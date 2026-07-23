@@ -45,12 +45,41 @@ on prod → drafts render with a DRAFT banner; public sees only `published`.
   `worker/src/engines/` at raw API cost.
 - Mathematical content requires Fable audit before publish, even when judged.
 
-## Presentation (owner-approved 2026-07-24, do not restyle)
+## Presentation (owner-approved 2026-07-24, FROZEN — do not restyle)
 
-The aesthetics and presentation are FROZEN as approved by the owner: the app
-repo's `/library` renderer (ItemBody mechanical proof tables with mono step
-numbers + per-citation tag chips, section-aware layout, five fixed-numbered
-page sections with empty states, flowchart v2 with straight thick indigo edges,
-13px squarish corners, click-to-enlarge lightbox, KaTeX). Do NOT change the
-visual style in either repo without an explicit owner instruction; new content
-must follow SCHEMA.md's layout rules so it renders identically.
+The owner has explicitly approved the aesthetics and presentation and asked that
+they persist across ALL future sessions. Treat this as a hard constraint: do NOT
+change the visual style, layout, colours, spacing, typography, or flowchart look
+in EITHER repo without an explicit, in-session owner instruction to restyle. New
+content must be authored to SCHEMA.md's layout rules so it renders identically to
+what exists; adding content is always fine, restyling is not.
+
+The approved style is implemented by these files (the source of truth — read them
+before any rendering change, and preserve their behaviour):
+
+- `web/lib/library-kinds.ts` — the per-kind colour palette (light + dark):
+  definition=blue, theorem=violet, lemma/proposition=teal, corollary=violet,
+  example=emerald, counterexample=amber, false-statement=rose, remark=slate.
+  Colour is ALWAYS paired with the kind label (never colour-alone). Drives both
+  the kind chips and the flowchart node fills.
+- `web/components/library/ItemBody.tsx` — mechanical proof rendering: sectioned
+  Statement / Facts & Assumptions / Proof, a "technique ·" line, one row per
+  fact and per step, right-aligned mono step numbers, per-citation tag chips in
+  a bounded wrapping end column, collapsible Scratch.
+- `web/components/library/badges.tsx` — kind chips (coloured), DRAFT banner,
+  provenance + verification chips.
+- `web/components/library/Mermaid.tsx` — flowchart v2: straight thick indigo
+  edges (linear curve, 2.75px), 13px squarish (iPhone-like) corners, nodes
+  coloured by kind, click-to-enlarge lightbox (Esc/backdrop close), selected
+  dark palette (not auto-flip).
+- `web/app/library/[...path]/page.tsx` — the five fixed-numbered page sections
+  (1 Prerequisites · 2 Summary · 3 Flowchart · 4 Definitions/theorems/proofs ·
+  5 Examples/counterexamples/false statements), always rendered, with honest
+  empty-state lines.
+- Flowchart is BIRDS-EYE: only `landmark: true` items are nodes; edges are the
+  transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
+  theorems, key definitions, key lemmas); do not revert to one-node-per-item.
+
+Global entry point for future sessions: the `/math-library` skill loads this
+file first. If a future session is tempted to "improve" the look, STOP — the
+look is settled; only the owner reopens it.
