@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-integers, thm-int-comm-ring]
 aliases: []
+landmark: true
 verification:
   precheck: n/a
 sources:

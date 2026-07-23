@@ -48,6 +48,11 @@ deps: [def-cauchy-sequence, lem-triangle-inequality]
   # every item this item's statement OR proof cites (single list; drives the
   # prerequisite closure and the flowchart). Must reference existing ids.
 aliases: []                          # alternate wikilink names / retired ids
+landmark: false                      # true = show as a node in the page's
+                                     #   birds-eye flowchart (§6). Reserve for
+                                     #   MAIN theorems, key definitions, key
+                                     #   lemmas; routine items stay false and are
+                                     #   elided (their edges pass through).
 verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
@@ -126,8 +131,10 @@ hand-written prose on a page.)
 
 Rendered page = fixed 5 sections: (1) Prerequisites — MECHANICAL transitive
 closure of `deps` over listed items, minus items already on the page;
-(2) Summary — the body above; (3) Flowchart — MECHANICAL Mermaid graph of dep
-edges among listed items; (4) items in order, full bodies; (5) examples list.
+(2) Summary — the body above; (3) Flowchart — MECHANICAL birds-eye Mermaid graph:
+only `landmark: true` items are nodes, edges = transitive reduction of
+nearest-landmark-ancestor over the full dep graph (routine items elided),
+nodes coloured by kind; (4) items in order, full bodies; (5) examples list.
 Page badge (origin × verification) is DERIVED from item frontmatter per
 README; a page renders publicly only if page `status: published` AND every
 listed item is `published` (a draft item on a published page is a broken page

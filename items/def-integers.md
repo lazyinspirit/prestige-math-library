@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: []
 aliases: []
+landmark: true
 verification:
   precheck: n/a
 sources:

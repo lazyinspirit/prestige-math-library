@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring]
 aliases: []
+landmark: true
 proof_strategy: direct
 verification:
   precheck: pass

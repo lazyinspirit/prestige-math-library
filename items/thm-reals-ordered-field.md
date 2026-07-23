@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-real-order, thm-reals-field, lem-cauchy-away-from-zero, thm-rat-ordered-field, def-null-sequence]
 aliases: []
+landmark: true
 proof_strategy: direct
 verification:
   precheck: pass

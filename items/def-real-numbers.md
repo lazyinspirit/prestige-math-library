@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [thm-cauchy-ring, lem-null-ideal]
 aliases: []
+landmark: true
 verification:
   precheck: n/a
 sources:

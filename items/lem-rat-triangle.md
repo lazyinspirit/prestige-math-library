@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [thm-rat-ordered-field]
 aliases: []
+landmark: true
 proof_strategy: cases
 verification:
   precheck: pass

@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [lem-cauchy-away-from-zero, thm-cauchy-ring, lem-null-ideal, lem-rat-triangle, def-null-sequence]
 aliases: []
+landmark: true
 proof_strategy: direct
 verification:
   precheck: pass

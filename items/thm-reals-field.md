@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-real-numbers, thm-cauchy-ring, lem-null-ideal, lem-null-maximal]
 aliases: []
+landmark: true
 proof_strategy: direct
 verification:
   precheck: pass

@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
+landmark: true
 verification:
   precheck: n/a
 sources:

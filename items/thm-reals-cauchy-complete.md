@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-real-limit, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-numbers]
 aliases: []
+landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
