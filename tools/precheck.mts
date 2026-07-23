@@ -9,6 +9,17 @@ import { join } from 'path';
 import { proposedPrecheck } from '/root/Projects/prestige-intelligence/worker/src/precheck.ts';
 
 const BODY_MARKER = /\n## (Proof|Refutation|Verification|Counterexample)\n/;
+
+/** Extract the checkable text: facts declarations + steps. New format = the
+ *  "## Facts & Assumptions" section onward with markdown headings stripped;
+ *  old format = the body after the proof-section heading. */
+function checkableText(md: string): string | null {
+  const fa = md.split(/\n## Facts & Assumptions\n/);
+  if (fa.length >= 2) return fa[fa.length - 1].replace(/^## .*$/gm, '').trim();
+  const m = md.split(BODY_MARKER);
+  if (m.length >= 3) return m[m.length - 1].trim();
+  return null;
+}
 const files = process.argv.slice(2).length
   ? process.argv.slice(2)
   : readdirSync('items').filter(f => f.endsWith('.md')).map(f => join('items', f));
@@ -16,11 +27,11 @@ const files = process.argv.slice(2).length
 let failed = 0, checked = 0;
 for (const file of files) {
   const md = readFileSync(file, 'utf8');
-  const m = md.split(BODY_MARKER);
-  if (m.length < 3) continue; // no phase-format body (def/rem/ex without Verification)
+  const text = checkableText(md);
+  if (text === null) continue; // no phase-format body (def/rem/ex without Verification)
   const strategy = md.match(/^proof_strategy:\s*(\S+)/m)?.[1];
   if (!strategy) { console.log(`FAIL ${file}: phase body but no proof_strategy in frontmatter`); failed++; continue; }
-  const r = proposedPrecheck(m[m.length - 1].trim(), strategy);
+  const r = proposedPrecheck(text, strategy);
   checked++;
   if (r.err) { console.log(`FAIL ${file}: ${r.err}`); failed++; }
   else if (r.repaired) {

@@ -75,13 +75,23 @@ Markdown + LaTeX (`$…$` / `$$…$$`). Wikilinks `[[id]]` or `[[id|display text
 anywhere in prose; every wikilink must resolve to an item id or alias.
 
 - `def`: `## Definition` (+ optional `## Remarks`)
-- `thm` / `lem` / `prop` / `cor`: `## Statement` then `## Proof` (phase format, §5)
-- `ex`: `## Example` (+ optional `## Verification` in phase format)
-- `cex`: `## Statement refuted` then `## Counterexample` (phase format;
-  machine-verified flag may ride frontmatter as `cx_machine_verified: true`)
-- `fs`: `## Statement` (the FALSE claim, clearly banner-rendered) then
-  `## Refutation` (phase format)
+- `thm` / `lem` / `prop` / `cor`: THREE sections, in order —
+  `## Statement`, `## Facts & Assumptions`, `## Proof` (phase format, §5)
+- `ex`: `## Example` (+ optional Facts & Assumptions / Verification per §5)
+- `cex`: `## Statement refuted`, then Facts & Assumptions + `## Counterexample`
+  (phase format; machine-verified flag may ride frontmatter as
+  `cx_machine_verified: true`)
+- `fs`: `## Statement` (the FALSE claim, clearly banner-rendered), then
+  Facts & Assumptions + `## Refutation` (phase format)
 - `rem`: free prose
+
+Layout rules for proof-bearing bodies (mechanical, renderer-enforced look):
+- **`## Facts & Assumptions`**: an optional `**Given:** …` context paragraph,
+  then ONE fact per paragraph, each starting with its label (`[A1]`, `[L1]`, …).
+- **`## Proof`**: the FIRST paragraph is the technique line
+  `**Proof technique:** <strategy>.` (mirrors `proof_strategy` frontmatter);
+  then ONE numbered step per paragraph, each ending with its justification tags.
+- Adjacent paragraphs are separated by exactly one blank line, everywhere.
 
 ## 5. Proof format (phase-stratified)
 
@@ -94,8 +104,8 @@ citations, `[algebra]`, `[assume-contra]`, `[assume-hyp]`, `[assume-case …]`,
 `[discharge-contradiction|contrapositive|induction|construct]`, strategy tags),
 no forward references, strategy-specific required tags (contradiction /
 contrapositive / induction / cases / constructive), QED-final. `## Scratch`
-(exploratory work) is optional and precedes `## Proof`; it is rendered
-collapsed. EVERY phase-format body must pass precheck before `published`.
+(exploratory work) is optional and precedes `## Facts & Assumptions`; it is
+rendered collapsed. EVERY phase-format body must pass precheck before `published`.
 
 ## 6. Page composition files
 
