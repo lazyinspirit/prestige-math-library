@@ -33,9 +33,11 @@ from the page's items by the renderer (never hand-set):
   model lineup — the same pipeline that builds customer training datasets) or
   `session` (authored by the owner with Fable 5 assistance in coding sessions).
 - **Verification** (accumulative): mechanical precheck (always, both origins);
-  cross-family LLM judge (automatic for pipeline items; optional for session
-  items, run via the SAME judge models as production so the badge is truthfully
-  identical); owner audit (always — it gates `status: published`).
+  cross-family LLM judge; owner audit (always — it gates `status: published`).
+  Judge lineup is conditioned on origin to keep generator and judge in disjoint
+  model families: `pipeline` items (GLM/DeepSeek gen) use the production lineup
+  (Sonnet 5 -> GPT-5.4); `session` items (Claude-family gen) are judged by
+  GPT-5.4 primary with a non-Anthropic fallback (Gemini) — never a Claude model.
 
 Page badge rule: all items `pipeline` → "Pipeline-generated & judge-verified";
 otherwise → "Session-authored (Fable 5 assisted)" with judge status shown.
