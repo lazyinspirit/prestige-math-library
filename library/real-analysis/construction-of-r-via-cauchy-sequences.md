@@ -2,20 +2,18 @@
 page: construction-of-r-via-cauchy-sequences
 title: "Construction of the Real Numbers via Cauchy Sequences"
 status: draft
-# Reading order. Roadmap batches still to author:
-#   batch 2 (Q):  def-rationals, lem-rat-equivalence, def-rat-operations,
-#                 lem-rat-ops-well-defined, thm-rat-field, def-rat-order,
-#                 thm-rat-ordered-field, lem-int-embeds-rat
-#   batch 3 (Z order): def-int-order, thm-int-ordered-ring, lem-nat-embeds-int
-#   batch 4 (R):  lem-null-is-cauchy, thm-cauchy-ring, lem-null-ideal,
-#                 lem-null-maximal, def-real-numbers, thm-reals-field
-#   batch 5 (R order + completeness): def-real-order, thm-reals-ordered-field,
-#                 lem-rat-embeds-dense, thm-reals-cauchy-complete
-#   batch 6 (examples): ex-sqrt2-cauchy, fs-rationals-complete, cex-...
 items: [def-integers, lem-int-equivalence, def-int-operations,
         lem-int-add-well-defined, lem-int-mul-well-defined, thm-int-comm-ring,
-        def-rational-cauchy-sequence, def-null-sequence, lem-cauchy-bounded]
-examples: []
+        def-int-order, thm-int-ordered-ring, lem-int-cancellation, lem-nat-embeds-int,
+        def-rationals, lem-rat-equivalence, def-rat-operations,
+        lem-rat-ops-well-defined, thm-rat-field, def-rat-order,
+        thm-rat-ordered-field, lem-int-embeds-rat, lem-rat-archimedean, lem-rat-triangle,
+        def-rational-cauchy-sequence, def-null-sequence, lem-cauchy-bounded,
+        lem-null-is-cauchy, thm-cauchy-ring, lem-null-ideal,
+        lem-cauchy-away-from-zero, lem-null-maximal, def-real-numbers,
+        thm-reals-field, def-real-order, thm-reals-ordered-field,
+        lem-rat-embeds-dense, def-real-limit, thm-reals-cauchy-complete]
+examples: [ex-one-over-n-null, fs-sqrt2-rational, fs-rationals-complete]
 ---
 
 **Objective.** This page constructs the real number field $\mathbb{R}$ via Cauchy

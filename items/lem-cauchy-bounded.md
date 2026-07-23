@@ -4,7 +4,7 @@ kind: lemma
 title: "Every Cauchy sequence of rationals is bounded"
 status: draft
 origin: session
-deps: [def-rational-cauchy-sequence]
+deps: [def-rational-cauchy-sequence, lem-rat-triangle]
 aliases: []
 proof_strategy: direct
 verification:
@@ -29,7 +29,7 @@ $M \ge 0$ such that $|a_n| \le M$ for all $n \ge 1$.
 
 [A1] For every rational $\varepsilon > 0$ there exists $N \in \mathbb{N}$ with $|a_m - a_n| < \varepsilon$ for all $m, n \ge N$.
 
-[L1] Triangle inequality on $\mathbb{Q}$: $|x| \le |x - y| + |y|$ for all $x, y \in \mathbb{Q}$.
+[L1] Triangle inequality on $\mathbb{Q}$: $|x| \le |x - y| + |y|$ ([[lem-rat-triangle]]).
 
 ## Proof
 

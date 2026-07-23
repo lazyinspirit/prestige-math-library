@@ -4,7 +4,7 @@ kind: definition
 title: "Cauchy sequence of rationals"
 status: draft
 origin: session
-deps: []
+deps: [def-rationals, lem-rat-triangle]
 aliases: []
 verification:
   precheck: n/a

@@ -44,3 +44,13 @@ on prod → drafts render with a DRAFT banner; public sees only `published`.
   session route (Fable + Claude subagents) or the internal harness over
   `worker/src/engines/` at raw API cost.
 - Mathematical content requires Fable audit before publish, even when judged.
+
+## Presentation (owner-approved 2026-07-24, do not restyle)
+
+The aesthetics and presentation are FROZEN as approved by the owner: the app
+repo's `/library` renderer (ItemBody mechanical proof tables with mono step
+numbers + per-citation tag chips, section-aware layout, five fixed-numbered
+page sections with empty states, flowchart v2 with straight thick indigo edges,
+13px squarish corners, click-to-enlarge lightbox, KaTeX). Do NOT change the
+visual style in either repo without an explicit owner instruction; new content
+must follow SCHEMA.md's layout rules so it renders identically.
