@@ -32,15 +32,19 @@ of naturals, where $(a,b)$ encodes the formal difference $a - b$
 ([[thm-int-comm-ring]]): a set with an addition and a multiplication, both
 associative and commutative, where multiplication distributes over addition,
 addition has an identity $0$ and an inverse for every element, and
-multiplication has an identity $1$.
+multiplication has an identity $1$. The integers also carry a total order,
+defined on representatives by $(a,b) \le (c,d)$ exactly when $a + d \le b + c$:
+any two integers are comparable, and the order is compatible with addition and
+with multiplication by nonnegative elements, so $\mathbb{Z}$ is a totally
+ordered commutative ring.
 
 **Layer 2: from $\mathbb{Z}$ to $\mathbb{Q}$.** Division fails in $\mathbb{Z}$.
 The rationals are equivalence classes of pairs of integers with nonzero second
 component, encoding formal quotients $a/b$. The result is a field: a commutative
-ring in which every nonzero element has a multiplicative inverse. The rationals
-also carry a total order, meaning any two elements are comparable, and the order
-is compatible with addition and with multiplication by positive elements; a
-field equipped with such an order is a totally ordered field.
+ring in which every nonzero element has a multiplicative inverse. The total order
+extends from $\mathbb{Z}$: any two rationals remain comparable, and the order
+stays compatible with the arithmetic; a field equipped with such an order is a
+totally ordered field.
 
 **Layer 3: from $\mathbb{Q}$ to $\mathbb{R}$.** Limits fail in $\mathbb{Q}$:
 sequences such as $1, 1.4, 1.41, 1.414, \dots$ cluster ever more tightly yet
