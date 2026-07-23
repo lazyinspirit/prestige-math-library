@@ -2,13 +2,14 @@
 id: def-integers
 kind: definition
 title: "The integers as equivalence classes of pairs of naturals"
-status: draft
+status: published
 origin: session
 deps: []
 aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

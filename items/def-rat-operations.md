@@ -2,12 +2,13 @@
 id: def-rat-operations
 kind: definition
 title: "Arithmetic on the rationals"
-status: draft
+status: published
 origin: session
 deps: [def-rationals, lem-int-cancellation]
 aliases: []
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

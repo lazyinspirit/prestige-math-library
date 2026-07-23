@@ -2,12 +2,13 @@
 id: def-real-order
 kind: definition
 title: "Order on the reals"
-status: draft
+status: published
 origin: session
 deps: [def-real-numbers, def-rat-order]
 aliases: []
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

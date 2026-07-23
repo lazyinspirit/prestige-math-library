@@ -2,13 +2,14 @@
 id: def-rationals
 kind: definition
 title: "The rationals as equivalence classes of pairs of integers"
-status: draft
+status: published
 origin: session
 deps: [def-integers, thm-int-comm-ring]
 aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

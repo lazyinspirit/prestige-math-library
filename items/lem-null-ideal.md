@@ -2,13 +2,18 @@
 id: lem-null-ideal
 kind: lemma
 title: "Null sequences form an ideal"
-status: draft
+status: published
 origin: session
 deps: [def-null-sequence, thm-cauchy-ring, lem-cauchy-bounded, lem-rat-triangle, lem-null-is-cauchy]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -44,7 +49,7 @@ $c \in \mathcal{C}$ and $z \in \mathcal{N}$.
 
 1.1 Fix $N_z, N_w$ with $|z_n| < \varepsilon/2$ for $n \ge N_z$ and $|w_n| < \varepsilon/2$ for $n \ge N_w$. [A1, L1]
 
-1.2 Fix a rational bound $B \ge 1$ with $|c_n| \le B$ for all $n$. [L3]
+1.2 Fix $M \ge 0$ with $|c_n| \le M$ ([L3]) and set $B = \max(M, 1) \ge 1$, so $|c_n| \le B$ for all $n$. [L3]
 
 2.1 Sum: for $n \ge \max(N_z, N_w)$, $|z_n + w_n| \le |z_n| + |w_n| < \varepsilon$; negation: $|-z_n| = |z_n|$. So $\mathcal{N}$ is a subgroup under addition. [step 1.1, L2]
 

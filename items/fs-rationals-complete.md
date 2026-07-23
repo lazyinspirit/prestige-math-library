@@ -2,13 +2,18 @@
 id: fs-rationals-complete
 kind: false-statement
 title: "FALSE: the rationals are complete"
-status: draft
+status: published
 origin: session
 deps: [fs-sqrt2-rational, def-rational-cauchy-sequence, def-null-sequence, lem-rat-archimedean, thm-rat-ordered-field, lem-rat-triangle, lem-null-ideal, lem-cauchy-bounded]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

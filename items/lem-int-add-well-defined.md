@@ -2,13 +2,18 @@
 id: lem-int-add-well-defined
 kind: lemma
 title: "Integer addition and negation are well defined"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

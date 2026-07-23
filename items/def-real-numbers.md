@@ -2,13 +2,14 @@
 id: def-real-numbers
 kind: definition
 title: "The real numbers"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-ring, lem-null-ideal]
 aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

@@ -2,13 +2,18 @@
 id: ex-one-over-n-null
 kind: example
 title: "The sequence $1/n$ is null"
-status: draft
+status: published
 origin: session
 deps: [def-null-sequence, lem-rat-archimedean, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

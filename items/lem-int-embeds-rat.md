@@ -2,13 +2,18 @@
 id: lem-int-embeds-rat
 kind: lemma
 title: "The integers embed in the rationals"
-status: draft
+status: published
 origin: session
-deps: [def-rat-operations, def-rat-order, thm-int-comm-ring]
+deps: [def-rat-operations, def-rat-order, def-rationals, thm-int-comm-ring]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -31,11 +36,13 @@ $\mathbb{Q}$; we write $k$ for $j(k)$ throughout.
 
 [L2] The orders on $\mathbb{Z}$ and $\mathbb{Q}$ ([[def-rat-order]]).
 
+[L3] Equality in $\mathbb{Q}$: $[(a,b)] = [(c,d)]$ iff $ad = cb$ ([[def-rationals]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Injectivity: $(k,1) \sim (m,1)$ means $k \cdot 1 = m \cdot 1$, i.e. $k = m$. [L1]
+1.1 Injectivity: $(k,1) \sim (m,1)$ means $k \cdot 1 = m \cdot 1$, i.e. $k = m$. [L3, L1]
 
 1.2 Addition: $j(k) + j(m) = [(k \cdot 1 + m \cdot 1,\; 1)] = j(k+m)$. [L1]
 

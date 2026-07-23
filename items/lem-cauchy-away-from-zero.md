@@ -2,13 +2,18 @@
 id: lem-cauchy-away-from-zero
 kind: lemma
 title: "A non-null Cauchy sequence is eventually bounded away from zero, with constant sign"
-status: draft
+status: published
 origin: session
 deps: [def-null-sequence, def-rational-cauchy-sequence, lem-rat-triangle, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

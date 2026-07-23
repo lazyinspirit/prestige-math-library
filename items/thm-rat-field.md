@@ -2,13 +2,18 @@
 id: thm-rat-field
 kind: theorem
 title: "The rationals form a field"
-status: draft
+status: published
 origin: session
 deps: [def-rat-operations, lem-rat-ops-well-defined, thm-int-comm-ring, lem-int-cancellation]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -29,7 +34,7 @@ has a multiplicative inverse.
 
 [L1] The operations are independent of representatives ([[lem-rat-ops-well-defined]]).
 
-[L2] $\mathbb{Z}$ is a commutative ring ([[thm-int-comm-ring]]).
+[L2] $\mathbb{Z}$ is a commutative ring in which $1 \ne 0$ ([[thm-int-comm-ring]]; $1 \ne 0$ because $1 \ne 0$ in $\mathbb{N}$).
 
 [L3] $\mathbb{Z}$ has no zero divisors and admits cancellation ([[lem-int-cancellation]]).
 

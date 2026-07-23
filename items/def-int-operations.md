@@ -2,12 +2,13 @@
 id: def-int-operations
 kind: definition
 title: "Arithmetic on the integers"
-status: draft
+status: published
 origin: session
 deps: [def-integers]
 aliases: []
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

@@ -2,13 +2,18 @@
 id: lem-rat-embeds-dense
 kind: lemma
 title: "The rationals embed densely in the reals"
-status: draft
+status: published
 origin: session
 deps: [def-real-numbers, def-real-order, thm-reals-ordered-field, def-rational-cauchy-sequence, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

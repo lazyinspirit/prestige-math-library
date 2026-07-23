@@ -2,7 +2,7 @@
 id: thm-reals-cauchy-complete
 kind: theorem
 title: "The reals are complete"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-numbers]
 aliases: []
@@ -10,6 +10,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -50,6 +55,6 @@ construction: $\mathbb{R}$ is a complete totally ordered field.
 
 3.1 Set $x := [(q_k)] \in \mathbb{R}$, the class of this rational Cauchy sequence. [step 2.1, L5]
 
-4.1 $x_k \to x$: given rational $\varepsilon > 0$, pick $k_1$ with $1/k_1 < \varepsilon/3$ and $K_2$ with $|q_k - q_l| < \varepsilon/3$ for $k, l \ge K_2$; for $k \ge \max(k_1, K_2)$, $|\hat q_k - x|$ has a representative $(q_k - q_l)_l$ eventually below $\varepsilon/3$, so $|\hat q_k - x| \le \widehat{\varepsilon/3}$, and $|x_k - x| \le |x_k - \hat q_k| + |\hat q_k - x| < \widehat{1/k} + \widehat{\varepsilon/3} \le 2\,\widehat{\varepsilon/3} < \hat\varepsilon$. [step 1.1, step 2.1, step 3.1, L4]
+4.1 $x_k \to x$: given rational $\varepsilon > 0$, pick $k_1$ with $1/k_1 < \varepsilon/3$ and $K_2$ with $|q_k - q_l| < \varepsilon/3$ for $k, l \ge K_2$; for $k \ge \max(k_1, K_2)$, the difference $\hat q_k - x$ has representative $(q_k - q_l)_l$, whose absolute values $|q_k - q_l|$ are eventually below $\varepsilon/3$, so $|\hat q_k - x| \le \widehat{\varepsilon/3}$, and $|x_k - x| \le |x_k - \hat q_k| + |\hat q_k - x| < \widehat{1/k} + \widehat{\varepsilon/3} \le 2\,\widehat{\varepsilon/3} < \hat\varepsilon$. [step 1.1, step 2.1, step 3.1, L4]
 
 5.1 Every Cauchy sequence of reals converges in $\mathbb{R}$: the reals are complete. [step 4.1] ∎

@@ -2,12 +2,13 @@
 id: def-real-limit
 kind: definition
 title: "Limits and Cauchy sequences of reals"
-status: draft
+status: published
 origin: session
 deps: [def-real-numbers, def-real-order]
 aliases: []
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

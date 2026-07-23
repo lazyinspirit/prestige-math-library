@@ -2,7 +2,7 @@
 id: thm-cauchy-ring
 kind: theorem
 title: "Cauchy sequences form a commutative ring"
-status: draft
+status: published
 origin: session
 deps: [def-rational-cauchy-sequence, lem-cauchy-bounded, lem-rat-triangle, thm-rat-field, thm-rat-ordered-field]
 aliases: []
@@ -10,6 +10,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -42,7 +47,7 @@ commutative ring with identity.
 
 **Proof technique:** direct.
 
-1.1 Termwise, all ring axioms (associativity, commutativity, identities, inverses for $+$, distributivity) hold in $\mathcal{C}$ because they hold in $\mathbb{Q}$ at every index; the constant sequences $0, 1$ are Cauchy. What needs proof is closure of $\mathcal{C}$ under $+$ and $\cdot$. [L1]
+1.1 Termwise, all ring axioms (associativity, commutativity, identities, inverses for $+$, distributivity) hold in $\mathcal{C}$ because they hold in $\mathbb{Q}$ at every index; the constant sequences $0, 1$ are Cauchy. What needs proof is closure of $\mathcal{C}$ under $+$, negation, and $\cdot$. [L1]
 
 1.2 Fix $N_a$ with $|a_m - a_n| < \varepsilon/2$ for $m,n \ge N_a$ and $N_b$ likewise for $(b_n)$. [A1, L4]
 

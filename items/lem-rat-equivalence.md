@@ -2,13 +2,18 @@
 id: lem-rat-equivalence
 kind: lemma
 title: "The rational-defining relation is an equivalence relation"
-status: draft
+status: published
 origin: session
 deps: [def-rationals, thm-int-comm-ring, lem-int-cancellation]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

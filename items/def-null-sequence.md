@@ -2,12 +2,13 @@
 id: def-null-sequence
 kind: definition
 title: "Null sequence"
-status: draft
+status: published
 origin: session
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

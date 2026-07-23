@@ -2,13 +2,18 @@
 id: thm-int-comm-ring
 kind: theorem
 title: "The integers form a commutative ring"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations, lem-int-add-well-defined, lem-int-mul-well-defined]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

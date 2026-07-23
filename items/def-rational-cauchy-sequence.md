@@ -2,13 +2,14 @@
 id: def-rational-cauchy-sequence
 kind: definition
 title: "Cauchy sequence of rationals"
-status: draft
+status: published
 origin: session
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-07-24
 sources:
   scraped: []
   references:

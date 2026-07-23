@@ -2,13 +2,18 @@
 id: lem-nat-embeds-int
 kind: lemma
 title: "The naturals embed in the integers"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations, def-int-order]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
@@ -28,7 +33,7 @@ natural $k$.
 
 **Given:** The map $\iota : \mathbb{N} \to \mathbb{Z}$, $\iota(n) = [(n,0)]$.
 
-[A1] Arithmetic identities in $\mathbb{N}$: $x + 0 = x$, $x \cdot 0 = 0$, $x \cdot 1 = x$.
+[A1] Arithmetic identities in $\mathbb{N}$: $x + 0 = x$, $0 + x = x$, $x \cdot 0 = 0$, $0 \cdot x = 0$, $x \cdot 1 = x$.
 
 [A2] The order on $\mathbb{N}$, and: $x \le y$ iff $y = x + k$ for some $k$.
 

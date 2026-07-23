@@ -2,13 +2,18 @@
 id: lem-int-cancellation
 kind: lemma
 title: "The integers have no zero divisors; multiplicative cancellation"
-status: draft
+status: published
 origin: session
 deps: [def-int-operations, thm-int-comm-ring, thm-int-ordered-ring]
 aliases: []
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-24
+  audited: 2026-07-24
 sources:
   scraped: []
   references:
