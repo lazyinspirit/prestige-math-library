@@ -62,6 +62,10 @@ sources:
   references:                        # standard references (NOT scraped; labeled so)
     - "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
 pipeline_run: null                   # origin: pipeline only — run/manifest id
+proof_strategy: direct               # REQUIRED for kinds with a phase-format body:
+                                     #   direct|contradiction|contrapositive|induction|
+                                     #   cases|constructive — the strategy argument
+                                     #   passed to precheck for mechanical re-verification
 ---
 ```
 
