@@ -18,15 +18,41 @@ items: [def-integers, lem-int-equivalence, def-int-operations,
 examples: []
 ---
 
-Starting from the natural numbers — whose arithmetic and order we take as given
-— this page constructs, in turn, the integers, the rationals, and finally the
-real numbers. Each stage repairs a defect of the last by the same device,
-equivalence classes: subtraction fails in $\mathbb{N}$, so integers are classes
-of formal differences $(a,b)$; division fails in $\mathbb{Z}$, so rationals are
-classes of formal quotients; limits fail in $\mathbb{Q}$ — sequences like
-$1, 1.4, 1.41, 1.414, \dots$ cluster ever more tightly yet converge to nothing
-— so reals are classes of Cauchy sequences, identified when their difference
-tends to zero. The destination is the fundamental theorem of the construction:
-$\mathbb{R}$ is a totally ordered field that is complete — every Cauchy
-sequence of reals converges — and the holes are filled once and for all:
-completing $\mathbb{R}$ the same way yields nothing new.
+**Objective.** This page constructs the real number field $\mathbb{R}$ via Cauchy
+sequences, starting from the fundamental definitions of the integers and the
+rational numbers, and proves that $\mathbb{R}$ is a totally ordered, complete
+field. The natural numbers $\mathbb{N}$, with their arithmetic and order, are the
+assumed starting point.
+
+**Layer 1: from $\mathbb{N}$ to $\mathbb{Z}$.** Subtraction fails in
+$\mathbb{N}$. The integers are defined as equivalence classes of pairs $(a,b)$
+of naturals, where $(a,b)$ encodes the formal difference $a - b$
+([[def-integers]]), with arithmetic defined on representatives
+([[def-int-operations]]). The result is a commutative ring
+([[thm-int-comm-ring]]): a set with an addition and a multiplication, both
+associative and commutative, where multiplication distributes over addition,
+addition has an identity $0$ and an inverse for every element, and
+multiplication has an identity $1$.
+
+**Layer 2: from $\mathbb{Z}$ to $\mathbb{Q}$.** Division fails in $\mathbb{Z}$.
+The rationals are equivalence classes of pairs of integers with nonzero second
+component, encoding formal quotients $a/b$. The result is a field: a commutative
+ring in which every nonzero element has a multiplicative inverse. The rationals
+also carry a total order, meaning any two elements are comparable, and the order
+is compatible with addition and with multiplication by positive elements; a
+field equipped with such an order is a totally ordered field.
+
+**Layer 3: from $\mathbb{Q}$ to $\mathbb{R}$.** Limits fail in $\mathbb{Q}$:
+sequences such as $1, 1.4, 1.41, 1.414, \dots$ cluster ever more tightly yet
+converge to no rational. A Cauchy sequence is one whose terms eventually stay
+within any prescribed distance of one another ([[def-rational-cauchy-sequence]]).
+The reals are equivalence classes of Cauchy sequences of rationals, two
+sequences being identified when their difference is a null sequence
+([[def-null-sequence]]). Arithmetic passes to the quotient, the null sequences
+form a maximal ideal so that $\mathbb{R}$ is a field, and the order extends from
+$\mathbb{Q}$.
+
+**Destination.** $\mathbb{R}$ is a totally ordered field that is complete: every
+Cauchy sequence of reals converges to a real. Completeness is the payoff of the
+construction, and it fills the holes once and for all, since completing
+$\mathbb{R}$ by the same device yields nothing new.
