@@ -11,8 +11,10 @@ verification:
 sources:
   scraped: []
   references:
-    - "T. Tao, Analysis I, 3rd ed., §5.1"
-    - "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
+    - title: "T. Tao, Analysis I, 3rd ed., §5.1"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
+      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
 pipeline_run: null
 ---
 

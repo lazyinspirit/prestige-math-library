@@ -12,7 +12,8 @@ verification:
 sources:
   scraped: []
   references:
-    - "T. Tao, Analysis I, 3rd ed., §5.1"
+    - title: "T. Tao, Analysis I, 3rd ed., §5.1"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
 pipeline_run: null
 ---
 

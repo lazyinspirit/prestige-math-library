@@ -44,6 +44,8 @@ otherwise → "Session-authored (Fable 5 assisted)" with judge status shown.
 
 ## Citation conventions (settled)
 
+- Every source must have a WORKING url — scraped sources and standard
+  references alike (verify the link resolves before adding it).
 - Every item lists `source_urls` + license tags in frontmatter. The renderer
   aggregates all items' sources into a deduplicated **Sources** section at the
   end of every page (this also carries CC BY-SA / GFDL attribution).

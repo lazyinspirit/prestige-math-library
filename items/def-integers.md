@@ -11,8 +11,10 @@ verification:
 sources:
   scraped: []
   references:
-    - "T. Tao, Analysis I, 3rd ed., §4.1"
-    - "E. Landau, Foundations of Analysis, Ch. 4"
+    - title: "T. Tao, Analysis I, 3rd ed., §4.1"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "E. Landau, Foundations of Analysis, Ch. 4"
+      url: "https://bookstore.ams.org/chel-79"
 pipeline_run: null
 ---
 

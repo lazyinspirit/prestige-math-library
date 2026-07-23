@@ -60,7 +60,10 @@ verification:
 sources:
   scraped: []                        # [{url, title, license}] — extraction sources
   references:                        # standard references (NOT scraped; labeled so)
-    - "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
+    - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
+      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+      # EVERY source — scraped or reference — carries a WORKING url
+      # (verified to return HTTP 200 before it enters frontmatter)
 pipeline_run: null                   # origin: pipeline only — run/manifest id
 proof_strategy: direct               # REQUIRED for kinds with a phase-format body:
                                      #   direct|contradiction|contrapositive|induction|
@@ -134,7 +137,7 @@ listed item is `published` (a draft item on a published page is a broken page
 
 `status: published` on an item is valid only if: id == filename; kind/prefix
 match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);
-`verification.audited` set; every `sources.scraped` entry has url+license;
+`verification.audited` set; every `sources.scraped` entry has url+license; every `sources.references` entry has title + a working url;
 share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders. A repo
 lint script (to be written alongside the renderer) checks all of this and is
 the pre-merge gate.
