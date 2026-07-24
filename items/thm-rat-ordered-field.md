@@ -7,6 +7,7 @@ origin: session
 deps: [def-rat-order, def-rat-operations, thm-rat-field, thm-int-ordered-ring, lem-int-cancellation]
 aliases: []
 landmark: true
+short: "ℚ ordered field"
 proof_strategy: direct
 verification:
   precheck: pass

@@ -7,6 +7,7 @@ origin: session
 deps: [def-rational-cauchy-sequence, lem-cauchy-bounded, lem-rat-triangle, thm-rat-field, thm-rat-ordered-field]
 aliases: []
 landmark: true
+short: "Cauchy ring"
 proof_strategy: direct
 verification:
   precheck: pass

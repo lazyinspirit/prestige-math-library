@@ -7,6 +7,7 @@ origin: session
 deps: [def-real-numbers, thm-cauchy-ring, lem-null-ideal, lem-null-maximal]
 aliases: []
 landmark: true
+short: "ℝ field"
 proof_strategy: direct
 verification:
   precheck: pass

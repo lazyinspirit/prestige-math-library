@@ -7,6 +7,7 @@ origin: session
 deps: []
 aliases: []
 landmark: true
+short: "ℤ"
 verification:
   precheck: n/a
   audited: 2026-07-24

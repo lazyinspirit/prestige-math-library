@@ -7,6 +7,7 @@ origin: session
 deps: [def-rat-order, thm-rat-ordered-field, lem-nat-embeds-int, lem-int-embeds-rat]
 aliases: []
 landmark: true
+short: "Archimedean"
 proof_strategy: direct
 verification:
   precheck: pass

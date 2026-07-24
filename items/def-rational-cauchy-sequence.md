@@ -7,6 +7,7 @@ origin: session
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
 landmark: true
+short: "Cauchy seq."
 verification:
   precheck: n/a
   audited: 2026-07-24

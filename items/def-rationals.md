@@ -7,6 +7,7 @@ origin: session
 deps: [def-integers, thm-int-comm-ring]
 aliases: []
 landmark: true
+short: "ℚ"
 verification:
   precheck: n/a
   audited: 2026-07-24

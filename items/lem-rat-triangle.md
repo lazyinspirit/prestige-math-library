@@ -7,6 +7,7 @@ origin: session
 deps: [thm-rat-ordered-field]
 aliases: []
 landmark: true
+short: "Triangle ineq."
 proof_strategy: cases
 verification:
   precheck: pass

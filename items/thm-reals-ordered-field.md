@@ -7,6 +7,7 @@ origin: session
 deps: [def-real-order, def-real-numbers, thm-reals-field, lem-cauchy-away-from-zero, thm-rat-ordered-field, def-null-sequence]
 aliases: []
 landmark: true
+short: "ℝ ordered field"
 proof_strategy: direct
 verification:
   precheck: pass

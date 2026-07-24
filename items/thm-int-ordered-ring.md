@@ -7,6 +7,7 @@ origin: session
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring]
 aliases: []
 landmark: true
+short: "ℤ ordered ring"
 proof_strategy: direct
 verification:
   precheck: pass
