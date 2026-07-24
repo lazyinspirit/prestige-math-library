@@ -270,8 +270,12 @@ until clean.
 
 One recurring mechanical gotcha: the checker is line-based, so every numbered
 step must sit on a single physical line. Generators sometimes hard-wrap a long
-step across several lines. A small reflow pass joins wrapped step lines back into
-one line before prechecking.
+step across several lines. The helper `tools/reflow.mts` joins wrapped step lines
+back into one line; run it before precheck:
+
+```
+npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/reflow.mts items/<id>.md
+```
 
 ---
 
@@ -300,8 +304,17 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 Run the judge, then report and fix.
 
 **Judge.** GPT-5.4 runs as a refuter through `ofox`: its only job is to find a
-specific defect, and it accepts unless it can name one. A small harness sends
-each item to the gateway with a refuter system prompt and parses a JSON verdict.
+specific defect, and it accepts unless it can name one. The harness is
+`tools/judge.mts`, a topic-neutral refuter over the gateway that parses a JSON
+verdict `{keep, reason}`. Pass the topic (and optionally the domain conventions)
+so it frames the audit correctly; it refuses a Claude-family model for a session
+item, and it appends token usage to `$JUDGE_COSTLOG` for the cost report:
+
+```
+npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
+  items/<id>.md --topic "undergraduate group theory"
+```
+
 Dependencies cited by an item are treated as separately-verified, so the judge
 grades only the item's own reasoning.
 
@@ -425,7 +438,7 @@ directory directly.
 ## Mechanics and gotchas worth remembering
 
 - **Precheck is line-based.** Each numbered proof step must be one physical line.
-  Reflow wrapped steps before prechecking.
+  Reflow wrapped steps with `tools/reflow.mts` before prechecking.
 - **YAML titles must escape backslashes.** A frontmatter title like
   `"... $A \\cdot B$ ..."` needs a double backslash. A single backslash is an
   invalid YAML escape, and the renderer silently drops the whole item, which then

@@ -6,7 +6,10 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
 `README.md` (provenance, judge lineup, citation rules).** House style for proofs:
 `items/lem-cauchy-bounded.md` is the approved exemplar.
 
-## The authoring workflow (every item, no exceptions)
+**End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
+roles, the modified reasoning/disproof engines, the RAG distiller, the
+seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to
+run a page from prompt to publish; the normative docs above win where they differ.
 
 1. **Author as `status: draft`** per SCHEMA.md. Session-authored content is
    `origin: session`; never fabricate scraped sources (use `references`).
@@ -20,9 +23,12 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
    Record `verification.precheck: pass`.
 3. **Cross-family judge** (before publish): session items → **GPT-5.4 primary,
    Gemini fallback — NEVER a Claude model**; pipeline items → production lineup.
-   No judge script exists yet (TODO: `tools/judge.mts` via ofox using the app
-   repo's key); until then run it manually and record model/verdict/date in
-   `verification.judge`.
+   The judge harness is `tools/judge.mts` (topic-neutral refuter over ofox; pass
+   `--topic` and optional `--conventions`, set `JUDGE_COSTLOG` for the cost
+   report). Record model/verdict/date in `verification.judge`; an item published
+   on owner audit over a verified judge false-positive is recorded `audited`
+   without a fabricated judge pass. Reflow wrapped steps first with
+   `tools/reflow.mts` (the precheck checker is line-based).
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By
@@ -30,10 +36,11 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
 
 ## Preview
 
-Renderer not yet built (app-repo work: `/library` routes reading env
-`MATH_LIBRARY_DIR`). Until then and for pre-deploy preview: the app repo's
-`docs/DEV_WORKFLOW.md` tunnel (dev server on :3001). Post-deploy: owner signs in
-on prod → drafts render with a DRAFT banner; public sees only `published`.
+The `/library` renderer is built in the app repo (routes under
+`web/app/library/`, reading env `MATH_LIBRARY_DIR`). Local preview: run the app
+dev server on `:3001` and SSH-tunnel per `WORKFLOW.md` step 6 (`docs/DEV_WORKFLOW.md`
+in the app repo has the tunnel). The signed-in owner sees drafts with a DRAFT
+banner; the public sees only `published`.
 
 ## Hard rules
 
