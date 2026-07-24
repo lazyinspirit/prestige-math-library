@@ -115,6 +115,28 @@ contrapositive / induction / cases / constructive), QED-final. `## Scratch`
 (exploratory work) is optional and precedes `## Facts & Assumptions`; it is
 rendered collapsed. EVERY phase-format body must pass precheck before `published`.
 
+### 5.1 Commutative diagrams (diagram chasing)
+
+Proofs that reason about a commutative diagram carry two co-located pieces, a
+deliberate dual source: the cells drive verification, the tikzcd drives the
+picture. Keep them consistent.
+
+- **Verification** lives in `## Facts & Assumptions` as a `**Diagram:**`
+  paragraph: named arrows one per line (e.g. `f\colon A \to B`), then one
+  numbered cell per line as a composite equation with a justification from the
+  closed grammar: `given | [F#/A#/L#] | def <term> | naturality of <nt> at
+  <morphism> | axiom <name> at (<objects>) | universal property of <object> |
+  functor <F> applied to [C#|step p.q]`. A cell reads
+  `[C1] h \circ f = k \circ g (given)`. Steps cite cells with `[C#]`; every cited
+  `[C#]` must be DECLARED, and "the diagram commutes" / "by the diagram" /
+  "a diagram chase shows" is never a valid justification (each commutativity
+  claim is a specific composite equation). The precheck cell gate and the judge's
+  diagram rules (auto-activated when a `**Diagram:**` block is present) enforce this.
+- **Rendering** lives in a prose section (e.g. `## Statement`) as a fenced
+  ` ```tikzcd ` block. The renderer compiles it to an inline SVG on the server
+  (tikz-cd via node-tikzjax, cached). The block may hold a bare cd body or a full
+  `\begin{tikzcd}...\end{tikzcd}`.
+
 ## 6. Page composition files
 
 ```yaml

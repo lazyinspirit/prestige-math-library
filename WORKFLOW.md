@@ -258,23 +258,28 @@ Strategy-specific requirements: contradiction needs `[assume-contra]` and a fina
 `[discharge-construct]`; direct needs no special tags. The normative source is
 `worker/src/precheck.ts`; this list is a convenience, not a substitute for it.
 
-**Diagram chasing (categorical proofs).** For proofs that reason about a
-commutative diagram, the shared checker also supports a `**Diagram:**` block:
-named arrows, then numbered cells `[C1], [C2], ...`, each cell one composite
-equation justified from a strict grammar (`naturality of <nt> at <morphism>`,
-`universal property of <object>`, `functor <F> applied to [C#]`, and so on). A
-step cites a cell with `[C#]`, every cited cell must be declared, and "the
-diagram commutes" or "a diagram chase shows" as a justification is rejected. This
-rigor discipline is inherited by the library through `precheck.ts`, but two gaps
-remain in the current setup, and neither is wired yet: the generation and judge
-assets here do not exercise it (the generator prompt and `tools/judge.mts` would
-need the diagram grammar and the diagram-specific refuter rules added, or the
-library judge would reuse the production `JUDGE_SYS_PROOF_DEEP` for diagram
-items), and the renderer does not draw commutative diagrams (KaTeX has no
-`tikz-cd`, so cells render as their LaTeX equations, not as a figure). Reading
-diagrams from source images is also not wired. Full diagram support is opt-in
-work; the rendering side touches the frozen presentation, so it needs owner
-sign-off.
+**Diagram chasing (categorical proofs).** Fully supported end to end (see
+`SCHEMA.md` 5.1 for the authoring contract). A proof that reasons about a
+commutative diagram carries two co-located pieces:
+
+- **Verification**: a `**Diagram:**` block in `## Facts & Assumptions`, with
+  named arrows then numbered cells `[C1], [C2], ...`, each cell one composite
+  equation justified from the closed grammar (`naturality of <nt> at <morphism>`,
+  `universal property of <object>`, `functor <F> applied to [C#]`, and so on).
+  Steps cite cells with `[C#]`; every cited cell must be declared, and "the
+  diagram commutes" or "a diagram chase shows" as a justification is rejected.
+  `precheck.ts` enforces the cell gate, and `tools/judge.mts` auto-activates its
+  diagram refuter rules when a `**Diagram:**` block is present.
+- **Rendering**: a fenced ` ```tikzcd ` block in a prose section. The app renders
+  it to an inline SVG on the server (tikz-cd via `node-tikzjax`, cached by source
+  hash; no client payload, no build step). Diagrams sit on a white card that
+  reads in both themes.
+
+The generator brief for a categorical topic must instruct the subagents to emit
+both pieces. The one part still deferred is step-0 reading of diagrams from
+raster source images (Opus 4.8 vision), needed only when scraping figure-only
+sources. Deploy note: the production `output: standalone` build must trace
+`node-tikzjax`'s `tex/*.gz` assets (`outputFileTracingIncludes`).
 
 **Mechanical precheck** runs on every generated item (free, deterministic):
 
