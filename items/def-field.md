@@ -4,7 +4,7 @@ kind: definition
 title: "Field"
 status: published
 origin: session
-deps: []
+deps: [lem-of-inverse-unique]
 aliases: []
 landmark: false
 short: "field"
@@ -45,3 +45,6 @@ abbreviate $x \cdot y$ as $xy$.
   definition states the field axioms once, abstractly, so that every field fact
   proved from them applies to all of these at once.
 - The requirement $0 \ne 1$ excludes the trivial one-element structure.
+- The identities $0, 1$ and the inverses $-x, x^{-1}$ are unique
+  ([[lem-of-inverse-unique]]), so writing them as single-valued notation, and
+  the abbreviations $x - y := x + (-y)$ and $x/y := x y^{-1}$, are legitimate.

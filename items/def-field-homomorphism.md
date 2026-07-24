@@ -4,7 +4,7 @@ kind: definition
 title: "Field homomorphism and embedding"
 status: published
 origin: session
-deps: [def-field]
+deps: [def-field, lem-of-inverse-unique]
 aliases: []
 landmark: false
 short: "field hom"
@@ -34,7 +34,10 @@ An **embedding** (or **monomorphism**) is an injective field homomorphism. An
 ## Remarks
 
 - From additivity, $\varphi(0_F) = 0_G$ and $\varphi(-x) = -\varphi(x)$; from
-  multiplicativity, $\varphi(x^{-1}) = \varphi(x)^{-1}$ for $x \ne 0$.
+  multiplicativity, $\varphi(x^{-1}) = \varphi(x)^{-1}$ for $x \ne 0$. These read
+  off because $\varphi(-x)$ is an additive inverse of $\varphi(x)$ and
+  $\varphi(x^{-1})$ a multiplicative inverse of $\varphi(x)$, and inverses are
+  unique ([[lem-of-inverse-unique]]).
 - Every field homomorphism is automatically injective: its kernel
   $\{x : \varphi(x) = 0\}$ is an ideal of $F$, and a field has only the ideals
   $\{0\}$ and $F$; since $\varphi(1_F) = 1_G \ne 0$, the kernel is $\{0\}$. This

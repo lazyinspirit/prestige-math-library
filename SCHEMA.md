@@ -151,9 +151,13 @@ examples: [ex-…, cex-…, fs-…]                # Section 5, in reading order
 hand-written prose on a page.)
 ```
 
-Rendered page = fixed 5 sections: (1) Prerequisites — MECHANICAL transitive
-closure of `deps` over listed items, minus items already on the page;
-(2) Summary — the body above; (3) Flowchart — MECHANICAL birds-eye Mermaid graph:
+Rendered page = fixed 5 sections: (1) Prerequisites — MECHANICAL, but PAGE-level:
+the other library pages that prove any item in this page's transitive `deps`
+closure (over listed items, minus items already on the page), rendered as direct
+links to those pages, not to individual items. A page whose closure is empty, or
+all of whose prerequisite items live on this page, shows "None"; prerequisite
+items that belong to no page are not surfaced here (they should be given a home
+page). (2) Summary — the body above; (3) Flowchart — MECHANICAL birds-eye Mermaid graph:
 only `landmark: true` items are nodes, edges = transitive reduction of
 nearest-landmark-ancestor over the full dep graph (routine items elided),
 nodes coloured by kind; (4) items in order, full bodies; (5) examples list.

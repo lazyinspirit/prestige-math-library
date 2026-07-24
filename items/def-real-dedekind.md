@@ -4,7 +4,7 @@ kind: definition
 title: "The real numbers $\\mathbb{R}$ as Dedekind cuts"
 status: published
 origin: session
-deps: [def-dedekind-cut, def-rationals]
+deps: [def-dedekind-cut, def-rationals, lem-rational-cut-is-cut]
 aliases: []
 landmark: true
 short: "ℝ (cuts)"
@@ -32,10 +32,11 @@ $\mathbb{Q}$ satisfying (C1)–(C3).
 The rationals embed into $\mathbb{R}$ by the **rational embedding**: for
 $q \in \mathbb{Q}$ set
 $$q^{*} := \{\, r \in \mathbb{Q} : r < q \,\},$$
-the cut of all rationals strictly below $q$. Each $q^{*}$ is a Dedekind cut, and
-$q \mapsto q^{*}$ sends $\mathbb{Q}$ into $\mathbb{R}$. The images of $0$ and $1$
-are written $0^{*}$ and $1^{*}$; they serve as the additive and multiplicative
-identities of $\mathbb{R}$.
+the cut of all rationals strictly below $q$. Each $q^{*}$ is a Dedekind cut
+([[lem-rational-cut-is-cut]]), and $q \mapsto q^{*}$ sends $\mathbb{Q}$ into
+$\mathbb{R}$. The images of $0$ and $1$ are written $0^{*}$ and $1^{*}$; being
+cuts they lie in $\mathbb{R}$ and serve as its additive and multiplicative
+identities.
 
 ## Remarks
 

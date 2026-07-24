@@ -29,7 +29,7 @@ Multiplication of Dedekind cuts ([[def-dedekind-cut]], [[def-real-dedekind]]) is
 defined first for nonnegative cuts, then extended to all cuts by their signs
 ([[def-cut-order]]) via the absolute value.
 
-**Nonnegative case.** For cuts $A, B \ge 0^{*}$,
+**Positive case.** For cuts $A, B > 0^{*}$ (strictly positive),
 
 $$A \cdot B := \{\, q \in \mathbb{Q} : q \le 0 \,\} \;\cup\; \{\, a b : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}.$$
 
@@ -55,13 +55,16 @@ $A / B := A \cdot B^{-1}$ for $B \ne 0^{*}$.
 
 ## Remarks
 
-- When $A, B > 0^{*}$ there exist positive $a \in A$, $b \in B$, so the positive
-  products $ab$ are nonempty and, because $A, B$ have no greatest element
-  (axiom (C3)), $A \cdot B$ has none either; together with downward closure this
-  makes $A \cdot B$ a genuine cut. The clause $\{q \le 0\}$ is then absorbed
-  below those positive products. The degenerate boundary $A = 0^{*}$ (where that
-  clause would leave $0$ as a greatest element) is fixed separately by the first
-  sign rule, $0^{*} \cdot B = 0^{*}$, so the definition is well posed.
+- The product formula is stated only for strictly positive cuts $A, B > 0^{*}$:
+  then there exist positive $a \in A$, $b \in B$, so the positive products $ab$
+  are nonempty and, because $A, B$ have no greatest element (axiom (C3)),
+  $A \cdot B$ has none either; together with downward closure this makes
+  $A \cdot B$ a genuine cut, the clause $\{q \le 0\}$ being absorbed below those
+  positive products. The formula is deliberately not applied at the boundary
+  $A = 0^{*}$ or $B = 0^{*}$, where $\{q \le 0\}$ would leave $0$ as a greatest
+  element and so fail to be a cut; products with a zero factor are supplied
+  instead by the first sign rule, $A \cdot B = 0^{*}$, so the operation is well
+  posed on all cuts.
 - On the rational embedding $q \mapsto q^{*}$ the operation agrees with
   $\mathbb{Q}$: $(pq)^{*} = p^{*} \cdot q^{*}$, and $(q^{*})^{-1} = (1/q)^{*}$
   for $q > 0$ ([[lem-rat-cut-embeds]]).

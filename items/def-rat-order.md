@@ -4,7 +4,7 @@ kind: definition
 title: "Order on the rationals"
 status: published
 origin: session
-deps: [def-rationals, def-rat-operations, def-int-order]
+deps: [def-rationals, def-rat-operations, def-int-order, lem-rat-positive-denominator]
 aliases: []
 verification:
   precheck: n/a
@@ -19,8 +19,9 @@ pipeline_run: null
 
 ## Definition
 
-Every rational has a representative with positive denominator, since
-$(a,b) \sim (-a,-b)$. For representatives with $b > 0$ and $d > 0$ define
+Every rational has a representative with positive denominator (if $b < 0$ then
+$(a,b) \sim (-a,-b)$ with $-b > 0$, [[lem-rat-positive-denominator]]). For
+representatives with $b > 0$ and $d > 0$ define
 
 $$[(a,b)] \le [(c,d)] \iff ad \le cb \quad \text{in } \mathbb{Z}.$$
 

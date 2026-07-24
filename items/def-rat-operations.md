@@ -4,7 +4,7 @@ kind: definition
 title: "Arithmetic on the rationals"
 status: published
 origin: session
-deps: [def-rationals, lem-int-cancellation]
+deps: [def-rationals, lem-int-cancellation, lem-rat-inverse-well-defined]
 aliases: []
 verification:
   precheck: n/a
@@ -31,4 +31,5 @@ $[(a,b)]^{-1} := [(b,a)]$.
 
 - The denominators stay legal: $bd \ne 0$ because $\mathbb{Z}$ has no zero
   divisors ([[lem-int-cancellation]]).
-- Independence of representatives: [[lem-rat-ops-well-defined]].
+- Independence of representatives: [[lem-rat-ops-well-defined]] for sum, product,
+  and negation; [[lem-rat-inverse-well-defined]] for the reciprocal.

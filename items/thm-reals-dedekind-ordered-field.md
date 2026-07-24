@@ -44,7 +44,7 @@ nonnegatives ($0^{*} \le A$ and $0^{*} \le B \Rightarrow 0^{*} \le A \cdot B$).
 
 [L3] Addition is the sumset $A + B = \{\, a + b : a \in A,\ b \in B \,\}$, with identity $0^{*}$ ([[def-cut-addition]]).
 
-[L4] For nonnegative cuts, $A \cdot B = \{\, q \in \mathbb{Q} : q \le 0 \,\} \cup \{\, a b : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}$, and $0^{*} = \{\, r \in \mathbb{Q} : r < 0 \,\}$ ([[def-cut-multiplication]], [[def-cut-order]]).
+[L4] For strictly positive cuts $A, B > 0^{*}$, $A \cdot B = \{\, q \in \mathbb{Q} : q \le 0 \,\} \cup \{\, a b : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}$; and $A \cdot B = 0^{*}$ whenever $A = 0^{*}$ or $B = 0^{*}$ (the sign rule). Also $0^{*} = \{\, r \in \mathbb{Q} : r < 0 \,\}$ ([[def-cut-multiplication]], [[def-cut-order]]).
 
 ## Proof
 
@@ -54,6 +54,6 @@ nonnegatives ($0^{*} \le A$ and $0^{*} \le B \Rightarrow 0^{*} \le A \cdot B$).
 
 1.2 Translation invariance: suppose $A \subseteq B$. Every element of $A + C$ has the form $a + c$ with $a \in A$, $c \in C$; since $a \in A \subseteq B$, also $a + c \in B + C$. Hence $A + C \subseteq B + C$, i.e. $A \le B \Rightarrow A + C \le B + C$. [L3]
 
-1.3 Positivity of products of nonnegatives: if $0^{*} \le A$ and $0^{*} \le B$, the product formula gives $A \cdot B \supseteq \{\, q \in \mathbb{Q} : q \le 0 \,\} \supseteq \{\, r \in \mathbb{Q} : r < 0 \,\} = 0^{*}$, so $0^{*} \subseteq A \cdot B$, i.e. $0^{*} \le A \cdot B$. [L4]
+1.3 Positivity of products of nonnegatives: suppose $0^{*} \le A$ and $0^{*} \le B$. If $A = 0^{*}$ or $B = 0^{*}$, then $A \cdot B = 0^{*}$ by the sign rule [L4], so $0^{*} \subseteq A \cdot B$. Otherwise $A, B > 0^{*}$, and the positive-case formula [L4] gives $A \cdot B \supseteq \{\, q \in \mathbb{Q} : q \le 0 \,\} \supseteq \{\, r \in \mathbb{Q} : r < 0 \,\} = 0^{*}$, so $0^{*} \subseteq A \cdot B$. In either case $0^{*} \le A \cdot B$. [L4]
 
 2.1 Thus $\mathbb{R}$ is a field whose inclusion order is total, translation-invariant, and closed under multiplication of nonnegative cuts: a totally ordered field. [step 1.1, step 1.2, step 1.3, L1] ∎

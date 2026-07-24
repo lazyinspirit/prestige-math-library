@@ -46,9 +46,10 @@ Follow those files, not this runbook, wherever they differ.
   (definition), `thm` (theorem), `lem` (lemma), `prop` (proposition), `cor`
   (corollary), `ex` (example), `cex` (counterexample), `fs` (false statement),
   `rem` (remark).
-- Every rendered page is five fixed sections: Prerequisites (mechanical
-  dependency closure), Summary (the only authored prose), Flowchart (birds-eye,
-  landmarks only), the item bodies, and the examples.
+- Every rendered page is five fixed sections: Prerequisites (mechanical, and
+  PAGE-level: links to the other library pages that prove this page's dependency
+  closure, not links to individual items), Summary (the only authored prose),
+  Flowchart (birds-eye, landmarks only), the item bodies, and the examples.
 
 ### Frozen presentation (hard rule)
 
@@ -67,6 +68,56 @@ frontmatter. Session-authored items list standard textbook references, not
 fabricated scraped sources: the end-of-page Sources section is split into Sources
 scraped (may be empty) and Standard references (recommended treatments, labelled
 as such, not extraction sources). Never invent a source.
+
+### Definition justification (hard rule)
+
+Every definition must be fully justified for logical validity and
+well-definedness whenever it carries a nontrivial obligation. A definition may
+not simply assert that an object exists, is single-valued, or has the structure
+its name claims; each such obligation is discharged by a proof-bearing item (a
+lemma or theorem) that the definition cites by `[[id]]`. Asserting the obligation
+in the definition's prose or Remarks with a bare citation that does not actually
+prove it is a citation-honesty violation, not a justification. When the obligation
+is nontrivial and no existing item discharges it, author the missing lemma or
+theorem and prove it before the definition is published.
+
+The obligations that recur, and what each requires:
+
+- **Quotient constructions.** Defining a quotient (a quotient group $G/N$, a
+  quotient ring, or a set of equivalence classes such as $\mathbb Z$, $\mathbb Q$,
+  or the Cauchy reals) requires proving: (i) the relation is an equivalence
+  relation (or $N$ is a normal subgroup / two-sided ideal, as appropriate);
+  (ii) every operation defined on representatives is **well-defined**, i.e.
+  independent of the choice of representative (independent of the coset
+  representatives, in the $G/N$ case); and (iii) the quotient **satisfies all the
+  axioms of the structure it is claimed to be** (all group axioms for $G/N$, all
+  field axioms for a quotient field, and so on). Each of (i), (ii), (iii) is a
+  separate proof obligation; none may be skipped as "obvious".
+- **Operations and objects defined via representatives or a construction.** A sum,
+  product, inverse, reciprocal, or order defined on class representatives needs a
+  representative-independence proof for *each* such operation (do not let one
+  "operations are well-defined" lemma silently stand in for an operation it does
+  not actually cover, e.g. a lemma that proves it for $+,\cdot,-$ does not cover
+  $x^{-1}$). A constructed object claimed to be a member of the target set (the
+  sum of two Dedekind cuts is again a cut; a reciprocal class is again a legal
+  rational) must be proven to lie in that set.
+- **Definitions by cases.** The cases must be exhaustive and consistent: they
+  cover every input and agree wherever they overlap, so the object is
+  single-valued. Cite the result that makes them exhaustive/exclusive (e.g.
+  trichotomy of the order).
+- **Notation that presupposes uniqueness.** Writing "the" inverse, "the"
+  identity, "the" supremum, or $-x$, $x^{-1}$, $\sup S$ as single-valued notation
+  presupposes a uniqueness result; that uniqueness must be proven or cited.
+- **Existence claims.** If a definition presupposes that some object exists (a
+  representative of a required form, a least upper bound under completeness),
+  that existence is a proof obligation unless it is an axiom.
+
+Genuinely axiomatic or structural definitions (a field, an ordered field, a
+homomorphism, a limit predicate) carry no well-definedness obligation and need no
+such proof; do not manufacture one. The audit question for every definition is
+narrow and mechanical: *list each object it introduces that could fail to exist,
+be multi-valued, escape its target set, or lack a claimed axiom, and confirm a
+cited proof-bearing item discharges it.*
 
 ---
 
@@ -401,8 +452,10 @@ hand-written prose on the page. Structure it well: compress shared foundational
 layers into a single short paragraph that references the sibling page instead of
 re-deriving them, and break the novel layer into several small paragraphs.
 
-The rendered page is always five fixed sections: Prerequisites (mechanical
-dependency closure), Summary, Flowchart, the item bodies, and the examples. The
+The rendered page is always five fixed sections: Prerequisites (mechanical and
+page-level: links to the other pages that prove this page's dependency closure,
+never to individual items), Summary, Flowchart, the item bodies, and the
+examples. The
 **flowchart is birds-eye**: only landmark items are nodes, and edges are the
 transitive reduction of nearest-landmark-ancestor over the dependency graph.
 Confirm the flowchart follows the proof spine: the landmark set should be the

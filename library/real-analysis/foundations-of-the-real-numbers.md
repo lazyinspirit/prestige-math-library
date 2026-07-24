@@ -5,7 +5,7 @@ status: published
 items: [def-field, def-ordered-field, def-abs-value, def-archimedean-field,
         def-complete-ordered-field, def-field-homomorphism,
         def-ordered-field-isomorphism,
-        lem-of-zero-mult, lem-of-mult-neg, cor-of-neg-one-squared,
+        lem-of-inverse-unique, lem-of-zero-mult, lem-of-mult-neg, cor-of-neg-one-squared,
         lem-of-no-zero-divisors, lem-of-mult-cancel,
         lem-of-add-order, lem-of-sign-rules, lem-of-square-positive,
         cor-of-one-positive, lem-of-inverse-positive, lem-of-abs-value,
