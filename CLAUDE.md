@@ -74,7 +74,9 @@ before any rendering change, and preserve their behaviour):
   fact and per step, right-aligned mono step numbers, per-citation tag chips in
   a bounded wrapping end column, collapsible Scratch.
 - `web/components/library/badges.tsx` — kind chips (coloured), DRAFT banner,
-  provenance + verification chips.
+  provenance + verification chips. The provenance pill shows ONLY the provenance
+  label (no "judge N/M" fraction — that reads as failures and is banned here);
+  the judge count lives in the verification caption below (see page.tsx).
 - `web/components/library/Mermaid.tsx` — flowchart v2: straight thick indigo
   edges (linear curve, 2.75px), 13px squarish (iPhone-like) corners, nodes
   coloured by kind, click-to-enlarge lightbox (Esc/backdrop close), selected
@@ -82,7 +84,15 @@ before any rendering change, and preserve their behaviour):
 - `web/app/library/[...path]/page.tsx` — the five fixed-numbered page sections
   (1 Prerequisites · 2 Summary · 3 Flowchart · 4 Definitions/theorems/proofs ·
   5 Examples/counterexamples/false statements), always rendered, with honest
-  empty-state lines.
+  empty-state lines. Section 1 Prerequisites is PAGE-level: links to the other
+  library pages proving this page's dependency closure, never individual items.
+- **Verification caption (owner-approved, keep it): a short always-visible note
+  directly under the provenance pill** reads "✓ N results · all verified · K also
+  independently AI-judged", then explains every result is machine-checked and
+  owner-audited and that the judge is an ADDITIONAL independent AI review, so the
+  items not AI-judged were owner-verified, NOT failures. This exists so "judge
+  31/34" can never be misread as failures; do not remove it or reintroduce a
+  bare judge fraction as the headline.
 - Flowchart is BIRDS-EYE: only `landmark: true` items are nodes; edges are the
   transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
   theorems, key definitions, key lemmas); do not revert to one-node-per-item.
