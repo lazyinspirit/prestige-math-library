@@ -4,7 +4,7 @@ kind: definition
 title: "Arithmetic on the integers"
 status: published
 origin: session
-deps: [def-integers]
+deps: [def-integers, def-nat-addition, def-nat-multiplication]
 aliases: []
 verification:
   precheck: n/a

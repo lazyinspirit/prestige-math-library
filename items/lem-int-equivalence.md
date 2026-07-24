@@ -4,7 +4,7 @@ kind: lemma
 title: "The integer-defining relation is an equivalence relation"
 status: published
 origin: session
-deps: [def-integers]
+deps: [def-integers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-cancellative]
 aliases: []
 proof_strategy: direct
 verification:

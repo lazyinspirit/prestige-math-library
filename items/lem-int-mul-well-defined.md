@@ -4,7 +4,7 @@ kind: lemma
 title: "Integer multiplication is well defined"
 status: published
 origin: session
-deps: [def-integers, def-int-operations]
+deps: [def-integers, def-int-operations, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-mult-commutative, lem-nat-mult-distributive]
 aliases: []
 proof_strategy: direct
 verification:

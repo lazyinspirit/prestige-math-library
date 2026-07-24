@@ -4,7 +4,7 @@ kind: lemma
 title: "The naturals embed in the integers"
 status: published
 origin: session
-deps: [def-integers, def-int-operations, def-int-order]
+deps: [def-integers, def-int-operations, def-int-order, def-natural-numbers, def-nat-order, lem-nat-add-identity, lem-nat-mult-identity, thm-nat-linear-order]
 aliases: []
 proof_strategy: direct
 verification:

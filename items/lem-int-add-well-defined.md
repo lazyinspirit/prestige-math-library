@@ -4,7 +4,7 @@ kind: lemma
 title: "Integer addition and negation are well defined"
 status: published
 origin: session
-deps: [def-integers, def-int-operations]
+deps: [def-integers, def-int-operations, lem-nat-add-commutative, lem-nat-add-associative]
 aliases: []
 proof_strategy: direct
 verification:

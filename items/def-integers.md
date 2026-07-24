@@ -4,7 +4,7 @@ kind: definition
 title: "The integers as equivalence classes of pairs of naturals"
 status: published
 origin: session
-deps: []
+deps: [def-natural-numbers, def-nat-addition]
 aliases: []
 landmark: true
 short: "ℤ"
