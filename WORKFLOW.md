@@ -239,8 +239,9 @@ each ending in a bracket justification tag drawn from a closed vocabulary
 ### The proof format and the precheck tag vocabulary
 
 The closed justification-tag vocabulary (every step ends in one or more of these)
-is: `[given]`; the citation tags `[F#]`, `[A#]`, `[L#]`, `[C#]` (Facts,
-Assumptions, Lemmas, prior Claims) and `[step k.j]`; `[algebra]`; `[choose]`;
+is: `[given]`; the citation tags `[F#]`, `[A#]`, `[L#]` (Facts, Assumptions,
+Lemmas), `[C#]` (a declared diagram cell; see the diagram note below), and
+`[step k.j]` (a prior step); `[algebra]`; `[choose]`;
 `[suffices: ...]`; and the strategy tags `[assume-contra]`, `[assume-hyp]`,
 `[assume-case ...]`, `[ih]`, `[base]`, `[construct]`, `[contrapositive-reduce]`,
 `[cases]` / `[cases-exhaustive]`, and the discharges `[discharge-contradiction |
@@ -256,6 +257,24 @@ Strategy-specific requirements: contradiction needs `[assume-contra]` and a fina
 `[cases-exhaustive]`; constructive needs `[construct]` and a final
 `[discharge-construct]`; direct needs no special tags. The normative source is
 `worker/src/precheck.ts`; this list is a convenience, not a substitute for it.
+
+**Diagram chasing (categorical proofs).** For proofs that reason about a
+commutative diagram, the shared checker also supports a `**Diagram:**` block:
+named arrows, then numbered cells `[C1], [C2], ...`, each cell one composite
+equation justified from a strict grammar (`naturality of <nt> at <morphism>`,
+`universal property of <object>`, `functor <F> applied to [C#]`, and so on). A
+step cites a cell with `[C#]`, every cited cell must be declared, and "the
+diagram commutes" or "a diagram chase shows" as a justification is rejected. This
+rigor discipline is inherited by the library through `precheck.ts`, but two gaps
+remain in the current setup, and neither is wired yet: the generation and judge
+assets here do not exercise it (the generator prompt and `tools/judge.mts` would
+need the diagram grammar and the diagram-specific refuter rules added, or the
+library judge would reuse the production `JUDGE_SYS_PROOF_DEEP` for diagram
+items), and the renderer does not draw commutative diagrams (KaTeX has no
+`tikz-cd`, so cells render as their LaTeX equations, not as a figure). Reading
+diagrams from source images is also not wired. Full diagram support is opt-in
+work; the rendering side touches the frozen presentation, so it needs owner
+sign-off.
 
 **Mechanical precheck** runs on every generated item (free, deterministic):
 
