@@ -4,7 +4,7 @@ kind: theorem
 title: "The arithmetic mean, geometric mean inequality"
 status: draft
 origin: session
-deps: [def-finite-sum, lem-finite-sum-laws, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
+deps: [def-finite-sum, lem-finite-sum-laws, lem-of-zero-mult, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
 justified_by: []
 aliases: [thm-am-gm-inequality]
 landmark: true
@@ -12,10 +12,6 @@ short: "$(\\prod a_k)^{1/n} \\le \\frac1n \\sum a_k$"
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -68,7 +64,7 @@ identity relating $N_j$ to any real power is needed anywhere, and none is claime
 
 **Given:** A natural $n \ge 1$ and reals $a_0, \dots, a_{n-1} \ge 0$; for $m \ge 1$ let $P(m)$ denote the statement "for all reals $b_0, \dots, b_{m-1} \ge 0$, $\prod_{k<m} b_k \le B^{m}$ where $B = \frac{1}{m}\sum_{k<m} b_k$, with equality if and only if $b_0 = \dots = b_{m-1}$".
 
-[L1] Laws of finite sums and products ([[lem-finite-sum-laws]], [[def-finite-sum]]): splitting of sums and of products at any index; the constant sum $\sum_{k<m}\lambda = m\lambda$; monotonicity of sums, with a sum of nonnegatives being $0$ only if every term is $0$; and a product of nonnegatives is nonnegative, of positives positive.
+[L1] A product with a zero factor is zero, $0 \cdot x = 0$ ([[lem-of-zero-mult]]). Laws of finite sums and products ([[lem-finite-sum-laws]], [[def-finite-sum]]): splitting of sums and of products at any index; the constant sum $\sum_{k<m}\lambda = m\lambda$; monotonicity of sums, with a sum of nonnegatives being $0$ only if every term is $0$; and a product of nonnegatives is nonnegative, of positives positive.
 
 [L2] Roots ([[thm-nth-roots-exist]]): every $c \ge 0$ has a unique $c^{1/m} \ge 0$ with $\big(c^{1/m}\big)^{m} = c$, and $c^{1/m} > 0$ when $c > 0$.
 

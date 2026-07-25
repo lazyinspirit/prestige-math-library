@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -45,7 +41,7 @@ and this item is the reason for that restriction.
 
 [A2] The same rational has many representatives: $1/3 = 2/6$ in $\mathbb{Q}$, since $1 \cdot 6 = 3 \cdot 2$ ([[def-rationals]]). For a formula in $m$ and $n$ to define a function of $r$, all representatives must give the same value, which for positive bases is [[lem-rational-power-well-defined]].
 
-[A3] No real has sixth power $-8$: for every $x \in \mathbb{R}$, $x^{6} = \big(x^{3}\big)^{2} \ge 0$, whereas $-8 < 0$ ([[lem-power-laws]], [[lem-of-square-positive]], [[def-integer-power]], [[def-rat-order]]).
+[A3] No real has sixth power $-8$: for every $x \in \mathbb{R}$, $x^{6} = \big(x^{3}\big)^{2} \ge 0$, whereas $-8 < 0$ in $\mathbb{R}$ by [A1] ([[lem-power-laws]], [[lem-of-square-positive]], [[def-integer-power]]).
 
 [A4] Exactly one real has cube $-8$, namely $-2$: if $x^{3} = -8 < 0$ then $x < 0$, since $x \ge 0$ would give $x^{3} \ge 0$; and then $y := -x > 0$ satisfies $y^{3} = -x^{3} = 8$, so $y = 8^{1/3} = 2$ by uniqueness of the nonnegative cube root, whence $x = -2$ ([[thm-nth-roots-exist]], [[lem-power-monotone]], [[lem-of-sign-rules]], [[lem-of-mult-neg]]).
 

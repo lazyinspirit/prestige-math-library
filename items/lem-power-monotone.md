@@ -4,17 +4,13 @@ kind: lemma
 title: "Monotonicity of $x \\mapsto x^n$ and of $n \\mapsto a^n$"
 status: draft
 origin: session
-deps: [def-integer-power, lem-of-sign-rules, prop-of-multiply-inequalities, thm-induction-principle, def-ordered-field, def-nat-order]
+deps: [def-integer-power, cor-of-one-positive, lem-of-sign-rules, prop-of-multiply-inequalities, thm-induction-principle, def-ordered-field, def-nat-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -46,7 +42,7 @@ $a, b \in \mathbb{R}$ and let $n \in \mathbb{N}$, with powers as in
 
 [L2] Induction principle ([[thm-induction-principle]]).
 
-[L3] Sign and scaling rules: a product of positives is positive; for $c > 0$, $x < y \iff cx < cy$; and $1 > 0$ ([[lem-of-sign-rules]], [[def-ordered-field]]).
+[L3] Sign and scaling rules: a product of positives is positive, and for $c > 0$, $x < y \iff cx < cy$ ([[lem-of-sign-rules]]); the positives are closed under addition and satisfy trichotomy ([[def-ordered-field]]); and $1 > 0$ ([[cor-of-one-positive]], which is where that fact is proved: neither of the two items just named states it).
 
 [L4] Multiplying inequalities of nonnegatives: if $0 \le x \le y$ and $0 \le u \le v$ then $xu \le yv$, and if $0 < x < y$ and $0 < u < v$ then $xu < yv$ ([[prop-of-multiply-inequalities]]).
 
