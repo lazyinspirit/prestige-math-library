@@ -4,7 +4,7 @@ kind: lemma
 title: "Null sequences form an ideal"
 status: published
 origin: session
-deps: [def-null-sequence, thm-cauchy-ring, lem-cauchy-bounded, lem-rat-triangle, lem-null-is-cauchy]
+deps: [def-null-sequence, thm-cauchy-ring, lem-cauchy-bounded, lem-rat-triangle, lem-null-is-cauchy, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
 verification:

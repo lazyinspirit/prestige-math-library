@@ -4,7 +4,7 @@ kind: lemma
 title: "The rationals are Archimedean"
 status: published
 origin: session
-deps: [def-rat-order, thm-rat-ordered-field, lem-nat-embeds-int, lem-int-embeds-rat]
+deps: [def-rat-order, thm-rat-ordered-field, lem-nat-embeds-int, lem-int-embeds-rat, thm-int-ordered-ring]
 aliases: []
 landmark: true
 short: "Archimedean"

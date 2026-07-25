@@ -4,7 +4,7 @@ kind: lemma
 title: "ℚ is dense in every Archimedean ordered field"
 status: published
 origin: session
-deps: [def-archimedean-field, lem-of-q-embeds, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules]
+deps: [def-archimedean-field, lem-of-q-embeds, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules, thm-well-ordering-principle, lem-nat-embeds-int, def-int-order]
 aliases: []
 landmark: false
 short: "ℚ dense"
@@ -43,13 +43,15 @@ $q$ with $x < \iota(q) < y$.
 
 [L5] Sign rules: for $c > 0$ one has $a < b$ iff $ac < bc$, and products of positives are positive ([[lem-of-sign-rules]]).
 
+[L6] Every nonempty $T \subseteq \mathbb{Z}$ that is bounded below has a least element: if $k > -M$ for every $k \in T$ then $\{k + M : k \in T\}$ is a nonempty set of naturals, which has a least element, and subtracting $M$ returns the least element of $T$ ([[thm-well-ordering-principle]], [[lem-nat-embeds-int]], [[def-int-order]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Since $x < y$, the element $y - x > 0$, so it is nonzero and its inverse $(y - x)^{-1}$ exists in the field $F$; by the Archimedean property applied to $(y - x)^{-1}$, choose $n \ge 1$ with $(y - x)^{-1} < n \cdot 1_F$. [L1, L4, choose]
 
-1.2 By [L1] applied to $(n \cdot 1_F)\,x$ there is a natural $N$ with $(n \cdot 1_F)\,x < N \cdot 1_F$, so the set $T = \{\, k \in \mathbb{Z} : k \cdot 1_F > (n \cdot 1_F)\,x \,\}$ is nonempty ($N \in T$); by [L1] applied to $-(n \cdot 1_F)\,x$ there is a natural $M$ with $-(n \cdot 1_F)\,x < M \cdot 1_F$, so every $k \in T$ satisfies $k \cdot 1_F > (n \cdot 1_F)\,x > -M \cdot 1_F$, hence $k > -M$ (were $k \le -M$, monotonicity of $k \mapsto k \cdot 1_F$ from [L3] would force $k \cdot 1_F \le -M \cdot 1_F$, against $k \cdot 1_F > -M \cdot 1_F$), so $T$ is bounded below; a nonempty set of integers bounded below has a least element $m$ (well-ordering of $\mathbb{Z}$). [L1, L3, choose]
+1.2 By [L1] applied to $(n \cdot 1_F)\,x$ there is a natural $N$ with $(n \cdot 1_F)\,x < N \cdot 1_F$, so the set $T = \{\, k \in \mathbb{Z} : k \cdot 1_F > (n \cdot 1_F)\,x \,\}$ is nonempty ($N \in T$); by [L1] applied to $-(n \cdot 1_F)\,x$ there is a natural $M$ with $-(n \cdot 1_F)\,x < M \cdot 1_F$, so every $k \in T$ satisfies $k \cdot 1_F > (n \cdot 1_F)\,x > -M \cdot 1_F$, hence $k > -M$ (were $k \le -M$, monotonicity of $k \mapsto k \cdot 1_F = \iota(k)$ on $\mathbb{Z}$, which is [L2], would force $k \cdot 1_F \le -M \cdot 1_F$, against $k \cdot 1_F > -M \cdot 1_F$), so $T$ is bounded below by $-M$, and therefore has a least element $m$. [L1, L2, L3, L6, choose]
 
 2.1 Multiplying $(y - x)^{-1} < n \cdot 1_F$ by the positive $(n \cdot 1_F)^{-1}(y - x)$ gives $(n \cdot 1_F)^{-1} < y - x$. [step 1.1, L4, L5]
 

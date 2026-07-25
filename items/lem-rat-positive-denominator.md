@@ -4,7 +4,7 @@ kind: lemma
 title: "Every rational has a positive-denominator representative"
 status: published
 origin: session
-deps: [def-rationals, thm-int-comm-ring, thm-int-ordered-ring]
+deps: [def-rationals, thm-int-comm-ring, thm-int-ordered-ring, def-rat-order]
 aliases: []
 landmark: false
 short: "rep with $b>0$ exists"

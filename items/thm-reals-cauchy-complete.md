@@ -4,7 +4,7 @@ kind: theorem
 title: "The reals are complete"
 status: published
 origin: session
-deps: [def-real-limit, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-numbers]
+deps: [def-real-limit, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-numbers, def-rational-cauchy-sequence, def-real-order]
 aliases: []
 landmark: true
 short: "ℝ complete"

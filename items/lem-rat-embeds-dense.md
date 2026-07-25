@@ -4,7 +4,7 @@ kind: lemma
 title: "The rationals embed densely in the reals"
 status: published
 origin: session
-deps: [def-real-numbers, def-real-order, thm-reals-ordered-field, def-rational-cauchy-sequence, thm-rat-ordered-field]
+deps: [def-real-numbers, def-real-order, thm-reals-ordered-field, def-rational-cauchy-sequence, thm-rat-ordered-field, thm-rat-field]
 aliases: []
 proof_strategy: direct
 verification:

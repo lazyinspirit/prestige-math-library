@@ -21,7 +21,7 @@ sources:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
-      url: "https://en.wikipedia.org/wiki/Calculus_(Spivak)"
+      url: "https://en.wikipedia.org/wiki/Michael_Spivak"
 pipeline_run: null
 ---
 

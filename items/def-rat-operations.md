@@ -4,7 +4,8 @@ kind: definition
 title: "Arithmetic on the rationals"
 status: published
 origin: session
-deps: [def-rationals, lem-int-cancellation, lem-rat-inverse-well-defined]
+deps: [def-rationals, lem-int-cancellation]
+justified_by: [lem-rat-inverse-well-defined]
 aliases: []
 verification:
   precheck: n/a

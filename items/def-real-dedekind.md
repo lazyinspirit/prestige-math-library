@@ -4,7 +4,8 @@ kind: definition
 title: "The real numbers $\\mathbb{R}$ as Dedekind cuts"
 status: published
 origin: session
-deps: [def-dedekind-cut, def-rationals, lem-rational-cut-is-cut]
+deps: [def-dedekind-cut, def-rationals]
+justified_by: [lem-rational-cut-is-cut]
 aliases: []
 landmark: true
 short: "ℝ (cuts)"

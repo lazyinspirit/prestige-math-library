@@ -4,7 +4,8 @@ kind: definition
 title: "Order on the rationals"
 status: published
 origin: session
-deps: [def-rationals, def-rat-operations, def-int-order, lem-rat-positive-denominator]
+deps: [def-rationals, def-rat-operations, def-int-order]
+justified_by: [lem-rat-positive-denominator]
 aliases: []
 verification:
   precheck: n/a

@@ -4,7 +4,7 @@ kind: lemma
 title: "The null ideal is maximal"
 status: published
 origin: session
-deps: [lem-cauchy-away-from-zero, thm-cauchy-ring, lem-null-ideal, lem-rat-triangle, def-null-sequence]
+deps: [lem-cauchy-away-from-zero, thm-cauchy-ring, lem-null-ideal, lem-rat-triangle, def-null-sequence, thm-rat-ordered-field]
 aliases: []
 landmark: true
 short: "Null ideal maximal"

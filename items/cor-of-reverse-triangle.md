@@ -4,7 +4,7 @@ kind: corollary
 title: "The reverse triangle inequality"
 status: published
 origin: session
-deps: [lem-of-triangle-inequality, lem-of-abs-value]
+deps: [lem-of-triangle-inequality, lem-of-abs-value, def-ordered-field]
 aliases: []
 landmark: false
 short: "Reverse triangle ineq."

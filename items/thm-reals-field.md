@@ -4,7 +4,7 @@ kind: theorem
 title: "The reals form a field"
 status: published
 origin: session
-deps: [def-real-numbers, thm-cauchy-ring, lem-null-ideal, lem-null-maximal]
+deps: [def-real-numbers, thm-cauchy-ring, lem-null-ideal, lem-null-maximal, def-null-sequence]
 aliases: []
 landmark: true
 short: "ℝ field"

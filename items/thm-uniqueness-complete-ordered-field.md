@@ -15,11 +15,15 @@ sources:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 30 (Uniqueness of the real numbers)"
-      url: "https://en.wikipedia.org/wiki/Calculus_(Spivak)"
+      url: "https://en.wikipedia.org/wiki/Michael_Spivak"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
 verification:
   precheck: pass
+  judge:
+    model: openai/gpt-5.4
+    verdict: pass
+    date: 2026-07-25
   audited: 2026-07-25
 pipeline_run: null
 ---
@@ -89,7 +93,7 @@ and it admits $\mathbb{Q}$ as an ordered subfield via $\iota_F$.
 
 10.1 For uniqueness let $\chi : F \to G$ be any ordered-field isomorphism; being such it is in particular a field homomorphism ([L7]), so by [L4] it fixes $\mathbb{Q}$, and it is order-preserving, so for each $x$ every $\iota_G(q) \in L_x$ equals $\chi(\iota_F(q)) < \chi(x)$, making $\chi(x)$ an upper bound of $L_x$, hence $\chi(x) \ge \varphi(x)$. [step 9.1, L4, L7]
 
-11.1 Conversely, were $\chi(x) > \varphi(x)$, density [L3] would give a rational $q$ with $\varphi(x) < \iota_G(q) < \chi(x)$; then $\iota_G(q) > \sup L_x$ forces $\iota_F(q) \ge x$, so $\chi(x) \le \chi(\iota_F(q)) = \iota_G(q) < \chi(x)$, which is impossible, hence $\chi(x) \le \varphi(x)$. [step 10.1, L3, L4]
+11.1 Conversely, were $\chi(x) > \varphi(x)$, density [L3] would give a rational $q$ with $\varphi(x) < \iota_G(q) < \chi(x)$; then $\iota_G(q) > \sup L_x$ forces $\iota_F(q) \ge x$, since $\iota_F(q) < x$ would put $\iota_G(q)$ into $L_x$ and hence below $\sup L_x$; so $\chi(x) \le \chi(\iota_F(q)) = \iota_G(q) < \chi(x)$, which is impossible, hence $\chi(x) \le \varphi(x)$. [step 10.1, L3, L4]
 
 12.1 Therefore $\chi(x) = \varphi(x)$ for every $x$, so $\chi = \varphi$: the ordered-field isomorphism is unique. [step 10.1, step 11.1]
 

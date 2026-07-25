@@ -22,7 +22,7 @@ sources:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Appendix)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 30 (Epilogue: uniqueness of ℝ)"
-      url: "https://en.wikipedia.org/wiki/Calculus_(Spivak)"
+      url: "https://en.wikipedia.org/wiki/Michael_Spivak"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
 pipeline_run: null

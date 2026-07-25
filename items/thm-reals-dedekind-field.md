@@ -56,7 +56,7 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 **Proof technique:** direct.
 
-1.1 For $A, B > 0^{*}$, $A \cdot B$ is a cut: it is nonempty and proper, downward closed because any $0 < y < ab$ equals $(y/b)\,b$ with $0 < y/b < a$ in $A$ (so the positive part of $A \cdot B$ is exactly $\{ab : a \in A, b \in B, a, b > 0\}$), and it has no greatest element because $A, B$ have none; and $0^{*} \cdot B = 0^{*}$ by the sign rule, so multiplication of nonnegatives lands in $\mathbb{R}$. [L1, L2, L6, L7]
+1.1 For $A, B > 0^{*}$, $A \cdot B$ is a cut: it is nonempty and proper, downward closed because any $0 < y < ab$ equals $(y/b)\,b$ with $0 < y/b < a$ in $A$ (so the positive part of $A \cdot B$ is exactly $\{ab : a \in A, b \in B, a, b > 0\}$), and it has no greatest element because $A$ has none: given $ab$ with $a \in A$, $b \in B$, $a, b > 0$, choose $a' \in A$ with $a' > a$, and then $a'b \in A \cdot B$ with $a'b > ab$ since $b > 0$; and $0^{*} \cdot B = 0^{*}$ by the sign rule, so multiplication of nonnegatives lands in $\mathbb{R}$. [L1, L2, L6, L7]
 
 1.2 On nonnegatives multiplication is commutative: $A \cdot B$ and $B \cdot A$ are the same set, since $\{ab\} = \{ba\}$ by commutativity of rational multiplication. [L1, L7]
 

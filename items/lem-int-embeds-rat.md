@@ -4,7 +4,7 @@ kind: lemma
 title: "The integers embed in the rationals"
 status: published
 origin: session
-deps: [def-rat-operations, def-rat-order, def-rationals, thm-int-comm-ring]
+deps: [def-rat-operations, def-rat-order, def-rationals, thm-int-comm-ring, lem-nat-embeds-int]
 aliases: []
 proof_strategy: direct
 verification:
