@@ -12,10 +12,6 @@ landmark: false
 short: "$\\mathrm{AC}_\\omega$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -69,14 +65,22 @@ countable family of nonempty sets ([[def-countable]]) has a choice function.
   $\mathrm{AC}_\omega$ from AC in the other direction is quoted from the
   references alone.
 
-- **Dependent choice sits strictly between them.** The Axiom of Dependent Choice
+- **Dependent choice sits between them.** The Axiom of Dependent Choice
   (DC) says that if $R$ is a relation on a nonempty set $X$ such that every
   $x \in X$ has some $y$ with $x \mathbin{R} y$, then there is a sequence
   $(x_n)_{n \in \mathbb{N}}$ with $x_n \mathbin{R} x_{n+1}$ for all $n$. In ZF,
-  $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$, and
-  neither implication reverses. DC is the principle that legitimises "choose
-  $x_0$, then choose $x_1$ depending on $x_0$, and so on"; $\mathrm{AC}_\omega$
-  only legitimises countably many *independent* choices made at once.
+  $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$; both
+  implications are theorems of ZF, and neither is proved here. That neither
+  reverses is a pair of relative-consistency results of the same kind as in the
+  previous bullet: if ZF is consistent, then so are ZF + DC + (not AC) and
+  ZF + $\mathrm{AC}_\omega$ + (not DC). Both are established by forcing and by
+  permutation models, are quoted here from the references rather than proved, and
+  cannot be stated without the consistency hypothesis; so "DC is *strictly*
+  between AC and $\mathrm{AC}_\omega$" is shorthand for those two conditional
+  statements and is never used here as a standalone assertion. DC is the
+  principle that legitimises "choose $x_0$, then choose $x_1$ depending on
+  $x_0$, and so on"; $\mathrm{AC}_\omega$ only legitimises countably many
+  *independent* choices made at once.
 
 - **Being an axiom, $\mathrm{AC}_\omega$ carries no well-definedness obligation**,
   which is why this item has no `justified_by`. Its role in this library is

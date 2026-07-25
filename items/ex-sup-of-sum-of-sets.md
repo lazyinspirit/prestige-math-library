@@ -5,18 +5,14 @@ title: "$(0,1) + (2,3) = (2,4)$, with supremum $4 = \\sup(0,1) + \\sup(2,3)$"
 status: draft
 origin: session
 deps: [lem-sup-sum, lem-sup-translate, ex-sup-of-open-interval, lem-of-add-order,
-       lem-of-sign-rules, def-complete-ordered-field, def-ordered-field, def-field,
-       cor-of-one-positive]
+       lem-of-sign-rules, lem-max-is-sup, def-max-min, def-complete-ordered-field,
+       def-ordered-field, def-field, cor-of-one-positive]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -45,9 +41,11 @@ $s_x \in S$ and $t_x \in T$. The supremum statement is then supplied by
 $\sup T = 3$, the latter obtained from $\sup S$ by translation
 ([[lem-sup-translate]]) rather than by a second epsilon argument.
 
-The value $4$ is not attained: $4 \notin (2,4)$, exactly as in
-[[ex-sup-of-open-interval]]. The identity $\sup(S+T) = \sup S + \sup T$ therefore
-holds without either side being a maximum.
+The value $4$ is not attained: it fails the strict inequality $x < 4$ that defines
+$(2,4)$, so $S + T$ has no maximum ([[lem-max-is-sup]], [[def-max-min]]). The
+identity $\sup(S+T) = \sup S + \sup T$ therefore holds with the supremum on the
+left unattained, just as $\sup S = 1$ is unattained in
+[[ex-sup-of-open-interval]].
 
 ## Facts & Assumptions
 
@@ -64,6 +62,10 @@ holds without either side being a maximum.
 [L5] Halving: $0 < 1$, hence $2 = 1 + 1 > 0$, so $2 \ne 0$ and $2^{-1}$ exists with $c = (c \cdot 2^{-1}) \cdot 2$ for every $c$; and multiplying by the positive constant $2$ is an order equivalence, so $x < y$ if and only if $x \cdot 2 < y \cdot 2$ ([[cor-of-one-positive]], [[lem-of-sign-rules]], [[def-field]], [[def-ordered-field]]).
 
 [L6] Arithmetic of the named constants, from the field axioms: $2 + 1 = 3$, $3 + 1 = 4$, $2 + 2 = 4$, $1 + 3 = 4$, $x + x = x \cdot 2$ for every $x$, $2 \cdot 2 = 4$ and $3 \cdot 2 = 4 + 2$ ([[def-field]], [[def-complete-ordered-field]]).
+
+[L7] Order: trichotomy holds in an ordered field, so $a < a$ is impossible for every $a$ ([[def-ordered-field]], [[def-complete-ordered-field]]).
+
+[L8] Maximum and attainment: $m = \max X$ means $m \in X$ and $x \le m$ for every $x \in X$ ([[def-max-min]]); and if a nonempty $X$ has a maximum then $\sup X$ exists and equals $\max X \in X$, so a set whose supremum exists and does not belong to it has no maximum ([[lem-max-is-sup]]).
 
 ## Verification
 
@@ -85,7 +87,11 @@ holds without either side being a maximum.
 
 3.2 $\sup(S + T) = 4$: both $S$ and $T$ are nonempty and bounded above, so the sumset identity applies and gives $\sup(S + T) = \sup S + \sup T = 1 + 3 = 4$. [step 2.3, L1, L3, L6]
 
-4.1 Therefore $(0,1) + (2,3)$ is exactly the interval $(2,4)$, and its supremum is $4$, which is the sum $\sup(0,1) + \sup(2,3)$ of the two suprema; in particular $\sup U = 4$. [step 3.1, step 3.2, L3] ∎
+4.1 Therefore $(0,1) + (2,3)$ is exactly the interval $(2,4)$, and its supremum is $4$, which is the sum $\sup(0,1) + \sup(2,3)$ of the two suprema; in particular $\sup U = 4$. [step 3.1, step 3.2, L3]
+
+4.2 The value $4$ does not belong to $S + T$: by 3.1 one has $S + T = U$, membership in $U$ requires $x < 4$, and $4 < 4$ is impossible. [step 3.1, L7]
+
+5.1 Hence $S + T$ is nonempty with $\sup(S + T) = 4 \notin S + T$, so by the attainment criterion $S + T$ has no maximum: the identity $\sup(S+T) = \sup S + \sup T$ holds with the left-hand supremum unattained. [step 4.1, step 4.2, L3, L8] ∎
 
 ## Remarks
 

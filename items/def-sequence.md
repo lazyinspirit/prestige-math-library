@@ -99,11 +99,12 @@ toolkit for those two notions and does not restate them. A sequence
   negations of one another applied to the complementary property, and there is no
   third pattern hiding between them.
 
-- **A sequence is not its range.** $(x_k)$ is a function, not a set: the constant
-  sequence $x_k = 0$ and the sequence $x_0 = 0$, $x_k = 1$ for $k \ge 1$ have
-  ranges $\{0\}$ and $\{0, 1\}$, but neither is determined by its range, since
-  order and repetition are part of the data. Boundedness, on the other hand,
-  depends only on the range.
+- **A sequence is not its range.** $(x_k)$ is a function, not a set, and the
+  range does not determine the function: the sequence $x_0 = 0$, $x_k = 1$ for
+  $k \ge 1$ and the sequence $y_0 = y_1 = 0$, $y_k = 1$ for $k \ge 2$ have the
+  same range $\{0, 1\}$, yet they differ at $k = 1$, so they are different
+  sequences. Order and repetition are part of the data and the range forgets
+  both. Boundedness, on the other hand, depends only on the range.
 
 - **Indexing.** Sequences here start at $k = 0$ because $\mathbb{N}$ contains
   $0$ ([[def-natural-numbers]]). Texts that index from $1$ describe the same

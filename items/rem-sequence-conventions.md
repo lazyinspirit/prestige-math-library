@@ -84,9 +84,11 @@ has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]); then
 $x_k \le u \le |u| \le M$ and $-M \le -|\ell| \le \ell \le x_k$, so
 $-M \le x_k \le M$ and hence $|x_k| \le M$ for every $k$, by transitivity of
 $\le$ ([[def-ordered-field]]). Everything else about a sequence, convergence
-included, depends on more than the range: the constant sequence $1$ and the
-alternating sequence of [[fs-bounded-implies-convergent]] both have range
-contained in $\{-1, 1\}$, and one converges while the other does not.
+included, depends on more than the range: the sequence $z_0 = -1$ with $z_k = 1$
+for $k \ge 1$ and the alternating sequence of [[fs-bounded-implies-convergent]]
+have the *same* range $\{-1, 1\}$, yet the first converges to $1$, being constant
+from index $1$ on ([[def-sequence]], [[lem-limit-of-tail]]), while the second
+does not converge at all.
 
 **"Diverges" means "does not converge".** Divergence is the plain negation of
 convergence, so an oscillating bounded sequence diverges. Divergence *to*

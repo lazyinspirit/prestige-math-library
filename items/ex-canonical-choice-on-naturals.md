@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -77,11 +73,17 @@ subset; how large the family of nonempty subsets is then does not matter.
   $\min$ is carved out by Separation from $\mathcal{F} \times \mathbb{N}$ with no
   further axiom.
 
-- **This family is not finite**, so [[lem-finite-choice]] does not apply: it
-  contains the singleton $\{n\}$ for every natural number $n$, and these are
-  pairwise distinct. Size is not what is at stake, structure is, and
-  [[ex-russells-socks]] is the contrasting case: an infinite family of
-  two element sets carrying no rule of this kind.
+- **[[lem-finite-choice]] does not apply**, and not for the reason usually
+  given. That lemma carries no finiteness hypothesis at all, and it refuses that
+  reading explicitly: it is stated over an *indexed* family, a natural number $n$
+  and a function $F$ with domain $n$ all of whose values are nonempty, and it
+  gives a choice function for the family $F[n]$ of the values of $F$. What
+  disqualifies $\mathcal{F} = \mathcal{P}(\mathbb{N}) \setminus \{\emptyset\}$ is
+  that it is not $F[n]$ for any such $F$: a family of that form has at most $n$
+  members, whereas $\mathcal{F}$ already contains the $n + 1$ pairwise distinct
+  singletons $\{0\}, \{1\}, \dots, \{n\}$. Size is not what is at stake here,
+  structure is, and [[ex-russells-socks]] is the contrasting case: a family of
+  two element sets, with no listing of this kind and no rule either.
 
 - The same construction works verbatim on any set carrying a well-order, with
   "least element" read in that order. Whether every set carries a well-order is a

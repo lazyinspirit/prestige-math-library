@@ -4,7 +4,7 @@ kind: lemma
 title: "Every subset of an at most countable set is at most countable"
 status: draft
 origin: session
-deps: [def-countable, thm-well-ordering-principle, thm-recursion, thm-strong-induction, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy]
+deps: [def-countable, thm-well-ordering-principle, thm-recursion, thm-strong-induction, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy, thm-nat-linear-order]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "subsets of countable sets are countable"
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -57,7 +53,7 @@ dependent choice.
 
 [L5] Recursion: for any set $X$, any $x_0 \in X$ and any $F : X \to X$ there is a function $h : \mathbb{N} \to X$ with $h(0) = x_0$ and $h(\sigma(n)) = F(h(n))$ ([[thm-recursion]]).
 
-[L6] Order facts in $\mathbb{N}$: $m \in n \iff m < n$, $m \le n \iff m \subseteq n$, $n < \sigma(n)$, and $m < \sigma(n) \iff m \le n$ ([[lem-nat-order-is-membership]]); $<$ is irreflexive and transitive, and any two naturals are comparable ([[lem-nat-trichotomy]]); $m < n \iff \sigma(m) \le n$ ([[lem-nat-discrete]]).
+[L6] Order facts in $\mathbb{N}$: $m \in n \iff m < n$, $m \le n \iff m \subseteq n$, $n < \sigma(n)$, and $m < \sigma(n) \iff m \le n$ ([[lem-nat-order-is-membership]]); exactly one of $m < n$, $m = n$, $n < m$ holds, so $<$ is irreflexive and any two naturals are comparable ([[lem-nat-trichotomy]]); $\le$ is reflexive, antisymmetric, transitive and total ([[thm-nat-linear-order]]), whence $<$ is transitive, because $m < n < p$ gives $m \le p$ while $m = p$ would force $m = n$ by antisymmetry; $m < n \iff \sigma(m) \le n$ ([[lem-nat-discrete]]).
 
 [L7] Every nonzero natural is a successor ([[lem-nat-nonzero-is-successor]]).
 

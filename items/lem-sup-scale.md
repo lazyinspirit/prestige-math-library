@@ -4,17 +4,13 @@ kind: lemma
 title: "Supremum of a scalar multiple"
 status: draft
 origin: session
-deps: [lem-sup-epsilon, thm-infimum-property, def-complete-ordered-field, lem-of-sign-rules, def-infimum, def-ordered-field, def-field, lem-of-add-order]
+deps: [lem-sup-epsilon, thm-infimum-property, def-complete-ordered-field, lem-of-sign-rules, def-infimum, def-ordered-field, def-field, lem-of-add-order, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -52,7 +48,7 @@ image, which is why claim 2 has an infimum on the right.
 
 [L5] Trichotomy: for $a, b \in \mathbb{R}$ exactly one of $a < b$, $a = b$, $b < a$ holds, so the negation of $a \le b$ is $b < a$, and a nonzero $c$ satisfies exactly one of $c > 0$, $c < 0$ ([[def-complete-ordered-field]], [[def-ordered-field]]).
 
-[L6] Field and order arithmetic: a nonzero $c$ has an inverse $c^{-1}$ with $c^{-1} c = 1$; $0 \cdot c = 0$; multiplication distributes over addition; and adding a constant preserves the order ([[def-field]], [[lem-of-add-order]]).
+[L6] Field and order arithmetic: a nonzero $c$ has an inverse $c^{-1}$ with $c^{-1} c = 1$, and multiplication distributes over addition ([[def-field]]); $0 \cdot c = 0$ ([[lem-of-zero-mult]]); and adding a constant preserves the order ([[lem-of-add-order]]).
 
 ## Proof
 

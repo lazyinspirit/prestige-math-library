@@ -4,7 +4,7 @@ kind: lemma
 title: "The union of a nonempty chain of filters is a filter"
 status: draft
 origin: session
-deps: [def-filter, def-chain, def-partial-order]
+deps: [def-filter, def-chain, def-partial-order, def-upper-bound]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "$\\bigcup\\mathcal{D}$ is a filter, $\\mathcal{D}\\neq\\emptyset$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -47,7 +43,7 @@ it is not a filter.
 
 [L1] A filter on $X$ is a family of subsets of $X$ containing $X$, omitting $\emptyset$, closed under pairwise intersection, and closed upward in $X$ ([[def-filter]]).
 
-[L2] Inclusion is a partial order on any set of sets, and $u$ is an upper bound of $S$ when $s \subseteq u$ for every $s \in S$ ([[def-partial-order]]).
+[L2] Inclusion is a partial order on any set of sets ([[def-partial-order]]), and $u$ is an upper bound of $S$ when $s \subseteq u$ for every $s \in S$ ([[def-upper-bound]]).
 
 ## Proof
 

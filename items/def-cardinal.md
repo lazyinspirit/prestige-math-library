@@ -11,10 +11,6 @@ landmark: false
 short: "ordinal not equinumerous with any smaller ordinal"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -101,9 +97,11 @@ runs of the recipe, from any two well-orders of $X$, return the same $\kappa$.
   That every natural number is a cardinal, and that $\omega$ is one, amounts to
   the pigeonhole principle, namely that no natural number is equinumerous with a
   proper subset of itself. That principle is about finiteness rather than about
-  order, and it is not proved on this page; the page that develops finiteness
-  and countability supplies it. Nothing here depends on it, and the definition
-  above is stated so that it does not.
+  order, and this library does not prove it anywhere: not on this page, and not
+  on the page that develops finiteness and countability, which states explicitly
+  that it neither assumes nor uses it. So the classification of the ordinals up
+  to and including $\omega$ is left open here. Nothing on this page depends on
+  it, and the definition above is stated so that it does not.
 - **Notation.** The infinite cardinals are traditionally written
   $\aleph_0, \aleph_1, \dots$, with $\aleph_0 = \omega$. The notation
   $\aleph(A)$ for the Hartogs number of $A$ ([[thm-hartogs]]) comes from the

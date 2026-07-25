@@ -58,12 +58,16 @@ this library, and the three statements below are cited, not proved.
 
 **Why this matters for the rest of the library.** A theorem proved from UL is not
 "a theorem of choice" in the same sense as one proved from the Axiom of Choice.
-Because the Axiom of Choice and Zorn's lemma are equivalent, anything proved from
-Zorn costs exactly AC, no more and no less; but a result that only needs UL costs
-strictly less, and a page that proves such a result through Zorn is overpaying and
-should say so. That is why [[thm-ultrafilter-lemma]] is kept as a named statement
-rather than being inlined into its applications: naming it is what makes the
-weaker cost visible downstream.
+Because the Axiom of Choice and Zorn's lemma are equivalent, a proof through Zorn
+shows the theorem costs **at most** the Axiom of Choice, and nothing more than
+that: it is an upper bound on the price, never a lower one ([[cor-ac-iff-zorn]]).
+A result provable from UL alone carries the strictly smaller upper bound UL, and a
+page that nonetheless routes it through Zorn is overpaying and should say so. UL
+itself is the standing example, proved here from Zorn and yet, on the cited
+results above, strictly weaker than the Axiom of Choice. That is why
+[[thm-ultrafilter-lemma]] is kept as a named statement rather than being inlined
+into its applications: naming it is what makes the smaller bound visible
+downstream.
 
 **Two honest caveats.**
 

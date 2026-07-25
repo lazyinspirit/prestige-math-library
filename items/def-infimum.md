@@ -5,7 +5,7 @@ title: "Greatest lower bound (infimum)"
 status: draft
 origin: session
 deps: [def-bounded-set]
-justified_by: []
+justified_by: [lem-sup-unique]
 aliases: []
 landmark: false
 verification:

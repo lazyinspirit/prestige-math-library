@@ -4,7 +4,7 @@ kind: theorem
 title: "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$"
 status: draft
 origin: session
-deps: [def-countable, def-equinumerous, def-injection-surjection-bijection, lem-nat-no-zero-divisors, thm-strong-induction, thm-recursion, thm-induction-principle, thm-omega-is-peano-system, lem-nat-nonzero-is-successor, def-nat-addition, def-nat-multiplication, def-nat-order, def-natural-numbers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-successor-left, lem-nat-mult-commutative, lem-nat-mult-associative, lem-nat-mult-distributive, lem-nat-mult-identity, lem-nat-mult-cancellative, lem-nat-order-add-compatible, lem-nat-trichotomy, lem-nat-transitive-irreflexive, lem-nat-discrete]
+deps: [def-countable, def-equinumerous, def-injection-surjection-bijection, lem-nat-no-zero-divisors, thm-strong-induction, thm-recursion, thm-induction-principle, thm-omega-is-peano-system, lem-nat-nonzero-is-successor, def-nat-addition, def-nat-multiplication, def-nat-order, def-natural-numbers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-successor-left, lem-nat-mult-commutative, lem-nat-mult-associative, lem-nat-mult-distributive, lem-nat-mult-identity, lem-nat-mult-cancellative, lem-nat-order-add-compatible, lem-nat-trichotomy, thm-nat-linear-order, lem-nat-discrete]
 justified_by: []
 aliases: [pairing-bijection]
 landmark: false
@@ -50,7 +50,7 @@ existence and uniqueness both.
 
 [L3] Arithmetic laws: $+$ and $\cdot$ are commutative and associative, $1 \cdot n = n = n \cdot 1$, $0 + n = n$, $a(b + c) = ab + ac$ and $\sigma(a) + n = \sigma(a + n)$ ([[lem-nat-add-commutative]], [[lem-nat-add-associative]], [[lem-nat-mult-commutative]], [[lem-nat-mult-associative]], [[lem-nat-mult-identity]], [[lem-nat-mult-distributive]], [[lem-nat-add-successor-left]]).
 
-[L4] Order laws: exactly one of $a < b$, $a = b$, $b < a$ holds ([[lem-nat-trichotomy]]); $<$ is transitive and irreflexive ([[lem-nat-transitive-irreflexive]]); $a \le b \iff a + k \le b + k$ and $a < b \iff a + k < b + k$ ([[lem-nat-order-add-compatible]]); $a < b \iff \sigma(a) \le b$, so $a < \sigma(a)$ ([[lem-nat-discrete]]); $a \le b$ means $a + c = b$ for some $c$, and $a < b$ means $c \ne 0$ ([[def-nat-order]]).
+[L4] Order laws: exactly one of $a < b$, $a = b$, $b < a$ holds ([[lem-nat-trichotomy]]); $\le$ is reflexive, antisymmetric, transitive and total ([[thm-nat-linear-order]]), so $<$ is transitive, because $a < b < c$ gives $a \le c$ while $a = c$ would force $a = b$ by antisymmetry, and $<$ is irreflexive, because $a < a$ would demand $a \ne a$ ([[def-nat-order]]); $a \le b \iff a + k \le b + k$ and $a < b \iff a + k < b + k$ ([[lem-nat-order-add-compatible]]); $a < b \iff \sigma(a) \le b$, so $a < \sigma(a)$ ([[lem-nat-discrete]]); $a \le b$ means $a + c = b$ for some $c$, and $a < b$ means $c \ne 0$ ([[def-nat-order]]).
 
 [L5] Cancellation: $a \cdot k = b \cdot k$ with $k \ne 0$ gives $a = b$ ([[lem-nat-mult-cancellative]]); and $a \cdot b = 0$ forces $a = 0$ or $b = 0$ ([[lem-nat-no-zero-divisors]]).
 

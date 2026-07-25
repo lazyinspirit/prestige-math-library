@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: every uncountable subset of $\\mathbb{R}$ contains an interval"
 status: draft
 origin: session
-deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field]
+deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, thm-rationals-countable, lem-subset-of-countable, thm-r-uncountable]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "irrationals are a counterexample"
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -65,7 +61,7 @@ topology are available, is a starker one.
 
 ## Remarks
 
-- The counterexample is as strong as possible in one direction: $X_0$ misses no interval either, since between any two reals there is also an irrational, so $X_0$ is dense and yet contains no interval. Density and containing an interval are unrelated properties.
+- The counterexample is as strong as possible in one direction: $X_0$ misses no interval either, so it is dense and yet contains no interval. That $X_0$ meets every $(a,b)$ with $a < b$ needs no new input, only what is already on this page: were $(a,b) \cap X_0$ empty we would have $(a,b) \subseteq \mathbb{Q}_{\mathbb{R}}$, and $\mathbb{Q}_{\mathbb{R}} = \iota[\mathbb{Q}]$ is at most countable, being a bijective image of $\mathbb{Q}$ ([[thm-rationals-countable]], [[lem-of-q-embeds]]), so $(a,b)$ would be at most countable ([[lem-subset-of-countable]]); but every nondegenerate interval is uncountable, by the remark at the end of [[thm-r-uncountable]]. Density and containing an interval are unrelated properties.
 
 - The converse implication is true and trivial: a nondegenerate interval is uncountable, by the remark at the end of [[thm-r-uncountable]]. So "contains an interval" implies "uncountable", and only the direction claimed above fails.
 

@@ -25,8 +25,9 @@ then separates the two ingredients. From infinitely many pairs of shoes "take th
 left one" is a rule and the choice function is a theorem of ZF; from infinitely
 many pairs of socks nothing distinguishes a member, and the existence of a choice
 function is the axiom itself. That last half is quoted, not proved: the
-independence from ZF is established by forcing and by permutation models, which
-this library does not contain, and saying so is part of the point.
+independence from ZF is established by forcing, or by a permutation model of set
+theory with atoms together with a theorem transferring the conclusion to ZF, and
+this library contains neither, and saying so is part of the point.
 
 The next two items are the order theory that Zorn's lemma actually runs on. The
 power set of any set is chain-complete, with union as supremum and $\emptyset$ at

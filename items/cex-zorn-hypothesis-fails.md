@@ -4,7 +4,7 @@ kind: counterexample
 title: "$(\\mathbb{N}, \\le)$ has no maximal element: Zorn's chain hypothesis fails"
 status: draft
 origin: session
-deps: [thm-zorn, def-upper-bound, def-maximal-element, def-chain, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self]
+deps: [thm-zorn, def-axiom-of-choice, def-upper-bound, def-maximal-element, def-chain, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -51,7 +47,7 @@ lemma that it violates is exactly one: $\mathbb{N}$ is itself a chain
 
 [L5] A subset is a chain when any two of its elements are comparable ([[def-chain]]).
 
-[L6] Zorn's lemma: a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
+[L6] Zorn's lemma, stated under the Axiom of Choice ([[def-axiom-of-choice]]), which it assumes outright: a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]). The Axiom of Choice is a standing assumption of the theorem, not a hypothesis on the poset.
 
 ## Counterexample
 
@@ -67,7 +63,7 @@ lemma that it violates is exactly one: $\mathbb{N}$ is itself a chain
 
 3.1 That chain has no upper bound in $\mathbb{N}$: an upper bound $u$ would satisfy $n \le u$ for every $n$, in particular $\sigma(u) \le u$; combined with $u \le \sigma(u)$, antisymmetry would give $u = \sigma(u)$, which [L2] forbids. So no $u \in \mathbb{N}$ is an upper bound of $\mathbb{N}$. [step 2.2, step 1.2, L1, L2, L4]
 
-4.1 So $(\mathbb{N}, \le)$ is a nonempty poset with no maximal element, and the single hypothesis of [L6] that fails is that every chain has an upper bound, the offending chain being $\mathbb{N}$ itself; the claim is refuted and Zorn's lemma is untouched. [step 1.1, step 2.1, step 3.1, L6] ∎
+4.1 So $(\mathbb{N}, \le)$ is a nonempty poset with no maximal element, and of the hypotheses [L6] places on the poset the single one that fails is that every chain has an upper bound, the offending chain being $\mathbb{N}$ itself; the Axiom of Choice, assumed throughout [L6], is not a property of $(\mathbb{N}, \le)$ and is neither used nor contradicted here. The claim is refuted and Zorn's lemma is untouched. [step 1.1, step 2.1, step 3.1, L6] ∎
 
 ## Remarks
 

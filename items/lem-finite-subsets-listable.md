@@ -4,7 +4,7 @@ kind: lemma
 title: "The nonempty finite subsets of $\\mathbb{R}$ are exactly the listable ones"
 status: draft
 origin: session
-deps: [def-countable, def-equinumerous, thm-induction-principle, lem-nat-discrete, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-nonzero-is-successor, def-complete-ordered-field, lem-finite-set-has-max, def-max-min]
+deps: [def-countable, def-equinumerous, thm-induction-principle, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-nonzero-is-successor, def-complete-ordered-field, lem-finite-set-has-max, def-max-min]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ $$F = \{a_0, a_1, \dots, a_n\}.$$
 
 Here $\{a_0, \dots, a_n\}$ means the image $a[\sigma(n)]$ of a function
 $a : \sigma(n) \to \mathbb{R}$, where $\sigma(n) = \{\, i \in \mathbb{N} : i \le n \,\}$
-([[def-natural-numbers]], [[lem-nat-discrete]]).
+([[def-natural-numbers]], [[lem-nat-order-is-membership]]).
 
 **Consequently every nonempty finite subset of $\mathbb{R}$ has a maximum and a
 minimum** ([[def-max-min]]), since [[lem-finite-set-has-max]] proves exactly that
@@ -49,9 +49,11 @@ for sets presented as $\{a_0, \dots, a_n\}$.
 
 [L3] Induction principle: if $P(0)$ holds and $P(n)$ implies $P(\sigma(n))$ for every $n$, then $P(n)$ holds for every $n \in \mathbb{N}$ ([[thm-induction-principle]]).
 
-[L4] $i < \sigma(n) \iff i \le n$, so $\sigma(n) = \{\, i : i \le n \,\} = n \cup \{n\}$, and $\sigma(n) \ne 0$; every nonzero natural is a successor ([[lem-nat-discrete]], [[def-nat-order]], [[lem-nat-nonzero-is-successor]]).
+[L4] For the additive order of [[def-nat-order]]: $i < \sigma(n) \iff i \le n$, and every natural number is exactly the set of the naturals below it, so $\sigma(n) = \{\, i : i \le n \,\} = n \cup \{n\}$ ([[lem-nat-order-is-membership]], [[def-natural-numbers]]); and every nonzero natural is a successor ([[lem-nat-nonzero-is-successor]]).
 
 [L5] For every $n \in \mathbb{N}$ and all $a_0, \dots, a_n \in \mathbb{R}$ the set $\{a_0, \dots, a_n\}$ has a maximum and a minimum ([[lem-finite-set-has-max]], [[def-max-min]]).
+
+[L6] Membership is irreflexive on $\mathbb{N}$: $k \notin k$ for every $k \in \mathbb{N}$ ([[lem-nat-transitive-irreflexive]]).
 
 ## Proof
 
@@ -63,7 +65,7 @@ for sets presented as $\{a_0, \dots, a_n\}$.
 
 1.3 The finite-implies-listable direction needs no induction: if $F$ is nonempty and finite there is a bijection $\psi : m \to F$ with $m \in \mathbb{N}$, and $m \ne 0$ because $F \ne \varnothing$, so $m = \sigma(n)$ for some $n$ by [L4]; putting $a := \psi$ gives $F = \psi[\sigma(n)] = \{a_0, \dots, a_n\}$, a listable set. [given, L1, L2, L4]
 
-2.1 Inductive step: let $b : \sigma(\sigma(n)) \to \mathbb{R}$ and put $G = b[\sigma(n)]$ and $H = b[\sigma(\sigma(n))] = G \cup \{b(\sigma(n))\}$, using [L4]. By the inductive hypothesis applied to the restriction of $b$ to $\sigma(n)$, there is a bijection $u : G \to k$ for some $k \in \mathbb{N}$. If $b(\sigma(n)) \in G$ then $H = G$ is finite. Otherwise extend $u$ to $H$ by $u(b(\sigma(n))) := k$; since $k \notin k$, this is a bijection $H \to k \cup \{k\} = \sigma(k)$, so $H$ is finite. In both cases $H$ is finite, so the claim holds at $\sigma(n)$. [step 1.2, L1, L2, L4]
+2.1 Inductive step: let $b : \sigma(\sigma(n)) \to \mathbb{R}$ and put $G = b[\sigma(n)]$ and $H = b[\sigma(\sigma(n))] = G \cup \{b(\sigma(n))\}$, using [L4]. By the inductive hypothesis applied to the restriction of $b$ to $\sigma(n)$, there is a bijection $u : G \to k$ for some $k \in \mathbb{N}$. If $b(\sigma(n)) \in G$ then $H = G$ is finite. Otherwise extend $u$ to $H$ by $u(b(\sigma(n))) := k$; since $k \notin k$ by [L6], this is a bijection $H \to k \cup \{k\} = \sigma(k)$, so $H$ is finite. In both cases $H$ is finite, so the claim holds at $\sigma(n)$. [step 1.2, L1, L2, L4, L6]
 
 3.1 By [L3] every listable subset of $\mathbb{R}$ is finite, and by step 1.3 every nonempty finite subset of $\mathbb{R}$ is listable, which is the stated equivalence; combining it with [L5], every nonempty finite $F \subseteq \mathbb{R}$ is of the form $\{a_0, \dots, a_n\}$ and therefore has a maximum and a minimum. [step 1.1, step 1.3, step 2.1, L3, L5, discharge-induction] ∎
 

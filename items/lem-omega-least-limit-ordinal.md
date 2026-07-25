@@ -12,10 +12,6 @@ short: "naturals and $\\omega$ are ordinals; $\\omega$ is the first limit"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -97,6 +93,6 @@ the first ordinal at which induction acquires a limit clause.
 
 **The finite ordinals.** Claims (ii) and (iv) say the natural numbers are exactly the ordinals $\alpha$ with $\alpha \in \omega$, and that each is $0$ or a successor. This is the precise sense in which $\mathbb{N}$ is an initial segment of the ordinals, and it is why ordinary induction ([[thm-induction-principle]]) is the special case of [[thm-transfinite-induction]] at $W = \omega$.
 
-**Limits exist only because $\omega$ does.** The Axiom of Infinity is what makes $\omega$ a set ([[lem-omega-smallest-inductive]]), and without it every ordinal would be $0$ or a successor and this lemma would have no content. The successor operation alone never produces a limit; a limit is always reached by taking a union, here $\omega = \bigcup \{n : n \in \omega\}$.
+**Limits exist only because $\omega$ does.** The Axiom of Infinity is what makes $\omega$ a set ([[lem-omega-smallest-inductive]]), and it is also what gives this lemma its content: ZF without Infinity cannot prove that any limit ordinal exists, assuming that theory consistent. The reason is that every limit ordinal $\gamma$ is itself an inductive set, and so would witness Infinity outright: $0 \in \gamma$, because the $\in$-least element of a nonempty ordinal is $\varnothing$; and $\beta \in \gamma$ gives $\beta^{+} \subseteq \gamma$, hence $\beta^{+} \in \gamma$ by claim (f) of [[lem-ordinal-basics]] unless $\beta^{+} = \gamma$, which a limit ordinal excludes. Dropping an axiom is not the same as assuming its negation, and nothing here says that without Infinity every ordinal is $0$ or a successor: ZF itself extends ZF without Infinity and has limit ordinals. What is lost is any proof that one exists. The successor operation alone never produces a limit; a limit is always reached by taking a union, here $\omega = \bigcup \{n : n \in \omega\}$.
 
 **Ordinal arithmetic is not developed here.** Sums and products of ordinals, and the ordinals $\omega + 1$, $\omega \cdot 2$ and so on, are defined by transfinite recursion and would fit naturally after this item, but nothing on this page needs them, so they are left to a later page rather than introduced unused.

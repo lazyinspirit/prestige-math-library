@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -38,7 +34,10 @@ $\sup I = 1$ and $\inf I = 0$, and neither value belongs to $I$. This is the
 smallest interesting computation in the subject: both bounds exist by the
 least-upper-bound property ([[def-complete-ordered-field]]) and its dual
 ([[thm-infimum-property]]), and both are missed by the set, so $I$ has neither a
-maximum nor a minimum ([[def-max-min]], [[lem-max-is-sup]]).
+maximum ([[lem-max-is-sup]]) nor a minimum. The maximum is ruled out by the
+attainment criterion; the minimum is ruled out directly, since a minimum would be
+a lower bound of $I$ lying in $I$ and therefore at most $\inf I = 0$
+([[def-max-min]], [[def-infimum]]).
 
 Nothing here is asserted by inspection. That $1$ bounds $I$ above is checked from
 the definition; that no smaller number does is checked with the epsilon
@@ -63,9 +62,11 @@ $\min\{1/2,\ \varepsilon/2\}$.
 
 [L5] Every set $\{a, b\}$ of two reals has a maximum and a minimum, so the notations $\max\{a,b\}$ and $\min\{a,b\}$ are legitimate: each is an element of $\{a,b\}$, the maximum dominates both entries and the minimum is dominated by both ([[lem-finite-set-has-max]], [[def-max-min]]).
 
-[L6] Upper bound, lower bound, maximum, minimum: $u$ bounds $X$ above when $x \le u$ for all $x \in X$, and $\ell$ bounds $X$ below when $\ell \le x$ for all $x \in X$; $m = \max X$ additionally requires $m \in X$, and $m = \min X$ requires $m \in X$ ([[def-complete-ordered-field]], [[def-bounded-set]], [[def-max-min]]).
+[L6] Upper bound, lower bound, maximum, minimum: $u$ bounds $X$ above when $x \le u$ for all $x \in X$, and $\ell$ bounds $X$ below when $\ell \le x$ for all $x \in X$; $m = \max X$ means $m$ is an upper bound of $X$ with $m \in X$, and $m = \min X$ means $m$ is a lower bound of $X$ with $m \in X$ ([[def-complete-ordered-field]], [[def-bounded-set]], [[def-max-min]]).
 
-[L7] Attainment: for nonempty $X$ whose supremum exists, $\sup X \in X$ holds exactly when $X$ has a maximum, and then $\sup X = \max X$; dually for the infimum and the minimum ([[lem-max-is-sup]]).
+[L7] Attainment of the supremum: for nonempty $X$ whose supremum exists, $\sup X \in X$ holds exactly when $X$ has a maximum, and then $\sup X = \max X$ ([[lem-max-is-sup]]).
+
+[L8] The infimum is the greatest lower bound: $\inf X$ is a lower bound of $X$, and $\ell \le \inf X$ for every lower bound $\ell$ of $X$ ([[def-infimum]]).
 
 ## Verification
 
@@ -91,7 +92,11 @@ $\min\{1/2,\ \varepsilon/2\}$.
 
 3.2 $I$ is nonempty and bounded below by $0$, and for every $\varepsilon > 0$ the element $t_\varepsilon$ of $I$ satisfies $t_\varepsilon < 0 + \varepsilon$; the dual characterisation therefore gives $\inf I = 0$. [step 1.1, step 1.2, step 2.3, step 2.4, L2]
 
-4.1 Hence $\sup I = 1$ and $\inf I = 0$, while $1 \notin I$ and $0 \notin I$; by the attainment criterion $I$ has neither a maximum nor a minimum, so both bounds are approached by $I$ and reached by neither. [step 3.1, step 3.2, step 1.3, L7] ∎
+4.1 $I$ has no maximum: if $m$ were one, the attainment criterion would give $\sup I = m \in I$, whereas $\sup I = 1 \notin I$; the two are incompatible, so no maximum exists. [step 3.1, step 1.3, L7]
+
+4.2 $I$ has no minimum: a minimum of $I$ would be a lower bound of $I$ lying in $I$, hence at most the greatest lower bound $\inf I = 0$; but every element of $I$ satisfies $0 < x$, and $x \le 0$ together with $0 < x$ is impossible by trichotomy. [step 3.2, L3, L6, L8]
+
+5.1 Hence $\sup I = 1$ and $\inf I = 0$, while $1 \notin I$ and $0 \notin I$, and $I$ has neither a maximum nor a minimum, so both bounds are approached by $I$ and reached by neither. [step 3.1, step 3.2, step 1.3, step 4.1, step 4.2] ∎
 
 ## Remarks
 

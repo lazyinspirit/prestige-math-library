@@ -4,17 +4,13 @@ kind: lemma
 title: "Supremum of a sumset: $\\sup(S + T) = \\sup S + \\sup T$"
 status: draft
 origin: session
-deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field, cor-of-one-positive, lem-of-sign-rules, def-field]
+deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field, cor-of-one-positive, lem-of-sign-rules, def-field, def-ordered-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -43,7 +39,7 @@ $$\sup(S + T) = \sup S + \sup T.$$
 
 [L3] Supremum and the least-upper-bound property: $w = \sup X$ means $w$ is an upper bound of $X$ with $w \le w'$ for every upper bound $w'$ of $X$, and every nonempty $X \subseteq \mathbb{R}$ bounded above has such a $w$ ([[def-complete-ordered-field]]).
 
-[L4] Halving: $0 < 1$, so $2 := 1 + 1 > 0$ and in particular $2 \ne 0$, whence $2^{-1}$ exists; and for the positive multiplier $2$ one has $x < y$ if and only if $x \cdot 2 < y \cdot 2$ ([[cor-of-one-positive]], [[lem-of-sign-rules]], [[def-field]]).
+[L4] Halving: $0 < 1$ ([[cor-of-one-positive]]); the positives are closed under addition, so $2 := 1 + 1 > 0$, and by trichotomy a positive element is nonzero, so $2 \ne 0$ (axioms O2 and O1 of [[def-ordered-field]]); hence $2^{-1}$ exists ([[def-field]]) and $0 \cdot 2 = 0$ ([[lem-of-zero-mult]]); and for the positive multiplier $2$ one has $x < y$ if and only if $x \cdot 2 < y \cdot 2$ (claim 4 of [[lem-of-sign-rules]]).
 
 ## Proof
 

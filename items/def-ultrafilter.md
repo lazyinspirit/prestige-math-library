@@ -6,16 +6,12 @@ status: draft
 origin: session
 deps: [def-filter, def-maximal-element, def-partial-order]
 justified_by: []
-external_refs: [rem-feferman-no-free-ultrafilter-in-zf]
+external_refs: [rem-feferman-no-free-ultrafilter-in-zf, rem-blass-model-without-ultrafilters]
 aliases: [def-maximal-filter]
 landmark: true
 short: "maximal filter"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -80,8 +76,12 @@ $\{\, A \subseteq X : x \in A \,\}$ for some $x \in X$, and **free**, or
   (Feferman 1965, [[rem-feferman-no-free-ultrafilter-in-zf]]), and hence does not
   prove the ultrafilter lemma either. That external result is recorded, not
   proved, in this library, and the strength the lemma costs is set out in
-  [[rem-choice-strengths]]. So the principal ultrafilters are the only ones ZF
-  alone can produce, and by [[fs-every-ultrafilter-principal]] they are
+  [[rem-choice-strengths]]. So on $\mathbb{N}$ the principal ultrafilters are the
+  only ones ZF alone can be relied on to produce. The same conclusion for
+  **every** set at once does not follow from Feferman's model, which concerns
+  $\mathbb{N}$; it is the separate and stronger external result
+  [[rem-blass-model-without-ultrafilters]], likewise recorded and not proved
+  here. By [[fs-every-ultrafilter-principal]] the principal ultrafilters are
   nevertheless not all of them.
 - Principal ultrafilters really are ultrafilters: $\{A \subseteq X : x \in A\}$
   is a filter, and if a filter $\mathcal{G}$ contains it then any $B \in

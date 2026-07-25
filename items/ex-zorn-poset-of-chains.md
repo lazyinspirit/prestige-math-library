@@ -4,17 +4,13 @@ kind: example
 title: "The chains of a poset, ordered by inclusion, form a chain-complete poset"
 status: draft
 origin: session
-deps: [def-chain-complete-poset, thm-zorn, def-chain, def-upper-bound, def-partial-order, ex-powerset-is-chain-complete]
+deps: [def-chain-complete-poset, thm-zorn, def-axiom-of-choice, def-chain, def-upper-bound, def-partial-order, ex-powerset-is-chain-complete]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -54,13 +50,13 @@ the engine of Zorn's lemma, running on its own.
 
 [L4] A poset is chain-complete when every chain has a least upper bound, and then $\bot = \sup \emptyset$ is its least element ([[def-chain-complete-poset]]).
 
-[L5] The restriction of a partial order to a subset is a partial order ([[def-partial-order]]).
+[L5] A partial order on a set $X$ is a relation on $X$ that is reflexive, antisymmetric and transitive, each of the three being a condition required of all elements of $X$ ([[def-partial-order]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 $\mathcal{C}$ is a subset of $\mathcal{P}(P)$, and inclusion partially orders $\mathcal{P}(P)$, so its restriction partially orders $\mathcal{C}$. [given, L2, L5]
+1.1 $\mathcal{C}$ is a subset of $\mathcal{P}(P)$, and inclusion partially orders $\mathcal{P}(P)$; reflexivity, antisymmetry and transitivity are required of all elements of $\mathcal{P}(P)$, so they hold in particular for all elements of $\mathcal{C}$, and the restriction of inclusion to $\mathcal{C}$ partially orders $\mathcal{C}$. [given, L2, L5]
 
 1.2 Let $\mathcal{D} \subseteq \mathcal{C}$ be a chain for inclusion and put $U = \bigcup \mathcal{D}$. [given, construct]
 
@@ -91,11 +87,14 @@ the engine of Zorn's lemma, running on its own.
   chain-completeness rather than completeness is the right hypothesis for
   [[thm-bourbaki-witt]].
 
-- **An immediate consequence.** $\mathcal{C}$ is nonempty, since
-  $\emptyset \in \mathcal{C}$, and every chain of $\mathcal{C}$ has an upper
-  bound by the verification above, so [[thm-zorn]] applies to $\mathcal{C}$ and
-  yields a maximal element: every poset has a maximal chain. This is the
-  Hausdorff maximal principle, and it costs exactly one application of Zorn.
+- **An immediate consequence, at the price of the Axiom of Choice.**
+  $\mathcal{C}$ is nonempty, since $\emptyset \in \mathcal{C}$, and every chain
+  of $\mathcal{C}$ has an upper bound by the verification above. Assume in
+  addition the Axiom of Choice ([[def-axiom-of-choice]]), which [[thm-zorn]]
+  assumes outright: Zorn's lemma then applies to $\mathcal{C}$ and yields a
+  maximal element, so every poset has a maximal chain. This is the Hausdorff
+  maximal principle, and it costs exactly one application of Zorn, hence the
+  Axiom of Choice. The chain-completeness verified above costs nothing.
 
 - The verification never used any property of $P$ beyond its being a poset. In
   particular $P$ may be empty, in which case $\mathcal{C} = \{\emptyset\}$ is the

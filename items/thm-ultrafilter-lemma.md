@@ -4,7 +4,7 @@ kind: theorem
 title: "The ultrafilter lemma: every filter extends to an ultrafilter"
 status: draft
 origin: session
-deps: [def-ultrafilter, thm-zorn, lem-union-of-chain-of-filters, def-filter, def-maximal-element, def-partial-order, def-chain]
+deps: [def-ultrafilter, thm-zorn, lem-union-of-chain-of-filters, def-filter, def-maximal-element, def-partial-order, def-chain, def-upper-bound]
 justified_by: []
 aliases: [thm-ultrafilter-extension]
 landmark: true
@@ -12,10 +12,6 @@ short: "every filter extends to an ultrafilter"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -51,7 +47,7 @@ proved in this library; see the remarks below.
 
 [L3] An ultrafilter on $X$ is a filter that is a maximal element of $(\mathrm{Filt}(X), \subseteq)$, and $m$ is maximal exactly when $m \leq x$ forces $x = m$ ([[def-ultrafilter]], [[def-maximal-element]]).
 
-[L4] Inclusion partially orders any set of sets, and a chain is a subset any two of whose members are comparable, the empty set included ([[def-partial-order]], [[def-chain]]).
+[L4] Inclusion partially orders any set of sets, and a chain is a subset any two of whose members are comparable, the empty set included ([[def-partial-order]], [[def-chain]]); an element $u$ of a poset is an upper bound of a subset $S$ when $s \leq u$ for every $s \in S$ ([[def-upper-bound]]).
 
 ## Proof
 
@@ -95,11 +91,13 @@ proved in this library; see the remarks below.
   maximality among all filters. That transfer is the only step where the shape of
   $P$ is used.
 - The conclusion is **an** ultrafilter, not **the** ultrafilter. Zorn's lemma
-  delivers a maximal element with no canonicity whatsoever, and the extension is
-  massively non-unique in general: on $\mathbb{N}$ there are many ultrafilters
-  extending the filter of tails, and the proof singles out none of them
-  ([[fs-every-ultrafilter-principal]] produces one and can describe it no
-  further).
+  delivers a maximal element and no construction, so nothing in the proof
+  distinguishes the ultrafilter it produces from any other filter above
+  $\mathcal{F}_0$; the statement asserts existence and no uniqueness whatever.
+  [[fs-every-ultrafilter-principal]] runs the argument on the filter of tails of
+  $\mathbb{N}$ and obtains a single free ultrafilter, which it can describe no
+  further. How many ultrafilters extend a given filter is a separate counting
+  question, and this library neither states nor uses an answer to it.
 - Combined with [[lem-fip-generates-filter]], the lemma takes its most usable
   form: **every family of subsets of $X$ with the finite intersection property is
   contained in an ultrafilter on $X$.** That is the version applied in topology

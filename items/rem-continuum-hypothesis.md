@@ -11,10 +11,6 @@ landmark: false
 short: "CH is independent of ZFC"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -48,8 +44,10 @@ statement is not choice free. Passing from the displayed form to the subset form
 requires knowing that an uncountable $A \subseteq \mathcal{P}(\mathbb{N})$
 satisfies $\mathbb{N} \prec A$, that is, that $A$ has a countably infinite
 subset, and **that is not a theorem of ZF**: this page records exactly that in
-[[fs-infinite-has-countable-subset-in-zf]]. Over ZF the two forms of CH can
-therefore come apart, and only the displayed form is used below.
+[[fs-infinite-has-countable-subset-in-zf]]. Over ZF that passage is therefore
+unavailable, so nothing here asserts the two forms to be equivalent, and only the
+displayed form is used below. Whether they genuinely come apart in some model of
+ZF is a further independence question, which this page neither settles nor uses.
 
 **CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1940)
 showed that ZFC cannot refute it, by constructing the inner model $L$ of
@@ -86,7 +84,10 @@ The generalised continuum hypothesis (GCH), that
 $A \prec B \prec \mathcal{P}(A)$ never holds for infinite $A$, is also
 independent of ZFC ([[rem-independence-of-ch-and-gch]]), in the same conditional
 sense as CH above: if ZFC is consistent, then so are ZFC + GCH and
-ZFC + not GCH, and that consistency assumption cannot be dropped. GCH is
-strictly stronger than CH:
-over ZF it even implies the Axiom of Choice, a result of Sierpiński
+ZFC + not GCH, and that consistency assumption cannot be dropped. GCH implies CH,
+being its instance at $A = \mathbb{N}$, and it is stronger in a striking further
+sense: over ZF it even implies the Axiom of Choice, a result of Sierpiński
 ([[rem-gch-implies-ac]]). That implication, too, is quoted and not proved here.
+That CH does not conversely imply GCH is again a relative-consistency statement
+rather than a theorem, conditional on the consistency of ZFC, and it is likewise
+not proved here.

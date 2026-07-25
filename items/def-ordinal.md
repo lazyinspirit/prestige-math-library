@@ -45,8 +45,16 @@ $\alpha$.
 
 - **Two different transitivities.** Clause 1 is about the *set* $\alpha$: it
   contains all members of its members. Clause 2 asks in part that the *relation*
-  $\in$ be transitive on $\alpha$, which is equivalent to saying that every
-  element of $\alpha$ is itself a transitive set. Neither clause implies the
+  $\in$ be transitive on $\alpha$. If every element of $\alpha$ is itself a
+  transitive set then the relation $\in$ is transitive on $\alpha$; the converse
+  holds *given clause 1*, and fails without it. For
+  $\alpha = \{\{\{\emptyset\}\}\}$ the relation
+  $\{(x, y) \in \alpha \times \alpha : x \in y\}$ is empty, hence vacuously
+  transitive, yet the sole element $\{\{\emptyset\}\}$ of $\alpha$ is not a
+  transitive set, since $\{\emptyset\} \in \{\{\emptyset\}\}$ while
+  $\emptyset \notin \{\{\emptyset\}\}$. Under clause 1 the two readings do
+  coincide, because then every member of a member of $\alpha$ again lies in
+  $\alpha$, where the relation has something to say. Neither clause implies the
   other, and both are needed.
 - **Every ordinal is literally the set of all smaller ordinals.** By clause 1 and
   the notation above, $\alpha = \{\beta : \beta < \alpha\}$, so the ordinals

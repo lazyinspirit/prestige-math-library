@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-axiom-of-choice, def-choice-function]
 justified_by: []
+external_refs: [rem-cohen-forcing-ac-independent, rem-cohen-first-model]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -41,14 +42,15 @@ whatever the size of the family. The sock half is **not** proved here and is not
 provable here: it is the standard independence result that ZF alone, if
 consistent, does not prove that every countable family of two element sets has a
 choice function. That is quoted on the authority of the references, since it is
-established by forcing and by permutation models, neither of which this library
-contains.
+established either by forcing, or by a permutation model of set theory with
+atoms together with a theorem transferring the conclusion to ZF, and this
+library develops neither.
 
 ## Facts & Assumptions
 
 **Given:** A family $\mathcal{F}$ of two element sets. In the shoe case the data also includes a set $L$, the left shoes, such that $S \cap L$ has exactly one element for every $S \in \mathcal{F}$. In the sock case the data is $\mathcal{F}$ alone.
 
-[A1] **External result, quoted and not proved here.** If ZF is consistent, then ZF does not prove that every countable family of two element sets has a choice function; models of ZF are known in which such a family has none (Cohen 1963, and the permutation models that preceded it). Nothing below is used to establish this, and it is used only in the final step.
+[A1] **External result, quoted and not proved here.** If ZF is consistent, then ZF does not prove that every countable family of two element sets has a choice function. The classical witness is a permutation model of ZFA, set theory with atoms, in which a countable family of pairs of atoms has no choice function (Fraenkel 1922, Mostowski); such a model is **not** a model of ZF, and the conclusion is carried over to ZF proper by the Jech-Sochor embedding theorem, or reached directly by Cohen's symmetric submodels of a forcing extension (1963). This library records no result of exactly this strength; the nearest it records are [[rem-cohen-forcing-ac-independent]] and [[rem-cohen-first-model]], neither of which implies it, so [A1] is quoted on the authority of the references alone. Nothing below is used to establish this, and it is used only in the final step.
 
 [L1] A choice function for $\mathcal{F}$ is a function $g$ with domain $\mathcal{F}$ such that $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 
@@ -82,8 +84,12 @@ contains.
   [[rem-cohen-forcing-ac-independent]], that ZF does not prove the Axiom of
   Choice, and [[rem-cohen-first-model]], that ZF is consistent with an infinite
   set of reals having no countably infinite subset. Neither of them implies
-  [A1], which is therefore quoted on the authority of the references alone, and
-  which the standard Fraenkel-Mostowski "socks" permutation model witnesses.
+  [A1], which is therefore quoted on the authority of the references alone. The
+  standard Fraenkel-Mostowski "socks" model witnesses it in **ZFA**, set theory
+  with atoms, where the two socks of a pair are atoms and a permutation
+  exchanging them is an automorphism; a permutation model is not a model of ZF,
+  and the passage to ZF is the Jech-Sochor embedding theorem, which this library
+  does not contain either.
 
 - **Finitely many pairs of socks are free.** For a family of finitely many two
   element sets a choice function exists outright by [[lem-finite-choice]], with

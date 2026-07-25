@@ -77,6 +77,11 @@ convention should read every unqualified "filter" below as "proper filter".
   writing out every superset is neither possible nor informative.
 - The maximal filters under the inclusion order recorded above are the
   **ultrafilters** ([[def-ultrafilter]]), and every filter is contained in one
-  ([[thm-ultrafilter-lemma]]). Maximal here means maximal, not greatest: there is
-  no finest filter on a set with at least two points, since the principal filters
-  at two distinct points are incomparable.
+  ([[thm-ultrafilter-lemma]]). Maximal here means maximal, not greatest: as soon
+  as $X$ has two distinct points $x \neq y$ there is no finest filter, since a
+  filter containing every filter would contain the principal filters at $x$ and
+  at $y$, hence both $\{x\}$ and $\{y\}$, hence their intersection $\emptyset$,
+  which (F2) forbids. Incomparability of those two principal filters is not the
+  reason: incomparable elements are perfectly compatible with a greatest element
+  above them both, and reading "maximal" as "greatest" is the error recorded in
+  [[fs-maximal-is-greatest]]. The argument is set out in [[def-ultrafilter]].

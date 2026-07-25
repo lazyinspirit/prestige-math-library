@@ -87,4 +87,4 @@ usually written $x_k = (-1)^k$ is introduced here by recursion
 
 - The error is tempting because boundedness feels like "no room to escape". It is not: boundedness forbids running away, but it does not forbid oscillating forever, and oscillation is exactly what $(s_k)$ does.
 
-- The same witness refutes [[fs-subsequence-convergence-implies-convergence]], and it is the sequence referred to in the remarks of [[lem-limit-abs]] and [[lem-reciprocal-of-null-diverges]].
+- The same witness refutes [[fs-subsequence-convergence-implies-convergence]], and it is the sequence referred to in the remarks of [[lem-limit-abs]].

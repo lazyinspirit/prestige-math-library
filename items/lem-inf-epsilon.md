@@ -4,17 +4,14 @@ kind: lemma
 title: "Epsilon characterisation of the infimum"
 status: draft
 origin: session
-deps: [lem-sup-epsilon, thm-infimum-property, lem-reflection, def-bounded-set]
+deps: [lem-sup-epsilon, thm-infimum-property, lem-reflection, def-bounded-set,
+       lem-of-add-order, lem-of-inverse-unique, def-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -39,7 +36,7 @@ cannot be raised by any positive amount and still bound $S$ from below.
 
 **Given:** A nonempty $S \subseteq \mathbb{R}$ that is bounded below, a lower bound $\ell$ of $S$, and the reflection $T := -S = \{-s : s \in S\}$.
 
-[L1] Reflection: $S$ is nonempty exactly when $T$ is; $\ell$ is a lower bound of $S$ exactly when $-\ell$ is an upper bound of $T$; $S$ is bounded below exactly when $T$ is bounded above; and negation reverses the order, so $a < b$ exactly when $-b < -a$, with $-(-a) = a$ ([[lem-reflection]]).
+[L1] Reflection, at the level of sets: $S$ is nonempty exactly when $T$ is; $\ell$ is a lower bound of $S$ exactly when $-\ell$ is an upper bound of $T$; and $S$ is bounded below exactly when $T$ is bounded above ([[lem-reflection]]). Elementwise, negation reverses the order: $-(-a) = a$, because $(-a) + a = 0$ and additive inverses are unique ([[def-field]], [[lem-of-inverse-unique]]); and $a < b$ exactly when $-b < -a$, because translation invariance applied with the constant $-a - b$ turns $a < b$ into $-b < -a$ and, applied with the constant $a + b$, turns it back ([[lem-of-add-order]]).
 
 [L2] Every nonempty $S \subseteq \mathbb{R}$ bounded below has an infimum, and $\inf S = -\sup(-S) = -\sup T$ ([[thm-infimum-property]]).
 

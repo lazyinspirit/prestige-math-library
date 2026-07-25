@@ -14,10 +14,6 @@ landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -130,14 +126,16 @@ assumed elsewhere. All three facts belong in the ledger.
   choice-free. Every result in this library that assumes full choice reaches it
   through that step and no other.
 - **The results that assume full choice.** On this page: the well-ordering
-  theorem ([[thm-well-ordering-theorem]]) and its corollary
-  ([[cor-ac-iff-well-ordering]]); and the **cardinality assignment** of
-  [[def-cardinal]], which assumes the Axiom of Choice in order to well order an
-  arbitrary set. That last one is easy to miss, because the *property* of being a
-  cardinal is choice-free and only the attachment of $|X|$ to an arbitrary $X$ is
-  not. Elsewhere in the library, [[thm-ultrafilter-lemma]] is proved through
-  Zorn's lemma and so also pays full price, although its statement costs strictly
-  less.
+  theorem ([[thm-well-ordering-theorem]]), which takes the Axiom of Choice as a
+  hypothesis; and the **cardinality assignment** of [[def-cardinal]], which
+  assumes it in order to well order an arbitrary set. That last one is easy to
+  miss, because the *property* of being a cardinal is choice-free and only the
+  attachment of $|X|$ to an arbitrary $X$ is not. The two equivalences
+  [[cor-ac-iff-zorn]] and [[cor-ac-iff-well-ordering]] do **not** belong in this
+  list: each is proved in ZF outright and assumes no choice principle, saying
+  only that the statements it names imply one another. Elsewhere in the library,
+  [[thm-ultrafilter-lemma]] is proved through Zorn's lemma and so also pays full
+  price, although its statement costs strictly less.
 - **A weaker principle, spent separately.** [[thm-countable-union-of-countable]]
   is stated under countable choice ([[def-countable-choice]]) and flags the one
   step that spends it. That is **not** a use of the Axiom of Choice:

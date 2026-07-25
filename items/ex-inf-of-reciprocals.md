@@ -14,10 +14,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -70,6 +66,8 @@ an explicit index is produced.
 
 [L8] Lower bound and bounded below: $\ell$ bounds $X$ below when $\ell \le x$ for all $x \in X$, and $X$ is bounded below when such an $\ell$ exists ([[def-bounded-set]]).
 
+[L9] Minimum, and the infimum as greatest lower bound: $m = \min X$ means $m \in X$ and $m \le x$ for all $x \in X$, so a minimum is a lower bound of $X$ belonging to $X$ ([[def-max-min]]); and $\inf X$ is the greatest lower bound, so $\ell \le \inf X$ for every lower bound $\ell$ of $X$ ([[def-infimum]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -92,7 +90,9 @@ an explicit index is produced.
 
 3.2 Since $H$ is nonempty with maximum $1$, the attainment criterion gives that $\sup H$ exists and $\sup H = \max H = 1 \in H$. [step 2.3, step 1.1, L6]
 
-4.1 Hence $\inf H = 0 \notin H$ and $\sup H = 1 \in H$: the infimum of $H$ is not attained and $H$ has no minimum, while the supremum is attained and is the maximum. [step 3.1, step 3.2, step 2.2, L6] ∎
+4.1 $H$ has no minimum: a minimum of $H$ would be a lower bound of $H$ lying in $H$, hence at most the greatest lower bound $\inf H = 0$; but every element of $H$ is $> 0$ by 1.2, and $x \le 0$ together with $0 < x$ is impossible by trichotomy. [step 3.1, step 1.2, L7, L9]
+
+5.1 Hence $\inf H = 0 \notin H$ and $\sup H = 1 \in H$: the infimum of $H$ is not attained and $H$ has no minimum, while the supremum is attained and is the maximum. [step 3.1, step 3.2, step 2.2, step 4.1, L6] ∎
 
 ## Remarks
 

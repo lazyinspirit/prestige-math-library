@@ -4,17 +4,13 @@ kind: false-statement
 title: "FALSE: the supremum of a set belongs to the set"
 status: draft
 origin: session
-deps: [lem-sup-epsilon, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, cor-of-one-positive, lem-of-sign-rules, def-field]
+deps: [lem-sup-epsilon, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, cor-of-one-positive, lem-of-sign-rules, def-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -44,7 +40,7 @@ supremum exists, is unique, and lies outside the set.
 
 [L3] Order: trichotomy holds, so exactly one of $a < b$, $a = b$, $b < a$ is true, the negation of $a \le b$ is $b < a$, and $a < a$ is impossible; the order is transitive; and adding a constant preserves it, so $a < b$ if and only if $a + c < b + c$ ([[def-complete-ordered-field]], [[def-ordered-field]], [[lem-of-add-order]]).
 
-[L4] Positivity and multiplication: $0 < 1$; sums and products of positive elements are positive; every nonzero element has a multiplicative inverse; and for a positive multiplier $c$ one has $x < y$ if and only if $xc < yc$ ([[cor-of-one-positive]], [[lem-of-sign-rules]], [[def-field]]).
+[L4] Positivity and multiplication: $0 < 1$ ([[cor-of-one-positive]]); sums and products of positive elements are positive (axiom O2 of [[def-ordered-field]]); every nonzero element has a multiplicative inverse ([[def-field]]); $0 \cdot c = 0$ for every $c$ ([[lem-of-zero-mult]]); and for a positive multiplier $c$ one has $x < y$ if and only if $xc < yc$ (claim 4 of [[lem-of-sign-rules]]).
 
 ## Refutation
 

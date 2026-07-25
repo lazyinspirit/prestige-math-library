@@ -4,7 +4,8 @@ kind: theorem
 title: "Every nonempty set bounded below has an infimum"
 status: draft
 origin: session
-deps: [lem-reflection, def-infimum, lem-sup-unique, def-complete-ordered-field]
+deps: [lem-reflection, def-infimum, lem-sup-unique, def-complete-ordered-field,
+       lem-of-add-order, lem-of-inverse-unique, def-field]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,10 +13,6 @@ short: "greatest-lower-bound property"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -51,7 +48,7 @@ consequence of the least-upper-bound property.
 
 [L4] A least upper bound and a greatest lower bound are unique when they exist, so the notations $\sup$ and $\inf$ are unambiguous ([[lem-sup-unique]]).
 
-[L5] Negation reverses the order: $a \le b$ if and only if $-b \le -a$, and $-(-a) = a$ ([[lem-reflection]]).
+[L5] Negation reverses the order, elementwise: $-(-a) = a$, because $(-a) + a = 0$ and additive inverses are unique ([[def-field]], [[lem-of-inverse-unique]]); and $a \le b$ if and only if $-b \le -a$, because translation invariance applied with the constant $-a - b$ turns $a < b$ into $-b < -a$ and, applied with the constant $a + b$, turns $-b < -a$ back into $a < b$, while $a = b$ holds exactly when $-a = -b$ ([[lem-of-add-order]]).
 
 ## Proof
 
