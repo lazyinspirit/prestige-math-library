@@ -11,10 +11,6 @@ landmark: false
 short: "ordinal not equinumerous with any smaller ordinal"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -107,7 +103,11 @@ runs of the recipe, from any two well-orders of $X$, return the same $\kappa$.
   to and including $\omega$ is left open here. Nothing on this page depends on
   it, and the definition above is stated so that it does not.
 - **Notation.** The infinite cardinals are traditionally written
-  $\aleph_0, \aleph_1, \dots$, with $\aleph_0 = \omega$. The notation
+  $\aleph_0, \aleph_1, \dots$, with $\aleph_0 = \omega$. That last equation is
+  quoted tradition, not a result of this library: it says $\omega$ is the least
+  ordinal equinumerous with $\omega$, which needs $\mathbb{N} \not\approx n$ for
+  every natural $n$, the pigeonhole principle recorded above as proved nowhere
+  here. Nothing below rests on it. The notation
   $\aleph(A)$ for the Hartogs number of $A$ ([[thm-hartogs]]) comes from the
   same source and is deliberately close: under the Axiom of Choice
   $\aleph(A)$ is the successor cardinal of $|A|$.

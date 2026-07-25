@@ -14,10 +14,6 @@ landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -83,7 +79,9 @@ Each of the following is a genuine choice principle: not provable in ZF
   What DC delivers is an $\mathbb{N}$-indexed sequence, not a chain in this
   library's sense ([[def-chain]], a totally ordered subset of a poset): $R$ need
   not be an order at all, and the terms need not be distinct. Implied by the
-  Axiom of Choice, implies countable choice, and neither implication reverses. It
+  Axiom of Choice, and implies countable choice; neither implication reverses,
+  which is a relative-consistency result and so holds under the standing
+  assumption that ZF is consistent. It
   is the principle quietly used whenever a sequence is built by picking each term
   in terms of the previous one. The two non-reversals are external results that
   this library neither proves nor records; they are quoted from the references.
@@ -94,9 +92,13 @@ Each of the following is a genuine choice principle: not provable in ZF
   $\mathrm{AC}_\omega$.
 
 **These three are not ranked on a line, and none of them is "the weakest".** The
-only implications among them are $\mathrm{DC} \Rightarrow \mathrm{AC}_\omega$ and
-its consequences; the ultrafilter lemma is incomparable with dependent choice and
-with countable choice alike, neither implying nor implied by either. Those
+only implications among them PROVABLE IN ZF are $\mathrm{DC} \Rightarrow \mathrm{AC}_\omega$
+and its consequences; the ultrafilter lemma is incomparable with dependent choice
+and with countable choice alike, neither implying nor implied by either. Every
+*non*-implication in that sentence is a relative-consistency result, quoted from
+the references and conditional on the consistency of ZF: what is established is
+that ZF, if consistent, does not prove the missing implications, never that they
+are outright false. Those
 incomparabilities are quoted from the references, not recorded here. So a theorem
 must be labelled with the principle it actually uses, never with a position on a
 scale, and a phrase like "the weakest of the three" is simply not available.

@@ -57,8 +57,11 @@ $\mathcal{P}(\mathcal{P}(A))$, to force $A$ into bijection with an ordinal.
   the Axiom of Choice ([[def-axiom-of-choice]]). This is why
   [[rem-independence-of-ch-and-gch]] is stated over ZFC rather than ZF, and why
   [[rem-continuum-hypothesis]] records that GCH implies CH and reaches far
-  beyond it. CH alone does **not** imply the Axiom of Choice over ZF; the
-  implication is a feature of the generalised form.
+  beyond it. CH alone is not known to imply the Axiom of Choice: assuming ZF is
+  consistent, ZF + CH does not prove AC. That non-implication is a
+  relative-consistency result, quoted here and not proved in this library, so it
+  carries the same conditional as every other independence claim on this page.
+  The implication AC from GCH is a feature of the generalised form.
 
 - **Conditional discipline.** This one statement is not an independence result
   and needs no consistency hypothesis: it is an ordinary implication provable in
