@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-filter, def-maximal-element, def-partial-order]
 justified_by: []
+external_refs: [rem-feferman-no-free-ultrafilter-in-zf]
 aliases: [def-maximal-filter]
 landmark: true
 short: "maximal filter"

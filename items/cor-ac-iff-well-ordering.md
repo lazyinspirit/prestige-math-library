@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
+external_refs: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
 aliases: [cor-ac-zorn-well-ordering]
 landmark: false
 short: "AC $\\iff$ Zorn $\\iff$ every set is well orderable"

@@ -7,6 +7,7 @@ origin: session
 deps: [def-choice-function]
 justified_by: []
 forward_refs: [ex-russells-socks, rem-choice-strengths]
+external_refs: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
 aliases: [def-ac]
 landmark: true
 short: "axiom of choice"

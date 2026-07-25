@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [def-choice-function, def-axiom-of-choice, def-countable, thm-well-ordering-principle, lem-countable-iff-surjection-from-n]
 justified_by: []
+external_refs: [rem-feferman-levy-model, rem-cohen-first-model]
 aliases: [def-ac-omega, axiom-of-countable-choice]
 landmark: false
 short: "$\\mathrm{AC}_\\omega$"

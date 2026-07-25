@@ -160,10 +160,20 @@ for (const it of items.values()) {
 
 // ------------------------------------------- who rests on unproved material
 //
-// Mirrors web/lib/library-external.ts exactly. Seeds are the unproved items
-// themselves, any item that USES one outside its Remarks, and any item that
-// DECLARES one in `external_refs`; the relation then propagates along `deps`,
-// which is the "and their consequences" requirement.
+// Mirrors web/lib/library-external.ts exactly.
+//
+// A DEPENDENCE propagates; a MENTION does not. Owner decision 2026-07-25, taken
+// on a measurement: seeding the closure from `def-axiom-of-choice`'s mention of
+// Cohen marked 26 items instead of 7, among them `thm-zorn`, `lem-finite-choice`
+// and `thm-well-ordering-theorem` -- all proved in full here, none of them
+// resting on Cohen for anything. Their chip would have asserted something false.
+// So:
+//   * PROPAGATING seeds are the unproved items themselves and any item that USES
+//     one outside its Remarks. Consequences of those genuinely rest on unproved
+//     material, which is the "and their consequences" requirement.
+//   * A `external_refs` mention marks ONLY the mentioning item. The reader still
+//     meets the fuchsia / dotted / ‡ link at the exact point the unproved result
+//     is named, because link marking is driven by the TARGET, not by this map.
 
 const rests = new Map();       // id -> 'direct' | 'inherited'
 for (const it of items.values()) {
@@ -172,11 +182,7 @@ for (const it of items.values()) {
     const r = resolve(d);
     return r && !items.get(r).provedHere && it.loadBearing.includes('[[' + d);
   });
-  const mentions = it.externalRefs.some((d) => {
-    const r = resolve(d);
-    return r && !items.get(r).provedHere;
-  });
-  if (uses || mentions) rests.set(it.id, 'direct');
+  if (uses) rests.set(it.id, 'direct');
 }
 for (let changed = true; changed;) {
   changed = false;
@@ -184,6 +190,15 @@ for (let changed = true; changed;) {
     if (rests.has(it.id)) continue;
     if (it.deps.map(resolve).some((d) => d && rests.has(d))) { rests.set(it.id, 'inherited'); changed = true; }
   }
+}
+// Mentions, added AFTER the fixed point so they never act as sources.
+for (const it of items.values()) {
+  if (rests.has(it.id)) continue;
+  const mentions = it.externalRefs.some((d) => {
+    const r = resolve(d);
+    return r && !items.get(r).provedHere;
+  });
+  if (mentions) rests.set(it.id, 'direct');
 }
 
 for (const [id, how] of rests) {

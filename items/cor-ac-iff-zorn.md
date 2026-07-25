@@ -7,6 +7,7 @@ origin: session
 deps: [thm-zorn, thm-zorn-implies-ac, def-axiom-of-choice]
 justified_by: []
 forward_refs: [rem-choice-strengths, thm-ultrafilter-lemma]
+external_refs: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
 aliases: []
 landmark: true
 proof_strategy: direct

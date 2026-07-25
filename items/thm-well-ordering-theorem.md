@@ -6,6 +6,7 @@ status: draft
 origin: session
 deps: [thm-zorn, def-axiom-of-choice, def-well-order, def-partial-order, def-initial-segment, def-upper-bound, def-maximal-element, def-chain]
 justified_by: []
+external_refs: [rem-cohen-forcing-ac-independent]
 aliases: [zermelo-well-ordering-theorem, thm-every-set-well-orderable]
 landmark: true
 short: "AC implies every set carries a well-order"

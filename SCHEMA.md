@@ -74,9 +74,16 @@ proved_here: true                    # OPTIONAL, defaults to true. Set FALSE whe
   # rendered by web/lib/library-external.ts.
 external_refs: []                    # OPTIONAL. Recorded-not-proved items (i.e.
   # items with `proved_here: false`) that this item MENTIONS without logically
-  # depending on them. Declaring one here is what makes this item, and everything
-  # depending on it, carry the ‡ marker (owner decision 2026-07-25: mark the full
-  # cone, so a reader never meets an unproved result without the reminder).
+  # depending on them. Declaring one here is what makes THIS item carry the ‡
+  # marker and the reminder note.
+  # A MENTION DOES NOT PROPAGATE (owner decision 2026-07-25, taken on a
+  # measurement). A `deps` edge to an unproved result does propagate, because a
+  # consequence of it really does rest on unproved material. A mention does not:
+  # propagating one from `def-axiom-of-choice` marked 26 items instead of 13,
+  # including `thm-zorn`, `lem-finite-choice` and `thm-well-ordering-theorem`,
+  # which are proved in full here and rest on Cohen for nothing. Their chip would
+  # have said something false. The reader is warned at the point of contact
+  # regardless, since a LINK is marked from its target's own flag.
   # It is a SEPARATE field from `deps` on purpose. `deps` means "the statement or
   # proof logically depends on this", and it is the graph read by depcheck's
   # acyclicity check, fwdcheck's page ordering, the page prerequisite closure and
