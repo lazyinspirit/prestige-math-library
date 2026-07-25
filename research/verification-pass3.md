@@ -62,13 +62,14 @@ one's own edits:
 Every quote below was confirmed present. Fix these before any publish.
 
 ### countability
-1. `def-countable:69` — "nothing on this page uses it" is FALSE;
-   `rem-continuum-hypothesis` uses it. *(pigeonhole agent was tasked with this)*
-2. `rem-continuum-hypothesis:91-92` — instantiates GCH at `A = ℕ`; GCH is
-   quantified over INFINITE `A`, so this needs `ℕ ≉ n`. *(pigeonhole agent)*
-3. `fs-infinite-has-countable-subset-in-zf:80` — "Dedekind-infinite implies
-   infinite in ZF" asserted unflagged; contrapositively the pigeonhole
-   principle. *(pigeonhole agent)*
+1. ~~`def-countable:69` — "nothing on this page uses it" is FALSE.~~ **FIXED**
+   by the pigeonhole work; the remark now cites `lem-pigeonhole` claim 4 and a
+   second remark says honestly where exclusivity is and is not used.
+2. ~~`rem-continuum-hypothesis:91-92` — GCH instantiated at `A = ℕ` without
+   `ℕ ≉ n`.~~ **FIXED**; the instantiation is now licensed by claim 4.
+3. ~~`fs-infinite-has-countable-subset-in-zf:80` — "Dedekind-infinite implies
+   infinite in ZF" asserted unflagged.~~ **FIXED**; the remark now carries the
+   transport argument off claim 5.
 4. `fs-uncountable-contains-interval:68,70` — cites the remark at the end of
    `thm-r-uncountable`, which is stated for the CLOSED `[a,b]`, while this item's
    Given fixes the OPEN `(a,b)`. Not vacuous: the point the construction produces
@@ -115,10 +116,18 @@ Every quote below was confirmed present. Fix these before any publish.
 
 ## Structural gaps, beyond any single item
 
-- **Pigeonhole principle.** `lem-pigeonhole` was commissioned this session
-  (claims: no injection `σ(n) → n`; no injection `n → m` for `m < n`; `n ≈ m ⟹
-  n = m`; `ℕ ≉ n`; no natural is equinumerous with a proper subset). Status at
-  session end: authoring agent in flight, result unknown.
+- ~~**Pigeonhole principle.**~~ **CLOSED.** `lem-pigeonhole` is authored, all
+  five gates clean, judged `z-ai/glm-5.2` pass, and wired into its five
+  consumers (`def-countable`, `rem-continuum-hypothesis`,
+  `fs-infinite-has-countable-subset-in-zf`, `def-cardinal`,
+  `thm-rationals-countable`), each re-judged after the change. It sits on the
+  countability page immediately before `def-countable`. Two corrections the
+  auditor made on top of the authoring agent's work: `def-cardinal` attributed
+  "every element of a natural number is a natural number" to
+  `lem-omega-least-limit-ordinal` claim (i), which presupposes rather than
+  supplies it (the real source is `lem-nat-order-is-membership`, ℕ transitive);
+  and `thm-rationals-countable`'s remark still implied the principle was
+  unavailable in the library.
 - **`ex-russells-socks` `[A1]`** has no `proved_here: false` item at its exact
   strength (ZF ⊬ AC for countable families of pairs). Recommended:
   `rem-fraenkel-socks-model`, cited to Jech, *The Axiom of Choice*.

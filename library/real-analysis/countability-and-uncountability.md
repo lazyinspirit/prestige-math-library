@@ -29,6 +29,17 @@ order and induction alone. The ordinals page proves the same thing in far greate
 generality, but it comes much later in the library, so citing it here would be
 circular.
 
+A second preliminary is the pigeonhole principle, [[lem-pigeonhole]]: no
+injection $\sigma(n) \to n$ exists. It is what makes finiteness behave. A finite
+set is equinumerous with exactly one natural number, so its number of elements is
+well defined; $\mathbb{N}$ is equinumerous with no natural number, so the three
+size classes below are mutually exclusive and not merely exhaustive; and no
+natural number is equinumerous with a proper subset of itself, which is the ZF
+half of the comparison between "infinite" and "Dedekind-infinite" drawn at the
+end of the page. It is proved here for the same reason as the previous item: it
+is elementary, several later items quote it, and the pages that would otherwise
+supply it come later.
+
 The measuring stick is equinumerosity: $A \approx B$ when a bijection exists,
 $A \preceq B$ when an injection does. Two facts make this usable. The first is
 [[thm-schroder-bernstein]], which turns injections in both directions into a

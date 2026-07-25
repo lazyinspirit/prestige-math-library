@@ -4,7 +4,7 @@ kind: definition
 title: "Cardinal (initial ordinal) and cardinality"
 status: draft
 origin: session
-deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice]
+deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice, lem-omega-least-limit-ordinal, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
 aliases: [def-initial-ordinal, def-cardinality]
 landmark: false
@@ -97,21 +97,29 @@ runs of the recipe, from any two well-orders of $X$, return the same $\kappa$.
   Cardinals are sparse among ordinals, which is
   precisely why the least one equinumerous with a given set is a useful
   representative.
-- **Which ordinals below and at $\omega$ are cardinals is a counting question.**
-  That every natural number is a cardinal, and that $\omega$ is one, amounts to
-  the pigeonhole principle, namely that no natural number is equinumerous with a
-  proper subset of itself. That principle is about finiteness rather than about
-  order, and this library does not prove it anywhere: not on this page, and not
-  on the page that develops finiteness and countability, which states explicitly
-  that it neither assumes nor uses it. So the classification of the ordinals up
-  to and including $\omega$ is left open here. Nothing on this page depends on
-  it, and the definition above is stated so that it does not.
+- **Which ordinals up to and including $\omega$ are cardinals.** Every natural
+  number is a cardinal, and so is $\omega$. Both facts are counting facts rather
+  than order facts, and both come from the pigeonhole principle
+  ([[lem-pigeonhole]]), proved on the countability page. Every natural number is
+  an ordinal, and so is $\omega$ ([[lem-omega-least-limit-ordinal]], claim (ii));
+  and if $\alpha \in n$ with $n$ a natural number then $\alpha$ is itself a
+  natural number, since $\mathbb{N}$ is a transitive set
+  ([[lem-nat-order-is-membership]]), with $\alpha < n$ by claim (i) of
+  [[lem-omega-least-limit-ordinal]].
+  So if some $\alpha \in n$ had $\alpha \approx n$, claim 3 of the pigeonhole
+  principle would force $\alpha = n$ and hence $n \in n$, which claim (b) of
+  [[lem-ordinal-basics]] forbids; therefore $n$ is a cardinal. And if some
+  $\alpha \in \omega$ had $\alpha \approx \omega$, then $\alpha$ would be a
+  natural number equinumerous with $\mathbb{N} = \omega$, which claim 4 of the
+  pigeonhole principle forbids; therefore $\omega$ is a cardinal. Nothing else on
+  this page depends on either fact, and the definition above is stated so that it
+  does not.
 - **Notation.** The infinite cardinals are traditionally written
-  $\aleph_0, \aleph_1, \dots$, with $\aleph_0 = \omega$. That last equation is
-  quoted tradition, not a result of this library: it says $\omega$ is the least
-  ordinal equinumerous with $\omega$, which needs $\mathbb{N} \not\approx n$ for
-  every natural $n$, the pigeonhole principle recorded above as proved nowhere
-  here. Nothing below rests on it. The notation
+  $\aleph_0, \aleph_1, \dots$, with $\aleph_0 = \omega$. That last equation can
+  now be stated outright rather than quoted: it says $\omega$ is the least
+  ordinal equinumerous with $\omega$, which is precisely the assertion that
+  $\omega$ is a cardinal, established in the previous remark from claim 4 of
+  [[lem-pigeonhole]]. Nothing below rests on it. The notation
   $\aleph(A)$ for the Hartogs number of $A$ ([[thm-hartogs]]) comes from the
   same source and is deliberately close: under the Axiom of Choice
   $\aleph(A)$ is the successor cardinal of $|A|$.

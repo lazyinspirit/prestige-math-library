@@ -11,7 +11,7 @@ A **load bearing** entry is one the citing item actually uses in its proof, so
 that item and everything depending on it rests on later material and is marked
 as such by the renderer. Everything else is orientation only.
 
-**0 open, 99 closed, 0 load bearing, 0 item(s) resting on later material.**
+**0 open, 104 closed, 0 load bearing, 0 item(s) resting on later material.**
 
 ## Open, grouped by the page that will close them
 
@@ -34,6 +34,7 @@ _None. Every forward reference in the repo resolves._
 - `lem-finite-set-has-max` -> `def-countable` (on `countability-and-uncountability`)
 - `lem-nat-order-is-membership` -> `def-ordinal` (on `ordinals-and-transfinite-recursion`)
 - `lem-nat-order-is-membership` -> `lem-omega-least-limit-ordinal` (on `ordinals-and-transfinite-recursion`)
+- `lem-pigeonhole` -> `def-cardinal` (on `ordinals-and-transfinite-recursion`)
 - `rem-baire-category-choice-strength` -> `def-countable-choice` (on `countability-and-uncountability`)
 - `rem-baire-category-choice-strength` -> `rem-choice-ledger` (on `ordinals-and-transfinite-recursion`)
 - `rem-baire-category-choice-strength` -> `rem-choice-strengths` (on `filters-and-ultrafilters`)
@@ -101,6 +102,10 @@ _None. Every forward reference in the repo resolves._
 - `rem-schechter-kelley-tychonoff` -> `thm-ultrafilter-lemma` (on `filters-and-ultrafilters`)
 - `rem-shelah-inaccessible-and-the-baire-property` -> `rem-choice-ledger` (on `ordinals-and-transfinite-recursion`)
 - `rem-sierpinski-iterated-integrals` -> `rem-continuum-hypothesis` (on `countability-and-uncountability`)
+- `rem-sierpinski-ultrafilter-not-measurable` -> `def-ultrafilter` (on `filters-and-ultrafilters`)
+- `rem-sierpinski-ultrafilter-not-measurable` -> `thm-ultrafilter-lemma` (on `filters-and-ultrafilters`)
+- `rem-sierpinski-ultrafilter-not-measurable` -> `thm-ultrafilter-characterisation` (on `filters-and-ultrafilters`)
+- `rem-sierpinski-ultrafilter-not-measurable` -> `fs-every-ultrafilter-principal` (on `filters-and-ultrafilters`)
 - `rem-solovay-model` -> `def-axiom-of-choice` (on `order-zorn-and-the-axiom-of-choice`)
 - `rem-solovay-model` -> `rem-choice-ledger` (on `ordinals-and-transfinite-recursion`)
 - `rem-solovay-model` -> `thm-zorn` (on `order-zorn-and-the-axiom-of-choice`)

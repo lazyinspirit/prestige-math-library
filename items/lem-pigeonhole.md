@@ -16,6 +16,10 @@ short: "no injection $\\sigma(n)\\to n$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -51,7 +55,7 @@ library actually quotes. Claim 3 says a finite set is equinumerous with exactly
 one natural number, so "the number of elements" is well defined. Claim 4 says
 $\mathbb{N}$ is infinite. Claim 5 says no natural number is Dedekind-infinite.
 
-**Why this is proved here.** [[def-countable]] defines finiteness as
+**Why this is proved here.** The next item on this page defines finiteness as
 equinumerosity with a natural number, and the three size classes it introduces
 are exhaustive by construction but mutually exclusive only because of claim 4.
 Several later items also need claim 3 or claim 5. The principle is elementary and
@@ -88,7 +92,7 @@ ordinals, cardinals, or any later material.
 
 2.1 Normalising $f$ at the top point. Put $a = f(\sigma(n))$, an element of $\sigma(n)$ because $\sigma(n)$ is the codomain of $f$, and let $\tau = \tau^{\sigma(n)}_{a,n}$, which is legitimate since $a$ and $n$ both lie in $\sigma(n)$. Then $f' = \tau \circ f : \sigma(\sigma(n)) \to \sigma(n)$ is a composite of an injection with a bijection, hence injective, and $f'(\sigma(n)) = \tau(a) = n$. [step 1.1, step 1.3, L6]
 
-2.2 Every $k \in \sigma(n)$ satisfies $k \ne \sigma(n)$: were $k = \sigma(n)$ we would have $\sigma(n) \in \sigma(n)$, and no natural number is a member of itself, $\sigma(n)$ included. [step 1.3, L3]
+2.2 Every $k \in \sigma(n)$ satisfies $k \ne \sigma(n)$: were $k = \sigma(n)$ we would have $\sigma(n) \in \sigma(n)$, and no natural number is a member of itself, $\sigma(n)$ included, since $\mathbb{N}$ is closed under $\sigma$. [step 1.3, L3, given]
 
 3.1 Let $k \in \sigma(n)$. Then $k \in \sigma(\sigma(n))$, so $f'(k)$ is defined; and $k \ne \sigma(n)$, so injectivity of $f'$ gives $f'(k) \ne f'(\sigma(n)) = n$. Since $f'(k) \in \sigma(n) = n \cup \{n\}$, this forces $f'(k) \in n$. Hence the restriction of $f'$ to $\sigma(n)$ takes all its values in $n$ and is an injection $\sigma(n) \to n$. [step 2.1, step 2.2, L6]
 
@@ -132,4 +136,5 @@ ordinals, cardinals, or any later material.
   cardinal when no $\alpha \in \kappa$ satisfies $\alpha \approx \kappa$. Claim 3
   makes every natural number a cardinal and claim 4 makes $\omega$ one, which is
   what licenses the traditional $\aleph_0 = \omega$. That page comes much later
-  in the library and nothing here cites it.
+  in the library; the pointer here is orientation only, and nothing above rests
+  on it.

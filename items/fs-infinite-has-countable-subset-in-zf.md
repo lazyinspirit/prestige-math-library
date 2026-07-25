@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: every infinite set has a countably infinite subset, in ZF"
 status: draft
 origin: session
-deps: [rem-cohen-first-model, def-countable, def-countable-choice, def-equinumerous]
+deps: [rem-cohen-first-model, def-countable, def-countable-choice, def-equinumerous, lem-pigeonhole]
 justified_by: []
 aliases: []
 landmark: false
@@ -13,7 +13,7 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -77,6 +77,6 @@ naming elements of $A$.
 
 - **With $\mathrm{AC}_\omega$ the statement is true**, which is exactly why it feels obvious. Given an infinite $A$, for each $n$ the set of injections $n \to A$ is nonempty, and $\mathrm{AC}_\omega$ selects one for every $n$ at once; from that sequence a countably infinite subset is assembled with no further choices. The intuition behind the naive argument is therefore not wrong, it is just not a ZF argument.
 
-- **Two notions of infinite come apart in ZF.** A set is *Dedekind-infinite* when it is equinumerous with a proper subset of itself, equivalently when it has a countably infinite subset. Dedekind-infinite implies infinite in ZF; the converse is exactly $S$. In ZF alone, "infinite" and "Dedekind-infinite" are therefore different properties, and an amorphous set, one that cannot be split into two infinite pieces at all, is infinite in the weak sense only.
+- **Two notions of infinite come apart in ZF.** A set is *Dedekind-infinite* when it is equinumerous with a proper subset of itself, equivalently when it has a countably infinite subset. Dedekind-infinite implies infinite in ZF, and that direction is a theorem of this library rather than a convention: it is claim 5 of [[lem-pigeonhole]], transported along a bijection. In detail, suppose $A$ were both finite and Dedekind-infinite, say $f : A \to n$ is a bijection onto a natural number and $g : A \to B$ is a bijection onto a proper subset $B \subsetneq A$. Then $f[B] \subseteq n$, and $f[B] \neq n$ because $f$ is injective and $B \neq A$, while $n \approx A \approx B \approx f[B]$; so $n$ is equinumerous with a proper subset of itself, which claim 5 forbids. The converse implication, that infinite implies Dedekind-infinite, is exactly $S$. In ZF alone, "infinite" and "Dedekind-infinite" are therefore different properties, and an amorphous set, one that cannot be split into two infinite pieces at all, is infinite in the weak sense only.
 
 - This is the reason the library's definition of finiteness ([[def-countable]]) is by equinumerosity with a natural number rather than by the Dedekind condition. The two definitions are equivalent under $\mathrm{AC}_\omega$ and not equivalent in ZF, and only the first supports the induction arguments used in [[lem-subset-of-countable]] and [[lem-finite-subsets-listable]].
