@@ -12,6 +12,10 @@ short: "irrationals are a counterexample"
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

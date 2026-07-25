@@ -12,6 +12,10 @@ short: "no surjection $\\mathbb N\\to\\mathbb R$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

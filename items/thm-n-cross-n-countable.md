@@ -12,6 +12,10 @@ short: "$(m,n)\\mapsto 2^m(2n+1)$ is a bijection"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

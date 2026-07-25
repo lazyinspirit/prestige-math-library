@@ -12,6 +12,10 @@ short: "subsets of countable sets are countable"
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
