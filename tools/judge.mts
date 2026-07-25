@@ -163,6 +163,26 @@ function quotedTextOf(src: string): string {
     : text.slice(0, CAP) + "\n… [truncated here; this item continues. Do NOT infer that anything is missing from it.]";
 }
 
+/**
+ * The WHOLE body of a page sibling: Statement/Definition, Facts & Assumptions,
+ * the full Proof or Refutation, and Remarks. Frontmatter is stripped.
+ *
+ * Owner decision, 2026-07-26: the judge is to be given the FULL context of its
+ * page. quotedTextOf's proof-free summary is what made the judge structurally
+ * blind to an unbacked step or a mis-stated [L#] inside a sibling, which is the
+ * defect class the reading tiers keep finding. The largest page in the repo is
+ * ~124k chars (~35k tokens) of body, well inside GLM 5.2's 1M window, so the old
+ * 3000-char cap was protecting a gateway timeout, not a context limit. The
+ * request timeout is raised alongside this.
+ */
+function fullTextOf(src: string): string {
+  const body = src.replace(/^---\n[\s\S]*?\n---\n/, "").trim();
+  const CAP = 24000;
+  return body.length <= CAP
+    ? body
+    : body.slice(0, CAP) + "\n… [truncated here; this item continues. Do NOT infer that anything is missing from it.]";
+}
+
 // Ids already shown under "EXACT TEXT OF EVERY ITEM THIS ONE CITES", so the page
 // block below does not repeat them.
 const shownIds = new Set<string>();
@@ -209,7 +229,7 @@ function pageContext(selfId: string): string {
       if (!existsSync(f)) continue;
       const s = readFileSync(f, "utf8");
       const t = (s.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
-      blocks.push(`### [[${id}]] ${t}\n` + quotedTextOf(s));
+      blocks.push(`### [[${id}]] ${t}\n` + fullTextOf(s));
     }
     if (!blocks.length) return "";
     return (
@@ -286,7 +306,9 @@ PAGE CONTEXT: the other items published on this item's page are supplied after t
   * a ledger, conventions or summary item whose claims do not match what its page actually establishes;
   * this item restating a sibling INACCURATELY, whether or not it cites it.
   Two cautions. A sibling covering related ground is NOT duplication, and a sibling that comes LATER on the page is not a forward-reference violation: same-page links are ordinary links. Do not object to either.
-  A THIRD caution, and it is the one that has actually caused wrong rejections: the supplied text of another item is its Statement/Definition and Remarks only, and long items are TRUNCATED at a marked cut. It does NOT include that item's Proof. So you may NOT conclude that a cross-reference is false merely because you cannot find the referenced passage in the supplied text. Report such a reference as unverifiable, or say nothing; do not call it a false claim about the library's contents unless the supplied text CONTRADICTS it.`;
+  A THIRD point, and read it carefully because the two blocks below the item differ:
+  * PAGE SIBLINGS are supplied IN FULL: statement, facts, every proof step, and remarks. So a cross-reference to a sibling's step, fact or proof IS checkable, and a claim about a sibling that its full text contradicts IS a defect you should name. Use this.
+  * CITED ITEMS FROM OTHER PAGES are supplied as Statement/Definition and Remarks only, TRUNCATED at a marked cut, with no Proof. For those you may NOT conclude a cross-reference is false merely because you cannot find the passage. Report it as unverifiable, or say nothing, unless the supplied text CONTRADICTS it.`;
 
 // The `--mode certify` arm was MEASURED AND DELETED, 2026-07-25. Scored against
 // research/verification-benchmark.md (150 items, 50 known defects), a gentler
@@ -301,6 +323,14 @@ PAGE CONTEXT: the other items published on this item's page are supplied after t
 
 const refuterSys =
   `You are a REFUTER auditing ONE mathematical library item (a definition, theorem+proof, lemma+proof, example, or false-statement+refutation) for a rigorous, cross-referenced public math library${topic ? ` (topic: ${topic})` : ""}.
+
+WHERE TO LOOK FIRST (owner instruction, 2026-07-26). Two classes account for nearly every real defect found in this library. Spend your effort on them, in this order, before anything else:
+
+  (1) MISSING OR INCORRECT CITATIONS OF DEPENDENCIES. A step that makes a mathematical move with no fact behind it at all. An [L#] fact that is STRONGER than, or does not literally say, what its cited item says. A step whose tag cites facts that do not license the move it makes. A named property (transitivity, antisymmetry, trichotomy, cancellation, density, completeness) used with nothing establishing it. This is the single most common real defect here: check EVERY step's tag against the facts it names, and every [L#] against the supplied text of its source.
+
+  (2) LOGICAL GAPS IN THE IMMEDIATE NEIGHBOURHOOD OF THE PROOF. Within this item's own argument: a step that does not follow from the steps and facts it cites, a hypothesis used but never established (nonemptiness before a minimum, a denominator before a division, a case never discharged), a quantifier or scope slip, a claim in the statement that the proof does not reach. Stay close to the proof; you are not auditing the whole library.
+
+Report anything else you happen to notice, but do not go hunting for it at the expense of these two.
 
 Your ONLY job is to find a SPECIFIC defect. Flag the item (keep=false) ONLY if you can point to a concrete problem: a false claim, a concrete counterexample, a logically unjustified or mis-cited step, a symbol used out of its scope, a wrong or incompletely-discharged proof strategy, a definition that is not well-formed, or ill-formed / mathematically wrong LaTeX. If you find no specific error, ACCEPT (keep=true). Do NOT reject merely because a proof is terse, omits routine algebra, or defers a genuinely tedious-but-standard verification to a cited textbook, PROVIDED the core argument is present and correct.
 
@@ -345,7 +375,7 @@ async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw
         method: "POST",
         headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
         body: JSON.stringify(payload),
-        signal: AbortSignal.timeout(180_000),
+        signal: AbortSignal.timeout(420_000),
       });
     } catch (e) {
       if (attempt < 2) { await sleep((attempt + 1) * 4000); continue; }
