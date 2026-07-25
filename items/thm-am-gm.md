@@ -12,6 +12,10 @@ short: "$(\\prod a_k)^{1/n} \\le \\frac1n \\sum a_k$"
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

@@ -61,7 +61,7 @@ the first ordinal at which induction acquires a limit clause.
 
 [L8] An ordinal is a transitive set strictly well ordered by $\in$, no ordinal is a member of itself, and a limit ordinal is a nonzero ordinal that is not of the form $\beta^{+}$ ([[def-ordinal]], [[lem-ordinal-basics]], [[def-limit-ordinal]]).
 
-[L9] $n < \sigma(n)$ for every $n \in \mathbb{N}$ ([[lem-nat-trichotomy]], step 1.3).
+[L9] $n < \sigma(n)$ for every $n \in \mathbb{N}$. This is established at step 1.3 *of* [[lem-nat-trichotomy]], where it is derived from $n + \sigma(0) = \sigma(n)$ and $\sigma(0) \ne 0$; the reference is to that item's numbering, not to any step below.
 
 [L10] For ordinals $\alpha, \beta$: $\alpha \subseteq \beta$ if and only if $\alpha \in \beta$ or $\alpha = \beta$, and any two ordinals are comparable under inclusion (claims (f) and (g) of [[lem-ordinal-basics]]); exactly one of $\alpha \in \beta$, $\alpha = \beta$, $\beta \in \alpha$ holds, and $\alpha \le \beta :\iff \alpha \subseteq \beta$ is the order under which sets of ordinals are well ordered, with strict part $\in$ ([[lem-ordinal-trichotomy]]).
 

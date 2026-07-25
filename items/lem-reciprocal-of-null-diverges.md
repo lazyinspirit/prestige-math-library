@@ -12,6 +12,10 @@ short: "$x_k\\to0$ iff $1/x_k\\to+\\infty$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
