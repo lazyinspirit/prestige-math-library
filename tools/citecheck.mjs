@@ -104,7 +104,12 @@ const RULES = [
     // homes with the use-regex missed lem-nat-transitive-irreflexive and
     // def-nat-order, so two correctly-cited items were flagged.
     homeRe: /reflexiv|antisymmetr|transitiv|irreflexiv|trichotom/i,
-    homeUnless: /\\approx|equinumer|equivalence\s+relation/i,
+    // A TRANSITIVE SET is not a transitive ORDER. `lem-nat-transitive-irreflexive`
+    // says "$n$ is transitive, i.e. $x \in n \Rightarrow x \subseteq n$; and
+    // $n \notin n$" -- nothing whatever about `<`. Treating it as an order home
+    // let a real mis-attribution in `thm-n-cross-n-countable` pass as a false
+    // positive, which a page verifier then caught. Exclude the set sense.
+    homeUnless: /\\approx|equinumer|equivalence\s+relation|transitive\s+set|\\subseteq|\\in\s+n\b/i,
     seed: ['def-partial-order', 'def-ordered-field', 'def-total-order', 'def-preorder'],
   },
   {
