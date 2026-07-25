@@ -26,6 +26,13 @@ function reflow(md: string): string {
     for (const ln of para.split("\n")) {
       const s = ln.trim();
       if (s.startsWith("## ") || s === "") { flush(); merged.push(ln); }
+      // A markdown list item starts a new logical line. Without this, a Remarks
+      // list written in the repo style (bullets with no blank line between them)
+      // was collapsed into ONE line, silently turning four bullets into one
+      // paragraph; and a continuation line could be left starting with something
+      // like "2.2 ...", which precheck then read as a numbered step after the
+      // QED. Continuation lines still join onto their own bullet.
+      else if (/^([-*+]|\d+[.)])\s+/.test(s)) { flush(); buf.push(ln); }
       else buf.push(ln);
     }
     flush();
