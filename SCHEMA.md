@@ -272,6 +272,25 @@ needs machinery introduced later.
 `status: published` on an item is valid only if: id == filename; kind/prefix
 match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);
 `verification.audited` set; every `sources.scraped` entry has url+license; every `sources.references` entry has title + a working url;
-share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders. A repo
-lint script (to be written alongside the renderer) checks all of this and is
-the pre-merge gate.
+share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders.
+
+The gate is five tools, run from the repo root; all five must be clean before
+anything is published:
+
+```
+npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts
+node tools/depcheck.mjs      # deps resolve, graph acyclic, no draft on a published page
+node tools/fwdcheck.mjs      # forward refs declared, point forward, closed, off the spine
+node tools/extcheck.mjs      # recorded-not-proved items well formed; ‡ consequences marked
+node tools/citecheck.mjs     # HEURISTIC: an elementary move whose home is not in deps
+```
+
+`citecheck` is warning-only and its output is to be TRIAGED, never merely
+counted; the surviving false positives are documented in its own header. The
+first four exit non-zero on failure and are hard gates.
+
+Note what none of them can check: whether a fact's prose faithfully restates the
+item it cites. That is the dominant defect class in this library
+(`research/verification-benchmark.md`), and it is caught only by a human or a
+model that reads the cited item. That is what the judge's cited-item context and
+the page verifier of `WORKFLOW.md` §0 exist for.
