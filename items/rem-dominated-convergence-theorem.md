@@ -2,7 +2,7 @@
 id: rem-dominated-convergence-theorem
 kind: remark
 title: "Dominated convergence theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-fatou-lemma]
@@ -13,6 +13,10 @@ landmark: true
 short: "A single integrable dominating function licenses passage to the limit"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

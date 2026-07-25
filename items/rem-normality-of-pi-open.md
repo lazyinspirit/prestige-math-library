@@ -2,7 +2,7 @@
 id: rem-normality-of-pi-open
 kind: remark
 title: "Normality of $\\pi$ (open)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Open: π is not known to be normal in any base"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,6 +26,8 @@ sources:
       url: "https://projecteuclid.org/journals/experimental-mathematics/volume-10/issue-2/On-the-Random-Character-of-Fundamental-Constant-Expansions/em/999188633.full"
     - title: "Champernowne constant (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Champernowne_constant"
+    - title: "Chronology of computation of π (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80"
 pipeline_run: null
 ---
 
@@ -52,8 +58,10 @@ notions of the deferred measure and integration track. Explicit normal numbers a
 easy to write down once one stops asking for a familiar constant: Champernowne's
 constant $0.123456789101112\ldots$ is normal in base $10$, and Sierpinski and
 Turing gave constructions of absolutely normal numbers. Computations have checked
-tens of trillions of decimal digits of $\pi$ against the usual statistical tests,
-which they pass; passing a statistical test is evidence and not a proof, and no
+hundreds of trillions of decimal digits of $\pi$ against the usual statistical
+tests, which they pass; the published record stood at $314$ trillion digits in
+November 2025, and the digit statistics of such runs are reported routinely.
+Passing a statistical test is evidence and not a proof, and no
 amount of computation can settle an asymptotic frequency. The most concrete
 programme is Bailey and Crandall's: the Bailey-Borwein-Plouffe formula for $\pi$
 reduces base-$2$ normality of $\pi$ to a uniform-distribution statement about a

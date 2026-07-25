@@ -2,7 +2,7 @@
 id: rem-kolmogorov-divergent-fourier
 kind: remark
 title: "Kolmogorov 1926: an $L^1$ function whose Fourier series diverges everywhere"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "Integrability in L^1 gives no pointwise convergence anywhere"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

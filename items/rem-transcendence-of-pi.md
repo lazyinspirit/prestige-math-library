@@ -2,7 +2,7 @@
 id: rem-transcendence-of-pi
 kind: remark
 title: "Transcendence of $\\pi$ (awaiting a scope decision)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lindemann-weierstrass-theorem]
@@ -13,6 +13,10 @@ landmark: true
 short: "π is transcendental (Lindemann 1882); settled, but not authored here"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

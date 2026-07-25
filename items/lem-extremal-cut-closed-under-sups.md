@@ -63,12 +63,6 @@ $\sup C \in M_x$ for every chain $C \subseteq M_x$.
 
 ## Remarks
 
-- The empty chain is covered without a separate argument: it falls into the first
-  case vacuously, and $\sup \emptyset = \bot \le x$.
-- Note which property of the supremum each case uses. The first case uses
-  **leastness**, that $s$ is below any upper bound; the second uses only that $s$
-  is an **upper bound**. Both halves of the definition of least upper bound are
-  needed, which is why chain-completeness cannot be weakened here to the mere
-  existence of some upper bound.
-- Together with [[lem-extremal-cut-closed-under-f]] this makes $M_x$ admissible,
-  which is what [[lem-extremal-comparability]] feeds to minimality.
+- The empty chain is covered without a separate argument: it falls into the first case vacuously, and $\sup \emptyset = \bot \le x$.
+- Note which property of the supremum each case uses. The first case uses **leastness**, that $s$ is below any upper bound; the second uses only that $s$ is an **upper bound**. Both halves of the definition of least upper bound are needed, which is why chain-completeness cannot be weakened here to the mere existence of some upper bound.
+- Together with [[lem-extremal-cut-closed-under-f]] this makes $M_x$ admissible, which is what [[lem-extremal-comparability]] feeds to minimality.

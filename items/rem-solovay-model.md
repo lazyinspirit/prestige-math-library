@@ -2,7 +2,7 @@
 id: rem-solovay-model
 kind: remark
 title: "Solovay's model: ZF + DC with every set of reals measurable"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent]
@@ -13,6 +13,10 @@ landmark: true
 short: "from an inaccessible: all sets of reals Lebesgue measurable"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -36,11 +40,13 @@ then so is the theory**
 where DC is the axiom of dependent choice.
 
 Solovay (1970) builds the model by Levy-collapsing an inaccessible cardinal
-$\kappa$ to $\omega_1$ and then passing to the inner model $L(\mathbb{R})$ of the
-extension, or equivalently to the sets hereditarily definable from a real and an
-ordinal. Every set of reals in that model is definable from a real and an
-ordinal, and each such set is shown to be measurable by a homogeneity argument
-about the collapse.
+$\kappa$ to $\omega_1$ and then passing to an inner model of the extension. His
+own model is the class of sets **hereditarily definable from a countable sequence
+of ordinals**; the inner model $L(\mathbb{R})$ of the same extension is the other
+standard choice and satisfies the same conclusions. The two are not being claimed
+here to be the same class. Every set of reals in the model is definable from a
+real and an ordinal, and each such set is shown to be measurable by a homogeneity
+argument about the collapse.
 
 **What this rules out.** Every classical pathology of the real line that is
 proved by well-ordering $\mathbb{R}$ is therefore **not** available from ZF + DC

@@ -1,7 +1,7 @@
 ---
 page: deferred-set-theory-beyond-choice
 title: "Set Theory Beyond Choice: Recorded, Not Proved Here"
-status: draft
+status: published
 items: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent,
         rem-independence-of-ch-and-gch, rem-gch-implies-ac,
         rem-cohen-first-model, rem-fraenkel-socks-model,

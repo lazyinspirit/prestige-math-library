@@ -2,7 +2,7 @@
 id: rem-fubini-counting-measure-diagonal
 kind: remark
 title: "Failure of Tonelli without $\\sigma$-finiteness: the diagonal under Lebesgue times counting measure"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-fubini-tonelli]
@@ -13,6 +13,10 @@ landmark: false
 short: "A nonnegative product-measurable function whose iterated integrals are 0 and 1"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

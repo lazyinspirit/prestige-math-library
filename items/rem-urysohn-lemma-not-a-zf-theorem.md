@@ -2,7 +2,7 @@
 id: rem-urysohn-lemma-not-a-zf-theorem
 kind: remark
 title: "Urysohn's lemma is not a theorem of ZF, nor of ZF plus countable choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-baire-category-choice-strength]
@@ -13,6 +13,10 @@ landmark: true
 short: "Läuchli 1962, Tachtsis 2019; DMC suffices, BPI does not"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -38,9 +42,10 @@ $A \subseteq f^{-1}(\{0\})$ and $B \subseteq f^{-1}(\{1\})$.
 The following are all relative to the consistency of ZF.
 
 **(a) UL is not a theorem of ZF.** Läuchli (1962/63) builds a permutation model
-of ZF with atoms in which the set of atoms carries a dense linear order whose
-order topology is $T_4$ and on which **every continuous real-valued function is
-constant**; UL fails there. Since the negation of UL is a boundable statement,
+of ZF with atoms in which the set of atoms is densely linearly ordered, of the
+order type of the rationals of the ground model, and in which that set with its
+order topology is a $T_4$ space on which **every continuous real-valued function
+is constant**; UL fails there. Since the negation of UL is a boundable statement,
 the Jech-Sochor first embedding theorem transfers the failure to ZF proper.
 
 **(b) UL is not a theorem of ZF + countable choice.** Tachtsis (2019) produces a

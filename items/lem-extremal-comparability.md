@@ -61,15 +61,6 @@ $M_x = M$; that is, for every $y \in M$, either $y \le x$ or $f(x) \le y$.
 
 ## Remarks
 
-- This is the first payoff of minimality, and the pattern is worth naming: to
-  prove that everything in $M$ has a property, collect the elements that have it,
-  show the collection is admissible, and let minimality do the rest. The same
-  move proves [[lem-all-extremal]].
-- The conclusion is a comparability statement with a gap. It says nothing about
-  elements strictly between $x$ and $f(x)$, and indeed the content of the lemma
-  is that $M$ has none: an element of $M$ lies at or below $x$, or at or above
-  $f(x)$, never inside.
-- The hypothesis that $x$ is extremal is doing real work and cannot be dropped.
-  It is what [[lem-all-extremal]] later supplies for every element, which is what
-  turns this one-sided statement into total comparability
-  ([[lem-admissible-is-chain]]).
+- This is the first payoff of minimality, and the pattern is worth naming: to prove that everything in $M$ has a property, collect the elements that have it, show the collection is admissible, and let minimality do the rest. The same move proves [[lem-all-extremal]].
+- The conclusion is a comparability statement with a gap. It says nothing about elements strictly between $x$ and $f(x)$, and indeed the content of the lemma is that $M$ has none: an element of $M$ lies at or below $x$, or at or above $f(x)$, never inside.
+- The hypothesis that $x$ is extremal is doing real work and cannot be dropped. It is what [[lem-all-extremal]] later supplies for every element, which is what turns this one-sided statement into total comparability ([[lem-admissible-is-chain]]).

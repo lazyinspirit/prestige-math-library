@@ -2,7 +2,7 @@
 id: rem-halpern-levy-bpi-not-ac
 kind: remark
 title: "Halpern and Lévy 1971: the Boolean prime ideal theorem does not imply the Axiom of Choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent, rem-feferman-no-free-ultrafilter-in-zf]
@@ -13,6 +13,10 @@ landmark: true
 short: "BPI is strictly weaker than AC"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "T. Jech, The Axiom of Choice, North-Holland (1973), Section 5.3 (the basic Cohen model) and Theorem 7.1"
+      url: "https://archive.org/details/axiomofchoice0000jech"
 pipeline_run: null
 ---
 
@@ -34,18 +40,28 @@ algebra has a prime ideal; over ZF this is equivalent to the ultrafilter lemma
 **If ZF is consistent, then ZF + BPI + (not AC) is consistent.** So BPI does not
 imply the Axiom of Choice over ZF.
 
-Halpern and Lévy (1971) prove this in the second Cohen model: adjoin countably
-many mutually generic Cohen reals and take the symmetric submodel with finite
-supports and the group of all permutations of the index set. The Axiom of Choice
-fails there, because the set of adjoined reals cannot be well-ordered. That BPI
-nevertheless holds is the difficult half, and it rests on the Halpern-Läuchli
-partition theorem for products of finitely many trees.
+Halpern and Lévy (1971) prove this in the **basic Cohen model**, the first
+symmetric model Cohen built: adjoin countably many mutually generic Cohen reals
+and take the symmetric submodel with finite supports and the group of all
+permutations of the index set. The Axiom of Choice fails there, because the set
+of adjoined reals cannot be well-ordered. That BPI nevertheless holds is the
+difficult half, and it rests on the Halpern-Läuchli partition theorem for
+products of finitely many trees.
 
 **Combined with [[rem-feferman-no-free-ultrafilter-in-zf]]** this places UL
 strictly between ZF and AC, relative to the consistency of ZF: UL is not provable
 in ZF, and UL does not recover AC.
 
 ## Remarks
+
+- **Which Cohen model this is.** The model is the one recorded in
+  [[rem-cohen-first-model]], Jech's basic Cohen model. Jech's *second* Cohen
+  model is a different construction, the atom-free analogue of Fraenkel's socks
+  ([[rem-fraenkel-socks-model]]), and is **not** the model used here. The
+  distinction matters: BPI holds in the basic Cohen model, so free ultrafilters
+  on $\mathbb{N}$ exist there, which is why
+  [[rem-feferman-no-free-ultrafilter-in-zf]] must use a different symmetric model
+  altogether.
 
 - **Not proved in this library.** Neither the symmetric model nor the
   Halpern-Läuchli partition theorem is developed here.

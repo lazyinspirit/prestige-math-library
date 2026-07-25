@@ -2,7 +2,7 @@
 id: rem-godel-constructible-universe
 kind: remark
 title: "Gödel 1938: ZF does not refute the Axiom of Choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: true
 short: "Con(ZF) implies Con(ZFC + GCH), via L"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

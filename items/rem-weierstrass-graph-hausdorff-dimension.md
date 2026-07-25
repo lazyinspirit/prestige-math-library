@@ -2,7 +2,7 @@
 id: rem-weierstrass-graph-hausdorff-dimension
 kind: remark
 title: "Hausdorff dimension of the graph of the Weierstrass function"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "dim_H = 2 + log_b(a); settled for integer b ≥ 2 by Shen (2018), open otherwise"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,6 +26,8 @@ sources:
       url: "https://arxiv.org/abs/1505.03986"
     - title: "K. Barański, B. Bárány and J. Romanowska, On the dimension of the graph of the classical Weierstrass function (arXiv:1309.3759)"
       url: "https://arxiv.org/abs/1309.3759"
+    - title: "H. Ren and W. Shen, A dichotomy for the Weierstrass-type functions, Inventiones Mathematicae 226 (2021) 1057-1100 (arXiv:2007.04312)"
+      url: "https://arxiv.org/abs/2007.04312"
     - title: "Weierstrass function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Weierstrass_function"
 pipeline_run: null
@@ -66,9 +72,14 @@ $(\theta_n)$; Barański, Bárány and Romanowska (2014), who proved it for integ
 $b$ and $a$ above a threshold $a_b \in (1/b, 1)$; and Shen (2018), who removed the
 threshold and covered every integer $b \ge 2$ and every $a \in (1/b, 1)$, by
 proving that the SRB measure of the associated solenoidal attractor is absolutely
-continuous. What would settle what remains is the non-integer case, where the
-associated dynamics is no longer a self-affine expanding map of a circle by an
-integer degree and the current method does not apply.
+continuous. Ren and Shen (2021) then generalised the formula from $\cos$ to an
+arbitrary real analytic periodic $\varphi$, as a dichotomy: for integer
+$b \ge 2$ and $a \in (1/b, 1)$, either $\sum a^n \varphi(b^n x)$ is real
+analytic or its graph has Hausdorff dimension $2 + \log_b a$. Every one of these
+results keeps the hypothesis that $b$ is an integer. What would settle what
+remains is the non-integer case, where the associated dynamics is no longer a
+self-affine expanding map of a circle by an integer degree and the current method
+does not apply.
 
 **Why it matters here.** Continuity and nowhere differentiability of a Weierstrass
 function **are** in scope for this library and will be proved from the Weierstrass

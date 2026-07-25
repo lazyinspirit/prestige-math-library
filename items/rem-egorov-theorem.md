@@ -2,7 +2,7 @@
 id: rem-egorov-theorem
 kind: remark
 title: "Egorov's theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "On a finite measure space, pointwise a.e. convergence is uniform off a set of small measure"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: rem-ftc-absolutely-continuous
 kind: remark
 title: "The sharp fundamental theorem of calculus (absolute continuity)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-absolutely-continuous-function, rem-lebesgue-monotone-differentiation]
@@ -13,6 +13,10 @@ landmark: true
 short: "F is AC iff F' exists a.e., lies in L^1, and integrates back to F on every subinterval"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

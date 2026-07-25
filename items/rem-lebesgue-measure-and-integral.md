@@ -2,7 +2,7 @@
 id: rem-lebesgue-measure-and-integral
 kind: remark
 title: "Lebesgue measure and the Lebesgue integral"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: true
 short: "Lebesgue outer measure, Caratheodory measurability, and the integral built from them"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -89,10 +93,15 @@ derivative almost everywhere, Volterra's function, Jordan content and Jordan
 measurability all live inside the elementary theory. What is missing is the
 $\sigma$-algebra, the measure defined on it, and the integral.
 
-**Choice.** The construction above is a theorem of ZF as stated, but the
-convenience results around it are not all free. In particular "a countable union
-of null sets is null" needs a countable choice principle
-([[def-countable-choice]]) to select one $\varepsilon 2^{-n}$ cover per index,
-and in ZF alone it can fail: in the Feferman-Levy model $\mathbb{R}$ is a
-countable union of countable sets. A measure track built here would have to keep
-the same ledger of choice principles that the rest of this library keeps.
+**Choice.** The construction above is not free of choice, and the statement
+displayed above is not a theorem of ZF. What is choice-free is the definition of
+$\lambda^{*}$, its monotonicity, and its subadditivity over finitely many sets.
+What is not is countable subadditivity of $\lambda^{*}$, and with it the
+countable additivity of $\lambda$ asserted above and the statement "a countable
+union of null sets is null": each needs a countable choice principle
+([[def-countable-choice]]) to select one $\varepsilon 2^{-n}$ cover per index.
+If ZF is consistent then ZF proves none of them, since in the Feferman-Levy
+model of ZF the set $\mathbb{R}$ is a countable union of countable sets, so
+$[0,1]$ there is a countable union of null sets while $\lambda^{*}([0,1]) = 1$.
+A measure track built here would have to keep the same ledger of choice
+principles that the rest of this library keeps.

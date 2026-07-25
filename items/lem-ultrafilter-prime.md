@@ -66,19 +66,6 @@ $s(i) \in \mathcal{U}$ for some $i \in n$.
 
 ## Remarks
 
-- **The converse holds too**, and is worth stating even though it is not needed
-  below: a filter $\mathcal{U}$ with the property that $A \cup B \in \mathcal{U}$
-  implies $A \in \mathcal{U}$ or $B \in \mathcal{U}$ is an ultrafilter, because
-  $A \cup (X \setminus A) = X \in \mathcal{U}$ forces one of $A$ and
-  $X \setminus A$ into $\mathcal{U}$, which is
-  [[thm-ultrafilter-characterisation]]. Primeness and maximality are therefore the
-  same condition, which is why the ultrafilter lemma is a form of the Boolean
-  prime ideal theorem ([[rem-choice-strengths]]).
-- The finite case does not extend to infinite unions. On $\mathbb{N}$ an
-  ultrafilter containing every tail contains
-  $\mathbb{N} = \bigcup_{x \in \mathbb{N}} \{x\}$ but no singleton
-  ([[fs-every-ultrafilter-principal]]), so a union of infinitely many sets can lie
-  in $\mathcal{U}$ with no single member of the union doing so.
-- Read through the two-valued measure of [[thm-ultrafilter-characterisation]],
-  primeness says that a union of finitely many null sets is null, the
-  complementary form of closure under finite intersection.
+- **The converse holds too**, and is worth stating even though it is not needed below: a filter $\mathcal{U}$ with the property that $A \cup B \in \mathcal{U}$ implies $A \in \mathcal{U}$ or $B \in \mathcal{U}$ is an ultrafilter, because $A \cup (X \setminus A) = X \in \mathcal{U}$ forces one of $A$ and $X \setminus A$ into $\mathcal{U}$, which is [[thm-ultrafilter-characterisation]]. Primeness and maximality are therefore the same condition, which is why the ultrafilter lemma is a form of the Boolean prime ideal theorem ([[rem-choice-strengths]]).
+- The finite case does not extend to infinite unions. On $\mathbb{N}$ an ultrafilter containing every tail contains $\mathbb{N} = \bigcup_{x \in \mathbb{N}} \{x\}$ but no singleton ([[fs-every-ultrafilter-principal]]), so a union of infinitely many sets can lie in $\mathcal{U}$ with no single member of the union doing so.
+- Read through the two-valued measure of [[thm-ultrafilter-characterisation]], primeness says that a union of finitely many null sets is null, the complementary form of closure under finite intersection.

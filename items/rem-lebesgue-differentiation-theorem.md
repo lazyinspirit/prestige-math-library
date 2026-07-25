@@ -2,7 +2,7 @@
 id: rem-lebesgue-differentiation-theorem
 kind: remark
 title: "Lebesgue differentiation theorem for $L^1$ functions"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-vitali-covering-theorem]
@@ -13,6 +13,10 @@ landmark: false
 short: "Almost every point is a Lebesgue point: averages of an integrable function converge to its value"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

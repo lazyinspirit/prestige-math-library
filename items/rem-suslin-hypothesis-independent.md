@@ -2,7 +2,7 @@
 id: rem-suslin-hypothesis-independent
 kind: remark
 title: "The Suslin hypothesis is independent of ZFC, in both directions"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-martins-axiom]
@@ -13,6 +13,10 @@ landmark: true
 short: "Solovay-Tennenbaum for SH, Jensen's diamond for its failure"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,6 +26,10 @@ sources:
       url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC286001/"
     - title: "Martin's axiom (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Martin%27s_axiom"
+    - title: "Suslin algebra (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Suslin_algebra"
+    - title: "Suslin tree (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Suslin_tree"
 pipeline_run: null
 ---
 
@@ -36,7 +44,8 @@ order satisfying the ccc is order-isomorphic to $\mathbb{R}$.
 **Kurepa (1935): three equivalent forms.** Over ZFC, a Suslin line exists if and
 only if a **Suslin tree** exists (a tree of height $\omega_1$ with no uncountable
 chain and no uncountable antichain), if and only if a **Suslin algebra** exists (a
-complete ccc atomless Boolean algebra that is not a measure algebra).
+Boolean algebra that is complete, atomless, countably distributive and satisfies
+the countable chain condition).
 
 The following are relative to the consistency of ZFC.
 

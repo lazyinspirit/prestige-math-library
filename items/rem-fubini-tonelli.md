@@ -2,7 +2,7 @@
 id: rem-fubini-tonelli
 kind: remark
 title: "Fubini-Tonelli theorem and the $\\sigma$-finiteness hypothesis"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-monotone-convergence-theorem]
@@ -13,6 +13,10 @@ landmark: true
 short: "Iterated integrals equal the double integral for sigma-finite measures"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

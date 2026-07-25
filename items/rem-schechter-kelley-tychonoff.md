@@ -2,7 +2,7 @@
 id: rem-schechter-kelley-tychonoff
 kind: remark
 title: "Schechter 2006: Kelley's cofinite proof yields BPI, not the Axiom of Choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-halpern-levy-bpi-not-ac]
@@ -13,9 +13,15 @@ landmark: false
 short: "the classical Tychonoff-implies-AC argument needs a repair"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
+    - title: "J. L. Kelley, The Tychonoff product theorem implies the axiom of choice, Fund. Math. 37 (1950), 75-76"
+      url: "https://doi.org/10.4064/fm-37-1-75-76"
     - title: "E. Schechter, Kelley's specialization of Tychonoff's theorem is equivalent to the Boolean prime ideal theorem, Fund. Math. 189 (2006), 285-288"
       url: "https://doi.org/10.4064/fm189-3-5"
     - title: "Boolean prime ideal theorem (Wikipedia)"

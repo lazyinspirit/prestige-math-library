@@ -2,7 +2,7 @@
 id: rem-monotone-convergence-theorem
 kind: remark
 title: "Monotone convergence theorem (Beppo Levi)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "An increasing sequence of nonnegative measurable functions may be integrated term by term"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -63,6 +67,16 @@ integrable functions on $[0,1]$ with bounded integrals may converge pointwise to
 a bounded function that is not Riemann integrable. That failure is exactly the
 defect this theorem repairs, and it is the honest motivation for building a
 measure track at all.
+
+**A naming warning.** "Monotone convergence theorem" names two unrelated
+results, and this library uses the phrase for both. The one stated here is
+Lebesgue's, sharpened by Beppo Levi in 1906, and it is about integrals of
+functions on a measure space. The other is the elementary theorem that a
+monotone sequence of reals converges if and only if it is bounded, which belongs
+to the sequences track; that one is not deferred, but as things stand it is not
+proved anywhere in this library either, and nothing on this page bears on it. A
+reader who wants "bounded monotone sequences converge" is in the wrong item, and
+neither result is a special case of the other.
 
 **Interchange results that this library does prove.** Uniform convergence
 permits interchange for the Riemann integral, and so does Arzela's bounded

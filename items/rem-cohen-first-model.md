@@ -2,7 +2,7 @@
 id: rem-cohen-first-model
 kind: remark
 title: "Cohen's first model: an infinite Dedekind-finite set of reals"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent]
@@ -13,12 +13,16 @@ landmark: false
 short: "infinite but with no countably infinite subset"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
     - title: "P. J. Cohen, The independence of the continuum hypothesis, Proc. Nat. Acad. Sci. USA 50 (1963), 1143-1148"
       url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC221287/"
-    - title: "T. Jech, The Axiom of Choice, North-Holland (1973), Chapter 5"
+    - title: "T. Jech, The Axiom of Choice, North-Holland (1973), Section 5.3 (the basic Cohen model), Chapter 5 Problem 18 and Theorem 10.1"
       url: "https://archive.org/details/axiomofchoice0000jech"
     - title: "Dedekind-infinite set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dedekind-infinite_set"
@@ -37,10 +41,11 @@ $(a_n)_{n \in \mathbb{N}}$ of mutually generic Cohen reals to a countable
 transitive model of ZFC, and pass to the symmetric submodel determined by finite
 supports and the full permutation group of the indices. In that submodel the
 **set** $A = \{a_n : n \in \mathbb{N}\}$ exists, but the **sequence**
-$n \mapsto a_n$ does not: any injection $\mathbb{N} \to A$ would be fixed by only
-finitely many of the permutations that the symmetry condition requires. So $A$ is
-infinite, and no countably infinite subset of it can be enumerated inside the
-model.
+$n \mapsto a_n$ does not: a hereditarily symmetric name for an injection
+$\mathbb{N} \to A$ has a finite support $E$, and a permutation of the indices
+fixing $E$ but moving some index outside $E$ then fixes the injection while
+moving one of its values, which is impossible. So $A$ is infinite and has no
+countably infinite subset in the model.
 
 ## Remarks
 

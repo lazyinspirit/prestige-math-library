@@ -2,7 +2,7 @@
 id: rem-gitik-all-uncountable-cardinals-singular
 kind: remark
 title: "Gitik 1980: consistently, every uncountable cardinal is singular"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-feferman-levy-model]
@@ -13,6 +13,10 @@ landmark: false
 short: "from large cardinals: no uncountable regular cardinal"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

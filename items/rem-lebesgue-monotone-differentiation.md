@@ -2,7 +2,7 @@
 id: rem-lebesgue-monotone-differentiation
 kind: remark
 title: "Lebesgue's differentiation theorem for monotone functions"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-vitali-covering-theorem]
@@ -13,6 +13,10 @@ landmark: true
 short: "A monotone function on an interval is differentiable almost everywhere"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,6 +26,8 @@ sources:
       url: "https://classicalrealanalysis.info/documents/Thomson-RAE2003-euclid.rae.1149698567.pdf"
     - title: "Bounded variation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bounded_variation"
+    - title: "C. Heil, Absolute continuity and the Banach-Zaretsky theorem, Corollary 6"
+      url: "https://heil.math.gatech.edu/papers/abscont_typosmarked.pdf"
 pipeline_run: null
 ---
 

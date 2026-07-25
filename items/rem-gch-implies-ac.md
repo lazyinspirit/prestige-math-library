@@ -2,7 +2,7 @@
 id: rem-gch-implies-ac
 kind: remark
 title: "Sierpiński 1947: the generalised continuum hypothesis implies the Axiom of Choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-independence-of-ch-and-gch]
@@ -13,6 +13,10 @@ landmark: false
 short: "GCH is a choice principle in disguise"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -57,11 +61,12 @@ $\mathcal{P}(\mathcal{P}(A))$, to force $A$ into bijection with an ordinal.
   the Axiom of Choice ([[def-axiom-of-choice]]). This is why
   [[rem-independence-of-ch-and-gch]] is stated over ZFC rather than ZF, and why
   [[rem-continuum-hypothesis]] records that GCH implies CH and reaches far
-  beyond it. CH alone is not known to imply the Axiom of Choice: assuming ZF is
-  consistent, ZF + CH does not prove AC. That non-implication is a
-  relative-consistency result, quoted here and not proved in this library, so it
-  carries the same conditional as every other independence claim on this page.
-  The implication AC from GCH is a feature of the generalised form.
+  beyond it. What carries the argument is the *generalised* form: the proof
+  applies the hypothesis to $A$, to $\mathcal{P}(A)$ and to
+  $\mathcal{P}(\mathcal{P}(A))$ for an arbitrary infinite $A$, and the single
+  instance $A = \mathbb{N}$ that is CH gives none of that. This library records
+  no result at all about whether CH alone implies the Axiom of Choice, in either
+  direction, and no page here may assert one.
 
 - **Conditional discipline.** This one statement is not an independence result
   and needs no consistency hypothesis: it is an ordinary implication provable in

@@ -2,7 +2,7 @@
 id: rem-riesz-fischer
 kind: remark
 title: "Riesz-Fischer theorem: completeness of $L^p$"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-dominated-convergence-theorem, rem-holder-minkowski-integral]
@@ -13,6 +13,10 @@ landmark: true
 short: "L^p is complete for 1 <= p <= infinity; L^2 is isomorphic to l^2 through Fourier coefficients"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

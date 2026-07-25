@@ -2,7 +2,7 @@
 id: rem-hahn-banach-hamel-basis-open
 kind: remark
 title: "Does Hahn-Banach yield a Hamel basis for $\\mathbb{R}$ over $\\mathbb{Q}$? (open)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Open in ZF: whether Hahn-Banach implies a Hamel basis for R over Q"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -20,8 +24,12 @@ sources:
       url: "https://www.ams.org/surv/059"
     - title: "P. Larson and S. Shelah, Discontinuous homomorphisms without Hamel bases (arXiv:2606.08384)"
       url: "https://arxiv.org/abs/2606.08384"
-    - title: "A. Karagila, Zornian Functional Analysis, or How I Learned to Stop Worrying and Love the Axiom of Choice (arXiv:2010.15632)"
+    - title: "A. Karagila, Zornian Functional Analysis, or How I Learned to Stop Worrying and Love the Axiom of Choice (arXiv:2010.15632); Theorem 38, Theorem 49 and Corollary 51"
       url: "https://arxiv.org/abs/2010.15632"
+    - title: "S. Shelah, Can you take Solovay's inaccessible away?, Israel Journal of Mathematics 48 (1984) 1-47"
+      url: "https://link.springer.com/article/10.1007/BF02760522"
+    - title: "D. Pincus, The strength of the Hahn-Banach theorem, Victoria Symposium on Nonstandard Analysis, Lecture Notes in Mathematics 369, Springer 1974, 203-248"
+      url: "https://link.springer.com/chapter/10.1007/BFb0066014"
     - title: "Hahn-Banach theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn%E2%80%93Banach_theorem"
 pipeline_run: null
@@ -53,17 +61,27 @@ page depends on the answer.
 **What is known, and what would settle it.** The endpoints are well understood.
 Full choice gives a Hamel basis, since "every vector space has a basis" is
 equivalent to the axiom of choice ([[def-axiom-of-choice]]), the standard proof
-running through Zorn's lemma ([[thm-zorn]]). HB is, if ZF is consistent, strictly
-weaker than choice: the Boolean prime ideal theorem implies it outright
-(Luxemburg), and it does not imply the axiom of choice (Pincus), that
-non-implication being a relative-consistency result and nothing stronger. On the
-same hypothesis HB is nonetheless not a theorem of ZF. It does imply, in ZF, the
-existence of a set of reals that is not Lebesgue measurable, and indeed the
-Banach-Tarski paradox; that implication by itself does not establish the
-unprovability, because a model of ZF + DC in which every set of reals is
-measurable costs an inaccessible cardinal, so the unprovability of HB in ZF is
-quoted here from the models in the references and not read off the implication. A
-Hamel basis for $\mathbb{R}$ over $\mathbb{Q}$ likewise yields a non-measurable
+running through Zorn's lemma ([[thm-zorn]]). In the other direction, **granted
+the consistency of ZF**, HB is not a theorem of ZF + DC. The cheapest route to
+that, and the one this item relies on, does **not** go through Lebesgue measure.
+HB applied to a nonzero element of $\ell^\infty / c_0$ produces a nonzero linear
+functional on that space, and from such a functional one gets a set of reals
+without the Baire property. Shelah (1984) showed that Solovay's inaccessible can
+be dispensed with for the Baire property, so the consistency of ZF alone yields a
+model of ZF + DC in which every set of reals has the Baire property; in that
+model $(\ell^\infty / c_0)^*$ is trivial, so HB fails there. This is worth
+spelling out because the obvious argument is more expensive: HB also implies, in
+ZF, the existence of a non-Lebesgue-measurable set (Foreman and Wehrung, 1991)
+and indeed the Banach-Tarski paradox (Pawlikowski, 1991), but a model of ZF + DC
+in which every set of reals is *measurable* costs an inaccessible cardinal, so
+that route would only give the unprovability of HB relative to a large cardinal.
+
+HB is also, granted Con(ZF), strictly weaker than choice: the Boolean prime ideal
+theorem implies it outright (Luxemburg, 1969), and BPI does not imply the axiom of
+choice (Halpern and Lévy, 1971), so neither does HB. Pincus (1974) proved the
+sharper separation that HB does not imply BPI, refuting the prevailing conjecture
+of the 1960s. All of these are relative-consistency results and nothing stronger.
+A Hamel basis for $\mathbb{R}$ over $\mathbb{Q}$ likewise yields a non-measurable
 set. So the two statements sit strictly between ZF and AC, on those cited results
 and under the consistency of ZF, and the question is how they are ordered with
 respect to each other. Settling it means either deriving a Hamel basis from HB in
@@ -80,9 +98,12 @@ notational variants.
 **A note on the reference.** The form numbers used for these questions in the
 working notes are $52$ for Hahn-Banach, $367$ for a Hamel basis of $\mathbb{R}$
 over $\mathbb{Q}$ and $366$ for a discontinuous additive function, taken from the
-Howard-Rubin numbering. The Consequences of the Axiom of Choice project database
-that hosted the searchable numbering is no longer served, so the numbers could not
-be re-verified online; the book remains the reference.
+Howard-Rubin numbering. **These three numbers are unverified.** The Consequences
+of the Axiom of Choice project database that hosted the searchable numbering, and
+the later mirror of it, both fail to answer as of 2026-07-26, and no other online
+source consulted lists the numbering, so they could not be re-checked; the book
+remains the reference and the numbers should be treated as a pointer into it
+rather than as a verified citation.
 
 **Why it matters here.** This library keeps an explicit ledger of what each result
 costs in choice, and the ledger is supposed to be exact. This entry is a place

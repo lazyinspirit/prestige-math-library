@@ -2,7 +2,7 @@
 id: rem-e-plus-pi-irrationality-open
 kind: remark
 title: "Is $e + \\pi$ irrational? (open)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-transcendence-of-pi]
@@ -13,6 +13,10 @@ landmark: true
 short: "Open: nobody knows whether e + π is irrational"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -20,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Transcendental_number"
     - title: "Schanuel's conjecture (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Schanuel%27s_conjecture"
+    - title: "Gelfond's constant (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Gelfond%27s_constant"
     - title: "Pi (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pi"
 pipeline_run: null
@@ -50,9 +56,14 @@ $$x^2 - (e + \pi)x + e\pi,$$
 
 so if $e + \pi$ and $e\pi$ were both algebraic then $e$ and $\pi$ would be
 algebraic too. Hence **at least one of $e + \pi$ and $e\pi$ is transcendental**,
-and that is essentially the whole of what is known. Note the asymmetry with
-$e^{\pi}$, which **is** known to be transcendental (Gelfond, 1934, via the
-Gelfond-Schneider theorem), while $\pi^{e}$ is not known to be irrational.
+and that is essentially the whole of what is known about this pair. Note the
+asymmetry with $e^{\pi}$, which **is** known to be transcendental (Gelfond, via
+the Gelfond-Schneider theorem of 1934 applied to
+$e^{\pi} = (e^{i\pi})^{-i} = (-1)^{-i}$), and about which much more is known:
+Nesterenko (1996) proved that $\pi$ and $e^{\pi}$ are algebraically independent
+over $\mathbb{Q}$. By contrast $\pi^{e}$ is not known even to be irrational,
+because it is not of the form $\alpha^{\beta}$ with $\alpha, \beta$ algebraic and
+so Gelfond-Schneider says nothing about it.
 
 Schanuel's conjecture, if proved, would settle all of these at once: it implies
 that $e$ and $\pi$ are algebraically independent over $\mathbb{Q}$, and hence that

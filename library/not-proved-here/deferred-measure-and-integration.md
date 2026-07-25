@@ -1,7 +1,7 @@
 ---
 page: deferred-measure-and-integration
 title: "Measure and Integration: Recorded, Not Proved Here"
-status: draft
+status: published
 items: [rem-lebesgue-measure-and-integral, rem-monotone-convergence-theorem,
         rem-fatou-lemma, rem-dominated-convergence-theorem,
         rem-vitali-covering-theorem, rem-mini-vitali-covering-theorem,
@@ -46,9 +46,12 @@ separability for finite $p$ and its failure at $p = \infty$. Fubini-Tonelli with
 its $\sigma$-finiteness hypothesis, together with the two counterexamples that
 show why each hypothesis is there, the diagonal under Lebesgue times counting
 measure and Sierpinski's construction under the continuum hypothesis.
-Non-measurable sets: the Vitali set and the Banach-Tarski paradox, both of which
-need a choice principle strictly beyond ZF + DC, since Solovay's model of ZF + DC
-makes every set of reals measurable. The comparison of the Henstock-Kurzweil
+Non-measurable sets: the Vitali set and the Banach-Tarski paradox, neither of
+which ZF + DC proves, on the hypothesis that ZFC together with an inaccessible
+cardinal is consistent, since on that hypothesis Solovay's model of ZF + DC makes
+every set of reals measurable. The inaccessible is part of the claim: it is what
+Solovay's construction consumes, and Shelah showed it cannot be dropped for the
+measurability half. The comparison of the Henstock-Kurzweil
 integral with the Lebesgue integral. Kolmogorov's everywhere divergent Fourier
 series of an $L^1$ function, with du Bois-Reymond's continuous example beside it.
 The Riesz-Markov-Kakutani representation theorem. And the genuinely
@@ -89,6 +92,11 @@ thing: proving a statement whose proof needs a measure, before a measure exists.
 **How these items will be discharged.** When the measure track is built as its
 own category to the same standard, each item here is replaced by a proof-bearing
 one, the remark's id is kept as an alias if the statement moves, and the entry is
-deleted from the deferral list. Two items on this page are already flagged as
-likely candidates for early undeferral, since their proofs may fit inside the
-elementary covering theory the library already has.
+deleted from the deferral list. Two items on this page carry an explicit
+candidate-for-undeferral note, the semicontinuous function equal almost
+everywhere to no Riemann integrable function and the null set that is no
+function's discontinuity set, since their proofs may fit inside the elementary
+covering and Baire theory the library already has. A third, du Bois-Reymond's
+continuous function with a divergent Fourier series, is recorded as probably
+reachable here by the uniform boundedness route once normed spaces exist, and is
+waiting on a page rather than on a theory.

@@ -2,7 +2,7 @@
 id: rem-du-bois-reymond-divergent-fourier
 kind: remark
 title: "du Bois-Reymond: a continuous function whose Fourier series diverges at a point"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Continuity does not imply pointwise convergence of the Fourier series"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -31,7 +35,7 @@ whose Fourier series diverges at a point: writing
 $$S_N f(x) = \sum_{|n| \le N} \hat{f}(n) e^{inx}, \qquad \hat{f}(n) = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-int} \, dt,$$
 
 there is $x_0$ with $\limsup_{N} |S_N f(x_0)| = +\infty$. du Bois-Reymond gave
-the first such example in 1876. The set of points of divergence can be taken to
+the first such example in 1873. The set of points of divergence can be taken to
 be any prescribed set of measure zero, and by Carleson's theorem it can be no
 larger than that: the Fourier series of a continuous, indeed of any $L^2$,
 function converges almost everywhere.
@@ -60,6 +64,14 @@ results live: Fejer's theorem gives uniform convergence of the Cesaro means for
 every continuous function, and Weierstrass approximation follows. The correct
 reading of the pair is that summability, not convergence, is the right notion
 for continuous functions.
+
+**Attribution.** The first published proof is du Bois-Reymond, *Ueber die
+Fourierschen Reihen*, Nachr. Kon. Ges. Wiss. Gottingen **21** (1873), 571-582,
+which is the paper the cited Wikipedia article names as the first proof that the
+Fourier series of a continuous function can diverge. The extended treatment is
+his 1876 Munich memoir, and 1876 is quoted for the result by part of the
+literature; the earlier date is used here because it is the date of the first
+publication.
 
 **Contrast.** This is the continuous, pointwise, Baire-reachable failure. The
 $L^1$ failure recorded in [[rem-kolmogorov-divergent-fourier]] is of a different

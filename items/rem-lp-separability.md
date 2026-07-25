@@ -2,7 +2,7 @@
 id: rem-lp-separability
 kind: remark
 title: "Separability of $L^p$ for finite $p$, and the failure at $p = \\infty$"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-riesz-fischer]
@@ -13,6 +13,10 @@ landmark: false
 short: "L^p is separable for finite p over a countably generated measure; L^infinity is not"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -59,9 +63,13 @@ available.
 and where $\mathbb{R}^n$ and $C[a,b]$ are shown separable, and the countability
 page, which supplies the notion of countable. The pair of statements above is the
 standard first example of a natural Banach space that is not separable, and it is
-also why $L^{\infty}$ behaves differently from every $L^p$ with $p$ finite: it is
-not the dual of anything familiar, it is not separable, and its unit ball has no
-countable dense subset to run approximation arguments on.
+also why $L^{\infty}$ behaves differently from every $L^p$ with $p$ finite. It is
+not separable, so it has no countable dense subset to run approximation arguments
+on, and the duality stops at it. For $\sigma$-finite $\mu$ the space
+$L^{\infty}(\mu)$ is itself the dual of $L^{1}(\mu)$; what has no counterpart is
+the return trip, since the dual of $L^{\infty}(\mu)$ is not $L^{1}(\mu)$ but a
+space of bounded finitely additive set functions. So the identification
+$L^{p}(\mu)^{*} = L^{q}(\mu)$ that holds for $1 < p < \infty$ stops here.
 
 **Hypotheses worth stating carefully.** Separability of $L^p$ is a property of
 the measure space and not of $p$ alone: $L^{p}(\mu)$ for the counting measure on

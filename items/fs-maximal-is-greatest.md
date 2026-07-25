@@ -61,23 +61,8 @@ is the standard way to misapply it.
 
 ## Remarks
 
-- The counterexample is as small as it can be. The empty poset has no maximal
-  element and satisfies the claim vacuously; a one-element poset satisfies it
-  outright, since its single element is maximal and is greatest by reflexivity.
-  So two elements is the minimum, and the antichain above achieves it.
-- **Incomparability alone is not what refutes the claim.** A poset can contain
-  incomparable elements and still have a greatest one: take
-  $P = \{a, b, c\}$ with $a < c$ and $b < c$ and nothing else, where $a$ and $b$
-  are incomparable while $c$ is above everything. What a refutation needs is a
-  maximal element that is not greatest, which is a strictly stronger demand than
-  the presence of an incomparable pair.
-- The same phenomenon at scale: ordering the proper subsets of a set by
-  inclusion, every subset missing exactly one point is maximal, and when the set
-  has at least two points there are several such subsets and no greatest one.
-- **Why this matters for Zorn.** [[thm-zorn]] concludes that a maximal element
-  exists. Applications must therefore be arranged so that maximality alone is
-  decisive, typically by making "nothing is strictly above it" mean "it cannot be
-  extended". Reading the conclusion as "there is a greatest element" is not a
-  harmless slip: it is a strictly stronger claim that the lemma does not support.
-- A greatest element, when one exists, **is** maximal and is unique. Only the
-  converse fails.
+- The counterexample is as small as it can be. The empty poset has no maximal element and satisfies the claim vacuously; a one-element poset satisfies it outright, since its single element is maximal and is greatest by reflexivity. So two elements is the minimum, and the antichain above achieves it.
+- **Incomparability alone is not what refutes the claim.** A poset can contain incomparable elements and still have a greatest one: take $P = \{a, b, c\}$ with $a < c$ and $b < c$ and nothing else, where $a$ and $b$ are incomparable while $c$ is above everything. What a refutation needs is a maximal element that is not greatest, which is a strictly stronger demand than the presence of an incomparable pair.
+- The same phenomenon at scale: ordering the proper subsets of a set by inclusion, every subset missing exactly one point is maximal, and when the set has at least two points there are several such subsets and no greatest one.
+- **Why this matters for Zorn.** [[thm-zorn]] concludes that a maximal element exists. Applications must therefore be arranged so that maximality alone is decisive, typically by making "nothing is strictly above it" mean "it cannot be extended". Reading the conclusion as "there is a greatest element" is not a harmless slip: it is a strictly stronger claim that the lemma does not support.
+- A greatest element, when one exists, **is** maximal and is unique. Only the converse fails.

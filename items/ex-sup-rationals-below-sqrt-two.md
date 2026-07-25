@@ -15,10 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -111,4 +107,4 @@ and once by Cauchy sequences.
 
 - The set $S$ is bounded above in $\mathbb{Q}$, by $2$, as step 1.5 checks. Both hypotheses of the least-upper-bound property are therefore satisfied *inside* $\mathbb{Q}$, and the conclusion still fails. The property is a genuine assumption about the field, not a consequence of the order axioms alone.
 - The proof of leastness uses density twice, once to find an element of $S$ close below $\sqrt{2}$ and once to squeeze a rational between $\sqrt{2}$ and a putative rational least upper bound. Both uses go through [[lem-of-q-dense]], which is itself a consequence of the Archimedean property ([[thm-of-archimedean]]).
-- The same argument runs with $2$ replaced by any positive rational $c$ that is not the square of a rational, once its two numerical steps are readjusted: step 1.2 must exhibit a positive rational whose square lies below $c$, and step 1.5 a positive rational whose square lies above it, neither of which is the constant $1$ or $2$ in general. Everything after those two steps is unchanged, so the failure is pervasive rather than a curiosity attached to $\sqrt{2}$.
+- The same argument runs with $2$ replaced by any positive rational $c$ that is not the square of a rational, once its two numerical steps are readjusted: step 1.2 must exhibit a positive rational whose square lies below $c$, and step 1.5 a positive rational whose square lies above it, neither of which is the constant $1$ or $2$ in general. Both exist for every positive rational $c$, and uniformly, so nothing here depends on $c$ being convenient: take $p := c/(1+c)$ and $w := 1 + c$, both positive rationals. Then $p^2 < c$, since $p^2 < c$ is equivalent to $c^2 < c(1+c)^2$ and hence, dividing by $c > 0$, to $c < (1+c)^2 = 1 + 2c + c^2$, which holds because $1 + c + c^2 > 0$; and $w^2 = 1 + 2c + c^2 > c$ for the same reason. Everything after those two steps is unchanged, so the failure is pervasive rather than a curiosity attached to $\sqrt{2}$.

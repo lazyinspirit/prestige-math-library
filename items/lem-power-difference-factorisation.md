@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -55,7 +51,7 @@ exist.
 
 [L4] Monotonicity of powers ([[lem-power-monotone]]): $0 \le x \le y$ implies $0 \le x^j \le y^j$.
 
-[L5] Multiplying inequalities of nonnegatives: $0 \le x \le y$ and $0 \le u \le v$ imply $xu \le yv$; and $u \ge v$ with $c \ge 0$ implies $uc \ge vc$ ([[prop-of-multiply-inequalities]], [[lem-of-sign-rules]]).
+[L5] Multiplying inequalities of nonnegatives: $0 \le x \le y$ and $0 \le u \le v$ imply $xu \le yv$. [[prop-of-multiply-inequalities]] states exactly this nonstrict form, alongside the strict one, and it is the only product-of-inequalities move used below. Two instances occur: in step 1.3 with the four nonnegatives $a^k \le M^k$ and $b^{\,n-1-k} \le M^{\,n-1-k}$, and in step 4.1 with $0 \le \sum_{k<n} a^k b^{\,n-1-k} \le nM^{\,n-1}$ and $0 \le b - a \le b - a$, which yields $\big(\sum_{k<n} a^k b^{\,n-1-k}\big)(b-a) \le nM^{\,n-1}(b-a)$. No instance with a possibly negative factor and no strict instance is needed, so the multiplicative order claims of [[lem-of-sign-rules]], which are strict and require a nonzero multiplier, are not what carries either move.
 
 ## Proof
 
@@ -77,4 +73,4 @@ exist.
 
 3.1 Comparing the two evaluations gives $a^n - b^n = (a - b)\sum_{k<n} a^k b^{\,n-1-k}$, and multiplying both sides by $-1$ gives the stated factorisation $b^n - a^n = (b-a)\sum_{k=0}^{n-1} a^k b^{\,n-1-k}$. [step 2.1, step 2.2, algebra]
 
-4.1 Multiplying the inequality of step 2.3 by the nonnegative factor $b - a$ and substituting into the factorisation gives $b^n - a^n = (b-a)\sum_{k<n} a^k b^{\,n-1-k} \le n M^{\,n-1}(b-a)$, which together with $b^n - a^n \ge 0$ is the Lipschitz estimate. [step 3.1, step 1.4, step 2.3, L5] ∎
+4.1 Multiplying the inequality of step 2.3 by the nonnegative factor $b - a$ and substituting into the factorisation gives $b^n - a^n = (b-a)\sum_{k<n} a^k b^{\,n-1-k} \le n M^{\,n-1}(b-a)$; the multiplication is the instance of [L5] with $0 \le \sum_{k<n} a^k b^{\,n-1-k} \le nM^{\,n-1}$ and $0 \le b-a \le b-a$, the left-hand nonnegativity holding because every term is nonnegative by step 1.3 and finite sums are monotone. Together with $b^n - a^n \ge 0$ this is the Lipschitz estimate. [step 3.1, step 1.3, step 1.4, step 2.3, L2, L5] ∎

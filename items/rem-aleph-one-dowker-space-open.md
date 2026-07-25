@@ -2,7 +2,7 @@
 id: rem-aleph-one-dowker-space-open
 kind: remark
 title: "Is there a Dowker space of cardinality $\\aleph_1$ in ZFC? (open)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Open: ZFC gives Dowker spaces, but none of size aleph_1 is known"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -20,8 +24,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dowker_space"
     - title: "Z. Balogh, A small Dowker space in ZFC, Proceedings of the AMS 124 (1996) 2555-2560"
       url: "https://www.ams.org/journals/proc/1996-124-08/S0002-9939-96-03610-6/"
-    - title: "M. Kojman and S. Shelah, A ZFC Dowker space in aleph_{omega+1}: an application of pcf theory to topology (arXiv:math/9512202)"
+    - title: "M. Kojman and S. Shelah, A ZFC Dowker space in aleph_{omega+1}: an application of pcf theory to topology, Proceedings of the AMS 126 (1998) 2459-2465 (arXiv:math/9512202)"
       url: "https://arxiv.org/abs/math/9512202"
+    - title: "A. Rinot, R. Shalev and S. Todorcevic, A new small Dowker space (arXiv:2209.10504); introduction, for the three ZFC constructions and for Rudin's Conjecture 4 remaining open"
+      url: "https://arxiv.org/abs/2209.10504"
 pipeline_run: null
 ---
 
@@ -35,13 +41,17 @@ preserved by so much as multiplying with the unit interval.
 **Question.** Does ZFC prove that a Dowker space of cardinality $\aleph_1$
 exists?
 
-**Status: open.** Dowker spaces themselves exist in ZFC: M. E. Rudin constructed
-one in 1971, of cardinality $\aleph_\omega^{\aleph_0}$. Small ones exist under
-extra axioms: a Dowker space of cardinality $\aleph_1$ can be built under the
-continuum hypothesis (Juhász, Kunen and Rudin) and under $\diamondsuit$ (de Caux).
-Whether ZFC alone suffices is not known. The best ZFC upper bounds are Balogh
-(1996), who produced one of cardinality the continuum, and Kojman and Shelah
-(1998), who produced one of cardinality $\aleph_{\omega+1}$ using pcf theory.
+**Status: open.** Dowker spaces themselves exist in ZFC, but only three
+constructions are known: M. E. Rudin's of 1971, of cardinality
+$\aleph_\omega^{\aleph_0}$; Balogh's of 1996, of cardinality the continuum; and
+the Kojman-Shelah space of 1998, of cardinality $\aleph_{\omega+1}$, obtained
+from pcf theory as a subspace of Rudin's. Small ones exist under extra axioms: a
+Dowker space of cardinality $\aleph_1$ can be built under the continuum
+hypothesis (Juhász, Kunen and Rudin, 1976), from the existence of a Luzin set
+(Todorcevic), and from the guessing principle $\clubsuit$ (de Caux, 1977; note
+$\diamondsuit$ implies $\clubsuit$, so it suffices too). Whether ZFC alone
+suffices is not known; this is Conjecture 4 of Rudin's 1990 problem list, and it
+is still open.
 
 ## Remarks
 
@@ -54,11 +64,13 @@ tracks are deferred.
 construction of a Dowker space of size $\aleph_1$, or a model of ZFC containing no
 such space. The consistency of the negative side is what the extra-axiom
 constructions do *not* rule out, and it is why the question is genuinely open
-rather than merely unresolved by the current constructions. A closely related and
-harder open problem is whether there is a Dowker space with a $\sigma$-disjoint
-base, for which not even a consistent example is known. Note the difference in
-status from the ambient theory: that a ZFC Dowker space exists at all was settled
-in 1971, and the open part is entirely about how small it can be forced to be.
+rather than merely unresolved by the current constructions. Work since has gone
+on widening the hypotheses that suffice rather than removing them: Rinot, Shalev
+and Todorcevic derive the relevant guessing principle at $\aleph_1$ from the
+stick principle, from $\diamondsuit(\mathfrak{b})$, and from the existence of a
+Luzin set. Note the difference in status from the ambient theory: that a ZFC
+Dowker space exists at all was settled in 1971, and the open part is entirely
+about how small it can be forced to be.
 
 **Why it matters here.** The library's separation-axiom material has to record
 that normality is badly behaved: not hereditary, not productive, and not even

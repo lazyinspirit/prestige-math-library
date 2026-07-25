@@ -2,7 +2,7 @@
 id: rem-semicontinuous-not-ae-riemann
 kind: remark
 title: "A bounded semicontinuous function equal almost everywhere to no Riemann integrable function"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "The indicator of a fat Cantor set: upper semicontinuous, and no a.e. modification is Riemann integrable"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

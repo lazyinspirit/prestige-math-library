@@ -2,7 +2,7 @@
 id: rem-holder-minkowski-integral
 kind: remark
 title: "Holder and Minkowski inequalities in integral form"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "The integral versions of the two inequalities that make the L^p norms norms"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

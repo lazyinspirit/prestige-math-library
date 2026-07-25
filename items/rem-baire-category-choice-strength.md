@@ -2,7 +2,7 @@
 id: rem-baire-category-choice-strength
 kind: remark
 title: "The Baire category theorem is four inequivalent statements over ZF"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: true
 short: "complete metric BCT is equivalent to DC"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,8 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Baire_category_theorem"
     - title: "J. Fossy and M. Morillon, The Baire category property and some notions of compactness, J. London Math. Soc. 57 (1998), 1-19"
       url: "https://www.cambridge.org/core/journals/journal-of-the-london-mathematical-society/article/abs/baire-category-property-and-some-notions-of-compactness/5C6265B552C8D43D21F16C60802D6109"
-    - title: "A. Blass, Injectivity, projectivity, and the axiom of choice, Trans. Amer. Math. Soc. 255 (1979), 31-59"
+    - title: "A. Blass, Injectivity, projectivity, and the axiom of choice, Trans. Amer. Math. Soc. 255 (1979), 31-59 (Section 7: DMC, 'every tree has a subtree whose levels are finite')"
       url: "https://doi.org/10.1090/S0002-9947-1979-0542870-6"
+    - title: "E. Tachtsis, The Urysohn Lemma is independent of ZF + Countable Choice, Proc. Amer. Math. Soc. 147 (2019), 4029-4038 (introduction: DMC is strictly weaker than each of DC and MC)"
+      url: "https://doi.org/10.1090/proc/14590"
 pipeline_run: null
 ---
 
@@ -47,15 +53,24 @@ levels are finite", introduced by Blass (1979) and known as **dependent multiple
 choice (DMC)**. The equivalence is Fossy and Morillon (1998).
 
 **Separating them.** DMC is strictly weaker than each of DC and the axiom of
-multiple choice, and DC and DMC are not equivalent, so BCT-metric and
-BCT-compact-Hausdorff are genuinely different assumptions. The Boolean prime
-ideal theorem does not imply DMC, so BPI does not give BCT-compact-Hausdorff
-either.
+multiple choice, in ZF and in ZFA alike, so BCT-metric and BCT-compact-Hausdorff
+are genuinely different assumptions. The Boolean prime ideal theorem does not
+imply DMC either, and so does not give BCT-compact-Hausdorff. The ground for that
+last point is recorded elsewhere on this page: DMC implies Urysohn's lemma
+(Blass 1979) while BPI does not (Brunner 1983, in the Mostowski linearly ordered
+model). The same pair shows DMC is not itself a theorem of ZF, since Urysohn's
+lemma is not.
 
 **If ZF is consistent**, none of these principles is a theorem of ZF except
 BCT-separable, and the non-implications listed are witnessed by models.
 
 ## Remarks
+
+- **Where the DMC separations are recorded.** The two facts about DMC used in
+  "Separating them" are the ones stated in
+  [[rem-urysohn-lemma-not-a-zf-theorem]]: Blass's implication from DMC to
+  Urysohn's lemma, and Brunner's model in which BPI holds and Urysohn's lemma
+  fails.
 
 - **Not proved in this library.** No direction of any of these equivalences is
   proved here, and the models witnessing the non-implications are symmetric

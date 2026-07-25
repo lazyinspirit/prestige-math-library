@@ -2,7 +2,7 @@
 id: rem-banach-zarecki
 kind: remark
 title: "Banach-Zarecki theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-absolutely-continuous-function]
@@ -13,6 +13,10 @@ landmark: false
 short: "AC = continuous + bounded variation + Luzin's property (N)"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

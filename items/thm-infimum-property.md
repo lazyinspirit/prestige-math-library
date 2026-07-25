@@ -78,14 +78,6 @@ consequence of the least-upper-bound property.
 
 ## Remarks
 
-- The theorem is not a restatement of the least-upper-bound property: it is
-  proved from it, by transporting the problem across the order-reversing
-  bijection $x \mapsto -x$ of [[lem-reflection]]. Nothing about $\mathbb{R}$
-  beyond the complete-ordered-field axioms is used.
-- The hypotheses are both needed. The empty set is bounded below by every real
-  and has no greatest lower bound, and a set unbounded below has no lower bound
-  at all; the dual failures for suprema are recorded in
-  [[fs-every-set-has-sup]].
-- The identity $\inf S = -\sup(-S)$ is the standard device for turning any
-  statement about suprema into its dual; [[lem-inf-epsilon]] is the first
-  application on this page.
+- The theorem is not a restatement of the least-upper-bound property: it is proved from it, by transporting the problem across the order-reversing bijection $x \mapsto -x$ of [[lem-reflection]]. Nothing about $\mathbb{R}$ beyond the complete-ordered-field axioms is used.
+- The hypotheses are both needed. The empty set is bounded below by every real and has no greatest lower bound, and a set unbounded below has no lower bound at all; the dual failures for suprema are recorded in [[fs-every-set-has-sup]].
+- The identity $\inf S = -\sup(-S)$ is the standard device for turning any statement about suprema into its dual; [[lem-inf-epsilon]] is the first application on this page.

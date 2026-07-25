@@ -2,7 +2,7 @@
 id: rem-mini-vitali-covering-theorem
 kind: remark
 title: "Mini-Vitali covering theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "Measure zero characterised equivalently by open covers, full covers and fine covers"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

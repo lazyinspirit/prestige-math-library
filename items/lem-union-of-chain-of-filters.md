@@ -73,16 +73,6 @@ it is not a filter.
 
 ## Remarks
 
-- **Nonemptiness is used exactly once**, at step 1.1, and only for the axiom
-  $X \in \bigcup \mathcal{D}$. The other three axioms hold vacuously for the empty
-  chain, which is precisely why the failure is easy to overlook: three of the four
-  checks go through and the one that does not is the one nobody writes out.
-- This is the chain-bound half of the hypothesis of Zorn's lemma ([[thm-zorn]]),
-  and the empty chain is the other half. In [[thm-ultrafilter-lemma]] the empty
-  chain is bounded not by this lemma but by the given filter $\mathcal{F}_0$,
-  which is why that proof must treat the two cases separately.
-- Unions of chains are used rather than unions of arbitrary families because an
-  arbitrary union of filters is almost never a filter: for $x \neq y$ the union of
-  the principal filters at $x$ and at $y$ contains $\{x\}$ and $\{y\}$ but not
-  $\emptyset = \{x\} \cap \{y\}$, so it is not closed under intersection.
-  Comparability at step 1.5 is what repairs this.
+- **Nonemptiness is used exactly once**, at step 1.1, and only for the axiom $X \in \bigcup \mathcal{D}$. The other three axioms hold vacuously for the empty chain, which is precisely why the failure is easy to overlook: three of the four checks go through and the one that does not is the one nobody writes out.
+- This is the chain-bound half of the hypothesis of Zorn's lemma ([[thm-zorn]]), and the empty chain is the other half. In [[thm-ultrafilter-lemma]] the empty chain is bounded not by this lemma but by the given filter $\mathcal{F}_0$, which is why that proof must treat the two cases separately.
+- Unions of chains are used rather than unions of arbitrary families because an arbitrary union of filters is almost never a filter: for $x \neq y$ the union of the principal filters at $x$ and at $y$ contains $\{x\}$ and $\{y\}$ but not $\emptyset = \{x\} \cap \{y\}$, so it is not closed under intersection. Comparability at step 1.5 is what repairs this.

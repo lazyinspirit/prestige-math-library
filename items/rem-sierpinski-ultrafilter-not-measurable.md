@@ -2,7 +2,7 @@
 id: rem-sierpinski-ultrafilter-not-measurable
 kind: remark
 title: "Sierpiński 1938: no free ultrafilter on $\\mathbb{N}$ is measurable or has the Baire property"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "a free ultrafilter on $\\mathbb{N}$ is non-measurable and lacks the Baire property"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

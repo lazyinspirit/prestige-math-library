@@ -100,23 +100,8 @@ alone. Nothing below uses ordinals or any later material.
 
 ## Remarks
 
-- Nothing here is circular. The order used throughout is the additive one of
-  [[def-nat-order]], and every fact quoted about it, linearity
-  ([[thm-nat-linear-order]]), trichotomy ([[lem-nat-trichotomy]]) and
-  discreteness ([[lem-nat-discrete]]), is proved on the naturals page from
-  addition and induction, with no appeal to membership. The two set-theoretic
-  inputs, that each $n$ is transitive with $n \notin n$
-  ([[lem-nat-transitive-irreflexive]]), are likewise proved there by induction on
-  the von Neumann encoding alone.
+- Nothing here is circular. The order used throughout is the additive one of [[def-nat-order]], and every fact quoted about it, linearity ([[thm-nat-linear-order]]), trichotomy ([[lem-nat-trichotomy]]) and discreteness ([[lem-nat-discrete]]), is proved on the naturals page from addition and induction, with no appeal to membership. The two set-theoretic inputs, that each $n$ is transitive with $n \notin n$ ([[lem-nat-transitive-irreflexive]]), are likewise proved there by induction on the von Neumann encoding alone.
 
-- Step 5.2 is where irreflexivity of membership does real work: without $n \notin n$
-  the inclusion $m \subseteq n$ would not exclude $n < m$.
+- Step 5.2 is where irreflexivity of membership does real work: without $n \notin n$ the inclusion $m \subseteq n$ would not exclude $n < m$.
 
-- **The duplication with the ordinals page is deliberate.** There, membership is
-  made the order by fiat: [[def-ordinal]] *defines* $\alpha < \beta$ to mean
-  $\alpha \in \beta$, and [[lem-omega-least-limit-ordinal]] then re-derives claim
-  1 while identifying $\mathbb{N}$ with the ordinals below $\omega$. That page
-  comes far later in the library, so nothing here may cite it without
-  circularity, and building the ordinals would be a very expensive way to obtain
-  a fact this page needs only for the naturals. The two proofs are independent
-  and agree.
+- **The duplication with the ordinals page is deliberate.** There, membership is made the order by fiat: [[def-ordinal]] *defines* $\alpha < \beta$ to mean $\alpha \in \beta$, and [[lem-omega-least-limit-ordinal]] then re-derives claim 1 while identifying $\mathbb{N}$ with the ordinals below $\omega$. That page comes far later in the library, so nothing here may cite it without circularity, and building the ordinals would be a very expensive way to obtain a fact this page needs only for the naturals. The two proofs are independent and agree.

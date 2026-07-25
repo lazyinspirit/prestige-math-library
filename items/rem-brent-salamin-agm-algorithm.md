@@ -2,7 +2,7 @@
 id: rem-brent-salamin-agm-algorithm
 kind: remark
 title: "The Gauss-Legendre (Brent-Salamin) AGM algorithm for $\\pi$"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Quadratically convergent AGM iteration for π; proved 1976, rests on elliptic integrals"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -70,9 +74,15 @@ library does not yet have.
 
 **Why it matters here.** This library defines $\pi$ analytically and will prove
 the elementary series and product formulas for it, including the Leibniz series
-and the Machin-type arctangent formulas. Every one of those converges *linearly*:
-each additional digit costs a bounded amount of extra work per digit. The AGM
-algorithm converges quadratically and is the reason the record computations of the
+and the Machin-type arctangent formulas. None of those converges as fast as the
+AGM iteration, and they do not even all converge at the same rate as each other.
+The Machin-type arctangent series converge *linearly*: the error falls by a fixed
+factor per term, so each further digit costs a bounded number of extra terms. The
+Leibniz series is worse than linear, and it is worth being exact about how much:
+its partial sums have error of order $1/n$, so each further decimal digit
+multiplies the number of terms by about ten and a hundred digits are already out
+of reach. The AGM algorithm converges quadratically, doubling the number of
+correct digits per step, and it is the reason the record computations of the
 1980s and 1990s were feasible at all. Recording it prevents the $\pi$ pages from
 leaving the impression that the formulas they can prove are the ones that are
 actually used.

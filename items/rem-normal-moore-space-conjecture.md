@@ -2,7 +2,7 @@
 id: rem-normal-moore-space-conjecture
 kind: remark
 title: "The normal Moore space conjecture is independent, and its consistency needs a large cardinal"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-martins-axiom]
@@ -13,6 +13,10 @@ landmark: false
 short: "PMEA gives it; CH refutes it; large cardinals are necessary"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

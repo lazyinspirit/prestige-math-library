@@ -152,7 +152,26 @@ verification:
     # substitute for a judge verdict; and `certify` here is a model's opinion,
     # never the publish gate. Only `audited` is the gate, and only the owner
     # sets it.
+  sources_checked:                   # ONLY on `proved_here: false` items, where it
+    date: 2026-07-26                 #   REPLACES `audited` as the publish gate.
+    scope: citations                 #   what was actually checked
+    by: session-audit                #   who/what performed it
+    # Added 2026-07-26 (owner). These items have NO PROOF, so `audited` -- an audit
+    # OF A PROOF -- cannot be what verifies them, and `judge` is forbidden outright
+    # (tools/extcheck.mjs `unproved-judged`: there is no proof to judge). What CAN be
+    # checked is the thing they actually assert: that the statement of the external
+    # result is correct, that the attribution and year are right, that the cited
+    # source resolves and contains the claim, and that the item is consistent with
+    # the rest of the library. That is what this block records.
+    #
+    # It is a SEPARATE field on purpose. Writing this under `audited` would make one
+    # field mean "the owner checked a proof" on 137 items and "someone checked a
+    # citation" on 64 others, which is exactly the kind of quiet equivocation this
+    # schema exists to prevent. A reader is told the difference too: these items
+    # carry the fuchsia recorded-not-proved marking, never a judge or audited chip.
   audited: 2026-07-25                # owner/Fable audit date; REQUIRED for published
+                                     #   UNLESS `proved_here: false`, which uses
+                                     #   `sources_checked` above instead.
 sources:
   scraped: []                        # [{url, title, license}] — extraction sources
   references:                        # standard references (NOT scraped; labeled so)

@@ -2,7 +2,7 @@
 id: rem-hahn-banach-discontinuous-additive-open
 kind: remark
 title: "Does Hahn-Banach yield a discontinuous additive $f : \\mathbb{R} \\to \\mathbb{R}$? (open)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Open in ZF: whether Hahn-Banach implies a discontinuous solution of Cauchy's functional equation"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -22,8 +26,10 @@ sources:
       url: "https://arxiv.org/abs/2606.08384"
     - title: "Cauchy's functional equation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
-    - title: "A. Karagila, Zornian Functional Analysis, or How I Learned to Stop Worrying and Love the Axiom of Choice (arXiv:2010.15632)"
+    - title: "A. Karagila, Zornian Functional Analysis, or How I Learned to Stop Worrying and Love the Axiom of Choice (arXiv:2010.15632); Theorem 23, Theorem 27 and Theorem 38"
       url: "https://arxiv.org/abs/2010.15632"
+    - title: "S. Shelah, Can you take Solovay's inaccessible away?, Israel Journal of Mathematics 48 (1984) 1-47"
+      url: "https://link.springer.com/article/10.1007/BF02760522"
 pipeline_run: null
 ---
 
@@ -54,22 +60,28 @@ on some interval are all the same condition, so a discontinuous additive functio
 is an extremely wild object: its graph is dense in the plane. The axiom of choice
 ([[def-axiom-of-choice]]) produces one immediately from a Hamel basis for
 $\mathbb{R}$ over $\mathbb{Q}$, by choosing a $\mathbb{Q}$-linear map that is not
-$\mathbb{R}$-linear. In the other direction, ZF alone cannot produce one: in
-Solovay's model, and in Shelah's strengthening that removes the inaccessible
-cardinal, every set of reals has the Baire property, and then every additive
-$f : \mathbb{R} \to \mathbb{R}$ is continuous. So the statement sits strictly
-between ZF and AC, exactly as HB does, and the question is again how the two are
-ordered. Settling it means a ZF derivation from HB, or a model of ZF with HB and
-no discontinuous additive function.
+$\mathbb{R}$-linear. In the other direction, **granted the consistency of ZF**,
+ZF + DC cannot produce one: in Solovay's model, and in Shelah's 1984
+strengthening that removes the inaccessible cardinal, every set of reals has the
+Baire property, and then every additive $f : \mathbb{R} \to \mathbb{R}$ is
+continuous. Shelah's version is what makes the consistency hypothesis just
+Con(ZF): Solovay's model on its own would need an inaccessible. So the statement
+sits strictly between ZF and AC, exactly as HB does, and the question is again
+how the two are ordered. Settling it means a ZF derivation from HB, or a model of
+ZF with HB and no discontinuous additive function.
 
 Two nearby results sharpen what is at stake. Larson and Shelah (2026) build a
 model of ZF + DC with a discontinuous additive endomorphism of $\mathbb{R}$ but no
 Hamel basis for $\mathbb{R}$, so this consequence is strictly weaker than the
 Hamel basis in that setting and the two open questions are genuinely distinct. And
-on an infinite-dimensional *Banach* space, the existence of a discontinuous linear
-functional is equivalent to the full axiom of choice, whereas the discontinuous
-additive function asked about here is only $\mathbb{Q}$-linear, which is what
-leaves room for it to be cheaper.
+the $\mathbb{R}$-linear analogue is at least as expensive: in the same
+ZF + DC model in which every set of reals has the Baire property, every linear
+functional on a Banach space is continuous, so the existence of a discontinuous
+*linear* functional on an infinite-dimensional Banach space is itself not
+provable in ZF + DC. It follows from the axiom of choice, but it is not known to
+this library's sources to be equivalent to it, and nothing here claims that it
+is. The function asked about above is only $\mathbb{Q}$-linear, which is what
+leaves room for it to be cheaper than either.
 
 **Why it matters here.** A discontinuous additive function is the smallest and
 most-cited pathology in real analysis whose existence is not a theorem of ZF. Any

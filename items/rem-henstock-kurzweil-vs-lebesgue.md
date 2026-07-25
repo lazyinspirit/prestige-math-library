@@ -2,7 +2,7 @@
 id: rem-henstock-kurzweil-vs-lebesgue
 kind: remark
 title: "Henstock-Kurzweil versus Lebesgue: $f$ is Lebesgue integrable iff $f$ and $|f|$ are both HK integrable"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "HK is a non-absolute integral; adding absolute integrability of |f| recovers exactly L^1"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

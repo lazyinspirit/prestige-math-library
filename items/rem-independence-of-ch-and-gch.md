@@ -2,7 +2,7 @@
 id: rem-independence-of-ch-and-gch
 kind: remark
 title: "The continuum hypothesis and its generalisation are independent of ZFC"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
@@ -13,6 +13,10 @@ landmark: true
 short: "Con(ZFC) implies Con(ZFC + CH) and Con(ZFC + not CH)"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

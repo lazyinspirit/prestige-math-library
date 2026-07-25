@@ -4,7 +4,7 @@ kind: theorem
 title: "Uniqueness of the complete ordered field: $\\mathbb{R}$ up to a unique isomorphism"
 status: published
 origin: session
-deps: [def-complete-ordered-field, thm-of-archimedean, lem-of-q-embeds, lem-of-q-dense, lem-of-hom-fixes-q, lem-of-hom-order-preserving, thm-of-square-roots, def-ordered-field-isomorphism, def-field-homomorphism, lem-of-add-order, lem-of-sign-rules]
+deps: [def-complete-ordered-field, def-ordered-field, thm-of-archimedean, lem-of-q-embeds, lem-of-q-dense, lem-of-hom-fixes-q, lem-of-hom-order-preserving, thm-of-square-roots, def-ordered-field-isomorphism, def-field-homomorphism, lem-of-add-order, lem-of-sign-rules]
 aliases: []
 landmark: true
 short: "ℝ unique up to unique iso"
@@ -20,10 +20,6 @@ sources:
       url: "https://bookstore.ams.org/chel-79"
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
   audited: 2026-07-25
 pipeline_run: null
 ---
@@ -55,7 +51,7 @@ and it admits $\mathbb{Q}$ as an ordered subfield via $\iota_F$.
 
 [L7] An ordered-field isomorphism is a bijective field homomorphism order-preserving in both directions; a field homomorphism preserves $+$, $\cdot$, and $1$ ([[def-ordered-field-isomorphism]], [[def-field-homomorphism]]).
 
-[L8] Least-upper-bound calculus in $G$: for nonempty $T \subseteq G$ bounded above with $u = \sup T$, any upper bound $w$ of $T$ satisfies $w \ge u$; and since translation $z \mapsto z + c$ and, for $c > 0$, scaling $z \mapsto cz$ are order-preserving ([[lem-of-add-order]], [[lem-of-sign-rules]]), from $\,\alpha \ge \iota_G(q) + c$ for all $q$ with $\iota_F(q) < x$ one gets $\alpha \ge \varphi(x) + c$, and from $\,\alpha \ge \iota_G(q)\,c$ (with $c > 0$) for all such $q$ with $q > 0$ one gets $\alpha \ge \varphi(x)\,c$ (using that the positive rationals below $x$ are cofinal when $x > 0$).
+[L8] Least-upper-bound calculus in $G$: for nonempty $T \subseteq G$ bounded above with $u = \sup T$, any upper bound $w$ of $T$ satisfies $w \ge u$; and translation $z \mapsto z + c$ and, for $c > 0$, scaling $z \mapsto cz$ preserve $\le$ as well as $<$. [[lem-of-add-order]] (claim 1) and [[lem-of-sign-rules]] (claim 4) state the STRICT forms and only those, $z < z' \Rightarrow z + c < z' + c$ and, for $c > 0$, $z < z' \iff cz < cz'$; the nonstrict forms used here are those together with the equality cases, in which $z + c = z' + c$ and $cz = cz'$, the order being total by trichotomy ([[def-ordered-field]]). Hence from $\,\alpha \ge \iota_G(q) + c$ for all $q$ with $\iota_F(q) < x$ one gets $\alpha \ge \varphi(x) + c$, and from $\,\alpha \ge \iota_G(q)\,c$ (with $c > 0$) for all such $q$ with $q > 0$ one gets $\alpha \ge \varphi(x)\,c$ (using that the positive rationals below $x$ are cofinal when $x > 0$).
 
 ## Proof
 

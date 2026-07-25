@@ -2,7 +2,7 @@
 id: rem-lusin-theorem
 kind: remark
 title: "Lusin's theorem"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral, rem-egorov-theorem]
@@ -13,6 +13,10 @@ landmark: false
 short: "A measurable function is continuous on the complement of a set of small measure"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

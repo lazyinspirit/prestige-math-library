@@ -70,12 +70,6 @@ choice function ([[def-choice-function]]); that is, the Axiom of Choice holds.
 
 ## Remarks
 
-- Step 5.1 makes a single existential instantiation, exactly as in
-  [[lem-finite-choice]], and is not a use of choice. The work of choosing across
-  all of $\mathcal{F}$ at once has already been done by Zorn's lemma at step 3.1.
-- The poset of partial choice functions is the standard vehicle for this
-  direction, and it illustrates the usual shape of a Zorn argument: order the
-  partial solutions by extension, check that a chain of them unions to a partial
-  solution, and observe that a maximal partial solution cannot be partial.
-- Together with [[thm-zorn]] this gives the equivalence recorded in
-  [[cor-ac-iff-zorn]].
+- Step 5.1 makes a single existential instantiation, exactly as in [[lem-finite-choice]], and is not a use of choice. The work of choosing across all of $\mathcal{F}$ at once has already been done by Zorn's lemma at step 3.1.
+- The poset of partial choice functions is the standard vehicle for this direction, and it illustrates the usual shape of a Zorn argument: order the partial solutions by extension, check that a chain of them unions to a partial solution, and observe that a maximal partial solution cannot be partial.
+- Together with [[thm-zorn]] this gives the equivalence recorded in [[cor-ac-iff-zorn]].

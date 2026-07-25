@@ -61,18 +61,7 @@ cannot be removed.
 
 ## Remarks
 
-- **What is and is not proved here.** The refutation is a genuine ZF argument
-  given the cited independence result, but that result itself is not proved in
-  this library: Cohen's theorem requires forcing, which is deferred. The honest
-  reading is therefore conditional, namely that Zorn's lemma is a theorem of ZF
-  only if ZF is inconsistent. It is recorded this way deliberately rather than
-  presented as fully derived.
-- The companion half of the independence, that ZF cannot refute the Axiom of
-  Choice, is Gödel's 1938 constructible universe result. Together they say the
-  Axiom of Choice, and hence Zorn's lemma, is genuinely independent.
-- Where this sits among the choice principles, and which weaker ones are still
-  unprovable in ZF, is taken up later in [[rem-choice-strengths]].
-- The trap this item exists to close: [[thm-bourbaki-witt]] really is choice-free
-  and does most of the work of [[thm-zorn]], which invites the conclusion that
-  the whole proof is choice-free. Step 4.1 of [[thm-zorn]], where a strict upper
-  bound is selected for every chain at once, is the irreducible use.
+- **What is and is not proved here.** The refutation is a genuine ZF argument given the cited independence result, but that result itself is not proved in this library: Cohen's theorem requires forcing, which is deferred. The honest reading is therefore conditional, namely that Zorn's lemma is a theorem of ZF only if ZF is inconsistent. It is recorded this way deliberately rather than presented as fully derived.
+- The companion half of the independence, that ZF cannot refute the Axiom of Choice, is Gödel's 1938 constructible universe result. Together they say the Axiom of Choice, and hence Zorn's lemma, is genuinely independent.
+- Where this sits among the choice principles, and which weaker ones are still unprovable in ZF, is taken up later in [[rem-choice-strengths]].
+- The trap this item exists to close: [[thm-bourbaki-witt]] really is choice-free and does most of the work of [[thm-zorn]], which invites the conclusion that the whole proof is choice-free. Step 4.1 of [[thm-zorn]], where a strict upper bound is selected for every chain at once, is the irreducible use.

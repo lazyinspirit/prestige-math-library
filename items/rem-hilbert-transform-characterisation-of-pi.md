@@ -2,7 +2,7 @@
 id: rem-hilbert-transform-characterisation-of-pi
 kind: remark
 title: "The Hilbert-transform characterisation of $\\pi$"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "π is the unique normalisation making the Hilbert transform a complex structure on L^2(R)"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -20,8 +24,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hilbert_transform"
     - title: "Pi (Wikipedia), section on the Cauchy distribution and the Hilbert transform"
       url: "https://en.wikipedia.org/wiki/Pi"
-    - title: "E. C. Titchmarsh, Introduction to the Theory of Fourier Integrals, 2nd ed., Clarendon Press (cited by the above for this characterisation)"
+    - title: "E. C. Titchmarsh, Introduction to the Theory of Fourier Integrals, 2nd ed., Clarendon Press (the source the above cites for the complex-structure characterisation; only the author page is linkable here, the book is not online)"
       url: "https://en.wikipedia.org/wiki/Edward_Charles_Titchmarsh"
+    - title: "E. M. Stein, Singular Integrals and Differentiability Properties of Functions, Princeton University Press 1970, Ch. II (the source the above cites for the dilation and reflection characterisation; only the author page is linkable here, the book is not freely online)"
+      url: "https://en.wikipedia.org/wiki/Elias_M._Stein"
 pipeline_run: null
 ---
 
@@ -56,9 +62,15 @@ page here may use it.
 is again purely prerequisite. Discharging this item requires both deferred
 analysis tracks: Lebesgue measure and $L^p$ spaces on one side, and bounded
 operators, the Plancherel theorem and the Fourier-multiplier description of $H$
-(multiplication by $-i \,\mathrm{sgn}(\xi)$, from which $H^2 = -I$ is immediate) on
-the other. Once those exist the proof is short, which is exactly why the item is a
-prerequisite problem and not a difficulty problem.
+on the other. On the Fourier side $H$ is multiplication by
+$\pm i \,\mathrm{sgn}(\xi)$, the sign depending on which of the two standard sign
+conventions is taken for the kernel (the one displayed above, with $x - t$ in the
+denominator, gives $+i \,\mathrm{sgn}(\xi)$; writing the kernel as $t - x$
+instead gives $-i \,\mathrm{sgn}(\xi)$, and the two operators differ by a sign).
+Either way the multiplier has modulus one and squares to $-1$, so $H$ is unitary
+and $H^2 = -I$ is immediate, which is why the choice of convention does not
+affect the characterisation. Once those tracks exist the proof is short, which is
+exactly why the item is a prerequisite problem and not a difficulty problem.
 
 **Why it matters here.** This library treats the many equivalent characterisations
 of $\pi$ as a subject in its own right: the least positive zero of the sine, half

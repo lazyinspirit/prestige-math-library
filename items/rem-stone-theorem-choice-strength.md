@@ -2,7 +2,7 @@
 id: rem-stone-theorem-choice-strength
 kind: remark
 title: "A. H. Stone's theorem that every metric space is paracompact is not choice-free"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-urysohn-lemma-not-a-zf-theorem]
@@ -13,6 +13,10 @@ landmark: false
 short: "not provable in ZF + DC; not implied by BPI"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://arxiv.org/abs/2001.06513"
     - title: "Paracompact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Paracompact_space"
+    - title: "T. Jech, The Axiom of Choice, North-Holland (1973), Theorem 9.1 (multiple choice implies AC in ZF)"
+      url: "https://archive.org/details/axiomofchoice0000jech"
 pipeline_run: null
 ---
 
@@ -43,8 +49,18 @@ theorems carry the independence to ZF. This answers a question left open by Good
 Tree and Watson.
 
 **(c) What is not known.** Stone's theorem is **not known** to be equivalent to
-the Axiom of Choice, and no published result places it strictly below AC. The
-best upper bound recorded in the literature is the axiom of multiple choice.
+the Axiom of Choice, and no published result places it strictly below AC. What
+Good, Tree and Watson do record on the upper side is that every proof of Stone's
+theorem known to them in fact proves a stronger statement that implies AC: their
+Proposition 5 shows that "every discrete metric space is *effectively*
+metacompact", where a refinement is effective when a function chooses a member of
+the cover containing each refining set, already yields the axiom of multiple
+choice for disjoint families, and the axiom of multiple choice implies the Axiom
+of Choice over ZF. Note that the last step is a ZF fact, not a weakening: over ZF
+multiple choice and the Axiom of Choice are **equivalent**, so "the axiom of
+multiple choice" is not an upper bound below AC here. It is only over ZFA that
+the two come apart, which is why the models in (a) and (b) are permutation models
+needing a transfer theorem.
 
 ## Remarks
 
@@ -65,6 +81,8 @@ best upper bound recorded in the literature is the axiom of multiple choice.
   [[def-axiom-of-choice]] is open.
 
 - **Conditional discipline.** Clauses (a) and (b) are relative to the consistency
-  of ZF. Clause (c) is a statement about the current state of knowledge and is
-  not a mathematical claim; it is recorded so that no later page over-reports the
-  result as "equivalent to AC".
+  of ZF. Clause (c) mixes two things and they are kept apart: "not known to be
+  equivalent to AC" is a statement about the current state of knowledge and not a
+  mathematical claim, recorded so that no later page over-reports the result as
+  "equivalent to AC"; the facts about effective metacompactness and about
+  multiple choice are ordinary ZF theorems and need no consistency hypothesis.

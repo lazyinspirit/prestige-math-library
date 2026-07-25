@@ -4,16 +4,12 @@ kind: remark
 title: "Conventions for sequences: indexing, eventually, $\\lim$, and rational $\\varepsilon$"
 status: draft
 origin: session
-deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value, def-abs-value, def-real-order, lem-finite-set-has-max, def-max-min, def-countable, lem-subset-of-countable, lem-pigeonhole, lem-index-map-grows, lem-limit-preserves-order, thm-squeeze, thm-algebra-of-limits, lem-null-times-bounded, lem-reciprocal-of-null-diverges, lem-convergent-implies-cauchy, thm-reals-cauchy-complete, fs-bounded-implies-convergent, def-complete-ordered-field, def-ordered-field]
+deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value, def-abs-value, def-real-order, lem-finite-set-has-max, def-max-min, def-countable, lem-subset-of-countable, lem-pigeonhole, lem-index-map-grows, lem-limit-preserves-order, thm-squeeze, thm-algebra-of-limits, lem-null-times-bounded, lem-reciprocal-of-null-diverges, lem-convergent-implies-cauchy, thm-reals-cauchy-complete, fs-bounded-implies-convergent, def-complete-ordered-field, def-ordered-field, lem-convergent-implies-bounded, thm-of-archimedean, lem-rat-archimedean, thm-rat-ordered-field, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -151,6 +147,33 @@ real is already proved elsewhere in the library, by
 [[lem-convergent-implies-cauchy]] records where that leaves the two directions.
 The monotone convergence theorem and the Bolzano-Weierstrass theorem have no such
 exception: neither is proved anywhere in this library as things stand.
-This page assumes only that $\mathbb{R}$ is a complete ordered field and
-uses completeness solely through the Archimedean property, so every result here
-also holds verbatim for sequences of rationals.
+**How far this page is really a page about $\mathbb{R}$.** It assumes only that
+$\mathbb{R}$ is a complete ordered field, and it uses completeness solely through
+the Archimedean property. It is tempting to conclude that every result here holds
+verbatim for sequences of rationals, and the earlier version of this remark said
+exactly that. The claim needs splitting in two, because it is true of the
+statements and not literally true of the proofs.
+
+The statements do transfer. $\mathbb{Q}$ is an ordered field
+([[thm-rat-ordered-field]]) and is Archimedean ([[lem-rat-archimedean]]), and the
+absolute value, the triangle inequality and the order arithmetic these proofs run
+on are established for an arbitrary ordered field, not for $\mathbb{R}$ in
+particular ([[lem-of-abs-value]], [[lem-of-triangle-inequality]],
+[[def-ordered-field]]).
+
+The proofs do not transfer by citation, and two places are why.
+[[lem-convergent-implies-bounded]] absorbs the first finitely many terms using
+[[lem-finite-set-has-max]], which is stated for finite lists of **reals**; its
+proof is an induction that runs in any totally ordered field, but as stated it
+does not apply to $\mathbb{Q}$. And [[thm-of-archimedean]] is stated for
+**complete** ordered fields, so it says nothing about $\mathbb{Q}$; the
+$\mathbb{Q}$ counterpart is the separately proved [[lem-rat-archimedean]]. A
+third, more basic point: this library defines convergence and the Cauchy
+condition only for sequences of reals ([[def-sequence]], [[def-real-limit]]), so
+the rational statements are not formulated anywhere here in the first place.
+
+What is therefore claimed, and all that is claimed, is this: rerun any argument on
+this page over $\mathbb{Q}$, replacing the maximum lemma by the same induction in
+$\mathbb{Q}$ and [[thm-of-archimedean]] by [[lem-rat-archimedean]], and it goes
+through unchanged. That is a statement about the arguments, not a licence to cite
+the items above with $\mathbb{Q}$ in place of $\mathbb{R}$.

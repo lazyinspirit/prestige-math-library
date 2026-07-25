@@ -2,7 +2,7 @@
 id: rem-improper-riemann-not-lebesgue
 kind: remark
 title: "An improper Riemann integral that no Lebesgue integral reproduces: the sine integral"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "The Dirichlet integral converges conditionally, so sin(x)/x is not in L^1(0, infinity)"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

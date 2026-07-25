@@ -67,11 +67,5 @@ cut $M_x$ satisfies $f(y) \in M_x$ for every $y \in M_x$.
 
 ## Remarks
 
-- The case $y = x$ is the one that explains the shape of the cut. It is precisely
-  why $M_x$ is defined with $f(x) \le z$ rather than $x < z$: the image $f(x)$
-  must itself land inside $M_x$, and it does so on the upper side.
-- Extremality of $x$ is used only in the first case, and it is exactly what stops
-  $f$ from carrying an element from strictly below $x$ into the forbidden zone
-  strictly between $x$ and $f(x)$. That zone is what the cut omits, and keeping
-  it empty of elements of $M$ is what eventually makes $M$ a chain
-  ([[lem-admissible-is-chain]]).
+- The case $y = x$ is the one that explains the shape of the cut. It is precisely why $M_x$ is defined with $f(x) \le z$ rather than $x < z$: the image $f(x)$ must itself land inside $M_x$, and it does so on the upper side.
+- Extremality of $x$ is used only in the first case, and it is exactly what stops $f$ from carrying an element from strictly below $x$ into the forbidden zone strictly between $x$ and $f(x)$. That zone is what the cut omits, and keeping it empty of elements of $M$ is what eventually makes $M$ a chain ([[lem-admissible-is-chain]]).

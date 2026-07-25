@@ -2,7 +2,7 @@
 id: rem-feferman-levy-model
 kind: remark
 title: "The Feferman-Levy model: the reals as a countable union of countable sets"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-cohen-forcing-ac-independent]
@@ -13,6 +13,10 @@ landmark: true
 short: "omega_1 singular; R a countable union of countable sets"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

@@ -117,6 +117,9 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     id, kind, file,
     status: scalar(fm, 'status'),
     audited: nested(fm, 'verification', 'audited'),
+    provedHere: scalar(fm, 'proved_here') !== 'false',
+    sourcesChecked: nested(fm, 'verification', 'sources_checked') !== undefined
+      || /^\s+sources_checked:/m.test(fm),
     deps: list(fm, 'deps'),
     justified: list(fm, 'justified_by'),
     externalRefs: list(fm, 'external_refs'),
@@ -195,8 +198,16 @@ for (const p of pages) {
 }
 
 for (const it of items.values()) {
-  if (it.status === 'published' && !it.audited)
+  // A `proved_here: false` item has no proof, so `audited` (an audit OF A PROOF)
+  // is not what verifies it and `judge` is forbidden outright (extcheck
+  // `unproved-judged`). Its gate is `verification.sources_checked`: the statement,
+  // the attribution and the cited source were checked. SCHEMA §3.
+  if (it.status === 'published' && !it.provedHere && !it.sourcesChecked)
+    err('published-unchecked', `${it.file}: status published, proved_here false, but verification.sources_checked is unset`);
+  if (it.status === 'published' && it.provedHere && !it.audited)
     err('published-unaudited', `${it.file}: status published but verification.audited is unset`);
+  if (it.provedHere && it.sourcesChecked)
+    err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))
     warn('orphan', `${it.id} is published but appears on no page (dropped from page-level Prerequisites)`);
 }

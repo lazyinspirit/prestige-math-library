@@ -57,12 +57,6 @@ $M$ are comparable.
 
 ## Remarks
 
-- This is where the two halves of the argument meet. Comparability
-  ([[lem-extremal-comparability]]) was conditional on extremality, and
-  [[lem-all-extremal]] removes the condition; neither alone gives a chain.
-- $M$ being a chain is exactly what makes $\sup M$ available in
-  [[thm-bourbaki-witt]]. Chain-completeness supplies suprema for chains only, so
-  without this lemma there would be no reason for $\sup M$ to exist at all.
-- Note that $M$ is a chain but $P$ need not be. The construction carves a totally
-  ordered piece out of an arbitrary chain-complete poset, and the fixed point is
-  found at the top of that piece.
+- This is where the two halves of the argument meet. Comparability ([[lem-extremal-comparability]]) was conditional on extremality, and [[lem-all-extremal]] removes the condition; neither alone gives a chain.
+- $M$ being a chain is exactly what makes $\sup M$ available in [[thm-bourbaki-witt]]. Chain-completeness supplies suprema for chains only, so without this lemma there would be no reason for $\sup M$ to exist at all.
+- Note that $M$ is a chain but $P$ need not be. The construction carves a totally ordered piece out of an arbitrary chain-complete poset, and the fixed point is found at the top of that piece.

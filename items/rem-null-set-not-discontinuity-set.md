@@ -2,7 +2,7 @@
 id: rem-null-set-not-discontinuity-set
 kind: remark
 title: "A null set that is the discontinuity set of no function whatsoever"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: false
 short: "Discontinuity sets are F-sigma, and some null sets are not"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

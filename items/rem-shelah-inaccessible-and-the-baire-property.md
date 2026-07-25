@@ -2,7 +2,7 @@
 id: rem-shelah-inaccessible-and-the-baire-property
 kind: remark
 title: "Shelah 1984: the inaccessible is needed for measurability, not for the Baire property"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-solovay-model]
@@ -13,6 +13,10 @@ landmark: false
 short: "Con(ZF + DC + all sets Baire) from Con(ZF) alone"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

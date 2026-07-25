@@ -266,6 +266,84 @@ for (const it of selected) {
   }
 }
 
+// ------------------------------------------- nonstrict attribution (per FACT)
+//
+// A DIFFERENT SHAPE OF DEFECT from the rules above, and it needed its own pass.
+// The rules above ask "does this ITEM cite a home for the move it makes". This
+// asks, of a single `[L#]` FACT: does it assert a NONSTRICT order move (<=, >=)
+// while every source it names states only the STRICT one?
+//
+// `lem-of-add-order` states exactly "if a < b then a + c < b + c" and "if a < b
+// and c < d then a + c < b + d". `lem-of-sign-rules` claim 4 is likewise strict.
+// The nonstrict forms are TRUE and follow in one line by trichotomy -- but the
+// cited item does not state them, so a reader who follows the citation finds
+// something strictly weaker than the proof used. The mathematics is fine; the
+// justification chain has a hole.
+//
+// Found independently by two auditors on two different pages (2026-07-26), 8 facts
+// on one page alone. Invisible to depcheck (the dep resolves), to precheck (the tag
+// is well formed) and to the judge (MEASURED: it missed every instance, and on one
+// item positively asserted "All [L#] facts faithfully restate their cited items").
+//
+// The library's own correct model is `lem-sup-translate` [L2], which says the
+// source gives the strict form and derives the nonstrict one in the fact. That
+// derivation language is exactly what NONSTRICT_OK exempts, so a correctly written
+// fact does not warn.
+
+/** Sources that state their order-arithmetic moves for `<` ONLY. */
+const STRICT_ONLY_SEEDS = ['lem-of-add-order', 'lem-of-sign-rules'];
+/** The fact makes an additive/scaling order move AND asserts it non-strictly. */
+const NONSTRICT_MOVE =
+  /(?:add(?:ing|s)?|sum|scal(?:e|ing|es)|multiply(?:ing)?|translat)/i;
+// The symbol, OR a word that is itself nonstrict. Four of the eight known
+// instances wrote no `\le` at all: they said "scaling by a NONNEGATIVE element" or
+// "multiplying inequalities of NONNEGATIVES" in prose, while citing a strict-only
+// source. Two of the eight remain undetectable at fact level, because the fact
+// reads as purely strict ("adding inequalities") and only the STEPS that cite it
+// go nonstrict. Recall is 6 of 8 on the known set, with 0 false positives on the
+// corrected form -- a heuristic, like every rule here.
+const NONSTRICT_SYMBOL =
+  /\\le\b|\\leq\b|\\ge\b|\\geq\b|≤|≥|nonnegative|non-negative|nonpositive|at most|at least/i;
+/** Written the right way: the fact says the source is strict and derives the rest. */
+const NONSTRICT_OK =
+  /strict(?:ly)?\s+(?:order\s+)?only|for\s+the\s+strict|state[sd]?\s+[^.]*strict|trichotom|equality\s+case|hence|so\s+the\s+nonstrict|derive|one\s+may\s+add|adding\s+-c|both\s+the\s+strict\s+and\s+the\s+nonstrict/i;
+
+// Self-check: the rule's whole premise is that these seeds are strict-only. If one
+// ever gains a nonstrict clause the rule becomes noise, so verify rather than trust.
+const strictOnly = new Set();
+for (const id of STRICT_ONLY_SEEDS) {
+  const it = all.find((x) => x.id === id);
+  if (!it) { warns.push({ code: 'nonstrict-seed-missing', file: 'tools/citecheck.mjs', line: 0,
+    why: `strict-only seed "${id}" is not an item`, quote: '', count: 1 }); continue; }
+  if (NONSTRICT_SYMBOL.test(it.states)) {
+    warns.push({ code: 'nonstrict-seed-stale', file: it.file, line: 0,
+      why: `"${id}" is seeded as strict-only but its Statement now uses <= or >=; re-check the rule`,
+      quote: '', count: 1 });
+    continue;
+  }
+  strictOnly.add(id);
+}
+
+for (const it of selected) {
+  for (const l of it.lines) {
+    if (!/^\[[AL]\d+\]/.test(l.text.trim())) continue;        // facts only
+    if (!NONSTRICT_SYMBOL.test(l.text)) continue;               // asserts <= or >=
+    if (!NONSTRICT_MOVE.test(l.text)) continue;                 // about an order move
+    if (NONSTRICT_OK.test(l.text)) continue;                    // derived properly
+    const cited = [...l.text.matchAll(/\[\[([^\]|]+)/g)].map((m) => resolve(m[1].trim()));
+    if (!cited.length) continue;
+    if (!cited.some((c) => strictOnly.has(c))) continue;         // names a strict-only source
+    warns.push({
+      code: 'nonstrict-attribution',
+      file: it.file,
+      line: l.line,
+      why: 'a nonstrict order move (<=, >=) attributed to a source that states only the strict form',
+      quote: l.text.trim().slice(0, 150),
+      count: 1,
+    });
+  }
+}
+
 // ---------------------------------------------------------------------- report
 
 if (asJson) {

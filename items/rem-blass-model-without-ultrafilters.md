@@ -2,7 +2,7 @@
 id: rem-blass-model-without-ultrafilters
 kind: remark
 title: "Blass 1977: a model of ZF with no free ultrafilter on any set"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-feferman-no-free-ultrafilter-in-zf]
@@ -13,6 +13,10 @@ landmark: false
 short: "every ultrafilter, on every set, principal"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -31,18 +35,21 @@ pipeline_run: null
 ultrafilter on every set is principal.** Equivalently: there is a model of ZF
 containing no free ultrafilter at all, on any set whatsoever.
 
-This is Blass (1977), and it strictly strengthens
+This is Blass (1977). As a statement it strengthens
 [[rem-feferman-no-free-ultrafilter-in-zf]], where the conclusion was obtained only
-for $\mathbb{N}$. The model is a symmetric extension built over a model of ZFC in
-which the symmetry group is chosen so that the argument applies uniformly to
-every set of the model, not merely to the ground-model naturals.
+for $\mathbb{N}$: "every ultrafilter on every set is principal" implies "every
+ultrafilter on $\mathbb{N}$ is principal", so the consistency of the first is the
+stronger result. The model is again obtained by forcing and symmetry, but the
+construction is not reproduced here: the published note is a summary (see the
+citation remark below), and this library has not read a full account of it, so it
+records the conclusion and not the method.
 
 ## Remarks
 
-- **Not proved in this library.** The construction is a symmetric extension and
-  nothing of that kind is developed here.
+- **Not proved in this library.** No forcing or symmetric-model machinery is
+  developed here.
 
-- **What would prove it.** The same forcing and symmetric-model machinery named
+- **What would prove it.** The forcing and symmetric-model machinery named
   in [[rem-cohen-forcing-ac-independent]], with the additional uniformity
   argument that handles arbitrary sets rather than a single fixed set.
 
@@ -55,10 +62,14 @@ every set of the model, not merely to the ground-model naturals.
   non-principal instance of [[def-ultrafilter]] anywhere.
 
 - **On the citation.** The primary source is a short note in the Bulletin de
-  l'Académie Polonaise des Sciences, which has no open electronic edition; the
-  reference url above points at the standard survey statement of the fact rather
-  than at the note itself, and the note's full bibliographic details are given in
-  the reference title.
+  l'Académie Polonaise des Sciences (volume 25, number 4, pages 329-331), which
+  has no open electronic edition and which the reviewing literature describes as
+  a summary rather than a full account. The reference url above therefore points
+  at the standard survey statement of the fact, "ZF alone does not even imply
+  that there exists a non-principal ultrafilter on some set", rather than at the
+  note itself; the note's full bibliographic details are given in the reference
+  title. The survey page states the fact but does not name Blass, so the
+  attribution rests on the bibliographic record, not on that page.
 
 - **Conditional discipline.** Relative to the consistency of ZF, as always. The
   claim is that ZF cannot refute "every ultrafilter is principal", not that the

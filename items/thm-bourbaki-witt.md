@@ -68,20 +68,7 @@ monotone, injective, or continuous in any sense.
 
 ## Remarks
 
-- **Why this matters here.** The usual route to Zorn's lemma runs through
-  transfinite recursion, which needs ordinals, transfinite induction and
-  replacement. Bourbaki–Witt replaces all of that with the smallest admissible
-  set, so the foundations page that supports [[thm-zorn]] stays ordinal-free.
-  Ordinals are still worth having, but nothing on the path to Zorn or to the
-  ultrafilter lemma requires them.
-- **The theorem itself is choice-free.** Choice enters only in
-  [[thm-zorn]], at the single step where a strict upper bound is selected for
-  every chain simultaneously. Keeping the two separate is what lets later pages
-  state honestly which of their results need choice.
-- Both hypotheses are load-bearing. Progressivity without chain-completeness
-  fails ([[cex-progressive-map-without-fixed-point]]), and the fixed point is
-  genuinely produced at the top of a chain, not by iterating $f$: no iteration
-  argument is available, since $f$ need not be monotone and the chain $M$ need
-  not be countable.
-- The fixed point found is $\sup M$, and $M$ is the smallest admissible set, so
-  the construction is canonical rather than a choice among many fixed points.
+- **Why this matters here.** The usual route to Zorn's lemma runs through transfinite recursion, which needs ordinals, transfinite induction and replacement. Bourbaki–Witt replaces all of that with the smallest admissible set, so the foundations page that supports [[thm-zorn]] stays ordinal-free. Ordinals are still worth having, but nothing on the path to Zorn or to the ultrafilter lemma requires them.
+- **The theorem itself is choice-free.** Choice enters only in [[thm-zorn]], at the single step where a strict upper bound is selected for every chain simultaneously. Keeping the two separate is what lets later pages state honestly which of their results need choice.
+- Both hypotheses are load-bearing. Progressivity without chain-completeness fails ([[cex-progressive-map-without-fixed-point]]), and the fixed point is genuinely produced at the top of a chain, not by iterating $f$: no iteration argument is available, since $f$ need not be monotone and the chain $M$ need not be countable.
+- The fixed point found is $\sup M$, and $M$ is the smallest admissible set, so the construction is canonical rather than a choice among many fixed points.

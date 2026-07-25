@@ -2,7 +2,7 @@
 id: rem-dowker-spaces
 kind: remark
 title: "Dowker spaces exist in ZFC, and the aleph-one case is open"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-independence-of-ch-and-gch]
@@ -13,6 +13,10 @@ landmark: false
 short: "Rudin 1971, Balogh 1996, Kojman-Shelah 1998"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

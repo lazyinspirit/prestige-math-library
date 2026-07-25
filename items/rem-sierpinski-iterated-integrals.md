@@ -2,7 +2,7 @@
 id: rem-sierpinski-iterated-integrals
 kind: remark
 title: "Sierpinski's example under the continuum hypothesis"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-fubini-tonelli]
@@ -13,6 +13,10 @@ landmark: false
 short: "Under CH, a non-measurable subset of the unit square whose iterated integrals are 0 and 1"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
@@ -20,6 +24,8 @@ sources:
       url: "https://eudml.org/doc/212592"
     - title: "Fubini's theorem, failure for non-measurable functions (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fubini%27s_theorem"
+    - title: "H. Friedman, A consistent Fubini-Tonelli theorem for nonmeasurable functions, Illinois J. Math. 24 (1980) 390-395"
+      url: "https://doi.org/10.1215/ijm/1256047607"
 pipeline_run: null
 ---
 
@@ -62,10 +68,25 @@ displayed pair of values for a measurable set.
 kills $\sigma$-finiteness, this one kills the idea that measurability of every
 section is enough.
 
-**What it costs.** More than ZFC: the statement is conditional on the continuum
-hypothesis, which is independent of ZFC, so this is not a ZFC counterexample but
-a consistency result. Under Martin's axiom with the negation of the continuum
-hypothesis the conclusion fails for this construction. The ordinals and
-transfinite recursion machinery it uses is itself only ordinary ZFC, and this
-library plans that page; what is deferred is the independence apparatus and the
-measure theory, not the well ordering.
+**What it costs, exactly.** More than ZFC: the statement is conditional on the
+continuum hypothesis, which is independent of ZFC, so this is not a ZFC
+counterexample but a consistency result. The dependence is an equivalence and
+not merely a sufficient condition. A set $E$ with the two section properties
+above splits the square into $E$, whose horizontal sections are countable, and
+its complement, whose vertical sections are countable; and by Sierpinski's
+decomposition theorem such a splitting exists, for the square or equally for the
+plane, if and only if the continuum hypothesis holds. So under the negation of
+the continuum hypothesis this construction is unavailable outright.
+
+**What is not thereby restored.** The conclusion, unlike the construction, does
+not go away. Martin's axiom also implies that there is a function on the unit
+square whose two iterated integrals are defined and unequal, so Martin's axiom
+together with the negation of the continuum hypothesis still produces one, by a
+different route. What is consistent with ZFC, by a theorem of Friedman (1980),
+is the opposite: there are models of ZFC in which no such function exists at
+all, so that whenever both iterated integrals of a function on the unit square
+exist they agree. The strong Fubini statement for non-measurable functions is
+therefore independent of ZFC, and this item is one half of that independence.
+The ordinals and transfinite recursion machinery the construction uses is itself
+only ordinary ZFC, and this library plans that page; what is deferred is the
+independence apparatus and the measure theory, not the well ordering.

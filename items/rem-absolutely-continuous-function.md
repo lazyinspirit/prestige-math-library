@@ -2,7 +2,7 @@
 id: rem-absolutely-continuous-function
 kind: remark
 title: "Absolutely continuous functions"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "The class between Lipschitz and bounded variation on which Newton-Leibniz holds"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

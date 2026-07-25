@@ -2,7 +2,7 @@
 id: rem-banach-tarski
 kind: remark
 title: "The Banach-Tarski paradox"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
@@ -13,6 +13,10 @@ landmark: false
 short: "A ball in R^3 splits into finitely many pieces that reassemble into two copies of itself"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

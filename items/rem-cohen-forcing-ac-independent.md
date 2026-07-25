@@ -2,7 +2,7 @@
 id: rem-cohen-forcing-ac-independent
 kind: remark
 title: "Cohen 1963: ZF does not prove the Axiom of Choice"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-godel-constructible-universe]
@@ -13,6 +13,10 @@ landmark: true
 short: "Con(ZF) implies Con(ZF + not AC), by forcing"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

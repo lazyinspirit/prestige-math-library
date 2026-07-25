@@ -59,11 +59,5 @@ $$\sup S \le \sup T.$$
 
 ## Remarks
 
-- The hypothesis that the larger set is bounded above cannot be weakened to the
-  smaller one being bounded above: $\sup T$ has to exist for the inequality to
-  mean anything.
-- The dual statement, $\inf T \le \inf S$ for $\emptyset \ne S \subseteq T$ with
-  $T$ bounded below, follows by applying this lemma to
-  $\emptyset \ne -S \subseteq -T$, which gives $\sup(-S) \le \sup(-T)$, and then
-  negating and using $\inf X = -\sup(-X)$ ([[lem-reflection]],
-  [[thm-infimum-property]]).
+- The hypothesis that the larger set is bounded above cannot be weakened to the smaller one being bounded above: $\sup T$ has to exist for the inequality to mean anything.
+- The dual statement, $\inf T \le \inf S$ for $\emptyset \ne S \subseteq T$ with $T$ bounded below, follows by applying this lemma to $\emptyset \ne -S \subseteq -T$, which gives $\sup(-S) \le \sup(-T)$, and then negating and using $\inf X = -\sup(-X)$ ([[lem-reflection]], [[thm-infimum-property]]).

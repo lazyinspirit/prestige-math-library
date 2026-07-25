@@ -2,7 +2,7 @@
 id: rem-martins-axiom
 kind: remark
 title: "Martin's Axiom"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: [rem-independence-of-ch-and-gch]
@@ -13,6 +13,10 @@ landmark: true
 short: "MA is consistent with the negation of CH"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

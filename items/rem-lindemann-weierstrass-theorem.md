@@ -2,7 +2,7 @@
 id: rem-lindemann-weierstrass-theorem
 kind: remark
 title: "The Lindemann-Weierstrass theorem (awaiting a scope decision)"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -13,6 +13,10 @@ landmark: true
 short: "Distinct algebraic exponents give linearly independent exponentials; settled 1882/1885, not authored here"
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-07-26
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:

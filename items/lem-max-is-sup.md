@@ -63,17 +63,6 @@ set) precisely when the set has a maximum, and then the two agree.
 
 ## Remarks
 
-- The dual statement, that $\inf S$ is attained exactly when $S$ has a minimum
-  and then $\inf S = \min S$, is not proved above. It follows by reflection:
-  $m = \max S$ if and only if $-m = \min(-S)$, and $\inf X = -\sup(-X)$
-  ([[lem-reflection]], [[thm-infimum-property]]), so applying the two claims
-  proved here to $-S$ and negating gives the minimum form.
-- Claim 1 needs no completeness assumption: a set with a maximum has a supremum
-  for free, since the maximum is already the least upper bound. Only claim 2
-  presupposes that $\sup S$ exists, which for a nonempty set bounded above is
-  guaranteed by the least-upper-bound property ([[def-complete-ordered-field]]).
-- The converse of "the supremum exists" is not "the maximum exists": the set
-  $\{x \in \mathbb{R} : 0 < x < 1\}$ has supremum $1$ and no maximum
-  ([[fs-sup-belongs-to-set]]). What forces attainment is being **nonempty and
-  finite** ([[lem-finite-set-has-max]]); finiteness alone does not, since
-  $\emptyset$ is finite and has no maximum ([[def-max-min]]).
+- The dual statement, that $\inf S$ is attained exactly when $S$ has a minimum and then $\inf S = \min S$, is not proved above. It follows by reflection: $m = \max S$ if and only if $-m = \min(-S)$, and $\inf X = -\sup(-X)$ ([[lem-reflection]], [[thm-infimum-property]]), so applying the two claims proved here to $-S$ and negating gives the minimum form.
+- Claim 1 needs no completeness assumption: a set with a maximum has a supremum for free, since the maximum is already the least upper bound. Only claim 2 presupposes that $\sup S$ exists, which for a nonempty set bounded above is guaranteed by the least-upper-bound property ([[def-complete-ordered-field]]).
+- The converse of "the supremum exists" is not "the maximum exists": the set $\{x \in \mathbb{R} : 0 < x < 1\}$ has supremum $1$ and no maximum ([[fs-sup-belongs-to-set]]). What forces attainment is being **nonempty and finite** ([[lem-finite-set-has-max]]); finiteness alone does not, since $\emptyset$ is finite and has no maximum ([[def-max-min]]).
