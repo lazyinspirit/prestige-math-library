@@ -47,8 +47,8 @@ The usual reading, that *every finite family of nonempty sets has a choice
 function*, is this statement together with the identification of the finite
 families with those admitting such a listing. That identification is deliberately
 **not** made here and is nowhere used below: no definition of finiteness is
-available at this point in the library, and inventing one to state this lemma
-would be the only place it occurred.
+available at this point in the library, and the argument given does not need
+one.
 
 ## Facts & Assumptions
 
@@ -86,25 +86,7 @@ would be the only place it occurred.
 
 ## Remarks
 
-- **Where the Axiom of Choice would be needed, and why it is not needed here.**
-  Step 2.2 picks one element out of one nonempty set. That is a single
-  existential instantiation, licensed by first-order logic alone. The induction
-  performs one such instantiation per stage, and the stages are indexed by a
-  natural number, so the process terminates. What ZF cannot do is perform
-  *infinitely many* instantiations at once, and that is exactly the gap
-  [[def-axiom-of-choice]] fills.
-- **Why the family is presented as an indexed one.** Stated over "a family of
-  exactly $n$ sets", the successor step would have to assert that deleting one
-  member of a family of $n+1$ sets leaves exactly $n$, which is a claim about
-  cardinality and needs a theory of finiteness this page does not have. Indexed
-  by $n$, the same step is the restriction $F \restriction n$ of a function, which
-  is immediate from $n \subseteq \sigma(n)$ and costs nothing. Nothing else in the
-  argument changes.
-- The listing may repeat, and the argument is arranged so that repetition needs no
-  separate treatment: $g$ is built by overwriting rather than by adjoining, so it
-  is a function whether or not $S$ already occurs among $F(0), \dots, F(n-1)$. In
-  particular $\mathcal{F}$ may have strictly fewer than $n$ members.
-- The lemma is not a special case of the Axiom of Choice that happens to be
-  provable; it is the precise boundary of what is free. [[ex-russells-socks]]
-  makes the boundary concrete, and [[ex-finite-choice-by-induction]] works this
-  induction out on a small family.
+- **Where the Axiom of Choice would be needed, and why it is not needed here.** Step 2.2 picks one element out of one nonempty set. That is a single existential instantiation, licensed by first-order logic alone. The induction performs one such instantiation per stage, and the stages are indexed by a natural number, so the process terminates. What ZF cannot do is perform *infinitely many* instantiations at once, and that is exactly the gap [[def-axiom-of-choice]] fills.
+- **Why the family is presented as an indexed one.** Stated over "a family of exactly $n$ sets", the successor step would have to assert that deleting one member of a family of $n+1$ sets leaves exactly $n$, which is a claim about cardinality and needs a theory of finiteness this page does not have. Indexed by $n$, the same step is the restriction $F \restriction n$ of a function, which is immediate from $n \subseteq \sigma(n)$ and costs nothing. Nothing else in the argument changes.
+- The listing may repeat, and the argument is arranged so that repetition needs no separate treatment: $g$ is built by overwriting rather than by adjoining, so it is a function whether or not $S$ already occurs among $F(0), \dots, F(n-1)$. In particular $\mathcal{F}$ may have strictly fewer than $n$ members.
+- The lemma is not a special case of the Axiom of Choice that happens to be provable; it is the precise boundary of what is free. [[ex-russells-socks]] makes the boundary concrete, and [[ex-finite-choice-by-induction]] works this induction out on a small family.

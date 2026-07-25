@@ -11,6 +11,10 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -74,18 +78,6 @@ image, which is why claim 2 has an infimum on the right.
 
 ## Remarks
 
-- The value $c = 0$ is excluded because it is degenerate rather than difficult:
-  for nonempty $S$ one has $0 \cdot S = \{0\}$, so $\sup(0 \cdot S) = 0$ whatever
-  $S$ is, and no information about $\sup S$ or $\inf S$ survives.
-- Claim 2 needs $S$ bounded below, not bounded above: for $c < 0$ the image $cS$
-  is bounded above exactly when $S$ is bounded below ([[lem-reflection]] is the
-  case $c = -1$).
-- **Companion identities for the infimum, with their own hypotheses.** Write
-  $\inf X = -\sup(-X)$ ([[thm-infimum-property]]), so $\inf(cS) = -\sup((-c)S)$.
-  For $c > 0$ the multiplier $-c$ is negative, so this is **claim 2** applied to
-  $-c$, and it needs $S$ nonempty and bounded **below**; it gives
-  $\inf(cS) = c \inf S$. For $c < 0$ the multiplier $-c$ is positive, so this is
-  **claim 1** applied to $-c$, and it needs $S$ nonempty and bounded **above**;
-  it gives $\inf(cS) = c \sup S$. Note that each companion carries the OPPOSITE
-  boundedness hypothesis to the claim it invokes, and that neither is a
-  consequence of claim 2 alone.
+- The value $c = 0$ is excluded because it is degenerate rather than difficult: for nonempty $S$ one has $0 \cdot S = \{0\}$, so $\sup(0 \cdot S) = 0$ whatever $S$ is, and no information about $\sup S$ or $\inf S$ survives.
+- Claim 2 needs $S$ bounded below, not bounded above: for $c < 0$ the image $cS$ is bounded above exactly when $S$ is bounded below ([[lem-reflection]] is the case $c = -1$).
+- **Companion identities for the infimum, with their own hypotheses.** Write $\inf X = -\sup(-X)$ ([[thm-infimum-property]]), so $\inf(cS) = -\sup((-c)S)$. For $c > 0$ the multiplier $-c$ is negative, so this is **claim 2** applied to $-c$, and it needs $S$ nonempty and bounded **below**; it gives $\inf(cS) = c \inf S$. For $c < 0$ the multiplier $-c$ is positive, so this is **claim 1** applied to $-c$, and it needs $S$ nonempty and bounded **above**; it gives $\inf(cS) = c \sup S$. Note that each companion carries the OPPOSITE boundedness hypothesis to the *supremum* claim for the same multiplier: for $c > 0$ claim 1 assumes $S$ bounded above while the companion assumes $S$ bounded below, and for $c < 0$ claim 2 assumes $S$ bounded below while the companion assumes $S$ bounded above. Neither companion follows from the supremum claim for its own sign of $c$; each goes through the claim for the opposite sign, together with $\inf X = -\sup(-X)$.

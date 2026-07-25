@@ -62,18 +62,12 @@ supremum exists, is unique, and lies outside the set.
 
 2.3 The set $S$ has no maximum: if $m$ were one then $m \in S$, so $0 < m < 1$; putting $m' := (m + 1) 2^{-1}$, so that $m' \cdot 2 = m + 1$, the inequality $m \cdot 2 = m + m < m + 1 = m' \cdot 2$ gives $m < m'$, the inequality $m' \cdot 2 = m + 1 < 1 + 1 = 1 \cdot 2$ gives $m' < 1$, and $m' \cdot 2 = m + 1 > 0 = 0 \cdot 2$ gives $m' > 0$; hence $m' \in S$ with $m < m'$, contradicting the requirement $m' \le m$ for a maximum. [step 1.1, L2, L3, L4, algebra]
 
-3.1 The set $S$ is nonempty and bounded above with upper bound $1$, and every $1 - \varepsilon$ with $\varepsilon > 0$ is exceeded by some element of $S$, so the epsilon characterisation gives $\sup S = 1$. [step 1.2, step 2.1, L1]
+3.1 The set $S$ is nonempty and bounded above with upper bound $1$, and every $1 - \varepsilon$ with $\varepsilon > 0$ is exceeded by some element of $S$, so the epsilon characterisation gives $\sup S = 1$. [step 1.1, step 1.2, step 2.1, L1]
 
 4.1 Thus $S$ is a nonempty subset of $\mathbb{R}$ that is bounded above, its supremum exists and equals $1$, and $1 \notin S$; the claim that the supremum of a set belongs to the set is therefore false, and correspondingly $S$ has no maximum, so no element of $S$ could have served as its supremum. [step 3.1, step 2.2, step 2.3] ∎
 
 ## Remarks
 
-- The refutation is self-contained: the witness $S$, the value of $\sup S$ and
-  the failure of membership are all verified here from the complete-ordered-field
-  axioms and the items this page has already proved.
-- What is true is the corrected statement [[lem-max-is-sup]]: $\sup S \in S$
-  exactly when $S$ has a maximum, and then $\sup S = \max S$. Finiteness is a
-  sufficient condition for that ([[lem-finite-set-has-max]]); boundedness is not.
-- The error is a common one because it is harmless on finite sets, which is where
-  intuition is trained. The whole point of the supremum is to name a boundary
-  that the set approaches without reaching.
+- The refutation is self-contained: the witness $S$, the value of $\sup S$ and the failure of membership are all verified here from the complete-ordered-field axioms and the items this page has already proved.
+- What is true is the corrected statement [[lem-max-is-sup]]: for a set whose supremum exists, $\sup S \in S$ exactly when $S$ has a maximum, and then $\sup S = \max S$. Being **nonempty and finite** is a sufficient condition for having a maximum ([[lem-finite-set-has-max]]); nonemptiness cannot be dropped there, since $\emptyset$ is finite and has no maximum. Being nonempty and bounded above is not sufficient, which is exactly what the witness above shows.
+- The error is a common one because it is harmless on finite sets, which is where intuition is trained. The whole point of the supremum is to name a boundary that the set approaches without reaching.

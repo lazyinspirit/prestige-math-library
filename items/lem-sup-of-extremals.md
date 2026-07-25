@@ -44,7 +44,7 @@ extremal ([[def-bw-extremal]]). Then $\sup C$ is extremal.
 
 [L4] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
 
-[L5] $\le$ is a partial order: it is reflexive ($u \le u$) and transitive ($u \le v$ and $v \le w$ imply $u \le w$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
+[L5] $\le$ is a partial order: it is reflexive ($u \le u$), transitive ($u \le v$ and $v \le w$ imply $u \le w$) and **antisymmetric** ($u \le v$ and $v \le u$ imply $u = v$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
 
 ## Proof
 
@@ -54,13 +54,13 @@ extremal ([[def-bw-extremal]]). Then $\sup C$ is extremal.
 
 1.2 It suffices to show $f(y) \le s$ for the given $y \in M$ with $y < s$. [suffices: f(y) le s]
 
-2.1 If $y$ were an upper bound of $C$ then $s \le y$, since $s$ is below every upper bound, contradicting $y < s$. So $y$ is not an upper bound of $C$. [step 1.2, L3]
+2.1 If $y$ were an upper bound of $C$ then $s \le y$, since $s$ is below every upper bound; but $y < s$ means $y \le s$ together with $y \ne s$, and $s \le y$ with $y \le s$ would force $y = s$ by antisymmetry, a contradiction. So $y$ is not an upper bound of $C$. [step 1.2, L3, L5]
 
 3.1 Hence there exists $x \in C$ with $x \not\le y$; fix one. [step 2.1, choose]
 
 4.1 The element $x$ is extremal, so comparability gives $y \le x$ or $f(x) \le y$. [step 3.1, A1, L1]
 
-5.1 The alternative $f(x) \le y$ is impossible: progressivity gives $x \le f(x)$, so it would yield $x \le y$, contradicting $x \not\le y$. Hence $y \le x$. [step 4.1, step 3.1, L4]
+5.1 The alternative $f(x) \le y$ is impossible: progressivity gives $x \le f(x)$, so transitivity would yield $x \le y$, contradicting $x \not\le y$. Hence $y \le x$. [step 4.1, step 3.1, L4, L5]
 
 6.1 Moreover $y \ne x$, since $y = x$ would give $x \le y$ by reflexivity, again contradicting $x \not\le y$. So $y < x$. [step 5.1, step 3.1, L5]
 
@@ -70,12 +70,6 @@ extremal ([[def-bw-extremal]]). Then $\sup C$ is extremal.
 
 ## Remarks
 
-- **Step 2.1 is the subtle one, and it is where chain-completeness does real
-  work.** The move from $y < s$ to "$y$ is not an upper bound of $C$" is exactly
-  leastness of the supremum. If $\sup C$ were merely some upper bound of $C$, the
-  step would fail and the lemma with it, which is why the Bourbaki-Witt
-  hypothesis asks for least upper bounds rather than upper bounds.
-- The empty chain is covered without comment: $\sup \emptyset = \bot$, and there
-  is no $y \in M$ with $y < \bot$, so the condition holds vacuously.
-- Nothing here needs $C$ to have a largest element, and in the intended
-  application it does not have one.
+- **Step 2.1 is the subtle one, and it is where chain-completeness does real work.** The move from $y < s$ to "$y$ is not an upper bound of $C$" is exactly leastness of the supremum, closed off by antisymmetry: leastness gives $s \le y$, and it is antisymmetry that turns that together with $y \le s$ into $y = s$, contradicting $y \ne s$. If $\sup C$ were merely some upper bound of $C$, the step would fail and the lemma with it, which is why the Bourbaki-Witt hypothesis asks for least upper bounds rather than upper bounds.
+- The empty chain is covered without comment: $\sup \emptyset = \bot$, and there is no $y \in M$ with $y < \bot$, so the condition holds vacuously.
+- Nothing here needs $C$ to have a largest element, and in the intended application it does not have one.

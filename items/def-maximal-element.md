@@ -12,6 +12,10 @@ landmark: true
 short: "maximal element"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -54,5 +58,7 @@ inequality.
   object cannot be extended, which is a statement about nothing being strictly
   above it.
 - Maximality says nothing about comparability: a maximal element may be
-  incomparable to most of the poset. That is exactly what happens in
-  [[cex-maximal-not-greatest]].
+  incomparable to other elements, including to other maximal ones. In
+  [[cex-maximal-not-greatest]] the two maximal elements are incomparable to each
+  other, and in an antichain every element is maximal and is incomparable to all
+  the rest.

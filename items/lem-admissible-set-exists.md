@@ -12,7 +12,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -62,14 +62,6 @@ $M \subseteq A$ for every admissible $A \subseteq P$.
 
 ## Remarks
 
-- Uniqueness is automatic: two smallest admissible sets each contain the other,
-  so they are equal. This licenses writing $M$ for "the" smallest admissible set
-  throughout [[def-bw-extremal]] and the lemmas that follow.
-- $M$ is never empty. Condition (C2) applied to the empty chain puts
-  $\bot = \sup\emptyset$ into every admissible set, so $\bot \in M$.
-- **Minimality is the only tool used from here on.** Each later step proves that
-  all of $M$ has some property by showing that the elements of $M$ with that
-  property again form an admissible set, which minimality then forces to be all
-  of $M$. That pattern appears in [[lem-extremal-comparability]] and
-  [[lem-all-extremal]], and it is what replaces transfinite recursion in this
-  proof of [[thm-bourbaki-witt]].
+- Uniqueness is automatic: two smallest admissible sets each contain the other, so they are equal. This licenses writing $M$ for "the" smallest admissible set throughout [[def-bw-extremal]] and the lemmas that follow.
+- $M$ is never empty. Condition (C2) applied to the empty chain puts $\bot = \sup\emptyset$ into every admissible set, so $\bot \in M$.
+- **Minimality is used exactly twice in what follows**, in [[lem-extremal-comparability]] and in [[lem-all-extremal]], and both times in the same shape: to prove that all of $M$ has some property, one shows that the elements of $M$ with that property again form an admissible set, which minimality then forces to be all of $M$. That pattern is what replaces transfinite recursion in this proof of [[thm-bourbaki-witt]]. The remaining lemmas use only admissibility of $M$, progressivity of $f$, and the order axioms.

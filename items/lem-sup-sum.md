@@ -39,7 +39,7 @@ $$\sup(S + T) = \sup S + \sup T.$$
 
 [L1] Epsilon characterisation of the supremum: for a nonempty $X \subseteq \mathbb{R}$ bounded above and an upper bound $w$ of $X$, one has $w = \sup X$ if and only if for every $\varepsilon > 0$ there is $x \in X$ with $w - \varepsilon < x$ ([[lem-sup-epsilon]]).
 
-[L2] Order and addition: $x \le y$ implies $x + c \le y + c$, and inequalities may be added, so $x \le y$ together with $z \le w$ gives $x + z \le y + w$; likewise strict inequalities add ([[lem-of-add-order]]).
+[L2] Order and addition: strict inequalities translate and add, that is $x < y$ implies $x + c < y + c$, and $x < y$ together with $z < w$ gives $x + z < y + w$ (claims 1 and 2 of [[lem-of-add-order]]). Adjoining the case of equality, in which both sides move by the same amount, gives the nonstrict forms used below: $x \le y$ implies $x + c \le y + c$, and $x \le y$ together with $z \le w$ gives $x + z \le y + w$.
 
 [L3] Supremum and the least-upper-bound property: $w = \sup X$ means $w$ is an upper bound of $X$ with $w \le w'$ for every upper bound $w'$ of $X$, and every nonempty $X \subseteq \mathbb{R}$ bounded above has such a $w$ ([[def-complete-ordered-field]]).
 
@@ -63,12 +63,6 @@ $$\sup(S + T) = \sup S + \sup T.$$
 
 ## Remarks
 
-- The inequality $\sup(S + T) \le \sup S + \sup T$ is the easy half and needs only
-  that $u + v$ bounds $S + T$; the content is the reverse inequality, and the
-  halving of $\varepsilon$ is what lets two separate approximations be combined
-  without overshooting.
-- The corresponding statement for infima, $\inf(S + T) = \inf S + \inf T$ for
-  nonempty $S, T$ bounded below, follows by reflection ([[lem-reflection]],
-  [[thm-infimum-property]]), since $-(S + T) = (-S) + (-T)$.
-- No analogue holds for products in general: sign changes break the argument, and
-  $\sup(ST)$ is not determined by $\sup S$ and $\sup T$ alone.
+- The inequality $\sup(S + T) \le \sup S + \sup T$ is the easy half and needs only that $u + v$ bounds $S + T$; the content is the reverse inequality, and the halving of $\varepsilon$ is what lets two separate approximations be combined without overshooting.
+- The corresponding statement for infima, $\inf(S + T) = \inf S + \inf T$ for nonempty $S, T$ bounded below, follows by reflection ([[lem-reflection]], [[thm-infimum-property]]), since $-(S + T) = (-S) + (-T)$.
+- No analogue holds for products in general: sign changes break the argument, and $\sup(ST)$ is not determined by $\sup S$ and $\sup T$ alone.

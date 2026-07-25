@@ -4,12 +4,16 @@ kind: definition
 title: "Maximum and minimum of a set"
 status: draft
 origin: session
-deps: [def-complete-ordered-field]
+deps: [def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -31,9 +35,9 @@ Let $S \subseteq \mathbb{R}$ and $m \in \mathbb{R}$.
 
 A set has at most one maximum: if $m_1$ and $m_2$ are both maxima then
 $m_1 \in S$ gives $m_1 \le m_2$ and $m_2 \in S$ gives $m_2 \le m_1$, so
-$m_1 = m_2$ by antisymmetry of the order of an ordered field
-([[def-complete-ordered-field]]). The same argument applies to minima, so we may
-write $\max S$ and $\min S$.
+$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy
+axiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).
+The same argument applies to minima, so we may write $\max S$ and $\min S$.
 
 ## Remarks
 

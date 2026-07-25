@@ -12,6 +12,10 @@ landmark: true
 short: "chain-complete poset"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

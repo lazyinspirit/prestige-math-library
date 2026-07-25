@@ -14,9 +14,11 @@ examples: [fs-zorn-provable-in-zf, fs-maximal-is-greatest]
 ---
 
 **Objective.** This page proves **Zorn's lemma** from the Axiom of Choice, and
-proves the converse, so that the two stand as equivalent over ZF. It is the first
-of two foundations pages supplying exactly what the topology track later needs
-for Tychonoff's theorem and the ultrafilter lemma, and nothing more.
+proves the converse, so that the two stand as equivalent over ZF. It was written
+as the first of two foundations pages leading to the ultrafilter lemma, the
+second being [[filters-and-ultrafilters|Filters and Ultrafilters]]; the order
+vocabulary and Zorn's lemma proved here are also what the later pages on
+ordinals and on countability draw on.
 
 The order-theoretic vocabulary comes first: partial order, chain, upper bound,
 maximal element. Two distinctions carry the whole page and are easy to lose. A

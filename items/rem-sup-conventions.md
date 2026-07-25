@@ -6,7 +6,7 @@ status: draft
 origin: session
 deps: [def-complete-ordered-field, def-infimum, thm-infimum-property, fs-every-set-has-sup,
        lem-sup-epsilon, lem-inf-epsilon, lem-sup-monotone, lem-sup-translate,
-       lem-sup-scale, lem-sup-sum]
+       lem-sup-scale, lem-sup-sum, lem-sup-unique, lem-max-is-sup]
 justified_by: []
 aliases: []
 landmark: false
@@ -67,10 +67,15 @@ Accordingly, in this library:
   least-upper-bound property ([[def-complete-ordered-field]]) and its dual
   ([[thm-infimum-property]]), each of which requires the set to be nonempty and
   bounded on the relevant side.
-- Every statement about a supremum or an infimum carries those hypotheses
-  explicitly. The nonempty and bounded clauses in [[lem-sup-epsilon]],
+- No supremum or infimum is written down before its existence has been
+  established, and every statement that establishes existence says explicitly
+  what it assumes. The nonempty and bounded clauses in [[lem-sup-epsilon]],
   [[lem-inf-epsilon]], [[lem-sup-monotone]], [[lem-sup-translate]],
-  [[lem-sup-scale]] and [[lem-sup-sum]] are load bearing, not decoration.
+  [[lem-sup-scale]] and [[lem-sup-sum]] are load bearing, not decoration. Where
+  some other hypothesis does that work it is named instead of being suppressed:
+  [[lem-max-is-sup]] obtains existence from a maximum rather than from a
+  boundedness clause, and [[lem-sup-unique]], which asserts no existence at all,
+  needs neither clause.
 - $\sup \emptyset$ and $\inf \emptyset$ are simply undefined
   ([[def-infimum]], [[fs-every-set-has-sup]]).
 

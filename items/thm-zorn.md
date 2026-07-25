@@ -54,15 +54,17 @@ the conclusion gives a maximal element, never a greatest one.
 
 [L5] $\le$ is a partial order, in particular transitive ($u \le v$ and $v \le w$ imply $u \le w$) and antisymmetric ($u \le v$ and $v \le u$ imply $u = v$); the strict order $u < v$ means $u \le v$ and $u \ne v$, so $<$ is irreflexive ([[def-partial-order]]).
 
+[L6] Inclusion is a partial order on any collection of sets: $A \subseteq A$; $A \subseteq B$ and $B \subseteq A$ give $A = B$ by extensionality; and $A \subseteq B \subseteq C$ gives $A \subseteq C$ ([[def-partial-order]]).
+
 ## Proof
 
 **Proof technique:** contradiction.
 
 1.1 Suppose $P$ has no maximal element. [assume-contra]
 
-1.2 Let $\mathcal{C}$ be the set of all chains of $P$, partially ordered by inclusion. [construct]
+1.2 Let $\mathcal{C}$ be the set of all chains of $P$, a subset of the power set of $P$, partially ordered by inclusion. [L4, L6, construct]
 
-2.1 $\mathcal{C}$ is chain-complete: if $\mathcal{D} \subseteq \mathcal{C}$ is a chain under inclusion then $\bigcup \mathcal{D}$ is a chain of $P$, since any two of its elements lie in a common member of $\mathcal{D}$, and it is the least upper bound of $\mathcal{D}$ under inclusion; the empty chain has least upper bound $\emptyset$, which is a chain. [step 1.2, L4]
+2.1 $(\mathcal{C}, \subseteq)$ is a chain-complete poset: if $\mathcal{D} \subseteq \mathcal{C}$ is a chain under inclusion then $\bigcup \mathcal{D}$ is a chain of $P$, since any two of its elements lie in a common member of $\mathcal{D}$, and it is the least upper bound of $\mathcal{D}$ under inclusion; the empty chain has least upper bound $\bigcup \emptyset = \emptyset$, which is a chain. [step 1.2, L4, L6]
 
 2.2 For $C \in \mathcal{C}$ let $S_C$ be the set of strict upper bounds of $C$ in $P$. [step 1.2, L3, construct]
 
@@ -70,7 +72,7 @@ the conclusion gives a maximal element, never a greatest one.
 
 4.1 Apply the Axiom of Choice to the family $\mathcal{S} = \{S_C : C \in \mathcal{C}\}$, every member of which is nonempty, obtaining a choice function $g$ with $g(S) \in S$ for each $S \in \mathcal{S}$; composing with the map $C \mapsto S_C$, which is a function on $\mathcal{C}$, yields a selection $C \mapsto g(S_C) \in S_C$ defined for every chain $C$, and no injectivity of $C \mapsto S_C$ is needed, since two chains with the same set of strict upper bounds simply receive the same chosen element. [step 3.1, A2]
 
-5.1 Define $f(C) = C \cup \{g(S_C)\}$ for $C \in \mathcal{C}$; this is again a chain, because $g(S_C)$ is a strict upper bound of $C$ and so is comparable to every element of $C$. [step 4.1, step 2.2, L4, construct]
+5.1 Define $f(C) = C \cup \{g(S_C)\}$ for $C \in \mathcal{C}$; this is again a chain, because $g(S_C)$ is a strict upper bound of $C$ and so is comparable to every element of $C$. [step 4.1, step 2.2, L3, L4, L5, construct]
 
 6.1 $f$ is progressive for inclusion, since $C \subseteq f(C)$ by construction. [step 5.1]
 
@@ -80,22 +82,7 @@ the conclusion gives a maximal element, never a greatest one.
 
 ## Remarks
 
-- **The Axiom of Choice is used exactly once, at step 4.1**, and nowhere else.
-  Everything before it, including Bourbaki–Witt, is a theorem of ZF. That is why
-  the fixed point theorem is kept as a separate item: it marks the boundary
-  between what is free and what is bought.
-- The hypothesis is about **all** chains, including the empty one, whose upper
-  bounds are exactly the elements of $P$. So on this library's convention, where
-  $\emptyset$ is a chain ([[def-chain]]), requiring every chain to have an upper
-  bound **already forces** $P \ne \emptyset$, and the nonemptiness hypothesis is
-  stated separately for emphasis rather than as an independent assumption. In
-  particular the empty poset does **not** satisfy the hypothesis: there the empty
-  chain has no upper bound, because there is nothing at all to be one. Under the
-  competing convention, on which chains are required to be nonempty, nonemptiness
-  of $P$ is genuinely independent and cannot be dropped. See
-  [[cex-zorn-hypothesis-fails]] for the failure when unbounded chains exist.
-- The conclusion is **maximal, not greatest**, and conflating the two is the most
-  common error in applying the lemma ([[fs-maximal-is-greatest]]).
-- The converse holds: Zorn's lemma implies the Axiom of Choice
-  ([[thm-zorn-implies-ac]]), so the two are equivalent over ZF
-  ([[cor-ac-iff-zorn]]).
+- **The Axiom of Choice is used exactly once, at step 4.1**, and nowhere else. Everything before it, including Bourbaki–Witt, is a theorem of ZF. That is why the fixed point theorem is kept as a separate item: it marks the boundary between what is free and what is bought.
+- The hypothesis is about **all** chains, including the empty one, whose upper bounds are exactly the elements of $P$. So on this library's convention, where $\emptyset$ is a chain ([[def-chain]]), requiring every chain to have an upper bound **already forces** $P \ne \emptyset$, and the nonemptiness hypothesis is stated separately for emphasis rather than as an independent assumption. In particular the empty poset does **not** satisfy the hypothesis: there the empty chain has no upper bound, because there is nothing at all to be one. Under the competing convention, on which chains are required to be nonempty, nonemptiness of $P$ is genuinely independent and cannot be dropped. See [[cex-zorn-hypothesis-fails]] for the failure when unbounded chains exist.
+- The conclusion is **maximal, not greatest**, and conflating the two is the most common error in applying the lemma ([[fs-maximal-is-greatest]]).
+- The converse holds: Zorn's lemma implies the Axiom of Choice ([[thm-zorn-implies-ac]]), so the two are equivalent over ZF ([[cor-ac-iff-zorn]]).

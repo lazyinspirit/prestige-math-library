@@ -11,6 +11,10 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -59,13 +63,9 @@ $f(x)$ is extremal.
 
 2.3 In the case $y = x$, we get $f(y) = f(x)$, hence $f(y) \le f(x)$ by reflexivity. [step 1.5, L4]
 
-3.1 The relation $y \le x$ holds exactly when $y < x$ or $y = x$, so the two cases are exhaustive and $f(y) \le f(x)$ in both; therefore $f(x)$ is extremal. [step 2.1, step 2.2, step 2.3, cases-exhaustive] ∎
+3.1 The relation $y \le x$ holds exactly when $y < x$ or $y = x$, by the definition of the strict order, so the two cases are exhaustive and $f(y) \le f(x)$ in both; therefore $f(x)$ is extremal. [step 2.1, step 2.2, step 2.3, L4, cases-exhaustive] ∎
 
 ## Remarks
 
-- Step 2.1 is where the comparability lemma earns its place. Without it there
-  would be no way to rule out an element of $M$ sitting strictly between $x$ and
-  $f(x)$, and such an element would break extremality of $f(x)$ immediately.
-- Extremality is not a monotonicity condition in disguise. Nothing here assumes
-  $f$ preserves order, and the proof never compares $f$ of two different elements
-  except through $x$ itself.
+- Step 2.1 is where the comparability lemma earns its place. Without it there would be no way to rule out an element of $M$ sitting strictly between $x$ and $f(x)$, and such an element would break extremality of $f(x)$ immediately.
+- Extremality is not a monotonicity condition in disguise. Nothing here assumes $f$ preserves order, and the proof never compares $f$ of two different elements except through $x$ itself.

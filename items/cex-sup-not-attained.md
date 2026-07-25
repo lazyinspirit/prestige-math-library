@@ -14,7 +14,7 @@ cx_machine_verified: false
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -74,9 +74,11 @@ not repeated here; this item records only what that computation refutes.
   $\sup(0,1) = 1$ from the epsilon characterisation, and the refutation is then a
   two-line consequence of it.
 - What survives of the claim is exactly [[lem-max-is-sup]]: the supremum lies in
-  the set precisely when a maximum exists. A sufficient condition is finiteness
-  ([[lem-finite-set-has-max]]), and [[ex-sup-of-closed-interval]] is the
-  attaining companion of this witness, with the same supremum.
+  the set precisely when a maximum exists. A sufficient condition is being
+  nonempty and finite ([[lem-finite-set-has-max]]); finiteness alone is not
+  sufficient, since $\emptyset$ is finite and has no maximum
+  ([[def-max-min]]). And [[ex-sup-of-closed-interval]] is the attaining
+  companion of this witness, with the same supremum.
 - Nothing about $I$ is special beyond being open at the top. Any set whose
   supremum is approached but not reached does the same job, which is why the
   supremum, and not the maximum, is the right notion for analysis.

@@ -74,5 +74,6 @@ set) precisely when the set has a maximum, and then the two agree.
   guaranteed by the least-upper-bound property ([[def-complete-ordered-field]]).
 - The converse of "the supremum exists" is not "the maximum exists": the set
   $\{x \in \mathbb{R} : 0 < x < 1\}$ has supremum $1$ and no maximum
-  ([[fs-sup-belongs-to-set]]). Finiteness is what forces attainment
-  ([[lem-finite-set-has-max]]).
+  ([[fs-sup-belongs-to-set]]). What forces attainment is being **nonempty and
+  finite** ([[lem-finite-set-has-max]]); finiteness alone does not, since
+  $\emptyset$ is finite and has no maximum ([[def-max-min]]).
