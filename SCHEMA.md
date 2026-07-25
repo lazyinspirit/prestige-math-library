@@ -135,6 +135,12 @@ verification:
     # rather than leave it: an absent block honestly says "not yet judged",
     # whereas a stale one claims a pass on text the judge never saw. 27 blocks
     # were removed on exactly this ground in the 2026-07-25 rebuild.
+    # "MATERIALLY REWRITTEN" INCLUDES A CORRECTION IN REMARKS. The judge reads
+    # the whole item, a Remark is live prose held to the Statement standard, and
+    # a `rem-` item IS its prose. So if the judge passed text that has since been
+    # corrected -- anywhere in the item -- the block goes. The test is not "which
+    # section changed" but "would the judge have seen something different".
+    # Pure typography, or adding a citation that changes no claim, does not count.
   verified:                          # OPTIONAL. The PAGE VERIFIER's adjudication
     model: claude-opus-5             #   (WORKFLOW.md §0): one Opus subagent per
     verdict: certify                 #   page, reading its page plus the FULL TEXT
