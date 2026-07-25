@@ -1,5 +1,30 @@
 // Topic-neutral cross-family refuter-judge for library items (ofox gateway).
-// Default judge: z-ai/glm-5.2 (owner decision, 2026-07-25; replaced openai/gpt-5.4).
+// Default judge: deepseek/deepseek-v4-flash (owner decision, 2026-07-25; replaced
+// z-ai/glm-5.2, which replaced openai/gpt-5.4 earlier the same day).
+//
+// MEASURED, so no future session re-runs this. 56 calls over 7 candidate models,
+// against 5 items verified correct by hand and 3 historical versions carrying
+// defects verified from git:
+//
+//   model                         median latency   false pos   caught defects
+//   z-ai/glm-5.2                       73.8 s         0/5           0/3
+//   deepseek/deepseek-v4-flash          5.1 s         1/5           0/3
+//   google/gemini-3.1-flash-lite        3.4 s         0/5           0/3
+//   openai/gpt-5.4-mini                 ~3   s         4/5           0/3
+//   minimax/minimax-m2.7 | moonshotai/kimi-k2.6 | bailian/qwen3.7-plus: UNPARSEABLE
+//
+// DeepSeek was chosen for 14x lower latency at GLM-comparable reasoning depth
+// (it named the specific construction under test, where gemini-flash-lite
+// returned one generic sentence per verdict and is a rubber stamp, not a precise
+// judge: a model that always accepts scores 0 false positives too).
+//
+// The finding that matters more than the ranking: EVERY model caught 0 of 3 known
+// real defects. All three were found by reading tiers. Keep the judge as a cheap
+// screen; do not model it as the thing that finds defects.
+//
+// Also: half the catalogue is not drop-in. Reasoning-style models return <think>
+// blocks or reasoning-only content this harness cannot parse. Check parseability
+// before swapping a model, not after.
 // Run from the repo root (the app worker's tsx supplies the TS loader):
 //   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
 //     items/<id>.md [--model z-ai/glm-5.2] [--topic "..."] [--conventions "..."] [--allow-claude]
@@ -37,11 +62,15 @@ if (!file) {
   console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--allow-claude]');
   process.exit(2);
 }
-// SESSION items only. The production PIPELINE generator is also z-ai/glm-5.2
-// (WORKFLOW.md "production defaults"), so a pipeline item must NOT be judged
-// with this default: that would be a generator grading its own work. Pipeline
-// items keep the origin-conditioned lineup in worker/src/ofox.ts.
-const model = opts.model ?? "z-ai/glm-5.2";
+// SESSION items only. The production generator lineup is
+// ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"] (worker/src/ofox.ts genLineup), so
+// the default here is same-FAMILY as the second generator, though not the same
+// model. Harmless for session items, whose generator is Claude; a PIPELINE item
+// must NOT be judged with this default, since that is close to a generator
+// grading its own work. Pipeline items keep the origin-conditioned lineup in
+// worker/src/ofox.ts. (Under the previous default the collision was sharper: GLM
+// 5.2 is the generator's FIRST entry, an identity collision, not a family one.)
+const model = opts.model ?? "deepseek/deepseek-v4-flash";
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
 const id = basename(file).replace(/\.md$/, "");

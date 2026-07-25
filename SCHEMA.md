@@ -122,9 +122,10 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: z-ai/glm-5.2              # session items: NEVER a Claude model;
+    model: deepseek/deepseek-v4-flash # session items: NEVER a Claude model;
                                      #   pipeline items: production lineup, and
-                                     #   NEVER glm (it is the pipeline generator)
+                                     #   NEVER glm or deepseek (both are in the
+                                     #   pipeline generator lineup)
     verdict: pass
     date: 2026-07-25
     # RECORD ONLY A VERDICT THE JUDGE ACTUALLY GAVE, for the text now on disk.
