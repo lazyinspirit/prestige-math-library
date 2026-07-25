@@ -12,10 +12,6 @@ short: "$A\\in\\mathcal{U}$ or $X\\setminus A\\in\\mathcal{U}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -75,9 +71,11 @@ every subset of $X$, containing exactly one of $A$ and $X \setminus A$.
 
 - **This is the working form of the definition.** Maximality is a statement about
   the whole poset of filters; deciding complements is a statement about
-  $\mathcal{U}$ alone, and it is what one actually checks and uses. Every later
-  fact about ultrafilters in this library goes through statement 2, starting with
-  [[lem-ultrafilter-prime]].
+  $\mathcal{U}$ alone, and it is what one actually checks and uses. It is the
+  route taken by [[lem-ultrafilter-prime]], for instance. It is not the only
+  route: [[fs-every-ultrafilter-principal]] is refuted from properness and the
+  ultrafilter lemma directly, without this characterisation, and does not list it
+  among its dependencies.
 - **The two directions run as separate threads**, and the mechanical
   stratification interleaves them, so each step is labelled Forward or Converse.
   They share nothing except the filter $\mathcal{U}$ and the exclusivity of

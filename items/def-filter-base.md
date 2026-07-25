@@ -57,7 +57,7 @@ be a filter base.
   $B_3 = B_1 \cap B_2$ by (F3). Both halves are proved in
   [[lem-filter-base-generates]], so "base" is a way of presenting a filter, never
   a different kind of object.
-- **A filter has many bases.** If $\mathcal{B} \subseteq \mathcal{F}$ and every
+- **When a subfamily is a base for the filter it sits in.** If $\mathcal{B} \subseteq \mathcal{F}$ and every
   member of $\mathcal{F}$ contains a member of $\mathcal{B}$, then $\mathcal{B}$
   is a filter base and $\langle \mathcal{B} \rangle = \mathcal{F}$: (B1) holds
   because $X \in \mathcal{F}$ contains some member of $\mathcal{B}$, (B2) because
@@ -65,7 +65,9 @@ be a filter base.
   \mathcal{F}$ contains some member of $\mathcal{B}$. So a base is a
   presentation, not an invariant. What is determined is the generated filter,
   which is why every statement below is about $\langle \mathcal{B} \rangle$ and
-  never about $\mathcal{B}$ itself.
+  never about $\mathcal{B}$ itself. The criterion is sufficient, and it is not a
+  claim that a filter has *many* bases: any base of $\mathcal{F}$ is a subfamily
+  of it, so the filter $\{X\}$ on $X$ has exactly one base, namely $\{X\}$.
 - (B2) is exactly the properness of the generated filter, and it is not
   automatic: dropping it would allow $\emptyset \in \mathcal{B}$ and then
   $\langle \mathcal{B} \rangle = \mathcal{P}(X)$, the improper filter excluded by

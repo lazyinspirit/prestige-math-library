@@ -14,10 +14,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -100,14 +96,20 @@ an explicit index is produced.
 
 ## Remarks
 
-- The set $H$ is bounded, with $0 \le h \le 1$ for every $h \in H$, and it is
-  infinite; it is the standard example showing that a bounded infinite set can
-  attain one of its two bounds and miss the other.
+- The set $H$ is bounded, with $0 \le h \le 1$ for every $h \in H$, and its members
+  are pairwise distinct, since $n \mapsto 1/(n+1)$ is strictly decreasing by
+  [L1]; it is the standard example showing that a bounded set with infinitely
+  many members can attain one of its two bounds and miss the other. ("Infinite"
+  is used here in its everyday sense: no definition of finiteness is in scope on
+  this page, and nothing above or below depends on one.)
 - Positivity of every element is what makes $0$ a lower bound, and the
   Archimedean property is what makes it the greatest one. In a non-Archimedean
-  ordered field the same set is bounded below by $0$ and has a strictly positive
-  greatest lower bound whenever one exists at all, so this computation is a
-  statement about $\mathbb{R}$, not a formal manipulation
-  ([[cex-ordered-field-not-archimedean]]).
+  ordered field the argument breaks at exactly one point, step 3.2: it is the
+  Archimedean property ([[thm-of-archimedean]]) that produces a natural below
+  which $1/(n+1)$ falls, and [[cex-ordered-field-not-archimedean]] exhibits an
+  ordered field where no such natural exists. What that item establishes is the
+  failure of the Archimedean property there; it says nothing about $H$ or its
+  greatest lower bound, and this page does not compute one. So the value
+  $\inf H = 0$ is a statement about $\mathbb{R}$, not a formal manipulation.
 - Read as a sequence rather than a set, $H$ is the classical null sequence; the
   rational form of the same fact is [[ex-one-over-n-null]].

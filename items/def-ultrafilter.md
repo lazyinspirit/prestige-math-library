@@ -12,10 +12,6 @@ landmark: true
 short: "maximal filter"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -61,8 +57,10 @@ $\{\, A \subseteq X : x \in A \,\}$ for some $x \in X$, and **free**, or
   argument above, is that two distinct ultrafilters are never comparable, since
   $\mathcal{U} \subseteq \mathcal{V}$ with $\mathcal{U}$ maximal forces
   $\mathcal{V} = \mathcal{U}$. How many ultrafilters there are is a separate
-  question again, which the argument above does not touch and which only the
-  ultrafilter lemma answers; see the existence bullet below.
+  question again, which the argument above does not touch and which this library
+  does not answer at all: the ultrafilter lemma gives EXISTENCE (every filter
+  extends to an ultrafilter), never a count, and [[thm-ultrafilter-lemma]] says so
+  in its own remarks. See the existence bullet below.
 - **Maximality is a negative condition**, which is what makes it usable: it says
   nothing can be added, not that everything is already there. The positive
   reformulation, that $\mathcal{U}$ decides every subset by containing either $A$
