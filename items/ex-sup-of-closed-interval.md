@@ -14,9 +14,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -51,7 +51,7 @@ argument and no appeal to completeness ([[lem-max-is-sup]]).
 
 [L2] Maximum and minimum: $m = \max X$ means $m \in X$ and $x \le m$ for every $x \in X$; $m = \min X$ means $m \in X$ and $m \le x$ for every $x \in X$; each is unique when it exists ([[def-max-min]]).
 
-[L3] Infimum: $\ell = \inf X$ means $\ell$ is a lower bound of $X$, that is $\ell \le x$ for every $x \in X$, and $\ell' \le \ell$ for every lower bound $\ell'$ of $X$; it is unique when it exists ([[def-infimum]], [[def-bounded-set]]).
+[L3] Bounds and the infimum: $u$ is an upper bound of $X$ when $x \le u$ for every $x \in X$ ([[def-complete-ordered-field]]), and $\ell$ is a lower bound of $X$ when $\ell \le x$ for every $x \in X$ ([[def-bounded-set]]); and $\ell = \inf X$ means $\ell$ is a lower bound of $X$ with $\ell' \le \ell$ for every lower bound $\ell'$ of $X$, unique when it exists ([[def-infimum]]).
 
 [L4] Order: $0 < 1$; the order is reflexive, so $a \le a$; and $a < b$ implies $a \le b$ ([[cor-of-one-positive]], [[def-complete-ordered-field]], [[def-ordered-field]]).
 
@@ -61,7 +61,7 @@ argument and no appeal to completeness ([[lem-max-is-sup]]).
 
 1.1 Both $0$ and $1$ lie in $J$, so $J \ne \emptyset$: from $0 < 1$ we get $0 \le 1$, and reflexivity gives $0 \le 0$ and $1 \le 1$, so each of $0$ and $1$ satisfies the membership condition $0 \le x \le 1$. [L4]
 
-1.2 Every $x \in J$ satisfies $x \le 1$ and $0 \le x$, directly by the membership condition; so $1$ is an upper bound of $J$ and $0$ is a lower bound of $J$. [L2, L3]
+1.2 Every $x \in J$ satisfies $x \le 1$ and $0 \le x$, directly by the membership condition; so $1$ is an upper bound of $J$ and $0$ is a lower bound of $J$. [L3]
 
 2.1 $1 = \max J$: the number $1$ lies in $J$ and dominates every element of $J$. [step 1.1, step 1.2, L2]
 
@@ -75,11 +75,5 @@ argument and no appeal to completeness ([[lem-max-is-sup]]).
 
 ## Remarks
 
-- Claim 1 of [[lem-max-is-sup]] needs no completeness: a set with a maximum has a
-  least upper bound because the maximum already is one. The least-upper-bound
-  property of $\mathbb{R}$ ([[def-complete-ordered-field]]) is what handles sets
-  with no maximum, such as the open interval of [[ex-sup-of-open-interval]].
-- The infimum was computed here directly from [[def-infimum]] rather than by
-  reflecting through the origin. Both routes are available; the direct one is
-  shorter when the bound is attained, since leastness of the upper bound and
-  greatestness of the lower bound are then immediate from membership.
+- Claim 1 of [[lem-max-is-sup]] needs no completeness: a set with a maximum has a least upper bound because the maximum already is one. The least-upper-bound property of $\mathbb{R}$ ([[def-complete-ordered-field]]) is what handles sets with no maximum, such as the open interval of [[ex-sup-of-open-interval]].
+- The infimum was computed here directly from [[def-infimum]] rather than by reflecting through the origin. Both routes are available; the direct one is shorter when the bound is attained, since leastness of the upper bound and greatestness of the lower bound are then immediate from membership.

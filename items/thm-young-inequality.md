@@ -4,7 +4,7 @@ kind: theorem
 title: "Young's inequality for products (rational conjugate exponents)"
 status: draft
 origin: session
-deps: [thm-weighted-am-gm-rational, def-rational-power, lem-rational-power-laws, def-rat-operations, def-rat-order, def-rationals, lem-of-q-embeds, lem-of-inverse-positive, lem-of-sign-rules]
+deps: [thm-weighted-am-gm-rational, def-rational-power, lem-rational-power-laws, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, lem-of-q-embeds, lem-of-inverse-positive, lem-of-sign-rules]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,9 +12,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -56,7 +56,7 @@ world on this page.
 
 [L2] Rational power laws ([[lem-rational-power-laws]], [[def-rational-power]]): for $u > 0$ and rationals $r, s$, $u^{r} > 0$ and $\big(u^{r}\big)^{s} = u^{rs}$, and $u^{1} = u$; and $0^{r} = 0$ for rational $r > 0$.
 
-[L3] Rational arithmetic ([[def-rationals]], [[def-rat-operations]], [[def-rat-order]]): $p > 1 > 0$ gives $1/p > 0$, likewise $1/q > 0$, and $p \cdot (1/p) = 1$; and $q = p/(p-1)$ is rational.
+[L3] Rational arithmetic ([[def-rationals]], [[def-rat-operations]], [[def-rat-order]]): $q = p/(p-1)$ is a quotient of rationals with nonzero denominator, hence rational, and $p \cdot (1/p) = 1$. Moreover $\mathbb{Q}$ is itself a totally ordered field ([[thm-rat-ordered-field]]), which is what licenses the order arithmetic used on $p$ and $q$; being an ordered field it has $1 > 0$ ([[cor-of-one-positive]], which is where that fact is proved: [[thm-rat-ordered-field]] states totality, compatibility with addition and closure of the positives under multiplication, and not this), so $p > 1 > 0$ gives $p > 0$ by transitivity and hence $1/p > 0$, and likewise $1/q > 0$ ([[lem-of-inverse-positive]], claim 1, applied in $\mathbb{Q}$).
 
 [L4] The embedding $\iota : \mathbb{Q} \to \mathbb{R}$ is an order-preserving field homomorphism, so $\iota(1/p) = \iota(p)^{-1} > 0$ ([[lem-of-q-embeds]], [[lem-of-inverse-positive]], [[lem-of-sign-rules]]).
 

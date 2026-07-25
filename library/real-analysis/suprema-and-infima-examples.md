@@ -32,8 +32,9 @@ The examples are arranged so that each isolates one phenomenon. The open interva
 $(0,1)$ has a supremum it does not contain; the closed interval $[0,1]$ has the
 same supremum and does contain it, so the value of a supremum carries no
 information at all about attainment. The set $\{1/n : n \ge 1\}$ misses its
-infimum and attains its supremum at once, and the reason its infimum is $0$
-rather than something positive is the Archimedean property, nothing weaker. The
+infimum and attains its supremum at once, and what forces its infimum down to
+$0$ rather than to something positive is the Archimedean property, invoked at one
+identified step of the computation and nowhere else. The
 set of positive rationals with square below $2$ is the historical reason for
 building $\mathbb{R}$ at all: it has a supremum in $\mathbb{R}$, namely
 $\sqrt{2}$, and no supremum in $\mathbb{Q}$, although inside $\mathbb{Q}$ it is

@@ -68,17 +68,6 @@ not repeated here; this item records only what that computation refutes.
 
 ## Remarks
 
-- The false statement [[fs-sup-belongs-to-set]] carries its own self-contained
-  refutation with the same witness. This item exists so that the computation and
-  the refutation are separated: [[ex-sup-of-open-interval]] establishes the value
-  $\sup(0,1) = 1$ from the epsilon characterisation, and the refutation is then a
-  two-line consequence of it.
-- What survives of the claim is exactly [[lem-max-is-sup]]: the supremum lies in
-  the set precisely when a maximum exists. A sufficient condition is being
-  nonempty and finite ([[lem-finite-set-has-max]]); finiteness alone is not
-  sufficient, since $\emptyset$ is finite and has no maximum
-  ([[def-max-min]]). And [[ex-sup-of-closed-interval]] is the attaining
-  companion of this witness, with the same supremum.
-- Nothing about $I$ is special beyond being open at the top. Any set whose
-  supremum is approached but not reached does the same job, which is why the
-  supremum, and not the maximum, is the right notion for analysis.
+- The false statement [[fs-sup-belongs-to-set]] carries its own self-contained refutation with the same witness. This item exists so that the computation and the refutation are separated: [[ex-sup-of-open-interval]] establishes the value $\sup(0,1) = 1$ from the epsilon characterisation, and the refutation is then a two-line consequence of it.
+- What survives of the claim is exactly [[lem-max-is-sup]]: the supremum lies in the set precisely when a maximum exists. A sufficient condition is being nonempty and finite ([[lem-finite-set-has-max]]); finiteness alone is not sufficient, since $\emptyset$ is finite and has no maximum ([[def-max-min]]). And [[ex-sup-of-closed-interval]] is the attaining companion of this witness, with the same supremum.
+- Nothing about $I$ is special beyond being open at the top. Any set whose supremum is approached but not reached does the same job, which is why the supremum, and not the maximum, is the right notion for analysis.

@@ -4,13 +4,17 @@ kind: lemma
 title: "Monotonicity of $x \\mapsto x^n$ and of $n \\mapsto a^n$"
 status: draft
 origin: session
-deps: [def-integer-power, cor-of-one-positive, lem-of-sign-rules, prop-of-multiply-inequalities, thm-induction-principle, def-ordered-field, def-nat-order]
+deps: [def-integer-power, cor-of-one-positive, lem-of-sign-rules, prop-of-multiply-inequalities, thm-induction-principle, def-ordered-field, def-nat-order, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -48,7 +52,7 @@ $a, b \in \mathbb{R}$ and let $n \in \mathbb{N}$, with powers as in
 
 [L5] Trichotomy and transitivity of the order: for $x, y$ exactly one of $x < y$, $x = y$, $y < x$ holds, and $<$ and $\le$ are transitive ([[def-ordered-field]]).
 
-[L6] The order on the exponents ([[def-nat-order]]): for naturals $m, n$, $m < n$ holds exactly when $n = m + d$ for some natural $d \ge 1$.
+[L6] The order on the exponents: $m \le n$ holds exactly when $n = m + k$ for some natural $k$ ([[def-nat-order]]), and $m < n$ holds exactly when $m + 1 \le n$ ([[lem-nat-discrete]]); combining the two, $m < n$ holds exactly when $n = m + d$ for some natural $d \ge 1$.
 
 ## Proof
 

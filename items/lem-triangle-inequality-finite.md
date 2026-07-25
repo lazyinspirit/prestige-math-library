@@ -12,9 +12,9 @@ proof_strategy: induction
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -45,7 +45,7 @@ $$\Big|\sum_{k<n} a_k\Big| \le \sum_{k<n} |a_k|.$$
 
 [L3] Basic absolute value facts: $|x| \ge 0$ and $|0| = 0$ ([[lem-of-abs-value]], [[def-abs-value]]).
 
-[L4] Adding a constant preserves the order, and $\le$ is transitive ([[lem-of-add-order]], [[def-ordered-field]]).
+[L4] Adding a constant preserves the order: [[lem-of-add-order]] gives $x < y \Rightarrow x + c < y + c$ and states no nonstrict form, so the form used below, $x \le y \Rightarrow x + c \le y + c$, is that statement together with the case $x = y$, which trichotomy settles; and $\le$ is transitive ([[def-ordered-field]]).
 
 [L5] Induction principle ([[thm-induction-principle]]).
 

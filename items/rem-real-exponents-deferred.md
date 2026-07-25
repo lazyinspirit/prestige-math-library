@@ -4,12 +4,16 @@ kind: remark
 title: "Why real exponents are deferred"
 status: draft
 origin: session
-deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-complete-ordered-field, thm-nth-roots-exist, lem-of-q-dense, thm-of-archimedean]
+deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-complete-ordered-field, thm-nth-roots-exist, thm-of-square-roots, thm-cauchy-schwarz-finite, lem-max-is-sup, def-real-limit, lem-of-q-dense, thm-of-archimedean]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -31,8 +35,13 @@ strictly increasing in $a$ for a fixed positive exponent
 continuous function. Every value is produced by finitely many field operations
 once the relevant root is available, and the only nonalgebraic ingredient
 anywhere on the page is the least-upper-bound property
-([[def-complete-ordered-field]]), used exactly once, to produce roots
-([[thm-nth-roots-exist]]).
+([[def-complete-ordered-field]]). It enters exactly one proof on the page
+directly, the existence of $n$-th roots ([[thm-nth-roots-exist]]); everything
+else here that needs a root cites a theorem rather than the property itself, and
+those theorems are [[thm-nth-roots-exist]] and, for the root form of
+Cauchy-Schwarz ([[thm-cauchy-schwarz-finite]]), the already published
+[[thm-of-square-roots]]. In each case completeness is spent on producing a root
+and on nothing else.
 
 **The obvious next step, and how far it gets.** For $a > 1$ and a real $x$, put
 
@@ -44,7 +53,8 @@ $a^{r} \le a^{R}$ for every rational $r \le x$ by monotonicity in the exponent;
 both rationals are supplied by the density of $\mathbb{Q}$ in $\mathbb{R}$
 ([[lem-of-q-dense]], [[thm-of-archimedean]]). The definition is also consistent
 with what we already have: for a rational $x$ the set has greatest element
-$a^{x}$, so $E_a(x) = a^{x}$. For $0 < a < 1$ one sets
+$a^{x}$, and a set with a greatest element has that element as its supremum
+([[lem-max-is-sup]]), so $E_a(x) = a^{x}$. For $0 < a < 1$ one sets
 $E_a(x) := 1/E_{1/a}(x)$, and $E_1(x) := 1$. So the object exists, it is the
 right object, and it is monotone.
 
@@ -56,9 +66,10 @@ given $r \le x+y$ need only be *approximated* by such sums. Closing that gap is
 an approximation argument, and an approximation argument needs a notion of limit
 and an estimate that controls $a^{r} - a^{s}$ in terms of $r - s$. The library
 does have a notion of convergent sequence of reals, introduced in the
-construction of $\mathbb{R}$ via Cauchy sequences, but it has no continuity, no
-uniform continuity, no series, and no derivative, and each of those is exactly
-what the standard proofs of the power laws for real exponents use. Writing such
+construction of $\mathbb{R}$ via Cauchy sequences ([[def-real-limit]]), but no
+continuity, no uniform continuity, no series and no derivative is developed
+anywhere in it, and each of those is exactly what the standard proofs of the
+power laws for real exponents use. Writing such
 a proof here would either import machinery that does not exist yet or quietly
 assume it, and the second is the failure mode this library is built to avoid.
 

@@ -17,11 +17,12 @@ examples: [fs-negative-has-square-root, fs-rational-power-of-negative-base]
 can honestly be built with the tools the library currently owns, and then proves
 the classical inequalities that live at that level. The tools are the field
 axioms, the order, and the least-upper-bound property
-([[def-complete-ordered-field]]). There is no exponential function, no
-logarithm, no limit, no continuity and no infinite series anywhere in the
-library yet, so **every exponent on this page is an integer or a rational, and
-every proof is a finite algebraic argument plus, in exactly one place,
-completeness.**
+([[def-complete-ordered-field]]). The library has no exponential function, no
+logarithm, no continuity and no infinite series; a limit of a sequence of reals
+is defined in the Cauchy construction ([[def-real-limit]]), but no proof on this
+page uses one. So **every exponent on this page is an integer or a rational, and
+every proof is a finite algebraic argument plus, in exactly one proof, the
+least-upper-bound property.**
 
 The construction runs in three stages. First, finite sums and finite products
 are defined by recursion ([[def-finite-sum]], resting on [[thm-recursion]]) and
@@ -29,8 +30,9 @@ their laws are proved by induction, because "$a_0 + \cdots + a_{n-1}$" is
 notation and not a definition. Second, integer powers are defined by the same
 mechanism and their algebra and order behaviour established. Third, roots are
 produced: for $a \ge 0$ and $n \ge 1$ there is a unique nonnegative $s$ with
-$s^{n} = a$ ([[thm-nth-roots-exist]]). That theorem is the one place where
-completeness is spent, and it is a **generalisation of the already published
+$s^{n} = a$ ([[thm-nth-roots-exist]]). That theorem is the one proof on this page
+that invokes the least-upper-bound property directly, and it is a
+**generalisation of the already published
 [[thm-of-square-roots]]**: the case $n = 2$ is not new here and is not claimed
 to be. What is new is the passage to general $n$, where the completed square
 that drives the square-root argument is replaced by the factorisation of
@@ -63,7 +65,12 @@ which does not exist in this library. Young's inequality
 $q = p/(p-1)$, **which is rational exactly because $p$ is**. Cauchy-Schwarz
 ([[thm-cauchy-schwarz-finite]]) is proved separately and by a route that uses no
 root at all, from the nonnegativity of $\sum_k (a_k t + b_k)^{2}$; its root form
-is a restatement.
+is a restatement, reached through the already published [[thm-of-square-roots]]
+rather than through the $n$-th roots of this page.
+Bernoulli's inequality ([[lem-bernoulli-inequality]]) sits outside that chain: it
+is proved here as a classical inequality of exactly this level, for its own sake
+rather than as a step towards the others, and nothing else on this page rests on
+it.
 
 Two false statements guard the boundary of what has been built. No real number
 squares to a negative one ([[fs-negative-has-square-root]]), in any ordered

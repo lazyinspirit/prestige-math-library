@@ -4,13 +4,17 @@ kind: lemma
 title: "Bernoulli's inequality $(1+x)^n \\ge 1 + nx$"
 status: draft
 origin: session
-deps: [def-integer-power, thm-induction-principle, lem-of-add-order, lem-of-sign-rules, lem-of-square-positive, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field]
+deps: [def-integer-power, thm-induction-principle, lem-of-add-order, lem-of-sign-rules, lem-of-square-positive, lem-of-zero-mult, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -43,9 +47,9 @@ and equality holds if and only if $n \le 1$ or $x = 0$.
 
 [L2] Induction principle ([[thm-induction-principle]]).
 
-[L3] Order and scaling: for $c \ge 0$, $u \ge v$ implies $uc \ge vc$ (the case $c > 0$ is the scaling rule and the case $c = 0$ gives $0 \ge 0$); and adding a constant preserves the order ([[lem-of-sign-rules]], [[lem-of-add-order]]).
+[L3] Order and scaling: for $c \ge 0$, $u \ge v$ implies $uc \ge vc$. [[lem-of-sign-rules]] gives only the strict rule $u > v \iff uc > vc$ for $c > 0$, so this is that rule together with the case $u = v$, and with the case $c = 0$, where both sides are $0$ ([[lem-of-zero-mult]]). Likewise adding a constant preserves the order, where [[lem-of-add-order]] again states only the strict form and the nonstrict one adds the case of equality; trichotomy is what settles those cases ([[def-ordered-field]]).
 
-[L4] Squares are nonnegative: $x^2 > 0$ for $x \ne 0$ and $0^2 = 0$ ([[lem-of-square-positive]]).
+[L4] Squares are nonnegative: $x^2 > 0$ for $x \ne 0$ ([[lem-of-square-positive]]), and $0^2 = 0 \cdot 0 = 0$ because a product with a zero factor vanishes ([[lem-of-zero-mult]]), which is also what makes $0 \cdot x = 0$ below; so $x^2 \ge 0$ for every $x$.
 
 [L5] Canonical naturals: $\iota(0) = 0$, $\iota(n+1) = \iota(n) + 1$, and $\iota(n) > 0$ for $n \ge 1$, so $\iota(n) \ge 0$ for every $n$ ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
 
@@ -53,13 +57,13 @@ and equality holds if and only if $n \le 1$ or $x = 0$.
 
 **Proof technique:** induction.
 
-1.1 Base case $n = 0$: $(1+x)^0 = 1$ and $1 + 0 \cdot x = 1$, so the inequality holds with equality. [base, L1, L5]
+1.1 Base case $n = 0$: $(1+x)^0 = 1$ and $1 + 0 \cdot x = 1$, so the inequality holds with equality. [base, L1, L4, L5]
 
 1.2 Inductive hypothesis: fix $n \in \mathbb{N}$ and assume $(1+x)^n \ge 1 + nx$. [ih]
 
 1.3 Since $x \ge -1$ we have $1 + x \ge 0$, and this is exactly what licenses multiplying the inductive inequality by $1 + x$ without reversing it. [given, L3]
 
-1.4 The discarded term is nonnegative: $n x^2 \ge 0$, since $\iota(n) \ge 0$ and $x^2 \ge 0$. [L4, L5]
+1.4 The discarded term is nonnegative: $n x^2 \ge 0$, since $x^2 \ge 0$ and $\iota(n) \ge 0$, so scaling the inequality $x^2 \ge 0$ by the nonnegative factor $\iota(n)$ gives $\iota(n) x^2 \ge \iota(n) \cdot 0 = 0$; the scaling rule, and not the nonnegativity of the two factors on its own, is what licenses this. [L3, L4, L5]
 
 1.5 Equality analysis, the strict direction: if $n \ge 2$ and $x \ne 0$ with $x \ge -1$, then $(1+x)^n > 1 + nx$, by a second induction, on $j$, over the statement $(1+x)^{j+2} > 1 + (j+2)x$; for $j = 0$ we have $(1+x)^2 = 1 + 2x + x^2 > 1 + 2x$ because $x^2 > 0$; and assuming $(1+x)^{m} > 1 + mx$ for some $m \ge 2$, there are two possibilities: if $x = -1$ then $(1+x)^{m+1} = 0$ while $1 + (m+1)x = 1 - (m+1) = -m < 0$, and if $x > -1$ then $1 + x > 0$ and $(1+x)^{m+1} = (1+x)^{m}(1+x) > (1 + mx)(1 + x) = 1 + (m+1)x + mx^2 \ge 1 + (m+1)x$, so the strict inequality passes to $m+1$ in either case. [L1, L2, L3, L4, L5]
 

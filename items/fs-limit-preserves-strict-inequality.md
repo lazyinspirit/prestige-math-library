@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: limits preserve strict inequalities"
 status: draft
 origin: session
-deps: [lem-limit-preserves-order, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
+deps: [lem-limit-preserves-order, lem-limit-unique, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -14,7 +14,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -57,6 +57,8 @@ $x_k = 0$ and $y_k = 1/(k+1)$, whose limits are both $0$.
 
 [L7] Limits preserve non-strict inequalities ([[lem-limit-preserves-order]]).
 
+[L8] A sequence of reals has at most one limit ([[lem-limit-unique]]), so the symbols $\lim_k x_k$ and $\lim_k y_k$ appearing in the false claim and below denote.
+
 ## Refutation
 
 **Proof technique:** direct.
@@ -67,7 +69,7 @@ $x_k = 0$ and $y_k = 1/(k+1)$, whose limits are both $0$.
 
 2.1 The sequence $(y_k)$ converges to $0$. Let $\varepsilon > 0$ be rational; then $\varepsilon^{-1} > 0$ by [L4], so [L2] supplies a natural $N \ge 1$ with $\varepsilon^{-1} < N \cdot 1_{\mathbb{R}}$, and [L4] applied to $0 < \varepsilon^{-1} < N \cdot 1_{\mathbb{R}}$ gives $0 < (N \cdot 1_{\mathbb{R}})^{-1} < \varepsilon$. For $k \ge N$ we have $k + 1 > N$ by [L6], hence $(k+1) \cdot 1_{\mathbb{R}} > N \cdot 1_{\mathbb{R}} > 0$ by [L3], hence $0 < y_k < (N \cdot 1_{\mathbb{R}})^{-1} < \varepsilon$ by [L4], and therefore $|y_k - 0| = y_k < \varepsilon$ by [L5]. [step 1.1, L1, L2, L3, L4, L5, L6]
 
-3.1 Both sequences converge and $\lim_k x_k = 0 = \lim_k y_k$, so the conclusion $\lim_k x_k < \lim_k y_k$ fails by trichotomy, although the hypothesis $x_k < y_k$ holds at every single index. The claim is therefore false. [step 1.1, step 1.2, step 2.1, L6]
+3.1 Both sequences converge, and their limits are unique by [L8], so $\lim_k x_k = 0 = \lim_k y_k$; the conclusion $\lim_k x_k < \lim_k y_k$ therefore fails by trichotomy, although the hypothesis $x_k < y_k$ holds at every single index. The claim is therefore false. [step 1.1, step 1.2, step 2.1, L6, L8]
 
 4.1 What survives is the non-strict statement [L7]: from $x_k \le y_k$ eventually one may conclude $\lim_k x_k \le \lim_k y_k$, and here that conclusion holds with equality. [step 3.1, L7] ∎
 

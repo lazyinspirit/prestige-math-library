@@ -4,7 +4,7 @@ kind: theorem
 title: "The arithmetic mean, geometric mean inequality"
 status: draft
 origin: session
-deps: [def-finite-sum, lem-finite-sum-laws, lem-of-zero-mult, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
+deps: [def-finite-sum, lem-finite-sum-laws, lem-of-zero-mult, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
 justified_by: []
 aliases: [thm-am-gm-inequality]
 landmark: true
@@ -12,13 +12,15 @@ short: "$(\\prod a_k)^{1/n} \\le \\frac1n \\sum a_k$"
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
     - title: "AM-GM inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/AM%E2%80%93GM_inequality"
-    - title: "Bernoulli's inequality (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Bernoulli%27s_inequality"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
 pipeline_run: null
@@ -72,9 +74,9 @@ identity relating $N_j$ to any real power is needed anywhere, and none is claime
 
 [L4] Integer exponent laws ([[lem-power-laws]]): $(xy)^{m} = x^{m}y^{m}$ and $\big(x^{2}\big)^{m} = x^{2m}$.
 
-[L5] Order arithmetic: adding inequalities, multiplying inequalities of nonnegatives, scaling by a positive, and positivity of inverses of positives ([[lem-of-add-order]], [[prop-of-multiply-inequalities]], [[lem-of-sign-rules]], [[lem-of-inverse-positive]]).
+[L5] Order arithmetic: multiplying inequalities of nonnegatives, in both the strict and the nonstrict form ([[prop-of-multiply-inequalities]]); adding inequalities and scaling by a positive, both of which [[lem-of-add-order]] and [[lem-of-sign-rules]] state for the STRICT order only, so the nonstrict forms used below are the strict ones together with the case of equality, which is settled by trichotomy ([[def-ordered-field]]); and the inverse of a positive element is positive ([[lem-of-inverse-positive]]).
 
-[L6] Squares: $x^{2} \ge 0$, and $x^{2} = 0$ only for $x = 0$ ([[lem-of-square-positive]]).
+[L6] Squares: $x^{2} \ge 0$, which is $x^{2} > 0$ for $x \ne 0$ ([[lem-of-square-positive]], the only thing that item states) together with $0^{2} = 0 \cdot 0 = 0$, a product with a zero factor ([[lem-of-zero-mult]]); and $x^{2} = 0$ only for $x = 0$, the contrapositive of the same statement.
 
 [L7] Induction principle ([[thm-induction-principle]]).
 
@@ -82,7 +84,7 @@ identity relating $N_j$ to any real power is needed anywhere, and none is claime
 
 [L9] Canonical naturals: $\iota(m) > 0$ for $m \ge 1$, $\iota$ is a field homomorphism, and we write $m$ for $\iota(m)$ ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
 
-[L10] Order and addition in $\mathbb{N}$ ([[def-nat-order]], [[thm-nat-linear-order]], [[lem-nat-order-add-compatible]], [[lem-nat-discrete]], [[lem-nat-add-associative]], [[lem-nat-add-commutative]]): $\le$ is a linear order; $m \le n$ holds exactly when $n = m + i$ for some $i \in \mathbb{N}$; $m < n$ holds exactly when $m + k < n + k$, and exactly when $m + 1 \le n$; and addition is associative and commutative.
+[L10] Order and addition in $\mathbb{N}$ ([[def-nat-order]], [[thm-nat-linear-order]], [[lem-nat-order-add-compatible]], [[lem-nat-discrete]], [[lem-nat-add-associative]], [[lem-nat-add-commutative]]): $\le$ is a linear order; $m \le n$ holds exactly when $n = m + i$ for some $i \in \mathbb{N}$; $m \le n$ holds exactly when $m + k \le n + k$ and $m < n$ exactly when $m + k < n + k$, BOTH forms being stated in [[lem-nat-order-add-compatible]] and the nonstrict one being the one step 1.5 uses; $m < n$ holds exactly when $m + 1 \le n$ ([[lem-nat-discrete]]); and addition is associative and commutative.
 
 ## Proof
 

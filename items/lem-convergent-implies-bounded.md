@@ -15,7 +15,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -68,8 +68,8 @@ $M \in \mathbb{R}$ with $|x_k| \le M$ for every $k \in \mathbb{N}$.
 
 ## Remarks
 
-- This is the item that consumes [[lem-finite-set-has-max]]: the first $K$ terms are bounded because a nonempty finite set of reals has a maximum, and that fact is proved once, by induction, rather than re-derived here.
+- This is where [[lem-finite-set-has-max]] does its main work on this page: the first $K$ terms are bounded because a nonempty finite set of reals has a maximum, and that fact is proved once, by induction, rather than re-derived here. It is not the only consumer, and no claim of uniqueness is made: [[lem-null-times-bounded]] and [[rem-sequence-conventions]] cite the same lemma, each for a maximum of finitely many reals.
 
-- The converse is false. A bounded sequence need not converge ([[fs-bounded-implies-convergent]]); what is true in that direction requires a passage to a subsequence and belongs to the next page of this track.
+- The converse is false. A bounded sequence need not converge ([[fs-bounded-implies-convergent]]). What is true in that direction is the Bolzano-Weierstrass theorem, which requires a passage to a subsequence; it is **not proved anywhere in this library as things stand**, being the subject of the next page of this track, planned and not yet written.
 
 - Boundedness is exactly what makes [[lem-null-times-bounded]] applicable to a convergent factor, and that is how boundedness enters the product rule of [[thm-algebra-of-limits]].

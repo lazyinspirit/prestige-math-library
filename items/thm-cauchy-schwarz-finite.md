@@ -4,7 +4,7 @@ kind: theorem
 title: "The Cauchy-Schwarz inequality for finite sums"
 status: draft
 origin: session
-deps: [def-finite-sum, lem-finite-sum-laws, lem-of-square-positive, thm-of-square-roots, def-integer-power, lem-of-square-monotone, lem-of-abs-value, def-abs-value, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, def-ordered-field]
+deps: [def-finite-sum, lem-finite-sum-laws, lem-of-square-positive, lem-of-zero-mult, thm-of-square-roots, def-integer-power, lem-of-square-monotone, lem-of-abs-value, def-abs-value, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: true
@@ -13,9 +13,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -58,13 +58,13 @@ inequality independent of the existence theorem for roots.
 
 [L1] Laws of finite sums ([[lem-finite-sum-laws]], [[def-finite-sum]]): additivity, scaling, monotonicity, and the fact that a sum of nonnegative terms is nonnegative and vanishes only if every term vanishes.
 
-[L2] Squares ([[lem-of-square-positive]], [[def-integer-power]]): $x^{2} \ge 0$ for every $x$, and $x^{2} = 0$ only for $x = 0$.
+[L2] Squares ([[lem-of-square-positive]], [[def-integer-power]]): $x^{2} \ge 0$ for every $x$, and $x^{2} = 0$ only for $x = 0$; and a product with a zero factor vanishes, $0 \cdot x = 0$ ([[lem-of-zero-mult]]).
 
 [L3] Square roots ([[thm-of-square-roots]]): every $c \ge 0$ has a unique $\sqrt{c} \ge 0$ with $(\sqrt{c})^{2} = c$.
 
 [L4] Monotonicity of squaring ([[lem-of-square-monotone]]): for $x, y \ge 0$, $x \le y \iff x^{2} \le y^{2}$; and $|x|^{2} = x^{2}$ with $|x| \ge 0$ ([[lem-of-abs-value]], [[def-abs-value]]).
 
-[L5] Order arithmetic in an ordered field: adding inequalities, and scaling an inequality by a positive element, with the inverse of a positive element positive ([[lem-of-add-order]], [[lem-of-sign-rules]], [[lem-of-inverse-positive]], [[def-ordered-field]]).
+[L5] Order arithmetic in an ordered field: adding inequalities ([[lem-of-add-order]]) and scaling an inequality by a positive element ([[lem-of-sign-rules]], claim 4) are both stated there for the STRICT order alone, so the nonstrict uses below are those statements together with the case of equality, settled by trichotomy ([[def-ordered-field]]); the inverse of a positive element is positive ([[lem-of-inverse-positive]], claim 1); and a nonzero factor cancels, since $\lambda x = 0$ with $\lambda \ne 0$ gives $x = \lambda^{-1}(\lambda x) = \lambda^{-1} \cdot 0 = 0$, a product with a zero factor ([[lem-of-zero-mult]]).
 
 ## Proof
 

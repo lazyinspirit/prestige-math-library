@@ -47,12 +47,15 @@ rule. [[lem-subsequence-inherits-limit]] gives the standard divergence test: two
 subsequences with different limits force divergence.
 
 **Where the older pages are consumed.** [[lem-convergent-implies-bounded]] is
-the item that uses round one's [[lem-finite-set-has-max]]: the first finitely
-many terms of a convergent sequence are bounded because a nonempty finite set of
-reals has a maximum, proved once by induction and cited here rather than
-re-derived. [[lem-index-map-grows]] is the corresponding consumer on the
-$\mathbb{N}$ side, using discreteness ([[lem-nat-discrete]]) to turn a strictly
-increasing index map into the inequality $n_k \ge k$.
+where round one's [[lem-finite-set-has-max]] does its main work: the first
+finitely many terms of a convergent sequence are bounded because a nonempty
+finite set of reals has a maximum, proved once by induction and cited here rather
+than re-derived. Two further items on this page take a maximum of finitely many
+reals and cite the same lemma. [[lem-index-map-grows]] is the corresponding
+consumer on the $\mathbb{N}$ side, turning a strictly increasing index map into
+the inequality $n_k \ge k$ by induction, using both that $0$ is the least natural
+and that $\mathbb{N}$ is discrete ([[lem-nat-discrete]]); neither ingredient may
+be dropped, as the remarks there show.
 
 **Divergence to infinity is divergence.** [[def-divergence-to-infinity]] fixes
 the meaning of $x_k \to +\infty$ and stresses what it does not mean: $+\infty$ is
@@ -66,7 +69,8 @@ two notions, valid for sequences of positive terms.
 **The three false statements guard the three standard errors.** A bounded
 sequence need not converge ([[fs-bounded-implies-convergent]]); the true
 statement in that direction requires passing to a subsequence and is
-Bolzano-Weierstrass, on the next page. Strict inequalities are not preserved in
+Bolzano-Weierstrass, which this library does not yet prove anywhere. Strict
+inequalities are not preserved in
 the limit ([[fs-limit-preserves-strict-inequality]]); only the non-strict form
 [[lem-limit-preserves-order]] survives, because a positive gap may shrink to
 nothing. And one convergent subsequence says nothing at all about the sequence
@@ -75,9 +79,18 @@ every subsequence, or a Cauchy hypothesis.
 
 **What is deliberately deferred.** Monotone sequences and the monotone
 convergence theorem, the Bolzano-Weierstrass theorem, and the completeness of
-$\mathbb{R}$ in the Cauchy sense all belong to the next page of this track. This
-page proves only the easy half of the Cauchy story,
-[[lem-convergent-implies-cauchy]], and says plainly that the converse is a
-theorem it does not prove. Nothing here uses the least-upper-bound property
+$\mathbb{R}$ in the Cauchy sense all belong to the next page of this track,
+*Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, which is
+planned and not yet written. Of those, monotone sequences are not defined
+anywhere in this library, and neither the monotone convergence theorem nor the
+Bolzano-Weierstrass theorem is proved anywhere in it as things stand; no item
+here may be cited for either. Cauchy completeness is the
+exception and is stated as such rather than left vague: every Cauchy sequence of
+reals converges, for the $\mathbb{R}$ this page works in, is already proved on the
+Cauchy-construction page ([[thm-reals-cauchy-complete]]); what the next page will
+add is a proof from the least-upper-bound property that does not go through a
+construction. This page itself proves only the easy half,
+[[lem-convergent-implies-cauchy]], and its remarks say exactly where the other
+half stands. Nothing here uses the least-upper-bound property
 except through the Archimedean property ([[thm-of-archimedean]]), so every result
 on this page holds verbatim for sequences of rationals.

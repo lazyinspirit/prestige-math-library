@@ -6,7 +6,7 @@ status: draft
 origin: session
 deps: [lem-sup-sum, lem-sup-translate, ex-sup-of-open-interval, lem-of-add-order,
        lem-of-sign-rules, lem-max-is-sup, def-max-min, def-complete-ordered-field,
-       def-ordered-field, def-field, cor-of-one-positive]
+       def-ordered-field, def-field, cor-of-one-positive, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
@@ -16,7 +16,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -61,9 +61,9 @@ left unattained, just as $\sup S = 1$ is unattained in
 
 [L3] Sumset: for nonempty $X, Y \subseteq \mathbb{R}$ both bounded above, the sumset $X + Y$ is nonempty and bounded above and $\sup(X + Y) = \sup X + \sup Y$ ([[lem-sup-sum]]).
 
-[L4] Order and addition: $a < b$ if and only if $a + c < b + c$; and strict inequalities add, so $a < b$ together with $c < d$ gives $a + c < b + d$ ([[lem-of-add-order]], [[def-ordered-field]]).
+[L4] Order and addition: $a < b$ implies $a + c < b + c$, and strict inequalities add, so $a < b$ together with $c < d$ gives $a + c < b + d$ (claims 1 and 2 of [[lem-of-add-order]]). Applying the first claim with the constant $c$ and then with the constant $-c$ turns it into the equivalence $a < b$ if and only if $a + c < b + c$, which is the form used below whenever a constant is subtracted from each part of a chain of inequalities ([[def-ordered-field]]).
 
-[L5] Halving: $0 < 1$, hence $2 = 1 + 1 > 0$, so $2 \ne 0$ and $2^{-1}$ exists with $c = (c \cdot 2^{-1}) \cdot 2$ for every $c$; and multiplying by the positive constant $2$ is an order equivalence, so $x < y$ if and only if $x \cdot 2 < y \cdot 2$ ([[cor-of-one-positive]], [[lem-of-sign-rules]], [[def-field]], [[def-ordered-field]]).
+[L5] Halving: $0 < 1$, hence $2 = 1 + 1 > 0$, so $2 \ne 0$ and $2^{-1}$ exists with $c = (c \cdot 2^{-1}) \cdot 2$ for every $c$; $0 \cdot 2 = 0$ and $1 \cdot 2 = 2$ ([[lem-of-zero-mult]], [[def-field]]); and multiplying by the positive constant $2$ is an order equivalence, so $x < y$ if and only if $x \cdot 2 < y \cdot 2$ (claim 4 of [[lem-of-sign-rules]]) ([[cor-of-one-positive]], [[def-field]], [[def-ordered-field]]).
 
 [L6] Arithmetic of the named constants, from the field axioms: $2 + 1 = 3$, $3 + 1 = 4$, $2 + 2 = 4$, $1 + 3 = 4$, $x + x = x \cdot 2$ for every $x$, $2 \cdot 2 = 4$ and $3 \cdot 2 = 4 + 2$ ([[def-field]], [[def-complete-ordered-field]]).
 
@@ -99,16 +99,6 @@ left unattained, just as $\sup S = 1$ is unattained in
 
 ## Remarks
 
-- The inclusion $S + T \subseteq U$ alone already gives $\sup(S+T) \le 4$, which
-  is the easy half of [[lem-sup-sum]]. What the explicit decomposition
-  $x = s_x + t_x$ buys is the reverse inclusion, and with it the fact that the
-  sumset is the whole interval rather than a proper subset of it. The lemma
-  proves the reverse inequality without any such decomposition, by combining two
-  epsilon approximations at $\varepsilon/2$ each.
-- $\sup T$ was obtained by translating $S$ rather than by repeating the epsilon
-  computation. This is the normal division of labour: the general lemmas
-  ([[lem-sup-translate]], [[lem-sup-scale]], [[lem-sup-sum]]) are proved once, and
-  concrete suprema are then transported rather than recomputed.
-- No analogue holds for products of sets. The sumset identity depends on the
-  order being translation invariant, which multiplication is not: scaling by a
-  negative number exchanges suprema and infima ([[lem-sup-scale]]).
+- The inclusion $S + T \subseteq U$ alone already gives $\sup(S+T) \le 4$, which is the easy half of [[lem-sup-sum]]. What the explicit decomposition $x = s_x + t_x$ buys is the reverse inclusion, and with it the fact that the sumset is the whole interval rather than a proper subset of it. The lemma proves the reverse inequality without any such decomposition, by combining two epsilon approximations at $\varepsilon/2$ each.
+- $\sup T$ was obtained by translating $S$ rather than by repeating the epsilon computation. This is the normal division of labour: the general lemmas ([[lem-sup-translate]], [[lem-sup-scale]], [[lem-sup-sum]]) are proved once, and concrete suprema are then transported rather than recomputed.
+- No analogue holds for products of sets. The sumset identity depends on the order being translation invariant, which multiplication is not: scaling by a negative number exchanges suprema and infima ([[lem-sup-scale]]).

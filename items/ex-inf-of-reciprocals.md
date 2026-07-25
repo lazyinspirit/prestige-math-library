@@ -14,6 +14,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -54,7 +58,7 @@ an explicit index is produced.
 
 [L2] Archimedean property: $\mathbb{R}$ is a complete ordered field, hence Archimedean, so for every $x \in \mathbb{R}$ there is a natural $n \ge 1$ with $x < n \cdot 1$ ([[thm-of-archimedean]], [[def-archimedean-field]]).
 
-[L3] Inverses and order: if $a > 0$ then $a^{-1} > 0$; if $0 < a < b$ then $0 < b^{-1} < a^{-1}$; and $(a^{-1})^{-1} = a$ for every $a \ne 0$ ([[lem-of-inverse-positive]], [[def-field]]).
+[L3] Inverses and order: if $a > 0$ then $a^{-1} > 0$; if $0 < a < b$ then $0 < b^{-1} < a^{-1}$ (claims 1 and 2 of [[lem-of-inverse-positive]]); and, from uniqueness of the multiplicative inverse, $(a^{-1})^{-1} = a$ for every $a \ne 0$ and $1^{-1} = 1$, since $a^{-1} a = 1$ exhibits $a$ as an inverse of $a^{-1}$ and the identity axiom $1 \cdot x = x$ at $x = 1$ exhibits $1$ as an inverse of itself ([[def-field]]).
 
 [L4] Multiplying by a positive constant is an order equivalence: for $c > 0$ one has $x < y$ if and only if $xc < yc$, and hence, by trichotomy, $x \le y$ if and only if $xc \le yc$ ([[lem-of-sign-rules]], [[def-ordered-field]]).
 
@@ -72,7 +76,7 @@ an explicit index is produced.
 
 **Proof technique:** direct.
 
-1.1 $H$ is nonempty: taking $n = 1$ gives $1 \cdot 1 = 1$ and $1/1 = 1^{-1} = 1$, so $1 \in H$. [L1, L3]
+1.1 $H$ is nonempty: taking $n = 1$ gives the canonical natural $1 \cdot 1 = 1$ by [L1], and $1/1 = 1^{-1} = 1$ by [L3], so $1 \in H$. [L1, L3]
 
 1.2 Every element of $H$ is positive, so $0$ is a lower bound of $H$ and $H$ is bounded below: for $n \ge 1$ one has $n \cdot 1 > 0$, hence $1/n = (n \cdot 1)^{-1} > 0$ and in particular $0 \le 1/n$. [L1, L3, L8]
 
@@ -96,20 +100,6 @@ an explicit index is produced.
 
 ## Remarks
 
-- The set $H$ is bounded, with $0 \le h \le 1$ for every $h \in H$, and its members
-  are pairwise distinct, since $n \mapsto 1/(n+1)$ is strictly decreasing by
-  [L1]; it is the standard example showing that a bounded set with infinitely
-  many members can attain one of its two bounds and miss the other. ("Infinite"
-  is used here in its everyday sense: no definition of finiteness is in scope on
-  this page, and nothing above or below depends on one.)
-- Positivity of every element is what makes $0$ a lower bound, and the
-  Archimedean property is what makes it the greatest one. In a non-Archimedean
-  ordered field the argument breaks at exactly one point, step 3.2: it is the
-  Archimedean property ([[thm-of-archimedean]]) that produces a natural below
-  which $1/(n+1)$ falls, and [[cex-ordered-field-not-archimedean]] exhibits an
-  ordered field where no such natural exists. What that item establishes is the
-  failure of the Archimedean property there; it says nothing about $H$ or its
-  greatest lower bound, and this page does not compute one. So the value
-  $\inf H = 0$ is a statement about $\mathbb{R}$, not a formal manipulation.
-- Read as a sequence rather than a set, $H$ is the classical null sequence; the
-  rational form of the same fact is [[ex-one-over-n-null]].
+- The set $H$ is bounded, with $0 \le h \le 1$ for every $h \in H$, and its members are pairwise distinct, since $n \mapsto 1/n$ is strictly decreasing on $\{1, 2, 3, \dots\}$: for $n < m$ the map $n \mapsto n \cdot 1$ is strictly increasing by [L1], so $0 < n \cdot 1 < m \cdot 1$, and inversion reverses that by [L3], giving $1/m < 1/n$. It is the standard example showing that a bounded set with infinitely many members can attain one of its two bounds and miss the other. ("Infinite" is used here in its everyday sense: no definition of finiteness is in scope on this page, and nothing above or below depends on one.)
+- Positivity of every element is what makes $0$ a lower bound, and the Archimedean property is what makes it the greatest one. In a non-Archimedean ordered field the argument breaks at exactly one point, step 1.4: it is the Archimedean property ([[thm-of-archimedean]]) that supplies, for a given $\varepsilon > 0$, an index $n_\varepsilon$ with $\varepsilon^{-1} < n_\varepsilon \cdot 1$, and hence with $1/n_\varepsilon < \varepsilon$ in step 2.1. And [[cex-ordered-field-not-archimedean]] exhibits an ordered field where no such natural exists. What that item establishes is the failure of the Archimedean property there; it says nothing about $H$ or its greatest lower bound, and this page does not compute one. So the value $\inf H = 0$ is a statement about $\mathbb{R}$, not a formal manipulation.
+- Read as a sequence rather than a set, $H$ is the classical null sequence; the rational form of the same fact is [[ex-one-over-n-null]].

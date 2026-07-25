@@ -4,7 +4,7 @@ kind: lemma
 title: "For positive terms, null and divergence to $+\\infty$ are reciprocal"
 status: draft
 origin: session
-deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-limit-of-tail, lem-of-inverse-positive, prop-of-reciprocal-order, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
+deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-limit-of-tail, lem-of-inverse-positive, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -15,7 +15,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -48,7 +48,7 @@ The positivity hypothesis is essential and is not a convenience; see the remarks
 
 [L2] Inverses and order: $a > 0$ implies $a^{-1} > 0$, and $0 < a < b$ implies $0 < b^{-1} < a^{-1}$ ([[lem-of-inverse-positive]]).
 
-[L3] Reciprocals against $1$, and the involution $(u^{-1})^{-1} = u$ for $u \ne 0$ ([[prop-of-reciprocal-order]], [[def-field]]).
+[L3] The involution $(u^{-1})^{-1} = u$ for $u \ne 0$, from uniqueness of multiplicative inverses ([[def-field]]).
 
 [L4] Absolute value: $|u| = u$ when $u \ge 0$, and $|u - 0| = |u|$ ([[lem-of-abs-value]], [[def-real-order]]).
 

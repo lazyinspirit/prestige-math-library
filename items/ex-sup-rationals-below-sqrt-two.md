@@ -8,7 +8,7 @@ deps: [lem-sup-epsilon, thm-of-square-roots, fs-sqrt2-rational, fs-rationals-com
        lem-of-q-embeds, lem-of-q-dense, thm-of-archimedean, lem-of-square-monotone,
        lem-finite-set-has-max, def-max-min, def-archimedean-field,
        def-complete-ordered-field, def-ordered-field, def-field,
-       cor-of-one-positive, lem-of-add-order]
+       cor-of-one-positive, lem-of-add-order, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
@@ -16,9 +16,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -73,7 +73,7 @@ and once by Cauchy sequences.
 
 [L7] Every set $\{a, b\}$ of two reals has a maximum, which is one of the two entries and dominates both ([[lem-finite-set-has-max]], [[def-max-min]]).
 
-[L8] Order and least upper bounds: $0 < 1$, hence $2 = 1 + 1 > 1 > 0$ in both fields; trichotomy holds, so the negation of $a \le b$ is $b < a$; the order is transitive; adding a constant preserves it; multiplication distributes over addition, so $2 \cdot 2 = 2 + 2$; and a least upper bound is an upper bound that is $\le$ every upper bound ([[cor-of-one-positive]], [[lem-of-add-order]], [[def-complete-ordered-field]], [[def-ordered-field]], [[def-field]]).
+[L8] Order and least upper bounds: $0 < 1$, hence $2 = 1 + 1 > 1 > 0$ in both fields; trichotomy holds, so the negation of $a \le b$ is $b < a$; the order is transitive; adding a constant preserves it; multiplication distributes over addition, so $2 \cdot 2 = 2 + 2$; $0 \cdot a = 0$ for every $a$, so $0^2 = 0$ ([[lem-of-zero-mult]]); and a least upper bound is an upper bound that is $\le$ every upper bound ([[cor-of-one-positive]], [[lem-of-add-order]], [[def-complete-ordered-field]], [[def-ordered-field]], [[def-field]]).
 
 ## Verification
 
@@ -95,7 +95,7 @@ and once by Cauchy sequences.
 
 2.3 Put $a_\varepsilon := \max\{0,\ r - \varepsilon\}$, which exists by [L7]; then $0 \le a_\varepsilon$, and $a_\varepsilon < r$ because $a_\varepsilon$ is one of the two entries $0$ and $r - \varepsilon$, of which the first is $< r$ by 1.1 and the second is $< r$ because $\varepsilon > 0$. [step 1.1, step 1.4, L7, L8, choose]
 
-2.4 Through $\iota$, the bound $u$ is an upper bound of $\iota(S)$ in $\mathbb{R}$: for $q \in S$ the inequality $q \le u$ in $\mathbb{Q}$ gives $\iota(q) \le \iota(u)$ by order preservation. [step 1.3, L3]
+2.4 The image $\iota(u)$ of the bound $u$ is an upper bound of $\iota(S)$ in $\mathbb{R}$: for $q \in S$ the inequality $q \le u$ in $\mathbb{Q}$ gives $\iota(q) \le \iota(u)$ by order preservation. [step 1.3, L3]
 
 3.1 Density applied to $a_\varepsilon < r$ produces a rational $q_\varepsilon$ with $a_\varepsilon < \iota(q_\varepsilon) < r$; then $\iota(q_\varepsilon) > a_\varepsilon \ge 0$ forces $q_\varepsilon > 0$ by order reflection, and $0 \le \iota(q_\varepsilon) < r$ gives $\iota(q_\varepsilon^2) = \iota(q_\varepsilon)^2 < r^2 = 2 = \iota(2)$ by [L2], hence $q_\varepsilon^2 < 2$ in $\mathbb{Q}$; so $q_\varepsilon \in S$ and $r - \varepsilon \le a_\varepsilon < \iota(q_\varepsilon)$. [step 2.3, step 1.1, L4, L2, L3]
 
@@ -109,15 +109,6 @@ and once by Cauchy sequences.
 
 ## Remarks
 
-- The set $S$ is bounded above in $\mathbb{Q}$, by $2$, as step 1.5 checks. Both
-  hypotheses of the least-upper-bound property are therefore satisfied *inside*
-  $\mathbb{Q}$, and the conclusion still fails. The property is a genuine
-  assumption about the field, not a consequence of the order axioms alone.
-- The proof of leastness uses density twice, once to find an element of $S$ close
-  below $\sqrt{2}$ and once to squeeze a rational between $\sqrt{2}$ and a
-  putative rational least upper bound. Both uses go through [[lem-of-q-dense]],
-  which is itself a consequence of the Archimedean property
-  ([[thm-of-archimedean]]).
-- The same argument with $2$ replaced by any positive rational that is not the
-  square of a rational produces another witness, so the failure is pervasive
-  rather than a curiosity attached to $\sqrt{2}$.
+- The set $S$ is bounded above in $\mathbb{Q}$, by $2$, as step 1.5 checks. Both hypotheses of the least-upper-bound property are therefore satisfied *inside* $\mathbb{Q}$, and the conclusion still fails. The property is a genuine assumption about the field, not a consequence of the order axioms alone.
+- The proof of leastness uses density twice, once to find an element of $S$ close below $\sqrt{2}$ and once to squeeze a rational between $\sqrt{2}$ and a putative rational least upper bound. Both uses go through [[lem-of-q-dense]], which is itself a consequence of the Archimedean property ([[thm-of-archimedean]]).
+- The same argument runs with $2$ replaced by any positive rational $c$ that is not the square of a rational, once its two numerical steps are readjusted: step 1.2 must exhibit a positive rational whose square lies below $c$, and step 1.5 a positive rational whose square lies above it, neither of which is the constant $1$ or $2$ in general. Everything after those two steps is unchanged, so the failure is pervasive rather than a curiosity attached to $\sqrt{2}$.

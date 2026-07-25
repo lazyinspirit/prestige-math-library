@@ -4,7 +4,7 @@ kind: theorem
 title: "Minkowski's inequality for finite sums (rational exponent)"
 status: draft
 origin: session
-deps: [thm-holder-finite, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, lem-triangle-inequality-finite, lem-of-triangle-inequality, lem-of-abs-value, def-abs-value, def-rat-operations, def-rat-order, def-rationals, thm-nth-roots-exist, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order]
+deps: [thm-holder-finite, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, lem-triangle-inequality-finite, lem-of-triangle-inequality, lem-of-abs-value, def-abs-value, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, thm-nth-roots-exist, def-ordered-field, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order]
 justified_by: []
 aliases: []
 landmark: true
@@ -13,9 +13,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -66,9 +66,9 @@ $\big|\sum_{k<n}(a_k+b_k)\big| \le \sum_{k<n}|a_k| + \sum_{k<n}|b_k|$.
 
 [L4] Absolute values ([[lem-of-abs-value]], [[def-abs-value]], [[lem-of-triangle-inequality]]): $|x| \ge 0$, $|xy| = |x||y|$, and $|x+y| \le |x| + |y|$.
 
-[L5] Rational arithmetic ([[def-rat-operations]], [[def-rationals]], [[def-rat-order]]): for rational $p > 1$ the number $q := p/(p-1)$ is a rational with $q > 1$, $\frac1p + \frac1q = 1$, $(p-1)q = p$ and $1 - \frac1q = \frac1p$.
+[L5] Rational arithmetic ([[def-rat-operations]], [[def-rationals]], [[def-rat-order]]), carried out in the totally ordered field $\mathbb{Q}$ ([[thm-rat-ordered-field]], which is what makes the order comparisons below legitimate, and which supplies totality, compatibility with addition and closure of the positives under multiplication but NOT $1 > 0$; that is [[cor-of-one-positive]], valid in $\mathbb{Q}$ because $\mathbb{Q}$ is an ordered field): for rational $p > 1$ one has $p - 1 > 0$ and, since $1 > 0$, also $p > p - 1 > 0$, so the number $q := p/(p-1)$ is a rational with $q > 1$, $\frac1p + \frac1q = 1$, $(p-1)q = p$ and $1 - \frac1q = \frac1p$.
 
-[L6] Order arithmetic: adding inequalities, scaling by a nonnegative or positive element, and positivity of inverses of positives ([[lem-of-add-order]], [[lem-of-sign-rules]], [[lem-of-inverse-positive]]).
+[L6] Order arithmetic: [[lem-of-add-order]] and [[lem-of-sign-rules]] state adding inequalities and scaling by a positive element for the STRICT order only, so the nonstrict forms used below (adding two $\le$, and scaling a $\le$ by a nonnegative element) are those statements together with the case of equality, which is settled by trichotomy ([[def-ordered-field]]); and the inverse of a positive element is positive ([[lem-of-inverse-positive]], claim 1).
 
 ## Proof
 

@@ -18,7 +18,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -60,7 +60,7 @@ $\min\{1/2,\ \varepsilon/2\}$.
 
 [L2] Epsilon characterisation of the infimum: for a nonempty $X \subseteq \mathbb{R}$ bounded below and a lower bound $m$ of $X$, one has $m = \inf X$ if and only if for every $\varepsilon > 0$ there is $x \in X$ with $x < m + \varepsilon$; such an $\inf X$ exists for every nonempty $X$ bounded below ([[lem-inf-epsilon]], [[thm-infimum-property]], [[def-infimum]]).
 
-[L3] Order: trichotomy holds, so exactly one of $a < b$, $a = b$, $b < a$ is true, $a < a$ is impossible, and the negation of $a \le b$ is $b < a$; the order is transitive; and adding a constant preserves it, so $a < b$ if and only if $a + c < b + c$ ([[def-complete-ordered-field]], [[def-ordered-field]], [[lem-of-add-order]]).
+[L3] Order: trichotomy holds, so exactly one of $a < b$, $a = b$, $b < a$ is true, $a < a$ is impossible, the negation of $a \le b$ is $b < a$, and $a < b$ implies $a \le b$; the order is transitive; and adding a constant preserves it, that is, $a < b$ implies $a + c < b + c$ (claim 1 of [[lem-of-add-order]]) ([[def-complete-ordered-field]], [[def-ordered-field]], [[lem-of-add-order]]).
 
 [L4] Halving: $0 < 1$, so $2 = 1 + 1 > 1 > 0$; hence $2 \ne 0$ and $2^{-1}$ exists, and $2 > 1$ gives $0 < 2^{-1} < 1$; consequently $0 < c/2 < c$ for every $c > 0$ ([[cor-of-one-positive]], [[lem-of-add-order]], [[prop-of-reciprocal-order]], [[prop-of-ab-less-b]], [[def-field]]).
 
@@ -104,16 +104,6 @@ $\min\{1/2,\ \varepsilon/2\}$.
 
 ## Remarks
 
-- The two entries of the witness $\max\{2^{-1},\ 1 - \varepsilon/2\}$ play different
-  roles, and dropping either breaks the argument. For small $\varepsilon$ the
-  approximating entry $1 - \varepsilon/2$ is the larger one and does the work; for
-  $\varepsilon \ge 1$ that entry can fall to $0$ or below and leave $I$, which is
-  exactly what the guard $2^{-1}$ prevents. Using $1 - \varepsilon$ itself as the
-  witness fails for the same reason and also fails the strict inequality
-  $1 - \varepsilon < s$.
-- The interval $I$ is the standard witness that a supremum need not belong to its
-  set ([[fs-sup-belongs-to-set]]); that consequence is recorded separately as
-  [[cex-sup-not-attained]].
-- Compare [[ex-sup-of-closed-interval]]: the closed interval $[0,1]$ has the same
-  supremum and the same infimum, and attains both. The value of a supremum
-  therefore carries no information at all about whether it is attained.
+- The two entries of the witness $\max\{2^{-1},\ 1 - \varepsilon/2\}$ play different roles, and dropping either breaks the argument. For small $\varepsilon$ the approximating entry $1 - \varepsilon/2$ is the larger one and does the work; for $\varepsilon \ge 2$ that entry falls to $0$ or below and leaves $I$, which is exactly what the guard $2^{-1}$ prevents. Using $1 - \varepsilon$ itself as the witness fails for the same reason and also fails the strict inequality $1 - \varepsilon < s$.
+- The interval $I$ is the standard witness that a supremum need not belong to its set ([[fs-sup-belongs-to-set]]); that consequence is recorded separately as [[cex-sup-not-attained]].
+- Compare [[ex-sup-of-closed-interval]]: the closed interval $[0,1]$ has the same supremum and the same infimum, and attains both. The value of a supremum therefore carries no information at all about whether it is attained.

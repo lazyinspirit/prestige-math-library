@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: a convergent subsequence forces the sequence to converge"
 status: draft
 origin: session
-deps: [lem-subsequence-inherits-limit, def-sequence, def-real-limit, fs-bounded-implies-convergent, lem-index-map-grows]
+deps: [lem-subsequence-inherits-limit, lem-limit-unique, lem-convergent-implies-cauchy, def-sequence, def-real-limit, fs-bounded-implies-convergent, thm-reals-cauchy-complete]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,9 +12,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -45,7 +45,7 @@ The true statement in this direction runs the other way:
 
 [L2] A constant sequence converges to its value ([[def-real-limit]], [[def-sequence]]).
 
-[L3] Subsequences are the composites along strictly increasing index maps ([[def-sequence]], [[lem-index-map-grows]]).
+[L3] Subsequences are the composites along strictly increasing index maps ([[def-sequence]]).
 
 [L4] Every subsequence of a convergent sequence converges to the same limit ([[lem-subsequence-inherits-limit]]), and a sequence is a subsequence of itself along the identity index map, which is strictly increasing ([[def-sequence]]).
 
@@ -65,6 +65,6 @@ The true statement in this direction runs the other way:
 
 - The witness is the same alternating sequence that refutes [[fs-bounded-implies-convergent]]. Its subsequence along the index map $n$, the even indices, is constant $1$, and its subsequence along the index map $m$, the odd indices, is constant $-1$; either one alone converges, and it is the disagreement between them that kills convergence of the whole sequence, by the divergence test in [[lem-subsequence-inherits-limit]].
 
-- A second repair exists and is **not proved here**: if $(x_k)$ is Cauchy ([[lem-convergent-implies-cauchy]] records the converse implication) and some subsequence converges to $x$, then $(x_k)$ converges to $x$. That is the standard bridge from Cauchy to convergence, it belongs with the completeness material on the next page of this track, and it is mentioned here only to make clear which extra hypothesis repairs the false claim. Nothing above uses it.
+- A second repair exists and is **not proved on this page**: if $(x_k)$ is Cauchy, in the sense of [[def-real-limit]] whose other direction is [[lem-convergent-implies-cauchy]], and some subsequence converges to $x$, then $(x_k)$ converges to $x$. That is the standard bridge from Cauchy to convergence, and it belongs with the completeness material on the next page of this track, which is planned and not yet written. It is named here only to make clear which extra hypothesis repairs the false claim; nothing above uses it. It is worth adding, so that the reader is not left thinking the repair is unavailable, that for the $\mathbb{R}$ of this library the conclusion is already in hand by a shorter route: [[thm-reals-cauchy-complete]] gives that a Cauchy sequence of reals converges outright, with no subsequence hypothesis at all, and uniqueness of limits ([[lem-limit-unique]]) with [[lem-subsequence-inherits-limit]] then identifies its limit as $x$. What the next page will supply is that same conclusion proved from the least-upper-bound property rather than from a construction.
 
 - A useful way to remember the asymmetry: a subsequence sees only part of the sequence, so it can only ever certify what happens along the indices it keeps. Convergence is a statement about all indices, and no single subsequence carries that information.

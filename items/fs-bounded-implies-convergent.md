@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: every bounded sequence converges"
 status: draft
 origin: session
-deps: [def-real-limit, def-sequence, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-index-map-grows, thm-recursion, thm-induction-principle, lem-of-abs-value, cor-of-one-positive, lem-of-add-order, lem-nat-successor-neq-self, def-nat-order, def-nat-addition, thm-nat-linear-order, def-natural-numbers, def-field, def-complete-ordered-field, def-ordered-field]
+deps: [def-real-limit, def-sequence, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-index-map-grows, thm-recursion, thm-induction-principle, lem-of-abs-value, def-abs-value, def-real-order, cor-of-one-positive, lem-of-add-order, lem-nat-successor-neq-self, def-nat-order, def-nat-addition, thm-nat-linear-order, def-natural-numbers, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -14,7 +14,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -39,9 +39,12 @@ The implication in the opposite direction is true and is
 claim above asserts the converse, and it is refuted below by the alternating
 sequence whose terms are $1$ and $-1$.
 
-Because integer powers are not yet available in this library, the sequence
-usually written $x_k = (-1)^k$ is introduced here by recursion
-([[thm-recursion]]), which is exactly as explicit and needs no new machinery.
+The sequence usually written $x_k = (-1)^k$ is introduced here by recursion
+([[thm-recursion]]), as the unique $(s_k)$ with $s_0 = 1$ and
+$s_{\sigma(k)} = -s_k$. That is the same sequence under a different presentation,
+and it is chosen because the three inductions of the refutation read straight off
+those two recursion equations, whereas the power notation would first have to be
+unwound into them.
 
 ## Facts & Assumptions
 
@@ -49,7 +52,7 @@ usually written $x_k = (-1)^k$ is introduced here by recursion
 
 [L1] Recursion theorem ([[thm-recursion]]) and the induction principle ([[thm-induction-principle]]).
 
-[L2] Absolute value and field arithmetic: $|-u| = |u|$, $|1| = 1$ since $1 > 0$, and $-(-u) = u$ ([[lem-of-abs-value]], [[cor-of-one-positive]], [[def-field]]).
+[L2] Absolute value and field arithmetic: $|-u| = |u|$ ([[lem-of-abs-value]]); $|1| = 1$, because $1 > 0$ ([[cor-of-one-positive]]) and $|v| = v$ whenever $v \ge 0$ by the definition of the absolute value ([[def-real-order]], [[def-abs-value]]); and $-(-u) = u$ ([[def-field]]).
 
 [L3] Order in $\mathbb{R}$: $0 < 1$, sums of positives are positive, and adding a constant preserves the order, so $1 - (-1) = 1 + 1 > 0$ and hence $-1 < 1$ ([[cor-of-one-positive]], [[lem-of-add-order]], [[def-complete-ordered-field]], [[def-ordered-field]]).
 
@@ -87,7 +90,7 @@ usually written $x_k = (-1)^k$ is introduced here by recursion
 
 - The refutation is self-contained: the witness is constructed by recursion, its boundedness and its two subsequential limits are each proved by induction, and the failure of convergence comes from the divergence test of [[lem-subsequence-inherits-limit]] together with uniqueness of limits ([[lem-limit-unique]]).
 
-- **What is true in this direction** is the Bolzano-Weierstrass theorem: every bounded sequence of reals has a convergent *subsequence*. That is a genuine theorem, it needs the least-upper-bound property, and it is proved on the next page of this track. The false claim above is what one gets by deleting the word "subsequence" from it.
+- **What is true in this direction** is the Bolzano-Weierstrass theorem: every bounded sequence of reals has a convergent *subsequence*. That is a genuine theorem and it needs the least-upper-bound property. It is **not proved anywhere in this library as things stand**: it is the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, which is planned and not yet written. It is named here only to say what the correct statement is; nothing above uses it, and no item of this library may be cited for it. The false claim above is what one gets by deleting the word "subsequence" from it.
 
 - The error is tempting because boundedness feels like "no room to escape". It is not: boundedness forbids running away, but it does not forbid oscillating forever, and oscillation is exactly what $(s_k)$ does.
 

@@ -4,7 +4,7 @@ kind: definition
 title: "Integer powers $a^m$"
 status: draft
 origin: session
-deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, thm-int-ordered-ring]
+deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-of-zero-mult, thm-int-ordered-ring]
 justified_by: [lem-power-laws]
 aliases: [def-power]
 landmark: false
@@ -81,7 +81,8 @@ $m = 0$, where $-\iota(0) = \iota(0)$ and $(a^0)^{-1} = 1^{-1} = 1 = a^0$.
   studied as a function of two *real* variables and one wants continuity, which
   is unavailable and irrelevant here: the exponent in $a^m$ is an integer, never
   a real.
-- $0^n = 0$ for every $n \ge 1$, since $0^{n} = 0^{n-1} \cdot 0 = 0$; and
+- $0^n = 0$ for every $n \ge 1$, since $0^{n} = 0^{n-1} \cdot 0 = 0$, a product
+  with a zero factor ([[lem-of-zero-mult]]); and
   $0^{-n}$ is not defined for $n \ge 1$, since $0$ has no inverse.
 - The exponent is an integer and stays an integer. Rational exponents are a
   separate construction resting on the existence of roots

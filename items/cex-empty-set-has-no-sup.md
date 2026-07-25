@@ -77,16 +77,6 @@ not an element of $\mathbb{R}$.
 
 ## Remarks
 
-- The same argument, applied to lower bounds, shows that $\emptyset$ has no
-  infimum either: every real is a lower bound and there is no greatest real,
-  since $w < w + 1$ for every $w$.
-- Together with [[cex-unbounded-set-has-no-sup]] this shows that both hypotheses
-  of the least-upper-bound property are load bearing, and that they fail
-  independently: $\emptyset$ is bounded and not nonempty, while the naturals
-  inside $\mathbb{R}$ are nonempty and not bounded above. Neither witness alone
-  would establish that.
-- The convention $\sup \emptyset = -\infty$ is exactly the assertion that the
-  empty set has a least upper bound in a larger ordered set in which every
-  element bounds $\emptyset$ above and $-\infty$ is least. That larger set is not
-  a field, which is why [[rem-sup-conventions]] keeps it out of the statements
-  proved here rather than adopting it by default.
+- The same argument, applied to lower bounds, shows that $\emptyset$ has no infimum either: every real is a lower bound and there is no greatest real, since $w < w + 1$ for every $w$.
+- Together with [[cex-unbounded-set-has-no-sup]] this shows that both hypotheses of the least-upper-bound property are load bearing, and that they fail independently: $\emptyset$ is bounded and not nonempty, while the naturals inside $\mathbb{R}$ are nonempty and not bounded above. Neither witness alone would establish that.
+- The convention $\sup \emptyset = -\infty$ is exactly the assertion that the empty set has a least upper bound in a larger ordered set in which every element bounds $\emptyset$ above and $-\infty$ is least. That larger set is not a field, which is why [[rem-sup-conventions]] keeps it out of the statements proved here rather than adopting it by default.

@@ -77,15 +77,6 @@ chosen.
 
 ## Remarks
 
-- The failure is of a specific shape: the set of upper bounds of $A$ is empty, so
-  there is nothing among which to be least. The companion witness
-  [[cex-empty-set-has-no-sup]] fails for the opposite reason, with a set of upper
-  bounds so large that it has no least element either. Both are needed, since
-  each alone would suggest that a single hypothesis carries all the weight.
-- In a non-Archimedean ordered field the same set is bounded above
-  ([[cex-ordered-field-not-archimedean]]), so this counterexample really is using
-  completeness by way of [[thm-of-archimedean]] and is not a formal consequence
-  of the ordered-field axioms.
-- Adjoining $+\infty$ repairs the statement, at the price of leaving the field;
-  this library does not adopt that convention silently
-  ([[rem-sup-conventions]]).
+- The failure is of a specific shape: the set of upper bounds of $A$ is empty, so there is nothing among which to be least. The companion witness [[cex-empty-set-has-no-sup]] fails for the opposite reason, with a set of upper bounds so large that it has no least element either. Both are needed, since each alone would suggest that a single hypothesis carries all the weight.
+- In a non-Archimedean ordered field the same set is bounded above ([[cex-ordered-field-not-archimedean]]), so this counterexample really is using completeness by way of [[thm-of-archimedean]] and is not a formal consequence of the ordered-field axioms.
+- Adjoining $+\infty$ repairs the statement, at the price of leaving the field; this library does not adopt that convention silently ([[rem-sup-conventions]]).

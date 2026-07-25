@@ -4,7 +4,7 @@ kind: lemma
 title: "The absolute value is compatible with limits"
 status: draft
 origin: session
-deps: [def-real-limit, def-sequence, cor-of-reverse-triangle, lem-of-abs-value, thm-algebra-of-limits, def-complete-ordered-field, def-ordered-field]
+deps: [def-real-limit, def-sequence, cor-of-reverse-triangle, lem-of-abs-value, def-real-order, def-abs-value, def-max-min, thm-algebra-of-limits, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -15,7 +15,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -45,7 +45,7 @@ the remarks below; it is no part of what the proof establishes.
 
 [L2] Reverse triangle inequality: $\bigl||u| - |v|\bigr| \le |u - v|$ for all reals $u, v$ ([[cor-of-reverse-triangle]]).
 
-[L3] Absolute value: $|u| \ge 0$, so $\bigl||u|\bigr| = |u|$; and $|u - 0| = |u|$ ([[lem-of-abs-value]]).
+[L3] Absolute value: $|u| \ge 0$ ([[lem-of-abs-value]]), and $|v| = v$ whenever $v \ge 0$ by the definition of the absolute value ([[def-real-order]], [[def-abs-value]]), so $\bigl||u|\bigr| = |u|$; and $|u - 0| = |u|$ ([[lem-of-abs-value]]).
 
 [L4] Order arithmetic in $\mathbb{R}$: $u \le v < w$ gives $u < w$ ([[def-complete-ordered-field]], [[def-ordered-field]]).
 
