@@ -2,7 +2,7 @@
 id: cex-sup-not-attained
 kind: counterexample
 title: "A supremum need not belong to its set: $\\sup(0,1) = 1 \\notin (0,1)$"
-status: draft
+status: published
 origin: session
 deps: [fs-sup-belongs-to-set, lem-sup-epsilon, ex-sup-of-open-interval,
        lem-max-is-sup, def-max-min, def-complete-ordered-field, def-ordered-field]
@@ -13,6 +13,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

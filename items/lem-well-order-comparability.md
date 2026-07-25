@@ -2,7 +2,7 @@
 id: lem-well-order-comparability
 kind: lemma
 title: "Comparability of well-orders"
-status: draft
+status: published
 origin: session
 deps: [lem-well-order-rigid, def-initial-segment, def-order-isomorphism, def-well-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "one of two well-orders embeds onto an initial segment of the other"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

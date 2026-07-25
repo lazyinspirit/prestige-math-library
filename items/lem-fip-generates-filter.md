@@ -2,7 +2,7 @@
 id: lem-fip-generates-filter
 kind: lemma
 title: "A family lies in a filter exactly when it has the finite intersection property"
-status: draft
+status: published
 origin: session
 deps: [def-finite-intersection-property, def-filter, def-filter-base, lem-filter-base-generates, def-natural-numbers, thm-induction-principle, lem-nat-transitive-irreflexive]
 justified_by: []
@@ -12,6 +12,12 @@ short: "FIP $\\iff$ contained in a filter"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-sup-translate
 kind: lemma
 title: "Supremum of a translate: $\\sup(a + S) = a + \\sup S$"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

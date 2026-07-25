@@ -2,7 +2,7 @@
 id: cor-ac-iff-well-ordering
 kind: corollary
 title: "Choice, Zorn and well-ordering are equivalent"
-status: draft
+status: published
 origin: session
 deps: [thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
@@ -13,6 +13,12 @@ short: "AC $\\iff$ Zorn $\\iff$ every set is well orderable"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

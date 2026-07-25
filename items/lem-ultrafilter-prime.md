@@ -2,7 +2,7 @@
 id: lem-ultrafilter-prime
 kind: lemma
 title: "Ultrafilters are prime: a union in $\\mathcal{U}$ has a member in $\\mathcal{U}$"
-status: draft
+status: published
 origin: session
 deps: [thm-ultrafilter-characterisation, def-ultrafilter, def-filter, def-natural-numbers, thm-induction-principle]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$A\\cup B\\in\\mathcal{U}\\Rightarrow A\\in\\mathcal{U}$ or $B\\in\\math
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

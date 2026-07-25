@@ -2,7 +2,7 @@
 id: fs-infinite-has-countable-subset-in-zf
 kind: false-statement
 title: "FALSE: every infinite set has a countably infinite subset, in ZF"
-status: draft
+status: published
 origin: session
 deps: [rem-cohen-first-model, def-countable, def-countable-choice, def-equinumerous, lem-pigeonhole]
 justified_by: []
@@ -12,6 +12,12 @@ short: "not a ZF theorem"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

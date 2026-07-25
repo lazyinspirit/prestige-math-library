@@ -2,7 +2,7 @@
 id: thm-schroder-bernstein
 kind: theorem
 title: "The Schröder-Bernstein theorem"
-status: draft
+status: published
 origin: session
 deps: [def-injection-surjection-bijection, def-equinumerous, thm-recursion, def-natural-numbers, lem-nat-nonzero-is-successor]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$A\\preceq B$ and $B\\preceq A$ give $A\\approx B$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

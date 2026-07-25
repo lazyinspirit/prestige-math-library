@@ -2,7 +2,7 @@
 id: lem-power-difference-factorisation
 kind: lemma
 title: "Factorisation of $b^n - a^n$, and the resulting Lipschitz estimate"
-status: draft
+status: published
 origin: session
 deps: [def-integer-power, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
@@ -11,6 +11,16 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:

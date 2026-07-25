@@ -2,7 +2,7 @@
 id: thm-zorn-implies-ac
 kind: theorem
 title: "Zorn's lemma implies the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [thm-zorn, def-choice-function, def-maximal-element, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

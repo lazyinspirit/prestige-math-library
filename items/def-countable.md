@@ -2,7 +2,7 @@
 id: def-countable
 kind: definition
 title: "Finite, countably infinite, countable, uncountable"
-status: draft
+status: published
 origin: session
 deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "finite, countable, uncountable"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

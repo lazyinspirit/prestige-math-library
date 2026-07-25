@@ -2,7 +2,7 @@
 id: lem-finite-sum-laws
 kind: lemma
 title: "Laws of finite sums and finite products"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, thm-induction-principle, def-ordered-field, def-field, lem-of-add-order, lem-of-sign-rules, lem-of-zero-mult, cor-of-one-positive, lem-of-q-embeds, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

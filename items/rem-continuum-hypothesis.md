@@ -2,7 +2,7 @@
 id: rem-continuum-hypothesis
 kind: remark
 title: "The continuum hypothesis, and what this page does not prove"
-status: draft
+status: published
 origin: session
 deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole, fs-infinite-has-countable-subset-in-zf]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "CH is independent of ZFC"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

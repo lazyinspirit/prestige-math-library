@@ -2,7 +2,7 @@
 id: def-limit-ordinal
 kind: definition
 title: "Successor and limit ordinals"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "$\\alpha=\\beta^{+}$, or nonzero and not a successor"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

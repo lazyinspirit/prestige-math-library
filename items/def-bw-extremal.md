@@ -2,7 +2,7 @@
 id: def-bw-extremal
 kind: definition
 title: "Extremal element and its cut (Bourbaki–Witt)"
-status: draft
+status: published
 origin: session
 deps: [lem-admissible-set-exists]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "extremal element"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

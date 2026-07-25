@@ -2,7 +2,7 @@
 id: def-equinumerous
 kind: definition
 title: "Equinumerous sets, $A \\approx B$ and $A \\preceq B$"
-status: draft
+status: published
 origin: session
 deps: [def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "$A\\approx B$, $A\\preceq B$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

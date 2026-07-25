@@ -2,7 +2,7 @@
 id: ex-sup-of-open-interval
 kind: example
 title: "$\\sup(0,1) = 1$ and $\\inf(0,1) = 0$, with neither attained"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, lem-inf-epsilon, lem-max-is-sup, lem-finite-set-has-max,
        thm-infimum-property, def-max-min, def-bounded-set, def-infimum,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

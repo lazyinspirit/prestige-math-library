@@ -2,7 +2,7 @@
 id: thm-cantor-powerset
 kind: theorem
 title: "Cantor's theorem: $A \\prec \\mathcal{P}(A)$"
-status: draft
+status: published
 origin: session
 deps: [def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
@@ -12,6 +12,12 @@ short: "no surjection $A\\to\\mathcal P(A)$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

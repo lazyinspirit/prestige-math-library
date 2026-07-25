@@ -2,7 +2,7 @@
 id: thm-young-inequality
 kind: theorem
 title: "Young's inequality for products (rational conjugate exponents)"
-status: draft
+status: published
 origin: session
 deps: [thm-weighted-am-gm-rational, def-rational-power, lem-rational-power-laws, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, lem-of-q-embeds, lem-of-inverse-positive, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

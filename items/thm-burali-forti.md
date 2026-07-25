@@ -2,7 +2,7 @@
 id: thm-burali-forti
 kind: theorem
 title: "Burali-Forti: there is no set of all ordinals"
-status: draft
+status: published
 origin: session
 deps: [lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the ordinals form a proper class"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

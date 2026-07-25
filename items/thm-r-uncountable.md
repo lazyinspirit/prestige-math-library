@@ -2,7 +2,7 @@
 id: thm-r-uncountable
 kind: theorem
 title: "$\\mathbb{R}$ is uncountable (Cantor's nested intervals, 1874)"
-status: draft
+status: published
 origin: session
 deps: [def-countable, def-complete-ordered-field, thm-recursion, lem-sup-epsilon, lem-sup-unique, def-bounded-set, lem-countable-iff-surjection-from-n, lem-of-add-order, def-ordered-field, cor-of-one-positive, lem-of-inverse-positive, lem-of-sign-rules, thm-induction-principle, def-natural-numbers, def-nat-order, lem-nat-trichotomy, lem-nat-order-is-membership]
 justified_by: []
@@ -12,6 +12,12 @@ short: "no surjection $\\mathbb N\\to\\mathbb R$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

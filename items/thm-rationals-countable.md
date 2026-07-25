@@ -2,7 +2,7 @@
 id: thm-rationals-countable
 kind: theorem
 title: "$\\mathbb{Q}$ is countably infinite"
-status: draft
+status: published
 origin: session
 deps: [thm-n-cross-n-countable, thm-product-of-countable, def-rationals, lem-rat-positive-denominator, def-countable, lem-subset-of-countable, def-integers, lem-countable-iff-surjection-from-n, thm-schroder-bernstein, def-equinumerous, def-injection-surjection-bijection, lem-nat-embeds-int, lem-int-embeds-rat, def-int-order, thm-int-ordered-ring, thm-omega-is-peano-system, lem-nat-order-is-membership]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\mathbb{Q}\\approx\\mathbb{N}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

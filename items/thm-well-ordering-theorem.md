@@ -2,7 +2,7 @@
 id: thm-well-ordering-theorem
 kind: theorem
 title: "The well-ordering theorem"
-status: draft
+status: published
 origin: session
 deps: [thm-zorn, def-axiom-of-choice, def-well-order, def-partial-order, def-initial-segment, def-upper-bound, def-maximal-element, def-chain]
 justified_by: []
@@ -13,6 +13,12 @@ short: "AC implies every set carries a well-order"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: suprema-and-infima-examples
 title: "Suprema and Infima: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-sup-of-open-interval, ex-sup-of-closed-interval,
            ex-inf-of-reciprocals, ex-sup-rationals-below-sqrt-two,

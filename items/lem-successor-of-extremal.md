@@ -2,7 +2,7 @@
 id: lem-successor-of-extremal
 kind: lemma
 title: "The image of an extremal element is extremal"
-status: draft
+status: published
 origin: session
 deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-admissible-is-chain
 kind: lemma
 title: "The smallest admissible set is a chain"
-status: draft
+status: published
 origin: session
 deps: [lem-all-extremal, lem-extremal-comparability, def-chain, def-chain-complete-poset, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

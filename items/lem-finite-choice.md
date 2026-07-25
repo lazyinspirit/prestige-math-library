@@ -2,7 +2,7 @@
 id: lem-finite-choice
 kind: lemma
 title: "Every finite family of nonempty sets has a choice function"
-status: draft
+status: published
 origin: session
 deps: [def-choice-function, thm-induction-principle, def-natural-numbers, def-nat-addition, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,12 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

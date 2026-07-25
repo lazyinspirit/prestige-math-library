@@ -2,7 +2,7 @@
 id: def-infimum
 kind: definition
 title: "Greatest lower bound (infimum)"
-status: draft
+status: published
 origin: session
 deps: [def-bounded-set]
 justified_by: [lem-sup-unique]
@@ -10,6 +10,12 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

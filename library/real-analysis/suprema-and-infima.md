@@ -1,7 +1,7 @@
 ---
 page: suprema-and-infima
 title: "Suprema and Infima"
-status: draft
+status: published
 items: [def-bounded-set, def-infimum, def-max-min, lem-sup-unique,
         lem-reflection, thm-infimum-property, lem-sup-epsilon, lem-inf-epsilon,
         lem-max-is-sup, lem-finite-set-has-max, lem-sup-monotone,

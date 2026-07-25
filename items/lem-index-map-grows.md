@@ -2,7 +2,7 @@
 id: lem-index-map-grows
 kind: lemma
 title: "A strictly increasing index map satisfies $n_k \\ge k$"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, thm-induction-principle, lem-nat-discrete, def-nat-order, def-nat-addition, lem-nat-add-identity, lem-nat-successor-neq-self, thm-nat-linear-order, lem-nat-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$n_k\\ge k$"
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

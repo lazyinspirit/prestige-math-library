@@ -2,7 +2,7 @@
 id: lem-convergent-implies-bounded
 kind: lemma
 title: "Every convergent sequence is bounded"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, lem-finite-set-has-max, def-max-min, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, thm-rat-ordered-field, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "convergent implies bounded"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

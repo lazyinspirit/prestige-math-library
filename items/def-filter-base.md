@@ -2,7 +2,7 @@
 id: def-filter-base
 kind: definition
 title: "Filter base and the filter it generates"
-status: draft
+status: published
 origin: session
 deps: [def-filter]
 justified_by: [lem-filter-base-generates]
@@ -11,6 +11,12 @@ landmark: false
 short: "filter base"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

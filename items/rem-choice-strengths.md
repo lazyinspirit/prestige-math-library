@@ -2,7 +2,7 @@
 id: rem-choice-strengths
 kind: remark
 title: "What the ultrafilter lemma costs: a choice principle strictly weaker than AC"
-status: draft
+status: published
 origin: session
 deps: [rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, thm-ultrafilter-lemma, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "UL is strictly between ZF and AC"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

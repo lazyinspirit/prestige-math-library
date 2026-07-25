@@ -2,7 +2,7 @@
 id: fs-subsequence-convergence-implies-convergence
 kind: false-statement
 title: "FALSE: a convergent subsequence forces the sequence to converge"
-status: draft
+status: published
 origin: session
 deps: [lem-subsequence-inherits-limit, lem-limit-unique, lem-convergent-implies-cauchy, def-sequence, def-real-limit, fs-bounded-implies-convergent, thm-reals-cauchy-complete]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

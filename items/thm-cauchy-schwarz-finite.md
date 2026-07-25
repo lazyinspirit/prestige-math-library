@@ -2,7 +2,7 @@
 id: thm-cauchy-schwarz-finite
 kind: theorem
 title: "The Cauchy-Schwarz inequality for finite sums"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, lem-finite-sum-laws, lem-of-square-positive, lem-of-zero-mult, thm-of-square-roots, def-integer-power, lem-of-square-monotone, lem-of-abs-value, def-abs-value, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, def-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$(\\sum a_k b_k)^2 \\le \\sum a_k^2 \\sum b_k^2$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

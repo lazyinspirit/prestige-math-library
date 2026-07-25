@@ -2,7 +2,7 @@
 id: def-upper-bound
 kind: definition
 title: "Upper bound, least upper bound, and strict upper bound"
-status: draft
+status: published
 origin: session
 deps: [def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "upper bound"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

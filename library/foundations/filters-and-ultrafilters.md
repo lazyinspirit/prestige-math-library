@@ -1,7 +1,7 @@
 ---
 page: filters-and-ultrafilters
 title: "Filters and Ultrafilters"
-status: draft
+status: published
 items: [def-filter, def-filter-base, lem-filter-base-generates,
         def-finite-intersection-property, lem-fip-generates-filter,
         def-ultrafilter, lem-union-of-chain-of-filters, thm-ultrafilter-lemma,

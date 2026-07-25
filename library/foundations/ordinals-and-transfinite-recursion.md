@@ -1,7 +1,7 @@
 ---
 page: ordinals-and-transfinite-recursion
 title: "Ordinals, Cardinals, and Transfinite Recursion"
-status: draft
+status: published
 items: [def-well-order, def-order-isomorphism, def-initial-segment,
         thm-transfinite-induction, thm-transfinite-recursion,
         lem-well-order-rigid, lem-well-order-comparability, def-ordinal,

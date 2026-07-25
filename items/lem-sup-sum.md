@@ -2,7 +2,7 @@
 id: lem-sup-sum
 kind: lemma
 title: "Supremum of a sumset: $\\sup(S + T) = \\sup S + \\sup T$"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field, cor-of-one-positive, lem-of-sign-rules, def-field, def-ordered-field, lem-of-zero-mult]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

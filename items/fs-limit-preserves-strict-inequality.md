@@ -2,7 +2,7 @@
 id: fs-limit-preserves-strict-inequality
 kind: false-statement
 title: "FALSE: limits preserve strict inequalities"
-status: draft
+status: published
 origin: session
 deps: [lem-limit-preserves-order, lem-limit-unique, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

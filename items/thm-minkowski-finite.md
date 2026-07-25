@@ -2,7 +2,7 @@
 id: thm-minkowski-finite
 kind: theorem
 title: "Minkowski's inequality for finite sums (rational exponent)"
-status: draft
+status: published
 origin: session
 deps: [thm-holder-finite, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, lem-triangle-inequality-finite, lem-of-triangle-inequality, lem-of-abs-value, def-abs-value, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, thm-nth-roots-exist, def-ordered-field, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\|a+b\\|_p \\le \\|a\\|_p + \\|b\\|_p$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

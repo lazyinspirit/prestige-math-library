@@ -2,7 +2,7 @@
 id: def-initial-segment
 kind: definition
 title: "Initial segment of a well-order"
-status: draft
+status: published
 origin: session
 deps: [def-well-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "downward closed subset; $W_{<a}=\\{x:x<a\\}$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

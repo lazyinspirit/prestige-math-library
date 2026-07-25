@@ -2,7 +2,7 @@
 id: lem-limit-of-tail
 kind: lemma
 title: "Convergence depends only on the tail"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-limit, def-nat-order, def-nat-addition, lem-nat-order-add-compatible, lem-nat-add-associative, lem-nat-add-commutative, thm-nat-linear-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "tails have the same limit"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

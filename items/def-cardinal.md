@@ -2,7 +2,7 @@
 id: def-cardinal
 kind: definition
 title: "Cardinal (initial ordinal) and cardinality"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice, lem-omega-least-limit-ordinal, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "ordinal not equinumerous with any smaller ordinal"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

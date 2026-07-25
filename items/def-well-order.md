@@ -2,7 +2,7 @@
 id: def-well-order
 kind: definition
 title: "Well-order and well-ordered set"
-status: draft
+status: published
 origin: session
 deps: [def-partial-order, def-chain, thm-well-ordering-principle, thm-nat-linear-order]
 justified_by: []
@@ -12,6 +12,12 @@ landmark: false
 short: "total order in which every nonempty subset has a least element"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

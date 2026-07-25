@@ -2,7 +2,7 @@
 id: def-countable-choice
 kind: definition
 title: "The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)"
-status: draft
+status: published
 origin: session
 deps: [def-choice-function, def-axiom-of-choice, def-countable, thm-well-ordering-principle, lem-countable-iff-surjection-from-n]
 justified_by: []
@@ -12,6 +12,12 @@ landmark: false
 short: "$\\mathrm{AC}_\\omega$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

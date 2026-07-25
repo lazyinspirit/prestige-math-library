@@ -2,7 +2,7 @@
 id: fs-rational-power-of-negative-base
 kind: false-statement
 title: "FALSE: $a^{m/n} := (a^{1/n})^{m}$ extends to negative bases"
-status: draft
+status: published
 origin: session
 deps: [def-rational-power, lem-rational-power-well-defined, thm-nth-roots-exist, def-rationals, def-rat-order, def-integer-power, def-ordered-field, lem-of-square-positive, lem-of-zero-mult, lem-power-laws, lem-power-monotone, lem-of-sign-rules, lem-of-mult-neg, lem-of-naturals-positive, lem-of-q-embeds, thm-of-square-roots, fs-negative-has-square-root]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

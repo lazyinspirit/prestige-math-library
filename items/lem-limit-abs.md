@@ -2,7 +2,7 @@
 id: lem-limit-abs
 kind: lemma
 title: "The absolute value is compatible with limits"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, cor-of-reverse-triangle, lem-of-abs-value, def-real-order, def-abs-value, def-max-min, thm-algebra-of-limits, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$x_k\\to x$ gives $|x_k|\\to|x|$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

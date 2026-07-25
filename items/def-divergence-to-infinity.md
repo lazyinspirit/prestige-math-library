@@ -2,7 +2,7 @@
 id: def-divergence-to-infinity
 kind: definition
 title: "Divergence to $+\\infty$ and to $-\\infty$"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-order, def-real-limit, def-complete-ordered-field, lem-convergent-implies-bounded, thm-of-archimedean, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "$x_k\\to+\\infty$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

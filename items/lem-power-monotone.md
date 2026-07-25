@@ -2,7 +2,7 @@
 id: lem-power-monotone
 kind: lemma
 title: "Monotonicity of $x \\mapsto x^n$ and of $n \\mapsto a^n$"
-status: draft
+status: published
 origin: session
 deps: [def-integer-power, cor-of-one-positive, lem-of-sign-rules, prop-of-multiply-inequalities, thm-induction-principle, def-ordered-field, def-nat-order, lem-nat-discrete]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

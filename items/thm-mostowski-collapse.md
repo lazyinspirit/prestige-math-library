@@ -2,7 +2,7 @@
 id: thm-mostowski-collapse
 kind: theorem
 title: "Every well-order has a unique order type"
-status: draft
+status: published
 origin: session
 deps: [thm-transfinite-recursion, thm-transfinite-induction, def-ordinal, def-well-order, def-order-isomorphism, lem-ordinal-basics, lem-ordinal-trichotomy, lem-well-order-rigid, def-initial-segment]
 justified_by: []
@@ -12,6 +12,12 @@ short: "every well-order is isomorphic to a unique ordinal"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-triangle-inequality-finite
 kind: lemma
 title: "Triangle inequality for finite sums"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, lem-of-triangle-inequality, thm-induction-principle, lem-of-abs-value, lem-of-add-order, def-abs-value, def-ordered-field]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

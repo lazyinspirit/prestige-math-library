@@ -2,7 +2,7 @@
 id: lem-pigeonhole
 kind: lemma
 title: "The pigeonhole principle on $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [def-natural-numbers, def-nat-order, thm-induction-principle,
        lem-nat-order-is-membership, lem-nat-trichotomy,
@@ -16,6 +16,12 @@ short: "no injection $\\sigma(n)\\to n$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

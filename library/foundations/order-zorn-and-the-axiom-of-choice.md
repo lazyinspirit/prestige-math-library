@@ -1,7 +1,7 @@
 ---
 page: order-zorn-and-the-axiom-of-choice
 title: "Order, Zorn's Lemma, and the Axiom of Choice"
-status: draft
+status: published
 items: [def-partial-order, def-chain, def-upper-bound, def-maximal-element,
         def-chain-complete-poset, def-choice-function, def-axiom-of-choice,
         lem-finite-choice, def-admissible-set, lem-admissible-set-exists,

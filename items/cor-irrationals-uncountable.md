@@ -2,7 +2,7 @@
 id: cor-irrationals-uncountable
 kind: corollary
 title: "The irrationals are uncountable"
-status: draft
+status: published
 origin: session
 deps: [thm-r-uncountable, thm-rationals-countable, def-countable, lem-countable-iff-surjection-from-n, thm-n-cross-n-countable, lem-of-q-embeds, def-equinumerous, def-injection-surjection-bijection, def-complete-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\mathbb{R}\\setminus\\mathbb{Q}$ uncountable"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

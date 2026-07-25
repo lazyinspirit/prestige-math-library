@@ -2,7 +2,7 @@
 id: cor-ac-iff-zorn
 kind: corollary
 title: "The Axiom of Choice and Zorn's lemma are equivalent"
-status: draft
+status: published
 origin: session
 deps: [thm-zorn, thm-zorn-implies-ac, def-axiom-of-choice]
 justified_by: []
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

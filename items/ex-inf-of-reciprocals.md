@@ -2,7 +2,7 @@
 id: ex-inf-of-reciprocals
 kind: example
 title: "$\\inf\\{1/n : n \\ge 1\\} = 0$, not attained, while $\\sup\\{1/n : n \\ge 1\\} = 1$ is"
-status: draft
+status: published
 origin: session
 deps: [lem-inf-epsilon, thm-of-archimedean, lem-max-is-sup, lem-of-naturals-positive,
        lem-of-inverse-positive, lem-of-sign-rules, def-archimedean-field,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-uncountable-contains-interval
 kind: false-statement
 title: "FALSE: every uncountable subset of $\\mathbb{R}$ contains an interval"
-status: draft
+status: published
 origin: session
 deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, thm-rationals-countable, lem-subset-of-countable, thm-r-uncountable, cor-interval-uncountable]
 justified_by: []
@@ -12,6 +12,12 @@ short: "irrationals are a counterexample"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

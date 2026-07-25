@@ -2,7 +2,7 @@
 id: fs-bounded-implies-convergent
 kind: false-statement
 title: "FALSE: every bounded sequence converges"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-index-map-grows, thm-recursion, thm-induction-principle, lem-of-abs-value, def-abs-value, def-real-order, cor-of-one-positive, lem-of-add-order, lem-nat-successor-neq-self, def-nat-order, def-nat-addition, thm-nat-linear-order, def-natural-numbers, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

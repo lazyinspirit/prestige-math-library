@@ -2,7 +2,7 @@
 id: fs-maximal-is-greatest
 kind: false-statement
 title: "FALSE: every maximal element is a greatest element"
-status: draft
+status: published
 origin: session
 deps: [def-maximal-element, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

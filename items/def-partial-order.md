@@ -2,7 +2,7 @@
 id: def-partial-order
 kind: definition
 title: "Partial order and partially ordered set"
-status: draft
+status: published
 origin: session
 deps: []
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "partial order"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

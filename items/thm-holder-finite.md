@@ -2,7 +2,7 @@
 id: thm-holder-finite
 kind: theorem
 title: "Hölder's inequality for finite sums (rational exponents)"
-status: draft
+status: published
 origin: session
 deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-triangle-inequality-finite, lem-of-abs-value, def-abs-value, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: rem-real-exponents-deferred
 kind: remark
 title: "Why real exponents are deferred"
-status: draft
+status: published
 origin: session
 deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-complete-ordered-field, thm-nth-roots-exist, thm-of-square-roots, thm-cauchy-schwarz-finite, lem-max-is-sup, def-real-limit, lem-of-q-dense, thm-of-archimedean]
 justified_by: []
@@ -10,6 +10,12 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

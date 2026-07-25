@@ -2,7 +2,7 @@
 id: fs-ordinals-form-a-set
 kind: false-statement
 title: "FALSE: the ordinals form a set"
-status: draft
+status: published
 origin: session
 deps: [thm-burali-forti, def-ordinal, lem-ordinal-basics]
 justified_by: []
@@ -12,6 +12,12 @@ short: "refuted by Burali-Forti"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

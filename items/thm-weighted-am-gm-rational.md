@@ -2,7 +2,7 @@
 id: thm-weighted-am-gm-rational
 kind: theorem
 title: "Weighted AM-GM inequality with rational weights"
-status: draft
+status: published
 origin: session
 deps: [thm-am-gm, def-rational-power, lem-rational-power-laws, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, thm-recursion, lem-rat-positive-denominator, def-rationals, def-rat-operations, def-rat-order, def-int-order, lem-nat-embeds-int, lem-of-q-embeds, def-integer-power, thm-nth-roots-exist, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,16 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:

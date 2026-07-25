@@ -2,7 +2,7 @@
 id: lem-sup-of-extremals
 kind: lemma
 title: "A supremum of extremal elements is extremal"
-status: draft
+status: published
 origin: session
 deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-upper-bound, def-chain-complete-poset, def-admissible-set, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

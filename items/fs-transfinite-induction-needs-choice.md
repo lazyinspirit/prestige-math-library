@@ -2,7 +2,7 @@
 id: fs-transfinite-induction-needs-choice
 kind: false-statement
 title: "FALSE: transfinite induction and recursion need the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [thm-transfinite-induction, thm-transfinite-recursion, def-axiom-of-choice, thm-well-ordering-theorem, thm-zorn]
 justified_by: []
@@ -12,6 +12,12 @@ short: "both are ZF theorems; the choosing is a separate cost"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

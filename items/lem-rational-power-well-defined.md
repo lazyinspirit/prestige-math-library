@@ -2,7 +2,7 @@
 id: lem-rational-power-well-defined
 kind: lemma
 title: "Rational powers do not depend on the representative"
-status: draft
+status: published
 origin: session
 deps: [def-rational-power, thm-nth-roots-exist, lem-power-monotone, lem-power-laws, def-rationals, def-integer-power, lem-of-inverse-positive, def-rat-order, def-int-order, lem-nat-embeds-int]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

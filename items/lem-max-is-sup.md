@@ -2,7 +2,7 @@
 id: lem-max-is-sup
 kind: lemma
 title: "The supremum is attained exactly when a maximum exists"
-status: draft
+status: published
 origin: session
 deps: [def-max-min, lem-sup-unique, def-complete-ordered-field]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

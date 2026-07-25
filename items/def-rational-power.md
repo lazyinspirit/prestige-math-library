@@ -2,7 +2,7 @@
 id: def-rational-power
 kind: definition
 title: "Rational powers $a^r$ of a positive base"
-status: draft
+status: published
 origin: session
 deps: [thm-nth-roots-exist, def-integer-power, def-rationals, lem-rat-positive-denominator, lem-nat-embeds-int, def-rat-order, lem-power-monotone, lem-power-laws, lem-of-inverse-positive]
 justified_by: [lem-rational-power-well-defined]
@@ -11,6 +11,12 @@ landmark: true
 short: "$a^{m/n} := (a^{1/n})^m$, $a>0$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

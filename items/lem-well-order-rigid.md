@@ -2,7 +2,7 @@
 id: lem-well-order-rigid
 kind: lemma
 title: "Rigidity of well-orders"
-status: draft
+status: published
 origin: session
 deps: [def-well-order, def-order-isomorphism, thm-transfinite-induction, def-initial-segment]
 justified_by: []
@@ -12,6 +12,12 @@ short: "strictly increasing $f$ has $a\\le f(a)$; only automorphism is the ident
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

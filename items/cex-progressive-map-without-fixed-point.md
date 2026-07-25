@@ -2,7 +2,7 @@
 id: cex-progressive-map-without-fixed-point
 kind: counterexample
 title: "A progressive map with no fixed point, on a poset that is not chain-complete"
-status: draft
+status: published
 origin: session
 deps: [thm-bourbaki-witt, def-chain-complete-poset, def-chain, def-upper-bound, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, lem-nat-order-add-compatible, cex-zorn-hypothesis-fails, thm-well-ordering-principle, thm-zorn]
 justified_by: []
@@ -12,6 +12,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

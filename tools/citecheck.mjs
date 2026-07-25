@@ -306,7 +306,18 @@ const NONSTRICT_SYMBOL =
   /\\le\b|\\leq\b|\\ge\b|\\geq\b|≤|≥|nonnegative|non-negative|nonpositive|at most|at least/i;
 /** Written the right way: the fact says the source is strict and derives the rest. */
 const NONSTRICT_OK =
-  /strict(?:ly)?\s+(?:order\s+)?only|for\s+the\s+strict|state[sd]?\s+[^.]*strict|trichotom|equality\s+case|hence|so\s+the\s+nonstrict|derive|one\s+may\s+add|adding\s+-c|both\s+the\s+strict\s+and\s+the\s+nonstrict/i;
+  /strict(?:ly)?\s+(?:order\s+)?only|for\s+the\s+strict|state[sd]?\s+[^.]*strict|trichotom|equality\s+case|hence|so\s+the\s+nonstrict|derive|one\s+may\s+add|adding\s+-c|both\s+the\s+strict\s+and\s+the\s+nonstrict|adjoin/i;
+
+// MEASURED PRECISION, first live triage (2026-07-26): of 11 warnings, 3 were real
+// mis-attributions and 8 were left after individual triage -- 7 because the fact
+// already attributes the nonstrict half to a DIFFERENT, correct source while citing
+// the strict-only item for the strict half, and 1 because the phrase appears but
+// the move is never made. So this rule runs at roughly 27% precision, in the same
+// band as the others here, and its output is a worklist rather than a defect list.
+// "adjoin" was added above after two false positives used the library's own idiom
+// ("Adjoining the case x = y, in which xc = yc, gives the nonstrict implications").
+// The remaining false-positive shape is not lexically separable: it needs knowing
+// WHICH cited item carries which half, which is what a reader does.
 
 // Self-check: the rule's whole premise is that these seeds are strict-only. If one
 // ever gains a nonstrict clause the rule becomes noise, so verify rather than trust.

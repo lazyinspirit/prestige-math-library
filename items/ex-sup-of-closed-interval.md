@@ -2,7 +2,7 @@
 id: ex-sup-of-closed-interval
 kind: example
 title: "$\\sup[0,1] = 1 = \\max[0,1]$ and $\\inf[0,1] = 0 = \\min[0,1]$"
-status: draft
+status: published
 origin: session
 deps: [lem-max-is-sup, ex-sup-of-open-interval, def-max-min, def-infimum,
        def-bounded-set, def-complete-ordered-field, def-ordered-field,
@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

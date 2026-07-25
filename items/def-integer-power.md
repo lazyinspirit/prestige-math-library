@@ -2,7 +2,7 @@
 id: def-integer-power
 kind: definition
 title: "Integer powers $a^m$"
-status: draft
+status: published
 origin: session
 deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-of-zero-mult, thm-int-ordered-ring]
 justified_by: [lem-power-laws]
@@ -10,6 +10,12 @@ aliases: [def-power]
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

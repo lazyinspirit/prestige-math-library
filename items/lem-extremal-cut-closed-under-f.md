@@ -2,7 +2,7 @@
 id: lem-extremal-cut-closed-under-f
 kind: lemma
 title: "The cut at an extremal element is closed under $f$"
-status: draft
+status: published
 origin: session
 deps: [def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-partial-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

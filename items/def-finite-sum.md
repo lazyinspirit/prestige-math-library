@@ -2,7 +2,7 @@
 id: def-finite-sum
 kind: definition
 title: "Finite sums and finite products, by recursion"
-status: draft
+status: published
 origin: session
 deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
@@ -10,6 +10,12 @@ aliases: [def-finite-product]
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

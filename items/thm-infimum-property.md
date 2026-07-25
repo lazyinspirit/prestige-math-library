@@ -2,7 +2,7 @@
 id: thm-infimum-property
 kind: theorem
 title: "Every nonempty set bounded below has an infimum"
-status: draft
+status: published
 origin: session
 deps: [lem-reflection, def-infimum, lem-sup-unique, def-complete-ordered-field,
        lem-of-add-order, lem-of-inverse-unique, def-field]
@@ -13,6 +13,12 @@ short: "greatest-lower-bound property"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

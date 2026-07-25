@@ -2,7 +2,7 @@
 id: ex-sup-of-sum-of-sets
 kind: example
 title: "$(0,1) + (2,3) = (2,4)$, with supremum $4 = \\sup(0,1) + \\sup(2,3)$"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-sum, lem-sup-translate, ex-sup-of-open-interval, lem-of-add-order,
        lem-of-sign-rules, lem-max-is-sup, def-max-min, def-complete-ordered-field,
@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

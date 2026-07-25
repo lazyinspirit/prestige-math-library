@@ -2,7 +2,7 @@
 id: lem-power-laws
 kind: lemma
 title: "Laws of integer exponents"
-status: draft
+status: published
 origin: session
 deps: [def-integer-power, thm-induction-principle, def-field, def-int-operations, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-nat-embeds-int, thm-int-comm-ring]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-order-isomorphism
 kind: definition
 title: "Order embedding and order isomorphism"
-status: draft
+status: published
 origin: session
 deps: [def-partial-order, def-well-order]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "bijection $f$ with $x\\le y\\iff f(x)\\le f(y)$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

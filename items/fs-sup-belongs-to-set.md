@@ -2,7 +2,7 @@
 id: fs-sup-belongs-to-set
 kind: false-statement
 title: "FALSE: the supremum of a set belongs to the set"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, cor-of-one-positive, lem-of-sign-rules, def-field, lem-of-zero-mult]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

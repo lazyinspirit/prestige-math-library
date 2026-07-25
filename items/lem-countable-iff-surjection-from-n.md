@@ -2,7 +2,7 @@
 id: lem-countable-iff-surjection-from-n
 kind: lemma
 title: "A nonempty set is at most countable iff it is a surjective image of $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [def-countable, thm-well-ordering-principle, def-injection-surjection-bijection, lem-subset-of-countable, def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
 justified_by: []
@@ -12,6 +12,12 @@ short: "countable iff enumerable by a surjection"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

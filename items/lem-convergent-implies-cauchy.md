@@ -2,7 +2,7 @@
 id: lem-convergent-implies-cauchy
 kind: lemma
 title: "Every convergent sequence is Cauchy"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, def-real-numbers, thm-reals-cauchy-complete, thm-uniqueness-complete-ordered-field, lem-of-triangle-inequality, lem-of-abs-value, thm-rat-ordered-field, lem-rat-embeds-dense, cor-of-one-positive, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "convergent implies Cauchy"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

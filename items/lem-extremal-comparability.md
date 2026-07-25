@@ -2,7 +2,7 @@
 id: lem-extremal-comparability
 kind: lemma
 title: "Everything in $M$ is comparable to an extremal element"
-status: draft
+status: published
 origin: session
 deps: [lem-extremal-cut-closed-under-f, lem-extremal-cut-closed-under-sups, def-bw-extremal, lem-admissible-set-exists, def-admissible-set]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

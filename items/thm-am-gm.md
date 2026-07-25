@@ -2,7 +2,7 @@
 id: thm-am-gm
 kind: theorem
 title: "The arithmetic mean, geometric mean inequality"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, lem-finite-sum-laws, lem-of-zero-mult, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$(\\prod a_k)^{1/n} \\le \\frac1n \\sum a_k$"
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

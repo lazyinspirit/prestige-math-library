@@ -1,7 +1,7 @@
 ---
 page: roots-and-rational-powers
 title: "Roots, Rational Powers, and Classical Inequalities"
-status: draft
+status: published
 items: [def-finite-sum, lem-finite-sum-laws, def-integer-power, lem-power-laws,
         lem-power-monotone, lem-bernoulli-inequality,
         lem-power-difference-factorisation, thm-nth-roots-exist,

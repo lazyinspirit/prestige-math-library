@@ -2,7 +2,7 @@
 id: thm-transfinite-induction
 kind: theorem
 title: "Transfinite induction"
-status: draft
+status: published
 origin: session
 deps: [def-well-order, def-initial-segment]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$W_{<a}\\subseteq S\\Rightarrow a\\in S$ for all $a$, then $S=W$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-countable-union-of-countable
 kind: theorem
 title: "Countable unions of at most countable sets, assuming $\\mathrm{AC}_\\omega$"
-status: draft
+status: published
 origin: session
 deps: [def-countable-choice, thm-n-cross-n-countable, lem-countable-iff-surjection-from-n, def-countable, thm-well-ordering-principle, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
@@ -12,6 +12,12 @@ short: "countable union of countables (needs $\\mathrm{AC}_\\omega$)"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-canonical-choice-on-naturals
 kind: example
 title: "$\\min$ is a choice function on $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [def-choice-function, thm-well-ordering-principle, thm-nat-linear-order, def-nat-order]
 justified_by: []
@@ -12,6 +12,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

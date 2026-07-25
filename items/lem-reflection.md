@@ -2,7 +2,7 @@
 id: lem-reflection
 kind: lemma
 title: "Reflection through zero exchanges upper and lower bounds"
-status: draft
+status: published
 origin: session
 deps: [def-bounded-set, def-complete-ordered-field, def-ordered-field, def-field, lem-of-inverse-unique]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

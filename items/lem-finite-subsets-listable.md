@@ -2,7 +2,7 @@
 id: lem-finite-subsets-listable
 kind: lemma
 title: "The nonempty finite subsets of $\\mathbb{R}$ are exactly the listable ones"
-status: draft
+status: published
 origin: session
 deps: [def-countable, def-equinumerous, thm-induction-principle, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-nonzero-is-successor, def-complete-ordered-field, lem-finite-set-has-max, def-max-min]
 justified_by: []
@@ -12,6 +12,12 @@ short: "finite iff listable as $\\{a_0,\\dots,a_n\\}$"
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

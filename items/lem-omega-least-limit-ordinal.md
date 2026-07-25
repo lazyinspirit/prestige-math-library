@@ -2,7 +2,7 @@
 id: lem-omega-least-limit-ordinal
 kind: lemma
 title: "$\\omega$ is the least limit ordinal"
-status: draft
+status: published
 origin: session
 deps: [def-limit-ordinal, def-ordinal, def-natural-numbers, def-nat-order, lem-omega-smallest-inductive, lem-nat-nonzero-is-successor, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-trichotomy, thm-nat-linear-order, thm-induction-principle, thm-well-ordering-principle, lem-nat-add-identity, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "naturals and $\\omega$ are ordinals; $\\omega$ is the first limit"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

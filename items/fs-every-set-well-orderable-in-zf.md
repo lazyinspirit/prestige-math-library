@@ -2,7 +2,7 @@
 id: fs-every-set-well-orderable-in-zf
 kind: false-statement
 title: "FALSE: the well-ordering theorem is a theorem of ZF"
-status: draft
+status: published
 origin: session
 deps: [rem-cohen-forcing-ac-independent, thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-well-ordering, fs-zorn-provable-in-zf, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "not provable in ZF, conditionally on the consistency of ZF"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

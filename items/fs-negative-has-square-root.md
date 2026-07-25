@@ -2,7 +2,7 @@
 id: fs-negative-has-square-root
 kind: false-statement
 title: "FALSE: every real number has a real square root"
-status: draft
+status: published
 origin: session
 deps: [thm-of-square-roots, lem-of-square-positive, lem-of-zero-mult, thm-nth-roots-exist, def-complete-ordered-field, def-ordered-field, def-integer-power, cor-of-one-positive, cor-of-neg-one-squared, lem-of-sign-rules, lem-of-mult-neg, lem-power-laws, lem-power-monotone]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-subset-of-countable
 kind: lemma
 title: "Every subset of an at most countable set is at most countable"
-status: draft
+status: published
 origin: session
 deps: [def-countable, thm-well-ordering-principle, thm-recursion, thm-strong-induction, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy, thm-nat-linear-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "subsets of countable sets are countable"
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

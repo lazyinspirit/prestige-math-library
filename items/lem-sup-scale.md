@@ -2,7 +2,7 @@
 id: lem-sup-scale
 kind: lemma
 title: "Supremum of a scalar multiple"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, thm-infimum-property, def-complete-ordered-field, lem-of-sign-rules, def-infimum, def-ordered-field, def-field, lem-of-add-order, lem-of-zero-mult]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-zorn-provable-in-zf
 kind: false-statement
 title: "FALSE: Zorn's lemma is a theorem of ZF"
-status: draft
+status: published
 origin: session
 deps: [rem-cohen-forcing-ac-independent, thm-zorn, cor-ac-iff-zorn, thm-zorn-implies-ac, thm-bourbaki-witt]
 justified_by: []
@@ -12,6 +12,12 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

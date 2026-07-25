@@ -2,7 +2,7 @@
 id: thm-zorn
 kind: theorem
 title: "Zorn's lemma"
-status: draft
+status: published
 origin: session
 deps: [thm-bourbaki-witt, def-axiom-of-choice, def-maximal-element, def-upper-bound, def-chain, def-partial-order]
 justified_by: []
@@ -13,6 +13,12 @@ short: "Zorn's lemma"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

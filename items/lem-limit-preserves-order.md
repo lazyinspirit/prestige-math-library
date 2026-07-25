@@ -2,7 +2,7 @@
 id: lem-limit-preserves-order
 kind: lemma
 title: "Limits preserve non-strict inequalities"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, lem-limit-unique, thm-algebra-of-limits, thm-of-archimedean, lem-of-add-order, lem-rat-embeds-dense, lem-of-inverse-positive, lem-of-abs-value, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$x_k\\le y_k$ gives $\\lim x_k\\le\\lim y_k$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

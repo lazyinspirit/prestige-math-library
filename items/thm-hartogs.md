@@ -2,7 +2,7 @@
 id: thm-hartogs
 kind: theorem
 title: "Hartogs: an ordinal that does not inject into a given set"
-status: draft
+status: published
 origin: session
 deps: [thm-mostowski-collapse, def-ordinal, lem-ordinal-trichotomy, def-well-order, lem-ordinal-basics, def-order-isomorphism, def-initial-segment]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph(A)$: least ordinal not injecting into $A$, choice free"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

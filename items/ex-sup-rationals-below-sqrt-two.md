@@ -2,7 +2,7 @@
 id: ex-sup-rationals-below-sqrt-two
 kind: example
 title: "$\\sup\\{q \\in \\mathbb{Q} : q > 0,\\ q^2 < 2\\} = \\sqrt{2}$ in $\\mathbb{R}$, and no supremum in $\\mathbb{Q}$"
-status: draft
+status: published
 origin: session
 deps: [lem-sup-epsilon, thm-of-square-roots, fs-sqrt2-rational, fs-rationals-complete,
        lem-of-q-embeds, lem-of-q-dense, thm-of-archimedean, lem-of-square-monotone,
@@ -15,6 +15,16 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:

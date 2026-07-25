@@ -118,6 +118,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     status: scalar(fm, 'status'),
     audited: nested(fm, 'verification', 'audited'),
     provedHere: scalar(fm, 'proved_here') !== 'false',
+    verified: /^\s+verified:/m.test(fm),
     sourcesChecked: nested(fm, 'verification', 'sources_checked') !== undefined
       || /^\s+sources_checked:/m.test(fm),
     deps: list(fm, 'deps'),
@@ -204,8 +205,11 @@ for (const it of items.values()) {
   // the attribution and the cited source were checked. SCHEMA §3.
   if (it.status === 'published' && !it.provedHere && !it.sourcesChecked)
     err('published-unchecked', `${it.file}: status published, proved_here false, but verification.sources_checked is unset`);
-  if (it.status === 'published' && it.provedHere && !it.audited)
-    err('published-unaudited', `${it.file}: status published but verification.audited is unset`);
+  // `audited` is the OWNER's own read; `verified` is a delegated subagent's, on the
+  // owner's instruction (SCHEMA §3, amended 2026-07-26). Either gates publication;
+  // they are kept distinct so the corpus never loses track of which is which.
+  if (it.status === 'published' && it.provedHere && !it.audited && !it.verified)
+    err('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set`);
   if (it.provedHere && it.sourcesChecked)
     err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))

@@ -2,7 +2,7 @@
 id: thm-ultrafilter-characterisation
 kind: theorem
 title: "Characterisation of ultrafilters: every set or its complement"
-status: draft
+status: published
 origin: session
 deps: [def-ultrafilter, def-filter, def-maximal-element, lem-fip-generates-filter]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$A\\in\\mathcal{U}$ or $X\\setminus A\\in\\mathcal{U}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-zorn-hypothesis-fails
 kind: counterexample
 title: "$(\\mathbb{N}, \\le)$ has no maximal element: Zorn's chain hypothesis fails"
-status: draft
+status: published
 origin: session
 deps: [thm-zorn, def-axiom-of-choice, def-upper-bound, def-maximal-element, def-chain, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, thm-well-ordering-principle]
 justified_by: []
@@ -12,6 +12,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

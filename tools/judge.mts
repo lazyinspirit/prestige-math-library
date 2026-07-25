@@ -353,7 +353,19 @@ if (bools.has("dump-prompt")) {
 const payload = {
   model,
   temperature: 0,
-  max_tokens: 3000,
+  // Raised 3000 -> 8000 -> 40000 on 2026-07-26 (owner). Under the full-page context
+  // the reason strings grew, and a truncated reason arrives as unparseable JSON ->
+  // keep=null, which reads as a call failure rather than as a verdict. A page agent
+  // hit this twice on one item and correctly refused to record a verdict from it.
+  // Reasoning models also spend this budget on thinking BEFORE emitting the JSON, so
+  // the ceiling must clear both; that is why the generous value.
+  //
+  // This is a CEILING, not a target: billing is on tokens actually produced, and
+  // measured completions run about 1.4k. Headroom here costs nothing.
+  // GLM 5.2's max_completion_tokens is 128000, so 40000 is comfortably in range;
+  // check that field before raising it further, and note the GPT-5.4 fallback is
+  // also 128000 while the Gemini fallback caps at 65536.
+  max_tokens: 40000,
   messages: [
     { role: "system", content: sys },
     { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(id) },

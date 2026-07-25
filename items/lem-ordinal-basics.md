@@ -2,7 +2,7 @@
 id: lem-ordinal-basics
 kind: lemma
 title: "Basic closure properties of ordinals"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal, def-well-order, lem-nat-transitive-irreflexive]
 justified_by: []
@@ -12,6 +12,12 @@ short: "elements, successors, unions, intersections of ordinals are ordinals"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

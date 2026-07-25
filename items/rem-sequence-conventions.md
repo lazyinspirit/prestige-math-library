@@ -2,7 +2,7 @@
 id: rem-sequence-conventions
 kind: remark
 title: "Conventions for sequences: indexing, eventually, $\\lim$, and rational $\\varepsilon$"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value, def-abs-value, def-real-order, lem-finite-set-has-max, def-max-min, def-countable, lem-subset-of-countable, lem-pigeonhole, lem-index-map-grows, lem-limit-preserves-order, thm-squeeze, thm-algebra-of-limits, lem-null-times-bounded, lem-reciprocal-of-null-diverges, lem-convergent-implies-cauchy, thm-reals-cauchy-complete, fs-bounded-implies-convergent, def-complete-ordered-field, def-ordered-field, lem-convergent-implies-bounded, thm-of-archimedean, lem-rat-archimedean, thm-rat-ordered-field, lem-of-triangle-inequality]
 justified_by: []
@@ -10,6 +10,16 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-product-of-countable
 kind: theorem
 title: "A product of two at most countable sets is at most countable"
-status: draft
+status: published
 origin: session
 deps: [thm-n-cross-n-countable, def-countable, lem-countable-iff-surjection-from-n, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$A\\times B$ countable"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: openai/gpt-5.4
     verdict: pass

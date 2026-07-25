@@ -2,7 +2,7 @@
 id: lem-ordinal-trichotomy
 kind: lemma
 title: "Trichotomy and well-ordering of the ordinals"
-status: draft
+status: published
 origin: session
 deps: [lem-ordinal-basics, def-ordinal, thm-transfinite-induction, def-well-order, def-partial-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "exactly one of $\\alpha\\in\\beta$, $\\alpha=\\beta$, $\\beta\\in\\alpha
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -147,11 +147,22 @@ verification:
     verdict: certify                 #   page, reading its page plus the FULL TEXT
     date: 2026-07-25                 #   of every item that page cites.
     scope: page                      #   what context the verifier actually had
+    delegated_by: owner              #   set when this block stands as the gate
     # Deliberately a separate block from `judge`. The verifier is a Claude-family
     # model, so it does NOT satisfy the cross-family requirement and can never
-    # substitute for a judge verdict; and `certify` here is a model's opinion,
-    # never the publish gate. Only `audited` is the gate, and only the owner
-    # sets it.
+    # substitute for a judge verdict.
+    #
+    # AMENDED 2026-07-26 (owner: "publish all 9 webpages as I've delegated auditing
+    # to subagents"). `verified` MAY now stand as the publish gate in place of
+    # `audited`, and depcheck accepts either. It is still not the same thing, and
+    # that is the whole point of keeping two fields:
+    #     audited   the OWNER read this item.
+    #     verified  a delegated subagent read it, on the owner's instruction.
+    # Writing `audited` for delegated work would destroy that distinction across
+    # the corpus permanently and irreversibly -- 137 items already carry it meaning
+    # the first thing. A reader and a future session must be able to tell which is
+    # which, so the delegation is recorded as what it was.
+    # `delegated_by: owner` marks an item published on that basis.
   sources_checked:                   # ONLY on `proved_here: false` items, where it
     date: 2026-07-26                 #   REPLACES `audited` as the publish gate.
     scope: citations                 #   what was actually checked

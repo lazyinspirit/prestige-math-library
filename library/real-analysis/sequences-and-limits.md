@@ -1,7 +1,7 @@
 ---
 page: sequences-and-limits
 title: "Sequences and Limits"
-status: draft
+status: published
 items: [def-sequence, lem-limit-of-tail, lem-limit-unique,
         lem-convergent-implies-bounded, lem-convergent-implies-cauchy,
         lem-null-times-bounded, thm-algebra-of-limits,
@@ -92,5 +92,11 @@ add is a proof from the least-upper-bound property that does not go through a
 construction. This page itself proves only the easy half,
 [[lem-convergent-implies-cauchy]], and its remarks say exactly where the other
 half stands. Nothing here uses the least-upper-bound property
-except through the Archimedean property ([[thm-of-archimedean]]), so every result
-on this page holds verbatim for sequences of rationals.
+except through the Archimedean property ([[thm-of-archimedean]]). The natural
+conclusion, that the results here are really results about any Archimedean
+ordered field and so about $\mathbb{Q}$, is true of the *statements* and needs
+one qualification about the *proofs*, which is set out at the end of
+[[rem-sequence-conventions]]: two of the items cited on this page are stated for
+$\mathbb{R}$ or for complete ordered fields specifically, so transferring an
+argument to $\mathbb{Q}$ means rerunning it with the $\mathbb{Q}$ counterparts,
+not citing these items unchanged.

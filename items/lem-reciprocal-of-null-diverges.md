@@ -2,7 +2,7 @@
 id: lem-reciprocal-of-null-diverges
 kind: lemma
 title: "For positive terms, null and divergence to $+\\infty$ are reciprocal"
-status: draft
+status: published
 origin: session
 deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-limit-of-tail, lem-of-inverse-positive, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$x_k\\to0$ iff $1/x_k\\to+\\infty$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

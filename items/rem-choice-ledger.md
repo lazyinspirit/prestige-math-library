@@ -2,7 +2,7 @@
 id: rem-choice-ledger
 kind: remark
 title: "The choice ledger: what costs the Axiom of Choice and what does not"
-status: draft
+status: published
 origin: session
 deps: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
        rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, rem-cohen-first-model,
@@ -14,6 +14,12 @@ landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

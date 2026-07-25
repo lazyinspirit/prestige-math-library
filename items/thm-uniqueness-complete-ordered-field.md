@@ -20,6 +20,10 @@ sources:
       url: "https://bookstore.ams.org/chel-79"
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
   audited: 2026-07-25
 pipeline_run: null
 ---

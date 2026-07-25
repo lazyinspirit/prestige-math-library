@@ -2,7 +2,7 @@
 id: rem-sup-conventions
 kind: remark
 title: "Conventions: $\\sup \\emptyset$, unbounded sets, and the extended reals"
-status: draft
+status: published
 origin: session
 deps: [def-complete-ordered-field, def-infimum, thm-infimum-property, fs-every-set-has-sup,
        lem-sup-epsilon, lem-inf-epsilon, lem-sup-monotone, lem-sup-translate,
@@ -12,6 +12,12 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
