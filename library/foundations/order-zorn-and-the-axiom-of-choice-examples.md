@@ -33,9 +33,12 @@ The next two items are the order theory that Zorn's lemma actually runs on. The
 power set of any set is chain-complete, with union as supremum and $\emptyset$ at
 the bottom, and the argument proves rather more, since it never uses that the
 family is a chain. The chains of an arbitrary poset, ordered by inclusion, are
-chain-complete too, but only just: an arbitrary union of chains need not be a
-chain, so this poset is not a complete lattice, and chain-completeness is
-therefore the right hypothesis rather than a weakened one. That second poset is
+chain-complete too, but usually only just: as soon as $P$ has two incomparable
+elements, an arbitrary union of chains need not be a chain, so that poset is not
+a complete lattice, and chain-completeness is therefore the right hypothesis
+rather than a weakened one. (The hedge is needed: if $P$ happens to be totally
+ordered then every subset of $P$ is a chain, the poset of chains is all of
+$\mathcal{P}(P)$, and it *is* a complete lattice.) That second poset is
 the one Zorn's lemma builds inside its own proof, so the example is the engine of
 the theorem, run on its own.
 

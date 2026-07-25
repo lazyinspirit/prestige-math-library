@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -41,7 +37,7 @@ $f(x)$ is extremal.
 
 [L3] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
 
-[L4] $\le$ is a partial order: it is reflexive ($u \le u$) and transitive ($u \le v$ and $v \le w$ imply $u \le w$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
+[L4] $\le$ is a partial order: it is reflexive ($u \le u$), transitive ($u \le v$ and $v \le w$ imply $u \le w$) and **antisymmetric** ($u \le v$ and $v \le u$ imply $u = v$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
 
 ## Proof
 
@@ -57,7 +53,7 @@ $f(x)$ is extremal.
 
 1.5 Suppose $y = x$. [assume-case equal]
 
-2.1 The alternative $f(x) \le y$ is impossible: combined with $y < f(x)$ it would give $f(x) < f(x)$. Hence $y \le x$. [step 1.3, step 1.2]
+2.1 The alternative $f(x) \le y$ is impossible: $y < f(x)$ gives $y \le f(x)$ with $y \ne f(x)$, so $f(x) \le y$ together with $y \le f(x)$ would force $f(x) = y$ by antisymmetry, contradicting $y \ne f(x)$. (Transitivity alone would only give $f(x) \le f(x)$, which is no contradiction; antisymmetry is what is doing the work.) Hence $y \le x$. [step 1.3, step 1.2, L4]
 
 2.2 In the case $y < x$, extremality of $x$ gives $f(y) \le x$, and progressivity gives $x \le f(x)$, so $f(y) \le f(x)$ by transitivity. [step 1.4, A1, L3, L4]
 

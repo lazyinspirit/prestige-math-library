@@ -12,10 +12,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -68,8 +64,12 @@ maximal in $P$, neither is greatest, and $P$ has no greatest element at all.
 ## Remarks
 
 - **This witness is not the smallest one.** The refutation in
-  [[fs-maximal-is-greatest]] uses a two element antichain, which is minimal:
-  a poset with at most one element satisfies the claim vacuously. The witness
+  [[fs-maximal-is-greatest]] uses a two element antichain, which is minimal, but
+  not for the reason one might expect: only the *empty* poset satisfies the claim
+  vacuously, having no maximal element at all, while a *one element* poset
+  satisfies it **outright**, since its single element is maximal and is greatest
+  by reflexivity. Two elements is therefore the least size at which the claim can
+  fail, and it does fail there. The witness
   here adds a least element $\emptyset$ below both maximal elements, which
   matters because it shows the failure is not caused by the poset splitting into
   unrelated pieces. Even a poset with a bottom, in which every element is

@@ -12,10 +12,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -95,9 +91,13 @@ library develops neither.
   and the passage to ZF is the Jech-Sochor embedding theorem, which this library
   does not contain either.
 
-- **Finitely many pairs of socks are free.** For a family of finitely many two
-  element sets a choice function exists outright by [[lem-finite-choice]], with
-  the picks made one at a time. Russell's contrast is a genuinely infinite
+- **Boundedly many pairs of socks are free.** Whenever the pairs can be listed
+  as the values $F(0), \dots, F(n-1)$ of a function $F$ with domain a natural
+  number $n$, a choice function exists outright by [[lem-finite-choice]], with
+  the picks made one at a time. That lemma is stated over such an indexed family
+  and deliberately does *not* say "finitely many": no definition of finiteness is
+  available at this point in the library, and the identification of the finite
+  families with the listable ones is nowhere made there. Russell's contrast is a genuinely infinite
   phenomenon, which is why he stated it for infinitely many pairs.
 
 - The shoe argument never used that the pairs are pairwise disjoint, or that
