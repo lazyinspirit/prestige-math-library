@@ -81,6 +81,23 @@ prove it is a citation-honesty violation, not a justification. When the obligati
 is nontrivial and no existing item discharges it, author the missing lemma or
 theorem and prove it before the definition is published.
 
+**Where the citation goes (this is not cosmetic).** A discharging item comes in
+two flavours and they belong in different frontmatter fields:
+
+- If the discharging item **depends on the definition** (it is a statement *about*
+  the object the definition introduces, e.g. "the inverse in a field is unique",
+  "each rational cut is a cut"), it points FORWARD. Put it in **`justified_by`**.
+  Putting it in `deps` creates a genuine cycle in the dependency graph: the
+  definition would cite the lemma and the lemma would cite the definition.
+- If the discharging item **does not depend on the definition** (it is a genuine
+  prerequisite that LICENSES the definition, e.g. the recursion theorem licensing
+  a definition by recursion), it belongs in **`deps`** as normal.
+
+`node tools/depcheck.mjs` enforces the distinction: it rejects a `justified_by`
+target that does not transitively depend on the citing item, and it rejects any
+cycle in `deps`. Run it before publish; it is the mechanical guarantee that the
+library contains no circular reasoning.
+
 The obligations that recur, and what each requires:
 
 - **Quotient constructions.** Defining a quotient (a quotient group $G/N$, a
@@ -240,11 +257,28 @@ because a request on a specialised topic (a recent arXiv area, say) would rely
 on it to give the otherwise-stateless generator and judge the domain context
 they lack.
 
-**Maximum theorem depth is 5.** Plan the dependency tree so the deepest chain of
-proof-bearing results (definitions are depth-0 leaves) is at most five levels,
-and so that whatever sits at depth 5 is self-contained: it cites only
-definitions, axioms, or already-established results, never an unproven
-sub-result.
+**No cap on theorem depth** (owner decision, 2026-07-25). This previously read
+"maximum theorem depth is 5", a limit inherited from generating a page in one
+pipeline pass. Authoring now runs through Claude Code subagents with no timeout
+restriction, so depth costs nothing and the cap only pushed toward coarse,
+hard-to-check lemmas.
+
+It was in any case never observed. Measured per page, counting proof-bearing
+results and treating cross-page dependencies as leaves, the published corpus runs
+`construction-of-the-natural-numbers` 10, `construction-of-r-via-cauchy-sequences`
+16, `construction-of-r-via-dedekind-cuts` 12, `foundations-of-the-real-numbers` 9.
+Globally the deepest chain reaches 26, at `thm-equivalence-of-constructions`.
+
+**What survives, and it is the part that mattered:** every proof-bearing item
+must be *self-contained at its own level*. It may cite only definitions, axioms,
+or results already established earlier on its page or on a strictly earlier page,
+never an unproven sub-result. Depth is then a consequence of decomposing
+honestly, not a budget to stay inside. Prefer more, smaller lemmas: the owner's
+standing rule is that difficulty is never a reason to omit or hand-wave, only to
+decompose further.
+
+`node tools/depcheck.mjs` reports the depth per page so it is measured rather
+than asserted.
 
 ---
 

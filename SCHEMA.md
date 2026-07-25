@@ -45,8 +45,52 @@ title: "Completeness of $\\mathbb{R}$ (Cauchy criterion)"   # inline LaTeX ok
 status: draft                        # draft | published  (THE publish gate)
 origin: session                      # pipeline | session
 deps: [def-cauchy-sequence, lem-triangle-inequality]
-  # every item this item's statement OR proof cites (single list; drives the
-  # prerequisite closure and the flowchart). Must reference existing ids.
+  # every item this item's statement OR proof LOGICALLY DEPENDS ON (single list;
+  # drives the prerequisite closure and the flowchart). Must reference existing
+  # ids. THIS GRAPH MUST BE ACYCLIC — see §7.
+justified_by: []                     # OPTIONAL, definitions only in practice.
+  # Items that discharge this item's well-definedness obligations (WORKFLOW.md
+  # "Definition justification"). These point FORWARD: the discharging lemma is
+  # about the object this definition introduces, so it depends on this item.
+  # Listing such a lemma in `deps` creates a spurious cycle; list it here.
+  # Enforced: every `justified_by` target must transitively depend on this item,
+  # otherwise it is a genuine prerequisite and belongs in `deps`.
+proved_here: true                    # OPTIONAL, defaults to true. Set FALSE when
+  # this item RECORDS a result that this library does NOT prove, because the
+  # track that would prove it has not been built (DEFERRED.md). Such an item:
+  #   * is a `rem-` (it states, it does not establish), with `verification.
+  #     precheck: n/a` and NO `## Proof` section;
+  #   * MUST carry a real citation in `sources.references`;
+  #   * says in its body what would prove it and which track that belongs to.
+  # Owner requirement 2026-07-25: these, and everything depending on them, are
+  # visibly different from EVERYTHING else INCLUDING ordinary forward references.
+  # Three ranked tiers, each distinct in colour, underline and glyph:
+  #     ordinary citation   indigo,  solid underline,  no glyph
+  #     forward reference   sky,     dashed underline, ↗
+  #     NOT PROVED HERE     fuchsia, dotted underline, ‡    <- outranks the others
+  # Inside a proof, any fact carrying such a dependency and EVERY step tag citing
+  # that fact are marked ‡ too, and an always-visible note reminds the reader the
+  # dependency is not developed in this library. Enforced by tools/extcheck.mjs;
+  # rendered by web/lib/library-external.ts.
+forward_refs: []                     # OPTIONAL. Items developed LATER in the
+  # library that this item points at for orientation ("this is taken up in ...").
+  # Owner decision 2026-07-25: forward references are allowed, on three
+  # conditions, all mechanically enforced by `tools/fwdcheck.mjs`:
+  #   1. VISIBLE. Declaring an id here is what makes the renderer mark the link
+  #      as a forward reference, distinct from every ordinary citation.
+  #   2. REMEMBERED. `node tools/fwdcheck.mjs --ledger` regenerates
+  #      research/forward-refs.md, the standing list of open forward references
+  #      and the page that will close each one.
+  #   3. CLOSED, AND NEVER CIRCULAR. The target must be planned on a page
+  #      STRICTLY LATER in plan order, so it is guaranteed to be authored, and
+  #      the forward edge points the opposite way to every `deps` edge. That is
+  #      what keeps the union acyclic; `stack-cycle` re-checks it on real content.
+  # A forward reference is ORIENTATION ONLY. It may appear in Remarks and in page
+  # prose, and it may NEVER appear in Statement, Statement refuted, or Facts &
+  # Assumptions: there it would be a genuine prerequisite pointing forward, which
+  # is precisely circular reasoning. Enforced as `forward-load-bearing`.
+  # An id may never be in both `forward_refs` and `deps`/`justified_by`.
+  # Links to items on the SAME page are ordinary links, not forward references.
 aliases: []                          # alternate wikilink names / retired ids
 landmark: false                      # true = show as a node in the page's
                                      #   birds-eye flowchart (§6). Reserve for
@@ -166,7 +210,24 @@ README; a page renders publicly only if page `status: published` AND every
 listed item is `published` (a draft item on a published page is a broken page
 — the renderer refuses, listing offenders, rather than skipping silently).
 
-## 7. Mechanical publish checklist (enforced by CI/renderer, not by memory)
+## 7. Acyclicity (the no-circular-reasoning guarantee)
+
+Run `node tools/depcheck.mjs` from the repo root. It is the mechanical gate for
+everything in this section and for the reference/hygiene half of §8.
+
+The `deps` graph over all of `items/` MUST be acyclic, and so must the induced
+page graph (page P points at page Q when an item homed on P depends on an item
+homed on Q). `justified_by` edges are excluded from both, because they point
+forward by construction; `depcheck.mjs` separately verifies that each one really
+does point forward, so the exclusion cannot conceal a real cycle.
+
+Pages are read in a single global order. An item may cite only items on its own
+page (earlier in the `items` list) or on a strictly earlier page. Examples pages
+are leaves: nothing depends on an item that lives only on an examples page, which
+is what lets an examples page cite forward when the classical form of an example
+needs machinery introduced later.
+
+## 8. Mechanical publish checklist (enforced by CI/renderer, not by memory)
 
 `status: published` on an item is valid only if: id == filename; kind/prefix
 match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);

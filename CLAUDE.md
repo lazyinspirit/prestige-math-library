@@ -93,6 +93,44 @@ before any rendering change, and preserve their behaviour):
   items not AI-judged were owner-verified, NOT failures. This exists so "judge
   31/34" can never be misread as failures; do not remove it or reintroduce a
   bare judge fraction as the headline.
+- **Forward references (owner-authorised addition, 2026-07-25 — ADDITIVE, not a
+  restyle; keep it).** The owner allowed forward references on condition that
+  they are VISIBLY different from everything else, and that their CONSEQUENCES
+  (examples, corollaries, anything downstream) are marked the same way, since
+  such a consequence may use the forward reference in its own proof. Implemented
+  by `web/lib/library-forward.ts`, which owns the single accent used for all of
+  it: **sky, a dashed underline on links, and the ↗ glyph** (sky is used nowhere
+  else; the kind palette and the state chips are untouched). Marker text always
+  accompanies the colour, as everywhere else here. `web/components/library/
+  MathMarkdown.tsx` renders a forward link, and renders it as marked text rather
+  than a dead link when the target is not authored yet;
+  `web/components/library/badges.tsx` adds `ForwardDependentChip` for an item
+  that rests on later material, `direct` or `inherited`. The content side is
+  `forward_refs` in item frontmatter (SCHEMA §3) plus `tools/fwdcheck.mjs`.
+- **Recorded-but-not-proved, a THIRD tier (owner instruction, 2026-07-25 —
+  ADDITIVE; keep it).** The owner asked that the deferred results of
+  `DEFERRED.md` be INCLUDED in the library, and that they and their consequences
+  be visibly different from everything else INCLUDING ordinary forward references
+  and their consequences; that every unproved dependency inside a proof be
+  visibly different from every other dependency; and that the reader be reminded
+  such a dependency is not developed here. Three ranked tiers result, each
+  distinct in colour, underline style AND glyph, so none relies on colour alone:
+
+  | tier | colour | underline | glyph |
+  |---|---|---|---|
+  | ordinary citation | indigo | solid | none |
+  | forward reference | sky | dashed | ↗ |
+  | **not proved here** | **fuchsia** | **dotted** | **‡** |
+
+  Fuchsia is used nowhere else, and the bottom tier OUTRANKS the middle one.
+  Owned by `web/lib/library-external.ts` (accent + the `unprovedDependence`
+  closure, which propagates along `deps` so consequences are marked too);
+  `web/components/library/ItemBody.tsx` marks the FACT row carrying an unproved
+  dependency and EVERY step tag citing that fact; `badges.tsx` adds
+  `UnprovedDependentChip` and `UnprovedDepsNote`, the always-visible reminder in
+  the spirit of the verification caption. Content side: `proved_here: false` in
+  frontmatter (SCHEMA §3), the `not-proved-here` category, and
+  `tools/extcheck.mjs`.
 - Flowchart is BIRDS-EYE: only `landmark: true` items are nodes; edges are the
   transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
   theorems, key definitions, key lemmas); do not revert to one-node-per-item.
