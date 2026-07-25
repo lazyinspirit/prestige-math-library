@@ -12,6 +12,10 @@ short: "every well-order is isomorphic to a unique ordinal"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -21,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "Axiom schema of replacement (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_schema_of_replacement"
+    - title: "Zermelo set theory (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Zermelo_set_theory"
+    - title: "Von Neumann universe (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Von_Neumann_universe"
 pipeline_run: null
 ---
 
@@ -75,7 +83,7 @@ unique as well, by rigidity ([[lem-well-order-rigid]]).
 
 ## Remarks
 
-**Replacement is the whole cost.** The values $F(a)$ are not subsets of any set given in advance, so Separation cannot collect them; steps 2.1 and 3.2 both invoke Replacement, exactly as [[thm-transfinite-recursion]] does. In Zermelo set theory, which has Separation but not Replacement, the theorem fails: there are models of it containing well-orders that no ordinal of the model is isomorphic to.
+**Replacement is the whole cost.** The values $F(a)$ are not subsets of any set given in advance, so Separation cannot collect them; steps 2.1 and 3.2 both invoke Replacement, exactly as [[thm-transfinite-recursion]] does. In Zermelo set theory, which has Separation but not Replacement, the theorem fails, and the standard witness is explicit: $V_{\omega + \omega}$ satisfies Zermelo set theory, its ordinals are exactly the ordinals below $\omega + \omega$, and it contains relations on $\omega$ of order type $\omega \cdot 2$, which no ordinal of the model is isomorphic to. That model is built inside ZF, so this failure carries no consistency hypothesis; it is quoted from the references below and is not proved here, since Zermelo set theory is nowhere developed in this library.
 
 **No choice, and the reason is again uniqueness.** Nothing is ever selected: $F$ is produced by recursion from a formula, and the ordinal it lands on is determined. This is what makes order type a choice-free notion, in contrast with cardinality, which needs [[thm-well-ordering-theorem]] and hence the Axiom of Choice to be defined for an arbitrary set.
 

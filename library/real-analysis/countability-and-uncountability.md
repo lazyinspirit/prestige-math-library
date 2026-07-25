@@ -70,8 +70,9 @@ construction into a single application of [[thm-recursion]]. The familiar
 phrasing "pick a subinterval avoiding $f(n)$" would quietly be using dependent
 choice, and the whole point of the thirds is to avoid it.
 
-The choice ledger for this page is short and explicit. Everything is a theorem of
-ZF except [[thm-countable-union-of-countable]], which assumes the Axiom of
+The choice ledger for this page is short and explicit. Every definition, lemma
+and theorem proved here is a theorem of ZF except
+[[thm-countable-union-of-countable]], which assumes the Axiom of
 Countable Choice ([[def-countable-choice]]) and flags the exact step that spends
 it: the selection, for every index at once, of one surjection onto $A_n$ out of
 the many that exist. In particular [[lem-subset-of-countable]] and

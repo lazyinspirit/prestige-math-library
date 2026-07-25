@@ -13,7 +13,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -78,4 +78,4 @@ The single infinite construction is an application of the recursion theorem
 
 - **Why the choice-freeness is worth stating.** Many textbook proofs phrase the construction as "follow the chain of preimages backwards until it stops", which sounds like an infinite sequence of selections. It is not: the preimage under an injection is unique when it exists, and the recursion above is a single application of [[thm-recursion]] to one explicitly given function $S \mapsto g[f[S]]$. The theorem is a theorem of ZF.
 
-- With this theorem, $\preceq$ behaves like an order on equinumerosity classes: $A \preceq B$ and $B \preceq A$ give $A \approx B$. Comparability, that $A \preceq B$ or $B \preceq A$ holds for any two sets, is a different matter entirely and is equivalent to the Axiom of Choice ([[def-axiom-of-choice]]); it is not used anywhere on this page.
+- With this theorem, $\preceq$ behaves like an order on equinumerosity classes: $A \preceq B$ and $B \preceq A$ give $A \approx B$. Comparability, that $A \preceq B$ or $B \preceq A$ holds for any two sets, is a different matter entirely: over ZF it is equivalent to the Axiom of Choice ([[def-axiom-of-choice]]), a classical result quoted here and proved nowhere on this page, the harder half of it going back to Hartogs. Nothing on this page uses comparability.

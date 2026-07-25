@@ -92,7 +92,12 @@ countable family of nonempty sets ([[def-countable]]) has a choice function.
   step that spends it, and [[fs-countable-union-theorem-of-zf]] records that the
   assumption cannot be removed.
 
-- Everything else on this page is a theorem of ZF alone. In particular
+- Every result *proved* on this page other than
+  [[thm-countable-union-of-countable]] is a theorem of ZF alone. In particular
   [[lem-subset-of-countable]], [[lem-countable-iff-surjection-from-n]],
   [[thm-schroder-bernstein]], [[thm-rationals-countable]], [[thm-cantor-powerset]]
-  and [[thm-r-uncountable]] are choice free, and each says so.
+  and [[thm-r-uncountable]] are choice free, and each says so. The false
+  statements at the end of the page are not all of that kind, and the claim above
+  does not cover them: two of the three refute a ZF-provability claim only under
+  the hypothesis that ZF is consistent, quoting an external independence result
+  rather than proving it, and they say so in their own Facts.

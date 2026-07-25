@@ -110,31 +110,10 @@ ordinals, cardinals, or any later material.
 
 ## Remarks
 
-- **Where the work is.** Everything rests on claim 1, and claim 1 rests on one
-  device: a map into $\sigma(n)$ can be modified by a transposition of the
-  codomain so that the top point $\sigma(n)$ goes to the top value $n$, after
-  which the rest of the map misses $n$ and lands in $n$. Without that
-  normalisation the inductive hypothesis does not apply, since an arbitrary
-  injection $\sigma(\sigma(n)) \to \sigma(n)$ need not send anything to $n$.
+- **Where the work is.** Everything rests on claim 1, and claim 1 rests on one device: a map into $\sigma(n)$ can be modified by a transposition of the codomain so that the top point $\sigma(n)$ goes to the top value $n$, after which the rest of the map misses $n$ and lands in $n$. Without that normalisation the inductive hypothesis does not apply, since an arbitrary injection $\sigma(\sigma(n)) \to \sigma(n)$ need not send anything to $n$.
 
-- **No choice is used.** Every map built above is defined by an explicit rule:
-  the transposition is given by three cases, and the only element selected
-  anywhere is a single $j \in n \setminus A$ in step 5.3, a single choice from a
-  nonempty set, which needs no choice principle.
+- **No choice is used.** Every map built above is defined by an explicit rule: the transposition is given by three cases, and the only element selected anywhere is a single $j \in n \setminus A$ in step 5.3, a single choice from a nonempty set, which needs no choice principle.
 
-- **Claim 5 and the two notions of infinity.** A set is *Dedekind-infinite* when
-  it is equinumerous with a proper subset of itself. Claim 5 says no natural
-  number is, and transporting along a bijection extends this to every finite set,
-  which is the ZF half of the comparison discussed in
-  [[fs-infinite-has-countable-subset-in-zf]]: Dedekind-infinite implies infinite,
-  while the converse is not a theorem of ZF. The successor map
-  $\sigma : \mathbb{N} \to \mathbb{N} \setminus \{0\}$ shows $\mathbb{N}$ itself
-  is Dedekind-infinite, so the restriction to natural numbers in claim 5 is
-  essential.
+- **Claim 5 and the two notions of infinity.** A set is *Dedekind-infinite* when it is equinumerous with a proper subset of itself. Claim 5 says no natural number is, and transporting along a bijection extends this to every finite set, which is the ZF half of the comparison discussed in [[fs-infinite-has-countable-subset-in-zf]]: Dedekind-infinite implies infinite outright in ZF, while the converse is not a theorem of ZF unless ZF is inconsistent, that item's conclusion being conditional on the consistency of ZF and resting on an external independence result quoted rather than proved. The successor map $\sigma : \mathbb{N} \to \mathbb{N} \setminus \{0\}$ shows $\mathbb{N}$ itself is Dedekind-infinite, so the restriction to natural numbers in claim 5 is essential.
 
-- **Relation to the ordinals page.** [[def-cardinal]] calls an ordinal $\kappa$ a
-  cardinal when no $\alpha \in \kappa$ satisfies $\alpha \approx \kappa$. Claim 3
-  makes every natural number a cardinal and claim 4 makes $\omega$ one, which is
-  what licenses the traditional $\aleph_0 = \omega$. That page comes much later
-  in the library; the pointer here is orientation only, and nothing above rests
-  on it.
+- **Relation to the ordinals page.** [[def-cardinal]] calls an ordinal $\kappa$ a cardinal when no $\alpha \in \kappa$ satisfies $\alpha \approx \kappa$. Claim 3 makes every natural number a cardinal and claim 4 makes $\omega$ one, which is what licenses the traditional $\aleph_0 = \omega$. That page comes much later in the library; the pointer here is orientation only, and nothing above rests on it.

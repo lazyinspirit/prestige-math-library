@@ -34,7 +34,8 @@ nonempty poset in which **every chain has an upper bound**. Then $P$ has a
 maximal element ([[def-maximal-element]]).
 
 Note the hypothesis asks only for an upper bound, not a least upper bound, and
-the conclusion gives a maximal element, never a greatest one.
+the conclusion asserts only that a maximal element exists, never that a greatest
+one does.
 
 ## Facts & Assumptions
 

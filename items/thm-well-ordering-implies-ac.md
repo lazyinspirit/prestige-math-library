@@ -13,7 +13,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -49,7 +49,7 @@ Work in ZF and assume that **every set can be well ordered**
 
 **Proof technique:** direct.
 
-1.1 Let $U = \bigcup \mathcal{F}$, which is a set by the Union axiom, and note that every member of $\mathcal{F}$ is a subset of $U$. [L1, construct]
+1.1 Let $U = \bigcup \mathcal{F}$, which is a set by the Union axiom of ZF, available by the Given, and note that every member of $\mathcal{F}$ is a subset of $U$. [given, construct]
 
 2.1 By hypothesis there is a well-order $<$ on $U$; fix one. [step 1.1, A1, choose]
 

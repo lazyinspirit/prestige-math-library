@@ -14,7 +14,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -86,7 +86,7 @@ argument below.
 
 **End extension is doing real work.** Ordering $P$ merely by "$R$ is the restriction of $R'$" is not enough. Without the requirement that $B$ be an initial segment of $B'$, a union of a chain of well-orders can fail to be a well-order, because a set $S$ could keep acquiring smaller elements as one moves up the chain and end with no least element. Step 5.1 is exactly the point where initial segments rule that out.
 
-**Maximal, not greatest.** Zorn's lemma delivers a maximal element and never a greatest one ([[fs-maximal-is-greatest]]). The argument is arranged so that maximality suffices: step 8.1 shows a maximal well-ordered piece cannot omit a point, because a point could always be appended on top.
+**Maximal, not greatest.** Zorn's lemma concludes that a maximal element exists, never that a greatest one does, and maximal does not imply greatest ([[fs-maximal-is-greatest]]). The argument is arranged so that maximality suffices: step 8.1 shows a maximal well-ordered piece cannot omit a point, because a point could always be appended on top.
 
 **The converse holds.** Every set being well orderable implies the Axiom of Choice ([[thm-well-ordering-implies-ac]]), so the two are equivalent over ZF, as is Zorn's lemma ([[cor-ac-iff-well-ordering]]). That the well-ordering theorem is not a theorem of ZF alone is recorded, conditionally on the consistency of ZF, in [[fs-every-set-well-orderable-in-zf]]; the external result that item quotes is Cohen's independence theorem ([[rem-cohen-forcing-ac-independent]]), which this library records with references and does not prove.
 

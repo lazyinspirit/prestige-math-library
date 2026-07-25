@@ -4,7 +4,7 @@ kind: theorem
 title: "$\\mathbb{Q}$ is countably infinite"
 status: draft
 origin: session
-deps: [thm-n-cross-n-countable, thm-product-of-countable, def-rationals, lem-rat-positive-denominator, def-countable, lem-subset-of-countable, def-integers, lem-countable-iff-surjection-from-n, thm-schroder-bernstein, def-equinumerous, def-injection-surjection-bijection, lem-nat-embeds-int, lem-int-embeds-rat, def-int-order, thm-int-ordered-ring]
+deps: [thm-n-cross-n-countable, thm-product-of-countable, def-rationals, lem-rat-positive-denominator, def-countable, lem-subset-of-countable, def-integers, lem-countable-iff-surjection-from-n, thm-schroder-bernstein, def-equinumerous, def-injection-surjection-bijection, lem-nat-embeds-int, lem-int-embeds-rat, def-int-order, thm-int-ordered-ring, thm-omega-is-peano-system, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
 landmark: true
@@ -62,7 +62,7 @@ of $\mathbb{N} \times \mathbb{N}$ by construction ([[def-integers]]).
 
 [L8] $\preceq$ in both directions gives $\approx$ ([[thm-schroder-bernstein]]).
 
-[L9] $\mathbb{Z}$ is a totally ordered commutative ring with $0 < 1$, so $\mathbb{Z}_{>0} \ne \varnothing$ ([[thm-int-ordered-ring]], [[def-int-order]]).
+[L9] The relation of [[def-int-order]] is a total order on $\mathbb{Z}$ compatible with the ring structure ([[thm-int-ordered-ring]]), and $\mathbb{Z}_{>0} \ne \varnothing$: on representatives $0 < [(a,b)]$ holds exactly when $b < a$ in $\mathbb{N}$ ([[def-int-order]]), and $0 < 1$ in $\mathbb{N}$, since $1 = \sigma(0) \ne 0$ ([[thm-omega-is-peano-system]]) while $0 < n$ for every nonzero natural $n$ (claim 4 of [[lem-nat-order-is-membership]]); so the integer $[(1,0)]$ is positive.
 
 ## Proof
 

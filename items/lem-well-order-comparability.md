@@ -4,7 +4,7 @@ kind: lemma
 title: "Comparability of well-orders"
 status: draft
 origin: session
-deps: [lem-well-order-rigid, thm-transfinite-recursion, def-initial-segment, def-order-isomorphism, def-well-order]
+deps: [lem-well-order-rigid, def-initial-segment, def-order-isomorphism, def-well-order]
 justified_by: []
 aliases: [lem-well-orders-comparable]
 landmark: false
@@ -12,6 +12,10 @@ short: "one of two well-orders embeds onto an initial segment of the other"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:

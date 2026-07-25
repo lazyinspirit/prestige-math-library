@@ -45,6 +45,10 @@ that is $\omega \le \gamma$, for every limit ordinal $\gamma$.
 So the natural numbers are exactly the ordinals below $\omega$, and $\omega$ is
 the first ordinal at which induction acquires a limit clause.
 
+**Everything here is a theorem of ZF, and no choice principle is used.** The
+only axiom beyond the basic ones that any of it needs is Infinity, which is what
+makes $\omega$ a set at all ([[lem-omega-smallest-inductive]]).
+
 ## Facts & Assumptions
 
 **Given:** $\mathbb{N} = \omega$ with $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$ ([[def-natural-numbers]]), and the order $m \le n \iff \exists k\,(m + k = n)$, $m < n \iff (m \le n$ and $m \ne n)$ ([[def-nat-order]]).

@@ -13,7 +13,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -41,8 +41,12 @@ It is spent at exactly one step, step 3.1 below, where one surjection
 $\mathbb{N} \to A_n$ is selected for every $n$ at once. Each $A_n$ has such
 surjections, in general many of them, and the countability assumption provides no
 rule for singling one out. Without some choice principle the theorem is not
-available at all: ZF alone does not prove it, as recorded among this page's false
-statements and discussed in the remarks below.
+available at all: ZF alone does not prove it, **conditionally on the consistency
+of ZF**, as recorded among this page's false statements and discussed in the
+remarks below, where that item is named and linked. The
+consistency hypothesis is not a formality and cannot be dropped: the separation
+rests on an external independence result that this library quotes rather than
+proves, and it cannot be stated without it.
 
 ## Facts & Assumptions
 

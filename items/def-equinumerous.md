@@ -11,6 +11,10 @@ landmark: false
 short: "$A\\approx B$, $A\\preceq B$"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -50,8 +54,11 @@ terminology).
   any use of choice.
 
 - **Subsets.** $A \subseteq B$ implies $A \preceq B$, since the inclusion map is
-  injective. The reverse fails badly for infinite sets: the successor map shows
-  $\mathbb{N} \approx \mathbb{N} \setminus \{0\}$, so a proper subset can be
+  injective. The reverse fails badly for infinite sets: the successor map
+  $\sigma$ is a bijection $\mathbb{N} \to \mathbb{N} \setminus \{0\}$, being
+  injective and never zero ([[thm-omega-is-peano-system]]) and hitting every
+  nonzero natural ([[lem-nat-nonzero-is-successor]]), so
+  $\mathbb{N} \approx \mathbb{N} \setminus \{0\}$ and a proper subset can be
   equinumerous with the whole.
 
 - $\approx$ is the library's substitute for "has the same number of elements",

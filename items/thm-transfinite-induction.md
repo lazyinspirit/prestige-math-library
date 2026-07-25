@@ -13,7 +13,7 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-25
 sources:
@@ -36,8 +36,10 @@ In property form: if a property $P$ of elements of $W$ satisfies "whenever
 $P(x)$ holds for every $x < a$, it holds at $a$", then $P(a)$ holds for every
 $a \in W$.
 
-**This is a theorem of ZF.** No form of the Axiom of Choice is used, and none
-is available at this point in the development.
+**This is a theorem of ZF.** No form of the Axiom of Choice is used. Choice is
+perfectly available at this point in the library, since Zorn's lemma is proved
+from it on the previous page; the claim made here is about this proof, which
+never invokes it.
 
 ## Facts & Assumptions
 

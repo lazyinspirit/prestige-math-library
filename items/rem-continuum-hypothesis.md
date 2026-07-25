@@ -47,13 +47,15 @@ The qualification matters, and it is one of the few places on this page where a
 statement is not choice free. Passing from the displayed form to the subset form
 requires knowing that an uncountable $A \subseteq \mathcal{P}(\mathbb{N})$
 satisfies $\mathbb{N} \prec A$, that is, that $A$ has a countably infinite
-subset, and **that is not a theorem of ZF**: this page records exactly that in
-[[fs-infinite-has-countable-subset-in-zf]]. Over ZF that passage is therefore
-unavailable, so nothing here asserts the two forms to be equivalent, and only the
-displayed form is used below. Whether they genuinely come apart in some model of
+subset, and **that is not a theorem of ZF, granted the consistency of ZF**: this
+page records exactly that in [[fs-infinite-has-countable-subset-in-zf]], whose
+conclusion is conditional on the consistency of ZF and rests on an external
+independence result quoted there rather than proved. Over ZF that passage is
+therefore unavailable, so nothing here asserts the two forms to be equivalent,
+and only the displayed form is used below. Whether they genuinely come apart in some model of
 ZF is a further independence question, which this page neither settles nor uses.
 
-**CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1940)
+**CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1938)
 showed that ZFC cannot refute it, by constructing the inner model $L$ of
 constructible sets, in which CH holds ([[rem-godel-constructible-universe]]).
 Cohen (1963) showed that ZFC cannot prove it, by inventing forcing and building a

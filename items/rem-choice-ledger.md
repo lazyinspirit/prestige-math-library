@@ -55,9 +55,11 @@ link is flagged as such.
   ([[rem-schechter-kelley-tychonoff]]).
 - **Every vector space has a basis.** The implication from the Axiom of Choice
   is a routine application of Zorn's lemma; the converse is a hard theorem of
-  Blass, 1984. Not proved here, and, unlike the other entries in this ledger,
-  not recorded anywhere in this library either: it is quoted on the authority of
-  the references alone.
+  Blass, 1984. Neither direction is proved here, and no item derives either, so
+  both are quoted on the authority of the references. The equivalence itself is
+  recorded in the library, in [[rem-hahn-banach-hamel-basis-open]], where it
+  fixes the upper endpoint of an open question about the strength of
+  Hahn-Banach.
 - **Cardinal comparability**, that for any two sets one injects into the other.
   This is Hartogs 1915, and the proof runs through the construction of
   [[thm-hartogs]]. Not proved here.
@@ -135,7 +137,9 @@ assumed elsewhere. All three facts belong in the ledger.
   chain at once; the fixed point theorem underlying it ([[thm-bourbaki-witt]]) is
   choice-free. Every result in this library that assumes full choice reaches it
   through that step and no other.
-- **The results that assume full choice.** On this page: the well-ordering
+- **The results that assume full choice.** [[thm-zorn]] itself is the first of
+  them: its statement takes the Axiom of Choice as a standing hypothesis, which
+  is why the step above lives inside it. On this page: the well-ordering
   theorem ([[thm-well-ordering-theorem]]), which takes the Axiom of Choice as a
   hypothesis; and the **cardinality assignment** of [[def-cardinal]], which
   assumes it in order to well order an arbitrary set. That last one is easy to
@@ -145,7 +149,10 @@ assumed elsewhere. All three facts belong in the ledger.
   list: each is proved in ZF outright and assumes no choice principle, saying
   only that the statements it names imply one another. Elsewhere in the library,
   [[thm-ultrafilter-lemma]] is proved through Zorn's lemma and so also pays full
-  price, although its statement costs strictly less.
+  price, although its statement costs strictly less; and the **Hausdorff maximal
+  principle**, that every poset has a maximal chain, is drawn from Zorn as a
+  consequence in [[ex-zorn-poset-of-chains]] and pays the same price, the
+  chain-completeness verified there being free.
 - **A weaker principle, spent separately.** [[thm-countable-union-of-countable]]
   is stated under countable choice ([[def-countable-choice]]) and flags the one
   step that spends it. That is **not** a use of the Axiom of Choice:

@@ -52,8 +52,11 @@ inequality.
 - A greatest element is always maximal, and it is unique when it exists: if $m$
   and $m'$ are both greatest then $m \le m'$ and $m' \le m$, so $m = m'$ by
   antisymmetry. Maximal elements need not be unique.
-- **Zorn's lemma delivers a maximal element, never a greatest one**
-  ([[thm-zorn]]). Every application of Zorn therefore has to be phrased so that
+- **Zorn's lemma concludes that a maximal element exists, never that a greatest
+  one does** ([[thm-zorn]]). In a particular poset the maximal element it
+  produces may happen to be greatest, since a greatest element is maximal; what
+  Zorn never supplies is a *guarantee* of greatestness. Every application of Zorn
+  therefore has to be phrased so that
   maximality is enough, typically by arranging the poset so that a maximal
   object cannot be extended, which is a statement about nothing being strictly
   above it.
