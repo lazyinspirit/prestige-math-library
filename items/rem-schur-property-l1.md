@@ -1,7 +1,7 @@
 ---
 id: rem-schur-property-l1
 kind: remark
-title: "The Schur property of $\ell^1$"
+title: "The Schur property of $\\ell^1$"
 status: draft
 origin: session
 proved_here: false

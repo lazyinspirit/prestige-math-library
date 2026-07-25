@@ -1,7 +1,7 @@
 ---
 id: rem-dual-of-l-infinity
 kind: remark
-title: "The dual of $\ell^\infty$ is $ba(2^{\mathbb{N}})$, the finitely additive charges"
+title: "The dual of $\\ell^\\infty$ is $ba(2^{\\mathbb{N}})$, the finitely additive charges"
 status: draft
 origin: session
 proved_here: false

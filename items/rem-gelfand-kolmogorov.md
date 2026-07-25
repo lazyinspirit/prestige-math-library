@@ -1,7 +1,7 @@
 ---
 id: rem-gelfand-kolmogorov
 kind: remark
-title: "Gelfand-Kolmogorov theorem: the maximal ideals of $C(X)$ are the points of $\beta X$"
+title: "Gelfand-Kolmogorov theorem: the maximal ideals of $C(X)$ are the points of $\\beta X$"
 status: draft
 origin: session
 proved_here: false

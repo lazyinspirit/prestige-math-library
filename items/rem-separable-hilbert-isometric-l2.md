@@ -1,7 +1,7 @@
 ---
 id: rem-separable-hilbert-isometric-l2
 kind: remark
-title: "Every separable infinite-dimensional Hilbert space is isometrically isomorphic to $\ell^2$"
+title: "Every separable infinite-dimensional Hilbert space is isometrically isomorphic to $\\ell^2$"
 status: draft
 origin: session
 proved_here: false

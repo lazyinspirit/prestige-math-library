@@ -10,6 +10,8 @@
 //
 // HARD ERRORS
 //   id-filename     frontmatter id must equal the filename
+//   yaml-escape     a lone backslash inside a double-quoted frontmatter scalar
+//                   (YAML eats it; the item then loads wrong or not at all)
 //   kind-prefix     id prefix must match the declared kind (SCHEMA.md §2)
 //   dep-unresolved  a deps: entry names no existing item id or alias
 //   link-unresolved a [[wikilink]] names no existing item id or alias
@@ -57,6 +59,22 @@ function split(src) {
   return m ? { fm: m[1], body: m[2] } : { fm: '', body: src };
 }
 
+/** A backslash inside a DOUBLE-quoted YAML scalar is a YAML escape, not TeX.
+ *  `\b` `\e` `\f` `\n` `\t` `\v` `\0` `\a` are valid escapes, so `$\beta X$`
+ *  silently loads as "eta X"; `\i` `\l` `\s` are invalid, so the whole file
+ *  fails to parse and the renderer — which swallows a malformed item so one bad
+ *  file cannot take the site down — drops the item from the library entirely,
+ *  with every other gate still green. Every TeX backslash must be doubled. */
+function badEscapes(fm, file) {
+  for (const line of fm.split(/\r?\n/)) {
+    const m = line.match(/^([A-Za-z_]+):[ \t]*"((?:[^"\\]|\\.)*)"[ \t]*$/);
+    if (!m) continue;
+    const stray = [...m[2].matchAll(/\\(.)/g)].filter((e) => !'\\"'.includes(e[1]));
+    for (const e of stray)
+      err('yaml-escape', `${file}: ${m[1]} contains "\\${e[1]}" inside a double-quoted scalar — double the backslash ("\\\\${e[1]}")`);
+  }
+}
+
 /** Scalar value of `key:` in a frontmatter block (first match, unquoted). */
 function scalar(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
@@ -100,6 +118,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   const file = `items/${f}`;
   const src = readFileSync(join(REPO, file), 'utf8');
   const { fm, body } = split(src);
+  badEscapes(fm, file);
   const id = scalar(fm, 'id');
   const kind = scalar(fm, 'kind');
   const stem = basename(f, '.md');
@@ -144,6 +163,7 @@ const pages = [];  // {page, title, status, file, cat, items:[], examples:[]}
     if (!e.name.endsWith('.md') || e.name.startsWith('_')) continue;
     const rel = fp.slice(REPO.length + 1);
     const { fm } = split(readFileSync(fp, 'utf8'));
+    badEscapes(fm, rel);
     pages.push({
       page: scalar(fm, 'page') ?? basename(e.name, '.md'),
       title: scalar(fm, 'title'),
