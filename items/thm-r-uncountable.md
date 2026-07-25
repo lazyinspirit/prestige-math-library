@@ -102,4 +102,4 @@ choice, silently and unnecessarily.
 
 - **The choice-freeness matters beyond tidiness.** It is what lets [[fs-countable-union-theorem-of-zf]] draw a conclusion about ZF: since this theorem is proved in ZF alone, any model of ZF in which $\mathbb{R}$ is a countable union of countable sets is a model in which the countable-union theorem fails.
 
-- The argument gives more than stated: it shows every interval $[a,b]$ with $a < b$ is uncountable, since the construction can start at $(a,b)$ instead of $(0,1)$ and every $x$ produced lies in $[a,b]$.
+- **The argument gives more than the statement does.** Nothing above depends on the starting interval being $(0,1)$, so re-seeding the recursion inside a given interval shows that every nondegenerate interval, open or closed, is uncountable. That extension is [[cor-interval-uncountable]], next on this page, where it is proved rather than asserted.

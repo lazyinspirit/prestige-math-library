@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: every uncountable subset of $\\mathbb{R}$ contains an interval"
 status: draft
 origin: session
-deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, thm-rationals-countable, lem-subset-of-countable, thm-r-uncountable]
+deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, thm-rationals-countable, lem-subset-of-countable, thm-r-uncountable, cor-interval-uncountable]
 justified_by: []
 aliases: []
 landmark: false
@@ -67,7 +67,7 @@ topology are available, is a starker one.
 
 - The counterexample is as strong as possible in one direction: $X_0$ misses no interval either, so it is dense and yet contains no interval. That $X_0$ meets every $(a,b)$ with $a < b$ needs no new input, only what is already on this page: were $(a,b) \cap X_0$ empty we would have $(a,b) \subseteq \mathbb{Q}_{\mathbb{R}}$, and $\mathbb{Q}_{\mathbb{R}} = \iota[\mathbb{Q}]$ is at most countable, being a bijective image of $\mathbb{Q}$ ([[thm-rationals-countable]], [[lem-of-q-embeds]]), so $(a,b)$ would be at most countable ([[lem-subset-of-countable]]), which it is not, by the next remark. Density and containing an interval are unrelated properties.
 
-- **Every open interval $(a,b)$ with $a < b$ is uncountable.** The remark at the end of [[thm-r-uncountable]] gives this for a *closed* interval $[c,d]$ with $c < d$, and that is the form to quote: the point that argument produces is a supremum of left endpoints and may be an endpoint of the starting interval, so the conclusion is stated for $[c,d]$ and not for $(c,d)$. The open case follows in one step. Applying [L2] twice gives rationals with $a < \iota(q_1) < b$ and $\iota(q_1) < \iota(q_2) < b$; put $c = \iota(q_1)$ and $d = \iota(q_2)$, so that $a < c < d < b$ and hence $[c,d] \subseteq (a,b)$. If $(a,b)$ were at most countable then so would be its subset $[c,d]$ ([[lem-subset-of-countable]]), contradicting the uncountability of $[c,d]$.
+- **Every nondegenerate interval is uncountable, open as well as closed** ([[cor-interval-uncountable]]). The open form is the one the remarks on either side of this one need, and the corollary states it outright, so nothing has to be transported here from the closed case to the open one. It is proved by re-running the nested-interval construction of [[thm-r-uncountable]] seeded at the middle third of $(a,b)$, which is what places the point that construction produces strictly inside $(a,b)$ rather than merely in $[a,b]$; the density of $\mathbb{Q}_{\mathbb{R}}$ recorded in [L2] is not needed for it.
 
 - The converse implication is true and trivial: a nondegenerate interval is uncountable, by the previous remark, so "contains an interval" implies "uncountable" ([[lem-subset-of-countable]] again, applied to the interval inside the set). Only the direction claimed above fails.
 

@@ -8,8 +8,8 @@ items: [def-injection-surjection-bijection, def-equinumerous,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,
         thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice,
         thm-countable-union-of-countable, thm-rationals-countable,
-        thm-cantor-powerset, thm-r-uncountable, cor-irrationals-uncountable,
-        rem-continuum-hypothesis]
+        thm-cantor-powerset, thm-r-uncountable, cor-interval-uncountable,
+        cor-irrationals-uncountable, rem-continuum-hypothesis]
 examples: [fs-countable-union-theorem-of-zf, fs-infinite-has-countable-subset-in-zf,
            fs-uncountable-contains-interval]
 ---
@@ -68,7 +68,11 @@ stage the current interval is cut into three closed thirds and the rule takes th
 are disjoint, so such a third always exists. That determinism is what turns the
 construction into a single application of [[thm-recursion]]. The familiar
 phrasing "pick a subinterval avoiding $f(n)$" would quietly be using dependent
-choice, and the whole point of the thirds is to avoid it.
+choice, and the whole point of the thirds is to avoid it. Nothing in that
+construction depends on the starting interval being $(0,1)$, and
+[[cor-interval-uncountable]] re-seeds it to prove that every nondegenerate
+interval, open or closed, is uncountable; that is the form the last of the false
+statements below actually needs.
 
 The choice ledger for this page is short and explicit. Every definition, lemma
 and theorem proved here is a theorem of ZF except
