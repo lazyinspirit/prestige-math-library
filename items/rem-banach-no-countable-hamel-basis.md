@@ -51,7 +51,7 @@ which over ZF is equivalent to dependent choice, so it is not choice-free. Howar
 so is the stronger "no infinite-dimensional Banach space has a well-orderable Hamel basis of
 cardinality less than $2^{\aleph_0}$". By contrast the versions without well-orderability are
 genuinely choice-dependent. "No infinite-dimensional Banach space has a Hamel basis of cardinality
-less than $2^{\aleph_0}$" is not provable in ZF; "no infinite-dimensional Banach space is a countable
+less than $2^{\aleph_0}$" is not provable in ZF, if ZF is consistent; "no infinite-dimensional Banach space is a countable
 union of finite-dimensional subspaces" implies countable choice for families of finite sets; and
 "every infinite-dimensional Banach space has a well-orderable Hamel basis" is equivalent to the full
 axiom of choice ([[def-axiom-of-choice]]).

@@ -4,7 +4,8 @@ title: "Set Theory Beyond Choice: Recorded, Not Proved Here"
 status: draft
 items: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent,
         rem-independence-of-ch-and-gch, rem-gch-implies-ac,
-        rem-cohen-first-model, rem-feferman-levy-model,
+        rem-cohen-first-model, rem-fraenkel-socks-model,
+        rem-feferman-levy-model,
         rem-feferman-no-free-ultrafilter-in-zf,
         rem-blass-model-without-ultrafilters, rem-halpern-levy-bpi-not-ac,
         rem-solovay-model, rem-shelah-inaccessible-and-the-baire-property,
@@ -41,9 +42,11 @@ that, Sierpiński's theorem that GCH implies the Axiom of Choice shows GCH is no
 the innocent size hypothesis it looks like.
 
 **Models of ZF where choice fails.** Cohen's first model contains an infinite
-Dedekind-finite set of reals. The Feferman-Levy model makes the reals a countable
-union of countable sets and $\omega_1$ singular. Feferman's model has no free
-ultrafilter on $\mathbb{N}$, and Blass's has none on any set. Halpern and Lévy's
+Dedekind-finite set of reals. Fraenkel's socks, a permutation model transferred
+to ZF by the Jech-Sochor embedding theorem, shows that even a countable family of
+two element sets need not have a choice function. The Feferman-Levy model makes
+the reals a countable union of countable sets and $\omega_1$ singular. Feferman's
+model has no free ultrafilter on $\mathbb{N}$, and Blass's has none on any set. Halpern and Lévy's
 model satisfies the Boolean prime ideal theorem while the Axiom of Choice fails,
 which is what places the ultrafilter lemma strictly between the two. Solovay's
 model, and Shelah's sharpening of it, measure how much choice the pathologies of

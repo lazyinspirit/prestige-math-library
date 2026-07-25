@@ -4,13 +4,17 @@ kind: example
 title: "Finite choice written out: a choice function for three sets"
 status: draft
 origin: session
-deps: [lem-finite-choice, def-choice-function]
+deps: [lem-finite-choice, def-choice-function, def-natural-numbers]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -38,13 +42,13 @@ already known to be nonempty, and three such picks are made one after another.
 The induction of [[lem-finite-choice]] is exactly this process stated in general.
 That lemma indexes the family by a natural number rather than counting its
 members: writing the three sets as the values $F(0), F(1), F(2)$ of a function
-$F$ with domain $3 = \{0,1,2\}$, the successor step restricts $F$ to the shorter
+$F$ with domain $3 = \{0,1,2\}$ ([[def-natural-numbers]]), the successor step restricts $F$ to the shorter
 index set, takes a choice function for those values, and overwrites it with one
 further pair.
 
 ## Facts & Assumptions
 
-**Given:** The family $\mathcal{F} = \{\{0,1\}, \{1,2\}, \{2,3\}\}$, whose members are sets of natural numbers, together with the function $F$ with domain $3 = \{0,1,2\}$ given by $F(0) = \{0,1\}$, $F(1) = \{1,2\}$, $F(2) = \{2,3\}$, so that $\mathcal{F} = F[3]$.
+**Given:** The family $\mathcal{F} = \{\{0,1\}, \{1,2\}, \{2,3\}\}$, whose members are sets of natural numbers, together with the function $F$ with domain the von Neumann natural number $3 = \{0,1,2\}$ ([[def-natural-numbers]]) given by $F(0) = \{0,1\}$, $F(1) = \{1,2\}$, $F(2) = \{2,3\}$, so that $\mathcal{F} = F[3]$.
 
 [L1] A choice function for a family $\mathcal{F}$ is a function $g$ with domain $\mathcal{F}$ such that $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 
@@ -66,20 +70,8 @@ further pair.
 
 ## Remarks
 
-- **Where an axiom would have been needed, and why it was not.** Each pick is a
-  single existential instantiation from a single nonempty set, licensed by
-  first-order logic alone. Three of them are made, one at a time, and three is a
-  natural number, so the process stops. What ZF cannot do is make infinitely
-  many such instantiations at once, and that is the whole of the gap that the
-  Axiom of Choice fills.
+- **Where an axiom would have been needed, and why it was not.** Each pick is a single existential instantiation from a single nonempty set, licensed by first-order logic alone. Three of them are made, one at a time, and three is a natural number, so the process stops. What ZF cannot do is make infinitely many such instantiations at once, and that is the whole of the gap that the Axiom of Choice fills.
 
-- **Choice functions are not unique.** Taking the larger element of each pair
-  gives another one, with values $1, 2, 3$; since each member has two elements
-  there are $2 \cdot 2 \cdot 2 = 8$ choice functions for $\mathcal{F}$ in all.
-  Nothing in the definition prefers one of them.
+- **Choice functions are not unique.** Taking the larger element of each pair gives another one, with values $1, 2, 3$; since each member has two elements there are $2 \cdot 2 \cdot 2 = 8$ choice functions for $\mathcal{F}$ in all. Nothing in the definition prefers one of them.
 
-- The particular $g$ displayed above is the rule $S \mapsto \min S$, which
-  happens to work for every nonempty set of natural numbers at once
-  ([[ex-canonical-choice-on-naturals]]). That is a feature of $\mathbb{N}$, not
-  of finiteness. The two ingredients come apart in [[ex-russells-socks]], where
-  the family is infinite and carries no such rule.
+- The particular $g$ displayed above is the rule $S \mapsto \min S$, which happens to work for every nonempty set of natural numbers at once ([[ex-canonical-choice-on-naturals]]). That is a feature of $\mathbb{N}$, not of finiteness. The two ingredients come apart in [[ex-russells-socks]], where the family is infinite and carries no such rule.

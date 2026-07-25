@@ -74,32 +74,10 @@ the engine of Zorn's lemma, running on its own.
 
 ## Remarks
 
-- **This is the whole of Zorn's engine.** Given a nonempty $P$ in which every
-  chain has an upper bound and assuming no maximal element exists, every chain
-  $C$ admits a *strict* upper bound; choosing one for each chain at once turns
-  $C \mapsto C \cup \{\text{chosen strict upper bound}\}$ into a progressive map
-  on $\mathcal{C}$, and Bourbaki-Witt applied to the chain-completeness proved
-  here returns a chain equal to its own extension, which is absurd. That is
-  [[thm-zorn]], and the Axiom of Choice is used at exactly one point of it, the
-  simultaneous choice of strict upper bounds, and nowhere in this example.
+- **This is the whole of Zorn's engine.** Given a nonempty $P$ in which every chain has an upper bound and assuming no maximal element exists, every chain $C$ admits a *strict* upper bound; choosing one for each chain at once turns $C \mapsto C \cup \{\text{chosen strict upper bound}\}$ into a progressive map on $\mathcal{C}$, and Bourbaki-Witt applied to the chain-completeness proved here returns a chain equal to its own extension, which is absurd. That is [[thm-zorn]], and the Axiom of Choice is used at exactly one point of it, the simultaneous choice of strict upper bounds, and nowhere in this example.
 
-- **$\mathcal{C}$ is chain-complete but usually not a complete lattice.** An
-  arbitrary union of chains need not be a chain: if $x, y \in P$ are
-  incomparable then $\{x\}$ and $\{y\}$ are chains and $\{x, y\}$ is not, so the
-  family $\{\{x\}, \{y\}\}$ has no supremum given by union. This is exactly the
-  gap between this example and [[ex-powerset-is-chain-complete]], and it is why
-  chain-completeness rather than completeness is the right hypothesis for
-  [[thm-bourbaki-witt]].
+- **$\mathcal{C}$ is chain-complete but usually not a complete lattice.** An arbitrary union of chains need not be a chain: if $x, y \in P$ are incomparable then $\{x\}$ and $\{y\}$ are chains and $\{x, y\}$ is not, so the family $\{\{x\}, \{y\}\}$ has no supremum given by union. This is exactly the gap between this example and [[ex-powerset-is-chain-complete]], and it is why chain-completeness rather than completeness is the right hypothesis for [[thm-bourbaki-witt]].
 
-- **An immediate consequence, at the price of the Axiom of Choice.**
-  $\mathcal{C}$ is nonempty, since $\emptyset \in \mathcal{C}$, and every chain
-  of $\mathcal{C}$ has an upper bound by the verification above. Assume in
-  addition the Axiom of Choice ([[def-axiom-of-choice]]), which [[thm-zorn]]
-  assumes outright: Zorn's lemma then applies to $\mathcal{C}$ and yields a
-  maximal element, so every poset has a maximal chain. This is the Hausdorff
-  maximal principle, and it costs exactly one application of Zorn, hence the
-  Axiom of Choice. The chain-completeness verified above costs nothing.
+- **An immediate consequence, at the price of the Axiom of Choice.** $\mathcal{C}$ is nonempty, since $\emptyset \in \mathcal{C}$, and every chain of $\mathcal{C}$ has an upper bound by the verification above. Assume in addition the Axiom of Choice ([[def-axiom-of-choice]]), which [[thm-zorn]] assumes outright: Zorn's lemma then applies to $\mathcal{C}$ and yields a maximal element, so every poset has a maximal chain. This is the Hausdorff maximal principle, and it costs exactly one application of Zorn, hence the Axiom of Choice. The chain-completeness verified above costs nothing.
 
-- The verification never used any property of $P$ beyond its being a poset. In
-  particular $P$ may be empty, in which case $\mathcal{C} = \{\emptyset\}$ is the
-  one-element poset.
+- The verification never used any property of $P$ beyond its being a poset. In particular $P$ may be empty, in which case $\mathcal{C} = \{\emptyset\}$ is the one-element poset.

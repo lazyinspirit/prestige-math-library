@@ -4,7 +4,7 @@ kind: example
 title: "Russell's shoes and socks"
 status: draft
 origin: session
-deps: [def-axiom-of-choice, def-choice-function]
+deps: [def-axiom-of-choice, def-choice-function, lem-finite-choice, rem-fraenkel-socks-model]
 justified_by: []
 external_refs: [rem-cohen-forcing-ac-independent, rem-cohen-first-model]
 aliases: []
@@ -12,6 +12,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -41,16 +45,16 @@ shoe half is proved: a distinguishing set makes the choice function explicit,
 whatever the size of the family. The sock half is **not** proved here and is not
 provable here: it is the standard independence result that ZF alone, if
 consistent, does not prove that every countable family of two element sets has a
-choice function. That is quoted on the authority of the references, since it is
-established either by forcing, or by a permutation model of set theory with
-atoms together with a theorem transferring the conclusion to ZF, and this
-library develops neither.
+choice function. The library records that result, with sources, as
+[[rem-fraenkel-socks-model]], and does not prove it: it is established either by
+forcing, or by a permutation model of set theory with atoms together with a
+theorem transferring the conclusion to ZF, and this library develops neither.
 
 ## Facts & Assumptions
 
 **Given:** A family $\mathcal{F}$ of two element sets. In the shoe case the data also includes a set $L$, the left shoes, such that $S \cap L$ has exactly one element for every $S \in \mathcal{F}$. In the sock case the data is $\mathcal{F}$ alone.
 
-[A1] **External result, quoted and not proved here.** If ZF is consistent, then ZF does not prove that every countable family of two element sets has a choice function. The classical witness is a permutation model of ZFA, set theory with atoms, in which a countable family of pairs of atoms has no choice function (Fraenkel 1922, Mostowski); such a model is **not** a model of ZF, and the conclusion is carried over to ZF proper by the Jech-Sochor embedding theorem, or reached directly by Cohen's symmetric submodels of a forcing extension (1963). This library records no result of exactly this strength; the nearest it records are [[rem-cohen-forcing-ac-independent]] and [[rem-cohen-first-model]], neither of which implies it, so [A1] is quoted on the authority of the references alone. Nothing below is used to establish this, and it is used only in the final step.
+[A1] **External result, recorded and not proved here.** If ZF is consistent, then ZF does not prove that every countable family of two element sets has a choice function ([[rem-fraenkel-socks-model]]). The classical witness is a permutation model of ZFA, set theory with atoms, in which a countable family of pairs of atoms has no choice function (Fraenkel 1922, Mostowski); such a model is **not** a model of ZF, and the conclusion is carried over to ZF proper by the Jech-Sochor embedding theorem, or reached directly by Cohen's symmetric submodels of a forcing extension (1963). Nothing below is used to establish this, and it is used only in the final step.
 
 [L1] A choice function for $\mathcal{F}$ is a function $g$ with domain $\mathcal{F}$ such that $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 
@@ -72,42 +76,12 @@ library develops neither.
 
 ## Remarks
 
-- **What is proved and what is quoted.** Steps 1.1 to 3.1 are a complete ZF
-  argument: a distinguishing set turns infinitely many choices into one formula.
-  Step 5.1 rests on [A1], an external independence result. The honest reading is
-  that the sock half is unavailable in ZF, not that it has been refuted here.
+- **What is proved and what is quoted.** Steps 1.1 to 3.1 are a complete ZF argument: a distinguishing set turns infinitely many choices into one formula. Step 5.1 rests on [A1], an external independence result. The honest reading is that the sock half is unavailable in ZF, not that it has been refuted here.
 
-- **Where [A1] sits in this library's record of unproved results.** [A1] is about
-  countable families of two element sets, a choice principle strictly weaker than
-  the Axiom of Choice, and this library records no external result at exactly
-  that strength. The nearest entries it does record are
-  [[rem-cohen-forcing-ac-independent]], that ZF does not prove the Axiom of
-  Choice, and [[rem-cohen-first-model]], that ZF is consistent with an infinite
-  set of reals having no countably infinite subset. Neither of them implies
-  [A1], which is therefore quoted on the authority of the references alone. The
-  standard Fraenkel-Mostowski "socks" model witnesses it in **ZFA**, set theory
-  with atoms, where the two socks of a pair are atoms and a permutation
-  exchanging them is an automorphism; a permutation model is not a model of ZF,
-  and the passage to ZF is the Jech-Sochor embedding theorem, which this library
-  does not contain either.
+- **Where [A1] sits in this library's record of unproved results.** [A1] concerns countable families of two element sets, so it is the failure of a choice principle far weaker than the Axiom of Choice, and the library records it in its own right, with sources, as [[rem-fraenkel-socks-model]]. It is stronger than the bare independence of the Axiom of Choice: the Axiom of Choice implies choice for countable families of pairs, so any ZF proof of the Axiom of Choice would yield a ZF proof of that weaker principle, and [A1] denies the latter, so [A1] already gives [[rem-cohen-forcing-ac-independent]]. [[rem-cohen-first-model]], that if ZF is consistent then so is ZF together with an infinite set of reals having no countably infinite subset, records a different failure of choice and is not what [A1] rests on. The standard Fraenkel-Mostowski "socks" model witnesses [A1] in **ZFA**, set theory with atoms, where the two socks of a pair are atoms and a permutation exchanging them is an automorphism; a permutation model is not a model of ZF, and the passage to ZF is the Jech-Sochor embedding theorem, which this library does not contain either.
 
-- **Boundedly many pairs of socks are free.** Whenever the pairs can be listed
-  as the values $F(0), \dots, F(n-1)$ of a function $F$ with domain a natural
-  number $n$, a choice function exists outright by [[lem-finite-choice]], with
-  the picks made one at a time. That lemma is stated over such an indexed family
-  and deliberately does *not* say "finitely many": no definition of finiteness is
-  available at this point in the library, and the identification of the finite
-  families with the listable ones is nowhere made there. Russell's contrast is a genuinely infinite
-  phenomenon, which is why he stated it for infinitely many pairs.
+- **Boundedly many pairs of socks are free.** Whenever the pairs can be listed as the values $F(0), \dots, F(n-1)$ of a function $F$ with domain a natural number $n$, a choice function exists outright by [[lem-finite-choice]], with the picks made one at a time. That lemma is stated over such an indexed family and deliberately does *not* say "finitely many": no definition of finiteness is available at this point in the library, and the identification of the finite families with the listable ones is nowhere made there. Russell's contrast is a genuinely infinite phenomenon, which is why he stated it for infinitely many pairs.
 
-- The shoe argument never used that the pairs are pairwise disjoint, or that
-  they are indexed by $\mathbb{N}$, or that they have two elements. All it used
-  is that some formula picks out one element of each member, which is the general
-  reason a concrete family can have an explicit choice function
-  ([[ex-canonical-choice-on-naturals]] is the same phenomenon with "least
-  element" in place of "left shoe").
+- The shoe argument never used that the pairs are pairwise disjoint, or that they are indexed by $\mathbb{N}$, or that they have two elements. All it used is that some formula picks out one element of each member, which is the general reason a concrete family can have an explicit choice function ([[ex-canonical-choice-on-naturals]] is the same phenomenon with "least element" in place of "left shoe").
 
-- Russell's own phrasing concerns a millionaire with denumerably many pairs of
-  boots and of socks. "Shoes" is the usual modern retelling, and the
-  mathematical content is unchanged: what matters is only that one member of
-  each pair is singled out in advance.
+- Russell's own phrasing concerns a millionaire with denumerably many pairs of boots and of socks. "Shoes" is the usual modern retelling, and the mathematical content is unchanged: what matters is only that one member of each pair is singled out in advance.

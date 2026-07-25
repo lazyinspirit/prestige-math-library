@@ -15,7 +15,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -36,8 +36,8 @@ $\mathcal{F}_0 \subseteq \mathcal{U}$.
 
 In particular, every set that carries a filter carries an ultrafilter. The proof
 uses Zorn's lemma ([[thm-zorn]]) and therefore the Axiom of Choice. That some
-choice principle is unavoidable here is an external independence result, not
-proved in this library; see the remarks below.
+choice principle is unavoidable here, if ZF is consistent, is an external
+independence result, not proved in this library; see the remarks below.
 
 ## Facts & Assumptions
 
@@ -79,36 +79,8 @@ proved in this library; see the remarks below.
 
 ## Remarks
 
-- **The empty chain is the load-bearing case.** Zorn's lemma requires an upper
-  bound for *every* chain of $P$, and the empty chain has one exactly when $P$ is
-  nonempty. Step 3.1 discharges it with $\mathcal{F}_0$ itself, and step 2.2 is
-  what makes that possible. This is not a formality:
-  [[lem-union-of-chain-of-filters]] is false for the empty chain, since
-  $\bigcup \emptyset = \emptyset$ is not a filter, so a proof that says "the union
-  of a chain is a filter" without the case split has a genuine gap at the one
-  chain the hypothesis of [[thm-zorn]] is easiest to forget.
-- **Why the poset is $P$ and not $\mathrm{Filt}(X)$.** Applying Zorn to
-  $\mathrm{Filt}(X)$ would produce a maximal filter unrelated to $\mathcal{F}_0$.
-  Restricting to the filters above $\mathcal{F}_0$ costs nothing, because
-  step 6.1 transfers maximality back: a filter above $\mathcal{U}$ is
-  automatically above $\mathcal{F}_0$, so maximality in $P$ already means
-  maximality among all filters. That transfer is the only step where the shape of
-  $P$ is used.
-- The conclusion is **an** ultrafilter, not **the** ultrafilter. Zorn's lemma
-  delivers a maximal element and no construction, so nothing in the proof
-  distinguishes the ultrafilter it produces from any other filter above
-  $\mathcal{F}_0$; the statement asserts existence and no uniqueness whatever.
-  [[fs-every-ultrafilter-principal]] runs the argument on the filter of tails of
-  $\mathbb{N}$ and obtains a single free ultrafilter, which it can describe no
-  further. How many ultrafilters extend a given filter is a separate counting
-  question, and this library neither states nor uses an answer to it.
-- Combined with [[lem-fip-generates-filter]], the lemma takes its most usable
-  form: **every family of subsets of $X$ with the finite intersection property is
-  contained in an ultrafilter on $X$.** That is the version applied in topology
-  and in model theory.
-- **What this costs.** The proof buys the conclusion with the full Axiom of
-  Choice, through [[thm-zorn]] and [[cor-ac-iff-zorn]], but the statement is
-  strictly weaker than the Axiom of Choice: it is neither provable in ZF nor
-  strong enough to recover choice. Both of those are external metamathematical
-  results and are recorded, with references and without a claim to prove them, in
-  [[rem-choice-strengths]].
+- **The empty chain is the load-bearing case.** Zorn's lemma requires an upper bound for *every* chain of $P$, and the empty chain has one exactly when $P$ is nonempty. Step 3.1 discharges it with $\mathcal{F}_0$ itself, and step 2.2 is what makes that possible. This is not a formality: the conclusion of [[lem-union-of-chain-of-filters]] fails for the empty chain, since $\bigcup \emptyset = \emptyset$ is not a filter, which is exactly why that lemma assumes its chain nonempty; so a proof that says "the union of a chain is a filter" without the case split has a genuine gap at the one chain the hypothesis of [[thm-zorn]] is easiest to forget.
+- **Why the poset is $P$ and not $\mathrm{Filt}(X)$.** Applying Zorn to $\mathrm{Filt}(X)$ would produce a maximal filter unrelated to $\mathcal{F}_0$. Restricting to the filters above $\mathcal{F}_0$ costs nothing, because step 6.1 transfers maximality back: a filter above $\mathcal{U}$ is automatically above $\mathcal{F}_0$, so maximality in $P$ already means maximality among all filters. That transfer is the only step where the shape of $P$ is used.
+- The conclusion is **an** ultrafilter, not **the** ultrafilter. Zorn's lemma delivers a maximal element and no construction, so nothing in the proof distinguishes the ultrafilter it produces from any other filter above $\mathcal{F}_0$; the statement asserts existence and no uniqueness whatever. [[fs-every-ultrafilter-principal]] runs the argument on the filter of tails of $\mathbb{N}$ and obtains a single free ultrafilter, which it can describe no further. How many ultrafilters extend a given filter is a separate counting question, and this library neither states nor uses an answer to it.
+- Combined with [[lem-fip-generates-filter]], the lemma takes its most usable form: **every family of subsets of $X$ with the finite intersection property is contained in an ultrafilter on $X$.** That is the version applied in topology and in model theory.
+- **What this costs.** The proof buys the conclusion with the full Axiom of Choice, through [[thm-zorn]] and [[cor-ac-iff-zorn]], but the statement is, if ZF is consistent, strictly weaker than the Axiom of Choice: it is then neither provable in ZF nor strong enough to recover choice. Both of those are external metamathematical results, conditional on the consistency of ZF, and are recorded, with references and without a claim to prove them, in [[rem-choice-strengths]].

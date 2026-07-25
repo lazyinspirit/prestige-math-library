@@ -4,7 +4,7 @@ kind: counterexample
 title: "A progressive map with no fixed point, on a poset that is not chain-complete"
 status: draft
 origin: session
-deps: [thm-bourbaki-witt, def-chain-complete-poset, def-chain, def-upper-bound, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, cex-zorn-hypothesis-fails]
+deps: [thm-bourbaki-witt, def-chain-complete-poset, def-chain, def-upper-bound, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, lem-nat-order-add-compatible, cex-zorn-hypothesis-fails, thm-well-ordering-principle, thm-zorn]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,6 +12,10 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -70,30 +74,10 @@ $\mathbb{N}$ ([[cex-zorn-hypothesis-fails]]), hence with no least upper bound
 
 ## Remarks
 
-- **The failure is sharp, and it is a missing supremum.** Adjoin one element
-  $\infty$ above every natural number. The enlarged poset is chain-complete: a
-  subset containing $\infty$ has supremum $\infty$, a subset of $\mathbb{N}$ with
-  an upper bound in $\mathbb{N}$ has a least one by
-  [[thm-well-ordering-principle]], a subset of $\mathbb{N}$ with none has
-  supremum $\infty$, and the empty chain has supremum $0$. Extending $f$ by
-  $f(\infty) = \infty$ keeps it progressive, and the fixed point Bourbaki-Witt
-  promises is $\infty$, precisely the supremum that was missing. Any progressive
-  map on the enlarged poset must fix $\infty$, since $\infty$ is greatest.
+- **The failure is sharp, and it is a missing supremum.** Adjoin one element $\infty$ above every natural number. The enlarged poset is chain-complete: a subset containing $\infty$ has supremum $\infty$, a subset of $\mathbb{N}$ with an upper bound in $\mathbb{N}$ has a least one by [[thm-well-ordering-principle]], a subset of $\mathbb{N}$ with none has supremum $\infty$, and the empty chain has supremum $0$. Extending $f$ by $f(\infty) = \infty$ keeps it progressive, and the fixed point Bourbaki-Witt promises is $\infty$, precisely the supremum that was missing. Any progressive map on the enlarged poset must fix $\infty$, since $\infty$ is greatest.
 
-- **Monotonicity is not the issue.** The map $f(n) = \sigma(n)$ is order
-  preserving as well as progressive, so this is not a case of a badly behaved
-  map defeating the theorem; a perfectly well behaved map is defeated by the
-  poset. Conversely [[thm-bourbaki-witt]] assumes no monotonicity at all, which
-  is what lets [[thm-zorn]] apply it to a map built from an arbitrary choice
-  function.
+- **Monotonicity is not the issue.** The map $f(n) = \sigma(n)$ is order preserving as well as progressive: $\sigma(m) = m + \sigma(0)$ and $\sigma(n) = n + \sigma(0)$ by the Given, and adding a fixed natural number preserves $\le$ in both directions ([[lem-nat-order-add-compatible]]), so $m \le n$ gives $\sigma(m) \le \sigma(n)$. So this is not a case of a badly behaved map defeating the theorem; a perfectly well behaved map is defeated by the poset. Conversely [[thm-bourbaki-witt]] assumes no monotonicity at all, which is what lets [[thm-zorn]] apply it to a map built from an arbitrary choice function.
 
-- **No iteration argument could have worked.** Starting at $0$ and iterating $f$
-  walks up $\mathbb{N}$ forever without converging, and the fixed point in
-  Bourbaki-Witt is not reached by iterating: it is the supremum of the smallest
-  set closed under $f$ and under suprema of its chains. When that supremum does
-  not exist there is nothing to reach.
+- **No iteration argument could have worked.** Starting at $0$ and iterating $f$ walks up $\mathbb{N}$ forever without converging, and the fixed point in Bourbaki-Witt is not reached by iterating: it is the supremum of the smallest set closed under $f$ and under suprema of its chains. When that supremum does not exist there is nothing to reach.
 
-- This is the same defect as in [[cex-zorn-hypothesis-fails]], stated one notch
-  higher. There the chain $\mathbb{N}$ had no upper bound, which broke the
-  hypothesis of [[thm-zorn]]; here the same chain has no least upper bound,
-  which breaks the hypothesis of [[thm-bourbaki-witt]] one level below.
+- This is the same defect as in [[cex-zorn-hypothesis-fails]], read one notch higher up the scale of bounds. There the chain $\mathbb{N}$ had no upper bound, which is what [[thm-zorn]] asks of every chain; here the same chain has no *least* upper bound, which is what [[thm-bourbaki-witt]] asks of every chain through chain-completeness. A least upper bound is in particular an upper bound, so the first failure implies the second, and adjoining one top element repairs both at once.

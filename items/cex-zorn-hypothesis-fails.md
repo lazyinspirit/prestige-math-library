@@ -4,7 +4,7 @@ kind: counterexample
 title: "$(\\mathbb{N}, \\le)$ has no maximal element: Zorn's chain hypothesis fails"
 status: draft
 origin: session
-deps: [thm-zorn, def-axiom-of-choice, def-upper-bound, def-maximal-element, def-chain, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self]
+deps: [thm-zorn, def-axiom-of-choice, def-upper-bound, def-maximal-element, def-chain, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, thm-well-ordering-principle]
 justified_by: []
 aliases: []
 landmark: false
@@ -71,30 +71,10 @@ lemma that it violates is exactly one: $\mathbb{N}$ is itself a chain
 
 ## Remarks
 
-- **Nothing exotic is at work.** The poset is totally ordered, it is the most
-  familiar order there is, and it is even well ordered
-  ([[thm-well-ordering-principle]]). What it lacks is a ceiling. So the
-  hypothesis Zorn's lemma really needs is boundedness of chains, and no amount of
-  good behaviour elsewhere substitutes for it.
+- **Nothing exotic is at work.** The poset is totally ordered, it is the most familiar order there is, and it is even well ordered ([[thm-well-ordering-principle]]). What it lacks is a ceiling. So the hypothesis Zorn's lemma really needs is boundedness of chains, and no amount of good behaviour elsewhere substitutes for it.
 
-- **It fails only at the top.** Every chain of $\mathbb{N}$ that has an upper
-  bound at all has a *least* one: the set of its upper bounds is a nonempty
-  subset of $\mathbb{N}$, so [[thm-well-ordering-principle]] hands back its least
-  element. The empty chain has least upper bound $0$. So the only chains without
-  suprema are the ones with no upper bound whatever, and $\mathbb{N}$ is one of
-  them. The same observation, read as a statement about suprema rather than
-  upper bounds, is [[cex-progressive-map-without-fixed-point]].
+- **It fails only at the top.** Every chain of $\mathbb{N}$ that has an upper bound at all has a *least* one: the set of its upper bounds is a nonempty subset of $\mathbb{N}$, so [[thm-well-ordering-principle]] hands back its least element. The empty chain has least upper bound $0$. So the only chains without suprema are the ones with no upper bound whatever, and $\mathbb{N}$ is one of them. The same observation, read as a statement about suprema rather than upper bounds, is [[cex-progressive-map-without-fixed-point]].
 
-- **Nonemptiness is not what fails here**, and how much work it does depends on
-  the convention. Under the convention of [[def-chain]], where $\emptyset$ counts
-  as a chain, "every chain has an upper bound" already forces $P \ne \emptyset$,
-  since an upper bound of $\emptyset$ is just some element of $P$; the separate
-  nonemptiness hypothesis of [[thm-zorn]] is then emphasis rather than extra
-  strength. Under the competing convention, where "chain" means nonempty chain,
-  the empty poset satisfies the chain hypothesis vacuously and has no maximal
-  element, so nonemptiness must be assumed outright. Either way, what
-  $(\mathbb{N}, \le)$ isolates is the failure of the chain hypothesis alone.
+- **Nonemptiness is not what fails here**, and how much work it does depends on the convention. Under the convention of [[def-chain]], where $\emptyset$ counts as a chain, "every chain has an upper bound" already forces $P \ne \emptyset$, since an upper bound of $\emptyset$ is just some element of $P$; the separate nonemptiness hypothesis of [[thm-zorn]] is then emphasis rather than extra strength. Under the competing convention, where "chain" means nonempty chain, the empty poset satisfies the chain hypothesis vacuously and has no maximal element, so nonemptiness must be assumed outright. Either way, what $(\mathbb{N}, \le)$ isolates is the failure of the chain hypothesis alone.
 
-- Adding a single element $\infty$ above every natural number repairs
-  everything: the chain $\mathbb{N}$ then has upper bound $\infty$, every chain
-  has one, and $\infty$ is the maximal element Zorn's lemma promises.
+- Adding a single element $\infty$ above every natural number repairs everything: the chain $\mathbb{N}$ then has upper bound $\infty$, every chain has one, and $\infty$ is the maximal element Zorn's lemma promises.

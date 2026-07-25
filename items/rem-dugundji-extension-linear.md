@@ -47,9 +47,10 @@ the vector-valued statement with a **linear** extender is what is deferred.
 diameters shrink as they approach $A$, a partition of unity subordinate to it, and an averaging
 formula $F(x) = \sum_i \varphi_i(x) f(a_i)$ with $a_i \in A$ chosen near the $i$-th cover element.
 Linearity in $f$ is visible in that formula, which is why the extender is linear. The construction
-needs paracompactness of metric spaces, A. H. Stone's theorem, which is itself choice-sensitive: it
-is not provable in ZF + DC (Good, Tree and Watson, 1998) and is not implied by the Boolean prime
-ideal theorem (Corson, 2020).
+needs paracompactness of metric spaces, A. H. Stone's theorem, which is itself choice-sensitive:
+if ZF is consistent, it is not provable in ZF + DC (Good, Tree and Watson, 1998) and is not implied
+by the Boolean prime ideal theorem (Corson, 2020). Both halves are relative-consistency results and
+neither is available unconditionally.
 
 **Why it matters here.** The linearity of the extension operator, not the extension itself, is what
 makes the theorem a tool: it lets one extend a whole family of maps coherently, which is what

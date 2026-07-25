@@ -164,7 +164,7 @@ says whose verdict survives a disagreement.
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
 | Generator | Claude Opus subagent | one page | nothing | everyone |
-| **Judge** | non-Claude, GLM 5.2 | **its PAGE**: the item, the full text of the items it cites, and the statements of its page siblings | nothing; it NAMES CANDIDATES | every tier below |
+| **Judge** | non-Claude, GLM 5.2 | the item in FULL; for everything else (cited items and page siblings alike) only Statement/Definition/Example plus Remarks, capped at 3000 chars each. **NO OTHER ITEM'S PROOF IS EVER SHOWN.** | nothing; it NAMES CANDIDATES | every tier below |
 | **Page verifier** | one Opus 5 subagent PER PAGE | its page, plus the full text of everything that page cites | CERTIFY / WITHHOLD per item | auditor, owner |
 | **Cross-page auditor** | the driver, main loop | the whole library at once | final **among models** | **the owner only** |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
@@ -175,6 +175,15 @@ once the loop is
 ```
 escalation (page ctx) -> judge (page ctx) -> escalation (page ctx) -> judge (page ctx) -> auditor (full ctx)
 ```
+
+**"page ctx" is weaker for the judge than for the escalation tier, and the
+difference matters.** The escalation subagent reads whole files. The judge never
+sees another item's PROOF, only Statement/Definition/Example plus Remarks, truncated
+at 3000 chars. So the judge is structurally blind to an unbacked step, a mis-stated
+`[L#]` fact, or a missing hypothesis living in a sibling's proof — which is the
+defect class the auditors keep finding. Judge silence bounds much less than the
+phrase "page context" suggests; never read a clean judge run as page-level
+assurance.
 
 Escalation runs FIRST and the judge screens the repaired text; running the judge
 first records verdicts on text that escalation then changes. The loop is bounded

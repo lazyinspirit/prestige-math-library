@@ -24,10 +24,12 @@ the choice free is the well-ordering, not the size. Russell's shoes and socks
 then separates the two ingredients. From infinitely many pairs of shoes "take the
 left one" is a rule and the choice function is a theorem of ZF; from infinitely
 many pairs of socks nothing distinguishes a member, and the existence of a choice
-function is the axiom itself. That last half is quoted, not proved: the
+function is the axiom itself. That last half is recorded, not proved: the
 independence from ZF is established by forcing, or by a permutation model of set
 theory with atoms together with a theorem transferring the conclusion to ZF, and
-this library contains neither, and saying so is part of the point.
+this library contains neither, and saying so is part of the point. The result
+itself is entered in the library's register of things it does not prove, as
+[[rem-fraenkel-socks-model]].
 
 The next two items are the order theory that Zorn's lemma actually runs on. The
 power set of any set is chain-complete, with union as supremum and $\emptyset$ at
@@ -44,11 +46,13 @@ the theorem, run on its own.
 
 The three counterexamples remove one hypothesis each. A maximal element is not a
 greatest element: in the three-element poset of proper subsets of $\{1,2\}$ there
-are two maximal elements and no greatest one, which is the standard way to
-misapply Zorn's lemma. The chain hypothesis of Zorn's lemma cannot be dropped:
+are two maximal elements and no greatest one, and reading the conclusion of
+Zorn's lemma as the second rather than the first is the standard way to misapply
+it. The chain hypothesis of Zorn's lemma cannot be dropped:
 $(\mathbb{N}, \le)$ is nonempty, totally ordered, well ordered and entirely
-familiar, and it has no maximal element, because the chain $\mathbb{N}$ has no
-upper bound. Chain-completeness cannot be dropped from Bourbaki-Witt either: on
+familiar, and it still has no maximal element; the chain that defeats the
+hypothesis is $\mathbb{N}$ itself, which has no upper bound in $\mathbb{N}$.
+Chain-completeness cannot be dropped from Bourbaki-Witt either: on
 the same $(\mathbb{N}, \le)$, the successor map is progressive, is even order
 preserving, and has no fixed point at all. The last two are one defect seen at
 two heights, a missing upper bound and a missing supremum, and adjoining a single

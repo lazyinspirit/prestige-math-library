@@ -11,6 +11,10 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -67,27 +71,10 @@ Bourbaki–Witt argument consumes.
 
 ## Remarks
 
-- **The argument proves more than chain-completeness.** Neither the construction
-  of $U$ nor either of the two bound checks used that $\mathcal{D}$ is a chain,
-  so every subset of $\mathcal{P}(X)$ has a supremum and
-  $(\mathcal{P}(X), \subseteq)$ is a complete lattice.
-  Chain-completeness is strictly weaker, and the posets to which Zorn's lemma is
-  applied usually have only the weaker property
-  ([[ex-zorn-poset-of-chains]] is the standard instance).
+- **The argument proves more than chain-completeness.** Neither the construction of $U$ nor either of the two bound checks used that $\mathcal{D}$ is a chain, so every subset of $\mathcal{P}(X)$ has a supremum and $(\mathcal{P}(X), \subseteq)$ is a complete lattice. Chain-completeness is strictly weaker, and the posets to which Zorn's lemma is applied usually have only the weaker property ([[ex-zorn-poset-of-chains]] is the standard instance).
 
-- Infima are present too: for nonempty $\mathcal{D}$ the greatest lower bound is
-  $\bigcap \mathcal{D}$, and the greatest lower bound of the empty family is $X$,
-  the top element. The class $\bigcap \emptyset$ is not a set, which is why the
-  empty case is read inside $\mathcal{P}(X)$ rather than absolutely.
+- Infima are present too: for nonempty $\mathcal{D}$ the greatest lower bound is $\bigcap \mathcal{D}$, and the greatest lower bound of the empty family is $X$, the top element. The class $\bigcap \emptyset$ is not a set, which is why the empty case is read inside $\mathcal{P}(X)$ rather than absolutely.
 
-- **The empty chain is not a technicality.** It is what forces a chain-complete
-  poset to have a least element at all, and here it produces $\emptyset$. A
-  convention that excludes the empty chain has to reintroduce the same content as
-  a separate nonemptiness hypothesis ([[def-chain-complete-poset]] records the
-  reduction between the two conventions).
+- **The empty chain is not a technicality.** It is what forces a chain-complete poset to have a least element at all, and here it produces $\emptyset$. A convention that excludes the empty chain has to reintroduce the same content as a separate nonemptiness hypothesis ([[def-chain-complete-poset]] records the reduction between the two conventions).
 
-- Chain-completeness is not the same as having a top. Deleting the top element
-  from $\mathcal{P}(\{1,2\})$ leaves the three-element poset of
-  [[cex-maximal-not-greatest]], which is still chain-complete, since $\{1\}$ and
-  $\{2\}$ are incomparable and so never lie in a common chain, yet it now has two
-  maximal elements and no greatest one.
+- Chain-completeness is not the same as having a top. Deleting the top element from $\mathcal{P}(\{1,2\})$ leaves the three-element poset of [[cex-maximal-not-greatest]], which is still chain-complete, since $\{1\}$ and $\{2\}$ are incomparable and so never lie in a common chain, yet it now has two maximal elements and no greatest one.

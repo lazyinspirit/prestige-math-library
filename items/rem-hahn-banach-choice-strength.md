@@ -37,13 +37,16 @@ ultrafilter lemma. Over ZF:
 
 1. **BPI implies HB** (Luxemburg, 1962). The extension is produced from an ultrapower rather than
    from a maximal element, so no well ordering of the space is needed.
-2. **HB does not imply BPI** (Pincus, 1974), so the implication in (1) is strict. Since BPI does
-   not imply the axiom of choice (Halpern and Levy, 1971), HB is strictly weaker than the axiom of
-   choice.
+2. **HB does not imply BPI** (Pincus, 1974), so the implication in (1) is strict; and BPI does
+   not imply the axiom of choice (Halpern and Levy, 1971), so HB is strictly weaker than the axiom
+   of choice. Both non-implications are relative-consistency results and hold under the consistency
+   of ZF, never unconditionally.
 3. **HB implies that some set of reals is not Lebesgue measurable** (Foreman and Wehrung, 1991),
    and in fact implies the Banach-Tarski paradox (Pawlikowski, 1991). Consequently, granted the
-   consistency of ZF, HB is not provable in ZF, nor even in ZF + DC, since ZF + DC is consistent
-   with the statement that every set of reals is Lebesgue measurable.
+   consistency of ZF, HB is not provable in ZF. That it is not provable in ZF + DC either is quoted
+   from models of ZF + DC in which every set of reals is Lebesgue measurable; the standard such
+   model is Solovay's, built by collapsing an inaccessible cardinal, so that half rests on the
+   consistency of ZFC together with an inaccessible and not on the consistency of ZF alone.
 
 ## Remarks
 

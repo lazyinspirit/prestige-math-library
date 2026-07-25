@@ -11,6 +11,10 @@ landmark: false
 short: "filter base"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-26
 sources:
   scraped: []
   references:

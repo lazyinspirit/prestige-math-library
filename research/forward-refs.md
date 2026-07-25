@@ -11,7 +11,7 @@ A **load bearing** entry is one the citing item actually uses in its proof, so
 that item and everything depending on it rests on later material and is marked
 as such by the renderer. Everything else is orientation only.
 
-**0 open, 104 closed, 0 load bearing, 0 item(s) resting on later material.**
+**0 open, 110 closed, 0 load bearing, 0 item(s) resting on later material.**
 
 ## Open, grouped by the page that will close them
 
@@ -28,6 +28,8 @@ _None. Every forward reference in the repo resolves._
 - `def-choice-function` -> `ex-canonical-choice-on-naturals` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `def-choice-function` -> `ex-russells-socks` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `def-maximal-element` -> `cex-maximal-not-greatest` (on `order-zorn-and-the-axiom-of-choice-examples`)
+- `ex-canonical-choice-on-naturals` -> `thm-well-ordering-theorem` (on `ordinals-and-transfinite-recursion`)
+- `ex-canonical-choice-on-naturals` -> `lem-pigeonhole` (on `countability-and-uncountability`)
 - `fs-zorn-provable-in-zf` -> `rem-choice-strengths` (on `filters-and-ultrafilters`)
 - `lem-finite-choice` -> `ex-finite-choice-by-induction` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `lem-finite-choice` -> `ex-russells-socks` (on `order-zorn-and-the-axiom-of-choice-examples`)
@@ -66,6 +68,10 @@ _None. Every forward reference in the repo resolves._
 - `rem-feferman-no-free-ultrafilter-in-zf` -> `def-ultrafilter` (on `filters-and-ultrafilters`)
 - `rem-feferman-no-free-ultrafilter-in-zf` -> `fs-every-ultrafilter-principal` (on `filters-and-ultrafilters`)
 - `rem-feferman-no-free-ultrafilter-in-zf` -> `rem-choice-strengths` (on `filters-and-ultrafilters`)
+- `rem-fraenkel-socks-model` -> `def-axiom-of-choice` (on `order-zorn-and-the-axiom-of-choice`)
+- `rem-fraenkel-socks-model` -> `def-choice-function` (on `order-zorn-and-the-axiom-of-choice`)
+- `rem-fraenkel-socks-model` -> `ex-russells-socks` (on `order-zorn-and-the-axiom-of-choice-examples`)
+- `rem-fraenkel-socks-model` -> `rem-choice-ledger` (on `ordinals-and-transfinite-recursion`)
 - `rem-gch-implies-ac` -> `def-axiom-of-choice` (on `order-zorn-and-the-axiom-of-choice`)
 - `rem-gch-implies-ac` -> `thm-hartogs` (on `ordinals-and-transfinite-recursion`)
 - `rem-gch-implies-ac` -> `rem-continuum-hypothesis` (on `countability-and-uncountability`)

@@ -14,7 +14,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -48,11 +48,11 @@ this library, and the three statements below are cited, not proved.
   the filter of tails, so ZF does not prove UL. This is external to this library
   exactly as the independence of the Axiom of Choice itself is
   ([[fs-zorn-provable-in-zf]]).
-- **UL does not imply the Axiom of Choice.** There is a model of ZF in which UL
-  holds and the Axiom of Choice fails (Halpern and Lévy 1971:
-  [[rem-halpern-levy-bpi-not-ac]]). Together with the previous point this places
-  UL strictly between the two: it is not provable in ZF, and it is not strong
-  enough to recover AC.
+- **UL does not imply the Axiom of Choice.** If ZF is consistent, there is a
+  model of ZF in which UL holds and the Axiom of Choice fails (Halpern and Lévy
+  1971: [[rem-halpern-levy-bpi-not-ac]]). Together with the previous point this
+  places UL strictly between the two, again under the consistency of ZF: it is
+  not provable in ZF, and it is not strong enough to recover AC.
 - **UL is the Boolean prime ideal theorem.** Over ZF, UL is equivalent to the
   statement that every nontrivial Boolean algebra has a prime ideal, equivalently
   an ultrafilter in the lattice sense. The dictionary is the one visible in
@@ -68,7 +68,8 @@ that: it is an upper bound on the price, never a lower one ([[cor-ac-iff-zorn]])
 A result provable from UL alone carries the strictly smaller upper bound UL, and a
 page that nonetheless routes it through Zorn is overpaying and should say so. UL
 itself is the standing example, proved here from Zorn and yet, on the cited
-results above, strictly weaker than the Axiom of Choice. That is why
+results above and so under the consistency of ZF, strictly weaker than the Axiom
+of Choice. That is why
 [[thm-ultrafilter-lemma]] is kept as a named statement rather than being inlined
 into its applications: naming it is what makes the smaller bound visible
 downstream.

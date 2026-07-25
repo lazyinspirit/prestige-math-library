@@ -42,11 +42,17 @@ by a Banach construction using the amenability of the isometry groups there, so
 the paradox is a fact about $n \ge 3$, where the rotation group contains a free
 subgroup of rank two.
 
-**It needs choice beyond ZF + DC.** In Solovay's model of ZF + DC every set of
-reals is Lebesgue measurable, and the same holds for $\mathbb{R}^3$, so no such
-decomposition exists there. The paradox does not need the full Axiom of Choice
-either: it follows from the Hahn-Banach theorem, hence from the Boolean prime
-ideal theorem, which is strictly weaker than choice.
+**It needs choice beyond ZF + DC.** If ZFC together with "there exists an
+inaccessible cardinal" is consistent, then ZF + DC does not prove the paradox: in
+Solovay's model of ZF + DC every set of reals is Lebesgue measurable, and the
+same holds in $\mathbb{R}^3$, while the pieces above are necessarily
+non-measurable, so no such decomposition exists there. That model is built by
+collapsing an inaccessible, so the conclusion drawn from it is conditional on
+that large-cardinal hypothesis and not merely on the consistency of ZF. The
+paradox does not need the full Axiom of Choice either: it follows from the
+Hahn-Banach theorem, hence from the Boolean prime ideal theorem, which the Axiom
+of Choice implies outright and which, if ZF is consistent, does not imply the
+Axiom of Choice in return.
 
 ## Remarks
 

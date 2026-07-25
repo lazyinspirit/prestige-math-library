@@ -37,10 +37,11 @@ track is built to the same standard as everything else, these statements are rec
 
 The page opens with **Hahn-Banach** and with what it costs. That is the one theorem of the
 subject whose set-theoretic price is a real one: it follows from the Boolean prime ideal
-theorem, is strictly weaker than the axiom of choice, and yet already implies that some set
-of reals is not Lebesgue measurable. Attached to it is the sharpest choice question in the
-area, whether an infinite-dimensional **Banach** space must carry a discontinuous linear
-functional. That statement is unprovable in ZF + DC. The elementary, explicit, choice-free
+theorem, is strictly weaker than the axiom of choice if ZF is consistent, and yet already
+implies that some set of reals is not Lebesgue measurable. Attached to it is the sharpest
+choice question in the area, whether an infinite-dimensional **Banach** space must carry a
+discontinuous linear functional. If ZF is consistent, that statement is not provable in
+ZF + DC. The elementary, explicit, choice-free
 discontinuous functional on the incomplete space of finitely supported sequences is *not*
 deferred and belongs in the library proper; the item says so, and says what is still open.
 

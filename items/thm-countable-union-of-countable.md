@@ -15,7 +15,7 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-25
+    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -90,4 +90,4 @@ proves, and it cannot be stated without it.
 
 - **The two-set union needs no choice at all**, and neither does any union of finitely many sets: with $A$ and $B$ both at most countable and nonempty, fix surjections $f, g : \mathbb{N} \to A, B$ (two choices made one after the other, which is ordinary existential instantiation, not a choice principle) and put $u(0,k) = f(k)$ and $u(n,k) = g(k)$ for $n \ne 0$, a surjection $\mathbb{N} \times \mathbb{N} \to A \cup B$. This is the form used in [[cor-irrationals-uncountable]], and keeping it separate from the countable case is the whole point of flagging step 3.1.
 
-- The failure without choice is not a technicality about exotic sets: it is consistent with ZF that $\mathbb{R}$ itself is a countable union of countable sets ([[fs-countable-union-theorem-of-zf]]), even though $\mathbb{R}$ is provably uncountable in ZF ([[thm-r-uncountable]]).
+- The failure without choice is not a technicality about exotic sets: if ZF is consistent, then it is consistent with ZF that $\mathbb{R}$ itself is a countable union of countable sets ([[fs-countable-union-theorem-of-zf]]), even though $\mathbb{R}$ is provably uncountable in ZF ([[thm-r-uncountable]]).

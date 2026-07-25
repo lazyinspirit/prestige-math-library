@@ -53,13 +53,19 @@ page depends on the answer.
 **What is known, and what would settle it.** The endpoints are well understood.
 Full choice gives a Hamel basis, since "every vector space has a basis" is
 equivalent to the axiom of choice ([[def-axiom-of-choice]]), the standard proof
-running through Zorn's lemma ([[thm-zorn]]). HB is strictly weaker than choice: it
-follows from the Boolean prime ideal theorem (Luxemburg), and it does not imply
-the axiom of choice (Pincus). HB is nonetheless not a theorem of ZF, since it
-already implies the existence of a set of reals that is not Lebesgue measurable,
-and indeed the Banach-Tarski paradox. A Hamel basis for $\mathbb{R}$ over
-$\mathbb{Q}$ likewise yields a non-measurable set. So the two statements sit
-between ZF and AC, both strictly, and the question is how they are ordered with
+running through Zorn's lemma ([[thm-zorn]]). HB is, if ZF is consistent, strictly
+weaker than choice: the Boolean prime ideal theorem implies it outright
+(Luxemburg), and it does not imply the axiom of choice (Pincus), that
+non-implication being a relative-consistency result and nothing stronger. On the
+same hypothesis HB is nonetheless not a theorem of ZF. It does imply, in ZF, the
+existence of a set of reals that is not Lebesgue measurable, and indeed the
+Banach-Tarski paradox; that implication by itself does not establish the
+unprovability, because a model of ZF + DC in which every set of reals is
+measurable costs an inaccessible cardinal, so the unprovability of HB in ZF is
+quoted here from the models in the references and not read off the implication. A
+Hamel basis for $\mathbb{R}$ over $\mathbb{Q}$ likewise yields a non-measurable
+set. So the two statements sit strictly between ZF and AC, on those cited results
+and under the consistency of ZF, and the question is how they are ordered with
 respect to each other. Settling it means either deriving a Hamel basis from HB in
 ZF, or producing a model of ZF in which HB holds and $\mathbb{R}$ has no basis
 over $\mathbb{Q}$.
