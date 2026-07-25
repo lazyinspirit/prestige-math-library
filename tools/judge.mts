@@ -81,9 +81,37 @@ DIAGRAM CHASING (this item declares a commutative diagram): "the diagram commute
 // catch, which is a real class it was previously blind to.
 const withContext = !argv.includes("--no-context");
 
-function statementOf(src: string): string {
-  const m = src.match(/\n## (?:Statement|Definition)\b[^\n]*\n([\s\S]*?)(?=\n## |$)/);
-  return (m ? m[1] : src).trim();
+/**
+ * What a cited or sibling item SAYS: its Statement/Definition AND its Remarks.
+ *
+ * Remarks are NOT optional here, and leaving them out was a real bug. Items
+ * legitimately cross-reference each other's Remarks ("the argument is written
+ * out once, in the remarks of X", "by the remark at the end of Y"). With only
+ * Statements supplied, the judge cannot find the referenced argument and reports
+ * the cross-reference as a false claim about the library's contents. That
+ * produced FOUR rejections in one run, every one of them wrong, and every one
+ * pointing at text that does exist.
+ *
+ * Proof and Refutation stay out: the judge is told to treat cited items as
+ * correct, so it needs what they SAY, not how they are established.
+ */
+function quotedTextOf(src: string): string {
+  const grab = (h: string) => {
+    const m = src.match(new RegExp("\\n## " + h + "\\b[^\\n]*\\n([\\s\\S]*?)(?=\\n## |$)"));
+    return m ? m[1].trim() : "";
+  };
+  const parts = [
+    grab("Statement refuted") || grab("Statement") || grab("Definition") || grab("Example"),
+    grab("Remarks") && "**Remarks.**\n" + grab("Remarks"),
+  ].filter(Boolean);
+  const text = parts.length ? parts.join("\n\n") : src.trim();
+  // Cap per item. A 23-item page of full Remarks reached ~103k chars, and the
+  // gateway already timed out once on this page at half that. The cap is marked
+  // so the judge knows text was elided and does not read the elision as absence.
+  const CAP = 3000;
+  return text.length <= CAP
+    ? text
+    : text.slice(0, CAP) + "\n… [truncated here; this item continues. Do NOT infer that anything is missing from it.]";
 }
 
 // Ids already shown under "EXACT TEXT OF EVERY ITEM THIS ONE CITES", so the page
@@ -132,7 +160,7 @@ function pageContext(selfId: string): string {
       if (!existsSync(f)) continue;
       const s = readFileSync(f, "utf8");
       const t = (s.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
-      blocks.push(`### [[${id}]] ${t}\n` + statementOf(s));
+      blocks.push(`### [[${id}]] ${t}\n` + quotedTextOf(s));
     }
     if (!blocks.length) return "";
     return (
@@ -184,7 +212,7 @@ function citedContext(itemBody: string): string {
     shownIds.add(id);
     blocks.push(
       `### [[${id}]] ${title}${notProved ? "  (RECORDED, NOT PROVED IN THIS LIBRARY)" : ""}\n` +
-        statementOf(src),
+        quotedTextOf(src),
     );
   }
   if (!blocks.length) return "";
@@ -208,7 +236,8 @@ PAGE CONTEXT: the other items published on this item's page are supplied after t
   * this item claiming the page (or the library) proves, supplies or discusses something that no sibling actually does. If this item says "proved below", "supplied by the page that develops X", "as shown in the remarks of Y", CHECK the supplied text. A false claim about the library's own contents is a defect even when the mathematics is fine;
   * a ledger, conventions or summary item whose claims do not match what its page actually establishes;
   * this item restating a sibling INACCURATELY, whether or not it cites it.
-  Two cautions. A sibling covering related ground is NOT duplication, and a sibling that comes LATER on the page is not a forward-reference violation: same-page links are ordinary links. Do not object to either.`;
+  Two cautions. A sibling covering related ground is NOT duplication, and a sibling that comes LATER on the page is not a forward-reference violation: same-page links are ordinary links. Do not object to either.
+  A THIRD caution, and it is the one that has actually caused wrong rejections: the supplied text of another item is its Statement/Definition and Remarks only, and long items are TRUNCATED at a marked cut. It does NOT include that item's Proof. So you may NOT conclude that a cross-reference is false merely because you cannot find the referenced passage in the supplied text. Report such a reference as unverifiable, or say nothing; do not call it a false claim about the library's contents unless the supplied text CONTRADICTS it.`;
 
 // The `--mode certify` arm was MEASURED AND DELETED, 2026-07-25. Scored against
 // research/verification-benchmark.md (150 items, 50 known defects), a gentler
