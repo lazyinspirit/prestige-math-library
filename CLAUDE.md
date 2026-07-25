@@ -139,6 +139,24 @@ before any rendering change, and preserve their behaviour):
 - Flowchart is BIRDS-EYE: only `landmark: true` items are nodes; edges are the
   transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
   theorems, key definitions, key lemmas); do not revert to one-node-per-item.
+- **Index page, owner-instructed restyle 2026-07-26 — now itself FROZEN.** The
+  owner reopened the `/library` INDEX only (the page and item renderers were not
+  touched). Owned by `web/lib/library-categories.ts` (per-group accent, A/B
+  pairing, page-level dependency graph), `web/components/library/group.tsx`
+  (group card + page row) and `web/app/library/group/[slug]/page.tsx` (the group
+  dependency tree). A page's `<name>-examples` companion is listed in a RIGHT-hand
+  column on its A page's row, never on a line of its own. Group titles are cards
+  with a per-group accent and the `.font-display-serif` system serif stack
+  (`app/globals.css`) — a deliberately different voice from the Geist sans of
+  every other heading, and no webfont fetch, so the Docker build stays hermetic.
+  Sky and fuchsia remain reserved; the single use of fuchsia is the
+  `not-proved-here` group, which IS the ‡ tier.
+- **Titles are LaTeX; nothing renders KaTeX inside a mermaid label.** `plainTitle`
+  in `web/lib/math-library.ts` is the one de-TeX for every plain-text context
+  (flowchart labels, OG cards, metadata): a Unicode symbol table, `\{`/`\}` kept
+  as set braces, unknown control words degrading to their own name, and
+  all-or-nothing scripts so `a^{1/n}` stays `a^1/n` rather than becoming the
+  false-reading `a¹/n`. Do not reintroduce a second, cruder copy.
 
 Global entry point for future sessions: the `/math-library` skill loads this
 file first. If a future session is tempted to "improve" the look, STOP — the
