@@ -122,7 +122,7 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: deepseek/deepseek-v4-flash # session items: NEVER a Claude model;
+    model: z-ai/glm-5.2              # session items: NEVER a Claude model;
                                      #   pipeline items: production lineup, and
                                      #   NEVER glm or deepseek (both are in the
                                      #   pipeline generator lineup)

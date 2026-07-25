@@ -1,10 +1,10 @@
 // Topic-neutral cross-family refuter-judge for library items (ofox gateway).
-// Default judge: deepseek/deepseek-v4-flash (owner decision, 2026-07-25; replaced
-// z-ai/glm-5.2, which replaced openai/gpt-5.4 earlier the same day).
+// Default judge: z-ai/glm-5.2.
 //
-// MEASURED, so no future session re-runs this. 56 calls over 7 candidate models,
-// against 5 items verified correct by hand and 3 historical versions carrying
-// defects verified from git:
+// MEASURED TWICE, so no future session re-runs either experiment.
+//
+// PASS 1 — 56 calls, 7 candidate models, against 5 items verified correct by hand
+// and 3 historical versions carrying defects verified from git:
 //
 //   model                         median latency   false pos   caught defects
 //   z-ai/glm-5.2                       73.8 s         0/5           0/3
@@ -13,14 +13,36 @@
 //   openai/gpt-5.4-mini                 ~3   s         4/5           0/3
 //   minimax/minimax-m2.7 | moonshotai/kimi-k2.6 | bailian/qwen3.7-plus: UNPARSEABLE
 //
-// DeepSeek was chosen for 14x lower latency at GLM-comparable reasoning depth
-// (it named the specific construction under test, where gemini-flash-lite
-// returned one generic sentence per verdict and is a rubber stamp, not a precise
-// judge: a model that always accepts scores 0 false positives too).
+// On pass 1 the default was switched to deepseek for 14x lower latency, since its
+// REASON strings named the specific construction under test and read as genuine
+// engagement. THAT WAS WRONG, and the way it was wrong is the lesson here.
 //
-// The finding that matters more than the ranking: EVERY model caught 0 of 3 known
-// real defects. All three were found by reading tiers. Keep the judge as a cheap
-// screen; do not model it as the thing that finds defects.
+// PASS 2 — INJECTION TEST, which is what actually separates a judge from a rubber
+// stamp. Two defects were injected into a known-good item:
+//
+//   (a) BLATANT: claim 3 restated as "n ~ m implies n < m", false on its face
+//       (n = m gives n ~ n) and flatly contradicted by the item's own step 6.1.
+//   (b) SUBTLE: trichotomy attributed to lem-nat-transitive-irreflexive, which
+//       states only that naturals are transitive sets with n not in n.
+//
+//   model                        blatant (a)   subtle (b)
+//   z-ai/glm-5.2                 CAUGHT        missed
+//   deepseek/deepseek-v4-flash   MISSED        missed
+//
+// DeepSeek passed the blatant injection and reported "No false claim, unjustified
+// step, or mis-cited fact was found." GLM named claim 3, gave the n = m witness,
+// and pointed out that step 6.1 proves n = m rather than n < m. Reverted.
+//
+// THE METHOD, not the ranking, is what to keep: A LOW REJECTION RATE AND A
+// FLUENT-SOUNDING REASON ARE NOT EVIDENCE OF A GOOD JUDGE. A model that always
+// accepts scores zero false positives and writes a confident summary of the proof
+// it just failed to check. The only test that separates them is injecting a defect
+// you KNOW is there and seeing whether the model says so. Run the injection test
+// before adopting any judge model.
+//
+// The finding that outranks all of it: on 3 real historical defects EVERY model
+// scored 0/3, GLM included. All three were found by reading tiers. Keep the judge
+// as a cheap screen; never model it as the thing that finds defects.
 //
 // Also: half the catalogue is not drop-in. Reasoning-style models return <think>
 // blocks or reasoning-only content this harness cannot parse. Check parseability
@@ -64,13 +86,11 @@ if (!file) {
 }
 // SESSION items only. The production generator lineup is
 // ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"] (worker/src/ofox.ts genLineup), so
-// the default here is same-FAMILY as the second generator, though not the same
-// model. Harmless for session items, whose generator is Claude; a PIPELINE item
-// must NOT be judged with this default, since that is close to a generator
-// grading its own work. Pipeline items keep the origin-conditioned lineup in
-// worker/src/ofox.ts. (Under the previous default the collision was sharper: GLM
-// 5.2 is the generator's FIRST entry, an identity collision, not a family one.)
-const model = opts.model ?? "deepseek/deepseek-v4-flash";
+// this default is an IDENTITY collision with the first generator entry. Harmless
+// for session items, whose generator is Claude; a PIPELINE item must NOT be judged
+// with this default, since that is a generator grading its own work. Pipeline
+// items keep the origin-conditioned lineup in worker/src/ofox.ts.
+const model = opts.model ?? "z-ai/glm-5.2";
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
 const id = basename(file).replace(/\.md$/, "");

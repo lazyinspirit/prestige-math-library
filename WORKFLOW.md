@@ -164,7 +164,7 @@ says whose verdict survives a disagreement.
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
 | Generator | Claude Opus subagent | one page | nothing | everyone |
-| **Judge** | non-Claude, DeepSeek v4-flash | **its PAGE**: the item, the full text of the items it cites, and the statements of its page siblings | nothing; it NAMES CANDIDATES | every tier below |
+| **Judge** | non-Claude, GLM 5.2 | **its PAGE**: the item, the full text of the items it cites, and the statements of its page siblings | nothing; it NAMES CANDIDATES | every tier below |
 | **Page verifier** | one Opus 5 subagent PER PAGE | its page, plus the full text of everything that page cites | CERTIFY / WITHHOLD per item | auditor, owner |
 | **Cross-page auditor** | the driver, main loop | the whole library at once | final **among models** | **the owner only** |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
@@ -227,17 +227,24 @@ Two hard rules govern the models:
 1. Generation never runs through the public billed pipeline, and never wires a
    subscription into the worker service. It uses either the session route
    (subagents) or the internal harness at raw API cost.
-2. Session-authored items are judged by a non-Claude model (**DeepSeek v4-flash
-   primary** since 2026-07-25, GLM 5.2 then GPT-5.4 as fallback), never by a
-   Claude model. Chosen on measurement: 14x lower latency than GLM 5.2 at
-   comparable reasoning depth (the table is in the `tools/judge.mts` header, with
-   the caveat that EVERY candidate caught 0 of 3 known real defects).
+2. Session-authored items are judged by a non-Claude model (**GLM 5.2 primary**,
+   GPT-5.4 then Gemini as fallback), never by a Claude model.
+   **`deepseek/deepseek-v4-flash` was adopted and REVERTED on 2026-07-25**, inside
+   a single batch. It is 14x faster and its verdict prose reads like genuine
+   engagement, but an injection test settled it: given an item whose claim 3 had
+   been restated as a blatant falsehood contradicted by its own proof, DeepSeek
+   replied "No false claim, unjustified step, or mis-cited fact was found." GLM
+   named the claim, gave the witness, and cited the step that refutes it.
+   **Rule: never adopt a judge model on latency, price, or how substantial its
+   reasons sound. Inject a defect you know is there and see whether it says so.**
+   A model that always accepts scores zero false positives too. The full table is
+   in the `tools/judge.mts` header.
    **Note the collision:** the production GENERATOR lineup is
-   `["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"]`, so both the current judge and
-   its first fallback overlap it — GLM by identity, DeepSeek v4-flash by family.
-   Harmless for session items, whose generator is Claude, but a PIPELINE item must
-   never be judged with either, since that is a generator grading its own work.
-   The judge lineup is conditioned on origin precisely so both rules hold at once.
+   `["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"]`, so GLM as judge is an identity
+   collision with the first entry. Harmless for session items, whose generator is
+   Claude, but a PIPELINE item must never be judged with GLM or DeepSeek, since
+   that is a generator grading its own work. The judge lineup is conditioned on
+   origin precisely so both rules hold at once.
 
 ---
 
