@@ -164,10 +164,30 @@ says whose verdict survives a disagreement.
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
 | Generator | Claude Opus subagent | one page | nothing | everyone |
-| **Judge** | non-Claude, GLM 5.2 | one item, plus the full text of the items it cites | nothing; it NAMES CANDIDATES | every tier below |
+| **Judge** | non-Claude, GLM 5.2 | **its PAGE**: the item, the full text of the items it cites, and the statements of its page siblings | nothing; it NAMES CANDIDATES | every tier below |
 | **Page verifier** | one Opus 5 subagent PER PAGE | its page, plus the full text of everything that page cites | CERTIFY / WITHHOLD per item | auditor, owner |
 | **Cross-page auditor** | the driver, main loop | the whole library at once | final **among models** | **the owner only** |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
+
+**The order, and the bound** (owner, 2026-07-25). For an item rejected at least
+once the loop is
+
+```
+escalation (page ctx) -> judge (page ctx) -> escalation (page ctx) -> judge (page ctx) -> auditor (full ctx)
+```
+
+Escalation runs FIRST and the judge screens the repaired text; running the judge
+first records verdicts on text that escalation then changes. The loop is bounded
+at EXACTLY ONE repair cycle: a second rejection goes to the auditor, not to
+another repair. And **the auditor waits until every item has been through the
+loop** before auditing anything, rather than adjudicating items while others are
+still in flight.
+
+That bound is what makes re-judging safe. Objections rotate between runs, so
+chasing a clean sheet is a treadmill that ends in damaging correct proofs; one
+repair cycle converts the judge's high recall into fixes and hands the residue to
+a tier that can actually adjudicate it. Re-judging CHANGED text is a real check;
+re-judging UNCHANGED text is the treadmill.
 
 Three things this makes explicit, each learned the expensive way:
 

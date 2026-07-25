@@ -86,6 +86,68 @@ function statementOf(src: string): string {
   return (m ? m[1] : src).trim();
 }
 
+// Ids already shown under "EXACT TEXT OF EVERY ITEM THIS ONE CITES", so the page
+// block below does not repeat them.
+const shownIds = new Set<string>();
+
+/**
+ * The OTHER items on this item's page (owner decision, 2026-07-25: the judge is a
+ * PAGE-context tier, not an item-context one).
+ *
+ * Citation context alone cannot see a defect that lives BETWEEN two items on the
+ * same page: two items taking opposite positions, a ledger item whose claims do
+ * not match what its own page proves, a lemma restated inaccurately by a sibling
+ * that does not cite it. Those were real defects here and the item-scoped judge
+ * was structurally blind to every one of them.
+ */
+function pageContext(selfId: string): string {
+  if (!withContext || !existsSync("library")) return "";
+
+  const pages: string[] = [];
+  const walk = (dir: string) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const p = dir + "/" + e.name;
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith(".md")) pages.push(p);
+    }
+  };
+  walk("library");
+
+  const listed = (fm: string, key: string): string[] => {
+    const m = fm.match(new RegExp("^" + key + ":\\s*\\[([^\\]]*)\\]", "m"));
+    return m ? m[1].split(",").map((t) => t.trim()).filter(Boolean) : [];
+  };
+
+  for (const p of pages) {
+    const src = readFileSync(p, "utf8");
+    const fm = (src.match(/^---\n([\s\S]*?)\n---/) ?? [, ""])[1];
+    const ids = [...listed(fm, "items"), ...listed(fm, "examples")];
+    if (!ids.includes(selfId)) continue;
+
+    const title = (fm.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, p])[1];
+    const blocks: string[] = [];
+    for (const id of ids) {
+      if (id === selfId || shownIds.has(id)) continue;
+      const f = "items/" + id + ".md";
+      if (!existsSync(f)) continue;
+      const s = readFileSync(f, "utf8");
+      const t = (s.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
+      blocks.push(`### [[${id}]] ${t}\n` + statementOf(s));
+    }
+    if (!blocks.length) return "";
+    return (
+      `\n\n=== THE OTHER ITEMS ON THIS ITEM'S PAGE ("${title}") ===\n` +
+      "This item is published as part of the page above and is read in that order.\n" +
+      "Use these to check for defects that live BETWEEN items: this item contradicting\n" +
+      "a sibling, restating one inaccurately, claiming the page proves something it does\n" +
+      "not, or duplicating a sibling's result while disagreeing with it. Items already\n" +
+      "quoted in the citation section above are not repeated here.\n\n" +
+      blocks.join("\n\n")
+    );
+  }
+  return "";
+}
+
 function citedContext(itemBody: string): string {
   if (!withContext) return "";
   const dir = "items";
@@ -119,6 +181,7 @@ function citedContext(itemBody: string): string {
     const src = byId.get(id)!;
     const title = (src.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
     const notProved = /^proved_here:\s*false/m.test(src);
+    shownIds.add(id);
     blocks.push(
       `### [[${id}]] ${title}${notProved ? "  (RECORDED, NOT PROVED IN THIS LIBRARY)" : ""}\n` +
         statementOf(src),
@@ -138,7 +201,14 @@ const CONTEXT_RULES = `
 CITED CONTEXT: the exact text of every item this one cites is supplied below the item. Use it, and note that it cuts BOTH ways.
   * If an [L#] fact FAITHFULLY restates its cited item, then any step citing that [L#] is LICENSED. Do NOT object that such a step is unjustified, and do NOT assume a cited item says less than the supplied text says. Read the supplied text before claiming a step lacks support.
   * If an [L#] fact is STRONGER than its cited item, or restates it inaccurately, that IS a specific defect: name the fact and the discrepancy.
-  * An item marked RECORDED, NOT PROVED IN THIS LIBRARY is a deliberate external citation, not a gap. Depending on one is not a defect.`;
+  * An item marked RECORDED, NOT PROVED IN THIS LIBRARY is a deliberate external citation, not a gap. Depending on one is not a defect.
+
+PAGE CONTEXT: the other items published on this item's page are supplied after the cited items. They are there so you can catch defects that live BETWEEN items, which are invisible when an item is read alone:
+  * this item CONTRADICTING a sibling on the same page, or the two taking opposite positions on the same question;
+  * this item claiming the page (or the library) proves, supplies or discusses something that no sibling actually does. If this item says "proved below", "supplied by the page that develops X", "as shown in the remarks of Y", CHECK the supplied text. A false claim about the library's own contents is a defect even when the mathematics is fine;
+  * a ledger, conventions or summary item whose claims do not match what its page actually establishes;
+  * this item restating a sibling INACCURATELY, whether or not it cites it.
+  Two cautions. A sibling covering related ground is NOT duplication, and a sibling that comes LATER on the page is not a forward-reference violation: same-page links are ordinary links. Do not object to either.`;
 
 // The `--mode certify` arm was MEASURED AND DELETED, 2026-07-25. Scored against
 // research/verification-benchmark.md (150 items, 50 known defects), a gentler
@@ -163,13 +233,22 @@ Output STRICT minified JSON ONLY, no prose around it:
 
 const sys = refuterSys;
 
+// --dump-prompt prints the exact system + user message and exits, so the context
+// assembly can be inspected without spending a call.
+if (bools.has("dump-prompt")) {
+  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(id);
+  console.log("========== SYSTEM ==========\n" + sys + "\n\n========== USER ==========\n" + user);
+  console.error(`\n[dump-prompt] system ${sys.length} chars, user ${user.length} chars`);
+  process.exit(0);
+}
+
 const payload = {
   model,
   temperature: 0,
   max_tokens: 3000,
   messages: [
     { role: "system", content: sys },
-    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) },
+    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(id) },
   ],
 };
 
