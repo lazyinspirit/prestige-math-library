@@ -35,17 +35,20 @@ $$g(\{0,1\}) = 0, \qquad g(\{1,2\}) = 1, \qquad g(\{2,3\}) = 2.$$
 
 Nothing was assumed to produce it. Each value is one element taken from one set
 already known to be nonempty, and three such picks are made one after another.
-The induction of [[lem-finite-choice]] is exactly this process stated in general:
-remove one member from the family, pick an element of it, and glue that single
-pair onto a choice function for the remaining members.
+The induction of [[lem-finite-choice]] is exactly this process stated in general.
+That lemma indexes the family by a natural number rather than counting its
+members: writing the three sets as the values $F(0), F(1), F(2)$ of a function
+$F$ with domain $3 = \{0,1,2\}$, the successor step restricts $F$ to the shorter
+index set, takes a choice function for those values, and overwrites it with one
+further pair.
 
 ## Facts & Assumptions
 
-**Given:** The family $\mathcal{F} = \{\{0,1\}, \{1,2\}, \{2,3\}\}$, whose members are sets of natural numbers.
+**Given:** The family $\mathcal{F} = \{\{0,1\}, \{1,2\}, \{2,3\}\}$, whose members are sets of natural numbers, together with the function $F$ with domain $3 = \{0,1,2\}$ given by $F(0) = \{0,1\}$, $F(1) = \{1,2\}$, $F(2) = \{2,3\}$, so that $\mathcal{F} = F[3]$.
 
 [L1] A choice function for a family $\mathcal{F}$ is a function $g$ with domain $\mathcal{F}$ such that $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 
-[L2] Every family of exactly $n$ nonempty sets has a choice function, for every natural number $n$, and the proof is an induction whose successor step removes one member, picks one element of it, and extends a choice function for the rest ([[lem-finite-choice]]).
+[L2] For every natural number $n$ and every function $F$ with domain $n$ all of whose values are nonempty, the family of values $F[n]$ has a choice function; the proof is an induction on $n$ whose successor step restricts $F$ to $n \subseteq \sigma(n)$, takes a choice function for $F[n]$, and overwrites it with the single pair $(F(n), a)$ for some $a \in F(n)$ ([[lem-finite-choice]]).
 
 ## Verification
 
@@ -59,7 +62,7 @@ pair onto a choice function for the remaining members.
 
 3.1 Its values lie where they must: $g(\{0,1\}) = 0 \in \{0,1\}$, $g(\{1,2\}) = 1 \in \{1,2\}$ and $g(\{2,3\}) = 2 \in \{2,3\}$, so $g(S) \in S$ for every $S \in \mathcal{F}$ and $g$ is a choice function for $\mathcal{F}$. [step 2.1, step 1.2, L1]
 
-4.1 A function of this shape is what the induction of [L2] returns when run on $\mathcal{F}$: three stages, one member removed and one element picked at each, the three picks then glued together, so no choice principle is invoked and none is needed. [step 3.1, L2] ∎
+4.1 A function of this shape is what the induction of [L2] returns when run on the listing $F$: since $F$ has domain $3$ and each value is nonempty by step 1.2, [L2] applies with $n = 3$ and yields a choice function for $F[3] = \mathcal{F}$, obtained in three stages, one pick at each index, so no choice principle is invoked and none is needed. Nothing here rests on counting the members of $\mathcal{F}$, only on the listing exhibited in the Given. [step 3.1, step 1.2, given, L2] ∎
 
 ## Remarks
 

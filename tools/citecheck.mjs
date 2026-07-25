@@ -24,6 +24,25 @@
 // WARNING; do not merely count them, and do not "fix" one by adding a dep the
 // proof does not use, which trades a wrong citation for a wrong dependency.
 //
+// TRIAGED 2026-07-25, whole repo, 402 items. Started at 63 warnings, nearly all
+// false; four separate detection bugs accounted for 60 of them, each fixed at
+// source rather than by suppressing the warning:
+//   1. homes hand-listed          -> derive them from each item's own Statement
+//   2. "is an ordered field"      -> ORDERED_STRUCTURE, since a structure states
+//                                    every one of these moves without the words
+//   3. `## Definition` not read   -> definitions ARE the home of an axiom
+//   4. home regex needed "transitivITY", but a home says "$<$ is transitive"
+// Three warnings survive and ALL THREE ARE FALSE POSITIVES, verified by reading
+// the cited items; they are left standing rather than special-cased, because a
+// suppression list rots faster than three lines of noise:
+//   * cor-of-neg-one-squared:44 -- "the sign rule" names lem-of-mult-neg, which
+//     is in deps and states exactly (-a)(-b) = ab.
+//   * thm-reals-dedekind-field:37,51 -- sign rules and reciprocal FOR CUTS,
+//     cited to def-cut-multiplication and lem-cut-reciprocal, both in deps.
+// Three warnings were REAL and are fixed: thm-holder-finite (adding inequalities
+// attributed to lem-of-sign-rules), lem-sup-of-extremals and
+// lem-successor-of-extremal (reflexivity and transitivity with no order dep).
+//
 // Scope: load-bearing sections only (Statement, Statement refuted, Facts &
 // Assumptions, Proof, Refutation, Counterexample, Verification). Remarks are
 // held to the same standard for TRUTH, but they are orientation prose and may
@@ -81,6 +100,11 @@ const RULES = [
     //   * a transitive RELATION being constructed rather than appealed to.
     re: /reflexivit|antisymmetr|transitivit/i,
     unless: /\\approx|equinumer|equivalence\s+relation|\\sim\b|\\equiv|transitive\s+set|is\s+transitive\b|transitivity\s+of\s+\$/i,
+    // A USE says "by transitivity"; a HOME says "$<$ is transitive". Detecting
+    // homes with the use-regex missed lem-nat-transitive-irreflexive and
+    // def-nat-order, so two correctly-cited items were flagged.
+    homeRe: /reflexiv|antisymmetr|transitiv|irreflexiv|trichotom/i,
+    homeUnless: /\\approx|equinumer|equivalence\s+relation/i,
     seed: ['def-partial-order', 'def-ordered-field', 'def-total-order', 'def-preorder'],
   },
   {
@@ -125,19 +149,27 @@ function list(fm, key) {
 const LOAD_BEARING = [
   'Statement', 'Statement refuted', 'Facts & Assumptions',
   'Proof', 'Refutation', 'Counterexample', 'Verification',
+  // `Definition` and `Example` are the body of a def- / ex- item: as
+  // load bearing as a Statement, and just as able to mis-cite.
+  'Definition', 'Example',
 ];
 
 // What an item ESTABLISHES, i.e. what makes it a home for a move.
-const ESTABLISHES = ['Statement', 'Statement refuted'];
+// `Definition` MUST be here: definitions are where axioms live, and omitting it
+// made the tool blind to def-well-order, def-partial-order and every other
+// definition, which is exactly where an order axiom is established.
+const ESTABLISHES = ['Statement', 'Statement refuted', 'Definition', 'Example'];
 
-/** Prose of an item under the given `## ` headings, as `[{line, text}]`. */
-function linesUnder(body, headings) {
+/** Prose of an item under the given `## ` headings, as `[{line, text}]`.
+ *  `offset` is the number of frontmatter lines, so `line` is a FILE line and the
+ *  reported `path:line` is clickable. */
+function linesUnder(body, headings, offset = 0) {
   const out = [];
   let live = false;
   body.split('\n').forEach((text, i) => {
     const h = text.match(/^##\s+(.+?)\s*$/);
     if (h) { live = headings.includes(h[1]); return; }
-    if (live && text.trim()) out.push({ line: i + 1, text });
+    if (live && text.trim()) out.push({ line: offset + i + 1, text });
   });
   return out;
 }
@@ -156,7 +188,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     file: `items/${f}`,
     deps: list(fm, 'deps'),
     justified: list(fm, 'justified_by'),
-    lines: linesUnder(body, LOAD_BEARING),
+    lines: linesUnder(body, LOAD_BEARING, src.slice(0, src.length - body.length).split('\n').length - 1),
     states: linesUnder(body, ESTABLISHES).map((l) => l.text).join('\n'),
   };
   all.push(rec);
@@ -169,15 +201,32 @@ const selected = targets.length
   : all;
 
 // --------------------------------------------------------- derive the homes
+//
+// An item is a home for a move when its own `## Statement` establishes it. Two
+// ways that happens:
+//
+//   1. the Statement says the move in the words the rule looks for; or
+//   2. the Statement ESTABLISHES A STRUCTURE whose axioms include every move
+//      here. "$\mathbb{Q}$ is a totally ordered field" states translation
+//      invariance, the sign rules and the order axioms without using any of
+//      those words, and citing it for them is correct. Missing this was the
+//      second-largest source of false positives, after hand-listed homes:
+//      lem-cut-add-well-defined, lem-rat-cut-embeds and thm-reals-ordered-field
+//      all cite thm-rat-ordered-field and all were correct.
+
+const ORDERED_STRUCTURE =
+  /is\s+(?:a|an)\s+[^.]*?(?:ordered\s+(?:field|ring|set|group)|linear\s+order|total\s+order|partial\s+order|well[-\s]order)|(?:totally|linearly|partially|well)[-\s]ordered|satisfies\s+the\s+order\s+axioms/i;
 
 /** Items whose own Statement establishes each move. */
 const homes = new Map();
 for (const rule of RULES) {
   const set = new Set(rule.seed ?? []);
+  const hre = rule.homeRe ?? rule.re;
+  const hun = rule.homeRe ? rule.homeUnless : rule.unless;
   for (const it of all) {
-    if (!rule.re.test(it.states)) continue;
-    if (rule.unless && rule.unless.test(it.states)) continue;
-    set.add(it.id);
+    const byWords = hre.test(it.states) && !(hun && hun.test(it.states));
+    const byStructure = ORDERED_STRUCTURE.test(it.states);
+    if (byWords || byStructure) set.add(it.id);
   }
   homes.set(rule.id, set);
 }
