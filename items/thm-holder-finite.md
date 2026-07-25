@@ -4,17 +4,13 @@ kind: theorem
 title: "Hölder's inequality for finite sums (rational exponents)"
 status: draft
 origin: session
-deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-of-abs-value, def-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
+deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-triangle-inequality-finite, lem-of-abs-value, def-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -38,8 +34,14 @@ $$\sum_{k<n} |a_k b_k| \;\le\; \Big(\sum_{k<n} |a_k|^{p}\Big)^{1/p}\Big(\sum_{k<
 All powers here are rational powers of nonnegative bases
 ([[def-rational-power]]): the exponents $p, q, 1/p, 1/q$ are positive rationals,
 so the supplementary clause $0^{r} = 0$ covers the vanishing bases and no
-expression is left undefined. Taking $p = q = 2$ recovers the root form of
-[[thm-cauchy-schwarz-finite]], since $x^{1/2} = \sqrt{x}$.
+expression is left undefined. Taking $p = q = 2$ gives
+$\sum_{k<n} |a_k b_k| \le \big(\sum_{k<n} a_k^2\big)^{1/2}\big(\sum_{k<n} b_k^2\big)^{1/2}$,
+since $x^{1/2} = \sqrt{x}$ and $|a_k|^2 = a_k^2$. That is not literally the root
+form of [[thm-cauchy-schwarz-finite]], whose left-hand side is
+$\big|\sum_{k<n} a_k b_k\big|$: the two are bridged by
+$\big|\sum_{k<n} c_k\big| \le \sum_{k<n} |c_k|$
+([[lem-triangle-inequality-finite]]), which turns the display above into the
+root form and is the only step needed to pass between them.
 
 ## Facts & Assumptions
 

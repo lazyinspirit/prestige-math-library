@@ -3,7 +3,7 @@ page: countability-and-uncountability
 title: "Countability and Uncountability"
 status: draft
 items: [def-injection-surjection-bijection, def-equinumerous,
-        lem-nat-order-is-membership, def-countable,
+        lem-nat-order-is-membership, lem-pigeonhole, def-countable,
         thm-schroder-bernstein, lem-subset-of-countable,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,
         thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice,

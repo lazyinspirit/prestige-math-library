@@ -4,17 +4,13 @@ kind: definition
 title: "Finite, countably infinite, countable, uncountable"
 status: draft
 origin: session
-deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
+deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
 aliases: [def-finite-set, def-countably-infinite, def-uncountable]
 landmark: true
 short: "finite, countable, uncountable"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -65,11 +61,22 @@ immediately above. Let $A$ be a set, and let $\approx$ be equinumerosity
   countably infinite, or uncountable, since "uncountable" is defined as the
   negation of the disjunction. That they are also mutually exclusive, that is,
   that no set is both finite and countably infinite, is a genuine theorem
-  amounting to $\mathbb{N} \not\approx n$ for every $n \in \mathbb{N}$. It is not
-  assumed here, and nothing on this page uses it; the one place where it would be
-  needed, the infinitude of $\mathbb{Q}$, is instead handled by exhibiting a
-  bijection $\mathbb{Q} \approx \mathbb{N}$ directly
-  ([[thm-rationals-countable]]).
+  amounting to $\mathbb{N} \not\approx n$ for every $n \in \mathbb{N}$, and it is
+  proved immediately above as claim 4 of [[lem-pigeonhole]]. So a countably
+  infinite set is never finite, and "$A$ is infinite", meaning not finite, is
+  implied by $A \approx \mathbb{N}$. The same lemma pins down finiteness itself:
+  by its claim 3 a finite set is equinumerous with exactly one natural number, so
+  the number of elements of a finite set is well defined, and by its claim 5 no
+  finite set is equinumerous with a proper subset of itself.
+
+- **What the exclusivity is and is not used for below.** Nothing on this page
+  needs it in order to run: the infinitude of $\mathbb{Q}$, for instance, is
+  obtained by exhibiting a bijection $\mathbb{Q} \approx \mathbb{N}$ directly
+  ([[thm-rationals-countable]]) rather than by ruling out finiteness. It is used
+  where the two notions of infinity are compared
+  ([[fs-infinite-has-countable-subset-in-zf]]) and where the continuum hypothesis
+  is instantiated at $\mathbb{N}$ ([[rem-continuum-hypothesis]]), both of which
+  need $\mathbb{N}$ to be infinite as a fact rather than as a convention.
 
 - **$0$ and the empty set.** $0 = \varnothing$, and $A \approx 0$ holds exactly
   when $A = \varnothing$, so the empty set is finite. This matters in the proofs

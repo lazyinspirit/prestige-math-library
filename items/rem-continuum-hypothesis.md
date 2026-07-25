@@ -4,7 +4,7 @@ kind: remark
 title: "The continuum hypothesis, and what this page does not prove"
 status: draft
 origin: session
-deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, fs-infinite-has-countable-subset-in-zf]
+deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole, fs-infinite-has-countable-subset-in-zf]
 justified_by: []
 aliases: [rem-ch]
 landmark: false
@@ -89,7 +89,10 @@ $A \prec B \prec \mathcal{P}(A)$ never holds for infinite $A$, is also
 independent of ZFC ([[rem-independence-of-ch-and-gch]]), in the same conditional
 sense as CH above: if ZFC is consistent, then so are ZFC + GCH and
 ZFC + not GCH, and that consistency assumption cannot be dropped. GCH implies CH,
-being its instance at $A = \mathbb{N}$, and it is stronger in a striking further
+being its instance at $A = \mathbb{N}$, an instance the hypothesis "for infinite
+$A$" genuinely licenses: $\mathbb{N} \not\approx n$ for every natural number $n$
+(claim 4 of [[lem-pigeonhole]]), so $\mathbb{N}$ is not finite in the sense of
+[[def-countable]]. GCH is stronger in a striking further
 sense: over ZF it even implies the Axiom of Choice, a result of Sierpiński
 ([[rem-gch-implies-ac]]). That implication, too, is quoted and not proved here.
 That CH does not conversely imply GCH is again a relative-consistency statement
