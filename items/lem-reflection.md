@@ -4,17 +4,13 @@ kind: lemma
 title: "Reflection through zero exchanges upper and lower bounds"
 status: draft
 origin: session
-deps: [def-bounded-set, lem-of-sign-rules]
+deps: [def-bounded-set, def-complete-ordered-field, def-ordered-field, def-field, lem-of-inverse-unique]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -42,11 +38,11 @@ only if $-S$ is bounded ([[def-bounded-set]]).
 
 **Given:** A subset $S \subseteq \mathbb{R}$, its reflection $-S = \{-s : s \in S\}$, and elements $u, \ell \in \mathbb{R}$.
 
-[L1] In an ordered field, $x < y$ means exactly that $y - x$ is positive, and $x \le y$ means $x < y$ or $x = y$ ([[lem-of-sign-rules]]).
+[L1] $\mathbb{R}$ is a complete ordered field, in particular an ordered field ([[def-complete-ordered-field]]), and in an ordered field the order is *defined* by the positive cone $P$: $x < y$ means exactly $y - x \in P$, and $x \le y$ means $x < y$ or $x = y$ ([[def-ordered-field]]).
 
 [L2] Upper bound, lower bound, bounded above, bounded below and bounded have their meanings from [[def-bounded-set]]: $u$ bounds $S$ above when $s \le u$ for all $s \in S$, and $\ell$ bounds $S$ below when $\ell \le s$ for all $s \in S$.
 
-[L3] Field arithmetic: $-(-x) = x$ for every $x$, and $y - x = (-x) - (-y)$ for all $x, y$ ([[lem-of-sign-rules]]).
+[L3] Field arithmetic. Additive inverses are unique ([[lem-of-inverse-unique]]), and $(-x) + x = 0$ by the inverse axiom, so $x$ is the additive inverse of $-x$, that is $-(-x) = x$. Addition is commutative and $y - x$ abbreviates $y + (-x)$ ([[def-field]]), so $y - x = y + (-x) = (-x) + y = (-x) + (-(-y)) = (-x) - (-y)$ for all $x, y$.
 
 ## Proof
 

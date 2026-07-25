@@ -12,10 +12,6 @@ short: "both are ZF theorems; the choosing is a separate cost"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -25,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "Axiom schema of replacement (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_schema_of_replacement"
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
 pipeline_run: null
 ---
 
@@ -74,6 +72,6 @@ is never the recursion.
 
 **The three choice-free constructions on this page.** The collapsing map of [[thm-mostowski-collapse]], the family of order types in [[thm-hartogs]], and the comparison map of [[lem-well-order-comparability]] are all defined by formulas, which is why each is a ZF theorem. Their proofs say so explicitly, and the reason is always the same: rigidity of well-orders makes the relevant witnesses unique ([[lem-well-order-rigid]]).
 
-**Dependent choice is the usual hidden cost.** A construction along $\mathbb{N}$ that picks an object at each step, using the previous one, needs the principle of dependent choice, which is strictly weaker than the Axiom of Choice and strictly stronger than ZF. It is not transfinite recursion that costs this; it is the picking. The ledger of principles is [[rem-choice-ledger]].
+**Dependent choice is the usual hidden cost.** A construction along $\mathbb{N}$ that picks an object at each step, using the previous one, needs the principle of dependent choice (DC). It is not transfinite recursion that costs this; it is the picking. Where DC sits is a separate question and a strictly metamathematical one: **if ZF is consistent**, then DC is not a theorem of ZF and DC does not imply the Axiom of Choice, so DC is then strictly between the two. Both separations are external results, established by forcing and permutation models, quoted from the references and proved nowhere in this library; the consistency hypothesis cannot be dropped and cannot be proved inside ZF. **The refutation above needs none of this**, because transfinite induction and transfinite recursion are outright theorems of ZF and the claim is refuted by exhibiting their proofs. The ledger of principles is [[rem-choice-ledger]].
 
 **Ordinary induction is the same story.** Nobody suspects induction on $\mathbb{N}$ ([[thm-induction-principle]]) of using choice, and transfinite induction is the same theorem with $\mathbb{N}$ replaced by an arbitrary well-order. The proofs are the same length and use the same single ingredient.

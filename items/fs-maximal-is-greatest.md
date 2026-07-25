@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -32,9 +28,10 @@ nothing strictly above it, then every element is below $m$
 ([[def-maximal-element]]).
 
 The statement is plausible because it is true in every **totally** ordered set,
-which is where most intuition about order is formed. It fails as soon as two
-elements are incomparable, and since Zorn's lemma delivers only maximal elements,
-believing this is the standard way to misapply it.
+which is where most intuition about order is formed. What defeats it is a
+maximal element that is not above everything, which only a partial order permits;
+and since Zorn's lemma delivers maximal elements and nothing more, believing this
+is the standard way to misapply it.
 
 ## Facts & Assumptions
 
@@ -60,9 +57,16 @@ believing this is the standard way to misapply it.
 
 ## Remarks
 
-- The counterexample is as small as it can be. In a poset with at most one
-  element the claim holds vacuously, and any poset with two incomparable elements
-  refutes it, so two elements is the minimum.
+- The counterexample is as small as it can be. The empty poset has no maximal
+  element and satisfies the claim vacuously; a one-element poset satisfies it
+  outright, since its single element is maximal and is greatest by reflexivity.
+  So two elements is the minimum, and the antichain above achieves it.
+- **Incomparability alone is not what refutes the claim.** A poset can contain
+  incomparable elements and still have a greatest one: take
+  $P = \{a, b, c\}$ with $a < c$ and $b < c$ and nothing else, where $a$ and $b$
+  are incomparable while $c$ is above everything. What a refutation needs is a
+  maximal element that is not greatest, which is a strictly stronger demand than
+  the presence of an incomparable pair.
 - The same phenomenon at scale: ordering the proper subsets of a set by
   inclusion, every subset missing exactly one point is maximal, and when the set
   has at least two points there are several such subsets and no greatest one.

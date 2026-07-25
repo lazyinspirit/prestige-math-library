@@ -21,8 +21,9 @@ run a page from prompt to publish; the normative docs above win where they diffe
    canonical stratification into the file and re-run until clean (the repo stores
    the strictly stratified form: a step citing phase-k steps sits in phase k+1).
    Record `verification.precheck: pass`.
-3. **Cross-family judge** (before publish): session items → **GPT-5.4 primary,
-   Gemini fallback — NEVER a Claude model**; pipeline items → production lineup.
+3. **Cross-family judge** (before publish): session items → **GLM 5.2 primary
+   (`z-ai/glm-5.2`), GPT-5.4 then Gemini fallback — NEVER a Claude model, and
+   never GLM for a PIPELINE item, whose generator is GLM**; pipeline items → production lineup.
    The judge harness is `tools/judge.mts` (topic-neutral refuter over ofox; pass
    `--topic` and optional `--conventions`, set `JUDGE_COSTLOG` for the cost
    report). Record model/verdict/date in `verification.judge`; an item published

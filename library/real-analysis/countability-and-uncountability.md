@@ -2,7 +2,8 @@
 page: countability-and-uncountability
 title: "Countability and Uncountability"
 status: draft
-items: [def-injection-surjection-bijection, def-equinumerous, def-countable,
+items: [def-injection-surjection-bijection, def-equinumerous,
+        lem-nat-order-is-membership, def-countable,
         thm-schroder-bernstein, lem-subset-of-countable,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,
         thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice,
@@ -18,6 +19,15 @@ can be listed and those that cannot. It fixes the vocabulary of size without
 introducing cardinal numbers, proves that $\mathbb{Q}$ can be listed and that
 $\mathbb{R}$ cannot, and keeps an explicit account of which results need a choice
 principle and which do not.
+
+One preliminary is settled first. The naturals page defines the order on
+$\mathbb{N}$ additively, $m \le n$ when $m + k = n$ for some $k$, and only
+*remarks* that on the von Neumann naturals this coincides with membership. Every
+argument below reads a natural number as the set of its predecessors, so that
+coincidence is proved here, as [[lem-nat-order-is-membership]], from the additive
+order and induction alone. The ordinals page proves the same thing in far greater
+generality, but it comes much later in the library, so citing it here would be
+circular.
 
 The measuring stick is equinumerosity: $A \approx B$ when a bijection exists,
 $A \preceq B$ when an injection does. Two facts make this usable. The first is

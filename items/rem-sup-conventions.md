@@ -4,7 +4,9 @@ kind: remark
 title: "Conventions: $\\sup \\emptyset$, unbounded sets, and the extended reals"
 status: draft
 origin: session
-deps: [def-complete-ordered-field, def-infimum]
+deps: [def-complete-ordered-field, def-infimum, thm-infimum-property, fs-every-set-has-sup,
+       lem-sup-epsilon, lem-inf-epsilon, lem-sup-monotone, lem-sup-translate,
+       lem-sup-scale, lem-sup-sum]
 justified_by: []
 aliases: []
 landmark: false
@@ -31,10 +33,13 @@ $$\sup \emptyset = -\infty, \qquad \inf \emptyset = +\infty, \qquad \sup S = +\i
 With those conventions in force, every subset of $\mathbb{R}$ has a supremum and
 an infimum in $\overline{\mathbb{R}}$, and the two exceptional cases recorded in
 [[fs-every-set-has-sup]] disappear. The conventions are consistent and often
-convenient: $\sup \emptyset = -\infty$ is forced if one wants
-$\sup$ to be monotone under inclusion with $\sup$ of the whole line equal to
-$+\infty$, and it makes $\sup(S \cup T) = \max\{\sup S, \sup T\}$ hold without
-side conditions.
+convenient. The value $\sup \emptyset = -\infty$ is not arbitrary: it is forced
+by monotonicity under inclusion together with $\sup \{x\} = x$, since
+$\emptyset \subseteq \{x\}$ then gives $\sup \emptyset \le x$ for **every** real
+$x$, and $-\infty$ is the only element of $\overline{\mathbb{R}}$ below every
+real. (Monotonicity together with $\sup \mathbb{R} = +\infty$ forces nothing
+here: it only gives $\sup \emptyset \le +\infty$.) The convention also makes
+$\sup(S \cup T) = \max\{\sup S, \sup T\}$ hold without side conditions.
 
 **This library does not adopt them.** Two reasons, both about keeping the
 foundations honest.

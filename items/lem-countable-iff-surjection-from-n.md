@@ -4,7 +4,7 @@ kind: lemma
 title: "A nonempty set is at most countable iff it is a surjective image of $\\mathbb{N}$"
 status: draft
 origin: session
-deps: [def-countable, thm-well-ordering-principle, def-injection-surjection-bijection, lem-subset-of-countable, def-equinumerous, def-natural-numbers, def-nat-order]
+deps: [def-countable, thm-well-ordering-principle, def-injection-surjection-bijection, lem-subset-of-countable, def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "countable iff enumerable by a surjection"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -58,7 +54,7 @@ $a$ and $s$ alone.
 
 [L4] Every subset of an at most countable set is at most countable ([[lem-subset-of-countable]]).
 
-[L5] For naturals, $k \in n \iff k < n$, so a natural number $n$ is the set of naturals below it ([[def-nat-order]], [[def-natural-numbers]]).
+[L5] For naturals, $k \in n \iff k < n$, so a natural number $n$ is the set $\{\, k \in \mathbb{N} : k < n \,\}$ of naturals below it; in particular $0 \in n$ whenever $n \ne 0$ ([[lem-nat-order-is-membership]], proved earlier on this page from the additive order of [[def-nat-order]] on the von Neumann naturals of [[def-natural-numbers]]).
 
 ## Proof
 

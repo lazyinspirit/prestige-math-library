@@ -4,7 +4,7 @@ kind: definition
 title: "Finite, countably infinite, countable, uncountable"
 status: draft
 origin: session
-deps: [def-equinumerous, def-natural-numbers, def-nat-order]
+deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-finite-set, def-countably-infinite, def-uncountable]
 landmark: true
@@ -26,12 +26,16 @@ pipeline_run: null
 ## Definition
 
 Recall that a natural number is a von Neumann natural
-([[def-natural-numbers]]): $0 = \varnothing$, $\sigma(n) = n \cup \{n\}$, so that
+([[def-natural-numbers]]): $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$, so
+that
 
 $$n = \{\, m \in \mathbb{N} : m < n \,\} = \{0, 1, \dots, n-1\}$$
 
-is itself the set of its predecessors, with $<$ the order of [[def-nat-order]].
-Let $A$ be a set, and let $\approx$ be equinumerosity ([[def-equinumerous]]).
+is itself the set of its predecessors. Here $<$ is the order of
+[[def-nat-order]], which is defined additively, so the displayed identity is a
+theorem and not a convention: it is [[lem-nat-order-is-membership]], proved
+immediately above. Let $A$ be a set, and let $\approx$ be equinumerosity
+([[def-equinumerous]]).
 
 - $A$ is **finite** if $A \approx n$ for some $n \in \mathbb{N}$.
 - $A$ is **countably infinite** if $A \approx \mathbb{N}$.

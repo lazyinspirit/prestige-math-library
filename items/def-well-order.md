@@ -18,6 +18,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-order"
     - title: "Total order (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Total_order"
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
 pipeline_run: null
 ---
 
@@ -72,8 +74,18 @@ $x = y)$, and we write $(W, <)$ or $(W, \le)$ as convenient.
   Every one element set carries exactly one.
 - A well-order admits no infinite strictly decreasing sequence
   $x_0 > x_1 > x_2 > \cdots$, since the set of its terms would have no least
-  element. The converse, that a total order with no infinite strictly decreasing
-  sequence is a well-order, is **not** provable in ZF: it needs the principle of
-  dependent choice to assemble the decreasing sequence. This library therefore
-  takes the least element formulation as the definition and never uses the
-  descending sequence characterisation.
+  element. That direction is a theorem of ZF and is used freely here. The
+  **converse**, that a total order with no infinite strictly decreasing sequence
+  is a well-order, is a different matter: the natural argument takes a nonempty
+  $S$ with no least element and assembles a decreasing sequence inside it by
+  choosing each term below the previous one, which is exactly the principle of
+  **dependent choice** (DC), described in [[def-countable-choice]]. DC is not a
+  theorem of ZF **unless ZF is inconsistent**, and, granted the consistency of
+  ZF, the converse above is likewise unprovable in ZF. Both are external
+  metamathematical results, established by forcing and permutation models; they
+  are quoted from the references below and from the ledger
+  ([[rem-choice-ledger]]), and neither is proved anywhere in this library, which
+  contains neither technique. Nothing on this page depends on any of it: the
+  library takes the least element formulation as the definition and never uses
+  the descending sequence characterisation, precisely so that no result here
+  inherits that cost.

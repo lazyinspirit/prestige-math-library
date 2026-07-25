@@ -49,8 +49,11 @@ formula assigns $-2$ to $(-8)^{1/3}$ and nothing at all to $(-8)^{2/6}$, though
 $1/3$ and $2/6$ are the same rational.
 
 The inequalities then follow one from the next. AM-GM ([[thm-am-gm]]) is proved
-by Cauchy's forward-backward induction, over powers of two and then downward,
-with the equality case tracked throughout. Its weighted form
+by Cauchy's forward-backward induction, up a doubling sequence of **natural
+numbers** and then downward, with the equality case tracked throughout. The
+doubling sequence is defined by recursion inside $\mathbb{N}$ rather than written
+$2^{j}$, because a list length must be a natural number and $2^{j}$ would name a
+real ([[def-integer-power]] gives powers of a real base only). Its weighted form
 ([[thm-weighted-am-gm-rational]]) is stated for **rational** weights, and that
 restriction is not laziness: a real weight $w$ would require the symbol $x^{w}$,
 which does not exist in this library. Young's inequality

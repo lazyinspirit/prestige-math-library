@@ -11,10 +11,6 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -47,20 +43,47 @@ bearing, not decoration.
 
 [A3] Nonnegative reals do have roots: for $a \ge 0$ and $n \ge 1$ there is a unique $a^{1/n} \ge 0$ with $\big(a^{1/n}\big)^{n} = a$ ([[thm-nth-roots-exist]], [[thm-of-square-roots]]).
 
-[A4] Sign arithmetic for powers: $(-u)^{n} = (-1)^{n} u^{n}$, $(-1)^{2} = 1$, hence $(-1)^{n} = -1$ for odd $n$ and $(-1)^{n} = 1$ for even $n$ ([[lem-power-laws]], [[cor-of-neg-one-squared]], [[lem-of-mult-neg]], [[lem-of-sign-rules]]).
-
-[A5] $x \mapsto x^{n}$ is strictly increasing on $\{x \ge 0\}$ for $n \ge 1$ ([[lem-power-monotone]]).
-
 ## Refutation
 
 **Proof technique:** contradiction.
 
 1.1 Assume, for contradiction, that every real has a real square root; applying this to $-1 \in \mathbb{R}$ produces $y \in \mathbb{R}$ with $y^{2} = -1$. [assume-contra, given]
 
-1.2 Odd roots of negatives, by contrast, do exist, so the failure is genuinely about even exponents: for odd $n$ and $a < 0$ the element $x := -\,(-a)^{1/n}$ satisfies $x^{n} = (-1)^{n}\big((-a)^{1/n}\big)^{n} = -(-a) = a$; and for odd $n$ the map $x \mapsto x^{n}$ is a bijection of $\mathbb{R}$ onto itself, being strictly increasing on the nonnegatives by [A5], carrying negatives to negatives by $x^{n} = -(-x)^{n}$, and surjective by the displayed formula together with [A3]. [A3, A4, A5]
-
 2.1 By [A1] the element $y^{2}$ is nonnegative, so $-1 = y^{2} \ge 0$; but $-1 < 0$ by [A2], and no element is both $\ge 0$ and $< 0$. [step 1.1, A1, A2]
 
 3.1 The obstruction is exactly the order, and it applies in every ordered field, not only in $\mathbb{R}$: completeness is never used, so no ordered field contains a square root of a negative element, and adjoining one, as happens in $\mathbb{C}$, necessarily destroys the order. [step 2.1, A1, A2]
 
-4.1 The assumption of step 1.1 therefore fails: there is no real $y$ with $y^{2} = -1$, so the claim that every real has a real square root is false, and the correct statements are [A3] with its hypothesis $a \ge 0$ kept. [step 2.1, step 3.1, step 1.2, step 1.1, discharge-contradiction] ∎
+4.1 The assumption of step 1.1 therefore fails: there is no real $y$ with $y^{2} = -1$, so the claim that every real has a real square root is false, and the correct statements are [A3] with its hypothesis $a \ge 0$ kept. [step 2.1, step 3.1, step 1.1, A3, discharge-contradiction] ∎
+
+## Remarks
+
+- **What fails is evenness of the exponent, not the taking of roots.** Odd roots
+  of negative numbers do exist in $\mathbb{R}$. The library has no general theory
+  of parity, so fix the local abbreviation: call a natural $n$ **odd** when
+  $n = 2k + 1$ for some natural $k$. Every odd $n$ satisfies $n \ge 1$.
+- **First, $(-1)^{n} = -1$ for odd $n$**, which is a computation and not an
+  unstated induction: $(-1)^{2k+1} = \big((-1)^{2}\big)^{k} \cdot (-1)$ by the
+  addition and iterated-power laws for natural exponents ([[lem-power-laws]],
+  claim 1), $(-1)^{2} = (-1)(-1) = 1$ ([[cor-of-neg-one-squared]]), and
+  $1^{k} = 1$ ([[lem-power-monotone]], claim 4); so the product is
+  $1 \cdot (-1) = -1$. Consequently $(-u)^{n} = (-1)^{n} u^{n} = -\,u^{n}$ for
+  every $u \in \mathbb{R}$ and odd $n$ ([[lem-power-laws]], [[lem-of-mult-neg]]).
+- **Every real is an $n$-th power, for odd $n$.** For $a \ge 0$ take
+  $x = a^{1/n}$ ([A3], [[thm-nth-roots-exist]]). For $a < 0$ take
+  $x := -\,(-a)^{1/n}$, which is legitimate because $-a > 0$ ([[lem-of-sign-rules]]),
+  and then $x^{n} = -\big((-a)^{1/n}\big)^{n} = -(-a) = a$ by the previous item.
+- **And the $n$-th power map is injective for odd $n$**, which the strict
+  increase on $\{x \ge 0\}$ alone does not give, since a sign statement is not a
+  monotonicity statement. The map is strictly increasing on the *whole* line.
+  On $\{x \ge 0\}$ that is [[lem-power-monotone]], claim 2. If $x < y \le 0$ then
+  $0 \le -y < -x$, so $(-y)^{n} < (-x)^{n}$ by that same claim, and negating
+  gives $x^{n} = -(-x)^{n} < -(-y)^{n} = y^{n}$ ([[lem-of-sign-rules]]). If
+  $x < 0 \le y$ then $-x > 0$ gives $(-x)^{n} > 0$, so $x^{n} = -(-x)^{n} < 0$,
+  while $y^{n} \ge 0$ ([[lem-power-monotone]], claim 1). So $x < y$ always
+  implies $x^{n} < y^{n}$; the map is injective, and with the surjectivity above
+  it is a bijection of $\mathbb{R}$ onto itself for every odd $n$.
+- **None of this rescues the even case**, and that is the point of the item: for
+  even $n$, meaning $n = 2k$, the same computation gives
+  $(-1)^{n} = \big((-1)^{2}\big)^{k} = 1^{k} = 1$, so $x^{n} = (-x)^{n} \ge 0$ for
+  every $x$, powers of both signs land in $\{x \ge 0\}$, and the refutation above
+  applies verbatim with $n = 2$.

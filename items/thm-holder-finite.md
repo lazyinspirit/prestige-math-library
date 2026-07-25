@@ -4,17 +4,13 @@ kind: theorem
 title: "Hölder's inequality for finite sums (rational exponents)"
 status: draft
 origin: session
-deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-of-abs-value, def-abs-value, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
+deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-of-abs-value, def-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -53,7 +49,7 @@ expression is left undefined. Taking $p = q = 2$ recovers the root form of
 
 [L4] Absolute values ([[lem-of-abs-value]], [[def-abs-value]]): $|x| \ge 0$, $|xy| = |x||y|$, and $|x| = 0$ only for $x = 0$.
 
-[L5] Order arithmetic: scaling an inequality by a positive element and adding inequalities, with inverses of positives positive ([[lem-of-sign-rules]], [[lem-of-inverse-positive]], [[lem-of-q-embeds]], [[def-rat-order]]).
+[L5] Order arithmetic: adding inequalities, that is $u \le v$ and $u' \le v'$ imply $u + u' \le v + v'$ ([[lem-of-add-order]]); scaling an inequality by a positive element ([[lem-of-sign-rules]]); and inverses of positives being positive ([[lem-of-inverse-positive]]). Rational exponents are read in $\mathbb{R}$ through the order-preserving embedding of $\mathbb{Q}$ ([[lem-of-q-embeds]], [[def-rat-order]]).
 
 ## Proof
 

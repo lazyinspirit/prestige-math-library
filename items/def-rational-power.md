@@ -4,7 +4,7 @@ kind: definition
 title: "Rational powers $a^r$ of a positive base"
 status: draft
 origin: session
-deps: [thm-nth-roots-exist, def-integer-power, def-rationals, lem-rat-positive-denominator, lem-nat-embeds-int, def-rat-order]
+deps: [thm-nth-roots-exist, def-integer-power, def-rationals, lem-rat-positive-denominator, lem-nat-embeds-int, def-rat-order, lem-power-monotone, lem-power-laws, lem-of-inverse-positive]
 justified_by: [lem-rational-power-well-defined]
 aliases: []
 landmark: true
@@ -67,10 +67,18 @@ rather than for positive ones only.
   is unambiguous, and rational powers extend integer powers on positive bases.
   At $r = 1/n$ it returns $\big(a^{1/n}\big)^{1} = a^{1/n}$, so the root notation
   of [[thm-nth-roots-exist]] is the special case $r = 1/n$, as intended.
-- $a^{r} > 0$ for every $a > 0$ and $r \in \mathbb{Q}$, since $a^{1/n} > 0$ and a
-  nonzero integer power of a positive element is positive
-  ([[lem-power-monotone]]). The exponent laws are [[lem-rational-power-laws]] and
-  the order behaviour is [[lem-rational-power-monotone]].
+- $a^{r} > 0$ for every $a > 0$ and **every** $r \in \mathbb{Q}$, the exponent $0$
+  included. Writing $r = m/n$ with $n \ge 1$: the root $a^{1/n}$ is positive
+  ([[thm-nth-roots-exist]]); for $m \ge 0$ the value $\big(a^{1/n}\big)^{m}$ is a
+  natural power of a positive element, hence positive, which is claim 1 of
+  [[lem-power-monotone]] and covers $m = 0$ as well, since $a^{0} = 1 > 0$; and for
+  $m < 0$ the value is $\big(a^{1/n}\big)^{m} = \Big(\big(a^{1/n}\big)^{-m}\Big)^{-1}$
+  ([[lem-power-laws]], claim 2), the inverse of a positive element, hence positive
+  ([[lem-of-inverse-positive]]). Note that [[lem-power-monotone]] is stated for
+  natural exponents only, so it does not by itself settle the negative case; that
+  is what the inverse step is for. The exponent laws are
+  [[lem-rational-power-laws]] and the order behaviour is
+  [[lem-rational-power-monotone]].
 - **The exponent is a rational, never a real.** There is no $a^{x}$ for
   irrational $x$ in this library. Nothing here is a limit, a series or a
   continuous function, and $a^{r}$ is computed in finitely many field operations

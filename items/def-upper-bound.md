@@ -40,8 +40,14 @@ $s \in S$.
 - **A least upper bound is unique when it exists.** If $u$ and $u'$ are both
   least upper bounds of $S$ then each is an upper bound and each is below the
   other, so $u \le u'$ and $u' \le u$, whence $u = u'$ by antisymmetry
-  ([[def-partial-order]]). This is what makes the notation $\sup S$ legitimate,
-  and it is the only place the antisymmetry axiom is really needed.
+  ([[def-partial-order]]). This is what makes the notation $\sup S$ legitimate.
+  Antisymmetry is not peculiar to this argument: the same two-inequality step
+  gives uniqueness of a greatest element ([[def-maximal-element]]), and it is
+  used essentially in [[thm-bourbaki-witt]], whose fixed point is obtained by
+  passing from $f(c) \le c$ and $c \le f(c)$ to $f(c) = c$. Drop antisymmetry
+  and it is the conclusion, not merely the notation, that goes: on two distinct
+  elements each below the other, every subset still has a least upper bound, yet
+  the map exchanging the two satisfies $x \le f(x)$ and has no fixed point.
 - **Every element of $P$ is an upper bound of the empty set**, vacuously.
   Consequently $\sup \emptyset$, when it exists, is the least element of $P$.
 - An upper bound of $S$ need not belong to $S$, and $S$ may have many upper

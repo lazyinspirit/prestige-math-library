@@ -12,10 +12,6 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -45,8 +41,8 @@ descriptions of a nonempty finite subset of $\mathbb{R}$ agree. That lemma is
 recorded in `justified_by` rather than in `deps`, since it is about the sets this
 lemma quantifies over and therefore depends on this one. This is what licenses
 the notation
-$\max\{a_1, \dots, a_n\}$ and $\min\{a_1, \dots, a_n\}$ used throughout the
-library, including in the already-published [[lem-cauchy-bounded]].
+$\max\{a_1, \dots, a_n\}$ and $\min\{a_1, \dots, a_n\}$ for finite sets of
+**real** numbers from this page onwards.
 
 ## Facts & Assumptions
 
@@ -87,9 +83,14 @@ library, including in the already-published [[lem-cauchy-bounded]].
   $\{a_0, \dots, a_n\}$, which is the Given below. So nothing on this page rests
   on an assumption that is never paid for; it is paid for later, and the payment
   is recorded in `justified_by`.
-- Only the total order of $\mathbb{R}$ is used, never completeness, so the same
-  argument gives a maximum and a minimum for every nonempty finite subset of any
-  ordered field ([[def-ordered-field]]).
+- **Only the total order is used, never completeness.** The base case needs
+  reflexivity, the inductive step needs totality and transitivity, and the
+  induction itself runs over $\mathbb{N}$. Reading the same three steps with
+  $\mathbb{R}$ replaced by an arbitrary ordered field ([[def-ordered-field]])
+  therefore yields a maximum and a minimum for every nonempty finite subset of
+  that field, $\mathbb{Q}$ included. That generalisation is an observation about
+  the argument above and is not itemised separately; in particular nothing
+  published earlier in the library is made to rest on it, or on this lemma.
 - Nonemptiness is essential: $\emptyset$ is finite and has no maximum
   ([[def-max-min]]). Finiteness is essential too: $\{x \in \mathbb{R} : 0 < x < 1\}$
   is bounded and has no maximum ([[fs-sup-belongs-to-set]]).

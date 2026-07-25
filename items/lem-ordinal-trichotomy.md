@@ -4,7 +4,7 @@ kind: lemma
 title: "Trichotomy and well-ordering of the ordinals"
 status: draft
 origin: session
-deps: [lem-ordinal-basics, def-ordinal, thm-transfinite-induction, def-well-order]
+deps: [lem-ordinal-basics, def-ordinal, thm-transfinite-induction, def-well-order, def-partial-order]
 justified_by: []
 aliases: [lem-ordinals-linearly-ordered]
 landmark: false
@@ -12,10 +12,6 @@ short: "exactly one of $\\alpha\\in\\beta$, $\\alpha=\\beta$, $\\beta\\in\\alpha
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -49,9 +45,11 @@ choice principle is used.
 
 [L1] Every element of an ordinal is an ordinal; $\alpha \notin \alpha$; $\alpha \subseteq \beta$ if and only if $\alpha \in \beta$ or $\alpha = \beta$; and any two ordinals are comparable under inclusion ([[lem-ordinal-basics]]).
 
-[L2] A well-order is a total order in which every nonempty subset has a least element; inclusion is reflexive, antisymmetric and transitive ([[def-well-order]]).
+[L2] A partial order is a reflexive, antisymmetric and transitive relation; a total order is a partial order any two of whose elements are comparable; and the strict part of $\le$ is $x < y :\iff (x \le y$ and $x \ne y)$ ([[def-partial-order]]).
 
-[L3] Transfinite induction holds on every well-order ([[thm-transfinite-induction]]).
+[L3] A well-order is a total order in which every nonempty subset has a least element ([[def-well-order]]).
+
+[L4] Transfinite induction holds on every well-order ([[thm-transfinite-induction]]).
 
 ## Proof
 
@@ -63,7 +61,7 @@ choice principle is used.
 
 3.1 Least elements: fix $\alpha \in A$; if $\alpha \cap A = \emptyset$ then $\alpha$ is $\in$-least in $A$, because $\beta \in A$ with $\beta \in \alpha$ would lie in $\alpha \cap A$, so trichotomy leaves $\alpha \in \beta$ or $\alpha = \beta$; otherwise $\alpha \cap A$ is a nonempty subset of $\alpha$ and has an $\in$-least element $\gamma$ there, and $\gamma$ is $\in$-least in $A$, because $\beta \in A$ with $\beta \in \gamma$ would satisfy $\beta \in \alpha$ by transitivity of $\alpha$ and so lie in $\alpha \cap A$ strictly below $\gamma$, and trichotomy again leaves $\gamma \in \beta$ or $\gamma = \beta$. [step 1.1, step 2.1, A1, L1]
 
-4.1 On $A$ the relation $\alpha \le \beta :\iff \alpha \subseteq \beta$ is reflexive, antisymmetric and transitive, hence a partial order; it is total by [L1] and step 1.1; its strict part is membership, since $\alpha \subseteq \beta$ with $\alpha \ne \beta$ is $\alpha \in \beta$ by [L1]; and every nonempty subset of $A$ has a least element by step 3.1, so $(A, \subseteq)$ is a well-order and [L3] applies to it. [step 1.1, step 3.1, L1, L2, L3]
+4.1 On $A$ the relation $\alpha \le \beta :\iff \alpha \subseteq \beta$ satisfies the three axioms of [L2], since inclusion is reflexive, antisymmetric by extensionality, and transitive, so it is a partial order; it is total by [L1] and step 1.1; its strict part in the sense of [L2] is membership, since $\alpha \subseteq \beta$ with $\alpha \ne \beta$ is $\alpha \in \beta$ by [L1]; and every nonempty subset of $A$ has a least element by step 3.1, so $(A, \subseteq)$ is a well-order in the sense of [L3] and [L4] applies to it. [step 1.1, step 3.1, L1, L2, L3, L4]
 
 5.1 Exactly one of the three alternatives holds, every nonempty set of ordinals has an $\in$-least element, and every set of ordinals is well ordered by inclusion. [step 2.1, step 3.1, step 4.1] ∎
 

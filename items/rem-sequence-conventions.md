@@ -4,7 +4,7 @@ kind: remark
 title: "Conventions for sequences: indexing, eventually, $\\lim$, and rational $\\varepsilon$"
 status: draft
 origin: session
-deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value]
+deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value, lem-finite-set-has-max, def-max-min, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,7 +38,10 @@ here purely so that no term is undefined at $k = 0$.
 
 **"Eventually" is the only quantifier pattern used for hypotheses.** A property
 holds eventually when it holds for all indices from some point on, and
-frequently when it holds for infinitely many ([[def-sequence]]). The two are
+frequently when, for every index $K$, it holds at some index $k \ge K$
+([[def-sequence]]). "Frequently" is stated in that cofinal form rather than as
+"at infinitely many indices" because no notion of finiteness is in scope on this
+page. The two are
 negations of each other applied to the complementary property: $P$ holds
 frequently exactly when $\lnot P$ does not hold eventually. Because of
 [[lem-limit-of-tail]], every hypothesis of the form "for all $k$" that concerns
@@ -67,9 +70,20 @@ the ordered-field embedding, again as recorded in [[def-sequence]].
 **A sequence is not its range, but boundedness only sees the range.** $(x_k)$ is
 a function; the set $\{x_k : k \in \mathbb{N}\}$ forgets order and multiplicity.
 The sequence is bounded, in the sense of [[def-sequence]], exactly when its range
-is a bounded subset of $\mathbb{R}$ in the sense of [[def-bounded-set]], since
-$|x_k| \le M$ holds for all $k$ if and only if $-M \le x_k \le M$ holds for all
-$k$ ([[lem-of-abs-value]]). Everything else about a sequence, convergence
+is a bounded subset of $\mathbb{R}$ in the sense of [[def-bounded-set]]. Both
+directions rest on the equivalence $|x| \le M \iff -M \le x \le M$: if
+$|x| \le M$ then $x \le |x| \le M$ and $-M \le -|x| \le x$, using
+$-|x| \le x \le |x|$ ([[lem-of-abs-value]]) together with the fact that
+$a \le b$ and $-b \le -a$ are the same assertion, both saying that $b - a$ is
+positive or zero ([[def-ordered-field]]); conversely, if $-M \le x \le M$ then
+$|x|$, being $x$ or $-x$ ([[lem-of-abs-value]]), is $\le M$ either way. Given a
+bound $M$ with $|x_k| \le M$ for all $k$, the range is bounded below by $-M$ and
+above by $M$. Conversely, given $\ell \le x_k \le u$ for all $k$, put
+$M := \max\{|\ell|, |u|\}$, which exists because a nonempty finite list of reals
+has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]); then
+$x_k \le u \le |u| \le M$ and $-M \le -|\ell| \le \ell \le x_k$, so
+$-M \le x_k \le M$ and hence $|x_k| \le M$ for every $k$, by transitivity of
+$\le$ ([[def-ordered-field]]). Everything else about a sequence, convergence
 included, depends on more than the range: the constant sequence $1$ and the
 alternating sequence of [[fs-bounded-implies-convergent]] both have range
 contained in $\{-1, 1\}$, and one converges while the other does not.

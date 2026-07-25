@@ -4,7 +4,7 @@ kind: false-statement
 title: "FALSE: $a^{m/n} := (a^{1/n})^{m}$ extends to negative bases"
 status: draft
 origin: session
-deps: [def-rational-power, lem-rational-power-well-defined, thm-nth-roots-exist, def-rationals, def-rat-order, def-integer-power, lem-of-square-positive, lem-power-laws, lem-power-monotone, lem-of-sign-rules, lem-of-mult-neg]
+deps: [def-rational-power, lem-rational-power-well-defined, thm-nth-roots-exist, def-rationals, def-rat-order, def-integer-power, lem-of-square-positive, lem-power-laws, lem-power-monotone, lem-of-sign-rules, lem-of-mult-neg, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
 aliases: []
 landmark: false
@@ -37,25 +37,27 @@ and this item is the reason for that restriction.
 
 **Given:** The base $a = -8$ and the rational $r = 1/3$; the formula under test is $a^{m/n} = \big(a^{1/n}\big)^{m}$, in which $a^{1/n}$ has to denote a real number whose $n$-th power is $a$ ([[def-rational-power]], [[thm-nth-roots-exist]]).
 
-[A1] The same rational has many representatives: $1/3 = 2/6$ in $\mathbb{Q}$, since $1 \cdot 6 = 3 \cdot 2$ ([[def-rationals]]). For a formula in $m$ and $n$ to define a function of $r$, all representatives must give the same value, which for positive bases is [[lem-rational-power-well-defined]].
+[A1] Numerals denote canonical naturals. For a natural $k$ the symbol $k$ inside $\mathbb{R}$ means $\iota(k) = k \cdot 1_{\mathbb{R}}$, where $\iota$ is the canonical order-preserving field embedding; $\iota(k) > 0$ for $k \ge 1$, and $\iota$ preserves products ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). So $8 > 0$ and therefore $-8 < 0$, and $2^{3} = \iota(2)\iota(2)\iota(2) = \iota(8) = 8$ ([[def-integer-power]]). This is where the numerals of this item enter $\mathbb{R}$; the order on $\mathbb{Q}$ ([[def-rat-order]]) is not what is being used when we write $-8 < 0$ in $\mathbb{R}$.
 
-[A2] No real has sixth power $-8$: for every $x \in \mathbb{R}$, $x^{6} = \big(x^{3}\big)^{2} \ge 0$, whereas $-8 < 0$ ([[lem-power-laws]], [[lem-of-square-positive]], [[def-integer-power]], [[def-rat-order]]).
+[A2] The same rational has many representatives: $1/3 = 2/6$ in $\mathbb{Q}$, since $1 \cdot 6 = 3 \cdot 2$ ([[def-rationals]]). For a formula in $m$ and $n$ to define a function of $r$, all representatives must give the same value, which for positive bases is [[lem-rational-power-well-defined]].
 
-[A3] Exactly one real has cube $-8$, namely $-2$: if $x^{3} = -8 < 0$ then $x < 0$, since $x \ge 0$ would give $x^{3} \ge 0$; and then $y := -x > 0$ satisfies $y^{3} = -x^{3} = 8$, so $y = 8^{1/3} = 2$ by uniqueness of the nonnegative cube root, whence $x = -2$ ([[thm-nth-roots-exist]], [[lem-power-monotone]], [[lem-of-sign-rules]], [[lem-of-mult-neg]]).
+[A3] No real has sixth power $-8$: for every $x \in \mathbb{R}$, $x^{6} = \big(x^{3}\big)^{2} \ge 0$, whereas $-8 < 0$ ([[lem-power-laws]], [[lem-of-square-positive]], [[def-integer-power]], [[def-rat-order]]).
+
+[A4] Exactly one real has cube $-8$, namely $-2$: if $x^{3} = -8 < 0$ then $x < 0$, since $x \ge 0$ would give $x^{3} \ge 0$; and then $y := -x > 0$ satisfies $y^{3} = -x^{3} = 8$, so $y = 8^{1/3} = 2$ by uniqueness of the nonnegative cube root, whence $x = -2$ ([[thm-nth-roots-exist]], [[lem-power-monotone]], [[lem-of-sign-rules]], [[lem-of-mult-neg]]).
 
 ## Refutation
 
 **Proof technique:** contradiction.
 
-1.1 Assume, for contradiction, that the formula does define $a^{r}$ for negative $a$ and every rational $r$, depending only on $a$ and $r$; then in particular $(-8)^{1/3}$ is a real number, and the value obtained from any representative $m/n$ of the rational $1/3$ is that same number. [assume-contra, given, A1]
+1.1 Assume, for contradiction, that the formula does define $a^{r}$ for negative $a$ and every rational $r$, depending only on $a$ and $r$; then in particular $(-8)^{1/3}$ is a real number, and the value obtained from any representative $m/n$ of the rational $1/3$ is that same number. [assume-contra, given, A2]
 
-2.1 Read through the representative $1/3$: the formula gives $(-8)^{1/3} = \big((-8)^{1/3}\big)^{1}$, where $(-8)^{1/3}$ is a real cube root of $-8$, and there is exactly one such real, namely $-2$; so the value is $-2$. [step 1.1, A3]
+2.1 Read through the representative $1/3$: the formula gives $(-8)^{1/3} = \big((-8)^{1/3}\big)^{1}$, where $(-8)^{1/3}$ is a real cube root of $-8$, and there is exactly one such real, namely $-2$; so the value is $-2$. [step 1.1, A1, A4]
 
-2.2 Read through the representative $2/6$: the formula gives $(-8)^{2/6} = \big((-8)^{1/6}\big)^{2}$, and $(-8)^{1/6}$ must be a real sixth root of $-8$, of which there is none. [step 1.1, A2]
+2.2 Read through the representative $2/6$: the formula gives $(-8)^{2/6} = \big((-8)^{1/6}\big)^{2}$, and $(-8)^{1/6}$ must be a real sixth root of $-8$, of which there is none. [step 1.1, A1, A3]
 
-3.1 The two readings are incompatible: by the assumption the rational $1/3 = 2/6$ has a single value, which step 2.1 computes to be $-2$, while step 2.2 shows that the very expression the formula prescribes for the representative $2/6$ names nothing at all in $\mathbb{R}$. [step 1.1, step 2.1, step 2.2, A1]
+3.1 The two readings are incompatible: by the assumption the rational $1/3 = 2/6$ has a single value, which step 2.1 computes to be $-2$, while step 2.2 shows that the very expression the formula prescribes for the representative $2/6$ names nothing at all in $\mathbb{R}$. [step 1.1, step 2.1, step 2.2, A2]
 
-4.1 The assumption therefore fails, and the failure is not an artefact of the chosen numbers: every rational $r$ has representatives with even denominator, and a negative base has no real root of even order by the argument of [A2], so for a negative base the formula depends on the representative and [[lem-rational-power-well-defined]] genuinely breaks down; this is exactly why [[def-rational-power]] requires $a > 0$. [step 3.1, step 1.1, A1, A2, discharge-contradiction] ∎
+4.1 The assumption therefore fails, and the failure is not an artefact of the chosen numbers: every rational $r$ has representatives with even denominator, and a negative base has no real root of even order by the argument of [A3], so for a negative base the formula depends on the representative and [[lem-rational-power-well-defined]] genuinely breaks down; this is exactly why [[def-rational-power]] requires $a > 0$. [step 3.1, step 1.1, A2, A3, discharge-contradiction] ∎
 
 ## Remarks
 

@@ -4,17 +4,13 @@ kind: lemma
 title: "The image of an extremal element is extremal"
 status: draft
 origin: session
-deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset]
+deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -41,6 +37,8 @@ $f(x)$ is extremal.
 
 [L3] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
 
+[L4] $\le$ is a partial order: it is reflexive ($u \le u$) and transitive ($u \le v$ and $v \le w$ imply $u \le w$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
+
 ## Proof
 
 **Proof technique:** cases.
@@ -57,9 +55,9 @@ $f(x)$ is extremal.
 
 2.1 The alternative $f(x) \le y$ is impossible: combined with $y < f(x)$ it would give $f(x) < f(x)$. Hence $y \le x$. [step 1.3, step 1.2]
 
-2.2 In the case $y < x$, extremality of $x$ gives $f(y) \le x$, and progressivity gives $x \le f(x)$, so $f(y) \le f(x)$ by transitivity. [step 1.4, A1, L3]
+2.2 In the case $y < x$, extremality of $x$ gives $f(y) \le x$, and progressivity gives $x \le f(x)$, so $f(y) \le f(x)$ by transitivity. [step 1.4, A1, L3, L4]
 
-2.3 In the case $y = x$, we get $f(y) = f(x)$, hence $f(y) \le f(x)$ by reflexivity. [step 1.5]
+2.3 In the case $y = x$, we get $f(y) = f(x)$, hence $f(y) \le f(x)$ by reflexivity. [step 1.5, L4]
 
 3.1 The relation $y \le x$ holds exactly when $y < x$ or $y = x$, so the two cases are exhaustive and $f(y) \le f(x)$ in both; therefore $f(x)$ is extremal. [step 2.1, step 2.2, step 2.3, cases-exhaustive] ∎
 

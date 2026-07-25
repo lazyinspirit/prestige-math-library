@@ -4,7 +4,7 @@ kind: lemma
 title: "Laws of rational exponents"
 status: draft
 origin: session
-deps: [def-rational-power, lem-rational-power-well-defined, lem-power-laws, thm-nth-roots-exist, def-rat-operations, lem-power-monotone, def-rationals, def-integer-power, lem-of-inverse-positive, def-rat-order]
+deps: [def-rational-power, lem-rational-power-well-defined, lem-power-laws, thm-nth-roots-exist, def-rat-operations, lem-power-monotone, def-rationals, def-integer-power, lem-of-inverse-positive, def-rat-order, thm-rat-ordered-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,8 +36,11 @@ rational powers as in [[def-rational-power]]. Then:
 
 Claims 2 and 3 persist in the supplementary case of [[def-rational-power]]: for
 $a, b \ge 0$ and rationals $r, s > 0$ ([[def-rat-order]]) one still has
-$(ab)^{r} = a^{r} b^{r}$ and $a^{r+s} = a^{r} a^{s}$, both sides being $0$ as
-soon as a base is $0$.
+$(ab)^{r} = a^{r} b^{r}$ and $a^{r+s} = a^{r} a^{s}$. The two identities degenerate
+differently, and it is worth saying how. In the product identity, a zero base on
+either side makes both sides $0$. In the addition identity only the base $a$
+occurs, so it degenerates only when $a = 0$, and then both sides are $0$; when
+$a > 0$ that identity holds with no hypothesis on $b$ at all.
 
 ## Facts & Assumptions
 
@@ -47,9 +50,13 @@ soon as a base is $0$.
 
 [L2] Laws of integer exponents ([[lem-power-laws]], [[def-integer-power]]): for $x, y \ne 0$ and integers $j, k$, $x^{j+k} = x^{j}x^{k}$, $(x^{j})^{k} = x^{jk}$, $(xy)^{j} = x^{j}y^{j}$ and $x^{-j} = (x^{j})^{-1}$.
 
-[L3] Positivity and injectivity ([[lem-power-monotone]], [[lem-of-inverse-positive]]): $x > 0$ implies $x^{j} > 0$ for every integer $j$; and $x \mapsto x^{N}$ is injective on $\{x \ge 0\}$ for $N \ge 1$.
+[L3] Positivity and injectivity: $x > 0$ implies $x^{j} > 0$ for every NATURAL $j$ ([[lem-power-monotone]], claim 1), and hence for every integer $j$, since $x^{-j} = \big(x^{j}\big)^{-1}$ ([[lem-power-laws]], claim 2) and the inverse of a positive element is positive ([[lem-of-inverse-positive]]); and $x \mapsto x^{N}$ is injective on $\{x \ge 0\}$ for $N \ge 1$ ([[lem-power-monotone]], claim 2).
 
 [L4] Rational arithmetic ([[def-rat-operations]], [[def-rationals]]): any two rationals can be written with a common positive denominator, $m/N + k/N = (m+k)/N$, $-(m/N) = (-m)/N$, and $(m/n)(p/q) = (mp)/(nq)$.
+
+[L5] The order on $\mathbb{Q}$ ([[thm-rat-ordered-field]], [[def-rat-order]]) is compatible with addition, so $r > 0$ and $s > 0$ imply $r + s > 0$.
+
+[L6] The supplementary clause of [[def-rational-power]]: $0^{t} = 0$ for every rational $t > 0$, and $0^{t}$ is left undefined for $t \le 0$. In a field, a product with a factor $0$ is $0$ ([[lem-of-zero-mult]]).
 
 ## Proof
 
@@ -69,6 +76,8 @@ soon as a base is $0$.
 
 3.3 Claim 5: write $r = m/n$ and $s = p/q$ with $n, q \ge 1$, and put $x := a^{1/(nq)}$, so $x > 0$ and $x^{nq} = a$; then $\big(x^{q}\big)^{n} = x^{qn} = a$ with $x^{q} > 0$, so $x^{q} = a^{1/n}$ by uniqueness of the nonnegative $n$-th root; putting $z := x^{m}$ we get $z > 0$ and $z^{q} = \big(x^{m}\big)^{q} = \big(x^{q}\big)^{m} = \big(a^{1/n}\big)^{m} = a^{r}$, so $z$ is the nonnegative $q$-th root of $a^{r}$, that is $z = \big(a^{r}\big)^{1/q}$; therefore $\big(a^{r}\big)^{s} = \Big(\big(a^{r}\big)^{1/q}\Big)^{p} = z^{p} = \big(x^{m}\big)^{p} = x^{mp} = \big(a^{1/(nq)}\big)^{mp} = a^{(mp)/(nq)} = a^{rs}$. [step 2.1, L1, L2, L3, L4]
 
-4.1 The supplementary nonnegative case: if $a, b \ge 0$ and $r, s > 0$ are rational, then either both bases are positive, and claims 2 and 3 are steps 3.1 and 2.2, or some base is $0$, in which case $0^{t} = 0$ for every rational $t > 0$ makes both sides of $(ab)^{r} = a^{r}b^{r}$ and of $a^{r+s} = a^{r}a^{s}$ equal to $0$. [step 3.1, step 2.2, L1]
+3.4 The supplementary nonnegative case, product identity: let $a, b \ge 0$ and let $r > 0$ be rational; if $a > 0$ and $b > 0$ this is step 2.2, and otherwise $a = 0$ or $b = 0$, so $ab = 0$ and the left side is $0^{r} = 0$, while the right side $a^{r}b^{r}$ has a factor $0^{r} = 0$ and is therefore $0$ as well. [step 2.2, L6]
 
-5.1 All five claims hold for positive bases and arbitrary rational exponents, together with the two supplementary identities for nonnegative bases and positive rational exponents. [step 2.1, step 3.1, step 3.2, step 2.2, step 3.3, step 4.1] ∎
+4.1 The supplementary nonnegative case, addition identity: the identity $a^{r+s} = a^{r}a^{s}$ involves the base $a$ only, so nothing need be assumed about $b$; for $a > 0$ it is step 3.1 verbatim, which uses only $a > 0$, and both sides are then positive rather than $0$; for $a = 0$ the exponents satisfy $r + s > 0$, so the left side is $0^{r+s} = 0$ and the right side is $0 \cdot 0 = 0$. [step 3.1, L5, L6]
+
+5.1 All five claims hold for positive bases and arbitrary rational exponents, together with the two supplementary identities for nonnegative bases and positive rational exponents. [step 2.1, step 3.1, step 3.2, step 2.2, step 3.3, step 3.4, step 4.1] ∎

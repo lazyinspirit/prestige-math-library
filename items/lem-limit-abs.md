@@ -4,7 +4,7 @@ kind: lemma
 title: "The absolute value is compatible with limits"
 status: draft
 origin: session
-deps: [def-real-limit, def-sequence, cor-of-reverse-triangle, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
+deps: [def-real-limit, def-sequence, cor-of-reverse-triangle, lem-of-abs-value, thm-algebra-of-limits, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "$x_k\\to x$ gives $|x_k|\\to|x|$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -34,7 +30,8 @@ Let $(x_k)$ be a sequence of reals converging to $x \in \mathbb{R}$
 ([[def-sequence]], [[def-real-limit]]). Then $(|x_k|)$ converges to $|x|$.
 
 In the single case $x = 0$ the implication reverses: $|x_k| \to 0$ if and only if
-$x_k \to 0$. For $x \ne 0$ the converse fails.
+$x_k \to 0$. Whether the implication can be reversed for $x \ne 0$ is taken up in
+the remarks below; it is no part of what the proof establishes.
 
 ## Facts & Assumptions
 
@@ -60,8 +57,8 @@ $x_k \to 0$. For $x \ne 0$ the converse fails.
 
 ## Remarks
 
-- **The converse fails in general.** Take the sequence with $x_k$ alternating between $1$ and $-1$, constructed in [[fs-bounded-implies-convergent]]. Then $|x_k| = 1$ for every $k$, so $(|x_k|)$ converges to $1$, while $(x_k)$ does not converge at all. Passing to absolute values destroys sign information, and only at $0$ is there no sign information to destroy.
+- **The converse fails at every nonzero limit.** This is not established by the proof above, which proves only the forward implication and the equivalence at $x = 0$; the witness is exhibited here instead. Fix a real $c \ne 0$, let $(s_k)$ be the alternating sequence of $1$ and $-1$ constructed in [[fs-bounded-implies-convergent]], which is shown there not to converge, and put $w_k := s_k c$. Then $|w_k| = |s_k|\,|c| = |c|$ for every $k$ ([[lem-of-abs-value]]), so $(|w_k|)$ is the constant sequence $|c|$ and converges to $|c|$ ([[def-sequence]]). But $(w_k)$ does not converge: if it converged to some $\ell$, then $(s_k) = (c^{-1}w_k)$ would converge to $c^{-1}\ell$ by the scalar-multiple rule ([[thm-algebra-of-limits]]), which it does not. Passing to absolute values destroys sign information, and only at $0$ is there no sign information to destroy.
 
-- Combined with [[thm-algebra-of-limits]] this gives the usual companions: $\max\{x_k, y_k\} = \tfrac{1}{2}\bigl(x_k + y_k + |x_k - y_k|\bigr)$ and $\min\{x_k, y_k\} = \tfrac{1}{2}\bigl(x_k + y_k - |x_k - y_k|\bigr)$ converge to $\max\{x, y\}$ and $\min\{x, y\}$ ([[def-max-min]]).
+- Combined with [[thm-algebra-of-limits]] this gives the usual companions: the identities $\max\{u, v\} = \tfrac{1}{2}\bigl(u + v + |u - v|\bigr)$ and $\min\{u, v\} = \tfrac{1}{2}\bigl(u + v - |u - v|\bigr)$ ([[def-max-min]]), each a two-case check on the sign of $u - v$, exhibit $\max\{x_k, y_k\}$ and $\min\{x_k, y_k\}$ as sums of convergent sequences, so they converge to $\max\{x, y\}$ and $\min\{x, y\}$.
 
 - The lemma is the sequential form of the statement that $u \mapsto |u|$ is continuous, but continuity is not available yet and is not needed: the reverse triangle inequality does the work directly.

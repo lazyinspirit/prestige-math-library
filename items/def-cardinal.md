@@ -36,15 +36,46 @@ that is, $\kappa$ is not equinumerous with any strictly smaller ordinal.
 **Cardinality, under the Axiom of Choice.** Assume the Axiom of Choice
 ([[def-axiom-of-choice]]) and let $X$ be a set. Then $X$ carries a well-order
 ([[thm-well-ordering-theorem]]), which has an order type $\alpha$
-([[thm-mostowski-collapse]]) and in particular $\alpha \approx X$. The set
-$\{\xi \in \alpha^{+} : \xi \approx X\}$ is a nonempty set of ordinals
-([[lem-ordinal-basics]]), so it has a least element $\kappa$
-([[lem-ordinal-trichotomy]]). This $\kappa$ is the **cardinality** of $X$,
-written $|X|$; it is a cardinal, because $\beta \in \kappa$ with
-$\beta \approx \kappa \approx X$ would lie in $\alpha^{+}$ and contradict the
-minimality of $\kappa$.
+([[thm-mostowski-collapse]]) and in particular $\alpha \approx X$. Now
+$\alpha^{+} = \alpha \cup \{\alpha\}$ is an ordinal ([[lem-ordinal-basics]],
+claim (c)) whose elements are ordinals (claim (a)) and which contains $\alpha$,
+so $C = \{\xi \in \alpha^{+} : \xi \approx X\}$ is a nonempty set of ordinals and
+has an $\in$-least element $\kappa$ ([[lem-ordinal-trichotomy]]). This $\kappa$ is the
+**cardinality** of $X$, written $|X|$; it is a cardinal, because
+$\beta \in \kappa$ with $\beta \approx \kappa \approx X$ would lie in
+$\alpha^{+}$ and contradict the minimality of $\kappa$.
+
+**Well-definedness: $\kappa$ does not depend on the well-order or on $\alpha$.**
+The recipe above instantiates a well-order of $X$ and an order type $\alpha$ for
+it, and $X$ will in general carry many well-orders with many different order
+types, so the value $\kappa$ has to be shown independent of both. It is, because
+$\kappa$ is in fact the least ordinal equinumerous with $X$ **outright**, a
+description in which neither the well-order nor $\alpha$ appears. Let $\beta$ be
+any ordinal with $\beta \approx X$. By trichotomy for ordinals
+([[lem-ordinal-trichotomy]]) exactly one of $\beta \in \alpha^{+}$,
+$\beta = \alpha^{+}$, $\alpha^{+} \in \beta$ holds. In the first case
+$\beta \in C$, so $\kappa \subseteq \beta$ by minimality of $\kappa$. In the
+other two cases claim (f) of [[lem-ordinal-basics]] gives
+$\alpha^{+} \subseteq \beta$, and $\alpha \in \alpha^{+}$ because
+$\alpha^{+} = \alpha \cup \{\alpha\}$, so $\alpha \in \beta$ and hence
+$\alpha \subseteq \beta$ by claim (f) again; and $\alpha \in C$, so
+$\kappa \subseteq \alpha$ by minimality, whence $\kappa \subseteq \beta$. In every case
+$\kappa \subseteq \beta$, that is $\kappa \le \beta$. So $\kappa$ is the least
+element of the collection of **all** ordinals equinumerous with $X$, and any two
+runs of the recipe, from any two well-orders of $X$, return the same $\kappa$.
 
 ## Remarks
+
+- **What the well-definedness argument does and does not need.** The obligation
+  is that $|X|$ depend on $X$ alone, and it is discharged in the definition
+  itself, from two lemmas that are genuine prerequisites of this item and
+  therefore sit in `deps` rather than in `justified_by`: comparability and
+  trichotomy of ordinals ([[lem-ordinal-trichotomy]]) and the elementary closure
+  facts ([[lem-ordinal-basics]]). Neither mentions cardinals, so neither points
+  forward, and no separate discharging lemma is needed. The bound $\alpha^{+}$ is
+  a device for turning "the least ordinal equinumerous with $X$" into a
+  Separation instance over a **set**; the argument above is what shows that the
+  device does not change the answer.
 
 - **The definition is choice-free; the cardinality assignment is not.** Being a
   cardinal is a property of an ordinal and needs no axiom beyond ZF. Attaching a

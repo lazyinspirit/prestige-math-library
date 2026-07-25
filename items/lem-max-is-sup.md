@@ -4,17 +4,13 @@ kind: lemma
 title: "The supremum is attained exactly when a maximum exists"
 status: draft
 origin: session
-deps: [def-max-min, lem-sup-unique, def-complete-ordered-field, lem-reflection]
+deps: [def-max-min, lem-sup-unique, def-complete-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -35,8 +31,7 @@ Let $S \subseteq \mathbb{R}$ be nonempty.
    $\max S = \sup S$.
 
 Hence, for a set whose supremum exists, the supremum is attained (belongs to the
-set) precisely when the set has a maximum, and then the two agree. The dual
-statement for infima and minima follows by reflection ([[lem-reflection]]).
+set) precisely when the set has a maximum, and then the two agree.
 
 ## Facts & Assumptions
 
@@ -64,6 +59,11 @@ statement for infima and minima follows by reflection ([[lem-reflection]]).
 
 ## Remarks
 
+- The dual statement, that $\inf S$ is attained exactly when $S$ has a minimum
+  and then $\inf S = \min S$, is not proved above. It follows by reflection:
+  $m = \max S$ if and only if $-m = \min(-S)$, and $\inf X = -\sup(-X)$
+  ([[lem-reflection]], [[thm-infimum-property]]), so applying the two claims
+  proved here to $-S$ and negating gives the minimum form.
 - Claim 1 needs no completeness assumption: a set with a maximum has a supremum
   for free, since the maximum is already the least upper bound. Only claim 2
   presupposes that $\sup S$ exists, which for a nonempty set bounded above is

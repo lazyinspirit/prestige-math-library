@@ -4,17 +4,13 @@ kind: false-statement
 title: "FALSE: limits preserve strict inequalities"
 status: draft
 origin: session
-deps: [lem-limit-preserves-order, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
+deps: [lem-limit-preserves-order, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -75,6 +71,6 @@ $x_k = 0$ and $y_k = 1/(k+1)$, whose limits are both $0$.
 
 - The reason is structural rather than accidental. A strict inequality between two sequences is a statement about each index separately, and a gap that is positive at every index may shrink towards $0$; the limit records only what is left after the shrinking. Non-strict inequalities survive precisely because "$\ge 0$" is stable under this shrinking, which is the content of [[lem-limit-preserves-order]].
 
-- No hypothesis can be added to the sequences alone to rescue strictness. The witness above may be shifted, so for any two reals $a < b$ one may arrange convergent sequences with $x_k < y_k$ at every index and equal limits; only a hypothesis on the limits themselves, such as a fixed positive gap $y_k - x_k \ge c > 0$, restores a strict conclusion, and then it is [[lem-limit-preserves-order]] applied to $y_k - x_k$ and the constant $c$ that does the work.
+- **Strictness at every index is never enough by itself, and the failure has nothing to do with the limit being $0$.** The witness may be shifted: for any real $a$, the sequences $x_k := a$ and $y_k := a + 1/(k+1)$ again satisfy $x_k < y_k$ at every index, and both converge to $a$ by the sum rule applied to a constant sequence and a null sequence ([[thm-algebra-of-limits]]), so no value of the common limit is exceptional. What does repair the claim is a *quantitative* strengthening of the hypothesis, for instance a uniform gap $y_k - x_k \ge c$ for a fixed real $c > 0$: then $(y_k - x_k)$ converges to $\lim_k y_k - \lim_k x_k$ ([[thm-algebra-of-limits]]) and [[lem-limit-preserves-order]], applied to the constant sequence $c$ and to $(y_k - x_k)$, gives $\lim_k y_k - \lim_k x_k \ge c > 0$. The moral is that $x_k < y_k$ carries no lower bound on the gap, not that hypotheses on the sequences are powerless.
 
 - The sequence $1/(k+1)$ used here is the standard witness that the Archimedean property is what makes $\mathbb{R}$ have no infinitesimals ([[thm-of-archimedean]]); by [[lem-reciprocal-of-null-diverges]] its reciprocals diverge to $+\infty$.

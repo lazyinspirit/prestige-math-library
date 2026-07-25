@@ -21,6 +21,23 @@ The judge is told to treat cited items as assumed-correct and is not shown them.
 the pipeline reads the item that a fact cites**, and the dominant defect class below is invisible
 to all three. That is the finding this benchmark exists to hold onto.
 
+## What this benchmark is NOT: the verifier tier hallucinates too
+
+One labelled defect was a **fabricated quotation** (`rem-choice-ledger`, corrected in place below).
+The verifier attributed a sentence to an item that has never contained it in any revision. It was
+caught only because the re-authoring agent grepped for the string before editing, found nothing,
+and said so instead of quietly "fixing" prose that was already correct.
+
+Two consequences, and neither is optional:
+
+1. **This file is high-quality evidence, not ground truth.** Every verdict here is one Opus
+   verifier's reading. Treat a defect entry as a *lead to check*, exactly as a judge rejection is.
+   The tier ordering in `WORKFLOW.md` §0 is about who has more context, not about who is honest.
+2. **Standing instruction for any agent acting on a defect entry: verify the quoted string exists
+   before you change anything.** `grep` the item. If the quote is not there, report that and stop;
+   do not reword nearby prose to make the entry true. A verifier that invents evidence will
+   otherwise cause an author to damage a correct proof.
+
 ## Judge performance against this ground truth
 
 | configuration | rejects | real caught | recall | precision |
@@ -83,7 +100,8 @@ the author brief, and `tools/citecheck.mjs`, are aimed at.
 
 ### ordinals-and-transfinite-recursion (7 of 23)
 - `lem-omega-least-limit-ordinal` **C+A** — "least limit ordinal" proves only ∈-minimality; comparability uncited. `[L3]`'s stated derivation of `n < σ(n)` is wrong.
-- `rem-choice-ledger` **B** — three defects, including the same "costs exactly AC" falsehood as `cor-ac-iff-zorn`, plus **a session process note in live prose** ("which is being written alongside this one").
+- `rem-choice-ledger` **B** — two defects: the same "costs exactly AC" falsehood as `cor-ac-iff-zorn`, and "Weakest of the three" / "Exactly once so far", which misrank AC_ω and DC (they are incomparable) and overstate the choice ledger.
+  **LABEL CORRECTED 2026-07-25.** This entry originally listed a third defect, *a session process note in live prose ("which is being written alongside this one")*. **That string never existed** — not in the working tree, not in `library/`, and not in any revision (`git log --all -S`). The page verifier invented the quote. The item was still correctly WITHHELD on its other two defects, so the count of 50 is unchanged, but see "What this benchmark is not" below.
 - `def-cardinal` **E** — `|X|` built from an instantiated well-order with no independence argument; `justified_by` empty.
 - `lem-ordinal-trichotomy` **A** — `[L2]` attributes inclusion's order axioms to `def-well-order`. *(fixed)*
 - `cor-ac-iff-well-ordering` **B+D** — "an equivalence of ZF-theorems" reads as asserting all three are ZF theorems; "each strictly weaker than AC" stated bare.

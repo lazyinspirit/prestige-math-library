@@ -4,7 +4,7 @@ kind: lemma
 title: "A null sequence times a bounded sequence is null"
 status: draft
 origin: session
-deps: [def-real-limit, def-sequence, lem-of-abs-value, lem-of-sign-rules, thm-of-archimedean, lem-rat-embeds-dense, prop-of-multiply-inequalities, lem-of-inverse-positive, lem-of-add-order, cor-of-one-positive, def-complete-ordered-field, def-ordered-field]
+deps: [def-real-limit, def-sequence, lem-of-abs-value, lem-of-sign-rules, thm-of-archimedean, lem-rat-embeds-dense, prop-of-multiply-inequalities, lem-of-inverse-positive, lem-of-add-order, cor-of-one-positive, lem-finite-set-has-max, def-max-min, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "null times bounded is null"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -70,8 +66,8 @@ rule for limits.
 
 ## Remarks
 
-- The hypothesis on $(y_k)$ cannot be weakened to "eventually bounded" without comment, but it need not be: by [[lem-limit-of-tail]] a sequence bounded from some index on is bounded outright, since the finitely many earlier terms are absorbed into the bound exactly as in [[lem-convergent-implies-bounded]].
+- The hypothesis on $(y_k)$ looks weaker if it is stated as "eventually bounded", but it is not: a sequence bounded from some index $K$ on is bounded outright. If $|y_k| \le M$ for every $k \ge K$, then $M' := \max\{\, |y_0|, \dots, |y_{K-1}|, M \,\}$ exists, because a nonempty finite list of reals has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]), and $|y_k| \le M'$ for every $k$. That is the same absorption of finitely many initial terms used in [[lem-convergent-implies-bounded]].
 
-- Boundedness of $(y_k)$ is essential. With $x_k = 1/(k+1)$, which is null, and $y_k = (k+1)^2$, which is unbounded, the product is $k+1$, which is unbounded and certainly not null. The lemma is therefore sharp in the sense that the bounded factor may not be replaced by an arbitrary one.
+- Boundedness of $(y_k)$ is essential. Take $x_k := 1/(k+1)$, which is null (that sequence is shown to converge to $0$ in [[fs-limit-preserves-strict-inequality]]), and $y_k := (k+1)^2$. Their product is $x_k y_k = k + 1$, which is unbounded by the Archimedean property ([[thm-of-archimedean]]) and hence does not converge at all, since a convergent sequence is bounded ([[lem-convergent-implies-bounded]]); in particular it is not null. The lemma is therefore sharp in the sense that the bounded factor may not be replaced by an arbitrary one.
 
 - The lemma is the workhorse of the product rule: the identity $x_k y_k - xy = x_k(y_k - y) + y(x_k - x)$ exhibits the error as a sum of two products of a null sequence with a bounded one, and boundedness of $(x_k)$ comes from [[lem-convergent-implies-bounded]].

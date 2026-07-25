@@ -11,13 +11,26 @@
 // proof must be visibly distinct from every other dependency; and the reader
 // must be reminded that such a dependency is not developed here.
 //
-// The content mechanism is one frontmatter flag, `proved_here: false`. Everything
-// else is derived, so nothing can go stale:
+// The content mechanism is one frontmatter flag, `proved_here: false`, plus one
+// optional list, `external_refs`. Everything else is derived, so nothing can go
+// stale:
 //
 //   * an item with the flag STATES a result this library does not prove;
 //   * any item whose `deps` reach one, transitively, RESTS on unproved material;
+//   * an item that MENTIONS one without depending on it declares `external_refs`,
+//     which seeds the same closure (owner decision 2026-07-25, "mark the full
+//     cone") WITHOUT adding a logical edge -- see the note below;
 //   * the renderer marks both, and marks every fact and every step tag that
 //     carries such a dependency (web/lib/library-external.ts, ItemBody.tsx).
+//
+// WHY `external_refs` IS A SEPARATE FIELD AND NOT JUST A `deps` ENTRY.
+// `deps` is defined by SCHEMA.md §3 as what an item's statement or proof
+// LOGICALLY DEPENDS ON, and it is the graph that depcheck's acyclicity check,
+// fwdcheck's page ordering, the page prerequisite closure and the flowchart all
+// read. The definition of the Axiom of Choice does not logically depend on
+// Cohen's independence theorem; it merely mentions it. Putting the mention in
+// `deps` would inject a false edge into all four of those consumers at once.
+// `external_refs` seeds the ‡ contagion and nothing else.
 //
 // This is a THIRD tier, ranked above forward references: "developed later in
 // this library" is a far weaker caveat than "never proved here at all", so an
@@ -30,6 +43,13 @@
 //   unproved-uncited     such an item has no entry in sources.references
 //   unproved-judged      such an item carries a verification.judge block: there
 //                        is no proof to judge, so a verdict would be meaningless
+//   external-dangling    an `external_refs` entry names no item
+//   external-not-unproved  an `external_refs` entry names an item this library
+//                        DOES prove; the field is only for recorded-not-proved
+//   external-in-deps     an id is in both `deps` and `external_refs`; a logical
+//                        dependency is already a stronger seed, so pick one
+//   external-unused      an `external_refs` entry is never linked in the body,
+//                        so the declaration marks the item for nothing visible
 //
 // WARNINGS
 //   unproved-on-published  a PUBLISHED item rests on unproved material (correct
@@ -93,6 +113,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     kind: scalar(fm, 'kind'),
     status: scalar(fm, 'status'),
     deps: list(fm, 'deps'),
+    externalRefs: list(fm, 'external_refs'),
     provedHere: scalar(fm, 'proved_here') !== 'false',
     precheck: nested(fm, 'verification', 'precheck'),
     hasJudge: /^\s+judge:/m.test(fm),
@@ -121,11 +142,28 @@ for (const it of items.values()) {
     err('unproved-judged', `${it.file}: proved_here false but a verification.judge block is present; there is no proof to judge`);
 }
 
+// ------------------------------------------------- shape of an external_refs entry
+
+for (const it of items.values()) {
+  const deps = new Set(it.deps.map(resolve));
+  for (const ref of it.externalRefs) {
+    const r = resolve(ref);
+    if (!r) { err('external-dangling', `${it.file}: external_refs names "${ref}", which is not an item`); continue; }
+    if (items.get(r).provedHere)
+      err('external-not-unproved', `${it.file}: external_refs names "${ref}", which this library DOES prove; the field records mentions of recorded-not-proved results only`);
+    if (deps.has(r))
+      err('external-in-deps', `${it.file}: "${ref}" is in both deps and external_refs; a logical dependency already seeds the marker, so remove it from external_refs`);
+    if (!it.body.includes('[[' + ref))
+      err('external-unused', `${it.file}: external_refs names "${ref}" but the body never links it, so the declaration marks the item for nothing the reader can see`);
+  }
+}
+
 // ------------------------------------------- who rests on unproved material
 //
 // Mirrors web/lib/library-external.ts exactly. Seeds are the unproved items
-// themselves plus any item that USES one outside its Remarks; the relation then
-// propagates along `deps`, which is the "and their consequences" requirement.
+// themselves, any item that USES one outside its Remarks, and any item that
+// DECLARES one in `external_refs`; the relation then propagates along `deps`,
+// which is the "and their consequences" requirement.
 
 const rests = new Map();       // id -> 'direct' | 'inherited'
 for (const it of items.values()) {
@@ -134,7 +172,11 @@ for (const it of items.values()) {
     const r = resolve(d);
     return r && !items.get(r).provedHere && it.loadBearing.includes('[[' + d);
   });
-  if (uses) rests.set(it.id, 'direct');
+  const mentions = it.externalRefs.some((d) => {
+    const r = resolve(d);
+    return r && !items.get(r).provedHere;
+  });
+  if (uses || mentions) rests.set(it.id, 'direct');
 }
 for (let changed = true; changed;) {
   changed = false;

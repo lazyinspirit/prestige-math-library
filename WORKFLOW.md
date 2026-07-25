@@ -155,6 +155,36 @@ runtime it ran on.
 
 The owner, not any model, is the final publish gate.
 
+### Who overrides whom (owner decision, 2026-07-25)
+
+Each tier below has strictly more context than the one above it, so **each
+overrides the one above**. This is a role model, not a politeness ranking: it
+says whose verdict survives a disagreement.
+
+| tier | who | scope it can see | what it decides | overruled by |
+|---|---|---|---|---|
+| Generator | Claude Opus subagent | one page | nothing | everyone |
+| **Judge** | non-Claude, GLM 5.2 | one item, plus the full text of the items it cites | nothing; it NAMES CANDIDATES | every tier below |
+| **Page verifier** | one Opus 5 subagent PER PAGE | its page, plus the full text of everything that page cites | CERTIFY / WITHHOLD per item | auditor, owner |
+| **Cross-page auditor** | the driver, main loop | the whole library at once | final **among models** | **the owner only** |
+| Owner | the human | everything | `verification.audited`, publish | nobody |
+
+Three things this makes explicit, each learned the expensive way:
+
+1. **A judge rejection is evidence, not a work item.** Measured precision is
+   ~20-25% and that is permanent (see `research/verification-benchmark.md`).
+   Never iterate judge -> fix -> judge toward a clean sheet: objections *rotate*
+   between runs rather than being confirmed, so the treadmill ends with a
+   correct proof damaged to satisfy an objection that was wrong.
+2. **The page verifier is a genuinely different role from "Escalation (revises
+   rejects)" below.** Escalation applies a correction the driver already
+   adjudicated. The page verifier adjudicates, with the cited text in hand.
+3. **Higher tier does not mean honest.** A page verifier fabricated a quotation
+   during this session (`research/verification-benchmark.md`, "What this
+   benchmark is NOT"). Every tier's output is evidence to be checked. Before
+   acting on a reported defect that quotes an item, `grep` the item for the
+   quoted string; if it is not there, report that and change nothing.
+
 ### The production defaults these replaced
 
 In normal operation the same steps run through the `ofox` gateway on a stock,
@@ -177,8 +207,12 @@ Two hard rules govern the models:
 1. Generation never runs through the public billed pipeline, and never wires a
    subscription into the worker service. It uses either the session route
    (subagents) or the internal harness at raw API cost.
-2. Session-authored items are judged by a non-Claude model (GPT-5.4 primary,
-   Gemini fallback), never by a Claude model.
+2. Session-authored items are judged by a non-Claude model (**GLM 5.2 primary**
+   since 2026-07-25, GPT-5.4 then Gemini as fallback), never by a Claude model.
+   **Note the collision:** `z-ai/glm-5.2` is also the production GENERATOR. That is
+   harmless for session items, whose generator is Claude, but a PIPELINE item must
+   never be judged with GLM, since that is a generator grading its own work. The
+   judge lineup is conditioned on origin precisely so both rules can hold at once.
 
 ---
 
@@ -396,8 +430,11 @@ it. This is the guardrail. The audit checks three things:
 1. **Mathematical soundness.** Is each proof correct, and does each step follow
    from what it cites?
 2. **Sufficiency and depth.** Is the whole set of definitions and theorems
-   enough for the topic? Compute the theorem-dependency depth and confirm it is
-   at most 5, and that nothing at depth 5 needs further justification.
+   enough for the topic, and does every leaf of the dependency tree bottom out
+   in something this library proves, in an axiom, or in an explicitly marked
+   `proved_here: false` remark? (There is no cap on dependency depth. The owner
+   removed it — see "no artificial depth limit" above — because rigor and
+   non-circularity outrank brevity: a chain is as long as the mathematics needs.)
 3. **Syntactic accuracy.** Precheck clean, ids equal filenames, kinds match
    prefixes, and every dependency and wikilink resolves.
 

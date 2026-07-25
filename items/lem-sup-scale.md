@@ -4,17 +4,13 @@ kind: lemma
 title: "Supremum of a scalar multiple"
 status: draft
 origin: session
-deps: [lem-sup-epsilon, thm-infimum-property, prop-of-multiply-inequalities, def-complete-ordered-field, lem-of-sign-rules, def-infimum, def-ordered-field, def-field, lem-of-add-order]
+deps: [lem-sup-epsilon, thm-infimum-property, def-complete-ordered-field, lem-of-sign-rules, def-infimum, def-ordered-field, def-field, lem-of-add-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -44,7 +40,7 @@ image, which is why claim 2 has an infimum on the right.
 
 [L1] Supremum and the least-upper-bound property: $v = \sup X$ means $v$ is an upper bound of $X$ with $v \le v'$ for every upper bound $v'$ of $X$, and every nonempty $X \subseteq \mathbb{R}$ bounded above has such a $v$ ([[def-complete-ordered-field]]).
 
-[L2] Multiplying an inequality by a nonzero constant, in equivalence form: for $c > 0$ one has $x < y \iff xc < yc$ and $x \le y \iff xc \le yc$; for $c < 0$ one has $x < y \iff yc < xc$ and $x \le y \iff yc \le xc$ ([[lem-of-sign-rules]], the facts on which [[prop-of-multiply-inequalities]] rests).
+[L2] Multiplying an inequality by a nonzero constant, in equivalence form: for $c > 0$ one has $x < y \iff xc < yc$, and for $c < 0$ one has $x < y \iff yc < xc$ (claims 4 and 5 of [[lem-of-sign-rules]]). Adjoining the case $x = y$, in which $xc = yc$, gives the nonstrict implications used below: for $c > 0$, $x \le y \Rightarrow xc \le yc$; for $c < 0$, $x \le y \Rightarrow yc \le xc$.
 
 [L3] Epsilon characterisation of the supremum: for a nonempty $X \subseteq \mathbb{R}$ bounded above and an upper bound $v$ of $X$, one has $v = \sup X$ if and only if for every $\varepsilon > 0$ there is $x \in X$ with $v - \varepsilon < x$ ([[lem-sup-epsilon]]).
 

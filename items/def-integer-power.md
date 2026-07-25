@@ -4,8 +4,8 @@ kind: definition
 title: "Integer powers $a^m$"
 status: draft
 origin: session
-deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique]
-justified_by: []
+deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, thm-int-ordered-ring]
+justified_by: [lem-power-laws]
 aliases: [def-power]
 landmark: false
 verification:
@@ -39,16 +39,29 @@ Thus $a^1 = a$, $a^2 = a \cdot a$, and so on. Note that this is defined for
 
 **Negative exponents.** If $a \ne 0$ and $n \in \mathbb{N}$ with $n \ge 1$, set
 
-$$a^{-n} := (a^n)^{-1},$$
+$$a^{-n} := (a^n)^{-1}.$$
 
-which makes sense because $a^n \ne 0$ for $a \ne 0$ (a product of nonzero
-elements of a field is nonzero) and because multiplicative inverses are unique
+**Why that is legitimate.** The right-hand side presupposes that $a^n$ is
+invertible, that is, that $a^n \ne 0$. This is a proof obligation and not an
+observation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \ne 0$
+in a field, $a^n \ne 0$ for every $n \in \mathbb{N}$, proved there by induction on
+$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).
+That lemma is a statement *about* the operation introduced here, so it depends on
+this definition and is recorded in this item's `justified_by` rather than in its
+`deps` (SCHEMA §3). Given $a^n \ne 0$, the value $(a^n)^{-1}$ is a single
+well-determined element, because multiplicative inverses in a field are unique
 ([[lem-of-inverse-unique]]).
 
 **Integer exponents.** Every integer $m$ ([[def-integers]]) is either
 $\iota(n)$ or $-\iota(n)$ for a unique natural $n$, where $\iota$ is the
 embedding $\mathbb{N} \to \mathbb{Z}$ ([[lem-nat-embeds-int]],
-[[def-int-operations]]). The two clauses above therefore define $a^m$ for every
+[[def-int-operations]]). This too is a citation and not a slogan: the order on
+$\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \ge 0$ or $m < 0$; the
+image of $\iota$ is exactly the set of nonnegative integers, and each of them is
+$\iota(n)$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then
+$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),
+so $-m = \iota(n)$ and $m = -\iota(n)$, with $n$ unique because $\iota$ is
+injective. The two clauses above therefore define $a^m$ for every
 $m \in \mathbb{Z}$ whenever $a \ne 0$, and for every $m \in \mathbb{N}$ for
 arbitrary $a$. The clauses are consistent where they overlap: the only overlap is
 $m = 0$, where $-\iota(0) = \iota(0)$ and $(a^0)^{-1} = 1^{-1} = 1 = a^0$.

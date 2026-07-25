@@ -4,7 +4,7 @@ kind: lemma
 title: "$\\omega$ is the least limit ordinal"
 status: draft
 origin: session
-deps: [def-limit-ordinal, def-ordinal, def-natural-numbers, def-nat-order, lem-omega-smallest-inductive, lem-nat-nonzero-is-successor, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-trichotomy, thm-nat-linear-order, thm-induction-principle, thm-well-ordering-principle, lem-nat-add-identity, lem-ordinal-basics]
+deps: [def-limit-ordinal, def-ordinal, def-natural-numbers, def-nat-order, lem-omega-smallest-inductive, lem-nat-nonzero-is-successor, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-trichotomy, thm-nat-linear-order, thm-induction-principle, thm-well-ordering-principle, lem-nat-add-identity, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [lem-omega-is-an-ordinal]
 landmark: false
@@ -34,8 +34,9 @@ ordinal;
 
 **(iii)** $\omega$ is a limit ordinal ([[def-limit-ordinal]]);
 
-**(iv)** $\omega$ is the **least** limit ordinal: every ordinal $\alpha \in \omega$
-is $0$ or a successor ordinal.
+**(iv)** every ordinal $\alpha \in \omega$ is $0$ or a successor ordinal, and
+consequently $\omega$ is the **least** limit ordinal: $\omega \subseteq \gamma$,
+that is $\omega \le \gamma$, for every limit ordinal $\gamma$.
 
 So the natural numbers are exactly the ordinals below $\omega$, and $\omega$ is
 the first ordinal at which induction acquires a limit clause.
@@ -48,7 +49,7 @@ the first ordinal at which induction acquires a limit clause.
 
 [L2] The induction principle: a subset of $\mathbb{N}$ containing $0$ and closed under $\sigma$ equals $\mathbb{N}$ ([[thm-induction-principle]]).
 
-[L3] $m < n \iff \sigma(m) \le n$; taking $m = n$ gives $n < \sigma(n)$ ([[lem-nat-discrete]]).
+[L3] $m < n \iff \sigma(m) \le n$ ([[lem-nat-discrete]]).
 
 [L4] $\le$ is a linear order on $\mathbb{N}$ with trichotomy, and $0 \le m$ for every $m$ because $0 + m = m$ ([[thm-nat-linear-order]], [[lem-nat-trichotomy]], [[lem-nat-add-identity]]).
 
@@ -60,11 +61,15 @@ the first ordinal at which induction acquires a limit clause.
 
 [L8] An ordinal is a transitive set strictly well ordered by $\in$, no ordinal is a member of itself, and a limit ordinal is a nonzero ordinal that is not of the form $\beta^{+}$ ([[def-ordinal]], [[lem-ordinal-basics]], [[def-limit-ordinal]]).
 
+[L9] $n < \sigma(n)$ for every $n \in \mathbb{N}$ ([[lem-nat-trichotomy]], step 1.3).
+
+[L10] For ordinals $\alpha, \beta$: $\alpha \subseteq \beta$ if and only if $\alpha \in \beta$ or $\alpha = \beta$, and any two ordinals are comparable under inclusion (claims (f) and (g) of [[lem-ordinal-basics]]); exactly one of $\alpha \in \beta$, $\alpha = \beta$, $\beta \in \alpha$ holds, and $\alpha \le \beta :\iff \alpha \subseteq \beta$ is the order under which sets of ordinals are well ordered, with strict part $\in$ ([[lem-ordinal-trichotomy]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For all $m, n \in \mathbb{N}$, $m \le n$ if and only if $m < \sigma(n)$: from $m \le n$ and $n < \sigma(n)$ transitivity gives $m < \sigma(n)$; conversely if $m < \sigma(n)$ and $m \le n$ failed, then $n < m$ by trichotomy, so $\sigma(n) \le m < \sigma(n)$ by [L3], which is impossible. [L3, L4]
+1.1 For all $m, n \in \mathbb{N}$, $m \le n$ if and only if $m < \sigma(n)$: from $m \le n$ and $n < \sigma(n)$ ([L9]) transitivity gives $m < \sigma(n)$; conversely if $m < \sigma(n)$ and $m \le n$ failed, then $n < m$ by trichotomy, so $\sigma(n) \le m < \sigma(n)$ by [L3], which is impossible. [L3, L4, L9]
 
 1.2 $\omega$ is a transitive set: the set $S = \{n \in \omega : n \subseteq \omega\}$ contains $0 = \varnothing$ and is closed under $\sigma$, since $n \subseteq \omega$ together with $n \in \omega$ gives $\sigma(n) = n \cup \{n\} \subseteq \omega$; so $S = \omega$ by [L2]. [L2, L1]
 
@@ -76,9 +81,11 @@ the first ordinal at which induction acquires a limit clause.
 
 4.1 Claim (iii): $\omega \ne 0$ because $0 \in \omega$; and $\omega$ is not a successor ordinal, since $\omega = \beta^{+}$ would give $\beta \in \omega$ and hence $\sigma(\beta) = \beta^{+} = \omega \in \omega$ because $\omega$ is inductive, contradicting the fact that no ordinal is a member of itself; so $\omega$ is a limit ordinal. [step 3.2, L1, L8]
 
-5.1 Claim (iv): the ordinals $\alpha$ with $\alpha \in \omega$ are exactly the natural numbers, each of which is $0$ or of the form $\sigma(m) = m^{+}$ with $m$ a natural number by [L7], hence $0$ or a successor ordinal; so no ordinal below $\omega$ is a limit ordinal, and $\omega$ is the least one. [step 3.1, step 4.1, L7, L8]
+5.1 Claim (iv), first half: the ordinals $\alpha$ with $\alpha \in \omega$ are exactly the natural numbers, each of which is $0$ or of the form $\sigma(m) = m^{+}$ with $m$ a natural number by [L7], hence $0$ or a successor ordinal; so no ordinal $\in$-below $\omega$ is a limit ordinal. [step 3.1, step 4.1, L7, L8]
 
-6.1 Claims (i) to (iv) are established. [step 2.1, step 3.1, step 3.2, step 4.1, step 5.1] ∎
+6.1 Claim (iv), second half, which is where "least" is more than $\in$-minimality: let $\gamma$ be any limit ordinal; $\omega$ is an ordinal by step 3.2, so by comparability of ordinals under inclusion [L10] either $\omega \subseteq \gamma$ or $\gamma \subseteq \omega$, and in the second case [L10] gives $\gamma \in \omega$ or $\gamma = \omega$; but $\gamma \in \omega$ would make $\gamma$ equal to $0$ or to a successor ordinal by step 5.1, contradicting the definition of a limit ordinal in [L8], so $\gamma = \omega$ and $\omega \subseteq \gamma$ again; hence $\omega \subseteq \gamma$, that is $\omega \le \gamma$ in the ordering of [L10], for every limit ordinal $\gamma$, and since $\omega$ is itself a limit ordinal by step 4.1 it is the least one. [step 5.1, step 4.1, step 3.2, L8, L10]
+
+7.1 Claims (i) to (iv) are established. [step 2.1, step 3.1, step 3.2, step 4.1, step 5.1, step 6.1] ∎
 
 ## Remarks
 

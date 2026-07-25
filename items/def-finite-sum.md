@@ -4,7 +4,7 @@ kind: definition
 title: "Finite sums and finite products, by recursion"
 status: draft
 origin: session
-deps: [thm-recursion, def-ordered-field, def-natural-numbers, def-nat-addition, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
+deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
 aliases: [def-finite-product]
 landmark: false
@@ -33,18 +33,35 @@ of natural numbers ([[def-natural-numbers]]) with successor $\sigma(n) = n + 1$
 Let $a : \mathbb{N} \to \mathbb{R}$ be a sequence of reals, written $a_k$ for
 $a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the
 upper index**, which is legitimate because of the recursion theorem
-([[thm-recursion]]): applying it to the set $A = \mathbb{N} \times \mathbb{R}$,
-the starting element $(0, 0)$ and the function
-$f(n, s) = (\sigma(n),\, s + a_n)$ produces a unique
-$g : \mathbb{N} \to \mathbb{N} \times \mathbb{R}$ whose first coordinate is $n$
-and whose second coordinate we call $\Sigma_n$. Unwinding, $\Sigma$ is the unique
-function $\mathbb{N} \to \mathbb{R}$ with
+([[thm-recursion]]). That theorem produces a function of one variable, so the
+running index has to be carried along inside the value: applying it to the set
+$A = \mathbb{N} \times \mathbb{R}$, the starting element $(0, 0)$ and the function
+$f(n, s) = (\sigma(n),\, s + a_n)$ gives a unique
+$g : \mathbb{N} \to \mathbb{N} \times \mathbb{R}$ with
+
+$$g(0) = (0, 0), \qquad g(\sigma(n)) = f(g(n)) \quad (n \in \mathbb{N}).$$
+
+Write $g(n) = \big(\pi_1(g(n)),\, \Sigma_n\big)$ for its two coordinates.
+
+**The first coordinate is the index itself, and that is a small induction, not an
+observation** ([[thm-induction-principle]]). Indeed $\pi_1(g(0)) = 0$; and if
+$\pi_1(g(n)) = n$, then
+$g(\sigma(n)) = f\big(\pi_1(g(n)), \Sigma_n\big) = \big(\sigma(\pi_1(g(n))),\, \Sigma_n + a_{\pi_1(g(n))}\big) = \big(\sigma(n),\, \Sigma_n + a_n\big)$,
+so $\pi_1(g(\sigma(n))) = \sigma(n)$. By induction $\pi_1(g(n)) = n$ for every
+$n \in \mathbb{N}$. Only now may the second coordinate of the two displayed
+clauses be read off, and doing so gives
 
 $$\Sigma_0 = 0, \qquad \Sigma_{\sigma(n)} = \Sigma_n + a_n .$$
 
+$\Sigma$ is moreover the **unique** function $\mathbb{N} \to \mathbb{R}$ with those
+two properties: if $\Sigma'$ also has them then $n \mapsto (n, \Sigma'_n)$ satisfies
+the two clauses defining $g$, hence equals $g$ by the uniqueness clause of
+[[thm-recursion]], so $\Sigma' = \Sigma$.
+
 We write $\sum_{k < n} a_k := \Sigma_n$. The same construction with starting
-element $(0, 1)$ and $f(n, p) = (\sigma(n),\, p \cdot a_n)$ gives the unique
-$\Pi : \mathbb{N} \to \mathbb{R}$ with
+element $(0, 1)$ and $f(n, p) = (\sigma(n),\, p \cdot a_n)$, with the same
+induction on the first coordinate and the same uniqueness argument, gives the
+unique $\Pi : \mathbb{N} \to \mathbb{R}$ with
 
 $$\Pi_0 = 1, \qquad \Pi_{\sigma(n)} = \Pi_n \cdot a_n ,$$
 

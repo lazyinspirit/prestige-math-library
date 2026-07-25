@@ -37,7 +37,11 @@ from the page's items by the renderer (never hand-set):
   Judge lineup is conditioned on origin to keep generator and judge in disjoint
   model families: `pipeline` items (GLM/DeepSeek gen) use the production lineup
   (Sonnet 5 -> GPT-5.4); `session` items (Claude-family gen) are judged by
-  GPT-5.4 primary with a non-Anthropic fallback (Gemini) — never a Claude model.
+  **GLM 5.2** (`z-ai/glm-5.2`) primary since 2026-07-25, with GPT-5.4 then Gemini
+  as fallback — never a Claude model. GLM is also the production *generator*, so
+  it is used as judge for `session` items ONLY; judging a `pipeline` item with it
+  would be a generator grading its own work, which the disjoint-family rule above
+  exists to prevent.
 
 Page badge rule: all items `pipeline` → "Pipeline-generated & judge-verified";
 otherwise → "Session-authored (Fable 5 assisted)" with judge status shown.

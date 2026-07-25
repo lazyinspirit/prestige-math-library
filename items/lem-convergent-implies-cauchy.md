@@ -4,7 +4,7 @@ kind: lemma
 title: "Every convergent sequence is Cauchy"
 status: draft
 origin: session
-deps: [def-real-limit, def-sequence, lem-of-triangle-inequality, lem-of-abs-value, thm-rat-ordered-field, thm-nat-linear-order, def-complete-ordered-field]
+deps: [def-real-limit, def-sequence, lem-of-triangle-inequality, lem-of-abs-value, thm-rat-ordered-field, lem-rat-embeds-dense, cor-of-one-positive, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "convergent implies Cauchy"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -44,9 +40,11 @@ Let $(x_k)$ be a sequence of reals converging to $x \in \mathbb{R}$
 
 [L3] Absolute value: $|-u| = |u|$ for every real $u$ ([[lem-of-abs-value]]).
 
-[L4] Rational arithmetic: if $\varepsilon$ is a rational $> 0$ then $\varepsilon/2$ is a rational $> 0$ and $\varepsilon/2 + \varepsilon/2 = \varepsilon$ ([[thm-rat-ordered-field]]).
+[L4] Halving a positive rational: if $\varepsilon$ is a rational $> 0$ then $\varepsilon/2$ is again a rational, it is $> 0$, and $\varepsilon/2 + \varepsilon/2 = \varepsilon$. In detail, $\mathbb{Q}$ is an ordered field ([[thm-rat-ordered-field]], [[def-ordered-field]], [[def-field]]), so $1 > 0$ ([[cor-of-one-positive]]) and $2 := 1 + 1 > 0$ because the positives are closed under addition ([[def-ordered-field]]); hence $2 \ne 0$ is invertible with $2^{-1} > 0$ ([[lem-of-inverse-positive]]), the product $\varepsilon/2 = \varepsilon \cdot 2^{-1}$ of two positives is positive ([[lem-of-sign-rules]]), and $\varepsilon \cdot 2^{-1} + \varepsilon \cdot 2^{-1} = \varepsilon \cdot 2^{-1} \cdot 2 = \varepsilon$ by the field axioms ([[def-field]]). The embedding of $\mathbb{Q}$ in $\mathbb{R}$ preserves the order ([[lem-rat-embeds-dense]]), so these facts hold verbatim for the images, under the identification recorded in [[def-sequence]].
 
 [L5] The order on $\mathbb{N}$ is total and transitive, so a single threshold serves for both indices ([[thm-nat-linear-order]]).
+
+[L6] Order arithmetic in $\mathbb{R}$: adding two strict inequalities, $a < b$ and $c < d$ give $a + c < b + d$ ([[lem-of-add-order]]); and, since $u \le v$ means $u < v$ or $u = v$, the mixed form $u \le v < w \Rightarrow u < w$ ([[def-complete-ordered-field]], [[def-ordered-field]]).
 
 ## Proof
 
@@ -56,7 +54,7 @@ Let $(x_k)$ be a sequence of reals converging to $x \in \mathbb{R}$
 
 2.1 By convergence there is $K \in \mathbb{N}$ with $|x_k - x| < \varepsilon/2$ for all $k \ge K$. [step 1.1, L1]
 
-3.1 For all $k, l \ge K$ we get $|x_k - x_l| = |(x_k - x) + (x - x_l)| \le |x_k - x| + |x - x_l| = |x_k - x| + |x_l - x| < \varepsilon/2 + \varepsilon/2 = \varepsilon$. [step 2.1, L2, L3, L4, L5]
+3.1 For all $k, l \ge K$ we get $|x_k - x_l| = |(x_k - x) + (x - x_l)| \le |x_k - x| + |x - x_l| = |x_k - x| + |x_l - x|$, while adding the two strict inequalities of step 2.1 gives $|x_k - x| + |x_l - x| < \varepsilon/2 + \varepsilon/2 = \varepsilon$; composing the non-strict inequality with the strict one yields $|x_k - x_l| < \varepsilon$. [step 2.1, L2, L3, L4, L5, L6]
 
 4.1 Since the rational $\varepsilon > 0$ was arbitrary and the single threshold $K$ works for both indices, $(x_k)$ is Cauchy. [step 3.1, L1] ∎
 

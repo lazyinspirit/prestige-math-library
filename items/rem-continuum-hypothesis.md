@@ -4,7 +4,7 @@ kind: remark
 title: "The continuum hypothesis, and what this page does not prove"
 status: draft
 origin: session
-deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n]
+deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, fs-infinite-has-countable-subset-in-zf]
 justified_by: []
 aliases: [rem-ch]
 landmark: false
@@ -37,8 +37,15 @@ obvious next question is whether anything sits strictly in between.
 
 > there is no set $A$ with $\mathbb{N} \prec A \prec \mathcal{P}(\mathbb{N})$.
 
-Equivalently, every uncountable subset of $\mathcal{P}(\mathbb{N})$ is
-equinumerous with $\mathcal{P}(\mathbb{N})$ itself.
+**Over ZFC** this is equivalent to: every uncountable subset of
+$\mathcal{P}(\mathbb{N})$ is equinumerous with $\mathcal{P}(\mathbb{N})$ itself.
+The qualification matters, and it is one of the few places on this page where a
+statement is not choice free. Passing from the displayed form to the subset form
+requires knowing that an uncountable $A \subseteq \mathcal{P}(\mathbb{N})$
+satisfies $\mathbb{N} \prec A$, that is, that $A$ has a countably infinite
+subset, and **that is not a theorem of ZF**: this page records exactly that in
+[[fs-infinite-has-countable-subset-in-zf]]. Over ZF the two forms of CH can
+therefore come apart, and only the displayed form is used below.
 
 **CH is independent of ZFC** ([[rem-independence-of-ch-and-gch]]). Gödel (1940)
 showed that ZFC cannot refute it, by constructing the inner model $L$ of
@@ -73,6 +80,9 @@ $\mathcal{P}(\mathbb{N})$, and for the choice principles recorded in
 
 The generalised continuum hypothesis (GCH), that
 $A \prec B \prec \mathcal{P}(A)$ never holds for infinite $A$, is also
-independent of ZFC ([[rem-independence-of-ch-and-gch]]) and is strictly stronger:
+independent of ZFC ([[rem-independence-of-ch-and-gch]]), in the same conditional
+sense as CH above: if ZFC is consistent, then so are ZFC + GCH and
+ZFC + not GCH, and that consistency assumption cannot be dropped. GCH is
+strictly stronger than CH:
 over ZF it even implies the Axiom of Choice, a result of Sierpiński
 ([[rem-gch-implies-ac]]). That implication, too, is quoted and not proved here.

@@ -12,10 +12,6 @@ short: "AC $\\iff$ Zorn $\\iff$ every set is well orderable"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -38,7 +34,7 @@ Over ZF the following three statements are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** The axioms of ZF. Each implication below is itself proved in ZF, so the equivalence is an equivalence of ZF-theorems and not an appeal to any further principle.
+**Given:** The axioms of ZF. Each implication below is itself a theorem of ZF, so what is established here is an **equivalence proved in ZF**, with no appeal to any further principle. Read it exactly that way: it says that ZF proves each of (1), (2), (3) to follow from the others, and it does **not** say that any of the three is itself a theorem of ZF. Which of them ZF proves outright is a separate, metamathematical question, and the answer, conditional on the consistency of ZF, is none of them; that is recorded among this page's false statements and in the remarks below.
 
 [L1] The Axiom of Choice implies that every set can be well ordered ([[thm-well-ordering-theorem]]).
 
@@ -68,6 +64,6 @@ Over ZF the following three statements are equivalent:
 
 **What is not proved here.** That any of the three is independent of ZF. That requires Gödel's constructible universe for the consistency of the Axiom of Choice with ZF ([[rem-godel-constructible-universe]]) and Cohen's forcing for the consistency of its negation ([[rem-cohen-forcing-ac-independent]]), neither of which this library contains: both are recorded with references and are not proved anywhere here. The honest conditional statements are [[fs-zorn-provable-in-zf]] and [[fs-every-set-well-orderable-in-zf]].
 
-**Strictly weaker principles get no information from this.** The equivalence says nothing about the ultrafilter lemma, dependent choice or countable choice, each of which is strictly weaker than the Axiom of Choice. Every theorem in this library that uses one of those must say which, and the ledger is [[rem-choice-ledger]].
+**Strictly weaker principles get no information from this.** The equivalence says nothing about the ultrafilter lemma, dependent choice or countable choice. Each of those is, **if ZF is consistent**, strictly weaker than the Axiom of Choice: not provable in ZF, and not strong enough to recover AC. Those separations are external metamathematical results, established by forcing and by permutation models, quoted from references and proved nowhere in this library; the consistency hypothesis cannot be dropped and cannot be proved inside ZF. Every theorem in this library that uses one of the weaker principles must say which, and the ledger, with the sources, is [[rem-choice-ledger]].
 
 **Historical note.** Zermelo proved (1) implies (3) in 1904, Kuratowski and Zorn isolated (2) in 1922 and 1935, and the circle of equivalences was standard by the 1940s. The choice-free content of the theory of well-orders, by contrast, was settled earlier: Hartogs proved in 1915 that cardinal comparability implies (3), which is what makes [[thm-hartogs]] a choice-free theorem worth isolating.

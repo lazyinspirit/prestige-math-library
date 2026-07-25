@@ -4,17 +4,13 @@ kind: lemma
 title: "The cut at an extremal element is closed under chain suprema"
 status: draft
 origin: session
-deps: [def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-upper-bound]
+deps: [def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-upper-bound, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -41,6 +37,8 @@ $\sup C \in M_x$ for every chain $C \subseteq M_x$.
 
 [L3] A least upper bound is below every upper bound of the same set ([[def-upper-bound]]).
 
+[L4] $\le$ is a partial order, in particular transitive: $u \le v$ and $v \le w$ imply $u \le w$ ([[def-partial-order]]).
+
 ## Proof
 
 **Proof technique:** cases.
@@ -55,7 +53,7 @@ $\sup C \in M_x$ for every chain $C \subseteq M_x$.
 
 2.1 In the first case $x$ is an upper bound of $C$, so $s \le x$ because $s$ is the least upper bound, hence $s \in M_x$. [step 1.3, step 1.1, L3, step 1.2, A1]
 
-2.2 In the second case $z_0 \in M_x$ together with $z_0 \not\le x$ forces $f(x) \le z_0$, and $z_0 \le s$ since $s$ is an upper bound of $C$, so $f(x) \le s$ by transitivity, hence $s \in M_x$. [step 1.4, A1, step 1.1, step 1.2]
+2.2 In the second case $z_0 \in M_x$ together with $z_0 \not\le x$ forces $f(x) \le z_0$, and $z_0 \le s$ since $s$ is an upper bound of $C$, so $f(x) \le s$ by transitivity, hence $s \in M_x$. [step 1.4, A1, step 1.1, step 1.2, L4]
 
 3.1 Either every element of $C$ is below $x$ or some element is not, so the two cases are exhaustive and $\sup C \in M_x$ in both. [step 2.1, step 2.2, cases-exhaustive] ∎
 

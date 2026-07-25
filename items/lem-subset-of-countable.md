@@ -4,7 +4,7 @@ kind: lemma
 title: "Every subset of an at most countable set is at most countable"
 status: draft
 origin: session
-deps: [def-countable, thm-well-ordering-principle, thm-recursion, thm-strong-induction, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy]
+deps: [def-countable, thm-well-ordering-principle, thm-recursion, thm-strong-induction, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "subsets of countable sets are countable"
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -45,7 +41,7 @@ dependent choice.
 
 ## Facts & Assumptions
 
-**Given:** An at most countable set $A$ and a subset $B \subseteq A$. Throughout, a natural number is the von Neumann natural $n = \{\, m \in \mathbb{N} : m < n \,\}$, so that $\sigma(n) = n \cup \{n\}$ and every element of a natural number is a natural number.
+**Given:** An at most countable set $A$ and a subset $B \subseteq A$. Throughout, a natural number is the von Neumann natural, so that $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$ ([[def-natural-numbers]]); that $n = \{\, m \in \mathbb{N} : m < n \,\}$, and in particular that every element of a natural number is a natural number, is [[lem-nat-order-is-membership]], proved earlier on this page from the additive order of [[def-nat-order]].
 
 [L1] $A$ is finite when $A \approx n$ for some $n \in \mathbb{N}$, countably infinite when $A \approx \mathbb{N}$, and at most countable when one of the two holds ([[def-countable]]).
 
@@ -57,9 +53,11 @@ dependent choice.
 
 [L5] Recursion: for any set $X$, any $x_0 \in X$ and any $F : X \to X$ there is a function $h : \mathbb{N} \to X$ with $h(0) = x_0$ and $h(\sigma(n)) = F(h(n))$ ([[thm-recursion]]).
 
-[L6] Order facts in $\mathbb{N}$: $m \in n \iff m < n$ and $m \le n \iff m \subseteq n$ ([[def-natural-numbers]], [[def-nat-order]]); $<$ is irreflexive and transitive, and any two naturals are comparable ([[lem-nat-trichotomy]]); $m < n \iff \sigma(m) \le n$, so $n < \sigma(n)$ and $m < \sigma(n) \iff m \le n$ ([[lem-nat-discrete]]).
+[L6] Order facts in $\mathbb{N}$: $m \in n \iff m < n$, $m \le n \iff m \subseteq n$, $n < \sigma(n)$, and $m < \sigma(n) \iff m \le n$ ([[lem-nat-order-is-membership]]); $<$ is irreflexive and transitive, and any two naturals are comparable ([[lem-nat-trichotomy]]); $m < n \iff \sigma(m) \le n$ ([[lem-nat-discrete]]).
 
 [L7] Every nonzero natural is a successor ([[lem-nat-nonzero-is-successor]]).
+
+[L8] Membership is irreflexive on $\mathbb{N}$: $k \notin k$ for every $k \in \mathbb{N}$, and every natural number is a transitive set ([[lem-nat-transitive-irreflexive]]).
 
 ## Proof
 
@@ -67,7 +65,7 @@ dependent choice.
 
 1.1 Since $A$ is at most countable there is a bijection $\varphi : A \to N_0$ where $N_0 = n$ for some $n \in \mathbb{N}$ or $N_0 = \mathbb{N}$; in either case $N_0 \subseteq \mathbb{N}$, and restricting $\varphi$ to $B$ gives a bijection of $B$ onto $S := \varphi[B] \subseteq \mathbb{N}$, so $B \approx S$. It therefore suffices to prove that every subset of $\mathbb{N}$ is at most countable, since then $S \approx n'$ or $S \approx \mathbb{N}$ and transitivity carries the conclusion back to $B$. [given, L1, L2, L6, suffices: every subset of N is at most countable]
 
-1.2 Every subset of a natural number is finite: by strong induction on $n$, assume every subset of every $m < n$ is finite. If $n = 0$ then a subset $T \subseteq 0 = \varnothing$ is empty and $T \approx 0$. Otherwise $n = \sigma(m)$ by [L7], with $m < n$; given $T \subseteq \sigma(m) = m \cup \{m\}$, the set $T \setminus \{m\}$ is a subset of $m$, so the hypothesis at $m$ gives a bijection $u : T \setminus \{m\} \to k$ for some $k \in \mathbb{N}$. If $m \notin T$ then $T = T \setminus \{m\} \approx k$. If $m \in T$, extend $u$ by $u(m) := k$; since $k \notin k$ by irreflexivity, the extension is a bijection $T \to k \cup \{k\} = \sigma(k)$. In both cases $T$ is finite, so the claim holds for $n$ and hence for all $n$. [L1, L2, L4, L6, L7]
+1.2 Every subset of a natural number is finite: by strong induction on $n$, assume every subset of every $m < n$ is finite. If $n = 0$ then a subset $T \subseteq 0 = \varnothing$ is empty and $T \approx 0$. Otherwise $n = \sigma(m)$ by [L7], with $m < n$; given $T \subseteq \sigma(m) = m \cup \{m\}$, the set $T \setminus \{m\}$ is a subset of $m$, so the hypothesis at $m$ gives a bijection $u : T \setminus \{m\} \to k$ for some $k \in \mathbb{N}$. If $m \notin T$ then $T = T \setminus \{m\} \approx k$. If $m \in T$, extend $u$ by $u(m) := k$; since $k \notin k$ by irreflexivity of membership, the value $k$ is not already taken and the extension is a bijection $T \to k \cup \{k\} = \sigma(k)$. In both cases $T$ is finite, so the claim holds for $n$ and hence for all $n$. [L1, L2, L4, L6, L7, L8]
 
 1.3 Case $S$ bounded: assume there is $b_0 \in \mathbb{N}$ with $s \le b_0$ for every $s \in S$. Then $s < \sigma(b_0)$ for every $s \in S$ by [L6], that is, $S \subseteq \sigma(b_0)$. [assume-case bounded, L6]
 
@@ -93,4 +91,4 @@ dependent choice.
 
 - The dichotomy proved here, bounded subsets of $\mathbb{N}$ are finite and unbounded ones are copies of $\mathbb{N}$, is the only structural fact about $\mathbb{N}$ the rest of the page needs. The enumeration $e$ built in the unbounded case is the increasing one, and it is unique with that property.
 
-- The bounded case rests on the von Neumann encoding: "bounded by $b_0$" is literally "a subset of the set $\sigma(b_0)$" ([[def-natural-numbers]]), which is what makes the induction of step 1.2 an induction on a natural number rather than on an informal count.
+- The bounded case rests on the von Neumann encoding: "bounded by $b_0$" is literally "a subset of the set $\sigma(b_0)$", which is what makes the induction of step 1.2 an induction on a natural number rather than on an informal count. That translation is not a convention but a theorem, [[lem-nat-order-is-membership]], since the library's order on $\mathbb{N}$ is defined additively ([[def-nat-order]]) and not by membership.

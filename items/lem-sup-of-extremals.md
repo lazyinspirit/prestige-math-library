@@ -4,17 +4,13 @@ kind: lemma
 title: "A supremum of extremal elements is extremal"
 status: draft
 origin: session
-deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-upper-bound, def-chain-complete-poset, def-admissible-set]
+deps: [lem-extremal-comparability, def-bw-extremal, lem-admissible-set-exists, def-upper-bound, def-chain-complete-poset, def-admissible-set, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
   audited: 2026-07-25
 sources:
   scraped: []
@@ -44,6 +40,8 @@ extremal ([[def-bw-extremal]]). Then $\sup C$ is extremal.
 
 [L4] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
 
+[L5] $\le$ is a partial order: it is reflexive ($u \le u$) and transitive ($u \le v$ and $v \le w$ imply $u \le w$), and its strict form $u < v$ means $u \le v$ together with $u \ne v$ ([[def-partial-order]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -60,11 +58,11 @@ extremal ([[def-bw-extremal]]). Then $\sup C$ is extremal.
 
 5.1 The alternative $f(x) \le y$ is impossible: progressivity gives $x \le f(x)$, so it would yield $x \le y$, contradicting $x \not\le y$. Hence $y \le x$. [step 4.1, step 3.1, L4]
 
-6.1 Moreover $y \ne x$, since $y = x$ would give $x \le y$ by reflexivity, again contradicting $x \not\le y$. So $y < x$. [step 5.1, step 3.1]
+6.1 Moreover $y \ne x$, since $y = x$ would give $x \le y$ by reflexivity, again contradicting $x \not\le y$. So $y < x$. [step 5.1, step 3.1, L5]
 
 7.1 Extremality of $x$ applied to $y$ gives $f(y) \le x$. [step 6.1, step 3.1, A1]
 
-8.1 Since $x \in C$ and $s$ is an upper bound of $C$, we have $x \le s$, so $f(y) \le s$ by transitivity, and $s$ is extremal. [step 7.1, step 3.1, L3] ∎
+8.1 Since $x \in C$ and $s$ is an upper bound of $C$, we have $x \le s$, so $f(y) \le s$ by transitivity, and $s$ is extremal. [step 7.1, step 3.1, L3, L5] ∎
 
 ## Remarks
 

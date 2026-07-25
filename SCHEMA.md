@@ -72,6 +72,20 @@ proved_here: true                    # OPTIONAL, defaults to true. Set FALSE whe
   # that fact are marked ‡ too, and an always-visible note reminds the reader the
   # dependency is not developed in this library. Enforced by tools/extcheck.mjs;
   # rendered by web/lib/library-external.ts.
+external_refs: []                    # OPTIONAL. Recorded-not-proved items (i.e.
+  # items with `proved_here: false`) that this item MENTIONS without logically
+  # depending on them. Declaring one here is what makes this item, and everything
+  # depending on it, carry the ‡ marker (owner decision 2026-07-25: mark the full
+  # cone, so a reader never meets an unproved result without the reminder).
+  # It is a SEPARATE field from `deps` on purpose. `deps` means "the statement or
+  # proof logically depends on this", and it is the graph read by depcheck's
+  # acyclicity check, fwdcheck's page ordering, the page prerequisite closure and
+  # the flowchart. The definition of the Axiom of Choice does not depend on
+  # Cohen's independence theorem; it mentions it. Recording the mention in `deps`
+  # would inject a false edge into all four consumers at once.
+  # Enforced by tools/extcheck.mjs: every entry must name an existing item, that
+  # item must have `proved_here: false`, it may not also be in `deps` (a logical
+  # dependency is already the stronger seed), and the body must actually link it.
 forward_refs: []                     # OPTIONAL. Items developed LATER in the
   # library that this item points at for orientation ("this is taken up in ...").
   # Owner decision 2026-07-25: forward references are allowed, on three

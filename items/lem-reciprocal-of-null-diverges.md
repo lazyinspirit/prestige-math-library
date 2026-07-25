@@ -4,7 +4,7 @@ kind: lemma
 title: "For positive terms, null and divergence to $+\\infty$ are reciprocal"
 status: draft
 origin: session
-deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-of-inverse-positive, prop-of-reciprocal-order, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
+deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-limit-of-tail, lem-of-inverse-positive, prop-of-reciprocal-order, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,10 +12,6 @@ short: "$x_k\\to0$ iff $1/x_k\\to+\\infty$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -70,8 +66,8 @@ The positivity hypothesis is essential and is not a convenience; see the remarks
 
 ## Remarks
 
-- **Positivity is essential.** Let $(s_k)$ be the alternating sequence of [[fs-bounded-implies-convergent]], whose terms are $1$ and $-1$ and which takes the value $-1$ frequently, and put $w_k := s_k / (k+1)$. Then $(w_k)$ converges to $0$, because $(1/(k+1))$ is null and $(s_k)$ is bounded ([[lem-null-times-bounded]]), and every $w_k$ is nonzero, yet $(1/w_k)$ does not diverge to $+\infty$: $w_k$ is negative, hence $1/w_k$ is negative, *frequently* in the sense of [[def-sequence]], since the index map $m$ of [[fs-bounded-implies-convergent]] satisfies $s_{m_j} = -1$ for every $j$ and $m_j \ge j$ ([[lem-index-map-grows]]); so no threshold works even for $M = 0$. What survives without a sign hypothesis is the statement about absolute values, namely $|x_k| \to 0$ if and only if $1/|x_k| \to +\infty$, which is this lemma applied to the sequence $(|x_k|)$.
+- **Positivity is essential.** Let $(x_k)$ be as in the lemma, so that $x_k > 0$ for every $k$ and $(x_k)$ converges to $0$; such sequences exist, $x_k = 1/(k+1)$ being the standard one ([[fs-limit-preserves-strict-inequality]]). Put $w_k := -x_k$. Then $|w_k - 0| = |-x_k| = |x_k| = |x_k - 0|$ for every $k$ ([[lem-of-abs-value]]), so $(w_k)$ converges to $0$ as well, and every $w_k$ is nonzero. Yet $(1/w_k)$ does not diverge to $+\infty$: $1/w_k = -(1/x_k)$ by field arithmetic ([[def-field]]), and $1/x_k > 0$ ([[lem-of-inverse-positive]]), so $1/w_k < 0$ at every index, its negative $1/x_k$ being positive ([[def-ordered-field]]), and no threshold works even for $M = 0$. Dropping positivity therefore breaks the forward implication outright. What survives without a sign hypothesis is the statement about absolute values: for a sequence of nonzero terms, $(|x_k|)$ converges to $0$ if and only if $(1/|x_k|)$ diverges to $+\infty$, which is this lemma applied to $(|x_k|)$, whose terms are positive ([[lem-of-abs-value]]).
 
-- The hypothesis $x_k > 0$ for **every** $k$ can be relaxed to "eventually", at the cost of passing to a tail ([[lem-limit-of-tail]]); it is stated for every $k$ only so that $1/x_k$ is defined at every index.
+- The hypothesis $x_k > 0$ is imposed at **every** index so that $1/x_k$ is defined at every index. It is tempting to relax it to "eventually positive" by passing to a tail, and on the convergence side that is exactly [[lem-limit-of-tail]]; but the equivalence also has a divergence side, and the corresponding tail statement for divergence to $+\infty$ ([[def-divergence-to-infinity]]) is proved nowhere in this library, [[lem-limit-of-tail]] covering convergence and the Cauchy condition only. The relaxed form is therefore not asserted here.
 
-- The lemma is the reason $1/(k+1) \to 0$ and $k + 1 \to +\infty$ are the same fact seen twice, and it is the standard bridge between the Archimedean property and statements about growth.
+- Taking $x_k := 1/(k+1)$, which is null ([[fs-limit-preserves-strict-inequality]]), the lemma turns that one fact into $k + 1 \to +\infty$. The two are the same statement seen twice, which is why this lemma is the standard bridge between the Archimedean property ([[thm-of-archimedean]]) and statements about growth.

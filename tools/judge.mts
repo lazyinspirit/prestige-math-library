@@ -1,7 +1,8 @@
-// Topic-neutral GPT-5.4 refuter-judge for library items (ofox gateway).
+// Topic-neutral cross-family refuter-judge for library items (ofox gateway).
+// Default judge: z-ai/glm-5.2 (owner decision, 2026-07-25; replaced openai/gpt-5.4).
 // Run from the repo root (the app worker's tsx supplies the TS loader):
 //   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
-//     items/<id>.md [--model openai/gpt-5.4] [--topic "..."] [--conventions "..."] [--allow-claude]
+//     items/<id>.md [--model z-ai/glm-5.2] [--topic "..."] [--conventions "..."] [--allow-claude]
 //
 // Prints one line of JSON: {"id":..,"model":..,"keep":true|false|null,"reason":..}
 //   keep=true  -> accepted (no specific defect found)
@@ -17,7 +18,7 @@ import { readFileSync, appendFileSync, existsSync, readdirSync } from "node:fs";
 import { basename } from "node:path";
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = new Set(["model", "topic", "conventions", "mode"]);
+const VALUE_FLAGS = new Set(["model", "topic", "conventions"]);
 // --no-context disables the cited-item RAG block, for A/B measurement only.
 const opts: Record<string, string> = {};
 const bools = new Set<string>();
@@ -36,7 +37,11 @@ if (!file) {
   console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--allow-claude]');
   process.exit(2);
 }
-const model = opts.model ?? "openai/gpt-5.4";
+// SESSION items only. The production PIPELINE generator is also z-ai/glm-5.2
+// (WORKFLOW.md "production defaults"), so a pipeline item must NOT be judged
+// with this default: that would be a generator grading its own work. Pipeline
+// items keep the origin-conditioned lineup in worker/src/ofox.ts.
+const model = opts.model ?? "z-ai/glm-5.2";
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
 const id = basename(file).replace(/\.md$/, "");
@@ -135,19 +140,16 @@ CITED CONTEXT: the exact text of every item this one cites is supplied below the
   * If an [L#] fact is STRONGER than its cited item, or restates it inaccurately, that IS a specific defect: name the fact and the discrepancy.
   * An item marked RECORDED, NOT PROVED IN THIS LIBRARY is a deliberate external citation, not a gap. Depending on one is not a defect.`;
 
-const certifySys =
-  `You are AUDITING ONE item of a rigorous, cross-referenced public math library for PUBLICATION${topic ? ` (topic: ${topic})` : ""}. Decide whether it can be certified.
-
-CERTIFY (keep=true) when all three hold: the mathematics is correct; each [L#]/[A#] fact FAITHFULLY restates the cited item supplied below, without strengthening it; and the item's dependencies cover what its Statement and Facts actually cite.
-
-WITHHOLD (keep=false) ONLY if you can name a concrete defect: a false claim, a step that does not follow from what it cites, a fact that overstates its source, a symbol used outside its scope, an undischarged proof obligation, or a definition that is not well formed.
-
-NOT defects: terseness; routine algebra compressed under an [algebra] tag; deferring a standard, tedious verification to a cited source; a proof that is correct but could be clearer; a citation you would have made differently.
-
-MOST ITEMS ARE CORRECT. Certifying a correct item is the expected outcome and is a complete, successful audit. Do not manufacture an objection to demonstrate diligence; an unfounded WITHHOLD is worse than a CERTIFY, because it costs a human an adjudication.${conventions ? `\n\nConventions in use:\n${conventions}` : ""}${withContext ? CONTEXT_RULES : ""}${hasDiagram ? DIAGRAM_RULES : ""}
-
-Output STRICT minified JSON ONLY, no prose around it:
-{"keep":true|false,"reason":"<if keep=false, the specific defect and where; if keep=true, a one-line note on what you verified>"}`;
+// The `--mode certify` arm was MEASURED AND DELETED, 2026-07-25. Scored against
+// research/verification-benchmark.md (150 items, 50 known defects), a gentler
+// "most items are correct, do not manufacture an objection" framing halved the
+// rejections (29 -> 14) but gutted recall: it caught 2 of 6 real defects where
+// the refuter caught 6 of 6, and its precision was WORSE too (14% vs 21%). It
+// became agreeable, not accurate. The refuter framing below is deliberate: this
+// judge is a high-recall SCREEN whose ~20-25% precision is a property of
+// adversarial refutation, not a bug to tune out. Do not re-run this experiment,
+// and do not soften the prompt to reduce false positives -- that trade has been
+// measured and it loses real defects.
 
 const refuterSys =
   `You are a REFUTER auditing ONE mathematical library item (a definition, theorem+proof, lemma+proof, example, or false-statement+refutation) for a rigorous, cross-referenced public math library${topic ? ` (topic: ${topic})` : ""}.
@@ -159,7 +161,7 @@ DEPENDENCIES: any step citing another library item by [[id]] or by a fact label 
 Output STRICT minified JSON ONLY, no prose around it:
 {"keep":true|false,"reason":"<if keep=false, the specific defect and where; if keep=true, a one-line note on what you verified>"}`;
 
-const sys = opts.mode === "certify" ? certifySys : refuterSys;
+const sys = refuterSys;
 
 const payload = {
   model,

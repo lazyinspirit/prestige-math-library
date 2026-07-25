@@ -4,17 +4,13 @@ kind: lemma
 title: "The smallest admissible set is a chain"
 status: draft
 origin: session
-deps: [lem-all-extremal, lem-extremal-comparability, def-chain, def-chain-complete-poset]
+deps: [lem-all-extremal, lem-extremal-comparability, def-chain, def-chain-complete-poset, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -41,6 +37,8 @@ $M$ are comparable.
 
 [L4] A subset is a chain when any two of its elements are comparable ([[def-chain]]).
 
+[L5] $\le$ is a partial order, in particular transitive: $u \le v$ and $v \le w$ imply $u \le w$ ([[def-partial-order]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -49,7 +47,7 @@ $M$ are comparable.
 
 2.1 Applying comparability at $x$ to the element $y$, either $y \le x$ or $f(x) \le y$. [step 1.1, L2]
 
-3.1 In the second case progressivity gives $x \le f(x)$, so $x \le y$ by transitivity. [step 2.1, L3]
+3.1 In the second case progressivity gives $x \le f(x)$, so $x \le y$ by transitivity. [step 2.1, L3, L5]
 
 4.1 So in either case $x$ and $y$ are comparable, and since $x$ and $y$ were arbitrary, $M$ is a chain. [step 2.1, step 3.1, L4] ∎
 

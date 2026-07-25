@@ -12,10 +12,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -62,7 +58,13 @@ Over ZF, the Axiom of Choice ([[def-axiom-of-choice]]) and Zorn's lemma
   [[rem-godel-constructible-universe]] and [[rem-cohen-forcing-ac-independent]];
   where the weaker choice principles sit is [[rem-choice-strengths]], and the
   corresponding trap is [[fs-zorn-provable-in-zf]].
-- Because the two are equivalent, every theorem in this library proved with Zorn
-  costs exactly the Axiom of Choice, no more and no less. Theorems needing
-  strictly less, such as the ultrafilter lemma, must be flagged as such, since
-  the equivalence gives no information about weaker principles.
+- Because the two are equivalent, a theorem proved with Zorn's lemma costs **at
+  most** the Axiom of Choice, and the equivalence says nothing beyond that. It
+  does not say the theorem *needs* the Axiom of Choice: a proof through Zorn is
+  an upper bound on the price, never a lower one. The ultrafilter lemma
+  ([[thm-ultrafilter-lemma]]) is the standing example, proved here with Zorn and
+  yet, on the external results recorded in [[rem-choice-strengths]], strictly
+  weaker than the Axiom of Choice, so that proof overpays. Only a
+  statement that is itself equivalent to the Axiom of Choice, as Zorn's lemma is
+  by this corollary, costs exactly the Axiom of Choice, no more and no less.
+  Where the weaker principles sit is [[rem-choice-strengths]].
