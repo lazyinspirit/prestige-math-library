@@ -119,6 +119,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     audited: nested(fm, 'verification', 'audited'),
     deps: list(fm, 'deps'),
     justified: list(fm, 'justified_by'),
+    externalRefs: list(fm, 'external_refs'),
     forward: list(fm, 'forward_refs'),
     links,
     body,
@@ -232,7 +233,13 @@ for (const it of items.values()) {
   // discharge points forward, so listing it there is a spurious cycle, and
   // `justification-duplicated` above forbids it), yet citing one in a Statement
   // is exactly how a definition names the lemma that makes it well posed.
-  const declared = new Set([...(it.deps ?? []), ...(it.justified ?? [])].map(resolve));
+  // `external_refs` counts as declared. It names a recorded-but-not-proved result
+  // the item MENTIONS; SCHEMA §3 and tools/extcheck.mjs (`external-in-deps`) forbid
+  // putting such an id in `deps`, so without this the two gates contradict each
+  // other: depcheck would demand a deps entry that extcheck hard-errors on.
+  const declared = new Set(
+    [...(it.deps ?? []), ...(it.justified ?? []), ...(it.externalRefs ?? [])].map(resolve),
+  );
   for (const c of cited) {
     const r = resolve(c);
     if (!r || !items.has(r) || declared.has(r) || r === it.id) continue;
