@@ -122,10 +122,29 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: openai/gpt-5.4            # session items: NEVER a Claude model;
-                                     #   pipeline items: production lineup
+    model: z-ai/glm-5.2              # session items: NEVER a Claude model;
+                                     #   pipeline items: production lineup, and
+                                     #   NEVER glm (it is the pipeline generator)
     verdict: pass
     date: 2026-07-25
+    # RECORD ONLY A VERDICT THE JUDGE ACTUALLY GAVE, for the text now on disk.
+    # A rejection is NOT recorded here in any form: it is evidence for the
+    # auditor, not a verdict (WORKFLOW.md §0). An item cleared by the auditor
+    # over a verified judge false positive is recorded `audited` ALONE.
+    # If an item is materially rewritten after being judged, DELETE this block
+    # rather than leave it: an absent block honestly says "not yet judged",
+    # whereas a stale one claims a pass on text the judge never saw. 27 blocks
+    # were removed on exactly this ground in the 2026-07-25 rebuild.
+  verified:                          # OPTIONAL. The PAGE VERIFIER's adjudication
+    model: claude-opus-5             #   (WORKFLOW.md §0): one Opus subagent per
+    verdict: certify                 #   page, reading its page plus the FULL TEXT
+    date: 2026-07-25                 #   of every item that page cites.
+    scope: page                      #   what context the verifier actually had
+    # Deliberately a separate block from `judge`. The verifier is a Claude-family
+    # model, so it does NOT satisfy the cross-family requirement and can never
+    # substitute for a judge verdict; and `certify` here is a model's opinion,
+    # never the publish gate. Only `audited` is the gate, and only the owner
+    # sets it.
   audited: 2026-07-25                # owner/Fable audit date; REQUIRED for published
 sources:
   scraped: []                        # [{url, title, license}] — extraction sources
