@@ -44,9 +44,10 @@ Its first terms are
 
 $$\frac{1}{1};\quad \frac{1}{2}, \frac{2}{2};\quad \frac{1}{3}, \frac{2}{3}, \frac{3}{3};\quad \frac{1}{4}, \dots$$
 
-the blocks being the successive values of $m$. Then
+the blocks being the successive values of $m$. Then the subsequential limit set
+([[def-subsequential-limit]]) is the whole unit interval ([[def-interval]]),
 
-$$\operatorname{SL}(x) = [0,1] \qquad ([[def-subsequential-limit]], [[def-interval]]),$$
+$$\operatorname{SL}(x) = [0,1],$$
 
 and consequently $\limsup_k x_k = 1$ and $\liminf_k x_k = 0$
 ([[def-limsup-liminf]]).
