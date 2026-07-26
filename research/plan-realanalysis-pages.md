@@ -102,9 +102,15 @@ limit set is closed; subadditivity; the **ratio-to-root inequality**
 liminf(a_{n+1}/a_n) <= liminf a_n^{1/n} <= limsup a_n^{1/n} <= limsup(a_{n+1}/a_n)
 (this is WHY the root test dominates the ratio test, and it belongs here, not in
 the series block); standard limits n^{1/n} -> 1, p^{1/n} -> 1,
-n^alpha/(1+p)^n -> 0, x^n/n! -> 0. B: a sequence whose subsequential limit set is
-all of R*; the strict five-term liminf/limsup chain; 2 + sin(ln n) has ratio -> 1
-and limit-point set [1,3] (uses trig: see D-TRIG); (-1)^n.
+n^alpha/(1+p)^n -> 0, x^n/n! -> 0. B: (-1)^n; the block sequence 1/1; 1/2, 2/2;
+1/3, 2/3, 3/3; ... with subsequential limit set exactly [0,1] (level-7 audit
+2026-07-26: replaces the earlier "all of extended-R" enumeration idea — same lesson,
+self-contained witness, and the extended-R attainment point is carried by the dedicated
+limsup = +infinity counterexample); 2^{-k+(-1)^k} defeating the ratio test; the
+all-strict ratio-root chain; the four standard limits worked; strict
+subadditivity/product counterexamples; 0 * infinity indeterminate. (2 + sin(ln n)
+with ratio -> 1 and limit-point set [1,3] is DEFERRED to the trig delta D-TRIG;
+it is not in the level-7 item list.)
 Citations on this page: every (-1)^k witness (the alternating example, the
 strict subadditivity and product counterexamples, 2^{-k+(-1)^k}) cites
 `lem-alternating-sequence` from RA-05; the 1/n-quantitative steps in
@@ -176,8 +182,14 @@ analogue); **Heine-Borel in R by bisection** (NOT as a corollary of Tychonoff);
 compact implies closed and bounded and conversely; compact iff sequentially
 compact; **connected subsets of R are exactly the intervals**; perfect sets; a
 nonempty perfect set is uncountable. B: intersection of (-1/n, 1/n);
-[0,1] cap Q is closed and bounded in Q and not compact; an open cover of (0,1)
-with no finite subcover; a set neither open nor closed.
+{q in Q : q >= 0, q^2 < 2} is closed and bounded in Q and not compact (level-7
+audit 2026-07-26: witness changed from "[0,1] cap Q" — both work, but the
+sqrt-2 truncation runs on the same mechanism as the A-page false statement it
+refutes, and its closedness-in-Q is exactly the irrationality of sqrt 2); an open
+cover of (0,1) with no finite subcover; a set neither open nor closed; Q's
+closure/interior/boundary; {1/k} cup {0} compact; Z closed not compact and (0,1)
+bounded not compact; Q cap [0,2] disconnected; a closed set with an isolated
+point is not perfect; a nondegenerate closed interval is perfect.
 
 **RA-11 The Cantor Set, Baire Category, and Measure Zero in R** <- RA-10
 nowhere dense, meager, residual, F-sigma, G-delta; measure zero; content zero;
