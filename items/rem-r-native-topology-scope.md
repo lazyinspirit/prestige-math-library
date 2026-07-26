@@ -4,7 +4,13 @@ kind: remark
 title: "Which results on this page use the order of $\\mathbb{R}$ and therefore have no general-topological analogue"
 status: draft
 origin: session
-deps: [def-metric-space, def-metric-topology, lem-real-line-is-a-metric-space,
+deps: [def-metric-space, def-metric-topology, def-metric-ball, lem-real-line-is-a-metric-space,
+       def-metric-interior-closure-boundary, thm-metric-closure-characterisation,
+       thm-metric-sequential-closure, def-metric-bounded-diameter,
+       fs-boundedness-is-a-topological-property,
+       def-interior-closure-boundary-r, def-limit-point-r,
+       lem-sequential-characterisation-of-closure-r,
+       lem-compact-implies-closed-and-bounded-r,
        thm-open-subsets-of-r-structure, thm-connected-subsets-of-r-are-intervals, thm-heine-borel-r, thm-compact-iff-sequentially-compact-r, def-open-cover-r, thm-heine-borel-characterisation-r, thm-open-set-algebra-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-neighbourhood-r, def-connected-r, def-interval, def-bounded-set, thm-nested-interval-property, thm-bolzano-weierstrass, fs-closed-bounded-compact-without-completeness]
 justified_by: []
 forward_refs: [cex-closed-bounded-in-q-not-compact]
@@ -100,6 +106,49 @@ $B(x,r) = (x-r,\ x+r)$, which is exactly the neighbourhood $N_r(x)$ of
 proves everything from the order directly, so that nothing here rests on the
 metric development; the identification is recorded so that a reader moving
 between the two pages knows they are looking at one topology and not two.
+Because the two collections of open sets are one collection, everything built
+from them is one notion as well. The interior, closure and boundary of
+[[def-interior-closure-boundary-r]] and of
+[[def-metric-interior-closure-boundary]] are the same three sets, since each
+side characterises them in both of the same two ways, pointwise by
+neighbourhoods and by extremality among the open subsets and the closed
+supersets ([[thm-closure-characterisations-r]],
+[[thm-metric-closure-characterisation]]); limit point, isolated point, adherent
+point and dense are defined by literally the same condition on the two sides
+([[def-limit-point-r]]), once $N_\varepsilon(x)$ and $B(x,\varepsilon)$ are
+recognised as the same set; and
+[[lem-sequential-characterisation-of-closure-r]] is the case $X = \mathbb{R}$ of
+[[thm-metric-sequential-closure]], spending the axiom of countable choice in the
+same one of the two directions.
+
+**Bounded means the same here as it does in the metric development, and that
+agreement is not a topological fact.** [[def-bounded-set]] calls
+$A \subseteq \mathbb{R}$ bounded when it has both a lower and an upper bound,
+while [[def-metric-bounded-diameter]] calls it bounded when it is empty or lies
+inside some ball of $(\mathbb{R}, d_{\mathbb{R}})$. The two conditions hold of
+exactly the same subsets of $\mathbb{R}$. If $A \subseteq B(x_0,r) = (x_0 - r,\
+x_0 + r)$ ([[lem-real-line-is-a-metric-space]], claim 2, [[def-metric-ball]])
+then $x_0 - r$ and $x_0 + r$ bound $A$ below and above; conversely, if
+$\ell \le a \le u$ for every $a \in A$ and $A \ne \varnothing$, then $\ell \le u$
+and $A \subseteq B(\ell,\ u - \ell + 1)$, the radius being at least $1$ and hence
+positive; and an empty $A$ is bounded under both definitions, vacuously under the
+first and by the explicit empty clause of the second. So the word **bounded** in
+[[thm-heine-borel-characterisation-r]] may be read in either sense without
+changing which sets the theorem names.
+
+What may not be done is to read that theorem as a statement about the topology.
+Boundedness is a property of the metric and not of the topology it induces
+([[fs-boundedness-is-a-topological-property]]): the metric
+$\rho(u,v) = \min\{|u-v|,\ 1\}$ induces exactly the open sets of this page, and
+under it every subset of $\mathbb{R}$, including $\mathbb{R}$ itself, is
+bounded. Since the open sets are unchanged, compactness ([[def-open-cover-r]])
+is unchanged too, and $\mathbb{R}$ is not compact, being unbounded in the order
+sense ([[lem-compact-implies-closed-and-bounded-r]]); yet $\mathbb{R}$ is closed,
+and $\rho$-bounded. So "closed and bounded implies compact" is false for $\rho$
+and true for $d_{\mathbb{R}}$, on one and the same topology. The identification
+in the previous paragraph is with the usual metric specifically, and Heine-Borel
+is a theorem about that metric and the order it comes from, not about the
+topology alone.
 
 **What is deliberately not claimed.** Whether the results above have analogues in
 a setting carrying a topology with no order available at all, and whether

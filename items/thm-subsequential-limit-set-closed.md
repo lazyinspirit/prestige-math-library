@@ -39,10 +39,13 @@ sequence of reals with
 Then $y \in \operatorname{SL}(x)$.
 
 In words: the subsequential limit set of a real sequence contains the limit of
-every convergent sequence of its own elements. This is the property that will
-later be called closedness, once the topology of $\mathbb{R}$ is available; here
-it is stated and proved purely in terms of sequences, and no topological notion
-is used or needed.
+every convergent sequence of its own elements. When the topology of $\mathbb{R}$
+arrives, that property is what it calls *sequential closedness*; that sequential
+closedness is in turn equivalent to closedness for subsets of $\mathbb{R}$ is a
+theorem there and not a matter of naming, and the half of that equivalence
+running from sequential closedness to closedness spends the axiom of countable
+choice. Here the property is stated and proved purely in terms of sequences, with
+no choice principle and no topological notion used or needed.
 
 ## Facts & Assumptions
 
