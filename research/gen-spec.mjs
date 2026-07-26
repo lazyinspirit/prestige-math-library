@@ -351,6 +351,14 @@ const RA05_ITEMS = [
   // own Given block. Proving it once here turns eight reconstructions into eight
   // citations. It cannot live on the B page: B pages are leaves. Level 6 is the
   // earliest page every consumer can reach.
+  //
+  // DEFERRED BY THE OWNER 2026-07-26, revisit at step 8. Beta-6 observed that
+  // consumers' titles literally say (-1)^k, which is a well-formed
+  // def-integer-power object: lem-power-laws already gives (-1)^{2j} = 1 with no
+  // parity at all. What this lemma uniquely supplies is the PARITY DECOMPOSITION
+  // of N, needed for "the limit set is exactly {-1, 1}" and for tail-sup splits.
+  // Proposal was to add the identification s_k = (-1)^k to the statement so all
+  // 13 consumers get both halves from one citation. Deferred, not rejected.
   { id: 'lem-alternating-sequence', kind: 'lemma',
     title: 'The even and odd index maps and the alternating sequence: strictly increasing $e, o$ with $\\mathbb{N}$ their disjoint union, and the unique $(s_k)$ with $s_0 = 1$, $s_{\\sigma(k)} = -s_k$, which satisfies $|s_k| = 1$, $s \\circ e \\equiv 1$ and $s \\circ o \\equiv -1$',
     strategy: 'induction',
