@@ -73,9 +73,9 @@ every topology is metrizable, the indiscrete topology on two points being induce
 by no metric ([[cex-non-metrizable-topology]]).
 
 **Where the choice principles are, and are not.** No item on this page invokes a
-choice principle in its own argument. The one place a choice hypothesis is even
-mentioned is on the general page, where topology-hood of the cocountable family is
-verified by citing the countable-union theorem; the instance used there is a union
+choice principle in its own argument. The one place a choice hypothesis is
+actually appealed to is on the general page, where topology-hood of the
+cocountable family is verified by citing the countable-union theorem; the instance used there is a union
 of two sets, for which the hypothesis is not needed, and the definition says so.
 Two items here come close and say so as well: the cofinite clause of
 [[cex-sequential-limits-not-unique]] is stated for a sequence that is *given* to

@@ -11,6 +11,7 @@ items: [def-cauchy-in-metric, lem-metric-convergent-implies-cauchy,
         thm-uniformly-continuous-extension-from-dense, thm-banach-fixed-point,
         cor-banach-error-estimates, def-metric-completion,
         thm-metric-completion-exists, thm-metric-completion-unique,
+        lem-complete-remetrisation,
         rem-complete-metrizability-is-the-topological-shadow]
 examples: [fs-completeness-is-a-topological-property,
            fs-cauchy-implies-convergent-in-every-metric-space,
@@ -37,8 +38,10 @@ convergent subsequence already converges, to that subsequence's limit
 first lemma holds, and the word is always relative to the metric, never to the
 topology.
 
-**Where completeness comes from.** Two theorems supply every complete space this
-page uses. [[thm-euclidean-space-complete]] transfers the Cauchy criterion from
+**Where completeness comes from.** Two theorems supply the concrete complete
+spaces that the fixed-point and extension arguments below run on; a third source,
+the completion of an arbitrary metric space, is built at the end of the page.
+[[thm-euclidean-space-complete]] transfers the Cauchy criterion from
 $\mathbb{R}$ to $\mathbb{R}^n$ for every $n \ge 1$, coordinatewise, using two
 inequalities and no Cauchy-Schwarz; the restriction $n \ge 1$ is inherited from
 [[lem-metrics-on-rn]], where at $n = 0$ the metric $d_\infty$ would be a maximum
@@ -55,13 +58,17 @@ space, nested nonempty closed bounded sets whose diameters tend to $0$ meet in
 exactly one point; and a space in which every such family has nonempty
 intersection is complete. The converse half has to close the tails of a Cauchy
 sequence, so it proves inline that closing a set does not change its diameter,
-rather than assuming it. Both hypotheses earn their place: the vanishing of the
-diameters cannot be dropped
-([[cex-cantor-intersection-needs-vanishing-diameters]]).
+rather than assuming it. The diameter hypothesis earns its place: the vanishing of the
+diameters cannot be dropped, and cannot be weakened to boundedness of the
+diameters either
+([[cex-cantor-intersection-needs-vanishing-diameters]]). Boundedness of each
+$F_k$ is not a further hypothesis but the precondition for writing a diameter
+down at all, and the item says so.
 
 **Uniform continuity and the regularity hierarchy.**
 [[def-metric-uniform-continuity]] discharges a promise made twice on the previous
-page, where the condition had to be written out in full for want of a name;
+page, where for want of a name the condition had to be written out in full in
+[[def-equivalent-metrics]] and pointed at from [[def-metric-continuity]];
 uniform equivalence of two metrics now reads as "both identity maps are
 uniformly continuous". [[def-lipschitz-holder-contraction]] adds the three
 quantitative strengthenings, with the Hölder exponent a rational in $(0,1]$
@@ -93,8 +100,9 @@ still spent inside the two results that are cited, and the item says where.
 **Banach's fixed point theorem.** [[thm-banach-fixed-point]] gives the exact
 statement: a contraction of a nonempty complete metric space into itself has one
 fixed point, reached by iterating from any starting point, together with the
-quantitative estimate $d(x_m,x_n) \le q^{\,n} d(x_1,x_0)/(1-q)$ that the proof
-produces along the way. That estimate is in the statement because
+quantitative estimate $d(x_m,x_n) \le q^{\,n} d(x_1,x_0)/(1-q)$, valid for
+$m \ge n$, that the proof produces along the way. That estimate is in the
+statement because
 [[cor-banach-error-estimates]] reads the two working bounds off it, the a priori
 bound that says how many steps are needed and the a posteriori bound that says
 how good the current step is. Every hypothesis has a witness for its necessity on
@@ -128,6 +136,13 @@ metrics need not share their Cauchy sequences
 witness inside itself, and each is worked out again in full on the companion
 page. Taken together they say one thing: convergence is topological, Cauchyness
 is not, and completeness inherits that failure.
-[[rem-complete-metrizability-is-the-topological-shadow]] closes the page by
-naming the topological invariant that does survive, complete metrizability, and
-by recording plainly that this library does not develop it here.
+[[lem-complete-remetrisation]] then names the topological invariant that does
+survive — **complete metrizability**, the existence of *some* topologically
+equivalent complete metric — and proves three things about it: it is carried
+across homeomorphisms, it passes to closed subspaces, and it is strictly weaker
+than completeness, $(0,\infty)$ carrying the complete metric
+$|x-y| + |1/x - 1/y|$ for the same open sets that $|x-y|$ gives it without being
+complete. [[rem-complete-metrizability-is-the-topological-shadow]] closes the
+page by saying what is still missing: the *characterisation* of the completely
+metrizable topologies, which is Alexandroff's theorem and needs machinery a much
+later page supplies.

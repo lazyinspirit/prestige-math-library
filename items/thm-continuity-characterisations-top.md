@@ -83,6 +83,6 @@ being in particular a subbasis for the topology it generates.
 
 - **Only (a) is pointwise.** Conditions (b) to (e) are global, and none of them has a pointwise version that is equivalent to continuity at a single point: the preimage of an open set containing $f(x)$ can fail to be open while still being a neighbourhood of $x$, which is exactly what continuity at $x$ asserts.
 
-- **The inclusion in (e) may be strict for a continuous map.** For the constant map on a two-point discrete space, or for the inclusion of $(0,1)$ into $\mathbb{R}$, images of closures are smaller than closures of images. Equality for all $A$ is a strictly stronger condition, equivalent to $f$ being a closed map, and closed maps are defined two items below.
+- **The inclusion in (e) may be strict for a continuous map.** For the inclusion of $(0,1)$ into $\mathbb{R}$ and $A = (0,1)$, the image of the closure is $(0,1)$ while the closure of the image is $[0,1]$. Equality for all $A$ is a strictly stronger condition, equivalent to $f$ being a closed map, and closed maps are defined three items below. Note that no map into a **discrete** space can witness strictness: there every subset is closed, so $f[\overline{A}] = f[A] = \overline{f[A]}$ always.
 
 - **What the theorem does not say.** It says nothing about images of open sets: a continuous map need not carry open sets to open sets, and the failure is exactly what separates a continuous bijection from a homeomorphism. That separation is recorded on this page as a false statement with an explicit two-point witness.

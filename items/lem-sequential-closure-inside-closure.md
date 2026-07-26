@@ -81,7 +81,7 @@ topological space: the symbol would not denote.
 
 ## Remarks
 
-- **Neither inclusion of claim 1 reverses, and the implication of claim 2 does not reverse either.** The witnesses are on the companion page and are both in the cocountable topology on $\mathbb{R}$: the sequential closure of $[0,1]$ is $[0,1]$ while its closure is all of $\mathbb{R}$ ([[cex-sequential-closure-strictly-inside-closure]]), and the identity from the cocountable topology to the usual topology is sequentially continuous and not continuous ([[cex-sequentially-continuous-not-continuous]]). This lemma therefore asserts the two inclusions and the one implication and nothing more.
+- **The second inclusion of claim 1 does not reverse, and the implication of claim 2 does not reverse either.** The witnesses are on the companion page and are both in the cocountable topology on $\mathbb{R}$: the sequential closure of $[0,1]$ is $[0,1]$ while its closure is all of $\mathbb{R}$ ([[cex-sequential-closure-strictly-inside-closure]]), and the identity from the cocountable topology to the usual topology is sequentially continuous and not continuous ([[cex-sequentially-continuous-not-continuous]]). This lemma therefore asserts the two inclusions and the one implication and nothing more.
 
 - **A countability hypothesis repairs both.** In a first countable space the second inclusion of claim 1, $\operatorname{seqcl}(A) \subseteq \overline{A}$, is an equality, and the implication of claim 2 reverses; that is the theorem two items below, and it is where countable choice is spent.
 

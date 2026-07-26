@@ -89,13 +89,15 @@ Heine criterion, uniqueness, algebra, order preservation, squeeze, local
 boundedness, composition, psi = dist(.,Z) and the psi(1/x) oscillator — see
 RA-12 in plan-realanalysis-pages.md for the binding audit. When the continuity
 pages (`continuity-ivt-evt-and-uniform-continuity`, order 44, onward) are
-scaffolded they CITE those items, never redefine them. Two more settled facts
-bind this section: `lem-integer-part` (`limits-of-real-functions`) is the
-library's floor item — cite it for any integer-part step; and
-`cex-evt-and-ivt-fail-over-a-non-complete-field` on
-`equivalent-forms-of-completeness-examples` is owed this track's
-continuity-of-a-real-function definition id in its deps once that page is
-scaffolded (research/level8-batch-2.notes.md §2).
+scaffolded they CITE those items, never redefine them. One more settled fact
+binds this section: `lem-integer-part` (`limits-of-real-functions`) is the
+library's floor item — cite it for any integer-part step. (This note
+originally also recorded a wiring obligation owed by this track to
+`cex-evt-and-ivt-fail-over-a-non-complete-field`; RETRACTED 2026-07-27,
+matching the RA-13 retraction in plan-realanalysis-pages.md — that
+counterexample states epsilon-delta continuity inline over an ARBITRARY
+ordered field and is FINAL; this track's continuity definition is for real
+functions on subsets of R and could never be cited there. Do not retro-wire.)
 
 ### RA4-A definitions
 limit of a function at a point (epsilon-delta); one-sided limits; limits at

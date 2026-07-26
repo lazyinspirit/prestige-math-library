@@ -5,6 +5,7 @@ title: "Metrizable space: a topological space whose topology is induced by some 
 status: draft
 origin: session
 deps: [def-topological-space, def-metric-topology, def-metric-space, thm-metric-open-set-algebra, def-equivalent-metrics,
+       def-subspace-topology-top, def-isometry-and-metric-embedding,
        def-metric-ball, def-neighbourhood-top, def-interior-closure-boundary-top, def-continuous-map-top,
        def-sequence-convergence-top, def-homeomorphism-and-open-maps, def-first-countable-top,
        lem-metric-ball-neighbourhood-base, thm-metric-hausdorff-separation, def-metric-convergence,
@@ -73,8 +74,22 @@ $\mathcal{T}_d$.
   around $a$ mapped into it, which by the first bullet is continuity at $a$ in
   the sense of [[def-continuous-map-top]].
 
-Consequently every statement proved for metric spaces in this library may be
-quoted verbatim for a metrizable space once a metric is named, and conversely.
+- *Subspaces.* For $A \subseteq X$ the subspace topology
+  $\{\, U \cap A : U \in \mathcal{T}_d \,\}$ of [[def-subspace-topology-top]] is
+  exactly the metric topology of the subspace metric $d_A$
+  ([[def-isometry-and-metric-embedding]]), so the two uses of the phrase
+  *subspace topology* in this library name one thing. Indeed
+  $B_A(a,r) = B_X(a,r) \cap A$: a trace $U \cap A$ is $d_A$-open, since each of
+  its points $a$ has $B_X(a,r) \subseteq U$ and hence $B_A(a,r) \subseteq U \cap A$;
+  and a $d_A$-open $W$ is the trace of
+  $U := \bigcup \{\, B_X(a,r) : a \in W,\ r > 0,\ B_X(a,r) \cap A \subseteq W \,\}$,
+  which is $d_X$-open, satisfies $U \cap A = W$, and involves no choice principle,
+  the union being taken over a set of pairs rather than over a selection.
+
+Consequently every notion the metric-space pages define — neighbourhood,
+interior, closure, boundary, dense, convergence, continuity, subspace — is the
+notion defined here, and every statement proved about them there may be quoted
+verbatim for a metrizable space once a metric is named, and conversely.
 
 **Metrizability is a topological property; the metric is not part of it.** If
 $h : X \to Y$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]) and $d$

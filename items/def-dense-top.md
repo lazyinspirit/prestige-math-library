@@ -62,10 +62,12 @@ exactly when $\operatorname{int}(A) = \varnothing$.
 **Nowhere dense implies codense, and the converse fails.** If
 $\operatorname{int}(\overline{A}) = \varnothing$ then
 $\operatorname{int}(A) \subseteq \operatorname{int}(\overline{A}) = \varnothing$
-by monotonicity of the interior, so $A$ is codense. The two notions differ
-exactly on sets whose closure is larger than themselves: a dense set with empty
-interior, such as the rationals inside the real line, is codense and is not
-nowhere dense, its closure being everything. A *closed* set is nowhere dense
+by monotonicity of the interior, so $A$ is codense. The two notions can differ
+only on sets whose closure is larger than themselves, and there they sometimes
+do: a dense set with empty interior, such as the rationals inside the real line,
+is codense and is not nowhere dense, its closure being everything. They may also
+agree on such a set: $(0,1)$ inside $\mathbb{R}$ has closure $[0,1]$ and is
+neither codense nor nowhere dense. A *closed* set is nowhere dense
 precisely when it is codense, since then $\overline{A} = A$.
 
 ## Remarks

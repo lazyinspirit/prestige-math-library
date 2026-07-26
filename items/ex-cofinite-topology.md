@@ -84,7 +84,7 @@ sets of finite complement ([[def-standard-topologies]], [[def-countable]]). Then
 
 ## Remarks
 
-- **Claim 3 is the reason the cofinite topology is a standard counterexample factory.** A space in which any two nonempty open sets meet cannot be metrizable ([[thm-metric-hausdorff-separation]], [[def-metrizable-space]]) and cannot have unique sequential limits; the failure of uniqueness is worked out on this page ([[cex-sequential-limits-not-unique]]).
+- **Claim 3 is the reason the cofinite topology is a standard counterexample factory.** A space with at least two points in which any two nonempty open sets meet cannot be metrizable ([[thm-metric-hausdorff-separation]], [[def-metrizable-space]]), since a metric separates distinct points by disjoint balls. It does **not** follow that sequential limits fail to be unique there: the cocountable topology on $\mathbb{R}$ also has no two disjoint nonempty open sets and its sequential limits *are* unique ([[ex-cocountable-topology-on-r]]). In the cofinite topology uniqueness does fail, but the argument needs an injective sequence and not merely the meeting of open sets ([[cex-sequential-limits-not-unique]]).
 
 - **Finiteness of $X$ collapses the example.** If $X$ were finite then every subset would have finite complement, the topology would be discrete, and all four claims would read differently or vacuously. The hypothesis that $X$ is infinite is used in steps 1.5 and 2.2 and is not decoration.
 

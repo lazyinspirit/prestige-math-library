@@ -92,7 +92,7 @@ full below rather than cited, so that this page does not depend on its companion
 
 ## Remarks
 
-- **What the witness shows about the source.** Since the source is not first countable — if it were, [[thm-first-countable-sequences-suffice]] would make the map continuous — the cocountable topology on $\mathbb{R}$ has no at most countable neighbourhood base at any point. That is a genuine consequence of the refutation and not an extra assumption; it is also the reason the cocountable topology is the standard source of examples in which sequences fail to see the topology.
+- **What the witness shows about the source.** The cocountable topology on $\mathbb{R}$ is **not first countable**: were it, [[thm-first-countable-sequences-suffice]] would make the map above continuous, and it is not. So some point of it has no at most countable neighbourhood base. That much is a genuine consequence of the refutation and not an extra assumption; the sharper statement that **no** point has one is true but is not established here, since the refutation exhibits a single failure of continuity rather than one at every point. it is also the reason the cocountable topology is the standard source of examples in which sequences fail to see the topology.
 
 - **The failure is not about the target.** The target here is metrizable, hence as well behaved as a space can be; all the pathology is in the source, which is where sequential continuity is tested.
 

@@ -409,15 +409,33 @@ CEX: one per failing implication in the chain, matched explicitly.
 
 ## T8. Countability, Metrization, and Baire   [needs F1]
 
-**Level-8 wiring obligation (Alpha-8, 2026-07-26, from
-research/level8-batch-1.notes.md §2).**
+**Level-8 wiring obligation (Alpha-8, 2026-07-26; corrected 2026-07-27).**
 `rem-complete-metrizability-is-the-topological-shadow` on
 `completeness-and-uniform-continuity` forward-orients to this material (page
 `complete-metrizability-and-baire`, order 128). That page had no items when
-the remark was authored, so no `forward_refs` id could be declared; when it
-gains items, the remark MUST declare the Alexandroff-theorem item in its
-`forward_refs` (fwdcheck), per the forward-refs ledger entry. Do not lose
-this when the page is scaffolded.
+the remark was authored, so no `forward_refs` id could be declared — and a
+page-level forward reference is NOT expressible in the schema (fwdcheck
+rejects a dangling entry; a page wikilink is a `link-unplanned` error), so
+the generated ledger carries NO entry for this and THIS NOTE is the memory.
+When the page gains items, the remark MUST declare the Alexandroff-theorem
+item in its `forward_refs` (fwdcheck). Do not lose this when the page is
+scaffolded.
+
+**AMENDED at the step-8 audit, 2026-07-27 (Beta-8-1), on the owner instruction
+to prove forward references inside level 8.** The orientation is now PARTLY
+DISCHARGED on `completeness-and-uniform-continuity` itself, by the new item
+`lem-complete-remetrisation` (id COINED, since this page had no items to reuse
+an id from). That lemma defines complete metrizability as a property of a metric
+topology and proves three things: invariance under homeomorphism, inheritance by
+closed subspaces, and that the property is strictly weaker than completeness,
+witnessed by $(0,\infty)$ under $|x-y| + |1/x-1/y|$. The remark now DEPENDS on
+that lemma as an ordinary same-page dependency, and what is left forward is only
+ALEXANDROFF'S THEOREM (completely metrizable iff G-delta in a complete metric
+space) and its open-subspace corollary. So when this page is scaffolded, the
+`forward_refs` entry to declare is the Alexandroff item ALONE, and the T8 DEFS
+list must NOT coin a second "completely metrizable" definition: it is already
+made precise in `lem-complete-remetrisation` and must be transferred from there
+to the general-topological-space setting, not restated.
 
 DEFS: first and second countable; separable; Lindelof; ccc; sigma-locally-finite
 and sigma-discrete bases; Baire space; comeager; completely metrizable; Polish

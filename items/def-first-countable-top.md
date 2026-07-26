@@ -47,7 +47,7 @@ $x \in U_N \subseteq N$ gives an at most countable neighbourhood base of open
 sets. Making the base decreasing, that is arranging
 $M_0 \supseteq M_1 \supseteq \dots$, requires enumerating it and forming the
 running finite intersections; both operations are carried out inside the proof of
-the theorem that uses them, two items below, where the enumeration and the
+the theorem that uses them, the next item, where the enumeration and the
 recursion are cited explicitly rather than assumed here.
 
 **First countability is a topological property**
@@ -68,10 +68,13 @@ inclusion, and a bijection preserves at most countability
 - **Every metric space is first countable**, the balls of radius $1/n$ for
   $n \ge 1$ forming an at most countable neighbourhood base at each point
   ([[lem-metric-ball-neighbourhood-base]]); so every metrizable space is first
-  countable, and a space that is not first countable is not metrizable. That is
-  the cheapest obstruction to metrizability available here, and it is stronger
-  than the Hausdorff obstruction used elsewhere on this page in the sense that it
-  applies to spaces in which points are separated.
+  countable, and a space that is not first countable is not metrizable. That is a
+  second obstruction to metrizability, **independent** of the Hausdorff
+  obstruction used elsewhere on this page and not stronger than it: the
+  indiscrete topology on two points is first countable, as the paragraph above
+  records, and is not Hausdorff, so it is caught by the Hausdorff obstruction and
+  not by this one. Neither obstruction is a characterisation, and this library
+  proves no implication between the two.
 
 - **Second countability is not defined here.** The stronger axiom, an at most
   countable basis for the whole topology, belongs with the other countability

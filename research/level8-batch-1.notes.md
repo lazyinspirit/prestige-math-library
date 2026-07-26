@@ -83,9 +83,21 @@ Level-8 addition (batch 1): "the interior of Q is empty" and every other
 no-interval-inside-a-countable-set claim cites `cor-interval-uncountable` +
 `thm-rationals-countable` + `lem-subset-of-countable` (a ball is a
 nondegenerate interval by `lem-real-line-is-a-metric-space`, so it cannot sit
-inside a countable set). No density-of-irrationals item exists or is needed
-for this. Closedness of [a,b] or [a,infinity) inside a completeness argument
-cites `thm-metric-sequential-closure` + `lem-limit-preserves-order`.
+inside a countable set). Closedness of [a,b] or [a,infinity) inside a
+completeness argument cites `thm-metric-sequential-closure` +
+`lem-limit-preserves-order`.
+
+CORRECTION, step-8 audit 2026-07-27 (Beta-8-1). The sentence originally here,
+"No density-of-irrationals item exists or is needed for this", was WRONG on its
+first half. `lem-q-and-irrationals-dense-r` DOES exist, is published on
+`topology-of-r`, and states that both Q and R \ Q are dense in R and that every
+nonempty open subset of R is uncountable. Its claim 3 is an alternative route to
+the no-interval-inside-a-countable-set pattern above, at the cost of one extra
+dependency. The step-5 author correctly did not need it for the cofinite and
+cocountable computations, so the citation guidance above stands unchanged; only
+the false existence claim is withdrawn. A later page reading this note should
+prefer `lem-q-and-irrationals-dense-r` whenever it wants density of the
+irrationals itself, which the three-item pattern above does not give.
 ```
 
 ### 1.4 T1 CEX list — OWNER-CONDITIONAL (only if the sqrt swap is approved)

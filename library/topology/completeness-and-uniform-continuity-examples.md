@@ -65,7 +65,7 @@ intersection is empty; the diameters are $1 + 1/(2n+1)$ and never approach $0$.
 The metric takes values in $\{0\} \cup (1,2]$, so its topology is discrete and
 closedness carries no information at all.
 
-Three counterexamples make the failure of topological invariance concrete.
+Two counterexamples make the failure of topological invariance concrete.
 [[cex-completeness-is-not-topological]] puts $|m-n|$ and $|1/m - 1/n|$ on the
 positive integers: both topologies are discrete, hence equal, and only the first
 metric is complete. [[cex-same-topology-different-cauchy-sequences]] does the

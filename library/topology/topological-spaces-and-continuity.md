@@ -34,11 +34,11 @@ between "arbitrary" and "binary" is the whole subject: it is what makes a metric
 topology an instance, and it is not removable, as the first false statement below
 records. Closed sets are complements of open sets, and a topology may equally be
 presented by its closed sets, a dual axiomatisation discharged in full inside the
-definition. Six standard topologies are then defined on an arbitrary set —
-discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski —
-and topology-hood is verified for each ([[def-standard-topologies]]); the
-cofinite and cocountable verifications are where the countability machinery of the
-earlier pages is spent, and the definition records honestly that only finite
+definition. Six standard topologies are then defined ([[def-standard-topologies]]) — the
+first four on an arbitrary set, the particular-point one on a set with a point
+named in it, and Sierpinski space on a two-point set — and topology-hood is
+verified for each; the cofinite and cocountable verifications are where the
+countability machinery of the earlier pages is spent, and the definition records honestly that only finite
 unions are needed, so no choice principle is actually required despite the
 citation to a theorem that carries one.
 
@@ -90,10 +90,11 @@ sequential continuity and the sequential closure are defined for an arbitrary
 space ([[def-sequence-convergence-top]]). The notation $\lim_k x_k$ is
 deliberately **not** introduced there: limits need not be unique, and in the
 indiscrete topology every sequence converges to every point, so the symbol would
-not denote. [[lem-sequential-closure-inside-closure]] proves the two inclusions
-that always hold — the sequential closure sits inside the closure, continuity
-implies sequential continuity — and claims nothing more, because the witnesses
-against the converses live on the companion page. Under first countability
+not denote. [[lem-sequential-closure-inside-closure]] proves what always holds — the
+sequential closure sits between the set and its closure, continuity implies
+sequential continuity — and adds that sequential limits need not be unique, the
+indiscrete topology witnessing that inline. It claims no converse, because the
+witnesses against the converses live on the companion page. Under first countability
 ([[def-first-countable-top]]) both converses hold
 ([[thm-first-countable-sequences-suffice]]), and the proof spends the axiom of
 countable choice at exactly two points, both flagged.
