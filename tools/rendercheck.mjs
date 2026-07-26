@@ -27,16 +27,42 @@
 // Every check below corresponds to a real defect or to a documented mis-render,
 // and none of them needs a browser, so this runs with the other gates.
 //
-// WHAT IT CANNOT DO. It does not render anything. A formula that is well
-// delimited but mathematically malformed (`\frac{1}` , an unknown macro) still
-// needs an eye or a real KaTeX pass. Treat a clean run as "the delimiters are
-// sound", never as "the page renders".
+// IT ALSO RENDERS. Every math span is passed through the real KaTeX, loaded from
+// the app repo, with the same options the renderer uses (MathMarkdown.tsx calls
+// rehype-katex with NO options, so plain defaults and no custom macros). This
+// was added after a delimiter-clean formula still failed to render: KaTeX parses
+// `\tag{...}` in TEXT mode, where `\ast` is undefined, while the `$\ast$` form
+// that KaTeX wants is broken by markdown before KaTeX ever sees it. Two layers,
+// two different failures, and only an actual render pass sees both.
+//
+// WHAT IT STILL CANNOT DO. It checks that each span PARSES, not that the page
+// looks right: spacing, line breaking, a formula that parses but says the wrong
+// thing. If KaTeX cannot be loaded the parse pass is skipped and reported as
+// skipped, never as passed.
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 const REPO = join(fileURLToPath(new URL(".", import.meta.url)), "..");
+
+// KaTeX lives in the app repo; this repo has no node_modules of its own. Same
+// sibling-repo pattern the precheck runner uses for tsx.
+const require_ = createRequire(import.meta.url);
+let katex = null;
+let katexWhy = "";
+for (const cand of [
+  "/root/Projects/prestige-intelligence/web/node_modules/katex",
+  "katex",
+]) {
+  try {
+    katex = require_(cand);
+    break;
+  } catch (e) {
+    katexWhy = e.message;
+  }
+}
 const argv = process.argv.slice(2);
 const asJson = argv.includes("--json");
 const quiet = argv.includes("--quiet");
@@ -85,6 +111,21 @@ const clip = (s, n = 96) => {
   return one.length > n ? one.slice(0, n) + "…" : one;
 };
 
+const tryKatex = (rel, tex, displayMode) => {
+  if (!katex) return;
+  if (/\[\[/.test(tex)) return; // already reported; KaTeX would only echo it
+  try {
+    katex.renderToString(tex, { displayMode, throwOnError: true });
+  } catch (e) {
+    err(
+      rel,
+      "katex-parse-error",
+      String(e.message).replace(/\s+/g, " ").slice(0, 160),
+      clip(tex),
+    );
+  }
+};
+
 // ------------------------------------------------------------------ checks
 for (const path of targets) {
   let src;
@@ -123,6 +164,7 @@ for (const path of targets) {
         "wikilinks are resolved before KaTeX runs, so this kills the whole block",
         clip(d.whole),
       );
+    tryKatex(rel, d.inner, true);
     if (/\r?\n/.test(d.inner.trim()))
       err(
         rel,
@@ -169,6 +211,7 @@ for (const path of targets) {
     // corpus (45 occurrences on pages that render correctly), so it is not
     // flagged. A BLANK line is not: it ends the paragraph, so the closing
     // delimiter is orphaned and the dollars render literally.
+    tryKatex(rel, inner, false);
     if (/\r?\n[ \t]*\r?\n/.test(inner))
       err(
         rel,
@@ -205,8 +248,8 @@ if (asJson) {
   } else {
     console.log(
       `\nOK — ${targets.length} file(s): no wikilink inside math, no nested or unbalanced` +
-        `\ndelimiters, no multiline display block. This checks DELIMITERS, not whether` +
-        `\nthe mathematics inside them renders.`,
+        `\ndelimiters, no multiline display block, and every math span parses under the` +
+        `\nreal KaTeX${katex ? "" : " (SKIPPED: " + katexWhy.slice(0, 60) + ")"}.`,
     );
   }
 }
