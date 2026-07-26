@@ -87,6 +87,20 @@ basis; the Vitali set; 1 + omega = omega but omega + 1 > omega; Banach-Tarski
 
 ## T1. Metric Spaces
 
+**Level-7 audit, 2026-07-26 (owner-approved).** Three decisions bind authoring
+of this page. (1) `lem-real-line-is-a-metric-space` was ADDED: nothing in the
+library established that (R, |x-y|) is a metric space, and because a B page is
+a leaf, no example could ever supply it. Both `fs-` items and the six R-based
+B items now cite it. (2) `thm-metric-equivalence-hierarchy` no longer claims
+"and both implications are strict": the strictness witnesses live on the B
+page, which the A-page theorem may not cite. Strictness belongs in a REMARK on
+the theorem naming `cex-topologically-not-uniformly-equivalent` and
+`cex-uniformly-not-lipschitz-equivalent` -- an ordinary same-pair link, not a
+dependency. (3) `ex-p-adic-ultrametric` is fixed at p = 2: general p needs
+unique factorisation and the library has no number theory at all. Existence of
+v_2 is `thm-strong-induction`, uniqueness is parity via
+`lem-alternating-sequence`.
+
 DEFS: metric, pseudometric, ultrametric, extended metric; ball; bounded,
 diameter; distance to a set and between sets; isometry; topologically /
 uniformly / Lipschitz equivalent metrics; metric topology; open, closed,
