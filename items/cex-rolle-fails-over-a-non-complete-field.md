@@ -97,29 +97,10 @@ refutes clause 1.
 
 ## Remarks
 
-- **Where the classical proof breaks.** Rolle's theorem is proved by taking a
-  point where the function attains its maximum and showing the derivative
-  vanishes there. Over $\mathbb{Q}$ the maximum need not exist: that is
-  [[cex-evt-and-ivt-fail-over-a-non-complete-field]], proved on the same
-  interval and by the same missing $\sqrt 2$. So this counterexample is not
-  independent of that one, it is its consequence for the differential calculus.
+- **Where the classical proof breaks.** Rolle's theorem is proved by taking a point where the function attains its maximum and showing the derivative vanishes there. Over $\mathbb{Q}$ the maximum need not exist: that is [[cex-evt-and-ivt-fail-over-a-non-complete-field]], proved on the same interval and by the same missing $\sqrt 2$. So this counterexample is not independent of that one, it is its consequence for the differential calculus.
 
-- **A locally constant function need not be constant** when the domain is
-  disconnected, and $D$ is disconnected in exactly the way $\mathbb{Q}$ is: the
-  sets $\{x \in D : x^2 < 2\}$ and $\{x \in D : x^2 > 2\}$ are disjoint,
-  nonempty, cover $D$, and each is open in the $\varepsilon$-$\delta$ sense.
-  Over $\mathbb{R}$ no such split of an interval exists, and that is the
-  connectedness that the mean value theorem really rests on.
+- **A locally constant function need not be constant** when the domain is disconnected, and $D$ is disconnected in exactly the way $\mathbb{Q}$ is: the sets $\{x \in D : x^2 < 2\}$ and $\{x \in D : x^2 > 2\}$ are disjoint, nonempty, cover $D$, and each is open in the $\varepsilon$-$\delta$ sense. Over $\mathbb{R}$ no such split of an interval exists, and that is the connectedness that the mean value theorem really rests on.
 
-- **The derivative here is genuinely a derivative**, not a degenerate reading:
-  the difference quotient is not merely small near $c$, it is exactly $0$ for
-  $\varphi$ and exactly $-1/2$ for $\rho$ on a whole punctured neighbourhood, so
-  the limit exists in the strongest possible sense.
+- **The derivative here is genuinely a derivative**, not a degenerate reading: the difference quotient is not merely small near $c$, it is exactly $0$ for $\varphi$ and exactly $-1/2$ for $\rho$ on a whole punctured neighbourhood, so the limit exists in the strongest possible sense.
 
-- **This item does not use, and does not need, a general theory of
-  differentiation.** The difference-quotient condition is stated in the
-  Statement refuted and every use of it above is a direct verification. When the
-  page developing the derivative and the mean value theorems is written, its
-  definition will specialise to the one above with $F = \mathbb{R}$, and this
-  item should then cite it rather than restate it. Until that page exists there
-  is no id to cite, and inventing one would be a fabricated citation.
+- **This item does not use, and does not need, a general theory of differentiation.** The difference-quotient condition is stated in the Statement refuted and every use of it above is a direct verification, so the item is self-contained and nothing here waits on a later page. As with [[cex-evt-and-ivt-fail-over-a-non-complete-field]], that is deliberate: the claim refuted is a claim about an *arbitrary* ordered field and is refuted over $\mathbb{Q}$, so a derivative defined for real functions on subsets of $\mathbb{R}$ would not apply to it. The condition above is the ordinary difference-quotient one read inside $F$, and it specialises to the real-variable definition at $F = \mathbb{R}$.

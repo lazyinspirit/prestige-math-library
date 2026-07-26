@@ -370,14 +370,13 @@ needed). B: Dirichlet nowhere continuous; x times Dirichlet continuous at exactl
 Lipschitz, exactly 1/2-Holder; x^beta separates every Holder class; the product
 of two uniformly continuous functions need not be uniformly continuous; EVT fails
 on (0,1) and on [0,infinity); the IVT fails over Q.
-Level-8 wiring obligation (Alpha-8, 2026-07-26, from
-research/level8-batch-2.notes.md §2):
-`cex-evt-and-ivt-fail-over-a-non-complete-field` on
-`equivalent-forms-of-completeness-examples` needs THIS page's definition of
-continuity of a real function on a subset of R (a B page is a leaf, so the
-forward dep is legal, but the target id does not exist yet). When this page is
-scaffolded, add its continuity-definition id to that item's deps; the
-obligation must not be lost.
+Level-8 wiring obligation RETRACTED (Beta-8-2, 2026-07-27, superseding the
+Alpha-8 note of 2026-07-26). `cex-evt-and-ivt-fail-over-a-non-complete-field`
+on `equivalent-forms-of-completeness-examples` states epsilon-delta continuity
+inline and that is FINAL. It refutes a claim about an ARBITRARY ordered field,
+over Q; this page's continuity definition will be for real functions on subsets
+of R, resting on `def-function-limit`, so it cannot apply to Q and could never
+be cited there. Do NOT retro-wire it.
 
 **RA-14 Monotone Functions, Discontinuities, and Continuity Sets**
 <- RA-13, RA-11, RA-03
@@ -422,12 +421,12 @@ constant; monotonicity from the sign of the derivative; bounded derivative
 implies globally Lipschitz. B: |x| not differentiable at 0; x^3 strictly
 increasing with vanishing derivative; the MVT fails without endpoint continuity;
 Rolle fails over Q; **the vector-valued MVT failure**, deferred to RA-22.
-Level-8 wiring obligation (Alpha-8, 2026-07-26, from
-research/level8-batch-2.notes.md §2): `cex-rolle-fails-over-a-non-complete-field`
-on `equivalent-forms-of-completeness-examples` needs THIS page's definition of
-the derivative (a B page is a leaf, so the forward dep is legal, but the
-target id does not exist yet). When this page is scaffolded, add its
-derivative-definition id to that item's deps; the obligation must not be lost.
+Level-8 wiring obligation RETRACTED (Beta-8-2, 2026-07-27, superseding the
+Alpha-8 note of 2026-07-26). `cex-rolle-fails-over-a-non-complete-field` states
+the difference quotient inline and that is FINAL, for the same reason as the
+retraction at RA-13: it refutes a claim about an ARBITRARY ordered field, over
+Q, and this page's derivative will be defined for real functions on subsets of
+R. Do NOT retro-wire it.
 
 **RA-16 Darboux, L'Hopital, and Taylor's Theorem** <- RA-15
 higher derivatives; **C^k and C^infinity**; **Darboux's theorem** and its

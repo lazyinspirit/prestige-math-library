@@ -108,27 +108,10 @@ because of that single omission.
 
 ## Remarks
 
-- **One mechanism, three failures.** All three functions are built from
-  $x^2 - 2$, whose zero is missing from $\mathbb{Q}$. The map $T$ is a
-  contraction towards that missing zero: it halves $|x^2-2|$ at every step while
-  staying inside $D$. So $|x^2-2|$ has infimum $0$ on $D$ and does not attain
-  it, and the three failures are three ways of reading that one sentence.
+- **One mechanism, three failures.** All three functions are built from $x^2 - 2$, whose zero is missing from $\mathbb{Q}$. The map $T$ is a contraction towards that missing zero: it halves $|x^2-2|$ at every step while staying inside $D$. So $|x^2-2|$ has infimum $0$ on $D$ and does not attain it, and the three failures are three ways of reading that one sentence.
 
-- **Nothing here is peculiar to $\mathbb{Q}$.** The same construction runs in
-  any ordered subfield of $\mathbb{R}$ that omits $\sqrt 2$, since every step
-  above uses only the field operations, the order, and the absence of a square
-  root of $2$. This item exhibits the cheapest witness; no claim is made here
-  about ordered fields in general.
+- **Nothing here is peculiar to $\mathbb{Q}$.** The same construction runs in any ordered subfield of $\mathbb{R}$ that omits $\sqrt 2$, since every step above uses only the field operations, the order, and the absence of a square root of $2$. This item exhibits the cheapest witness; no claim is made here about ordered fields in general.
 
-- **This item does not use, and does not need, a general theory of continuous
-  functions.** The $\varepsilon$-$\delta$ condition is stated in the Statement
-  refuted and every use of it above is a direct verification. When the page
-  developing continuity of real functions is written, its definition will
-  specialise to the one above with $F = \mathbb{R}$, and this item should then
-  cite it rather than restate it. Until that page exists there is no id to cite,
-  and inventing one would be a fabricated citation.
+- **This item does not use, and does not need, a general theory of continuous functions.** The $\varepsilon$-$\delta$ condition is stated in the Statement refuted and every use of it above is a direct verification, so the item is self-contained and nothing here waits on a later page. That is deliberate and not a placeholder: the claim refuted here is a claim about an *arbitrary* ordered field, and it is refuted over $\mathbb{Q}$, so a definition of continuity written for real functions on subsets of $\mathbb{R}$ would not apply to it. This library has no notion of continuity over a general ordered field and needs none elsewhere, and inventing an id for one would put an unused definition on a page about completeness properties. The condition above is the ordinary one read inside $F$, and it specialises to the real-variable definition at $F = \mathbb{R}$.
 
-- **What is true over $\mathbb{Q}$.** Continuity, sums and products of
-  continuous functions, and composition all behave normally; what fails is every
-  statement whose proof needs a supremum. That is the content of the page this
-  one belongs to.
+- **What is true over $\mathbb{Q}$.** Continuity, sums and products of continuous functions, and composition all behave normally; what fails is every statement whose proof needs a supremum. That is the content of the page this one belongs to.

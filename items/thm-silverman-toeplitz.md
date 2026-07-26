@@ -118,25 +118,8 @@ sequence built against the matrix, by a gliding hump.
 
 ## Remarks
 
-- **The three conditions are independent**, and each is tested by a different
-  input. Condition 1 is what a single nonzero coordinate detects, condition 2
-  what the constant sequence detects, and condition 3 is invisible to any fixed
-  sequence: for each individual bounded input a matrix with unbounded row
-  absolute sums may behave perfectly well, and the failure only appears against
-  a sequence whose signs are chosen row by row.
-  [[cex-irregular-summability-matrix]] exhibits a matrix satisfying 1 and 2 and
-  failing 3, together with a null sequence whose transform diverges.
+- **No one of the three conditions follows from the other two**, and each is tested by a different input. Condition 1 is what a single nonzero coordinate detects, condition 2 what the constant sequence detects, and condition 3 is invisible to any fixed sequence: for each individual bounded input a matrix with unbounded row absolute sums may behave perfectly well, and the failure only appears against a sequence whose signs are chosen row by row. The substantial case is 3, and it is [[cex-irregular-summability-matrix]], which exhibits a matrix satisfying 1 and 2 and failing 3, together with a null sequence whose transform diverges. The other two are settled in a line each and are recorded here rather than given items of their own: the matrix with $c_{n,0} = 1$ and every other entry $0$ has row sums and row absolute sums constantly $1$, so it satisfies 2 and 3, while its $0$-th column is constantly $1$ and fails 1; and the zero matrix has null columns and row absolute sums $0$, so it satisfies 1 and 3, while its row sums are constantly $0$ and fail 2.
 
-- **The gliding hump.** The witness of the necessity argument is built in blocks:
-  on the $j$-th block its terms have modulus $1/j$, so the sequence tends to
-  $0$, and their signs are chosen to align with the entries of one row $n_j$, so
-  that on that row the transform picks up almost the whole row absolute sum,
-  divided by $j$. Choosing $r_{n_j}$ larger than $j$ times its own head bound
-  makes the transform exceed $j$ there. The bound $B_{k_{j-1}}$ on the head is
-  available *before* $n_j$ is chosen, because it depends only on the earlier
-  block boundary, and that is what keeps the construction from circling.
+- **The gliding hump.** The witness of the necessity argument is built in blocks: on the $j$-th block its terms have modulus $1/j$, so the sequence tends to $0$, and their signs are chosen to align with the entries of one row $n_j$, so that on that row the transform picks up almost the whole row absolute sum, divided by $j$. Choosing $r_{n_j}$ larger than $j$ times its own head bound makes the transform exceed $j$ there. The bound $B_{k_{j-1}}$ on the head is available *before* $n_j$ is chosen, because it depends only on the earlier block boundary, and that is what keeps the construction from circling.
 
-- **No choice is used.** Every stage of the recursion takes a least element or a
-  maximum of a finite set; the row bound $\rho(n)$ is the least admissible one;
-  and $M_k$ is a supremum, that is, a definite element of $\mathbb{R}$ rather
-  than a selected bound.
+- **No choice is used.** Every stage of the recursion takes a least element or a maximum of a finite set; the row bound $\rho(n)$ is the least admissible one; and $M_k$ is a supremum, that is, a definite element of $\mathbb{R}$ rather than a selected bound.

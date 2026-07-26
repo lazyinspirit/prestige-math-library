@@ -1,10 +1,10 @@
 ---
 id: thm-root-test
 kind: theorem
-title: "Root test: $\\limsup |a_k|^{1/k} < 1$ gives absolute convergence, $> 1$ gives divergence, and $= 1$ decides nothing"
+title: "Root test: $\\limsup |a_k|^{1/k} < 1$ gives absolute convergence and hence convergence, $> 1$ gives divergence, and $= 1$ decides nothing"
 status: draft
 origin: session
-deps: [def-series, def-limsup-liminf, lem-limsup-exists, thm-ratio-root-inequality, thm-geometric-series, thm-direct-comparison-test, lem-series-tail-invariance, lem-nth-term-test, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, lem-power-monotone, lem-of-abs-value, def-extended-reals, lem-extended-reals-complete, thm-p-series-rational, lem-nth-root-of-n-tends-to-one, thm-algebra-of-limits, thm-convergence-iff-limsup-equals-liminf, def-real-limit]
+deps: [def-series, def-limsup-liminf, lem-limsup-exists, thm-ratio-root-inequality, thm-geometric-series, thm-direct-comparison-test, lem-series-tail-invariance, lem-absolute-convergence-implies-convergence, lem-nth-term-test, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, lem-power-monotone, lem-of-abs-value, def-extended-reals, lem-extended-reals-complete, thm-p-series-rational, lem-nth-root-of-n-tends-to-one, thm-algebra-of-limits, thm-convergence-iff-limsup-equals-liminf, def-real-limit]
 justified_by: []
 aliases: []
 landmark: true
@@ -35,7 +35,8 @@ $$\rho_k \;:=\; |a_{k+1}|^{1/(k+1)} \qquad (k \in \mathbb{N}), \qquad \rho \;:=\
 and note that $\rho$ exists for every such family, with no hypothesis whatever
 ([[lem-limsup-exists]], [[def-limsup-liminf]]). Then:
 
-1. if $\rho < 1$ then $\sum_{k \ge 1} |a_k|$ converges;
+1. if $\rho < 1$ then $\sum_{k \ge 1} |a_k|$ converges, and hence
+   $\sum_{k \ge 1} a_k$ converges as well;
 2. if $\rho > 1$ then $\sum_{k \ge 1} a_k$ diverges;
 3. if $\rho = 1$ neither conclusion follows: $\sum_{k \ge 1} 1/k$ diverges,
    $\sum_{k \ge 1} 1/k^{2}$ converges, and both have $\rho = 1$.
@@ -49,10 +50,12 @@ exactly the convention of [[thm-ratio-root-inequality]]. Every $\rho_k$ is
 defined, including where $a_{k+1} = 0$, by the supplementary clause of
 [[def-rational-power]].
 
-**What claim 1 does and does not say.** It gives convergence of the series of
-absolute values. That $\sum_{k \ge 1} a_k$ itself then converges is a separate
-statement, belonging to the theory of absolute convergence, which this page does
-not develop.
+**What claim 1 does and does not say.** The comparison with a geometric series
+delivers convergence of the series of *absolute values*; that
+$\sum_{k \ge 1} a_k$ itself converges is a separate step, and it is supplied by
+[[lem-absolute-convergence-implies-convergence]] earlier on this page. Nothing
+here identifies the sum, and nothing here says anything about rearranging the
+series, which is taken up later in this track.
 
 ## Facts & Assumptions
 
@@ -77,6 +80,8 @@ not develop.
 [L9] Laws of rational exponents on a positive base: $(a^{r})^{s} = a^{rs}$, $a^{-r} = 1/a^{r}$ and $a^{r} > 0$; and for rational $t > 0$, $a > 1$ implies $a^{t} > 1$ ([[lem-rational-power-laws]], [[lem-rational-power-monotone]]).
 
 [L10] For rational $p > 0$, $\sum_{k \ge 1} 1/k^{p}$ converges if and only if $p > 1$ ([[thm-p-series-rational]]).
+
+[L11] If $\sum |x_j|$ converges then $\sum x_j$ converges; for a family from the starting index $1$ this is the same statement applied to the shifted sequence $j \mapsto a_{j+1}$, whose series is $\sum_{k \ge 1} a_k$ and whose absolute-value series is $\sum_{k \ge 1} |a_k|$ ([[lem-absolute-convergence-implies-convergence]], [[def-series]]).
 
 ## Proof
 
@@ -108,11 +113,13 @@ not develop.
 
 4.3 In the case $\rho < 1$: since $0 < t < 1$ the geometric series $\sum_{j \ge 0} t^{j}$ converges, hence so does its first tail series $\sum_{m \ge 1} t^{m}$. [step 3.1, L5]
 
-5.1 In the case $\rho < 1$: putting $x_j := |a_{j+1}|$ and $y_j := t^{\,j+1}$ for $j \in \mathbb{N}$, step 4.1 gives $0 \le x_j \le y_j$ for all $j \ge N$, and $\sum_j y_j$ is the convergent series of step 4.3; so $\sum_{k \ge 1} |a_k|$ converges, which is claim 1. [step 4.1, step 4.3, L4, L6]
+5.1 In the case $\rho < 1$: putting $x_j := |a_{j+1}|$ and $y_j := t^{\,j+1}$ for $j \in \mathbb{N}$, step 4.1 gives $0 \le x_j \le y_j$ for all $j \ge N$, and $\sum_j y_j$ is the convergent series of step 4.3; so $\sum_{k \ge 1} |a_k|$ converges. [step 4.1, step 4.3, L4, L6]
 
 5.2 In the case $\rho > 1$: the sequence $j \mapsto a_{j+1}$ does not converge to $0$, because with the rational tolerance $1$ no index $K$ satisfies $|a_{k+1}| < 1$ for all $k \ge K$; hence $\sum_{k \ge 1} a_k$ diverges, which is claim 2. [step 4.2, L7]
 
-6.1 The three cases $\rho < 1$, $\rho > 1$ and $\rho = 1$ exhaust $\overline{\mathbb{R}}$, the extended order being total, so the three claims together cover every family. [step 5.1, step 5.2, step 3.3, L1, cases-exhaustive] ∎
+6.1 In the case $\rho < 1$: the series $\sum_{k \ge 1} |a_k|$ having been shown to converge, the sequence $j \mapsto a_{j+1}$ has a convergent absolute-value series, so $\sum_{k \ge 1} a_k$ converges as well; together with the convergence of $\sum_{k \ge 1}|a_k|$ that is claim 1. [step 5.1, L11]
+
+7.1 The three cases $\rho < 1$, $\rho > 1$ and $\rho = 1$ exhaust $\overline{\mathbb{R}}$, the extended order being total, so the three claims together cover every family. [step 6.1, step 5.2, step 3.3, L1, cases-exhaustive] ∎
 
 ## Remarks
 

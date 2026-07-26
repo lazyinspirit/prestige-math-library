@@ -40,7 +40,8 @@ $$\liminf_{k} q_k \;\le\; \liminf_{k} \rho_k \;\le\; \limsup_{k} \rho_k \;\le\; 
 and consequently:
 
 1. if $\limsup_k q_k < 1$, so that the ratio test gives convergence of
-   $\sum |a_k|$, then $\limsup_k \rho_k < 1$ and the root test gives it too;
+   $\sum |a_k|$ and hence of $\sum a_k$, then $\limsup_k \rho_k < 1$ and the root
+   test gives the same;
 2. if $\liminf_k q_k > 1$, so that the ratio test gives divergence of
    $\sum a_k$, then $\limsup_k \rho_k > 1$ and the root test gives it too.
 
@@ -63,9 +64,9 @@ decides strictly more series than the ratio test.
 
 [L3] Absolute value: $|x| \ge 0$, and $|x| = 0$ exactly when $x = 0$ ([[lem-of-abs-value]]).
 
-[L4] The root test: for a family from $1$, $\limsup_k |a_{k+1}|^{1/(k+1)} < 1$ gives convergence of $\sum_{k \ge 1}|a_k|$, and $> 1$ gives divergence of $\sum_{k \ge 1} a_k$ ([[thm-root-test]]).
+[L4] The root test: for a family from $1$, $\limsup_k |a_{k+1}|^{1/(k+1)} < 1$ gives convergence of $\sum_{k \ge 1}|a_k|$ and hence of $\sum_{k \ge 1} a_k$, and $> 1$ gives divergence of $\sum_{k \ge 1} a_k$ ([[thm-root-test]]).
 
-[L5] The ratio test: $\limsup_k q_k < 1$ gives convergence of $\sum |a_k|$, and $\liminf_k q_k > 1$ gives divergence of $\sum a_k$ ([[thm-ratio-test]]).
+[L5] The ratio test: $\limsup_k q_k < 1$ gives convergence of $\sum |a_k|$ and hence of $\sum a_k$, and $\liminf_k q_k > 1$ gives divergence of $\sum a_k$ ([[thm-ratio-test]]).
 
 [L6] A series converges if and only if each of its tail series converges ([[lem-series-tail-invariance]], [[def-series]]).
 
@@ -83,7 +84,7 @@ decides strictly more series than the ratio test.
 
 3.1 Therefore $\liminf_k q_k \le \liminf_k \rho_k \le \limsup_k \rho_k \le \limsup_k q_k$, which is the displayed chain. [step 1.1, step 2.1, L1]
 
-4.1 Suppose $\limsup_k q_k < 1$. By the chain, $\limsup_k \rho_k \le \limsup_k q_k < 1$, so the root test applies to the family $(a_k)_{k \ge 1}$ and gives convergence of $\sum_{k \ge 1}|a_k|$, hence of $\sum |a_k|$; the ratio test gives the same conclusion. That is claim 1. [step 3.1, L4, L5, L6]
+4.1 Suppose $\limsup_k q_k < 1$. By the chain, $\limsup_k \rho_k \le \limsup_k q_k < 1$, so the root test applies to the family $(a_k)_{k \ge 1}$ and gives convergence of $\sum_{k \ge 1}|a_k|$ and of $\sum_{k \ge 1} a_k$, hence of $\sum |a_k|$ and of $\sum a_k$; the ratio test gives the same conclusions. That is claim 1. [step 3.1, L4, L5, L6]
 
 4.2 Suppose $\liminf_k q_k > 1$. By the chain and [L2], $\limsup_k \rho_k \ge \liminf_k \rho_k \ge \liminf_k q_k > 1$, so the root test gives divergence of $\sum_{k \ge 1} a_k$, hence of $\sum a_k$; the ratio test gives the same conclusion. That is claim 2. [step 3.1, L2, L4, L5, L6]
 

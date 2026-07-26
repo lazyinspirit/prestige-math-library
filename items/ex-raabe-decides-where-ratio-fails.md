@@ -83,6 +83,6 @@ as it must.
 
 ## Remarks
 
-- **The Raabe expression here is exact, not asymptotic.** Step 1.3 computes $R_k = 2 + 1/(k+1)$ on the nose, so no limit is needed to apply the test: a single inequality $R_k > 2$ at every index already forces $\liminf_k R_k \ge 2$. That is why this witness is the cleanest available one.
+- **The Raabe expression here is exact, not asymptotic.** Step 2.2 computes $R_k = 2 + 1/(k+1)$ on the nose, so no limit is needed to apply the test: a single inequality $R_k > 2$ at every index already forces $\liminf_k R_k \ge 2$. That is why this witness is the cleanest available one.
 
 - **Why the ratio test must fail here.** The ratios of any $p$-series tend to $1$ whatever $p$ is, so a criterion reading only $\limsup$ and $\liminf$ of the ratios cannot separate the convergent $p$-series from the divergent ones. Raabe reads the *rate* at which the ratios approach $1$, which is exactly the missing information, and that rate is $2/k$ up to smaller terms when $p = 2$.

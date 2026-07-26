@@ -3,7 +3,8 @@ page: series-and-nonnegative-tests
 title: "Series: Convergence and the Nonnegative Tests"
 status: draft
 items: [def-series, lem-series-tail-invariance, lem-nth-term-test,
-        thm-series-cauchy-criterion, lem-series-linearity, thm-geometric-series,
+        thm-series-cauchy-criterion, lem-series-linearity,
+        lem-absolute-convergence-implies-convergence, thm-geometric-series,
         lem-telescoping-series, thm-nonnegative-series-bounded-partial-sums,
         thm-direct-comparison-test, thm-limit-comparison-test,
         thm-cauchy-condensation, thm-p-series-rational, thm-root-test,
@@ -32,7 +33,7 @@ a family from a general starting index $m$, as the series of the shifted sequenc
 $j \mapsto a_{j+m}$. Every statement on this page says which starting index it
 uses, and the ones that must start at $1$ do.
 
-**The three general facts, true for terms of any sign.**
+**The five general facts, true for terms of any sign.**
 [[lem-series-tail-invariance]] says convergence depends only on the terms from
 any index on, with the sum splitting as $s_N$ plus the $N$-th tail sum.
 [[lem-nth-term-test]] gives the necessary condition that the terms tend to $0$,
@@ -41,7 +42,12 @@ and [[fs-nth-term-test-converse]] records at once that it is not sufficient.
 to a bound on every block $a_{m+1} + \dots + a_n$ with $n > m \ge N$, and it
 decides convergence without naming the sum. [[lem-series-linearity]] adds that
 convergent series may be added and scaled, and that scaling by a nonzero constant
-preserves both convergence and divergence.
+preserves both convergence and divergence. Finally
+[[lem-absolute-convergence-implies-convergence]] proves that convergence of
+$\sum |a_k|$ forces convergence of $\sum a_k$: the Cauchy criterion never asks
+for a sign, so the triangle inequality carries its hypothesis from the absolute
+values to the terms in one line. That is the only part of the theory of absolute
+convergence proved here, and it is the part the root and ratio tests need.
 
 **Two computable families.** [[thm-geometric-series]] evaluates
 $\sum_{k \ge 0} r^{k} = 1/(1-r)$ for $|r| < 1$ and shows divergence for
@@ -70,9 +76,11 @@ name ([[def-rational-power]]).
 in $\overline{\mathbb{R}}$, so their hypotheses always mean something
 ([[lem-limsup-exists]]); the root family is written $|a_{k+1}|^{1/(k+1)}$, the
 shift of [[thm-ratio-root-inequality]], since $|a_k|^{1/k}$ is undefined at
-$k = 0$. Both conclude convergence of $\sum |a_k|$, not of $\sum a_k$; the step
-from one to the other is the theory of absolute convergence and is not proved
-here. [[cor-root-test-dominates-ratio-test]] reads the chain of
+$k = 0$. What the comparison with a geometric series delivers in each case is
+convergence of $\sum |a_k|$;
+[[lem-absolute-convergence-implies-convergence]] carries it the rest of the way,
+so both tests are stated in their standard form, concluding convergence of
+$\sum a_k$ itself. [[cor-root-test-dominates-ratio-test]] reads the chain of
 [[thm-ratio-root-inequality]] through the two tests: whenever the ratio test
 decides, the root test decides the same way, and the standard witness
 $a_k = 2^{-k+(-1)^{k}}$ shows the converse fails.

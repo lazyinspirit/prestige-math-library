@@ -90,6 +90,24 @@ rem-sequence-conventions.
 
 ## 2. Forward references and same-level cross-page references (complete)
 
+### New item authored at step 8 (2026-07-27)
+
+- **`lem-absolute-convergence-implies-convergence`**, on
+  `series-and-nonnegative-tests` (A page), placed after `lem-series-linearity`.
+  **The id was COINED here**, because the page that would otherwise own it,
+  `absolute-convergence-and-rearrangement` (order 36), has an empty item list in
+  `plan-spec.json`, so there was no id to reuse. Ids are immutable on `main`: if
+  order 36 is later scaffolded with an id for this result, it must reuse this one
+  (or alias it), not mint a second. Deps: `def-series`,
+  `thm-series-cauchy-criterion`, `lem-triangle-inequality-finite`,
+  `lem-finite-sum-laws`, `def-finite-sum`, `lem-of-abs-value`, `def-real-limit`
+  — all earlier on the same page or on published pages.
+  It exists because `thm-root-test` and `thm-ratio-test` concluded only that
+  `sum |a_k|` converges, explicitly weaker than their standard forms; both were
+  strengthened to their standard conclusions on the strength of it. Only that one
+  implication is proved here; the converse, rearrangement, the Riemann series
+  theorem and products of series stay on order 36.
+
 ### A pages
 
 - **None.** Every external dependency of `equivalent-forms-of-completeness`
@@ -106,20 +124,36 @@ rem-sequence-conventions.
   `series-and-nonnegative-tests-examples` cite their own A pages and the
   level-7 limsup page (`def-limsup-liminf`, `lem-nth-root-of-n-tends-to-one`,
   `lem-nth-root-of-constant-tends-to-one`) — all earlier in plan order, fine.
-- **Two genuine forward commitments, targets not yet scaffolded** (B pages are
-  leaves, so forward deps are legal per SCHEMA §7, but the target items do not
-  exist yet in plan-spec.json):
-  1. `cex-evt-and-ivt-fail-over-a-non-complete-field` needs the definition of
-     continuity of a real function on a subset of R — home will be RA-13
-     (`continuity-ivt-evt-and-uniform-continuity`, order 44, item list still
-     empty). When RA-13 is scaffolded, its continuity definition id must be
-     added to this item's deps.
-  2. `cex-rolle-fails-over-a-non-complete-field` needs the definition of the
-     derivative — home will be RA-15 (`the-derivative-and-mean-value-theorems`,
-     order 48, item list still empty). Same wiring obligation.
-  These two cannot be authored before RA-13/RA-15 are scaffolded (or must be
-  authored last with the ids agreed in advance). Recorded here so the closure
-  obligation is not lost; nothing was absorbed silently.
+- **Two apparent forward commitments — RESOLVED at step 8 (2026-07-27), and the
+  resolution is NOT a wiring obligation.** The scaffold recorded these as owing a
+  citation to a later page:
+  1. `cex-evt-and-ivt-fail-over-a-non-complete-field`, for a definition of
+     continuity — supposed home RA-13
+     (`continuity-ivt-evt-and-uniform-continuity`, order 44, item list empty).
+  2. `cex-rolle-fails-over-a-non-complete-field`, for a definition of the
+     derivative — supposed home RA-15 (`the-derivative-and-mean-value-theorems`,
+     order 48, item list empty).
+
+  **Both items were authored self-contained, and that is the FINAL form.** The
+  scaffold's reading was wrong on a point of substance: each of these items
+  refutes a claim about an ARBITRARY ordered field, and refutes it over Q, so a
+  definition of continuity or of the derivative written for real functions on
+  subsets of R — which is what RA-13 and RA-15 will give, resting on
+  `def-function-limit` of `limits-of-real-functions` (order 42, already built) —
+  simply does not apply to them and could never be cited by them. The only thing
+  that would serve is a definition over a general ordered field, and authoring
+  one at order 32 would (a) put on `equivalent-forms-of-completeness` a
+  definition that no item on that page, and no item anywhere in the planned
+  library, uses, and (b) mint an immutable id competing with RA-13's own
+  continuity definition, forcing a design decision for ~8 later pages that
+  belongs to the owner of those pages.
+
+  So: **no id is owed, and RA-13/RA-15 must NOT retro-wire these two.** Both are
+  B-page (leaf) items that nothing may cite, so the self-contained epsilon-delta
+  and difference-quotient statements cost no other item anything. The Remarks of
+  both items and the B-page summary were corrected at step 8 — they previously
+  advised a future session to replace the restatement by a citation, which would
+  have been a wrong citation.
 
 ## 3. Open decisions for the owner (analysis in the batch-2 report)
 

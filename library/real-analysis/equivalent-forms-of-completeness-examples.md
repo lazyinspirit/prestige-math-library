@@ -75,7 +75,12 @@ $(-1)^k/(k+1)$ to the divergent $-2\,(-1)^n$.
 **A note on two of the counterexamples.** The items about the extreme value,
 intermediate value and mean value theorems each state the notion they need,
 $\varepsilon$-$\delta$ continuity and the difference-quotient derivative, in
-full inside their own Statement, and verify it directly. This library does not
-yet define continuity or differentiability of a real function; when the pages
-that do are written, those two items should cite the definitions there instead
-of restating them. Nothing on this page cites an item that does not exist.
+full inside their own Statement, and verify it directly. That is the final form
+and not a placeholder. Both refute a claim about an *arbitrary* ordered field,
+and both refute it over $\mathbb{Q}$, so the definitions of continuity and of
+the derivative that later pages of this track will give for real functions on
+subsets of $\mathbb{R}$ would not apply to them; a general ordered-field version
+would be a definition no other item in this library uses. The conditions stated
+there are the ordinary ones read inside the field, and they specialise to the
+real-variable definitions at $F = \mathbb{R}$. Nothing on this page cites an item
+that does not exist, and nothing on it waits on a later page.

@@ -4,7 +4,7 @@ kind: remark
 title: "How the nonnegative tests are ordered by strength, and which of them this page cannot state without the logarithm"
 status: draft
 origin: session
-deps: [thm-root-test, thm-ratio-test, cor-root-test-dominates-ratio-test, cor-ratio-test-is-kummer-with-constant-weights, cor-raabe-test, thm-gauss-test, thm-kummer-test, thm-abel-dini, fs-universal-comparison-series, thm-direct-comparison-test, thm-geometric-series, thm-cauchy-condensation, thm-p-series-rational, def-rational-power, def-limsup-liminf]
+deps: [thm-root-test, thm-ratio-test, cor-root-test-dominates-ratio-test, cor-ratio-test-is-kummer-with-constant-weights, cor-raabe-test, thm-gauss-test, thm-kummer-test, thm-abel-dini, fs-universal-comparison-series, thm-direct-comparison-test, thm-geometric-series, thm-cauchy-condensation, thm-p-series-rational, lem-absolute-convergence-implies-convergence, thm-series-cauchy-criterion, def-rational-power, def-limsup-liminf]
 justified_by: []
 aliases: []
 landmark: false
@@ -100,9 +100,15 @@ not an approach to a best test.
   positive rational, which is a $p$-series bound and therefore expressible. The
   restriction costs generality, not correctness.
 
-**One further limitation, of a different kind.** The root and ratio tests
-conclude convergence of $\sum |a_k|$, not of $\sum a_k$. That the second follows
-from the first is the theorem that absolute convergence implies convergence, and
-it is not proved on this page; it belongs with rearrangement and the
-Riemann series theorem, on the page that follows. Until then, the convergence
-halves of those two tests should be read exactly as they are stated.
+**A limitation that has been removed, and one that has not.** The comparison
+with a geometric series inside [[thm-root-test]] and [[thm-ratio-test]] delivers
+convergence of $\sum |a_k|$ and not, on its own, of $\sum a_k$. That the second
+follows from the first is
+[[lem-absolute-convergence-implies-convergence]], proved on this page from
+[[thm-series-cauchy-criterion]] and the triangle inequality for finite sums, so
+both tests do reach their standard conclusion here. What is *not* on this page is
+the rest of that theory: the converse fails, and the alternating harmonic series
+that witnesses the failure needs the alternating series test, which is not proved
+here; rearrangement, the Riemann series theorem and products of series belong
+with it on the page that follows. Nothing above asserts a converse or identifies
+any sum.
