@@ -26,6 +26,19 @@ it is DECISION D-TRIG below.
 inequality, SQUARE roots only, Q dense, uniqueness of the complete ordered field,
 equivalence of the two constructions).
 
+`foundations-of-the-real-numbers` additionally carries the planned
+`cor-archimedean-reciprocal` (owner-approved 2026-07-26, to be authored, judged
+and audited BEFORE it joins the published page's item list): for every eps > 0
+there is a natural n >= 1 with 1/n < eps. **Citation discipline for every later
+page:** `thm-of-archimedean` states only the DIRECT form "for every x there is n
+with x < n·1_F". Any step of the form "1/n < eps" — countable neighbourhood
+bases B(x, 1/n), 1/k -> 0, delta = 1/k witness sequences, Cesaro head estimates,
+Baire-stage interval lengths — cites `cor-archimedean-reciprocal` (plus
+`lem-of-inverse-positive` when the tail comparison 1/k <= 1/N or a division by a
+growing positive term is also needed), never the bare theorem. Direct-form uses
+(unbounded sequences, cofinality of N, covers by balls of radius n) keep citing
+the theorem alone.
+
 TO VERIFY before authoring RA-01: whether `def-complete-ordered-field` already
 contains a usable definition of supremum, or whether standalone `def-supremum` /
 `def-infimum` items are needed.
@@ -71,7 +84,14 @@ monotone convergence theorem; nested interval property; subsequences and
 subsequential limits; the monotone-subsequence (peak/rising-sun) lemma;
 **Bolzano-Weierstrass**; Cauchy sequences; Cauchy implies bounded; Cauchy with a
 convergent subsequence converges; **the Cauchy criterion in R**; contractive
-sequences. B: the Babylonian sequence for sqrt 2; a Cauchy sequence of rationals
+sequences; **the alternating sequence and the even/odd index maps**
+(`lem-alternating-sequence`, owner-approved 2026-07-26): strictly increasing
+e, o with N their disjoint union, and the unique (s_k) with s_0 = 1,
+s_{sigma(k)} = -s_k. This is the library's ONLY parity notion; every later
+(-1)^k or interleaved witness — on RA-06, RA-07 and RA-08 in particular — cites
+it rather than rebuilding the object by repeated applications of the recursion
+theorem inside its own Given block. B: the Babylonian sequence for sqrt 2; a
+Cauchy sequence of rationals
 with no rational limit; sqrt(n) with null consecutive differences is not Cauchy;
 nested OPEN intervals with empty intersection.
 
@@ -85,6 +105,12 @@ the series block); standard limits n^{1/n} -> 1, p^{1/n} -> 1,
 n^alpha/(1+p)^n -> 0, x^n/n! -> 0. B: a sequence whose subsequential limit set is
 all of R*; the strict five-term liminf/limsup chain; 2 + sin(ln n) has ratio -> 1
 and limit-point set [1,3] (uses trig: see D-TRIG); (-1)^n.
+Citations on this page: every (-1)^k witness (the alternating example, the
+strict subadditivity and product counterexamples, 2^{-k+(-1)^k}) cites
+`lem-alternating-sequence` from RA-05; the 1/n-quantitative steps in
+n^{1/n} -> 1, p^{1/n} -> 1, the closed-limit-set diagonal and the
+block-sequence example cite `cor-archimedean-reciprocal` (see the published
+list above), not bare `thm-of-archimedean`.
 
 **RA-07 Equivalent Forms of Completeness** <- RA-05, RA-06
 The five-way equivalence: least upper bound <=> monotone convergence +
@@ -98,6 +124,11 @@ non-complete ordered field, EVT, IVT, Rolle, MVT, uniform continuity and
 the completeness axiom in the literature. Plus: a Cauchy-complete but not
 complete ordered field; an ordered field in which Q is not dense; a field ordered
 in two distinct ways; a non-Archimedean ordered field.
+Citations on this page: the Cesaro-mean head estimate C/n < eps and the Cesaro
+matrix columns 1/n -> 0 cite `cor-archimedean-reciprocal`; Stolz-Cesaro divides
+by the growing b_k (a field element, not 1/n), so its tool is
+`lem-of-inverse-positive`, not the corollary; the (-1)^k Cesaro/Stolz-converse
+examples cite `lem-alternating-sequence` from RA-05.
 
 ### Block III: series
 
@@ -114,6 +145,9 @@ sum 1/(n log n) diverges and sum 1/(n(log n)^2) converges with ratio and root
 both exactly 1; 2^{-n+(-1)^n} defeats the ratio test but not the root test;
 n^{-1/2} and n^{-2} both have root limit 1 (L = 1 is genuinely inconclusive both
 ways); the Bertrand family gives arbitrarily slowly convergent series.
+Citations on this page: the 2^{-n+(-1)^n} witness (the A-page false statement
+"ratio limsup >= 1 implies divergence" and the B-page ratio-fails counterexample)
+cites `lem-alternating-sequence` from RA-05 for the parity structure.
 
 **RA-09 Absolute and Conditional Convergence; Rearrangement; Products**
 <- RA-08

@@ -70,6 +70,13 @@ Counterexamples: intersection of (-1/n,1/n); [0,1] cap Q is closed and bounded i
 Q and not compact; a nowhere dense set of positive measure; a dense measure-zero
 set; a set that is neither open nor closed; an open cover of (0,1) with no finite
 subcover.
+Citations on these two pages: every "1/n < eps" step — the (-1/n,1/n) and
+(1/n,1) witnesses, {1/k} cup {0} compact, the sequential characterisation of
+closure via points of B(x,1/n), and forcing the Baire-stage nested intervals to
+have length below 1/n — cites `cor-archimedean-reciprocal` (declared on
+foundations-of-the-real-numbers, owner-approved 2026-07-26), not bare
+`thm-of-archimedean`; the DIRECT uses (Z unbounded, covers by balls of radius n,
+bisection decay via lem-geometric-sequence-null) keep the theorem alone.
 
 ---
 
@@ -98,6 +105,11 @@ additive function; convex function (definition here, theory on RA5).
   a continuous f: [a,b] -> [a,b] has a fixed point.
 - **Heine-Cantor in R**: continuous on a compact set implies uniformly
   continuous.
+- Citation note: the sequence-to-epsilon direction of the sequential criterion
+  builds its witnesses with delta = 1/k, and the psi(1/x) counterexample sends
+  1/k -> 0; both cite `cor-archimedean-reciprocal` (foundations page,
+  owner-approved 2026-07-26) plus `lem-of-inverse-positive`, not bare
+  `thm-of-archimedean`.
 - uniformly continuous maps send Cauchy sequences to Cauchy sequences;
   **the uniformly continuous extension theorem from a dense subset** (this is
   the one page 8A needs for a^x = sup over rationals).

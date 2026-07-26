@@ -133,6 +133,16 @@ l^2 is not compact; two metrics with the same topology and different Cauchy
 sequences; l^infinity is not separable; a totally bounded non-compact space; a
 discontinuous linear functional.
 
+Citation note for the metric pages (owner-approved additions of 2026-07-26):
+first countability via the balls B(x, 1/n), and every 1/n-built counterexample
+(the metrics |1/m - 1/n| and |1/x - 1/y|, d(m,n) = 1 + 1/(m+n), the pairs
+n and n + 1/n defeating uniform continuity of x^3, set distance 0 between Z and
+{n + 1/n}) cite `cor-archimedean-reciprocal` (foundations page) plus
+`lem-of-inverse-positive`; f(x) = x + 1/x needs only `lem-of-inverse-positive`
+(1/x > 0 rules the fixed point out). Direct-form uses of `thm-of-archimedean`
+(unboundedness of |x-y| against min(|x-y|,1), d(x,y)/2 separations) stay on the
+bare theorem.
+
 ---
 
 ## T2. Topological Spaces and Continuity
