@@ -143,14 +143,17 @@ partial sums, convergence, tails; the n-th term test; the Cauchy criterion;
 linearity; geometric and telescoping series; bounded partial sums for nonnegative
 series; direct and limit comparison; **Cauchy condensation**; the p-series for
 RATIONAL p (real p is completed on RA-27); ratio and root tests in limsup/liminf
-form; root strictly dominates ratio (citing RA-06); Raabe, Bertrand, Gauss, and
-**Kummer's test** as the common generalization (ratio/Raabe/Bertrand are the
-cases zeta_n = 1, n, n log n); the **Abel-Dini theorem** (no slowest divergent
-series, hence no universal comparison test). B: the harmonic series;
-sum 1/(n log n) diverges and sum 1/(n(log n)^2) converges with ratio and root
-both exactly 1; 2^{-n+(-1)^n} defeats the ratio test but not the root test;
-n^{-1/2} and n^{-2} both have root limit 1 (L = 1 is genuinely inconclusive both
-ways); the Bertrand family gives arbitrarily slowly convergent series.
+form; root strictly dominates ratio (citing RA-06); Raabe, Gauss, and
+**Kummer's test** as the common generalization (ratio and Raabe are the cases
+zeta_k = 1 and zeta_k = k+1 — k+1, NOT the classical k, because the library
+indexes from 0 and Kummer requires zeta_k > 0 at k = 0; level-8 sweep
+2026-07-26); the **Abel-Dini theorem** (no slowest divergent series, hence no
+universal comparison test). Bertrand (zeta_n = n log n), sum 1/(n log n) and the
+"arbitrarily slowly convergent Bertrand family" are DEFERRED until the logarithm
+exists; the A-page strength-order remark records which tests this page cannot
+state without it. B: the harmonic series; 2^{-n+(-1)^n} defeats the ratio test
+but not the root test; n^{-1/2} and n^{-2} both have root limit 1 (L = 1 is
+genuinely inconclusive both ways).
 Citations on this page: the 2^{-n+(-1)^n} witness (the A-page false statement
 "ratio limsup >= 1 implies divergence" and the B-page ratio-fails counterexample)
 cites `lem-alternating-sequence` from RA-05 for the parity structure.

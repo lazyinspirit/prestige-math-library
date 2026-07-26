@@ -101,7 +101,10 @@ unique factorisation and the library has no number theory at all. Existence of
 v_2 is `thm-strong-induction`, uniqueness is parity via
 `lem-alternating-sequence`.
 
-DEFS: metric, pseudometric, ultrametric, extended metric; ball; bounded,
+DEFS: metric, pseudometric, ultrametric (extended metrics DROPPED at level 7,
+decision R4: the value +infinity has no honest home until the extended reals
+exist on RA-06, and nothing later in the plan uses them; reintroduce only if a
+later page needs them, citing `def-extended-reals`); ball; bounded,
 diameter; distance to a set and between sets; isometry; topologically /
 uniformly / Lipschitz equivalent metrics; metric topology; open, closed,
 interior, closure, boundary, limit point; dense, nowhere dense, meager,
@@ -137,7 +140,8 @@ implies totally bounded; equivalent metrics share their Cauchy sequences; every
 metric space is separable.
 
 B: discrete metric; R^n with the p-metrics; sup metric on C[0,1]; l^p and
-l^infinity; the p-adic ultrametric; the SNCF/post-office metric; the Hilbert
+l^infinity; the 2-adic ultrametric (fixed at p = 2, audit note (3) above); the
+SNCF/post-office metric; the Hilbert
 cube; the Cantor set; Hausdorff-metric computations.
 CEX: R vs (0,1) homeomorphic with only one complete; a uniformly continuous
 bijection with non-uniformly-continuous inverse; a contraction on an incomplete
