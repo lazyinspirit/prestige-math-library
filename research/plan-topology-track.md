@@ -1,5 +1,17 @@
 # Topology track — my own draft (pre-merge)
 
+> **T-NUMBERING WARNING (Alpha-9, 2026-07-27) — read before trusting any
+> "T\<n\>" in this file.** This file's `T1 ... T10` number the GENERAL-topology
+> pages. `research/gen-spec.mjs` separately uses `t(1), t(2), t(3)` for the
+> METRIC pages `metric-spaces` (order 24), `completeness-and-uniform-continuity`
+> (order 26) and `compactness-in-metric-spaces` (order 28). The two numberings
+> DO NOT AGREE: this file's `## T3` is `subspaces-products-and-quotients`, plan
+> order **104**, NOT the metric compactness page at order 28. The metric
+> compactness page has its own section below, `## M3`, which repeats this
+> warning. Level 9's orchestrator walked into this collision when briefing
+> agents; check the plan order in `research/plan-spec.json` before acting on
+> any `T<n>` label here.
+
 Owner decision 2026-07-25: build BOTH the R-specific treatments AND the fully
 general ones. Every A page (definitions/theorems/false statements) is paired with
 a B page (examples/counterexamples). Duplication across generality levels is
@@ -175,6 +187,139 @@ nondegenerate interval by `lem-real-line-is-a-metric-space`, so it cannot sit
 inside a countable set). No density-of-irrationals item exists or is needed
 for this. Closedness of [a,b] or [a,infinity) inside a completeness argument
 cites `thm-metric-sequential-closure` + `lem-limit-preserves-order`.
+Level-9 addition (batch 1): the T1 DEFS/THMS lists above cover THREE published
+or planned pages, not one — `metric-spaces` (24), `completeness-and-uniform-
+continuity` (26) and `compactness-in-metric-spaces` (28). The compactness half
+of those lists now has its own section, `## M3` below; read it before authoring
+page 28. In particular "compact <=> sequentially compact <=> complete + totally
+bounded" is NOT a single theorem here: it is five implications with three
+different choice costs, itemised in M3 note (2).
+
+---
+
+## M3. Compactness in Metric Spaces   (plan order 28)
+
+NUMBERING WARNING. This file's `T1 ... T10` are the GENERAL-topology pages;
+`gen-spec.mjs` uses `t(1), t(2), t(3)` for the METRIC pages `metric-spaces`
+(24), `completeness-and-uniform-continuity` (26) and `compactness-in-metric-
+spaces` (28). The two numberings do not agree: this file's `## T3` is
+`subspaces-products-and-quotients` (order 104). The metric pages 26 and 28 had
+no prose section of their own; their material was carried inside the T1 lists.
+This section splits out page 28 only. Page 26 is published and needs none.
+
+Level-9 design, 2026-07-27 (batch 1). Six decisions bind authoring.
+
+(1) ORDER 28 IS BEFORE `topology-of-r` (38). Nothing on this page may cite
+Heine-Borel for R, `def-open-cover-r`, `thm-compact-iff-sequentially-compact-r`
+or anything else homed on page 38. Every statement is genuinely metric-general,
+and `thm-heine-borel-rn` is proved here by bisection from
+`thm-nested-interval-property`, NOT by citing the R-native page. The dictionary
+relating the two notions of "compact subset of R" is stated once, later, on
+`continuity-ivt-evt-and-uniform-continuity` (44), in
+`lem-real-and-metric-notions-agree`.
+
+(2) THE CHOICE ACCOUNTING IS THE SPINE OF THE PAGE, per implication:
+    ZF, no choice at all
+      compact => closed and bounded (as a subset of any metric space)
+      compact => complete           (via the FIP characterisation applied to
+                                     the closures of the tails of a Cauchy
+                                     sequence; the textbook route through a
+                                     convergent subsequence is NOT choice-free)
+      compact => totally bounded
+      compact => countably compact
+      compact => limit point compact
+      countably compact  => sequentially compact
+      limit point compact => sequentially compact
+      sequentially compact => complete
+      closed subset of a compact space is compact
+      continuous image of a compact space is compact; EVT; Lebesgue number;
+      Heine-Cantor; continuous bijection has continuous inverse
+      Heine-Borel in R^n (bisection)
+    AC_omega, used exactly once and named
+      complete + totally bounded => compact
+      a compact metric space has a countable dense subset
+    DC (dependent choice)
+      sequentially compact => totally bounded
+The two ZF "=> sequentially compact" arrows are the reason the equivalence
+closes at all; both extract a subsequence by taking the LEAST admissible index
+at each stage (`thm-well-ordering-principle` + `thm-recursion`), exactly the
+canonical-selection device of `thm-perfect-set-uncountable-r`. Where the range
+of the sequence is finite, the repeated value is picked with `lem-finite-choice`,
+not with a choice principle.
+
+(3) DEPENDENT CHOICE IS INTRODUCED HERE (`def-dependent-choice`, first item of
+the page) because without it the compactness trichotomy cannot be stated as an
+equivalence: every route from sequential (or limit point, or countable)
+compactness to total boundedness builds an epsilon-separated sequence one term
+at a time in terms of the previous ones, and countable choice does not licence
+that. See the report for the alternative the owner may prefer (define DC on
+`order-zorn-and-the-axiom-of-choice`, order 10) and for the fallback if DC is
+refused. NOTE: `thm-perfect-set-uncountable-r` (published, order 38) contains
+the sentence "that is the axiom of dependent choice, and no item of this library
+states it", which any of these options falsifies; see note 4.2 below.
+
+(4) COMPACTNESS OF A SUBSET is defined as compactness of the metric subspace,
+and `lem-compactness-is-intrinsic` then proves BOTH that the relatively open
+sets are the traces of ambient open sets and that the two readings of "every
+open cover has a finite subcover" agree. Nothing later may use the ambient
+reading without citing that lemma.
+
+(5) THE B PAGE IS A LEAF, so `ex-discrete-metric` and
+`ex-sup-metric-on-bounded-functions` (both on `metric-spaces-examples`, order
+25) MAY NOT BE CITED by anything. The three `fs-` items on this page therefore
+build their witnesses inline: the discrete metric on N (three axioms verified in
+two lines) for `fs-closed-and-bounded-implies-compact-in-every-metric-space` and
+`fs-bounded-implies-totally-bounded`, and (0,1) with |x-y| for
+`fs-totally-bounded-implies-compact`. The sup metric on the bounded functions
+N -> R comes from `lem-sup-metric-is-a-metric` (A page, order 24), which is
+citable.
+
+(6) NO WORD "HOMEOMORPHISM" AND NO WORD "SEPARABLE". Neither is defined at this
+point in the reading order (`def-homeomorphism-and-open-maps` is order 102,
+separability is nowhere). So the statements are "the inverse map is continuous,
+and f carries open sets to open sets" and "has a countable dense subset".
+
+DEFS: dependent choice; open cover, subcover, compact metric space, compact
+subset; countably compact, sequentially compact, limit point compact; finite
+epsilon-net, totally bounded.
+
+THMS: relative openness and the intrinsic character of compactness; totally
+bounded implies bounded, and total boundedness passes to subspaces and closures;
+compact iff every family of closed sets with the FIP meets; closed subsets of
+compacts are compact; compacts are closed and bounded; compact implies complete
+and totally bounded; the ZF implications among the four compactness variants;
+sequentially compact implies complete; sequentially compact implies totally
+bounded (DC); complete + totally bounded implies compact (AC_omega); the full
+equivalence; Heine-Borel in R^n by bisection; continuous images of compacts;
+EVT; the Lebesgue number lemma; Heine-Cantor; a continuous bijection from a
+compact space has a continuous inverse; a compact metric space has a countable
+dense subset.
+
+FS: closed and bounded implies compact in every metric space; totally bounded
+implies compact; bounded implies totally bounded.
+
+B: the discrete metric (compact iff totally bounded iff finite, complete always);
+the cube [-M,M]^n is totally bounded with an explicit grid net; a convergent
+sequence together with its limit is compact; the distance to a nonempty compact
+set is attained, and disjoint compacts are at positive distance; the Lebesgue
+number of the two-set cover of [0,1] is exactly 1/3.
+CEX: the closed unit ball of the bounded functions on N with the sup metric is
+closed and bounded and not compact (the singleton indicators are 1-separated);
+N with the discrete metric is bounded and not totally bounded; (0,1) is totally
+bounded and not compact; on (0,1) the identity has no greatest value and 1/x is
+unbounded, so EVT needs compactness; 1/x is continuous and not uniformly
+continuous on (0,1); the cover of (0,1) by (1/(k+2), 1) has no Lebesgue number.
+
+STATUS (Alpha-9, step 4, 2026-07-27). The section above is inserted verbatim
+from research/level9-batch-1.notes.md §1.1; its note (3) predates the owner's
+step-3 decisions and is now SETTLED: `def-dependent-choice` at order 28 is
+APPROVED (decision B1-R1, scratchpad DECISIONS.md), so the alternatives note
+(3) offers are dead, and the amendment to the published sentence in
+`thm-perfect-set-uncountable-r` is APPROVED (B1-R5) — its "note 4.2 below"
+lives in research/level9-batch-1.notes.md §4.2, and per B1-R5 that amendment
+lands in the SAME commit that publishes level 9, never before (depcheck will
+flag the item `published-unaudited` once its audit is cleared; that is the
+owner's re-audit gate working, not a defect).
 
 ---
 
@@ -259,14 +404,58 @@ definition; this page contributes the subspace THEOREMS (basis, closedness in
 a subspace, transitivity, continuity into and out of subspaces) and the
 further constructions, not the definition itself.
 
-DEFS: subspace topology (defined at level 8, `def-subspace-topology-top` —
-cite, do not redefine); hereditary property; product topology (finite and
-arbitrary); box topology; projections; disjoint union / coproduct; quotient
-topology, quotient map, saturated set; identification space; adjunction space,
-cone, suspension; initial and final topologies; embedding.
+**Level-9 audit, 2026-07-27 (batch 2).** Six notes bind authoring of this page
+pair. (1) The four subspace THEOREMS this section promised — the subspace basis,
+closedness in a subspace, transitivity, and continuity into and out of subspaces
+— are ALREADY DISCHARGED inside the body of `def-subspace-topology-top` at level
+8, each with its proof. They are not reproved here and no item restates them.
+What this page adds on subspaces is `thm-subspace-closure-and-interior` (closure
+in a subspace is the trace of the closure; the interior only contains the trace,
+with equality for open S; density traces only to OPEN subspaces — the unqualified
+form is false, witness Q inside the irrationals), `def-hereditary-property`, and
+`cor-metrizability-and-first-countability-are-hereditary`. (2) SEPARATION: the
+library has no `def-hausdorff-space`; the property is spelled out but not defined
+in `def-metrizable-space`, and `thm-metric-hausdorff-separation` is metric-only.
+`separation-axioms` is order 112, LATER than this page. This page therefore mints
+a MINIMAL `def-hausdorff-space` (owner decision — see report R2), used only by
+`fs-quotient-of-a-hausdorff-space-is-hausdorff` and its companion
+`cex-line-with-two-origins`; the T0-T4 hierarchy stays at 112 and the hereditary
+and productive theorems stay at 116. (3) The false statement "a subspace of a
+normal space is normal" is DROPPED from this page: normality is a separation
+axiom and its non-hereditariness is exactly the subject of
+`hereditary-and-productive-separation` (order 116). (4) The false statement "a
+product of quotient maps is a quotient map" and its counterexample are DROPPED
+from this page (report R3): the only standard witness is Dieudonne's, which needs
+an enumeration of Q and a nested construction out of proportion to the page, and
+the true positive result (Whitehead, with a locally compact factor) needs
+compactness at order 108. (5) `lem-product-topology-on-rn` is a mandatory seam
+item: without it "R^2" means two unrelated things on this page (a product, and
+the metric space of `lem-metrics-on-rn`), which is the level-7 two-notions-of-open
+defect. It is stated for d_infinity, whose balls ARE the basic product boxes,
+with d_1 and d_2 following from d_infinity <= d_2 <= d_1 <= n d_infinity and
+`thm-metric-equivalence-hierarchy`; it carries n >= 1, since `lem-metrics-on-rn`
+does. (6) `ex-sorgenfrey-line` is homed on an examples page (order 103) and so
+may not be a dep of anything; `ex-sorgenfrey-plane` re-introduces the half-open
+basis inline through `thm-basis-criterion` and links the level-8 example as
+prose, not as a dependency. Separately, the word "separable" never appears: the
+property is written "has a countable dense subset", as at level 8.
 
-THMS: the subspace basis; closedness in a subspace; transitivity of subspaces;
-continuity into and out of subspaces; the product topology is the initial
+DEFS: subspace topology (defined at level 8, `def-subspace-topology-top` —
+cite, do not redefine); embedding (also defined at level 8, inside
+`def-homeomorphism-and-open-maps` — cite, do not redefine); hereditary property;
+initial and final topologies (defined BEFORE the product, so that the product,
+the coproduct and the quotient are three instances of two constructions rather
+than three separate universal properties); product topology (finite and
+arbitrary, including the empty index set, whose product is a one-point space);
+box topology; projections; disjoint union / coproduct; quotient topology,
+quotient map, saturated set; identification space; adjunction space, cone,
+suspension; Hausdorff space (minimal, owner-approved pull-forward from order 112).
+
+THMS: (the subspace basis, closedness in a subspace, transitivity of subspaces
+and continuity into and out of subspaces are ALL discharged in the body of
+`def-subspace-topology-top` at level 8 and are NOT reproved here; what this page
+adds is closure and interior in a subspace, and heredity); the product topology
+is the initial
 topology for the projections; the universal property of the product;
 projections are continuous, open and surjective; a map into a product is
 continuous iff each component is; closure in a product is the product of
@@ -275,19 +464,28 @@ universal property of the quotient; continuity of induced maps; open or closed
 surjections are quotient maps; composites of quotient maps; the coproduct and
 its universal property; the first-isomorphism-theorem analogue for spaces.
 
-FS: the product topology equals the box topology; a product of quotient maps is
-a quotient map; a quotient of a Hausdorff space is Hausdorff; a subspace of a
-normal space is normal; projections are closed maps; an arbitrary product of
-opens is open in the product topology.
+FS: the product topology equals the box topology; a quotient of a Hausdorff
+space is Hausdorff; projections are closed maps; every quotient map is an open
+map; an arbitrary product of opens is open in the product topology. ("A product
+of quotient maps is a quotient map" is deferred — the only standard witness is
+Dieudonne's and the positive result needs compactness at order 108. "A subspace
+of a normal space is normal" moves to `hereditary-and-productive-separation`,
+order 116, where normality is defined.)
 
-B: R^n as a product; the Cantor set as {0,1}^N; the Hilbert cube; the torus as a
-quotient of the square; the Mobius band; R/Z; the Sorgenfrey plane.
+B: R^n as a product; the Cantor set as {0,1}^N (the ternary digits are the
+coordinates; cites the order-40 Cantor items); the Hilbert cube, metrized by
+sum |x_k - y_k|/2^{k+1}; R/Z, and the torus as the quotient of the square
+identified with (R/Z) x (R/Z) — NOT with a circle in R^2, since identifying R/Z
+with the unit circle needs the trigonometric functions at order 74; the cylinder
+and the Mobius band as quotients of the square; the Sorgenfrey plane, with
+Q x Q as a countable dense subset.
 CEX: the diagonal map into R^omega is continuous for the product and not for the
 box topology; the projection of the hyperbola shows projections are not closed;
-the line with two origins is a non-Hausdorff quotient of a Hausdorff space; R/Q
-is indiscrete-like; a product of quotient maps that is not a quotient map; the
-antidiagonal of the Sorgenfrey plane is a non-separable subspace of a separable
-space.
+the first projection of ([0,inf) x R) u (R x {0}) is a quotient map that is
+neither open nor closed; the line with two origins is a non-Hausdorff quotient of
+a metrizable space; R/Q carries the indiscrete topology; the antidiagonal of the
+Sorgenfrey plane is an uncountable discrete subspace, so "has a countable dense
+subset" is not hereditary (the word "separable" is not used — no item defines it).
 
 ---
 

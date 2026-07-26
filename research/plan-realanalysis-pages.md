@@ -254,20 +254,61 @@ rem-sequence-conventions.
 
 **RA-09 Absolute and Conditional Convergence; Rearrangement; Products**
 <- RA-08
+**Level-9 audit, 2026-07-27 (batch 2).** Seven notes bind authoring of this page
+pair. (1) `lem-absolute-convergence-implies-convergence` is REUSED, not reminted:
+`def-absolute-and-conditional-convergence` names it for the implication and no
+item on this page restates it. (2) The LOGARITHM does not exist at order 36
+(`the-logarithm-and-general-powers` is order 72), so no sum on this page or its
+companion is ever evaluated as a multiple of log 2. The alternating harmonic
+series is proved to converge with sum strictly between 1/2 and 1, and the
+two-positive-one-negative rearrangement is proved to converge to (3/2) TIMES THAT
+SUM, via the log-free identity T_{3n} = S_{4n} + (1/2) S_{2n}. (3) R^d does not
+exist as a normed space at order 36 (`rn-as-a-normed-space` is order 62), so
+Levy-Steinitz and Sierpinski's refinement are NOT items on this page and the
+"in R^2 the rearrangement sums form a LINE" example is dropped; what remains is
+the orientation remark `rem-rearrangement-in-higher-dimensions`. (4) The sum
+p_n^2 criterion for infinite products needs the log expansion and is DEFERRED to
+order 72; `thm-infinite-product-criterion` carries the log-free content instead
+(the nonnegative criterion with the two elementary bounds, the (1 - p_k) form,
+and absolute convergence from sum |p_k|). (5) `lem-integer-part` is homed on
+`limits-of-real-functions` (order 42), LATER than this page, so
+`thm-decimal-expansions` may not use a floor function; the digits are produced by
+`thm-recursion` with the finite case distinction of `thm-well-ordering-principle`.
+(6) The harmonic series' divergence is NOT citable here:
+`ex-harmonic-series-diverges` is homed on an examples page. Every conditional
+convergence witness cites `thm-p-series-rational` at p = 1 (and at p = 1/2 for
+the square-root witnesses) instead. (7) Every series on this page and its
+companion is written 0-indexed: the alternating harmonic series is
+sum_{j>=0} (-1)^j/(j+1), the square-root witnesses run over 1/sqrt(j+1),
+prod(1 - 1/(j+2)) replaces prod(1 - 1/n), and prod(1 + (-1)^j/sqrt(j+2))
+replaces prod(1 + (-1)^n/sqrt n) — at the original indices the first term of
+each is 1/0 or a vanishing factor.
 absolute, conditional and unconditional convergence; rearrangement; **Abel
 summation by parts**; **Dirichlet's test**; **Abel's test**; the alternating
 series test with error bound; absolute implies convergent; **Dirichlet's
 rearrangement theorem** (absolute implies unconditional); **the Riemann series
-theorem**; unconditional <=> absolute in R; **Levy-Steinitz** (in R^d the
-rearrangement sums form an affine subspace) and Sierpinski's refinement;
-**Cauchy products** and **Mertens' theorem**; grouping; Fubini for double series;
-infinite products with the sum p_n^2 criterion; decimal expansions as a theorem.
-B: the alternating harmonic series rearranged to (3/2) log 2 and to any
-prescribed real; the Cauchy product of sum (-1)^n/sqrt(n+1) with itself diverges;
-in R^2 the rearrangement sums form a LINE, not the plane; a double array with
-iterated sums 0 and -1; product(1 - 1/n) = 0 explains why 0 is excluded from
-product convergence; product(1 + (-1)^n/sqrt n) diverges though the series
-converges.
+theorem**; unconditional <=> absolute in R; **Cauchy products** and **Mertens'
+theorem**; grouping; Fubini for double series; infinite products with the
+log-free criteria (nonnegative terms, the (1 - p_k) form, and absolute
+convergence from sum |p_k| — the sum p_n^2 refinement is DEFERRED to the
+logarithm page, order 72); decimal expansions as a theorem. Levy-Steinitz (in
+R^d the rearrangement sums form an affine subspace) and Sierpinski's refinement
+are NOT stated on this page: R^d as a normed space is order 62, later in the
+reading order, and rem-rearrangement-in-higher-dimensions carries the
+orientation instead.
+B: the alternating harmonic series sum_{j>=0} (-1)^j/(j+1), proved conditionally
+convergent with sum strictly between 1/2 and 1 (the VALUE log 2 is not available
+at order 36); the same series rearranged two-positive-one-negative to (3/2) times
+that sum, and rearranged to any prescribed real; a Dirichlet-test example whose
+signs have period three, so the alternating series test does not reach it; an
+Abel-test example and the counterexample showing Abel's test needs monotonicity;
+the Cauchy product of sum_{k>=0} (-1)^k/sqrt(k+1) with itself diverges because
+|c_n| >= 1 for every n; a double array with iterated sums 1 and 0; every
+rearrangement of sum (-1/2)^k has sum 2/3; grouping (1-1)+(1-1)+... converges
+while sum (-1)^k does not; prod_{j>=0}(1 - 1/(j+2)) has partial products 1/(n+1)
+and so does not converge, which is why a zero limit is excluded;
+prod_{j>=0}(1 + (-1)^j/sqrt(j+2)) has partial products tending to 0 although the
+series converges; and 0.999... = 1 as the nonuniqueness of base-b expansions.
 Level-8 note (Alpha-8, 2026-07-27, per the orchestrator): "absolute implies
 convergent" ALREADY EXISTS — `lem-absolute-convergence-implies-convergence`
 was coined and authored on `series-and-nonnegative-tests` (the root and ratio
@@ -305,6 +346,65 @@ function; Q is F-sigma and not G-delta. B: Q covered by intervals of total lengt
 epsilon; the fat Cantor set's measure computed; two homeomorphic perfect nowhere
 dense sets of which only one is null (measure is not a topological invariant);
 two homeomorphic sets of different Baire category.
+Level-9 audit, 2026-07-27 (Beta-9-1; note (e) amended by Alpha-9 per owner
+decision B1-R3). Seven notes bind authoring of this pair.
+(a) TWO NEW ITEMS, and they are load-bearing. `lem-finite-interval-cover-total-
+length` (finitely many intervals covering [a,b] have total length >= b - a,
+proved by induction on the number of intervals) and `lem-nondegenerate-interval-
+is-not-null` (no interval of positive length has measure zero: enlarge the k-th
+covering interval to an open one of length |I_k| + eps*2^{-k-1}, apply Heine-
+Borel, then the previous lemma). WITHOUT THEM three items on this pair are
+unprovable, because each needs "a cover of total length < 1 cannot cover an
+interval of length 1": `thm-fat-cantor-set-has-positive-measure`,
+`fs-null-implies-content-zero` and `cex-null-set-not-of-content-zero`. The
+scaffold had none of it. Both lemmas are also what `the-riemann-integral`
+(order 54) will want for Lebesgue's criterion.
+(b) THE CHOICE-FREENESS OF BAIRE IS NOT FREE. `rem-baire-in-r-is-choice-free`
+claims the nested-interval proof spends no choice; the naive proof picks an
+interval at each stage in terms of the previous one, which is dependent choice.
+`thm-baire-category-r` must therefore run the canonical selection of
+`thm-perfect-set-uncountable-r`: fix one enumeration of Q, and at every stage
+take the interval with LEAST-INDEXED RATIONAL ENDPOINTS meeting the
+requirements. `thm-rationals-countable`, `lem-rat-embeds-dense` and
+`thm-well-ordering-principle` are now in the deps of both items for exactly
+this; the remark must name the device, not merely assert the conclusion. This
+is also what `rem-baire-category-choice-strength` means by "a fixed countable
+dense set removes every choice".
+(c) `def-monotone-sequence` WAS DROPPED from `thm-cantor-function-properties`:
+it is about SEQUENCES and says nothing about functions, and no definition of a
+monotone function exists before RA-14 (order 46). The title now states the
+property inline, "satisfies c(x) <= c(y) whenever x <= y".
+(d) "TOTALLY DISCONNECTED" IS UNDEFINED IN THIS LIBRARY. `def-connected-r`
+defines connectedness for subsets of R and nothing defines total
+disconnectedness. `thm-cantor-set-properties` and
+`ex-cantor-set-is-perfect-and-totally-disconnected` now say what is actually
+provable: the set contains no interval of positive length, so by
+`thm-connected-subsets-of-r-are-intervals` its only nonempty connected subsets
+are single points. The phrase may appear as a gloss, never as the claim.
+(e) THE CANTOR FUNCTION'S CONTINUITY STAYS OFF THIS PAGE. [AMENDED BY ALPHA-9,
+owner decision B1-R3, 2026-07-27: Beta-9-1 originally landed
+`cor-cantor-function-is-continuous` and
+`rem-cantor-function-increases-only-on-a-null-set` at order 44; the owner moved
+them, together with the B item
+`ex-cantor-function-maps-a-null-set-onto-the-unit-interval`, to
+`monotone-functions-and-discontinuities` (RA-14, order 46) — see the Level-9
+inheritance note in the RA-14 entry below, which is now the authoritative
+record. Only `lem-monotone-with-interval-image-is-continuous` stays at order
+44, and it is the tool the moved items cite.] The scaffold was RIGHT to claim
+only well-definedness, monotonicity, surjectivity and constancy on the removed
+intervals here: no definition of continuity for real functions exists before
+order 42.
+(f) TWO PROSE B ITEMS ARE NOT IN THE SCAFFOLD AND SHOULD NOT BE. "Two
+homeomorphic perfect nowhere dense sets of which only one is null" and "two
+homeomorphic sets of different Baire category" both need a homeomorphism of
+subsets of R, and `def-homeomorphism-and-open-maps` is order 102. They belong
+on a later page or must be restated without the word; they are not a gap here.
+(g) THREE RETITLES, because the words were not available: "outer measure 1/2"
+became "cannot be covered by intervals of total length less than 1/2"
+(`ex-fat-cantor-measure-computed`) and "a set of full measure" became "the
+union of a meager set and a set of measure zero" (`cex-meager-set-of-full-
+measure`). No measure-theoretic notion beyond `def-measure-zero-and-content-
+zero` exists here.
 
 ### Block V: continuity
 
@@ -399,9 +499,74 @@ now precede it in reading order — `def-metric-continuity` (metric-spaces, 24),
 (R, |x-y|) instance and cite, or define R-natively and record the agreement
 explicitly, in the dictionary style of `def-metrizable-space`. Silent
 re-definition repeats the level-7 two-notions-of-open defect. At the same
-point, identify psi = dist(., Z) of `ex-distance-to-the-integers` with the set
-distance d(x, Z) and its 1-Lipschitz property (`lem-distance-to-set-is-lipschitz`,
-level 7), which makes psi this track's natural uniformly-continuous example.
+point, identify psi = dist(., Z) with the set distance d(x, Z) and its
+1-Lipschitz property (`lem-distance-to-set-is-lipschitz`, level 7), which makes
+psi this track's natural uniformly-continuous example.
+
+CORRECTION, level-9 audit 2026-07-27 (Beta-9-1). The sentence above originally
+routed that identification through `ex-distance-to-the-integers`. That item is
+homed on `limits-of-real-functions-examples`, an EXAMPLES page, and examples
+pages are leaves (SCHEMA §7): no item on RA-13 or on its B page may depend on
+it, so the instruction was unexecutable as written. The identification is made
+instead from the A-page items it actually needs — `def-metric-bounded-diameter`
+(distance from a point to a nonempty set) and `lem-distance-to-set-is-lipschitz`,
+both on `metric-spaces`, order 24 — in the new B item
+`ex-distance-to-the-integers-is-1-lipschitz`. That reaches exactly the intended
+destination, and it is why the seam obligation is recorded as discharged.
+
+Level-9 audit, 2026-07-27 (Beta-9-1). Eight notes bind authoring of this pair.
+(a) THE SEAM IS DISCHARGED BY ONE ITEM, `lem-real-and-metric-notions-agree`,
+placed immediately after `def-uniform-continuity-real`. It is a LEMMA, not a
+remark, so later pages can cite it and move between the two vocabularies. It
+records four agreements at once: continuity, uniform continuity, the Lipschitz
+and Holder conditions (which are NOT redefined here — they are
+`def-lipschitz-holder-contraction` of order 26 instantiated at X = A subset of
+(R, |x-y|)), and, as a fifth clause, that a subset of R is compact in the
+open-cover sense of `def-open-cover-r` exactly when it is a compact metric
+subspace. That fifth clause closes the OTHER seam nobody had noticed: page 28
+defines compactness metrically and page 38 defines it again R-natively, and
+until now no item said the two agreed.
+(b) CONTINUITY AND UNIFORM CONTINUITY ARE DEFINED R-NATIVELY, resting on
+`def-function-limit` as the RA-12 retraction requires; Lipschitz and Holder are
+NOT. That asymmetry is deliberate: the first two are the subject of the page and
+must be stated in the idiom of RA-12, the second two would gain nothing from a
+second definition.
+(c) EVT, THE CONTINUOUS IMAGE OF A COMPACT SET, AND HEINE-CANTOR ARE STATED
+TWICE ON PURPOSE, metric-generally at order 28 and R-natively here, with
+distinct ids and distinct proofs, per the standing decision at the head of
+`plan-topology-track.md`. The R-native proofs go through
+`thm-heine-borel-characterisation-r` and `thm-compact-iff-sequentially-compact-r`
+(order 38, choice-free and order-based); the metric proofs go through the cover
+machinery of page 28. `lem-real-and-metric-notions-agree` is the single place
+where the duplication is acknowledged, and every duplicated item must link it.
+(d) THE k-TH ROOTS COROLLARY IS NOT AN A-PAGE ITEM. `thm-nth-roots-exist`
+already exists and is published (order 16); minting a second id for the same
+statement is forbidden. The IVT re-proof lives on the B page as
+`ex-ivt-gives-nth-roots`, which cites the existing theorem.
+(e) THE STRICT HIERARCHY IS NOT RESTATED. `thm-metric-regularity-hierarchy`
+(order 26) already gives Lipschitz => uniformly continuous => continuous and
+Holder => uniformly continuous; via note (a) it applies verbatim. Strictness
+belongs in a Remark on `lem-real-and-metric-notions-agree` naming the B-page
+witnesses `ex-x-to-the-beta-separates-the-holder-classes` and
+`cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval`, as ordinary
+same-pair links, not dependencies — the `thm-metric-equivalence-hierarchy`
+pattern of the level-7 audit.
+(f) "A FUNCTION WITH THE INTERMEDIATE VALUE PROPERTY IS CONTINUOUS" IS NOT
+REFUTED HERE. Every witness available at order 44 is an oscillator, and the
+only oscillator in the library, `ex-distance-to-the-integers`, is homed on
+`limits-of-real-functions-examples` (order 43), a B page, which is a leaf: no
+item anywhere may depend on it. The false statement belongs on RA-14, whose B
+page already plans the Conway base-13 function. This is a mathematical
+placement, not a page-budget cut.
+(g) alpha-HOLDER WITH alpha > 1 MUST STATE ITS HYPOTHESIS INLINE.
+`def-lipschitz-holder-contraction` defines the Holder condition for RATIONAL
+0 < alpha <= 1 only, so "alpha > 1" is not expressible through it;
+`thm-holder-exponent-above-one-forces-constancy` writes
+|f(x) - f(y)| <= C|x-y|^alpha out in full, with alpha a rational > 1 and
+`def-rational-power` supplying the power.
+(h) INDEXING. def-sequence is 0-indexed, so the witnesses on the B page are the
+pairs 1/(k+2), 1/(k+3) for 1/x on (0,1) and k+1, k+1+1/(k+1) for x^2 on R;
+never 1/k or n, n+1/n.
 
 **RA-14 Monotone Functions, Discontinuities, and Continuity Sets**
 <- RA-13, RA-11, RA-03
@@ -431,6 +596,41 @@ Level-8 note (Alpha-8, 2026-07-26): the library now has a floor item —
 `lem-integer-part` on `limits-of-real-functions` (for every real x exactly
 one integer m with m <= x < m+1). Any integer-part / floor step on this page
 cites it; do not rebuild the argument from Archimedean + well-ordering inline.
+Level-9 inheritance note (Alpha-9, step 4, 2026-07-27 — owner decisions B1-R3
+and B1-R9; BINDING when this page is scaffolded). This page inherits four
+results moved off level 9's pages 44/45 by the owner:
+(1) `cor-cantor-function-is-continuous` (A page): the Cantor function c of
+`def-cantor-function` (order 40) is continuous on [0,1]. Intended proof: the
+image of c is [0,1] by `thm-cantor-function-properties` (surjectivity), which
+is order-convex, and c satisfies c(x) <= c(y) whenever x <= y, so
+`lem-monotone-with-interval-image-is-continuous` applies directly; no IVT.
+(2) `rem-cantor-function-increases-only-on-a-null-set` (A page): may claim that
+c is continuous, nondecreasing, surjective, constant on every removed interval,
+and that the Cantor set has measure zero, so the increase happens on a null
+set. It may NOT claim c' = 0 almost everywhere, that c is singular, or anything
+about Lebesgue measure; it carries `external_refs:
+[rem-lebesgue-monotone-differentiation, rem-ftc-absolutely-continuous]` (both
+published, both `proved_here: false`) and must LINK both in its body — that is
+what makes the ‡ marker appear and what extcheck enforces.
+(3) `ex-cantor-function-maps-a-null-set-onto-the-unit-interval` (B page): the
+Cantor set is null yet c maps it ONTO [0,1], because c is surjective onto
+[0,1] and constant on every removed interval.
+(4) The false statement "a function with the intermediate value property is
+continuous" (decision B1-R9; no id coined yet — mint it here): its only honest
+witness is an oscillator with the Darboux property, and this page's B list
+already plans the Conway base-13 function (Darboux, nowhere continuous), which
+is the intended witness; the library's only other oscillator sits on a leaf
+examples page and may not be cited.
+REUSE OBLIGATION. The three ids in (1)-(3) are COINED but UNBUILT — they
+appear in research/level9-batch-1.notes.md and DECISIONS.md but in no spec page
+and no items/ file (verified 2026-07-27). This is the same trap as
+`lem-absolute-convergence-implies-convergence` at level 8: when this page is
+scaffolded, those EXACT ids must be reused, never re-minted under a paraphrase.
+Their tool, `lem-monotone-with-interval-image-is-continuous`, STAYS on
+`continuity-ivt-evt-and-uniform-continuity` (order 44, in `plan-spec.json`
+today) — cite it, do not move or restate it. The prerequisite cost is zero:
+this page's `requires` already lists both `cantor-set-baire-and-measure-zero`
+and `continuity-ivt-evt-and-uniform-continuity` (verified in `plan-spec.json`).
 
 ### Block VI: differentiation
 
@@ -550,6 +750,27 @@ Level-8 note (Alpha-8, 2026-07-26): `thm-euclidean-space-complete`
 so restricted at level-7 authoring (d_infinity is a max over the empty index
 set at n = 0). The completeness, Bolzano-Weierstrass and Heine-Borel items
 here inherit the n >= 1 hypothesis; do not cite the level-7 theorem for all n.
+Level-9 inheritance note (Alpha-9, step 4, 2026-07-27 — owner decision B2-R4;
+BINDING when this page is scaffolded). This page — id `rn-as-a-normed-space`,
+plan order 62 — or a later series page resting on it inherits **Levy-Steinitz**
+(for a series of vectors in R^d, the set of sums of its convergent
+rearrangements is either empty or an affine subspace) together with
+**Sierpinski's refinement**, as a properly PROVED theorem, not a stub. At
+order 36, `absolute-convergence-and-rearrangement` deliberately states NO
+theorem about R^d: its `rem-rearrangement-in-higher-dimensions` says only that
+the R^d question has a complete classical answer not reachable at that point
+in the reading order, and carries the Levy and Steinitz papers in
+`sources.references`. The owner explicitly declined to mint a
+`proved_here: false` stub (`rem-levy-steinitz` does NOT exist and should not
+be created: `deferred-functional-analysis` is a draft page, and every
+published `external_refs` today targets a published deferred page; a stub
+would also need later reconciliation with the proved version — the re-mint
+trap). So this note is the ONLY carrier of the plan line: if this page is
+scaffolded without the theorem, Levy-Steinitz silently vanishes from the
+library's plan. When this page gains items, `rem-rearrangement-in-higher-
+dimensions` (page 36) must declare the proved item in its `forward_refs` so it
+gains the ↗ tier and the ledger entry comes into existence (see
+research/level9-batch-2.notes.md §5).
 
 **RA-23 Sequences and Series of Functions; Uniform Convergence**
 <- RA-22, RA-19
@@ -645,6 +866,23 @@ growth-rate comparisons; x^x -> 1 as x -> 0+; the log series diverges at -1.
 Level-8 note (Alpha-8, 2026-07-26): any integer-part / floor step on this page
 cites `lem-integer-part` (`limits-of-real-functions`); do not rebuild it
 inline from Archimedean + well-ordering.
+Level-9 inheritance note (Alpha-9, step 4, 2026-07-27 — owner decision B2-R5;
+BINDING when this page is scaffolded). This page — id
+`the-logarithm-and-general-powers`, plan order 72 — inherits the **sum p_n^2
+criterion for infinite products with SIGNED factors**: for a real sequence
+(p_n) with sum p_n^2 convergent, prod(1 + p_n) converges if and only if
+sum p_n converges. It was deferred from `absolute-convergence-and-
+rearrangement` (order 36) because every honest proof runs through the
+log(1+x) expansion, which this page owns, and there is no log-free proof at
+order 36 — the alternative was a fabricated or circular proof. What order 36
+DOES prove, in `thm-infinite-product-criterion`, is the full log-free content:
+the nonnegative criterion with both elementary bounds
+1 + sum p <= prod(1+p) <= 1/(1 - sum p), the (1 - p_k) form including
+"partial products -> 0 when sum p diverges", and absolute convergence from
+sum |p_k|. Build the signed criterion ON that theorem plus this page's
+log(1+x) series; do not restate the log-free bounds. If this page is
+scaffolded without the criterion, the deferral becomes a silent loss — this
+note is the plan line's only carrier.
 
 **RA-28 Sine, Cosine, and the Definition of pi** <- RA-26
 sin and cos by power series; sin' = cos, cos' = -sin; the Pythagorean identity;
