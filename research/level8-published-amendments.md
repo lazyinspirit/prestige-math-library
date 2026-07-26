@@ -1,7 +1,17 @@
 # Level-8 published-item amendments — prepared for owner audit
 
-**Status: PREPARED, NOT APPLIED.** The changes live on the branch
-`level8-published-amendments`, commit `cd42bd0`. `main` is untouched.
+**Status: APPLIED AND PUBLISHED, 2026-07-27, commit `de8aaef`.** All four
+amendments landed in the same commit that flipped level 8 to published, as the
+sequencing below requires, and were re-audited by the owner. The preparation
+branch `level8-published-amendments` was merged and deleted. This file is kept
+as the record of what changed and why.
+
+**Two further falsehoods were found after this document was written**, in
+PAGE SUMMARIES rather than items, which this document's sweep did not cover:
+`topology-of-r` ("topological spaces in general, which this library does not
+develop") and `sequences-and-limits`. See the "What the sweep did not cover"
+section at the end, now expanded, and the durable rule in the session memory
+`published-claim-decay`.
 
 ## Why these exist
 
@@ -180,7 +190,14 @@ Listed only so the sweep's coverage is on record.
 
 ## What the sweep did not cover
 
-Alpha-8 swept for scope-denial phrasing. Statements of the form "no item states
+**It swept ITEMS ONLY.** Page summaries are published text too and were missed
+entirely; two of them were false, and one of those (`sequences-and-limits`,
+claiming the monotone convergence theorem and Bolzano-Weierstrass are "not
+proved anywhere in it" and their page "planned and not yet written") had been
+false since level 5, not level 8. Both were repaired in `de8aaef`. Every future
+sweep must cover `library/*/*.md` as well as `items/*.md`.
+
+Beyond that, Alpha-8 swept for scope-denial phrasing. Statements of the form "no item states
 X" or "the library has no Y", where X or Y is now supplied by level 8, would be
 caught by the same pattern; statements that *assume* absence without saying so
 would not. If a future level adds material that an existing published item
