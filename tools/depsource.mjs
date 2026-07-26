@@ -139,6 +139,38 @@ for (const p of planned) {
     }
 }
 
+// ------------------------------------------- reciprocal-Archimedean worklist
+//
+// `thm-of-archimedean` states only "for every x there is n with x < n·1_F". The
+// RECIPROCAL form "1/n < eps" is a further step (part 2 of
+// `lem-of-inverse-positive`), proved once as `cor-archimedean-reciprocal`. An
+// item citing the theorem alone is either using the direct form — unboundedness,
+// [n, inf) with empty intersection — which is fine, or reaching for the
+// reciprocal form it was never given, which is a citation gap of the same class
+// as citecheck's `nonstrict-attribution`.
+//
+// This is a WORKLIST, not a defect list: the direct-form uses are legitimate and
+// cannot be told apart from a dep set alone. Triage each one against what the
+// item's title actually asserts.
+const ARCH = 'thm-of-archimedean';
+const ARCH_RECIP = ['cor-archimedean-reciprocal', 'lem-of-inverse-positive'];
+const archWorklist = [];
+for (const p of planned) {
+  if (pageFilter && p.id !== pageFilter) continue;
+  for (const it of p.items ?? []) {
+    const deps = it.deps ?? [];
+    if (deps.includes(ARCH) && !ARCH_RECIP.some((d) => deps.includes(d)))
+      archWorklist.push({ page: p.id, item: it.id, title: (it.title ?? '').slice(0, 70) });
+  }
+}
+// The rule is worthless if its premise has drifted, so check the premise: the
+// theorem must still be direct-only. If it ever gains a reciprocal clause, say so
+// loudly rather than keep flagging correct citations.
+const archItem = existsSync(join(REPO, 'items', ARCH + '.md'))
+  ? readFileSync(join(REPO, 'items', ARCH + '.md'), 'utf8')
+  : '';
+const archStale = /1\s*\/\s*n\s*<|n\^\{-1\}|reciprocal/i.test(archItem.split('## Facts')[0] ?? '');
+
 const by = (v) => rows.filter((r) => r.verdict === v);
 const counts = Object.fromEntries(
   ['published', 'planned-earlier', 'draft-page', 'homeless', 'planned-later', 'unresolved'].map((v) => [v, by(v).length]),
@@ -156,6 +188,18 @@ if (asJson) {
     if (!list.length) continue;
     console.log(`\n--- ${v} (${list.length})`);
     for (const r of list) console.log(`  ${r.page} :: ${r.item} -> ${r.dep}  ${r.where}`);
+  }
+
+  if (archStale)
+    console.log(
+      `\n--- archimedean-seed-stale\n  ${ARCH}'s Statement now appears to mention the reciprocal form. ` +
+        `Re-read it: the worklist below assumes it does NOT, and is meaningless if that changed.`,
+    );
+  if (archWorklist.length) {
+    console.log(`\n--- archimedean-reciprocal worklist (${archWorklist.length}) — TRIAGE, not defects`);
+    console.log(`  cites ${ARCH} without ${ARCH_RECIP.join(' or ')}.`);
+    console.log(`  Legitimate when the item uses the DIRECT form; a citation gap when it uses 1/n < eps.`);
+    for (const w of archWorklist) console.log(`  ${w.page} :: ${w.item}\n      ${w.title}`);
   }
 
   const unpublished = rows.filter((r) => r.verdict !== 'published' && r.verdict !== 'planned-earlier');

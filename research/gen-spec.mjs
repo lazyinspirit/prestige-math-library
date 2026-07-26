@@ -6,8 +6,8 @@ const pages = [];
 let ord = 0;
 
 /** already-published page, declared so the new stack can name it */
-const P = (id, requires) =>
-  pages.push({ order: ++ord, id, kind: 'P', category: 'published', requires, items: [] });
+const P = (id, requires, items = []) =>
+  pages.push({ order: ++ord, id, kind: 'P', category: 'published', requires, items });
 
 /** an A page and its B companion; returns the A id for use in later requires */
 const AB = (id, title, category, requires, opts = {}) => {
@@ -55,7 +55,23 @@ const FND = 'foundations-of-the-real-numbers';
 P(NAT, []);
 P(CAU, [NAT]);
 P(DED, [CAU]);
-P(FND, [DED]);
+// Owner-approved 2026-07-26. thm-of-archimedean states only "for every x there
+// is n with x < n·1_F". FORTY-ONE scaffolded items at levels 6-8 use the
+// RECIPROCAL form "1/n < eps", which it does not give; that step is part 2 of
+// lem-of-inverse-positive. Rather than 41 chances to cite the theorem and forget
+// the lemma, the reciprocal form is proved ONCE, on the page where both its
+// inputs already live. This is a genuine proof, not a restatement of a proved
+// theorem — the ‡ not-proved-here tier is for results the library does NOT prove.
+// NOTE AT PUBLISH TIME: this item must be authored, judged and audited BEFORE it
+// is added to library/real-analysis/foundations-of-the-real-numbers.md, because a
+// published page listing a draft item is a hard error (CLAUDE.md).
+const FND_ADDED_ITEMS = [
+  { id: 'cor-archimedean-reciprocal', kind: 'corollary',
+    title: 'For every $\\varepsilon > 0$ in a complete ordered field there is a natural $n \\ge 1$ with $1/n < \\varepsilon$',
+    strategy: 'direct',
+    deps: ['thm-of-archimedean', 'lem-of-inverse-positive', 'def-complete-ordered-field', 'def-ordered-field', 'def-field', 'cor-of-one-positive'] },
+];
+P(FND, [DED], FND_ADDED_ITEMS);
 
 // ---------------------------------------------------------------- foundations
 
@@ -287,7 +303,7 @@ const RA05_ITEMS = [
   { id: 'thm-nested-interval-property', kind: 'theorem',
     title: 'A nested sequence of nonempty closed bounded intervals has nonempty intersection, and the intersection is a single point exactly when the lengths tend to $0$',
     strategy: 'direct',
-    deps: ['def-interval', 'def-monotone-sequence', 'thm-monotone-convergence', 'def-complete-ordered-field', 'lem-sup-epsilon', 'lem-sup-unique', 'thm-infimum-property', 'def-bounded-set', 'def-real-limit', 'thm-of-archimedean', 'lem-of-add-order', 'thm-algebra-of-limits', 'lem-limit-unique', 'lem-of-inverse-positive'] },
+    deps: ['def-interval', 'def-monotone-sequence', 'thm-monotone-convergence', 'def-complete-ordered-field', 'lem-sup-epsilon', 'lem-sup-unique', 'thm-infimum-property', 'def-bounded-set', 'def-real-limit', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-of-add-order', 'thm-algebra-of-limits', 'lem-limit-unique', 'lem-of-inverse-positive'] },
   { id: 'def-subsequential-limit', kind: 'definition',
     title: 'Subsequential limit of a real sequence, and the subsequential limit set',
     deps: ['def-sequence', 'def-real-limit', 'lem-index-map-grows'] },
@@ -314,7 +330,7 @@ const RA05_ITEMS = [
   { id: 'lem-geometric-sequence-null', kind: 'lemma',
     title: 'For $|r| < 1$ the sequence $r^k$ is null, and for $|r| > 1$ the sequence $|r|^k$ diverges to $+\\infty$',
     strategy: 'cases',
-    deps: ['def-integer-power', 'lem-bernoulli-inequality', 'lem-power-monotone', 'thm-of-archimedean', 'def-real-limit', 'def-divergence-to-infinity', 'lem-of-inverse-positive', 'lem-of-abs-value', 'prop-of-reciprocal-order', 'thm-induction-principle', 'prop-of-multiply-inequalities'] },
+    deps: ['def-integer-power', 'lem-bernoulli-inequality', 'lem-power-monotone', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'def-real-limit', 'def-divergence-to-infinity', 'lem-of-inverse-positive', 'lem-of-abs-value', 'prop-of-reciprocal-order', 'thm-induction-principle', 'prop-of-multiply-inequalities'] },
   { id: 'def-contractive-sequence', kind: 'definition',
     title: 'Contractive sequence: $|x_{k+2} - x_{k+1}| \\le c\\,|x_{k+1} - x_k|$ for a fixed $0 < c < 1$',
     deps: ['def-sequence', 'def-real-order', 'lem-of-abs-value'] },
@@ -322,18 +338,35 @@ const RA05_ITEMS = [
     title: 'Every contractive sequence is Cauchy, hence converges, with error bound $|x - x_k| \\le c^{k-1}|x_2 - x_1|/(1-c)$',
     strategy: 'induction',
     deps: ['def-contractive-sequence', 'thm-cauchy-criterion-via-lub', 'lem-geometric-sequence-null', 'def-integer-power', 'lem-power-monotone', 'lem-power-difference-factorisation', 'lem-triangle-inequality-finite', 'def-finite-sum', 'lem-finite-sum-laws', 'thm-induction-principle', 'def-real-limit', 'thm-algebra-of-limits', 'lem-limit-abs', 'lem-limit-preserves-order', 'lem-of-inverse-positive'] },
+  // Owner-approved 2026-07-26. The alternating sequence and the even/odd index
+  // maps are needed by EIGHT scaffolded items across levels 6-8 (this page's
+  // fs-convergent-subsequence-implies-bounded; ex-two-subsequential-limits and
+  // cex-unbounded-with-convergent-subsequence on the B page; then
+  // ex-limsup-of-alternating-sequence, ex-ratio-fails-root-succeeds,
+  // cex-limsup-subadditivity-strict, cex-limsup-product-strict at level 7 and
+  // ex-cesaro-means-of-alternating, cex-stolz-cesaro-converse-fails,
+  // cex-ratio-inconclusive-root-decides at level 8). The library has NO parity
+  // notion, and the published exemplar fs-bounded-implies-convergent builds the
+  // object by three separate applications of the recursion theorem inside its
+  // own Given block. Proving it once here turns eight reconstructions into eight
+  // citations. It cannot live on the B page: B pages are leaves. Level 6 is the
+  // earliest page every consumer can reach.
+  { id: 'lem-alternating-sequence', kind: 'lemma',
+    title: 'The even and odd index maps and the alternating sequence: strictly increasing $e, o$ with $\\mathbb{N}$ their disjoint union, and the unique $(s_k)$ with $s_0 = 1$, $s_{\\sigma(k)} = -s_k$, which satisfies $|s_k| = 1$, $s \\circ e \\equiv 1$ and $s \\circ o \\equiv -1$',
+    strategy: 'induction',
+    deps: ['thm-recursion', 'thm-induction-principle', 'lem-index-map-grows', 'def-sequence', 'def-natural-numbers', 'def-nat-addition', 'def-nat-order', 'thm-nat-linear-order', 'lem-nat-successor-neq-self', 'def-abs-value', 'lem-of-abs-value', 'def-real-order', 'cor-of-one-positive', 'lem-of-add-order', 'def-complete-ordered-field', 'def-ordered-field', 'def-field'] },
   { id: 'fs-nested-open-intervals-nonempty', kind: 'false-statement',
     title: 'FALSE: a nested sequence of nonempty bounded open intervals has nonempty intersection',
     strategy: 'direct',
-    deps: ['thm-nested-interval-property', 'def-interval', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
+    deps: ['thm-nested-interval-property', 'def-interval', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
   { id: 'fs-consecutive-differences-null-implies-cauchy', kind: 'false-statement',
     title: 'FALSE: if $|x_{k+1} - x_k| \\to 0$ then $(x_k)$ is Cauchy',
     strategy: 'direct',
-    deps: ['def-real-limit', 'def-sequence', 'def-contractive-sequence', 'thm-contractive-implies-cauchy', 'thm-of-square-roots', 'lem-power-difference-factorisation', 'lem-power-monotone', 'lem-of-inverse-positive', 'thm-of-archimedean', 'lem-cauchy-sequence-bounded'] },
+    deps: ['def-real-limit', 'def-sequence', 'def-contractive-sequence', 'thm-contractive-implies-cauchy', 'thm-of-square-roots', 'lem-power-difference-factorisation', 'lem-power-monotone', 'lem-of-inverse-positive', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-cauchy-sequence-bounded'] },
   { id: 'fs-convergent-subsequence-implies-bounded', kind: 'false-statement',
     title: 'FALSE: a sequence with a convergent subsequence is bounded (the converse of Bolzano-Weierstrass)',
     strategy: 'direct',
-    deps: ['thm-bolzano-weierstrass', 'def-subsequential-limit', 'def-sequence', 'def-bounded-set', 'def-real-limit', 'thm-recursion', 'thm-induction-principle', 'lem-index-map-grows', 'thm-of-archimedean'] },
+    deps: ['thm-bolzano-weierstrass', 'lem-alternating-sequence', 'def-subsequential-limit', 'def-sequence', 'def-bounded-set', 'def-real-limit', 'thm-recursion', 'thm-induction-principle', 'lem-index-map-grows', 'thm-of-archimedean'] },
   { id: 'rem-completeness-routes', kind: 'remark',
     title: 'Two independent proofs that $\\mathbb{R}$ is Cauchy complete, and why the library records both',
     deps: ['thm-cauchy-criterion-via-lub', 'thm-reals-cauchy-complete', 'thm-bolzano-weierstrass', 'thm-nested-interval-property', 'def-complete-ordered-field'] },
@@ -348,10 +381,10 @@ const RA05_B_ITEMS = [
     deps: ['thm-monotone-convergence', 'def-monotone-sequence', 'thm-of-square-roots', 'thm-algebra-of-limits', 'thm-induction-principle', 'lem-limit-of-tail', 'lem-limit-preserves-order', 'lem-power-monotone'] },
   { id: 'ex-nested-intervals-single-point', kind: 'example',
     title: 'The nested intervals $[0, 1/k]$ intersect in exactly $\\{0\\}$',
-    deps: ['thm-nested-interval-property', 'def-interval', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
+    deps: ['thm-nested-interval-property', 'def-interval', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
   { id: 'ex-two-subsequential-limits', kind: 'example',
     title: 'The sequence $(-1)^k(1 + 1/k)$ is bounded with subsequential limit set exactly $\\{-1, 1\\}$',
-    deps: ['thm-bolzano-weierstrass', 'def-subsequential-limit', 'thm-algebra-of-limits', 'lem-subsequence-inherits-limit', 'thm-of-archimedean', 'lem-of-inverse-positive', 'thm-recursion', 'thm-induction-principle'] },
+    deps: ['thm-bolzano-weierstrass', 'lem-alternating-sequence', 'def-subsequential-limit', 'thm-algebra-of-limits', 'lem-subsequence-inherits-limit', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-of-inverse-positive', 'thm-recursion', 'thm-induction-principle'] },
   { id: 'ex-contractive-sequence-fixed-point', kind: 'example',
     title: 'The sequence $x_{k+1} = (x_k + 1)/3$ is contractive with $c = 1/3$ and converges to $1/2$',
     deps: ['thm-contractive-implies-cauchy', 'def-contractive-sequence', 'thm-algebra-of-limits', 'lem-limit-of-tail', 'lem-limit-unique'] },
@@ -362,19 +395,19 @@ const RA05_B_ITEMS = [
     deps: ['def-real-limit', 'thm-of-square-roots', 'fs-sqrt2-rational', 'def-rationals', 'lem-rat-embeds-dense', 'thm-cauchy-criterion-via-lub', 'fs-rationals-complete', 'lem-convergent-implies-cauchy', 'lem-limit-unique', 'lem-geometric-sequence-null', 'thm-squeeze'] },
   { id: 'cex-nested-open-intervals-empty', kind: 'counterexample',
     title: 'The nested open intervals $(0, 1/k)$ have empty intersection',
-    deps: ['fs-nested-open-intervals-nonempty', 'def-interval', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
+    deps: ['fs-nested-open-intervals-nonempty', 'def-interval', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-of-inverse-positive'] },
   { id: 'cex-nested-unbounded-closed-empty', kind: 'counterexample',
     title: 'The nested closed unbounded sets $[k, \\infty)$ have empty intersection, so boundedness cannot be dropped',
     deps: ['thm-nested-interval-property', 'def-interval', 'thm-of-archimedean'] },
   { id: 'cex-sqrt-k-differences-null-not-cauchy', kind: 'counterexample',
     title: '$x_k = \\sqrt{k}$ has $x_{k+1} - x_k \\to 0$ and is not Cauchy',
-    deps: ['fs-consecutive-differences-null-implies-cauchy', 'thm-of-square-roots', 'def-real-limit', 'def-divergence-to-infinity', 'thm-of-archimedean', 'lem-cauchy-sequence-bounded', 'lem-power-difference-factorisation', 'lem-power-monotone', 'lem-of-inverse-positive'] },
+    deps: ['fs-consecutive-differences-null-implies-cauchy', 'thm-of-square-roots', 'def-real-limit', 'def-divergence-to-infinity', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'lem-cauchy-sequence-bounded', 'lem-power-difference-factorisation', 'lem-power-monotone', 'lem-of-inverse-positive'] },
   { id: 'cex-unbounded-with-convergent-subsequence', kind: 'counterexample',
     title: 'The sequence $1, 1, 2, 1, 3, 1, 4, \\dots$ is unbounded and has a convergent subsequence',
-    deps: ['fs-convergent-subsequence-implies-bounded', 'def-subsequential-limit', 'def-sequence', 'def-bounded-set', 'def-real-limit', 'thm-recursion', 'thm-induction-principle', 'lem-index-map-grows', 'thm-of-archimedean'] },
+    deps: ['fs-convergent-subsequence-implies-bounded', 'lem-alternating-sequence', 'def-subsequential-limit', 'def-sequence', 'def-bounded-set', 'def-real-limit', 'thm-recursion', 'thm-induction-principle', 'lem-index-map-grows', 'thm-of-archimedean'] },
   { id: 'cex-strictly-decreasing-gaps-no-limit', kind: 'counterexample',
     title: '$x_{k+1} = x_k + 1/x_k$ from $x_1 = 1$ has strictly decreasing consecutive gaps and diverges, so no uniform $c < 1$ exists',
-    deps: ['def-contractive-sequence', 'thm-contractive-implies-cauchy', 'def-divergence-to-infinity', 'def-monotone-sequence', 'thm-of-archimedean', 'thm-induction-principle', 'lem-power-monotone', 'lem-of-inverse-positive'] },
+    deps: ['def-contractive-sequence', 'thm-contractive-implies-cauchy', 'def-divergence-to-infinity', 'def-monotone-sequence', 'cor-archimedean-reciprocal', 'thm-of-archimedean', 'thm-induction-principle', 'lem-power-monotone', 'lem-of-inverse-positive'] },
 ];
 
 // Design: research/plan-realanalysis-pages.md RA-06. The ratio-to-root
