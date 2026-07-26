@@ -101,6 +101,14 @@ unique factorisation and the library has no number theory at all. Existence of
 v_2 is `thm-strong-induction`, uniqueness is parity via
 `lem-alternating-sequence`.
 
+**Level-8 propagation note (Alpha-8, 2026-07-26).** `ex-completion-of-q-is-r`
+(on `completeness-and-uniform-continuity`) states that the completion of Q
+with the usual metric is R, and ONLY that: its former p-adic clause was
+dropped, because no p-adic absolute value or valuation exists anywhere in
+this library (`ex-p-adic-ultrametric` exhibits the 2-adic ultrametric only,
+no valuation theory). The p-adic completions Q_p are a candidate FUTURE page,
+never an assumed-available fact; no later page may cite or presuppose them.
+
 DEFS: metric, pseudometric, ultrametric (extended metrics DROPPED at level 7,
 decision R4: the value +infinity has no honest home until the extended reals
 exist on RA-06, and nothing later in the plan uses them; reintroduce only if a
@@ -154,16 +162,55 @@ discontinuous linear functional.
 Citation note for the metric pages (owner-approved additions of 2026-07-26):
 first countability via the balls B(x, 1/n), and every 1/n-built counterexample
 (the metrics |1/m - 1/n| and |1/x - 1/y|, d(m,n) = 1 + 1/(m+n), the pairs
-n and n + 1/n defeating uniform continuity of x^3, set distance 0 between Z and
+n and n + 1/n defeating uniform continuity of x^2, set distance 0 between Z and
 {n + 1/n}) cite `cor-archimedean-reciprocal` (foundations page) plus
 `lem-of-inverse-positive`; f(x) = x + 1/x needs only `lem-of-inverse-positive`
 (1/x > 0 rules the fixed point out). Direct-form uses of `thm-of-archimedean`
 (unboundedness of |x-y| against min(|x-y|,1), d(x,y)/2 separations) stay on the
 bare theorem.
+Level-8 addition (batch 1): "the interior of Q is empty" and every other
+no-interval-inside-a-countable-set claim cites `cor-interval-uncountable` +
+`thm-rationals-countable` + `lem-subset-of-countable` (a ball is a
+nondegenerate interval by `lem-real-line-is-a-metric-space`, so it cannot sit
+inside a countable set). No density-of-irrationals item exists or is needed
+for this. Closedness of [a,b] or [a,infinity) inside a completeness argument
+cites `thm-metric-sequential-closure` + `lem-limit-preserves-order`.
 
 ---
 
 ## T2. Topological Spaces and Continuity
+
+**Level-8 audit, 2026-07-26 (batch 1).** Five notes bind authoring of this
+page pair. (1) SUBSPACE-TOPOLOGY GAP, RESOLVED (owner decision 2026-07-26):
+`lem-continuity-is-local-and-pastes` (restrictions to cover members) and the
+"embedding" clause of `def-homeomorphism-and-open-maps` need the general
+subspace topology, which was first planned at T3. The owner approved the new
+item `def-subspace-topology-top`, now in the scaffold on
+`topological-spaces-and-continuity` between
+`thm-continuity-characterisations-top` and
+`lem-continuity-is-local-and-pastes`; author against it. The fallback (the
+pasting lemma restated in ambient terms and "embedding" dropped from the def
+title, deferring embeddings to T3) is DEAD.
+(2) `lem-sequential-closure-inside-closure`
+no longer claims "neither implication can be reversed": the witnesses are the
+cocountable-topology items on the B page, which the A-page lemma may not cite;
+non-reversal is a REMARK naming `cex-sequential-closure-strictly-inside-
+closure` and `cex-sequentially-continuous-not-continuous`. The cheap clause
+"sequential limits need not be unique" stays (indiscrete witness, inline).
+(3) The refutation of `fs-sequentially-continuous-implies-continuous` inlines
+the cocountable witness on the A page (it cannot cite B): identity from
+(R, cocountable) to (R, usual); not continuous because R minus (0,1) contains
+a nondegenerate interval, uncountable by `cor-interval-uncountable`;
+sequentially continuous because cocountable-convergent sequences are
+eventually constant, via `lem-countable-iff-surjection-from-n` (a sequence's
+range is countable) plus `lem-subset-of-countable`. (4) The refutation of
+`fs-continuous-bijection-is-a-homeomorphism` should use the two-point witness
+id: ({0,1}, discrete) -> Sierpinski (continuous bijection; inverse pulls the
+non-open {0} back to an open set), which needs nothing beyond
+`def-standard-topologies`; the R witness stays on the B page. (5) The closed-
+pasting counterexample is R covered by its closed singletons with the
+indicator of {0} (the scaffold's Z-subspace version was false: Z is discrete
+as a subspace of R, so EVERY map on it is continuous).
 
 DEFS: topology; open/closed; discrete, indiscrete, cofinite, cocountable,
 particular-point topologies; basis, subbasis, generated topology; neighbourhood
@@ -196,13 +243,24 @@ particular-point topology; the Cantor set.
 CEX: cofinite is T1 not Hausdorff; the intersection of (-1/n,1/n) is not open;
 the cocountable topology on R has sequential closure strictly inside closure; a
 sequentially continuous discontinuous map; the identity from the discrete to the
-usual topology is a continuous bijection that is not a homeomorphism.
+usual topology is a continuous bijection that is not a homeomorphism; R covered
+by its closed singletons defeats the closed pasting lemma without finiteness.
 
 ---
 
 ## T3. Subspaces, Products, and Quotients
 
-DEFS: subspace topology; hereditary property; product topology (finite and
+**Level-8 propagation note (Alpha-8, 2026-07-26).** The subspace topology is
+no longer first defined on this page: `def-subspace-topology-top` sits at
+level 8 on `topological-spaces-and-continuity`, between the continuity
+characterisations and the pasting lemma (owner decision 2026-07-26, closing
+batch-1 note §1.1 item (1)). When T3 is scaffolded its items CITE that
+definition; this page contributes the subspace THEOREMS (basis, closedness in
+a subspace, transitivity, continuity into and out of subspaces) and the
+further constructions, not the definition itself.
+
+DEFS: subspace topology (defined at level 8, `def-subspace-topology-top` —
+cite, do not redefine); hereditary property; product topology (finite and
 arbitrary); box topology; projections; disjoint union / coproduct; quotient
 topology, quotient map, saturated set; identification space; adjunction space,
 cone, suspension; initial and final topologies; embedding.
@@ -350,6 +408,16 @@ CEX: one per failing implication in the chain, matched explicitly.
 ---
 
 ## T8. Countability, Metrization, and Baire   [needs F1]
+
+**Level-8 wiring obligation (Alpha-8, 2026-07-26, from
+research/level8-batch-1.notes.md §2).**
+`rem-complete-metrizability-is-the-topological-shadow` on
+`completeness-and-uniform-continuity` forward-orients to this material (page
+`complete-metrizability-and-baire`, order 128). That page had no items when
+the remark was authored, so no `forward_refs` id could be declared; when it
+gains items, the remark MUST declare the Alexandroff-theorem item in its
+`forward_refs` (fwdcheck), per the forward-refs ledger entry. Do not lose
+this when the page is scaffolded.
 
 DEFS: first and second countable; separable; Lindelof; ccc; sigma-locally-finite
 and sigma-discrete bases; Baire space; comeager; completely metrizable; Polish

@@ -39,6 +39,30 @@ growing positive term is also needed), never the bare theorem. Direct-form uses
 (unbounded sequences, cofinality of N, covers by balls of radius n) keep citing
 the theorem alone.
 
+**Level-8 additions (Alpha-8, step 4, 2026-07-26 — settled at the level-8
+splice of `plan-spec.json`; binding on every later page).** (1)
+`lem-of-sequence-basics` (`equivalent-forms-of-completeness`) is the single
+home for sequence basics in an ARBITRARY ordered field: limits are unique,
+limits preserve non-strict inequalities, convergent implies Cauchy, Cauchy
+implies bounded, Cauchy with a convergent subsequence converges. No later page
+re-derives any of these clauses in an abstract ordered field; cite the lemma.
+(2) `lem-mct-implies-archimedean` (same page): monotone convergence alone
+forces the Archimedean property; cite it, never reprove it. (3)
+`lem-integer-part` (`limits-of-real-functions`): for every real x there is
+exactly one integer m with m <= x < m+1 — the library's only floor /
+integer-part item; later pages (RA-14, RA-27, RA-37 in particular) cite it
+rather than rebuilding the argument from Archimedean + well-ordering. (4)
+`thm-euclidean-space-complete` (metric-spaces, level 7) is stated for n >= 1
+ONLY, because `lem-metrics-on-rn` was so restricted (d_infinity is a max over
+the empty index set at n = 0); nothing later may assume R^n completeness for
+all n. (5) The p-adic completion of Q is NOT in this library and is not
+planned — no p-adic absolute value or valuation exists here, and
+`ex-completion-of-q-is-r` carries no p-adic clause; treat Q_p as a candidate
+future page, never as an available fact. (6) The subspace topology is defined
+at level 8 (`def-subspace-topology-top` on
+`topological-spaces-and-continuity`); later topology material cites it and
+does not redefine it (see the T3 note in plan-topology-track.md).
+
 TO VERIFY before authoring RA-01: whether `def-complete-ordered-field` already
 contains a usable definition of supremum, or whether standalone `def-supremum` /
 `def-infimum` items are needed.
@@ -129,12 +153,55 @@ non-complete ordered field, EVT, IVT, Rolle, MVT, uniform continuity and
 "f' = 0 implies constant" ALL fail simultaneously. The single best motivation for
 the completeness axiom in the literature. Plus: a Cauchy-complete but not
 complete ordered field; an ordered field in which Q is not dense; a field ordered
-in two distinct ways; a non-Archimedean ordered field.
+in two distinct ways; a non-Archimedean ordered field. WITNESS WARNING (batch-2
+audit 2026-07-26): R(t) itself is NEITHER Cauchy complete NOR nested-interval
+complete, in either the unrestricted or the shrinking sense — the intervals
+[n, t/n] have empty intersection because no rational function has a growth
+exponent strictly between 0 and 1, and the partial sums of a non-rational
+Laurent series are a Cauchy sequence in R(t) with no limit there. So
+cex-ordered-field-not-archimedean cannot close fs-cauchy-complete-implies-lub or
+fs-nested-intervals-implies-lub; both refutations now rest on the formal Laurent
+series field R((t^-1)), built and published at level 7 (see the settlement
+paragraph below).
 Citations on this page: the Cesaro-mean head estimate C/n < eps and the Cesaro
 matrix columns 1/n -> 0 cite `cor-archimedean-reciprocal`; Stolz-Cesaro divides
 by the growing b_k (a field element, not 1/n), so its tool is
 `lem-of-inverse-positive`, not the corollary; the (-1)^k Cesaro/Stolz-converse
 examples cite `lem-alternating-sequence` from RA-05.
+
+Authoring notes (batch-2 audit 2026-07-26): (i) def-summability-matrix must
+carry the finite-row-support condition (only finitely many nonzero entries per
+row) in the definition itself, since y_n = sum_k c_{n,k} x_k must be a FINITE
+sum — def-series does not exist until RA-08, one page later. (ii) The Cesaro
+mean is 0-indexed: sigma_n = (x_0 + ... + x_n)/(n+1) for n in N, so that sigma
+is a genuine sequence on N and the Cesaro matrix c_{n,k} = 1/(n+1) for k <= n
+is a genuine N-by-N summability matrix in cor-cesaro-matrix-is-regular.
+(iii) The abstract ordered-field lemmas may NOT cite the R-stated items
+lem-sup-epsilon, lem-sup-unique, lem-cauchy-sequence-bounded,
+lem-cauchy-with-convergent-subsequence, lem-limit-preserves-order,
+lem-limit-unique (rem-sequence-conventions: transfer is a statement about the
+arguments, not a licence to cite); the needed facts are re-derived inline in
+the ordered field F, or via the proposed lem-of-sequence-basics if approved.
+(iv) In cex-stolz-cesaro-converse-fails the quotient a_k/b_k is formed for
+k >= 1 only, since b_0 = 0. (v) In thm-silverman-toeplitz the necessity of the
+uniform bound on row absolute sums is a gliding-hump recursion, the fiddliest
+proof on the page; it is elementary but needs thm-recursion, not just limits.
+
+Settled since the batch-2 audit (Alpha-8, step 4, 2026-07-26): the open
+decisions of research/level8-batch-2.notes.md §3 items 2-4 are resolved in
+`plan-spec.json` at the level-8 splice. (a) The honest witness field IS built:
+page `formal-laurent-series-field` (order 31.5, 11 items — R((t^{-1})) as an
+ordered field, Cauchy complete, non-Archimedean, not LUB-complete) precedes
+this page, and fs-cauchy-complete-implies-lub, fs-nested-intervals-implies-lub
+and ex-cauchy-complete-not-complete-field now cite its items
+(thm-laurent-cauchy-complete, cor-laurent-nested-intervals,
+cor-laurent-not-lub-complete, ...). The WITNESS WARNING above is thereby
+discharged — R(t) is still never used as a completeness witness. (b)
+`lem-mct-implies-archimedean` is approved and on this page. (c)
+`lem-of-sequence-basics` is approved and on this page: the abstract
+ordered-field re-derivations of authoring note (iii) go through it, and no
+later page re-derives those clauses in an abstract ordered field (see the
+level-8 additions note at the top of this file).
 
 ### Block III: series
 
@@ -157,6 +224,26 @@ genuinely inconclusive both ways).
 Citations on this page: the 2^{-n+(-1)^n} witness (the A-page false statement
 "ratio limsup >= 1 implies divergence" and the B-page ratio-fails counterexample)
 cites `lem-alternating-sequence` from RA-05 for the parity structure.
+
+Authoring notes (batch-2 audit 2026-07-26): (i) thm-abel-dini starts its sums
+at the first index where s_k > 0, since s_0 = 0 under def-series. (ii)
+thm-p-series-rational, ex-harmonic-series-diverges and
+cex-root-limit-one-decides-nothing run over k >= 1 (1/0^p is undefined); the
+root and ratio tests form |a_k|^{1/k} and a_{k+1}/a_k over k >= 1 as well.
+(iii) The ratio, Kummer, Raabe and Gauss tests need a_k nonzero — Kummer,
+Raabe and Gauss need a_k > 0, now in their titles; the divergence half of
+Kummer is FALSE for signed terms (a_k = (-1)^k/k satisfies the zeta_k = 1
+divergence hypotheses yet sum a_k converges), so positivity is load-bearing,
+not a convenience. (iv) The h = 1 branch of Gauss is proved log-free: r_k is
+absolutely summable by comparison with the p-series exponent 1 + eps, so the
+products telescoping k*a_k are bounded below via the Weierstrass product
+inequality prod(1 - x_j) >= 1 - sum x_j (an induction), giving a_k >= c/k and
+divergence by direct comparison; no Bertrand machinery is used. (v) In
+thm-stolz-cesaro the step 1/b_n -> 0 cites lem-reciprocal-of-null-diverges on
+a tail (lem-limit-of-tail), since b_k is only eventually positive. (vi)
+thm-limit-comparison-test phrases L = infinity as divergence to +infinity
+(def-divergence-to-infinity), never as an extended limit equation, per
+rem-sequence-conventions.
 
 **RA-09 Absolute and Conditional Convergence; Rearrangement; Products**
 <- RA-08
@@ -215,6 +302,55 @@ order preservation; squeeze; local boundedness; two-sided iff both one-sided;
 **composition of limits with the correct hypothesis**. B: psi(1/x) has no limit
 at 0 (trig-free, using psi = dist(.,Z)); the precise composition failure
 (f(u) = 0 for u != 0, f(0) = 1, g == 0: lim f = lim g = 0 but lim f(g(x)) = 1).
+Level-8 audit (Beta-8-3, 2026-07-26), binding for authoring:
+(a) PAGE ORDER: local boundedness and the sign-preservation lemma now PRECEDE
+the algebra theorem — they are its toolkit. Sign preservation is strengthened to
+"L != 0 implies |f| > |L|/2 on a punctured neighbourhood; if L > 0 then
+f > L/2 > 0 there" (reverse triangle, cor-of-reverse-triangle); the |L|/2 lower
+bound is exactly what the quotient case needs, and it also shows c stays a limit
+point of the quotient's domain A cap {g != 0}.
+(b) CHOICE HYGIENE: the Heine criterion's sequence-to-epsilon direction costs
+AC_omega, and this page carries the remark recording that. Therefore algebra,
+order preservation, squeeze and composition are proved DIRECTLY epsilon-delta
+(choice-free), NOT via Heine; only the criterion itself and the nonexistence
+corollary sit on the sequential side. Heine's epsilon-to-sequence direction is
+choice-free and is the one the corollary uses.
+(c) The algebra theorem is stated at a FINITE limit point only. The B-page limit
+at +infinity example must NOT cite it: it is proved by the direct estimate
+|(3x^2-1)/(x^2+x) - 3| = (1+3x)/(x^2+x) <= 4/x for x >= 1, then Archimedean.
+(d) def-sequence is 0-indexed: the null sequences of the B page are 1/(k+1) and
+2/(2k+1) (giving 1/x-values k+1 in Z and k+1/2), never 1/k.
+(e) The judge sees Statements only: ex-distance-to-the-integers must STATE (and
+verify in its body) attainment at a nearest integer, psi = 0 exactly on Z,
+psi(m + 1/2) = 1/2, range [0,1/2], and 1-periodicity — the psi(1/x)
+counterexample cites precisely these. Z sits inside R via lem-int-embeds-rat
+then lem-rat-embeds-dense; the nearest-integer argument is Archimedean +
+well-ordering (mind negative x: apply WOP to a shifted set of naturals).
+(f) Dirichlet items: sequences in Q minus {c} and in the irrationals minus {c}
+come from lem-sequential-characterisation-of-closure-r applied to the dense sets
+of lem-q-and-irrationals-dense-r (AC_omega inherited and recorded through that
+lemma; a canonical choice-free alternative — least-indexed rational under a fixed
+enumeration, and c + sqrt2/(k+1) patched by sqrt3 at the at-most-one bad index —
+exists if the owner prefers, at the price of thm-rationals-countable and
+thm-of-square-roots deps).
+(g) The choice-cost remark must claim only: epsilon-to-sequence is ZF; the
+converse as proved here uses AC_omega; pointwise sequential criteria cannot be
+had for free (the full pointwise schema is in fact equivalent to AC_omega(R),
+Herrlich, *Axiom of Choice*, LNM 1876 — attributed, not proved here); and
+Sierpinski's theorem that EVERYWHERE-sequentially-continuous implies continuous
+is ZF, so the remark must not overclaim. Title softened accordingly ("uses",
+not "is exactly").
+(h) fs-limit-unique-at-every-point and its B-page counterexample concern the RAW
+epsilon-delta formula extended to an arbitrary point of the domain (vacuously
+satisfied by every L at an isolated point); under the official def-function-limit
+the limit at an isolated point is UNDEFINED, and both items must say so.
+Settled since the Beta-8-3 audit (Alpha-8, step 4, 2026-07-26): recommendation
+§4.1 of research/level8-batch-3.notes.md is APPROVED — `lem-integer-part` ("for
+every real x there is exactly one integer m with m <= x < m+1") is now on this
+page in `plan-spec.json` (21 items), the library's first floor / integer-part
+item. The nearest-integer machinery of note (e) above therefore has the lemma
+to cite instead of redoing Archimedean + WOP inline, and every later page that
+needs the integer part (RA-14, RA-27, RA-37 in particular) cites it too.
 
 **RA-13 Continuity, IVT, EVT, and Uniform Continuity** <- RA-12
 continuity at a point and on a set; the sequential criterion; algebra and
@@ -234,6 +370,14 @@ needed). B: Dirichlet nowhere continuous; x times Dirichlet continuous at exactl
 Lipschitz, exactly 1/2-Holder; x^beta separates every Holder class; the product
 of two uniformly continuous functions need not be uniformly continuous; EVT fails
 on (0,1) and on [0,infinity); the IVT fails over Q.
+Level-8 wiring obligation (Alpha-8, 2026-07-26, from
+research/level8-batch-2.notes.md §2):
+`cex-evt-and-ivt-fail-over-a-non-complete-field` on
+`equivalent-forms-of-completeness-examples` needs THIS page's definition of
+continuity of a real function on a subset of R (a B page is a leaf, so the
+forward dep is legal, but the target id does not exist yet). When this page is
+scaffolded, add its continuity-definition id to that item's deps; the
+obligation must not be lost.
 
 **RA-14 Monotone Functions, Discontinuities, and Continuity Sets**
 <- RA-13, RA-11, RA-03
@@ -259,6 +403,10 @@ unbounded at every point; a bounded function with no relative extremum anywhere
 and nowhere semicontinuous; 1_Q is not Baire class 1 but is Baire class 2 (the
 Baire hierarchy is strict); the **Conway base-13 function** (Darboux, nowhere
 continuous).
+Level-8 note (Alpha-8, 2026-07-26): the library now has a floor item —
+`lem-integer-part` on `limits-of-real-functions` (for every real x exactly
+one integer m with m <= x < m+1). Any integer-part / floor step on this page
+cites it; do not rebuild the argument from Archimedean + well-ordering inline.
 
 ### Block VI: differentiation
 
@@ -274,6 +422,12 @@ constant; monotonicity from the sign of the derivative; bounded derivative
 implies globally Lipschitz. B: |x| not differentiable at 0; x^3 strictly
 increasing with vanishing derivative; the MVT fails without endpoint continuity;
 Rolle fails over Q; **the vector-valued MVT failure**, deferred to RA-22.
+Level-8 wiring obligation (Alpha-8, 2026-07-26, from
+research/level8-batch-2.notes.md §2): `cex-rolle-fails-over-a-non-complete-field`
+on `equivalent-forms-of-completeness-examples` needs THIS page's definition of
+the derivative (a B page is a leaf, so the forward dep is legal, but the
+target id does not exist yet). When this page is scaffolded, add its
+derivative-definition id to that item's deps; the obligation must not be lost.
 
 **RA-16 Darboux, L'Hopital, and Taylor's Theorem** <- RA-15
 higher derivatives; **C^k and C^infinity**; **Darboux's theorem** and its
@@ -367,6 +521,11 @@ false. B: t -> (t^2, t^3) defeats the mean value equality; **f(x) = cos x +
 i sin x on [0, 2pi]** is the crispest failure (forward-citing, see D-TRIG);
 p-norm equivalence constants on R^2; xy/(x^2+y^2) is separately continuous and
 not jointly continuous.
+Level-8 note (Alpha-8, 2026-07-26): `thm-euclidean-space-complete`
+(metric-spaces, level 7) is stated for n >= 1 ONLY — `lem-metrics-on-rn` was
+so restricted at level-7 authoring (d_infinity is a max over the empty index
+set at n = 0). The completeness, Bolzano-Weierstrass and Heine-Borel items
+here inherit the n >= 1 hypothesis; do not cite the level-7 theorem for all n.
 
 **RA-23 Sequences and Series of Functions; Uniform Convergence**
 <- RA-22, RA-19
@@ -452,6 +611,9 @@ hence AM-GM, **Young, Holder, Minkowski**; hyperbolic functions with the full
 identity and inverse-logarithm inventory. B: 2^{sqrt 2} by the sup definition and
 by exp(sqrt 2 log 2), agreeing; the alternating harmonic series equals log 2;
 growth-rate comparisons; x^x -> 1 as x -> 0+; the log series diverges at -1.
+Level-8 note (Alpha-8, 2026-07-26): any integer-part / floor step on this page
+cites `lem-integer-part` (`limits-of-real-functions`); do not rebuild it
+inline from Archimedean + well-ordering.
 
 **RA-28 Sine, Cosine, and the Definition of pi** <- RA-26
 sin and cos by power series; sin' = cos, cos' = -sin; the Pythagorean identity;
@@ -467,6 +629,15 @@ B: **Bartle & Sherbert's bound sqrt 2 < gamma < sqrt(6 - 2 sqrt 3)**, giving
 the loop with RA-16's spline versions); **`fs-sin-x-over-x-by-sector-areas`**:
 the standard calculus proof that lim sin x / x = 1 via sin theta < theta < tan
 theta COMPARES SECTOR AREAS and is therefore circular (arXiv:1302.1167).
+Level-8 wiring obligation (Alpha-8, 2026-07-26, from
+research/level8-batch-3.notes.md §2):
+`rem-classical-oscillator-is-sine-of-one-over-x` on
+`limits-of-real-functions-examples` carries the page-level forward reference
+to this page (`forwardRefs` in plan-spec.json; the ledger holds the page-level
+entry until a target exists). When this page is scaffolded, choose the
+concrete target item and declare it in that remark's `forward_refs`
+frontmatter (fwdcheck); its prose treats "the classical oscillator is
+sin(1/x)" as orientation, not a proved claim.
 
 **RA-29 Arc Length and Rectifiable Curves** <- RA-20, RA-22
 **a curve is a MAPPING, not a point set** (Rudin Def 6.26 verbatim: two curves
@@ -593,6 +764,11 @@ C^1 images of null sets are null. B: a bounded plane set without area; a compact
 one; a bounded open set built from a fat Cantor set whose boundary has positive
 measure; **Munkres calls Jordan measurable sets "rectifiable"**, a real citation
 hazard.
+Level-8 note (Alpha-8, 2026-07-26): any integer-part / floor step on this page
+(mesh counts, grid-cube counts) cites `lem-integer-part`
+(`limits-of-real-functions`); do not rebuild it inline. And per the level-8
+additions note at the top of this file, `thm-euclidean-space-complete` and its
+companions are stated for n >= 1 only.
 
 **RA-38 Fubini and Change of Variables** <- RA-37, RA-36
 **Fubini for the Riemann integral, stated with UPPER AND LOWER integrals**

@@ -82,6 +82,21 @@ bisection decay via lem-geometric-sequence-null) keep the theorem alone.
 
 ## RA4. Limits and Continuity of Real Functions   (A/B)   [second half of old pair 3]
 
+**Level-8 propagation note (Alpha-8, 2026-07-26).** The limits half of this
+draft is now BUILT at level 8: `limits-of-real-functions` (+examples) carries
+the epsilon-delta limit, one-sided limits, limits at and to infinity, the
+Heine criterion, uniqueness, algebra, order preservation, squeeze, local
+boundedness, composition, psi = dist(.,Z) and the psi(1/x) oscillator — see
+RA-12 in plan-realanalysis-pages.md for the binding audit. When the continuity
+pages (`continuity-ivt-evt-and-uniform-continuity`, order 44, onward) are
+scaffolded they CITE those items, never redefine them. Two more settled facts
+bind this section: `lem-integer-part` (`limits-of-real-functions`) is the
+library's floor item — cite it for any integer-part step; and
+`cex-evt-and-ivt-fail-over-a-non-complete-field` on
+`equivalent-forms-of-completeness-examples` is owed this track's
+continuity-of-a-real-function definition id in its deps once that page is
+scaffolded (research/level8-batch-2.notes.md §2).
+
 ### RA4-A definitions
 limit of a function at a point (epsilon-delta); one-sided limits; limits at
 +-infinity; infinite limits; limsup and liminf of a function at a point;
@@ -166,6 +181,13 @@ quotient, cross-linking to T3).
 
 ## RA7. R^n as a Metric and Normed Space; Vector-Valued Functions   (A/B)
 [replaces old pair 6; the general metric-space theory now lives in T1]
+
+**Level-8 propagation note (Alpha-8, 2026-07-26).**
+`thm-euclidean-space-complete` (metric-spaces, level 7) is stated for n >= 1
+only, because `lem-metrics-on-rn` was so restricted (d_infinity is a max over
+the empty index set at n = 0). "R^n is complete" below and its
+Bolzano-Weierstrass / Heine-Borel companions are authored for n >= 1; nothing
+on this page or later may assume R^n completeness for all n.
 
 ### RA7-A definitions
 the Euclidean inner product and norm on R^n; the p-norms and the sup norm;
