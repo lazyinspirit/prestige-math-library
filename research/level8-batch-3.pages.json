@@ -1,0 +1,437 @@
+[
+  {
+    "order": 42,
+    "id": "limits-of-real-functions",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Limits of Real Functions",
+    "companion": "limits-of-real-functions-examples",
+    "requires": [
+      "topology-of-r"
+    ],
+    "items": [
+      {
+        "id": "def-function-limit",
+        "kind": "definition",
+        "title": "The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$",
+        "deps": [
+          "def-limit-point-r",
+          "def-neighbourhood-r",
+          "def-real-numbers",
+          "def-real-order",
+          "lem-of-abs-value",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-function-limit-unique",
+        "kind": "lemma",
+        "title": "At a limit point of the domain a function has at most one limit",
+        "strategy": "contradiction",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "lem-of-triangle-inequality",
+          "thm-of-archimedean",
+          "lem-rat-embeds-dense"
+        ]
+      },
+      {
+        "id": "lem-limit-is-local",
+        "kind": "lemma",
+        "title": "The limit at $c$ depends only on the restriction of $f$ to a punctured neighbourhood of $c$, and passes to any subset of the domain having $c$ as a limit point",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-neighbourhood-r",
+          "def-limit-point-r",
+          "lem-function-limit-unique"
+        ]
+      },
+      {
+        "id": "def-one-sided-limits",
+        "kind": "definition",
+        "title": "The left and right limits of $f$ at $c$, as limits of the restrictions of $f$ to $A \\cap (-\\infty, c)$ and $A \\cap (c, \\infty)$",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-interval",
+          "lem-limit-is-local"
+        ]
+      },
+      {
+        "id": "def-limits-at-infinity",
+        "kind": "definition",
+        "title": "Limits at $+\\infty$ and $-\\infty$, and infinite limits at a point",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-divergence-to-infinity",
+          "def-interval",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-sequential-criterion-for-function-limits",
+        "kind": "theorem",
+        "title": "Heine criterion: $\\lim_{x \\to c} f(x) = L$ iff $f(x_k) \\to L$ for every sequence in $A \\setminus \\{c\\}$ converging to $c$",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-sequence",
+          "def-real-limit",
+          "def-limit-point-r",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "lem-of-inverse-positive",
+          "def-countable-choice",
+          "lem-sequential-characterisation-of-closure-r",
+          "lem-rat-embeds-dense"
+        ]
+      },
+      {
+        "id": "cor-sequential-criterion-for-nonexistence",
+        "kind": "corollary",
+        "title": "A function has no limit at $c$ as soon as two sequences in $A \\setminus \\{c\\}$ tending to $c$ give different limits of the values",
+        "strategy": "contrapositive",
+        "deps": [
+          "thm-sequential-criterion-for-function-limits",
+          "def-function-limit",
+          "lem-function-limit-unique",
+          "lem-limit-unique"
+        ]
+      },
+      {
+        "id": "lem-limit-implies-local-boundedness",
+        "kind": "lemma",
+        "title": "If $f$ has a finite limit at $c$ then $f$ is bounded on some punctured neighbourhood of $c$",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-bounded-set",
+          "def-neighbourhood-r",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "lem-sign-preservation-near-a-limit",
+        "kind": "lemma",
+        "title": "If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-neighbourhood-r",
+          "cor-of-reverse-triangle",
+          "lem-of-add-order",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "thm-algebra-of-function-limits",
+        "kind": "theorem",
+        "title": "Sums, scalar multiples, products and quotients of function limits, the quotient under the hypothesis that the denominator limit is nonzero",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-neighbourhood-r",
+          "lem-function-limit-unique",
+          "lem-limit-implies-local-boundedness",
+          "lem-sign-preservation-near-a-limit",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value",
+          "lem-of-add-order",
+          "lem-of-inverse-positive"
+        ]
+      },
+      {
+        "id": "lem-function-limit-preserves-order",
+        "kind": "lemma",
+        "title": "If $f \\le g$ on a punctured neighbourhood of $c$ then $\\lim f \\le \\lim g$, non-strictly",
+        "strategy": "contradiction",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-neighbourhood-r",
+          "lem-of-abs-value",
+          "lem-of-add-order"
+        ]
+      },
+      {
+        "id": "thm-squeeze-for-function-limits",
+        "kind": "theorem",
+        "title": "If $f \\le g \\le h$ near $c$ and $f$ and $h$ have the same limit at $c$, then so does $g$",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-neighbourhood-r",
+          "lem-of-abs-value",
+          "lem-of-add-order"
+        ]
+      },
+      {
+        "id": "thm-two-sided-limit-iff-both-one-sided",
+        "kind": "theorem",
+        "title": "If $c$ is a limit point of the domain from both sides, the limit exists iff both one-sided limits exist and agree",
+        "strategy": "direct",
+        "deps": [
+          "def-one-sided-limits",
+          "def-function-limit",
+          "def-limit-point-r",
+          "lem-function-limit-unique",
+          "lem-limit-is-local"
+        ]
+      },
+      {
+        "id": "thm-composition-of-function-limits",
+        "kind": "theorem",
+        "title": "Composition of limits holds under either hypothesis: $f$ is defined at $L$ with value $M$, or $g$ avoids $L$ on a punctured neighbourhood of $c$",
+        "strategy": "cases",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-neighbourhood-r",
+          "lem-function-limit-unique",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "fs-limit-equals-value",
+        "kind": "false-statement",
+        "title": "FALSE: $\\lim_{x \\to c} f(x) = f(c)$ whenever both sides exist",
+        "strategy": "direct",
+        "deps": [
+          "def-function-limit",
+          "def-limit-point-r"
+        ]
+      },
+      {
+        "id": "fs-naive-composition-of-limits",
+        "kind": "false-statement",
+        "title": "FALSE: $\\lim_{x \\to c} f(g(x)) = M$ whenever $\\lim_{x \\to c} g = L$ and $\\lim_{y \\to L} f = M$",
+        "strategy": "direct",
+        "deps": [
+          "thm-composition-of-function-limits",
+          "def-function-limit",
+          "fs-limit-equals-value"
+        ]
+      },
+      {
+        "id": "fs-limit-unique-at-every-point-of-the-domain",
+        "kind": "false-statement",
+        "title": "FALSE: a function has at most one limit at every point of its domain, isolated points included",
+        "strategy": "direct",
+        "deps": [
+          "lem-function-limit-unique",
+          "def-limit-point-r",
+          "def-function-limit"
+        ]
+      },
+      {
+        "id": "fs-function-limit-preserves-strict-inequality",
+        "kind": "false-statement",
+        "title": "FALSE: $f < g$ near $c$ implies $\\lim f < \\lim g$",
+        "strategy": "direct",
+        "deps": [
+          "lem-function-limit-preserves-order",
+          "def-function-limit",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "fs-limit-exists-implies-bounded-on-the-domain",
+        "kind": "false-statement",
+        "title": "FALSE: a function with a limit at $c$ is bounded on its whole domain",
+        "strategy": "direct",
+        "deps": [
+          "lem-limit-implies-local-boundedness",
+          "def-function-limit",
+          "def-bounded-set",
+          "thm-of-archimedean",
+          "lem-of-inverse-positive"
+        ]
+      },
+      {
+        "id": "rem-heine-criterion-choice-cost",
+        "kind": "remark",
+        "title": "The sequence-to-epsilon direction of the Heine criterion uses countable choice for $\\mathbb{R}$, and where this library records that cost",
+        "deps": [
+          "thm-sequential-criterion-for-function-limits",
+          "def-countable-choice",
+          "def-function-limit",
+          "lem-sequential-characterisation-of-closure-r"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 43,
+    "id": "limits-of-real-functions-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Limits of Real Functions: Examples and Counterexamples",
+    "requires": [
+      "limits-of-real-functions"
+    ],
+    "forwardRefs": [
+      "sine-cosine-and-the-definition-of-pi"
+    ],
+    "items": [
+      {
+        "id": "ex-limit-of-a-polynomial",
+        "kind": "example",
+        "title": "Every polynomial has $\\lim_{x \\to c} p(x) = p(c)$, and rational functions do so away from the zeros of the denominator",
+        "deps": [
+          "thm-algebra-of-function-limits",
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-finite-sum",
+          "def-integer-power"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-distance-to-the-integers",
+        "kind": "example",
+        "title": "The trigonometry-free oscillator $\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is well defined and attained at a nearest integer, takes values in $[0, 1/2]$, vanishes exactly on $\\mathbb{Z}$, equals $1/2$ at half-integers, and is $1$-periodic",
+        "deps": [
+          "def-infimum",
+          "thm-infimum-property",
+          "lem-inf-epsilon",
+          "def-integers",
+          "lem-int-embeds-rat",
+          "lem-rat-embeds-dense",
+          "thm-of-archimedean",
+          "lem-of-abs-value",
+          "thm-well-ordering-principle",
+          "def-max-min"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-x-times-psi-tends-to-zero",
+        "kind": "example",
+        "title": "$x\\,\\psi(1/x) \\to 0$ as $x \\to 0$, by the squeeze theorem",
+        "deps": [
+          "ex-distance-to-the-integers",
+          "thm-squeeze-for-function-limits",
+          "def-function-limit",
+          "lem-of-abs-value"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-one-sided-limits-of-the-sign-function",
+        "kind": "example",
+        "title": "The sign function has both one-sided limits at $0$ and no two-sided limit",
+        "deps": [
+          "def-one-sided-limits",
+          "thm-two-sided-limit-iff-both-one-sided",
+          "def-function-limit"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-limit-at-infinity-of-a-rational-function",
+        "kind": "example",
+        "title": "$(3x^2 - 1)/(x^2 + x) \\to 3$ as $x \\to +\\infty$",
+        "deps": [
+          "def-limits-at-infinity",
+          "def-integer-power",
+          "thm-of-archimedean",
+          "lem-of-inverse-positive",
+          "lem-of-abs-value",
+          "lem-of-add-order"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-psi-of-one-over-x-has-no-limit-at-zero",
+        "kind": "counterexample",
+        "title": "$\\psi(1/x)$ has no limit at $0$: two sequences tending to $0$ give values constantly $0$ and constantly $1/2$",
+        "deps": [
+          "ex-distance-to-the-integers",
+          "cor-sequential-criterion-for-nonexistence",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "lem-of-inverse-positive",
+          "def-function-limit"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-limit-differs-from-the-value",
+        "kind": "counterexample",
+        "title": "The function equal to $0$ off the origin and to $1$ at the origin has limit $0 \\ne 1$ there",
+        "deps": [
+          "fs-limit-equals-value",
+          "def-function-limit",
+          "def-limit-point-r"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-composition-of-limits-fails",
+        "kind": "counterexample",
+        "title": "With $g \\equiv 0$ and $f$ equal to $0$ off the origin and $1$ at it, $\\lim g = 0$ and $\\lim_{y \\to 0} f = 0$ while $f \\circ g \\equiv 1$",
+        "deps": [
+          "fs-naive-composition-of-limits",
+          "thm-composition-of-function-limits",
+          "cex-limit-differs-from-the-value",
+          "def-function-limit"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-dirichlet-has-no-limit-anywhere",
+        "kind": "counterexample",
+        "title": "The indicator of $\\mathbb{Q}$ has a limit at no point of $\\mathbb{R}$",
+        "deps": [
+          "cor-sequential-criterion-for-nonexistence",
+          "lem-q-and-irrationals-dense-r",
+          "lem-sequential-characterisation-of-closure-r",
+          "def-function-limit",
+          "lem-rat-embeds-dense"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-x-times-dirichlet-has-a-limit-only-at-zero",
+        "kind": "example",
+        "title": "$x \\cdot 1_{\\mathbb{Q}}(x)$ has a limit at $0$ and at no other point",
+        "deps": [
+          "cex-dirichlet-has-no-limit-anywhere",
+          "thm-squeeze-for-function-limits",
+          "cor-sequential-criterion-for-nonexistence",
+          "lem-q-and-irrationals-dense-r",
+          "lem-sequential-characterisation-of-closure-r",
+          "lem-of-abs-value",
+          "def-function-limit"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-limit-not-unique-at-an-isolated-point",
+        "kind": "counterexample",
+        "title": "On the domain $\\{0\\} \\cup [1,2]$ every real is vacuously a limit at $0$",
+        "deps": [
+          "fs-limit-unique-at-every-point-of-the-domain",
+          "def-limit-point-r",
+          "def-function-limit"
+        ],
+        "strategy": "direct"
+      },
+      {
+        "id": "rem-classical-oscillator-is-sine-of-one-over-x",
+        "kind": "remark",
+        "title": "The classical form of the oscillator above is $\\sin(1/x)$, which this library can only construct much later",
+        "deps": [
+          "cex-psi-of-one-over-x-has-no-limit-at-zero",
+          "ex-distance-to-the-integers"
+        ]
+      }
+    ]
+  }
+]
