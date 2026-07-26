@@ -2,7 +2,7 @@
 id: cor-sequential-criterion-for-nonexistence
 kind: corollary
 title: "A function has no limit at $c$ as soon as two sequences in $A \\setminus \\{c\\}$ tending to $c$ give different limits of the values"
-status: draft
+status: published
 origin: session
 deps: [thm-sequential-criterion-for-function-limits, def-function-limit, def-limit-point-r, def-sequence, def-real-limit, lem-limit-unique]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

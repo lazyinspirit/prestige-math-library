@@ -2,7 +2,7 @@
 id: thm-metric-completion-unique
 kind: theorem
 title: "A completion is unique up to a unique isometry fixing the original space, and uniformly continuous maps into complete spaces extend through it"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-completion-exists, thm-uniformly-continuous-extension-from-dense,
        def-metric-completion, def-isometry-and-metric-embedding,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

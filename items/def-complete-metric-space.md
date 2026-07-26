@@ -2,7 +2,7 @@
 id: def-complete-metric-space
 kind: definition
 title: "Complete metric space: every Cauchy sequence converges in the space"
-status: draft
+status: published
 origin: session
 deps: [def-cauchy-in-metric, def-metric-convergence, def-metric-space,
        lem-metric-limits-unique, def-isometry-and-metric-embedding,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

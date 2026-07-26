@@ -2,7 +2,7 @@
 id: cex-composition-of-limits-fails
 kind: counterexample
 title: "With $g \\equiv 0$ and $f$ equal to $0$ off the origin and $1$ at it, $\\lim g = 0$ and $\\lim_{y \\to 0} f = 0$ while $f \\circ g \\equiv 1$"
-status: draft
+status: published
 origin: session
 deps: [fs-naive-composition-of-limits, thm-composition-of-function-limits, cex-limit-differs-from-the-value, def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

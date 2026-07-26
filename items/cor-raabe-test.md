@@ -2,7 +2,7 @@
 id: cor-raabe-test
 kind: corollary
 title: "Raabe is Kummer with $\\zeta_k = k+1$: for positive terms, $\\liminf\\, (k+1)(a_k/a_{k+1} - 1) > 1$ gives convergence and $\\limsup < 1$ gives divergence"
-status: draft
+status: published
 origin: session
 deps: [thm-kummer-test, thm-p-series-rational, def-limsup-liminf, lem-limsup-exists, def-series, def-extended-reals, lem-extended-reals-complete, lem-of-naturals-positive, def-rational-power, thm-nth-roots-exist, def-integer-power]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

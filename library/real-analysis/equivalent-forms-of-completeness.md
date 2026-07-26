@@ -1,7 +1,7 @@
 ---
 page: equivalent-forms-of-completeness
 title: "Equivalent Forms of Completeness"
-status: draft
+status: published
 items: [def-completeness-properties, lem-of-sequence-basics,
         lem-lub-implies-nested-intervals,
         lem-nested-intervals-and-archimedean-imply-bw,

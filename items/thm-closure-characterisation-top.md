@@ -2,7 +2,7 @@
 id: thm-closure-characterisation-top
 kind: theorem
 title: "A point lies in the closure of $A$ iff every basic neighbourhood of it meets $A$; the closure is the smallest closed superset and equals $A$ together with its derived set"
-status: draft
+status: published
 origin: session
 deps: [def-interior-closure-boundary-top, def-neighbourhood-top, def-topology-basis-subbasis, def-topological-space]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-cesaro-mean-theorem
 kind: theorem
 title: "If $x_k \\to L$ then $\\sigma_n \\to L$: convergence implies $(C,1)$-summability to the same value"
-status: draft
+status: published
 origin: session
 deps: [def-cesaro-mean, def-sequence, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, def-real-limit, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value, lem-of-naturals-positive, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

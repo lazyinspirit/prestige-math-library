@@ -1,7 +1,7 @@
 ---
 page: completeness-and-uniform-continuity
 title: "Completeness, Completion, and Uniform Continuity"
-status: draft
+status: published
 items: [def-cauchy-in-metric, lem-metric-convergent-implies-cauchy,
         lem-metric-cauchy-bounded, lem-metric-cauchy-with-convergent-subsequence,
         def-complete-metric-space, thm-complete-subspace-iff-closed,

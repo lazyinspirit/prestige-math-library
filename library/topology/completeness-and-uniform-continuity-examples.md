@@ -1,7 +1,7 @@
 ---
 page: completeness-and-uniform-continuity-examples
 title: "Completeness, Completion, and Uniform Continuity: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-completion-of-q-is-r, ex-banach-fixed-point-for-square-roots,
            ex-lipschitz-extension-from-the-rationals, ex-square-root-is-half-holder,

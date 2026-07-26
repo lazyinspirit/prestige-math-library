@@ -2,7 +2,7 @@
 id: thm-uniform-continuity-preserves-cauchy
 kind: theorem
 title: "A uniformly continuous map sends Cauchy sequences to Cauchy sequences"
-status: draft
+status: published
 origin: session
 deps: [def-metric-uniform-continuity, def-cauchy-in-metric, def-metric-space,
        lem-rat-embeds-dense, def-equivalent-metrics]
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

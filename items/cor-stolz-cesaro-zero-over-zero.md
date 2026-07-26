@@ -2,7 +2,7 @@
 id: cor-stolz-cesaro-zero-over-zero
 kind: corollary
 title: "Stolz-Cesaro, $0/0$ form: if $b_k$ is strictly decreasing to $0$, $a_k \\to 0$, and the difference quotient converges, then $a_k/b_k$ converges to the same value"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-monotone-sequence, def-real-limit, lem-rat-embeds-dense, thm-algebra-of-limits, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, lem-limit-preserves-order, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, lem-of-abs-value, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

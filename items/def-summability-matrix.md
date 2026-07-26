@@ -2,7 +2,7 @@
 id: def-summability-matrix
 kind: definition
 title: "A summability (Toeplitz) matrix, the transformed sequence $y_n = \\sum_k c_{n,k} x_k$, and regularity"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-limit, def-finite-sum, lem-finite-sum-laws, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field]
 forward_refs: [cex-irregular-summability-matrix, ex-cesaro-means-of-alternating]
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

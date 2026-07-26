@@ -2,7 +2,7 @@
 id: thm-kuratowski-closure-axioms
 kind: theorem
 title: "Kuratowski: operators satisfying $c(\\varnothing) = \\varnothing$, $A \\subseteq c(A)$, $c(c(A)) = c(A)$ and $c(A \\cup B) = c(A) \\cup c(B)$ correspond bijectively to topologies"
-status: draft
+status: published
 origin: session
 deps: [def-interior-closure-boundary-top, lem-interior-closure-boundary-identities, def-topological-space, def-injection-surjection-bijection]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

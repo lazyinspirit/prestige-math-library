@@ -2,7 +2,7 @@
 id: def-neighbourhood-top
 kind: definition
 title: "Neighbourhood of a point and neighbourhood base, with this library's convention that a neighbourhood need not be open"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-topology-basis-subbasis]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

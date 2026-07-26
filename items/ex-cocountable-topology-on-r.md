@@ -2,7 +2,7 @@
 id: ex-cocountable-topology-on-r
 kind: example
 title: "In the cocountable topology on $\\mathbb{R}$ the closed sets are the countable sets and $\\mathbb{R}$, and a sequence converges iff it is eventually constant"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-sequence-convergence-top, thm-closure-characterisation-top, def-countable,
        thm-r-uncountable, lem-countable-iff-surjection-from-n, lem-subset-of-countable,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

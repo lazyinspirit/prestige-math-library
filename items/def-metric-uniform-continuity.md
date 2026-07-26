@@ -2,7 +2,7 @@
 id: def-metric-uniform-continuity
 kind: definition
 title: "Uniform continuity of a map of metric spaces: one $\\delta$ serving every point"
-status: draft
+status: published
 origin: session
 deps: [def-metric-continuity, def-metric-space, def-equivalent-metrics,
        def-metric-ball]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

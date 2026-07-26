@@ -2,7 +2,7 @@
 id: def-dense-top
 kind: definition
 title: "Dense, nowhere dense and codense subsets of a topological space, and the criterion by basic open sets"
-status: draft
+status: published
 origin: session
 deps: [def-interior-closure-boundary-top, thm-closure-characterisation-top, def-topology-basis-subbasis]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-comparison-needs-nonnegativity
 kind: counterexample
 title: "Two series with $a_k \\le b_k$ for all $k$, $\\sum b_k$ convergent and $\\sum a_k$ divergent, when the terms may be negative"
-status: draft
+status: published
 origin: session
 deps: [thm-direct-comparison-test, thm-nonnegative-series-bounded-partial-sums, ex-harmonic-series-diverges, def-series, lem-series-linearity, def-finite-sum, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

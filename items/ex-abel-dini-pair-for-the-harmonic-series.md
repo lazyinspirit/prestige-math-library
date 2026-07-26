@@ -2,7 +2,7 @@
 id: ex-abel-dini-pair-for-the-harmonic-series
 kind: example
 title: "Abel-Dini applied to $\\sum 1/k$: $\\sum 1/(k s_k)$ still diverges while $\\sum 1/(k s_k^2)$ converges"
-status: draft
+status: published
 origin: session
 deps: [thm-abel-dini, ex-harmonic-series-diverges, def-series, def-finite-sum, lem-of-naturals-positive, def-integer-power, lem-of-inverse-positive]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-limit-differs-from-the-value
 kind: counterexample
 title: "The function equal to $0$ off the origin and to $1$ at the origin has limit $0 \\ne 1$ there"
-status: draft
+status: published
 origin: session
 deps: [fs-limit-equals-value, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-one-sided-limits, def-interval, lem-limit-is-local, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-function-limit-preserves-strict-inequality
 kind: false-statement
 title: "FALSE: $f < g$ near $c$ implies $\\lim f < \\lim g$"
-status: draft
+status: published
 origin: session
 deps: [lem-function-limit-preserves-order, def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

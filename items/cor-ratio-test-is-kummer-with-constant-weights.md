@@ -2,7 +2,7 @@
 id: cor-ratio-test-is-kummer-with-constant-weights
 kind: corollary
 title: "Kummer with $\\zeta_k = 1$ recovers the ratio test"
-status: draft
+status: published
 origin: session
 deps: [thm-kummer-test, thm-ratio-test, def-series, def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, lem-nth-term-test, lem-of-inverse-positive, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

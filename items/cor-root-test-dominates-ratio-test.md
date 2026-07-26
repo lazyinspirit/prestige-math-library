@@ -2,7 +2,7 @@
 id: cor-root-test-dominates-ratio-test
 kind: corollary
 title: "Whenever the ratio test decides, the root test decides the same way, and the converse fails"
-status: draft
+status: published
 origin: session
 deps: [thm-ratio-root-inequality, thm-root-test, thm-ratio-test, def-limsup-liminf, def-extended-reals, lem-liminf-le-limsup, lem-of-abs-value, lem-series-tail-invariance, def-series, fs-ratio-and-root-limits-always-agree, lem-alternating-sequence, def-integer-power, lem-power-monotone]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-abel-dini
 kind: theorem
 title: "For a divergent series of positive terms with partial sums $s_k$, the series $\\sum a_k/s_k$ diverges and $\\sum a_k/s_k^2$ converges"
-status: draft
+status: published
 origin: session
 deps: [def-series, thm-nonnegative-series-bounded-partial-sums, thm-series-cauchy-criterion, lem-telescoping-series, thm-direct-comparison-test, def-monotone-sequence, lem-monotone-unbounded-diverges, def-divergence-to-infinity, def-integer-power, lem-reciprocal-of-null-diverges, lem-of-inverse-positive, lem-series-tail-invariance, def-finite-sum, lem-finite-sum-laws, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-continuous-bijection-not-a-homeomorphism
 kind: counterexample
 title: "The identity from the discrete topology on $\\mathbb{R}$ to the usual topology is a continuous bijection that is not a homeomorphism"
-status: draft
+status: published
 origin: session
 deps: [fs-continuous-bijection-is-a-homeomorphism, def-standard-topologies, lem-homeomorphism-criteria,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-homeomorphism-and-open-maps,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

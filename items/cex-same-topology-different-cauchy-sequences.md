@@ -2,7 +2,7 @@
 id: cex-same-topology-different-cauchy-sequences
 kind: counterexample
 title: "On $(0,\\infty)$ the metrics $|x-y|$ and $|1/x - 1/y|$ share their topology and not their Cauchy sequences"
-status: draft
+status: published
 origin: session
 deps: [fs-equivalent-metrics-share-cauchy-sequences, def-cauchy-in-metric,
        def-equivalent-metrics, cor-archimedean-reciprocal, thm-of-archimedean,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -14,8 +14,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+    date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -57,9 +57,9 @@ always written out.
 
 **Quantifier order.** The $\delta$ is allowed to depend on $\varepsilon$ **and on
 the point $a$**. Requiring one $\delta$ to work at every point simultaneously is
-a strictly stronger condition, uniform continuity; this library does not define
-it here, and where it is needed it is written out in full
-([[def-equivalent-metrics]]).
+a strictly stronger condition, uniform continuity; it is defined on a later page
+of this library, and at this point in the reading order it is written out in full
+where needed ([[def-equivalent-metrics]]).
 
 ## Remarks
 

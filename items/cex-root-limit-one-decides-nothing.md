@@ -2,7 +2,7 @@
 id: cex-root-limit-one-decides-nothing
 kind: counterexample
 title: "$\\sum k^{-1/2}$ diverges and $\\sum k^{-2}$ converges, and both have root limit exactly $1$"
-status: draft
+status: published
 origin: session
 deps: [thm-root-test, thm-p-series-rational, lem-nth-root-of-n-tends-to-one, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, thm-squeeze, thm-algebra-of-limits, thm-convergence-iff-limsup-equals-liminf, def-limsup-liminf, def-series, lem-of-naturals-positive, def-real-limit, lem-of-inverse-positive, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

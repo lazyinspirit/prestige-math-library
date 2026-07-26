@@ -13,7 +13,7 @@ deps: [def-metric-space, def-metric-topology, def-metric-ball, lem-real-line-is-
        lem-compact-implies-closed-and-bounded-r,
        thm-open-subsets-of-r-structure, thm-connected-subsets-of-r-are-intervals, thm-heine-borel-r, thm-compact-iff-sequentially-compact-r, def-open-cover-r, thm-heine-borel-characterisation-r, thm-open-set-algebra-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-neighbourhood-r, def-connected-r, def-interval, def-bounded-set, thm-nested-interval-property, thm-bolzano-weierstrass, fs-closed-bounded-compact-without-completeness]
 justified_by: []
-forward_refs: [cex-closed-bounded-in-q-not-compact]
+forward_refs: [cex-closed-bounded-in-q-not-compact, def-topological-space, def-metrizable-space]
 aliases: []
 landmark: false
 verification:
@@ -21,8 +21,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+    date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -44,8 +44,10 @@ of what follows uses nothing else about $\mathbb{R}$, and some of it is written
 in order vocabulary from beginning to end. This remark separates the two, so a
 reader knows which results are candidates for reuse elsewhere and which are not
 even statable elsewhere. **It asserts nothing about topological spaces in
-general: this library does not develop them, and no claim about them is made or
-needed here.**
+general: they are developed later in this library, on the page of
+[[def-topological-space]] and [[def-metrizable-space]], where the metric
+development becomes a special case, but no claim about them is made or needed
+here and nothing below rests on them.**
 
 **Results that use only the definitions.** [[thm-open-set-algebra-r]] and
 [[thm-closure-characterisations-r]] use openness, closedness, closure and the
@@ -154,9 +156,11 @@ topology alone.
 **What is deliberately not claimed.** Whether the results above have analogues in
 a setting carrying a topology with no order available at all, and whether
 compactness and sequential compactness agree there, are questions about general
-topological spaces. This library develops metric spaces but no general
-topological spaces, proves nothing about the latter, and the reader should take
-no assertion about them from this page. What is claimed here is narrower and
+topological spaces. This library takes those questions up on a later page, where
+[[def-metrizable-space]] identifies the metric development, this page's topology
+included, as a special case of the general one; but nothing on **this** page
+proves anything about general spaces, and the reader should take no assertion
+about them from here. What is claimed here is narrower and
 is checkable line by line against the proofs: in the four results listed above,
 the order of $\mathbb{R}$ is used, and in three of them it is used in the
 statement itself.

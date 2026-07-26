@@ -2,7 +2,7 @@
 id: def-metrizable-space
 kind: definition
 title: "Metrizable space: a topological space whose topology is induced by some metric; metrizability is topological, the metric is not"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-metric-topology, def-metric-space, thm-metric-open-set-algebra, def-equivalent-metrics,
        def-subspace-topology-top, def-isometry-and-metric-embedding,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

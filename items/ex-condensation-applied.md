@@ -2,7 +2,7 @@
 id: ex-condensation-applied
 kind: example
 title: "Condensation reduces $\\sum 1/k^p$ to a geometric series with ratio $2^{1-p}$"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-condensation, thm-p-series-rational, thm-geometric-series, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, def-series, def-integer-power, thm-nth-roots-exist, lem-of-naturals-positive, lem-of-inverse-positive, def-monotone-sequence]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

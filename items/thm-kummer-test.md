@@ -2,7 +2,7 @@
 id: thm-kummer-test
 kind: theorem
 title: "Kummer: for positive terms $a_k$ and weights $\\zeta_k > 0$, $\\liminf(\\zeta_k a_k/a_{k+1} - \\zeta_{k+1}) > 0$ gives convergence, and if $\\sum 1/\\zeta_k$ diverges while that expression is eventually $\\le 0$ the series diverges"
-status: draft
+status: published
 origin: session
 deps: [def-series, thm-direct-comparison-test, def-limsup-liminf, lem-limsup-exists, lem-telescoping-series, def-monotone-sequence, thm-monotone-convergence, def-extended-reals, lem-extended-reals-complete, lem-series-tail-invariance, lem-series-linearity, thm-induction-principle, lem-of-inverse-positive, def-bounded-set, thm-geometric-series, lem-power-laws, def-integer-power, lem-nth-term-test]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

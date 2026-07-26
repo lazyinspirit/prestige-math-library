@@ -2,7 +2,7 @@
 id: thm-cantor-intersection-metric
 kind: theorem
 title: "In a complete metric space nested nonempty closed sets whose diameters tend to $0$ meet in exactly one point, and this property characterises completeness"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, def-metric-bounded-diameter,
        thm-metric-closure-characterisation, def-cauchy-in-metric, def-countable-choice,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

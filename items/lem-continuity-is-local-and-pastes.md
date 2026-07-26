@@ -2,7 +2,7 @@
 id: lem-continuity-is-local-and-pastes
 kind: lemma
 title: "Continuity may be checked on any open cover, and on any finite closed cover; composites of continuous maps are continuous"
-status: draft
+status: published
 origin: session
 deps: [thm-continuity-characterisations-top, def-continuous-map-top, def-topological-space, def-subspace-topology-top]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

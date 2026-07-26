@@ -2,7 +2,7 @@
 id: fs-continuous-bijection-is-a-homeomorphism
 kind: false-statement
 title: "FALSE: every continuous bijection of topological spaces is a homeomorphism"
-status: draft
+status: published
 origin: session
 deps: [lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-standard-topologies,
        def-continuous-map-top, thm-continuity-characterisations-top]
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

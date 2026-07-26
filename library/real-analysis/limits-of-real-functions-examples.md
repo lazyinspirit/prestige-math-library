@@ -1,7 +1,7 @@
 ---
 page: limits-of-real-functions-examples
 title: "Limits of Real Functions: Examples and Counterexamples"
-status: draft
+status: published
 items: [rem-classical-oscillator-is-sine-of-one-over-x]
 examples: [ex-limit-of-a-polynomial, ex-distance-to-the-integers,
            ex-x-times-psi-tends-to-zero,

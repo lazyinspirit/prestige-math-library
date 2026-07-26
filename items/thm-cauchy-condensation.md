@@ -2,7 +2,7 @@
 id: thm-cauchy-condensation
 kind: theorem
 title: "For a nonincreasing nonnegative sequence, $\\sum a_k$ converges iff $\\sum 2^k a_{2^k}$ converges"
-status: draft
+status: published
 origin: session
 deps: [thm-nonnegative-series-bounded-partial-sums, def-monotone-sequence, def-integer-power, lem-power-monotone, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-series, def-bounded-set]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

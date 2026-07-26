@@ -2,7 +2,7 @@
 id: rem-strength-order-of-the-nonnegative-tests
 kind: remark
 title: "How the nonnegative tests are ordered by strength, and which of them this page cannot state without the logarithm"
-status: draft
+status: published
 origin: session
 deps: [thm-root-test, thm-ratio-test, cor-root-test-dominates-ratio-test, cor-ratio-test-is-kummer-with-constant-weights, cor-raabe-test, thm-gauss-test, thm-kummer-test, thm-abel-dini, fs-universal-comparison-series, thm-direct-comparison-test, thm-geometric-series, thm-cauchy-condensation, thm-p-series-rational, lem-absolute-convergence-implies-convergence, thm-series-cauchy-criterion, def-rational-power, def-limsup-liminf]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

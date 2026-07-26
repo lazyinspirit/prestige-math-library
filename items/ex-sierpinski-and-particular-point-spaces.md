@@ -2,7 +2,7 @@
 id: ex-sierpinski-and-particular-point-spaces
 kind: example
 title: "Sierpinski space and the particular-point topology, with their closures and their continuous maps"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-interior-closure-boundary-top, thm-continuity-characterisations-top,
        def-topological-space, def-dense-top, def-continuous-map-top]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

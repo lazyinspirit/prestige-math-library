@@ -2,7 +2,7 @@
 id: cex-sequential-closure-strictly-inside-closure
 kind: counterexample
 title: "In the cocountable topology on $\\mathbb{R}$ the sequential closure of $[0,1]$ is $[0,1]$ while its closure is all of $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [ex-cocountable-topology-on-r, lem-sequential-closure-inside-closure, def-sequence-convergence-top,
        thm-closure-characterisation-top, cor-interval-uncountable, def-interval, lem-subset-of-countable,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

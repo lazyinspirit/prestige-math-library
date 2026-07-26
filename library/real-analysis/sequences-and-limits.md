@@ -80,11 +80,10 @@ every subsequence, or a Cauchy hypothesis.
 **What is deliberately deferred.** Monotone sequences and the monotone
 convergence theorem, the Bolzano-Weierstrass theorem, and the completeness of
 $\mathbb{R}$ in the Cauchy sense all belong to the next page of this track,
-*Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, which is
-planned and not yet written. Of those, monotone sequences are not defined
-anywhere in this library, and neither the monotone convergence theorem nor the
-Bolzano-Weierstrass theorem is proved anywhere in it as things stand; no item
-here may be cited for either. Cauchy completeness is the
+*Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, where they
+are now proved ([[def-monotone-sequence]], [[thm-monotone-convergence]],
+[[thm-bolzano-weierstrass]]). None of them is available at this point in the
+reading order, and no item on this page may be cited for any of them. Cauchy completeness is the
 exception and is stated as such rather than left vague: every Cauchy sequence of
 reals converges, for the $\mathbb{R}$ this page works in, is already proved on the
 Cauchy-construction page ([[thm-reals-cauchy-complete]]); what the next page will

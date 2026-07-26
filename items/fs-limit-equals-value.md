@@ -2,7 +2,7 @@
 id: fs-limit-equals-value
 kind: false-statement
 title: "FALSE: $\\lim_{x \\to c} f(x) = f(c)$ whenever both sides exist"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, lem-function-limit-unique, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

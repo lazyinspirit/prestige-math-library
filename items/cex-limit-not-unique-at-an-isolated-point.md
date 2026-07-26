@@ -2,7 +2,7 @@
 id: cex-limit-not-unique-at-an-isolated-point
 kind: counterexample
 title: "On the domain $\\{0\\} \\cup [1,2]$ every real is vacuously a limit at $0$"
-status: draft
+status: published
 origin: session
 deps: [fs-limit-unique-at-every-point-of-the-domain, def-limit-point-r, def-function-limit, lem-function-limit-unique, def-neighbourhood-r, def-interval, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

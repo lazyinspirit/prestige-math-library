@@ -2,7 +2,7 @@
 id: def-homeomorphism-and-open-maps
 kind: definition
 title: "Homeomorphism, open map, closed map, embedding, and what it means for a property to be topological"
-status: draft
+status: published
 origin: session
 deps: [def-continuous-map-top, def-injection-surjection-bijection, def-topological-space, def-subspace-topology-top, def-standard-topologies]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

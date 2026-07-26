@@ -2,7 +2,7 @@
 id: cex-uniform-bijection-with-non-uniform-inverse
 kind: counterexample
 title: "$x \\mapsto \\sqrt{x}$ is a uniformly continuous bijection of $[0,\\infty)$ onto itself whose inverse $x \\mapsto x^2$ is not uniformly continuous"
-status: draft
+status: published
 origin: session
 deps: [def-metric-uniform-continuity, thm-metric-regularity-hierarchy, thm-of-square-roots,
        lem-power-difference-factorisation, lem-of-abs-value, cor-archimedean-reciprocal,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

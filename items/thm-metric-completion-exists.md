@@ -2,7 +2,7 @@
 id: thm-metric-completion-exists
 kind: theorem
 title: "Every metric space has a completion, constructed as the equivalence classes of its Cauchy sequences"
-status: draft
+status: published
 origin: session
 deps: [def-metric-completion, def-cauchy-in-metric, def-complete-metric-space,
        def-metric-space, def-isometry-and-metric-embedding, def-countable-choice,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

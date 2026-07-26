@@ -2,7 +2,7 @@
 id: fs-cauchy-implies-convergent-in-every-metric-space
 kind: false-statement
 title: "FALSE: every Cauchy sequence in a metric space converges"
-status: draft
+status: published
 origin: session
 deps: [def-cauchy-in-metric, def-complete-metric-space, lem-metric-convergent-implies-cauchy,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

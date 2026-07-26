@@ -2,7 +2,7 @@
 id: def-standard-topologies
 kind: definition
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-countable, lem-subset-of-countable, thm-countable-union-of-countable,
        def-equinumerous, def-injection-surjection-bijection, def-natural-numbers,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

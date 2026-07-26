@@ -2,7 +2,7 @@
 id: ex-raabe-decides-where-ratio-fails
 kind: example
 title: "A series with ratio limit exactly $1$ that Raabe decides"
-status: draft
+status: published
 origin: session
 deps: [cor-raabe-test, thm-ratio-test, def-series, def-limsup-liminf, lem-limsup-exists, def-integer-power, thm-p-series-rational, thm-algebra-of-limits, cor-archimedean-reciprocal, lem-extended-reals-complete, def-extended-reals, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, lem-power-monotone]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

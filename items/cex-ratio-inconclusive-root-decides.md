@@ -2,7 +2,7 @@
 id: cex-ratio-inconclusive-root-decides
 kind: counterexample
 title: "$a_k = 2^{-k+(-1)^k}$ has ratio limsup $2$ and liminf $1/8$, so the ratio test fails, while the root test gives convergence"
-status: draft
+status: published
 origin: session
 deps: [thm-ratio-test, thm-root-test, cor-root-test-dominates-ratio-test, def-limsup-liminf, lem-limsup-exists, def-integer-power, lem-alternating-sequence, fs-ratio-and-root-limits-always-agree, def-series, def-rational-power, lem-power-monotone, lem-power-laws, lem-of-abs-value, lem-series-tail-invariance]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

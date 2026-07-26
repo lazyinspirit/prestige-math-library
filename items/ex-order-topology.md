@@ -2,7 +2,7 @@
 id: ex-order-topology
 kind: example
 title: "The order topology on a totally ordered set, with the open rays as a subbasis, and its agreement with the usual topology of $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-topology-basis-subbasis, thm-basis-criterion, def-partial-order, def-real-order, def-interval,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-topological-space, def-metric-ball,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

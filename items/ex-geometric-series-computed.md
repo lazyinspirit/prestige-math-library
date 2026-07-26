@@ -2,7 +2,7 @@
 id: ex-geometric-series-computed
 kind: example
 title: "Geometric sums computed: $\\sum_{k \\ge 1} 2^{-k} = 1$ and $\\sum_{k \\ge 0} (-1/3)^k = 3/4$"
-status: draft
+status: published
 origin: session
 deps: [thm-geometric-series, def-integer-power, lem-series-tail-invariance, def-series, lem-of-abs-value, def-finite-sum, lem-power-laws]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

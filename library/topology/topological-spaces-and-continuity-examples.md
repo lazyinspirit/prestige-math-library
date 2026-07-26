@@ -1,7 +1,7 @@
 ---
 page: topological-spaces-and-continuity-examples
 title: "Topological Spaces and Continuity: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-discrete-and-indiscrete-topologies, ex-cofinite-topology,
            ex-cocountable-topology-on-r, ex-sierpinski-and-particular-point-spaces,

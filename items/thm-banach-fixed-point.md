@@ -2,7 +2,7 @@
 id: thm-banach-fixed-point
 kind: theorem
 title: "A contraction of a nonempty complete metric space into itself has exactly one fixed point, the limit of the iterates from any starting point"
-status: draft
+status: published
 origin: session
 deps: [def-lipschitz-holder-contraction, def-complete-metric-space, def-cauchy-in-metric,
        thm-recursion, lem-geometric-sequence-null, def-integer-power,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-two-sided-limit-iff-both-one-sided
 kind: theorem
 title: "If $c$ is a limit point of the domain from both sides, the limit exists iff both one-sided limits exist and agree"
-status: draft
+status: published
 origin: session
 deps: [def-one-sided-limits, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-interval, lem-limit-is-local, lem-function-limit-unique, lem-of-abs-value, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

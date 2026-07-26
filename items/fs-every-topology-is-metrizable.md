@@ -2,7 +2,7 @@
 id: fs-every-topology-is-metrizable
 kind: false-statement
 title: "FALSE: every topology is induced by some metric"
-status: draft
+status: published
 origin: session
 deps: [def-metrizable-space, def-standard-topologies, thm-metric-hausdorff-separation, def-metric-topology,
        def-topological-space, def-sequence-convergence-top, lem-metric-limits-unique]
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

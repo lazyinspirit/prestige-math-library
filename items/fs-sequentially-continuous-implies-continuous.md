@@ -2,7 +2,7 @@
 id: fs-sequentially-continuous-implies-continuous
 kind: false-statement
 title: "FALSE: a sequentially continuous map between topological spaces is continuous"
-status: draft
+status: published
 origin: session
 deps: [def-sequence-convergence-top, def-standard-topologies, thm-first-countable-sequences-suffice,
        def-continuous-map-top, thm-continuity-characterisations-top, def-metrizable-space,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-homeomorphism-criteria
 kind: lemma
 title: "A continuous bijection is a homeomorphism iff it is open iff it is closed, and homeomorphy is an equivalence relation on spaces"
-status: draft
+status: published
 origin: session
 deps: [def-homeomorphism-and-open-maps, thm-continuity-characterisations-top, def-continuous-map-top, lem-continuity-is-local-and-pastes]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

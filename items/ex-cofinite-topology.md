@@ -2,7 +2,7 @@
 id: ex-cofinite-topology
 kind: example
 title: "On an infinite set the cofinite topology has every infinite subset dense and no two nonempty open sets disjoint"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-dense-top, thm-closure-characterisation-top, def-countable,
        def-topological-space, def-interior-closure-boundary-top]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

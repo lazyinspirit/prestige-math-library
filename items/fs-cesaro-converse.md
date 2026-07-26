@@ -2,7 +2,7 @@
 id: fs-cesaro-converse
 kind: false-statement
 title: "FALSE: if the Cesaro means of a sequence converge then the sequence converges"
-status: draft
+status: published
 origin: session
 deps: [thm-cesaro-mean-theorem, def-cesaro-mean, lem-alternating-sequence, fs-bounded-implies-convergent, cor-archimedean-reciprocal, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, def-real-limit, def-sequence, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 forward_refs: [ex-cesaro-means-of-alternating]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-complete-subspace-iff-closed
 kind: theorem
 title: "A subspace of a complete metric space is complete iff it is closed, and a complete subspace of any metric space is closed"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, def-isometry-and-metric-embedding,
        thm-metric-sequential-closure, def-metric-topology, def-cauchy-in-metric,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

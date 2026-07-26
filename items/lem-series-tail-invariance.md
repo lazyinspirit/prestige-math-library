@@ -2,7 +2,7 @@
 id: lem-series-tail-invariance
 kind: lemma
 title: "A series converges iff each of its tail series converges, and the sum splits as $s_N$ plus the $N$-th tail"
-status: draft
+status: published
 origin: session
 deps: [def-series, lem-limit-of-tail, def-finite-sum, lem-finite-sum-laws, thm-algebra-of-limits, def-real-limit, def-sequence]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

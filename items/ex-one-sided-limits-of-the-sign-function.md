@@ -2,7 +2,7 @@
 id: ex-one-sided-limits-of-the-sign-function
 kind: example
 title: "The sign function has both one-sided limits at $0$ and no two-sided limit"
-status: draft
+status: published
 origin: session
 deps: [def-one-sided-limits, thm-two-sided-limit-iff-both-one-sided, def-function-limit, lem-function-limit-unique, def-limit-point-r, def-neighbourhood-r, def-interval, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-sorgenfrey-line
 kind: example
 title: "The Sorgenfrey line: $\\mathbb{R}$ with the half-open intervals $[a,b)$ as a basis is strictly finer than the usual topology, is first countable, has a countable dense subset, and its sequences converge only from the right"
-status: draft
+status: published
 origin: session
 deps: [thm-basis-criterion, def-topology-basis-subbasis, def-topological-space, def-first-countable-top,
        def-dense-top, def-sequence-convergence-top, lem-rat-embeds-dense, def-interval,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

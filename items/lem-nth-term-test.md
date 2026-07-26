@@ -2,7 +2,7 @@
 id: lem-nth-term-test
 kind: lemma
 title: "If a series converges then its terms tend to $0$"
-status: draft
+status: published
 origin: session
 deps: [def-series, thm-algebra-of-limits, def-real-limit, def-finite-sum, lem-limit-of-tail, def-sequence]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

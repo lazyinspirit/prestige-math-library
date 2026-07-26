@@ -2,7 +2,7 @@
 id: ex-cauchy-complete-not-complete-field
 kind: example
 title: "$\\mathbb{R}((t^{-1}))$, the formal Laurent series field, is Cauchy complete, non-Archimedean, and lacks the least-upper-bound property"
-status: draft
+status: published
 origin: session
 deps: [cex-laurent-nested-intervals-empty, fs-cauchy-complete-implies-lub, def-sequences-in-an-ordered-field, def-completeness-properties, def-archimedean-field, def-formal-laurent-series, lem-laurent-series-ring, thm-laurent-ordered-field, thm-laurent-cauchy-complete, lem-laurent-non-archimedean, cor-laurent-not-lub-complete, cor-laurent-nested-intervals, lem-bw-implies-archimedean, lem-mct-implies-archimedean, thm-completeness-equivalences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

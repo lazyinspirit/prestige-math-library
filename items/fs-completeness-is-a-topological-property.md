@@ -2,7 +2,7 @@
 id: fs-completeness-is-a-topological-property
 kind: false-statement
 title: "FALSE: completeness of a metric space is determined by its topology"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, def-equivalent-metrics, def-metric-topology,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

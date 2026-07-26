@@ -2,7 +2,7 @@
 id: cex-contraction-on-an-incomplete-space
 kind: counterexample
 title: "$x \\mapsto x/2$ maps $(0,1]$ into itself, is a $1/2$-contraction, and has no fixed point"
-status: draft
+status: published
 origin: session
 deps: [thm-banach-fixed-point, def-complete-metric-space, def-lipschitz-holder-contraction,
        def-interval, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-non-metrizable-topology
 kind: counterexample
 title: "The indiscrete topology on a two-point set is induced by no metric"
-status: draft
+status: published
 origin: session
 deps: [fs-every-topology-is-metrizable, def-metrizable-space, def-standard-topologies,
        thm-metric-hausdorff-separation, def-metric-space, def-metric-ball, def-metric-topology,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

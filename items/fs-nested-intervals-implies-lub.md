@@ -2,7 +2,7 @@
 id: fs-nested-intervals-implies-lub
 kind: false-statement
 title: "FALSE: the nested interval property alone implies the least-upper-bound property"
-status: draft
+status: published
 origin: session
 deps: [cex-laurent-nested-intervals-empty, thm-completeness-equivalences, def-completeness-properties, def-archimedean-field, def-sequences-in-an-ordered-field, def-complete-ordered-field, cor-laurent-nested-intervals, cor-laurent-not-lub-complete, lem-laurent-non-archimedean, thm-laurent-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

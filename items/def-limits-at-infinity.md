@@ -2,7 +2,7 @@
 id: def-limits-at-infinity
 kind: definition
 title: "Limits at $+\\infty$ and $-\\infty$, and infinite limits at a point"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-limit-point-r, def-divergence-to-infinity, def-interval, def-bounded-set, def-complete-ordered-field, lem-of-abs-value, lem-of-triangle-inequality, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

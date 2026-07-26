@@ -2,7 +2,7 @@
 id: ex-bounded-functions-with-sup-metric-are-complete
 kind: example
 title: "The bounded real-valued functions on a set, with the supremum metric, form a complete metric space"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, def-cauchy-in-metric, def-metric-space, def-bounded-set,
        thm-cauchy-criterion-via-lub, lem-sup-metric-is-a-metric, lem-limit-preserves-order,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

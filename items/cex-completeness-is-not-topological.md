@@ -2,7 +2,7 @@
 id: cex-completeness-is-not-topological
 kind: counterexample
 title: "On the positive integers the metrics $|m-n|$ and $|1/m - 1/n|$ both induce the discrete topology, and only the first is complete"
-status: draft
+status: published
 origin: session
 deps: [fs-completeness-is-a-topological-property, def-complete-metric-space,
        def-equivalent-metrics, def-metric-topology, cor-archimedean-reciprocal,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

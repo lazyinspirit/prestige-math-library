@@ -2,7 +2,7 @@
 id: lem-absolute-convergence-implies-convergence
 kind: lemma
 title: "If $\\sum |a_k|$ converges then $\\sum a_k$ converges"
-status: draft
+status: published
 origin: session
 deps: [def-series, thm-series-cauchy-criterion, lem-triangle-inequality-finite, lem-finite-sum-laws, def-finite-sum, lem-of-abs-value, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

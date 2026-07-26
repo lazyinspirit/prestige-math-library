@@ -2,7 +2,7 @@
 id: def-metric-completion
 kind: definition
 title: "A completion of a metric space: a complete metric space together with an isometric embedding onto a dense subspace"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, def-isometry-and-metric-embedding,
        def-metric-interior-closure-boundary, def-metric-space,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

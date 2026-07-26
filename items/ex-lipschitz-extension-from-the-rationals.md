@@ -2,7 +2,7 @@
 id: ex-lipschitz-extension-from-the-rationals
 kind: example
 title: "A Lipschitz function on $\\mathbb{Q}$ extends uniquely to a Lipschitz function on $\\mathbb{R}$ with the same constant"
-status: draft
+status: published
 origin: session
 deps: [thm-uniformly-continuous-extension-from-dense, def-lipschitz-holder-contraction,
        lem-rat-embeds-dense, thm-euclidean-space-complete, lem-real-line-is-a-metric-space,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

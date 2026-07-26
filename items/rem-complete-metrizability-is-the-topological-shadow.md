@@ -2,7 +2,7 @@
 id: rem-complete-metrizability-is-the-topological-shadow
 kind: remark
 title: "Completeness belongs to the metric; the topological invariant is complete metrizability, which this page introduces and only a much later page characterises"
-status: draft
+status: published
 origin: session
 deps: [fs-completeness-is-a-topological-property, def-complete-metric-space,
        def-equivalent-metrics, def-metric-completion, def-metric-topology,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

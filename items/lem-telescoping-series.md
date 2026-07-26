@@ -2,7 +2,7 @@
 id: lem-telescoping-series
 kind: lemma
 title: "$\\sum (b_k - b_{k+1})$ converges iff $(b_k)$ converges, with sum $b_0 - \\lim b_k$"
-status: draft
+status: published
 origin: session
 deps: [def-series, def-finite-sum, lem-finite-sum-laws, thm-algebra-of-limits, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

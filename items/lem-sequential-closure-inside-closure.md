@@ -2,7 +2,7 @@
 id: lem-sequential-closure-inside-closure
 kind: lemma
 title: "The sequential closure is contained in the closure, continuity implies sequential continuity, and sequential limits need not be unique"
-status: draft
+status: published
 origin: session
 deps: [def-sequence-convergence-top, thm-closure-characterisation-top, def-continuous-map-top, def-standard-topologies, def-neighbourhood-top]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

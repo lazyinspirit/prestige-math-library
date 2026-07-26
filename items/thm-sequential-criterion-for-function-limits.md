@@ -2,7 +2,7 @@
 id: thm-sequential-criterion-for-function-limits
 kind: theorem
 title: "Heine criterion: $\\lim_{x \\to c} f(x) = L$ iff $f(x_k) \\to L$ for every sequence in $A \\setminus \\{c\\}$ converging to $c$"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-sequence, def-natural-numbers, def-real-limit, def-limit-point-r, def-neighbourhood-r, def-countable-choice, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, lem-of-abs-value, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

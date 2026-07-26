@@ -2,7 +2,7 @@
 id: fs-limit-exists-implies-bounded-on-the-domain
 kind: false-statement
 title: "FALSE: a function with a limit at $c$ is bounded on its whole domain"
-status: draft
+status: published
 origin: session
 deps: [lem-limit-implies-local-boundedness, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-bounded-set, def-interval, thm-of-archimedean, lem-of-inverse-positive, lem-of-sign-rules, lem-of-abs-value, lem-of-add-order, lem-of-naturals-positive, cor-of-one-positive, def-field, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

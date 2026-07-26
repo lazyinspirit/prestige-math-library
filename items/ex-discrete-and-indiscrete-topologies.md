@@ -2,7 +2,7 @@
 id: ex-discrete-and-indiscrete-topologies
 kind: example
 title: "The discrete and indiscrete topologies, their closures and interiors, and their continuous maps in each direction"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-interior-closure-boundary-top, thm-continuity-characterisations-top,
        def-topological-space, def-continuous-map-top, def-topology-basis-subbasis, thm-basis-criterion]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

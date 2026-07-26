@@ -1,7 +1,7 @@
 ---
 page: series-and-nonnegative-tests-examples
 title: "Series: Convergence and the Nonnegative Tests: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-harmonic-series-diverges, ex-sum-of-reciprocal-squares-converges,
            ex-geometric-series-computed, ex-telescoping-sum-computed,

@@ -2,7 +2,7 @@
 id: fs-strict-contraction-has-a-fixed-point
 kind: false-statement
 title: "FALSE: $d(fx, fy) < d(x,y)$ for all $x \\ne y$ on a complete metric space forces a fixed point"
-status: draft
+status: published
 origin: session
 deps: [thm-banach-fixed-point, def-lipschitz-holder-contraction, def-complete-metric-space,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

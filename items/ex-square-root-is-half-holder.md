@@ -2,7 +2,7 @@
 id: ex-square-root-is-half-holder
 kind: example
 title: "$\\sqrt{\\cdot}$ on $[0,\\infty)$ is uniformly continuous and exactly $1/2$-Hölder, and is not Lipschitz"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-regularity-hierarchy, def-lipschitz-holder-contraction, thm-of-square-roots,
        def-rational-power, def-metric-uniform-continuity, lem-real-line-is-a-metric-space,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

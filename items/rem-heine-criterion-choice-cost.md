@@ -2,7 +2,7 @@
 id: rem-heine-criterion-choice-cost
 kind: remark
 title: "The sequence-to-$\\varepsilon$ direction of the Heine criterion uses countable choice for $\\mathbb{R}$, and where this library records that cost"
-status: draft
+status: published
 origin: session
 deps: [thm-sequential-criterion-for-function-limits, def-countable-choice, def-function-limit, lem-sequential-characterisation-of-closure-r]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

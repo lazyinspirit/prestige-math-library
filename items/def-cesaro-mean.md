@@ -2,7 +2,7 @@
 id: def-cesaro-mean
 kind: definition
 title: "The Cesaro means $\\sigma_n = (x_0 + \\dots + x_n)/(n+1)$ and $(C,1)$-summability"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-finite-sum, def-real-limit, lem-of-naturals-positive, lem-limit-unique, def-complete-ordered-field]
 forward_refs: [ex-cesaro-means-of-alternating]
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

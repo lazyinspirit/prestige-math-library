@@ -2,7 +2,7 @@
 id: thm-uniformly-continuous-extension-from-dense
 kind: theorem
 title: "A uniformly continuous map from a dense subspace into a complete metric space extends uniquely to a uniformly continuous map on the whole space"
-status: draft
+status: published
 origin: session
 deps: [thm-cantor-intersection-metric, def-complete-metric-space,
        def-metric-interior-closure-boundary, thm-metric-sequential-closure,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

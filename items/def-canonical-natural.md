@@ -2,15 +2,17 @@
 id: def-canonical-natural
 kind: definition
 title: "The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field"
-status: draft
+status: published
 origin: session
 deps: [def-field, def-natural-numbers, thm-recursion]
 justified_by: []
+forward_refs: [def-metric-completion]
 aliases: []
 landmark: false
 short: "$\\iota(n) = n \\cdot 1_F$"
 verification:
   precheck: n/a
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

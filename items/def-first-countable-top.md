@@ -2,7 +2,7 @@
 id: def-first-countable-top
 kind: definition
 title: "First countable space: a countable neighbourhood base at every point"
-status: draft
+status: published
 origin: session
 deps: [def-neighbourhood-top, def-countable, def-equinumerous, def-topological-space, def-homeomorphism-and-open-maps]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

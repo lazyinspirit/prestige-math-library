@@ -2,7 +2,7 @@
 id: cex-condensation-needs-monotonicity
 kind: counterexample
 title: "A nonnegative non-monotone sequence for which $\\sum a_k$ and $\\sum 2^k a_{2^k}$ behave differently"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-condensation, def-monotone-sequence, def-series, lem-nth-term-test, def-integer-power, lem-power-monotone, thm-induction-principle, lem-nat-discrete, def-finite-sum, lem-finite-sum-laws, def-real-limit, lem-of-naturals-positive]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

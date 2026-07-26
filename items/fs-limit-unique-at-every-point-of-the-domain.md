@@ -2,7 +2,7 @@
 id: fs-limit-unique-at-every-point-of-the-domain
 kind: false-statement
 title: "FALSE: a function has at most one limit at every point of its domain, isolated points included"
-status: draft
+status: published
 origin: session
 deps: [lem-function-limit-unique, def-limit-point-r, def-function-limit, def-neighbourhood-r, def-interval, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: limits-of-real-functions
 title: "Limits of Real Functions"
-status: draft
+status: published
 items: [def-function-limit, lem-function-limit-unique, lem-limit-is-local,
         def-one-sided-limits, def-limits-at-infinity,
         thm-sequential-criterion-for-function-limits,

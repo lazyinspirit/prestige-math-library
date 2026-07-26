@@ -2,7 +2,7 @@
 id: thm-p-series-rational
 kind: theorem
 title: "For rational $p > 0$, $\\sum 1/k^p$ converges iff $p > 1$"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-condensation, thm-geometric-series, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-monotone-sequence, def-series, lem-of-inverse-positive, thm-nth-roots-exist, lem-of-naturals-positive, def-integer-power, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

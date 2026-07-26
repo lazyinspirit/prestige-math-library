@@ -2,7 +2,7 @@
 id: rem-topology-conventions
 kind: remark
 title: "The four live convention forks of general topology and which side this library takes on each"
-status: draft
+status: published
 origin: session
 deps: [def-neighbourhood-top, def-topological-space, def-standard-topologies, def-first-countable-top,
        def-topology-basis-subbasis, thm-basis-criterion, def-countable, def-sequence-convergence-top,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: equivalent-forms-of-completeness-examples
 title: "Equivalent Forms of Completeness: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-rational-function-field-order, ex-field-ordered-in-two-ways,
            ex-cauchy-complete-not-complete-field,

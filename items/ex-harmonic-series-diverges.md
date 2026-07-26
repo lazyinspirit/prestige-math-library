@@ -2,7 +2,7 @@
 id: ex-harmonic-series-diverges
 kind: example
 title: "The harmonic series $\\sum 1/k$ diverges, by condensation and by Oresme block grouping"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-condensation, thm-p-series-rational, def-series, lem-nth-term-test, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-integer-power, lem-power-monotone, lem-of-inverse-positive, lem-of-naturals-positive, thm-of-archimedean, def-monotone-sequence, def-rational-power, def-bounded-set]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

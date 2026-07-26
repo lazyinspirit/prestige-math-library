@@ -2,7 +2,7 @@
 id: rem-classical-oscillator-is-sine-of-one-over-x
 kind: remark
 title: "The classical form of the oscillator above is $\\sin(1/x)$, which this library can only construct much later"
-status: draft
+status: published
 origin: session
 deps: [cex-psi-of-one-over-x-has-no-limit-at-zero, ex-distance-to-the-integers, ex-x-times-psi-tends-to-zero, lem-integer-part]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

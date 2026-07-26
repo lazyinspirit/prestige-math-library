@@ -2,7 +2,7 @@
 id: ex-telescoping-sum-computed
 kind: example
 title: "$\\sum_{k \\ge 1} 1/(k(k+1)) = 1$"
-status: draft
+status: published
 origin: session
 deps: [lem-telescoping-series, def-series, cor-archimedean-reciprocal, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, def-finite-sum, ex-harmonic-series-diverges]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

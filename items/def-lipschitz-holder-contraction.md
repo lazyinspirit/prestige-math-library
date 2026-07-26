@@ -2,7 +2,7 @@
 id: def-lipschitz-holder-contraction
 kind: definition
 title: "Lipschitz map, $\\alpha$-Hölder map for rational $0 < \\alpha \\le 1$, and contraction"
-status: draft
+status: published
 origin: session
 deps: [def-metric-uniform-continuity, def-metric-space, def-rational-power,
        def-rat-order, lem-metric-nonnegativity, def-integer-power]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-cauchy-in-metric
 kind: definition
 title: "Cauchy sequence in a metric space"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-convergence, def-sequence, def-real-limit,
        lem-rat-embeds-dense, lem-metric-nonnegativity, lem-real-line-is-a-metric-space,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

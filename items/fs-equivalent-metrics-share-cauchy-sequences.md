@@ -2,7 +2,7 @@
 id: fs-equivalent-metrics-share-cauchy-sequences
 kind: false-statement
 title: "FALSE: two metrics inducing the same topology have the same Cauchy sequences"
-status: draft
+status: published
 origin: session
 deps: [def-equivalent-metrics, def-cauchy-in-metric, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, cor-archimedean-reciprocal,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

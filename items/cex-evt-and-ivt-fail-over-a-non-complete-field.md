@@ -2,7 +2,7 @@
 id: cex-evt-and-ivt-fail-over-a-non-complete-field
 kind: counterexample
 title: "On a closed interval of $\\mathbb{Q}$ there is a continuous unbounded function, a bounded one with no maximum, and one without the intermediate value property"
-status: draft
+status: published
 origin: session
 deps: [def-sequences-in-an-ordered-field, def-completeness-properties, def-rationals, thm-rat-ordered-field, lem-rat-archimedean, thm-of-square-roots, fs-sqrt2-rational, def-integer-power, lem-power-monotone, lem-bernoulli-inequality, thm-recursion, thm-induction-principle, lem-of-abs-value, lem-of-triangle-inequality, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, lem-of-naturals-positive, def-ordered-field, def-complete-ordered-field, def-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

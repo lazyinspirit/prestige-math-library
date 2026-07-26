@@ -2,7 +2,7 @@
 id: lem-metric-cauchy-with-convergent-subsequence
 kind: lemma
 title: "A Cauchy sequence in a metric space with a convergent subsequence converges to that subsequence’s limit"
-status: draft
+status: published
 origin: session
 deps: [def-cauchy-in-metric, def-metric-convergence, def-subsequential-limit,
        lem-index-map-grows, def-metric-space, lem-finite-set-has-max, def-max-min,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

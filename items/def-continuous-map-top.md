@@ -2,7 +2,7 @@
 id: def-continuous-map-top
 kind: definition
 title: "Continuity of a map of topological spaces at a point and globally"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-neighbourhood-top, def-injection-surjection-bijection]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

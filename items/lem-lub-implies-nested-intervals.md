@@ -2,7 +2,7 @@
 id: lem-lub-implies-nested-intervals
 kind: lemma
 title: "An ordered field with the least-upper-bound property has the nested interval property and is Archimedean"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-of-archimedean, def-complete-ordered-field, def-upper-bound, def-ordered-field, thm-induction-principle, thm-nat-linear-order]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

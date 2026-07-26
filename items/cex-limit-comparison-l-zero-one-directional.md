@@ -2,7 +2,7 @@
 id: cex-limit-comparison-l-zero-one-directional
 kind: counterexample
 title: "With $a_k/b_k \\to 0$, convergence of $\\sum a_k$ does not give convergence of $\\sum b_k$"
-status: draft
+status: published
 origin: session
 deps: [thm-limit-comparison-test, thm-p-series-rational, ex-harmonic-series-diverges, def-series, cor-archimedean-reciprocal, def-integer-power, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, def-rational-power]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

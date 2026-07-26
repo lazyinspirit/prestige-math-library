@@ -2,7 +2,7 @@
 id: lem-function-limit-preserves-order
 kind: lemma
 title: "If $f \\le g$ on a punctured neighbourhood of $c$ then $\\lim f \\le \\lim g$, non-strictly"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

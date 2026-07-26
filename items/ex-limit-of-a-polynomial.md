@@ -2,7 +2,7 @@
 id: ex-limit-of-a-polynomial
 kind: example
 title: "Every polynomial has $\\lim_{x \\to c} p(x) = p(c)$, and rational functions do so away from the zeros of the denominator"
-status: draft
+status: published
 origin: session
 deps: [thm-algebra-of-function-limits, lem-sign-preservation-near-a-limit, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-finite-sum, def-integer-power, thm-induction-principle, lem-of-abs-value, def-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

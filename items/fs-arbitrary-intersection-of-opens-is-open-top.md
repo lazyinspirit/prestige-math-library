@@ -2,7 +2,7 @@
 id: fs-arbitrary-intersection-of-opens-is-open-top
 kind: false-statement
 title: "FALSE: an arbitrary intersection of open sets is open in every topological space"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-standard-topologies, def-metrizable-space, lem-real-line-is-a-metric-space,
        def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-interval, def-abs-value,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

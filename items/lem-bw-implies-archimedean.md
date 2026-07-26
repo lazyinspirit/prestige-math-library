@@ -2,7 +2,7 @@
 id: lem-bw-implies-archimedean
 kind: lemma
 title: "Bolzano-Weierstrass alone forces the Archimedean property, so it needs no separate Archimedean hypothesis"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, def-ordered-field, lem-of-add-order, lem-of-abs-value, lem-of-naturals-positive, lem-of-sequence-basics, cor-of-one-positive, lem-nat-discrete]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

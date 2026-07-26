@@ -2,7 +2,7 @@
 id: def-sequence-convergence-top
 kind: definition
 title: "Convergence and cluster points of a sequence in a topological space, sequential continuity, and the sequential closure"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-neighbourhood-top, def-sequence, def-natural-numbers, def-continuous-map-top,
        lem-limit-unique, lem-metric-limits-unique, lem-metric-ball-neighbourhood-base, def-metric-convergence]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

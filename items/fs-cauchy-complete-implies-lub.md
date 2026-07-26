@@ -2,7 +2,7 @@
 id: fs-cauchy-complete-implies-lub
 kind: false-statement
 title: "FALSE: an ordered field in which every Cauchy sequence converges has the least-upper-bound property"
-status: draft
+status: published
 origin: session
 deps: [thm-completeness-equivalences, def-completeness-properties, def-archimedean-field, def-sequences-in-an-ordered-field, def-complete-ordered-field, thm-laurent-cauchy-complete, cor-laurent-not-lub-complete, lem-laurent-non-archimedean, thm-laurent-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

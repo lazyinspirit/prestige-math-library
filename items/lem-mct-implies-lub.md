@@ -2,7 +2,7 @@
 id: lem-mct-implies-lub
 kind: lemma
 title: "The monotone convergence property plus the Archimedean property imply the least-upper-bound property"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, def-complete-ordered-field, def-upper-bound, thm-recursion, thm-induction-principle, thm-nat-linear-order, def-integer-power, lem-bernoulli-inequality, lem-of-inverse-positive, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, lem-of-abs-value, lem-of-triangle-inequality, lem-of-sequence-basics, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

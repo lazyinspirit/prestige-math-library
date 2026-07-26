@@ -2,7 +2,7 @@
 id: cex-q-not-dense-in-an-ordered-field
 kind: counterexample
 title: "In $\\mathbb{R}(t)$ the rationals are not dense: no rational lies strictly between $0$ and $1/t$"
-status: draft
+status: published
 origin: session
 deps: [cex-ordered-field-not-archimedean, ex-rational-function-field-order, lem-of-q-dense, lem-of-q-embeds, def-archimedean-field, lem-of-inverse-positive, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

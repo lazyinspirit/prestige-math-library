@@ -2,7 +2,7 @@
 id: ex-completion-of-q-is-r
 kind: example
 title: "The completion of $\\mathbb{Q}$ under the usual metric is $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-completion-exists, thm-metric-completion-unique, def-metric-completion,
        def-rationals, lem-rat-embeds-dense, lem-real-line-is-a-metric-space,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

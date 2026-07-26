@@ -2,7 +2,7 @@
 id: lem-bw-implies-cauchy-complete
 kind: lemma
 title: "Bolzano-Weierstrass implies Cauchy completeness in any ordered field"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, lem-of-sequence-basics]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

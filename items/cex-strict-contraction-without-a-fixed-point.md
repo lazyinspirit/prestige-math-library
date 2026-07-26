@@ -2,7 +2,7 @@
 id: cex-strict-contraction-without-a-fixed-point
 kind: counterexample
 title: "$x \\mapsto x + 1/x$ on $[1,\\infty)$ strictly decreases every distance and has no fixed point"
-status: draft
+status: published
 origin: session
 deps: [fs-strict-contraction-has-a-fixed-point, thm-banach-fixed-point,
        def-lipschitz-holder-contraction, def-complete-metric-space, thm-of-archimedean,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-basis-criterion
 kind: theorem
 title: "A family is a basis for a unique topology iff it covers the set and every point of an intersection of two members lies in a member inside that intersection; finite intersections of any subbasis form a basis"
-status: draft
+status: published
 origin: session
 deps: [def-topology-basis-subbasis, def-topological-space]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

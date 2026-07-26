@@ -2,7 +2,7 @@
 id: lem-metric-cauchy-bounded
 kind: lemma
 title: "Every Cauchy sequence in a metric space is bounded"
-status: draft
+status: published
 origin: session
 deps: [def-cauchy-in-metric, def-metric-bounded-diameter, lem-finite-set-has-max,
        def-max-min, def-metric-space, def-metric-ball, lem-metric-nonnegativity,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

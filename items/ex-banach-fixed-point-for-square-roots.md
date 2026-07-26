@@ -2,7 +2,7 @@
 id: ex-banach-fixed-point-for-square-roots
 kind: example
 title: "The map $x \\mapsto (x + 2/x)/2$ is a contraction of $[1,2]$ with fixed point $\\sqrt{2}$, and the a priori bound gives the error after $n$ steps"
-status: draft
+status: published
 origin: session
 deps: [thm-banach-fixed-point, cor-banach-error-estimates, def-lipschitz-holder-contraction,
        thm-of-square-roots, thm-euclidean-space-complete, def-interval,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

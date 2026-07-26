@@ -2,7 +2,7 @@
 id: lem-series-linearity
 kind: lemma
 title: "Convergent series add and scale termwise"
-status: draft
+status: published
 origin: session
 deps: [def-series, thm-algebra-of-limits, lem-finite-sum-laws, def-finite-sum]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

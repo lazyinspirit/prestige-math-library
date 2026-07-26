@@ -2,7 +2,7 @@
 id: thm-gauss-test
 kind: theorem
 title: "Gauss: for positive terms, if $a_k/a_{k+1} = 1 + h/k + r_k$ with $|r_k| \\le C\\,k^{-1-\\varepsilon}$ for $k \\ge 1$, some constant $C$ and some rational $\\varepsilon > 0$, the series converges iff $h > 1$"
-status: draft
+status: published
 origin: session
 deps: [cor-raabe-test, thm-p-series-rational, thm-direct-comparison-test, def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-series, thm-induction-principle, thm-of-archimedean, cor-archimedean-reciprocal, thm-squeeze, thm-algebra-of-limits, lem-series-linearity, lem-series-tail-invariance, lem-limit-of-tail, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-real-limit, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

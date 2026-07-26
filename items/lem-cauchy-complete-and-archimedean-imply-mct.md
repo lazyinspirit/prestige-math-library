@@ -2,7 +2,7 @@
 id: lem-cauchy-complete-and-archimedean-imply-mct
 kind: lemma
 title: "Cauchy completeness plus the Archimedean property imply the monotone convergence property"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-recursion, thm-well-ordering-principle, thm-induction-principle, thm-nat-linear-order, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-naturals-positive, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

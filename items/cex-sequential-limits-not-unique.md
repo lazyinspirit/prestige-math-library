@@ -2,7 +2,7 @@
 id: cex-sequential-limits-not-unique
 kind: counterexample
 title: "In the indiscrete topology every sequence converges to every point, and in the cofinite topology on an infinite set an injective sequence converges to every point"
-status: draft
+status: published
 origin: session
 deps: [def-sequence-convergence-top, def-standard-topologies, ex-cofinite-topology,
        lem-sequential-closure-inside-closure, def-injection-surjection-bijection, def-countable,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

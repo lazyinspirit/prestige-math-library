@@ -1,7 +1,7 @@
 ---
 page: series-and-nonnegative-tests
 title: "Series: Convergence and the Nonnegative Tests"
-status: draft
+status: published
 items: [def-series, lem-series-tail-invariance, lem-nth-term-test,
         thm-series-cauchy-criterion, lem-series-linearity,
         lem-absolute-convergence-implies-convergence, thm-geometric-series,

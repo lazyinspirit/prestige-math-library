@@ -2,7 +2,7 @@
 id: thm-metric-regularity-hierarchy
 kind: theorem
 title: "Contraction implies Lipschitz implies uniformly continuous implies continuous; every Hölder map is uniformly continuous, and a Lipschitz map on a bounded space is Hölder for every exponent"
-status: draft
+status: published
 origin: session
 deps: [def-lipschitz-holder-contraction, def-metric-uniform-continuity,
        def-metric-continuity, def-rational-power, lem-rational-power-monotone,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

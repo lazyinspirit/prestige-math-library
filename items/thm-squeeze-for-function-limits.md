@@ -2,7 +2,7 @@
 id: thm-squeeze-for-function-limits
 kind: theorem
 title: "If $f \\le g \\le h$ near $c$ and $f$ and $h$ have the same limit at $c$, then so does $g$"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, lem-of-add-order, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

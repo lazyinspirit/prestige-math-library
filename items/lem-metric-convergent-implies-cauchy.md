@@ -2,7 +2,7 @@
 id: lem-metric-convergent-implies-cauchy
 kind: lemma
 title: "Every convergent sequence in a metric space is Cauchy"
-status: draft
+status: published
 origin: session
 deps: [def-cauchy-in-metric, def-metric-convergence, def-metric-space,
        lem-rat-embeds-dense, def-real-limit]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

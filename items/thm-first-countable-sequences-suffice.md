@@ -2,7 +2,7 @@
 id: thm-first-countable-sequences-suffice
 kind: theorem
 title: "In a first countable space the sequential closure equals the closure and sequential continuity at a point equals continuity there"
-status: draft
+status: published
 origin: session
 deps: [def-first-countable-top, lem-sequential-closure-inside-closure, thm-closure-characterisation-top, def-sequence-convergence-top, def-countable-choice, def-continuous-map-top, def-neighbourhood-top, thm-recursion, lem-countable-iff-surjection-from-n]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

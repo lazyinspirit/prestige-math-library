@@ -10,16 +10,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-26
+    date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -73,9 +68,9 @@ an approximation argument, and an approximation argument needs a notion of limit
 and an estimate that controls $a^{r} - a^{s}$ in terms of $r - s$. The library
 does have a notion of convergent sequence of reals, introduced in the
 construction of $\mathbb{R}$ via Cauchy sequences ([[def-real-limit]]), but no
-continuity, no uniform continuity, no series and no derivative is developed
-anywhere in it, and each of those is exactly what the standard proofs of the
-power laws for real exponents use. Writing such
+continuity, no uniform continuity, no series and no derivative is available at
+this point in its reading order, and each of those is exactly what the standard
+proofs of the power laws for real exponents use. Writing such
 a proof here would either import machinery that does not exist yet or quietly
 assume it, and the second is the failure mode this library is built to avoid.
 

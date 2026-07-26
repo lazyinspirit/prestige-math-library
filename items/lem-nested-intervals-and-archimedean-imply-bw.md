@@ -2,7 +2,7 @@
 id: lem-nested-intervals-and-archimedean-imply-bw
 kind: lemma
 title: "Nested intervals plus the Archimedean property imply Bolzano-Weierstrass, by repeated bisection"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-recursion, thm-well-ordering-principle, lem-index-map-grows, def-integer-power, lem-bernoulli-inequality, lem-of-inverse-positive, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, lem-of-abs-value, thm-induction-principle, thm-nat-linear-order, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-sequentially-continuous-not-continuous
 kind: counterexample
 title: "The identity from the cocountable topology on $\\mathbb{R}$ to the usual topology is sequentially continuous and not continuous"
-status: draft
+status: published
 origin: session
 deps: [fs-sequentially-continuous-implies-continuous, ex-cocountable-topology-on-r, def-sequence-convergence-top,
        def-metrizable-space, lem-real-line-is-a-metric-space, cor-interval-uncountable, lem-subset-of-countable,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

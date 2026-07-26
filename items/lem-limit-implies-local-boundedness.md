@@ -2,7 +2,7 @@
 id: lem-limit-implies-local-boundedness
 kind: lemma
 title: "If $f$ has a finite limit at $c$ then $f$ is bounded on some punctured neighbourhood of $c$"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-bounded-set, def-neighbourhood-r, def-limit-point-r, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, cor-of-one-positive]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

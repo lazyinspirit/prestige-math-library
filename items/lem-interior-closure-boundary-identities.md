@@ -2,7 +2,7 @@
 id: lem-interior-closure-boundary-identities
 kind: lemma
 title: "Interior commutes with finite intersections and closure with finite unions, while the two reverse combinations are inclusions only and both fail for infinite families; the space is the disjoint union of interior, boundary and exterior"
-status: draft
+status: published
 origin: session
 deps: [def-interior-closure-boundary-top, def-standard-topologies, def-topological-space, def-countable]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

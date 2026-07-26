@@ -2,7 +2,7 @@
 id: def-interior-closure-boundary-top
 kind: definition
 title: "Interior, closure, boundary, exterior, derived set and isolated point in a topological space"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-neighbourhood-top]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

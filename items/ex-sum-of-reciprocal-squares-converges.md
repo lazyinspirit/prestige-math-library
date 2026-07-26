@@ -2,7 +2,7 @@
 id: ex-sum-of-reciprocal-squares-converges
 kind: example
 title: "$\\sum 1/k^2$ converges with sum at most $2$, by comparison with the telescoping $\\sum 1/(k(k-1))$"
-status: draft
+status: published
 origin: session
 deps: [thm-direct-comparison-test, lem-telescoping-series, thm-p-series-rational, def-series, def-integer-power, lem-series-tail-invariance, thm-nonnegative-series-bounded-partial-sums, lem-of-inverse-positive, lem-of-naturals-positive, def-finite-sum, lem-finite-sum-laws, cor-archimedean-reciprocal, def-real-limit, def-rational-power, def-bounded-set]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

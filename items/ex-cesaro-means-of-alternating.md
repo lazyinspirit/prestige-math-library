@@ -2,7 +2,7 @@
 id: ex-cesaro-means-of-alternating
 kind: example
 title: "The Cesaro means of $(-1)^k$ converge to $0$ although the sequence diverges"
-status: draft
+status: published
 origin: session
 deps: [def-cesaro-mean, fs-cesaro-converse, fs-bounded-implies-convergent, lem-alternating-sequence, cor-archimedean-reciprocal, def-finite-sum, def-real-limit, def-sequence, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-series
 kind: definition
 title: "Series, partial sums, convergence and the sum, divergence, and the tail series"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, def-sequence, def-real-limit, def-real-numbers, lem-limit-unique]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

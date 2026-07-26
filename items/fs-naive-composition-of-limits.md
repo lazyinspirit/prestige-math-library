@@ -2,7 +2,7 @@
 id: fs-naive-composition-of-limits
 kind: false-statement
 title: "FALSE: $\\lim_{x \\to c} f(g(x)) = M$ whenever $\\lim_{x \\to c} g = L$ and $\\lim_{y \\to L} f = M$"
-status: draft
+status: published
 origin: session
 deps: [thm-composition-of-function-limits, def-function-limit, def-limit-point-r, def-neighbourhood-r, fs-limit-equals-value, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

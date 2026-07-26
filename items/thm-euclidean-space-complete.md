@@ -2,7 +2,7 @@
 id: thm-euclidean-space-complete
 kind: theorem
 title: "$\\mathbb{R}$ and $\\mathbb{R}^n$ for $n \\ge 1$ with the Euclidean metric are complete, componentwise from the Cauchy criterion in $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-complete-metric-space, thm-cauchy-criterion-via-lub, def-cauchy-in-metric,
        def-metric-space, def-metric-convergence, def-finite-sum, thm-of-square-roots,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-interior-of-a-union-is-larger
 kind: counterexample
 title: "In $\\mathbb{R}$ the interiors of $\\mathbb{Q}$ and of its complement are both empty while the interior of their union is everything"
-status: draft
+status: published
 origin: session
 deps: [lem-interior-closure-boundary-identities, def-interior-closure-boundary-top, def-metrizable-space,
        lem-rat-embeds-dense, lem-real-line-is-a-metric-space, cor-interval-uncountable, thm-rationals-countable,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-nonnegative-series-bounded-partial-sums
 kind: theorem
 title: "A series of nonnegative terms converges iff its partial sums are bounded, and then the sum is their supremum"
-status: draft
+status: published
 origin: session
 deps: [def-series, def-monotone-sequence, thm-monotone-convergence, cor-monotone-converges-iff-bounded, lem-monotone-unbounded-diverges, def-bounded-set, def-finite-sum, lem-finite-sum-laws, def-sequence, def-divergence-to-infinity, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

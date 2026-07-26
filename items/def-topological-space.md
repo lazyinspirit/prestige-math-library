@@ -2,7 +2,7 @@
 id: def-topological-space
 kind: definition
 title: "Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison"
-status: draft
+status: published
 origin: session
 deps: [def-partial-order]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

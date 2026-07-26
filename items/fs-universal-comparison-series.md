@@ -2,7 +2,7 @@
 id: fs-universal-comparison-series
 kind: false-statement
 title: "FALSE: there is a divergent series of positive terms that diverges more slowly than every other, hence a universal comparison test"
-status: draft
+status: published
 origin: session
 deps: [thm-abel-dini, def-series, thm-nonnegative-series-bounded-partial-sums, lem-monotone-unbounded-diverges, def-divergence-to-infinity, def-monotone-sequence, lem-of-inverse-positive, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

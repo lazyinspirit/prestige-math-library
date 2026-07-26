@@ -2,7 +2,7 @@
 id: thm-completeness-equivalences
 kind: theorem
 title: "For an ordered field the five completeness properties are equivalent, provided the Archimedean property is assumed alongside monotone convergence, nested intervals and Cauchy completeness"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-archimedean-field, lem-lub-implies-nested-intervals, lem-nested-intervals-and-archimedean-imply-bw, lem-bw-implies-archimedean, lem-bw-implies-cauchy-complete, lem-cauchy-complete-and-archimedean-imply-mct, lem-mct-implies-archimedean, lem-mct-implies-lub]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

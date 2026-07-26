@@ -87,5 +87,7 @@ least-indexed rational-endpoint interval that works.
 only the definitions, and four depend on the order of $\mathbb{R}$: three of
 them in what they say, the fourth in how it is proved.
 [[rem-r-native-topology-scope]] separates
-them, and it is deliberately silent about topological spaces in general, which
-this library does not develop.
+them, and it is deliberately silent about topological spaces in general. Those
+are developed later in this library, on *Topological Spaces and Continuity*,
+where [[def-metrizable-space]] identifies the topology of this page as a special
+case; nothing here proves anything about them.

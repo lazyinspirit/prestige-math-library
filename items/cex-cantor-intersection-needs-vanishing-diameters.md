@@ -2,7 +2,7 @@
 id: cex-cantor-intersection-needs-vanishing-diameters
 kind: counterexample
 title: "On $\\mathbb{N}$ with $d(m,n) = 1 + 1/(m+n)$ for $m \\ne n$ the sets $\\{n, n+1, \\dots\\}$ are nested, closed, bounded and complete with empty intersection"
-status: draft
+status: published
 origin: session
 deps: [thm-cantor-intersection-metric, def-metric-space, def-complete-metric-space,
        def-metric-bounded-diameter, cor-archimedean-reciprocal, thm-of-archimedean,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

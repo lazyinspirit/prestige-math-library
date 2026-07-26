@@ -2,7 +2,7 @@
 id: fs-nth-term-test-converse
 kind: false-statement
 title: "FALSE: if $a_k \\to 0$ then $\\sum a_k$ converges"
-status: draft
+status: published
 origin: session
 deps: [lem-nth-term-test, thm-p-series-rational, def-series, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive, def-rational-power, thm-nth-roots-exist, def-integer-power, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

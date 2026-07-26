@@ -2,7 +2,7 @@
 id: ex-field-ordered-in-two-ways
 kind: example
 title: "$\\mathbb{Q}(\\sqrt{2})$ carries exactly two distinct field orders, exchanged by the conjugation $\\sqrt{2} \\mapsto -\\sqrt{2}$"
-status: draft
+status: published
 origin: session
 deps: [def-ordered-field, def-field, def-rationals, thm-of-square-roots, fs-sqrt2-rational, lem-of-square-positive, cor-of-one-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order, lem-of-naturals-positive, lem-of-q-embeds, def-complete-ordered-field, thm-reals-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

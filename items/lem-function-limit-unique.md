@@ -2,7 +2,7 @@
 id: lem-function-limit-unique
 kind: lemma
 title: "At a limit point of the domain a function has at most one limit"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-continuous-map-destroying-cauchyness
 kind: counterexample
 title: "$x \\mapsto 1/x$ is continuous on $(0,1)$ and sends the Cauchy sequence $(1/(k+2))_{k \\ge 0}$ to an unbounded one"
-status: draft
+status: published
 origin: session
 deps: [thm-uniform-continuity-preserves-cauchy, def-metric-uniform-continuity,
        def-metric-continuity, def-cauchy-in-metric, cor-archimedean-reciprocal,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

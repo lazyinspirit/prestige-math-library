@@ -1,7 +1,7 @@
 ---
 page: topological-spaces-and-continuity
 title: "Topological Spaces and Continuity"
-status: draft
+status: published
 items: [def-topological-space, def-standard-topologies, def-topology-basis-subbasis,
         thm-basis-criterion, def-neighbourhood-top, def-interior-closure-boundary-top,
         thm-closure-characterisation-top, lem-interior-closure-boundary-identities,

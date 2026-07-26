@@ -2,7 +2,7 @@
 id: fs-ratio-limsup-at-least-one-diverges
 kind: false-statement
 title: "FALSE: $\\limsup |a_{k+1}/a_k| \\ge 1$ implies the series diverges"
-status: draft
+status: published
 origin: session
 deps: [thm-ratio-test, def-limsup-liminf, lem-limsup-exists, def-series, lem-alternating-sequence, lem-index-map-grows, def-extended-reals, lem-extended-reals-complete, thm-geometric-series, thm-direct-comparison-test, lem-series-linearity, def-integer-power, lem-power-laws, lem-power-monotone, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

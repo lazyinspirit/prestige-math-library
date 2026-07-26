@@ -2,7 +2,7 @@
 id: thm-limit-comparison-test
 kind: theorem
 title: "For $a_k, b_k > 0$ with $a_k/b_k \\to L$: if $L \\in (0,\\infty)$ the two series share their behaviour, while $L = 0$ and $L = \\infty$ give one implication each"
-status: draft
+status: published
 origin: session
 deps: [thm-direct-comparison-test, def-real-limit, def-series, def-divergence-to-infinity, lem-series-linearity, cor-archimedean-reciprocal, def-sequence, lem-limit-unique]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

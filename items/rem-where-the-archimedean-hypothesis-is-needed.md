@@ -2,7 +2,7 @@
 id: rem-where-the-archimedean-hypothesis-is-needed
 kind: remark
 title: "Which of the five completeness properties carry the Archimedean property on their own, and which must be handed it"
-status: draft
+status: published
 origin: session
 deps: [def-completeness-properties, def-archimedean-field, thm-completeness-equivalences, lem-lub-implies-nested-intervals, lem-bw-implies-archimedean, lem-mct-implies-archimedean, fs-nested-intervals-implies-lub, fs-cauchy-complete-implies-lub, thm-of-archimedean, lem-laurent-non-archimedean, thm-laurent-cauchy-complete, cor-laurent-nested-intervals]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

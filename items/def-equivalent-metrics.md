@@ -14,8 +14,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+    date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -49,9 +49,10 @@ compares metrics on different sets.
 identity maps $\mathrm{id} : (X,d) \to (X,d')$ and
 $\mathrm{id} : (X,d') \to (X,d)$ are *uniformly* continuous: the same $\delta$
 works at every pair of points, not merely at each point separately as in
-[[def-metric-continuity]]. Uniform continuity is not given a definition of its
-own in this library yet, so the condition is written out in full above; when it
-is needed it is quoted from here.
+[[def-metric-continuity]]. Uniform continuity has no definition of its own at
+this point in the reading order, so the condition is written out in full above;
+a later page defines it, and until then this write-out is what earlier pages
+quote.
 
 **Each of the three is an equivalence relation on the metrics on $X$.**
 Reflexivity is immediate ($\delta = \varepsilon$, and $\alpha = \beta = 1$);

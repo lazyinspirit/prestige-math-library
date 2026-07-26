@@ -2,7 +2,7 @@
 id: ex-stolz-cesaro-applied
 kind: example
 title: "Stolz-Cesaro gives $(1 + 2 + \\dots + n)/n^2 \\to 1/2$ and $(1^p + \\dots + n^p)/n^{p+1} \\to 1/(p+1)$ for natural $p$"
-status: draft
+status: published
 origin: session
 deps: [thm-stolz-cesaro, def-finite-sum, lem-finite-sum-laws, def-integer-power, lem-power-laws, lem-power-monotone, lem-power-difference-factorisation, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, def-real-limit, def-sequence, def-monotone-sequence, def-bounded-set, lem-limit-of-tail, lem-limit-unique, thm-induction-principle, lem-of-inverse-positive, lem-of-add-order, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:

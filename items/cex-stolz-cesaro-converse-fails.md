@@ -2,7 +2,7 @@
 id: cex-stolz-cesaro-converse-fails
 kind: counterexample
 title: "$a_k = (-1)^k$, $b_k = k$ have $a_k/b_k \\to 0$ while the difference quotient oscillates, so Stolz-Cesaro has no converse"
-status: draft
+status: published
 origin: session
 deps: [thm-stolz-cesaro, lem-alternating-sequence, fs-bounded-implies-convergent, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, def-monotone-sequence, def-bounded-set, def-real-limit, def-sequence, lem-limit-of-tail, lem-limit-unique, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
