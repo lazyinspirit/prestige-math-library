@@ -61,7 +61,14 @@ planned — no p-adic absolute value or valuation exists here, and
 future page, never as an available fact. (6) The subspace topology is defined
 at level 8 (`def-subspace-topology-top` on
 `topological-spaces-and-continuity`); later topology material cites it and
-does not redefine it (see the T3 note in plan-topology-track.md).
+does not redefine it (see the T3 note in plan-topology-track.md). (7)
+`lem-absolute-convergence-implies-convergence` now exists on
+`series-and-nonnegative-tests` (level-8 authoring: `thm-root-test` and
+`thm-ratio-test` conclude convergence of the SERIES, not merely of the series
+of absolute values, and this lemma is the step). Its id was COINED there while
+`absolute-convergence-and-rearrangement` (order 36, RA-09) had an empty item
+list; when RA-09 is scaffolded it MUST reuse or alias this id, never mint a
+second one.
 
 TO VERIFY before authoring RA-01: whether `def-complete-ordered-field` already
 contains a usable definition of supremum, or whether standalone `def-supremum` /
@@ -261,6 +268,12 @@ in R^2 the rearrangement sums form a LINE, not the plane; a double array with
 iterated sums 0 and -1; product(1 - 1/n) = 0 explains why 0 is excluded from
 product convergence; product(1 + (-1)^n/sqrt n) diverges though the series
 converges.
+Level-8 note (Alpha-8, 2026-07-27, per the orchestrator): "absolute implies
+convergent" ALREADY EXISTS — `lem-absolute-convergence-implies-convergence`
+was coined and authored on `series-and-nonnegative-tests` (the root and ratio
+tests conclude convergence of the series through it). When this page is
+scaffolded, REUSE or alias that id for the absolute-implies-convergent slot;
+minting a second id for the same statement is an error.
 
 ### Block IV: topology of R
 
@@ -377,6 +390,18 @@ inline and that is FINAL. It refutes a claim about an ARBITRARY ordered field,
 over Q; this page's continuity definition will be for real functions on subsets
 of R, resting on `def-function-limit`, so it cannot apply to Q and could never
 be cited there. Do NOT retro-wire it.
+Level-8 seam note (Alpha-8, 2026-07-27, step-9 audit): when this page defines
+continuity, uniform continuity, Lipschitz and Holder for real functions on
+A subset of R, it must STATE the relation to the metric-space definitions that
+now precede it in reading order — `def-metric-continuity` (metric-spaces, 24),
+`def-metric-uniform-continuity` and `def-lipschitz-holder-contraction`
+(completeness-and-uniform-continuity, 26): either define as the X = A subset of
+(R, |x-y|) instance and cite, or define R-natively and record the agreement
+explicitly, in the dictionary style of `def-metrizable-space`. Silent
+re-definition repeats the level-7 two-notions-of-open defect. At the same
+point, identify psi = dist(., Z) of `ex-distance-to-the-integers` with the set
+distance d(x, Z) and its 1-Lipschitz property (`lem-distance-to-set-is-lipschitz`,
+level 7), which makes psi this track's natural uniformly-continuous example.
 
 **RA-14 Monotone Functions, Discontinuities, and Continuity Sets**
 <- RA-13, RA-11, RA-03
@@ -574,6 +599,13 @@ sum n! x^n converges at one point only; **the converse of Abel's theorem fails**
 a C^infinity function whose Maclaurin series converges everywhere and represents
 it at one point only; one whose Maclaurin series converges at one point only
 (Borel).
+Level-8 seam note (Alpha-8, 2026-07-27): when Cesaro and Abel summability of
+SERIES are treated here (Frobenius), define the Cesaro sum through the already
+existing `def-cesaro-mean` and `thm-cesaro-mean-theorem`
+(equivalent-forms-of-completeness, order 32) applied to the partial sums of
+`def-series`; do not re-derive the mean machinery. That page and the series
+page share no bridge today by design — the summability-of-series statement
+belongs here, where Abel's limit theorem makes it worth stating.
 
 ### Block IX: the elementary functions
 
@@ -628,15 +660,22 @@ B: **Bartle & Sherbert's bound sqrt 2 < gamma < sqrt(6 - 2 sqrt 3)**, giving
 the loop with RA-16's spline versions); **`fs-sin-x-over-x-by-sector-areas`**:
 the standard calculus proof that lim sin x / x = 1 via sin theta < theta < tan
 theta COMPARES SECTOR AREAS and is therefore circular (arXiv:1302.1167).
-Level-8 wiring obligation (Alpha-8, 2026-07-26, from
-research/level8-batch-3.notes.md §2):
+Level-8 wiring obligation (Alpha-8, 2026-07-26; CORRECTED 2026-07-27 per the
+orchestrator):
 `rem-classical-oscillator-is-sine-of-one-over-x` on
-`limits-of-real-functions-examples` carries the page-level forward reference
-to this page (`forwardRefs` in plan-spec.json; the ledger holds the page-level
-entry until a target exists). When this page is scaffolded, choose the
-concrete target item and declare it in that remark's `forward_refs`
-frontmatter (fwdcheck); its prose treats "the classical oscillator is
-sin(1/x)" as orientation, not a proved claim.
+`limits-of-real-functions-examples` is owed a forward reference INTO this
+page. A page-level forward reference is NOT expressible in the schema:
+`forward_refs` takes item ids and fwdcheck rejects a dangling entry, a
+wikilink to a page id from an item body is a hard `link-unplanned` error, and
+`proved_here: false` is not a substitute (the ‡ tier means "never proved
+here"; sine is planned, not deferred). The `forwardRefs` whitelist on the B
+page in plan-spec.json is a plan-validator construct only, and the generated
+ledger (research/forward-refs.md) cannot carry an entry until a `forward_refs`
+is declared. So the remark is authored with NO link, reporting the sin(1/x)
+statements as orientation only, and THIS NOTE is the memory of the
+obligation: when this page is scaffolded, add the concrete oscillator/sine
+item id to that remark's `forward_refs` so it gains the ↗ tier and the ledger
+entry comes into existence.
 
 **RA-29 Arc Length and Rectifiable Curves** <- RA-20, RA-22
 **a curve is a MAPPING, not a point set** (Rudin Def 6.26 verbatim: two curves

@@ -69,12 +69,16 @@ inclusion, and a bijection preserves at most countability
   $n \ge 1$ forming an at most countable neighbourhood base at each point
   ([[lem-metric-ball-neighbourhood-base]]); so every metrizable space is first
   countable, and a space that is not first countable is not metrizable. That is a
-  second obstruction to metrizability, **independent** of the Hausdorff
-  obstruction used elsewhere on this page and not stronger than it: the
-  indiscrete topology on two points is first countable, as the paragraph above
-  records, and is not Hausdorff, so it is caught by the Hausdorff obstruction and
-  not by this one. Neither obstruction is a characterisation, and this library
-  proves no implication between the two.
+  second obstruction to metrizability, and it is **not stronger** than the
+  Hausdorff obstruction used elsewhere on this page: the indiscrete topology on
+  two points is first countable, as the paragraph above records, and is not
+  Hausdorff, so it is caught by the Hausdorff obstruction and not by this one.
+  Whether the converse failure can occur, that is whether some Hausdorff space is
+  not first countable, is not settled here: no such space appears in this library,
+  and nothing below needs one. So what is established is one direction only, that
+  first countability does not subsume the Hausdorff obstruction. Neither
+  obstruction is a characterisation, and this library proves no implication
+  between the two.
 
 - **Second countability is not defined here.** The stronger axiom, an at most
   countable basis for the whole topology, belongs with the other countability
