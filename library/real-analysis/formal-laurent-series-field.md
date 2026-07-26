@@ -65,8 +65,8 @@ at which two elements differ, and every later coefficient is irrelevant. That
 single sentence explains everything unusual about $K$.
 [[lem-laurent-non-archimedean]] draws the consequences: $t$ exceeds every
 canonical natural, so $K$ is not Archimedean; the monomials $t^{-k}$ decrease;
-and, the clause that matters most, **every positive element of $K$ is exceeded
-by some $t^{-k}$ with $k \in \mathbb{N}$**. The value group is $\mathbb{Z}$,
+and, the clause that matters most, **every positive element of $K$ exceeds some
+$t^{-k}$ with $k \in \mathbb{N}$**. The value group is $\mathbb{Z}$,
 whose cofinality is countable, and that clause is what countable cofinality
 means down in the order.
 
@@ -116,10 +116,12 @@ unrestricted property is **false** in $K$, and
 $[\iota(n)t^{-1},\, \iota(1/(n+1))]$ with empty intersection: a common point
 would have to be infinitesimal, because it lies below every positive real
 constant, and simultaneously larger than every multiple of $t^{-1}$, which no
-element of $K$ is. The example also shows why the shrinking hypothesis must be
-read in $K$ and not in $\mathbb{R}$: lengths of the shape $2/n$ never get below
-$t^{-1}$, so a nested sequence can have lengths tending to $0$ in the ordinary
-real sense and not tend to $0$ here at all.
+element of $K$ is. The shrinking hypothesis must also be read in $K$ and not in
+$\mathbb{R}$, and both items say so. The lengths in the counterexample keep a
+nonzero coefficient at index $0$, so not one of them ever gets below $t^{-1}$;
+and the remarks of [[cor-laurent-nested-intervals]] make the same point with
+lengths that are the real constants $2/(n+1)$, which tend to $0$ in the ordinary
+real sense and do not tend to $0$ in $K$ at all.
 
 **What this page is for.** Three results elsewhere in the library need a single
 honest witness, and this field is it: an ordered field in which every Cauchy
