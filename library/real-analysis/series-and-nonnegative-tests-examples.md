@@ -17,6 +17,15 @@ first group computes; the second group shows that a hypothesis dropped from a
 theorem there makes it false, or that a test is silent where one might expect it
 to speak.
 
+**A note on the notation $\iota$, which appears throughout this page.** A natural
+number here is a von Neumann natural, that is a set, so it is not an element of
+$\mathbb{R}$ and cannot be divided into $1$. The canonical natural
+$\iota(n) = n \cdot 1_{\mathbb{R}}$ is the real number that $n$ names, $1$ added
+to itself $n$ times ([[lem-of-naturals-positive]]). So $1/\iota(k+1)$ is what an
+informal text writes as $1/(k+1)$, and the shift by one is there because
+$\mathbb{N}$ contains $0$ and $\iota(0) = 0$, so $1/\iota(k)$ would be undefined
+at the first index.
+
 **The two series everything is measured against.**
 [[ex-harmonic-series-diverges]] proves that $\sum_{k \ge 1} 1/k$ diverges twice
 over: by [[thm-cauchy-condensation]], where the condensed terms are constantly

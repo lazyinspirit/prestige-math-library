@@ -16,6 +16,13 @@ examples: [fs-nth-term-test-converse, fs-ratio-limsup-at-least-one-diverges,
            fs-universal-comparison-series]
 ---
 
+**A note on the notation $\iota$.** A natural number here is a von Neumann
+natural, that is a set, so it is not an element of $\mathbb{R}$ and cannot be
+divided into $1$. The canonical natural $\iota(n) = n \cdot 1_{\mathbb{R}}$ is
+the real number that $n$ names ([[lem-of-naturals-positive]]), so $1/\iota(k+1)$
+is what an informal text writes as $1/(k+1)$; the shift by one is there because
+$\mathbb{N}$ contains $0$ and $\iota(0) = 0$.
+
 **Objective.** A series is not a new kind of object. It is a sequence, namely the
 sequence of partial sums, looked at through the terms that generate it. This page
 makes that reduction precise in [[def-series]] and then spends itself on the one
