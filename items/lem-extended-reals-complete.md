@@ -145,5 +145,5 @@ exactly where the two coincide.
 - **Where this is consumed.** [[def-limsup-liminf]] needs the supremum of a tail
   range of an arbitrary real sequence, which may be unbounded, and then the
   infimum of the resulting family, which may contain $+\infty$; both are supplied
-  here and by nothing earlier in the library. Seven items on this page depend on
-  it.
+  here and by nothing earlier in the library. Fourteen items on this page depend
+  on it, and five more on the companion page of examples.

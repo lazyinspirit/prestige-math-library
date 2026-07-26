@@ -6,7 +6,7 @@ status: draft
 origin: session
 deps: [def-perfect-set-r, thm-nested-interval-property, def-countable, lem-countable-iff-surjection-from-n, thm-recursion, def-interval, def-neighbourhood-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-limit-point-r, lem-rat-embeds-dense, thm-rationals-countable, thm-well-ordering-principle, cor-archimedean-reciprocal, thm-of-archimedean, def-injection-surjection-bijection, def-equinumerous, def-real-limit, def-sequence, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, lem-finite-set-has-max, def-max-min, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
-forward_refs: [ex-closed-interval-is-perfect, cex-closed-set-with-an-isolated-point-is-not-perfect]
+forward_refs: [ex-closed-interval-is-perfect, cex-closed-set-with-an-isolated-point-is-not-perfect, ex-reciprocals-with-zero-are-compact]
 aliases: []
 landmark: true
 short: "nonempty perfect $\\Rightarrow$ uncountable"
@@ -134,10 +134,15 @@ no choice principle is used anywhere.
   and it says nothing about $\ell_0$, which is not needed.
 
 - **The result is sharp in both directions.** A nondegenerate closed interval is
-  perfect and uncountable ([[ex-closed-interval-is-perfect]]), and a closed set
-  with one isolated point can be countable
-  ([[cex-closed-set-with-an-isolated-point-is-not-perfect]]). Applied to a
+  perfect and uncountable ([[ex-closed-interval-is-perfect]]), and deleting the
+  no-isolated-points clause loses the conclusion: a closed set with an isolated
+  point need not be perfect
+  ([[cex-closed-set-with-an-isolated-point-is-not-perfect]]) and may be
+  countable, as $\{\, 1/k : k \ge 1 \,\} \cup \{0\}$ is
+  ([[ex-reciprocals-with-zero-are-compact]]). Applied to a
   nondegenerate closed interval, which [[ex-closed-interval-is-perfect]] shows
   to be perfect, the theorem reproves the uncountability of intervals
-  ([[cor-interval-uncountable]]) by a different route; the two proofs share the
-  nested interval property and little else.
+  ([[cor-interval-uncountable]]) by a different route; the two proofs share
+  nothing but the completeness of $\mathbb{R}$, which
+  [[cor-interval-uncountable]] spends as a supremum and the argument above
+  spends through [[thm-nested-interval-property]].

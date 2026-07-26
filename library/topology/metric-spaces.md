@@ -42,7 +42,9 @@ cite.** That the absolute value makes $\mathbb{R}$ a metric space, with the open
 balls exactly the bounded open intervals and the space unbounded, is
 [[lem-real-line-is-a-metric-space]]. That $\mathbb{R}^n$, defined ZFC-natively
 as the set of functions from the von Neumann natural $n$ to $\mathbb{R}$, carries
-the three metrics $d_1$, $d_2$ and $d_\infty$ is [[lem-metrics-on-rn]], proved
+the three metrics $d_1$, $d_2$ and $d_\infty$ for every $n \ge 1$ is
+[[lem-metrics-on-rn]]. That restriction is not decoration: at $n = 0$ the metric
+$d_\infty$ would be a maximum over the empty index set. The lemma is proved
 from Minkowski at exponent $1$ and from Cauchy-Schwarz, with no rational power
 anywhere. That the bounded real-valued functions on a nonempty set carry the
 supremum metric is [[lem-sup-metric-is-a-metric]]. None of these had a home in
@@ -76,9 +78,10 @@ countable neighbourhood base at each point
 enough to detect the closure: a point is adherent to a set exactly when some
 sequence in the set converges to it, and a set is closed exactly when it is
 sequentially closed ([[thm-metric-sequential-closure]]). That theorem is the one
-place on this page where a choice principle is used, and it uses only countable
-choice; the dependence is flagged at the step that spends it rather than
-suppressed.
+place on this page where a choice principle is spent, and it spends only
+countable choice; the dependence is flagged at the step that spends it rather
+than suppressed, and [[thm-metric-continuity-characterisations]] inherits it from
+there rather than adding to it.
 
 **Continuity, embeddings and comparison of metrics.** The $\varepsilon$-$\delta$
 definition ([[def-metric-continuity]]) agrees with four other conditions:

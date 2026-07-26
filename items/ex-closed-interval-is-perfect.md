@@ -81,10 +81,10 @@ do the counting.
   but $(a,b)$ is not closed, so it is not perfect. Perfectness needs both halves,
   which is why the example is stated for the closed interval.
 
-- **Two proofs of one fact, sharing one ingredient.** Both routes use
-  [[thm-nested-interval-property]], the first inside
-  [[cor-interval-uncountable]] and the second inside
-  [[thm-perfect-set-uncountable-r]]. They differ in everything else: the first
+- **Two proofs of one fact, sharing one ingredient.** Both routes spend the
+  completeness of $\mathbb{R}$ exactly once, [[cor-interval-uncountable]] as a
+  supremum and [[thm-perfect-set-uncountable-r]] through
+  [[thm-nested-interval-property]]. They differ in everything else: the first
   trisects a given interval against a given enumeration, the second selects
   rational-endpoint intervals by least index. Neither is a corollary of the
   other.

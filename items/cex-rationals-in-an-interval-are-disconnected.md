@@ -1,7 +1,7 @@
 ---
 id: cex-rationals-in-an-interval-are-disconnected
 kind: counterexample
-title: "$\\mathbb{Q} \\cap [0,2]$ is bounded and disconnected, so being an interval of the ambient order is not enough"
+title: "$\\mathbb{Q} \\cap [0,2]$ is bounded and disconnected, so being an interval of $\\mathbb{Q}$ is not enough"
 status: draft
 origin: session
 deps: [thm-connected-subsets-of-r-are-intervals, def-connected-r, fs-sqrt2-rational, thm-of-square-roots, def-rationals, lem-rat-embeds-dense, def-interval, def-interior-closure-boundary-r, def-open-and-closed-in-r, thm-closure-characterisations-r, lem-of-square-monotone, def-bounded-set, def-ordered-field, def-complete-ordered-field, cor-of-one-positive]

@@ -84,7 +84,8 @@ here instead fixes an enumeration of the rationals once and always takes the
 least-indexed rational-endpoint interval that works.
 
 **What is and is not claimed about generality.** Two results on this page use
-only the definitions, and four are written in the vocabulary of the order of
-$\mathbb{R}$ from beginning to end. [[rem-r-native-topology-scope]] separates
+only the definitions, and four depend on the order of $\mathbb{R}$: three of
+them in what they say, the fourth in how it is proved.
+[[rem-r-native-topology-scope]] separates
 them, and it is deliberately silent about topological spaces in general, which
 this library does not develop.

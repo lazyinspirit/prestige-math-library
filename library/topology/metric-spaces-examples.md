@@ -21,9 +21,9 @@ false statements and the strictness claims that the general page deliberately di
 not assert.
 
 **The examples span the range of what a metric can look like.** On
-$\mathbb{R}^n$ the three metrics $d_1$, $d_2$ and $d_\infty$ are Lipschitz
-equivalent with explicit constants, so the choice among them never affects a
-topological question ([[ex-p-metrics-on-rn]]). The discrete metric sits at the
+$\mathbb{R}^n$, for every $n \ge 1$, the three metrics $d_1$, $d_2$ and
+$d_\infty$ are Lipschitz equivalent with explicit constants, so the choice among
+them never affects a topological question ([[ex-p-metrics-on-rn]]). The discrete metric sits at the
 opposite extreme, making every subset clopen ([[ex-discrete-metric]]). The
 supremum metric on the bounded real-valued functions contains an isometric copy
 of the real line and has a supremum that is not attained

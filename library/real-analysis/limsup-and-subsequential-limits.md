@@ -36,7 +36,7 @@ is not a field. What it does have is [[lem-extended-reals-complete]]: **every**
 subset of $\overline{\mathbb{R}}$, with no hypothesis whatever, has a least upper
 bound and a greatest lower bound there, agreeing with the real supremum and
 infimum wherever the latter are defined. That single lemma is what makes the
-whole page hypothesis free, and seven of its items rest on it.
+whole page hypothesis free, and fourteen of its items rest on it.
 
 **The two quantities.** [[def-limsup-liminf]] sets
 $\limsup_k x_k = \inf_n \sup_{k \ge n} x_k$ and
@@ -76,8 +76,9 @@ comparison principle, [[thm-limsup-subadditive]] the subadditivity, with the
 hypothesis that the right-hand side be defined in $\overline{\mathbb{R}}$ and not
 a hypothesis more, and [[thm-limsup-submultiplicative]] the multiplicative
 analogue for bounded nonnegative sequences, where both hypotheses are load
-bearing. Neither inequality can be reversed, which is what
-[[fs-limsup-additive]] records.
+bearing. Neither inequality can be reversed: [[fs-limsup-additive]] records that
+for the sum, and [[cex-limsup-subadditivity-strict]] and
+[[cex-limsup-product-strict]] exhibit strict inequality in each case.
 
 **The ratio-to-root chain, and the standard limits.**
 [[thm-ratio-root-inequality]] proves

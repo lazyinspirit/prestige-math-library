@@ -36,8 +36,9 @@ only if $K$ is closed ([[def-open-and-closed-in-r]]) and bounded
 ([[def-bounded-set]]).
 
 This is the Heine-Borel theorem in the form used everywhere below. The forward
-implication is [[lem-compact-implies-closed-and-bounded-r]] and holds in any
-Archimedean ordered field; the backward implication rests on
+implication is [[lem-compact-implies-closed-and-bounded-r]] and spends no
+completeness, only the Archimedean property and the existence of maxima of
+finite sets; the backward implication rests on
 [[thm-heine-borel-r]] and therefore on the completeness of $\mathbb{R}$, and the
 remarks below record where it fails without completeness.
 
