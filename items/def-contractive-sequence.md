@@ -77,8 +77,10 @@ Nothing in the definition forces the gaps to be positive.
   bound both fall out of a hypothesis that never mentions the limit.
 
 - **Contractive implies the gaps are null but not conversely.** From the
-  definition the gaps satisfy $|x_{k+1} - x_k| \le c^{k-1}|x_2 - x_1|$, which
-  tends to $0$ ([[lem-geometric-sequence-null]]). The converse implication fails
+  definition the gaps satisfy $|x_{k+1} - x_k| \le c^{k-1}|x_2 - x_1|$ for
+  $k \ge 1$, which tends to $0$ ([[lem-geometric-sequence-null]]); the first
+  gap $|x_1 - x_0|$ is unconstrained, having no predecessor
+  ([[thm-contractive-implies-cauchy]]). The converse implication fails
   badly: gaps tending to $0$ do not even give a Cauchy sequence, which is
   [[fs-consecutive-differences-null-implies-cauchy]].
 
