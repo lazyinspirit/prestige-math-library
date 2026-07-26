@@ -11,7 +11,7 @@ A **load bearing** entry is one the citing item actually uses in its proof, so
 that item and everything depending on it rests on later material and is marked
 as such by the renderer. Everything else is orientation only.
 
-**0 open, 110 closed, 0 load bearing, 0 item(s) resting on later material.**
+**0 open, 128 closed, 0 load bearing, 0 item(s) resting on later material.**
 
 ## Open, grouped by the page that will close them
 
@@ -27,13 +27,25 @@ _None. Every forward reference in the repo resolves._
 - `def-chain-complete-poset` -> `ex-powerset-is-chain-complete` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `def-choice-function` -> `ex-canonical-choice-on-naturals` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `def-choice-function` -> `ex-russells-socks` (on `order-zorn-and-the-axiom-of-choice-examples`)
+- `def-contractive-sequence` -> `ex-contractive-sequence-fixed-point` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `def-contractive-sequence` -> `cex-strictly-decreasing-gaps-no-limit` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `def-maximal-element` -> `cex-maximal-not-greatest` (on `order-zorn-and-the-axiom-of-choice-examples`)
+- `def-subsequential-limit` -> `ex-two-subsequential-limits` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `def-subsequential-limit` -> `cex-unbounded-with-convergent-subsequence` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `ex-canonical-choice-on-naturals` -> `thm-well-ordering-theorem` (on `ordinals-and-transfinite-recursion`)
 - `ex-canonical-choice-on-naturals` -> `lem-pigeonhole` (on `countability-and-uncountability`)
+- `fs-consecutive-differences-null-implies-cauchy` -> `cex-sqrt-k-differences-null-not-cauchy` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `fs-consecutive-differences-null-implies-cauchy` -> `cex-strictly-decreasing-gaps-no-limit` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `fs-convergent-subsequence-implies-bounded` -> `cex-unbounded-with-convergent-subsequence` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `fs-nested-open-intervals-nonempty` -> `ex-nested-intervals-single-point` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `fs-nested-open-intervals-nonempty` -> `cex-nested-open-intervals-empty` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `fs-zorn-provable-in-zf` -> `rem-choice-strengths` (on `filters-and-ultrafilters`)
+- `lem-alternating-sequence` -> `ex-two-subsequential-limits` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `lem-alternating-sequence` -> `cex-unbounded-with-convergent-subsequence` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `lem-finite-choice` -> `ex-finite-choice-by-induction` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `lem-finite-choice` -> `ex-russells-socks` (on `order-zorn-and-the-axiom-of-choice-examples`)
 - `lem-finite-set-has-max` -> `def-countable` (on `countability-and-uncountability`)
+- `lem-geometric-sequence-null` -> `cex-cauchy-rationals-no-rational-limit` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `lem-nat-order-is-membership` -> `def-ordinal` (on `ordinals-and-transfinite-recursion`)
 - `lem-nat-order-is-membership` -> `lem-omega-least-limit-ordinal` (on `ordinals-and-transfinite-recursion`)
 - `lem-pigeonhole` -> `def-cardinal` (on `ordinals-and-transfinite-recursion`)
@@ -127,5 +139,11 @@ _None. Every forward reference in the repo resolves._
 - `rem-vitali-non-measurable-set` -> `def-axiom-of-choice` (on `order-zorn-and-the-axiom-of-choice`)
 - `rem-vitali-non-measurable-set` -> `rem-choice-ledger` (on `ordinals-and-transfinite-recursion`)
 - `rem-weak-and-weak-star-topologies` -> `def-filter` (on `filters-and-ultrafilters`)
+- `thm-bolzano-weierstrass` -> `cex-unbounded-with-convergent-subsequence` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `thm-bourbaki-witt` -> `cex-progressive-map-without-fixed-point` (on `order-zorn-and-the-axiom-of-choice-examples`)
+- `thm-contractive-implies-cauchy` -> `ex-contractive-sequence-fixed-point` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `thm-contractive-implies-cauchy` -> `cex-strictly-decreasing-gaps-no-limit` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `thm-nested-interval-property` -> `ex-nested-intervals-single-point` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `thm-nested-interval-property` -> `cex-nested-open-intervals-empty` (on `monotone-sequences-and-cauchy-completeness-examples`)
+- `thm-nested-interval-property` -> `cex-nested-unbounded-closed-empty` (on `monotone-sequences-and-cauchy-completeness-examples`)
 - `thm-zorn` -> `cex-zorn-hypothesis-fails` (on `order-zorn-and-the-axiom-of-choice-examples`)
