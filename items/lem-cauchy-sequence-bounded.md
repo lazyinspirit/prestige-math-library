@@ -2,7 +2,7 @@
 id: lem-cauchy-sequence-bounded
 kind: lemma
 title: "Every Cauchy sequence of reals is bounded"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, lem-finite-set-has-max, lem-of-triangle-inequality, def-max-min, lem-rat-embeds-dense, lem-of-add-order, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

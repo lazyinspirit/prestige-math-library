@@ -2,7 +2,7 @@
 id: ex-contractive-sequence-fixed-point
 kind: example
 title: "The sequence $x_{k+1} = (x_k + 1)/3$ is contractive with $c = 1/3$ and converges to $1/2$"
-status: draft
+status: published
 origin: session
 deps: [thm-contractive-implies-cauchy, def-contractive-sequence, thm-algebra-of-limits, lem-limit-of-tail, lem-limit-unique, thm-recursion, def-sequence, def-real-limit, lem-of-abs-value, lem-of-inverse-positive, prop-of-reciprocal-order, cor-of-one-positive, lem-of-add-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

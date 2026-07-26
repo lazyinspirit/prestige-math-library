@@ -2,7 +2,7 @@
 id: rem-completeness-routes
 kind: remark
 title: "Two independent proofs that $\\mathbb{R}$ is Cauchy complete, and why the library records both"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-criterion-via-lub, thm-reals-cauchy-complete, thm-bolzano-weierstrass, thm-nested-interval-property, def-complete-ordered-field]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

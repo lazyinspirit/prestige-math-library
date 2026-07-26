@@ -2,7 +2,7 @@
 id: thm-bolzano-weierstrass
 kind: theorem
 title: "Bolzano-Weierstrass: every bounded real sequence has a convergent subsequence"
-status: draft
+status: published
 origin: session
 deps: [lem-peak-monotone-subsequence, cor-monotone-converges-iff-bounded, def-subsequential-limit, def-sequence, def-monotone-sequence]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

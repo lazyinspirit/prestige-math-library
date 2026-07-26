@@ -2,7 +2,7 @@
 id: fs-nested-open-intervals-nonempty
 kind: false-statement
 title: "FALSE: a nested sequence of nonempty bounded open intervals has nonempty intersection"
-status: draft
+status: published
 origin: session
 deps: [thm-nested-interval-property, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

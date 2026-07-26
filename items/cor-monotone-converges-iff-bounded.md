@@ -2,7 +2,7 @@
 id: cor-monotone-converges-iff-bounded
 kind: corollary
 title: "A monotone sequence converges if and only if it is bounded"
-status: draft
+status: published
 origin: session
 deps: [thm-monotone-convergence, lem-convergent-implies-bounded, def-monotone-sequence, def-bounded-set, def-sequence, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

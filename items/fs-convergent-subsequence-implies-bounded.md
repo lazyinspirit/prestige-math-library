@@ -2,7 +2,7 @@
 id: fs-convergent-subsequence-implies-bounded
 kind: false-statement
 title: "FALSE: a sequence with a convergent subsequence is bounded (the converse of Bolzano-Weierstrass)"
-status: draft
+status: published
 origin: session
 deps: [thm-bolzano-weierstrass, lem-alternating-sequence, def-subsequential-limit, def-sequence, def-real-limit, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

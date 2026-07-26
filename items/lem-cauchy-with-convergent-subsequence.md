@@ -2,7 +2,7 @@
 id: lem-cauchy-with-convergent-subsequence
 kind: lemma
 title: "A Cauchy sequence with a convergent subsequence converges, to that subsequence’s limit"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, def-subsequential-limit, lem-index-map-grows, lem-of-triangle-inequality, lem-rat-embeds-dense, thm-nat-linear-order]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-nested-unbounded-closed-empty
 kind: counterexample
 title: "The nested closed unbounded sets $[k, \\infty)$ have empty intersection, so boundedness cannot be dropped"
-status: draft
+status: published
 origin: session
 deps: [thm-nested-interval-property, def-interval, thm-of-archimedean, lem-of-naturals-positive, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

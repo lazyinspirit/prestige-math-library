@@ -2,7 +2,7 @@
 id: def-subsequential-limit
 kind: definition
 title: "Subsequential limit of a real sequence, and the subsequential limit set"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-limit, lem-index-map-grows]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

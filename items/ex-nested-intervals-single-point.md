@@ -2,7 +2,7 @@
 id: ex-nested-intervals-single-point
 kind: example
 title: "The nested intervals $[0, 1/k]$ intersect in exactly $\\{0\\}$"
-status: draft
+status: published
 origin: session
 deps: [thm-nested-interval-property, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-sequence, def-real-limit, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-recursive-sqrt-two-plus-x
 kind: example
 title: "The sequence $x_1 = 1$, $x_{k+1} = \\sqrt{2 + x_k}$ increases to $2$"
-status: draft
+status: published
 origin: session
 deps: [thm-monotone-convergence, def-monotone-sequence, thm-of-square-roots, thm-algebra-of-limits, lem-limit-of-tail, lem-limit-preserves-order, lem-power-monotone, lem-limit-unique, thm-recursion, def-sequence, def-real-limit, def-integer-power, def-bounded-set, lem-of-no-zero-divisors, cor-of-one-positive, lem-of-add-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

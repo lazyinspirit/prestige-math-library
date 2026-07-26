@@ -2,7 +2,7 @@
 id: fs-consecutive-differences-null-implies-cauchy
 kind: false-statement
 title: "FALSE: if $|x_{k+1} - x_k| \\to 0$ then $(x_k)$ is Cauchy"
-status: draft
+status: published
 origin: session
 deps: [def-real-limit, def-sequence, def-contractive-sequence, thm-contractive-implies-cauchy, thm-of-square-roots, lem-power-difference-factorisation, lem-power-monotone, lem-power-laws, def-integer-power, lem-of-inverse-positive, cor-archimedean-reciprocal, thm-of-archimedean, lem-cauchy-sequence-bounded, lem-of-abs-value, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-monotone-convergence
 kind: theorem
 title: "A nondecreasing sequence bounded above converges to the supremum of its range, and a nonincreasing sequence bounded below to the infimum"
-status: draft
+status: published
 origin: session
 deps: [def-monotone-sequence, def-sequence, def-real-limit, def-complete-ordered-field, def-bounded-set, lem-sup-epsilon, lem-sup-unique, lem-inf-epsilon, thm-infimum-property, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

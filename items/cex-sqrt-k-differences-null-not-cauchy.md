@@ -2,7 +2,7 @@
 id: cex-sqrt-k-differences-null-not-cauchy
 kind: counterexample
 title: "$x_k = \\sqrt{k}$ has $x_{k+1} - x_k \\to 0$ and is not Cauchy"
-status: draft
+status: published
 origin: session
 deps: [fs-consecutive-differences-null-implies-cauchy, thm-of-square-roots, def-real-limit, def-sequence, def-divergence-to-infinity, cor-archimedean-reciprocal, thm-of-archimedean, lem-cauchy-sequence-bounded, lem-power-difference-factorisation, lem-power-monotone, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-integer-power, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

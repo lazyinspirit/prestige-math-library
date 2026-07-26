@@ -2,7 +2,7 @@
 id: cex-nested-open-intervals-empty
 kind: counterexample
 title: "The nested open intervals $(0, 1/k)$ have empty intersection"
-status: draft
+status: published
 origin: session
 deps: [fs-nested-open-intervals-nonempty, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, thm-nested-interval-property, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

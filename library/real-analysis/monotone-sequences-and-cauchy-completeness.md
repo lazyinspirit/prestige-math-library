@@ -1,7 +1,7 @@
 ---
 page: monotone-sequences-and-cauchy-completeness
 title: "Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness"
-status: draft
+status: published
 items: [def-interval, def-monotone-sequence, thm-monotone-convergence,
         lem-monotone-unbounded-diverges, cor-monotone-converges-iff-bounded,
         thm-nested-interval-property, def-subsequential-limit,

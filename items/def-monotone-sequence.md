@@ -2,7 +2,7 @@
 id: def-monotone-sequence
 kind: definition
 title: "Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-order, def-complete-ordered-field, def-bounded-set, def-nat-order, thm-nat-linear-order, lem-nat-discrete, thm-induction-principle]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

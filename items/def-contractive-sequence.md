@@ -2,7 +2,7 @@
 id: def-contractive-sequence
 kind: definition
 title: "Contractive sequence: $|x_{k+2} - x_{k+1}| \\le c\\,|x_{k+1} - x_k|$ for a fixed $0 < c < 1$"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-real-order, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

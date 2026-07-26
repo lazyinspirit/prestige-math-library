@@ -12,8 +12,8 @@ items: [def-field, def-ordered-field, def-abs-value, def-archimedean-field,
         lem-of-triangle-inequality, cor-of-reverse-triangle,
         lem-of-square-monotone, prop-of-reciprocal-order, prop-of-product-sign,
         prop-of-multiply-inequalities, prop-of-ab-less-b,
-        lem-of-naturals-positive, thm-of-archimedean, lem-of-q-embeds,
-        lem-of-q-dense, thm-of-square-roots,
+        lem-of-naturals-positive, thm-of-archimedean, cor-archimedean-reciprocal,
+        lem-of-q-embeds, lem-of-q-dense, thm-of-square-roots,
         lem-of-hom-fixes-q, lem-of-hom-order-preserving,
         thm-uniqueness-complete-ordered-field, lem-cauchy-reals-archimedean,
         cor-cauchy-reals-lub-complete, thm-equivalence-of-constructions]
@@ -64,7 +64,11 @@ including $0 < ab < b \iff 0 < a < 1$ for $a, b > 0$ ([[prop-of-ab-less-b]]).
 **Square roots and the Archimedean property.** Completeness does the two things
 $\mathbb{Q}$ could not. It makes the field **Archimedean**
 ([[thm-of-archimedean]]), so the integers are cofinal and the rationals are dense
-([[lem-of-q-dense]]); and it supplies **square roots**: every nonnegative element
+([[lem-of-q-dense]]). The cofinal form is not quite the form analysis uses, so the
+**reciprocal form** is recorded separately: for every $\varepsilon > 0$ there is a
+natural $n \ge 1$ with $1/n < \varepsilon$ ([[cor-archimedean-reciprocal]]). That
+is the statement every convergence proof reaches for, and having it once spares
+each of them the inversion step. Completeness also supplies **square roots**: every nonnegative element
 has a unique nonnegative square root ([[thm-of-square-roots]]), so the positive
 elements are exactly the nonzero squares. That last fact is the hinge of the
 uniqueness proof, since a field homomorphism preserves squares and therefore

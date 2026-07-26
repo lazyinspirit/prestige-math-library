@@ -2,7 +2,7 @@
 id: thm-contractive-implies-cauchy
 kind: theorem
 title: "Every contractive sequence is Cauchy, hence converges, with error bound $|x - x_k| \\le c^{k-1}|x_2 - x_1|/(1-c)$ for $k \\ge 1$"
-status: draft
+status: published
 origin: session
 deps: [def-contractive-sequence, thm-cauchy-criterion-via-lub, lem-geometric-sequence-null, def-integer-power, lem-power-laws, lem-power-monotone, lem-power-difference-factorisation, lem-triangle-inequality-finite, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-real-limit, def-sequence, thm-algebra-of-limits, lem-limit-abs, lem-limit-preserves-order, lem-limit-of-tail, lem-of-inverse-positive, lem-of-abs-value, prop-of-multiply-inequalities, thm-nat-linear-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

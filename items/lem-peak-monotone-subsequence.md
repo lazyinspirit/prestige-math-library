@@ -2,7 +2,7 @@
 id: lem-peak-monotone-subsequence
 kind: lemma
 title: "Every real sequence has a monotone subsequence (the peak / rising-sun lemma)"
-status: draft
+status: published
 origin: session
 deps: [def-sequence, def-monotone-sequence, def-real-order, def-complete-ordered-field, def-ordered-field, lem-index-map-grows, thm-recursion, thm-well-ordering-principle, def-nat-order, thm-nat-linear-order, lem-nat-discrete]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

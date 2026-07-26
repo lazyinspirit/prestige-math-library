@@ -2,7 +2,7 @@
 id: thm-cauchy-criterion-via-lub
 kind: theorem
 title: "The Cauchy criterion from the least-upper-bound property: in a complete ordered field every Cauchy sequence converges"
-status: draft
+status: published
 origin: session
 deps: [lem-cauchy-sequence-bounded, thm-bolzano-weierstrass, lem-cauchy-with-convergent-subsequence, def-real-limit, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

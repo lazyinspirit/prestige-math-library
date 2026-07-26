@@ -2,7 +2,7 @@
 id: ex-two-subsequential-limits
 kind: example
 title: "The sequence $(-1)^k(1 + 1/k)$ is bounded with subsequential limit set exactly $\\{-1, 1\\}$"
-status: draft
+status: published
 origin: session
 deps: [lem-alternating-sequence, def-subsequential-limit, thm-algebra-of-limits, lem-subsequence-inherits-limit, lem-limit-abs, lem-limit-unique, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-abs-value, def-sequence, def-real-limit, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

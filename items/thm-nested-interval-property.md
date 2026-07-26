@@ -2,7 +2,7 @@
 id: thm-nested-interval-property
 kind: theorem
 title: "A nested sequence of nonempty closed bounded intervals has nonempty intersection, and the intersection is a single point exactly when the lengths tend to $0$"
-status: draft
+status: published
 origin: session
 deps: [def-interval, def-monotone-sequence, thm-monotone-convergence, def-complete-ordered-field, lem-sup-unique, thm-infimum-property, def-bounded-set, def-real-limit, def-sequence, thm-algebra-of-limits, lem-limit-unique, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

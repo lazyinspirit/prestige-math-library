@@ -2,7 +2,7 @@
 id: def-interval
 kind: definition
 title: "Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length"
-status: draft
+status: published
 origin: session
 deps: [def-complete-ordered-field, def-ordered-field, def-real-order, def-bounded-set]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

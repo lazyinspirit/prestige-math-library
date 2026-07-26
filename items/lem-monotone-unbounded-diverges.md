@@ -2,7 +2,7 @@
 id: lem-monotone-unbounded-diverges
 kind: lemma
 title: "A nondecreasing sequence that is not bounded above diverges to $+\\infty$"
-status: draft
+status: published
 origin: session
 deps: [def-monotone-sequence, def-divergence-to-infinity, def-sequence, def-bounded-set, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

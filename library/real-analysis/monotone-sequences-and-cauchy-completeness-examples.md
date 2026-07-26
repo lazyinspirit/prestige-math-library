@@ -1,7 +1,7 @@
 ---
 page: monotone-sequences-and-cauchy-completeness-examples
 title: "Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-babylonian-sqrt-two, ex-recursive-sqrt-two-plus-x,
            ex-nested-intervals-single-point, ex-two-subsequential-limits,
