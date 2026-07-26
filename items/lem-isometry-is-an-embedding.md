@@ -2,7 +2,7 @@
 id: lem-isometry-is-an-embedding
 kind: lemma
 title: "An isometric embedding is injective and carries the metric topology of the source onto the subspace topology of its image"
-status: draft
+status: published
 origin: session
 deps: [def-isometry-and-metric-embedding, def-metric-continuity,
        thm-metric-continuity-characterisations, def-metric-ball, def-metric-topology,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

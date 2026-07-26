@@ -2,7 +2,7 @@
 id: thm-heine-borel-r
 kind: theorem
 title: "Heine-Borel by bisection: every closed bounded interval $[a,b]$ is compact"
-status: draft
+status: published
 origin: session
 deps: [def-open-cover-r, def-interval, thm-nested-interval-property, def-complete-ordered-field, thm-recursion, cor-archimedean-reciprocal, thm-of-archimedean, def-neighbourhood-r, def-open-and-closed-in-r, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

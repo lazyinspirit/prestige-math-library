@@ -2,7 +2,7 @@
 id: cex-zero-times-infinity-indeterminate
 kind: counterexample
 title: "Null times divergent has no rule: $x_k = 1/k$ with $y_k = ck$ gives product limit $c$, and with $y_k = k^2$ gives divergence"
-status: draft
+status: published
 origin: session
 deps: [def-extended-reals, def-divergence-to-infinity, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-limit-unique, lem-convergent-implies-bounded, def-real-limit, def-sequence, def-integer-power, lem-of-sign-rules, lem-of-add-order, cor-of-one-positive, def-nat-order, thm-nat-linear-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

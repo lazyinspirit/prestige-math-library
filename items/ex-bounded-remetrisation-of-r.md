@@ -2,7 +2,7 @@
 id: ex-bounded-remetrisation-of-r
 kind: example
 title: "$\\min(|x-y|, 1)$ on $\\mathbb{R}$ has the usual topology and diameter at most $1$"
-status: draft
+status: published
 origin: session
 deps: [lem-bounded-remetrisation, def-equivalent-metrics, def-metric-bounded-diameter,
        def-max-min, lem-real-line-is-a-metric-space, thm-metric-equivalence-hierarchy,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

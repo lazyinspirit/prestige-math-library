@@ -2,7 +2,7 @@
 id: cex-unbounded-closed-set-not-compact
 kind: counterexample
 title: "$\\mathbb{Z}$ is closed and not compact, and $(0,1)$ is bounded and not compact: neither hypothesis of Heine-Borel can be dropped"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-characterisation-r, def-open-cover-r, def-integers, thm-of-archimedean, def-interval, lem-of-q-embeds, lem-of-naturals-positive, lem-of-triangle-inequality, lem-of-abs-value, lem-finite-set-has-max, def-max-min, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

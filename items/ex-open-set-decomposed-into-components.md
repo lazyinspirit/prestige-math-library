@@ -2,7 +2,7 @@
 id: ex-open-set-decomposed-into-components
 kind: example
 title: "An explicit open subset of $\\mathbb{R}$ written as the disjoint union of its component intervals"
-status: draft
+status: published
 origin: session
 deps: [thm-open-subsets-of-r-structure, def-interval, def-open-and-closed-in-r, thm-open-set-algebra-r]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

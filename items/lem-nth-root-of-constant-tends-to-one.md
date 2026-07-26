@@ -2,7 +2,7 @@
 id: lem-nth-root-of-constant-tends-to-one
 kind: lemma
 title: "For every $a > 0$, $a^{1/n} \\to 1$"
-status: draft
+status: published
 origin: session
 deps: [thm-nth-roots-exist, lem-bernoulli-inequality, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-squeeze, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-sign-rules, lem-of-add-order, def-real-limit, def-sequence, def-integer-power, def-ordered-field, def-complete-ordered-field, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-metric-hausdorff-separation
 kind: theorem
 title: "Distinct points of a metric space have disjoint balls around them"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball, def-metric-topology, lem-of-add-order,
        lem-metric-nonnegativity, thm-metric-open-set-algebra, cor-of-one-positive,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

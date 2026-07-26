@@ -2,7 +2,7 @@
 id: rem-metric-axiom-conventions
 kind: remark
 title: "Which metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, lem-metric-nonnegativity, rem-sup-conventions,
        def-complete-ordered-field]
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

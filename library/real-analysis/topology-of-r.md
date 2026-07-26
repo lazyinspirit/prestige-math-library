@@ -1,7 +1,7 @@
 ---
 page: topology-of-r
 title: "Topology of $\\mathbb{R}$"
-status: draft
+status: published
 items: [def-neighbourhood-r, def-open-and-closed-in-r, thm-open-set-algebra-r,
         def-interior-closure-boundary-r, def-limit-point-r,
         thm-closure-characterisations-r,

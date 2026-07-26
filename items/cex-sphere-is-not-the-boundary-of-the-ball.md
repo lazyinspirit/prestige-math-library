@@ -2,7 +2,7 @@
 id: cex-sphere-is-not-the-boundary-of-the-ball
 kind: counterexample
 title: "In the discrete metric the boundary of $B(p,1)$ is empty while the sphere of radius $1$ is everything but $p$"
-status: draft
+status: published
 origin: session
 deps: [ex-discrete-metric, def-metric-ball, def-metric-interior-closure-boundary,
        def-metric-topology, thm-metric-closure-characterisation, def-metric-space]
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

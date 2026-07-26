@@ -2,7 +2,7 @@
 id: lem-metric-reverse-triangle
 kind: lemma
 title: "The reverse triangle inequality $|d(x,z) - d(y,z)| \\le d(x,y)$ in any metric space"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, lem-of-abs-value, lem-of-add-order, def-ordered-field,
        def-abs-value, def-complete-ordered-field]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

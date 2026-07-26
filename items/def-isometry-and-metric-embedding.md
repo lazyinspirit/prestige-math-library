@@ -2,7 +2,7 @@
 id: def-isometry-and-metric-embedding
 kind: definition
 title: "Isometry, isometric embedding, and the subspace metric on a subset"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-topology, def-injection-surjection-bijection,
        def-metric-ball]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

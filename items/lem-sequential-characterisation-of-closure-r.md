@@ -2,7 +2,7 @@
 id: lem-sequential-characterisation-of-closure-r
 kind: lemma
 title: "A point lies in the closure of $A \\subseteq \\mathbb{R}$ iff some sequence in $A$ converges to it, so a subset of $\\mathbb{R}$ is closed iff it is sequentially closed"
-status: draft
+status: published
 origin: session
 deps: [thm-closure-characterisations-r, def-limit-point-r, def-real-limit, def-sequence, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, def-countable-choice, def-neighbourhood-r, def-interior-closure-boundary-r, def-open-and-closed-in-r]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

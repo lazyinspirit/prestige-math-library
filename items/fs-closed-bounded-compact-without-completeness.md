@@ -2,7 +2,7 @@
 id: fs-closed-bounded-compact-without-completeness
 kind: false-statement
 title: "FALSE: in every ordered field a closed bounded set is compact, so Heine-Borel needs no completeness"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-characterisation-r, def-open-cover-r, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, def-rationals, thm-rat-ordered-field, thm-rat-field, fs-sqrt2-rational, def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-square-monotone, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, lem-of-inverse-positive]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

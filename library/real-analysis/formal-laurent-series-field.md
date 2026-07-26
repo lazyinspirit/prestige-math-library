@@ -1,7 +1,7 @@
 ---
 page: formal-laurent-series-field
 title: "The Formal Laurent Series Field $\\mathbb{R}((t^{-1}))$: Cauchy Complete, Non-Archimedean, Not Complete"
-status: draft
+status: published
 items: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation,
         thm-laurent-series-field, thm-laurent-ordered-field,
         lem-laurent-non-archimedean, cor-laurent-not-lub-complete,

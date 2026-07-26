@@ -2,7 +2,7 @@
 id: def-metric-continuity
 kind: definition
 title: "Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

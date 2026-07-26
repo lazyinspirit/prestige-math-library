@@ -2,7 +2,7 @@
 id: fs-every-set-is-open-or-closed
 kind: false-statement
 title: "FALSE: every subset of $\\mathbb{R}$ is either open or closed"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-interval, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

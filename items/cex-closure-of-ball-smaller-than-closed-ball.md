@@ -2,7 +2,7 @@
 id: cex-closure-of-ball-smaller-than-closed-ball
 kind: counterexample
 title: "In $\\{0\\} \\cup [1,2]$ with the metric of $\\mathbb{R}$, the closure of $B(0,1) = \\{0\\}$ is $\\{0\\}$ while the closed ball is $\\{0,1\\}$"
-status: draft
+status: published
 origin: session
 deps: [fs-closed-ball-is-the-closure-of-the-open-ball, def-metric-ball,
        thm-metric-closure-characterisation, def-interval, def-isometry-and-metric-embedding,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

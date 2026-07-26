@@ -2,7 +2,7 @@
 id: def-interior-closure-boundary-r
 kind: definition
 title: "Interior, closure, boundary and exterior of a subset of $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, thm-open-set-algebra-r]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

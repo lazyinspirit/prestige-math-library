@@ -2,7 +2,7 @@
 id: fs-arbitrary-intersection-of-open-is-open
 kind: false-statement
 title: "FALSE: an arbitrary intersection of open subsets of $\\mathbb{R}$ is open"
-status: draft
+status: published
 origin: session
 deps: [thm-open-set-algebra-r, def-open-and-closed-in-r, cor-archimedean-reciprocal, thm-of-archimedean, def-neighbourhood-r, def-interval, lem-of-abs-value, lem-of-naturals-positive, lem-of-inverse-positive, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

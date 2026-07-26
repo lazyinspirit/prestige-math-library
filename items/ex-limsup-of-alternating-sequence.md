@@ -2,7 +2,7 @@
 id: ex-limsup-of-alternating-sequence
 kind: example
 title: "$(-1)^k$ has $\\liminf = -1$ and $\\limsup = 1$, so it does not converge"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, thm-convergence-iff-limsup-equals-liminf, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

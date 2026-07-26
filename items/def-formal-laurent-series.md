@@ -2,7 +2,7 @@
 id: def-formal-laurent-series
 kind: definition
 title: "The formal Laurent series $\\mathbb{R}((t^{-1}))$: support bounded below, valuation, leading coefficient"
-status: draft
+status: published
 origin: session
 deps: [def-real-numbers, thm-reals-ordered-field, def-integers, def-int-order, def-int-operations, thm-int-ordered-ring, def-field, def-ordered-field]
 justified_by: [lem-laurent-series-ring, thm-laurent-series-field, thm-laurent-ordered-field]
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

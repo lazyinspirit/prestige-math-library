@@ -2,7 +2,7 @@
 id: lem-limsup-reflection
 kind: lemma
 title: "$\\limsup(-x_k) = -\\liminf(x_k)$, with the reflection of $\\overline{\\mathbb{R}}$ exchanging $\\pm\\infty$"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, lem-limsup-exists, def-extended-reals, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-sequence]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

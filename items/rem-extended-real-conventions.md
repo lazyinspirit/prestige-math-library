@@ -2,7 +2,7 @@
 id: rem-extended-real-conventions
 kind: remark
 title: "Which extended-real operations this library leaves undefined, and where each $\\limsup$ statement needs the hypothesis"
-status: draft
+status: published
 origin: session
 deps: [def-extended-reals, def-limsup-liminf, thm-limsup-subadditive, thm-limsup-submultiplicative, rem-sup-conventions, lem-extended-reals-complete]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

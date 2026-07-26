@@ -2,7 +2,7 @@
 id: thm-subsequential-limit-set-closed
 kind: theorem
 title: "If each $y_j$ is a subsequential limit of $(x_k)$ and $y_j \\to y \\in \\mathbb{R}$, then $y$ is a subsequential limit of $(x_k)$"
-status: draft
+status: published
 origin: session
 deps: [def-subsequential-limit, def-real-limit, def-sequence, thm-recursion, thm-well-ordering-principle, lem-index-map-grows, lem-of-triangle-inequality, lem-of-abs-value, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

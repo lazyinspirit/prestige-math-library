@@ -2,7 +2,7 @@
 id: thm-open-set-algebra-r
 kind: theorem
 title: "Arbitrary unions and finite intersections of open subsets of $\\mathbb{R}$ are open, and dually for closed sets"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-interval, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

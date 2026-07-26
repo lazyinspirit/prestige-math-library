@@ -2,7 +2,7 @@
 id: rem-r-native-topology-scope
 kind: remark
 title: "Which results on this page use the order of $\\mathbb{R}$ and therefore have no general-topological analogue"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-topology, def-metric-ball, lem-real-line-is-a-metric-space,
        def-metric-interior-closure-boundary, thm-metric-closure-characterisation,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

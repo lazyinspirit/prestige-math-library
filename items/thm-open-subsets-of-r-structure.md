@@ -2,7 +2,7 @@
 id: thm-open-subsets-of-r-structure
 kind: theorem
 title: "Every open subset of $\\mathbb{R}$ is a countable disjoint union of open intervals, namely its order components"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, def-interval, def-complete-ordered-field, lem-sup-epsilon, lem-inf-epsilon, thm-infimum-property, def-infimum, lem-sup-unique, def-bounded-set, lem-rat-embeds-dense, thm-rationals-countable, lem-subset-of-countable, def-countable, def-injection-surjection-bijection, def-equinumerous, thm-well-ordering-principle, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

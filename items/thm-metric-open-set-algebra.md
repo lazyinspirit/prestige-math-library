@@ -2,7 +2,7 @@
 id: thm-metric-open-set-algebra
 kind: theorem
 title: "Arbitrary unions and finite intersections of open sets are open, open balls are open and closed balls are closed"
-status: draft
+status: published
 origin: session
 deps: [def-metric-topology, def-metric-ball, lem-finite-set-has-max, def-max-min,
        lem-of-add-order, def-metric-space, lem-metric-reverse-triangle,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

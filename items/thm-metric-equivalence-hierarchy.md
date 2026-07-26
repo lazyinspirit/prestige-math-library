@@ -2,7 +2,7 @@
 id: thm-metric-equivalence-hierarchy
 kind: theorem
 title: "Lipschitz equivalence implies uniform equivalence implies topological equivalence"
-status: draft
+status: published
 origin: session
 deps: [def-equivalent-metrics, def-metric-topology, thm-metric-continuity-characterisations,
        def-metric-ball, def-metric-continuity, def-metric-space, lem-of-inverse-positive,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

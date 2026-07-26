@@ -2,7 +2,7 @@
 id: ex-closure-interior-boundary-of-q
 kind: example
 title: "$\\mathbb{Q}$ has closure $\\mathbb{R}$, empty interior, and boundary $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-interior-closure-boundary-r, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-neighbourhood-r, def-interval, lem-rat-embeds-dense, def-limit-point-r]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

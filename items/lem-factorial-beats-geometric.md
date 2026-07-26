@@ -2,7 +2,7 @@
 id: lem-factorial-beats-geometric
 kind: lemma
 title: "For every real $x$, $x^k/k! \\to 0$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, lem-finite-sum-laws, def-integer-power, lem-power-laws, lem-power-monotone, lem-geometric-sequence-null, thm-of-archimedean, thm-squeeze, thm-algebra-of-limits, lem-limit-of-tail, def-real-limit, def-sequence, lem-of-abs-value, thm-induction-principle, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, prop-of-multiply-inequalities, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-metric-ball-neighbourhood-base
 kind: lemma
 title: "The balls $B(x, 1/n)$, $n \\ge 1$, form a countable neighbourhood base at $x$, so every metric space is first countable"
-status: draft
+status: published
 origin: session
 deps: [def-metric-ball, def-metric-topology, cor-archimedean-reciprocal, thm-of-archimedean,
        lem-of-inverse-positive, def-natural-numbers, def-countable, def-equinumerous,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

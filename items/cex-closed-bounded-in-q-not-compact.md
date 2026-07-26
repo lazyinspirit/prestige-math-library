@@ -2,7 +2,7 @@
 id: cex-closed-bounded-in-q-not-compact
 kind: counterexample
 title: "$\\{q \\in \\mathbb{Q} : q \\ge 0,\\ q^2 < 2\\}$ is closed and bounded in $\\mathbb{Q}$ and is not compact"
-status: draft
+status: published
 origin: session
 deps: [fs-closed-bounded-compact-without-completeness, def-rationals, fs-sqrt2-rational, thm-of-square-roots, def-open-cover-r, def-ordered-field, thm-rat-ordered-field, lem-of-square-monotone, def-abs-value, lem-of-abs-value]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

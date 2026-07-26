@@ -2,7 +2,7 @@
 id: cex-topologically-not-uniformly-equivalent
 kind: counterexample
 title: "On $(0,\\infty)$ the metrics $|x-y|$ and $|1/x - 1/y|$ have the same topology and are not uniformly equivalent"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-equivalence-hierarchy, def-equivalent-metrics, def-metric-space,
        thm-of-archimedean, lem-of-inverse-positive, cor-archimedean-reciprocal,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

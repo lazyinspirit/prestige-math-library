@@ -2,7 +2,7 @@
 id: lem-sup-metric-is-a-metric
 kind: lemma
 title: "The supremum metric $d_\\infty(f,g) = \\sup_x |f(x) - g(x)|$ is a metric on the bounded real-valued functions on a nonempty set"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-bounded-set, lem-sup-unique, def-complete-ordered-field,
        lem-of-triangle-inequality, lem-of-abs-value, def-abs-value,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

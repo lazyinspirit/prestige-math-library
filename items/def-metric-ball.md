@@ -2,7 +2,7 @@
 id: def-metric-ball
 kind: definition
 title: "Open ball, closed ball and sphere in a metric space"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-real-order, lem-metric-nonnegativity,
        def-complete-ordered-field, def-ordered-field]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

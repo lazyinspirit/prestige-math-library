@@ -2,7 +2,7 @@
 id: ex-reciprocals-with-zero-are-compact
 kind: example
 title: "$\\{1/k : k \\ge 1\\} \\cup \\{0\\}$ is compact while $\\{1/k : k \\ge 1\\}$ is not closed"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-characterisation-r, def-limit-point-r, thm-closure-characterisations-r, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

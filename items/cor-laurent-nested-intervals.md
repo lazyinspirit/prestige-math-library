@@ -2,7 +2,7 @@
 id: cor-laurent-nested-intervals
 kind: corollary
 title: "$\\mathbb{R}((t^{-1}))$ has the nested interval property for lengths tending to $0$"
-status: draft
+status: published
 origin: session
 deps: [def-sequences-in-an-ordered-field, thm-laurent-cauchy-complete, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-formal-laurent-series, def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-add-order, thm-induction-principle, def-nat-order, def-natural-numbers]
 aliases: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

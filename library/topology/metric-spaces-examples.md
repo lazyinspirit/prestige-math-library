@@ -1,7 +1,7 @@
 ---
 page: metric-spaces-examples
 title: "Metric Spaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-p-metrics-on-rn, ex-discrete-metric, ex-sup-metric-on-bounded-functions,
            ex-p-adic-ultrametric, ex-post-office-metric, ex-bounded-remetrisation-of-r,

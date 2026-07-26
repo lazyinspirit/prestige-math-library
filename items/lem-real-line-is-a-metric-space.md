@@ -2,7 +2,7 @@
 id: lem-real-line-is-a-metric-space
 kind: lemma
 title: "The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball, def-metric-topology, def-metric-bounded-diameter,
        def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-interval,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

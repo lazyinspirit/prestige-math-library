@@ -2,7 +2,7 @@
 id: cex-set-distance-is-not-a-metric
 kind: counterexample
 title: "$\\mathbb{Z}$ and $\\{n + 1/n : n \\ge 2\\}$ are disjoint closed subsets of $\\mathbb{R}$ at distance $0$, so the set-to-set distance is not a metric"
-status: draft
+status: published
 origin: session
 deps: [def-metric-bounded-diameter, def-metric-space, thm-metric-closure-characterisation,
        def-integers, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive,
@@ -26,6 +26,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

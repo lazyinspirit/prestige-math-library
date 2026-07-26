@@ -2,7 +2,7 @@
 id: thm-heine-borel-characterisation-r
 kind: theorem
 title: "A subset of $\\mathbb{R}$ is compact if and only if it is closed and bounded"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-r, lem-compact-implies-closed-and-bounded-r, def-open-cover-r, def-interval, def-bounded-set, def-open-and-closed-in-r]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

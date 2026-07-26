@@ -2,7 +2,7 @@
 id: def-metric-convergence
 kind: definition
 title: "Convergence of a sequence in a metric space: $x_k \\to x$ iff $d(x_k, x) \\to 0$ in $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-sequence, def-real-limit, def-subsequential-limit,
        lem-metric-nonnegativity, lem-rat-embeds-dense, def-natural-numbers,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

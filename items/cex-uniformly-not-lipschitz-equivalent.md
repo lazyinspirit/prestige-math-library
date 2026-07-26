@@ -2,7 +2,7 @@
 id: cex-uniformly-not-lipschitz-equivalent
 kind: counterexample
 title: "On $\\mathbb{R}$ the metrics $|x-y|$ and $\\min(|x-y|,1)$ are uniformly but not Lipschitz equivalent"
-status: draft
+status: published
 origin: session
 deps: [lem-bounded-remetrisation, thm-metric-equivalence-hierarchy, def-equivalent-metrics,
        thm-of-archimedean, def-max-min, lem-real-line-is-a-metric-space,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

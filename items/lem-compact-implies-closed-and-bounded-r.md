@@ -2,7 +2,7 @@
 id: lem-compact-implies-closed-and-bounded-r
 kind: lemma
 title: "A compact subset of $\\mathbb{R}$ is closed and bounded"
-status: draft
+status: published
 origin: session
 deps: [def-open-cover-r, def-open-and-closed-in-r, def-bounded-set, def-neighbourhood-r, def-interval, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-abs-value, lem-of-triangle-inequality, lem-finite-set-has-max, def-max-min, lem-of-naturals-positive, lem-of-inverse-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

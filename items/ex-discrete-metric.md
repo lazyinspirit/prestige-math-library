@@ -2,7 +2,7 @@
 id: ex-discrete-metric
 kind: example
 title: "The discrete metric induces the discrete topology, in which every subset is clopen"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra,
        lem-metric-nonnegativity, cor-of-one-positive, lem-of-add-order,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

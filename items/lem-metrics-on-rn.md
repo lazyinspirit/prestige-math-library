@@ -2,7 +2,7 @@
 id: lem-metrics-on-rn
 kind: lemma
 title: "$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-natural-numbers, def-finite-sum, thm-minkowski-finite,
        thm-cauchy-schwarz-finite, lem-finite-set-has-max, thm-of-square-roots,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

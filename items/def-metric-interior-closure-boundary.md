@@ -2,7 +2,7 @@
 id: def-metric-interior-closure-boundary
 kind: definition
 title: "Interior, closure, boundary, limit point, isolated point and dense subset of a metric space"
-status: draft
+status: published
 origin: session
 deps: [def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-metric-space]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-p-metrics-on-rn
 kind: example
 title: "The metrics $d_1$, $d_2$ and $d_\\infty$ on $\\mathbb{R}^n$ are metrics and are Lipschitz equivalent, with explicit constants"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-equivalent-metrics, thm-metric-equivalence-hierarchy,
        thm-cauchy-schwarz-finite, def-finite-sum, lem-finite-set-has-max,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-bounded-remetrisation
 kind: lemma
 title: "$\\min(d,1)$ and $d/(1+d)$ are metrics uniformly equivalent to $d$, so every metric space carries a bounded metric with the same topology"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-equivalent-metrics, thm-metric-equivalence-hierarchy,
        def-metric-bounded-diameter, lem-of-add-order, lem-of-inverse-positive,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

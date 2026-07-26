@@ -2,7 +2,7 @@
 id: thm-limsup-subadditive
 kind: theorem
 title: "$\\limsup(x_k + y_k) \\le \\limsup x_k + \\limsup y_k$ whenever the right-hand side is defined in $\\overline{\\mathbb{R}}$, and dually for $\\liminf$"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, lem-limsup-exists, lem-limsup-epsilon-characterisation, lem-limsup-reflection, lem-liminf-le-limsup, thm-convergence-iff-limsup-equals-liminf, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-divergence-to-infinity, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-add-order, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

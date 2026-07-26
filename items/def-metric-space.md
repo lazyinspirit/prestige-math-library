@@ -2,7 +2,7 @@
 id: def-metric-space
 kind: definition
 title: "Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric"
-status: draft
+status: published
 origin: session
 deps: [def-real-numbers, def-real-order, def-complete-ordered-field, def-ordered-field,
        def-max-min, lem-finite-set-has-max]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

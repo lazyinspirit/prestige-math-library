@@ -2,7 +2,7 @@
 id: ex-sup-metric-on-bounded-functions
 kind: example
 title: "The supremum metric $d_\\infty(f,g) = \\sup_x |f(x) - g(x)|$ on the bounded real-valued functions on a set"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-bounded-set, lem-sup-epsilon, lem-sup-unique,
        def-complete-ordered-field, lem-sup-metric-is-a-metric,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

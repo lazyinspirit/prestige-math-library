@@ -2,7 +2,7 @@
 id: fs-boundedness-is-a-topological-property
 kind: false-statement
 title: "FALSE: boundedness of a metric space is determined by its topology"
-status: draft
+status: published
 origin: session
 deps: [lem-bounded-remetrisation, def-metric-bounded-diameter, def-equivalent-metrics,
        def-metric-topology, lem-real-line-is-a-metric-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

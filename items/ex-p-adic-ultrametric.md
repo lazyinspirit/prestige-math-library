@@ -2,7 +2,7 @@
 id: ex-p-adic-ultrametric
 kind: example
 title: "The $2$-adic absolute value gives an ultrametric on $\\mathbb{Q}$, in which every triangle is isosceles and every point of a ball is a centre"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball, def-integers, def-rationals, def-integer-power,
        thm-strong-induction, lem-alternating-sequence, thm-induction-principle,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

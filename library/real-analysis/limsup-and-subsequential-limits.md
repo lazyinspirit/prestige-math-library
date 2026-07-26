@@ -1,7 +1,7 @@
 ---
 page: limsup-and-subsequential-limits
 title: "limsup, liminf, and Subsequential Limits"
-status: draft
+status: published
 items: [def-extended-reals, lem-extended-reals-complete, def-extended-limits,
         def-limsup-liminf, lem-limsup-exists, lem-limsup-reflection,
         lem-liminf-le-limsup, lem-limsup-epsilon-characterisation,

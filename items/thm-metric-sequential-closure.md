@@ -2,7 +2,7 @@
 id: thm-metric-sequential-closure
 kind: theorem
 title: "A point lies in the closure of $A$ iff some sequence in $A$ converges to it, and a set is closed iff it is sequentially closed"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-closure-characterisation, def-metric-convergence,
        lem-metric-ball-neighbourhood-base, def-countable-choice, def-metric-topology,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

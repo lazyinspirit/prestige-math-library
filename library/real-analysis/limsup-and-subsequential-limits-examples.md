@@ -1,7 +1,7 @@
 ---
 page: limsup-and-subsequential-limits-examples
 title: "limsup, liminf, and Subsequential Limits: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-limsup-of-alternating-sequence,
            ex-subsequential-limits-fill-unit-interval,

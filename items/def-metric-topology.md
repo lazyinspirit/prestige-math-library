@@ -2,7 +2,7 @@
 id: def-metric-topology
 kind: definition
 title: "The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement"
-status: draft
+status: published
 origin: session
 deps: [def-metric-ball, def-metric-space]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

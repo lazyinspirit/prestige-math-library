@@ -2,7 +2,7 @@
 id: cex-limsup-infinite-not-attained-in-r
 kind: counterexample
 title: "A sequence with $\\limsup = +\\infty$: the greatest subsequential limit exists only in $\\overline{\\mathbb{R}}$"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, thm-limsup-is-greatest-subsequential-limit, def-extended-reals, def-extended-limits, def-subsequential-limit, def-divergence-to-infinity, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, lem-convergent-implies-bounded, lem-limit-unique, lem-limit-of-tail, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, def-abs-value, def-upper-bound, def-partial-order, def-sequence, def-real-limit, cor-of-one-positive, lem-of-add-order, def-nat-order, thm-nat-linear-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-limsup-additive
 kind: false-statement
 title: "FALSE: $\\limsup(x_k + y_k) = \\limsup x_k + \\limsup y_k$"
-status: draft
+status: published
 origin: session
 deps: [thm-limsup-subadditive, def-limsup-liminf, def-extended-reals, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-sequence, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

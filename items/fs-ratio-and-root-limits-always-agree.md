@@ -2,7 +2,7 @@
 id: fs-ratio-and-root-limits-always-agree
 kind: false-statement
 title: "FALSE: $\\limsup a_k^{1/k} = \\limsup a_{k+1}/a_k$ for every positive sequence"
-status: draft
+status: published
 origin: session
 deps: [thm-ratio-root-inequality, def-limsup-liminf, def-rational-power, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, thm-convergence-iff-limsup-equals-liminf, lem-nth-root-of-constant-tends-to-one, thm-nth-roots-exist, lem-rational-power-laws, lem-rational-power-monotone, def-integer-power, lem-power-laws, thm-squeeze, thm-algebra-of-limits, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-real-limit, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, lem-of-inverse-positive, lem-of-sign-rules, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

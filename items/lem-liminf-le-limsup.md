@@ -2,7 +2,7 @@
 id: lem-liminf-le-limsup
 kind: lemma
 title: "$\\liminf x_k \\le \\limsup x_k$ for every real sequence"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

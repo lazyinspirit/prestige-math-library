@@ -2,7 +2,7 @@
 id: lem-metric-nonnegativity
 kind: lemma
 title: "Nonnegativity of a metric is a consequence of the other axioms, not an axiom"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, lem-of-add-order, def-real-order, def-complete-ordered-field,
        def-ordered-field, def-max-min, lem-finite-set-has-max]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

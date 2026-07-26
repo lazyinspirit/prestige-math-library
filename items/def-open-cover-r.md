@@ -2,7 +2,7 @@
 id: def-open-cover-r
 kind: definition
 title: "Open cover, subcover, compact subset of $\\mathbb{R}$ (every open cover has a finite subcover), and sequentially compact subset"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-sequence, def-subsequential-limit, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

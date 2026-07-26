@@ -2,7 +2,7 @@
 id: thm-limsup-submultiplicative
 kind: theorem
 title: "For bounded nonnegative sequences, $\\limsup(x_k y_k) \\le (\\limsup x_k)(\\limsup y_k)$"
-status: draft
+status: published
 origin: session
 deps: [def-limsup-liminf, lem-limsup-exists, lem-limsup-epsilon-characterisation, lem-extended-reals-complete, prop-of-multiply-inequalities, lem-of-sign-rules, def-bounded-set, def-sequence, def-extended-reals, def-upper-bound, def-partial-order, lem-of-abs-value, lem-of-add-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

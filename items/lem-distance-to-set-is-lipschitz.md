@@ -2,7 +2,7 @@
 id: lem-distance-to-set-is-lipschitz
 kind: lemma
 title: "$|d(x,A) - d(y,A)| \\le d(x,y)$, so the distance to a fixed nonempty set is $1$-Lipschitz"
-status: draft
+status: published
 origin: session
 deps: [def-metric-bounded-diameter, lem-metric-reverse-triangle, thm-infimum-property,
        def-metric-space, def-infimum, lem-of-abs-value, def-abs-value,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

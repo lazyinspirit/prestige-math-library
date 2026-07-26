@@ -2,7 +2,7 @@
 id: def-equivalent-metrics
 kind: definition
 title: "Topologically, uniformly and Lipschitz equivalent metrics on a set"
-status: draft
+status: published
 origin: session
 deps: [def-metric-topology, def-metric-space, def-metric-continuity, def-metric-ball]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

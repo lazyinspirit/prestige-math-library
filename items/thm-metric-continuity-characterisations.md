@@ -2,7 +2,7 @@
 id: thm-metric-continuity-characterisations
 kind: theorem
 title: "For a map of metric spaces the following agree: $\\varepsilon$-$\\delta$ continuity everywhere, preimages of open sets are open, preimages of closed sets are closed, sequential continuity, and $f(\\overline{A}) \\subseteq \\overline{f(A)}$"
-status: draft
+status: published
 origin: session
 deps: [def-metric-continuity, def-metric-topology, thm-metric-sequential-closure,
        thm-metric-closure-characterisation, def-metric-convergence, def-countable-choice,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-metric-closure-characterisation
 kind: theorem
 title: "The closure of a nonempty $A$ is $\\{x : d(x,A) = 0\\}$, equals $A$ together with its limit points, and is the smallest closed superset"
-status: draft
+status: published
 origin: session
 deps: [def-metric-interior-closure-boundary, def-metric-bounded-diameter,
        thm-metric-open-set-algebra, lem-inf-epsilon, def-metric-topology,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

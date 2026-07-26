@@ -2,7 +2,7 @@
 id: cex-boundedness-is-not-topological
 kind: counterexample
 title: "$\\mathbb{R}$ carries both an unbounded and a bounded metric inducing the same topology"
-status: draft
+status: published
 origin: session
 deps: [fs-boundedness-is-a-topological-property, lem-bounded-remetrisation,
        def-metric-bounded-diameter, ex-bounded-remetrisation-of-r,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

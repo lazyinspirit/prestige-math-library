@@ -1,7 +1,7 @@
 ---
 page: metric-spaces
 title: "Metric Spaces"
-status: draft
+status: published
 items: [def-metric-space, lem-metric-nonnegativity, def-metric-ball,
         def-metric-bounded-diameter, lem-metric-reverse-triangle,
         lem-distance-to-set-is-lipschitz, def-metric-topology,

@@ -2,7 +2,7 @@
 id: def-perfect-set-r
 kind: definition
 title: "Perfect subset of $\\mathbb{R}$: closed with no isolated points"
-status: draft
+status: published
 origin: session
 deps: [def-limit-point-r, def-open-and-closed-in-r, thm-closure-characterisations-r]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

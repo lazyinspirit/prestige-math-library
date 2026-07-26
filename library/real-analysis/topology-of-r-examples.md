@@ -1,7 +1,7 @@
 ---
 page: topology-of-r-examples
 title: "Topology of $\\mathbb{R}$: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-open-set-decomposed-into-components,
            ex-closure-interior-boundary-of-q,

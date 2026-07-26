@@ -2,7 +2,7 @@
 id: ex-ratio-fails-root-succeeds
 kind: example
 title: "$a_k = 2^{-k + (-1)^k}$ has $\\liminf a_{k+1}/a_k = 1/8$, $\\limsup a_{k+1}/a_k = 2$ and $\\lim a_k^{1/k} = 1/2$"
-status: draft
+status: published
 origin: session
 deps: [fs-ratio-and-root-limits-always-agree, thm-ratio-root-inequality, def-limsup-liminf, def-integer-power, def-rational-power, lem-power-laws, lem-alternating-sequence, lem-geometric-sequence-null, thm-squeeze, def-real-limit, def-sequence, def-extended-reals, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

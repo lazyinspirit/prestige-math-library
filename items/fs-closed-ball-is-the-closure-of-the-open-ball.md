@@ -2,7 +2,7 @@
 id: fs-closed-ball-is-the-closure-of-the-open-ball
 kind: false-statement
 title: "FALSE: in every metric space the closure of $B(x,r)$ is the closed ball of radius $r$"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-closure-characterisation, def-metric-ball, thm-metric-open-set-algebra,
        def-metric-space, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

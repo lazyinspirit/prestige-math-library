@@ -2,7 +2,7 @@
 id: def-metric-bounded-diameter
 kind: definition
 title: "Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball, def-bounded-set, def-infimum,
        thm-infimum-property, lem-sup-unique, def-complete-ordered-field,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

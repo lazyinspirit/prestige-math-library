@@ -2,7 +2,7 @@
 id: lem-metric-limits-unique
 kind: lemma
 title: "A sequence in a metric space has at most one limit"
-status: draft
+status: published
 origin: session
 deps: [def-metric-convergence, def-metric-space, def-real-limit, lem-rat-embeds-dense,
        lem-metric-nonnegativity, def-abs-value, lem-of-abs-value, cor-of-one-positive,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

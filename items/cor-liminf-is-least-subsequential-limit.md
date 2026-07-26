@@ -2,7 +2,7 @@
 id: cor-liminf-is-least-subsequential-limit
 kind: corollary
 title: "The limit inferior is the least subsequential limit in $\\overline{\\mathbb{R}}$"
-status: draft
+status: published
 origin: session
 deps: [thm-limsup-is-greatest-subsequential-limit, lem-limsup-reflection, def-limsup-liminf, def-subsequential-limit, def-extended-limits, def-extended-reals, thm-algebra-of-limits, def-divergence-to-infinity, def-real-limit, def-sequence, lem-of-add-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

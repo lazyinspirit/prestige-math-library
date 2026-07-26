@@ -2,7 +2,7 @@
 id: cex-laurent-nested-intervals-empty
 kind: counterexample
 title: "The unrestricted nested interval property fails in $\\mathbb{R}((t^{-1}))$"
-status: draft
+status: published
 origin: session
 deps: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-sequences-in-an-ordered-field, cor-laurent-nested-intervals, def-ordered-field, thm-reals-ordered-field, cor-cauchy-reals-lub-complete, thm-of-archimedean, cor-archimedean-reciprocal]
 aliases: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

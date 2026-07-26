@@ -2,7 +2,7 @@
 id: thm-compact-iff-sequentially-compact-r
 kind: theorem
 title: "A subset of $\\mathbb{R}$ is compact iff it is sequentially compact"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-characterisation-r, thm-bolzano-weierstrass, def-open-cover-r, lem-sequential-characterisation-of-closure-r, def-subsequential-limit, def-bounded-set, def-countable-choice, def-open-and-closed-in-r, def-interior-closure-boundary-r, def-sequence, def-real-limit, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-limit-unique, lem-index-map-grows, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, lem-finite-set-has-max, def-max-min]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

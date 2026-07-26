@@ -2,7 +2,7 @@
 id: cex-closed-set-with-an-isolated-point-is-not-perfect
 kind: counterexample
 title: "$\\{0\\} \\cup [1,2]$ is closed, has an isolated point, and is not perfect"
-status: draft
+status: published
 origin: session
 deps: [def-perfect-set-r, def-limit-point-r, def-open-and-closed-in-r, def-interval, def-neighbourhood-r, thm-open-set-algebra-r, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

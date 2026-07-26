@@ -2,7 +2,7 @@
 id: ex-post-office-metric
 kind: example
 title: "The post-office metric $d(x,y) = \\|x\\| + \\|y\\|$ for $x \\ne y$ on $\\mathbb{R}^n$, and its isolated points"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-interior-closure-boundary, def-metric-ball,
        lem-metrics-on-rn, lem-metric-nonnegativity, lem-finite-sum-laws,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-open-cover-of-unit-interval-no-finite-subcover
 kind: counterexample
 title: "The cover $\\{(1/k, 1)\\}$ of $(0,1)$ has no finite subcover, so $(0,1)$ is not compact"
-status: draft
+status: published
 origin: session
 deps: [def-open-cover-r, thm-heine-borel-characterisation-r, cor-archimedean-reciprocal, thm-of-archimedean, def-interval, def-open-and-closed-in-r, def-neighbourhood-r, lem-of-naturals-positive, lem-of-inverse-positive, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

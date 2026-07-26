@@ -2,7 +2,7 @@
 id: cex-limsup-product-strict
 kind: counterexample
 title: "$x_k = 1 + (-1)^k$, $y_k = 1 + (-1)^{k+1}$ give $\\limsup(x_k y_k) = 0 < 4$"
-status: draft
+status: published
 origin: session
 deps: [thm-limsup-submultiplicative, def-limsup-liminf, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-extended-reals, def-sequence, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:

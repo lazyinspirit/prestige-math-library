@@ -2,7 +2,7 @@
 id: def-extended-limits
 kind: definition
 title: "Convergence in $\\overline{\\mathbb{R}}$ and the extended subsequential limit set: $L \\in \\overline{\\mathbb{R}}$ is an extended subsequential limit when some subsequence converges to $L$, or diverges to $L = \\pm\\infty$"
-status: draft
+status: published
 origin: session
 deps: [def-extended-reals, def-sequence, def-real-limit, def-divergence-to-infinity, def-subsequential-limit, lem-limit-unique]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-26
+  audited: 2026-07-26
 sources:
   scraped: []
   references:
