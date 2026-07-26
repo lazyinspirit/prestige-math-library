@@ -33,7 +33,7 @@ pipeline_run: null
 **False claim:** for every $A \subseteq \mathbb{R}$, every $f : A \to \mathbb{R}$
 and every $c \in A$, at most one real $L$ satisfies
 
-$$(\forall \varepsilon > 0)\ (\exists \delta > 0)\ (\forall x \in A)\ \bigl[\ 0 < |x - c| < \delta \ \Longrightarrow\ |f(x) - L| < \varepsilon\ \bigr] . \tag{$\ast$}$$
+$$(\forall \varepsilon > 0)\ (\exists \delta > 0)\ (\forall x \in A)\ \bigl[\ 0 < |x - c| < \delta \ \Longrightarrow\ |f(x) - L| < \varepsilon\ \bigr] . \tag{\ast}$$
 
 **Read the claim carefully: it is about the raw formula $(\ast)$, extended to an
 arbitrary point $c$ of the domain.** It is *not* a claim about
