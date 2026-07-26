@@ -88,13 +88,27 @@ published page or on `topology-of-r` (level 7, the declared prerequisite):
 
 **B page (`limits-of-real-functions-examples`):** same-level: none. Level-7
 (`topology-of-r`): `lem-q-and-irrationals-dense-r`,
-`lem-sequential-characterisation-of-closure-r` (Dirichlet items 9–10). Forward
-reference: page-level `forwardRefs: [sine-cosine-and-the-definition-of-pi]`,
-carried by `rem-classical-oscillator-is-sine-of-one-over-x` (item 12). At
-authoring time that remark needs `forward_refs` frontmatter naming a concrete
-item on the sine/cosine page (target item id TBD when that page is scaffolded —
-the ledger should carry the page-level entry until then), and its prose must
-treat "the classical oscillator is sin(1/x)" as orientation, not as a proved claim.
+`lem-sequential-characterisation-of-closure-r` (Dirichlet items 9–10).
+`rem-classical-oscillator-is-sine-of-one-over-x` (item 12) points at
+`sine-cosine-and-the-definition-of-pi` in prose only, with NO `forward_refs`
+entry and NO `proved_here: false`; its prose treats "the classical oscillator is
+sin(1/x)" as orientation, not as a proved claim.
+
+**CORRECTION (Beta-8-3, step 8, 2026-07-27).** The paragraph above originally
+proposed a **page-level** forward reference,
+`forwardRefs: [sine-cosine-and-the-definition-of-pi]`, to be carried in the
+ledger until the sine page was scaffolded. **That is not expressible in the
+current schema and the assumption was wrong.** `forward_refs` (SCHEMA §3) takes
+ITEM ids and `tools/fwdcheck.mjs` rejects an entry that names no existing or
+planned item (`forward-dangling`); a wikilink from an item body to a PAGE id is a
+hard `link-unplanned` error. `sine-cosine-and-the-definition-of-pi` is plan order
+74 with an empty item list, so there is no id to name and no legal way to declare
+the reference. The `not-proved-here` ‡ tier is not the substitute either: it is
+for results this library will never prove (DEFERRED.md), whereas sine is planned
+material, and marking it ‡ would tell the reader the opposite of the truth. The
+remark therefore carries neither field, by design. When the sine page is
+authored, this remark is the place to add a real `forward_refs` entry naming the
+item that states the classical pair.
 
 No same-level references into the four pages owned by batches 1 and 2, in either
 direction from my side.
@@ -135,6 +149,13 @@ direction from my side.
    m <= x < m+1") to the A page would change the item count (20 -> 21), so it is
    NOT in my pages.json. Trade-off: one-time count change vs. repeated inline
    reconstruction on later pages.
+   **RESOLVED (2026-07-27): accepted.** `lem-integer-part` is item 15 of the A
+   page, the page is 21 items, and `research/plan-spec.json` records 21. Its
+   uniqueness half is assembled inline from `lem-nat-embeds-int` (every integer
+   >= 0 is the image of a unique natural, order preserving) plus `lem-nat-discrete`
+   (m < n iff sigma(m) <= n, so a natural j != 0 satisfies j >= 1); there is still
+   no standalone "discreteness of Z" item in the library, and that assembly is
+   what later pages will inherit.
 2. **Algebra of limits at ±infinity.** Deliberately absent; the single B-page
    use is served by a direct estimate. If later pages (improper integrals,
    asymptotics) want it, add it there as a lemma rather than stretching

@@ -4,7 +4,7 @@ kind: remark
 title: "The classical form of the oscillator above is $\\sin(1/x)$, which this library can only construct much later"
 status: draft
 origin: session
-deps: [cex-psi-of-one-over-x-has-no-limit-at-zero, ex-distance-to-the-integers, ex-x-times-psi-tends-to-zero]
+deps: [cex-psi-of-one-over-x-has-no-limit-at-zero, ex-distance-to-the-integers, ex-x-times-psi-tends-to-zero, lem-integer-part]
 justified_by: []
 aliases: []
 landmark: false
@@ -37,8 +37,9 @@ and a reader who has met them before will recognise
 [[cex-psi-of-one-over-x-has-no-limit-at-zero]] and
 [[ex-x-times-psi-tends-to-zero]] as those examples with $\psi$ in place of
 $\sin$. This remark records the correspondence, and it records that the
-correspondence is **orientation only**: nothing on this page asserts, uses, or
-proves anything about $\sin$.
+correspondence is **orientation only**: the two displayed statements are reported
+as what the classical treatment proves, not asserted here, and nothing on this
+page uses or proves anything about $\sin$.
 
 ## Why $\sin$ is not available here
 
@@ -73,10 +74,12 @@ classical examples work:
   integers and $1/2$ at the reciprocals of the half-integers.
 
 The third property is what
-[[cex-psi-of-one-over-x-has-no-limit-at-zero]] uses, and it is *sharper* than
-what $\sin$ would give: the two witnessing sequences here take the extreme values
-exactly, with no estimate needed, because $\psi$ is defined by an infimum that
-is attained rather than by a series.
+[[cex-psi-of-one-over-x-has-no-limit-at-zero]] uses. It is not sharper than what
+$\sin$ would give — the classical witnessing sequences hit the extreme values of
+$\sin$ exactly too — but it is available *here*: the two values $0$ and $1/2$ are
+read off from the integer part in one line ([[lem-integer-part]]), with no series
+and no $\pi$, whereas the corresponding facts about $\sin$ presuppose the whole
+construction described above.
 
 ## What is genuinely lost, and what is not
 
@@ -86,7 +89,7 @@ exactly the statements usually proved with $\sin$, and their proofs are shorter.
 What is lost is a connection to a different subject. The classical pair
 $\sin(1/x)$, $x\sin(1/x)$ also carries information about smoothness, about power
 series and about the topologist's sine curve, none of which $\psi$ can carry,
-since $\psi$ is assembled from the order and the absolute value alone and none of
-those notions is defined in this library yet. Those phenomena are not in scope
-here, and when they come into scope they will be stated with $\sin$, on the page
-that defines it.
+since $\psi$ is assembled from the order, the absolute value and the integer part
+alone and none of those notions is defined in this library yet. Those phenomena
+are not in scope here, and when they come into scope they will be stated with
+$\sin$, on the page that defines it.

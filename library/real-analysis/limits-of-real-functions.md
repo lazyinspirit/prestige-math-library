@@ -31,8 +31,8 @@ and it is the last page before continuity.
 [[def-function-limit]] says that $\lim_{x \to c} f(x) = L$ when for every real
 $\varepsilon > 0$ there is a real $\delta > 0$ with $|f(x) - L| < \varepsilon$
 for every $x$ in the domain satisfying $0 < |x - c| < \delta$. Three features are
-load bearing rather than decorative, and each has a false statement on this page
-attached to it.
+load bearing rather than decorative, and two of the three have a false statement
+on this page attached to them.
 
 - **$c$ must be a limit point of the domain.** That is what keeps the quantified
   set nonempty for every $\delta$, and hence what allows the condition to pin $L$
@@ -138,4 +138,7 @@ line.
 **The companion page** carries the witnesses: polynomials and rational functions,
 the oscillator $\psi$ and the two examples built on it, the sign function, a
 limit at $+\infty$ computed by a direct estimate, the indicator of $\mathbb{Q}$,
-and the concrete counterexamples behind the five false statements listed here.
+and the counterexample items that work three of the five false statements listed
+here out in full. Each of the five already carries its own witness, verified in
+the false statement itself; what the companion page adds, for those three, is the
+further computation each witness supports.

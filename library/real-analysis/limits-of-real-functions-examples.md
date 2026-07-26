@@ -17,10 +17,11 @@ examples: [ex-limit-of-a-polynomial, ex-distance-to-the-integers,
 
 **Objective.** This is the worked companion to the page on limits of real
 functions, linked under Prerequisites above. It introduces no new definition and
-proves no new general theorem: every item here is either a computation carried
-out in full, or a witness that some hypothesis on that page cannot be dropped.
-The one remark on the page is orientation about notation, not a mathematical
-claim.
+proves no new general theorem: every item here except the single remark is either
+a computation carried out in full, or a witness that some hypothesis on that page
+cannot be dropped. The remark records the classical form of two of those items,
+which this library cannot yet write; it is orientation, and nothing on the page
+rests on it.
 
 **The routine case, done properly.** [[ex-limit-of-a-polynomial]] proves that a
 polynomial function satisfies $\lim_{x \to c} p(x) = p(c)$ at every real $c$, and
@@ -111,6 +112,7 @@ $\lim_{x \to 0} f(x)$ is left undefined on such a domain.
 records that the classical form of the two oscillator items is $\sin(1/x)$ and
 $x \sin(1/x)$, and that this library cannot yet write them: $\sin$ needs power
 series and a definition of $\pi$, none of which exists at this point in the
-reading order. The remark is orientation only; nothing on this page asserts,
-uses or proves anything about $\sin$, and it carries no link to a sine item,
+reading order. The remark is orientation only; it reports the classical
+statements without asserting them, nothing on this page uses or proves anything
+about $\sin$, and it carries no link to a sine item,
 because the page that will define one has not been written.
