@@ -28,8 +28,7 @@ pipeline_run: null
 ## Statement
 
 Let $J$ be the space of real sequences $x$ with $x_n \to 0$ and finite quadratic variation norm
-$$\lVert x \rVert = \sup \Big\{ \Big( \sum_{i=1}^{k-1} (x_{p_{i}} - x_{p_{i+1}})^{2}
-\Big)^{1/2} : p_1 < p_2 < \dots < p_k \Big\}.$$
+$$\lVert x \rVert = \sup \Big\{ \Big( \sum_{i=1}^{k-1} (x_{p_{i}} - x_{p_{i+1}})^{2} \Big)^{1/2} : p_1 < p_2 < \dots < p_k \Big\}.$$
 Then $J$ is a separable Banach space with the following two properties at once.
 
 1. $J$ is **not reflexive**: the canonical image of $J$ in $J^{**}$ has codimension $1$.
