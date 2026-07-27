@@ -609,23 +609,81 @@ then $r = s$ and there is a $\sigma \in \operatorname{Sym}(r)$ with
 $q_i = p_{\sigma(i)}$. Prefer this to a hand-wave, and give the finitely
 supported valuation form $n = \prod_p p^{v_p(n)}$ as the second face of it.
 
-B page: why the theorem fails if $1$ is called prime; $2$ is the only even prime;
-**the Hilbert monoid** $\{1, 4, 7, 10, \dots\}$, closed under multiplication,
-where $100 = 4 \cdot 25 = 10 \cdot 10$ has two factorisations into
-irreducibles — the counterexample that shows Euclid's lemma is doing the work and
-that existence alone is not the theorem; arbitrarily long prime gaps from
-$n! + 2, \dots, n! + n$; a false-statement item on $n^2 + n + 41$ being prime for
-every natural $n$ (true for $n < 40$, false at $n = 40$).
+B page, nine items as scaffolded at level 9 (mixed): a worked factorisation of
+$360$ and $84$ with $\gcd$ and $\operatorname{lcm}$ read off the exponents and
+cross-checked against the Euclidean algorithm; $2$ is the only even prime; three
+instances of the rational-root corollary ($\sqrt 3$, $\sqrt 6$, $\sqrt[3]{2}$,
+in one item); arbitrarily long runs of composites, **without a factorial** (see
+the factorial trap below); the Hilbert monoid $\{1,4,7,10,\dots\}$, closed under
+multiplication, where $100 = 4 \cdot 25 = 10 \cdot 10$ has two factorisations
+into irreducibles — the counterexample that shows Euclid's lemma is doing the
+work and that existence alone is not the theorem; calling $1$ prime destroys
+uniqueness; and three false statements — that $p_0 \cdots p_{n-1} + 1$ is prime
+($30031 = 59 \cdot 509$, the standard misreading of Euclid's theorem), that
+$n^2 + n + 41$ is always prime (fails at $n = 40$), and that every Fermat number
+is prime ($641 \mid 2^{32} + 1$, by Euler's $641 = 5 \cdot 2^{7} + 1 =
+2^{4} + 5^{4}$ argument written out as divisibility, since congruence notation
+only arrives at order 26). `cex-divides-a-product-without-dividing-a-factor` is
+**already published** on the order-23 B page and is exactly the gap Euclid's
+lemma closes; the B page must not duplicate it, and the A page's
+`thm-euclids-lemma` should reference it in prose as the thing primality repairs.
 
 Traps. The Hilbert monoid is chosen deliberately: the usual textbook
 counterexample is $\mathbb{Z}[\sqrt{-5}]$, which needs ring theory at order 42
 and is therefore **dropped by the self-contained-scope rule**, while
-$\{1, 4, 7, \dots\}$ needs nothing but $\mathbb{N}$ and divisibility. Check
-whether **strong induction** is published or must be minted here; ordinary
-induction is (`thm-induction-principle`). Check whether the irrationality of
-$\sqrt{2}$ exists anywhere — `ex-sqrt-two-exists` gives existence in $\mathbb{R}$,
-not irrationality — and if not, this page is its natural home, since it is a
-one-line consequence of unique factorisation.
+$\{1, 4, 7, \dots\}$ needs nothing but $\mathbb{N}$ and divisibility.
+**CHECKED at level 9 (mixed): `thm-strong-induction` is published**, homed on
+`construction-of-the-natural-numbers` (order 6). Its Statement is the
+full-strength form ("if $P(m)$ for all $m < n$ then $P(n)$", with the $n = 0$
+case noted as vacuous), and the spliced spec has
+`thm-prime-factorisation-exists` and `thm-fundamental-theorem-of-arithmetic`
+citing it directly, so the existence half of the fundamental theorem uses it
+and mints nothing. (Batch 2's note also claimed page 22 already cites it in
+`thm-euclidean-algorithm` and `cor-extended-euclidean-bezout-coefficients`;
+verified FALSE on disk 2026-07-28 — those two items cite
+`thm-induction-principle` and `thm-well-ordering-principle`, not strong
+induction. The claim that matters was checked independently and stands.)
+The irrationality of $\sqrt{2}$ **already exists and is published**:
+`fs-sqrt2-rational`, "FALSE: some rational number squares to 2", is homed on
+BOTH R-construction pages (orders 7 and 8) and is proved there by parity
+alone, with `deps: [def-rationals, thm-rat-field]` and nothing else. The title
+of `ex-sqrt-two-exists` likewise reads "…and is irrational". So this page must
+NOT mint a second item for that statement. What it mints instead is the
+genuine generalisation, `cor-rational-root-of-an-integer-is-an-integer`: a
+rational $x$ with $x^{k} = m$ for an integer $m$ is an integer. Its Remarks
+record that `fs-sqrt2-rational` is the case $k = m = 2$ and that the two
+agree — a dictionary obligation, kept in Remarks so it needs no `deps` entry.
+**$p^{k}$ is the MONOID power of `def-group-power`, not `def-integer-power`.**
+`def-integer-power` (order 16) is stated for "$a \in \mathbb{R}$, where
+$\mathbb{R}$ is the ambient ordered field", so using it would drag the whole
+real construction into a statement about $\mathbb{Z}$. `def-group-power`
+(order 20) defines $g^{n}$ for natural $n$ **in a monoid**, and
+`lem-units-of-z` (order 22) proves $(\mathbb{Z},\cdot,1)$ IS a commutative
+monoid — that pairing is what makes $p^{k}$ legitimate at order 24. The
+exponent law $p^{j+k} = p^{j}p^{k}$ for natural exponents is available from
+`lem-group-power-laws`, whose Statement says in as many words that "claims 1
+and 3 hold in any monoid" for exponents in $\mathbb{N}$ and whose step 2.1
+concludes "by induction, $g^{m+n} = g^{m} g^{n}$ for all $m, n \in \mathbb{N}$,
+in any monoid" — verified on disk (Beta-9-2, re-verified at step 4); it is not
+a bare assertion in a Statement.
+**$n = \prod_p p^{v_p(n)}$ cannot be written literally.** `def-monoid-finite-product`
+is the product of a **finite list**; the library has no finitely-supported
+product over an infinite index set at any order. So
+`thm-canonical-prime-factorisation` quantifies over a finite INJECTIVE list of
+primes covering the prime divisors of $n$ and adds the clause "$v_q(n) = 0$
+for every prime $q$ off the list". The familiar notation is an abbreviation
+for exactly that, and the item's Remarks say so.
+**There is no integer factorial in this library.** The only $k!$ on disk is
+introduced inside the Statement of `lem-factorial-beats-geometric` as a
+product in $\mathbb{R}$ via `def-finite-sum` — a different object on a
+different page. Minting `def-int-factorial` here would create a dictionary
+obligation this page cannot discharge, so the arbitrarily-long-prime-gaps
+example uses $N := \prod_{j<n} \iota(j+2)$ (the finite product of
+$2, 3, \dots, n+1$ in $(\mathbb{Z},\cdot,1)$) instead of $n!$, and gets the
+same $n$ consecutive composites $N+2, \dots, N+n+1$. **A dropped item, not a
+deleted one**: an integer factorial is wanted by order 40
+(`symmetric-groups-and-the-sign-homomorphism`, for $|\operatorname{Sym}(n)|$)
+and is the natural home for the dictionary against the real factorial.
 
 ## NT-3. Congruences, the Integers Modulo n and the Chinese Remainder Theorem  (order 26)
 
@@ -1325,6 +1383,11 @@ $F[x]$ and $F[x]_{\le n}$ need `polynomial-rings-and-roots` (order 48), and
 LA-2's B page (order 71) already plans $\{1, x, x^2, \dots\}$ as a basis and is
 the natural inheritor of the first; any page above order 50 can take the second.
 Drop them here with a note; the five remaining B-page items need none of it.
+**(Level 9 (mixed) update: the LA-2 inheritance fell through — order 48 still
+has an empty item list, so $F[x]$ does not exist as an object and LA-2's B page
+DROPPED the item in turn; see the corrections in the LA-2 block below. The
+inheritance should be re-pointed at whichever B page above order 48 is built
+first.)**
 
 ## LA-2. Linear Independence, Bases and Dimension  (order 70)
 
@@ -1338,26 +1401,88 @@ bases have the same size (well-definedness #12); **dimension**; every spanning s
 contains a basis; every independent set extends to a basis; $\dim U \le \dim V$
 for a subspace, with equality iff $U = V$; **the dimension formula**
 $\dim(U+W) + \dim(U \cap W) = \dim U + \dim W$; $\dim F^n = n$; **every vector
-space has a basis** (Zorn, cited from `order-zorn-and-the-axiom-of-choice`);
-$F^m \cong F^n$ iff $m = n$.
+space has a basis** (Zorn, cited from `order-zorn-and-the-axiom-of-choice`).
+**$F^{m} \cong F^{n}$ iff $m = n$ is DROPPED from this page**: isomorphism of
+vector spaces requires a linear map, and `def-linear-map` is LA-3 at order
+**72**, two pages above this one. What this page supplies instead is
+`lem-standard-basis-of-f-n` ($\dim_F F^{n} = n$), from which LA-3 gets the
+statement in one line once "isomorphic spaces have equal dimension" is
+available there. **Deferred, not deleted — LA-3 inherits it.**
+**Naming, decided before the splice (owner, 2026-07-28): the basis definition
+id is `def-linear-basis`, not `def-basis`**, following LA-1's
+`def-linear-subspace` over `def-subspace`: the unqualified name belongs to the
+topological notion (`def-topology-basis-subbasis`, order 185, published with
+alias `def-basis-top`, so the topological side is namespaced too).
+`def-dimension` stays unqualified on the same grounds (Hausdorff and covering
+dimension would be `def-hausdorff-dimension` and `def-covering-dimension`).
+Ids are immutable on `main`; the spliced spec honours exactly this naming.
 
-B page: the standard basis of $F^n$; $\{1, x, x^2, \dots\}$ for $F[x]$;
-$\mathbb{R}$ over $\mathbb{Q}$ has an infinite basis and no explicit one (Hamel,
-relating to the existing scaffold note in `plan-realanalysis-pages.md`, and
-**without** the "non-measurable" clause, which was withdrawn under the
-self-contained-scope rule); an infinite independent set that spans nothing;
-a spanning set that is not a basis.
+B page, eight items as scaffolded at level 9 (mixed). Three corrections to the
+old list:
+
+- **$\{1, x, x^{2}, \dots\}$ for $F[x]$ is DROPPED.** The LA-1 note names
+  LA-2's B page as "the natural inheritor" of this item, and that inheritance
+  **cannot be discharged yet**: `polynomial-rings-and-roots` is order 48,
+  which is earlier than 70 in plan order but **has an empty item list**, so
+  $F[x]$ does not exist as an object anywhere on disk and any dependency on it
+  would be `unresolved`, not `planned-earlier`. **What would license it:**
+  authoring order 48. **Deferred, not deleted** — and the inheritance note in
+  the LA-1 block should be re-pointed at whichever B page above order 48 is
+  built first.
+- **"the standard basis of $F^{n}$" MOVES TO THE A PAGE**, as
+  `lem-standard-basis-of-f-n`. It is not an example: $\dim_F F^{n} = n$ is a
+  result the A page states and later pages (74 onwards) will need, and **B
+  pages are leaves**, so nothing outside them may depend on an item homed
+  there. The B page keeps the concrete half,
+  `ex-coordinates-depend-on-the-ordered-basis`.
+- **"an infinite independent set that spans nothing" is mathematically wrong
+  as written** — every set spans something, namely its span. Corrected to
+  `cex-independent-set-that-does-not-span`: the standard unit families are
+  independent in $F^{\mathbb{N}}$ and do NOT span it, the constant family $1$
+  being no finite linear combination of them.
+
+The remaining seven (the batch-2 note says "six" and then lists seven; the
+spliced B page has eight items, corrected at step 4): coordinates depend on
+the ORDERED basis; an explicit infinite basis for the eventually zero
+families, built with no choice principle; the Hamel basis of $\mathbb{R}$ over
+$\mathbb{Q}$, **without** the withdrawn non-measurable clause; a spanning set
+that is not independent; a proper subspace with a basis equinumerous with one
+of the whole space; the inclusion–exclusion analogue of the dimension formula
+failing for three subspaces; and the false statement that a union of
+independent sets is independent.
 
 Traps. The infinite-dimensional case needs cardinality, but **`def-cardinal` is
 homed on `ordinals-and-transfinite-recursion`, order 183, not on
 `countability-and-uncountability`** — it is 113 pages LATER than LA-2 and cannot
 be cited. Available at order 70 are `def-equinumerous` ($A \approx B$,
 $A \preceq B$), `thm-schroder-bernstein`, `def-countable` and `lem-pigeonhole`.
-Step 1 for LA-2 must either state the infinite case as "any two bases are
-equinumerous" in the $\approx$ language of `def-equinumerous`, which is what the
-Steinitz/Zorn argument actually gives, or drop the infinite case. Do not cite
-`def-cardinal`. The finite case must not silently assume the space is finitely
-generated.
+**DECIDED at level 9, batch 2: the infinite case is DROPPED.** The $\approx$
+option is not actually reachable. The Steinitz/Zorn argument gives invariance
+only in the finite case; the infinite case needs $|B \times \mathbb{N}| = |B|$
+for infinite $B$, which is cardinal arithmetic, and `def-cardinal` is homed on
+`ordinals-and-transfinite-recursion` at order 183. So
+`thm-any-two-finite-bases-have-the-same-size` claims exactly its title,
+`def-dimension` defines $\dim_F V$ only for a space with a finite basis, and
+"infinite-dimensional" is defined as the pure negation with **no cardinal
+attached** — never $\dim V = \infty$. **What would license the restoration:**
+the cardinal arithmetic of order 183, or a cardinal-free basis-exchange
+argument for infinite sets. **Deferred, not deleted.** The companion page
+carries `cex-proper-subspace-with-an-equinumerous-basis`, which is the honest
+substitute: it compares two specific bases through an explicit bijection and
+assigns no dimension to either space. Do not cite `def-cardinal`. The finite
+case must not silently assume the space is finitely generated.
+**Page 71 may not depend on page 69.** `ex-r-as-a-vector-space-over-q`,
+`ex-sequence-space-and-eventually-zero-subspace` and
+`cex-pairwise-trivial-intersection-is-not-a-direct-sum` all live on
+`vector-spaces-and-subspaces-examples`, order 69, **a B page**, and B pages
+are leaves: nothing outside them may depend on them. `validate-plan`'s
+`b-leaf` check **cannot see this**, because those three items are already
+published on disk and the check short-circuits on `existing.has(d)` before it
+ever looks at the home page. So page 71 rebuilds each one-line setup natively
+(restriction of scalars from `lem-restriction-of-scalars` at order 68; the
+eventually zero subspace from `lem-linear-subspace-criterion`) and records the
+agreement with the order-69 example **in Remarks only, with no `deps` entry**.
+This is exactly the failure the last level shipped.
 
 ## LA-3. Linear Transformations, Rank-Nullity and Quotient Spaces  (order 72)
 

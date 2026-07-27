@@ -569,7 +569,18 @@ pairs 1/(k+2), 1/(k+3) for 1/x on (0,1) and k+1, k+1+1/(k+1) for x^2 on R;
 never 1/k or n, n+1/n.
 
 **RA-14 Monotone Functions, Discontinuities, and Continuity Sets**
-<- RA-13, RA-11, RA-03
+<- RA-13, RA-11, RA-03, and the two linear-algebra pages LA-01
+`vector-spaces-and-subspaces` (order 68) and LA-02
+`linear-independence-bases-and-dimension` (order 70). Both LA edges are new at
+level 9 (mixed) and are genuine `requires` entries, not incidental: LA-01
+supplies the vector-space language (`def-vector-space`,
+`def-linear-combination-and-span`, `lem-restriction-of-scalars`) that
+`lem-hamel-basis-exists` and `fs-additive-implies-linear` speak, and LA-02
+supplies `cor-every-vector-space-has-a-basis` and `def-linear-basis`, from
+which `lem-hamel-basis-exists` is obtained. (Batch 1's plan to build the Hamel
+basis directly from Zorn, with Q-linear independence written out inline, was
+superseded at the splice once batch 2 scaffolded LA-02 in the same level; the
+spliced `plan-spec.json` deps are the record — verified 2026-07-28.)
 classification of discontinuities (removable, jump, essential; Rudin's first and
 second kind); **oscillation** at a point, and continuity iff oscillation zero;
 {osc >= eps} is closed; one-sided limits of monotone functions always exist;
@@ -588,9 +599,19 @@ boundedness above or below on an interval OR sign-constancy OR non-dense graph).
 "boundedness on a set of positive measure" and "Lebesgue measurability" both
 require a measure, which this library does not build. Restore them when a
 measure-theory track exists; nothing else on the page changes when they return,
-since each is an independent sufficient condition. B: Thomae continuous exactly
-at the irrationals; a monotone function discontinuous exactly on Q; Froda sharp
-(discontinuous exactly at {1 - 1/k}); a Hamel-basis additive function (unbounded
+since each is an independent sufficient condition.
+PLACEMENT DECISION (Beta-9-1, level 9). The Dirichlet function 1_Q and Thomae's
+function are DEFINED ON THE A PAGE, as `def-dirichlet-and-thomae-functions`, and
+their continuity sets are proved there as
+`thm-dirichlet-and-thomae-continuity-sets` (1_Q nowhere continuous; Thomae
+continuous exactly at the irrationals, with osc_t(c) = t(c)). The reason is the
+leaf rule: RA-18's B page needs "Thomae is Riemann integrable with integral 0"
+and may not cite anything homed on RA-14's B page. The A-page theorem restates,
+across the leaf boundary, what `cex-dirichlet-is-nowhere-continuous` (order 124,
+a B page) already proves; the duplication is deliberate and must be acknowledged
+in the item, in the style `ex-distance-to-the-integers-is-1-lipschitz` uses.
+B: Thomae's values and oscillation computed; a monotone function discontinuous exactly on Q; Froda sharp
+(discontinuous exactly at {1 - 1/(k+1) : k in N}); a Hamel-basis additive function (unbounded
 on every interval, dense graph — the "non-measurable" clause is DROPPED for the
 same reason; the Hamel basis itself is fine, it costs only AC, which is an
 adopted axiom); f(m/n) = n is finite everywhere and locally
@@ -598,15 +619,27 @@ unbounded at every point; a bounded function with no relative extremum anywhere
 and nowhere semicontinuous; 1_Q is not Baire class 1 but is Baire class 2 (the
 Baire hierarchy is strict); the **Conway base-13 function** (Darboux, nowhere
 continuous).
+FALSE-STATEMENT WITNESS (Beta-9-1, level 9).
+`fs-intermediate-value-property-implies-continuity` is an A-page item and so may
+not cite the Conway function, which is homed on the B page (a leaf). It states
+its own witness inline: psi(1/x) for x != 0 and 0 at x = 0, on [-1,1], with
+psi(x) = min{x - floor(x), 1 - (x - floor(x))} written out from
+`lem-integer-part`. That function has the intermediate value property (its range
+is [0,1/2] and every value of [0,1/2] is taken in every neighbourhood of 0, and
+it is continuous off 0) and is discontinuous at 0. The Conway base-13 function
+remains on the B page, where it is the strictly stronger witness: Darboux and
+continuous at NO point.
 Level-8 note (Alpha-8, 2026-07-26): the library now has a floor item —
 `lem-integer-part` on `limits-of-real-functions` (for every real x exactly
 one integer m with m <= x < m+1). Any integer-part / floor step on this page
 cites it; do not rebuild the argument from Archimedean + well-ordering inline.
 Level-9 inheritance note (Alpha-9, step 4, 2026-07-27 — owner decisions B1-R3
 and B1-R9; BINDING when this page is scaffolded). This page inherits four
-results moved off level 9's pages 44/45 by the owner:
+results moved off level 9's pages 44/45 by the owner (those orders predate the
+2026-07-27 insertions; the pages are `continuity-ivt-evt-and-uniform-continuity`
+and its examples page, today orders 123/124):
 (1) `cor-cantor-function-is-continuous` (A page): the Cantor function c of
-`def-cantor-function` (order 40) is continuous on [0,1]. Intended proof: the
+`def-cantor-function` (order 119 today) is continuous on [0,1]. Intended proof: the
 image of c is [0,1] by `thm-cantor-function-properties` (surjectivity), which
 is order-convex, and c satisfies c(x) <= c(y) whenever x <= y, so
 `lem-monotone-with-interval-image-is-continuous` applies directly; no IVT.
@@ -627,42 +660,68 @@ Restore the pointers if and when a differentiation-and-measure track exists.
 Cantor set is null yet c maps it ONTO [0,1], because c is surjective onto
 [0,1] and constant on every removed interval.
 (4) The false statement "a function with the intermediate value property is
-continuous" (decision B1-R9; no id coined yet — mint it here): its only honest
-witness is an oscillator with the Darboux property, and this page's B list
-already plans the Conway base-13 function (Darboux, nowhere continuous), which
-is the intended witness; the library's only other oscillator sits on a leaf
-examples page and may not be cited.
-REUSE OBLIGATION. The three ids in (1)-(3) are COINED but UNBUILT — they
-appear in research/level9-batch-1.notes.md and DECISIONS.md but in no spec page
-and no items/ file (verified 2026-07-27). This is the same trap as
+continuous" (decision B1-R9; SPLICED at level 9 (mixed) as
+`fs-intermediate-value-property-implies-continuity`). The intended-witness
+sentence that stood here is superseded: an A-page `fs-` item may not cite the
+Conway base-13 function, which is homed on this page's own B list (a leaf), so
+the item carries its own inline witness — see the FALSE-STATEMENT WITNESS note
+above. Conway stays on the B page as the strictly stronger witness.
+REUSE OBLIGATION — DISCHARGED at the level-9 (mixed) splice, 2026-07-28. The
+three ids in (1)-(3) were COINED but UNBUILT — they appeared in
+research/level9-batch-1.notes.md and DECISIONS.md but in no spec page and no
+items/ file (verified 2026-07-27). They now sit in `plan-spec.json` on pages
+129/130 exactly as coined ((1) and (2) on the A page, (3) on the B page). This is the same trap as
 `lem-absolute-convergence-implies-convergence` at level 8: when this page is
 scaffolded, those EXACT ids must be reused, never re-minted under a paraphrase.
 Their tool, `lem-monotone-with-interval-image-is-continuous`, STAYS on
-`continuity-ivt-evt-and-uniform-continuity` (order 44, in `plan-spec.json`
+`continuity-ivt-evt-and-uniform-continuity` (order 123, in `plan-spec.json`
 today) — cite it, do not move or restate it. The prerequisite cost is zero:
 this page's `requires` already lists both `cantor-set-baire-and-measure-zero`
 and `continuity-ivt-evt-and-uniform-continuity` (verified in `plan-spec.json`).
 
 ### Block VI: differentiation
 
-**RA-15 The Derivative and the Mean Value Theorems** <- RA-13
+**RA-15 The Derivative and the Mean Value Theorems** <- RA-14
+(which subsumes RA-13). The edge to RA-14 is NEW at level 9 and is load bearing
+twice: `thm-derivative-of-an-inverse` needs `thm-continuous-inverse`, and
+`thm-monotonicity-from-the-derivative` states its conclusion with
+`def-monotone-function` rather than re-defining monotonicity inline.
 the derivative; the little-o/linear-approximation form; **Caratheodory's
 characterization** (f differentiable at c iff f(x) - f(c) = phi(x)(x - c) with
 phi continuous at c), which makes the chain rule a one-liner; differentiable
-implies continuous; algebra of derivatives; the general Leibniz rule; the chain
+implies continuous; algebra of derivatives; the chain
 rule; the derivative of an inverse; Fermat's interior extremum theorem; Rolle;
 **Cauchy's MVT proved FIRST, with the ordinary MVT as the case g(x) = x**
 (Rudin's dependency order, adopted deliberately); zero derivative implies
 constant; monotonicity from the sign of the derivative; bounded derivative
 implies globally Lipschitz. B: |x| not differentiable at 0; x^3 strictly
 increasing with vanishing derivative; the MVT fails without endpoint continuity;
-Rolle fails over Q; **the vector-valued MVT failure**, deferred to RA-22.
+**the vector-valued MVT failure**, deferred to RA-22.
 Level-8 wiring obligation RETRACTED (Beta-8-2, 2026-07-27, superseding the
 Alpha-8 note of 2026-07-26). `cex-rolle-fails-over-a-non-complete-field` states
 the difference quotient inline and that is FINAL, for the same reason as the
 retraction at RA-13: it refutes a claim about an ARBITRARY ordered field, over
 Q, and this page's derivative will be defined for real functions on subsets of
 R. Do NOT retro-wire it.
+DROPPED FROM RA-15 (Beta-9-1, level 9), deferred not deleted. THE GENERAL
+LEIBNIZ RULE, (fg)^(n) = sum_k C(n,k) f^(k) g^(n-k), needs two things this page
+does not have. (1) HIGHER DERIVATIVES are introduced on RA-16, which is LATER in
+plan order, so the statement cannot even be written here. (2) BINOMIAL
+COEFFICIENTS do not exist anywhere in the library: no `def-binomial-*` item, no
+binomial theorem, and no combinatorics page in `plan-spec.json` at all (verified
+2026-07-28). What would license it: a binomial-coefficient definition with
+Pascal's rule, plus RA-16's higher derivatives. RECOMMENDED HOME: RA-16, whose
+scaffold must then also mint the binomial coefficient (it needs one for Taylor's
+theorem in any case). The ordinary product rule is unaffected and is proved here
+inside `thm-algebra-of-derivatives`.
+REUSE, NOT RE-MINT (Beta-9-1, level 9). "Rolle fails over Q" is DROPPED from
+this B list because `cex-rolle-fails-over-a-non-complete-field` already exists
+and is PUBLISHED on `equivalent-forms-of-completeness-examples` (order 112).
+Minting a second id for the same statement is forbidden, and the existing item
+is homed on a B page, so nothing here may cite it either. This is the same trap
+as `lem-absolute-convergence-implies-convergence` at level 8. The Beta-8-2
+retraction above already fixed the wiring question; this fixes the placement
+question.
 
 **RA-16 Darboux, L'Hopital, and Taylor's Theorem** <- RA-15
 higher derivatives; **C^k and C^infinity**; **Darboux's theorem** and its
@@ -682,6 +741,13 @@ x + 2x^2 w(1/x) has positive derivative at 0 and is monotone in no neighbourhood
 conclusion is strictly one-directional); L'Hopital fails when g' vanishes near a;
 f(x) = x^2(2 + sin(1/x)) has an absolute minimum at 0 although f' changes sign
 infinitely often in every neighbourhood.
+INHERITED FROM RA-15 (Beta-9-1, level 9). This page inherits **the general
+Leibniz rule**, dropped from RA-15 because higher derivatives live here and
+binomial coefficients live nowhere. When this page is scaffolded it must ALSO
+mint a binomial-coefficient definition (Pascal's rule and C(n,k) as a natural
+number) — it needs one for Taylor's theorem regardless — and only then state
+Leibniz. Verified 2026-07-28: no `def-binomial-*`, no binomial theorem and no
+combinatorics page exists anywhere in `plan-spec.json` or `items/`.
 
 **RA-17 Convexity** <- RA-16
 convex and concave functions; midpoint convexity; supporting lines; convex iff
@@ -698,16 +764,41 @@ witness is kept and the reason restated within reach: midpoint convexity plus
 ANY of the in-scope regularity conditions of RA-14 gives convexity, and the
 Hamel-basis construction shows that without regularity it does not. The
 construction costs only AC, an adopted axiom.
+The tool exists as of level 9: `lem-hamel-basis-exists` is homed on RA-14
+(`monotone-functions-and-discontinuities`, order 129) — R has a Hamel basis
+over Q, with every real a finite Q-combination and the coefficients unique. It
+is obtained from `cor-every-vector-space-has-a-basis` and `def-linear-basis`
+(`linear-independence-bases-and-dimension`, order 70, scaffolded in the same
+level), with `lem-restriction-of-scalars` making R a Q-vector space. Cite it;
+do not rebuild it. (Batch 1's note saying order 70 "has no item list" predates
+the level-9 splice and is superseded — the page has 20 items in
+`plan-spec.json` as of 2026-07-28.)
 
 ### Block VII: the Riemann integral
 
-**RA-18 The Riemann Integral: Definition and Integrability** <- RA-13, RA-11
+**RA-18 The Riemann Integral: Definition and Integrability** <- RA-14
+(which subsumes RA-13 and RA-11). The edge to RA-14 is NEW at level 9 and is
+load bearing three times: `thm-lebesgue-criterion` needs `def-oscillation`,
+`thm-continuity-iff-oscillation-zero` and
+`lem-oscillation-superlevel-sets-are-closed`; `thm-monotone-implies-integrable`
+needs `def-monotone-function`; and the B page's Thomae example needs
+`thm-dirichlet-and-thomae-continuity-sets`. Defining oscillation a second time
+here would be the level-7 two-notions-of-open defect.
+SCOPE CHECK (Beta-9-1, 2026-07-28). Lebesgue's criterion is FULLY IN SCOPE and is
+NOT dropped. "Measure zero" here is `def-measure-zero-and-content-zero` (order
+119, published), a cover-by-intervals condition; the proof needs only
+`thm-countable-union-of-null-is-null`, `thm-compact-null-is-content-zero`,
+`lem-content-zero-implies-null`, `lem-finite-interval-cover-total-length` and
+Heine-Borel, all published. No outer measure, no measurable set and no Lebesgue
+integral is used or mentioned, and no `proved_here: false` item is cited.
 partition, refinement, mesh; tagged partitions and Riemann sums; upper and lower
 Darboux sums and integrals; **the equivalence of the Darboux and Riemann
 definitions**; **Riemann's criterion**; continuous implies integrable (needs
 Heine-Cantor); monotone implies integrable; finitely and countably many
 discontinuities; **Lebesgue's criterion** (bounded and null discontinuity set).
-B: the integral of x^2 from the definition; Thomae is integrable with integral 0;
+B: the integral of x^2 from the definition; Thomae is integrable with integral 0
+(citing `thm-dirichlet-and-thomae-continuity-sets` on RA-14's A PAGE — see the
+placement decision in the RA-14 block; do not restate Thomae's continuity here);
 **Dirichlet is not integrable**; **the indicator of a fat Cantor set is not
 integrable although its discontinuity set is nowhere dense** (the example that
 forces the Lebesgue criterion); a Riemann-integrable function with an arbitrary
