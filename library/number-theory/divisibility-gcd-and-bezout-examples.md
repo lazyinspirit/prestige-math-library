@@ -76,4 +76,4 @@ not $1$ because $F_1 = F_2 = 1$, so the descent ends at the pair $(2,1)$ with th
 single division $2 = 2 \cdot 1 + 0$; a claim of "quotient $1$ at every step"
 would be false for that reason. **No worst-case claim is made**: Lamé's theorem,
 that these pairs minimise the inputs for a given number of divisions, is a
-different statement and is not proved anywhere in this library.
+different statement and is not available at this point in the reading order.

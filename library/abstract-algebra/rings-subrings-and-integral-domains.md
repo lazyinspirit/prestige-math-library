@@ -25,8 +25,11 @@ how the two interact: that multiplying by zero gives zero, that a product of
 negatives is positive, that cancellation works away from zero. This page
 isolates that interaction into axioms. A **ring** is an abelian group under
 addition and a monoid under multiplication, with multiplication distributing
-over addition on both sides; the facts above are then proved once, for every
-structure satisfying the axioms.
+over addition on both sides. The first two facts are then proved once, for every
+structure satisfying the axioms. The third is not: cancellation away from zero
+is *equivalent* to the absence of zero divisors, not a consequence of the ring
+axioms, and that equivalence is what the definition of an integral domain is
+built on.
 
 **The convention, stated once and kept.** Here a ring **has** a multiplicative
 identity, because axiom (R2) of [[def-ring]] asks $(R,\cdot,1)$ to be a monoid.
@@ -80,7 +83,8 @@ adding only the ring-specific fact that $0$ is a unit exactly in the zero ring.
 and keeps it: $0$ is never one, and $1 \ne 0$ is a hypothesis rather than a
 consequence. [[lem-domain-cancellation]] proves that in a commutative ring with
 $1 \ne 0$ the cancellation law and the absence of zero divisors are equivalent,
-so a domain is exactly a ring where cancellation works. [[def-division-ring]]
+so a commutative ring with $1 \ne 0$ is a domain exactly when cancellation works
+there. [[def-division-ring]]
 asks instead that every nonzero element be invertible, and the two conditions are
 genuinely different in both directions: $\mathbb{Z}$ is a domain and not a
 division ring, and $\mathbb{H}$ is a division ring and not a domain, since a
@@ -141,5 +145,6 @@ constructed. The further property of the characteristic of an integral domain
 that would say more than "it is $0$ or at least $2$" requires the notion of a
 prime number, which no definition on this page or among the items it cites
 introduces, so it is not stated here. Twenty-six items are proved on this page,
-eleven of them marked as landmarks in the flowchart above; the companion page
-supplies every instance.
+eleven of them marked as landmarks in the flowchart above. Every instance lives
+on the companion page except one: the quaternions are built here, because
+companion pages are leaves in the reading order and later pages need them.

@@ -53,9 +53,9 @@ $\gcd(0,0) = (1+1)\gcd(0,0)$, and an integer $g$ with $g = g + g$ is $0$.
 
 [L6] $|0| = 0$, and $|u| = u$ for $u \ge 0$ ([[def-int-abs]], [[lem-int-abs-properties]]).
 
-[L8] The embedding $\iota : \mathbb{N} \to \mathbb{Z}$ has image exactly the nonnegative integers, and $\iota(1) = 1$, $\iota(1+1) = 1+1$ since $\iota$ preserves addition ([[lem-nat-embeds-int]], [[def-integers]]).
-
 [L7] Every integer divides $0$ ([[def-divides-in-z]]), and every common divisor of $u$ and $v$ divides $\gcd(u,v)$ ([[cor-common-divisor-divides-gcd]]).
+
+[L8] The embedding $\iota : \mathbb{N} \to \mathbb{Z}$ has image exactly the nonnegative integers, and $\iota(1) = 1$, $\iota(1+1) = 1+1$ since $\iota$ preserves addition ([[lem-nat-embeds-int]], [[def-integers]]).
 
 ## Verification
 

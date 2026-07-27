@@ -32,8 +32,8 @@ argument below assumes them.
 value, [[def-abs-value]], is stated for an ordered *field*, and $\mathbb{Z}$ is
 not one, so it does not apply. [[def-int-abs]] therefore defines $|a|$ for an
 integer directly, by the case split the total order of $\mathbb{Z}$ makes
-legitimate, and [[lem-int-abs-properties]] proves the six facts every later proof
-uses: positivity, vanishing exactly at $0$, invariance under negation,
+legitimate, and [[lem-int-abs-properties]] proves the six facts recorded here for
+later use: positivity, vanishing exactly at $0$, invariance under negation,
 multiplicativity, the bound $-|a| \le a \le |a|$, and the characterisation of
 $|a| \le c$ by $-c \le a \le c$. The Remarks of [[def-int-abs]] record that this
 agrees with [[def-abs-value]] along the embedding of $\mathbb{Z}$ in
@@ -44,9 +44,10 @@ $b$ by $|b|$.
 
 **Divisibility, which the library already had.** [[thm-division-algorithm-in-z]]
 introduces the relation "$b$ divides $a$" inside its own Statement, for use on
-its own page, and its Remarks leave the systematic theory to a later page which
-"must record that its general notion restricts to this one rather than introduce
-a second silently". This is that page: [[def-divides-in-z]] states the same
+its own page, and its Remarks leave the systematic theory to a later page, which
+"must record that its general divisibility in a ring restricts on $\mathbb{Z}$
+to the relation defined here, rather than introduce a second notion silently".
+This is that page: [[def-divides-in-z]] states the same
 relation, quotes the source, and adds the three boundary values that a page over
 a ring containing $0$ has to state — $d \mid 0$ for every $d$ including $0$,
 $0 \mid a$ only for $a = 0$, and $1 \mid a$ and $a \mid a$ always. It is a
@@ -126,11 +127,13 @@ without it.
 
 **The seam with the group theory.** [[lem-subgroups-of-z-are-cyclic]] classifies
 the subgroups of $(\mathbb{Z},+)$: each is $n\mathbb{Z} = \langle n \rangle$ for
-exactly one natural $n$. The published example on the companion page of
-Binary Operations, Monoids, Groups and Subgroups, linked under Prerequisites
-above, states the same fact, but examples pages are leaves in this library's
-reading order, so the classification is re-proved here
-on a spine where later pages can cite it; its Remarks record the agreement.
+exactly one natural $n$. The published example on the *examples* companion of
+Binary Operations, Monoids, Groups and Subgroups states the same fact, but
+examples pages are leaves in this library's reading order, so nothing here may
+rest on it — which is why that companion is deliberately absent from the
+Prerequisites above, while the spine page it accompanies is present. The
+classification is therefore re-proved here on a spine where later pages can cite
+it; its Remarks record the agreement.
 [[thm-gcd-generates-the-subgroup]] is then the item that joins the two halves of
 the page: $a\mathbb{Z} + b\mathbb{Z} = \gcd(a,b)\mathbb{Z}$ and
 $a\mathbb{Z} \cap b\mathbb{Z} = \operatorname{lcm}(a,b)\mathbb{Z}$. Both

@@ -50,7 +50,7 @@ which is $\{0\}$ when $a = 0$ and has exactly two elements otherwise.
 
 [L5] If $d \mid a$ and $a \ne 0$ then $d \ne 0$ and $|d| \le |a|$ ([[lem-divisor-bound]]).
 
-[L6] $\mathbb{Z}^{\times} = \{1,-1\}$: an integer $u$ is a unit exactly when $u = 1$ or $u = -1$ ([[lem-units-of-z]]).
+[L6] $\mathbb{Z}^{\times} = \{1,-1\}$: an integer $u$ is a unit exactly when $u = 1$ or $u = -1$, and $1 \ne -1$ ([[lem-units-of-z]]).
 
 [L7] $|x| = x$ when $x \ge 0$ and $|x| = -x$ when $x \le 0$ ([[def-int-abs]]); $|x| \ge 0$, $|x| = 0$ exactly when $x = 0$, and $|xy| = |x|\,|y|$ ([[lem-int-abs-properties]]).
 

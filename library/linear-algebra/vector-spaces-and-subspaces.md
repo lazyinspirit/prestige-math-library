@@ -1,6 +1,6 @@
 ---
 page: vector-spaces-and-subspaces
-title: "Vector Spaces, Subspaces, Span and Direct Sums"
+title: "Vector Spaces, Linear Subspaces, Span and Direct Sums"
 status: draft
 items: [def-vector-space, lem-vector-space-elementary-consequences,
         def-function-space, def-matrix-space, lem-restriction-of-scalars,
@@ -119,7 +119,9 @@ witness being on the companion page; for two summands the two conditions coincid
 and the definition reads $U + W = V$ with $U \cap W = \{0_V\}$. The payoff is
 [[lem-direct-sum-criterion]]: a direct sum is exactly the situation in which every
 vector decomposes in exactly one way, and equally exactly the situation in which
-only the all-zero list sums to $0_V$.
+the sum is all of $V$ **and** only the all-zero list sums to $0_V$; the second
+half of that condition is not on its own equivalent to the first, and the lemma
+states both.
 
 **What this page does not develop.** Linear independence, bases, dimension,
 linear maps, the matrix product, quotient spaces and external direct sums are all

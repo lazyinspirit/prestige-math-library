@@ -37,8 +37,8 @@ Then:
 2. $U + W = F^{3}$ ([[def-sum-of-linear-subspaces]]), a decomposition of $x$
    being $x = (x_0, x_1, 0_F) + (0_F, 0_F, x_2)$;
 3. $U \cap W = \{\, x \in F^{3} : x_0 = 0_F \text{ and } x_2 = 0_F \,\} = \operatorname{span}\{e_1\}$;
-4. the sum is **not** direct: $F^{3} \ne U \oplus W$, because
-   $U \cap W \ne \{0_V\}$.
+4. the sum is **not** direct: it is not the case that $F^{3} = U \oplus W$,
+   because $U \cap W \ne \{0_V\}$.
 
 $U$ and $W$ are called planes and $U \cap W$ a line, informally and by analogy
 only; dimension is not available at this point in the library and nothing below

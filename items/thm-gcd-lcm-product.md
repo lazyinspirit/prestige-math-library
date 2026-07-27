@@ -97,8 +97,9 @@ two sides of clause 2 are $0$.
   the companion page records this as
   [[fs-gcd-times-lcm-equals-the-product]].
 
-- **Where coprimality enters.** The only substantial step is step 3.1, and what
-  it uses is that $a/d$ and $b/d$ are coprime
+- **Where coprimality enters.** The only substantial step is step 3.3, which
+  proves that every common multiple is a multiple of $M$; what it uses is that
+  $a/d$ and $b/d$ are coprime
   ([[cor-gcd-quotients-coprime]]) together with the coprime divisibility lemma
   ([[lem-coprime-divides-product]]). Without those the argument gives only that
   $M$ is *a* common multiple, not the least one.

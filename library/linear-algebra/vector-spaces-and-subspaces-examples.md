@@ -1,6 +1,6 @@
 ---
 page: vector-spaces-and-subspaces-examples
-title: "Vector Spaces and Subspaces: Examples and Counterexamples"
+title: "Vector Spaces and Linear Subspaces: Examples and Counterexamples"
 status: draft
 items: []
 examples: [ex-r-as-a-vector-space-over-q,
@@ -76,8 +76,8 @@ field.
 [[ex-sum-and-intersection-in-f-three]] computes both operations explicitly on two
 planes in $F^{3}$, the sets $x_2 = 0_F$ and $x_0 = 0_F$: their sum is all of
 $F^{3}$ and their intersection is $\operatorname{span}\{e_1\}$, so the sum is not
-direct. It is the smallest illustration of the two conditions of a direct sum
-being independent, one holding and the other failing. Here, as on the A page, the
+direct. It shows the two conditions of a direct sum to be independent, (D1)
+holding while (D2) fails. Here, as on the A page, the
 words *plane* and *line* are used informally and by analogy; dimension is not
 available and no item uses it.
 

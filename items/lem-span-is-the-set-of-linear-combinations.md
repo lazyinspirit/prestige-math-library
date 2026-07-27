@@ -93,8 +93,8 @@ $S \subseteq V$ the span of $S$ contains $0_V$ as the empty linear combination.
   built from $S$. The same pair of descriptions appears for the subgroup generated
   by a set ([[def-generated-subgroup]],
   [[lem-cyclic-subgroup-is-the-set-of-powers]]), and the proof has the same shape:
-  the inside set is shown to be a subspace containing $S$, which gives one
-  inclusion, and every subspace containing $S$ is shown closed under the
+  the inside set is shown to be a linear subspace containing $S$, which gives one
+  inclusion, and every linear subspace containing $S$ is shown closed under the
   construction, which gives the other.
 
 - **$\operatorname{span}(\varnothing) = \{0_V\}$ is a consequence, not a

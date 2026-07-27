@@ -62,9 +62,11 @@ $\operatorname{lcm}(a,b) \ge 0$ always.
 
 ## Remarks
 
-- **The convention matches the one for $\gcd$.** $\gcd(0,0) = 0$ was fixed in
-  [[def-common-divisor-and-gcd]] and $\operatorname{lcm}(a,b) = 0$ is fixed here
-  whenever either argument vanishes; with both,
+- **The two boundary values agree, but they have different standing.**
+  $\gcd(0,0) = 0$ is a genuine convention, adopted in
+  [[def-common-divisor-and-gcd]] because no greatest common divisor exists there;
+  $\operatorname{lcm}(a,b) = 0$ at a vanishing argument is not a convention at
+  all, since $0$ is the only common multiple available. With the two together,
   $\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$ holds at every pair without exception
   ([[thm-gcd-lcm-product]]). At $a = 0$ that identity reads $\gcd(0,b) \cdot 0 = 0
   = |0 \cdot b|$, which is true for every $b$.

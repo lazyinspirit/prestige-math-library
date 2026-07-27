@@ -84,9 +84,15 @@ Let $F$ be a field ([[def-field]]).
   reading used above, that multiplication is associative and commutative on all of
   $F$ and distributes on both sides, is the standard one and is the reading
   already in force elsewhere in this library, for instance in
-  [[lem-of-zero-mult]] and [[lem-of-no-zero-divisors]]. It is used in steps 1.4
-  and 1.5, where axioms (V3) and (V4) are read off for arbitrary scalars including
-  $0_F$, and nowhere else. Nothing published is changed by recording it here.
+  [[lem-of-zero-mult]], whose [L1] states distributivity on the right. It is used
+  in exactly three of the steps above, where axioms (V3), (V4) and (V5) are read
+  off for arbitrary scalars including $0_F$: step 1.4 needs distributivity on the
+  right; step 1.5 needs associativity of the multiplication at $0_F$ as well; and
+  step 1.6 needs $1_F x = x$ rather than the stated $x \cdot 1_F = x$, and needs
+  it at $x = 0_F$ too. It is used nowhere else: step 1.2 is axiom (A) verbatim,
+  step 1.3 is axiom (D) verbatim, and steps 1.7 to 4.1 use only the vector-space
+  axioms of $V$ and the subfield facts of [L3]. Nothing published is changed by
+  recording it here.
 
 - **Restricting the scalars changes the structure, not the set.** The vectors, the
   addition and the zero are untouched; only the collection of scalars allowed to

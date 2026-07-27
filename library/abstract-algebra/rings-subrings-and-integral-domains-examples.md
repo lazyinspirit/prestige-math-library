@@ -17,10 +17,11 @@ examples: [ex-integers-as-a-commutative-ring,
 
 **Objective.** This page is the worked companion to Rings, Subrings, Integral
 Domains and Fields, linked under Prerequisites above. That page fixes the axioms
-and proves the general theory with no instance in sight; this one supplies the
-instances, and a witness for every clause the general page had to state
-separately. Seven examples and three refutations, two counterexamples and one
-false statement, are recorded here.
+and proves the general theory, building only one instance of its own — the
+quaternions, which it needs on its own spine; this one supplies the rest, and a
+witness for the clauses the general page had to state separately. Seven examples
+and three refutations, two counterexamples and one false statement, are recorded
+here.
 
 **The number systems, re-read as rings.** The library owns $\mathbb{Z}$,
 $\mathbb{Q}$ and $\mathbb{R}$ already, so the first task is to see the ring

@@ -58,7 +58,7 @@ empty.
 
 **What is not claimed.** Nothing here says these pairs are the *worst* case for
 their size; that is Lamé's theorem, and no bound on the number of divisions in
-terms of the size of the inputs is proved anywhere in this library.
+terms of the size of the inputs is available at this point in the reading order.
 
 ## Facts & Assumptions
 
@@ -123,4 +123,4 @@ terms of the size of the inputs is proved anywhere in this library.
 
 - **No worst-case claim.** Lamé's theorem — that the Fibonacci pairs minimise
   the size of the inputs for a given number of divisions — is a genuinely
-  different statement, and it is not proved here.
+  different statement, and nothing above establishes or assumes it.

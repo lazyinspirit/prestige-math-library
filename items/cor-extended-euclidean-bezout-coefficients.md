@@ -76,7 +76,7 @@ alongside it.
 
 2.2 Inductive step, case $b_k = 0$. Then $B_k = b_k = 0$, so $B_k \le 0$ and $S(\sigma(k)) = S(k)$, while $R(\sigma(k)) = R(k)$; all three equalities are inherited unchanged. Since $b_k \ge 0$, the two cases are exhaustive. [step 1.3, L5, L6]
 
-3.1 In that same case the coefficients transport: $A_{\sigma(k)} = B_k = a u_k + b v_k = a x_{\sigma(k)} + b y_{\sigma(k)}$, since $(x_{\sigma(k)}, y_{\sigma(k)}) = (u_k,v_k)$; and $B_{\sigma(k)} = A_k - q B_k = (a x_k + b y_k) - q(a u_k + b v_k) = a(x_k - q u_k) + b(y_k - q v_k) = a u_{\sigma(k)} + b v_{\sigma(k)}$ by distributivity. [step 1.3, step 2.1, L1]
+3.1 Back in the case $b_k > 0$ of step 2.1, the coefficients transport: $A_{\sigma(k)} = B_k = a u_k + b v_k = a x_{\sigma(k)} + b y_{\sigma(k)}$, since $(x_{\sigma(k)}, y_{\sigma(k)}) = (u_k,v_k)$; and $B_{\sigma(k)} = A_k - q B_k = (a x_k + b y_k) - q(a u_k + b v_k) = a(x_k - q u_k) + b(y_k - q v_k) = a u_{\sigma(k)} + b v_{\sigma(k)}$ by distributivity. [step 1.3, step 2.1, L1]
 
 4.1 By induction the three equalities hold for every $k \in \mathbb{N}$. [step 1.2, step 2.1, step 3.1, step 2.2, L4]
 

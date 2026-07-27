@@ -69,7 +69,7 @@ Let $a, b, c \in \mathbb{Z}$ and let $|\cdot|$ be as in [[def-int-abs]]. Then
 
 2.8 Claim 5. If $a \ge 0$ then $|a| = a$, so $a \le |a|$; and $-|a| = -a \le 0 \le a$ by step 1.1, so $-|a| \le a$ by transitivity. If $a \le 0$ then $|a| = -a$ and $0 \le -a$ by step 1.1, so $a \le 0 \le |a|$ by transitivity; and $-|a| = -(-a) = a \le a$. [step 1.1, step 1.3, L1, L2, L3]
 
-2.9 Claim 6, from right to left: suppose $-c \le a \le c$. If $a \ge 0$ then $|a| = a \le c$. If $a \le 0$ then $|a| = -a$, and adding $-a - c$ to $-c \le a$ gives $-a \le c$, that is $|a| \le c$. [step 1.3, L1, L2, L3]
+2.9 Claim 6, from right to left: suppose $-c \le a \le c$. If $a \ge 0$ then $|a| = a \le c$. If $a \le 0$ then $|a| = -a$, and adding $c - a$ to $-c \le a$ gives $-a \le c$, that is $|a| \le c$. [step 1.3, L1, L2, L3]
 
 3.1 Claim 1 holds: $|a| \ge 0$ in both cases. [step 1.3, step 1.4, step 2.1, cases]
 
@@ -89,5 +89,7 @@ Let $a, b, c \in \mathbb{Z}$ and let $|\cdot|$ be as in [[def-int-abs]]. Then
   strict inequalities.
 
 - The list does **not** include the triangle inequality, which is not used
-  anywhere on this page; every proof below needs only multiplicativity (claim 4),
-  the bound $a \le |a|$ (claim 5) and positivity (claim 1).
+  anywhere on this page. What the proofs below actually reach for is claim 1,
+  claim 2, claim 4 and the bound $a \le |a|$ of claim 5; claim 3 is used once, in
+  the identification of the associate classes, and claim 6 is recorded for
+  completeness rather than because something later needs it.

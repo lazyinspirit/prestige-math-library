@@ -66,9 +66,13 @@ reasons are recorded here rather than deferred:
   $\gcd(0,0) = |c|\gcd(0,0)$ for every $c$; taking $c = 1 + 1$, so that
   $|c| = 1 + 1$, gives $g = g + g$ and hence $g = 0$. No other value makes the
   identity true at $c = 0$ or anywhere else on that boundary.
-- **It keeps the product formula true.** $\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$
-  ([[thm-gcd-lcm-product]]) reads $0 \cdot 0 = 0$ at $(0,0)$, using the matching
-  convention $\operatorname{lcm}(0,0) = 0$ of [[def-lcm]].
+- **It is consistent with the product formula** —
+  $\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$ ([[thm-gcd-lcm-product]]) reads
+  $0 \cdot 0 = 0$ at $(0,0)$, using $\operatorname{lcm}(0,0) = 0$ from
+  [[def-lcm]]. This one is a check, **not** a second forcing argument: with
+  $\operatorname{lcm}(0,0) = 0$ the left side vanishes whatever value
+  $\gcd(0,0)$ is given, so the product formula is silent at $(0,0)$ and only the
+  scaling identity above pins the value down.
 
 ## Remarks
 
