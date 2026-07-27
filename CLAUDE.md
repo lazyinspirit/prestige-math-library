@@ -199,11 +199,30 @@ before any rendering change, and preserve their behaviour):
   (group card + page row) and `web/app/library/group/[slug]/page.tsx` (the group
   dependency tree). A page's `<name>-examples` companion is listed in a RIGHT-hand
   column on its A page's row, never on a line of its own. Group titles are cards
-  with a per-group accent and the `.font-display-serif` system serif stack
-  (`app/globals.css`) — a deliberately different voice from the Geist sans of
-  every other heading, and no webfont fetch, so the Docker build stays hermetic.
-  Sky and fuchsia remain reserved; the single use of fuchsia is the
+  with a per-group accent, and no webfont fetch, so the Docker build stays
+  hermetic. Sky and fuchsia remain reserved; the single use of fuchsia is the
   `not-proved-here` group, which IS the ‡ tier.
+- **Index page, SECOND owner-instructed restyle 2026-07-27 — liquid glass, and
+  now itself FROZEN.** The owner reopened the INDEX again (the item and page
+  renderers were NOT touched and remain frozen at the 2026-07-24 spec). Cards are
+  translucent glass: `backdrop-blur-xl backdrop-saturate-150` over `bg-white/55`
+  (`dark:bg-white/[0.055]`), a `1.75rem` radius, a two-layer shadow, and a
+  specular top edge. The per-group hue moved from an opaque wash to a
+  TRANSLUCENT tint layered over the glass, so it tints rather than paints.
+  **The left accent bar is GONE** (owner, 2026-07-27) and the `bar` field was
+  removed from `CategoryStyle` with it; colour is still never alone because the
+  group title carries the hue and IS the group's name. Masthead and group titles
+  use `.font-display-rounded` — `ui-rounded`, which resolves to SF Pro Rounded on
+  Apple platforms and degrades to `system-ui` elsewhere. **Naming a family never
+  fetches; there is no `@font-face` and the build stays hermetic** — the same
+  constraint that made the old display serif a system stack. `.library-ground`
+  gives the `/library` layout a subtle vertical gradient, built with `color-mix`
+  against `--background` so it themes itself in both modes. Dark tints run at
+  `/40` (light `/35`) after the owner reported the first pass looked washed out;
+  `prefers-reduced-transparency: reduce` falls back to an opaque surface.
+  Owned by `web/app/globals.css`, `web/app/library/layout.tsx`,
+  `web/app/library/page.tsx`, `web/components/library/group.tsx` and
+  `web/lib/library-categories.ts`.
 - **Titles are LaTeX; nothing renders KaTeX inside a mermaid label.** `plainTitle`
   in `web/lib/math-library.ts` is the one de-TeX for every plain-text context
   (flowchart labels, OG cards, metadata): a Unicode symbol table, `\{`/`\}` kept
