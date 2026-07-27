@@ -69,7 +69,8 @@ two notions, valid for sequences of positive terms.
 **The three false statements guard the three standard errors.** A bounded
 sequence need not converge ([[fs-bounded-implies-convergent]]); the true
 statement in that direction requires passing to a subsequence and is
-Bolzano-Weierstrass, which this library does not yet prove anywhere. Strict
+Bolzano-Weierstrass, which is not available at this point in the reading order.
+Strict
 inequalities are not preserved in
 the limit ([[fs-limit-preserves-strict-inequality]]); only the non-strict form
 [[lem-limit-preserves-order]] survives, because a positive gap may shrink to

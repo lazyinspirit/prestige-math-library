@@ -14,10 +14,6 @@ short: "not every topology is metrizable"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
   audited: 2026-07-27
 sources:
   scraped: []
@@ -71,6 +67,6 @@ two points has no two disjoint nonempty open sets at all
 
 - **A second reading of the same failure, in terms of limits.** In the indiscrete topology on $X$ every sequence converges to every point ([[def-sequence-convergence-top]]), whereas in a metric space a sequence has at most one limit ([[lem-metric-limits-unique]]). A constant sequence therefore converges to two distinct points here and could not do so under any metric. This is the same obstruction as the one used above, since uniqueness of limits is a consequence of the separation of distinct points by disjoint balls.
 
-- **Separation is one obstruction and countability is another.** Every metrizable space is Hausdorff, which is what the refutation above uses, and every metrizable space is also first countable ([[def-metrizable-space]], [[def-first-countable-top]]). The cocountable topology on $\mathbb{R}$ fails the second: were it first countable, [[thm-first-countable-sequences-suffice]] would make the identity onto the usual topology continuous, which it is not ([[fs-sequentially-continuous-implies-continuous]]). So it is not metrizable either, on grounds independent of the two-point witness. Neither obstruction is a characterisation: metrization theorems need separation and countability axioms that this library does not develop.
+- **Separation is one obstruction and countability is another.** Every metrizable space is Hausdorff, which is what the refutation above uses, and every metrizable space is also first countable ([[def-metrizable-space]], [[def-first-countable-top]]). The cocountable topology on $\mathbb{R}$ fails the second: were it first countable, [[thm-first-countable-sequences-suffice]] would make the identity onto the usual topology continuous, which it is not ([[fs-sequentially-continuous-implies-continuous]]). So it is not metrizable either, on grounds independent of the two-point witness. Neither obstruction is a characterisation: metrization theorems need separation and countability axioms beyond what is available at this point in the reading order.
 
 - **What is being refuted is an existence claim**, so the refutation must rule out *every* metric, which is why it argues from a property that all metric topologies share rather than by inspecting candidate metrics. The witness is worked again on the companion page ([[cex-non-metrizable-topology]]).

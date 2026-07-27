@@ -10,11 +10,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -71,9 +67,9 @@ The converse is **false as stated**: Cauchy completeness alone does not imply th
 least-upper-bound property, and the standard counterexamples are non-Archimedean
 ordered fields that are Cauchy complete and not Dedekind complete. What is true
 is that Cauchy completeness *together with the Archimedean property* implies the
-least-upper-bound property. **That implication is not proved anywhere in this
-library as things stand.** It belongs to the page on the equivalent forms of
-completeness, which is planned and not yet written, and no item here may be cited
+least-upper-bound property. **That implication is not available at this point in
+the reading order.** It belongs to the page on the equivalent forms of
+completeness, which comes later in this library, and no item here may be cited
 for it.
 
 The same holds for the nested interval property. [[thm-nested-interval-property]]

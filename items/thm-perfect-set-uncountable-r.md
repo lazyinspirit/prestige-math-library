@@ -13,11 +13,7 @@ short: "nonempty perfect $\\Rightarrow$ uncountable"
 proof_strategy: contradiction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -37,11 +33,12 @@ pipeline_run: null
 Let $P \subseteq \mathbb{R}$ be nonempty and perfect ([[def-perfect-set-r]]).
 Then $P$ is uncountable ([[def-countable]]).
 
-**The selection is canonical, because this library has no dependent choice.**
+**The selection is canonical, so that this proof spends no dependent choice.**
 The textbook proof shrinks a neighbourhood at every stage by *choosing* a point
 of $P$ and then a radius, a choice made infinitely often and each time depending
-on the previous one: that is the axiom of dependent choice, and no item of this
-library states it; only the axiom of countable choice is available, and it does not
+on the previous one: that is the axiom of dependent choice
+([[def-dependent-choice]]), which is not available at this point in the reading
+order; only the axiom of countable choice is, and it does not
 licence a recursive selection. The construction below therefore fixes an
 enumeration $e$ of the rationals once ([[thm-rationals-countable]],
 [[lem-rat-embeds-dense]]) and, at every stage, takes the interval with

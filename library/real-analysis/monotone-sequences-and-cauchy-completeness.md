@@ -88,10 +88,10 @@ diagonal argument on representatives. The two proofs are not the same theorem
 twice. One is a fact about the object that construction produced; the other is a
 fact about the axioms, and holds in **every** complete ordered field however it
 was obtained. [[rem-completeness-routes]] sets out why both are kept, and states
-plainly which implications are *not* proved anywhere here: that Cauchy
+plainly which implications are *not* proved on this page: that Cauchy
 completeness plus the Archimedean property gives back the least-upper-bound
 property, and likewise for nested intervals. Those belong to the page on the
-equivalent forms of completeness, which is planned and not yet written, and no
+equivalent forms of completeness, which comes later in the reading order, and no
 item here may be cited for them.
 
 **Contractive sequences.** [[def-contractive-sequence]] and

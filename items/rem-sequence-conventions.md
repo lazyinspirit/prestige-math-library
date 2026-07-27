@@ -10,16 +10,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -148,8 +139,8 @@ because $+\infty$ is not a real number.
 convergence theorem, the Bolzano-Weierstrass theorem and the completeness of
 $\mathbb{R}$ in the Cauchy sense are none of them treated here. They are the
 subject of the next page of this track, *Monotone Sequences,
-Bolzano-Weierstrass, and Cauchy Completeness*, which is planned and not yet
-written; until it exists, nothing on this page may be taken to have proved any of
+Bolzano-Weierstrass, and Cauchy Completeness*, which comes later in the reading
+order; nothing on this page may be taken to have proved any of
 them. The last of the four is the one exception worth stating: for the
 $\mathbb{R}$ this page works in, every Cauchy sequence of reals converges to a
 real is already proved elsewhere in the library, by
