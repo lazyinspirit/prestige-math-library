@@ -12,6 +12,10 @@ short: "the zero ring"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -62,7 +66,7 @@ $0_Z := z$ and $1_Z := z$. Then:
 
 2.1 Claim 3: by step 1.1 the ring $Z$ is commutative, by step 1.3 it has no zero divisors, and by step 1.1 it has $1_Z = 0_Z$; the clause $1 \ne 0$ of [L3] therefore fails and $Z$ is not an integral domain. [step 1.1, step 1.3, L3]
 
-2.2 Claim 4: the clause $1 \ne 0$ of [L4] fails in $Z$, so $Z$ is not a division ring; and the axioms of [[def-field]] require $0 \ne 1$, so $Z$ is not a field. Note that "every nonzero element is a unit" holds vacuously in $Z$, so it is only the clause $1 \ne 0$ that excludes it. [step 1.1, L4]
+2.2 Claim 4: the clause $1 \ne 0$ of [L4] fails in $Z$, so $Z$ is not a division ring; and the axioms of [[def-field]] require $0 \ne 1$, so $Z$ is not a field. Note that "every nonzero element is a unit" holds vacuously in $Z$, so it is only the clause $1 \ne 0$ that excludes it from being a division ring. [step 1.1, L4]
 
 2.3 $1 \cdot 1_Z = 0 \cdot 1_Z + 1_Z = 0_Z + 1_Z = 1_Z = 0_Z$, using the recursion of [L5] at $\sigma(0) = 1$ and $1_Z = 0_Z$ from step 1.1. [step 1.1, L5]
 
@@ -73,7 +77,13 @@ $0_Z := z$ and $1_Z := z$. Then:
 - **This is the item that makes $1 \ne 0$ a visible hypothesis.**
   [[def-zero-divisor-and-integral-domain]], [[def-division-ring]] and
   [[def-field]] each carry that clause, and the zero ring is what each of them
-  excludes: it satisfies every other clause of all three.
+  excludes. It satisfies every other clause of the first two: it is a commutative
+  ring, it has no zero divisors, and every nonzero element of it is vacuously a
+  unit. For [[def-field]] the clause $0 \ne 1$ is not the only one that fails,
+  and this is worth saying rather than glossing: axiom (M) there asks that
+  $F \setminus \{0\}$ be an abelian group with identity $1$, and in the zero ring
+  that set is empty, so it has no identity at all. The two failures are the same
+  phenomenon, since $1 = 0$ is exactly what empties $F \setminus \{0\}$.
 
 - **Characteristic $1$ occurs exactly here.** By claim 2 a ring has $1 = 0$ only
   if it is the zero ring, and by [[def-ring-characteristic]] the characteristic

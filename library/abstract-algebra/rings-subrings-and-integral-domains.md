@@ -124,9 +124,9 @@ $R \times S$ componentwise, computes its units as $R^{\times} \times S^{\times}$
 and records that a product of two rings with $1 \ne 0$ always has zero divisors.
 [[def-ring-of-functions]] gives $R^{X}$ pointwise, and records that it has zero
 divisors as soon as $X$ has two distinct points and $R$ is not the zero ring; it
-is minted here so that the addition on that set has a single home, since the same
-set carries a second structure with the same addition elsewhere in the library's
-plan. Finally [[lem-integer-multiples-agree-with-canonical-natural]]
+is minted here because the same set, with the same pointwise addition, carries a
+second structure elsewhere in the library's plan, whose second operation
+multiplies a function by a scalar rather than two functions together. Finally [[lem-integer-multiples-agree-with-canonical-natural]]
 proves that in a field the multiple $n \cdot 1_F$ is the canonical natural
 $\iota(n)$ of [[def-canonical-natural]] — proved, because assuming it is exactly
 the two-notions defect this page is built to avoid — and

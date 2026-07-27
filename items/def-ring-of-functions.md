@@ -11,6 +11,10 @@ landmark: false
 short: "$R^{X}$, pointwise"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -72,8 +76,10 @@ domain.
   *all* functions $X \to R$, with no continuity, boundedness or finiteness
   condition. When $R$ is a field, this same set with this same addition carries a
   second structure of interest, obtained by replacing the pointwise product with
-  a scalar multiplication; the page that introduces that structure points back
-  here for the addition rather than redefining it.
+  a scalar multiplication. The addition of that second structure is this same
+  pointwise rule $(f+g)(x) = f(x) + g(x)$; what differs is the second operation,
+  which multiplies a function by a scalar rather than two functions together, so
+  the two are not special cases of one another.
 
 - **This is where non-domains become plentiful.** Products of two nonzero rings
   ([[def-product-ring]]) and function rings on a set with at least two points are
