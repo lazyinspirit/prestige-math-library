@@ -192,11 +192,26 @@ for (let changed = true; changed;) {
   }
 }
 // Mentions, added AFTER the fixed point so they never act as sources.
+//
+// LOAD BEARING ONLY (owner, 2026-07-28). This branch used to fire on merely
+// HAVING an `external_refs` entry, never asking where the reference occurs, so
+// eight published items counted as resting on unproved material when the
+// reference sat in their Remarks as orientation. `thm-well-ordering-theorem` is
+// the reported case: its proof is Zorn throughout, and its Remarks record that
+// Cohen showed ZF cannot prove the theorem — a fact ABOUT the result, not a step
+// of it. The rule is that the mark stays only if the PROOF of a theorem, or part
+// of a DEFINITION, rests on unproved material, so the same `loadBearing` test
+// the `deps` branch above already applies is applied here too. A reference in a
+// Definition or Statement still counts; only Remarks are excluded.
+//
+// Keep in step with `unprovedDependence` in web/lib/library-external.ts, which
+// carries the identical fix. These two implementations of one rule have now
+// drifted once; if you change either, change both.
 for (const it of items.values()) {
   if (rests.has(it.id)) continue;
   const mentions = it.externalRefs.some((d) => {
     const r = resolve(d);
-    return r && !items.get(r).provedHere;
+    return r && !items.get(r).provedHere && it.loadBearing.includes('[[' + d);
   });
   if (mentions) rests.set(it.id, 'direct');
 }
