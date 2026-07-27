@@ -47,6 +47,12 @@ run a page from prompt to publish; the normative docs above win where they diffe
    neighbouring dependencies at step 9, a further refutation is a red flag the
    orchestrator audits personally, and **no theorem or example is ever removed
    without explicit owner approval**.
+3b. **Final Alpha-n audit (owner, 2026-07-27)** — before the owner audit, Alpha-n
+   audits the WHOLE level for mathematical accuracy and fixes fatal errors,
+   starting with whatever the step-8/9 coverage statements say nobody read in
+   full. Fatal includes a title or Statement asserting more than the proof
+   gives — the judge reads Statements and cannot see a false title. See
+   `LEVELS.md` §10a.
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By

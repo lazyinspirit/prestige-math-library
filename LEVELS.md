@@ -156,11 +156,50 @@ read.
 **Zero declared edges between two pages is a finding, not a clean bill.** Ask
 what *should* connect.
 
-## Step 10 — Rundown, then pause
+## Step 10 — Final Alpha-n audit, sweep, rundown, then pause
+
+### 10a. Final Alpha-n mathematical-accuracy audit (owner instruction, 2026-07-27)
+
+**Alpha-n audits the WHOLE level for mathematical accuracy, fixes fatal errors,
+and reports to the owner.** This is the last verification tier before the owner's
+own audit, and it is not optional.
+
+It is deliberately different from step 9. Step 9 is bounded to seams; **10a is
+bounded by RISK**, and the risk map is written by the agents themselves:
+
+1. **Start with what nobody has read in full.** Every step-8 and step-9 report
+   ends with an honest coverage statement naming exactly this. At level 9 that
+   was two whole page pairs Alpha had never opened, plus ~60 proof bodies a Beta
+   had read only down to Statements, Remarks and Facts.
+2. **Then the items the authors flagged as their own least-confident.**
+3. Do **not** re-audit what step 9 already verified.
+
+**Fatal, must fix:** mathematical inaccuracy; logical invalidity; a step not
+licensed by its cited facts; citing an item for a claim it does not make; **a
+title or Statement asserting more than the proof gives.** That last class is the
+reason this stage exists — the judge reads Statements and structurally cannot see
+a false title, and level 9 shipped two of them into step 10.
+
+**Not fatal, spend no effort:** the standing triage list.
+
+**Interaction with the twice-touched rule.** A repair here to an item already
+repaired earlier takes it to two touches and so escalates to a personal audit by
+the orchestrator. Alpha-n must therefore **report such repairs in a separate,
+clearly labelled list** — and must still make them. Never leave a known
+falsehood standing to keep a count down.
+
+Alpha-n may **never remove a theorem or example**; that needs explicit owner
+approval, with the ramification of dropping it stated.
+
+### 10b. Scope-denial sweep of the published corpus
+
+See below — items and page summaries both.
+
+### 10c. Rundown, then pause
 
 Full report: forward references present, judge coverage counted from frontmatter
-on disk, gate results, escalation set, readiness to publish. **Then stop for the
-owner.**
+on disk, gate results, escalation set, what 10a covered and what it did not, and
+readiness to publish. **Then stop for the owner.**
 
 **Every level ends with a scope-denial sweep of the published corpus, over ITEMS
 AND PAGE SUMMARIES BOTH.** Grep `does not develop`, `not defined in this
