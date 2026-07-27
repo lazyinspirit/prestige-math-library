@@ -13,8 +13,8 @@ examples: [ex-r-as-a-vector-space-over-q,
            fs-union-of-two-subspaces-is-a-subspace]
 ---
 
-**Objective.** This page is the worked companion to Vector Spaces, Subspaces,
-Span and Direct Sums, linked under Prerequisites above. That page fixes the
+**Objective.** This page is the worked companion to Vector Spaces, Linear
+Subspaces, Span and Direct Sums, linked under Prerequisites above. That page fixes the
 axioms and proves the general theory with almost no example in sight; this one
 supplies the instances, and the witnesses for the three places where the general
 page had to be careful. Four examples, three counterexamples and one false

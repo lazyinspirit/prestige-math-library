@@ -87,10 +87,12 @@ $\operatorname{span}(S) = V$.
 - **The definition is the one already used for subgroups.**
   [[def-generated-subgroup]] defines $\langle S \rangle$ as the intersection of
   all subgroups containing $S$, licensed by
-  [[lem-intersection-of-subgroups]], and then identifies it from inside as a set
-  of products. The span is defined here in exactly that shape, and the
-  identification from inside, that $\operatorname{span}(S)$ is precisely the set
-  of linear combinations of elements of $S$, is
+  [[lem-intersection-of-subgroups]]. Its Remarks also record a description from
+  inside, as a set of products, proved there only for a single generator
+  ([[lem-cyclic-subgroup-is-the-set-of-powers]]) with the general case deferred
+  to a later page. The span is defined here in exactly that outside shape, and
+  the identification from inside, that $\operatorname{span}(S)$ is precisely the
+  set of linear combinations of elements of $S$, is proved in full as
   [[lem-span-is-the-set-of-linear-combinations]]. In particular
   $\operatorname{span}(\varnothing) = \{0_V\}$ is proved there, as a consequence
   of the definition, and is not stipulated here.
