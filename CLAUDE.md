@@ -6,6 +6,10 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
 `README.md` (provenance, judge lineup, citation rules).** House style for proofs:
 `items/lem-cauchy-bounded.md` is the approved exemplar.
 
+**Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
+(scaffold, step-8 audit, authoring). `LEVELS.md` describes them; those files are
+the actual text.
+
 **Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
 how a dependency level is built (actors, artifacts, the eight gates, the
 self-contained-scope rule, the twice-touched escalation). Read it before
@@ -47,12 +51,13 @@ run a page from prompt to publish; the normative docs above win where they diffe
    neighbouring dependencies at step 9, a further refutation is a red flag the
    orchestrator audits personally, and **no theorem or example is ever removed
    without explicit owner approval**.
-3b. **Final Alpha-n audit (owner, 2026-07-27)** — before the owner audit, Alpha-n
-   audits the WHOLE level for mathematical accuracy and fixes fatal errors,
-   starting with whatever the step-8/9 coverage statements say nobody read in
-   full. Fatal includes a title or Statement asserting more than the proof
-   gives — the judge reads Statements and cannot see a false title. See
-   `LEVELS.md` §10a.
+3b. **Final Alpha-n audit — WHEN PUBLISHING A LEVEL** (owner, 2026-07-27).
+   The five steps here are the publish path for any content; this one applies
+   only to a per-level build. Before the owner audit, Alpha-n audits the WHOLE
+   level for mathematical accuracy and fixes fatal errors, starting with
+   whatever the step-8/9 coverage statements say nobody read in full. Fatal
+   includes a title or Statement asserting more than the proof gives — the
+   judge reads Statements and cannot see a false title. `LEVELS.md` §10a.
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By

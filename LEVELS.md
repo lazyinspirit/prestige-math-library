@@ -31,6 +31,7 @@ Everything below is verified against the code as of 2026-07-27.
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-8 audit, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
 
 ---
 
