@@ -2,7 +2,7 @@
 id: thm-bezout-identity
 kind: theorem
 title: "Bézout's identity: for integers $a, b$ not both zero, $\\gcd(a,b)$ is the least positive element of $\\{\\, ax + by : x, y \\in \\mathbb{Z} \\,\\}$; in particular $ax + by = \\gcd(a,b)$ has an integer solution"
-status: draft
+status: published
 origin: session
 deps: [def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, thm-division-algorithm-in-z, thm-well-ordering-principle, lem-nat-embeds-int, def-natural-numbers, def-nat-order, def-int-abs, lem-int-abs-properties, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

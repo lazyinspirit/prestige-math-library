@@ -2,7 +2,7 @@
 id: ex-the-zero-ring
 kind: example
 title: "The zero ring $\\{0\\}$, in which $1 = 0$: a commutative ring of characteristic $1$ that is not a domain, not a division ring and not a field"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, def-division-ring, def-ring-characteristic, lem-ring-elementary-consequences, def-field, def-group-power]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

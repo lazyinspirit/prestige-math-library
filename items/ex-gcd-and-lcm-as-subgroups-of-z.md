@@ -2,7 +2,7 @@
 id: ex-gcd-and-lcm-as-subgroups-of-z
 kind: example
 title: "$12\\mathbb{Z} + 18\\mathbb{Z} = 6\\mathbb{Z}$ and $12\\mathbb{Z} \\cap 18\\mathbb{Z} = 36\\mathbb{Z}$, the arithmetic of $\\gcd$ and $\\operatorname{lcm}$ read off the subgroups of $(\\mathbb{Z},+)$"
-status: draft
+status: published
 origin: session
 deps: [thm-gcd-generates-the-subgroup, lem-subgroups-of-z-are-cyclic, thm-gcd-lcm-product, def-lcm, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-divisibility-basic, def-divides-in-z, def-subgroup, def-generated-subgroup, def-group, lem-int-cancellation, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

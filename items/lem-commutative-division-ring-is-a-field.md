@@ -2,7 +2,7 @@
 id: lem-commutative-division-ring-is-a-field
 kind: lemma
 title: "Every commutative division ring is a field, so \"field\" and \"commutative division ring\" name the same structures and the published definition and the ring-theoretic one agree"
-status: draft
+status: published
 origin: session
 deps: [def-division-ring, def-commutative-ring, def-ring, def-field, lem-ring-elementary-consequences, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-invertible-element, def-group]
 justified_by: []
@@ -16,6 +16,12 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-28
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -51,7 +57,7 @@ second notion of field is introduced on this page.
 
 [L4] $x \cdot 0 = 0 = 0 \cdot x$ for every $x \in D$ ([[lem-ring-elementary-consequences]]).
 
-[L5] The field axioms to be verified: (A) $(F,+)$ is an abelian group with identity $0$; (M) $(F \setminus \{0\}, \cdot)$ is an abelian group with identity $1$, multiplication being associative and commutative with $x \cdot 1 = x$ for all $x$ and an inverse for each $x \ne 0$; (D) $x(y+z) = xy + xz$; and $0 \ne 1$ ([[def-field]]).
+[L5] The field axioms to be verified: (A) $(F,+)$ is an abelian group with identity $0$; (M) multiplication is associative and commutative on all of $F$ with $x \cdot 1 = x$ for every $x \in F$, and $(F \setminus \{0\}, \cdot)$ is an abelian group with identity $1$, each $x \ne 0$ having an inverse; (D) $x(y+z) = xy + xz$; and $0 \ne 1$ ([[def-field]]).
 
 ## Proof
 
@@ -69,29 +75,14 @@ second notion of field is introduced on this page.
 
 2.2 That group is abelian, since multiplication is commutative on all of $D$ and therefore on the subset $D \setminus \{0\}$. [step 1.4, L1]
 
-3.1 Axiom (M) holds in full, under either reading of its gloss: $(D \setminus \{0\}, \cdot)$ is an abelian group with identity $1$ by steps 2.1 and 2.2; and multiplication is associative and commutative on all of $D$ with $x \cdot 1 = x$ for every $x \in D$, since $(D,\cdot,1)$ is a commutative monoid by [L1]. [step 2.1, step 2.2, L1, L5]
+3.1 Axiom (M) holds in both of its clauses: multiplication is associative and commutative on all of $D$ with $x \cdot 1 = x$ for every $x \in D$, since $(D,\cdot,1)$ is a commutative monoid by [L1]; and $(D \setminus \{0\}, \cdot)$ is an abelian group with identity $1$ by steps 2.1 and 2.2. [step 2.1, step 2.2, L1, L5]
 
 4.1 By steps 1.1, 1.2, 1.3 and 3.1 the structure $(D,+,\cdot,0,1)$ satisfies (A), (M), (D) and $0 \ne 1$, so it is a field. [step 1.1, step 1.2, step 1.3, step 3.1, L5] ∎
 
 ## Remarks
 
-- **Both directions are needed, and each is a numbered item.** This lemma turns a
-  commutative division ring into a field; [[lem-field-is-a-commutative-ring]]
-  turns a field into a commutative division ring. Without the pair, the page
-  would carry two unrelated words for one class of structures, which is exactly
-  the defect the page exists to avoid.
+- **Both directions are needed, and each is a numbered item.** This lemma turns a commutative division ring into a field; [[lem-field-is-a-commutative-ring]] turns a field into a commutative division ring. Without the pair, the page would carry two unrelated words for one class of structures, which is exactly the defect the page exists to avoid.
 
-- **The ambiguity in the gloss of axiom (M) does not arise on this side.** The
-  step verifying (M) above does so under the unrestricted reading as well as
-  under the restricted one,
-  because a commutative division ring has commutative associative multiplication
-  on all of $D$ and $1$ as a two-sided identity on all of $D$ by the ring axioms.
-  So a structure obtained from this lemma is a field on any reading of
-  [[def-field]].
+- **Both clauses of axiom (M) are verified separately.** (M) asserts associativity, commutativity and $x \cdot 1 = x$ on all of $F$, and that $(F \setminus \{0\}, \cdot)$ is an abelian group. A commutative division ring supplies the first clause directly from its ring axioms, its multiplication being a commutative monoid operation on all of $D$, and the second from steps 2.1 and 2.2; nothing about $0$ is left implicit.
 
-- **Why step 1.4 is not a triviality.** "Every nonzero element is a unit" does
-  not by itself say that the units are exactly the nonzero elements: the extra
-  content is that $0$ is not a unit, and that needs $0 \cdot v = 0$
-  ([[lem-ring-elementary-consequences]]) together with $1 \ne 0$. In the
-  one-element ring, where $1 = 0$, the units are all of the ring and axiom (M)
-  of [[def-field]] would fail for want of $0 \ne 1$.
+- **Why step 1.4 is not a triviality.** "Every nonzero element is a unit" does not by itself say that the units are exactly the nonzero elements: the extra content is that $0$ is not a unit, and that needs $0 \cdot v = 0$ ([[lem-ring-elementary-consequences]]) together with $1 \ne 0$. In the one-element ring, where $1 = 0$, the units are all of the ring and axiom (M) of [[def-field]] would fail for want of $0 \ne 1$.

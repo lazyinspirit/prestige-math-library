@@ -2,7 +2,7 @@
 id: ex-gcd-with-zero
 kind: example
 title: "$\\gcd$ at the boundary: $\\gcd(a,0) = |a|$, $\\gcd(0,0) = 0$, and the convention $\\gcd(0,0) = 0$ is exactly what makes $\\gcd(ca,cb) = |c|\\gcd(a,b)$ true at $c = 0$"
-status: draft
+status: published
 origin: session
 deps: [lem-nat-embeds-int, def-integers, def-common-divisor-and-gcd, lem-gcd-basic-values, lem-gcd-scaling, cor-common-divisor-divides-gcd, def-divides-in-z, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-coprime-criterion
 kind: lemma
 title: "$a$ and $b$ are coprime if and only if $ax + by = 1$ for some integers $x, y$; and in that case the only common divisors of $a$ and $b$ are $1$ and $-1$"
-status: draft
+status: published
 origin: session
 deps: [def-coprime, thm-bezout-identity, cor-common-divisor-divides-gcd, def-common-divisor-and-gcd, lem-divisibility-basic, lem-units-of-z, def-divides-in-z, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

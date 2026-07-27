@@ -2,7 +2,7 @@
 id: cex-subset-closed-under-addition-but-not-scaling
 kind: counterexample
 title: "The first quadrant of $\\mathbb{R}^{2}$ contains $0$ and is closed under addition and is not a linear subspace, since it is not closed under multiplication by $-1$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-linear-subspace-is-a-subgroup, lem-vector-space-elementary-consequences, def-subgroup, def-function-space, def-vector-space, def-ordered-field, lem-of-square-positive, thm-reals-field, thm-reals-ordered-field, def-real-numbers, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

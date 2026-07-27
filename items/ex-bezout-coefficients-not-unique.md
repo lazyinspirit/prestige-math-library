@@ -2,7 +2,7 @@
 id: ex-bezout-coefficients-not-unique
 kind: example
 title: "Bézout coefficients are not unique: $1071 \\cdot (-3) + 462 \\cdot 7 = 21$ and $1071 \\cdot 19 + 462 \\cdot (-44) = 21$, and for nonzero $a, b$ every solution has the form $(x_0 + t b/d,\\; y_0 - t a/d)$"
-status: draft
+status: published
 origin: session
 deps: [thm-bezout-identity, cor-extended-euclidean-bezout-coefficients, ex-euclidean-algorithm-worked, cor-gcd-quotients-coprime, lem-coprime-divides-product, lem-gcd-basic-values, def-common-divisor-and-gcd, def-coprime, def-divides-in-z, lem-int-cancellation, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

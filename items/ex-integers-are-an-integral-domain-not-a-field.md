@@ -2,7 +2,7 @@
 id: ex-integers-are-an-integral-domain-not-a-field
 kind: example
 title: "$\\mathbb{Z}$ is an integral domain of characteristic $0$ whose group of units is $\\{1,-1\\}$, so it is not a field: $2$ is nonzero and not invertible"
-status: draft
+status: published
 origin: session
 deps: [ex-integers-as-a-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-ring-characteristic, lem-characteristic-and-additive-order, def-field, def-invertible-element, lem-units-of-z, thm-int-comm-ring, thm-int-ordered-ring, lem-int-cancellation, def-integers, def-int-operations, def-int-order, def-group-power, lem-nat-embeds-int, thm-induction-principle, def-nat-addition, def-natural-numbers, def-ring, def-commutative-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

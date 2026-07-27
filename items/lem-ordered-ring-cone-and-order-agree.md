@@ -2,7 +2,7 @@
 id: lem-ordered-ring-cone-and-order-agree
 kind: lemma
 title: "The order presentation and the positive-cone presentation of an ordered ring determine each other: $P = \\{\\, x : 0 < x \\,\\}$ satisfies trichotomy and closure, and $a < b :\\iff b - a \\in P$ recovers the order"
-status: draft
+status: published
 origin: session
 deps: [def-ordered-ring, def-ring, def-group, lem-group-inverse-laws, def-partial-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

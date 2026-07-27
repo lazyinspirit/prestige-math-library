@@ -2,7 +2,7 @@
 id: lem-ordered-field-is-an-ordered-ring
 kind: lemma
 title: "Every ordered field is an ordered ring, and its order is the one its positive cone induces"
-status: draft
+status: published
 origin: session
 deps: [def-ordered-field, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, lem-field-is-a-commutative-ring, def-field, lem-of-square-positive]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-common-divisor-divides-gcd
 kind: corollary
 title: "Every common divisor of $a$ and $b$ divides $\\gcd(a,b)$; consequently $d = \\gcd(a,b)$ exactly when $d \\ge 0$, $d \\mid a$, $d \\mid b$, and every common divisor of $a$ and $b$ divides $d$ — a characterisation that holds at $(a,b) = (0,0)$ as well"
-status: draft
+status: published
 origin: session
 deps: [thm-bezout-identity, def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, lem-associates-characterisation, def-int-abs, lem-int-abs-properties, def-int-order, thm-int-ordered-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

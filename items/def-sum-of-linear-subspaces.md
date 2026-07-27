@@ -2,7 +2,7 @@
 id: def-sum-of-linear-subspaces
 kind: definition
 title: "The sum $U + W$ of two linear subspaces and the sum $\\sum_{i<n} U_i$ of a finite family"
-status: draft
+status: published
 origin: session
 deps: [def-linear-subspace, lem-linear-subspace-criterion, def-vector-space, def-monoid-finite-product, def-linear-combination-and-span, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

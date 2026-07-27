@@ -1,8 +1,16 @@
 # Level-8 ALGEBRA — amendments staged for the publishing commit
 
-**Status: PREPARED, NOT APPLIED.** Nothing here may land before the commit that
-flips level-8 algebra to `published` (`LEVELS.md` §10b: "Amendments to published
-pages land in the same commit that publishes the level, never before").
+**Status: APPLIED 2026-07-28, in the publishing commit, on the owner's "i
+audited. Publish".** Amendments 1, 2 and 3 landed; amendment 4 (optional
+courtesy pointer) was left unapplied per its own default. Amendment 3's open
+question was resolved by NOT clearing `verification.audited` on
+`cex-dirichlet-has-no-limit-anywhere`: an alias removal changes no claim
+(SCHEMA §3's own materiality test), and clearing would have blocked the publish
+on `published-unaudited`. The owner may override on review. `def-field` and the
+three amendment-2 items carry `verification.verified` (`delegated_by: owner`)
+rather than a fresh `audited`, since their final on-disk text postdates the
+owner's audit; the three amendment-2 items were re-judged (all pass,
+`research/level8-algebra-judge-alpha.jsonl`).
 
 Not to be confused with `research/level8-published-amendments.md`, which is the
 record of a **different** level 8 — the pre-renumber one, published 2026-07-27.

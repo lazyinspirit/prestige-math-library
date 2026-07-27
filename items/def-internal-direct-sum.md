@@ -2,7 +2,7 @@
 id: def-internal-direct-sum
 kind: definition
 title: "Internal direct sum $V = \\bigoplus_{i<n} U_i$: the sum is everything and each summand meets the sum of the others only in $0_V$"
-status: draft
+status: published
 origin: session
 deps: [def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

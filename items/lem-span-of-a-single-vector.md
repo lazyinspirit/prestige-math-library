@@ -2,7 +2,7 @@
 id: lem-span-of-a-single-vector
 kind: lemma
 title: "$\\operatorname{span}\\{v\\} = \\{\\, \\lambda v : \\lambda \\in F \\,\\}$, which is $\\{0_V\\}$ when $v = 0_V$, and when $v \\ne 0_V$ contains $0_V$ only as the multiple $0_F v$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-combination-and-span, lem-linear-subspace-criterion, lem-vector-space-elementary-consequences, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-sequence-space-and-eventually-zero-subspace
 kind: example
 title: "$F^{\\mathbb{N}}$ is a vector space and the eventually zero families form a linear subspace of it that is the span of the standard unit families"
-status: draft
+status: published
 origin: session
 deps: [def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-monoid-finite-product, thm-induction-principle, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, thm-nat-linear-order, def-field, lem-of-zero-mult]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

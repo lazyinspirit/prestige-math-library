@@ -2,7 +2,7 @@
 id: lem-coprime-divides-product
 kind: lemma
 title: "If $\\gcd(a,b) = 1$ and $a \\mid bc$ then $a \\mid c$; and if $a \\mid c$, $b \\mid c$ and $\\gcd(a,b) = 1$ then $ab \\mid c$"
-status: draft
+status: published
 origin: session
 deps: [def-coprime, lem-coprime-criterion, lem-gcd-basic-values, def-common-divisor-and-gcd, lem-divisibility-basic, def-divides-in-z, thm-int-comm-ring, def-int-operations]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

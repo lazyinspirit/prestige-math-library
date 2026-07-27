@@ -2,7 +2,7 @@
 id: def-linear-subspace
 kind: definition
 title: "Linear subspace of a vector space"
-status: draft
+status: published
 origin: session
 deps: [def-vector-space, def-subgroup, def-group, lem-vector-space-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

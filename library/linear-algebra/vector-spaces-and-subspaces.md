@@ -1,7 +1,7 @@
 ---
 page: vector-spaces-and-subspaces
 title: "Vector Spaces, Linear Subspaces, Span and Direct Sums"
-status: draft
+status: published
 items: [def-vector-space, lem-vector-space-elementary-consequences,
         def-function-space, def-matrix-space, lem-restriction-of-scalars,
         def-linear-subspace, lem-linear-subspace-is-a-subgroup,

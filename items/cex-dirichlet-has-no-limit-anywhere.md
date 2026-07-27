@@ -6,7 +6,7 @@ status: published
 origin: session
 deps: [cor-sequential-criterion-for-nonexistence, lem-q-and-irrationals-dense-r, lem-sequential-characterisation-of-closure-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-sequence, def-real-limit, lem-rat-embeds-dense, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive, def-ordered-field]
 justified_by: []
-aliases: [cex-dirichlet-function]
+aliases: []
 landmark: true
 short: "Dirichlet function: no limit anywhere"
 proof_strategy: direct

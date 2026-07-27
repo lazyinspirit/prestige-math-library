@@ -2,7 +2,7 @@
 id: lem-ring-elementary-consequences
 kind: lemma
 title: "In any ring $0 \\cdot a = a \\cdot 0 = 0$, $(-a)b = a(-b) = -(ab)$, $(-a)(-b) = ab$, $(-1)a = -a$ and $a(b - c) = ab - ac$"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-group, lem-group-cancellation, lem-group-inverse-laws, def-identity-element]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-int-bounded-above-has-greatest
 kind: lemma
 title: "A nonempty set of integers bounded above has a greatest element, and a nonempty set of integers bounded below has a least element"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, thm-well-ordering-principle, def-natural-numbers, def-nat-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

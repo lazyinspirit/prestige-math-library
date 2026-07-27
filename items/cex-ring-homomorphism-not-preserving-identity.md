@@ -2,7 +2,7 @@
 id: cex-ring-homomorphism-not-preserving-identity
 kind: counterexample
 title: "The map $n \\mapsto (n,0)$ from $\\mathbb{Z}$ to $\\mathbb{Z} \\times \\mathbb{Z}$ preserves addition and multiplication and does not preserve $1$, so the clause $f(1) = 1$ is not redundant"
-status: draft
+status: published
 origin: session
 deps: [def-ring-homomorphism, def-product-ring, def-ring, def-group-homomorphism, lem-ring-elementary-consequences, ex-integers-as-a-commutative-ring, thm-int-comm-ring, def-integers, def-int-operations, lem-nat-embeds-int]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

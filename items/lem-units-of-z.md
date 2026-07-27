@@ -2,7 +2,7 @@
 id: lem-units-of-z
 kind: lemma
 title: "$(\\mathbb{Z}, \\cdot, 1)$ is a commutative monoid whose group of units is $\\{1, -1\\}$; equivalently $u \\mid 1$ holds exactly for $u = 1$ and $u = -1$"
-status: draft
+status: published
 origin: session
 deps: [thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, def-integers, def-binary-operation, def-identity-element, def-semigroup-and-monoid, def-invertible-element, lem-monoid-units-form-a-group, def-group, def-divides-in-z, lem-divisor-bound, def-int-abs, lem-int-abs-properties, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

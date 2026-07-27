@@ -2,7 +2,7 @@
 id: lem-vector-space-elementary-consequences
 kind: lemma
 title: "In any vector space $0_F v = 0_V$, $\\lambda 0_V = 0_V$, $(-\\lambda)v = -(\\lambda v)$, $(-1_F)v = -v$, and $\\lambda v = 0_V$ forces $\\lambda = 0_F$ or $v = 0_V$"
-status: draft
+status: published
 origin: session
 deps: [def-vector-space, def-field, def-group, lem-group-cancellation, lem-of-inverse-unique]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

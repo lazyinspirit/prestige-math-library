@@ -2,7 +2,7 @@
 id: lem-span-is-the-set-of-linear-combinations
 kind: lemma
 title: "$\\operatorname{span}(S)$ is exactly the set of linear combinations of finite lists of elements of $S$, and $\\operatorname{span}(\\varnothing) = \\{0_V\\}$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-combination-and-span, def-monoid-finite-product, lem-linear-subspace-criterion, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

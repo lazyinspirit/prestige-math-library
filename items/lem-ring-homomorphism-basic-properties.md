@@ -2,7 +2,7 @@
 id: lem-ring-homomorphism-basic-properties
 kind: lemma
 title: "A ring homomorphism satisfies $f(0) = 0$, $f(-a) = -f(a)$ and $f(ma) = m f(a)$ for $m \\in \\mathbb{Z}$, carries units to units, and has a subring as its image; composites of ring homomorphisms are ring homomorphisms"
-status: draft
+status: published
 origin: session
 deps: [def-ring-homomorphism, def-ring, def-group-homomorphism, lem-group-homomorphism-basic-properties, def-subring, lem-subring-criterion, def-invertible-element, lem-inverse-unique, lem-ring-units-form-a-group, lem-integer-multiples-in-a-ring, def-group-power]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

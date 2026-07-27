@@ -2,7 +2,7 @@
 id: def-subfield
 kind: definition
 title: "Subfield: a subring of a field closed under inverses of its nonzero elements, and therefore a field with the restricted operations"
-status: draft
+status: published
 origin: session
 deps: [def-field, def-subring, lem-subring-criterion, lem-field-is-a-commutative-ring, lem-commutative-division-ring-is-a-field, def-division-ring, def-commutative-ring, def-ordered-field]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

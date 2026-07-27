@@ -2,7 +2,7 @@
 id: lem-int-abs-properties
 kind: lemma
 title: "Absolute value in $\\mathbb{Z}$: $|a| \\ge 0$; $|a| = 0$ exactly when $a = 0$; $|-a| = |a|$; $|ab| = |a|\\,|b|$; $-|a| \\le a \\le |a|$; and $|a| \\le c$ exactly when $-c \\le a \\le c$"
-status: draft
+status: published
 origin: session
 deps: [def-int-abs, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

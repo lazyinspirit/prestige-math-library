@@ -2,7 +2,7 @@
 id: lem-domain-cancellation
 kind: lemma
 title: "Cancellation characterises domains: in a commutative ring with $1 \\ne 0$, the implication $ab = ac$ and $a \\ne 0$ imply $b = c$ holds if and only if the ring has no zero divisors"
-status: draft
+status: published
 origin: session
 deps: [def-zero-divisor-and-integral-domain, def-commutative-ring, def-ring, lem-ring-elementary-consequences, lem-group-cancellation, def-group]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

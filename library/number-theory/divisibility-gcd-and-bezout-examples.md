@@ -1,7 +1,7 @@
 ---
 page: divisibility-gcd-and-bezout-examples
 title: "Divisibility and Greatest Common Divisors: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-euclidean-algorithm-worked, ex-bezout-coefficients-not-unique,
            ex-gcd-with-zero, ex-linear-diophantine-equation-solvability,

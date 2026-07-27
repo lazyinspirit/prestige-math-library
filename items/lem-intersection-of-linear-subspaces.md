@@ -2,7 +2,7 @@
 id: lem-intersection-of-linear-subspaces
 kind: lemma
 title: "The intersection of a nonempty family of linear subspaces of $V$ is a linear subspace of $V$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-subspace, lem-linear-subspace-criterion, def-vector-space]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

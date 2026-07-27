@@ -2,7 +2,7 @@
 id: lem-gcd-scaling
 kind: lemma
 title: "$\\gcd(ca, cb) = |c|\\,\\gcd(a,b)$ for all integers $a, b, c$, the identity holding at $c = 0$ and at $(a,b) = (0,0)$ as well"
-status: draft
+status: published
 origin: session
 deps: [def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, thm-bezout-identity, lem-divisibility-basic, lem-divisor-bound, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

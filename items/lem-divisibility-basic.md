@@ -2,7 +2,7 @@
 id: lem-divisibility-basic
 kind: lemma
 title: "Divisibility is reflexive and transitive on $\\mathbb{Z}$, and is linear: if $d \\mid a$ and $d \\mid b$ then $d \\mid ax + by$ for all integers $x, y$; also $d \\mid a$ implies $d \\mid ac$, $-d \\mid a$ and $d \\mid -a$"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, def-integers, def-int-operations, thm-int-comm-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

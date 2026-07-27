@@ -2,7 +2,7 @@
 id: lem-restriction-of-scalars
 kind: lemma
 title: "A field is a vector space over itself, and over any subfield $K \\subseteq F$ every $F$-vector space is a $K$-vector space by restricting the scalars"
-status: draft
+status: published
 origin: session
 deps: [def-vector-space, def-subfield, def-field]
 justified_by: []
@@ -16,6 +16,12 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-28
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -83,36 +89,10 @@ Let $F$ be a field ([[def-field]]).
 
 ## Remarks
 
-- **On the reading of the field axioms in [L2].** [[def-field]] states axiom (M)
-  for $F \setminus \{0_F\}$ and states distributivity on one side only. The
-  reading used above, that multiplication is associative and commutative on all of
-  $F$ and distributes on both sides, is the standard one and is the reading
-  already in force elsewhere in this library, for instance in
-  [[lem-of-zero-mult]], whose [L1] states distributivity on the right. It is used
-  in exactly three of the steps above, where axioms (V3), (V4) and (V5) are read
-  off for arbitrary scalars including $0_F$: step 1.4 needs distributivity on the
-  right; step 1.5 needs associativity of the multiplication at $0_F$ as well; and
-  step 1.6 needs $1_F x = x$ rather than the stated $x \cdot 1_F = x$, and needs
-  it at $x = 0_F$ too. It is used nowhere else: step 1.2 is axiom (A) verbatim,
-  step 1.3 is axiom (D) verbatim, and steps 1.7 to 4.1 use only the vector-space
-  axioms of $V$ and the subfield facts of [L3]. Nothing published is changed by
-  recording it here.
+- **On the field facts in [L2].** Axiom (M) of [[def-field]] asserts that multiplication is associative and commutative on all of $F$ with $x \cdot 1_F = x$ for every $x \in F$, the element $0_F$ included, and right distributivity then follows from axiom (D) by commuting, as [[lem-of-zero-mult]] already records. These unrestricted forms are spent in exactly three of the steps above, where axioms (V3), (V4) and (V5) are read off for arbitrary scalars including $0_F$: step 1.4 needs distributivity on the right; step 1.5 needs associativity of the multiplication at $0_F$ as well; and step 1.6 needs $1_F x = x$ rather than the literal $x \cdot 1_F = x$, which commutativity supplies, and needs it at $x = 0_F$ too. They are used nowhere else: step 1.2 is axiom (A) verbatim, step 1.3 is axiom (D) verbatim, and steps 1.7 to 4.1 use only the vector-space axioms of $V$ and the subfield facts of [L3].
 
-- **Restricting the scalars changes the structure, not the set.** The vectors, the
-  addition and the zero are untouched; only the collection of scalars allowed to
-  act shrinks. Everything that can be said about $V$ as a $K$-vector space is
-  therefore a statement about the same object with fewer operations available, and
-  every $F$-linear subspace of $V$ is in particular a $K$-linear subspace
-  ([[def-linear-subspace]]). The converse fails, and that is the point of the
-  construction.
+- **Restricting the scalars changes the structure, not the set.** The vectors, the addition and the zero are untouched; only the collection of scalars allowed to act shrinks. Everything that can be said about $V$ as a $K$-vector space is therefore a statement about the same object with fewer operations available, and every $F$-linear subspace of $V$ is in particular a $K$-linear subspace ([[def-linear-subspace]]). The converse fails, and that is the point of the construction.
 
-- **The field is part of the data.** Because of this lemma, a bare phrase like
-  "the vector space $V$" is incomplete: $\mathbb{R}$ is a vector space over
-  $\mathbb{R}$ and also over the embedded copy of $\mathbb{Q}$ inside it, and
-  these are different structures on one set. Every statement on this page names
-  its field.
+- **The field is part of the data.** Because of this lemma, a bare phrase like "the vector space $V$" is incomplete: $\mathbb{R}$ is a vector space over $\mathbb{R}$ and also over the embedded copy of $\mathbb{Q}$ inside it, and these are different structures on one set. Every statement on this page names its field.
 
-- **Nothing here is about dimension.** How much smaller $K$ is than $F$, and what
-  that does to $V$, is a question about bases and dimension, which are developed
-  on a later page. This lemma asserts only that the restricted structure satisfies
-  the five axioms.
+- **Nothing here is about dimension.** How much smaller $K$ is than $F$, and what that does to $V$, is a question about bases and dimension, which are developed on a later page. This lemma asserts only that the restricted structure satisfies the five axioms.

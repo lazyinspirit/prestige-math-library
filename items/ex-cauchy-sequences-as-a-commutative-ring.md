@@ -2,7 +2,7 @@
 id: ex-cauchy-sequences-as-a-commutative-ring
 kind: example
 title: "The Cauchy sequences of rationals form a commutative ring that is not an integral domain: two eventually-constant sequences with disjoint supports multiply to zero"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-elementary-consequences, def-subring, lem-subring-criterion, def-ring-of-functions, thm-cauchy-ring, def-rational-cauchy-sequence, thm-rat-field, def-natural-numbers, def-nat-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

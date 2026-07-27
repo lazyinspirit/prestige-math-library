@@ -2,7 +2,7 @@
 id: def-coprime
 kind: definition
 title: "Coprime integers: $\\gcd(a,b) = 1$"
-status: draft
+status: published
 origin: session
 deps: [def-common-divisor-and-gcd, lem-gcd-basic-values, lem-units-of-z, def-int-abs, lem-int-abs-properties]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

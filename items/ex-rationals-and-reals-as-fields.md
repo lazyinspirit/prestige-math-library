@@ -2,7 +2,7 @@
 id: ex-rationals-and-reals-as-fields
 kind: example
 title: "$\\mathbb{Q}$ and $\\mathbb{R}$ are fields, hence commutative rings, integral domains and ordered rings, all of characteristic $0$"
-status: draft
+status: published
 origin: session
 deps: [def-field, lem-field-is-a-commutative-ring, def-zero-divisor-and-integral-domain, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, lem-ordered-field-is-an-ordered-ring, def-ordered-field, def-ring-characteristic, lem-integer-multiples-agree-with-canonical-natural, def-canonical-natural, lem-of-naturals-positive, thm-rat-field, thm-reals-field, thm-rat-ordered-field, thm-reals-ordered-field, def-ring, def-commutative-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

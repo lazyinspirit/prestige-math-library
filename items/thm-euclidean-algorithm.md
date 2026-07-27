@@ -2,7 +2,7 @@
 id: thm-euclidean-algorithm
 kind: theorem
 title: "The Euclidean algorithm: for $a \\in \\mathbb{Z}$ and $b > 0$ the remainder descent from $(a,b)$ terminates, and the last nonzero remainder is $\\gcd(a,b)$"
-status: draft
+status: published
 origin: session
 deps: [lem-gcd-euclidean-step, def-common-divisor-and-gcd, lem-gcd-basic-values, thm-division-algorithm-in-z, thm-recursion, thm-induction-principle, thm-well-ordering-principle, def-natural-numbers, def-nat-order, lem-nat-discrete, lem-nat-trichotomy, lem-nat-nonzero-is-successor, lem-nat-embeds-int, def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, def-int-order, thm-int-comm-ring, def-int-operations, def-integers]
 justified_by: []
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

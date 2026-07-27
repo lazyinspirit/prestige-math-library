@@ -2,7 +2,7 @@
 id: def-subring
 kind: definition
 title: "Subring: a subset containing $1_R$ and closed under addition, additive inverses and multiplication"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-subgroup, def-binary-operation, def-identity-element]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-integer-multiples-agree-with-canonical-natural
 kind: lemma
 title: "In a field, the additive multiple $n \\cdot 1_F$ is the canonical natural $\\iota(n)$: the additive power of the group-power definition and the canonical natural are the same function, both being the unique one given by the recursion $\\iota(0) = 0_F$, $\\iota(\\sigma(n)) = \\iota(n) + 1_F$"
-status: draft
+status: published
 origin: session
 deps: [def-canonical-natural, def-group-power, def-field, lem-field-is-a-commutative-ring, def-ring, thm-recursion, def-natural-numbers, def-nat-addition, def-group]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

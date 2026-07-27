@@ -2,7 +2,7 @@
 id: thm-quaternions-form-a-division-ring
 kind: theorem
 title: "$\\mathbb{H}$ is a division ring that is not commutative, hence not a field: $q^{-1} = \\bar q / N(q)$ for $q \\ne 0$, while $ij = k$ and $ji = -k$"
-status: draft
+status: published
 origin: session
 deps: [def-quaternions, def-ring, def-division-ring, def-commutative-ring, def-invertible-element, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-field, def-ordered-field, thm-reals-field, thm-reals-ordered-field, lem-of-square-positive, lem-of-zero-mult, def-real-numbers, def-monoid-finite-product, thm-generalised-associativity, def-semigroup-and-monoid, def-group, def-binary-operation, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

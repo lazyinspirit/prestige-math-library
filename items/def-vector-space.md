@@ -2,7 +2,7 @@
 id: def-vector-space
 kind: definition
 title: "Vector space over a field"
-status: draft
+status: published
 origin: session
 deps: [def-field, def-group, def-binary-operation, def-identity-element, def-invertible-element, lem-identity-unique, lem-inverse-unique]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-product-ring-has-zero-divisors
 kind: example
 title: "A product of two rings with $1 \\ne 0$ always has zero divisors: $(1,0)(0,1) = (0,0)$ in $\\mathbb{Z} \\times \\mathbb{Z}$, so a product of integral domains is never an integral domain"
-status: draft
+status: published
 origin: session
 deps: [def-product-ring, def-zero-divisor-and-integral-domain, def-ring, def-commutative-ring, lem-ring-elementary-consequences, ex-integers-as-a-commutative-ring, ex-integers-are-an-integral-domain-not-a-field, thm-int-comm-ring, def-integers, def-int-operations]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

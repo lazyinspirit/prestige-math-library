@@ -2,7 +2,7 @@
 id: lem-integer-multiples-in-a-ring
 kind: lemma
 title: "Integer multiples in a ring: $(m + n)a = ma + na$, $m(a + b) = ma + mb$, $(ma)b = m(ab) = a(mb)$ and $(ma)(nb) = (mn)(ab)$ for all $m, n \\in \\mathbb{Z}$ and $a, b \\in R$"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-group, def-group-power, lem-group-power-laws, lem-ring-elementary-consequences, thm-induction-principle, def-natural-numbers, def-integers, def-int-operations, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, lem-nat-embeds-int]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

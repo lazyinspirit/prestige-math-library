@@ -2,7 +2,7 @@
 id: fs-gcd-times-lcm-equals-the-product
 kind: false-statement
 title: "For all integers $a$ and $b$, $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = ab$"
-status: draft
+status: published
 origin: session
 deps: [thm-gcd-lcm-product, def-lcm, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-divisibility-basic, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, lem-nat-embeds-int, def-integers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

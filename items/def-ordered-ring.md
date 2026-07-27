@@ -2,7 +2,7 @@
 id: def-ordered-ring
 kind: definition
 title: "Ordered ring: a ring with a total order compatible with addition and with positives closed under multiplication"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-partial-order, def-ordered-field, thm-int-ordered-ring, def-int-order]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

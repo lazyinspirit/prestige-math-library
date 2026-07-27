@@ -2,7 +2,7 @@
 id: lem-divisor-bound
 kind: lemma
 title: "If $d \\mid a$ and $a \\ne 0$ then $d \\ne 0$ and $|d| \\le |a|$; hence the set of divisors of a nonzero integer is bounded above by $|a|$"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, def-int-abs, lem-int-abs-properties, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order, def-integers, def-int-operations]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

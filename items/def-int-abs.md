@@ -2,7 +2,7 @@
 id: def-int-abs
 kind: definition
 title: "The absolute value $|a|$ of an integer"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

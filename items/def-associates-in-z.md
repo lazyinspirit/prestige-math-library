@@ -2,7 +2,7 @@
 id: def-associates-in-z
 kind: definition
 title: "Associates in $\\mathbb{Z}$: integers each of which divides the other"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, def-equivalence-relation]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

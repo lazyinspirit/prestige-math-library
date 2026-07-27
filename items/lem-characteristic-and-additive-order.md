@@ -2,7 +2,7 @@
 id: lem-characteristic-and-additive-order
 kind: lemma
 title: "The characteristic of a ring is the additive order of $1_R$, with $0$ recording infinite order; $n \\cdot 1_R = 0$ holds exactly when $\\operatorname{char}(R) \\mid n$; and in an integral domain every nonzero element has the same additive order as $1_R$"
-status: draft
+status: published
 origin: session
 deps: [def-ring-characteristic, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-integer-multiples-in-a-ring, lem-ring-elementary-consequences, def-order-in-a-group, lem-order-characterisation, def-group-power, def-group, def-divides-in-z, def-ring, thm-int-comm-ring, lem-nat-embeds-int]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

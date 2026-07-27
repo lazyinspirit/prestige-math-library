@@ -2,7 +2,7 @@
 id: lem-subgroups-of-z-are-cyclic
 kind: lemma
 title: "Every subgroup of $(\\mathbb{Z}, +)$ is $\\langle n \\rangle = n\\mathbb{Z}$ for exactly one natural number $n$"
-status: draft
+status: published
 origin: session
 deps: [def-group, def-subgroup, lem-subgroup-criterion, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, def-group-power, thm-recursion, thm-division-algorithm-in-z, thm-well-ordering-principle, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-2z-is-not-a-subring
 kind: counterexample
 title: "$2\\mathbb{Z}$ is closed under addition, negation and multiplication and is not a subring of $\\mathbb{Z}$, because it does not contain $1$"
-status: draft
+status: published
 origin: session
 deps: [def-subring, lem-subring-criterion, def-ring, def-subgroup, def-divides-in-z, lem-divisibility-basic, lem-units-of-z, ex-integers-as-a-commutative-ring, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order, lem-nat-embeds-int, def-invertible-element]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

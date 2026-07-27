@@ -2,7 +2,7 @@
 id: ex-subring-that-is-not-a-subfield
 kind: example
 title: "$\\mathbb{Z}$ sits inside $\\mathbb{Q}$ as a subring that is not a subfield, so the inverse-closure clause of the subfield definition is doing work"
-status: draft
+status: published
 origin: session
 deps: [def-subring, lem-subring-criterion, def-subfield, def-ring, def-commutative-ring, def-field, def-invertible-element, lem-ring-units-form-a-group, lem-units-of-z, lem-int-embeds-rat, ex-rationals-and-reals-as-fields, ex-integers-as-a-commutative-ring, thm-rat-field, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-integers, lem-nat-embeds-int, lem-field-is-a-commutative-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: divisibility-gcd-and-bezout
 title: "Divisibility, Greatest Common Divisors and Bézout's Identity"
-status: draft
+status: published
 items: [def-int-abs, lem-int-abs-properties, def-divides-in-z,
         cor-division-algorithm-nonzero-divisor, lem-divisibility-basic,
         lem-divisor-bound, lem-units-of-z, def-associates-in-z,

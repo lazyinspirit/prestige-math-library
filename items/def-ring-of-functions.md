@@ -2,7 +2,7 @@
 id: def-ring-of-functions
 kind: definition
 title: "The ring $R^{X}$ of all functions from a set $X$ into a ring, with pointwise operations"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, def-binary-operation, lem-ring-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

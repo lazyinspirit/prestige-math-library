@@ -2,7 +2,7 @@
 id: cex-pairwise-trivial-intersection-is-not-a-direct-sum
 kind: counterexample
 title: "Three lines in $F^{2}$ that meet pairwise only in $0$ and whose sum is $F^{2}$ with decompositions that are not unique, so pairwise trivial intersection does not give a direct sum"
-status: draft
+status: published
 origin: session
 deps: [def-internal-direct-sum, lem-direct-sum-criterion, def-sum-of-linear-subspaces, lem-span-of-a-single-vector, def-linear-combination-and-span, def-linear-subspace, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

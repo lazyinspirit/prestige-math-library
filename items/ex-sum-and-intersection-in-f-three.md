@@ -2,7 +2,7 @@
 id: ex-sum-and-intersection-in-f-three
 kind: example
 title: "Two planes in $F^{3}$ whose sum is $F^{3}$ and whose intersection is a line, computed explicitly"
-status: draft
+status: published
 origin: session
 deps: [def-sum-of-linear-subspaces, lem-intersection-of-linear-subspaces, lem-span-of-a-single-vector, def-linear-combination-and-span, def-linear-subspace, lem-linear-subspace-criterion, def-internal-direct-sum, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

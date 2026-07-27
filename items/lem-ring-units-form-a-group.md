@@ -2,7 +2,7 @@
 id: lem-ring-units-form-a-group
 kind: lemma
 title: "The units of a ring are the invertible elements of its multiplicative monoid, and $R^{\\times}$ is a group under multiplication; $0 \\in R^{\\times}$ only in the zero ring"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-invertible-element, lem-inverse-unique, lem-monoid-units-form-a-group, def-semigroup-and-monoid, lem-ring-elementary-consequences, def-group]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

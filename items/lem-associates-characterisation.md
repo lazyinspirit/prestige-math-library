@@ -2,7 +2,7 @@
 id: lem-associates-characterisation
 kind: lemma
 title: "For integers $a$ and $b$ the following are equivalent: $a \\mid b$ and $b \\mid a$; $b = ua$ for a unit $u$; $|a| = |b|$. Being associates is an equivalence relation whose class of $a$ is $\\{a, -a\\}$"
-status: draft
+status: published
 origin: session
 deps: [def-associates-in-z, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, lem-units-of-z, def-int-abs, lem-int-abs-properties, def-equivalence-relation, lem-equivalence-classes-partition, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-int-operations]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

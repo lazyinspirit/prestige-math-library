@@ -2,7 +2,7 @@
 id: def-division-ring
 kind: definition
 title: "Division ring: a ring with $1 \\ne 0$ in which every nonzero element is a unit"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-invertible-element, lem-ring-units-form-a-group, lem-ring-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

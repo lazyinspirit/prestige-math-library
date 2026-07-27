@@ -2,7 +2,7 @@
 id: def-product-ring
 kind: definition
 title: "The product ring $R \\times S$ with componentwise operations, its identity $(1_R, 1_S)$ and its units $R^{\\times} \\times S^{\\times}$"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, def-invertible-element, lem-ring-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

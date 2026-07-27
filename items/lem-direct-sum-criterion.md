@@ -2,7 +2,7 @@
 id: lem-direct-sum-criterion
 kind: lemma
 title: "$V = \\bigoplus_{i<n} U_i$ if and only if every $v \\in V$ is $\\sum_{i<n} u_i$ with $u_i \\in U_i$ in exactly one way; equivalently, if and only if the sum is $V$ and $\\sum_{i<n} u_i = 0_V$ with $u_i \\in U_i$ forces every $u_i = 0_V$"
-status: draft
+status: published
 origin: session
 deps: [def-internal-direct-sum, def-sum-of-linear-subspaces, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, def-monoid-finite-product, lem-group-cancellation, def-group, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: rings-subrings-and-integral-domains-examples
 title: "Rings, Domains and Fields: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-integers-as-a-commutative-ring,
            ex-integers-are-an-integral-domain-not-a-field,

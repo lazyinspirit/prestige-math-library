@@ -2,7 +2,7 @@
 id: cor-gcd-quotients-coprime
 kind: corollary
 title: "If $d = \\gcd(a,b)$ is nonzero then $a/d$ and $b/d$ are coprime"
-status: draft
+status: published
 origin: session
 deps: [lem-gcd-scaling, def-coprime, def-common-divisor-and-gcd, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

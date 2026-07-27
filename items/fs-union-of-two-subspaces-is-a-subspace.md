@@ -2,7 +2,7 @@
 id: fs-union-of-two-subspaces-is-a-subspace
 kind: false-statement
 title: "The union of two linear subspaces is a linear subspace"
-status: draft
+status: published
 origin: session
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-span-of-a-single-vector, def-linear-combination-and-span, lem-intersection-of-linear-subspaces, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

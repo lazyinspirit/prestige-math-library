@@ -2,7 +2,7 @@
 id: ex-integers-as-a-commutative-ring
 kind: example
 title: "$\\mathbb{Z}$ is a commutative ring and an ordered ring, the published construction being an instance of the general definitions"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-euclidean-algorithm-worked
 kind: example
 title: "$\\gcd(1071, 462) = 21$ by the Euclidean algorithm, with the back-substitution giving $21 = 7 \\cdot 462 - 3 \\cdot 1071$"
-status: draft
+status: published
 origin: session
 deps: [thm-euclidean-algorithm, cor-extended-euclidean-bezout-coefficients, lem-gcd-euclidean-step, lem-gcd-basic-values, thm-bezout-identity, def-common-divisor-and-gcd, def-divides-in-z, thm-division-algorithm-in-z, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, def-int-abs, lem-int-abs-properties]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

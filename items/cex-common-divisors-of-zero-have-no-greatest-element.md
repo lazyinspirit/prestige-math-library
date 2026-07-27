@@ -2,7 +2,7 @@
 id: cex-common-divisors-of-zero-have-no-greatest-element
 kind: counterexample
 title: "The common divisors of $(0,0)$ are all of $\\mathbb{Z}$ and have no greatest element in the order of $\\mathbb{Z}$, so $\\gcd(0,0)$ cannot be defined as a maximum and is fixed by convention"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-int-bounded-above-has-greatest, def-int-order, thm-int-ordered-ring, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-divides-a-product-without-dividing-a-factor
 kind: counterexample
 title: "$6 \\mid 4 \\cdot 9$ while $6 \\nmid 4$ and $6 \\nmid 9$: dividing a product does not force dividing a factor, and the coprimality hypothesis is what fails"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, lem-divisibility-basic, lem-coprime-divides-product, def-coprime, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, thm-division-algorithm-in-z, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order, lem-nat-embeds-int, def-integers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

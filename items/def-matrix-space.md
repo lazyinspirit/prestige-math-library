@@ -2,7 +2,7 @@
 id: def-matrix-space
 kind: definition
 title: "The vector space $M_{m \\times n}(F) := F^{\\,m \\times n}$ of $m$ by $n$ matrices over a field, with entrywise operations"
-status: draft
+status: published
 origin: session
 deps: [def-function-space, def-vector-space, def-field, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

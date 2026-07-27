@@ -2,7 +2,7 @@
 id: lem-subring-criterion
 kind: lemma
 title: "Subring criterion: $S \\subseteq R$ is a subring if and only if $1_R \\in S$ and $a - b \\in S$ and $ab \\in S$ for all $a, b \\in S$; and an intersection of subrings is a subring"
-status: draft
+status: published
 origin: session
 deps: [def-subring, def-ring, def-subgroup, lem-subgroup-criterion, lem-intersection-of-subgroups, def-group]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

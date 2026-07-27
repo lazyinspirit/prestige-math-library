@@ -2,7 +2,7 @@
 id: ex-f-n-and-its-coordinate-subspaces
 kind: example
 title: "In $F^{3}$ the three coordinate lines are linear subspaces whose internal direct sum is $F^{3}$, and $F^{0}$ is the zero space"
-status: draft
+status: published
 origin: session
 deps: [def-function-space, def-vector-space, def-linear-subspace, def-linear-combination-and-span, lem-span-of-a-single-vector, def-sum-of-linear-subspaces, def-internal-direct-sum, lem-direct-sum-criterion, def-natural-numbers, lem-nat-order-is-membership, def-field, lem-of-zero-mult]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

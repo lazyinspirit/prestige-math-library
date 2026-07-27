@@ -2,7 +2,7 @@
 id: lem-ring-homomorphism-of-fields-is-a-field-homomorphism
 kind: lemma
 title: "A ring homomorphism between fields is a field homomorphism in the published sense, and every such map is injective"
-status: draft
+status: published
 origin: session
 deps: [def-ring-homomorphism, def-field-homomorphism, lem-field-is-a-commutative-ring, lem-ring-homomorphism-basic-properties, lem-ring-elementary-consequences, def-field, def-injection-surjection-bijection, def-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

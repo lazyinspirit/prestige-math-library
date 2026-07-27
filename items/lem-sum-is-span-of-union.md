@@ -2,7 +2,7 @@
 id: lem-sum-is-span-of-union
 kind: lemma
 title: "$\\sum_{i<n} U_i = \\operatorname{span}\\bigl(\\bigcup_{i<n} U_i\\bigr)$, so the sum is the smallest linear subspace containing every $U_i$"
-status: draft
+status: published
 origin: session
 deps: [def-sum-of-linear-subspaces, def-linear-combination-and-span, def-linear-subspace, def-monoid-finite-product, def-vector-space, thm-induction-principle, lem-nat-order-is-membership, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

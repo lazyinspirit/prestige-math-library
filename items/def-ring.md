@@ -2,7 +2,7 @@
 id: def-ring
 kind: definition
 title: "Ring: an abelian group under addition and a monoid under multiplication, with multiplication distributing over addition on both sides"
-status: draft
+status: published
 origin: session
 deps: [def-group, def-semigroup-and-monoid, def-binary-operation, def-identity-element, lem-identity-unique, def-invertible-element, lem-inverse-unique]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

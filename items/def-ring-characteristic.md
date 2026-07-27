@@ -2,7 +2,7 @@
 id: def-ring-characteristic
 kind: definition
 title: "The characteristic of a ring: the least $n \\ge 1$ with $n \\cdot 1_R = 0$ when one exists, and $0$ otherwise"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-group, def-group-power, lem-integer-multiples-agree-with-canonical-natural, def-canonical-natural, def-field, def-order-in-a-group, thm-well-ordering-principle, def-natural-numbers, def-nat-order]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-gcd-euclidean-step
 kind: lemma
 title: "If $a = qb + r$ then $a, b$ and $b, r$ have exactly the same common divisors, so $\\gcd(a,b) = \\gcd(b,r)$"
-status: draft
+status: published
 origin: session
 deps: [def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, thm-int-comm-ring, def-int-operations]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

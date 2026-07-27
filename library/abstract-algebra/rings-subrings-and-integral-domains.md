@@ -1,7 +1,7 @@
 ---
 page: rings-subrings-and-integral-domains
 title: "Rings, Subrings, Integral Domains and Fields"
-status: draft
+status: published
 items: [def-ring, def-commutative-ring, lem-ring-elementary-consequences,
         lem-integer-multiples-in-a-ring, lem-ring-units-form-a-group,
         def-zero-divisor-and-integral-domain, lem-domain-cancellation,
@@ -54,15 +54,16 @@ homomorphism between fields is exactly a field homomorphism in the published
 sense, and is injective. Getting these wrong would leave the library with two
 notions wearing one name, which is the defect the four items exist to prevent.
 
-**A reading of the published field axioms, declared where it is load bearing.**
-Axiom (M) of [[def-field]] is headed by a statement about $F \setminus \{0\}$ and
-glossed by a sentence with no restriction on the variable. Two steps of
-[[lem-field-is-a-commutative-ring]] need the unrestricted reading: that
+**The field axioms, where their quantifiers are load bearing.** Axiom (M) of
+[[def-field]] asserts associativity, commutativity and $x \cdot 1 = x$ on all of
+$F$, the element $0$ included; its Remarks record the two-element counterexample
+showing that quantifier cannot be restricted to $F \setminus \{0\}$. Two steps of
+[[lem-field-is-a-commutative-ring]] spend exactly that clause: that
 $(F,\cdot,1)$ is a monoid, which is a statement about all of $F$ including $0$,
 and right distributivity, which follows from the left form only by commuting a
-product one of whose factors may be $0$. That lemma states the reading it uses in
-its Facts & Assumptions and names those two steps. No published item is amended
-by this page.
+product one of whose factors may be $0$. The axiom was amended into this explicit
+form in the commit that published this level, after the strict reading of its
+earlier wording was shown to admit a model falsifying [[lem-of-zero-mult]].
 
 **Elementary consequences, and integer multiples.**
 [[lem-ring-elementary-consequences]] proves $0 \cdot a = a \cdot 0 = 0$,

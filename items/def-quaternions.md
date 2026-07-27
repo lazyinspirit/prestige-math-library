@@ -2,7 +2,7 @@
 id: def-quaternions
 kind: definition
 title: "The quaternions $\\mathbb{H}$: real quadruples with componentwise addition and the multiplication extended from the table on $1, i, j, k$"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-binary-operation, def-identity-element, def-field, thm-reals-field, def-real-numbers, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

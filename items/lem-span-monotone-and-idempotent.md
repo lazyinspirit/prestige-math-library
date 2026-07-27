@@ -2,7 +2,7 @@
 id: lem-span-monotone-and-idempotent
 kind: lemma
 title: "The span is monotone and idempotent, $\\operatorname{span}(S) = S$ exactly when $S$ is a linear subspace, and $\\operatorname{span}(S \\cup \\{0_V\\}) = \\operatorname{span}(S)$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-combination-and-span, def-linear-subspace, def-vector-space]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

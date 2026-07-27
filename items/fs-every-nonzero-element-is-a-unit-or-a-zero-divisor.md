@@ -2,7 +2,7 @@
 id: fs-every-nonzero-element-is-a-unit-or-a-zero-divisor
 kind: false-statement
 title: "In every commutative ring, each nonzero element is either a unit or a zero divisor"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, def-invertible-element, lem-units-of-z, lem-int-cancellation, ex-integers-as-a-commutative-ring, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-integers, def-int-operations, lem-nat-embeds-int]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: vector-spaces-and-subspaces-examples
 title: "Vector Spaces and Linear Subspaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-r-as-a-vector-space-over-q,
            ex-f-n-and-its-coordinate-subspaces,

@@ -2,7 +2,7 @@
 id: def-commutative-ring
 kind: definition
 title: "Commutative ring"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-binary-operation]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

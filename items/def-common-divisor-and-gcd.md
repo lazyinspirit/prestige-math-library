@@ -2,7 +2,7 @@
 id: def-common-divisor-and-gcd
 kind: definition
 title: "Common divisor, and the greatest common divisor $\\gcd(a,b)$, with the convention $\\gcd(0,0) := 0$"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, lem-divisor-bound, lem-int-bounded-above-has-greatest, def-int-abs, def-int-order, thm-int-ordered-ring]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

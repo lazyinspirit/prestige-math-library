@@ -2,7 +2,7 @@
 id: ex-r-as-a-vector-space-over-q
 kind: example
 title: "$\\mathbb{R}$ is a vector space over itself and, by restriction of scalars along the embedded copy of $\\mathbb{Q}$, a vector space over $\\mathbb{Q}$"
-status: draft
+status: published
 origin: session
 deps: [lem-restriction-of-scalars, def-vector-space, def-subfield, def-field, def-ordered-field, def-field-homomorphism, lem-of-q-embeds, thm-rat-field, thm-reals-field, thm-reals-ordered-field, def-real-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

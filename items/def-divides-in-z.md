@@ -2,7 +2,7 @@
 id: def-divides-in-z
 kind: definition
 title: "Divisibility in $\\mathbb{Z}$: $d \\mid a$ when $a = dq$ for some integer $q$"
-status: draft
+status: published
 origin: session
 deps: [def-integers, def-int-operations, thm-int-comm-ring, thm-division-algorithm-in-z]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

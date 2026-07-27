@@ -2,7 +2,7 @@
 id: def-zero-divisor-and-integral-domain
 kind: definition
 title: "Zero divisor, and integral domain: a commutative ring with $1 \\ne 0$ and no zero divisors"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-commutative-ring, lem-ring-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

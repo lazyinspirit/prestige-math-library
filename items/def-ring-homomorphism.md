@@ -2,7 +2,7 @@
 id: def-ring-homomorphism
 kind: definition
 title: "Ring homomorphism: additive, multiplicative, and required to send $1$ to $1$"
-status: draft
+status: published
 origin: session
 deps: [def-ring, def-group-homomorphism, def-semigroup-and-monoid, def-identity-element]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:

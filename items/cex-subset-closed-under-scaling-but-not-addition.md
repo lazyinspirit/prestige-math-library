@@ -2,7 +2,7 @@
 id: cex-subset-closed-under-scaling-but-not-addition
 kind: counterexample
 title: "The union of the two coordinate axes of $F^{2}$ is closed under scalar multiplication and is not closed under addition, so neither closure condition implies the other"
-status: draft
+status: published
 origin: session
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-span-of-a-single-vector, def-linear-combination-and-span, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership, cex-subset-closed-under-addition-but-not-scaling]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-28
 sources:
   scraped: []
   references:
