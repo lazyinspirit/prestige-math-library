@@ -1,0 +1,1629 @@
+[
+  {
+    "order": 22,
+    "id": "divisibility-gcd-and-bezout",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Divisibility, Greatest Common Divisors and Bézout's Identity",
+    "companion": "divisibility-gcd-and-bezout-examples",
+    "requires": [
+      "monoids-groups-and-subgroups"
+    ],
+    "items": [
+      {
+        "id": "def-int-abs",
+        "kind": "definition",
+        "title": "The absolute value $|a|$ of an integer",
+        "strategy": "WELL-DEFINEDNESS, and a dictionary obligation. WHY IT IS MINTED AS A $\\mathbb{Z}$-SPECIFIC DEFINITION rather than as absolute value on an ordered ring: `def-ordered-ring` is order 42, fourteen pages ABOVE this one, so the general form is not available and cannot be reached for. (1) The two clauses $|a| = a$ for $a \\ge 0$ and $|a| = -a$ for $a < 0$ are exhaustive and mutually exclusive because the order on $\\mathbb{Z}$ is total and antisymmetric ([[thm-int-ordered-ring]], [[def-int-order]]); cite that, do not assert it. $-a$ is the additive inverse supplied by [[thm-int-comm-ring]]. (2) THIS IS NOT A SECOND NOTION OF ABSOLUTE VALUE. The published [[def-abs-value]] is stated for an ORDERED FIELD and $\\mathbb{Z}$ is not a field, so it does not apply here and this is not a re-definition of the same object. Say so in `## Remarks`, and note that the two agree along the order-preserving embedding $\\mathbb{Z} \\to \\mathbb{Q}$ of [[lem-int-embeds-rat]], the check being the same case split. Keep that observation in Remarks only and let nothing on the page depend on it; the wikilinks then need no `deps` entry (a Remarks citation is outside depcheck's `cited-not-in-deps`).",
+        "deps": [
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "lem-int-abs-properties",
+        "kind": "lemma",
+        "title": "Absolute value in $\\mathbb{Z}$: $|a| \\ge 0$; $|a| = 0$ exactly when $a = 0$; $|-a| = |a|$; $|ab| = |a|\\,|b|$; $-|a| \\le a \\le |a|$; and $|a| \\le c$ exactly when $-c \\le a \\le c$",
+        "strategy": "cases",
+        "deps": [
+          "def-int-abs",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "lem-int-cancellation"
+        ]
+      },
+      {
+        "id": "def-divides-in-z",
+        "kind": "definition",
+        "title": "Divisibility in $\\mathbb{Z}$: $d \\mid a$ when $a = dq$ for some integer $q$",
+        "strategy": "DICTIONARY, and the reason this item exists — DISCHARGING A PUBLISHED OBLIGATION DIRECTED AT THIS PAGE. The relation $b \\mid a$ is ALREADY introduced, in as many words, in the Statement of the published [[thm-division-algorithm-in-z]] (order 20): \"we say $b$ divides $a$, written $b \\mid a$, when $a = qb$ for some $q \\in \\mathbb{Z}$\", and the published [[lem-order-characterisation]] already quotes it. The published page summary of `monoids-groups-and-subgroups` says, verbatim: \"The relation 'b divides a' is defined there for use here; the systematic theory of divisibility belongs to a later page, which must record that its general notion restricts to this one rather than introduce a second silently.\" THIS IS THAT PAGE. So this item states the SAME relation, cites that theorem as its source, records the restriction explicitly, and adds the second half of the published sentence as a lemma-grade observation: for $b > 0$, $b \\mid a$ holds exactly when the remainder of the division algorithm is $0$. Do NOT present it as new vocabulary. BOUNDARY VALUES, all three to be stated because $\\mathbb{N}$ contains $0$ and the page is about $\\mathbb{Z}$: $d \\mid 0$ for every $d$ INCLUDING $d = 0$; $0 \\mid a$ only for $a = 0$; $1 \\mid a$ and $a \\mid a$ for every $a$.",
+        "deps": [
+          "def-integers",
+          "def-int-operations",
+          "thm-int-comm-ring",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "lem-divisibility-basic",
+        "kind": "lemma",
+        "title": "Divisibility is reflexive and transitive on $\\mathbb{Z}$, and is linear: if $d \\mid a$ and $d \\mid b$ then $d \\mid ax + by$ for all integers $x, y$; also $d \\mid a$ implies $d \\mid ac$, $-d \\mid a$ and $d \\mid -a$",
+        "strategy": "direct",
+        "deps": [
+          "def-divides-in-z",
+          "def-integers",
+          "def-int-operations",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "lem-divisor-bound",
+        "kind": "lemma",
+        "title": "If $d \\mid a$ and $a \\ne 0$ then $d \\ne 0$ and $|d| \\le |a|$; hence the set of divisors of a nonzero integer is bounded above by $|a|$",
+        "strategy": "direct",
+        "deps": [
+          "def-divides-in-z",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "lem-int-cancellation"
+        ]
+      },
+      {
+        "id": "lem-units-of-z",
+        "kind": "lemma",
+        "title": "$(\\mathbb{Z}, \\cdot, 1)$ is a commutative monoid whose group of units is $\\{1, -1\\}$; equivalently $u \\mid 1$ holds exactly for $u = 1$ and $u = -1$",
+        "strategy": "direct",
+        "deps": [
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "def-int-operations",
+          "def-binary-operation",
+          "def-identity-element",
+          "def-semigroup-and-monoid",
+          "def-invertible-element",
+          "lem-monoid-units-form-a-group",
+          "def-group",
+          "def-divides-in-z",
+          "lem-divisor-bound",
+          "def-int-abs",
+          "lem-int-abs-properties"
+        ]
+      },
+      {
+        "id": "def-associates-in-z",
+        "kind": "definition",
+        "title": "Associates in $\\mathbb{Z}$: integers each of which divides the other",
+        "strategy": "The relation is defined as a binary relation in the sense of the published [[def-equivalence-relation]]; that it IS an equivalence relation is proved in the next item and must not be assumed in this one.",
+        "deps": [
+          "def-divides-in-z",
+          "def-equivalence-relation"
+        ]
+      },
+      {
+        "id": "lem-associates-characterisation",
+        "kind": "lemma",
+        "title": "For integers $a$ and $b$ the following are equivalent: $a \\mid b$ and $b \\mid a$; $b = ua$ for a unit $u$; $|a| = |b|$. Being associates is an equivalence relation whose class of $a$ is $\\{a, -a\\}$",
+        "strategy": "direct",
+        "deps": [
+          "def-associates-in-z",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-divisor-bound",
+          "lem-units-of-z",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "def-equivalence-relation",
+          "lem-equivalence-classes-partition",
+          "lem-int-cancellation",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "lem-int-bounded-above-has-greatest",
+        "kind": "lemma",
+        "title": "A nonempty set of integers bounded above has a greatest element, and a nonempty set of integers bounded below has a least element",
+        "strategy": "direct",
+        "deps": [
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "lem-nat-embeds-int",
+          "thm-well-ordering-principle",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "def-common-divisor-and-gcd",
+        "kind": "definition",
+        "title": "Common divisor, and the greatest common divisor $\\gcd(a,b)$, with the convention $\\gcd(0,0) := 0$",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #26, and the convention decision, both to be discharged inside the item. (1) For $(a,b) \\ne (0,0)$ the set of common divisors is NONEMPTY ($1$ divides everything, [[def-divides-in-z]]) and BOUNDED ABOVE (one of $a, b$ is nonzero, so [[lem-divisor-bound]] bounds every common divisor by $|a|$ or by $|b|$), hence has a greatest element by [[lem-int-bounded-above-has-greatest]]. That greatest element is $\\ge 1$, since $1$ is a common divisor. (2) At $(0,0)$ EVERY integer is a common divisor, so there is no greatest element in the order of $\\mathbb{Z}$ and the definition above says nothing. CONVENTION, stated here and nowhere else: $\\gcd(0,0) := 0$. Justify it in the item, not in a footnote: $0$ is the greatest common divisor in the DIVISIBILITY preorder, since every integer divides $0$, and [[cor-common-divisor-divides-gcd]] later shows that the divisibility characterisation is the one that holds uniformly across all pairs. This agrees with Wikipedia and with the convention tiebreaker rule. The companion page carries [[cex-common-divisors-of-zero-have-no-greatest-element]], which is what makes the convention necessary rather than decorative.",
+        "deps": [
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-divisor-bound",
+          "lem-int-bounded-above-has-greatest",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "def-int-order",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "lem-gcd-basic-values",
+        "kind": "lemma",
+        "title": "$\\gcd$ is symmetric and unchanged by signs: $\\gcd(a,b) = \\gcd(b,a) = \\gcd(|a|,|b|)$; moreover $\\gcd(a,0) = |a|$, $\\gcd(a,1) = 1$, $\\gcd(a,a) = |a|$, and $\\gcd(a,b) \\ge 1$ unless $a = b = 0$",
+        "strategy": "direct",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-divisor-bound",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "thm-bezout-identity",
+        "kind": "theorem",
+        "title": "Bézout's identity: for integers $a, b$ not both zero, $\\gcd(a,b)$ is the least positive element of $\\{\\, ax + by : x, y \\in \\mathbb{Z} \\,\\}$; in particular $ax + by = \\gcd(a,b)$ has an integer solution",
+        "strategy": "direct",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-divisor-bound",
+          "thm-division-algorithm-in-z",
+          "thm-well-ordering-principle",
+          "lem-nat-embeds-int",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "cor-common-divisor-divides-gcd",
+        "kind": "corollary",
+        "title": "Every common divisor of $a$ and $b$ divides $\\gcd(a,b)$; consequently $d = \\gcd(a,b)$ exactly when $d \\ge 0$, $d \\mid a$, $d \\mid b$, and every common divisor of $a$ and $b$ divides $d$ — a characterisation that holds at $(a,b) = (0,0)$ as well",
+        "strategy": "direct",
+        "deps": [
+          "thm-bezout-identity",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-divisor-bound",
+          "lem-associates-characterisation",
+          "def-int-abs",
+          "lem-int-abs-properties"
+        ]
+      },
+      {
+        "id": "lem-gcd-euclidean-step",
+        "kind": "lemma",
+        "title": "If $a = qb + r$ then $a, b$ and $b, r$ have exactly the same common divisors, so $\\gcd(a,b) = \\gcd(b,r)$",
+        "strategy": "direct",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "thm-euclidean-algorithm",
+        "kind": "theorem",
+        "title": "The Euclidean algorithm: for $a \\in \\mathbb{Z}$ and $b > 0$ the remainder descent from $(a,b)$ terminates, and the last nonzero remainder is $\\gcd(a,b)$",
+        "strategy": "induction",
+        "deps": [
+          "lem-gcd-euclidean-step",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "thm-division-algorithm-in-z",
+          "thm-strong-induction",
+          "thm-recursion",
+          "thm-well-ordering-principle",
+          "def-natural-numbers",
+          "def-nat-order",
+          "lem-nat-embeds-int",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "thm-int-ordered-ring",
+          "def-int-order"
+        ]
+      },
+      {
+        "id": "cor-extended-euclidean-bezout-coefficients",
+        "kind": "corollary",
+        "title": "The extended Euclidean algorithm: the same descent produces integers $x, y$ with $ax + by = \\gcd(a,b)$, so Bézout coefficients are computed and not merely shown to exist",
+        "strategy": "induction",
+        "deps": [
+          "thm-euclidean-algorithm",
+          "thm-bezout-identity",
+          "lem-gcd-euclidean-step",
+          "def-common-divisor-and-gcd",
+          "thm-division-algorithm-in-z",
+          "thm-strong-induction",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "def-coprime",
+        "kind": "definition",
+        "title": "Coprime integers: $\\gcd(a,b) = 1$",
+        "strategy": "Boundary values to state: $a$ and $1$ are coprime for every $a$; $0$ and $b$ are coprime exactly when $|b| = 1$; $0$ and $0$ are not coprime, since $\\gcd(0,0) = 0$ by the convention fixed in [[def-common-divisor-and-gcd]].",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values"
+        ]
+      },
+      {
+        "id": "lem-coprime-criterion",
+        "kind": "lemma",
+        "title": "$a$ and $b$ are coprime if and only if $ax + by = 1$ for some integers $x, y$; and in that case the only common divisors of $a$ and $b$ are $1$ and $-1$",
+        "strategy": "direct",
+        "deps": [
+          "def-coprime",
+          "thm-bezout-identity",
+          "cor-common-divisor-divides-gcd",
+          "def-common-divisor-and-gcd",
+          "lem-divisibility-basic",
+          "lem-units-of-z",
+          "def-divides-in-z"
+        ]
+      },
+      {
+        "id": "lem-coprime-divides-product",
+        "kind": "lemma",
+        "title": "If $\\gcd(a,b) = 1$ and $a \\mid bc$ then $a \\mid c$; and if $a \\mid c$, $b \\mid c$ and $\\gcd(a,b) = 1$ then $ab \\mid c$",
+        "strategy": "direct",
+        "deps": [
+          "def-coprime",
+          "lem-coprime-criterion",
+          "thm-bezout-identity",
+          "lem-divisibility-basic",
+          "def-divides-in-z",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "lem-gcd-scaling",
+        "kind": "lemma",
+        "title": "$\\gcd(ca, cb) = |c|\\,\\gcd(a,b)$ for all integers $a, b, c$, the identity holding at $c = 0$ and at $(a,b) = (0,0)$ as well",
+        "strategy": "cases",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "cor-common-divisor-divides-gcd",
+          "thm-bezout-identity",
+          "lem-gcd-basic-values",
+          "lem-divisibility-basic",
+          "def-divides-in-z",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "lem-int-cancellation",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "cor-gcd-quotients-coprime",
+        "kind": "corollary",
+        "title": "If $d = \\gcd(a,b)$ is nonzero then $a/d$ and $b/d$ are coprime",
+        "strategy": "direct",
+        "deps": [
+          "lem-gcd-scaling",
+          "def-coprime",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "lem-int-cancellation",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "def-lcm",
+        "kind": "definition",
+        "title": "Common multiple, and the least common multiple $\\operatorname{lcm}(a,b)$, taken to be $0$ when $a = 0$ or $b = 0$",
+        "strategy": "WELL-DEFINEDNESS, in the same shape as [[def-order-in-a-group]] and to be written the same way. For $a, b$ both nonzero the set of POSITIVE common multiples is nonempty (it contains $|ab|$) and is a set of positive integers, so it has a least element by [[thm-well-ordering-principle]] transported along [[lem-nat-embeds-int]]. When $a = 0$ or $b = 0$ the only common multiple of the pair is $0$ itself for the $a = b = 0$ case, and the positive common multiples are absent in general, so the value is fixed by convention as $0$. State the convention where it is made, and check that it is the value that keeps [[thm-gcd-lcm-product]] true at every boundary pair.",
+        "deps": [
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "thm-well-ordering-principle",
+          "lem-nat-embeds-int",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "thm-int-ordered-ring",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "thm-gcd-lcm-product",
+        "kind": "theorem",
+        "title": "Every common multiple of $a$ and $b$ is a multiple of $\\operatorname{lcm}(a,b)$, and $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = |ab|$",
+        "strategy": "direct",
+        "deps": [
+          "def-lcm",
+          "def-common-divisor-and-gcd",
+          "cor-common-divisor-divides-gcd",
+          "thm-bezout-identity",
+          "lem-gcd-scaling",
+          "cor-gcd-quotients-coprime",
+          "lem-coprime-divides-product",
+          "lem-divisibility-basic",
+          "def-divides-in-z",
+          "thm-division-algorithm-in-z",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "lem-int-cancellation",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "lem-subgroups-of-z-are-cyclic",
+        "kind": "lemma",
+        "title": "Every subgroup of $(\\mathbb{Z}, +)$ is $\\langle n \\rangle = n\\mathbb{Z}$ for exactly one natural number $n$",
+        "strategy": "direct",
+        "deps": [
+          "def-group",
+          "def-subgroup",
+          "lem-subgroup-criterion",
+          "def-generated-subgroup",
+          "lem-cyclic-subgroup-is-the-set-of-powers",
+          "def-group-power",
+          "lem-group-power-laws",
+          "thm-division-algorithm-in-z",
+          "thm-well-ordering-principle",
+          "lem-nat-embeds-int",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-divides-in-z",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "thm-gcd-generates-the-subgroup",
+        "kind": "theorem",
+        "title": "$a\\mathbb{Z} + b\\mathbb{Z} = \\gcd(a,b)\\,\\mathbb{Z}$ and $a\\mathbb{Z} \\cap b\\mathbb{Z} = \\operatorname{lcm}(a,b)\\,\\mathbb{Z}$; equivalently, in $(\\mathbb{Z},+)$ the subgroup generated by $\\{a,b\\}$ is $\\langle \\gcd(a,b) \\rangle$ and $\\langle a \\rangle \\cap \\langle b \\rangle = \\langle \\operatorname{lcm}(a,b) \\rangle$",
+        "strategy": "direct. ROUTING, and it matters: the published [[ex-subgroups-of-the-integers]] states exactly the classification this theorem is tempted to reach for, and it is on a B page at order 21, so it is a LEAF and may not be cited. Both set inclusions here are proved from Bézout and divisibility alone — $\\gcd(a,b) = ax+by$ gives $\\gcd(a,b)\\mathbb{Z} \\subseteq a\\mathbb{Z}+b\\mathbb{Z}$, and $\\gcd(a,b) \\mid a$, $\\gcd(a,b) \\mid b$ give the reverse — and \"$a\\mathbb{Z}+b\\mathbb{Z}$ is a subgroup\" comes from [[def-subgroup]] and [[lem-subgroup-criterion]] on A page 20. The intersection half is [[thm-gcd-lcm-product]]'s clause that every common multiple is a multiple of the lcm. [[lem-subgroups-of-z-are-cyclic]] is cited for exactly one thing: the UNIQUENESS of the nonnegative generator, which is what lets \"$= \\gcd(a,b)\\mathbb{Z}$\" be read as an identification of subgroups and not merely of sets. Do not use it for anything else, and do not cite the B-page example at all.",
+        "deps": [
+          "thm-bezout-identity",
+          "cor-common-divisor-divides-gcd",
+          "def-common-divisor-and-gcd",
+          "def-lcm",
+          "thm-gcd-lcm-product",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-subgroup",
+          "lem-subgroup-criterion",
+          "lem-intersection-of-subgroups",
+          "def-generated-subgroup",
+          "lem-cyclic-subgroup-is-the-set-of-powers",
+          "def-group-power",
+          "def-group",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 23,
+    "id": "divisibility-gcd-and-bezout-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Divisibility and Greatest Common Divisors: Examples and Counterexamples",
+    "companion": "divisibility-gcd-and-bezout",
+    "requires": [
+      "divisibility-gcd-and-bezout"
+    ],
+    "items": [
+      {
+        "id": "ex-euclidean-algorithm-worked",
+        "kind": "example",
+        "title": "$\\gcd(1071, 462) = 21$ by the Euclidean algorithm, with the back-substitution giving $21 = 7 \\cdot 462 - 3 \\cdot 1071$",
+        "strategy": "direct",
+        "deps": [
+          "thm-euclidean-algorithm",
+          "cor-extended-euclidean-bezout-coefficients",
+          "lem-gcd-euclidean-step",
+          "thm-bezout-identity",
+          "def-common-divisor-and-gcd",
+          "def-divides-in-z",
+          "thm-division-algorithm-in-z",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "lem-nat-embeds-int"
+        ]
+      },
+      {
+        "id": "ex-bezout-coefficients-not-unique",
+        "kind": "example",
+        "title": "Bézout coefficients are not unique: $1071 \\cdot (-3) + 462 \\cdot 7 = 21$ and $1071 \\cdot 19 + 462 \\cdot (-44) = 21$, and every solution has the form $(x + tb/d,\\; y - ta/d)$",
+        "strategy": "direct",
+        "deps": [
+          "thm-bezout-identity",
+          "cor-extended-euclidean-bezout-coefficients",
+          "cor-gcd-quotients-coprime",
+          "lem-coprime-divides-product",
+          "lem-gcd-scaling",
+          "def-common-divisor-and-gcd",
+          "def-coprime",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "ex-gcd-with-zero",
+        "kind": "example",
+        "title": "$\\gcd$ at the boundary: $\\gcd(a,0) = |a|$, $\\gcd(0,0) = 0$, and the convention $\\gcd(0,0) = 0$ is exactly what makes $\\gcd(ca,cb) = |c|\\gcd(a,b)$ true at $c = 0$",
+        "strategy": "direct",
+        "deps": [
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "lem-gcd-scaling",
+          "cor-common-divisor-divides-gcd",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "def-int-abs",
+          "lem-int-abs-properties"
+        ]
+      },
+      {
+        "id": "ex-linear-diophantine-equation-solvability",
+        "kind": "example",
+        "title": "$ax + by = c$ has an integer solution exactly when $\\gcd(a,b) \\mid c$: $6x + 15y = 9$ is solvable and $6x + 15y = 7$ is not",
+        "strategy": "direct",
+        "deps": [
+          "thm-bezout-identity",
+          "cor-common-divisor-divides-gcd",
+          "cor-extended-euclidean-bezout-coefficients",
+          "def-common-divisor-and-gcd",
+          "lem-divisibility-basic",
+          "def-divides-in-z",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "ex-gcd-and-lcm-as-subgroups-of-z",
+        "kind": "example",
+        "title": "$12\\mathbb{Z} + 18\\mathbb{Z} = 6\\mathbb{Z}$ and $12\\mathbb{Z} \\cap 18\\mathbb{Z} = 36\\mathbb{Z}$, the arithmetic of $\\gcd$ and $\\operatorname{lcm}$ read off the subgroups of $(\\mathbb{Z},+)$",
+        "strategy": "direct",
+        "deps": [
+          "thm-gcd-generates-the-subgroup",
+          "lem-subgroups-of-z-are-cyclic",
+          "thm-gcd-lcm-product",
+          "def-lcm",
+          "def-common-divisor-and-gcd",
+          "def-subgroup",
+          "def-generated-subgroup",
+          "lem-cyclic-subgroup-is-the-set-of-powers",
+          "def-group-power",
+          "def-group",
+          "thm-int-comm-ring",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "ex-euclidean-algorithm-on-consecutive-fibonacci-numbers",
+        "kind": "example",
+        "title": "Consecutive Fibonacci numbers are coprime, and the Euclidean algorithm run on $(F_{n+2}, F_{n+1})$ has quotient $1$ at every step and takes exactly $n$ divisions",
+        "strategy": "induction",
+        "deps": [
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "def-nat-addition",
+          "def-nat-order",
+          "thm-euclidean-algorithm",
+          "lem-gcd-euclidean-step",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "def-coprime",
+          "thm-division-algorithm-in-z",
+          "lem-nat-embeds-int",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "cex-divides-a-product-without-dividing-a-factor",
+        "kind": "counterexample",
+        "title": "$6 \\mid 4 \\cdot 9$ while $6 \\nmid 4$ and $6 \\nmid 9$: dividing a product does not force dividing a factor, and the coprimality hypothesis is what fails",
+        "strategy": "direct",
+        "deps": [
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-coprime-divides-product",
+          "def-coprime",
+          "def-common-divisor-and-gcd",
+          "lem-gcd-basic-values",
+          "thm-int-comm-ring",
+          "def-int-operations",
+          "thm-int-ordered-ring"
+        ]
+      },
+      {
+        "id": "cex-common-divisors-of-zero-have-no-greatest-element",
+        "kind": "counterexample",
+        "title": "The common divisors of $(0,0)$ are all of $\\mathbb{Z}$ and have no greatest element in the order of $\\mathbb{Z}$, so $\\gcd(0,0)$ cannot be defined as a maximum and is fixed by convention",
+        "strategy": "direct",
+        "deps": [
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "def-common-divisor-and-gcd",
+          "cor-common-divisor-divides-gcd",
+          "lem-int-bounded-above-has-greatest",
+          "def-int-order",
+          "thm-int-ordered-ring",
+          "def-integers"
+        ]
+      },
+      {
+        "id": "fs-gcd-times-lcm-equals-the-product",
+        "kind": "false-statement",
+        "title": "For all integers $a$ and $b$, $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = ab$",
+        "strategy": "direct",
+        "deps": [
+          "thm-gcd-lcm-product",
+          "def-lcm",
+          "def-common-divisor-and-gcd",
+          "def-int-abs",
+          "lem-int-abs-properties",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "def-int-operations"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 42,
+    "id": "rings-subrings-and-integral-domains",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Rings, Subrings, Integral Domains and Fields",
+    "companion": "rings-subrings-and-integral-domains-examples",
+    "requires": [
+      "monoids-groups-and-subgroups",
+      "foundations-of-the-real-numbers",
+      "divisibility-gcd-and-bezout"
+    ],
+    "items": [
+      {
+        "id": "def-ring",
+        "kind": "definition",
+        "title": "Ring: an abelian group under addition and a monoid under multiplication, with multiplication distributing over addition on both sides",
+        "strategy": "CONVENTION DECISION, stated in the item and never silently assumed: a ring HAS a multiplicative identity, because $(R,\\cdot,1)$ is required to be a monoid ([[def-semigroup-and-monoid]]). This is the Wikipedia and modern convention, it is fixed for the whole track in the AA-8 scaffold section, and it is forced anyway by the scaffold's own wording. A structure satisfying every axiom except the existence of $1$ is a NON-UNITAL RING, is named as such where it appears, and is NOT called a ring here; [[cex-2z-is-not-a-subring]] on the companion page is the witness that the distinction has content. WELL-DEFINEDNESS: writing \"the\" zero and \"the\" identity is legitimate only through the published [[lem-identity-unique]], and \"the\" additive inverse $-a$ only through [[lem-inverse-unique]]; cite both rather than assert uniqueness, exactly as [[def-group]] does. Distributivity must be stated on BOTH sides, since multiplication is not assumed commutative here and the published [[def-field]] states only the left form.",
+        "deps": [
+          "def-group",
+          "def-semigroup-and-monoid",
+          "def-binary-operation",
+          "def-identity-element",
+          "lem-identity-unique",
+          "def-invertible-element",
+          "lem-inverse-unique"
+        ]
+      },
+      {
+        "id": "def-commutative-ring",
+        "kind": "definition",
+        "title": "Commutative ring",
+        "deps": [
+          "def-ring",
+          "def-binary-operation"
+        ]
+      },
+      {
+        "id": "lem-ring-elementary-consequences",
+        "kind": "lemma",
+        "title": "In any ring $0 \\cdot a = a \\cdot 0 = 0$, $(-a)b = a(-b) = -(ab)$, $(-a)(-b) = ab$, $(-1)a = -a$ and $a(b - c) = ab - ac$",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-group",
+          "lem-group-cancellation",
+          "lem-group-inverse-laws",
+          "def-identity-element"
+        ]
+      },
+      {
+        "id": "lem-integer-multiples-in-a-ring",
+        "kind": "lemma",
+        "title": "Integer multiples in a ring: $(m + n)a = ma + na$, $m(a + b) = ma + mb$, $(ma)b = m(ab) = a(mb)$ and $(ma)(nb) = (mn)(ab)$ for all $m, n \\in \\mathbb{Z}$ and $a, b \\in R$",
+        "strategy": "induction",
+        "deps": [
+          "def-ring",
+          "def-group",
+          "def-group-power",
+          "lem-group-power-laws",
+          "lem-ring-elementary-consequences",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "def-integers",
+          "def-int-operations",
+          "lem-nat-embeds-int",
+          "lem-nat-trichotomy"
+        ]
+      },
+      {
+        "id": "lem-ring-units-form-a-group",
+        "kind": "lemma",
+        "title": "The units of a ring are the invertible elements of its multiplicative monoid, and $R^{\\times}$ is a group under multiplication; $0 \\in R^{\\times}$ only in the zero ring",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-invertible-element",
+          "lem-inverse-unique",
+          "lem-monoid-units-form-a-group",
+          "def-semigroup-and-monoid",
+          "lem-ring-elementary-consequences",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-zero-divisor-and-integral-domain",
+        "kind": "definition",
+        "title": "Zero divisor, and integral domain: a commutative ring with $1 \\ne 0$ and no zero divisors",
+        "strategy": "BOUNDARY OBLIGATION, and a place a false Statement is easy to write: fix ONE convention for \"zero divisor\" and keep it. Here $a$ is a zero divisor when $a \\ne 0$ and $ab = 0$ for some $b \\ne 0$; under that convention $0$ is not a zero divisor, and the zero ring is excluded from being a domain by $1 \\ne 0$, not by the zero-divisor clause. State that $1 \\ne 0$ is a hypothesis and not a consequence.",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "lem-ring-elementary-consequences"
+        ]
+      },
+      {
+        "id": "lem-domain-cancellation",
+        "kind": "lemma",
+        "title": "Cancellation characterises domains: in a commutative ring with $1 \\ne 0$, the implication $ab = ac$ and $a \\ne 0$ imply $b = c$ holds if and only if the ring has no zero divisors",
+        "strategy": "direct",
+        "deps": [
+          "def-zero-divisor-and-integral-domain",
+          "def-commutative-ring",
+          "def-ring",
+          "lem-ring-elementary-consequences",
+          "lem-group-cancellation",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-division-ring",
+        "kind": "definition",
+        "title": "Division ring: a ring with $1 \\ne 0$ in which every nonzero element is a unit",
+        "deps": [
+          "def-ring",
+          "def-invertible-element",
+          "lem-ring-units-form-a-group",
+          "lem-ring-elementary-consequences"
+        ]
+      },
+      {
+        "id": "lem-field-is-a-commutative-ring",
+        "kind": "lemma",
+        "title": "Every field is a commutative ring with $1 \\ne 0$; it is an integral domain, and it is a commutative division ring",
+        "strategy": "direct",
+        "deps": [
+          "def-field",
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-division-ring",
+          "def-group",
+          "def-semigroup-and-monoid",
+          "def-invertible-element",
+          "lem-of-zero-mult",
+          "lem-of-no-zero-divisors",
+          "lem-of-inverse-unique"
+        ]
+      },
+      {
+        "id": "lem-commutative-division-ring-is-a-field",
+        "kind": "lemma",
+        "title": "Every commutative division ring is a field, so \"field\" and \"commutative division ring\" name the same structures and the published definition and the ring-theoretic one agree",
+        "strategy": "direct",
+        "deps": [
+          "def-division-ring",
+          "def-commutative-ring",
+          "def-ring",
+          "def-field",
+          "lem-ring-elementary-consequences",
+          "lem-ring-units-form-a-group",
+          "def-invertible-element",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-quaternions",
+        "kind": "definition",
+        "title": "The quaternions $\\mathbb{H}$: real quadruples with componentwise addition and the multiplication extended from the table on $1, i, j, k$",
+        "strategy": "WELL-DEFINEDNESS, and the reason this sits on the SPINE rather than on the companion page: [[thm-quaternions-form-a-division-ring]] is the library's only division ring that is not a field, and LA-6 (order 78) needs it for the determinant counterexample. B pages are leaves, so a quaternion example on page 43 would be unavailable there. Define $\\mathbb{H}$ as the set of functions $4 \\to \\mathbb{R}$, written $a + bi + cj + dk$, with componentwise addition and the product given by the explicit real formula obtained from the table $i^{2} = j^{2} = k^{2} = -1$, $ij = k$, $jk = i$, $ki = j$. State the product as an explicit formula in the eight real coordinates, so that it is a genuine binary operation on the set and nothing needs \"extending by bilinearity\" as an unproved notion. Do NOT use the words multilinear, bilinear or trilinear: those are order-68 and later vocabulary and cannot be cited here.",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-binary-operation",
+          "def-identity-element",
+          "def-semigroup-and-monoid",
+          "def-group",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity",
+          "def-field",
+          "thm-reals-field",
+          "def-real-numbers",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "thm-quaternions-form-a-division-ring",
+        "kind": "theorem",
+        "title": "$\\mathbb{H}$ is a division ring that is not commutative, hence not a field: $q^{-1} = \\bar q / N(q)$ for $q \\ne 0$, while $ij = k$ and $ji = -k$",
+        "strategy": "direct",
+        "deps": [
+          "def-quaternions",
+          "def-ring",
+          "def-division-ring",
+          "def-commutative-ring",
+          "lem-ring-elementary-consequences",
+          "lem-ring-units-form-a-group",
+          "lem-commutative-division-ring-is-a-field",
+          "def-invertible-element",
+          "def-field",
+          "def-ordered-field",
+          "thm-reals-field",
+          "thm-reals-ordered-field",
+          "lem-of-square-positive",
+          "def-real-numbers",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity"
+        ]
+      },
+      {
+        "id": "def-ordered-ring",
+        "kind": "definition",
+        "title": "Ordered ring: a ring with a total order compatible with addition and with positives closed under multiplication",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-binary-operation"
+        ]
+      },
+      {
+        "id": "lem-ordered-ring-cone-and-order-agree",
+        "kind": "lemma",
+        "title": "The order presentation and the positive-cone presentation of an ordered ring determine each other: $P = \\{\\, x : 0 < x \\,\\}$ satisfies trichotomy and closure, and $a < b :\\iff b - a \\in P$ recovers the order",
+        "strategy": "direct",
+        "deps": [
+          "def-ordered-ring",
+          "def-ring",
+          "lem-ring-elementary-consequences",
+          "def-group"
+        ]
+      },
+      {
+        "id": "lem-ordered-field-is-an-ordered-ring",
+        "kind": "lemma",
+        "title": "Every ordered field is an ordered ring, and its order is the one its positive cone induces",
+        "strategy": "direct",
+        "deps": [
+          "def-ordered-field",
+          "def-ordered-ring",
+          "lem-ordered-ring-cone-and-order-agree",
+          "lem-field-is-a-commutative-ring",
+          "def-field",
+          "lem-of-square-positive"
+        ]
+      },
+      {
+        "id": "def-subring",
+        "kind": "definition",
+        "title": "Subring: a subset containing $1_R$ and closed under addition, additive inverses and multiplication",
+        "strategy": "WELL-DEFINEDNESS: the item must state and justify that the restricted operations really are binary operations on $S$ and that $(S,+,\\cdot,0,1_R)$ is then a ring in its own right, with the SAME zero and the SAME identity as $R$ (the published [[def-subgroup]] and [[lem-subgroup-criterion]] do exactly this job for the additive part and must be cited rather than re-proved). Requiring $1_R \\in S$ is forced by the convention fixed in [[def-ring]]; say so, and point at [[cex-2z-is-not-a-subring]].",
+        "deps": [
+          "def-ring",
+          "def-subgroup",
+          "def-binary-operation",
+          "def-identity-element"
+        ]
+      },
+      {
+        "id": "lem-subring-criterion",
+        "kind": "lemma",
+        "title": "Subring criterion: $S \\subseteq R$ is a subring if and only if $1_R \\in S$ and $a - b \\in S$ and $ab \\in S$ for all $a, b \\in S$; and an intersection of subrings is a subring",
+        "strategy": "direct",
+        "deps": [
+          "def-subring",
+          "def-ring",
+          "def-subgroup",
+          "lem-subgroup-criterion",
+          "lem-intersection-of-subgroups",
+          "lem-ring-elementary-consequences",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-subfield",
+        "kind": "definition",
+        "title": "Subfield: a subring of a field closed under inverses of its nonzero elements, and therefore a field with the restricted operations",
+        "strategy": "WELL-DEFINEDNESS: \"is therefore a field\" is a claim and must be discharged inside the item, by checking the axioms of the published [[def-field]] for the restricted operations, using [[lem-commutative-division-ring-is-a-field]] rather than re-deriving. Also state that $0_K = 0_F$ and $1_K = 1_F$, which is what makes a subfield of an ordered field inherit the order, and which the vector space page at order 68 relies on when it restricts scalars ([[lem-restriction-of-scalars]]).",
+        "deps": [
+          "def-field",
+          "def-subring",
+          "lem-subring-criterion",
+          "lem-field-is-a-commutative-ring",
+          "lem-commutative-division-ring-is-a-field",
+          "def-division-ring",
+          "def-commutative-ring"
+        ]
+      },
+      {
+        "id": "def-ring-homomorphism",
+        "kind": "definition",
+        "title": "Ring homomorphism: additive, multiplicative, and required to send $1$ to $1$",
+        "strategy": "The requirement $f(1_R) = 1_S$ must be IMPOSED, not derived: the situation is exactly the published [[def-group-homomorphism]], where preservation of the identity is free for groups and must be assumed for monoids. Say which of the two is happening here (the multiplicative part is only a monoid) and point at [[cex-ring-homomorphism-not-preserving-identity]] on the companion page as the witness that the clause is not redundant.",
+        "deps": [
+          "def-ring",
+          "def-group-homomorphism",
+          "def-semigroup-and-monoid",
+          "def-identity-element"
+        ]
+      },
+      {
+        "id": "lem-ring-homomorphism-basic-properties",
+        "kind": "lemma",
+        "title": "A ring homomorphism satisfies $f(0) = 0$, $f(-a) = -f(a)$ and $f(ma) = m f(a)$ for $m \\in \\mathbb{Z}$, carries units to units, and has a subring as its image; composites of ring homomorphisms are ring homomorphisms",
+        "strategy": "direct",
+        "deps": [
+          "def-ring-homomorphism",
+          "def-ring",
+          "def-group-homomorphism",
+          "lem-group-homomorphism-basic-properties",
+          "def-subring",
+          "lem-subring-criterion",
+          "def-invertible-element",
+          "lem-ring-units-form-a-group",
+          "lem-integer-multiples-in-a-ring",
+          "def-group-power"
+        ]
+      },
+      {
+        "id": "lem-ring-homomorphism-of-fields-is-a-field-homomorphism",
+        "kind": "lemma",
+        "title": "A ring homomorphism between fields is a field homomorphism in the published sense, and every such map is injective",
+        "strategy": "direct",
+        "deps": [
+          "def-ring-homomorphism",
+          "def-field-homomorphism",
+          "lem-field-is-a-commutative-ring",
+          "lem-ring-homomorphism-basic-properties",
+          "lem-ring-elementary-consequences",
+          "def-field",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "def-product-ring",
+        "kind": "definition",
+        "title": "The product ring $R \\times S$ with componentwise operations, its identity $(1_R, 1_S)$ and its units $R^{\\times} \\times S^{\\times}$",
+        "strategy": "WELL-DEFINEDNESS is cheap here but must still be written: the componentwise rules really are binary operations on $R \\times S$ and the axioms hold componentwise. State the two facts later items use: a product of two rings with $1 \\ne 0$ is never a domain, because $(1,0)(0,1) = (0,0)$; and the product is commutative exactly when both factors are.",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "lem-ring-units-form-a-group",
+          "def-invertible-element"
+        ]
+      },
+      {
+        "id": "def-ring-of-functions",
+        "kind": "definition",
+        "title": "The ring $R^{X}$ of all functions from a set $X$ into a ring, with pointwise operations",
+        "strategy": "WELL-DEFINEDNESS: the pointwise rules are binary operations on $R^{X}$ and every axiom is checked pointwise; the zero and the identity are the constant functions. This item is also the ANCHOR the vector space page (order 68) points back to: the SAME set $F^{X}$ carries a vector-space structure there, with the SAME addition and a different second operation, and page 68 links here rather than re-deriving the additive structure. State that $R^{X}$ has zero divisors as soon as $X$ has two elements and $R$ is not the zero ring, and that $R^{X}$ is commutative exactly when $R$ is.",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-binary-operation"
+        ]
+      },
+      {
+        "id": "lem-integer-multiples-agree-with-canonical-natural",
+        "kind": "lemma",
+        "title": "In a field, the additive multiple $n \\cdot 1_F$ is the canonical natural $\\iota(n)$: the additive power of the group-power definition and the canonical natural are the same function, both being the unique one given by the recursion $\\iota(0) = 0_F$, $\\iota(\\sigma(n)) = \\iota(n) + 1_F$",
+        "strategy": "direct",
+        "deps": [
+          "def-canonical-natural",
+          "def-group-power",
+          "def-field",
+          "lem-field-is-a-commutative-ring",
+          "def-ring",
+          "lem-integer-multiples-in-a-ring",
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "def-group"
+        ]
+      },
+      {
+        "id": "def-ring-characteristic",
+        "kind": "definition",
+        "title": "The characteristic of a ring: the least $n \\ge 1$ with $n \\cdot 1_R = 0$ when one exists, and $0$ otherwise",
+        "strategy": "TWO OBLIGATIONS. (1) EXISTENCE OF THE LEAST: the set $\\{\\, n \\in \\mathbb{N} : n \\ge 1,\\ n \\cdot 1_R = 0 \\,\\}$ has a least element when nonempty, by [[thm-well-ordering-principle]]; this is the same shape as the published [[def-order-in-a-group]] and should be written the same way, with $0$ (not $\\infty$) as the value in the empty case, which is the standard convention. SAY THAT THIS IS THE OPPOSITE CONVENTION TO [[def-order-in-a-group]], so a reader who has just met $\\operatorname{ord}(g) = \\infty$ is not misled. (2) DICTIONARY, not a second notion: $n \\cdot 1_R$ here is the additive power of the published [[def-group-power]] applied to the additive group of $R$, and for a FIELD it is exactly the map $\\iota$ of [[def-canonical-natural]] — proved, not asserted, in [[lem-integer-multiples-agree-with-canonical-natural]] immediately above. Note that a natural number is a von Neumann natural and so is not itself an element of $R$.",
+        "deps": [
+          "def-ring",
+          "def-group",
+          "def-group-power",
+          "lem-group-power-laws",
+          "lem-integer-multiples-in-a-ring",
+          "lem-integer-multiples-agree-with-canonical-natural",
+          "def-canonical-natural",
+          "def-field",
+          "def-order-in-a-group",
+          "thm-well-ordering-principle",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "lem-characteristic-and-additive-order",
+        "kind": "lemma",
+        "title": "The characteristic of a ring is the additive order of $1_R$, with $0$ recording infinite order; $n \\cdot 1_R = 0$ holds exactly when $\\operatorname{char}(R) \\mid n$; and in an integral domain every nonzero element has the same additive order as $1_R$",
+        "strategy": "direct",
+        "deps": [
+          "def-ring-characteristic",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "lem-integer-multiples-in-a-ring",
+          "lem-ring-elementary-consequences",
+          "def-order-in-a-group",
+          "lem-order-characterisation",
+          "def-group-power",
+          "def-group",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "def-ring"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 43,
+    "id": "rings-subrings-and-integral-domains-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Rings, Domains and Fields: Examples and Counterexamples",
+    "companion": "rings-subrings-and-integral-domains",
+    "requires": [
+      "rings-subrings-and-integral-domains"
+    ],
+    "items": [
+      {
+        "id": "ex-integers-as-a-commutative-ring",
+        "kind": "example",
+        "title": "$\\mathbb{Z}$ is a commutative ring and an ordered ring, the published construction being an instance of the general definitions",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-ordered-ring",
+          "lem-ordered-ring-cone-and-order-agree",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order"
+        ]
+      },
+      {
+        "id": "ex-integers-are-an-integral-domain-not-a-field",
+        "kind": "example",
+        "title": "$\\mathbb{Z}$ is an integral domain of characteristic $0$ whose group of units is $\\{1,-1\\}$, so it is not a field: $2$ is nonzero and not invertible",
+        "strategy": "direct",
+        "deps": [
+          "def-zero-divisor-and-integral-domain",
+          "lem-domain-cancellation",
+          "lem-ring-units-form-a-group",
+          "lem-field-is-a-commutative-ring",
+          "def-ring-characteristic",
+          "lem-characteristic-and-additive-order",
+          "def-field",
+          "def-invertible-element",
+          "lem-units-of-z",
+          "def-divides-in-z",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "lem-int-cancellation",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order"
+        ]
+      },
+      {
+        "id": "ex-rationals-and-reals-as-fields",
+        "kind": "example",
+        "title": "$\\mathbb{Q}$ and $\\mathbb{R}$ are fields, hence commutative rings, integral domains and ordered rings, all of characteristic $0$",
+        "strategy": "direct",
+        "deps": [
+          "def-field",
+          "lem-field-is-a-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-ordered-ring",
+          "lem-ordered-field-is-an-ordered-ring",
+          "def-ordered-field",
+          "def-ring-characteristic",
+          "lem-integer-multiples-agree-with-canonical-natural",
+          "def-canonical-natural",
+          "thm-rat-field",
+          "thm-reals-field",
+          "thm-rat-ordered-field",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "ex-cauchy-sequences-as-a-commutative-ring",
+        "kind": "example",
+        "title": "The Cauchy sequences of rationals form a commutative ring that is not an integral domain, which is why the construction of $\\mathbb{R}$ has to quotient by a maximal ideal and not by any ideal at all",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "lem-ring-elementary-consequences",
+          "thm-cauchy-ring",
+          "def-rational-cauchy-sequence",
+          "thm-rat-field",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "ex-product-ring-has-zero-divisors",
+        "kind": "example",
+        "title": "A product of two rings with $1 \\ne 0$ always has zero divisors: $(1,0)(0,1) = (0,0)$ in $\\mathbb{Z} \\times \\mathbb{Z}$, so a product of integral domains is never an integral domain",
+        "strategy": "direct",
+        "deps": [
+          "def-product-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-ring",
+          "def-commutative-ring",
+          "thm-int-comm-ring",
+          "def-integers",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "ex-the-zero-ring",
+        "kind": "example",
+        "title": "The zero ring $\\{0\\}$, in which $1 = 0$: a commutative ring of characteristic $1$ that is not a domain, not a division ring and not a field",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-division-ring",
+          "def-ring-characteristic",
+          "lem-ring-elementary-consequences",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-subring-that-is-not-a-subfield",
+        "kind": "example",
+        "title": "$\\mathbb{Z}$ sits inside $\\mathbb{Q}$ as a subring that is not a subfield, so the inverse-closure clause of the subfield definition is doing work",
+        "strategy": "direct",
+        "deps": [
+          "def-subring",
+          "lem-subring-criterion",
+          "def-subfield",
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "def-field",
+          "def-invertible-element",
+          "lem-ring-units-form-a-group",
+          "lem-units-of-z",
+          "thm-rat-field",
+          "thm-int-comm-ring",
+          "lem-int-embeds-rat",
+          "def-integers"
+        ]
+      },
+      {
+        "id": "cex-2z-is-not-a-subring",
+        "kind": "counterexample",
+        "title": "$2\\mathbb{Z}$ is closed under addition, negation and multiplication and is not a subring of $\\mathbb{Z}$, because it does not contain $1$",
+        "strategy": "direct",
+        "deps": [
+          "def-subring",
+          "lem-subring-criterion",
+          "def-ring",
+          "def-subgroup",
+          "def-divides-in-z",
+          "lem-divisibility-basic",
+          "lem-units-of-z",
+          "thm-int-comm-ring",
+          "thm-int-ordered-ring",
+          "def-integers",
+          "def-int-operations",
+          "def-int-order"
+        ]
+      },
+      {
+        "id": "cex-ring-homomorphism-not-preserving-identity",
+        "kind": "counterexample",
+        "title": "The map $n \\mapsto (n,0)$ from $\\mathbb{Z}$ to $\\mathbb{Z} \\times \\mathbb{Z}$ preserves addition and multiplication and does not preserve $1$, so the clause $f(1) = 1$ is not redundant",
+        "strategy": "direct",
+        "deps": [
+          "def-ring-homomorphism",
+          "def-product-ring",
+          "def-ring",
+          "def-group-homomorphism",
+          "thm-int-comm-ring",
+          "def-integers",
+          "def-int-operations"
+        ]
+      },
+      {
+        "id": "fs-every-nonzero-element-is-a-unit-or-a-zero-divisor",
+        "kind": "false-statement",
+        "title": "In every commutative ring, each nonzero element is either a unit or a zero divisor",
+        "strategy": "direct",
+        "deps": [
+          "def-ring",
+          "def-commutative-ring",
+          "def-zero-divisor-and-integral-domain",
+          "lem-ring-units-form-a-group",
+          "def-invertible-element",
+          "lem-units-of-z",
+          "thm-int-comm-ring",
+          "lem-int-cancellation",
+          "def-integers",
+          "def-int-operations"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 68,
+    "id": "vector-spaces-and-subspaces",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Vector Spaces, Subspaces, Span and Direct Sums",
+    "companion": "vector-spaces-and-subspaces-examples",
+    "requires": [
+      "monoids-groups-and-subgroups",
+      "foundations-of-the-real-numbers",
+      "rings-subrings-and-integral-domains"
+    ],
+    "items": [
+      {
+        "id": "def-vector-space",
+        "kind": "definition",
+        "title": "Vector space over a field: an abelian group together with a scalar multiplication satisfying the four compatibility axioms",
+        "strategy": "THREE THINGS THIS ITEM MUST GET RIGHT. (1) THE FIELD IS THE PUBLISHED ONE: cite [[def-field]] (order 9) and do not restate the field axioms. (2) THE ADDITIVE PART IS AN ABELIAN GROUP in the published sense of [[def-group]]: say so explicitly, so that associativity, commutativity, the uniqueness of $0_V$ ([[lem-identity-unique]]) and the uniqueness of $-v$ ([[lem-inverse-unique]]) are inherited and are never re-derived here. (3) SCALAR MULTIPLICATION IS NOT A BINARY OPERATION ON A SET: it is a map $F \\times V \\to V$, so [[def-binary-operation]] does not apply to it and must not be cited for it. State the four axioms as $\\lambda(u+v) = \\lambda u + \\lambda v$, $(\\lambda + \\mu)v = \\lambda v + \\mu v$, $(\\lambda\\mu)v = \\lambda(\\mu v)$ and $1_F v = v$, and note that the last is an axiom and not a consequence.",
+        "deps": [
+          "def-field",
+          "def-group",
+          "def-binary-operation",
+          "def-identity-element",
+          "def-invertible-element",
+          "lem-identity-unique",
+          "lem-inverse-unique"
+        ]
+      },
+      {
+        "id": "lem-vector-space-elementary-consequences",
+        "kind": "lemma",
+        "title": "In any vector space $0_F v = 0_V$, $\\lambda 0_V = 0_V$, $(-\\lambda)v = -(\\lambda v)$, $(-1_F)v = -v$, and $\\lambda v = 0_V$ forces $\\lambda = 0_F$ or $v = 0_V$",
+        "strategy": "direct",
+        "deps": [
+          "def-vector-space",
+          "def-field",
+          "def-group",
+          "lem-group-cancellation",
+          "lem-group-inverse-laws",
+          "lem-of-inverse-unique"
+        ]
+      },
+      {
+        "id": "def-function-space",
+        "kind": "definition",
+        "title": "The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$",
+        "strategy": "WELL-DEFINEDNESS: the pointwise rules are genuinely a map $F^{X} \\times F^{X} \\to F^{X}$ and a map $F \\times F^{X} \\to F^{X}$, and each axiom is checked pointwise from the field axioms. INDEX DISCIPLINE, and this is the single most likely defect on the page: a natural number here is a von Neumann natural, so $n = \\{0,1,\\dots,n-1\\}$ ([[lem-nat-order-is-membership]]) and the coordinates of an element of $F^{n}$ are $x_0, \\dots, x_{n-1}$, NOT $x_1, \\dots, x_n$. Every displayed tuple on this page and its companion must start at index $0$. State the two boundary cases: $F^{0}$ has exactly one element, the empty function, so it is the zero space; and $F^{1}$ is $F$ up to the obvious identification. DICTIONARY: the same set $F^{X}$ carries the ring structure of [[def-ring-of-functions]] (order 42), with the SAME addition and with pointwise multiplication in place of scalar multiplication; link that item in `## Remarks` and say which operation is which, so the two structures are never conflated.",
+        "deps": [
+          "def-vector-space",
+          "def-field",
+          "def-binary-operation",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "def-matrix-space",
+        "kind": "definition",
+        "title": "The vector space $M_{m \\times n}(F) := F^{\\,m \\times n}$ of $m$ by $n$ matrices over a field, with entrywise operations",
+        "strategy": "This item introduces ONLY the vector-space structure and the notation $a_{ij}$; the matrix product, the ring $M_n(F)$ and the matrix of a linear map belong to order 74 and must NOT be anticipated here, not even in a remark that would need them. Index discipline as in [[def-function-space]]: rows are indexed by $i \\in m = \\{0,\\dots,m-1\\}$ and columns by $j \\in n$, both starting at $0$.",
+        "deps": [
+          "def-function-space",
+          "def-vector-space",
+          "def-field",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "lem-restriction-of-scalars",
+        "kind": "lemma",
+        "title": "A field is a vector space over itself, and over any subfield $K \\subseteq F$ every $F$-vector space is a $K$-vector space by restricting the scalars",
+        "strategy": "direct",
+        "deps": [
+          "def-vector-space",
+          "def-subfield",
+          "def-field"
+        ]
+      },
+      {
+        "id": "def-linear-subspace",
+        "kind": "definition",
+        "title": "Linear subspace of a vector space",
+        "strategy": "NAMING, decided at step 1 and to be honoured: the id says LINEAR subspace and the title says it too, because the library already uses \"subspace\" for the topological notion ([[def-subspace-topology-top]], order 185) and the two are unrelated. Do not link the topological item and do not remark on it; it is 117 pages later, so a link would be a forward reference needing declaration, and the qualified name is the whole fix. WELL-DEFINEDNESS: state that the restricted operations really are a vector addition and a scalar multiplication on $W$, and that $(W,+,0_V)$ is then a vector space whose zero and whose negatives are those of $V$ (that half is [[lem-linear-subspace-is-a-subgroup]], proved next, and is cited rather than re-argued).",
+        "deps": [
+          "def-vector-space",
+          "def-subgroup",
+          "def-group"
+        ]
+      },
+      {
+        "id": "lem-linear-subspace-is-a-subgroup",
+        "kind": "lemma",
+        "title": "The additive group of a vector space is an abelian group and every linear subspace is a subgroup of it; conversely a subgroup closed under scalar multiplication is a linear subspace",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "def-vector-space",
+          "def-subgroup",
+          "lem-subgroup-criterion",
+          "lem-vector-space-elementary-consequences",
+          "def-group"
+        ]
+      },
+      {
+        "id": "lem-linear-subspace-criterion",
+        "kind": "lemma",
+        "title": "One-step subspace test: a nonempty $W \\subseteq V$ is a linear subspace if and only if $\\lambda u + v \\in W$ for all $\\lambda \\in F$ and $u, v \\in W$",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "def-vector-space",
+          "lem-linear-subspace-is-a-subgroup",
+          "lem-subgroup-criterion",
+          "def-subgroup",
+          "lem-vector-space-elementary-consequences",
+          "def-field"
+        ]
+      },
+      {
+        "id": "lem-intersection-of-linear-subspaces",
+        "kind": "lemma",
+        "title": "The intersection of a nonempty family of linear subspaces of $V$ is a linear subspace of $V$",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "lem-linear-subspace-is-a-subgroup",
+          "lem-intersection-of-subgroups",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "def-linear-combination-and-span",
+        "kind": "definition",
+        "title": "Linear combination of a finite list, and the span $\\operatorname{span}(S)$ as the smallest linear subspace containing $S$",
+        "strategy": "WELL-DEFINEDNESS, in the shape the published [[def-generated-subgroup]] already uses and which must be reused rather than invented: the family of linear subspaces containing $S$ is nonempty because $V$ belongs to it, so its intersection is a linear subspace by [[lem-intersection-of-linear-subspaces]], and that intersection is the SMALLEST subspace containing $S$; those two properties determine it, which is what licenses the definite article. A linear combination is $\\sum_{i<n} \\lambda_i v_i$ with $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to V$, the sum being the finite product of the published [[def-monoid-finite-product]] read additively in the abelian group $(V,+)$: cite it, do NOT define a new finite sum, and note that [[def-finite-sum]] is unavailable because it is stated for sequences into the complete ordered field. Index from $0$, and state that the empty combination ($n = 0$) is $0_V$, so $\\operatorname{span}(\\varnothing) = \\{0_V\\}$ as a consequence and not as a stipulation.",
+        "deps": [
+          "def-vector-space",
+          "def-linear-subspace",
+          "lem-intersection-of-linear-subspaces",
+          "def-monoid-finite-product",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "def-field"
+        ]
+      },
+      {
+        "id": "lem-span-is-the-set-of-linear-combinations",
+        "kind": "lemma",
+        "title": "$\\operatorname{span}(S)$ is exactly the set of linear combinations of finite lists of elements of $S$, and $\\operatorname{span}(\\varnothing) = \\{0_V\\}$",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-combination-and-span",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity",
+          "lem-linear-subspace-criterion",
+          "def-linear-subspace",
+          "def-vector-space",
+          "def-natural-numbers",
+          "def-nat-addition",
+          "lem-nat-order-is-membership",
+          "def-field"
+        ]
+      },
+      {
+        "id": "lem-span-monotone-and-idempotent",
+        "kind": "lemma",
+        "title": "The span is monotone and idempotent, $\\operatorname{span}(S) = S$ exactly when $S$ is a linear subspace, and $\\operatorname{span}(S \\cup \\{0_V\\}) = \\operatorname{span}(S)$",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "lem-intersection-of-linear-subspaces",
+          "def-linear-subspace",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "lem-span-of-a-single-vector",
+        "kind": "lemma",
+        "title": "$\\operatorname{span}\\{v\\} = \\{\\, \\lambda v : \\lambda \\in F \\,\\}$, which is $\\{0_V\\}$ when $v = 0_V$ and otherwise meets $\\{0_V\\}$ only there",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "lem-linear-subspace-criterion",
+          "lem-vector-space-elementary-consequences",
+          "def-linear-subspace",
+          "def-vector-space",
+          "def-field"
+        ]
+      },
+      {
+        "id": "def-sum-of-linear-subspaces",
+        "kind": "definition",
+        "title": "The sum $U + W$ of two linear subspaces and the sum $\\sum_{i<n} U_i$ of a finite family",
+        "strategy": "WELL-DEFINEDNESS AND BOUNDARY: the sum is defined as the set of all $\\sum_{i<n} u_i$ with $u_i \\in U_i$, the finite sum again being [[def-monoid-finite-product]] read additively; the item must PROVE that this set is a linear subspace rather than assert it. Index from $0$, and state the empty case: the sum of the empty family ($n = 0$) is $\\{0_V\\}$, which is what makes the induction in [[lem-sum-is-span-of-union]] start.",
+        "deps": [
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-vector-space",
+          "def-monoid-finite-product",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "lem-sum-is-span-of-union",
+        "kind": "lemma",
+        "title": "$\\sum_{i<n} U_i = \\operatorname{span}\\bigl(\\bigcup_{i<n} U_i\\bigr)$, so the sum is the smallest linear subspace containing every $U_i$",
+        "strategy": "direct",
+        "deps": [
+          "def-sum-of-linear-subspaces",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "lem-linear-subspace-criterion",
+          "def-linear-subspace",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity"
+        ]
+      },
+      {
+        "id": "def-internal-direct-sum",
+        "kind": "definition",
+        "title": "Internal direct sum $V = \\bigoplus_{i<n} U_i$: the sum is everything and each summand meets the sum of the others only in $0_V$",
+        "strategy": "THE TRAP THIS ITEM EXISTS TO AVOID: for three or more summands, PAIRWISE trivial intersections are NOT sufficient, and the condition must be stated as $U_j \\cap \\sum_{i \\ne j} U_i = \\{0_V\\}$ for every $j < n$. Writing the pairwise condition would make the definition false, and the companion page carries [[cex-pairwise-trivial-intersection-is-not-a-direct-sum]] as the witness. State the two-summand case explicitly as the familiar $V = U + W$ with $U \\cap W = \\{0_V\\}$, and say that for two summands the two conditions do coincide. Index from $0$; the empty direct sum ($n = 0$) is the zero space.",
+        "deps": [
+          "def-sum-of-linear-subspaces",
+          "def-linear-subspace",
+          "def-vector-space",
+          "lem-vector-space-elementary-consequences",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "lem-direct-sum-criterion",
+        "kind": "lemma",
+        "title": "$V = \\bigoplus_{i<n} U_i$ if and only if every $v \\in V$ is $\\sum_{i<n} u_i$ with $u_i \\in U_i$ in exactly one way; equivalently, if and only if the sum is $V$ and $\\sum_{i<n} u_i = 0_V$ with $u_i \\in U_i$ forces every $u_i = 0_V$",
+        "strategy": "direct",
+        "deps": [
+          "def-internal-direct-sum",
+          "def-sum-of-linear-subspaces",
+          "def-linear-subspace",
+          "def-vector-space",
+          "lem-vector-space-elementary-consequences",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity",
+          "lem-group-cancellation",
+          "def-group"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 69,
+    "id": "vector-spaces-and-subspaces-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Vector Spaces and Subspaces: Examples and Counterexamples",
+    "companion": "vector-spaces-and-subspaces",
+    "requires": [
+      "vector-spaces-and-subspaces"
+    ],
+    "items": [
+      {
+        "id": "ex-r-as-a-vector-space-over-q",
+        "kind": "example",
+        "title": "$\\mathbb{R}$ is a vector space over itself and, by restriction of scalars along the embedded copy of $\\mathbb{Q}$, a vector space over $\\mathbb{Q}$",
+        "strategy": "direct",
+        "deps": [
+          "lem-restriction-of-scalars",
+          "def-vector-space",
+          "def-subfield",
+          "def-subring",
+          "def-field",
+          "def-ordered-field",
+          "def-complete-ordered-field",
+          "lem-of-q-embeds",
+          "thm-rat-field",
+          "thm-reals-field",
+          "def-real-numbers"
+        ]
+      },
+      {
+        "id": "ex-f-n-and-its-coordinate-subspaces",
+        "kind": "example",
+        "title": "In $F^{3}$ the three coordinate lines are linear subspaces whose internal direct sum is $F^{3}$, and $F^{0}$ is the zero space",
+        "strategy": "direct",
+        "deps": [
+          "def-function-space",
+          "def-matrix-space",
+          "def-vector-space",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-sum-of-linear-subspaces",
+          "def-internal-direct-sum",
+          "lem-direct-sum-criterion",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-combination-and-span",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "def-field"
+        ]
+      },
+      {
+        "id": "ex-sequence-space-and-eventually-zero-subspace",
+        "kind": "example",
+        "title": "$F^{\\mathbb{N}}$ is a vector space and the eventually zero families form a linear subspace of it that is the span of the standard unit families",
+        "strategy": "direct",
+        "deps": [
+          "def-function-space",
+          "def-vector-space",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-natural-numbers",
+          "def-nat-order",
+          "lem-nat-order-is-membership",
+          "def-field"
+        ]
+      },
+      {
+        "id": "cex-subset-closed-under-addition-but-not-scaling",
+        "kind": "counterexample",
+        "title": "The first quadrant of $\\mathbb{R}^{2}$ contains $0$ and is closed under addition and is not a linear subspace, since it is not closed under multiplication by $-1$",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "lem-linear-subspace-is-a-subgroup",
+          "def-function-space",
+          "def-vector-space",
+          "def-ordered-field",
+          "thm-reals-field",
+          "thm-reals-ordered-field",
+          "def-real-numbers"
+        ]
+      },
+      {
+        "id": "cex-subset-closed-under-scaling-but-not-addition",
+        "kind": "counterexample",
+        "title": "The union of the two coordinate axes of $F^{2}$ is closed under scalar multiplication and is not closed under addition, so neither closure condition implies the other",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "lem-span-of-a-single-vector",
+          "def-function-space",
+          "def-vector-space",
+          "def-field",
+          "thm-reals-field",
+          "def-real-numbers"
+        ]
+      },
+      {
+        "id": "cex-pairwise-trivial-intersection-is-not-a-direct-sum",
+        "kind": "counterexample",
+        "title": "Three lines in $F^{2}$ that meet pairwise only in $0$ and whose sum is $F^{2}$ with decompositions that are not unique, so pairwise trivial intersection does not give a direct sum",
+        "strategy": "direct",
+        "deps": [
+          "def-internal-direct-sum",
+          "lem-direct-sum-criterion",
+          "def-sum-of-linear-subspaces",
+          "lem-sum-is-span-of-union",
+          "lem-span-of-a-single-vector",
+          "def-linear-subspace",
+          "def-function-space",
+          "def-vector-space",
+          "def-field",
+          "thm-reals-field",
+          "def-real-numbers"
+        ]
+      },
+      {
+        "id": "ex-sum-and-intersection-in-f-three",
+        "kind": "example",
+        "title": "Two planes in $F^{3}$ whose sum is $F^{3}$ and whose intersection is a line, computed explicitly",
+        "strategy": "direct",
+        "deps": [
+          "def-sum-of-linear-subspaces",
+          "lem-sum-is-span-of-union",
+          "lem-intersection-of-linear-subspaces",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-function-space",
+          "def-vector-space",
+          "def-field"
+        ]
+      },
+      {
+        "id": "fs-union-of-two-subspaces-is-a-subspace",
+        "kind": "false-statement",
+        "title": "The union of two linear subspaces is a linear subspace",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "lem-span-of-a-single-vector",
+          "def-function-space",
+          "def-vector-space",
+          "def-field",
+          "thm-reals-field",
+          "def-real-numbers"
+        ]
+      }
+    ]
+  }
+]
