@@ -311,8 +311,8 @@ match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);
 `verification.audited` set; every `sources.scraped` entry has url+license; every `sources.references` entry has title + a working url;
 share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders.
 
-The gate is five tools, run from the repo root; all five must be clean before
-anything is published:
+The gate is **eight tools**, run from the repo root; all must be clean before
+anything is published. `ARCHITECTURE.md` §3 documents every error code:
 
 ```
 npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts
@@ -320,11 +320,23 @@ node tools/depcheck.mjs      # deps resolve, graph acyclic, no draft on a publis
 node tools/fwdcheck.mjs      # forward refs declared, point forward, closed, off the spine
 node tools/extcheck.mjs      # recorded-not-proved items well formed; ‡ consequences marked
 node tools/citecheck.mjs     # HEURISTIC: an elementary move whose home is not in deps
+node tools/rendercheck.mjs   # delimiters + a REAL KaTeX parse; defects visible only when rendered
+node tools/validate-plan.mjs research/plan-spec.json   # the scaffold; TAKES THE SPEC PATH
+node tools/depsource.mjs     # where each dep lives; only `unresolved` fails
 ```
 
 `citecheck` is warning-only and its output is to be TRIAGED, never merely
-counted; the surviving false positives are documented in its own header. The
-first four exit non-zero on failure and are hard gates.
+counted; the surviving false positives are documented in its own header.
+`depsource` fails only on `unresolved`. The other six exit non-zero on failure
+and are hard gates.
+
+**`validate-plan.mjs` requires the spec path as an argument.** Run bare it prints
+usage and exits non-zero, which looks exactly like a gate failure and is not one.
+
+**This list said "five tools" until 2026-07-27.** `rendercheck` was added at
+level 9 after two rendering defects reached the owner's eye that no other gate
+could see; `validate-plan` and `depsource` predate it and were simply never added
+here. Keep this list and `LEVELS.md`'s gate table in step.
 
 Note what none of them can check: whether a fact's prose faithfully restates the
 item it cites. That is the dominant defect class in this library

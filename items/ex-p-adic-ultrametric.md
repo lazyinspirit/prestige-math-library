@@ -20,11 +20,11 @@ short: "$2$-adic ultrametric on $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  # judge block removed 2026-07-27: the Remarks were materially corrected by the
+  # level-7-algebra scope-denial sweep, so the earlier pass was given on different
+  # text (SCHEMA 3). Owner instruction: no re-judge for a published fix, so this
+  # item is owner-audited but carries no AI-judge pass for its current text.
+  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -74,9 +74,9 @@ $$d_2(x,y) := |x - y|_2 \qquad (x, y \in \mathbb{Q}).$$
 3. **Every point of a ball is a centre**: if $y \in B(x,r)$ then
    $B(y,r) = B(x,r)$ ([[def-metric-ball]]).
 
-**Why $p = 2$ and not a general prime.** This library contains no number theory:
-the word *prime* is defined nowhere in it, and the general $p$-adic valuation
-needs unique factorisation. At $p = 2$ everything reduces to parity, which is
+**Why $p = 2$ and not a general prime.** The general $p$-adic valuation needs
+primality and unique factorisation in $\mathbb{Z}$, neither of which this item
+develops or assumes. At $p = 2$ everything reduces to parity, which is
 available: [[lem-alternating-sequence]] partitions $\mathbb{N}$ into the ranges
 of its two index maps, and that is what claim 2 of the verification turns into
 "even or odd, never both".
@@ -155,7 +155,7 @@ they hold in every ultrametric space.
   not be isosceles and a ball has exactly one centre.
 - **The general $p$-adic absolute value is not available here.** Its
   well-definedness needs the primality of $p$ in the form of Euclid's lemma, that
-  $p$ dividing a product divides one of the factors, and this library has no
-  divisibility theory at all in which to state or prove that. At $p = 2$ the
+  $p$ dividing a product divides one of the factors, which this item does not
+  establish and does not assume. At $p = 2$ the
   statement doing the same work is that a product of odd integers is odd, proved
   in step 1.3 above by a one-line ring computation.

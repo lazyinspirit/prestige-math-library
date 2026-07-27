@@ -29,7 +29,7 @@ Everything below is verified against the code as of 2026-07-27.
 
 | path | what |
 |---|---|
-| `research/plan-*.md`, `research/design-*.md` | **prose scaffolds** — human-readable page designs (RA-nn blocks, F1/T1–T10 topology track) |
+| `research/plan-*.md`, `research/design-*.md` | **prose scaffolds** — human-readable page designs (RA-nn blocks, F1/T1–T10 topology track, AA-nn/LA-nn algebra track) |
 | `research/sweep-*.md` | RAG sweeps: raw source material, *not* scaffolds |
 | `research/plan-spec.json` | **machine scaffold**. `pages[]` of `{order, id, kind, category, title, companion, requires[], items[]}`; each item `{id, kind, title, strategy?, deps[]}` |
 | `research/level<n>-batch-<i>.pages.json` / `.notes.md` | Beta-n-i's **only** writable outputs |
@@ -38,6 +38,24 @@ Everything below is verified against the code as of 2026-07-27.
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
 | `briefs/judge-conventions.txt` | the judge's `--conventions` string — the ONLY actor whose prompt is a bare CLI argument, so it is stored rather than retyped |
 | `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-8 audit, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
+
+### `order` is not stable across insertions — recompute, never remember
+
+`order` lives **only** in `research/plan-spec.json`; no page or item frontmatter
+carries it. Renumbering is therefore a one-file edit, and it is safe as long as
+the **relative** order of existing pages is preserved, because every existing
+citation stays backward-pointing. `depsource.mjs`, `fwdcheck.mjs`,
+`validate-plan.mjs` and `rounds.mjs` are the only readers.
+
+Two insertions have happened: `formal-laurent-series-field` took the fractional
+order 31.5, and on **2026-07-27** the algebra track was inserted at order 20,
+shifting 120 pages and taking the spec from 140 to 198 pages
+(`research/plan-algebra-track.md`). **Orders 48–59 and 86–89 are RESERVED** for
+the deferred algebra expansion (Sylow, Galois, finitely generated abelian groups)
+so that expansion needs no third renumber.
+
+**Consequence: any order quoted in a memory file, research note or commit message
+predating 2026-07-27 is stale above order 19.** Recompute from `plan-spec.json`.
 
 ---
 
@@ -265,12 +283,12 @@ items). **Do not trim landmarks.**
 | gate | catches |
 |---|---|
 | `precheck.mts` | phase-proof format. `no-given`, `no-steps`, `no-qed`, `qed-not-final[-postrepair]`, `untagged-steps`, `bad-tag`, `strategy-missing(...)`. Strategies: direct, contradiction, cases, induction, contrapositive, constructive. Tag families open→discharge: `contrapositive-reduce`→`discharge-contrapositive`, `assume-contra`→`discharge-contradiction`, `base`/`ih`→`discharge-induction`, `assume-case`/`cases-exhaustive`→`cases`. **Line-based** — run `reflow.mts` first; adopt REPAIR output with `adopt-repair.mjs` |
-| `depcheck.mjs` | `id-filename`, `yaml-escape`, `kind-prefix`, `dep-unresolved`, `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`, `page-item-dup`, `draft-on-published-page`, `published-unaudited`, `orphan`, `multi-home` |
+| `depcheck.mjs` | `id-filename`, `yaml-escape`, `kind-prefix`, `dep-unresolved`, `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`, `page-item-dup`, `draft-on-published-page`, `published-unaudited`, `published-unchecked`, `orphan`, `multi-home`, `cited-not-in-deps`, `justification-backward`, `justification-duplicated`, `sources-checked-on-proved` (19 total) |
 | `fwdcheck.mjs` | `forward-on-spine` (load-bearing forward ref on a def/lemma/prop/theorem), `forward-undeclared`, `forward-in-deps`, `forward-not-later`, `forward-same-page`, `forward-dangling`, `forward-unused`, `forward-cycle`, `stack-cycle`; marks `direct`/`inherited` |
 | `extcheck.mjs` | `unproved-kind`, `unproved-has-proof`, `unproved-judged`, `unproved-precheck`, `unproved-on-published`, `unproved-uncited`, `external-dangling`, `external-in-deps`, `external-not-unproved`, `external-unused` |
 | `citecheck.mjs` | mis-attribution heuristic — the largest historical defect class (14 of 50) |
-| `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**) |
-| `validate-plan.mjs` | scaffold: `resolve`, `item-cycle`, `page-cycle`, `forward-ref`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `orphan`, `dup-id`, `prefix`, `size` (WARN >30), `companion` |
+| `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `unreadable` |
+| `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>30 items), `redundant-prereq` (19 total) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
 
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what

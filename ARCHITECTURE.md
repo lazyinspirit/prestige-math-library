@@ -86,12 +86,26 @@ REPAIR output the repo stores the canonical stratification — a step citing
 phase-k steps sits in phase k+1 — adopted with `adopt-repair.mjs`, which also
 rewrites stale prose references like "step 3.2" that precheck cannot see.
 
+**Known limitation, measured 2026-07-27 (level-7-algebra authoring):
+`adopt-repair.mjs` SKIPped 20 of 22 REPAIR blocks**, at `tools/adopt-repair.mjs:94`,
+`"repaired steps do not match the originals by text"`. Cause: precheck's repair
+renumbers steps *and* rewrites the `step k.j` back-references inside step bodies,
+so the repaired line no longer matches the original line and the text-based
+mapping goes ambiguous. The more a proof cross-references its own steps, the more
+likely adoption fails — so it fails hardest exactly on the long proofs that need
+it most. **Adopting REPAIR output is therefore substantially a hand operation
+today; budget for it, and never assume a clean `adopt-repair` run means the
+repair was applied.** A positional-fallback adopter would fix this and does not
+exist in `tools/`; adding one is a tool change and carries the §9 doc obligation.
+
 ### 3.2 `depcheck.mjs` — dependency and circularity
 Runs over **actual content**, not the plan, so it stays true as things are
 authored. Errors: `id-filename`, `yaml-escape`, `kind-prefix`, `dep-unresolved`,
 `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`,
-`page-item-dup`, `draft-on-published-page`, `published-unaudited`, `orphan`,
-`multi-home`.
+`page-item-dup`, `draft-on-published-page`, `published-unaudited`,
+`published-unchecked`, `orphan`, `multi-home`, `cited-not-in-deps`,
+`justification-backward`, `justification-duplicated`,
+`sources-checked-on-proved` (19 total).
 
 **This is the mechanical guarantee behind "no circular reasoning."**
 `published-unaudited` is what forces the owner's re-audit when an amendment
@@ -106,6 +120,19 @@ Also `forward-undeclared`, `forward-in-deps`, `forward-not-later`,
 `stack-cycle`. Computes a `direct`/`inherited` marking that propagates along
 `deps`, so a consequence of a forward reference is marked too. `--ledger` writes
 the generated forward-reference ledger.
+
+**Measured, 2026-07-27: the orientation/load-bearing split is what makes anchoring
+vocabulary in a low published item affordable.** `web/lib/library-forward.ts`
+strips `## Remarks` before seeding, so only load-bearing references propagate. The
+algebra track needed the five order-7 items that say "commutative ring", "ideal"
+and "maximal ideal" to point at the definitions arriving at order 34. A
+load-bearing edge there would have marked **570 of 862 published items (66%)** as
+resting on later material, because ℤ and the Cauchy construction sit at the bottom
+of the graph, and a marker carried by two thirds of the library carries nothing.
+As Remarks-only orientation refs the blast radius is **zero items**, and
+`forward-on-spine` would have rejected the load-bearing form anyway, since those
+five are theorems and lemmas. **Anchoring vocabulary in the spine is a
+Remarks-only operation; there is no other legal form.**
 
 ### 3.4 `extcheck.mjs` — the ‡ "not proved here" tier
 `proved_here: false` items must be `rem-`, have `precheck: n/a`, carry no proof
@@ -138,12 +165,22 @@ correct. `wikilink-in-math` (the renderer rewrites `[[id]]` before KaTeX, so a
 wikilink inside `$…$` silently kills the block while every other gate stays
 green), `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`,
 `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, and
-**`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX.
+**`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX, plus
+`unreadable` for a file it cannot open.
 
 ### 3.7 `validate-plan.mjs` — the scaffold, before authoring
-`resolve`, `item-cycle`, `page-cycle`, `forward-ref`, `intra-order`, **`b-leaf`**
-(nothing may depend on an item on a B/examples page — B pages are leaves),
-`orphan`, `dup-id`, `prefix`, `size` (WARN above 30 items), `companion`.
+**Takes the spec path as an argument** — `node tools/validate-plan.mjs
+research/plan-spec.json`. Run bare it prints usage and exits non-zero, which
+reads as a gate failure and is not one.
+
+Errors: `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`,
+`page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`,
+`forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on an item
+on a B/examples page — B pages are leaves), `b-requires-a`, `dup-id`, `prefix`,
+`kind`, `companion`. Warnings: `orphan`, `size` (above 30 items),
+`redundant-prereq` (a declared prerequisite already reachable transitively; 12
+stand in the spec as of 2026-07-27 and are kept deliberately where the direct
+edge is mathematically real). 19 codes total.
 
 ### 3.8 `depsource.mjs` — where each dep actually lives
 Per dep: `published` / `planned-earlier` / `draft-page` / `homeless` /
@@ -204,6 +241,24 @@ slow call is usually not a hang; verdicts drop intermittently and must be re-run
 LaTeX backslashes in the reason break JSON parsing. **`keep: null` is not a
 pass.**
 
+**Do NOT parallelise the sweep. Measured 2026-07-27 (level 7-algebra).** A sweep
+run at `xargs -P 7`, with a subagent's retry loops layered on top (up to **nine**
+concurrent `judge.mts` processes against one gateway), produced repeated
+`NO_CONTENT: fetch failed` and indefinite hangs on one item across **seven**
+calls. With every competing process killed, the *same item, unchanged text*
+passed on the **first** attempt. Two false conclusions were drawn from those
+failures before the isolated test: that the item was too long (the batch's
+**largest** item, 11,732 bytes, judged fine while the 11,450-byte holdout failed),
+and that seven failures were seven independent trials. They were one observation
+of self-inflicted contention. Run the sweep **serially**; it is slower in
+wall-clock than a parallel run that has to be repeated.
+
+**Corollary on staleness: compute it, never read it from a report.** Whether a
+verdict covers the CURRENT text is `max(pass timestamp) > file mtime`, per item.
+That check corrected a subagent twice and the orchestrator once in a single
+level, including a case where a `null` sat as the newest entry and would have
+looked like the item was simply unjudged.
+
 **The injection test is the only thing that separates a judge from a rubber
 stamp.** DeepSeek v4-flash was adopted for 14× lower latency, then reverted: it
 passed a *blatantly* false injected claim while writing a confident summary of
@@ -263,8 +318,26 @@ State this honestly rather than implying coverage.
 
 - **No gate reads a page summary.** The judge reads items and cannot see a page
   file; precheck ignores prose. Six summary defects survived every gate at
-  level 7; two published summaries were false at level 8.
+  level 7; two published summaries were false at level 8. Level 7-algebra added
+  one more: a summary opened "Nothing here assumes anything about numbers" while
+  a theorem purely about ℤ was homed on that same page, contradicted by the
+  summary's OWN later paragraph.
 - **`depsource` cannot see `forward_refs`** (§3.8).
+- **`b-leaf` is enforced only against the SPEC, never against `items/`.**
+  `validate-plan` owns the check and reads `research/plan-spec.json`;
+  `depcheck` is the only gate that reads authored content and contains **zero**
+  b-leaf checks (verified 2026-07-27). An authoring agent that adds a `deps` edge
+  onto a B-page item after the splice is therefore invisible to all eight gates.
+  Note the rule's exact shape before "fixing" a report of one:
+  `validate-plan.mjs` guards with `dp.kind === 'B' && dp.id !== p.id`, so an item
+  citing an **earlier item on its own B page is legal** — ordinary intra-page
+  structure, covered by `intra-order`. A level-7-algebra audit misread this and
+  rewrote a correct item on a false premise.
+- **Nothing reconciles the spec's `deps` against the authored items' `deps`.**
+  Step 5 authors legitimately adjust deps as proofs take shape (19 of 40 items
+  did at level 7-algebra), and no tool ever compares the two afterwards. The
+  spec and the content drift apart silently, which is also why the gap above
+  cannot be caught by re-running `validate-plan`.
 - **Scope-denial decay has no detector.** A claim true when written that a later
   level falsifies changes no file, so every gate passes forever. Only the step-10b
   sweep finds it — and a repair confirmed by reading the diff can leave the same

@@ -20,10 +20,10 @@ short: "existence of the completion"
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
+  # judge block removed 2026-07-27: the Remarks were materially corrected by the
+  # level-7-algebra scope-denial sweep, so the earlier pass was given on different
+  # text (SCHEMA 3). Owner instruction: no re-judge for a published fix, so this
+  # item is owner-audited but carries no AI-judge pass for its current text.
   audited: 2026-07-27
 sources:
   scraped: []
@@ -65,9 +65,9 @@ completion**.
 **The notation is kept honest.** A Cauchy sequence in $X$ need not converge in
 $X$, so no symbol $\lim_n x_n$ appears anywhere below; the only limits taken are
 limits of *real* sequences, and each is written only after its existence has been
-proved. The equivalence relation is defined and verified here rather than cited,
-because this library has no general theory of equivalence relations; the same
-was done for [[def-integers]].
+proved. The equivalence relation is defined and verified here rather than cited, as was
+done for [[def-integers]], so that the construction is self-contained and its
+transitivity argument is visible at the point of use.
 
 ## Facts & Assumptions
 

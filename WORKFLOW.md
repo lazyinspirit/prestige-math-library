@@ -276,13 +276,25 @@ different model families so a generator never grades its own work. Every LLM tha
 touched this session's work is named below, with its exact identifier and the
 runtime it ran on.
 
-| Role | Model this session | Exact identifier | Runtime and cost |
+**HISTORICAL SNAPSHOT — the table below records the lineup of the session that
+first wrote this file. It is NOT the current lineup.** For who does what now, the
+authority is `LEVELS.md` §Actors (owner · orchestrator · Alpha-n · Beta-n-i ·
+authoring agent · judge) and `CLAUDE.md` §3 for the judge rule. Corrected
+2026-07-27, when this table still named GPT-5.4 as *the* judge and Opus 4.8 as
+the driver.
+
+| Role | Model that session | Exact identifier | Runtime and cost |
 |------|--------------------|------------------|------------------|
 | Driver, guardrail, auditor | Claude Opus 4.8 (1M context) | `claude-opus-4-8` | Claude Code main loop, subscription |
 | Generator (writes items) | Claude Opus 4.8 | `claude-opus-4-8` | Agent-tool subagents on the Claude subscription, spawned with `model: opus`; not the billed API |
 | Judge (refutes items) | OpenAI GPT-5.4 | `openai/gpt-5.4` | `ofox` gateway, raw API cost |
 | Escalation (revises rejects) | Claude Opus 4.8 | `claude-opus-4-8` | Agent-tool subagents on the Claude subscription |
 | Final audit and publish gate | the human owner | n/a | n/a |
+
+**Current judge rule (`CLAUDE.md` §3, binding):** session items are judged by
+**`z-ai/glm-5.2` primary**, GPT-5.4 then Gemini as fallback, **never a Claude
+model**; pipeline items never by GLM or DeepSeek. `deepseek/deepseek-v4-flash`
+was trialled and REVERTED 2026-07-25 for passing an injected false claim.
 
 The owner, not any model, is the final publish gate.
 
