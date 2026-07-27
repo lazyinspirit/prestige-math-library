@@ -2485,7 +2485,565 @@
       "requires": [
         "divisibility-gcd-and-bezout"
       ],
-      "items": [],
+      "items": [
+        {
+          "id": "def-prime",
+          "kind": "definition",
+          "title": "Prime and composite integers: $p$ is prime when $p > 1$ and its only positive divisors are $1$ and $p$",
+          "strategy": "CONVENTION, fixed here, and the convention memo's rule applies (most widely adopted, Wikipedia as tiebreaker): a prime is an INTEGER $p > 1$ whose only positive divisors are $1$ and $p$; $n > 1$ that is not prime is COMPOSITE. (1) $\\mathbb{N}$ contains $0$ and $\\mathbb{Z}$ contains $0$, $1$ and the negatives, so state the boundary explicitly: $0$, $1$ and every negative integer is neither prime nor composite, and $0$ is not prime even though its only positive divisors are not finite in number -- the clause $p > 1$ decides all of them. (2) $1$ IS EXCLUDED FOR A REASON THAT IS ON THIS PAGE, not for taste: with $1$ admitted, the uniqueness half of [[thm-fundamental-theorem-of-arithmetic]] is false, since a factorisation could be padded with any number of factors $1$. Say this where the convention is fixed and link forward ON THIS PAGE (a same-page link is an ordinary link, SCHEMA 3), and the companion page carries the explicit witness. (3) Record the equivalent form over all divisors: for $p > 1$, 'the only positive divisors are $1$ and $p$' is the same condition as 'the only divisors are $1, -1, p, -p$', by [[lem-associates-characterisation]] and [[lem-units-of-z]]; a divisor $d$ of $p$ has $|d| \\le p$ by [[lem-divisor-bound]] and $|d|$ is again a divisor. (4) DO NOT write 'irreducible' and DO NOT mention rings: [[def-ring]] is order 42, eighteen pages above this one. The dictionary between this notion and a prime or irreducible element of an integral domain belongs to order 46.",
+          "deps": [
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-common-divisor-and-gcd",
+            "lem-associates-characterisation",
+            "def-associates-in-z",
+            "lem-units-of-z",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-prime-not-dividing-is-coprime",
+          "kind": "lemma",
+          "title": "For a prime $p$ and any integer $a$, $\\gcd(p,a)$ is $p$ when $p \\mid a$ and $1$ otherwise; so $p \\nmid a$ makes $p$ and $a$ coprime",
+          "strategy": "direct. $\\gcd(p,a) \\ge 0$ and divides $p$ by [[cor-common-divisor-divides-gcd]] -- careful, that corollary gives 'every common divisor divides the gcd', so use its CHARACTERISATION clause (2), which includes $d \\mid p$. A nonnegative divisor of $p$ is $1$ or $p$ by [[def-prime]] ($\\gcd(p,a) = 0$ is impossible since $p \\ne 0$, by [[lem-gcd-basic-values]] clause 6). If $p \\mid a$ then $p$ is a common divisor, so $\\gcd(p,a) = p$ by [[cor-common-divisor-divides-gcd]] and [[lem-divisor-bound]]; if $p \\nmid a$ the value $p$ is excluded and $\\gcd(p,a) = 1$, i.e. $p$ and $a$ are coprime ([[def-coprime]]). This is the ONLY place primality is converted into coprimality, and every later use of Bezout on this page goes through it.",
+          "deps": [
+            "def-prime",
+            "def-common-divisor-and-gcd",
+            "cor-common-divisor-divides-gcd",
+            "lem-gcd-basic-values",
+            "def-coprime",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-associates-characterisation",
+            "lem-units-of-z",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "thm-euclids-lemma",
+          "kind": "theorem",
+          "title": "Euclid's lemma: if $p$ is prime and $p \\mid ab$ then $p \\mid a$ or $p \\mid b$",
+          "strategy": "cases, on whether $p \\mid a$. If $p \\mid a$ there is nothing to prove. Otherwise [[lem-prime-not-dividing-is-coprime]] gives $\\gcd(p,a) = 1$, and [[lem-coprime-divides-product]] clause 1 applies. INSTANTIATE THAT LEMMA CAREFULLY: it reads 'if $\\gcd(a,b) = 1$ and $a \\mid bc$ then $a \\mid c$', so take its $a := p$, its $b := a$, its $c := b$; the hypothesis $p \\mid ab$ is its $a \\mid bc$ and the conclusion is $p \\mid b$. [[lem-coprime-divides-product]] is published at order 22 and its proof uses NO primality whatever -- it is pure Bezout -- which is exactly why Euclid's lemma is a two-line consequence here and not a re-derivation. Say so in Remarks, and cite the page-22 summary's promise that primality is left to a later page. LANDMARK.",
+          "deps": [
+            "def-prime",
+            "lem-prime-not-dividing-is-coprime",
+            "lem-coprime-divides-product",
+            "lem-coprime-criterion",
+            "def-coprime",
+            "def-common-divisor-and-gcd",
+            "cor-common-divisor-divides-gcd",
+            "lem-gcd-basic-values",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-integers",
+            "def-int-operations",
+            "thm-int-comm-ring"
+          ]
+        },
+        {
+          "id": "cor-prime-iff-euclid-property",
+          "kind": "corollary",
+          "title": "For an integer $p > 1$: $p$ is prime if and only if, for all integers $a$ and $b$, $p \\mid ab$ implies $p \\mid a$ or $p \\mid b$",
+          "strategy": "contrapositive for the converse. Forward direction is [[thm-euclids-lemma]]. Converse: let $p > 1$ fail to be prime, so it has a positive divisor $a$ with $a \\ne 1$ and $a \\ne p$; write $p = ab$. Then $1 < a < p$ and $1 < b < p$ -- prove both bounds from [[lem-divisor-bound]] and the order axioms ([[thm-int-ordered-ring]]) rather than asserting them; $b \\ne 1$ because $a \\ne p$, and $b \\ne p$ because $a \\ne 1$ (cancel by [[lem-int-cancellation]]). So $p \\mid ab$ while $p \\nmid a$ and $p \\nmid b$, both by [[lem-divisor-bound]]. This is the characterisation that order 46 will call 'prime element = irreducible in $\\mathbb{Z}$'; state it here without any ring vocabulary.",
+          "deps": [
+            "thm-euclids-lemma",
+            "def-prime",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "cor-euclids-lemma-for-finite-products",
+          "kind": "corollary",
+          "title": "If a prime $p$ divides a finite product $\\prod_{i<n} a_i$ of integers then $p \\mid a_i$ for some $i < n$; at $n = 0$ the product is $1$ and the hypothesis cannot hold",
+          "strategy": "induction on $n$. The product is the finite product of [[def-monoid-finite-product]] taken in the COMMUTATIVE MONOID $(\\mathbb{Z},\\cdot,1)$, which is [[lem-units-of-z]] -- cite it for the monoid structure, since [[def-monoid-finite-product]] is stated for a monoid and $\\mathbb{Z}$ under multiplication is not a group. BASE $n = 0$: the empty product is $1$, and $p \\mid 1$ would make $p$ a unit, i.e. $p \\in \\{1,-1\\}$ by [[lem-units-of-z]], contradicting $p > 1$; so the conclusion holds vacuously and the statement is TRUE at $n = 0$ rather than excluded. STEP: $\\prod_{i<\\sigma(n)} a_i = (\\prod_{i<n} a_i) \\cdot a_n$ is the defining clause, and [[thm-euclids-lemma]] splits the two factors.",
+          "deps": [
+            "thm-euclids-lemma",
+            "def-prime",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "thm-induction-principle",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-nat-order-is-membership",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-every-integer-above-one-has-a-prime-divisor",
+          "kind": "lemma",
+          "title": "Every integer $n > 1$ has a prime divisor; indeed the least divisor of $n$ that exceeds $1$ is prime",
+          "strategy": "direct, via a least element. Put $S := \\{\\, d \\in \\mathbb{Z} : d \\mid n \\text{ and } d > 1 \\,\\}$. $S$ is nonempty ($n \\in S$, since $n \\mid n$ by [[lem-divisibility-basic]]) and bounded below by $2$, so it has a least element $q$ by [[lem-int-bounded-above-has-greatest]] -- use its LOWER-bound clause, which that lemma states explicitly. $q$ is prime: a positive divisor $e$ of $q$ with $e \\ne 1$ and $e \\ne q$ would satisfy $1 < e < q$ and $e \\mid n$ by transitivity ([[lem-divisibility-basic]]), contradicting minimality. Do not reach for [[thm-well-ordering-principle]] directly: it is about $\\mathbb{N}$, and the bridge to a bounded set of INTEGERS is exactly what [[lem-int-bounded-above-has-greatest]] was homed on page 22 to supply.",
+          "deps": [
+            "def-prime",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "lem-int-bounded-above-has-greatest",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int",
+            "thm-well-ordering-principle"
+          ]
+        },
+        {
+          "id": "thm-prime-factorisation-exists",
+          "kind": "theorem",
+          "title": "Every integer $n \\ge 1$ is a finite product of primes: there are $r \\in \\mathbb{N}$ and a list $p : r \\to \\mathbb{Z}$ of primes with $n = \\prod_{i<r} p_i$, the case $n = 1$ being the empty product",
+          "strategy": "induction (strong). Induct on the natural $k$ with $\\iota(k) = n$, $\\iota$ the embedding of [[lem-nat-embeds-int]], using [[thm-strong-induction]]. $n = 1$: take $r = 0$, the empty product being $1$ by [[def-monoid-finite-product]] in $(\\mathbb{Z},\\cdot,1)$ ([[lem-units-of-z]]) -- so $1$ IS a product of primes here, of no primes, and the theorem needs no separate clause for it. $n > 1$: take a prime divisor $q$ ([[lem-every-integer-above-one-has-a-prime-divisor]]), write $n = q m$; then $1 \\le m < n$ because $q \\ge 2$ and $n > 0$ (justify from [[thm-int-ordered-ring]] and [[lem-int-cancellation]], do not assert it), so the inductive hypothesis gives a prime list for $m$, and prepending $q$ uses the SPLITTING LAW of [[thm-generalised-associativity]] clause 1 with $m = 1$. Do not build a bespoke concatenation lemma; the splitting law is the published tool.",
+          "deps": [
+            "lem-every-integer-above-one-has-a-prime-divisor",
+            "def-prime",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "thm-strong-induction",
+            "lem-nat-order-is-membership",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "thm-fundamental-theorem-of-arithmetic",
+          "kind": "theorem",
+          "title": "The fundamental theorem of arithmetic: every integer $n \\ge 1$ is a product of primes, and the factorisation is unique up to order — if $\\prod_{i<r} p_i = \\prod_{j<s} q_j$ with every $p_i$ and $q_j$ prime, then $r = s$ and $q_i = p_{\\sigma(i)}$ for some $\\sigma \\in \\operatorname{Sym}(r)$",
+          "strategy": "induction on $r$. Existence is [[thm-prime-factorisation-exists]] and is quoted, not reproved. UNIQUENESS IS STATED WITH A QUANTIFIER, NOT A GESTURE: [[def-symmetric-group]] is published at order 20, so 'unique up to order' is spelt out as a permutation $\\sigma$ of the von Neumann natural $r = \\{0,\\dots,r-1\\}$. $r = 0$: the left side is $1$, so $s = 0$, since $s > 0$ would give a prime $q_0$ dividing $1$ ([[lem-divisibility-basic]] linearity, [[lem-units-of-z]]). $r > 0$: $p_0$ divides $\\prod_{j<s} q_j$, so $p_0 \\mid q_k$ for some $k < s$ by [[cor-euclids-lemma-for-finite-products]]; a prime dividing a prime EQUALS it (one line from [[def-prime]]: $p_0$ is a positive divisor of $q_k$ other than $1$, since $p_0 > 1$), so $p_0 = q_k$. Move $q_k$ to the front with the transposition $(0\\,k)$ of [[def-symmetric-group]] and the commutative clause 3 of [[thm-generalised-associativity]]; cancel $p_0$, which is legitimate because $p_0 \\ne 0$ ([[lem-int-cancellation]]); apply the inductive hypothesis; compose the resulting permutation with $(0\\,k)$ inside $\\operatorname{Sym}(r)$ ([[lem-symmetric-group-is-a-group]]). LANDMARK. Title and Statement must agree exactly: the theorem is stated for $n \\ge 1$, NOT for $n \\ge 2$ and NOT for all nonzero $n$ -- the signed form is the corollary that follows.",
+          "deps": [
+            "thm-prime-factorisation-exists",
+            "cor-euclids-lemma-for-finite-products",
+            "thm-euclids-lemma",
+            "def-prime",
+            "def-symmetric-group",
+            "lem-symmetric-group-is-a-group",
+            "def-injection-surjection-bijection",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "thm-induction-principle",
+            "thm-strong-induction",
+            "lem-nat-order-is-membership",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "cor-factorisation-of-a-nonzero-integer",
+          "kind": "corollary",
+          "title": "Every nonzero integer $n$ is $u \\prod_{i<r} p_i$ with $u \\in \\{1,-1\\}$ and every $p_i$ prime; $u$ and $r$ are determined by $n$, and the list is determined up to a permutation",
+          "strategy": "direct. Apply [[thm-fundamental-theorem-of-arithmetic]] to $|n| \\ge 1$ ([[def-int-abs]], [[lem-int-abs-properties]]) and set $u := 1$ if $n > 0$ and $u := -1$ if $n < 0$, the case split being legitimate because the order of $\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]) and $n \\ne 0$. Uniqueness of $u$ follows from $1 \\ne -1$ ([[lem-units-of-z]]). This is the form later pages will quote, and it is the reason [[def-prime]] can restrict to $p > 1$ without loss: the sign is carried by the unit, not by the primes.",
+          "deps": [
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "def-prime",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-symmetric-group",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring"
+          ]
+        },
+        {
+          "id": "thm-euclid-infinitude-of-primes",
+          "kind": "theorem",
+          "title": "Euclid's theorem: for every $n \\in \\mathbb{N}$ and every list $p : n \\to \\mathbb{Z}$ of primes there is a prime not among $p_0, \\dots, p_{n-1}$; consequently the set of primes is not finite",
+          "strategy": "direct, then contradiction for the second clause. Put $N := \\prod_{i<n} p_i + 1$. FIRST CHECK $N > 1$: each $p_i \\ge 2 > 0$, so $\\prod_{i<n} p_i \\ge 1$ by induction ([[thm-induction-principle]], [[thm-int-ordered-ring]]), and at $n = 0$ the empty product is $1$ so $N = 2$ -- the $n = 0$ case is real and the argument must survive it. $N$ has a prime divisor $q$ ([[lem-every-integer-above-one-has-a-prime-divisor]]). If $q = p_j$ for some $j$, then $q$ divides the product ($q \\mid p_j \\mid \\prod$, using [[thm-generalised-associativity]] clause 1 to split the factor out, and [[lem-divisibility-basic]] transitivity) and $q \\mid N$, so $q \\mid 1$ by linearity, making $q$ a unit ([[lem-units-of-z]]) and contradicting $q > 1$. SECOND CLAUSE: 'the set of primes is not finite' uses [[def-countable]]'s definition of finite -- equinumerous with a natural number. A bijection $n \\to P$ ([[def-equinumerous]], [[def-injection-surjection-bijection]]) IS a list enumerating every prime, and the first clause contradicts it. Do NOT cite [[lem-finite-subsets-listable]]: it is stated for subsets of $\\mathbb{R}$, not of $\\mathbb{Z}$, and it is not needed -- the bijection is the list. LANDMARK.",
+          "deps": [
+            "def-prime",
+            "lem-every-integer-above-one-has-a-prime-divisor",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "thm-induction-principle",
+            "def-equinumerous",
+            "def-countable",
+            "def-injection-surjection-bijection",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-nat-order-is-membership",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "def-p-adic-valuation",
+          "kind": "definition",
+          "title": "The $p$-adic valuation $v_p(a)$ of a nonzero integer: the greatest $k \\in \\mathbb{N}$ with $p^{k} \\mid a$",
+          "strategy": "WELL-DEFINEDNESS, and it must be proved inside the definition, in the style of [[def-common-divisor-and-gcd]]. (1) WHICH POWER. $p^{k}$ is the NATURAL power of [[def-group-power]] taken in the commutative monoid $(\\mathbb{Z},\\cdot,1)$ of [[lem-units-of-z]]. It is NOT [[def-integer-power]], which is stated for the ambient ordered field $\\mathbb{R}$ and would drag the whole real construction into a statement about $\\mathbb{Z}$. Say this in Remarks, and note that the two agree along the embeddings $\\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$ without letting anything on the page depend on it. (2) THE SET IS NONEMPTY: $p^{0} = 1 \\mid a$ ([[def-group-power]], [[def-divides-in-z]]). (3) THE SET IS BOUNDED: first prove $p^{k} \\ge k+1$ for $p \\ge 2$ by induction ([[thm-induction-principle]]), then $p^{k} \\mid a$ with $a \\ne 0$ gives $p^{k} \\le |a|$ by [[lem-divisor-bound]], so $k + 1 \\le |a|$. (4) A GREATEST ELEMENT then exists by [[lem-int-bounded-above-has-greatest]], transported along $\\iota$ ([[lem-nat-embeds-int]]), and it is unique. (5) $v_p(a)$ is a NATURAL NUMBER, hence a von Neumann set and not an element of $\\mathbb{Z}$; the exponent $p^{v_p(a)}$ reads it as an exponent, which is what [[def-group-power]] takes. $v_p(0)$ is left UNDEFINED and every statement below says $a \\ne 0$; do not adopt the $\\infty$ convention, which this library has no ordered set to hold.",
+          "deps": [
+            "def-prime",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "lem-int-bounded-above-has-greatest",
+            "thm-induction-principle",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-p-adic-valuation-basic",
+          "kind": "lemma",
+          "title": "For a prime $p$ and a nonzero integer $a$: $p^{v_p(a)} \\mid a$ and $p^{v_p(a)+1} \\nmid a$; $p^{k} \\mid a$ holds exactly for $k \\le v_p(a)$; $v_p(a) \\ge 1$ exactly when $p \\mid a$; $v_p(1) = v_p(-1) = 0$; and $v_p(p) = 1$",
+          "strategy": "direct, from the maximality in [[def-p-adic-valuation]]. The clause '$p^{k} \\mid a$ exactly for $k \\le v_p(a)$' needs the monoid exponent law $p^{k+m} = p^{k}p^{m}$ for NATURAL exponents; cite [[lem-group-power-laws]], whose Statement says in as many words that claims 1 and 3 hold in any monoid for exponents in $\\mathbb{N}$, and whose step 2.1 proves exactly that. Also record the factorisation $a = p^{v_p(a)} a'$ with $p \\nmid a'$, which is the form every later proof uses.",
+          "deps": [
+            "def-p-adic-valuation",
+            "def-prime",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-induction-principle",
+            "lem-nat-order-is-membership",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-p-adic-valuation-additive",
+          "kind": "lemma",
+          "title": "$v_p(ab) = v_p(a) + v_p(b)$ for nonzero integers $a, b$, and $v_p(a+b) \\ge \\min\\{v_p(a), v_p(b)\\}$ whenever $a$, $b$ and $a+b$ are all nonzero",
+          "strategy": "direct. Write $a = p^{v_p(a)}a'$ and $b = p^{v_p(b)}b'$ with $p \\nmid a'$, $p \\nmid b'$ ([[lem-p-adic-valuation-basic]]). Then $ab = p^{v_p(a)+v_p(b)}a'b'$ by the monoid exponent law ([[lem-group-power-laws]]), and $p \\nmid a'b'$ BY EUCLID'S LEMMA ([[thm-euclids-lemma]]) -- this is the one place additivity uses primality, and it is why the same statement is false for a composite $p$ (the companion page of order 23 already carries the failure of the product principle). For the second clause take $m := \\min\\{v_p(a),v_p(b)\\}$, using the totality of the order on $\\mathbb{N}$ ([[thm-nat-linear-order]]) rather than [[def-max-min]], which is stated for reals; then $p^{m}$ divides both terms and hence the sum ([[lem-divisibility-basic]] linearity).",
+          "deps": [
+            "def-p-adic-valuation",
+            "lem-p-adic-valuation-basic",
+            "thm-euclids-lemma",
+            "def-prime",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-nat-linear-order",
+            "thm-induction-principle",
+            "lem-nat-order-is-membership",
+            "lem-int-cancellation",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "thm-canonical-prime-factorisation",
+          "kind": "theorem",
+          "title": "For $n \\ge 1$ and any injective list $p : r \\to \\mathbb{Z}$ of primes containing every prime divisor of $n$, one has $n = \\prod_{i<r} p_i^{\\,v_{p_i}(n)}$; the exponents are determined by $n$, and $v_q(n) = 0$ for every prime $q$ outside the list",
+          "strategy": "direct, from [[thm-fundamental-theorem-of-arithmetic]] and [[lem-p-adic-valuation-additive]]. THE STATEMENT DELIBERATELY AVOIDS A PRODUCT OVER ALL PRIMES: an infinite indexed product with finite support is not available at order 24 ([[def-monoid-finite-product]] is a product of a finite list), so the honest form quantifies over a finite injective list that covers the prime divisors of $n$, and adds the clause that every prime off the list has valuation $0$. Say in Remarks that this is the second face of [[thm-fundamental-theorem-of-arithmetic]] -- the same theorem read by exponents rather than by lists -- and that the notation $\\prod_p p^{v_p(n)}$ abbreviates exactly this. Collect equal factors using clause 3 (commutative case) of [[thm-generalised-associativity]] and the monoid exponent law ([[lem-group-power-laws]]); injectivity of the list is what makes $v_{p_i}$ read off the multiplicity.",
+          "deps": [
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "lem-p-adic-valuation-additive",
+            "lem-p-adic-valuation-basic",
+            "def-p-adic-valuation",
+            "def-prime",
+            "cor-euclids-lemma-for-finite-products",
+            "thm-euclids-lemma",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-symmetric-group",
+            "def-injection-surjection-bijection",
+            "thm-induction-principle",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "lem-nat-order-is-membership",
+            "lem-int-cancellation",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-divisibility-via-valuations",
+          "kind": "lemma",
+          "title": "For positive integers $a$ and $b$: $a \\mid b$ if and only if $v_p(a) \\le v_p(b)$ for every prime $p$",
+          "strategy": "both directions direct. ($\\Rightarrow$) $b = ac$ and [[lem-p-adic-valuation-additive]] give $v_p(b) = v_p(a) + v_p(c) \\ge v_p(a)$. ($\\Leftarrow$) Take an injective list of primes covering the prime divisors of $a$ and of $b$ (concatenate two lists from [[thm-prime-factorisation-exists]] and delete repetitions), apply [[thm-canonical-prime-factorisation]] to both, and build the quotient factor by factor using the monoid exponent law. Only finitely many primes are involved, which is why the statement needs no infinite product.",
+          "deps": [
+            "thm-canonical-prime-factorisation",
+            "lem-p-adic-valuation-additive",
+            "lem-p-adic-valuation-basic",
+            "def-p-adic-valuation",
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "def-prime",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-injection-surjection-bijection",
+            "thm-induction-principle",
+            "lem-int-cancellation",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "thm-gcd-and-lcm-from-valuations",
+          "kind": "theorem",
+          "title": "For positive integers $a$ and $b$ and every prime $p$: $v_p(\\gcd(a,b)) = \\min\\{v_p(a), v_p(b)\\}$ and $v_p(\\operatorname{lcm}(a,b)) = \\max\\{v_p(a), v_p(b)\\}$; so the exponent-wise greatest common divisor is the $\\gcd$ of page 22 and not a second notion",
+          "strategy": "direct. THIS IS THE AGREEMENT ITEM demanded by the seam rule, and its whole point is that the page does not silently introduce a rival $\\gcd$. Do not prove 'the exponent-wise thing is a gcd' and stop: use clause 2 of [[cor-common-divisor-divides-gcd]], the characterisation '$d \\ge 0$, $d \\mid a$, $d \\mid b$, and every common divisor divides $d$', which is what pins the value, and verify it for the exponent-wise construction via [[lem-divisibility-via-valuations]]. The $\\operatorname{lcm}$ half uses the corresponding characterisation in [[thm-gcd-lcm-product]] ('every common multiple of $a$ and $b$ is a multiple of $\\operatorname{lcm}(a,b)$'), which that theorem states. Take min and max of two NATURALS through the totality of [[thm-nat-linear-order]], not through [[def-max-min]] (reals). Record in Remarks that $\\min + \\max = $ sum recovers $\\gcd \\cdot \\operatorname{lcm} = |ab|$ of [[thm-gcd-lcm-product]], as a consistency check and not as a second proof. Restrict to POSITIVE $a, b$ and say why: $v_p$ is undefined at $0$, and signs are handled by $\\gcd(a,b) = \\gcd(|a|,|b|)$ ([[lem-gcd-basic-values]]). LANDMARK.",
+          "deps": [
+            "lem-divisibility-via-valuations",
+            "thm-canonical-prime-factorisation",
+            "lem-p-adic-valuation-additive",
+            "lem-p-adic-valuation-basic",
+            "def-p-adic-valuation",
+            "def-common-divisor-and-gcd",
+            "cor-common-divisor-divides-gcd",
+            "lem-gcd-basic-values",
+            "def-lcm",
+            "thm-gcd-lcm-product",
+            "def-prime",
+            "thm-nat-linear-order",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "lem-int-cancellation",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "lem-p-adic-valuation-on-q",
+          "kind": "lemma",
+          "title": "The $p$-adic valuation extends to the nonzero rationals by $v_p(a/b) := v_p(a) - v_p(b) \\in \\mathbb{Z}$, independently of the representation; it satisfies $v_p(xy) = v_p(x) + v_p(y)$, and $v_p(x+y) \\ge \\min\\{v_p(x), v_p(y)\\}$ whenever $x$, $y$ and $x+y$ are nonzero",
+          "strategy": "WELL-DEFINEDNESS first, then the two laws. Representation-independence: $a/b = c/d$ gives $ad = cb$, and [[lem-p-adic-valuation-additive]] gives $v_p(a) + v_p(d) = v_p(c) + v_p(b)$, hence $v_p(a) - v_p(b) = v_p(c) - v_p(d)$ in $\\mathbb{Z}$; the subtraction is in $\\mathbb{Z}$ along [[lem-nat-embeds-int]], so the extended valuation takes INTEGER values while the valuation of an integer is a natural. Rationals are [[def-rationals]] and the field laws are [[thm-rat-field]]; the embedding $\\mathbb{Z} \\to \\mathbb{Q}$ is [[lem-int-embeds-rat]]. The ultrametric clause reduces to the integer case over a common denominator. ADDED BEYOND THE PROSE SCAFFOLD, deliberately: the published [[ex-p-adic-ultrametric]] (order 102) says the general $p$-adic absolute value is unavailable to it because it would need Euclid's lemma, and this lemma is exactly the missing well-definedness. Do NOT state anything metric here -- [[def-metric-space]] is order 102, far above this page -- and do not define $|x|_p = p^{-v_p(x)}$, which would need real powers with integer exponents and buys nothing at this order.",
+          "deps": [
+            "lem-p-adic-valuation-additive",
+            "lem-p-adic-valuation-basic",
+            "def-p-adic-valuation",
+            "def-prime",
+            "def-rationals",
+            "thm-rat-field",
+            "lem-int-embeds-rat",
+            "def-field",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-nat-linear-order",
+            "lem-int-cancellation",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "cor-rational-root-of-an-integer-is-an-integer",
+          "kind": "corollary",
+          "title": "A rational root of $x^{k} = m$ is an integer: if $k \\ge 1$, $m \\in \\mathbb{Z}$, $x \\in \\mathbb{Q}$ and $x^{k}$ is the image of $m$, then $x$ is the image of an integer; consequently no rational squares to $3$ or to $6$, and none cubes to $2$",
+          "strategy": "contradiction, inside $\\mathbb{Q}$ and NOT inside $\\mathbb{R}$. Write $x = a/b$ with $\\gcd(a,b) = 1$ and $b > 0$, which [[cor-gcd-quotients-coprime]] licenses. Then $a^{k} = m b^{k}$ in $\\mathbb{Z}$. If some prime $q$ divides $b$ then $q \\mid a^{k}$, so $q \\mid a$ by [[cor-euclids-lemma-for-finite-products]] (the power is the finite product of a constant list), contradicting $\\gcd(a,b) = 1$ via [[lem-coprime-criterion]]. So $b$ has no prime divisor, hence $b = 1$ by [[lem-every-integer-above-one-has-a-prime-divisor]]. POWERS ARE MONOID POWERS: $x^{k}$ is [[def-group-power]] in the multiplicative monoid of the field $\\mathbb{Q}$ ([[thm-rat-field]], [[def-field]]) -- do not reach for [[def-integer-power]] or [[thm-nth-roots-exist]], which live in $\\mathbb{R}$ and are not needed for a statement about rationals. REMARKS MUST RECORD THE AGREEMENT: the published [[fs-sqrt2-rational]] ('FALSE: some rational number squares to 2', order 7 and 8) is the case $k = 2$, $m = 2$; it is proved there by parity alone, this is a second and more general route, and the two agree. Keep that citation in Remarks only, so it needs no `deps` entry.",
+          "deps": [
+            "cor-euclids-lemma-for-finite-products",
+            "thm-euclids-lemma",
+            "lem-every-integer-above-one-has-a-prime-divisor",
+            "def-prime",
+            "def-coprime",
+            "cor-gcd-quotients-coprime",
+            "lem-coprime-criterion",
+            "def-common-divisor-and-gcd",
+            "cor-common-divisor-divides-gcd",
+            "lem-gcd-basic-values",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-rationals",
+            "thm-rat-field",
+            "lem-int-embeds-rat",
+            "def-field",
+            "def-group-power",
+            "lem-group-power-laws",
+            "def-semigroup-and-monoid",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "lem-int-cancellation",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "def-integers",
+            "def-int-operations",
+            "def-int-order",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-embeds-int"
+          ]
+        }
+      ],
       "order": 24
     },
     {
@@ -2497,7 +3055,230 @@
       "requires": [
         "primes-and-the-fundamental-theorem-of-arithmetic"
       ],
-      "items": [],
+      "items": [
+        {
+          "id": "ex-prime-factorisation-worked",
+          "kind": "example",
+          "title": "$360 = 2^{3} \\cdot 3^{2} \\cdot 5$ and $84 = 2^{2} \\cdot 3 \\cdot 7$, with $\\gcd(360,84) = 12$ and $\\operatorname{lcm}(360,84) = 2520$ read off the exponents",
+          "strategy": "Verification, not decoration: compute both factorisations by repeated division ([[thm-division-algorithm-in-z]]), give the valuations $v_2, v_3, v_5, v_7$ of each number explicitly, then apply [[thm-gcd-and-lcm-from-valuations]] to get $\\gcd$ and $\\operatorname{lcm}$, and CHECK the answer independently against [[thm-euclidean-algorithm]] and [[thm-gcd-lcm-product]] ($12 \\cdot 2520 = 30240 = 360 \\cdot 84$). The cross-check is the point: it is what shows the exponent recipe and page 22's $\\gcd$ are one notion.",
+          "deps": [
+            "thm-gcd-and-lcm-from-valuations",
+            "thm-canonical-prime-factorisation",
+            "lem-p-adic-valuation-additive",
+            "lem-p-adic-valuation-basic",
+            "def-p-adic-valuation",
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "def-prime",
+            "thm-euclidean-algorithm",
+            "thm-gcd-lcm-product",
+            "def-lcm",
+            "def-common-divisor-and-gcd",
+            "cor-common-divisor-divides-gcd",
+            "thm-division-algorithm-in-z",
+            "def-divides-in-z",
+            "def-group-power",
+            "lem-group-power-laws",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "ex-two-is-the-only-even-prime",
+          "kind": "example",
+          "title": "$2$ is prime, and it is the only even prime: every even integer $n > 2$ is composite",
+          "strategy": "Direct. $2 > 1$ and its positive divisors are $1$ and $2$ by [[lem-divisor-bound]] plus the absence of an integer strictly between $0$ and $1$ (prove that from [[thm-int-ordered-ring]] and [[lem-nat-embeds-int]], or cite the same step as used elsewhere). If $n > 2$ is even then $2 \\mid n$ with $2 \\ne 1$ and $2 \\ne n$, so $n$ is composite by [[def-prime]]. Note in a Remark that this is why parity was enough for the $2$-adic case elsewhere in the library, while the general $p$ needs [[thm-euclids-lemma]].",
+          "deps": [
+            "def-prime",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "thm-int-ordered-ring",
+            "thm-int-comm-ring",
+            "def-int-operations",
+            "def-int-order",
+            "lem-nat-embeds-int",
+            "def-natural-numbers",
+            "def-nat-order"
+          ]
+        },
+        {
+          "id": "ex-no-rational-square-root-of-three",
+          "kind": "example",
+          "title": "No rational squares to $3$ or to $6$, and none cubes to $2$: three instances of the rational-root corollary",
+          "strategy": "Instances of [[cor-rational-root-of-an-integer-is-an-integer]]. For each, exhibit the integer candidates and rule them out by size ($1^{2} = 1 < 3 < 4 = 2^{2}$, and so on), so the argument is finished rather than gestured at. Remark that [[fs-sqrt2-rational]] is the fourth instance and was proved on the construction pages by parity alone, long before primes existed here.",
+          "deps": [
+            "cor-rational-root-of-an-integer-is-an-integer",
+            "def-prime",
+            "thm-fundamental-theorem-of-arithmetic",
+            "def-coprime",
+            "cor-gcd-quotients-coprime",
+            "def-common-divisor-and-gcd",
+            "def-divides-in-z",
+            "def-rationals",
+            "thm-rat-field",
+            "lem-int-embeds-rat",
+            "def-field",
+            "def-group-power",
+            "lem-group-power-laws",
+            "lem-units-of-z",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "lem-int-cancellation"
+          ]
+        },
+        {
+          "id": "ex-arbitrarily-long-runs-of-composites",
+          "kind": "example",
+          "title": "For every $n \\in \\mathbb{N}$ there are $n$ consecutive composite integers: with $N := \\prod_{j<n}(j+2)$, each of $N+2, \\dots, N+n+1$ is composite",
+          "strategy": "Direct. DO NOT USE A FACTORIAL: no factorial on $\\mathbb{Z}$ is published here ([[lem-factorial-beats-geometric]] introduces $k!$ inside $\\mathbb{R}$ via [[def-finite-sum]], a different object on a different page), so minting one would create a dictionary obligation this page cannot discharge. Use the finite product $N := \\prod_{j<n} \\iota(j+2)$ of [[def-monoid-finite-product]] in $(\\mathbb{Z},\\cdot,1)$ ([[lem-units-of-z]]) instead. For $2 \\le k \\le n+1$ the factor $k$ occurs in the product, so $k \\mid N$ by the splitting law ([[thm-generalised-associativity]] clause 1) and $k \\mid N + k$ by linearity ([[lem-divisibility-basic]]); and $N + k > k > 1$, so $N+k$ is composite. Check $n = 0$: the claim is vacuous and the empty product is $1$. State the honest limit in a Remark: this shows the gaps between consecutive primes are unbounded, and says NOTHING about where the primes are -- [[thm-euclid-infinitude-of-primes]] is what keeps them coming.",
+          "deps": [
+            "def-prime",
+            "thm-euclid-infinitude-of-primes",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "lem-units-of-z",
+            "def-semigroup-and-monoid",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-induction-principle",
+            "lem-nat-order-is-membership",
+            "lem-nat-embeds-int",
+            "def-natural-numbers",
+            "def-nat-order",
+            "def-nat-addition",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations"
+          ]
+        },
+        {
+          "id": "cex-hilbert-monoid-factorisation-not-unique",
+          "kind": "counterexample",
+          "title": "In the multiplicative monoid $H = \\{1, 4, 7, 10, \\dots\\}$ of positive integers congruent to $1$ modulo $3$, the element $100$ has two genuinely different factorisations into irreducibles, $4 \\cdot 25$ and $10 \\cdot 10$",
+          "strategy": "Refutes: existence of a factorisation into irreducibles forces uniqueness. (1) $H$ is closed under multiplication, since $(3a+1)(3b+1) = 3(3ab+a+b)+1$, and contains $1$, so it is a commutative monoid under the multiplication of $\\mathbb{Z}$ ([[def-semigroup-and-monoid]], [[def-binary-operation]], [[lem-units-of-z]]). (2) Call $h \\in H$ with $h > 1$ irreducible in $H$ when it is not a product of two elements of $H$ both $> 1$; verify that $4$, $10$ and $25$ are irreducible in $H$ by listing the possibilities, which is finite work. (3) $100 = 4 \\cdot 25 = 10 \\cdot 10$, and no permutation matches the lists. THE POINT, and it must be stated: existence of a factorisation is NOT the fundamental theorem; [[thm-euclids-lemma]] is what buys uniqueness, and it fails in $H$ ($10 \\mid 4 \\cdot 25$ in $H$ while $10 \\nmid 4$ and $10 \\nmid 25$ in $H$). CHOSEN DELIBERATELY over $\\mathbb{Z}[\\sqrt{-5}]$, which would need ring theory at order 42 and is dropped by the self-contained-scope rule; $H$ needs nothing beyond $\\mathbb{Z}$ and divisibility. The word 'ring' must not appear.",
+          "deps": [
+            "def-prime",
+            "thm-euclids-lemma",
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "def-semigroup-and-monoid",
+            "def-binary-operation",
+            "def-identity-element",
+            "lem-units-of-z",
+            "def-monoid-finite-product",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-division-algorithm-in-z",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "def-int-order",
+            "lem-nat-embeds-int",
+            "def-natural-numbers"
+          ]
+        },
+        {
+          "id": "cex-calling-one-prime-destroys-uniqueness",
+          "kind": "counterexample",
+          "title": "If $1$ were admitted as a prime, uniqueness would fail: $6 = 2 \\cdot 3 = 1 \\cdot 2 \\cdot 3 = 1 \\cdot 1 \\cdot 2 \\cdot 3$, lists of different lengths that no permutation matches",
+          "strategy": "Refutes: the exclusion of $1$ in [[def-prime]] is an arbitrary convention. Under the modified definition the three displayed lists have lengths $2$, $3$ and $4$, so the clause '$r = s$' of [[thm-fundamental-theorem-of-arithmetic]] fails immediately, and no $\\sigma \\in \\operatorname{Sym}(r)$ can exist because the domains differ ([[lem-pigeonhole]] clause 3 if it needs saying). Note that EXISTENCE would survive, so it is precisely the uniqueness half that fixes the convention -- which is what [[def-prime]] claims and this item verifies.",
+          "deps": [
+            "def-prime",
+            "thm-fundamental-theorem-of-arithmetic",
+            "thm-prime-factorisation-exists",
+            "def-symmetric-group",
+            "lem-pigeonhole",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "def-monoid-finite-product",
+            "lem-units-of-z",
+            "def-divides-in-z",
+            "thm-int-comm-ring",
+            "def-int-operations",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "fs-euclids-product-of-primes-plus-one-is-prime",
+          "kind": "false-statement",
+          "title": "FALSE: for every finite list $p_0, \\dots, p_{n-1}$ of distinct primes, $p_0 \\cdots p_{n-1} + 1$ is prime",
+          "strategy": "Refutation by the first counterexample: $2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 = 59 \\cdot 509$, and both factors are verified prime by trial division up to their square roots (finite, explicit work; bound the trial range by [[lem-divisor-bound]] and the observation that a composite $n$ has a divisor $d > 1$ with $d^{2} \\le n$, which follows from [[def-prime]] and [[lem-every-integer-above-one-has-a-prime-divisor]]). The false claim is a common misreading of [[thm-euclid-infinitude-of-primes]]: that theorem concludes only that $N$ has a prime divisor OUTSIDE the list, never that $N$ itself is prime, and the proof there must be re-read to see that it never says otherwise. Also note $59$ and $509$ are indeed not on the list, as the theorem promises.",
+          "deps": [
+            "thm-euclid-infinitude-of-primes",
+            "def-prime",
+            "lem-every-integer-above-one-has-a-prime-divisor",
+            "thm-prime-factorisation-exists",
+            "def-monoid-finite-product",
+            "lem-units-of-z",
+            "thm-division-algorithm-in-z",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-int-abs",
+            "lem-int-abs-properties",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "lem-nat-embeds-int"
+          ]
+        },
+        {
+          "id": "fs-n-squared-plus-n-plus-forty-one-is-always-prime",
+          "kind": "false-statement",
+          "title": "FALSE: $n^{2} + n + 41$ is prime for every natural number $n$",
+          "strategy": "Refutation at $n = 40$: $40^{2} + 40 + 41 = 1681 = 41^{2}$, so it is composite ([[def-prime]]). Give the structural reason as well, since it is one line and makes the failure inevitable rather than accidental: at $n = 40$ every term is divisible by $41$, because $40^{2} + 40 = 40 \\cdot 41$. Remark honestly that the claim IS true for every $n < 40$, so no amount of checking small cases establishes it -- that is the point of the item, and the verification of the $40$ small cases need not be carried out to make it.",
+          "deps": [
+            "def-prime",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "def-group-power",
+            "lem-group-power-laws",
+            "lem-units-of-z",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "lem-nat-embeds-int",
+            "def-natural-numbers",
+            "def-nat-order"
+          ]
+        },
+        {
+          "id": "fs-every-fermat-number-is-prime",
+          "kind": "false-statement",
+          "title": "FALSE: every Fermat number $2^{2^{n}} + 1$ is prime",
+          "strategy": "Refutation at $n = 5$: $641 \\mid 2^{32} + 1$. Use Euler's slick verification rather than a $10$-digit division, since it is finite ring arithmetic: $641 = 5 \\cdot 2^{7} + 1 = 2^{4} + 5^{4}$. From the first, $5 \\cdot 2^{7} \\equiv -1$, so $5^{4} \\cdot 2^{28} \\equiv 1$; from the second, $5^{4} \\equiv -2^{4}$, so $-2^{32} \\equiv 1$, i.e. $641 \\mid 2^{32} + 1$. CONGRUENCE NOTATION IS NOT AVAILABLE at order 25 -- congruence notation arrives at order 26 -- so write every step as a divisibility statement with an explicit witness, using [[lem-divisibility-basic]] linearity and [[def-divides-in-z]]. Powers are [[def-group-power]] in $(\\mathbb{Z},\\cdot,1)$ ([[lem-units-of-z]]) and the exponent law is [[lem-group-power-laws]] read in a monoid. Then $2^{32} + 1$ is composite by [[def-prime]], $641$ being neither $1$ nor $2^{32}+1$. Remark that $n = 0,1,2,3,4$ do give primes, which is why Fermat believed it.",
+          "deps": [
+            "def-prime",
+            "def-group-power",
+            "lem-group-power-laws",
+            "lem-units-of-z",
+            "def-semigroup-and-monoid",
+            "def-divides-in-z",
+            "lem-divisibility-basic",
+            "lem-divisor-bound",
+            "thm-induction-principle",
+            "thm-int-comm-ring",
+            "thm-int-ordered-ring",
+            "def-int-operations",
+            "lem-nat-embeds-int",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-order-is-membership"
+          ]
+        }
+      ],
       "order": 25
     },
     {
@@ -3859,7 +4640,500 @@
         "vector-spaces-and-subspaces",
         "order-zorn-and-the-axiom-of-choice"
       ],
-      "items": [],
+      "items": [
+        {
+          "id": "def-linear-independence",
+          "kind": "definition",
+          "title": "Linear independence: a finite list $v : n \\to V$ is independent when $\\sum_{i<n} \\lambda_i v_i = 0_V$ forces every $\\lambda_i = 0_F$, and a subset $S \\subseteq V$ is independent when every injective finite list into $S$ is",
+          "strategy": "TWO NOTIONS, DEFINED TOGETHER AND RELATED, because the page needs both: lists carry ordered bases and coordinates, subsets carry the Zorn argument. (1) The finite sum is the one page 68 already fixed: [[def-monoid-finite-product]] read additively in the abelian group $(V,+,0_V)$, exactly as [[def-linear-combination-and-span]] does. Do not introduce a second finite sum, and do not reach for [[def-finite-sum]], which is stated for sequences into the complete ordered field. (2) THE INJECTIVITY CLAUSE IN THE SUBSET DEFINITION IS LOAD-BEARING AND MUST BE STATED. A linear combination in [[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$, which need NOT be injective; if repetitions were allowed, $1_F v + (-1_F) v = 0_V$ would make every nonempty $S$ dependent. Quantifying over injective lists is what makes the subset notion the intended one. [[lem-independent-list-is-injective]] then shows the clause is not an extra hypothesis for LISTS -- the vanishing condition forces a list to be injective by itself. (3) BOUNDARY CASES ARE REAL CASES: $n = 0$ makes the empty list independent and $\\varnothing \\subseteq V$ independent (vacuously), and $\\{0_V\\}$ is dependent, since $1_F \\cdot 0_V = 0_V$ with $1_F \\ne 0_F$ ([[def-field]], [[lem-vector-space-elementary-consequences]]). $\\mathbb{N}$ contains $0$, so state both. (4) Dependent means not independent; define the word here so no later item has to.",
+          "deps": [
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "lem-independent-list-is-injective",
+          "kind": "lemma",
+          "title": "An independent finite list is injective and takes no value $0_V$; every sublist of an independent list is independent; and every subset of an independent set is independent",
+          "strategy": "direct, with the witnesses written out. INJECTIVITY: if $v_j = v_k$ with $j \\ne k$, take $\\lambda_j = 1_F$, $\\lambda_k = -1_F$ and $\\lambda_i = 0_F$ otherwise; the sum is $0_V$ by (F1) and (F3) of [[def-sum-of-linear-subspaces]] -- CITE THOSE, they are exactly the finite-sum facts page 68 proved so that this page would not rebuild them -- while $1_F \\ne 0_F$. NO ZERO VALUE: if $v_j = 0_V$, take $\\lambda_j = 1_F$ and the rest $0_F$. SUBLISTS and SUBSETS: extend a witnessing scalar list by zeros and use (F3). Record the consequence used constantly below: an independent list $v : n \\to V$ is a bijection onto its range, so its range is a subset with exactly $n$ elements ([[def-equinumerous]], [[lem-pigeonhole]] clause 3), and independence of the list and of its range are the same condition.",
+          "deps": [
+            "def-linear-independence",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-linear-combination-and-span",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-countable"
+          ]
+        },
+        {
+          "id": "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+          "kind": "lemma",
+          "title": "A subset $S \\subseteq V$ is linearly dependent if and only if some $s \\in S$ lies in $\\operatorname{span}(S \\setminus \\{s\\})$",
+          "strategy": "both directions direct. ($\\Rightarrow$) A witnessing injective list with some $\\lambda_j \\ne 0_F$ can be solved for $v_j$, multiplying by $\\lambda_j^{-1}$, which exists because $F$ is a field ([[def-field]]); the remaining terms are a linear combination of the other entries, which are distinct from $v_j$ by injectivity, hence lie in $S \\setminus \\{v_j\\}$. Use (F2) and (F3) of [[def-sum-of-linear-subspaces]] for the rearrangement, and [[lem-span-is-the-set-of-linear-combinations]] to land in the span. ($\\Leftarrow$) Reverse it. CHECK THE EDGES: $S = \\varnothing$ has no $s$ and is independent; $S = \\{0_V\\}$ is dependent and $0_V \\in \\operatorname{span}(\\varnothing) = \\{0_V\\}$ by [[lem-span-is-the-set-of-linear-combinations]], so the equivalence holds there too and must be checked in the proof rather than waved at.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "lem-independence-has-finite-character",
+          "kind": "lemma",
+          "title": "$S \\subseteq V$ is linearly independent if and only if every finite subset of $S$ is; consequently the union of a nonempty chain of independent subsets of $V$, ordered by inclusion, is independent",
+          "strategy": "direct, and this is the lemma that makes Zorn applicable, so it must be proved in full rather than assumed. FINITE CHARACTER: an injective list $v : n \\to S$ has finite range, and independence of $S$ is by definition a condition on such lists. CHAINS: let $C$ be a nonempty chain of independent subsets under $\\subseteq$ ([[def-chain]], [[def-partial-order]]) and let $v : n \\to \\bigcup C$ be injective; each $v_i$ lies in some $A_i \\in C$, and by induction on $n$ ([[thm-induction-principle]]) using comparability, all $n$ of them lie in a single member $A \\in C$ -- WRITE THIS INDUCTION OUT; 'by comparability' is not a proof, and it is the only place the chain hypothesis is spent. Then independence of $A$ gives the conclusion. Note the induction needs $n$ finite, which is why finite character is stated first.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-partial-order",
+            "def-chain",
+            "def-vector-space",
+            "def-field",
+            "def-linear-combination-and-span",
+            "def-monoid-finite-product",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole"
+          ]
+        },
+        {
+          "id": "lem-adjoining-a-vector-outside-the-span",
+          "kind": "lemma",
+          "title": "If $S \\subseteq V$ is independent and $w \\notin \\operatorname{span}(S)$ then $S \\cup \\{w\\}$ is independent and $\\operatorname{span}(S) \\subsetneq \\operatorname{span}(S \\cup \\{w\\})$; and if $w \\in \\operatorname{span}(S)$ then $\\operatorname{span}(S \\cup \\{w\\}) = \\operatorname{span}(S)$",
+          "strategy": "contradiction for the first clause. Note $w \\notin S$, since $S \\subseteq \\operatorname{span}(S)$ ([[lem-span-monotone-and-idempotent]] clause 1). Given a dependence on $S \\cup \\{w\\}$, the coefficient of $w$ cannot be $0_F$ (else $S$ would be dependent) and cannot be nonzero (else $w \\in \\operatorname{span}(S)$ by the solving step of [[lem-dependent-iff-a-vector-lies-in-the-span-of-the-others]]). The second clause is monotonicity and idempotence of the span ([[lem-span-monotone-and-idempotent]]). This lemma is the engine of both [[thm-steinitz-exchange]] and the Zorn argument of [[thm-every-independent-set-extends-to-a-basis]]; state it once, here.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "lem-span-of-a-single-vector",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "def-linear-basis",
+          "kind": "definition",
+          "title": "Basis of a vector space: a linearly independent spanning subset; and ordered basis: an injective finite list whose range is a basis",
+          "strategy": "Definition, with the naming decision recorded. NAMING: the bare id `def-linear-basis` is free, and the library's other basis -- a basis for a topology -- is already namespaced as [[def-topology-basis-subbasis]] with alias `def-basis-top`, so no collision arises; say so in Remarks, in the dictionary style page 68 used for `linear subspace`, and note that the two notions share nothing but the word. CONTENT: $B \\subseteq V$ is a basis when $B$ is independent ([[def-linear-independence]]) and $\\operatorname{span}(B) = V$ ([[def-linear-combination-and-span]]). $\\varnothing$ IS A BASIS OF THE ZERO SPACE, since $\\operatorname{span}(\\varnothing) = \\{0_V\\}$ ([[lem-span-is-the-set-of-linear-combinations]]) -- state this, it is the $n = 0$ case that every later induction on this page starts from. An ORDERED basis is a list $v : n \\to V$, $n \\in \\mathbb{N}$, that is injective and whose range is a basis; by [[lem-independent-list-is-injective]] the injectivity is equivalent to asking only that the list be independent and span. Also fix the word SPANNING SET here if page 68 has not: it has -- [[def-linear-combination-and-span]] defines it -- so cite rather than redefine.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-linear-subspace",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "kind": "theorem",
+          "title": "A finite list $v : n \\to V$ is an ordered basis if and only if every $x \\in V$ equals $\\sum_{i<n} \\lambda_i v_i$ for exactly one $\\lambda : n \\to F$; those scalars are the coordinates of $x$ in the ordered basis",
+          "strategy": "both directions direct; this is the well-definedness obligation for coordinates and must be proved, not assumed. EXISTENCE is spanning ([[lem-span-is-the-set-of-linear-combinations]]). UNIQUENESS: subtract two representations using (F2) of [[def-sum-of-linear-subspaces]] to get $\\sum_{i<n} (\\lambda_i - \\mu_i) v_i = 0_V$, then independence. CONVERSE: unique representation gives spanning at once and independence by comparing a vanishing combination with the all-zero one, which represents $0_V$ by (F1). The list is injective by [[lem-independent-list-is-injective]]. State plainly that the coordinates depend on the ORDERED basis and not on the basis as a set -- reordering the list permutes the coordinates -- and leave the map $x \\mapsto \\lambda$ un-named: it is a linear map, and linear maps are order 72. LANDMARK.",
+          "deps": [
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "lem-group-cancellation",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "lem-basis-iff-maximal-independent-iff-minimal-spanning",
+          "kind": "lemma",
+          "title": "For $B \\subseteq V$ the following are equivalent: $B$ is a basis; $B$ is a maximal linearly independent subset of $V$; $B$ is a minimal spanning subset of $V$ — maximality and minimality being in the inclusion order",
+          "strategy": "three implications, direct. Basis implies maximal independent: any $w \\notin B$ lies in $\\operatorname{span}(B) = V$, so $B \\cup \\{w\\}$ is dependent by [[lem-dependent-iff-a-vector-lies-in-the-span-of-the-others]]. Maximal independent implies basis: if some $w \\notin \\operatorname{span}(B)$ existed, [[lem-adjoining-a-vector-outside-the-span]] would contradict maximality. Basis implies minimal spanning, and back, by the same lemma applied to $B \\setminus \\{b\\}$. Use [[def-maximal-element]] and [[def-partial-order]] for the words `maximal` and `minimal`, in the inclusion order on the relevant family of subsets -- name the poset explicitly, because [[thm-every-independent-set-extends-to-a-basis]] feeds Zorn the very same poset.",
+          "deps": [
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-adjoining-a-vector-outside-the-span",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-linear-subspace",
+            "def-partial-order",
+            "def-chain",
+            "def-upper-bound",
+            "def-maximal-element",
+            "def-vector-space",
+            "def-field"
+          ]
+        },
+        {
+          "id": "thm-steinitz-exchange",
+          "kind": "theorem",
+          "title": "The Steinitz exchange lemma: if $L \\subseteq V$ is linearly independent and $S \\subseteq V$ spans $V$ with $S$ finite of size $n$, then $L$ is finite with $|L| = m \\le n$, and there is $T \\subseteq S$ with $|T| = n - m$ such that $L \\cup T$ spans $V$",
+          "strategy": "induction, on $m$, exchanging one vector at a time. THE EXCHANGE STEP: if $L' \\cup T'$ spans $V$ and $w \\in L \\setminus L'$, then $w$ is a combination of $L' \\cup T'$ ([[lem-span-is-the-set-of-linear-combinations]]) with some coefficient on a $t \\in T'$ nonzero -- if every coefficient on $T'$ vanished, $w$ would lie in $\\operatorname{span}(L')$, contradicting independence of $L$ via [[lem-dependent-iff-a-vector-lies-in-the-span-of-the-others]] -- so solve for that $t$ and replace it by $w$, the new set still spanning by [[lem-adjoining-a-vector-outside-the-span]] and [[lem-span-monotone-and-idempotent]]. THE BOUND $m \\le n$ falls out because $T'$ cannot run out before $L$ does. SIZES ARE NATURALS AND ARE HANDLED BY [[lem-pigeonhole]]: a finite set is equinumerous with exactly one natural (clause 3), which is what makes $|L|$ and $|T|$ meaningful; $n - m$ is the unique natural $k$ with $m + k = n$ ([[def-nat-addition]], [[thm-nat-linear-order]]). ALSO PROVE $L$ IS FINITE rather than assuming it: if $L$ were infinite it would contain an independent subset of size $n+1$, which the bound forbids ([[lem-independent-list-is-injective]] for subsets). LANDMARK.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "lem-adjoining-a-vector-outside-the-span",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle",
+            "def-nat-addition",
+            "thm-nat-linear-order",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole"
+          ]
+        },
+        {
+          "id": "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "kind": "corollary",
+          "title": "If $V$ has a spanning set with $n$ elements, then every linearly independent subset of $V$ is finite with at most $n$ elements; in particular $V$ has no independent subset equinumerous with $\\mathbb{N}$",
+          "strategy": "direct, from [[thm-steinitz-exchange]]. The last clause is the one later items use to say a space is infinite-dimensional, and it needs [[lem-pigeonhole]] clause 4 ($\\mathbb{N} \\not\\approx n$) plus [[lem-independent-list-is-injective]] to cut a subset of size $n+1$ out of an infinite independent set.",
+          "deps": [
+            "thm-steinitz-exchange",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-linear-basis",
+            "lem-independence-has-finite-character",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "thm-any-two-finite-bases-have-the-same-size",
+          "kind": "theorem",
+          "title": "If $V$ has a basis with $n$ elements and a basis with $m$ elements then $n = m$; and if $V$ has one finite basis then every basis of $V$ is finite",
+          "strategy": "direct, applying [[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] twice, in each direction, then antisymmetry of the order on $\\mathbb{N}$. This is well-definedness obligation #12 and it is what licenses [[def-dimension]] to speak of THE dimension. Sizes are compared through [[lem-pigeonhole]] clause 3. THE INFINITE CASE IS NOT CLAIMED: this page does NOT assert that any two infinite bases are equinumerous, and it must not, because the standard proof needs cardinal arithmetic and [[def-cardinal]] is homed on `ordinals-and-transfinite-recursion` at order 183, one hundred and thirteen pages above this one. Say in Remarks that the invariance proved here is the finite one, in the 'not available at this point in the reading order' form -- never 'this library does not develop it'. LANDMARK.",
+          "deps": [
+            "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+            "thm-steinitz-exchange",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "def-dimension",
+          "kind": "definition",
+          "title": "Finite-dimensional vector space, and its dimension $\\dim_F V$; infinite-dimensional means having no finite basis",
+          "strategy": "Definition resting on [[thm-any-two-finite-bases-have-the-same-size]], which is a PREREQUISITE and belongs in `deps`, not in `justified_by`: it does not depend on this item. $V$ is finite-dimensional over $F$ when it has a finite basis, and then $\\dim_F V$ is the unique natural $n$ with a basis of $n$ elements. $\\dim_F$ IS SUBSCRIPTED BY THE FIELD and the Remarks must say why: page 68's [[lem-restriction-of-scalars]] makes the same set a vector space over a subfield, and the dimension changes when the field does. $\\dim_F \\{0_V\\} = 0$, with basis $\\varnothing$. INFINITE-DIMENSIONAL is defined as the negation, with NO cardinal attached -- do not write $\\dim V = \\infty$ and do not cite [[def-cardinal]] (order 183). Note that the definition is stated relative to a field and a space, so 'the dimension of $V$' is incomplete language, exactly as page 68 says of 'the vector space $V$'. LANDMARK.",
+          "deps": [
+            "thm-any-two-finite-bases-have-the-same-size",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-restriction-of-scalars",
+            "def-subfield",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers"
+          ]
+        },
+        {
+          "id": "thm-every-independent-set-extends-to-a-basis",
+          "kind": "theorem",
+          "title": "Zorn's lemma gives a basis between any independent set and any spanning set containing it: if $L \\subseteq S \\subseteq V$ with $L$ independent and $\\operatorname{span}(S) = V$, there is a basis $B$ of $V$ with $L \\subseteq B \\subseteq S$",
+          "strategy": "constructive via Zorn, and the two hypotheses are stated together on purpose so that the two classical statements are corollaries rather than two separate Zorn arguments. THE POSET: $P := \\{\\, A : L \\subseteq A \\subseteq S,\\ A \\text{ independent} \\,\\}$ ordered by inclusion, a poset by [[def-partial-order]]. NONEMPTY: $L \\in P$. EVERY CHAIN HAS AN UPPER BOUND -- and the EMPTY CHAIN MUST BE HANDLED SEPARATELY, its upper bound being $L$, because the union of the empty chain is $\\varnothing$, which need not contain $L$; [[thm-zorn]] as published quantifies over every chain, so this case is not optional. For a nonempty chain the union is in $P$: independent by [[lem-independence-has-finite-character]], and between $L$ and $S$ because every member is. [[thm-zorn]] then yields a maximal $B \\in P$. FINALLY $\\operatorname{span}(B) = V$: if some $s \\in S$ had $s \\notin \\operatorname{span}(B)$ then $B \\cup \\{s\\} \\in P$ by [[lem-adjoining-a-vector-outside-the-span]], contradicting maximality; so $S \\subseteq \\operatorname{span}(B)$ and $\\operatorname{span}(B) \\supseteq \\operatorname{span}(S) = V$ by [[lem-span-monotone-and-idempotent]]. CHOICE IS DECLARED, not hidden: [[thm-zorn]] assumes [[def-axiom-of-choice]], which this library has adopted, and the Statement should say the theorem is proved from Zorn's lemma. LANDMARK.",
+          "deps": [
+            "thm-zorn",
+            "def-axiom-of-choice",
+            "def-partial-order",
+            "def-chain",
+            "def-upper-bound",
+            "def-maximal-element",
+            "lem-independence-has-finite-character",
+            "lem-basis-iff-maximal-independent-iff-minimal-spanning",
+            "lem-adjoining-a-vector-outside-the-span",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-linear-subspace",
+            "def-vector-space",
+            "def-field"
+          ]
+        },
+        {
+          "id": "cor-every-spanning-set-contains-a-basis",
+          "kind": "corollary",
+          "title": "Every spanning subset of a vector space contains a basis",
+          "strategy": "direct: apply [[thm-every-independent-set-extends-to-a-basis]] with $L = \\varnothing$, which is independent by [[def-linear-independence]]. Note the finite case needs no choice at all -- a minimal spanning subset of a finite spanning set exists by [[lem-pigeonhole]] and downward induction -- and say so, since the library is careful elsewhere about what a proof actually costs.",
+          "deps": [
+            "thm-every-independent-set-extends-to-a-basis",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-basis-iff-maximal-independent-iff-minimal-spanning",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "cor-every-vector-space-has-a-basis",
+          "kind": "corollary",
+          "title": "Every vector space has a basis",
+          "strategy": "direct: apply [[thm-every-independent-set-extends-to-a-basis]] with $L = \\varnothing$ and $S = V$, noting $\\operatorname{span}(V) = V$ by [[lem-span-monotone-and-idempotent]] clause 4. The zero space is included, its basis being $\\varnothing$. REMARKS, and this is a decision the orchestrator should confirm: the CONVERSE -- that 'every vector space has a basis' implies the Axiom of Choice -- is a theorem of Blass (1984) which this library does not prove. State that in PLAIN PROSE with a real entry in `sources.references` and NO wikilink and NO `external_refs` entry, exactly as the number-theory scaffold orients readers forward without linking; the self-contained-scope rule forbids resting on it, and nothing here does. LANDMARK. See the batch notes: the published [[rem-choice-ledger]] currently says of this statement that 'neither direction is proved here', which THIS ITEM FALSIFIES, and the amendment is recorded in `research/level9-mixed-batch-2.notes.md`.",
+          "deps": [
+            "thm-every-independent-set-extends-to-a-basis",
+            "thm-zorn",
+            "def-axiom-of-choice",
+            "cor-ac-iff-zorn",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-vector-space",
+            "def-field"
+          ]
+        },
+        {
+          "id": "lem-standard-basis-of-f-n",
+          "kind": "lemma",
+          "title": "The standard list $e : n \\to F^{n}$ with $e_i(j) = 1_F$ for $j = i$ and $0_F$ otherwise is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$",
+          "strategy": "direct, via [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]: for $x \\in F^{n}$ the list $\\lambda_i := x(i)$ is the unique one with $x = \\sum_{i<n} \\lambda_i e_i$, checked by evaluating both sides at each $j < n$, which is legitimate because equality in $F^{X}$ is pointwise ([[def-function-space]]). INDEXING: $F^{n}$ is $F^{X}$ with $X = n = \\{0,\\dots,n-1\\}$ the von Neumann natural, so entries run $x_0,\\dots,x_{n-1}$ and the list starts at $0$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]); $n = 0$ gives $F^{0}$, whose single element is the empty function, and the empty list is its ordered basis. Evaluating a finite sum pointwise needs induction ([[thm-induction-principle]]) on the defining clauses of [[def-monoid-finite-product]]; do not assert it.",
+          "deps": [
+            "def-linear-basis",
+            "def-dimension",
+            "def-linear-independence",
+            "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+            "def-function-space",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "thm-dimension-of-a-linear-subspace",
+          "kind": "theorem",
+          "title": "If $\\dim_F V = n$ and $U$ is a linear subspace of $V$, then $U$ is finite-dimensional, $\\dim_F U \\le n$, and $\\dim_F U = n$ if and only if $U = V$",
+          "strategy": "direct. $U$ is finite-dimensional: an independent subset of $U$ is independent in $V$, hence has at most $n$ elements ([[cor-independent-set-is-no-larger-than-a-finite-spanning-set]]); take one of maximal size, which exists because the sizes form a nonempty set of naturals bounded by $n$ ([[thm-well-ordering-principle]] or the bounded-above form), and it is a basis of $U$ by [[lem-basis-iff-maximal-independent-iff-minimal-spanning]] applied inside $U$ -- note that maximality among independent subsets OF $U$ is what is needed, and that the span in $U$ and in $V$ agree because $U$ is a linear subspace. EQUALITY CASE: if $\\dim_F U = n$ and $U \\ne V$, pick $w \\in V \\setminus U$; a basis of $U$ together with $w$ is independent by [[lem-adjoining-a-vector-outside-the-span]] and has $n+1$ elements, contradicting the bound. FINITENESS IS ESSENTIAL and the companion page carries the witness: in infinite dimension a proper subspace can have a basis equinumerous with a basis of the whole space.",
+          "deps": [
+            "def-dimension",
+            "thm-any-two-finite-bases-have-the-same-size",
+            "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+            "thm-every-independent-set-extends-to-a-basis",
+            "thm-steinitz-exchange",
+            "lem-basis-iff-maximal-independent-iff-minimal-spanning",
+            "lem-adjoining-a-vector-outside-the-span",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-linear-subspace",
+            "lem-linear-subspace-criterion",
+            "lem-intersection-of-linear-subspaces",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-vector-space",
+            "def-field",
+            "thm-well-ordering-principle",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "cor-a-linear-subspace-has-a-complement",
+          "kind": "corollary",
+          "title": "Every linear subspace $U$ of a vector space $V$ has a complement: a linear subspace $W$ with $V = U \\oplus W$",
+          "strategy": "constructive, from [[thm-every-independent-set-extends-to-a-basis]]. Take a basis $A$ of $U$ ([[cor-every-vector-space-has-a-basis]] applied to $U$, which is a vector space in its own right by [[def-linear-subspace]]), extend it to a basis $B$ of $V$ with $A \\subseteq B \\subseteq V$, and put $W := \\operatorname{span}(B \\setminus A)$. Then $U + W = V$ by [[lem-sum-is-span-of-union]] and [[lem-span-monotone-and-idempotent]], and $U \\cap W = \\{0_V\\}$ because a vector in both has two representations in the basis $B$, contradicting [[thm-unique-coordinates-with-respect-to-an-ordered-basis]] unless it is $0_V$ -- for an infinite $B$ argue with the finite lists that actually occur, via [[lem-span-is-the-set-of-linear-combinations]], rather than with an ordered basis. Conclude with the two-summand form of [[def-internal-direct-sum]], which that definition states as $U + W = V$ and $U \\cap W = \\{0_V\\}$, and record that the complement is NOT unique -- the companion page of order 69 already exhibits three lines in $F^{2}$ pairwise meeting in $0$.",
+          "deps": [
+            "thm-every-independent-set-extends-to-a-basis",
+            "cor-every-vector-space-has-a-basis",
+            "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-internal-direct-sum",
+            "lem-direct-sum-criterion",
+            "def-sum-of-linear-subspaces",
+            "lem-sum-is-span-of-union",
+            "def-linear-subspace",
+            "lem-linear-subspace-criterion",
+            "lem-intersection-of-linear-subspaces",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-monoid-finite-product",
+            "def-vector-space",
+            "def-field",
+            "thm-zorn"
+          ]
+        },
+        {
+          "id": "thm-dimension-formula",
+          "kind": "theorem",
+          "title": "The dimension formula: for finite-dimensional linear subspaces $U$ and $W$ of $V$, $\\dim_F(U+W) + \\dim_F(U \\cap W) = \\dim_F U + \\dim_F W$",
+          "strategy": "constructive. Take a basis $A$ of $U \\cap W$ -- which is a linear subspace by [[lem-intersection-of-linear-subspaces]] and finite-dimensional by [[thm-dimension-of-a-linear-subspace]] -- extend it to a basis $A \\cup A_U$ of $U$ and to a basis $A \\cup A_W$ of $W$ ([[thm-every-independent-set-extends-to-a-basis]]). Prove that $A \\cup A_U \\cup A_W$ is a basis of $U + W$: it spans by [[lem-sum-is-span-of-union]], and independence is the crux -- a vanishing combination puts a vector of $\\operatorname{span}(A_U)$ into $W$, hence into $U \\cap W = \\operatorname{span}(A)$, forcing its $A_U$ coefficients to vanish. Then count, the three pieces being pairwise disjoint (prove that, do not assume it). Arithmetic of naturals: [[def-nat-addition]] and [[lem-pigeonhole]] clause 3 for sizes. CHECK THE EDGES: $U \\cap W = \\{0_V\\}$ gives $A = \\varnothing$ and the formula reads $\\dim(U \\oplus W) = \\dim U + \\dim W$; $U = W$ gives an identity. LANDMARK.",
+          "deps": [
+            "thm-dimension-of-a-linear-subspace",
+            "def-dimension",
+            "thm-any-two-finite-bases-have-the-same-size",
+            "thm-every-independent-set-extends-to-a-basis",
+            "thm-steinitz-exchange",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "lem-adjoining-a-vector-outside-the-span",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "def-sum-of-linear-subspaces",
+            "lem-sum-is-span-of-union",
+            "def-linear-subspace",
+            "lem-linear-subspace-criterion",
+            "lem-intersection-of-linear-subspaces",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-monoid-finite-product",
+            "thm-generalised-associativity",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-nat-addition",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "cor-dimension-of-a-direct-sum",
+          "kind": "corollary",
+          "title": "If $V = \\bigoplus_{i<n} U_i$ with every $U_i$ finite-dimensional, then $V$ is finite-dimensional and $\\dim_F V = \\sum_{i<n} \\dim_F U_i$; in particular $\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$",
+          "strategy": "induction on $n$, from [[thm-dimension-formula]] and the defining condition of [[def-internal-direct-sum]], which says each $U_j$ meets the sum of the OTHERS only in $0_V$ -- that is what makes the intersection term vanish at each step, and the pairwise condition would not suffice ([[lem-direct-sum-criterion]], and the order-69 counterexample). BASE $n = 0$: the empty direct sum is $\\{0_V\\}$ and the empty sum of naturals is $0$, so the formula holds; state the base rather than starting at $1$. The sum of naturals is the finite sum of [[def-monoid-finite-product]] read additively in $(\\mathbb{N},+,0)$.",
+          "deps": [
+            "thm-dimension-formula",
+            "def-dimension",
+            "thm-any-two-finite-bases-have-the-same-size",
+            "def-internal-direct-sum",
+            "lem-direct-sum-criterion",
+            "def-sum-of-linear-subspaces",
+            "lem-sum-is-span-of-union",
+            "lem-intersection-of-linear-subspaces",
+            "def-linear-basis",
+            "def-monoid-finite-product",
+            "def-nat-addition",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership",
+            "def-nat-order",
+            "thm-induction-principle"
+          ]
+        }
+      ],
       "order": 70
     },
     {
@@ -3871,7 +5145,221 @@
         "linear-independence-bases-and-dimension"
       ],
       "forwardRefs": [],
-      "items": [],
+      "items": [
+        {
+          "id": "ex-coordinates-depend-on-the-ordered-basis",
+          "kind": "example",
+          "title": "The vector $(1,2) \\in \\mathbb{R}^{2}$ has coordinate list $(1,2)$ in the standard ordered basis, $(2,1)$ in its reversal, and $(2,-1)$ in the ordered basis $\\bigl((1,1),(1,0)\\bigr)$",
+          "strategy": "Compute all three coordinate lists from [[thm-unique-coordinates-with-respect-to-an-ordered-basis]], verifying each by expanding the sum. TITLE MUST BE FIXED BY THE AUTHOR: recompute the third list before writing the title -- the scaffold deliberately leaves the arithmetic unverified so it is checked rather than copied, and a title asserting a wrong triple would be a published falsehood. The point of the item, and it should be stated: coordinates are attached to an ORDERED basis, not to a basis, and the same vector has different coordinate lists under different orderings of the same set. This is the concrete half of the distinction that order 74 will formalise as change of basis.",
+          "deps": [
+            "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-standard-basis-of-f-n",
+            "def-dimension",
+            "def-function-space",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-sum-of-linear-subspaces",
+            "def-monoid-finite-product",
+            "def-vector-space",
+            "def-field",
+            "thm-reals-field",
+            "def-real-numbers",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "ex-basis-of-the-eventually-zero-families",
+          "kind": "example",
+          "title": "The standard unit families $e_i \\in F^{\\mathbb{N}}$ form a basis of the linear subspace of eventually zero families, an explicit infinite basis",
+          "strategy": "B PAGES ARE LEAVES, so this item may NOT depend on page 69's `ex-sequence-space-and-eventually-zero-subspace`, which lives on another examples page; build the eventually zero subspace natively from [[lem-linear-subspace-criterion]] (three lines) and record the agreement with that example in Remarks ONLY, with no `deps` entry. Then prove SPANNING as it does, and add what is new, namely INDEPENDENCE: an injective list $e_{i_0}, \\dots, e_{i_{n-1}}$ with $\\sum \\lambda_k e_{i_k} = 0$ evaluates at $i_k$ to $\\lambda_k = 0_F$, the evaluation being legitimate because equality in $F^{X}$ is pointwise ([[def-function-space]]). Then it is a basis by [[def-linear-basis]], and the space is infinite-dimensional by [[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] together with [[lem-pigeonhole]] clause 4. This is the counterweight to [[cor-every-vector-space-has-a-basis]]: here an infinite basis is written down, no choice principle is used, and the contrast with [[ex-hamel-basis-of-r-over-q]] is the item's point.",
+          "deps": [
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+            "def-dimension",
+            "def-function-space",
+            "def-linear-subspace",
+            "lem-linear-subspace-criterion",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-monoid-finite-product",
+            "def-vector-space",
+            "def-field",
+            "lem-pigeonhole",
+            "def-countable",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "ex-hamel-basis-of-r-over-q",
+          "kind": "example",
+          "title": "$\\mathbb{R}$ as a vector space over $\\mathbb{Q}$ has a basis, and every such basis is infinite; the existence proof exhibits none",
+          "strategy": "EXISTENCE: [[ex-r-as-a-vector-space-over-q]] (order 69) makes $\\mathbb{R}$ a $\\mathbb{Q}$-vector space by restriction of scalars, and [[cor-every-vector-space-has-a-basis]] supplies a basis. INFINITUDE, primary argument: a basis with $n$ elements would give a unique coordinate list in $\\mathbb{Q}^{n}$ for each real ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]), hence an injection $\\mathbb{R} \\to \\mathbb{Q}^{n}$; $\\mathbb{Q}$ is countable ([[thm-rationals-countable]]) and finite products of countable sets are countable ([[thm-product-of-countable]]), so $\\mathbb{R}$ would be countable, contradicting [[thm-r-uncountable]]. SECOND CLAUSE, OPTIONAL AND TO BE CUT IF IT DOES NOT COME OUT CLEANLY: no basis is countably infinite either, because the set of finite $\\mathbb{Q}$-combinations from a countable set is a countable union of countable sets ([[thm-countable-union-of-countable]], which costs countable choice and must be flagged as such via [[def-countable-choice]]). SCOPE DISCIPLINE: say that the proof of existence is non-constructive and exhibits no basis; do NOT write that no basis can be exhibited, which is a metamathematical claim this library has not established, and do NOT mention non-measurable sets -- that clause was withdrawn under the self-contained-scope rule. Do not cite [[rem-banach-no-countable-hamel-basis]] or [[rem-hahn-banach-hamel-basis-open]]: both are recorded-not-proved items, the first is still a draft, and depending on either is forbidden.",
+          "deps": [
+            "cor-every-vector-space-has-a-basis",
+            "thm-every-independent-set-extends-to-a-basis",
+            "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-dimension",
+            "lem-restriction-of-scalars",
+            "def-subfield",
+            "thm-rationals-countable",
+            "thm-product-of-countable",
+            "thm-r-uncountable",
+            "thm-countable-union-of-countable",
+            "def-countable",
+            "def-countable-choice",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "lem-pigeonhole",
+            "thm-zorn",
+            "def-axiom-of-choice",
+            "def-vector-space",
+            "def-field",
+            "def-rationals",
+            "def-real-numbers",
+            "thm-rat-field",
+            "thm-reals-field",
+            "lem-of-q-embeds"
+          ]
+        },
+        {
+          "id": "cex-independent-set-that-does-not-span",
+          "kind": "counterexample",
+          "title": "The standard unit families $\\{e_i : i \\in \\mathbb{N}\\}$ are linearly independent in $F^{\\mathbb{N}}$ but do not span it: the constant family $1$ is not a finite linear combination of them",
+          "strategy": "Refutes: an infinite independent set in an infinite-dimensional space must span. Independence is as in [[ex-basis-of-the-eventually-zero-families]]. NON-SPANNING: every element of the span is a FINITE linear combination ([[lem-span-is-the-set-of-linear-combinations]]) and therefore vanishes outside a finite set of indices, while the constant family $1$ vanishes nowhere -- make the finiteness argument explicit, since it is the whole content. Conclude that this set is independent but not a basis ([[def-linear-basis]]), and note that [[thm-every-independent-set-extends-to-a-basis]] says it EXTENDS to one, which does not contradict anything here.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-linear-basis",
+            "thm-every-independent-set-extends-to-a-basis",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-function-space",
+            "def-linear-subspace",
+            "def-monoid-finite-product",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-order-is-membership",
+            "def-countable",
+            "def-equinumerous"
+          ]
+        },
+        {
+          "id": "cex-spanning-set-that-is-not-independent",
+          "kind": "counterexample",
+          "title": "$\\{(1,0), (0,1), (1,1)\\}$ spans $F^{2}$ and is linearly dependent, so a spanning set need not be a basis; each of its three two-element subsets is a basis",
+          "strategy": "Refutes: a spanning set of a space of dimension $n$ is a basis. Spanning is immediate from the standard basis ([[lem-standard-basis-of-f-n]], [[lem-span-monotone-and-idempotent]] monotonicity). Dependence: $(1,0) + (0,1) - (1,1) = 0$, so it is dependent by [[def-linear-independence]], and equally by [[lem-dependent-iff-a-vector-lies-in-the-span-of-the-others]]. Then verify each two-element subset is a basis, which makes [[cor-every-spanning-set-contains-a-basis]] concrete and shows the contained basis is not unique. NOTE THE FIELD: over $F = \\mathbb{F}_2$ the identity $-1 = 1$ changes nothing here, but say which field is meant, since page 68 insists the field is part of the data.",
+          "deps": [
+            "def-linear-independence",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "def-linear-basis",
+            "cor-every-spanning-set-contains-a-basis",
+            "lem-basis-iff-maximal-independent-iff-minimal-spanning",
+            "lem-standard-basis-of-f-n",
+            "def-dimension",
+            "thm-any-two-finite-bases-have-the-same-size",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-function-space",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "cex-proper-subspace-with-an-equinumerous-basis",
+          "kind": "counterexample",
+          "title": "Inside the space of eventually zero families, the subspace spanned by $\\{e_i : i \\ge 1\\}$ is proper and has a basis equinumerous with a basis of the whole space, so \"equal dimension forces equality\" fails without finite dimension",
+          "strategy": "Refutes: a linear subspace whose basis is equinumerous with a basis of the ambient space equals it. $U := \\operatorname{span}\\{e_i : i \\ge 1\\}$ is a proper subspace of the eventually zero families, since $e_0 \\notin U$ by the pointwise evaluation argument of [[ex-basis-of-the-eventually-zero-families]]. Both $\\{e_i : i \\in \\mathbb{N}\\}$ and $\\{e_i : i \\ge 1\\}$ are bases, of the whole space and of $U$, and they are equinumerous ([[def-equinumerous]]) via $i \\mapsto i+1$, which is a bijection $\\mathbb{N} \\to \\{i : i \\ge 1\\}$. THE POINT: [[thm-dimension-of-a-linear-subspace]] states the equality case only for FINITE dimension, and this shows the hypothesis is not decoration. Say explicitly that this item does not compare infinite dimensions as cardinals -- it compares two specific bases through an explicit bijection -- because [[def-cardinal]] is order 183 and no dimension is assigned to either space here.",
+          "deps": [
+            "thm-dimension-of-a-linear-subspace",
+            "def-dimension",
+            "def-linear-basis",
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "def-linear-subspace",
+            "lem-linear-subspace-criterion",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-span-monotone-and-idempotent",
+            "def-function-space",
+            "def-vector-space",
+            "def-field",
+            "def-equinumerous",
+            "def-injection-surjection-bijection",
+            "def-countable",
+            "def-natural-numbers",
+            "def-nat-order",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "cex-dimension-formula-fails-for-three-subspaces",
+          "kind": "counterexample",
+          "title": "Three distinct lines $U_0, U_1, U_2$ in $F^{2}$ have $\\dim(U_0+U_1+U_2) = 2$ while the inclusion-exclusion analogue of the dimension formula predicts $3$, so the two-subspace formula does not extend",
+          "strategy": "Refutes: $\\dim(U_0+U_1+U_2) = \\sum \\dim U_i - \\sum_{i<j} \\dim(U_i \\cap U_j) + \\dim(U_0 \\cap U_1 \\cap U_2)$. Take the three lines spanned by $(1,0)$, $(0,1)$ and $(1,1)$ over a field with more than two elements -- CHECK THE FIELD: over $\\mathbb{F}_2$ these are still three distinct lines and the computation still works, but say which field is used. Each has dimension $1$ ([[lem-span-of-a-single-vector]], [[def-dimension]]), pairwise intersections are $\\{0\\}$ ([[lem-span-of-a-single-vector]] clause 3), the triple intersection is $\\{0\\}$, and the sum is $F^{2}$ of dimension $2$ ([[lem-standard-basis-of-f-n]]); the right-hand side is $3 - 0 + 0 = 3$. Pair this in the prose with the order-69 [[cex-pairwise-trivial-intersection-is-not-a-direct-sum]], which uses the same three lines for the neighbouring failure -- SAME WITNESS, DIFFERENT FAILURE, and saying so is what stops it reading as a duplicate.",
+          "deps": [
+            "thm-dimension-formula",
+            "def-dimension",
+            "thm-any-two-finite-bases-have-the-same-size",
+            "def-internal-direct-sum",
+            "lem-direct-sum-criterion",
+            "def-sum-of-linear-subspaces",
+            "lem-sum-is-span-of-union",
+            "lem-intersection-of-linear-subspaces",
+            "lem-span-of-a-single-vector",
+            "lem-standard-basis-of-f-n",
+            "def-linear-basis",
+            "def-linear-independence",
+            "def-linear-subspace",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-function-space",
+            "def-vector-space",
+            "def-field",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        },
+        {
+          "id": "fs-union-of-two-independent-sets-is-independent",
+          "kind": "false-statement",
+          "title": "FALSE: the union of two linearly independent subsets of a vector space is linearly independent",
+          "strategy": "Refutation in $F^{2}$: $\\{(1,0),(0,1)\\}$ and $\\{(1,1)\\}$ are each independent, and their union is dependent, since $(1,0) + (0,1) - (1,1) = 0$ ([[def-linear-independence]], [[lem-dependent-iff-a-vector-lies-in-the-span-of-the-others]]). Verify independence of each part from the definition. Note the true statements nearby, so the reader knows what survives: a SUBSET of an independent set is independent ([[lem-independent-list-is-injective]]), and adjoining a vector OUTSIDE the span preserves independence ([[lem-adjoining-a-vector-outside-the-span]]) -- the false claim is what you get by dropping the second hypothesis.",
+          "deps": [
+            "def-linear-independence",
+            "lem-independent-list-is-injective",
+            "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+            "lem-adjoining-a-vector-outside-the-span",
+            "def-linear-basis",
+            "lem-span-of-a-single-vector",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "def-function-space",
+            "def-vector-space",
+            "def-field",
+            "lem-vector-space-elementary-consequences",
+            "def-natural-numbers",
+            "lem-nat-order-is-membership"
+          ]
+        }
+      ],
       "order": 71
     },
     {
@@ -11326,9 +12814,577 @@
       "companion": "monotone-functions-and-discontinuities-examples",
       "requires": [
         "continuity-ivt-evt-and-uniform-continuity",
-        "cantor-set-baire-and-measure-zero"
+        "cantor-set-baire-and-measure-zero",
+        "vector-spaces-and-subspaces",
+        "linear-independence-bases-and-dimension"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "def-monotone-function",
+          "kind": "definition",
+          "title": "Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\\mathbb{R}$, with the dictionary to monotone sequences",
+          "deps": [
+            "def-complete-ordered-field",
+            "def-real-order",
+            "def-interval",
+            "def-monotone-sequence",
+            "def-sequence",
+            "def-ordered-field"
+          ]
+        },
+        {
+          "id": "thm-monotone-one-sided-limits-exist",
+          "kind": "theorem",
+          "title": "One-sided limits of a monotone function always exist: for $f$ nondecreasing on an interval $I$ and $c \\in I$, $\\lim_{x \\to c^{-}} f(x) = \\sup\\{f(x) : x \\in I,\\ x < c\\}$ whenever $I$ has points below $c$, $\\lim_{x \\to c^{+}} f(x) = \\inf\\{f(x) : x \\in I,\\ x > c\\}$ whenever it has points above $c$, and these satisfy $\\lim_{x \\to c^{-}} f(x) \\le f(c) \\le \\lim_{x \\to c^{+}} f(x)$",
+          "strategy": "direct",
+          "deps": [
+            "def-monotone-function",
+            "def-one-sided-limits",
+            "def-function-limit",
+            "lem-function-limit-unique",
+            "def-limit-point-r",
+            "def-interval",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "def-bounded-set",
+            "def-infimum",
+            "thm-infimum-property",
+            "def-complete-ordered-field"
+          ]
+        },
+        {
+          "id": "def-classification-of-discontinuities",
+          "kind": "definition",
+          "title": "Discontinuity of $f$ at a point of its domain, and its classification: removable discontinuity, jump discontinuity and essential discontinuity, equivalently Rudin's discontinuities of the first and of the second kind",
+          "deps": [
+            "def-continuity-real",
+            "def-one-sided-limits",
+            "def-function-limit",
+            "def-limit-point-r",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "thm-monotone-discontinuities-are-jumps",
+          "kind": "theorem",
+          "title": "A monotone function on an interval has no discontinuity of the second kind: at every point both relevant one-sided limits exist, and an interior point $c$ is a discontinuity exactly when $\\lim_{x \\to c^{-}} f(x) < \\lim_{x \\to c^{+}} f(x)$",
+          "strategy": "direct",
+          "deps": [
+            "def-monotone-function",
+            "thm-monotone-one-sided-limits-exist",
+            "def-classification-of-discontinuities",
+            "thm-two-sided-limit-iff-both-one-sided",
+            "def-continuity-real",
+            "def-one-sided-limits",
+            "def-interval",
+            "def-limit-point-r"
+          ]
+        },
+        {
+          "id": "thm-froda",
+          "kind": "theorem",
+          "title": "Froda's theorem: the set of discontinuities of a monotone function on an interval is at most countable, the injection into $\\mathbb{Q}$ being built from one fixed enumeration of the rationals by least index, so no choice principle is used",
+          "strategy": "direct",
+          "deps": [
+            "def-monotone-function",
+            "thm-monotone-discontinuities-are-jumps",
+            "thm-monotone-one-sided-limits-exist",
+            "def-classification-of-discontinuities",
+            "def-countable",
+            "thm-rationals-countable",
+            "lem-rat-embeds-dense",
+            "lem-q-and-irrationals-dense-r",
+            "lem-countable-iff-surjection-from-n",
+            "lem-subset-of-countable",
+            "thm-well-ordering-principle",
+            "def-interval",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "thm-monotone-with-prescribed-discontinuity-set",
+          "kind": "theorem",
+          "title": "Converse to Froda: for every at most countable $E \\subseteq \\mathbb{R}$ there is a bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $E$, every one of them a jump",
+          "strategy": "constructive",
+          "deps": [
+            "def-monotone-function",
+            "def-classification-of-discontinuities",
+            "thm-monotone-one-sided-limits-exist",
+            "def-countable",
+            "lem-countable-iff-surjection-from-n",
+            "def-series",
+            "thm-geometric-series",
+            "thm-nonnegative-series-bounded-partial-sums",
+            "lem-series-tail-invariance",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "def-function-limit",
+            "def-one-sided-limits",
+            "def-continuity-real",
+            "def-bounded-set",
+            "cor-archimedean-reciprocal",
+            "def-integer-power"
+          ]
+        },
+        {
+          "id": "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+          "kind": "theorem",
+          "title": "A continuous injective function on an interval is strictly monotone",
+          "strategy": "contradiction",
+          "deps": [
+            "def-continuity-real",
+            "def-monotone-function",
+            "thm-intermediate-value",
+            "cor-continuous-image-of-an-interval-is-an-interval",
+            "def-interval",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "thm-continuous-inverse",
+          "kind": "theorem",
+          "title": "Continuous inverse theorem: a continuous injective $f$ on an interval $I$ is a bijection onto the order-convex set $f[I]$, and the inverse $g : f[I] \\to I$ is continuous and strictly monotone in the same sense as $f$",
+          "strategy": "direct",
+          "deps": [
+            "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+            "def-monotone-function",
+            "cor-continuous-image-of-an-interval-is-an-interval",
+            "lem-monotone-with-interval-image-is-continuous",
+            "thm-connected-subsets-of-r-are-intervals",
+            "def-continuity-real",
+            "def-interval",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "cor-cantor-function-is-continuous",
+          "kind": "corollary",
+          "title": "The Cantor function is continuous on $[0,1]$",
+          "strategy": "direct",
+          "deps": [
+            "def-cantor-function",
+            "thm-cantor-function-properties",
+            "lem-monotone-with-interval-image-is-continuous",
+            "def-monotone-function",
+            "def-continuity-real",
+            "def-interval",
+            "def-cantor-set"
+          ]
+        },
+        {
+          "id": "rem-cantor-function-increases-only-on-a-null-set",
+          "kind": "remark",
+          "title": "The Cantor function is continuous and nondecreasing, climbs from $0$ to $1$, and is constant on every interval removed in the construction of the Cantor set, so all of its increase happens on a set of measure zero",
+          "deps": [
+            "cor-cantor-function-is-continuous",
+            "thm-cantor-function-properties",
+            "thm-cantor-set-properties",
+            "def-cantor-set",
+            "def-cantor-function",
+            "def-measure-zero-and-content-zero",
+            "def-monotone-function",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "def-oscillation",
+          "kind": "definition",
+          "title": "The oscillation $\\omega_f(S) = \\sup\\{\\,|f(x) - f(y)| : x, y \\in S\\,\\}$ of $f$ on a set and the oscillation $\\omega_f(c) = \\inf_{\\delta > 0} \\omega_f(A \\cap N_\\delta(c))$ at a point, both taken in the extended reals",
+          "deps": [
+            "def-extended-reals",
+            "lem-extended-reals-complete",
+            "def-neighbourhood-r",
+            "def-bounded-set",
+            "def-infimum",
+            "lem-of-abs-value",
+            "def-complete-ordered-field"
+          ]
+        },
+        {
+          "id": "thm-continuity-iff-oscillation-zero",
+          "kind": "theorem",
+          "title": "$f : A \\to \\mathbb{R}$ is continuous at $c \\in A$ if and only if $\\omega_f(c) = 0$",
+          "strategy": "direct",
+          "deps": [
+            "def-oscillation",
+            "def-continuity-real",
+            "def-extended-reals",
+            "lem-extended-reals-complete",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "def-neighbourhood-r",
+            "cor-archimedean-reciprocal",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "lem-oscillation-superlevel-sets-are-closed",
+          "kind": "lemma",
+          "title": "For every real $\\varepsilon > 0$ the set $\\{\\,x \\in A : \\omega_f(x) \\ge \\varepsilon\\,\\}$ is the intersection with $A$ of a closed subset of $\\mathbb{R}$; in particular it is closed in $\\mathbb{R}$ when $A = \\mathbb{R}$",
+          "strategy": "direct",
+          "deps": [
+            "def-oscillation",
+            "def-open-and-closed-in-r",
+            "def-neighbourhood-r",
+            "def-interior-closure-boundary-r",
+            "thm-open-set-algebra-r",
+            "thm-closure-characterisations-r",
+            "def-extended-reals"
+          ]
+        },
+        {
+          "id": "thm-discontinuity-set-is-f-sigma",
+          "kind": "theorem",
+          "title": "For $f : A \\to \\mathbb{R}$ the set of points of $A$ at which $f$ is discontinuous is the intersection with $A$ of an $F_\\sigma$ subset of $\\mathbb{R}$, and the set of points at which $f$ is continuous is the intersection with $A$ of a $G_\\delta$ subset; for $A = \\mathbb{R}$ the two sets are $F_\\sigma$ and $G_\\delta$ outright",
+          "strategy": "direct",
+          "deps": [
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "lem-oscillation-superlevel-sets-are-closed",
+            "def-f-sigma-g-delta",
+            "def-open-and-closed-in-r",
+            "cor-archimedean-reciprocal",
+            "def-continuity-real",
+            "def-extended-reals",
+            "def-canonical-natural",
+            "lem-of-naturals-positive"
+          ]
+        },
+        {
+          "id": "def-dirichlet-and-thomae-functions",
+          "kind": "definition",
+          "title": "The Dirichlet function $1_{\\mathbb{Q}}$, and Thomae's function $t$ with $t(x) = 1/q$ at a rational $x = p/q$ in lowest terms with $q \\ge 1$ and $t(x) = 0$ at every irrational $x$",
+          "deps": [
+            "lem-rat-embeds-dense",
+            "lem-int-embeds-rat",
+            "thm-rationals-countable",
+            "def-countable",
+            "def-coprime",
+            "cor-gcd-quotients-coprime",
+            "lem-gcd-basic-values",
+            "def-common-divisor-and-gcd",
+            "lem-int-bounded-above-has-greatest",
+            "def-complete-ordered-field",
+            "def-canonical-natural",
+            "lem-of-naturals-positive",
+            "lem-q-and-irrationals-dense-r"
+          ]
+        },
+        {
+          "id": "thm-dirichlet-and-thomae-continuity-sets",
+          "kind": "theorem",
+          "title": "The Dirichlet function is continuous at no point of $\\mathbb{R}$, and Thomae's function is continuous at every irrational and at no rational, so its set of continuity points is exactly the set of irrationals and its oscillation at $c$ equals $t(c)$",
+          "strategy": "cases",
+          "deps": [
+            "def-dirichlet-and-thomae-functions",
+            "def-continuity-real",
+            "lem-q-and-irrationals-dense-r",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "lem-integer-part",
+            "def-countable",
+            "thm-rationals-countable",
+            "lem-subset-of-countable",
+            "lem-finite-set-has-max",
+            "def-max-min",
+            "def-interval",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "thm-continuity-set-realisation",
+          "kind": "theorem",
+          "title": "Every $G_\\delta$ subset of $\\mathbb{R}$ is the set of continuity points of some $f : \\mathbb{R} \\to \\mathbb{R}$, so the $G_\\delta$ sets are exactly the continuity sets",
+          "strategy": "constructive",
+          "deps": [
+            "def-f-sigma-g-delta",
+            "thm-discontinuity-set-is-f-sigma",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "def-dirichlet-and-thomae-functions",
+            "lem-q-and-irrationals-dense-r",
+            "thm-rationals-countable",
+            "def-countable",
+            "def-open-and-closed-in-r",
+            "def-interior-closure-boundary-r",
+            "thm-closure-characterisations-r",
+            "thm-open-set-algebra-r",
+            "cor-archimedean-reciprocal",
+            "def-continuity-real",
+            "def-canonical-natural"
+          ]
+        },
+        {
+          "id": "cor-no-function-is-continuous-exactly-on-q",
+          "kind": "corollary",
+          "title": "No function $\\mathbb{R} \\to \\mathbb{R}$ is continuous at every rational and discontinuous at every irrational, because $\\mathbb{Q}$ is not $G_\\delta$",
+          "strategy": "contradiction",
+          "deps": [
+            "thm-discontinuity-set-is-f-sigma",
+            "def-f-sigma-g-delta",
+            "cor-q-is-meager-and-not-g-delta",
+            "thm-baire-category-r",
+            "def-continuity-real",
+            "lem-rat-embeds-dense",
+            "def-nowhere-dense-meager"
+          ]
+        },
+        {
+          "id": "def-intermediate-value-property",
+          "kind": "definition",
+          "title": "The intermediate value property (Darboux property) of a function on an interval: the image of every subinterval is order-convex",
+          "deps": [
+            "def-interval",
+            "def-complete-ordered-field",
+            "thm-connected-subsets-of-r-are-intervals"
+          ]
+        },
+        {
+          "id": "fs-intermediate-value-property-implies-continuity",
+          "kind": "false-statement",
+          "title": "FALSE: a function with the intermediate value property on an interval is continuous",
+          "strategy": "direct",
+          "deps": [
+            "def-intermediate-value-property",
+            "def-continuity-real",
+            "thm-intermediate-value",
+            "cor-continuous-image-of-an-interval-is-an-interval",
+            "def-interval",
+            "lem-integer-part",
+            "def-max-min",
+            "lem-finite-set-has-max",
+            "thm-algebra-of-continuous-functions",
+            "thm-composition-of-continuous-functions",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "lem-of-abs-value",
+            "def-limit-point-r",
+            "def-function-limit"
+          ]
+        },
+        {
+          "id": "def-semicontinuity",
+          "kind": "definition",
+          "title": "Upper and lower semicontinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$",
+          "deps": [
+            "def-continuity-real",
+            "def-neighbourhood-r",
+            "def-complete-ordered-field",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "thm-semicontinuity-level-set-characterisation",
+          "kind": "theorem",
+          "title": "$f$ is upper semicontinuous on $A$ if and only if $\\{x \\in A : f(x) < \\alpha\\}$ is relatively open in $A$ for every real $\\alpha$, lower semicontinuous if and only if $\\{x \\in A : f(x) > \\alpha\\}$ is, and continuous if and only if it is both",
+          "strategy": "direct",
+          "deps": [
+            "def-semicontinuity",
+            "def-continuity-real",
+            "def-open-and-closed-in-r",
+            "thm-continuity-preimage-characterisation",
+            "def-neighbourhood-r",
+            "thm-open-set-algebra-r",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "thm-semicontinuous-evt",
+          "kind": "theorem",
+          "title": "Semicontinuous extreme value theorem: an upper semicontinuous function on a nonempty compact $K \\subseteq \\mathbb{R}$ is bounded above and attains a maximum, and a lower semicontinuous one is bounded below and attains a minimum",
+          "strategy": "direct",
+          "deps": [
+            "def-semicontinuity",
+            "thm-semicontinuity-level-set-characterisation",
+            "def-open-cover-r",
+            "thm-heine-borel-characterisation-r",
+            "def-max-min",
+            "def-bounded-set",
+            "lem-sup-epsilon",
+            "def-complete-ordered-field",
+            "cor-archimedean-reciprocal",
+            "def-open-and-closed-in-r",
+            "lem-finite-set-has-max"
+          ]
+        },
+        {
+          "id": "lem-baire-category-in-a-closed-interval",
+          "kind": "lemma",
+          "title": "Baire category inside a closed bounded interval: if $[a,b]$ with $a < b$ is the union of a sequence of closed sets, then one of them contains a nondegenerate closed subinterval; the nested intervals are chosen by least rational index, so no choice principle is used",
+          "strategy": "contradiction",
+          "deps": [
+            "def-open-and-closed-in-r",
+            "def-interior-closure-boundary-r",
+            "thm-closure-characterisations-r",
+            "thm-open-set-algebra-r",
+            "thm-nested-interval-property",
+            "thm-rationals-countable",
+            "lem-rat-embeds-dense",
+            "lem-q-and-irrationals-dense-r",
+            "thm-well-ordering-principle",
+            "thm-recursion",
+            "def-interval",
+            "thm-baire-category-r",
+            "def-nowhere-dense-meager",
+            "cor-archimedean-reciprocal",
+            "def-sequence",
+            "def-real-limit"
+          ]
+        },
+        {
+          "id": "def-baire-class-one",
+          "kind": "definition",
+          "title": "Pointwise convergence of a sequence of real functions, and the Baire class one functions as the pointwise limits of sequences of continuous functions",
+          "deps": [
+            "def-continuity-real",
+            "def-sequence",
+            "def-real-limit",
+            "lem-limit-unique",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "thm-baire-one-continuity-points",
+          "kind": "theorem",
+          "title": "Baire's theorem: a Baire class one function on a closed bounded interval $[a,b]$ is continuous at the points of a dense $G_\\delta$ subset of $[a,b]$, so its set of discontinuities is meager",
+          "strategy": "contradiction",
+          "deps": [
+            "def-baire-class-one",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "lem-oscillation-superlevel-sets-are-closed",
+            "thm-discontinuity-set-is-f-sigma",
+            "lem-baire-category-in-a-closed-interval",
+            "def-nowhere-dense-meager",
+            "def-f-sigma-g-delta",
+            "def-open-and-closed-in-r",
+            "def-interior-closure-boundary-r",
+            "thm-closure-characterisations-r",
+            "def-continuity-real",
+            "def-interval",
+            "cor-archimedean-reciprocal",
+            "def-real-limit",
+            "def-sequence",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "def-additive-function",
+          "kind": "definition",
+          "title": "Cauchy's functional equation $f(x+y) = f(x) + f(y)$, and the additive functions $\\mathbb{R} \\to \\mathbb{R}$",
+          "deps": [
+            "def-complete-ordered-field",
+            "def-ordered-field",
+            "def-field"
+          ]
+        },
+        {
+          "id": "lem-additive-is-q-linear",
+          "kind": "lemma",
+          "title": "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ satisfies $f(0) = 0$, $f(-x) = -f(x)$ and $f(qx) = q\\,f(x)$ for every rational $q$ and every real $x$; in particular $f(q) = q\\,f(1)$ at every rational $q$",
+          "strategy": "induction",
+          "deps": [
+            "def-additive-function",
+            "thm-induction-principle",
+            "lem-rat-embeds-dense",
+            "lem-int-embeds-rat",
+            "lem-nat-embeds-int",
+            "def-canonical-natural",
+            "lem-integer-multiples-agree-with-canonical-natural",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "def-complete-ordered-field",
+            "def-integers"
+          ]
+        },
+        {
+          "id": "lem-additive-bounded-above-on-an-interval-is-linear",
+          "kind": "lemma",
+          "title": "If an additive $f : \\mathbb{R} \\to \\mathbb{R}$ is bounded above on some nondegenerate interval, then $f(x) = f(1)\\,x$ for every real $x$",
+          "strategy": "direct",
+          "deps": [
+            "def-additive-function",
+            "lem-additive-is-q-linear",
+            "def-interval",
+            "def-bounded-set",
+            "lem-of-q-dense",
+            "lem-rat-embeds-dense",
+            "lem-q-and-irrationals-dense-r",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "def-complete-ordered-field",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "thm-cauchy-functional-equation-regularity",
+          "kind": "theorem",
+          "title": "Six regularity conditions each force an additive $f : \\mathbb{R} \\to \\mathbb{R}$ to be $x \\mapsto f(1)x$: continuity at a single point, monotonicity on a nondegenerate interval, boundedness above on one, boundedness below on one, constancy of sign on one, and a graph that is not dense in $\\mathbb{R}^{2}$",
+          "strategy": "cases",
+          "deps": [
+            "def-additive-function",
+            "lem-additive-is-q-linear",
+            "lem-additive-bounded-above-on-an-interval-is-linear",
+            "def-monotone-function",
+            "def-continuity-real",
+            "def-interval",
+            "def-bounded-set",
+            "lem-metrics-on-rn",
+            "lem-real-line-is-a-metric-space",
+            "def-metric-space",
+            "def-metric-topology",
+            "def-metric-ball",
+            "def-metric-interior-closure-boundary",
+            "thm-metric-closure-characterisation",
+            "lem-q-and-irrationals-dense-r",
+            "lem-of-q-dense",
+            "cor-archimedean-reciprocal",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "lem-hamel-basis-exists",
+          "kind": "lemma",
+          "title": "$\\mathbb{R}$ has a Hamel basis over $\\mathbb{Q}$: by Zorn's lemma there is a maximal $\\mathbb{Q}$-linearly independent subset $B \\subseteq \\mathbb{R}$, every real is a finite $\\mathbb{Q}$-combination of elements of $B$, and the coefficients are unique",
+          "strategy": "direct SPECIALISE cor-every-vector-space-has-a-basis (order 70) to R over Q via lem-restriction-of-scalars; do NOT re-run Zorn. Record in Remarks that ex-hamel-basis-of-r-over-q (order 71) states the same fact, and that it is re-homed here only because a B page is a leaf.",
+          "deps": [
+            "def-vector-space",
+            "lem-restriction-of-scalars",
+            "def-subfield",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-rat-embeds-dense",
+            "def-field",
+            "def-complete-ordered-field",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "cor-every-vector-space-has-a-basis",
+            "def-linear-basis"
+          ]
+        },
+        {
+          "id": "fs-additive-implies-linear",
+          "kind": "false-statement",
+          "title": "FALSE: every additive $f : \\mathbb{R} \\to \\mathbb{R}$ is of the form $x \\mapsto cx$ for a single real $c$",
+          "strategy": "direct",
+          "deps": [
+            "def-additive-function",
+            "lem-additive-is-q-linear",
+            "lem-hamel-basis-exists",
+            "thm-cauchy-functional-equation-regularity",
+            "def-vector-space",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-restriction-of-scalars",
+            "def-axiom-of-choice",
+            "thm-zorn",
+            "def-complete-ordered-field",
+            "lem-rat-embeds-dense"
+          ]
+        }
+      ]
     },
     {
       "order": 130,
@@ -11337,10 +13393,250 @@
       "category": "real-analysis",
       "title": "Monotone Functions, Discontinuities, and Continuity Sets: Examples and Counterexamples",
       "requires": [
-        "monotone-functions-and-discontinuities"
+        "monotone-functions-and-discontinuities",
+        "absolute-convergence-and-rearrangement"
       ],
       "forwardRefs": [],
-      "items": []
+      "items": [
+        {
+          "id": "ex-thomae-values-and-oscillation-computed",
+          "kind": "example",
+          "title": "Thomae's function computed: $t(1/2) = 1/2$, $t(2/3) = 1/3$, $t(m) = 1$ at every integer $m$, $t(x) = 0$ at every irrational, and $\\omega_t(c) = t(c)$ at every real $c$",
+          "strategy": "direct",
+          "deps": [
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "lem-q-and-irrationals-dense-r",
+            "cor-archimedean-reciprocal",
+            "def-coprime",
+            "cor-gcd-quotients-coprime",
+            "lem-rat-embeds-dense"
+          ]
+        },
+        {
+          "id": "ex-monotone-function-discontinuous-exactly-at-the-rationals",
+          "kind": "example",
+          "title": "A bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $\\mathbb{Q}$, obtained from the prescribed-jump construction applied to one fixed enumeration of the rationals",
+          "strategy": "constructive",
+          "deps": [
+            "thm-monotone-with-prescribed-discontinuity-set",
+            "def-monotone-function",
+            "def-classification-of-discontinuities",
+            "thm-froda",
+            "thm-rationals-countable",
+            "lem-rat-embeds-dense",
+            "def-countable",
+            "def-series",
+            "thm-geometric-series"
+          ]
+        },
+        {
+          "id": "ex-froda-is-sharp",
+          "kind": "example",
+          "title": "Froda's countable bound is attained: a bounded nondecreasing function on $\\mathbb{R}$ discontinuous exactly at the points $1 - 1/(k+1)$ for $k \\in \\mathbb{N}$, an infinite discontinuity set inside a bounded interval",
+          "strategy": "direct",
+          "deps": [
+            "thm-monotone-with-prescribed-discontinuity-set",
+            "thm-froda",
+            "def-monotone-function",
+            "def-classification-of-discontinuities",
+            "def-countable",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "def-interval",
+            "def-canonical-natural",
+            "lem-of-naturals-positive"
+          ]
+        },
+        {
+          "id": "ex-continuous-inverse-gives-the-nth-root",
+          "kind": "example",
+          "title": "The $n$-th root as a continuous inverse: for a natural $n \\ge 1$ the map $x \\mapsto x^{n}$ is continuous and strictly increasing on $[0,\\infty)$ with image $[0,\\infty)$, so its inverse $x \\mapsto x^{1/n}$ is continuous and strictly increasing",
+          "strategy": "direct",
+          "deps": [
+            "thm-continuous-inverse",
+            "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+            "def-monotone-function",
+            "thm-nth-roots-exist",
+            "lem-power-monotone",
+            "def-integer-power",
+            "def-rational-power",
+            "thm-algebra-of-continuous-functions",
+            "cor-continuous-image-of-an-interval-is-an-interval",
+            "def-interval",
+            "def-continuity-real",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "ex-hamel-basis-additive-function",
+          "kind": "example",
+          "title": "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ that is not $x \\mapsto cx$: the coefficient of one fixed Hamel basis vector. It is unbounded above and below on every nondegenerate interval, its graph is dense in $\\mathbb{R}^{2}$, and every level set is dense in $\\mathbb{R}$",
+          "strategy": "constructive",
+          "deps": [
+            "lem-hamel-basis-exists",
+            "fs-additive-implies-linear",
+            "def-additive-function",
+            "lem-additive-is-q-linear",
+            "thm-cauchy-functional-equation-regularity",
+            "def-vector-space",
+            "lem-restriction-of-scalars",
+            "def-linear-combination-and-span",
+            "lem-span-is-the-set-of-linear-combinations",
+            "lem-metrics-on-rn",
+            "def-metric-interior-closure-boundary",
+            "thm-metric-closure-characterisation",
+            "def-metric-ball",
+            "def-axiom-of-choice",
+            "thm-zorn",
+            "def-bounded-set",
+            "def-interval",
+            "lem-rat-embeds-dense"
+          ]
+        },
+        {
+          "id": "ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous",
+          "kind": "example",
+          "title": "A bounded function on $\\mathbb{R}$ with no local maximum and no local minimum at any point, upper semicontinuous at no point and lower semicontinuous at no point: compose the Hamel coefficient with a bijection $\\mathbb{Q} \\to \\mathbb{Q} \\cap (0,1)$",
+          "strategy": "constructive",
+          "deps": [
+            "ex-hamel-basis-additive-function",
+            "lem-hamel-basis-exists",
+            "def-additive-function",
+            "lem-additive-is-q-linear",
+            "def-semicontinuity",
+            "thm-semicontinuity-level-set-characterisation",
+            "def-max-min",
+            "thm-rationals-countable",
+            "lem-rat-embeds-dense",
+            "def-countable",
+            "lem-countable-iff-surjection-from-n",
+            "def-bounded-set",
+            "def-interval",
+            "lem-q-and-irrationals-dense-r",
+            "def-continuity-real"
+          ]
+        },
+        {
+          "id": "ex-locally-unbounded-finite-everywhere",
+          "kind": "example",
+          "title": "The function equal to $q$ at a rational $p/q$ in lowest terms and to $0$ at every irrational is finite at every point and unbounded on every nondegenerate interval",
+          "strategy": "direct",
+          "deps": [
+            "def-dirichlet-and-thomae-functions",
+            "lem-q-and-irrationals-dense-r",
+            "thm-rationals-countable",
+            "def-coprime",
+            "cor-gcd-quotients-coprime",
+            "def-bounded-set",
+            "def-interval",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "def-oscillation",
+            "def-continuity-real"
+          ]
+        },
+        {
+          "id": "ex-indicator-of-q-is-baire-class-two-not-one",
+          "kind": "example",
+          "title": "The Dirichlet function is the pointwise limit of a sequence of Baire class one functions and is itself not Baire class one, so the Baire hierarchy on $[0,1]$ is already strict at the first level",
+          "strategy": "contradiction",
+          "deps": [
+            "def-dirichlet-and-thomae-functions",
+            "def-baire-class-one",
+            "thm-baire-one-continuity-points",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "thm-rationals-countable",
+            "lem-q-and-irrationals-dense-r",
+            "def-continuity-real",
+            "thm-algebra-of-continuous-functions",
+            "def-real-limit",
+            "def-sequence",
+            "def-countable",
+            "def-interval",
+            "def-max-min",
+            "lem-finite-set-has-max"
+          ]
+        },
+        {
+          "id": "ex-conway-base-13-function",
+          "kind": "example",
+          "title": "The Conway base-13 function: a function $[0,1] \\to \\mathbb{R}$ taking every real value on every nondegenerate subinterval, hence with the intermediate value property and continuous at no point",
+          "strategy": "constructive",
+          "deps": [
+            "def-intermediate-value-property",
+            "fs-intermediate-value-property-implies-continuity",
+            "def-continuity-real",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "thm-decimal-expansions",
+            "def-interval",
+            "def-countable",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "def-series",
+            "thm-geometric-series",
+            "thm-nonnegative-series-bounded-partial-sums",
+            "def-integer-power",
+            "def-canonical-natural",
+            "lem-of-naturals-positive",
+            "lem-q-and-irrationals-dense-r",
+            "lem-integer-part"
+          ]
+        },
+        {
+          "id": "ex-cantor-function-maps-a-null-set-onto-the-unit-interval",
+          "kind": "example",
+          "title": "The Cantor set has measure zero, yet the Cantor function maps it onto all of $[0,1]$: a null set can have image an interval of length $1$",
+          "strategy": "direct",
+          "deps": [
+            "def-cantor-function",
+            "thm-cantor-function-properties",
+            "thm-cantor-set-properties",
+            "cor-cantor-function-is-continuous",
+            "def-measure-zero-and-content-zero",
+            "lem-nondegenerate-interval-is-not-null",
+            "def-cantor-set",
+            "def-interval",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "cex-upper-semicontinuous-need-not-attain-its-infimum",
+          "kind": "counterexample",
+          "title": "An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided",
+          "strategy": "direct",
+          "deps": [
+            "def-semicontinuity",
+            "thm-semicontinuous-evt",
+            "thm-semicontinuity-level-set-characterisation",
+            "def-max-min",
+            "def-infimum",
+            "thm-infimum-property",
+            "def-bounded-set",
+            "def-interval",
+            "def-continuity-real",
+            "cor-archimedean-reciprocal"
+          ]
+        },
+        {
+          "id": "cex-continuous-injection-on-a-non-interval-need-not-be-monotone",
+          "kind": "counterexample",
+          "title": "A continuous injection on $[0,1] \\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem",
+          "strategy": "direct",
+          "deps": [
+            "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+            "thm-continuous-inverse",
+            "def-monotone-function",
+            "def-continuity-real",
+            "thm-algebra-of-continuous-functions",
+            "def-interval",
+            "def-injection-surjection-bijection"
+          ]
+        }
+      ]
     },
     {
       "order": 131,
@@ -11350,9 +13646,306 @@
       "title": "The Derivative and the Mean Value Theorems",
       "companion": "the-derivative-and-mean-value-theorems-examples",
       "requires": [
-        "continuity-ivt-evt-and-uniform-continuity"
+        "continuity-ivt-evt-and-uniform-continuity",
+        "monotone-functions-and-discontinuities"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "def-derivative",
+          "kind": "definition",
+          "title": "The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set",
+          "deps": [
+            "def-function-limit",
+            "lem-function-limit-unique",
+            "def-limit-point-r",
+            "def-interval",
+            "def-neighbourhood-r",
+            "def-complete-ordered-field",
+            "def-continuity-real"
+          ]
+        },
+        {
+          "id": "thm-caratheodory-characterisation",
+          "kind": "theorem",
+          "title": "Carath\\'eodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi(c) = f'(c)$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "def-continuity-real",
+            "def-function-limit",
+            "lem-function-limit-unique",
+            "def-limit-point-r",
+            "thm-algebra-of-function-limits",
+            "lem-limit-is-local"
+          ]
+        },
+        {
+          "id": "cor-differentiable-implies-continuous",
+          "kind": "corollary",
+          "title": "A function differentiable at $c$ is continuous at $c$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-caratheodory-characterisation",
+            "def-continuity-real",
+            "thm-algebra-of-continuous-functions"
+          ]
+        },
+        {
+          "id": "thm-derivative-linear-approximation-form",
+          "kind": "theorem",
+          "title": "The linear-approximation form of the derivative: $f$ is differentiable at $c$ with $f'(c) = L$ if and only if the remainder $r(x) = f(x) - f(c) - L(x-c)$ satisfies $\\lim_{x \\to c} r(x)/(x-c) = 0$, so $L$ is the unique real for which the affine map $x \\mapsto f(c) + L(x-c)$ approximates $f$ to first order",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "def-function-limit",
+            "lem-function-limit-unique",
+            "thm-algebra-of-function-limits",
+            "thm-caratheodory-characterisation"
+          ]
+        },
+        {
+          "id": "thm-algebra-of-derivatives",
+          "kind": "theorem",
+          "title": "Sums, scalar multiples, products and quotients: $(f+g)'(c) = f'(c) + g'(c)$, $(\\alpha f)'(c) = \\alpha f'(c)$, $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$, and $(f/g)'(c) = \\bigl(f'(c)g(c) - f(c)g'(c)\\bigr)/g(c)^{2}$ when $g(c) \\ne 0$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-caratheodory-characterisation",
+            "cor-differentiable-implies-continuous",
+            "thm-algebra-of-function-limits",
+            "thm-algebra-of-continuous-functions",
+            "def-continuity-real",
+            "def-integer-power",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "lem-derivative-of-a-power",
+          "kind": "lemma",
+          "title": "For a natural $n \\ge 1$ the function $x \\mapsto x^{n}$ is differentiable everywhere with derivative $\\iota(n)\\,x^{\\,n-1}$; for $n = 0$ it is constant with derivative $0$; for a natural $n \\ge 1$ the function $x \\mapsto x^{-n}$ is differentiable at every $x \\ne 0$ with derivative $-\\iota(n)\\,x^{-n-1}$; consequently every polynomial function is differentiable with the expected derivative",
+          "strategy": "induction",
+          "deps": [
+            "def-derivative",
+            "thm-algebra-of-derivatives",
+            "def-integer-power",
+            "lem-power-laws",
+            "lem-power-difference-factorisation",
+            "def-canonical-natural",
+            "lem-of-naturals-positive",
+            "thm-induction-principle",
+            "def-finite-sum",
+            "lem-finite-sum-laws"
+          ]
+        },
+        {
+          "id": "thm-chain-rule",
+          "kind": "theorem",
+          "title": "The chain rule, in one line from Carath\\'eodory: if $g$ is differentiable at $c$ and $f$ is differentiable at $g(c)$, then $f \\circ g$ is differentiable at $c$ with $(f \\circ g)'(c) = f'(g(c))\\,g'(c)$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-caratheodory-characterisation",
+            "thm-composition-of-continuous-functions",
+            "cor-differentiable-implies-continuous",
+            "thm-algebra-of-continuous-functions",
+            "def-continuity-real",
+            "def-limit-point-r"
+          ]
+        },
+        {
+          "id": "thm-derivative-of-an-inverse",
+          "kind": "theorem",
+          "title": "Derivative of an inverse: if $f$ is continuous and injective on an interval $I$ and differentiable at $c \\in I$ with $f'(c) \\ne 0$, then the inverse $g$ is differentiable at $f(c)$ with $g'(f(c)) = 1/f'(c)$; and if $f'(c) = 0$ then $g$ is not differentiable at $f(c)$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-caratheodory-characterisation",
+            "thm-chain-rule",
+            "thm-continuous-inverse",
+            "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+            "def-monotone-function",
+            "def-continuity-real",
+            "def-injection-surjection-bijection",
+            "def-interval",
+            "thm-algebra-of-function-limits",
+            "def-function-limit",
+            "def-limit-point-r"
+          ]
+        },
+        {
+          "id": "def-local-extremum",
+          "kind": "definition",
+          "title": "Local (relative) maximum and minimum of $f : A \\to \\mathbb{R}$ at a point, the strict forms, and what it means for the point to be interior to $A$",
+          "deps": [
+            "def-neighbourhood-r",
+            "def-max-min",
+            "def-interior-closure-boundary-r",
+            "def-complete-ordered-field",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "thm-fermat-interior-extremum",
+          "kind": "theorem",
+          "title": "Fermat's interior extremum theorem: if $f$ has a local extremum at a point $c$ interior to its domain and is differentiable at $c$, then $f'(c) = 0$",
+          "strategy": "contradiction",
+          "deps": [
+            "def-derivative",
+            "def-local-extremum",
+            "lem-sign-preservation-near-a-limit",
+            "def-function-limit",
+            "def-neighbourhood-r",
+            "def-interior-closure-boundary-r",
+            "def-limit-point-r"
+          ]
+        },
+        {
+          "id": "thm-rolle",
+          "kind": "theorem",
+          "title": "Rolle's theorem: if $a < b$, $f$ is continuous on $[a,b]$, differentiable at every point of $(a,b)$, and $f(a) = f(b)$, then $f'(c) = 0$ for some $c \\in (a,b)$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-fermat-interior-extremum",
+            "def-local-extremum",
+            "thm-extreme-value-r",
+            "thm-heine-borel-characterisation-r",
+            "def-open-cover-r",
+            "def-continuity-real",
+            "def-interval",
+            "def-max-min",
+            "def-interior-closure-boundary-r",
+            "def-open-and-closed-in-r"
+          ]
+        },
+        {
+          "id": "thm-cauchy-mean-value",
+          "kind": "theorem",
+          "title": "Cauchy's mean value theorem: for $f, g$ continuous on $[a,b]$ with $a<b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $\\bigl(f(b)-f(a)\\bigr)g'(c) = \\bigl(g(b)-g(a)\\bigr)f'(c)$; no hypothesis on $g'$ is needed in this product form",
+          "strategy": "direct",
+          "deps": [
+            "thm-rolle",
+            "thm-algebra-of-derivatives",
+            "def-derivative",
+            "thm-algebra-of-continuous-functions",
+            "cor-differentiable-implies-continuous",
+            "def-continuity-real",
+            "def-interval",
+            "lem-derivative-of-a-power"
+          ]
+        },
+        {
+          "id": "cor-mean-value-theorem",
+          "kind": "corollary",
+          "title": "The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$",
+          "strategy": "direct",
+          "deps": [
+            "thm-cauchy-mean-value",
+            "lem-derivative-of-a-power",
+            "def-derivative",
+            "def-continuity-real",
+            "thm-algebra-of-continuous-functions",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "cor-zero-derivative-implies-constant",
+          "kind": "corollary",
+          "title": "A function continuous on an interval $I$ whose derivative vanishes at every interior point of $I$ is constant on $I$; consequently two such functions with the same derivative differ by a constant",
+          "strategy": "direct",
+          "deps": [
+            "cor-mean-value-theorem",
+            "def-derivative",
+            "def-continuity-real",
+            "def-interval",
+            "thm-algebra-of-derivatives",
+            "cor-differentiable-implies-continuous",
+            "def-interior-closure-boundary-r"
+          ]
+        },
+        {
+          "id": "thm-monotonicity-from-the-derivative",
+          "kind": "theorem",
+          "title": "On an interval $I$, for $f$ continuous on $I$ and differentiable at every interior point: $f' \\ge 0$ throughout gives $f$ nondecreasing, $f' > 0$ gives $f$ strictly increasing, $f' \\le 0$ and $f' < 0$ give the two decreasing forms; conversely a nondecreasing $f$ has $f' \\ge 0$ wherever it is differentiable, while the strict converse fails",
+          "strategy": "direct",
+          "deps": [
+            "cor-mean-value-theorem",
+            "def-derivative",
+            "def-monotone-function",
+            "def-interval",
+            "def-continuity-real",
+            "cor-differentiable-implies-continuous",
+            "lem-function-limit-preserves-order",
+            "def-function-limit",
+            "def-interior-closure-boundary-r"
+          ]
+        },
+        {
+          "id": "cor-bounded-derivative-implies-lipschitz",
+          "kind": "corollary",
+          "title": "If $f$ is continuous on an interval $I$ and $|f'| \\le M$ at every interior point, then $|f(x) - f(y)| \\le M|x-y|$ for all $x,y \\in I$, so $f$ is Lipschitz with constant $M$ and uniformly continuous on $I$",
+          "strategy": "direct",
+          "deps": [
+            "cor-mean-value-theorem",
+            "def-derivative",
+            "def-interval",
+            "def-continuity-real",
+            "def-uniform-continuity-real",
+            "lem-real-and-metric-notions-agree",
+            "def-lipschitz-holder-contraction",
+            "thm-metric-regularity-hierarchy",
+            "lem-of-abs-value",
+            "def-interior-closure-boundary-r"
+          ]
+        },
+        {
+          "id": "fs-mean-value-theorem-needs-no-continuity-at-the-endpoints",
+          "kind": "false-statement",
+          "title": "FALSE: differentiability at every point of $(a,b)$ alone yields a $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$",
+          "strategy": "direct",
+          "deps": [
+            "cor-mean-value-theorem",
+            "thm-rolle",
+            "def-derivative",
+            "def-continuity-real",
+            "def-interval",
+            "thm-algebra-of-derivatives",
+            "lem-derivative-of-a-power",
+            "def-function-limit",
+            "def-limit-point-r"
+          ]
+        },
+        {
+          "id": "fs-vanishing-derivative-forbids-strict-increase",
+          "kind": "false-statement",
+          "title": "FALSE: if $f'(c) = 0$ then $f$ is not strictly increasing on any interval containing $c$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "def-monotone-function",
+            "lem-derivative-of-a-power",
+            "thm-monotonicity-from-the-derivative",
+            "def-integer-power",
+            "lem-power-monotone",
+            "def-interval",
+            "lem-of-sign-rules"
+          ]
+        },
+        {
+          "id": "rem-derivative-conventions",
+          "kind": "remark",
+          "title": "What is fixed here and what is not: the derivative is taken at a point of the domain that is also a limit point of it, one-sided derivatives and derivatives of order above one are not introduced at this point in the reading order, and $f'(c)$ and $\\frac{df}{dx}(c)$ name the same real number",
+          "deps": [
+            "def-derivative",
+            "def-function-limit",
+            "def-limit-point-r",
+            "def-one-sided-limits",
+            "def-interval",
+            "thm-caratheodory-characterisation"
+          ]
+        }
+      ]
     },
     {
       "order": 132,
@@ -11366,7 +13959,174 @@
       "forwardRefs": [
         "sine-cosine-and-the-definition-of-pi"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "ex-derivatives-of-polynomials-computed",
+          "kind": "example",
+          "title": "Worked derivatives from the algebra of derivatives and the power rule: $(3x^{4} - 5x + 2)' = 12x^{3} - 5$, and the quotient rule applied to $(x^{2}+1)/(x-1)$ on $\\mathbb{R} \\setminus \\{1\\}$",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "thm-algebra-of-derivatives",
+            "lem-derivative-of-a-power",
+            "def-integer-power",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "def-canonical-natural"
+          ]
+        },
+        {
+          "id": "cex-absolute-value-is-not-differentiable-at-zero",
+          "kind": "counterexample",
+          "title": "$x \\mapsto |x|$ is continuous everywhere and not differentiable at $0$: the difference quotient equals $1$ on the right and $-1$ on the left, so the two one-sided limits differ",
+          "strategy": "direct",
+          "deps": [
+            "def-derivative",
+            "cor-differentiable-implies-continuous",
+            "def-one-sided-limits",
+            "thm-two-sided-limit-iff-both-one-sided",
+            "lem-of-abs-value",
+            "thm-algebra-of-continuous-functions",
+            "def-continuity-real",
+            "def-function-limit"
+          ]
+        },
+        {
+          "id": "ex-x-cubed-is-strictly-increasing-with-a-vanishing-derivative",
+          "kind": "example",
+          "title": "$x \\mapsto x^{3}$ is strictly increasing on $\\mathbb{R}$ although its derivative vanishes at $0$, which is the witness for the false statement that a vanishing derivative forbids strict increase",
+          "strategy": "direct",
+          "deps": [
+            "fs-vanishing-derivative-forbids-strict-increase",
+            "def-derivative",
+            "lem-derivative-of-a-power",
+            "def-monotone-function",
+            "thm-monotonicity-from-the-derivative",
+            "lem-power-monotone",
+            "def-integer-power",
+            "lem-of-sign-rules"
+          ]
+        },
+        {
+          "id": "ex-chain-rule-computed",
+          "kind": "example",
+          "title": "The chain rule applied to $x \\mapsto (x^{2}+1)^{5}$ and to $x \\mapsto ((3x-1)^{2}+2)^{3}$, with the Carath\\'eodory factor written out in the first case",
+          "strategy": "direct",
+          "deps": [
+            "thm-chain-rule",
+            "thm-caratheodory-characterisation",
+            "lem-derivative-of-a-power",
+            "thm-algebra-of-derivatives",
+            "def-derivative",
+            "def-integer-power"
+          ]
+        },
+        {
+          "id": "ex-derivative-of-the-nth-root-by-the-inverse-rule",
+          "kind": "example",
+          "title": "For a natural $n \\ge 1$, the derivative of $x \\mapsto x^{1/n}$ on $(0,\\infty)$ is $\\frac{1}{n}x^{1/n - 1}$, obtained from the inverse rule applied to $x \\mapsto x^{n}$; in particular $(\\sqrt{x})' = 1/(2\\sqrt{x})$",
+          "strategy": "direct",
+          "deps": [
+            "thm-derivative-of-an-inverse",
+            "lem-derivative-of-a-power",
+            "thm-nth-roots-exist",
+            "def-rational-power",
+            "lem-rational-power-laws",
+            "lem-rational-power-monotone",
+            "def-integer-power",
+            "def-derivative",
+            "thm-continuous-inverse",
+            "def-interval",
+            "def-canonical-natural",
+            "lem-of-naturals-positive"
+          ]
+        },
+        {
+          "id": "cex-mean-value-theorem-fails-without-continuity-at-the-endpoints",
+          "kind": "counterexample",
+          "title": "$f(x) = x$ on $[0,1)$ with $f(1) = 0$ is differentiable at every point of $(0,1)$ with $f' \\equiv 1$, yet no $c$ satisfies $f(1) - f(0) = f'(c)$, so continuity on the closed interval cannot be dropped from the mean value theorem",
+          "strategy": "direct",
+          "deps": [
+            "fs-mean-value-theorem-needs-no-continuity-at-the-endpoints",
+            "cor-mean-value-theorem",
+            "thm-rolle",
+            "def-derivative",
+            "lem-derivative-of-a-power",
+            "def-continuity-real",
+            "def-interval",
+            "def-function-limit",
+            "lem-limit-is-local"
+          ]
+        },
+        {
+          "id": "cex-fermat-fails-at-an-endpoint",
+          "kind": "counterexample",
+          "title": "The identity on $[0,1]$ attains its maximum at $1$ and its minimum at $0$ with derivative $1$ at both, so Fermat's theorem genuinely needs the extremum to be at an interior point",
+          "strategy": "direct",
+          "deps": [
+            "thm-fermat-interior-extremum",
+            "def-local-extremum",
+            "def-derivative",
+            "lem-derivative-of-a-power",
+            "def-interior-closure-boundary-r",
+            "def-max-min",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "ex-mean-value-theorem-bounds-the-square-root-increment",
+          "kind": "example",
+          "title": "The mean value theorem gives $|\\sqrt{x} - \\sqrt{y}| \\le \\tfrac12 |x - y|$ for $x, y \\ge 1$, so the square root is Lipschitz with constant $1/2$ on $[1,\\infty)$",
+          "strategy": "direct",
+          "deps": [
+            "cor-mean-value-theorem",
+            "cor-bounded-derivative-implies-lipschitz",
+            "ex-derivative-of-the-nth-root-by-the-inverse-rule",
+            "thm-nth-roots-exist",
+            "def-rational-power",
+            "lem-rational-power-monotone",
+            "def-interval",
+            "lem-real-and-metric-notions-agree",
+            "def-lipschitz-holder-contraction",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "cex-differentiable-with-unbounded-derivative-is-not-lipschitz",
+          "kind": "counterexample",
+          "title": "$x \\mapsto \\sqrt{x}$ on $(0,1]$ is differentiable with unbounded derivative and is not Lipschitz there, so the boundedness hypothesis in the Lipschitz corollary cannot be dropped",
+          "strategy": "direct",
+          "deps": [
+            "cor-bounded-derivative-implies-lipschitz",
+            "ex-derivative-of-the-nth-root-by-the-inverse-rule",
+            "def-derivative",
+            "def-rational-power",
+            "lem-rational-power-monotone",
+            "thm-nth-roots-exist",
+            "def-bounded-set",
+            "def-interval",
+            "lem-real-and-metric-notions-agree",
+            "def-lipschitz-holder-contraction",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean"
+          ]
+        },
+        {
+          "id": "cex-cauchy-mean-value-quotient-form-needs-a-nonvanishing-derivative",
+          "kind": "counterexample",
+          "title": "With $f(x) = x^{3}$ and $g(x) = x^{2}$ on $[-1,1]$ the quotient form $\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}$ is meaningless because $g(b) = g(a)$, while the product form of Cauchy's theorem still holds",
+          "strategy": "direct",
+          "deps": [
+            "thm-cauchy-mean-value",
+            "cor-mean-value-theorem",
+            "thm-rolle",
+            "def-derivative",
+            "lem-derivative-of-a-power",
+            "def-integer-power",
+            "def-interval"
+          ]
+        }
+      ]
     },
     {
       "order": 133,
@@ -11427,9 +14187,359 @@
       "companion": "the-riemann-integral-examples",
       "requires": [
         "continuity-ivt-evt-and-uniform-continuity",
-        "cantor-set-baire-and-measure-zero"
+        "cantor-set-baire-and-measure-zero",
+        "monotone-functions-and-discontinuities"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "def-partition-and-refinement",
+          "kind": "definition",
+          "title": "Partition of $[a,b]$ as a finite strictly increasing list $a = t_0 < t_1 < \\dots < t_n = b$, its subintervals and their lengths, its mesh, refinement, and the common refinement of two partitions",
+          "deps": [
+            "def-interval",
+            "def-finite-sum",
+            "def-max-min",
+            "lem-finite-set-has-max",
+            "def-natural-numbers",
+            "def-complete-ordered-field",
+            "def-sequence",
+            "def-injection-surjection-bijection"
+          ]
+        },
+        {
+          "id": "def-darboux-sums",
+          "kind": "definition",
+          "title": "For bounded $f$ on $[a,b]$ and a partition $P$: the infimum $m_i$ and supremum $M_i$ of $f$ on the $i$-th subinterval, and the lower and upper Darboux sums $L(f,P) = \\sum_i m_i \\Delta_i$ and $U(f,P) = \\sum_i M_i \\Delta_i$",
+          "deps": [
+            "def-partition-and-refinement",
+            "def-bounded-set",
+            "def-complete-ordered-field",
+            "def-infimum",
+            "thm-infimum-property",
+            "def-finite-sum",
+            "lem-finite-sum-laws",
+            "def-interval",
+            "lem-sup-unique"
+          ]
+        },
+        {
+          "id": "lem-refinement-inequalities",
+          "kind": "lemma",
+          "title": "Refining a partition raises the lower Darboux sum and lowers the upper one, and every lower sum is at most every upper sum: $L(f,P) \\le L(f,P') \\le U(f,P') \\le U(f,P)$ when $P'$ refines $P$, and $L(f,P) \\le U(f,Q)$ for arbitrary partitions $P$ and $Q$",
+          "strategy": "induction",
+          "deps": [
+            "def-partition-and-refinement",
+            "def-darboux-sums",
+            "lem-sup-monotone",
+            "lem-finite-sum-laws",
+            "def-infimum",
+            "thm-infimum-property",
+            "def-bounded-set",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "thm-induction-principle",
+            "def-finite-sum"
+          ]
+        },
+        {
+          "id": "def-darboux-integral",
+          "kind": "definition",
+          "title": "The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$",
+          "deps": [
+            "def-darboux-sums",
+            "lem-refinement-inequalities",
+            "def-partition-and-refinement",
+            "def-bounded-set",
+            "def-complete-ordered-field",
+            "def-infimum",
+            "thm-infimum-property",
+            "lem-sup-unique",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "lem-integral-elementary-bounds",
+          "kind": "lemma",
+          "title": "If $m \\le f \\le M$ on $[a,b]$ then $m(b-a) \\le L(f,P) \\le \\underline{\\int_a^b} f \\le \\overline{\\int_a^b} f \\le U(f,P) \\le M(b-a)$ for every partition $P$; in particular every constant function is integrable, with $\\int_a^b c = c(b-a)$",
+          "strategy": "direct",
+          "deps": [
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "lem-refinement-inequalities",
+            "lem-finite-sum-laws",
+            "def-bounded-set",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "def-partition-and-refinement",
+            "def-infimum"
+          ]
+        },
+        {
+          "id": "thm-riemann-criterion",
+          "kind": "theorem",
+          "title": "Riemann's criterion: a bounded $f$ on $[a,b]$ is Darboux integrable if and only if for every real $\\varepsilon > 0$ there is a partition $P$ with $U(f,P) - L(f,P) < \\varepsilon$",
+          "strategy": "direct",
+          "deps": [
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "lem-refinement-inequalities",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "def-partition-and-refinement",
+            "cor-archimedean-reciprocal",
+            "def-bounded-set",
+            "def-infimum"
+          ]
+        },
+        {
+          "id": "def-tagged-partition-and-riemann-sum",
+          "kind": "definition",
+          "title": "Tagged partitions of $[a,b]$, with a tag $\\xi_i$ in each subinterval, and the Riemann sum $S(f,P,\\xi) = \\sum_i f(\\xi_i)\\,\\Delta_i$",
+          "deps": [
+            "def-partition-and-refinement",
+            "def-finite-sum",
+            "def-interval",
+            "def-complete-ordered-field"
+          ]
+        },
+        {
+          "id": "thm-darboux-equals-riemann",
+          "kind": "theorem",
+          "title": "The Darboux and Riemann definitions agree: a bounded $f$ on $[a,b]$ is Darboux integrable with integral $I$ if and only if for every real $\\varepsilon > 0$ there is a real $\\delta > 0$ such that $|S(f,P,\\xi) - I| < \\varepsilon$ for every tagged partition of mesh below $\\delta$",
+          "strategy": "direct",
+          "deps": [
+            "def-partition-and-refinement",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "def-tagged-partition-and-riemann-sum",
+            "thm-riemann-criterion",
+            "lem-refinement-inequalities",
+            "lem-integral-elementary-bounds",
+            "lem-sup-epsilon",
+            "lem-inf-epsilon",
+            "lem-finite-sum-laws",
+            "def-bounded-set",
+            "cor-archimedean-reciprocal",
+            "lem-finite-set-has-max",
+            "def-max-min",
+            "lem-of-abs-value"
+          ]
+        },
+        {
+          "id": "thm-continuous-implies-integrable",
+          "kind": "theorem",
+          "title": "A continuous function on $[a,b]$ is Riemann integrable, by Heine-Cantor and Riemann's criterion",
+          "strategy": "direct",
+          "deps": [
+            "thm-riemann-criterion",
+            "thm-heine-cantor-r",
+            "def-uniform-continuity-real",
+            "thm-extreme-value-r",
+            "thm-heine-borel-characterisation-r",
+            "def-open-cover-r",
+            "def-continuity-real",
+            "cor-boundedness-theorem-r",
+            "def-partition-and-refinement",
+            "def-darboux-sums",
+            "lem-finite-sum-laws",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "def-interval",
+            "def-max-min"
+          ]
+        },
+        {
+          "id": "thm-monotone-implies-integrable",
+          "kind": "theorem",
+          "title": "A monotone function on $[a,b]$ is Riemann integrable: for the uniform partition into $n$ parts the upper minus lower sum telescopes to $|f(b) - f(a)|(b-a)/n$",
+          "strategy": "direct",
+          "deps": [
+            "thm-riemann-criterion",
+            "def-monotone-function",
+            "def-partition-and-refinement",
+            "def-darboux-sums",
+            "lem-finite-sum-laws",
+            "def-bounded-set",
+            "cor-archimedean-reciprocal",
+            "thm-of-archimedean",
+            "def-interval",
+            "def-max-min",
+            "def-infimum",
+            "def-canonical-natural",
+            "lem-of-naturals-positive"
+          ]
+        },
+        {
+          "id": "thm-finitely-many-discontinuities-integrable",
+          "kind": "theorem",
+          "title": "A bounded function on $[a,b]$ that is continuous except at finitely many points is Riemann integrable",
+          "strategy": "direct",
+          "deps": [
+            "thm-riemann-criterion",
+            "thm-continuous-implies-integrable",
+            "def-continuity-real",
+            "def-classification-of-discontinuities",
+            "def-partition-and-refinement",
+            "def-darboux-sums",
+            "lem-finite-sum-laws",
+            "def-bounded-set",
+            "lem-finite-set-has-max",
+            "thm-heine-cantor-r",
+            "def-uniform-continuity-real",
+            "cor-archimedean-reciprocal",
+            "def-interval",
+            "def-max-min"
+          ]
+        },
+        {
+          "id": "thm-lebesgue-criterion",
+          "kind": "theorem",
+          "title": "Lebesgue's criterion for Riemann integrability: a bounded $f$ on $[a,b]$ is Riemann integrable if and only if its set of discontinuities has measure zero",
+          "strategy": "direct",
+          "deps": [
+            "thm-riemann-criterion",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "lem-oscillation-superlevel-sets-are-closed",
+            "thm-discontinuity-set-is-f-sigma",
+            "def-measure-zero-and-content-zero",
+            "thm-countable-union-of-null-is-null",
+            "thm-compact-null-is-content-zero",
+            "lem-content-zero-implies-null",
+            "lem-finite-interval-cover-total-length",
+            "thm-heine-borel-characterisation-r",
+            "def-open-cover-r",
+            "def-countable-choice",
+            "def-darboux-sums",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "cor-archimedean-reciprocal",
+            "def-f-sigma-g-delta",
+            "def-open-and-closed-in-r",
+            "def-bounded-set",
+            "def-interval",
+            "def-continuity-real",
+            "lem-finite-set-has-max",
+            "def-extended-reals"
+          ]
+        },
+        {
+          "id": "cor-countably-many-discontinuities-integrable",
+          "kind": "corollary",
+          "title": "A bounded function on $[a,b]$ whose set of discontinuities is at most countable is Riemann integrable",
+          "strategy": "direct",
+          "deps": [
+            "thm-lebesgue-criterion",
+            "lem-countable-sets-are-null",
+            "def-countable",
+            "def-measure-zero-and-content-zero",
+            "def-bounded-set",
+            "def-continuity-real",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "fs-bounded-implies-riemann-integrable",
+          "kind": "false-statement",
+          "title": "FALSE: every bounded function on $[a,b]$ is Riemann integrable",
+          "strategy": "direct",
+          "deps": [
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "thm-riemann-criterion",
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "lem-q-and-irrationals-dense-r",
+            "def-bounded-set",
+            "lem-finite-sum-laws",
+            "def-partition-and-refinement",
+            "def-interval",
+            "def-infimum"
+          ]
+        },
+        {
+          "id": "fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set",
+          "kind": "false-statement",
+          "title": "FALSE: a bounded function on $[a,b]$ is Riemann integrable exactly when its set of discontinuities is nowhere dense",
+          "strategy": "direct",
+          "deps": [
+            "thm-lebesgue-criterion",
+            "def-fat-cantor-set",
+            "thm-fat-cantor-set-has-positive-measure",
+            "def-nowhere-dense-meager",
+            "def-measure-zero-and-content-zero",
+            "def-continuity-real",
+            "def-open-and-closed-in-r",
+            "thm-closure-characterisations-r",
+            "def-interior-closure-boundary-r",
+            "def-bounded-set",
+            "def-interval",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero"
+          ]
+        },
+        {
+          "id": "fs-nonnegative-integrable-with-zero-integral-vanishes",
+          "kind": "false-statement",
+          "title": "FALSE: a nonnegative Riemann integrable function on $[a,b]$ with $\\int_a^b f = 0$ is identically zero",
+          "strategy": "direct",
+          "deps": [
+            "def-darboux-integral",
+            "def-darboux-sums",
+            "thm-riemann-criterion",
+            "lem-integral-elementary-bounds",
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "cor-countably-many-discontinuities-integrable",
+            "thm-lebesgue-criterion",
+            "lem-countable-sets-are-null",
+            "def-countable",
+            "lem-finite-sum-laws",
+            "def-interval",
+            "lem-q-and-irrationals-dense-r"
+          ]
+        },
+        {
+          "id": "fs-pointwise-limit-of-riemann-integrable-is-integrable",
+          "kind": "false-statement",
+          "title": "FALSE: a pointwise limit of a sequence of Riemann integrable functions on $[a,b]$ is Riemann integrable",
+          "strategy": "direct",
+          "deps": [
+            "thm-finitely-many-discontinuities-integrable",
+            "fs-bounded-implies-riemann-integrable",
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "thm-rationals-countable",
+            "def-countable",
+            "lem-countable-iff-surjection-from-n",
+            "def-real-limit",
+            "def-sequence",
+            "def-continuity-real",
+            "thm-lebesgue-criterion",
+            "lem-nondegenerate-interval-is-not-null",
+            "def-measure-zero-and-content-zero",
+            "def-interval",
+            "lem-q-and-irrationals-dense-r"
+          ]
+        },
+        {
+          "id": "rem-riemann-integral-choice-ledger",
+          "kind": "remark",
+          "title": "What this page costs in choice: Riemann's criterion, the Darboux-Riemann equivalence and integrability of a monotone function are theorems of ZF, integrability of a continuous function inherits the single use of countable choice inside Heine-Cantor, and the Lebesgue criterion inherits a second from the countable union of null sets",
+          "deps": [
+            "thm-lebesgue-criterion",
+            "thm-countable-union-of-null-is-null",
+            "def-countable-choice",
+            "thm-riemann-criterion",
+            "thm-darboux-equals-riemann",
+            "thm-continuous-implies-integrable",
+            "thm-monotone-implies-integrable",
+            "thm-heine-cantor-r",
+            "rem-heine-criterion-choice-cost",
+            "thm-compact-iff-sequentially-compact-r"
+          ]
+        }
+      ]
     },
     {
       "order": 138,
@@ -11443,7 +14553,212 @@
       "forwardRefs": [
         "sine-cosine-and-the-definition-of-pi"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "ex-integral-of-x-squared-from-the-definition",
+          "kind": "example",
+          "title": "$\\int_0^1 x^{2} = 1/3$, computed from the Darboux definition with uniform partitions and the closed form $\\sum_{k<n} k^{2} = n(n-1)(2n-1)/6$",
+          "strategy": "direct",
+          "deps": [
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "thm-riemann-criterion",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "def-finite-sum",
+            "thm-induction-principle",
+            "def-integer-power",
+            "lem-power-monotone",
+            "cor-archimedean-reciprocal",
+            "def-canonical-natural",
+            "lem-of-naturals-positive",
+            "thm-continuous-implies-integrable",
+            "thm-algebra-of-continuous-functions",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "ex-refinement-improves-the-darboux-sums",
+          "kind": "example",
+          "title": "One refinement worked out for $f(x) = x^{2}$ on $[0,1]$: adding the point $1/2$ to the trivial partition raises the lower sum from $0$ to $1/8$ and lowers the upper sum from $1$ to $5/8$",
+          "strategy": "direct",
+          "deps": [
+            "lem-refinement-inequalities",
+            "def-darboux-sums",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "def-integer-power",
+            "lem-power-monotone",
+            "def-interval",
+            "def-infimum"
+          ]
+        },
+        {
+          "id": "ex-integral-of-the-floor-function",
+          "kind": "example",
+          "title": "$\\int_0^3 \\lfloor x \\rfloor = 3$: the floor function is nondecreasing, hence integrable, and the integral is computed from the uniform partitions",
+          "strategy": "direct",
+          "deps": [
+            "thm-monotone-implies-integrable",
+            "lem-integer-part",
+            "def-monotone-function",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "thm-riemann-criterion",
+            "lem-integral-elementary-bounds",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "def-classification-of-discontinuities",
+            "def-interval",
+            "cor-archimedean-reciprocal"
+          ]
+        },
+        {
+          "id": "ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero",
+          "kind": "example",
+          "title": "The indicator of the Cantor set is discontinuous exactly on the Cantor set, which is null, so it is Riemann integrable with integral $0$ even though it is discontinuous at uncountably many points",
+          "strategy": "direct",
+          "deps": [
+            "thm-lebesgue-criterion",
+            "def-cantor-set",
+            "thm-cantor-set-properties",
+            "def-measure-zero-and-content-zero",
+            "def-nowhere-dense-meager",
+            "def-continuity-real",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "lem-integral-elementary-bounds",
+            "def-countable",
+            "def-interval",
+            "def-open-and-closed-in-r",
+            "thm-closure-characterisations-r"
+          ]
+        },
+        {
+          "id": "ex-thomae-is-riemann-integrable-with-integral-zero",
+          "kind": "example",
+          "title": "Thomae's function is Riemann integrable on $[0,1]$ with integral $0$: it is continuous at every irrational, so its discontinuity set is countable, and every lower Darboux sum is $0$",
+          "strategy": "direct",
+          "deps": [
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "cor-countably-many-discontinuities-integrable",
+            "thm-lebesgue-criterion",
+            "thm-riemann-criterion",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "lem-integral-elementary-bounds",
+            "thm-rationals-countable",
+            "def-countable",
+            "lem-q-and-irrationals-dense-r",
+            "lem-finite-set-has-max",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "def-interval",
+            "cor-archimedean-reciprocal"
+          ]
+        },
+        {
+          "id": "cex-dirichlet-is-not-riemann-integrable",
+          "kind": "counterexample",
+          "title": "The Dirichlet function on $[0,1]$ has lower Darboux integral $0$ and upper Darboux integral $1$, so it is bounded and not Riemann integrable",
+          "strategy": "direct",
+          "deps": [
+            "fs-bounded-implies-riemann-integrable",
+            "def-dirichlet-and-thomae-functions",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "thm-riemann-criterion",
+            "lem-q-and-irrationals-dense-r",
+            "lem-finite-sum-laws",
+            "def-partition-and-refinement",
+            "def-bounded-set",
+            "def-interval",
+            "def-infimum"
+          ]
+        },
+        {
+          "id": "cex-indicator-of-a-fat-cantor-set-is-not-integrable",
+          "kind": "counterexample",
+          "title": "The indicator of the Smith-Volterra-Cantor set is discontinuous exactly on a nowhere dense set, and is not Riemann integrable, because that set does not have measure zero",
+          "strategy": "direct",
+          "deps": [
+            "fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set",
+            "thm-lebesgue-criterion",
+            "def-fat-cantor-set",
+            "thm-fat-cantor-set-has-positive-measure",
+            "def-nowhere-dense-meager",
+            "def-measure-zero-and-content-zero",
+            "def-continuity-real",
+            "def-open-and-closed-in-r",
+            "thm-closure-characterisations-r",
+            "def-darboux-sums",
+            "def-darboux-integral",
+            "thm-riemann-criterion",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set",
+          "kind": "example",
+          "title": "For every $F_\\sigma$ subset $E$ of $[0,1]$ of measure zero there is a bounded Riemann integrable function on $[0,1]$ whose set of discontinuities is exactly $E$",
+          "strategy": "constructive",
+          "deps": [
+            "thm-lebesgue-criterion",
+            "thm-discontinuity-set-is-f-sigma",
+            "def-f-sigma-g-delta",
+            "def-measure-zero-and-content-zero",
+            "thm-countable-union-of-null-is-null",
+            "lem-nondegenerate-interval-is-not-null",
+            "def-nowhere-dense-meager",
+            "def-continuity-real",
+            "def-oscillation",
+            "thm-continuity-iff-oscillation-zero",
+            "def-series",
+            "thm-geometric-series",
+            "thm-nonnegative-series-bounded-partial-sums",
+            "def-open-and-closed-in-r",
+            "thm-closure-characterisations-r",
+            "def-interval",
+            "cor-archimedean-reciprocal",
+            "def-countable-choice"
+          ]
+        },
+        {
+          "id": "cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice",
+          "kind": "counterexample",
+          "title": "For the Dirichlet function every uniform partition with rational tags gives Riemann sum $1$, so the sums converge along that sequence of tagged partitions although the function is not integrable: the mesh condition of the Riemann definition quantifies over all tagged partitions and cannot be weakened to one sequence",
+          "strategy": "direct",
+          "deps": [
+            "def-tagged-partition-and-riemann-sum",
+            "thm-darboux-equals-riemann",
+            "cex-dirichlet-is-not-riemann-integrable",
+            "def-dirichlet-and-thomae-functions",
+            "def-partition-and-refinement",
+            "lem-finite-sum-laws",
+            "def-real-limit",
+            "def-sequence",
+            "lem-q-and-irrationals-dense-r",
+            "def-interval"
+          ]
+        },
+        {
+          "id": "cex-nonnegative-integrable-with-zero-integral-need-not-vanish",
+          "kind": "counterexample",
+          "title": "Thomae's function is nonnegative, Riemann integrable on $[0,1]$ with integral $0$, and nonzero at every rational, so a vanishing integral does not force a nonnegative integrand to vanish",
+          "strategy": "direct",
+          "deps": [
+            "fs-nonnegative-integrable-with-zero-integral-vanishes",
+            "ex-thomae-is-riemann-integrable-with-integral-zero",
+            "def-dirichlet-and-thomae-functions",
+            "thm-dirichlet-and-thomae-continuity-sets",
+            "def-darboux-integral",
+            "cor-countably-many-discontinuities-integrable",
+            "lem-q-and-irrationals-dense-r",
+            "def-interval"
+          ]
+        }
+      ]
     },
     {
       "order": 139,
