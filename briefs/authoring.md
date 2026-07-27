@@ -156,6 +156,14 @@ Then the judge (step 6), model **`z-ai/glm-5.2`** via `tools/judge.mts`. Pass
 `--topic` and `--conventions`; put the triage rule of §6 into `--conventions`
 so the judge does not flag 30-second gaps as defects. **Never a Claude model.**
 
+**Also pass `--batch` with the level's A-page slugs**, comma-separated (the
+harness adds each `-examples` companion itself). The judge's context unit is the
+A/B pair — it always sees your page and its companion page in full — and
+`--batch` extends that to the level's other pages as Statement + Remarks, so a
+step resting on a sibling page of the same batch can actually be checked. If you
+do not know the level's A pages, ask the orchestrator rather than guessing: a
+misspelled slug warns on stderr and contributes nothing.
+
 Three hard-won rules about the judge:
 
 - **Capture stdout.** `JUDGE_COSTLOG` records spend, not verdicts. Redirecting

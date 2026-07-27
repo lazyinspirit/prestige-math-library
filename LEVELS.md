@@ -168,6 +168,28 @@ that keeps the JSON parseable.
 **Always set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`** and capture
 stdout — `JUDGE_COSTLOG` records spend, not verdicts.
 
+**Always pass `--batch` with the level's A-page slugs (owner, 2026-07-28).**
+Comma-separated, A pages only — the harness pulls in each `-examples` companion
+itself, and naming a page that does not exist under `library/` prints a warning
+rather than silently contributing nothing:
+
+```
+--batch "divisibility-gcd-and-bezout,rings-subrings-and-integral-domains,vector-spaces-and-subspaces"
+```
+
+The judge's context unit is the **A/B pair**: it always receives its item's own
+page AND its companion page in full, and `--batch` adds the level's other pages
+as Statement + Remarks. This is what lets it check a step against a dependency
+that lives on a sibling page of the same batch, and what lets an example be
+checked against the theorem it illustrates. Its primary job is unchanged and
+still outranks this: the step-by-step validity of the one proof it was called on.
+Full context inventory in `ARCHITECTURE.md` §5 and the `tools/judge.mts` header.
+
+**Concurrency: at most 2 judge processes per subagent, 6 globally.** The sweep
+belongs to subagents, one per A/B pair, not to the orchestrator running it
+serially. The cap is the derisking; see `ARCHITECTURE.md` §5 for the failure it
+prevents and why 6 is the ceiling.
+
 Known harness behaviour, all measured: **retry envelope is 7 minutes per attempt
 × 3 attempts ≈ 21 minutes worst case per item** (`AbortSignal.timeout(420_000)`)
 — a slow call is usually not a hang; verdicts are **dropped intermittently**, so

@@ -235,13 +235,40 @@ actor whose prompt is a bare CLI argument, which made it the weakest link — a 
 that forgot the string gets a judge flagging 30-second gaps, driving repair
 cycles against a 21–24%-precision screen.
 
+**Its context unit is the A/B PAIR, not the item (owner, 2026-07-28).** Every
+call carries, in this order: the item; the full text of every item it cites
+(Statement + Remarks, or the FULL item when the citation is same-pair); the other
+items on its page, in full; **its companion page, in full**; and, with `--batch`,
+the other pages of the level as Statement + Remarks. The pair is what the reader
+gets and what the renderer publishes, so judging an A-page theorem without its
+`-examples` page left both halves unchecked against each other. `--batch` takes
+A-page slugs and pulls in each `-examples` companion itself.
+
+**Injection-tested before use, and the test is the point.** A context change gets
+the same treatment as a model change (see §"never adopt a judge model", and the
+`tools/judge.mts` header for the run). The pair block caught a Remark that was
+false *only* against the companion page's contents and mathematically neutral —
+the class it exists for. The first attempt at that injection was **not actually
+false**, and the judge was right to accept it: verify an injection is false
+against the library's own conventions before reading an acceptance as a miss.
+None of this promotes the judge above a screen; the 0/3 on real historical
+defects stands.
+
 **Measured behaviour, all in the tool header:** retry envelope
 `AbortSignal.timeout(420_000)` × 3 ≈ **21 minutes worst case per item**, so a
 slow call is usually not a hang; verdicts drop intermittently and must be re-run;
 LaTeX backslashes in the reason break JSON parsing. **`keep: null` is not a
 pass.**
 
-**Do NOT parallelise the sweep. Measured 2026-07-27 (level 7-algebra).** A sweep
+**Concurrency: CAPPED, not banned (owner, 2026-07-27, superseding the serial
+rule below).** The sweep runs in subagents, **at most 2 concurrent `judge.mts`
+processes per agent and 6 globally**. A serial sweep run by the orchestrator was
+rejected as slow and as spending the orchestrator's context on work a subagent
+should do. The cap, not serialism, is what derisks the failure measured below:
+6 is well under the 9 that produced it. The measurement stands as the reason the
+cap exists — do not raise it without re-measuring.
+
+**The failure the cap prevents. Measured 2026-07-27 (level 7-algebra).** A sweep
 run at `xargs -P 7`, with a subagent's retry loops layered on top (up to **nine**
 concurrent `judge.mts` processes against one gateway), produced repeated
 `NO_CONTENT: fetch failed` and indefinite hangs on one item across **seven**
@@ -250,8 +277,8 @@ passed on the **first** attempt. Two false conclusions were drawn from those
 failures before the isolated test: that the item was too long (the batch's
 **largest** item, 11,732 bytes, judged fine while the 11,450-byte holdout failed),
 and that seven failures were seven independent trials. They were one observation
-of self-inflicted contention. Run the sweep **serially**; it is slower in
-wall-clock than a parallel run that has to be repeated.
+of self-inflicted contention. The lesson that survives the cap: an unbounded
+sweep is slower in wall-clock than a bounded one, because it has to be repeated.
 
 **Corollary on staleness: compute it, never read it from a report.** Whether a
 verdict covers the CURRENT text is `max(pass timestamp) > file mtime`, per item.

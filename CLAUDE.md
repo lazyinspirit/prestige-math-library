@@ -43,7 +43,11 @@ run a page from prompt to publish; the normative docs above win where they diffe
    the injection test recorded in the `tools/judge.mts` header.**
    The judge harness is `tools/judge.mts` (topic-neutral refuter over ofox; pass
    `--topic` and optional `--conventions`, set `JUDGE_COSTLOG` for the cost
-   report). Record model/verdict/date in `verification.judge`; an item published
+   report). **The judge's context unit is the A/B PAIR (owner, 2026-07-28):** it
+   always receives its item's own page AND its `-examples` companion in full, and
+   `--batch "<A-page slugs>"` adds the rest of the level as Statement + Remarks —
+   pass it on every level sweep. `ARCHITECTURE.md` §5 has the full inventory.
+   Record model/verdict/date in `verification.judge`; an item published
    on owner audit over a verified judge false-positive is recorded `audited`
    without a fabricated judge pass. Reflow wrapped steps first with
    `tools/reflow.mts` (the precheck checker is line-based).

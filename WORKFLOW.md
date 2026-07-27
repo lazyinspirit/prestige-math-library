@@ -319,14 +319,21 @@ once the loop is
 escalation (page ctx) -> judge (page ctx) -> escalation (page ctx) -> judge (page ctx) -> auditor (full ctx)
 ```
 
-**"page ctx" is weaker for the judge than for the escalation tier, and the
-difference matters.** The escalation subagent reads whole files. The judge never
-sees another item's PROOF, only Statement/Definition/Example plus Remarks, truncated
-at 3000 chars. So the judge is structurally blind to an unbacked step, a mis-stated
-`[L#]` fact, or a missing hypothesis living in a sibling's proof — which is the
-defect class the auditors keep finding. Judge silence bounds much less than the
-phrase "page context" suggests; never read a clean judge run as page-level
-assurance.
+**"page ctx" means something specific for the judge, and it has changed twice.**
+It is now the **A/B pair**: the judge receives its item's own page and its
+companion `-examples` page IN FULL, proofs included, plus every cited item
+(Statement + Remarks, truncated at 3000 chars, or the full item when the citation
+is same-pair), plus — with `--batch` — the level's other pages as Statement +
+Remarks. Two earlier limits are gone: the sibling-proof blindness (fixed
+2026-07-26) and the companion-page blindness (fixed 2026-07-28). Verify against
+`tools/judge.mts`, which is the truth here; `ARCHITECTURE.md` §5 has the
+inventory.
+
+**What has NOT changed is what judge silence is worth.** Context closes
+structural blind spots; it does not raise a 21–24%-precision screen into an
+auditor, and the measured 0/3 on real historical defects was never a context
+problem. **Never read a clean judge run as page-level assurance** — every level
+so far has had its real defects found by a reading tier after a clean sweep.
 
 Escalation runs FIRST and the judge screens the repaired text; running the judge
 first records verdicts on text that escalation then changes. The loop is bounded
@@ -642,11 +649,18 @@ item, and it appends token usage to `$JUDGE_COSTLOG` for the cost report:
 
 ```
 npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
-  items/<id>.md --topic "undergraduate group theory"
+  items/<id>.md --topic "undergraduate group theory" \
+  --conventions "$(cat briefs/judge-conventions.txt)" \
+  --batch "<A-page-slug>,<A-page-slug>"
 ```
 
+The default model is `z-ai/glm-5.2` (GPT-5.4 and Gemini are the fallbacks).
+
 Dependencies cited by an item are treated as separately-verified, so the judge
-grades only the item's own reasoning.
+grades only the item's own reasoning — but it is given the text of those
+dependencies, of its own page, and of its A/B companion page, so "faithfully
+restated?" and "actually licensed?" are checkable rather than assumed. `--batch`
+adds the rest of the level. See `ARCHITECTURE.md` §5.
 
 **Report.** List every problematic pair regardless of whether the judge accepted,
 rejected, escalated, or dropped it. "Problematic" is the driver's determination,

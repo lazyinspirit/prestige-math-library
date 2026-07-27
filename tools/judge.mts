@@ -44,12 +44,51 @@
 // scored 0/3, GLM included. All three were found by reading tiers. Keep the judge
 // as a cheap screen; never model it as the thing that finds defects.
 //
+// PASS 3 — INJECTION TEST FOR THE A/B PAIR CONTEXT, 2026-07-28, 3 calls. The
+// companion-page block below was added on the owner's instruction; the same rule
+// applies to a CONTEXT change as to a model change, so it was injection-tested
+// before being used on a level.
+//
+//   injection                                                          GLM 5.2
+//   (a) INVALID TEST, discarded: a Remark asserting gcd(0,0) = 0       accepted
+//       and that Bezout extends to (0,0) with x = y = 0
+//   (b) a Remark asserting the companion page never uses the           CAUGHT
+//       Euclidean algorithm and finds coefficients by inspection
+//   (c) control: an untouched item that passed pre-change              accepted
+//
+// (a) is recorded because getting it wrong is instructive: it was written as a
+// false claim and it is TRUE. def-common-divisor-and-gcd fixes gcd(0,0) := 0 by
+// convention, the B page does treat that pair, and 0 = 0*0 + 0*0. The judge was
+// right and the test was broken. VERIFY AN INJECTION IS ACTUALLY FALSE, against
+// the library's own conventions, before reading an acceptance as a miss.
+//
+// (b) is the class this block exists for: mathematically NEUTRAL, false only
+// relative to the companion page's contents, so no amount of mathematical
+// knowledge can catch it and only the supplied text can. GLM named both refuting
+// items (ex-euclidean-algorithm-worked, ex-euclidean-algorithm-on-consecutive-
+// fibonacci-numbers) and added that the proof itself was correct, so the bigger
+// prompt did not buy the catch with a collateral false positive.
+//
+// This does NOT promote the judge above a screen. It closes one structural
+// blindness; the 0/3 on real historical defects stands unchallenged.
+//
 // Also: half the catalogue is not drop-in. Reasoning-style models return <think>
 // blocks or reasoning-only content this harness cannot parse. Check parseability
 // before swapping a model, not after.
 // Run from the repo root (the app worker's tsx supplies the TS loader):
 //   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
-//     items/<id>.md [--model z-ai/glm-5.2] [--topic "..."] [--conventions "..."] [--allow-claude]
+//     items/<id>.md [--model z-ai/glm-5.2] [--topic "..."] [--conventions "..."] \
+//     [--batch "<A-page-slug>,<A-page-slug>,..."] [--allow-claude]
+//
+// CONTEXT SUPPLIED, in the order the prompt carries it (see the blocks below):
+//   1. the item itself
+//   2. every item it cites          — Statement + Remarks, or FULL if same pair
+//   3. the other items on its page  — FULL text, proofs included
+//   4. its A/B companion page       — FULL text, proofs included
+//   5. other pages in the batch     — Statement + Remarks, only with --batch
+// --batch takes A-page slugs; each pulls in its own `-examples` companion, so
+// naming the level's A pages is enough. JUDGE_BATCH is the env equivalent.
+// --no-context disables 2-5 for A/B measurement.
 //
 // Prints one line of JSON: {"id":..,"model":..,"keep":true|false|null,"reason":..}
 //   keep=true  -> accepted (no specific defect found)
@@ -69,7 +108,7 @@ import { readFileSync, appendFileSync, existsSync, readdirSync } from "node:fs";
 import { basename } from "node:path";
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = new Set(["model", "topic", "conventions"]);
+const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
 // --no-context disables the cited-item RAG block, for A/B measurement only.
 const opts: Record<string, string> = {};
 const bools = new Set<string>();
@@ -85,7 +124,7 @@ for (let i = 0; i < argv.length; i++) {
   }
 }
 if (!file) {
-  console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--allow-claude]');
+  console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--batch "slug,slug"] [--allow-claude]');
   process.exit(2);
 }
 // SESSION items only. The production generator lineup is
@@ -187,29 +226,45 @@ function fullTextOf(src: string): string {
     : body.slice(0, CAP) + "\n… [truncated here; this item continues. Do NOT infer that anything is missing from it.]";
 }
 
-// Ids already shown under "EXACT TEXT OF EVERY ITEM THIS ONE CITES", so the page
-// block below does not repeat them.
+// Ids already shown in an earlier block, so no later block repeats them.
 const shownIds = new Set<string>();
 
-/**
- * The OTHER items on this item's page (owner decision, 2026-07-25: the judge is a
- * PAGE-context tier, not an item-context one).
- *
- * Citation context alone cannot see a defect that lives BETWEEN two items on the
- * same page: two items taking opposite positions, a ledger item whose claims do
- * not match what its own page proves, a lemma restated inaccurately by a sibling
- * that does not cite it. Those were real defects here and the item-scoped judge
- * was structurally blind to every one of them.
- */
-function pageContext(selfId: string): string {
-  if (!withContext || !existsSync("library")) return "";
+// ------------------------------------------------------------- page structure
+//
+// Owner decision, 2026-07-28: the judge's context unit is the A/B PAIR, and it
+// may additionally be given the rest of the batch being built.
+//
+// The 2026-07-25 tier below supplied only the item's OWN page, and that leaves
+// two blind spots that the pair closes:
+//   * an A-page theorem never sees the `-examples` page that illustrates it, so
+//     an example that misstates its theorem, or claims a hypothesis the theorem
+//     does not have, is invisible from both sides;
+//   * a B-page example sees the A-page results ONLY where it happens to cite
+//     them, which is precisely the case where a MISSING citation cannot be seen.
+// An A page and its companion are published, and read, as one unit; judging half
+// of it against the other half is what the pair block restores.
+//
+// The batch block is wider and deliberately cheaper (statement + remarks, no
+// proofs). Its job is cross-PAGE dependency checking inside one level: a step
+// resting on a result that a sibling page states but this item never cites, or
+// two pages of the same batch stating the same result differently. It is opt-in
+// per run via --batch / JUDGE_BATCH because the batch is a property of the build,
+// not of the content, and nothing in items/ or library/ records it.
+interface PageInfo {
+  path: string;
+  slug: string;
+  title: string;
+  ids: string[];
+}
 
-  const pages: string[] = [];
-  const walk = (dir: string) => {
+function loadPages(): PageInfo[] {
+  if (!existsSync("library")) return [];
+  const paths: string[] = [];
+  const walk = (dir: string): void => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const p = dir + "/" + e.name;
       if (e.isDirectory()) walk(p);
-      else if (e.name.endsWith(".md")) pages.push(p);
+      else if (e.name.endsWith(".md")) paths.push(p);
     }
   };
   walk("library");
@@ -219,34 +274,139 @@ function pageContext(selfId: string): string {
     return m ? m[1].split(",").map((t) => t.trim()).filter(Boolean) : [];
   };
 
-  for (const p of pages) {
+  const out: PageInfo[] = [];
+  for (const p of paths) {
     const src = readFileSync(p, "utf8");
     const fm = (src.match(/^---\n([\s\S]*?)\n---/) ?? [, ""])[1];
     const ids = [...listed(fm, "items"), ...listed(fm, "examples")];
-    if (!ids.includes(selfId)) continue;
+    if (!ids.length) continue; // _category.md and any other non-page markdown
+    out.push({
+      path: p,
+      slug: basename(p).replace(/\.md$/, ""),
+      title: (fm.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, p])[1],
+      ids,
+    });
+  }
+  return out;
+}
 
-    const title = (fm.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, p])[1];
-    const blocks: string[] = [];
-    for (const id of ids) {
-      if (id === selfId || shownIds.has(id)) continue;
-      const f = "items/" + id + ".md";
-      if (!existsSync(f)) continue;
-      const s = readFileSync(f, "utf8");
-      const t = (s.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
-      blocks.push(`### [[${id}]] ${t}\n` + fullTextOf(s));
-    }
-    if (!blocks.length) return "";
-    return (
-      `\n\n=== THE OTHER ITEMS ON THIS ITEM'S PAGE ("${title}") ===\n` +
+// The A/B pairing convention, and the ONLY one the renderer uses:
+// web/lib/library-categories.ts pairs `<slug>` with `<slug>-examples`.
+const EXAMPLES_SUFFIX = "-examples";
+const companionSlug = (slug: string): string =>
+  slug.endsWith(EXAMPLES_SUFFIX) ? slug.slice(0, -EXAMPLES_SUFFIX.length) : slug + EXAMPLES_SUFFIX;
+
+const allPages = withContext ? loadPages() : [];
+const ownPage = allPages.find((p) => p.ids.includes(id));
+const pairPage = ownPage ? allPages.find((p) => p.slug === companionSlug(ownPage.slug)) : undefined;
+
+// --batch a,b,c (or JUDGE_BATCH=a,b,c): page slugs or paths. Each named page
+// pulls in its companion too, so naming the three A pages of a level is enough.
+const batchArg = opts.batch ?? process.env.JUDGE_BATCH ?? "";
+const namedBatch = batchArg
+  .split(",")
+  .map((t) => basename(t.trim()).replace(/\.md$/, ""))
+  .filter(Boolean);
+const batchSlugs = new Set<string>();
+for (const slug of namedBatch) {
+  batchSlugs.add(slug);
+  batchSlugs.add(companionSlug(slug));
+  // A named page that matches nothing is a silent no-op otherwise, and a
+  // silently-empty context block reads as "the batch is clean". Say so.
+  if (withContext && !allPages.some((p) => p.slug === slug)) {
+    console.error(`[judge] --batch: no page "${slug}" under library/ — that page contributes NO context`);
+  }
+}
+const batchPages = allPages.filter(
+  (p) => batchSlugs.has(p.slug) && p.slug !== ownPage?.slug && p.slug !== pairPage?.slug,
+);
+
+/** Ids supplied IN FULL somewhere in the prompt: this item's page and its pair. */
+const inFullPage = (x: string): boolean =>
+  (ownPage?.ids.includes(x) ?? false) || (pairPage?.ids.includes(x) ?? false);
+
+function blocksFor(page: PageInfo, mode: "full" | "quoted"): string[] {
+  const out: string[] = [];
+  for (const x of page.ids) {
+    if (x === id || shownIds.has(x)) continue;
+    const f = "items/" + x + ".md";
+    if (!existsSync(f)) continue;
+    const s = readFileSync(f, "utf8");
+    shownIds.add(x);
+    const t = (s.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, x])[1];
+    out.push(`### [[${x}]] ${t}\n` + (mode === "full" ? fullTextOf(s) : quotedTextOf(s)));
+  }
+  return out;
+}
+
+function pageContext(): string {
+  if (!withContext || !ownPage) return "";
+  let out = "";
+
+  const own = blocksFor(ownPage, "full");
+  if (own.length) {
+    out +=
+      `\n\n=== THE OTHER ITEMS ON THIS ITEM'S PAGE ("${ownPage.title}") ===\n` +
       "This item is published as part of the page above and is read in that order.\n" +
       "Use these to check for defects that live BETWEEN items: this item contradicting\n" +
       "a sibling, restating one inaccurately, claiming the page proves something it does\n" +
       "not, or duplicating a sibling's result while disagreeing with it. Items already\n" +
       "quoted in the citation section above are not repeated here.\n\n" +
-      blocks.join("\n\n")
-    );
+      own.join("\n\n");
   }
-  return "";
+
+  if (pairPage) {
+    const pair = blocksFor(pairPage, "full");
+    if (pair.length) {
+      const ownIsExamples = ownPage.slug.endsWith(EXAMPLES_SUFFIX);
+      out +=
+        `\n\n=== THE COMPANION PAGE ("${pairPage.title}") ===\n` +
+        (ownIsExamples
+          ? "This item is an example on the B page of an A/B pair. The block below is the A\n" +
+            "page it illustrates: the definitions and results these examples are examples OF.\n"
+          : "This item sits on the A page of an A/B pair. The block below is the companion\n" +
+            "B page: the examples and counterexamples published alongside these results.\n") +
+        "The two pages are published and read as ONE unit. Supplied IN FULL, like the page\n" +
+        "siblings above, so cross-references between them are checkable in both directions.\n\n" +
+        pair.join("\n\n");
+    }
+  }
+
+  if (batchPages.length) {
+    // Budget: the pair blocks above are the high-value context and are never cut.
+    // The batch is cut rather than allowed to push the request into the gateway
+    // timeout that this file's history already records. Elisions are declared.
+    const BATCH_BUDGET = 200_000;
+    const kept: string[] = [];
+    const dropped: string[] = [];
+    let used = 0;
+    for (const p of batchPages) {
+      const blocks = blocksFor(p, "quoted");
+      if (!blocks.length) continue;
+      const text = `#### page: ${p.title}\n\n` + blocks.join("\n\n");
+      if (used + text.length > BATCH_BUDGET) {
+        dropped.push(p.title);
+        continue;
+      }
+      used += text.length;
+      kept.push(text);
+    }
+    if (dropped.length) {
+      console.error(`[judge] batch context budget reached; omitted: ${dropped.join(", ")}`);
+    }
+    if (kept.length) {
+      out +=
+        "\n\n=== OTHER PAGES IN THE CURRENT BATCH ===\n" +
+        "These pages are being written alongside this one, at the same dependency level.\n" +
+        "Statement/Definition and Remarks only, NO proofs, so treat every one as CORRECT\n" +
+        "and do not audit them: they are judged separately, on their own calls.\n" +
+        (dropped.length ? `NOTE: further batch pages were omitted for length (${dropped.join(", ")}).\n` : "") +
+        "\n" +
+        kept.join("\n\n");
+    }
+  }
+
+  return out;
 }
 
 function citedContext(itemBody: string): string {
@@ -283,16 +443,25 @@ function citedContext(itemBody: string): string {
     const title = (src.match(/^title:\s*"?(.*?)"?\s*$/m) ?? [, id])[1];
     const notProved = /^proved_here:\s*false/m.test(src);
     shownIds.add(id);
+    // A cited item on this item's own page or its companion is supplied IN FULL.
+    // Previously the citation block claimed every entry first, so citing a sibling
+    // DOWNGRADED it from full text to a 3000-char statement — exactly backwards,
+    // and it contradicted the prompt rule telling the judge siblings come in full.
+    const full = inFullPage(id);
     blocks.push(
-      `### [[${id}]] ${title}${notProved ? "  (RECORDED, NOT PROVED IN THIS LIBRARY)" : ""}\n` +
-        quotedTextOf(src),
+      `### [[${id}]] ${title}` +
+        (notProved ? "  (RECORDED, NOT PROVED IN THIS LIBRARY)" : "") +
+        (full ? "  (FULL TEXT — this page or its companion)" : "") +
+        "\n" +
+        (full ? fullTextOf(src) : quotedTextOf(src)),
     );
   }
   if (!blocks.length) return "";
   return (
     "\n\n=== EXACT TEXT OF EVERY ITEM THIS ONE CITES ===\n" +
     "These are the real statements behind the [[wikilinks]] and behind the [L#] facts.\n" +
-    "Treat each as CORRECT. Use them to check that this item's facts restate them FAITHFULLY.\n\n" +
+    "Treat each as CORRECT. Use them to check that this item's facts restate them FAITHFULLY.\n" +
+    "Entries marked FULL TEXT carry their proofs too; the rest are Statement + Remarks.\n\n" +
     blocks.join("\n\n")
   );
 }
@@ -312,7 +481,24 @@ PAGE CONTEXT: the other items published on this item's page are supplied after t
   Two cautions. A sibling covering related ground is NOT duplication, and a sibling that comes LATER on the page is not a forward-reference violation: same-page links are ordinary links. Do not object to either.
   A THIRD point, and read it carefully because the two blocks below the item differ:
   * PAGE SIBLINGS are supplied IN FULL: statement, facts, every proof step, and remarks. So a cross-reference to a sibling's step, fact or proof IS checkable, and a claim about a sibling that its full text contradicts IS a defect you should name. Use this.
-  * CITED ITEMS FROM OTHER PAGES are supplied as Statement/Definition and Remarks only, TRUNCATED at a marked cut, with no Proof. For those you may NOT conclude a cross-reference is false merely because you cannot find the passage. Report it as unverifiable, or say nothing, unless the supplied text CONTRADICTS it.`;
+  * CITED ITEMS FROM OTHER PAGES are supplied as Statement/Definition and Remarks only, TRUNCATED at a marked cut, with no Proof. For those you may NOT conclude a cross-reference is false merely because you cannot find the passage. Report it as unverifiable, or say nothing, unless the supplied text CONTRADICTS it.
+
+COMPANION PAGE: pages are published in A/B pairs. The A page develops definitions and results; the B page, named "<A>-examples", carries the examples and counterexamples for them. THE PAIR IS ONE UNIT, read together, so the companion is supplied IN FULL exactly like the page siblings. Check across it in whichever direction applies:
+  * an example that MISSTATES the result it illustrates: attributing a hypothesis the theorem does not have, dropping one it does have, or claiming it shows a hypothesis is necessary when it does not exhibit the required failure;
+  * an example claiming to be a counterexample to a result that, as the A page actually states it, it does not contradict;
+  * a result whose statement or remarks promise an example, a counterexample, or a witness that the companion page does not in fact supply, or a companion item that claims the A page proves something it does not;
+  * the two pages using the same term, symbol or notation with DIFFERENT meanings, or defining the same object twice and inequivalently.
+  Same caution as above: a companion item that comes later, or that is not cited, is not by itself a defect. The pair is symmetric, and links across it are ordinary links.
+
+BATCH CONTEXT: if a block of OTHER PAGES IN THE CURRENT BATCH is supplied, those pages are being written at the same time as this one, at the same dependency level. They are Statement/Definition and Remarks only, with NO proofs. Their purpose is narrow, and staying inside it matters:
+  * USE them to catch a step that makes a mathematical move which a batch item states but this item never cites, when the item's OWN facts do not already license that move. That is a missing-dependency defect and it is worth naming.
+  * USE them to catch this item and a batch item stating the SAME result incompatibly, or defining the same term differently.
+  * USE them to check a claim this item makes about what the library does or does not contain.
+  * DO NOT audit the batch items themselves. They are judged separately, on their own calls; a defect in one of them is not a defect in this item.
+  * DO NOT reject this item merely because it does not cite a batch item, because a batch item covers similar ground, or because a batch item would have given a shorter proof. Only a step that is actually UNLICENSED as written is a defect.
+  * DO NOT treat a batch item as unavailable machinery: the batch is being published together with this item.
+
+Your primary job is unchanged and outranks all of the above: the logical validity of THIS item's own steps, each against the facts it cites. The blocks below exist so that a step resting on something outside this item can be checked against what that something actually says.`;
 
 // The `--mode certify` arm was MEASURED AND DELETED, 2026-07-25. Scored against
 // research/verification-benchmark.md (150 items, 50 known defects), a gentler
@@ -348,7 +534,7 @@ const sys = refuterSys;
 // --dump-prompt prints the exact system + user message and exits, so the context
 // assembly can be inspected without spending a call.
 if (bools.has("dump-prompt")) {
-  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(id);
+  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext();
   console.log("========== SYSTEM ==========\n" + sys + "\n\n========== USER ==========\n" + user);
   console.error(`\n[dump-prompt] system ${sys.length} chars, user ${user.length} chars`);
   process.exit(0);
@@ -372,7 +558,7 @@ const payload = {
   max_tokens: 40000,
   messages: [
     { role: "system", content: sys },
-    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(id) },
+    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext() },
   ],
 };
 

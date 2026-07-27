@@ -45,6 +45,7 @@ open a repair cycle for a citation quirk; do not re-audit text already correct.
   count". Where you do materially rewrite, delete the block, then re-judge with
   `tools/judge.mts --model z-ai/glm-5.2`,
   `--conventions "$(cat briefs/judge-conventions.txt)"`,
+  `--batch "<the level's A-page slugs, comma-separated>"`,
   `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`. **Never a Claude model.**
   Capture stdout. **Never record a pass the judge did not give**; `keep: null`
   is not a pass. The harness retries 3x at 7 minutes, so a slow call is usually
