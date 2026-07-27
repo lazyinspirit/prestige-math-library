@@ -12,6 +12,10 @@ short: "subgroups of $\\mathbb{Z}$ are $n\\mathbb{Z}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -92,21 +96,10 @@ In particular every subgroup of $(\mathbb{Z},+)$ is cyclic.
 
 ## Remarks
 
-- **Why this is proved here rather than cited.** The published example
-  [[ex-subgroups-of-the-integers]] states the same classification, but it lives
-  on an examples page, and examples pages are leaves in the library's reading
-  order: no later page may depend on an item homed there. The classification is
-  therefore re-established on a spine, so that this page and later ones have a
-  citable home for it. The two statements agree, and neither is used in proving
-  the other.
+- **Why this is proved here rather than cited.** The published example [[ex-subgroups-of-the-integers]] gives the same classification, but it lives on an examples page, and examples pages are leaves in the library's reading order: no later page may depend on an item homed there. The classification is therefore re-established on a spine, so that this page and later ones have a citable home for it. Neither is used in proving the other.
 
-- **What it is used for below.** Exactly one thing: the *uniqueness* of the
-  nonnegative generator, which is what lets
-  $a\mathbb{Z} + b\mathbb{Z} = \gcd(a,b)\mathbb{Z}$ be read as an identification
-  of subgroups rather than as an accident about two sets
-  ([[thm-gcd-generates-the-subgroup]]).
+The two are not quite the same statement, and the difference is the whole reason this one is worded as it is. The example asserts that every subgroup is $n\mathbb{Z}$ for **some** $n \ge 0$, and adds that $n$ *may be taken* to be $0$ or the least positive element of $H$; it does not assert that no other $n \ge 0$ names the same subgroup. The statement above asserts **exactly one**, which is strictly stronger. The extra content is small — if $a\mathbb{Z} = b\mathbb{Z}$ with $a, b \ge 0$ then each of $a, b$ divides the other, so $a = b$ — but it is what the uses below actually need, and it is proved here rather than assumed to come with the example.
 
-- **The generator is a natural number, hence a set.** $n\mathbb{Z}$ above always
-  means $\iota(n)\mathbb{Z}$; the natural number $n$ is not itself an element of
-  $\mathbb{Z}$, and the embedding is written out wherever the distinction could
-  matter.
+- **What it is used for below.** Exactly one thing: the *uniqueness* of the nonnegative generator, which is what lets $a\mathbb{Z} + b\mathbb{Z} = \gcd(a,b)\mathbb{Z}$ be read as an identification of subgroups rather than as an accident about two sets ([[thm-gcd-generates-the-subgroup]]).
+
+- **The generator is a natural number, hence a set.** $n\mathbb{Z}$ above always means $\iota(n)\mathbb{Z}$; the natural number $n$ is not itself an element of $\mathbb{Z}$, and the embedding is written out wherever the distinction could matter.

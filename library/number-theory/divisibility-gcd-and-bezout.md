@@ -128,12 +128,13 @@ without it.
 **The seam with the group theory.** [[lem-subgroups-of-z-are-cyclic]] classifies
 the subgroups of $(\mathbb{Z},+)$: each is $n\mathbb{Z} = \langle n \rangle$ for
 exactly one natural $n$. The published example on the *examples* companion of
-Binary Operations, Monoids, Groups and Subgroups states the same fact, but
-examples pages are leaves in this library's reading order, so nothing here may
-rest on it — which is why that companion is deliberately absent from the
-Prerequisites above, while the spine page it accompanies is present. The
-classification is therefore re-proved here on a spine where later pages can cite
-it; its Remarks record the agreement.
+Binary Operations, Monoids, Groups and Subgroups gives that classification for
+*some* such $n$, but examples pages are leaves in this library's reading order,
+so nothing here may rest on it — which is why that companion is deliberately
+absent from the Prerequisites above, while the spine page it accompanies is
+present. The classification is therefore re-proved here on a spine where later
+pages can cite it, and re-proved in the stronger form the uses need: its Remarks
+set out exactly how the two statements differ.
 [[thm-gcd-generates-the-subgroup]] is then the item that joins the two halves of
 the page: $a\mathbb{Z} + b\mathbb{Z} = \gcd(a,b)\mathbb{Z}$ and
 $a\mathbb{Z} \cap b\mathbb{Z} = \operatorname{lcm}(a,b)\mathbb{Z}$. Both

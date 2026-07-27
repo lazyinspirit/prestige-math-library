@@ -12,6 +12,10 @@ short: "$c \\mid a, c \\mid b \\Rightarrow c \\mid \\gcd(a,b)$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

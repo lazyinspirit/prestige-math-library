@@ -12,6 +12,10 @@ short: "the family of Bézout pairs"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
