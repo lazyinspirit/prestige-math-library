@@ -31,6 +31,7 @@ Everything below is verified against the code as of 2026-07-27.
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
+| `briefs/judge-conventions.txt` | the judge's `--conventions` string — the ONLY actor whose prompt is a bare CLI argument, so it is stored rather than retyped |
 | `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-8 audit, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
 
 ---
@@ -113,8 +114,12 @@ defect class and is forbidden.
 
 ## Step 6 — Judge (parallel with step 5, per pair)
 
-`tools/judge.mts`, model `z-ai/glm-5.2`. Pass `--topic` and `--conventions`;
-put the triage rule in `--conventions` so 30-second gaps are not flagged.
+`tools/judge.mts`, model `z-ai/glm-5.2`. Pass `--topic`, and pass the triage
+rule as `--conventions "$(cat briefs/judge-conventions.txt)"` — **do not retype
+it**. That file is the judge's brief: the non-negotiables, the 30-second rule,
+the 0-indexing and iota conventions that are NOT defects, the instruction to
+check the title against what is proved, and the no-backslash output constraint
+that keeps the JSON parseable.
 
 **Always set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`** and capture
 stdout — `JUDGE_COSTLOG` records spend, not verdicts.
