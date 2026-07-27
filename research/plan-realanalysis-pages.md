@@ -341,7 +341,7 @@ nowhere dense, meager, residual, F-sigma, G-delta; measure zero; content zero;
 null; countable unions of null sets are null; content zero implies null and the
 converse FAILS; the Cantor set (compact, perfect, uncountable, nowhere dense,
 null, totally disconnected, homeomorphic to {0,1}^N); the **fat
-(Smith-Volterra-Cantor) set** (nowhere dense, POSITIVE measure); the Cantor
+(Smith-Volterra-Cantor) set** (nowhere dense, NOT of measure zero); the Cantor
 function; Q is F-sigma and not G-delta. B: Q covered by intervals of total length
 epsilon; the fat Cantor set's measure computed; two homeomorphic perfect nowhere
 dense sets of which only one is null (measure is not a topological invariant);
@@ -581,13 +581,19 @@ the **continuity set is G-delta and the discontinuity set F-sigma**; every
 G-delta is realized; **corollary via Baire: no function is continuous exactly on
 Q**; upper and lower semicontinuity, the level-set characterization, and the
 semicontinuous EVT; Baire class one and its dense G-delta of continuity points;
-**Cauchy's functional equation** with the full regularity list (continuity at a
-single point [Darboux 1875] OR monotonicity on an interval OR boundedness above
-or below on a set of positive measure OR Lebesgue measurability OR sign-constancy
-OR non-dense graph). B: Thomae continuous exactly at the irrationals; a monotone
-function discontinuous exactly on Q; Froda sharp (discontinuous exactly at
-{1 - 1/k}); a Hamel-basis additive function (unbounded on every interval,
-non-measurable, dense graph); f(m/n) = n is finite everywhere and locally
+**Cauchy's functional equation** with the regularity list REACHABLE IN SCOPE
+(continuity at a single point [Darboux 1875] OR monotonicity on an interval OR
+boundedness above or below on an interval OR sign-constancy OR non-dense graph).
+**Two clauses DROPPED per the self-contained-scope rule (owner, 2026-07-27):**
+"boundedness on a set of positive measure" and "Lebesgue measurability" both
+require a measure, which this library does not build. Restore them when a
+measure-theory track exists; nothing else on the page changes when they return,
+since each is an independent sufficient condition. B: Thomae continuous exactly
+at the irrationals; a monotone function discontinuous exactly on Q; Froda sharp
+(discontinuous exactly at {1 - 1/k}); a Hamel-basis additive function (unbounded
+on every interval, dense graph — the "non-measurable" clause is DROPPED for the
+same reason; the Hamel basis itself is fine, it costs only AC, which is an
+adopted axiom); f(m/n) = n is finite everywhere and locally
 unbounded at every point; a bounded function with no relative extremum anywhere
 and nowhere semicontinuous; 1_Q is not Baire class 1 but is Baire class 2 (the
 Baire hierarchy is strict); the **Conway base-13 function** (Darboux, nowhere
@@ -608,10 +614,15 @@ is order-convex, and c satisfies c(x) <= c(y) whenever x <= y, so
 c is continuous, nondecreasing, surjective, constant on every removed interval,
 and that the Cantor set has measure zero, so the increase happens on a null
 set. It may NOT claim c' = 0 almost everywhere, that c is singular, or anything
-about Lebesgue measure; it carries `external_refs:
-[rem-lebesgue-monotone-differentiation, rem-ftc-absolutely-continuous]` (both
-published, both `proved_here: false`) and must LINK both in its body — that is
-what makes the ‡ marker appear and what extcheck enforces.
+about Lebesgue measure.
+**AMENDED 2026-07-27 by the self-contained-scope rule.** The earlier instruction
+here was to carry `external_refs: [rem-lebesgue-monotone-differentiation,
+rem-ftc-absolutely-continuous]` and LINK both in the body so the ‡ marker
+appears. **That is withdrawn: the item carries NO `external_refs` and links
+neither.** The owner's goal is to eliminate instances of unproven forward
+reference, and a ‡ mention is one. The remark stands on what it can prove — the
+Cantor set is null and c is constant off it — and says nothing it cannot reach.
+Restore the pointers if and when a differentiation-and-measure track exists.
 (3) `ex-cantor-function-maps-a-null-set-onto-the-unit-interval` (B page): the
 Cantor set is null yet c maps it ONTO [0,1], because c is surjective onto
 [0,1] and constant on every removed interval.
@@ -680,6 +691,13 @@ derivatives everywhere**; Jensen's inequality; inflection points. B: |x| convex
 and not differentiable; a **discontinuous midpoint-convex function** (midpoint
 convexity without measurability does not give convexity); Jensen applied;
 x^4 defeats the second-derivative test.
+**Scope note 2026-07-27.** The parenthetical justification for the discontinuous
+midpoint-convex witness previously read "midpoint convexity without
+measurability does not give convexity". Measurability is out of scope, so the
+witness is kept and the reason restated within reach: midpoint convexity plus
+ANY of the in-scope regularity conditions of RA-14 gives convexity, and the
+Hamel-basis construction shows that without regularity it does not. The
+construction costs only AC, an adopted axiom.
 
 ### Block VII: the Riemann integral
 

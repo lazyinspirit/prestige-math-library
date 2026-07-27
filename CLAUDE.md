@@ -51,6 +51,15 @@ banner; the public sees only `published`.
 
 - Item ids are IMMUTABLE on `main`; renames go through `aliases` (SCHEMA §2).
 - A published page listing a draft item is a hard error, never a silent skip.
+- **Self-contained scope (owner, 2026-07-27).** No item may rest on a result the
+  library has not established. A theorem or example needing out-of-scope
+  machinery (measure theory, functional analysis, …) is **DROPPED from the
+  scaffold with a note saying why and what would license it**, never authored
+  with a ‡ dependency. The sole exception is a foundational axiom already
+  adopted — AC, countable choice, dependent choice — and the independence facts
+  about those axioms. The ‡ tier and the `deferred-*` catalogue pages STAY; what
+  ends is depending on them. Forward-looking: published items are not
+  retrofitted. Full rule in `WORKFLOW.md` §"Self-contained scope".
 - Generation for this library NEVER goes through the public billed pipelines,
   and NEVER wires the Claude subscription into the worker service. Modes:
   session route (Fable + Claude subagents) or the internal harness over
@@ -128,6 +137,13 @@ before any rendering change, and preserve their behaviour):
   | **not proved here** | **fuchsia** | **dotted** | **‡** |
 
   Fuchsia is used nowhere else, and the bottom tier OUTRANKS the middle one.
+
+  **Content-side policy change, owner 2026-07-27 — the RENDERING below is
+  untouched and stays frozen, but the ‡ tier no longer licenses new content.**
+  New items may not depend on a `proved_here: false` item at all (see Hard rules
+  above); the tier now serves the `deferred-*` catalogue pages, which record
+  results the library does not prove, plus the pre-existing choice/independence
+  citations. Do not delete this machinery — it is still in use.
   Owned by `web/lib/library-external.ts` (accent + the `unprovedDependence`
   closure, which propagates along `deps` so consequences are marked too);
   `web/components/library/ItemBody.tsx` marks the FACT row carrying an unproved

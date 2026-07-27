@@ -92,8 +92,14 @@ ZF; omega_1 is countable; a countable union of countable sets is countable in ZF
 Zorn's lemma is a ZF theorem; ordinal addition is commutative.
 
 B: omega_1 and its order topology; the long line; a free ultrafilter; a Hamel
-basis; the Vitali set; 1 + omega = omega but omega + 1 > omega; Banach-Tarski
-(remark with reference).
+basis; 1 + omega = omega but omega + 1 > omega.
+**Two entries DROPPED 2026-07-27 (self-contained-scope rule).** The **Vitali
+set** needs Lebesgue measure to be worth stating at all — without a measure it
+is just a transversal of the cosets of Q, which says nothing — so it waits for a
+measure track. **Banach-Tarski** was listed as "remark with reference", i.e. a ‡
+catalogue entry on an in-scope B page; it belongs on
+`deferred-set-theory-beyond-choice`, where `rem-banach-tarski` already lives.
+The Hamel basis STAYS: it costs only AC, an adopted axiom.
 
 ---
 

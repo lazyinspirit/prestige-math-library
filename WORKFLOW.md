@@ -98,6 +98,51 @@ target that does not transitively depend on the citing item, and it rejects any
 cycle in `deps`. Run it before publish; it is the mechanical guarantee that the
 library contains no circular reasoning.
 
+### Self-contained scope (hard rule, owner instruction 2026-07-27)
+
+**No item may rest on a result this library has not established.** If a theorem,
+example or counterexample requires machinery beyond the current scope — measure
+theory, functional analysis, or anything else the library has not yet built — it
+is **DROPPED from the scaffold**, not marked and kept.
+
+**The one exception is a foundational axiom the library has already adopted**:
+the Axiom of Choice and its relatives (`def-axiom-of-choice`,
+`def-countable-choice`, `def-dependent-choice`). An axiom is assumed rather than
+derived, so depending on one is not an unproved dependency. The
+metamathematical independence facts *about* those axioms (Cohen forcing, the
+Feferman-Levy model, the constructible universe) are exempt on the same
+grounds: they are cited as external facts about an axiom, never used as a step
+inside a mathematical proof.
+
+**What this changes.** Until now an unproved dependency was permitted whenever
+it was visibly marked — the fuchsia / dotted / ‡ "not proved here" tier. **That
+tier is not removed.** The `deferred-*` pages exist precisely to record results
+the library does not prove, they stay, and their rendering is untouched. What
+changes is that **nothing in the mathematical development may depend on them**.
+The ‡ tier is a catalogue, not a licence to build on unproved material.
+
+**Consequences for scaffolding.** When a prose scaffold lists a result whose
+standard proof needs out-of-scope machinery:
+
+- drop the item from the page, and
+- record in the scaffold **why** it was dropped and **what would license it**,
+  so it can be restored when the prerequisite track exists.
+
+Richness is added back later, at or below the current dependency level, as the
+advanced topics are developed. **A dropped item is deferred, not deleted** — the
+scaffold note is what makes it recoverable.
+
+**This is forward-looking** (owner: "from now on"). Published items are not
+retrofitted. As of 2026-07-27 only nine items carry a load-bearing dependency on
+a ‡ item, and every one is a choice or independence result covered by the
+exception above, so the existing corpus is already compliant.
+
+**Where it bites first.** A scaffold that says "this is true but the standard
+proof uses Lebesgue measurability", or that reaches for a Vitali set, a
+non-measurable function, a positive-measure hypothesis, or a Banach-space
+theorem, is describing an item that must be dropped and noted — not authored
+with a ‡ dependency.
+
 The obligations that recur, and what each requires:
 
 - **Quotient constructions.** Defining a quotient (a quotient group $G/N$, a

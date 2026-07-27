@@ -47,7 +47,7 @@ oscillation of a function at a point.
   a set of content zero is null; **the converse fails** (Q in [0,1]).
 - the Cantor set: compact, perfect, uncountable, nowhere dense, measure zero,
   totally disconnected, homeomorphic to {0,1}^N.
-- the fat (Smith-Volterra) Cantor set: compact, nowhere dense, POSITIVE measure.
+- the fat (Smith-Volterra) Cantor set: compact, nowhere dense, NOT of measure zero.
 - the Cantor function is continuous, monotone, surjective, and constant off a
   null set.
 - Q is F-sigma and not G-delta; the irrationals are G-delta and not F-sigma.
@@ -61,13 +61,13 @@ is countable because we removed countably many intervals; Q is a G-delta.
 
 ### RA3-B
 Constructions: the Cantor middle-thirds set; the fat Cantor set; the Cantor
-function; a nowhere dense closed set of positive measure; an enumeration of Q
+function; a nowhere dense closed set that is not of measure zero; an enumeration of Q
 with shrinking intervals.
 Examples: the structure theorem applied to an explicit open set; the Cantor set
 worked out in ternary; the fat Cantor set's measure computed; Q covered by
 intervals of total length epsilon (the striking one); Baire applied.
 Counterexamples: intersection of (-1/n,1/n); [0,1] cap Q is closed and bounded in
-Q and not compact; a nowhere dense set of positive measure; a dense measure-zero
+Q and not compact; a nowhere dense set not of measure zero; a dense measure-zero
 set; a set that is neither open nor closed; an open cover of (0,1) with no finite
 subcover.
 Citations on these two pages: every "1/n < eps" step — the (-1/n,1/n) and
@@ -145,10 +145,12 @@ additive function; convex function (definition here, theory on RA5).
 - oscillation characterizes continuity: f is continuous at x iff osc(f,x) = 0;
   {x : osc(f,x) >= eps} is closed.
 - **Cauchy's functional equation**: an additive f that is continuous at a point,
-  OR monotone on an interval, OR bounded above or below on an interval, OR
-  Lebesgue measurable, OR has non-dense graph, is linear. (The full regularity
-  list from the sweep. The measurable case is stated; the Solovay remark is
-  routed to F1.)
+  OR monotone on an interval, OR bounded above or below on an interval, OR has
+  non-dense graph, is linear. **The "Lebesgue measurable" clause and the routed
+  Solovay remark are DROPPED (self-contained-scope rule, owner 2026-07-27):**
+  both need a measure this library does not build. Each clause is an independent
+  sufficient condition, so the measurable case can be added later without
+  disturbing anything else here.
 - the three companion Cauchy equations: f(x+y)=f(x)f(y), f(xy)=f(x)+f(y),
   f(xy)=f(x)f(y), and their solutions under regularity. (These set up page 8A.)
 
