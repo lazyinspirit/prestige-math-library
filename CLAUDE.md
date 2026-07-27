@@ -6,6 +6,11 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
 `README.md` (provenance, judge lineup, citation rules).** House style for proofs:
 `items/lem-cauchy-bounded.md` is the approved exemplar.
 
+**Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
+how a dependency level is built (actors, artifacts, the eight gates, the
+self-contained-scope rule, the twice-touched escalation). Read it before
+starting or resuming a level.
+
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
 roles, the modified reasoning/disproof engines, the RAG distiller, the
 seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to
@@ -38,7 +43,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
    run**, and commit it: `verification.judge` records only passes and
    `JUDGE_COSTLOG` records only spend, so without it a refutation vanishes the
    moment it is repaired. A proof refuted **more than once** escalates per
-   WORKFLOW.md §"Twice-refuted proofs" — Alpha-n reviews the proof AND its
+   WORKFLOW.md §"Twice-touched proofs" — Alpha-n reviews the proof AND its
    neighbouring dependencies at step 9, a further refutation is a red flag the
    orchestrator audits personally, and **no theorem or example is ever removed
    without explicit owner approval**.
