@@ -178,6 +178,31 @@ for (const p of pages)
       if (existing.has(d) && !publishedPageItems.has(d) && !itemById.has(d))
         warn('orphan', `${it.id} depends on existing item ${d}, which is on NO page — it will be silently dropped from page-level Prerequisites`);
 
+// b-leaf, for deps that are ALREADY PUBLISHED (owner, 2026-07-28).
+//
+// The b-leaf check inside the main loop above is UNREACHABLE for any dep that
+// already exists in items/: that loop does `if (existing.has(d)) continue;`
+// first, so it never reaches the leaf test. Depending on a published item homed
+// on a B page — precisely what the leaf rule forbids — therefore passed
+// silently, and the rule was only ever enforced against PLANNED items.
+//
+// It is checked here rather than there because `homePageOf` is built below that
+// loop; moving the loop would reorder every other check for no gain.
+//
+// Found at level 9 scaffolding: a Beta wanted three order-69 B-page items for
+// its own B page, spotted the trap by hand, and rebuilt the setups natively. A
+// gate that only catches what an agent already noticed is not a gate.
+const kindOfPage = new Map(pages.map((p) => [p.id, p.kind]));
+const isBPage = (pid) => (kindOfPage.get(pid) ?? (pid.endsWith('-examples') ? 'B' : 'A')) === 'B';
+for (const p of pages)
+  for (const it of p.items)
+    for (const d of it.deps ?? []) {
+      if (!existing.has(d)) continue;               // planned deps: handled above
+      const home = homePageOf.get(d);
+      if (home && home !== p.id && isBPage(home))
+        err('b-leaf', `${it.id} (${p.id}) depends on published ${d}, which is homed on examples page ${home}; B pages must be leaves`);
+    }
+
 // An id planned here that already exists in items/ is a genuine immutability
 // violation only when it is homed on a DIFFERENT page that is already composed.
 // Otherwise it is simply an item of this plan that has been authored already.

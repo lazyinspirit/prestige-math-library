@@ -374,6 +374,18 @@ State this honestly rather than implying coverage.
   citing an **earlier item on its own B page is legal** — ordinary intra-page
   structure, covered by `intra-order`. A level-7-algebra audit misread this and
   rewrote a correct item on a false premise.
+- **`b-leaf` used to be unreachable for a dep that was ALREADY PUBLISHED — fixed
+  2026-07-28.** The main check loop begins `if (existing.has(d)) continue;`, so
+  any dep resolving to an item already in `items/` skipped the leaf test
+  entirely, and the rule was enforced against planned items only. A second loop
+  now runs the same test against `homePageOf` after that map is built.
+  **The hole was PARTLY masked, and the unmasked case is the dangerous one:** if
+  the depending page does not declare the examples page in `requires`, the
+  violation surfaces as `undeclared-prereq` instead — a real failure, but under
+  the wrong name. If the page DOES declare it, the old gate passed the spec
+  clean. That is exactly the shape an agent produces when it believes depending
+  on a B page is allowed. Verified by injection both ways before and after the
+  fix, and the current spec is unaffected (still exits 0).
 - **Nothing reconciles the spec's `deps` against the authored items' `deps`.**
   Step 5 authors legitimately adjust deps as proofs take shape (19 of 40 items
   did at level 7-algebra), and no tool ever compares the two afterwards. The
