@@ -18,6 +18,20 @@ personally audits every result and makes every publish decision.
 
 ## Read these first (the contract wins over this runbook)
 
+**The four normative documents, and what each owns:**
+
+| doc | scope |
+|---|---|
+| `CLAUDE.md` | session entry point, hard rules, the publish path |
+| `WORKFLOW.md` | this file: the per-PAGE runbook, and the hard rules in full |
+| `LEVELS.md` | the per-LEVEL build, step 0 to 10 |
+| `ARCHITECTURE.md` | every mechanism — gates, ledgers, briefs, visual tiers — how each works and which failure it prevents |
+
+All four are **updated in the same commit as the change they describe**
+(owner, 2026-07-27). Verify against the code, never from memory: when a doc
+and the code disagree, the code is the truth and the doc is the bug.
+`SCHEMA.md` is the item/page contract and outranks all four.
+
 This document is a runbook. The normative contract lives in other files, and they
 take precedence over anything here if they ever disagree. Before building
 anything, read:

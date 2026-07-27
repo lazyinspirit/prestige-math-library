@@ -6,6 +6,10 @@ by the Prestige Intelligence app (bind-mount; see README §How serving works).
 `README.md` (provenance, judge lineup, citation rules).** House style for proofs:
 `items/lem-cauchy-bounded.md` is the approved exemplar.
 
+**Mechanism architecture: `ARCHITECTURE.md`** — every gate, ledger, brief and
+visual tier, how each works and which failure it prevents. Read it before
+adding or changing a mechanism.
+
 **Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
 (scaffold, step-8 audit, authoring). `LEVELS.md` describes them; those files are
 the actual text.
@@ -72,6 +76,15 @@ in the app repo has the tunnel). The signed-in owner sees drafts with a DRAFT
 banner; the public sees only `published`.
 
 ## Hard rules
+
+- **Keep the normative docs current (owner, 2026-07-27).** `CLAUDE.md`,
+  `WORKFLOW.md`, `LEVELS.md` and `ARCHITECTURE.md` are normative and are
+  updated **in the same commit as the change they describe** — a new or
+  retired tool, a new gate error code, a change to the agent hierarchy or a
+  brief, a new owner rule, a change to the frontmatter contract, or a
+  measured fact about a mechanism. Verify against the code, never from
+  memory: when a doc and the code disagree, the code is the truth and the
+  doc is the bug.
 
 - Item ids are IMMUTABLE on `main`; renames go through `aliases` (SCHEMA §2).
 - A published page listing a draft item is a hard error, never a silent skip.
