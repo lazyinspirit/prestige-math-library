@@ -297,7 +297,14 @@ definition-justification rule.
 | 23 | 90 | orthogonal projection | existence and uniqueness of the nearest point in a finite-dimensional subspace |
 | 24 | 90 | the adjoint $T^*$ | exists and is unique in finite dimensions |
 | 25 | 92 | degree $[K:F]$ | it is a dimension, which is why this page sits above linear algebra |
-| 26 | 22 | **$\gcd(a,b)$** | the common divisors of $(a,b) \ne (0,0)$ form a nonempty set bounded above, so it has a greatest element; and $\gcd(0,0)$ needs a stated convention, since every integer divides $0$ and the usual order gives no greatest |
+| 26 | 22 | **$\gcd(a,b)$** | for $(a,b) \ne (0,0)$: nonempty because $1$ is a common divisor, bounded above by `lem-divisor-bound`, hence has a greatest element by `lem-int-bounded-above-has-greatest`, which is MINTED at NT-1 because well-ordering gives a least element and nothing published gives a greatest. At $(0,0)$ there is no greatest element at all (`cex-common-divisors-of-zero-have-no-greatest-element`), so $\gcd(0,0) := 0$ is a stated convention, justified as the greatest common divisor in the DIVISIBILITY order via `cor-common-divisor-divides-gcd` |
+| 26b | 22 | $\operatorname{lcm}(a,b)$ | the positive common multiples of two nonzero integers are nonempty (they contain $|ab|$), so `thm-well-ordering-principle` gives a least one along `lem-nat-embeds-int`; the value $0$ when either argument is $0$ is a convention, chosen because it is what keeps $\gcd \cdot \operatorname{lcm} = |ab|$ true at every boundary pair |
+| 26c | 22 | the absolute value on $\mathbb{Z}$ | the two clauses are exhaustive and exclusive by totality and antisymmetry of the order (`thm-int-ordered-ring`); `def-abs-value` is stated for an ordered FIELD and does not apply, so this is not a second notion of one object |
+| 5b | 42 | characteristic of a ring | the set $\{n \ge 1 : n \cdot 1_R = 0\}$ has a least element when nonempty (`thm-well-ordering-principle`); and $n \cdot 1_R$ must be PROVED to be the published `def-canonical-natural` when $R$ is a field (`lem-integer-multiples-agree-with-canonical-natural`), both being the unique function with the same recursion (`thm-recursion`) |
+| 5c | 42 | subring, subfield | the restricted operations really are operations on the subset, and the subset really is a ring (resp. a field) with them, with the SAME $0$ and $1$; the additive half is the published `def-subgroup`/`lem-subgroup-criterion` and is cited |
+| 5d | 42 | the quaternion product | it is given as an explicit formula in the eight real coordinates, so it is a genuine binary operation on $\mathbb{R}^4$; associativity is checked on basis triples and the reduction to those triples is a finite-sum computation, NOT an appeal to multilinearity, which is unavailable at order 42 |
+| 12b | 68 | span | the family of linear subspaces containing $S$ is nonempty and its intersection is a linear subspace (`lem-intersection-of-linear-subspaces`), which is what licenses "the smallest"; the empty combination is $0_V$, so $\operatorname{span}(\varnothing) = \{0_V\}$ is a consequence, not a stipulation |
+| 12c | 68 | internal direct sum of $n$ summands | the criterion is $U_j \cap \sum_{i \ne j} U_i = \{0\}$ for every $j$; PAIRWISE trivial intersection is not sufficient and the companion page carries the counterexample |
 | 27 | 24 | the exponent $v_p(n)$ | uniqueness in the fundamental theorem of arithmetic — without it $v_p$ depends on the factorisation chosen, and every exponent-wise formula for $\gcd$ and $\operatorname{lcm}$ is meaningless |
 | 28 | 26 | **$[a] + [b] := [a+b]$ on $\mathbb{Z}/n$** | independence of representatives |
 | 29 | 26 | **$[a]\cdot[b] := [ab]$ on $\mathbb{Z}/n$** | independence of representatives. Together with #28 this is the owner's named obligation on quotient structures, discharged **here**, two pages below the quotient group of AA-3 that generalises it |
@@ -446,42 +453,138 @@ reading order — never that the library does not develop it.
 
 `requires`: `monoids-groups-and-subgroups`
 
-**Divisibility** $d \mid a$ in $\mathbb{Z}$; reflexivity, transitivity, and
-linearity ($d \mid a$ and $d \mid b$ imply $d \mid ax + by$); the bound
-$d \mid a$ with $a \ne 0$ implies $|d| \le |a|$; the units of $\mathbb{Z}$ are
-exactly $\pm 1$; **associates**. **Common divisor**; **greatest common divisor**
-$\gcd(a,b)$ (well-definedness #26, below); **Bézout's identity**, that
-$\gcd(a,b)$ is the least positive element of $\{ax + by\}$, proved from
-`thm-well-ordering-principle` and `thm-division-algorithm-in-z`; the corollary
-that every common divisor **divides** the gcd, so the gcd is greatest in the
-divisibility order and not merely in the usual one; the **Euclidean algorithm**
-$\gcd(a,b) = \gcd(b, r)$ with termination by well-ordering, and its extended
-form producing Bézout coefficients; **coprime**, with the criterion
-$\gcd(a,b) = 1 \iff \exists x, y\ (ax + by = 1)$; $\gcd(ca, cb) = |c|\gcd(a,b)$
-and $\gcd(a/d, b/d) = 1$ for $d = \gcd(a,b)$; **lcm**, and
+**Level-8-algebra audit, 2026-07-27 (batch 1).** Six notes bind authoring of
+this page pair. (1) ABSOLUTE VALUE ON $\mathbb{Z}$ IS NOT PUBLISHED. Verified
+from disk: `def-abs-value` is stated for an ORDERED FIELD and $\mathbb{Z}$ is
+not a field, so it does not apply, and citing it for $\mathbb{Z}$ would be the
+library's dominant defect class. Page 20's published summary independently
+confirms the gap ("No absolute value on $\mathbb{Z}$ is needed and none is
+used"). The general form — absolute value on an ordered RING — is not an
+option either, since `def-ordered-ring` is order 42, twenty orders above.
+NT-1 therefore mints a $\mathbb{Z}$-specific `def-int-abs` and
+`lem-int-abs-properties`, and records in Remarks — not as a numbered claim —
+that the two agree along the order-preserving embedding `lem-int-embeds-rat`.
+(2) DIVISIBILITY IS ALREADY DEFINED, inside the Statement of the published
+`thm-division-algorithm-in-z` ("we say $b$ divides $a$ ... when $a = qb$ for
+some $q$"), and the published `lem-order-characterisation` already quotes it.
+**This is a published instruction, not a preference**: page 20's summary says
+"the systematic theory of divisibility belongs to a later page, which must
+record that its general notion restricts to this one rather than introduce a
+second silently", and page 22 IS that later page. `def-divides-in-z` therefore
+states the SAME relation, cites that theorem as its source and records the
+restriction; it is a dictionary item, not new vocabulary, and presenting it as
+new would be the level-7 two-notions defect at the bottom of the library.
+Page 20's summary also states that page deliberately has "no greatest common
+divisor, since nothing here needs one", so there is no collision to manage.
+(3) THE SEAM PARAGRAPH BELOW WAS WRONG AND IS CORRECTED: AA-1 does NOT have the
+subgroups of $\mathbb{Z}$ available for citation. `ex-subgroups-of-the-integers`
+is on `monoids-groups-and-subgroups-examples`, a **B page** at order 21, and B
+pages are leaves (`validate-plan`'s `b-leaf`). NT-1 therefore proves
+`lem-subgroups-of-z-are-cyclic` on its own spine and records the agreement with
+the published example in Remarks. The same prohibition covers
+`ex-integers-under-addition`, from which $\mathbb{Z}^{\times} = \{1,-1\}$ must
+NOT be cited; `lem-units-of-z` proves it here. (4) THE GREATEST ELEMENT IS NOT
+FREE. Well-ordering gives a LEAST element of a set of naturals; obligation #26
+needs a GREATEST element of a set of integers bounded above, and nothing
+published supplies it. NT-1 mints `lem-int-bounded-above-has-greatest`, which
+is general infrastructure homed here only because this is the first page that
+needs it. (5) THE DIVISION ALGORITHM IS STATED FOR $b > 0$ ONLY. Every use of
+it on this page — Bézout, the Euclidean step, the subgroup classification —
+must reduce to a positive divisor first, which is exactly why note 1's absolute
+value is not a convenience. (6) NO FINITE CARDINAL ARITHMETIC IS NEEDED OR USED
+on this page pair; nothing here counts anything. AA-2 at order 28 is where that
+gap bites, and it is recorded in AA-2's own traps.
+
+**Absolute value on $\mathbb{Z}$**, minted here (audit note 1), with its
+properties. **Divisibility** $d \mid a$ in $\mathbb{Z}$, stated as the relation
+the published `thm-division-algorithm-in-z` already introduces (audit note 2);
+reflexivity, transitivity, and linearity ($d \mid a$ and $d \mid b$ imply
+$d \mid ax + by$); the bound $d \mid a$ with $a \ne 0$ implies $|d| \le |a|$;
+$(\mathbb{Z},\cdot,1)$ is a commutative monoid whose group of units is
+$\{1,-1\}$, obtained from the published `lem-monoid-units-form-a-group` and not
+from the B-page `ex-integers-under-addition`; **associates**, with the three
+equivalent forms and the fact that they are the classes of an equivalence
+relation in the sense of `def-equivalence-relation`. **A nonempty set of
+integers bounded above has a greatest element** (audit note 4). **Common
+divisor**; **greatest common divisor** $\gcd(a,b)$ (well-definedness #26,
+below), with the convention $\gcd(0,0) = 0$ stated where $\gcd$ is defined; the
+basic values $\gcd(a,b) = \gcd(|a|,|b|)$, $\gcd(a,0) = |a|$, $\gcd(a,1) = 1$;
+**Bézout's identity**, that $\gcd(a,b)$ is the least positive element of
+$\{ax + by\}$, proved from `thm-well-ordering-principle` and
+`thm-division-algorithm-in-z`; the corollary that every common divisor
+**divides** the gcd, so the gcd is greatest in the divisibility order and not
+merely in the usual one, and that this characterisation is the one that survives
+at $(0,0)$; the **Euclidean algorithm** $\gcd(a,b) = \gcd(b, r)$ with
+termination by strong induction, and its extended form producing Bézout
+coefficients; **coprime**, with the criterion
+$\gcd(a,b) = 1 \iff \exists x, y\ (ax + by = 1)$; **the coprime divisibility
+lemma**, that $\gcd(a,b) = 1$ and $a \mid bc$ force $a \mid c$, minted here
+because it needs Bézout and no primality at all, and because it is what makes
+NT-2's Euclid's lemma one line; $\gcd(ca, cb) = |c|\gcd(a,b)$ and
+$\gcd(a/d, b/d) = 1$ for $d = \gcd(a,b)$; **lcm**, and
 $\gcd(a,b) \cdot \operatorname{lcm}(a,b) = |ab|$.
 
 **The seam that must be stated, not left implicit:** $a\mathbb{Z} + b\mathbb{Z} =
-\gcd(a,b)\mathbb{Z}$. AA-1 already has the subgroups of $\mathbb{Z}$, so this is
-the item that connects the arithmetic to the group theory, and it is the concrete
-shadow of "$\mathbb{Z}$ is a PID" at order 46. Without it the two developments
-sit side by side saying nothing to each other, which is the level-7 defect.
+\gcd(a,b)\mathbb{Z}$, together with its dual $a\mathbb{Z} \cap b\mathbb{Z} =
+\operatorname{lcm}(a,b)\mathbb{Z}$. This is the item that connects the arithmetic
+to the group theory, and it is the concrete shadow of "$\mathbb{Z}$ is a PID" at
+order 46. Without it the two developments sit side by side saying nothing to each
+other, which is the level-7 defect.
 
-B page: worked gcds and Bézout coefficients; Bézout coefficients are **not
-unique**; $\gcd$ with $0$; a pair with $d \mid ab$ but $d \nmid a$ and
-$d \nmid b$, which is exactly the gap Euclid's lemma closes at NT-2 and the
-reason primality is not a decoration; the Euclidean algorithm on consecutive
-Fibonacci numbers as its worst case (`thm-recursion` is published, so the
-sequence is definable).
+**The classification is NOT what the seam item rests on, and it still has to be
+proved here.** Both inclusions of $a\mathbb{Z} + b\mathbb{Z} = \gcd(a,b)\mathbb{Z}$
+follow from Bézout and divisibility alone, and "$a\mathbb{Z} + b\mathbb{Z}$ is a
+subgroup" is `def-subgroup` plus `lem-subgroup-criterion`, both on A page 20; the
+intersection half is the "every common multiple is a multiple of the lcm" clause
+of `thm-gcd-lcm-product`. What the classification supplies is the UNIQUENESS of
+the nonnegative generator, which is what lets the conclusion be read as an
+identification of subgroups rather than of sets. AA-1 does not supply it:
+`ex-subgroups-of-the-integers` lives on `monoids-groups-and-subgroups-examples`,
+a B page at order 21, and B pages are leaves, so no later page may depend on it.
+NT-1 therefore proves `lem-subgroups-of-z-are-cyclic` on its own spine —
+every subgroup of $(\mathbb{Z},+)$ is $\langle n \rangle$ for exactly one natural
+$n$ — from `thm-division-algorithm-in-z`, `thm-well-ordering-principle` and the
+published `def-generated-subgroup` and `lem-cyclic-subgroup-is-the-set-of-powers`,
+and records in Remarks that the published example states the same fact and why it
+is restated rather than cited. **NT-1's A page is where the classification can
+legally live**: it is the lowest A page above order 21 whose subject matter needs
+it, and homing it here makes it available to AA-5 (order 34) and AA-10 (order 46),
+which should cite it rather than repeat the argument a third time.
 
-Traps. **$\gcd(0,0)$.** Every integer divides $0$, so "greatest common divisor"
-in the usual order has no meaning at $(0,0)$. Fix the convention $\gcd(0,0) = 0$
-(Wikipedia, and the tiebreaker rule in the convention memo), which is exactly the
-greatest element under **divisibility**, and say so where it is defined rather
-than leaving a hole. **Absolute value on $\mathbb{Z}$** is used throughout: check
-whether it is published (`def-int-order` is) and mint it here if not, rather than
-inlining a case split six times. $\mathbb{N}$ contains $0$, so every statement
-about divisors is checked at $0$ and at $1$ before it is written.
+B page: $\gcd(1071,462) = 21$ worked through the Euclidean algorithm with the
+back-substitution giving $21 = 7 \cdot 462 - 3 \cdot 1071$; Bézout coefficients
+are **not unique**, with the full one-parameter family
+$(x + tb/d,\ y - ta/d)$; $\gcd$ at the boundary, including the observation that
+$\gcd(0,0) = 0$ is exactly what makes $\gcd(ca,cb) = |c|\gcd(a,b)$ true at
+$c = 0$; the solvability of $ax + by = c$ exactly when $\gcd(a,b) \mid c$, worked
+on $6x + 15y = 9$ and $6x + 15y = 7$; $12\mathbb{Z} + 18\mathbb{Z} = 6\mathbb{Z}$
+and $12\mathbb{Z} \cap 18\mathbb{Z} = 36\mathbb{Z}$, instantiating the seam;
+the Euclidean algorithm on consecutive Fibonacci numbers (`thm-recursion` is
+published, so the sequence is definable), stated ONLY as "quotient $1$ at every
+step, exactly $n$ divisions" and NOT as Lamé's minimality theorem, which is not
+proved; a pair with $d \mid ab$ but $d \nmid a$ and $d \nmid b$, which is exactly
+the gap Euclid's lemma closes at NT-2 and the reason primality is not a
+decoration; the common divisors of $(0,0)$, which are all of $\mathbb{Z}$ and
+have no greatest element, so that the $\gcd(0,0)$ convention is necessary rather
+than decorative; and the false statement
+$\gcd(a,b)\operatorname{lcm}(a,b) = ab$, refuted at $(-2,3)$, where the absolute
+value in the true statement is doing the work.
+
+Traps. **$\gcd(0,0)$ — DECIDED, $\gcd(0,0) = 0$.** Every integer divides $0$, so
+"greatest common divisor" in the usual order has no meaning at $(0,0)$, and the
+value is fixed by convention (Wikipedia, and the tiebreaker rule in the
+convention memo): it is the greatest element under **divisibility**, and it is
+the value that keeps $\gcd(ca,cb) = |c|\gcd(a,b)$ and
+$\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$ true at every boundary pair. State it
+where $\gcd$ is defined rather than leaving a hole, and justify it there rather
+than in a footnote. **Absolute value on $\mathbb{Z}$ — CHECKED, and it is NOT
+published.** `def-abs-value` is stated for an ordered field and $\mathbb{Z}$ is
+not one, so `def-int-abs` is minted here. **The published division algorithm is
+stated for $b > 0$**, so every use of it reduces to a positive divisor first;
+that is the reason the absolute value is load-bearing and not a convenience.
+$\mathbb{N}$ contains $0$, so every statement about divisors is checked at $0$
+and at $1$ before it is written: $d \mid 0$ for every $d$ including $0$;
+$0 \mid a$ only for $a = 0$; and every gcd identity is checked at $(0,0)$.
 
 ## NT-2. Primes, Euclid's Lemma and the Fundamental Theorem of Arithmetic  (order 24)
 
@@ -803,7 +906,14 @@ cite AA-11 from here.
 
 ## AA-8. Rings, Subrings, Integral Domains and Fields  (order 42)
 
-`requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`
+`requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`,
+`divisibility-gcd-and-bezout`
+
+The number theory edge is load-bearing and is new at level 8:
+`lem-characteristic-and-additive-order` states $n \cdot 1_R = 0$ exactly when
+$\operatorname{char}(R) \mid n$, which is NT-1's divisibility relation, and the
+B page reads $\mathbb{Z}^{\times} = \{1,-1\}$ off NT-1's `lem-units-of-z` rather
+than re-deriving it from the order.
 
 **Convention, fixed 2026-07-27 because this inventory contradicted itself.** It
 read "**Ring** (abelian group under $+$, monoid under $\cdot$, distributive); ring
@@ -815,30 +925,95 @@ ring without one is named a **non-unital ring** where it appears, and the
 $2\mathbb{Z}$ item flips from an example to a **counterexample showing the
 subring criterion's $1 \in S$ clause is not redundant**.
 
-**Ring** (abelian group under $+$, monoid under $\cdot$, distributive);
-**commutative ring**; the elementary consequences $0 \cdot a = 0$,
-$(-a)b = -(ab)$; **unit** and the group of units $R^\times$; **zero divisor**;
-**integral domain**; cancellation in a domain; **division ring**; the
-**bridges** `lem-field-is-a-commutative-ring` and
-`lem-commutative-division-ring-is-a-field` against the published `def-field`;
-`lem-ordered-field-is-an-ordered-ring` against `def-ordered-field`; **subring**
-and the subring criterion; **subfield**; characteristic of a ring; the
-characteristic of a domain is $0$ or prime; ring homomorphism; the bridge
-`lem-ring-homomorphism-of-fields-is-a-field-homomorphism`; product rings.
+**Ring** (abelian group under $+$, monoid under $\cdot$, distributive on both
+sides, since multiplication is not assumed commutative and the published
+`def-field` states only the left form); **commutative ring**; the elementary
+consequences $0 \cdot a = a \cdot 0 = 0$, $(-a)b = -(ab)$, $(-1)a = -a$;
+**integer multiples** $ma$ and the identities $(ma)(nb) = (mn)(ab)$, obtained
+from the published `def-group-power` read additively rather than from a new
+recursion; **unit** and the group of units $R^\times$, obtained from the
+published `lem-monoid-units-form-a-group` applied to the multiplicative monoid,
+not re-proved; **zero divisor**; **integral domain**; cancellation characterises
+domains; **division ring**; the **bridges** `lem-field-is-a-commutative-ring`
+and `lem-commutative-division-ring-is-a-field` against the published `def-field`;
+**the quaternions $\mathbb{H}$ and the theorem that they are a division ring
+which is not a field**, homed on the SPINE and not on the companion page,
+because LA-6 (order 78) needs them for the determinant counterexample and B
+pages are leaves; **ordered ring**, together with
+`lem-ordered-ring-cone-and-order-agree` reconciling the positive-cone
+presentation of `def-ordered-field` with the total-order presentation of
+`thm-int-ordered-ring`, and then `lem-ordered-field-is-an-ordered-ring`;
+**subring** and the subring criterion; **subfield**, which is what the vector
+space page at order 68 restricts scalars along; ring homomorphism, with
+$f(1) = 1$ imposed rather than derived, and its basic properties; the bridge
+`lem-ring-homomorphism-of-fields-is-a-field-homomorphism`; **product rings**;
+**the ring $R^X$ of functions with pointwise operations**, minted here because
+order 68 points back at it when it puts a vector-space structure on the same
+set; **the proved dictionary $n \cdot 1_F = \iota(n)$** against the published
+`def-canonical-natural`; characteristic of a ring, well defined by well-ordering,
+with the convention $\operatorname{char} = 0$ in the "no such $n$" case flagged
+as the OPPOSITE of `def-order-in-a-group`'s $\infty$; and the characteristic read
+as the additive order of $1_R$, with the domain statement that every nonzero
+element has that same additive order.
+
+**"The characteristic of an integral domain is $0$ or prime" is DEFERRED to
+AA-9 (order 44)** and is not on this page. See the deferral note in AA-9's
+inventory: the word *prime* is defined nowhere below order 42, its home is NT-2
+at order 24, and NT-2 requires NT-1 and so cannot be published before level 9.
+AA-9 requires AA-3 and therefore cannot be built until level 13 at the earliest,
+by which time NT-2 is long published, so the deferral is discharged by
+construction rather than by a promise to retrofit a published page.
 
 B page: the retro-instantiations `ex-integers-as-a-commutative-ring`,
-`ex-integers-are-an-integral-domain-not-a-field`, `ex-rationals-and-reals-as-fields`;
-$\mathbb{Z}/n$ has zero divisors exactly when $n$ is composite; **the quaternions
-$\mathbb{H}$**, a division ring that is not a field, kept because the determinant
-page needs it; **$2\mathbb{Z}$ as a counterexample** (closed under $+$ and
-$\cdot$, but $1 \notin 2\mathbb{Z}$, so the identity clause of the subring
-criterion is doing work); the zero ring and why $1 \ne 0$ is required of a field.
-**$\mathbb{Z}/n$ has zero divisors exactly when $n$ is composite has MOVED** to
-NT-3's B page at order 27, where it is statable with no ring vocabulary at all.
+`ex-integers-are-an-integral-domain-not-a-field` and
+`ex-rationals-and-reals-as-fields`, and a fourth,
+`ex-cauchy-sequences-as-a-commutative-ring`, which reads `thm-cauchy-ring` as an
+instance and observes that $\mathcal{C}$ has zero divisors, so it is NOT a
+domain — which is precisely why the construction of $\mathbb{R}$ has to quotient
+by a maximal ideal rather than by any ideal, the point AA-9 then makes; a product
+of two nonzero rings always has zero divisors; **$2\mathbb{Z}$ as a
+counterexample** (closed under $+$ and $\cdot$, but $1 \notin 2\mathbb{Z}$, so
+the identity clause of the subring criterion is doing work); $\mathbb{Z}$ inside
+$\mathbb{Q}$ as a subring that is NOT a subfield, so the inverse-closure clause
+is doing work too; the zero ring, of characteristic $1$, and why $1 \ne 0$ is
+required of a field; a map preserving $+$ and $\cdot$ but not $1$, showing the
+homomorphism clause is not redundant; and the false statement that every nonzero
+element of a commutative ring is a unit or a zero divisor, refuted by $2$ in
+$\mathbb{Z}$. **$\mathbb{Z}/n$ has zero divisors exactly when $n$ is composite
+has MOVED** to NT-3's B page at order 27, where it is statable with no ring
+vocabulary at all. **The quaternions have MOVED to this page's A spine**
+(level-8 batch-1 finding): LA-6 at order 78 needs them and B pages are leaves,
+so an example here would be unavailable there.
 
 Traps. The published `def-field` is the definition; this page does not restate it,
 it connects to it. Getting this wrong reproduces the level-7 two-notions defect at
-the bottom of the library.
+the bottom of the library. There are four such connections and each is a numbered
+item, never a remark: field to commutative ring, commutative division ring back to
+field, ordered field to ordered ring, and ring homomorphism of fields to
+`def-field-homomorphism`. Two further two-notions hazards are specific to this
+page, and a third hazard is one of vocabulary. First, the elementary consequences
+$0 \cdot a = 0$ and $(-a)b = -(ab)$ exist
+already for FIELDS as `lem-of-zero-mult` and `lem-of-mult-neg`; the ring versions
+are the general statements and the field ones are instances, so record the
+agreement in Remarks and do not cite a field lemma inside a ring proof. Second,
+$n \cdot 1_R$ is the published `def-canonical-natural` when $R$ is a field, and
+`lem-integer-multiples-agree-with-canonical-natural` must PROVE the two agree,
+both being the unique function given by the same recursion; an assertion in
+Remarks would be exactly the shape D6 rejects. Third, the quaternion construction
+may not use the words bilinear, trilinear or multilinear: that vocabulary starts
+at order 68 and later, and this page is order 42.
+
+**Where the OPEN `def-field` question below becomes load-bearing, precisely.**
+`lem-field-is-a-commutative-ring` has two steps that depend on how axiom (M) is
+read: the step asserting that $(F,\cdot,1)$ is a COMMUTATIVE MONOID (associativity
+and commutativity of $\cdot$ at $0$, which the headline "$(F \setminus \{0\},\cdot)$
+is an abelian group" does not give), and the step asserting RIGHT distributivity
+$(y+z)x = yx + zx$ (which axiom (D) does not state and which follows from left
+distributivity only via commutativity at $0$). Both are licensed by the
+unqualified reading of (M)'s gloss — "multiplication is associative and
+commutative, $x \cdot 1 = x$ for all $x$" — and by nothing else. State that
+reading explicitly in the item's Facts & Assumptions, as a reading of the
+published axiom, and do not amend `def-field`.
 
 **OPEN, and the owner's call — an ambiguity in the published `def-field` that
 becomes load-bearing exactly here.** `def-field` axiom (D) states only LEFT
@@ -858,6 +1033,31 @@ but the lemma states $0 \cdot a = 0$, so this likely forces a statement change);
 or declare the intended reading in this page's bridge lemma only (touches no
 published item, leaves the mis-citation standing).
 
+**Evidence recorded at level-8 batch 1 (verified by hand at step 4; the decision
+above remains OPEN and the candidates are unchanged).** Under the strict reading
+of (M) — the gloss confined to $F \setminus \{0\}$ — `lem-of-zero-mult` is not
+merely mis-cited but **FALSE**: the axioms admit finite models in which
+$0 \cdot a \ne 0$. Take $F = \{0,1\}$ with addition mod $2$ and the usual product
+except $0 \cdot 1 := 1$ (keeping $1 \cdot 0 = 0$). Axiom (A) holds; $F \setminus
+\{0\} = \{1\}$ is the trivial abelian group, so strict (M) holds; and left
+distributivity (D) holds in all eight instances — for $x \ne 0$ it is the field
+identity plus the forced $x \cdot 0 = 0$, and $y \mapsto 0 \cdot y$, which sends
+$0 \mapsto 0$, $1 \mapsto 1$, is additive on $\mathbb{Z}/2$. Yet
+$0 \cdot 1 = 1 \ne 0$. If the intermediate reading is preferred — keeping
+"$x \cdot 1 = x$ for all $x$" unqualified while confining associativity and
+commutativity to $F \setminus \{0\}$ — the same failure appears in the
+four-element field $\mathbb{F}_4 = \{0, 1, \omega, \omega + 1\}$: redefine
+$0 \cdot y := f(y)$ where $f$ is the additive ($\mathbb{F}_2$-linear) map with
+$f(1) = 0$, $f(\omega) = f(\omega + 1) = 1$; then $0 \cdot 1 = 0$ as required,
+(A), strict (M) and left (D) all hold, and $0 \cdot \omega = 1 \ne 0$. In both
+models commutativity fails at $0$ ($\omega \cdot 0 = 0 \ne 0 \cdot \omega$), as
+the strict reading permits, and right distributivity fails with it — which
+confirms that the published proof's step "$(0+0) \cdot a = 0 \cdot a + 0 \cdot a$"
+is licensed by nothing in the strict axioms. Consequence for the third candidate:
+declaring the reading locally in the bridge lemma would leave a published,
+audited lemma whose Statement is not a theorem of the published axioms under the
+strict reading. The choice is still the owner's.
+
 ## AA-9. Ideals, Quotient Rings and the Isomorphism Theorems for Rings  (order 44)
 
 `requires`: `rings-subrings-and-integral-domains`, `normal-subgroups-and-quotient-groups`
@@ -870,7 +1070,18 @@ second and third isomorphism theorems for rings; the correspondence theorem;
 **prime ideal** and **maximal ideal**; **$R/P$ is a domain iff $P$ is prime**;
 **`thm-quotient-by-maximal-is-a-field`: $R/M$ is a field iff $M$ is maximal**; a
 maximal ideal is prime; in a commutative ring with identity, maximal ideals exist
-(Zorn, cited from `order-zorn-and-the-axiom-of-choice`).
+(Zorn, cited from `order-zorn-and-the-axiom-of-choice`); and **the characteristic
+of an integral domain is $0$ or prime**, deferred here from AA-8 at level-8
+batch 1 because the word *prime* is defined nowhere below order 42 — its home is
+NT-2 at order 24, which requires NT-1 and so cannot publish before level 9,
+whereas AA-8 was on the level-8 frontier. This page requires AA-3, so it cannot
+be built before level 13, by which time NT-2 is published and the citation is an
+ordinary backward one. AA-8 keeps `def-ring-characteristic` and
+`lem-characteristic-and-additive-order` ("$n \cdot 1_R = 0$ exactly when
+$\operatorname{char}(R) \mid n$", and in a domain every nonzero element has the
+additive order of $1_R$), which is the primality-free half and reduces the proof
+here to two lines: a factorisation $\operatorname{char}(R) = km$ with $k, m \ge 2$
+gives $(k \cdot 1_R)(m \cdot 1_R) = 0$ with both factors nonzero by minimality.
 
 B page: `ex-null-sequences-as-a-maximal-ideal` and
 **`ex-the-reals-as-a-quotient-by-a-maximal-ideal`**, the payoff item, citing
@@ -1024,27 +1235,78 @@ function of the roots lies in $F$" is the form that gets used; state it explicit
 
 ## LA-1. Vector Spaces, Subspaces, Span and Direct Sums  (order 68)
 
-`requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`
+`requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`,
+`rings-subrings-and-integral-domains`
 
-Vector space over a field $F$ (the published `def-field`, cited, not restated);
-the elementary consequences $0 \cdot v = 0$, $\lambda \cdot 0 = 0$,
-$(-1)v = -v$, and $\lambda v = 0 \Rightarrow \lambda = 0$ or $v = 0$; **subspace**
-and the subspace criterion; intersections of subspaces; the sum $U + W$;
-**internal direct sum** and the criterion $U \cap W = \{0\}$; finite direct sums;
-**span**; the span is the smallest subspace containing a set; spanning set;
-$F^n$; the space of $m \times n$ matrices; function spaces $F^X$.
+The ring page is a prerequisite for exactly one reason and it is load-bearing:
+restriction of scalars needs `def-subfield`, and a subfield is ring-page material.
+The second, lighter connection is a Remarks-only dictionary link from the vector
+space $F^X$ to the ring $R^X$ of `def-ring-of-functions`, same set, same addition,
+different second operation.
 
-B page: $F[x]$ and $F[x]_{\le n}$ (requires AA-11, declared on the B page);
-$\mathbb{R}$ over $\mathbb{Q}$; a subset closed under addition but not scaling;
-the union of two subspaces is a subspace only if one contains the other, as a
-false-statement item; $\mathbb{C}$ as a real vector space and as a complex one.
+Vector space over a field $F$ (the published `def-field`, cited, not restated),
+whose additive part is an abelian group in the published sense of `def-group`,
+cited and not re-derived; the elementary consequences $0_F v = 0_V$,
+$\lambda 0_V = 0_V$, $(-1_F)v = -v$, and
+$\lambda v = 0_V \Rightarrow \lambda = 0_F$ or $v = 0_V$; the function space $F^X$
+and $F^n$ as the case $X = n = \{0,\dots,n-1\}$; the space
+$M_{m \times n}(F) = F^{\,m \times n}$ of matrices, vector-space structure ONLY,
+with the product left to order 74; restriction of scalars along a subfield;
+**linear subspace** — the id and the title say LINEAR, because the library
+already uses "subspace" for the topological notion at order 185 — and the
+one-step subspace test; a linear subspace is a subgroup of the additive group,
+and conversely; intersections of linear subspaces; **span**, defined as the
+intersection of the linear subspaces containing the set, exactly as the published
+`def-generated-subgroup` is, and then proved equal to the set of finite linear
+combinations; monotonicity and idempotence of the span; $\operatorname{span}\{v\}$;
+the sum $\sum_{i<n} U_i$ and its identification with the span of the union;
+**internal direct sum**, with the criterion stated as
+$U_j \cap \sum_{i \ne j} U_i = \{0\}$ for each $j$ and NOT as pairwise trivial
+intersection; and the unique-decomposition characterisation. Finite sums of
+vectors are the published `def-monoid-finite-product` read additively, together
+with `thm-generalised-associativity`; `def-finite-sum` cannot be used, being
+stated for sequences into the complete ordered field.
+
+B page: $\mathbb{R}$ over itself and over the embedded copy of $\mathbb{Q}$
+(`lem-of-q-embeds` is published and gives the embedding as an ordered subfield);
+$F^3$ with its three coordinate lines as an internal direct sum, and $F^0$ as the
+zero space; $F^{\mathbb{N}}$ with the eventually zero families as a subspace;
+a subset closed under addition and not under scaling (the first quadrant of
+$\mathbb{R}^2$) and one closed under scaling and not under addition (a union of
+two axes), so that neither closure condition implies the other; three lines in
+$F^2$ meeting pairwise only in $0$ whose sum is not direct, which is what makes
+the $n$-summand criterion mean something; two planes in $F^3$ with their sum and
+intersection computed; and the false statement that the union of two linear
+subspaces is a linear subspace.
+
+**Two items are DEFERRED, not deleted.** $F[x]$ and $F[x]_{\le n}$ need
+`polynomial-rings-and-roots`, order 48, and $\mathbb{C}$ as a real and as a
+complex vector space needs `field-extensions-and-the-complex-numbers`, order 50 —
+both **above** this page, so neither can be authored at order 69. LA-2's B page
+(order 71) already plans $\{1, x, x^2, \dots\}$ as a basis and is the natural
+inheritor of the first; any page above order 50 can take the second. Whichever
+page takes them must also declare the corresponding `requires` edge. Page 69's
+`requires` therefore does not name `polynomial-rings-and-roots`, and must not
+regain it.
 
 Traps. The additive group of a vector space is an abelian group, so cite AA-1
-rather than re-deriving the additive laws. Do not assume finite dimension anywhere
-on this page.
+rather than re-deriving the additive laws; the page makes this a numbered item so
+the dictionary is explicit. Do not assume finite dimension anywhere on this page.
+Scalar multiplication is a map $F \times V \to V$ and is therefore NOT a binary
+operation on a set, so `def-binary-operation` must not be cited for it. A natural
+number is a von Neumann natural, so $F^n$ is indexed $x_0, \dots, x_{n-1}$ and
+$F^0$ is the one-element space containing only the empty function; every tuple on
+this page and its companion starts at index $0$. The word "subspace" is already in
+use in this library for the topological notion (`def-subspace-topology-top`,
+order 185), so the ids and titles here say LINEAR subspace; do not link the
+topological item, which is 117 pages later and would be a forward reference. The
+$n$-summand direct sum criterion is $U_j \cap \sum_{i \ne j} U_i = \{0\}$; the
+pairwise version is false and the companion page carries the witness.
 
 **Name it "linear subspace", and decide this at step 1 because ids are
-immutable.** "Subspace" already means the topological notion in this library —
+immutable. DECIDED at level-8 batch 1: the scaffolded ids in
+`research/level8-algebra-batch-1.pages.json` honour exactly this naming.**
+"Subspace" already means the topological notion in this library —
 `def-subspace-topology-top`, `thm-subspace-closure-and-interior`,
 `thm-complete-subspace-iff-closed` and `def-metrizable-space` are all published at
 order 104 and above. Prefer `def-linear-subspace`, `lem-linear-subspace-criterion`,
@@ -1052,7 +1314,11 @@ order 104 and above. Prefer `def-linear-subspace`, `lem-linear-subspace-criterio
 `def-subspace` happens to be free today, which is precisely why it will be taken
 by whichever page reaches for it first.
 
-**Two B-page items are unbuildable here and are deferred, not deleted.**
+**Two B-page items are unbuildable here and are deferred, not deleted.
+(Superseded at level-8 batch 1 by the "Two items are DEFERRED" paragraph in the
+B-page listing above, which adds the `requires`-edge obligation; kept for the
+record. Its "five remaining B-page items" count describes the pre-batch list;
+the scaffolded B page has eight items.)**
 $F[x]$ and $F[x]_{\le n}$ need `polynomial-rings-and-roots` (order 48), and
 "$\mathbb{C}$ as a real vector space and as a complex one" needs
 `field-extensions-and-the-complex-numbers` (order 50) — both **above** this page.
@@ -1195,8 +1461,10 @@ $B \mapsto \det(AB)$; $\det(A^{-1}) = (\det A)^{-1}$; similarity invariance.
 
 B page: the $3 \times 3$ Leibniz expansion in full, all six permutations with
 signs; **the quaternionic $2\times 2$ matrix with equal columns and $\det = 2k \ne 0$**,
-the counterexample showing commutativity is essential, citing $\mathbb{H}$ from
-AA-8's B page; a matrix over $\mathbb{Z}$ with $\det = 2$, invertible over
+the counterexample showing commutativity is essential, citing `def-quaternions`
+and `thm-quaternions-form-a-division-ring` on AA-8's A page at order 42 (they
+were moved onto that spine at level-8 batch 1 precisely so that this citation is
+legal: B pages are leaves); a matrix over $\mathbb{Z}$ with $\det = 2$, invertible over
 $\mathbb{Q}$ and not over $\mathbb{Z}$; an antisymmetric non-alternating form over
 $\mathbb{Z}/2$.
 
@@ -1476,24 +1744,51 @@ Recorded here so it is not rediscovered:
 7. **X-1**: confirmation that AA-13 and AA-14 fully discharge the symmetric
    polynomial route, before any authoring begins.
 8. **NT-1**: whether **absolute value on $\mathbb{Z}$** is already published.
-   `def-int-order` is; $|\cdot|$ may not be, and it is used throughout NT-1 and
-   NT-2. Mint it here if missing rather than inlining a case split repeatedly.
+   **DECIDED 2026-07-27 (level-8 batch 1): it is NOT, and `def-int-abs` is
+   minted at NT-1**, with `lem-int-abs-properties` beside it. Verified from
+   disk: the only absolute value in the library is `def-abs-value`, stated for
+   an ORDERED FIELD, and $\mathbb{Z}$ is not a field, so it does not apply and
+   there is no two-notions collision. The agreement with `def-abs-value` along
+   the order-preserving embedding `lem-int-embeds-rat` is recorded in Remarks
+   only, and nothing on the page depends on it. It is load-bearing rather than
+   cosmetic because the published `thm-division-algorithm-in-z` is stated for
+   $b > 0$, so every use of it reduces to a positive divisor first.
 9. **NT-2**: whether **strong induction** is published or must be minted.
+   **ANSWERED 2026-07-27 (level-8 batch 1, verified from disk): it IS
+   published.** `items/thm-strong-induction.md`, "Strong (complete) induction",
+   `status: published`, homed on `construction-of-the-natural-numbers` at
+   order 6, with aliases `complete-induction` and `course-of-values-induction`.
+   It must be reused and never re-minted; NT-1 already cites it for the
+   termination of the Euclidean algorithm.
    `thm-induction-principle` is published; the strong form is what the existence
    half of the fundamental theorem of arithmetic actually uses. Related: whether
    the **irrationality of $\sqrt{2}$** exists anywhere — `ex-sqrt-two-exists`
    gives existence in $\mathbb{R}$, not irrationality — since NT-2 is its natural
    home and it is one line from unique factorisation.
-10. **NT-1**: the $\gcd(0,0)$ convention. Recommended $\gcd(0,0) = 0$, which is
-    the greatest common divisor in the **divisibility** order and agrees with
-    Wikipedia, per the convention tiebreaker rule. Whichever is chosen must be
-    stated where $\gcd$ is defined, not left as a hole.
+10. **NT-1**: the $\gcd(0,0)$ convention. **DECIDED 2026-07-27 (level-8
+    batch 1): $\gcd(0,0) = 0$**, stated inside `def-common-divisor-and-gcd` and
+    justified there. It is the greatest common divisor in the **divisibility**
+    order, it agrees with Wikipedia per the convention tiebreaker rule, and it
+    is the only value under which $\gcd(ca,cb) = |c|\gcd(a,b)$ and
+    $\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$ hold at every boundary pair — that
+    last is the argument to give, since it is a fact about the identities rather
+    than a matter of taste. The matching convention
+    $\operatorname{lcm}(a,b) = 0$ when either argument is $0$ is fixed the same
+    way, in `def-lcm`.
 11. **NT-3 / AA-9**: the $\mathbb{Z}/n$ agreement chain. NT-3 must build
     $(\mathbb{Z}/n,+)$ natively — it **cannot** cite the published
     `ex-integers-mod-n-additive-group`, which is on a B page at order 21 and so
     is a leaf — and must record the agreement explicitly. AA-9 (order 44) then
     identifies its quotient ring $\mathbb{Z}/(n)$ with NT-3's object rather than
     minting a third. Two agreements, both proved, neither asserted.
+    **NOT DECIDED at level-8 batch 1, deliberately: neither NT-3 nor AA-9 is in
+    that batch.** What batch 1 did settle is the general shape, twice over, and
+    it is the precedent to follow: NT-1 hits the identical wall for
+    `ex-subgroups-of-the-integers` and `ex-integers-under-addition`, and
+    resolves it by proving `lem-subgroups-of-z-are-cyclic` and `lem-units-of-z`
+    on its own SPINE and recording the agreement with the published B-page
+    example in Remarks. The constraint itself was re-verified from disk on
+    2026-07-27 and stands.
 12. **AA-5b**: the complement lemma in the decomposition of a finite abelian
     $p$-group is the hard step of that page. Decide its route at step 1 rather
     than discovering at step 5 that the textbook proof waves at it.
