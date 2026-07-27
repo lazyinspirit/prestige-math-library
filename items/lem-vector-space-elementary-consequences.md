@@ -12,6 +12,10 @@ short: "$0_F v = 0_V$, $(-1_F)v = -v$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

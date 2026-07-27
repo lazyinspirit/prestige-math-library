@@ -12,6 +12,10 @@ short: "$\\operatorname{span}\\{v\\} = Fv$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -46,7 +50,7 @@ $v \in V$. Write $Fv := \{\, \lambda v : \lambda \in F \,\}$. Then:
 
 [L4] The vector space axioms ([[def-vector-space]]): (V3) $(\lambda+\mu)w = \lambda w + \mu w$; (V4) $(\lambda\mu)w = \lambda(\mu w)$; (V5) $1_F w = w$.
 
-[L5] $0_F w = 0_V$ and $\lambda 0_V = 0_V$ for all $\lambda \in F$ and $w \in V$; and if $\lambda w = 0_V$ then $\lambda = 0_F$ or $w = 0_V$ ([[lem-vector-space-elementary-consequences]]).
+[L5] $0_F w = 0_V$ and $\lambda 0_V = 0_V$ for all $\lambda \in F$ and $w \in V$; $(-\lambda)w = -(\lambda w)$, which is claim 3 there; and if $\lambda w = 0_V$ then $\lambda = 0_F$ or $w = 0_V$ ([[lem-vector-space-elementary-consequences]]).
 
 [L6] $F$ is a field, so $(F,+,0_F)$ is an abelian group with $0_F, 1_F \in F$ and an additive inverse $-\mu$ for each $\mu$; adding $\mu$ to both sides of $\lambda + (-\mu) = 0_F$ therefore gives $\lambda = \mu$ ([[def-field]]).
 

@@ -280,11 +280,25 @@ and that seven failures were seven independent trials. They were one observation
 of self-inflicted contention. The lesson that survives the cap: an unbounded
 sweep is slower in wall-clock than a bounded one, because it has to be repeated.
 
-**Corollary on staleness: compute it, never read it from a report.** Whether a
-verdict covers the CURRENT text is `max(pass timestamp) > file mtime`, per item.
-That check corrected a subagent twice and the orchestrator once in a single
-level, including a case where a `null` sat as the newest entry and would have
-looked like the item was simply unjudged.
+**Corollary on staleness: compute it, never read it from a report.** Per item,
+whether a verdict covers the CURRENT text. That check corrected a subagent twice
+and the orchestrator once in a single level, including a case where a `null` sat
+as the newest entry and would have looked like the item was simply unjudged.
+
+**But `max(pass timestamp) > file mtime` is the WRONG test, and it fires on
+everything (measured 2026-07-28).** Recording the verdict *is* a write: the agent
+writes `verification.judge` into frontmatter after the pass, so mtime is always
+later than the verdict it records. Run naively it reported all 25 items of a pair
+stale when exactly one had changed. **Compare the verdict against the last change
+to the item's BODY, not to the file** — diff the text below the closing
+frontmatter delimiter against the last commit:
+
+```
+git show HEAD:items/<id>.md | awk 'f>=2{print} /^---$/{f++}'
+```
+
+A frontmatter-only diff (judge block, precheck flag) does not invalidate a
+verdict; a body diff does, and needs a re-judge.
 
 **The injection test is the only thing that separates a judge from a rubber
 stamp.** DeepSeek v4-flash was adopted for 14× lower latency, then reverted: it

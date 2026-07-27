@@ -12,6 +12,10 @@ short: "two planes in $F^{3}$: sum and intersection"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

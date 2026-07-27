@@ -12,6 +12,10 @@ short: "$F^{3}$ as a direct sum of coordinate lines"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
