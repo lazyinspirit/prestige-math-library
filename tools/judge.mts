@@ -57,6 +57,10 @@
 //   keep=null  -> call/parse error (reason explains)
 //
 // Appends {id,model,pt,ct} to $JUDGE_COSTLOG when set, for the session cost report.
+// Appends the FULL VERDICT {id,model,keep,reason,at} to $JUDGE_VERDICTLOG when set.
+// Set that one for every judge run of a level, at a stable path, so refutations
+// survive their own repair — the owner's twice-refuted escalation rule counts
+// rejections per proof across runs and cannot work off stdout alone.
 //
 // Honesty rule (README): a session item must NOT be judged by a Claude-family
 // model. This tool refuses an anthropic/claude model unless --allow-claude is
@@ -415,8 +419,21 @@ if (costlog) {
   } catch { /* non-fatal */ }
 }
 
+// A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
+// until now a rejection existed solely on stdout and vanished the moment it was
+// repaired. The owner's twice-refuted rule (WORKFLOW §"Twice-refuted proofs")
+// needs a COUNT PER PROOF ACROSS RUNS, so verdicts must outlive the run that
+// produced them. Set JUDGE_VERDICTLOG to the level's ledger and never rotate it
+// mid-level; the count is the whole point.
 const emit = (keep: boolean | null, reason: string): void => {
-  process.stdout.write(JSON.stringify({ id, model, keep, reason }) + "\n");
+  const line = JSON.stringify({ id, model, keep, reason });
+  process.stdout.write(line + "\n");
+  const vlog = process.env.JUDGE_VERDICTLOG;
+  if (vlog) {
+    try {
+      appendFileSync(vlog, JSON.stringify({ id, model, keep, reason, at: new Date().toISOString() }) + "\n");
+    } catch { /* non-fatal: stdout is still the primary channel */ }
+  }
 };
 
 if (!content) {

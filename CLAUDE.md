@@ -34,6 +34,14 @@ run a page from prompt to publish; the normative docs above win where they diffe
    on owner audit over a verified judge false-positive is recorded `audited`
    without a fabricated judge pass. Reflow wrapped steps first with
    `tools/reflow.mts` (the precheck checker is line-based).
+   **Also set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl` on EVERY judge
+   run**, and commit it: `verification.judge` records only passes and
+   `JUDGE_COSTLOG` records only spend, so without it a refutation vanishes the
+   moment it is repaired. A proof refuted **more than once** escalates per
+   WORKFLOW.md §"Twice-refuted proofs" — Alpha-n reviews the proof AND its
+   neighbouring dependencies at step 9, a further refutation is a red flag the
+   orchestrator audits personally, and **no theorem or example is ever removed
+   without explicit owner approval**.
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By

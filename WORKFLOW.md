@@ -98,6 +98,78 @@ target that does not transitively depend on the citing item, and it rejects any
 cycle in `deps`. Run it before publish; it is the mechanical guarantee that the
 library contains no circular reasoning.
 
+### Twice-touched proofs (hard rule, owner instruction 2026-07-27)
+
+A proof that is **refuted OR REPAIRED more than once** is treated as
+structurally suspect, not as a repair queue. Repetition is the strongest signal
+this process produces that something is wrong at the level of the mathematics
+rather than the wording.
+
+**Two independent triggers. Either one fires.**
+
+- **Refuted more than once by the judge before step 9** — the escalation below.
+- **Refuted or fixed more than once by ANY subagent, Alpha-n included** — the
+  orchestrator audits it personally, assesses, reports to the owner and
+  iterates. This trigger does not wait for step 9 and does not require a judge
+  rejection at all: an item three different agents kept rewriting is suspect
+  even if every individual repair looked reasonable and every judge call passed.
+
+The counting is over **refutations + repairs combined**, per item, across the
+whole level.
+
+**The escalation, in order:**
+
+1. **Two refutations before step 9.** Name the proof explicitly in **Alpha-n's
+   step-9 brief**, and instruct Alpha-n to review **the proof AND all of its
+   neighbouring dependencies** — every item it cites and every item that cites
+   it. A proof that keeps failing is often correct in itself and resting on a
+   neighbour that is not.
+2. **Refuted again at step 9 — a RED FLAG.** The orchestrator (me) audits the
+   proof personally. Not a subagent, and not another repair cycle.
+3. **The personal audit must state, explicitly:**
+   - the **nature** of the problem — mathematical inaccuracy, incorrectly cited
+     dependency, unjustified step, false statement, or a judge false positive;
+   - the **ramification of dropping** the whole theorem or example: what cites
+     it, what breaks, what the page loses, and whether a weaker true statement
+     would serve.
+4. **Report to the owner and iterate.** **NEVER remove the theorem or example
+   without the owner's explicit approval.** A twice-refuted proof is not
+   self-evidently wrong — measured judge precision on this corpus is 21–24%, so
+   a repeated rejection can still be a repeated false positive, and silently
+   deleting content is the one outcome the owner has ruled out.
+
+**This rule needs data the process used to discard.** `verification.judge`
+records only passes, correctly — a rejection leaves no trace once repaired, and
+`JUDGE_COSTLOG` stores spend, not verdicts. So **every judge invocation for a
+level must set `JUDGE_VERDICTLOG` to that level's ledger**, at a stable path,
+e.g.:
+
+```
+export JUDGE_VERDICTLOG=research/level<n>-judge.jsonl
+```
+
+`tools/judge.mts` appends `{id, model, keep, reason, at}` there for every call,
+including `keep: null` parse failures. Commit the ledger with the level. Count
+refutations per id from it; never rotate it mid-level, because the count is the
+entire point of keeping it.
+
+**Repairs are worse — they had no record at all**, living only in subagent prose
+reports, which is exactly what amendment 6 of the build workflow says not to
+trust. Item files are untracked while a level is in draft, so `git log` cannot
+supply it either. `tools/touchlog.mjs` closes this by hashing every item file:
+
+```
+node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage label>"
+node tools/touchlog.mjs audit research/level<n>-touches.json research/level<n>-judge.jsonl
+```
+
+**Take a snapshot after EVERY stage that can modify items** — authoring, step-7
+fixes, each step-8 batch audit, step-9 Alpha. A file appearing for the first time
+counts as creation, not a repair. `audit` combines repairs with judge refutations
+and prints the escalation set: every id whose total exceeds one.
+
+Measure repairs from disk; do not count them from what an agent reported.
+
 ### Self-contained scope (hard rule, owner instruction 2026-07-27)
 
 **No item may rest on a result this library has not established.** If a theorem,
