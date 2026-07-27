@@ -47,15 +47,36 @@ the **relative** order of existing pages is preserved, because every existing
 citation stays backward-pointing. `depsource.mjs`, `fwdcheck.mjs`,
 `validate-plan.mjs` and `rounds.mjs` are the only readers.
 
-Two insertions have happened: `formal-laurent-series-field` took the fractional
-order 31.5, and on **2026-07-27** the algebra track was inserted at order 20,
-shifting 120 pages and taking the spec from 140 to 198 pages
-(`research/plan-algebra-track.md`). **Orders 48–59 and 86–89 are RESERVED** for
-the deferred algebra expansion (Sylow, Galois, finitely generated abelian groups)
-so that expansion needs no third renumber.
+Three insertions have happened, the last two on the same day:
+
+1. `formal-laurent-series-field` took the fractional order 31.5 (since absorbed
+   into an integer slot by the renumbers below — there are now **no** fractional
+   orders in the spec).
+2. **2026-07-27**, the algebra track inserted at order 20, shifting 120 pages and
+   taking the spec from 140 to 198 pages (`research/plan-algebra-track.md`).
+3. **2026-07-27**, the elementary number theory block inserted at orders 22–27
+   and the fundamental theorem of finite abelian groups at 36–37, shifting 177
+   pages and taking the spec from 198 to **206** pages. Two different shifts:
+   old orders 22–29 moved **+6**, old order 30 and above moved **+8**, orders
+   1–21 did not move. Decisions D5–D7 in `research/plan-algebra-track.md`.
+
+**Orders 56–67 and 94–97 are RESERVED** (they were 48–59 and 86–89 before
+insertion 3) for the deferred algebra expansion — Sylow, Galois, and the
+structure theorem for **finitely generated** abelian groups. The **finite**
+abelian case is no longer deferred; it is built at order 36.
 
 **Consequence: any order quoted in a memory file, research note or commit message
-predating 2026-07-27 is stale above order 19.** Recompute from `plan-spec.json`.
+predating insertion 3 is stale above order 21** — and anything predating
+insertion 2 is stale above order 19. Recompute from `plan-spec.json`; never
+quote an order from memory.
+
+**When you renumber, the prose scaffolds do not follow automatically.** Insertion
+3 had to rewrite 64 `order N` references in `research/plan-algebra-track.md`, and
+a case-sensitive sweep still missed a capitalised `Orders N to M`, two bare
+`(34)`-style parentheticals in a bridge table, an `available at 70`, and an
+entire table column of bare page orders. **Grep for bare numbers as well as for
+the word "order", and verify every section heading against the spec afterwards**
+rather than trusting the sweep.
 
 ---
 

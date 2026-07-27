@@ -2,8 +2,8 @@
 
 Prose scaffold, owner-commissioned 2026-07-27. Companion to
 `research/plan-realanalysis-pages.md` and `research/plan-topology-track.md`.
-Machine-readable half: `research/plan-spec.json` (orders 20 to 47, 60 to 85, and
-the carve-out at 117 to 120).
+Machine-readable half: `research/plan-spec.json` (orders 20 to 55, 68 to 93, and
+the carve-out at 125 to 128).
 
 This file is the step-0 input for the pages below. It is NOT a page and it is not
 normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and `ARCHITECTURE.md` win
@@ -38,8 +38,8 @@ determinant.
 **D1. Placement.** The track is inserted **low**, at order 20, and every existing
 page from old order 20 upward shifts, keeping its relative order, so no existing
 citation can become forward-pointing. Everything in analysis and topology from
-order 90 up may now cite linear algebra. The pages that need analysis are carved
-out to orders 117 to 120.
+order 98 up may now cite linear algebra. The pages that need analysis are carved
+out to orders 125 to 128.
 
 The binding constraint on how low it can go: finiteness (`def-countable`, aliased
 `def-finite-set`) and `lem-pigeonhole` are homed on `countability-and-uncountability`,
@@ -54,9 +54,11 @@ finite fields. Those last three are not needed by linear algebra; they are there
 because they make an **algebraic** proof of the fundamental theorem of algebra
 possible, which is what lets eigenvalue existence over $\mathbb{C}$ and the
 spectral theorem land just above the intermediate value theorem instead of above
-trigonometry. Orders 48 to 59 and 86 to 89 are **reserved** so that Sylow theory,
-Galois theory and the structure theorem for finitely generated abelian groups can
-be inserted later without another renumber.
+trigonometry. Orders 56 to 67 and 94 to 97 are **reserved** so that Sylow theory,
+Galois theory and the structure theorem for **finitely generated** abelian groups
+can be inserted later without another renumber. (The **finite** abelian case is no
+longer deferred — see D7 below. Only the finitely generated case remains, because
+it needs free abelian groups and Smith normal form over $\mathbb{Z}$.)
 
 **D3. Scalars.** Vector spaces, bases, dimension, rank, eigenvalues and everything
 else are over an **arbitrary field**. The determinant is developed over a
@@ -74,6 +76,59 @@ characteristic polynomial without a separate construction.
 and the track goes back and instantiates the published constructions as cases of
 the general theory. Details in the next section.
 
+## The three further owner decisions, 2026-07-27 (second commission)
+
+The owner commissioned an elementary number theory block "all the way up to the
+fundamental theorem of arithmetic", plus the Chinese remainder theorem and the
+fundamental theorem of finite abelian groups. Three decisions settled it. They
+forced the **second renumber** of this track on the same day: pages at old orders
+22 to 29 moved **+6**, pages at old order 30 and above moved **+8**, and orders
+1 to 21 did not move. The spec went from 198 to **206** pages.
+
+**D5. The number theory block sits at orders 22 to 27**, directly above AA-1 and
+below everything else in the track. Three A pages with their example siblings:
+NT-1 divisibility and Bézout, NT-2 primes and the fundamental theorem of
+arithmetic, NT-3 congruences and the Chinese remainder theorem.
+
+The binding constraint on how low it can go is the mirror of D1's:
+**`thm-division-algorithm-in-z` is published on AA-1 at order 20.** Number theory
+cannot sit below 20 without re-minting division with remainder, which is the
+two-notions defect by construction. Order 22 is the earliest legal slot.
+
+Placing it here rather than in the reserved band closes **three open wounds at
+once**, all of which are recorded elsewhere in this file and were live before the
+block existed:
+
+1. **AA-2 wanted Fermat's little theorem and Euler's theorem** as corollaries of
+   Lagrange but had no $\gcd$, so no way to say which classes are units. NT-3
+   supplies $(\mathbb{Z}/n)^\times$ and $\varphi$, and AA-2 now ships both exactly
+   as its inventory always planned.
+2. **AA-5's own Traps paragraph admitted it used $\gcd$ before AA-10 defines it.**
+   That trap is now discharged: $\gcd$ arrives at order 22, AA-5 at order 34.
+3. **The fundamental theorem of arithmetic existed nowhere below order 46**, and
+   only there as a corollary of PID implies UFD — never proved elementarily.
+
+**D6. The fundamental theorem of arithmetic is proved TWICE, with an explicit
+agreement item.** NT-2 (order 24) proves it for $\mathbb{Z}$ from Bézout, Euclid's
+lemma and strong induction. AA-10 (order 46) proves PID implies UFD by a
+genuinely different argument (ascending chains, irreducible implies prime in a
+PID). A dedicated item then **proves the two agree** — that NT-2's "prime"
+coincides with "irreducible in $\mathbb{Z}$" and with "prime element of
+$\mathbb{Z}$", so the abstract theorem specialises to the concrete one.
+
+This is the `def-metrizable-space` dictionary pattern, and it is what the
+anti-two-notions rule asks for. **An unproved agreement claim in Remarks is the
+shape of the level-7 two-notions defect and was explicitly rejected here.**
+
+**D7. The fundamental theorem of finite abelian groups is un-deferred**, scoped to
+the **finite** case, and homed at orders 36 and 37 immediately above AA-5, whose
+cyclic groups and direct products it directly extends. It needs nothing above
+itself: cyclic groups, direct products, Lagrange and the Chinese remainder
+theorem all sit below. The **finitely generated** case stays deferred in the
+reserved band, because $\mathbb{Z}^r \times$ torsion needs free abelian groups and
+Smith normal form over $\mathbb{Z}$, which cannot precede the matrix machinery at
+order 74.
+
 ---
 
 ## The bridge obligations (D4), and the mechanism that makes them cheap
@@ -83,7 +138,7 @@ order 9, homed on `foundations-of-the-real-numbers`. Ids are immutable on `main`
 
 **Therefore: the algebra track MUST NOT define `def-field` again.** It reuses the
 published id. The consequence is an inverted reading order, field at order 9 and
-ring at order 34, which is pedagogically backwards and logically fine. The ring
+ring at order 42, which is pedagogically backwards and logically fine. The ring
 page opens by connecting to a definition that already exists.
 
 ### Downward bridges (ordinary backward citations, indigo)
@@ -92,7 +147,7 @@ These are new items on the algebra pages, citing published items normally.
 
 | new item | connects |
 |---|---|
-| `lem-field-is-a-commutative-ring` | `def-field` (9) to `def-ring` (34) |
+| `lem-field-is-a-commutative-ring` | `def-field` (9) to `def-ring` (42) |
 | `lem-commutative-division-ring-is-a-field` | the converse, so the two agree |
 | `lem-ordered-field-is-an-ordered-ring` | `def-ordered-field` (9) to `def-ring` |
 | `lem-ring-homomorphism-of-fields-is-a-field-homomorphism` | `def-field-homomorphism` (9) |
@@ -108,7 +163,7 @@ These are new items on the algebra pages, citing published items normally.
 | `ex-the-reals-as-a-quotient-by-a-maximal-ideal` | `thm-cauchy-ring`, `lem-null-maximal`, and the new `thm-quotient-by-maximal-is-a-field` |
 
 The last one is the point of the whole exercise. `thm-reals-field` proved it by
-hand at order 7; order 37 explains **why** it was true.
+hand at order 7; order 45 explains **why** it was true.
 
 ### Upward anchors (forward references, ORIENTATION ONLY)
 
@@ -146,7 +201,7 @@ other published change.
 
 ### Published-amendment obligation recorded at batch 1 (2026-07-27)
 
-`ex-p-adic-ultrametric` (published, `metric-spaces-examples`, order 95) says in
+`ex-p-adic-ultrametric` (published, `metric-spaces-examples`, order 103) says in
 its `## Remarks`: this library "has no divisibility theory at all in which to
 state or prove that". `thm-division-algorithm-in-z`, homed on
 `monoids-groups-and-subgroups` (order 20), makes that claim false the moment
@@ -155,8 +210,8 @@ this level publishes.
 **DONE 2026-07-27, and NOT by the wording first recorded here.** The standing
 rule says reword a decaying claim to "not available at this point in the reading
 order". That wording would have been **false in a new way**: Euclid's lemma
-arrives on `euclidean-domains-pids-and-unique-factorisation`, order 38, which is
-*below* this item at order 95, so it will be available at this point in the
+arrives on `euclidean-domains-pids-and-unique-factorisation`, order 46, which is
+*below* this item at order 103, so it will be available at this point in the
 reading order. The claim was instead rewritten to say what the ITEM does not
 establish or assume, dropping every claim about what the library contains.
 
@@ -167,11 +222,11 @@ fallback for when the result really is planned strictly later.
 
 A re-grep of the same file then found a SECOND decaying claim sixteen lines
 away ("this library contains no number theory: the word *prime* is defined
-nowhere in it"), still true today but falsified by order 38. Also rewritten. That
+nowhere in it"), still true today but falsified by order 46. Also rewritten. That
 is the level-8 failure mode reproduced exactly, and it is why §10b says re-grep
 the file you just repaired.
 
-`thm-metric-completion-exists` (published, order 96) carried the same class of
+`thm-metric-completion-exists` (published, order 104) carried the same class of
 claim — "this library has no general theory of equivalence relations", falsified
 by `def-equivalence-relation` at order 20 — and was rewritten the same way.
 
@@ -218,30 +273,35 @@ definition-justification rule.
 |---|---|---|---|
 | 1 | 20 | order of an element, and $\|G\|$ | `lem-order-of-element-exists` (the set of $n \ge 1$ with $g^n = e$ is nonempty in a finite group, by `lem-pigeonhole` claim 1) then `thm-well-ordering-principle` picks the least; $\|G\|$ by `lem-pigeonhole` claim 3, a finite set being equinumerous with exactly one natural |
 | 1b | 20 | $g^n$ for $n \in \mathbb{Z}$ | an integer is a class $[(a,b)]$, so the definition is by cases on `lem-nat-trichotomy` via `lem-nat-embeds-int`, NOT by an unchecked formula on representatives |
-| 2 | 22 | index $[G:H]$ | all left cosets of $H$ are equinumerous with $H$ |
-| 3 | 24 | **quotient group $G/N$** | $[a][b] := [ab]$ is independent of representatives, and this holds **iff** $N$ is normal |
-| 4 | 32 | **sign of a permutation** | the parity of the number of transpositions is independent of the factorisation (Vandermonde $\Delta = \prod_{i<j}(x_j - x_i)$) |
-| 5 | 36 | **quotient ring $R/I$** | the induced product is independent of representatives, and this holds **iff** $I$ is an ideal |
-| 6 | 38 | gcd in a PID | exists and is unique up to units |
-| 7 | 40 | $R[x]$ | finitely supported sequences are closed under the convolution product |
-| 8 | 40 | $\deg(fg) = \deg f + \deg g$ | requires $R$ to be a domain; state the failure over $\mathbb{Z}/4$ |
-| 9 | 42 | $\mathbb{C} := \mathbb{R}[x]/(x^2+1)$ | $x^2+1$ is irreducible over $\mathbb{R}$, so the quotient is a field |
-| 10 | 44 | splitting field | existence by induction on degree; uniqueness up to isomorphism |
-| 11 | 46 | symmetric polynomial representation | the expression in elementary symmetric polynomials is **unique** |
-| 12 | 62 | **dimension** | any two bases of a finitely generated space are equinumerous (Steinitz exchange); the infinite case, if stated, as "any two bases are equinumerous" in the $\approx$ language of `def-equinumerous` (order 18) — `def-cardinal` is homed on `ordinals-and-transfinite-recursion`, order 175, and CANNOT be cited from order 62 |
-| 13 | 64 | quotient space $V/W$ | inherited from the quotient group, plus scalar multiplication independent of representatives |
-| 14 | 66 | the matrix of a linear map | determined by the map **and** the ordered bases; changing either changes it |
-| 15 | 68 | **the RREF** | existence AND **uniqueness**, which is what licenses the definite article and makes rank well defined |
-| 16 | 68 | rank | row rank $=$ column rank $=$ $\dim \operatorname{im}$ |
-| 17 | 70 | **the determinant** | the Leibniz sum is the **unique** normalized alternating multilinear function of the columns |
-| 18 | 72 | **$\det$ of an operator** | independent of the chosen basis, via similarity and multiplicativity |
-| 19 | 74 | characteristic polynomial | independent of basis; **and** $\det(xI - A)$ is a determinant over $F[x]$, a ring, which is why 70 is stated over a ring |
-| 20 | 76 | minimal polynomial | the annihilator is an ideal of $F[x]$, a PID, so it has a unique monic generator |
-| 21 | 78 | Jordan form | uniqueness up to the order of the blocks |
-| 22 | 80 | signature of a real quadratic form | Sylvester's law of inertia |
-| 23 | 82 | orthogonal projection | existence and uniqueness of the nearest point in a finite-dimensional subspace |
-| 24 | 82 | the adjoint $T^*$ | exists and is unique in finite dimensions |
-| 25 | 84 | degree $[K:F]$ | it is a dimension, which is why this page sits above linear algebra |
+| 2 | 28 | index $[G:H]$ | all left cosets of $H$ are equinumerous with $H$ |
+| 3 | 30 | **quotient group $G/N$** | $[a][b] := [ab]$ is independent of representatives, and this holds **iff** $N$ is normal |
+| 4 | 40 | **sign of a permutation** | the parity of the number of transpositions is independent of the factorisation (Vandermonde $\Delta = \prod_{i<j}(x_j - x_i)$) |
+| 5 | 44 | **quotient ring $R/I$** | the induced product is independent of representatives, and this holds **iff** $I$ is an ideal |
+| 6 | 46 | gcd in a PID | exists and is unique up to units |
+| 7 | 48 | $R[x]$ | finitely supported sequences are closed under the convolution product |
+| 8 | 48 | $\deg(fg) = \deg f + \deg g$ | requires $R$ to be a domain; state the failure over $\mathbb{Z}/4$ |
+| 9 | 50 | $\mathbb{C} := \mathbb{R}[x]/(x^2+1)$ | $x^2+1$ is irreducible over $\mathbb{R}$, so the quotient is a field |
+| 10 | 52 | splitting field | existence by induction on degree; uniqueness up to isomorphism |
+| 11 | 54 | symmetric polynomial representation | the expression in elementary symmetric polynomials is **unique** |
+| 12 | 70 | **dimension** | any two bases of a finitely generated space are equinumerous (Steinitz exchange); the infinite case, if stated, as "any two bases are equinumerous" in the $\approx$ language of `def-equinumerous` (order 18) — `def-cardinal` is homed on `ordinals-and-transfinite-recursion`, order 183, and CANNOT be cited from order 70 |
+| 13 | 72 | quotient space $V/W$ | inherited from the quotient group, plus scalar multiplication independent of representatives |
+| 14 | 74 | the matrix of a linear map | determined by the map **and** the ordered bases; changing either changes it |
+| 15 | 76 | **the RREF** | existence AND **uniqueness**, which is what licenses the definite article and makes rank well defined |
+| 16 | 76 | rank | row rank $=$ column rank $=$ $\dim \operatorname{im}$ |
+| 17 | 78 | **the determinant** | the Leibniz sum is the **unique** normalized alternating multilinear function of the columns |
+| 18 | 80 | **$\det$ of an operator** | independent of the chosen basis, via similarity and multiplicativity |
+| 19 | 82 | characteristic polynomial | independent of basis; **and** $\det(xI - A)$ is a determinant over $F[x]$, a ring, which is why 70 is stated over a ring |
+| 20 | 84 | minimal polynomial | the annihilator is an ideal of $F[x]$, a PID, so it has a unique monic generator |
+| 21 | 86 | Jordan form | uniqueness up to the order of the blocks |
+| 22 | 88 | signature of a real quadratic form | Sylvester's law of inertia |
+| 23 | 90 | orthogonal projection | existence and uniqueness of the nearest point in a finite-dimensional subspace |
+| 24 | 90 | the adjoint $T^*$ | exists and is unique in finite dimensions |
+| 25 | 92 | degree $[K:F]$ | it is a dimension, which is why this page sits above linear algebra |
+| 26 | 22 | **$\gcd(a,b)$** | the common divisors of $(a,b) \ne (0,0)$ form a nonempty set bounded above, so it has a greatest element; and $\gcd(0,0)$ needs a stated convention, since every integer divides $0$ and the usual order gives no greatest |
+| 27 | 24 | the exponent $v_p(n)$ | uniqueness in the fundamental theorem of arithmetic — without it $v_p$ depends on the factorisation chosen, and every exponent-wise formula for $\gcd$ and $\operatorname{lcm}$ is meaningless |
+| 28 | 26 | **$[a] + [b] := [a+b]$ on $\mathbb{Z}/n$** | independence of representatives |
+| 29 | 26 | **$[a]\cdot[b] := [ab]$ on $\mathbb{Z}/n$** | independence of representatives. Together with #28 this is the owner's named obligation on quotient structures, discharged **here**, two pages below the quotient group of AA-3 that generalises it |
+| 30 | 36 | **the invariant factors $d_1 \mid \cdots \mid d_k$** | uniqueness of the decomposition, proved via a computable invariant (the cardinalities $\lvert G[p^k]\rvert$), not by an appeal to "clearly" |
 
 ---
 
@@ -255,11 +315,28 @@ scaffold** rather than authored with an unproved dependency.
   A `rem-` may say the geometric reading exists and name what would license it,
   with no numbered claim resting on it.
 - **Orientation via path components of $GL_n(\mathbb{R})$.** Needs connectedness
-  of a topological group, order 181. Not available at 70. Drop.
+  of a topological group, order 189. Not available at order 78. Drop.
 - **Dieudonne determinants, quasideterminants, quantum determinants** (section 8
   of the article). Named in a remark, developed nowhere.
-- **Galois theory, Sylow theory, the structure theorem for finitely generated
-  abelian groups.** Deferred by D2, with orders 48 to 59 reserved.
+- **Galois theory, Sylow theory, and the structure theorem for FINITELY
+  GENERATED abelian groups.** Deferred by D2, with orders 56 to 67 reserved.
+  **D7 removed the finite abelian case from this list** — it is built at order 36.
+  What remains deferred is $\mathbb{Z}^r \times$ torsion, which needs free abelian
+  groups and Smith normal form over $\mathbb{Z}$; that would license it.
+- **Primitive roots, and the cyclicity of $(\mathbb{Z}/p)^\times$.** Dropped from
+  NT-3 (order 26). The standard proof needs the bound on the number of roots of a
+  polynomial over a field, which is AA-11 at order 48; that would license it.
+  NT-3's B page keeps the negative half, that $(\mathbb{Z}/8)^\times$ is not
+  cyclic, which needs nothing.
+- **$\mathbb{Z}[\sqrt{-5}]$ as the failure of unique factorisation, at NT-2**
+  (order 24). It needs ring theory at order 42. **The Hilbert monoid
+  $\{1, 4, 7, 10, \dots\}$ replaces it** and is strictly better here: it needs
+  nothing but $\mathbb{N}$ and divisibility, and it isolates Euclid's lemma as
+  the load-bearing step. $\mathbb{Z}[\sqrt{-5}]$ is **not** dropped from the
+  library — it stays on AA-10's B page at order 47, where rings exist.
+- **"Every finite subgroup of the multiplicative group of a field is cyclic"**,
+  the natural capstone of the finite abelian classification at order 36. Needs
+  the polynomial root bound of AA-11, order 48; that would license it.
 - **Infinite-dimensional spectral theory, operator norms, Banach and Hilbert
   spaces.** Functional analysis. `deferred-functional-analysis` already exists.
 
@@ -292,19 +369,19 @@ general. AA-1 therefore mints `def-equivalence-relation` and
 `lem-equivalence-classes-partition`, which AA-2 (cosets partition $G$), AA-3
 ($G/N$) and AA-9 ($R/I$) all consume. (2) `Sym(X)` MOVES TO AA-1. AA-6 (order
 30) uses $G \to \operatorname{Sym}(X)$ and proves Cayley's theorem, but AA-7
-(order 32) is where the scaffold first defines $\operatorname{Sym}(X)$ — a
+(order 40) is where the scaffold first defines $\operatorname{Sym}(X)$ — a
 forward citation on the spine. `def-symmetric-group` and
 `lem-symmetric-group-is-a-group` are homed here instead; AA-7 keeps $S_n$,
 $|S_n| = n!$, cycle notation and the sign. It also supplies AA-1's own
 non-abelian witnesses, which the plane-geometry reading of the square cannot
-(order 94 metric material). (3) DIVISION WITH REMAINDER DOES NOT EXIST EITHER.
+(order 102 metric material). (3) DIVISION WITH REMAINDER DOES NOT EXIST EITHER.
 `thm-n-cross-n-countable` says so in as many words, and `ex-p-adic-ultrametric`
 says the library "has no divisibility theory at all". AA-1 mints
 `thm-division-algorithm-in-z` (stated for divisor $b > 0$, so no absolute value
 on $\mathbb{Z}$ is needed), because $|\langle g \rangle| = \operatorname{ord}(g)$
 is unprovable without it and AA-2's "the order of an element divides the order
 of the group" rests on that. NO gcd theory is minted here; AA-10 still owns it.
-(4) THE DIRECT PRODUCT LEAVES AA-1. AA-5 (order 28) already lists external and
+(4) THE DIRECT PRODUCT LEAVES AA-1. AA-5 (order 34) already lists external and
 internal direct products, so AA-1 listing "direct product of two groups" is a
 duplicate; the Klein four-group is built inside $\operatorname{Sym}(\{1,2,3,4\})$
 instead. (5) GENERALISED ASSOCIATIVITY is minted here
@@ -361,13 +438,153 @@ $\mathbb{Z}/n$ examples need the equivalence-class machinery already used by
 definition of an equivalence relation anywhere in the library to cite, so AA-1
 supplies one (audit note 1 above). The symmetries of the square are NOT
 available as plane isometries at this order: $\mathbb{R}^2$ with the Euclidean
-metric is order 94. Realise them as the eight vertex permutations, and say that
+metric is order 102. Realise them as the eight vertex permutations, and say that
 the identification with the rigid motions is not available at this point in the
 reading order — never that the library does not develop it.
 
-## AA-2. Cosets, Index and Lagrange's Theorem  (order 22)
+## NT-1. Divisibility, Greatest Common Divisors and Bézout's Identity  (order 22)
 
 `requires`: `monoids-groups-and-subgroups`
+
+**Divisibility** $d \mid a$ in $\mathbb{Z}$; reflexivity, transitivity, and
+linearity ($d \mid a$ and $d \mid b$ imply $d \mid ax + by$); the bound
+$d \mid a$ with $a \ne 0$ implies $|d| \le |a|$; the units of $\mathbb{Z}$ are
+exactly $\pm 1$; **associates**. **Common divisor**; **greatest common divisor**
+$\gcd(a,b)$ (well-definedness #26, below); **Bézout's identity**, that
+$\gcd(a,b)$ is the least positive element of $\{ax + by\}$, proved from
+`thm-well-ordering-principle` and `thm-division-algorithm-in-z`; the corollary
+that every common divisor **divides** the gcd, so the gcd is greatest in the
+divisibility order and not merely in the usual one; the **Euclidean algorithm**
+$\gcd(a,b) = \gcd(b, r)$ with termination by well-ordering, and its extended
+form producing Bézout coefficients; **coprime**, with the criterion
+$\gcd(a,b) = 1 \iff \exists x, y\ (ax + by = 1)$; $\gcd(ca, cb) = |c|\gcd(a,b)$
+and $\gcd(a/d, b/d) = 1$ for $d = \gcd(a,b)$; **lcm**, and
+$\gcd(a,b) \cdot \operatorname{lcm}(a,b) = |ab|$.
+
+**The seam that must be stated, not left implicit:** $a\mathbb{Z} + b\mathbb{Z} =
+\gcd(a,b)\mathbb{Z}$. AA-1 already has the subgroups of $\mathbb{Z}$, so this is
+the item that connects the arithmetic to the group theory, and it is the concrete
+shadow of "$\mathbb{Z}$ is a PID" at order 46. Without it the two developments
+sit side by side saying nothing to each other, which is the level-7 defect.
+
+B page: worked gcds and Bézout coefficients; Bézout coefficients are **not
+unique**; $\gcd$ with $0$; a pair with $d \mid ab$ but $d \nmid a$ and
+$d \nmid b$, which is exactly the gap Euclid's lemma closes at NT-2 and the
+reason primality is not a decoration; the Euclidean algorithm on consecutive
+Fibonacci numbers as its worst case (`thm-recursion` is published, so the
+sequence is definable).
+
+Traps. **$\gcd(0,0)$.** Every integer divides $0$, so "greatest common divisor"
+in the usual order has no meaning at $(0,0)$. Fix the convention $\gcd(0,0) = 0$
+(Wikipedia, and the tiebreaker rule in the convention memo), which is exactly the
+greatest element under **divisibility**, and say so where it is defined rather
+than leaving a hole. **Absolute value on $\mathbb{Z}$** is used throughout: check
+whether it is published (`def-int-order` is) and mint it here if not, rather than
+inlining a case split six times. $\mathbb{N}$ contains $0$, so every statement
+about divisors is checked at $0$ and at $1$ before it is written.
+
+## NT-2. Primes, Euclid's Lemma and the Fundamental Theorem of Arithmetic  (order 24)
+
+`requires`: `divisibility-gcd-and-bezout`
+
+**Prime** ($p > 1$ whose only positive divisors are $1$ and $p$) and
+**composite**; $1$ is neither, and the reason is the uniqueness half of the
+theorem below, which is worth stating where the convention is fixed rather than
+asserting it as taste. Every integer $> 1$ has a prime divisor; **Euclid's
+lemma**, $p \mid ab \Rightarrow p \mid a$ or $p \mid b$, from Bézout, with its
+extension to finite products by induction over `def-monoid-finite-product`;
+**Euclid's theorem**, that there are infinitely many primes; **the fundamental
+theorem of arithmetic**, existence by strong induction and uniqueness up to
+order; the **$p$-adic valuation** $v_p(n)$ with $v_p(ab) = v_p(a) + v_p(b)$;
+divisibility, $\gcd$ and $\operatorname{lcm}$ read off the exponents, with the
+**agreement item** proving that the exponent-wise $\gcd$ is NT-1's $\gcd$.
+
+**Stating uniqueness.** "Unique up to order" needs a quantifier, not a gesture.
+`def-symmetric-group` is published at order 20, so the honest statement is
+available directly: if $p_1 \cdots p_r = q_1 \cdots q_s$ with all factors prime
+then $r = s$ and there is a $\sigma \in \operatorname{Sym}(r)$ with
+$q_i = p_{\sigma(i)}$. Prefer this to a hand-wave, and give the finitely
+supported valuation form $n = \prod_p p^{v_p(n)}$ as the second face of it.
+
+B page: why the theorem fails if $1$ is called prime; $2$ is the only even prime;
+**the Hilbert monoid** $\{1, 4, 7, 10, \dots\}$, closed under multiplication,
+where $100 = 4 \cdot 25 = 10 \cdot 10$ has two factorisations into
+irreducibles — the counterexample that shows Euclid's lemma is doing the work and
+that existence alone is not the theorem; arbitrarily long prime gaps from
+$n! + 2, \dots, n! + n$; a false-statement item on $n^2 + n + 41$ being prime for
+every natural $n$ (true for $n < 40$, false at $n = 40$).
+
+Traps. The Hilbert monoid is chosen deliberately: the usual textbook
+counterexample is $\mathbb{Z}[\sqrt{-5}]$, which needs ring theory at order 42
+and is therefore **dropped by the self-contained-scope rule**, while
+$\{1, 4, 7, \dots\}$ needs nothing but $\mathbb{N}$ and divisibility. Check
+whether **strong induction** is published or must be minted here; ordinary
+induction is (`thm-induction-principle`). Check whether the irrationality of
+$\sqrt{2}$ exists anywhere — `ex-sqrt-two-exists` gives existence in $\mathbb{R}$,
+not irrationality — and if not, this page is its natural home, since it is a
+one-line consequence of unique factorisation.
+
+## NT-3. Congruences, the Integers Modulo n and the Chinese Remainder Theorem  (order 26)
+
+`requires`: `primes-and-the-fundamental-theorem-of-arithmetic`
+
+**Congruence** $a \equiv b \pmod n$, shown to be an equivalence relation by
+citing `def-equivalence-relation` and `lem-equivalence-classes-partition` rather
+than rebuilding them; the classes and the set $\mathbb{Z}/n$;
+$|\mathbb{Z}/n| = n$ for $n \ge 1$ from the division algorithm, with the $n = 0$
+and $n = 1$ cases stated rather than skipped; **addition and multiplication of
+classes, with representative-independence PROVED** (well-definedness #28 and #29
+— this is the owner's named obligation on quotient structures and the reason this
+page exists below AA-3 rather than above it); $(\mathbb{Z}/n, +)$ an abelian
+group; $(\mathbb{Z}/n, \cdot)$ a commutative monoid, so
+$(\mathbb{Z}/n)^\times$ is a group by `lem-monoid-units-form-a-group`; the **unit
+criterion** $\bar a \in (\mathbb{Z}/n)^\times \iff \gcd(a,n) = 1$, from Bézout;
+**Euler's totient** $\varphi(n) := |(\mathbb{Z}/n)^\times|$, with $\varphi(p) =
+p - 1$ and $\varphi(p^k) = p^k - p^{k-1}$; **linear congruences**, $ax \equiv b
+\pmod n$ solvable iff $\gcd(a,n) \mid b$, with exactly $\gcd(a,n)$ solutions mod
+$n$; **the Chinese remainder theorem** for pairwise coprime moduli, in both
+faces — a unique simultaneous solution mod $\prod n_i$, and the bijection
+$\mathbb{Z}/N \to \prod \mathbb{Z}/n_i$ preserving $+$ and $\cdot$; the corollary
+that $\varphi$ is multiplicative; **$\mathbb{Z}/p$ is a field**, which is legal
+here because `def-field` is published at order 9; **Wilson's theorem**.
+
+**Fermat and Euler are NOT on this page.** They are AA-2's corollaries of
+Lagrange at order 28, which is what D5 bought. This page supplies exactly the
+$(\mathbb{Z}/n)^\times$ and $\varphi$ that AA-2 needs, and its Remarks orient the
+reader forward **in plain prose with no wikilink** — AA-2's items are not planned
+yet, so a link would be `forward-dangling`.
+
+**The b-leaf blocker, and the agreement it forces.** The published
+`ex-integers-mod-n-additive-group` lives on `monoids-groups-and-subgroups-examples`,
+a **B page** at order 21, and B pages are leaves: nothing outside them may depend
+on them (`validate-plan`'s `b-leaf`). So this page **cannot cite it** and must
+build $(\mathbb{Z}/n, +)$ natively, then **record the agreement explicitly in the
+dictionary style of `def-metrizable-space`**. Silent re-definition here is the
+level-7 two-notions defect. The same obligation runs forward to AA-9 (order 44),
+where $\mathbb{Z}/n$ reappears as the quotient ring $\mathbb{Z}/(n)$ and must be
+identified with this one, not minted a third time.
+
+B page: a worked simultaneous system; **$\mathbb{Z}/n$ has zero divisors exactly
+when $n$ is composite**, statable here with no ring vocabulary at all (two
+nonzero classes with $\bar a \bar b = \bar 0$), which is why it lands here rather
+than waiting for order 44; CRT fails without coprimality ($x \equiv 1 \bmod 2$
+and $x \equiv 2 \bmod 4$); $(\mathbb{Z}/8)^\times$ is not cyclic, which is the
+honest edge of what this block proves; a false-statement item asserting
+$\bar a \bar b = \bar 0 \Rightarrow \bar a = \bar 0$ or $\bar b = \bar 0$.
+
+Traps. **The word "ring" is not available** until order 42, and nothing on this
+page may use it; every statement is about $\mathbb{Z}/n$ with two named
+operations. **Primitive roots and the cyclicity of $(\mathbb{Z}/p)^\times$ are
+DROPPED** with a recoverable note: the standard proof needs the bound on the
+number of roots of a polynomial over a field, which is AA-11 at order 48. The
+$(\mathbb{Z}/8)^\times$ example above is deliberately the *negative* half, which
+needs nothing. $n = 0$ and $n = 1$ are checked everywhere; $\mathbb{Z}/1$ is the
+one-element structure and is **not** a field, since `def-field` requires
+$0 \ne 1$.
+
+## AA-2. Cosets, Index and Lagrange's Theorem  (order 28)
+
+`requires`: `congruences-and-the-chinese-remainder-theorem`
 
 Left and right cosets; cosets partition the group (via the equivalence relation
 $a \sim b \iff a^{-1}b \in H$); every coset is equinumerous with $H$
@@ -376,20 +593,48 @@ element divides the order of the group; a group of prime order is cyclic;
 $g^{|G|} = e$; **Fermat's little theorem** and **Euler's theorem** as corollaries
 in $(\mathbb{Z}/n)^\times$.
 
+Those last two are **licensed as of D5** and were not before. NT-3 at order 26
+supplies $(\mathbb{Z}/n)^\times$, the unit criterion and $\varphi$, so both are
+now one line each from $g^{|G|} = e$: Euler is that identity in
+$(\mathbb{Z}/n)^\times$, and Fermat is Euler at $n = p$. Do not re-derive the
+arithmetic; cite NT-3.
+
 B page: cosets of $n\mathbb{Z}$ in $\mathbb{Z}$; a group with no subgroup of a
 given order dividing $|G|$ (so **the converse of Lagrange is false**: $A_4$ has no
 subgroup of order 6) as a false-statement item; left cosets that are not right
 cosets.
 
 Traps. Lagrange needs $G$ finite; the index is defined without finiteness and the
-statement must say which is which. $A_4$ requires $S_4$, which is only formally
-introduced at AA-7; either construct the twelve elements concretely here or move
-that counterexample to AA-7's B page. Prefer the latter. The coset partition
+statement must say which is which. $A_4$: the reason for deferring it recorded
+here originally — that $S_4$ arrives only at AA-7 — is **wrong as of level
+7-algebra**, which moved `def-symmetric-group` down to order 20, where it is now
+published. $S_4$, cycle notation and transpositions are all available at order
+28. What is still missing is $\operatorname{sgn}$, without which $A_4$ can only
+be given as an explicit twelve-element set whose closure is verified by hand,
+whereas AA-7 gets $A_4$ and $|A_n| = n!/2$ for free. So the conclusion stands and
+the reason changes: the counterexample lives on **AA-7's B page, order 41**, and
+that obligation is **firm, not advisory**, because nothing else in the library
+refutes the converse of Lagrange. Note the refutation argument itself needs
+nothing above this page: index $2$ forces every square into $H$, and the eight
+$3$-cycles are squares. The coset partition
 cites `def-equivalence-relation` and `lem-equivalence-classes-partition`,
 minted on AA-1 (batch-1 audit note 1); this page does not build its own
 equivalence-relation machinery.
 
-## AA-3. Normal Subgroups and Quotient Groups  (order 24)
+**The library has no finite cardinal arithmetic, and Lagrange cannot be proved
+without it.** Verified from disk 2026-07-27: nothing published says a subset of a
+finite set is finite, that a surjective image of a finite set is finite, or that
+$|A \sqcup B| = |A| + |B|$. `lem-subset-of-countable`, `lem-pigeonhole` and
+`thm-product-of-countable` are all about *at most countable*, which is a weaker
+statement and does not specialise for free. This page must mint the counting
+lemmas it needs — the sharper bounded-subset clause inside
+`lem-subset-of-countable`'s Statement and the canonical-min argument of
+`lem-countable-iff-surjection-from-n` license them with **no choice principle** —
+and AA-6, AA-7, AA-5b and LA-2 then reuse rather than re-mint. This is the defect
+class no dependency gate can see: `depsource` reports 0 unresolved for a scaffold
+that silently assumes arithmetic nobody declared.
+
+## AA-3. Normal Subgroups and Quotient Groups  (order 30)
 
 `requires`: `cosets-and-lagranges-theorem`
 
@@ -411,7 +656,7 @@ normality is necessary. The quotient set $G/N$ itself cites
 `def-equivalence-relation` and `lem-equivalence-classes-partition` from AA-1
 (batch-1 audit note 1), not machinery of its own.
 
-## AA-4. Group Homomorphisms and the Isomorphism Theorems  (order 26)
+## AA-4. Group Homomorphisms and the Isomorphism Theorems  (order 32)
 
 `requires`: `normal-subgroups-and-quotient-groups`
 
@@ -422,7 +667,7 @@ the second (diamond) isomorphism theorem; the third; the correspondence theorem;
 isomorphism; automorphism group; inner automorphisms; conjugation.
 
 B page: $\det$ is a homomorphism (**forward reference, orientation only**, since
-determinants are order 70 and this is 26); $\exp$ is not available yet, do not use
+determinants are order 78 and this is 26); $\exp$ is not available yet, do not use
 it; $\mathbb{Z} \to \mathbb{Z}/n$; a bijective homomorphism of monoids that is not
 a monoid isomorphism.
 
@@ -430,7 +675,7 @@ Traps. This is the page the owner named. The first isomorphism theorem must be
 proved, not asserted, and the well-definedness of the induced map
 $G/\ker f \to \operatorname{im} f$ is its own step.
 
-## AA-5. Cyclic Groups and Direct Products  (order 28)
+## AA-5. Cyclic Groups and Direct Products  (order 34)
 
 `requires`: `group-homomorphisms-and-the-isomorphism-theorems`
 
@@ -446,11 +691,65 @@ B page: $\mathbb{Z}/4 \not\cong \mathbb{Z}/2 \times \mathbb{Z}/2$, which is the
 counterexample showing the coprimality hypothesis is not decorative; the Klein
 four-group revisited; a non-cyclic group all of whose proper subgroups are cyclic.
 
-Traps. $\gcd$ is used here but the general theory arrives at AA-10. Use the
-concrete $\gcd$ on $\mathbb{Z}$ and cite `thm-well-ordering-principle`, or defer
-the arithmetic statements. Do not forward-reference AA-10 load-bearingly.
+Traps. **This page's $\gcd$ trap is DISCHARGED by D5 and the paragraph that
+recorded it is now history.** It read: "$\gcd$ is used here but the general theory
+arrives at AA-10. Use the concrete $\gcd$ on $\mathbb{Z}$ and cite
+`thm-well-ordering-principle`, or defer the arithmetic statements." Neither
+workaround is needed. $\gcd$, Bézout and the Euclidean algorithm are established
+at order 22, twelve pages below this one, so `ord`$(g^k) = n/\gcd(n,k)$ cites
+NT-1 directly. Likewise $\mathbb{Z}/mn \cong \mathbb{Z}/m \times \mathbb{Z}/n$
+is now the **group-theoretic face** of a theorem already proved arithmetically at
+NT-3, so it cites the CRT rather than re-deriving it, and says which face it is.
+The one live constraint remains: do not forward-reference AA-10 load-bearingly.
 
-## AA-6. Group Actions, Orbits, Stabilisers and Cayley's Theorem  (order 30)
+## AA-5b. The Fundamental Theorem of Finite Abelian Groups  (order 36)
+
+`requires`: `cyclic-groups-and-direct-products`
+
+Un-deferred by D7. Homed here, immediately above AA-5, because it is the
+classification that AA-5's cyclic groups and direct products exist to support,
+and because everything it needs sits below it: Lagrange (28), quotients (30),
+homomorphisms (32), cyclic groups and internal direct products (34), and the
+Chinese remainder theorem (26). **No Sylow theory is required** — that is the
+whole point of restricting to the abelian case, and it is why this page can
+precede the reserved band rather than wait inside it.
+
+**Primary decomposition**: for a finite abelian $G$, the $p$-primary component
+$G_p = \{g : \operatorname{ord}(g) = p^k \text{ for some } k\}$ is a subgroup, and
+$G$ is the internal direct product of the $G_p$ over the primes dividing $|G|$ —
+proved from coprime order arithmetic and Bézout, which is the group-theoretic
+shadow of CRT. **Decomposition of a finite abelian $p$-group** into cyclic
+factors, by induction on $|G|$: take $g$ of maximal order and show
+$\langle g \rangle$ has a complement. This complement lemma is **the one hard
+step on the page**, and it is exactly where textbook proofs wave; budget for it
+and do not let it become a thirty-second gap. **Invariant factor form**
+$G \cong \mathbb{Z}/d_1 \times \cdots \times \mathbb{Z}/d_k$ with
+$d_1 \mid d_2 \mid \cdots \mid d_k$, obtained from the primary form by CRT.
+**Uniqueness of both forms**, via an invariant that can actually be computed —
+the cardinalities $|G[p^k]|$ of the $p^k$-torsion subgroups — rather than an
+appeal to "clearly". Corollaries: the abelian groups of a given order, counted by
+partitions of the exponents in its factorisation; a finite abelian group is
+cyclic iff it has exactly one invariant factor.
+
+B page: $\mathbb{Z}/6 \cong \mathbb{Z}/2 \times \mathbb{Z}/3$ worked through both
+forms; the five abelian groups of order $16$, listed by the partitions of $4$;
+$\operatorname{Sym}(\{1,2,3\})$ as a group of order $6$ that is **not** a product
+of cyclic groups, so the abelian hypothesis is not decorative — chosen because
+`def-symmetric-group` is published at order 20 whereas $D_4$ and $Q_8$ are not
+available here; a false-statement item asserting that every finite group is a
+direct product of cyclic groups. **Do not restate**
+$\mathbb{Z}/4 \not\cong \mathbb{Z}/2 \times \mathbb{Z}/2$ — it is already AA-5's
+B page at order 35; cite it.
+
+Traps. **"Every finite subgroup of the multiplicative group of a field is
+cyclic" is DROPPED** with a recoverable note: it needs the bound on the number of
+roots of a polynomial over a field, which is AA-11 at order 48. It is the natural
+capstone of this page and it is genuinely out of reach here; record what would
+license it. Finiteness is essential everywhere and must be in every statement
+that uses it — $\mathbb{Q}$ under addition is abelian and is not a direct product
+of cyclic groups.
+
+## AA-6. Group Actions, Orbits, Stabilisers and Cayley's Theorem  (order 38)
 
 `requires`: `group-homomorphisms-and-the-isomorphism-theorems`
 
@@ -469,7 +768,7 @@ trivial stabiliser; an action that is not faithful.
 Traps. Orbit-stabiliser is a bijection between $G/G_x$ and the orbit, not a
 counting statement, and the counting form needs finiteness. State both.
 
-## AA-7. Symmetric Groups, Cycle Decomposition and the Sign Homomorphism  (order 32)
+## AA-7. Symmetric Groups, Cycle Decomposition and the Sign Homomorphism  (order 40)
 
 `requires`: `group-actions-and-cayleys-theorem`
 
@@ -494,7 +793,7 @@ moved here from AA-2); a permutation written as transpositions in two different
 ways with the same parity; $\operatorname{sgn}$ of an $n$-cycle is $(-1)^{n-1}$.
 
 Traps. The Vandermonde argument needs $\mathbb{Z}[x_1,\dots,x_n]$, a polynomial
-ring in several variables, and polynomial rings arrive at AA-11 (order 40) which
+ring in several variables, and polynomial rings arrive at AA-11 (order 48) which
 is **later**. Two legal routes, and step 1 must pick one and record it:
 (a) prove parity well-definedness by the inversion-counting argument alone, which
 needs only $\mathbb{N}$ arithmetic and no polynomial ring; or
@@ -502,12 +801,22 @@ needs only $\mathbb{N}$ arithmetic and no polynomial ring; or
 in $\mathbb{Z}$ rather than as a polynomial. Route (a) is recommended. Do **not**
 cite AA-11 from here.
 
-## AA-8. Rings, Subrings, Integral Domains and Fields  (order 34)
+## AA-8. Rings, Subrings, Integral Domains and Fields  (order 42)
 
 `requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`
 
-**Ring** (abelian group under $+$, monoid under $\cdot$, distributive); ring with
-identity; **commutative ring**; the elementary consequences $0 \cdot a = 0$,
+**Convention, fixed 2026-07-27 because this inventory contradicted itself.** It
+read "**Ring** (abelian group under $+$, monoid under $\cdot$, distributive); ring
+with identity" — but "monoid under $\cdot$" already forces an identity, which
+makes "ring with identity" redundant *and* makes the B-page item "$2\mathbb{Z}$
+is a subring without identity" **false**. The convention is now: **a ring has an
+identity** (Wikipedia and modern usage, per the convention tiebreaker rule), a
+ring without one is named a **non-unital ring** where it appears, and the
+$2\mathbb{Z}$ item flips from an example to a **counterexample showing the
+subring criterion's $1 \in S$ clause is not redundant**.
+
+**Ring** (abelian group under $+$, monoid under $\cdot$, distributive);
+**commutative ring**; the elementary consequences $0 \cdot a = 0$,
 $(-a)b = -(ab)$; **unit** and the group of units $R^\times$; **zero divisor**;
 **integral domain**; cancellation in a domain; **division ring**; the
 **bridges** `lem-field-is-a-commutative-ring` and
@@ -521,14 +830,35 @@ B page: the retro-instantiations `ex-integers-as-a-commutative-ring`,
 `ex-integers-are-an-integral-domain-not-a-field`, `ex-rationals-and-reals-as-fields`;
 $\mathbb{Z}/n$ has zero divisors exactly when $n$ is composite; **the quaternions
 $\mathbb{H}$**, a division ring that is not a field, kept because the determinant
-page needs it; $2\mathbb{Z}$ is a subring without identity; the zero ring and why
-$1 \ne 0$ is required of a field.
+page needs it; **$2\mathbb{Z}$ as a counterexample** (closed under $+$ and
+$\cdot$, but $1 \notin 2\mathbb{Z}$, so the identity clause of the subring
+criterion is doing work); the zero ring and why $1 \ne 0$ is required of a field.
+**$\mathbb{Z}/n$ has zero divisors exactly when $n$ is composite has MOVED** to
+NT-3's B page at order 27, where it is statable with no ring vocabulary at all.
 
 Traps. The published `def-field` is the definition; this page does not restate it,
 it connects to it. Getting this wrong reproduces the level-7 two-notions defect at
 the bottom of the library.
 
-## AA-9. Ideals, Quotient Rings and the Isomorphism Theorems for Rings  (order 36)
+**OPEN, and the owner's call — an ambiguity in the published `def-field` that
+becomes load-bearing exactly here.** `def-field` axiom (D) states only LEFT
+distributivity, $x(y+z) = xy + xz$, and axiom (M) grants associativity and
+commutativity of $\cdot$ as a gloss on "$(F \setminus \{0\}, \cdot)$ is an abelian
+group" — so the behaviour of $\cdot$ at $0$ is not clearly licensed. The published,
+audited `lem-of-zero-mult` (order 9) nonetheless cites `def-field` for the RIGHT
+form $(y+z)x = yx + zx$. That is the library's dominant defect class (citing an
+item for a claim it does not make), and `lem-field-is-a-commutative-ring` on this
+page is where it first bites. Verified from disk 2026-07-27: `def-field` has 64
+direct dependents, and `lem-of-zero-mult` is the only item using the right form.
+**No decision has been recorded and nothing has been changed.** The candidates
+are: amend (M)'s gloss to say $\cdot$ is associative and commutative on all of
+$F$ (retroactively licenses the published step; nothing downstream weakens);
+amend `lem-of-zero-mult` alone (left distributivity gives $a \cdot 0 = 0$ cleanly,
+but the lemma states $0 \cdot a = 0$, so this likely forces a statement change);
+or declare the intended reading in this page's bridge lemma only (touches no
+published item, leaves the mis-citation standing).
+
+## AA-9. Ideals, Quotient Rings and the Isomorphism Theorems for Rings  (order 44)
 
 `requires`: `rings-subrings-and-integral-domains`, `normal-subgroups-and-quotient-groups`
 
@@ -545,7 +875,7 @@ maximal ideal is prime; in a commutative ring with identity, maximal ideals exis
 B page: `ex-null-sequences-as-a-maximal-ideal` and
 **`ex-the-reals-as-a-quotient-by-a-maximal-ideal`**, the payoff item, citing
 `thm-cauchy-ring`, `lem-null-ideal`, `lem-null-maximal` and the new theorem, and
-observing that `thm-reals-field` proved by hand at order 7 what order 36 explains;
+observing that `thm-reals-field` proved by hand at order 7 what order 44 explains;
 $n\mathbb{Z}$ is maximal iff $n$ is prime; a prime ideal that is not maximal
 ($(x)$ in $\mathbb{Z}[x]$, so this item comes after AA-11 or uses $\{0\}$ in
 $\mathbb{Z}$); an ideal that is not a subring with identity.
@@ -556,21 +886,46 @@ set underlying $R/I$ cites `def-equivalence-relation` and
 `lem-equivalence-classes-partition` from AA-1 (batch-1 audit note 1), not
 machinery of its own.
 
-## AA-10. Divisibility, Euclidean Domains, PIDs and Unique Factorisation  (order 38)
+## AA-10. Divisibility, Euclidean Domains, PIDs and Unique Factorisation  (order 46)
 
-`requires`: `ideals-and-quotient-rings`
+`requires`: `ideals-and-quotient-rings` (which already reaches
+`primes-and-the-fundamental-theorem-of-arithmetic` transitively — declaring it
+directly is a `redundant-prereq` warning, so the agreement item below is licensed
+without a new edge)
 
 Divisibility in a domain; associates; **irreducible** and **prime** elements;
 prime implies irreducible; **Euclidean domain**; **principal ideal domain**;
 Euclidean implies PID; in a PID irreducible implies prime; **PID implies UFD**;
-gcd and lcm via ideals (well-definedness #6); **Bezout**; $\mathbb{Z}$ is
+gcd and lcm via ideals (well-definedness #6); **Bézout**; $\mathbb{Z}$ is
 Euclidean; **the fundamental theorem of arithmetic**; $\mathbb{Z}/p$ is a field
-iff $p$ is prime. **Seam obligation:** AA-1 already proves
-`thm-division-algorithm-in-z` and uses "$n$ divides $k$" concretely in
-`lem-order-characterisation`. AA-10 must state explicitly that its general
-divisibility in a domain restricts to that relation on $\mathbb{Z}$, and that
-"$\mathbb{Z}$ is Euclidean" is `thm-division-algorithm-in-z` and not a second
-proof of it. Silent re-definition is the level-7 two-notions-of-open defect.
+iff $p$ is prime.
+
+**Seam obligation, now much larger than it was.** This page is no longer the
+first home of any of these; the whole number theory block sits twenty-four pages
+below it, and every concrete statement here has a concrete ancestor. Three
+identifications must be **proved, not asserted**:
+
+1. General divisibility in a domain restricts on $\mathbb{Z}$ to NT-1's relation,
+   and to the "$n$ divides $k$" used concretely in AA-1's
+   `lem-order-characterisation`.
+2. "$\mathbb{Z}$ is Euclidean" **is** `thm-division-algorithm-in-z` and not a
+   second proof of it. The gcd-via-ideals of this page **is** NT-1's gcd, and
+   `Bézout` here **is** NT-1's Bézout — the concrete one is the instance, not a
+   rhyme.
+3. **The D6 agreement item, which is the reason this page keeps FTA at all.**
+   NT-2 (order 24) already proves the fundamental theorem of arithmetic for
+   $\mathbb{Z}$, elementarily. This page proves PID implies UFD by a genuinely
+   different argument. A dedicated item must prove that the two theorems are the
+   same theorem: that NT-2's "prime" ($p > 1$ with no positive divisors but $1$
+   and $p$) coincides with "irreducible in $\mathbb{Z}$" **and** with "prime
+   element of $\mathbb{Z}$", so that specialising PID implies UFD at
+   $R = \mathbb{Z}$ recovers NT-2's statement.
+
+The owner settled this shape explicitly (D6): both proofs stay, and the agreement
+is an **item with a proof**, never a sentence in Remarks. An unproved agreement
+claim is the exact shape of the level-7 two-notions-of-open defect, and asserting
+one here would be worse than at level 7, because here it would be asserting that
+two *proved* theorems coincide when nobody checked.
 
 B page: $\mathbb{Z}[\sqrt{-5}]$, where irreducible does not imply prime and
 factorisation is not unique, which is the counterexample that makes the whole page
@@ -580,7 +935,7 @@ Traps. $F[x]$ is the other headline example but polynomial rings are AA-11, one
 page **later**. This page instantiates with $\mathbb{Z}$ only; AA-11 instantiates
 with $F[x]$ and cites back. Do not forward-reference.
 
-## AA-11. Polynomial Rings, the Division Algorithm and Roots  (order 40)
+## AA-11. Polynomial Rings, the Division Algorithm and Roots  (order 48)
 
 `requires`: `euclidean-domains-pids-and-unique-factorisation`
 
@@ -604,7 +959,7 @@ Traps. The formal construction is the point: a polynomial is **not** a function.
 Over a finite field $x^p - x$ and $0$ are different polynomials with the same
 evaluation map, and that belongs on the B page.
 
-## AA-12. Simple Field Extensions and the Complex Numbers  (order 42)
+## AA-12. Simple Field Extensions and the Complex Numbers  (order 50)
 
 `requires`: `polynomial-rings-and-roots`
 
@@ -622,13 +977,13 @@ B page: $\mathbb{Q}(\sqrt 2)$, relating to the published
 compatible with its field structure, as a false-statement item; explicit square
 roots of $i$.
 
-Traps. **No degree here.** $[K:F]$ is a dimension and belongs at order 84. This
+Traps. **No degree here.** $[K:F]$ is a dimension and belongs at order 92. This
 page needs only "remainders of degree $< \deg p$", which is division-algorithm
 bookkeeping, not linear algebra. The square-root construction is what the
-fundamental theorem of algebra will need at order 117; make it explicit and
+fundamental theorem of algebra will need at order 125; make it explicit and
 unconditional.
 
-## AA-13. Splitting Fields and the Existence of Roots  (order 44)
+## AA-13. Splitting Fields and the Existence of Roots  (order 52)
 
 `requires`: `field-extensions-and-the-complex-numbers`
 
@@ -645,7 +1000,7 @@ routes.
 Traps. Uniqueness is the harder half and is what AA-14 and the fundamental theorem
 of algebra actually consume. Do not state it without proof.
 
-## AA-14. Symmetric Polynomials  (order 46)
+## AA-14. Symmetric Polynomials  (order 54)
 
 `requires`: `splitting-fields`
 
@@ -662,12 +1017,12 @@ non-symmetric polynomial; the discriminant of a quadratic as a symmetric functio
 of its roots.
 
 Traps. This page exists for one reason: it is what makes the fundamental theorem
-of algebra provable at order 117 without trigonometry. The corollary "a symmetric
+of algebra provable at order 125 without trigonometry. The corollary "a symmetric
 function of the roots lies in $F$" is the form that gets used; state it explicitly.
 
 ---
 
-## LA-1. Vector Spaces, Subspaces, Span and Direct Sums  (order 60)
+## LA-1. Vector Spaces, Subspaces, Span and Direct Sums  (order 68)
 
 `requires`: `monoids-groups-and-subgroups`, `foundations-of-the-real-numbers`
 
@@ -688,7 +1043,24 @@ Traps. The additive group of a vector space is an abelian group, so cite AA-1
 rather than re-deriving the additive laws. Do not assume finite dimension anywhere
 on this page.
 
-## LA-2. Linear Independence, Bases and Dimension  (order 62)
+**Name it "linear subspace", and decide this at step 1 because ids are
+immutable.** "Subspace" already means the topological notion in this library —
+`def-subspace-topology-top`, `thm-subspace-closure-and-interior`,
+`thm-complete-subspace-iff-closed` and `def-metrizable-space` are all published at
+order 104 and above. Prefer `def-linear-subspace`, `lem-linear-subspace-criterion`,
+`lem-intersection-of-linear-subspaces`, `def-sum-of-linear-subspaces`. The bare id
+`def-subspace` happens to be free today, which is precisely why it will be taken
+by whichever page reaches for it first.
+
+**Two B-page items are unbuildable here and are deferred, not deleted.**
+$F[x]$ and $F[x]_{\le n}$ need `polynomial-rings-and-roots` (order 48), and
+"$\mathbb{C}$ as a real vector space and as a complex one" needs
+`field-extensions-and-the-complex-numbers` (order 50) — both **above** this page.
+LA-2's B page (order 71) already plans $\{1, x, x^2, \dots\}$ as a basis and is
+the natural inheritor of the first; any page above order 50 can take the second.
+Drop them here with a note; the five remaining B-page items need none of it.
+
+## LA-2. Linear Independence, Bases and Dimension  (order 70)
 
 `requires`: `linear-independence-bases-and-dimension` prerequisites, namely
 `vector-spaces-and-subspaces` and `order-zorn-and-the-axiom-of-choice`
@@ -711,9 +1083,9 @@ self-contained-scope rule); an infinite independent set that spans nothing;
 a spanning set that is not a basis.
 
 Traps. The infinite-dimensional case needs cardinality, but **`def-cardinal` is
-homed on `ordinals-and-transfinite-recursion`, order 175, not on
+homed on `ordinals-and-transfinite-recursion`, order 183, not on
 `countability-and-uncountability`** — it is 113 pages LATER than LA-2 and cannot
-be cited. Available at order 62 are `def-equinumerous` ($A \approx B$,
+be cited. Available at order 70 are `def-equinumerous` ($A \approx B$,
 $A \preceq B$), `thm-schroder-bernstein`, `def-countable` and `lem-pigeonhole`.
 Step 1 for LA-2 must either state the infinite case as "any two bases are
 equinumerous" in the $\approx$ language of `def-equinumerous`, which is what the
@@ -721,7 +1093,7 @@ Steinitz/Zorn argument actually gives, or drop the infinite case. Do not cite
 `def-cardinal`. The finite case must not silently assume the space is finitely
 generated.
 
-## LA-3. Linear Transformations, Rank-Nullity and Quotient Spaces  (order 64)
+## LA-3. Linear Transformations, Rank-Nullity and Quotient Spaces  (order 72)
 
 `requires`: `linear-independence-bases-and-dimension`, `group-homomorphisms-and-the-isomorphism-theorems`
 
@@ -743,7 +1115,7 @@ subspace; a map preserving addition but not scaling.
 Traps. "Injective iff surjective" is **false** in infinite dimensions and the
 counterexample is required on the B page, not optional.
 
-## LA-4. Matrices, the Matrix of a Linear Map, and Change of Basis  (order 66)
+## LA-4. Matrices, the Matrix of a Linear Map, and Change of Basis  (order 74)
 
 `requires`: `linear-maps-rank-nullity-and-quotient-spaces`
 
@@ -768,7 +1140,7 @@ linear transformations.** It is carried by #14 plus the change of basis formula:
 a matrix represents a map only after ordered bases are chosen, and the same map
 has many matrices. Make it a numbered item with an explicit example, not a remark.
 
-## LA-5. Gaussian Elimination, Elementary Matrices and RREF  (order 68)
+## LA-5. Gaussian Elimination, Elementary Matrices and RREF  (order 76)
 
 `requires`: `matrices-and-the-matrix-of-a-linear-map`
 
@@ -799,7 +1171,7 @@ Traps. The article presents the algorithm first and rank-nullity as a later
 LA-2 and LA-3, and this page justifies the algorithm using them. Uniqueness of the
 RREF is the item most often skipped and it is what licenses the definite article.
 
-## LA-6. Determinants of Matrices over a Commutative Ring  (order 70)
+## LA-6. Determinants of Matrices over a Commutative Ring  (order 78)
 
 `requires`: `matrices-and-the-matrix-of-a-linear-map`, `symmetric-groups-and-the-sign-homomorphism`, `rings-subrings-and-integral-domains`
 
@@ -834,7 +1206,7 @@ reordered); the proof must say so rather than reorder silently. **The signed-vol
 interpretation is DROPPED** (see Scope denials): it is stated via Lebesgue measure
 and orientation via path components of $GL_n(\mathbb{R})$, both out of scope.
 
-## LA-7. The Determinant of a Linear Operator, Cofactors and Cramer  (order 72)
+## LA-7. The Determinant of a Linear Operator, Cofactors and Cramer  (order 80)
 
 `requires`: `determinants-of-matrices-over-a-commutative-ring`, `gaussian-elimination-and-row-reduction`
 
@@ -857,7 +1229,7 @@ Traps. The off-diagonal entries of $A \cdot \operatorname{adj}(A)$ vanish becaus
 they are determinants of matrices with a repeated column; that is where
 *alternating* is used and it must be cited, not asserted.
 
-## LA-8. Eigenvalues, Eigenvectors and the Characteristic Polynomial  (order 74)
+## LA-8. Eigenvalues, Eigenvectors and the Characteristic Polynomial  (order 82)
 
 `requires`: `the-determinant-of-a-linear-operator`, `polynomial-rings-and-roots`
 
@@ -875,17 +1247,17 @@ $n$ distinct eigenvalues.
 
 B page: a real matrix with no real eigenvalue (rotation by $90°$), which is the
 item showing that existence needs an algebraically closed field and motivates
-order 117; the same matrix over $\mathbb{C}$; geometric $<$ algebraic for a
+order 125; the same matrix over $\mathbb{C}$; geometric $<$ algebraic for a
 Jordan block; a matrix with a repeated eigenvalue that is still diagonalisable.
 
 Traps. **Do not assert that every operator has an eigenvalue.** Over a general
 field it is false and over $\mathbb{C}$ it needs the fundamental theorem of
-algebra, which is order 117. Every statement here is either field-general or
+algebra, which is order 125. Every statement here is either field-general or
 conditional on $\chi$ having a root in $F$. This is the self-contained-scope rule
 biting, and it is the single most likely place for a false Statement in this
 track.
 
-## LA-9. Diagonalisation, the Minimal Polynomial and Cayley-Hamilton  (order 76)
+## LA-9. Diagonalisation, the Minimal Polynomial and Cayley-Hamilton  (order 84)
 
 `requires`: `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, `euclidean-domains-pids-and-unique-factorisation`
 
@@ -907,7 +1279,7 @@ Traps. The adjugate proof of Cayley-Hamilton works over $F[x]$ and is the clean
 one available here; the "substitute $x = A$ into $\det(xI - A)$" argument is the
 classical fallacy and belongs on the B page as a false statement.
 
-## LA-10. Triangularisation, Generalised Eigenspaces and Jordan Form  (order 78)
+## LA-10. Triangularisation, Generalised Eigenspaces and Jordan Form  (order 86)
 
 `requires`: `diagonalisation-and-the-minimal-polynomial`
 
@@ -927,10 +1299,10 @@ justifying the block-count invariants; a matrix with no Jordan form over
 $\mathbb{R}$.
 
 Traps. Every statement here carries the hypothesis "$\chi_T$ splits over $F$".
-Do not silently work over $\mathbb{C}$; order 117 is what removes the hypothesis
+Do not silently work over $\mathbb{C}$; order 125 is what removes the hypothesis
 and it is later.
 
-## LA-11. Dual Spaces, Bilinear and Quadratic Forms, Inertia  (order 80)
+## LA-11. Dual Spaces, Bilinear and Quadratic Forms, Inertia  (order 88)
 
 `requires`: `the-determinant-of-a-linear-operator`
 
@@ -956,7 +1328,7 @@ them is a standard error; the B page carries the separating example. The minors
 criterion is what keeps the multivariable second-derivative test independent of
 the spectral theorem, so it must be proved here and not deferred.
 
-## LA-12. Inner Product Spaces, Gram-Schmidt, Projections and Adjoints  (order 82)
+## LA-12. Inner Product Spaces, Gram-Schmidt, Projections and Adjoints  (order 90)
 
 `requires`: `dual-spaces-bilinear-forms-and-inertia`, `roots-and-rational-powers`, `field-extensions-and-the-complex-numbers`
 
@@ -975,8 +1347,8 @@ functional in finite dimensions; **the adjoint $T^*$**, existence and uniqueness
 $\|Tv\| = \|v\|$ characterises the unitary ones.
 
 **Required dictionary item.** A `rem-` relating this page's Cauchy-Schwarz to the
-published `thm-cauchy-schwarz-finite` (order 94) and this page's standard inner
-product on $\mathbb{R}^n$ to `lem-metrics-on-rn` (order 94). Those are **later**,
+published `thm-cauchy-schwarz-finite` (order 102) and this page's standard inner
+product on $\mathbb{R}^n$ to `lem-metrics-on-rn` (order 102). Those are **later**,
 so the ids go in `forward_refs` and the wikilinks appear **only in `## Remarks`**.
 See "The unbridgeable seam" above. This is not optional.
 
@@ -993,12 +1365,12 @@ lives in functional analysis, so state the hypothesis and do not chase the witne
 
 ---
 
-## AA-15. Algebraic Extensions, Degree, and Finite Fields  (order 84)
+## AA-15. Algebraic Extensions, Degree, and Finite Fields  (order 92)
 
 `requires`: `splitting-fields`, `linear-independence-bases-and-dimension`
 
 **This page sits above linear algebra because $[K:F]$ is a dimension.** It was
-originally scaffolded at order 48 and moved for exactly that reason.
+originally scaffolded at order 56 and moved for exactly that reason.
 
 $K$ as an $F$-vector space; **the degree $[K:F]$** (well-definedness #25);
 finite extensions; **the tower law** $[L:F] = [L:K][K:F]$; algebraic and
@@ -1018,16 +1390,16 @@ counterexample most worth having; $\pi$ is transcendental is **not** claimed
 
 ## The carve-out: the two pages that need analysis
 
-## X-1. The Fundamental Theorem of Algebra  (order 117, category abstract-algebra)
+## X-1. The Fundamental Theorem of Algebra  (order 125, category abstract-algebra)
 
 `requires`: `symmetric-polynomials`, `continuity-ivt-evt-and-uniform-continuity`
 
-Placed immediately above `continuity-ivt-evt-and-uniform-continuity` (order 115),
+Placed immediately above `continuity-ivt-evt-and-uniform-continuity` (order 123),
 which is the lowest point at which it is provable.
 
 The **algebraic** proof, which needs no trigonometry:
 1. every real polynomial of **odd** degree has a real root, by the intermediate
-   value theorem (order 115);
+   value theorem (order 123);
 2. every complex number has a **square root**, by the explicit formula at AA-12;
 3. induction on the $2$-adic valuation of $\deg f$, using a splitting field
    (AA-13) and the fundamental theorem of symmetric polynomials (AA-14) to show
@@ -1041,17 +1413,17 @@ the false statement that the theorem holds over $\mathbb{Q}$.
 
 Traps. The analytic minimum-modulus proof is **not** available here: its descent
 step needs a $k$-th root of a complex number, which without polar form needs
-trigonometry (order 172). If a subagent proposes it, that is the error to catch.
+trigonometry (order 180). If a subagent proposes it, that is the error to catch.
 Step 1 must confirm the symmetric-polynomial route is fully discharged by AA-13
 and AA-14, and if it is not, the missing lemma is added there, not forward-cited
 from here.
 
-## X-2. The Spectral Theorem, Positive Operators and SVD  (order 119, category linear-algebra)
+## X-2. The Spectral Theorem, Positive Operators and SVD  (order 127, category linear-algebra)
 
 `requires`: `the-fundamental-theorem-of-algebra`, `inner-product-spaces-and-orthogonality`, `triangularisation-and-jordan-canonical-form`
 
 **Every operator on a nonzero finite-dimensional complex space has an
-eigenvalue** (this is what order 117 buys, and it is the statement LA-8 was
+eigenvalue** (this is what order 125 buys, and it is the statement LA-8 was
 forbidden to make); **Schur triangularisation** over $\mathbb{C}$ with an
 orthonormal basis; **the spectral theorem for normal operators** on a complex
 space; **the spectral theorem for real symmetric operators**, with all
@@ -1082,14 +1454,19 @@ Recorded here so it is not rediscovered:
    the Vandermonde polynomial needs a multivariable polynomial ring that arrives
    later).
 2. **AA-2 / AA-7**: where the $A_4$ counterexample to the converse of Lagrange
-   lives (AA-7's B page recommended, since $S_4$ is only available there).
-3. **AA-5**: whether the coprime CRT statement can use $\gcd$ before AA-10.
-   DECIDED for AA-1 (2026-07-27): the $\mathbb{Z}/n$ examples on AA-1's B page
-   need NO gcd. $(\mathbb{Z}/n,+)$ needs only the congruence equivalence
-   relation and `thm-division-algorithm-in-z` for $|\mathbb{Z}/n| = n$. gcd
-   enters only at $(\mathbb{Z}/n)^\times$ (AA-2's Euler theorem) and at
-   $\operatorname{ord}(g^k) = n/\gcd(n,k)$ (AA-5), so the question is genuinely
-   AA-5's and AA-2's, not AA-1's.
+   lives. **DECIDED 2026-07-27: AA-7's B page, order 41, and the obligation is
+   FIRM.** The original reason recorded here — "since $S_4$ is only available
+   there" — is false: `def-symmetric-group` was moved down to order 20 by level
+   7-algebra and is published. The surviving reason is $\operatorname{sgn}$; see
+   AA-2's Traps.
+3. ~~**AA-5**: whether the coprime CRT statement can use $\gcd$ before
+   AA-10.~~ **CLOSED by D5, 2026-07-27.** The question no longer exists: $\gcd$,
+   Bézout and the Euclidean algorithm are established at order 22 and the CRT at
+   order 26, all below AA-2 (28) and AA-5 (34). Both workarounds recorded here —
+   "use the concrete $\gcd$ and cite `thm-well-ordering-principle`" and "defer the
+   arithmetic statements" — are obsolete. Kept visible rather than deleted,
+   because the *shape* of this question recurs every time the track reaches for
+   arithmetic it has not built.
 4. **AA-9 / AA-11**: whether the prime-not-maximal example uses $(x) \subset \mathbb{Z}[x]$
    (needs AA-11, later) or $\{0\} \subset \mathbb{Z}$ (available).
 5. **LA-2**: the exact cardinality apparatus for the infinite-dimensional
@@ -1098,3 +1475,25 @@ Recorded here so it is not rediscovered:
    $\mu$ that are not similar.
 7. **X-1**: confirmation that AA-13 and AA-14 fully discharge the symmetric
    polynomial route, before any authoring begins.
+8. **NT-1**: whether **absolute value on $\mathbb{Z}$** is already published.
+   `def-int-order` is; $|\cdot|$ may not be, and it is used throughout NT-1 and
+   NT-2. Mint it here if missing rather than inlining a case split repeatedly.
+9. **NT-2**: whether **strong induction** is published or must be minted.
+   `thm-induction-principle` is published; the strong form is what the existence
+   half of the fundamental theorem of arithmetic actually uses. Related: whether
+   the **irrationality of $\sqrt{2}$** exists anywhere — `ex-sqrt-two-exists`
+   gives existence in $\mathbb{R}$, not irrationality — since NT-2 is its natural
+   home and it is one line from unique factorisation.
+10. **NT-1**: the $\gcd(0,0)$ convention. Recommended $\gcd(0,0) = 0$, which is
+    the greatest common divisor in the **divisibility** order and agrees with
+    Wikipedia, per the convention tiebreaker rule. Whichever is chosen must be
+    stated where $\gcd$ is defined, not left as a hole.
+11. **NT-3 / AA-9**: the $\mathbb{Z}/n$ agreement chain. NT-3 must build
+    $(\mathbb{Z}/n,+)$ natively — it **cannot** cite the published
+    `ex-integers-mod-n-additive-group`, which is on a B page at order 21 and so
+    is a leaf — and must record the agreement explicitly. AA-9 (order 44) then
+    identifies its quotient ring $\mathbb{Z}/(n)$ with NT-3's object rather than
+    minting a third. Two agreements, both proved, neither asserted.
+12. **AA-5b**: the complement lemma in the decomposition of a finite abelian
+    $p$-group is the hard step of that page. Decide its route at step 1 rather
+    than discovering at step 5 that the textbook proof waves at it.
