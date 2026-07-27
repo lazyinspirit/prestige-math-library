@@ -1,9 +1,14 @@
 # The per-level build, step 0 to 10 — canonical
 
 The owner builds this library **one A-page dependency level at a time**. This
-file is the single description of that process. `SCHEMA.md` and `CLAUDE.md` win
+file is the single description of that process — *what happens in what order*.
+**`ARCHITECTURE.md` is its companion**: what each mechanism IS, how it works,
+and which failure it was built to prevent. `SCHEMA.md` and `CLAUDE.md` win
 where they differ; `WORKFLOW.md` is the older per-page runbook and remains true
 of a single page's journey.
+
+All four normative docs are updated **in the same commit as the change they
+describe** (owner, 2026-07-27).
 
 Everything below is verified against the code as of 2026-07-27.
 
