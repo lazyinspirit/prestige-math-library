@@ -1,0 +1,2110 @@
+[
+  {
+    "order": 20,
+    "id": "finite-counting-and-binomial-coefficients",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Finite Counting, Factorials and Binomial Coefficients",
+    "companion": "finite-counting-and-binomial-coefficients-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "roots-and-rational-powers"
+    ],
+    "items": [
+      {
+        "id": "def-finite-cardinality",
+        "kind": "definition",
+        "title": "The cardinality $\\lvert A\\rvert$ of a finite set",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #1 of the scaffold, and the foundation of the whole page: discharge it INSIDE this item, in the style of [[def-darboux-integral]]. For a finite set $A$ ([[def-countable]]) there is at least one $n \\in \\mathbb{N}$ with $A \\approx n$ ([[def-equinumerous]]) -- that IS the definition of finite -- and at most one, by claim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number. Prove the three consequences everything below uses, here and not later: (a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$, since $\\mathrm{id}_n$ is a bijection; (b) $\\lvert\\varnothing\\rvert = 0$ and $\\lvert A\\rvert = 0$ iff $A = \\varnothing$, since $0 = \\varnothing$ ([[def-natural-numbers]]); (c) TRANSPORT: if $A$ is finite and $f : A \\to B$ is a bijection then $B$ is finite with $\\lvert B\\rvert = \\lvert A\\rvert$, by transitivity of $\\approx$. INDEX WARNING: $\\mathbb{N}$ contains $0$ here, so a set with one element has cardinality $1 = \\{0\\}$ and $\\lvert A\\rvert$ is never a positive-integer-only object. DO NOT say 'cardinal number': [[def-cardinal]] is a different, later object (order 243) and no cardinal arithmetic is used or implied anywhere on this page. Say instead that $\\lvert A\\rvert$ is defined ONLY for finite $A$ and is a natural number. LANDMARK.",
+        "deps": [
+          "def-countable",
+          "lem-pigeonhole",
+          "def-equinumerous",
+          "def-injection-surjection-bijection",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "thm-subset-of-a-finite-set",
+        "kind": "theorem",
+        "title": "A subset of a finite set is finite, with $\\lvert B\\rvert \\le \\lvert A\\rvert$, and equality holds if and only if $B = A$",
+        "strategy": "induction on $\\lvert A\\rvert$. THE WORKHORSE of the page: state it in four clauses so that later items cite a clause rather than reprove it. (1) $B \\subseteq A$ finite implies $B$ finite; (2) $\\lvert B\\rvert \\le \\lvert A\\rvert$; (3) $\\lvert B\\rvert = \\lvert A\\rvert$ iff $B = A$ (the finite Dedekind statement); (4) every injection of a finite set into itself is a bijection, and every surjection of a finite set onto itself is an injection. Clause 3 is where [[lem-pigeonhole]] claim 5 is spent, clause 2 where claim 2 is. Prove (1) by induction on $n = \\lvert A\\rvert$ using $\\sigma(n) = n \\cup \\{n\\}$ and splitting on whether the removed point lies in $B$; the argument is the same shape as the inductive step of [[lem-finite-subsets-listable]], which is available and may be cited for the presented-as-a-list form but does NOT prove this statement (it is about subsets of $\\mathbb{R}$ presented as $\\{a_0,\\dots,a_n\\}$ -- read it before citing it). Clause 4 is the finite half of the false statement on the companion page; the witness there is $\\sigma : \\mathbb{N} \\to \\mathbb{N}$, and the point is that finiteness is the hypothesis. LANDMARK.",
+        "deps": [
+          "def-finite-cardinality",
+          "lem-pigeonhole",
+          "def-countable",
+          "def-equinumerous",
+          "def-injection-surjection-bijection",
+          "lem-finite-subsets-listable",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "lem-nat-nonzero-is-successor",
+          "lem-nat-trichotomy",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "def-nat-finite-sum-and-product",
+        "kind": "definition",
+        "title": "Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$",
+        "strategy": "MINTED HERE, AND THE REASON IS A REAL GAP FOUND ON DISK. [[def-finite-sum]] (order 16, published) defines finite sums and products of REALS only, and [[def-monoid-finite-product]] is homed on `monoids-groups-and-subgroups` at order 24, ABOVE this page, so neither is available for a sum of natural numbers. Every count on this page is a natural number, so the sum rule, the row sums of Pascal's triangle, the multinomial condition $\\sum k_i = n$ and stars and bars all need a $\\mathbb{N}$-valued finite sum. Construct it exactly as [[def-finite-sum]] does: apply [[thm-recursion]] to $A = \\mathbb{N} \\times \\mathbb{N}$, starting element $(0,0)$ and $f(k,s) = (\\sigma(k), s + a_k)$, prove by induction ([[thm-induction-principle]]) that the first coordinate is the index, then read off $\\sum_{k<0} a_k = 0$ and $\\sum_{k<\\sigma(n)} a_k = \\sum_{k<n} a_k + a_n$, with the same uniqueness argument; and identically with $(0,1)$ and $f(k,p) = (\\sigma(k), p \\cdot a_k)$ for $\\prod$. THE EMPTY SUM IS $0$ AND THE EMPTY PRODUCT IS $1$, fixed here by the base clause and not by any imported convention. Remarks: record, as an ORIENTATION-ONLY forward reference (SCHEMA 3, allowed in Remarks even on a definition), that [[def-monoid-finite-product]] carries out this same recursion in an arbitrary monoid at order 24 and that $(\\mathbb{N},+,0)$ and $(\\mathbb{N},\\cdot,1)$ are instances of it; the agreement is the recursion clauses, which are identical. That remark is what stops this being a second unrelated notion.",
+        "deps": [
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "def-nat-addition",
+          "def-nat-multiplication",
+          "lem-nat-add-identity",
+          "lem-nat-mult-identity",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+        "kind": "lemma",
+        "title": "Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$",
+        "strategy": "induction, one clause at a time, mirroring [[lem-finite-sum-laws]] so the two read alike. Clauses: additivity $\\sum_{k<n}(a_k+b_k) = \\sum a_k + \\sum b_k$; splitting at $m \\le n$; monotonicity ($a_k \\le b_k$ for $k<n$ implies $\\sum a_k \\le \\sum b_k$, and each term is at most the sum); $\\sum_{k<n} c = n \\cdot c$; the product clauses. THEN THE BRIDGE, which is the point of the item: $\\iota\\big(\\sum^{\\mathbb{N}}_{k<n} a_k\\big) = \\sum^{\\mathbb{R}}_{k<n} \\iota(a_k)$ and $\\iota\\big(\\prod^{\\mathbb{N}}_{k<n} a_k\\big) = \\prod^{\\mathbb{R}}_{k<n} \\iota(a_k)$, both by induction from $\\iota(0)=0$, $\\iota(1)=1$ and the additivity/multiplicativity of $\\iota$ ([[def-canonical-natural]], [[lem-of-naturals-positive]]). CHECK THE INDEX RANGE OF THE CITED LEMMA: [[lem-of-naturals-positive]] states $(m+n)\\cdot 1_F = m\\cdot 1_F + n\\cdot 1_F$ and $(mn)\\cdot 1_F = (m\\cdot 1_F)(n\\cdot 1_F)$ for $m,n \\ge 1$ only; the cases where a factor is $0$ are separate one-line checks from $\\iota(0)=0$ and [[lem-of-zero-mult]], and must be done, not assumed. Also record that $\\iota$ is injective and strictly increasing on $\\mathbb{N}$, so an identity between natural numbers may be proved by proving it between their canonical naturals -- the licence every real-valued identity on this page uses to come back to $\\mathbb{N}$.",
+        "deps": [
+          "def-nat-finite-sum-and-product",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-of-zero-mult",
+          "thm-induction-principle",
+          "lem-nat-add-associative",
+          "lem-nat-add-commutative",
+          "lem-nat-mult-associative",
+          "lem-nat-mult-commutative",
+          "lem-nat-mult-distributive",
+          "lem-nat-order-add-compatible",
+          "lem-nat-order-mult-compatible",
+          "def-nat-order",
+          "lem-of-q-embeds"
+        ]
+      },
+      {
+        "id": "lem-finite-sum-permutation-invariance",
+        "kind": "lemma",
+        "title": "A finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$",
+        "strategy": "induction on $n$, for a list $a : n \\to \\mathbb{R}$ and, in the same proof, for $a : n \\to \\mathbb{N}$ (state both; the argument is identical because both use only associativity, commutativity and the recursion clause). This is the ONLY new mathematical content behind well-definedness obligation #5, and it must exist as its own numbered item because the next item is a DEFINITION that cites it -- it is a prerequisite of that definition, not a discharge of it, so it goes in that definition's `deps` and NOT in `justified_by` (SCHEMA 3: a `justified_by` target must depend on the definition, and this lemma does not). Proof: at $n=0$ both sides are the empty sum. At $\\sigma(n)$, let $j := \\pi^{-1}(n)$; split the sum at $j$ using the splitting clause of [[lem-finite-sum-laws]], move the single term $a_n$ to the end by repeated commutativity, and apply the inductive hypothesis to the bijection $n \\to n$ obtained by deleting $j$ from the domain and $n$ from the codomain. Write that deletion map down explicitly ($k \\mapsto \\pi(k)$ for $k<j$, $k \\mapsto \\pi(k+1)$ for $j \\le k < n$) and check it is a bijection; the usual proofs wave at this step and it is where an error would hide. Also state the immediate corollary in the form actually used below: for a bijection $\\varphi : m \\to n$ ... no, keep the statement to $n \\to n$ and let the next item do the transport.",
+        "deps": [
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-injection-surjection-bijection",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "lem-nat-nonzero-is-successor"
+        ]
+      },
+      {
+        "id": "def-sum-over-a-finite-index-set",
+        "kind": "definition",
+        "title": "The sum $\\sum_{i \\in S} a_i$ over a finite index set, and its product form",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #5, and TRAP (iv) of the scaffold: this is a DIFFERENT object from [[def-finite-sum]]'s sum over an initial segment, and the bridge is mandatory. Let $S$ be a finite set with $\\lvert S\\rvert = n$ ([[def-finite-cardinality]]) and $a : S \\to \\mathbb{R}$ (or $a : S \\to \\mathbb{N}$). Choose a bijection $\\varphi : n \\to S$ and set $\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}$. INDEPENDENCE OF THE CHOICE is the content: two bijections $\\varphi, \\psi : n \\to S$ differ by the permutation $\\pi = \\varphi^{-1} \\circ \\psi$ of $n$, so [[lem-finite-sum-permutation-invariance]] gives the same value. There is no choice principle here: the definition quantifies over all enumerations and the lemma says they agree; nothing is selected. THE BRIDGE CLAUSE, stated explicitly so the library never holds two unrelated notions of finite sum: for $S = n$ and $\\varphi = \\mathrm{id}$, $\\sum_{i \\in n} a_i = \\sum_{k<n} a_k$, so the new notation extends the old one and every law of [[lem-finite-sum-laws]] transfers. Record the laws actually used later -- additivity over a disjoint union $\\sum_{i \\in S \\sqcup T} = \\sum_{i \\in S} + \\sum_{i \\in T}$, and reindexing along a bijection $S \\to T$ -- as clauses proved here from the same lemma. NOTATION: also fix $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$.",
+        "deps": [
+          "lem-finite-sum-permutation-invariance",
+          "def-finite-cardinality",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "thm-subset-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "thm-sum-rule",
+        "kind": "theorem",
+        "title": "The sum rule: a finite disjoint union is finite with $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$, and $\\lvert\\bigcup_{i \\in I} A_i\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$ for a finite partition",
+        "strategy": "direct for the two-set case, then induction on $\\lvert I\\rvert$ for the partition case. Two-set case: bijections $f : \\lvert A\\rvert \\to A$ and $g : \\lvert B\\rvert \\to B$ splice to $h : \\lvert A\\rvert + \\lvert B\\rvert \\to A \\cup B$ by $h(k) = f(k)$ for $k < \\lvert A\\rvert$ and $h(k) = g(k - \\lvert A\\rvert)$ otherwise; injectivity is exactly where DISJOINTNESS is spent, and the companion page's false statement is the witness for dropping it. Subtraction of naturals is legitimate here because $k \\ge \\lvert A\\rvert$ gives a unique $j$ with $\\lvert A\\rvert + j = k$ ([[def-nat-order]], [[lem-nat-add-cancellative]]) -- say so rather than writing $k - \\lvert A\\rvert$ silently. Partition case: $I$ finite, the $A_i$ pairwise disjoint, each finite; the sum is the one of [[def-sum-over-a-finite-index-set]], which is why that item precedes this one. State the CONTRAPOSITIVE-SHAPED consequence used constantly below: if $A$ is partitioned into blocks then counting the blocks and counting $A$ are the same computation. LANDMARK.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-sum-over-a-finite-index-set",
+          "thm-subset-of-a-finite-set",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-nat-addition",
+          "def-nat-order",
+          "lem-nat-add-cancellative",
+          "lem-nat-order-add-compatible",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-product-rule",
+        "kind": "theorem",
+        "title": "The product rule: $\\lvert A \\times B\\rvert = \\lvert A\\rvert\\,\\lvert B\\rvert$, and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$",
+        "strategy": "direct, by exhibiting a bijection, then induction for the iterate. For the two-factor case do NOT appeal to 'obvious' pairing: the map $\\lvert A\\rvert \\times \\lvert B\\rvert \\to \\lvert A\\rvert \\cdot \\lvert B\\rvert$, $(p,q) \\mapsto p\\cdot\\lvert B\\rvert + q$, is a bijection, and proving it is exactly division with remainder inside $\\mathbb{N}$; prove it from [[lem-nat-discrete]], [[lem-nat-add-cancellative]] and [[lem-nat-order-mult-compatible]] rather than citing a division algorithm, which lives at order 26, ABOVE this page. Alternatively prove the two-factor case by induction on $\\lvert B\\rvert$ using [[thm-sum-rule]] on the slices $A \\times \\{b\\}$, which needs no arithmetic at all and is the recommended route. The iterate is over a finite product of sets indexed by $m \\in \\mathbb{N}$; the product on the right is the $\\mathbb{N}$-valued finite product of [[def-nat-finite-sum-and-product]]. The infinite analogue is FALSE in the shape a reader expects, and the companion page carries that false statement with [[thm-n-cross-n-countable]] as the witness.",
+        "deps": [
+          "def-finite-cardinality",
+          "thm-sum-rule",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-sum-over-a-finite-index-set",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-nat-multiplication",
+          "lem-nat-mult-distributive",
+          "lem-nat-discrete",
+          "lem-nat-add-cancellative",
+          "lem-nat-order-mult-compatible",
+          "thm-induction-principle",
+          "thm-subset-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "def-nat-power",
+        "kind": "definition",
+        "title": "Exponentiation of natural numbers, $m^{n}$, and its agreement with the integer power in $\\mathbb{R}$",
+        "strategy": "MINTED HERE FOR THE SAME REASON AS THE NATURAL FINITE SUM, and the scaffold's instruction to state $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$ 'citing `def-integer-power`' cannot be followed literally: [[def-integer-power]] gives $a^{n}$ for a REAL base $a$, so its value is a real, while $\\lvert A^{B}\\rvert$ is a natural. Define $m^{0} := 1$, $m^{\\sigma(n)} := m^{n}\\cdot m$ by [[thm-recursion]] inside $\\mathbb{N}$. Prove the laws needed below ($m^{p+q} = m^p m^q$, $(mp)^q = m^q p^q$, monotonicity in the base and, for $m \\ge 1$, in the exponent) by induction, and prove the BRIDGE $\\iota(m^{n}) = \\iota(m)^{n}$, so every natural-number power on this page can be read in $\\mathbb{R}$ when needed. Adopt $0^{0} = 1$ and say that this AGREES with [[def-integer-power]]'s explicitly adopted $0^{0} = 1$ and with the empty product of [[def-nat-finite-sum-and-product]]; the three conventions are one convention, and saying so is what keeps them from drifting. Do not restate the reasoning of [[def-integer-power]]'s remark, cite it.",
+        "deps": [
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-nat-multiplication",
+          "lem-nat-mult-associative",
+          "lem-nat-mult-commutative",
+          "lem-nat-mult-distributive",
+          "lem-nat-order-mult-compatible",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-integer-power",
+          "lem-power-laws",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ]
+      },
+      {
+        "id": "thm-cardinality-of-a-set-of-functions",
+        "kind": "theorem",
+        "title": "The set $A^{B}$ of functions $B \\to A$ between finite sets is finite, with $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$",
+        "strategy": "induction on $\\lvert B\\rvert$, using [[thm-product-rule]] at the step: restriction to $B \\setminus \\{b\\}$ paired with the value at $b$ is a bijection $A^{B} \\to A^{B\\setminus\\{b\\}} \\times A$. BOUNDARY CASES, both of which are where a scaffolded proof usually goes wrong and both of which are correct here: $B = \\varnothing$ gives exactly one function, the empty function, so $\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ even when $A = \\varnothing$; and $A = \\varnothing$ with $B \\ne \\varnothing$ gives no function at all, so $0 = 0^{\\lvert B\\rvert}$ with $\\lvert B\\rvert \\ge 1$. Both agree with $0^{0} = 1$ as fixed in [[def-nat-power]]. Note $A^{B}$ here is the SET of functions and carries no algebraic structure; [[def-function-space]] (order 72) puts a vector space structure on the same set over a field, which is later and is not used.",
+        "deps": [
+          "def-nat-power",
+          "thm-product-rule",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "thm-induction-principle",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "cor-cardinality-of-the-power-set",
+        "kind": "corollary",
+        "title": "$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\lvert A\\rvert}$ for finite $A$",
+        "strategy": "direct, from [[thm-cardinality-of-a-set-of-functions]] with the two-element set $2 = \\{0,1\\}$: $S \\mapsto \\chi_S$, the characteristic function, is a bijection $\\mathcal{P}(A) \\to 2^{A}$, with inverse $f \\mapsto f^{-1}[\\{1\\}]$. Check both composites. State also that $\\mathcal{P}(A)$ is finite, which is what makes the next definition's finiteness clause available. CONTRAST, worth one sentence: [[thm-cantor-powerset]] says $A \\prec \\mathcal{P}(A)$ for every set, finite or not, and for finite $A$ this page's identity is the quantitative form, $n < 2^{n}$; prove that inequality here from [[def-nat-power]]'s monotonicity so the two statements are visibly consistent rather than merely coexisting.",
+        "deps": [
+          "thm-cardinality-of-a-set-of-functions",
+          "def-nat-power",
+          "def-finite-cardinality",
+          "thm-cantor-powerset",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-natural-numbers",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "def-factorial-and-falling-factorial",
+        "kind": "definition",
+        "title": "The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #2, AND THE SCAFFOLD DEFECT THIS PAGE HAD TO FIX. Trap (iii) instructed that $0! = 1$ come from 'the empty-product convention already fixed by `def-monoid-finite-product`'. That is a PLAN-ORDER VIOLATION: [[def-monoid-finite-product]] is homed on `monoids-groups-and-subgroups` at order 24, above this page, and citing it here is a forward citation on the spine, which `fwdcheck` rejects. The resolution adopted: TAKE $0! = 1$ AS THE BASE CLAUSE OF THE RECURSION. By [[thm-recursion]] there is a unique $F : \\mathbb{N} \\to \\mathbb{N}$ with $F(0) = 1$ and $F(\\sigma(n)) = F(n)\\cdot\\sigma(n)$; write $n! := F(n)$. So $0! = 1$ is a consequence of this page's own definition, not an import. THEN RECORD THE AGREEMENTS, which is what stops a second notion appearing: (a) $n! = \\prod_{j<n}(j+1)$ for the $\\mathbb{N}$-valued product of [[def-nat-finite-sum-and-product]], by induction, so the empty-product reading is the same reading; (b) $\\iota(n!) = \\prod_{j<n}\\iota(j+1)$ in $\\mathbb{R}$, by the bridge clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]] -- THIS IS LOAD BEARING, because the published [[lem-factorial-beats-geometric]] (order 122) defines a real-valued factorial by exactly that product, and without clause (b) the library would hold two unrelated factorials. Cite that item as an ORIENTATION-ONLY forward reference in Remarks (allowed there on a definition; never in the Definition body). Falling factorial: $n^{\\underline{0}} := 1$, $n^{\\underline{\\sigma(k)}} := n^{\\underline{k}}\\cdot(n-k)$ for $k < n$, and $n^{\\underline{k}} := 0$ for $k > n$; state the subtraction as the unique $j$ with $k + j = n$ ([[lem-nat-add-cancellative]]) and give the closed relation $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$. Every clause must be checked AT $k = 0$ AND AT $k = n$: $n^{\\underline{n}} = n!$ and $n^{\\underline{0}} = 1$.",
+        "deps": [
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-nat-multiplication",
+          "lem-nat-mult-associative",
+          "lem-nat-mult-commutative",
+          "lem-nat-add-cancellative",
+          "def-nat-order",
+          "lem-nat-order-mult-compatible",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ]
+      },
+      {
+        "id": "thm-number-of-injections",
+        "kind": "theorem",
+        "title": "The number of injections from a $k$-element set into an $n$-element set is $n^{\\underline{k}}$",
+        "strategy": "induction on $k$. Build the bijection between $\\mathrm{Inj}(B,A)$ and the pairs (injection of $B\\setminus\\{b\\}$, value at $b$ outside the image), and count the second factor with [[thm-subset-of-a-finite-set]] clause 2 and [[thm-sum-rule]]: the image of an injection of a $(k-1)$-set has exactly $k-1$ elements, so exactly $n-(k-1)$ values remain. The set of injections is finite because it is a subset of $A^{B}$ ([[thm-cardinality-of-a-set-of-functions]], [[thm-subset-of-a-finite-set]]) -- say so, do not assume it. INDEX RANGE: the statement is true at $k = 0$ (one injection, the empty function, and $n^{\\underline{0}} = 1$) and at $k > n$ (no injections, by [[lem-pigeonhole]], and $n^{\\underline{k}} = 0$); both boundary cases must appear in the proof, since the falling factorial was defined in two clauses.",
+        "deps": [
+          "def-factorial-and-falling-factorial",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "def-finite-cardinality",
+          "lem-pigeonhole",
+          "def-injection-surjection-bijection",
+          "thm-induction-principle",
+          "def-nat-order",
+          "lem-nat-add-cancellative"
+        ]
+      },
+      {
+        "id": "thm-number-of-bijections-of-a-finite-set",
+        "kind": "theorem",
+        "title": "A finite set $A$ with $\\lvert A\\rvert = n$ has exactly $n!$ bijections onto itself",
+        "strategy": "direct, as the case $k = n$ of [[thm-number-of-injections]] together with clause 4 of [[thm-subset-of-a-finite-set]] (an injection of a finite set into itself is a bijection), plus $n^{\\underline{n}} = n!$ from [[def-factorial-and-falling-factorial]]. STATE IT ABOUT BIJECTIONS OF A FINITE SET, NEVER ABOUT A SYMMETRIC GROUP: [[def-symmetric-group]] is homed at order 24, ABOVE this page, and no group vocabulary -- composition law, identity, inverse as group operations -- may appear. Write $\\operatorname{Bij}(A)$ for the SET of bijections $A \\to A$ and say explicitly in Remarks that the group structure on it is introduced later in the reading order and is not used here. This is the item that the later symmetric-group page is to cite for $\\lvert S_n\\rvert = n!$ ($\\S 10$ amendment 3 of the combinatorics scaffold), which is why it is on the A page and not on the companion. LANDMARK.",
+        "deps": [
+          "thm-number-of-injections",
+          "thm-subset-of-a-finite-set",
+          "def-factorial-and-falling-factorial",
+          "def-finite-cardinality",
+          "def-injection-surjection-bijection",
+          "def-equinumerous"
+        ]
+      },
+      {
+        "id": "def-binomial-coefficient",
+        "kind": "definition",
+        "title": "The set $[A]^{k}$ of $k$-element subsets and the binomial coefficient $\\binom{n}{k} := \\lvert [n]^{k}\\rvert$",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #3, discharged in three steps inside the item. (1) $[A]^{k} := \\{\\,S \\subseteq A : \\lvert S\\rvert = k\\,\\}$ is a subset of $\\mathcal{P}(A)$, hence finite by [[cor-cardinality-of-the-power-set]] and [[thm-subset-of-a-finite-set]]. (2) $\\lvert [A]^{k}\\rvert$ DEPENDS ONLY ON $\\lvert A\\rvert$: a bijection $A \\to A'$ induces a bijection $[A]^{k} \\to [A']^{k}$ by direct image, and the direct image of a $k$-element set under a bijection has $k$ elements ([[def-finite-cardinality]] transport clause). (3) Define $\\binom{n}{k} := \\lvert [n]^{k}\\rvert$, so $\\lvert [A]^{k}\\rvert = \\binom{\\lvert A\\rvert}{k}$ for every finite $A$. DEFINING IT AS $n!/(k!(n-k)!)$ INSTEAD IS ILLEGITIMATE HERE and the scaffold says why: integrality is not yet available, and it is precisely the content of the next theorem. Because $\\binom{n}{k}$ is a count, integrality is free. Read off the boundary values directly from the definition, not from a convention: $[A]^{0} = \\{\\varnothing\\}$ so $\\binom{n}{0} = 1$ FOR EVERY $n$ INCLUDING $n = 0$; $[A]^{n} = \\{A\\}$ so $\\binom{n}{n} = 1$; $[A]^{k} = \\varnothing$ for $k > n$ by [[thm-subset-of-a-finite-set]] clause 2, so $\\binom{n}{k} = 0$; and $\\binom{n}{1} = n$. Note this is the second half of the scaffold's trap (iii): $\\binom{n}{0} = 1$ is a COUNT of the empty subset, and needs no empty-product convention at all. LANDMARK.",
+        "deps": [
+          "def-finite-cardinality",
+          "cor-cardinality-of-the-power-set",
+          "thm-subset-of-a-finite-set",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-natural-numbers",
+          "def-nat-order",
+          "lem-nat-order-is-membership"
+        ]
+      },
+      {
+        "id": "thm-binomial-closed-formula",
+        "kind": "theorem",
+        "title": "$\\binom{n}{k}\\,k!\\,(n-k)! = n!$ for $k \\le n$; hence $\\binom{n}{k} = n^{\\underline{k}}/k!$, the quotient $n!/(k!(n-k)!)$ is a natural number, and $\\binom{n}{k} = \\binom{n}{n-k}$",
+        "strategy": "direct, by counting one set two ways -- the first double count of the page and the model for the rest. Count $\\operatorname{Bij}(n)$, which has $n!$ elements by [[thm-number-of-bijections-of-a-finite-set]], by grouping the bijections according to the image of the initial segment $k = \\{0,\\dots,k-1\\}$: that image ranges over $[n]^{k}$, which has $\\binom{n}{k}$ elements, and for each image there are $k!\\,(n-k)!$ bijections realising it ([[thm-number-of-bijections-of-a-finite-set]] applied to the two blocks, then [[thm-product-rule]]). [[thm-sum-rule]] over the partition gives the identity. THE THREE CONSEQUENCES ARE THE POINT AND EACH IS A SEPARATE CLAUSE. (a) The relation $\\binom{n}{k}\\,k! = n^{\\underline{k}}$, from [[def-factorial-and-falling-factorial]]'s relation $n^{\\underline{k}}(n-k)! = n!$ and cancellation in $\\mathbb{N}$ ([[lem-nat-mult-cancellative]]; $k!$ and $(n-k)!$ are nonzero, prove that by induction rather than asserting it). (b) INTEGRALITY: the real number $\\iota(n!)/(\\iota(k!)\\iota((n-k)!))$ equals $\\iota\\binom{n}{k}$, so the familiar quotient formula is a THEOREM about a natural number, obtained through [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]'s embedding clause; state it in $\\mathbb{R}$ with $\\iota$ visible, since $n!$ is a set and division is an operation of $\\mathbb{R}$. (c) SYMMETRY $\\binom{n}{k} = \\binom{n}{n-k}$ for $k \\le n$, either from the formula or, better, from the complementation bijection $S \\mapsto A \\setminus S$ of $[A]^{k}$ onto $[A]^{n-k}$; give the bijection, it is shorter and it is the proof that survives to the multinomial case. LANDMARK.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-number-of-bijections-of-a-finite-set",
+          "def-factorial-and-falling-factorial",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "lem-nat-mult-cancellative",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-of-inverse-unique",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-pascals-rule",
+        "kind": "theorem",
+        "title": "Pascal's rule $\\binom{n+1}{k+1} = \\binom{n}{k} + \\binom{n}{k+1}$, and the hockey-stick identity $\\sum_{i \\le n}\\binom{i}{k} = \\binom{n+1}{k+1}$",
+        "strategy": "clause 1 direct by a partition, clause 2 by induction on $n$ from clause 1. Clause 1: fix $A$ with $\\lvert A\\rvert = n+1$ and a point $a \\in A$; partition $[A]^{k+1}$ into the subsets containing $a$ and those not, the first in bijection with $[A\\setminus\\{a\\}]^{k}$ by $S \\mapsto S \\setminus \\{a\\}$ and the second equal to $[A\\setminus\\{a\\}]^{k+1}$; then [[thm-sum-rule]]. Give the inverse of the first bijection explicitly. The rule holds with NO restriction on $k$ relative to $n$, because the boundary values of [[def-binomial-coefficient]] make both sides $0$ beyond the range -- check $k+1 > n+1$ and $k = 0$ separately and say that they check out; this is where an off-by-one would live. Clause 2 (hockey stick): $\\sum_{i \\le n}\\binom{i}{k} = \\binom{n+1}{k+1}$, the sum being the $\\mathbb{N}$-valued finite sum of [[def-nat-finite-sum-and-product]] over $i < n+1$; base case $n = 0$ reads $\\binom{0}{k} = \\binom{1}{k+1}$, which is $1 = 1$ at $k = 0$ and $0 = 0$ otherwise -- verify it, do not assert it. LANDMARK.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-sum-rule",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "def-injection-surjection-bijection",
+          "thm-induction-principle",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "thm-two-element-subsets-count",
+        "kind": "theorem",
+        "title": "A finite set with $n$ elements has exactly $\\binom{n}{2}$ two-element subsets, and $2\\binom{n}{2} = n(n-1)$",
+        "strategy": "direct, from [[thm-binomial-closed-formula]] at $k = 2$; the second clause is the integer form, stated in $\\mathbb{N}$ so that no division is needed, with the real form $\\iota\\binom{n}{2} = \\iota(n)(\\iota(n)-1)/2$ recorded alongside through the embedding clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]. HOMED ON THE A PAGE DELIBERATELY (scaffold trap (i)): later pages consume this as the number of edges of a complete graph, and an examples page is a leaf that nothing may depend on. STATE IT PURELY AS A COUNT. The words graph, vertex and edge do not appear -- no graph is defined anywhere in the library at this point in the reading order -- and Remarks says only that the count of unordered pairs is the quantity later pages will want. Check $n = 0$ and $n = 1$: both sides are $0$.",
+        "deps": [
+          "thm-binomial-closed-formula",
+          "def-binomial-coefficient",
+          "def-factorial-and-falling-factorial",
+          "def-finite-cardinality",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-nat-multiplication"
+        ]
+      },
+      {
+        "id": "thm-binomial-theorem",
+        "kind": "theorem",
+        "title": "The binomial theorem in $\\mathbb{R}$: $(x+y)^{n} = \\sum_{k<n+1} \\iota\\!\\binom{n}{k}\\, x^{k} y^{\\,n-k}$",
+        "strategy": "induction on $n$, using [[thm-pascals-rule]] at the step. STATED IN $\\mathbb{R}$ AND ONLY IN $\\mathbb{R}$ (scaffold trap (ii)): [[def-ring]] is homed at order 46, twenty-six pages above this one, so a commutative-ring version here would be a forward citation. Say in Remarks that the same proof uses only commutativity, associativity, distributivity and the natural-number multiples of a ring element, and that the ring statement is a separate statement to be made where rings exist -- phrase it as 'not available at this point in the reading order', never as 'this library does not develop rings', which is false. THE COEFFICIENT IS $\\iota\\binom{n}{k}$, NOT $\\binom{n}{k}$: a binomial coefficient is a von Neumann natural, hence a set, and is not an element of $\\mathbb{R}$ ([[def-canonical-natural]]); write the embedding, as [[lem-refinement-inequalities]] and [[lem-finite-sum-laws]] clause 2 do. The exponent $n-k$ is legitimate for $k \\le n$ by [[lem-nat-add-cancellative]]; the sum runs over $k < n+1$, that is $k \\le n$, so no term has an undefined exponent. Powers are those of [[def-integer-power]], which fixes $0^{0} = 1$, so the identity is true at $x = 0$ or $y = 0$ with no exception -- check that case explicitly, it is the standard place this theorem is stated falsely. LANDMARK.",
+        "deps": [
+          "thm-pascals-rule",
+          "def-binomial-coefficient",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-integer-power",
+          "lem-power-laws",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "lem-nat-add-cancellative",
+          "thm-induction-principle",
+          "def-field",
+          "def-ordered-field",
+          "lem-of-zero-mult"
+        ]
+      },
+      {
+        "id": "cor-binomial-theorem-consequences",
+        "kind": "corollary",
+        "title": "$\\sum_{k<n+1}\\binom{n}{k} = 2^{n}$, and $\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for $n \\ge 1$",
+        "strategy": "direct, two clauses with two different proofs, and one index trap that must be honoured. Clause 1 is proved TWICE and deliberately: once by [[thm-binomial-theorem]] at $x = y = 1$, and once by counting -- partition $\\mathcal{P}(A)$ by the size of the subset, apply [[thm-sum-rule]] and [[cor-cardinality-of-the-power-set]]. The second proof is a statement about natural numbers and needs no embedding; give it first and note the agreement. CLAUSE 2 IS FALSE AT $n = 0$, where the sum is $\\binom{0}{0} = 1$, not $0$; the hypothesis $n \\ge 1$ is therefore part of the statement and the companion page carries the false statement that drops it. Prove clause 2 from [[thm-binomial-theorem]] at $x = -1$, $y = 1$, where $(-1+1)^{n} = 0^{n} = 0$ requires $n \\ge 1$ ([[def-integer-power]] remark: $0^{n} = 0$ for $n \\ge 1$ and $0^{0} = 1$) -- that is exactly where the hypothesis is spent, and saying so is the whole value of the item.",
+        "deps": [
+          "thm-binomial-theorem",
+          "cor-cardinality-of-the-power-set",
+          "thm-sum-rule",
+          "def-binomial-coefficient",
+          "def-nat-power",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-integer-power",
+          "lem-power-laws",
+          "def-canonical-natural",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "thm-vandermonde-identity",
+        "kind": "theorem",
+        "title": "Vandermonde's identity $\\binom{m+n}{k} = \\sum_{i<k+1}\\binom{m}{i}\\binom{n}{k-i}$",
+        "strategy": "direct, by double counting, NOT by generating functions (formal power series are homed at order 193, far above this page) and NOT by comparing coefficients in a product of binomial expansions, which would need polynomial identity of coefficients and hence a polynomial ring, order 46 and above. Take disjoint $M$, $N$ with $\\lvert M\\rvert = m$, $\\lvert N\\rvert = n$ and partition $[M \\cup N]^{k}$ according to $\\lvert S \\cap M\\rvert = i$; the block with a given $i$ is in bijection with $[M]^{i} \\times [N]^{k-i}$ by $S \\mapsto (S \\cap M, S \\cap N)$, so [[thm-product-rule]] counts it and [[thm-sum-rule]] adds the blocks. Give the inverse map. The index runs over $i < k+1$, that is $0 \\le i \\le k$, and the boundary values of [[def-binomial-coefficient]] make the terms with $i > m$ or $k-i > n$ vanish, so no range restriction on $m$, $n$, $k$ is needed -- state that rather than adding hypotheses. Disjointness of $M$ and $N$ is a genuine hypothesis of the counting argument; obtain a disjoint pair from arbitrary $m$- and $n$-element sets by replacing them with $M \\times \\{0\\}$ and $N \\times \\{1\\}$ and citing the transport clause of [[def-finite-cardinality]].",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "def-sum-over-a-finite-index-set",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "def-injection-surjection-bijection",
+          "def-nat-order",
+          "lem-nat-add-cancellative"
+        ]
+      },
+      {
+        "id": "def-multinomial-coefficient",
+        "kind": "definition",
+        "title": "The multinomial coefficient $\\binom{n}{k_0,\\dots,k_{m-1}}$ as the number of ordered partitions of an $n$-set into blocks of prescribed sizes",
+        "strategy": "WELL-DEFINEDNESS OBLIGATION #4, and the hypothesis is PART OF THE DEFINITION, not a side condition. Let $m \\in \\mathbb{N}$ and $k : m \\to \\mathbb{N}$. The set $\\mathcal{B}(A,k)$ of functions $c : A \\to m$ with $\\lvert c^{-1}[\\{i\\}]\\rvert = k_i$ for every $i < m$ is a subset of $m^{A}$, hence finite ([[thm-cardinality-of-a-set-of-functions]], [[thm-subset-of-a-finite-set]]); it is NONEMPTY IF AND ONLY IF $\\sum_{i<m} k_i = \\lvert A\\rvert$, by [[thm-sum-rule]] applied to the partition into fibres. Define the multinomial coefficient only under that hypothesis, and prove, exactly as in [[def-binomial-coefficient]], that $\\lvert\\mathcal{B}(A,k)\\rvert$ depends only on $\\lvert A\\rvert$. Presenting a block decomposition as a colouring function $c$ rather than as a tuple of sets is a deliberate simplification: it makes the fibres a partition and lets [[thm-sum-rule]] and [[thm-cardinality-of-a-set-of-functions]] apply verbatim. Boundary cases to state: $m = 0$ forces $n = 0$ (the empty sum) and the coefficient is $1$, the empty function being the unique colouring; a block of size $0$ is allowed and contributes a factor $0! = 1$. Record that $\\binom{n}{k, n-k} = \\binom{n}{k}$, by the bijection $c \\mapsto c^{-1}[\\{0\\}]$, so the notation does not collide with [[def-binomial-coefficient]].",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set",
+          "thm-sum-rule",
+          "def-sum-over-a-finite-index-set",
+          "def-nat-finite-sum-and-product",
+          "def-finite-cardinality",
+          "def-injection-surjection-bijection",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "thm-multinomial-theorem",
+        "kind": "theorem",
+        "title": "The multinomial coefficient equals $n!/\\prod_{i<m} k_i!$, and $(x_0+\\dots+x_{m-1})^{n} = \\sum \\iota\\!\\binom{n}{k}\\prod_{i<m} x_i^{k_i}$ in $\\mathbb{R}$",
+        "strategy": "clause 1 by the same double count as [[thm-binomial-closed-formula]], clause 2 by induction on $m$ using [[thm-binomial-theorem]] and clause 1. Clause 1: $\\binom{n}{k}\\prod_{i<m} k_i! = n!$, counting $\\operatorname{Bij}(n)$ by the colouring it induces; state it multiplicatively in $\\mathbb{N}$ so that integrality is again free, and record the quotient form in $\\mathbb{R}$ through the embedding clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]. Clause 2: the outer sum runs over the finite index set of all $k : m \\to \\mathbb{N}$ with $\\sum_{i<m}k_i = n$, which is why [[def-sum-over-a-finite-index-set]] exists and why it must be shown FINITE -- it injects into $(n+1)^{m}$ since each $k_i \\le n$, so [[thm-cardinality-of-a-set-of-functions]] and [[thm-subset-of-a-finite-set]] apply. Products of powers are the $\\mathbb{R}$-valued finite products of [[def-finite-sum]]. Do the case $m = 0$ ($n$ must be $0$; both sides are $1$) and $m = 1$ explicitly. IN $\\mathbb{R}$, never in a ring, for the reason given in [[thm-binomial-theorem]].",
+        "deps": [
+          "def-multinomial-coefficient",
+          "thm-binomial-theorem",
+          "thm-binomial-closed-formula",
+          "def-sum-over-a-finite-index-set",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-integer-power",
+          "lem-power-laws",
+          "def-canonical-natural",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set",
+          "thm-number-of-bijections-of-a-finite-set",
+          "def-factorial-and-falling-factorial",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "def-composition-of-a-natural-number",
+        "kind": "definition",
+        "title": "Compositions and weak compositions of a natural number into a fixed number of parts",
+        "strategy": "definition only, kept small because the counting is the next item. A WEAK COMPOSITION of $n$ into $m$ parts is a function $k : m \\to \\mathbb{N}$ with $\\sum_{i<m} k_i = n$ ([[def-nat-finite-sum-and-product]]); a COMPOSITION is a weak composition with every part $\\ge 1$. Prove the set of each is finite by the injection into $(n+1)^{m}$ used in [[thm-multinomial-theorem]]. BOUNDARY CASES, and they are the ones the next item's hypothesis turns on: at $m = 0$ there is exactly one function $0 \\to \\mathbb{N}$, the empty function, whose empty sum is $0$, so there is exactly ONE weak composition of $0$ into $0$ parts and NONE of $n \\ge 1$ into $0$ parts. Say this here so that the theorem may carry the hypothesis $m \\ge 1$ honestly rather than silently. Record that the index set of the multinomial theorem's outer sum is exactly the set of weak compositions of $n$ into $m$ parts, so the two items name one object.",
+        "deps": [
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-subset-of-a-finite-set",
+          "def-finite-cardinality",
+          "def-nat-order",
+          "def-natural-numbers",
+          "def-multinomial-coefficient"
+        ]
+      },
+      {
+        "id": "thm-stars-and-bars",
+        "kind": "theorem",
+        "title": "For $m \\ge 1$ the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$, and the number of compositions is $\\binom{n-1}{m-1}$ for $n \\ge 1$",
+        "strategy": "constructive: exhibit the bijection, do not count by induction. Map a weak composition $k$ to the $(m-1)$-element subset $\\{\\,k_0 + i : i < m-1 \\text{ partial sums}\\,\\}$ of $n+m-1$ -- write it out precisely as $S(k) := \\{\\, (\\sum_{j<i+1} k_j) + i \\ : \\ i < m-1 \\,\\}$ -- and prove it is a bijection onto $[\\,n+m-1\\,]^{m-1}$ by constructing the inverse from the sorted list of $S$ ([[lem-finite-subsets-listable]] and [[lem-finite-set-has-max]] give the sorted presentation; alternatively define the inverse by successive differences and verify both composites). THE HYPOTHESIS $m \\ge 1$ IS NOT DECORATION: at $m = 0$ the right-hand side would be $\\binom{n-1}{-1}$, and $-1$ is not a natural number, so the formula is not even a well-formed expression; [[def-composition-of-a-natural-number]] records that the true count at $m = 0$ is $1$ if $n = 0$ and $0$ otherwise. Handle the composition clause by the substitution $k_i = k'_i + 1$, which is a bijection from compositions of $n$ into $m$ parts onto weak compositions of $n - m$ into $m$ parts, defined only when $m \\le n$; state the count as $0$ when $m > n$ and check $n = m$. LANDMARK.",
+        "deps": [
+          "def-composition-of-a-natural-number",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-nat-finite-sum-and-product",
+          "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "def-finite-cardinality",
+          "def-injection-surjection-bijection",
+          "thm-subset-of-a-finite-set",
+          "lem-finite-subsets-listable",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "def-nat-order",
+          "lem-nat-add-cancellative",
+          "lem-nat-order-add-compatible"
+        ]
+      },
+      {
+        "id": "rem-counting-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions fixed on this page, and what counting is deliberately not done here",
+        "strategy": "the page's ledger, in the style of [[rem-sup-conventions]] and [[rem-metric-axiom-conventions]]. Record, each with the item that fixes it: (1) $\\mathbb{N}$ contains $0$, so every index range on this page starts at $0$ and $\\lvert A\\rvert$ may be $0$; (2) $\\lvert A\\rvert$ is defined for FINITE $A$ only and is a natural number, not a cardinal -- [[def-cardinal]] is a later and different object and nothing here uses it (forward reference, orientation only); (3) the empty sum is $0$, the empty product is $1$, $0! = 1$ and $0^{0} = 1$ are ONE convention, fixed by the base clauses of [[def-nat-finite-sum-and-product]], [[def-factorial-and-falling-factorial]] and [[def-nat-power]] and agreeing with [[def-finite-sum]] and [[def-integer-power]]; (4) $\\binom{n}{k}$ is a count and integrality is a theorem, [[thm-binomial-closed-formula]]; (5) three notions of finite sum now exist in the library -- over an initial segment ([[def-finite-sum]]), over a finite index set ([[def-sum-over-a-finite-index-set]]), and in a monoid ([[def-monoid-finite-product]], later) -- and the bridges are stated where each is introduced. WHAT IS NOT HERE, phrased as reading order and never as a claim about the library as a whole: inclusion-exclusion, the pigeonhole principle in its strong form, double counting as a theorem about relations, and the number of surjections all belong to the next page in this track; the binomial theorem for a commutative ring waits on rings; asymptotics of $n!$ waits on the integral and the logarithm. Forward references, all orientation only.",
+        "deps": [
+          "def-finite-cardinality",
+          "def-nat-finite-sum-and-product",
+          "def-sum-over-a-finite-index-set",
+          "def-factorial-and-falling-factorial",
+          "def-nat-power",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-binomial-theorem",
+          "def-finite-sum",
+          "def-integer-power"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 21,
+    "id": "finite-counting-and-binomial-coefficients-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Finite Counting, Factorials and Binomial Coefficients: Examples and Counterexamples",
+    "companion": null,
+    "requires": [
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "ex-pascals-triangle-to-row-six",
+        "kind": "example",
+        "title": "Pascal's triangle computed to row $6$, with Pascal's rule checked at every entry",
+        "strategy": "computation, verified. Build rows $0$ through $6$ from the boundary values of [[def-binomial-coefficient]] ($\\binom{n}{0} = \\binom{n}{n} = 1$) and [[thm-pascals-rule]], and CROSS-CHECK every interior entry against [[thm-binomial-closed-formula]]'s quotient formula, so the two routes are seen to agree rather than asserted to. Also check the row sums against [[cor-binomial-theorem-consequences]] ($1, 2, 4, 8, 16, 32, 64$) and the alternating sums (all $0$ except row $0$, where it is $1$ -- the index trap made concrete). Row $6$ is $1, 6, 15, 20, 15, 6, 1$.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-pascals-rule",
+          "thm-binomial-closed-formula",
+          "cor-binomial-theorem-consequences",
+          "def-factorial-and-falling-factorial",
+          "def-nat-power"
+        ]
+      },
+      {
+        "id": "ex-counting-committees",
+        "kind": "example",
+        "title": "Choosing a committee: $\\binom{10}{3} = 120$, and the ordered count $10^{\\underline{3}} = 720$",
+        "strategy": "computation. Count the $3$-element subsets of a $10$-element set with [[def-binomial-coefficient]] and [[thm-binomial-closed-formula]], and the ordered selections with [[thm-number-of-injections]]; the ratio $3! = 6$ is clause (a) of the closed-formula theorem seen concretely. State clearly which set is being counted in each case -- the standard error is to count one and name the other.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-number-of-injections",
+          "def-factorial-and-falling-factorial",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "ex-anagrams-by-the-multinomial-coefficient",
+        "kind": "example",
+        "title": "Arrangements of a word with repeated letters, counted by the multinomial coefficient",
+        "strategy": "computation. Take a word of length $11$ over a four-letter alphabet with multiplicities $(1,4,4,2)$ and count its distinct arrangements as $\\binom{11}{1,4,4,2} = 34650$ by [[thm-multinomial-theorem]] clause 1. THE MODELLING STEP IS THE MATHEMATICS: an arrangement is a function from the $11$ positions to the alphabet whose fibres have the prescribed sizes, which is literally [[def-multinomial-coefficient]]'s $\\mathcal{B}(A,k)$; say so, and check $\\sum k_i = 11$, the hypothesis without which the coefficient is not defined.",
+        "deps": [
+          "def-multinomial-coefficient",
+          "thm-multinomial-theorem",
+          "def-nat-finite-sum-and-product",
+          "def-finite-cardinality",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "ex-poker-hands-from-a-deck",
+        "kind": "example",
+        "title": "Five-card hands from a $52$-card deck: $\\binom{52}{5} = 2598960$, and the count of hands with all cards of one suit",
+        "strategy": "computation, with a sum-rule step so that the example exercises more than one theorem. The total is [[thm-binomial-closed-formula]] at $(52,5)$. The flush count is $4\\binom{13}{5} = 5148$ by [[thm-sum-rule]] over the partition of the flush hands by suit. NO PROBABILITY is claimed anywhere: there is no probability space in this library at this point in the reading order, and these are counts of sets, not probabilities. Say that explicitly, since it is exactly the place a scaffolded example silently introduces one.",
+        "deps": [
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-sum-rule",
+          "def-finite-cardinality",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "ex-weak-compositions-worked",
+        "kind": "example",
+        "title": "The $15$ weak compositions of $4$ into $3$ parts, listed and matched against stars and bars",
+        "strategy": "verification. List all $k : 3 \\to \\mathbb{N}$ with $k_0+k_1+k_2 = 4$, count them ($15$), and check against $\\binom{4+3-1}{3-1} = \\binom{6}{2} = 15$ from [[thm-stars-and-bars]]. Then EXHIBIT THE BIJECTION of that theorem on two or three of the listed compositions, so the reader sees which $2$-element subset of $6$ each corresponds to; a stars-and-bars example that only checks the number is the weaker example. Also list the compositions with all parts $\\ge 1$ ($3$ of them) and check $\\binom{3}{2} = 3$.",
+        "deps": [
+          "thm-stars-and-bars",
+          "def-composition-of-a-natural-number",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-nat-finite-sum-and-product"
+        ]
+      },
+      {
+        "id": "ex-functions-injections-and-subsets-of-a-small-set",
+        "kind": "example",
+        "title": "All $8$ functions $3 \\to 2$, the $0$ injections $3 \\to 2$, and the $8$ subsets of a $3$-element set",
+        "strategy": "exhaustive verification, chosen because every count is small enough to list. List the eight functions $3 \\to 2$ and check $2^{3} = 8$ against [[thm-cardinality-of-a-set-of-functions]]; observe none is injective and check against [[thm-number-of-injections]] ($2^{\\underline{3}} = 0$) and against [[lem-pigeonhole]]; list the eight subsets and check [[cor-cardinality-of-the-power-set]], grouping them by size to check $\\binom{3}{0}+\\binom{3}{1}+\\binom{3}{2}+\\binom{3}{3} = 1+3+3+1 = 8$, which is [[cor-binomial-theorem-consequences]] clause 1 in the smallest interesting case.",
+        "deps": [
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-number-of-injections",
+          "cor-cardinality-of-the-power-set",
+          "cor-binomial-theorem-consequences",
+          "def-binomial-coefficient",
+          "lem-pigeonhole",
+          "def-nat-power",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "ex-vandermonde-checked-numerically",
+        "kind": "example",
+        "title": "Vandermonde's identity checked at $m = 4$, $n = 3$, $k = 3$, both sides equal to $35$",
+        "strategy": "verification. Compute $\\binom{7}{3} = 35$ and the sum $\\binom{4}{0}\\binom{3}{3} + \\binom{4}{1}\\binom{3}{2} + \\binom{4}{2}\\binom{3}{1} + \\binom{4}{3}\\binom{3}{0} = 1 + 12 + 18 + 4 = 35$, and exhibit the partition of $[7]^{3}$ that [[thm-vandermonde-identity]] uses, at least for one block, so the identity is seen as a count and not as an algebraic accident. Include a case where a term vanishes by the boundary convention, e.g. $k = 5$ with $m = 4$, $n = 3$.",
+        "deps": [
+          "thm-vandermonde-identity",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-sum-rule",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "cex-same-cardinality-without-a-canonical-bijection",
+        "kind": "counterexample",
+        "title": "Two sets of the same finite cardinality between which no bijection is distinguished",
+        "strategy": "orientation, and it refutes the reading of [[def-finite-cardinality]] under which $\\lvert A\\rvert = \\lvert B\\rvert$ ought to name a bijection. Take $A = \\{\\varnothing, \\{\\varnothing\\}\\}$ and $B = [\\,3\\,]^{1}$, both of cardinality $2$; exhibit BOTH bijections between them and observe that nothing in the definition, or anywhere in the library, prefers one. The definition asks for the EXISTENCE of some bijection, and [[lem-pigeonhole]] claim 3 is what makes the resulting number unambiguous even though the bijection is not. Contrast with the ordered case: [[thm-number-of-bijections-of-a-finite-set]] counts exactly how many such bijections there are, $2! = 2$ here.",
+        "deps": [
+          "def-finite-cardinality",
+          "lem-pigeonhole",
+          "thm-number-of-bijections-of-a-finite-set",
+          "def-binomial-coefficient",
+          "def-equinumerous",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "cex-a-count-that-double-counts",
+        "kind": "counterexample",
+        "title": "A count that overcounts because the blocks are not disjoint, and exactly where the sum rule's hypothesis is spent",
+        "strategy": "a worked wrong count, then the diagnosis. Count the subsets of $\\{0,1,2,3\\}$ containing $0$ or containing $1$ by adding the two counts ($8 + 8 = 16$) and compare with the true count ($12$); the overcount is the four subsets containing both. Then point at the exact step of [[thm-sum-rule]] that fails -- the splice map is no longer injective -- rather than merely observing that the answer is wrong. Say that the systematic repair is inclusion-exclusion, which is the next page in this track and is not available here; phrase that as reading order.",
+        "deps": [
+          "thm-sum-rule",
+          "def-finite-cardinality",
+          "cor-cardinality-of-the-power-set",
+          "thm-subset-of-a-finite-set",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "fs-every-injection-of-a-set-into-itself-is-a-bijection",
+        "kind": "false-statement",
+        "title": "Every injection of a set into itself is a bijection",
+        "strategy": "refutation by a single witness: $\\sigma : \\mathbb{N} \\to \\mathbb{N}$ is injective ([[thm-omega-is-peano-system]]) and misses $0$ ([[lem-nat-nonzero-is-successor]]), so it is not surjective. THE POINT IS NOT THE WITNESS BUT THE HYPOTHESIS: clause 4 of [[thm-subset-of-a-finite-set]] proves the statement TRUE for finite sets, so finiteness is exactly what fails, and the refutation should locate the step of that proof that uses it. Record that a set for which the false statement fails is called Dedekind-infinite and that [[lem-pigeonhole]] claim 5 says no natural number is; do not develop the ZF subtleties, which [[def-countable]]'s page already handles.",
+        "deps": [
+          "thm-subset-of-a-finite-set",
+          "lem-pigeonhole",
+          "thm-omega-is-peano-system",
+          "lem-nat-nonzero-is-successor",
+          "def-countable",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "fs-cardinality-of-a-union-adds-without-disjointness",
+        "kind": "false-statement",
+        "title": "$\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ for all finite $A$ and $B$",
+        "strategy": "refutation with the smallest possible witness, $A = B = \\{0\\}$, where the left side is $1$ and the right side is $2$; then a second witness with a partial overlap to show the failure is not an artefact of equality. Locate the hypothesis in [[thm-sum-rule]] and state the true general form as the reading-order pointer: the correction term is inclusion-exclusion, on the next page of this track. Do not state the inclusion-exclusion formula here as though it were available.",
+        "deps": [
+          "thm-sum-rule",
+          "def-finite-cardinality",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "fs-the-product-rule-makes-a-product-larger",
+        "kind": "false-statement",
+        "title": "For all sets $A$ and $B$ with $B$ having at least two elements, $A \\times B$ is strictly larger than $A$",
+        "strategy": "refutation by [[thm-n-cross-n-countable]], published: the pairing $(m,n) \\mapsto 2^{m}(2n+1)$ is a bijection $\\mathbb{N}\\times\\mathbb{N} \\to \\mathbb{N}$ ... state it in the form that item actually proves, and read it before citing it. So $\\mathbb{N}\\times\\mathbb{N} \\approx \\mathbb{N}$ and the product is not larger. THE FINITE CASE IS TRUE and is [[thm-product-rule]] together with [[def-nat-power]]'s monotonicity, so this is another item whose value is locating the hypothesis: finiteness. Note the contrast with [[thm-cantor-powerset]], where the strict increase does survive to the infinite case.",
+        "deps": [
+          "thm-n-cross-n-countable",
+          "thm-product-rule",
+          "thm-cantor-powerset",
+          "def-countable",
+          "def-equinumerous",
+          "def-finite-cardinality",
+          "def-nat-power"
+        ]
+      },
+      {
+        "id": "fs-the-alternating-row-sum-vanishes-for-every-n",
+        "kind": "false-statement",
+        "title": "$\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for every $n \\in \\mathbb{N}$",
+        "strategy": "refutation at $n = 0$, where the sum has the single term $\\binom{0}{0} = 1$. THIS IS THE PAGE'S INDEX-RANGE ITEM and it is here because the false form is what a text using $\\mathbb{N} = \\{1,2,\\dots\\}$ would state truly; in this library $\\mathbb{N}$ contains $0$ ([[def-natural-numbers]]) and the statement acquires a counterexample at its first index. Give the correct statement, [[cor-binomial-theorem-consequences]] clause 2 with its hypothesis $n \\ge 1$, and show exactly where the hypothesis is used: $(-1+1)^{n} = 0^{n}$ is $0$ for $n \\ge 1$ and $1$ for $n = 0$, by the $0^{0} = 1$ convention of [[def-integer-power]].",
+        "deps": [
+          "cor-binomial-theorem-consequences",
+          "thm-binomial-theorem",
+          "def-binomial-coefficient",
+          "def-integer-power",
+          "def-canonical-natural",
+          "def-finite-sum",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "fs-stars-and-bars-holds-for-every-number-of-parts",
+        "kind": "false-statement",
+        "title": "The number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$ for every $m \\in \\mathbb{N}$",
+        "strategy": "refutation at $m = 0$, where the right-hand side is not a well-formed expression at all: $m - 1$ would have to be $-1$, which is not a natural number, and $\\binom{n}{k}$ was defined in [[def-binomial-coefficient]] for naturals only. State the true counts at $m = 0$ from [[def-composition-of-a-natural-number]] -- one weak composition of $0$, none of any $n \\ge 1$ -- and note that the formula is correct for every $m \\ge 1$ including $m = 1$ (where it reads $\\binom{n}{0} = 1$) and every $n$ including $n = 0$ (where it reads $\\binom{m-1}{m-1} = 1$). A false statement whose falsity is ill-formedness rather than a wrong number is worth stating in exactly those terms.",
+        "deps": [
+          "thm-stars-and-bars",
+          "def-composition-of-a-natural-number",
+          "def-binomial-coefficient",
+          "def-nat-finite-sum-and-product",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 161,
+    "id": "properties-of-the-integral-and-the-working-ftc",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Properties of the Integral and the Working FTC",
+    "companion": "properties-of-the-integral-and-the-working-ftc-examples",
+    "requires": [
+      "the-riemann-integral",
+      "the-derivative-and-mean-value-theorems",
+      "absolute-convergence-and-rearrangement"
+    ],
+    "items": [
+      {
+        "id": "def-oriented-integral",
+        "kind": "definition",
+        "title": "The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$",
+        "strategy": "MINTED FIRST BECAUSE THE PUBLISHED DEFINITION DOES NOT COVER THE PAGE. Read [[def-darboux-integral]] on disk: it is stated under the standing hypothesis $a < b$ of [[def-partition-and-refinement]], so $\\int_a^b f$ is undefined when $a \\ge b$, and every additivity statement below would be false as usually written without this item. Extend by the two clauses above, noting there is nothing to prove for consistency because the clauses do not overlap with the case $a<b$; the only check is that $\\int_a^a f := 0$ agrees with the value the $a<b$ definition would give in a limit, which it does not need to, and should not be claimed. Say what $f$ must be: for $\\int_b^a f$ with $b > a$, $f$ is a bounded function on $[a,b]$ that is integrable there. State immediately the two consequences used everywhere below: $\\int_a^b f = -\\int_b^a f$ for ALL $a,b$ in the domain, and the additivity identity $\\int_a^b + \\int_b^c = \\int_a^c$ holds for every arrangement of $a,b,c$ once [[thm-additivity-over-subintervals]] is proved (record the obligation here, prove it there). Notation and convention only, no new integral: the object is still the Darboux integral of [[def-darboux-integral]].",
+        "deps": [
+          "def-darboux-integral",
+          "def-partition-and-refinement",
+          "def-darboux-sums",
+          "def-bounded-set",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-integrability-on-a-subinterval",
+        "kind": "lemma",
+        "title": "A function integrable on $[a,b]$ is integrable on every closed subinterval",
+        "strategy": "direct, through [[thm-riemann-criterion]]. Given $\\varepsilon>0$ take a partition $P$ of $[a,b]$ with $U(f,P)-L(f,P)<\\varepsilon$; refine it by adjoining $c$ and $d$ (the endpoints of the subinterval), which only decreases the gap by [[lem-refinement-inequalities]] clause 1, and then restrict to the part between $c$ and $d$. THE STEP THAT NEEDS CARE is that the restricted family is a partition of $[c,d]$ in the sense of [[def-partition-and-refinement]] -- that definition packages a partition as a pair $(n,t)$ with a tail convention, so the restriction has to be re-indexed and its tail set to $d$; do this explicitly rather than saying 'restrict'. The dropped subintervals contribute a nonnegative amount to the gap, by [[def-darboux-sums]] ($M_i - m_i \\ge 0$) and monotonicity of finite sums ([[lem-finite-sum-laws]] clause 4), which is why the gap on $[c,d]$ is at most the gap on $[a,b]$. Degenerate case $c = d$ is handled by [[def-oriented-integral]].",
+        "deps": [
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "thm-riemann-criterion",
+          "lem-refinement-inequalities",
+          "def-darboux-sums",
+          "def-partition-and-refinement",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-bounded-set",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "thm-linearity-of-the-integral",
+        "kind": "theorem",
+        "title": "Integrable functions on $[a,b]$ form a set closed under sums and scalar multiples, and $\\int_a^b(\\lambda f+\\mu g) = \\lambda\\int_a^b f + \\mu\\int_a^b g$",
+        "strategy": "direct, in two halves, and the halves are genuinely different. SUMS: $\\sup(f+g) \\le \\sup f + \\sup g$ and $\\inf(f+g)\\ge \\inf f+\\inf g$ on each subinterval, so $U(f+g,P) \\le U(f,P)+U(g,P)$ and dually; integrability follows from [[thm-riemann-criterion]] applied to a COMMON refinement of a partition for $f$ and one for $g$ ([[def-partition-and-refinement]] supplies the common refinement, [[lem-refinement-inequalities]] the monotonicity), and the value then by squeezing. Note that the inequality between suprema can be STRICT, so linearity of the integral is not linearity of the Darboux sums -- say so, it is the reason the proof squeezes rather than computes. SCALARS: for $\\lambda \\ge 0$, $U(\\lambda f,P) = \\lambda U(f,P)$; for $\\lambda < 0$ the roles of $\\sup$ and $\\inf$ SWAP, so $U(\\lambda f,P) = \\lambda L(f,P)$, and the case $\\lambda = -1$ must be done explicitly ([[lem-reflection]] on suprema and infima is the published tool). Do not merge the two cases. LANDMARK.",
+        "deps": [
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "thm-riemann-criterion",
+          "lem-refinement-inequalities",
+          "def-partition-and-refinement",
+          "lem-integral-elementary-bounds",
+          "def-oriented-integral",
+          "lem-reflection",
+          "def-infimum",
+          "lem-sup-unique",
+          "lem-sup-epsilon",
+          "lem-inf-epsilon",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-bounded-set",
+          "def-complete-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-monotonicity-of-the-integral",
+        "kind": "theorem",
+        "title": "If $f \\le g$ on $[a,b]$ and both are integrable then $\\int_a^b f \\le \\int_a^b g$; and $m(b-a) \\le \\int_a^b f \\le M(b-a)$",
+        "strategy": "direct and short, but state it as its own item because half the page cites it. From $f \\le g$ pointwise, $L(f,P) \\le L(g,P)$ and $U(f,P)\\le U(g,P)$ for every $P$ ([[def-darboux-sums]], [[lem-finite-sum-laws]] clause 4), so the suprema and infima compare ([[lem-sup-monotone]]). The two-sided bound is [[lem-integral-elementary-bounds]], published -- CITE IT, do not reprove it, and check what it actually says before citing: it bounds both the lower and the upper integral for every partition and includes the value of the integral of a constant. Add the clause used later: if $f \\ge 0$ and $f$ is integrable then $\\int_a^b f \\ge 0$, with equality possible even for $f$ not identically zero (the companion of the previous page carries the false statement; the CONTINUOUS case is a theorem below).",
+        "deps": [
+          "thm-linearity-of-the-integral",
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "lem-integral-elementary-bounds",
+          "lem-sup-monotone",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-oriented-integral",
+          "def-infimum",
+          "def-complete-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-additivity-over-subintervals",
+        "kind": "theorem",
+        "title": "For $a<c<b$: $f$ is integrable on $[a,b]$ if and only if it is integrable on $[a,c]$ and on $[c,b]$, and then $\\int_a^b f = \\int_a^c f + \\int_c^b f$; with the oriented form for arbitrary $a,b,c$",
+        "strategy": "direct, both directions, then a case analysis for the oriented form. Forward direction is [[lem-integrability-on-a-subinterval]]. Converse: given partitions of $[a,c]$ and $[c,b]$ with small gaps, splice them into a partition of $[a,b]$ -- again a re-indexing of the pair $(n,t)$ of [[def-partition-and-refinement]], written out -- and add the gaps. The value identity follows because both $L$ and $U$ split additively over a partition point, using the splitting clause of [[lem-finite-sum-laws]]. THE ORIENTED FORM IS A SEPARATE CLAUSE AND IS WHERE THE PAGE PAYS FOR [[def-oriented-integral]]: for arbitrary $a,b,c$ in an interval on which $f$ is integrable, $\\int_a^b f + \\int_b^c f = \\int_a^c f$; prove it by the six orderings of three points, or by the standard reduction (verify one ordering, then check that both sides change sign consistently under swapping two of the three). Do not assert 'by symmetry'. LANDMARK.",
+        "deps": [
+          "lem-integrability-on-a-subinterval",
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "thm-riemann-criterion",
+          "lem-refinement-inequalities",
+          "def-partition-and-refinement",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "thm-linearity-of-the-integral",
+          "lem-sup-epsilon",
+          "lem-inf-epsilon",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-changing-a-function-at-finitely-many-points",
+        "kind": "lemma",
+        "title": "Changing an integrable function at finitely many points changes neither its integrability nor its integral",
+        "strategy": "direct, by [[thm-linearity-of-the-integral]] plus the one-point case. Reduce to a function $h$ vanishing off a single point $p$: given $\\varepsilon>0$, take a partition whose subintervals containing $p$ have total length less than $\\varepsilon/(2\\lvert h(p)\\rvert+1)$; then $U(h,P)-L(h,P)$ is small, so $h$ is integrable with integral $0$ by [[thm-riemann-criterion]] and [[lem-integral-elementary-bounds]]. THE POINT $p$ MAY BE A PARTITION POINT, in which case it lies in TWO subintervals -- handle that, it is the only subtlety. Then a finite set is handled by induction and linearity; 'finite' here is [[def-countable]]'s finite, a set equinumerous with a natural number -- do NOT reach for the counting page's cardinality item, which is not in this page's declared prerequisites. This lemma is what makes the endpoint values of an integrand irrelevant, and the companion page uses it; it is also the honest reason the integral cannot detect a change on a finite set, in contrast with the derivative.",
+        "deps": [
+          "thm-linearity-of-the-integral",
+          "thm-riemann-criterion",
+          "lem-integral-elementary-bounds",
+          "def-darboux-sums",
+          "def-partition-and-refinement",
+          "def-darboux-integral",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "thm-induction-principle",
+          "def-countable",
+          "def-equinumerous",
+          "thm-of-archimedean",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "thm-composition-with-a-continuous-function",
+        "kind": "theorem",
+        "title": "If $f$ is integrable on $[a,b]$ with values in $[m,M]$ and $\\varphi$ is continuous on $[m,M]$, then $\\varphi \\circ f$ is integrable",
+        "strategy": "direct, the Rudin 6.11 argument, and it is the hardest proof on the page after the FTC; scaffold it in named stages. Fix $\\varepsilon>0$. (1) $\\varphi$ is uniformly continuous on the compact $[m,M]$ ([[thm-heine-cantor-r]]) and bounded there ([[cor-boundedness-theorem-r]], with $K := \\sup\\lvert\\varphi\\rvert$); choose $\\delta \\in (0,\\varepsilon)$ with $\\lvert\\varphi(s)-\\varphi(t)\\rvert<\\varepsilon$ whenever $\\lvert s-t\\rvert\\le\\delta$. (2) By [[thm-riemann-criterion]] pick $P$ with $U(f,P)-L(f,P)<\\delta^{2}$. (3) SPLIT THE INDICES into $G = \\{i : M_i-m_i<\\delta\\}$ and $B = \\{i : M_i-m_i\\ge\\delta\\}$; on $G$ the oscillation of $\\varphi\\circ f$ is at most $\\varepsilon$, and on $B$ it is at most $2K$ while $\\delta\\sum_{i\\in B}\\Delta_i \\le \\sum_{i\\in B}(M_i-m_i)\\Delta_i < \\delta^{2}$, so the total length of the bad subintervals is less than $\\delta$. (4) Add. The splitting is a finite index-set sum ([[lem-finite-sum-laws]] clause 3 suffices if the indices are grouped, but stating it as a sum over the subsets $G$ and $B$ of the index range is cleaner and is legitimate). THE ORDER MATTERS AND MUST BE SAID: the hypothesis is CONTINUOUS AFTER INTEGRABLE. Integrable after continuous can fail, and the companion page carries the witness; the remark should point there without stating the false general form. LANDMARK.",
+        "deps": [
+          "thm-riemann-criterion",
+          "def-darboux-sums",
+          "def-darboux-integral",
+          "def-partition-and-refinement",
+          "def-continuity-real",
+          "thm-heine-cantor-r",
+          "cor-boundedness-theorem-r",
+          "def-uniform-continuity-real",
+          "thm-extreme-value-r",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-oscillation",
+          "def-bounded-set",
+          "def-interval",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "cor-integrability-of-absolute-values-products-and-lattice-operations",
+        "kind": "corollary",
+        "title": "If $f,g$ are integrable on $[a,b]$ then so are $\\lvert f\\rvert$, $f^{2}$, $fg$, $\\max(f,g)$ and $\\min(f,g)$, and $\\bigl\\lvert\\int_a^b f\\bigr\\rvert \\le \\int_a^b\\lvert f\\rvert$",
+        "strategy": "direct, all from [[thm-composition-with-a-continuous-function]] plus [[thm-linearity-of-the-integral]]. Take $\\varphi(t)=\\lvert t\\rvert$ and $\\varphi(t)=t^{2}$ (continuous by [[thm-algebra-of-continuous-functions]]); then $fg = \\tfrac14\\big((f+g)^{2}-(f-g)^{2}\\big)$ and $\\max(f,g) = \\tfrac12(f+g+\\lvert f-g\\rvert)$, $\\min(f,g) = \\tfrac12(f+g-\\lvert f-g\\rvert)$. The inequality $\\lvert\\int f\\rvert \\le \\int\\lvert f\\rvert$ follows from $\\pm f \\le \\lvert f\\rvert$ and [[thm-monotonicity-of-the-integral]]; state it for $a \\le b$ ONLY, since with the orientation convention of [[def-oriented-integral]] it is false as written when $b<a$ -- that is a real trap and the item should say so and give the corrected two-sided form $\\lvert\\int_a^b f\\rvert \\le \\lvert\\int_a^b \\lvert f\\rvert\\rvert$. The converse of the first clause fails: $\\lvert f\\rvert$ integrable does not make $f$ integrable, and the companion page carries the witness.",
+        "deps": [
+          "thm-composition-with-a-continuous-function",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "def-oriented-integral",
+          "thm-algebra-of-continuous-functions",
+          "def-continuity-real",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "def-darboux-integral",
+          "def-max-min"
+        ]
+      },
+      {
+        "id": "thm-first-mean-value-theorem-for-integrals",
+        "kind": "theorem",
+        "title": "If $f$ is continuous on $[a,b]$ and $g$ is integrable with $g \\ge 0$, there is $\\xi \\in [a,b]$ with $\\int_a^b fg = f(\\xi)\\int_a^b g$",
+        "strategy": "direct, via the extreme value theorem and the intermediate value theorem. Let $m = \\min f$ and $M = \\max f$, which exist by [[thm-extreme-value-r]]; then $mg \\le fg \\le Mg$ pointwise, so $m\\int g \\le \\int fg \\le M\\int g$ by [[thm-monotonicity-of-the-integral]] ($fg$ is integrable by [[cor-integrability-of-absolute-values-products-and-lattice-operations]]). If $\\int g = 0$ then $\\int fg = 0$ and ANY $\\xi$ works -- handle that case first and separately, it is where the usual proof divides by zero. Otherwise $\\int fg / \\int g \\in [m,M]$ and [[thm-intermediate-value]] with [[cor-continuous-image-of-an-interval-is-an-interval]] supplies $\\xi$. THE HYPOTHESIS $g \\ge 0$ IS ESSENTIAL and the companion page carries a witness with a sign-changing $g$; the special case $g \\equiv 1$ gives the familiar $\\int_a^b f = f(\\xi)(b-a)$ and should be stated as a clause because the FTC proof below uses exactly that form.",
+        "deps": [
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-linearity-of-the-integral",
+          "thm-extreme-value-r",
+          "thm-intermediate-value",
+          "cor-continuous-image-of-an-interval-is-an-interval",
+          "def-continuity-real",
+          "def-max-min",
+          "lem-integral-elementary-bounds",
+          "def-darboux-integral",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "def-the-integral-function",
+        "kind": "definition",
+        "title": "The integral function $F(x) := \\int_a^x f$ of an integrable $f$",
+        "strategy": "definition with its well-definedness discharged inline. For $f$ integrable on $[a,b]$ and $x \\in [a,b]$, $f$ is integrable on $[a,x]$ by [[lem-integrability-on-a-subinterval]] when $a<x$, and $\\int_a^a f = 0$ by [[def-oriented-integral]] when $x = a$; so $F : [a,b] \\to \\mathbb{R}$ is a genuine function. Record the two identities used constantly below and prove them from [[thm-additivity-over-subintervals]]: $F(y)-F(x) = \\int_x^y f$ for ALL $x,y \\in [a,b]$, in either order, and $F(a)=0$. Note that $F$ depends on the base point $a$ and that changing it changes $F$ by a constant; that is the observation the primitive corollary below turns into a theorem. Also note, because the companion page needs it, that $F$ is defined for every integrable $f$ whether or not $f$ has a primitive, and that $F$ need not be a primitive of $f$ where $f$ is discontinuous.",
+        "deps": [
+          "lem-integrability-on-a-subinterval",
+          "thm-additivity-over-subintervals",
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "def-interval",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-the-integral-function-is-lipschitz",
+        "kind": "theorem",
+        "title": "The integral function of a bounded integrable $f$ is Lipschitz, hence uniformly continuous",
+        "strategy": "direct. With $\\lvert f\\rvert \\le K$ on $[a,b]$, [[def-the-integral-function]]'s identity and [[cor-integrability-of-absolute-values-products-and-lattice-operations]] give $\\lvert F(y)-F(x)\\rvert = \\lvert\\int_x^y f\\rvert \\le K\\lvert y-x\\rvert$ -- write the estimate for $x<y$ and then note the symmetric case rather than hiding it in the absolute value. Conclude that $F$ is Lipschitz with constant $K$ in the sense of [[def-lipschitz-holder-contraction]] on $(\\mathbb{R},d_{\\mathbb{R}})$ ([[lem-real-line-is-a-metric-space]]), hence uniformly continuous by [[thm-metric-regularity-hierarchy]], hence continuous ([[lem-real-and-metric-notions-agree]] bridges the metric and the $\\varepsilon$-$\\delta$ notions, and citing it is what keeps the library from holding two notions of continuity). NO CONTINUITY OF $f$ IS ASSUMED: this is the strongest statement available before the FTC and it is what makes the FTC's hypotheses visible as hypotheses.",
+        "deps": [
+          "def-the-integral-function",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-monotonicity-of-the-integral",
+          "lem-integral-elementary-bounds",
+          "def-lipschitz-holder-contraction",
+          "thm-metric-regularity-hierarchy",
+          "lem-real-line-is-a-metric-space",
+          "lem-real-and-metric-notions-agree",
+          "def-continuity-real",
+          "def-uniform-continuity-real",
+          "def-bounded-set",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "thm-ftc-first-part",
+        "kind": "theorem",
+        "title": "The first fundamental theorem: if $f$ is integrable on $[a,b]$ and continuous at $c$, then $F'(c) = f(c)$; in particular a continuous $f$ has $F$ as a primitive",
+        "strategy": "direct, from the definition of the derivative, not from the mean value theorem for integrals (which would need continuity on a whole subinterval and is the weaker route). For $x \\ne c$ in $[a,b]$, $\\frac{F(x)-F(c)}{x-c} - f(c) = \\frac{1}{x-c}\\int_c^x\\bigl(f(t)-f(c)\\bigr)\\,dt$ using [[def-the-integral-function]] and [[thm-linearity-of-the-integral]] with $\\int_c^x f(c)\\,dt = f(c)(x-c)$ ([[lem-integral-elementary-bounds]]); continuity at $c$ bounds the integrand by $\\varepsilon$ near $c$, and [[thm-monotonicity-of-the-integral]] with [[cor-integrability-of-absolute-values-products-and-lattice-operations]] bounds the whole quotient by $\\varepsilon$. WRITE THE ESTIMATE FOR $x<c$ TOO: with [[def-oriented-integral]] the factor $1/(x-c)$ is negative and the naive chain of inequalities reverses; this is the single most common error in this proof. Then $F'(c) = f(c)$ by [[def-derivative]] and [[def-function-limit]]. The one-sided statement at the endpoints $a$ and $b$ is included, since [[def-derivative]] is stated at limit points of the domain and every point of a nondegenerate interval is one. LANDMARK.",
+        "deps": [
+          "def-the-integral-function",
+          "thm-the-integral-function-is-lipschitz",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "lem-integral-elementary-bounds",
+          "thm-additivity-over-subintervals",
+          "def-oriented-integral",
+          "def-derivative",
+          "def-function-limit",
+          "def-continuity-real",
+          "lem-limit-is-local",
+          "def-interval",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "thm-ftc-second-part",
+        "kind": "theorem",
+        "title": "The second fundamental theorem: if $G$ is differentiable on $[a,b]$ with $G' = f$ and $f$ is integrable, then $\\int_a^b f = G(b)-G(a)$",
+        "strategy": "direct, by the mean value theorem on the subintervals of an arbitrary partition -- the proof that needs NO continuity of $f$, only its integrability, and is therefore the right 'working' form. For a partition $P = (n,t)$, telescoping gives $G(b)-G(a) = \\sum_{i<n}\\bigl(G(t_{i+1})-G(t_i)\\bigr)$ ([[lem-finite-sum-laws]] clause 5), and [[cor-mean-value-theorem]] on each $[t_i,t_{i+1}]$ produces $\\xi_i$ with $G(t_{i+1})-G(t_i) = f(\\xi_i)\\Delta_i$. So $G(b)-G(a)$ is a Riemann sum $S(f,P,\\xi)$ ([[def-tagged-partition-and-riemann-sum]]) and therefore lies between $L(f,P)$ and $U(f,P)$ for EVERY $P$; since $f$ is integrable, [[def-darboux-integral]] squeezes it to $\\int_a^b f$. THE SELECTION OF THE $\\xi_i$ IS FINITE AND NEEDS NO CHOICE PRINCIPLE -- say so, in the style of [[def-tagged-partition-and-riemann-sum]]'s own remark, since a reader who has met [[def-dependent-choice]] will ask. State the hypotheses exactly: $G$ differentiable at every point of $[a,b]$ (one-sided at the endpoints), $f = G'$ integrable. Both hypotheses have witnesses on the companion page showing neither is removable. LANDMARK.",
+        "deps": [
+          "def-darboux-integral",
+          "def-tagged-partition-and-riemann-sum",
+          "thm-darboux-equals-riemann",
+          "def-partition-and-refinement",
+          "def-darboux-sums",
+          "cor-mean-value-theorem",
+          "thm-rolle",
+          "def-derivative",
+          "cor-differentiable-implies-continuous",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-oriented-integral",
+          "def-interval",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "cor-primitives-of-a-continuous-function",
+        "kind": "corollary",
+        "title": "Every continuous function on an interval has a primitive; two primitives differ by a constant; and $\\int_a^b f = G(b)-G(a)$ for any primitive $G$",
+        "strategy": "direct, assembling [[thm-ftc-first-part]] (existence) and [[thm-ftc-second-part]] (evaluation) with [[cor-zero-derivative-implies-constant]] (uniqueness up to a constant). Note the alias [[cor-zero-derivative-implies-constant]] already carries for exactly this statement, so do not mint a second 'antiderivatives differ by a constant'. Integrability of a continuous $f$ is [[thm-continuous-implies-integrable]], published. STATE THE SCOPE HONESTLY: existence of a primitive is proved here only for CONTINUOUS $f$; an integrable $f$ need not have one and a function with a primitive need not be integrable, and both witnesses are on the companion page, so this corollary is exactly the intersection of the two failures.",
+        "deps": [
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-the-integral-function",
+          "cor-zero-derivative-implies-constant",
+          "thm-continuous-implies-integrable",
+          "def-derivative",
+          "def-continuity-real",
+          "def-interval",
+          "thm-monotonicity-from-the-derivative"
+        ]
+      },
+      {
+        "id": "thm-integration-by-parts",
+        "kind": "theorem",
+        "title": "If $u,v$ are differentiable on $[a,b]$ with $u',v'$ integrable, then $\\int_a^b u v' = u(b)v(b)-u(a)v(a) - \\int_a^b u'v$",
+        "strategy": "direct, from [[thm-ftc-second-part]] applied to $G = uv$. By [[thm-algebra-of-derivatives]], $G' = u'v + uv'$; $u$ and $v$ are continuous ([[cor-differentiable-implies-continuous]]) hence bounded and integrable ([[thm-continuous-implies-integrable]]), so $u'v$ and $uv'$ are integrable by [[cor-integrability-of-absolute-values-products-and-lattice-operations]], hence so is $G'$ by [[thm-linearity-of-the-integral]]; apply the second FTC to $G$ and split the integral by linearity. THE INTEGRABILITY OF THE PRODUCTS IS THE HYPOTHESIS-CHECKING STEP AND IS USUALLY SKIPPED; it is why the theorem is stated with $u',v'$ integrable rather than merely existing. The companion page carries the false statement that drops that hypothesis.",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-algebra-of-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-continuous-implies-integrable",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-linearity-of-the-integral",
+          "def-derivative",
+          "def-continuity-real",
+          "cor-boundedness-theorem-r",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "thm-substitution",
+        "kind": "theorem",
+        "title": "Substitution: if $\\varphi$ is differentiable on $[c,d]$ with $\\varphi'$ integrable and $f$ is continuous on an interval containing $\\varphi([c,d])$, then $\\int_{\\varphi(c)}^{\\varphi(d)} f = \\int_c^d (f\\circ\\varphi)\\,\\varphi'$",
+        "strategy": "direct, via a primitive and the chain rule -- the route that needs NO monotonicity of $\\varphi$, which is exactly why the theorem is stated with oriented limits. Let $F$ be a primitive of $f$ on the interval $J \\supseteq \\varphi([c,d])$ ($J$ is an interval containing the compact connected image, by [[cor-continuous-image-of-an-interval-is-an-interval]]), which exists by [[cor-primitives-of-a-continuous-function]]. Then $(F\\circ\\varphi)' = (f\\circ\\varphi)\\varphi'$ by [[thm-chain-rule]], this is integrable ([[thm-composition-with-a-continuous-function]] for $f\\circ\\varphi$, then [[cor-integrability-of-absolute-values-products-and-lattice-operations]] for the product), and [[thm-ftc-second-part]] applied to $F\\circ\\varphi$ on $[c,d]$ gives the right-hand side as $F(\\varphi(d))-F(\\varphi(c))$, which is the left-hand side by [[thm-ftc-second-part]] again on the oriented interval between $\\varphi(c)$ and $\\varphi(d)$ ([[def-oriented-integral]] is what makes that step legal when $\\varphi(d)<\\varphi(c)$). NOTE WHAT IS NOT ASSUMED: $\\varphi$ need be neither injective nor monotone. The version with $f$ merely integrable is FALSE without further hypotheses; do not state it, and let the companion page carry the witness.",
+        "deps": [
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "thm-chain-rule",
+          "thm-composition-with-a-continuous-function",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-linearity-of-the-integral",
+          "cor-continuous-image-of-an-interval-is-an-interval",
+          "thm-continuous-image-of-a-compact-set-r",
+          "def-oriented-integral",
+          "def-derivative",
+          "def-continuity-real",
+          "cor-differentiable-implies-continuous",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "thm-second-mean-value-theorem-for-integrals",
+        "kind": "theorem",
+        "title": "Bonnet's second mean value theorem: for $f$ monotone and $g$ integrable on $[a,b]$ there is $\\xi\\in[a,b]$ with $\\int_a^b fg = f(a)\\int_a^\\xi g + f(b)\\int_\\xi^b g$",
+        "strategy": "direct, by Abel summation on partitions and a passage to the limit -- the route that does NOT assume $f$ differentiable. Stages. (1) $f$ monotone is integrable ([[thm-monotone-implies-integrable]]) and $fg$ is integrable ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]). (2) Put $G(x) = \\int_a^x g$, continuous by [[thm-the-integral-function-is-lipschitz]]. (3) For a partition $P$, apply [[lem-abel-summation-by-parts]] to the finite sums $\\sum_i f(t_i)\\bigl(G(t_{i+1})-G(t_i)\\bigr)$, obtaining $f(b)G(b) - \\sum_i G(t_{i+1})\\bigl(f(t_{i+1})-f(t_i)\\bigr)$; READ THAT PUBLISHED LEMMA ON DISK AND MATCH ITS INDEXING BEFORE USING IT, since a summation-by-parts identity is off by one term under half the conventions in print. (4) The second sum lies between $m\\bigl(f(b)-f(a)\\bigr)$ and $M\\bigl(f(b)-f(a)\\bigr)$ where $m,M$ are the extrema of $G$ ([[thm-extreme-value-r]]), because the increments of a monotone $f$ have one sign. (5) Let the mesh go to $0$: the first sums converge to $\\int_a^b fg$ by [[thm-darboux-equals-riemann]] and the estimate persists, giving $\\int_a^b fg = f(b)G(b) - \\lambda(f(b)-f(a))$ with $\\lambda \\in [m,M]$; [[thm-intermediate-value]] gives $\\lambda = G(\\xi)$ and rearranging with [[thm-additivity-over-subintervals]] gives the stated form. IF STAGE (5) CANNOT BE MADE CLEAN, state and prove instead the WEAKER form with $f$ monotone AND continuously differentiable (proved in three lines from [[thm-integration-by-parts]] and [[thm-first-mean-value-theorem-for-integrals]] applied to the one-signed weight $-f'$) and record the general case as a scope drop -- a correct weaker theorem is worth more than a shaky general one.",
+        "deps": [
+          "thm-monotone-implies-integrable",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-the-integral-function-is-lipschitz",
+          "def-the-integral-function",
+          "lem-abel-summation-by-parts",
+          "thm-darboux-equals-riemann",
+          "def-tagged-partition-and-riemann-sum",
+          "thm-extreme-value-r",
+          "thm-intermediate-value",
+          "thm-additivity-over-subintervals",
+          "thm-integration-by-parts",
+          "thm-first-mean-value-theorem-for-integrals",
+          "def-monotone-function",
+          "thm-monotone-one-sided-limits-exist",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-oriented-integral",
+          "thm-linearity-of-the-integral"
+        ]
+      },
+      {
+        "id": "thm-nonnegative-continuous-with-zero-integral-vanishes",
+        "kind": "theorem",
+        "title": "A continuous $f \\ge 0$ on $[a,b]$ with $\\int_a^b f = 0$ is identically $0$",
+        "strategy": "contradiction, and it is the TRUE companion of a published false statement: [[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's companion refutes the same claim for merely integrable $f$, so this item is exactly the repair and should say so. If $f(c)>0$ for some $c$, continuity gives a subinterval $[p,q]\\subseteq[a,b]$ with $p<q$ on which $f \\ge f(c)/2$ ([[lem-sign-preservation-near-a-limit]] or directly from [[def-continuity-real]]); then [[thm-additivity-over-subintervals]] and [[thm-monotonicity-of-the-integral]] give $\\int_a^b f \\ge \\int_p^q f \\ge \\tfrac12 f(c)(q-p)>0$. THE NONNEGATIVITY ON THE OTHER TWO PIECES is what lets the middle piece be isolated -- cite it, do not assume it. Handle $c = a$ or $c = b$ by taking a one-sided subinterval.",
+        "deps": [
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "lem-integral-elementary-bounds",
+          "def-continuity-real",
+          "lem-sign-preservation-near-a-limit",
+          "thm-continuous-implies-integrable",
+          "def-darboux-integral",
+          "def-interval",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "thm-integral-test-for-series",
+        "kind": "theorem",
+        "title": "The integral test: for $f \\ge 0$ nonincreasing on $[0,\\infty)$, $\\sum_k f(k)$ converges if and only if the sequence $\\bigl(\\int_0^N f\\bigr)_N$ is bounded, with $\\int_0^N f \\le \\sum_{k<N} f(k) \\le f(0) + \\int_0^N f$",
+        "strategy": "direct, from a bracketing on each unit interval, then [[thm-nonnegative-series-bounded-partial-sums]]. STATED WITH PROPER INTEGRALS ONLY, AND THAT IS A DELIBERATE DESIGN DECISION: improper integrals are homed on a later page and are not available at this point in the reading order, so the conclusion is phrased as boundedness of the increasing sequence $\\bigl(\\int_0^N f\\bigr)_N$ rather than as convergence of $\\int_0^\\infty f$. Say that in Remarks, and say that the later page will identify the two. On $[k,k+1]$, monotonicity gives $f(k+1)\\le f(t)\\le f(k)$, so [[thm-monotonicity-of-the-integral]] and [[lem-integral-elementary-bounds]] give $f(k+1)\\le\\int_k^{k+1} f\\le f(k)$; sum with [[thm-additivity-over-subintervals]] and [[lem-finite-sum-laws]]. $f$ is integrable on every $[0,N]$ by [[thm-monotone-implies-integrable]]. Then the equivalence is [[thm-nonnegative-series-bounded-partial-sums]] applied to $\\sum f(k)$, whose terms are nonnegative. INDEX RANGE: $\\mathbb{N}$ contains $0$, so the sum starts at $k=0$ and the base interval is $[0,N]$; a version starting at $1$ is a tail and is covered by [[lem-series-tail-invariance]] -- do not silently start at $1$ as the classical statement does. LANDMARK.",
+        "deps": [
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "lem-integral-elementary-bounds",
+          "thm-monotone-implies-integrable",
+          "def-monotone-function",
+          "def-series",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "lem-series-tail-invariance",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-sequence",
+          "thm-monotone-convergence",
+          "cor-monotone-converges-iff-bounded",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-oriented-integral",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "rem-integral-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions of this page, and which sharpenings of the integral are taken up later in the reading order",
+        "strategy": "the page ledger, in the style of [[rem-riemann-integral-choice-ledger]] and [[rem-metric-axiom-conventions]]. Record: (1) the orientation convention of [[def-oriented-integral]] and the two statements on this page whose form depends on it ([[cor-integrability-of-absolute-values-products-and-lattice-operations]], [[thm-substitution]]); (2) that 'integrable' means Darboux integrable in the sense of [[def-darboux-integral]], equivalently Riemann integrable by [[thm-darboux-equals-riemann]], and that no other integral is in use; (3) the choice cost: nothing on this page uses a choice principle, and in particular the finitely many tags of [[thm-ftc-second-part]] are chosen by a theorem of ZF, whereas the published [[thm-lebesgue-criterion]] on the previous page does spend countable choice once. WHAT IS TAKEN UP LATER, phrased as reading order and never as a claim about the library: Taylor's integral remainder needs higher derivatives, which are introduced on a later page; bounded variation and the Riemann-Stieltjes integral, improper integrals, and the sharpening of the fundamental theorem all have their own pages later in this track. MENTION, via `external_refs` and not via `deps`, the recorded-not-proved [[rem-ftc-absolutely-continuous]] and [[rem-dominated-convergence-theorem]] on the deferred measure-and-integration page, as the statements a reader will want next and which this library records but does not prove; a mention does not propagate (SCHEMA 3) and nothing here rests on them.",
+        "deps": [
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "thm-darboux-equals-riemann",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "thm-substitution",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-integral-test-for-series",
+          "thm-lebesgue-criterion"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 162,
+    "id": "properties-of-the-integral-and-the-working-ftc-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Properties of the Integral and the Working FTC: Examples and Counterexamples",
+    "companion": null,
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc"
+    ],
+    "items": [
+      {
+        "id": "ex-polynomial-integrals-by-the-ftc",
+        "kind": "example",
+        "title": "$\\int_0^1 x^{m} = 1/\\iota(m+1)$, computed by the fundamental theorem and checked against the definition",
+        "strategy": "computation, done twice. First by [[cor-primitives-of-a-continuous-function]] with the primitive $x^{m+1}/\\iota(m+1)$, whose derivative is $x^{m}$ by [[lem-derivative-of-a-power]] -- read that published lemma's index range before citing it, it is the item the previous page flagged for an index trap. Second, for $m=1$ and $m=2$, from Darboux sums on the uniform partition, which the previous page's companion already does for $x^{2}$; the point of repeating it is the CROSS-CHECK, that the two routes agree. Note the canonical natural: the answer is $1/\\iota(m+1)$, not $1/(m+1)$, since $m+1$ is a von Neumann natural ([[def-canonical-natural]]).",
+        "deps": [
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "def-integer-power",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-darboux-integral",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "ex-additivity-on-a-step-function",
+        "kind": "example",
+        "title": "A step function integrated by additivity over subintervals, and the same value from the definition",
+        "strategy": "computation exercising [[thm-additivity-over-subintervals]] and [[lem-changing-a-function-at-finitely-many-points]] together. Take $f = 1$ on $[0,1)$, $f = 3$ on $[1,2]$, and any value at the single point $1$; compute $\\int_0^2 f = 1 + 3 = 4$ by splitting at $1$ and using the constant case of [[lem-integral-elementary-bounds]], then observe that the value at $1$ is irrelevant, which is the content of the changing-at-finitely-many-points lemma. This is the smallest example in which the partition point genuinely lies in two subintervals, the case that lemma's proof singles out.",
+        "deps": [
+          "thm-additivity-over-subintervals",
+          "lem-changing-a-function-at-finitely-many-points",
+          "lem-integral-elementary-bounds",
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "thm-monotone-implies-integrable"
+        ]
+      },
+      {
+        "id": "ex-integral-test-applied-to-the-p-series",
+        "kind": "example",
+        "title": "The integral test applied to $\\sum 1/\\iota(k+1)^{p}$ for rational $p>0$, cross-checked against the published $p$-series theorem",
+        "strategy": "verification, and the cross-check is the point. Apply [[thm-integral-test-for-series]] to $f(t) = (t+1)^{-p}$ for rational $p>0$ ([[def-rational-power]], positive base, so the power is defined; $p$ MUST BE RATIONAL because real exponents do not exist in this library at this point in the reading order -- [[rem-real-exponents-deferred]]). Compute $\\int_0^N f$ by [[cor-primitives-of-a-continuous-function]], separating $p = 1$ (where the primitive is not a power and the integral is not available here, so state only the boundedness question and resolve it by comparison) from $p \\ne 1$. Then compare the verdict with the published [[thm-p-series-rational]] and confirm they agree. If the $p=1$ case cannot be settled without the logarithm, say so and settle it by [[thm-cauchy-condensation]] instead, citing the published result rather than inventing a logarithm.",
+        "deps": [
+          "thm-integral-test-for-series",
+          "cor-primitives-of-a-continuous-function",
+          "thm-p-series-rational",
+          "thm-cauchy-condensation",
+          "def-rational-power",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "rem-real-exponents-deferred",
+          "def-series",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "ex-two-root-x-and-its-unbounded-derivative",
+        "kind": "example",
+        "title": "$H(x) = 2\\sqrt{x}$ on $[0,1]$: $H$ is continuous, $H'$ is unbounded on $(0,1]$, and $H'$ is therefore not Riemann integrable",
+        "strategy": "the Bartle and Sherbert motivating example, worked. $H$ is continuous on $[0,1]$ ([[thm-nth-roots-exist]] and the continuity of the square root, which follows from [[thm-continuous-inverse]] applied to $x\\mapsto x^{2}$ on $[0,\\infty)$ -- cite, do not assume); $H$ is differentiable on $(0,1]$ with $H'(x) = 1/\\sqrt{x}$ ([[thm-derivative-of-an-inverse]] or the power rule for rational exponents, whichever is actually published -- CHECK ON DISK), and $H'$ is unbounded, hence not Riemann integrable on $[0,1]$ because [[def-darboux-sums]] is defined only for bounded functions. So the second fundamental theorem does not apply on $[0,1]$ even though $H$ is continuous there and differentiable on the open interval. The honest conclusion available here is exactly that; the improper integral that repairs it belongs to a later page and must not be computed here.",
+        "deps": [
+          "thm-ftc-second-part",
+          "def-darboux-sums",
+          "def-darboux-integral",
+          "def-bounded-set",
+          "thm-nth-roots-exist",
+          "def-rational-power",
+          "thm-continuous-inverse",
+          "thm-derivative-of-an-inverse",
+          "def-derivative",
+          "def-continuity-real",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "cex-an-integrable-function-with-no-primitive",
+        "kind": "counterexample",
+        "title": "The sign function is Riemann integrable on $[-1,1]$ and has no primitive there",
+        "strategy": "counterexample with an ELEMENTARY refutation, not by Darboux's theorem on the intermediate value property of derivatives, which lives on a later page and is not available. Integrability: $s$ has one discontinuity, so [[thm-finitely-many-discontinuities-integrable]] applies, and $\\int_{-1}^{1} s = 0$ by [[thm-additivity-over-subintervals]]. No primitive: if $G' = s$ on $[-1,1]$ then $G' = 1$ on $(0,1]$ and $G' = -1$ on $[-1,0)$, so by [[cor-zero-derivative-implies-constant]] applied to $G(x)-x$ and to $G(x)+x$, $G(x) = x + c_1$ on $[0,1]$ and $G(x) = -x + c_2$ on $[-1,0]$, and continuity of $G$ at $0$ ([[cor-differentiable-implies-continuous]]) forces $c_1 = c_2$; then $G(x) = \\lvert x\\rvert + c$, whose one-sided difference quotients at $0$ are $1$ and $-1$, so $G'(0)$ does not exist by [[thm-two-sided-limit-iff-both-one-sided]] -- contradicting differentiability at $0$. Note the tension with [[thm-ftc-first-part]] resolved: the integral function of $s$ IS $\\lvert x\\rvert - 1$, differentiable everywhere except at the one point where $s$ is discontinuous.",
+        "deps": [
+          "thm-ftc-first-part",
+          "thm-finitely-many-discontinuities-integrable",
+          "thm-additivity-over-subintervals",
+          "cor-zero-derivative-implies-constant",
+          "cor-differentiable-implies-continuous",
+          "thm-two-sided-limit-iff-both-one-sided",
+          "def-one-sided-limits",
+          "def-derivative",
+          "def-the-integral-function",
+          "def-continuity-real",
+          "def-classification-of-discontinuities"
+        ]
+      },
+      {
+        "id": "cex-a-function-with-a-primitive-that-is-not-integrable",
+        "kind": "counterexample",
+        "title": "A function differentiable on $[0,1]$ whose derivative is unbounded, hence not Riemann integrable",
+        "strategy": "explicit construction, ENTIRELY POLYNOMIAL, because the classical witness $x^{2}\\sin(1/x^{2})$ needs trigonometric functions and this library has none at this point in the reading order -- record that substitution as a deliberate choice. Take $\\phi(t) = t^{2}(1-t)^{2}$, which is a polynomial with $\\phi(0)=\\phi(1)=0$ and $\\phi'(0)=\\phi'(1)=0$, so translating and scaling it gives bumps that glue to $0$ with matching derivatives. On disjoint intervals $I_n \\subseteq (1/\\iota(n+2), 1/\\iota(n+1))$ of length $h_n$ place the bump $c_n\\phi((x-a_n)/h_n)$, and set $G = 0$ elsewhere. Choose $h_n$ and $c_n$ (for instance $c_n$ of order $1/\\iota(n)^{3}$ and $h_n$ of order $1/\\iota(n)^{5}$) so that (i) $\\lvert G(x)\\rvert / \\lvert x\\rvert \\to 0$ as $x\\to 0$, which gives $G'(0) = 0$ by [[def-derivative]] and [[thm-squeeze-for-function-limits]], and (ii) $\\sup\\lvert G'\\rvert$ on $I_n$, which is of order $c_n/h_n$, tends to infinity. VERIFY BOTH ESTIMATES EXPLICITLY WITH THE CHOSEN EXPONENTS -- the construction is only as good as those two inequalities, and every step is finite algebra plus [[lem-power-monotone]]. Then $G$ is differentiable on $[0,1]$, but $G'$ is unbounded, so $G'$ is not Riemann integrable ([[def-darboux-sums]] requires boundedness). Only ONE bump is nonzero near any point of $(0,1]$, so no series convergence is involved anywhere.",
+        "deps": [
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "lem-derivative-of-a-power",
+          "thm-squeeze-for-function-limits",
+          "def-function-limit",
+          "lem-limit-is-local",
+          "def-darboux-sums",
+          "def-bounded-set",
+          "def-integer-power",
+          "lem-power-monotone",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "thm-of-archimedean",
+          "thm-ftc-second-part",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "cex-a-composition-of-integrable-functions-that-is-not-integrable",
+        "kind": "counterexample",
+        "title": "Integrable $\\varphi$ and integrable $f$ with $\\varphi\\circ f$ not integrable: the order of the hypotheses in the composition theorem cannot be reversed",
+        "strategy": "counterexample, refuting the mirror image of [[thm-composition-with-a-continuous-function]]. Take $f$ to be Thomae's function on $[0,1]$ ([[def-dirichlet-and-thomae-functions]]), which is integrable with integral $0$ (its discontinuity set is $\\mathbb{Q}\\cap[0,1]$, countable hence null, so [[thm-lebesgue-criterion]] applies; or cite the previous page's companion where this is worked), and $\\varphi(t) = 1$ for $t>0$, $\\varphi(0)=0$, which is integrable on $[0,1]$ by [[thm-monotone-implies-integrable]]. Then $\\varphi\\circ f$ is the Dirichlet function, not integrable ([[def-dirichlet-and-thomae-functions]], [[thm-lebesgue-criterion]], or the previous page's companion). SAY EXACTLY WHICH HYPOTHESIS OF THE COMPOSITION THEOREM FAILS: $\\varphi$ is not continuous. Cross-check the discontinuity sets against [[thm-dirichlet-and-thomae-continuity-sets]], published, rather than restating them.",
+        "deps": [
+          "thm-composition-with-a-continuous-function",
+          "def-dirichlet-and-thomae-functions",
+          "thm-dirichlet-and-thomae-continuity-sets",
+          "thm-lebesgue-criterion",
+          "thm-monotone-implies-integrable",
+          "def-measure-zero-and-content-zero",
+          "lem-countable-sets-are-null",
+          "def-darboux-integral",
+          "def-continuity-real",
+          "thm-rationals-countable"
+        ]
+      },
+      {
+        "id": "cex-absolute-value-integrable-without-the-function",
+        "kind": "counterexample",
+        "title": "A function that is not Riemann integrable although $\\lvert f\\rvert$ is",
+        "strategy": "counterexample refuting the converse of [[cor-integrability-of-absolute-values-products-and-lattice-operations]]. Take $f = 1$ on the rationals of $[0,1]$ and $f = -1$ on the irrationals; then $\\lvert f\\rvert \\equiv 1$ is integrable with integral $1$, while $f$ has $L(f,P) = -1$ and $U(f,P) = 1$ for every partition, because both the rationals and the irrationals are dense ([[lem-q-and-irrationals-dense-r]]), so $f$ is not integrable by [[def-darboux-integral]]. Note that $f = 2\\chi_{\\mathbb{Q}} - 1$, so this is the Dirichlet function rescaled, and cross-check with [[thm-lebesgue-criterion]]: the discontinuity set is all of $[0,1]$, which is not null ([[lem-nondegenerate-interval-is-not-null]]).",
+        "deps": [
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "lem-q-and-irrationals-dense-r",
+          "def-dirichlet-and-thomae-functions",
+          "thm-lebesgue-criterion",
+          "lem-nondegenerate-interval-is-not-null",
+          "def-measure-zero-and-content-zero",
+          "thm-linearity-of-the-integral"
+        ]
+      },
+      {
+        "id": "cex-spikes-with-integral-one-converging-pointwise-to-zero",
+        "kind": "counterexample",
+        "title": "Continuous $f_n \\to 0$ pointwise on $[0,1]$ with $\\int_0^1 f_n = 1$ for every $n$",
+        "strategy": "counterexample: pointwise convergence alone never licenses passing to the limit under the integral. Take $f_n$ to be the piecewise linear tent of height $2\\iota(n+1)$ supported on $[0, 1/\\iota(n+1)]$, continuous hence integrable ([[thm-continuous-implies-integrable]]) with integral $1$ computed by [[thm-additivity-over-subintervals]] and [[cor-primitives-of-a-continuous-function]] on the two linear pieces. For fixed $x>0$, $f_n(x) = 0$ once $1/\\iota(n+1)<x$ ([[thm-of-archimedean]]), and $f_n(0)=0$ for all $n$, so $f_n \\to 0$ pointwise. THE HEIGHTS ARE UNBOUNDED, and saying so is what makes the example precise: it refutes the interchange for pointwise convergence, and it does NOT refute anything about uniformly bounded sequences, whose interchange theorem is not stated on this page. Do not assert the bounded convergence theorem in any form here.",
+        "deps": [
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "cor-primitives-of-a-continuous-function",
+          "thm-linearity-of-the-integral",
+          "def-continuity-real",
+          "def-sequence",
+          "def-real-limit",
+          "thm-of-archimedean",
+          "cor-archimedean-reciprocal",
+          "def-canonical-natural",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "cex-the-first-mean-value-theorem-needs-a-one-signed-weight",
+        "kind": "counterexample",
+        "title": "Continuous $f$ and integrable sign-changing $g$ with $\\int_a^b fg \\ne f(\\xi)\\int_a^b g$ for every $\\xi$",
+        "strategy": "counterexample locating the hypothesis $g \\ge 0$ of [[thm-first-mean-value-theorem-for-integrals]]. On $[-1,1]$ take $g(t) = t$ and $f(t) = t$; then $\\int_{-1}^{1} fg = \\int_{-1}^{1} t^{2} = 2/\\iota(3) > 0$ while $\\int_{-1}^{1} g = 0$, so $f(\\xi)\\int g = 0$ for every $\\xi$ and no $\\xi$ works. Compute both integrals by [[cor-primitives-of-a-continuous-function]]. Note the weaker true statement that survives: with $g$ of one sign the theorem holds, and with $g$ integrable of arbitrary sign only the bound $\\lvert\\int fg\\rvert \\le \\sup\\lvert f\\rvert\\int\\lvert g\\rvert$ remains ([[thm-monotonicity-of-the-integral]], [[cor-integrability-of-absolute-values-products-and-lattice-operations]]).",
+        "deps": [
+          "thm-first-mean-value-theorem-for-integrals",
+          "cor-primitives-of-a-continuous-function",
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "def-oriented-integral",
+          "def-canonical-natural",
+          "def-integer-power",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "fs-integration-by-parts-needs-no-integrability-hypothesis",
+        "kind": "false-statement",
+        "title": "If $u$ and $v$ are differentiable on $[a,b]$ then $\\int_a^b uv' = u(b)v(b)-u(a)v(a)-\\int_a^b u'v$",
+        "strategy": "refutation: with $u = G$ the everywhere-differentiable function of [[cex-a-function-with-a-primitive-that-is-not-integrable]] and $v(x) = x$, the integrand $uv' = G$ is continuous hence integrable, but $u'v = G'(x)\\,x$ is unbounded near the accumulation point and hence not Riemann integrable, so the right-hand side is not even defined. THE FALSITY IS UNDEFINEDNESS, NOT A WRONG NUMBER, and the item should say so in those terms, exactly as the stars-and-bars false statement on the counting page does. State the correct hypothesis of [[thm-integration-by-parts]] ($u',v'$ integrable) and note that it is automatic when $u,v$ are continuously differentiable.",
+        "deps": [
+          "thm-integration-by-parts",
+          "cex-a-function-with-a-primitive-that-is-not-integrable",
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "def-darboux-integral",
+          "def-bounded-set",
+          "thm-continuous-implies-integrable",
+          "cor-differentiable-implies-continuous"
+        ]
+      },
+      {
+        "id": "fs-substitution-holds-for-every-integrable-integrand",
+        "kind": "false-statement",
+        "title": "If $\\varphi$ is differentiable with integrable derivative and $f$ is integrable on an interval containing the image of $\\varphi$, then $\\int_{\\varphi(c)}^{\\varphi(d)} f = \\int_c^d (f\\circ\\varphi)\\varphi'$",
+        "strategy": "refutation, and the cleanest failure is that the right-hand side need not exist: take $f$ to be the Dirichlet function on $[0,1]$, which is not integrable, and $\\varphi$ a nonconstant polynomial mapping $[c,d]$ into $[0,1]$ -- but that already fails the hypothesis on $f$, so instead take $f$ integrable and $\\varphi$ chosen so that $f\\circ\\varphi$ is not: with $f$ Thomae's function (integrable) and $\\varphi$ a map whose image meets the rationals densely in a controlled way, $f\\circ\\varphi$ is the Dirichlet-type function of [[cex-a-composition-of-integrable-functions-that-is-not-integrable]]. CONSTRUCT THE WITNESS EXPLICITLY OR WEAKEN THE ITEM: if a clean explicit $\\varphi$ cannot be exhibited with the machinery of this page, replace this false statement with the weaker and fully provable one that the substitution identity requires $f\\circ\\varphi$ to be integrable, and refute the version that omits continuity of $f$ by a two-line undefinedness argument. Do not publish a witness that has not been checked; an honest weaker item is preferred.",
+        "deps": [
+          "thm-substitution",
+          "cex-a-composition-of-integrable-functions-that-is-not-integrable",
+          "thm-composition-with-a-continuous-function",
+          "def-dirichlet-and-thomae-functions",
+          "thm-dirichlet-and-thomae-continuity-sets",
+          "thm-lebesgue-criterion",
+          "def-darboux-integral",
+          "def-continuity-real",
+          "cor-primitives-of-a-continuous-function"
+        ]
+      },
+      {
+        "id": "fs-the-integral-function-is-always-a-primitive",
+        "kind": "false-statement",
+        "title": "For every integrable $f$ on $[a,b]$, the integral function $F(x)=\\int_a^x f$ satisfies $F' = f$ on $[a,b]$",
+        "strategy": "refutation by the sign function of [[cex-an-integrable-function-with-no-primitive]]: there $F(x) = \\lvert x\\rvert - 1$, which is not differentiable at $0$, so $F' = f$ fails at the single point where $f$ is discontinuous. A second, sharper witness: any integrable $f$ that differs from a continuous $g$ at one point has the same $F$ as $g$ ([[lem-changing-a-function-at-finitely-many-points]]), so $F' = g \\ne f$ at that point -- this shows the failure is not exotic and cannot be repaired by any hypothesis weaker than continuity at the point. State the true theorem, [[thm-ftc-first-part]], whose hypothesis is continuity AT THE POINT and nowhere else.",
+        "deps": [
+          "thm-ftc-first-part",
+          "def-the-integral-function",
+          "cex-an-integrable-function-with-no-primitive",
+          "lem-changing-a-function-at-finitely-many-points",
+          "def-derivative",
+          "def-continuity-real",
+          "thm-the-integral-function-is-lipschitz",
+          "def-classification-of-discontinuities"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 167,
+    "id": "rn-as-a-normed-space",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "$\\mathbb{R}^n$ as a Normed Space; Vector-Valued Functions",
+    "companion": "rn-as-a-normed-space-examples",
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc"
+    ],
+    "items": [
+      {
+        "id": "def-norm-and-normed-space",
+        "kind": "definition",
+        "title": "A norm on a real vector space, the induced metric, and the dictionary with the metric axioms",
+        "strategy": "the page's opening definition, and it is where the SEAM with the published metric theory is fixed rather than left to chance. A norm on a vector space $V$ over $\\mathbb{R}$ ([[def-vector-space]]) is $\\lVert\\cdot\\rVert : V \\to \\mathbb{R}$ with (N1) $\\lVert v\\rVert = 0$ iff $v = 0$, (N2) $\\lVert\\lambda v\\rVert = \\lvert\\lambda\\rvert\\lVert v\\rVert$, (N3) the triangle inequality. NONNEGATIVITY IS NOT AN AXIOM, exactly as in [[def-metric-space]]: derive it from (N2) and (N3) ($0 = \\lVert v-v\\rVert \\le 2\\lVert v\\rVert$), and say that the verification of a candidate norm therefore has three things to check, mirroring [[lem-metric-nonnegativity]]. Then prove the DICTIONARY CLAUSE: $d(u,v) := \\lVert u-v\\rVert$ is a metric on $V$ in the sense of [[def-metric-space]], and it is translation invariant and absolutely homogeneous, which an arbitrary metric need not be. Say plainly that not every metric on a vector space arises this way and give the reason a reader will need later (an arbitrary metric fails homogeneity); the bounded remetrisation [[lem-bounded-remetrisation]] is the published example, cite it. Values are real, never $+\\infty$, as [[rem-metric-axiom-conventions]] fixed for metrics. LANDMARK.",
+        "deps": [
+          "def-vector-space",
+          "def-function-space",
+          "def-metric-space",
+          "lem-metric-nonnegativity",
+          "def-metric-topology",
+          "lem-bounded-remetrisation",
+          "rem-metric-axiom-conventions",
+          "def-abs-value",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality",
+          "def-complete-ordered-field",
+          "lem-vector-space-elementary-consequences"
+        ]
+      },
+      {
+        "id": "def-euclidean-inner-product",
+        "kind": "definition",
+        "title": "The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$",
+        "strategy": "concrete definition with its algebra proved inline; NO abstract inner-product-space theory is developed, and the reason is recorded. $\\mathbb{R}^n$ is the function space of [[def-function-space]] on the von Neumann natural $n$, so $x_k := x(k)$ for $k<n$, and $\\langle x,y\\rangle := \\sum_{k<n} x_k y_k$ is the finite sum of [[def-finite-sum]]. VALID FOR EVERY $n$ INCLUDING $n = 0$, where it is the empty sum $0$ -- unlike the metric $d_\\infty$ of [[lem-metrics-on-rn]], which needs $n \\ge 1$; state that contrast here, because it is the first place on the page where the two index regimes diverge. Prove symmetry, bilinearity and positive definiteness ($\\langle x,x\\rangle = \\sum x_k^{2} \\ge 0$ with equality iff $x = 0$, by [[lem-finite-sum-laws]] clause 4 and [[lem-of-square-positive]]) directly from the finite-sum laws. Define $\\lVert x\\rVert_2 := \\sqrt{\\langle x,x\\rangle}$ ([[thm-of-square-roots]]) and record that this is exactly the $d_2$ of [[lem-metrics-on-rn]] at $y = 0$. SCOPE NOTE, to be stated in Remarks and reported: the general theory of inner product spaces is planned for a page EARLIER in plan order that is not yet built, so this item defines the concrete Euclidean form only and claims nothing about abstract inner product spaces.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-function-space",
+          "def-vector-space",
+          "lem-standard-basis-of-f-n",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-metrics-on-rn",
+          "lem-of-square-positive",
+          "thm-of-square-roots",
+          "def-natural-numbers",
+          "lem-nat-order-is-membership",
+          "def-integer-power",
+          "lem-power-laws"
+        ]
+      },
+      {
+        "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "kind": "theorem",
+        "title": "Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation",
+        "strategy": "direct, and the first clause is a CITATION, not a new proof: [[thm-cauchy-schwarz-finite]] is published at order 16 and already gives the root form and the equality case in the symmetric proportionality sense; read it on disk and restate it in the vector notation of [[def-euclidean-inner-product]]. Re-proving it here would be the two-notions defect in its purest form. What IS new: (a) $\\lVert\\cdot\\rVert_2$ satisfies (N1)-(N3) of [[def-norm-and-normed-space]], the triangle inequality following from Cauchy-Schwarz by expanding $\\lVert x+y\\rVert_2^{2}$ -- or by citing [[thm-minkowski-finite]] at $p = 2$, and either route is acceptable provided one is chosen and the other mentioned; (b) the PARALLELOGRAM LAW $\\lVert x+y\\rVert_2^{2}+\\lVert x-y\\rVert_2^{2} = 2\\lVert x\\rVert_2^{2}+2\\lVert y\\rVert_2^{2}$, by bilinearity; (c) POLARISATION $\\langle x,y\\rangle = \\tfrac14\\bigl(\\lVert x+y\\rVert_2^{2}-\\lVert x-y\\rVert_2^{2}\\bigr)$, which says the inner product is recoverable from the norm. Clauses (b) and (c) are what the companion page uses to show that $\\lVert\\cdot\\rVert_1$ on $\\mathbb{R}^{2}$ comes from no inner product. LANDMARK.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-norm-and-normed-space",
+          "thm-cauchy-schwarz-finite",
+          "thm-minkowski-finite",
+          "lem-triangle-inequality-finite",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "lem-metrics-on-rn",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "def-p-norms-on-rn",
+        "kind": "definition",
+        "title": "The $p$-norms $\\lVert x\\rVert_p$ for rational $p \\ge 1$, and $\\lVert x\\rVert_\\infty$",
+        "strategy": "definition, with TWO hypotheses that are not decoration and must both be stated where the object is introduced. (1) THE EXPONENT IS RATIONAL. $\\lVert x\\rVert_p := \\bigl(\\sum_{k<n}\\lvert x_k\\rvert^{p}\\bigr)^{1/p}$ uses [[def-rational-power]], which is defined for rational exponents and nonnegative bases only; real exponents do not exist in this library at this point in the reading order ([[rem-real-exponents-deferred]]), and [[thm-minkowski-finite]] is itself stated for rational $p \\ge 1$ for exactly that reason -- read it on disk. Do not write 'for $p \\in [1,\\infty)$'. (2) $\\lVert x\\rVert_\\infty := \\max\\{\\lvert x_k\\rvert : k<n\\}$ REQUIRES $n \\ge 1$, since at $n = 0$ it is a maximum over the empty set; this is the same restriction [[lem-metrics-on-rn]] carries and for the same reason, and it propagates to everything on this page mentioning $\\lVert\\cdot\\rVert_\\infty$. Existence of the maximum is [[lem-finite-set-has-max]] with [[def-max-min]]. Record $\\lVert x\\rVert_1$ and $\\lVert x\\rVert_2$ as the cases $p = 1, 2$ and note $\\lVert\\cdot\\rVert_2$ agrees with [[def-euclidean-inner-product]]'s.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-euclidean-inner-product",
+          "def-rational-power",
+          "lem-rational-power-well-defined",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "rem-real-exponents-deferred",
+          "thm-minkowski-finite",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "lem-metrics-on-rn",
+          "def-abs-value",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+        "kind": "lemma",
+        "title": "Each $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^n$, and the induced metrics are exactly $d_1$, $d_2$ and $d_\\infty$ of the published metric-spaces page",
+        "strategy": "direct, and THIS IS THE DICTIONARY ITEM THAT PREVENTS THE LEVEL-7 TWO-NOTIONS-OF-OPEN DEFECT FROM RECURRING HERE. Clause 1: (N1) and (N2) are computations from [[lem-finite-sum-laws]] and [[lem-rational-power-laws]]; (N3) is [[thm-minkowski-finite]] for rational $p \\ge 1$, and the separate elementary argument for $p = \\infty$ (a max of sums is at most the sum of maxes), which needs $n \\ge 1$. Clause 2, the dictionary: for $p \\in \\{1,2\\}$ and for $\\infty$, $\\lVert x-y\\rVert_p = d_p(x,y)$ where $d_1,d_2,d_\\infty$ are the PUBLISHED metrics of [[lem-metrics-on-rn]]; the two sides are the same expression, so the proof is a one-line comparison of the definitions -- but the item must exist, because without it the library holds a norm-induced metric and a separately published metric on the same set with no recorded relation, and every later citation would have to guess which is meant. CONSEQUENCE, stated here and used repeatedly below: every published theorem about $(\\mathbb{R}^n,d_2)$ -- completeness [[thm-euclidean-space-complete]], Heine-Borel [[thm-heine-borel-rn]], the compactness equivalences [[thm-metric-compactness-equivalences]] -- applies verbatim to the normed space of this page, WITH THEIR HYPOTHESIS $n \\ge 1$ INHERITED UNCHANGED.",
+        "deps": [
+          "def-p-norms-on-rn",
+          "def-norm-and-normed-space",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-minkowski-finite",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "lem-metrics-on-rn",
+          "def-metric-space",
+          "def-metric-topology",
+          "thm-euclidean-space-complete",
+          "thm-heine-borel-rn",
+          "thm-metric-compactness-equivalences",
+          "lem-finite-set-has-max",
+          "def-max-min"
+        ]
+      },
+      {
+        "id": "def-equivalent-norms",
+        "kind": "definition",
+        "title": "Equivalent norms, and the dictionary with equivalent metrics",
+        "strategy": "definition plus a bridge clause. Two norms on $V$ are EQUIVALENT when there are reals $c, C > 0$ with $c\\lVert v\\rVert \\le \\lVert v\\rVert' \\le C\\lVert v\\rVert$ for every $v$. Prove that this is an equivalence relation (the reflexive and symmetric clauses are immediate; transitivity multiplies constants) and prove the DICTIONARY CLAUSE against [[def-equivalent-metrics]]: equivalent norms induce STRONGLY equivalent metrics in the sense of the published [[thm-metric-equivalence-hierarchy]], hence the same open sets, the same convergent sequences, the same Cauchy sequences and the same uniformly continuous maps. READ [[thm-metric-equivalence-hierarchy]] ON DISK BEFORE STATING WHICH TIER OF EQUIVALENCE IS MEANT: that item distinguishes topological equivalence, uniform equivalence and Lipschitz/strong equivalence, and the norm condition gives the strongest of them; asserting the wrong tier is a citation defect of exactly the dominant class. Note that the converse fails: a metric equivalent to a norm metric need not come from a norm, [[lem-bounded-remetrisation]] being the published witness.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-equivalent-metrics",
+          "thm-metric-equivalence-hierarchy",
+          "def-metric-topology",
+          "def-metric-convergence",
+          "def-cauchy-in-metric",
+          "def-metric-uniform-continuity",
+          "lem-bounded-remetrisation",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+        "kind": "lemma",
+        "title": "For $n \\ge 1$ every norm $N$ on $\\mathbb{R}^n$ satisfies $N(x) \\le C\\lVert x\\rVert_1$ and is Lipschitz, hence continuous, for $d_2$",
+        "strategy": "direct, and it is the half of the norm-equivalence theorem that costs no compactness. Expand $x = \\sum_{k<n} x_k e_k$ in the standard basis ([[lem-standard-basis-of-f-n]], published, with the coordinate clause giving exactly $x_k = x(k)$ -- read clause 3 before citing) and apply (N2) and (N3) repeatedly: $N(x) \\le \\sum_{k<n}\\lvert x_k\\rvert N(e_k) \\le C\\lVert x\\rVert_1$ with $C := \\max\\{N(e_k) : k<n\\}$, a maximum over a nonempty finite set because $n \\ge 1$ ([[lem-finite-set-has-max]]). The repeated triangle inequality is an induction on $n$ -- do it, or cite the finite-sum form if one is available for a general norm, but do not wave. Then $\\lvert N(x)-N(y)\\rvert \\le N(x-y) \\le C\\lVert x-y\\rVert_1 \\le C\\,\\iota(n)^{1/2}\\lVert x-y\\rVert_2$ (the reverse triangle inequality for a norm, proved from (N3) exactly as [[lem-metric-reverse-triangle]] is for a metric, plus the comparison $\\lVert\\cdot\\rVert_1 \\le \\iota(n)^{1/2}\\lVert\\cdot\\rVert_2$ from [[thm-cauchy-schwarz-finite]] applied with the constant list $1$). So $N$ is Lipschitz for $d_2$ ([[def-lipschitz-holder-contraction]]) and continuous ([[thm-metric-regularity-hierarchy]], [[def-metric-continuity]]). STATE THE COMPARISON CHAIN $\\lVert x\\rVert_\\infty \\le \\lVert x\\rVert_2 \\le \\lVert x\\rVert_1 \\le \\iota(n)\\lVert x\\rVert_\\infty$ as a separate clause, with each inequality proved and each requiring $n \\ge 1$ where $\\lVert\\cdot\\rVert_\\infty$ appears.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-equivalent-norms",
+          "lem-standard-basis-of-f-n",
+          "def-linear-combination-and-span",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "thm-cauchy-schwarz-finite",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "lem-metric-reverse-triangle",
+          "def-lipschitz-holder-contraction",
+          "thm-metric-regularity-hierarchy",
+          "def-metric-continuity",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-rational-power",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-all-norms-on-rn-are-equivalent",
+        "kind": "theorem",
+        "title": "For $n \\ge 1$ all norms on $\\mathbb{R}^n$ are equivalent",
+        "strategy": "direct, by compactness of the unit sphere, and the hypothesis $n \\ge 1$ is inherited from every step. Let $N$ be a norm; by [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] it is continuous for $d_2$ and bounded above by $C\\lVert\\cdot\\rVert_2$ after rescaling the constant. The sphere $S := \\{x : \\lVert x\\rVert_2 = 1\\}$ is closed (preimage of a point under a continuous map, [[thm-metric-continuity-characterisations]]) and bounded ([[def-metric-bounded-diameter]]), hence COMPACT by [[thm-heine-borel-rn]] clause 2, and NONEMPTY because $n \\ge 1$ gives $e_0 \\in S$ ([[lem-standard-basis-of-f-n]]) -- state the nonemptiness, it is exactly where $n \\ge 1$ enters a second time and where a proof for $n = 0$ would silently break. By [[thm-extreme-value-metric]] the continuous $N$ attains a minimum $c$ on $S$, and $c > 0$ by (N1) since $0 \\notin S$. Homogeneity (N2) transfers the two bounds from $S$ to all of $\\mathbb{R}^n$: for $x \\ne 0$ apply them to $x/\\lVert x\\rVert_2$; the case $x = 0$ is separate and trivial. Conclude equivalence with $\\lVert\\cdot\\rVert_2$, hence with each other by transitivity ([[def-equivalent-norms]]). SAY WHAT FAILS IN INFINITE DIMENSIONS and that the companion page carries a witness; phrase it as a statement about this proof (the sphere is no longer compact), not as a claim about spaces the library has not built. LANDMARK.",
+        "deps": [
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-equivalent-norms",
+          "def-norm-and-normed-space",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-metric-continuity-characterisations",
+          "def-metric-compactness",
+          "def-metric-bounded-diameter",
+          "def-metric-topology",
+          "lem-standard-basis-of-f-n",
+          "def-metric-continuity",
+          "lem-of-inverse-positive",
+          "def-complete-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-componentwise-convergence-and-completeness",
+        "kind": "theorem",
+        "title": "For $n \\ge 1$ a sequence in $\\mathbb{R}^n$ converges iff each coordinate sequence converges, is Cauchy iff each coordinate sequence is Cauchy, and $\\mathbb{R}^n$ is complete in every norm",
+        "strategy": "direct, from the comparison chain and then a citation. Clauses 1 and 2 follow from $\\lVert x\\rVert_\\infty \\le \\lVert x\\rVert_2 \\le \\iota(n)\\lVert x\\rVert_\\infty$ ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]]): the $\\infty$-norm bounds each coordinate and is bounded by the Euclidean norm, so the two convergence notions squeeze each other. Use [[def-metric-convergence]] and [[def-cauchy-in-metric]] as the definitions, and [[thm-metric-limits-unique]]... check the published id ([[lem-metric-limits-unique]]) before citing. CLAUSE 3 IS A CITATION AND MUST NOT BE REPROVED: [[thm-euclidean-space-complete]] clause 2 is published and states completeness of $(\\mathbb{R}^n,d_2)$ FOR $n \\ge 1$ ONLY; combine it with [[thm-all-norms-on-rn-are-equivalent]] and the dictionary of [[def-equivalent-norms]] to get completeness in every norm. DO NOT CITE THE PUBLISHED THEOREM FOR ALL $n$: this is the explicit level-8 instruction carried in the prose scaffold, and $n = 0$ is excluded because $d_\\infty$, not the theorem, is what fails there. State the $n = 0$ situation once, correctly and separately: $\\mathbb{R}^0$ is the zero vector space with a unique element, the zero norm is its only norm, and everything is trivially true -- but it is NOT covered by the published theorem, so it is asserted here from scratch or not at all. LANDMARK.",
+        "deps": [
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "thm-all-norms-on-rn-are-equivalent",
+          "def-equivalent-norms",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-euclidean-space-complete",
+          "def-complete-metric-space",
+          "def-metric-convergence",
+          "def-cauchy-in-metric",
+          "lem-metric-limits-unique",
+          "lem-metric-convergent-implies-cauchy",
+          "lem-metrics-on-rn",
+          "lem-standard-basis-of-f-n",
+          "def-sequence",
+          "def-real-limit",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "cor-bolzano-weierstrass-in-rn",
+        "kind": "corollary",
+        "title": "For $n \\ge 1$ every bounded sequence in $\\mathbb{R}^n$ has a convergent subsequence",
+        "strategy": "direct, assembled from published theorems and NOT reproved by bisection. A bounded sequence lies in a closed bounded set, for instance a closed ball, which is compact by [[thm-heine-borel-rn]] clause 2; a compact metric space is sequentially compact by [[thm-metric-compactness-equivalences]] -- read that item on disk and cite the exact clause, since it lists several equivalent forms and their choice costs differ. Note the CHOICE LEDGER, in the style of [[rem-compactness-choice-ledger-metric]]: [[thm-heine-borel-rn]] is proved by bisection and uses no choice, while the general implication from compact to sequentially compact may; say which is used here and record it, rather than leaving the reader to guess. The prose scaffold's line 'Heine-Borel in $\\mathbb{R}^n$ by bisection' describes work ALREADY PUBLISHED at order 120; this page cites it and adds only the sequential corollary. Also record the relation to the published one-dimensional [[thm-bolzano-weierstrass]], which is the case $n = 1$ under the identification of $\\mathbb{R}^1$ with $\\mathbb{R}$ -- state that identification explicitly, since $\\mathbb{R}^1$ is a set of functions $1 \\to \\mathbb{R}$ and is not literally $\\mathbb{R}$.",
+        "deps": [
+          "thm-componentwise-convergence-and-completeness",
+          "thm-heine-borel-rn",
+          "thm-metric-compactness-equivalences",
+          "def-metric-compactness",
+          "def-metric-compactness-variants",
+          "def-metric-bounded-diameter",
+          "def-metric-ball",
+          "thm-bolzano-weierstrass",
+          "rem-compactness-choice-ledger-metric",
+          "def-dependent-choice",
+          "lem-metrics-on-rn",
+          "def-metric-convergence",
+          "def-sequence",
+          "lem-subsequence-inherits-limit",
+          "lem-index-map-grows"
+        ]
+      },
+      {
+        "id": "def-vector-valued-functions-limits-and-continuity",
+        "kind": "definition",
+        "title": "Vector-valued functions $f : A \\to \\mathbb{R}^m$, their limits and continuity, with the dictionary to the metric notions",
+        "strategy": "definition whose whole job is to AVOID minting a third notion of continuity. For $A \\subseteq \\mathbb{R}$ (or $A \\subseteq \\mathbb{R}^n$) and $f : A \\to \\mathbb{R}^m$ with $m \\ge 1$, define the limit and continuity by the $\\varepsilon$-$\\delta$ conditions with $\\lVert\\cdot\\rVert_2$ in the codomain, and then PROVE, not assert, that these are exactly [[def-metric-continuity]] and the metric limit for the metrics of [[lem-metrics-on-rn]], via [[lem-p-norms-are-norms-and-induce-the-published-metrics]]. Cite [[lem-real-and-metric-notions-agree]] as the precedent: the library already bridged the real and metric notions once and this item is the same move one dimension up. Define the components $f_i := \\pi_i \\circ f$ for $i<m$, where $\\pi_i(y) := y_i$; note $\\pi_i$ is $1$-Lipschitz since $\\lvert y_i\\rvert \\le \\lVert y\\rVert_2$. Everything is stated for $m \\ge 1$; at $m = 0$ the codomain has one point and every map is continuous, which is true but is not what the page is about -- say so once and move on.",
+        "deps": [
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-euclidean-inner-product",
+          "def-metric-continuity",
+          "def-metric-convergence",
+          "lem-metrics-on-rn",
+          "lem-real-and-metric-notions-agree",
+          "def-continuity-real",
+          "def-function-limit",
+          "def-metric-ball",
+          "lem-standard-basis-of-f-n",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "thm-componentwise-limits-and-continuity",
+        "kind": "theorem",
+        "title": "A vector-valued function has a limit, or is continuous, if and only if each of its components does",
+        "strategy": "direct, from [[thm-componentwise-convergence-and-completeness]]'s comparison of norms, or directly from $\\lvert y_i\\rvert \\le \\lVert y\\rVert_2 \\le \\sum_{j<m}\\lvert y_j\\rvert$. Give both directions explicitly: one is a single inequality, the other needs the sum over $m$ components and hence a $\\delta$ chosen for $\\varepsilon/\\iota(m)$ -- and that division requires $m \\ge 1$, which is the standing hypothesis. State the immediate consequences that later items use: the algebra of continuous vector-valued functions (sums, scalar multiples, and $\\langle f,g\\rangle$, using bilinearity of [[def-euclidean-inner-product]] and [[thm-algebra-of-continuous-functions]] componentwise), and that $x \\mapsto \\lVert x\\rVert$ is continuous for every norm ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]]). Do not restate the metric algebra results; cite them.",
+        "deps": [
+          "def-vector-valued-functions-limits-and-continuity",
+          "thm-componentwise-convergence-and-completeness",
+          "def-euclidean-inner-product",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "thm-algebra-of-continuous-functions",
+          "thm-algebra-of-function-limits",
+          "thm-metric-continuity-characterisations",
+          "def-metric-continuity",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "def-vector-valued-derivative-and-integral",
+        "kind": "definition",
+        "title": "The derivative and the Riemann integral of a function $[a,b] \\to \\mathbb{R}^m$, defined componentwise and characterised intrinsically",
+        "strategy": "one definition with two halves, each carrying its own well-definedness. DERIVATIVE: for $f : A \\to \\mathbb{R}^m$ and $c$ a limit point of $A \\subseteq \\mathbb{R}$, $f'(c)$ is the limit of the difference quotient $(f(x)-f(c))/(x-c)$ in $\\mathbb{R}^m$ ([[def-vector-valued-functions-limits-and-continuity]]); the limit is unique ([[lem-metric-limits-unique]]), and by [[thm-componentwise-limits-and-continuity]] it exists iff each $f_i'(c)$ exists, with $f'(c)_i = f_i'(c)$. Give the intrinsic form FIRST and the componentwise form as a theorem-clause, not the other way round -- the intrinsic form is the one that survives to the total derivative later. INTEGRAL: for $f : [a,b] \\to \\mathbb{R}^m$ define $f$ to be integrable when each $f_i$ is, and $\\int_a^b f := \\bigl(\\int_a^b f_0,\\dots,\\int_a^b f_{m-1}\\bigr) \\in \\mathbb{R}^m$, the component integrals being those of [[def-darboux-integral]] with the orientation convention of [[def-oriented-integral]]. Well-definedness is the observation that a tuple of reals is an element of $\\mathbb{R}^m$, i.e. a function $m \\to \\mathbb{R}$ -- write it as such, since $\\mathbb{R}^m$ is a function space and not a set of tuples in this library. Record linearity of both operations from [[thm-linearity-of-the-integral]] and [[thm-algebra-of-derivatives]] componentwise.",
+        "deps": [
+          "def-vector-valued-functions-limits-and-continuity",
+          "thm-componentwise-limits-and-continuity",
+          "def-derivative",
+          "def-darboux-integral",
+          "def-oriented-integral",
+          "thm-linearity-of-the-integral",
+          "thm-algebra-of-derivatives",
+          "lem-metric-limits-unique",
+          "def-function-limit",
+          "lem-function-limit-unique",
+          "def-function-space",
+          "lem-standard-basis-of-f-n",
+          "def-interval",
+          "lem-integrability-on-a-subinterval",
+          "thm-additivity-over-subintervals"
+        ]
+      },
+      {
+        "id": "thm-norm-inequality-for-the-vector-valued-integral",
+        "kind": "theorem",
+        "title": "For $a \\le b$ and integrable $f : [a,b] \\to \\mathbb{R}^m$, $\\lVert f\\rVert_2$ is integrable and $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\int_a^b \\lVert f\\rVert_2$",
+        "strategy": "direct, by the inner-product trick, which is shorter and sharper than any componentwise estimate. Put $v := \\int_a^b f \\in \\mathbb{R}^m$. Then $\\lVert v\\rVert_2^{2} = \\langle v,v\\rangle = \\sum_{i<m} v_i\\int_a^b f_i = \\int_a^b \\langle v,f\\rangle$ by [[thm-linearity-of-the-integral]] applied $m$ times and [[def-euclidean-inner-product]]; by Cauchy-Schwarz ([[thm-cauchy-schwarz-and-the-euclidean-norm]]) the integrand is at most $\\lVert v\\rVert_2\\lVert f\\rVert_2$ pointwise, so [[thm-monotonicity-of-the-integral]] gives $\\lVert v\\rVert_2^{2} \\le \\lVert v\\rVert_2\\int_a^b\\lVert f\\rVert_2$; divide by $\\lVert v\\rVert_2$ WHEN IT IS NONZERO and handle $v = 0$ separately -- that case split is mandatory and is where the usual textbook proof is silently incomplete. INTEGRABILITY OF $\\lVert f\\rVert_2$ IS A SEPARATE OBLIGATION and must be discharged before the estimate: each $f_i$ is integrable, so $f_i^{2}$ and the sum are ([[cor-integrability-of-absolute-values-products-and-lattice-operations]], [[thm-linearity-of-the-integral]]), and the square root is continuous on $[0,\\infty)$, so [[thm-composition-with-a-continuous-function]] applies. The hypothesis $a \\le b$ is needed because the orientation convention flips the inequality; say so, exactly as the scalar case does. LANDMARK.",
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-composition-with-a-continuous-function",
+          "def-oriented-integral",
+          "def-darboux-integral",
+          "thm-of-square-roots",
+          "thm-continuous-inverse",
+          "def-continuity-real",
+          "lem-of-inverse-positive"
+        ]
+      },
+      {
+        "id": "thm-mean-value-inequality",
+        "kind": "theorem",
+        "title": "The mean value inequality: if $f : [a,b] \\to \\mathbb{R}^m$ is continuous and differentiable on $(a,b)$ with $\\lVert f'\\rVert_2 \\le M$, then $\\lVert f(b)-f(a)\\rVert_2 \\le M(b-a)$",
+        "strategy": "direct, by reducing to the scalar mean value theorem with a fixed auxiliary vector -- the proof that needs NO integrability hypothesis and therefore no dependence on the integral half of this page. Put $u := f(b)-f(a)$ and $\\varphi(t) := \\langle u, f(t)\\rangle$, a real-valued function on $[a,b]$, continuous by [[thm-componentwise-limits-and-continuity]] and differentiable on $(a,b)$ with $\\varphi'(t) = \\langle u, f'(t)\\rangle$ by [[thm-algebra-of-derivatives]] applied to the finite sum defining the inner product. By [[cor-mean-value-theorem]] there is $\\xi$ with $\\varphi(b)-\\varphi(a) = \\varphi'(\\xi)(b-a)$, that is $\\lVert u\\rVert_2^{2} = \\langle u, f'(\\xi)\\rangle (b-a) \\le \\lVert u\\rVert_2 M (b-a)$ by [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Divide by $\\lVert u\\rVert_2$ when nonzero and treat $u = 0$ separately. THE EQUALITY FORM IS FALSE FOR $m \\ge 2$: there need be NO $\\xi$ with $f(b)-f(a) = f'(\\xi)(b-a)$, and the companion page carries the witness. Say that here in exactly one sentence, WITHOUT asserting the false statement as though it were a theorem, and note that the $\\xi$ produced above depends on $u$ and is therefore not a mean value point for $f$. LANDMARK.",
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-valued-functions-limits-and-continuity",
+          "thm-componentwise-limits-and-continuity",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-mean-value-theorem",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "cor-differentiable-implies-continuous",
+          "def-continuity-real",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+        "kind": "corollary",
+        "title": "If $f : [a,b] \\to \\mathbb{R}^m$ is differentiable with integrable $f'$ then $\\int_a^b f' = f(b)-f(a)$; and a bounded derivative makes $f$ Lipschitz",
+        "strategy": "direct, componentwise from [[thm-ftc-second-part]] together with [[def-vector-valued-derivative-and-integral]]'s componentwise clause, then the Lipschitz bound from [[thm-mean-value-inequality]] applied on each subinterval $[s,t] \\subseteq [a,b]$. State the Lipschitz conclusion in the sense of [[def-lipschitz-holder-contraction]] for the metrics of [[lem-metrics-on-rn]], not informally. Note the alternative derivation of the mean value inequality from [[thm-norm-inequality-for-the-vector-valued-integral]] when $f'$ is integrable, and say why the theorem above is proved the other way instead: it needs no integrability, so it applies to every differentiable $f$, and the companion page's witness for the failure of the equality form is differentiable but is not assumed integrable. That comparison is the item's real content and should be written out rather than left implicit.",
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "thm-mean-value-inequality",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-ftc-second-part",
+          "cor-primitives-of-a-continuous-function",
+          "def-lipschitz-holder-contraction",
+          "lem-metrics-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "def-derivative",
+          "cor-bounded-derivative-implies-lipschitz"
+        ]
+      },
+      {
+        "id": "def-series-of-vectors-and-rearrangement",
+        "kind": "definition",
+        "title": "Series of vectors in $\\mathbb{R}^n$, absolute convergence, rearrangement, and the set of rearrangement sums",
+        "strategy": "definition, with an explicit agreement clause against the published one-dimensional theory. For a sequence $x : \\mathbb{N} \\to \\mathbb{R}^n$ the partial sums are $s_N := \\sum_{k<N} x_k$ (the finite sum in the vector space $\\mathbb{R}^n$, which is the pointwise finite sum of [[lem-standard-basis-of-f-n]] clause 1 -- cite it rather than minting a third finite sum), and $\\sum x_k$ CONVERGES to $s$ when $s_N \\to s$ in $(\\mathbb{R}^n,d_2)$ ([[def-metric-convergence]]); it converges ABSOLUTELY when the real series $\\sum\\lVert x_k\\rVert_2$ converges ([[def-series]]). A REARRANGEMENT is $\\sum x_{\\sigma(k)}$ for a bijection $\\sigma : \\mathbb{N}\\to\\mathbb{N}$, verbatim as in the published [[def-rearrangement-and-unconditional-convergence]]; the SET OF REARRANGEMENT SUMS is $\\mathcal{S}(x) := \\{\\,s : \\text{some rearrangement converges to } s\\,\\}$. AGREEMENT CLAUSE, mandatory: at $n = 1$, under the identification of $\\mathbb{R}^1$ with $\\mathbb{R}$, these are exactly [[def-series]] and [[def-rearrangement-and-unconditional-convergence]] and $\\mathcal{S}$ is exactly the set the published [[rem-rearrangement-in-higher-dimensions]] calls $\\mathcal{S}(a)$; state the identification, since $\\mathbb{R}^1$ is a function space and not literally $\\mathbb{R}$. Everything here needs $n \\ge 1$ because $d_2$ does.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-componentwise-convergence-and-completeness",
+          "def-metric-convergence",
+          "def-series",
+          "def-rearrangement-and-unconditional-convergence",
+          "lem-standard-basis-of-f-n",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-sequence",
+          "def-injection-surjection-bijection",
+          "def-vector-space",
+          "lem-metrics-on-rn"
+        ]
+      },
+      {
+        "id": "thm-absolute-convergence-in-rn",
+        "kind": "theorem",
+        "title": "An absolutely convergent series in $\\mathbb{R}^n$ converges, and every rearrangement converges to the same sum",
+        "strategy": "direct, in two clauses, both by reduction to the published one-dimensional theory rather than by re-running its proofs. Clause 1: absolute convergence gives a Cauchy sequence of partial sums, by the triangle inequality for $\\lVert\\cdot\\rVert_2$ ([[thm-cauchy-schwarz-and-the-euclidean-norm]]) and the Cauchy criterion for the real series [[thm-series-cauchy-criterion]]; then completeness ([[thm-componentwise-convergence-and-completeness]]) gives convergence. Clause 2: each coordinate series converges absolutely because $\\lvert (x_k)_i\\rvert \\le \\lVert x_k\\rVert_2$ and [[thm-direct-comparison-test]], so [[thm-dirichlet-rearrangement]] applies coordinatewise, and [[thm-componentwise-convergence-and-completeness]] reassembles the sum. State the consequence in the form the next items use: if $\\sum x_k$ converges absolutely then $\\mathcal{S}(x)$ is the single point $\\{\\sum x_k\\}$. Note that [[lem-absolute-convergence-implies-convergence]] is the published one-dimensional statement and that this theorem is its $\\mathbb{R}^n$ analogue, NOT a generalisation of its proof.",
+        "deps": [
+          "def-series-of-vectors-and-rearrangement",
+          "thm-componentwise-convergence-and-completeness",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-series-cauchy-criterion",
+          "thm-direct-comparison-test",
+          "thm-dirichlet-rearrangement",
+          "lem-absolute-convergence-implies-convergence",
+          "def-absolute-and-conditional-convergence",
+          "def-series",
+          "def-cauchy-in-metric",
+          "def-complete-metric-space",
+          "lem-metrics-on-rn"
+        ]
+      },
+      {
+        "id": "def-the-space-of-summing-directions",
+        "kind": "definition",
+        "title": "The subspace $\\Gamma$ of directions along which a series converges absolutely, and its orthogonal complement $\\Gamma^{\\perp}$",
+        "strategy": "definition, PHRASED WITH THE INNER PRODUCT AND NOT WITH LINEAR FUNCTIONALS, and that is a deliberate design decision forced by plan order: the page that introduces linear maps and dual spaces sits earlier in plan order but is not built, so no linear-map vocabulary is available here. For a convergent series $\\sum x_k$ in $\\mathbb{R}^n$ set $\\Gamma := \\{\\,a \\in \\mathbb{R}^n : \\sum_k \\lvert\\langle a, x_k\\rangle\\rvert \\text{ converges}\\,\\}$ and $\\Gamma^{\\perp} := \\{\\,y \\in \\mathbb{R}^n : \\langle a,y\\rangle = 0 \\text{ for every } a \\in \\Gamma\\,\\}$. PROVE BOTH ARE LINEAR SUBSPACES ([[def-linear-subspace]], [[lem-linear-subspace-criterion]]): for $\\Gamma$ use bilinearity and [[lem-series-linearity]] with [[thm-direct-comparison-test]]; for $\\Gamma^{\\perp}$ use bilinearity alone. Record $0 \\in \\Gamma$ always, and $\\Gamma = \\mathbb{R}^n$ exactly when the series converges absolutely (one direction by comparison with $\\lVert x_k\\rVert_2$ using [[thm-cauchy-schwarz-and-the-euclidean-norm]], the other by testing against the standard basis and [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]]'s comparison chain) -- that equivalence is what makes the next theorem contain [[thm-absolute-convergence-in-rn]] as a special case. Define AFFINE SUBSPACE as a coset $s + W$ of a linear subspace, since the library has no such notion yet, and prove the coset is determined by $W$ and any of its points.",
+        "deps": [
+          "def-series-of-vectors-and-rearrangement",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-absolute-convergence-in-rn",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "lem-intersection-of-linear-subspaces",
+          "def-vector-space",
+          "def-series",
+          "lem-series-linearity",
+          "thm-direct-comparison-test",
+          "lem-standard-basis-of-f-n",
+          "def-absolute-and-conditional-convergence"
+        ]
+      },
+      {
+        "id": "thm-steinitz-polygonal-confinement",
+        "kind": "theorem",
+        "title": "Steinitz's polygonal confinement theorem: finitely many vectors of norm at most $1$ summing to $0$ can be ordered so that every partial sum has norm at most $n$",
+        "strategy": "constructive, and the proof is fully available from published material; scaffold it in five named stages and check each. STATEMENT: let $n \\ge 1$, let $v : m \\to \\mathbb{R}^n$ with $\\lVert v_i\\rVert_2 \\le 1$ for every $i<m$ and $\\sum_{i<m} v_i = 0$; then there is a bijection $\\pi : m \\to m$ with $\\lVert\\sum_{i<k} v_{\\pi(i)}\\rVert_2 \\le \\iota(n)$ for every $k \\le m$. (1) If $m \\le n$ every partial sum has norm at most $\\iota(k) \\le \\iota(n)$ by the triangle inequality; assume $m > n$. (2) For $n \\le k \\le m$ let $\\Lambda_k := \\{\\lambda : m \\to [0,1] \\mid \\sum_i \\lambda_i v_i = 0,\\ \\sum_i \\lambda_i = \\iota(k-n)\\}$ RELATIVE TO A SUBSET $A_k$ (see 3). $\\Lambda_m$ contains the constant $\\iota(m-n)/\\iota(m)$, since $\\sum v_i = 0$. (3) DESCENDING CONSTRUCTION: build $A_m \\supseteq A_{m-1} \\supseteq \\dots \\supseteq A_n$ with $\\lvert A_k\\rvert = k$ and $\\lambda^{k}$ supported in $A_k$, in $[0,1]^{A_k}$, with $\\sum_{i \\in A_k}\\lambda^k_i v_i = 0$ and $\\sum_{i\\in A_k}\\lambda^k_i = \\iota(k-n)$. Given $A_k,\\lambda^k$, the feasible set for $k-1$ is nonempty (scale $\\lambda^k$ by $\\iota(k-1-n)/\\iota(k-n)$; the case $k-n = 0$ does not arise since the construction stops at $k = n$). (4) THE KEY LEMMA, and it is pure linear algebra: among the feasible $\\lambda$ choose one with the FEWEST coordinates in the open interval $(0,1)$ -- legitimate because a nonempty set of naturals has a least element ([[thm-well-ordering-principle]]). If that number were at least $n+2$, the vectors $(v_i,1) \\in \\mathbb{R}^{n+1}$ indexed by the fractional coordinates would be more than $\\dim \\mathbb{R}^{n+1} = n+1$ in number, hence linearly dependent ([[cor-independent-set-is-no-larger-than-a-finite-spanning-set]], [[lem-standard-basis-of-f-n]], [[def-dimension]]); a nontrivial dependence $\\mu$ gives $\\sum\\mu_i v_i = 0$ and $\\sum\\mu_i = 0$, and moving $\\lambda + t\\mu$ to the nearest $t$ at which some fractional coordinate reaches $0$ or $1$ (a minimum over a nonempty finite set of reals, [[lem-finite-set-has-max]]) keeps feasibility and strictly reduces the count -- contradiction. So at most $n+1$ coordinates are fractional. (5) THE SUPPORT BOUND, the step that makes the nesting work and the one an inattentive proof omits: $\\#\\{i : \\lambda_i = 1\\} \\le \\sum_i\\lambda_i = k-1-n$, so $\\#\\mathrm{supp}(\\lambda) \\le (k-1-n)+(n+1) = k$; and equality would force the fractional coordinates to sum to $0$ while each is strictly positive, which is impossible, so $\\#\\mathrm{supp}(\\lambda) \\le k-1$ and an $A_{k-1} \\subseteq A_k$ of size $k-1$ containing the support exists. (6) THE ORDERING: enumerate $A_n$ first in any order, then the single element of $A_{k}\\setminus A_{k-1}$ for $k = n+1,\\dots,m$ in increasing $k$. For $k \\le n$ the partial sum has norm at most $\\iota(k)\\le\\iota(n)$; for $k \\ge n$ the partial sum is $\\sum_{i\\in A_k} v_i = \\sum_{i\\in A_k}(1-\\lambda^k_i)v_i$, whose norm is at most $\\sum_{i\\in A_k}(1-\\lambda^k_i) = \\iota(k) - \\iota(k-n) = \\iota(n)$. Every sum here is a sum over a finite index set; if the counting page's index-set sum is not among this page's declared prerequisites, index by a chosen enumeration and use [[lem-finite-sum-laws]] instead. LANDMARK.",
+        "deps": [
+          "def-series-of-vectors-and-rearrangement",
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "def-linear-independence",
+          "def-dimension",
+          "lem-standard-basis-of-f-n",
+          "def-linear-combination-and-span",
+          "thm-well-ordering-principle",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "lem-finite-subsets-listable",
+          "def-countable",
+          "lem-pigeonhole",
+          "def-injection-surjection-bijection",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-function-space",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "thm-rearrangement-sums-lie-in-an-affine-subspace",
+        "kind": "theorem",
+        "title": "The set of rearrangement sums of a convergent series in $\\mathbb{R}^n$ is a nonempty subset of the affine subspace $s + \\Gamma^{\\perp}$",
+        "strategy": "direct, and it is the containment half of the Levy-Steinitz theorem; SCOPE THE CLAIM EXACTLY AND DO NOT OVERSTATE THE TITLE, since a title claiming more than the proof gives is a fatal defect. Let $\\sum x_k$ converge to $s$. Nonemptiness: $s \\in \\mathcal{S}(x)$, via the identity bijection. Containment: let $t \\in \\mathcal{S}(x)$, so $\\sum x_{\\sigma(k)} = t$ for some bijection $\\sigma$, and let $a \\in \\Gamma$. The real series $\\sum\\langle a,x_k\\rangle$ converges absolutely by definition of $\\Gamma$, so by the published [[thm-dirichlet-rearrangement]] every rearrangement of it has the same sum; and $\\langle a,\\cdot\\rangle$ is continuous ([[thm-componentwise-limits-and-continuity]], or directly by Cauchy-Schwarz) and additive on finite sums ([[lem-finite-sum-laws]], [[lem-standard-basis-of-f-n]] clause 1), so $\\langle a,t\\rangle = \\sum_k\\langle a,x_{\\sigma(k)}\\rangle = \\sum_k\\langle a,x_k\\rangle = \\langle a,s\\rangle$. Hence $\\langle a, t-s\\rangle = 0$ for every $a \\in \\Gamma$, that is $t - s \\in \\Gamma^{\\perp}$. State the two extreme cases as clauses, because they are exactly the published one-dimensional dichotomy seen from here: if the series converges absolutely then $\\Gamma = \\mathbb{R}^n$, $\\Gamma^{\\perp} = \\{0\\}$ and $\\mathcal{S}(x) = \\{s\\}$ ([[thm-absolute-convergence-in-rn]]); at $n = 1$ a conditionally convergent series has $\\Gamma = \\{0\\}$ and $\\Gamma^{\\perp} = \\mathbb{R}$, and the published [[thm-riemann-series-theorem]] says the containment is then an EQUALITY. WHAT IS NOT CLAIMED, and must be said in Remarks in exactly these terms: this theorem gives containment only; whether $\\mathcal{S}(x)$ is all of $s+\\Gamma^{\\perp}$ for $n \\ge 2$ is not settled here, and no assertion about it, in either direction, is made anywhere on this page. Declare [[rem-rearrangement-in-higher-dimensions]] nowhere in `deps` -- it is a published remark on an earlier page and the edge runs the other way, as a forward reference to be added there. LANDMARK.",
+        "deps": [
+          "def-the-space-of-summing-directions",
+          "def-series-of-vectors-and-rearrangement",
+          "thm-absolute-convergence-in-rn",
+          "thm-componentwise-convergence-and-completeness",
+          "thm-componentwise-limits-and-continuity",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product",
+          "thm-dirichlet-rearrangement",
+          "thm-riemann-series-theorem",
+          "cor-unconditional-iff-absolute-in-r",
+          "def-rearrangement-and-unconditional-convergence",
+          "def-absolute-and-conditional-convergence",
+          "def-series",
+          "lem-finite-sum-laws",
+          "def-finite-sum",
+          "lem-standard-basis-of-f-n",
+          "def-linear-subspace",
+          "def-injection-surjection-bijection",
+          "def-metric-convergence"
+        ]
+      },
+      {
+        "id": "rem-rn-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order",
+        "strategy": "the page ledger, and on this page it carries more weight than usual because three separate scope decisions were taken. Record: (1) THE $n \\ge 1$ HYPOTHESIS, where it comes from ([[lem-metrics-on-rn]] defines $d_\\infty$ only there) and exactly which items inherit it -- list them; note that [[def-euclidean-inner-product]] and the vector space structure are fine at $n = 0$, so the boundary is between the algebra and the metric, not between statements a reader would guess. (2) THE EXPONENT IN $\\lVert\\cdot\\rVert_p$ IS RATIONAL, because real exponents do not exist at this point in the reading order ([[rem-real-exponents-deferred]]); every $p$-norm statement on this page carries it. (3) $\\mathbb{R}^n$ IS A FUNCTION SPACE, the set of functions $n \\to \\mathbb{R}$ ([[lem-metrics-on-rn]], [[def-function-space]]), so $\\mathbb{R}^1$ is not literally $\\mathbb{R}$ and every comparison with the one-dimensional theory goes through the stated identification. (4) WHAT IS TAKEN UP ELSEWHERE, phrased as reading order and never as a claim about the library as a whole: the operator norm and the fact that linear maps are Lipschitz belong with linear maps, which are introduced on a page earlier in plan order that is not yet built; the general theory of inner product spaces and orthogonality likewise; uniform convergence, the total derivative and the integral in $\\mathbb{R}^m$ all come later in this track. (5) THE OPEN HALF OF THE REARRANGEMENT QUESTION: [[thm-rearrangement-sums-lie-in-an-affine-subspace]] proves containment and the page asserts nothing about the reverse inclusion for $n \\ge 2$; the published [[rem-rearrangement-in-higher-dimensions]] on the series page raised the question and this page answers the part it can. State that plainly; do NOT state the classical answer, in any form, and do not create a recorded-not-proved item for it.",
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-all-norms-on-rn-are-equivalent",
+          "thm-componentwise-convergence-and-completeness",
+          "def-vector-valued-derivative-and-integral",
+          "thm-mean-value-inequality",
+          "thm-rearrangement-sums-lie-in-an-affine-subspace",
+          "lem-metrics-on-rn",
+          "rem-real-exponents-deferred",
+          "def-function-space"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 168,
+    "id": "rn-as-a-normed-space-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "$\\mathbb{R}^n$ as a Normed Space: Examples and Counterexamples",
+    "companion": null,
+    "requires": [
+      "rn-as-a-normed-space"
+    ],
+    "items": [
+      {
+        "id": "cex-mean-value-equality-fails-for-a-vector-valued-function",
+        "kind": "counterexample",
+        "title": "$f(t) = (t^{2}, t^{3})$ on $[0,1]$: no $\\xi$ satisfies $f(1)-f(0) = f'(\\xi)$",
+        "strategy": "counterexample, refuting the equality form of the mean value theorem for $m \\ge 2$ and confirming that [[thm-mean-value-inequality]] is the correct statement. $f(1)-f(0) = (1,1)$ and $f'(t) = (2t,3t^{2})$ ([[lem-derivative-of-a-power]] componentwise, via [[def-vector-valued-derivative-and-integral]]); $2\\xi = 1$ forces $\\xi = 1/\\iota(2)$, and then $3\\xi^{2} = 3/\\iota(4) \\ne 1$. Do the arithmetic in $\\mathbb{R}$ with the canonical naturals visible. CHOSEN DELIBERATELY OVER THE CLASSICAL WITNESS: the crispest classical example is $t \\mapsto (\\cos t, \\sin t)$ on $[0,2\\pi]$, and the trigonometric functions are introduced later in the reading order, so a polynomial curve is used instead; record that substitution here rather than in a scaffold note, since a reader who knows the classical example will look for it. Then CHECK the inequality form on the same curve: $\\lVert f(1)-f(0)\\rVert_2 = \\sqrt{2}$ and $\\sup\\lVert f'\\rVert_2 = \\sqrt{13}$ on $[0,1]$, so the inequality holds with room to spare.",
+        "deps": [
+          "thm-mean-value-inequality",
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "cor-mean-value-theorem",
+          "thm-of-square-roots",
+          "def-canonical-natural",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "ex-p-norm-comparison-constants-on-r2",
+        "kind": "example",
+        "title": "The comparison constants between $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and $\\lVert\\cdot\\rVert_\\infty$ on $\\mathbb{R}^{2}$, and vectors attaining each",
+        "strategy": "computation, and the value is that every constant is shown SHARP by an attaining vector, which the general theorem [[thm-all-norms-on-rn-are-equivalent]] does not supply. On $\\mathbb{R}^{2}$: $\\lVert x\\rVert_\\infty \\le \\lVert x\\rVert_2 \\le \\lVert x\\rVert_1 \\le \\iota(2)\\lVert x\\rVert_\\infty$ and $\\lVert x\\rVert_1 \\le \\sqrt{2}\\lVert x\\rVert_2$; exhibit $e_0$ (attaining the first, third-from-left and the outer chain at one end) and $(1,1)$ (attaining $\\lVert x\\rVert_1 = 2$, $\\lVert x\\rVert_2 = \\sqrt{2}$, $\\lVert x\\rVert_\\infty = 1$, which is the extreme case of both the $\\sqrt{2}$ and the $\\iota(2)$ constants). Verify each inequality from [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]]'s chain and [[thm-cauchy-schwarz-finite]]. Also compute the unit balls' inclusions to make the geometry explicit.",
+        "deps": [
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "thm-all-norms-on-rn-are-equivalent",
+          "def-equivalent-norms",
+          "thm-cauchy-schwarz-finite",
+          "thm-of-square-roots",
+          "lem-standard-basis-of-f-n",
+          "def-canonical-natural",
+          "def-metric-ball"
+        ]
+      },
+      {
+        "id": "cex-the-one-norm-comes-from-no-inner-product",
+        "kind": "counterexample",
+        "title": "$\\lVert\\cdot\\rVert_1$ on $\\mathbb{R}^{2}$ violates the parallelogram law, so it is induced by no inner product",
+        "strategy": "counterexample with a two-line computation and a precise conclusion. Take $x = e_0$, $y = e_1$: $\\lVert x+y\\rVert_1^{2}+\\lVert x-y\\rVert_1^{2} = 4+4 = 8$ while $2\\lVert x\\rVert_1^{2}+2\\lVert y\\rVert_1^{2} = 4$. Since every norm arising from an inner product satisfies the parallelogram law ([[thm-cauchy-schwarz-and-the-euclidean-norm]] clause (b)), no inner product on $\\mathbb{R}^{2}$ induces $\\lVert\\cdot\\rVert_1$. STATE THE LOGIC PRECISELY: the page proves the parallelogram law only for the Euclidean inner product, so the conclusion available here is about norms of that form; a general converse (the Jordan-von Neumann theorem, that the parallelogram law characterises inner-product norms) is not proved on this page and must not be asserted. Note also that $\\lVert\\cdot\\rVert_1$ IS equivalent to $\\lVert\\cdot\\rVert_2$ by [[thm-all-norms-on-rn-are-equivalent]] -- equivalence of norms is a metric statement and says nothing about inner products, which is the point worth making.",
+        "deps": [
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn",
+          "thm-all-norms-on-rn-are-equivalent",
+          "def-equivalent-norms",
+          "lem-standard-basis-of-f-n",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "cex-separately-continuous-not-jointly-continuous",
+        "kind": "counterexample",
+        "title": "$g(x,y) = xy/(x^{2}+y^{2})$, extended by $g(0,0)=0$, is continuous in each variable separately and not continuous at the origin",
+        "strategy": "counterexample. Continuity in each variable separately at the origin: $g(x,0) = 0$ and $g(0,y) = 0$ for all $x,y$, so both partial functions are constant. Discontinuity at the origin: along the line $y = x$ the value is $1/\\iota(2)$ for $x \\ne 0$, and points of that line come arbitrarily close to the origin, so no $\\delta$ works ([[def-vector-valued-functions-limits-and-continuity]], [[def-metric-continuity]]); or use the sequential criterion with $(1/\\iota(k+1), 1/\\iota(k+1))$ and [[thm-metric-continuity-characterisations]]. Continuity away from the origin follows from [[thm-algebra-of-continuous-functions]] and [[thm-componentwise-limits-and-continuity]]. THE POINT IS THAT SEPARATE CONTINUITY IS STRICTLY WEAKER, and this is the first place in the library where a function of several real variables appears, so state the domain as $\\mathbb{R}^{2}$ with the metric of [[lem-metrics-on-rn]] rather than informally.",
+        "deps": [
+          "def-vector-valued-functions-limits-and-continuity",
+          "thm-componentwise-limits-and-continuity",
+          "def-metric-continuity",
+          "thm-metric-continuity-characterisations",
+          "thm-algebra-of-continuous-functions",
+          "lem-metrics-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-metric-convergence",
+          "def-sequence",
+          "cor-archimedean-reciprocal",
+          "def-canonical-natural",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "ex-componentwise-convergence-and-a-vector-valued-integral-computed",
+        "kind": "example",
+        "title": "A convergent sequence in $\\mathbb{R}^{3}$ and the integral $\\int_0^1 (1, t, t^{2})$, computed componentwise",
+        "strategy": "computation exercising both halves of [[def-vector-valued-derivative-and-integral]] and [[thm-componentwise-convergence-and-completeness]]. Take $x^{(k)} = (1/\\iota(k+1),\\ 1 - 1/\\iota(k+1),\\ 2)$ and show $x^{(k)} \\to (0,1,2)$ by the componentwise criterion, checking that the $\\varepsilon$ for the vector is obtained from the three coordinate $\\varepsilon$'s exactly as the theorem's proof does. Then compute $\\int_0^1 (1,t,t^{2}) = (1, 1/\\iota(2), 1/\\iota(3))$ by [[cor-primitives-of-a-continuous-function]] componentwise, and CHECK the norm inequality [[thm-norm-inequality-for-the-vector-valued-integral]] on this example numerically: $\\lVert\\int f\\rVert_2$ against $\\int\\lVert f\\rVert_2$, bounding the latter from below by a crude estimate rather than evaluating it, since its exact value needs machinery not available here. Say that the inequality is strict here and why.",
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "thm-componentwise-convergence-and-completeness",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "cor-primitives-of-a-continuous-function",
+          "thm-monotonicity-of-the-integral",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "def-oriented-integral",
+          "cor-archimedean-reciprocal",
+          "def-canonical-natural",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "ex-steinitz-confinement-worked-in-the-plane",
+        "kind": "example",
+        "title": "Steinitz's confinement bound realised on an explicit list of six unit vectors in $\\mathbb{R}^{2}$ summing to zero",
+        "strategy": "verification, and it makes an abstract existence proof concrete. Take six vectors of norm at most $1$ in $\\mathbb{R}^{2}$ summing to $0$ -- for instance $\\pm e_0, \\pm e_1$ together with $\\pm(1,1)/\\sqrt{2}$ -- exhibit an ordering whose partial sums all have norm at most $\\iota(2)$, and exhibit a BAD ordering whose partial sums exceed $1$, so that the theorem is seen to say something. Then trace one step of the descending construction of [[thm-steinitz-polygonal-confinement]] on this list: write down $A_6$, one $\\lambda^{6}$, and the resulting $A_5$, checking the support bound $\\#\\mathrm{supp} \\le k-1$ that the proof turns on. An example that only asserts the bound would be worth much less than one that exhibits the construction.",
+        "deps": [
+          "thm-steinitz-polygonal-confinement",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-standard-basis-of-f-n",
+          "thm-of-square-roots",
+          "def-canonical-natural",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "ex-gamma-and-its-complement-computed-for-a-plane-series",
+        "kind": "example",
+        "title": "A convergent series in $\\mathbb{R}^{2}$ with $\\Gamma$ a line and $\\Gamma^{\\perp}$ a line, computed from the definition",
+        "strategy": "computation, and it is the example that makes [[def-the-space-of-summing-directions]] concrete. Take $x_k := \\bigl((-1)^{k}/\\iota(k+1),\\ 0\\bigr)$: the series converges by the alternating series test ([[thm-alternating-series-test]]) in the first coordinate and trivially in the second. For $a = (a_0,a_1)$, $\\langle a,x_k\\rangle = a_0(-1)^{k}/\\iota(k+1)$, so $\\sum\\lvert\\langle a,x_k\\rangle\\rvert$ converges iff $a_0 = 0$ (harmonic divergence, [[thm-p-series-rational]] at $p=1$ or [[thm-cauchy-condensation]]). Hence $\\Gamma = \\{(0,a_1)\\}$, a line, and $\\Gamma^{\\perp} = \\{(y_0,0)\\}$, a line. So [[thm-rearrangement-sums-lie-in-an-affine-subspace]] confines every rearrangement sum to the horizontal line through $s$ -- and, since the second coordinate is identically $0$, that confinement is visibly sharp in the trivial direction. Note what this example does NOT decide: whether every point of that line is attained. Say so; do not assert it.",
+        "deps": [
+          "def-the-space-of-summing-directions",
+          "def-series-of-vectors-and-rearrangement",
+          "thm-rearrangement-sums-lie-in-an-affine-subspace",
+          "thm-alternating-series-test",
+          "thm-p-series-rational",
+          "thm-cauchy-condensation",
+          "def-euclidean-inner-product",
+          "def-series",
+          "def-absolute-and-conditional-convergence",
+          "def-linear-subspace",
+          "def-canonical-natural",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "fs-the-rearrangement-sums-of-a-non-absolutely-convergent-series-fill-the-space",
+        "kind": "false-statement",
+        "title": "If a convergent series in $\\mathbb{R}^{n}$ does not converge absolutely, then every point of $\\mathbb{R}^{n}$ is the sum of some rearrangement of it",
+        "strategy": "refutation, and it is the item that stops a reader generalising [[thm-riemann-series-theorem]] by analogy -- the exact expectation the published [[rem-rearrangement-in-higher-dimensions]] warns against. Use the series of [[ex-gamma-and-its-complement-computed-for-a-plane-series]]: it converges, it does not converge absolutely (its norms are $1/\\iota(k+1)$, whose series diverges), and every rearrangement has second coordinate $0$, so no point off the horizontal line through $s$ is a rearrangement sum. That refutes the statement without needing any part of the classical higher-dimensional theorem, which is the point: the refutation is elementary and complete. Note that [[thm-rearrangement-sums-lie-in-an-affine-subspace]] explains it structurally, $\\Gamma^{\\perp}$ being a proper subspace, and that the one-dimensional case is genuinely different because there $\\Gamma = \\{0\\}$ forces $\\Gamma^{\\perp} = \\mathbb{R}$.",
+        "deps": [
+          "thm-rearrangement-sums-lie-in-an-affine-subspace",
+          "ex-gamma-and-its-complement-computed-for-a-plane-series",
+          "def-the-space-of-summing-directions",
+          "def-series-of-vectors-and-rearrangement",
+          "thm-riemann-series-theorem",
+          "thm-absolute-convergence-in-rn",
+          "def-absolute-and-conditional-convergence",
+          "thm-p-series-rational",
+          "def-euclidean-inner-product",
+          "def-p-norms-on-rn"
+        ]
+      },
+      {
+        "id": "fs-all-norms-on-any-real-vector-space-are-equivalent",
+        "kind": "false-statement",
+        "title": "All norms on a real vector space are equivalent",
+        "strategy": "refutation on an infinite-dimensional space built from published material only. Let $V \\subseteq \\mathbb{R}^{\\mathbb{N}}$ be the set of sequences with only finitely many nonzero terms; it is a linear subspace of the function space $\\mathbb{R}^{\\mathbb{N}}$ ([[def-function-space]], [[lem-linear-subspace-criterion]]) -- prove that, it is two lines. On $V$ define $N_1(v) := \\sum_{k<K}\\lvert v_k\\rvert$ for any $K$ beyond the last nonzero index (well defined: prove the value does not depend on $K$, which is where finiteness of the support is spent) and $N_\\infty(v) := \\max\\{\\lvert v_k\\rvert : k<K\\}$; both are norms by the same computations as [[lem-p-norms-are-norms-and-induce-the-published-metrics]]. The vectors $u^{(m)} := e_0+\\dots+e_{m-1}$ have $N_1(u^{(m)}) = \\iota(m)$ and $N_\\infty(u^{(m)}) = 1$, so no constant $C$ satisfies $N_1 \\le C N_\\infty$ ([[thm-of-archimedean]]). STATE THE HYPOTHESIS THAT FAILS: [[thm-all-norms-on-rn-are-equivalent]] is about $\\mathbb{R}^n$ with $n$ a natural number, and its proof spends compactness of the unit sphere, which is a finite-dimensional fact; $V$ is not finite-dimensional ([[def-dimension]], [[lem-standard-basis-of-f-n]] give the comparison). Do not claim anything about general infinite-dimensional normed spaces, a theory this library has not built.",
+        "deps": [
+          "thm-all-norms-on-rn-are-equivalent",
+          "def-norm-and-normed-space",
+          "def-equivalent-norms",
+          "def-function-space",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-linear-independence",
+          "def-dimension",
+          "lem-standard-basis-of-f-n",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "thm-of-archimedean",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "fs-heine-borel-holds-in-every-normed-space",
+        "kind": "false-statement",
+        "title": "In every normed space a closed bounded set is compact",
+        "strategy": "refutation on the same space $V$ of finitely supported sequences used in the previous item, with the norm $N_\\infty$. The closed unit ball of $(V,N_\\infty)$ is closed and bounded ([[def-metric-topology]], [[def-metric-bounded-diameter]]) but not compact: the standard unit vectors $e_k$ all lie in it and satisfy $N_\\infty(e_j - e_k) = 1$ for $j \\ne k$, so no subsequence is Cauchy ([[def-cauchy-in-metric]]) and none converges, contradicting sequential compactness ([[thm-metric-compactness-equivalences]], [[def-metric-compactness-variants]]). STATE WHERE THE PUBLISHED THEOREM'S HYPOTHESIS IS: [[thm-heine-borel-rn]] is about $\\mathbb{R}^n$ for a natural $n$, and its bisection proof consumes exactly that finiteness. Note as a bonus that the same family shows $(V,N_\\infty)$ is not totally bounded ([[def-totally-bounded]]), which is the property the general metric characterisation [[thm-metric-compactness-equivalences]] identifies as missing.",
+        "deps": [
+          "thm-heine-borel-rn",
+          "def-norm-and-normed-space",
+          "def-function-space",
+          "def-linear-subspace",
+          "lem-linear-subspace-criterion",
+          "def-metric-topology",
+          "def-metric-bounded-diameter",
+          "def-metric-compactness",
+          "def-metric-compactness-variants",
+          "thm-metric-compactness-equivalences",
+          "def-totally-bounded",
+          "def-cauchy-in-metric",
+          "def-metric-convergence",
+          "lem-standard-basis-of-f-n",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "cor-bolzano-weierstrass-in-rn"
+        ]
+      },
+      {
+        "id": "fs-componentwise-boundedness-gives-a-convergent-sequence-in-every-dimension",
+        "kind": "false-statement",
+        "title": "A sequence in $\\mathbb{R}^{n}$ whose coordinate sequences are each bounded converges",
+        "strategy": "refutation by the smallest possible witness, and it is here to separate two statements that are easy to conflate. Take $n = 1$ and the sequence $x^{(k)} = ((-1)^{k})$: each coordinate is bounded, and the sequence does not converge ([[lem-limit-unique]] with two subsequential limits, or [[thm-convergence-iff-limsup-equals-liminf]]). The TRUE statement in the neighbourhood is [[cor-bolzano-weierstrass-in-rn]]: a bounded sequence has a convergent SUBSEQUENCE, not a limit. Also state the true componentwise statement, [[thm-componentwise-convergence-and-completeness]] clause 1, which is about convergence and not about boundedness, and point out that the false statement conflates the hypothesis of one with the conclusion of the other.",
+        "deps": [
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-componentwise-convergence-and-completeness",
+          "lem-limit-unique",
+          "thm-convergence-iff-limsup-equals-liminf",
+          "def-metric-convergence",
+          "def-sequence",
+          "lem-metrics-on-rn",
+          "def-integer-power",
+          "lem-convergent-implies-bounded"
+        ]
+      },
+      {
+        "id": "cex-the-mean-value-inequality-is-attained",
+        "kind": "counterexample",
+        "title": "A curve for which the mean value inequality is an equality, showing the constant cannot be improved",
+        "strategy": "the positive companion of the first item on this page, and it is what makes [[thm-mean-value-inequality]] sharp rather than merely true. Take $f(t) = (t, 0)$ on $[0,1]$: $\\lVert f'\\rVert_2 \\equiv 1$ and $\\lVert f(1)-f(0)\\rVert_2 = 1 = 1\\cdot(1-0)$. So no constant smaller than $\\sup\\lVert f'\\rVert_2$ works in general, and the inequality is the best possible statement of its shape. Contrast with the first item on this page, where the same inequality is strict; the two together show that the failure of the equality FORM is not a failure of the bound. Compute both norms explicitly.",
+        "deps": [
+          "thm-mean-value-inequality",
+          "def-vector-valued-derivative-and-integral",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "lem-derivative-of-a-power",
+          "def-derivative",
+          "cex-mean-value-equality-fails-for-a-vector-valued-function"
+        ]
+      }
+    ]
+  }
+]
