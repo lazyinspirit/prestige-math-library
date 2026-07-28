@@ -42,8 +42,10 @@ no attaining vectors; that is what this computation adds.
 **Unit balls.** Writing $B_p := \{\, x \in \mathbb{R}^{2} : \lVert x\rVert_p \le 1 \,\}$
 for $p \in \{1,2,\infty\}$, the chain gives
 $B_1 \subseteq B_2 \subseteq B_\infty$, and both inclusions are strict: $(1,1)$
-lies in $B_\infty$ and not in $B_2$, and $(1,1)/\iota(2)$ lies in $B_2$ and not in
-$B_1$.
+lies in $B_\infty$ and not in $B_2$, and $\bigl(3/\iota(5)\bigr)(1,1)$ lies in
+$B_2$ and not in $B_1$. The scalar has to be chosen strictly between
+$1/\iota(2)$ and $1/\sqrt{\iota(2)}$: at the endpoint $1/\iota(2)$ the vector
+$(1,1)/\iota(2)$ has $\lVert\cdot\rVert_1 = 1$ and so still lies in $B_1$.
 
 ## Facts & Assumptions
 

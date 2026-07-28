@@ -124,9 +124,11 @@ denies.
   equality form of the mean value theorem for vector-valued functions is
   $t \mapsto (\cos t, \sin t)$ on $[0,2\pi]$. The trigonometric functions are
   introduced later in the reading order than this page, so the companion page
-  uses the polynomial curve $t \mapsto (t^{2},t^{3})$ on $[0,1]$ instead, and
-  records the substitution in the item itself
-  ([[thm-mean-value-inequality]]).
+  uses the polynomial curve $t \mapsto (t^{2},t^{3})$ on $[0,1]$ instead. The
+  substitution is recorded in the companion item that carries the witness, not
+  here, so that a reader meeting the polynomial curve is told at once why the
+  classical one is absent; the theorem whose equality form it refutes is
+  [[thm-mean-value-inequality]].
 
 ## 5. The open half of the rearrangement question
 

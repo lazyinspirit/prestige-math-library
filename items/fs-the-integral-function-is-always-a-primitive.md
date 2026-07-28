@@ -41,9 +41,11 @@ The claim fails in **two independent ways**, and both are exhibited below.
 The second witness shows the failure is not exotic: **any** integrable $f$ that
 differs from a continuous $g$ at a single point has the same integral function as
 $g$, by [[lem-changing-a-function-at-finitely-many-points]], and therefore has
-$F' = g \ne f$ at that point. No hypothesis weaker than continuity of $f$ at the
-point can repair the claim, and the true theorem,
-[[thm-ftc-first-part]], asks for exactly that and nothing more.
+$F' = g \ne f$ at that point. Continuity of $f$ at the point is what the true
+theorem [[thm-ftc-first-part]] asks for, and it asks for nothing more. It is not
+claimed here to be *necessary*: what the conclusion needs is the equality
+$F'(c) = f(c)$, and the last Remark below exhibits an $f$ discontinuous at a
+point where that equality nevertheless holds.
 
 ## Facts & Assumptions
 

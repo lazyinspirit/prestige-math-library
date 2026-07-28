@@ -36,10 +36,12 @@ $\varphi \circ f : [a,b] \to \mathbb{R}$ is integrable on $[a,b]$.
 
 **The order of the hypotheses is the whole content, and it does not reverse.**
 What is assumed is *continuous after integrable*: the outer function is the
-continuous one. The mirror statement — $\varphi$ integrable and $f$ continuous,
-or both merely integrable — is **false**, and the witness is
-the counterexample of the companion page on the
-companion page. Nothing here asserts anything about that direction.
+continuous one. Weakening the outer function to a merely integrable $\varphi$
+makes the statement **false**, and the witness is on the companion page. The
+remaining variant — $\varphi$ merely integrable with $f$ *continuous* — is
+neither proved nor refuted anywhere on this page, and the companion page's
+witness does not bear on it, its inner function being discontinuous at every
+rational. Nothing here asserts anything about that variant.
 
 ## Facts & Assumptions
 

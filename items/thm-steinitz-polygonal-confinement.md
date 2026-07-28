@@ -126,7 +126,7 @@ this page uses the bare alias.
 
 ## Remarks
 
-- **The support bound of step 6 is the step most write-ups omit.** From $r_0 \le n+1$ one gets only that the support of $\mu$ has at most $(k-1-n)+(n+1) = k$ elements, which is no information at all. What rules out equality is that the fractional coordinates would then have to sum to $0$ while each of them is strictly positive; that is exactly the computation in steps 6.1 and 6.2, and without it the descending construction does not start.
+- **The support bound of steps 9.1 and 10.1 is the step most write-ups omit.** From $r_0 \le n+1$ one gets only that the support of $\mu$ has at most $(k-1-n)+(n+1) = k$ elements, which is no information at all. What rules out equality is that the quantities $1-\mu_{f(i)}$ would then be strictly positive at each of at most $n+1$ marked indices while summing to $\iota(n+1)$; that is exactly the computation in steps 9.1 and 10.1, and without a coordinate $\mu_{j_0} = 0$ the descending construction does not start.
 
 - **Where the dimension enters, and only there.** The single place the number $n$ is used is step 5.1, where $n+2$ vectors in $\mathbb{R}^{n+1}$ are linearly dependent. The extra coordinate constantly $1$ is what converts the constraint $\sum_i \lambda_i = 0$ into a linear condition, so that one dependence delivers both identities of step 6.1 at once.
 
@@ -134,4 +134,4 @@ this page uses the bare alias.
 
 - **The reindexing identity of step 2.1 is proved here rather than cited**, because this library has no lemma on sums over a finite index set at this point in the reading order: [[lem-finite-sum-laws]] is stated for sums $\sum_{k<n}a_k$ over an initial segment of $\mathbb{N}$ and carries no invariance clause. Step 2.1 contains permutation invariance as the special case $r = k$ with $f$ a bijection.
 
-- **The constant $\iota(n)$ is not claimed to be optimal.** What is proved is that some ordering keeps every partial sum inside the ball of radius $\iota(n)$; the companion page realises the bound on an explicit list of six unit vectors in $\mathbb{R}^{2}$ and exhibits an ordering that violates it, so the theorem is seen to say something.
+- **The constant $\iota(n)$ is not claimed to be optimal.** What is proved is that some ordering keeps every partial sum inside the ball of radius $\iota(n)$; on an explicit list of six unit vectors in $\mathbb{R}^{2}$ the companion page exhibits one ordering that meets the bound — with room to spare, so the bound is not attained there — and another that violates it, so the theorem is seen to say something.
