@@ -569,6 +569,67 @@ convention, which I checked before touching anything.)
 none applied. They are additional to the seven found earlier, and every one would
 become a live falsehood the moment this pair publishes.
 
+### Owner decision, 2026-07-29: the workflow is UNCHANGED
+
+The owner considered merging steps 1–2 with step 5 — a Beta that scaffolds, then
+authors, logging logical gaps and amending its own scaffold in a loop — on the
+ground that dependency correctness is what mathematical accuracy rests on and the
+deriver should be the author.
+
+**The premise is right and now measured.** Across the 143 authored items of this
+build (compactness excluded, still running): **88% of scaffolded dep lists were
+changed by their author**, 34% churn against scaffolded entries, and the edits
+run **375 added against 129 dropped** — the scaffolds were predominantly
+*under*-specified, by an average of 2.6 deps per item. A scaffolder cannot know
+what a proof needs until the proof is written.
+
+**Decision: stick with the workflow as is.** No change to `LEVELS.md`, the briefs
+or the agent hierarchy. Recorded here so a future session does not re-propose it
+without new evidence. The measurement above is kept because it is useful on its
+own: it is the quantitative case for the standing rule that **the author owns the
+dep list and a handed-down list is a hypothesis.**
+
+### The escalation set — and a measurement artifact I will not report as a defect
+
+`touchlog report --min 2` returns **9 items**, which fires trigger 2 of the
+escalation rule (refuted or fixed more than once by any subagent → the
+orchestrator audits personally).
+
+| repairs | item | page |
+|---|---|---|
+| 3 | `thm-tietze-extension-theorem` | 267 |
+| 2 | `cor-a-compact-hausdorff-space-is-tychonoff` | 267 |
+| 2 | `ex-every-closed-subset-of-the-line-is-a-zero-set` | 267 |
+| 2 | `fs-every-normal-space-is-completely-regular` | 267 |
+| 2 | `lem-a-uniformly-approximable-real-valued-map-is-continuous` | 267 |
+| 2 | `thm-a-locally-compact-hausdorff-space-is-completely-regular` | 267 |
+| 2 | `cex-tietze-fails-in-a-t1-space-that-is-not-normal` | 267 |
+| 2 | `lem-the-oscillating-zigzag-curve` | 253 |
+| 2 | `thm-hessenberg` | 247 |
+
+**Seven of nine are the Sonnet arm, and that is almost certainly an artifact of my
+snapshot schedule, not a defect signal.** `touchlog` counts hash changes between
+snapshots. I snapped at author-completion boundaries, and the Sonnet arm received
+**two mid-flight instructions from me** — run `rendercheck`, and audit your dep
+list — each of which it executed as a pass over its whole id set. Those edits
+were **ordered by me and are not defect repairs**, but the ledger cannot tell the
+difference.
+
+This is the mirror of `frontier-1`'s failure, where snapping only twice made
+every item look like a first appearance and the instrument was blind. Snapping
+more often makes instructed edits look like repairs. **Neither schedule measures
+what the rule means**, and the fix is not more snapshots but recording what each
+snapshot straddles — which is what the labels now do.
+
+**Disposition.** All nine are carried into the step-9 brief as a named risk list,
+which is what the rule requires of the *judge*-refutation trigger. For the repair
+trigger I audit personally, and the honest candidate is
+**`thm-tietze-extension-theorem`**: highest count, and independently named by its
+own author as one of its two least-confident items, with the combinatorial claim
+that "every $D_{n+1}$-consecutive pair has a member among the new midpoints"
+asserted on a one-line justification rather than a spelled-out induction. That
+one gets a personal read regardless of the artifact.
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
