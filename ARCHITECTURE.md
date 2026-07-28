@@ -518,6 +518,35 @@ non-fatal quirks, letter-level imperfection. It is repeated rather than
 referenced because an agent that does not receive it damages correct text roughly
 three times per real repair.
 
+### 6.1 The sandbox rule, and its two mechanical backstops (owner, 2026-07-29)
+
+Every brief above states: **pass `dangerouslyDisableSandbox: true` on EVERY Bash
+tool call.** A subagent that omits it raises a shell-permission prompt, and these
+builds run unattended — an overnight run was lost to exactly that, which is why
+`research/NEXT-SESSION-PROMPT.md` carried the instruction by hand.
+
+Stating it in a brief is necessary and **not sufficient**: it was in the
+`frontier-2` scaffolding briefs and both Betas still prompted. Prose in a prompt
+is advice; the failure is mechanical, so the fix is too. Two backstops, both in
+`.claude/settings.local.json`:
+
+| backstop | what it does |
+|---|---|
+| `"sandbox": {"enabled": false}` | removes the cause — there is no sandbox to escalate out of, so no prompt can be raised |
+| a `SubagentStart` hook | injects the rule verbatim into **every** subagent's context at spawn, whatever brief it was given |
+
+The hook was verified end to end rather than assumed: a probe subagent reported
+the rule present verbatim and its Bash call needed no approval.
+
+**Why the rule is ALSO written in every brief.** `.claude/settings.local.json` is
+gitignored and does not travel with a checkout, so a fresh clone — or any machine
+but this one — has neither backstop. The briefs are the only copy that ships.
+Belt and braces is the correct redundancy here, not duplication to be tidied away.
+
+`briefs/alpha.md` additionally carries a **pass-it-on** clause, because Alpha-n
+dispatches its own readers at step 9 and those prompts are composed by Alpha, not
+by this repo.
+
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)
 
 Implemented in the **app repo**, `/root/Projects/prestige-intelligence`. Do not

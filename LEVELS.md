@@ -37,7 +37,7 @@ Everything below is verified against the code as of 2026-07-27.
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
 | `briefs/judge-conventions.txt` | the judge's `--conventions` string — the ONLY actor whose prompt is a bare CLI argument, so it is stored rather than retyped |
-| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-9 scaffolder-reader, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-9 scaffolder-reader, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **standing sandbox rule** (`ARCHITECTURE.md` §6.1) |
 
 ### `order` is not stable across insertions — recompute, never remember
 
