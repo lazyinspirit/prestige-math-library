@@ -199,6 +199,22 @@ touched — one agent per page otherwise leaves consumers unowned, which has fai
 three times) · `rounds.mjs` (static levels; **ignores publication state**) ·
 `gen-spec.mjs`.
 
+**`rounds.mjs --pairs`** (owner, 2026-07-28) prints one row per A/B pair ranked
+by dependency level, so a session can build the library layer by layer with
+minimal forward referencing; `--md` emits it as the committed table
+`research/BUILD-LEVELS.md`. **Regenerate that file, never hand-edit it** — the
+spec moves under it every time a track is spliced. It shares `rounds.mjs`'s level
+function deliberately, so the table and the round plan cannot disagree.
+
+Unlike the round plan, `--pairs` reads **publication state from disk**, and it
+reads the PAGE FILE first rather than the spec's `items` array. That matters: 62
+page files exist and only 58 spec entries carry an item list, so a state inferred
+from `items` alone reports long-published pages as unscaffolded. It also
+distinguishes a B companion that is outstanding work from one the owner has said
+is never being built — five A pages are published with no B page file at all, and
+labelling those `not-building` is what stops every future session re-proposing
+them.
+
 ## 4. The ledgers — state that must outlive its own repair
 
 | ledger | written by | answers |
