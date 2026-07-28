@@ -49,7 +49,7 @@ in both clauses above.
 
 **Openness in the clauses is not removable and is a live fork.** Asking only for
 a *connected neighbourhood* inside every open $U \ni x$ — with no openness
-demanded of the connected set — defines a strictly weaker condition at a single
+demanded of the connected set — defines an a priori weaker condition at a single
 point, called *connectedness im kleinen at $x$* in the literature. This library
 takes the definition above, with openness, and **no statement here asserts that
 the two agree**, at a point or globally.

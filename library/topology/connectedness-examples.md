@@ -33,7 +33,8 @@ variable.
 **Where the standard topologies sit.**
 [[ex-connectedness-of-the-standard-topologies]] places the discrete, indiscrete,
 cofinite, cocountable, particular-point and Sierpinski topologies in the
-hierarchy. The indiscrete, cofinite, cocountable and particular-point topologies
+hierarchy. The indiscrete and particular-point topologies, the cofinite topology on an
+infinite set, and the cocountable topology on an uncountable set
 are connected for one structural reason — no two nonempty open sets are disjoint —
 and in each connected case every nonempty open subspace
 is again of the same kind, so local connectedness holds for free and carries no

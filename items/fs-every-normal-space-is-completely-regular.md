@@ -1,7 +1,7 @@
 ---
 id: fs-every-normal-space-is-completely-regular
 kind: false-statement
-title: "Every normal space is completely regular"
+title: "FALSE: Every normal space is completely regular"
 status: draft
 origin: session
 deps: [cor-urysohns-lemma-closes-the-separation-chain,
@@ -25,7 +25,7 @@ sources:
 pipeline_run: null
 ---
 
-## Statement refuted
+## Statement
 
 **FALSE.** Every normal space is completely regular.
 

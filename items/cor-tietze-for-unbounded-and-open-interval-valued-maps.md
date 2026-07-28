@@ -1,7 +1,7 @@
 ---
 id: cor-tietze-for-unbounded-and-open-interval-valued-maps
 kind: corollary
-title: "A continuous real-valued map on a closed subspace of a normal space extends to the whole space, and a map into an open interval extends into that same open interval"
+title: "Under dependent choice, a continuous real-valued map on a closed subspace of a normal space extends to the whole space, and a map into an open interval extends into that same open interval"
 status: draft
 origin: session
 deps: [thm-tietze-extension-theorem, thm-urysohn-lemma, def-normal-and-t4-spaces,

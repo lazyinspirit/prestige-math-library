@@ -75,7 +75,7 @@ as cardinals in the first place.
 
 ## Remarks
 
-**Why $2$ and not some other base.** The characteristic function of a subset takes two values, so the power set is the function space with base $2$; that is the whole content of step 1.1, and it is why $2^{\kappa}$ rather than $\mathcal{P}$ is the object cardinal arithmetic manipulates. Any base $\mu$ with $2 \le \mu$ gives the same value once $\mu \le 2^{\kappa}$, by monotonicity and the second exponent law, and the companion page computes one such case.
+**Why $2$ and not some other base.** The characteristic function of a subset takes two values, so the power set is the function space with base $2$; that is the whole content of step 1.1, and it is why $2^{\kappa}$ rather than $\mathcal{P}$ is the object cardinal arithmetic manipulates. For infinite $\kappa$, any base $\mu$ with $2 \le \mu$ gives the same value once $\mu \le 2^{\kappa}$, by monotonicity, the second exponent law and [[thm-hessenberg]], and the companion page computes one such case; for finite $\kappa$ the bases genuinely differ, $3^{2} = 9 \ne 4 = 2^{2}$.
 
 **No fixed point.** Clause (b) holds for **every** cardinal, so no cardinal satisfies $2^{\kappa} = \kappa$ and the hierarchy of cardinals never terminates. The corresponding statement one level up — that $\alpha \mapsto \aleph_\alpha$ has no fixed point — is **false**, and the companion page exhibits one; the two operations behave quite differently, and it is the power operation, not the successor operation, that is unboundedly expansive.
 

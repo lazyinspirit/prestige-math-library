@@ -66,6 +66,6 @@ point of the segment $\{0\} \times [0,1]$.
 
 - **Connectedness is global and local connectedness is not, so no implication is to be expected in either direction.** Connectedness says the space cannot be cut in two; local connectedness says every point has arbitrarily small connected open neighbourhoods. A space can be a single unbroken piece and still be locally shredded at some of its points, which is what $\overline{G}$ is at every point of the added segment.
 
-- **What the failure costs.** By [L3] a locally connected space has clopen components and, inside every open set, open components. In $\overline{G}$ that machinery is unavailable, which is precisely why its path components can be neither open nor closed and why the space is connected without being path-connected.
+- **What the failure costs.** By [L3] a locally connected space has clopen components and, inside every open set, open components. In $\overline{G}$ that machinery is unavailable, which is precisely why its partition into path components fails to be a partition into clopen pieces and why the space is connected without being path-connected.
 
 - **The failure is confined to the segment.** Claim 5 of [[lem-the-oscillating-zigzag-curve]] locates it at the points $(0,t)$, and at every other point $\overline{G}$ agrees locally with $G$, which is locally connected by claim 1 there.

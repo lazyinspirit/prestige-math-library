@@ -861,10 +861,12 @@ statement names regularity, normality or complete regularity can live there;
 results are therefore homed as follows.
 
 (1) *compact Hausdorff => normal* is homed on **263 `hausdorff-via-the-diagonal`**
-as `thm-a-compact-hausdorff-space-is-regular-and-normal`, together with the two
-separation lemmas it is built from, `lem-a-point-and-a-compact-set-in-a-hausdorff-
-space-are-separated-by-disjoint-open-sets` and `lem-two-disjoint-compact-sets-in-a-
-hausdorff-space-are-separated-by-disjoint-open-sets`. **263 rather than 267,
+as `thm-a-compact-hausdorff-space-is-regular-and-normal`. **The two separation
+lemmas this block originally named as its inputs were never authored as separate
+263 items**: at the step-4 splice they were de-duplicated into clauses 1 and 2 of
+`thm-compact-subset-of-a-hausdorff-space-is-closed` on 255 (see
+`research/frontier-2-RESUME.md` §"The two cross-batch conflicts"), and the
+authored 263 theorem cites those clauses. **263 rather than 267,
 because 265 `hereditary-and-productive-separation` needs it and 265 does not
 declare 267.** The standard proof that normality is not hereditary runs through a
 compact Hausdorff space with a non-normal subspace, and 265 requires 263 and 255
@@ -879,10 +881,13 @@ compact closure, hence is regular — is split out onto 263 as `lem-a-locally-
 compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`, because it
 needs no Urysohn function. **The route through "complete regularity is
 hereditary" is NOT taken**: that property is 265's, 265 is unbuilt, and 265 sits
-below 267 so it cannot be back-filled. The proof used instead is direct: shrink to
-a compact-closure neighbourhood, apply Urysohn's lemma inside that compact
-Hausdorff (hence T4) subspace, and extend by zero with the finite-closed-cover
-clause of `lem-continuity-is-local-and-pastes`.
+below 267 so it cannot be back-filled. **The authored proof (step 5, superseding
+the route sketched here) goes through the one-point compactification instead**:
+$X^{*}$ is compact Hausdorff by `thm-one-point-compactification-properties`,
+hence normal by 263's theorem; Urysohn is applied in $X^{*}$ and the function
+restricted to $X$. The scaffold's extend-by-zero sketch was not used, and the
+263 base lemma, while authored and sound, is not cited by the authored 267
+theorem.
 
 (3) *paracompact Hausdorff => normal* is **NOT on either of these pages.** Its
 home is **269 `partitions-of-unity-and-paracompactness`**, which `plan-spec.json`

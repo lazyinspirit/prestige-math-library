@@ -45,9 +45,6 @@ Let $(X, \mathcal{T})$ be a topological space ([[def-topological-space]]). Then:
    $V \subseteq X$ with $K \subseteq V$ and $\overline{V}$ a compact subset of
    $X$ ([[def-interior-closure-boundary-top]]).
 
-Neither of the two hypotheses of claims 1, 3 and 4 can be dropped. Local compactness
-alone gives no base of compact neighbourhoods, and heredity fails outright
-without a hypothesis on the subspace.
 **No choice principle is used**; every cover produced below is defined by a
 formula and thinned by [[lem-compactness-of-a-subspace-is-ambient]], which returns
 members rather than indices.

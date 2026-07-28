@@ -1,7 +1,7 @@
 ---
 id: fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends
 kind: false-statement
-title: "Every continuous real-valued function on a subspace of a normal space extends continuously to the whole space"
+title: "FALSE: Every continuous real-valued function on a subspace of a normal space extends continuously to the whole space"
 status: draft
 origin: session
 deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
@@ -26,7 +26,7 @@ sources:
 pipeline_run: null
 ---
 
-## Statement refuted
+## Statement
 
 **FALSE.** Every continuous real-valued function on a subspace of a normal
 space extends continuously to the whole space.

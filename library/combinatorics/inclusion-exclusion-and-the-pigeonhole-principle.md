@@ -29,8 +29,8 @@ argument and whose bound is shown to be exactly right.
 Everything rests on the counting page named under Prerequisites above, together
 with the naturals and the ordered-field foundations beneath it.
 
-**Some tools are minted here because that counting page does not carry them.** One
-is [[lem-a-double-sum-over-finite-index-sets-may-be-interchanged]]:
+One tool minted here is
+[[lem-a-double-sum-over-finite-index-sets-may-be-interchanged]]:
 [[thm-sum-rule]] splits a sum along a partition of a single index set, and
 nothing there exchanges two index sets, which is what every argument on this page
 that counts a set of pairs in two ways requires. Another is
@@ -97,8 +97,8 @@ set, with $D_0 = 1$ computed rather than stipulated;
 [[thm-the-derangement-formula]] sieves the bijections by the points they fix and
 gets $\iota(D_n) = \iota(n!)\sum_{i<n+1}(-1)^{i}/\iota(i!)$; and
 [[cor-the-derangement-recurrences]] extracts the two recurrences, the first legal
-from $n = 1$ and the second from $n = 2$, since the second would otherwise ask
-for $D_{-1}$.
+from $n = 1$ and the second from $n = 2$, its derivation applying the first
+recurrence at $n - 1$ as well.
 
 The page ends with monotone sublists.
 [[def-a-monotone-sublist-of-a-finite-list-of-reals]] fixes what a sublist is, a

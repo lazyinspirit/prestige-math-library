@@ -31,8 +31,11 @@ $x \in X$ ([[def-connected-component-and-quasicomponent]]). Then:
 1. **Maximality.** $C(x)$ is connected, contains $x$, and contains every
    connected subset of $X$ that contains $x$. So the components are exactly the
    maximal connected subsets of $X$: a connected $A \subseteq X$ is a component
-   if and only if no connected subset of $X$ properly contains $A$ — except that
-   $\varnothing$ is connected and is never a component when $X \ne \varnothing$.
+   if and only if no connected subset of $X$ properly contains $A$ — except in
+   the empty space, where $\varnothing$ is vacuously maximal and yet is not a
+   component, there being no points; for nonempty $X$ no exception is needed,
+   since $\varnothing$ is properly contained in a connected singleton and so is
+   never maximal.
 2. **Partition.** For $x, y \in X$, either $C(x) = C(y)$ or
    $C(x) \cap C(y) = \varnothing$; every point lies in its own component; and
    $X = \bigcup_{x \in X} C(x)$. So the components are nonempty, pairwise

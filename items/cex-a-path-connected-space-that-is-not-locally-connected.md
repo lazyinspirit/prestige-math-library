@@ -1,7 +1,7 @@
 ---
 id: cex-a-path-connected-space-that-is-not-locally-connected
 kind: counterexample
-title: "The comb space is path-connected and fails to be locally connected at every point of the missing spine, so path-connectedness does not imply local connectedness"
+title: "The comb space is path-connected and fails to be locally connected at every point of the limit tooth strictly above the base, so path-connectedness does not imply local connectedness"
 status: draft
 origin: session
 deps: [def-path-connected, def-locally-connected, def-connected-space,

@@ -4,7 +4,7 @@ kind: lemma
 title: "The graph of the piecewise-linear map oscillating between $0$ and $1$ on the intervals $[1/(n+2), 1/(n+1)]$ is path-connected, its closure adds the segment $\\{0\\} \\times [0,1]$, and that closure is connected, is not path-connected because no path joins the segment to the graph, and is not locally connected"
 status: draft
 origin: session
-deps: [def-connected-space, def-path-connected, def-locally-connected,
+deps: [def-connected-space, def-path-connected, def-locally-connected, def-homeomorphism-and-open-maps,
        thm-closure-of-a-connected-set, thm-continuous-image-of-a-connected-space,
        cor-connected-subsets-of-the-line, cor-intermediate-value-theorem-topological,
        thm-path-connected-implies-connected, def-subspace-topology-top,
@@ -100,7 +100,7 @@ $\varepsilon_n$ alone.
 
 [A8] A nonempty subset of $\mathbb{R}$ bounded above has a least upper bound, and for every $\varepsilon > 0$ some element of it exceeds $\sup - \varepsilon$ ([[def-complete-ordered-field]], [[lem-sup-epsilon]]).
 
-[A9] $X$ is locally connected at $x$ when every open $U \ni x$ contains an open connected $V$ with $x \in V \subseteq U$; a homeomorphism carries open connected sets to open connected sets, so local connectedness is a topological property ([[def-locally-connected]], [[thm-continuous-image-of-a-connected-space]], claim 2).
+[A9] $X$ is locally connected at $x$ when every open $U \ni x$ contains an open connected $V$ with $x \in V \subseteq U$; a homeomorphism $h$ carries such a $V$ to $h[V]$, which is connected as a continuous image and open because a homeomorphism is an open map, so local connectedness is a topological property ([[def-locally-connected]], [[thm-continuous-image-of-a-connected-space]] claim 1, [[def-homeomorphism-and-open-maps]]).
 
 ## Proof
 

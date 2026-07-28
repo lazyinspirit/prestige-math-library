@@ -116,8 +116,13 @@ outside each of countably many nested unions; claim 3 of
 statements whose witnesses those are,
 [[fs-sequentially-compact-implies-compact]] and
 [[fs-countably-compact-implies-compact]]. In the ordinal and long-ray results the
-principle enters only through a boundedness theorem for at most countable
-subsets, which carries the hypothesis in its own statement.
+principle enters through a boundedness theorem for at most countable
+subsets, which carries the hypothesis in its own statement — and not only
+through it: claim 2 of
+[[thm-the-long-line-is-countably-compact-and-not-compact]] spends it once more
+directly, to pick a point in each of countably many nonempty sets, and claim 3
+of [[thm-ordinal-spaces-and-compactness]] inherits a further use through claim 2
+of [[thm-compactness-variants-hierarchy]].
 
 **Spending the Axiom of Dependent Choice ([[def-dependent-choice]]).** Claim 3 of
 [[thm-compactness-variants-hierarchy]], where it is spent to extract a countably

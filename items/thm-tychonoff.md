@@ -7,6 +7,7 @@ origin: session
 deps: [thm-alexander-subbase-lemma, def-compact-space, def-product-topology, def-topology-basis-subbasis, def-axiom-of-choice, thm-zorn, def-topological-space]
 justified_by: []
 aliases: [thm-tychonoff-theorem]
+external_refs: [rem-schechter-kelley-tychonoff]
 landmark: true
 short: "Tychonoff's theorem"
 proof_strategy: direct

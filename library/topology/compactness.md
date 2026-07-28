@@ -30,7 +30,7 @@ argument collapses to a finite one. This page defines it for an arbitrary
 topological space, proves what it gives — closedness in a Hausdorff space,
 separation of disjoint compact sets, attainment of extreme values, automatic
 continuity of an inverse — and settles how it behaves under the constructions of
-general topology: subspaces, products of any size, quotient-free images, and the
+general topology: subspaces, products of any size, continuous images, and the
 adjunction of a single point at infinity.
 
 **Compactness of a subset is intrinsic.** [[def-compact-space]] defines a compact
@@ -83,7 +83,8 @@ equivalence proved round a cycle charges every arrow the maximum: compactness
 gives countable compactness, the Lindelöf property and limit point compactness in
 ZF; sequential compactness gives countable compactness at the cost of countable
 choice; countable compactness gives limit point compactness at the cost of
-dependent choice, and the converse holds when singletons are closed.
+dependent choice, and the converse holds when singletons are closed, again at
+the cost of countable choice.
 [[cor-heine-borel-in-the-product-topology]] records that on $\mathbb{R}^n$ the
 product topology is the Euclidean one, so Heine-Borel applies unchanged.
 
@@ -119,8 +120,9 @@ and a limit ordinal is not, and that $\omega_1$ is sequentially compact and
 countably compact without being compact, assuming countable choice.
 [[thm-the-long-line-is-countably-compact-and-not-compact]] proves a Heine-Borel
 theorem for the closed initial segments of the long ray, using only order density
-and the least upper bound property, and deduces that the ray is countably compact
-and neither compact nor Lindelöf. Both spaces are the standard witnesses for the
+and the least upper bound property, and deduces that the ray is not compact — a
+theorem of ZF — and, assuming countable choice, that it is countably compact and
+not Lindelöf. Both spaces are the standard witnesses for the
 false statements that close the page.
 [[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]] is the last
 theorem: in a compact Hausdorff space the quasicomponents are connected, so the

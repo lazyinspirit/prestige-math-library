@@ -33,7 +33,7 @@ change how statements here are read.
 **1. The empty space is connected, and so is a one-point space.** A separation
 asks for two nonempty disjoint open pieces covering the space
 ([[def-connected-space]]), and neither space admits one, so both are connected
-with no special clause. The competing convention, used by Bourbaki among others,
+with no special clause. The competing convention
 adds "nonempty" to the definition of a connected space, which makes the empty
 space neither connected nor disconnected. The cost of the choice made here is
 that the empty set is a connected subset of every space, so "maximal connected

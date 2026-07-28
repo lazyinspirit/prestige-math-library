@@ -88,8 +88,8 @@ compact closure, and regularity of the whole space.
 graph is closed; the converse needs a different hypothesis altogether.
 [[thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain]] proves that
 a map into a **compact** space whose graph is closed is continuous, with no
-separation hypothesis used in that direction, so the two conditions are
-equivalent exactly when the codomain is compact Hausdorff. Its proof is the model
+separation hypothesis used in that direction, so for a compact Hausdorff
+codomain the two conditions are equivalent. Its proof is the model
 for the choice discipline of this page: the family of admissible boxes is
 collected by a formula, compactness cuts it down to finitely many members, and
 only then is a selection made, licensed by [[lem-finite-choice]], a theorem of

@@ -28,9 +28,11 @@ Sierpinski space $S = \{a,b\}$, $a \ne b$, with
 $\mathcal{T}_{\mathrm{Sier}} = \{\varnothing,\{b\},S\}$
 ([[def-standard-topologies]]) is normal ([[def-normal-and-t4-spaces]]) but not
 completely regular ([[def-completely-regular-and-tychonoff-spaces]]), by
-[[fs-every-normal-space-is-completely-regular]]. Since [[thm-completely-regular-implies-regular]]
-would give regularity from complete regularity, $S$ is in particular not
-regular, and it is not $T_1$: the singleton $\{b\}$ is not closed in $S$.
+[[fs-every-normal-space-is-completely-regular]]. The refutation there in fact
+shows $S$ is not even regular — the only open set containing $a$ is $S$ itself —
+and complete regularity then fails because it implies regularity
+([[thm-completely-regular-implies-regular]]). And $S$ is not $T_1$: the
+singleton $\{b\}$ is not closed in $S$.
 
 This is exactly why [[cor-urysohns-lemma-closes-the-separation-chain]] proves
 its arrow for a normal $T_1$ space and not for a bare normal space: $S$ is a

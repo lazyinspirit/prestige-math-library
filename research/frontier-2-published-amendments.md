@@ -87,6 +87,23 @@ is the applyable list. All verified on disk.
 
 ---
 
+## B2. Title-convention amendment found at step 9 (Alpha-F2, 2026-07-29)
+
+Four PUBLISHED `fs-` items carry titles without the `FALSE:` prefix that every
+other `fs-` title in the corpus carries (the two draft offenders on
+`urysohn-lemma-and-tietze` were repaired at step 9; these four are published and
+are therefore staged, not repaired):
+
+- `items/fs-every-nonzero-element-is-a-unit-or-a-zero-divisor.md`
+- `items/fs-gcd-times-lcm-equals-the-product.md`
+- `items/fs-union-of-two-subgroups-is-a-subgroup.md`
+- `items/fs-union-of-two-subspaces-is-a-subspace.md`
+
+Amendment: prepend `FALSE: ` to each title. A title is what listing surfaces
+show, and an `fs-` title reading as an assertion is the misreading the prefix
+exists to prevent. Prefixing changes no mathematical claim; per SCHEMA §3 it is
+not a material rewrite, so judge blocks stay.
+
 ## C. Rules for whoever applies these
 
 1. **Clear `verification.audited`** on every item touched, so `depcheck`'s

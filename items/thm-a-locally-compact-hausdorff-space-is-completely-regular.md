@@ -74,7 +74,7 @@ property of regularity or complete regularity: none is used or needed.
 
 2.1 By step 1.1 ($T_1$) and [L4], $\{x_0\} \subseteq X \subseteq X^{*}$ is closed in $X^{*}$. [step 1.1, L4]
 
-3.1 By step 1.1 ($X^{*}$ normal), steps 2.1–2.3, and [L5], fix a continuous $g : X^{*} \to [0,1]$ with $C \cup \{\infty\} \subseteq g^{-1}(\{0\})$ and $\{x_0\} \subseteq g^{-1}(\{1\})$. [step 1.1, step 2.1, step 1.2, step 1.3, L5, choose]
+3.1 By step 1.1 ($X^{*}$ normal), steps 2.1, 1.2 and 1.3, and [L5], fix a continuous $g : X^{*} \to [0,1]$ with $C \cup \{\infty\} \subseteq g^{-1}(\{0\})$ and $\{x_0\} \subseteq g^{-1}(\{1\})$. [step 1.1, step 2.1, step 1.2, step 1.3, L5, choose]
 
 4.1 By [L6] and [L2] ($X$ a subspace of $X^{*}$ with its own topology), $f := g|_X : X \to [0,1]$ is continuous. For $x \in C$: $x \in C \cup \{\infty\}$, so $f(x)=g(x)=0$; and $f(x_0) = g(x_0) = 1$, since $x_0 \in \{x_0\} \subseteq g^{-1}(\{1\})$. [step 3.1, L2, L6]
 

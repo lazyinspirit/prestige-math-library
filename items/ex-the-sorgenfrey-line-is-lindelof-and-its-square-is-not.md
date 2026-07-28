@@ -88,6 +88,12 @@ treatment.
 
 ## Remarks
 
+- **Dictionary.** The space defined here is the same space as the published
+  [[ex-sorgenfrey-line]]; that item is homed on an examples page, whose items may
+  not be cited from outside their own A/B pair, which is why the space is
+  re-minted here rather than cited. Nothing above depends on the published
+  treatment.
+
 **What fails in the product.** Lindel&ouml;fness of $\mathbb{R}_\ell$ rests on the rationals being dense and at most countable, so that a cover can be thinned to countably many rational-endpoint intervals plus countably many exceptional points. In the square the antidiagonal is a set on which every basic box is a single point, and there are uncountably many of those points; no countability of the rationals helps, because the boxes never contain two of them at once.
 
 **Neither compactness nor Lindel&ouml;fness is what separates the topologies.** $\mathbb{R}_\ell$ is finer than the usual topology of $\mathbb{R}$, since every $(a,b)$ is a union of half-open intervals, and both spaces are Lindel&ouml;f and not compact; the difference shows up only in the square.

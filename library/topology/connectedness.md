@@ -26,8 +26,7 @@ examples: [fs-a-connected-space-is-path-connected,
 open pieces. That is the whole definition, and almost everything on this page is
 an attempt to say what it is good for and what it fails to guarantee. The
 organising fact is that connectedness is preserved by continuous maps, by unions
-through a common point, and by passing to a closure — three closure operations
-that between them build every connected set that appears here — while it is
+through a common point, and by passing to a closure, while it is
 preserved by neither intersections nor complements, and implies nothing about how
 a space looks near any one of its points.
 
@@ -122,7 +121,7 @@ the closed pasting lemma is false for an infinite closed cover.
 ([[fs-a-connected-space-is-path-connected]]); the closure of a path-connected set
 need not be path-connected
 ([[fs-the-closure-of-a-path-connected-set-is-path-connected]]), although the
-closure of a connected set always is; a connected space need not be locally
+closure of a connected set is always connected; a connected space need not be locally
 connected ([[fs-a-connected-space-is-locally-connected]]); the intersection of
 two connected sets need not be connected, witnessed by two three-sided pieces of
 the boundary of a square ([[fs-an-intersection-of-connected-sets-is-connected]]);

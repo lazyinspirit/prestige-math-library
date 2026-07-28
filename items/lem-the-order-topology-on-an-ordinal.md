@@ -70,7 +70,7 @@ point in the reading order.
 
 1.1 For $\beta \in \gamma$ the set $[0,\beta]$ is open: if $\beta^{+} \in \gamma$ then $\xi \le \beta$ is equivalent to $\xi < \beta^{+}$ by [L5], so $[0,\beta] = \gamma_{<\beta^{+}}$, an open ray; and if $\beta^{+} \notin \gamma$ then $\beta^{+} \subseteq \gamma$, since every ordinal below $\beta^{+}$ is $\le \beta$ and so lies in $\gamma$, whence $\beta^{+} = \gamma$ by [L1] and $[0,\beta] = \gamma$, which is open. [L1, L2, L4, L5]
 
-1.2 For $\xi \ne \eta$ in $\gamma$ the trichotomy of [L1] gives $\xi < \eta$ after renaming, and then $\gamma_{<\eta}$ and $\gamma_{>\xi}$ are open rays containing $\xi$ and $\eta$ respectively; they are disjoint, since a common point would satisfy $\xi < \zeta < \eta$ and $\zeta < \eta$ at once with $\zeta \le \xi$, which [L1] forbids. So claim 3 holds by [L7]. [L1, L2, L7]
+1.2 For $\xi \ne \eta$ in $\gamma$ the trichotomy of [L1] gives $\xi < \eta$ after renaming. By [L5] the inequality $\xi < \eta$ gives $\xi^{+} \le \eta$, and since $\eta \in \gamma$, [L1] puts $\xi^{+}$ in $\gamma$ as well; so $\gamma_{<\xi^{+}}$ and $\gamma_{>\xi}$ are open rays, and they contain $\xi$ and $\eta$ respectively, since $\xi < \xi^{+}$ and $\xi < \eta$. They are disjoint: a common point $\zeta$ would satisfy $\zeta < \xi^{+}$, hence $\zeta \le \xi$ by [L5] and trichotomy, and $\xi < \zeta$ at once, which [L1] forbids. So claim 3 holds by [L7]. [L1, L2, L5, L7]
 
 2.1 For $\alpha, \beta \in \gamma$ the set $(\alpha,\beta] = \gamma_{>\alpha} \cap [0,\beta]$ is open by [L4], being an intersection of two open sets. [L2, L4, step 1.1]
 

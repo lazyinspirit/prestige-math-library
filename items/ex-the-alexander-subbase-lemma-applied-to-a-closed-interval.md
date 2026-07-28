@@ -66,11 +66,11 @@ all the work in one step.
 
 2.1 Put $C := \{\, t \in L : t < b \text{ for some } b \in A \,\}$, which contains $0$ by step 1.2 and is bounded above by $1$; so [L3] gives $s := \sup C$, and $0 \le s \le 1$, that is $s \in L$. [L3, L4, step 1.1, step 1.2]
 
-3.1 $s$ lies in some member of $\mathcal{S}_0$. If that member is $L_{<b}$ with $b \in A$, then $s < b$, and every $t \in L$ with $t \le s$ satisfies $t < b$; so $L_{\le s} := \{t \in L : t \le s\}$ is contained in the single ray $L_{<b}$. If instead it is $L_{>a}$ with $a \in B$, then $a < s$, so by [L3] there is $t \in C$ with $a < t \le s$, and by the definition of $C$ there is $b \in A$ with $t < b$; then $L_{\le s} \subseteq L_{<b} \cup L_{>a}$, since a point of $L_{\le s}$ is either $\le a$, hence $< t < b$, or $> a$. [L3, L4, step 1.1, step 2.1]
+3.1 $s$ lies in some member of $\mathcal{S}_0$, and that member cannot be a ray $L_{<b}$ with $b \in A$: if it were, then $s < b$, and the point $t := (s+b)/2$ would satisfy $s < t < b \le 1$ and $t \ge s \ge 0$, so $t \in L$ and $t \in C$ by the definition of $C$, contradicting $s = \sup C$. So $s \in L_{>a}$ for some $a \in B$, with $a < s$. [L3, L4, step 1.1, step 2.1]
 
-4.1 In either case finitely many members of $\mathcal{S}_0$ cover $L_{\le s}$. If $s = 1$ then $L_{\le s} = L$ and those members cover $L$. If $s < 1$, take $b \in A$ as produced in step 3.1, so that $L_{\le s} \subseteq L_{<b}$ or $L_{\le s} \subseteq L_{<b} \cup L_{>a}$; in both cases $s < b$, so any $t$ with $s < t < b$ would lie in $C$ by the definition of $C$, contradicting $s = \sup C$ unless no such $t$ exists in $L$. Since $s < 1$ and $s < b$ with $b \le 1$, the point $t := s + (b - s)/2$ satisfies $s < t < b \le 1$ and $t \ge 0$, so $t \in L$ and $t \in C$, which contradicts $t > s = \sup C$. Hence $s = 1$. [L3, L4, step 2.1, step 3.1]
+4.1 By [L3] there is $t \in C$ with $a < t \le s$, and by the definition of $C$ there is $b \in A$ with $t < b$; in particular $a < b$. Then $L = L_{<b} \cup L_{>a}$: a point $u \in L$ has $u < b$, or else $u \ge b > a$ and $u \in L_{>a}$. [L3, L4, step 2.1, step 3.1]
 
-5.1 So $s = 1$, $L_{\le s} = L$, and step 3.1 exhibits at most two members of $\mathcal{S}_0$ whose union is $L$. As $\mathcal{S}_0$ was an arbitrary cover of $L$ by members of $\mathcal{S}$, [L1] and [L2] make $L$ compact. [L1, L2, step 3.1, step 4.1] ∎
+5.1 So the two members $L_{<b}$ and $L_{>a}$ of $\mathcal{S}_0$ cover $L$. As $\mathcal{S}_0$ was an arbitrary cover of $L$ by members of $\mathcal{S}$, [L1] and [L2] make $L$ compact. [L1, L2, step 3.1, step 4.1] ∎
 
 ## Remarks
 

@@ -74,15 +74,21 @@ $\alpha^{+} \in \omega_1$ because $\alpha^{+}$ is again at most countable
 **The long line.** Let $R' := R \setminus \{0_R\}$ be the open long ray. The
 **long line** is the set
 
-$$\mathbb{L} \;:=\; (\{0\} \times R') \;\cup\; (\{1\} \times R')$$
+$$\mathbb{L} \;:=\; (\{0\} \times R') \;\cup\; (\{1\} \times R)$$
 
 with the order
 
 $$(0,x) < (0,y) :\Longleftrightarrow y < x, \qquad (0,x) < (1,y) \ \text{ always}, \qquad (1,x) < (1,y) :\Longleftrightarrow x < y,$$
 
-that is: two copies of the open long ray laid back to back, the first reversed.
-This is again a total order, by the same three checks applied within each copy
-and by the third clause across them, and $\mathbb{L}$ carries its order topology.
+that is: a reversed copy of the **open** long ray laid before a copy of the
+**closed** long ray, the two halves meeting at the single centre point
+$(1, 0_R)$. This is again a total order, by the same three checks applied within
+each copy and by the third clause across them, and $\mathbb{L}$ carries its
+order topology. One copy is open and one is closed deliberately: were both
+copies open, each half would be a union of open rays of $\mathbb{L}$, so the two
+halves would form a pair of disjoint nonempty open sets covering $\mathbb{L}$ —
+a separation — and the order would have a gap at the seam instead of the centre
+point $(1, 0_R)$ that closes it.
 
 **Blocks.** The set
 $\{0\} \times [0,1)$ is an initial segment of $R$ order-isomorphic to $[0,1)$,

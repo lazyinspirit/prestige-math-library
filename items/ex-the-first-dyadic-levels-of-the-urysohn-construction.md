@@ -8,7 +8,7 @@ deps: [thm-urysohn-lemma, def-the-dyadic-rationals-of-the-unit-interval,
        lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
        lem-normality-via-shrinking, def-normal-and-t4-spaces,
        thm-metric-spaces-are-completely-normal, def-interval,
-       lem-real-line-is-a-metric-space]
+       lem-real-line-is-a-metric-space, thm-closure-characterisation-top]
 justified_by: []
 aliases: []
 landmark: false
@@ -48,7 +48,7 @@ $$U_0 = \big(-\infty,\ \tfrac12\big), \quad U_{1/4} = \big(-\infty,\ \tfrac58\bi
 
 **Given:** $A = (-\infty,0]$, $B=[1,\infty)$ in $\mathbb{R}$, and $U_r := (-\infty, (1+r)/2)$ for dyadic $r<1$, $U_1 := \mathbb{R}$.
 
-[L1] $\overline{(-\infty,c)} = (-\infty,c]$ for real $c$, and $(-\infty,c) \subseteq (-\infty,c')$ exactly when $c \le c'$ ([[lem-real-line-is-a-metric-space]], [[def-interval]]).
+[L1] $\overline{(-\infty,c)} = (-\infty,c]$ for real $c$, and $(-\infty,c) \subseteq (-\infty,c')$ exactly when $c \le c'$. The closure identity is two lines from the cited items: $(-\infty,c]$ is closed, since its complement $(c,\infty)$ contains an interval $(x - r, x + r)$ around each of its points $x$ (take $r = x - c$), which is the open-set criterion of [[lem-real-line-is-a-metric-space]] claim 3; and $c$ lies in the closure of $(-\infty,c)$, since every interval $(c - r, c + r)$ with $r > 0$ meets it, so by [[thm-closure-characterisation-top]] claims 1 and 2 the closure of $(-\infty,c)$ is $(-\infty,c]$ exactly. The inclusion clause is immediate from [[def-interval]] and the order. ([[lem-real-line-is-a-metric-space]], [[thm-closure-characterisation-top]], [[def-interval]])
 
 [L2] $A \subseteq U_0$: every $x \le 0$ satisfies $x < 1/2$.
 

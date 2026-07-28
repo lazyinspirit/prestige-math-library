@@ -49,7 +49,7 @@ subsets.
 is the example where a naive count is not enough. The neighbour counts of an
 $N$-element set lie in a range of $N$ possible values, so the pigeonhole
 principle says nothing until the range is cut down; what cuts it down is that no
-element can have no neighbour while another is adjacent to everything else.
+element can have no neighbour while another is a neighbour of everything else.
 [[ex-a-ceiling-bound-from-the-strong-pigeonhole]] computes
 $\lceil 17/5\rceil = 4$ from the definition, notes that the counting form of the
 principle already yields it at $k = 3$ and says nothing at $k = 4$, and then

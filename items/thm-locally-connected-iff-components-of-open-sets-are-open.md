@@ -4,7 +4,7 @@ kind: theorem
 title: "A space is locally connected exactly when every component of every open subspace is open; in that case the components of the space itself are clopen"
 status: draft
 origin: session
-deps: [def-locally-connected, def-connected-component-and-quasicomponent,
+deps: [def-locally-connected, def-connected-component-and-quasicomponent, def-path-connected,
        thm-components-partition-and-are-closed, def-subspace-topology-top,
        def-topological-space, def-neighbourhood-top, def-connected-space]
 justified_by: []
@@ -46,7 +46,7 @@ form because that is how it is used.
 
 [A1] $X$ is locally connected at $x$ when every open $U \ni x$ contains an open connected $V$ with $x \in V \subseteq U$; locally path-connected likewise with "path-connected" ([[def-locally-connected]]).
 
-[A2] $C_U(x)$ is the largest connected subset of $U$ containing $x$: it is connected, contains $x$, and contains every connected $A \subseteq U$ with $x \in A$. The same holds for $P_U(x)$ with "path-connected" in place of "connected", the path components being the classes of an equivalence relation, each path-connected and containing its point ([[def-connected-component-and-quasicomponent]], [[def-connected-space]]).
+[A2] $C_U(x)$ is the largest connected subset of $U$ containing $x$: it is connected, contains $x$, and contains every connected $A \subseteq U$ with $x \in A$ ([[def-connected-component-and-quasicomponent]], [[def-connected-space]]). The same holds for $P_U(x)$ with "path-connected" in place of "connected": the path components are the classes of the joined-by-a-path equivalence relation, each path-connected and containing its point ([[def-path-connected]]).
 
 [A3] If $U$ is open in $X$ then a subset of $U$ is open in $U$ if and only if it is open in $X$ ([[def-subspace-topology-top]]).
 

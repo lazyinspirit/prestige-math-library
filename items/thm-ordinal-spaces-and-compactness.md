@@ -40,10 +40,13 @@ clopen basis $\mathcal{B}_\gamma$ of
    and it is not compact; while $\omega_1 + 1$ is compact
    ([[def-ordinal-addition]]).
 
-Claims 1 and 2 are theorems of ZF. Claim 3 spends countable choice exactly once,
-in [[thm-countable-subsets-of-omega-one-are-bounded]], which is where the
-hypothesis comes from and which carries it in its own statement; the extraction
-of a subsequence below selects nothing, taking least elements throughout.
+Claims 1 and 2 are theorems of ZF. Claim 3 spends countable choice twice, both
+times through cited results that carry the hypothesis in their own statements:
+[[thm-countable-subsets-of-omega-one-are-bounded]], which supplies the
+boundedness of at most countable subsets of $\omega_1$, and claim 2 of
+[[thm-compactness-variants-hierarchy]], which converts sequential compactness
+into countable compactness; the extraction of a subsequence below selects
+nothing, taking least elements throughout.
 
 ## Facts & Assumptions
 
@@ -103,4 +106,4 @@ of a subsequence below selects nothing, taking least elements throughout.
 
 **$\omega_1$ separates sequential compactness from compactness.** It is sequentially compact and countably compact and not compact, so neither of those two properties implies compactness; that is the content of [[fs-sequentially-compact-implies-compact]] and [[fs-countably-compact-implies-compact]], both of which take their witness from here. The reason is visible in the proof: countably many terms cannot escape from $\omega_1$, because a countable set of countable ordinals has a countable supremum, while the uncountable cover by the initial segments has no finite subfamily covering everything.
 
-**The hypothesis of countable choice is inherited, not added.** It enters only through [[thm-countable-subsets-of-omega-one-are-bounded]], whose own statement carries it; the boundedness of an at most countable subset of $\omega_1$ is what the whole of claim 3 rests on, and everything else in the argument takes least elements.
+**The hypothesis of countable choice is inherited, not added.** It enters through two cited results whose own statements carry it — [[thm-countable-subsets-of-omega-one-are-bounded]] at the boundedness step, and claim 2 of [[thm-compactness-variants-hierarchy]] at the passage from sequential to countable compactness; the boundedness of an at most countable subset of $\omega_1$ is what claim 3 rests on, and everything else in the argument takes least elements.

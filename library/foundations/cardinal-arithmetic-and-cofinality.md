@@ -109,9 +109,9 @@ $\operatorname{cf}(\alpha)$ is the least length of a family reaching $\alpha$ fr
 below ([[lem-cofinality-is-well-defined]], [[def-cofinality]]), and for a limit
 ordinal it is an infinite cardinal which is its own cofinality
 ([[thm-cofinality-basics]]). Regularity of $\aleph_0$ and singularity of
-$\aleph_\omega$ are theorems of ZF; regularity of the successor alephs is not,
-and [[thm-regularity-of-the-alephs]] carries the hypothesis in its statement and
-names where it is spent.
+$\aleph_\omega$ are theorems of ZF; regularity of the successor alephs is proved
+here only from the Axiom of Choice, and [[thm-regularity-of-the-alephs]] carries
+the hypothesis in its statement and names where it is spent.
 
 **König, and what ZFC decides about the continuum.** With sums and
 products of indexed families in place ([[def-infinite-cardinal-sum-and-product]]),

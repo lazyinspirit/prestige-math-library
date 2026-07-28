@@ -23,7 +23,7 @@ notation, and singularity stops being an abstract possibility.
 $\aleph_0 \oplus \aleph_0$, $\aleph_0 \otimes \aleph_0$,
 $\aleph_1 \oplus \aleph_0$ and $5 \oplus \aleph_0$ from
 [[cor-cardinal-absorption]], and then recomputes the countable ones from the
-published bijection $\omega \times \omega \approx \omega$ and two inclusions. The
+published bijection $\omega \times \omega \approx \omega$ and explicit injections. The
 two routes are independent: one is the general theorem, the other is the explicit
 map that was available before cardinal arithmetic existed.
 

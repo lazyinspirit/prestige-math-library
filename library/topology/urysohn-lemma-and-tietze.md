@@ -54,7 +54,7 @@ continuous map on a closed subspace into $[a,b]$, and proves the converse:
 the extension property characterises normality.
 [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] widens the target
 from a closed bounded interval to $\mathbb{R}$ and to an open interval,
-composing the bounded case with an explicit rational homeomorphism.
+composing the bounded case with an explicit homeomorphism.
 
 **Compactness and complete regularity.** [[thm-a-locally-compact-hausdorff-space-is-completely-regular]]
 applies Urysohn's lemma inside the one-point compactification of a locally

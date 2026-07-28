@@ -35,8 +35,8 @@ $x \ne y$ in $V$ with $d(x) = d(y)$.
 The point is that the possible values of $d$ are $0, 1, \dots, N-1$, which is as
 many values as $V$ has elements, so counting alone does not settle it. What
 settles it is that the two extreme values cannot both occur: if some $x_0$ has no
-neighbour then no $y$ can be adjacent to everything else, since it would then be
-adjacent to $x_0$.
+neighbour then no $y$ can be a neighbour of everything else, since it would then
+be a neighbour of $x_0$.
 
 **Concretely**, with $V := 3 = \{0,1,2\}$ and
 $R := \{(0,1),(1,0)\}$, the neighbour counts are $d(0) = 1$, $d(1) = 1$ and

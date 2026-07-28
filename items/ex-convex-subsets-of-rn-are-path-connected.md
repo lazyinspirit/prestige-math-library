@@ -47,7 +47,7 @@ $$x, y \in C \ \text{ and } \ t \in [0,1] \quad \Longrightarrow \quad (1-t)x + t
    ([[def-p-norms-on-rn]], [[def-metric-ball]]); so every ball of
    $\mathbb{R}^n$ is path-connected and connected.
 3. **$\mathbb{R}^n$ itself is convex**, hence path-connected and connected, and
-   so is every affine subspace, every half-space
+   so is every half-space
    $\{\, x : x_k \le c \,\}$, and every box $\prod_{k<n} J_k$ with each $J_k$ an
    order-convex subset of $\mathbb{R}$.
 

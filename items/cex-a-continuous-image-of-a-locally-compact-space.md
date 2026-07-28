@@ -78,4 +78,4 @@ locally compact: the point $\ast := N$ of $Y$ has no compact neighbourhood.
 
 **Compactness behaves differently.** A continuous image of a compact space is compact ([[thm-compactness-under-continuous-maps]], claim 1); it is only the *local* condition that fails to survive, and it fails because "locally" is a statement about each point separately and a quotient can glue infinitely many points together.
 
-**Quotient maps are the natural place to look.** A quotient map is a continuous surjection, so this also refutes the same claim for continuous surjections; and since $q$ here is a closed map with one non-singleton fibre, no weakening of the hypothesis short of compactness of the fibres will restore the conclusion.
+**Quotient maps are the natural place to look.** A quotient map is a continuous surjection, so this also refutes the same claim for continuous surjections; and since $q$ here is a closed map with one non-singleton fibre, closedness of the map, even with a single non-singleton fibre, is not enough to restore the conclusion.

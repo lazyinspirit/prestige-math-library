@@ -68,7 +68,7 @@ collapse to $2^{\aleph_0}$.
 
 ## Remarks
 
-**Why the collapse happens.** Once the base is at least $2$ and at most $2^{\mu}$, raising it to the power $\mu$ gives the same value, because $(2^{\mu})^{\mu} = 2^{\mu \otimes \mu} = 2^{\mu}$ squeezes the chain shut. So strict monotonicity in the base can only survive where the base is allowed to exceed $2^{\mu}$, and it fails on the whole interval below it. That is a fact about [[thm-hessenberg]] as much as about exponentiation.
+**Why the collapse happens.** For an infinite exponent $\mu$: once the base is at least $2$ and at most $2^{\mu}$, raising it to the power $\mu$ gives the same value, because $(2^{\mu})^{\mu} = 2^{\mu \otimes \mu} = 2^{\mu}$ squeezes the chain shut. So for infinite $\mu$ strict monotonicity in the base can only survive where the base is allowed to exceed $2^{\mu}$, and it fails on the whole interval below it; for finite exponents $\ge 1$ the collapse does not occur, which is why the witness above takes $\mu = \aleph_0$. That is a fact about [[thm-hessenberg]] as much as about exponentiation.
 
 **The weak form is not damaged.** $\kappa \le \lambda \Rightarrow \kappa^{\mu} \le \lambda^{\mu}$ remains true, and so does strictness in the exponent slot in the one case proved on this page, $\kappa < 2^{\kappa}$. What fails is the strict form in the base, and it fails at the smallest infinite instance.
 

@@ -7,6 +7,7 @@ origin: session
 deps: [def-topological-space, def-dense-top, def-sequence, def-interior-closure-boundary-top, def-natural-numbers]
 justified_by: []
 aliases: []
+external_refs: [rem-baire-category-choice-strength]
 landmark: true
 short: "Baire space"
 verification:

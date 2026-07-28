@@ -7,7 +7,8 @@ origin: session
 deps: [def-interval, def-integer-power, def-canonical-natural, def-nat-power,
        cor-archimedean-reciprocal, def-ordered-field, def-natural-numbers,
        def-nat-order, thm-induction-principle, thm-well-ordering-principle,
-       lem-of-naturals-positive, lem-of-inverse-positive, def-countable]
+       lem-of-naturals-positive, lem-of-inverse-positive, def-countable,
+       lem-nat-nonzero-is-successor]
 justified_by: []
 aliases: [def-dyadic-rationals]
 landmark: true
@@ -41,7 +42,7 @@ For $n \in \mathbb{N}$ put
 $$D_n \;:=\; \Big\{\, \frac{k}{2^n} \;:\; k \in \mathbb{N},\ k \le 2^n \,\Big\} \;\subseteq\; [0,1],$$
 
 the order $\le$ on the naturals $k$ and $2^n$ being that of [[def-nat-order]].
-
+Each $D_n$ is
 a finite subset of $[0,1]$ ([[def-interval]]) with $0, 1 \in D_n$ (the cases
 $k=0$ and $k=2^n$); it has at most $2^n+1$ elements, so is finite in the sense
 of [[def-countable]]. The **dyadic rationals of $[0,1]$** are
@@ -55,6 +56,32 @@ factor $\iota(2)$, licensed by [[def-ordered-field]]), so every element of $D_n$
 is exhibited as an element of $D_{n+1}$; hence $D_0 \subseteq D_1 \subseteq
 D_2 \subseteq \cdots$ and $D = \bigcup_n D_n$ is genuinely increasing, not
 merely a union.
+
+**The level decomposition, stated and discharged here because the recursion of
+[[thm-urysohn-lemma]] consumes it.** For $n \in \mathbb{N}$,
+
+$$D_{n+1} \;=\; D_n \,\cup\, \Big\{\, t_j := \frac{2j+1}{2^{n+1}} \;:\; j \in \mathbb{N},\ j < 2^n \,\Big\},$$
+
+and the new points $t_j$ are pairwise distinct, none lies in $D_n$, and each
+lies strictly between the $D_n$-consecutive pair $r_j := j/2^n$ and
+$s_j := (j+1)/2^n$. *Strict betweenness:* $2j < 2j+1 < 2j+2$, and dividing by
+the positive $2^{n+1}$ preserves strict order ([[def-ordered-field]]), so
+$r_j = 2j/2^{n+1} < t_j < (2j+2)/2^{n+1} = s_j$. *Distinctness:* $j \mapsto
+2j+1$ is injective. *Disjointness from $D_n$:* $t_j = k/2^n$ with
+$k \le 2^n$ would give $2j+1 = 2k$ after clearing the positive factor
+$1/2^{n+1}$ and applying injectivity of $\iota$; but $k \le j$ gives
+$2k \le 2j < 2j+1$, and $k \ge j+1$ gives $2k \ge 2j+2 > 2j+1$, so no such $k$
+exists. *The union is all of $D_{n+1}$:* given $k/2^{n+1}$ with
+$k \le 2^{n+1}$, the set $\{\, i \in \mathbb{N} : 2i > k \,\}$ is nonempty
+($2(k+1) = 2k+2 > k$), so by [[thm-well-ordering-principle]] it has a least
+element $i_0$, and $i_0 \ge 1$ since $2 \cdot 0 = 0 \le k$; writing
+$i_0 = j+1$ ([[lem-nat-nonzero-is-successor]]) gives $2j \le k < 2j+2$, so
+$k = 2j$ or $k = 2j+1$. In the first case $k/2^{n+1} = j/2^n \in D_n$ (with
+$j \le 2^n$ since $2j \le 2^{n+1}$); in the second it is $t_j$ (with $j < 2^n$
+since $2j+1 \le 2^{n+1}$ forces $2j < 2^{n+1}$). Finally, **any two elements of
+$D$ lie together in a common level**: one lies in some $D_m$ and the other in
+some $D_{m'}$, and both then lie in $D_{\max(m,m')}$ by the nesting just
+proved.
 
 **$D$ is dense in $[0,1]$: for every $x \in [0,1]$ and every real
 $\varepsilon > 0$ there is $r \in D$ with $|x - r| < \varepsilon$.** First, a
@@ -86,8 +113,7 @@ satisfies $|x-r| < \varepsilon$.
 ## Remarks
 
 - **Every dyadic rational of $[0,1]$ other than $0$ and $1$ lies strictly
-  between them**, since $0 < k/2^n < 1$ exactly when $0 < k < 2^n$, and this is
-  the only order fact about $D$ used elsewhere on this page.
+  between them**, since $0 < k/2^n < 1$ exactly when $0 < k < 2^n$.
 
 - **The finite levels, not $D$ itself, are what the construction of Urysohn's
   lemma recurses on.** $D$ is presented here as the increasing union

@@ -82,13 +82,14 @@ readable alternative to $\kappa^{\lambda}$, and
 [[rem-ordinal-versus-cardinal-exponentiation]] already records that
 $\alpha^{\beta}$ is used for two different operations: as ordinals
 $2^{\omega} = \omega$, while the cardinal $2^{\omega}$ counts the functions
-$\omega \to \{0,1\}$ and is uncountable. The rule adopted here, and followed
-without exception on this page and its companion, is:
+$\omega \to \{0,1\}$ and is uncountable. The rule adopted here, and followed on
+this page and its companion, is:
 
-> **In an exponential, the base and the exponent are always alephs or one of the
-> cardinal letters $\kappa$, $\lambda$, $\mu$, or a natural number read as a
-> cardinal — never $\omega$, never $\omega_1$, and never an ordinal letter
-> $\alpha, \beta, \gamma, \xi, \eta$.**
+> **In an exponential, the base and the exponent are always alephs, letters or
+> expressions denoting cardinals — $\kappa$, $\lambda$, $\mu$,
+> $\mathfrak{c}$, $\operatorname{cf}(\kappa)$, $\lvert A \rvert$ — or a natural
+> number read as a cardinal; never $\omega$, never $\omega_1$, and never a
+> letter denoting an ordinal, such as $\alpha, \beta, \gamma, \xi, \eta$.**
 
 So $2^{\aleph_0}$, $\kappa^{\lambda}$ and $\aleph_1^{\aleph_0}$ are cardinal
 exponentials, and an expression such as $\omega^{\omega}$ or $\alpha^{\beta}$ is
