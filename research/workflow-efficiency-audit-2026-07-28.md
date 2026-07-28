@@ -6,7 +6,20 @@ own proposals — shrink summary/Remark content, cut judging and auditing, possi
 delete step 8, possibly author with Sonnet 5 — are each addressed below, adopted
 where the evidence supports them and contested where it does not.
 
-**This is a PROPOSAL. `LEVELS.md` is unchanged; nothing here is in force.**
+**OUTCOME: all seven decisions taken by the owner, 2026-07-28. This file is now
+the RATIONALE; the rules themselves are in the normative docs.**
+
+| # | recommendation | decision | where it lives now |
+|---|---|---|---|
+| R3 | `--batch` on real dependency edges only | **approved** | `LEVELS.md` §Step 6, `CLAUDE.md`, `briefs/authoring.md` |
+| R7 | 402 is terminal; `--preflight` | **approved, both parts** | `tools/judge.mts`, `ARCHITECTURE.md` §5 |
+| R1 | three prose rules + a gate | **approved, rules and gate** | `tools/prosecheck.mjs` (gate 9), `LEVELS.md` triage, all briefs |
+| R2 | judge once, after step 9 | **approved** | `LEVELS.md` §Execution order |
+| R4 | merge step 8 into step 9 | **approved** | `LEVELS.md`; step 8 kept as a tombstone |
+| R6 | summaries and Remarks | **approved, both** | `SCHEMA.md` §6, `LEVELS.md` prose rule 4, all briefs |
+| R8 | Sonnet 5 authoring | **pilot approved, no switch yet** | `LEVELS.md` §Step 5 |
+
+Execution order is now **0 → 1 → 2 → 3 → 4 → 5 → 9 → 6 → 7 → 10**.
 
 ---
 
