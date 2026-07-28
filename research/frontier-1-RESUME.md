@@ -408,6 +408,70 @@ It removed all 13 by unfolding the identification inline instead. Recorded in
 `ARCHITECTURE.md` §3.3, because any future page reaching for that remark hits the
 same thing and the chip it earns is false.
 
+## Step 5–7 outcome: all six pairs authored, 212 items
+
+**Judge coverage, counted from `verification.judge` in frontmatter on disk — not
+from any agent's claim:**
+
+| page | judged |
+|---|---|
+| `function-space-topologies` | 24/24 |
+| `function-space-topologies-examples` | 9/9 |
+| `ordinal-arithmetic` | 25/28 |
+| `separation-axioms` | 23/28 |
+| `finite-counting-and-binomial-coefficients` | 22/26 |
+| `rn-as-a-normed-space` | 18/22 |
+| `properties-of-the-integral-and-the-working-ftc` | 8/20 |
+| `…-integral…-examples` | 3/13 |
+| `ordinal-arithmetic-examples` | 1/8 |
+| the other three B pages | 0/14, 0/12, 0/8 |
+| **total** | **133/212 (63%)** |
+
+The B pages are worst hit because every author judged its A page first and the
+credits ran out before the companions.
+
+**Three of the gaps are NOT credit exhaustion**, and the distinction matters
+because the honesty rule produced them deliberately:
+
+- `thm-ordinal-arithmetic-agrees-on-omega` — an HTTP transport failure.
+- `fs-ordinal-addition-is-commutative` — a verdict whose payload visibly begins
+  `keep:true` but which the harness could not parse. **Not recorded**, because an
+  unparsed response is not a pass.
+- `thm-componentwise-limits-and-continuity` — **passed, then the pass was
+  deleted.** The verdict's own reason quoted a stale step reference left by
+  precheck's restratification; fixing that made the pass a claim about text the
+  judge never saw. The author discarded a verdict it had earned and could not
+  regain. That is the rule working.
+
+**And 14 more passes were deliberately destroyed on the integral pair** — see
+below. Coverage there fell from 25/33 to 11/33 as a *result of quality work*.
+
+### The integral author's own Remarks re-read: nine defects, all its own
+
+With the judge gone, it re-read its Remarks with a numbered step's suspicion, as
+the brief demands. It was not clean. **Nine defects, every one in a Remark or a
+page summary, none in a numbered step** — the fifth consecutive build with that
+signature. Four were outright false:
+
+1. *"Half of this page cites claim 2"* — 7 of 20 do. A **count stated in prose**,
+   the class nobody re-checks.
+2. The witness offered for "∫φ∘f is not a function of ∫f" was `φ(t)=t²` on
+   **constants of different values** — no witness at all, since distinct constants
+   have distinct integrals.
+3. *"Every computation on the companion page runs through the second FTC"* —
+   several do not. **Its first repair was also over-quantified** and had to be
+   replaced a second time.
+4. Darboux's theorem described as *"developed on a **later** page of this track"*.
+   It is planned at order **155**, which is **earlier** than 161, and unbuilt.
+   This is exactly the failure `LEVELS.md` records: **order-relative phrasing is
+   decay-resistant, not decay-proof**, because it does not protect against getting
+   the position wrong in the first place. The same error sat in the A page summary
+   about Taylor's integral remainder.
+
+Because these were Remarks corrections on items that had already passed, SCHEMA §3
+made them material rewrites and **14 `verification.judge` blocks were deleted**.
+That is the honest state, not the flattering one.
+
 ## Progress
 
 - [x] Step 0 — frontier computed, batched, seams reported
