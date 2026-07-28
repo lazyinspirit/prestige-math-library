@@ -69,8 +69,8 @@ derivative is $1$ everywhere.
 
 ## Remarks
 
-- **What the endpoint case would need instead.** At $1$ the domain supplies points on the left only, and the difference quotient there is positive, so the most one can conclude is $f'(1) \ge 0$. This library does not state that one-sided refinement, since nothing here uses it; the point of the witness is only that the two-sided conclusion $f'(c) = 0$ is unavailable.
+- **What the endpoint case would need instead.** At $1$ the domain supplies points on the left only, and the difference quotient there is positive, so the most one can conclude is $f'(1) \ge 0$. That one-sided refinement is not stated at this point in the reading order, since nothing here uses it; the point of the witness is only that the two-sided conclusion $f'(c) = 0$ is unavailable.
 
-- **The witness is not delicate.** Any function that is increasing on $[0,1]$ and differentiable there does the same job, and the identity is chosen for having a derivative that can be computed from [[def-derivative]] in one line. So the failure at an endpoint is the generic situation and not an artefact.
+- **The witness is not delicate.** Any function increasing on $[0,1]$ and differentiable there whose derivative vanishes at neither endpoint does the same job, and the identity is chosen for having a derivative that can be computed from [[def-derivative]] in one line. The nonvanishing clause has to be said and is not automatic: $x \mapsto x^{3}$ is increasing on $[0,1]$ and differentiable there, and attains its least value at $0$, yet $f'(0) = 0$, so it refutes nothing at the left endpoint. What removing interiority destroys is the *guarantee* that the derivative vanishes, not the possibility. So the failure at an endpoint is the generic situation and not an artefact.
 
 - **Why this matters for Rolle's theorem.** [[thm-rolle]] produces an interior point precisely by ruling this case out: when both extrema sit at the endpoints, the hypothesis $f(a) = f(b)$ forces the function to be constant, and any interior point then serves. Without that hypothesis the endpoint case is exactly the one that survives, and the identity on $[0,1]$ is it.

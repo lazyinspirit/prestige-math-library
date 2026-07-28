@@ -80,8 +80,11 @@ needed, and [[thm-continuity-iff-oscillation-zero]] converts continuity at a
 point into the vanishing of a single number there. That is what makes the
 continuity set accessible: [[lem-oscillation-superlevel-sets-are-closed]] shows
 each set $\{\omega_f \ge \varepsilon\}$ is relatively closed, and
-[[thm-discontinuity-set-is-f-sigma]] assembles them into the statement that the
-discontinuity set is $F_\sigma$ and the continuity set $G_\delta$.
+[[thm-discontinuity-set-is-f-sigma]] assembles them, first into the pointwise
+exhaustion of the discontinuity set by the superlevel sets at the thresholds
+$1, 1/2, 1/3, \dots$, and then into the statement that the discontinuity set is
+$F_\sigma$ and the continuity set $G_\delta$. Both halves are cited downstream,
+and the exhaustion is stated as a claim in its own right for that reason.
 [[thm-continuity-set-realisation]] proves the converse, so the continuity sets
 are exactly the $G_\delta$ sets, and
 [[cor-no-function-is-continuous-exactly-on-q]] spends that on the sharpest
@@ -135,8 +138,9 @@ monotonicity on an interval, boundedness above or below on one, constancy of
 sign on one, and a graph that is not dense in $\mathbb{R}^2$ — five of them by
 reduction to that lemma. Two further classical clauses, boundedness on a set of
 positive measure and Lebesgue measurability, are absent: both need a measure,
-which this library does not build as it stands, and each is an independent
-sufficient condition, so nothing else changes when they are restored.
+which is not available at this point in the reading order, and each is an
+independent sufficient condition, so nothing else changes when they are
+restored.
 
 **And what happens without any of them.** [[lem-hamel-basis-exists]] produces,
 from the Axiom of Choice through [[cor-every-vector-space-has-a-basis]] and

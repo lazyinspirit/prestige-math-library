@@ -98,23 +98,8 @@ for it. This is the pattern
 
 ## Remarks
 
-- **What claim 2 adds beyond claim 3.** Continuity at a point is the vanishing of
-  the oscillation there, so claim 3 is the special case of claim 2 recording
-  where the value is $0$. The value itself is used on the companion page, where
-  the oscillation of $t$ is computed at particular points
-  on the companion examples page, and it shows that the failure
-  of continuity at a rational is exactly as large as the value of $t$ there:
-  small denominators are the bad points.
+- **What claim 2 adds beyond claim 3.** Continuity at a point is the vanishing of the oscillation there, so claim 3 is the special case of claim 2 recording where the value is $0$. The value itself is used on the companion page, where the oscillation of $t$ is computed at particular points, and it shows that the failure of continuity at a rational is exactly as large as the value of $t$ there: small denominators are the bad points.
 
-- **The continuity set of $t$ is $G_\delta$, as it must be.** The irrationals
-  form a $G_\delta$ set ([[cor-q-is-meager-and-not-g-delta]]), in agreement with
-  [[thm-discontinuity-set-is-f-sigma]]. The reverse arrangement is impossible:
-  no function is continuous at every rational and discontinuous at every
-  irrational, because $\mathbb{Q}$ is not $G_\delta$
-  ([[cor-no-function-is-continuous-exactly-on-q]]).
+- **The continuity set of $t$ is $G_\delta$, as it must be.** The irrationals form a $G_\delta$ set ([[cor-q-is-meager-and-not-g-delta]]), in agreement with [[thm-discontinuity-set-is-f-sigma]]. The reverse arrangement is impossible: no function is continuous at every rational and discontinuous at every irrational, because $\mathbb{Q}$ is not $G_\delta$ ([[cor-no-function-is-continuous-exactly-on-q]]).
 
-- **No choice principle is spent.** The separation estimate of step 1.2 is
-  written down from $\lfloor \iota(q)c \rfloor$, the minimum of step 2.1 is the
-  minimum of an explicitly listed finite set, and the least denominator $q(x)$ is
-  a least element. Density supplies points, and it is used only in the form
-  "every neighbourhood meets the set", never to build a sequence.
+- **No choice principle is spent.** The separation estimate of step 1.2 is written down from $\lfloor \iota(q)c \rfloor$, the minimum of step 2.1 is the minimum of an explicitly listed finite set, and the least denominator $q(x)$ is a least element. Density supplies points, and it is used only in the form "every neighbourhood meets the set", never to build a sequence.

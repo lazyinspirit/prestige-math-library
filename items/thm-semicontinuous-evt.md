@@ -39,8 +39,7 @@ Let $K \subseteq \mathbb{R}$ be nonempty and compact ([[def-open-cover-r]]).
 
 **The theorem is genuinely one-sided.** An upper semicontinuous function on a
 compact set need be neither bounded below nor a function attaining its infimum;
-the companion page gives such a function on $[0,1]$
-on the companion examples page. Only the maximum is
+the companion page gives such a function on $[0,1]$. Only the maximum is
 asserted in claim 1, and only the minimum in claim 2.
 
 Taking $f$ continuous, which is upper and lower semicontinuous at once
@@ -87,17 +86,6 @@ compact subset of $\mathbb{R}$.
 
 ## Remarks
 
-- **Where compactness is spent, and in which form.** Twice, and both times as the
-  open-cover property of [[def-open-cover-r]]: once to bound $f$ above, once to
-  find the point where the supremum is attained. No sequence is extracted and no
-  countable choice is used; the second application is stated as the
-  contrapositive of the covering property, which is why step 5.1 proves that no
-  finite subfamily covers rather than assuming a limit point.
+- **Where compactness is spent, and in which form.** Twice, and both times as the open-cover property of [[def-open-cover-r]]: once to bound $f$ above, once to find the point where the supremum is attained. No sequence is extracted and no countable choice is used; the second application is stated as the contrapositive of the covering property, which is why step 5.1 proves that no finite subfamily covers rather than assuming a limit point.
 
-- **Semicontinuity cannot be dropped.** Both applications use only that the sets
-  $\{f < \alpha\}$ are relatively open
-  ([[thm-semicontinuity-level-set-characterisation]]), which is exactly upper
-  semicontinuity, and nothing else about $f$ is used at all. A function whose
-  strict sublevel sets are not relatively open can be unbounded above on a
-  compact set: the function on $[0,1]$ equal to $1/x$ for $x \ne 0$ and to $0$ at
-  $0$ is one.
+- **Semicontinuity cannot be dropped.** Both applications use only that the sets $\{f < \alpha\}$ are relatively open ([[thm-semicontinuity-level-set-characterisation]]), which is exactly upper semicontinuity, and nothing else about $f$ is used at all. A function whose strict sublevel sets are not relatively open can be unbounded above on a compact set: the function on $[0,1]$ equal to $1/x$ for $x \ne 0$ and to $0$ at $0$ is one.

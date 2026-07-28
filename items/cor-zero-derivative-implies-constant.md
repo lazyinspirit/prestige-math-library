@@ -53,8 +53,14 @@ proof would survive, because the mean value theorem is applied to the segment
 joining two points of the domain and that segment must lie in the domain.
 
 **The hypothesis is imposed only at interior points.** At an endpoint of $I$
-nothing is asked, which matters because $f'$ at an endpoint is a one-sided
-object and need not vanish; the conclusion holds anyway.
+nothing is asked at all: $f$ need not be differentiable there, and the proof
+never evaluates a difference quotient at an endpoint, since it applies the mean
+value theorem on a segment $[u,v] \subseteq I$ and uses the derivative only at
+points of $(u,v)$, all of which are interior to $I$. What is *not* meant is that
+the derivative at an endpoint is free to be nonzero: once $f$ is known to be
+constant its difference quotient at an endpoint is constantly $0$, so wherever
+$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,
+not a hypothesis of it.
 
 ## Facts & Assumptions
 

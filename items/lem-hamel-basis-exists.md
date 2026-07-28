@@ -125,35 +125,10 @@ by the real alone.
 
 ## Remarks
 
-- **How this differs from [[ex-hamel-basis-of-r-over-q]], exactly.** That item,
-  homed on the examples page of *Linear independence, bases and dimension*,
-  proves three things: that $\mathbb{R}$ is a vector space over the canonical
-  copy of $\mathbb{Q}$, that it has a basis there, and that **every** such basis
-  is infinite, together with the observation that the existence proof exhibits
-  none. The present lemma proves the first two and does **not** prove the third:
-  nothing above says that a Hamel basis is infinite. What it adds instead is
-  claims 2 to 5 — the representation by injective lists, uniqueness of the
-  coefficients along a list, the coefficient map $\Lambda_{b_{\star}}$ of a
-  single basis vector with its kernel, and the fact that
-  $W_{b_{\star}} \ne \{0\}$ — none of which appears there. So neither statement
-  contains the other, and they are **not** the same statement.
+- **How this differs from [[ex-hamel-basis-of-r-over-q]], exactly.** That item, homed on the examples page of *Linear independence, bases and dimension*, proves three things: that $\mathbb{R}$ is a vector space over the canonical copy of $\mathbb{Q}$, that it has a basis there, and that **every** such basis is infinite, together with the observation that the existence proof exhibits none. The present lemma proves the first two and does **not** prove the third: nothing above says that a Hamel basis is infinite. What it adds instead is claims 2 to 5 — the representation by injective lists, uniqueness of the coefficients along a list, the coefficient map $\Lambda_{b_{\star}}$ of a single basis vector with its kernel, and the fact that $W_{b_{\star}} \ne \{0\}$ — none of which appears there. So neither statement contains the other, and they are **not** the same statement.
 
-  The duplication of the two shared clauses is deliberate. An examples page is a
-  leaf of this library and nothing outside it may depend on an item homed there,
-  so a citable Hamel basis had to be built on a page that is not a leaf. The
-  proofs of those clauses are the same proof, and no originality is claimed for
-  them.
+The duplication of the two shared clauses is deliberate. An examples page is a leaf of this library and nothing outside it may depend on an item homed there, so a citable Hamel basis had to be built on a page that is not a leaf. The proofs of those clauses are the same proof, and no originality is claimed for them.
 
-- **Where the choice is spent.** Once, in [[cor-every-vector-space-has-a-basis]],
-  which runs through [[thm-zorn]]. Everything after step 3.1 is elementary
-  linear algebra over an arbitrary field, applied to $\mathbb{R}$ over
-  $\mathbb{Q}$. Nothing here exhibits a Hamel basis, and nothing here claims that
-  none can be exhibited; that would be an assertion about definability, and this
-  library has established nothing of the kind.
+- **Where the choice is spent.** Once, in [[cor-every-vector-space-has-a-basis]], which runs through [[thm-zorn]]. Everything after step 3.1 is elementary linear algebra over an arbitrary field, applied to $\mathbb{R}$ over $\mathbb{Q}$. Nothing here exhibits a Hamel basis, and nothing here claims that none can be exhibited; that would be an assertion about definability, and this library has established nothing of the kind.
 
-- **The coefficient map is the source of the pathology.**
-  $\Lambda_{b_{\star}}$ is additive ([[def-additive-function]]) and takes only
-  rational values, so it is not of the form $x \mapsto cx$; that is the whole of
-  [[fs-additive-implies-linear]], and the companion page reads off from it a
-  function unbounded on every interval, with dense graph and dense level sets
-  on the companion examples page.
+- **The coefficient map is the source of the pathology.** $\Lambda_{b_{\star}}$ is additive ([[def-additive-function]]) and takes only rational values, so it is not of the form $x \mapsto cx$; that is the whole of [[fs-additive-implies-linear]], and the companion page reads off from it a function unbounded on every interval, with dense graph and dense level sets.

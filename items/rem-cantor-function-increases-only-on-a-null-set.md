@@ -65,5 +65,4 @@ climbs from $0$ to $1$ might be expected to do its climbing on a set that is
 large in some sense; $c$ does all of it on a set that is null and, being
 nowhere dense ([[thm-cantor-set-properties]], claim 5), small in category as
 well. The companion page pushes the same observation one step further: $c$ maps
-the null set $C$ **onto** the whole of $[0,1]$
-on the companion examples page.
+the null set $C$ **onto** the whole of $[0,1]$.

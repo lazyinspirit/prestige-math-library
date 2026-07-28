@@ -32,14 +32,30 @@ Let $A \subseteq \mathbb{R}$ and let $f : A \to \mathbb{R}$. Write
 
 $$D \;:=\; \{\, x \in A : f \text{ is discontinuous at } x \,\}, \qquad C \;:=\; A \setminus D$$
 
-([[def-continuity-real]], [[def-classification-of-discontinuities]]). Then there
-is an $F_\sigma$ set $F \subseteq \mathbb{R}$ and a $G_\delta$ set
-$V \subseteq \mathbb{R}$ ([[def-f-sigma-g-delta]]) with
+([[def-continuity-real]], [[def-classification-of-discontinuities]]). Then:
 
-$$D \;=\; A \cap F, \qquad C \;=\; A \cap V, \qquad V = \mathbb{R} \setminus F .$$
+1. **Pointwise exhaustion.** $D = \{\, x \in A : \omega_f(x) > 0 \,\}$
+   ([[def-oscillation]]), and $D$ is the union of the increasing sequence of
+   superlevel sets
+   $$D \;=\; \bigcup_{n \in \mathbb{N}} \{\, x \in A : \omega_f(x) \ge 1/\iota(n+1) \,\}$$
+   ([[def-canonical-natural]]), whose thresholds are $1, 1/2, 1/3, \dots$.
+2. **Descriptive form.** There is an $F_\sigma$ set $F \subseteq \mathbb{R}$ and
+   a $G_\delta$ set $V \subseteq \mathbb{R}$ ([[def-f-sigma-g-delta]]) with
+   $$D \;=\; A \cap F, \qquad C \;=\; A \cap V, \qquad V = \mathbb{R} \setminus F ,$$
+   and $F$ may be taken to be $\bigcup_{n \in \mathbb{N}} G_n$ with each $G_n$ a
+   closed subset of $\mathbb{R}$ cutting down on $A$ to the $n$-th set of
+   claim 1 ([[lem-oscillation-superlevel-sets-are-closed]]).
 
 In particular, when $A = \mathbb{R}$ the discontinuity set $D$ is an $F_\sigma$
-subset of $\mathbb{R}$ and the continuity set $C$ is a $G_\delta$ subset.
+subset of $\mathbb{R}$ and the continuity set $C$ is a $G_\delta$ subset, and
+claim 1 reads $D = \bigcup_{n} \{\, x \in \mathbb{R} : \omega_f(x) \ge 1/\iota(n+1) \,\}$.
+
+**Claim 1 is stated separately because it is what is cited downstream.** The
+exhaustion of $D$ by the superlevel sets $\{\omega_f \ge 1/\iota(n+1)\}$ is used
+directly wherever a property has to be established one threshold at a time —
+[[thm-baire-one-continuity-points]] shows each superlevel set nowhere dense and
+concludes that $D$ is meager — and that use needs the identity itself, not only
+the descriptive conclusion of claim 2.
 
 **The statement is relative on purpose.** For a general domain $A$ the sets $D$
 and $C$ are subsets of $A$, and neither is $F_\sigma$ or $G_\delta$ in
@@ -74,22 +90,14 @@ which is the case [[thm-continuity-set-realisation]] and
 
 3.1 Put $F := \bigcup_{n \in \mathbb{N}} G_n$, an $F_\sigma$ subset of $\mathbb{R}$ since each $G_n$ is closed and the family is indexed by $\mathbb{N}$. Then $A \cap F = \bigcup_{n} (A \cap G_n) = D$. [step 1.1, step 2.1, step 2.2, L4]
 
+3.2 Claim 1 is proved: $D = \{x \in A : \omega_f(x) > 0\}$ by step 1.2, and $D = \bigcup_{n \in \mathbb{N}} \{x \in A : \omega_f(x) \ge \varepsilon_n\}$ by steps 2.1 and 2.2, since $A \cap G_n$ is by step 1.1 exactly the set $\{x \in A : \omega_f(x) \ge \varepsilon_n\}$ with $\varepsilon_n = 1/\iota(n+1)$. The union is increasing, since $n \le m$ gives $\iota(n+1) \le \iota(m+1)$ and hence $\varepsilon_m \le \varepsilon_n$. [step 1.1, step 1.2, step 2.1, step 2.2, L3]
+
 4.1 Put $V := \mathbb{R} \setminus F$, a $G_\delta$ subset of $\mathbb{R}$. Then $A \cap V = A \setminus (A \cap F) = A \setminus D = C$. [step 3.1, L4]
 
-5.1 For $A = \mathbb{R}$ the two identities read $D = F$ and $C = V$, so $D$ is $F_\sigma$ and $C$ is $G_\delta$ outright. [step 3.1, step 4.1] ∎
+5.1 Claim 2 is proved by steps 3.1 and 4.1; and for $A = \mathbb{R}$ the two identities read $D = F$ and $C = V$, so $D$ is $F_\sigma$ and $C$ is $G_\delta$ outright. [step 3.1, step 3.2, step 4.1] ∎
 
 ## Remarks
 
-- **The exhaustion is indexed from $0$ and the thresholds are $1/\iota(n+1)$.**
-  $\mathbb{N}$ contains $0$, so the sequence of thresholds is
-  $1, 1/2, 1/3, \dots$ and never $1/\iota(0)$, which is not defined. Writing the
-  union as $\bigcup_{n \ge 1} \{\omega_f \ge 1/\iota(n)\}$ names the same family;
-  the form above is used because a sequence in this library is a function on
-  $\mathbb{N}$.
+- **The exhaustion is indexed from $0$ and the thresholds are $1/\iota(n+1)$.** $\mathbb{N}$ contains $0$, so the sequence of thresholds is $1, 1/2, 1/3, \dots$ and never $1/\iota(0)$, which is not defined. Writing the union as $\bigcup_{n \ge 1} \{\omega_f \ge 1/\iota(n)\}$ names the same family; the form above is used because a sequence in this library is a function on $\mathbb{N}$.
 
-- **The converse holds and is proved separately.** Every $G_\delta$ subset of
-  $\mathbb{R}$ is the continuity set of some function $\mathbb{R} \to \mathbb{R}$
-  ([[thm-continuity-set-realisation]]), so the two classes coincide exactly.
-  What the present theorem contributes is the direction that constrains: no
-  function can have a continuity set that fails to be $G_\delta$, and
-  [[cor-no-function-is-continuous-exactly-on-q]] spends that on $\mathbb{Q}$.
+- **The converse holds and is proved separately.** Every $G_\delta$ subset of $\mathbb{R}$ is the continuity set of some function $\mathbb{R} \to \mathbb{R}$ ([[thm-continuity-set-realisation]]), so the two classes coincide exactly. What the present theorem contributes is the direction that constrains: no function can have a continuity set that fails to be $G_\delta$, and [[cor-no-function-is-continuous-exactly-on-q]] spends that on $\mathbb{Q}$.

@@ -50,7 +50,8 @@ says "differentiable at every point of $(a,b)$" for a function on $[a,b]$, the
 domain meant is $[a,b]$.
 
 **One-sided derivatives are not introduced at this point in the reading order.**
-No item in this library defines one. The ingredient is available:
+No item up to this point in the reading order defines one, and nothing below may
+be cited as though one had been. The ingredient is available:
 [[def-one-sided-limits]] defines the limit of $f$ at $c$ from the right as the
 limit at $c$ of the restriction of $f$ to $A \cap (c, \infty)$
 ([[def-interval]]), and a right derivative would be that limit applied to the
@@ -64,12 +65,13 @@ appears here as an ordinary derivative on a domain that happens to lie on one
 side.
 
 **Derivatives of order above one are not introduced at this point in the reading
-order** either, and no item in this library defines one. Doing so requires more
-than iterating the definition: $f'$ is a function on the set of points at which
-$f$ is differentiable, and to differentiate *that* function at a point one needs
-the point to be a limit point of that set, which is a hypothesis about $f$ and
-not a formality. No statement on this page mentions $f''$, and none should be
-read as implying anything about it.
+order** either, and no item up to this point in the reading order defines one.
+A later page takes them up; nothing on this page anticipates it. Doing so
+requires more than iterating the definition: $f'$ is a function on the set of
+points at which $f$ is differentiable, and to differentiate *that* function at a
+point one needs the point to be a limit point of that set, which is a hypothesis
+about $f$ and not a formality. No statement on this page mentions $f''$, and
+none should be read as implying anything about it.
 
 **Two notations, one object.** $f'(c)$ and $\frac{df}{dx}(c)$ name the same real
 number. The second is a name, not a quotient: nothing in this library divides

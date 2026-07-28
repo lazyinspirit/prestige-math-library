@@ -89,15 +89,6 @@ assumed: $I$ may be open, half-open, unbounded, or a single point.
 
 ## Remarks
 
-- **No epsilon-delta argument appears anywhere.** Continuity of the inverse is
-  obtained entirely from [[lem-monotone-with-interval-image-is-continuous]],
-  whose hypotheses are exactly the two facts the theorem has already
-  established: the inverse is monotone, and its image is the order-convex set
-  $I$. The decreasing case is reduced to the increasing one by composing with
-  $u \mapsto -u$ rather than repeating the argument.
+- **No epsilon-delta argument appears anywhere.** Continuity of the inverse is obtained entirely from [[lem-monotone-with-interval-image-is-continuous]], whose hypotheses are exactly the two facts the theorem has already established: the inverse is monotone, and its image is the order-convex set $I$. The decreasing case is reduced to the increasing one by composing with $u \mapsto -u$ rather than repeating the argument.
 
-- **What the theorem is used for.** It is the tool that turns a strictly monotone
-  continuous bijection into a continuous one in the other direction, and the
-  standard elementary functions are built with it: the companion page derives
-  the continuity of $x \mapsto x^{1/n}$ this way
-  on the companion examples page.
+- **What the theorem is used for.** It is the tool that turns a strictly monotone continuous bijection into a continuous one in the other direction, and the standard elementary functions are built with it: the companion page derives the continuity of $x \mapsto x^{1/n}$ this way.

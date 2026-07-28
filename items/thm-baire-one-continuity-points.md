@@ -74,7 +74,7 @@ since $C \subseteq [a,b]$.
 
 [L8] A closed set with empty interior is nowhere dense, and a union of a sequence of nowhere dense sets is meager ([[def-nowhere-dense-meager]], [[def-interior-closure-boundary-r]], [[thm-closure-characterisations-r]]).
 
-[L9] The set of continuity points of $f : A \to \mathbb{R}$ is $A \cap V$ for a $G_\delta$ set $V \subseteq \mathbb{R}$, and the discontinuity set is $\{x \in A : \omega_f(x) > 0\} = \bigcup_{n \in \mathbb{N}} \{x \in A : \omega_f(x) \ge 1/\iota(n+1)\}$ ([[thm-discontinuity-set-is-f-sigma]], [[def-f-sigma-g-delta]]).
+[L9] The set of continuity points of $f : A \to \mathbb{R}$ is $A \cap V$ for a $G_\delta$ set $V \subseteq \mathbb{R}$, and the discontinuity set is $\{x \in A : \omega_f(x) > 0\} = \bigcup_{n \in \mathbb{N}} \{x \in A : \omega_f(x) \ge 1/\iota(n+1)\}$ ([[thm-discontinuity-set-is-f-sigma]], claims 1 and 2, [[def-f-sigma-g-delta]]).
 
 [L10] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/\iota(m) < \eta$; $\iota$ is positive on the naturals $\ge 1$ ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
@@ -116,29 +116,12 @@ since $C \subseteq [a,b]$.
 
 10.1 Suppose $[c,d] \subseteq D$ with $c < d$ as in step 1.4. Then $[c,d]$ is covered by the sequence $(D_{1/\iota(n+1)})$ of closed sets, so by the interval form of Baire category some $D_{1/\iota(n+1)} \cap [c,d]$ contains a nondegenerate closed interval, contradicting step 7.1. So $[c,d] \not\subseteq D$, and any point of $[c,d] \setminus D$ is a point of $C$ inside $[a,b] \cap N_{\rho}(x)$. [step 7.1, step 9.1, step 1.4, L5, L6]
 
-11.1 Claims 1, 2, 3 and 4 are therefore proved: claim 1 by steps 1.2 to 5.3, claim 2 by step 9.1, claim 3 by steps 1.4 and 10.1, and claim 4 by step 1.3. [step 8.1, step 9.1, step 1.3, step 10.1] ∎
+11.1 Claims 1, 2, 3 and 4 are therefore proved: claim 1 by steps 1.2, 7.1 and 8.1, claim 2 by step 9.1, claim 3 by steps 1.4 and 10.1, and claim 4 by step 1.3. [step 8.1, step 9.1, step 1.3, step 10.1] ∎
 
 ## Remarks
 
-- **Where the hypothesis of Baire class one is used.** Only in steps 1.3 and 2.2,
-  and only through the Cauchy-style estimate: pointwise convergence makes the
-  sets $E_{N}$ exhaust $[c,d]$, and category then produces an interval on which
-  one single continuous $f_{N}$ approximates $f$ uniformly to within
-  $\varepsilon/4$. Everything after step 4.1 is about oscillation and category
-  and would apply to any function satisfying the refinement claim.
+- **Where the hypothesis of Baire class one is used.** Only in steps 1.3 and 2.2, and only through the Cauchy-style estimate: pointwise convergence makes the sets $E_{N}$ exhaust $[c,d]$, and category then produces an interval on which one single continuous $f_{N}$ approximates $f$ uniformly to within $\varepsilon/4$. Everything after step 4.1 is about oscillation and category and would apply to any function satisfying the refinement claim.
 
-- **The conclusion is sharp in the sense that "meager" cannot be improved to
-  "at most countable".** The theorem constrains the discontinuity set by
-  category, not by cardinality. Nothing above bounds the size of $D$; a meager
-  set can be uncountable, the Cantor set being one
-  ([[thm-cantor-set-properties]]), so the theorem leaves open how large a
-  discontinuity set a Baire class one function may have. What it does exclude
-  outright is a Baire class one function on $[0,1]$ that is nowhere continuous,
-  and the companion page spends exactly that on the Dirichlet function
-  on the companion examples page.
+- **The conclusion is sharp in the sense that "meager" cannot be improved to "at most countable".** The theorem constrains the discontinuity set by category, not by cardinality. Nothing above bounds the size of $D$; a meager set can be uncountable, the Cantor set being one ([[thm-cantor-set-properties]]), so the theorem leaves open how large a discontinuity set a Baire class one function may have. What it does exclude outright is a Baire class one function on $[0,1]$ that is nowhere continuous, and the companion page spends exactly that on the Dirichlet function.
 
-- **The dense set is not claimed to be uncountable, and no measure statement is
-  made.** Meagerness is a statement about category alone
-  ([[def-nowhere-dense-meager]]); nothing above bears on the measure of $D$, and
-  the two notions of smallness are independent, as
-  [[cor-q-is-meager-and-not-g-delta]] and the fat Cantor set already record.
+- **The dense set is not claimed to be uncountable, and no measure statement is made.** Meagerness is a statement about category alone ([[def-nowhere-dense-meager]]); nothing above bears on the measure of $D$, and the two notions of smallness are independent, as [[cor-q-is-meager-and-not-g-delta]] and the fat Cantor set already record.

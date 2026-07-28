@@ -74,8 +74,9 @@ the second half is a one-line use of the chain rule against the identity.
 **Extrema, and the theorem that needs an interior point.**
 [[def-local-extremum]] fixes local maxima and minima, their strict forms, and
 what it means for a point to be interior to the domain; it also proves the two
-facts the next theorem needs, that a global extremum is a local one and that an
-interior point of a set is a limit point of it.
+facts the theorems below need, that an interior point of a set is a limit point
+of it, which is what Fermat's theorem consumes, and that a global extremum is a
+local one, which is what Rolle's theorem consumes.
 [[thm-fermat-interior-extremum]] then shows that a derivative at an interior
 local extremum vanishes, by keeping the difference quotient on the sign of its
 limit ([[lem-sign-preservation-near-a-limit]]) and reading it on both sides of

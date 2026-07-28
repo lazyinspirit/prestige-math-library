@@ -37,9 +37,8 @@ $I$, or $f(x) > f(y)$ whenever $x < y$ in $I$.
 **Both hypotheses are needed and neither can be weakened to the other.**
 Continuity alone does not give injectivity, and injectivity alone does not give
 monotonicity: the companion page exhibits a continuous injection on
-$[0,1] \cup [2,3]$, a set that is not order-convex, that is not monotone
-on the companion examples page. So it is
-order-convexity of the domain, and not merely continuity, that forces the
+$[0,1] \cup [2,3]$, a set that is not order-convex, that is not monotone. So it
+is order-convexity of the domain, and not merely continuity, that forces the
 conclusion.
 
 ## Facts & Assumptions
@@ -78,22 +77,16 @@ conclusion.
 
 6.1 Let $x \in I$ with $x > a$. If $x < b$, the three-point claim applied to $a < x < b$ gives $f(a) < f(x) < f(b)$, the alternative being impossible as in step 5.1; if $x = b$ then $f(a) < f(x)$ by step 2.1; and if $x > b$, the claim applied to $a < b < x$ gives $f(a) < f(b) < f(x)$. In every case $f(x) > f(a)$. [step 2.1, step 4.1]
 
-6.2 If $d = a$ then $c < a$ and step 5.1 gives $f(c) < f(a) = f(d)$. If $d < a$ then the three-point claim applied to $c < d < a$ gives $f(c) < f(d) < f(a)$ or $f(c) > f(d) > f(a)$, and the second contradicts $f(d) < f(a)$ from step 5.1; so $f(c) < f(d)$. [step 4.1, step 5.1]
+6.2 Let $c, d \in I$ with $c < d \le a$; we show $f(c) < f(d)$. If $d = a$ then $c < a$ and step 5.1 gives $f(c) < f(a) = f(d)$. If $d < a$ then the three-point claim applied to $c < d < a$ gives $f(c) < f(d) < f(a)$ or $f(c) > f(d) > f(a)$, and the second contradicts $f(d) < f(a)$ from step 5.1; so $f(c) < f(d)$. [step 4.1, step 5.1]
 
-7.1 Let $c, d \in I$ with $c < d$; we show $f(c) < f(d)$. If $c = a$ then $d > a$ and step 6.1 gives $f(d) > f(a) = f(c)$. If $a < c$ then the three-point claim applied to $a < c < d$ gives $f(a) < f(c) < f(d)$ or $f(a) > f(c) > f(d)$, and the second contradicts $f(c) > f(a)$ from step 6.1; so $f(c) < f(d)$. [step 4.1, step 6.1]
+7.1 Let $c, d \in I$ with $a \le c < d$; we show $f(c) < f(d)$. If $c = a$ then $d > a$ and step 6.1 gives $f(d) > f(a) = f(c)$. If $a < c$ then the three-point claim applied to $a < c < d$ gives $f(a) < f(c) < f(d)$ or $f(a) > f(c) > f(d)$, and the second contradicts $f(c) > f(a)$ from step 6.1; so $f(c) < f(d)$. [step 4.1, step 6.1]
 
 7.2 The only remaining case is $c < a < d$, where steps 5.1 and 6.1 give $f(c) < f(a) < f(d)$ directly. [step 5.1, step 6.1]
 
-8.1 Steps 7.1, 6.2 and 7.2 cover every pair $c < d$ in $I$, so $f(x) < f(y)$ whenever $x < y$ in $I$, that is, $f$ is increasing. This contradicts step 1.1, which assumed that $f$ is not increasing; the assumption of step 1.1 is therefore false and $f$ is strictly monotone. [step 1.1, step 7.1, step 6.2, step 7.2, L3, discharge-contradiction] ∎
+8.1 Steps 7.1, 6.2 and 7.2 cover every pair $c < d$ in $I$: either $a \le c$, which is step 7.1, or $c < a$, and then $d \le a$, which is step 6.2, or $a < d$, which is step 7.2. So $f(x) < f(y)$ whenever $x < y$ in $I$, that is, $f$ is increasing. This contradicts step 1.1, which assumed that $f$ is not increasing; the assumption of step 1.1 is therefore false and $f$ is strictly monotone. [step 1.1, step 7.1, step 6.2, step 7.2, L3, discharge-contradiction] ∎
 
 ## Remarks
 
-- **The three-point claim is the whole content.** Steps 1.2, 2.2, 3.1 and 4.1 say that a
-  continuous injection on an interval cannot fold: the middle of three points
-  always has the middle value. Everything after that is bookkeeping, comparing an
-  arbitrary pair with one fixed pair $a < b$ on which the direction is known.
+- **The three-point claim is the whole content.** Steps 1.2, 2.2, 3.1 and 4.1 say that a continuous injection on an interval cannot fold: the middle of three points always has the middle value. Everything after that is bookkeeping, comparing an arbitrary pair with one fixed pair $a < b$ on which the direction is known.
 
-- **Where the intermediate value theorem enters.** Once only, in step 3.1, and it
-  is what makes order-convexity of $I$ indispensable: the segments $[u,v]$ and
-  $[v,w]$ must lie inside the domain for the theorem to apply. That is exactly
-  the hypothesis the companion page's counterexample removes.
+- **Where the intermediate value theorem enters.** Once only, in step 3.1, and it is what makes order-convexity of $I$ indispensable: the segments $[u,v]$ and $[v,w]$ must lie inside the domain for the theorem to apply. That is exactly the hypothesis the companion page's counterexample removes.

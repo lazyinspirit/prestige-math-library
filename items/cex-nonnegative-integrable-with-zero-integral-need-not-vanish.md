@@ -45,9 +45,9 @@ subset of the interval and the integral still vanishes.
 conclusion is true, and the reason is exactly what fails here: a continuous
 function positive at one point is positive on a whole subinterval, whereas $t$ is
 positive only on a set that contains no interval
-([[lem-q-and-irrationals-dense-r]]). That repaired statement is not proved in
-this library, since the additivity of the integral over subintervals is not
-developed on this page.
+([[lem-q-and-irrationals-dense-r]]). That repaired statement is not proved here,
+since the additivity of the integral over subintervals is not available at this
+point in the reading order.
 
 ## Facts & Assumptions
 

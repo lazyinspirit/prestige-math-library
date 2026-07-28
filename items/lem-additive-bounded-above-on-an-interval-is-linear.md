@@ -75,15 +75,6 @@ the whole line.
 
 ## Remarks
 
-- **Only an upper bound is used, and only on one interval.** The proof never
-  bounds $f$ below and never uses more than the single closed interval $[p,r]$;
-  the translation step 2.3 does the rest. A lower bound on an interval gives the
-  same conclusion by applying the lemma to $-f$, which is additive and bounded
-  above there, and that is how
-  [[thm-cauchy-functional-equation-regularity]] obtains five of its six clauses
-  from this one lemma, the sixth being argued separately there.
+- **Only an upper bound is used, and only on one interval.** The proof never bounds $f$ below and never uses more than the single closed interval $[p,r]$; the translation invariance of step 2.2 and the sliding argument of step 3.1 do the rest. A lower bound on an interval gives the same conclusion by applying the lemma to $-f$, which is additive and bounded above there, and that is how [[thm-cauchy-functional-equation-regularity]] obtains five of its six clauses from this one lemma, the sixth being argued separately there.
 
-- **Where the Archimedean property enters.** Once, in step 4.1, to make the
-  multiples $\iota(n)g(x_{0})$ exceed the bound $M'$. Over a non-Archimedean
-  ordered field the argument fails at exactly that point, and the statement is
-  not asserted there.
+- **Where the Archimedean property enters.** Once, in step 4.1, to make the multiples $\iota(n)g(x_{0})$ exceed the bound $M'$. Over a non-Archimedean ordered field the argument fails at exactly that point, and the statement is not asserted there.

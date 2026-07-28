@@ -62,8 +62,7 @@ on $A = [0,1]$ ([[def-interval]]): the indicator of a single point is of Baire
 class one and is not continuous. The second is
 [[thm-baire-one-continuity-points]], which shows that a Baire class one function
 on a closed bounded interval has a dense set of continuity points, and the
-companion page uses it to exhibit a function that is not of Baire class one
-on this page's companion examples page.
+companion page uses it to exhibit a function that is not of Baire class one.
 
 **On the higher classes.** The pointwise limits of sequences of Baire class one
 functions form what is classically called Baire class two, and the construction

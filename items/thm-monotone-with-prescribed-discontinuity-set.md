@@ -4,7 +4,7 @@ kind: theorem
 title: "Converse to Froda: for every at most countable $E \\subseteq \\mathbb{R}$ there is a bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $E$, every one of them a jump"
 status: draft
 origin: session
-deps: [def-monotone-function, def-classification-of-discontinuities, thm-monotone-one-sided-limits-exist, thm-monotone-discontinuities-are-jumps, def-countable, lem-countable-iff-surjection-from-n, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, lem-series-tail-invariance, def-finite-sum, lem-finite-sum-laws, def-continuity-real, def-bounded-set, def-integer-power, def-real-limit, lem-finite-set-has-max, lem-rat-embeds-dense, def-interval, def-max-min]
+deps: [def-monotone-function, def-classification-of-discontinuities, thm-monotone-one-sided-limits-exist, thm-monotone-discontinuities-are-jumps, thm-froda, def-countable, lem-countable-iff-surjection-from-n, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, lem-series-tail-invariance, def-finite-sum, lem-finite-sum-laws, def-continuity-real, def-bounded-set, def-integer-power, def-real-limit, lem-finite-set-has-max, lem-rat-embeds-dense, def-interval, def-max-min]
 justified_by: []
 aliases: [thm-prescribed-jump-construction]
 landmark: true

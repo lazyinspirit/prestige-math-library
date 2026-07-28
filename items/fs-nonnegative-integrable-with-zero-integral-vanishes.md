@@ -85,7 +85,7 @@ there are infinitely many.
 
 ## Remarks
 
-- **The correct statement, and the hypothesis that repairs it.** If $f$ is continuous on $[a,b]$, nonnegative and $\int_a^b f = 0$, then $f \equiv 0$: a point with $f(c) > 0$ would, by continuity, force $f > f(c)\cdot 2^{-1}$ on a whole subinterval, and $\int_a^b f$ would then be at least $f(c)\cdot 2^{-1}$ times the length of that subinterval, by [[lem-integral-elementary-bounds]] applied there. That argument is not carried out in this library, because the additivity of the integral over subintervals is not developed on this page; what is asserted here is only that the hypothesis of continuity cannot simply be dropped.
+- **The correct statement, and the hypothesis that repairs it.** If $f$ is continuous on $[a,b]$, nonnegative and $\int_a^b f = 0$, then $f \equiv 0$: a point with $f(c) > 0$ would, by continuity, force $f > f(c)\cdot 2^{-1}$ on a whole subinterval, and $\int_a^b f$ would then be at least $f(c)\cdot 2^{-1}$ times the length of that subinterval, by [[lem-integral-elementary-bounds]] applied there. That argument is not carried out here, because the additivity of the integral over subintervals is not available at this point in the reading order; what is asserted by this item is only that the hypothesis of continuity cannot simply be dropped.
 
 - **The exceptional set is exactly the rationals.** $t$ is positive precisely on $\mathbb{Q}\cap[0,1]$, a countable dense set, which is null ([[lem-countable-sets-are-null]]). The integral is blind to a null set of positive values, and the Lebesgue criterion explains why: what governs integrability, and here the value, is the size of the set where the function misbehaves, measured by interval covers ([[thm-lebesgue-criterion]]).
 

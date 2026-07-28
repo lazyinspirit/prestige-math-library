@@ -39,9 +39,13 @@ $\sum_{k<5} b^{k}y^{\,4-k}$ supplied by
 [[thm-derivative-of-an-inverse]] to $x \mapsto x^{n}$ on $(0,\infty)$ and gets
 $\bigl(u^{1/n}\bigr)' = \frac{1}{\iota(n)}u^{1/n-1}$, in particular
 $(\sqrt{u})' = 1/(\iota(2)\sqrt{u})$. The domain is $(0,\infty)$ and not
-$[0,\infty)$, because $1/n - 1$ is a negative rational and
-[[def-rational-power]] leaves $0^{r}$ undefined there; the exponent arithmetic
-stays inside $\mathbb{Q}$ throughout, this library having no real exponents.
+$[0,\infty)$, and the reason depends on $n$: for $n \ge 2$ the exponent
+$1/n - 1$ is a **negative** rational, where [[def-rational-power]] leaves
+$0^{r}$ undefined, and the root genuinely fails to be differentiable at $0$
+there; at $n = 1$ the exponent is $0$ and neither obstruction arises, so the
+restriction is only a convenience of the uniform statement. The exponent
+arithmetic stays inside $\mathbb{Q}$ throughout, this library having no real
+exponents.
 
 **Where differentiability fails, and where it must.**
 [[cex-absolute-value-is-not-differentiable-at-zero]] shows that the converse of
