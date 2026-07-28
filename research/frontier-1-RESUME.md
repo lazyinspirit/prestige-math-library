@@ -344,6 +344,70 @@ one. **`--batch` pays off across a genuine dependency level and is close to pure
 cost across a frontier set of mutually independent pairs.** Recorded here rather
 than acted on: changing the standing instruction is an owner decision.
 
+## The escalation: `def-g-delta-and-f-sigma-in-a-topological-space`, audited personally
+
+Refuted **twice** and repaired twice, which fires trigger 2 of the escalation rule
+(`LEVELS.md`): the orchestrator audits it personally and does not wait for step 9.
+Done, line by line, against the file on disk.
+
+**Nature of the fault, both times: a false claim in DEFINITION-BODY PROSE.** The
+item has no proof — it is a definition — so neither fault was in a numbered step,
+and neither touched the mathematical core (the two definitions, the
+complementation duality, the ℝ dictionary), which was never refuted.
+
+1. The first text conflated the converse *"every `Fσ` is closed"* with the
+   condition *"every closed set is `Gδ`"*. Those are different statements; the
+   judge named the conflation and gave ℚ ⊂ ℝ as a witness that the first keeps
+   failing in a perfectly normal space.
+2. The repair's witness was wrong in the same direction: it offered *"a bounded
+   open interval is a `Gδ` that is not open"*. An open interval **is** open, so it
+   refuted nothing.
+
+**Verdict: the current text is correct.** Checked:
+
+- `{0} = ⋂ₙ (−1/(n+1), 1/(n+1))` — right, and **index-safe**: written over `n+1`
+  so nothing divides by `ι(0)`, at `n = 0` the interval is `(−1, 1)`, and the
+  exclusion of `t ≠ 0` goes through Archimedes plus "a nonzero natural is a
+  successor". This is the ℕ-contains-0 discipline done properly.
+- `{0}` is not open — every `(a,b)` with `a < 0 < b` contains `b/2`, which is `> 0`
+  hence `≠ 0`, and `< b`, and `> a`. Correct.
+- `ℝ ∖ {0}` is `Fσ` and not closed, by the duality. Correct.
+- The two automatic inclusions, and the separation of them from the real
+  restriction ("every closed set is `Gδ`, equivalently every open set is `Fσ`") —
+  which is what rejection 1 was about, and it is now stated correctly.
+- The agreement paragraph unfolds `def-open-and-closed-in-r` against
+  `def-metric-topology` term by term rather than asserting the identification.
+
+**One non-fatal gap, left alone under the triage rule.** The construction
+presenting an at most countable family as a sequence extends a finite list
+`V₀ … V_m` by `Vₙ := V_m`, which presumes the list is nonempty. The *claim* is
+still true for the empty family (`⋂ = X` via `Vₙ := X`, `⋃ = ∅` via `Fₙ := ∅`);
+only the exhibited construction misses that case. A competent reader closes it in
+well under 30 seconds, so no effort is spent.
+
+**Ramification of dropping it: severe, and it is not a candidate.**
+`def-completely-normal-and-perfectly-normal-spaces` and
+`thm-perfectly-normal-implies-completely-normal` both rest on it; removing it
+takes perfect normality off the page entirely. No result is removed without
+explicit owner approval in any case.
+
+**Still owed: its current text has never been judged** — the credits ran out on
+the retry. It is in the unjudged count.
+
+## A mechanism trap found by the separation-axioms author, worth the whole build
+
+**Citing `rem-r-native-topology-scope` propagates the sky ↗ "rests on later
+material" chip along `deps`.** That remark is the natural citation for "the two
+collections of open subsets of ℝ are one collection" — `def-metrizable-space`
+attributes exactly that to it — but it declares `forward_refs`, and
+`fwdcheck`/`library-forward.ts` propagate the marking along `deps` to every
+consequence. When the author first cited it, **13 items inherited the marker** for
+targets all published far *earlier* than page 261.
+
+It removed all 13 by unfolding the identification inline instead. Recorded in
+`ARCHITECTURE.md` §3.3, because any future page reaching for that remark hits the
+same thing and the chip it earns is false.
+
 ## Progress
 
 - [x] Step 0 — frontier computed, batched, seams reported

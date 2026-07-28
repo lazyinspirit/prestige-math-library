@@ -134,6 +134,27 @@ As Remarks-only orientation refs the blast radius is **zero items**, and
 five are theorems and lemmas. **Anchoring vocabulary in the spine is a
 Remarks-only operation; there is no other legal form.**
 
+**The corollary, measured 2026-07-28 (frontier-1): an item that DECLARES
+`forward_refs` is radioactive as a dependency.** Propagation runs along `deps`,
+so citing such an item marks the citer and everything downstream of it as resting
+on later material — regardless of what the citer needed it for.
+
+`rem-r-native-topology-scope` is the live example, and it is a trap because it is
+the *natural* citation for a true and useful fact: that the two collections of
+open subsets of ℝ (the order-native one and the metric one) are one collection.
+`def-metrizable-space` attributes exactly that to it. But it declares
+`forward_refs: [cex-closed-bounded-in-q-not-compact, def-topological-space,
+def-metrizable-space]`, and when `separation-axioms` (order 261) cited it, **13
+items inherited the sky ↗ chip for targets all published far earlier than 261** —
+an assertion that is simply false about those items. The author removed all 13 by
+unfolding the identification inline from `def-open-and-closed-in-r`,
+`def-neighbourhood-r`, `def-metric-topology` and `lem-real-line-is-a-metric-space`.
+
+So: before citing any item, check whether it declares `forward_refs`. If it does
+and the fact wanted is elementary, unfold the fact rather than inherit the
+marking. No gate reports this — `fwdcheck` is doing exactly what it should, and
+the resulting chip is a correct consequence of an incorrect citation choice.
+
 ### 3.4 `extcheck.mjs` — the ‡ "not proved here" tier
 `proved_here: false` items must be `rem-`, have `precheck: n/a`, carry no proof
 section, carry a real citation, and have **no judge block** (there is no proof to
