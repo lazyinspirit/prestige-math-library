@@ -22,7 +22,7 @@ Everything below is verified against the code as of 2026-07-27.
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-7 adjudication of every judge rejection**, reporting |
 | **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; **runs step 9 as one fanned-out pass**, dispatching readers and re-verifying every finding from disk |
 | **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; **at step 9, the scaffolder-authored reader for its own batch** (step 8 retired 2026-07-28) |
-| **authoring agent** | Opus 5 | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
+| **authoring agent** | Opus 5 — **Sonnet 5 pilot pending, see step 5** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
 | **judge** | `z-ai/glm-5.2` via ofox | cheap adversarial screen. **Never a Claude model** for session items |
 
 ## Artifacts
@@ -207,6 +207,40 @@ overwrite.
 > **Authors do NOT judge (owner, 2026-07-28).** An author is finished when its
 > gates are clean and its report is written. Judging is step 6 and now runs after
 > step 9. This is where most of the wall-clock saving lives.
+
+> **PENDING PILOT — Sonnet 5 vs Opus 5 for authoring (owner approved,
+> 2026-07-28). Run it on the next build; do not switch before it returns.**
+>
+> Authoring is the largest Claude cost in a build — **3.46M of ~6.5M tokens on
+> `frontier-1`** — and the case for a cheaper model is real: across 212 items the
+> authors' **proofs were clean** and their prose was not, which is not obviously
+> model-limited.
+>
+> The case against a blind switch is also real. The authors did work that was
+> judgement rather than throughput: one **refused a `justified_by` the scaffold
+> demanded**, because SCHEMA restricts that field to well-definedness discharges;
+> one found the published `thm-recursion` **inapplicable**, because `β ↦ ω^β` is a
+> class operation and that theorem needs a set; one found a scaffolded false
+> statement **was not false** and restated it; one **deleted a judge pass it had
+> earned** rather than let it stand on text the judge never saw. This repo already
+> adopted `deepseek/deepseek-v4-flash` on latency alone and reverted it.
+>
+> **Protocol.**
+> 1. In ONE build, author **one A/B pair with Sonnet 5** and **one comparable pair
+>    with Opus 5** — comparable in item count, proof length and prerequisite depth.
+>    Both get the identical brief and the identical scaffold quality.
+> 2. **Do not tell the step-9 readers which pair came from which model.** An
+>    unblinded audit measures the expectation, not the model.
+> 3. **Measure, per pair:** defects by class (proof / Statement / Remark /
+>    summary); **scaffold errors caught and reported**; gate failures before clean;
+>    tokens; wall clock.
+> 4. **Decision rule, fixed in advance:** switch the bulk only if Sonnet matches on
+>    **proof defects AND on scaffold errors caught**. Matching on proofs alone is
+>    not enough — the scaffold-error catch is the expensive half, because nothing
+>    downstream looks for it.
+> 5. If it matches on proofs but not on scaffold catching, the fallback is the
+>    split: Sonnet for B-page examples, definitions and routine proofs; Opus for
+>    whatever the scaffold flags high-risk.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to

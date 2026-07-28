@@ -482,6 +482,17 @@ git show HEAD:items/<id>.md | awk 'f>=2{print} /^---$/{f++}'
 A frontmatter-only diff (judge block, precheck flag) does not invalidate a
 verdict; a body diff does, and needs a re-judge.
 
+**THE SAME RULE NOW BINDS THE AUTHORING MODEL (owner, 2026-07-28).** A pilot is
+pending: one A/B pair authored by Sonnet 5 against one comparable pair by Opus 5,
+in the same build, under the identical brief, **with the step-9 readers not told
+which is which** — an unblinded audit measures the expectation rather than the
+model. The decision rule is fixed in advance and is deliberately two-part: switch
+only if Sonnet matches on **proof defects AND on scaffold errors caught**.
+Matching on proofs alone is not enough, because the scaffold-error catch is the
+expensive half — nothing downstream looks for it. Protocol in `LEVELS.md` §"Step
+5". Do not switch before it returns; this is the DeepSeek lesson applied to a
+different role.
+
 **The injection test is the only thing that separates a judge from a rubber
 stamp.** DeepSeek v4-flash was adopted for 14× lower latency, then reverted: it
 passed a *blatantly* false injected claim while writing a confident summary of
