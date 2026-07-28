@@ -261,6 +261,23 @@ the data was being destroyed:
 - Repairs had **no record at all**: they lived in subagent prose, and item files
   are untracked while a level is draft, so `git log` cannot supply them either.
 
+**SNAP AFTER EVERY ITEM-MODIFYING STAGE, OR THE LEDGER IS EMPTY — measured
+2026-07-28 (frontier-1), and it was the orchestrator's error.** A baseline
+snapshot taken *before* authoring, followed by one taken after step 8, records
+every item as a **first appearance**, i.e. a creation. First appearance is
+deliberately not a repair (below), so `touchlog report --min 1` returned **0
+items** for a build in which eleven step-8 repairs and nine author repairs had
+actually happened. The escalation set had to be reconstructed from narrative in
+the resume log rather than measured, which is exactly what the ledger exists to
+prevent.
+
+The rule in `LEVELS.md` — snap "after EVERY item-modifying stage" — is not
+advice, and two snapshots at the ends of a build do not satisfy it. Minimum for a
+build: baseline, **after authoring**, after step 7 adjudication, after step 8,
+after step 9. The judge ledger still supplied refutation counts, so the
+escalation rule fired correctly on its other trigger; repairs were the half that
+went unrecorded.
+
 `touchlog.mjs` hashes item files per stage. **The hash excludes the
 `verification` block**, because stamping a judge verdict rewrites the file
 without touching a character of mathematics — hashing raw bytes charged 53

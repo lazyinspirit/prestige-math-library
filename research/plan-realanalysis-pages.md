@@ -978,6 +978,29 @@ commit that publishes the level, never before.
 
 **RA-23 Sequences and Series of Functions; Uniform Convergence**
 <- RA-22, RA-19
+
+**BINDING when this page is scaffolded (Alpha-F1, step 9, 2026-07-28). UNIFORM
+CONVERGENCE ALREADY EXISTS IN THE LIBRARY, AT A HIGHER ORDER THAN THIS PAGE.**
+`frontier-1` minted `def-topology-of-uniform-convergence`, `thm-uniform-limit-
+theorem` and `thm-dini` on `function-space-topologies`, **order 283** — while this
+page is order **169**. So the plan's earlier home is the *second* one to be built,
+and the moment 169 is authored the library holds **two notions under one name**
+unless the agreement is recorded.
+
+Nothing is false today: 283 asserts nothing about 169, and 169 does not exist.
+This note is the whole mitigation, and it exists because
+`rem-function-space-conventions` §6 records exactly this obligation for the two
+other objects 283 newly minted and **not** for uniform convergence itself — the
+one place it was needed. Step 9 deliberately did not add that prose rather than
+put unreviewed text into a page at the last tier; the same call the orchestrator
+made on the ω-exponentiation seam.
+
+**So when this page is scaffolded: either define uniform convergence as the
+special case of 283's topology and cite it, or define it natively and record the
+agreement explicitly in the dictionary style of `def-metrizable-space`.** Silent
+re-definition is the level-7 two-notions-of-open defect, and this is the clearest
+warning of one the library has ever had in advance.
+
 pointwise and uniform convergence; the sup metric; uniformly Cauchy; the uniform
 Cauchy criterion; a uniform limit of continuous functions is continuous;
 **interchange with the integral**; **the derivative theorem** (f_n' -> g

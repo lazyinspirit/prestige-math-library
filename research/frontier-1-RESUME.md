@@ -534,15 +534,123 @@ the exponentiation clause is not carried out here. Accuracy over completeness.
 step 0 reported as "not computable" — the one edge the six pairs turned out to
 have.
 
+## Step 9 — Alpha's whole-build audit
+
+**Every one of the 212 items has been read end to end by an Opus-class reader.**
+35 by Alpha personally, 177 by six independent readers it dispatched and whose
+findings it re-verified against the files on disk before acting on any of them.
+**No proof in this build is unread.**
+
+**21 fatal defects fixed, every one in prose.** Not one in a numbered step —
+seventh consecutive build with that signature. Six were claims **this build
+falsified itself**, now the dominant shape rather than a curiosity: four items
+and two page summaries said "this library has no sum over a subset of an index
+range" while the other batch minted exactly that at order 20; another said no
+fixed-point theorem is available when Bourbaki–Witt and Banach are published;
+another said "regular" is undefined while `def-regular-and-t3-spaces` is in this
+same build.
+
+Two titles had dropped a countable-choice hypothesis their Statements carried,
+and one of those matters: **with `cf(ω₁) = ω` the deleted Tychonoff plank need not
+be a counterexample at all**, so the title was asserting a non-theorem.
+
+The four load-bearing checks all pass: AC_ω is genuinely spent and now declared in
+all four places; exactly one chain arrow is unreachable; `thm-the-exponential-law`
+claims a bijection and its proof delivers one; no item asserts the full
+Lévy–Steinitz answer.
+
+Six more judge blocks deleted. **Coverage 128 → 122/212.**
+
+## Two seam decisions, and one thing Alpha flagged that is NOT a defect
+
+**Uniform convergence is a real two-notions risk, and it is now registered where
+the next session will look.** This build minted `def-topology-of-uniform-
+convergence`, `thm-uniform-limit-theorem` and `thm-dini` at order **283**, while
+the plan homes uniform convergence on `uniform-convergence-of-functions` at order
+**169**. The plan's earlier home is the *later* build. Nothing is false today —
+169 does not exist — but the library acquires two notions under one name the
+moment it does. `rem-function-space-conventions` §6 records this obligation for
+the two *other* objects 283 minted and not for uniform convergence, the one place
+it was needed. Alpha declined to add unreviewed prose at the last tier; **I have
+instead written a BINDING note into `plan-realanalysis-pages.md` §RA-23**, which
+is the mechanism that carried the Lévy–Steinitz plan line successfully.
+
+**`rn-as-a-normed-space-examples`' `requires` is NOT inconsistent.** Alpha
+reported it as an asymmetry against `separation-axioms-examples`. Checked:
+`separation-axioms` requires `ordinals-and-transfinite-recursion` (243), **not**
+`ordinal-arithmetic` (245), so its B page *must* declare that edge directly; the
+ℝⁿ B page reaches the integral page transitively through its own A page, so
+declaring it would only add a `redundant-prereq`. The asymmetry is correct.
+
+## A mechanism failure that was mine
+
+**The repair ledger is empty for this build, because I snapped it twice instead of
+after every stage.** A baseline before authoring plus one snapshot after step 8
+records all 212 items as *first appearances*, and first appearance is
+deliberately not a repair — so `touchlog report --min 1` returned **0 items** for
+a build containing eleven step-8 repairs and nine author repairs. Alpha had to
+reconstruct the escalation list from narrative rather than measure it.
+
+The judge ledger still supplied refutation counts, so the escalation rule fired
+correctly on its other trigger and the one twice-refuted item was caught and
+audited. But half the instrument was blind and it was my error, not the tool's.
+Recorded in `ARCHITECTURE.md` §4 with the minimum snapshot schedule.
+
+## Step 10 — the gates of record, and the rundown
+
+### Eight gates, run by the orchestrator after every agent finished
+
+| gate | result |
+|---|---|
+| `precheck.mts` | **1041 checked, 0 failing** |
+| `depcheck.mjs` | OK — no cycles, all references resolve, no draft item on a published page |
+| `fwdcheck.mjs` | OK — every forward reference declared, strictly forward, off the spine, no cycle |
+| `extcheck.mjs` | OK |
+| `rendercheck.mjs` | OK — **1493 files**, every math span parses under real KaTeX |
+| `validate-plan.mjs` | OK — 0 errors |
+| `depsource.mjs` | OK — **0 unresolved**, 0 deps on an unbuilt planned page |
+| `citecheck.mjs` | warnings only, triaged item by item, none silenced by adding a dep |
+
+Plus the check no gate performs: **0 `deps` edges onto another page's B side**,
+verified against the page files rather than the spec.
+
+### The numbers
+
+- **212 items, 12 pages, all `status: draft`, all `origin: session`.**
+- **`verification.audited` appears on 0 of them** — it is the owner's field alone.
+- **Judge coverage 122/212 (58%).** Down from a peak of 152 because **30 passes
+  were deliberately destroyed** by honest repairs to text the judge had approved.
+  The judge died mid-build on credit exhaustion (balance ≈ −$1.00, confirmed by
+  direct probe); restoring it needs an owner top-up.
+- **Corpus: 1416 items**, up from 1204.
+
+### Readiness to publish — my honest assessment
+
+**Not blocked on anything I can do.** All eight gates are green, every item has
+been read in full by a human-grade reader, and every defect found has been fixed
+or recorded. What the owner is accepting if they publish:
+
+1. **90 items have no cross-family judge verdict.** For those, the step-8 and
+   step-9 readings are the only review. Given the judge's measured 21–24%
+   precision and 0/3 on real historical defects, the readings are the stronger
+   tier — but the independence is genuinely missing.
+2. **Seven amendments to published items are staged and unapplied**
+   (`research/frontier-1-published-amendments.md`). Two are false *today*, not on
+   publication. Applying any clears `verification.audited` and forces a re-audit.
+3. **Nine amendments from level 9 are still outstanding**, one of them explicitly
+   not owner-approved.
+4. **Two seams are deliberately open**, both recorded with their licensing
+   conditions: ω-exponentiation agreement, and uniform convergence at 169.
+
 ## Progress
 
 - [x] Step 0 — frontier computed, batched, seams reported
-- [ ] Steps 1–2 — Beta-F1-1 and Beta-F1-2 scaffolding (running)
-- [ ] Step 3 — findings adjudicated and logged
-- [ ] Step 4 — splice into `plan-spec.json`, Alpha-F1 spawned
-- [ ] Step 5 — six A/B pairs authored in parallel
-- [ ] Step 6 — judged (`z-ai/glm-5.2`, `JUDGE_VERDICTLOG=research/frontier-1-judge.jsonl`, `--batch`)
-- [ ] Step 7 — rejections adjudicated
-- [ ] Step 8 — batch audits
-- [ ] Step 9 — Alpha-F1 whole-build mathematical-accuracy audit
-- [ ] Step 10a — scope-denial sweep · 10b — rundown, then pause
+- [x] Steps 1–2 — Beta-F1-1 and Beta-F1-2 scaffolding
+- [x] Step 3 — findings adjudicated and logged
+- [x] Step 4 — spliced into plan-spec.json, Alpha-F1 spawned
+- [x] Step 5 — six A/B pairs authored in parallel
+- [x] Step 6 — judged until the account died: 122/212
+- [x] Step 7 — rejections adjudicated
+- [x] Step 8 — batch audits: 11 defects, all prose
+- [x] Step 9 — Alpha whole-build audit: 21 defects, all prose; every item read
+- [x] Step 10a — sweep: 7 amendments staged · 10b — rundown written. PAUSED FOR OWNER.
