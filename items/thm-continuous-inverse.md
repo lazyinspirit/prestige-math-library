@@ -12,6 +12,10 @@ short: "continuous inverse theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -96,4 +100,4 @@ assumed: $I$ may be open, half-open, unbounded, or a single point.
   continuous bijection into a continuous one in the other direction, and the
   standard elementary functions are built with it: the companion page derives
   the continuity of $x \mapsto x^{1/n}$ this way
-  ([[ex-continuous-inverse-gives-the-nth-root]]).
+  on the companion examples page.

@@ -11,6 +11,10 @@ landmark: true
 short: "intermediate value property"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -43,7 +47,7 @@ $f$ has the intermediate value property **if and only if**
 
 *From the displayed condition to the pointwise one.* Given $a < b$ in $I$, the
 set $[a,b]$ is order-convex and contained in $I$ by order-convexity of $I$, so
-$f[[a,b]]$ is order-convex; it contains $f(a)$ and $f(b)$, hence every $y$
+$f[\,[a,b]\,]$ is order-convex; it contains $f(a)$ and $f(b)$, hence every $y$
 between them, and such a $y$ is $f(c)$ for some $c \in [a,b]$.
 
 *From the pointwise condition to the displayed one.* Let $J \subseteq I$ be

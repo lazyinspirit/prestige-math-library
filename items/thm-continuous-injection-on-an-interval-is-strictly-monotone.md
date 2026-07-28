@@ -12,6 +12,10 @@ short: "continuous injection on an interval is strictly monotone"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -34,7 +38,7 @@ $I$, or $f(x) > f(y)$ whenever $x < y$ in $I$.
 Continuity alone does not give injectivity, and injectivity alone does not give
 monotonicity: the companion page exhibits a continuous injection on
 $[0,1] \cup [2,3]$, a set that is not order-convex, that is not monotone
-([[cex-continuous-injection-on-a-non-interval-need-not-be-monotone]]). So it is
+on the companion examples page. So it is
 order-convexity of the domain, and not merely continuity, that forces the
 conclusion.
 

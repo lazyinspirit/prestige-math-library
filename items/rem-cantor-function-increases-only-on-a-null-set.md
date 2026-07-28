@@ -11,6 +11,10 @@ landmark: false
 short: "the Cantor function climbs on a null set"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -62,4 +66,4 @@ large in some sense; $c$ does all of it on a set that is null and, being
 nowhere dense ([[thm-cantor-set-properties]], claim 5), small in category as
 well. The companion page pushes the same observation one step further: $c$ maps
 the null set $C$ **onto** the whole of $[0,1]$
-([[ex-cantor-function-maps-a-null-set-onto-the-unit-interval]]).
+on the companion examples page.

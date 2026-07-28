@@ -12,6 +12,10 @@ short: "the Cantor function is continuous"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -56,7 +60,7 @@ continuity is deduced.
 
 1.2 $c$ satisfies $c(x) \le c(y)$ whenever $x, y \in [0,1]$ and $x \le y$. [L1]
 
-1.3 The image $c[[0,1]]$ is exactly $[0,1]$, since $c$ is surjective onto $[0,1]$, and $[0,1]$ is order-convex. [L2, L4]
+1.3 The image $c[\,[0,1]\,]$ is exactly $[0,1]$, since $c$ is surjective onto $[0,1]$, and $[0,1]$ is order-convex. [L2, L4]
 
 2.1 The three hypotheses of the monotone-with-interval-image criterion hold for $c$ on $[0,1]$, so $c$ is continuous on $[0,1]$. [step 1.1, step 1.2, step 1.3, L3]
 
@@ -64,11 +68,10 @@ continuity is deduced.
 
 ## Remarks
 
-- **This is the first statement about the continuity of $c$ anywhere in the
-  library.** [[thm-cantor-function-properties]] says explicitly that it makes no
-  claim about continuity, for want of a definition at that point in the reading
-  order; the present corollary supplies it, using nothing about $c$ beyond
-  claims 2 and 3 of that theorem.
+- **[[thm-cantor-function-properties]] deliberately claims nothing about
+  continuity, and says so**, for want of a definition of continuity at that
+  point in the reading order. The present corollary supplies it, using nothing
+  about $c$ beyond claims 2 and 3 of that theorem.
 
 - **The Cantor function is not strictly monotone.** It is constant on every
   interval removed in the construction of the Cantor set

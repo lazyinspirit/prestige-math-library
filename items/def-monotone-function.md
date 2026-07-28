@@ -11,6 +11,10 @@ landmark: true
 short: "monotone real function"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -80,8 +84,23 @@ used interchangeably: the words *nondecreasing*, *increasing*, *nonincreasing*,
 *decreasing*, *monotone* and *strictly monotone* mean the corresponding
 condition on the domain at hand.
 
-One consequence is used repeatedly. If $f : A \to \mathbb{R}$ is nondecreasing
-and $(x_k)$ is a nondecreasing sequence with $x_k \in A$ for every $k$, then
-$(f(x_k))$ is a nondecreasing sequence: $j \le k$ gives $x_j \le x_k$, hence
-$f(x_j) \le f(x_k)$. The same holds with *nondecreasing* replaced throughout by
-any one of the other three words.
+One consequence is used repeatedly, and it has to be stated carefully because
+composition does **not** simply preserve the four words. Let $(x_k)$ be a
+**nondecreasing** sequence with $x_k \in A$ for every $k$, so that $j \le k$ gives
+$x_j \le x_k$. Then:
+
+- if $f$ is nondecreasing, $(f(x_k))$ is nondecreasing, since $f(x_j) \le f(x_k)$;
+- if $f$ is nonincreasing, $(f(x_k))$ is **nonincreasing**, since
+  $f(x_j) \ge f(x_k)$.
+
+So along a nondecreasing sequence the composite inherits the direction of $f$;
+and with $(x_k)$ increasing and $f$ increasing, $(f(x_k))$ is increasing, while
+with $(x_k)$ increasing and $f$ decreasing, $(f(x_k))$ is decreasing.
+
+**Along a nonincreasing sequence the direction is reversed, not inherited.** If
+$(x_k)$ is nonincreasing and $f$ is nonincreasing, then $j \le k$ gives
+$x_j \ge x_k$ and hence $f(x_j) \le f(x_k)$: the composite is **nondecreasing**.
+The witness is $f(x) = -x$ on $A = \mathbb{R}$ with $x_k = -k$, where both $f$ and
+$(x_k)$ are decreasing and $f(x_k) = k$ is increasing. Two order-reversing maps
+compose to an order-preserving one, exactly as for the four words applied to
+functions.

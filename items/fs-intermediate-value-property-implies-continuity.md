@@ -12,6 +12,10 @@ short: "IVP does not imply continuity"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -69,7 +73,7 @@ asserts that the implication reverses, and it does not.
 
 4.1 $g$ is continuous at every $x \in [-1,1]$ with $x \ne 0$: on the set $\{x \in [-1,1] : x \ne 0\}$ the map $x \mapsto 1/x$ is continuous, and $g$ is its composite with $\psi$; continuity at a point of that set is continuity of $g$ there, since the set contains a whole neighbourhood of $x$ inside $[-1,1]$ when $x \ne 0$. [step 1.1, step 3.1, L3]
 
-4.2 If $0 \in [a,b]$ then, since $a < b$, either $b > 0$ or $a < 0$. In the first case step 2.3 with $\eta := b$ gives $c$ with $0 < c < b$ and $g(c) = y$, and $c \in [a,b]$; in the second case step 3.2 with $\eta := -a$ gives $c$ with $a < c < 0$ and $g(c) = y$. Either way $y \in g[[a,b]]$. [step 2.1, step 2.3, step 3.2, L7]
+4.2 If $0 \in [a,b]$ then, since $a < b$, either $b > 0$ or $a < 0$. In the first case step 2.3 with $\eta := b$ gives $c$ with $0 < c < b$ and $g(c) = y$, and $c \in [a,b]$; in the second case step 3.2 with $\eta := -a$ gives $c$ with $a < c < 0$ and $g(c) = y$. Either way $y \in g[\,[a,b]\,]$. [step 2.1, step 2.3, step 3.2, L7]
 
 5.1 $g$ **has the intermediate value property on $[-1,1]$**. Let $a < b$ in $[-1,1]$ and let $y$ lie between $g(a)$ and $g(b)$ in either order; in particular $y \in [0,1/2]$ by step 2.1. If $0 \notin [a,b]$ then $g$ restricted to $[a,b]$ is continuous by step 4.1, and the intermediate value theorem supplies $c \in [a,b]$ with $g(c) = y$. [step 2.1, step 4.1, L4, L7]
 

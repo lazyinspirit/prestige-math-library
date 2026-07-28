@@ -12,6 +12,10 @@ short: "Thomae is continuous exactly at the irrationals"
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -98,7 +102,7 @@ for it. This is the pattern
   the oscillation there, so claim 3 is the special case of claim 2 recording
   where the value is $0$. The value itself is used on the companion page, where
   the oscillation of $t$ is computed at particular points
-  ([[ex-thomae-values-and-oscillation-computed]]), and it shows that the failure
+  on the companion examples page, and it shows that the failure
   of continuity at a rational is exactly as large as the value of $t$ there:
   small denominators are the bad points.
 
