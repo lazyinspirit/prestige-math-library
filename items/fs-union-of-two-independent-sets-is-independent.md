@@ -2,7 +2,7 @@
 id: fs-union-of-two-independent-sets-is-independent
 kind: false-statement
 title: "FALSE: the union of two linearly independent subsets of a vector space is linearly independent"
-status: draft
+status: published
 origin: session
 deps: [cex-spanning-set-that-is-not-independent, def-linear-independence, lem-independent-list-is-injective, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-adjoining-a-vector-outside-the-span, lem-standard-basis-of-f-n, lem-span-of-a-single-vector, def-linear-basis, def-linear-combination-and-span, def-monoid-finite-product, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "FALSE: unions preserve independence"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

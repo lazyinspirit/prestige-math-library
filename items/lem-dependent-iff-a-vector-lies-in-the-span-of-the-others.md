@@ -2,7 +2,7 @@
 id: lem-dependent-iff-a-vector-lies-in-the-span-of-the-others
 kind: lemma
 title: "A subset $S \\subseteq V$ is linearly dependent if and only if some $s \\in S$ lies in $\\operatorname{span}(S \\setminus \\{s\\})$; and $\\operatorname{span}(S)$ is already the set of linear combinations of INJECTIVE finite lists into $S$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-independent-list-is-injective, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "dependent iff one vector is spanned by the rest"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

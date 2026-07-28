@@ -2,7 +2,7 @@
 id: cor-factorisation-of-a-nonzero-integer
 kind: corollary
 title: "Every nonzero integer $n$ is $u \\prod_{i<r} p_i$ with $u \\in \\{1,-1\\}$ and every $p_i$ prime; $u$ and $r$ are determined by $n$, and the list is determined up to a permutation"
-status: draft
+status: published
 origin: session
 deps: [thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists, def-prime,
        def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product,
@@ -16,6 +16,7 @@ landmark: false
 short: "$n = u \\prod p_i$ for nonzero $n$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

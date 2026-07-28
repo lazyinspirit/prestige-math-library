@@ -2,7 +2,7 @@
 id: cex-spanning-set-that-is-not-independent
 kind: counterexample
 title: "$\\{(1,0), (0,1), (1,1)\\}$ spans $F^{2}$ and is linearly dependent, so a spanning set need not be a basis; each of its three two-element subsets is a basis"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-basis, cor-every-spanning-set-contains-a-basis, lem-basis-iff-maximal-independent-iff-minimal-spanning, lem-standard-basis-of-f-n, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-dimension, thm-any-two-finite-bases-have-the-same-size, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-monoid-finite-product, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a spanning set that is not a basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

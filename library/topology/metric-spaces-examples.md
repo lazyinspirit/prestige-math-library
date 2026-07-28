@@ -30,8 +30,9 @@ of the real line and has a supremum that is not attained
 ([[ex-sup-metric-on-bounded-functions]]). The $2$-adic absolute value on
 $\mathbb{Q}$ is an ultrametric, in which every triangle is isosceles and every
 point of a ball is a centre ([[ex-p-adic-ultrametric]]); it is fixed at $p = 2$
-because the general $p$-adic valuation needs unique factorisation, and this
-library has no number theory, whereas parity is available. The post-office metric
+because the general $p$-adic valuation needs unique factorisation, developed on
+*Primes and the Fundamental Theorem of Arithmetic*, whereas parity needs
+nothing and keeps the item self-contained. The post-office metric
 on $\mathbb{R}^n$ isolates every point except the origin
 ([[ex-post-office-metric]]), and $\min\{|x-y|,1\}$ on $\mathbb{R}$ has the usual
 topology with diameter exactly $1$ ([[ex-bounded-remetrisation-of-r]]).

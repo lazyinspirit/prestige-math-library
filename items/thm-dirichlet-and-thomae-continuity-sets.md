@@ -2,7 +2,7 @@
 id: thm-dirichlet-and-thomae-continuity-sets
 kind: theorem
 title: "The Dirichlet function is continuous at no point of $\\mathbb{R}$, and Thomae's function is continuous at every irrational and at no rational, so its set of continuity points is exactly the set of irrationals and its oscillation at $c$ equals $t(c)$"
-status: draft
+status: published
 origin: session
 deps: [def-dirichlet-and-thomae-functions, def-continuity-real, lem-q-and-irrationals-dense-r, def-oscillation, thm-continuity-iff-oscillation-zero, cor-archimedean-reciprocal, lem-integer-part, def-canonical-natural, lem-of-naturals-positive, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-neighbourhood-r, thm-closure-characterisations-r, lem-rat-embeds-dense, def-extended-reals, lem-extended-reals-complete]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "Thomae is continuous exactly at the irrationals"
 proof_strategy: cases
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

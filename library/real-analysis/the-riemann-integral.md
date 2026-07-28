@@ -1,7 +1,7 @@
 ---
 page: the-riemann-integral
 title: "The Riemann Integral: Definition and Integrability"
-status: draft
+status: published
 items: [def-partition-and-refinement, def-darboux-sums,
         lem-refinement-inequalities, def-darboux-integral,
         lem-integral-elementary-bounds, thm-riemann-criterion,

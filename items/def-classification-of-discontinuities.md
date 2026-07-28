@@ -2,7 +2,7 @@
 id: def-classification-of-discontinuities
 kind: definition
 title: "Discontinuity of $f$ at a point of its domain, and its classification: removable discontinuity, jump discontinuity and essential discontinuity, equivalently Rudin's discontinuities of the first and of the second kind"
-status: draft
+status: published
 origin: session
 deps: [def-continuity-real, def-one-sided-limits, def-function-limit, def-limit-point-r, def-interval, thm-two-sided-limit-iff-both-one-sided]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-discontinuity, def-jump-discontinuity, def-removable-discontinuity
 landmark: true
 short: "removable, jump, essential discontinuity"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

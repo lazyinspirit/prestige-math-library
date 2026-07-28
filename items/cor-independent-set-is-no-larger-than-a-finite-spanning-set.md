@@ -2,7 +2,7 @@
 id: cor-independent-set-is-no-larger-than-a-finite-spanning-set
 kind: corollary
 title: "If $V$ has a spanning set with $n$ elements, then every linearly independent subset of $V$ is finite with at most $n$ elements; in particular $V$ has no linearly independent subset equinumerous with $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [thm-steinitz-exchange, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, def-nat-order]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "independent sets are bounded by a finite spanning set"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

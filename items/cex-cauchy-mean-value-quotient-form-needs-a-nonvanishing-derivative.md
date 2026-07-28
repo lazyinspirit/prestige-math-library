@@ -2,7 +2,7 @@
 id: cex-cauchy-mean-value-quotient-form-needs-a-nonvanishing-derivative
 kind: counterexample
 title: "With $f(x) = x^{3}$ and $g(x) = x^{2}$ on $[-1,1]$ the quotient form $\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}$ is meaningless because $g(b) = g(a)$, while the product form of Cauchy's theorem still holds"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-mean-value, thm-rolle, def-derivative, lem-derivative-of-a-power, lem-power-monotone, def-integer-power, def-interval, thm-algebra-of-continuous-functions, def-continuity-real, lem-of-sign-rules, def-canonical-natural, lem-of-naturals-positive, def-field, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "the quotient form of Cauchy's theorem"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

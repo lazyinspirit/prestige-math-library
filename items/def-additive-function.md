@@ -2,7 +2,7 @@
 id: def-additive-function
 kind: definition
 title: "Cauchy's functional equation $f(x+y) = f(x) + f(y)$, and the additive functions $\\mathbb{R} \\to \\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-cauchy-functional-equation]
 landmark: true
 short: "additive function; Cauchy's equation"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

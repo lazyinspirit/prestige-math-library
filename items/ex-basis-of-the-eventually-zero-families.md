@@ -2,7 +2,7 @@
 id: ex-basis-of-the-eventually-zero-families
 kind: example
 title: "The standard unit families $e_k \\in F^{\\mathbb{N}}$ form a basis of the linear subspace of eventually zero families: an explicit infinite basis, built with no choice principle"
-status: draft
+status: published
 origin: session
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, lem-standard-basis-of-f-n, def-function-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-induction-principle, lem-pigeonhole, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, thm-nat-linear-order]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "an explicit infinite basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: lem-every-integer-above-one-has-a-prime-divisor
 kind: lemma
 title: "Every integer $n > 1$ has a prime divisor; indeed the least divisor of $n$ that exceeds $1$ is prime"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
        lem-int-bounded-above-has-greatest, def-int-abs, lem-int-abs-properties,
@@ -15,6 +15,7 @@ landmark: false
 short: "$n > 1$ has a prime divisor"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

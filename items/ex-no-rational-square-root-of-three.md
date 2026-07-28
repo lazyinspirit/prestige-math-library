@@ -2,7 +2,7 @@
 id: ex-no-rational-square-root-of-three
 kind: example
 title: "No rational squares to $3$ or to $6$, and none cubes to $2$: three instances of the rational-root corollary"
-status: draft
+status: published
 origin: session
 deps: [cor-rational-root-of-an-integer-is-an-integer, def-prime,
        thm-fundamental-theorem-of-arithmetic, def-coprime, cor-gcd-quotients-coprime,
@@ -18,6 +18,7 @@ landmark: false
 short: "no rational squares to $3$ or $6$, none cubes to $2$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

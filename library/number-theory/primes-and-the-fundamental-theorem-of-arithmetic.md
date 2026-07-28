@@ -1,7 +1,7 @@
 ---
 page: primes-and-the-fundamental-theorem-of-arithmetic
 title: "Primes, Euclid's Lemma and the Fundamental Theorem of Arithmetic"
-status: draft
+status: published
 items: [def-prime, lem-prime-not-dividing-is-coprime, thm-euclids-lemma,
         cor-prime-iff-euclid-property, cor-euclids-lemma-for-finite-products,
         lem-every-integer-above-one-has-a-prime-divisor, thm-prime-factorisation-exists,

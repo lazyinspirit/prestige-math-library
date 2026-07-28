@@ -2,7 +2,7 @@
 id: lem-p-adic-valuation-basic
 kind: lemma
 title: "For a prime $p$ and a nonzero integer $a$: $p^{v_p(a)} \\mid a$ and $p^{v_p(a)+1} \\nmid a$; $p^{k} \\mid a$ holds exactly for $k \\le v_p(a)$; $v_p(a) \\ge 1$ exactly when $p \\mid a$; $v_p(1) = v_p(-1) = 0$; and $v_p(p) = 1$"
-status: draft
+status: published
 origin: session
 deps: [def-p-adic-valuation, def-prime, def-group-power, lem-group-power-laws,
        def-semigroup-and-monoid, lem-units-of-z, def-divides-in-z, lem-divisibility-basic,
@@ -16,6 +16,7 @@ landmark: false
 short: "basic properties of $v_p$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

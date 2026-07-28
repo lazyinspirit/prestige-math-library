@@ -2,7 +2,7 @@
 id: thm-unique-coordinates-with-respect-to-an-ordered-basis
 kind: theorem
 title: "A finite list $v : n \\to V$ is an ordered basis if and only if every $x \\in V$ equals $\\sum_{i<n} \\lambda_i v_i$ for exactly one $\\lambda : n \\to F$; those scalars are the coordinates of $x$ in that ordered basis"
-status: draft
+status: published
 origin: session
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, def-linear-subspace, lem-linear-subspace-criterion, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "coordinates in an ordered basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

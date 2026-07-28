@@ -2,7 +2,7 @@
 id: cor-prime-iff-euclid-property
 kind: corollary
 title: "For an integer $p > 1$: $p$ is prime if and only if, for all integers $a$ and $b$, $p \\mid ab$ implies $p \\mid a$ or $p \\mid b$"
-status: draft
+status: published
 origin: session
 deps: [thm-euclids-lemma, def-prime, def-divides-in-z, lem-divisibility-basic,
        lem-associates-characterisation, lem-units-of-z, lem-int-cancellation,
@@ -16,6 +16,7 @@ landmark: false
 short: "prime iff the Euclid property"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

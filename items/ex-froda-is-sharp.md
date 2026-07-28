@@ -2,7 +2,7 @@
 id: ex-froda-is-sharp
 kind: example
 title: "Froda's countable bound is attained: a bounded nondecreasing function on $\\mathbb{R}$ discontinuous exactly at the points $1 - 1/(k+1)$ for $k \\in \\mathbb{N}$, an infinite discontinuity set inside a bounded interval"
-status: draft
+status: published
 origin: session
 deps: [def-equinumerous, def-injection-surjection-bijection, thm-monotone-with-prescribed-discontinuity-set, thm-froda, def-monotone-function, def-classification-of-discontinuities, def-countable, lem-countable-iff-surjection-from-n, cor-archimedean-reciprocal, thm-of-archimedean, def-interval, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "an infinite discontinuity set in $[0,1)$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

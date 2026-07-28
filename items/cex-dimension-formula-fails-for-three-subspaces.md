@@ -2,7 +2,7 @@
 id: cex-dimension-formula-fails-for-three-subspaces
 kind: counterexample
 title: "Three distinct lines $U_0, U_1, U_2$ in $F^{2}$ have $\\dim_F(U_0+U_1+U_2) = 2$ while the inclusion-exclusion analogue of the dimension formula predicts $3$, so the two-subspace formula does not extend"
-status: draft
+status: published
 origin: session
 deps: [thm-dimension-formula, def-dimension, thm-any-two-finite-bases-have-the-same-size, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, lem-intersection-of-linear-subspaces, lem-span-of-a-single-vector, lem-standard-basis-of-f-n, def-linear-basis, def-linear-independence, def-linear-subspace, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-monoid-finite-product, def-nat-addition, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-countable, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "no inclusion-exclusion for three subspaces"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

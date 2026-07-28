@@ -2,7 +2,7 @@
 id: cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice
 kind: counterexample
 title: "For the Dirichlet function every uniform partition with rational tags gives Riemann sum $1$, so the sums converge along that sequence of tagged partitions although the function is not integrable: the mesh condition of the Riemann definition quantifies over all tagged partitions and cannot be weakened to one sequence"
-status: draft
+status: published
 origin: session
 deps: [def-tagged-partition-and-riemann-sum, thm-darboux-equals-riemann, cex-dirichlet-is-not-riemann-integrable, def-dirichlet-and-thomae-functions, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-real-limit, def-sequence, lem-q-and-irrationals-dense-r, def-darboux-integral, def-interval, def-canonical-natural, lem-of-naturals-positive, cor-archimedean-reciprocal, thm-of-archimedean, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "one sequence of tagged partitions is not enough"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

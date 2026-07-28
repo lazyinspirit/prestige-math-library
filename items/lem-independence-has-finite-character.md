@@ -2,7 +2,7 @@
 id: lem-independence-has-finite-character
 kind: lemma
 title: "$S \\subseteq V$ is linearly independent if and only if every finite subset of $S$ is; consequently the union of a nonempty chain of linearly independent subsets of $V$, ordered by inclusion, is linearly independent"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-independent-list-is-injective, def-partial-order, def-chain, def-vector-space, def-field, def-linear-combination-and-span, def-countable, def-equinumerous, def-injection-surjection-bijection, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "independence has finite character"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

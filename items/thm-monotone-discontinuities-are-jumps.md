@@ -2,7 +2,7 @@
 id: thm-monotone-discontinuities-are-jumps
 kind: theorem
 title: "A monotone function on an interval has no discontinuity of the second kind: at every point both relevant one-sided limits exist, and an interior point $c$ is a discontinuity exactly when $\\lim_{x \\to c^{-}} f(x) < \\lim_{x \\to c^{+}} f(x)$"
-status: draft
+status: published
 origin: session
 deps: [def-monotone-function, thm-monotone-one-sided-limits-exist, def-classification-of-discontinuities, thm-two-sided-limit-iff-both-one-sided, def-continuity-real, def-one-sided-limits, def-interval, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "monotone discontinuities are jumps"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-thomae-values-and-oscillation-computed
 kind: example
 title: "Thomae's function computed: $t(1/2) = 1/2$, $t(2/3) = 1/3$, $t(m) = 1$ at every integer $m$, $t(x) = 0$ at every irrational, and $\\omega_t(c) = t(c)$ at every real $c$"
-status: draft
+status: published
 origin: session
 deps: [def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, def-oscillation, thm-continuity-iff-oscillation-zero, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, lem-integer-part, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "Thomae's function computed"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

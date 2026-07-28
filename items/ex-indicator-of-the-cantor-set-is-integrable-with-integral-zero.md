@@ -2,7 +2,7 @@
 id: ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero
 kind: example
 title: "The indicator of the Cantor set is discontinuous exactly on the Cantor set, which is null, so it is Riemann integrable with integral $0$ even though it is discontinuous at uncountably many points"
-status: draft
+status: published
 origin: session
 deps: [thm-lebesgue-criterion, def-cantor-set, thm-cantor-set-properties, def-measure-zero-and-content-zero, def-nowhere-dense-meager, def-interior-closure-boundary-r, def-continuity-real, def-classification-of-discontinuities, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-countable, def-interval, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "$\\int_0^1 \\mathbf{1}_C = 0$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

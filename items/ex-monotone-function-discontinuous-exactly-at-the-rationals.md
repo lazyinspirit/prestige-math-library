@@ -2,7 +2,7 @@
 id: ex-monotone-function-discontinuous-exactly-at-the-rationals
 kind: example
 title: "A bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $\\mathbb{Q}$, obtained from the prescribed-jump construction applied to one fixed enumeration of the rationals"
-status: draft
+status: published
 origin: session
 deps: [thm-monotone-with-prescribed-discontinuity-set, def-monotone-function, def-classification-of-discontinuities, thm-froda, thm-rationals-countable, lem-rat-embeds-dense, def-countable, def-series, thm-geometric-series, def-equinumerous, lem-countable-iff-surjection-from-n]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "monotone, discontinuous exactly on $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -1,7 +1,7 @@
 ---
 page: the-riemann-integral-examples
 title: "The Riemann Integral: Definition and Integrability: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-integral-of-x-squared-from-the-definition,
            ex-refinement-improves-the-darboux-sums,

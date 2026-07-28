@@ -2,7 +2,7 @@
 id: def-darboux-sums
 kind: definition
 title: "For bounded $f$ on $[a,b]$ and a partition $P$: the infimum $m_i$ and supremum $M_i$ of $f$ on the $i$-th subinterval, and the lower and upper Darboux sums $L(f,P) = \\sum_i m_i \\Delta_i$ and $U(f,P) = \\sum_i M_i \\Delta_i$"
-status: draft
+status: published
 origin: session
 deps: [def-partition-and-refinement, def-bounded-set, def-complete-ordered-field, def-ordered-field, def-infimum, thm-infimum-property, def-finite-sum, lem-finite-sum-laws, def-interval, lem-sup-unique, lem-sup-epsilon, lem-inf-epsilon, def-oscillation, def-extended-reals, lem-of-abs-value]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-lower-and-upper-darboux-sum]
 landmark: true
 short: "Darboux sums $L(f,P)$, $U(f,P)$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

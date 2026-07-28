@@ -2,7 +2,7 @@
 id: cor-zero-derivative-implies-constant
 kind: corollary
 title: "A function continuous on an interval $I$ whose derivative vanishes at every interior point of $I$ is constant on $I$; consequently two such functions with the same derivative differ by a constant"
-status: draft
+status: published
 origin: session
 deps: [cor-mean-value-theorem, def-derivative, def-continuity-real, def-interval, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, def-interior-closure-boundary-r, def-neighbourhood-r, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "zero derivative gives a constant"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

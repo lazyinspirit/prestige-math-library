@@ -2,7 +2,7 @@
 id: cor-countably-many-discontinuities-integrable
 kind: corollary
 title: "A bounded function on $[a,b]$ whose set of discontinuities is at most countable is Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-lebesgue-criterion, lem-countable-sets-are-null, def-countable, def-measure-zero-and-content-zero, def-bounded-set, def-continuity-real, def-classification-of-discontinuities, def-darboux-integral, def-interval]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "countable discontinuity set $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

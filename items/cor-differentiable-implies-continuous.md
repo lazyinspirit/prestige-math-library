@@ -2,7 +2,7 @@
 id: cor-differentiable-implies-continuous
 kind: corollary
 title: "A function differentiable at $c$ is continuous at $c$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, thm-caratheodory-characterisation, def-continuity-real, thm-algebra-of-continuous-functions, def-limit-point-r]
 justified_by: []
@@ -12,6 +12,7 @@ landmark: true
 short: "differentiable implies continuous"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

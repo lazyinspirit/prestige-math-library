@@ -2,7 +2,7 @@
 id: ex-integral-of-x-squared-from-the-definition
 kind: example
 title: "$\\int_0^1 x^{2} = 1/3$, computed from the Darboux definition with uniform partitions and the closed form $\\sum_{k<n} k^{2} = n(n-1)(2n-1)/6$"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-integer-power, lem-power-monotone, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "$\\int_0^1 x^2 = 1/3$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

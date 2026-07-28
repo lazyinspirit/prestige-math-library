@@ -2,7 +2,7 @@
 id: cex-calling-one-prime-destroys-uniqueness
 kind: counterexample
 title: "If $1$ were admitted as a prime, uniqueness would fail: $6 = 2 \\cdot 3 = 1 \\cdot 2 \\cdot 3 = 1 \\cdot 1 \\cdot 2 \\cdot 3$, lists of different lengths that no permutation matches"
-status: draft
+status: published
 origin: session
 deps: [def-prime, thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists,
        def-symmetric-group, lem-pigeonhole, def-equinumerous,
@@ -17,6 +17,7 @@ landmark: false
 short: "admitting $1$ breaks uniqueness"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: def-intermediate-value-property
 kind: definition
 title: "The intermediate value property (Darboux property) of a function on an interval: the image of every subinterval is order-convex"
-status: draft
+status: published
 origin: session
 deps: [lem-monotone-with-interval-image-is-continuous, def-interval, def-complete-ordered-field, thm-connected-subsets-of-r-are-intervals, cor-continuous-image-of-an-interval-is-an-interval, def-continuity-real]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-darboux-property]
 landmark: true
 short: "intermediate value property"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: thm-continuous-injection-on-an-interval-is-strictly-monotone
 kind: theorem
 title: "A continuous injective function on an interval is strictly monotone"
-status: draft
+status: published
 origin: session
 deps: [def-continuity-real, def-monotone-function, thm-intermediate-value, def-interval, def-injection-surjection-bijection, lem-rat-embeds-dense]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "continuous injection on an interval is strictly monotone"
 proof_strategy: contradiction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

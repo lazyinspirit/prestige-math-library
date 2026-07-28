@@ -2,7 +2,7 @@
 id: cex-upper-semicontinuous-need-not-attain-its-infimum
 kind: counterexample
 title: "An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided"
-status: draft
+status: published
 origin: session
 deps: [def-semicontinuity, thm-semicontinuous-evt, thm-semicontinuity-level-set-characterisation, def-max-min, def-infimum, thm-infimum-property, def-bounded-set, def-interval, def-continuity-real, cor-archimedean-reciprocal, def-neighbourhood-r, thm-algebra-of-continuous-functions]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "usc but no minimum"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

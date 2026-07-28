@@ -2,7 +2,7 @@
 id: thm-continuity-iff-oscillation-zero
 kind: theorem
 title: "$f : A \\to \\mathbb{R}$ is continuous at $c \\in A$ if and only if $\\omega_f(c) = 0$"
-status: draft
+status: published
 origin: session
 deps: [def-oscillation, def-continuity-real, def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "continuity iff zero oscillation"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

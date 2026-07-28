@@ -1,7 +1,7 @@
 ---
 page: monotone-functions-and-discontinuities
 title: "Monotone Functions, Discontinuities, and Continuity Sets"
-status: draft
+status: published
 items: [def-monotone-function, thm-monotone-one-sided-limits-exist,
         def-classification-of-discontinuities,
         thm-monotone-discontinuities-are-jumps, thm-froda,

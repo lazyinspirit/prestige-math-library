@@ -2,7 +2,7 @@
 id: cor-euclids-lemma-for-finite-products
 kind: corollary
 title: "If a prime $p$ divides a finite product $\\prod_{i<n} a_i$ of integers then $p \\mid a_i$ for some $i < n$; at $n = 0$ the product is $1$ and the hypothesis cannot hold"
-status: draft
+status: published
 origin: session
 deps: [thm-euclids-lemma, def-prime, def-semigroup-and-monoid, lem-units-of-z,
        def-monoid-finite-product, thm-induction-principle, lem-nat-order-is-membership,
@@ -15,6 +15,7 @@ landmark: false
 short: "$p \\mid \\prod a_i \\Rightarrow p \\mid a_i$ for some $i$"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

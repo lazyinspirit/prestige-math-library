@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-of-arithmetic
 kind: theorem
 title: "The fundamental theorem of arithmetic: every integer $n \\ge 1$ is a product of primes, and the factorisation is unique up to order — if $\\prod_{i<r} p_i = \\prod_{j<s} q_j$ with every $p_i$ and $q_j$ prime, then $r = s$ and $q_i = p_{\\pi(i)}$ for some $\\pi \\in \\operatorname{Sym}(r)$"
-status: draft
+status: published
 origin: session
 deps: [thm-prime-factorisation-exists, cor-euclids-lemma-for-finite-products,
        thm-euclids-lemma, def-prime, def-symmetric-group, lem-symmetric-group-is-a-group,
@@ -19,6 +19,7 @@ landmark: true
 short: "unique factorisation in $\\mathbb{Z}$"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

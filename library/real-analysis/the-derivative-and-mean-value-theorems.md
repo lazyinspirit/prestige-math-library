@@ -1,7 +1,7 @@
 ---
 page: the-derivative-and-mean-value-theorems
 title: "The Derivative and the Mean Value Theorems"
-status: draft
+status: published
 items: [def-derivative, thm-caratheodory-characterisation,
         cor-differentiable-implies-continuous,
         thm-derivative-linear-approximation-form,

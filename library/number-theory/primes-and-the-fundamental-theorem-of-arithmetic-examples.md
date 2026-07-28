@@ -1,7 +1,7 @@
 ---
 page: primes-and-the-fundamental-theorem-of-arithmetic-examples
 title: "Primes and Factorisation: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-prime-factorisation-worked, ex-two-is-the-only-even-prime,
            ex-no-rational-square-root-of-three, ex-arbitrarily-long-runs-of-composites,

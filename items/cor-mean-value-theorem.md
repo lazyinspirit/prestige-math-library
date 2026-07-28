@@ -2,7 +2,7 @@
 id: cor-mean-value-theorem
 kind: corollary
 title: "The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$"
-status: draft
+status: published
 origin: session
 deps: [thm-cauchy-mean-value, def-derivative, def-continuity-real, thm-algebra-of-continuous-functions, def-interval, def-function-limit]
 justified_by: []
@@ -12,6 +12,7 @@ landmark: true
 short: "the mean value theorem"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

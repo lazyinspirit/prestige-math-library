@@ -2,7 +2,7 @@
 id: cex-differentiable-with-unbounded-derivative-is-not-lipschitz
 kind: counterexample
 title: "$x \\mapsto \\sqrt{x}$ on $(0,1]$ is differentiable with unbounded derivative and is not Lipschitz there, so the boundedness hypothesis in the Lipschitz corollary cannot be dropped"
-status: draft
+status: published
 origin: session
 deps: [cor-bounded-derivative-implies-lipschitz, ex-derivative-of-the-nth-root-by-the-inverse-rule, def-derivative, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-bounded-set, def-interval, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-sign-rules, prop-of-multiply-inequalities, lem-power-monotone, def-integer-power, cor-differentiable-implies-continuous, def-interior-closure-boundary-r, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, lem-of-abs-value, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "unbounded derivative, not Lipschitz"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -1,7 +1,7 @@
 ---
 page: monotone-functions-and-discontinuities-examples
 title: "Monotone Functions, Discontinuities, and Continuity Sets: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-thomae-values-and-oscillation-computed,
            ex-monotone-function-discontinuous-exactly-at-the-rationals,

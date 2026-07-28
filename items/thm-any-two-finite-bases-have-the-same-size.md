@@ -2,7 +2,7 @@
 id: thm-any-two-finite-bases-have-the-same-size
 kind: theorem
 title: "If $V$ has a basis with $n$ elements and a basis with $m$ elements then $n = m$; and if $V$ has one finite basis then every basis of $V$ is finite"
-status: draft
+status: published
 origin: session
 deps: [cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-steinitz-exchange, def-linear-basis, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, def-nat-order, thm-nat-linear-order]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "any two finite bases have the same size"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

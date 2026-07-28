@@ -2,7 +2,7 @@
 id: cor-no-function-is-continuous-exactly-on-q
 kind: corollary
 title: "No function $\\mathbb{R} \\to \\mathbb{R}$ is continuous at every rational and discontinuous at every irrational, because $\\mathbb{Q}$ is not $G_\\delta$"
-status: draft
+status: published
 origin: session
 deps: [thm-discontinuity-set-is-f-sigma, def-f-sigma-g-delta, cor-q-is-meager-and-not-g-delta, def-continuity-real, lem-rat-embeds-dense]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "nothing is continuous exactly on $\\mathbb{Q}$"
 proof_strategy: contradiction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

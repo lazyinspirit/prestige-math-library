@@ -2,7 +2,7 @@
 id: ex-locally-unbounded-finite-everywhere
 kind: example
 title: "The function equal to $q$ at a rational $p/q$ in lowest terms and to $0$ at every irrational is finite at every point and unbounded on every nondegenerate interval"
-status: draft
+status: published
 origin: session
 deps: [def-dirichlet-and-thomae-functions, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, def-bounded-set, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, def-oscillation, def-continuity-real, lem-integer-part, def-canonical-natural, lem-of-naturals-positive, lem-of-abs-value, def-complete-ordered-field]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "finite everywhere, unbounded on every interval"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

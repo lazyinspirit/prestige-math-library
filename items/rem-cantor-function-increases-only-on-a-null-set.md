@@ -2,7 +2,7 @@
 id: rem-cantor-function-increases-only-on-a-null-set
 kind: remark
 title: "The Cantor function is continuous and nondecreasing, climbs from $0$ to $1$, and is constant on every interval removed in the construction of the Cantor set, so all of its increase happens on a set of measure zero"
-status: draft
+status: published
 origin: session
 deps: [cor-cantor-function-is-continuous, thm-cantor-function-properties, thm-cantor-set-properties, def-cantor-set, def-cantor-function, def-measure-zero-and-content-zero, def-monotone-function, def-interval]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: []
 landmark: false
 short: "the Cantor function climbs on a null set"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-hamel-basis-of-r-over-q
 kind: example
 title: "$\\mathbb{R}$ as a vector space over $\\mathbb{Q}$ has a basis, and every such basis is infinite; the existence proof exhibits none"
-status: draft
+status: published
 origin: session
 deps: [cor-every-vector-space-has-a-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-linear-basis, def-linear-independence, def-dimension, def-linear-combination-and-span, def-monoid-finite-product, lem-restriction-of-scalars, def-subfield, def-field-homomorphism, lem-of-q-embeds, def-ordered-field, thm-reals-ordered-field, thm-rationals-countable, thm-product-of-countable, thm-r-uncountable, lem-subset-of-countable, lem-pigeonhole, def-countable, def-equinumerous, def-injection-surjection-bijection, def-function-space, def-vector-space, def-field, def-rationals, def-real-numbers, thm-rat-field, thm-reals-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a Hamel basis of $\\mathbb{R}$ over $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

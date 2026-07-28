@@ -2,7 +2,7 @@
 id: cex-mean-value-theorem-fails-without-continuity-at-the-endpoints
 kind: counterexample
 title: "$f(x) = x$ on $[0,1)$ with $f(1) = 0$ is differentiable at every point of $(0,1)$ with $f' \\equiv 1$, yet no $c$ satisfies $f(1) - f(0) = f'(c)$, so continuity on the closed interval cannot be dropped from the mean value theorem"
-status: draft
+status: published
 origin: session
 deps: [fs-mean-value-theorem-needs-no-continuity-at-the-endpoints, cor-mean-value-theorem, thm-rolle, def-derivative, def-continuity-real, def-interval, def-function-limit, def-one-sided-limits, def-limit-point-r, cor-of-one-positive, lem-of-abs-value, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "MVT fails without endpoint continuity"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

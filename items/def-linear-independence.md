@@ -2,7 +2,7 @@
 id: def-linear-independence
 kind: definition
 title: "Linear independence: a finite list $v : n \\to V$ is independent when $\\sum_{i<n} \\lambda_i v_i = 0_V$ forces every $\\lambda_i = 0_F$, and a subset $S \\subseteq V$ is independent when every injective finite list into $S$ is independent"
-status: draft
+status: published
 origin: session
 deps: [def-vector-space, def-field, lem-vector-space-elementary-consequences, def-linear-combination-and-span, def-monoid-finite-product, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-linearly-independent, def-linear-dependence]
 landmark: true
 short: "linearly independent list; independent subset"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

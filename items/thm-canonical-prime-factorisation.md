@@ -2,7 +2,7 @@
 id: thm-canonical-prime-factorisation
 kind: theorem
 title: "For $n \\ge 1$ and any injective list $p : r \\to \\mathbb{Z}$ of primes containing every prime divisor of $n$, one has $n = \\prod_{i<r} p_i^{\\,v_{p_i}(n)}$; the exponents are determined by $n$, and $v_q(n) = 0$ for every prime $q$ outside the list"
-status: draft
+status: published
 origin: session
 deps: [thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists,
        lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
@@ -20,6 +20,7 @@ landmark: true
 short: "$n = \\prod p_i^{v_{p_i}(n)}$"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

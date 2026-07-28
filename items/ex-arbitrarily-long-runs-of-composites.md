@@ -2,7 +2,7 @@
 id: ex-arbitrarily-long-runs-of-composites
 kind: example
 title: "For every $n \\in \\mathbb{N}$ there are $n$ consecutive composite integers: with $N := \\prod_{j<n}(j+2)$, each of $N+2, \\dots, N+n+1$ is composite"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-monoid-finite-product, thm-generalised-associativity,
        lem-units-of-z, def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic,
@@ -17,6 +17,7 @@ landmark: false
 short: "$n$ consecutive composites, for every $n$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

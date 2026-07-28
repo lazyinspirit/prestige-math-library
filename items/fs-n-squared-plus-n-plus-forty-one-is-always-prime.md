@@ -2,7 +2,7 @@
 id: fs-n-squared-plus-n-plus-forty-one-is-always-prime
 kind: false-statement
 title: "FALSE: $n^{2} + n + 41$ is prime for every natural number $n$"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
        def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z,
@@ -15,6 +15,7 @@ landmark: false
 short: "FALSE: $n^2+n+41$ is always prime"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

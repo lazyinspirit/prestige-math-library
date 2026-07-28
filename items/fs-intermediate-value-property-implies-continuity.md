@@ -2,7 +2,7 @@
 id: fs-intermediate-value-property-implies-continuity
 kind: false-statement
 title: "FALSE: a function with the intermediate value property on an interval is continuous"
-status: draft
+status: published
 origin: session
 deps: [def-intermediate-value-property, def-continuity-real, thm-intermediate-value, cor-continuous-image-of-an-interval-is-an-interval, def-interval, lem-integer-part, def-max-min, lem-finite-set-has-max, thm-algebra-of-continuous-functions, thm-composition-of-continuous-functions, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-abs-value, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "IVP does not imply continuity"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-integral-of-the-floor-function
 kind: example
 title: "$\\int_0^3 \\lfloor x \\rfloor = 3$: the floor function is nondecreasing, hence integrable, and the integral is computed from the uniform partitions"
-status: draft
+status: published
 origin: session
 deps: [thm-monotone-implies-integrable, lem-integer-part, def-monotone-function, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-classification-of-discontinuities, def-continuity-real, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "$\\int_0^3 \\lfloor x\\rfloor = 3$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

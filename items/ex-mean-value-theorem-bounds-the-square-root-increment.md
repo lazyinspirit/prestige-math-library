@@ -2,7 +2,7 @@
 id: ex-mean-value-theorem-bounds-the-square-root-increment
 kind: example
 title: "The mean value theorem gives $|\\sqrt{x} - \\sqrt{y}| \\le \\tfrac{1}{\\iota(2)} |x - y|$ for $x, y \\ge 1$, so the square root is Lipschitz with constant $1/2$ on $[1,\\infty)$"
-status: draft
+status: published
 origin: session
 deps: [cor-bounded-derivative-implies-lipschitz, prop-of-multiply-inequalities, ex-derivative-of-the-nth-root-by-the-inverse-rule, thm-nth-roots-exist, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-interval, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, lem-of-abs-value, def-derivative, cor-differentiable-implies-continuous, lem-of-inverse-positive, lem-of-sign-rules, def-uniform-continuity-real, def-interior-closure-boundary-r, def-neighbourhood-r, def-limit-point-r, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "square root is $1/2$-Lipschitz on $[1,\\infty)$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

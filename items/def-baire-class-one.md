@@ -2,7 +2,7 @@
 id: def-baire-class-one
 kind: definition
 title: "Pointwise convergence of a sequence of real functions, and the Baire class one functions as the pointwise limits of sequences of continuous functions"
-status: draft
+status: published
 origin: session
 deps: [def-continuity-real, def-sequence, def-real-limit, lem-limit-unique, def-interval]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-pointwise-convergence, def-baire-one]
 landmark: true
 short: "pointwise limit; Baire class one"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

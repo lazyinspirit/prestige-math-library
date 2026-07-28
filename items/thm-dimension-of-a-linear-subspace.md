@@ -2,7 +2,7 @@
 id: thm-dimension-of-a-linear-subspace
 kind: theorem
 title: "If $\\dim_F V = n$ and $U$ is a linear subspace of $V$, then $U$ is finite-dimensional, $\\dim_F U \\le n$, and $\\dim_F U = n$ if and only if $U = V$"
-status: draft
+status: published
 origin: session
 deps: [def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, lem-adjoining-a-vector-outside-the-span, def-linear-basis, def-linear-independence, def-linear-subspace, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-vector-space, def-field, thm-well-ordering-principle, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, thm-nat-linear-order, lem-nat-nonzero-is-successor]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "$\\dim_F U \\le \\dim_F V$, with equality only at $U = V$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

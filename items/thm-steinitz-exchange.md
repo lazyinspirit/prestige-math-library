@@ -2,7 +2,7 @@
 id: thm-steinitz-exchange
 kind: theorem
 title: "The Steinitz exchange lemma: if $L \\subseteq V$ is linearly independent and $S \\subseteq V$ spans $V$ with $S$ finite of size $n$, then $L$ is finite with $|L| = m \\le n$, and there is $T \\subseteq S$ of size $n - m$ such that $L \\cup T$ spans $V$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-independent-list-is-injective, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-linear-subspace, def-sum-of-linear-subspaces, def-monoid-finite-product, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, def-nat-addition, thm-induction-principle, lem-nat-add-successor-left, lem-nat-add-commutative, lem-nat-add-cancellative, lem-nat-nonzero-is-successor, lem-nat-discrete, thm-nat-linear-order, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "Steinitz exchange"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

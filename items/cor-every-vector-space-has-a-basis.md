@@ -2,7 +2,7 @@
 id: cor-every-vector-space-has-a-basis
 kind: corollary
 title: "Every vector space has a basis"
-status: draft
+status: published
 origin: session
 deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "every vector space has a basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

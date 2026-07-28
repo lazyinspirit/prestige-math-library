@@ -2,7 +2,7 @@
 id: def-oscillation
 kind: definition
 title: "The oscillation $\\omega_f(S) = \\sup\\{\\,|f(x) - f(y)| : x, y \\in S\\,\\}$ of $f$ on a set and the oscillation $\\omega_f(c) = \\inf_{\\delta > 0} \\omega_f(A \\cap N_\\delta(c))$ at a point, both taken in the extended reals"
-status: draft
+status: published
 origin: session
 deps: [def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, def-bounded-set, def-infimum, lem-of-abs-value, def-complete-ordered-field]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-oscillation-at-a-point]
 landmark: true
 short: "oscillation $\\omega_f$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

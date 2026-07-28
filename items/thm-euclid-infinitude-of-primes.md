@@ -2,7 +2,7 @@
 id: thm-euclid-infinitude-of-primes
 kind: theorem
 title: "Euclid's theorem: for every $n \\in \\mathbb{N}$ and every list $p : n \\to \\mathbb{Z}$ of primes there is a prime not among $p_0, \\dots, p_{n-1}$; consequently the set of primes is not finite"
-status: draft
+status: published
 origin: session
 deps: [def-prime, lem-every-integer-above-one-has-a-prime-divisor,
        thm-prime-factorisation-exists, def-semigroup-and-monoid, lem-units-of-z,
@@ -18,6 +18,7 @@ landmark: true
 short: "there are infinitely many primes"
 proof_strategy: contradiction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

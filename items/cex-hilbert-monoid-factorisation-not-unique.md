@@ -2,7 +2,7 @@
 id: cex-hilbert-monoid-factorisation-not-unique
 kind: counterexample
 title: "In the multiplicative monoid $H = \\{1, 4, 7, 10, \\dots\\}$ of positive integers one more than a multiple of $3$, the element $100$ has two genuinely different factorisations into irreducibles, $4 \\cdot 25$ and $10 \\cdot 10$"
-status: draft
+status: published
 origin: session
 deps: [def-prime, thm-euclids-lemma, thm-fundamental-theorem-of-arithmetic,
        thm-prime-factorisation-exists, lem-every-integer-above-one-has-a-prime-divisor,
@@ -18,6 +18,7 @@ landmark: false
 short: "$100 = 4 \\cdot 25 = 10 \\cdot 10$ in $H$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

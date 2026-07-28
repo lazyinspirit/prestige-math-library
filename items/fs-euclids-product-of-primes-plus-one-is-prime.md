@@ -2,7 +2,7 @@
 id: fs-euclids-product-of-primes-plus-one-is-prime
 kind: false-statement
 title: "FALSE: for every finite list $p_0, \\dots, p_{n-1}$ of distinct primes, $p_0 \\cdots p_{n-1} + 1$ is prime"
-status: draft
+status: published
 origin: session
 deps: [thm-euclid-infinitude-of-primes, def-prime,
        lem-every-integer-above-one-has-a-prime-divisor, def-monoid-finite-product,
@@ -18,6 +18,7 @@ landmark: false
 short: "FALSE: $p_0 \\cdots p_{n-1} + 1$ is prime"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

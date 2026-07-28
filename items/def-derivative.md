@@ -2,7 +2,7 @@
 id: def-derivative
 kind: definition
 title: "The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set"
-status: draft
+status: published
 origin: session
 deps: [def-function-limit, lem-function-limit-unique, def-limit-point-r, def-interval, def-neighbourhood-r, def-complete-ordered-field, def-continuity-real, lem-limit-is-local]
 justified_by: []
@@ -11,6 +11,7 @@ aliases: [def-differentiable, def-differentiability]
 landmark: true
 short: "the derivative at a point"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

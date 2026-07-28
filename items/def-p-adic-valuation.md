@@ -2,7 +2,7 @@
 id: def-p-adic-valuation
 kind: definition
 title: "The $p$-adic valuation $v_p(a)$ of a nonzero integer: the greatest $k \\in \\mathbb{N}$ with $p^{k} \\mid a$"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-group-power, def-semigroup-and-monoid, lem-units-of-z,
        def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
@@ -15,6 +15,7 @@ aliases: [def-p-adic-valuation-on-z]
 landmark: true
 short: "$v_p(a)$, the exponent of $p$ in $a$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

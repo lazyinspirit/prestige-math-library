@@ -2,7 +2,7 @@
 id: cor-a-linear-subspace-has-a-complement
 kind: corollary
 title: "Every linear subspace $U$ of a vector space $V$ has a complement: a linear subspace $W$ with $V = U \\oplus W$"
-status: draft
+status: published
 origin: session
 deps: [thm-every-independent-set-extends-to-a-basis, cor-every-vector-space-has-a-basis, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-independent-list-is-injective, def-linear-basis, def-linear-independence, def-internal-direct-sum, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "every linear subspace has a complement"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

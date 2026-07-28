@@ -2,7 +2,7 @@
 id: cor-every-spanning-set-contains-a-basis
 kind: corollary
 title: "Every spanning subset of a vector space contains a basis"
-status: draft
+status: published
 origin: session
 deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a spanning set contains a basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

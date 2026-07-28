@@ -2,7 +2,7 @@
 id: thm-derivative-linear-approximation-form
 kind: theorem
 title: "The linear-approximation form of the derivative: $f$ is differentiable at $c$ with $f'(c) = L$ if and only if the remainder $r(x) = f(x) - f(c) - L(x-c)$ satisfies $\\lim_{x \\to c} r(x)/(x-c) = 0$; at most one $L$ does so, so $x \\mapsto f(c) + L(x-c)$ is the unique affine map approximating $f$ to first order at $c$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, def-function-limit, lem-function-limit-unique, def-limit-point-r, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "derivative as first-order approximation"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

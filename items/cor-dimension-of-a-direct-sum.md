@@ -2,7 +2,7 @@
 id: cor-dimension-of-a-direct-sum
 kind: corollary
 title: "If $V = \\bigoplus_{i<n} U_i$ with every $U_i$ finite-dimensional, then $V$ is finite-dimensional and $\\dim_F V = \\sum_{i<n} \\dim_F U_i$; in particular $\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$"
-status: draft
+status: published
 origin: session
 deps: [thm-dimension-formula, thm-dimension-of-a-linear-subspace, def-dimension, def-internal-direct-sum, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, lem-intersection-of-linear-subspaces, def-linear-subspace, def-linear-basis, def-monoid-finite-product, def-nat-addition, def-vector-space, def-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-nat-order]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "dimension of a direct sum"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

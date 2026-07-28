@@ -2,7 +2,7 @@
 id: ex-two-is-the-only-even-prime
 kind: example
 title: "$2$ is prime, and it is the only even prime: every even integer $n > 2$ is composite"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
        def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, thm-int-comm-ring,
@@ -15,6 +15,7 @@ landmark: false
 short: "$2$ is the only even prime"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

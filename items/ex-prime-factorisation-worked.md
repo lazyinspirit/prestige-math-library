@@ -2,7 +2,7 @@
 id: ex-prime-factorisation-worked
 kind: example
 title: "$360 = 2^{3} \\cdot 3^{2} \\cdot 5$ and $84 = 2^{2} \\cdot 3 \\cdot 7$, with $\\gcd(360,84) = 12$ and $\\operatorname{lcm}(360,84) = 2520$ read off the exponents"
-status: draft
+status: published
 origin: session
 deps: [thm-gcd-and-lcm-from-valuations, thm-canonical-prime-factorisation,
        lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
@@ -19,6 +19,7 @@ landmark: false
 short: "$360$, $84$, and their $\\gcd$ and $\\operatorname{lcm}$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

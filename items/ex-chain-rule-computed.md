@@ -2,7 +2,7 @@
 id: ex-chain-rule-computed
 kind: example
 title: "The chain rule applied to $x \\mapsto (x^{2}+1)^{5}$ and to $x \\mapsto ((3x-1)^{2}+2)^{3}$, with the Carathéodory factor written out in closed form in the first case"
-status: draft
+status: published
 origin: session
 deps: [thm-chain-rule, thm-caratheodory-characterisation, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-derivative, def-integer-power, lem-power-difference-factorisation, lem-power-laws, def-finite-sum, lem-finite-sum-laws, thm-algebra-of-continuous-functions, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r, def-continuity-real, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "worked chain-rule computations"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

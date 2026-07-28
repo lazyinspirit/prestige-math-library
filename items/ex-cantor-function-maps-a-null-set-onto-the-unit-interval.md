@@ -2,7 +2,7 @@
 id: ex-cantor-function-maps-a-null-set-onto-the-unit-interval
 kind: example
 title: "The Cantor set has measure zero, yet the Cantor function maps it onto all of $[0,1]$: a null set can have image an interval of length $1$"
-status: draft
+status: published
 origin: session
 deps: [def-cantor-function, thm-cantor-function-properties, thm-cantor-set-properties, cor-cantor-function-is-continuous, def-measure-zero-and-content-zero, lem-nondegenerate-interval-is-not-null, def-cantor-set, def-interval, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a null set mapped onto $[0,1]$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

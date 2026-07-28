@@ -2,7 +2,7 @@
 id: cor-cantor-function-is-continuous
 kind: corollary
 title: "The Cantor function is continuous on $[0,1]$"
-status: draft
+status: published
 origin: session
 deps: [def-cantor-function, thm-cantor-function-properties, lem-monotone-with-interval-image-is-continuous, def-monotone-function, def-continuity-real, def-interval, def-cantor-set]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "the Cantor function is continuous"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

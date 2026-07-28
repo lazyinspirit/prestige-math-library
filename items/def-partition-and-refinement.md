@@ -2,7 +2,7 @@
 id: def-partition-and-refinement
 kind: definition
 title: "Partition of $[a,b]$ as a finite strictly increasing list $a = t_0 < t_1 < \\dots < t_n = b$, its subintervals and their lengths, its mesh, refinement, and the common refinement of two partitions"
-status: draft
+status: published
 origin: session
 deps: [def-interval, def-finite-sum, lem-finite-sum-laws, def-max-min, lem-finite-set-has-max, def-natural-numbers, def-nat-order, def-complete-ordered-field, def-ordered-field, def-sequence, def-injection-surjection-bijection, thm-recursion, thm-induction-principle, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-partition-of-an-interval, def-mesh-of-a-partition]
 landmark: true
 short: "partition, mesh, refinement"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

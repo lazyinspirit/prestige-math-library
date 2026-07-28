@@ -2,7 +2,7 @@
 id: thm-semicontinuous-evt
 kind: theorem
 title: "Semicontinuous extreme value theorem: an upper semicontinuous function on a nonempty compact $K \\subseteq \\mathbb{R}$ is bounded above and attains a maximum, and a lower semicontinuous one is bounded below and attains a minimum"
-status: draft
+status: published
 origin: session
 deps: [def-semicontinuity, thm-semicontinuity-level-set-characterisation, def-open-cover-r, def-max-min, def-bounded-set, lem-sup-epsilon, def-complete-ordered-field, cor-archimedean-reciprocal, def-open-and-closed-in-r, lem-finite-set-has-max, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "semicontinuous extreme value theorem"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

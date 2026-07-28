@@ -4,7 +4,7 @@ kind: example
 title: "The $2$-adic absolute value gives an ultrametric on $\\mathbb{Q}$, in which every triangle is isosceles and every point of a ball is a centre"
 status: published
 origin: session
-deps: [def-metric-space, def-metric-ball, def-integers, def-rationals, def-integer-power,
+deps: [thm-euclids-lemma, def-p-adic-valuation, thm-fundamental-theorem-of-arithmetic, lem-p-adic-valuation-on-q, def-metric-space, def-metric-ball, def-integers, def-rationals, def-integer-power,
        thm-strong-induction, lem-alternating-sequence, thm-induction-principle,
        def-nat-addition, lem-nat-add-successor-left, def-nat-order, lem-nat-discrete,
        thm-nat-linear-order, lem-nat-embeds-int, thm-int-comm-ring, thm-int-ordered-ring,
@@ -75,8 +75,13 @@ $$d_2(x,y) := |x - y|_2 \qquad (x, y \in \mathbb{Q}).$$
    $B(y,r) = B(x,r)$ ([[def-metric-ball]]).
 
 **Why $p = 2$ and not a general prime.** The general $p$-adic valuation needs
-primality and unique factorisation in $\mathbb{Z}$, neither of which this item
-develops or assumes. At $p = 2$ everything reduces to parity, which is
+primality and unique factorisation in $\mathbb{Z}$, which are developed on
+*Primes, Euclid's Lemma and the Fundamental Theorem of Arithmetic*
+([[def-p-adic-valuation]], [[thm-euclids-lemma]],
+[[thm-fundamental-theorem-of-arithmetic]], [[lem-p-adic-valuation-on-q]]) and
+are therefore available here; this item nevertheless develops the case $p = 2$
+from parity alone, so that the ultrametric geometry below rests on nothing but
+the discreteness of $\mathbb{Z}$. At $p = 2$ everything reduces to parity, which is
 available: [[lem-alternating-sequence]] partitions $\mathbb{N}$ into the ranges
 of its two index maps, and that is what claim 2 of the verification turns into
 "even or odd, never both".
@@ -153,9 +158,12 @@ they hold in every ultrametric space.
   ([[def-metric-space]]); they are recorded here because they are the two facts
   that make ultrametric geometry look unlike the real line, where a triangle need
   not be isosceles and a ball has exactly one centre.
-- **The general $p$-adic absolute value is not available here.** Its
-  well-definedness needs the primality of $p$ in the form of Euclid's lemma, that
-  $p$ dividing a product divides one of the factors, which this item does not
-  establish and does not assume. At $p = 2$ the
-  statement doing the same work is that a product of odd integers is odd, proved
-  in step 1.3 above by a one-line ring computation.
+- **The general $p$-adic absolute value, and what this item does instead.** Its
+  well-definedness needs the primality of $p$ in the form of Euclid's lemma,
+  that $p$ dividing a product divides one of the factors. That is
+  [[thm-euclids-lemma]], and the resulting valuation on $\mathbb{Q}^{\times}$ is
+  [[lem-p-adic-valuation-on-q]], both on the primes page and both available
+  here. This item deliberately does not use them: at $p = 2$ the statement doing
+  the same work is that a product of odd integers is odd, proved in step 1.3
+  above by a one-line ring computation, so the whole development below is
+  self-contained from parity.

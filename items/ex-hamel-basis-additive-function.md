@@ -2,7 +2,7 @@
 id: ex-hamel-basis-additive-function
 kind: example
 title: "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ that is not $x \\mapsto cx$: the coefficient of one fixed Hamel basis vector. It is unbounded above and below on every nondegenerate interval, its graph is dense in $\\mathbb{R}^{2}$, and every nonempty level set is dense in $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [lem-hamel-basis-exists, fs-additive-implies-linear, def-additive-function, lem-additive-is-q-linear, thm-cauchy-functional-equation-regularity, def-vector-space, lem-restriction-of-scalars, def-linear-combination-and-span, def-linear-subspace, lem-metrics-on-rn, def-metric-interior-closure-boundary, thm-metric-closure-characterisation, def-metric-ball, def-axiom-of-choice, thm-zorn, def-bounded-set, def-interval, lem-rat-embeds-dense, lem-q-and-irrationals-dense-r, def-complete-ordered-field, def-continuity-real, def-monotone-function]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a Hamel coefficient is additive and wild"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: fs-pointwise-limit-of-riemann-integrable-is-integrable
 kind: false-statement
 title: "FALSE: a pointwise limit of a sequence of Riemann integrable functions on $[a,b]$ is Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-finitely-many-discontinuities-integrable, fs-bounded-implies-riemann-integrable, def-dirichlet-and-thomae-functions, thm-rationals-countable, lem-subset-of-countable, lem-countable-iff-surjection-from-n, def-countable, def-real-limit, def-sequence, def-continuity-real, def-darboux-integral, def-bounded-set, lem-finite-set-has-max, def-max-min, def-neighbourhood-r, def-interval, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "FALSE: pointwise limits preserve integrability"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: cex-fermat-fails-at-an-endpoint
 kind: counterexample
 title: "The identity on $[0,1]$ attains its maximum at $1$ and its minimum at $0$ with derivative $1$ at both, so Fermat's theorem genuinely needs the extremum to be at an interior point"
-status: draft
+status: published
 origin: session
 deps: [thm-fermat-interior-extremum, def-local-extremum, def-derivative, def-interior-closure-boundary-r, def-max-min, def-interval, def-neighbourhood-r, def-function-limit, cor-of-one-positive, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "Fermat needs an interior point"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

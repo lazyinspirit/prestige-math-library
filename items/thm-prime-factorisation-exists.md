@@ -2,7 +2,7 @@
 id: thm-prime-factorisation-exists
 kind: theorem
 title: "Every integer $n \\ge 1$ is a finite product of primes: there are $r \\in \\mathbb{N}$ and a list $p : r \\to \\mathbb{Z}$ of primes with $n = \\prod_{i<r} p_i$, the case $n = 1$ being the empty product"
-status: draft
+status: published
 origin: session
 deps: [lem-every-integer-above-one-has-a-prime-divisor, def-prime,
        def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product,
@@ -17,6 +17,7 @@ landmark: true
 short: "$n \\ge 1$ is a product of primes"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

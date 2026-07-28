@@ -1,7 +1,7 @@
 ---
 page: the-derivative-and-mean-value-theorems-examples
 title: "The Derivative and the Mean Value Theorems: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-derivatives-of-polynomials-computed,
            cex-absolute-value-is-not-differentiable-at-zero,

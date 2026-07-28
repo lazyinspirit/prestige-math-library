@@ -2,7 +2,7 @@
 id: thm-continuity-set-realisation
 kind: theorem
 title: "Every $G_\\delta$ subset of $\\mathbb{R}$ is the set of continuity points of some $f : \\mathbb{R} \\to \\mathbb{R}$, so the $G_\\delta$ sets are exactly the continuity sets"
-status: draft
+status: published
 origin: session
 deps: [def-f-sigma-g-delta, thm-discontinuity-set-is-f-sigma, def-open-and-closed-in-r, thm-open-set-algebra-r, thm-well-ordering-principle, lem-q-and-irrationals-dense-r, cor-archimedean-reciprocal, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, def-neighbourhood-r, lem-rat-embeds-dense, thm-closure-characterisations-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "the continuity sets are exactly the $G_\\delta$ sets"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

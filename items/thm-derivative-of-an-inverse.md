@@ -2,7 +2,7 @@
 id: thm-derivative-of-an-inverse
 kind: theorem
 title: "Derivative of an inverse: if $f$ is continuous and injective on a nondegenerate interval $I$ and differentiable at $c \\in I$ with $f'(c) \\ne 0$, then the inverse $g$ is differentiable at $f(c)$ with $g'(f(c)) = 1/f'(c)$; and if $f'(c) = 0$ then $g$ is not differentiable at $f(c)$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, thm-caratheodory-characterisation, thm-chain-rule, thm-continuous-inverse, def-continuity-real, def-injection-surjection-bijection, def-interval, thm-algebra-of-continuous-functions, thm-composition-of-continuous-functions, def-function-limit, def-limit-point-r, cor-of-one-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "derivative of an inverse"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

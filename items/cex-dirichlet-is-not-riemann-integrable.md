@@ -2,7 +2,7 @@
 id: cex-dirichlet-is-not-riemann-integrable
 kind: counterexample
 title: "The Dirichlet function on $[0,1]$ has lower Darboux integral $0$ and upper Darboux integral $1$, so it is bounded and not Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [fs-bounded-implies-riemann-integrable, def-dirichlet-and-thomae-functions, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "Dirichlet is not integrable"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

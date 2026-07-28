@@ -1,7 +1,7 @@
 ---
 page: linear-independence-bases-and-dimension-examples
 title: "Bases and Dimension: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-coordinates-depend-on-the-ordered-basis,
            ex-basis-of-the-eventually-zero-families,

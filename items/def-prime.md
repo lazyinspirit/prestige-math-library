@@ -2,7 +2,7 @@
 id: def-prime
 kind: definition
 title: "Prime and composite integers: $p$ is prime when $p > 1$ and its only positive divisors are $1$ and $p$"
-status: draft
+status: published
 origin: session
 deps: [def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, def-int-abs,
        lem-int-abs-properties, lem-associates-characterisation, lem-units-of-z,
@@ -14,6 +14,7 @@ aliases: [def-prime-integer, def-composite-integer]
 landmark: true
 short: "$p$ prime: $p > 1$, positive divisors $1$ and $p$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

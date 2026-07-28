@@ -2,7 +2,7 @@
 id: def-local-extremum
 kind: definition
 title: "Local (relative) maximum and minimum of $f : A \\to \\mathbb{R}$ at a point, the strict forms, and what it means for the point to be interior to $A$"
-status: draft
+status: published
 origin: session
 deps: [def-neighbourhood-r, def-max-min, def-interior-closure-boundary-r, def-complete-ordered-field, def-interval, def-limit-point-r]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-local-maximum, def-local-minimum, def-relative-extremum]
 landmark: true
 short: "local maximum, local minimum, interior point"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

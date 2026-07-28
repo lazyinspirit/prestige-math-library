@@ -4,7 +4,7 @@ kind: remark
 title: "The choice ledger: what costs the Axiom of Choice and what does not"
 status: published
 origin: session
-deps: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
+deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-a-basis, rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
        rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, rem-cohen-first-model,
        cor-ac-iff-well-ordering, cor-ac-iff-zorn, thm-hartogs, lem-well-order-comparability,
        thm-zorn, thm-bourbaki-witt, def-chain, thm-well-ordering-theorem, def-cardinal]
@@ -20,10 +20,6 @@ verification:
     date: 2026-07-26
     scope: page
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -60,9 +56,11 @@ link is flagged as such.
   repair it yields only the Boolean prime ideal theorem
   ([[rem-schechter-kelley-tychonoff]]).
 - **Every vector space has a basis.** The implication from the Axiom of Choice
-  is a routine application of Zorn's lemma; the converse is a hard theorem of
-  Blass, 1984. Neither direction is proved here, and no item derives either, so
-  both are quoted on the authority of the references. The equivalence itself is
+  is a routine application of Zorn's lemma, and it **is** proved here, in
+  [[cor-every-vector-space-has-a-basis]] by way of
+  [[thm-every-independent-set-extends-to-a-basis]]. The converse is a hard
+  theorem of Blass, 1984, which is **not** proved here and is quoted on the
+  authority of the references. The equivalence itself is
   recorded in the library, in [[rem-hahn-banach-hamel-basis-open]], where it
   fixes the upper endpoint of an open question about the strength of
   Hahn-Banach.

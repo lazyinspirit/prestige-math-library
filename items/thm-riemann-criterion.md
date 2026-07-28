@@ -2,7 +2,7 @@
 id: thm-riemann-criterion
 kind: theorem
 title: "Riemann's criterion: a bounded $f$ on $[a,b]$ is Darboux integrable if and only if for every real $\\varepsilon > 0$ there is a partition $P$ with $U(f,P) - L(f,P) < \\varepsilon$"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-sums, def-darboux-integral, lem-refinement-inequalities, lem-sup-epsilon, lem-inf-epsilon, def-partition-and-refinement, def-bounded-set, def-infimum, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "Riemann's criterion"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-x-cubed-is-strictly-increasing-with-a-vanishing-derivative
 kind: example
 title: "$x \\mapsto x^{3}$ is increasing on $\\mathbb{R}$ although its derivative vanishes at $0$, which is the witness for the false statement that a vanishing derivative forbids strict increase, and which makes its inverse non-differentiable at $0$"
-status: draft
+status: published
 origin: session
 deps: [fs-vanishing-derivative-forbids-strict-increase, def-derivative, lem-derivative-of-a-power, def-monotone-function, thm-monotonicity-from-the-derivative, def-integer-power, thm-derivative-of-an-inverse, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-canonical-natural, lem-of-naturals-positive, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "$x^{3}$ increases with $f'(0)=0$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

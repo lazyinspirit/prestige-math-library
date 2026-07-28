@@ -2,7 +2,7 @@
 id: thm-euclids-lemma
 kind: theorem
 title: "Euclid's lemma: if $p$ is prime and $p \\mid ab$ then $p \\mid a$ or $p \\mid b$"
-status: draft
+status: published
 origin: session
 deps: [def-prime, lem-prime-not-dividing-is-coprime, lem-coprime-divides-product,
        def-coprime, def-common-divisor-and-gcd, def-divides-in-z,
@@ -13,6 +13,7 @@ landmark: true
 short: "$p \\mid ab \\Rightarrow p \\mid a$ or $p \\mid b$"
 proof_strategy: cases
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

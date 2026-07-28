@@ -2,7 +2,7 @@
 id: lem-p-adic-valuation-on-q
 kind: lemma
 title: "The $p$-adic valuation extends to the nonzero rationals by $v_p(a/b) := v_p(a) - v_p(b) \\in \\mathbb{Z}$, independently of the representation; it satisfies $v_p(xy) = v_p(x) + v_p(y)$, and $v_p(x+y) \\ge \\min\\{v_p(x), v_p(y)\\}$ whenever $x$, $y$ and $x+y$ are nonzero"
-status: draft
+status: published
 origin: session
 deps: [lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
        def-prime, def-rationals, def-rat-operations, thm-rat-field, lem-int-embeds-rat,
@@ -17,6 +17,7 @@ landmark: false
 short: "$v_p$ on $\\mathbb{Q}^{\\times}$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

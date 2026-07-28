@@ -2,7 +2,7 @@
 id: cex-independent-set-that-does-not-span
 kind: counterexample
 title: "The standard unit families $\\{\\, e_i : i \\in \\mathbb{N} \\,\\}$ are linearly independent in $F^{\\mathbb{N}}$ but do not span it: the constant family $1_F$ is not a finite linear combination of them"
-status: draft
+status: published
 origin: session
 deps: [ex-basis-of-the-eventually-zero-families, def-linear-independence, def-linear-basis, def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-every-independent-set-extends-to-a-basis, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-function-space, def-linear-subspace, def-vector-space, def-field, def-countable, def-equinumerous, lem-pigeonhole, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "independent, infinite, and not spanning"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

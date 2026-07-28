@@ -2,7 +2,7 @@
 id: cor-bounded-derivative-implies-lipschitz
 kind: corollary
 title: "If $f$ is continuous on an interval $I$ and $|f'| \\le M$ at every interior point, then $|f(x) - f(y)| \\le M|x-y|$ for all $x,y \\in I$, so $f$ is Lipschitz with constant $M$ and uniformly continuous on $I$"
-status: draft
+status: published
 origin: session
 deps: [cor-mean-value-theorem, def-derivative, def-interval, def-continuity-real, def-uniform-continuity-real, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, lem-of-abs-value, def-interior-closure-boundary-r, def-neighbourhood-r, prop-of-multiply-inequalities, def-limit-point-r]
 justified_by: []
@@ -12,6 +12,7 @@ landmark: true
 short: "bounded derivative gives Lipschitz"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

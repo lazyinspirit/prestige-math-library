@@ -2,7 +2,7 @@
 id: fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set
 kind: false-statement
 title: "FALSE: a bounded function on $[a,b]$ is Riemann integrable exactly when its set of discontinuities is nowhere dense"
-status: draft
+status: published
 origin: session
 deps: [def-fat-cantor-set, thm-fat-cantor-set-has-positive-measure, def-nowhere-dense-meager, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-neighbourhood-r, def-measure-zero-and-content-zero, def-continuity-real, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "FALSE: integrable iff nowhere dense discontinuities"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

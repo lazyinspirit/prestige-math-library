@@ -2,7 +2,7 @@
 id: cex-nonnegative-integrable-with-zero-integral-need-not-vanish
 kind: counterexample
 title: "Thomae's function is nonnegative, Riemann integrable on $[0,1]$ with integral $0$, and nonzero at every rational, so a vanishing integral does not force a nonnegative integrand to vanish"
-status: draft
+status: published
 origin: session
 deps: [fs-nonnegative-integrable-with-zero-integral-vanishes, ex-thomae-is-riemann-integrable-with-integral-zero, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, def-darboux-integral, def-canonical-natural, lem-of-naturals-positive, lem-q-and-irrationals-dense-r, def-interval, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "zero integral, nonzero function"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

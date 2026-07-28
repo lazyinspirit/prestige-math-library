@@ -2,7 +2,7 @@
 id: thm-fermat-interior-extremum
 kind: theorem
 title: "Fermat's interior extremum theorem: if $f$ has a local extremum at a point $c$ interior to its domain and is differentiable at $c$, then $f'(c) = 0$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, def-local-extremum, lem-sign-preservation-near-a-limit, def-function-limit, def-neighbourhood-r, def-interior-closure-boundary-r, def-limit-point-r, lem-of-sign-rules, def-ordered-field]
 justified_by: []
@@ -12,6 +12,7 @@ landmark: true
 short: "Fermat's interior extremum theorem"
 proof_strategy: contradiction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

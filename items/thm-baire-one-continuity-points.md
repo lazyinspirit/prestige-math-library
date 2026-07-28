@@ -2,7 +2,7 @@
 id: thm-baire-one-continuity-points
 kind: theorem
 title: "Baire's theorem: a Baire class one function on a closed bounded interval $[a,b]$ is continuous at the points of a dense subset of $[a,b]$ that is the trace of a $G_\\delta$ set, so its set of discontinuities is meager"
-status: draft
+status: published
 origin: session
 deps: [def-baire-class-one, def-oscillation, thm-continuity-iff-oscillation-zero, lem-oscillation-superlevel-sets-are-closed, thm-discontinuity-set-is-f-sigma, lem-baire-category-in-a-closed-interval, def-nowhere-dense-meager, def-f-sigma-g-delta, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-continuity-preimage-characterisation, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, cor-archimedean-reciprocal, def-real-limit, def-sequence, lem-of-abs-value, def-max-min, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "Baire class one: continuity on a dense $G_\\delta$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

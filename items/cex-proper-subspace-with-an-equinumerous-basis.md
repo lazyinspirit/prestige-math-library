@@ -2,7 +2,7 @@
 id: cex-proper-subspace-with-an-equinumerous-basis
 kind: counterexample
 title: "Inside the space of eventually zero families, the linear subspace spanned by $\\{\\, e_i : i \\ge 1 \\,\\}$ is proper and has a basis equinumerous with a basis of the whole space, so \"equal dimension forces equality\" fails without finite dimension"
-status: draft
+status: published
 origin: session
 deps: [ex-basis-of-the-eventually-zero-families, thm-dimension-of-a-linear-subspace, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-standard-basis-of-f-n, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-injection-surjection-bijection, def-countable, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-nonzero-is-successor]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "a proper subspace with an equinumerous basis"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

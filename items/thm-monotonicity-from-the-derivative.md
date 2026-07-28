@@ -2,7 +2,7 @@
 id: thm-monotonicity-from-the-derivative
 kind: theorem
 title: "On an interval $I$, for $f$ continuous on $I$ and differentiable at every interior point: $f' \\ge 0$ throughout gives $f$ nondecreasing, $f' > 0$ gives $f$ increasing, $f' \\le 0$ and $f' < 0$ give the two decreasing forms; conversely a nondecreasing $f$ has $f' \\ge 0$ and a nonincreasing $f$ has $f' \\le 0$ wherever it is differentiable, and no strict converse is claimed"
-status: draft
+status: published
 origin: session
 deps: [cor-mean-value-theorem, def-derivative, def-monotone-function, def-interval, def-continuity-real, lem-function-limit-preserves-order, def-function-limit, def-interior-closure-boundary-r, lem-of-sign-rules, lem-of-inverse-positive, def-ordered-field, def-neighbourhood-r, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "sign of $f'$ and monotonicity"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

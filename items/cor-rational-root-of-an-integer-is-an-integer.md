@@ -2,7 +2,7 @@
 id: cor-rational-root-of-an-integer-is-an-integer
 kind: corollary
 title: "A rational root of $x^{k} = m$ is an integer: if $k \\ge 1$, $m \\in \\mathbb{Z}$, $x \\in \\mathbb{Q}$ and $x^{k}$ is the image of $m$, then $x$ is the image of an integer"
-status: draft
+status: published
 origin: session
 deps: [thm-euclids-lemma, lem-every-integer-above-one-has-a-prime-divisor, def-prime,
        def-coprime, cor-gcd-quotients-coprime, lem-coprime-criterion,
@@ -20,6 +20,7 @@ landmark: true
 short: "a rational $k$-th root of an integer is an integer"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

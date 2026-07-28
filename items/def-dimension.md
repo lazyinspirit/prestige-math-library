@@ -2,7 +2,7 @@
 id: def-dimension
 kind: definition
 title: "Finite-dimensional vector space, and its dimension $\\dim_F V$; infinite-dimensional means having no finite basis"
-status: draft
+status: published
 origin: session
 deps: [thm-any-two-finite-bases-have-the-same-size, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-restriction-of-scalars, def-subfield, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-finite-dimensional, def-infinite-dimensional]
 landmark: true
 short: "$\\dim_F V$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

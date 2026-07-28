@@ -2,7 +2,7 @@
 id: cex-indicator-of-a-fat-cantor-set-is-not-integrable
 kind: counterexample
 title: "The indicator of the Smith-Volterra-Cantor set is discontinuous exactly on a nowhere dense set, and is not Riemann integrable, because that set does not have measure zero"
-status: draft
+status: published
 origin: session
 deps: [fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set, thm-lebesgue-criterion, def-fat-cantor-set, thm-fat-cantor-set-has-positive-measure, def-nowhere-dense-meager, def-interior-closure-boundary-r, def-measure-zero-and-content-zero, def-continuity-real, def-classification-of-discontinuities, def-open-and-closed-in-r, def-neighbourhood-r, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-interval, def-bounded-set, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "fat Cantor indicator not integrable"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-derivative-of-the-nth-root-by-the-inverse-rule
 kind: example
 title: "For a natural $n \\ge 1$, the derivative of $x \\mapsto x^{1/n}$ on $(0,\\infty)$ is $\\frac{1}{\\iota(n)}x^{1/n - 1}$, obtained from the inverse rule applied to $x \\mapsto x^{n}$; in particular $(\\sqrt{x})' = 1/(\\iota(2)\\sqrt{x})$"
-status: draft
+status: published
 origin: session
 deps: [thm-derivative-of-an-inverse, lem-derivative-of-a-power, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, def-integer-power, def-derivative, thm-continuous-inverse, def-interval, def-canonical-natural, lem-of-naturals-positive, lem-power-monotone, thm-algebra-of-continuous-functions, def-continuity-real, def-injection-surjection-bijection, def-limit-point-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "derivative of the $n$-th root"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

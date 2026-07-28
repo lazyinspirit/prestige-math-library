@@ -2,7 +2,7 @@
 id: fs-bounded-implies-riemann-integrable
 kind: false-statement
 title: "FALSE: every bounded function on $[a,b]$ is Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-sums, def-darboux-integral, def-partition-and-refinement, def-dirichlet-and-thomae-functions, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, def-bounded-set, lem-finite-sum-laws, def-finite-sum, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "FALSE: bounded $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: thm-every-independent-set-extends-to-a-basis
 kind: theorem
 title: "Zorn's lemma gives a basis between any linearly independent set and any spanning set containing it: if $L \\subseteq S \\subseteq V$ with $L$ independent and $\\operatorname{span}(S) = V$, there is a basis $B$ of $V$ with $L \\subseteq B \\subseteq S$"
-status: draft
+status: published
 origin: session
 deps: [thm-zorn, def-axiom-of-choice, def-partial-order, def-chain, def-upper-bound, def-maximal-element, lem-independence-has-finite-character, lem-adjoining-a-vector-outside-the-span, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "independent set extends to a basis inside a spanning set"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

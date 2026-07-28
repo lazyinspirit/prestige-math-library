@@ -2,7 +2,7 @@
 id: lem-adjoining-a-vector-outside-the-span
 kind: lemma
 title: "If $S \\subseteq V$ is linearly independent and $w \\notin \\operatorname{span}(S)$ then $S \\cup \\{w\\}$ is linearly independent and $\\operatorname{span}(S) \\subsetneq \\operatorname{span}(S \\cup \\{w\\})$; and if $w \\in \\operatorname{span}(S)$ then $\\operatorname{span}(S \\cup \\{w\\}) = \\operatorname{span}(S)$"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-independent-list-is-injective, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-linear-subspace, def-sum-of-linear-subspaces, def-monoid-finite-product, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "adjoining a vector outside the span"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

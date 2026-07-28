@@ -2,7 +2,7 @@
 id: thm-dimension-formula
 kind: theorem
 title: "The dimension formula: for finite-dimensional linear subspaces $U$ and $W$ of $V$, the subspaces $U + W$ and $U \\cap W$ are finite-dimensional and $\\dim_F(U+W) + \\dim_F(U \\cap W) = \\dim_F U + \\dim_F W$"
-status: draft
+status: published
 origin: session
 deps: [thm-dimension-of-a-linear-subspace, def-dimension, thm-any-two-finite-bases-have-the-same-size, cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-unique-coordinates-with-respect-to-an-ordered-basis, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-independent-list-is-injective, def-linear-basis, def-linear-independence, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, lem-intersection-of-linear-subspaces, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-nat-addition, lem-nat-add-associative, lem-nat-add-commutative, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "dimension formula for $U + W$"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

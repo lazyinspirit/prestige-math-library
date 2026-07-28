@@ -2,7 +2,7 @@
 id: lem-independent-list-is-injective
 kind: lemma
 title: "Finite sums re-indexed along an injection, with a zero term deleted, and concatenated; and the closure properties of linear independence: an independent list is injective and never $0_V$, its sublists are independent, a list is independent exactly when it is injective with linearly independent image, and every subset of a linearly independent set is linearly independent"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, def-linear-combination-and-span, def-monoid-finite-product, def-sum-of-linear-subspaces, thm-generalised-associativity, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, lem-nat-trichotomy, lem-nat-nonzero-is-successor, lem-nat-discrete, lem-nat-add-cancellative, lem-nat-add-commutative, lem-nat-order-add-compatible, thm-nat-linear-order, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "re-indexing finite sums; independence is hereditary"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

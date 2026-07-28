@@ -2,7 +2,7 @@
 id: thm-monotone-one-sided-limits-exist
 kind: theorem
 title: "One-sided limits of a monotone function always exist: for $f$ nondecreasing on an interval $I$ and $c \\in I$, $\\lim_{x \\to c^{-}} f(x) = \\sup\\{f(x) : x \\in I,\\ x < c\\}$ whenever $I$ has points below $c$, $\\lim_{x \\to c^{+}} f(x) = \\inf\\{f(x) : x \\in I,\\ x > c\\}$ whenever it has points above $c$, and these satisfy $\\lim_{x \\to c^{-}} f(x) \\le f(c) \\le \\lim_{x \\to c^{+}} f(x)$"
-status: draft
+status: published
 origin: session
 deps: [def-monotone-function, def-one-sided-limits, def-function-limit, lem-function-limit-unique, def-limit-point-r, def-interval, lem-sup-epsilon, lem-inf-epsilon, def-bounded-set, def-infimum, thm-infimum-property, def-complete-ordered-field, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "monotone: one-sided limits exist"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

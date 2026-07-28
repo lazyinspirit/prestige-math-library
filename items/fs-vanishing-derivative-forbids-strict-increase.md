@@ -2,7 +2,7 @@
 id: fs-vanishing-derivative-forbids-strict-increase
 kind: false-statement
 title: "FALSE: if $f'(c) = 0$ then $f$ is not increasing on any interval containing $c$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, def-monotone-function, lem-derivative-of-a-power, thm-monotonicity-from-the-derivative, def-integer-power, lem-power-monotone, def-interval, lem-of-sign-rules, thm-algebra-of-continuous-functions, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, def-neighbourhood-r, def-interior-closure-boundary-r, def-ordered-field, def-limit-point-r]
 justified_by: []
@@ -12,6 +12,7 @@ landmark: false
 short: "FALSE: $f'(c)=0$ forbids strict increase"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

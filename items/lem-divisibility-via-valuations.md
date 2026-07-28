@@ -2,7 +2,7 @@
 id: lem-divisibility-via-valuations
 kind: lemma
 title: "For positive integers $a$ and $b$: $a \\mid b$ if and only if $v_p(a) \\le v_p(b)$ for every prime $p$"
-status: draft
+status: published
 origin: session
 deps: [lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
        lem-every-integer-above-one-has-a-prime-divisor, def-prime, thm-strong-induction,
@@ -16,6 +16,7 @@ landmark: false
 short: "$a \\mid b$ iff $v_p(a) \\le v_p(b)$ for all $p$"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

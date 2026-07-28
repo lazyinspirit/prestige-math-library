@@ -1,7 +1,7 @@
 ---
 page: linear-independence-bases-and-dimension
 title: "Linear Independence, Bases and Dimension"
-status: draft
+status: published
 items: [def-linear-independence, lem-independent-list-is-injective,
         lem-dependent-iff-a-vector-lies-in-the-span-of-the-others,
         lem-independence-has-finite-character,

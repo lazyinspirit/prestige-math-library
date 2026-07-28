@@ -2,7 +2,7 @@
 id: thm-gcd-and-lcm-from-valuations
 kind: theorem
 title: "For positive integers $a$ and $b$ and every prime $p$: $v_p(\\gcd(a,b)) = \\min\\{v_p(a), v_p(b)\\}$ and $v_p(\\operatorname{lcm}(a,b)) = \\max\\{v_p(a), v_p(b)\\}$; so the exponent-wise greatest common divisor is the $\\gcd$ of the divisibility page and not a second notion"
-status: draft
+status: published
 origin: session
 deps: [lem-divisibility-via-valuations, lem-p-adic-valuation-additive,
        lem-p-adic-valuation-basic, def-p-adic-valuation, def-common-divisor-and-gcd,
@@ -19,6 +19,7 @@ landmark: true
 short: "$v_p(\\gcd) = \\min$, $v_p(\\operatorname{lcm}) = \\max$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: ex-derivatives-of-polynomials-computed
 kind: example
 title: "Worked derivatives from the algebra of derivatives and the power rule: $(3x^{4} - 5x + 2)' = 12x^{3} - 5$, and the quotient rule applied to $(x^{2}+1)/(x-1)$ on $\\mathbb{R} \\setminus \\{1\\}$"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-integer-power, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "worked polynomial and rational derivatives"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

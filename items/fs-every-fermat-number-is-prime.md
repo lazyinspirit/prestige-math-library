@@ -2,7 +2,7 @@
 id: fs-every-fermat-number-is-prime
 kind: false-statement
 title: "FALSE: every Fermat number $2^{2^{n}} + 1$ is prime"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-group-power, lem-group-power-laws, lem-units-of-z,
        def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic,
@@ -16,6 +16,7 @@ landmark: false
 short: "FALSE: every Fermat number is prime"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

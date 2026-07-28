@@ -2,7 +2,7 @@
 id: lem-basis-iff-maximal-independent-iff-minimal-spanning
 kind: lemma
 title: "For $B \\subseteq V$ the following are equivalent: $B$ is a basis; $B$ is a maximal linearly independent subset of $V$; $B$ is a minimal spanning subset of $V$ — maximality and minimality being in the inclusion order"
-status: draft
+status: published
 origin: session
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-adjoining-a-vector-outside-the-span, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-partial-order, def-maximal-element, def-vector-space, def-field]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "basis = maximal independent = minimal spanning"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

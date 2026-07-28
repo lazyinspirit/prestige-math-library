@@ -2,7 +2,7 @@
 id: fs-mean-value-theorem-needs-no-continuity-at-the-endpoints
 kind: false-statement
 title: "FALSE: differentiability at every point of $(a,b)$ alone yields a $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$"
-status: draft
+status: published
 origin: session
 deps: [cor-mean-value-theorem, thm-rolle, def-derivative, def-continuity-real, def-interval, def-function-limit, def-limit-point-r, lem-of-abs-value, cor-of-one-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "FALSE: MVT without endpoint continuity"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

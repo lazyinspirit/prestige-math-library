@@ -2,7 +2,7 @@
 id: lem-prime-not-dividing-is-coprime
 kind: lemma
 title: "For a prime $p$ and any integer $a$, $\\gcd(p,a)$ is $p$ when $p \\mid a$ and $1$ otherwise; so $p \\nmid a$ makes $p$ and $a$ coprime"
-status: draft
+status: published
 origin: session
 deps: [def-prime, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd,
        lem-gcd-basic-values, def-coprime, def-divides-in-z, lem-divisibility-basic,
@@ -14,6 +14,7 @@ landmark: false
 short: "$p \\nmid a \\Rightarrow \\gcd(p,a) = 1$"
 proof_strategy: cases
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

@@ -2,7 +2,7 @@
 id: rem-derivative-conventions
 kind: remark
 title: "What is fixed here and what is not: the derivative is taken at a point of the domain that is also a limit point of it, one-sided derivatives and derivatives of order above one are not introduced at this point in the reading order, and $f'(c)$ and $\\frac{df}{dx}(c)$ name the same real number"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, def-function-limit, def-limit-point-r, def-one-sided-limits, def-interval, thm-caratheodory-characterisation, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, thm-chain-rule, thm-derivative-of-an-inverse, thm-derivative-linear-approximation-form, lem-derivative-of-a-power, thm-fermat-interior-extremum, cor-bounded-derivative-implies-lipschitz]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: []
 landmark: false
 short: "conventions for the derivative"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

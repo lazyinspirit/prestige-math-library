@@ -2,7 +2,7 @@
 id: lem-p-adic-valuation-additive
 kind: lemma
 title: "$v_p(ab) = v_p(a) + v_p(b)$ for nonzero integers $a, b$, and $v_p(a+b) \\ge \\min\\{v_p(a), v_p(b)\\}$ whenever $a$, $b$ and $a+b$ are all nonzero"
-status: draft
+status: published
 origin: session
 deps: [def-p-adic-valuation, lem-p-adic-valuation-basic, thm-euclids-lemma, def-prime,
        def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z,
@@ -17,6 +17,7 @@ landmark: false
 short: "$v_p(ab) = v_p(a) + v_p(b)$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

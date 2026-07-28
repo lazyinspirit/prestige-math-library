@@ -2,7 +2,7 @@
 id: def-monotone-function
 kind: definition
 title: "Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\\mathbb{R}$, with the dictionary to monotone sequences"
-status: draft
+status: published
 origin: session
 deps: [def-complete-ordered-field, def-real-order, def-interval, def-monotone-sequence, def-sequence, def-ordered-field, def-injection-surjection-bijection]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-monotone-real-function, def-strictly-monotone]
 landmark: true
 short: "monotone real function"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

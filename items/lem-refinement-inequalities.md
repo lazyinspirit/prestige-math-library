@@ -2,7 +2,7 @@
 id: lem-refinement-inequalities
 kind: lemma
 title: "Refining a partition raises the lower Darboux sum and lowers the upper one, and every lower sum is at most every upper sum: $L(f,P) \\le L(f,P') \\le U(f,P') \\le U(f,P)$ when $P'$ refines $P$, and $L(f,P) \\le U(f,Q)$ for arbitrary partitions $P$ and $Q$; moreover the two changes are at most $2M(n' - n)\\|P\\|$"
-status: draft
+status: published
 origin: session
 deps: [def-partition-and-refinement, def-darboux-sums, lem-sup-monotone, lem-finite-sum-laws, def-finite-sum, def-infimum, thm-infimum-property, def-bounded-set, thm-induction-principle, def-canonical-natural, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-interval]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "refinement inequalities"
 proof_strategy: induction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

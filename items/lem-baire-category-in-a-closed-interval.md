@@ -2,7 +2,7 @@
 id: lem-baire-category-in-a-closed-interval
 kind: lemma
 title: "Baire category inside a closed bounded interval: if $[a,b]$ with $a < b$ is covered by a sequence of closed sets, then one of them contains a nondegenerate closed subinterval of $[a,b]$; no choice principle is used"
-status: draft
+status: published
 origin: session
 deps: [def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-baire-category-r, def-limit-point-r, def-interval, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "Baire category inside $[a,b]$"
 proof_strategy: contradiction
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

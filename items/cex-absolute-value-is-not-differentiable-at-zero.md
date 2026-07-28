@@ -2,7 +2,7 @@
 id: cex-absolute-value-is-not-differentiable-at-zero
 kind: counterexample
 title: "$x \\mapsto |x|$ is continuous everywhere and not differentiable at $0$: the difference quotient equals $1$ on the right and $-1$ on the left, so the two one-sided limits differ"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, cor-differentiable-implies-continuous, def-one-sided-limits, thm-two-sided-limit-iff-both-one-sided, lem-of-abs-value, thm-algebra-of-continuous-functions, def-continuity-real, def-function-limit, def-limit-point-r, def-interval, lem-function-limit-unique, cor-of-one-positive, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "$|x|$ is not differentiable at $0$"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

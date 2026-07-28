@@ -2,7 +2,7 @@
 id: def-semicontinuity
 kind: definition
 title: "Upper and lower semicontinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$"
-status: draft
+status: published
 origin: session
 deps: [def-continuity-real, def-neighbourhood-r, def-complete-ordered-field, lem-of-abs-value]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-upper-semicontinuous, def-lower-semicontinuous]
 landmark: true
 short: "upper and lower semicontinuity"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

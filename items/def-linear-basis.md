@@ -2,7 +2,7 @@
 id: def-linear-basis
 kind: definition
 title: "Basis of a vector space: a linearly independent spanning subset; and ordered basis: an injective finite list whose image is a basis"
-status: draft
+status: published
 origin: session
 deps: [def-linear-independence, lem-independent-list-is-injective, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-linear-subspace, def-monoid-finite-product, def-vector-space, def-field, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,7 @@ aliases: [def-hamel-basis, def-ordered-basis]
 landmark: true
 short: "basis; ordered basis"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

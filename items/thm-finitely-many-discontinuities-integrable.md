@@ -2,7 +2,7 @@
 id: thm-finitely-many-discontinuities-integrable
 kind: theorem
 title: "A bounded function on $[a,b]$ that is continuous except at finitely many points is Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-riemann-criterion, def-continuity-real, def-classification-of-discontinuities, def-partition-and-refinement, def-darboux-sums, def-darboux-integral, lem-finite-sum-laws, def-finite-sum, def-bounded-set, thm-heine-cantor-r, def-uniform-continuity-real, thm-heine-borel-characterisation-r, def-open-cover-r, def-open-and-closed-in-r, thm-open-set-algebra-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, thm-well-ordering-principle, thm-induction-principle, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-interval, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "finitely many discontinuities $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

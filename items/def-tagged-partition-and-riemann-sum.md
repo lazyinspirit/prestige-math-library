@@ -2,7 +2,7 @@
 id: def-tagged-partition-and-riemann-sum
 kind: definition
 title: "Tagged partitions of $[a,b]$, with a tag $\\xi_i$ in each subinterval, and the Riemann sum $S(f,P,\\xi) = \\sum_i f(\\xi_i)\\,\\Delta_i$"
-status: draft
+status: published
 origin: session
 deps: [def-partition-and-refinement, def-finite-sum, lem-finite-sum-laws, def-interval, def-complete-ordered-field, def-ordered-field, def-sequence, def-darboux-sums, def-bounded-set]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-riemann-sum]
 landmark: true
 short: "tagged partition, Riemann sum"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

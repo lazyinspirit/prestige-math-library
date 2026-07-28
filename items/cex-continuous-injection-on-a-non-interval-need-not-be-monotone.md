@@ -2,7 +2,7 @@
 id: cex-continuous-injection-on-a-non-interval-need-not-be-monotone
 kind: counterexample
 title: "A continuous injection on $[0,1] \\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem"
-status: draft
+status: published
 origin: session
 deps: [thm-continuous-injection-on-an-interval-is-strictly-monotone, thm-continuous-inverse, def-monotone-function, def-continuity-real, thm-algebra-of-continuous-functions, def-interval, def-injection-surjection-bijection, def-neighbourhood-r]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: false
 short: "continuous injection, not monotone"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

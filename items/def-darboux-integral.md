@@ -2,7 +2,7 @@
 id: def-darboux-integral
 kind: definition
 title: "The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-sums, lem-refinement-inequalities, def-partition-and-refinement, def-bounded-set, def-complete-ordered-field, def-ordered-field, def-infimum, thm-infimum-property, lem-sup-unique, def-interval]
 justified_by: []
@@ -10,6 +10,7 @@ aliases: [def-riemann-integrable, def-lower-and-upper-integral]
 landmark: true
 short: "Darboux integral $\\int_a^b f$"
 verification:
+  audited: 2026-07-28
   precheck: n/a
   judge:
     model: z-ai/glm-5.2

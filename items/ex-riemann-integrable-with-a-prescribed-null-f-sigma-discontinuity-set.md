@@ -2,7 +2,7 @@
 id: ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set
 kind: example
 title: "For every $F_\\sigma$ subset $E$ of $[0,1]$ of measure zero there is a bounded Riemann integrable function on $[0,1]$ whose set of discontinuities is exactly $E$"
-status: draft
+status: published
 origin: session
 deps: [thm-lebesgue-criterion, def-f-sigma-g-delta, def-measure-zero-and-content-zero, lem-nondegenerate-interval-is-not-null, def-continuity-real, def-classification-of-discontinuities, def-open-and-closed-in-r, def-neighbourhood-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-integer-power, lem-power-monotone, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, def-sequence, def-bounded-set, def-darboux-integral, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "prescribed null $F_\\sigma$ discontinuity set"
 proof_strategy: constructive
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2

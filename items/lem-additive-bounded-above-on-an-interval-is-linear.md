@@ -2,7 +2,7 @@
 id: lem-additive-bounded-above-on-an-interval-is-linear
 kind: lemma
 title: "If an additive $f : \\mathbb{R} \\to \\mathbb{R}$ is bounded above on some nondegenerate interval, then $f(x) = f(1)\\,x$ for every real $x$"
-status: draft
+status: published
 origin: session
 deps: [def-additive-function, lem-additive-is-q-linear, def-interval, def-bounded-set, lem-rat-embeds-dense, cor-archimedean-reciprocal, thm-of-archimedean, def-complete-ordered-field, lem-of-abs-value, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
@@ -11,6 +11,7 @@ landmark: true
 short: "bounded above on an interval implies linear"
 proof_strategy: direct
 verification:
+  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2
