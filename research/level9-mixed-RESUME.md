@@ -94,10 +94,25 @@ it weakens a claim the library could actually make.
 ## Remaining work
 
 1. Round 3 (131/132, 137/138) once 129 lands.
-2. **Re-judge rounds 1-2 with full `--batch` context.** Round 1's batch context
-   was largely INERT: four of five level slugs had no page file under `library/`
-   at judge time, so they contributed nothing and `judge.mts` warned on stderr
-   every call. Batch context only reaches pages already composed.
+2. ~~Re-judge rounds 1-2 with full `--batch` context.~~ **CANCELLED by the owner,
+   2026-07-28: "Don't rejudge rounds 1 and rounds 2 again. We'll audit everything
+   at step 10a anyway."** Do not re-add this.
+
+   The reasoning is sound and worth keeping: the judge's measured precision on
+   this corpus is 21-24%, step 10a is a full-level mathematical-accuracy audit by
+   Alpha-n, and re-judging risks the treadmill documented in
+   `parallel-authoring-protocol` — a rejection is not evidence of a defect, and
+   the objection rotates between runs.
+
+   **What this costs, recorded so nobody later claims otherwise:** rounds 1 and 2
+   were judged with the `--batch` block INERT. Four of five level slugs had no
+   page file under `library/` at judge time, so they contributed nothing and
+   `judge.mts` warned on stderr on every call — the round-2 agent reported the
+   warning on all 44 of its invocations. So **the A/B-pair batch-context change
+   was never actually exercised on orders 24/25, 70/71 or 129/130**, and any claim
+   about its effect on those pages is unmeasured rather than measured. Round 3 is
+   the first round to get live batch context. Step 10a is now the only tier that
+   reads those three pairs against their siblings.
 3. Step 8 for **batch 1** (the real-analysis pages), once they are authored.
    Batch 2's step 8 is in flight; see above.
 4. Step 9 seam audit and step 10a level audit — **resume Alpha-9**, agent
