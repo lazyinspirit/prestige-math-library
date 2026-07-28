@@ -339,7 +339,7 @@ function blocksFor(page: PageInfo, mode: "full" | "quoted"): string[] {
   return out;
 }
 
-function pageContext(): string {
+function pageContext(itemBody: string): string {
   if (!withContext || !ownPage) return "";
   let out = "";
 
@@ -380,7 +380,33 @@ function pageContext(): string {
     const kept: string[] = [];
     const dropped: string[] = [];
     let used = 0;
-    for (const p of batchPages) {
+
+    // RELEVANCE ORDER, not list order (fixed 2026-07-28, measured defect).
+    //
+    // This loop used to walk `batchPages` in the order the --batch flag named
+    // them and drop whatever no longer fit. So the pages that survived were the
+    // ones typed first, which has nothing to do with the item being judged.
+    //
+    // Measured on level 9 (mixed): every item of `the-derivative-and-mean-value-
+    // theorems` was judged with `primes-and-the-fundamental-theorem-of-arithmetic`
+    // and `linear-independence-bases-and-dimension` in context, and with
+    // `monotone-functions-and-discontinuities` DROPPED — the one page it actually
+    // cites, and the only one whose statements it could get wrong. The batch
+    // block was doing worse than nothing there: it spent the whole budget on two
+    // pages about primes and vector spaces while judging a page about
+    // derivatives, and declared the elision of the page that mattered.
+    //
+    // So: pages this item actually cites go first, and the cut falls on pages it
+    // does not cite. Ties keep the caller's order, which stays deterministic.
+    const cited = new Set<string>();
+    for (const m of itemBody.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) cited.add(m[1].trim());
+    const relevance = (p: PageInfo) => (p.ids.some((i) => cited.has(i)) ? 0 : 1);
+    const ordered = batchPages
+      .map((p, i) => ({ p, i }))
+      .sort((a, b) => relevance(a.p) - relevance(b.p) || a.i - b.i)
+      .map(({ p }) => p);
+
+    for (const p of ordered) {
       const blocks = blocksFor(p, "quoted");
       if (!blocks.length) continue;
       const text = `#### page: ${p.title}\n\n` + blocks.join("\n\n");
@@ -534,7 +560,7 @@ const sys = refuterSys;
 // --dump-prompt prints the exact system + user message and exits, so the context
 // assembly can be inspected without spending a call.
 if (bools.has("dump-prompt")) {
-  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext();
+  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(body);
   console.log("========== SYSTEM ==========\n" + sys + "\n\n========== USER ==========\n" + user);
   console.error(`\n[dump-prompt] system ${sys.length} chars, user ${user.length} chars`);
   process.exit(0);
@@ -558,7 +584,7 @@ const payload = {
   max_tokens: 40000,
   messages: [
     { role: "system", content: sys },
-    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext() },
+    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(body) },
   ],
 };
 

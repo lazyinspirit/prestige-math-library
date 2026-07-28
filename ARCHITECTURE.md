@@ -268,6 +268,26 @@ gets and what the renderer publishes, so judging an A-page theorem without its
 `-examples` page left both halves unchecked against each other. `--batch` takes
 A-page slugs and pulls in each `-examples` companion itself.
 
+**The batch block is cut in RELEVANCE order, and getting this wrong made it worse
+than nothing (fixed 2026-07-28).** The batch is capped at `BATCH_BUDGET` 200k
+characters, because an uncapped one pushed the request into the gateway timeout
+this file's history already records. The cut originally fell in the order
+`--batch` named the slugs, which has nothing to do with the item being judged.
+
+Measured on level 9 (mixed): every item of `the-derivative-and-mean-value-theorems`
+was judged with the primes and linear-algebra pages in context and with
+`monotone-functions-and-discontinuities` **dropped** — the one page it cites, and
+the only one whose statements it could restate wrongly. The block spent its whole
+budget on primes and vector spaces while judging derivatives, and then declared
+the elision of the page that mattered. The authoring agent reported this; no gate
+could have.
+
+Pages the item actually cites now sort first, so the cut falls on pages it does
+not cite; ties keep the caller's order. Verified by re-running the same call on
+`thm-derivative-of-an-inverse`: the omitted set flipped from
+`{monotone-functions…, riemann-integral}` to `{primes…, riemann-integral}`, i.e.
+the cited page is retained and the uncited ones are dropped.
+
 **Injection-tested before use, and the test is the point.** A context change gets
 the same treatment as a model change (see §"never adopt a judge model", and the
 `tools/judge.mts` header for the run). The pair block caught a Remark that was
