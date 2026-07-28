@@ -440,6 +440,20 @@ State this honestly rather than implying coverage.
   sweep finds it — and a repair confirmed by reading the diff can leave the same
   falsehood elsewhere in the same file, which happened at level 8.
 - **`citecheck` is a heuristic**, not a proof of correct attribution.
+- **No reader at any tier has read the PROOFS of cited dependencies.** Readers
+  open a cited item's Statement and check the `[L#]` restates it faithfully,
+  which catches the dominant defect class and nothing about whether the cited
+  proof is itself sound. Measured 2026-07-28, and the shape is better than it
+  sounds: the dep graph is a power law, so this is a **~40-item problem, not a
+  1204-item one**. Of the top 100 items by consumer count, 60 are definitions
+  with no proof to read; the proof-bearing 40 total **342 proof steps** (median
+  9, max 20). The top 20 carry 28% of all 11,705 dep edges and the top 100 carry
+  64%; `def-natural-numbers` alone has 945 transitive consumers.
+  **If this is ever closed, rank by blast radius and not by level** — auditing
+  per level re-reads `lem-of-abs-value` (233 consumers, 9 steps) every level and
+  still never finishes it, whereas reading it once covers every future level.
+  Key it to a content hash so a repair lapses the read. Do NOT point the judge
+  at it. Owner deferred 2026-07-28; recorded so the measurement is not redone.
 - **No page has ever been visually rendered.** `rendercheck` closes part of this.
 - **The Fable audit** required by `CLAUDE.md` before publishing mathematical
   content has not been satisfied at level 8 or 9; step 9 is the nearest
