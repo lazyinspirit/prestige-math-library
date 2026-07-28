@@ -128,6 +128,24 @@ them as a checklist against your own output:
 Owner instruction, binding on you:
 
 - **Non-negotiable:** mathematical accuracy, logical validity, correct citation.
+
+**Three prose rules (owner, 2026-07-28), gated by `tools/prosecheck.mjs`.** Every
+defect this library has shipped for seven consecutive builds was in prose, and
+almost none was mathematical — they were claims *about the library*, which no
+author can verify while writing:
+
+1. **No count in prose.** Not "seven items", not "half of this page", not "three
+   things take their shape from this". If a count matters the reader can count.
+   Every count written here has eventually been wrong.
+2. **No positional claim that is not derived from the spec.** No "a later page",
+   no "earlier". Name the page id, or say it is not built. "Later" was wrong
+   seven times in one build, always for a page at a *lower* order.
+3. **A scope denial is scoped to THIS PAGE'S DECLARED PREREQUISITES, never to
+   "the library".** One build falsified its own claim: a page said there was no
+   natural-number exponentiation while the other batch minted it at order 20.
+
+Run `node tools/prosecheck.mjs <your files> --warnings` before reporting.
+
 - **Explicitly acceptable, spend no effort:** minor citational quirks; logical
   gaps between steps that a human closes within 30 SECONDS; any other non-fatal
   quirk; imperfection at the level of the letter.

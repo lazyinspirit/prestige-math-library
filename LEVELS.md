@@ -437,6 +437,14 @@ Repairs are **measured from disk**, never counted from an agent's report.
 ## Triage — the standing rule, binding on every actor including me
 
 - **Non-negotiable:** mathematical accuracy, logical validity, correct citation.
+- **Three prose rules (owner, 2026-07-28), enforced by `prosecheck.mjs`.**
+  **(1) No count in prose** — not "seven items", not "half of this page". Every
+  count written here has eventually been wrong, and nobody re-counts a count.
+  **(2) No positional claim not derived from the spec** — name the page id or say
+  "not built"; "a later page" was wrong seven times in one build. **(3) A scope
+  denial is scoped to THIS PAGE'S DECLARED PREREQUISITES, never to "the
+  library"** — the corpus-wide form is a claim no author can warrant, and one
+  build falsified its own.
 - **Explicitly acceptable, spend no effort:** minor citational quirks; logical
   gaps a competent reader closes **within 30 seconds**; other non-fatal quirks;
   imperfection at the level of the letter.
@@ -446,7 +454,7 @@ self-contained, accurate* library, not a perfect one. Prefer one reusable lemma
 over a repeated inline argument (`cor-archimedean-reciprocal` retired a gap in 24
 items). **Do not trim landmarks.**
 
-## The eight gates — the orchestrator runs the authoritative pass
+## The nine gates — the orchestrator runs the authoritative pass
 
 | gate | catches |
 |---|---|
@@ -458,6 +466,7 @@ items). **Do not trim landmarks.**
 | `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `unreadable` |
 | `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>30 items), `redundant-prereq` (19 total) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
+| `prosecheck.mjs` | **the prose defect class**, which is where 100% of this library's found defects live. ERROR `position-contradiction` (a "later/earlier page" claim contradicting `plan-spec` order — decidable, no judgement). WARNINGS `count-in-prose`, `count-of-this-page`, `library-scope-denial`. `--warnings` lists them, `--strict` fails on them |
 
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).

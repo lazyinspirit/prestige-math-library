@@ -15,7 +15,7 @@ adding or changing a mechanism.
 the actual text.
 
 **Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
-how a dependency level is built (actors, artifacts, the eight gates, the
+how a dependency level is built (actors, artifacts, the nine gates, the
 self-contained-scope rule, the twice-touched escalation). Read it before
 starting or resuming a level.
 

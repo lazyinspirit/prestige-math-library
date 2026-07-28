@@ -25,7 +25,7 @@ That is the design claim, and it is measured, not assumed.
         │  validate-plan + depsource gate it BEFORE authoring
         ▼
   CONTENT                 items/*.md, library/*/*.md
-        │  6 content gates + 4 reading tiers + 1 judge
+        │  7 content gates + 4 reading tiers + 1 judge
         ▼
   RENDERED PAGE           app repo, read-only bind mount
 ```
@@ -65,7 +65,7 @@ remark would inject a false logical edge into acyclicity, the page prerequisite
 closure and the flowchart — `def-axiom-of-choice` does not *depend* on Cohen's
 theorem.
 
-## 3. The eight gates
+## 3. The nine gates
 
 Run from the repo root. The orchestrator runs the authoritative pass **after**
 every agent in a stage finishes; no stage advances on an agent's report.
@@ -189,7 +189,41 @@ green), `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`,
 **`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX, plus
 `unreadable` for a file it cannot open.
 
-### 3.7 `validate-plan.mjs` — the scaffold, before authoring
+### 3.7 `prosecheck.mjs` — the prose defect class (owner approved 2026-07-28)
+**Every defect this library has shipped for seven consecutive builds was in
+prose**, and almost none was mathematical: they were claims *about the library* —
+counts, positions, what the corpus does not contain. An author cannot verify any
+of those while writing, because each is a claim about a file they are not looking
+at. That is why they survive authoring and cost a human reading tier to find.
+
+Three rules, gated: **no count in prose**; **no positional claim not derived from
+the spec**; **scope denials scoped to this page's declared prerequisites, never to
+"the library"**.
+
+**Severity is split on certainty.** The only ERROR is `position-contradiction`: a
+"later/earlier page" phrase whose linked target's page order contradicts it —
+decidable from `plan-spec.json`, no judgement. Warnings are the heuristics
+(`count-in-prose`, `count-of-this-page`, `library-scope-denial`), modelled on
+`citecheck`, which is warnings-only for the same reason. **Never silence a warning
+by making a true sentence vaguer.**
+
+**Its own false-positive history is the instructive part, and is why the ERROR is
+narrow.** The first draft fired whenever a direction word shared a *sentence* with
+any wikilink and produced **240 "errors" on a corpus that had just been read end
+to end** — i.e. almost all false. Two causes, both now handled: "above"/"below"
+overwhelmingly mean *within this item*, not a page position, so only
+"later"/"earlier" count; and the word must attach to the link, so the phrase must
+name a page or the reading order and the link must fall inside the same sentence.
+`"later on this page"` is excluded outright. After tightening: **0 errors on the
+live corpus, and an injection of the real historical defect** (general compactness
+at order 255 called "a later page" from 283) **is caught**, with the control clean
+and the file byte-identical after restore.
+
+Current corpus: 0 errors, ~670 warnings — dominated by real counts in prose such
+as "three false statements" and "three theorems", which are *true today* and
+exactly the class the rule bans.
+
+### 3.8 `validate-plan.mjs` — the scaffold, before authoring
 **Takes the spec path as an argument** — `node tools/validate-plan.mjs
 research/plan-spec.json`. Run bare it prints usage and exits non-zero, which
 reads as a gate failure and is not one.
@@ -203,7 +237,7 @@ on a B/examples page — B pages are leaves), `b-requires-a`, `dup-id`, `prefix`
 stand in the spec as of 2026-07-27 and are kept deliberately where the direct
 edge is mathematically real). 19 codes total.
 
-### 3.8 `depsource.mjs` — where each dep actually lives
+### 3.9 `depsource.mjs` — where each dep actually lives
 Per dep: `published` / `planned-earlier` / `draft-page` / `homeless` /
 `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is
 the forward-reference report.
@@ -501,7 +535,7 @@ State this honestly rather than implying coverage.
   `validate-plan` owns the check and reads `research/plan-spec.json`;
   `depcheck` is the only gate that reads authored content and contains **zero**
   b-leaf checks (verified 2026-07-27). An authoring agent that adds a `deps` edge
-  onto a B-page item after the splice is therefore invisible to all eight gates.
+  onto a B-page item after the splice is therefore invisible to all nine gates.
   Note the rule's exact shape before "fixing" a report of one:
   `validate-plan.mjs` guards with `dp.kind === 'B' && dp.id !== p.id`, so an item
   citing an **earlier item on its own B page is legal** — ordinary intra-page
