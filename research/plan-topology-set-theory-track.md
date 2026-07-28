@@ -213,24 +213,24 @@ WORKFLOW definition-justification rule.
 | # | page | the definition | what must be proved |
 |---|---|---|---|
 | 1 | 185 (spec **245**) | ordinal $\alpha+\beta$, $\alpha\cdot\beta$, $\alpha^\beta$ | each exists and is unique, via the new bridge item `lem-recursion-on-the-ordinals` (the published `thm-transfinite-recursion` is stated for a well-order, i.e. a SET, and gives a class operation only after a coherence argument that its uniqueness clause supplies); THREE cases at $0$, at a successor and at a limit via `def-limit-ordinal`, never two; the exponentiation limit clause runs over $0 < \beta < \lambda$ so that $0^\lambda = 0$; conventions $0^0 = 1$ and $\alpha^0 = 1$ stated where defined |
-| 2 | 185 | ordinal subtraction and division | for $\alpha \le \beta$ a UNIQUE $\gamma$ with $\alpha + \gamma = \beta$; unique $(\xi, \rho)$ with $\beta = \alpha\cdot\xi + \rho$, $\rho < \alpha$ — both are what CNF rests on |
-| 3 | 185 | **Cantor normal form** | existence AND uniqueness of the representation $\alpha = \omega^{\beta_1} c_1 + \cdots + \omega^{\beta_k} c_k$; uniqueness is what licenses the definite article |
-| 4 | 185 | **$\omega_1$** | defined as the Hartogs number $\aleph(\omega)$ (`thm-hartogs`, published, choice-free); a numbered item proves it is the LEAST uncountable ordinal, and that it is a cardinal |
-| 5 | 185 | agreement with published arithmetic on $\omega$ | ordinal $+$ and $\cdot$ restricted to $\omega$ AGREE with the published Peano operations (`thm-omega-is-peano-system`) — the dictionary item; without it the library holds two arithmetics on $\mathbb{N}$ that say nothing to each other, the level-7 two-notions defect by construction |
-| 6 | 187 | cardinal $\kappa + \lambda$, $\kappa \cdot \lambda$, $\kappa^\lambda$ | representative-independence: $A \approx A'$, $B \approx B'$ imply $A \sqcup B \approx A' \sqcup B'$, $A \times B \approx A' \times B'$, ${}^B A \approx {}^{B'}A'$ |
-| 7 | 187 | the aleph hierarchy $\alpha \mapsto \aleph_\alpha$ | exists and is unique by transfinite recursion; each $\aleph_\alpha$ is a cardinal; the enumeration is exhaustive (every infinite cardinal is an $\aleph_\alpha$) |
-| 8 | 187 | **cofinality** $\operatorname{cf}(\alpha)$ | the set of cofinal order types is nonempty, so a least exists; and $\operatorname{cf}(\kappa)$ is itself a regular cardinal |
-| 9 | 197 | polygonal path, and concatenation | the concatenation of finitely many segments is a path (pasting lemma, published `lem-continuity-is-local-and-pastes`) |
-| 10 | 56 | **the free group $F(S)$** | associativity of reduced-word multiplication — by van der Waerden's trick: realise the operations as permutations of the set of reduced words via the published `def-symmetric-group` (order 20), so associativity is inherited from composition instead of a case analysis |
-| 11 | 56 | rank of a finitely generated free group | $F(S) \cong F(T)$ with $S, T$ finite forces $\lvert S\rvert = \lvert T\rvert$, by counting homomorphisms to $\mathbb{Z}/2$ with AA-2's finite counting lemmas. (Infinite rank: DROPPED here, see denials — the cardinality argument needs ST-2 at order 187, above this page) |
-| 12 | 56 | presentation $\langle S \mid R \rangle$ | the normal closure of $R$ exists (intersection of the normal subgroups containing $R$, nonempty family) and the quotient is a group |
-| 13 | 58 | free product $G * H$ (and arbitrary families) | associativity again by van der Waerden; the normal-form theorem (uniqueness of reduced words) is a separate numbered theorem |
-| 14 | 58 | amalgamated product $G *_A H$ | it is a quotient of $G * H$ by a normal closure, hence a group; its universal property (pushout) proved outright |
-| 15 | 231 | **the operation on $\pi_1(X, x_0)$** | concatenation respects path-homotopy classes; associativity and inverses up to homotopy via explicit reparametrisation lemmas |
-| 16 | 231 | $\pi_1(f)$, and change of basepoint | $f_*[\gamma] := [f \circ \gamma]$ independent of representative; the basepoint isomorphism depends on the CLASS of the connecting path, stated where defined (the two-path witness needs a nonabelian $\pi_1$, so it lives on HT-5's B page — see traps) |
-| 17 | 235 | **the degree of a loop in $\mathbb{R}/\mathbb{Z}$** | independent of the chosen lift (unique lifting, fixed start) AND of the representative loop (homotopy lifting) — two separate steps, in that order |
-| 18 | 237 | the van Kampen homomorphism | the map out of $\pi_1(U) *_{\pi_1(U \cap V)} \pi_1(V)$ is well defined via the universal property of FG-2, before surjectivity or injectivity is argued |
-| 19 | 239 | **the universal cover $\widetilde{X}$** | the basis of the constructed topology is a basis (published `thm-basis-criterion`); the projection is well defined on path classes and is a covering map |
+| 2 | 185 (spec **245**) | ordinal subtraction and division | for $\alpha \le \beta$ a UNIQUE $\gamma$ with $\alpha + \gamma = \beta$; unique $(\xi, \rho)$ with $\beta = \alpha\cdot\xi + \rho$, $\rho < \alpha$ — both are what CNF rests on |
+| 3 | 185 (spec **245**) | **Cantor normal form** | existence AND uniqueness of the representation $\alpha = \omega^{\beta_1} c_1 + \cdots + \omega^{\beta_k} c_k$; uniqueness is what licenses the definite article |
+| 4 | 185 (spec **245**) | **$\omega_1$** | defined as the Hartogs number $\aleph(\omega)$ (`thm-hartogs`, published, choice-free); a numbered item proves it is the LEAST uncountable ordinal, and that it is a cardinal |
+| 5 | 185 (spec **245**) | agreement with published arithmetic on $\omega$ | ordinal $+$ and $\cdot$ restricted to $\omega$ AGREE with the published Peano operations (`thm-omega-is-peano-system`) — the dictionary item; without it the library holds two arithmetics on $\mathbb{N}$ that say nothing to each other, the level-7 two-notions defect by construction |
+| 6 | 187 (spec **247**) | cardinal $\kappa \oplus \lambda$, $\kappa \otimes \lambda$, $\kappa^\lambda$ | TWO obligations, not one, and they are discharged by two items. `lem-cardinality-of-a-well-orderable-set` first isolates the ZF half of `def-cardinal` (which is stated under AC), so that $\lvert X \rvert$ exists for any well-orderable $X$ without choice. `lem-cardinal-operations-are-well-defined` then proves representative-independence ($A \approx A'$, $B \approx B'$ imply $A \sqcup B \approx A' \sqcup B'$, $A \times B \approx A' \times B'$, ${}^B A \approx {}^{B'}A'$) AND that $\kappa \sqcup \lambda$ and $\kappa \times \lambda$ carry explicit well-orders, so $\oplus$ and $\otimes$ are ZF operations while $\kappa^\lambda$ needs AC |
+| 7 | 187 (spec **247**) | the aleph hierarchy $\alpha \mapsto \aleph_\alpha$ AND the beth hierarchy $\alpha \mapsto \beth_\alpha$ | one item, `cor-the-aleph-and-beth-hierarchies-are-well-defined`: both exist and are unique by `lem-recursion-on-the-ordinals` (the published `thm-transfinite-recursion` is stated for a SET and both operations are defined at every ordinal); each value is an infinite cardinal; each is strictly increasing and continuous at limits. Exhaustiveness is a SEPARATE numbered theorem, `thm-every-infinite-cardinal-is-an-aleph`, because it is proved by transfinite induction and not by the recursion. The successor cardinal $\kappa^{+} = \aleph(\kappa)$ is `lem-successor-cardinal-exists` and precedes both |
+| 8 | 187 (spec **247**) | **cofinality** $\operatorname{cf}(\alpha)$ | `lem-cofinality-is-well-defined`: the collection of ordinals $\beta$ admitting a map $\beta \to \alpha$ with cofinal range is nonempty (the identity witnesses $\beta = \alpha$), so a least exists; and the witnessing map may always be taken strictly increasing. That $\operatorname{cf}(\alpha)$ is a regular CARDINAL is `thm-cofinality-basics` and is a theorem, not part of the definition — stating it inside the definition would make the definition circular, since regularity is defined through $\operatorname{cf}$ |
+| 9 | 197 (spec **257**) | polygonal path, and concatenation | the concatenation of finitely many segments is a path (pasting lemma, published `lem-continuity-is-local-and-pastes`) |
+| 10 | 56 (spec **60**) | **the free group $F(S)$** | associativity of reduced-word multiplication — by van der Waerden's trick: realise the operations as permutations of the set of reduced words via the published `def-symmetric-group` (`monoids-groups-and-subgroups`, spec order 24), so associativity is inherited from composition instead of a case analysis |
+| 11 | 56 (spec **60**) | rank of a finitely generated free group | $F(S) \cong F(T)$ with $S, T$ finite forces $\lvert S\rvert = \lvert T\rvert$, by counting homomorphisms to $\mathbb{Z}/2$ with the published counting lemmas of `finite-counting-and-binomial-coefficients` (spec order 20). (Infinite rank: DROPPED here, see denials — the cardinality argument needs ST-2 at spec order 247, above this page) |
+| 12 | 56 (spec **60**) | presentation $\langle S \mid R \rangle$ | the normal closure of $R$ exists (intersection of the normal subgroups containing $R$, nonempty family) and the quotient is a group |
+| 13 | 58 (spec **62**) | free product $G * H$ (and arbitrary families) | associativity again by van der Waerden; the normal-form theorem (uniqueness of reduced words) is a separate numbered theorem |
+| 14 | 58 (spec **62**) | amalgamated product $G *_A H$ | it is a quotient of $G * H$ by a normal closure, hence a group; its universal property (pushout) proved outright |
+| 15 | 231 (spec **291**) | **the operation on $\pi_1(X, x_0)$** | concatenation respects path-homotopy classes; associativity and inverses up to homotopy via explicit reparametrisation lemmas |
+| 16 | 231 (spec **291**) | $\pi_1(f)$, and change of basepoint | $f_*[\gamma] := [f \circ \gamma]$ independent of representative; the basepoint isomorphism depends on the CLASS of the connecting path, stated where defined (the two-path witness needs a nonabelian $\pi_1$, so it lives on HT-5's B page — see traps) |
+| 17 | 235 (spec **295**) | **the degree of a loop in $\mathbb{R}/\mathbb{Z}$** | independent of the chosen lift (unique lifting, fixed start) AND of the representative loop (homotopy lifting) — two separate steps, in that order |
+| 18 | 237 (spec **297**) | the van Kampen homomorphism | the map out of $\pi_1(U) *_{\pi_1(U \cap V)} \pi_1(V)$ is well defined via the universal property of FG-2, before surjectivity or injectivity is argued |
+| 19 | 239 (spec **299**) | **the universal cover $\widetilde{X}$** | the basis of the constructed topology is a basis (published `thm-basis-criterion`); the projection is well defined on path classes and is a covering map |
 
 ---
 
@@ -246,9 +246,11 @@ deferred, not deleted.
 2. **Infinite-rank invariance for free groups** ($F(S) \cong F(T) \Rightarrow
    \lvert S \rvert = \lvert T \rvert$ for infinite $S$). The argument runs
    through $\lvert F(S)\rvert = \max(\lvert S\rvert, \aleph_0)$, which is ST-2
-   cardinal arithmetic at order 187, ABOVE the FG pages at 56. Finite rank is
-   proved at FG-1. Licensed by: a later item, on any page above 187, citing
-   both — recorded here so it is not silently forgotten.
+   cardinal arithmetic at spec order 247, ABOVE the FG pages at 60 and 62.
+   Finite rank is proved at FG-1. Licensed by: a later item, on any page above
+   247, citing both — recorded here so it is not silently forgotten. (ST-2 is
+   scaffolded at `frontier-2`; the FG pages are not built, so the licence is
+   still open.)
 3. **Nielsen–Schreier** (subgroups of free groups are free). The honest proofs
    run through covering spaces of graphs or through Schreier transversals,
    either being a page of machinery. Licensed by a graphs-and-coverings page
@@ -288,12 +290,16 @@ deferred, not deleted.
     singularity of $\omega_1$.** ST-1 defines only *cofinal subset of an
     ordinal*, which is all its boundedness theorem needs. The function and the
     regular/singular vocabulary are ST-2's (spec order 247), and 247 is unbuilt
-    at frontier-1. Licensed by: building ST-2.
+    at frontier-1. Licensed by: building ST-2. **DISCHARGED at frontier-2
+    (2026-07-29): ST-2 is scaffolded at spec order 247, and defines
+    $\operatorname{cf}$, regular and singular.**
 14. **$\aleph_1$ as a notation, and $\aleph_1 \le 2^{\aleph_0}$.** ST-1 mints
     $\omega_1$ and proves it is a cardinal, but the aleph HIERARCHY
     $\alpha \mapsto \aleph_\alpha$ is ST-2's well-definedness obligation #7. The
     scaffolded page therefore writes $\omega_1$ throughout and never $\aleph_1$.
-    Licensed by: ST-2.
+    Licensed by: ST-2. **DISCHARGED at frontier-2 (2026-07-29): 247 defines
+    $\aleph_\alpha$ and records $\aleph_0 = \omega$, $\aleph_1 = \omega_1$;
+    $\aleph_1 \le 2^{\aleph_0}$ is on its B page 248.**
 15. **Ordinal arithmetic on the LEFT is not developed beyond monotonicity.**
     Right subtraction, left division, and the fixed-point (Veblen) theory of
     normal functions are dropped; $\varepsilon_0$ is exhibited by hand instead.
@@ -301,6 +307,25 @@ deferred, not deleted.
 16. **Goodstein sequences, and any proof-theoretic use of Cantor normal form.**
     Not commissioned, and the termination proof needs transfinite induction up to
     $\varepsilon_0$ plus arithmetic coding. Licensed by: a proof-theory page.
+17. **`fs-` items whose refutation is an independence result.** "$2^{\aleph_0} =
+    \aleph_1$ is a theorem of ZFC" and "$\kappa < \lambda \Rightarrow 2^\kappa <
+    2^\lambda$" are dropped at 247. Their refutations are Cohen's and Easton's
+    theorems, which are recorded-not-proved, and an `fs-` Refutation is
+    phase-format, so refuting them would use ‡ material as a proof step. The
+    self-contained-scope rule allows independence facts about AC as MENTIONS
+    only. Both survive as sentences in `rem-cardinal-arithmetic-choice-ledger`,
+    which mentions the ‡ records through `external_refs`. Licensed by: a track
+    that develops forcing, which is out of scope by construction.
+18. **The Suslin line and Suslin trees, and Martin's axiom.** They stay ‡ on
+    `deferred-set-theory-beyond-choice` and `open-problems-and-research-frontier`.
+    247 supplies cofinality and 253 supplies the order topology of a linearly
+    ordered set, but the ccc arguments additionally need separability and the
+    countable chain condition, which are `countability-axioms-and-cardinal-
+    functions` (spec order 273). Licensed by: page 273.
+19. **Cardinal invariants of the continuum**, and any statement of the form
+    "$\mathfrak{b}$, $\mathfrak{d}$, $\mathfrak{c}$ satisfy ...". Not
+    commissioned; 247 proves the one ZFC constraint that was asked for,
+    $\operatorname{cf}(2^{\aleph_0}) > \aleph_0$. Licensed by: a dedicated page.
 
 ---
 
@@ -464,7 +489,57 @@ scope-denial claims per the standing sweep.
 
 Forward references: NONE load-bearing. None expected at all.
 
-## ST-2. Cardinal Arithmetic, Cofinality and the Alephs  (order 187, foundations)
+## ST-2. Cardinal Arithmetic, Cofinality and the Alephs  (spec order 247, foundations)
+
+**frontier-2 audit, 2026-07-29 (batch 1). Seven notes bind authoring of this page
+pair.** (1) CARDINALITY MUST BE RE-STATED FOR ZF BEFORE ANYTHING IS DEFINED. The
+published `def-cardinal` introduces $\lvert X \rvert$ under the Axiom of Choice,
+because it opens with "Assume the Axiom of Choice"; its actual argument needs only
+that $X$ carries a well-order. Hessenberg is a ZF theorem and Tarski's theorem is
+about the gap between ZF and ZFC, so both are unstatable until the choice-free
+half is isolated. `lem-cardinality-of-a-well-orderable-set` is that item and it is
+the first on the page: if $X$ is equinumerous with some ordinal there is a least
+such ordinal, it is a cardinal, and equinumerous sets receive the same one, all in
+ZF. (2) THE OPERATIONS ARE WRITTEN $\oplus$ AND $\otimes$, NOT $+$ AND $\cdot$.
+The immediately preceding page defines ordinal $+$ and $\cdot$ on the same
+objects with different values ($\omega \oplus \omega = \omega$ while
+$\omega + \omega \neq \omega$), and `rem-ordinal-versus-cardinal-exponentiation`
+already warns that $\alpha^\beta$ is two operations. Exponentiation keeps the
+notation $\kappa^{\lambda}$ under a hard rule stated at the definition: base and
+exponent are always alephs or cardinal letters $\kappa, \lambda, \mu$, never
+$\omega$ and never an ordinal letter. (3) TWO OF THE FOUR PLANNED `fs-` ITEMS
+CANNOT BE WRITTEN AND ARE REPLACED. Trap (i) of this section is decisive: an
+`fs-` Refutation is phase-format and may not rest on recorded-not-proved
+material, and the self-contained-scope rule allows the independence facts about
+AC only as mentions, never as a proof step. So "$2^{\aleph_0} = \aleph_1$ is a
+theorem of ZFC" and "$\kappa < \lambda \Rightarrow 2^\kappa < 2^\lambda$" both
+DROP (their refutations are Cohen and Easton). What replaces them is what ZFC
+actually proves: `fs-the-continuum-has-cardinality-aleph-omega`, refuted outright
+by K\"onig ($\operatorname{cf}(2^{\aleph_0}) > \aleph_0 =
+\operatorname{cf}(\aleph_\omega)$), and
+`fs-cardinal-exponentiation-is-strictly-monotone-in-the-base`, refuted outright
+by $\aleph_0 < \aleph_1$ with
+$\aleph_0^{\aleph_0} = \aleph_1^{\aleph_0} = 2^{\aleph_0}$. Both are ZFC theorems
+of this page's own machinery and neither cites an independence result.
+(4) THE BETH HIERARCHY IS FOLDED INTO THE ALEPH ITEMS, not given items of its
+own: the recursion, its uniqueness and its continuity are one argument, and
+splitting them would put the page over the 30-item ceiling for no mathematical
+gain. (5) THE FINITE DICTIONARY IS REQUIRED AND IS THE REASON THIS PAGE DECLARES
+`finite-counting-and-binomial-coefficients`. That page's `def-finite-cardinality`
+already writes $\lvert A \rvert$, for finite $A$, as a NATURAL NUMBER, and says
+in its own remarks that this is not `def-cardinal`'s $\lvert A \rvert$. Without
+`thm-cardinal-arithmetic-agrees-with-finite-counting` the library ships two
+meanings of $\lvert A \rvert$ and two meanings of $+$ on $\omega$.
+(6) EVERY $\omega_1$ FACT THIS PAGE NEEDS IS ALREADY PUBLISHED ON 245.
+`thm-countable-subsets-of-omega-one-are-bounded` clause (b) is exactly "no at
+most countable subset of $\omega_1$ is cofinal in it", so
+`cex-omega-one-has-no-at-most-countable-cofinal-subset` — which is leaf-locked on
+the B page 246 and may not be cited — is not needed by anything.
+(7) TARSKI NEEDS ONE FACT THAT IS NOT PUBLISHED and must be proved inline: if $A$
+is not finite then every natural number injects into $A$, hence
+$\aleph(A) \ge \omega$. Two lines by induction: an injection $n \to A$ that is not
+surjective extends, and it cannot be surjective or $A$ would be finite. Nothing is
+chosen; the extension point is asserted to exist, not selected.
 
 `requires`: the ST-1 page, `order-zorn-and-the-axiom-of-choice`
 
@@ -474,8 +549,11 @@ hierarchy by transfinite recursion (well-definedness #7); **cofinality**
 cardinals; the beth hierarchy $\beth_\alpha$.
 
 THMS: $\kappa + \lambda$ and $\kappa \cdot \lambda$ agree with the published
-finite arithmetic on naturals (dictionary, citing AA-2's counting lemmas at
-order 28 — reuse, never re-mint); $2^\kappa = \lvert \mathcal{P}(\kappa)
+finite arithmetic on naturals (dictionary, citing the published counting lemmas
+of `finite-counting-and-binomial-coefficients`, spec order 20 — the "AA-2 at
+order 28" this line used to name predates the counting insertion; the lemmas
+are `def-finite-cardinality`, `thm-sum-rule`, `thm-product-rule` — reuse, never
+re-mint); $2^\kappa = \lvert \mathcal{P}(\kappa)
 \rvert$ (functions-to-$\{0,1\}$ vs subsets); Cantor's theorem restated
 cardinally, $\kappa < 2^\kappa$ (cites published `thm-cantor-powerset`);
 **Hessenberg's theorem** $\aleph_\alpha \cdot \aleph_\alpha = \aleph_\alpha$,
@@ -526,8 +604,8 @@ definition. (iii) Operations are defined on cardinals-as-initial-ordinals
 (sets), so #6 is about $\approx$-invariance, not about proper classes.
 (iv) Hessenberg is ZF for ALEPHS; Tarski is the reason the global statement
 costs AC — do not let a Statement quantify over "all infinite sets"
-choice-free. (v) Finite counting: AA-2 (order 28) owns the finite lemmas;
-cite them. (vi) König's proof uses a choice function TWICE (choosing
+choice-free. (v) Finite counting: `finite-counting-and-binomial-coefficients`
+(spec order 20) owns the finite lemmas; cite them. (vi) König's proof uses a choice function TWICE (choosing
 representatives and diagonalising); name AC in Facts, not silently.
 
 Forward references: NONE load-bearing. Mentions of independence go through

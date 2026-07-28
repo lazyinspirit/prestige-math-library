@@ -574,8 +574,9 @@ post-splice.
 | 3 | 20 | $\binom{n}{k}$, **defined as $\lvert [A]^k \rvert$** | the set $[A]^k$ of $k$-element subsets of a finite $A$ is finite (so #1 applies), and $\lvert [A]^k\rvert$ depends only on $\lvert A\rvert$. **Defining it as $n!/(k!(n-k)!)$ instead is not legitimate until integrality is a theorem** — which is exactly the content of $\binom{n}{k}\,k!\,(n-k)! = n!$ |
 | 4 | 20 | the multinomial coefficient $\binom{n}{k_1,\dots,k_m}$ | the set of ordered partitions of an $n$-set into blocks of the prescribed sizes is finite and nonempty **iff** $\sum k_i = n$; the hypothesis is part of the definition |
 | 5 | 20 | $\sum_{i<n} a_i$ over a finite INDEX SET rather than an initial segment | independence of the chosen enumeration (commutativity/associativity), so that "the sum over $S$" is defined. **CORRECTED (Alpha-F1, frontier-1, 2026-07-28): this canNOT be discharged by citation.** The published `lem-finite-sum-laws` has additivity, scaling, splitting, monotonicity, telescoping and the product laws and **no permutation-invariance clause**, verified on disk; nothing else in the corpus carries one. So `lem-finite-sum-permutation-invariance` is MINTED here (trap (vi)) and cited alongside `lem-finite-subsets-listable`. Per SCHEMA §3 it goes in the definition's `deps`, not its `justified_by` |
-| 6 | 22 | the inclusion–exclusion alternating sum | the index set (nonempty subsets of a finite index set) is finite by #3, so the sum is a finite sum in the sense of #5 |
-| 7 | 22 | the derangement number $D_n$ | the set of fixed-point-free bijections of a finite set is finite |
+| 6 | 22 | the inclusion–exclusion alternating sum | the index set (nonempty subsets of a finite index set) is finite, from `cor-cardinality-of-the-power-set` and `thm-subset-of-a-finite-set`, so the sum is a finite sum in the sense of #5. TWO further obligations, added frontier-2: the summand is REAL, since it carries a sign, so the identity is stated in $\mathbb{R}$ through `def-canonical-natural`; and the COMPLEMENTARY form runs over all subsets including the empty one, so the ambient finite set $X$ must be named in the definition and $A_\varnothing := X$ stipulated there. Both live in `def-a-sieve-family-and-its-intersections` |
+| 6b | 22 | $\lceil m/n \rceil$ for $n \ge 1$ | the set of $q$ with $m \le nq$ is nonempty, so it has a least element by `thm-well-ordering-principle`. Minted as `def-the-ceiling-of-a-quotient-of-naturals` because the library has NO floor or ceiling and `thm-division-algorithm-in-z` is homed above this page, on `divisibility-gcd-and-bezout` |
+| 7 | 22 | the derangement number $D_n$ | the set of fixed-point-free bijections of a finite set is finite, being a subset of $\operatorname{Bij}(A)$, which is finite by `thm-number-of-bijections-of-a-finite-set`; and $D_0 = 1$, the empty function being vacuously fixed-point-free |
 | 8 | 173 | height, width of a finite poset | the sets of chain and antichain sizes are nonempty (singletons are both) and finite, so maxima exist by `lem-finite-set-has-max` |
 | 9 | 175 | $R[[x]]$, the convolution product | each coefficient $\sum_{i+j=n} f_i g_j$ is a **finite** sum; then associativity, distributivity, commutativity when $R$ is |
 | 10 | 175 | **summable family** in $R[[x]]$ | $(f_i)_{i \in I}$ is summable iff for each $n$ only finitely many $f_i$ have $[x^n]f_i \ne 0$; only then is $\sum_i f_i$ defined. **Every infinite product and every infinite sum of generating functions in this track is illegitimate until this item exists** — it is what the partition generating function rests on |
@@ -826,6 +827,13 @@ reader of this file will find it. Orders verified against
     177 and above. This is denial 3 restated at CB-1's own site; see §10
     amendment 2, which asked for a home above order 161 and was corrected on
     2026-07-28 because no page satisfies that.
+42. **Floor and ceiling as library-wide notions.** `def-the-ceiling-of-a-quotient-of-
+    naturals` on page 22 defines only what the strong pigeonhole principle needs:
+    the least $q$ with $m \le nq$, for naturals $m$ and $n \ge 1$. It is not the
+    real floor, it is not defined for a real argument, and it does not carry the
+    division algorithm. A general floor and ceiling on $\mathbb{R}$ would be
+    licensed by any page above `divisibility-gcd-and-bezout` (26) choosing to
+    mint them; page 22 is below it and cannot.
 
 **Deliberately NOT denied, because they are reachable and it would be a mistake
 to drop them by reflex:** locally presentable and accessible categories, and the
@@ -1021,6 +1029,58 @@ Forward references: NONE.
 ## CB-2. Inclusion–Exclusion, the Pigeonhole Principle and Double Counting  (order 22, combinatorics)
 
 `requires`: `finite-counting-and-binomial-coefficients` (20)
+
+**frontier-2 audit, 2026-07-29 (batch 2). Traps (i), (ii) and (iii) were
+re-checked against `plan-spec.json` and all three are still accurate**
+(`divisibility-gcd-and-bezout` is 26, `congruences-and-the-chinese-remainder-
+theorem` is 30, `matrices-and-the-matrix-of-a-linear-map` is 78 — all above 22).
+Seven further notes bind authoring of this page pair.
+
+(1) THE SIEVE IDENTITY CANNOT BE STATED IN N. It has minus signs, and the
+library's naturals have only a truncated difference. Every alternating identity
+on this page is stated in R through the canonical natural of
+`def-canonical-natural`, exactly as the binomial theorem is at 20, and the counts
+themselves stay in N. Clauses 6 and 7 of
+`lem-nat-finite-sum-laws-and-the-canonical-embedding` are the licence.
+
+(2) THE EMPTY INTERSECTION NEEDS AN AMBIENT SET NAMED. The complementary form of
+the sieve runs over ALL subsets J of the index set, including the empty one, and
+the intersection of no subsets of X is only defined once X is named. So the sieve
+setup is a definition, `def-a-sieve-family-and-its-intersections`, that fixes a
+finite ambient X and stipulates A_empty := X. Well-definedness obligation #6 is
+discharged there, together with the finiteness of the index set of subsets, which
+comes from `cor-cardinality-of-the-power-set` and `thm-subset-of-a-finite-set`.
+
+(3) THE SIEVE PROOF NEEDS AN INTERCHANGE OF A DOUBLE SUM, AND THE LIBRARY HAS NO
+SUCH LEMMA. `thm-sum-rule` splits a sum along a partition of its index set and
+stops there. `lem-a-double-sum-over-finite-index-sets-may-be-interchanged` is
+minted as the FIRST item of this page and is reused by the sieve, by the
+Bonferroni inequalities and by double counting, which is why it precedes all
+three.
+
+(4) THE BONFERRONI PROOF NEEDS A PARTIAL ALTERNATING BINOMIAL SUM, which 20 does
+not have: `cor-binomial-theorem-consequences` gives only the FULL alternating row
+sum, and only for n at least 1. `lem-the-partial-alternating-sum-of-a-binomial-
+row` is minted here for the truncated version and proved by induction from
+`thm-pascals-rule`.
+
+(5) THE CEILING FORM OF THE STRONG PIGEONHOLE HAS NO NOTATION TO USE. The library
+has no floor and no ceiling, and `thm-division-algorithm-in-z` is homed on
+`divisibility-gcd-and-bezout` at order 26, above this page. So the ceiling is
+minted here as `def-the-ceiling-of-a-quotient-of-naturals`: the LEAST q with
+m <= nq, which exists by `thm-well-ordering-principle` and needs no division.
+
+(6) THE SURJECTION COUNT IS CORRECT AT n = 0 ONLY BECAUSE 0^0 = 1. At n = 0 and
+k = 0 there is exactly one surjection, the empty function, and the formula returns
+0^0; at n = 0 and k at least 1 there is none, and the formula returns the full
+alternating row sum, which is 0. Both readings are part of the statement and both
+turn on the convention that `def-nat-power` fixes as a base clause. Likewise the
+term at i = 0 of the derangement formula is 1 and D_0 = 1.
+
+(7) THE ERDOS-SZEKERES TIGHTNESS WITNESS IS AN A-PAGE THEOREM, because the false
+statement that the bound can be lowered cites it and a B page is a leaf. It is
+`thm-the-erdos-szekeres-bound-is-sharp`; the concrete small instance stays on the
+B page.
 
 DEFS: the sieve setup (a finite family $A_1,\dots,A_n$ of subsets of a finite
 set, and the intersections indexed by subsets of $[n]$; well-definedness #6);

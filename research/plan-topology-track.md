@@ -524,6 +524,83 @@ subset" is not hereditary (the word "separable" is not used — no item defines 
 
 ## T4. Connectedness
 
+**frontier-2 audit, 2026-07-29 (batch 1). T4 IS SPEC PAGE 253 `connectedness`
+(companion 254). Six notes bind authoring.**
+
+**(1) THE ORDER TOPOLOGY OF A LINEARLY ORDERED SET IS MINTED HERE, AND IT HAS TO
+BE.** There is no order topology this page or page 255 may legally cite. The
+published `def-order-topology-on-an-ordinal` is homed on `separation-axioms`
+(order 261), ABOVE both; the published `ex-order-topology` is homed on
+`topological-spaces-and-continuity-examples` (order 250) and is a B-page item,
+hence leaf-locked and citable from nowhere. `grep` of `items/` finds no third.
+So 253 mints `def-order-topology-on-a-linearly-ordered-set` — the general
+definition, rays as a subbasis — which is the lowest-ordered page of this build
+that needs one, and 255 cites it for the ordinal spaces. **The id
+`def-order-topology` is NOT available: it is an alias of the published
+`ex-order-topology`.** The new definition carries a dictionary paragraph in its
+Remarks naming `ex-order-topology` (a wikilink in a Remarks section creates no
+`deps` edge and no b-leaf violation, so this is legal and is the only way to
+record the agreement), and 261's definition receives a staged amendment.
+
+**(2) THE TOPOLOGIST'S SINE CURVE IS DROPPED AND REPLACED, BECAUSE THIS LIBRARY
+HAS NO SINE.** `sine-cosine-and-the-definition-of-pi` is spec order 179, i.e.
+EARLIER than 253, and it is UNBUILT; nothing on disk defines $\sin$. A dep onto
+it would be classified `planned-earlier`, which `depsource` does not fail, and
+would be an unbuildable page. The replacement is
+`lem-the-oscillating-zigzag-curve`: the graph of the piecewise-linear map on
+$(0,1]$ that runs between $0$ and $1$ on each $[1/(n+2), 1/(n+1)]$. Its graph is
+path-connected, its closure adds $\{0\} \times [0,1]$, and that closure is
+connected, not path-connected and not locally connected — every property the sine
+curve was there for, with no transcendental function anywhere. The library
+already has a precedent for this substitution: the published
+`ex-distance-to-the-integers` calls $\psi(x) = \inf_{n} \lvert x - n \rvert$ "the
+trigonometry-free oscillator".
+
+**(3) THE LONG LINE IS KEPT AND IS THE REASON 253 DECLARES `ordinal-arithmetic`.**
+`def-the-long-line` and `thm-the-long-line-is-a-connected-linear-continuum` are
+on the A page, not the B page, because 255 needs the long ray for "countably
+compact and not compact" and a B-page item would be leaf-locked. The theorem
+proves three things and no more: the long ray is a linear continuum; hence it is
+connected; and every at most countable subset of it is bounded (this last clause
+is the one 255 consumes, and it inherits the $\mathrm{AC}_\omega$ cost of
+`thm-countable-subsets-of-omega-one-are-bounded`). **Path-connectedness of the
+long ray is DROPPED**: it needs an order isomorphism $[0,x] \cong [0,1]$, which is
+a transfinite construction of its own.
+
+**(4) THE REAL-LINE DICTIONARY IS UNFOLDED INLINE AND NEVER ROUTED THROUGH
+`rem-r-native-topology-scope`.** That remark is one of the five items in the
+library that seed the forward-dependence marker (it uses its `forward_refs`
+outside a Remarks section), so a `deps` edge to it would propagate the sky ↗
+"rests on later material" chip to every consequence on this page. The
+identification needed by `cor-connected-subsets-of-the-line` is one sentence and
+is written out: $B(x,r) = (x-r, x+r) = N_r(x)$, so "open in
+`def-open-and-closed-in-r`" and "open in `def-metric-topology` for
+$d_{\mathbb{R}}$" are the same condition word for word. `def-connected-r` and
+`thm-connected-subsets-of-r-are-intervals` are themselves safe to cite: each
+declares a forward reference but uses it only inside `## Remarks`, so neither is a
+seed.
+
+**(5) "QUASI-COMPONENTS COINCIDE WITH COMPONENTS IN COMPACT HAUSDORFF SPACES" IS
+NOT ON THIS PAGE.** Compactness is spec order 255, above 253. The item is homed on
+255 as `thm-quasicomponents-equal-components-in-a-compact-hausdorff-space`, which
+is legal because 255 may cite 253. 253 keeps
+`thm-quasicomponents-contain-components` and states no equality.
+
+**(6) DROPPED FROM T4, each with what would license it.** *Arcwise connectedness
+and continua*: a continuum is a compact connected Hausdorff space and compactness
+is 255; the notion belongs to 255 or above, and arcwise connectedness needs the
+Hahn-Mazurkiewicz circle of ideas, denied in this file's scope denials. *The
+Warsaw circle and the Knaster-Kuratowski fan*: both are several pages of
+construction, and the fan additionally needs a Cantor-set indexing whose payoff
+(totally disconnected but not zero-dimensional) rests on `countability-axioms-and-
+cardinal-functions` (273). *Simple connectedness*: the T4 list already marks it
+"forward pointer only", and under the self-contained-scope rule a forward pointer
+to unbuilt material is not written at all; `homotopy-and-homotopy-equivalence` is
+spec order 289 and owns it. *The Cantor set as a totally disconnected perfect
+space*: the published `ex-cantor-set-is-perfect-and-totally-disconnected` (order
+134) already says it, and re-minting it at 254 would be a second item for one
+statement.
+
 DEFS: connected; separation/disconnection; clopen; component; quasi-component;
 path; path-connected; path component; locally connected; locally path-connected;
 totally disconnected; arcwise connected; continuum; (simply connected: forward
@@ -553,22 +630,111 @@ quasi-components; the Cantor set is totally disconnected and not discrete.
 
 ## T5. Compactness   [needs F1]
 
+**frontier-2 audit, 2026-07-29 (batch 1). T5 IS SPEC PAGE 255 `compactness`
+(companion 256). Seven notes bind authoring.**
+
+**(1) THREE DICTIONARY OBLIGATIONS LAND HERE AND ALL THREE ARE DISCHARGEABLE
+BACKWARD.** `def-metric-compactness` and `def-metric-compactness-variants` are
+`compactness-in-metric-spaces` (order 120), BELOW 255, so the agreement is an
+ordinary backward citation and is a numbered item on this page,
+`thm-compactness-agrees-with-metric-compactness`, plus a dictionary clause inside
+`def-compactness-variants`. `def-locally-compact-metric-space` is
+`function-space-topologies` (order 283), ABOVE 255, so the agreement CANNOT be
+cited from here in either a Statement or a Remark without a forward reference —
+and a forward reference declared on `def-locally-compact-space`, a base
+definition, would propagate the sky ↗ chip to every consequence on the page. So
+255 states the metric unfolding of its own definition (a point has a compact
+neighbourhood exactly when some ball lies inside a compact set) WITHOUT naming the
+later item, and the agreement is recorded by a staged amendment to the published
+item, which is where the standing obligation was written.
+
+**(2) "COMPACT HAUSDORFF $\Rightarrow$ NORMAL" IS NOT ON THIS PAGE, AND T5'S LIST
+WAS WRONG TO HOME IT HERE** (the entry has since been removed from the THMS list;
+see the batch-2 note at the end of this section). Normality is defined at 261,
+above 255, so as originally listed it was a forward reference on the spine, which
+`fwdcheck` rejects outright (`forward-on-spine`). Its only legal home is a page
+above BOTH 255 and 261. The same holds for *locally compact Hausdorff
+$\Rightarrow$ completely regular* (which additionally needs Urysohn's lemma, spec
+order 267) and for *partitions of unity*. What 255 supplies instead is the exact
+separation input those proofs need, stated as clauses of
+`thm-compact-subset-of-a-hausdorff-space-is-closed`: a point and a disjoint
+compact set, and two disjoint compact sets, have disjoint open neighbourhoods.
+
+**(3) PARACOMPACTNESS IS DROPPED ENTIRELY, and this is not a loss.**
+`partitions-of-unity-and-paracompactness` is spec order **269** and ALREADY
+declares `compactness` among its `requires`. Every theorem T5 lists about
+paracompactness (paracompact Hausdorff $\Rightarrow$ normal, partitions of unity)
+needs normality, which 269 has and 255 does not. Defining paracompactness and
+locally finite refinements at 255 would leave a definition with nothing to prove
+and would pre-empt 269.
+
+**(4) TYCHONOFF TAKES THE ALEXANDER SUBBASE ROUTE, NOT THE ULTRAFILTER ROUTE, AND
+THIS IS FORCED.** The published `filters-and-ultrafilters` (order 12) has filters,
+the finite intersection property, ultrafilters, the ultrafilter lemma and the
+prime characterisation — and NO notion of a filter converging in a topological
+space, which is what "compact iff every ultrafilter converges" needs. That notion
+is `nets-and-filters`, spec order **259**, above 255, and 259 already declares
+`compactness` in its `requires`. So 255 proves `thm-alexander-subbase-lemma`
+directly from Zorn (published at order 10) and derives Tychonoff from it; the
+ultrafilter proof, and the equivalence "Tychonoff for Hausdorff spaces iff the
+ultrafilter lemma", belong to 259. What 255 does use from page 12 is
+`def-finite-intersection-property` and `lem-fip-generates-filter`, in
+`thm-compact-iff-fip`.
+
+**(5) "SECOND COUNTABLE $\Rightarrow$ LINDELOF" IS DROPPED.** Second countability
+is `countability-axioms-and-cardinal-functions`, spec order **273**, ABOVE 255.
+Minting a second-countability definition here would take 273's material and create
+a second notion. 255 defines Lindelof and proves the hierarchy that does not
+mention a countable basis. Licensed by: page 273.
+
+**(6) "THE BAIRE CATEGORY THEOREM FOR LOCALLY COMPACT HAUSDORFF SPACES" IS
+DROPPED FOR PAGE SIZE, and its home is 255 or above.** Note that
+`complete-metrizability-and-baire` is spec order **277**, above 255, so it CAN
+host it once it declares `compactness` in `requires`; the alternative is a later
+item on 255 itself. Nothing else in this build needs it. Licensed by: page 277
+plus a `requires` edge to 255.
+
+**(7) THE `fs-` THAT CANNOT BE WRITTEN.** T5 lists "infinite products of compacts
+are compact without AC". Its refutation is the independence of AC, which is
+recorded-not-proved, and the self-contained-scope rule allows independence facts
+about AC only as a MENTION, never as a proof step in a phase-format Refutation.
+It is dropped as an `fs-` and survives as a sentence in
+`rem-compactness-conventions-and-choice-ledger`, which mentions the published ‡
+`rem-schechter-kelley-tychonoff` through `external_refs`. The other five `fs-`
+items of T5's list are all kept and all have witnesses reachable from this page.
+
+**Kept, and what carries them.** *$[0,1]^{[0,1]}$-style compact non-sequentially-
+compact*: the witness minted inside the `fs-` is
+$\{0,1\}^{\{0,1\}^{\mathbb{N}}}$ with $F_n(x) = x_n$, which needs only Tychonoff
+and pointwise convergence and avoids binary expansions of reals entirely.
+*$\omega_1$ sequentially compact and not compact*, *$\omega_1 + 1$ compact*: from
+`lem-the-order-topology-on-an-ordinal` and `thm-ordinal-spaces-and-compactness`,
+both on the A page, and from the published `thm-countable-subsets-of-omega-one-
+are-bounded`. *The long line countably compact and not compact*: from 253's
+`def-the-long-line`. *The Sorgenfrey line Lindelof with a non-Lindelof square*:
+the published `ex-sorgenfrey-line` (250) and `ex-sorgenfrey-plane` (252) are
+B-page items and leaf-locked, so the line is re-minted on the B page 256, where a
+Remarks wikilink to the published item records that it is the same space; the
+payoff needs only that the antidiagonal is an uncountable closed discrete
+subspace, not Jones' lemma. *A closed bounded subset of $\mathbb{Q}$ that is not
+compact*: already published as `cex-closed-bounded-in-q-not-compact` (order 132)
+and not re-minted; the related hereditary failure is
+`fs-local-compactness-is-hereditary` on the A page.
+
 DEFS: open cover, subcover, compact; the finite intersection property; countably
 compact; Lindelof; sequentially compact; limit point compact; locally compact;
 sigma-compact; paracompact; locally finite refinement; the one-point
 (Alexandroff) compactification; proper map; relatively compact.
 
 THMS: compact <=> FIP; closed subsets of compacts are compact; compact subsets
-of Hausdorff spaces are closed; compact Hausdorff => normal; continuous images;
+of Hausdorff spaces are closed; continuous images;
 EVT; a continuous bijection from compact to Hausdorff is a homeomorphism; finite
 products; TYCHONOFF (AC), and Tychonoff for Hausdorff spaces <=> the ultrafilter
 lemma; the tube lemma; the Alexander subbase lemma; compact => countably compact
 => limit point compact (in T1); all coincide in metric spaces; Lindelof +
 countably compact => compact; second countable => Lindelof; Heine-Borel in R^n as
-a corollary; the one-point compactification and when it is Hausdorff; locally
-compact Hausdorff => completely regular; the Baire category theorem for locally
-compact Hausdorff spaces; paracompact Hausdorff => normal; partitions of unity;
-the Stone-Cech compactification and its universal property (statement).
+a corollary; the one-point compactification and when it is Hausdorff; the Baire
+category theorem for locally compact Hausdorff spaces.
 
 FS: compact implies closed in every space; compact implies sequentially compact;
 sequentially compact implies compact; infinite products of compacts are compact
@@ -581,6 +747,26 @@ compact and not compact; the long line is countably compact and not compact; the
 Sorgenfrey line is Lindelof and not compact while its square is not Lindelof; the
 closed unit ball of an infinite-dimensional normed space; a closed bounded subset
 of Q that is not compact.
+
+**frontier-2 audit, 2026-07-29 (batch 2). THREE ITEMS OF THE LIST ABOVE ARE NOT
+255's, and were removed from it.** *compact Hausdorff => normal* is homed on 263
+`hausdorff-via-the-diagonal`; *locally compact Hausdorff => completely regular* on
+267 `urysohn-lemma-and-tietze`; *paracompact Hausdorff => normal* and *partitions
+of unity* on 269 `partitions-of-unity-and-paracompactness`. Every one of them
+names a separation axiom defined at 261, which is ABOVE 255, so none of them can
+be stated at 255 at all. *The Stone-Cech compactification* likewise belongs to 271
+`tychonoff-embedding-and-stone-cech`.
+
+**255 MAY NOT REUSE THESE PUBLISHED IDS.** `def-metric-compactness`,
+`lem-closed-subset-of-a-compact-space-is-compact`,
+`thm-continuous-image-of-a-compact-space-is-compact`,
+`thm-compact-iff-finite-intersection-property`,
+`thm-continuous-bijection-from-a-compact-space-has-continuous-inverse`,
+`lem-compactness-is-intrinsic` and `lem-tube-lemma-for-a-compact-metric-factor`
+are all PUBLISHED on 120 `compactness-in-metric-spaces` and all state the METRIC
+case. Ids are immutable, so the general topological versions need distinct ids,
+and each of them owes a dictionary sentence saying that the metric case agrees —
+this is the level-7 "two notions" defect and it is exactly where it would start.
 
 ---
 
@@ -652,17 +838,58 @@ argument is written out in `research/frontier-1-RESUME.md`. The *hereditarily
 normal* characterisation of complete normality stays 265's; this proof does not
 touch it.
 
-**Dropped from 261/262, each with what would license it.** *compact Hausdorff =>
-normal*: general topological compactness does not exist in this library — the only
-compactness on disk is metric (`def-metric-compactness`, order 120) and the general
-notion belongs to page 255 `compactness`, which is unbuilt AND sits below 261, so
-it cannot be back-filled. *locally compact Hausdorff => completely regular*: same
+**frontier-2 audit, 2026-07-29 (batch 2). THE THREE COMPACTNESS-DEPENDENT
+RESULTS T7 LOST AT 261 NOW HAVE HOMES, AND NONE OF THEM IS AT 255.** Page 255
+`compactness` defines general compactness but sits BELOW 261, so no result whose
+statement names regularity, normality or complete regularity can live there;
+`fwdcheck` rejects such a statement outright as `forward-on-spine`. The three
+results are therefore homed as follows.
+
+(1) *compact Hausdorff => normal* is homed on **263 `hausdorff-via-the-diagonal`**
+as `thm-a-compact-hausdorff-space-is-regular-and-normal`, together with the two
+separation lemmas it is built from, `lem-a-point-and-a-compact-set-in-a-hausdorff-
+space-are-separated-by-disjoint-open-sets` and `lem-two-disjoint-compact-sets-in-a-
+hausdorff-space-are-separated-by-disjoint-open-sets`. **263 rather than 267,
+because 265 `hereditary-and-productive-separation` needs it and 265 does not
+declare 267.** The standard proof that normality is not hereditary runs through a
+compact Hausdorff space with a non-normal subspace, and 265 requires 263 and 255
+and nothing above them; homing the theorem at 267 would put it out of 265's reach
+permanently.
+
+(2) *locally compact Hausdorff => completely regular* is homed on **267
+`urysohn-lemma-and-tietze`** as `thm-a-locally-compact-hausdorff-space-is-
+completely-regular`, since it needs Urysohn's lemma as well as local compactness.
+Its geometric half — that such a space has a neighbourhood base of open sets with
+compact closure, hence is regular — is split out onto 263 as `lem-a-locally-
+compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`, because it
+needs no Urysohn function. **The route through "complete regularity is
+hereditary" is NOT taken**: that property is 265's, 265 is unbuilt, and 265 sits
+below 267 so it cannot be back-filled. The proof used instead is direct: shrink to
+a compact-closure neighbourhood, apply Urysohn's lemma inside that compact
+Hausdorff (hence T4) subspace, and extend by zero with the finite-closed-cover
+clause of `lem-continuity-is-local-and-pastes`.
+
+(3) *paracompact Hausdorff => normal* is **NOT on either of these pages.** Its
+home is **269 `partitions-of-unity-and-paracompactness`**, which `plan-spec.json`
+declares with `requires` = 267 and 255, so it sits above both and above every
+separation axiom it names. Nothing about it is scaffolded here.
+
+**Dropped from 261/262 at `frontier-1`, each with what would license it — kept as
+the record of the drop; for the compactness-dependent entries the frontier-2
+block above supersedes what follows.** *compact Hausdorff =>
+normal*: general topological compactness did not exist in the library when 261
+was scaffolded — at that point the only
+compactness on disk was metric (`def-metric-compactness`, order 120) and the
+general notion belonged to page 255 `compactness`, then unbuilt AND below 261, so
+it could not be back-filled. *locally compact Hausdorff => completely regular*:
+same
 reason, plus Urysohn. *the Sorgenfrey line and plane*: the published items
 `ex-sorgenfrey-line` (order 250, B page) and `ex-sorgenfrey-plane` /
 `cex-antidiagonal-of-the-sorgenfrey-plane` (order 252, B page) are LEAF-LOCKED and
 may not be cited from another page; rebuilding them is cheap but the payoff item —
 the Sorgenfrey plane is not normal — needs either Jones' lemma (cardinal
-arithmetic, page 247, unbuilt) or a delicate Baire-category argument, and the
+arithmetic: page 247 is built at frontier-2 but scaffolds no Jones-lemma item) or
+a delicate Baire-category argument, and the
 published Baire material (`thm-baire-category-r`, order 133) is about $\mathbb{R}$
 specifically. *the Niemytzki (Moore) plane*: same obstruction, and its complete
 regularity would additionally need 265. *the Tychonoff corkscrew* (a T3 space that
@@ -1008,25 +1235,43 @@ names what would license it. Entries 1–7 are page 261 `separation-axioms`,
 entries 8–12 are page 283 `function-space-topologies`; both were dropped at
 scaffold time by Beta-F1-1 and adjudicated by the orchestrator (see
 `research/frontier-1-RESUME.md` §"Step 3 — findings adjudicated (batch 1)" and
-`research/frontier-1-batch-1.notes.md` §1.4, §1.5).
+`research/frontier-1-batch-1.notes.md` §1.4, §1.5). **Amended at `frontier-2`
+(Alpha-F2, 2026-07-29):** entries 1–3 were RESOLVED and rewritten, not appended
+to; entries 13–20 are the `frontier-2` drops from pages 253 `connectedness` and
+255 `compactness` (`research/frontier-2-batch-1.notes.md` §1.8); entries 21–23
+are the drops from pages 263 and 267 (`research/frontier-2-batch-2.notes.md`
+§1.3, renumbered from that file's 13–15, which collided with batch 1's
+numbering).
 
-1. **compact Hausdorff $\Rightarrow$ normal.** General topological compactness
-   does not exist in this library: the only compactness on disk is metric
-   (`def-metric-compactness`, order 120), and the general notion belongs to page
-   255 `compactness`, which is unbuilt AND sits BELOW 261, so it cannot be
-   back-filled later. Licensed by: page 255 — but note that the item's only legal
-   home is then a page ABOVE both 255 and 261, most naturally 265 or 267, since
-   at 255 normality is not yet defined. Recorded at step 0 of `frontier-1` as a
-   plan defect: T5's THMS list currently homes it on 255, where it is a forward
-   reference on the spine and `fwdcheck` rejects it.
-2. **locally compact Hausdorff $\Rightarrow$ completely regular.** Same
-   compactness obstruction as 1, plus Urysohn's lemma. Licensed by: pages 255 and
-   267.
-3. **normal + T1 $\Rightarrow$ completely regular**, the one arrow of the
-   implication chain page 261 cannot reach. It IS Urysohn's lemma. Licensed by:
-   page 267 `urysohn-lemma-and-tietze`. (The other arrow Beta-F1-1 proposed
-   dropping, perfectly normal $\Rightarrow$ completely normal, is NOT denied — it
-   is proved at 261; see the T7 audit block.)
+1. **compact Hausdorff $\Rightarrow$ normal. RESOLVED at `frontier-2`, no longer
+   denied.** The obstruction recorded here was that general topological
+   compactness did not exist; page 255 `compactness` is built in `frontier-2` and
+   supplies it. The result is homed on **263 `hausdorff-via-the-diagonal`** as
+   `thm-a-compact-hausdorff-space-is-regular-and-normal`, not on 255, because at
+   255 normality is not yet defined and `fwdcheck` rejects such a statement as
+   `forward-on-spine`. **263 rather than 265 or 267**, because 265
+   `hereditary-and-productive-separation` needs it — the standard proof that
+   normality is not hereditary runs through a compact Hausdorff space with a
+   non-normal subspace — and 265 declares 263 and 255 and nothing above them.
+   The plan defect this entry recorded (T5's THMS list homing it on 255) is fixed
+   by the T5 edit of `research/frontier-2-batch-2.notes.md` §1.2.
+2. **locally compact Hausdorff $\Rightarrow$ completely regular. RESOLVED at
+   `frontier-2`, no longer denied.** Homed on **267 `urysohn-lemma-and-tietze`**
+   as `thm-a-locally-compact-hausdorff-space-is-completely-regular`, with its
+   compactness half split onto 263 as `lem-a-locally-compact-hausdorff-space-has-
+   a-base-of-open-sets-with-compact-closure`. The proof does NOT go through
+   "complete regularity is hereditary", which is 265's and would be a forward
+   reference from 267; see `research/frontier-2-batch-2.notes.md` §1.1(2).
+3. **normal + T1 $\Rightarrow$ completely regular. RESOLVED at `frontier-2`, no
+   longer denied.** This is Urysohn's lemma, and it is proved at 267 as
+   `thm-urysohn-lemma`, with the chain closed by
+   `cor-urysohns-lemma-closes-the-separation-chain`. **It costs a choice
+   principle: dependent choice.** The published
+   `rem-urysohn-lemma-not-a-zf-theorem` records that the statement is not a
+   theorem of ZF (Laeuchli) and not a theorem of ZF + countable choice
+   (Tachtsis), and that DC suffices. (The other arrow Beta-F1-1 proposed
+   dropping, perfectly normal $\Rightarrow$ completely normal, was never denied —
+   it is proved at 261; see the T7 audit block.)
 4. **The Sorgenfrey line and plane as witnesses on 261/262.** The published
    `ex-sorgenfrey-line` (order 250) and `ex-sorgenfrey-plane` /
    `cex-antidiagonal-of-the-sorgenfrey-plane` (order 252) are B-page items and
@@ -1067,9 +1312,79 @@ scaffold time by Beta-F1-1 and adjudicated by the orchestrator (see
     describe it as a homeomorphism — a title asserting more than the proof gives
     is the fatal class `LEVELS.md` step 9 exists for. Licensed by: page 255 plus
     the product/quotient machinery a homeomorphism proof needs.
+13. **Paracompactness, locally finite refinements and partitions of unity at
+    page 255.** Every theorem about them on T5's list needs normality, defined at
+    261. `partitions-of-unity-and-paracompactness` is spec order 269 and already
+    requires `compactness`. Licensed by: page 269, which owns the whole topic.
+14. **"Second countable implies Lindelof" at page 255.** Second countability is
+    `countability-axioms-and-cardinal-functions`, spec order 273, above 255.
+    Licensed by: page 273.
+15. **The Baire category theorem for locally compact Hausdorff spaces.** Dropped
+    from 255 for page size, not for reachability: it is provable from the
+    material 255 has. Licensed by: page 277
+    `complete-metrizability-and-baire` once that page declares `compactness` in
+    its `requires`, or a later item on 255 itself.
+16. **The ultrafilter proof of Tychonoff, and "Tychonoff for Hausdorff spaces iff
+    the ultrafilter lemma".** The published `filters-and-ultrafilters` (order 12)
+    has no notion of a filter converging in a topological space. Licensed by:
+    page 259 `nets-and-filters`, which already requires `compactness`.
+17. **The Stone-Cech compactification and its universal property.** T5 lists it
+    "(statement)"; nothing on 255 states it. Licensed by: page 271
+    `tychonoff-embedding-and-stone-cech`.
+18. **Arcwise connectedness, continua, the Warsaw circle, the
+    Knaster-Kuratowski fan, and simple connectedness, at page 253.** A continuum
+    is compact connected Hausdorff and compactness is 255; the fan's payoff needs
+    273; simple connectedness is 289's. Licensed by: those pages.
+19. **Path-connectedness of the long ray.** Proved nowhere in this build: it
+    needs an order isomorphism $[0,x] \cong [0,1]$ for every $x$, a transfinite
+    construction of its own. 253 proves the long ray is a connected linear
+    continuum and stops there. Licensed by: a dedicated item.
+20. **The topologist's sine curve, under that name.** This library has no
+    $\sin$: `sine-cosine-and-the-definition-of-pi` is spec order 179 and is
+    unbuilt. 253 proves every property it was wanted for on a piecewise-linear
+    substitute, `lem-the-oscillating-zigzag-curve`. Licensed by: building page
+    179, after which the classical curve may be added as a second witness.
+21. **Urysohn's lemma in regular spaces, as a false statement (T7's FS list).**
+    Refuting it needs a regular space in which two disjoint closed sets are not
+    separated by a continuous function, and the nearest witness is a regular
+    space that is not normal. Entry 7 above already records that no such witness
+    is reachable from 261's declared prerequisites, and 267 inherits the same
+    obstruction: the witnesses need either a Jones-lemma item resting on cardinal
+    arithmetic (page 247 is built at `frontier-2` but scaffolds no such item, and
+    267 does not declare 247) or the hereditary and productive behaviour of
+    regularity (page 265, unbuilt and below 267). DROPPED from 267 with no
+    substitute. Licensed by: a Jones-lemma item on a page above 247, or page 265.
+22. **"The Urysohn function of $A$ and $B$ vanishes exactly on $A$", as a false
+    statement.** Refuting it needs a normal space with a closed set that is not a
+    zero set, that is a normal space that is not perfectly normal. The standard
+    witness is the ordinal space $\omega_1 + 1$ with the closed singleton
+    $\{\omega_1\}$, and it needs the compactness of $\omega_1 + 1$ proved on an A
+    page: page 256 is a B page and its items are leaf-locked. DROPPED from 267 —
+    the drop was decided against a scaffold in which the homing of $\omega_1+1$'s
+    compactness was not yet known. Licensed by: the compactness of $\omega_1 + 1$
+    homed on page 255 rather than page 256 — **a licence `frontier-2` itself
+    meets**: batch 1 homed `thm-ordinal-spaces-and-compactness` (every successor
+    ordinal is compact in its order topology) on the A page 255, so the item is
+    recoverable at 267 or above in a later build; the `frontier-2` scaffold is
+    frozen post-splice and does not carry it. Note that 267 DOES prove the
+    positive characterisation
+    `thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set`,
+    so it is the witness that is missing and not the theory.
+23. **"Hausdorff iff every net has at most one limit", and the filter forms of
+    the separation axioms.** Nets and filters on a topological space are page 259
+    `nets-and-filters`, which is unbuilt and sits ABOVE 263. Page 263 proves the
+    SEQUENCE form instead (`lem-a-sequence-in-a-hausdorff-space-has-at-most-one-limit`),
+    which is strictly weaker and whose converse the published
+    `fs-unique-sequential-limits-imply-hausdorff` already refutes. Licensed by:
+    page 259.
 
 **Not a denial, recorded so it is not rediscovered:** general topological
 compactness is minted at page 255, and page 283's
 `def-locally-compact-metric-space` is a deliberate metric special case with a
 dictionary Remark. **Page 255 carries a standing obligation** to record the
-agreement explicitly when it defines local compactness in general.
+agreement explicitly when it defines local compactness in general. **Status,
+`frontier-2` (2026-07-29): 255 is scaffolded with `def-locally-compact-space`,
+and the agreement is discharged as a staged amendment to the published
+`def-locally-compact-metric-space` (`research/frontier-2-batch-1.notes.md` §3.7),
+to land in the same commit that publishes 255 — not before, and not as a forward
+reference from 255.**
