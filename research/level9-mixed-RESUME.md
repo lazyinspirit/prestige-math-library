@@ -47,22 +47,49 @@ is authoring order, not three publish cycles.
 
 `79568d8` scaffolds + staged amendments · `f4129cb` splice · `735576a` Hamel
 retitle + Alpha-9 prose propagation · `ad04db1` pages 24/25 · `8994e16` pages
-70/71 · `9575d7e` validate-plan b-leaf fix · `de155bc` extcheck ‡ load-bearing
-fix · `91fbe8f` level-8 scope sweep · `70f6a3f` touchlog seed.
+70/71 · `74a6c81` choice-free dimension formula · `9575d7e` validate-plan b-leaf
+fix · `de155bc` extcheck ‡ load-bearing fix · `91fbe8f` level-8 scope sweep ·
+`70f6a3f` touchlog seed.
+
+## Batch numbering — do not get this backwards
+
+`research/level9-mixed-batch-1.pages.json` is the **real-analysis** batch
+(129/130, 131/132, 137/138), still being authored.
+`research/level9-mixed-batch-2.pages.json` is the **number-theory + linear
+algebra** batch (24/25, 70/71), authored and committed. So *round 1* of
+authoring corresponds to *batch 2* of scaffolding. Step 8 for batch 2 can
+therefore run while batch 1 is still being written.
 
 App repo (`prestige-intelligence`, branch `feat/reasoning-training-controls`):
 `e846c9a` the ‡ chip load-bearing fix — **built and deployed and verified live**.
 
 ## In flight
 
-- **Round-2 author** (pages 129/130).
-- **LA author, resumed**: asked to make `thm-dimension-formula` **choice-free**
-  and drop the AC declaration. It is stated for FINITE-dimensional subspaces,
-  which need no choice; the agent's own Remark says the choice-free route was
-  "sketched, not carried out"; and `thm-dimension-of-a-linear-subspace` on the
-  same page is already routed choice-free. Told to refute me with a specific
-  step if I am wrong rather than comply. Must also propagate to
-  `cor-dimension-of-a-direct-sum` and the page-70 summary.
+- **Round-2 author** (pages 129/130), 44 items, the level's largest batch.
+- **Step-8 auditors for batch 2**, one per A/B pair (24/25 and 70/71), running
+  concurrently because page 129 does not depend on page 24 at all and touches
+  page 70 through exactly one item. The 70/71 auditor was told to flag loudly if
+  it materially changes the **Statement** of `cor-every-vector-space-has-a-basis`,
+  `def-linear-basis` or `thm-unique-coordinates-with-respect-to-an-ordered-basis`,
+  which page 129's `lem-hamel-basis-exists` cites.
+
+## Done since this file was written
+
+**The choice-free dimension formula, `74a6c81`.** `thm-dimension-formula` and
+`cor-dimension-of-a-direct-sum` declared "Assume the Axiom of Choice" for
+statements about FINITE-dimensional subspaces, which need none — true but
+unnecessarily weak, and this library tracks choice strength deliberately.
+`thm-dimension-of-a-linear-subspace` gained **claim 3**, the finite-dimensional
+extension statement, by parametrising its existing largest-independent-subset
+construction by a given independent `A₀`; claim 1 is now the case `A₀ = ∅`. The
+formula runs on that instead of on the Zorn-based
+`thm-every-independent-set-extends-to-a-basis`, which left its `deps` entirely.
+All three re-judged `keep: true`; gates green. The agent was invited to refute
+the instruction with a specific step and reported it could not.
+
+**The general lesson, which is why this is recorded rather than just committed:**
+a repair that is merely TRUE is not automatically the right repair. Ask whether
+it weakens a claim the library could actually make.
 
 ## Remaining work
 
@@ -71,7 +98,8 @@ App repo (`prestige-intelligence`, branch `feat/reasoning-training-controls`):
    was largely INERT: four of five level slugs had no page file under `library/`
    at judge time, so they contributed nothing and `judge.mts` warned on stderr
    every call. Batch context only reaches pages already composed.
-3. Step 8 per-batch audits (`briefs/beta-step8-audit.md`).
+3. Step 8 for **batch 1** (the real-analysis pages), once they are authored.
+   Batch 2's step 8 is in flight; see above.
 4. Step 9 seam audit and step 10a level audit — **resume Alpha-9**, agent
    `ae085501642ff3e01`, which already carries this level's context.
 5. Step 10b scope-denial sweep of the published corpus.
