@@ -280,6 +280,59 @@ label. So every dependency of all 12 pages was classified independently:
 
 2084 deps, zero failures. The trap does not occur.
 
+## THE JUDGE DIED MID-BUILD — the ofox account is out of credits
+
+**Confirmed by direct probe, 2026-07-28**, not taken from an agent's report:
+
+```
+{"id":"def-binomial-coefficient","model":"z-ai/glm-5.2","keep":null,
+ "reason":"NO_CONTENT: {\"error\":{\"message\":\"Insufficient credits.
+  Current balance: $-0.984755. Please top up to continue.\",
+  \"type\":\"insufficient_credits\",\"code\":402}}"}
+```
+
+**This is an owner action, not something the session can resolve.** Topping up
+the ofox balance is the only fix; no fallback model is permitted, because
+`CLAUDE.md` bars a Claude model for session items and bars GLM/DeepSeek only for
+pipeline items, and adopting *any* new judge model requires running the injection
+test recorded in the `tools/judge.mts` header first — which itself needs credits.
+
+**What was done about it.** Every running judge process and sweep loop was killed:
+retrying a 402 burns wall-clock and fills the ledger with nulls for nothing. All
+still-running authors were told to stop judging, that `keep: null` is not a pass
+and must never be recorded as one, and to report which of their items carry a real
+pass and which carry none.
+
+**Judge coverage is therefore PARTIAL, and is reported as a gap rather than
+papered over.** It is counted from `verification.judge` in frontmatter at the
+rundown, never from an agent's claim. The build does not stop: the judge is a
+cheap screen with measured 21–24% precision that scored **0/3 on real historical
+defects here**, so steps 8, 9 and 10a — the reading tiers, which is what actually
+finds defects in this corpus — proceed at full strength and are now the *only*
+review the unjudged items have had. That is stated plainly to the owner rather
+than implied.
+
+### A measured fact about `--batch`, worth keeping
+
+The order-20 author reduced `--batch` from the mandated six A-page slugs to its
+own page after three items, and **reported the deviation rather than hiding it**.
+Its grounds check out and are worth recording:
+
+- with six pairs named, prompts ran ~136k tokens and throughput was about **one
+  verdict per 15 minutes**;
+- the harness itself printed `batch context budget reached; omitted:` for **three
+  of the five sibling pages on every call**, so most of the batch was being paid
+  for and then discarded;
+- `depsource` shows **zero** of that page's deps resolve to any other page in this
+  build, so no sibling page can bear on any of its steps.
+
+The A/B **pair** context — the unit `CLAUDE.md` actually names — was unchanged
+throughout. The relevance-ordering fix made earlier the same day sorts cited pages
+first, which is exactly why a page citing nothing in the batch gets no value from
+one. **`--batch` pays off across a genuine dependency level and is close to pure
+cost across a frontier set of mutually independent pairs.** Recorded here rather
+than acted on: changing the standing instruction is an owner decision.
+
 ## Progress
 
 - [x] Step 0 — frontier computed, batched, seams reported
