@@ -327,6 +327,66 @@ them crossing a category), and the negative tier is strong (246 of 1365 items,
 the **28.6% of scaffolded items that are leaf-locked on B pages** are where
 richness is actually being lost, not connectivity or counterexample density.
 
+## Step 5 — in progress. The Sonnet 5 pilot ledger, and a gate gap
+
+### `rendercheck` IS MISSING FROM THE AUTHORING BRIEF (orchestrator's omission)
+
+`briefs/authoring.md` names `reflow`, `precheck`, `depcheck`, `fwdcheck`,
+`extcheck`, `citecheck` and `prosecheck`. It does **not** name `rendercheck` —
+zero mentions — even though `SCHEMA.md` §8 and `LEVELS.md` list it as one of the
+hard gates. It catches what no other gate can see: a wikilink inside `$…$` (the
+renderer resolves `[[…]]` before KaTeX runs, so the formula dies silently while
+`precheck` stays green), unbalanced delimiters, and spans that fail a real KaTeX
+parse. All five running authors were told to run it. **This is a run-scoped
+instruction; the brief itself was left unchanged.**
+
+**A trap worth keeping.** Seven of the eight rendercheck errors found so far were
+not wikilinks at all but the digraph `[[` arising innocently, where a preimage
+bracket meets a half-open interval: `f^{-1}[[0,a)]`. The wikilink resolver claims
+it and the formula dies. Fix is `f^{-1}[\,[0,a)\,]` or `f^{-1}([0,a))`. Pages
+using `[n]` index sets or `[A]^k` subset notation are equally exposed.
+
+### Pilot ledger — arm 1 of 2 returned
+
+Blinding holds: neither author was told it is in a pilot, both briefs are
+structurally identical, and no step-9 reader will be told which is which.
+
+| measure | **Opus 5** — `hausdorff-via-the-diagonal` | **Sonnet 5** — `urysohn-lemma-and-tietze` |
+|---|---|---|
+| items | 21 (13 + 8) | 21 (13 + 8) |
+| precheck | all pass or legitimate `n/a` | not yet reported |
+| rendercheck | **0 errors on 21 files** — and it ran a gate its brief never named | **8 errors** (7 preimage-digraph, 1 genuine wikilink-in-math) |
+| scaffold errors caught | **5**, one of them a scaffolded statement that was outright **false** | not yet reported |
+| tokens | ~420k | not yet reported |
+| wall clock | ~42 min | not yet reported |
+
+**Fairness notes, recorded now rather than argued later.** (a) `rendercheck` was
+in neither brief, so the 8 errors are not a protocol failure by the Sonnet arm —
+but the Opus arm ran it unprompted, which is itself the "scaffold errors caught"
+dimension the decision rule cares about. (b) The Sonnet arm's page is the heavier
+of the two by proof length and prerequisite depth, by the pre-registered
+selection rule, so the comparison is deliberately conservative against it.
+
+### The Opus arm's best catch, and a live gap it found
+
+**A scaffolded statement that was false.** "On an infinite set the cofinite *and
+cocountable* topologies are $T_1$ with a diagonal that is not closed" fails for
+the cocountable topology on a **countably infinite** set: every subset then has
+an at most countable complement, so the topology is **discrete**, hence
+Hausdorff, with a closed diagonal. Restated with the cofinite clause for an
+infinite set, the cocountable clause for $\mathbb{R}$, and the degenerate case
+written out.
+
+**A gap that will recur.** `lem-q-and-irrationals-dense-r` states density in the
+**ℝ-native** closure of `def-interior-closure-boundary-r`, and no item identifies
+that closure with the topological or metric one — `lem-real-and-metric-notions-
+agree` covers continuity, uniform continuity, Lipschitz, Hölder and compactness,
+but **not closure**. The only item discussing the seam is
+`rem-r-native-topology-scope`, which is a forward-dependence seed and barred.
+So "ℚ is dense in ℝ" is **not citable topologically**, and three items derived it
+instead from `lem-rat-embeds-dense`. Any future page needing topological density
+of ℚ hits this. Carried to the rundown.
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
