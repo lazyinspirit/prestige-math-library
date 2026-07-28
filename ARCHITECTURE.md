@@ -350,6 +350,25 @@ should do. The cap, not serialism, is what derisks the failure measured below:
 6 is well under the 9 that produced it. The measurement stands as the reason the
 cap exists — do not raise it without re-measuring.
 
+**COUNTING the concurrency: `ps | grep -c` OVERCOUNTS BY 4×, and it has misled
+two readers.** One `judge.mts` call spawns a chain of **four** OS processes:
+
+```
+npm exec tsx  →  sh -c "tsx"  →  node .../.bin/tsx tools/judge.mts  →  node --require .../preflight.cjs
+```
+
+So `ps -eo cmd | grep -c '[t]ools/judge.mts'` returning 16 means **4 concurrent
+calls, not 16**. Measured 2026-07-28: the orchestrator read 26 raw matches as "4×
+the cap" when it was exactly 6 calls, and a sweeper later reported "10 concurrent,
+the cap is being breached" when the real figure was 2–3. Both were wrong in the
+alarming direction, and acting on either would have killed a healthy sweep.
+
+**Count invocations, not processes:**
+
+```
+ps -eo cmd | grep '[t]ools/judge.mts' | grep -c '^npm'
+```
+
 **The failure the cap prevents. Measured 2026-07-27 (level 7-algebra).** A sweep
 run at `xargs -P 7`, with a subagent's retry loops layered on top (up to **nine**
 concurrent `judge.mts` processes against one gateway), produced repeated
