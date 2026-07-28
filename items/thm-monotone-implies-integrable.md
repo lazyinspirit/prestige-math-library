@@ -1,7 +1,7 @@
 ---
 id: thm-monotone-implies-integrable
 kind: theorem
-title: "A monotone function on $[a,b]$ is Riemann integrable: for the uniform partition into $N$ parts the upper minus lower sum telescopes to $|f(b) - f(a)|\\,(b-a)/N$"
+title: "A monotone function on $[a,b]$ is Riemann integrable: for the uniform partition into $N$ parts the upper minus lower sum telescopes to $|f(b) - f(a)|\\,(b-a)/\\iota(N)$"
 status: draft
 origin: session
 deps: [thm-riemann-criterion, def-monotone-function, def-partition-and-refinement, def-darboux-sums, def-darboux-integral, lem-finite-sum-laws, def-finite-sum, def-bounded-set, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-interval, def-max-min, def-infimum, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]

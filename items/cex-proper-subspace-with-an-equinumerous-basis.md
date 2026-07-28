@@ -4,7 +4,7 @@ kind: counterexample
 title: "Inside the space of eventually zero families, the linear subspace spanned by $\\{\\, e_i : i \\ge 1 \\,\\}$ is proper and has a basis equinumerous with a basis of the whole space, so \"equal dimension forces equality\" fails without finite dimension"
 status: draft
 origin: session
-deps: [ex-basis-of-the-eventually-zero-families, thm-dimension-of-a-linear-subspace, def-dimension, def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-standard-basis-of-f-n, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-injection-surjection-bijection, def-countable, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-nonzero-is-successor]
+deps: [ex-basis-of-the-eventually-zero-families, thm-dimension-of-a-linear-subspace, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-standard-basis-of-f-n, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-injection-surjection-bijection, def-countable, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-nonzero-is-successor]
 justified_by: []
 aliases: []
 landmark: false
@@ -51,7 +51,12 @@ whole space, and the equality clause of
 finite-dimensional ambient space — really does need its hypothesis.
 
 **No dimension is assigned to either space.** $E$ and $U$ are both
-infinite-dimensional ([[def-dimension]] assigns no number to such a space), and
+infinite-dimensional ([[def-dimension]] assigns no number to such a space): for
+$E$ this is claim 4 of [[ex-basis-of-the-eventually-zero-families]], and for $U$
+it follows from claims 1 and 2 below, since the basis $B'$ of $U$ is linearly
+independent and equinumerous with $\mathbb{N}$, so $U$ can have no finite
+spanning set and hence no finite basis, by claim 2 of
+[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]]. And
 claim 2 compares two specific bases through an explicit bijection, not two
 cardinal numbers.
 

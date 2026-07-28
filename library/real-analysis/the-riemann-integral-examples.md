@@ -55,7 +55,8 @@ set of a bounded integrable function, by the explicit construction
 $h(x) = 2^{-n(x)}$ with $n(x)$ the least index of a closed set containing $x$.
 Together with [[thm-discontinuity-set-is-f-sigma]], whose conclusion for the
 domain $[0,1]$ is that the discontinuity set is the trace on $[0,1]$ of an
-$F_\sigma$ set and hence itself $F_\sigma$, and with [[thm-lebesgue-criterion]],
+$F_\sigma$ set and hence, $[0,1]$ being closed, itself $F_\sigma$, and with
+[[thm-lebesgue-criterion]],
 this closes the classification: null and $F_\sigma$ is exactly what such a
 discontinuity set can be.
 
@@ -76,4 +77,8 @@ dense set, refuting
 [[thm-lebesgue-criterion]] is invoked it is only its converse half, "null implies
 integrable", which is a theorem of ZF; the fat-Cantor counterexample does not go
 through the criterion at all; and every tag or point selection made here is over
-a finite family. The ledger is [[rem-riemann-integral-choice-ledger]].
+a finite family. One cost is inherited rather than incurred:
+[[ex-integral-of-x-squared-from-the-definition]] takes integrability from
+[[thm-continuous-implies-integrable]] and with it the single use of countable
+choice inside Heine-Cantor. The ledger is
+[[rem-riemann-integral-choice-ledger]].

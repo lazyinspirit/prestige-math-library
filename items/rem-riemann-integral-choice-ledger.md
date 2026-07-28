@@ -57,8 +57,12 @@ used, and no claim is made anywhere that a use recorded here is *necessary*.
 **Selecting a tag in every subinterval is not countable choice.**
 [[thm-darboux-equals-riemann]] picks, for a *single fixed* partition, one point
 in each of its $n$ subintervals subject to a supremum condition. That family is
-finite, and a finite family of nonempty sets has a choice function outright, by
-[[lem-finite-choice]], which is a theorem of ZF proved by induction. The
+listed by the index $i < n$, and a family of nonempty sets listed by a natural
+number has a choice function outright, by
+[[lem-finite-choice]], which is a theorem of ZF proved by induction. (That
+lemma is careful to state only the listed form, since no definition of
+finiteness is available where it is proved; the listed form is what is used
+here.) The
 temptation to read this as a choice principle comes from the phrase "for each
 $i$ pick a point"; the number of picks is what matters, and it is finite.
 

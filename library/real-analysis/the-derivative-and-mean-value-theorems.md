@@ -64,10 +64,11 @@ constant $1$ with derivative $0$, and that $x \mapsto x^{-n}$ has derivative
 $-\iota(n)x^{-n-1}$ away from $0$; the case $n = 0$ is stated separately and not
 folded into the general formula, because $\iota(0)c^{-1}$ is not defined at
 $c = 0$. Polynomial functions follow by induction along the recursion defining
-finite sums. [[thm-derivative-of-an-inverse]] closes the toolkit: the inverse of
-a continuous injection on an interval is differentiable exactly where the
-derivative of the function does not vanish, with the reciprocal derivative, and
-is **not** differentiable where it does. Both halves rest on
+finite sums. [[thm-derivative-of-an-inverse]] closes the toolkit: at a point $f(c)$ where
+$f$ is differentiable, the inverse is differentiable exactly when $f'(c)$ does
+not vanish, with the reciprocal derivative, and is **not** differentiable when
+it does; nothing is asserted at a point of $f[I]$ where $f$ itself has no
+derivative. Both halves rest on
 [[thm-continuous-inverse]], which supplies the inverse and its continuity, and
 the second half is a one-line use of the chain rule against the identity.
 
@@ -121,7 +122,13 @@ which is increasing on $\mathbb{R}$ with $f'(0) = 0$.
 
 **What this page does not fix.** No one-sided derivative and no derivative of
 order above one is defined here, and no item on this page says anything about
-the continuity of $f'$ or about the existence of an antiderivative.
+the continuity of $f'$ or about the existence of an antiderivative. **Darboux's
+theorem is not proved here either**, so nothing below says that $f'$ has the
+intermediate value property of [[def-intermediate-value-property]]. The
+monotone-functions page names that theorem as the classical source of
+discontinuous functions with the intermediate value property and builds its own
+witness by hand instead; this page does not discharge it, and no item here may
+be cited for it. Nothing on either page depends on it.
 [[rem-derivative-conventions]] records exactly what is settled and what is left
 open, including that $f'(c)$ and $\frac{df}{dx}(c)$ name the same real number and
 that the second is a name and not a quotient.

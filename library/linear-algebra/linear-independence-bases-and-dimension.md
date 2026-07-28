@@ -143,9 +143,11 @@ condition (D2) of [[def-internal-direct-sum]] rather than pairwise trivial
 intersections, which would not suffice. **Neither of those two costs a choice
 principle**: the dimension formula extends a basis of $U \cap W$ to bases of $U$
 and of $W$ through claim 3 of [[thm-dimension-of-a-linear-subspace]], the
-finite-dimensional extension statement, which is proved from
-[[thm-well-ordering-principle]] and [[lem-adjoining-a-vector-outside-the-span]]
-alone. So the whole finite-dimensional theory on this page is choice-free, and
+finite-dimensional extension statement, which is proved from the size bound of
+[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]], the least-element
+principle [[thm-well-ordering-principle]] and
+[[lem-adjoining-a-vector-outside-the-span]], none of which costs a choice
+principle. So the whole finite-dimensional theory on this page is choice-free, and
 the Axiom of Choice appears only where an arbitrary vector space does: in
 [[thm-every-independent-set-extends-to-a-basis]], its two corollaries and
 [[cor-a-linear-subspace-has-a-complement]].

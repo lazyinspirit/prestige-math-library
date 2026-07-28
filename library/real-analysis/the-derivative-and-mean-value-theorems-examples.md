@@ -17,9 +17,9 @@ examples: [ex-derivatives-of-polynomials-computed,
 
 **Objective.** This is the worked companion to the page on the derivative and
 the mean value theorems, linked under Prerequisites above. It introduces no new
-definition and proves no new general theorem: every item here is either a
-computation carried out in full or a witness that a hypothesis on that page
-cannot be dropped.
+definition: every item here is either a computation carried out in full, a
+general formula derived from the rules of that page, or a witness that a
+hypothesis on that page cannot be dropped.
 
 **The rules, computed.** [[ex-derivatives-of-polynomials-computed]] differentiates
 $\iota(3)x^{4} - \iota(5)x + \iota(2)$ and then the rational function

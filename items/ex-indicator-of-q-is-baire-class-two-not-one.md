@@ -84,7 +84,7 @@ pointwise limits ([[def-baire-class-one]]).
 
 3.1 $\rho_{m}$ is $1$-Lipschitz, hence continuous: choosing $j_{0} \le m$ with $\rho_{m}(x) = |x - s(j_{0})|$ gives $\rho_{m}(y) \le |y - s(j_{0})| \le |y - x| + \rho_{m}(x)$, and exchanging $x$ and $y$ gives $|\rho_{m}(x) - \rho_{m}(y)| \le |x - y|$; so $\delta := \varepsilon$ witnesses continuity at every point. [step 2.1, L4, L5, L7]
 
-4.1 For $m, n \in \mathbb{N}$ with $n \ge 1$ define $h_{m,n} : [0,1] \to \mathbb{R}$ by $h_{m,n}(x) := \max\{\, 0,\ 1 - \iota(n)\,\rho_{m}(x) \,\}$. Each $h_{m,n}$ is continuous on $[0,1]$, being the pointwise maximum of the constant $0$ and the continuous function $x \mapsto 1 - \iota(n)\rho_{m}(x)$. [step 3.1, L4, L6]
+4.1 For $m, n \in \mathbb{N}$ define $h_{m,n} : [0,1] \to \mathbb{R}$ by $h_{m,n}(x) := \max\{\, 0,\ 1 - \iota(n)\,\rho_{m}(x) \,\}$; the index runs over the whole of $\mathbb{N}$, the term at $n = 0$ being the constant $1$ since $\iota(0) = 0$, so that $n \mapsto h_{m,n}$ is a sequence in the sense of [[def-sequence]]. Each $h_{m,n}$ is continuous on $[0,1]$, being the pointwise maximum of the constant $0$ and the continuous function $x \mapsto 1 - \iota(n)\rho_{m}(x)$. [step 3.1, L4, L6]
 
 5.1 For each fixed $m$ the sequence $n \mapsto h_{m,n}$ converges pointwise on $[0,1]$ to $g_{m}$. If $\rho_{m}(x) = 0$ then $h_{m,n}(x) = \max\{0,1\} = 1 = g_{m}(x)$ for every $n$. If $\rho_{m}(x) > 0$ then, taking a natural $n_{0} \ge 1$ with $\iota(n_{0}) > 1/\rho_{m}(x)$, every $n \ge n_{0}$ has $\iota(n)\rho_{m}(x) \ge \iota(n_{0})\rho_{m}(x) > 1$, so $h_{m,n}(x) = 0 = g_{m}(x)$. [step 2.1, step 4.1, L6, L7]
 
@@ -96,19 +96,8 @@ pointwise limits ([[def-baire-class-one]]).
 
 ## Remarks
 
-- **Why the restriction to $[0,1]$.** [[thm-baire-one-continuity-points]] is
-  stated on a closed bounded interval, and that is where the category argument
-  lives; the same conclusion holds on $\mathbb{R}$ by applying it on each
-  $[-\iota(n), \iota(n)]$, but nothing below needs that and it is not claimed
-  here.
+- **Why the restriction to $[0,1]$.** [[thm-baire-one-continuity-points]] is stated on a closed bounded interval, and that is where the category argument lives; the same conclusion holds on $\mathbb{R}$ by applying it on each $[-\iota(n), \iota(n)]$, but nothing below needs that and it is not claimed here.
 
-- **The two limits are of different kinds and the order matters.** $D$ is a
-  double pointwise limit: $h_{m,n} \to g_{m}$ as $n$ grows, and $g_{m} \to D$ as
-  $m$ grows. Claim 2 says the two cannot be collapsed into one: no single
-  sequence of continuous functions converges pointwise to $D$.
+- **The two limits are of different kinds and the order matters.** $D$ is a double pointwise limit: $h_{m,n} \to g_{m}$ as $n$ grows, and $g_{m} \to D$ as $m$ grows. Claim 2 says the two cannot be collapsed into one: no single sequence of continuous functions converges pointwise to $D$.
 
-- **The failing hypothesis, named exactly.** What obstructs Baire class one is
-  the density of the continuity set, and $D$ has an **empty** continuity set
-  ([[thm-dirichlet-and-thomae-continuity-sets]]). Thomae's function, by
-  contrast, is continuous at every irrational and so is not excluded by this
-  argument.
+- **The failing hypothesis, named exactly.** What obstructs Baire class one is the density of the continuity set, and $D$ has an **empty** continuity set ([[thm-dirichlet-and-thomae-continuity-sets]]). Thomae's function, by contrast, is continuous at every irrational and so is not excluded by this argument.

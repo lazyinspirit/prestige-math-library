@@ -4,7 +4,7 @@ kind: remark
 title: "What is fixed here and what is not: the derivative is taken at a point of the domain that is also a limit point of it, one-sided derivatives and derivatives of order above one are not introduced at this point in the reading order, and $f'(c)$ and $\\frac{df}{dx}(c)$ name the same real number"
 status: draft
 origin: session
-deps: [def-derivative, def-function-limit, def-limit-point-r, def-one-sided-limits, def-interval, thm-caratheodory-characterisation, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, thm-chain-rule, thm-derivative-of-an-inverse, thm-derivative-linear-approximation-form, lem-derivative-of-a-power, thm-fermat-interior-extremum]
+deps: [def-derivative, def-function-limit, def-limit-point-r, def-one-sided-limits, def-interval, thm-caratheodory-characterisation, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, thm-chain-rule, thm-derivative-of-an-inverse, thm-derivative-linear-approximation-form, lem-derivative-of-a-power, thm-fermat-interior-extremum, cor-bounded-derivative-implies-lipschitz]
 justified_by: []
 aliases: []
 landmark: false
@@ -96,9 +96,11 @@ rest of the page works with the difference quotient directly, among them
 mechanism is the sign of the quotient near the point.
 
 **What is deliberately not claimed anywhere on this page.** That $f'$ is
-continuous where it exists; that a function differentiable on a set has any
-regularity beyond the continuity of [[cor-differentiable-implies-continuous]];
-and that a vanishing derivative marks a local extremum. None of the three is
+continuous where it exists; that differentiability **alone**, with no hypothesis
+on $f'$, gives any regularity beyond the continuity of
+[[cor-differentiable-implies-continuous]] — a *bound* on $f'$ does give more,
+and that is [[cor-bounded-derivative-implies-lipschitz]]; and that a vanishing
+derivative marks a local extremum. None of the three is
 addressed here, and no item on this page may be cited for any of them. What *is*
 recorded, as the two false statements of this page, is that the mean value
 theorem needs continuity on the closed interval and that a vanishing derivative

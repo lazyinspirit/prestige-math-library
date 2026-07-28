@@ -87,8 +87,9 @@ the whole space. Inside $E$, the span of $\{\, e_i : i \ge 1 \,\}$ is a proper
 linear subspace, $e_0$ lying outside it, and its basis is equinumerous with a
 basis of $E$ through the explicit enumeration $k \mapsto e_{k+1}$ of the smaller
 basis by $\mathbb{N}$, set against the enumeration $k \mapsto e_k$ of the larger.
-That is exactly the hypothesis
-that [[thm-dimension-of-a-linear-subspace]] carries in its equality clause, and
+That is the infinite-dimensional analogue of the hypothesis
+[[thm-dimension-of-a-linear-subspace]] carries in its equality clause, which is
+stated only for a finite-dimensional ambient space; and
 the item is careful to compare two named bases through a named bijection rather
 than to compare dimensions: neither space is assigned a dimension, since neither
 has a finite basis.

@@ -69,7 +69,7 @@ used: every application on this page starts from a bounded $f$.
 
 [L6] $\varepsilon$-characterisations: if $u = \sup S$ with $S$ nonempty then for every real $\eta > 0$ there is $s \in S$ with $s > u - \eta$; dually for the infimum ([[lem-sup-epsilon]], [[lem-inf-epsilon]]).
 
-[L7] Every finite family of nonempty sets has a choice function, and this is a theorem of ZF ([[lem-finite-choice]], [[def-choice-function]]).
+[L7] A family of nonempty sets **indexed by a natural number** $n$ has a choice function, and this is a theorem of ZF; the family used below is indexed by $i < n$, which is exactly that listed form. [[lem-finite-choice]] states it in that form and expressly declines to identify it with "every finite family of nonempty sets has a choice function", no definition of finiteness being available where it is proved ([[lem-finite-choice]], [[def-choice-function]]).
 
 [L8] For every real $\eta > 0$ there is a natural $N \ge 1$ with $1/\iota(N) < \eta$; $\iota$ is nonnegative, additive and nondecreasing on $\mathbb{N}$, and $\iota(N) > 0$ for $N \ge 1$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
@@ -115,7 +115,7 @@ used: every application on this page starts from a bounded $f$.
 
 ## Remarks
 
-- **What the Riemann condition costs in choice: nothing beyond ZF.** The only selection made anywhere above is in steps 3.1 and 3.2, where a tag is picked in each of the $n$ subintervals of one fixed partition. That family is finite, and a finite family of nonempty sets has a choice function outright ([[lem-finite-choice]]), with no appeal to any choice axiom. Every other existential in the proof is instantiated once. This is recorded in [[rem-riemann-integral-choice-ledger]].
+- **What the Riemann condition costs in choice: nothing beyond ZF.** The only selection made anywhere above is in steps 3.1 and 3.2, where a tag is picked in each of the $n$ subintervals of one fixed partition. That family is listed by the index $i < n$, and a family of nonempty sets listed by a natural number has a choice function outright ([[lem-finite-choice]]), with no appeal to any choice axiom. Every other existential in the proof is instantiated once. This is recorded in [[rem-riemann-integral-choice-ledger]].
 
 - **Why the mesh of the coarse partition is the right quantity.** Step 4.2 is the only place where the mesh hypothesis is spent, and it is spent through the quantitative clause of [[lem-refinement-inequalities]]. The symbols there are those of the second half: adding the at most $n_0 - 1$ interior points of $P_0$ to the arbitrary partition $Q$ can change each Darboux sum by at most $2M_{+}$ times the total length of the affected subintervals, and each of those has length below $\delta_0$, the mesh bound imposed on $Q$. The number $n_0$ is fixed **before** $\delta_0$ is chosen, in step 1.2 against step 2.3, which is why the argument is not circular.
 

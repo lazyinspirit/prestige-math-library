@@ -21,7 +21,7 @@ discontinuities and continuity sets, linked under Prerequisites above. It
 introduces no definition and proves no general theorem: every item here is
 either a computation carried out in full, or a witness that some hypothesis on
 that page cannot be dropped. As an examples page it is a leaf of the dependency
-graph — nothing anywhere in the library rests on an item listed here.
+graph — nothing outside this page rests on an item listed here.
 
 **Computations.** [[ex-thomae-values-and-oscillation-computed]] evaluates
 Thomae's function and its oscillation at particular points: $1$ at every

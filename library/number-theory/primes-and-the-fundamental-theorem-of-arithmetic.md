@@ -92,8 +92,8 @@ value. [[lem-p-adic-valuation-basic]] converts the definition into the form the
 proofs use, chiefly $a = p^{v_p(a)}a'$ with $p \nmid a'$, and
 [[lem-p-adic-valuation-additive]] proves $v_p(ab) = v_p(a) + v_p(b)$ together
 with the ultrametric inequality $v_p(a+b) \ge \min\{v_p(a),v_p(b)\}$. Additivity
-is where primality enters, through Euclid's lemma, and it is the only place it
-does.
+is where primality enters, through Euclid's lemma, and among the valuation
+lemmas it is the only place it does.
 
 **Factorisation read by exponents.** [[thm-canonical-prime-factorisation]] states
 the canonical form honestly: for an injective list of primes covering the prime
@@ -136,8 +136,9 @@ divisibility witnesses instead. No claim that the characteristic of a ring is $0
 or prime — that statement is deferred by [[def-ring-characteristic]] and needs
 the definition of a ring, which sits far above this page; it is not discharged
 here and no argument below approaches it. No product over all primes, no
-statement about the distribution of primes beyond the two facts proved (there
-are infinitely many, and the gaps are unbounded), and no bound on the size of the
+statement about the distribution of primes beyond two facts: that there are
+infinitely many, proved here, and that the gaps between them are unbounded,
+proved on the companion page. And no bound on the size of the
 witness in Euclid's theorem. Eighteen items make up this page: two definitions,
 six lemmas, six theorems and four corollaries, nine of them marked as landmarks
 in the flowchart above.

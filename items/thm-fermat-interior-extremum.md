@@ -50,7 +50,10 @@ on $[0,1]$ attaining both its greatest and its least value at points where the
 derivative is $1$.
 
 **No converse is asserted.** A vanishing derivative does not produce an
-extremum, and this page records that failure separately.
+extremum. The witness is the cubic of
+[[fs-vanishing-derivative-forbids-strict-increase]], which has $f'(0) = 0$ and
+neither a local maximum nor a local minimum at $0$; that failure is recorded in
+the remarks of that item, not as an item of its own.
 
 ## Facts & Assumptions
 
