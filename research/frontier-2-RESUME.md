@@ -443,6 +443,81 @@ at $n=1$ the second reads $0 = 0\cdot(D_0+D_0)$, both true. The hypotheses are
 what the *proofs* need, not where the formulas break, and the item now says so.
 The same error had propagated into a Remark and was corrected there too.
 
+### AN ORCHESTRATOR ERROR THAT COST AN OWNER INSTRUCTION ITS AGENT
+
+**I transposed two agent identifiers.** The seven step-5 agents were dispatched
+in one batch and I recorded the returned ids against the wrong pairs for
+`connectedness` and `compactness`. Consequence: **every Baire instruction — the
+owner's explicit mid-build addition — went to the `connectedness` author**, which
+verified `plan-spec.json` three times, found all four items homed on
+`compactness`, and **correctly refused to write them**, citing its id-set
+boundary and the 253→255 page cycle it would create. It escalated the misrouting
+as its first report item.
+
+So the owner's instruction sat unassigned for the length of an authoring run. It
+has now been re-sent to the correct agent, which is still running.
+
+**Two lessons, recorded rather than smoothed over.**
+
+1. **The boundary rule saved this.** An author willing to write outside its id
+   set would have produced the Baire items on the wrong page, created a page
+   cycle, and no gate would have caught the *homing* error until `validate-plan`
+   failed at step 10 — by which point the compactness author would also have
+   written them, giving a duplicate id clash. The refusal is the mechanism
+   working exactly as designed.
+2. **Verify an agent id against something other than dispatch order.** The
+   notification labels are authoritative; my own notes were not. The reconstructed
+   map is in the commit message.
+
+**A second instruction was misrouted in the same swap, and there I was also
+wrong on the merits.** I told the `compactness` author to *remove* the forward
+wikilink on `def-order-topology-on-a-linearly-ordered-set` rather than declare
+it, reasoning that declaring it would propagate the sky ↗ chip to every
+consequence. The item belongs to `connectedness`, which never got the message and
+**declared it instead** — the better call. Checked from disk: the wikilink sits
+under `## Remarks`, so it is orientation-only and legal on a definition;
+`fwdcheck` reports **OK** overall, and there is exactly **one** inherited marker
+in the whole repository, on a pre-existing item unrelated to this build. My
+instruction was over-cautious and reached the wrong agent, so the correct outcome
+occurred by accident.
+
+### Two more pairs complete, and a spec/disk divergence repaired
+
+`cardinal-arithmetic-and-cofinality` (34 items) and `connectedness` (36 items),
+both gate-clean. Between them **11 scaffold errors caught**, of which three are
+the fatal title class:
+
+- `thm-konig`'s scaffolded title asserted "the theorem **implies** [AC]" — true of
+  the *set* form, not proved for the cardinal form as stated. Retitled; the
+  set-form derivation is given in Remarks as the justification for naming AC.
+- `thm-tarski-square`'s title asserted an **independence** result needing Con(ZF)
+  and Cohen — ‡ material, barred. Retitled to what is proved.
+- `ex-aleph-one-is-at-most-the-continuum`'s title asserted "why the inequality is
+  all that ZFC decides" — an independence claim an `ex-` cannot establish.
+- `thm-cardinal-power-set-and-cantor` was scaffolded **with no choice
+  hypothesis** although it writes $2^\kappa$ and $|\mathcal{P}(\kappa)|$, neither
+  of which need denote anything in ZF.
+- **`cex-components-differ-from-quasicomponents`'s scaffolded witness is simply
+  false.** The notes specify a space that is a product of two totally
+  disconnected spaces, in which each column is clopen — so the quasicomponent of
+  $(0,0)$ cannot contain $(1,0)$ and the space witnesses nothing. Replaced with
+  the classical space; id unchanged.
+- `def-locally-connected` was scheduled **before** `def-path-connected` while its
+  own title needs paths; and its title omitted **open**, which without it names
+  *connectedness im kleinen*, a strictly weaker notion for which the following
+  theorem is false as stated.
+
+**Spec/disk divergence repaired.** The forced reorder above left
+`research/plan-spec.json` disagreeing with the authored page file. Spliced;
+`validate-plan` exit 0. (The five `fs-` items appearing in the spec's `items` but
+not the page's was a **false alarm** — they sit in `examples:` per house
+convention, which I checked before touching anything.)
+
+**Five published items this build falsifies are now staged** in
+`research/frontier-2-published-amendments.md`, each verified verbatim on disk,
+none applied. They are additional to the seven found earlier, and every one would
+become a live falsehood the moment this pair publishes.
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
