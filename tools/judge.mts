@@ -123,10 +123,28 @@ for (let i = 0; i < argv.length; i++) {
     file = a;
   }
 }
-if (!file) {
+if (!file && !bools.has("preflight")) {
   console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--batch "slug,slug"] [--allow-claude]');
+  console.error('       tsx tools/judge.mts --preflight [--model M]   # one cheap call: is the account funded?');
   process.exit(2);
 }
+
+// EXIT CODES. 0 = a verdict was produced (pass, refutation, or an honest null).
+// 2 = usage/config error. 3 = THE ACCOUNT CANNOT PAY: no verdict is obtainable
+// now or by retrying, and a sweep should stop rather than continue.
+//
+// Why 3 exists (measured 2026-07-28, frontier-1). The account ran dry mid-build.
+// A 402 is not a transient fault, but it reached callers as `keep: null` with a
+// NO_CONTENT reason — indistinguishable from the intermittently dropped verdicts
+// this harness genuinely does produce, and the documented response to those is
+// "always re-run before concluding". So six agents re-ran a payment error for
+// HOURS. The status was never the problem; the AMBIGUITY was.
+const PAYMENT_EXIT = 3;
+// Endpoint override, so the payment path above can be EXERCISED in a test rather
+// than only reasoned about. Defaults to production; nothing in the workflow sets it.
+const API_URL = (process.env.OFOX_BASE_URL ?? "https://api.ofox.ai") + "/v1/chat/completions";
+const isPaymentError = (status: number, raw: string): boolean =>
+  status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
 // SESSION items only. The production generator lineup is
 // ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"] (worker/src/ofox.ts genLineup), so
 // this default is an IDENTITY collision with the first generator entry. Harmless
@@ -146,6 +164,38 @@ const key = process.env.OFOXAI_API_KEY;
 if (!key) {
   console.error("OFOXAI_API_KEY not set");
   process.exit(2);
+}
+
+// --preflight: ONE minimal call, before a sweep spends anything. A dead account
+// then costs a single request instead of one per item.
+if (bools.has("preflight")) {
+  const pm = opts.model ?? "z-ai/glm-5.2";
+  let status = 0;
+  let raw = "";
+  try {
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
+      body: JSON.stringify({ model: pm, max_tokens: 1, messages: [{ role: "user", content: "ok" }] }),
+      signal: AbortSignal.timeout(60_000),
+    });
+    status = r.status;
+    raw = await r.text();
+  } catch (e) {
+    console.error(`[judge] preflight: transport failure — ${String((e as Error)?.message ?? e)}`);
+    process.exit(PAYMENT_EXIT);
+  }
+  if (isPaymentError(status, raw)) {
+    console.error(`[judge] PREFLIGHT FAILED: the account cannot pay. ${raw.slice(0, 200)}`);
+    console.error("[judge] Do not start a sweep. This needs an owner top-up; no retry will succeed.");
+    process.exit(PAYMENT_EXIT);
+  }
+  if (status >= 400) {
+    console.error(`[judge] preflight: HTTP ${status} — ${raw.slice(0, 200)}`);
+    process.exit(2);
+  }
+  console.error(`[judge] preflight OK (${pm}) — the account is funded.`);
+  process.exit(0);
 }
 
 const body = readFileSync(file, "utf8");
@@ -595,11 +645,11 @@ interface OfoxResp {
   usage?: { prompt_tokens?: number; completion_tokens?: number };
 }
 
-async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw: string }> {
+async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw: string; payment?: boolean }> {
   for (let attempt = 0; attempt < 3; attempt++) {
     let resp: Response;
     try {
-      resp = await fetch("https://api.ofox.ai/v1/chat/completions", {
+      resp = await fetch(API_URL, {
         method: "POST",
         headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
         body: JSON.stringify(payload),
@@ -610,6 +660,9 @@ async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw
       return { content: "", raw: String((e as Error)?.message ?? e) };
     }
     const raw = await resp.text();
+    // A payment error is TERMINAL. Never retry it, and never let it leave here
+    // wearing the same clothes as a dropped verdict — see PAYMENT_EXIT above.
+    if (isPaymentError(resp.status, raw)) return { content: "", raw, payment: true };
     if ((resp.status === 429 || resp.status >= 500) && attempt < 2) {
       const ra = Number(resp.headers.get("retry-after") ?? NaN);
       await sleep(!Number.isNaN(ra) ? Math.min(ra * 1000, 60_000) : (attempt + 1) * 4000);
@@ -622,7 +675,7 @@ async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw
   return { content: "", raw: "retries exhausted" };
 }
 
-const { content, usage, raw } = await call();
+const { content, usage, raw, payment } = await call();
 
 const costlog = process.env.JUDGE_COSTLOG;
 if (costlog) {
@@ -647,6 +700,21 @@ const emit = (keep: boolean | null, reason: string): void => {
     } catch { /* non-fatal: stdout is still the primary channel */ }
   }
 };
+
+// TERMINAL: the account cannot pay. Say so on stdout so the caller sees it, and
+// exit 3 so a sweep loop can stop on the FIRST one instead of grinding through
+// every remaining item.
+//
+// Deliberately NOT written to JUDGE_VERDICTLOG. That ledger answers "how many
+// times was this proof refuted", and a payment failure is not a verdict about
+// the proof at all. 46 such lines entered the frontier-1 ledger before this
+// existed and had to be filtered out of every count made from it afterwards.
+if (payment) {
+  process.stdout.write(JSON.stringify({ id, model, keep: null, reason: "PAYMENT_REQUIRED: " + raw.slice(0, 200) }) + "\n");
+  console.error("[judge] ACCOUNT CANNOT PAY — stopping. This is terminal: no retry will succeed and this is not a dropped verdict.");
+  console.error("[judge] Needs an owner top-up. Run `tsx tools/judge.mts --preflight` to confirm before restarting a sweep.");
+  process.exit(PAYMENT_EXIT);
+}
 
 if (!content) {
   emit(null, "NO_CONTENT: " + raw.slice(0, 300));

@@ -246,6 +246,18 @@ belongs to subagents, one per A/B pair, not to the orchestrator running it
 serially. The cap is the derisking; see `ARCHITECTURE.md` §5 for the failure it
 prevents and why 6 is the ceiling.
 
+**Preflight the account before a sweep** (owner, 2026-07-28) — one cheap call
+instead of discovering a dead balance ninety items in:
+
+```
+npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts --preflight
+```
+
+**Exit 3 means the account cannot pay and the sweep must STOP.** It is terminal:
+no retry succeeds, it is printed as `PAYMENT_REQUIRED` rather than `NO_CONTENT`,
+and it is deliberately kept out of the verdict ledger. Do not treat it as a
+dropped verdict.
+
 Known harness behaviour, all measured: **retry envelope is 7 minutes per attempt
 × 3 attempts ≈ 21 minutes worst case per item** (`AbortSignal.timeout(420_000)`)
 — a slow call is usually not a hang; verdicts are **dropped intermittently**, so

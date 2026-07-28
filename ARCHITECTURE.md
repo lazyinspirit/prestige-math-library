@@ -346,6 +346,28 @@ against the library's own conventions before reading an acceptance as a miss.
 None of this promotes the judge above a screen; the 0/3 on real historical
 defects stands.
 
+**A PAYMENT ERROR IS TERMINAL, and the tool now says so (owner approved,
+2026-07-28).** Exit codes: **0** a verdict was produced (pass, refutation, or an
+honest null), **2** usage/config error, **3** the account cannot pay. On a 402 —
+or any body matching `insufficient_credits` — `judge.mts` returns immediately, does
+not retry, prints `PAYMENT_REQUIRED` on stdout rather than `NO_CONTENT`, and
+**does not write to `JUDGE_VERDICTLOG`**, because a payment failure is not a
+verdict about the proof. `tsx tools/judge.mts --preflight` makes one minimal call
+and exits 0 or 3, so a dead account costs one request instead of one per item.
+
+The status was never the problem; the **ambiguity** was. When the account died
+mid-`frontier-1`, a 402 reached callers as `keep: null` with a `NO_CONTENT`
+reason — indistinguishable from the intermittently dropped verdicts this harness
+genuinely produces, whose documented response is "always re-run before
+concluding". So six agents re-ran a payment error for hours, and 46 non-verdicts
+entered the ledger and had to be filtered out of every count made from it after.
+
+`OFOX_BASE_URL` overrides the endpoint so this path can be **exercised** rather
+than reasoned about; it defaults to production and nothing in the workflow sets
+it. All four paths were tested against a mock 402 before the change shipped:
+funded preflight → 0, unfunded preflight → 3, unfunded item call → 3 with an
+untouched ledger, and a real call → a verdict at exit 0.
+
 **Measured behaviour, all in the tool header:** retry envelope
 `AbortSignal.timeout(420_000)` × 3 ≈ **21 minutes worst case per item**, so a
 slow call is usually not a hang; verdicts drop intermittently and must be re-run;
