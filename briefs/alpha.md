@@ -62,7 +62,15 @@ Each note is stated as an applyable edit: file, section, exact old text, exact
 new text. Apply only what the owner approved; the orchestrator will tell you
 which. Record what you applied.
 
-## Stage 2 — step 9: final mathematical-accuracy audit
+## Stage 2 — step 9: THE audit, and you FAN IT OUT
+
+**Step 8 was merged into this stage (owner, 2026-07-28), so this is now the only
+audit tier.** Do not read the level alone. Dispatch readers — **including one
+scaffolder-authored reader per batch**, the Beta that scaffolded it, because a
+scaffolder is the one who can recognise its own scaffold errors — and then
+**re-verify every finding against the file on disk before acting on it.** No fix
+lands on a reader's word. Every reader returns an honest coverage statement; you
+compose them into the one the OWNER reads.
 
 Audit the **whole level** for mathematical accuracy and fix fatal errors. This is
 the last verification tier before the owner's own audit.

@@ -11,7 +11,8 @@ visual tier, how each works and which failure it prevents. Read it before
 adding or changing a mechanism.
 
 **Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
-(scaffold, step-8 audit, authoring). `LEVELS.md` describes them; those files are
+(scaffold, step-9 scaffolder-reader, authoring). `LEVELS.md` describes them;
+those files are
 the actual text.
 
 **Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
@@ -69,7 +70,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
    The five steps here are the publish path for any content; this one applies
    only to a per-level build. Before the owner audit, Alpha-n audits the WHOLE
    level for mathematical accuracy and fixes fatal errors, starting with
-   whatever the step-8 coverage statements say nobody read in full. Fatal
+   whatever its own readers' coverage statements say nobody read in full. Fatal
    includes a title or Statement asserting more than the proof gives — the
    judge reads Statements and cannot see a false title. `LEVELS.md` §"Step 9".
 4. **Owner audit** gates `status: published` (set `verification.audited`).

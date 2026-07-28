@@ -1,9 +1,19 @@
+<!-- RETITLED 2026-07-28. Step 8 was merged into step 9; this file is now the
+     brief for the SCAFFOLDER-AUTHORED READER inside step 9's fan-out. The
+     filename is unchanged on purpose — it is referenced from ARCHITECTURE.md,
+     memory files and the commit history, and renaming it would dangle those.
+     Your role: you scaffolded this batch, so you read this batch, and you are
+     the one who can recognise your OWN scaffold errors. Alpha adjudicates every
+     finding you return against the file on disk before acting on it. -->
 <!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
      <i> (batch). Kept in the repo because these briefs ARE the prompt-side
      half of the workflow: LEVELS.md describes them, this is the text. They
      lived in a session scratchpad until 2026-07-27 and would have been lost. -->
 
-# Level-<n> step-8 audit brief (Beta-9-i audits its own batch)
+# Scaffolder-reader brief — your batch, inside step 9's fanned-out audit
+
+*(Was the step-8 brief. Step 8 was retired 2026-07-28 and merged into step 9;
+your reading duty is unchanged, but Alpha now adjudicates what you return.)*
 
 You scaffolded this batch at step 1. The pages have since been AUTHORED: every
 item in your `research/level<n>-batch-<i>.pages.json` now exists as

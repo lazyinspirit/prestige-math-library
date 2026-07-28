@@ -495,9 +495,9 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | file | actor | carries |
 |---|---|---|
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | plan order, namespaced writes, dep resolution, id reuse, seams |
-| `beta-step8-audit.md` | Beta-n-i, step 8 | "you are the first real reader", ranked hunting grounds |
+| `beta-step8-audit.md` | Beta-n-i, **step 9 scaffolder-reader** (step 8 retired 2026-07-28; filename kept so references do not dangle) | ranked hunting grounds; catching one's own scaffold errors |
 | `authoring.md` | authoring agent, steps 5/7 | precheck traps, shipped-defect checklist, judge protocol |
-| `alpha.md` | Alpha-n, steps 4 and 9 | propagation, final whole-level audit (seams included as a risk source), twice-touched interaction |
+| `alpha.md` | Alpha-n, steps 4 and 9 | propagation; **step 9 as ONE fanned-out audit** — dispatch readers, re-verify every finding from disk, never act on a reader's word |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical

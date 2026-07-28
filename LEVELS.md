@@ -20,8 +20,8 @@ Everything below is verified against the code as of 2026-07-27.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may delete a result |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-7 adjudication of every judge rejection**, reporting |
-| **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; audits the whole level, seams included |
-| **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; step 8 audit of its own batch |
+| **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; **runs step 9 as one fanned-out pass**, dispatching readers and re-verifying every finding from disk |
+| **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; **at step 9, the scaffolder-authored reader for its own batch** (step 8 retired 2026-07-28) |
 | **authoring agent** | Opus 5 | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
 | **judge** | `z-ai/glm-5.2` via ofox | cheap adversarial screen. **Never a Claude model** for session items |
 
@@ -37,7 +37,7 @@ Everything below is verified against the code as of 2026-07-27.
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
 | `briefs/judge-conventions.txt` | the judge's `--conventions` string — the ONLY actor whose prompt is a bare CLI argument, so it is stored rather than retyped |
-| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-8 audit, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-9 scaffolder-reader, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27 |
 
 ### `order` is not stable across insertions — recompute, never remember
 
@@ -107,10 +107,12 @@ rather than trusting the sweep.
 final text.** Run them in this order:
 
 ```
-0 → 1 → 2 → 3 → 4 → 5 → 8 → 9 → 6 → 7 → 10
-                    ▲            ▲
-              author, gates      judge ONCE, on text nobody
-              only, NO judge     will rewrite afterwards
+0 → 1 → 2 → 3 → 4 → 5 → 9 → 6 → 7 → 10
+                    ▲   ▲   ▲
+      author, gates ┘   │   └ judge ONCE, on text nobody
+      only, NO judge    │     will rewrite afterwards
+                        └ THE audit — one fanned-out pass
+                          (step 8 was merged into it)
 ```
 
 **Why the numbers did not change with the order.** Step numbers are quoted from
@@ -323,16 +325,28 @@ re-judge only what changed.
 Standing instruction: **re-read your own Remarks with a numbered step's
 suspicion.** Remark prose is where falsehoods hide.
 
-## Step 8 — Batch audit (Beta-n-i audits its own batch)
+## Step 8 — RETIRED, merged into step 9 (owner, 2026-07-28)
 
-Focus on once-rejected proofs and their neighbours; where the judge passed
-everything, this stage is the **first real reading**, not a formality — at
-level 8 it found 22 item defects and ~14 summary corrections after a clean judge
-sweep. Ranked hunting grounds: **Remark prose · page summaries · counts stated in
-prose · index ranges at the first index (ℕ contains 0) · citing an item for a
-claim it does not make · scope-denial phrasing that decays.**
+> **This is a tombstone, kept deliberately.** "Step 8" is quoted from memory
+> files, briefs, research notes and the commit history; deleting the heading
+> would leave every one of those references pointing at nothing. The stage is
+> gone, its duties are in step 9, and this marker is how a reader of an old
+> reference finds out.
+>
+> **Why it went.** It was productive — 11 defects on `frontier-1`, 22 items plus
+> ~14 summary corrections at level 8 — but step 9 read all 212 items anyway, via
+> readers Alpha dispatched, so step 8's findings sat *inside* step 9's coverage.
+> Two passes over the same text, and the second was the complete one.
+>
+> **What was preserved, because deleting it outright would have lost them:** the
+> ranked hunting grounds (now step 9); the honest coverage statement, which now
+> goes to the **owner** rather than to a later stage; and the scaffolder's
+> context — a Beta auditing the batch it scaffolded catches its own errors, which
+> is how the `[3]^1` two-element witness and the unexecutable `thm-recursion`
+> instruction were both found. Step 9 therefore keeps **one scaffolder-authored
+> reader per batch**.
 
-## Step 9 — Final Alpha-n mathematical-accuracy audit (owner instruction, 2026-07-27; renumbered 2026-07-28)
+## Step 9 — THE audit: one fanned-out mathematical-accuracy pass (owner, 2026-07-27; absorbed step 8 on 2026-07-28)
 
 > **The separate seam audit was REMOVED on 2026-07-28 (owner).** It used to be
 > step 9, bounded to cross-batch dependency edges; the final audit was step 10a.
@@ -344,6 +358,35 @@ claim it does not make · scope-denial phrasing that decays.**
 **Alpha-n audits the WHOLE level for mathematical accuracy, fixes fatal errors,
 and reports to the owner.** This is the last verification tier before the owner's
 own audit, and it is not optional.
+
+**It is ONE stage and it FANS OUT.** Alpha does not read 200 items alone; it
+dispatches readers, then **re-verifies every finding against the file on disk
+before acting on it** — no fix lands on a reader's word. That pattern covered all
+212 items of `frontier-1` in a single pass, 35 read by Alpha itself and 177 by six
+readers it dispatched.
+
+**Composition, binding:**
+
+- **One scaffolder-authored reader per batch.** The Beta that scaffolded a batch
+  reads that batch. This is the half of the retired step 8 worth keeping: a
+  scaffolder catches its *own* errors, which is how the `[3]^1` "two-element"
+  witness and the unexecutable `thm-recursion` instruction were found.
+- **The rest by topic**, sized to the level.
+- **Every reader returns an honest coverage statement** — what it read in full,
+  what Statement-only, what it never opened. These compose into the statement
+  that goes to the **owner** in the rundown, and it is the number the owner is
+  actually being asked to trust.
+
+**Ranked hunting grounds (inherited from step 8, and measured):** **Remark prose ·
+page summaries · counts stated in prose · index ranges at the first index (ℕ
+contains 0) · citing an item for a claim it does not make · scope-denial phrasing
+that decays.** Across seven consecutive builds **every defect found at this tier
+was in prose and none was in a numbered proof step** — so read the proofs, because
+nobody else will, but expect the defects in the sentences around them.
+
+**The judge has not run yet.** Under the execution order, step 6 comes *after*
+you. Delete the `verification.judge` block of anything you materially rewrite and
+stop there; do not re-judge, the sweep will reach it.
 
 It is **bounded by RISK**, and the risk map is written by the agents themselves:
 
