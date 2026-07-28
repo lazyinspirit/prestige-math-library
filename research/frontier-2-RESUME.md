@@ -387,6 +387,62 @@ So "ℚ is dense in ℝ" is **not citable topologically**, and three items deriv
 instead from `lem-rat-embeds-dense`. Any future page needing topological density
 of ℚ hits this. Carried to the rundown.
 
+### Gate state during authoring — measured against a true baseline
+
+A mid-build gate run is meaningless without a baseline, so I took one from the
+pre-authoring commit in a detached worktree rather than reasoning about it.
+
+| class | baseline (pre-authoring) | now (4 pairs still in flight) | verdict |
+|---|---|---|---|
+| `cited-not-in-deps` | 112 | 117 | warning class; **exit 0 at baseline**, so tolerated. All 5 new ones name `frontier-2` items on pages still being written |
+| `multi-home` | 22 | 22 | **unchanged — entirely pre-existing**, and all 22 are the same pair: `construction-of-r-via-cauchy-sequences` and `construction-of-r-via-dedekind-cuts` share the integer/rational scaffolding |
+| `link-unresolved` | 0 | 13 | the only hard-failing class. **All 7 distinct targets are `compactness` items whose author has not written them yet** — pure in-flight transience |
+| exit code | 0 | 1 | expected mid-authoring; the authoritative pass is step 10 |
+
+Of the 5 new `cited-not-in-deps`, three are same-page citations of a *later*
+item from a Remark, which is legitimate; two are on `thm-tietze-extension-theorem`
+(`def-topological-space`, `lem-geometric-sequence-null` cited in Statement/Facts
+but absent from `deps`) and are genuine, minor, and on a page still in flight.
+**Re-check all of this at step 10 rather than now.**
+
+**A false finding I nearly recorded.** I first measured "204 published items with
+no page home" — a number that would have gone into the rundown as a substantial
+gap. It was my own measurement error: I checked the spec's `items[]`, but `kind:
+P` placeholder pages carry empty arrays there while their real page files list
+items. Re-measured against the page files: **all 1365 published items are homed,
+zero orphans.** Recorded because the near-miss is the point — a corpus-wide claim
+from the wrong source reads exactly like a finding.
+
+### Step 5 — arm 2 of the authors, and a second self-caught defect
+
+`inclusion-exclusion-and-the-pigeonhole-principle` returned 31 items, all
+precheck clean, `rendercheck` clean on 33 files (it also grepped for stray `[[`
+digraphs after the warning and found none), and 4 scaffold errors caught:
+
+- `thm-double-counting` does **not** need the double-sum interchange lemma the
+  notes assign it — the published `thm-sum-rule` clause 2 already counts a
+  pairwise-disjoint family directly. The lemma is genuinely used three times, but
+  elsewhere.
+- **`lem-finite-set-has-max` cannot supply what Erdős–Szekeres needs**: its
+  Statement is about a listed set of **reals**, and the proof needs a greatest
+  element of a set of **naturals**. Derived from `thm-well-ordering-principle`
+  instead and the dep dropped. This is the mis-citation class caught before it
+  was committed.
+- `thm-the-erdos-szekeres-bound-is-sharp` does not depend on `thm-erdos-szekeres`
+  at all; the construction is self-contained. Dropped.
+- It independently hit the `ARCHITECTURE.md` §3.3 trap: its remark inherited a
+  sky ↗ marker propagated along one `deps` edge from
+  `rem-counting-conventions-and-scope`. Dropping that edge cleared it, and no
+  item on the pair now carries the chip.
+
+**And it caught a falsehood of its own making**, which is the habit the brief
+asks for: its first draft of `cor-the-derangement-recurrences` claimed the
+recurrences *fail* at the excluded indices. Under this library's **truncated**
+natural subtraction they do not — at $n=0$ the first reads $1 = 0\cdot 1 + 1$ and
+at $n=1$ the second reads $0 = 0\cdot(D_0+D_0)$, both true. The hypotheses are
+what the *proofs* need, not where the formulas break, and the item now says so.
+The same error had propagated into a Remark and was corrected there too.
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
