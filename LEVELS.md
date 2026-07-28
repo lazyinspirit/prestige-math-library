@@ -282,6 +282,28 @@ publishes the level**, never before, with `verification.audited` cleared so
 you repaired** — a level-8 fix corrected one sentence and left the same
 falsehood sixteen lines away.
 
+**Grep is the entry point, never the sweep (measured at level 9).** Running the
+patterns above plus every variant of `not (developed|proved|available|
+established|defined|introduced) (here|in this library|at this point)` over the
+published corpus matched 157 items, and every one of the 14 topic-relevant
+sentences it surfaced was still true. It nevertheless missed **both** amendments
+that level's step 2 had already found by reading:
+
+- `rem-choice-ledger`: *"Neither direction is proved here, and no item derives
+  either"* — "neither … proved here" is not "not proved here";
+- `ex-p-adic-ultrametric`: *"neither of which this item develops or assumes"* —
+  no denial keyword in any matched form.
+
+The defect class is a claim about what the library does not contain, written in
+whatever English the author reached for; no pattern enumerates that. **Dispatch a
+reading agent, and hand it those two sentences as recall tests** — a sweep that
+does not rediscover both is not measuring what it claims to.
+
+The one thing that IS working: every published item using the order-relative
+phrasing (`not available at this point in the reading order`) survived level 9
+untouched, because the claim is indexed to a position rather than to the corpus.
+That is why §6 of the step-8 brief mandates it.
+
 ---
 
 ## The escalation rule (fires at any step)

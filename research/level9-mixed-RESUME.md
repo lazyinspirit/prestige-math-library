@@ -102,8 +102,39 @@ it weakens a claim the library could actually make.
    Batch 2's step 8 is in flight; see above.
 4. Step 9 seam audit and step 10a level audit — **resume Alpha-9**, agent
    `ae085501642ff3e01`, which already carries this level's context.
-5. Step 10b scope-denial sweep of the published corpus.
+5. Step 10b scope-denial sweep of the published corpus. **Do not run it by
+   grep — see below.**
 6. Step 10c rundown, then **stop**.
+
+## Step 10b: why a regex sweep is not enough, measured
+
+I probed the published corpus for scope-denial claims level 9 falsifies, using
+the phrasings the step-8 brief names: `not (developed|proved|available|
+established|defined|introduced) (here|in this library|at this point)`, `this
+library does not`, `is not available`, `does not develop`, `not yet …`. That
+matched 157 published items; narrowing to level-9 topics left 80 items and 14
+actual sentences. **All 14 survive**, because each uses the order-relative
+phrasing and sits at a strictly earlier order than the page that supplies the
+machinery — items at orders 68/69 denying dimension (arrives at 70), one at 105
+denying the mean value theorem (131), one at 123 denying one-sided limits of
+monotone functions (129).
+
+That reads like a clean sweep and **it is not one.** The same regex misses both
+amendments already staged in `level9-mixed-published-amendments.md`, which
+Beta-9-2 found by reading:
+
+- `rem-choice-ledger`: *"Neither direction is proved here, and no item derives
+  either."* — "neither … proved here", not "not proved here".
+- `ex-p-adic-ultrametric`: *"neither of which this item develops or assumes."* —
+  no denial keyword at all in the matched form.
+
+So the real defect class is a claim about **what the library does not contain**,
+written in whatever English the author reached for, and no pattern enumerates
+that. Use a reading agent at step 10b, and give it those two sentences as recall
+tests: a sweep that does not rediscover both is not measuring what it claims to.
+
+The order-relative convention IS working, though — every item that used it
+survived, which is the whole point of having adopted it.
 
 ## Owner decisions taken at step 3 — do not re-open
 
