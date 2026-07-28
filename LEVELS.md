@@ -299,6 +299,17 @@ whatever English the author reached for; no pattern enumerates that. **Dispatch 
 reading agent, and hand it those two sentences as recall tests** — a sweep that
 does not rediscover both is not measuring what it claims to.
 
+The step-8 audits the same day added two more forms no pattern above catches,
+both of them false when written rather than decayed: *"this library has not
+built one"* (`def-p-adic-valuation`, of an ordered set with a greatest element —
+`def-extended-reals` is published and is exactly that) and *"machinery this
+library has not built"* (`cex-hilbert-monoid-factorisation-not-unique`, of the
+algebraic integers, which orders 46/47 are for). **"has not built" is now the
+fourth distinct verb** after "develop", "prove", "contain"; the list will keep
+growing, which is the point. Note also that both of these were caught by page
+auditors reading their own batch, not by any sweep — the cheapest place to kill
+this defect is at step 8, before the claim is ever published.
+
 The one thing that IS working: every published item using the order-relative
 phrasing (`not available at this point in the reading order`) survived level 9
 untouched, because the claim is indexed to a position rather than to the corpus.
