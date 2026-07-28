@@ -696,3 +696,123 @@ removal, so the ramification question does not arise.
 **182 items, 12 pages, corpus 1416 → 1598.** All `status: draft`, all `origin:
 session`. **Zero carry `verification.audited` and zero carry
 `verification.judge`** — the judge has not run and `audited` is the owner's field.
+
+---
+
+# STEP 10b — THE RUNDOWN. Paused for the owner.
+
+## What was built
+
+**182 items across 12 pages, corpus 1416 → 1598.** All `status: draft`, all
+`origin: session`. **Zero carry `verification.audited`** — that field is the
+owner's alone.
+
+| page | items | judged |
+|---|---|---|
+| `cardinal-arithmetic-and-cofinality` (+examples) | 26 + 8 | 30/34 |
+| `connectedness` (+examples) | 28 + 8 | 36/36 |
+| `compactness` (+examples) | 31 + 8 | 39/39 |
+| `hausdorff-via-the-diagonal` (+examples) | 13 + 8 | 21/21 |
+| `urysohn-lemma-and-tietze` (+examples) | 13 + 8 | 21/21 |
+| `inclusion-exclusion-and-the-pigeonhole-principle` (+examples) | 21 + 10 | 31/31 |
+| **total** | **182** | **178/182 (98%)** |
+
+## The nine gates — final orchestrator pass
+
+| gate | result |
+|---|---|
+| `precheck.mts` | **1195 checked, 0 failing** |
+| `depcheck.mjs` | OK, exit 0 |
+| `fwdcheck.mjs` | OK, exit 0 |
+| `extcheck.mjs` | OK, exit 0 |
+| `rendercheck.mjs` | OK — every math span parses under real KaTeX |
+| `validate-plan.mjs` | OK, exit 0 (`[size]` on `compactness` at 31, owner-authorised) |
+| `depsource.mjs` | **0 unresolved** |
+| `citecheck.mjs` | 21 warnings, triaged |
+| `prosecheck.mjs` | 0 errors |
+
+**Judge coverage is corroborated, not asserted.** Every one of the 178 recorded
+passes was cross-checked against `research/frontier-2-judge.jsonl` in both
+directions. **Fabricated blocks: 0.** Two were found and removed during the
+sweep — see below.
+
+## What the owner is accepting if they publish
+
+1. **Four items are unjudged**, all on `cardinal-arithmetic-and-cofinality-examples`:
+   `ex-a-singular-cardinal-of-uncountable-cofinality`, `ex-an-aleph-fixed-point`,
+   `ex-the-beth-hierarchy-computed`, `ex-counting-functions-and-subsets-of-the-continuum`.
+   The sweep stopped on the **weekly API limit**, not on any defect. They have
+   been read by the step-9 tier; they lack the independent cross-family screen.
+2. **Step 10a is PARTIAL.** The dedicated scope-denial reader died on the same
+   limit. I ran grep plus targeted reading myself; **the recall test that
+   `LEVELS.md` requires was not run**, so this sweep is not measuring what the
+   process says it should. Repeat it before publishing.
+3. **Thirteen amendments to published items are staged and unapplied**
+   (`research/frontier-2-published-amendments.md`). Each becomes a live falsehood
+   the moment this build publishes.
+4. **Coverage asymmetry at step 9**, stated as Alpha gave it: every item was read
+   in full by at least one attestable reader, but `connectedness`'s tail was read
+   by Alpha itself after its assigned reader failed, and `hausdorff-via-the-diagonal`
+   and `urysohn-lemma-and-tietze` have **one** full independent read rather than two.
+
+## What this build found that no gate could
+
+**Three invalid proof steps — breaking a seven-build streak** in which every
+defect was in prose and none in a numbered step. The long line defined as two
+*open* rays (a gap, hence disconnected); a Hausdorff separation using two
+**non-disjoint** rays; a vacuous case analysis resting on a false intermediate
+claim. I do not think authoring got worse: this is the first build whose step-9
+readers were told to read *every numbered step*, and the streak was probably a
+detection artifact.
+
+**Five judge rejections, all five real** — against a documented historical
+precision of 21–24%. All five were the same class: **the mathematics is correct
+and the licensing citation is wrong.** The sharpest used the *ambient* reading of
+compactness while `def-compact-space` states that no item may do so without
+citing `lem-compactness-of-a-subspace-is-ambient` — which it cited zero times.
+The library caught a violation of a rule it wrote for itself.
+
+**Three scaffolded witnesses were mathematically false**, each caught only by an
+author deriving from it: a "counterexample" collapsing a *compact* set (which
+preserves local compactness, so it refuted nothing); a quasicomponent witness
+that was a product of totally disconnected spaces; a cofinite/cocountable claim
+false on countable sets.
+
+**Judge self-agreement is not 1.** Duplicate sweeps judged two items twice and
+returned **pass then reject on identical text**. A pass block from the earlier run
+masked the rejection until the two-way reconciliation caught it. That reconciliation
+is only possible because `JUDGE_VERDICTLOG` is set on every call.
+
+## Orchestrator errors, recorded because they shape what to trust
+
+1. **I transposed two agent ids**, so the owner's Baire instruction went to the
+   wrong author. It refused on boundary grounds and escalated — the rule working.
+2. **I reported a reader's verbatim quote as fabricated. It was not.** I read the
+   working tree after Alpha had repaired the file, while the pre-repair state sat
+   in git. The long line genuinely was disconnected as authored.
+3. **I raised a 5× judge-concurrency breach that did not exist.** `ps | grep -c`
+   overcounts 4×, which `ARCHITECTURE.md` documents and warns has misled two
+   readers before me. The real figure was exactly at cap; acting would have killed
+   a healthy sweep.
+4. **I let two sweeps race**, costing 34 duplicate paid judgements — though that
+   is also how the contradictory-verdict finding surfaced.
+5. **I supplied a 14-entry dep list I had not derived**, and a title naming a
+   definition that did not exist.
+
+All five were caught by verifying rather than by any gate.
+
+## Sonnet 5 pilot — do not switch
+
+Both arms, 21 items each, same scaffolder, blinded. **Sonnet used 1.9× the tokens
+and 1.5× the wall clock**, caught **0** scaffold errors against Opus's 5 — and
+produced **zero** invalid proof steps, where Opus produced three. Its weakness is
+the apparatus (titles, citations, contract conformance), not the mathematics. The
+cost result alone defeats the premise that motivated the pilot.
+
+## Not done
+
+- The four unjudged items.
+- A proper step-10a sweep with its recall test.
+- Applying the thirteen staged amendments (publish-commit only).
+
+**PAUSED. `verification.audited` is the owner's field and nothing here sets it.**

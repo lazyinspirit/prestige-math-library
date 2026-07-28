@@ -16,6 +16,10 @@ short: "agreement on a dense set does not force equality"
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

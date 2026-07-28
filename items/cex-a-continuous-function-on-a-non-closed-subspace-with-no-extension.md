@@ -15,6 +15,10 @@ short: "reciprocal on $(0,1]$, no continuous extension"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

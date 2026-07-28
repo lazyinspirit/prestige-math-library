@@ -12,6 +12,10 @@ landmark: true
 short: "the diagonal, the diagonal map, the pairing of two maps"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

@@ -11,6 +11,10 @@ landmark: true
 short: "$\\operatorname{cf}(\\alpha)$; regular, singular"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

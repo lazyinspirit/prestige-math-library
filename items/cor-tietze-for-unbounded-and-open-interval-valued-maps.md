@@ -16,6 +16,10 @@ short: "Tietze into $\\mathbb{R}$ and into an open interval"
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

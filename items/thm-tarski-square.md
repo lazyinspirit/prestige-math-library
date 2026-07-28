@@ -12,6 +12,10 @@ short: "$A \\times A \\approx A$ for all infinite $A$ $\\iff$ AC"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

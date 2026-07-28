@@ -14,6 +14,10 @@ short: "the agreement set of two maps into a Hausdorff space is closed"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

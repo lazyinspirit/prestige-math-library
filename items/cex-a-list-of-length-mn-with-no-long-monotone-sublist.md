@@ -15,6 +15,10 @@ proof_strategy: constructive
 cx_machine_verified: false
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

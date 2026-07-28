@@ -117,3 +117,50 @@ not a material rewrite, so judge blocks stay.
    `sources_checked` rather than `audited`, and must not acquire a judge block.
 5. Prefer the **order-relative, page-scoped** form over any corpus-wide claim —
    that is the phrasing that survived level 9 untouched.
+
+## D. Step-10a scope-denial sweep (orchestrator, 2026-07-29)
+
+**Coverage caveat, stated plainly: this sweep was run by the orchestrator with
+grep plus targeted reading, NOT by a dedicated reading agent.** The agent
+dispatched for it died on the weekly API limit before returning. `LEVELS.md`
+is explicit that grep is the entry point and never the sweep, and that the
+recall test is rediscovering two sentences no negation pattern matches. **That
+recall test was not run.** This section is therefore a partial result and the
+sweep should be repeated properly before publication.
+
+### D1. `items/lem-tube-lemma-for-a-compact-metric-factor.md` (published, order 283) — DECAYED
+
+> **The general tube lemma, for a compact factor in an arbitrary topological
+> product, is not available in this library at this point in the reading order,**
+> because compactness is defined here only for metric spaces
+> ([[def-metric-compactness]]).
+
+**Both halves are now false.** This build added `def-compact-space` and
+`lem-tube-lemma-for-a-compact-factor` on `compactness` at order **255**, which is
+*below* 283 — so at this item's point in the reading order the general notion and
+the general lemma both exist.
+
+This is the case `LEVELS.md` warns about specifically: the phrasing is the
+approved order-relative form, which is decay-**resistant** and not decay-proof,
+and it failed because the position it names moved underneath it. Replace with a
+pointer to `lem-tube-lemma-for-a-compact-factor` recording that the metric case
+here is the special case.
+
+### D2. `items/ex-sorgenfrey-line.md` (published, order 250) — CANDIDATE, lower confidence
+
+> That is not proved here: the standard argument uses a second countability or a
+> Baire-type input **that this library does not have**.
+
+The trailing clause is the **corpus-wide** form the prose rules ban, rather than
+the page-scoped one. Second countability is genuinely still unbuilt (order 273),
+but `def-baire-space` and `thm-baire-category-locally-compact-hausdorff` now
+exist at 255, and `thm-baire-category-r` was already published at 133. Reword to
+the page-scoped form regardless of how the Baire half is judged.
+
+### Checked and CORRECT — do not amend
+
+- `items/thm-any-two-finite-bases-have-the-same-size.md` (order 74): "cardinal
+  numbers being not available at this point in the reading order". Cardinals
+  arrived at **247**, above 74, so the claim **stays true**. This is the
+  order-relative form working exactly as designed, and it is worth recording as
+  the positive control for the sweep.

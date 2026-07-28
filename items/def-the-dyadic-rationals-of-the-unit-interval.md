@@ -15,6 +15,10 @@ landmark: true
 short: "dyadic rationals of $[0,1]$"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

@@ -17,6 +17,10 @@ short: "perfectly normal iff normal + closed sets are zero sets (DC)"
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

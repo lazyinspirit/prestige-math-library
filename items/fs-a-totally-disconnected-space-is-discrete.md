@@ -16,6 +16,10 @@ short: "a totally disconnected space need not be discrete"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:
