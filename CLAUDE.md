@@ -193,6 +193,27 @@ before any rendering change, and preserve their behaviour):
   the spirit of the verification caption. Content side: `proved_here: false` in
   frontmatter (SCHEMA §3), the `not-proved-here` category, and
   `tools/extcheck.mjs`.
+- **Search and issue reporting, owner-commissioned 2026-07-28 — ADDITIVE, not a
+  restyle; keep them.** The owner asked for a search box and a way to report
+  mathematical inaccuracies. Both are built from the EXISTING vocabulary only —
+  the kind palette for result chips, the chip shape of `badges.tsx`, existing
+  neutrals — and introduce **no new accent**; sky and fuchsia remain reserved for
+  forward references and the ‡ tier. Owned by `web/components/library/SearchBox.tsx`
+  (client, mounted in `web/app/library/layout.tsx`), `web/lib/library-search.ts`
+  + `web/app/library/search-index/route.ts` (the index), and
+  `web/components/library/ReportIssue.tsx` + `web/lib/library-feedback.ts` +
+  `web/app/library/feedback/route.ts` (per-item reporting to
+  `support@prestige-intelligence.cc`).
+  **Two rules here are correctness, not taste.** The search index is
+  **published-only for the public** — it is a file in the browser, so shipping
+  drafts would publish unpublished mathematics to anyone with devtools; the route
+  serves the owner's draft-bearing index as `private, no-store` with
+  `Vary: cookie`. And the index is built through `plainTitle()`, never a second
+  de-TeX, so a reader typing `sqrt` matches `\sqrt`.
+- **Corpus loading is memoised** (`web/lib/library-cache.ts`), which took a page
+  view from ~50 ms of re-parsing 1,204 items to 0.50 ms. The DATA is cached and
+  the RENDER is not, deliberately: the routes await `auth()` and show drafts to
+  the owner only, so caching rendered pages would leak drafts or hide them.
 - Flowchart is BIRDS-EYE: only `landmark: true` items are nodes; edges are the
   transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
   theorems, key definitions, key lemmas); do not revert to one-node-per-item.
