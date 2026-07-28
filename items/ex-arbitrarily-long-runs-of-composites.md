@@ -90,7 +90,7 @@ composite integers.
 
 ## Remarks
 
-- **No factorial is used, and none is available.** The library's $k!$ is introduced inside $\mathbb{R}$ by way of a finite sum ([[lem-factorial-beats-geometric]]), a different object on a different page; minting a factorial on $\mathbb{Z}$ here would create a dictionary obligation this page cannot discharge. The finite product of [[def-monoid-finite-product]] in $(\mathbb{Z},\cdot,1)$ does everything needed, and $N$ is $(n+1)!$ only in the informal sense.
+- **No factorial is used, and none is available on $\mathbb{Z}$.** The library's $k!$ is introduced inside $\mathbb{R}$ as a finite product of reals ([[lem-factorial-beats-geometric]]), a different object on a different page; minting a factorial on $\mathbb{Z}$ here would create a dictionary obligation this page cannot discharge. The finite product of [[def-monoid-finite-product]] in $(\mathbb{Z},\cdot,1)$ does everything needed, and $N$ is $(n+1)!$ only in the informal sense.
 
 - **The case $n = 0$ is real and vacuous.** The empty product is $1$, there is no $j < 0$, and the claim asserts nothing — correctly, since a run of $0$ consecutive composites is no claim at all.
 

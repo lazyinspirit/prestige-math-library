@@ -82,7 +82,7 @@ $0_V \in \operatorname{span}(\varnothing) = \{0_V\}$
 
 ## Remarks
 
-- **Claim 2 is the working form of the span.** Once it is available, "a vector of $\operatorname{span}(S)$" may always be taken to come with an injective list of vectors of $S$ carrying it, which is what makes the coefficient of a chosen entry meaningful. Every later solve-for-one-vector argument on this page ([[lem-adjoining-a-vector-outside-the-span]], [[thm-steinitz-exchange]]) uses it in that form, and [[lem-span-is-the-set-of-linear-combinations]] on its own does not supply it, since its lists may repeat.
+- **Claim 2 is the working form of the span.** Once it is available, "a vector of $\operatorname{span}(S)$" may always be taken to come with an injective list of vectors of $S$ carrying it, which is what makes the coefficient of a chosen entry meaningful. Every later argument on this page that solves for one entry of a list drawn from a span uses it in that form — [[thm-steinitz-exchange]] and [[cor-a-linear-subspace-has-a-complement]] — and [[lem-span-is-the-set-of-linear-combinations]] on its own does not supply it, since its lists may repeat. [[lem-adjoining-a-vector-outside-the-span]] solves for an entry too but needs nothing from here, its list being injective by hypothesis, drawn from the definition of independence of a subset.
 
 - **Claim 1 removes the lists from the statement.** Dependence as defined is an existential over lists and witnesses; claim 1 restates it as a property of the set alone: some member is redundant, in that the span does not shrink when it is removed. That is also the form in which dependence is used to characterise bases ([[lem-basis-iff-maximal-independent-iff-minimal-spanning]]).
 

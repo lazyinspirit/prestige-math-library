@@ -84,8 +84,10 @@ basis is not unique.
 [[cex-proper-subspace-with-an-equinumerous-basis]] refutes the claim that a
 subspace whose basis is equinumerous with a basis of the ambient space must be
 the whole space. Inside $E$, the span of $\{\, e_i : i \ge 1 \,\}$ is a proper
-linear subspace, $e_0$ lying outside it, and its basis is carried onto a basis of
-$E$ by the explicit bijection $k \mapsto e_{k+1}$. That is exactly the hypothesis
+linear subspace, $e_0$ lying outside it, and its basis is equinumerous with a
+basis of $E$ through the explicit enumeration $k \mapsto e_{k+1}$ of the smaller
+basis by $\mathbb{N}$, set against the enumeration $k \mapsto e_k$ of the larger.
+That is exactly the hypothesis
 that [[thm-dimension-of-a-linear-subspace]] carries in its equality clause, and
 the item is careful to compare two named bases through a named bijection rather
 than to compare dimensions: neither space is assigned a dimension, since neither
@@ -118,5 +120,8 @@ been built, so $F[x]$ does not exist as an object anywhere in the library yet an
 the example cannot be stated without pointing at something that is not there. It
 is deferred, not deleted, and belongs on the first examples page above the
 polynomial-ring page. There is also no discussion of non-measurable sets built
-from a basis of $\mathbb{R}$ over $\mathbb{Q}$: that needs measure theory, which
-this library does not develop, and it was withdrawn for that reason.
+from a basis of $\mathbb{R}$ over $\mathbb{Q}$. That needs a measure defined on
+more than the null sets: the library develops measure zero and content zero in
+$\mathbb{R}$, but Lebesgue measure and measurability are recorded among its
+deferred results rather than proved, so nothing here could state what
+"non-measurable" means. The clause was withdrawn for that reason.

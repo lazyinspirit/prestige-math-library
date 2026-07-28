@@ -119,4 +119,4 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 
 - **What fails is Euclid's lemma.** In $H$, $10$ is irreducible and $100 = 4 \cdot 25$ is a product of two elements of $H$ that $10$ divides inside $H$, since $100 = 10 \cdot 10$; yet $10 \nmid 4$ and $10 \nmid 25$, because $4 = 0 \cdot 10 + 4$ and $25 = 2 \cdot 10 + 5$ have nonzero remainders. So the analogue of [[thm-euclids-lemma]] is false in $H$, and by [[cor-prime-iff-euclid-property]] that property, and not indecomposability, is what unique factorisation actually needs.
 
-- **The example needs nothing beyond $\mathbb{Z}$ and divisibility.** The classical witness for this phenomenon uses algebraic integers, which this library has not built; $H$ is a subset of $\mathbb{Z}$ closed under multiplication, and every claim above is a statement about integers.
+- **The example needs nothing beyond $\mathbb{Z}$ and divisibility.** The classical witness for this phenomenon uses algebraic integers, which are not available at this point in the reading order; $H$ is a subset of $\mathbb{Z}$ closed under multiplication, and every claim above is a statement about integers.

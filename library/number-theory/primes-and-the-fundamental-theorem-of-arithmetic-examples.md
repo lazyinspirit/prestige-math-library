@@ -63,7 +63,7 @@ that proves [[thm-prime-factorisation-exists]]; but $100 = 4 \cdot 25 = 10 \cdot
 fails underneath is Euclid's lemma: $10$ divides $4 \cdot 25$ inside $H$ and
 divides neither factor. $H$ was chosen because it needs nothing beyond
 $\mathbb{Z}$ and divisibility; the classical witness for this phenomenon uses
-machinery this library has not built.
+machinery that is not available at this point in the reading order.
 
 **Why $1$ is not a prime.** [[cex-calling-one-prime-destroys-uniqueness]] admits
 $1$ and watches the theorem break: $6 = 2 \cdot 3 = 1 \cdot 2 \cdot 3 = 1 \cdot 1

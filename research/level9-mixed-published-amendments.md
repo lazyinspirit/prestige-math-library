@@ -83,7 +83,8 @@ NEW:
 > **Why $p = 2$ and not a general prime.** The general $p$-adic valuation needs
 > primality and unique factorisation in $\mathbb{Z}$, which are developed at
 > order 24 ([[def-p-adic-valuation]], [[thm-euclids-lemma]],
-> [[lem-p-adic-valuation-on-q]]) and are therefore available here; this item
+> [[thm-fundamental-theorem-of-arithmetic]], [[lem-p-adic-valuation-on-q]]) and
+> are therefore available here; this item
 > nevertheless develops the case $p = 2$ from parity alone, so that the
 > ultrametric geometry below rests on nothing but the discreteness of
 > $\mathbb{Z}$.
@@ -113,8 +114,20 @@ NEW:
 
 Applying it:
 
-- add `thm-euclids-lemma`, `def-p-adic-valuation` and `lem-p-adic-valuation-on-q`
-  to `deps` (order 24 → order 102, backward, no cycle);
+- add `thm-euclids-lemma`, `def-p-adic-valuation`,
+  `thm-fundamental-theorem-of-arithmetic` and `lem-p-adic-valuation-on-q` to
+  `deps` (order 24 → order 102, backward, no cycle);
+
+**Correction, step-8 audit 2026-07-28 (Beta-9-2a).** The first draft of this
+amendment named three items for "primality **and unique factorisation**" and
+none of the three states unique factorisation — that is
+`thm-fundamental-theorem-of-arithmetic`, now added above in both places. The
+auditor also noted that `lem-p-adic-valuation-on-q` does not in fact *use*
+unique factorisation, only Euclid's lemma through additivity, so the published
+sentence's "needs primality and unique factorisation" is a mild overstatement
+this amendment inherits rather than introduces. Left standing: it is published
+text, the general $p$-adic *absolute value* development does use unique
+factorisation, and rewriting it is a separate owner call.
 - it carries **no** `judge` block — one was removed 2026-07-27 for exactly this
   kind of Remarks correction — so only `verification.audited` needs refreshing.
 

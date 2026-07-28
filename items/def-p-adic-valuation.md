@@ -88,8 +88,13 @@ $E(p,a)$ and is unique. We set $v_p(a) := k_0$.
 ([[def-divides-in-z]]), so $E(p,0) = \mathbb{N}$ has no greatest element and the
 clause above defines nothing. Every statement about $v_p$ in this library
 therefore carries the hypothesis $a \ne 0$ explicitly. The convention
-$v_p(0) := \infty$ is *not* adopted: it would need an ordered set with a greatest
-element in which to place $\infty$, and this library has not built one.
+$v_p(0) := \infty$ is *not* adopted: it would need a value set enlarging
+$\mathbb{N}$ by a greatest element in which to place $\infty$, and no such set is
+available at this point in the reading order. The library does build a totally
+ordered set with a greatest element — the extended real line, whose greatest
+element is $+\infty$ — but it is constructed far above this page, and taking the
+values of $v_p$ there would make a definition about $\mathbb{Z}$ rest on the
+construction of $\mathbb{R}$.
 
 ## Remarks
 
