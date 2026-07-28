@@ -570,10 +570,10 @@ post-splice.
 | # | page | the definition | what must be proved first |
 |---|---|---|---|
 | 1 | 20 | $\lvert A \rvert$ for finite $A$ | there is **exactly one** natural $n$ with $A \approx n$ — existence is `def-countable`, uniqueness is `lem-pigeonhole`. Without this, every count in the library is ambiguous |
-| 2 | 20 | $n!$ and the falling factorial $n^{\underline{k}}$ | existence and uniqueness of the recursively defined function, by `thm-recursion`; and $0! = 1$ stated as the empty-product convention agreeing with `def-monoid-finite-product` |
+| 2 | 20 | $n!$ and the falling factorial $n^{\underline{k}}$ | existence and uniqueness of the recursively defined function, by `thm-recursion`; $0! = 1$ is the BASE CLAUSE of that recursion, not an imported convention (`def-monoid-finite-product` is at order 24, above this page — see trap (iii)); and the agreement $\iota(n!) = \prod_{j<n}\iota(j+1)$ with the real-valued finite product of `def-finite-sum` is a required clause, because the published `lem-factorial-beats-geometric` (`limsup-and-subsequential-limits`, order 122) already defines a real-valued factorial by exactly that product |
 | 3 | 20 | $\binom{n}{k}$, **defined as $\lvert [A]^k \rvert$** | the set $[A]^k$ of $k$-element subsets of a finite $A$ is finite (so #1 applies), and $\lvert [A]^k\rvert$ depends only on $\lvert A\rvert$. **Defining it as $n!/(k!(n-k)!)$ instead is not legitimate until integrality is a theorem** — which is exactly the content of $\binom{n}{k}\,k!\,(n-k)! = n!$ |
 | 4 | 20 | the multinomial coefficient $\binom{n}{k_1,\dots,k_m}$ | the set of ordered partitions of an $n$-set into blocks of the prescribed sizes is finite and nonempty **iff** $\sum k_i = n$; the hypothesis is part of the definition |
-| 5 | 20 | $\sum_{i<n} a_i$ over a finite INDEX SET rather than an initial segment | independence of the chosen enumeration (commutativity/associativity), so that "the sum over $S$" is defined. Cite `lem-finite-sum-laws` and `lem-finite-subsets-listable`; do not re-derive |
+| 5 | 20 | $\sum_{i<n} a_i$ over a finite INDEX SET rather than an initial segment | independence of the chosen enumeration (commutativity/associativity), so that "the sum over $S$" is defined. **CORRECTED (Alpha-F1, frontier-1, 2026-07-28): this canNOT be discharged by citation.** The published `lem-finite-sum-laws` has additivity, scaling, splitting, monotonicity, telescoping and the product laws and **no permutation-invariance clause**, verified on disk; nothing else in the corpus carries one. So `lem-finite-sum-permutation-invariance` is MINTED here (trap (vi)) and cited alongside `lem-finite-subsets-listable`. Per SCHEMA §3 it goes in the definition's `deps`, not its `justified_by` |
 | 6 | 22 | the inclusion–exclusion alternating sum | the index set (nonempty subsets of a finite index set) is finite by #3, so the sum is a finite sum in the sense of #5 |
 | 7 | 22 | the derangement number $D_n$ | the set of fixed-point-free bijections of a finite set is finite |
 | 8 | 173 | height, width of a finite poset | the sets of chain and antichain sizes are nonempty (singletons are both) and finite, so maxima exist by `lem-finite-set-has-max` |
@@ -653,7 +653,11 @@ deferred, not deleted.
    the integral, $\log$, and Wallis, all planned — but it is **not in
    `plan-spec.json` anywhere**. Denied here and raised as an amendment to the
    analysis track (§10). Once it exists, elementary asymptotic estimates in
-   CB-2 and CB-12 become licensed.
+   CB-2 and CB-12 become licensed. **Its earliest legal home is order 177
+   (`the-logarithm-and-general-powers`), and 179 if the proof uses Wallis**
+   (`sine-cosine-and-the-definition-of-pi`) — see §10 amendment 2, which was
+   corrected on 2026-07-28 after asking for a home above order 161, which no
+   page can satisfy.
 4. **Szemerédi's regularity lemma, and Szemerédi's theorem on arithmetic
    progressions.** The regularity lemma is a page of machinery on its own and
    the theorem is research-level. Licensed by a dedicated regularity page. Van
@@ -796,6 +800,33 @@ deferred, not deleted.
     MO-2 states the hexagons and proves the consequences it needs; the coherence
     theorem itself is denied with this note.
 
+**Added by the `frontier-1` build (Beta-F1-2 scaffolding CB-1, applied by
+Alpha-F1 2026-07-28).** These are the three CB-1 drops the scaffold names, moved
+here from `research/frontier-1-batch-2.notes.md` §4 so the record lives where a
+reader of this file will find it. Orders verified against
+`research/plan-spec.json`.
+
+39. **The ring form of the binomial theorem.** `def-ring` is homed on
+    `rings-subrings-and-integral-domains`, order **46**, twenty-six pages above
+    CB-1; trap (ii) of CB-1 is explicit that no ring version may be stated there.
+    The binomial theorem at order 20 is stated **in $\mathbb{R}$**. Licensed by:
+    order 46, together with §10 amendment 3's companion decision about where the
+    ring version is stated and how the agreement is recorded.
+40. **Any use of `def-symmetric-group` for
+    $\lvert\operatorname{Bij}(A)\rvert = n!$.** `def-symmetric-group` is homed on
+    `monoids-groups-and-subgroups`, order **24**, above CB-1. The theorem is
+    therefore stated about bijections of a finite set with **no group vocabulary
+    at all**, and it is homed on the A page so that
+    `symmetric-groups-and-the-sign-homomorphism` (order 44) can cite it for
+    $\lvert S_n\rvert = n!$ (§10 amendment 3). Licensed by: order 24 — but note
+    the item is not blocked, only its group phrasing is.
+41. **Stirling's formula, and any asymptotics of $n!$.** Needs the logarithm
+    (`the-logarithm-and-general-powers`, order **177**) and Wallis
+    (`sine-cosine-and-the-definition-of-pi`, order **179**). Licensed by: order
+    177 and above. This is denial 3 restated at CB-1's own site; see §10
+    amendment 2, which asked for a home above order 161 and was corrected on
+    2026-07-28 because no page satisfies that.
+
 **Deliberately NOT denied, because they are reachable and it would be a mistake
 to drop them by reflex:** locally presentable and accessible categories, and the
 accessible adjoint functor theorem — they need regular cardinals and
@@ -821,9 +852,21 @@ Addressed to their owners. This file never edits them.
    to `requires`, and state the general Leibniz rule citing it. Same for
    `mixed-partials-taylor-and-extrema` (new 213) and multi-indices.
 2. **To the analysis track**: consider adding **Stirling's formula** somewhere
-   above `properties-of-the-integral-and-the-working-ftc`. It is in scope, it is
-   absent from the spec, and denial 3 above is the only reason this track has no
-   asymptotics.
+   above **`the-logarithm-and-general-powers` (order 177)**. It is in scope, it
+   is absent from the spec, and denial 3 above is the only reason this track has
+   no asymptotics.
+   **AMENDED (Alpha-F1, frontier-1, 2026-07-28), answering Beta-F1-2's finding
+   F-8.** This amendment previously read "somewhere above
+   `properties-of-the-integral-and-the-working-ftc`" (order 161), which is
+   **unsatisfiable**: Stirling needs the logarithm, homed on
+   `the-logarithm-and-general-powers` at order **177**, and Wallis' product,
+   which needs the trigonometric functions of `sine-cosine-and-the-definition-of-pi`
+   at order **179** — both strictly ABOVE 161, so no page above 161 but below 177
+   can carry it. All three orders verified against `research/plan-spec.json`,
+   2026-07-28. The floor is therefore **177**, and 179 if the proof goes through
+   Wallis. Nothing below 177 may state Stirling in any form, and CB-2's and
+   CB-12's asymptotic estimates stay denied until a Stirling page exists (§9
+   denials 3 and 41).
 3. **To the algebra track** (`plan-algebra-track.md`): AA-7
    (`symmetric-groups-and-the-sign-homomorphism`, new 44) should **cite** CB-1
    for $\lvert S_n \rvert = n!$ rather than assert it. Add
@@ -894,8 +937,13 @@ THMS: a subset of a finite set is finite, and $\lvert B\rvert \le \lvert A\rvert
 with equality iff $B = A$ (the finite Dedekind statement, the workhorse);
 **the sum rule** for a finite disjoint union and for a partition into $m$
 blocks; **the product rule** $\lvert A \times B\rvert = \lvert A\rvert\lvert B\rvert$
-and its iterate; $\lvert A^B\rvert = \lvert A\rvert^{\lvert B\rvert}$ (citing
-`def-integer-power`); the number of injections $B \to A$ is
+and its iterate; $\lvert A^B\rvert = \lvert A\rvert^{\lvert B\rvert}$, which needs
+NATURAL-NUMBER exponentiation and therefore a new `def-nat-power` on this page:
+`def-integer-power` (order 16) gives $a^{n}$ for a REAL base, so its value is a
+real while $\lvert A^{B}\rvert$ is a natural. `def-nat-power` is defined by
+`thm-recursion` inside $\mathbb{N}$ and carries the bridge clause
+$\iota(m^{n}) = \iota(m)^{n}$ and the agreement $0^{0} = 1$ with
+`def-integer-power`; the number of injections $B \to A$ is
 $n^{\underline{k}}$; **$\lvert\operatorname{Bij}(A)\rvert = n!$** (landmark —
 this is the item `symmetric-groups-and-the-sign-homomorphism` should cite for
 $\lvert S_n\rvert = n!$, §10 amendment 3); $\lvert \mathcal{P}(A)\rvert = 2^n$;
@@ -915,9 +963,12 @@ in the form $\lvert A \times B\rvert > \lvert A\rvert$ (witness
 
 B: worked counts — committees, anagrams via the multinomial coefficient, hands
 from a deck; Pascal's triangle computed to row 6 with Pascal's rule checked;
-$\binom{n}{2}$ as the number of edges of a complete graph, stated purely as a
-count (the graph pages cite this, so it is a **theorem on the A page**, not a
-B item — see traps); the number of surjections deferred to CB-2.
+the number of two-element subsets of an $n$-element set, $\binom{n}{2}$, with
+$2\binom{n}{2} = n(n-1)$ in $\mathbb{N}$: a **theorem on the A page**
+(`thm-two-element-subsets-count`), because the graph pages cite it and a B page
+is a leaf. The words graph, vertex and edge do NOT appear in it — no graph is
+defined anywhere in the library at order 20 — and Remarks says only that the
+count of unordered pairs is the quantity later pages will want; the number of surjections deferred to CB-2.
 
 CEX: two different sets with the same cardinality and no canonical bijection
 (orientation for why $\lvert\cdot\rvert$ is defined by existence of *some*
@@ -932,12 +983,38 @@ binomial theorem is stated **in $\mathbb{R}$**, because commutative rings arrive
 at order 46. The ring generalisation is a genuinely separate statement; §10
 amendment 3's companion decision is whether `rings-subrings-and-integral-domains`
 (published, 46) gets an amendment or whether a later page states it with an
-agreement remark. **Do not silently state a ring version here.** (iii) $0! = 1$
-and $\binom{n}{0} = 1$ come out of the empty-product convention already fixed by
-`def-monoid-finite-product`; cite it rather than stipulating twice. (iv) The
+agreement remark. **Do not silently state a ring version here.** (iii) $0! = 1$ is
+taken as the BASE CLAUSE of the recursion defining the factorial
+(`thm-recursion`, published at order 6), NOT imported: `def-monoid-finite-product`
+is homed on `monoids-groups-and-subgroups` at order 24, four pages ABOVE this
+one, so citing it here is a forward citation on the spine and `fwdcheck` rejects
+it (`forward-on-spine`). `def-binomial-coefficient` gets $\binom{n}{0} = 1$ from
+the count itself, $[A]^{0} = \{\varnothing\}$, so no empty-product convention is
+involved there at all. The page then RECORDS the agreements in one place
+(`rem-counting-conventions-and-scope`): the empty sum $0$, the empty product $1$,
+$0! = 1$ and $0^{0} = 1$ are one convention, agreeing with `def-finite-sum` and
+`def-integer-power` (both order 16, below this page), and an orientation-only
+forward reference in Remarks points at `def-monoid-finite-product` for the
+monoid version. (iv) The
 sum over a finite index set (#5) is not the same object as `def-finite-sum`'s
 sum over an initial segment; the bridge item is mandatory and is where the
 "two notions" defect would otherwise start.
+(v) THE COUNTING IDENTITIES ARE IDENTITIES OF NATURAL NUMBERS, AND THE LIBRARY
+HAS NO FINITE SUM IN $\mathbb{N}$. `def-finite-sum` (order 16) is real-valued and
+`def-monoid-finite-product` (order 24) is above this page, so the sum rule, the
+row sums of Pascal's triangle, the multinomial condition $\sum k_i = n$ and stars
+and bars all need a `def-nat-finite-sum-and-product` minted here, by the same
+`thm-recursion` construction, together with a `lem-nat-finite-sum-laws-and-the-canonical-embedding`
+carrying $\iota(\sum^{\mathbb{N}}) = \sum^{\mathbb{R}}\iota$.
+That embedding clause is what lets the binomial theorem live in $\mathbb{R}$ while
+every count stays in $\mathbb{N}$.
+(vi) The well-definedness of the sum over a finite index set (#5) rests on
+PERMUTATION INVARIANCE of a finite sum, which the library does not have anywhere:
+`lem-finite-sum-laws` has additivity, splitting, monotonicity, telescoping and the
+product laws, and no invariance clause. It is minted here as
+`lem-finite-sum-permutation-invariance` and, per SCHEMA §3, it belongs in the
+DEFINITION'S `deps` and NOT in its `justified_by`, since it is about
+`def-finite-sum` and does not depend on the new definition.
 
 Forward references: NONE.
 

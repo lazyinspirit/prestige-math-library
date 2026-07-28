@@ -810,13 +810,44 @@ integrability of |f|, of fg, of max and min; **composition: continuous after
 integrable is integrable, and the order matters**; the first and second (Bonnet)
 mean value theorems for integrals; **FTC for continuous integrands, both parts**
 (the working version; RA-39 sharpens it); integration by parts; substitution;
-**Taylor's integral remainder**; the integral test for series; **Arzela's bounded
-convergence theorem (1885)**, the Riemann-integral analogue of dominated
-convergence, essentially never taught. B: Bartle & Sherbert's motivating pair
+the integral test for series, STATED WITH PROPER INTEGRALS ONLY — improper
+integrals are `improper-integrals` at order 165, above this page, so the
+conclusion is "the increasing sequence $(\int_0^N f)_N$ is bounded", not
+"$\int_0^\infty f$ converges", and the index range starts at $0$ because
+$\mathbb{N}$ contains $0$ (a version starting at $1$ is a tail,
+`lem-series-tail-invariance`).
+B: Bartle & Sherbert's motivating pair
 H(x) = 2 sqrt x (H' unbounded, so H' is not Riemann integrable) and its partner;
 a Riemann-integrable function with no primitive; **a function with a primitive
 that is not Riemann integrable**; spikes with integral 1 converging pointwise
 to 0; a composition of integrable functions that is not integrable.
+
+(Taylor's integral remainder is DROPPED from RA-19, Beta-F1-2, frontier-1: it
+needs higher derivatives, which are introduced on `darboux-lhopital-and-taylor`
+at order 155 — EARLIER in plan order than 161, but not built, so nothing on this
+page may cite it. When 155 is built, the integral remainder is best homed THERE,
+next to the Lagrange, Cauchy and Peano forms it belongs with, citing this page's
+`thm-integration-by-parts`; that is a smaller change than adding it here later.)
+
+DROPPED FROM RA-19 (Beta-F1-2, frontier-1), deferred not deleted. **Arzela's
+bounded convergence theorem (1885)** is in scope in principle — it is a theorem
+about the Riemann integral, it predates Lebesgue, and the published measure-zero
+toolkit of order 133 plus Heine-Borel is the right neighbourhood for it. It is
+dropped because I could not certify a complete and correct proof route at
+scaffold time. The obstruction is specific: the elementary proofs (Luxemburg 1971,
+Lewin AMM 93 (1986) 395-397, and the Arzela-Osgood argument) all turn on showing
+that the outer content of the sets $\{g_n \ge \varepsilon\}$ tends to $0$, and
+Jordan outer content is NOT countably additive, so that step needs a delicate
+compactness argument that I could not reconstruct with enough confidence to
+scaffold. Scaffolding a strategy I cannot certify is the one thing this page must
+not do. WHAT WOULD LICENSE IT: a session that works out one of the named
+elementary proofs in full and gives it its own numbered lemma chain (the
+decreasing case, then the general case by $g_n = \sup_{k\ge n}|f_k - f|$), or the
+dominated convergence theorem once a measure-theory track exists. The
+counterexample that motivates it, spikes with integral $1$ converging pointwise to
+$0$, IS scaffolded on the companion page and stands on its own: it refutes the
+interchange for pointwise convergence without asserting anything about the bounded
+case.
 
 **RA-20 Bounded Variation and the Riemann-Stieltjes Integral** <- RA-19
 bounded variation, total variation, positive and negative variation; the
@@ -847,13 +878,36 @@ of the n-th term test is FALSE); one whose integrand is unbounded in every tail;
 **RA-22 R^n as a Normed Space; Vector-Valued Functions** <- RA-13, RA-15
 inner product, Euclidean norm, the p-norms; **Cauchy-Schwarz**; the parallelogram
 law; equivalent norms; componentwise convergence; completeness of R^n;
-Bolzano-Weierstrass and **Heine-Borel in R^n by bisection**; **all norms on R^n
-are equivalent**; the operator norm; linear maps are Lipschitz; componentwise
+Bolzano-Weierstrass in $\mathbb{R}^n$ as a COROLLARY. **Heine-Borel in
+$\mathbb{R}^n$ by bisection is ALREADY PUBLISHED** as `thm-heine-borel-rn` on
+`compactness-in-metric-spaces` (order 120), together with
+`thm-metric-compactness-equivalences`; this page CITES them and adds only the
+sequential corollary, and re-proving either here would be a duplicate. The same
+goes for completeness: `thm-euclidean-space-complete` (order 118) is published
+and this page cites it, adding only completeness in an arbitrary norm via norm
+equivalence; **all norms on R^n
+are equivalent**; componentwise
 derivatives and integrals; **the mean value INEQUALITY**, with the equality
-false. B: t -> (t^2, t^3) defeats the mean value equality; **f(x) = cos x +
-i sin x on [0, 2pi]** is the crispest failure (forward-citing, see D-TRIG);
+false. B: t -> (t^2, t^3) defeats the mean value equality;
 p-norm equivalence constants on R^2; xy/(x^2+y^2) is separately continuous and
 not jointly continuous.
+
+(The operator norm and "linear maps are Lipschitz" are DROPPED from RA-22,
+Beta-F1-2, frontier-1. There is no definition of a linear map anywhere in the
+published library: `linear-maps-rank-nullity-and-quotient-spaces` is order 76,
+EARLIER in plan order than 167 and not built. Minting a linear map here would be
+a re-mint of an earlier page's canonical object, which is worse than the gap.
+LICENSED BY: page 76. When it is built, these two items are a short addition to
+this page, and the operator norm is then also what `the-total-derivative` (229)
+will want.)
+
+(The classical B-page witness $t \mapsto (\cos t, \sin t)$ on $[0,2\pi]$ is
+DROPPED, Beta-F1-2, frontier-1: the trigonometric functions are order 179, above
+this page, and the level-9 forward-citing plan for it is superseded by the
+self-contained-scope rule of 2026-07-27. The polynomial curve $t\mapsto(t^2,t^3)$
+carries the same refutation and is scaffolded instead; the substitution is
+recorded IN the item, so a reader who knows the classical example is told why it
+is absent. LICENSED BY: order 179.)
 Level-8 note (Alpha-8, 2026-07-26): `thm-euclidean-space-complete`
 (metric-spaces, level 7) is stated for n >= 1 ONLY — `lem-metrics-on-rn` was
 so restricted at level-7 authoring (d_infinity is a max over the empty index
@@ -880,6 +934,47 @@ library's plan. When this page gains items, `rem-rearrangement-in-higher-
 dimensions` (page 36) must declare the proved item in its `forward_refs` so it
 gains the ↗ tier and the ledger entry comes into existence (see
 research/level9-batch-2.notes.md §5).
+ORDERS IN THE PARAGRAPH ABOVE ARE PRE-RENUMBER (Alpha-F1, 2026-07-28, verified
+against `research/plan-spec.json`): this page `rn-as-a-normed-space` is spec order
+**167**, not 62, and `absolute-convergence-and-rearrangement` is **129**, not 36.
+STATUS AT SCAFFOLD TIME (Beta-F1-2, frontier-1, 2026-07-28): PARTLY DISCHARGED,
+and the residue is named here so it cannot vanish. Scaffolded on this page as
+proved items: `def-series-of-vectors-and-rearrangement` (series of vectors,
+absolute convergence, rearrangement, the set $\mathcal{S}(x)$ of rearrangement
+sums, with the agreement clause against `def-series` and
+`def-rearrangement-and-unconditional-convergence` at $n = 1$);
+`def-the-space-of-summing-directions` ($\Gamma$ and $\Gamma^{\perp}$, both proved
+to be linear subspaces, phrased with the Euclidean inner product and NOT with
+linear functionals, because dual spaces are order 92 and unbuilt);
+`thm-steinitz-polygonal-confinement` (the Steinitz rounding / polygonal
+confinement theorem, in full, as its own numbered theorem); and
+`thm-rearrangement-sums-lie-in-an-affine-subspace` (the CONTAINMENT half:
+$\mathcal{S}(x)$ is nonempty and contained in the affine subspace
+$s + \Gamma^{\perp}$, with the absolutely convergent case and the published
+one-dimensional dichotomy as clauses). NOT scaffolded: the REVERSE inclusion,
+i.e. that every point of $s+\Gamma^{\perp}$ is a rearrangement sum for $n \ge 2$,
+and Sierpinski's refinement. WHY: every proof of the reverse inclusion known to
+me routes through (a) a reduction to $\Gamma = \{0\}$ by orthogonal projection,
+which needs the orthogonal decomposition of `inner-product-spaces-and-orthogonality`
+(order 94, EARLIER in plan order and unbuilt, so minting it here would be a
+re-mint), and (b) a finite-dimensional separation argument for convex sets, which
+exists nowhere in the library and is owned by no planned page (`convexity` at 157
+is about convex FUNCTIONS on intervals). Both are structural, not effort, gaps.
+WHAT WOULD LICENSE IT: pages 94 and 76 being built, plus a convex-separation
+item; the natural discharge is then an ADDITION to this same page (adding items to
+a published page is always allowed), not a new page, so the plan line stays where
+`rem-rearrangement-in-higher-dimensions` promised it. NOTHING on this page states
+the reverse inclusion in any form, no `proved_here: false` stub was created, and
+the page's scope remark says only what was proved. The companion page carries
+`fs-the-rearrangement-sums-of-a-non-absolutely-convergent-series-fill-the-space`,
+which refutes the naive $\mathbb{R}^d$ generalisation of the Riemann series
+theorem outright, using only the containment half — so a reader is protected from
+the wrong expectation even while the sharp answer is outstanding.
+The `forward_refs` edit this note owes to the published
+`rem-rearrangement-in-higher-dimensions` is STAGED, not applied, in
+`research/frontier-1-published-amendments.md`: that item is published and
+owner-audited, and CLAUDE.md lands amendments to published pages in the same
+commit that publishes the level, never before.
 
 **RA-23 Sequences and Series of Functions; Uniform Convergence**
 <- RA-22, RA-19
@@ -1212,6 +1307,72 @@ domination.
 
 ---
 
+# Scope denials
+
+Added by Alpha-F1, 2026-07-28, in the style of the "Scope denials" sections of
+`research/plan-topology-set-theory-track.md` and
+`research/plan-combinatorics-and-categories.md`, because this file had none and
+the `frontier-1` drops needed a record rather than a note buried in a page's
+inventory line. **A dropped result is deferred, not deleted**, and every entry
+names what would license it. Entries 1–3 are RA-19
+(`properties-of-the-integral-and-the-working-ftc`, spec order 161), entries 4–7
+are RA-22 (`rn-as-a-normed-space`, spec order 167). Source:
+`research/frontier-1-batch-2.notes.md` §4, adjudicated in
+`research/frontier-1-RESUME.md`. Orders verified against
+`research/plan-spec.json`, 2026-07-28.
+
+This section is distinct from **D-SCOPE** below: D-SCOPE lists results the
+library states with a reference and never proves; these are results the plan
+still intends to prove, at a page that does not exist yet.
+
+1. **Arzelà's bounded convergence theorem (1885)** (RA-19). In scope in
+   principle — a theorem about the Riemann integral, predating Lebesgue — but
+   Beta-F1-2 could not certify a complete proof route at scaffold time: the
+   elementary proofs (Luxemburg 1971; Lewin, AMM 93 (1986) 395–397; Arzelà–
+   Osgood) all turn on the outer content of $\{g_n \ge \varepsilon\}$ tending to
+   $0$, and Jordan outer content is not countably additive. Licensed by: a
+   session that writes out one of the named proofs as its own lemma chain, or
+   dominated convergence once a measure track exists. The motivating
+   counterexample (spikes of integral $1$ converging pointwise to $0$) IS
+   scaffolded on RA-19's companion and asserts nothing about the bounded case.
+2. **Taylor's integral remainder** (RA-19). Needs higher derivatives, homed on
+   `darboux-lhopital-and-taylor` at order **155** — earlier in plan order than
+   161, but unbuilt, so nothing at 161 may cite it. Licensed by: page 155, and
+   it is better homed THERE, beside the Lagrange, Cauchy and Peano forms, citing
+   161's `thm-integration-by-parts`.
+3. **The improper-integral reading of the integral test** (RA-19).
+   `improper-integrals` is order **165**, above 161. The PROPER-integral form is
+   scaffolded: the conclusion is that $(\int_0^N f)_N$ is bounded, not that
+   $\int_0^\infty f$ converges. Licensed by: page 165.
+4. **The operator norm, and "linear maps are Lipschitz"** (RA-22). There is no
+   definition of a linear map anywhere in the published corpus;
+   `linear-maps-rank-nullity-and-quotient-spaces` is order **76**, earlier in
+   plan order and unbuilt. Minting one at 167 would re-mint an earlier page's
+   canonical object. Licensed by: page 76 — after which both are a short
+   addition to 167, and the operator norm is what `the-total-derivative` (order
+   229) will want.
+5. **The reverse inclusion of Lévy–Steinitz, and Sierpiński's refinement**
+   (RA-22). Needs the orthogonal decomposition of
+   `inner-product-spaces-and-orthogonality` (order **94**, earlier and unbuilt)
+   and a finite-dimensional convex-separation argument that no planned page owns
+   (`convexity` at 157 is about convex FUNCTIONS on intervals). Licensed by:
+   pages 94 and 76 plus a convex-separation item; the discharge is an ADDITION
+   to page 167 itself. The Steinitz polygonal-confinement theorem and the
+   CONTAINMENT half ARE scaffolded — see the level-9 inheritance note on RA-22.
+6. **$t \mapsto (\cos t, \sin t)$ on $[0,2\pi]$ as the mean-value witness**
+   (RA-22). The trigonometric functions are order **179**, above 167, and the
+   level-9 plan to forward-cite them is superseded by the self-contained-scope
+   rule of 2026-07-27. Licensed by: order 179. $t \mapsto (t^2, t^3)$ is
+   scaffolded in its place and the substitution is recorded in the item, so a
+   reader who knows the classical example is told why it is absent.
+7. **Abstract inner-product-space theory** — orthonormal bases, Gram–Schmidt,
+   orthogonal projection (RA-22). `inner-product-spaces-and-orthogonality` is
+   order **94**, earlier in plan order and unbuilt. Licensed by: page 94. Only
+   the CONCRETE Euclidean dot product on $\mathbb{R}^n$ is defined at 167, with
+   a scope note saying so.
+
+---
+
 # Count
 
 40 pairs = 80 pages. A pages average ~18 items, B pages ~12, so roughly
@@ -1237,10 +1398,21 @@ cannot be stated in their usual form at that point. Three options:
   **SETTLED 2026-07-25: (c).** The PROVED item is always trig-free, so nothing
   early depends on anything late; beside it sits a `rem-` naming the classical
   trig form. Those remarks are the only forward citations in the whole stack.
-  They are now WHITELISTED per page in `plan-spec.json` (`forwardRefs`), on
-  exactly eight B pages — RA-04, RA-10, RA-12, RA-13, RA-15, RA-16, RA-18, RA-23
-  — and `validate-plan.mjs` permits them there and nowhere else, reporting each
-  one rather than hiding it. Any further forward citation is a hard error.
+  They are now WHITELISTED per page in `plan-spec.json` (`forwardRefs`), and
+  `validate-plan.mjs` permits them there and nowhere else, reporting each one
+  rather than hiding it. Any further forward citation is a hard error.
+  **CORRECTED (Alpha-F1, 2026-07-28), read off `research/plan-spec.json`: the
+  whitelist is SEVEN B pages, not eight — RA-04, RA-10, RA-12, RA-15, RA-16,
+  RA-18, RA-23 (spec orders 113, 132, 136, 154, 156, 160, 170), each carrying the
+  single target `sine-cosine-and-the-definition-of-pi`. RA-13
+  (`continuity-ivt-evt-and-uniform-continuity-examples`, order 138) is NOT on it,
+  and neither is RA-22's companion `rn-as-a-normed-space-examples` (order 168).**
+  **And option (c) no longer licenses a NEW forward citation.** The
+  self-contained-scope rule (owner, 2026-07-27) supersedes it for anything
+  scaffolded after that date: a page above the trig block states the trig-free
+  version and nothing else. The whitelist above is grandfathered, not extensible
+  — this is exactly why RA-22 drops $t \mapsto (\cos t, \sin t)$ rather than
+  forward-citing RA-28 as this decision once contemplated (scope denial 6).
 
 **D-MVT.** Adopt Rudin's ordering, proving Cauchy's MVT first and obtaining the
 ordinary MVT as the case g(x) = x. The sweep flags this as "a real alternative

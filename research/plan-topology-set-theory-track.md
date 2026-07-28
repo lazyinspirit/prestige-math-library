@@ -48,6 +48,36 @@ cites "plan order 104" for a page the spec now holds at 187, and its M3 header
 says 28 for a page now at 106); after TS-D2 both files' neighbours shift again.
 Recompute from `plan-spec.json`; never quote an order from prose.
 
+**ORDER-CORRECTION TABLE (Alpha-F1, 2026-07-28), verified page by page against
+`research/plan-spec.json`.** A THIRD renumber (the algebra-track insertion) landed
+after TS-D2, so every order stated in this file's headings, well-definedness table
+and scope denials is now low. The spec ids are stable and are the safe reference;
+the orders below are the current truth, and each block's B companion sits at the
+A order $+\,1$.
+
+| block | spec id | this file says | spec order |
+|---|---|---|---|
+| ST-1 | `ordinal-arithmetic` | 185 | **245** |
+| ST-2 | `cardinal-arithmetic-and-cofinality` | 187 | **247** |
+| EU-1 | `the-topology-of-euclidean-space` | 197 | **257** |
+| FG-1 | `free-groups-and-presentations` | 56 | **60** |
+| FG-2 | `free-products-and-amalgamation` | 58 | **62** |
+| HT-1 | `homotopy-and-homotopy-equivalence` | 229 | **289** |
+| HT-2 | `the-fundamental-group` | 231 | **291** |
+| HT-3 | `covering-spaces-and-lifting` | 233 | **293** |
+| HT-4 | `the-fundamental-group-of-the-circle` | 235 | **295** |
+| HT-5 | `the-seifert-van-kampen-theorem` | 237 | **297** |
+| HT-6 | `classification-of-covering-spaces` | 239 | **299** |
+| HT-7 | `applications-of-the-fundamental-group` | 241 | **301** |
+
+The T-page orders this file quotes in §"Amendments to the existing scaffold" are
+stale by the same shift: `connectedness` is **253**, `compactness` **255**,
+`partitions-of-unity-and-paracompactness` **269**, `metrization-theorems` **275**,
+`complete-metrizability-and-baire` **277**, and the Euler-formula page
+`the-complex-exponential-and-eulers-formula` **189** (not 167). `def-symmetric-group`
+in well-definedness row 10 is homed on `monoids-groups-and-subgroups`, order **24**,
+not 20.
+
 ---
 
 ## Why this track exists
@@ -182,7 +212,7 @@ WORKFLOW definition-justification rule.
 
 | # | page | the definition | what must be proved |
 |---|---|---|---|
-| 1 | 185 | ordinal $\alpha+\beta$, $\alpha\cdot\beta$, $\alpha^\beta$ | each exists and is unique by the uniqueness clause of `thm-transfinite-recursion` (published), with the successor/limit cases split via `def-limit-ordinal`; convention $0^0 = 1$ and $\alpha^0=1$ stated where defined |
+| 1 | 185 (spec **245**) | ordinal $\alpha+\beta$, $\alpha\cdot\beta$, $\alpha^\beta$ | each exists and is unique, via the new bridge item `lem-recursion-on-the-ordinals` (the published `thm-transfinite-recursion` is stated for a well-order, i.e. a SET, and gives a class operation only after a coherence argument that its uniqueness clause supplies); THREE cases at $0$, at a successor and at a limit via `def-limit-ordinal`, never two; the exponentiation limit clause runs over $0 < \beta < \lambda$ so that $0^\lambda = 0$; conventions $0^0 = 1$ and $\alpha^0 = 1$ stated where defined |
 | 2 | 185 | ordinal subtraction and division | for $\alpha \le \beta$ a UNIQUE $\gamma$ with $\alpha + \gamma = \beta$; unique $(\xi, \rho)$ with $\beta = \alpha\cdot\xi + \rho$, $\rho < \alpha$ — both are what CNF rests on |
 | 3 | 185 | **Cantor normal form** | existence AND uniqueness of the representation $\alpha = \omega^{\beta_1} c_1 + \cdots + \omega^{\beta_k} c_k$; uniqueness is what licenses the definite article |
 | 4 | 185 | **$\omega_1$** | defined as the Hartogs number $\aleph(\omega)$ (`thm-hartogs`, published, choice-free); a numbered item proves it is the LEAST uncountable ordinal, and that it is a cardinal |
@@ -254,6 +284,23 @@ deferred, not deleted.
 12. **CH/GCH proved either way; GCH $\Rightarrow$ AC.** Independence facts
     stay ‡ on `deferred-set-theory-beyond-choice` per the axiom exemption;
     ST-2 states, cites, never proves.
+13. **The cofinality FUNCTION $\operatorname{cf}(\alpha)$, and regularity or
+    singularity of $\omega_1$.** ST-1 defines only *cofinal subset of an
+    ordinal*, which is all its boundedness theorem needs. The function and the
+    regular/singular vocabulary are ST-2's (spec order 247), and 247 is unbuilt
+    at frontier-1. Licensed by: building ST-2.
+14. **$\aleph_1$ as a notation, and $\aleph_1 \le 2^{\aleph_0}$.** ST-1 mints
+    $\omega_1$ and proves it is a cardinal, but the aleph HIERARCHY
+    $\alpha \mapsto \aleph_\alpha$ is ST-2's well-definedness obligation #7. The
+    scaffolded page therefore writes $\omega_1$ throughout and never $\aleph_1$.
+    Licensed by: ST-2.
+15. **Ordinal arithmetic on the LEFT is not developed beyond monotonicity.**
+    Right subtraction, left division, and the fixed-point (Veblen) theory of
+    normal functions are dropped; $\varepsilon_0$ is exhibited by hand instead.
+    Licensed by: a dedicated normal-functions page.
+16. **Goodstein sequences, and any proof-theoretic use of Cantor normal form.**
+    Not commissioned, and the termination proof needs transfinite induction up to
+    $\varepsilon_0$ plus arithmetic coding. Licensed by: a proof-theory page.
 
 ---
 
@@ -316,6 +363,49 @@ here are written to land at 22–28.
 ---
 
 ## ST-1. Ordinal Arithmetic and the First Uncountable Ordinal  (order 185, foundations)
+
+**frontier-1 audit, 2026-07-28 (batch 1). Six notes bind authoring of this page
+pair.** (0) THE HEADING ORDER IS STALE. This page is `ordinal-arithmetic` at spec
+order **245**, its companion `ordinal-arithmetic-examples` at **246** (verified
+against `research/plan-spec.json`, 2026-07-28); "185/186" is the post-TS-D2
+numbering, which a later renumber superseded. See the order-correction table in
+the ORDER-STALENESS WARNING at the top of this file. (1) THE PUBLISHED RECURSION
+THEOREM IS NOT ENOUGH AS QUOTED.
+`thm-transfinite-recursion` is stated for a well-order $(W,<)$, i.e. for a SET;
+ordinal $\alpha+\beta$ is a class operation defined at every ordinal $\beta$, so
+a bridge item is REQUIRED and is scaffolded as `lem-recursion-on-the-ordinals`:
+apply the published theorem to each ordinal $\gamma$ (which is a well-order under
+$\in$ by clause 2 of `def-ordinal`, whose initial segment below $\beta \in \gamma$
+is literally $\beta$), then note that the restriction of $F_\gamma$ to $\delta \in
+\gamma$ satisfies the same recursion on $\delta$ and so equals $F_\delta$ by the
+published UNIQUENESS clause. Coherence, not a new recursion principle. (2) THE
+EXPONENTIATION LIMIT CLAUSE RUNS OVER $0 < \beta < \lambda$, NOT OVER $\beta <
+\lambda$. With the naive clause $0^\lambda$ would come out $\ge 1$, since
+$0^0 = 1$. With the restricted clause the single formula
+$\alpha^\lambda = \bigcup\{\alpha^\beta : 0 < \beta < \lambda\}$ is correct for
+EVERY $\alpha$ including $0$, and no case split on $\alpha$ is needed; this is
+worth a Remark because most texts split. (3) ORDER-TYPE CHARACTERISATIONS ARE
+SCAFFOLDED AS SEPARATE ITEMS (`lem-ordinal-sum-as-an-order-type`,
+`lem-ordinal-product-as-an-order-type`), because the recursive definition alone
+makes $1 + \omega = \omega$ and $2 \cdot \omega = \omega$ tedious and the order
+types make them immediate; both cite the published `thm-mostowski-collapse`.
+The product convention is $\alpha \cdot \beta = \operatorname{ot}(\alpha \times
+\beta)$ under LAST DIFFERENCES ($\beta$ copies of $\alpha$), which is what makes
+$\omega \cdot 2 = \omega + \omega$; state it where it is defined. (4) CANTOR
+NORMAL FORM NEEDS $\beta \le \alpha^\beta$ for $\alpha > 1$, otherwise "the
+largest $\beta$ with $\omega^\beta \le \alpha$" is not known to exist; that
+inequality is scaffolded as a clause of `thm-ordinal-exponent-laws`, together
+with continuity at limits, which is what makes the set of such $\beta$ closed and
+therefore attain its supremum. (5) NATURAL-NUMBER EXPONENTIATION IS NOT PUBLISHED.
+`construction-of-the-natural-numbers` has `def-nat-addition` and
+`def-nat-multiplication` and NO exponentiation, so the dictionary item
+`thm-ordinal-arithmetic-agrees-on-omega` claims agreement for $+$ and $\cdot$
+only, and claims CLOSURE of $\omega$ under all three. Do not write a title
+asserting agreement of exponentiation with a Peano operation that does not exist.
+(6) $\varepsilon_0$ ON THE B PAGE IS ORIENTATION PLUS ONE HONEST PROOF: define it
+as the supremum of the $\omega$-tower (by the published `thm-recursion` over
+$\mathbb{N}$, not by any fixed-point theory), then $\omega^{\varepsilon_0} =
+\varepsilon_0$ IS proved, from continuity at limits. No fixed-point theorem.
 
 `requires`: `ordinals-and-transfinite-recursion`, `countability-and-uncountability`
 
@@ -962,9 +1052,15 @@ then, plain prose otherwise.
 
 ## Build-frontier notes (for the orchestrator; order ≠ build order)
 
-- **ST-1/ST-2** are buildable NOW: their `requires` (183, 18, 10) are all
-  published. They are the natural next foundations level, and the T-page
-  counterexample machinery ($\omega_1$, long line, plank) waits on them.
+- **ST-1 is buildable NOW and is scaffolded in build `frontier-1`** (spec order
+  245; the "183" above is pre-TS-D2 and is stale — recompute from the spec). Its
+  prerequisites `ordinals-and-transfinite-recursion` and
+  `countability-and-uncountability` are published, and `depsource` confirms all
+  138 of its scaffolded dependencies resolve to published items. **ST-2 is NOT in
+  frontier-1** and remains unbuilt; every page that needs cardinal arithmetic
+  (`countability-axioms-and-cardinal-functions`' cardinal functions, the
+  Jones-lemma counterexamples) still waits on it. The plank counterexample does
+  NOT wait on ST-2 and is built at `separation-axioms-examples` (spec 262).
 - **FG-1/FG-2** wait on AA pages 28–40 (counting lemmas, isomorphism
   theorems, AA-6's actions for HT-3's later use) — the algebra track's own
   frontier.

@@ -11,6 +11,33 @@
 > warning. Level 9's orchestrator walked into this collision when briefing
 > agents; check the plan order in `research/plan-spec.json` before acting on
 > any `T<n>` label here.
+>
+> **ORDER-CORRECTION TABLE (Alpha-F1, 2026-07-28), verified page by page against
+> `research/plan-spec.json`.** Every order quoted in the body of this file — the
+> warning above included — predates three renumbers and is now low. Use the spec
+> ids; each A page's B companion is at the A order $+\,1$.
+>
+> | label | spec id | spec order |
+> |---|---|---|
+> | F1 | `ordinals-and-transfinite-recursion` / `ordinal-arithmetic` / `cardinal-arithmetic-and-cofinality` | 243 / 245 / 247 |
+> | T1 | `metric-spaces` | 116 |
+> | (M2) | `completeness-and-uniform-continuity` | 118 |
+> | M3 | `compactness-in-metric-spaces` | 120 |
+> | T2 | `topological-spaces-and-continuity` | 249 |
+> | T3 | `subspaces-products-and-quotients` | 251 |
+> | T4 | `connectedness` | 253 |
+> | T5 | `compactness` | 255 |
+> | T6 | `nets-and-filters` | 259 |
+> | T7 | `separation-axioms` (+ 263, 265, 267, 271 — see the T7 audit block) | 261 |
+> | T8a | `countability-axioms-and-cardinal-functions` | 273 |
+> | T8b | `metrization-theorems` | 275 |
+> | T8c | `complete-metrizability-and-baire` | 277 |
+> | T9 | `uniform-spaces` | 279 |
+> | T10 | `function-space-topologies` (+ 285, 287 — see the T10 audit block) | 283 |
+>
+> So `## M3`'s header "plan order 28" is really **120**, `## T3` is **251** and
+> not 104, and the T8a/T8b/T8c headers "spec order 213/215/217" are really
+> **273/275/277**.
 
 Owner decision 2026-07-25: build BOTH the R-specific treatments AND the fully
 general ones. Every A page (definitions/theorems/false statements) is paired with
@@ -587,6 +614,85 @@ but no convergent subsequence); a sequentially continuous discontinuous map.
 
 ## T7. Separation Axioms   [needs F1]
 
+**frontier-1 audit, 2026-07-28 (batch 1). T7 IS NOW FIVE SPEC PAGES, and this
+section is authoritative for none of them alone.** `plan-spec.json` carries
+**261 `separation-axioms`**, **263 `hausdorff-via-the-diagonal`**, **265
+`hereditary-and-productive-separation`**, **267 `urysohn-lemma-and-tietze`** and
+**271 `tychonoff-embedding-and-stone-cech`** (all five orders verified against the
+spec, 2026-07-28). Of T7's THMS list, page 261 owns:
+the definitions, separated sets, zero and cozero sets, "T1 iff singletons are
+closed", metric => perfectly normal, and every implication of the chain that is
+provable without Urysohn's lemma. "Hausdorff iff the diagonal is closed" is 263's;
+hereditary and productive behaviour, and "completely normal iff hereditarily
+normal", are 265's; Urysohn's lemma and Tietze are 267's; the cube embedding and
+Stone-Cech are 271's.
+
+**EXACTLY ONE arrow of the "full implication chain" is NOT provable at 261, and
+the page must say so rather than assert the whole chain.** That arrow is
+**normal + T1 => completely regular**, which IS Urysohn's lemma, homed at 267.
+Page 261 proves T6 => T5, T6 => T4, T5 => T4, T4+T1 => T3+T1, T3.5 => T3,
+T3+T1 => T2.5 => T2 => T1 => T0, and metrizable => all of them, and records the
+one gap in a Remark in the non-decaying form ("not available at this point in the
+reading order").
+
+**T6 => T5 is PROVED at 261 and is its own numbered theorem**
+(`thm-perfectly-normal-implies-completely-normal`), against the separated-sets
+form of complete normality that 261 defines. *Beta-F1-1 reported this arrow as a
+second unreachable gap needing Urysohn functions; that is REFUTED and must not be
+recorded here as a scope limit.* It needs only normality plus "every open set is
+$F_\sigma$", i.e. the definition of perfect normality restated through
+complementation: for separated $A, B$ write $X \setminus \overline{B} =
+\bigcup_n F_n$ and $X \setminus \overline{A} = \bigcup_n G_n$ with $F_n, G_n$
+closed, use normality to get open $U_n \supseteq F_n$ with
+$\overline{U_n} \cap \overline{B} = \varnothing$ and symmetrically $V_n$, then
+interleave: $U = \bigcup_n (U_n \setminus \bigcup_{i \le n}\overline{V_i})$ and
+$V = \bigcup_n (V_n \setminus \bigcup_{i \le n}\overline{U_i})$ are open, separate
+$A$ and $B$, and are disjoint by the $n \le m$ / $m < n$ case split. The full
+argument is written out in `research/frontier-1-RESUME.md`. The *hereditarily
+normal* characterisation of complete normality stays 265's; this proof does not
+touch it.
+
+**Dropped from 261/262, each with what would license it.** *compact Hausdorff =>
+normal*: general topological compactness does not exist in this library — the only
+compactness on disk is metric (`def-metric-compactness`, order 120) and the general
+notion belongs to page 255 `compactness`, which is unbuilt AND sits below 261, so
+it cannot be back-filled. *locally compact Hausdorff => completely regular*: same
+reason, plus Urysohn. *the Sorgenfrey line and plane*: the published items
+`ex-sorgenfrey-line` (order 250, B page) and `ex-sorgenfrey-plane` /
+`cex-antidiagonal-of-the-sorgenfrey-plane` (order 252, B page) are LEAF-LOCKED and
+may not be cited from another page; rebuilding them is cheap but the payoff item —
+the Sorgenfrey plane is not normal — needs either Jones' lemma (cardinal
+arithmetic, page 247, unbuilt) or a delicate Baire-category argument, and the
+published Baire material (`thm-baire-category-r`, order 133) is about $\mathbb{R}$
+specifically. *the Niemytzki (Moore) plane*: same obstruction, and its complete
+regularity would additionally need 265. *the Tychonoff corkscrew* (a T3 space that
+is not T3.5): dropped outright, it is several pages of construction. *every regular
+space is normal* as an `fs-`: dropped, because after the two drops above no regular
+non-normal witness is reachable — the deleted plank IS regular, but proving that
+needs "regular is hereditary and productive", which is 265's.
+
+**Kept, and what carries them.** *T1 not T2*: the cofinite topology, which is on
+the A page `def-standard-topologies` (order 249) and is therefore citable, unlike
+its worked B-page companion. *normal not Hausdorff*: the indiscrete two-point
+space, likewise from `def-standard-topologies`; this is the item that shows the T1
+hypotheses are not decoration. *T0 normal not regular*: Sierpinski space, likewise.
+*Hausdorff not regular*: the K-topology on $\mathbb{R}$, built from
+`thm-basis-criterion`, minted as `lem-the-k-topology-is-hausdorff-and-not-regular`
+on the A page so the `fs-` can cite it. *unique sequential limits without
+Hausdorff*: the cocountable topology on $\mathbb{R}$. *a Hausdorff non-normal
+space*: the DELETED TYCHONOFF PLANK $((\omega_1+1) \times (\omega+1)) \setminus
+\{(\omega_1,\omega)\}$, which is the reason 262 declares `ordinal-arithmetic`
+(order 245) as a prerequisite — its non-normality is exactly the boundedness of
+countable subsets of $\omega_1$.
+
+**The order topology on an ordinal is minted on the A PAGE, not the B page**
+(`def-order-topology-on-an-ordinal`, `lem-ordinal-order-topology-is-t3`). The
+published `ex-order-topology` is a B-page item at order 250 and is leaf-locked, and
+homing the ordinal case on 262 would leave it unusable by 273's B page, which the
+T8a scaffold already promises will need $[0,\omega_1)$. The new definition is
+stated for ordinals only and says so; it does not claim to be the general
+linearly-ordered-space definition.
+
 DEFS: T0, T1, T2 (Hausdorff), T2.5 (Urysohn), regular, T3, completely regular,
 Tychonoff/T3.5, normal, T4, completely normal/T5, perfectly normal/T6; separated
 sets; the diagonal; zero sets and cozero sets. (Source disagreement on whether
@@ -814,6 +920,58 @@ non-metrizable uniformizable space.
 
 ## T10. Function Spaces and Convergence Topologies
 
+**frontier-1 audit, 2026-07-28 (batch 1). T10 IS THREE SPEC PAGES**: **283
+`function-space-topologies`**, **285 `ascoli-arzela`**, **287
+`stone-weierstrass-general`** (orders verified against the spec, 2026-07-28).
+Page 283 owns the topologies, the comparison, the
+uniform limit theorem, completeness, evaluation, the exponential law and Dini;
+Ascoli-Arzela is 285's and Stone-Weierstrass is 287's. Equicontinuity is DEFINED at
+283 (`def-equicontinuity`) so that 285 has it; no Ascoli statement appears at 283.
+
+**THE DOMAIN IS A METRIC SPACE THROUGHOUT, and this is forced, not stylistic.**
+The compact-open topology quantifies over the compact subsets of $X$, and the only
+compactness this library has is `def-metric-compactness` (order 120), for metric
+spaces. General topological compactness is page 255, unbuilt, and 255 < 283, so it
+cannot be back-filled either. Consequently 283 scaffolds
+`def-locally-compact-metric-space` ("every point has a compact neighbourhood") with
+a DICTIONARY REMARK in the style of the published `def-metrizable-space`, recording
+that this is the metric special case of the general topological notion. **Standing
+obligation on page 255 `compactness`: when it defines local compactness in
+general, it must record the agreement with `def-locally-compact-metric-space`
+explicitly.** The target $Y$ is an arbitrary topological space wherever open sets
+suffice (pointwise topology, compact-open topology, the exponential law) and is
+metric exactly where a distance is used (uniform metric, compact convergence,
+uniform limit theorem, completeness, Dini).
+
+**The exponential law is reached, in the form the title promises.** With $X$ a
+locally compact metric space and $Z$, $Y$ arbitrary topological spaces,
+transposition is a bijection between $C(X \times Z, Y)$ and $C(Z, C(X,Y))$ under
+the compact-open topology: the forward half (`thm-exponential-correspondence-is-continuous`)
+needs no local compactness and runs on a newly minted
+`lem-tube-lemma-for-a-compact-metric-factor`; the converse half runs on
+`thm-evaluation-is-continuous-on-a-locally-compact-metric-domain`. The HOMEOMORPHISM
+form of the law is NOT claimed and the Statement must not claim it.
+
+**Two published items are NOT usable and their content is re-minted.**
+`lem-sup-metric-is-a-metric` (order 116) is the supremum metric on BOUNDED
+REAL-VALUED functions only, so it cannot carry $C(X,Y)$ for a metric target;
+283 mints `lem-uniform-metric-on-a-function-space` for
+$\bar\rho(f,g) = \sup_x \min\{d(f(x),g(x)), 1\}$, which needs no boundedness
+hypothesis and cites the published `lem-bounded-remetrisation` for $\min\{d,1\}$
+being a uniformly equivalent metric. And `ex-bounded-functions-with-sup-metric-are-complete`
+(order 119) is a B-PAGE item, leaf-locked, so completeness of the function
+space is proved outright at 283 as `thm-function-space-is-complete-for-a-complete-target`.
+The B page then records that on $C([0,1],\mathbb{R})$ the two metrics agree
+topologically, which is the anti-two-notions obligation for this page.
+
+**Dropped from 283, each with what would license it.** *Gelfand duality*: needs
+Banach algebras, out of scope; it stays a statement for a functional-analysis track.
+*"the compact-open topology is metrizable iff $X$ is hemicompact"*: needs countable
+exhaustion machinery from 273; only the negative `fs-` is kept. *the general
+(non-metric) form of "compact-open = compact convergence"*: needs page 255.
+*Dini in its net form*: needs 259 `nets-and-filters`, unbuilt; the sequence form
+is kept.
+
 DEFS: the topology of pointwise convergence (product topology); the topology of
 uniform convergence and the sup metric; the compact-open topology; the topology
 of compact convergence; equicontinuity, uniform equicontinuity, pointwise
@@ -837,3 +995,81 @@ equicontinuous families; Bernstein polynomials; density of polynomials in C[0,1]
 CEX: spikes (pointwise not uniform); a non-equicontinuous family defeating
 Ascoli; the complex algebra generated by z on the unit circle defeats
 Stone-Weierstrass without conjugation; Dini without monotonicity.
+
+---
+
+## Scope denials
+
+Added by Alpha-F1, 2026-07-28, in the style of the "Scope denials" section of
+`research/plan-topology-set-theory-track.md`, because this file had none and the
+`frontier-1` drops needed a home that is a record rather than a paragraph inside
+an audit block. **A dropped result is deferred, not deleted**, and every entry
+names what would license it. Entries 1–7 are page 261 `separation-axioms`,
+entries 8–12 are page 283 `function-space-topologies`; both were dropped at
+scaffold time by Beta-F1-1 and adjudicated by the orchestrator (see
+`research/frontier-1-RESUME.md` §"Step 3 — findings adjudicated (batch 1)" and
+`research/frontier-1-batch-1.notes.md` §1.4, §1.5).
+
+1. **compact Hausdorff $\Rightarrow$ normal.** General topological compactness
+   does not exist in this library: the only compactness on disk is metric
+   (`def-metric-compactness`, order 120), and the general notion belongs to page
+   255 `compactness`, which is unbuilt AND sits BELOW 261, so it cannot be
+   back-filled later. Licensed by: page 255 — but note that the item's only legal
+   home is then a page ABOVE both 255 and 261, most naturally 265 or 267, since
+   at 255 normality is not yet defined. Recorded at step 0 of `frontier-1` as a
+   plan defect: T5's THMS list currently homes it on 255, where it is a forward
+   reference on the spine and `fwdcheck` rejects it.
+2. **locally compact Hausdorff $\Rightarrow$ completely regular.** Same
+   compactness obstruction as 1, plus Urysohn's lemma. Licensed by: pages 255 and
+   267.
+3. **normal + T1 $\Rightarrow$ completely regular**, the one arrow of the
+   implication chain page 261 cannot reach. It IS Urysohn's lemma. Licensed by:
+   page 267 `urysohn-lemma-and-tietze`. (The other arrow Beta-F1-1 proposed
+   dropping, perfectly normal $\Rightarrow$ completely normal, is NOT denied — it
+   is proved at 261; see the T7 audit block.)
+4. **The Sorgenfrey line and plane as witnesses on 261/262.** The published
+   `ex-sorgenfrey-line` (order 250) and `ex-sorgenfrey-plane` /
+   `cex-antidiagonal-of-the-sorgenfrey-plane` (order 252) are B-page items and
+   LEAF-LOCKED, so no other page may cite them. Re-minting the spaces is cheap,
+   but the payoff — the Sorgenfrey plane is not normal — needs Jones' lemma
+   (`cardinal-arithmetic-and-cofinality`, order 247, unbuilt) or a delicate
+   Baire-category argument, and the published Baire material
+   (`thm-baire-category-r`, order 133) is about $\mathbb{R}$ specifically.
+   Licensed by: page 247, or a general Baire page.
+5. **The Niemytzki (Moore) plane.** Same obstruction as 4, and its complete
+   regularity would additionally need 265. Licensed by: pages 247 and 265.
+6. **The Tychonoff corkscrew** (a T3 space that is not T3.5). Several pages of
+   construction on its own. Licensed by: a dedicated page.
+7. **`fs-every-regular-space-is-normal`.** After 4, 5 and 6 no regular
+   non-normal witness is reachable at 261: the deleted Tychonoff plank IS
+   regular, but proving that needs "regular is hereditary and productive", which
+   is page 265's. Licensed by: page 265. The `fs-` is dropped, not weakened —
+   restoring it at 261 would take the page over the 30-item ceiling to duplicate
+   265.
+8. **Gelfand duality for compact Hausdorff $X$.** Needs Banach algebras; out of
+   scope under the self-contained-scope rule. Licensed by: a functional-analysis
+   track. T10's THMS list has it as "(statement)"; nothing on 283 states it.
+9. **"the compact-open topology is metrizable iff $X$ is hemicompact".** Needs
+   the countable-exhaustion machinery of page 273. Only the negative
+   `fs-the-compact-open-topology-is-always-metrizable` is kept, with a discrete
+   witness. Licensed by: page 273.
+10. **The general (non-metric) form of "compact-open $=$ compact convergence".**
+    Needs general topological compactness, page 255. The metric-domain form IS
+    proved at 283. Licensed by: page 255.
+11. **Dini's theorem in its net form.** Needs page 259 `nets-and-filters`,
+    unbuilt. The sequence form IS proved at 283. Licensed by: page 259.
+12. **The HOMEOMORPHISM form of the exponential law.** Page 283 proves the
+    natural BIJECTION $C(X \times Z, Y) \leftrightarrow C(Z, C(X,Y))$ for $X$ a
+    locally compact metric space, which is what most texts call the exponential
+    law; the homeomorphism strengthening needs more than this build has. Binding
+    consequence: `thm-the-exponential-law` must say bijection (or
+    correspondence) in its own title and Statement, and the page summary must not
+    describe it as a homeomorphism — a title asserting more than the proof gives
+    is the fatal class `LEVELS.md` step 9 exists for. Licensed by: page 255 plus
+    the product/quotient machinery a homeomorphism proof needs.
+
+**Not a denial, recorded so it is not rediscovered:** general topological
+compactness is minted at page 255, and page 283's
+`def-locally-compact-metric-space` is a deliberate metric special case with a
+dictionary Remark. **Page 255 carries a standing obligation** to record the
+agreement explicitly when it defines local compactness in general.

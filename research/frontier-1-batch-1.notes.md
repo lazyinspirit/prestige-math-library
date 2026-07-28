@@ -132,14 +132,21 @@ hereditary and productive behaviour, and "completely normal iff hereditarily
 normal", are 265's; Urysohn's lemma and Tietze are 267's; the cube embedding and
 Stone-Cech are 271's.
 
-**Two arrows of the "full implication chain" are NOT provable at 261, and the
-page must say so rather than assert the chain.** (a) normal + T1 => completely
-regular IS Urysohn's lemma, homed at 267. (b) perfectly normal => completely
-normal has no proof that avoids Urysohn functions either; the honest route is
-"every closed set is a zero set", which is the same lemma. Page 261 proves
-T6 => T4, T5 => T4, T4+T1 => T3+T1, T3.5 => T3, T3+T1 => T2.5 => T2 => T1 => T0,
-and metrizable => all of them, and records the two gaps in a Remark in the
-non-decaying form ("not available at this point in the reading order").
+**ORCHESTRATOR CORRECTION, 2026-07-28 — claim (b) below is REFUTED and the arrow
+it dropped is back in the spec. Exactly ONE arrow is unreachable, not two.**
+
+~~Two arrows of the "full implication chain" are NOT provable at 261~~ — **one
+arrow** is not provable at 261, and the page must say so rather than assert the
+chain. (a) normal + T1 => completely regular IS Urysohn's lemma, homed at 267;
+this half stands. ~~(b) perfectly normal => completely normal has no proof that
+avoids Urysohn functions~~ — **false.** It follows from normality plus "every
+open set is F-sigma" by the standard interleaving construction, with no Urysohn
+function anywhere; the proof is written out in `research/frontier-1-RESUME.md`
+and `thm-perfectly-normal-implies-completely-normal` is now item 17 of the page.
+Page 261 proves T6 => T5, T5 => T4, T6 => T4, T4+T1 => T3+T1, T3.5 => T3,
+T3+T1 => T2.5 => T2 => T1 => T0, and metrizable => all of them, and records the
+**one** gap in a Remark in the non-decaying form ("not available at this point in
+the reading order").
 
 **Dropped from 261/262, each with what would license it.** *compact Hausdorff =>
 normal*: general topological compactness does not exist in this library — the only
@@ -447,13 +454,15 @@ is kept.
 - `thm-the-separation-implication-chain` is the page landmark and is an ASSEMBLY
   item: every clause names the earlier item that carries it, and the proof cites.
   Its Statement must list exactly the arrows proved and no more — the T4 => T3.5
-  and T6 => T5 arrows are absent, and their absence is stated in
+  arrow is absent (**orchestrator correction: T6 => T5 is PROVED on this page,
+  as `thm-perfectly-normal-implies-completely-normal`; only normal + T1 =>
+  completely regular is absent**), and its absence is stated in
   `rem-separation-axiom-conventions`, not in the theorem.
 - `rem-separation-axiom-conventions` carries four things: the regular/normal-with-
   or-without-T1 fork (Munkres builds T1 in and writes "regular"; Kelley, Willard
   and Engelking do not — this library separates the two and always writes the T1
   hypothesis); the $T_{2\frac12}$ naming and its clash with Urysohn's LEMMA; the
-  two missing arrows; and the choice observation, via `external_refs` to
+  **one** missing arrow; and the choice observation, via `external_refs` to
   `rem-urysohn-lemma-not-a-zf-theorem`, that Urysohn's lemma is not even a theorem
   of ZF, so the gap at 261 is not merely bookkeeping.
 - `cex-the-deleted-tychonoff-plank-is-not-normal` — the full argument, since it is
