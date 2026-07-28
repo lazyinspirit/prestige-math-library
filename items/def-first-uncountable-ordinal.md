@@ -11,10 +11,6 @@ landmark: true
 short: "$\\omega_1$, the Hartogs number of $\\mathbb{N}$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -68,11 +64,13 @@ naming obligation of this definition.
   $\omega_1$ is strictly above the least limit ordinal
   ([[lem-omega-least-limit-ordinal]]).
 
-- **Notation.** The cardinal notation $\aleph_1$ is **not** used in this
-  library. It presupposes the aleph hierarchy $\alpha \mapsto \aleph_\alpha$,
-  which is not constructed here; every statement about the first uncountable
-  ordinal is written $\omega_1$. The two names denote the same ordinal once the
-  hierarchy exists, but nothing on this page needs that.
+- **Notation.** The cardinal notation $\aleph_1$ is **not** used on this page or
+  anywhere in this library's ordinal development. It presupposes the aleph
+  hierarchy $\alpha \mapsto \aleph_\alpha$, which is not constructed here; every
+  statement about the first uncountable ordinal is written $\omega_1$. The
+  symbol does occur in remarks elsewhere that record results of cardinal
+  arithmetic this library does not develop. The two names denote the same
+  ordinal once the hierarchy exists, but nothing on this page needs that.
 
 - **Without a choice principle $\omega_1$ can behave strangely, and it still
   exists.** Its existence never fails, but statements about its cofinal

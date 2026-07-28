@@ -12,10 +12,6 @@ short: "unique base-$\\omega$ normal form of a nonzero ordinal"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -95,4 +91,4 @@ tighter than products, which bind tighter than sums
 
 **Base $\omega$ is not special.** The same argument with $\omega$ replaced by any ordinal $\gamma > 1$ gives a base-$\gamma$ normal form, with coefficients in $\gamma$ rather than in $\omega$. Only the base-$\omega$ case is stated here, because it is the one used, and because its coefficients are then ordinary natural numbers.
 
-**What is not claimed.** Nothing here says the normal form is computable, and nothing here uses or proves anything about $\varepsilon_0$. The ordinals $\alpha$ with $\alpha = \omega^{\alpha}$ have normal form $\omega^{\alpha} \cdot 1$, whose exponent is $\alpha$ itself, so the normal form does not always reduce a problem to strictly smaller data; the least such ordinal, $\varepsilon_0$, is exhibited on the companion examples page.
+**What is not claimed.** Nothing here says the normal form is computable, and nothing here uses or proves anything about $\varepsilon_0$. The ordinals $\alpha$ with $\alpha = \omega^{\alpha}$ have normal form $\omega^{\alpha} \cdot 1$, whose exponent is $\alpha$ itself, so the normal form does not always reduce a problem to strictly smaller data; one such ordinal, $\varepsilon_0$, is exhibited on the companion examples page, where it is shown to satisfy $\omega^{\varepsilon_0} = \varepsilon_0$ and where it is recorded that its *leastness* among such fixed points is not proved.

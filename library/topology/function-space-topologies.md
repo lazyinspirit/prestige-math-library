@@ -98,8 +98,8 @@ immediate while *joint* continuity is not.
 [[thm-evaluation-is-continuous-on-a-locally-compact-metric-domain]] supplies the
 hypothesis that makes it true. That hypothesis is
 [[def-locally-compact-metric-space]], minted here as the metric special case of a
-notion this library defines in general only later and carrying a dictionary remark
-saying so; [[lem-compact-closed-balls-in-a-locally-compact-metric-space]] upgrades
+notion this library does not yet define in general, and carrying a dictionary
+remark saying so; [[lem-compact-closed-balls-in-a-locally-compact-metric-space]] upgrades
 it to a neighbourhood base of compact closed balls.
 [[lem-tube-lemma-for-a-compact-metric-factor]] is the other half of the machinery,
 and [[thm-exponential-correspondence-is-continuous]] uses it to show that the

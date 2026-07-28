@@ -20,10 +20,6 @@ landmark: false
 short: "conventions of this page"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -46,8 +42,8 @@ uses.** Where the domain *must* be metric, that is forced rather than chosen: an
 item quantifying over the **compact** subsets of the domain needs a notion of
 compactness, and the only one available at this point in the reading order is
 [[def-metric-compactness]], which is defined for metric spaces. Compactness for
-an arbitrary topological space is developed on a later page of this library, and
-nothing here anticipates it. The items with a metric domain for that reason are
+an arbitrary topological space is not developed anywhere in this library at
+present, and nothing here anticipates it. The items with a metric domain for that reason are
 [[def-locally-compact-metric-space]],
 [[lem-compact-closed-balls-in-a-locally-compact-metric-space]],
 [[lem-tube-lemma-for-a-compact-metric-factor]], [[def-compact-open-topology]],
@@ -124,7 +120,7 @@ says so where it is defined.**
   $C([0,1],\mathbb{R})$, where both are defined, they induce the same topology,
   so no second notion of convergence is created.
 - [[def-locally-compact-metric-space]] is a metric special case of a notion this
-  library defines in general only later. Its own dictionary remark records the
+  library does not yet define in general. Its own dictionary remark records the
   agreement and why the agreement is immediate.
 
 **7. $Y^{X}$ here is a bare set of functions with the product topology, not the

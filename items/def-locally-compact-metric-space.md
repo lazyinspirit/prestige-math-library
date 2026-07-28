@@ -14,10 +14,6 @@ landmark: true
 short: "locally compact metric space"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -68,8 +64,8 @@ being vacuous.
 
 ## Remarks
 
-- **Dictionary: this is the metric special case of a notion this library defines
-  in general only later.** *Locally compact* is ordinarily defined for an
+- **Dictionary: this is the metric special case of a notion this library does not
+  yet define in general.** *Locally compact* is ordinarily defined for an
   arbitrary topological space, by the same words: every point has a compact
   neighbourhood, compactness there being the open-cover condition for arbitrary
   topological spaces. This library has no general topological compactness at this
@@ -85,8 +81,8 @@ being vacuous.
   [[lem-compactness-is-intrinsic]] are literally the members of $\mathcal{T}_d$.
   So a subset of $X$ is compact in the metric sense exactly when it is compact in
   the topological sense, and "has a compact neighbourhood" means the same thing on
-  both sides. The later page that defines compactness for arbitrary topological
-  spaces carries the obligation to record that agreement explicitly, exactly as
+  both sides. The page that defines compactness for arbitrary topological spaces
+  carries the obligation to record that agreement explicitly, exactly as
   [[def-metrizable-space]] records the agreement of the metric and topological
   notions of neighbourhood, closure, convergence and continuity. Stating this here
   is what stops the library from acquiring two unrelated notions under one name.

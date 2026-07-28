@@ -32,8 +32,11 @@ pipeline_run: null
 The claim is plausible because every limit ordinal a reader meets first does
 have one. $\omega$ is cofinal in itself and at most countable; and **every** at
 most countable limit ordinal $\lambda$ is cofinal in itself and at most
-countable, so the claim holds for all of them, and $\omega^{2}$,
-$\omega^{\omega}$ and $\varepsilon_0$ are among them.
+countable, so the claim holds for all of them, and $\omega + \omega$ and
+$\omega^{2}$ are among them, both being shown at most countable earlier on this
+page. Whether $\omega^{\omega}$ and $\varepsilon_0$ are at most countable is a
+question no item on these pages settles, so neither is offered here as an
+instance.
 
 **Assume the Axiom of Countable Choice** ([[def-countable-choice]]). The first
 uncountable ordinal $\omega_1$ ([[def-first-uncountable-ordinal]]) refutes the

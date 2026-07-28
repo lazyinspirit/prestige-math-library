@@ -67,7 +67,7 @@ $$\omega + \omega \;=\; \mathrm{ot}\big(\underbrace{0, 1, 2, \dots}_{\text{first
 
 ## Remarks
 
-**How far this goes.** Every ordinal strictly below $\omega_1$ is at most countable ([[thm-omega-one-is-the-least-uncountable-ordinal]]), and there are a great many of them: $\omega + \omega$, $\omega \cdot \omega$, $\omega^{\omega}$ and $\varepsilon_0$ ([[ex-powers-of-omega-and-epsilon-zero]]) are all countable, and all pairwise non-isomorphic as orders. So a single countably infinite set carries uncountably many mutually non-isomorphic well-orders, one for each countable ordinal.
+**How far this goes.** Every ordinal strictly below $\omega_1$ is at most countable ([[thm-omega-one-is-the-least-uncountable-ordinal]]), and there are a great many of them: $\omega + \omega$ and $\omega \cdot \omega = \omega^{2}$ are at most countable by the argument above, and no two distinct ordinals are isomorphic as orders. So a single countably infinite set carries uncountably many mutually non-isomorphic well-orders, one for each infinite ordinal below $\omega_1$. Nothing here says the same of $\omega^{\omega}$ or of $\varepsilon_0$ ([[ex-powers-of-omega-and-epsilon-zero]]): those are ordinals of larger *order type*, and their cardinality is a question no item on these pages settles, as that item's last remark records.
 
 **Why the argument does not need a choice principle.** The bijection used at step 2.1 is the collapsing isomorphism of [[thm-mostowski-collapse]], which is unique and therefore never chosen, and [[thm-product-of-countable]] is choice free too. Countability of a *countable union* of countable sets is a different matter and does cost $\mathrm{AC}_\omega$; that is [[thm-countable-union-of-countable]] and it is not used here.
 

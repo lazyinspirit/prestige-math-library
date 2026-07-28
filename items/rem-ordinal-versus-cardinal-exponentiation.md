@@ -11,10 +11,6 @@ landmark: false
 short: "$2^{\\omega} = \\omega$ as ordinals; $\\mathcal{P}(\\mathbb{N})$ is uncountable"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -65,9 +61,12 @@ $\mathbb{N}$.
 "$2^{\aleph_0}$ is uncountable" and then meets $2^{\omega}$ on this page has
 every reason to expect an uncountable ordinal, and would conclude that something
 above has gone wrong. Nothing has: the two expressions are values of two
-different functions. This library writes $\omega$ for the least infinite
-ordinal throughout and never writes $\aleph_0$ or $\aleph_1$, precisely so that
-an ordinal expression is never silently read as a cardinal one.
+different functions. This page writes $\omega$ for the least infinite ordinal
+throughout and $\omega_1$ for the first uncountable one, and never writes
+$\aleph_0$ or $\aleph_1$, precisely so that an ordinal expression here is never
+silently read as a cardinal one. Where the aleph subscript notation appears
+elsewhere in this library it is inside a statement *about* cardinal arithmetic,
+never inside an ordinal computation; no page of the ordinal development uses it.
 
 **What else is nearby, and what it is not.** $\mathbb{R}$ is uncountable too
 ([[thm-r-uncountable]]), by an argument that has nothing to do with power sets;

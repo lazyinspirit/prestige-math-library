@@ -97,9 +97,9 @@ that licenses the definite article in "the Cantor normal form".
 $+$ and $\cdot$ are literally the Peano operations of
 `construction-of-the-natural-numbers`, and that $\omega$ is closed under all
 three ordinal operations. Without it the library would carry two unrelated
-functions written $+$ on the same set. Note the exact scope: there is **no**
-natural-number exponentiation in this library, so no agreement is claimed for
-exponentiation, only closure.
+functions written $+$ on the same set. Note the exact scope: no prerequisite of
+this page supplies a natural-number exponentiation, so no agreement is claimed
+for exponentiation, only closure.
 
 **The first uncountable ordinal, and where choice starts.** $\omega_1$ is
 defined as the Hartogs number $\aleph(\omega)$, and

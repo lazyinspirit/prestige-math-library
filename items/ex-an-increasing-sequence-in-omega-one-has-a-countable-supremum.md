@@ -1,7 +1,7 @@
 ---
 id: ex-an-increasing-sequence-in-omega-one-has-a-countable-supremum
 kind: example
-title: "A strictly increasing $\\omega$-sequence of countable ordinals has a countable supremum, which is a countable limit ordinal below $\\omega_1$"
+title: "Assuming countable choice, a strictly increasing $\\omega$-sequence of countable ordinals has a countable supremum, which is a countable limit ordinal below $\\omega_1$; the instance $\\sup_n \\omega\\cdot(n+1) = \\omega^{2}$ needs no choice"
 status: draft
 origin: session
 deps: [thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal, def-first-uncountable-ordinal, def-countable-choice, def-countable, lem-subset-of-countable, lem-countable-iff-surjection-from-n, thm-product-of-countable, def-equinumerous, lem-ordinal-product-as-an-order-type, thm-mostowski-collapse, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, thm-ordinal-arithmetic-monotonicity, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-ordinal]
@@ -86,6 +86,6 @@ itself: $\omega_1$ is **not** the supremum of any such sequence.
 
 **Where the choice principle is and is not needed.** The general statement uses $\mathrm{AC}_\omega$, at the single step where [[thm-countable-subsets-of-omega-one-are-bounded]] is applied. The concrete instance does **not**: $\omega^{2}$ is shown at most countable directly, from [[lem-ordinal-product-as-an-order-type]] and [[thm-product-of-countable]], both of which are choice free. So the example is available in ZF and only the general statement carries the hypothesis.
 
-**The contrast with $\omega_1$ itself.** $\omega_1$ is also a limit ordinal, and it is also the supremum of the ordinals below it; what fails there, under $\mathrm{AC}_\omega$, is that no *at most countable* family of them suffices. That is [[thm-countable-subsets-of-omega-one-are-bounded]] again, and it is refuted outright without a choice principle, since consistently with ZF the first uncountable ordinal is the supremum of an $\omega$-sequence of countable ordinals ([[rem-omega-one-and-the-cost-of-choice]]).
+**The contrast with $\omega_1$ itself.** $\omega_1$ is also a limit ordinal, and it is also the supremum of the ordinals below it; what fails there, under $\mathrm{AC}_\omega$, is that no *at most countable* family of them suffices. That is [[thm-countable-subsets-of-omega-one-are-bounded]] again, and it is **not a theorem of ZF alone**: consistently with ZF the first uncountable ordinal *is* the supremum of an $\omega$-sequence of at most countable ordinals, so no choice-free proof of it exists ([[rem-omega-one-and-the-cost-of-choice]]).
 
 **Strict increase is used only for the limit clause.** Boundedness needs only that the set of values is at most countable; strictness is what makes the supremum unattained and hence a limit ordinal. A sequence that is eventually constant has its final value as supremum, and that value need not be a limit ordinal at all, which is why step 2.2 quotes the strictness hypothesis.

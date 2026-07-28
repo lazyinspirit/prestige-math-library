@@ -42,10 +42,11 @@ $m \cdot n = m \cdot_{\mathbb{N}} n$.
 $m < n$ in the additive order of [[def-nat-order]]. This is claim (i) of
 [[lem-omega-least-limit-ordinal]] and is cited, not reproved.
 
-**No agreement is claimed for exponentiation, because there is no
-natural-number exponentiation in this library to compare with.**
-`construction-of-the-natural-numbers` defines addition and multiplication and
-stops there. What clause (a) says about $m^{n}$ is only that the ordinal power
+**No agreement is claimed for exponentiation.** The dictionary drawn here is
+with `construction-of-the-natural-numbers`, which defines addition and
+multiplication and no exponentiation, and nothing among this page's declared
+prerequisites supplies a natural-number power for the ordinal power to be
+compared with. What clause (a) says about $m^{n}$ is only that the ordinal power
 of two naturals is again a natural.
 
 **This item is the dictionary between the two arithmetics on $\mathbb{N}$.**
@@ -90,6 +91,6 @@ same symbol on the same set. **No choice principle is used.**
 
 **The agreement stops immediately above $\omega$.** The natural-number operations are commutative; the ordinal operations are not, and the failure begins at the first infinite ordinal, with $1 + \omega = \omega \ne \omega + 1$ ([[fs-ordinal-addition-is-commutative]]). So this item says the ordinal operations restrict correctly, and says nothing about their behaviour anywhere else.
 
-**Exponentiation is closure only.** `construction-of-the-natural-numbers` has no exponentiation, so there is no natural-number power for the ordinal power to agree with, and clause (a) is all that can honestly be claimed. When a natural-number exponentiation is built, the corresponding agreement will be a one-line induction of exactly the shape of step 4.1.
+**Exponentiation is closure only.** `construction-of-the-natural-numbers` has no exponentiation, and no prerequisite of this page supplies one, so there is no natural-number power here for the ordinal power to agree with and clause (a) is all that this page claims. Wherever in the library a natural-number exponentiation with the clauses $m^{0} = 1$ and $m^{n^{+}} = m^{n} \cdot m$ is available, the corresponding agreement is a one-line induction of exactly the shape of step 4.1, on top of claim (b) for the product; it is not carried out here only because this page does not declare the page that mints it as a prerequisite.
 
 **What would go wrong without this item.** The symbol $+$ would denote two different functions on $\mathbb{N}$, one defined in `construction-of-the-natural-numbers` and one here, with nothing connecting them. Every later computation mixing finite and infinite ordinals, such as the coefficients of a Cantor normal form ([[thm-cantor-normal-form]]) or the value $2^{\omega} = \omega$ ([[fs-the-ordinal-two-to-the-omega-is-uncountable]]), silently uses the identification proved here.
