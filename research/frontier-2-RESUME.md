@@ -766,8 +766,19 @@ claim. I do not think authoring got worse: this is the first build whose step-9
 readers were told to read *every numbered step*, and the streak was probably a
 detection artifact.
 
-**Five judge rejections, all five real** — against a documented historical
-precision of 21–24%. All five were the same class: **the mathematics is correct
+**Six judge rejections, all six real** — against a documented historical
+precision of 21–24%. **The sixth was nearly lost.** Duplicate sweeps judged it
+twice and the second run PASSED the same text, washing the rejection away; a pass
+block was recorded and it was only found by grouping the ledger by id and looking
+for items whose verdicts disagree. `[L6]` asserted that the canonical embedding
+$\iota$ is injective, citing `def-canonical-natural` — which states in terms that
+"injectivity is a lemma rather than part of the definition" and names
+`lem-of-naturals-positive`, an item the file cited zero times. Re-cited and
+re-judged clean, with the judge confirming the derivation explicitly.
+
+**Five of the 182 items received contradictory verdicts on identical text.** That
+is the number to carry forward: a single judge verdict, pass or reject, is one
+sample from a distribution, not a measurement. All five were the same class: **the mathematics is correct
 and the licensing citation is wrong.** The sharpest used the *ambient* reading of
 compactness while `def-compact-space` states that no item may do so without
 citing `lem-compactness-of-a-subspace-is-ambient` — which it cited zero times.

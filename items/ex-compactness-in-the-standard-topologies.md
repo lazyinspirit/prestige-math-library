@@ -4,18 +4,18 @@ kind: example
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies placed in the compactness hierarchy"
 status: draft
 origin: session
-deps: [def-compact-space, def-compactness-variants, def-standard-topologies, def-topological-space, lem-compactness-of-a-subspace-is-ambient, def-countable, thm-r-uncountable, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, def-subspace-topology-top, lem-subset-of-countable, def-natural-numbers, def-canonical-natural]
+deps: [lem-of-naturals-positive, def-compact-space, def-compactness-variants, def-standard-topologies, def-topological-space, lem-compactness-of-a-subspace-is-ambient, def-countable, thm-r-uncountable, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, def-subspace-topology-top, lem-subset-of-countable, def-natural-numbers, def-canonical-natural]
 justified_by: []
 aliases: []
 landmark: true
 short: "compactness of the standard topologies"
 proof_strategy: direct
 verification:
+  precheck: pass
   judge:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-29
-  precheck: pass
 sources:
   scraped: []
   references:
@@ -66,7 +66,7 @@ all.
 
 [L5] In a Hausdorff space every compact subset is closed ([[thm-compact-subset-of-a-hausdorff-space-is-closed]], claim 3; [[def-hausdorff-space]]).
 
-[L6] The naturals embed in $\mathbb{R}$ by the canonical natural $\iota$, injectively, so $\{\iota(n) : n \in \mathbb{N}\}$ is a countably infinite subset of $\mathbb{R}$ ([[def-canonical-natural]], [[def-natural-numbers]]).
+[L6] The naturals embed in $\mathbb{R}$ by the canonical natural $\iota$ ([[def-canonical-natural]], [[def-natural-numbers]]); $\iota$ is injective, which is a lemma about ordered fields and not part of the definition ([[lem-of-naturals-positive]]), so $\{\iota(n) : n \in \mathbb{N}\}$ is a countably infinite subset of $\mathbb{R}$.
 
 ## Verification
 
