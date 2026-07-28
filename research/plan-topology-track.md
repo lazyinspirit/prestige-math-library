@@ -687,12 +687,27 @@ Minting a second-countability definition here would take 273's material and crea
 a second notion. 255 defines Lindelof and proves the hierarchy that does not
 mention a countable basis. Licensed by: page 273.
 
-**(6) "THE BAIRE CATEGORY THEOREM FOR LOCALLY COMPACT HAUSDORFF SPACES" IS
-DROPPED FOR PAGE SIZE, and its home is 255 or above.** Note that
-`complete-metrizability-and-baire` is spec order **277**, above 255, so it CAN
-host it once it declares `compactness` in `requires`; the alternative is a later
-item on 255 itself. Nothing else in this build needs it. Licensed by: page 277
-plus a `requires` edge to 255.
+**(6) "THE BAIRE CATEGORY THEOREM FOR LOCALLY COMPACT HAUSDORFF SPACES" — DROP
+REVERSED BY THE OWNER, 2026-07-29, AND IT IS ON PAGE 255.** The scaffold dropped
+it **for page size, not for reachability**, and recorded that it is provable from
+the material 255 already has. The owner reinstated it mid-build ("don't worry
+about page length"); page 255 carries
+`thm-baire-category-locally-compact-hausdorff` and stands at 29 items, still
+under the 30 threshold. **Page size is not a reason to drop a true result — split
+the page instead.**
+
+Its statement is **"assuming dependent choice"**, and the hypothesis is
+deliberately stated as *sufficient and not necessary*: the published
+`rem-baire-category-choice-strength` records that BCT for compact Hausdorff
+spaces is equivalent over ZF to **DMC**, strictly weaker than DC (Fossy–Morillon
+1998), and **explicitly declines to assert the locally compact form's
+equivalence** because the Bacsich (1972) attribution was never confirmed against
+a primary source. Page 255 does not assert it either; it mentions that item via
+`external_refs`, which is the sanctioned surviving use of the ‡ tier.
+
+`complete-metrizability-and-baire` (spec order 277) must therefore **not**
+re-mint the locally compact case when it is built; the complete-metric case is
+still its own.
 
 **(7) THE `fs-` THAT CANNOT BE WRITTEN.** T5 lists "infinite products of compacts
 are compact without AC". Its refutation is the independence of AC, which is
@@ -1319,11 +1334,13 @@ numbering).
 14. **"Second countable implies Lindelof" at page 255.** Second countability is
     `countability-axioms-and-cardinal-functions`, spec order 273, above 255.
     Licensed by: page 273.
-15. **The Baire category theorem for locally compact Hausdorff spaces.** Dropped
-    from 255 for page size, not for reachability: it is provable from the
-    material 255 has. Licensed by: page 277
-    `complete-metrizability-and-baire` once that page declares `compactness` in
-    its `requires`, or a later item on 255 itself.
+15. **The Baire category theorem for locally compact Hausdorff spaces —
+    RESOLVED, not denied (owner, 2026-07-29).** It was dropped from 255 for page
+    size rather than for reachability, and the owner reversed that: 255 carries
+    `thm-baire-category-locally-compact-hausdorff`, stated under dependent
+    choice as a sufficient hypothesis. This entry is kept as the record of a
+    denial that was lifted, not as a denial. `complete-metrizability-and-baire`
+    (277) still owns the complete-metric case and must not re-mint this one.
 16. **The ultrafilter proof of Tychonoff, and "Tychonoff for Hausdorff spaces iff
     the ultrafilter lemma".** The published `filters-and-ultrafilters` (order 12)
     has no notion of a filter converging in a topological space. Licensed by:

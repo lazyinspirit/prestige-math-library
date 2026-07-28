@@ -287,11 +287,52 @@ Authoritative gates, run by the orchestrator after the splice:
 - The check `depsource` cannot do — see the 1962-dep classification above.
   **0 onto an unbuilt planned page.**
 
+### Step 4b — Alpha-F2's propagation, and the three things it caught
+
+Alpha-F2 applied both notes sets to the three prose scaffolds. Every "Old text"
+block matched byte-for-byte; nothing was declined. Verified from disk before the
+commit: only those three files modified, `prosecheck` 0 errors on all three, no
+duplicate denial numbers after the renumber.
+
+It caught three defects **in text that had already been approved**, which is the
+argument for a single propagating writer rather than letting each Beta apply its
+own notes:
+
+1. **A numbering collision neither notes file could see.** Both batches numbered
+   their new scope denials from 13. Renumbered on application.
+2. **A wrong count in an approved amendment headline** — "FOUR PUBLISHED IDS"
+   above a list of seven. Prose rule 1, in text I had signed off.
+3. **A drop whose licence is ALREADY MET.** Batch 2 recorded the `fs-` item "the
+   Urysohn function vanishes exactly on $A$" as blocked because its witness needs
+   the compactness of $\omega_1 + 1$ homed on an **A** page. It is:
+   `thm-ordinal-spaces-and-compactness` sits on `compactness`, kind A, citable —
+   confirmed from the spliced spec. Batch 2 wrote the entry against its synthetic
+   stand-in for `compactness` and could not have known.
+   **The drop stands for this build** — the scaffold is frozen after the splice
+   and reinstating an item is not a step-4 action — **but the licensing condition
+   is satisfied and this is the cheapest recovery available to a later build.**
+   Carried to the rundown.
+
+### Recoverable-drop backlog — a standing observation
+
+Item 3 above is an instance of a general pattern worth acting on outside this
+build. Roughly 157 "dropped / would license it" notes sit across `research/`,
+each a result already reasoned about with its licensing condition named, and
+**nothing sweeps them when the licensing page is later built**. This build
+recovered "compact Hausdorff ⇒ normal" only because it was hand-carried in a
+handoff prompt. Measured against the published corpus for context: cross-page
+citation is healthy (6994 cross-page dep edges vs 2592 within-page, 21.7% of
+them crossing a category), and the negative tier is strong (246 of 1365 items,
+18%, are `counterexample` or `false-statement`) — so the recoverable backlog and
+the **28.6% of scaffolded items that are leaf-locked on B pages** are where
+richness is actually being lost, not connectivity or counterexample density.
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
 - [x] Steps 1–2 — Beta-F2-1 and Beta-F2-2 scaffolding: 181 items
 - [x] Step 3 — findings adjudicated from disk and logged
+- [x] Step 4 — spliced, gates of record green, Alpha-F2 propagation applied
 - [ ] Step 4 — spliced into plan-spec.json, Alpha-F2 spawned
 - [ ] Step 5 — six A/B pairs authored in parallel, Sonnet pilot assigned
 - [ ] Step 9 — Alpha-F2 fanned-out whole-build audit
