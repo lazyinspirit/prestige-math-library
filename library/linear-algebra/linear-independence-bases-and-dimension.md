@@ -130,17 +130,25 @@ pointwise. [[thm-dimension-of-a-linear-subspace]] then shows that a linear
 subspace of an $n$-dimensional space is finite-dimensional of dimension at most
 $n$, with equality only when the subspace is everything — and it too uses no
 choice, obtaining a basis of the subspace as an independent subset of greatest
-size via [[thm-well-ordering-principle]]. [[cor-a-linear-subspace-has-a-complement]]
+size via [[thm-well-ordering-principle]]. Its third claim is the
+finite-dimensional extension statement, that a linearly independent subset of a
+finite-dimensional space is contained in a basis of it, again with no choice
+principle; that is what the dimension formula below runs on. [[cor-a-linear-subspace-has-a-complement]]
 returns to Zorn and produces a complement for an arbitrary linear subspace of an
 arbitrary vector space, with no finiteness assumed. [[thm-dimension-formula]] is
 the page's second main computation, $\dim_F(U+W) + \dim_F(U \cap W) = \dim_F U +
 \dim_F W$ for finite-dimensional subspaces of an arbitrary ambient space, and
 [[cor-dimension-of-a-direct-sum]] iterates it along a finite direct sum, using
 condition (D2) of [[def-internal-direct-sum]] rather than pairwise trivial
-intersections, which would not suffice. Both of those two carry the Axiom of
-Choice in their statements, and both carry it for one reason only: the dimension
-formula extends a basis of $U \cap W$ to bases of $U$ and of $W$ through
-[[thm-every-independent-set-extends-to-a-basis]].
+intersections, which would not suffice. **Neither of those two costs a choice
+principle**: the dimension formula extends a basis of $U \cap W$ to bases of $U$
+and of $W$ through claim 3 of [[thm-dimension-of-a-linear-subspace]], the
+finite-dimensional extension statement, which is proved from
+[[thm-well-ordering-principle]] and [[lem-adjoining-a-vector-outside-the-span]]
+alone. So the whole finite-dimensional theory on this page is choice-free, and
+the Axiom of Choice appears only where an arbitrary vector space does: in
+[[thm-every-independent-set-extends-to-a-basis]], its two corollaries and
+[[cor-a-linear-subspace-has-a-complement]].
 
 **What this page does not develop.** There are no linear maps here, and
 therefore no rank, no matrix of a linear map, no change-of-basis matrix and no

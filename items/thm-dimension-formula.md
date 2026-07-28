@@ -4,7 +4,7 @@ kind: theorem
 title: "The dimension formula: for finite-dimensional linear subspaces $U$ and $W$ of $V$, the subspaces $U + W$ and $U \\cap W$ are finite-dimensional and $\\dim_F(U+W) + \\dim_F(U \\cap W) = \\dim_F U + \\dim_F W$"
 status: draft
 origin: session
-deps: [thm-dimension-of-a-linear-subspace, def-dimension, thm-any-two-finite-bases-have-the-same-size, cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-every-independent-set-extends-to-a-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-independent-list-is-injective, def-linear-basis, def-linear-independence, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, lem-intersection-of-linear-subspaces, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-nat-addition, lem-nat-add-associative, lem-nat-add-commutative, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, lem-nat-order-is-membership]
+deps: [thm-dimension-of-a-linear-subspace, def-dimension, thm-any-two-finite-bases-have-the-same-size, cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-unique-coordinates-with-respect-to-an-ordered-basis, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-independent-list-is-injective, def-linear-basis, def-linear-independence, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, lem-intersection-of-linear-subspaces, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-nat-addition, lem-nat-add-associative, lem-nat-add-commutative, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [thm-grassmann-formula]
 landmark: true
@@ -28,12 +28,9 @@ pipeline_run: null
 
 ## Statement
 
-**Assume the Axiom of Choice**, through
-[[thm-every-independent-set-extends-to-a-basis]], which is the one place below
-where it is used. Let $V$ be a vector space over a field $F$
-([[def-vector-space]]) and let $U$ and $W$ be linear subspaces of $V$
-([[def-linear-subspace]]), both finite-dimensional over $F$
-([[def-dimension]]). Then $U \cap W$ and $U + W$
+Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let $U$ and
+$W$ be linear subspaces of $V$ ([[def-linear-subspace]]), both
+finite-dimensional over $F$ ([[def-dimension]]). Then $U \cap W$ and $U + W$
 ([[def-sum-of-linear-subspaces]]) are finite-dimensional and
 
 $$\dim_F(U+W) \;+\; \dim_F(U \cap W) \;=\; \dim_F U \;+\; \dim_F W .$$
@@ -44,9 +41,16 @@ The ambient space $V$ is arbitrary and need not be finite-dimensional.
 $\dim_F(U \oplus W) = \dim_F U + \dim_F W$, since $\dim_F\{0_V\} = 0$; if
 $U = W$ it reads $\dim_F U + \dim_F U = \dim_F U + \dim_F U$.
 
+**No choice principle is used.** The bases of $U$ and of $W$ extending a basis of
+$U \cap W$ come from claim 3 of [[thm-dimension-of-a-linear-subspace]], which is
+proved by a largest-independent-subset argument inside a finite-dimensional
+space. Zorn's lemma is **not** used anywhere below, and the Zorn-based extension
+theorem of this page is neither cited nor needed; the remarks say where the
+difference lies.
+
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice; a field $F$; a vector space $V$ over $F$; and finite-dimensional linear subspaces $U$ and $W$ of $V$; write $u := \dim_F U$ and $w := \dim_F W$.
+**Given:** A field $F$; a vector space $V$ over $F$; and finite-dimensional linear subspaces $U$ and $W$ of $V$; write $u := \dim_F U$ and $w := \dim_F W$.
 
 [L1] $\dim_F X = p$ means $X$ has a basis with $p$ elements; if $X$ has one finite basis then every basis of $X$ is finite, and any two have the same size ([[def-dimension]], [[thm-any-two-finite-bases-have-the-same-size]]).
 
@@ -56,7 +60,7 @@ $U = W$ it reads $\dim_F U + \dim_F U = \dim_F U + \dim_F U$.
 
 [L4] If $X$ has a spanning set with $p$ elements then every linearly independent subset of $X$ is finite with at most $p$ elements ([[cor-independent-set-is-no-larger-than-a-finite-spanning-set]]).
 
-[L5] **Assuming the Axiom of Choice**, which is a hypothesis of the cited theorem and is carried in the Given above: if $L \subseteq S \subseteq V$ with $L$ linearly independent and $\operatorname{span}(S) = V$, there is a basis $B$ with $L \subseteq B \subseteq S$ ([[thm-every-independent-set-extends-to-a-basis]]). Also $\operatorname{span}(X) = X$ for a linear subspace $X$, which needs no choice ([[lem-span-monotone-and-idempotent]], claim 4).
+[L5] In a finite-dimensional vector space $X$ over $F$, every linearly independent $A_0 \subseteq X$ is contained in a basis of $X$, and no choice principle is used to produce it ([[thm-dimension-of-a-linear-subspace]], claim 3, which states this for a linear subspace and notes that a space is a linear subspace of itself). Also $\operatorname{span}(X) = X$ for a linear subspace $X$ ([[lem-span-monotone-and-idempotent]], claim 4).
 
 [L6] Concatenation: for $y : p \to Z$ and $z : q \to Z$ there is exactly one $c : p+q \to Z$ with $c_i = y_i$ for $i < p$ and $c_{p+j} = z_j$ for $j < q$; for $Z = V$ it satisfies $\sum_{i<p+q}c_i = \sum_{i<p}y_i + \sum_{j<q}z_j$; and if $y, z$ are injective with disjoint images then $c$ is injective with image $y[p] \cup z[q]$. A list is linearly independent exactly when it is injective with linearly independent image, and every subset of a linearly independent set is linearly independent ([[lem-independent-list-is-injective]], claims 3, 6 and 7). The scalar case is the same statement read in $F$, a vector space over itself ([[lem-restriction-of-scalars]]).
 
@@ -76,7 +80,7 @@ $U = W$ it reads $\dim_F U + \dim_F U = \dim_F U + \dim_F U$.
 
 1.1 $U \cap W$ is a linear subspace of $V$ contained in $U$, hence a linear subspace of $U$; since $U$ is finite-dimensional, so is $U \cap W$. Write $a := \dim_F(U \cap W)$, fix a basis $A$ of $U \cap W$ with $A \approx a$, and fix an injective list $\alpha : a \to V$ with image $A$. Note $\operatorname{span}(A) = U \cap W$, and that independence and spans may be computed in $V$ throughout. [L1, L2, L3, construct]
 
-2.1 Extending $A$ in each of $U$ and $W$. The set $A$ is linearly independent with $A \subseteq U$ and $\operatorname{span}(U) = U$, so there is a basis $B_U$ of $U$ with $A \subseteq B_U \subseteq U$; likewise there is a basis $B_W$ of $W$ with $A \subseteq B_W \subseteq W$. Put $A_U := B_U \setminus A$ and $A_W := B_W \setminus A$, which are disjoint from $A$ by construction. Each is a subset of a linearly independent set, hence linearly independent, and each lies in a space with a finite basis, hence is finite; fix $q$ and $r$ with $A_U \approx q$ and $A_W \approx r$, and injective lists $\beta : q \to V$ with image $A_U$ and $\delta : r \to V$ with image $A_W$. [step 1.1, L1, L4, L5, L6, L11, construct]
+2.1 Extending $A$ in each of $U$ and $W$. The set $A$ is linearly independent with $A \subseteq U$, and $U$ is finite-dimensional, so $A$ is contained in a basis $B_U$ of $U$; likewise $A \subseteq W$ gives a basis $B_W$ of $W$ with $A \subseteq B_W$. Both extensions are the finite-dimensional ones, with no appeal to Zorn's lemma. Put $A_U := B_U \setminus A$ and $A_W := B_W \setminus A$, which are disjoint from $A$ by construction. Each is a subset of a linearly independent set, hence linearly independent, and each lies in a space with a finite basis, hence is finite; fix $q$ and $r$ with $A_U \approx q$ and $A_W \approx r$, and injective lists $\beta : q \to V$ with image $A_U$ and $\delta : r \to V$ with image $A_W$. [step 1.1, L1, L4, L5, L6, L11, construct]
 
 3.1 The sizes add up. The lists $\alpha$ and $\beta$ are injective with disjoint images, so their concatenation is an injective list $a+q \to V$ with image $A \cup A_U = B_U$; hence $B_U \approx a + q$. Also $B_U$ is a basis of $U$, so $B_U \approx u$, and a finite set is equinumerous with exactly one natural number, so $a + q = u$. The same argument with $\delta$ gives $a + r = w$. [step 2.1, L1, L6, L11]
 
@@ -98,6 +102,6 @@ $U = W$ it reads $\dim_F U + \dim_F U = \dim_F U + \dim_F U$.
 
 - **The three blocks are pairwise disjoint, and that is proved rather than assumed.** $A$ meets neither $A_U$ nor $A_W$ by construction, and $A_U$ meets $A_W$ only if some vector of $B_W \setminus A$ lies in $U \cap W$, which would make $B_W$ dependent. Without disjointness the count $(a+q)+r$ would be wrong even though the set were still a basis.
 
-- **Where the Axiom of Choice is spent.** At exactly one point: step 2.1, where $A$ is extended to a basis of $U$ and to a basis of $W$ by [[thm-every-independent-set-extends-to-a-basis]]. Everything else above is explicit. For finite-dimensional $U$ and $W$ the extension is also reachable without any choice principle, by taking a linearly independent subset of $U$ containing $A$ of greatest size, exactly as [[thm-dimension-of-a-linear-subspace]] does; that route is sketched here rather than carried out, and the hypothesis is therefore stated.
+- **The proof costs no choice principle, and the reason is that $U$ and $W$ are finite-dimensional.** The only existence step is 2.1, and the extension used there is claim 3 of [[thm-dimension-of-a-linear-subspace]]: among the linearly independent subsets of $U$ containing $A$ there is one of greatest size, because [[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds their sizes and [[thm-well-ordering-principle]] then produces the largest, and a set of that size is already a basis by [[lem-adjoining-a-vector-outside-the-span]]. Nothing is selected from an infinite family, so [[thm-zorn]] is not needed. The corresponding statement for an arbitrary vector space, [[thm-every-independent-set-extends-to-a-basis]], does need the Axiom of Choice; this theorem does not use it, and [[cor-a-linear-subspace-has-a-complement]] is the item on this page that genuinely does.
 
 - **Nothing here needs the ambient $V$ to be finite-dimensional**, only $U$ and $W$. The consequence for a finite family of summands is [[cor-dimension-of-a-direct-sum]], and the failure of the inclusion-exclusion analogue for three subspaces is recorded on the companion page.

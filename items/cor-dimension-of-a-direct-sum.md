@@ -28,9 +28,7 @@ pipeline_run: null
 
 ## Statement
 
-**Assume the Axiom of Choice**, through [[thm-dimension-formula]], which is the
-one result below that carries it. Let $F$ be a field ([[def-field]]), let
-$n \in \mathbb{N}$, let $V$ be a vector
+Let $F$ be a field ([[def-field]]), let $n \in \mathbb{N}$, let $V$ be a vector
 space over $F$ ([[def-vector-space]]) and let $U$ be a family of linear subspaces
 $U_i$ of $V$ indexed by $i < n$ ([[def-linear-subspace]],
 [[def-sum-of-linear-subspaces]]) with
@@ -51,9 +49,13 @@ family is $\{0_V\}$ and the empty sum of natural numbers is $0$, so the formula
 reads $\dim_F\{0_V\} = 0$. **At $n = 2$** it reads
 $\dim_F(U \oplus W) = \dim_F U + \dim_F W$.
 
+**No choice principle is used.** The only inputs are
+[[thm-dimension-formula]] and [[thm-dimension-of-a-linear-subspace]], both of
+which are proved in finite dimension without one.
+
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice; a field $F$; a natural number $n$; a vector space $V$ over $F$; and a family of finite-dimensional linear subspaces $U_i$ of $V$ indexed by $i < n$ with $V = \bigoplus_{i<n} U_i$.
+**Given:** A field $F$; a natural number $n$; a vector space $V$ over $F$; and a family of finite-dimensional linear subspaces $U_i$ of $V$ indexed by $i < n$ with $V = \bigoplus_{i<n} U_i$.
 
 [L1] $V = \bigoplus_{i<n} U_i$ means (D1) $\sum_{i<n}U_i = V$ and (D2) $U_j \cap \sum_{i \ne j}U_i = \{0_V\}$ for every $j < n$, where $\sum_{i \ne j}U_i = \sum_{i<n}U^{(j)}_i$ for the family $U^{(j)}$ with $U^{(j)}_j = \{0_V\}$; and $\bigoplus_{i<0}U_i = \{0_V\}$ holds exactly for the zero space ([[def-internal-direct-sum]]).
 
@@ -61,7 +63,7 @@ $\dim_F(U \oplus W) = \dim_F U + \dim_F W$.
 
 [L3] A sum of a family contains each of its summands ([[lem-sum-is-span-of-union]]); the intersection of two linear subspaces is a linear subspace ([[lem-intersection-of-linear-subspaces]]); and a linear subspace of $V$ contained in a linear subspace $V'$ of $V$ is a linear subspace of $V'$, with the same independence and the same spans ([[def-linear-basis]], section on bases of a linear subspace, [[def-linear-subspace]]).
 
-[L4] **Assuming the Axiom of Choice**, which is a hypothesis of the cited theorem and is carried in the Given above: for finite-dimensional linear subspaces $X$ and $Y$ of a vector space, $X + Y$ and $X \cap Y$ are finite-dimensional and $\dim_F(X+Y) + \dim_F(X \cap Y) = \dim_F X + \dim_F Y$ ([[thm-dimension-formula]]); and a linear subspace of a finite-dimensional space is finite-dimensional ([[thm-dimension-of-a-linear-subspace]]).
+[L4] For finite-dimensional linear subspaces $X$ and $Y$ of a vector space, $X + Y$ and $X \cap Y$ are finite-dimensional and $\dim_F(X+Y) + \dim_F(X \cap Y) = \dim_F X + \dim_F Y$ ([[thm-dimension-formula]]); and a linear subspace of a finite-dimensional space is finite-dimensional ([[thm-dimension-of-a-linear-subspace]]).
 
 [L5] $\dim_F\{0_V\} = 0$, and $\dim_F$ depends only on the space and the field ([[def-dimension]]).
 
