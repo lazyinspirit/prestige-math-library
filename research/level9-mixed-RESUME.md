@@ -197,3 +197,62 @@ zero rejections. Too small a sample to restate the prior; worth watching.
 The one that matters: `thm-dimension-formula`'s `[L5]` restated its source while
 dropping "Assume the Axiom of Choice", making the fact stronger than the item it
 cited. That is the dominant defect class in this library.
+
+---
+
+## Orchestrator's personal audit of the escalation set (2026-07-28)
+
+`LEVELS.md` §escalation: an item **refuted OR repaired more than once** is
+audited by the orchestrator personally. Ten level-9 items crossed that line.
+
+**First, the count needed deflating.** Six of the ten reached two touches through
+a **batch cosmetic sweep** — a garbled "on the companion examples page" clause
+deleted from eight items in one commit — not through two substantive repairs.
+Measuring post-authoring diffs separates them:
+
+| item | post-authoring change | substantive? |
+|---|---|---|
+| `thm-discontinuity-set-is-f-sigma` | +31 −19 | **yes — a new Statement claim** |
+| `def-monotone-function` | +24 −5 | yes (judge-caught dictionary) |
+| `thm-dimension-formula` | +15 −11 | yes (choice-free rewrite) |
+| `thm-continuous-injection-…` | +11 −14 | **yes — proof steps restructured** |
+| the other six | ≤ 9 insertions | no — the cosmetic sweep |
+
+**Two of the four had already been independently read** — `def-monotone-function`
+by the step-8 auditor that verified its witness, `thm-dimension-formula` by the
+linear-algebra auditor claim by claim. **The other two were changes a step-8
+auditor made ITSELF, so nobody had read the new text.** That is exactly the
+standing lesson that a repair is new text and needs the scrutiny of the text it
+replaced. Both audited here, by hand.
+
+### `thm-discontinuity-set-is-f-sigma` — claim 1 is sound
+
+The repair added a **new claim to a Statement**, which is the fatal class if the
+proof does not give it. It does. Step 1.2 gives $D = \{\omega_f > 0\}$; steps 2.1
+and 2.2 give the two inclusions; step 1.1 identifies $A \cap G_n$ with the
+superlevel set at threshold $\varepsilon_n = 1/\iota(n+1)$, so the union identity
+follows. Checked specifically:
+
+- **first index**: $\varepsilon_0 = 1/\iota(1) = 1$, and step 2.1 splits on
+  $\omega_f(x) \ge 1$ versus $0 < \omega_f(x) < 1$, so $n = 0$ is a real case and
+  not an off-by-one;
+- **$\omega_f(x) = +\infty$** (the oscillation is extended-real-valued) satisfies
+  $\omega_f(x) \ge \varepsilon_0$, so it lands in $G_0$ rather than escaping the
+  union;
+- **"increasing"** is proved, not asserted: $n \le m \Rightarrow \varepsilon_m \le
+  \varepsilon_n$, so the superlevel sets grow with $n$.
+
+### `thm-continuous-injection-…` — the restructured case split is exhaustive
+
+Step 6.2 used to open with variables first bound two steps later. The repair gave
+each step its own hypothesis. Verified that the trichotomy in step 8.1 still
+covers every pair $c < d$ in $I$: $a \le c$ → 7.1; $c < a$ with $d \le a$ → 6.2;
+$c < a < d$ → 7.2. Each branch's hypothesis matches its step's opening exactly
+(6.2's "$c < d \le a$" implies $c < a$ on its own, so no case is orphaned), and
+each branch is grounded — 5.1 gives $f(x) < f(a)$ for $x < a$, 6.1 gives
+$f(x) > f(a)$ for $x > a$, both proved from the three-point claim with their own
+sub-cases exhausted.
+
+**Verdict: both repairs are correct. No further escalation.** The remaining six
+are cosmetic-sweep artefacts and need no personal audit; recorded so a later
+reader does not re-derive that conclusion.
