@@ -46,16 +46,10 @@ open a repair cycle for a citation quirk; do not re-audit text already correct.
   cited as external facts and never used as a proof step.
 - **Judge block:** delete it only on a material rewrite. SCHEMA §3 is explicit
   that "pure typography, or adding a citation that changes no claim, does not
-  count". Where you do materially rewrite, delete the block, then re-judge with
-  `tools/judge.mts --model z-ai/glm-5.2`,
-  `--conventions "$(cat briefs/judge-conventions.txt)"`,
-  `--batch "<the level's A-page slugs, comma-separated>"`,
-  `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`. **Never a Claude model.**
-  Capture stdout. **Never record a pass the judge did not give**; `keep: null`
-  is not a pass. The harness retries 3x at 7 minutes, so a slow call is usually
-  not a hang.
-- The orchestrator runs the authoritative gates after you and takes a `touchlog`
-  snapshot. Do not claim a gate passed that you did not run.
+  count". Where you do materially rewrite, **delete the block and stop there — do NOT
+  re-judge, and do not run `judge.mts`** (owner, 2026-07-28). The judge is step 6
+  and now runs ONCE, after your audit, on final text; whatever you rewrite is
+  picked up by that sweep. Until then the item is honestly unjudged.
 
 ## Stage 1 — step 4: propagate approved changes
 

@@ -70,14 +70,12 @@ already correct. Fix fatal; log cosmetic and move on.
    material rewrite — INCLUDING a correction in Remarks — invalidates the
    block, because a stale block claims a pass on text the judge never saw.
 2. Re-run `tools/reflow.mts` then `tools/precheck.mts` on it.
-3. **Re-judge it** with `tools/judge.mts`, model **`z-ai/glm-5.2`**, never a
-   Claude model. Pass `--topic`, put the triage rule above into `--conventions`,
-   and pass `--batch` with the level's A-page slugs so the judge sees the whole
-   batch (it always sees the item's own page and its `-examples` companion in
-   full). **Capture stdout** — `JUDGE_COSTLOG` records spend, not
-   verdicts. The harness drops verdicts intermittently: at level 7 three of six
-   returned empty or truncated JSON and all three parsed on a straight re-run.
-   **Never record a pass the judge did not give.**
+3. **Do NOT re-judge it, and do not run `judge.mts` at all** (owner,
+   2026-07-28). The judge is step 6 and now runs ONCE, after the step-9 audit,
+   on final text — so anything you rewrite here is judged afterwards as a matter
+   of course. Deleting the stale block is the whole of your obligation; the item
+   is simply unjudged until the sweep reaches it, and that is the honest state.
+
 
 ## Boundaries
 
