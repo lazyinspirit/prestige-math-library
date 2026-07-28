@@ -3,7 +3,7 @@
 
 189 pairs across 30 levels. Build frontier: **level 3**.
 
-A pages: 5 draft · 25 published · 159 unscaffolded
+A pages: 30 published · 159 unscaffolded
 
 **A pair's level is its A page's.** Its B companion always sits exactly one
 level higher, because it requires the A page. **Pairs sharing a level are
@@ -42,7 +42,7 @@ with no blockers is buildable today regardless of its level.
 | 5 | 135 | `limits-of-real-functions` | real-analysis | 21 | published | 12 | published | — |
 | 5 | 247 | `cardinal-arithmetic-and-cofinality` | foundations | 0 | unscaffolded | 0 | unscaffolded | ordinal-arithmetic |
 | 5 | 249 | `topological-spaces-and-continuity` | topology | 26 | published | 14 | published | — |
-| 6 | 28 | `primes-and-the-fundamental-theorem-of-arithmetic` | number-theory | 18 | draft | 9 | draft | — |
+| 6 | 28 | `primes-and-the-fundamental-theorem-of-arithmetic` | number-theory | 18 | published | 9 | published | — |
 | 6 | 46 | `rings-subrings-and-integral-domains` | abstract-algebra | 26 | published | 10 | published | — |
 | 6 | 120 | `compactness-in-metric-spaces` | topology | 26 | published | 11 | published | — |
 | 6 | 129 | `absolute-convergence-and-rearrangement` | real-analysis | 26 | published | 14 | published | — |
@@ -60,22 +60,22 @@ with no blockers is buildable today regardless of its level.
 | 7 | 273 | `countability-axioms-and-cardinal-functions` | topology | 0 | unscaffolded | 0 | unscaffolded | cardinal-arithmetic-and-cofinality |
 | 7 | 283 | `function-space-topologies` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
 | 8 | 32 | `cosets-and-lagranges-theorem` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | congruences-and-the-chinese-remainder-theorem |
-| 8 | 74 | `linear-independence-bases-and-dimension` | linear-algebra | 20 | draft | 8 | draft | — |
+| 8 | 74 | `linear-independence-bases-and-dimension` | linear-algebra | 20 | published | 8 | published | — |
 | 8 | 209 | `trees-forests-and-spanning-trees` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | graphs-walks-and-connectivity |
 | 8 | 259 | `nets-and-filters` | topology | 0 | unscaffolded | 0 | unscaffolded | compactness |
 | 8 | 263 | `hausdorff-via-the-diagonal` | topology | 0 | unscaffolded | 0 | unscaffolded | separation-axioms |
 | 8 | 267 | `urysohn-lemma-and-tietze` | topology | 0 | unscaffolded | 0 | unscaffolded | separation-axioms |
 | 8 | 279 | `uniform-spaces` | topology | 0 | unscaffolded | 0 | unscaffolded | compactness |
 | 9 | 34 | `normal-subgroups-and-quotient-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | cosets-and-lagranges-theorem |
-| 9 | 151 | `monotone-functions-and-discontinuities` | real-analysis | 32 | draft | 12 | draft | — |
+| 9 | 151 | `monotone-functions-and-discontinuities` | real-analysis | 32 | published | 12 | published | — |
 | 9 | 211 | `eulerian-and-hamiltonian-graphs` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | trees-forests-and-spanning-trees |
 | 9 | 265 | `hereditary-and-productive-separation` | topology | 0 | unscaffolded | 0 | unscaffolded | hausdorff-via-the-diagonal, compactness, ordinal-arithmetic |
 | 9 | 269 | `partitions-of-unity-and-paracompactness` | topology | 0 | unscaffolded | 0 | unscaffolded | urysohn-lemma-and-tietze, compactness |
 | 9 | 271 | `tychonoff-embedding-and-stone-cech` | topology | 0 | unscaffolded | 0 | unscaffolded | urysohn-lemma-and-tietze, nets-and-filters |
 | 10 | 36 | `group-homomorphisms-and-the-isomorphism-theorems` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | normal-subgroups-and-quotient-groups |
 | 10 | 48 | `ideals-and-quotient-rings` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | normal-subgroups-and-quotient-groups |
-| 10 | 153 | `the-derivative-and-mean-value-theorems` | real-analysis | 19 | draft | 10 | draft | — |
-| 10 | 159 | `the-riemann-integral` | real-analysis | 18 | draft | 10 | draft | — |
+| 10 | 153 | `the-derivative-and-mean-value-theorems` | real-analysis | 19 | published | 10 | published | — |
+| 10 | 159 | `the-riemann-integral` | real-analysis | 18 | published | 10 | published | — |
 | 10 | 213 | `matchings-covers-menger-and-network-flows` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | eulerian-and-hamiltonian-graphs, chains-antichains-sperner-and-dilworth |
 | 10 | 275 | `metrization-theorems` | topology | 0 | unscaffolded | 0 | unscaffolded | countability-axioms-and-cardinal-functions, partitions-of-unity-and-paracompactness |
 | 10 | 281 | `uniform-completeness-and-samuel-compactification` | topology | 0 | unscaffolded | 0 | unscaffolded | uniform-spaces, tychonoff-embedding-and-stone-cech |
