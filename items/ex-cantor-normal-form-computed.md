@@ -12,6 +12,10 @@ short: "$(\\omega^{2}+\\omega\\cdot3+5)\\cdot\\omega^{2} = \\omega^{4}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -47,9 +51,9 @@ summand is swallowed.
 
 **Given:** $\alpha = \omega^{2} + \omega \cdot 3 + 5$, with the operations of [[def-ordinal-addition]], [[def-ordinal-multiplication]] and [[def-ordinal-exponentiation]]; the finite ordinals $2, 3, 4, 5, 7$ are elements of $\omega$ ([[def-natural-numbers]], [[lem-omega-least-limit-ordinal]]). Products bind tighter than sums, so $\omega \cdot 3 + 5$ is $(\omega \cdot 3) + 5$.
 
-[L1] $\alpha \cdot \delta^{+} = \alpha \cdot \delta + \alpha$ and $\alpha \cdot \lambda = \sup\{\alpha \cdot \xi : \xi \in \lambda\}$ for limit $\lambda$ ([[def-ordinal-multiplication]]); $\alpha^{\delta^{+}} = \alpha^{\delta} \cdot \alpha$ and $\alpha^{0} = 1$ ([[def-ordinal-exponentiation]]); $\mu + 0 = \mu$ ([[def-ordinal-addition]]).
+[L1] $\alpha \cdot \delta^{+} = \alpha \cdot \delta + \alpha$ and $\alpha \cdot \lambda = \sup\{\alpha \cdot \xi : \xi \in \lambda\}$ for limit $\lambda$ ([[def-ordinal-multiplication]]); $\alpha^{\delta^{+}} = \alpha^{\delta} \cdot \alpha$ and $\alpha^{0} = 1$ ([[def-ordinal-exponentiation]]); $\mu + 0 = \mu$, $\mu + \delta^{+} = (\mu + \delta)^{+}$ and $\mu + \lambda = \sup\{\mu + \xi : \xi \in \lambda\}$ for limit $\lambda$ ([[def-ordinal-addition]]).
 
-[L2] From [[thm-ordinal-arithmetic-monotonicity]]: $1 \cdot \mu = \mu \cdot 1 = \mu$ and $0 + \mu = \mu$ (claim (a)); $\nu < \theta$ implies $\mu + \nu < \mu + \theta$ (claim (b)); for $\mu > 0$, $\nu < \theta$ implies $\mu\nu < \mu\theta$ (claim (d)); $\mu \le \nu$ implies $\mu\gamma \le \nu\gamma$ (claim (e)); and $\mu \cdot \lambda = \sup\{\mu\eta : \eta \in D\}$ for $\mu > 0$, $\lambda$ a limit and $D \subseteq \lambda$ nonempty with $\sup D = \lambda$ (claim (f)).
+[L2] From [[thm-ordinal-arithmetic-monotonicity]]: $1 \cdot \mu = \mu \cdot 1 = \mu$ and $0 + \mu = \mu$ (claim (a)); $\nu < \theta$ implies $\mu + \nu < \mu + \theta$ (claim (b)); for $\mu > 0$, $\nu < \theta$ implies $\mu\nu < \mu\theta$ (claim (d)); $\mu \le \nu$ implies $\mu\gamma \le \nu\gamma$ (claim (e)); $\mu + \lambda = \sup\{\mu + \xi : \xi \in \lambda\}$ and $\mu \cdot \lambda = \sup\{\mu\eta : \eta \in D\}$ for $\mu > 0$, $\lambda$ a limit and $D \subseteq \lambda$ nonempty with $\sup D = \lambda$ (claim (f)).
 
 [L3] $\cdot$ is associative and $\mu(\nu + \theta) = \mu\nu + \mu\theta$ ([[thm-ordinal-multiplication-associative-and-left-distributive]]); $+$ is associative ([[thm-ordinal-addition-associative]]).
 
@@ -65,7 +69,7 @@ summand is swallowed.
 
 **Proof technique:** direct.
 
-1.1 Preliminary identities: $\omega^{1} = \omega$ and $\omega^{2} = \omega^{1^{+}} = \omega^{1} \cdot \omega = \omega \cdot \omega$ by [L1] and [L4]; $\omega \cdot 3 + \omega = \omega \cdot 3^{+} = \omega \cdot 4$ and $\omega^{2} + \omega^{2} = \omega^{2} \cdot 1 + \omega^{2} = \omega^{2} \cdot 2$ by [L1] and [L2]. [L1, L2, L4]
+1.1 Preliminary identities: $\omega^{1} = \omega$ and $\omega^{2} = \omega^{1^{+}} = \omega^{1} \cdot \omega = \omega \cdot \omega$ by [L1] and [L4]; $\omega \cdot 3 + \omega = \omega \cdot 3^{+} = \omega \cdot 4$, $\omega + \omega = \omega \cdot 1 + \omega = \omega \cdot 1^{+} = \omega \cdot 2$, and $\omega^{2} + \omega^{2} = \omega^{2} \cdot 1 + \omega^{2} = \omega^{2} \cdot 2$ by [L1] and [L2]. [L1, L2, L4]
 
 1.2 For $n \in \omega$ the ordinals $2 \cdot n$ and $5 + n$ lie in $\omega$ by [L6], hence are subsets of $\omega$ by [L7]; and $n = 1 \cdot n \le 2 \cdot n$ and $n \le 5 + n$ by [L2], so both $\{2 \cdot n : n \in \omega\}$ and $\{5 + n : n \in \omega\}$ are nonempty subsets of $\omega$ with supremum $\bigcup \omega = \omega$. [L2, L6, L7]
 

@@ -11,6 +11,10 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

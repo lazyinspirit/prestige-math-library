@@ -12,6 +12,10 @@ landmark: true
 short: "primitives of a continuous function"
 proof_strategy: direct
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []

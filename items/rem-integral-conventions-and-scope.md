@@ -12,6 +12,10 @@ aliases: []
 landmark: false
 short: "conventions and scope of this page"
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []

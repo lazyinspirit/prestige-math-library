@@ -14,6 +14,10 @@ short: "Sierpinski space in the hierarchy"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -35,9 +39,11 @@ one. Then:
 
 1. $S$ is **$T_0$** ([[def-t0-and-t1-spaces]]): the open set $\{b\}$ contains $b$
    and not $a$.
-2. $S$ is **not $T_1$**, and therefore not Hausdorff
-   ([[def-hausdorff-space]]): the singleton $\{b\}$ is not closed
-   ([[thm-t1-iff-singletons-are-closed]]).
+2. $S$ is **not $T_1$**: the singleton $\{b\}$ is not closed
+   ([[thm-t1-iff-singletons-are-closed]]). It is **not Hausdorff**
+   ([[def-hausdorff-space]]) either, and for an independent reason rather than
+   as a consequence of the previous sentence: the only open set containing $a$
+   is $S$ itself, which also contains $b$.
 3. $S$ is **normal** ([[def-normal-and-t4-spaces]]): its only closed sets are
    $\varnothing$, $\{a\}$ and $S$, and no two disjoint closed sets are both
    nonempty.
@@ -61,7 +67,7 @@ and fails the axiom immediately above it.
 
 [L2] Normal: disjoint closed sets have disjoint open supersets. Regular: a point and a closed set not containing it have disjoint open supersets ([[def-normal-and-t4-spaces]], [[def-regular-and-t3-spaces]]).
 
-[L3] Hausdorff: distinct points have disjoint open neighbourhoods, and every Hausdorff space is $T_1$ ([[def-hausdorff-space]]).
+[L3] Hausdorff: distinct points have disjoint open neighbourhoods ([[def-hausdorff-space]]).
 
 ## Verification
 
@@ -73,7 +79,7 @@ and fails the axiom immediately above it.
 
 1.3 The only open set containing $a$ is $S$, by [A1], since $\varnothing$ contains nothing and $\{b\}$ does not contain $a$. [A1]
 
-2.1 $\{b\}$ is not closed, since $\{b\}$ is not among the three closed sets of step 1.1; so $S$ is not $T_1$ by [L1], and not Hausdorff by [L3], which is claim 2. [step 1.1, L1, L3]
+2.1 $\{b\}$ is not closed, since $\{b\}$ is not among the three closed sets of step 1.1, so $S$ is not $T_1$ by [L1]; and $S$ is not Hausdorff, since by step 1.3 the only open set containing $a$ is $S$, which also contains $b$, so $a$ and $b$ have no disjoint open neighbourhoods as [L3] would require. Together these are claim 2. [step 1.1, step 1.3, L1, L3]
 
 2.2 No two disjoint closed subsets of $S$ are both nonempty: by step 1.1 the nonempty closed sets are $\{a\}$ and $S$, and $\{a\} \cap \{a\} = \{a\}$, $\{a\} \cap S = \{a\}$ and $S \cap S = S$ are all nonempty. [step 1.1]
 

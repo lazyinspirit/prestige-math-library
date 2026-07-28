@@ -12,6 +12,10 @@ short: "$\\omega_1$ refutes it, under $\\mathrm{AC}_\\omega$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

@@ -12,6 +12,10 @@ landmark: false
 short: "finitely many values do not matter"
 proof_strategy: induction
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []

@@ -10,6 +10,10 @@ aliases: [def-oriented-limits-of-integration]
 landmark: true
 short: "oriented limits $\\int_b^a f = -\\int_a^b f$"
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []

@@ -10,6 +10,10 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:

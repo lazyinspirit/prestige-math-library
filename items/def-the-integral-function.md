@@ -11,6 +11,10 @@ aliases: [def-integral-function]
 landmark: true
 short: "integral function $F(x) = \\int_a^x f$"
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []

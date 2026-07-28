@@ -11,6 +11,10 @@ landmark: false
 short: "step function: $\\int_0^2 f = 4$"
 proof_strategy: direct
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []

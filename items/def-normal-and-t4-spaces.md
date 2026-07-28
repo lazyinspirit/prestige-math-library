@@ -12,6 +12,10 @@ landmark: true
 short: "normal space, $T_4$ space"
 verification:
   precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-28
 sources:
   scraped: []
   references:
