@@ -86,8 +86,8 @@ and confirms the resulting uniform convergence by the direct bound
 $|s_k(t) - t| \le a_k$. It then takes the ramps of the previous counterexample:
 continuous, pointwise monotone, on the same compact domain, and with a
 discontinuous pointwise limit — every hypothesis of Dini's theorem except
-continuity of the limit, and the conclusion fails. That is the sharpest statement
-this page makes about which hypotheses of Dini's theorem are load bearing.
+continuity of the limit, and the conclusion fails. That isolates which
+hypothesis of Dini's theorem is load bearing.
 
 **Two conventions visible throughout.** $\mathbb{N}$ contains $0$, so every
 reciprocal on this page is written $1/\iota(k+1)$ or $1/\iota(k+2)$, never

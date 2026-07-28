@@ -127,3 +127,13 @@ author can verify while writing:
    natural-number exponentiation while the other batch minted it at order 20.
 
 Run `node tools/prosecheck.mjs <your files> --warnings` before reporting.
+
+## Summaries and Remarks
+
+**Summaries describe the mathematics, never the page; Remarks justify, never
+survey (owner, 2026-07-28 — SCHEMA §6).** A page summary gives background and
+says what the page proves. It does not count anything, rank its own contents
+("the hardest proof here"), claim what other pages contain, or state a reading
+position. A Remark says *why* a hypothesis is needed; it does not survey what the
+library holds elsewhere. Both classes are unverifiable while writing, both decay
+silently, and neither is mathematics. This cuts no theorem, example or proof.

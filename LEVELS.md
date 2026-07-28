@@ -534,6 +534,9 @@ Repairs are **measured from disk**, never counted from an agent's report.
   denial is scoped to THIS PAGE'S DECLARED PREREQUISITES, never to "the
   library"** — the corpus-wide form is a claim no author can warrant, and one
   build falsified its own.
+  **(4) A page summary describes the mathematics, never the page**, and a Remark
+  justifies rather than surveys (SCHEMA §6). No counts, no self-ranking, no
+  claims about other pages. No mechanical tier reads a summary at all.
 - **Explicitly acceptable, spend no effort:** minor citational quirks; logical
   gaps a competent reader closes **within 30 seconds**; other non-fatal quirks;
   imperfection at the level of the letter.

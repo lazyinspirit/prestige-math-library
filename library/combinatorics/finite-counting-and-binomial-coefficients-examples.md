@@ -27,7 +27,7 @@ functions $3 \to 2$, observes that none is injective, and checks that against
 both the falling factorial $2^{\underline{3}} = 0$ and the pigeonhole principle;
 [[ex-weak-compositions-worked]] lists all fifteen weak compositions of $4$ into
 $3$ parts and matches them against $\binom{6}{2}$, exhibiting the stars-and-bars
-bijection on four of them rather than merely checking the number. Where a set is
+bijection rather than merely checking the number. Where a set is
 too large to list, every arithmetic step is written out:
 [[ex-pascals-triangle-to-row-six]] builds rows $0$ to $6$ from Pascal's rule and
 then re-derives four interior entries from the closed formula, so the two routes

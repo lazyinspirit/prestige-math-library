@@ -54,7 +54,7 @@ worked form of the main page's
 that a discrete space satisfies every axiom on the main page, and that the
 indiscrete topology on two points is regular, completely regular, normal,
 completely normal and perfectly normal while failing $T_0$. The second half is
-the sharpest statement of the convention point: all five unnumbered adjectives
+the convention point made concrete: all five unnumbered adjectives
 together are compatible with a space that distinguishes no pair of its points,
 and that is precisely what the numerals $T_3$ to $T_6$ add.
 

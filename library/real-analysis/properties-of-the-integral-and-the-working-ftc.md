@@ -56,7 +56,7 @@ a finite set, the one delicate point being that a partition point lies in two
 subintervals.
 
 **Composition, and the order of the hypotheses.**
-[[thm-composition-with-a-continuous-function]] is the hardest proof on the page:
+[[thm-composition-with-a-continuous-function]] is the one place where the classical argument does not transfer:
 if $f$ is integrable with values in $[m,M]$ and $\varphi$ is continuous on
 $[m,M]$, then $\varphi\circ f$ is integrable. The classical proof splits the
 index range into good and bad indices; the finite-sum laws available here are

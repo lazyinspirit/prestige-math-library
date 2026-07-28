@@ -272,6 +272,43 @@ examples: [ex-…, cex-…, fs-…]                # Section 5, in reading order
 hand-written prose on a page.)
 ```
 
+### The summary describes the MATHEMATICS, never the page (owner, 2026-07-28)
+
+**No mechanical tier reads a page summary** — the judge reads items and cannot
+see a page file, and `precheck` ignores prose. So a summary is the least-checked
+text in the library, and every summary defect ever found here was the page
+**describing itself** rather than getting mathematics wrong:
+
+> "the hardest proof on the page" · "every computation on the companion page runs
+> through it" · "three theorems close the page" · "half of this page cites claim
+> 2" (it was 7 of 20) · "Darboux's theorem is developed on a later page" (its page
+> is at a *lower* order, and unbuilt)
+
+**Rule.** A summary gives background and says what the page proves. It does
+**not**:
+
+- count anything on the page, or on any other page;
+- rank its own contents ("the hardest", "the sharpest", "the only");
+- claim what other pages do, contain, or lack;
+- state a position in the reading order that is not derived from the spec.
+
+Each of those is a claim about a file the writer is not looking at, and none of
+them is mathematics. `tools/prosecheck.mjs` gates the count and position halves;
+the self-ranking half is a reading check.
+
+### Remarks JUSTIFY; they do not SURVEY
+
+The same split, measured over seven builds: a Remark saying **why** a hypothesis
+is needed, what fails without it, or which convention is in force **has never been
+wrong here**. A Remark **surveying what the library contains elsewhere** is the
+defect class — it is unverifiable while writing and it decays silently afterwards.
+
+Write the first kind. For the second, either cite the item and let the link carry
+it, or say nothing.
+
+**This cuts no theorem, no example, no proof, and no counterexample.** It removes
+sentences that were never mathematics and were never checked by anything.
+
 Rendered page = fixed 5 sections: (1) Prerequisites — MECHANICAL, but PAGE-level:
 the other library pages that prove any item in this page's transitive `deps`
 closure (over listed items, minus items already on the page), rendered as direct

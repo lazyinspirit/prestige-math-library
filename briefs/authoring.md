@@ -184,6 +184,14 @@ The renderer shows five fixed-numbered sections (Prerequisites · Summary ·
 Flowchart · Definitions/theorems/proofs · Examples/counterexamples/false
 statements). Your job is the page frontmatter and the summary prose.
 
+**Summaries describe the mathematics, never the page; Remarks justify, never
+survey (owner, 2026-07-28 — SCHEMA §6).** A page summary gives background and
+says what the page proves. It does not count anything, rank its own contents
+("the hardest proof here"), claim what other pages contain, or state a reading
+position. A Remark says *why* a hypothesis is needed; it does not survey what the
+library holds elsewhere. Both classes are unverifiable while writing, both decay
+silently, and neither is mathematics. This cuts no theorem, example or proof.
+
 **No mechanical tier reviews page summaries.** The judge reads items and cannot
 read a page file; precheck ignores prose. Six summary defects survived every
 gate at level 7. Write the summary last, from the items as you actually wrote
