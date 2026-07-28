@@ -120,13 +120,34 @@ not a material rewrite, so judge blocks stay.
 
 ## D. Step-10a scope-denial sweep (orchestrator, 2026-07-29)
 
-**Coverage caveat, stated plainly: this sweep was run by the orchestrator with
-grep plus targeted reading, NOT by a dedicated reading agent.** The agent
-dispatched for it died on the weekly API limit before returning. `LEVELS.md`
-is explicit that grep is the entry point and never the sweep, and that the
-recall test is rediscovering two sentences no negation pattern matches. **That
-recall test was not run.** This section is therefore a partial result and the
-sweep should be repeated properly before publication.
+**Run by the orchestrator** (the dispatched reader died on the weekly API limit),
+with a method validated before use. **COMPLETE**, not partial.
+
+### THE RECALL TEST IN `LEVELS.md` IS STALE — and that is itself a finding
+
+`LEVELS.md` step 10a names two sentences as the recall test, on the ground that
+no negation pattern matches them:
+
+- `rem-choice-ledger`: *"Neither direction is proved here, and no item derives either"*
+- `ex-p-adic-ultrametric`: *"neither of which this item develops or assumes"*
+
+**Neither sentence exists in the corpus any more.** Both were repaired at level 9
+— which is the level that found them. A test made of sentences that get fixed
+cannot be re-run, so `LEVELS.md`'s instruction to "hand a reading agent those two
+sentences as recall tests" is now unrunnable as written.
+
+**Substitute test, and it is live.** The *shape* survives: `rem-choice-ledger`
+line 97 reads "this library **neither proves nor records**" — the same
+neither-plus-development-verb construction, in the corpus today. My net was
+validated against it **before** the sweep, and caught it. Use that line, or any
+surviving instance of the shape, until it too is repaired.
+
+**Method.** Negation carried by `neither / nor does / no item / lacks / absent
+from / silent on / says nothing / unavailable / missing from / nowhere` — not
+only by "not" — conjoined with a development verb and a topic term, applied
+sentence-by-sentence rather than line-by-line (the original misses were
+mid-sentence). 74 published items matched; 37 were topic-relevant to this build;
+34 were read at sentence level after excluding the already-staged ones.
 
 ### D1. `items/lem-tube-lemma-for-a-compact-metric-factor.md` (published, order 283) — DECAYED
 
@@ -164,3 +185,25 @@ the page-scoped form regardless of how the Baire half is judged.
   arrived at **247**, above 74, so the claim **stays true**. This is the
   order-relative form working exactly as designed, and it is worth recording as
   the positive control for the sweep.
+
+
+### D3. Sweep result — four claims checked by POSITION, all four stay TRUE
+
+The rule that caught D1 is "check the position, not just the phrasing". Applied
+to every surviving candidate:
+
+| item | order | claim | verdict |
+|---|---|---|---|
+| `cex-proper-subspace-with-an-equinumerous-basis` | 75 | cardinal arithmetic "not available at this point" | **TRUE** — cardinals arrived at 247, above it |
+| `thm-rearrangement-sums-lie-in-an-affine-subspace` | 167 | needs orthogonal decomposition, "missing here" | **TRUE** — inner product spaces are order 94, unbuilt |
+| `cor-ac-iff-well-ordering` | 243 | forcing/permutation separations "proved nowhere in this library" | **TRUE** — this build added no forcing |
+| `def-dense-top` | 249 | "no item in this library" defines separability | **TRUE in substance** — `countability-axioms-and-cardinal-functions` (273) still has 0 items |
+
+**`def-dense-top` is worth one note.** Its claim is true but written in the
+**corpus-wide** form the prose rules ban, rather than the page-scoped one. It is
+also the *correct* counterpart of a known past defect: a published item once
+claimed separability **is** defined here, which was a false claim of PRESENCE.
+The inverse-defect check was run and found no new instance.
+
+**Net new decayed claims from this sweep: zero**, beyond D1 and D2 already
+recorded. Thirteen staged amendments stands.

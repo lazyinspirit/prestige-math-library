@@ -12,6 +12,10 @@ short: "$\\operatorname{cf}(\\aleph_{\\omega_1}) = \\aleph_1$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

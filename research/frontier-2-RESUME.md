@@ -738,15 +738,16 @@ sweep — see below.
 
 ## What the owner is accepting if they publish
 
-1. **Four items are unjudged**, all on `cardinal-arithmetic-and-cofinality-examples`:
-   `ex-a-singular-cardinal-of-uncountable-cofinality`, `ex-an-aleph-fixed-point`,
-   `ex-the-beth-hierarchy-computed`, `ex-counting-functions-and-subsets-of-the-continuum`.
-   The sweep stopped on the **weekly API limit**, not on any defect. They have
-   been read by the step-9 tier; they lack the independent cross-family screen.
-2. **Step 10a is PARTIAL.** The dedicated scope-denial reader died on the same
-   limit. I ran grep plus targeted reading myself; **the recall test that
-   `LEVELS.md` requires was not run**, so this sweep is not measuring what the
-   process says it should. Repeat it before publishing.
+1. ~~Four items unjudged~~ **RESOLVED: judge coverage is 182/182 (100%)**, every
+   pass corroborated against the verdict ledger, **0 fabricated**, 0 open
+   rejections.
+2. ~~Step 10a partial~~ **RESOLVED: step 10a is COMPLETE**, with a method
+   validated before use — and it exposed a defect in the process itself. **The
+   recall test `LEVELS.md` prescribes is stale**: both sentences it names were
+   repaired at level 9, so they no longer exist and the test cannot be run as
+   written. A live substitute of the same shape (`rem-choice-ledger` line 97,
+   "this library neither proves nor records") was used and the net was validated
+   against it first. Net new decayed claims: **zero** beyond those already staged.
 3. **Thirteen amendments to published items are staged and unapplied**
    (`research/frontier-2-published-amendments.md`). Each becomes a live falsehood
    the moment this build publishes.

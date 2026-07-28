@@ -12,6 +12,10 @@ short: "$\\beth_0, \\beth_1, \\beth_2, \\operatorname{cf}(\\beth_\\omega)$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:
