@@ -2,7 +2,7 @@
 id: ex-the-cardinality-of-the-continuum
 kind: example
 title: "$\\mathbb{R} \\approx \\mathcal{P}(\\mathbb{N})$ in ZF, by the Cantor set for one injection and by the cuts $\\{q \\in \\mathbb{Q} : q < x\\}$ for the other; so $\\lvert \\mathbb{R} \\rvert = 2^{\\aleph_0}$ under the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-rationals-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, def-real-numbers, def-real-order, def-sequence, thm-schroder-bernstein, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-aleph-and-beth-hierarchies, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, def-natural-numbers, def-countable]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\lvert \\mathbb{R}\\rvert = 2^{\\aleph_0}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-tietze-extension-from-a-closed-interval-of-the-line
 kind: example
 title: "A continuous function on $[0,1] \\subseteq \\mathbb{R}$ extended to all of $\\mathbb{R}$, both by Tietze and by hand"
-status: draft
+status: published
 origin: session
 deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
        thm-metric-spaces-are-completely-normal, def-normal-and-t4-spaces,
@@ -15,6 +15,12 @@ short: "a hand-built Tietze extension"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

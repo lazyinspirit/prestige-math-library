@@ -2,7 +2,7 @@
 id: ex-two-continuous-real-functions-agreeing-on-the-rationals-are-equal
 kind: example
 title: "Two continuous maps $\\mathbb{R} \\to \\mathbb{R}$ agreeing at every rational are equal"
-status: draft
+status: published
 origin: session
 deps: [cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal,
        lem-rat-embeds-dense, def-dense-top, def-hausdorff-space,
@@ -15,6 +15,12 @@ short: "a continuous real function is determined on the rationals"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

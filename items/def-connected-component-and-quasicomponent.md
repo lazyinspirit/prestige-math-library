@@ -2,7 +2,7 @@
 id: def-connected-component-and-quasicomponent
 kind: definition
 title: "Connected components, quasicomponents, and totally disconnected spaces"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, thm-unions-of-connected-sets, def-topological-space,
        def-subspace-topology-top, def-standard-topologies]
@@ -11,6 +11,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

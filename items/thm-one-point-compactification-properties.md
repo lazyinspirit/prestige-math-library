@@ -2,7 +2,7 @@
 id: thm-one-point-compactification-properties
 kind: theorem
 title: "$X^{*}$ is compact and contains $X$ as an open subspace; $X$ is dense in $X^{*}$ exactly when $X$ is not compact; and $X^{*}$ is Hausdorff exactly when $X$ is locally compact and Hausdorff"
-status: draft
+status: published
 origin: session
 deps: [def-one-point-compactification, def-compact-space, def-locally-compact-space, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-locally-compact-hausdorff-basics, def-subspace-topology-top, def-dense-top, def-interior-closure-boundary-top, thm-closure-characterisation-top, lem-compactness-of-a-subspace-is-ambient, def-topological-space, def-neighbourhood-top]
 justified_by: []
@@ -12,6 +12,12 @@ short: "properties of $X^{*}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-a-compact-hausdorff-space-is-tychonoff
 kind: corollary
 title: "Under dependent choice a compact Hausdorff space is Tychonoff, and its disjoint closed sets are separated by continuous functions"
-status: draft
+status: published
 origin: session
 deps: [thm-a-compact-hausdorff-space-is-regular-and-normal, thm-urysohn-lemma,
        cor-urysohns-lemma-closes-the-separation-chain, def-compact-space,
@@ -15,6 +15,12 @@ short: "compact Hausdorff is Tychonoff (DC)"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

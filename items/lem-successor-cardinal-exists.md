@@ -2,7 +2,7 @@
 id: lem-successor-cardinal-exists
 kind: lemma
 title: "For every set $A$ the Hartogs number $\\aleph(A)$ is a cardinal, and for every cardinal $\\kappa$ it is the least cardinal strictly above $\\kappa$; this is a theorem of ZF"
-status: draft
+status: published
 origin: session
 deps: [thm-hartogs, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, lem-cardinality-of-a-well-orderable-set, lem-cardinal-arithmetic-basic-laws, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph(\\kappa)$ is the least cardinal above $\\kappa$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

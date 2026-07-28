@@ -2,7 +2,7 @@
 id: ex-the-hat-check-ratio-as-a-quotient-of-counts
 kind: example
 title: "The ratio $\\iota(D_n)/\\iota(n!)$ computed for small $n$ as a quotient of two counts, with no probability space claimed"
-status: draft
+status: published
 origin: session
 deps: [def-the-derangement-number, thm-the-derangement-formula, cor-the-derangement-recurrences,
        def-factorial-and-falling-factorial, def-canonical-natural, def-integer-power,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

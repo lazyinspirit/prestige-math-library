@@ -2,7 +2,7 @@
 id: def-the-diagonal-of-a-space
 kind: definition
 title: "The diagonal $\\Delta_X \\subseteq X \\times X$, the diagonal map $\\delta_X$, and the pairing $\\langle f, g \\rangle$ of two maps"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-product-topology, thm-product-universal-property,
        def-continuous-map-top, def-subspace-topology-top, def-homeomorphism-and-open-maps]
@@ -12,6 +12,12 @@ landmark: true
 short: "the diagonal, the diagonal map, the pairing of two maps"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

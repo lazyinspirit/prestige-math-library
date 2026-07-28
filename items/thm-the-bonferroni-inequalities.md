@@ -2,7 +2,7 @@
 id: thm-the-bonferroni-inequalities
 kind: theorem
 title: "Truncating the sieve at an odd depth over-estimates the size of the union and truncating it at an even depth under-estimates it"
-status: draft
+status: published
 origin: session
 deps: [thm-inclusion-exclusion, lem-the-partial-alternating-sum-of-a-binomial-row,
        def-a-sieve-family-and-its-intersections, lem-a-double-sum-over-finite-index-sets-may-be-interchanged,
@@ -17,6 +17,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

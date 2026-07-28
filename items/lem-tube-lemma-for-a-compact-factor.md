@@ -2,7 +2,7 @@
 id: lem-tube-lemma-for-a-compact-factor
 kind: lemma
 title: "Tube lemma: if $K$ is compact and an open $N \\subseteq X \\times Z$ contains $K \\times \\{z_0\\}$, then $N$ contains $K \\times W$ for some open $W \\ni z_0$"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-product-topology, def-topology-basis-subbasis, thm-basis-criterion, def-topological-space, def-subspace-topology-top]
 justified_by: []
@@ -12,6 +12,12 @@ short: "tube lemma"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

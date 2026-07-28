@@ -2,7 +2,7 @@
 id: cor-the-averaging-principle
 kind: corollary
 title: "If $X$ is nonempty, some row fibre is at least the average size and some row fibre is at most the average size"
-status: draft
+status: published
 origin: session
 deps: [thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        def-sum-over-a-finite-index-set, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -14,6 +14,12 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

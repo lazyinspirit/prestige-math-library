@@ -2,7 +2,7 @@
 id: thm-urysohn-lemma
 kind: theorem
 title: "Urysohn's lemma, under the axiom of dependent choice: in a normal space two disjoint closed sets are separated by a continuous function into $[0,1]$, and conversely such a space is normal"
-status: draft
+status: published
 origin: session
 deps: [lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
        def-the-dyadic-rationals-of-the-unit-interval, def-normal-and-t4-spaces,
@@ -18,6 +18,12 @@ short: "Urysohn's lemma (DC)"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

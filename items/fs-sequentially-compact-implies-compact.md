@@ -2,7 +2,7 @@
 id: fs-sequentially-compact-implies-compact
 kind: false-statement
 title: "FALSE: every sequentially compact space is compact"
-status: draft
+status: published
 origin: session
 deps: [thm-ordinal-spaces-and-compactness, def-compact-space, def-compactness-variants, lem-the-order-topology-on-an-ordinal, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-countable-choice, def-limit-ordinal]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "FALSE: sequentially compact implies compact"
 proof_strategy: contradiction
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

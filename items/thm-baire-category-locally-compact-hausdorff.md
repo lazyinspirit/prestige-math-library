@@ -2,7 +2,7 @@
 id: thm-baire-category-locally-compact-hausdorff
 kind: theorem
 title: "Assuming dependent choice, every locally compact Hausdorff space is a Baire space"
-status: draft
+status: published
 origin: session
 deps: [lem-dependent-choice-along-a-sequence-of-relations, def-baire-space, def-compact-space, thm-compact-iff-fip, thm-compact-subset-of-a-hausdorff-space-is-closed, def-locally-compact-space, thm-locally-compact-hausdorff-basics, def-hausdorff-space, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-subspace-topology-top, def-dependent-choice, def-sequence, def-natural-numbers]
 justified_by: []
@@ -13,6 +13,12 @@ short: "Baire category for locally compact Hausdorff"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

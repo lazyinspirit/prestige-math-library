@@ -2,7 +2,7 @@
 id: def-a-finite-incidence-relation-and-its-fibres
 kind: definition
 title: "A relation $R \\subseteq X \\times Y$ between finite sets, its row fibres $R_x$ and its column fibres $R^y$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, thm-subset-of-a-finite-set, thm-product-rule,
        def-injection-surjection-bijection, def-countable]
@@ -11,6 +11,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

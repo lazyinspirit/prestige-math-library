@@ -2,7 +2,7 @@
 id: def-one-point-compactification
 kind: definition
 title: "The one-point (Alexandroff) compactification $X^{*} = X \\cup \\{\\infty\\}$, whose open sets are the open sets of $X$ together with the complements in $X^{*}$ of the closed compact subsets of $X$"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-topological-space, def-subspace-topology-top, thm-closed-subspace-of-a-compact-space-is-compact]
 justified_by: [thm-one-point-compactification-properties]
@@ -10,11 +10,17 @@ aliases: [def-alexandroff-compactification]
 landmark: true
 short: "one-point compactification"
 verification:
-  precheck: n
+  precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-29/a
+    date: 2026-07-29
 sources:
   scraped: []
   references:

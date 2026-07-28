@@ -2,7 +2,7 @@
 id: cor-cofinality-of-a-cardinal-power
 kind: corollary
 title: "$\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ for every infinite cardinal $\\kappa$, and $\\operatorname{cf}(2^{\\kappa}) > \\kappa$; in particular $\\operatorname{cf}(2^{\\aleph_0}) > \\aleph_0$"
-status: draft
+status: published
 origin: session
 deps: [thm-konig, def-infinite-cardinal-sum-and-product, def-cofinality, lem-cofinality-is-well-defined, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-hessenberg, thm-cardinal-power-set-and-cantor, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-aleph-and-beth-hierarchies, def-cardinal, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-equinumerous, def-injection-surjection-bijection, def-well-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\operatorname{cf}(2^{\\aleph_0}) > \\aleph_0$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

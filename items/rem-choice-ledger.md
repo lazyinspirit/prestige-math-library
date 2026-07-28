@@ -7,17 +7,21 @@ origin: session
 deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-a-basis, rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
        rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, rem-cohen-first-model,
        cor-ac-iff-well-ordering, cor-ac-iff-zorn, thm-hartogs, lem-well-order-comparability,
-       thm-zorn, thm-bourbaki-witt, def-chain, thm-well-ordering-theorem, def-cardinal]
+       thm-zorn, thm-bourbaki-witt, def-chain, thm-well-ordering-theorem, def-cardinal,
+       def-dependent-choice]
 justified_by: []
+forward_refs: [thm-cardinal-comparability-iff-ac, thm-perfectly-normal-implies-completely-normal,
+               thm-urysohn-lemma, thm-tietze-extension-theorem,
+               lem-dependent-choice-along-a-sequence-of-relations]
 aliases: [rem-choice-strength-ledger]
 landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
   verified:
-    model: claude-opus-5
+    model: claude-sonnet-5
     verdict: certify
-    date: 2026-07-26
+    date: 2026-07-29
     scope: page
     delegated_by: owner
 sources:
@@ -65,8 +69,9 @@ link is flagged as such.
   fixes the upper endpoint of an open question about the strength of
   Hahn-Banach.
 - **Cardinal comparability**, that for any two sets one injects into the other.
-  This is Hartogs 1915, and the proof runs through the construction of
-  [[thm-hartogs]]. Not proved here.
+  This is Hartogs 1915, and the full equivalence with the Axiom of Choice **is**
+  now proved here, in [[thm-cardinal-comparability-iff-ac]], by way of the
+  construction of [[thm-hartogs]].
 
 **Strictly weaker than the Axiom of Choice.**
 
@@ -133,8 +138,8 @@ scale, and a phrase like "the weakest of the three" is simply not available.
 **Where this library spends choice.**
 
 There is exactly one *place* where the full Axiom of Choice is spent, and more
-than one *result* that assumes it, and there is a second, weaker principle
-assumed elsewhere. All three facts belong in the ledger.
+than one *result* that assumes it, and there are a second and a third, weaker
+principle each assumed elsewhere. All four facts belong in the ledger.
 
 - **One step, in one proof.** The Axiom of Choice is used at a single step of the
   proof of Zorn's lemma ([[thm-zorn]]), to select a strict upper bound for every
@@ -158,10 +163,19 @@ assumed elsewhere. All three facts belong in the ledger.
   consequence in [[ex-zorn-poset-of-chains]] and pays the same price, the
   chain-completeness verified there being free.
 - **A weaker principle, spent separately.** [[thm-countable-union-of-countable]]
-  is stated under countable choice ([[def-countable-choice]]) and flags the one
-  step that spends it. That is **not** a use of the Axiom of Choice:
-  $\mathrm{AC}_\omega$ is strictly weaker, so the theorem may be neither
-  relabelled choice-free nor lumped in with the full-choice results above.
+  and [[thm-perfectly-normal-implies-completely-normal]] are each stated under
+  countable choice ([[def-countable-choice]]) and flag the one step that spends
+  it. That is **not** a use of the Axiom of Choice: $\mathrm{AC}_\omega$ is
+  strictly weaker, so neither theorem may be relabelled choice-free or lumped in
+  with the full-choice results above.
+- **A third principle, weaker still.** [[thm-urysohn-lemma]] and
+  [[thm-tietze-extension-theorem]] are each stated under dependent choice
+  ([[def-dependent-choice]]), spent through
+  [[lem-dependent-choice-along-a-sequence-of-relations]] to build an
+  $\mathbb{N}$-indexed sequence of approximations. DC implies $\mathrm{AC}_\omega$
+  and neither reverses (recorded above), so this is a third, distinct cost: not
+  the Axiom of Choice, and not interchangeable with the countable-choice results
+  either, even though DC happens to imply enough to reprove them.
 
 **What is not proved anywhere here.**
 

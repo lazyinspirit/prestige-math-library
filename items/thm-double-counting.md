@@ -2,7 +2,7 @@
 id: thm-double-counting
 kind: theorem
 title: "Double counting: $\\sum_{x \\in X}\\lvert R_x\\rvert = \\lvert R\\rvert = \\sum_{y \\in Y}\\lvert R^y\\rvert$ for a relation between finite sets"
-status: draft
+status: published
 origin: session
 deps: [def-a-finite-incidence-relation-and-its-fibres, thm-sum-rule,
        def-sum-over-a-finite-index-set, def-finite-cardinality,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

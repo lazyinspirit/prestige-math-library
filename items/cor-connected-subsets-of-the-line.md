@@ -2,7 +2,7 @@
 id: cor-connected-subsets-of-the-line
 kind: corollary
 title: "The connected subspaces of $\\mathbb{R}$ with its usual topology are exactly the order-convex subsets, the published characterisation transported by the identification of the two descriptions of \"open in $\\mathbb{R}$\""
-status: draft
+status: published
 origin: session
 deps: [lem-connected-subsets-and-separated-sets, def-connected-space,
        thm-connected-subsets-of-r-are-intervals, def-connected-r,
@@ -16,6 +16,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

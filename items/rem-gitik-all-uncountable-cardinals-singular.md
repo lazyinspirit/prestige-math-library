@@ -7,14 +7,14 @@ origin: session
 proved_here: false
 deps: [rem-feferman-levy-model]
 justified_by: []
-forward_refs: [def-cardinal, thm-hartogs, rem-choice-ledger, def-cofinal-subset-of-an-ordinal]
+forward_refs: [def-cardinal, thm-hartogs, rem-choice-ledger, def-cofinality, thm-regularity-of-the-alephs]
 aliases: []
 landmark: false
 short: "from large cardinals: no uncountable regular cardinal"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
+    date: 2026-07-29
     scope: citations
     by: session-audit
 sources:
@@ -41,9 +41,13 @@ compact cardinals, followed by a symmetric submodel.
 ## Remarks
 
 - **Not proved in this library.** No forcing, no large cardinals, and no
-  cofinality *function*: the library defines cofinal subsets of an ordinal
-  ([[def-cofinal-subset-of-an-ordinal]]) but neither $\operatorname{cf}(\alpha)$
-  nor the words *regular* and *singular*.
+  symmetric submodels: that part of the machinery is entirely outside the
+  library's stack. The cofinality *function* $\operatorname{cf}(\alpha)$ and the
+  words *regular* and *singular* are themselves defined here
+  ([[def-cofinality]]), and the library proves one regularity fact under choice
+  ([[thm-regularity-of-the-alephs]]) — but that is choice-theoretic ground truth,
+  the opposite of what Gitik's result denies, and nothing here touches the
+  choice-free question this remark records.
 
 - **What would prove it.** Large-cardinal theory (strongly compact cardinals and
   their embeddings), Prikry forcing and its iterations, and symmetric extensions.

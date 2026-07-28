@@ -2,7 +2,7 @@
 id: lem-cardinal-operations-are-well-defined
 kind: lemma
 title: "Disjoint union, cartesian product, function space and power set respect equinumerosity, and for ordinals $\\alpha, \\beta$ the sets $\\alpha \\sqcup \\beta$ and $\\alpha \\times \\beta$ carry explicit well-orders, so their cardinalities exist in ZF"
-status: draft
+status: published
 origin: session
 deps: [lem-cardinality-of-a-well-orderable-set, def-equinumerous, def-injection-surjection-bijection, def-well-order, def-ordinal, lem-ordinal-trichotomy, lem-ordinal-basics, def-cardinal, thm-well-ordering-theorem, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\sqcup$, $\\times$, ${}^{B}A$, $\\mathcal{P}$ respect $\\approx$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

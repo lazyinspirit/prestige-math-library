@@ -2,7 +2,7 @@
 id: lem-a-double-sum-over-finite-index-sets-may-be-interchanged
 kind: lemma
 title: "$\\sum_{i \\in S}\\sum_{j \\in T} a_{ij} = \\sum_{(i,j) \\in S \\times T} a_{ij} = \\sum_{j \\in T}\\sum_{i \\in S} a_{ij}$ for finite index sets $S$ and $T$"
-status: draft
+status: published
 origin: session
 deps: [def-sum-over-a-finite-index-set, thm-sum-rule, thm-product-rule, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-finite-sum, def-nat-finite-sum-and-product]
@@ -12,6 +12,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

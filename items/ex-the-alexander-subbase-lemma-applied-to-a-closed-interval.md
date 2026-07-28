@@ -2,7 +2,7 @@
 id: ex-the-alexander-subbase-lemma-applied-to-a-closed-interval
 kind: example
 title: "Compactness of $[0,1]$ derived from the subbase lemma alone, using only the rays as a subbasis and the least upper bound property"
-status: draft
+status: published
 origin: session
 deps: [thm-alexander-subbase-lemma, def-compact-space, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-interval, def-complete-ordered-field, lem-sup-epsilon, def-upper-bound, def-subspace-topology-top, def-real-order, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-topological-space]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "Alexander applied to $[0,1]$"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

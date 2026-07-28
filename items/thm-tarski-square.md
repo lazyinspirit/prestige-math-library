@@ -2,7 +2,7 @@
 id: thm-tarski-square
 kind: theorem
 title: "Tarski: the Axiom of Choice is equivalent to the statement that $A \\times A \\approx A$ for every infinite set $A$, so extending Hessenberg's theorem from the alephs to arbitrary sets is exactly as strong as choice"
-status: draft
+status: published
 origin: session
 deps: [thm-hessenberg, thm-hartogs, lem-successor-cardinal-exists, cor-ac-iff-well-ordering, thm-well-ordering-theorem, def-axiom-of-choice, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, lem-cardinal-arithmetic-basic-laws, def-cardinal-arithmetic, thm-cardinal-arithmetic-agrees-with-finite-counting, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-well-order, def-countable, def-finite-cardinality, lem-pigeonhole, thm-induction-principle]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$A \\times A \\approx A$ for all infinite $A$ $\\iff$ AC"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

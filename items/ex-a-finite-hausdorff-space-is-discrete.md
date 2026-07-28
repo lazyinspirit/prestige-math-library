@@ -2,7 +2,7 @@
 id: ex-a-finite-hausdorff-space-is-discrete
 kind: example
 title: "A finite Hausdorff space is discrete, and its diagonal is closed for the trivial reason that every subset of the square is"
-status: draft
+status: published
 origin: session
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-hausdorff-space, thm-t1-iff-singletons-are-closed, def-t0-and-t1-spaces,
@@ -16,6 +16,12 @@ short: "a finite Hausdorff space is discrete"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

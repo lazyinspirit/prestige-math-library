@@ -2,7 +2,7 @@
 id: fs-two-continuous-maps-agreeing-on-a-dense-subset-are-equal
 kind: false-statement
 title: "FALSE: two continuous maps that agree on a dense subset of their common domain are equal, with no hypothesis on the codomain"
-status: draft
+status: published
 origin: session
 deps: [cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal,
        def-standard-topologies, def-dense-top, lem-rat-embeds-dense,
@@ -16,6 +16,12 @@ short: "agreement on a dense set does not force equality"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

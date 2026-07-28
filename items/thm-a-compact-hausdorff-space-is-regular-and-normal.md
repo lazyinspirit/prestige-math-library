@@ -2,7 +2,7 @@
 id: thm-a-compact-hausdorff-space-is-regular-and-normal
 kind: theorem
 title: "A compact Hausdorff space is regular and normal, hence $T_3$ and $T_4$"
-status: draft
+status: published
 origin: session
 deps: [thm-compact-subset-of-a-hausdorff-space-is-closed, def-compact-space,
        thm-closed-subspace-of-a-compact-space-is-compact, def-regular-and-t3-spaces,
@@ -15,6 +15,12 @@ short: "compact Hausdorff implies regular and normal"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem
 kind: remark
 title: "Which results on this page spend dependent choice, which spend countable choice, and which are theorems of ZF"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, thm-tietze-extension-theorem,
        thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set,
@@ -18,6 +18,12 @@ landmark: false
 short: "choice-cost ledger for this page"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

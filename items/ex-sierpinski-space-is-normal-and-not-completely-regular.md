@@ -2,7 +2,7 @@
 id: ex-sierpinski-space-is-normal-and-not-completely-regular
 kind: example
 title: "Sierpinski space is normal and not completely regular, so the $T_1$ hypothesis in the Urysohn corollary is not decoration"
-status: draft
+status: published
 origin: session
 deps: [fs-every-normal-space-is-completely-regular, cor-urysohns-lemma-closes-the-separation-chain,
        def-standard-topologies, def-normal-and-t4-spaces, def-completely-regular-and-tychonoff-spaces,
@@ -14,6 +14,12 @@ short: "Sierpinski: normal, not $T_1$, not completely regular"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

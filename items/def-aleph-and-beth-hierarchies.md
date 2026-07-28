@@ -2,7 +2,7 @@
 id: def-aleph-and-beth-hierarchies
 kind: definition
 title: "The successor cardinal $\\kappa^{+}$, the alephs $\\aleph_\\alpha$, the beths $\\beth_\\alpha$, successor and limit cardinals, and the identifications $\\aleph_0 = \\omega$ and $\\aleph_1 = \\omega_1$"
-status: draft
+status: published
 origin: session
 deps: [cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-hartogs, def-cardinal, def-cardinal-arithmetic, def-limit-ordinal, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-ordinal, def-countable, rem-ordinal-versus-cardinal-exponentiation]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "$\\aleph_\\alpha$, $\\beth_\\alpha$, $\\kappa^{+}$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

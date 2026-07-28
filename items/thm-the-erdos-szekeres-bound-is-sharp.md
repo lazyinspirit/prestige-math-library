@@ -2,7 +2,7 @@
 id: thm-the-erdos-szekeres-bound-is-sharp
 kind: theorem
 title: "For all $m$ and $n$ there is a list of $mn$ pairwise distinct reals with no strictly increasing sublist of length $m+1$ and no strictly decreasing sublist of length $n+1$"
-status: draft
+status: published
 origin: session
 deps: [def-a-monotone-sublist-of-a-finite-list-of-reals, def-canonical-natural,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-nat-multiplication,
@@ -17,6 +17,12 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

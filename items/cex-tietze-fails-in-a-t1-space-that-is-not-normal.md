@@ -2,7 +2,7 @@
 id: cex-tietze-fails-in-a-t1-space-that-is-not-normal
 kind: counterexample
 title: "In the $K$-topology on $\\mathbb{R}$ the closed set $K \\cup \\{0\\}$ carries a continuous two-valued function with no continuous extension"
-status: draft
+status: published
 origin: session
 deps: [thm-tietze-extension-theorem, lem-the-k-topology-is-hausdorff-and-not-regular,
        def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
@@ -16,6 +16,12 @@ short: "Tietze fails in the $K$-topology"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

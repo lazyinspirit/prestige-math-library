@@ -2,7 +2,7 @@
 id: thm-a-linear-continuum-is-connected
 kind: theorem
 title: "A linear continuum is connected in its order topology, and so is every order-convex subset of it"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-a-linearly-ordered-set, def-connected-space,
        def-upper-bound, def-partial-order, def-topological-space,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

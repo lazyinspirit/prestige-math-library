@@ -1,7 +1,7 @@
 ---
 page: compactness
 title: "Compactness"
-status: draft
+status: published
 items: [def-compact-space, lem-compactness-of-a-subspace-is-ambient,
         thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip,
         thm-closed-subspace-of-a-compact-space-is-compact,

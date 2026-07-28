@@ -2,7 +2,7 @@
 id: def-the-long-line
 kind: definition
 title: "The closed long ray $\\omega_1 \\times [0,1)$ under the lexicographic order, and the long line, with the order topology"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-a-linearly-ordered-set, def-first-uncountable-ordinal,
        thm-omega-one-is-the-least-uncountable-ordinal, def-ordinal, lem-ordinal-basics,
@@ -14,6 +14,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

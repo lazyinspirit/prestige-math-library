@@ -2,7 +2,7 @@
 id: ex-the-metric-urysohn-function-costs-no-choice
 kind: example
 title: "In a metric space the function $d(x,A)/(d(x,A) + d(x,B))$ separates two disjoint closed sets outright, so the metric case spends no choice principle"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, thm-metric-spaces-are-completely-normal,
        thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-metric-space,
@@ -15,6 +15,12 @@ short: "an explicit choice-free metric Urysohn function"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

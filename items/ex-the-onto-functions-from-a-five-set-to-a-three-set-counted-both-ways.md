@@ -2,7 +2,7 @@
 id: ex-the-onto-functions-from-a-five-set-to-a-three-set-counted-both-ways
 kind: example
 title: "The surjections from a five-element set onto a three-element set counted by the sieve formula and by direct subtraction"
-status: draft
+status: published
 origin: session
 deps: [thm-the-number-of-surjections, thm-cardinality-of-a-set-of-functions, def-nat-power,
        def-binomial-coefficient, def-canonical-natural, def-integer-power, def-finite-cardinality,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

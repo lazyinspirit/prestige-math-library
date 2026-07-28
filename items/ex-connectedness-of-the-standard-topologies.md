@@ -2,7 +2,7 @@
 id: ex-connectedness-of-the-standard-topologies
 kind: example
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies placed in the connectedness hierarchy"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, thm-connectedness-characterisations, def-standard-topologies,
        def-topological-space, def-connected-component-and-quasicomponent, def-countable,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

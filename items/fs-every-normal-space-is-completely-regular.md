@@ -2,7 +2,7 @@
 id: fs-every-normal-space-is-completely-regular
 kind: false-statement
 title: "FALSE: Every normal space is completely regular"
-status: draft
+status: published
 origin: session
 deps: [cor-urysohns-lemma-closes-the-separation-chain,
        def-normal-and-t4-spaces, def-completely-regular-and-tychonoff-spaces,
@@ -15,6 +15,12 @@ short: "normal does not imply completely regular"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

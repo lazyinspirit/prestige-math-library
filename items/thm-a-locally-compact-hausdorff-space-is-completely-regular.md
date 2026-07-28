@@ -2,7 +2,7 @@
 id: thm-a-locally-compact-hausdorff-space-is-completely-regular
 kind: theorem
 title: "Under dependent choice a locally compact Hausdorff space is completely regular, hence Tychonoff"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, def-one-point-compactification, thm-one-point-compactification-properties,
        thm-a-compact-hausdorff-space-is-regular-and-normal, def-locally-compact-space,
@@ -16,6 +16,12 @@ short: "locally compact Hausdorff is completely regular (DC)"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

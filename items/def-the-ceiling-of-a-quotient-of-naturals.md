@@ -2,7 +2,7 @@
 id: def-the-ceiling-of-a-quotient-of-naturals
 kind: definition
 title: "$\\lceil m/n \\rceil$ for naturals $m$ and $n \\ge 1$: the least $q \\in \\mathbb{N}$ with $m \\le n q$"
-status: draft
+status: published
 origin: session
 deps: [thm-well-ordering-principle, def-natural-numbers, def-nat-order, lem-nat-order-is-membership,
        def-nat-multiplication, lem-nat-mult-identity, lem-nat-mult-commutative,
@@ -15,6 +15,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

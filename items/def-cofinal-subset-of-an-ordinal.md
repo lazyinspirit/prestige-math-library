@@ -11,11 +11,12 @@ landmark: false
 short: "$C \\subseteq \\alpha$ with every $\\xi \\in \\alpha$ below some member"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -60,13 +61,13 @@ $\eta \le \xi$ for every $\eta \in C$ and some $\xi \in \alpha$.
   in $\alpha$ if and only if it contains $\delta$. The interesting case is the
   limit case, and that is where the notion is used.
 
-- **What is deliberately not defined here.** The **cofinality**
+- **What is not defined at this point in the reading order.** The **cofinality**
   $\operatorname{cf}(\alpha)$, the least order type of a cofinal subset, and the
-  vocabulary of **regular** and **singular** ordinals, are not introduced. They
-  belong to a page on cardinal arithmetic and cofinality that this library has
-  not built, and nothing on this page needs them: the boundedness theorem below
-  is stated as "no at most countable subset is cofinal", which is a statement
-  about subsets and not about a cardinal invariant.
+  vocabulary of **regular** and **singular** cardinals, are not introduced here;
+  they are introduced later, on Cardinal Arithmetic, Cofinality and the Alephs.
+  Nothing on this page needs them: the boundedness theorem below is stated as
+  "no at most countable subset is cofinal", which is a statement about subsets
+  and not about a cardinal invariant.
 
 - **Cofinal is a property of the pair, not of the set.** $\omega$ is cofinal in
   $\omega$ and bounded below $\omega + 1$. The ordinal must always be named.

@@ -2,7 +2,7 @@
 id: ex-one-point-compactifications-of-the-line-and-of-the-naturals
 kind: example
 title: "$\\mathbb{R}^{*}$ is homeomorphic to the unit circle by inverse stereographic projection, and $\\mathbb{N}^{*}$ is the ordinal space $\\omega + 1$"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-r, def-one-point-compactification, thm-one-point-compactification-properties, lem-the-order-topology-on-an-ordinal, thm-ordinal-spaces-and-compactness, def-ordinal-addition, lem-omega-least-limit-ordinal, lem-ordinal-basics, def-ordinal, def-standard-topologies, def-natural-numbers, def-compact-space, def-subspace-topology-top, def-homeomorphism-and-open-maps, thm-compactness-under-continuous-maps, def-hausdorff-space, def-metrizable-space, cor-metrizability-and-first-countability-are-hereditary, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, lem-metrics-on-rn, lem-product-topology-on-rn, cor-heine-borel-in-the-product-topology, def-continuous-map-top, thm-continuity-characterisations-top, thm-product-universal-property, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, cor-archimedean-reciprocal, def-canonical-natural, def-topological-space, def-interval, def-product-topology, def-metric-bounded-diameter, def-complete-ordered-field, ex-compactness-in-the-standard-topologies]
 justified_by: []
@@ -12,6 +12,12 @@ short: "two one-point compactifications"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

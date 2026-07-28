@@ -2,7 +2,7 @@
 id: def-cardinal-arithmetic
 kind: definition
 title: "Cardinal sum $\\kappa \\oplus \\lambda$, product $\\kappa \\otimes \\lambda$ and exponentiation $\\kappa^{\\lambda}$, and why they are written apart from the ordinal operations"
-status: draft
+status: published
 origin: session
 deps: [lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, rem-ordinal-versus-cardinal-exponentiation, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "$\\oplus$, $\\otimes$, $\\kappa^{\\lambda}$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

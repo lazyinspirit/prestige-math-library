@@ -2,7 +2,7 @@
 id: ex-the-first-dyadic-levels-of-the-urysohn-construction
 kind: example
 title: "The sets $U_0, U_1, U_{1/2}, U_{1/4}, U_{3/4}$ of the Urysohn construction computed for two disjoint closed subsets of $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, def-the-dyadic-rationals-of-the-unit-interval,
        lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
@@ -16,6 +16,12 @@ short: "dyadic levels computed by hand"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

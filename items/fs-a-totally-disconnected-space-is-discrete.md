@@ -2,7 +2,7 @@
 id: fs-a-totally-disconnected-space-is-discrete
 kind: false-statement
 title: "FALSE: a totally disconnected space carries the discrete topology"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, cor-connected-subsets-of-the-line,
        def-connected-space, def-standard-topologies, def-subspace-topology-top,
@@ -16,6 +16,12 @@ short: "a totally disconnected space need not be discrete"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

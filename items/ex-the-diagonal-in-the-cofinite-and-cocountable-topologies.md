@@ -2,7 +2,7 @@
 id: ex-the-diagonal-in-the-cofinite-and-cocountable-topologies
 kind: example
 title: "The cofinite topology on an infinite set, and the cocountable topology on $\\mathbb{R}$, are $T_1$ with a diagonal whose closure is the whole square; on a countably infinite set the cocountable topology is discrete instead"
-status: draft
+status: published
 origin: session
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
@@ -16,6 +16,12 @@ short: "the diagonal in the cofinite and cocountable topologies"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

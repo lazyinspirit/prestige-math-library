@@ -2,7 +2,7 @@
 id: cex-a-continuous-image-of-a-locally-compact-space
 kind: counterexample
 title: "Collapsing the set of naturals inside $\\mathbb{R}$ to a point gives a quotient of $\\mathbb{R}$ that is not locally compact at the collapsed point"
-status: draft
+status: published
 origin: session
 deps: [def-locally-compact-space, def-quotient-topology, thm-quotient-universal-property, def-compact-space, def-continuous-map-top, def-neighbourhood-top, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-interval, def-canonical-natural, def-natural-numbers, thm-closed-subspace-of-a-compact-space-is-compact, def-standard-topologies, def-topological-space, def-subspace-topology-top, def-complete-ordered-field, thm-of-archimedean]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "a quotient of a locally compact space"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

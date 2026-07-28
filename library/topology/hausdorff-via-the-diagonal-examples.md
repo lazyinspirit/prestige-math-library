@@ -1,7 +1,7 @@
 ---
 page: hausdorff-via-the-diagonal-examples
 title: "Hausdorff via the Diagonal: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-diagonal-of-the-real-line-is-closed,
            ex-the-diagonal-in-the-cofinite-and-cocountable-topologies,

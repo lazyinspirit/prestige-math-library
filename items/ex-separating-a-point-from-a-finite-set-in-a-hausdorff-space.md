@@ -2,7 +2,7 @@
 id: ex-separating-a-point-from-a-finite-set-in-a-hausdorff-space
 kind: example
 title: "A finite subset of any space is compact, so the compact separation clauses specialise to separating a point from a finite set in a Hausdorff space"
-status: draft
+status: published
 origin: session
 deps: [thm-compact-subset-of-a-hausdorff-space-is-closed, def-compact-space,
        def-subspace-topology-top, def-hausdorff-space, def-countable,
@@ -14,6 +14,12 @@ short: "finite sets are compact; separating a point from a finite set"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

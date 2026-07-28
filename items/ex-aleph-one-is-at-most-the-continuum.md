@@ -2,7 +2,7 @@
 id: ex-aleph-one-is-at-most-the-continuum
 kind: example
 title: "$\\aleph_1 \\le 2^{\\aleph_0}$ under the Axiom of Choice, because $2^{\\aleph_0}$ is a cardinal strictly above $\\aleph_0$ and $\\aleph_1$ is the least such; so $\\omega_1$ injects into $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [ex-the-cardinality-of-the-continuum, def-aleph-and-beth-hierarchies, lem-successor-cardinal-exists, thm-cardinal-power-set-and-cantor, thm-every-infinite-cardinal-is-an-aleph, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-axiom-of-choice, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_1 \\le 2^{\\aleph_0}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

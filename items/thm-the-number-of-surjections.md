@@ -2,7 +2,7 @@
 id: thm-the-number-of-surjections
 kind: theorem
 title: "The number of surjections from an $n$-element set onto a $k$-element set is $\\sum_{i<k+1}(-1)^{i}\\binom{k}{i}(k-i)^{n}$, read in $\\mathbb{R}$ through $\\iota$"
-status: draft
+status: published
 origin: session
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        thm-cardinality-of-a-set-of-functions, def-nat-power, def-binomial-coefficient,
@@ -17,6 +17,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

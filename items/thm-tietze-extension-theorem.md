@@ -2,7 +2,7 @@
 id: thm-tietze-extension-theorem
 kind: theorem
 title: "Tietze's extension theorem, under dependent choice: a continuous map from a closed subspace of a normal space into $[a,b]$ extends continuously to the whole space, and this property characterises normality"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, lem-a-uniformly-approximable-real-valued-map-is-continuous,
        def-normal-and-t4-spaces, def-dependent-choice, def-subspace-topology-top,
@@ -18,6 +18,12 @@ short: "Tietze extension theorem (DC)"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

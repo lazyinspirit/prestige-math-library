@@ -2,7 +2,7 @@
 id: ex-the-sorgenfrey-line-is-lindelof-and-its-square-is-not
 kind: example
 title: "$\\mathbb{R}$ with the half-open intervals $[a,b)$ as a basis is Lindel\\\"of and not compact, while its square is not Lindel\\\"of, the antidiagonal being an uncountable closed discrete subspace"
-status: draft
+status: published
 origin: session
 deps: [def-compactness-variants, def-compact-space, def-topology-basis-subbasis, thm-basis-criterion, def-product-topology, def-subspace-topology-top, def-topological-space, def-countable, lem-countable-iff-surjection-from-n, thm-r-uncountable, thm-rationals-countable, lem-of-q-dense, def-countable-choice, def-interval, def-real-order, def-complete-ordered-field, def-canonical-natural, thm-of-archimedean]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "the Sorgenfrey line and its square"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

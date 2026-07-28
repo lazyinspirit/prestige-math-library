@@ -2,7 +2,7 @@
 id: ex-the-diagonal-of-the-real-line-is-closed
 kind: example
 title: "The diagonal of $\\mathbb{R}$ is closed in $\\mathbb{R}^2$, computed from the product basis"
-status: draft
+status: published
 origin: session
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-product-topology, lem-product-topology-on-rn, lem-real-line-is-a-metric-space,
@@ -16,6 +16,12 @@ short: "the diagonal of the real line is closed"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

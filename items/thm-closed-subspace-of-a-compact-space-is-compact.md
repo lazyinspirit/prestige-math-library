@@ -2,7 +2,7 @@
 id: thm-closed-subspace-of-a-compact-space-is-compact
 kind: theorem
 title: "A closed subspace of a compact space is compact, and a finite union of compact subspaces is compact"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-topological-space, def-subspace-topology-top, lem-finite-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "closed in compact is compact"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

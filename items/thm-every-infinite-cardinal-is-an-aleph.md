@@ -2,7 +2,7 @@
 id: thm-every-infinite-cardinal-is-an-aleph
 kind: theorem
 title: "Every infinite cardinal is $\\aleph_\\alpha$ for exactly one ordinal $\\alpha$, in ZF; and, assuming the Axiom of Choice, every infinite set is equinumerous with exactly one aleph"
-status: draft
+status: published
 origin: session
 deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, lem-omega-least-limit-ordinal, def-limit-ordinal, thm-well-ordering-theorem, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, def-countable, def-equinumerous]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the alephs exhaust the infinite cardinals"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

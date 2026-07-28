@@ -2,7 +2,7 @@
 id: cex-limit-point-compact-without-countable-compactness
 kind: counterexample
 title: "$\\mathbb{N} \\times \\{a,b\\}$ with the indiscrete topology on the second factor is limit point compact and not countably compact, so the hypothesis that singletons are closed is not decoration"
-status: draft
+status: published
 origin: session
 deps: [def-compactness-variants, def-compact-space, def-standard-topologies, def-product-topology, def-topological-space, def-interior-closure-boundary-top, def-neighbourhood-top, thm-compactness-variants-hierarchy, def-countable, def-natural-numbers]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "limit point compact, not countably compact"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

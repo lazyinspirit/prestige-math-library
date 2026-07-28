@@ -2,7 +2,7 @@
 id: fs-every-aleph-is-regular
 kind: false-statement
 title: "FALSE: $\\aleph_\\alpha$ is regular for every ordinal $\\alpha$"
-status: draft
+status: published
 origin: session
 deps: [thm-regularity-of-the-alephs, def-cofinality, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-cardinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_\\omega$ is singular"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

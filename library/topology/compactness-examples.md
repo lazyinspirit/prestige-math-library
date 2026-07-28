@@ -1,7 +1,7 @@
 ---
 page: compactness-examples
 title: "Compactness: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-compactness-in-the-standard-topologies,
            ex-the-interval-the-cantor-set-and-the-hilbert-cube-are-compact,

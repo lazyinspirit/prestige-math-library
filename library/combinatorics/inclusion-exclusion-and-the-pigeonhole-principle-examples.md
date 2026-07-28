@@ -1,7 +1,7 @@
 ---
 page: inclusion-exclusion-and-the-pigeonhole-principle-examples
 title: "Inclusion–Exclusion, the Pigeonhole Principle and Double Counting: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-a-three-set-and-a-four-set-sieve-computed,
            ex-the-onto-functions-from-a-five-set-to-a-three-set-counted-both-ways,

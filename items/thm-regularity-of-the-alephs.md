@@ -2,7 +2,7 @@
 id: thm-regularity-of-the-alephs
 kind: theorem
 title: "$\\aleph_0$ is regular in ZF; assuming the Axiom of Choice every successor aleph $\\aleph_{\\alpha+1}$ is regular; $\\operatorname{cf}(\\aleph_\\omega) = \\aleph_0$, so $\\aleph_\\omega$ is singular, and under choice it is the least singular infinite cardinal"
-status: draft
+status: published
 origin: session
 deps: [thm-cofinality-basics, def-cofinality, lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-every-infinite-cardinal-is-an-aleph, lem-successor-cardinal-exists, cor-cardinal-absorption, thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-axiom-of-choice, def-choice-function, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, lem-omega-least-limit-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "successor alephs regular; $\\aleph_\\omega$ singular"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-locally-connected
 kind: definition
 title: "Locally connected and locally path-connected spaces: a neighbourhood base of open connected, respectively open path-connected, sets at every point"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, def-path-connected, def-neighbourhood-top,
        def-topological-space, def-subspace-topology-top,
@@ -12,6 +12,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

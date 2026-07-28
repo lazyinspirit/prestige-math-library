@@ -2,7 +2,7 @@
 id: thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set
 kind: theorem
 title: "Under dependent choice a space is perfectly normal if and only if it is normal and every closed set is a zero set"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, lem-a-uniformly-approximable-real-valued-map-is-continuous,
        def-completely-normal-and-perfectly-normal-spaces, def-zero-sets-and-cozero-sets,
@@ -17,6 +17,12 @@ short: "perfectly normal iff normal + closed sets are zero sets (DC)"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

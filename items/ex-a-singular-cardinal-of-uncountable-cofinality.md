@@ -2,7 +2,7 @@
 id: ex-a-singular-cardinal-of-uncountable-cofinality
 kind: example
 title: "Assuming countable choice, $\\operatorname{cf}(\\aleph_{\\omega_1}) = \\aleph_1$, so singular does not mean of countable cofinality"
-status: draft
+status: published
 origin: session
 deps: [def-cofinality, thm-cofinality-basics, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, def-limit-ordinal, def-cofinal-subset-of-an-ordinal, def-cardinal, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\operatorname{cf}(\\aleph_{\\omega_1}) = \\aleph_1$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

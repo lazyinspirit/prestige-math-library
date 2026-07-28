@@ -2,7 +2,7 @@
 id: def-compact-space
 kind: definition
 title: "Open cover, subcover, and compact topological space; a compact subset is a subspace that is compact in its own right"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-subspace-topology-top, def-standard-topologies, def-countable, def-metric-compactness]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "open cover, compact space"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

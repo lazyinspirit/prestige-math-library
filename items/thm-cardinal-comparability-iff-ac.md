@@ -2,7 +2,7 @@
 id: thm-cardinal-comparability-iff-ac
 kind: theorem
 title: "Comparability of arbitrary sets, that any two sets admit an injection one way or the other, is equivalent to the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [thm-hartogs, thm-well-ordering-theorem, cor-ac-iff-well-ordering, def-axiom-of-choice, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-cardinality-of-a-well-orderable-set, lem-ordinal-trichotomy, lem-ordinal-basics, def-ordinal, def-well-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "comparability $\\iff$ AC"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

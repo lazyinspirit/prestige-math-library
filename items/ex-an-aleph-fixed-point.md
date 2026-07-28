@@ -2,7 +2,7 @@
 id: ex-an-aleph-fixed-point
 kind: example
 title: "An ordinal $\\alpha$ with $\\aleph_\\alpha = \\alpha$, built as the supremum of the tower $\\aleph_0, \\aleph_{\\aleph_0}, \\aleph_{\\aleph_{\\aleph_0}}, \\dots$, and its cofinality is $\\aleph_0$"
-status: draft
+status: published
 origin: session
 deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-recursion-on-the-ordinals, thm-transfinite-induction, def-cofinality, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-ordinal, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_\\alpha = \\alpha$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

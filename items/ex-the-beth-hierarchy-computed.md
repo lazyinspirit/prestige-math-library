@@ -2,7 +2,7 @@
 id: ex-the-beth-hierarchy-computed
 kind: example
 title: "$\\beth_0 = \\aleph_0$, $\\beth_1 = 2^{\\aleph_0} = \\lvert \\mathbb{R} \\rvert$, $\\beth_2 = \\lvert \\mathcal{P}(\\mathbb{R}) \\rvert$, and $\\beth_\\omega$ has cofinality $\\aleph_0$"
-status: draft
+status: published
 origin: session
 deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, ex-the-cardinality-of-the-continuum, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cofinality, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, def-axiom-of-choice, thm-well-ordering-theorem, def-cardinal, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\beth_0, \\beth_1, \\beth_2, \\operatorname{cf}(\\beth_\\omega)$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

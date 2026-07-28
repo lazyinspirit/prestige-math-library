@@ -1,7 +1,7 @@
 ---
 page: urysohn-lemma-and-tietze-examples
 title: "Urysohn's Lemma and the Tietze Extension Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-a-urysohn-function-on-the-real-line,
            ex-the-first-dyadic-levels-of-the-urysohn-construction,

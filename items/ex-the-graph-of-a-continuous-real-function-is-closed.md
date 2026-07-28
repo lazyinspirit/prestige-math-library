@@ -2,7 +2,7 @@
 id: ex-the-graph-of-a-continuous-real-function-is-closed
 kind: example
 title: "The graph of a continuous $f : \\mathbb{R} \\to \\mathbb{R}$ is closed in $\\mathbb{R}^2$"
-status: draft
+status: published
 origin: session
 deps: [lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed,
        def-continuity-real, lem-real-and-metric-notions-agree, def-continuous-map-top,
@@ -15,6 +15,12 @@ short: "a continuous real function has closed graph"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

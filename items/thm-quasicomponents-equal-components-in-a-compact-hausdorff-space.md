@@ -2,7 +2,7 @@
 id: thm-quasicomponents-equal-components-in-a-compact-hausdorff-space
 kind: theorem
 title: "In a compact Hausdorff space every quasicomponent is connected, so quasicomponents and components coincide"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, thm-quasicomponents-contain-components, thm-components-partition-and-are-closed, def-connected-space, def-compact-space, thm-compact-iff-fip, def-hausdorff-space, thm-closed-subspace-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, def-topological-space, def-subspace-topology-top, def-finite-intersection-property]
 justified_by: []
@@ -12,6 +12,12 @@ short: "components = quasicomponents when compact Hausdorff"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

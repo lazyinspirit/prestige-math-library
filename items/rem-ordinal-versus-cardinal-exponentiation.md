@@ -11,11 +11,12 @@ landmark: false
 short: "$2^{\\omega} = \\omega$ as ordinals; $\\mathcal{P}(\\mathbb{N})$ is uncountable"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,10 +43,10 @@ $\alpha > 1$.
 
 **Cardinal exponentiation** is a different operation, defined on cardinals
 ([[def-cardinal]]) by counting functions: $\kappa^{\lambda}$ is the number of
-functions from a set of size $\lambda$ to a set of size $\kappa$. **It is not
-defined anywhere in this library**, because the cardinal arithmetic that would
-support it has not been built here. It is named in this remark only to warn the
-reader off the identification.
+functions from a set of size $\lambda$ to a set of size $\kappa$. It is not
+defined at this point in the reading order; it is introduced later, on Cardinal
+Arithmetic, Cofinality and the Alephs. It is named in this remark only to warn
+the reader off the identification.
 
 **The two disagree at the smallest interesting input.** As ordinals,
 
@@ -84,4 +85,4 @@ this page.
 **A rule of thumb that is safe here.** If the exponent is being used to index a
 transfinite recursion, the exponentiation is ordinal. If it is being used to
 count functions, it is cardinal. On this page it is always the first, because
-the second does not exist here.
+the second is not defined at this point in the reading order.

@@ -2,7 +2,7 @@
 id: ex-the-long-line-in-the-connectedness-hierarchy
 kind: example
 title: "The long ray is connected and locally connected, every proper initial segment is order-convex and connected, and, assuming countable choice, no at most countable subset is cofinal"
-status: draft
+status: published
 origin: session
 deps: [def-the-long-line, thm-the-long-line-is-a-connected-linear-continuum,
        def-order-topology-on-a-linearly-ordered-set, def-connected-space,
@@ -17,6 +17,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

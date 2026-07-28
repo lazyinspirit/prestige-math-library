@@ -2,7 +2,7 @@
 id: def-compactness-variants
 kind: definition
 title: "Countably compact, Lindel\\\"of, sequentially compact, limit point compact, $\\sigma$-compact and relatively compact spaces"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-countable, lem-countable-iff-surjection-from-n, def-sequence-convergence-top, def-sequence, def-interior-closure-boundary-top, def-metric-compactness-variants, def-subspace-topology-top, def-topological-space, lem-index-map-grows, def-metrizable-space, def-metric-topology, thm-compactness-agrees-with-metric-compactness]
 justified_by: []
@@ -10,11 +10,17 @@ aliases: [def-lindelof, def-sigma-compact, def-relatively-compact, def-countably
 landmark: true
 short: "the compactness variants"
 verification:
-  precheck: n
+  precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-29/a
+    date: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-the-strong-pigeonhole-principle
 kind: theorem
 title: "If $\\lvert A\\rvert > k\\lvert B\\rvert$ then every $f : A \\to B$ has a fibre with more than $k$ elements, and for nonempty $B$ some fibre has at least $\\lceil \\lvert A\\rvert / \\lvert B\\rvert\\rceil$ elements"
-status: draft
+status: published
 origin: session
 deps: [def-the-ceiling-of-a-quotient-of-naturals, thm-sum-rule, def-sum-over-a-finite-index-set,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-finite-cardinality,
@@ -15,6 +15,12 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

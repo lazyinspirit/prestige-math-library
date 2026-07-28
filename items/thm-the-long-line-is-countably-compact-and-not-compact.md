@@ -2,7 +2,7 @@
 id: thm-the-long-line-is-countably-compact-and-not-compact
 kind: theorem
 title: "Every closed initial segment of the long ray is compact; the long ray is countably compact, assuming countable choice; and it is not compact and not Lindel\\\"of"
-status: draft
+status: published
 origin: session
 deps: [def-the-long-line, thm-the-long-line-is-a-connected-linear-continuum, def-compact-space, def-compactness-variants, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-upper-bound, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, lem-compactness-of-a-subspace-is-ambient, def-topological-space]
 justified_by: []
@@ -12,6 +12,12 @@ short: "compactness of the long ray"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

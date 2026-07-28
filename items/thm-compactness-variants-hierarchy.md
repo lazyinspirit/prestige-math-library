@@ -2,7 +2,7 @@
 id: thm-compactness-variants-hierarchy
 kind: theorem
 title: "Compact implies countably compact, Lindel\\\"of and limit point compact; countably compact together with Lindel\\\"of implies compact; and, at the cost of countable or dependent choice, sequentially compact implies countably compact, countably compact implies limit point compact, and the converse holds when every singleton is closed"
-status: draft
+status: published
 origin: session
 deps: [def-compactness-variants, def-compact-space, def-topological-space, def-countable, lem-countable-iff-surjection-from-n, def-countable-choice, def-dependent-choice, def-sequence-convergence-top, def-sequence, lem-index-map-grows, def-interior-closure-boundary-top, thm-closure-characterisation-top, def-neighbourhood-top, def-injection-surjection-bijection, def-natural-numbers]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the compactness hierarchy"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

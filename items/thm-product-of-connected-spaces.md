@@ -2,7 +2,7 @@
 id: thm-product-of-connected-spaces
 kind: theorem
 title: "A product of connected spaces is connected in the product topology; for an infinite index set the choice of a base point uses the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, thm-unions-of-connected-sets, thm-closure-of-a-connected-set,
        def-product-topology, thm-product-universal-property, def-continuous-map-top,
@@ -16,6 +16,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

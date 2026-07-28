@@ -2,7 +2,7 @@
 id: lem-the-diagonal-map-is-an-embedding
 kind: lemma
 title: "$\\delta_X$ is a topological embedding of $X$ onto $\\Delta_X$, and $\\langle f, g \\rangle$ is continuous whenever $f$ and $g$ are"
-status: draft
+status: published
 origin: session
 deps: [def-the-diagonal-of-a-space, def-product-topology, thm-product-universal-property,
        def-homeomorphism-and-open-maps, def-subspace-topology-top, def-continuous-map-top]
@@ -13,6 +13,12 @@ short: "the diagonal map is an embedding; pairings are continuous"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

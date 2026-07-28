@@ -2,7 +2,7 @@
 id: cor-the-aleph-and-beth-hierarchies-are-well-defined
 kind: corollary
 title: "The clauses at $0$, at a successor and at a limit determine exactly one operation $\\alpha \\mapsto \\aleph_\\alpha$, in ZF, and — assuming the Axiom of Choice — exactly one operation $\\alpha \\mapsto \\beth_\\alpha$; each value is an infinite cardinal, each is strictly increasing and continuous at limits, and $\\alpha \\le \\aleph_\\alpha$"
-status: draft
+status: published
 origin: session
 deps: [lem-recursion-on-the-ordinals, lem-successor-cardinal-exists, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, lem-omega-least-limit-ordinal, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, thm-schroder-bernstein, thm-transfinite-induction, def-equinumerous]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph$ and $\\beth$ exist and are unique"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

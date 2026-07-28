@@ -2,7 +2,7 @@
 id: thm-cardinal-arithmetic-agrees-with-finite-counting
 kind: theorem
 title: "Every natural number and $\\omega$ are cardinals, every infinite cardinal is a limit ordinal, and on the natural numbers the cardinal operations are the published finite counting operations, with $\\lvert A \\rvert$ in the finite sense equal to $\\lvert A \\rvert$ in the cardinal sense"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinality-of-a-well-orderable-set, def-finite-cardinality, thm-sum-rule, thm-product-rule, thm-cardinality-of-a-set-of-functions, def-nat-power, lem-pigeonhole, def-cardinal, lem-omega-least-limit-ordinal, thm-ordinal-arithmetic-agrees-on-omega, def-countable, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, thm-omega-is-peano-system, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the finite dictionary for $\\oplus$, $\\otimes$, $\\kappa^{\\lambda}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

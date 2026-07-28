@@ -2,7 +2,7 @@
 id: thm-erdos-szekeres
 kind: theorem
 title: "Every list of $mn+1$ pairwise distinct reals has a strictly increasing sublist of length $m+1$ or a strictly decreasing sublist of length $n+1$"
-status: draft
+status: published
 origin: session
 deps: [def-a-monotone-sublist-of-a-finite-list-of-reals, lem-pigeonhole, thm-product-rule,
        def-finite-cardinality, thm-well-ordering-principle, def-ordered-field,
@@ -15,6 +15,12 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

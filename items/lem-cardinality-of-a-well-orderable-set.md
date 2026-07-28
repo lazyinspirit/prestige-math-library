@@ -2,7 +2,7 @@
 id: lem-cardinality-of-a-well-orderable-set
 kind: lemma
 title: "A set equinumerous with some ordinal has a least such ordinal, that ordinal is a cardinal, and equinumerous sets get the same one; no choice principle is used"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection, thm-mostowski-collapse, def-well-order, def-order-isomorphism, thm-well-ordering-theorem, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\lvert X\\rvert$ exists in ZF for well-orderable $X$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

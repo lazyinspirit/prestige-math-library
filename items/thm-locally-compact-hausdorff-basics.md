@@ -2,7 +2,7 @@
 id: thm-locally-compact-hausdorff-basics
 kind: theorem
 title: "In a locally compact Hausdorff space every point has a neighbourhood base of compact sets, every open subspace and every closed subspace is locally compact, every open set around a point contains an open set with compact closure inside it, and every compact set sits inside an open set with compact closure"
-status: draft
+status: published
 origin: session
 deps: [def-locally-compact-space, def-compact-space, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, def-neighbourhood-top, def-interior-closure-boundary-top, thm-closure-characterisation-top, def-subspace-topology-top, def-hereditary-property, lem-compactness-of-a-subspace-is-ambient, def-topological-space]
 justified_by: []
@@ -12,6 +12,12 @@ short: "locally compact Hausdorff basics"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

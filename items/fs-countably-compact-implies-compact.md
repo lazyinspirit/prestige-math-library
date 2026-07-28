@@ -2,7 +2,7 @@
 id: fs-countably-compact-implies-compact
 kind: false-statement
 title: "FALSE: every countably compact space is compact"
-status: draft
+status: published
 origin: session
 deps: [thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-compact-space, def-compactness-variants, def-countable-choice, lem-the-order-topology-on-an-ordinal, def-first-uncountable-ordinal, def-the-long-line]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "FALSE: countably compact implies compact"
 proof_strategy: contradiction
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

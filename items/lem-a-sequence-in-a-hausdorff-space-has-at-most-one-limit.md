@@ -2,7 +2,7 @@
 id: lem-a-sequence-in-a-hausdorff-space-has-at-most-one-limit
 kind: lemma
 title: "In a Hausdorff space a sequence converges to at most one point"
-status: draft
+status: published
 origin: session
 deps: [def-hausdorff-space, def-sequence-convergence-top, def-neighbourhood-top,
        fs-unique-sequential-limits-imply-hausdorff, lem-nat-trichotomy]
@@ -13,6 +13,12 @@ short: "sequential limits are unique in a Hausdorff space"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-locally-compact-space
 kind: definition
 title: "Locally compact topological space: every point has a compact neighbourhood; and what this says in a metric space"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-neighbourhood-top, def-topological-space, def-subspace-topology-top, def-metrizable-space, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, thm-compactness-agrees-with-metric-compactness, cor-heine-borel-in-the-product-topology, lem-metrics-on-rn]
 justified_by: []
@@ -10,11 +10,17 @@ aliases: [def-locally-compact]
 landmark: true
 short: "locally compact space"
 verification:
-  precheck: n
+  precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-29/a
+    date: 2026-07-29
 sources:
   scraped: []
   references:

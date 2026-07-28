@@ -2,7 +2,7 @@
 id: cor-cardinal-absorption
 kind: corollary
 title: "Absorption: for cardinals $\\kappa, \\lambda$ with $\\kappa$ infinite and $\\lambda \\le \\kappa$, $\\kappa \\oplus \\lambda = \\kappa$, and $\\kappa \\otimes \\lambda = \\kappa$ when $\\lambda \\ne 0$"
-status: draft
+status: published
 origin: session
 deps: [thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, lem-ordinal-trichotomy, lem-ordinal-basics, lem-omega-least-limit-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\kappa \\oplus \\lambda = \\kappa \\otimes \\lambda = \\kappa$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

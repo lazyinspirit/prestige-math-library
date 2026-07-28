@@ -2,7 +2,7 @@
 id: thm-compactness-agrees-with-metric-compactness
 kind: theorem
 title: "For a metric space with its metric topology, compactness in the topological sense is compactness in the metric sense, and the two notions of compact subset coincide"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-metric-compactness, def-metric-topology, def-metrizable-space, def-metric-space, def-subspace-topology-top, def-isometry-and-metric-embedding, def-topological-space, cor-metrizability-and-first-countability-are-hereditary]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the two compactness notions agree"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

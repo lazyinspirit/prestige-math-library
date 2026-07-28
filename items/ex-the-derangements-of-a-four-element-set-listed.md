@@ -2,7 +2,7 @@
 id: ex-the-derangements-of-a-four-element-set-listed
 kind: example
 title: "All nine derangements of a four-element set listed, and the count checked against the formula and both recurrences"
-status: draft
+status: published
 origin: session
 deps: [def-the-derangement-number, thm-the-derangement-formula, cor-the-derangement-recurrences,
        thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

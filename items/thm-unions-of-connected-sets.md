@@ -2,7 +2,7 @@
 id: thm-unions-of-connected-sets
 kind: theorem
 title: "A union of connected subspaces with a point in common is connected, and so is a union of a family in which every member meets a fixed connected member"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, thm-connectedness-characterisations, def-subspace-topology-top,
        def-continuous-map-top, def-standard-topologies]
@@ -12,6 +12,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-a-three-set-and-a-four-set-sieve-computed
 kind: example
 title: "The sieve run in full on three explicit finite sets and then on four, with every intersection listed"
-status: draft
+status: published
 origin: session
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections, def-finite-cardinality,
        def-sum-over-a-finite-index-set, def-canonical-natural, def-integer-power,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

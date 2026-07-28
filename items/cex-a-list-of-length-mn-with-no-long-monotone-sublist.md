@@ -2,7 +2,7 @@
 id: cex-a-list-of-length-mn-with-no-long-monotone-sublist
 kind: counterexample
 title: "A list of six distinct reals with no strictly increasing sublist of length four and no strictly decreasing sublist of length three"
-status: draft
+status: published
 origin: session
 deps: [fs-the-erdos-szekeres-bound-can-be-lowered, thm-the-erdos-szekeres-bound-is-sharp,
        thm-erdos-szekeres, def-a-monotone-sublist-of-a-finite-list-of-reals,
@@ -15,6 +15,12 @@ proof_strategy: constructive
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

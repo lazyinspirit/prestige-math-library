@@ -2,7 +2,7 @@
 id: cex-components-differ-from-quasicomponents
 kind: counterexample
 title: "In the subspace of $\\mathbb{R}^2$ made of the vertical unit segments over $1/(n+1)$ together with the two points $(0,0)$ and $(0,1)$, the component of $(0,0)$ is a singleton while its quasicomponent is $\\{(0,0), (0,1)\\}$"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, thm-quasicomponents-contain-components,
        thm-components-partition-and-are-closed, cor-connected-subsets-of-the-line,
@@ -18,6 +18,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

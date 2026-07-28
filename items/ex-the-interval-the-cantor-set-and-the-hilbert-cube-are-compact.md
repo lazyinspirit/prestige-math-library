@@ -2,7 +2,7 @@
 id: ex-the-interval-the-cantor-set-and-the-hilbert-cube-are-compact
 kind: example
 title: "$[0,1]$, the Cantor set and $[0,1]^{\\mathbb{N}}$ are compact, by Heine-Borel, by closedness inside $[0,1]$, and by Tychonoff"
-status: draft
+status: published
 origin: session
 deps: [thm-tychonoff, thm-compactness-agrees-with-metric-compactness, def-compact-space, def-cantor-set, thm-cantor-set-properties, def-product-topology, thm-heine-borel-rn, def-interval, thm-closed-subspace-of-a-compact-space-is-compact, def-subspace-topology-top, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-bounded-diameter, def-topological-space]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "three compact spaces"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-konig
 kind: theorem
 title: "König's theorem: assuming the Axiom of Choice, if $\\kappa_i < \\lambda_i$ for every $i \\in I$ then $\\sum_{i \\in I} \\kappa_i < \\prod_{i \\in I} \\lambda_i$"
-status: draft
+status: published
 origin: session
 deps: [def-infinite-cardinal-sum-and-product, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-ordinal-trichotomy, lem-ordinal-basics, def-well-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\sum_i \\kappa_i < \\prod_i \\lambda_i$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

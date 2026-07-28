@@ -2,7 +2,7 @@
 id: thm-locally-connected-iff-components-of-open-sets-are-open
 kind: theorem
 title: "A space is locally connected exactly when every component of every open subspace is open; in that case the components of the space itself are clopen"
-status: draft
+status: published
 origin: session
 deps: [def-locally-connected, def-connected-component-and-quasicomponent, def-path-connected,
        thm-components-partition-and-are-closed, def-subspace-topology-top,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

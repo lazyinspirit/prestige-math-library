@@ -1,7 +1,7 @@
 ---
 page: hausdorff-via-the-diagonal
 title: "Hausdorff via the Diagonal"
-status: draft
+status: published
 items: [def-the-diagonal-of-a-space, lem-the-diagonal-map-is-an-embedding,
         thm-hausdorff-iff-the-diagonal-is-closed,
         cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed,

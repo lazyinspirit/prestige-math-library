@@ -2,7 +2,7 @@
 id: fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends
 kind: false-statement
 title: "FALSE: Every continuous real-valued function on a subspace of a normal space extends continuously to the whole space"
-status: draft
+status: published
 origin: session
 deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
        def-subspace-topology-top, def-continuity-real, thm-algebra-of-continuous-functions,
@@ -16,6 +16,12 @@ short: "closedness of the subspace is not decoration in Tietze"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

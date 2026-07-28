@@ -2,7 +2,7 @@
 id: cor-heine-borel-in-the-product-topology
 kind: corollary
 title: "A subset of $\\mathbb{R}^n$ with the product topology is compact exactly when it is closed and bounded, the product topology being the Euclidean metric topology"
-status: draft
+status: published
 origin: session
 deps: [thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, lem-product-topology-on-rn, lem-metrics-on-rn, def-product-topology, def-metric-topology, def-metrizable-space, def-compact-space, def-metric-bounded-diameter, def-subspace-topology-top]
 justified_by: []
@@ -12,6 +12,12 @@ short: "Heine-Borel for the product topology"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

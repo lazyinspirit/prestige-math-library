@@ -2,7 +2,7 @@
 id: def-a-sieve-family-and-its-intersections
 kind: definition
 title: "A finite family $(A_i)_{i \\in I}$ of subsets of a finite set $X$, the intersections $A_J$ for $J \\subseteq I$, and the convention $A_\\varnothing = X$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, thm-subset-of-a-finite-set, cor-cardinality-of-the-power-set,
        def-binomial-coefficient, def-countable]
@@ -11,6 +11,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-sigma-compactness-and-lindelof-in-the-line-and-the-rationals
 kind: example
 title: "$\\mathbb{R}$ and $\\mathbb{Q}$ are $\\sigma$-compact, and Lindel\\\"of assuming countable choice; $\\mathbb{R}$ is locally compact and $\\mathbb{Q}$ is nowhere locally compact"
-status: draft
+status: published
 origin: session
 deps: [lem-compactness-of-a-subspace-is-ambient, def-compactness-variants, def-compact-space, def-locally-compact-space, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, thm-rationals-countable, def-countable, lem-countable-iff-surjection-from-n, def-countable-choice, def-interval, def-canonical-natural, thm-of-archimedean, def-subspace-topology-top, def-neighbourhood-top, lem-of-q-dense, lem-q-and-irrationals-dense-r, def-hereditary-property, def-topological-space, def-complete-ordered-field, thm-closure-characterisation-top, def-interior-closure-boundary-top]
 justified_by: []
@@ -12,6 +12,12 @@ short: "sigma-compactness and Lindelofness of R and Q"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

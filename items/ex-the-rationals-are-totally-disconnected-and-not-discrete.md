@@ -2,7 +2,7 @@
 id: ex-the-rationals-are-totally-disconnected-and-not-discrete
 kind: example
 title: "$\\mathbb{Q}$ as a subspace of $\\mathbb{R}$: every component is a single point, no point is isolated, and the space is not locally connected anywhere"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, cor-connected-subsets-of-the-line,
        def-connected-space, def-subspace-topology-top, lem-q-and-irrationals-dense-r,
@@ -17,6 +17,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

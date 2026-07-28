@@ -2,7 +2,7 @@
 id: ex-cardinal-absorption-computed
 kind: example
 title: "$\\aleph_0 \\oplus \\aleph_0 = \\aleph_0 \\otimes \\aleph_0 = \\aleph_0$, $\\aleph_1 \\oplus \\aleph_0 = \\aleph_1$ and $5 \\oplus \\aleph_0 = \\aleph_0$, computed from absorption and, in the countable cases, independently from the published bijection $\\omega \\times \\omega \\approx \\omega$"
-status: draft
+status: published
 origin: session
 deps: [cor-cardinal-absorption, thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, thm-n-cross-n-countable, def-cardinal, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "absorption, computed"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

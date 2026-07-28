@@ -2,7 +2,7 @@
 id: ex-a-ceiling-bound-from-the-strong-pigeonhole
 kind: example
 title: "Distributing a finite set over a finite set of boxes, with the ceiling bound computed and attained"
-status: draft
+status: published
 origin: session
 deps: [thm-the-strong-pigeonhole-principle, def-the-ceiling-of-a-quotient-of-naturals,
        def-finite-cardinality, thm-sum-rule, def-sum-over-a-finite-index-set, def-nat-order,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

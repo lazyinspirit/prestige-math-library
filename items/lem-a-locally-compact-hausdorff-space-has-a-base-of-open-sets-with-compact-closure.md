@@ -2,7 +2,7 @@
 id: lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure
 kind: lemma
 title: "In a locally compact Hausdorff space every open set containing a point contains an open set containing it whose closure is compact and still inside; such a space is regular"
-status: draft
+status: published
 origin: session
 deps: [def-locally-compact-space, def-compact-space,
        thm-closed-subspace-of-a-compact-space-is-compact,
@@ -19,6 +19,12 @@ short: "locally compact Hausdorff: a base of open sets with compact closure"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

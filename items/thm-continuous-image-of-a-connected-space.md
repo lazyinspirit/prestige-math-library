@@ -2,7 +2,7 @@
 id: thm-continuous-image-of-a-connected-space
 kind: theorem
 title: "A continuous image of a connected space is connected, and connectedness is a topological property"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, thm-connectedness-characterisations, def-continuous-map-top,
        def-subspace-topology-top, lem-continuity-is-local-and-pastes,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

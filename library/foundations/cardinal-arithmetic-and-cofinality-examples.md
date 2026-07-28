@@ -1,7 +1,7 @@
 ---
 page: cardinal-arithmetic-and-cofinality-examples
 title: "Cardinal Arithmetic, Cofinality and the Alephs — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cardinal-absorption-computed,
            ex-the-cardinality-of-the-continuum,

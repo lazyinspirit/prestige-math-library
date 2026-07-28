@@ -11,11 +11,12 @@ landmark: true
 short: "$\\alpha^{0}=1$, $\\alpha^{\\beta^{+}}=\\alpha^{\\beta}\\cdot\\alpha$, sup over $0<\\beta<\\lambda$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -65,7 +66,8 @@ The first clause applies to every $\alpha$, so in particular $0^{0} = 1$.
   $\mathcal{P}(\mathbb{N})$, which is uncountable. The two operations share one
   notation and are not the same function.
   [[rem-ordinal-versus-cardinal-exponentiation]] is the standing warning, and
-  cardinal exponentiation is not defined anywhere in this library.
+  cardinal exponentiation is not defined at this point in the reading order; it
+  is introduced later, on Cardinal Arithmetic, Cofinality and the Alephs.
 
 - **Notation and precedence.** $\alpha^{\beta} \cdot \gamma$ means
   $(\alpha^{\beta}) \cdot \gamma$, and $\alpha^{\beta} + \gamma$ means

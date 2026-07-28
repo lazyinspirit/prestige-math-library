@@ -2,7 +2,7 @@
 id: lem-cardinal-arithmetic-basic-laws
 kind: lemma
 title: "Commutativity, associativity, distributivity and monotonicity of $\\oplus$ and $\\otimes$, the unit laws, the two exponent laws, and $\\kappa \\le \\lambda$ if and only if $\\kappa$ injects into $\\lambda$"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-ordinal-trichotomy, lem-ordinal-basics, thm-schroder-bernstein, def-axiom-of-choice, thm-well-ordering-theorem]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the algebra of $\\oplus$, $\\otimes$ and $\\kappa^{\\lambda}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-the-derangement-recurrences
 kind: corollary
 title: "$\\iota(D_n) = \\iota(n)\\,\\iota(D_{n-1}) + (-1)^{n}$ for $n \\ge 1$, and $D_n = (n-1)(D_{n-1} + D_{n-2})$ for $n \\ge 2$"
-status: draft
+status: published
 origin: session
 deps: [thm-the-derangement-formula, def-the-derangement-number, def-factorial-and-falling-factorial,
        def-canonical-natural, def-integer-power, def-finite-sum, lem-finite-sum-laws,
@@ -15,6 +15,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

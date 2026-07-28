@@ -2,7 +2,7 @@
 id: ex-the-oscillating-zigzag-curve-computed
 kind: example
 title: "The zigzag curve and its closure worked out: the components, the path components, and the points at which local connectedness fails"
-status: draft
+status: published
 origin: session
 deps: [lem-the-oscillating-zigzag-curve, def-connected-space, def-path-connected,
        def-locally-connected, def-connected-component-and-quasicomponent,
@@ -18,6 +18,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

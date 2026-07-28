@@ -2,7 +2,7 @@
 id: def-cofinality
 kind: definition
 title: "Cofinality $\\operatorname{cf}(\\alpha)$, and regular and singular cardinals"
-status: draft
+status: published
 origin: session
 deps: [lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-ordinal, def-cardinal, def-aleph-and-beth-hierarchies]
 justified_by: [thm-cofinality-basics]
@@ -11,6 +11,12 @@ landmark: true
 short: "$\\operatorname{cf}(\\alpha)$; regular, singular"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

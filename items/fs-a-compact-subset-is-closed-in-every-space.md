@@ -2,7 +2,7 @@
 id: fs-a-compact-subset-is-closed-in-every-space
 kind: false-statement
 title: "FALSE: a compact subset of a topological space is closed"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, thm-compact-subset-of-a-hausdorff-space-is-closed, def-standard-topologies, def-topological-space, def-hausdorff-space, def-subspace-topology-top]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "FALSE: compact implies closed"
 proof_strategy: contradiction
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

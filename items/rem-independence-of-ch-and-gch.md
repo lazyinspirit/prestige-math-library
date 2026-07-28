@@ -14,7 +14,7 @@ short: "Con(ZFC) implies Con(ZFC + CH) and Con(ZFC + not CH)"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
+    date: 2026-07-29
     scope: citations
     by: session-audit
 sources:
@@ -48,16 +48,18 @@ of [[rem-cohen-forcing-ac-independent]], adjoins $\aleph_2$ many generic subsets
 of $\mathbb{N}$ to a model of ZFC + GCH while preserving cardinals, producing a
 model of ZFC in which CH, and therefore GCH, fails.
 
-In cardinal notation, and using the alephs and beths that this library has not
-developed, GCH is the statement $2^{\aleph_\alpha} = \aleph_{\alpha+1}$ for every
-ordinal $\alpha$, and CH is its instance $\alpha = 0$.
+In cardinal notation, using the alephs and beths of the aleph and beth
+hierarchies developed later in the library, GCH is the statement
+$2^{\aleph_\alpha} = \aleph_{\alpha+1}$ for every ordinal $\alpha$, and CH is its
+instance $\alpha = 0$.
 
 ## Remarks
 
-- **Not proved in this library.** Neither half is proved here, and the cardinal
-  arithmetic in which the statement is usually phrased is itself only partly
-  available: [[def-cardinal]] exists, but exponentiation of cardinals and the
-  aleph hierarchy do not.
+- **Not proved in this library.** Neither half is proved here. The cardinal
+  arithmetic in which the statement is phrased above **is** now fully available
+  — [[def-cardinal]], cardinal exponentiation and the aleph and beth hierarchies
+  are all developed on a later page — what is absent is the forcing and
+  inner-model machinery that would prove the independence statement itself.
 
 - **What would prove it.** For consistency of CH, the inner model $L$ together
   with its condensation lemma. For consistency of the negation, the forcing
@@ -72,8 +74,10 @@ ordinal $\alpha$, and CH is its instance $\alpha = 0$.
   next question is not answerable. This item is the result it quotes. Note the
   gap that [[rem-continuum-hypothesis]] itself points out: the form of CH about
   $\mathbb{R}$ rather than about $\mathcal{P}(\mathbb{N})$ needs
-  $\mathbb{R} \approx \mathcal{P}(\mathbb{N})$, which the library has not proved
-  either, so the two forms are not interchangeable there.
+  $\mathbb{R} \approx \mathcal{P}(\mathbb{N})$, which the library **now** proves
+  in ZF, on a later page, so the two forms are interchangeable after all — the
+  gap [[rem-continuum-hypothesis]] records was closed by a later page, not a
+  standing limitation of this remark's own claim.
 
 - **Conditional discipline.** Every clause above is relative to the consistency
   of ZFC. "CH is independent of ZFC" is shorthand and is never used here as a

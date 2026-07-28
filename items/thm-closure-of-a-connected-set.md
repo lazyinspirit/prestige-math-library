@@ -2,7 +2,7 @@
 id: thm-closure-of-a-connected-set
 kind: theorem
 title: "If $A$ is connected and $A \\subseteq B \\subseteq \\overline{A}$ then $B$ is connected; in particular the closure of a connected set is connected"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, lem-connected-subsets-and-separated-sets,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

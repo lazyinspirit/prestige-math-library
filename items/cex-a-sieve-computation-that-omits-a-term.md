@@ -2,7 +2,7 @@
 id: cex-a-sieve-computation-that-omits-a-term
 kind: counterexample
 title: "A three-set count that drops the triple intersection and returns the wrong answer"
-status: draft
+status: published
 origin: session
 deps: [fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term, thm-inclusion-exclusion,
        def-a-sieve-family-and-its-intersections, def-finite-cardinality, def-canonical-natural,
@@ -15,6 +15,12 @@ proof_strategy: constructive
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

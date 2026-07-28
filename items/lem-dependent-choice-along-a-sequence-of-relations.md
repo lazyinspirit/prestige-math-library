@@ -2,7 +2,7 @@
 id: lem-dependent-choice-along-a-sequence-of-relations
 kind: lemma
 title: "Dependent choice along a sequence of relations: if $R_n$ is entire on $A$ for every $n$, then from any $a$ there is a sequence with $a_n \\mathbin{R_n} a_{n+1}$"
-status: draft
+status: published
 origin: session
 deps: [def-dependent-choice, def-sequence, def-natural-numbers, thm-induction-principle]
 justified_by: []
@@ -12,6 +12,12 @@ short: "DC along a sequence of relations"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

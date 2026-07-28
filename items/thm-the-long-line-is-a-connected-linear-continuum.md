@@ -2,7 +2,7 @@
 id: thm-the-long-line-is-a-connected-linear-continuum
 kind: theorem
 title: "The long ray is a linear continuum, hence connected; every one of its at most countable subsets is bounded above, assuming countable choice"
-status: draft
+status: published
 origin: session
 deps: [def-the-long-line, def-order-topology-on-a-linearly-ordered-set,
        thm-a-linear-continuum-is-connected, lem-ordinal-basics, lem-ordinal-trichotomy,
@@ -18,6 +18,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-the-order-topology-on-an-ordinal
 kind: lemma
 title: "On an ordinal with its order topology the sets $[0,\\beta]$ and $(\\alpha,\\beta]$ form a basis of clopen sets, the isolated points are exactly the non-limit ordinals, and the space is Hausdorff"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-a-linearly-ordered-set, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-topology-basis-subbasis, thm-basis-criterion, def-topological-space, def-hausdorff-space, def-interior-closure-boundary-top, def-neighbourhood-top, def-partial-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the order topology on an ordinal"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

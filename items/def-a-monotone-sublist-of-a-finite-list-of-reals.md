@@ -2,7 +2,7 @@
 id: def-a-monotone-sublist-of-a-finite-list-of-reals
 kind: definition
 title: "A finite list of reals, and its strictly increasing and strictly decreasing sublists"
-status: draft
+status: published
 origin: session
 deps: [def-ordered-field, def-natural-numbers, def-nat-order, lem-nat-order-is-membership,
        def-injection-surjection-bijection, def-finite-cardinality]
@@ -11,6 +11,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

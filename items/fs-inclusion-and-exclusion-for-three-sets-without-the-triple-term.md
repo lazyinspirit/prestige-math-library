@@ -2,7 +2,7 @@
 id: fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term
 kind: false-statement
 title: "FALSE: $\\lvert A \\cup B \\cup C\\rvert = \\lvert A\\rvert + \\lvert B\\rvert + \\lvert C\\rvert - \\lvert A \\cap B\\rvert - \\lvert A \\cap C\\rvert - \\lvert B \\cap C\\rvert$"
-status: draft
+status: published
 origin: session
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

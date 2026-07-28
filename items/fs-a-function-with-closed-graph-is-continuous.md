@@ -2,7 +2,7 @@
 id: fs-a-function-with-closed-graph-is-continuous
 kind: false-statement
 title: "FALSE: every function between topological spaces whose graph is closed in the product is continuous"
-status: draft
+status: published
 origin: session
 deps: [thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain,
        def-product-topology, def-topology-basis-subbasis, def-metrizable-space,
@@ -17,6 +17,12 @@ short: "a closed graph does not imply continuity"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

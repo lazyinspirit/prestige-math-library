@@ -2,7 +2,7 @@
 id: ex-two-elements-with-the-same-number-of-neighbours-in-a-finite-symmetric-relation
 kind: example
 title: "In a finite set with a symmetric irreflexive relation and at least two elements, two elements have equally many neighbours"
-status: draft
+status: published
 origin: session
 deps: [thm-the-strong-pigeonhole-principle, def-a-finite-incidence-relation-and-its-fibres,
        def-finite-cardinality, thm-subset-of-a-finite-set, def-injection-surjection-bijection,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

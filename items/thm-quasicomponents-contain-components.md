@@ -2,7 +2,7 @@
 id: thm-quasicomponents-contain-components
 kind: theorem
 title: "Every quasicomponent is a closed union of components, so each component is contained in a quasicomponent, and the quasicomponents partition the space"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, thm-components-partition-and-are-closed,
        thm-connectedness-characterisations, def-connected-space, def-topological-space,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

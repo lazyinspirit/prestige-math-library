@@ -22,7 +22,12 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -130,7 +135,7 @@ claim 4 says in full what it would abbreviate.
 
 ## Remarks
 
-- **The Sorgenfrey line is first countable and has an at most countable dense subset, and it is nevertheless not metrizable.** That is not proved here: the standard argument uses a second countability or a Baire-type input that this library does not have. Claims 3 and 4 are stated for what they are, and no metrizability verdict is drawn from them.
+- **The Sorgenfrey line is first countable and has an at most countable dense subset, and it is nevertheless not metrizable.** That is not proved here: the standard argument uses a second-countability or a Baire-type input that is not available at this point in the reading order. Claims 3 and 4 are stated for what they are, and no metrizability verdict is drawn from them.
 
 - **Where the asymmetry comes from.** The basis members are closed on the left and open on the right, so a neighbourhood of $x$ always contains a whole interval to the right of $x$ and need contain nothing to its left. Claim 5 is the exact expression of that, and it is why $[0,1)$, which is neither open nor closed in the usual topology, is open here — and also closed, its complement being the union of the basic sets $[b, b+1)$ for $b \ge 1$ together with $[a, 0)$ for $a < 0$.
 

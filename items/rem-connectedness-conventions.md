@@ -2,7 +2,7 @@
 id: rem-connectedness-conventions
 kind: remark
 title: "Which conventions this page fixes: the empty space and the one-point space, separated sets against disjoint open sets, and what is not developed here"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, lem-connected-subsets-and-separated-sets,
        def-connected-component-and-quasicomponent, def-locally-connected,
@@ -14,6 +14,12 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

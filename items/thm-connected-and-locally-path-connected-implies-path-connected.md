@@ -2,7 +2,7 @@
 id: thm-connected-and-locally-path-connected-implies-path-connected
 kind: theorem
 title: "A connected, locally path-connected space is path-connected, because its path components are open"
-status: draft
+status: published
 origin: session
 deps: [def-path-connected, def-locally-connected, def-connected-space,
        thm-connectedness-characterisations, def-topological-space,
@@ -14,6 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

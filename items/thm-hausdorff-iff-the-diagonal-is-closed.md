@@ -2,7 +2,7 @@
 id: thm-hausdorff-iff-the-diagonal-is-closed
 kind: theorem
 title: "A space is Hausdorff if and only if its diagonal is closed in the square carrying the product topology"
-status: draft
+status: published
 origin: session
 deps: [def-the-diagonal-of-a-space, def-hausdorff-space, def-product-topology,
        def-topology-basis-subbasis, thm-closure-characterisation-top,
@@ -14,6 +14,12 @@ short: "Hausdorff iff the diagonal is closed"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

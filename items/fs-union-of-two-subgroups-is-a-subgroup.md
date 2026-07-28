@@ -1,7 +1,7 @@
 ---
 id: fs-union-of-two-subgroups-is-a-subgroup
 kind: false-statement
-title: "The union of two subgroups is a subgroup"
+title: "FALSE: The union of two subgroups is a subgroup"
 status: published
 origin: session
 deps: [def-subgroup, lem-subgroup-criterion, lem-intersection-of-subgroups, def-group, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, thm-division-algorithm-in-z, lem-nat-embeds-int]
@@ -16,7 +16,12 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:

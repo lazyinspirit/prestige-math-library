@@ -2,7 +2,7 @@
 id: lem-the-partial-alternating-sum-of-a-binomial-row
 kind: lemma
 title: "$\\sum_{j<m+1}(-1)^{j}\\,\\iota\\binom{t}{j} = (-1)^{m}\\,\\iota\\binom{t-1}{m}$ for every $t \\ge 1$ and every $m$"
-status: draft
+status: published
 origin: session
 deps: [thm-pascals-rule, def-binomial-coefficient, def-canonical-natural, def-integer-power,
        def-finite-sum, lem-finite-sum-laws, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -14,6 +14,12 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

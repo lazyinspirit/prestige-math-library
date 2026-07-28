@@ -2,7 +2,7 @@
 id: fs-the-erdos-szekeres-bound-can-be-lowered
 kind: false-statement
 title: "FALSE: every list of $mn$ pairwise distinct reals has a strictly increasing sublist of length $m+1$ or a strictly decreasing sublist of length $n+1$"
-status: draft
+status: published
 origin: session
 deps: [thm-erdos-szekeres, thm-the-erdos-szekeres-bound-is-sharp,
        def-a-monotone-sublist-of-a-finite-list-of-reals, def-nat-order, def-ordered-field,
@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-intermediate-value-theorem-topological
 kind: corollary
 title: "A real-valued continuous map on a connected space has order-convex image, so it takes every value between any two of its values"
-status: draft
+status: published
 origin: session
 deps: [thm-continuous-image-of-a-connected-space, cor-connected-subsets-of-the-line,
        def-connected-space, def-continuous-map-top, def-interval,
@@ -14,6 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

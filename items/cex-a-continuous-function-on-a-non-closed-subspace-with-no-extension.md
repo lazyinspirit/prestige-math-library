@@ -2,7 +2,7 @@
 id: cex-a-continuous-function-on-a-non-closed-subspace-with-no-extension
 kind: counterexample
 title: "The reciprocal on $(0,1]$ is continuous and extends to no continuous function on $\\mathbb{R}$, so closedness of the subspace is not decoration in the $\\mathbb{R}$-valued Tietze extension"
-status: draft
+status: published
 origin: session
 deps: [fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends,
        thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps, def-continuity-real, thm-algebra-of-continuous-functions,
@@ -15,6 +15,12 @@ short: "reciprocal on $(0,1]$, no continuous extension"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

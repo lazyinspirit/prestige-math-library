@@ -2,7 +2,7 @@
 id: fs-a-connected-space-is-path-connected
 kind: false-statement
 title: "FALSE: every connected topological space is path-connected"
-status: draft
+status: published
 origin: session
 deps: [lem-the-oscillating-zigzag-curve, def-connected-space, def-path-connected,
        thm-path-connected-implies-connected, def-subspace-topology-top]
@@ -13,6 +13,12 @@ short: "a connected space need not be path-connected"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

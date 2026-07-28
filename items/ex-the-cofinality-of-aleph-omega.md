@@ -2,7 +2,7 @@
 id: ex-the-cofinality-of-aleph-omega
 kind: example
 title: "$\\operatorname{cf}(\\aleph_\\omega) = \\aleph_0$, computed from the cofinal map $n \\mapsto \\aleph_n$"
-status: draft
+status: published
 origin: session
 deps: [def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cofinal-subset-of-an-ordinal, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-cardinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\operatorname{cf}(\\aleph_\\omega) = \\aleph_0$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

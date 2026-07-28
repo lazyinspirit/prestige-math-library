@@ -2,7 +2,7 @@
 id: thm-cofinality-basics
 kind: theorem
 title: "$\\operatorname{cf}(\\alpha) \\le \\alpha$; $\\operatorname{cf}(0) = 0$ and $\\operatorname{cf}(\\alpha + 1) = 1$; for a limit ordinal $\\lambda$ the value $\\operatorname{cf}(\\lambda)$ is an infinite cardinal with $\\operatorname{cf}(\\operatorname{cf}(\\lambda)) = \\operatorname{cf}(\\lambda)$, so it is regular; and every cofinal subset of $\\lambda$ has cardinality at least $\\operatorname{cf}(\\lambda)$, a value that is attained"
-status: draft
+status: published
 origin: session
 deps: [def-cofinality, lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-cardinal, lem-omega-least-limit-ordinal, lem-cardinality-of-a-well-orderable-set, lem-cardinal-arithmetic-basic-laws, def-equinumerous, def-injection-surjection-bijection, def-ordinal-addition, def-cardinal-arithmetic, thm-mostowski-collapse, def-order-isomorphism, def-well-order]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\operatorname{cf}(\\lambda)$ is a regular infinite cardinal"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

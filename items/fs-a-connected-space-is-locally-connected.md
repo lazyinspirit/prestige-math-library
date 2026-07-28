@@ -2,7 +2,7 @@
 id: fs-a-connected-space-is-locally-connected
 kind: false-statement
 title: "FALSE: every connected space is locally connected"
-status: draft
+status: published
 origin: session
 deps: [lem-the-oscillating-zigzag-curve, def-locally-connected, def-connected-space,
        thm-locally-connected-iff-components-of-open-sets-are-open,
@@ -14,6 +14,12 @@ short: "a connected space need not be locally connected"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

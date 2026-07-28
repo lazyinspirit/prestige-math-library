@@ -2,7 +2,7 @@
 id: cex-an-averaging-bound-that-is-not-attained
 kind: counterexample
 title: "A relation whose row fibres all differ from the average size, so the averaging principle gives a bound that no fibre meets exactly"
-status: draft
+status: published
 origin: session
 deps: [cor-the-averaging-principle, thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
@@ -15,6 +15,12 @@ proof_strategy: constructive
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

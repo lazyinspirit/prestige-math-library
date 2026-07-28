@@ -2,7 +2,7 @@
 id: lem-compactness-of-a-subspace-is-ambient
 kind: lemma
 title: "A subspace is compact exactly when every family of open subsets of the ambient space covering it, indexed or not, has finitely many members covering it"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-subspace-topology-top, def-topological-space, lem-finite-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "compactness read in the ambient space"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

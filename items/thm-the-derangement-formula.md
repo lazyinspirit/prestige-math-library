@@ -2,7 +2,7 @@
 id: thm-the-derangement-formula
 kind: theorem
 title: "$\\iota(D_n) = \\iota(n!)\\sum_{i<n+1}(-1)^{i}/\\iota(i!)$, with the term at $i = 0$ equal to $1$ and $D_0 = 1$"
-status: draft
+status: published
 origin: session
 deps: [def-the-derangement-number, thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial,
@@ -18,6 +18,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

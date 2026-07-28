@@ -2,7 +2,7 @@
 id: thm-hessenberg
 kind: theorem
 title: "Hessenberg: $\\kappa \\otimes \\kappa = \\kappa$ for every infinite cardinal $\\kappa$, proved in ZF from the canonical well-order of $\\kappa \\times \\kappa$"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-well-order, thm-transfinite-induction, thm-mostowski-collapse, def-order-isomorphism, def-initial-segment, lem-omega-least-limit-ordinal, def-limit-ordinal, def-equinumerous, def-injection-surjection-bijection, thm-n-cross-n-countable, def-countable]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\kappa \\otimes \\kappa = \\kappa$, in ZF"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

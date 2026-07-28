@@ -7,18 +7,19 @@ origin: session
 deps: [def-metric-space, def-metric-topology, def-metric-ball, def-metric-compactness,
        lem-compactness-is-intrinsic, def-isometry-and-metric-embedding,
        def-neighbourhood-top, def-metrizable-space, def-topological-space,
-       thm-heine-borel-rn]
+       thm-heine-borel-rn, thm-compactness-agrees-with-metric-compactness]
 justified_by: []
 aliases: [def-locally-compact-metric]
 landmark: true
 short: "locally compact metric space"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -69,28 +70,29 @@ being vacuous.
 
 ## Remarks
 
-- **Dictionary: this is the metric special case of a notion this library does not
-  yet define in general.** *Locally compact* is ordinarily defined for an
-  arbitrary topological space, by the same words: every point has a compact
-  neighbourhood, compactness there being the open-cover condition for arbitrary
-  topological spaces. This library has no general topological compactness at this
-  point in the reading order — the only compactness available is
-  [[def-metric-compactness]], for metric spaces — so the definition above is
-  stated for a metric space and for nothing else, and it never claims to be the
-  general one.
+- **Dictionary: this was the metric special case of a notion this library did
+  not yet define in general, and now does.** *Locally compact* is ordinarily
+  defined for an arbitrary topological space, by the same words: every point has
+  a compact neighbourhood, compactness there being the open-cover condition for
+  arbitrary topological spaces. General topological compactness is now available
+  at this point in the reading order, alongside the metric notion
+  ([[def-metric-compactness]]) this page uses, so the definition above is stated
+  for a metric space and for nothing else, and never claimed to be the general
+  one.
 
-  **The agreement, when the general notion arrives, will be immediate and not a
-  theorem about metrics.** A metric space is a topological space whose topology
-  is $\mathcal{T}_d$ ([[def-metrizable-space]]), and *the metric topology is the
-  topology*: the open sets of $(X,d)$ used by [[def-metric-compactness]] and by
+  **The agreement is immediate and not a theorem about metrics.** A metric space
+  is a topological space whose topology is $\mathcal{T}_d$
+  ([[def-metrizable-space]]), and *the metric topology is the topology*: the
+  open sets of $(X,d)$ used by [[def-metric-compactness]] and by
   [[lem-compactness-is-intrinsic]] are literally the members of $\mathcal{T}_d$.
   So a subset of $X$ is compact in the metric sense exactly when it is compact in
   the topological sense, and "has a compact neighbourhood" means the same thing on
-  both sides. The page that defines compactness for arbitrary topological spaces
-  carries the obligation to record that agreement explicitly, exactly as
+  both sides. This agreement is now recorded explicitly, exactly as
   [[def-metrizable-space]] records the agreement of the metric and topological
-  notions of neighbourhood, closure, convergence and continuity. Stating this here
-  is what stops the library from acquiring two unrelated notions under one name.
+  notions of neighbourhood, closure, convergence and continuity: see
+  [[thm-compactness-agrees-with-metric-compactness]], which discharges the
+  standing obligation this Remark used to record. Stating both here and there is
+  what stops the library from acquiring two unrelated notions under one name.
 
 - **What local compactness is used for on this page.** Two things, and only two:
   continuity of the evaluation map, and the converse half of the exponential law.

@@ -2,7 +2,7 @@
 id: thm-compactness-under-continuous-maps
 kind: theorem
 title: "A continuous image of a compact space is compact; a continuous real-valued map on a nonempty compact space attains a maximum and a minimum; and a continuous bijection from a compact space to a Hausdorff space is a homeomorphism"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-continuous-map-top, thm-continuity-characterisations-top, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-complete-ordered-field, def-real-order, def-max-min, lem-finite-set-has-max, def-interval, def-subspace-topology-top, def-topological-space, lem-finite-choice]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: true
 short: "continuous images, extreme values, homeomorphism"
 proof_strategy: direct
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-a-uniformly-approximable-real-valued-map-is-continuous
 kind: lemma
 title: "If for every $\\varepsilon > 0$ some continuous $g : X \\to \\mathbb{R}$ satisfies $\\lvert f(x) - g(x)\\rvert < \\varepsilon$ for all $x$, then $f$ is continuous; in particular a uniformly convergent series of continuous real functions has a continuous sum"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-continuous-map-top, thm-continuity-characterisations-top,
        def-topology-basis-subbasis, lem-real-line-is-a-metric-space, def-metrizable-space,
@@ -17,6 +17,12 @@ short: "uniform approximation by continuous functions"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

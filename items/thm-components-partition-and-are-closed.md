@@ -2,7 +2,7 @@
 id: thm-components-partition-and-are-closed
 kind: theorem
 title: "The components of a space are its maximal connected subsets, they partition it, and each of them is closed"
-status: draft
+status: published
 origin: session
 deps: [def-connected-component-and-quasicomponent, thm-unions-of-connected-sets,
        thm-closure-of-a-connected-set, def-connected-space, def-subspace-topology-top,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

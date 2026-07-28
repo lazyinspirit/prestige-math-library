@@ -2,7 +2,7 @@
 id: ex-every-closed-subset-of-the-line-is-a-zero-set
 kind: example
 title: "Every closed subset of $\\mathbb{R}$ is a zero set and a $G_\\delta$, as the perfect-normality criterion predicts"
-status: draft
+status: published
 origin: session
 deps: [thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set,
        thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-zero-sets-and-cozero-sets,
@@ -15,6 +15,12 @@ short: "closed subsets of $\\mathbb{R}$ are zero sets"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

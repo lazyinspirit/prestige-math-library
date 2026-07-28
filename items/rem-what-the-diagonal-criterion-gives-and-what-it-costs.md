@@ -2,7 +2,7 @@
 id: rem-what-the-diagonal-criterion-gives-and-what-it-costs
 kind: remark
 title: "Why the criterion is about the product topology, and the choice cost of the compact separation lemmas"
-status: draft
+status: published
 origin: session
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-product-topology, thm-product-universal-property,
@@ -15,6 +15,12 @@ landmark: false
 short: "what the diagonal criterion needs, and what the separation arguments cost"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

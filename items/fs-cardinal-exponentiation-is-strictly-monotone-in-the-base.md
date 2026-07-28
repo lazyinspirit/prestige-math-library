@@ -2,7 +2,7 @@
 id: fs-cardinal-exponentiation-is-strictly-monotone-in-the-base
 kind: false-statement
 title: "FALSE: $\\kappa < \\lambda$ implies $\\kappa^{\\mu} < \\lambda^{\\mu}$"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-hessenberg, thm-cardinal-power-set-and-cantor, lem-successor-cardinal-exists, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-aleph-and-beth-hierarchies, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-axiom-of-choice, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_0^{\\aleph_0} = \\aleph_1^{\\aleph_0} = 2^{\\aleph_0}$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

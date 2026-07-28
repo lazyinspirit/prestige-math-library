@@ -2,7 +2,7 @@
 id: ex-counting-functions-and-subsets-of-the-continuum
 kind: example
 title: "$\\aleph_0^{\\aleph_0} = 2^{\\aleph_0}$ and $\\lvert \\mathbb{R}^{\\mathbb{R}} \\rvert = 2^{2^{\\aleph_0}}$, computed from the exponent laws and Hessenberg"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinal-operations-are-well-defined, thm-hessenberg, cor-cardinal-absorption, thm-cardinal-power-set-and-cantor, ex-the-cardinality-of-the-continuum, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-aleph-and-beth-hierarchies, def-axiom-of-choice, thm-well-ordering-theorem, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_0^{\\aleph_0} = 2^{\\aleph_0}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

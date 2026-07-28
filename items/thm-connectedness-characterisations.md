@@ -2,7 +2,7 @@
 id: thm-connectedness-characterisations
 kind: theorem
 title: "For a topological space the following agree: no separation exists, the only clopen subsets are $\\varnothing$ and $X$, and every continuous map to the two-point discrete space is constant"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, def-topological-space, def-standard-topologies,
        def-continuous-map-top, thm-continuity-characterisations-top,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

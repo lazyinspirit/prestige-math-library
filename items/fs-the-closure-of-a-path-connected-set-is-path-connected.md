@@ -2,7 +2,7 @@
 id: fs-the-closure-of-a-path-connected-set-is-path-connected
 kind: false-statement
 title: "FALSE: the closure of a path-connected subspace is path-connected"
-status: draft
+status: published
 origin: session
 deps: [lem-the-oscillating-zigzag-curve, def-path-connected, thm-closure-of-a-connected-set,
        def-connected-space, def-subspace-topology-top, def-interior-closure-boundary-top]
@@ -13,6 +13,12 @@ short: "the closure of a path-connected set need not be path-connected"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

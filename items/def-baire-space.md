@@ -2,7 +2,7 @@
 id: def-baire-space
 kind: definition
 title: "Baire space: a topological space in which every countable intersection of dense open subsets is dense"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-dense-top, def-sequence, def-interior-closure-boundary-top, def-natural-numbers]
 justified_by: []
@@ -11,11 +11,17 @@ external_refs: [rem-baire-category-choice-strength]
 landmark: true
 short: "Baire space"
 verification:
-  precheck: n
+  precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-29/a
+    date: 2026-07-29
 sources:
   scraped: []
   references:

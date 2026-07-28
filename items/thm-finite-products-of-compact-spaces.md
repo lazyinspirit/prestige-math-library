@@ -2,7 +2,7 @@
 id: thm-finite-products-of-compact-spaces
 kind: theorem
 title: "A product of finitely many compact spaces is compact in the product topology"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, lem-tube-lemma-for-a-compact-factor, def-product-topology, thm-product-universal-property, thm-induction-principle, lem-compactness-of-a-subspace-is-ambient, thm-compactness-under-continuous-maps, lem-continuity-is-local-and-pastes, def-continuous-map-top, thm-continuity-characterisations-top, def-homeomorphism-and-open-maps, lem-homeomorphism-criteria, def-natural-numbers, def-topological-space, lem-finite-choice]
 justified_by: []
@@ -12,6 +12,12 @@ short: "finite products of compacts are compact"
 proof_strategy: induction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

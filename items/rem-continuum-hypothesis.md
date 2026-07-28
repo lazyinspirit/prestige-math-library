@@ -12,15 +12,11 @@ short: "CH is independent of ZFC"
 verification:
   precheck: n/a
   verified:
-    model: claude-opus-5
+    model: claude-sonnet-5
     verdict: certify
-    date: 2026-07-26
+    date: 2026-07-29
     scope: page
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -76,14 +72,14 @@ of ZFC, which cannot be proved inside ZFC.
 **What this page has not proved.** CH is usually stated about $\mathbb{R}$: that
 every uncountable set of reals is equinumerous with $\mathbb{R}$. That form is
 equivalent to the one above only once one knows
-$\mathbb{R} \approx \mathcal{P}(\mathbb{N})$, and **this library has not proved
-that**. The natural proof identifies a real in $[0,1]$ with its binary expansion,
-that is, with a subset of $\mathbb{N}$, and binary expansions are infinite series,
-which are developed much later. The two uncountability results on this page are
-therefore genuinely separate facts here: $\mathcal{P}(\mathbb{N})$ is uncountable
-by the diagonal argument, and $\mathbb{R}$ is uncountable by nested intervals,
-and no bridge between them has been built. Nothing on this page depends on that
-bridge.
+$\mathbb{R} \approx \mathcal{P}(\mathbb{N})$, which this library **now** proves,
+in ZF, on a later page. At this point in the reading order, though, the two
+uncountability results on this page are
+still genuinely separate facts: $\mathcal{P}(\mathbb{N})$ is uncountable by the
+diagonal argument, and $\mathbb{R}$ is uncountable by nested intervals, and the
+bridge between them is not available here — it needs binary expansions, which
+are developed much later, on the same later page. Nothing on this page depends
+on that bridge.
 
 **None of this affects the theorems proved here.** Countability of $\mathbb{Q}$,
 uncountability of $\mathbb{R}$ and of the irrationals, and Cantor's theorem are

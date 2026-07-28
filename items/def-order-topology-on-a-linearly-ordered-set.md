@@ -2,7 +2,7 @@
 id: def-order-topology-on-a-linearly-ordered-set
 kind: definition
 title: "The order topology of a linearly ordered set, with the open rays as a subbasis; order-convex sets, order-density, the least upper bound property, and linear continua"
-status: draft
+status: published
 origin: session
 deps: [def-partial-order, def-topological-space, def-topology-basis-subbasis, thm-basis-criterion,
        def-subspace-topology-top, def-interval, def-upper-bound, def-maximal-element,
@@ -16,6 +16,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-local-compactness-is-hereditary
 kind: false-statement
 title: "FALSE: every subspace of a locally compact space is locally compact"
-status: draft
+status: published
 origin: session
 deps: [def-locally-compact-space, def-compact-space, def-hereditary-property, def-subspace-topology-top, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, lem-q-and-irrationals-dense-r, lem-of-q-dense, def-metrizable-space, def-metric-topology, lem-real-line-is-a-metric-space, def-neighbourhood-top, def-interval, def-topological-space, def-interior-closure-boundary-top, thm-closure-characterisation-top]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "FALSE: local compactness is hereditary"
 proof_strategy: contradiction
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

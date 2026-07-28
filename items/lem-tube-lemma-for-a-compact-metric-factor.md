@@ -6,7 +6,8 @@ status: published
 origin: session
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-product-topology,
        def-metric-topology, def-metrizable-space, def-topological-space,
-       def-topology-basis-subbasis, thm-basis-criterion, def-metric-space]
+       def-topology-basis-subbasis, thm-basis-criterion, def-metric-space,
+       lem-tube-lemma-for-a-compact-factor]
 justified_by: []
 aliases: [lem-tube-lemma]
 landmark: true
@@ -14,11 +15,12 @@ short: "tube lemma (compact metric factor)"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -88,4 +90,4 @@ to be selected afterwards.
 
 - **The hypothesis cannot be moved to the other factor.** With $K$ replaced by a non-compact set the conclusion fails: the region under the graph of a positive function tending to $0$ contains a whole slice and no tube around it. Nothing on this page needs that witness, and it is not constructed here.
 
-- **The general tube lemma, for a compact factor in an arbitrary topological product, is not available in this library at this point in the reading order,** because compactness is defined here only for metric spaces ([[def-metric-compactness]]). The proof above is the general one; only the hypothesis is narrowed.
+- **The general tube lemma, for a compact factor in an arbitrary topological product, is now available in this library, on an earlier page** ([[lem-tube-lemma-for-a-compact-factor]]). The proof above is the metric special case of that general lemma, narrowed to a metric factor $X$ and written independently of it: nothing above cites the general statement, and nothing needs to, since compactness of a metric-space subset is the same notion under either reading ([[lem-compactness-is-intrinsic]]).

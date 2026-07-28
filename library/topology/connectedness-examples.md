@@ -1,7 +1,7 @@
 ---
 page: connectedness-examples
 title: "Connectedness: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-convex-subsets-of-rn-are-path-connected,
            ex-connectedness-of-the-standard-topologies,

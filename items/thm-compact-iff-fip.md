@@ -2,7 +2,7 @@
 id: thm-compact-iff-fip
 kind: theorem
 title: "A space is compact exactly when every family of closed subsets with the finite intersection property has nonempty intersection"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-topological-space, def-finite-intersection-property, def-filter, lem-fip-generates-filter]
 justified_by: []
@@ -12,6 +12,12 @@ short: "compact iff the FIP condition"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

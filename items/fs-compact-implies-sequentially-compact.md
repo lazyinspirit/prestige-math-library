@@ -2,7 +2,7 @@
 id: fs-compact-implies-sequentially-compact
 kind: false-statement
 title: "FALSE: every compact space is sequentially compact"
-status: draft
+status: published
 origin: session
 deps: [thm-tychonoff, def-compact-space, def-compactness-variants, def-product-topology, def-standard-topologies, def-sequence-convergence-top, def-sequence, lem-index-map-grows, def-topological-space, def-natural-numbers]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "FALSE: compact implies sequentially compact"
 proof_strategy: contradiction
 verification:
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

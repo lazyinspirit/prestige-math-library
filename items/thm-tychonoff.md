@@ -2,7 +2,7 @@
 id: thm-tychonoff
 kind: theorem
 title: "Tychonoff's theorem: an arbitrary product of compact spaces is compact in the product topology, assuming the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [thm-alexander-subbase-lemma, def-compact-space, def-product-topology, def-topology-basis-subbasis, def-axiom-of-choice, thm-zorn, def-topological-space]
 justified_by: []
@@ -13,6 +13,12 @@ short: "Tychonoff's theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-a-urysohn-function-on-the-real-line
 kind: example
 title: "A Urysohn function for $(-\\infty, 0]$ and $[1, \\infty)$ in $\\mathbb{R}$, written down and checked against the definition"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, def-normal-and-t4-spaces, thm-metric-spaces-are-completely-normal,
        def-continuity-real, thm-algebra-of-continuous-functions, def-interval,
@@ -14,6 +14,12 @@ short: "an explicit Urysohn function on $\\mathbb{R}$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: connectedness
 title: "Connectedness"
-status: draft
+status: published
 items: [def-order-topology-on-a-linearly-ordered-set, def-connected-space,
         thm-connectedness-characterisations, lem-connected-subsets-and-separated-sets,
         cor-connected-subsets-of-the-line, thm-continuous-image-of-a-connected-space,

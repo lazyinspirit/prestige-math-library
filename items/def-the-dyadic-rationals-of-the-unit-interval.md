@@ -2,7 +2,7 @@
 id: def-the-dyadic-rationals-of-the-unit-interval
 kind: definition
 title: "The dyadic rationals of $[0,1]$, their finite levels $D_n$, and their density in $[0,1]$"
-status: draft
+status: published
 origin: session
 deps: [def-interval, def-integer-power, def-canonical-natural, def-nat-power,
        cor-archimedean-reciprocal, def-ordered-field, def-natural-numbers,
@@ -15,6 +15,12 @@ landmark: true
 short: "dyadic rationals of $[0,1]$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal
 kind: corollary
 title: "Two continuous maps into a Hausdorff space that agree on a dense subset are equal"
-status: draft
+status: published
 origin: session
 deps: [cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed,
        def-dense-top, thm-closure-characterisation-top, def-hausdorff-space,
@@ -14,6 +14,12 @@ short: "maps into a Hausdorff space are determined on a dense set"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

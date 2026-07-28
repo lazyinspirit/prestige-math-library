@@ -2,7 +2,7 @@
 id: thm-path-connected-implies-connected
 kind: theorem
 title: "Every path-connected space is connected, and every path component lies inside a component"
-status: draft
+status: published
 origin: session
 deps: [def-path-connected, def-connected-space, cor-connected-subsets-of-the-line,
        thm-continuous-image-of-a-connected-space, thm-unions-of-connected-sets,
@@ -14,6 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

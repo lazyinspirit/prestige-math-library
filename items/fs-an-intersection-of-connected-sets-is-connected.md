@@ -2,7 +2,7 @@
 id: fs-an-intersection-of-connected-sets-is-connected
 kind: false-statement
 title: "FALSE: the intersection of two connected subspaces is connected"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, def-path-connected, thm-path-connected-implies-connected,
        thm-unions-of-connected-sets, lem-connected-subsets-and-separated-sets,
@@ -18,6 +18,12 @@ short: "an intersection of two connected sets need not be connected"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

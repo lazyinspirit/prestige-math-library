@@ -2,7 +2,7 @@
 id: lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function
 kind: lemma
 title: "If $(U_r)_{r \\in D}$ are open with $\\overline{U_r} \\subseteq U_s$ whenever $r < s$ and $U_1 = X$, then $x \\mapsto \\inf\\{ r \\in D : x \\in U_r \\}$ is a continuous map $X \\to [0,1]$, and no choice principle is used"
-status: draft
+status: published
 origin: session
 deps: [def-the-dyadic-rationals-of-the-unit-interval, def-topological-space,
        def-continuous-map-top, thm-continuity-characterisations-top,
@@ -17,6 +17,12 @@ short: "a dyadic open scale defines a continuous function"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

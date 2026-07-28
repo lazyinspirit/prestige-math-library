@@ -2,7 +2,7 @@
 id: def-the-derangement-number
 kind: definition
 title: "The derangement number $D_n$: the number of bijections of an $n$-element set with no fixed point"
-status: draft
+status: published
 origin: session
 deps: [thm-number-of-bijections-of-a-finite-set, def-finite-cardinality, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-natural-numbers, def-factorial-and-falling-factorial]
@@ -11,6 +11,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-the-oscillating-zigzag-curve
 kind: lemma
 title: "The graph of the piecewise-linear map oscillating between $0$ and $1$ on the intervals $[1/(n+2), 1/(n+1)]$ is path-connected, its closure adds the segment $\\{0\\} \\times [0,1]$, and that closure is connected, is not path-connected because no path joins the segment to the graph, and is not locally connected"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, def-path-connected, def-locally-connected, def-homeomorphism-and-open-maps,
        thm-closure-of-a-connected-set, thm-continuous-image-of-a-connected-space,
@@ -22,6 +22,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

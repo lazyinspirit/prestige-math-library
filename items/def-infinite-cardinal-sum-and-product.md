@@ -2,7 +2,7 @@
 id: def-infinite-cardinal-sum-and-product
 kind: definition
 title: "The sum $\\sum_{i \\in I} \\kappa_i$ and the product $\\prod_{i \\in I} \\kappa_i$ of an indexed family of cardinals, defined under the Axiom of Choice"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, def-injection-surjection-bijection]
 justified_by: []
@@ -11,6 +11,12 @@ landmark: false
 short: "$\\sum_{i} \\kappa_i$, $\\prod_{i} \\kappa_i$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

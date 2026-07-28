@@ -9,7 +9,8 @@ deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-normal-and-t4-spaces, def-completely-normal-and-perfectly-normal-spaces,
        def-zero-sets-and-cozero-sets, thm-the-separation-implication-chain,
        thm-perfectly-normal-implies-completely-normal, def-metrizable-space,
-       def-countable-choice, rem-topology-conventions]
+       def-countable-choice, rem-topology-conventions,
+       def-compact-space, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
 external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
 aliases: []
@@ -17,11 +18,12 @@ landmark: false
 short: "separation-axiom conventions and the missing arrow"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -131,11 +133,14 @@ though the general arrow from perfect to complete normality does.
 ## 5. What this page deliberately does not contain
 
 - **Compactness.** "A compact Hausdorff space is normal" is the standard first
-  example of a normal space, and it is absent here because this library has no
-  general topological compactness at this point: the only compactness on disk is
-  the metric notion, and the general one belongs to a page below this one in the
-  reading order. What would license the statement is that page, plus a home for
-  it above the present one.
+  example of a normal space, and it is absent here for a narrower reason than
+  before: general topological compactness itself **is** now available at this
+  point in the reading order ([[def-compact-space]]), and the two separation
+  lemmas the proof needs are proved there too
+  ([[thm-compact-subset-of-a-hausdorff-space-is-closed]]). What is still absent
+  is the packaged statement itself, which is homed on a page above the present
+  one. What would license restating it here is a home for that packaging above
+  this page, not below it.
 - **A regular space that is not normal.** Every witness reachable from this
   page's material needs either cardinal arithmetic or the hereditary and
   productive behaviour of regularity, neither of which is available here. Rather

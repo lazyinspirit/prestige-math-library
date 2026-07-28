@@ -1,7 +1,7 @@
 ---
 page: cardinal-arithmetic-and-cofinality
 title: "Cardinal Arithmetic, Cofinality and the Alephs"
-status: draft
+status: published
 items: [lem-cardinality-of-a-well-orderable-set,
         lem-cardinal-operations-are-well-defined,
         def-cardinal-arithmetic,

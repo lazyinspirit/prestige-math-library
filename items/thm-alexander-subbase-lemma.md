@@ -2,7 +2,7 @@
 id: thm-alexander-subbase-lemma
 kind: theorem
 title: "Alexander's subbase lemma: if every cover by members of a fixed subbasis has a finite subcover then the space is compact; the proof is an application of Zorn's lemma"
-status: draft
+status: published
 origin: session
 deps: [def-compact-space, def-topology-basis-subbasis, thm-basis-criterion, thm-zorn, cor-ac-iff-zorn, def-axiom-of-choice, def-chain, def-maximal-element, def-partial-order, def-upper-bound, def-topological-space, lem-finite-choice, thm-induction-principle]
 justified_by: []
@@ -12,6 +12,12 @@ short: "Alexander subbase lemma"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

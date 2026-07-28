@@ -2,7 +2,7 @@
 id: fs-cardinal-addition-is-cancellative
 kind: false-statement
 title: "FALSE: $\\kappa \\oplus \\mu = \\lambda \\oplus \\mu$ implies $\\kappa = \\lambda$"
-status: draft
+status: published
 origin: session
 deps: [def-cardinal-arithmetic, cor-cardinal-absorption, lem-cardinal-arithmetic-basic-laws, def-aleph-and-beth-hierarchies, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\aleph_0 \\oplus \\aleph_0 = 1 \\oplus \\aleph_0$"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

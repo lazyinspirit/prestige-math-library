@@ -2,7 +2,7 @@
 id: thm-inclusion-exclusion
 kind: theorem
 title: "Inclusion and exclusion: $\\iota\\lvert\\bigcup_{i \\in I} A_i\\rvert = \\sum_{\\varnothing \\ne J \\subseteq I}(-1)^{\\lvert J\\rvert + 1}\\,\\iota\\lvert A_J\\rvert$, together with the complementary form counting the elements in none of the $A_i$"
-status: draft
+status: published
 origin: session
 deps: [def-a-sieve-family-and-its-intersections, lem-a-double-sum-over-finite-index-sets-may-be-interchanged,
        thm-sum-rule, def-sum-over-a-finite-index-set, cor-binomial-theorem-consequences,
@@ -16,6 +16,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

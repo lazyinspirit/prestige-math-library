@@ -2,7 +2,7 @@
 id: cor-urysohns-lemma-closes-the-separation-chain
 kind: corollary
 title: "Under dependent choice a normal $T_1$ space is completely regular, so $T_4 \\Rightarrow T_{3\\frac{1}{2}}$, and together with the implications already proved this is the whole classical chain"
-status: draft
+status: published
 origin: session
 deps: [thm-urysohn-lemma, def-normal-and-t4-spaces, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, def-completely-regular-and-tychonoff-spaces,
@@ -14,6 +14,12 @@ short: "$T_4 \\Rightarrow T_{3\\frac12}$ (DC)"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

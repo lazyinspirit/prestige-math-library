@@ -12,11 +12,12 @@ landmark: true
 short: "normal space, $T_4$ space"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -69,12 +70,12 @@ this page, the first as a false statement and both on the companion page.
   Sierpinski space on the companion page, which is normal and not regular.
   Whether *regularity* implies normality is a question this page leaves open: any
   witness reachable from the material here would need cardinal arithmetic or the
-  hereditary behaviour of regularity. Neither is supplied by this page's declared
-  prerequisites: the planned page carrying cardinal arithmetic and cofinality sits
-  *below* this one and is not yet built, and the hereditary and productive
-  behaviour of the separation axioms is planned for a page *above* this one. So
-  nothing above asserts an answer and no false statement asserting one is planted
-  here ([[rem-separation-axiom-conventions]]).
+  hereditary behaviour of regularity. This page's own prerequisites still supply
+  neither: cardinal arithmetic and cofinality is now built, but *below* this
+  one, and nothing here draws on it; the hereditary and productive behaviour of
+  the separation axioms is planned for a page *above* this one and remains
+  unbuilt. So nothing above asserts an answer and no false statement asserting
+  one is planted here ([[rem-separation-axiom-conventions]]).
 
 - **Normality is the axiom that behaves worst**, and the companion page shows
   one symptom: the deleted Tychonoff plank, a subspace of a product of two

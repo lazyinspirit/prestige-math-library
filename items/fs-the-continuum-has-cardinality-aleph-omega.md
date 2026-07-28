@@ -2,7 +2,7 @@
 id: fs-the-continuum-has-cardinality-aleph-omega
 kind: false-statement
 title: "FALSE: $2^{\\aleph_0} = \\aleph_\\omega$"
-status: draft
+status: published
 origin: session
 deps: [cor-cofinality-of-a-cardinal-power, thm-regularity-of-the-alephs, def-cofinality, def-aleph-and-beth-hierarchies, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-axiom-of-choice, def-cardinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -12,6 +12,12 @@ short: "$\\operatorname{cf}(2^{\\aleph_0}) > \\aleph_0 = \\operatorname{cf}(\\al
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

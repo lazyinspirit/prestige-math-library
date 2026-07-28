@@ -2,7 +2,7 @@
 id: ex-convex-subsets-of-rn-are-path-connected
 kind: example
 title: "Every convex subset of $\\mathbb{R}^n$, in particular every ball and $\\mathbb{R}^n$ itself, is path-connected and hence connected"
-status: draft
+status: published
 origin: session
 deps: [def-path-connected, thm-path-connected-implies-connected, def-connected-space,
        lem-product-topology-on-rn, def-product-topology, thm-product-universal-property,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

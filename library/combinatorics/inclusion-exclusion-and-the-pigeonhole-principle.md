@@ -1,7 +1,7 @@
 ---
 page: inclusion-exclusion-and-the-pigeonhole-principle
 title: "Inclusion–Exclusion, the Pigeonhole Principle and Double Counting"
-status: draft
+status: published
 items: [lem-a-double-sum-over-finite-index-sets-may-be-interchanged,
         def-a-finite-incidence-relation-and-its-fibres, thm-double-counting,
         cor-the-averaging-principle, def-the-ceiling-of-a-quotient-of-naturals,

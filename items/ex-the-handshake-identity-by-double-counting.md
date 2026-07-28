@@ -2,7 +2,7 @@
 id: ex-the-handshake-identity-by-double-counting
 kind: example
 title: "For a finite symmetric irreflexive relation the sum of the neighbour counts is twice the number of unordered related pairs"
-status: draft
+status: published
 origin: session
 deps: [thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        thm-two-element-subsets-count, def-binomial-coefficient,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

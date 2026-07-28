@@ -2,7 +2,7 @@
 id: cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed
 kind: corollary
 title: "For continuous $f, g : Z \\to Y$ with $Y$ Hausdorff the agreement set $\\{ z \\in Z : f(z) = g(z) \\}$ is closed in $Z$"
-status: draft
+status: published
 origin: session
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, lem-the-diagonal-map-is-an-embedding,
        def-the-diagonal-of-a-space, def-hausdorff-space, def-continuous-map-top,
@@ -14,6 +14,12 @@ short: "the agreement set of two maps into a Hausdorff space is closed"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

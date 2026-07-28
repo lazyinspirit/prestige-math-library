@@ -2,7 +2,7 @@
 id: lem-cofinality-is-well-defined
 kind: lemma
 title: "For every ordinal $\\alpha$ there is a least ordinal $\\beta$ admitting a map $\\beta \\to \\alpha$ with cofinal range, and that map may always be taken strictly increasing"
-status: draft
+status: published
 origin: session
 deps: [def-cofinal-subset-of-an-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-transfinite-recursion, def-well-order, def-injection-surjection-bijection]
 justified_by: []
@@ -12,6 +12,12 @@ short: "the least cofinal length exists"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

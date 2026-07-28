@@ -2,7 +2,7 @@
 id: fs-a-bonferroni-truncation-is-exact
 kind: false-statement
 title: "FALSE: truncating the sieve at a fixed depth of at least two gives the exact size of the union"
-status: draft
+status: published
 origin: session
 deps: [thm-the-bonferroni-inequalities, def-a-sieve-family-and-its-intersections,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
@@ -14,6 +14,12 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-compactness-in-the-standard-topologies
 kind: example
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies placed in the compactness hierarchy"
-status: draft
+status: published
 origin: session
 deps: [lem-of-naturals-positive, def-compact-space, def-compactness-variants, def-standard-topologies, def-topological-space, lem-compactness-of-a-subspace-is-ambient, def-countable, thm-r-uncountable, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, def-subspace-topology-top, lem-subset-of-countable, def-natural-numbers, def-canonical-natural]
 justified_by: []
@@ -12,6 +12,12 @@ short: "compactness of the standard topologies"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

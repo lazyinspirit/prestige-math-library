@@ -2,7 +2,7 @@
 id: cex-a-closed-graph-without-continuity
 kind: counterexample
 title: "Refuted: a function into a Hausdorff space whose graph is closed is continuous. The function equal to $1/x$ off $0$ and to $0$ at $0$ has a closed graph, is discontinuous at $0$ alone, and has a Hausdorff codomain"
-status: draft
+status: published
 origin: session
 deps: [fs-a-function-with-closed-graph-is-continuous,
        thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain,
@@ -18,6 +18,12 @@ short: "closed graph, Hausdorff codomain, still discontinuous"
 proof_strategy: constructive
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

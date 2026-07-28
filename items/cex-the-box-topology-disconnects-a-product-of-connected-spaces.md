@@ -2,7 +2,7 @@
 id: cex-the-box-topology-disconnects-a-product-of-connected-spaces
 kind: counterexample
 title: "$\\mathbb{R}^{\\mathbb{N}}$ in the box topology is disconnected, the bounded and the unbounded sequences forming a separation, although every factor is connected and the product topology is connected"
-status: draft
+status: published
 origin: session
 deps: [thm-product-of-connected-spaces, def-connected-space, thm-connectedness-characterisations,
        def-product-topology, thm-box-finer-than-product, def-topological-space,
@@ -15,6 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

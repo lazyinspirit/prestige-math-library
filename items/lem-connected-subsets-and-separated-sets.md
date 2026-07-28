@@ -2,7 +2,7 @@
 id: lem-connected-subsets-and-separated-sets
 kind: lemma
 title: "A subspace $A \\subseteq X$ is disconnected exactly when $A = A_1 \\cup A_2$ with $A_1, A_2$ nonempty and separated in $X$, which is the criterion this library already uses on the real line"
-status: draft
+status: published
 origin: session
 deps: [def-connected-space, def-subspace-topology-top, thm-subspace-closure-and-interior,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
@@ -13,6 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

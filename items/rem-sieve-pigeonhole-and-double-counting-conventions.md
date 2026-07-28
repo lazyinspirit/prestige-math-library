@@ -2,7 +2,7 @@
 id: rem-sieve-pigeonhole-and-double-counting-conventions
 kind: remark
 title: "The conventions this page fixes: the empty intersection, where the counts live, the first index of every sum, and what the declared prerequisites do not supply"
-status: draft
+status: published
 origin: session
 deps: [def-a-sieve-family-and-its-intersections, thm-inclusion-exclusion,
        thm-the-strong-pigeonhole-principle, def-the-ceiling-of-a-quotient-of-naturals,
@@ -15,6 +15,12 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  verified:
+    model: claude-fable-5
+    verdict: certify
+    date: 2026-07-29
+    scope: page
+    delegated_by: owner
   judge:
     model: z-ai/glm-5.2
     verdict: pass

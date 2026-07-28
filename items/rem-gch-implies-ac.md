@@ -7,14 +7,15 @@ origin: session
 proved_here: false
 deps: [rem-independence-of-ch-and-gch]
 justified_by: []
-forward_refs: [def-axiom-of-choice, thm-hartogs, rem-continuum-hypothesis]
+forward_refs: [def-axiom-of-choice, thm-hartogs, rem-continuum-hypothesis,
+               lem-cardinality-of-a-well-orderable-set]
 aliases: []
 landmark: false
 short: "GCH is a choice principle in disguise"
 verification:
   precheck: n/a
   sources_checked:
-    date: 2026-07-26
+    date: 2026-07-29
     scope: citations
     by: session-audit
 sources:
@@ -45,16 +46,23 @@ $\mathcal{P}(\mathcal{P}(A))$, to force $A$ into bijection with an ordinal.
 
 ## Remarks
 
-- **Not proved in this library.** The proof needs cardinal arithmetic without
-  choice, in particular the behaviour of $A + A$ and of $\aleph(A)$ under
-  iterated power sets, and none of that is developed here.
+- **Not proved in this library.** Choice-free cardinal arithmetic is now
+  developed elsewhere in the library — [[lem-cardinality-of-a-well-orderable-set]],
+  Hessenberg's theorem and the successor-cardinal lemma between them give
+  $A + A$ and the successor-cardinal step for a well-orderable $A$ — but that is
+  not enough by itself: the argument here needs the comparison of $\aleph(A)$
+  against *iterated power sets of an arbitrary, not-yet-well-ordered* $A$, which
+  is a genuinely different and harder computation, and remains undeveloped.
 
-- **What would prove it.** Choice-free cardinal arithmetic on top of the Hartogs
-  construction. The one ingredient the library already has in some form is
-  [[thm-hartogs]]: for every set there is a least ordinal that does not inject
-  into it, proved with no choice at all. Everything after that, the comparison
-  of $\aleph(A)$ with iterated power sets and the three applications of GCH, is
-  not in this library.
+- **What would prove it.** The choice-free cardinal arithmetic the library now
+  has, on top of the Hartogs construction, gets partway there. The ingredients
+  the library already has are [[thm-hartogs]] (for every set there is a least
+  ordinal that does not inject into it, proved with no choice at all) and,
+  since this build, [[lem-cardinality-of-a-well-orderable-set]], Hessenberg's
+  theorem and the successor-cardinal lemma. What is still missing is the
+  comparison of $\aleph(A)$ with $\mathcal{P}(\mathcal{P}(A))$ and
+  $\mathcal{P}(\mathcal{P}(\mathcal{P}(A)))$ for an arbitrary infinite $A$, which
+  is not in this library.
 
 - **Why it matters here.** It settles the status of GCH as a hypothesis: GCH is
   not a harmless size assumption to be added to ZF, it is at least as strong as

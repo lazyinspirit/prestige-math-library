@@ -1,7 +1,7 @@
 ---
 page: urysohn-lemma-and-tietze
 title: "Urysohn's Lemma and the Tietze Extension Theorem"
-status: draft
+status: published
 items: [def-the-dyadic-rationals-of-the-unit-interval,
         lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
         thm-urysohn-lemma, cor-urysohns-lemma-closes-the-separation-chain,
