@@ -472,6 +472,68 @@ Because these were Remarks corrections on items that had already passed, SCHEMA 
 made them material rewrites and **14 `verification.judge` blocks were deleted**.
 That is the honest state, not the flattering one.
 
+## Step 8 — both batch audits, and what they establish
+
+**Eleven defects fixed across the two batches, and NOT ONE was in a numbered
+proof step.** Every single one was in a Statement paragraph, an Example
+paragraph, a Remark, or a page summary. That is now the sixth consecutive build
+with that signature, and it should govern how step 9 and any future audit spend
+their time.
+
+The two audits also corrected **three of my own counts** — 42 unjudged in batch 2
+(really 56), 108 items in batch 1 (really 105), and 82/105 judged (77 after their
+own repairs). Both recounted from disk rather than trusting the brief, which is
+exactly the instruction and exactly why it is in the brief.
+
+### The defect worth remembering: this build falsified its own claim
+
+`thm-ordinal-arithmetic-agrees-on-omega` (page 245) asserted there is **no
+natural-number exponentiation in this library**, and its Remark said "**when** a
+natural-number exponentiation is built…". `def-nat-power` was minted by **the
+other batch of this same build**, on `finite-counting-and-binomial-coefficients`
+at order **20** — far *earlier* in the reading order — with clauses `m^0 = 1` and
+`m^{n⁺} = m^n · m`, which are literally the ordinal clauses restricted to ω.
+
+Scope-denial decay normally takes a level or two to bite. Here the falsifying
+content arrived **in the same build, from a page nobody thought was related**, and
+the false claim had already propagated into the Statement, the Remark and the page
+summary. The repair is the transferable lesson: the claim is now scoped to **this
+page's declared prerequisites**, which stays true whether or not page 20 ever
+publishes — a scope an author can actually warrant, unlike "the library".
+
+The positional error appeared **four more times**, in the form `LEVELS.md` calls
+decay-resistant but not decay-proof: general compactness described as "developed
+on a **later** page" when its page is order 255 and the citing page is 283. The
+batch contradicted itself — `rem-separation-axiom-conventions` §5 gets it right,
+saying "a page **below** this one".
+
+### The tier inversion, now measured on both batches
+
+Batch 2's auditor read all 56 of its unjudged items end to end; batch 1's read all
+23 of its unjudged items plus 10 judged ones sampled by risk. So **the unjudged
+set has had a careful human-grade reading and much of the judged set has not.** At
+21–24% measured judge precision, the judged items are now the *thinner* tier. Step
+9's risk map follows from this, not from the judge counts.
+
+### Orchestrator decision: the ω-exponentiation seam is NOT closed in this build
+
+Batch 1's auditor observed that, now that `def-nat-power` exists at order 20, the
+agreement of ordinal `m^n` with natural-number `m^n` on ω is provable in one
+induction of the shape of step 4.1, and that page 245 could carry it. It correctly
+**did not add it**, and asked.
+
+**Decision: leave it.** Adding a theorem clause at step 8 would put the build's
+least-reviewed mathematics — no author, no judge, no second reader — into the
+page, and would add a cross-batch page prerequisite (245 gaining
+`finite-counting-and-binomial-coefficients`) plus an item-level edge that
+`depsource` has never been run against. The page is **honest as it stands**: it
+claims agreement for `+` and `·`, closure under all three, and says exactly why
+the exponentiation clause is not carried out here. Accuracy over completeness.
+
+**Recorded as follow-up work for the owner**, and it is the item-level seam that
+step 0 reported as "not computable" — the one edge the six pairs turned out to
+have.
+
 ## Progress
 
 - [x] Step 0 — frontier computed, batched, seams reported
