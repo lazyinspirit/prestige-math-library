@@ -346,7 +346,58 @@ bracket meets a half-open interval: `f^{-1}[[0,a)]`. The wikilink resolver claim
 it and the formula dies. Fix is `f^{-1}[\,[0,a)\,]` or `f^{-1}([0,a))`. Pages
 using `[n]` index sets or `[A]^k` subset notation are equally exposed.
 
-### Pilot ledger — arm 1 of 2 returned
+### PILOT RESULT — both arms returned. Decision: DO NOT switch the bulk.
+
+| measure | **Opus 5** — `hausdorff-via-the-diagonal` | **Sonnet 5** — `urysohn-lemma-and-tietze` |
+|---|---|---|
+| items | 21 | 21 |
+| precheck | all pass or legitimate `n/a` | all pass or legitimate `n/a` |
+| rendercheck | **0 errors**, on a gate its brief never named | **8 errors** initially; 0 after being told to run it |
+| scaffold errors caught | **5**, incl. one scaffolded statement that was outright **false** | **0** mathematical; one documented route change |
+| dep over-declaration | pruned per item unprompted | 6 items pruned, on audit, after the instruction |
+| citations to items it had not read | none — read the parallel pages' Statements | several; **spot-checked by me and accurate** |
+| **tokens** | **~420k** | **~796k (1.9×)** |
+| **wall clock** | **~42 min** | **~63 min (1.5×)** |
+
+**The pre-registered rule: switch only if Sonnet matches on proof defects AND on
+scaffold errors caught.** Proof defects are still blinded until step 9. On
+scaffold errors it is **5 to 0**, so the rule is not met on the half the protocol
+calls the expensive one.
+
+**But the decisive finding is not quality at all — it is cost.** The entire
+premise of the pilot was that Sonnet would be cheaper: authoring was 3.46M of
+~6.5M tokens on `frontier-1`. **Sonnet used 1.9× the tokens and 1.5× the wall
+clock of Opus on an equal-sized pair.** Whatever step 9 finds about proof
+defects, the economic case that motivated the pilot does not survive this
+measurement. Recorded as the primary result.
+
+**Where Sonnet did well, stated because the ledger must not be one-sided.** Its
+gates are clean on every dimension; it responded correctly and completely to two
+mid-flight instructions; it ran a mechanical dep audit and pruned six items
+rather than defending its list; and it **flagged honestly** that it had cited
+five items from `plan-spec` titles alone because their bodies did not yet exist.
+I checked the most load-bearing of those citations against the real Statement
+once the parallel page landed — `thm-one-point-compactification-properties`
+clauses 1, 2 and 4 — and **its citation is accurate**. On the dominant defect
+class of this library, it did not fail.
+
+**One confound I cannot dismiss, and will not pretend to have resolved.**
+"Scaffold errors caught" conflates *errors present* with *errors detected*. Both
+pages were scaffolded by the same agent, so provenance is matched, but 263's
+scaffold happened to contain a false example title and a false counterexample
+witness, and 267's may simply have been cleaner. **Nothing downstream looks for a
+scaffold error the author missed** — that is precisely why the brief says so — so
+this cannot be settled by the step-9 readers and would need me to audit 267's
+scaffold directly. Until that is done, the 5–0 is suggestive, not conclusive; the
+token and wall-clock result is not affected by the confound and stands on its own.
+
+**Recommendation to the owner:** do not switch the bulk. The protocol's fallback
+— Sonnet for B-page examples, definitions and routine proofs, Opus for whatever
+the scaffold flags high-risk — is also not supported by this measurement, because
+the cost advantage it assumes is absent. Re-run the pilot only if a future build
+shows different token behaviour.
+
+### Pilot ledger — arm 1 of 2 returned (superseded by the table above)
 
 Blinding holds: neither author was told it is in a pilot, both briefs are
 structurally identical, and no step-9 reader will be told which is which.
