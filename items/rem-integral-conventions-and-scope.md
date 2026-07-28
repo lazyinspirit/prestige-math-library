@@ -12,10 +12,6 @@ aliases: []
 landmark: false
 short: "conventions and scope of this page"
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []
@@ -48,7 +44,7 @@ $\int_u^v f := -\int_v^u f$ for $u > v$. It is notation, not a new integral: the
 published definition is stated under the standing hypothesis $a < b$ and simply
 says nothing outside it.
 
-Three things on this page take their shape from that convention.
+Several statements on this page take their shape from that convention; three are worth naming, and no claim is made that they are the only ones.
 
 - **Additivity holds for every arrangement of three points.** Claim 3 of
   [[thm-additivity-over-subintervals]] is $\int_u^v f + \int_v^w f = \int_u^w f$
@@ -60,8 +56,9 @@ Three things on this page take their shape from that convention.
   $\varphi$ monotone or injective, and $\varphi(d) < \varphi(c)$ is allowed.
 - **One inequality is not orientation-invariant, and that is a trap.** The
   estimate $\bigl|\int_u^v f\bigr| \le \int_u^v |f|$ of
-  [[cor-integrability-of-absolute-values-products-and-lattice-operations]] holds
-  only for $u \le v$; at $u > v$ its right-hand side is $\le 0$. The form valid
+  [[cor-integrability-of-absolute-values-products-and-lattice-operations]] is
+  guaranteed only for $u \le v$; at $u > v$ its right-hand side is $\le 0$ while
+  its left-hand side is $\ge 0$. The form valid
   for every pair is $\bigl|\int_u^v f\bigr| \le \bigl|\int_u^v |f|\,\bigr|$, and
   that item states both.
 
@@ -82,9 +79,12 @@ Choice does enter through published items that name their own cost, and those
 costs are inherited unchanged, not added to: [[thm-heine-cantor-r]] spends
 countable choice once, and every item here that rests on
 [[thm-continuous-implies-integrable]] or on
-[[thm-composition-with-a-continuous-function]] inherits that single use. The
-choice ledger of the previous page, [[rem-riemann-integral-choice-ledger]],
-records the rest.
+[[thm-composition-with-a-continuous-function]] inherits that single use.
+[[thm-lebesgue-criterion]] spends countable choice once in the half that goes
+from integrability to the discontinuity set being null, and the companion page
+uses that half; that use too is inherited and not new. The choice ledger of the
+previous page, [[rem-riemann-integral-choice-ledger]], records the costs of the
+published items themselves.
 
 ## 4. Index conventions
 
@@ -105,15 +105,19 @@ currently proves.
   integral remainder is an application of [[thm-integration-by-parts]], but it
   needs derivatives of order $n$, which are introduced on the page of the
   analysis track devoted to Darboux's theorem, l'Hopital's rule and Taylor
-  expansion. It is homed there, next to the Lagrange and Cauchy forms it belongs
-  with, and it is deliberately absent here.
+  expansion. The scaffold for this build records that it belongs there, next to
+  the Lagrange and Cauchy forms, and it is deliberately absent here; that is a
+  statement about where the plan puts it, not about anything the library has
+  proved.
 - **Bounded variation and the Riemann-Stieltjes integral.** The integrator
   $\mathrm{d}\alpha$ generalises everything on this page, and the sharpened
-  second mean value theorem lives there. That is a later page of the same track.
+  second mean value theorem belongs with it. That is a later page of the same
+  track, and it is not built.
 - **Improper integrals.** $\int_0^{\infty} f$ is not defined anywhere in this
   library at this point in the reading order, which is why
   [[thm-integral-test-for-series]] concludes with the boundedness of the sequence
-  $\bigl(\int_0^N f\bigr)_N$ instead. The later page identifies the two.
+  $\bigl(\int_0^N f\bigr)_N$ instead. Identifying the two is what that later
+  page is for.
 - **Interchanging a limit with an integral.** Pointwise convergence licenses
   nothing: the companion page's
   [[cex-spikes-with-integral-one-converging-pointwise-to-zero]] exhibits

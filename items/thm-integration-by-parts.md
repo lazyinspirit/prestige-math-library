@@ -86,7 +86,4 @@ differentiable, since a continuous function on $[a,b]$ is integrable
 
 - **Discrete counterpart.** Abel's summation by parts ([[lem-abel-summation-by-parts]]) is the same manipulation for finite sums, and it is what [[thm-second-mean-value-theorem-for-integrals]] below uses in place of this theorem, precisely because that theorem assumes no differentiability.
 
-- **Forward reference, orientation only.** The false statement that deletes the
-  integrability hypothesis is
-  [[fs-integration-by-parts-needs-no-integrability-hypothesis]] on the companion
-  page; nothing above depends on it.
+- **Forward reference, orientation only.** The false statement that deletes the integrability hypothesis is [[fs-integration-by-parts-needs-no-integrability-hypothesis]] on the companion page; nothing above depends on it.

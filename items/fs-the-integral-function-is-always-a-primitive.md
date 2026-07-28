@@ -89,4 +89,4 @@ point can repair the claim, and the true theorem,
 
 - **What is always true of $F$ is one dimension weaker.** For every integrable $f$ the integral function is Lipschitz, hence uniformly continuous ([[thm-the-integral-function-is-lipschitz]]); differentiability is exactly what continuity of the integrand buys, and nothing more is available.
 
-- **The failure set can be much larger than a point.** Any integrable $f$ whose discontinuity set is an infinite null set — Thomae's function, for instance — has $F' \ne f$ at every point of that set for the same reason as the second witness; the claim above is not false merely at finitely many points.
+- **The failure set can be much larger than a point.** For Thomae's function $t$ on $[0,1]$ the integral function is identically $0$, so $F' = 0$ while $t$ is positive at every rational: the claim above then fails at every point of an infinite set, not merely at finitely many. No general statement is made here about an arbitrary integrable $f$ — at a discontinuity where $f$ happens to take the value $F'$ does, the two agree, and $f$ vanishing off $\{1/\iota(n+1)\}$ is such a case at the point $0$.

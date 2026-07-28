@@ -10,10 +10,6 @@ aliases: [def-oriented-limits-of-integration]
 landmark: true
 short: "oriented limits $\\int_b^a f = -\\int_a^b f$"
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []
@@ -95,9 +91,10 @@ is proved there.
   would be undefined at $x = a$.
 
 - **One published inequality is not orientation-invariant, and that is a trap.**
-  The estimate $\bigl|\int_u^v f\bigr| \le \int_u^v |f|$ holds only for
-  $u \le v$: at $u > v$ the right-hand side is $-\int_v^u |f| \le 0$ while the
-  left-hand side is $\ge 0$. The form valid for every pair is
+  The estimate $\bigl|\int_u^v f\bigr| \le \int_u^v |f|$ is guaranteed only
+  for $u \le v$: at $u > v$ the right-hand side is $-\int_v^u |f| \le 0$ while
+  the left-hand side is $\ge 0$, so the inequality fails whenever
+  $\int_v^u |f| > 0$. The form valid for every pair is
   $\bigl|\int_u^v f\bigr| \le \bigl|\int_u^v |f|\bigr|$, and this is stated where
   it is proved ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
 

@@ -11,10 +11,6 @@ landmark: true
 short: "linearity of the integral"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -121,4 +117,4 @@ $\lambda < 0$.
 
 - **The two scalar cases really are different.** For $\lambda > 0$ the extreme values scale; for $\lambda < 0$ they are exchanged, because multiplying by a negative reverses the order ([[lem-reflection]]). Merging the cases and writing $U(\lambda f, P) = \lambda U(f,P)$ for all $\lambda$ would be false at $\lambda = -1$, where the correct identity is $U(-f,P) = -L(f,P)$.
 
-- **The set of integrable functions on $[a,b]$ is closed under the operations named here and under more.** Products, absolute values and the lattice operations are also integrable, but none of those follows from linearity; they come from [[thm-composition-with-a-continuous-function]] and are recorded in [[cor-integrability-of-absolute-values-products-and-lattice-operations]].
+- **The set of integrable functions on $[a,b]$ is closed under the operations named here and under more.** Products, absolute values and the lattice operations are also integrable, but none of them is obtained from linearity alone: the proofs of [[cor-integrability-of-absolute-values-products-and-lattice-operations]] all pass through [[thm-composition-with-a-continuous-function]], with linearity used only to recombine the pieces.

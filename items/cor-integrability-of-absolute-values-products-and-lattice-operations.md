@@ -12,10 +12,6 @@ landmark: true
 short: "products, moduli and lattice operations"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -98,12 +94,10 @@ integrability of $f$; the witness is on the companion page.
 
 ## Remarks
 
-- **Every clause comes from one theorem plus linearity.** The only analytic input is [[thm-composition-with-a-continuous-function]]; the identities of [L5] are algebra, and they are what turns a statement about composing with $|\cdot|$ and $(\cdot)^2$ into statements about products and lattice operations. In particular no new estimate on Darboux sums is made here.
+- **Every integrability clause comes from one theorem plus linearity.** The only input that produces integrability is [[thm-composition-with-a-continuous-function]], with [[thm-linearity-of-the-integral]] recombining the pieces; claim 3 additionally uses [[thm-monotonicity-of-the-integral]], which is the one place an inequality between integrals is needed. The identities of [L5] are algebra, and they are what turns a statement about composing with $|\cdot|$ and $(\cdot)^2$ into statements about products and lattice operations. In particular no new estimate on Darboux sums is made here.
 
 - **The polarisation identity is used, and it is why $f^2$ comes first.** There is no direct route from integrability of $f$ and of $g$ to integrability of $fg$ through the composition theorem, because $(s,t) \mapsto st$ is a function of two variables and the theorem composes with one. Writing $fg$ through squares of sums and differences reduces it to the one-variable case.
 
 - **The inequality of claim 3 is the integral analogue of the triangle inequality**, and like it, it can be strict: for $f(x) = x$ on $[-1,1]$ the left-hand side is $0$ and the right-hand side is $1$.
 
-- **Forward reference, orientation only.** The witness refuting the converse of
-  claim 1 is [[cex-absolute-value-integrable-without-the-function]] on the
-  companion page; nothing above depends on it.
+- **Forward reference, orientation only.** The witness refuting the converse of claim 1 is [[cex-absolute-value-integrable-without-the-function]] on the companion page; nothing above depends on it.

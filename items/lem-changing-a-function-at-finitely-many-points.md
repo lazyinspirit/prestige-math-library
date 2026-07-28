@@ -12,10 +12,6 @@ landmark: false
 short: "finitely many values do not matter"
 proof_strategy: induction
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -105,4 +101,4 @@ any finite set of points, are irrelevant to both questions.
 
 - **Nothing here is an index-subset sum.** The indicator sequence $\theta$ of step 1.2 is a genuine sequence on $\{\,i : i<N\,\}$, and every estimate is applied term by term and then summed by the monotonicity clause of [[lem-finite-sum-laws]]; the library has no sum over a subset of the index range, and none is used.
 
-- **The contrast with the derivative is the point of the lemma.** Changing a function at one point destroys differentiability there and can destroy it nowhere else; it changes no integral at all. This is also why the integral function of an integrable $f$ cannot detect a change of $f$ at a point, which is what [[fs-the-integral-function-is-always-a-primitive]] on the companion page turns into a refutation.
+- **The contrast with the derivative is the point of the lemma.** Changing a function at one point can destroy differentiability at that point, and changes nothing at any other point, since a limit at $x \ne p$ may be taken over a neighbourhood excluding $p$; it changes no integral at all. This is also why the integral function of an integrable $f$ cannot detect a change of $f$ at a point, which is what [[fs-the-integral-function-is-always-a-primitive]] on the companion page turns into a refutation.

@@ -12,10 +12,6 @@ landmark: true
 short: "first mean value theorem for integrals"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -99,9 +95,6 @@ page.
 
 - **No intermediate value theorem is invoked directly.** What is needed is that the continuous image of $[a,b]$ is exactly $[\min,\max]$, which is claim 2 of [[cor-continuous-image-of-an-interval-is-an-interval]]; that item is itself proved from the intermediate and extreme value theorems, and citing it here saves repeating the argument.
 
-- **$\xi$ can be forced to lie in the open interval only under extra hypotheses**, and none is claimed. With $g \equiv 1$ and $f$ nonconstant one can indeed take $\xi \in (a,b)$, but that refinement is not needed anywhere on this page and is not asserted.
+- **$\xi$ can be forced to lie in the open interval only under extra hypotheses**, and none is claimed. The standard refinement puts $\xi$ in the open interval when $g \equiv 1$; it is not proved here, it is not needed anywhere on this page, and the theorem does not assert it.
 
-- **Forward reference, orientation only.** The witness showing that $g \ge 0$
-  cannot be dropped is
-  [[cex-the-first-mean-value-theorem-needs-a-one-signed-weight]] on the companion
-  page; nothing above depends on it.
+- **Forward reference, orientation only.** The witness showing that $g \ge 0$ cannot be dropped is [[cex-the-first-mean-value-theorem-needs-a-one-signed-weight]] on the companion page; nothing above depends on it.

@@ -11,10 +11,6 @@ landmark: true
 short: "integral test on the $p$-series"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -112,4 +108,4 @@ $p \in [1,\infty)$" is not a statement that can be made here.
 
 - **The index shift is real and is checked in step 2.2.** The $p$-series starts at $k = 1$ because $0^{p} = 0$ has no reciprocal, while a sequence in this library is a function on $\mathbb{N}$, which contains $0$; the integrand $(t+1)^{-p}$ is shifted by exactly one for that reason, and $f_p(k) = 1/\iota(k+1)^{p}$. Substituting $t^{-p}$ for $(t+1)^{-p}$ would put an undefined value at $t = 0$ and make $\int_0^N$ improper.
 
-- **An independent elementary route to the series verdict.** [[thm-cauchy-condensation]] applies to the nonnegative nonincreasing family $(1/\iota(k)^{p})_{k\ge1}$ and turns it into $\sum_{j\ge0}\iota(2)^{j}/\iota(2^{j})^{p}$, a geometric series; that is the standard elementary proof of the $p$-series theorem and is noted here for orientation only, nothing above depending on it.
+- **An independent elementary route to the series verdict.** [[thm-cauchy-condensation]] applies to the nonnegative nonincreasing family $(1/\iota(k)^{p})_{k\ge1}$ and turns it into $\sum_{j\ge0}\iota(2)^{j}/\iota(2^{j})^{p}$, a geometric series; that is the standard elementary route to the same verdict, and it is noted here for orientation only. No claim is made about how [[thm-p-series-rational]] is itself proved, and nothing above depends on this remark.

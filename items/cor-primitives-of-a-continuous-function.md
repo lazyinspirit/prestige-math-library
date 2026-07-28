@@ -12,10 +12,6 @@ landmark: true
 short: "primitives of a continuous function"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -99,13 +95,10 @@ page.
 
 ## Remarks
 
-- **Steps 1.2 to 2.1 are the only work beyond citing the two fundamental theorems.** [[thm-ftc-first-part]] is stated on a closed bounded interval, while $I$ here may be open, half-open or unbounded, so the derivative it produces is the derivative of a *restriction*. What those steps supply is a closed subinterval $[u,v] \subseteq I$ that contains all points of $I$ within $\eta$ of $c$, after which the difference quotients of $F$ and of the restriction agree on a punctured neighbourhood and the $\varepsilon$-$\delta$ statement transfers verbatim.
+- **Steps 1.2, 2.1 and 3.1 are the only work beyond citing the two fundamental theorems.** [[thm-ftc-first-part]] is stated on a closed bounded interval, while $I$ here may be open, half-open or unbounded, so the derivative it produces is the derivative of a *restriction*. What those steps supply is a closed subinterval $[u,v] \subseteq I$ that contains all points of $I$ within $\eta$ of $c$, after which the difference quotients of $F$ and of the restriction agree on a punctured neighbourhood and the $\varepsilon$-$\delta$ statement transfers verbatim.
 
 - **"Two primitives differ by a constant" is not re-minted here.** [[cor-zero-derivative-implies-constant]] already states exactly that, in its second clause, for functions with equal derivatives on an order-convex domain; claim 2 is that statement applied to $G_1 - G_2$.
 
 - **Order-convexity of $I$ is essential to claim 2 and harmless elsewhere.** On a domain in two pieces a function may be constant on each with different constants, which is why [[cor-zero-derivative-implies-constant]] carries the same hypothesis. Claims 1 and 3 use it only to know that closed subintervals spanned by points of $I$ lie in $I$.
 
-- **Forward references, orientation only.** The two witnesses bounding the scope
-  of this corollary are [[cex-an-integrable-function-with-no-primitive]] and
-  [[cex-a-function-with-a-primitive-that-is-not-integrable]] on the companion
-  page; nothing above depends on either.
+- **Forward references, orientation only.** The two witnesses bounding the scope of this corollary are [[cex-an-integrable-function-with-no-primitive]] and [[cex-a-function-with-a-primitive-that-is-not-integrable]] on the companion page; nothing above depends on either.

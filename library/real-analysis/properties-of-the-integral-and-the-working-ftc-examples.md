@@ -34,7 +34,8 @@ is checked at $m=0$ against the integral of a constant and, for general $m$,
 against the pointwise inequality $x^{m+1}\le x^{m}$.
 [[ex-additivity-on-a-step-function]] integrates a two-step function twice, once
 by splitting at the jump and once from Darboux sums on a three-point partition,
-and is the smallest example in which the jump sits at a partition point.
+and is the simplest case in which the jump sits at a partition point, which is
+the case the changing-at-finitely-many-points lemma has to handle separately.
 [[ex-integral-test-applied-to-the-p-series]] runs
 [[thm-integral-test-for-series]] **backwards**: the published $p$-series theorem
 settles the series for every rational $p>0$, and the test transfers the verdict
@@ -64,7 +65,8 @@ exponents.
 integrable on $[-1,1]$ with integral $0$ and has no primitive, refuted
 elementarily through [[cor-zero-derivative-implies-constant]] and the two
 one-sided difference quotients at $0$ — not through Darboux's theorem on the
-intermediate value property of derivatives, which lives on a later page.
+intermediate value property of derivatives, which this library does not have:
+the page planned to prove it is not built.
 [[fs-the-integral-function-is-always-a-primitive]] then refutes the converse
 expectation in **two** independent ways: for the sign function
 $F(x)=|x|-1$ is not differentiable at $0$, and for an integrable function

@@ -105,9 +105,13 @@ this point in the reading order — and both its sum and its integral begin at $
 since $\mathbb{N}$ contains $0$.
 
 **What is deliberately absent.** Taylor's integral remainder needs higher
-derivatives and is homed with the other remainder forms on a later page. Bounded
-variation, the Riemann-Stieltjes integral, improper integrals and the sharp form
-of the fundamental theorem each have their own later page. Arzelà's bounded
+derivatives, which the plan puts on the page for Darboux's theorem, l'Hopital's
+rule and Taylor expansion — a page that is not built, so the result is
+unavailable here whatever its position in the reading order, and the scaffold
+records that it belongs there rather than on this page. Bounded variation with
+the Riemann-Stieltjes integral, and improper integrals, are each a later page of
+this track; the sharp form of the fundamental theorem is not a planned page at
+all but a recorded-not-proved result, [[rem-ftc-absolutely-continuous]]. Arzelà's bounded
 convergence theorem is not here: it is a genuine theorem about the Riemann
 integral, but no complete proof route was certifiable at scaffold time, and the
 counterexample that motivates it —

@@ -11,10 +11,6 @@ aliases: [def-integral-function]
 landmark: true
 short: "integral function $F(x) = \\int_a^x f$"
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: n/a
 sources:
   scraped: []
@@ -73,7 +69,7 @@ additive constant.
 
 - **$F$ exists for every integrable $f$, whether or not $f$ has a primitive.**
   Nothing in the definition asks $f$ to be continuous anywhere, and nothing here
-  claims $F' = f$. The two statements that can be made are proved below: $F$ is
+  claims $F' = f$. The two statements about $F'$ that this page does prove are: $F$ is
   always Lipschitz ([[thm-the-integral-function-is-lipschitz]]), and $F'(c) = f(c)$
   at every point $c$ where $f$ is continuous ([[thm-ftc-first-part]]).
 

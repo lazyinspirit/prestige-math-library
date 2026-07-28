@@ -12,10 +12,6 @@ landmark: true
 short: "continuous after integrable is integrable"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -97,9 +93,6 @@ companion page. Nothing here asserts anything about that direction.
 
 - **The hypothesis $f[\,[a,b]\,] \subseteq [m,M]$ is what makes $\varphi\circ f$ defined at all**, and $m,M$ exist because an integrable $f$ is bounded ([[def-darboux-sums]]). Taking $[m,M]$ to be any interval containing the range of $f$ is legitimate and changes nothing, since a continuous function on a larger compact interval restricts to a continuous one.
 
-- **What the theorem does not say.** It does not say that $\varphi\circ f$ is integrable when $\varphi$ is merely integrable, and it does not say that $\int_a^b \varphi\circ f$ can be computed from $\int_a^b f$. The first is refuted on the companion page; the second is false already for $\varphi(t) = t^{2}$ on constants of different values.
+- **What the theorem does not say.** It does not say that $\varphi\circ f$ is integrable when $\varphi$ is merely integrable, and it does not say that $\int_a^b \varphi\circ f$ can be computed from $\int_a^b f$. The first is refuted on the companion page. For the second, take $\varphi(t) = t^{2}$ on $[0,1]$ with $f$ the constant $1/2$ and with $g$ the indicator of $[0,1/2]$: both are integrable with integral $1/2$, while $\int_0^1 \varphi\circ f = 1/4$ and $\int_0^1 \varphi\circ g = 1/2$, so $\int_a^b \varphi\circ f$ is not a function of $\int_a^b f$.
 
-- **Forward reference, orientation only.** The reversal refuted on the
-  companion page is
-  [[cex-a-composition-of-integrable-functions-that-is-not-integrable]]; nothing
-  above depends on it.
+- **Forward reference, orientation only.** The reversal refuted on the companion page is [[cex-a-composition-of-integrable-functions-that-is-not-integrable]]; nothing above depends on it.

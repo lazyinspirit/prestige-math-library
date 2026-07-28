@@ -84,20 +84,8 @@ while the *upper* sums still see it.
 
 ## Remarks
 
-- **The two sums of $P_{\eta}$ are not symmetric, and that is a statement about
-  these partitions.** For each $\eta \in (0,1)$ the lower sum $L(f,P_{\eta})$ is
-  exactly $4$ while the upper sum is $4 + 2\eta > 4$, so this family already
-  locates the integral exactly from below while its upper sums only approach it.
-  Nothing is claimed here about an arbitrary partition: a partition whose points
-  do not include $1$ has a subinterval on which $f$ takes both values, and its
-  lower sum is then strictly below $4$.
+- **The two sums of $P_{\eta}$ are not symmetric, and that is a statement about these partitions.** For each $\eta \in (0,1)$ the lower sum $L(f,P_{\eta})$ is exactly $4$ while the upper sum is $4 + 2\eta > 4$, so this family already locates the integral exactly from below while its upper sums only approach it. Nothing is claimed here about an arbitrary partition: a partition whose points do not include $1$ has a subinterval on which $f$ takes both values, and its lower sum is then strictly below $4$.
 
-- **The value at the jump is irrelevant to the integral, but not to the sums.**
-  Replacing $f(1) = 3$ by any real leaves $f$ integrable with the same integral,
-  by [[lem-changing-a-function-at-finitely-many-points]]. What it changes is
-  which partitions realise the extremes: with $f(1) := 1$ the subinterval
-  $[1-\eta,1]$ carries $m_1 = M_1 = 1$, while $[1,2]$ now carries $m_2 = 1$ and
-  $M_2 = 3$, so $L(f,P_{\eta}) = 2$ and $U(f,P_{\eta}) = 4$ and the asymmetry
-  moves to the other side. The integral is $4$ either way.
+- **The value at the jump is irrelevant to the integral, but not to the sums.** Replacing $f(1) = 3$ by any real leaves $f$ integrable with the same integral, by [[lem-changing-a-function-at-finitely-many-points]]. What it changes is which partitions realise the extremes: with $f(1) := 1$ the subinterval $[1-\eta,1]$ carries $m_1 = M_1 = 1$, while $[1,2]$ now carries $m_2 = 1$ and $M_2 = 3$, so $L(f,P_{\eta}) = 2$ and $U(f,P_{\eta}) = 4$ and the asymmetry moves to the other side. The integral is $4$ either way.
 
 - **Additivity is what makes the first route short.** Without [[thm-additivity-over-subintervals]] the only route is the second one, which needs the Darboux sums of a function that is not constant on any partition containing the jump in the interior of a subinterval.

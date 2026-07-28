@@ -103,7 +103,4 @@ the false statement that weakens it on the companion page.
 
 - **Where the more familiar hypotheses sit.** If $\varphi$ is continuously differentiable then $\varphi'$ is integrable automatically, and if $\varphi$ is in addition strictly monotone then the substitution can be read in either direction; neither refinement is needed above, and neither is claimed.
 
-- **Forward reference, orientation only.** The false statement that weakens the
-  continuity of $f$ to integrability is
-  [[fs-substitution-holds-for-every-integrable-integrand]] on the companion page;
-  nothing above depends on it.
+- **Forward reference, orientation only.** The false statement that weakens the continuity of $f$ to integrability is [[fs-substitution-holds-for-every-integrable-integrand]] on the companion page; nothing above depends on it.

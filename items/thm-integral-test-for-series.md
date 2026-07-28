@@ -11,10 +11,6 @@ landmark: true
 short: "integral test for series"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -109,4 +105,4 @@ statement about the first tail of $\sum_k f(k)$ and is not the statement above.
 
 - **The version beginning at $k = 1$ is a statement about a tail.** For the family $(f(k))_{k \ge 1}$ the same argument on $[1,N]$ gives $\int_1^N f \le \sum_{k=1}^{N-1} f(k) \le f(1) + \int_1^N f$, and convergence of the two series is equivalent by [[lem-series-tail-invariance]]. Nothing above silently starts at $1$, and a reader comparing with a classical text should check which convention that text uses for $\mathbb{N}$.
 
-- **Monotonicity of $f$ is used exactly twice**, in step 1.1, to bracket $f$ on a unit interval by its two endpoint values, and through [[thm-monotone-implies-integrable]] to know that $f$ is integrable on $[0,N]$ at all. Nonnegativity is used to compare partial sums and to apply [[thm-nonnegative-series-bounded-partial-sums]]; without it the test is false, since a series of terms of both signs may converge with unbounded partial sums of absolute values.
+- **Monotonicity of $f$ is used exactly twice**, in step 1.1, to bracket $f$ on a unit interval by its two endpoint values, and through [[thm-monotone-implies-integrable]] to know that $f$ is integrable on $[0,N]$ at all. Nonnegativity is used in three named places: to make $(J_N)$ nondecreasing in step 3.2, to pass from $s_{N+1}$ to $s_N$ in step 4.1, and to apply [[thm-nonnegative-series-bounded-partial-sums]], whose own hypothesis is that the terms are nonnegative. No claim is made here about what happens to the test if that hypothesis is dropped.

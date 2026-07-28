@@ -12,10 +12,6 @@ landmark: true
 short: "second fundamental theorem"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
 sources:
   scraped: []
@@ -89,10 +85,6 @@ continuous integrands.
 
 - **The hypothesis is differentiability at every point of the closed interval.** It is not enough to be differentiable on $(a,b)$ and continuous on $[a,b]$ in the argument as written, because step 2.1 uses the derivative only on open subintervals but the definition $f = G'$ has to name a function on all of $[a,b]$ for $\int_a^b f$ to mean anything. Changing $f$ at the two endpoints changes neither its integrability nor its integral ([[lem-changing-a-function-at-finitely-many-points]]), so the reader who prefers the weaker hypothesis loses nothing.
 
-- **This is the half of the fundamental theorem that computes.** The other half, [[thm-ftc-first-part]], produces a primitive; this one evaluates an integral once a primitive is known, and every computation on the companion page runs through it.
+- **This is the half of the fundamental theorem that computes.** The other half, [[thm-ftc-first-part]], produces a primitive; this one evaluates an integral once a primitive is known, and it is the tool the companion page reaches for whenever a primitive is available. Where no primitive is at hand the companion page computes instead by splitting at a jump and using the integral of a constant; no claim is made here about how many of its computations take which route.
 
-- **Forward references, orientation only.** The two witnesses showing neither
-  hypothesis is removable are
-  [[cex-a-function-with-a-primitive-that-is-not-integrable]] and
-  [[cex-an-integrable-function-with-no-primitive]] on the companion page; nothing
-  above depends on either.
+- **Forward references, orientation only.** The two witnesses showing neither hypothesis is removable are [[cex-a-function-with-a-primitive-that-is-not-integrable]] and [[cex-an-integrable-function-with-no-primitive]] on the companion page; nothing above depends on either.

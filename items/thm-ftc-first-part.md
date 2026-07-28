@@ -97,8 +97,4 @@ statement about the integral function.
 
 - **What is proved at a point is proved at a point.** Nothing here says $F$ is differentiable anywhere else, and nothing says $F' = f$ off the continuity set of $f$. Where $f$ is merely integrable, all that survives is [[thm-the-integral-function-is-lipschitz]].
 
-- **Forward references, orientation only.** The two failures at a discontinuity
-  are worked out on the companion page as
-  [[cex-an-integrable-function-with-no-primitive]] and
-  [[fs-the-integral-function-is-always-a-primitive]]; nothing above depends on
-  either.
+- **Forward references, orientation only.** The two failures at a discontinuity are worked out on the companion page as [[cex-an-integrable-function-with-no-primitive]] and [[fs-the-integral-function-is-always-a-primitive]]; nothing above depends on either.
