@@ -85,6 +85,38 @@ instead of assuming it, and that is an improvement rather than a repair.
 
 ---
 
+## Collision between jobs 2 and 3, resolved
+
+The two scaffolds were written concurrently and both claim two ids:
+
+| id | job 2 (combinatorics/categories) | job 3 (algebra) | **ruling** |
+|---|---|---|---|
+| `tensor-products-of-modules` | a **contingent** page at 299, written so the gap could not be silent | a real page at 102/103 in the modules band | **job 3 owns it.** Job 2's contingent page is DROPPED at splice. |
+| `def-module` | consumed via its module interface §5 | minted on `modules-and-module-homomorphisms` | **job 3 mints it**, job 2 cites it. |
+
+Job 2 anticipated this and said so in its own report — the contingent page exists
+precisely so the orchestrator would notice and delete one of the two. That is the
+right instinct and it worked; the alternative was a silent duplicate id, which
+`validate-plan` would have caught only if both were spliced.
+
+Both scaffolds also reference `vector-spaces-and-subspaces`. That is not a
+collision: it is a published page and both correctly cite it.
+
+## Verified: the library has no binomial coefficient
+
+Job 2 claimed it; it is exactly right, and stronger than it sounds. **Zero items
+use the `\binom` macro** and no item defines $\binom{n}{k}$ under any name. The
+single occurrence of the word in 998 published items is a passing mention of "the
+binomial theorem" in a Remark of `def-integer-power`, as motivation for a
+convention.
+
+`research/plan-realanalysis-pages.md` had already recorded an obligation for
+`darboux-lhopital-and-taylor` to mint one itself when it reaches Taylor's theorem.
+A combinatorics page below it discharges that obligation instead, which is a real
+argument for placing elementary counting LOW rather than appending it.
+
+---
+
 ## Standing rule this episode confirms
 
 Job 3 reported "$\mathbb{C}$ exists (order 50)". True, and it matters that the
