@@ -3,8 +3,30 @@
 Prose scaffold, owner-commissioned 2026-07-27 (Tom). Companion to
 `research/plan-topology-track.md`, `research/plan-algebra-track.md` and
 `research/plan-realanalysis-pages.md`. Machine-readable half:
-`research/plan-spec.json` once the orchestrator applies the renumber of
-decision TS-D2 below.
+`research/plan-spec.json`.
+
+> **TS-D2 IS APPLIED (orchestrator, 2026-07-28).** All 24 pages are in
+> `research/plan-spec.json` at the orders this file states, the renumber shifted
+> 38 existing pages, and `validate-plan.mjs` reports the result acyclic and
+> consistent with no forward-pointing `requires`. Two corrections to what this
+> file says about the splice:
+>
+> - **The spec goes 206 → 230 pages, not 206 → 218.** The "218" in TS-D2 counts
+>   the 12 A-pages and forgets the 12 B companions the same sentence asks for.
+> - **The two ST spec ids were not stated here and had to be coined**:
+>   `ordinal-arithmetic` (ST-1) and `cardinal-arithmetic-and-cofinality` (ST-2).
+>   Every other id in this file was already fixed by the `requires` lines of the
+>   pages above it, and those were used verbatim.
+>
+> The four `requires` edits owed at splice time are applied. Three of them are
+> reported by `validate-plan` as `[redundant-prereq]` — reachable transitively —
+> and are kept deliberately, on the same ground as amendment C4: a direct edge
+> names the page's load-bearing prerequisite, and the reader's Prerequisites
+> section renders from the item closure regardless.
+>
+> Published-claim decay this splice creates is staged in
+> `research/ts-d2-published-amendments.md`. Order 213 falsifies four published
+> sentences about second countability and separability.
 
 This file is NOT normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and
 `ARCHITECTURE.md` win wherever they differ.
@@ -99,10 +121,12 @@ the remarks cite each other, and the catalogue page itself is still
    **+2** (so **+6** total from old 193 up).
 4. **HT-1…HT-7 with B companions appended at 229–242.** No further shift.
 
-Net: the spec goes from 206 to 218 pages. Relative order of all existing pages
-is preserved, so no existing citation can become forward-pointing. Per
-`LEVELS.md`: after the splice, grep the prose scaffolds for the word "order"
-AND for bare numbers, and verify section headings against the spec.
+Net: the spec goes from 206 to **230** pages (this originally read 218, which
+counted the A-pages and dropped the B companions; corrected at splice time,
+2026-07-28). Relative order of all existing pages is preserved, so no existing
+citation can become forward-pointing. Per `LEVELS.md`: after the splice, grep the
+prose scaffolds for the word "order" AND for bare numbers, and verify section
+headings against the spec.
 
 **TS-D3. This file sits beside `plan-topology-track.md`** (authority boundary
 above). Alpha applies the amendments list; Tom never writes that file.

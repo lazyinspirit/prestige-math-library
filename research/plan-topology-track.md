@@ -641,27 +641,143 @@ list must NOT coin a second "completely metrizable" definition: it is already
 made precise in `lem-complete-remetrisation` and must be transferred from there
 to the general-topological-space setting, not restated.
 
-DEFS: first and second countable; separable; Lindelof; ccc; sigma-locally-finite
-and sigma-discrete bases; Baire space; comeager; completely metrizable; Polish
-space.
+**SPLIT ACROSS THREE SPEC PAGES (orchestrator, 2026-07-28).** T8 was written as
+one lump; `plan-spec.json` has carried it as three pairs since the topology
+track was spliced, and after the TS-D2 renumber they sit at **213
+`countability-axioms-and-cardinal-functions`**, **215 `metrization-theorems`**
+and **217 `complete-metrizability-and-baire`**. The three sections below say
+which page gets what. Nothing was added to or removed from T8's content by the
+split except the countability material of T8a, which the owner asked to be
+specified rather than listed (2026-07-28).
 
-THMS: second countable => separable, Lindelof, first countable; in metric spaces
-separable <=> second countable <=> Lindelof; second countability is hereditary
-and countably productive; separability is not hereditary; URYSOHN METRIZATION;
-NAGATA-SMIRNOV METRIZATION; BING METRIZATION; Smirnov metrization; the BAIRE
-CATEGORY THEOREM for complete metric and for locally compact Hausdorff spaces;
-ALEXANDROFF'S THEOREM (completely metrizable iff G-delta in a complete metric
-space); the irrationals are homeomorphic to N^N; the Hilbert cube is universal
-for separable metrizable spaces; the Cantor set surjects onto every compact
-metric space.
+---
 
-FS: separable implies second countable; separability is hereditary; every regular
-space is metrizable; every Baire space is completely metrizable; Q is a Baire
-space.
+### T8a. Countability Axioms and Cardinal Functions   (spec order 213)
 
-B: the Sorgenfrey line; the Niemytzki plane; Q; the irrationals; the Hilbert
-cube; genericity of nowhere-differentiable functions.
-CEX: matched to each failure above.
+`requires`: `subspaces-products-and-quotients`, `ordinals-and-transfinite-recursion`,
+`cardinal-arithmetic-and-cofinality` (cardinal functions take cardinal values).
+
+**DEFS.**
+- **neighbourhood basis at a point** $x$: a family $\mathcal{B}_x$ of
+  neighbourhoods of $x$ such that every neighbourhood of $x$ contains a member.
+- **first countable**: every point has an at most countable neighbourhood basis.
+  The item `def-first-countable-top` is **already published** at order 189 and is
+  NOT re-minted here; this page transfers it and must cite it. See the staged
+  amendment in `research/ts-d2-published-amendments.md`.
+- **second countable**: the topology has an at most countable basis. Says "basis"
+  in the sense of the published `thm-basis-criterion`, not "subbasis".
+- **separable**: there is an at most countable dense subset. `def-dense-top` is
+  published (order 189) and deliberately declines to define this; that Remark is
+  staged for amendment.
+- **Lindelof**: every open cover has an at most countable subcover.
+- **countable chain condition (ccc)**: every family of pairwise disjoint nonempty
+  open sets is at most countable.
+- **cardinal functions**: weight $w(X)$, density $d(X)$, character $\chi(X)$,
+  Lindelof number $L(X)$, cellularity $c(X)$.
+
+**WELL-DEFINEDNESS OBLIGATIONS, each a numbered item** (the owner's rule: a
+definition is introduced only where its well-definedness can be justified):
+
+1. **Every cardinal function is a MINIMUM over a nonempty set of cardinals**, so
+   each of the five needs its own two-line item: the set of cardinals in question
+   is nonempty (the whole topology is a basis for itself; $X$ is dense in itself;
+   …), and every nonempty set of cardinals has a least element. The second half
+   is ST-2's, at order 187 — **which is exactly why 213 requires 187**. Without
+   it the definite article in "the weight of $X$" is unlicensed.
+2. **The decreasing-neighbourhood-basis lemma**, its own numbered item: if $x$
+   has an at most countable neighbourhood basis then it has a DECREASING one,
+   $B_0 \supseteq B_1 \supseteq \cdots$, by replacing $B_n$ with
+   $B_0 \cap \cdots \cap B_n$ (a finite intersection, so still a neighbourhood).
+   Every sequence argument on this page and on 215/217 silently wants this; it is
+   stated once here and cited, never re-derived.
+
+**THMS.**
+- second countable $\Rightarrow$ first countable (choice-free: the basic opens
+  containing $x$ ARE a neighbourhood basis at $x$, no selection).
+- second countable $\Rightarrow$ separable. **Costs AC$_\omega$**: one point is
+  chosen from each nonempty basic open set. Its own item, and the choice cost is
+  stated in the Statement, per the house practice on the linear-algebra pages.
+- second countable $\Rightarrow$ Lindelof. **Also costs AC$_\omega$** (for each
+  basic open contained in some cover member, choose one such member). Separate
+  item, separate statement of the cost.
+- first countable $\Rightarrow$ the sequential characterisations of closure and of
+  continuity become equivalences. The published `def-first-countable-top` page
+  already proves both converses at order 189; the item here is a **dictionary
+  item** pointing at them, not a second proof.
+- **in a metric space, separable $\iff$ second countable $\iff$ Lindelof** — the
+  page's main theorem, a three-way cycle. Uses AC$_\omega$ in the arcs that
+  select; the arc "second countable $\Rightarrow$ separable" reuses the theorem
+  above rather than redoing it.
+- second countability is **hereditary** and **countably productive**; first
+  countability likewise. `cor-metrizability-and-first-countability-are-hereditary`
+  already exists — check before minting, it may discharge half of this.
+- separable $\Rightarrow$ ccc (choice-free); Lindelof + metrizable $\Rightarrow$
+  second countable.
+- the inequalities relating the cardinal functions: $d(X) \le w(X)$,
+  $\chi(X) \le w(X)$, $c(X) \le d(X)$, $L(X) \le w(X)$.
+
+**FS.**
+- separable $\Rightarrow$ second countable (Sorgenfrey line).
+- separability is hereditary (Sorgenfrey plane).
+- Lindelof is hereditary (Sorgenfrey plane), and Lindelof is productive
+  (Sorgenfrey line squared).
+- first countable $\Rightarrow$ second countable (uncountable discrete space).
+- ccc $\Rightarrow$ separable.
+
+**B page (214).** The Sorgenfrey line, computing all five cardinal functions; the
+Sorgenfrey plane; an uncountable discrete space; $[0, \omega_1)$ with the order
+topology and the long line, **both of which come from ST-1 at order 185**; the
+Hilbert cube; $\mathbb{R}^\kappa$ for large $\kappa$.
+
+**SCOPE DENIAL.** The Hewitt–Marczewski–Pondiczery theorem (a product of at most
+$2^\kappa$ spaces of density $\le \kappa$ has density $\le \kappa$) is **DROPPED**:
+it needs cardinal exponentiation arithmetic beyond what ST-2 develops. Recorded
+here so the omission is recoverable; what would license it is an ST-2 extension.
+
+---
+
+### T8b. Metrization Theorems   (spec order 215)
+
+DEFS: sigma-locally-finite and sigma-discrete bases (the local finiteness notion
+comes from 209, `partitions-of-unity-and-paracompactness`).
+
+THMS: **URYSOHN METRIZATION** (regular + second countable + $T_1$ $\Rightarrow$
+metrizable); **NAGATA–SMIRNOV** (metrizable $\iff$ regular $T_1$ with a
+sigma-locally-finite basis); **BING** (the sigma-discrete form); **SMIRNOV**
+(locally metrizable + paracompact + Hausdorff $\Rightarrow$ metrizable).
+
+FS: every regular space is metrizable.
+
+B (216): the Niemytzki plane (Tychonoff, not normal, not metrizable); the
+Sorgenfrey line again, now as the standard failure of Urysohn's hypotheses.
+
+---
+
+### T8c. Complete Metrizability and Baire   (spec order 217)
+
+DEFS: Baire space; comeager; completely metrizable; **Polish space**.
+
+**Do NOT re-mint "completely metrizable".** It is already made precise in
+`lem-complete-remetrisation` on `completeness-and-uniform-continuity`; this page
+TRANSFERS it to the general topological setting. See the level-8 wiring
+obligation at the head of this section.
+
+THMS: the **BAIRE CATEGORY THEOREM** for complete metric spaces and for locally
+compact Hausdorff spaces — note the R-native case is already published as
+`thm-baire-category-r` on `cantor-set-baire-and-measure-zero`, and the choice
+analysis there (`rem-baire-in-r-is-choice-free`) is the model for how the general
+case must state ITS choice cost, which is **DC** and is genuinely needed;
+**ALEXANDROFF'S THEOREM** (completely metrizable $\iff$ $G_\delta$ in a complete
+metric space) — this is the item the published
+`rem-complete-metrizability-is-the-topological-shadow` must name in its
+`forward_refs`, the obligation recorded above; the irrationals are homeomorphic
+to $\mathbb{N}^{\mathbb{N}}$; the Hilbert cube is universal for separable
+metrizable spaces; the Cantor set surjects onto every compact metric space.
+
+FS: every Baire space is completely metrizable; $\mathbb{Q}$ is a Baire space.
+
+B (218): $\mathbb{Q}$; the irrationals; the Hilbert cube; genericity of
+nowhere-differentiable functions.
 
 ---
 
