@@ -94,7 +94,7 @@ asserts that the implication reverses, and it does not.
   needs, and it is all that is claimed: nothing above says that the failure
   cannot be worse. Functions with the intermediate value property that are
   continuous at no point at all do exist, the standard one being Conway's
-  base-13 function; it is not constructed anywhere in this library as it stands,
+  base-13 function; it is not constructed at this point in the reading order,
   and no statement here depends on it.
 
 - **Nothing above defines the derivative, and Darboux's theorem is not used.**

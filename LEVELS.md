@@ -361,6 +361,22 @@ phrasing (`not available at this point in the reading order`) survived level 9
 untouched, because the claim is indexed to a position rather than to the corpus.
 That is why §6 of the step-8 brief mandates it.
 
+**But order-relative is decay-RESISTANT, not decay-proof (measured, level-9 step
+10a).** `thm-countable-union-of-null-is-null` uses the approved form — it says
+rearrangement theory is "not in the reading order at this point" — and is
+nevertheless **false**, because the order it names is wrong: `thm-double-series-
+fubini` sits at 129 and the citing item at 133, so the material is *earlier*, not
+later. The phrasing protects against the corpus growing underneath a claim; it
+does not protect against getting the position wrong in the first place. **Check
+the position, not just the phrasing.**
+
+**And the sweep must look for the INVERSE defect too.** `rem-lp-separability`
+claims "the metric spaces page, where separability is defined" — separability is
+defined **nowhere** in the library, which is exactly why every other item writes
+the property out in full. A false claim of PRESENCE is as wrong as a false claim
+of absence, reads as more authoritative, and no pattern built from negation words
+will ever surface it.
+
 ---
 
 ## The escalation rule (fires at any step)
