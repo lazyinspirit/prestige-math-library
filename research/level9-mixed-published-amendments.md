@@ -1,7 +1,9 @@
 # Level-9 (mixed track) — amendments staged for the publishing commit
 
-**Status: STAGED, NOT APPLIED. Owner-approved 2026-07-28** at step 3, both
-amendments together.
+**Status: STAGED, NOT APPLIED.** Amendments 1 and 2 were owner-approved
+2026-07-28 at step 3, together. **Amendment 3 was escalated by the step-8 audit
+later the same day and is NOT yet owner-approved** — it changes published,
+owner-audited text and needs an explicit decision.
 
 Nothing here may land before the commit that publishes the level containing the
 page that falsifies it (`LEVELS.md` §10b: "Amendments to published pages land in
@@ -13,9 +15,10 @@ Level 9 (mixed) = orders 24, 70, 129, 131, 137 and their `-examples` companions.
 Named "mixed" because it spans number theory, linear algebra and real analysis;
 `level9-*` alone was already taken by the pre-renumber level 9.
 
-Both amendments are the **published-claim-decay** class: true when written, made
-false by a later level, and **invisible to every gate**. Found by Beta-9-2 at
-step 2, verified from disk by the orchestrator at step 3.
+Amendments 1 and 2 are the **published-claim-decay** class: true when written,
+made false by a later level, and **invisible to every gate**. Found by Beta-9-2
+at step 2, verified from disk by the orchestrator at step 3. Amendment 3 is a
+different class — a fact the library needs and does not have anywhere.
 
 ---
 
@@ -117,6 +120,8 @@ Applying it:
 - add `thm-euclids-lemma`, `def-p-adic-valuation`,
   `thm-fundamental-theorem-of-arithmetic` and `lem-p-adic-valuation-on-q` to
   `deps` (order 24 → order 102, backward, no cycle);
+- it carries **no** `judge` block — one was removed 2026-07-27 for exactly this
+  kind of Remarks correction — so only `verification.audited` needs refreshing.
 
 **Correction, step-8 audit 2026-07-28 (Beta-9-2a).** The first draft of this
 amendment named three items for "primality **and unique factorisation**" and
@@ -128,8 +133,6 @@ sentence's "needs primality and unique factorisation" is a mild overstatement
 this amendment inherits rather than introduces. Left standing: it is published
 text, the general $p$-adic *absolute value* development does use unique
 factorisation, and rewriting it is a separate owner call.
-- it carries **no** `judge` block — one was removed 2026-07-27 for exactly this
-  kind of Remarks correction — so only `verification.audited` needs refreshing.
 
 ---
 
