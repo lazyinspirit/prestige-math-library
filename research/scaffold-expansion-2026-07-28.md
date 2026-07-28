@@ -17,6 +17,54 @@ and the findings verified from disk rather than taken from an agent's prose.
 
 ---
 
+## The three owner decisions, taken 2026-07-28
+
+Each was escalated by its scaffolder as an owner call and each was answered.
+**Do not re-open these**; they are the settled input to the splice.
+
+### SE-D1. Elementary counting is inserted at order 20
+
+The two elementary counting pairs — binomial coefficients, inclusion–exclusion,
+pigeonhole — go in at order 20, the earliest legal slot. **211 of 230 pages shift
+by +4.** Relative order is preserved, so no existing citation can become
+forward-pointing.
+
+The reasons the cost is worth paying, both verified from disk rather than argued:
+the library has **no binomial coefficient anywhere** (zero items use `\binom`),
+and `research/plan-realanalysis-pages.md` already records an obligation for
+`darboux-lhopital-and-taylor` to mint one itself — so a low counting page
+*discharges* an existing obligation rather than merely adding pages. And the
+reserved band at 60–67 cannot host this, because it sits **above** the symmetric
+groups and the number-theory block, which would therefore go on inventing their
+own counting.
+
+### SE-D2. The whole 40-pair combinatorics and category-theory block is spliced
+
+Not the three-phase alternative. The reasoning is specific to what the level
+table is for: **phasing is already expressible IN the table.** Every pair carries
+a level and a blocked-on column, so build order is readable off it directly.
+Withholding pages from the spec expresses the same intent far worse — it makes
+the table silently incomplete, which is exactly the failure mode where a later
+session re-proposes work that was already planned.
+
+### SE-D3. Global choice is NOT adopted; the split forms are primary
+
+The exempt axiom list stays at **AC, countable choice, dependent choice** and the
+independence facts about them. It does not grow a fourth member.
+
+The three category-theory theorems that wanted global choice — limits assembling
+into a functor, `L_nF` being well defined, and fully-faithful-plus-essentially-
+surjective implying equivalence for LARGE categories — are stated in their
+**data-supplied** form: a *choice* of limit cone for each diagram, or of a
+resolution for each object, is structure the reader supplies, and the conclusion
+is relative to that choice. The unconditional "the limit functor exists" is not
+stated.
+
+This is standard careful practice in category theory rather than a compromise,
+and it is what the scaffold already built, so nothing downstream moves.
+
+---
+
 ## The splice is ONE operation, not three
 
 Jobs 2, 3 and 4 were scaffolded concurrently, and **each proposed its orders
