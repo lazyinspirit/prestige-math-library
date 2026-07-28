@@ -199,6 +199,14 @@ touched — one agent per page otherwise leaves consumers unowned, which has fai
 three times) · `rounds.mjs` (static levels; **ignores publication state**) ·
 `gen-spec.mjs`.
 
+**`rounds.mjs` emits ONE ROUND PER LEVEL** (owner, 2026-07-28). The old `--max 8`
+cap split wide levels into sequential sub-rounds and turned 19 dependency levels
+into 36 rounds; it is now opt-in and off by default. Splitting a level bought
+nothing, because pages sharing a level are provably mutually independent — a
+dependency would force the dependent page to a strictly higher level — so there
+is no ordering to discover inside a level. The whole level is authored in
+parallel, one agent per A/B pair. Only a real dependency edge forces sequencing.
+
 **`rounds.mjs --pairs`** (owner, 2026-07-28) prints one row per A/B pair ranked
 by dependency level, so a session can build the library layer by layer with
 minimal forward referencing; `--md` emits it as the committed table

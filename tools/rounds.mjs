@@ -17,10 +17,16 @@
 // force the dependent page to a strictly higher level. Every prerequisite of a
 // level-k page sits at a level below k and is therefore already authored.
 //
-// A level wider than --max (default 8, owner's cap) is split into balanced
-// chunks that run as SEQUENTIAL rounds. Any split of a level is safe, since the
-// whole level is mutually independent; chunks are grouped by category so a round
-// stays on one topic and my review of it stays focused.
+// ONE ROUND PER LEVEL (owner, 2026-07-28). Every A/B pair in a level is authored
+// in parallel, however wide the level is. Splitting a level bought nothing —
+// pages sharing a level are PROVABLY mutually independent, so there is no
+// ordering to discover inside one and no risk a split mitigates — and it turned
+// 19 levels into 36 sequential rounds.
+//
+// --max N re-enables the old split for a caller that wants to cap concurrency
+// for a reason it can state. It is opt-in. When it is passed, a level wider than
+// N is broken into balanced chunks grouped by category, so a capped round at
+// least stays on one topic.
 //
 // --pairs (owner, 2026-07-28) prints ONE ROW PER A/B PAIR ranked by level, so a
 // future session can build the library layer by layer with minimal forward
@@ -40,7 +46,7 @@ const has = (f) => args.includes(f);
 const flag = (f, d) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1] : d; };
 const specPath = args.find((a) => !a.startsWith('--') && args[args.indexOf(a) - 1]?.startsWith('--') !== true)
   ?? 'research/plan-spec.json';
-const MAX = Number(flag('--max', 8));
+const MAX = Number(flag('--max', Infinity));   // default: no split, one round per level
 const only = flag('--round', null);
 const repo = flag('--repo', '/root/Projects/prestige-math-library');
 

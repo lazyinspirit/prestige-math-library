@@ -156,6 +156,25 @@ draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep t
 silence a checker when the proof does not use it is the dominant historical
 defect class and is forbidden.
 
+**AUTHOR THE WHOLE LEVEL AT ONCE (owner, 2026-07-28).** A dependency level is
+authored in ONE round, every A/B pair in it dispatched in parallel, however wide
+the level is. Do **not** split a level into sequential sub-rounds.
+
+The old `--max 8` cap did exactly that, turning 19 dependency levels into 36
+rounds. It bought nothing: pages sharing a level are *provably* mutually
+independent — a dependency would force the dependent page to a strictly higher
+level — so there is no ordering to discover inside a level and no risk that
+splitting mitigates. It only serialised work that could have run at once.
+
+`tools/rounds.mjs` now emits one round per level by default. `--max N` still
+exists for the rare case where the orchestrator wants to cap concurrency for a
+reason it can state; it is opt-in and no longer the default.
+
+**What still forces sequencing is a real dependency edge, and only that.** Level
+9 (mixed) ran as three rounds because its five pairs sat at four levels: order 129
+depends on 70, and orders 131 and 137 both depend on 129. Splitting there was
+correct. Splitting a single level is not.
+
 ## Step 6 — Judge (parallel with step 5, per pair)
 
 `tools/judge.mts`, model `z-ai/glm-5.2`. Pass `--topic`, and pass the triage
