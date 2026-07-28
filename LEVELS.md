@@ -70,6 +70,27 @@ predating insertion 3 is stale above order 21** — and anything predating
 insertion 2 is stale above order 19. Recompute from `plan-spec.json`; never
 quote an order from memory.
 
+### BRIEF AN AGENT BY PAGE ID, NEVER BY ORDER (2026-07-28, learned the hard way)
+
+A brief that says "audit orders 137 and 138" is a **dangling reference**: `order`
+is the one field a splice rewrites, and the agent resolves it against the spec as
+it stands when the agent runs, not when the brief was written.
+
+Measured the day it happened. Three step-8 auditors were briefed on level 9 as
+"orders 129/130, 131/132, 137/138". Between writing the briefs and the agents
+finishing, 158 pages were spliced in and **every one of those orders moved** —
+129→151, 131→153, 137→159. The `research/level<n>-batch-<i>.pages.json` files
+still carry the pre-splice numbers, so batch file and spec now disagree by 22.
+
+**Nothing was mis-audited, and only because each brief also named the page FILES
+under `library/`.** That is luck, not design. An agent given orders alone would
+have audited whatever had drifted into those slots and reported success.
+
+So: **name the page id and the file path. Quote an order only as a parenthetical
+convenience, never as the identifier.** The same applies to any note that will
+outlive the session — an order in prose is stale the moment a track is spliced,
+which is now a routine operation rather than a rare one.
+
 **When you renumber, the prose scaffolds do not follow automatically.** Insertion
 3 had to rewrite 64 `order N` references in `research/plan-algebra-track.md`, and
 a case-sensitive sweep still missed a capitalised `Orders N to M`, two bare

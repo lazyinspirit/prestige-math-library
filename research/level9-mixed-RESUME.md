@@ -1,5 +1,20 @@
 # Level 9 (mixed) — RESUME STATE, 2026-07-28
 
+> **ORDERS IN THIS FILE ARE PRE-SPLICE AND STALE.** On 2026-07-28, after this
+> level's authoring finished, 158 pages were spliced into `plan-spec.json` and
+> every level-9 order moved. Identify these pages by **id**, never by order:
+>
+> | page id | old order | **live order** |
+> |---|---|---|
+> | `primes-and-the-fundamental-theorem-of-arithmetic` | 24/25 | **28/29** |
+> | `linear-independence-bases-and-dimension` | 70/71 | **74/75** |
+> | `monotone-functions-and-discontinuities` | 129/130 | **151/152** |
+> | `the-derivative-and-mean-value-theorems` | 131/132 | **153/154** |
+> | `the-riemann-integral` | 137/138 | **159/160** |
+>
+> `research/level9-mixed-batch-*.pages.json` also carry the old numbers.
+> Recompute from `plan-spec.json`; see `LEVELS.md` §"Brief an agent by page id".
+
 Written mid-build so a compacted or fresh session can pick up without guessing.
 **Recompute everything here from disk before trusting it.**
 
