@@ -112,6 +112,6 @@ $\mathcal{C}(0,1) = \varnothing$.
   hockey-stick induction. The induction gives the number, and the number then
   gives the surjectivity of $S$.
 
-- **Both hypotheses are visible on the companion page.** The failure at $m = 0$
-  is recorded there as a false statement; the failure at $n = 0$ of the
+- **Both hypotheses are visible.** The failure at $m = 0$ is recorded on the
+  companion page as a false statement; the failure at $n = 0$ of the
   composition formula is recorded in the Statement above.

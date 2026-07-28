@@ -44,9 +44,9 @@ because $p_0^{2}+p_1^{2} = \lVert p\rVert_2^{2} > 0$ there
 Then $g$ is continuous in each variable separately at every point, and $g$ is
 **not** continuous at $0$.
 
-**This is the first function of two real variables in this library**, and its
-domain is $\mathbb{R}^{2}$ with the published metric $d_2$, not an informal
-plane.
+**This is the first function on $\mathbb{R}^{2}$ whose continuity this library
+studies**, and its domain is $\mathbb{R}^{2}$ with the published metric $d_2$,
+not an informal plane.
 
 ## Facts & Assumptions
 

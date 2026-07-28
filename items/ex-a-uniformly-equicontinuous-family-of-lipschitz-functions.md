@@ -16,10 +16,6 @@ short: "the $1$-Lipschitz maps are uniformly equicontinuous"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -45,8 +41,8 @@ Then:
 2. for every nonempty $A \subseteq X$ the distance function
    $\varphi_A(x) := d(x,A)$ ([[def-metric-bounded-diameter]]) belongs to
    $\mathcal{L}$;
-3. $\mathcal{L}$ is **not** pointwise bounded, since it contains every constant
-   function.
+3. if $X \ne \varnothing$ then $\mathcal{L}$ is **not** pointwise bounded, since
+   it contains every constant function.
 
 So equicontinuity and pointwise boundedness are genuinely independent hypotheses:
 this family has the first and not the second, and the next counterexample on this

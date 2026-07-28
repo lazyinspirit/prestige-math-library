@@ -44,8 +44,9 @@ than saying "restrict". [[thm-linearity-of-the-integral]] proves closure under
 sums and scalar multiples; the two halves are genuinely different, because
 $\sup(f+g) \le \sup f + \sup g$ can be strict — so the sum case squeezes rather
 than computes — while a negative scalar exchanges the roles of $\sup$ and $\inf$.
-[[thm-monotonicity-of-the-integral]] is short and is cited by most of what
-follows. [[thm-additivity-over-subintervals]] proves the splitting in both
+[[thm-monotonicity-of-the-integral]] is short, and it is what every later estimate
+of an integral against a pointwise bound goes through; seven of the sixteen later
+items on this page cite it. [[thm-additivity-over-subintervals]] proves the splitting in both
 directions and then the oriented identity
 $\int_u^v f + \int_v^w f = \int_u^w f$ for *arbitrary* $u,v,w$; that last clause
 is proved by observing that the oriented integral is a difference of values of
@@ -58,8 +59,9 @@ subintervals.
 [[thm-composition-with-a-continuous-function]] is the hardest proof on the page:
 if $f$ is integrable with values in $[m,M]$ and $\varphi$ is continuous on
 $[m,M]$, then $\varphi\circ f$ is integrable. The classical proof splits the
-index range into good and bad indices; this library has no sum over a subset of
-an index range, so the split is carried instead by one inequality valid at every
+index range into good and bad indices; the finite-sum laws available here are
+stated for $\sum_{i<n}$ and none of them splits a range into a subset and its
+complement, so the split is carried instead by one inequality valid at every
 index. **The order matters**: *continuous after integrable* is the hypothesis,
 and the reversal is refuted on the companion page.
 [[cor-integrability-of-absolute-values-products-and-lattice-operations]] reads off

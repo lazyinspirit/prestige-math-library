@@ -19,10 +19,6 @@ short: "the separation implication chain"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -114,6 +110,6 @@ and no clause above may be read as giving it.
 
 - **Every clause above is an implication and none is an equivalence.** This page refutes four of the possible converses among its false statements — $T_1$ does not give Hausdorff, normal does not give Hausdorff, Hausdorff does not give regular, and unique sequential limits do not give Hausdorff — and asserts nothing about the others.
 
-- **The $T_1$ hypothesis is where the numerals differ from the adjectives.** *Regular*, *completely regular*, *normal*, *completely normal* and *perfectly normal* carry no $T_1$ in this library; $T_3$, $T_{3\frac12}$, $T_4$, $T_5$ and $T_6$ are the conjunctions with $T_1$. Clause 5 is the only place the conjunction is genuinely needed for the next arrow, and clauses 3 and 5 are what makes the numbered chain descend at all.
+- **The $T_1$ hypothesis is where the numerals differ from the adjectives.** *Regular*, *completely regular*, *normal*, *completely normal* and *perfectly normal* carry no $T_1$ in this library; $T_3$, $T_{3\frac12}$, $T_4$, $T_5$ and $T_6$ are the conjunctions with $T_1$. Clauses 3 and 5 are the two places the conjunction is genuinely needed for the next arrow, and they are what makes the numbered chain descend at all.
 
 - **The countable choice in clause 1 is inherited, not introduced.** It is spent in the proof of [[thm-perfectly-normal-implies-completely-normal]] and nowhere else on this page; clause 6 in particular is choice free, since the metric proofs construct their open sets explicitly.

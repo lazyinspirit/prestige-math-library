@@ -1,7 +1,7 @@
 ---
 id: ex-the-ordinal-spaces-omega-plus-one-and-omega-one
 kind: example
-title: "$\\omega + 1$ as a convergent sequence together with its limit, and $[0, \\omega_1)$, in which every sequence lies inside an at most countable initial segment"
+title: "$\\omega + 1$ as a convergent sequence together with its limit, and, assuming countable choice, $[0, \\omega_1)$, in which every sequence lies inside an at most countable initial segment"
 status: draft
 origin: session
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3,

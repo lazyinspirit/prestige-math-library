@@ -77,13 +77,17 @@ corresponding constant maps.
 
 ## Remarks
 
-- **Not every closed set is a zero set.** The zero sets of $X$ are exactly the
-  closed sets that a continuous real-valued function can see, and a space may
-  have very few continuous real-valued functions: in the indiscrete topology on a
-  set with at least two points, every continuous map to $\mathbb{R}$ is constant,
-  because a nonconstant one would pull back two disjoint intervals to two
-  disjoint nonempty open sets. So the only zero sets there are $\varnothing$ and
-  $X$, while every subset is a $G_\delta$, both $\varnothing$ and $X$ being open.
+- **A closed set need not be a zero set, and no witness for that is exhibited
+  here.** The zero sets of $X$ are exactly the closed sets that a continuous
+  real-valued function can see, and a space may have very few continuous
+  real-valued functions: in the indiscrete topology on a set with at least two
+  points, every continuous map to $\mathbb{R}$ is constant, because a nonconstant
+  one would pull back two disjoint intervals to two disjoint nonempty open sets.
+  So the only zero sets there are $\varnothing$ and $X$ — which in that space is
+  also all of the closed sets and all of the $G_\delta$ sets, the only open sets
+  being $\varnothing$ and $X$. That space therefore illustrates the scarcity of
+  continuous functions without separating the two classes; a space with a closed
+  set that is not a zero set is not constructed on this page.
 
 - **Where zero sets are used on this page.** They are the vocabulary of complete
   regularity: the defining function separating a point from a closed set $C$

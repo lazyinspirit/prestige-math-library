@@ -88,8 +88,11 @@ here. Against the classical chain it is short by exactly **one** arrow:
 This is **Urysohn's lemma**, applied to the point $\{x_0\}$ — which is closed by
 $T_1$ — and the closed set $C$. Its proof indexes a family of open sets by the
 dyadic rationals, choosing each from the previous one by the shrinking lemma; it
-is not available at this point in the reading order, and this page therefore
-does not assert the implication anywhere. What would license it is a page
+is not available at this point in the reading order, and no theorem of this page
+proves it. Where it is named — in [[def-completely-regular-and-tychonoff-spaces]]
+and in [[thm-completely-regular-implies-regular]] — it is named as the classical
+arrow that is missing here, and it is never used as a fact in any proof on this
+page. What would license it is a page
 proving Urysohn's lemma, which in this library's plan sits above the present
 one.
 
@@ -102,8 +105,9 @@ supply it, and any page that does supply it must record a choice principle.
 
 **Everything else in the classical chain is here.** In particular
 $T_6 \Rightarrow T_5$ *is* proved ([[thm-perfectly-normal-implies-completely-normal]]),
-and proved without any Urysohn function: it needs only normality and the
-$F_\sigma$ presentation of open sets. A reader who expects that arrow also to be
+and proved without any Urysohn function: it needs only normality, the
+$F_\sigma$ presentation of open sets, and the Axiom of Countable Choice recorded
+in §4 below. A reader who expects that arrow also to be
 unavailable is thinking of the route through "every closed set is a zero set",
 which does need Urysohn's lemma; the route taken here does not.
 

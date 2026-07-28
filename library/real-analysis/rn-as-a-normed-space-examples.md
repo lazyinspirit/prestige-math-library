@@ -63,8 +63,9 @@ that a norm satisfying the parallelogram law comes from an inner product, is
 **not** proved here.
 
 **Continuity of a function of two variables.**
-[[cex-separately-continuous-not-jointly-continuous]] is the first function of two
-real variables in this library: $g(p) = p_0p_1/(p_0^{2}+p_1^{2})$ with $g(0) = 0$.
+[[cex-separately-continuous-not-jointly-continuous]] is the first function on
+$\mathbb{R}^{2}$ whose continuity this library studies:
+$g(p) = p_0p_1/(p_0^{2}+p_1^{2})$ with $g(0) = 0$.
 Each partial function is a rational function with nonvanishing denominator, or
 else constantly $0$, hence continuous; but along the diagonal the value is
 constantly $1/\iota(2)$, so the sequence $\bigl(1/\iota(k+1),1/\iota(k+1)\bigr)$

@@ -14,10 +14,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -87,5 +83,11 @@ coefficients are $0$ ([[def-binomial-coefficient]]).
   The double count needs neither.
 
 - **Pascal's rule is the special case $m = 1$**, read through
-  $\binom{1}{0} = \binom{1}{1} = 1$ and $\binom{1}{i} = 0$ for $i \ge 2$: the
-  identity collapses to $\binom{1+n}{k} = \binom{n}{k} + \binom{n}{k-1}$.
+  $\binom{1}{0} = \binom{1}{1} = 1$ and $\binom{1}{i} = 0$ for $i \ge 2$: for
+  $k \ge 1$ the identity collapses to
+  $\binom{1+n}{k} = \binom{n}{k} + \binom{n}{k-1}$, while at $k = 0$ the sum has
+  the single term $\binom{1}{0}\binom{n}{0} = 1 = \binom{n+1}{0}$. The
+  restriction $k \ge 1$ is not cosmetic: $n - m$ is the **truncated** difference
+  throughout this page ([[def-nat-finite-sum-and-product]]), so writing the
+  collapsed identity at $k = 0$ would read $\binom{n}{0-1}$ as $\binom{n}{0} = 1$
+  and assert $1 = 1 + 1$.

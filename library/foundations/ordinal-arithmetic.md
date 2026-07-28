@@ -66,7 +66,8 @@ theorem.
 
 **What the laws are, and what they are not.** Addition and multiplication are
 strictly increasing and continuous in the **right** argument, weakly increasing
-in the left, and left cancellative
+in the left, and left cancellative — for multiplication, in each case whenever the
+left factor is nonzero, since $0 \cdot \beta = 0$ for every $\beta$
 ([[thm-ordinal-arithmetic-monotonicity]] — the workhorse of the page:
 subtraction, division with remainder, the exponent laws and the Cantor normal
 form all run on it). Addition is associative; multiplication is

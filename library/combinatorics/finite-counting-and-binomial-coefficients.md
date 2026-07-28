@@ -18,8 +18,10 @@ examples: []
 **Objective.** This page builds finite counting from the ground up: what
 $\lvert A\rvert$ means, the two rules that every count is assembled from, and the
 factorials and binomial coefficients they produce. It ends with the binomial and
-multinomial theorems and with stars and bars. Everything is proved from the
-countability page and the naturals below it; nothing is imported.
+multinomial theorems and with stars and bars. Everything is proved from this
+page's declared prerequisites — the countability page and the page on roots and
+rational powers — together with the naturals and the ordered-field foundations
+below them; nothing is imported from later in the reading order.
 
 The starting point is [[def-finite-cardinality]]. A set is finite when it is
 equinumerous with a natural number, and the pigeonhole principle says it is
@@ -124,7 +126,7 @@ increasing enumeration of an arbitrary subset.
 fixes and with what is deliberately left to later pages, inclusion and exclusion
 among them.
 
-**Two habits are enforced throughout, and both have a companion item.** Every sum,
+**Two habits are enforced throughout.** Every sum,
 product and index range is checked at its first index, because $\mathbb{N}$
 contains $0$ here. Three results carry a hypothesis for that reason alone: the
 alternating row sum needs $n \ge 1$, the weak-composition count needs $m \ge 1$

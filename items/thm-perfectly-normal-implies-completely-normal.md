@@ -16,10 +16,6 @@ short: "perfectly normal implies completely normal"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -51,7 +47,7 @@ applied once to each member of a countable family of closed sets, and the
 $F_\sigma$ presentation of two open sets.
 
 **Where the choice principle is spent, and why it is not removable as written.**
-Step 2.1 selects, for each $n \in \mathbb{N}$ at once, one open set $U_n$ out of
+Step 4.1 selects, for each $n \in \mathbb{N}$ at once, one open set $U_n$ out of
 the nonempty family that normality provides for the closed set $F_n$, and
 likewise one $V_n$; normality is an existence statement and supplies no rule for
 singling out a member, so extracting the two sequences is an application of

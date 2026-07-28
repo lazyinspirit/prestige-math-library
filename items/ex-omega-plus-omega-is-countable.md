@@ -30,8 +30,9 @@ The ordinal $\omega + \omega$ is **at most countable** as a set
 
 There is no tension. Countability is a statement about bijections and ignores
 order; order type is a statement about order isomorphisms and is finer. Two
-well-orders on the same countably infinite set can have different order types,
-and $\omega$ and $\omega + \omega$ are the smallest pair that shows it.
+well-orders on the same countably infinite set can have different order types:
+$\omega$ and $\omega + 1$ already show it, as the first example of this page
+records, and $\omega$ and $\omega + \omega$ show it with the two copies visible.
 
 $$\omega + \omega \;=\; \mathrm{ot}\big(\underbrace{0, 1, 2, \dots}_{\text{first copy}} \ \ \underbrace{0', 1', 2', \dots}_{\text{second copy}}\big).$$
 

@@ -150,5 +150,7 @@ the gap between consecutive members of $K$.
 which also shows the $T_1$ hypothesis in $T_4$ is not redundant),
 [[fs-every-hausdorff-space-is-regular]] (the $K$-topology) and
 [[fs-unique-sequential-limits-imply-hausdorff]] (the cocountable topology on
-$\mathbb{R}$, where every convergent sequence is eventually constant). The
-witnesses are worked in full on the companion page.
+$\mathbb{R}$, where every convergent sequence is eventually constant). The first,
+second and fourth witnesses are worked in full on the companion page; the third
+is the $K$-topology built above on this page, so that the false statement can
+cite it.

@@ -31,8 +31,8 @@ than illustrations, because
 of the block arrangement.
 
 **Order type is not cardinality.**
-[[ex-omega-plus-omega-is-countable]] separates the two invariants at the
-smallest place they come apart: $\omega + \omega$ is an at most countable set
+[[ex-omega-plus-omega-is-countable]] separates the two invariants explicitly:
+$\omega + \omega$ is an at most countable set
 carrying a well-order that is not a copy of $\omega$. Reading "$\omega + \omega$
 is bigger than $\omega$" as a statement about size is the confusion that item
 exists to prevent.
@@ -42,8 +42,10 @@ exists to prevent.
 $\omega, \omega^{\omega}, \omega^{\omega^{\omega}}, \dots$ and proves that its
 supremum $\varepsilon_0$ satisfies $\omega^{\varepsilon_0} = \varepsilon_0$.
 The fixed point is exhibited **by hand**, from continuity of
-$\beta \mapsto \omega^{\beta}$ at limits; no fixed-point theorem is used and
-none exists in this library. The tower is built with
+$\beta \mapsto \omega^{\beta}$ at limits; no fixed-point theorem is used, and
+none that this library proves applies here, every fixed-point theorem on disk
+being stated for a *set* carrying an order or a metric while the ordinals are not
+a set. The tower is built with
 [[lem-recursion-on-the-ordinals]] rather than the published
 [[thm-recursion]], because the step $\beta \mapsto \omega^{\beta}$ is a class
 operation and the recursion theorem over $\mathbb{N}$ needs a set-sized

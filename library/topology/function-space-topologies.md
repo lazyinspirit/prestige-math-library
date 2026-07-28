@@ -112,7 +112,9 @@ arbitrary spaces $Z$ and $Y$ — an assertion about two sets of continuous maps 
 correspondence between them. **It is not a homeomorphism, and the page never says
 it is**: no topology is placed on either side, and the theorem's own remark states
 exactly what the homeomorphism form would additionally require, namely compactness
-for arbitrary topological spaces, which belongs to a later page.
+for arbitrary topological spaces, which is not available at this point in the
+reading order — the planned page carrying it sits *below* this one and is not yet
+built, so no later page can supply it retroactively.
 
 **Dini's theorem, and one definition for a later page.** [[thm-dini]] proves that
 on a compact metric space a nondecreasing sequence of continuous real functions

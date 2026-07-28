@@ -91,7 +91,7 @@ rational. Nothing here asserts anything about that variant.
 
 ## Remarks
 
-- **Step 4.1 is what replaces the usual split of the index range.** The classical proof separates the indices into a good set $G$ and a bad set $B$ and sums over each; this library has no sum over a subset of an index range ([[lem-finite-sum-laws]] is stated for $\sum_{i<n}$), so the split is carried instead by a single inequality valid at *every* index, whose two summands are exactly the two contributions. The bound obtained is the same one.
+- **Step 4.1 is what replaces the usual split of the index range.** The classical proof separates the indices into a good set $G$ and a bad set $B$ and sums over each; the finite-sum toolkit used here is that of [[lem-finite-sum-laws]], stated for $\sum_{i<n}$ and carrying no clause that splits a range into a subset and its complement, so the split is carried instead by a single inequality valid at *every* index, whose two summands are exactly the two contributions. The bound obtained is the same one.
 
 - **The hypothesis $f[\,[a,b]\,] \subseteq [m,M]$ is what makes $\varphi\circ f$ defined at all**, and $m,M$ exist because an integrable $f$ is bounded ([[def-darboux-sums]]). Taking $[m,M]$ to be any interval containing the range of $f$ is legitimate and changes nothing, since a continuous function on a larger compact interval restricts to a continuous one.
 

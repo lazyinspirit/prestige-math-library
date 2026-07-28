@@ -85,7 +85,7 @@ and fails the axiom immediately above it.
 
 ## Remarks
 
-- **Normality and regularity are incomparable without $T_1$.** This space is normal and not regular. The reverse failure also occurs: the indiscrete two-point space is regular and normal but not $T_0$, and the cofinite topology on an infinite set is $T_1$ and neither regular nor normal, both worked on this page. Only with $T_1$ does normality imply regularity ([[def-normal-and-t4-spaces]]).
+- **Normality without $T_1$ does not imply regularity.** This space is normal and not regular. Other combinations occur too: the indiscrete two-point space is regular and normal but not $T_0$, and the cofinite topology on an infinite set is $T_1$ and neither regular nor normal, both worked on this page. Whether regularity implies normality is a question this library leaves open, no witness being reachable from the material available here ([[rem-separation-axiom-conventions]]); nothing above asserts that the two conditions are incomparable. Only with $T_1$ does normality imply regularity ([[def-normal-and-t4-spaces]]).
 
 - **Why "the closed point" is the right name for $a$.** $\{a\}$ is closed and $\{b\}$ is not, so the two points of $S$ are not interchangeable even though the set has only two elements; the labelling is fixed once and for all in [[def-standard-topologies]].
 

@@ -47,7 +47,10 @@ $$\omega^{\varepsilon_0} = \varepsilon_0,$$
 so it is a **fixed point** of $\beta \mapsto \omega^{\beta}$. This is exhibited
 here by hand: the tower is written down, its supremum is taken, and the fixed
 point equation is proved from continuity at limits. **No fixed-point theorem is
-used**, and none is available in this library.
+used**, and none that this library proves applies here: every fixed-point theorem
+on disk is stated for a *set* carrying an order or a metric, whereas
+$\beta \mapsto \omega^{\beta}$ is a class operation on the ordinals, which are
+not a set.
 
 ## Facts & Assumptions
 
