@@ -148,3 +148,39 @@ splice time.
 
 (The orchestrator briefed Beta-9-2 that order 24 would discharge this. That was
 wrong, and the agent corrected it from disk.)
+
+---
+
+## Amendment 3 — `items/lem-finite-sum-laws.md`, a NEW clause
+
+**Trigger: `the-riemann-integral` publishing. Escalated by the step-8 audit,
+2026-07-28.**
+
+**Add a clause 7: the finite double-sum interchange**
+
+$$\sum_{i<n}\sum_{j<p} a_{ij} \;=\; \sum_{j<p}\sum_{i<n} a_{ij}.$$
+
+**Why it is owed.** Two items on `the-riemann-integral` —
+`thm-finitely-many-discontinuities-integrable` and `thm-lebesgue-criterion` —
+need it, and it exists **nowhere in the library**. The auditor confirmed this
+from disk: `lem-finite-sum-laws` has six clauses and none is this;
+`thm-double-series-fubini` is about infinite double series; and the precedent the
+authoring agent cited, `[L5]` of `thm-countable-union-of-null-is-null`, is a
+different fact entirely ("every finite list of naturals has an upper bound").
+
+**What was done instead, and why it is a stopgap.** The auditor replaced the bare
+assertion with its own three-line induction, inline, in both `[L]` lines —
+induction on the outer bound, base from the `def-finite-sum` recursion clause
+plus clause 2 at $\lambda = 0$, successor from the recursion clause plus clause 1.
+That is correct and it is gated, but **it duplicates the same induction in every
+consumer**, and every later multi-index proof in the library will want the same
+fact. Duplicating it is the wrong equilibrium.
+
+**Why it is staged rather than applied.** `lem-finite-sum-laws` is `published`
+and `audited`. Adding a clause is a material change to published, owner-audited
+text: it needs owner approval, and applying it clears `verification.audited` so
+`depcheck` forces a re-audit. It lands in the commit that publishes the level, or
+not at all.
+
+**When it lands**, the two inline inductions should be replaced by a citation, so
+the library holds one proof of the fact rather than three.

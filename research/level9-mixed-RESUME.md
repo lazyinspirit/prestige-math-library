@@ -34,7 +34,7 @@ prioritising mathematical accuracy, logical validity between steps, and correct
 citation of dependencies. Minor citational quirks and gaps a competent reader
 closes in 30 seconds are forgivable.
 
-**STOP at the 10c rundown. Do NOT publish.** Flipping `status: published` and
+**STOP at the rundown (now step 10b). Do NOT publish.** Flipping `status: published` and
 setting `verification.audited` are the owner's alone.
 
 **Use `dangerouslyDisableSandbox: true` on Bash.** An overnight run stalled
@@ -45,18 +45,21 @@ escalations, not permission denials.
 **The owner can message a background agent directly, and I cannot see it.** See
 the memory `owner-channels-to-subagents`. Never allege fabricated approval; ask.
 
-## Build state
+## Build state — ALL AUTHORING COMPLETE
 
-| round | pages | status |
+| round | pages (by id) | status |
 |---|---|---|
-| 1 | 24/25, 70/71 | **DONE, committed** (`ad04db1`, `8994e16`) — 55 items |
-| 2 | 129/130 | authoring in flight |
-| 3 | 131/132, 137/138 | not started; both depend on 129 |
+| 1 | primes+FTA, linear-independence | **DONE, committed** (`ad04db1`, `8994e16`) — 55 items |
+| 2 | monotone-functions-and-discontinuities | **DONE, committed** (`0c465de`) — 43 items |
+| 3 | derivative+MVT, riemann-integral | **DONE, committed** (`6fbebad`, `edc800a`) — 57 items |
 
-Three authoring rounds, not two: 131 and 137 genuinely depend on 129 (the spec
-denied it; Beta-9-1 found it), and 129 depends on 70 after the Hamel resolution.
-`LEVELS` §2 permits depending on an earlier page inside the same level, so this
-is authoring order, not three publish cycles.
+**155 items, five A/B pairs, all `status: draft`. Nothing published.**
+
+Three authoring rounds because the five pairs sat at four computed dependency
+levels: monotone-functions depends on linear-independence, and both the
+derivative and the integral depend on monotone-functions. That is a real edge
+set, not a batching cap — the owner removed the cap on 2026-07-28 (`LEVELS.md`
+step 5, one round per level).
 
 ## Commits (content repo)
 
@@ -80,13 +83,8 @@ App repo (`prestige-intelligence`, branch `feat/reasoning-training-controls`):
 
 ## In flight
 
-- **Round-2 author** (pages 129/130), 44 items, the level's largest batch.
-- **Step-8 auditors for batch 2**, one per A/B pair (24/25 and 70/71), running
-  concurrently because page 129 does not depend on page 24 at all and touches
-  page 70 through exactly one item. The 70/71 auditor was told to flag loudly if
-  it materially changes the **Statement** of `cor-every-vector-space-has-a-basis`,
-  `def-linear-basis` or `thm-unique-coordinates-with-respect-to-an-ordered-basis`,
-  which page 129's `lem-hamel-basis-exists` cites.
+Step 8 for the three real-analysis pairs, one auditor per pair. The number-theory
+and linear-algebra pairs were audited earlier and are committed (`2d22539`).
 
 ## Done since this file was written
 
@@ -108,35 +106,31 @@ it weakens a claim the library could actually make.
 
 ## Remaining work
 
-1. Round 3 (131/132, 137/138) once 129 lands.
+1. Commit the three real-analysis step-8 audits.
 2. ~~Re-judge rounds 1-2 with full `--batch` context.~~ **CANCELLED by the owner,
    2026-07-28: "Don't rejudge rounds 1 and rounds 2 again. We'll audit everything
-   at step 10a anyway."** Do not re-add this.
+   at step 10a anyway."** Do not re-add this. (Step 10a is now **step 9** — the
+   seam stage was removed the same day and the final audit renumbered.)
 
-   The reasoning is sound and worth keeping: the judge's measured precision on
-   this corpus is 21-24%, step 10a is a full-level mathematical-accuracy audit by
-   Alpha-n, and re-judging risks the treadmill documented in
-   `parallel-authoring-protocol` — a rejection is not evidence of a defect, and
-   the objection rotates between runs.
+   The reasoning is sound: measured judge precision here is 21-24%, and
+   re-judging risks the treadmill documented in `parallel-authoring-protocol`,
+   where a rejection is not evidence of a defect and the objection rotates
+   between runs.
 
-   **What this costs, recorded so nobody later claims otherwise:** rounds 1 and 2
-   were judged with the `--batch` block INERT. Four of five level slugs had no
-   page file under `library/` at judge time, so they contributed nothing and
-   `judge.mts` warned on stderr on every call — the round-2 agent reported the
-   warning on all 44 of its invocations. So **the A/B-pair batch-context change
-   was never actually exercised on orders 24/25, 70/71 or 129/130**, and any claim
-   about its effect on those pages is unmeasured rather than measured. Round 3 is
-   the first round to get live batch context. Step 10a is now the only tier that
-   reads those three pairs against their siblings.
-3. Step 8 for **batch 1** (the real-analysis pages), once they are authored.
-   Batch 2's step 8 is in flight; see above.
-4. Step 9 seam audit and step 10a level audit — **resume Alpha-9**, agent
-   `ae085501642ff3e01`, which already carries this level's context.
-5. Step 10b scope-denial sweep of the published corpus. **Do not run it by
+   **What it costs, recorded so nobody later overstates the evidence:** rounds 1
+   and 2 were judged with the `--batch` block INERT — four of five level slugs
+   had no page file at judge time, and the round-2 agent reported the warning on
+   all 44 of its calls. Round 3 was the first to get live batch context, and even
+   there the budget dropped the cited page for the two longest items. **So no
+   model tier has ever read these five pairs against each other.** Step 9 is the
+   only tier that will.
+3. **Step 9** — the final whole-level Alpha-n audit (was 10a). Resume Alpha-9,
+   agent `ae085501642ff3e01`, which carries this level's context.
+4. **Step 10a** scope-denial sweep of the published corpus. **Do not run it by
    grep — see below.**
-6. Step 10c rundown, then **stop**.
+5. **Step 10b** rundown, then **stop**.
 
-## Step 10b: why a regex sweep is not enough, measured
+## Step 10a (was 10b): why a regex sweep is not enough, measured
 
 I probed the published corpus for scope-denial claims level 9 falsifies, using
 the phrasings the step-8 brief names: `not (developed|proved|available|
