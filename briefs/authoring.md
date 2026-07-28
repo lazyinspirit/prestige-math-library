@@ -156,13 +156,18 @@ Then the judge (step 6), model **`z-ai/glm-5.2`** via `tools/judge.mts`. Pass
 `--topic` and `--conventions`; put the triage rule of §6 into `--conventions`
 so the judge does not flag 30-second gaps as defects. **Never a Claude model.**
 
-**Also pass `--batch` with the level's A-page slugs**, comma-separated (the
-harness adds each `-examples` companion itself). The judge's context unit is the
-A/B pair — it always sees your page and its companion page in full — and
-`--batch` extends that to the level's other pages as Statement + Remarks, so a
-step resting on a sibling page of the same batch can actually be checked. If you
-do not know the level's A pages, ask the orchestrator rather than guessing: a
-misspelled slug warns on stderr and contributes nothing.
+**Pass `--batch` with exactly the pages your page BOTH declares in `requires`
+and actually cites** — comma-separated, A pages only, the harness adds each
+`-examples` companion itself. **Do not pass every A-page slug in the build**
+(owner, 2026-07-28): measured, that produced 93,810-token prompts while the
+harness discarded three of five sibling pages on every call, because the cut is
+in relevance order and drops precisely the pages you do not cite.
+
+The judge's context unit is the A/B pair — it always sees your page and its
+companion in full — and `--batch` extends that to the pages your proofs actually
+rest on. If you are unsure which those are, ask the orchestrator rather than
+guessing: a misspelled slug warns on stderr and contributes nothing, and a
+correct-but-uncited slug just buys a truncation.
 
 Three hard-won rules about the judge:
 

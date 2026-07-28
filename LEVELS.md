@@ -208,7 +208,10 @@ that keeps the JSON parseable.
 **Always set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`** and capture
 stdout — `JUDGE_COSTLOG` records spend, not verdicts.
 
-**Always pass `--batch` with the level's A-page slugs (owner, 2026-07-28).**
+**Pass `--batch` with exactly the pages this item's page BOTH declares in
+`requires` and actually cites — computed mechanically, never typed (owner,
+2026-07-28, superseding "always pass every A-page slug").**
+
 Comma-separated, A pages only — the harness pulls in each `-examples` companion
 itself, and naming a page that does not exist under `library/` prints a warning
 rather than silently contributing nothing:
@@ -217,8 +220,21 @@ rather than silently contributing nothing:
 --batch "divisibility-gcd-and-bezout,rings-subrings-and-integral-domains,vector-spaces-and-subspaces"
 ```
 
+**Why not every slug. Measured on `frontier-1`, 2026-07-28.** The mean prompt was
+**93,810 tokens**, and with six slugs named the harness printed
+`batch context budget reached; omitted:` for **three of five sibling pages on
+every call** — bought, then discarded. The cut is in relevance order, so the
+pages dropped are exactly the uncited ones; naming them buys nothing and pays
+for a truncation. That build had **three cross-page edges among twelve pages**,
+so nine of twelve pages needed no batch at all, and the re-sweep run this way
+produced empty stderr on every call with no omission line.
+
+`--batch` earns its cost across a genuine dependency level, where siblings can
+bear on one another. Across a frontier set of mutually independent pairs it is
+close to pure waste. **Compute the edge set; do not assume it.**
+
 The judge's context unit is the **A/B pair**: it always receives its item's own
-page AND its companion page in full, and `--batch` adds the level's other pages
+page AND its companion page in full, and `--batch` adds the cited pages
 as Statement + Remarks. This is what lets it check a step against a dependency
 that lives on a sibling page of the same batch, and what lets an example be
 checked against the theorem it illustrates. Its primary job is unchanged and

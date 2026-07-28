@@ -320,6 +320,16 @@ budget on primes and vector spaces while judging derivatives, and then declared
 the elision of the page that mattered. The authoring agent reported this; no gate
 could have.
 
+**And since the cut IS in relevance order, naming an uncited page buys nothing —
+so stop naming them (owner, 2026-07-28).** `--batch` now takes exactly the pages
+the item's own page both declares in `requires` and actually cites, computed
+mechanically. Measured on `frontier-1`: six slugs gave a **mean prompt of 93,810
+tokens** while the harness printed `batch context budget reached; omitted:` for
+**three of five sibling pages on every call**; the same build had **three
+cross-page edges among twelve pages**, and the re-sweep run on the new rule
+produced empty stderr on every call. The two facts compose — relevance ordering
+makes the truncation harmless, and edge-restricted batching makes it unnecessary.
+
 Pages the item actually cites now sort first, so the cut falls on pages it does
 not cite; ties keep the caller's order. Verified by re-running the same call on
 `thm-derivative-of-an-inverse`: the omitted set flipped from

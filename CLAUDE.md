@@ -45,8 +45,12 @@ run a page from prompt to publish; the normative docs above win where they diffe
    `--topic` and optional `--conventions`, set `JUDGE_COSTLOG` for the cost
    report). **The judge's context unit is the A/B PAIR (owner, 2026-07-28):** it
    always receives its item's own page AND its `-examples` companion in full, and
-   `--batch "<A-page slugs>"` adds the rest of the level as Statement + Remarks —
-   pass it on every level sweep. `ARCHITECTURE.md` §5 has the full inventory.
+   `--batch "<A-page slugs>"` adds further pages as Statement + Remarks.
+   **Pass exactly the pages the item's own page BOTH declares in `requires` and
+   actually cites — computed mechanically, never typed (owner, 2026-07-28,
+   superseding "pass it on every level sweep").** Measured: with every slug
+   named, the mean prompt was 93,810 tokens and the harness discarded three of
+   five sibling pages on every call. `LEVELS.md` §"Step 6" has the numbers. `ARCHITECTURE.md` §5 has the full inventory.
    Record model/verdict/date in `verification.judge`; an item published
    on owner audit over a verified judge false-positive is recorded `audited`
    without a fabricated judge pass. Reflow wrapped steps first with
