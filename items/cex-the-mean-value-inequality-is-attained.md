@@ -2,7 +2,7 @@
 id: cex-the-mean-value-inequality-is-attained
 kind: counterexample
 title: "A curve for which the mean value inequality is an equality, showing the constant cannot be improved"
-status: draft
+status: published
 origin: session
 deps: [thm-mean-value-inequality, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, lem-derivative-of-a-power, def-derivative, cex-mean-value-equality-fails-for-a-vector-valued-function, thm-of-square-roots, thm-algebra-of-continuous-functions, cor-differentiable-implies-continuous, def-canonical-natural, lem-of-naturals-positive, def-integer-power, def-interval]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

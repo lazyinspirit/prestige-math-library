@@ -2,7 +2,7 @@
 id: cor-binomial-theorem-consequences
 kind: corollary
 title: "$\\sum_{k<n+1}\\binom{n}{k} = 2^{n}$, and $\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for $n \\ge 1$"
-status: draft
+status: published
 origin: session
 deps: [thm-binomial-theorem, cor-cardinality-of-the-power-set, thm-sum-rule,
        def-binomial-coefficient, def-nat-power, def-nat-finite-sum-and-product,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

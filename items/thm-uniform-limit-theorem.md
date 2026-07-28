@@ -2,7 +2,7 @@
 id: thm-uniform-limit-theorem
 kind: theorem
 title: "A uniform limit of continuous functions is continuous, so $C(X,Y)$ is closed in $Y^{X}$ under the uniform metric"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-uniform-convergence, lem-uniform-convergence-in-the-uniform-metric,
        lem-uniform-metric-on-a-function-space, def-continuous-map-top,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

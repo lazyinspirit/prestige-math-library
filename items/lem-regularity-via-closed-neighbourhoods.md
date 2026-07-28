@@ -2,7 +2,7 @@
 id: lem-regularity-via-closed-neighbourhoods
 kind: lemma
 title: "A space is regular if and only if every point has a neighbourhood base of closed neighbourhoods, if and only if $x \\in U$ open gives an open $V$ with $x \\in V \\subseteq \\overline{V} \\subseteq U$"
-status: draft
+status: published
 origin: session
 deps: [def-regular-and-t3-spaces, def-neighbourhood-top,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

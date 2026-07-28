@@ -2,7 +2,7 @@
 id: thm-composition-with-a-continuous-function
 kind: theorem
 title: "If $f$ is integrable on $[a,b]$ with values in $[m,M]$ and $\\varphi$ is continuous on $[m,M]$, then $\\varphi \\circ f$ is integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-riemann-criterion, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, cor-boundedness-theorem-r, def-uniform-continuity-real, thm-heine-borel-r, def-open-cover-r, lem-finite-sum-laws, def-finite-sum, def-oscillation, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field, lem-of-abs-value, thm-of-archimedean, cor-archimedean-reciprocal]
 forward_refs: [cex-a-composition-of-integrable-functions-that-is-not-integrable]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

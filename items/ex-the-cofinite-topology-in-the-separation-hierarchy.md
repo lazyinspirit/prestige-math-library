@@ -2,7 +2,7 @@
 id: ex-the-cofinite-topology-in-the-separation-hierarchy
 kind: example
 title: "The cofinite topology on an infinite set is $T_1$ but neither Hausdorff nor regular nor normal"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-hausdorff-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

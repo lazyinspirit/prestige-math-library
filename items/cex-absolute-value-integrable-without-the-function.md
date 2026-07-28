@@ -2,7 +2,7 @@
 id: cex-absolute-value-integrable-without-the-function
 kind: counterexample
 title: "A function that is not Riemann integrable although $\\lvert f\\rvert$ is"
-status: draft
+status: published
 origin: session
 deps: [cor-integrability-of-absolute-values-products-and-lattice-operations, def-darboux-integral, def-darboux-sums, def-partition-and-refinement, lem-q-and-irrationals-dense-r, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, thm-lebesgue-criterion, lem-nondegenerate-interval-is-not-null, def-measure-zero-and-content-zero, lem-integral-elementary-bounds, def-finite-sum, lem-finite-sum-laws, def-infimum, def-max-min, def-abs-value, def-interval, def-bounded-set, def-continuity-real, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

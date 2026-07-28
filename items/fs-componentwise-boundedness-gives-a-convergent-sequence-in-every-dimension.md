@@ -2,7 +2,7 @@
 id: fs-componentwise-boundedness-gives-a-convergent-sequence-in-every-dimension
 kind: false-statement
 title: "FALSE: a sequence in $\\mathbb{R}^{n}$ whose coordinate sequences are each bounded converges"
-status: draft
+status: published
 origin: session
 deps: [cor-bolzano-weierstrass-in-rn, thm-componentwise-convergence-and-completeness, lem-limit-unique, lem-subsequence-inherits-limit, thm-convergence-iff-limsup-equals-liminf, lem-alternating-sequence, def-metric-convergence, def-sequence, def-real-limit, lem-metrics-on-rn, def-p-norms-on-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-p-norms-are-norms-and-induce-the-published-metrics, def-integer-power, lem-convergent-implies-bounded, lem-standard-basis-of-f-n, def-isometry-and-metric-embedding, def-metric-bounded-diameter, lem-of-naturals-positive, def-canonical-natural, lem-index-map-grows, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

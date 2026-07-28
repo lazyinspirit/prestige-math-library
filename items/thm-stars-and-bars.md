@@ -2,7 +2,7 @@
 id: thm-stars-and-bars
 kind: theorem
 title: "For $m \\ge 1$ the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$, and the number of compositions is $\\binom{n-1}{m-1}$ for $n \\ge 1$"
-status: draft
+status: published
 origin: session
 deps: [def-composition-of-a-natural-number, def-multinomial-coefficient, def-binomial-coefficient,
        thm-pascals-rule, thm-sum-rule, def-sum-over-a-finite-index-set,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-integration-by-parts
 kind: theorem
 title: "If $u,v$ are differentiable on $[a,b]$ with $u',v'$ integrable, then $\\int_a^b u v' = u(b)v(b)-u(a)v(a) - \\int_a^b u'v$"
-status: draft
+status: published
 origin: session
 deps: [thm-ftc-second-part, thm-algebra-of-derivatives, cor-differentiable-implies-continuous, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, def-derivative, def-continuity-real, def-oriented-integral, def-darboux-integral, def-interval, def-limit-point-r]
 forward_refs: [fs-integration-by-parts-needs-no-integrability-hypothesis]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: rem-ordinal-versus-cardinal-exponentiation
 kind: remark
 title: "Ordinal $\\alpha^{\\beta}$ and cardinal $\\kappa^{\\lambda}$ are different operations that share one notation"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-exponentiation, fs-the-ordinal-two-to-the-omega-is-uncountable, thm-cantor-powerset, thm-r-uncountable, def-cardinal, def-countable, rem-continuum-hypothesis]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-cofinal-subset-of-an-ordinal
 kind: definition
 title: "Cofinal subset of an ordinal"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

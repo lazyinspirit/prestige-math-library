@@ -2,7 +2,7 @@
 id: ex-omega-plus-omega-is-countable
 kind: example
 title: "$\\omega + \\omega$ is at most countable although it is not order isomorphic to $\\omega$: order type and cardinality are different invariants"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-countable, thm-product-of-countable, def-equinumerous, def-order-isomorphism, thm-ordinal-arithmetic-monotonicity, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

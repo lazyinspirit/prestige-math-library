@@ -1,7 +1,7 @@
 ---
 page: function-space-topologies
 title: "Function Space Topologies and the Exponential Law"
-status: draft
+status: published
 items: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
         def-locally-compact-metric-space,
         lem-compact-closed-balls-in-a-locally-compact-metric-space,

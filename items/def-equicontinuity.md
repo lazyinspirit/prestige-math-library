@@ -2,7 +2,7 @@
 id: def-equicontinuity
 kind: definition
 title: "Equicontinuity at a point, uniform equicontinuity, and pointwise boundedness of a family of maps between metric spaces"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-ball, def-metric-continuity,
        def-metric-uniform-continuity, def-metric-bounded-diameter, def-metrizable-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

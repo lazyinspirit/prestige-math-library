@@ -2,7 +2,7 @@
 id: lem-nat-finite-sum-laws-and-the-canonical-embedding
 kind: lemma
 title: "Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$"
-status: draft
+status: published
 origin: session
 deps: [def-nat-finite-sum-and-product, def-finite-sum, def-canonical-natural,
        lem-of-naturals-positive, lem-of-zero-mult, thm-induction-principle,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-linearity-of-the-integral
 kind: theorem
 title: "Integrable functions on $[a,b]$ form a set closed under sums and scalar multiples, and $\\int_a^b(\\lambda f+\\mu g) = \\lambda\\int_a^b f + \\mu\\int_a^b g$"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-integral, def-darboux-sums, thm-riemann-criterion, lem-refinement-inequalities, def-partition-and-refinement, lem-integral-elementary-bounds, def-oriented-integral, lem-reflection, def-infimum, lem-sup-unique, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

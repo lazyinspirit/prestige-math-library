@@ -2,7 +2,7 @@
 id: ex-cantor-normal-form-computed
 kind: example
 title: "The Cantor normal form of $(\\omega^{2} + \\omega\\cdot 3 + 5) \\cdot \\omega^{2}$, computed by the division algorithm"
-status: draft
+status: published
 origin: session
 deps: [thm-cantor-normal-form, thm-ordinal-division-with-remainder, thm-ordinal-exponent-laws, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-addition-associative, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, def-ordinal-exponentiation, def-ordinal-multiplication, def-ordinal-addition, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

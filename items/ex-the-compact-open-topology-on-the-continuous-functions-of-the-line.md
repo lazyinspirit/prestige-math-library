@@ -2,7 +2,7 @@
 id: ex-the-compact-open-topology-on-the-continuous-functions-of-the-line
 kind: example
 title: "On $C(\\mathbb{R}, \\mathbb{R})$ the compact-open topology has the sets $\\{g : \\sup_{[-m,m]} |f-g| < \\varepsilon\\}$ as a neighbourhood base, and $\\mathbb{R}$ is locally compact so evaluation is continuous"
-status: draft
+status: published
 origin: session
 deps: [def-compact-open-topology, thm-compact-open-equals-compact-convergence,
        def-topology-of-compact-convergence, def-locally-compact-metric-space,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

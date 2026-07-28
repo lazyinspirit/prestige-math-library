@@ -2,7 +2,7 @@
 id: thm-completely-normal-implies-normal
 kind: theorem
 title: "Every completely normal space is normal, and every perfectly normal space is normal"
-status: draft
+status: published
 origin: session
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-interior-closure-boundary-top,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

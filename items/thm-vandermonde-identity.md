@@ -2,7 +2,7 @@
 id: thm-vandermonde-identity
 kind: theorem
 title: "Vandermonde's identity $\\binom{m+n}{k} = \\sum_{i<k+1}\\binom{m}{i}\\binom{n}{k-i}$"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-sum-rule, thm-product-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, def-finite-cardinality, thm-subset-of-a-finite-set,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

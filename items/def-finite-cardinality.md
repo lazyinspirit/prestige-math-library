@@ -2,7 +2,7 @@
 id: def-finite-cardinality
 kind: definition
 title: "The cardinality $\\lvert A\\rvert$ of a finite set"
-status: draft
+status: published
 origin: session
 deps: [def-countable, lem-pigeonhole, def-equinumerous, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-order-is-membership, def-nat-order]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

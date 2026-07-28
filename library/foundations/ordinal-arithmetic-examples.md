@@ -1,7 +1,7 @@
 ---
 page: ordinal-arithmetic-examples
 title: "Ordinal Arithmetic and the First Uncountable Ordinal — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-one-plus-omega-and-omega-plus-one,
            ex-omega-times-two-and-two-times-omega,

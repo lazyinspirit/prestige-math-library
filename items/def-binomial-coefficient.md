@@ -2,7 +2,7 @@
 id: def-binomial-coefficient
 kind: definition
 title: "The set $[A]^{k}$ of $k$-element subsets and the binomial coefficient $\\binom{n}{k} := \\lvert [n]^{k}\\rvert$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-equinumerous, def-natural-numbers,
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-the-exponential-law-worked-on-the-line
 kind: example
 title: "The map $(x,z) \\mapsto x \\cdot z$ on $\\mathbb{R} \\times \\mathbb{R}$ and its transpose $z \\mapsto (x \\mapsto x \\cdot z)$ traced through the exponential law"
-status: draft
+status: published
 origin: session
 deps: [thm-the-exponential-law, thm-exponential-correspondence-is-continuous,
        thm-evaluation-is-continuous-on-a-locally-compact-metric-domain,
@@ -28,6 +28,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

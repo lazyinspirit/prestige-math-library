@@ -1,7 +1,7 @@
 ---
 page: separation-axioms-examples
 title: "Separation Axioms: the Hierarchy: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-sierpinski-space-is-t0-normal-and-not-regular,
            ex-the-particular-point-topology-in-the-separation-hierarchy,

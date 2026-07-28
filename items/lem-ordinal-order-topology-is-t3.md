@@ -2,7 +2,7 @@
 id: lem-ordinal-order-topology-is-t3
 kind: lemma
 title: "Every ordinal with its order topology has a basis of clopen sets, and is $T_1$, Hausdorff and regular"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-an-ordinal, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, def-hausdorff-space, def-regular-and-t3-spaces,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

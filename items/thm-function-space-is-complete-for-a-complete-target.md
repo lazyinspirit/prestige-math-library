@@ -2,7 +2,7 @@
 id: thm-function-space-is-complete-for-a-complete-target
 kind: theorem
 title: "If $(Y,d)$ is complete then $Y^{X}$ is complete in the uniform metric, and so is $C(X,Y)$"
-status: draft
+status: published
 origin: session
 deps: [thm-uniform-limit-theorem, def-topology-of-uniform-convergence,
        lem-uniform-metric-on-a-function-space, lem-bounded-remetrisation,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

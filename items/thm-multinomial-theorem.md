@@ -2,7 +2,7 @@
 id: thm-multinomial-theorem
 kind: theorem
 title: "The multinomial coefficient equals $n!/\\prod_{i<m} k_i!$, and $(x_0+\\dots+x_{m-1})^{n} = \\sum \\iota\\!\\binom{n}{k}\\prod_{i<m} x_i^{k_i}$ in $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [def-multinomial-coefficient, thm-binomial-theorem, thm-binomial-closed-formula,
        def-sum-over-a-finite-index-set, def-finite-sum, lem-finite-sum-laws,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

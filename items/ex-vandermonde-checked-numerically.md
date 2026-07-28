@@ -2,7 +2,7 @@
 id: ex-vandermonde-checked-numerically
 kind: example
 title: "Vandermonde's identity checked at $m = 4$, $n = 3$, $k = 3$, both sides equal to $35$"
-status: draft
+status: published
 origin: session
 deps: [thm-vandermonde-identity, def-binomial-coefficient, thm-binomial-closed-formula,
        thm-sum-rule, thm-product-rule, def-factorial-and-falling-factorial,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

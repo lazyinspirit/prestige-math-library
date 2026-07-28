@@ -2,7 +2,7 @@
 id: cex-an-integrable-function-with-no-primitive
 kind: counterexample
 title: "The sign function is Riemann integrable on $[-1,1]$ and has no primitive there"
-status: draft
+status: published
 origin: session
 deps: [thm-ftc-first-part, thm-finitely-many-discontinuities-integrable, thm-additivity-over-subintervals, lem-changing-a-function-at-finitely-many-points, lem-integral-elementary-bounds, cor-zero-derivative-implies-constant, cor-differentiable-implies-continuous, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-derivative, def-function-limit, def-the-integral-function, def-continuity-real, def-classification-of-discontinuities, def-oriented-integral, def-darboux-integral, def-abs-value, lem-of-abs-value, def-interval, def-bounded-set, def-limit-point-r, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

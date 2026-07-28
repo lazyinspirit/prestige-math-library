@@ -2,7 +2,7 @@
 id: thm-second-mean-value-theorem-for-integrals
 kind: theorem
 title: "Bonnet's second mean value theorem: for $f$ monotone and $g$ integrable on $[a,b]$ there is $\\xi\\in[a,b]$ with $\\int_a^b fg = f(a)\\int_a^\\xi g + f(b)\\int_\\xi^b g$"
-status: draft
+status: published
 origin: session
 deps: [thm-monotone-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-the-integral-function-is-lipschitz, def-the-integral-function, lem-abel-summation-by-parts, thm-riemann-criterion, thm-extreme-value-r, thm-heine-borel-r, def-open-cover-r, cor-continuous-image-of-an-interval-is-an-interval, thm-additivity-over-subintervals, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, def-monotone-function, lem-finite-sum-laws, def-finite-sum, def-series, def-oriented-integral, def-partition-and-refinement, def-darboux-sums, def-darboux-integral, def-continuity-real, def-max-min, def-interval, def-bounded-set, lem-of-abs-value, def-abs-value, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

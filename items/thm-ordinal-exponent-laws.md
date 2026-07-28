@@ -2,7 +2,7 @@
 id: thm-ordinal-exponent-laws
 kind: theorem
 title: "$\\alpha^{\\beta+\\gamma} = \\alpha^{\\beta}\\cdot\\alpha^{\\gamma}$ and $(\\alpha^{\\beta})^{\\gamma} = \\alpha^{\\beta\\cdot\\gamma}$; and for $\\alpha > 1$ exponentiation is strictly increasing with $\\beta \\le \\alpha^{\\beta}$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-exponentiation, def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-arithmetic-monotonicity, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

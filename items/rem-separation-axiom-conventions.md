@@ -2,7 +2,7 @@
 id: rem-separation-axiom-conventions
 kind: remark
 title: "Conventions on this page, and the one implication of the classical chain that is not available at this point in the reading order"
-status: draft
+status: published
 origin: session
 deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-regular-and-t3-spaces, def-completely-regular-and-tychonoff-spaces,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

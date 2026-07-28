@@ -2,7 +2,7 @@
 id: ex-polynomial-integrals-by-the-ftc
 kind: example
 title: "$\\int_0^1 x^{m} = 1/\\iota(m+1)$, computed by the fundamental theorem and checked against the definition"
-status: draft
+status: published
 origin: session
 deps: [cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-monotonicity-of-the-integral, lem-derivative-of-a-power, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-continuous-implies-integrable, lem-integral-elementary-bounds, def-integer-power, lem-power-monotone, def-canonical-natural, lem-of-naturals-positive, def-darboux-integral, def-oriented-integral, def-derivative, def-continuity-real, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

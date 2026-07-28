@@ -2,7 +2,7 @@
 id: ex-closed-subsets-of-the-line-as-zero-sets-and-g-delta-sets
 kind: example
 title: "Every nonempty closed subset $A$ of $\\mathbb{R}$ is the zero set of $x \\mapsto d(x, A)$ and the intersection of the open sets $\\{x : d(x,A) < 1/(n+1)\\}$, worked for $[0,1]$ and for $\\{0\\}$"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-zero-sets-and-cozero-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-f-sigma-g-delta,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

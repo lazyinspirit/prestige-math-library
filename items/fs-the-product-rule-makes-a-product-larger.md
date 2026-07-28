@@ -2,7 +2,7 @@
 id: fs-the-product-rule-makes-a-product-larger
 kind: false-statement
 title: "FALSE: for all sets $A$ and $B$ with $B$ having at least two elements, $A \\times B$ is strictly larger than $A$"
-status: draft
+status: published
 origin: session
 deps: [thm-n-cross-n-countable, thm-product-rule, thm-cantor-powerset, def-countable,
        def-equinumerous, def-finite-cardinality, def-nat-power, def-natural-numbers,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

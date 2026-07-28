@@ -2,7 +2,7 @@
 id: lem-finite-sum-permutation-invariance
 kind: lemma
 title: "A finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-sum, lem-finite-sum-laws, def-nat-finite-sum-and-product, def-injection-surjection-bijection,
        thm-induction-principle, thm-omega-is-peano-system, def-natural-numbers,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

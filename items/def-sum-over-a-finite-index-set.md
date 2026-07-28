@@ -2,7 +2,7 @@
 id: def-sum-over-a-finite-index-set
 kind: definition
 title: "The sum $\\sum_{i \\in S} a_i$ over a finite index set, and its product form"
-status: draft
+status: published
 origin: session
 deps: [lem-finite-sum-permutation-invariance, def-finite-cardinality, def-finite-sum,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

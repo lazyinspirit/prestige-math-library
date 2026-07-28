@@ -2,7 +2,7 @@
 id: thm-cantor-normal-form
 kind: theorem
 title: "Cantor normal form: every nonzero ordinal is $\\omega^{\\beta_0}\\cdot c_0 + \\cdots + \\omega^{\\beta_{k-1}}\\cdot c_{k-1}$ with $\\beta_0 > \\cdots > \\beta_{k-1}$ and each $c_i$ a nonzero natural number, in exactly one way"
-status: draft
+status: published
 origin: session
 deps: [thm-ordinal-exponent-laws, thm-ordinal-division-with-remainder, thm-ordinal-arithmetic-monotonicity, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-addition-associative, lem-recursion-on-the-ordinals, def-ordinal-exponentiation, def-ordinal-multiplication, def-ordinal-addition, lem-omega-least-limit-ordinal, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

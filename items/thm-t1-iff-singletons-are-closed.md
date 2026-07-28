@@ -2,7 +2,7 @@
 id: thm-t1-iff-singletons-are-closed
 kind: theorem
 title: "A space is $T_1$ if and only if every singleton is closed, if and only if every finite subset is closed, if and only if its topology contains the cofinite topology"
-status: draft
+status: published
 origin: session
 deps: [def-t0-and-t1-spaces, def-topological-space, def-standard-topologies,
        def-neighbourhood-top, def-countable]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

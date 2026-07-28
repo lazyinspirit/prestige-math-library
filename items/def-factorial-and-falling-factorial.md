@@ -2,7 +2,7 @@
 id: def-factorial-and-falling-factorial
 kind: definition
 title: "The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [thm-recursion, thm-induction-principle, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-nat-multiplication,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

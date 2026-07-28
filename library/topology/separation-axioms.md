@@ -1,7 +1,7 @@
 ---
 page: separation-axioms
 title: "Separation Axioms: the Hierarchy"
-status: draft
+status: published
 items: [def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed, def-separated-sets,
         def-g-delta-and-f-sigma-in-a-topological-space, def-regular-and-t3-spaces,
         lem-regularity-via-closed-neighbourhoods, def-urysohn-space,

@@ -2,7 +2,7 @@
 id: thm-the-separation-implication-chain
 kind: theorem
 title: "The implications proved on this page: perfectly normal gives completely normal under countable choice, and completely normal gives normal; normal with $T_1$ gives $T_3$; completely regular gives regular; regular with $T_1$ gives Urysohn, hence Hausdorff, hence $T_1$, hence $T_0$; and metrizable gives every one of them"
-status: draft
+status: published
 origin: session
 deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-regular-and-t3-spaces, def-completely-regular-and-tychonoff-spaces,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

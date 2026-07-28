@@ -2,7 +2,7 @@
 id: def-locally-compact-metric-space
 kind: definition
 title: "Locally compact metric space: every point has a compact neighbourhood"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, def-metric-topology, def-metric-ball, def-metric-compactness,
        lem-compactness-is-intrinsic, def-isometry-and-metric-embedding,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

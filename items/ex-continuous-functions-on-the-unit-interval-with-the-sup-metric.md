@@ -2,7 +2,7 @@
 id: ex-continuous-functions-on-the-unit-interval-with-the-sup-metric
 kind: example
 title: "$C([0,1], \\mathbb{R})$ is complete, and on it the uniform metric and the supremum metric induce the same topology"
-status: draft
+status: published
 origin: session
 deps: [lem-uniform-metric-on-a-function-space, def-topology-of-uniform-convergence,
        thm-function-space-is-complete-for-a-complete-target, thm-uniform-limit-theorem,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

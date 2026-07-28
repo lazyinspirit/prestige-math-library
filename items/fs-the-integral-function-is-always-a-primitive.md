@@ -2,7 +2,7 @@
 id: fs-the-integral-function-is-always-a-primitive
 kind: false-statement
 title: "FALSE: for every integrable $f$ on $[a,b]$, the integral function $F(x)=\\int_a^x f$ satisfies $F' = f$ on $[a,b]$"
-status: draft
+status: published
 origin: session
 deps: [thm-ftc-first-part, def-the-integral-function, cex-an-integrable-function-with-no-primitive, lem-changing-a-function-at-finitely-many-points, lem-integral-elementary-bounds, thm-additivity-over-subintervals, thm-finitely-many-discontinuities-integrable, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-function-limit, def-derivative, def-continuity-real, def-classification-of-discontinuities, def-oriented-integral, def-darboux-integral, def-abs-value, lem-of-abs-value, def-interval, def-bounded-set, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

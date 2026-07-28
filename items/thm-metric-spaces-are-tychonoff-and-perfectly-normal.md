@@ -2,7 +2,7 @@
 id: thm-metric-spaces-are-tychonoff-and-perfectly-normal
 kind: theorem
 title: "In a metric space every closed set is a zero set and a $G_\\delta$, and the distance function separates a point from a closed set, so every metrizable space is Tychonoff and perfectly normal"
-status: draft
+status: published
 origin: session
 deps: [thm-metric-spaces-are-completely-normal, def-completely-regular-and-tychonoff-spaces,
        def-completely-normal-and-perfectly-normal-spaces, def-zero-sets-and-cozero-sets,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

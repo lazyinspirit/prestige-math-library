@@ -2,7 +2,7 @@
 id: ex-steinitz-confinement-worked-in-the-plane
 kind: example
 title: "Steinitz's confinement bound realised on an explicit list of six unit vectors in $\\mathbb{R}^{2}$ summing to zero"
-status: draft
+status: published
 origin: session
 deps: [thm-steinitz-polygonal-confinement, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-standard-basis-of-f-n, thm-of-square-roots, lem-of-square-monotone, def-canonical-natural, lem-of-naturals-positive, lem-finite-sum-laws, def-finite-sum, def-linear-combination-and-span, def-injection-surjection-bijection, lem-of-inverse-positive, def-integer-power]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

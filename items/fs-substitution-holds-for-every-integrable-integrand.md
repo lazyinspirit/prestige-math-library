@@ -2,7 +2,7 @@
 id: fs-substitution-holds-for-every-integrable-integrand
 kind: false-statement
 title: "FALSE: in the substitution theorem the continuity of $f$ may be weakened to integrability, $f\\circ\\varphi$ still being integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-substitution, thm-ftc-first-part, thm-nonnegative-continuous-with-zero-integral-vanishes, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, thm-additivity-over-subintervals, def-the-integral-function, def-oriented-integral, def-fat-cantor-set, thm-fat-cantor-set-has-positive-measure, def-nowhere-dense-meager, def-interior-closure-boundary-r, lem-distance-to-set-is-lipschitz, def-metric-bounded-diameter, lem-real-line-is-a-metric-space, lem-real-and-metric-notions-agree, def-open-and-closed-in-r, thm-continuous-implies-integrable, thm-continuous-image-of-a-compact-set-r, thm-heine-borel-characterisation-r, def-open-cover-r, thm-lebesgue-criterion, def-measure-zero-and-content-zero, lem-content-zero-implies-null, def-finite-sum, lem-finite-sum-laws, def-canonical-natural, lem-of-naturals-positive, cor-archimedean-reciprocal, thm-of-archimedean, def-continuity-real, def-darboux-integral, def-bounded-set, def-infimum, def-complete-ordered-field, def-ordered-field, def-interval, def-injection-surjection-bijection]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

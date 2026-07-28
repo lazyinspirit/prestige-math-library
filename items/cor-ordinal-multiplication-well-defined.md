@@ -2,7 +2,7 @@
 id: cor-ordinal-multiplication-well-defined
 kind: corollary
 title: "Ordinal multiplication exists and is unique, and its values are ordinals"
-status: draft
+status: published
 origin: session
 deps: [lem-recursion-on-the-ordinals, def-ordinal-addition, cor-ordinal-addition-well-defined, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

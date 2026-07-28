@@ -1,7 +1,7 @@
 ---
 page: properties-of-the-integral-and-the-working-ftc
 title: "Properties of the Integral and the Working FTC"
-status: draft
+status: published
 items: [def-oriented-integral, lem-integrability-on-a-subinterval,
         thm-linearity-of-the-integral, thm-monotonicity-of-the-integral,
         thm-additivity-over-subintervals,

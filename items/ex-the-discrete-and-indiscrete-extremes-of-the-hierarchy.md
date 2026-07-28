@@ -2,7 +2,7 @@
 id: ex-the-discrete-and-indiscrete-extremes-of-the-hierarchy
 kind: example
 title: "A discrete space satisfies every axiom in the chain; an indiscrete space with two points is regular, completely regular, normal, completely normal and perfectly normal, and fails $T_0$"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-t0-and-t1-spaces, def-hausdorff-space,
        def-urysohn-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

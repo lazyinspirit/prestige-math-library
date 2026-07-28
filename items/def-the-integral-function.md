@@ -2,7 +2,7 @@
 id: def-the-integral-function
 kind: definition
 title: "The integral function $F(x) := \\int_a^x f$ of an integrable $f$"
-status: draft
+status: published
 origin: session
 deps: [lem-integrability-on-a-subinterval, thm-additivity-over-subintervals, def-oriented-integral, def-darboux-integral, def-interval, def-bounded-set]
 forward_refs: [cex-an-integrable-function-with-no-primitive, fs-the-integral-function-is-always-a-primitive]
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: n/a
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

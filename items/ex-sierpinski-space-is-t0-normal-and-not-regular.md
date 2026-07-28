@@ -2,7 +2,7 @@
 id: ex-sierpinski-space-is-t0-normal-and-not-regular
 kind: example
 title: "Sierpinski space is $T_0$ and normal but neither $T_1$ nor regular: normality without $T_1$ implies nothing"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-hausdorff-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

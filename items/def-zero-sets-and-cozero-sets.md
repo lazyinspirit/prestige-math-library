@@ -2,7 +2,7 @@
 id: def-zero-sets-and-cozero-sets
 kind: definition
 title: "Zero sets and cozero sets of continuous real-valued functions"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-continuous-map-top, thm-continuity-characterisations-top,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-interval,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

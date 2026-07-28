@@ -2,7 +2,7 @@
 id: ex-a-uniformly-equicontinuous-family-of-lipschitz-functions
 kind: example
 title: "The $1$-Lipschitz maps of a metric space into $\\mathbb{R}$ form a uniformly equicontinuous family, and the distance functions $x \\mapsto d(x,A)$ all belong to it"
-status: draft
+status: published
 origin: session
 deps: [def-equicontinuity, def-lipschitz-holder-contraction, lem-distance-to-set-is-lipschitz,
        def-metric-bounded-diameter, def-metric-uniform-continuity,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

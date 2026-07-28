@@ -2,7 +2,7 @@
 id: ex-gamma-and-its-complement-computed-for-a-plane-series
 kind: example
 title: "A convergent series in $\\mathbb{R}^{2}$ with $\\Gamma$ a line and $\\Gamma^{\\perp}$ a line, computed from the definition"
-status: draft
+status: published
 origin: session
 deps: [def-the-space-of-summing-directions, def-series-of-vectors-and-rearrangement, thm-rearrangement-sums-lie-in-an-affine-subspace, thm-componentwise-convergence-and-completeness, thm-alternating-series-test, thm-p-series-rational, thm-riemann-series-theorem, lem-series-linearity, lem-alternating-sequence, def-monotone-sequence, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, def-series, def-absolute-and-conditional-convergence, def-linear-subspace, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, cor-archimedean-reciprocal, def-integer-power, def-real-limit, lem-of-abs-value, lem-standard-basis-of-f-n, def-injection-surjection-bijection, thm-of-square-roots, def-rational-power]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

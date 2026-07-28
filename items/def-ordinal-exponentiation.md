@@ -2,7 +2,7 @@
 id: def-ordinal-exponentiation
 kind: definition
 title: "Ordinal exponentiation $\\alpha^{\\beta}$, with the conventions $\\alpha^{0} = 1$ and $0^{0} = 1$"
-status: draft
+status: published
 origin: session
 deps: [cor-ordinal-exponentiation-well-defined, def-ordinal-multiplication, def-ordinal-addition, def-ordinal, def-limit-ordinal]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

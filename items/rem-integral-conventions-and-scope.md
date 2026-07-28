@@ -2,7 +2,7 @@
 id: rem-integral-conventions-and-scope
 kind: remark
 title: "Conventions of this page, and which sharpenings of the integral are taken up later in the reading order"
-status: draft
+status: published
 origin: session
 deps: [def-oriented-integral, def-darboux-integral, thm-darboux-equals-riemann, thm-ftc-first-part, thm-ftc-second-part, thm-substitution, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-integral-test-for-series, thm-second-mean-value-theorem-for-integrals, def-the-integral-function, thm-additivity-over-subintervals]
 external_refs: [rem-ftc-absolutely-continuous, rem-dominated-convergence-theorem]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: n/a
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

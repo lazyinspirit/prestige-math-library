@@ -2,7 +2,7 @@
 id: thm-exponential-correspondence-is-continuous
 kind: theorem
 title: "If $f : X \\times Z \\to Y$ is continuous then its transpose $F : Z \\to C(X,Y)$, $F(z)(x) = f(x,z)$, is continuous for the compact-open topology, with no hypothesis on $X$ beyond being metric"
-status: draft
+status: published
 origin: session
 deps: [lem-tube-lemma-for-a-compact-metric-factor, def-compact-open-topology,
        def-product-topology, thm-product-universal-property, def-continuous-map-top,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

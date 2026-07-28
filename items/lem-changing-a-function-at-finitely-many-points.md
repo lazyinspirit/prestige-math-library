@@ -2,7 +2,7 @@
 id: lem-changing-a-function-at-finitely-many-points
 kind: lemma
 title: "Changing an integrable function at finitely many points changes neither its integrability nor its integral"
-status: draft
+status: published
 origin: session
 deps: [thm-linearity-of-the-integral, thm-riemann-criterion, lem-integral-elementary-bounds, def-darboux-sums, def-partition-and-refinement, def-darboux-integral, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-countable, def-equinumerous, thm-of-archimedean, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field]
 forward_refs: [fs-the-integral-function-is-always-a-primitive]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

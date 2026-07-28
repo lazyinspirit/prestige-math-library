@@ -4,7 +4,7 @@ kind: example
 title: "For every $n \\in \\mathbb{N}$ there are $n$ consecutive composite integers: with $N := \\prod_{j<n}(j+2)$, each of $N+2, \\dots, N+n+1$ is composite"
 status: published
 origin: session
-deps: [def-prime, def-monoid-finite-product, thm-generalised-associativity,
+deps: [def-prime, def-factorial-and-falling-factorial, def-monoid-finite-product, thm-generalised-associativity,
        lem-units-of-z, def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic,
        lem-divisor-bound, thm-induction-principle, lem-nat-order-is-membership,
        lem-nat-discrete, lem-nat-add-commutative, lem-nat-embeds-int, def-natural-numbers,
@@ -17,7 +17,6 @@ landmark: false
 short: "$n$ consecutive composites, for every $n$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -91,7 +90,7 @@ composite integers.
 
 ## Remarks
 
-- **No factorial is used, and none is available on $\mathbb{Z}$.** The library's $k!$ is introduced inside $\mathbb{R}$ as a finite product of reals ([[lem-factorial-beats-geometric]]), a different object on a different page; minting a factorial on $\mathbb{Z}$ here would create a dictionary obligation this page cannot discharge. The finite product of [[def-monoid-finite-product]] in $(\mathbb{Z},\cdot,1)$ does everything needed, and $N$ is $(n+1)!$ only in the informal sense.
+- **The factorial is available at this point, and is deliberately not used.** [[def-factorial-and-falling-factorial]] defines $n!$ by recursion in $\mathbb{N}$, on a page this one may cite. The real-valued copy in [[lem-factorial-beats-geometric]] is a separate object and is already declared as a forward reference. Neither is a factorial *on $\mathbb{Z}$*: naming $\iota(n!)$ as one would create a dictionary obligation this page cannot discharge. The finite product of [[def-monoid-finite-product]] in $(\mathbb{Z},\cdot,1)$ does everything needed, and $N$ is $(n+1)!$ only in the informal sense.
 
 - **The case $n = 0$ is real and vacuous.** The empty product is $1$, there is no $j < 0$, and the claim asserts nothing — correctly, since a run of $0$ consecutive composites is no claim at all.
 

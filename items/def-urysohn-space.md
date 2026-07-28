@@ -2,7 +2,7 @@
 id: def-urysohn-space
 kind: definition
 title: "Urysohn ($T_{2\\frac{1}{2}}$) space: distinct points have neighbourhoods with disjoint closures"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-hausdorff-space, def-neighbourhood-top,
        def-interior-closure-boundary-top]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

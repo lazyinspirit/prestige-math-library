@@ -2,7 +2,7 @@
 id: ex-weak-compositions-worked
 kind: example
 title: "The $15$ weak compositions of $4$ into $3$ parts, listed and matched against stars and bars"
-status: draft
+status: published
 origin: session
 deps: [thm-stars-and-bars, def-composition-of-a-natural-number, def-multinomial-coefficient,
        def-binomial-coefficient, thm-binomial-closed-formula, def-nat-finite-sum-and-product,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

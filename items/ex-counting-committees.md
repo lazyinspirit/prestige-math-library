@@ -2,7 +2,7 @@
 id: ex-counting-committees
 kind: example
 title: "Choosing a committee: $\\binom{10}{3} = 120$, and the ordered count $10^{\\underline{3}} = 720$"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-binomial-closed-formula, thm-number-of-injections,
        def-factorial-and-falling-factorial, def-finite-cardinality]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

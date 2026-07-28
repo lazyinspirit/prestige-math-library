@@ -2,7 +2,7 @@
 id: fs-unique-sequential-limits-imply-hausdorff
 kind: false-statement
 title: "FALSE: a space in which every sequence has at most one limit is Hausdorff"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-sequence-convergence-top, def-hausdorff-space,
        def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed, def-countable,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

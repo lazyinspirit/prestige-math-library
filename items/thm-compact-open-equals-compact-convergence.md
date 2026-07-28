@@ -2,7 +2,7 @@
 id: thm-compact-open-equals-compact-convergence
 kind: theorem
 title: "For a metric domain and a metric target the compact-open topology on $C(X,Y)$ is the topology of compact convergence"
-status: draft
+status: published
 origin: session
 deps: [def-compact-open-topology, def-topology-of-compact-convergence,
        def-metric-compactness, lem-compactness-is-intrinsic,
@@ -26,6 +26,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

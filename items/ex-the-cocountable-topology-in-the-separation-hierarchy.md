@@ -2,7 +2,7 @@
 id: ex-the-cocountable-topology-in-the-separation-hierarchy
 kind: example
 title: "The cocountable topology on $\\mathbb{R}$ is $T_1$, has unique sequential limits, and is neither Hausdorff nor regular nor normal"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-hausdorff-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

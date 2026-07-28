@@ -1,7 +1,7 @@
 ---
 page: function-space-topologies-examples
 title: "Function Space Topologies and the Exponential Law: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-continuous-functions-on-the-unit-interval-with-the-sup-metric,
            ex-the-moving-spike-family-in-the-three-topologies,

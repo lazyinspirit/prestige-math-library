@@ -2,7 +2,7 @@
 id: cex-pointwise-bounded-but-not-equicontinuous
 kind: counterexample
 title: "Refuted: a pointwise bounded family of continuous functions is equicontinuous. The spikes are bounded by $1$ everywhere and are not equicontinuous at $0$"
-status: draft
+status: published
 origin: session
 deps: [def-equicontinuity, def-metric-continuity, lem-continuity-is-local-and-pastes,
        fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

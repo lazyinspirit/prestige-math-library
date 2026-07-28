@@ -2,7 +2,7 @@
 id: fs-ordinal-multiplication-is-commutative
 kind: false-statement
 title: "FALSE: ordinal multiplication is commutative"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-multiplication, def-ordinal-addition, lem-ordinal-product-as-an-order-type, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

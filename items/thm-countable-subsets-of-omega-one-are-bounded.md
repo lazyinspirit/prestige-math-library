@@ -2,7 +2,7 @@
 id: thm-countable-subsets-of-omega-one-are-bounded
 kind: theorem
 title: "Assuming countable choice: every at most countable subset of $\\omega_1$ is bounded below $\\omega_1$, so no at most countable subset of $\\omega_1$ is cofinal in it, and a supremum of at most countably many at most countable ordinals is at most countable"
-status: draft
+status: published
 origin: session
 deps: [def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-cofinal-subset-of-an-ordinal, def-countable-choice, thm-countable-union-of-countable, def-countable, lem-countable-iff-surjection-from-n, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-limit-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

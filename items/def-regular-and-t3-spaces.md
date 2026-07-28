@@ -2,7 +2,7 @@
 id: def-regular-and-t3-spaces
 kind: definition
 title: "Regular spaces and $T_3$ spaces, with the source disagreement over whether regularity includes $T_1$ stated explicitly"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-t0-and-t1-spaces, def-hausdorff-space,
        def-neighbourhood-top, def-standard-topologies]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

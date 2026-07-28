@@ -2,7 +2,7 @@
 id: cor-primitives-of-a-continuous-function
 kind: corollary
 title: "Every continuous function on an interval has a primitive; two primitives differ by a constant; and $\\int_a^b f = G(b)-G(a)$ for any primitive $G$"
-status: draft
+status: published
 origin: session
 deps: [thm-ftc-first-part, thm-ftc-second-part, def-the-integral-function, cor-zero-derivative-implies-constant, thm-continuous-implies-integrable, thm-additivity-over-subintervals, cor-differentiable-implies-continuous, def-oriented-integral, def-derivative, def-function-limit, def-continuity-real, def-interval, def-max-min, def-darboux-integral, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-one-plus-omega-and-omega-plus-one
 kind: example
 title: "$1 + \\omega = \\omega$ and $\\omega + 1 > \\omega$, computed both from the recursion and as order types"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-order-isomorphism, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

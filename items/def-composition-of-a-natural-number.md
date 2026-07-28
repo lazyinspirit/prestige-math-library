@@ -2,7 +2,7 @@
 id: def-composition-of-a-natural-number
 kind: definition
 title: "Compositions and weak compositions of a natural number into a fixed number of parts"
-status: draft
+status: published
 origin: session
 deps: [def-multinomial-coefficient, thm-multinomial-theorem, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, thm-cardinality-of-a-set-of-functions,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

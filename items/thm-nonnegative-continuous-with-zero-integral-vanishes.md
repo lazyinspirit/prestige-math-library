@@ -2,7 +2,7 @@
 id: thm-nonnegative-continuous-with-zero-integral-vanishes
 kind: theorem
 title: "A continuous $f \\ge 0$ on $[a,b]$ with $\\int_a^b f = 0$ is identically $0$"
-status: draft
+status: published
 origin: session
 deps: [thm-additivity-over-subintervals, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, thm-continuous-implies-integrable, lem-integrability-on-a-subinterval, def-continuity-real, def-darboux-integral, def-oriented-integral, def-max-min, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-cardinality-of-a-union-adds-without-disjointness
 kind: false-statement
 title: "FALSE: $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ for all finite $A$ and $B$"
-status: draft
+status: published
 origin: session
 deps: [thm-sum-rule, def-finite-cardinality, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-trichotomy]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

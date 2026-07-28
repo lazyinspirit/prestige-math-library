@@ -2,7 +2,7 @@
 id: lem-recursion-on-the-ordinals
 kind: lemma
 title: "Transfinite recursion along the ordinals: a class rule determines exactly one operation defined at every ordinal"
-status: draft
+status: published
 origin: session
 deps: [thm-transfinite-recursion, def-ordinal, def-well-order, def-initial-segment, lem-ordinal-basics, lem-ordinal-trichotomy, thm-burali-forti]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

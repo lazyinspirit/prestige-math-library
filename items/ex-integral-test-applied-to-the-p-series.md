@@ -2,7 +2,7 @@
 id: ex-integral-test-applied-to-the-p-series
 kind: example
 title: "The integral test applied to $\\sum 1/\\iota(k+1)^{p}$ for rational $p>0$, cross-checked against the published $p$-series theorem"
-status: draft
+status: published
 origin: session
 deps: [thm-integral-test-for-series, thm-algebra-of-continuous-functions, thm-cauchy-condensation, rem-real-exponents-deferred, thm-p-series-rational, cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-chain-rule, lem-derivative-of-a-power, thm-algebra-of-derivatives, thm-continuous-implies-integrable, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, thm-nth-roots-exist, def-series, def-canonical-natural, lem-of-naturals-positive, def-monotone-function, def-integer-power, def-bounded-set, def-derivative, def-continuity-real, def-oriented-integral, def-interval, def-rat-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

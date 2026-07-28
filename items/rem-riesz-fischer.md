@@ -59,10 +59,11 @@ $\sum_n \|f_{n+1} - f_n\|_p < \infty$, with the dominated convergence theorem
 statement falls out of the same construction. The case $p = \infty$ is separate
 and easier, since a countable union of null sets is again null.
 
-**Which page it serves.** The metric spaces and completeness pages, which prove
-that $\mathbb{R}$, $\mathbb{R}^n$ and $C[a,b]$ with the sup norm are complete,
-and that $C[a,b]$ with the $L^1$ metric is not. That last example is the honest
-motivation for the Lebesgue theory: the completion of $C[a,b]$ under the $L^1$
+**Which page it serves.** The completeness page, which proves $\mathbb{R}$ and
+$\mathbb{R}^n$ complete and the bounded functions with the sup metric complete,
+and the function-space page, which proves $C([0,1],\mathbb{R})$ complete for the
+uniform metric. The $L^1$ metric on $C[a,b]$ is not built here at all, which is
+the honest motivation for the Lebesgue theory: the completion of $C[a,b]$ under the $L^1$
 metric exists abstractly, and the theorem above says it is a space of functions,
 namely $L^1[a,b]$. Without measure theory the completion stays an abstract
 object with no description.

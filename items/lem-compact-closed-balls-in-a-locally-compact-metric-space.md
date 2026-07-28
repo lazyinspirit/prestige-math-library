@@ -2,7 +2,7 @@
 id: lem-compact-closed-balls-in-a-locally-compact-metric-space
 kind: lemma
 title: "In a locally compact metric space every point has arbitrarily small compact closed balls, hence a neighbourhood base of compact sets"
-status: draft
+status: published
 origin: session
 deps: [def-locally-compact-metric-space, def-metric-compactness, lem-compactness-is-intrinsic,
        lem-closed-subset-of-a-compact-space-is-compact, def-metric-ball, def-metric-topology,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

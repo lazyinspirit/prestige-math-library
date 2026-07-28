@@ -48,8 +48,8 @@ here; that is [[fs-sqrt2-rational]], and the two arguments agree.
 **Gaps between primes.** [[ex-arbitrarily-long-runs-of-composites]] produces, for
 every $n$, a run of $n$ consecutive composite integers: with
 $N = \prod_{j<n}(j+2)$, each of $N+2, \dots, N+n+1$ is divisible by its own
-offset. No factorial is used — the library's $k!$ lives inside $\mathbb{R}$ on a
-different page — and the finite product of [[def-monoid-finite-product]] in
+offset. No factorial is used — [[def-factorial-and-falling-factorial]] defines $n!$ in
+$\mathbb{N}$, not on $\mathbb{Z}$ — and the finite product of [[def-monoid-finite-product]] in
 $(\mathbb{Z},\cdot,1)$ does the work. The example says the gaps are unbounded
 and nothing about where the primes are; it is entirely compatible with
 [[thm-euclid-infinitude-of-primes]].

@@ -2,7 +2,7 @@
 id: rem-counting-conventions-and-scope
 kind: remark
 title: "Conventions fixed on this page, and what counting is deliberately not done here"
-status: draft
+status: published
 origin: session
 deps: [cor-binomial-theorem-consequences, def-finite-cardinality, def-nat-finite-sum-and-product, def-sum-over-a-finite-index-set,
        def-factorial-and-falling-factorial, def-nat-power, def-binomial-coefficient,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

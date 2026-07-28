@@ -6,15 +6,11 @@ status: published
 origin: session
 deps: [thm-riemann-series-theorem, thm-dirichlet-rearrangement, cor-unconditional-iff-absolute-in-r, def-rearrangement-and-unconditional-convergence]
 justified_by: []
+forward_refs: [thm-steinitz-polygonal-confinement, thm-rearrangement-sums-lie-in-an-affine-subspace]
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -56,6 +52,12 @@ Paul Lévy in 1905 and taken up by Ernst Steinitz in 1913, and later by Wacław
 Sierpiński; the references below are to those papers, and they are given as the
 origin of the question. **What the literature answers is not stated here in any
 form, and nothing on this page or anywhere else in this library depends on it.**
+Part of it is now proved, later in the reading order and marked as forward
+material: [[thm-steinitz-polygonal-confinement]] and
+[[thm-rearrangement-sums-lie-in-an-affine-subspace]] establish that the set of
+rearrangement sums is nonempty and lies inside an affine subspace. The reverse
+inclusion, which is what would turn that containment into the classical answer,
+is still proved nowhere here.
 
 The reason is a matter of reading order, not of difficulty or of interest. Stating
 the theorem requires $\mathbb{R}^d$ as a normed space (a norm, convergence of

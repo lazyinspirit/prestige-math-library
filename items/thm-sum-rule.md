@@ -2,7 +2,7 @@
 id: thm-sum-rule
 kind: theorem
 title: "The sum rule: a finite disjoint union is finite with $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ and $\\lvert\\bigcup_{i \\in I} A_i\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$, and a sum over a finite index set splits along a partition"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, def-sum-over-a-finite-index-set, lem-finite-sum-permutation-invariance, thm-subset-of-a-finite-set,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

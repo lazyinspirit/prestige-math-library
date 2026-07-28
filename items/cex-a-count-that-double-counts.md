@@ -2,7 +2,7 @@
 id: cex-a-count-that-double-counts
 kind: counterexample
 title: "A count that overcounts because the blocks are not disjoint, and exactly where the sum rule's hypothesis is spent"
-status: draft
+status: published
 origin: session
 deps: [thm-sum-rule, def-finite-cardinality, cor-cardinality-of-the-power-set,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection, def-nat-power,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

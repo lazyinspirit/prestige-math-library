@@ -2,7 +2,7 @@
 id: ex-two-root-x-and-its-unbounded-derivative
 kind: example
 title: "$H(x) = 2\\sqrt{x}$ on $[0,1]$: $H$ is continuous, $H'$ is unbounded on $(0,1]$, and $H'$ is therefore not Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [thm-ftc-second-part, def-darboux-sums, def-darboux-integral, def-bounded-set, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, thm-continuous-inverse, thm-derivative-of-an-inverse, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-continuous-implies-integrable, lem-derivative-of-a-power, lem-power-monotone, def-injection-surjection-bijection, def-monotone-function, def-derivative, def-function-limit, def-continuity-real, def-oriented-integral, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, cor-archimedean-reciprocal, def-integer-power, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

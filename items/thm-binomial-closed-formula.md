@@ -2,7 +2,7 @@
 id: thm-binomial-closed-formula
 kind: theorem
 title: "$\\binom{n}{k}\\,k!\\,(n-k)! = n!$ for $k \\le n$; hence $\\binom{n}{k}\\,k! = n^{\\underline{k}}$, the quotient $n!/(k!(n-k)!)$ is a natural number, and $\\binom{n}{k} = \\binom{n}{n-k}$"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-number-of-bijections-of-a-finite-set,
        def-factorial-and-falling-factorial, thm-sum-rule, thm-product-rule,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

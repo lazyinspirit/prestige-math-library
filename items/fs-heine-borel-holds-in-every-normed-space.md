@@ -2,7 +2,7 @@
 id: fs-heine-borel-holds-in-every-normed-space
 kind: false-statement
 title: "FALSE: in every normed space a closed bounded set is compact"
-status: draft
+status: published
 origin: session
 deps: [thm-heine-borel-rn, def-norm-and-normed-space, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, fs-all-norms-on-any-real-vector-space-are-equivalent, fs-closed-and-bounded-implies-compact-in-every-metric-space, def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-metric-space, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, def-metric-compactness, def-metric-compactness-variants, thm-compact-implies-the-other-compactness-forms, thm-metric-compactness-equivalences, thm-compact-implies-complete-and-totally-bounded, def-totally-bounded, def-cauchy-in-metric, def-metric-convergence, lem-metric-convergent-implies-cauchy, lem-standard-basis-of-f-n, lem-finite-set-has-max, def-max-min, lem-pigeonhole, def-countable, lem-of-abs-value, def-abs-value, lem-index-map-grows, def-sequence, def-injection-surjection-bijection, def-isometry-and-metric-embedding]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

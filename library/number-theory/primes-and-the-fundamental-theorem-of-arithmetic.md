@@ -87,8 +87,9 @@ definition: the set of exponents is nonempty because $p^{0} = 1$, and bounded
 because $p^{k}$ exceeds its own exponent while $p^{k} \mid a$ forces
 $p^{k} \le |a|$. The powers are the monoid powers of [[def-group-power]] in
 $(\mathbb{Z},\cdot,1)$, not the real ones, and $v_p(0)$ is left undefined rather
-than set to infinity, since this library has no ordered set to hold an infinite
-value. [[lem-p-adic-valuation-basic]] converts the definition into the form the
+than set to infinity, since no ordered set with a greatest element is available
+at this point in the reading order — [[def-p-adic-valuation]] records why the
+extended real line, built far above this page, is not used for it either. [[lem-p-adic-valuation-basic]] converts the definition into the form the
 proofs use, chiefly $a = p^{v_p(a)}a'$ with $p \nmid a'$, and
 [[lem-p-adic-valuation-additive]] proves $v_p(ab) = v_p(a) + v_p(b)$ together
 with the ultrametric inequality $v_p(a+b) \ge \min\{v_p(a),v_p(b)\}$. Additivity

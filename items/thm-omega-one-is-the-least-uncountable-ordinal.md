@@ -2,7 +2,7 @@
 id: thm-omega-one-is-the-least-uncountable-ordinal
 kind: theorem
 title: "$\\omega_1$ is uncountable, every ordinal below it is at most countable, it is a cardinal and a limit ordinal, and its existence is a theorem of ZF"
-status: draft
+status: published
 origin: session
 deps: [def-first-uncountable-ordinal, thm-hartogs, def-countable, def-natural-numbers, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-subset-of-countable, lem-countable-iff-surjection-from-n, lem-omega-least-limit-ordinal, def-limit-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

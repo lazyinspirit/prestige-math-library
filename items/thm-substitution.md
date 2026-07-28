@@ -2,7 +2,7 @@
 id: thm-substitution
 kind: theorem
 title: "Substitution: if $\\varphi$ is differentiable on $[c,d]$ with $\\varphi'$ integrable and $f$ is continuous on an interval containing $\\varphi([c,d])$, then $\\int_{\\varphi(c)}^{\\varphi(d)} f = \\int_c^d (f\\circ\\varphi)\\,\\varphi'$"
-status: draft
+status: published
 origin: session
 deps: [cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-chain-rule, thm-composition-with-a-continuous-function, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-continuous-implies-integrable, cor-continuous-image-of-an-interval-is-an-interval, def-oriented-integral, def-derivative, def-continuity-real, cor-differentiable-implies-continuous, def-interval, def-limit-point-r, def-darboux-integral, def-max-min]
 forward_refs: [fs-substitution-holds-for-every-integrable-integrand]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

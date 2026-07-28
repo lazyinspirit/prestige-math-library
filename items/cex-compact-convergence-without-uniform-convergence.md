@@ -2,7 +2,7 @@
 id: cex-compact-convergence-without-uniform-convergence
 kind: counterexample
 title: "Refuted: convergence uniformly on every compact subset of $\\mathbb{R}$ implies uniform convergence. The maps $x \\mapsto x/(n+1)$ separate the two"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-compact-convergence, def-topology-of-uniform-convergence,
        lem-uniform-convergence-in-the-uniform-metric, lem-uniform-metric-on-a-function-space,
@@ -26,6 +26,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

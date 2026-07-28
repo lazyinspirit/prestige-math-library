@@ -2,7 +2,7 @@
 id: fs-every-t1-space-is-hausdorff
 kind: false-statement
 title: "FALSE: every $T_1$ space is Hausdorff"
-status: draft
+status: published
 origin: session
 deps: [def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed, def-hausdorff-space,
        def-standard-topologies, def-countable, thm-r-uncountable, def-topological-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

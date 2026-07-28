@@ -2,7 +2,7 @@
 id: thm-product-rule
 kind: theorem
 title: "The product rule: $\\lvert A \\times B\\rvert = \\lvert A\\rvert\\,\\lvert B\\rvert$, and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, thm-sum-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, def-injection-surjection-bijection,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

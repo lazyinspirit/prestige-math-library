@@ -2,7 +2,7 @@
 id: thm-integral-test-for-series
 kind: theorem
 title: "The integral test: for $f \\ge 0$ nonincreasing on $[0,\\infty)$, $\\sum_k f(k)$ converges if and only if the sequence $\\bigl(\\int_0^N f\\bigr)_N$ is bounded, with $\\int_0^N f \\le \\sum_{k<N} f(k) \\le f(0) + \\int_0^N f$"
-status: draft
+status: published
 origin: session
 deps: [thm-monotonicity-of-the-integral, thm-additivity-over-subintervals, lem-integral-elementary-bounds, thm-monotone-implies-integrable, lem-integrability-on-a-subinterval, def-monotone-function, def-series, thm-nonnegative-series-bounded-partial-sums, lem-finite-sum-laws, def-finite-sum, def-sequence, def-canonical-natural, lem-of-naturals-positive, def-oriented-integral, def-bounded-set, def-interval, def-darboux-integral, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-two-element-subsets-count
 kind: theorem
 title: "A finite set with $n$ elements has exactly $\\binom{n}{2}$ two-element subsets, and $2\\binom{n}{2} = n(n-1)$"
-status: draft
+status: published
 origin: session
 deps: [thm-binomial-closed-formula, def-binomial-coefficient, def-factorial-and-falling-factorial,
        def-finite-cardinality, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

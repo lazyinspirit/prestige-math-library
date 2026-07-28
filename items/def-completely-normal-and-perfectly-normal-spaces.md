@@ -2,7 +2,7 @@
 id: def-completely-normal-and-perfectly-normal-spaces
 kind: definition
 title: "Completely normal ($T_5$) and perfectly normal ($T_6$) spaces"
-status: draft
+status: published
 origin: session
 deps: [def-normal-and-t4-spaces, def-separated-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-zero-sets-and-cozero-sets,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

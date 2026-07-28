@@ -2,7 +2,7 @@
 id: fs-stars-and-bars-holds-for-every-number-of-parts
 kind: false-statement
 title: "FALSE: the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$ for every $m \\in \\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [thm-stars-and-bars, def-composition-of-a-natural-number, def-binomial-coefficient,
        def-nat-finite-sum-and-product, def-natural-numbers, def-nat-order,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

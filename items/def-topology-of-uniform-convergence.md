@@ -2,7 +2,7 @@
 id: def-topology-of-uniform-convergence
 kind: definition
 title: "Uniform convergence, and the topology of uniform convergence: the metric topology of the uniform metric on $Y^{X}$ and on $C(X,Y)$"
-status: draft
+status: published
 origin: session
 deps: [lem-uniform-metric-on-a-function-space, def-metric-topology, def-metrizable-space,
        def-subspace-topology-top, def-isometry-and-metric-embedding,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

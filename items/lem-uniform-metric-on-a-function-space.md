@@ -2,7 +2,7 @@
 id: lem-uniform-metric-on-a-function-space
 kind: lemma
 title: "For a nonempty set $X$ and a metric space $(Y,d)$ the uniform metric $\\bar\\rho(f,g) = \\sup_{x} \\min\\{d(f(x),g(x)), 1\\}$ is a metric on $Y^{X}$"
-status: draft
+status: published
 origin: session
 deps: [def-metric-space, lem-bounded-remetrisation, def-bounded-set,
        def-complete-ordered-field, lem-sup-unique, def-max-min, lem-finite-set-has-max,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

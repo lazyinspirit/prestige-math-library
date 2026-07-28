@@ -2,7 +2,7 @@
 id: thm-the-integral-function-is-lipschitz
 kind: theorem
 title: "The integral function of a bounded integrable $f$ is Lipschitz, hence uniformly continuous"
-status: draft
+status: published
 origin: session
 deps: [def-the-integral-function, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, lem-real-line-is-a-metric-space, lem-real-and-metric-notions-agree, def-continuity-real, def-uniform-continuity-real, def-bounded-set, def-oriented-integral, def-darboux-integral, lem-of-abs-value, def-abs-value, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

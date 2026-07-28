@@ -2,7 +2,7 @@
 id: lem-ordinal-product-as-an-order-type
 kind: lemma
 title: "$\\alpha \\cdot \\beta$ is the order type of $\\alpha \\times \\beta$ ordered by last differences, that is $\\beta$ copies of $\\alpha$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-multiplication, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-well-order, def-order-isomorphism, def-initial-segment, thm-transfinite-induction, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

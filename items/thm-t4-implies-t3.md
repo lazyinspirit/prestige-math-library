@@ -2,7 +2,7 @@
 id: thm-t4-implies-t3
 kind: theorem
 title: "A normal $T_1$ space is regular, hence $T_3$, hence Urysohn, Hausdorff, $T_1$ and $T_0$"
-status: draft
+status: published
 origin: session
 deps: [def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, lem-urysohn-sits-between-hausdorff-and-regular-plus-t1,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

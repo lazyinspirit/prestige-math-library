@@ -2,7 +2,7 @@
 id: thm-ordinal-addition-associative
 kind: theorem
 title: "Ordinal addition is associative"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-order-isomorphism, def-well-order, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

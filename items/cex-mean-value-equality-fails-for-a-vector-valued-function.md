@@ -2,7 +2,7 @@
 id: cex-mean-value-equality-fails-for-a-vector-valued-function
 kind: counterexample
 title: "$f(t) = (t^{2}, t^{3})$ on $[0,1]$: no $\\xi$ satisfies $f(1)-f(0) = f'(\\xi)$"
-status: draft
+status: published
 origin: session
 deps: [thm-mean-value-inequality, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-derivative, cor-mean-value-theorem, cor-differentiable-implies-continuous, thm-of-square-roots, def-canonical-natural, lem-of-naturals-positive, def-integer-power, lem-of-square-monotone, lem-standard-basis-of-f-n, lem-finite-sum-laws, def-finite-sum, def-interval]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

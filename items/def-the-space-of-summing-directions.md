@@ -2,7 +2,7 @@
 id: def-the-space-of-summing-directions
 kind: definition
 title: "The subspace $\\Gamma$ of directions along which a series converges absolutely, and its orthogonal complement $\\Gamma^{\\perp}$"
-status: draft
+status: published
 origin: session
 deps: [def-series-of-vectors-and-rearrangement, def-euclidean-inner-product, thm-cauchy-schwarz-and-the-euclidean-norm, thm-absolute-convergence-in-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, def-linear-subspace, lem-linear-subspace-criterion, lem-intersection-of-linear-subspaces, def-vector-space, def-series, lem-series-linearity, thm-direct-comparison-test, lem-standard-basis-of-f-n, def-absolute-and-conditional-convergence, lem-of-abs-value, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-norm-and-normed-space]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

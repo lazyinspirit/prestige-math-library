@@ -2,7 +2,7 @@
 id: fs-the-compact-open-topology-is-always-metrizable
 kind: false-statement
 title: "FALSE: the compact-open topology on $C(X,Y)$ is metrizable for every metric $X$ and $Y$"
-status: draft
+status: published
 origin: session
 deps: [def-compact-open-topology, def-topology-of-pointwise-convergence,
        def-product-topology, def-metric-space, def-metric-topology,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

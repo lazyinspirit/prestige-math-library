@@ -2,7 +2,7 @@
 id: fs-the-rearrangement-sums-of-a-non-absolutely-convergent-series-fill-the-space
 kind: false-statement
 title: "FALSE: if a convergent series in $\\mathbb{R}^{n}$ does not converge absolutely, then every point of $\\mathbb{R}^{n}$ is the sum of some rearrangement of it"
-status: draft
+status: published
 origin: session
 deps: [thm-rearrangement-sums-lie-in-an-affine-subspace, ex-gamma-and-its-complement-computed-for-a-plane-series, def-the-space-of-summing-directions, def-series-of-vectors-and-rearrangement, thm-componentwise-convergence-and-completeness, thm-riemann-series-theorem, thm-absolute-convergence-in-rn, def-absolute-and-conditional-convergence, thm-p-series-rational, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, def-linear-subspace, def-injection-surjection-bijection, lem-standard-basis-of-f-n, def-series, lem-metric-limits-unique, def-metric-convergence, lem-finite-sum-laws, def-finite-sum, def-canonical-natural]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

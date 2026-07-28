@@ -2,7 +2,7 @@
 id: fs-every-hausdorff-space-is-regular
 kind: false-statement
 title: "FALSE: every Hausdorff space is regular"
-status: draft
+status: published
 origin: session
 deps: [lem-the-k-topology-is-hausdorff-and-not-regular, def-hausdorff-space,
        def-regular-and-t3-spaces, def-t0-and-t1-spaces,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

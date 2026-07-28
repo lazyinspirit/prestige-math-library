@@ -2,7 +2,7 @@
 id: ex-additivity-on-a-step-function
 kind: example
 title: "A step function integrated by additivity over subintervals, and the same value from the definition"
-status: draft
+status: published
 origin: session
 deps: [thm-additivity-over-subintervals, lem-changing-a-function-at-finitely-many-points, lem-integral-elementary-bounds, thm-monotone-implies-integrable, def-monotone-function, def-darboux-sums, def-partition-and-refinement, def-oriented-integral, def-darboux-integral, def-finite-sum, lem-finite-sum-laws, def-interval, def-infimum, def-max-min, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

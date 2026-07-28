@@ -2,7 +2,7 @@
 id: ex-the-particular-point-topology-in-the-separation-hierarchy
 kind: example
 title: "The particular-point topology is $T_0$ and not $T_1$, it is not regular once the set has at least two points, and it is not normal once the set has at least three"
-status: draft
+status: published
 origin: session
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-regular-and-t3-spaces, def-normal-and-t4-spaces, def-hausdorff-space,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

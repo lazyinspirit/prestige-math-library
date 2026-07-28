@@ -2,7 +2,7 @@
 id: cex-omega-one-has-no-at-most-countable-cofinal-subset
 kind: counterexample
 title: "Refuted: every limit ordinal has an at most countable cofinal subset — $\\omega_1$ has none, assuming countable choice"
-status: draft
+status: published
 origin: session
 deps: [thm-countable-subsets-of-omega-one-are-bounded, rem-omega-one-and-the-cost-of-choice, def-cofinal-subset-of-an-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-first-uncountable-ordinal, def-countable-choice, def-countable, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, lem-omega-least-limit-ordinal, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

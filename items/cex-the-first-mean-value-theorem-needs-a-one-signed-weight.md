@@ -2,7 +2,7 @@
 id: cex-the-first-mean-value-theorem-needs-a-one-signed-weight
 kind: counterexample
 title: "Continuous $f$ and integrable sign-changing $g$ with $\\int_a^b fg \\ne f(\\xi)\\int_a^b g$ for every $\\xi$"
-status: draft
+status: published
 origin: session
 deps: [thm-first-mean-value-theorem-for-integrals, cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-monotonicity-of-the-integral, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-oriented-integral, def-canonical-natural, lem-of-naturals-positive, def-integer-power, def-continuity-real, def-darboux-integral, def-derivative, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

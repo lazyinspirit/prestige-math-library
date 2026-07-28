@@ -2,7 +2,7 @@
 id: ex-poker-hands-from-a-deck
 kind: example
 title: "Five-card hands from a $52$-card deck: $\\binom{52}{5} = 2598960$, and the count of hands with all cards of one suit"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-binomial-closed-formula, thm-sum-rule,
        def-sum-over-a-finite-index-set, def-finite-cardinality, thm-product-rule,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

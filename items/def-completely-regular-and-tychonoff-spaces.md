@@ -2,7 +2,7 @@
 id: def-completely-regular-and-tychonoff-spaces
 kind: definition
 title: "Completely regular spaces and Tychonoff ($T_{3\\frac{1}{2}}$) spaces"
-status: draft
+status: published
 origin: session
 deps: [def-zero-sets-and-cozero-sets, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        def-continuous-map-top, def-interval, def-subspace-topology-top,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

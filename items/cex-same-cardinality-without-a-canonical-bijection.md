@@ -2,7 +2,7 @@
 id: cex-same-cardinality-without-a-canonical-bijection
 kind: counterexample
 title: "Two sets of the same finite cardinality between which no bijection is distinguished"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, lem-pigeonhole, thm-number-of-bijections-of-a-finite-set,
        def-binomial-coefficient, def-equinumerous, def-injection-surjection-bijection,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

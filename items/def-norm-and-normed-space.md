@@ -2,7 +2,7 @@
 id: def-norm-and-normed-space
 kind: definition
 title: "A norm on a real vector space, the induced metric, and the dictionary with the metric axioms"
-status: draft
+status: published
 origin: session
 deps: [def-vector-space, def-function-space, def-metric-space, lem-metric-nonnegativity, def-metric-topology, lem-bounded-remetrisation, rem-metric-axiom-conventions, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field, lem-vector-space-elementary-consequences]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

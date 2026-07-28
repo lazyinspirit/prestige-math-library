@@ -2,7 +2,7 @@
 id: thm-ordinal-multiplication-associative-and-left-distributive
 kind: theorem
 title: "Ordinal multiplication is associative, and $\\alpha \\cdot (\\beta + \\gamma) = \\alpha\\cdot\\beta + \\alpha\\cdot\\gamma$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-addition-associative, thm-ordinal-arithmetic-monotonicity, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

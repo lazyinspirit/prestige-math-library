@@ -2,7 +2,7 @@
 id: thm-first-mean-value-theorem-for-integrals
 kind: theorem
 title: "If $f$ is continuous on $[a,b]$ and $g$ is integrable with $g \\ge 0$, there is $\\xi \\in [a,b]$ with $\\int_a^b fg = f(\\xi)\\int_a^b g$"
-status: draft
+status: published
 origin: session
 deps: [thm-monotonicity-of-the-integral, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, thm-extreme-value-r, cor-continuous-image-of-an-interval-is-an-interval, thm-heine-borel-r, def-open-cover-r, thm-continuous-implies-integrable, def-continuity-real, def-max-min, lem-integral-elementary-bounds, def-darboux-integral, def-oriented-integral, def-interval, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-the-first-mean-value-theorem-needs-a-one-signed-weight]
@@ -17,6 +17,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-series-of-vectors-and-rearrangement
 kind: definition
 title: "Series of vectors in $\\mathbb{R}^n$, absolute convergence, rearrangement, and the set of rearrangement sums"
-status: draft
+status: published
 origin: session
 deps: [def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-componentwise-convergence-and-completeness, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, def-metric-convergence, def-series, def-absolute-and-conditional-convergence, def-rearrangement-and-unconditional-convergence, lem-standard-basis-of-f-n, def-linear-combination-and-span, def-finite-sum, lem-finite-sum-laws, def-sequence, def-injection-surjection-bijection, def-vector-space, lem-metrics-on-rn, lem-metric-limits-unique, def-isometry-and-metric-embedding, def-norm-and-normed-space]
 justified_by: []
@@ -14,6 +14,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-nat-finite-sum-and-product
 kind: definition
 title: "Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [thm-recursion, thm-induction-principle, def-natural-numbers, def-nat-addition,
        def-nat-multiplication, lem-nat-add-identity, lem-nat-mult-identity,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

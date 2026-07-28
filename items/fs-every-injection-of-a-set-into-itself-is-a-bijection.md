@@ -2,7 +2,7 @@
 id: fs-every-injection-of-a-set-into-itself-is-a-bijection
 kind: false-statement
 title: "FALSE: every injection of a set into itself is a bijection"
-status: draft
+status: published
 origin: session
 deps: [thm-subset-of-a-finite-set, lem-pigeonhole, thm-omega-is-peano-system,
        lem-nat-nonzero-is-successor, def-countable, def-injection-surjection-bijection,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

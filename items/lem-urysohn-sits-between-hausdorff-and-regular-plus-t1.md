@@ -2,7 +2,7 @@
 id: lem-urysohn-sits-between-hausdorff-and-regular-plus-t1
 kind: lemma
 title: "Every Urysohn space is Hausdorff, every Hausdorff space is $T_1$ and hence $T_0$, and every regular $T_1$ space is Urysohn"
-status: draft
+status: published
 origin: session
 deps: [def-urysohn-space, def-hausdorff-space, def-regular-and-t3-spaces,
        lem-regularity-via-closed-neighbourhoods, def-t0-and-t1-spaces,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-topology-of-compact-convergence
 kind: definition
 title: "The topology of compact convergence on $C(X,Y)$ for metric $X$ and $Y$: uniform convergence on each compact subset of $X$"
-status: draft
+status: published
 origin: session
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-space,
        def-metric-ball, def-isometry-and-metric-embedding, def-topology-basis-subbasis,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

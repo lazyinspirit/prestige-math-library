@@ -2,7 +2,7 @@
 id: cex-separately-continuous-not-jointly-continuous
 kind: counterexample
 title: "$g(x,y) = xy/(x^{2}+y^{2})$, extended by $g(0,0)=0$, is continuous in each variable separately and not continuous at the origin"
-status: draft
+status: published
 origin: session
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-metric-continuity, thm-metric-continuity-characterisations, thm-algebra-of-continuous-functions, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-p-norms-on-rn, def-norm-and-normed-space, def-metric-convergence, def-sequence, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-euclidean-inner-product, thm-componentwise-convergence-and-completeness, lem-standard-basis-of-f-n, def-continuity-real, lem-real-and-metric-notions-agree, thm-of-square-roots, def-integer-power, lem-of-inverse-positive, def-metric-space, lem-real-line-is-a-metric-space]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

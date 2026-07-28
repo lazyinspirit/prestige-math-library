@@ -2,7 +2,7 @@
 id: def-first-uncountable-ordinal
 kind: definition
 title: "The first uncountable ordinal $\\omega_1 := \\aleph(\\omega)$"
-status: draft
+status: published
 origin: session
 deps: [thm-hartogs, def-ordinal, def-countable, def-natural-numbers, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: [thm-omega-one-is-the-least-uncountable-ordinal]
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

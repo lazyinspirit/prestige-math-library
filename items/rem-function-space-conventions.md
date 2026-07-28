@@ -2,7 +2,7 @@
 id: rem-function-space-conventions
 kind: remark
 title: "Standing hypotheses on this page: a metric domain, where the target must be metric, and why the compact-open topology is built from metric compactness"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-pointwise-convergence, def-topology-of-uniform-convergence,
        def-topology-of-compact-convergence, def-compact-open-topology,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-ordinal-arithmetic-agrees-on-omega
 kind: theorem
 title: "On $\\omega$ the ordinal $+$ and $\\cdot$ are the Peano operations: $\\omega$ is closed under ordinal $+$, $\\cdot$ and exponentiation, and for naturals $m, n$ the ordinal $m + n$ and $m \\cdot n$ are the natural-number sum and product"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-nat-addition, def-nat-multiplication, thm-omega-is-peano-system, thm-induction-principle, def-natural-numbers, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-nat-order, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-the-ordinal-two-to-the-omega-is-uncountable
 kind: false-statement
 title: "FALSE: the ordinal $2^{\\omega}$ is uncountable"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-exponentiation, thm-ordinal-exponent-laws, thm-ordinal-arithmetic-agrees-on-omega, thm-ordinal-arithmetic-monotonicity, def-countable, def-equinumerous, lem-omega-least-limit-ordinal, def-limit-ordinal, def-natural-numbers, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

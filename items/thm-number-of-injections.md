@@ -2,7 +2,7 @@
 id: thm-number-of-injections
 kind: theorem
 title: "The number of injections from a $k$-element set into an $n$-element set is $n^{\\underline{k}}$"
-status: draft
+status: published
 origin: session
 deps: [def-factorial-and-falling-factorial, thm-cardinality-of-a-set-of-functions,
        thm-subset-of-a-finite-set, thm-sum-rule, def-sum-over-a-finite-index-set,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

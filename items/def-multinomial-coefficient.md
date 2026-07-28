@@ -2,7 +2,7 @@
 id: def-multinomial-coefficient
 kind: definition
 title: "The multinomial coefficient $\\binom{n}{k_0,\\dots,k_{m-1}}$ as the number of ordered partitions of an $n$-set into blocks of prescribed sizes"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-cardinality-of-a-set-of-functions, thm-subset-of-a-finite-set,
        thm-sum-rule, def-sum-over-a-finite-index-set, def-nat-finite-sum-and-product,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

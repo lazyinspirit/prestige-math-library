@@ -2,7 +2,7 @@
 id: lem-integrability-on-a-subinterval
 kind: lemma
 title: "A function integrable on $[a,b]$ is integrable on every closed subinterval"
-status: draft
+status: published
 origin: session
 deps: [def-oriented-integral, def-darboux-integral, thm-riemann-criterion, lem-refinement-inequalities, def-darboux-sums, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

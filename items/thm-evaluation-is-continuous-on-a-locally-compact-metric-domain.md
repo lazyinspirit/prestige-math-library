@@ -2,7 +2,7 @@
 id: thm-evaluation-is-continuous-on-a-locally-compact-metric-domain
 kind: theorem
 title: "If $X$ is a locally compact metric space then the evaluation map is continuous for the compact-open topology"
-status: draft
+status: published
 origin: session
 deps: [def-evaluation-map, def-compact-open-topology, def-locally-compact-metric-space,
        lem-compact-closed-balls-in-a-locally-compact-metric-space, def-product-topology,
@@ -21,6 +21,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

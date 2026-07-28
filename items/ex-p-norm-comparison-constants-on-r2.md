@@ -2,7 +2,7 @@
 id: ex-p-norm-comparison-constants-on-r2
 kind: example
 title: "The comparison constants between $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and $\\lVert\\cdot\\rVert_\\infty$ on $\\mathbb{R}^{2}$, and vectors attaining each"
-status: draft
+status: published
 origin: session
 deps: [def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, def-norm-and-normed-space, thm-cauchy-schwarz-finite, thm-of-square-roots, lem-of-square-monotone, lem-standard-basis-of-f-n, def-canonical-natural, lem-of-naturals-positive, def-metric-ball, lem-finite-sum-laws, def-finite-sum, lem-finite-set-has-max, def-max-min, def-abs-value, lem-of-abs-value]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

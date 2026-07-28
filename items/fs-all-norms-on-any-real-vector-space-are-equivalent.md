@@ -2,7 +2,7 @@
 id: fs-all-norms-on-any-real-vector-space-are-equivalent
 kind: false-statement
 title: "FALSE: all norms on a real vector space are equivalent"
-status: draft
+status: published
 origin: session
 deps: [thm-all-norms-on-rn-are-equivalent, def-norm-and-normed-space, def-equivalent-norms, def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-independence, def-linear-basis, def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, lem-standard-basis-of-f-n, def-linear-combination-and-span, def-finite-sum, lem-finite-sum-laws, lem-finite-set-has-max, def-max-min, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-countable, def-equinumerous, lem-pigeonhole, lem-of-abs-value, def-abs-value, lem-of-triangle-inequality, thm-induction-principle]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

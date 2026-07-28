@@ -2,7 +2,7 @@
 id: thm-the-exponential-law
 kind: theorem
 title: "The exponential law: for a locally compact metric $X$ and any spaces $Z$ and $Y$, transposition is a bijection between $C(X \\times Z, Y)$ and $C(Z, C(X,Y))$ with the compact-open topology"
-status: draft
+status: published
 origin: session
 deps: [thm-exponential-correspondence-is-continuous,
        thm-evaluation-is-continuous-on-a-locally-compact-metric-domain,
@@ -23,6 +23,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

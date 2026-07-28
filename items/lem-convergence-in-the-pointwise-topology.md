@@ -2,7 +2,7 @@
 id: lem-convergence-in-the-pointwise-topology
 kind: lemma
 title: "A sequence converges in the topology of pointwise convergence exactly when it converges at every point"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-pointwise-convergence, def-sequence-convergence-top,
        def-product-topology, def-neighbourhood-top, def-topology-basis-subbasis,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

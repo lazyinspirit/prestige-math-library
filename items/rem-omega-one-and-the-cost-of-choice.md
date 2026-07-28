@@ -2,7 +2,7 @@
 id: rem-omega-one-and-the-cost-of-choice
 kind: remark
 title: "Choice ledger for this page: $\\omega_1$ exists in ZF, and the boundedness theorem does not"
-status: draft
+status: published
 origin: session
 deps: [def-first-uncountable-ordinal, thm-hartogs, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, thm-countable-union-of-countable, rem-choice-ledger]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

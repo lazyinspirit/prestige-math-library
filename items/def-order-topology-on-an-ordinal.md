@@ -2,7 +2,7 @@
 id: def-order-topology-on-an-ordinal
 kind: definition
 title: "The order topology on an ordinal, with the half-open intervals $(\\alpha, \\beta]$ and the initial segments $[0, \\beta]$ as a basis"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy,
        lem-omega-least-limit-ordinal, def-topological-space, def-topology-basis-subbasis,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

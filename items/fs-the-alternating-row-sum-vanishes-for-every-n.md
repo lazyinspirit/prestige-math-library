@@ -2,7 +2,7 @@
 id: fs-the-alternating-row-sum-vanishes-for-every-n
 kind: false-statement
 title: "FALSE: $\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for every $n \\in \\mathbb{N}$"
-status: draft
+status: published
 origin: session
 deps: [cor-binomial-theorem-consequences, thm-binomial-theorem, def-binomial-coefficient,
        def-integer-power, def-canonical-natural, def-finite-sum, def-natural-numbers,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

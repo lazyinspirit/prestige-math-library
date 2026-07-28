@@ -2,7 +2,7 @@
 id: def-topology-of-pointwise-convergence
 kind: definition
 title: "The topology of pointwise convergence on $Y^{X}$, which is the product topology, and its restriction to $C(X,Y)$"
-status: draft
+status: published
 origin: session
 deps: [def-product-topology, def-initial-and-final-topology, def-subspace-topology-top,
        def-topological-space, def-topology-basis-subbasis, thm-basis-criterion,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

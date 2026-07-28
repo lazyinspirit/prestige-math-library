@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-feferman-levy-model]
 justified_by: []
-forward_refs: [def-cardinal, thm-hartogs, rem-choice-ledger]
+forward_refs: [def-cardinal, thm-hartogs, rem-choice-ledger, def-cofinal-subset-of-an-ordinal]
 aliases: []
 landmark: false
 short: "from large cardinals: no uncountable regular cardinal"
@@ -40,8 +40,10 @@ compact cardinals, followed by a symmetric submodel.
 
 ## Remarks
 
-- **Not proved in this library.** No forcing, no large cardinals, no cofinality
-  theory.
+- **Not proved in this library.** No forcing, no large cardinals, and no
+  cofinality *function*: the library defines cofinal subsets of an ordinal
+  ([[def-cofinal-subset-of-an-ordinal]]) but neither $\operatorname{cf}(\alpha)$
+  nor the words *regular* and *singular*.
 
 - **What would prove it.** Large-cardinal theory (strongly compact cardinals and
   their embeddings), Prikry forcing and its iterations, and symmetric extensions.
@@ -55,7 +57,10 @@ compact cardinals, followed by a symmetric submodel.
   structural fact about [[def-cardinal]]: it is a consequence of choice, and
   without choice it can fail everywhere at once. What survives in ZF is the much
   weaker existence statement [[thm-hartogs]], which is why the library leans on
-  Hartogs numbers and never on regularity. [[rem-choice-ledger]] records that
+  Hartogs numbers, and why the one regularity statement it does prove — that no at
+  most countable subset of $\omega_1$ is cofinal in it — carries the Axiom of
+  Countable Choice as an explicit standing hypothesis rather than reading it off
+  the structure. [[rem-choice-ledger]] records that
   distinction.
 
 - **Conditional discipline.** The hypothesis is a large-cardinal consistency

@@ -2,7 +2,7 @@
 id: ex-dini-on-the-unit-interval
 kind: example
 title: "Dini's theorem applied to a nondecreasing sequence of piecewise linear approximations on $[0,1]$, and what fails when the limit is not continuous"
-status: draft
+status: published
 origin: session
 deps: [thm-dini, lem-uniform-convergence-in-the-uniform-metric,
        def-topology-of-uniform-convergence, def-metric-compactness, thm-heine-borel-rn,
@@ -26,6 +26,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

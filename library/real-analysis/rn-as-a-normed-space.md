@@ -1,7 +1,7 @@
 ---
 page: rn-as-a-normed-space
 title: "R^n as a Normed Space; Vector-Valued Functions"
-status: draft
+status: published
 items: [def-norm-and-normed-space, def-euclidean-inner-product,
         thm-cauchy-schwarz-and-the-euclidean-norm, def-p-norms-on-rn,
         lem-p-norms-are-norms-and-induce-the-published-metrics,

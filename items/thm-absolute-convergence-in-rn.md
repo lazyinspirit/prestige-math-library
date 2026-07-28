@@ -2,7 +2,7 @@
 id: thm-absolute-convergence-in-rn
 kind: theorem
 title: "An absolutely convergent series in $\\mathbb{R}^n$ converges, and every rearrangement converges to the same sum"
-status: draft
+status: published
 origin: session
 deps: [def-series-of-vectors-and-rearrangement, thm-componentwise-convergence-and-completeness, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, thm-direct-comparison-test, thm-dirichlet-rearrangement, lem-absolute-convergence-implies-convergence, def-absolute-and-conditional-convergence, def-series, def-cauchy-in-metric, def-complete-metric-space, lem-metric-convergent-implies-cauchy, lem-real-line-is-a-metric-space, lem-metrics-on-rn, lem-finite-sum-laws, def-finite-sum, lem-standard-basis-of-f-n, def-injection-surjection-bijection, def-metric-convergence, def-real-limit]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-cardinality-of-the-power-set
 kind: corollary
 title: "$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\lvert A\\rvert}$ for finite $A$"
-status: draft
+status: published
 origin: session
 deps: [thm-cardinality-of-a-set-of-functions, def-nat-power, def-finite-cardinality,
        thm-cantor-powerset, lem-pigeonhole, lem-nat-trichotomy, def-nat-order,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

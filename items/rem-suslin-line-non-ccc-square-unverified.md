@@ -68,8 +68,9 @@ and with $(a_\alpha, c_\alpha)$ avoiding every $b_\xi$ already chosen, which is
 possible because $L$ is not separable. The $\omega_1$ many open rectangles
 $V_\alpha = (a_\alpha, b_\alpha) \times (b_\alpha, c_\alpha)$ are then nonempty
 and pairwise disjoint, so $L^2$ is not ccc. The obstacle here is the setting, not
-the difficulty: order topology, separability and transfinite recursion on
-$\omega_1$ all belong to tracks this library has not built.
+the difficulty: the library now has the order topology and $\omega_1$ with
+recursion along it, and has no notion of separability at all — that last conjunct
+is the one that keeps the argument out of reach.
 
 **Relation to the partial-order form.** [[rem-suslin-hypothesis-independent]]
 records, with citations, that a Suslin line yields a ccc *partial order* whose

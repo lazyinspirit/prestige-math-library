@@ -2,7 +2,7 @@
 id: def-evaluation-map
 kind: definition
 title: "The evaluation map $e : C(X,Y) \\times X \\to Y$, $e(f,x) = f(x)$"
-status: draft
+status: published
 origin: session
 deps: [def-compact-open-topology, def-product-topology, def-continuous-map-top,
        def-subspace-topology-top, def-topological-space, def-metric-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

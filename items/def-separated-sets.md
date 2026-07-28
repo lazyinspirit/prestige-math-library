@@ -2,7 +2,7 @@
 id: def-separated-sets
 kind: definition
 title: "Separated sets: $\\overline{A} \\cap B = A \\cap \\overline{B} = \\varnothing$"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-subspace-topology-top,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

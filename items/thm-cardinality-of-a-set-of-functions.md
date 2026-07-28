@@ -2,7 +2,7 @@
 id: thm-cardinality-of-a-set-of-functions
 kind: theorem
 title: "The set $A^{B}$ of functions $B \\to A$ between finite sets is finite, with $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$"
-status: draft
+status: published
 origin: session
 deps: [def-nat-power, thm-product-rule, thm-sum-rule, def-finite-cardinality,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection, def-equinumerous,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

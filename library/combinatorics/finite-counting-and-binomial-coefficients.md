@@ -1,7 +1,7 @@
 ---
 page: finite-counting-and-binomial-coefficients
 title: "Finite Counting, Factorials and Binomial Coefficients"
-status: draft
+status: published
 items: [def-finite-cardinality, thm-subset-of-a-finite-set, def-nat-finite-sum-and-product,
         lem-nat-finite-sum-laws-and-the-canonical-embedding, lem-finite-sum-permutation-invariance,
         def-sum-over-a-finite-index-set, thm-sum-rule, thm-product-rule, def-nat-power,

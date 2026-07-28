@@ -2,7 +2,7 @@
 id: thm-steinitz-polygonal-confinement
 kind: theorem
 title: "Steinitz's polygonal confinement theorem: finitely many vectors of norm at most $1$ summing to $0$ can be ordered so that every partial sum has norm at most $n$"
-status: draft
+status: published
 origin: session
 deps: [def-series-of-vectors-and-rearrangement, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-cauchy-schwarz-and-the-euclidean-norm, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-norm-and-normed-space, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-linear-independence, def-dimension, lem-standard-basis-of-f-n, def-linear-combination-and-span, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, lem-finite-sum-laws, def-finite-sum, lem-finite-subsets-listable, def-countable, lem-pigeonhole, def-injection-surjection-bijection, def-canonical-natural, lem-of-naturals-positive, def-function-space, def-vector-space, thm-induction-principle, lem-of-inverse-positive, def-equinumerous, lem-vector-space-elementary-consequences]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

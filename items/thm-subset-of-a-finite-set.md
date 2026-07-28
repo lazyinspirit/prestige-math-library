@@ -2,7 +2,7 @@
 id: thm-subset-of-a-finite-set
 kind: theorem
 title: "A subset of a finite set is finite, with $\\lvert B\\rvert \\le \\lvert A\\rvert$, and equality holds if and only if $B = A$"
-status: draft
+status: published
 origin: session
 deps: [def-finite-cardinality, def-countable, def-equinumerous, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-order-is-membership, def-nat-order, def-nat-addition,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

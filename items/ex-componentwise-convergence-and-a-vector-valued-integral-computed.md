@@ -2,7 +2,7 @@
 id: ex-componentwise-convergence-and-a-vector-valued-integral-computed
 kind: example
 title: "A convergent sequence in $\\mathbb{R}^{3}$ and the integral $\\int_0^1 (1, t, t^{2})$, computed componentwise"
-status: draft
+status: published
 origin: session
 deps: [def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-convergence-and-completeness, thm-componentwise-limits-and-continuity, thm-norm-inequality-for-the-vector-valued-integral, cor-primitives-of-a-continuous-function, thm-continuous-implies-integrable, thm-monotonicity-of-the-integral, thm-linearity-of-the-integral, lem-derivative-of-a-power, thm-algebra-of-continuous-functions, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, def-oriented-integral, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, thm-of-square-roots, lem-of-square-monotone, def-integer-power, def-metric-convergence, def-sequence, lem-standard-basis-of-f-n, def-interval, lem-finite-sum-laws, def-finite-sum]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-powers-of-omega-and-epsilon-zero
 kind: example
 title: "$\\omega^{2}$, $\\omega^{\\omega}$, and $\\varepsilon_0 = \\sup\\{\\omega, \\omega^{\\omega}, \\omega^{\\omega^{\\omega}}, \\dots\\}$ satisfying $\\omega^{\\varepsilon_0} = \\varepsilon_0$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-exponentiation, def-ordinal-multiplication, thm-ordinal-exponent-laws, thm-ordinal-arithmetic-monotonicity, lem-recursion-on-the-ordinals, thm-induction-principle, thm-cantor-normal-form, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

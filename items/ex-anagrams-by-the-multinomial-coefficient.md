@@ -2,7 +2,7 @@
 id: ex-anagrams-by-the-multinomial-coefficient
 kind: example
 title: "Arrangements of a word with repeated letters, counted by the multinomial coefficient"
-status: draft
+status: published
 origin: session
 deps: [def-multinomial-coefficient, thm-multinomial-theorem, def-nat-finite-sum-and-product,
        def-finite-cardinality, def-factorial-and-falling-factorial, lem-nat-mult-cancellative]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

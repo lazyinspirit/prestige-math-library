@@ -2,7 +2,7 @@
 id: ex-the-ordinal-spaces-omega-plus-one-and-omega-one
 kind: example
 title: "$\\omega + 1$ as a convergent sequence together with its limit, and, assuming countable choice, $[0, \\omega_1)$, in which every sequence lies inside an at most countable initial segment"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3,
        def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal,
@@ -22,6 +22,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

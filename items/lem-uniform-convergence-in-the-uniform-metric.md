@@ -2,7 +2,7 @@
 id: lem-uniform-convergence-in-the-uniform-metric
 kind: lemma
 title: "Convergence in the uniform metric is exactly uniform convergence: one $N$ serving every point"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-uniform-convergence, lem-uniform-metric-on-a-function-space,
        lem-bounded-remetrisation, def-metric-convergence, def-metric-ball,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

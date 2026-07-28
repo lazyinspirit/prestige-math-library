@@ -1,7 +1,7 @@
 ---
 page: properties-of-the-integral-and-the-working-ftc-examples
 title: "Properties of the Integral and the Working FTC: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-polynomial-integrals-by-the-ftc, ex-additivity-on-a-step-function,
            ex-integral-test-applied-to-the-p-series,

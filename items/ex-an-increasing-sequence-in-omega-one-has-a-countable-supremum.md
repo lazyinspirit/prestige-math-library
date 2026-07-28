@@ -2,7 +2,7 @@
 id: ex-an-increasing-sequence-in-omega-one-has-a-countable-supremum
 kind: example
 title: "Assuming countable choice, a strictly increasing $\\omega$-sequence of countable ordinals has a countable supremum, which is a countable limit ordinal below $\\omega_1$; the instance $\\sup_n \\omega\\cdot(n+1) = \\omega^{2}$ needs no choice"
-status: draft
+status: published
 origin: session
 deps: [thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal, def-first-uncountable-ordinal, def-countable-choice, def-countable, lem-subset-of-countable, lem-countable-iff-surjection-from-n, thm-product-of-countable, def-equinumerous, lem-ordinal-product-as-an-order-type, thm-mostowski-collapse, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, thm-ordinal-arithmetic-monotonicity, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

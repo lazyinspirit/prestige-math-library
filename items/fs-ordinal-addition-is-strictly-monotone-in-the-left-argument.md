@@ -2,7 +2,7 @@
 id: fs-ordinal-addition-is-strictly-monotone-in-the-left-argument
 kind: false-statement
 title: "FALSE: $\\beta < \\gamma$ implies $\\beta + \\alpha < \\gamma + \\alpha$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

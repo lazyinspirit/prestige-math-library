@@ -2,7 +2,7 @@
 id: def-g-delta-and-f-sigma-in-a-topological-space
 kind: definition
 title: "$G_\\delta$ and $F_\\sigma$ subsets of a topological space, agreeing with the real-line notion"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-countable, def-f-sigma-g-delta,
        def-metrizable-space, def-open-and-closed-in-r, def-neighbourhood-r,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

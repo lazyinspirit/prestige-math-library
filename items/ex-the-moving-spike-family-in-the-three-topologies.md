@@ -2,7 +2,7 @@
 id: ex-the-moving-spike-family-in-the-three-topologies
 kind: example
 title: "The moving spikes on $[0,1]$ converge pointwise to $0$, do not converge uniformly, and do not converge in the topology of compact convergence"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        def-topology-of-uniform-convergence, lem-uniform-convergence-in-the-uniform-metric,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

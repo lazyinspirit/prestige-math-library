@@ -2,7 +2,7 @@
 id: thm-pascals-rule
 kind: theorem
 title: "Pascal's rule $\\binom{n+1}{k+1} = \\binom{n}{k} + \\binom{n}{k+1}$, and the hockey-stick identity $\\sum_{i \\le n}\\binom{i}{k} = \\binom{n+1}{k+1}$"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-sum-rule, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-finite-cardinality,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

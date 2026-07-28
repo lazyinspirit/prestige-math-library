@@ -1,7 +1,7 @@
 ---
 page: rn-as-a-normed-space-examples
 title: "R^n as a Normed Space; Vector-Valued Functions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-mean-value-equality-fails-for-a-vector-valued-function,
            cex-the-mean-value-inequality-is-attained,

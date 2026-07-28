@@ -2,7 +2,7 @@
 id: cex-the-deleted-tychonoff-plank-is-not-normal
 kind: counterexample
 title: "Refuted, assuming countable choice: every Hausdorff space built from ordinal spaces is normal. The deleted Tychonoff plank $((\\omega_1 + 1) \\times (\\omega + 1)) \\setminus \\{(\\omega_1, \\omega)\\}$ is Hausdorff and not normal"
-status: draft
+status: published
 origin: session
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3,
        def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal,
@@ -25,6 +25,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-ordinal-subtraction
 kind: theorem
 title: "For $\\alpha \\le \\beta$ there is exactly one ordinal $\\gamma$ with $\\alpha + \\gamma = \\beta$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, thm-ordinal-arithmetic-monotonicity, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-initial-segment, def-well-order, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

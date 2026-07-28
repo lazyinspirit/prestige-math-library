@@ -2,7 +2,7 @@
 id: def-oriented-integral
 kind: definition
 title: "The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$"
-status: draft
+status: published
 origin: session
 deps: [def-darboux-integral, def-partition-and-refinement, def-darboux-sums, def-bounded-set, def-interval]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: n/a
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-ordinal-division-with-remainder
 kind: theorem
 title: "For $\\alpha > 0$ every ordinal $\\beta$ is $\\alpha \\cdot \\xi + \\rho$ with $\\rho < \\alpha$, in exactly one way"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-subtraction, thm-ordinal-arithmetic-monotonicity, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

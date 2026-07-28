@@ -2,7 +2,7 @@
 id: def-normal-and-t4-spaces
 kind: definition
 title: "Normal spaces and $T_4$ spaces, with the source disagreement over whether normality includes $T_1$ stated explicitly"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-t0-and-t1-spaces, def-separated-sets,
        def-standard-topologies, def-neighbourhood-top]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

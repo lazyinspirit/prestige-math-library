@@ -2,7 +2,7 @@
 id: ex-ordinal-subtraction-and-division-computed
 kind: example
 title: "Solving $\\omega + \\gamma = \\omega\\cdot 2$ and dividing $\\omega^{2} + \\omega + 3$ by $\\omega$"
-status: draft
+status: published
 origin: session
 deps: [thm-ordinal-subtraction, thm-ordinal-division-with-remainder, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-arithmetic-monotonicity, thm-ordinal-exponent-laws, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

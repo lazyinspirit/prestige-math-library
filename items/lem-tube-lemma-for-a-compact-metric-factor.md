@@ -2,7 +2,7 @@
 id: lem-tube-lemma-for-a-compact-metric-factor
 kind: lemma
 title: "Tube lemma: if $K$ is a compact subset of a metric space $X$, $Z$ is a topological space and $N$ is open in $X \\times Z$ with $K \\times \\{z_0\\} \\subseteq N$, then $K \\times W \\subseteq N$ for some open $W \\ni z_0$"
-status: draft
+status: published
 origin: session
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-product-topology,
        def-metric-topology, def-metrizable-space, def-topological-space,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

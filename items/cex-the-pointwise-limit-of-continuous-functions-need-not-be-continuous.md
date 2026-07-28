@@ -2,7 +2,7 @@
 id: cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous
 kind: counterexample
 title: "Refuted: $C(X,Y)$ is closed in the topology of pointwise convergence. The ramps on $[0,1]$ converge pointwise to a discontinuous limit"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        thm-uniform-limit-theorem, def-continuous-map-top, def-metric-continuity,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-functions-injections-and-subsets-of-a-small-set
 kind: example
 title: "All $8$ functions $3 \\to 2$, the $0$ injections $3 \\to 2$, and the $8$ subsets of a $3$-element set"
-status: draft
+status: published
 origin: session
 deps: [thm-cardinality-of-a-set-of-functions, thm-number-of-injections,
        cor-cardinality-of-the-power-set, cor-binomial-theorem-consequences,
@@ -18,6 +18,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

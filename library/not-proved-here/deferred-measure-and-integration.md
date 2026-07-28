@@ -98,5 +98,6 @@ everywhere to no Riemann integrable function and the null set that is no
 function's discontinuity set, since their proofs may fit inside the elementary
 covering and Baire theory the library already has. A third, du Bois-Reymond's
 continuous function with a divergent Fourier series, is recorded as probably
-reachable here by the uniform boundedness route once normed spaces exist, and is
-waiting on a page rather than on a theory.
+reachable by the uniform boundedness route now that norms exist
+([[def-norm-and-normed-space]]), once the library also has the Baire theorem for a
+general complete metric space, and is waiting on a page rather than on a theory.

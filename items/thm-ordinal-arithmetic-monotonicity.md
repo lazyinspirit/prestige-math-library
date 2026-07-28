@@ -2,7 +2,7 @@
 id: thm-ordinal-arithmetic-monotonicity
 kind: theorem
 title: "Monotonicity of ordinal $+$ and $\\cdot$: strictly increasing and continuous in the right argument, weakly increasing in the left, with left cancellation, and the identities $0 + \\beta = \\beta$ and $1 \\cdot \\beta = \\beta$"
-status: draft
+status: published
 origin: session
 deps: [def-ordinal-addition, def-ordinal-multiplication, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-t0-and-t1-spaces
 kind: definition
 title: "$T_0$ (Kolmogorov) and $T_1$ (Frechet) spaces"
-status: draft
+status: published
 origin: session
 deps: [def-topological-space, def-neighbourhood-top, def-interior-closure-boundary-top,
        def-standard-topologies, rem-topology-conventions]
@@ -16,6 +16,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

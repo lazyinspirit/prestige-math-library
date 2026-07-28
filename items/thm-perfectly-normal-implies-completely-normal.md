@@ -2,7 +2,7 @@
 id: thm-perfectly-normal-implies-completely-normal
 kind: theorem
 title: "Assuming countable choice, every perfectly normal space is completely normal: separated sets in a normal space whose open sets are all $F_\\sigma$ can be separated by disjoint open sets"
-status: draft
+status: published
 origin: session
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-g-delta-and-f-sigma-in-a-topological-space,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

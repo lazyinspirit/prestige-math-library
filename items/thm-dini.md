@@ -2,7 +2,7 @@
 id: thm-dini
 kind: theorem
 title: "Dini's theorem: on a compact metric space a nondecreasing sequence of continuous real functions converging pointwise to a continuous limit converges uniformly"
-status: draft
+status: published
 origin: session
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-continuity,
        thm-metric-continuity-characterisations, lem-uniform-convergence-in-the-uniform-metric,
@@ -24,6 +24,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

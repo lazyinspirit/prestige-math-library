@@ -2,7 +2,7 @@
 id: thm-completely-regular-implies-regular
 kind: theorem
 title: "Every completely regular space is regular, and every Tychonoff space is $T_3$"
-status: draft
+status: published
 origin: session
 deps: [def-completely-regular-and-tychonoff-spaces, def-regular-and-t3-spaces,
        def-t0-and-t1-spaces, def-continuous-map-top, thm-continuity-characterisations-top,
@@ -19,6 +19,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

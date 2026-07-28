@@ -2,7 +2,7 @@
 id: ex-pascals-triangle-to-row-six
 kind: example
 title: "Pascal's triangle computed to row $6$, with Pascal's rule checked at every entry"
-status: draft
+status: published
 origin: session
 deps: [def-binomial-coefficient, thm-pascals-rule, thm-binomial-closed-formula,
        cor-binomial-theorem-consequences, def-factorial-and-falling-factorial,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

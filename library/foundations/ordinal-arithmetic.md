@@ -1,7 +1,7 @@
 ---
 page: ordinal-arithmetic
 title: "Ordinal Arithmetic and the First Uncountable Ordinal"
-status: draft
+status: published
 items: [lem-recursion-on-the-ordinals, cor-ordinal-addition-well-defined,
         def-ordinal-addition, cor-ordinal-multiplication-well-defined,
         def-ordinal-multiplication, cor-ordinal-exponentiation-well-defined,

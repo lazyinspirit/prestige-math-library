@@ -2,7 +2,7 @@
 id: cex-spikes-with-integral-one-converging-pointwise-to-zero
 kind: counterexample
 title: "Continuous $f_n \\to 0$ pointwise on $[0,1]$ with $\\int_0^1 f_n = 1$ for every $n$"
-status: draft
+status: published
 origin: session
 deps: [thm-continuous-implies-integrable, thm-additivity-over-subintervals, cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-linearity-of-the-integral, thm-algebra-of-continuous-functions, lem-derivative-of-a-power, thm-algebra-of-derivatives, lem-integral-elementary-bounds, def-continuity-real, def-sequence, def-real-limit, thm-of-archimedean, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-integer-power, def-oriented-integral, def-darboux-integral, def-derivative, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

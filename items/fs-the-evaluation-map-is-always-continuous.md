@@ -2,7 +2,7 @@
 id: fs-the-evaluation-map-is-always-continuous
 kind: false-statement
 title: "FALSE: the evaluation map on $C(X,Y)$ with the compact-open topology is continuous for every metric $X$"
-status: draft
+status: published
 origin: session
 deps: [def-evaluation-map, def-compact-open-topology, def-locally-compact-metric-space,
        def-metric-compactness, lem-compactness-is-intrinsic,
@@ -30,6 +30,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

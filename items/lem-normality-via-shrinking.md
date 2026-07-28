@@ -2,7 +2,7 @@
 id: lem-normality-via-shrinking
 kind: lemma
 title: "A space is normal if and only if every closed $A$ inside an open $U$ admits an open $V$ with $A \\subseteq V \\subseteq \\overline{V} \\subseteq U$"
-status: draft
+status: published
 origin: session
 deps: [def-normal-and-t4-spaces, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-topological-space]
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

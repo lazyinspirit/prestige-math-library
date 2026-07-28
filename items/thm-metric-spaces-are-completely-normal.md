@@ -2,7 +2,7 @@
 id: thm-metric-spaces-are-completely-normal
 kind: theorem
 title: "In a metric space any two separated sets have disjoint open neighbourhoods, so every metrizable space is completely normal"
-status: draft
+status: published
 origin: session
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-metric-space, def-metric-topology, def-metric-ball,
@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

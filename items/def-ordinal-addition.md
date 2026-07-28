@@ -2,7 +2,7 @@
 id: def-ordinal-addition
 kind: definition
 title: "Ordinal addition $\\alpha + \\beta$"
-status: draft
+status: published
 origin: session
 deps: [cor-ordinal-addition-well-defined, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-omega-least-limit-ordinal]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

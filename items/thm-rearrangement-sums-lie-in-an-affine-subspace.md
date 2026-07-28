@@ -2,7 +2,7 @@
 id: thm-rearrangement-sums-lie-in-an-affine-subspace
 kind: theorem
 title: "The set of rearrangement sums of a convergent series in $\\mathbb{R}^n$ is a nonempty subset of the affine subspace $s + \\Gamma^{\\perp}$"
-status: draft
+status: published
 origin: session
 deps: [def-the-space-of-summing-directions, def-series-of-vectors-and-rearrangement, thm-absolute-convergence-in-rn, thm-componentwise-convergence-and-completeness, thm-cauchy-schwarz-and-the-euclidean-norm, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, thm-dirichlet-rearrangement, thm-riemann-series-theorem, cor-unconditional-iff-absolute-in-r, def-rearrangement-and-unconditional-convergence, def-absolute-and-conditional-convergence, def-series, lem-finite-sum-laws, def-finite-sum, lem-standard-basis-of-f-n, def-linear-subspace, def-injection-surjection-bijection, def-metric-convergence, def-real-limit, lem-metric-limits-unique, thm-induction-principle, def-isometry-and-metric-embedding, lem-of-abs-value, lem-of-inverse-positive]
 justified_by: []
@@ -15,6 +15,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

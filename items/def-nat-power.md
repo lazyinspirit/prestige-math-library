@@ -2,7 +2,7 @@
 id: def-nat-power
 kind: definition
 title: "Exponentiation of natural numbers, $m^{n}$, and its agreement with the integer power in $\\mathbb{R}$"
-status: draft
+status: published
 origin: session
 deps: [thm-recursion, thm-induction-principle, def-nat-addition, def-nat-multiplication,
        lem-nat-mult-associative, lem-nat-mult-commutative, lem-nat-mult-identity,
@@ -17,6 +17,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

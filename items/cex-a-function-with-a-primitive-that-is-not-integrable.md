@@ -2,7 +2,7 @@
 id: cex-a-function-with-a-primitive-that-is-not-integrable
 kind: counterexample
 title: "A function differentiable on $[0,1]$ whose derivative is unbounded, hence not Riemann integrable"
-status: draft
+status: published
 origin: session
 deps: [def-derivative, thm-algebra-of-derivatives, thm-chain-rule, lem-derivative-of-a-power, thm-algebra-of-continuous-functions, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-function-limit, lem-limit-is-local, def-darboux-sums, def-darboux-integral, def-bounded-set, def-integer-power, lem-power-monotone, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, cor-archimedean-reciprocal, thm-ftc-second-part, def-max-min, lem-finite-set-has-max, def-interval, def-limit-point-r, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -16,6 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
+  audited: 2026-07-29
 sources:
   scraped: []
   references:

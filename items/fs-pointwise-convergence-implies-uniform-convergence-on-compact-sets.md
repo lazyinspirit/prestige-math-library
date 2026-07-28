@@ -2,7 +2,7 @@
 id: fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets
 kind: false-statement
 title: "FALSE: a pointwise convergent sequence of continuous functions converges uniformly on every compact set"
-status: draft
+status: published
 origin: session
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        def-topology-of-compact-convergence, def-topology-of-uniform-convergence,
@@ -27,6 +27,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  audited: 2026-07-29
 sources:
   scraped: []
   references:
