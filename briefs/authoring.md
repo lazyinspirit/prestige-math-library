@@ -170,43 +170,13 @@ node tools/depcheck.mjs ; node tools/fwdcheck.mjs ; node tools/extcheck.mjs ; no
 
 Record `verification.precheck: pass` only when precheck actually passes.
 
-Then the judge (step 6), model **`z-ai/glm-5.2`** via `tools/judge.mts`. Pass
-`--topic` and `--conventions`; put the triage rule of §6 into `--conventions`
-so the judge does not flag 30-second gaps as defects. **Never a Claude model.**
-
-**Pass `--batch` with exactly the pages your page BOTH declares in `requires`
-and actually cites** — comma-separated, A pages only, the harness adds each
-`-examples` companion itself. **Do not pass every A-page slug in the build**
-(owner, 2026-07-28): measured, that produced 93,810-token prompts while the
-harness discarded three of five sibling pages on every call, because the cut is
-in relevance order and drops precisely the pages you do not cite.
-
-The judge's context unit is the A/B pair — it always sees your page and its
-companion in full — and `--batch` extends that to the pages your proofs actually
-rest on. If you are unsure which those are, ask the orchestrator rather than
-guessing: a misspelled slug warns on stderr and contributes nothing, and a
-correct-but-uncited slug just buys a truncation.
-
-Three hard-won rules about the judge:
-
-- **Capture stdout.** `JUDGE_COSTLOG` records spend, not verdicts. Redirecting
-  stdout to `/dev/null` loses the entire run.
-- **The harness drops verdicts intermittently** — empty or truncated JSON. At
-  level 7 three of six failed and all three parsed on a straight re-run. Re-run
-  before concluding anything.
-- **Never record a judge pass the judge did not give.** An unparsed response is
-  not a pass. Record model, verdict and date in `verification.judge` exactly as
-  received.
-
-On a rejection (step 7): adjudicate, do not comply. Measured judge precision on
-this corpus is 21–24%, so roughly three rejections in four are wrong, and an
-agent that "fixes" all of them damages correct text three times per real
-repair. Each rejection gets either a **fix**, with the defect named, or a
-**refutation**, with a verbatim quote from the cited item showing the judge is
-wrong. Then re-judge only the items whose text you changed, and **delete the
-`verification.judge` block of any item you materially rewrote** before
-re-judging — a stale block claims a pass on text the judge never saw. SCHEMA §3
-is explicit that a correction in Remarks counts as a material rewrite.
+**You do NOT judge (owner, 2026-07-28).** Judging is step 6 and now runs once,
+after the step-9 audit, on text nobody will rewrite afterwards. Measured: judging
+during authoring made 27% of all judge calls redundant, destroyed 30 earned
+passes, and cost the authoring agents most of their wall clock in judge loops and
+watch timers. **You are finished when your gates are clean and your report is
+written.** If you believe an item needs a judge's eye early, say so in your
+report and name it; do not run one.
 
 ## 8. Your page files
 

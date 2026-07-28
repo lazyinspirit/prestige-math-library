@@ -322,6 +322,21 @@ not repair.
 
 ## 5. The judge
 
+**WHEN it runs changed (owner approved, 2026-07-28): once, after the step-9
+audit, on final text.** It used to run during authoring, in parallel with step 5.
+Measured on `frontier-1`: **292 calls for 212 items**, because steps 7–9 rewrite
+prose and SCHEMA §3 correctly voids a verdict on rewritten text — **80 calls
+(27%) were repeats and 30 earned passes were destroyed.** The Claude cost was
+larger than the GLM cost: six authoring agents spent most of 7–8 hours each in
+judge loops, watch timers and retry babysitting instead of writing mathematics.
+
+Two consequences worth stating. **Coverage does not fall** — every item is still
+judged, and the verdicts now describe the text that actually ships. And **a
+rejection lands on audited text**, so the orchestrator adjudicates it personally;
+a sweeper verifies and reports, never fixes. Run that way on `frontier-1`'s
+closing sweep: 90 items, two rejections, both real, both verified from disk,
+both repaired by the orchestrator and re-judged clean.
+
 `tools/judge.mts`, `z-ai/glm-5.2` over ofox. **Never a Claude model for a session
 item** — the tool refuses `anthropic/claude*` without `--allow-claude`.
 

@@ -19,10 +19,10 @@ Everything below is verified against the code as of 2026-07-27.
 | actor | model | does |
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may delete a result |
-| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, reporting |
+| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-7 adjudication of every judge rejection**, reporting |
 | **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; audits the whole level, seams included |
 | **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; step 8 audit of its own batch |
-| **authoring agent** | Opus 5 | one per A/B pair; step 5 proof generation; step 7 fixes |
+| **authoring agent** | Opus 5 | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
 | **judge** | `z-ai/glm-5.2` via ofox | cheap adversarial screen. **Never a Claude model** for session items |
 
 ## Artifacts
@@ -101,6 +101,36 @@ rather than trusting the sweep.
 
 ---
 
+## EXECUTION ORDER — the step numbers are NAMES, not the running order
+
+**The judge moved (owner, 2026-07-28). Steps 6 and 7 now run AFTER step 9, on
+final text.** Run them in this order:
+
+```
+0 → 1 → 2 → 3 → 4 → 5 → 8 → 9 → 6 → 7 → 10
+                    ▲            ▲
+              author, gates      judge ONCE, on text nobody
+              only, NO judge     will rewrite afterwards
+```
+
+**Why the numbers did not change with the order.** Step numbers are quoted from
+`briefs/`, from memory files, from research notes and from the whole commit
+history. This repo's own most expensive lesson is that renumbering an identifier
+leaves dangling references behind it — that is exactly what `order` does to prose
+scaffolds, and why an agent is briefed by page id and never by order. So the
+numbers are treated as **stable names**; only their sequence changed.
+
+**Why the judge moved.** Measured on `frontier-1`: **292 judge calls for 212
+items.** Steps 7, 8 and 9 rewrite prose, and SCHEMA §3 correctly voids a verdict
+on rewritten text — so **80 calls (27%) were repeats of an item already judged,
+and 30 earned passes were destroyed** and had to be bought again. It cost the
+Claude side more than the GLM side: the six authoring agents spent most of their
+7–8 hours in judge loops, watch timers and retry babysitting rather than writing
+mathematics.
+
+Judging last costs nothing in coverage — every item is still judged — and the
+verdicts finally describe the text that ships.
+
 ## Step 0 — Batch (orchestrator)
 
 1. Compute the **frontier from disk**, never from a remembered page count: an
@@ -172,6 +202,10 @@ overwrite.
 
 ## Step 5 — Author (one agent per A/B pair, in parallel)
 
+> **Authors do NOT judge (owner, 2026-07-28).** An author is finished when its
+> gates are clean and its report is written. Judging is step 6 and now runs after
+> step 9. This is where most of the wall-clock saving lives.
+
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
 silence a checker when the proof does not use it is the dominant historical
@@ -196,7 +230,12 @@ reason it can state; it is opt-in and no longer the default.
 depends on 70, and orders 131 and 137 both depend on 129. Splitting there was
 correct. Splitting a single level is not.
 
-## Step 6 — Judge (parallel with step 5, per pair)
+## Step 6 — Judge (RUNS AFTER STEP 9, one sweep, on final text)
+
+> **Relocated 2026-07-28 (owner).** This used to run in parallel with step 5.
+> It now runs after the step-9 audit, once, on text nobody will rewrite
+> afterwards. See §"Execution order" for the measurement that moved it.
+> **Preflight the account first** — `tsx tools/judge.mts --preflight`.
 
 `tools/judge.mts`, model `z-ai/glm-5.2`. Pass `--topic`, and pass the triage
 rule as `--conventions "$(cat briefs/judge-conventions.txt)"` — **do not retype
@@ -265,7 +304,14 @@ always re-run before concluding; a reason string containing LaTeX backslashes ca
 make the JSON unparseable, so ask for plain prose in `--conventions`. **Never
 record a pass the judge did not give**; `keep: null` is not a pass.
 
-## Step 7 — Adjudicate rejections (authoring agent)
+## Step 7 — Adjudicate rejections (ORCHESTRATOR, after step 9)
+
+> **The actor changed with the move.** The authoring agents are finished by the
+> time step 6 runs, and a rejection now lands on text that has cleared the final
+> audit tier — so the orchestrator adjudicates it personally rather than a
+> subagent editing audited text. A sweeper's job is to verify and REPORT, never
+> to fix. Run this way on `frontier-1`'s closing sweep: two rejections, both
+> verified from disk, both repaired by the orchestrator, both re-judged clean.
 
 **Adjudicate, do not comply.** Measured judge precision on this corpus is
 **21–24%**, and it scored **0/3** on real historical defects. Each rejection gets

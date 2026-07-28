@@ -34,7 +34,9 @@ run a page from prompt to publish; the normative docs above win where they diffe
    canonical stratification into the file and re-run until clean (the repo stores
    the strictly stratified form: a step citing phase-k steps sits in phase k+1).
    Record `verification.precheck: pass`.
-3. **Cross-family judge** (before publish): session items → **GLM 5.2 primary
+3. **Cross-family judge** — **RUNS ONCE, AFTER the step-9 audit, on final text
+   (owner, 2026-07-28)**; authors do not judge. `LEVELS.md` §"Execution order"
+   has the measurement. Before publish: session items → **GLM 5.2 primary
    (`z-ai/glm-5.2`), GPT-5.4 then Gemini fallback — NEVER a Claude model, and
    never GLM or DeepSeek for a PIPELINE item, whose generator lineup is GLM 5.2
    then DeepSeek v4-pro**; pipeline items → production lineup.
