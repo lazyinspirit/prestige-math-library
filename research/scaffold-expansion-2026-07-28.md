@@ -29,6 +29,29 @@ scaffold files is a PROPOSAL against the 230-page baseline and must be
 recomputed from `research/plan-spec.json` after the splice. The files say this
 themselves; believe the spec, never the prose.
 
+**Splice by ANCHOR PAGE ID, never by composing the three shift tables.** Each
+group is inserted before or after a named page, the groups are applied in
+ascending anchor order, and every anchor's position is re-read from the live spec
+immediately before its group goes in. Composing `+4` / `+10` / `+18` / `+42`
+arithmetic by hand is how a page silently lands in the wrong band.
+
+### HAZARD: do not splice while an authoring agent is running
+
+Authoring briefs tell their agent to enumerate its items **from
+`research/plan-spec.json` by ORDER** — "orders 131 and 132", "orders 137 and 138"
+— because that is the only non-stale source. A renumber therefore moves the
+ground under any agent mid-build: the agent re-reads the spec and finds different
+pages at its assigned orders.
+
+Round 3 of level 9 (mixed) is authoring orders 131/132 and 137/138 right now, and
+job 3's own proposal inserts representation theory immediately below old order
+129, which would shift both of them. **So the splice waits for round 3 to land.**
+
+This is a general rule, not an incident: **the spec is a shared mutable resource,
+and a renumber is a write to every row of it.** Take it only when no agent holds
+a read on it. The alternative — briefing agents by page id rather than by order —
+would remove the hazard, and is worth doing if splices become frequent.
+
 ---
 
 ## Verified from disk (not taken from the agents' reports)
