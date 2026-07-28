@@ -20,7 +20,7 @@ Everything below is verified against the code as of 2026-07-27.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may delete a result |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, reporting |
-| **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; audits cross-batch seams |
+| **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; audits the whole level, seams included |
 | **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; step 8 audit of its own batch |
 | **authoring agent** | Opus 5 | one per A/B pair; step 5 proof generation; step 7 fixes |
 | **judge** | `z-ai/glm-5.2` via ofox | cheap adversarial screen. **Never a Claude model** for session items |
@@ -237,39 +237,43 @@ sweep. Ranked hunting grounds: **Remark prose · page summaries · counts stated
 prose · index ranges at the first index (ℕ contains 0) · citing an item for a
 claim it does not make · scope-denial phrasing that decays.**
 
-## Step 9 — Seam audit (Alpha-n, resumed)
+## Step 9 — Final Alpha-n mathematical-accuracy audit (owner instruction, 2026-07-27; renumbered 2026-07-28)
 
-Bounded to **cross-batch dependency edges and their immediate neighbours**,
-computed mechanically and handed over, so the job scales with seams rather than
-level size. Alpha keeps a standing licence to pull any item and reports what it
-read.
-
-**Zero declared edges between two pages is a finding, not a clean bill.** Ask
-what *should* connect.
-
-## Step 10 — Final Alpha-n audit, sweep, rundown, then pause
-
-### 10a. Final Alpha-n mathematical-accuracy audit (owner instruction, 2026-07-27)
+> **The separate seam audit was REMOVED on 2026-07-28 (owner).** It used to be
+> step 9, bounded to cross-batch dependency edges; the final audit was step 10a.
+> The final audit is now step 9 and there is no separate seam stage. **Its two
+> real duties were folded into risk source 3 below and are NOT lost** — a seam is
+> a risk source, not a workflow stage, and running it as its own pass meant
+> Alpha read the level twice and re-audited what it had just verified.
 
 **Alpha-n audits the WHOLE level for mathematical accuracy, fixes fatal errors,
 and reports to the owner.** This is the last verification tier before the owner's
 own audit, and it is not optional.
 
-It is deliberately different from step 9. Step 9 is bounded to seams; **10a is
-bounded by RISK**, and the risk map is written by the agents themselves:
+It is **bounded by RISK**, and the risk map is written by the agents themselves:
 
-1. **Start with what nobody has read in full.** Every step-8 and step-9 report
-   ends with an honest coverage statement naming exactly this. At level 9 that
-   was two whole page pairs Alpha had never opened, plus ~60 proof bodies a Beta
-   had read only down to Statements, Remarks and Facts.
+1. **Start with what nobody has read in full.** Every step-8 report ends with an
+   honest coverage statement naming exactly this. At level 9 that was two whole
+   page pairs Alpha had never opened, plus ~60 proof bodies a Beta had read only
+   down to Statements, Remarks and Facts. **The dependencies an author admits it
+   never opened belong here too** — an `[L#]` fact copied from a third item
+   rather than from its source is how the dominant defect class propagates.
 2. **Then the items the authors flagged as their own least-confident.**
-3. Do **not** re-audit what step 9 already verified.
+3. **Then the seams: cross-batch dependency edges and their immediate
+   neighbours.** Compute the edge set mechanically and work from it, so this part
+   scales with seams rather than with level size. **Zero declared edges between
+   two pages of the same level is a finding, not a clean bill** — ask what
+   *should* connect. Two pages that share a topic and cite nothing of each
+   other's are either genuinely independent or quietly duplicating, and only
+   reading tells you which.
+
+Alpha keeps a standing licence to pull any item, and reports what it read.
 
 **Fatal, must fix:** mathematical inaccuracy; logical invalidity; a step not
 licensed by its cited facts; citing an item for a claim it does not make; **a
 title or Statement asserting more than the proof gives.** That last class is the
 reason this stage exists — the judge reads Statements and structurally cannot see
-a false title, and level 9 shipped two of them into step 10.
+a false title, and level 9 shipped two of them into the final audit.
 
 **Not fatal, spend no effort:** the standing triage list.
 
@@ -282,15 +286,17 @@ falsehood standing to keep a count down.
 Alpha-n may **never remove a theorem or example**; that needs explicit owner
 approval, with the ramification of dropping it stated.
 
-### 10b. Scope-denial sweep of the published corpus
+## Step 10 — Sweep, rundown, then pause
+
+### 10a. Scope-denial sweep of the published corpus
 
 See below — items and page summaries both.
 
-### 10c. Rundown, then pause
+### 10b. Rundown, then pause
 
 Full report: forward references present, judge coverage counted from frontmatter
-on disk, gate results, escalation set, what 10a covered and what it did not, and
-readiness to publish. **Then stop for the owner.**
+on disk, gate results, escalation set, what step 9 covered and what it did not,
+and readiness to publish. **Then stop for the owner.**
 
 **Every level ends with a scope-denial sweep of the published corpus, over ITEMS
 AND PAGE SUMMARIES BOTH.** Grep `does not develop`, `not defined in this
@@ -343,7 +349,9 @@ independent triggers; count **refutations + repairs combined, per item**:
 
 1. **Judge refutations > 1 before step 9** → name it in Alpha-n's step-9 brief;
    Alpha reviews **the proof and all neighbouring dependencies**, since a proof
-   that keeps failing is often correct and resting on a bad neighbour.
+   that keeps failing is often correct and resting on a bad neighbour. (Step 9
+   is the final audit; the separate seam stage that used to hold this number was
+   removed 2026-07-28. The duty is unchanged — only its step number moved.)
 2. **Refuted or fixed > 1 by any subagent, Alpha-n included** → the orchestrator
    audits it **personally**, and this does not wait for step 9.
 

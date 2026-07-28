@@ -359,7 +359,7 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | plan order, namespaced writes, dep resolution, id reuse, seams |
 | `beta-step8-audit.md` | Beta-n-i, step 8 | "you are the first real reader", ranked hunting grounds |
 | `authoring.md` | authoring agent, steps 5/7 | precheck traps, shipped-defect checklist, judge protocol |
-| `alpha.md` | Alpha-n, steps 4/9/10a | propagation, seam audit, final audit, twice-touched interaction |
+| `alpha.md` | Alpha-n, steps 4 and 9 | propagation, final whole-level audit (seams included as a risk source), twice-touched interaction |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical
@@ -436,13 +436,13 @@ State this honestly rather than implying coverage.
   spec and the content drift apart silently, which is also why the gap above
   cannot be caught by re-running `validate-plan`.
 - **Scope-denial decay has no detector.** A claim true when written that a later
-  level falsifies changes no file, so every gate passes forever. Only the step-10b
+  level falsifies changes no file, so every gate passes forever. Only the step-10a
   sweep finds it — and a repair confirmed by reading the diff can leave the same
   falsehood elsewhere in the same file, which happened at level 8.
 - **`citecheck` is a heuristic**, not a proof of correct attribution.
 - **No page has ever been visually rendered.** `rendercheck` closes part of this.
 - **The Fable audit** required by `CLAUDE.md` before publishing mathematical
-  content has not been satisfied at level 8 or 9; step 10a is the nearest
+  content has not been satisfied at level 8 or 9; step 9 is the nearest
   equivalent but is Alpha, not a separate tier.
 
 ## 9. Maintaining this file, `LEVELS.md`, `WORKFLOW.md` and `CLAUDE.md`

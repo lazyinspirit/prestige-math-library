@@ -140,6 +140,11 @@ whole level.
    neighbour that is not.
 2. **Refuted again at step 9 — a RED FLAG.** The orchestrator (me) audits the
    proof personally. Not a subagent, and not another repair cycle.
+
+(Step 9 is the FINAL whole-level audit. The separate seam-audit stage that used
+to carry this number was removed on 2026-07-28; the final audit moved down from
+step 10a to step 9 and absorbed the seam duty as one of its risk sources. Every
+escalation above is unchanged in substance — only the number it points at moved.)
 3. **The personal audit must state, explicitly:**
    - the **nature** of the problem — mathematical inaccuracy, incorrectly cited
      dependency, unjustified step, false statement, or a judge false positive;
@@ -178,7 +183,7 @@ node tools/touchlog.mjs audit research/level<n>-touches.json research/level<n>-j
 ```
 
 **Take a snapshot after EVERY stage that can modify items** — authoring, step-7
-fixes, each step-8 batch audit, step-9 Alpha. A file appearing for the first time
+fixes, each step-8 batch audit, step-9 Alpha (the final whole-level audit). A file appearing for the first time
 counts as creation, not a repair. `audit` combines repairs with judge refutations
 and prints the escalation set: every id whose total exceeds one.
 

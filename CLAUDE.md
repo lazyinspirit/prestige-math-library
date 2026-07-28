@@ -63,9 +63,9 @@ run a page from prompt to publish; the normative docs above win where they diffe
    The five steps here are the publish path for any content; this one applies
    only to a per-level build. Before the owner audit, Alpha-n audits the WHOLE
    level for mathematical accuracy and fixes fatal errors, starting with
-   whatever the step-8/9 coverage statements say nobody read in full. Fatal
+   whatever the step-8 coverage statements say nobody read in full. Fatal
    includes a title or Statement asserting more than the proof gives — the
-   judge reads Statements and cannot see a false title. `LEVELS.md` §10a.
+   judge reads Statements and cannot see a false title. `LEVELS.md` §"Step 9".
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By

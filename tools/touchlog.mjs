@@ -21,7 +21,8 @@
 //   node tools/touchlog.mjs audit  research/level9-touches.json research/level9-judge.jsonl
 //
 // `snap` records a sha256 per items/*.md. Take one after EVERY stage that can
-// modify items: authoring, step-7 fixes, each step-8 batch audit, step-9 Alpha.
+// modify items: authoring, step-7 fixes, each step-8 batch audit, step-9 Alpha
+// (the final whole-level audit; the separate seam stage was removed 2026-07-28).
 // `report` counts, per id, the snapshot-to-snapshot transitions whose hash
 // changed — that is the repair count.
 // `audit` adds refutations from the judge ledger and prints the escalation set:
