@@ -4,7 +4,7 @@ kind: example
 title: "$\\mathbb{R}^{*}$ is homeomorphic to the unit circle by inverse stereographic projection, and $\\mathbb{N}^{*}$ is the ordinal space $\\omega + 1$"
 status: draft
 origin: session
-deps: [def-one-point-compactification, thm-one-point-compactification-properties, lem-the-order-topology-on-an-ordinal, thm-ordinal-spaces-and-compactness, def-ordinal-addition, lem-omega-least-limit-ordinal, lem-ordinal-basics, def-ordinal, def-standard-topologies, def-natural-numbers, def-compact-space, def-subspace-topology-top, def-homeomorphism-and-open-maps, thm-compactness-under-continuous-maps, def-hausdorff-space, def-metrizable-space, cor-metrizability-and-first-countability-are-hereditary, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, lem-metrics-on-rn, lem-product-topology-on-rn, cor-heine-borel-in-the-product-topology, def-continuous-map-top, thm-continuity-characterisations-top, thm-product-universal-property, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, cor-archimedean-reciprocal, def-canonical-natural, def-topological-space, def-interval, def-product-topology, def-metric-bounded-diameter, def-complete-ordered-field, ex-compactness-in-the-standard-topologies]
+deps: [thm-heine-borel-r, def-one-point-compactification, thm-one-point-compactification-properties, lem-the-order-topology-on-an-ordinal, thm-ordinal-spaces-and-compactness, def-ordinal-addition, lem-omega-least-limit-ordinal, lem-ordinal-basics, def-ordinal, def-standard-topologies, def-natural-numbers, def-compact-space, def-subspace-topology-top, def-homeomorphism-and-open-maps, thm-compactness-under-continuous-maps, def-hausdorff-space, def-metrizable-space, cor-metrizability-and-first-countability-are-hereditary, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, lem-metrics-on-rn, lem-product-topology-on-rn, cor-heine-borel-in-the-product-topology, def-continuous-map-top, thm-continuity-characterisations-top, thm-product-universal-property, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, cor-archimedean-reciprocal, def-canonical-natural, def-topological-space, def-interval, def-product-topology, def-metric-bounded-diameter, def-complete-ordered-field, ex-compactness-in-the-standard-topologies]
 justified_by: []
 aliases: []
 landmark: true
@@ -67,6 +67,8 @@ its inverse $(x,y) \mapsto x/(1-y)$ are rational.
 
 [L8] For every real $\varepsilon > 0$ there is a natural $m \ge 1$ with $1/m < \varepsilon$, and $\mathbb{R}$ is an ordered field ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[def-complete-ordered-field]], [[def-interval]], [[def-topological-space]]).
 
+[L9] A closed bounded interval of $\mathbb{R}$ is a compact subset of $\mathbb{R}$ ([[thm-heine-borel-r]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -85,7 +87,7 @@ its inverse $(x,y) \mapsto x/(1-y)$ are rational.
 
 3.2 Claim 1 follows: by steps 2.1 and 2.2 the two topologies on the set $\omega+1$ of step 1.1 are the same family of subsets, so the identity map is a bijection carrying open sets to open sets in both directions and is a homeomorphism. [L1, step 1.1, step 2.1, step 2.2]
 
-4.1 $h$ is continuous at $\infty$. Let $V$ be open in $S^1$ with $(0,1) \in V$; by [L5] there is a real $r > 0$ with every point of $S^1$ at $d_\infty$-distance less than $r$ from $(0,1)$ lying in $V$. By [L8] fix a natural $M \ge 1$ with $1/M < r/2$, and put $C := \{\, s \in \mathbb{R} : |s| \le M \,\}$, which is closed and bounded, hence a compact subset of $\mathbb{R}$ by [L5]. For $t \notin C$ one has $|t| > M \ge 1$, so $|2t/(t^2+1)| \le 2|t|/t^2 = 2/|t| < 2/M < r$ and $|(t^2-1)/(t^2+1) - 1| = 2/(t^2+1) \le 2/t^2 \le 2/M < r$; hence $h(t) \in V$. So $W := \mathbb{R}^{*} \setminus C$ is open in $\mathbb{R}^{*}$ by [L1], contains $\infty$, and satisfies $h[W] \subseteq V$. [L1, L5, L8, step 2.3, step 3.1]
+4.1 $h$ is continuous at $\infty$. Let $V$ be open in $S^1$ with $(0,1) \in V$; by [L5] there is a real $r > 0$ with every point of $S^1$ at $d_\infty$-distance less than $r$ from $(0,1)$ lying in $V$. By [L8] fix a natural $M \ge 1$ with $1/M < r/2$, and put $C := \{\, s \in \mathbb{R} : |s| \le M \,\}$, which is a closed bounded interval of $\mathbb{R}$, hence a compact subset of $\mathbb{R}$ by [L9]. For $t \notin C$ one has $|t| > M \ge 1$, so $|2t/(t^2+1)| \le 2|t|/t^2 = 2/|t| < 2/M < r$ and $|(t^2-1)/(t^2+1) - 1| = 2/(t^2+1) \le 2/t^2 \le 2/M < r$; hence $h(t) \in V$. So $W := \mathbb{R}^{*} \setminus C$ is open in $\mathbb{R}^{*}$ by [L1], contains $\infty$, and satisfies $h[W] \subseteq V$. [L1, L5, L8, L9, step 2.3, step 3.1]
 
 5.1 $h$ is therefore a continuous bijection from $\mathbb{R}^{*}$, which is compact by [L1], to $S^1$, which is Hausdorff by step 1.2; so [L7] makes it a homeomorphism, which is claim 2. With claim 1 at step 3.2 both statements are proved. [L1, L7, step 1.2, step 2.3, step 3.1, step 3.2, step 4.1] ∎
 

@@ -4,7 +4,7 @@ kind: example
 title: "$\\mathbb{R}$ and $\\mathbb{Q}$ are $\\sigma$-compact, and Lindel\\\"of assuming countable choice; $\\mathbb{R}$ is locally compact and $\\mathbb{Q}$ is nowhere locally compact"
 status: draft
 origin: session
-deps: [def-compactness-variants, def-compact-space, def-locally-compact-space, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, thm-rationals-countable, def-countable, lem-countable-iff-surjection-from-n, def-countable-choice, def-interval, def-canonical-natural, thm-of-archimedean, def-subspace-topology-top, def-neighbourhood-top, lem-of-q-dense, lem-q-and-irrationals-dense-r, def-hereditary-property, def-topological-space, def-complete-ordered-field, thm-closure-characterisation-top, def-interior-closure-boundary-top]
+deps: [lem-compactness-of-a-subspace-is-ambient, def-compactness-variants, def-compact-space, def-locally-compact-space, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, thm-rationals-countable, def-countable, lem-countable-iff-surjection-from-n, def-countable-choice, def-interval, def-canonical-natural, thm-of-archimedean, def-subspace-topology-top, def-neighbourhood-top, lem-of-q-dense, lem-q-and-irrationals-dense-r, def-hereditary-property, def-topological-space, def-complete-ordered-field, thm-closure-characterisation-top, def-interior-closure-boundary-top]
 justified_by: []
 aliases: []
 landmark: true
@@ -61,6 +61,8 @@ name one member of a cover for each of countably many pieces.
 
 [L8] For $A \subseteq S \subseteq X$ the topology $A$ inherits from $S$ is the one it inherits from $X$, so compactness of $A$ may be read in either; and a closed subset of $\mathbb{R}$ contains every real all of whose neighbourhoods meet it ([[def-hereditary-property]], [[def-subspace-topology-top]], [[thm-closure-characterisation-top]], claim 1).
 
+[L9] A subset $K$ of a space $X$ is compact exactly when every family of open subsets of $X$ covering $K$ has a finite subfamily covering $K$; the intrinsic and ambient readings agree ([[lem-compactness-of-a-subspace-is-ambient]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -71,7 +73,7 @@ name one member of a cover for each of countably many pieces.
 
 1.3 For claim 4 in $\mathbb{R}$: given $p \in \mathbb{R}$ the set $\{t : |t-p| \le 1\}$ is closed and bounded, hence compact by [L2], and it contains the open $(p-1,p+1) \ni p$, so it is a compact neighbourhood of $p$ and $\mathbb{R}$ is locally compact. [L1, L2, L6]
 
-2.1 For claim 3 assume countable choice and let $\mathcal{U}$ be an open cover of $\mathbb{R}$. For $n \in \mathbb{N}$ the set $T_n$ of finite subfamilies of $\mathcal{U}$ covering $I_n$ is nonempty, $I_n$ being compact by step 1.1, so [L5] supplies $\mathcal{V}_n \in T_n$ for every $n$; the union $\bigcup_{n \in \mathbb{N}} \mathcal{V}_n$ is an at most countable subfamily of $\mathcal{U}$ by [L4] and covers $\mathbb{R}$ by step 1.1. The same argument with the singletons of step 1.2 in place of the $I_n$ shows $\mathbb{Q}$ is Lindel&ouml;f: claim 3. [L4, L5, L6, step 1.1, step 1.2]
+2.1 For claim 3 assume countable choice and let $\mathcal{U}$ be an open cover of $\mathbb{R}$. For $n \in \mathbb{N}$ the set $T_n$ of finite subfamilies of $\mathcal{U}$ covering $I_n$ is nonempty, $I_n$ being compact by step 1.1 and the ambient reading being licensed by [L9], so [L5] supplies $\mathcal{V}_n \in T_n$ for every $n$; the union $\bigcup_{n \in \mathbb{N}} \mathcal{V}_n$ is an at most countable subfamily of $\mathcal{U}$ by [L4] and covers $\mathbb{R}$ by step 1.1. The same argument with the singletons of step 1.2 in place of the $I_n$ shows $\mathbb{Q}$ is Lindel&ouml;f: claim 3. [L4, L5, L6, [L9], step 1.1, step 1.2]
 
 2.2 For claim 4 in $\mathbb{Q}$, let $r \in \mathbb{Q}$ and suppose $K \subseteq \mathbb{Q}$ were a compact neighbourhood of $r$ in $\mathbb{Q}$; then some set open in $\mathbb{Q}$ lies between $r$ and $K$, so by [L1] there is a real $\varepsilon > 0$ with $(r-\varepsilon, r+\varepsilon) \cap \mathbb{Q} \subseteq K$, and by [L8] the set $K$ is a compact subset of $\mathbb{R}$ as well, hence closed in $\mathbb{R}$ by [L2]. [L1, L2, L6, L8, step 1.2]
 

@@ -65,6 +65,8 @@ $$x, y \in C \ \text{ and } \ t \in [0,1] \quad \Longrightarrow \quad (1-t)x + t
 
 [A5] A norm satisfies $\lVert \lambda v\rVert = |\lambda|\,\lVert v\rVert$ and $\lVert u + v\rVert \le \lVert u\rVert + \lVert v\rVert$, and the ball $B(c,r)$ of the induced metric is $\{\, y : \lVert y - c\rVert < r \,\}$ ([[def-norm-and-normed-space]], [[def-p-norms-on-rn]], [[def-metric-ball]], [[lem-metrics-on-rn]]).
 
+[A6] $\mathbb{R}^n$ is a real vector space, so it is closed under the scalar multiples and sums forming $(1-t)x + ty$ ([[def-vector-space]]); and an order-convex $J \subseteq \mathbb{R}$ contains every real lying between two of its elements ([[def-interval]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -73,7 +75,7 @@ $$x, y \in C \ \text{ and } \ t \in [0,1] \quad \Longrightarrow \quad (1-t)x + t
 
 1.2 Every ball is convex: for $x, y \in B(c,r)$ and $t \in [0,1]$, $\lVert (1-t)x + ty - c\rVert = \lVert (1-t)(x-c) + t(y-c)\rVert \le (1-t)\lVert x-c\rVert + t\lVert y-c\rVert < (1-t)r + tr = r$, using [A5] and $1-t \ge 0$, $t \ge 0$. [A5]
 
-1.3 $\mathbb{R}^n$ is convex, since $(1-t)x + ty$ is an element of $\mathbb{R}^n$ for all $x, y$ and $t$; a box $\prod_{k<n} J_k$ with each $J_k$ order-convex is convex, since $(1-t)x_k + t y_k$ lies between $x_k$ and $y_k$ and hence in $J_k$; and a half-space $\{x : x_k \le c\}$ is convex for the same reason. [A5]
+1.3 $\mathbb{R}^n$ is convex, since $(1-t)x + ty$ is an element of $\mathbb{R}^n$ for all $x, y$ and $t$; a box $\prod_{k<n} J_k$ with each $J_k$ order-convex is convex, since $(1-t)x_k + t y_k$ lies between $x_k$ and $y_k$ and hence in $J_k$; and a half-space $\{x : x_k \le c\}$ is convex for the same reason. [A6]
 
 2.1 $\gamma$ is continuous into $\mathbb{R}^n$ by [A1] and step 1.1, each component being continuous by [A2]; and $\gamma$ takes values in $C$ by convexity, so it is continuous into the subspace $C$ by [A1]. [step 1.1, A1, A2]
 

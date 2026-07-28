@@ -1,11 +1,11 @@
 ---
 id: cex-a-continuous-function-on-a-non-closed-subspace-with-no-extension
 kind: counterexample
-title: "The reciprocal on $(0,1]$ is continuous and extends to no continuous function on $\\mathbb{R}$, so closedness of the subspace is not decoration in Tietze's theorem"
+title: "The reciprocal on $(0,1]$ is continuous and extends to no continuous function on $\\mathbb{R}$, so closedness of the subspace is not decoration in the $\\mathbb{R}$-valued Tietze extension"
 status: draft
 origin: session
 deps: [fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends,
-       thm-tietze-extension-theorem, def-continuity-real, thm-algebra-of-continuous-functions,
+       thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps, def-continuity-real, thm-algebra-of-continuous-functions,
        cor-boundedness-theorem-r, cor-archimedean-reciprocal, def-interval,
        def-subspace-topology-top, thm-heine-borel-r]
 justified_by: []
@@ -31,9 +31,18 @@ continuous function $F : \mathbb{R} \to \mathbb{R}$.
 This is the single witness behind
 [[fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends]],
 presented on its own as the counterexample it is: it shows that dropping the
-hypothesis "$A$ closed" from [[thm-tietze-extension-theorem]] is not a minor
-loosening but breaks the theorem outright, on the very space $\mathbb{R}$
-where the theorem is otherwise available.
+hypothesis "$A$ closed" from
+[[cor-tietze-for-unbounded-and-open-interval-valued-maps]] is not a minor
+loosening but breaks that extension statement outright, on the very space
+$\mathbb{R}$ where it is otherwise available.
+
+**Which statement this witness refutes, and which it does not.** The corollary is
+the $\mathbb{R}$-valued form, and $f$ meets every one of its hypotheses except
+closedness of $A$, so it isolates that hypothesis exactly. It does **not** refute
+[[thm-tietze-extension-theorem]] itself with the closedness hypothesis removed:
+that theorem is stated for maps into a bounded interval $[a,b]$, and $f$ is
+unbounded, so $f$ fails its codomain hypothesis as well. A witness violating two
+hypotheses cannot isolate one.
 
 ## Facts & Assumptions
 
@@ -63,6 +72,6 @@ where the theorem is otherwise available.
 
 ## Remarks
 
-- **The only hypothesis of Tietze's theorem that fails here is closedness of $A$.** $\mathbb{R}$ is normal and $f$ is continuous on $A$; the closure of $A$ in $\mathbb{R}$ is $[0,1]$, and it is exactly the missing point $0$ where $f$ has nowhere finite to go.
+- **The only hypothesis of the $\mathbb{R}$-valued extension statement that fails here is closedness of $A$.** $\mathbb{R}$ is normal and $f$ is continuous on $A$; the closure of $A$ in $\mathbb{R}$ is $[0,1]$, and it is exactly the missing point $0$ where $f$ has nowhere finite to go. Against [[thm-tietze-extension-theorem]] itself the witness fails a second hypothesis, since that theorem takes values in a bounded interval and $f$ does not, which is why the statement refuted above is framed against [[cor-tietze-for-unbounded-and-open-interval-valued-maps]].
 
 - **The obstruction is boundedness, not the existence of a limit.** Step 1.2 shows $f$ is unbounded on every neighbourhood of the missing point directly from the reciprocal's growth, with no appeal to $\lim_{x \to 0^+} f(x)$ failing to exist as a real number.
