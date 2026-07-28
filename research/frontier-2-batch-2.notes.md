@@ -76,37 +76,37 @@ separation axiom it names. Nothing about it is scaffolded here.
 
 **File:** `research/plan-topology-track.md`
 **Section:** `## T5. Compactness   [needs F1]`
-**Old text (inside the THMS paragraph, three fragments on separate lines):**
+
+**Edit A. Old text (one line, the second line of the THMS paragraph):**
 
 ```
 of Hausdorff spaces are closed; compact Hausdorff => normal; continuous images;
 ```
 
-**New text:**
+**New text (one line):**
 
 ```
 of Hausdorff spaces are closed; continuous images;
 ```
 
-**Old text:**
+**Edit B. Old text (the last four lines of the THMS paragraph, verbatim):**
 
 ```
+a corollary; the one-point compactification and when it is Hausdorff; locally
 compact Hausdorff => completely regular; the Baire category theorem for locally
 compact Hausdorff spaces; paracompact Hausdorff => normal; partitions of unity;
+the Stone-Cech compactification and its universal property (statement).
 ```
 
-(the line in the file reads `... the one-point compactification and when it is Hausdorff; locally
-compact Hausdorff => completely regular; the Baire category theorem for locally
-compact Hausdorff spaces; paracompact Hausdorff => normal; partitions of unity;`)
-
-**New text:**
+**New text (two lines):**
 
 ```
-the Baire category theorem for locally
-compact Hausdorff spaces; partitions of unity;
+a corollary; the one-point compactification and when it is Hausdorff; the Baire
+category theorem for locally compact Hausdorff spaces.
 ```
 
-**Edit:** and append to the end of the T5 section, after the CEX line:
+**Edit C:** append to the end of the T5 section, after the CEX line and before the
+`---` rule:
 
 ```
 **frontier-2 audit, 2026-07-29 (batch 2). THREE ITEMS OF THE LIST ABOVE ARE NOT
@@ -130,38 +130,101 @@ and each of them owes a dictionary sentence saying that the metric case agrees �
 this is the level-7 "two notions" defect and it is exactly where it would start.
 ```
 
-### 1.3 `research/plan-topology-track.md` — scope denials, three new entries
+### 1.3 `research/plan-topology-track.md` — scope denials, entries 1–3 resolved
+
+Entries 1, 2 and 3 of that section are exactly the three results this batch was sent
+to home. They record the obstruction and are now stale: the obstruction is lifted and
+the homes are fixed. **A resolved denial that still reads as a denial is the decay
+class this repo has been bitten by**, so these are rewritten rather than appended to.
 
 **File:** `research/plan-topology-track.md`
 **Section:** `## Scope denials`
-**Edit:** append three entries at the end of the list:
+**Old text (entries 1 to 3, verbatim, seventeen lines):**
 
 ```
-**Urysohn's lemma in regular spaces, as a false statement (T7's FS list).**
-Refuting it needs a regular space in which two disjoint closed sets are not
-separated by a continuous function, and the nearest witness is a regular space
-that is not normal. 261 already records that no such witness is reachable from
-its declared prerequisites, and 267 inherits the same obstruction: the witnesses
-need either cardinal arithmetic (247, unbuilt) or the hereditary and productive
-behaviour of regularity (265, unbuilt and below 267). DROPPED from 267 with no
-substitute. Licensed by: 247 or 265.
+1. **compact Hausdorff $\Rightarrow$ normal.** General topological compactness
+   does not exist in this library: the only compactness on disk is metric
+   (`def-metric-compactness`, order 120), and the general notion belongs to page
+   255 `compactness`, which is unbuilt AND sits BELOW 261, so it cannot be
+   back-filled later. Licensed by: page 255 — but note that the item's only legal
+   home is then a page ABOVE both 255 and 261, most naturally 265 or 267, since
+   at 255 normality is not yet defined. Recorded at step 0 of `frontier-1` as a
+   plan defect: T5's THMS list currently homes it on 255, where it is a forward
+   reference on the spine and `fwdcheck` rejects it.
+2. **locally compact Hausdorff $\Rightarrow$ completely regular.** Same
+   compactness obstruction as 1, plus Urysohn's lemma. Licensed by: pages 255 and
+   267.
+3. **normal + T1 $\Rightarrow$ completely regular**, the one arrow of the
+   implication chain page 261 cannot reach. It IS Urysohn's lemma. Licensed by:
+   page 267 `urysohn-lemma-and-tietze`. (The other arrow Beta-F1-1 proposed
+   dropping, perfectly normal $\Rightarrow$ completely normal, is NOT denied — it
+   is proved at 261; see the T7 audit block.)
+```
 
-**"The Urysohn function of A and B vanishes exactly on A", as a false statement.**
-Refuting it needs a normal space with a closed set that is not a zero set, i.e. a
-normal space that is not perfectly normal. The standard witness is the ordinal
-space omega_1 + 1 with the closed singleton {omega_1}, and it needs the
-compactness of omega_1 + 1 proved on an A page — 256 is a B page and its items
-are leaf-locked. DROPPED from 267. Licensed by: the compactness of omega_1 + 1
-homed on 255 rather than 256. Note that 267 DOES prove the positive
-characterisation `thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-
-closed-set-is-a-zero-set`, so only the witness is missing, not the theory.
+**New text:**
 
-**"Hausdorff iff every net has at most one limit", and the filter forms of the
-separation axioms.** Nets and filters on a topological space are 259
-`nets-and-filters`, which is unbuilt and sits ABOVE 263. 263 proves the SEQUENCE
-form instead (`lem-a-sequence-in-a-hausdorff-space-has-at-most-one-limit`), which
-is strictly weaker and whose converse the published
-`fs-unique-sequential-limits-imply-hausdorff` already refutes. Licensed by: 259.
+```
+1. **compact Hausdorff $\Rightarrow$ normal. RESOLVED at `frontier-2`, no longer
+   denied.** The obstruction recorded here was that general topological
+   compactness did not exist; page 255 `compactness` is built in `frontier-2` and
+   supplies it. The result is homed on **263 `hausdorff-via-the-diagonal`** as
+   `thm-a-compact-hausdorff-space-is-regular-and-normal`, not on 255, because at
+   255 normality is not yet defined and `fwdcheck` rejects such a statement as
+   `forward-on-spine`. **263 rather than 265 or 267**, because 265
+   `hereditary-and-productive-separation` needs it — the standard proof that
+   normality is not hereditary runs through a compact Hausdorff space with a
+   non-normal subspace — and 265 declares 263 and 255 and nothing above them.
+   The plan defect this entry recorded (T5's THMS list homing it on 255) is fixed
+   by the T5 edit of `research/frontier-2-batch-2.notes.md` §1.2.
+2. **locally compact Hausdorff $\Rightarrow$ completely regular. RESOLVED at
+   `frontier-2`, no longer denied.** Homed on **267 `urysohn-lemma-and-tietze`**
+   as `thm-a-locally-compact-hausdorff-space-is-completely-regular`, with its
+   compactness half split onto 263 as `lem-a-locally-compact-hausdorff-space-has-
+   a-base-of-open-sets-with-compact-closure`. The proof does NOT go through
+   "complete regularity is hereditary", which is 265's and would be a forward
+   reference from 267; see `research/frontier-2-batch-2.notes.md` §1.1(2).
+3. **normal + T1 $\Rightarrow$ completely regular. RESOLVED at `frontier-2`, no
+   longer denied.** This is Urysohn's lemma, and it is proved at 267 as
+   `thm-urysohn-lemma`, with the chain closed by
+   `cor-urysohns-lemma-closes-the-separation-chain`. **It costs a choice
+   principle: dependent choice.** The published
+   `rem-urysohn-lemma-not-a-zf-theorem` records that the statement is not a
+   theorem of ZF (Laeuchli) and not a theorem of ZF + countable choice
+   (Tachtsis), and that DC suffices. (The other arrow Beta-F1-1 proposed
+   dropping, perfectly normal $\Rightarrow$ completely normal, was never denied —
+   it is proved at 261; see the T7 audit block.)
+```
+
+**Edit:** and append three further entries, numbered 13, 14 and 15, at the end of the
+list (the last existing entry is 12):
+
+```
+13. **Urysohn's lemma in regular spaces, as a false statement (T7's FS list).**
+    Refuting it needs a regular space in which two disjoint closed sets are not
+    separated by a continuous function, and the nearest witness is a regular
+    space that is not normal. Entry 7 above already records that no such witness
+    is reachable from 261's declared prerequisites, and 267 inherits the same
+    obstruction: the witnesses need either cardinal arithmetic (page 247,
+    unbuilt) or the hereditary and productive behaviour of regularity (page 265,
+    unbuilt and below 267). DROPPED from 267 with no substitute. Licensed by:
+    page 247 or page 265.
+14. **"The Urysohn function of $A$ and $B$ vanishes exactly on $A$", as a false
+    statement.** Refuting it needs a normal space with a closed set that is not a
+    zero set, that is a normal space that is not perfectly normal. The standard
+    witness is the ordinal space $\omega_1 + 1$ with the closed singleton
+    $\{\omega_1\}$, and it needs the compactness of $\omega_1 + 1$ proved on an A
+    page: page 256 is a B page and its items are leaf-locked. DROPPED from 267.
+    Licensed by: the compactness of $\omega_1 + 1$ homed on page 255 rather than
+    page 256. Note that 267 DOES prove the positive characterisation
+    `thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set`,
+    so it is the witness that is missing and not the theory.
+15. **"Hausdorff iff every net has at most one limit", and the filter forms of
+    the separation axioms.** Nets and filters on a topological space are page 259
+    `nets-and-filters`, which is unbuilt and sits ABOVE 263. Page 263 proves the
+    SEQUENCE form instead (`lem-a-sequence-in-a-hausdorff-space-has-at-most-one-limit`),
+    which is strictly weaker and whose converse the published
+    `fs-unique-sequential-limits-imply-hausdorff` already refutes. Licensed by:
+    page 259.
 ```
 
 ### 1.4 `research/plan-combinatorics-and-categories.md` — CB-2 audit block
@@ -247,10 +310,11 @@ B page.
 
 **File:** `research/plan-combinatorics-and-categories.md`
 **Section:** `## 9. Scope denials (CC-D10, requirement 3)`
-**Edit:** append at the end of the numbered list:
+**Edit:** append as entry **42** at the end of the numbered list (the last existing
+entry is 41, "Stirling's formula"):
 
 ```
-**Floor and ceiling as library-wide notions.** `def-the-ceiling-of-a-quotient-of-
+42. **Floor and ceiling as library-wide notions.** `def-the-ceiling-of-a-quotient-of-
 naturals` on page 22 defines only what the strong pigeonhole principle needs: the
 least $q$ with $m \le nq$, for naturals $m$ and $n \ge 1$. It is not the real
 floor, it is not defined for a real argument, and it does not carry the division

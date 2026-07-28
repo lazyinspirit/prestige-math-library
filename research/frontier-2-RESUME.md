@@ -187,11 +187,111 @@ execution order `0 → 1 → 2 → 3 → 4 → 5 → 9 → 6 → 7 → 10`.
   `ARCHITECTURE.md` §4.
 - Refutation ledger: `research/frontier-2-judge.jsonl`.
 
+## Step 3 — findings adjudicated (every load-bearing claim verified from disk)
+
+Beta-F2-1 returned 106 items over six pages, Beta-F2-2 returned 75. Both ran
+`validate-plan` and `depsource` against their own scratchpad splices and reported
+clean; the authoritative pass is recorded at step 4 below.
+
+### The checks NEITHER agent ran, which I ran before advancing
+
+- **Cross-batch id collision.** Beta-F2-1 explicitly listed this under "what I did
+  NOT verify". Checked all 181 ids against each other, against `items/` on disk,
+  against every `aliases:` list, and against every other spec page:
+  **zero collisions of any kind, and zero intra-batch duplicates.**
+- **The `planned-earlier` trap.** `depsource` does not fail a dep onto an unbuilt
+  planned page. Classified all **1962** deps of the twelve pages independently:
+  1385 to a published item, 373 to an earlier item on the same page, 204 to an
+  earlier `frontier-2` page, **0 to an unbuilt planned page, 0 unresolved.**
+
+### Batch 1 (Beta-F2-1) — 11 findings, all ACCEPTED except the last
+
+| finding | decision | verified how |
+|---|---|---|
+| **1** order topology unavailable; mint `def-order-topology-on-a-linearly-ordered-set` on `connectedness` | **ACCEPT** | confirms F2-D1 and corrects it: `ex-order-topology` carries `aliases: [def-order-topology]`, so the id I would have reached for is **taken** and would have been a hard error at splice |
+| **2** no sine in the library; the topologist's sine curve becomes `lem-the-oscillating-zigzag-curve` | **ACCEPT** | `sine-cosine-and-the-definition-of-pi` is order **179 with 0 items** — *earlier* than 253 and unbuilt, exactly the trap; `ls items/` has no `def-sin`/`def-cos`. Precedent exists: `ex-distance-to-the-integers` is already "the trigonometry-free oscillator" |
+| **3** `def-cardinal` defines $\lvert X\rvert$ only under AC, so Hessenberg/Tarski are unstatable as planned | **ACCEPT** | read it: line 46 opens **"Cardinality, under the Axiom of Choice. Assume the Axiom of Choice … and let $X$ be a set."** Hessenberg is ZF for alephs; the split into `lem-cardinality-of-a-well-orderable-set` is right |
+| **4** the two independence `fs-` items are unwritable; two ZFC-refutable replacements | **ACCEPT** | self-contained scope bars ‡ material as a proof step; ST-2's own trap (i) anticipated this |
+| **5** cardinal notation `⊕`/`⊗`, `κ^λ` under a stated rule | **ACCEPT**, owner-reversible | `rem-ordinal-versus-cardinal-exponentiation` exists precisely to warn of the collision |
+| **6** Tychonoff via the Alexander subbase lemma, not ultrafilters | **ACCEPT** | read `filters-and-ultrafilters`: it has FIP, ultrafilters and the ultrafilter lemma but **no notion of a filter converging in a space**; that is `nets-and-filters` (259), which itself `requires: [compactness]` |
+| **7** the three separation results drop from `compactness` | **ACCEPT** | confirmed from the spec, see the cross-batch table below |
+| **8** the expected cofinality→compactness seam **does not exist** | **ACCEPT — and it corrects my own step-0 rationale** | `thm-countable-subsets-of-omega-one-are-bounded` is homed on `ordinal-arithmetic` (245), the **A** page, and its title already carries "no at most countable subset of $\omega_1$ is cofinal in it". So `compactness` needs nothing from `cardinal-arithmetic-and-cofinality`. My step-0 note gave that seam as a reason for the packing; the packing is still correct (the real seam is `connectedness` → `compactness`, 11 declared deps) but the stated reason was wrong |
+| **9** three further drops from `compactness` | **ACCEPT** | `countability-axioms-and-cardinal-functions` is order **273 > 255**, so second countability cannot be minted here without a second notion |
+| **10** the Sorgenfrey line must be re-minted on `compactness-examples` | **ACCEPT** | leaf-lock confirmed; the payoff needs only an uncountable closed discrete subspace, not Jones' lemma |
+| **11** take `requires` as a **replacement**, not a union | **REJECT the narrowing, ACCEPT the additions** | `LEVELS.md` step 4 says union, and `frontier-1` §F-1 logged the same call: a `redundant-prereq` warning is cheaper than a page whose declared prerequisites rest on a transitive argument holding forever |
+
+### Batch 2 (Beta-F2-2) — 12 findings, all ACCEPTED
+
+| finding | decision | verified how |
+|---|---|---|
+| **F1** Urysohn's lemma costs **dependent choice**, not countable choice — *my brief was wrong* | **ACCEPT** | the published `rem-urysohn-lemma-not-a-zf-theorem` is **titled** "Urysohn's lemma is not a theorem of ZF, **nor of ZF plus countable choice**", citing Tachtsis 2019. My scaffolding brief asserted the construction was countable-choice-free "if written carefully". Following it would have shipped titles asserting non-theorems — the exact class that shipped twice in `frontier-1`. DC goes in the title and Statement of all six affected items |
+| **F2** "compact Hausdorff ⇒ normal" is homed on **263**, not 267 | **ACCEPT** | decisive and checkable: `hereditary-and-productive-separation` (265) declares `requires: [hausdorff-via-the-diagonal, compactness, …]` and **not** `urysohn-lemma-and-tietze`. Homing it at 267 would put it permanently out of 265's reach. This resolves Beta-F2-1's open "263 or 267" |
+| **F3** `thm-uniform-limit-theorem` is uncitable; mint a real-valued ε/3 lemma on 267 | **ACCEPT** | homed on `function-space-topologies`, order **283 > 267**, and so are its own prerequisites |
+| **F4** "paracompact Hausdorff ⇒ normal" belongs to 269, not this build | **ACCEPT** | `partitions-of-unity-and-paracompactness` (269) already declares `requires: [urysohn-lemma-and-tietze, compactness]` |
+| **F5** the compact-separation lemmas must be written **choice-free** | **ACCEPT**, binding on step 5 | the textbook "for each $y \in K$ choose…" is full AC over an arbitrary index set; the formula-defined family plus `lem-finite-choice` avoids it |
+| **F6** `compactness` may not reuse seven published **metric** ids | **ACCEPT**, and already discharged | the id sweep above shows Beta-F2-1 collided with none of them |
+| **F7** `plan-topology-track.md` §T5 homes three results where they cannot be stated | **ACCEPT** | old-text blocks verified byte-for-byte by the agent; applied by Alpha-F2 |
+| **F8** scope-denial entries 1–3 are now stale and must be **rewritten**, not appended to | **ACCEPT** | a resolved denial left reading as a denial is the decay class |
+| **F9** two `fs-` items drop from 267 with recoverable notes | **ACCEPT** | both need a witness this build cannot reach |
+| **F10** no floor/ceiling exists; mint a local `def-the-ceiling-of-a-quotient-of-naturals` | **ACCEPT** | `ls items/` has no `def-floor`/`def-ceiling`; `divisibility-gcd-and-bezout` is order **26 > 22** |
+| **F11** page 20 lacks double-sum interchange and the truncated alternating row sum | **ACCEPT** | both are minted on 22 |
+| **F12** §CB-2's three traps re-checked and still accurate | **ACCEPT**, no action | orders 26, 30, 78, all above 22 |
+
+### The two cross-batch conflicts, adjudicated from the item statements
+
+1. **Duplicated argument.** Beta-F2-2 scaffolded two standalone separation lemmas
+   on 263; Beta-F2-1 had already written **both clauses into the Statement** of
+   `thm-compact-subset-of-a-hausdorff-space-is-closed` on 255 ("a point and a
+   disjoint compact set, and two disjoint compact sets, have disjoint open
+   neighbourhoods"). Beta-F2-2 pre-authorised the outcome: *"If Beta-F2-1 exports
+   them, delete mine and rebind."* **De-duplicated at the splice**, with all six
+   dependent deps rebound. 263 goes 15 → 13 items. **No result is lost** — the
+   mathematics is on 255 in full; this is a de-duplication, not a drop, and is
+   flagged here because the standing rule forbids removing a result without owner
+   approval and the owner should see that this was not one.
+2. **`rem-separation-axiom-conventions`: the two batches disagreed, and each is
+   half right.** Read on disk. §5's first bullet says *"this library has no
+   general topological compactness at this point"* — **falsified by `compactness`,
+   which sits BELOW 261**, so Beta-F2-1 is right that it decays and Beta-F2-2 is
+   wrong that it survives. §3, on the missing Urysohn arrow, says the licensing
+   page *"sits above the present one"* — 267 > 261, so it stays **true**, and
+   there Beta-F2-2 is right. **Amend §5 bullet 1, leave §3.** Staged, not applied.
+
+### One placeholder mismatch, and one item-level risk passed to the authors
+
+- Beta-F2-2's placeholder `lem-closed-subspace-…` vs Beta-F2-1's actual
+  `thm-closed-subspace-…` (lemma vs theorem prefix) — **rebound at the splice**;
+  it would otherwise have been a `dep-unresolved` failure.
+- `thm-closed-subspace-of-a-compact-space-is-compact` (general) carries a dep on
+  the **published metric** `lem-closed-subset-of-a-compact-space-is-compact`.
+  That is a legal backward citation, but citing a metric statement inside a
+  general theorem is the dominant defect class if it is load-bearing rather than
+  a dictionary reference. **Flagged to the step-5 author to check or drop.**
+
+## Step 4 — the splice, and the gate of record
+
+12 pages spliced, **179 items** (181 scaffolded, minus the 2 de-duplicated). Page
+metadata from the spec, `requires` by **union**, hard-fail on id clash — none
+occurred. Every adjudication above was applied mechanically by the splice script
+and logged, rather than by hand.
+
+Authoritative gates, run by the orchestrator after the splice:
+
+- `validate-plan.mjs research/plan-spec.json` — **exit 0, 0 errors.** Warnings are
+  the pre-existing `redundant-prereq` set plus those the union introduced, and the
+  pre-existing `[size]` on `monotone-functions-and-discontinuities` (32).
+  **No new page trips `size`** — the largest here are `connectedness` and
+  `compactness` at 28.
+- `depsource.mjs` — **0 unresolved**; 10797 deps to a published page, 204 to an
+  earlier planned page.
+- The check `depsource` cannot do — see the 1962-dep classification above.
+  **0 onto an unbuilt planned page.**
+
 ## Progress
 
 - [x] Step 0 — frontier computed from disk, narrowed by owner, batched, seams reported
-- [ ] Steps 1–2 — Beta-F2-1 and Beta-F2-2 scaffolding (running)
-- [ ] Step 3 — findings adjudicated and logged
+- [x] Steps 1–2 — Beta-F2-1 and Beta-F2-2 scaffolding: 181 items
+- [x] Step 3 — findings adjudicated from disk and logged
 - [ ] Step 4 — spliced into plan-spec.json, Alpha-F2 spawned
 - [ ] Step 5 — six A/B pairs authored in parallel, Sonnet pilot assigned
 - [ ] Step 9 — Alpha-F2 fanned-out whole-build audit
