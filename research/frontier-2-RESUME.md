@@ -642,3 +642,57 @@ one gets a personal read regardless of the artifact.
 - [ ] Step 6 — judge sweep, once, on final text
 - [ ] Step 7 — rejections adjudicated by the orchestrator
 - [ ] Step 10 — scope-denial sweep, gates of record, rundown, PAUSE
+
+## The escalation audit — done personally, and both items are SOUND
+
+Trigger 2 of the escalation rule (repaired more than once) required a personal
+audit. Done on the two candidates that matter, against the files on disk.
+
+**`thm-tietze-extension-theorem` — sound.** Checked line by line: $M_n =
+r(2/3)^n$ indexed from $n=0$, so step 6.1 is a genuine base case rather than a
+special first step; step 6.2's bound $|f_{n+1}| \le 2M_n/3 = M_{n+1}$ is
+correct; $\sum_{n \ge 0} M_n/3 = (r/3)\cdot 3 = r$, which is what makes step
+10.1's $|F| \le r$ hold and the target land in $[c-r,c+r] = [a,b]$; the
+telescoping in 9.2 follows from $G_k = F_k - F_{k+1}$ on $A$; the degenerate
+$a=b$ case is separated at step 2.1; and clause 2, the converse, genuinely
+spends no choice and says so. **Its DC application at step 8.1 uses the
+$\mathbb{N}$-pairing correctly** — the same pattern I had to specify for the
+Baire lemma, arrived at independently here.
+
+**The author's own named worry is in `thm-urysohn-lemma`, and it is also
+correct.** The claim is that every $D_{n+1}$-consecutive pair has a member among
+the newly inserted points. If both members were old they would be consecutive in
+$D_n$ as well, hence a $D_n$-gap — but a new point was inserted into every
+$D_n$-gap, contradicting consecutiveness in $D_{n+1}$. The one-line
+justification the author gave is exactly that argument, and the check takes
+about fifteen seconds, well inside the triage rule. **No defect.**
+
+**One real observation, non-fatal.** `thm-urysohn-lemma` and
+`thm-tietze-extension-theorem` each re-derive the dependent-choice
+$\mathbb{N}$-pairing inline, although `lem-dependent-choice-along-a-sequence-of-
+relations` now exists on `compactness` (order 255 < 267, so citable). That is an
+artifact of **my** adding the lemma mid-build after 267's author had already
+begun, not a failure by the author. Passed to step 9 as a consolidation
+question, not a defect.
+
+**Nature of the fault, as the rule requires: none.** No mathematical inaccuracy,
+no mis-cited dependency, no unjustified step. Nothing is a candidate for
+removal, so the ramification question does not arise.
+
+## Step 5 closed — the gate of record
+
+| gate | result |
+|---|---|
+| `precheck.mts` | **1195 checked, 0 failing** |
+| `depcheck.mjs` | OK, exit 0 — no cycles, all references resolve, no draft on a published page |
+| `fwdcheck.mjs` | OK, exit 0 |
+| `extcheck.mjs` | OK, exit 0 |
+| `rendercheck.mjs` | OK — **1687 files**, every math span parses under real KaTeX |
+| `validate-plan.mjs` | OK, exit 0 (`[size]` on `compactness` at 31, owner-authorised) |
+| `depsource.mjs` | **0 unresolved** |
+| `citecheck.mjs` | 21 warnings, triage class |
+| `prosecheck.mjs` | 0 errors; 684 warnings, overwhelmingly mathematical quantifiers |
+
+**182 items, 12 pages, corpus 1416 → 1598.** All `status: draft`, all `origin:
+session`. **Zero carry `verification.audited` and zero carry
+`verification.judge`** — the judge has not run and `audited` is the owner's field.
