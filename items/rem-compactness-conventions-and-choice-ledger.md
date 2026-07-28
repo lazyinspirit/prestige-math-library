@@ -11,6 +11,10 @@ aliases: [rem-compactness-choice-ledger]
 landmark: false
 short: "conventions and the choice ledger"
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
   precheck: n/a
 sources:
   scraped: []

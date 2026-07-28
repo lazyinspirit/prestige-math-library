@@ -12,6 +12,10 @@ short: "finite products of compacts are compact"
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:

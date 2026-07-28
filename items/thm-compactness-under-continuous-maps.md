@@ -11,6 +11,10 @@ landmark: true
 short: "continuous images, extreme values, homeomorphism"
 proof_strategy: direct
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
   precheck: pass
 sources:
   scraped: []
@@ -23,7 +27,6 @@ sources:
       url: "https://en.wikipedia.org/wiki/James_Munkres"
 pipeline_run: null
 ---
-
 ## Statement
 
 Let $(X, \mathcal{T}_X)$ and $(Y, \mathcal{T}_Y)$ be topological spaces

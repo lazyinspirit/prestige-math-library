@@ -12,6 +12,10 @@ short: "compact sets separate in a Hausdorff space"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -23,7 +27,6 @@ sources:
       url: "https://en.wikipedia.org/wiki/James_Munkres"
 pipeline_run: null
 ---
-
 ## Statement
 
 Let $(X, \mathcal{T})$ be a Hausdorff topological space

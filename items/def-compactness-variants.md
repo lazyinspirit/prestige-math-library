@@ -10,7 +10,11 @@ aliases: [def-lindelof, def-sigma-compact, def-relatively-compact, def-countably
 landmark: true
 short: "the compactness variants"
 verification:
-  precheck: n/a
+  precheck: n
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29/a
 sources:
   scraped: []
   references:

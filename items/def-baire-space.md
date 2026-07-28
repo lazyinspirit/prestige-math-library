@@ -11,7 +11,11 @@ external_refs: [rem-baire-category-choice-strength]
 landmark: true
 short: "Baire space"
 verification:
-  precheck: n/a
+  precheck: n
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29/a
 sources:
   scraped: []
   references:

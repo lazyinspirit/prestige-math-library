@@ -11,6 +11,10 @@ landmark: true
 short: "compactness of the standard topologies"
 proof_strategy: direct
 verification:
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-29
   precheck: pass
 sources:
   scraped: []
