@@ -176,6 +176,17 @@ direction: an agent under-claiming is as much a defect as one over-claiming, and
 a dropped-but-provable theorem would have been recorded as a permanent scope
 limit of the library.
 
+**AMENDED by the author, and the amendment corrects me.** My sketch above says
+the proof needs "only normality plus every open set is `Fσ`". That is
+incomplete: normality supplies a valid `Uₙ` **for each** `n`, and assembling
+them into a sequence is a **countable choice**. The authored title says so —
+*"Assuming countable choice, every perfectly normal space is completely
+normal…"* — and `thm-the-separation-implication-chain` carries the hypothesis
+through. The refutation of Beta's claim stands (no Urysohn function appears);
+my accounting of what the proof spends did not, and the page is right where I
+was wrong. `cex-omega-one-has-no-at-most-countable-cofinal-subset` picked up the
+same hypothesis independently on the ordinal page.
+
 ### One title risk carried forward to step 9
 
 Beta-F1-1 reaches the exponential law as a **natural bijection**
