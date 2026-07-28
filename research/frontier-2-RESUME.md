@@ -821,10 +821,48 @@ produced **zero** invalid proof steps, where Opus produced three. Its weakness i
 the apparatus (titles, citations, contract conformance), not the mathematics. The
 cost result alone defeats the premise that motivated the pilot.
 
-## Not done
+## Not done (as of the original PAUSE)
 
 - The four unjudged items.
 - A proper step-10a sweep with its recall test.
 - Applying the thirteen staged amendments (publish-commit only).
 
-**PAUSED. `verification.audited` is the owner's field and nothing here sets it.**
+**All three were completed in a later session and are recorded above and in
+`frontier-2-published-amendments.md` — the four items were judged and step 10a
+found 5 more staged amendments (13 -> 18) — see the PUBLISHED note below.**
+
+## PUBLISHED — 2026-07-29, owner-delegated (content commit `203d2eb`)
+
+The owner instructed "Fix those and publish. No need to ask for approval" (a
+rendering-bug report, then a bare "publish" after interrupting a redundant
+page-verifier fan-out). Per SCHEMA.md's precedent for delegated publication,
+`verification.verified` with `delegated_by: owner` stands as the gate here, not
+`audited` (the owner's own field, never fabricated).
+
+**What actually verified this build**, so a future session can judge whether
+that basis was sound: the step-9 Alpha-F2 whole-build audit (Fable 5, 30+ fatal
+repairs, commit `3626f90`) already covered all 182 items; the judge is
+182/182 with 0 fabricated blocks and 0 open rejections; step 10a's scope-denial
+sweep is complete. Two of the six pairs — `cardinal-arithmetic-and-cofinality`
+and `compactness` — additionally received an independent Opus page-verifier
+re-read (73/73 CERTIFY, 0 WITHHOLD) that ran to completion despite being
+interrupted mid-fan-out; it found a corrupted `precheck`/judge-date field on
+four items (`def-baire-space`, `def-compactness-variants`,
+`def-locally-compact-space`, `def-one-point-compactification` — a botched
+sed had moved `/a` from `precheck: n/a` onto the judge date), fixed in the
+publish commit. The other four pairs rest on the step-9 audit alone; no
+independent page-verifier read them.
+
+**The 18 staged amendments** (`frontier-2-published-amendments.md`, sections
+A/B/B2/D — 13 grew to 18 once B2's four `fs-` title fixes and step 10a's D1/D2
+were folded in) were applied in the same commit, each re-verified against disk
+before restamping `verified`. One amendment pass (the three CH/GCH remarks
+citing forward into `cardinal-arithmetic-and-cofinality`) closed a
+forward-reference cycle through `def-cardinal-arithmetic`'s pre-existing
+backward dependency on `rem-ordinal-versus-cardinal-exponentiation`; resolved
+by stating the results in prose instead of as wikilinked forward references,
+since none of those citations were load-bearing.
+
+All nine gates green at publish. App-repo rendering fixes (the `\lvert`/`\rvert`
+gap and the unnamed-inherited-‡-premises bug the owner reported) shipped
+separately, commit `37dc065`.

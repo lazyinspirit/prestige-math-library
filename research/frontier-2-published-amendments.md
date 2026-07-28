@@ -1,9 +1,10 @@
 # `frontier-2` — staged amendments to PUBLISHED items
 
-**Do not apply these now.** `CLAUDE.md`: amendments to published pages land **in
-the same commit that publishes the level**, never before, with
-`verification.audited` cleared so `depcheck` forces the owner's re-audit. This
-build is not publishing — the owner audits first.
+**APPLIED — 2026-07-29, content commit `203d2eb`.** All 18 amendments below
+(§A, §B, §B2, §D) were applied in the same commit that published frontier-2,
+owner-delegated per SCHEMA.md's precedent (`verification.verified` with
+`delegated_by: owner`, not `audited`). Kept below as the record of what was
+changed and why; do not re-apply.
 
 Every entry below was **verified verbatim on disk by the orchestrator**, not
 taken from an agent's report. Line numbers are as of 2026-07-29 and should be
