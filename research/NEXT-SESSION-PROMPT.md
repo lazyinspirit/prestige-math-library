@@ -1,8 +1,10 @@
-# NEXT SESSION — read this and do it
+# NEXT SESSION — historical handoff, superseded
 
-*Written 2026-07-29, immediately after `frontier-1` published. If a build has
-happened since, this file is stale: check `git log` and
-[the current-state memory] before trusting it.*
+*Written 2026-07-29, immediately after `frontier-1` published. **Superseded
+2026-07-30 by the renumbered workflow and model-routing changes in `LEVELS.md`:**
+steps now run 0–9 in order; authoring is GLM 5.2 via ofox; Beta/Alpha/judge are
+GPT 5.6 Sol via the Codex subscription plan. If a build has happened since,
+check `git log` and current docs before trusting anything below.*
 
 ---
 

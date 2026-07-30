@@ -8,7 +8,7 @@ built to prevent*. `SCHEMA.md` and `CLAUDE.md` win where they differ.
 here in the same commit. A mechanism nobody can find is a mechanism that gets
 rebuilt worse. See §9.
 
-Verified against the code 2026-07-27.
+Verified against the code 2026-07-30.
 
 ---
 
@@ -25,7 +25,7 @@ That is the design claim, and it is measured, not assumed.
         │  validate-plan + depsource gate it BEFORE authoring
         ▼
   CONTENT                 items/*.md, library/*/*.md
-        │  7 content gates + 4 reading tiers + 1 judge
+        │  9 gates + Beta/Alpha reading audit + 1 judge
         ▼
   RENDERED PAGE           app repo, read-only bind mount
 ```
@@ -307,8 +307,8 @@ prevent.
 
 The rule in `LEVELS.md` — snap "after EVERY item-modifying stage" — is not
 advice, and two snapshots at the ends of a build do not satisfy it. Minimum for a
-build: baseline, **after authoring**, after step 7 adjudication, after step 8,
-after step 9. The judge ledger still supplied refutation counts, so the
+build: baseline, **after authoring**, after step 6 audit, after step 8
+adjudication, and after step 9. The judge ledger still supplied refutation counts, so the
 escalation rule fired correctly on its other trigger; repairs were the half that
 went unrecorded.
 
@@ -322,182 +322,47 @@ not repair.
 
 ## 5. The judge
 
-**WHEN it runs changed (owner approved, 2026-07-28): once, after the step-9
-audit, on final text.** It used to run during authoring, in parallel with step 5.
-Measured on `frontier-1`: **292 calls for 212 items**, because steps 7–9 rewrite
-prose and SCHEMA §3 correctly voids a verdict on rewritten text — **80 calls
-(27%) were repeats and 30 earned passes were destroyed.** The Claude cost was
-larger than the GLM cost: six authoring agents spent most of 7–8 hours each in
-judge loops, watch timers and retry babysitting instead of writing mathematics.
+**Current routing (owner, 2026-07-30): session-item judging uses GPT 5.6 Sol
+through the Codex subscription plan.** GPT-family models are never run through
+`ofox` for this workflow. `tools/judge.mts` remains as a legacy ofox refuter, a
+record of the GLM/DeepSeek injection experiments, and a non-GPT experimental
+harness; it is not the default path for the GPT judge.
 
-Two consequences worth stating. **Coverage does not fall** — every item is still
-judged, and the verdicts now describe the text that actually ships. And **a
-rejection lands on audited text**, so the orchestrator adjudicates it personally;
-a sweeper verifies and reports, never fixes. Run that way on `frontier-1`'s
-closing sweep: 90 items, two rejections, both real, both verified from disk,
-both repaired by the orchestrator and re-judged clean.
+**When it runs:** once, after the step-6 Beta/Alpha audit, on final text. The old
+reason still applies: judging before audit bought verdicts that later rewrites
+invalidated. Measured on `frontier-1`, 292 calls for 212 items produced 80 repeat
+calls and 30 destroyed passes. Judging after audit preserves coverage and makes
+verdicts describe the text that ships.
 
-`tools/judge.mts`, `z-ai/glm-5.2` over ofox. **Never a Claude model for a session
-item** — the tool refuses `anthropic/claude*` without `--allow-claude`.
+**Prompt files:** `briefs/codex-judge.md` plus `briefs/judge-conventions.txt`.
+The conventions file is still stored because forgetting it makes the judge flag
+30-second gaps and drives useless repair cycles.
 
-**Its prompt is a file, not a habit:** `briefs/judge-conventions.txt`, invoked as
-`--conventions "$(cat briefs/judge-conventions.txt)"`. The judge is the only
-actor whose prompt is a bare CLI argument, which made it the weakest link — a run
-that forgot the string gets a judge flagging 30-second gaps, driving repair
-cycles against a 21–24%-precision screen.
+**Context unit:** the A/B pair. The judge receives the target item, its own page
+and companion `-examples` page in full, plus only additional A pages that the
+target page both declares in `requires` and actually cites. That edge-restricted
+context rule was measured on `frontier-1`: passing every sibling page produced a
+mean 93,810-token prompt and omitted three of five siblings on every call.
 
-**Its context unit is the A/B PAIR, not the item (owner, 2026-07-28).** Every
-call carries, in this order: the item; the full text of every item it cites
-(Statement + Remarks, or the FULL item when the citation is same-pair); the other
-items on its page, in full; **its companion page, in full**; and, with `--batch`,
-the other pages of the level as Statement + Remarks. The pair is what the reader
-gets and what the renderer publishes, so judging an A-page theorem without its
-`-examples` page left both halves unchecked against each other. `--batch` takes
-A-page slugs and pulls in each `-examples` companion itself.
+**Ledger:** every judge run writes a full line to `research/level<n>-judge.jsonl`
+with at least `{id, model, keep, reason, at}`. `verification.judge` records
+passes only; an absent block means unjudged or owner-audited over a refuted false
+positive. `keep: null` is not a pass.
 
-**The batch block is cut in RELEVANCE order, and getting this wrong made it worse
-than nothing (fixed 2026-07-28).** The batch is capped at `BATCH_BUDGET` 200k
-characters, because an uncapped one pushed the request into the gateway timeout
-this file's history already records. The cut originally fell in the order
-`--batch` named the slugs, which has nothing to do with the item being judged.
+**Injection tests still govern model changes.** DeepSeek v4-flash was reverted
+after passing a blatantly false injected claim; GLM caught that injection but
+still scored 0/3 on real historical defects. A low rejection rate and fluent
+reasons are not evidence of a good judge. Before adopting any future judge model
+or materially different context shape, inject a defect known to be false under
+this library's conventions and verify the model catches it.
 
-Measured on level 9 (mixed): every item of `the-derivative-and-mean-value-theorems`
-was judged with the primes and linear-algebra pages in context and with
-`monotone-functions-and-discontinuities` **dropped** — the one page it cites, and
-the only one whose statements it could restate wrongly. The block spent its whole
-budget on primes and vector spaces while judging derivatives, and then declared
-the elision of the page that mattered. The authoring agent reported this; no gate
-could have.
+## 5b. Audit-manifest coverage backstop
 
-**And since the cut IS in relevance order, naming an uncited page buys nothing —
-so stop naming them (owner, 2026-07-28).** `--batch` now takes exactly the pages
-the item's own page both declares in `requires` and actually cites, computed
-mechanically. Measured on `frontier-1`: six slugs gave a **mean prompt of 93,810
-tokens** while the harness printed `batch context budget reached; omitted:` for
-**three of five sibling pages on every call**; the same build had **three
-cross-page edges among twelve pages**, and the re-sweep run on the new rule
-produced empty stderr on every call. The two facts compose — relevance ordering
-makes the truncation harmless, and edge-restricted batching makes it unnecessary.
-
-Pages the item actually cites now sort first, so the cut falls on pages it does
-not cite; ties keep the caller's order. Verified by re-running the same call on
-`thm-derivative-of-an-inverse`: the omitted set flipped from
-`{monotone-functions…, riemann-integral}` to `{primes…, riemann-integral}`, i.e.
-the cited page is retained and the uncited ones are dropped.
-
-**Injection-tested before use, and the test is the point.** A context change gets
-the same treatment as a model change (see §"never adopt a judge model", and the
-`tools/judge.mts` header for the run). The pair block caught a Remark that was
-false *only* against the companion page's contents and mathematically neutral —
-the class it exists for. The first attempt at that injection was **not actually
-false**, and the judge was right to accept it: verify an injection is false
-against the library's own conventions before reading an acceptance as a miss.
-None of this promotes the judge above a screen; the 0/3 on real historical
-defects stands.
-
-**A PAYMENT ERROR IS TERMINAL, and the tool now says so (owner approved,
-2026-07-28).** Exit codes: **0** a verdict was produced (pass, refutation, or an
-honest null), **2** usage/config error, **3** the account cannot pay. On a 402 —
-or any body matching `insufficient_credits` — `judge.mts` returns immediately, does
-not retry, prints `PAYMENT_REQUIRED` on stdout rather than `NO_CONTENT`, and
-**does not write to `JUDGE_VERDICTLOG`**, because a payment failure is not a
-verdict about the proof. `tsx tools/judge.mts --preflight` makes one minimal call
-and exits 0 or 3, so a dead account costs one request instead of one per item.
-
-The status was never the problem; the **ambiguity** was. When the account died
-mid-`frontier-1`, a 402 reached callers as `keep: null` with a `NO_CONTENT`
-reason — indistinguishable from the intermittently dropped verdicts this harness
-genuinely produces, whose documented response is "always re-run before
-concluding". So six agents re-ran a payment error for hours, and 46 non-verdicts
-entered the ledger and had to be filtered out of every count made from it after.
-
-`OFOX_BASE_URL` overrides the endpoint so this path can be **exercised** rather
-than reasoned about; it defaults to production and nothing in the workflow sets
-it. All four paths were tested against a mock 402 before the change shipped:
-funded preflight → 0, unfunded preflight → 3, unfunded item call → 3 with an
-untouched ledger, and a real call → a verdict at exit 0.
-
-**Measured behaviour, all in the tool header:** retry envelope
-`AbortSignal.timeout(420_000)` × 3 ≈ **21 minutes worst case per item**, so a
-slow call is usually not a hang; verdicts drop intermittently and must be re-run;
-LaTeX backslashes in the reason break JSON parsing. **`keep: null` is not a
-pass.**
-
-**Concurrency: CAPPED, not banned (owner, 2026-07-27, superseding the serial
-rule below).** The sweep runs in subagents, **at most 2 concurrent `judge.mts`
-processes per agent and 6 globally**. A serial sweep run by the orchestrator was
-rejected as slow and as spending the orchestrator's context on work a subagent
-should do. The cap, not serialism, is what derisks the failure measured below:
-6 is well under the 9 that produced it. The measurement stands as the reason the
-cap exists — do not raise it without re-measuring.
-
-**COUNTING the concurrency: `ps | grep -c` OVERCOUNTS BY 4×, and it has misled
-two readers.** One `judge.mts` call spawns a chain of **four** OS processes:
-
-```
-npm exec tsx  →  sh -c "tsx"  →  node .../.bin/tsx tools/judge.mts  →  node --require .../preflight.cjs
-```
-
-So `ps -eo cmd | grep -c '[t]ools/judge.mts'` returning 16 means **4 concurrent
-calls, not 16**. Measured 2026-07-28: the orchestrator read 26 raw matches as "4×
-the cap" when it was exactly 6 calls, and a sweeper later reported "10 concurrent,
-the cap is being breached" when the real figure was 2–3. Both were wrong in the
-alarming direction, and acting on either would have killed a healthy sweep.
-
-**Count invocations, not processes:**
-
-```
-ps -eo cmd | grep '[t]ools/judge.mts' | grep -c '^npm'
-```
-
-**The failure the cap prevents. Measured 2026-07-27 (level 7-algebra).** A sweep
-run at `xargs -P 7`, with a subagent's retry loops layered on top (up to **nine**
-concurrent `judge.mts` processes against one gateway), produced repeated
-`NO_CONTENT: fetch failed` and indefinite hangs on one item across **seven**
-calls. With every competing process killed, the *same item, unchanged text*
-passed on the **first** attempt. Two false conclusions were drawn from those
-failures before the isolated test: that the item was too long (the batch's
-**largest** item, 11,732 bytes, judged fine while the 11,450-byte holdout failed),
-and that seven failures were seven independent trials. They were one observation
-of self-inflicted contention. The lesson that survives the cap: an unbounded
-sweep is slower in wall-clock than a bounded one, because it has to be repeated.
-
-**Corollary on staleness: compute it, never read it from a report.** Per item,
-whether a verdict covers the CURRENT text. That check corrected a subagent twice
-and the orchestrator once in a single level, including a case where a `null` sat
-as the newest entry and would have looked like the item was simply unjudged.
-
-**But `max(pass timestamp) > file mtime` is the WRONG test, and it fires on
-everything (measured 2026-07-28).** Recording the verdict *is* a write: the agent
-writes `verification.judge` into frontmatter after the pass, so mtime is always
-later than the verdict it records. Run naively it reported all 25 items of a pair
-stale when exactly one had changed. **Compare the verdict against the last change
-to the item's BODY, not to the file** — diff the text below the closing
-frontmatter delimiter against the last commit:
-
-```
-git show HEAD:items/<id>.md | awk 'f>=2{print} /^---$/{f++}'
-```
-
-A frontmatter-only diff (judge block, precheck flag) does not invalidate a
-verdict; a body diff does, and needs a re-judge.
-
-**THE SAME RULE NOW BINDS THE AUTHORING MODEL (owner, 2026-07-28).** A pilot is
-pending: one A/B pair authored by Sonnet 5 against one comparable pair by Opus 5,
-in the same build, under the identical brief, **with the step-9 readers not told
-which is which** — an unblinded audit measures the expectation rather than the
-model. The decision rule is fixed in advance and is deliberately two-part: switch
-only if Sonnet matches on **proof defects AND on scaffold errors caught**.
-Matching on proofs alone is not enough, because the scaffold-error catch is the
-expensive half — nothing downstream looks for it. Protocol in `LEVELS.md` §"Step
-5". Do not switch before it returns; this is the DeepSeek lesson applied to a
-different role.
-
-**The injection test is the only thing that separates a judge from a rubber
-stamp.** DeepSeek v4-flash was adopted for 14× lower latency, then reverted: it
-passed a *blatantly* false injected claim while writing a confident summary of
-the proof it had failed to check. **Never adopt a judge model without running the
-injection test recorded in the tool header.**
+`tools/audit-manifest.mjs` supports step 6. Given the level batch JSON files, it
+classifies authored dependency edges as same-batch, cross-batch,
+published-backward, forward, unresolved, or missing-source. It does not certify
+semantic correctness; it makes omissions visible so Beta and Alpha reports can be
+reconciled against an explicit checklist.
 
 ## 6. The prompt-side mechanisms (`briefs/`)
 
@@ -506,9 +371,10 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | file | actor | carries |
 |---|---|---|
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | plan order, namespaced writes, dep resolution, id reuse, seams |
-| `beta-step8-audit.md` | Beta-n-i, **step 9 scaffolder-reader** (step 8 retired 2026-07-28; filename kept so references do not dangle) | ranked hunting grounds; catching one's own scaffold errors |
-| `authoring.md` | authoring agent, steps 5/7 | precheck traps, shipped-defect checklist, judge protocol |
-| `alpha.md` | Alpha-n, steps 4 and 9 | propagation; **step 9 as ONE fanned-out audit** — dispatch readers, re-verify every finding from disk, never act on a reader's word |
+| `beta-step8-audit.md` | Beta-n-i, **step 6a batch auditor** (historical filename retained) | exhaustive batch proof-step and citation audit; fixes; added/deleted in-flight results |
+| `authoring.md` | GLM authoring agent, step 5 | precheck traps, shipped-defect checklist, no-judge rule |
+| `alpha.md` | Alpha-n, steps 4 and 6 | propagation; audits Beta fixes; audits cross-batch and cross-level references |
+| `codex-judge.md` | GPT 5.6 Sol judge, step 7 | Codex-subscription judge prompt and JSON verdict contract |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical
@@ -544,8 +410,8 @@ but this one — has neither backstop. The briefs are the only copy that ships.
 Belt and braces is the correct redundancy here, not duplication to be tidied away.
 
 `briefs/alpha.md` additionally carries a **pass-it-on** clause, because Alpha-n
-dispatches its own readers at step 9 and those prompts are composed by Alpha, not
-by this repo.
+briefs Beta auditors at step 6 and those prompts may be composed by Alpha, not by
+this repo.
 
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)
 
@@ -614,7 +480,7 @@ State this honestly rather than implying coverage.
   spec and the content drift apart silently, which is also why the gap above
   cannot be caught by re-running `validate-plan`.
 - **Scope-denial decay has no detector.** A claim true when written that a later
-  level falsifies changes no file, so every gate passes forever. Only the step-10a
+  level falsifies changes no file, so every gate passes forever. Only the step-9a
   sweep finds it — and a repair confirmed by reading the diff can leave the same
   falsehood elsewhere in the same file, which happened at level 8.
 - **`citecheck` is a heuristic**, not a proof of correct attribution.
@@ -633,9 +499,8 @@ State this honestly rather than implying coverage.
   Key it to a content hash so a repair lapses the read. Do NOT point the judge
   at it. Owner deferred 2026-07-28; recorded so the measurement is not redone.
 - **No page has ever been visually rendered.** `rendercheck` closes part of this.
-- **The Fable audit** required by `CLAUDE.md` before publishing mathematical
-  content has not been satisfied at level 8 or 9; step 9 is the nearest
-  equivalent but is Alpha, not a separate tier.
+- **The step-6 Alpha/Beta audit** required by `CLAUDE.md` before publishing
+  mathematical content is the reading tier; it is not replaced by the judge.
 
 ## 9. Maintaining this file, `LEVELS.md`, `WORKFLOW.md` and `CLAUDE.md`
 

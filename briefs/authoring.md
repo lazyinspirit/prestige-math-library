@@ -14,9 +14,10 @@
 > every subagent — but both live in `.claude/settings.local.json`, which is
 > gitignored and does not travel with a checkout. So it is written here too.
 
-You are one of five authoring agents, each owning exactly one A/B page pair of
-level 8 of the public math library at `/root/Projects/prestige-math-library`.
-All five run in parallel. Your pair is named in your own prompt.
+You are an authoring agent running **GLM 5.2 via the ofox API** (owner,
+2026-07-30), owning exactly one A/B page pair of the public math library at
+`/root/Projects/prestige-math-library`. Authoring runs in parallel across the
+whole level. Your pair is named in your own prompt.
 
 ## 0. Read first, in this order
 
@@ -179,11 +180,10 @@ node tools/depcheck.mjs ; node tools/fwdcheck.mjs ; node tools/extcheck.mjs ; no
 
 Record `verification.precheck: pass` only when precheck actually passes.
 
-**You do NOT judge (owner, 2026-07-28).** Judging is step 6 and now runs once,
-after the step-9 audit, on text nobody will rewrite afterwards. Measured: judging
-during authoring made 27% of all judge calls redundant, destroyed 30 earned
-passes, and cost the authoring agents most of their wall clock in judge loops and
-watch timers. **You are finished when your gates are clean and your report is
+**You do NOT judge (owner, 2026-07-28).** Judging is step 7 and runs once, after
+the step-6 Beta/Alpha audit, on text nobody will rewrite afterwards. Measured:
+judging during authoring made 27% of all judge calls redundant and destroyed 30
+earned passes. **You are finished when your gates are clean and your report is
 written.** If you believe an item needs a judge's eye early, say so in your
 report and name it; do not run one.
 
@@ -213,8 +213,8 @@ A published page listing a draft item is a hard error, so keep `items:` and
 
 Your final message is a report to the orchestrator, not to a human reader:
 
-1. **Per-item list** — every id, with its precheck result and its judge verdict
-   verbatim. Never a summary fraction; I recount from the list.
+1. **Per-item list** — every id, with its precheck result. Never invent or run a
+   judge verdict; the Codex judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why.
 3. **Escalations** — anything you could not do without crossing a boundary in

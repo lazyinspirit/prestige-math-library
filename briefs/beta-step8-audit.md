@@ -1,148 +1,68 @@
-<!-- RETITLED 2026-07-28. Step 8 was merged into step 9; this file is now the
-     brief for the SCAFFOLDER-AUTHORED READER inside step 9's fan-out. The
-     filename is unchanged on purpose — it is referenced from ARCHITECTURE.md,
-     memory files and the commit history, and renaming it would dangle those.
-     Your role: you scaffolded this batch, so you read this batch, and you are
-     the one who can recognise your OWN scaffold errors. Alpha adjudicates every
-     finding you return against the file on disk before acting on it. -->
-<!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
-     <i> (batch). Kept in the repo because these briefs ARE the prompt-side
-     half of the workflow: LEVELS.md describes them, this is the text. They
-     lived in a session scratchpad until 2026-07-27 and would have been lost. -->
+<!-- RETITLED 2026-07-30. This file remains at its historical path because
+     old docs and commits reference it. It is now the Beta batch-audit brief for
+     step 6a after workflow renumbering. -->
+<!-- TEMPLATE. Copy into a Beta-n-i audit prompt and substitute <n> and <i>. -->
 
-# Scaffolder-reader brief — your batch, inside step 9's fanned-out audit
+# Beta-<n>-<i> brief — step 6a batch audit
 
 > **STANDING OPERATIONAL RULE (owner, 2026-07-29) — binding on every subagent,
 > in every brief.** Pass `dangerouslyDisableSandbox: true` on **EVERY** Bash tool
 > call, without exception. Builds here run unattended; each omission raises a
-> shell-permission prompt the owner must answer by hand, and an overnight run was
-> once lost to exactly that. Two mechanical backstops exist —
-> `sandbox.enabled: false` and a `SubagentStart` hook that injects this rule into
-> every subagent — but both live in `.claude/settings.local.json`, which is
-> gitignored and does not travel with a checkout. So it is written here too.
+> shell-permission prompt the owner must answer by hand.
 
-*(Was the step-8 brief. Step 8 was retired 2026-07-28 and merged into step 9;
-your reading duty is unchanged, but Alpha now adjudicates what you return.)*
+> **Model/routing rule (owner, 2026-07-30).** You are **GPT 5.6 Sol via the Codex
+> subscription plan**. Do not run GPT-family work through ofox.
 
-You scaffolded this batch at step 1. The pages have since been AUTHORED: every
-item in your `research/level<n>-batch-<i>.pages.json` now exists as
-`items/<id>.md`, and each page has a `library/<category>/<page>.md`. All are
-`status: draft`. Your job now is step 8 of the owner's build: **audit your own
-batch as authored.**
+You scaffolded this batch at steps 1–2. The pages have since been authored. Your
+job now is to audit your own batch exhaustively and fix what you find.
 
-## The single most important thing about this stage
+## Required coverage
 
-**The judge passed EVERY item in the level.** So the usual step-8 focus —
-"once-rejected proofs and their neighbours" — has no targets, and the temptation
-is to treat this as a formality. Do not.
+For **every proof item in your batch**:
 
-At level 8 the judge also passed everything, and step-8 *reading* then found
-**22 item-level defects and about 14 page-summary corrections**, of which
-**five were outright mathematical falsehoods**. The judge's measured precision
-on this corpus is 21–24% and it scored **0/3** on real historical defects. A
-judge pass is a cheap screen, not evidence. **You are the first real reader of
-this text.**
+1. Read every proof step.
+2. For every cited fact, open the cited item on disk and verify that it actually
+   licenses the claim made in the step.
+3. Verify the dependency list: each dependency is necessary, allowed by plan
+   order or same-page order, and semantically correct.
+4. Check titles and Statements against what the proof actually proves.
+5. Re-read every Remark and page summary with proof-step suspicion.
 
-## Where the defects actually are, ranked by where they have been found before
+For **examples, counterexamples, false statements and remarks**, verify the
+mathematical claim, the witness, and every dependency citation with the same
+standard.
 
-1. **REMARK PROSE.** Four separate occasions, three agents, every one in
-   Remarks and none in a numbered step. Remarks render to the reader with the
-   same authority as a Statement, and both the judge and the author skim them.
-   At level 7, two judged rejections became FOURTEEN corrected falsehoods once
-   the agents re-read their own Remarks. **Re-read every Remark with a numbered
-   step's suspicion.** This is the standing instruction and the highest-yield
-   thing you will do today.
-2. **PAGE SUMMARIES.** No mechanical tier reviews them: the judge reads items
-   and cannot read a page file, precheck ignores prose. Six summary defects
-   survived every gate at level 7, and two published page summaries were found
-   FALSE at level 8. Read each of your page files against the items as they
-   were actually authored, not as they were scaffolded.
-3. **COUNTS STATED IN PROSE.** "Seven items on this page depend on it" was
-   published when the truth was nineteen. Nobody re-counts a count — it reads
-   like a fact rather than a claim. **Grep every number in your pages and
-   items.**
-4. **INDEX RANGES.** `def-sequence` is a function on ℕ and **ℕ contains 0**.
-   Check every sum, product, root and reciprocal at its FIRST index. Past
-   casualties: a telescoping sum off by its first term, a geometric series
-   summing to 2 instead of 1, a Cantor set that removed everything at stage 0.
-5. **CITING AN ITEM FOR A CLAIM IT DOES NOT MAKE.** The dominant defect class
-   in this library's history. Open the cited item and read its Statement.
-6. **SCOPE-DENIAL CLAIMS.** Never "this library does not develop X" — always
-   "not available at this point in the reading order". Six published claims
-   were falsified by level 8 alone; one had been false since level 5.
+## Write authority
 
-## Triage — what to spend effort on
+You may edit files in your own in-flight batch. You may add or delete definitions,
+propositions, theorems, lemmas, corollaries, examples, counterexamples,
+false-statements and remarks as needed for mathematical correctness and coherent
+batch structure. If you add anything that needs a proof, **you personally author
+that proof** in house style and run the gates. Do not rename existing ids on
+`main`. Published items outside the in-flight level are read-only; report them.
 
-Owner instruction, binding on you:
+If a material rewrite changes an item with `verification.judge`, delete that
+block. Do not judge; judging is step 7.
 
-- **Non-negotiable:** mathematical accuracy, logical validity, correct citation.
-- **Explicitly acceptable, spend no effort:** minor citational quirks; logical
-  gaps between steps a human closes within 30 SECONDS; any other non-fatal
-  quirk; imperfection at the level of the letter.
+## Gates before reporting
 
-Do not open a repair cycle for a citation quirk. Do not re-audit text that is
-already correct. Fix fatal; log cosmetic and move on.
+Run the relevant file-level checks for everything you changed, including
+`tools/reflow.mts`, `tools/precheck.mts` for proof items, and
+`tools/prosecheck.mjs --warnings`. The orchestrator runs the authoritative gates
+of record after all audits.
 
-## If you change an item
+## Report to Alpha-n
 
-1. **DELETE its `verification.judge` block.** SCHEMA §3 is explicit that a
-   material rewrite — INCLUDING a correction in Remarks — invalidates the
-   block, because a stale block claims a pass on text the judge never saw.
-2. Re-run `tools/reflow.mts` then `tools/precheck.mts` on it.
-3. **Do NOT re-judge it, and do not run `judge.mts` at all** (owner,
-   2026-07-28). The judge is step 6 and now runs ONCE, after the step-9 audit,
-   on final text — so anything you rewrite here is judged afterwards as a matter
-   of course. Deleting the stale block is the whole of your obligation; the item
-   is simply unjudged until the sweep reaches it, and that is the honest state.
+Return a structured report:
 
+1. Every item/page you changed, with the defect named.
+2. Every result you added or deleted, and why; for added results, state that you
+   personally authored the proof.
+3. Every proof-step defect and every semantic citation defect found.
+4. Anything unresolved or outside your write boundary.
+5. **Coverage statement:** list the batch items and state whether every proof
+   step and dependency citation was read. Name any exception explicitly.
 
-## Boundaries
-
-- Write only inside your own batch's ids and page files. Item ids are IMMUTABLE
-  on `main`. If a published item looks wrong, or you need an item that does not
-  exist, REPORT it — do not fix it yourself.
-- The leaf rule: nothing outside an A/B pair may cite a B-page item.
-- Presentation is FROZEN. Do not invent visual devices.
-- Do not set `verification.audited` — that field is the owner's alone.
-
-## Report back
-
-1. **Per-item list** of everything you CHANGED, with the defect named and the
-   new judge verdict verbatim. Never a summary fraction; I recount from disk.
-2. **Anything you read and deliberately left alone** that a later reader might
-   flag, so the next stage does not re-litigate it.
-3. **Escalations** — published items you believe are wrong, scaffold decisions
-   you now think were mistakes, anything needing an owner decision.
-4. **An honest confidence statement**, including what you did NOT read.
-
-I run the authoritative gates after you finish (amendment 6); no stage advances
-on an agent's report alone.
-
-## Prose rules
-
-**Three prose rules (owner, 2026-07-28), gated by `tools/prosecheck.mjs`.** Every
-defect this library has shipped for seven consecutive builds was in prose, and
-almost none was mathematical — they were claims *about the library*, which no
-author can verify while writing:
-
-1. **No count in prose.** Not "seven items", not "half of this page", not "three
-   things take their shape from this". If a count matters the reader can count.
-   Every count written here has eventually been wrong.
-2. **No positional claim that is not derived from the spec.** No "a later page",
-   no "earlier". Name the page id, or say it is not built. "Later" was wrong
-   seven times in one build, always for a page at a *lower* order.
-3. **A scope denial is scoped to THIS PAGE'S DECLARED PREREQUISITES, never to
-   "the library".** One build falsified its own claim: a page said there was no
-   natural-number exponentiation while the other batch minted it at order 20.
-
-Run `node tools/prosecheck.mjs <your files> --warnings` before reporting.
-
-## Summaries and Remarks
-
-**Summaries describe the mathematics, never the page; Remarks justify, never
-survey (owner, 2026-07-28 — SCHEMA §6).** A page summary gives background and
-says what the page proves. It does not count anything, rank its own contents
-("the hardest proof here"), claim what other pages contain, or state a reading
-position. A Remark says *why* a hypothesis is needed; it does not survey what the
-library holds elsewhere. Both classes are unverifiable while writing, both decay
-silently, and neither is mathematics. This cuts no theorem, example or proof.
+Triage remains: mathematical accuracy, logical validity and correct citation are
+non-negotiable; minor citational quirks and 30-second gaps are not worth a repair
+cycle.

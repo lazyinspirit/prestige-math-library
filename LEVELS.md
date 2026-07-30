@@ -1,4 +1,4 @@
-# The per-level build, step 0 to 10 — canonical
+# The per-level build, step 0 to 9 — canonical
 
 The owner builds this library **one A-page dependency level at a time**. This
 file is the single description of that process — *what happens in what order*.
@@ -10,7 +10,7 @@ of a single page's journey.
 All four normative docs are updated **in the same commit as the change they
 describe** (owner, 2026-07-27).
 
-Everything below is verified against the code as of 2026-07-27.
+Everything below is verified against the code as of 2026-07-30.
 
 ---
 
@@ -18,12 +18,12 @@ Everything below is verified against the code as of 2026-07-27.
 
 | actor | model | does |
 |---|---|---|
-| **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may delete a result |
-| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-7 adjudication of every judge rejection**, reporting |
-| **Alpha-n** | Fable 5 | spawned at **step 4**, resumed at **step 9**; propagates approved changes into higher-level prose; **runs step 9 as one fanned-out pass**, dispatching readers and re-verifying every finding from disk |
-| **Beta-n-i** | Opus 5 | one per batch; step 1–2 scaffolding; **at step 9, the scaffolder-authored reader for its own batch** (step 8 retired 2026-07-28) |
-| **authoring agent** | Opus 5 — **Sonnet 5 pilot pending, see step 5** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
-| **judge** | `z-ai/glm-5.2` via ofox | cheap adversarial screen. **Never a Claude model** for session items |
+| **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
+| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-8 adjudication of every judge rejection**, reporting |
+| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan** | spawned at **step 4**, resumed at **step 6**; propagates approved changes into higher-level prose; audits every Beta fix from disk; audits cross-batch and cross-level references |
+| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
+| **authoring agent** | **GLM 5.2 via the ofox API** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
+| **judge** | **GPT 5.6 Sol via the Codex subscription plan** | cheap adversarial screen. GPT-family models are never run through ofox for this workflow |
 
 ## Artifacts
 
@@ -36,8 +36,8 @@ Everything below is verified against the code as of 2026-07-27.
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
-| `briefs/judge-conventions.txt` | the judge's `--conventions` string — the ONLY actor whose prompt is a bare CLI argument, so it is stored rather than retyped |
-| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-9 scaffolder-reader, authoring). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **standing sandbox rule** (`ARCHITECTURE.md` §6.1) |
+| `briefs/judge-conventions.txt` | the judge's conventions block. For subscription GPT judges it is pasted into the Codex prompt; `tools/judge.mts` is legacy/ofox-only |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, Codex judge). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **standing sandbox rule** (`ARCHITECTURE.md` §6.1) |
 
 ### `order` is not stable across insertions — recompute, never remember
 
@@ -101,37 +101,30 @@ rather than trusting the sweep.
 
 ---
 
-## EXECUTION ORDER — the step numbers are NAMES, not the running order
+## EXECUTION ORDER — numbers now match the running order
 
-**The judge moved (owner, 2026-07-28). Steps 6 and 7 now run AFTER step 9, on
-final text.** Run them in this order:
+**Renumbered 2026-07-30 (owner).** The old stable-name scheme was retired: the
+workflow is now numbered in the order it actually runs.
 
 ```
-0 → 1 → 2 → 3 → 4 → 5 → 9 → 6 → 7 → 10
-                    ▲   ▲   ▲
-      author, gates ┘   │   └ judge ONCE, on text nobody
-      only, NO judge    │     will rewrite afterwards
-                        └ THE audit — one fanned-out pass
-                          (step 8 was merged into it)
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+                        ▲   ▲   ▲   ▲
+          author, gates ┘   │   │   └ sweep, rundown, pause
+          only, NO judge    │   └ adjudicate judge rejections
+                            └ judge ONCE, after the audit
 ```
 
-**Why the numbers did not change with the order.** Step numbers are quoted from
-`briefs/`, from memory files, from research notes and from the whole commit
-history. This repo's own most expensive lesson is that renumbering an identifier
-leaves dangling references behind it — that is exactly what `order` does to prose
-scaffolds, and why an agent is briefed by page id and never by order. So the
-numbers are treated as **stable names**; only their sequence changed.
+**Legacy mapping for old notes:** old step 9 (and the retired old step 8 duties)
+is now **step 6**; old step 6 is now **step 7**; old step 7 is now **step 8**;
+old step 10 is now **step 9**. Historical research notes may still use the old
+numbers; normative instructions below use the new ones.
 
-**Why the judge moved.** Measured on `frontier-1`: **292 judge calls for 212
-items.** Steps 7, 8 and 9 rewrite prose, and SCHEMA §3 correctly voids a verdict
-on rewritten text — so **80 calls (27%) were repeats of an item already judged,
-and 30 earned passes were destroyed** and had to be bought again. It cost the
-Claude side more than the GLM side: the six authoring agents spent most of their
-7–8 hours in judge loops, watch timers and retry babysitting rather than writing
-mathematics.
-
-Judging last costs nothing in coverage — every item is still judged — and the
-verdicts finally describe the text that ships.
+**Why the judge stays after the audit.** Measured on `frontier-1`: **292 judge
+calls for 212 items.** Audits rewrite prose, and SCHEMA §3 correctly voids a
+verdict on rewritten text — so **80 calls (27%) were repeats of an item already
+judged, and 30 earned passes were destroyed** and had to be bought again.
+Judging after the audit costs nothing in coverage — every item is still judged —
+and the verdicts describe the text that ships.
 
 ## Step 0 — Batch (orchestrator)
 
@@ -198,49 +191,21 @@ what breaks if deferred. Decisions are logged.
 Splice the Beta outputs into `plan-spec.json`. The splice keeps `plan-spec`'s
 page metadata but takes the **union of `requires`** (Beta computes the closure
 `validate-plan` demands), logs every disagreement, and hard-fails on an id clash.
-**Alpha-n is spawned here**, not at step 9, and applies the `.notes.md`
+**Alpha-n is spawned here**, not at step 6, and applies the `.notes.md`
 amendments into higher-level prose scaffolds — one writer, so no silent
 overwrite.
 
 ## Step 5 — Author (one agent per A/B pair, in parallel)
 
 > **Authors do NOT judge (owner, 2026-07-28).** An author is finished when its
-> gates are clean and its report is written. Judging is step 6 and now runs after
-> step 9. This is where most of the wall-clock saving lives.
+> gates are clean and its report is written. Judging is step 7 and runs after the
+> step-6 audit. This is where most of the wall-clock saving lives.
 
-> **PENDING PILOT — Sonnet 5 vs Opus 5 for authoring (owner approved,
-> 2026-07-28). Run it on the next build; do not switch before it returns.**
->
-> Authoring is the largest Claude cost in a build — **3.46M of ~6.5M tokens on
-> `frontier-1`** — and the case for a cheaper model is real: across 212 items the
-> authors' **proofs were clean** and their prose was not, which is not obviously
-> model-limited.
->
-> The case against a blind switch is also real. The authors did work that was
-> judgement rather than throughput: one **refused a `justified_by` the scaffold
-> demanded**, because SCHEMA restricts that field to well-definedness discharges;
-> one found the published `thm-recursion` **inapplicable**, because `β ↦ ω^β` is a
-> class operation and that theorem needs a set; one found a scaffolded false
-> statement **was not false** and restated it; one **deleted a judge pass it had
-> earned** rather than let it stand on text the judge never saw. This repo already
-> adopted `deepseek/deepseek-v4-flash` on latency alone and reverted it.
->
-> **Protocol.**
-> 1. In ONE build, author **one A/B pair with Sonnet 5** and **one comparable pair
->    with Opus 5** — comparable in item count, proof length and prerequisite depth.
->    Both get the identical brief and the identical scaffold quality.
-> 2. **Do not tell the step-9 readers which pair came from which model.** An
->    unblinded audit measures the expectation, not the model.
-> 3. **Measure, per pair:** defects by class (proof / Statement / Remark /
->    summary); **scaffold errors caught and reported**; gate failures before clean;
->    tokens; wall clock.
-> 4. **Decision rule, fixed in advance:** switch the bulk only if Sonnet matches on
->    **proof defects AND on scaffold errors caught**. Matching on proofs alone is
->    not enough — the scaffold-error catch is the expensive half, because nothing
->    downstream looks for it.
-> 5. If it matches on proofs but not on scaffold catching, the fallback is the
->    split: Sonnet for B-page examples, definitions and routine proofs; Opus for
->    whatever the scaffold flags high-risk.
+**Model change (owner, 2026-07-30): authoring agents are GLM 5.2 via the ofox
+API.** They are no longer Opus/Sonnet subagents. GPT-family models remain on the
+Codex subscription plan and are not called through ofox. GLM authors use the
+same `briefs/authoring.md` contract and must emit normal repo files; the
+orchestrator remains responsible for running the gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
@@ -266,267 +231,139 @@ reason it can state; it is opt-in and no longer the default.
 depends on 70, and orders 131 and 137 both depend on 129. Splitting there was
 correct. Splitting a single level is not.
 
-## Step 6 — Judge (RUNS AFTER STEP 9, one sweep, on final text)
+## Step 6 — Audit (Betas first, then Alpha-n)
 
-> **Relocated 2026-07-28 (owner).** This used to run in parallel with step 5.
-> It now runs after the step-9 audit, once, on text nobody will rewrite
-> afterwards. See §"Execution order" for the measurement that moved it.
-> **Preflight the account first** — `tsx tools/judge.mts --preflight`.
+**Model (owner, 2026-07-30): Beta-n-i and Alpha-n are GPT 5.6 Sol run through
+the Codex subscription plan.** Do not run GPT-family audit work through ofox.
 
-`tools/judge.mts`, model `z-ai/glm-5.2`. Pass `--topic`, and pass the triage
-rule as `--conventions "$(cat briefs/judge-conventions.txt)"` — **do not retype
-it**. That file is the judge's brief: the non-negotiables, the 30-second rule,
-the 0-indexing and iota conventions that are NOT defects, the instruction to
-check the title against what is proved, and the no-backslash output constraint
-that keeps the JSON parseable.
+This is the final mathematical reading tier before the judge and the owner. It
+has three ordered parts.
 
-**Always set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl`** and capture
-stdout — `JUDGE_COSTLOG` records spend, not verdicts.
+### 6a. Beta batch audits, in parallel
 
-**Pass `--batch` with exactly the pages this item's page BOTH declares in
-`requires` and actually cites — computed mechanically, never typed (owner,
-2026-07-28, superseding "always pass every A-page slug").**
+Each Beta-n-i that scaffolded a batch at steps 1–2 returns as that batch's audit
+reader. Betas work in parallel and have write authority over their own in-flight
+batch files.
 
-Comma-separated, A pages only — the harness pulls in each `-examples` companion
-itself, and naming a page that does not exist under `library/` prints a warning
-rather than silently contributing nothing:
+For every authored item in the batch, the Beta must:
 
-```
---batch "divisibility-gcd-and-bezout,rings-subrings-and-integral-domains,vector-spaces-and-subspaces"
-```
+1. **Verify every proof step of every proof.** Read the step, its cited facts,
+   and the cited dependency items from disk. A step is clean only if the cited
+   material mathematically licenses exactly what the step claims.
+2. **Verify every dependency citation in the batch**, syntactically and
+   semantically: the target exists, is an allowed earlier/same-page dependency or
+   declared forward reference, and actually states the proposition for which it
+   is cited. The common failure mode is citing a true theorem for a stronger or
+   different claim than it makes.
+3. **Read the page summaries and Remarks with proof-step suspicion.** No count in
+   prose, no unsupported position claim, and no corpus-wide scope denial.
+4. **Fix every defect it is licensed to fix**, not merely report it. If the fix
+   requires adding or deleting a lemma/proposition/theorem/corollary/example/
+   counterexample/false-statement, the Beta may do so inside the in-flight level.
+   Anything it adds must be personally authored by that Beta, including the full
+   proof when the kind requires one. Item ids remain immutable once on `main`.
+5. Delete any stale `verification.judge` block after a material rewrite, run
+   `tools/reflow.mts` and `tools/precheck.mts` on changed proof items, and run the
+   relevant gates locally. Do **not** judge; judging is step 7.
 
-**Why not every slug. Measured on `frontier-1`, 2026-07-28.** The mean prompt was
-**93,810 tokens**, and with six slugs named the harness printed
-`batch context budget reached; omitted:` for **three of five sibling pages on
-every call** — bought, then discarded. The cut is in relevance order, so the
-pages dropped are exactly the uncited ones; naming them buys nothing and pays
-for a truncation. That build had **three cross-page edges among twelve pages**,
-so nine of twelve pages needed no batch at all, and the re-sweep run this way
-produced empty stderr on every call with no omission line.
+Each Beta reports to Alpha-n: every item changed; every added/deleted result and
+why; every proof step or citation defect found; unresolved concerns; and an
+explicit coverage statement saying that every proof step and every dependency
+citation in the batch was read, or naming any exception.
 
-`--batch` earns its cost across a genuine dependency level, where siblings can
-bear on one another. Across a frontier set of mutually independent pairs it is
-close to pure waste. **Compute the edge set; do not assume it.**
+### 6b. Alpha audit of Beta fixes
 
-The judge's context unit is the **A/B pair**: it always receives its item's own
-page AND its companion page in full, and `--batch` adds the cited pages
-as Statement + Remarks. This is what lets it check a step against a dependency
-that lives on a sibling page of the same batch, and what lets an example be
-checked against the theorem it illustrates. Its primary job is unchanged and
-still outranks this: the step-by-step validity of the one proof it was called on.
-Full context inventory in `ARCHITECTURE.md` §5 and the `tools/judge.mts` header.
+After all Betas finish, Alpha-n audits the mistakes and fixes reported by every
+Beta. Alpha verifies from disk, not from the report: changed item text, added or
+deleted results, dependency lists, page lists, stale judge blocks, and gate
+status. Alpha may accept, amend, revert, or extend a Beta fix. If Alpha adds a
+result, Alpha personally authors its proof.
 
-**Concurrency: at most 2 judge processes per subagent, 6 globally.** The sweep
-belongs to subagents, one per A/B pair, not to the orchestrator running it
-serially. The cap is the derisking; see `ARCHITECTURE.md` §5 for the failure it
-prevents and why 6 is the ceiling.
+### 6c. Alpha cross-batch and cross-level citation audit
 
-**Preflight the account before a sweep** (owner, 2026-07-28) — one cheap call
-instead of discovering a dead balance ninety items in:
+Alpha-n then audits every dependency edge from the in-flight level that is not
+wholly inside one Beta batch:
 
-```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts --preflight
-```
+- cross-batch edges inside the level;
+- backward edges to already-published library content;
+- any declared forward reference, which should be few and explicitly justified.
 
-**Exit 3 means the account cannot pay and the sweep must STOP.** It is terminal:
-no retry succeeds, it is printed as `PAYMENT_REQUIRED` rather than `NO_CONTENT`,
-and it is deliberately kept out of the verdict ledger. Do not treat it as a
-dropped verdict.
+Alpha has full read access to all published content. For each edge, Alpha reads
+the source item's use and the target item on disk and verifies that the citation
+is semantically and mathematically accurate: right statement, right hypotheses,
+right direction, no hidden stronger claim. Alpha fixes failures directly when
+possible and may add/delete in-flight results as needed, personally authoring any
+proof it adds.
 
-Known harness behaviour, all measured: **retry envelope is 7 minutes per attempt
-× 3 attempts ≈ 21 minutes worst case per item** (`AbortSignal.timeout(420_000)`)
-— a slow call is usually not a hang; verdicts are **dropped intermittently**, so
-always re-run before concluding; a reason string containing LaTeX backslashes can
-make the JSON unparseable, so ask for plain prose in `--conventions`. **Never
-record a pass the judge did not give**; `keep: null` is not a pass.
-
-## Step 7 — Adjudicate rejections (ORCHESTRATOR, after step 9)
-
-> **The actor changed with the move.** The authoring agents are finished by the
-> time step 6 runs, and a rejection now lands on text that has cleared the final
-> audit tier — so the orchestrator adjudicates it personally rather than a
-> subagent editing audited text. A sweeper's job is to verify and REPORT, never
-> to fix. Run this way on `frontier-1`'s closing sweep: two rejections, both
-> verified from disk, both repaired by the orchestrator, both re-judged clean.
-
-**Adjudicate, do not comply.** Measured judge precision on this corpus is
-**21–24%**, and it scored **0/3** on real historical defects. Each rejection gets
-either a **fix**, with the defect named, or a **refutation**, with a verbatim
-quote from the cited item. Then **delete the `verification.judge` block of
-anything materially rewritten** (SCHEMA §3: a correction in Remarks counts) and
-re-judge only what changed.
-
-Standing instruction: **re-read your own Remarks with a numbered step's
-suspicion.** Remark prose is where falsehoods hide.
-
-## Step 8 — RETIRED, merged into step 9 (owner, 2026-07-28)
-
-> **This is a tombstone, kept deliberately.** "Step 8" is quoted from memory
-> files, briefs, research notes and the commit history; deleting the heading
-> would leave every one of those references pointing at nothing. The stage is
-> gone, its duties are in step 9, and this marker is how a reader of an old
-> reference finds out.
->
-> **Why it went.** It was productive — 11 defects on `frontier-1`, 22 items plus
-> ~14 summary corrections at level 8 — but step 9 read all 212 items anyway, via
-> readers Alpha dispatched, so step 8's findings sat *inside* step 9's coverage.
-> Two passes over the same text, and the second was the complete one.
->
-> **What was preserved, because deleting it outright would have lost them:** the
-> ranked hunting grounds (now step 9); the honest coverage statement, which now
-> goes to the **owner** rather than to a later stage; and the scaffolder's
-> context — a Beta auditing the batch it scaffolded catches its own errors, which
-> is how the `[3]^1` two-element witness and the unexecutable `thm-recursion`
-> instruction were both found. Step 9 therefore keeps **one scaffolder-authored
-> reader per batch**.
-
-## Step 9 — THE audit: one fanned-out mathematical-accuracy pass (owner, 2026-07-27; absorbed step 8 on 2026-07-28)
-
-> **The separate seam audit was REMOVED on 2026-07-28 (owner).** It used to be
-> step 9, bounded to cross-batch dependency edges; the final audit was step 10a.
-> The final audit is now step 9 and there is no separate seam stage. **Its two
-> real duties were folded into risk source 3 below and are NOT lost** — a seam is
-> a risk source, not a workflow stage, and running it as its own pass meant
-> Alpha read the level twice and re-audited what it had just verified.
-
-**Alpha-n audits the WHOLE level for mathematical accuracy, fixes fatal errors,
-and reports to the owner.** This is the last verification tier before the owner's
-own audit, and it is not optional.
-
-**It is ONE stage and it FANS OUT.** Alpha does not read 200 items alone; it
-dispatches readers, then **re-verifies every finding against the file on disk
-before acting on it** — no fix lands on a reader's word. That pattern covered all
-212 items of `frontier-1` in a single pass, 35 read by Alpha itself and 177 by six
-readers it dispatched.
-
-**Composition, binding:**
-
-- **One scaffolder-authored reader per batch.** The Beta that scaffolded a batch
-  reads that batch. This is the half of the retired step 8 worth keeping: a
-  scaffolder catches its *own* errors, which is how the `[3]^1` "two-element"
-  witness and the unexecutable `thm-recursion` instruction were found.
-- **The rest by topic**, sized to the level.
-- **Every reader returns an honest coverage statement** — what it read in full,
-  what Statement-only, what it never opened. These compose into the statement
-  that goes to the **owner** in the rundown, and it is the number the owner is
-  actually being asked to trust.
-
-**Ranked hunting grounds (inherited from step 8, and measured):** **Remark prose ·
-page summaries · counts stated in prose · index ranges at the first index (ℕ
-contains 0) · citing an item for a claim it does not make · scope-denial phrasing
-that decays.** Across seven consecutive builds **every defect found at this tier
-was in prose and none was in a numbered proof step** — so read the proofs, because
-nobody else will, but expect the defects in the sentences around them.
-
-**The judge has not run yet.** Under the execution order, step 6 comes *after*
-you. Delete the `verification.judge` block of anything you materially rewrite and
-stop there; do not re-judge, the sweep will reach it.
-
-It is **bounded by RISK**, and the risk map is written by the agents themselves:
-
-1. **Start with what nobody has read in full.** Every step-8 report ends with an
-   honest coverage statement naming exactly this. At level 9 that was two whole
-   page pairs Alpha had never opened, plus ~60 proof bodies a Beta had read only
-   down to Statements, Remarks and Facts. **The dependencies an author admits it
-   never opened belong here too** — an `[L#]` fact copied from a third item
-   rather than from its source is how the dominant defect class propagates.
-2. **Then the items the authors flagged as their own least-confident.**
-3. **Then the seams: cross-batch dependency edges and their immediate
-   neighbours.** Compute the edge set mechanically and work from it, so this part
-   scales with seams rather than with level size. **Zero declared edges between
-   two pages of the same level is a finding, not a clean bill** — ask what
-   *should* connect. Two pages that share a topic and cite nothing of each
-   other's are either genuinely independent or quietly duplicating, and only
-   reading tells you which.
-
-Alpha keeps a standing licence to pull any item, and reports what it read.
+The mechanical backstop is `tools/audit-manifest.mjs`: generate the per-batch and
+cross-edge checklist, then reconcile Alpha's report against it so omission is
+visible. The script enumerates edges; the semantic verdict is the Beta/Alpha
+reader's responsibility.
 
 **Fatal, must fix:** mathematical inaccuracy; logical invalidity; a step not
-licensed by its cited facts; citing an item for a claim it does not make; **a
-title or Statement asserting more than the proof gives.** That last class is the
-reason this stage exists — the judge reads Statements and structurally cannot see
-a false title, and level 9 shipped two of them into the final audit.
-
-**Not fatal, spend no effort:** the standing triage list.
+licensed by its cited facts; citing an item for a claim it does not make; a title
+or Statement asserting more than the proof gives; unlicensed forward references;
+and any cross-level citation whose target is not actually strong enough.
 
 **Interaction with the twice-touched rule.** A repair here to an item already
-repaired earlier takes it to two touches and so escalates to a personal audit by
-the orchestrator. Alpha-n must therefore **report such repairs in a separate,
-clearly labelled list** — and must still make them. Never leave a known
-falsehood standing to keep a count down.
+repaired earlier takes it to two touches and escalates to a personal audit by the
+orchestrator. Alpha-n reports such repairs in a separate list and still makes
+necessary fixes.
 
-Alpha-n may **never remove a theorem or example**; that needs explicit owner
-approval, with the ramification of dropping it stated.
+## Step 7 — Judge (after the audit, one sweep, on final text)
 
-## Step 10 — Sweep, rundown, then pause
+**Model change (owner, 2026-07-30): the session-item judge is GPT 5.6 Sol through
+the Codex subscription plan.** GPT-family models are never run through ofox for
+this workflow. `tools/judge.mts` remains a legacy ofox refuter and injection-test
+record, but it is not the default path for GPT judging.
 
-### 10a. Scope-denial sweep of the published corpus
+Use `briefs/codex-judge.md` plus `briefs/judge-conventions.txt`. The judge's
+context unit stays the **A/B pair**: the item page and its `-examples` companion
+in full, plus only the pages the item's own page both declares in `requires` and
+actually cites. Compute that batch mechanically; do not pass every sibling page.
 
-See below — items and page summaries both.
+Record a full verdict ledger at `research/level<n>-judge.jsonl` with at least
+`{id, model, keep, reason, at}` for every call. `verification.judge` records only
+passes. Never record a pass the judge did not give; a null/failed subscription
+run is not a verdict.
 
-### 10b. Rundown, then pause
+Before adopting any different judge model or context shape, run an injection test
+with a defect known to be false under the library's own conventions. The old GLM
+and DeepSeek measurements remain evidence that a low rejection rate is not a
+judge-quality metric.
 
-Full report: forward references present, judge coverage counted from frontmatter
-on disk, gate results, escalation set, what step 9 covered and what it did not,
-and readiness to publish. **Then stop for the owner.**
+## Step 8 — Adjudicate judge rejections (orchestrator)
 
-**Every level ends with a scope-denial sweep of the published corpus, over ITEMS
-AND PAGE SUMMARIES BOTH.** Grep `does not develop`, `not defined in this
-library`, `anywhere in it`, `not yet written`, `has no item`, `not introduced in
-this library`. Amendments to published pages land **in the same commit that
-publishes the level**, never before, with `verification.audited` cleared so
-`depcheck` forces the owner's re-audit. After any such repair, **re-grep the file
-you repaired** — a level-8 fix corrected one sentence and left the same
-falsehood sixteen lines away.
+A rejection now lands on text that has cleared the step-6 audit, so the
+orchestrator adjudicates it personally. **Adjudicate, do not comply.** Each
+rejection gets either a fix, with the defect named, or a refutation, with a
+verbatim quote from the cited item. Then delete `verification.judge` on anything
+materially rewritten and re-judge only what changed.
 
-**Grep is the entry point, never the sweep (measured at level 9).** Running the
-patterns above plus every variant of `not (developed|proved|available|
-established|defined|introduced) (here|in this library|at this point)` over the
-published corpus matched 157 items, and every one of the 14 topic-relevant
-sentences it surfaced was still true. It nevertheless missed **both** amendments
-that level's step 2 had already found by reading:
+Standing instruction: re-read your own Remarks with a numbered step's suspicion.
+Remark prose is where falsehoods hide.
 
-- `rem-choice-ledger`: *"Neither direction is proved here, and no item derives
-  either"* — "neither … proved here" is not "not proved here";
-- `ex-p-adic-ultrametric`: *"neither of which this item develops or assumes"* —
-  no denial keyword in any matched form.
+## Step 9 — Sweep, rundown, then pause
 
-The defect class is a claim about what the library does not contain, written in
-whatever English the author reached for; no pattern enumerates that. **Dispatch a
-reading agent, and hand it those two sentences as recall tests** — a sweep that
-does not rediscover both is not measuring what it claims to.
+### 9a. Scope-denial sweep of the published corpus
 
-The step-8 audits the same day added two more forms no pattern above catches,
-both of them false when written rather than decayed: *"this library has not
-built one"* (`def-p-adic-valuation`, of an ordered set with a greatest element —
-`def-extended-reals` is published and is exactly that) and *"machinery this
-library has not built"* (`cex-hilbert-monoid-factorisation-not-unique`, of the
-algebraic integers, which orders 46/47 are for). **"has not built" is now the
-fourth distinct verb** after "develop", "prove", "contain"; the list will keep
-growing, which is the point. Note also that both of these were caught by page
-auditors reading their own batch, not by any sweep — the cheapest place to kill
-this defect is at step 8, before the claim is ever published.
+Every level ends with a scope-denial sweep of the published corpus, over ITEMS
+AND PAGE SUMMARIES BOTH. Grep is the entry point, never the sweep: negation can
+be carried by `neither`, `no item`, `lacks`, `absent from`, `silent on`,
+`nowhere`, and many other forms. Check order-relative claims by position, not
+only by phrasing, and look for the inverse defect too: a false claim that the
+library DOES define/prove something.
 
-The one thing that IS working: every published item using the order-relative
-phrasing (`not available at this point in the reading order`) survived level 9
-untouched, because the claim is indexed to a position rather than to the corpus.
-That is why §6 of the step-8 brief mandates it.
+Amendments to published pages land in the same commit that publishes the level,
+never before, with `verification.audited` cleared so `depcheck` forces the
+owner's re-audit. After any such repair, re-grep the file you repaired.
 
-**But order-relative is decay-RESISTANT, not decay-proof (measured, level-9 step
-10a).** `thm-countable-union-of-null-is-null` uses the approved form — it says
-rearrangement theory is "not in the reading order at this point" — and is
-nevertheless **false**, because the order it names is wrong: `thm-double-series-
-fubini` sits at 129 and the citing item at 133, so the material is *earlier*, not
-later. The phrasing protects against the corpus growing underneath a claim; it
-does not protect against getting the position wrong in the first place. **Check
-the position, not just the phrasing.**
+### 9b. Rundown, then pause
 
-**And the sweep must look for the INVERSE defect too.** `rem-lp-separability`
-claims "the metric spaces page, where separability is defined" — separability is
-defined **nowhere** in the library, which is exactly why every other item writes
-the property out in full. A false claim of PRESENCE is as wrong as a false claim
-of absence, reads as more authoritative, and no pattern built from negation words
-will ever surface it.
+Full report: added/deleted in-flight results; forward references present; judge
+coverage counted from frontmatter on disk; gate results; escalation set; Beta
+batch-audit coverage; Alpha cross-edge coverage; and readiness to publish. Then
+stop for the owner.
 
 ---
 
@@ -535,20 +372,21 @@ will ever surface it.
 A proof **refuted OR repaired more than once** is structurally suspect. Two
 independent triggers; count **refutations + repairs combined, per item**:
 
-1. **Judge refutations > 1 before step 9** → name it in Alpha-n's step-9 brief;
-   Alpha reviews **the proof and all neighbouring dependencies**, since a proof
-   that keeps failing is often correct and resting on a bad neighbour. (Step 9
-   is the final audit; the separate seam stage that used to hold this number was
-   removed 2026-07-28. The duty is unchanged — only its step number moved.)
+1. **Judge refutations > 1 before step 6 completes** → name it in Alpha-n's
+   step-6 brief; Alpha reviews **the proof and all neighbouring dependencies**,
+   since a proof that keeps failing is often correct and resting on a bad
+   neighbour.
 2. **Refuted or fixed > 1 by any subagent, Alpha-n included** → the orchestrator
-   audits it **personally**, and this does not wait for step 9.
+   audits it **personally**, and this does not wait for step 6.
 
 The personal audit must state the **nature** of the fault (mathematical
 inaccuracy / mis-cited dependency / unjustified step / judge false positive) and
 the **ramification of dropping** the result: what cites it, what breaks, whether
 a weaker true statement serves. Then report and iterate with the owner.
-**NEVER remove a theorem or example without explicit owner approval** — at 21–24%
-precision a repeated rejection can be a repeated false positive.
+Beta/Alpha may add or delete in-flight draft results under step 6, but published
+items and items outside the in-flight level still require explicit owner approval
+before removal; at 21–24% precision a repeated rejection can be a repeated false
+positive.
 
 ```
 node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage>"   # after EVERY item-modifying stage

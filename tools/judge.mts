@@ -1,5 +1,10 @@
-// Topic-neutral cross-family refuter-judge for library items (ofox gateway).
-// Default judge: z-ai/glm-5.2.
+// LEGACY topic-neutral cross-family refuter-judge for library items (ofox gateway).
+// Default legacy ofox judge: z-ai/glm-5.2.
+//
+// Owner update 2026-07-30: the session-item judge is GPT 5.6 Sol through the
+// Codex subscription plan. GPT-family judge calls must NOT be routed through
+// this ofox tool; use briefs/codex-judge.md instead. This file remains for
+// non-GPT experiments, historical GLM ledgers, and injection-test records.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -147,10 +152,11 @@ const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
 // SESSION items only. The production generator lineup is
 // ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"] (worker/src/ofox.ts genLineup), so
-// this default is an IDENTITY collision with the first generator entry. Harmless
-// for session items, whose generator is Claude; a PIPELINE item must NOT be judged
-// with this default, since that is a generator grading its own work. Pipeline
-// items keep the origin-conditioned lineup in worker/src/ofox.ts.
+// this default is an IDENTITY collision with the first generator entry. Since
+// 2026-07-30 session authoring also uses GLM 5.2, this tool is no longer the
+// default session judge path. A PIPELINE item must NOT be judged with this
+// default either, since that is a generator grading its own work. Pipeline items
+// keep the origin-conditioned lineup in worker/src/ofox.ts.
 const model = opts.model ?? "z-ai/glm-5.2";
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
@@ -158,6 +164,10 @@ const id = basename(file).replace(/\.md$/, "");
 
 if (/(^|\/)(anthropic|claude)/i.test(model) && !bools.has("allow-claude")) {
   console.error(`refusing to judge with a Claude-family model (${model}); session items need a cross-family judge. Pass --allow-claude to override.`);
+  process.exit(2);
+}
+if (/(^|\/)(openai\/)?gpt|gpt-/i.test(model)) {
+  console.error(`refusing to judge with a GPT-family model through ofox (${model}); owner rule 2026-07-30 says all GPT models run via the Codex subscription plan. Use briefs/codex-judge.md.`);
   process.exit(2);
 }
 const key = process.env.OFOXAI_API_KEY;

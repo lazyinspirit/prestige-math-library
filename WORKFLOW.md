@@ -24,7 +24,7 @@ personally audits every result and makes every publish decision.
 |---|---|
 | `CLAUDE.md` | session entry point, hard rules, the publish path |
 | `WORKFLOW.md` | this file: the per-PAGE runbook, and the hard rules in full |
-| `LEVELS.md` | the per-LEVEL build, step 0 to 10 |
+| `LEVELS.md` | the per-LEVEL build, step 0 to 9 |
 | `ARCHITECTURE.md` | every mechanism — gates, ledgers, briefs, visual tiers — how each works and which failure it prevents |
 
 All four are **updated in the same commit as the change they describe**
@@ -46,6 +46,11 @@ anything, read:
 - `worker/src/precheck.ts` (in the app repo): the normative phase-format checker.
 
 Follow those files, not this runbook, wherever they differ.
+
+**Current per-level model/routing rule (owner, 2026-07-30):** authoring agents
+run **GLM 5.2 via ofox**; Beta-n-i, Alpha-n and the independent judge run **GPT
+5.6 Sol via the Codex subscription plan**. GPT-family models are not routed
+through ofox. The current per-level step order and numbering are in `LEVELS.md`.
 
 ### The content model and file map
 
@@ -121,10 +126,10 @@ rather than the wording.
 
 **Two independent triggers. Either one fires.**
 
-- **Refuted more than once by the judge before step 9** — the escalation below.
+- **Refuted more than once by the judge before step 6 completes** — the escalation below.
 - **Refuted or fixed more than once by ANY subagent, Alpha-n included** — the
   orchestrator audits it personally, assesses, reports to the owner and
-  iterates. This trigger does not wait for step 9 and does not require a judge
+  iterates. This trigger does not wait for step 6 and does not require a judge
   rejection at all: an item three different agents kept rewriting is suspect
   even if every individual repair looked reasonable and every judge call passed.
 
@@ -133,29 +138,27 @@ whole level.
 
 **The escalation, in order:**
 
-1. **Two refutations before step 9.** Name the proof explicitly in **Alpha-n's
-   step-9 brief**, and instruct Alpha-n to review **the proof AND all of its
-   neighbouring dependencies** — every item it cites and every item that cites
-   it. A proof that keeps failing is often correct in itself and resting on a
-   neighbour that is not.
-2. **Refuted again at step 9 — a RED FLAG.** The orchestrator (me) audits the
-   proof personally. Not a subagent, and not another repair cycle.
+1. **Two refutations before step 6 completes.** Name the proof explicitly in
+   Alpha-n's step-6 brief, and instruct Alpha-n to review **the proof AND all of
+   its neighbouring dependencies** — every item it cites and every item that
+   cites it. A proof that keeps failing is often correct in itself and resting on
+   a neighbour that is not.
+2. **Refuted again after step 6 — a RED FLAG.** The orchestrator audits the proof
+   personally. Not a subagent, and not another repair cycle.
 
-(Step 9 is the FINAL whole-level audit. The separate seam-audit stage that used
-to carry this number was removed on 2026-07-28; the final audit moved down from
-step 10a to step 9 and absorbed the seam duty as one of its risk sources. Every
-escalation above is unchanged in substance — only the number it points at moved.)
+(Step 6 is the final whole-level Beta/Alpha audit under the renumbered workflow.)
 3. **The personal audit must state, explicitly:**
    - the **nature** of the problem — mathematical inaccuracy, incorrectly cited
      dependency, unjustified step, false statement, or a judge false positive;
    - the **ramification of dropping** the whole theorem or example: what cites
      it, what breaks, what the page loses, and whether a weaker true statement
      would serve.
-4. **Report to the owner and iterate.** **NEVER remove the theorem or example
-   without the owner's explicit approval.** A twice-refuted proof is not
-   self-evidently wrong — measured judge precision on this corpus is 21–24%, so
-   a repeated rejection can still be a repeated false positive, and silently
-   deleting content is the one outcome the owner has ruled out.
+4. **Report to the owner and iterate.** Beta/Alpha may add or delete in-flight
+   draft results under `LEVELS.md` step 6, but **published** theorems/examples or
+   items outside the in-flight level are not removed without explicit owner
+   approval. A twice-refuted proof is not self-evidently wrong — measured judge
+   precision on this corpus is 21–24%, so a repeated rejection can still be a
+   repeated false positive.
 
 **This rule needs data the process used to discard.** `verification.judge`
 records only passes, correctly — a rejection leaves no trace once repaired, and
@@ -167,8 +170,9 @@ e.g.:
 export JUDGE_VERDICTLOG=research/level<n>-judge.jsonl
 ```
 
-`tools/judge.mts` appends `{id, model, keep, reason, at}` there for every call,
-including `keep: null` parse failures. Commit the ledger with the level. Count
+The current GPT 5.6 Sol Codex judge records `{id, model, keep, reason, at}` for
+every call, including `keep: null` tool failures. Commit the ledger with the
+level. Count
 refutations per id from it; never rotate it mid-level, because the count is the
 entire point of keeping it.
 
@@ -182,8 +186,8 @@ node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage label>"
 node tools/touchlog.mjs audit research/level<n>-touches.json research/level<n>-judge.jsonl
 ```
 
-**Take a snapshot after EVERY stage that can modify items** — authoring, step-7
-fixes, each step-8 batch audit, step-9 Alpha (the final whole-level audit). A file appearing for the first time
+**Take a snapshot after EVERY stage that can modify items** — authoring, step-6
+Beta/Alpha audit, and step-8 judge adjudication. A file appearing for the first time
 counts as creation, not a repair. `audit` combines repairs with judge refutations
 and prints the escalation set: every id whose total exceeds one.
 
@@ -281,25 +285,20 @@ different model families so a generator never grades its own work. Every LLM tha
 touched this session's work is named below, with its exact identifier and the
 runtime it ran on.
 
-**HISTORICAL SNAPSHOT — the table below records the lineup of the session that
-first wrote this file. It is NOT the current lineup.** For who does what now, the
-authority is `LEVELS.md` §Actors (owner · orchestrator · Alpha-n · Beta-n-i ·
-authoring agent · judge) and `CLAUDE.md` §3 for the judge rule. Corrected
-2026-07-27, when this table still named GPT-5.4 as *the* judge and Opus 4.8 as
-the driver.
+**Current per-level lineup (owner, 2026-07-30):**
 
-| Role | Model that session | Exact identifier | Runtime and cost |
-|------|--------------------|------------------|------------------|
-| Driver, guardrail, auditor | Claude Opus 4.8 (1M context) | `claude-opus-4-8` | Claude Code main loop, subscription |
-| Generator (writes items) | Claude Opus 4.8 | `claude-opus-4-8` | Agent-tool subagents on the Claude subscription, spawned with `model: opus`; not the billed API |
-| Judge (refutes items) | OpenAI GPT-5.4 | `openai/gpt-5.4` | `ofox` gateway, raw API cost |
-| Escalation (revises rejects) | Claude Opus 4.8 | `claude-opus-4-8` | Agent-tool subagents on the Claude subscription |
-| Final audit and publish gate | the human owner | n/a | n/a |
+| Role | Model | Runtime and cost |
+|------|-------|------------------|
+| Orchestrator | current coding session | subscription/tooling of the active orchestrator |
+| Beta-n-i scaffold and batch audit | GPT 5.6 Sol | Codex subscription plan; never ofox |
+| Alpha-n propagation and cross-level audit | GPT 5.6 Sol | Codex subscription plan; never ofox |
+| Authoring agent | GLM 5.2 | ofox API |
+| Judge | GPT 5.6 Sol | Codex subscription plan; never ofox |
+| Final audit and publish gate | human owner | n/a |
 
-**Current judge rule (`CLAUDE.md` §3, binding):** session items are judged by
-**`z-ai/glm-5.2` primary**, GPT-5.4 then Gemini as fallback, **never a Claude
-model**; pipeline items never by GLM or DeepSeek. `deepseek/deepseek-v4-flash`
-was trialled and REVERTED 2026-07-25 for passing an injected false claim.
+The historical Opus/Fable/GLM judge lineups in older research notes are not the
+current workflow. `deepseek/deepseek-v4-flash` remains barred as judge because it
+passed an injected false claim.
 
 The owner, not any model, is the final publish gate.
 
@@ -311,10 +310,10 @@ says whose verdict survives a disagreement.
 
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
-| Generator | Claude Opus subagent | one page | nothing | everyone |
-| **Judge** | non-Claude, GLM 5.2 | the item in FULL; for everything else (cited items and page siblings alike) only Statement/Definition/Example plus Remarks, capped at 3000 chars each. **NO OTHER ITEM'S PROOF IS EVER SHOWN.** | nothing; it NAMES CANDIDATES | every tier below |
-| **Page verifier** | one Opus 5 subagent PER PAGE | its page, plus the full text of everything that page cites | CERTIFY / WITHHOLD per item | auditor, owner |
-| **Cross-page auditor** | the driver, main loop | the whole library at once | final **among models** | **the owner only** |
+| Generator | GLM 5.2 author via ofox | one A/B pair | draft content | every tier below |
+| **Beta batch auditor** | GPT 5.6 Sol via Codex | its batch, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
+| **Alpha cross-level auditor** | GPT 5.6 Sol via Codex | the level plus published dependencies | audits Beta fixes and cross-batch/cross-level citations | owner |
+| **Judge** | GPT 5.6 Sol via Codex | A/B pair plus required-and-cited pages | names candidate defects | orchestrator, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
 **The order, and the bound** (owner, 2026-07-25). For an item rejected at least
@@ -382,33 +381,19 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Judge pricing used for the session cost report: `openai/gpt-5.4` at 2.5 USD per
-million input tokens and 15 USD per million output tokens. Firecrawl and Apify
-(the step-0 scraping tools) were not invoked, so their cost was zero.
+Current session cost rule: authoring GLM 5.2 usage is ofox API spend; all GPT
+5.6 Sol Beta/Alpha/judge work is on the Codex subscription plan and must not be
+routed through ofox.
 
 Two hard rules govern the models:
 
 1. Generation never runs through the public billed pipeline, and never wires a
-   subscription into the worker service. It uses either the session route
-   (subagents) or the internal harness at raw API cost.
-2. Session-authored items are judged by a non-Claude model (**GLM 5.2 primary**,
-   GPT-5.4 then Gemini as fallback), never by a Claude model.
-   **`deepseek/deepseek-v4-flash` was adopted and REVERTED on 2026-07-25**, inside
-   a single batch. It is 14x faster and its verdict prose reads like genuine
-   engagement, but an injection test settled it: given an item whose claim 3 had
-   been restated as a blatant falsehood contradicted by its own proof, DeepSeek
-   replied "No false claim, unjustified step, or mis-cited fact was found." GLM
-   named the claim, gave the witness, and cited the step that refutes it.
-   **Rule: never adopt a judge model on latency, price, or how substantial its
-   reasons sound. Inject a defect you know is there and see whether it says so.**
-   A model that always accepts scores zero false positives too. The full table is
-   in the `tools/judge.mts` header.
-   **Note the collision:** the production GENERATOR lineup is
-   `["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"]`, so GLM as judge is an identity
-   collision with the first entry. Harmless for session items, whose generator is
-   Claude, but a PIPELINE item must never be judged with GLM or DeepSeek, since
-   that is a generator grading its own work. The judge lineup is conditioned on
-   origin precisely so both rules hold at once.
+   subscription into the worker service. Current authoring uses GLM 5.2 via ofox.
+2. GPT-family models (Beta, Alpha, judge) run via the Codex subscription plan,
+   never through ofox. The judge remains cross-family from the GLM author. Never
+   adopt a judge model on latency, price, or fluent reasons; inject a defect you
+   know is there and see whether it says so. DeepSeek v4-flash remains barred as
+   judge because it passed a blatant injected falsehood.
 
 ---
 
@@ -645,21 +630,12 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 
 Run the judge, then report and fix.
 
-**Judge.** GPT-5.4 runs as a refuter through `ofox`: its only job is to find a
-specific defect, and it accepts unless it can name one. The harness is
-`tools/judge.mts`, a topic-neutral refuter over the gateway that parses a JSON
-verdict `{keep, reason}`. Pass the topic (and optionally the domain conventions)
-so it frames the audit correctly; it refuses a Claude-family model for a session
-item, and it appends token usage to `$JUDGE_COSTLOG` for the cost report:
-
-```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
-  items/<id>.md --topic "undergraduate group theory" \
-  --conventions "$(cat briefs/judge-conventions.txt)" \
-  --batch "<A-page-slug>,<A-page-slug>"
-```
-
-The default model is `z-ai/glm-5.2` (GPT-5.4 and Gemini are the fallbacks).
+**Judge.** Current session judging uses GPT 5.6 Sol through the Codex
+subscription plan, with `briefs/codex-judge.md` and
+`briefs/judge-conventions.txt`. GPT-family judges are not run through ofox or
+`tools/judge.mts`. The judge's job is to find a specific defect and accept unless
+it can name one. Record each verdict in `research/level<n>-judge.jsonl` as
+`{id, model, keep, reason, at}`.
 
 Dependencies cited by an item are treated as separately-verified, so the judge
 grades only the item's own reasoning — but it is given the text of those
@@ -673,8 +649,9 @@ not the judge's. A judge rejection that the audit refutes is not problematic; a
 judge acceptance that the audit finds shaky is.
 
 **Fix.** For each genuine defect, either fix it directly (small, precise
-corrections) or escalate it to an Opus subagent with the specific critique and a
-concrete correction plan. In this session the genuine defects the judge caught
+corrections) or escalate it under the current `LEVELS.md` model assignment with
+the specific critique and a concrete correction plan. In the original session the
+genuine defects the judge caught
 and escalation fixed were: a circular use of completeness before it was proved, a
 missing direction of distributivity, an embedding multiplicativity that was
 hand-waved across sign cases, and an under-justified Archimedean step. When a
@@ -779,10 +756,9 @@ directory directly.
    The content repo commits to `main`; a fix to the app repo goes on whatever
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
-   apify (step-0 scraping, zero when nothing was scraped) plus ofox (the judge
-   spend; generation and escalation run on the subscription and cost zero on
-   ofox). The ofox spend is summed from the judge harness token log at the
-   `openai/gpt-5.4` rate.
+   apify (step-0 scraping, zero when nothing was scraped) plus ofox authoring
+   spend. GPT 5.6 Sol Beta/Alpha/judge work runs on the Codex subscription plan
+   and is not counted as ofox spend.
 
 ---
 

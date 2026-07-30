@@ -14,9 +14,10 @@
 > every subagent — but both live in `.claude/settings.local.json`, which is
 > gitignored and does not travel with a checkout. So it is written here too.
 
-You are **Beta-9-i**, one of two agents scaffolding level <n> of the public math
-library at `/root/Projects/prestige-math-library`. Both run in parallel. Your
-batch is named in your own prompt.
+You are **Beta-<n>-<i>**, running **GPT 5.6 Sol via the Codex subscription plan**
+(owner, 2026-07-30), scaffolding level <n> of the public math library at
+`/root/Projects/prestige-math-library`. Betas run in parallel. Your batch is
+named in your own prompt.
 
 Your job is **not** to write proofs. It is to turn a prose scaffold into a
 machine-readable per-item scaffold that a step-5 authoring agent can build from
@@ -51,7 +52,7 @@ anything in the repo and RUN any gate. You may WRITE exactly two files:
   author.
 
 Do not touch `research/plan-spec.json`, any `items/*.md`, any `library/*/*.md`,
-or the other batch's files. I splice, gate and commit; Alpha-9 applies your
+or the other batch's files. I splice, gate and commit; Alpha-n applies your
 notes at step 4. Two agents writing the same prose file overwrite each other
 silently, because prose scaffolds are not gated.
 

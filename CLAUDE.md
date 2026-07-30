@@ -1,5 +1,8 @@
 # prestige-math-library — session instructions
 
+`AGENTS.md` is a non-normative adapter for non-Anthropic agents and points here;
+this file remains the canonical agent instruction file.
+
 This repo is the **public math library** served at `app.prestige-intelligence.cc/library`
 by the Prestige Intelligence app (bind-mount; see README §How serving works).
 **Normative docs, read before touching content: `SCHEMA.md` (item/page contract) and
@@ -11,11 +14,10 @@ visual tier, how each works and which failure it prevents. Read it before
 adding or changing a mechanism.
 
 **Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
-(scaffold, step-9 scaffolder-reader, authoring). `LEVELS.md` describes them;
-those files are
-the actual text.
+(scaffold, step-6 batch audit, authoring, Codex judge). `LEVELS.md` describes
+them; those files are the actual text.
 
-**Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
+**Per-level build, step 0 to 9: `LEVELS.md`** — the canonical description of
 how a dependency level is built (actors, artifacts, the nine gates, the
 self-contained-scope rule, the twice-touched escalation). Read it before
 starting or resuming a level.
@@ -35,44 +37,24 @@ run a page from prompt to publish; the normative docs above win where they diffe
    canonical stratification into the file and re-run until clean (the repo stores
    the strictly stratified form: a step citing phase-k steps sits in phase k+1).
    Record `verification.precheck: pass`.
-3. **Cross-family judge** — **RUNS ONCE, AFTER the step-9 audit, on final text
-   (owner, 2026-07-28)**; authors do not judge. `LEVELS.md` §"Execution order"
-   has the measurement. Before publish: session items → **GLM 5.2 primary
-   (`z-ai/glm-5.2`), GPT-5.4 then Gemini fallback — NEVER a Claude model, and
-   never GLM or DeepSeek for a PIPELINE item, whose generator lineup is GLM 5.2
-   then DeepSeek v4-pro**; pipeline items → production lineup.
-   **`deepseek/deepseek-v4-flash` was trialled and REVERTED 2026-07-25: it passed
-   an injected blatantly-false claim. Never adopt a judge model without running
-   the injection test recorded in the `tools/judge.mts` header.**
-   The judge harness is `tools/judge.mts` (topic-neutral refuter over ofox; pass
-   `--topic` and optional `--conventions`, set `JUDGE_COSTLOG` for the cost
-   report). **The judge's context unit is the A/B PAIR (owner, 2026-07-28):** it
-   always receives its item's own page AND its `-examples` companion in full, and
-   `--batch "<A-page slugs>"` adds further pages as Statement + Remarks.
-   **Pass exactly the pages the item's own page BOTH declares in `requires` and
-   actually cites — computed mechanically, never typed (owner, 2026-07-28,
-   superseding "pass it on every level sweep").** Measured: with every slug
-   named, the mean prompt was 93,810 tokens and the harness discarded three of
-   five sibling pages on every call. `LEVELS.md` §"Step 6" has the numbers. `ARCHITECTURE.md` §5 has the full inventory.
-   Record model/verdict/date in `verification.judge`; an item published
-   on owner audit over a verified judge false-positive is recorded `audited`
-   without a fabricated judge pass. Reflow wrapped steps first with
-   `tools/reflow.mts` (the precheck checker is line-based).
-   **Also set `JUDGE_VERDICTLOG=research/level<n>-judge.jsonl` on EVERY judge
-   run**, and commit it: `verification.judge` records only passes and
-   `JUDGE_COSTLOG` records only spend, so without it a refutation vanishes the
-   moment it is repaired. A proof refuted **more than once** escalates per
-   WORKFLOW.md §"Twice-touched proofs" — Alpha-n reviews the proof AND its
-   neighbouring dependencies at step 9, a further refutation is a red flag the
-   orchestrator audits personally, and **no theorem or example is ever removed
-   without explicit owner approval**.
-3b. **Final Alpha-n audit — WHEN PUBLISHING A LEVEL** (owner, 2026-07-27).
-   The five steps here are the publish path for any content; this one applies
-   only to a per-level build. Before the owner audit, Alpha-n audits the WHOLE
-   level for mathematical accuracy and fixes fatal errors, starting with
-   whatever its own readers' coverage statements say nobody read in full. Fatal
-   includes a title or Statement asserting more than the proof gives — the
-   judge reads Statements and cannot see a false title. `LEVELS.md` §"Step 9".
+3. **Cross-family judge** — **RUNS ONCE, AFTER the step-6 Beta/Alpha audit, on
+   final text**; authors do not judge. Current session workflow (owner,
+   2026-07-30): authoring agents use **GLM 5.2 via ofox**, while Beta/Alpha and
+   the judge use **GPT 5.6 Sol via the Codex subscription plan**. GPT-family
+   models are never run through ofox for this workflow. `tools/judge.mts` is a
+   legacy ofox refuter and injection-test record, not the GPT judge path.
+   **The judge's context unit is the A/B PAIR:** it receives the item's own page
+   and `-examples` companion in full, plus exactly the pages the item's own page
+   both declares in `requires` and actually cites. Record model/verdict/date in
+   `verification.judge`; never record a pass the judge did not give. Commit the
+   full verdict ledger at `research/level<n>-judge.jsonl`. A proof refuted or
+   repaired more than once escalates per WORKFLOW.md §"Twice-touched proofs".
+3b. **Final Alpha-n audit — WHEN PUBLISHING A LEVEL**. Before the owner audit,
+   Alpha-n audits the WHOLE level under `LEVELS.md` step 6: Betas verify every
+   proof step and in-batch dependency citation, Alpha audits Beta fixes from
+   disk, then Alpha audits cross-batch and cross-level citations. Fatal includes
+   a title or Statement asserting more than the proof gives — the judge reads
+   Statements and cannot see a false title. `LEVELS.md` §"Step 6".
 4. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 5. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By
@@ -108,11 +90,12 @@ banner; the public sees only `published`.
   about those axioms. The ‡ tier and the `deferred-*` catalogue pages STAY; what
   ends is depending on them. Forward-looking: published items are not
   retrofitted. Full rule in `WORKFLOW.md` §"Self-contained scope".
-- Generation for this library NEVER goes through the public billed pipelines,
-  and NEVER wires the Claude subscription into the worker service. Modes:
-  session route (Fable + Claude subagents) or the internal harness over
-  `worker/src/engines/` at raw API cost.
-- Mathematical content requires Fable audit before publish, even when judged.
+- Generation for this library NEVER goes through the public billed pipelines.
+  Current session route: GLM 5.2 authoring through ofox; GPT 5.6 Sol Beta/Alpha
+  audit and judge through the Codex subscription plan. Do not wire a subscription
+  account into the worker service.
+- Mathematical content requires the step-6 Alpha/Beta audit before publish, even
+  when judged.
 
 ## Presentation (owner-approved 2026-07-24, FROZEN — do not restyle)
 

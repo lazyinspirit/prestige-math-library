@@ -122,10 +122,11 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: z-ai/glm-5.2              # session items: NEVER a Claude model;
-                                     #   pipeline items: production lineup, and
-                                     #   NEVER glm or deepseek (both are in the
-                                     #   pipeline generator lineup)
+    model: gpt-5.6-sol-codex-subscription
+                                     #   session workflow: GPT 5.6 Sol via the
+                                     #   Codex subscription plan; GPT-family
+                                     #   models are never run through ofox.
+                                     #   Pipeline items use the production lineup
     verdict: pass
     date: 2026-07-25
     # RECORD ONLY A VERDICT THE JUDGE ACTUALLY GAVE, for the text now on disk.
@@ -142,15 +143,15 @@ verification:
     # corrected -- anywhere in the item -- the block goes. The test is not "which
     # section changed" but "would the judge have seen something different".
     # Pure typography, or adding a citation that changes no claim, does not count.
-  verified:                          # OPTIONAL. The PAGE VERIFIER's adjudication
-    model: claude-opus-5             #   (WORKFLOW.md §0): one Opus subagent per
-    verdict: certify                 #   page, reading its page plus the FULL TEXT
-    date: 2026-07-25                 #   of every item that page cites.
+  verified:                          # OPTIONAL. Delegated verifier adjudication
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify                 #   verifier read the stated scope
+    date: 2026-07-25
     scope: page                      #   what context the verifier actually had
     delegated_by: owner              #   set when this block stands as the gate
-    # Deliberately a separate block from `judge`. The verifier is a Claude-family
-    # model, so it does NOT satisfy the cross-family requirement and can never
-    # substitute for a judge verdict.
+    # Deliberately a separate block from `judge`. A verifier certification records
+    # a delegated reading tier and is not the same evidence as an adversarial
+    # judge verdict.
     #
     # AMENDED 2026-07-26 (owner: "publish all 9 webpages as I've delegated auditing
     # to subagents"). `verified` MAY now stand as the publish gate in place of
@@ -180,7 +181,7 @@ verification:
     # citation" on 64 others, which is exactly the kind of quiet equivocation this
     # schema exists to prevent. A reader is told the difference too: these items
     # carry the fuchsia recorded-not-proved marking, never a judge or audited chip.
-  audited: 2026-07-25                # owner/Fable audit date; REQUIRED for published
+  audited: 2026-07-25                # owner audit date; REQUIRED for published
                                      #   UNLESS `proved_here: false`, which uses
                                      #   `sources_checked` above instead.
 sources:

@@ -7,7 +7,10 @@ delete step 8, possibly author with Sonnet 5 — are each addressed below, adopt
 where the evidence supports them and contested where it does not.
 
 **OUTCOME: all seven decisions taken by the owner, 2026-07-28. This file is now
-the RATIONALE; the rules themselves are in the normative docs.**
+the RATIONALE; the rules themselves are in the normative docs. Superseded in
+part on 2026-07-30: the workflow was renumbered to match execution order, Step 6
+became the Beta/Alpha audit, authoring moved to GLM 5.2 via ofox, and
+Beta/Alpha/judge moved to GPT 5.6 Sol via the Codex subscription plan.**
 
 | # | recommendation | decision | where it lives now |
 |---|---|---|---|
