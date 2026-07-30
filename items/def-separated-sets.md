@@ -8,6 +8,7 @@ deps: [def-topological-space, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-subspace-topology-top,
        thm-subspace-closure-and-interior]
 justified_by: []
+forward_refs: [def-separable-space]
 aliases: [def-separated-sets-top]
 landmark: true
 short: "separated sets"
@@ -16,8 +17,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -90,7 +91,7 @@ complete normality later on this page.
   $B$ are separated by disjoint open sets" is a different, stronger condition,
   and it is the conclusion of the normality and complete-normality axioms below,
   not the hypothesis. "Separable", meaning "has an at most countable dense
-  subset", is unrelated and is not used in this library at all.
+  subset", is unrelated and is defined later in [[def-separable-space]].
 
 - **Nothing here needs a separation axiom.** The definition and all four
   observations above hold in an arbitrary topological space, points closed or

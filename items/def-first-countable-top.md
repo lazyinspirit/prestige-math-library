@@ -6,6 +6,7 @@ status: published
 origin: session
 deps: [def-neighbourhood-top, def-countable, def-equinumerous, def-topological-space, def-homeomorphism-and-open-maps]
 justified_by: []
+forward_refs: [thm-first-countable-frechet-urysohn-sequential-hierarchy, ex-uncountable-cantor-cube-uniformizable-not-first-countable, def-second-countable-space]
 aliases: [def-first-countability]
 landmark: false
 short: "first countable"
@@ -14,8 +15,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -60,11 +61,14 @@ inclusion, and a bijection preserves at most countability
 
 ## Remarks
 
-- **What first countability buys.** It is exactly the hypothesis under which
-  sequences suffice to detect the topology: the closure is the sequential closure
-  and sequential continuity is continuity. Without it sequences are too weak, and
-  both failures occur in the cocountable topology on $\mathbb{R}$, which is
-  therefore not first countable.
+- **What first countability buys.** Under countable choice, it is a sufficient
+  hypothesis under which sequences detect the topology: the closure is the
+  sequential closure and sequential continuity is continuity. It is not
+  necessary: the later hierarchy
+  [[thm-first-countable-frechet-urysohn-sequential-hierarchy]] distinguishes
+  first countable, Fréchet--Urysohn, and sequential spaces. Without an additional
+  hypothesis sequences can be too weak, and both failures occur in the
+  cocountable topology on $\mathbb{R}$, which is therefore not first countable.
 
 - **Every metric space is first countable**, the balls of radius $1/n$ for
   $n \ge 1$ forming an at most countable neighbourhood base at each point
@@ -74,14 +78,11 @@ inclusion, and a bijection preserves at most countability
   Hausdorff obstruction used elsewhere on this page: the indiscrete topology on
   two points is first countable, as the paragraph above records, and is not
   Hausdorff, so it is caught by the Hausdorff obstruction and not by this one.
-  Whether the converse failure can occur, that is whether some Hausdorff space is
-  not first countable, is not settled here: no such space appears in this library,
-  and nothing below needs one. So what is established is one direction only, that
-  first countability does not subsume the Hausdorff obstruction. Neither
-  obstruction is a characterisation, and this library proves no implication
-  between the two.
+  The converse failure does occur: the later Cantor-cube example
+  [[ex-uncountable-cantor-cube-uniformizable-not-first-countable]] is compact
+  Hausdorff and not first countable. Together with the indiscrete example, neither
+  first countability nor Hausdorffness implies the other.
 
-- **Second countability is not defined here.** The stronger axiom, an at most
-  countable basis for the whole topology, belongs with the other countability
-  axioms and has no item in this library; nothing below uses it, and the word is
-  not used elsewhere on these pages.
+- **Second countability is not developed at this point in the reading order.**
+  The stronger axiom, an at most countable basis for the whole topology, is
+  defined later in [[def-second-countable-space]]. Nothing below uses it.

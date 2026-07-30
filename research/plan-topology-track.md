@@ -36,8 +36,9 @@
 > | T10 | `function-space-topologies` (+ 285, 287 — see the T10 audit block) | 283 |
 >
 > So `## M3`'s header "plan order 28" is really **120**, `## T3` is **251** and
-> not 104, and the T8a/T8b/T8c headers "spec order 213/215/217" are really
-> **273/275/277**.
+> not 104, and the T8a/T8b/T8c headers have been refreshed to
+> **273/275/277**. Treat remaining legacy numeric annotations as historical and
+> resolve page ids against the spec.
 
 Owner decision 2026-07-25: build BOTH the R-specific treatments AND the fully
 general ones. Every A page (definitions/theorems/false statements) is paired with
@@ -787,29 +788,52 @@ this is the level-7 "two notions" defect and it is exactly where it would start.
 
 ## T6. Convergence: Nets and Filters   [needs F1]
 
-DEFS: directed set; net; subnet (Willard / Kelley / Aarts-Arnaud variants, with
-the differences stated); eventually and frequently; convergence and cluster
-points of nets; filter, filter base, refinement; ultrafilter, principal and free;
-the neighbourhood filter; convergence and cluster points of filters; universal
-net; the net-filter dictionary.
+**Frontier-4 propagation, 2026-07-30.** The machine scaffold has **28 A-page
+items at spec order 259 and 8 B-page items at order 260**. The approved direct
+prerequisites are exactly `compactness`,
+`absolute-convergence-and-rearrangement`, and
+`finite-counting-and-binomial-coefficients`.
 
-THMS: x in cl(A) iff some net in A converges to x; continuity iff nets are
-preserved; Hausdorff iff every net has at most one limit; compact iff every net
-has a convergent subnet iff every filter has a cluster point iff every
-ultrafilter converges; every filter extends to an ultrafilter (Zorn); an
-ultrafilter converges to each of its cluster points; TYCHONOFF VIA ULTRAFILTERS;
-first countable spaces are exactly where sequences suffice; sequential and
-Frechet-Urysohn spaces; the net-filter correspondence preserves convergence.
+DEFS: directed preorder and net; eventually and frequently; convergence and
+cluster points of nets; subnet via an eventually cofinal index map, with the
+stricter order-preserving conventions recorded but not used; the tail filter;
+convergence and cluster points of filters; the canonical net derived from a
+filter; universal net; and the net-filter dictionary. Reuse the published
+definitions of filter, filter base and ultrafilter rather than re-minting them.
 
-FS: sequences determine closure in every space; every subnet of a net is a
-subsequence; every ultrafilter is principal; a cluster point is always a limit of
-a subsequence; sequential compactness equals compactness.
+THMS: $x\in\overline A$ iff some net in $A$ converges to $x$; continuity iff
+convergent nets are preserved; Hausdorff iff every net has at most one limit.
+The tail-filter and derived-net constructions preserve limits and cluster
+points. Assuming the ultrafilter lemma, compactness is equivalent to every net
+having a cluster point, every net having a convergent subnet, every filter
+having a cluster point, and every ultrafilter converging. Universal nets
+correspond to ultrafilters; every net has a universal subnet under the
+ultrafilter lemma; compactness is equivalent to convergence of universal nets;
+and the product of compact Hausdorff spaces is compact. Keep that last theorem
+distinct from the published arbitrary-product theorem under full AC.
 
-B: the net indexed by neighbourhoods; unordered summation as a net, and the
-theorem that a summable family of reals is absolutely summable; free ultrafilters
-and Banach limits; beta-N.
-CEX: the cocountable topology on R; omega_1 + 1; [0,1]^[0,1] (convergent subnets
-but no convergent subsequence); a sequentially continuous discontinuous map.
+Assuming countable choice, first countability implies Fréchet--Urysohn; in ZF,
+Fréchet--Urysohn implies sequential. These are implications, not
+characterisations, and the B-page sequential fan and Arens space witness that
+the converses fail.
+
+FS: keep “every subnet of a sequence is a subsequence” as the page-local false
+statement. Reuse the published failures of sequence detection, principalness of
+ultrafilters, and sequential compactness rather than minting duplicates.
+
+B: the neighbourhood-indexed net witnessing closure; the finite-subset net for
+unordered real summation and, under countable choice, the theorem that such a
+family is summable exactly when it has at most countable support whose nonzero
+terms form an absolutely convergent series, with sum independent of enumeration;
+a free ultrafilter converging in the one-point convergent-sequence space under
+the ultrafilter lemma; a sequence in a compact binary cube with convergent
+subnets but no convergent subsequence; the cocountable topology; the sequential
+fan; and Arens space.
+
+Banach limits are dropped until Hahn--Banach and functional analysis are built.
+The identification of $\beta\mathbb N$ is dropped until
+`tychonoff-embedding-and-stone-cech`; neither is a forward dependency of this
+pair.
 
 ---
 
@@ -891,8 +915,76 @@ theorem.
 
 (3) *paracompact Hausdorff => normal* is **NOT on either of these pages.** Its
 home is **269 `partitions-of-unity-and-paracompactness`**, which `plan-spec.json`
-declares with `requires` = 267 and 255, so it sits above both and above every
-separation axiom it names. Nothing about it is scaffolded here.
+now declares with direct `requires` =
+`urysohn-lemma-and-tietze`, `compactness`, and
+`hereditary-and-productive-separation`. It is scaffolded by the frontier-4
+block immediately below.
+
+**Frontier-4 propagation, 2026-07-30: pages 265/266.** The machine scaffold for
+`hereditary-and-productive-separation` has **24 A-page items and 7 B-page
+items**. Its direct prerequisites are exactly
+`hausdorff-via-the-diagonal`, `compactness`,
+`ordinals-and-transfinite-recursion`, `ordinal-arithmetic`, and
+`cardinal-arithmetic-and-cofinality`; the last supplies the cardinal machinery
+for Jones's obstruction. The page proves the positive hereditary and productive
+results through complete regularity, closed heredity of normality, complete
+normality iff hereditary normality, and under countable choice the
+perfect-normal heredity corollary.
+
+The lower-limit line is reconstructed on the A page because the published
+Sorgenfrey material is B-leaf locked. Jones's bound and the closed discrete
+antidiagonal then show, under AC, that normality is not productive. The deleted
+Tychonoff plank is likewise reconstructed from the published ordinal and compact
+Hausdorff machinery; under countable choice it is a regular nonnormal open
+subspace of a compact Hausdorff normal space. It proves that normality is not
+hereditary and restores `fs-every-regular-space-is-normal`, superseding the
+frontier-1 drop recorded below.
+
+**Frontier-4 propagation, 2026-07-30: pages 269/270.** The machine scaffold for
+`partitions-of-unity-and-paracompactness` has **25 A-page items and 7 B-page
+items**. Its exact prerequisites are `urysohn-lemma-and-tietze`, `compactness`,
+and the planned-earlier seam `hereditary-and-productive-separation`; the seam
+supplies the normal lower-limit line and its nonnormal square for the failure of
+productivity. Paracompactness means that every open cover has a locally finite
+open refinement and does **not** include Hausdorffness. Every regularity,
+normality, shrinking, or partition-of-unity result states Hausdorffness
+separately.
+
+The proof architecture is fixed: locally finite closure and closed-union
+lemmas; paracompact Hausdorff implies regular; paracompact Hausdorff implies
+normal; a two-stage shrinking under AC; Urysohn functions under the published
+DC hypothesis; locally finite summation and normalization; and then the
+subordinate partition theorem under AC and DC. Stone's theorem is a separate
+two-stage argument: under AC, Ornstein's point-finite refinement is followed by
+the locally finite refinement of that specifically constructed cover. This is a
+sufficient-hypothesis statement only; it makes no claim that AC is the exact
+strength of Stone's theorem.
+
+The remaining consequences keep their own hypotheses: compact spaces are
+paracompact without separation assumptions; closed subspaces inherit
+paracompactness; under countable choice, countably compact paracompact Hausdorff
+spaces are compact and regular Lindelöf spaces are paracompact. The ordinal
+witness refutes arbitrary heredity under countable choice, and the lower-limit
+square refutes productivity under AC. A finite non-$T_1$ compact space refutes
+the claim that paracompactness alone implies normality.
+
+**Residual authoring gate for Stone's theorem.** The AMS primary PDF was
+bot-blocked during scaffolding. Before authoring either Ornstein lemma or
+`thm-stone-metric-spaces-are-paracompact`, compare the exact dyadic
+point-finite construction and especially the restricted second-stage lemma with
+an accessible primary copy. If that comparison cannot be completed, defer the
+two lemmas, Stone's theorem, and its dependent corollary rather than authoring
+from the secondary reconstruction.
+
+**Publication-time prose obligations, not step-4 item edits.** When page 269
+publishes, amend `rem-stone-theorem-choice-strength` so only the independence
+analysis remains unproved, point order-relatively to
+`thm-stone-metric-spaces-are-paracompact`, and replace the generic choice-ledger
+pointer by `rem-paracompactness-choice-and-convention-ledger`; use
+`forward_refs`, never `deps`. When page 273 publishes, enact the four staged
+second-countability/separability repairs recorded under T8a below. In each case
+the affected published owner-audit field is cleared for re-audit in the
+publishing commit.
 
 **Dropped from 261/262 at `frontier-1`, each with what would license it — kept as
 the record of the drop; for the compactness-dependent entries the frontier-2
@@ -969,7 +1061,7 @@ CEX: one per failing implication in the chain, matched explicitly.
 **Level-8 wiring obligation (Alpha-8, 2026-07-26; corrected 2026-07-27).**
 `rem-complete-metrizability-is-the-topological-shadow` on
 `completeness-and-uniform-continuity` forward-orients to this material (page
-`complete-metrizability-and-baire`, order 128). That page had no items when
+`complete-metrizability-and-baire`, current spec order 277). That page had no items when
 the remark was authored, so no `forward_refs` id could be declared — and a
 page-level forward reference is NOT expressible in the schema (fwdcheck
 rejects a dangling entry; a page wikilink is a `link-unplanned` error), so
@@ -994,105 +1086,102 @@ list must NOT coin a second "completely metrizable" definition: it is already
 made precise in `lem-complete-remetrisation` and must be transferred from there
 to the general-topological-space setting, not restated.
 
-**SPLIT ACROSS THREE SPEC PAGES (orchestrator, 2026-07-28).** T8 was written as
-one lump; `plan-spec.json` has carried it as three pairs since the topology
-track was spliced, and after the TS-D2 renumber they sit at **213
-`countability-axioms-and-cardinal-functions`**, **215 `metrization-theorems`**
-and **217 `complete-metrizability-and-baire`**. The three sections below say
-which page gets what. Nothing was added to or removed from T8's content by the
-split except the countability material of T8a, which the owner asked to be
-specified rather than listed (2026-07-28).
+**SPLIT ACROSS THREE SPEC PAGES (orchestrator, 2026-07-28; orders refreshed
+2026-07-30).** T8 was written as one lump; `plan-spec.json` carries it as three
+pairs at **273 `countability-axioms-and-cardinal-functions`**, **275
+`metrization-theorems`**, and **277 `complete-metrizability-and-baire`**. The
+three sections below say which page gets what.
 
 ---
 
-### T8a. Countability Axioms and Cardinal Functions   (spec order 213)
+### T8a. Countability Axioms and Cardinal Functions   (spec order 273)
 
-`requires`: `subspaces-products-and-quotients`, `ordinals-and-transfinite-recursion`,
-`cardinal-arithmetic-and-cofinality` (cardinal functions take cardinal values).
+**Frontier-4 propagation, 2026-07-30.** The machine scaffold has **35 A-page
+items and 9 B-page items**. Its exact direct prerequisites are
+`subspaces-products-and-quotients`, `ordinals-and-transfinite-recursion`,
+`cardinal-arithmetic-and-cofinality`, `compactness`, and `separation-axioms`.
+Compactness supplies the published Lindelöf definition, one-point
+compactification, and compactness facts; separation axioms supplies the ordinal
+examples' separation properties.
 
 **DEFS.**
-- **neighbourhood basis at a point** $x$: a family $\mathcal{B}_x$ of
-  neighbourhoods of $x$ such that every neighbourhood of $x$ contains a member.
-- **first countable**: every point has an at most countable neighbourhood basis.
-  The item `def-first-countable-top` is **already published** at order 189 and is
-  NOT re-minted here; this page transfers it and must cite it. See the staged
-  amendment in `research/ts-d2-published-amendments.md`.
-- **second countable**: the topology has an at most countable basis. Says "basis"
-  in the sense of the published `thm-basis-criterion`, not "subbasis".
-- **separable**: there is an at most countable dense subset. `def-dense-top` is
-  published (order 189) and deliberately declines to define this; that Remark is
-  staged for amendment.
-- **Lindelof**: every open cover has an at most countable subcover.
-- **countable chain condition (ccc)**: every family of pairwise disjoint nonempty
-  open sets is at most countable.
-- **cardinal functions**: weight $w(X)$, density $d(X)$, character $\chi(X)$,
-  Lindelof number $L(X)$, cellularity $c(X)$.
+- **first countable**, **dense**, and **Lindelöf** are transferred from the
+  published items `def-first-countable-top`, `def-dense-top`, and
+  `def-compactness-variants`; none is re-minted.
+- **second countable**: the topology has an at most countable basis, with
+  “basis” in the published sense.
+- **separable**: there is an at most countable dense subset.
+- **countable chain condition (ccc)**: every pairwise-disjoint family of
+  nonempty open sets is at most countable.
+- Under AC, use the **raw, unnormalised** cardinal functions. Weight $w(X)$ and
+  density $d(X)$ are raw minima; local character $\chi(x,X)$ is the minimum
+  local-base size and $\chi(X)=\sup_x\chi(x,X)$; Lindelöf degree $L(X)$ is the
+  raw minimum cover bound; cellularity $c(X)$ is the supremum of cardinalities
+  of cellular families. In particular, an infinite discrete space of cardinal
+  $\kappa$ has $\chi(X)=1$ and $w(X)=d(X)=L(X)=c(X)=\kappa$.
 
-**WELL-DEFINEDNESS OBLIGATIONS, each a numbered item** (the owner's rule: a
-definition is introduced only where its well-definedness can be justified):
-
-1. **Every cardinal function is a MINIMUM over a nonempty set of cardinals**, so
-   each of the five needs its own two-line item: the set of cardinals in question
-   is nonempty (the whole topology is a basis for itself; $X$ is dense in itself;
-   …), and every nonempty set of cardinals has a least element. The second half
-   is ST-2's, at order 187 — **which is exactly why 213 requires 187**. Without
-   it the definite article in "the weight of $X$" is unlicensed.
-2. **The decreasing-neighbourhood-basis lemma**, its own numbered item: if $x$
-   has an at most countable neighbourhood basis then it has a DECREASING one,
-   $B_0 \supseteq B_1 \supseteq \cdots$, by replacing $B_n$ with
-   $B_0 \cap \cdots \cap B_n$ (a finite intersection, so still a neighbourhood).
-   Every sequence argument on this page and on 215/217 silently wants this; it is
-   stated once here and cited, never re-derived.
+**WELL-DEFINEDNESS OBLIGATIONS.** The scaffold has a separate item for each of
+$w,d,\chi,L,c$. The minimum definitions use nonempty families of cardinals and
+the published well-ordering machinery; the two suprema use the published
+cardinal-arithmetic machinery. Do not replace cellularity by a minimum or
+silently normalise any invariant by $\aleph_0$. A separate lemma proves that a
+countable local base can be chosen open and decreasing by taking running finite
+intersections.
 
 **THMS.**
-- second countable $\Rightarrow$ first countable (choice-free: the basic opens
-  containing $x$ ARE a neighbourhood basis at $x$, no selection).
-- second countable $\Rightarrow$ separable. **Costs AC$_\omega$**: one point is
-  chosen from each nonempty basic open set. Its own item, and the choice cost is
-  stated in the Statement, per the house practice on the linear-algebra pages.
-- second countable $\Rightarrow$ Lindelof. **Also costs AC$_\omega$** (for each
-  basic open contained in some cover member, choose one such member). Separate
-  item, separate statement of the cost.
-- first countable $\Rightarrow$ the sequential characterisations of closure and of
-  continuity become equivalences. The published `def-first-countable-top` page
-  already proves both converses at order 189; the item here is a **dictionary
-  item** pointing at them, not a second proof.
-- **in a metric space, separable $\iff$ second countable $\iff$ Lindelof** — the
-  page's main theorem, a three-way cycle. Uses AC$_\omega$ in the arcs that
-  select; the arc "second countable $\Rightarrow$ separable" reuses the theorem
-  above rather than redoing it.
-- second countability is **hereditary** and **countably productive**; first
-  countability likewise. `cor-metrizability-and-first-countability-are-hereditary`
-  already exists — check before minting, it may discharge half of this.
-- separable $\Rightarrow$ ccc (choice-free); Lindelof + metrizable $\Rightarrow$
-  second countable.
-- the inequalities relating the cardinal functions: $d(X) \le w(X)$,
-  $\chi(X) \le w(X)$, $c(X) \le d(X)$, $L(X) \le w(X)$.
+- Second countability implies first countability in ZF, and implies separability
+  and Lindelöfness under countable choice.
+- Under countable choice, a metrizable space is second countable iff separable
+  iff Lindelöf.
+- Second countability is hereditary. Countable products of second-countable
+  spaces, and countable products of first-countable spaces, have the
+  corresponding property under countable choice.
+- Every separable space is ccc. Under AC,
+  $c(X)\le d(X)\le w(X)$ and $\chi(X),L(X)\le w(X)$; subspaces do not increase
+  weight or local character, and continuous images do not increase density or
+  Lindelöf degree.
+- Under AC, every metrizable space satisfies the convention-safe equality
+  $d(X)=w(X)$. Do not assert that all five raw invariants coincide.
+- Under AC, the uncountable $\Delta$-system lemma yields ccc for every Cantor
+  cube, while cubes indexed above $2^{\aleph_0}$ are not separable.
 
 **FS.**
-- separable $\Rightarrow$ second countable (Sorgenfrey line).
-- separability is hereditary (Sorgenfrey plane).
-- Lindelof is hereditary (Sorgenfrey plane), and Lindelof is productive
-  (Sorgenfrey line squared).
-- first countable $\Rightarrow$ second countable (uncountable discrete space).
-- ccc $\Rightarrow$ separable.
+- first countable $\Rightarrow$ second countable (uncountable discrete space);
+- separable $\Rightarrow$ second countable (lower-limit line);
+- separability is hereditary (lower-limit plane and its antidiagonal);
+- Lindelöfness is hereditary (one-point compactification witness);
+- under countable choice, Lindelöfness is productive (lower-limit line squared);
+- under AC, ccc $\Rightarrow$ separable (a sufficiently large Cantor cube);
+- under AC and countable choice, second countability is arbitrarily productive
+  (a sufficiently large Cantor cube).
 
-**B page (214).** The Sorgenfrey line, computing all five cardinal functions; the
-Sorgenfrey plane; an uncountable discrete space; $[0, \omega_1)$ with the order
-topology and the long line, **both of which come from ST-1 at order 185**; the
-Hilbert cube; $\mathbb{R}^\kappa$ for large $\kappa$.
+**B page (274).** Raw cardinal functions of the real line, an uncountable
+discrete space, and the lower-limit line; the lower-limit plane's countability
+profile; a one-point compactification of an uncountable discrete space;
+$\omega_1$; a ccc nonseparable Cantor cube; and worked failures of hereditary
+separability and productive Lindelöfness.
 
-**SCOPE DENIAL.** The Hewitt–Marczewski–Pondiczery theorem (a product of at most
-$2^\kappa$ spaces of density $\le \kappa$ has density $\le \kappa$) is **DROPPED**:
-it needs cardinal exponentiation arithmetic beyond what ST-2 develops. Recorded
-here so the omission is recoverable; what would license it is an ST-2 extension.
+**Publication-time obligation.** The old order annotation in
+`research/ts-d2-published-amendments.md` is stale; this page is now order 273.
+When it publishes, replace the four corpus-relative denials in
+`def-first-countable-top`, `def-dense-top`, `ex-sorgenfrey-line`, and
+`topological-spaces-and-continuity-examples` by “not developed/defined at this
+point in the reading order” and point to `def-second-countable-space` or
+`def-separable-space` as appropriate. The earlier items use `forward_refs`,
+never `deps`, and their owner-audit fields are cleared for re-audit in the
+publishing commit.
+
+**SCOPE DENIAL.** The Hewitt--Marczewski--Pondiczery theorem is not in the
+machine scaffold. It remains deferred until a dependency-closed proof of its
+full product-density statement is supplied; the $\Delta$-system argument above
+proves only the ccc result actually planned here.
 
 ---
 
-### T8b. Metrization Theorems   (spec order 215)
+### T8b. Metrization Theorems   (spec order 275)
 
 DEFS: sigma-locally-finite and sigma-discrete bases (the local finiteness notion
-comes from 209, `partitions-of-unity-and-paracompactness`).
+comes from 269, `partitions-of-unity-and-paracompactness`).
 
 THMS: **URYSOHN METRIZATION** (regular + second countable + $T_1$ $\Rightarrow$
 metrizable); **NAGATA–SMIRNOV** (metrizable $\iff$ regular $T_1$ with a
@@ -1101,12 +1190,12 @@ sigma-locally-finite basis); **BING** (the sigma-discrete form); **SMIRNOV**
 
 FS: every regular space is metrizable.
 
-B (216): the Niemytzki plane (Tychonoff, not normal, not metrizable); the
+B (276): the Niemytzki plane (Tychonoff, not normal, not metrizable); the
 Sorgenfrey line again, now as the standard failure of Urysohn's hypotheses.
 
 ---
 
-### T8c. Complete Metrizability and Baire   (spec order 217)
+### T8c. Complete Metrizability and Baire   (spec order 277)
 
 DEFS: Baire space; comeager; completely metrizable; **Polish space**.
 
@@ -1129,39 +1218,65 @@ metrizable spaces; the Cantor set surjects onto every compact metric space.
 
 FS: every Baire space is completely metrizable; $\mathbb{Q}$ is a Baire space.
 
-B (218): $\mathbb{Q}$; the irrationals; the Hilbert cube; genericity of
+B (278): $\mathbb{Q}$; the irrationals; the Hilbert cube; genericity of
 nowhere-differentiable functions.
 
 ---
 
 ## T9. Uniform Spaces   [greatest generality; needs F1]
 
-DEFS: entourage and uniformity (Bourbaki); uniform cover (Tukey); a gauge, i.e.
-a family of pseudometrics; uniform space; the induced topology; uniformly
-continuous map; Cauchy filter; complete uniform space; totally bounded;
-precompact; uniform embedding; completion; separated uniformity; the uniformity
-of a metric; the uniformity of a topological group.
+**Frontier-4 propagation, 2026-07-30.** The machine scaffold has **54 A-page
+items at spec order 279 and 8 B-page items at order 280**. Its exact direct
+prerequisites are `nets-and-filters`, `hausdorff-via-the-diagonal`, and
+`monoids-groups-and-subgroups`, matching its convergence, separation, and
+group-theoretic proof surface.
 
-THMS: the three definitions are equivalent; a uniformity induces a topology;
-uniformly continuous => continuous, not conversely; COMPLETENESS AND UNIFORM
-CONTINUITY ARE NOT TOPOLOGICAL INVARIANTS (the theorem that justifies this page);
-every uniform space has a completion, unique up to uniform isomorphism; A
-COMPACT HAUSDORFF SPACE CARRIES EXACTLY ONE UNIFORMITY, and every continuous map
-out of it is uniformly continuous (Heine-Cantor in greatest generality); compact
-<=> complete + totally bounded; a separated uniformity with a countable base is
-metrizable; uniformizable <=> completely regular; the two-sided uniformity of a
-topological group; uniform convergence as a uniformity on a function space.
+DEFS: uniformity by entourages; induced topology and separatedness; uniform
+continuity; uniformity by uniform covers; gauge of pseudometrics; Cauchy filter;
+complete uniform space; totally bounded uniform space; uniform embedding and
+uniform isomorphism; Hausdorff completion with a possibly noninjective canonical
+map before separation; countably based uniformity; uniformizable and
+separated-uniformizable topology; topological group; its left, right, upper and
+Roelcke uniformities; and pointwise and uniform-convergence uniformities on a
+function set. Use “totally bounded” throughout; do not introduce the
+convention-dependent synonym “precompact”.
 
-FS: completeness is a topological property; every topological space is
-uniformizable; continuous maps between uniform spaces are uniformly continuous;
-a uniform space has a unique compatible metric; metrics inducing the same
-topology induce the same uniformity.
+THMS: entourage and uniform-cover formulations are equivalent in ZF. Under
+dependent choice, normal entourage sequences produce pseudometrics and show
+that gauges are equivalent to the other formulations. A uniformity induces a
+topology, is separated exactly when that topology is Hausdorff, and uniform
+continuity implies continuity.
 
-B: the metric uniformity; R against (0,1); the additive uniformity of a
-topological group; the uniformity of pointwise and of uniform convergence; the
-unique uniformity on [0,1].
-CEX: same topology, different uniformities; x -> x^2 on R; a completely regular
-non-metrizable uniformizable space.
+Every uniform space has a complete Hausdorff reflection with dense canonical
+image. The canonical map is a uniform embedding exactly when the original
+uniformity is separated; uniformly continuous maps into complete Hausdorff
+targets extend uniquely, and this gives uniqueness of completion up to the
+appropriate uniform isomorphism. Do not state that an arbitrary nonseparated
+uniform space embeds in its Hausdorff completion.
+
+Compact uniform spaces are complete and totally bounded. Assuming the
+ultrafilter lemma, complete and totally bounded uniform spaces are compact, so
+compactness is equivalent to completeness plus total boundedness under that
+hypothesis. Compact Hausdorff spaces carry exactly one compatible uniformity,
+and continuous maps from them to uniform spaces are uniformly continuous.
+
+A countably based uniformity is generated by one pseudometric and is metrizable
+exactly when separated. Uniformizable spaces are regular in ZF. Under dependent
+choice, uniformizability is equivalent to complete regularity, and separated
+uniformizability is equivalent to Tychonoffness under the library's convention
+that complete regularity itself does not include $T_1$. For a topological group,
+left and right uniformities induce the given topology and inversion interchanges
+them; the upper and Roelcke uniformities are named separately rather than
+conflated as a “two-sided” uniformity. Pointwise and uniform-convergence
+uniformities agree on finite domains, with uniform convergence finer in general.
+
+B: the usual metric uniformity on $\mathbb{R}$; a homeomorphism
+$\mathbb{R}\to(-1,1)$ that is not a uniform isomorphism; the false claim that a
+compatible uniformity is unique; coincidence of the four uniformities on the
+additive group $\mathbb{R}$; pointwise but not uniform convergence on a
+countable domain; uniqueness on $[0,1]$; the nonuniformizable $K$-topology; and
+under the ultrafilter lemma an uncountable Cantor cube that is compact Hausdorff
+and uniformizable but not first countable.
 
 ---
 

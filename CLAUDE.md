@@ -14,7 +14,7 @@ visual tier, how each works and which failure it prevents. Read it before
 adding or changing a mechanism.
 
 **Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
-(scaffold, step-6 batch audit, authoring, Codex judge). `LEVELS.md` describes
+(scaffold, step-6 batch audit, authoring, GLM judge). `LEVELS.md` describes
 them; those files are the actual text.
 
 **Per-level build, step 0 to 9: `LEVELS.md`** — the canonical description of
@@ -31,7 +31,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
    `origin: session`; never fabricate scraped sources (use `references`).
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
-   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts
+   node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts
    ```
    Bare = all items; or pass specific files. On REPAIR output, adopt the printed
    canonical stratification into the file and re-run until clean (the repo stores
@@ -39,10 +39,12 @@ run a page from prompt to publish; the normative docs above win where they diffe
    Record `verification.precheck: pass`.
 3. **Cross-family judge** — **RUNS ONCE, AFTER the step-6 Beta/Alpha audit, on
    final text**; authors do not judge. Current session workflow (owner,
-   2026-07-30): authoring agents use **GLM 5.2 via ofox**, while Beta/Alpha and
-   the judge use **GPT 5.6 Sol via the Codex subscription plan**. GPT-family
-   models are never run through ofox for this workflow. `tools/judge.mts` is a
-   legacy ofox refuter and injection-test record, not the GPT judge path.
+   2026-07-30): authoring agents use **GPT 5.6 Terra via the Codex subscription
+   plan**, Beta/Alpha use **GPT 5.6 Sol via the Codex subscription plan**, and
+   the judge uses **GLM 5.2 via the ofox API**. All run at `xhigh` reasoning.
+   GPT-family models are never run through ofox for this workflow.
+   `tools/judge.mts` is the GLM judge path and preserves the injection-test
+   record.
    **The judge's context unit is the A/B PAIR:** it receives the item's own page
    and `-examples` companion in full, plus exactly the pages the item's own page
    both declares in `requires` and actually cites. Record model/verdict/date in
@@ -70,6 +72,37 @@ banner; the public sees only `published`.
 
 ## Hard rules
 
+- **No shell-permission prompts (owner, 2026-07-30).** This binds the
+  orchestrator and every current and future subagent. Run routine repository
+  reads, writes, and gates inside the workspace sandbox and choose
+  non-escalated command forms. Do not request shell-command approval from the
+  owner. On runtimes that expose `dangerouslyDisableSandbox`, pass it on every
+  Bash call as the existing unattended-build backstop; on runtimes that do not,
+  stay within their already-granted workspace permissions. If an indispensable
+  operation truly cannot be expressed without new authority, stop and record a
+  blocker instead of raising a permission prompt.
+
+- **Step-3 decisions belong to the orchestrator (owner, 2026-07-30).** In this
+  and every future session, the orchestrator verifies each Beta recommendation
+  from disk and then **approves or declines it using best judgment**; it does not
+  hand routine scaffold adjudication back to the owner. The decision priority
+  is: (1) mathematical accuracy and correct citation of dependencies are
+  non-negotiable; then (2) minimize forward references; then (3) preserve
+  mathematical richness. Investigate uncertainty before deciding and log the
+  decision plus rationale.
+
+- **Step-9 fatal-error report (owner, 2026-07-30).** At the end of step 9,
+  before the publication pause, the orchestrator gives the owner a concise but
+  complete account of every fatal mathematical error encountered and fixed.
+  Group errors by defect type (for example invalid inference, incorrect
+  dependency citation, false/overstrong definition or theorem, missing
+  hypothesis/choice scope, invalid witness) and by location (title/Statement,
+  proof/refutation, Facts/dependencies, Remark, or page prose/summary). For every
+  error, name the affected id/file and the disposition: dropped/deferred,
+  restated, proof repaired/replaced, prose corrected, dependencies corrected, or
+  a new lemma/result added. Detailed Beta/Alpha/judge ledgers remain the evidence
+  source; concision must not omit a fatal defect.
+
 - **Keep the normative docs current (owner, 2026-07-27).** `CLAUDE.md`,
   `WORKFLOW.md`, `LEVELS.md` and `ARCHITECTURE.md` are normative and are
   updated **in the same commit as the change they describe** — a new or
@@ -91,11 +124,41 @@ banner; the public sees only `published`.
   ends is depending on them. Forward-looking: published items are not
   retrofitted. Full rule in `WORKFLOW.md` §"Self-contained scope".
 - Generation for this library NEVER goes through the public billed pipelines.
-  Current session route: GLM 5.2 authoring through ofox; GPT 5.6 Sol Beta/Alpha
-  audit and judge through the Codex subscription plan. Do not wire a subscription
-  account into the worker service.
+  Current session route: GPT 5.6 Terra authoring and GPT 5.6 Sol Beta/Alpha
+  audit through the Codex subscription plan; GLM 5.2 judging through ofox. Do
+  not wire a subscription account into the worker service.
 - Mathematical content requires the step-6 Alpha/Beta audit before publish, even
   when judged.
+- **Scaffold richness (owner, 2026-07-30).** For every A/B pair, Beta decomposes
+  long theorem/lemma proofs into focused intermediate lemmas and performs a pass
+  for useful, cheaply proved corollaries. The A-page size-warning ceiling is 100
+  total items, raised from 60. It is a review ceiling, not a target: never pad,
+  and never drop valuable results merely for ergonomics or to stay below it.
+- **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30).**
+  Before constructing an A/B scaffold, Beta searches reputable mathematical
+  sources on the web for the relevant definitions, theorem and corollary
+  statements, counterexamples, and proof strategies, and records the sources
+  and any convention disagreements in its notes. Beta has read access to the
+  full published library and must open every published item it intends to cite.
+  Every load-bearing dependency must be established by published content or by
+  an earlier item inside the pair; otherwise the result is decomposed,
+  rescoped, or dropped under the self-contained-scope rule.
+- **Natural mathematical voice and citation fidelity (owner, 2026-07-30).** Do
+  not write AI-sounding labels or interpretive filler such as "Null definition:"
+  or "the key bridge says". In every `[F#]`, `[A#]`, or `[L#]` dependency fact,
+  state the cited definition/theorem itself: quote it exactly when practical, or
+  give a concise shortening that preserves its domain, quantifiers, hypotheses,
+  conclusion, and direction with maximum fidelity. Never replace the proposition
+  with a synthetic summary of what it is "for". This binds the orchestrator and
+  every scaffold, author, Beta, Alpha, and judge agent.
+- **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
+  two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
+  mathematical background and names definitions and results from declared
+  dependencies that the development uses. Paragraph 2 names the main definitions
+  and theorems developed on the page and explains their general logical
+  progression. A B page has no authored summary body at all. A summaries remain
+  bound by SCHEMA §6: no counts, self-ranking, unsupported reading position, or
+  survey claims about other pages.
 
 ## Presentation (owner-approved 2026-07-24, FROZEN — do not restyle)
 

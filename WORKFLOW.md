@@ -1,5 +1,13 @@
 # From a prompt to a publish-ready page: the end-to-end authoring workflow
 
+> **No shell-permission prompts (owner, 2026-07-30).** The orchestrator and
+> every current and future agent use commands already permitted inside the
+> workspace sandbox and choose non-escalated equivalents for routine repository
+> work. Do not ask the owner to approve shell commands. Claude agents pass
+> `dangerouslyDisableSandbox: true` on every Bash call; sandboxed Codex agents
+> stay within granted workspace permissions. An indispensable operation with no
+> escalation-free form is reported as a blocker rather than prompting.
+
 This document describes, in human-readable terms, how a single natural-language
 request from the owner becomes a fully verified, rendered, publish-ready page in
 this math library. It reflects exactly what was done in the session that built
@@ -13,6 +21,13 @@ similar). The running example throughout is a hypothetical request:
 The orchestrating agent (the "driver") stays in the loop the whole way. It
 delegates generation and revision to subagents, calls an external judge, but
 personally audits every result and makes every publish decision.
+
+At `LEVELS.md` step 3, the driver also makes the scaffold decisions: after
+verifying each Beta recommendation from disk, it approves or declines it using
+best judgment. Mathematical accuracy and correct dependency citation are
+non-negotiable; among valid alternatives, minimizing forward references takes
+priority over preserving additional mathematical richness. Routine step-3
+adjudication does not pause for owner approval.
 
 ---
 
@@ -48,9 +63,11 @@ anything, read:
 Follow those files, not this runbook, wherever they differ.
 
 **Current per-level model/routing rule (owner, 2026-07-30):** authoring agents
-run **GLM 5.2 via ofox**; Beta-n-i, Alpha-n and the independent judge run **GPT
-5.6 Sol via the Codex subscription plan**. GPT-family models are not routed
-through ofox. The current per-level step order and numbering are in `LEVELS.md`.
+run **GPT 5.6 Terra via the Codex subscription plan**; Beta-n-i and Alpha-n run
+**GPT 5.6 Sol via the Codex subscription plan**; the independent judge runs
+**GLM 5.2 via the ofox API**. All use `xhigh` reasoning. GPT-family models are
+not routed through ofox. The current per-level step order and numbering are in
+`LEVELS.md`.
 
 ### The content model and file map
 
@@ -59,8 +76,9 @@ through ofox. The current per-level step order and numbering are in `LEVELS.md`.
   IMMUTABLE once merged: rename only through `aliases`, never by reusing a
   retired id.
 - `library/<category>/[<subcategory>/]<page>.md` is a page composition file: an
-  item list, an examples list, and a short authored summary. `_category.md` holds
-  category metadata.
+  item list and an examples list, plus the fixed two-paragraph authored summary
+  on A pages only. B/examples pages have no authored summary body. `_category.md`
+  holds category metadata.
 - Id prefixes are a closed set whose prefix must match the item `kind`: `def`
   (definition), `thm` (theorem), `lem` (lemma), `prop` (proposition), `cor`
   (corollary), `ex` (example), `cex` (counterexample), `fs` (false statement),
@@ -87,6 +105,18 @@ frontmatter. Session-authored items list standard textbook references, not
 fabricated scraped sources: the end-of-page Sources section is split into Sources
 scraped (may be empty) and Standard references (recommended treatments, labelled
 as such, not extraction sources). Never invent a source.
+
+**Natural voice and proposition fidelity (owner, 2026-07-30).** Write direct,
+natural mathematical prose throughout, without canned headings,
+meta-commentary, or rhetorical filler that sounds generated rather than written
+for a reader. A dependency fact is not a place for an agent to explain what a
+source result is "doing". Avoid AI-sounding headings and filler such as `Null definition:`, `the key bridge
+says`, `serves as`, or `captures the idea that`. In `[F#]`, `[A#]`, and `[L#]`,
+state the source proposition itself. Use the exact Definition or Statement when
+practical. A concise version is allowed only when it retains the source's domain,
+quantifiers, hypotheses, conclusion, and direction with maximum fidelity. This
+rule binds scaffolding, authoring, Beta/Alpha audit, judge review, and the
+orchestrator's own edits.
 
 ### Definition justification (hard rule)
 
@@ -170,8 +200,8 @@ e.g.:
 export JUDGE_VERDICTLOG=research/level<n>-judge.jsonl
 ```
 
-The current GPT 5.6 Sol Codex judge records `{id, model, keep, reason, at}` for
-every call, including `keep: null` tool failures. Commit the ledger with the
+The current GLM 5.2 ofox judge records `{id, model, keep, reason, at}` for every
+call, including `keep: null` tool failures. Commit the ledger with the
 level. Count
 refutations per id from it; never rotate it mid-level, because the count is the
 entire point of keeping it.
@@ -290,13 +320,13 @@ runtime it ran on.
 | Role | Model | Runtime and cost |
 |------|-------|------------------|
 | Orchestrator | current coding session | subscription/tooling of the active orchestrator |
-| Beta-n-i scaffold and batch audit | GPT 5.6 Sol | Codex subscription plan; never ofox |
-| Alpha-n propagation and cross-level audit | GPT 5.6 Sol | Codex subscription plan; never ofox |
-| Authoring agent | GLM 5.2 | ofox API |
-| Judge | GPT 5.6 Sol | Codex subscription plan; never ofox |
+| Beta-n-i scaffold and batch audit | GPT 5.6 Sol (`xhigh`) | Codex subscription plan; never ofox |
+| Alpha-n propagation and cross-level audit | GPT 5.6 Sol (`xhigh`) | Codex subscription plan; never ofox |
+| Authoring agent | GPT 5.6 Terra (`xhigh`) | Codex subscription plan; never ofox |
+| Judge | GLM 5.2 (`xhigh`) | ofox API |
 | Final audit and publish gate | human owner | n/a |
 
-The historical Opus/Fable/GLM judge lineups in older research notes are not the
+The historical Opus/Fable and older judge lineups in research notes are not the
 current workflow. `deepseek/deepseek-v4-flash` remains barred as judge because it
 passed an injected false claim.
 
@@ -310,10 +340,10 @@ says whose verdict survives a disagreement.
 
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
-| Generator | GLM 5.2 author via ofox | one A/B pair | draft content | every tier below |
+| Generator | GPT 5.6 Terra author via Codex | one A/B pair | draft content | every tier below |
 | **Beta batch auditor** | GPT 5.6 Sol via Codex | its batch, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
 | **Alpha cross-level auditor** | GPT 5.6 Sol via Codex | the level plus published dependencies | audits Beta fixes and cross-batch/cross-level citations | owner |
-| **Judge** | GPT 5.6 Sol via Codex | A/B pair plus required-and-cited pages | names candidate defects | orchestrator, owner |
+| **Judge** | GLM 5.2 via ofox | A/B pair plus required-and-cited pages | names candidate defects | orchestrator, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
 **The order, and the bound** (owner, 2026-07-25). For an item rejected at least
@@ -381,17 +411,18 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Current session cost rule: authoring GLM 5.2 usage is ofox API spend; all GPT
-5.6 Sol Beta/Alpha/judge work is on the Codex subscription plan and must not be
-routed through ofox.
+Current session cost rule: GPT 5.6 Terra authoring and GPT 5.6 Sol Beta/Alpha
+work are on the Codex subscription plan; GLM 5.2 judging is ofox API spend.
+GPT-family work must not be routed through ofox.
 
 Two hard rules govern the models:
 
 1. Generation never runs through the public billed pipeline, and never wires a
-   subscription into the worker service. Current authoring uses GLM 5.2 via ofox.
-2. GPT-family models (Beta, Alpha, judge) run via the Codex subscription plan,
-   never through ofox. The judge remains cross-family from the GLM author. Never
-   adopt a judge model on latency, price, or fluent reasons; inject a defect you
+   subscription into the worker service. Current authoring uses GPT 5.6 Terra
+   through the Codex subscription plan.
+2. GPT-family models (author, Beta and Alpha) run via the Codex subscription
+   plan, never through ofox. The GLM judge remains cross-family from the GPT
+   author. Never adopt a judge model on latency, price, or fluent reasons; inject a defect you
    know is there and see whether it says so. DeepSeek v4-flash remains barred as
    judge because it passed a blatant injected falsehood.
 
@@ -436,6 +467,12 @@ plan* before any generation happens.
    topics, discover reputable sources and generate RAG raw data first, then feed
    that context to the generators. Firecrawl and Apify are the scraping tools;
    they cost nothing when no scraping happens.
+   **Standing Beta rule (owner, 2026-07-30): even for standard material, the
+   scaffolding Beta first searches reputable mathematical sources on the web**
+   for definitions, theorem and corollary statements, counterexamples, and proof
+   strategies. It records working URLs, what each source supports, and convention
+   disagreements in its namespaced notes. This is a knowledge and verification
+   pass, not permission to label session-authored work as scraped.
 4. **Fix the mathematical conventions once, centrally.** Write a single spec
    sheet that pins every id, kind, dependency list, landmark flag, and the exact
    statement and definitional convention for each item. This is what keeps
@@ -492,8 +529,27 @@ honestly, not a budget to stay inside. Prefer more, smaller lemmas: the owner's
 standing rule is that difficulty is never a reason to omit or hand-wave, only to
 decompose further.
 
+**Per-pair richness rule (owner, 2026-07-30).** During scaffolding, each Beta
+separately reviews every A/B pair for long, multi-part theorem or lemma proofs
+that should become a chain of focused intermediate lemmas, then reviews each
+substantial result for useful immediate corollaries with cheap proofs. This is
+not permission to create trivial microlemmas, duplicates, or cosmetic variants.
+The A-page size-warning ceiling is **100 total items**, raised from 60. It is a
+review ceiling, not a target or minimum. Never pad toward it, and never omit
+valuable mathematics merely for ergonomics or to suppress the warning; report a
+possible structural split when coherent content genuinely exceeds it.
+
 `node tools/depcheck.mjs` reports the depth per page so it is measured rather
 than asserted.
+
+**Published-library closure during scaffolding (owner, 2026-07-30).** Betas may
+read the full published corpus and must do so for every dependency they propose:
+open the item on disk, verify its published status and exact proposition, and
+search for existing ids before minting another. A load-bearing dependency is
+allowed only when it is established by published content on a strictly earlier
+page or by an earlier item inside the A/B pair. Anything else is decomposed,
+rescoped, or dropped with a note explaining what would license it; a web source
+cannot substitute for an unbuilt library dependency.
 
 ---
 
@@ -584,7 +640,7 @@ sources. Deploy note: the production `output: standalone` build must trace
 **Mechanical precheck** runs on every generated item (free, deterministic):
 
 ```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts items/<id>.md
+node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts items/<id>.md
 ```
 
 It verifies the phase stratification, tag vocabulary, strategy-specific required
@@ -598,7 +654,7 @@ step across several lines. The helper `tools/reflow.mts` joins wrapped step line
 back into one line; run it before precheck:
 
 ```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/reflow.mts items/<id>.md
+node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/reflow.mts items/<id>.md
 ```
 
 ---
@@ -630,11 +686,11 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 
 Run the judge, then report and fix.
 
-**Judge.** Current session judging uses GPT 5.6 Sol through the Codex
-subscription plan, with `briefs/codex-judge.md` and
-`briefs/judge-conventions.txt`. GPT-family judges are not run through ofox or
-`tools/judge.mts`. The judge's job is to find a specific defect and accept unless
-it can name one. Record each verdict in `research/level<n>-judge.jsonl` as
+**Judge.** Current session judging uses GLM 5.2 through the ofox API at `xhigh`
+reasoning, with `tools/judge.mts`, `briefs/codex-judge.md` (historical filename),
+and `briefs/judge-conventions.txt`. The judge's job is to find a specific defect
+and accept unless it can name one. Record each verdict in
+`research/level<n>-judge.jsonl` as
 `{id, model, keep, reason, at}`.
 
 Dependencies cited by an item are treated as separately-verified, so the judge
@@ -693,15 +749,31 @@ A strict refuter tends to surface a different nitpick on each stochastic run of
 the same long proof, so treat repeated re-judging as sampling, not as a verdict.
 The owner audit, not judge unanimity, is the convergence criterion.
 
+Before the owner audit/publish pause, `LEVELS.md` step 9 produces a concise but
+complete fatal-error report. It groups every publish-blocking mathematical
+defect by type (logical inference, dependency citation, false/overstrong
+definition/title/Statement/theorem, missing hypothesis or choice scope, invalid
+witness, circular/forward/out-of-scope use) and location (Statement/title,
+proof/refutation, Facts/dependency metadata, Remark, page prose/summary). Every
+entry names its item/page and how it was resolved: dropped/deferred, restated,
+proof replaced or repaired, prose repaired, dependencies corrected, hypothesis
+restored, or a new lemma/result added. The report is concise by grouping, never
+by omitting a fatal defect; the detailed Beta/Alpha/judge/touch ledgers support
+it.
+
 ---
 
 ## Step 6. Build the page, serve it locally, view it over SSH
 
 **Compose the page.** Write one page file that lists the items in reading order
-plus the examples, and a short authored summary. The summary is the only
-hand-written prose on the page. Structure it well: compress shared foundational
-layers into a single short paragraph that references the sibling page instead of
-re-deriving them, and break the novel layer into several small paragraphs.
+plus the examples. For every A page, the authored summary has exactly two
+nonempty prose paragraphs, each under 150 words. The first gives mathematical
+background and names the definitions and results from declared dependencies that
+are used. The second names the main definitions and theorems developed on the
+page and explains their general logical progression. A B/examples page has no
+authored summary body. A summaries remain subject to SCHEMA §6: no counts,
+self-ranking, unsupported reading-position claims, or surveys of what other
+pages contain.
 
 The rendered page is always five fixed sections: Prerequisites (mechanical and
 page-level: links to the other pages that prove this page's dependency closure,
@@ -756,9 +828,9 @@ directory directly.
    The content repo commits to `main`; a fix to the app repo goes on whatever
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
-   apify (step-0 scraping, zero when nothing was scraped) plus ofox authoring
-   spend. GPT 5.6 Sol Beta/Alpha/judge work runs on the Codex subscription plan
-   and is not counted as ofox spend.
+   apify (step-0 scraping, zero when nothing was scraped) plus ofox judge spend.
+   GPT 5.6 Terra authoring and GPT 5.6 Sol Beta/Alpha work run on the Codex
+   subscription plan and are not counted as ofox spend.
 
 ---
 

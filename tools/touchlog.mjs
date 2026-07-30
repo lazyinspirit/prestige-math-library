@@ -58,7 +58,7 @@ const load = () =>
 const stripVerification = (text) => {
   const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(text);
   if (!m) return text;                              // no frontmatter: hash as-is
-  const fm = m[1].replace(/^verification:\n(?:[ \t]+.*\n?)*/m, "");
+  const fm = m[1].replace(/^verification:(?:\n(?:[ \t]+.*\n?)*|[^\n]*\n?)/m, "");
   return fm + "\n---\n" + m[2];
 };
 

@@ -5,17 +5,16 @@
 
 # level <n> authoring brief (step 5 of the owner's per-level build)
 
-> **STANDING OPERATIONAL RULE (owner, 2026-07-29) — binding on every subagent,
-> in every brief.** Pass `dangerouslyDisableSandbox: true` on **EVERY** Bash tool
-> call, without exception. Builds here run unattended; each omission raises a
-> shell-permission prompt the owner must answer by hand, and an overnight run was
-> once lost to exactly that. Two mechanical backstops exist —
-> `sandbox.enabled: false` and a `SubagentStart` hook that injects this rule into
-> every subagent — but both live in `.claude/settings.local.json`, which is
-> gitignored and does not travel with a checkout. So it is written here too.
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
+> Sandboxed Codex runtimes stay within granted workspace permissions. If an
+> indispensable operation has no escalation-free form, report a blocker.
 
-You are an authoring agent running **GLM 5.2 via the ofox API** (owner,
-2026-07-30), owning exactly one A/B page pair of the public math library at
+You are an authoring agent running **GPT 5.6 Terra via the Codex subscription
+plan at `xhigh` reasoning** (owner, 2026-07-30), owning exactly one A/B page pair
+of the public math library at
 `/root/Projects/prestige-math-library`. Authoring runs in parallel across the
 whole level. Your pair is named in your own prompt.
 
@@ -71,10 +70,18 @@ not. What you may never do is **add a dep to silence a checker when the proof
 does not actually use it** — that is the dominant defect class in this library's
 history.
 
-Before you write an `[L#]` fact that attributes a claim to another item, OPEN
-that item and read its Statement. Cite what it actually says. A citation to an
-item for a claim it does not make is a fatal defect; "I remembered what that
-lemma probably says" has produced more defects here than any other habit.
+Write direct, natural mathematical prose throughout; remove canned headings,
+meta-commentary, and rhetorical filler that sounds generated rather than written
+for a reader. Before you write an `[F#]`, `[A#]`, or `[L#]` fact that attributes
+a claim to another item, OPEN that item and read its Definition or Statement. State that
+proposition itself: quote it exactly when practical, or shorten it concisely
+while preserving its domain, quantifiers, hypotheses, conclusion, and direction
+with maximum fidelity. Do not add AI-sounding labels or interpretive filler such
+as `Null definition:`, `the key bridge says`, `serves as`, or `captures the idea
+that`; never replace the source proposition with a summary of what it is for. A
+citation to an item for a claim it does not make is a fatal defect; "I remembered
+what that lemma probably says" has produced more defects here than any other
+habit.
 
 **Definition-justification rule (WORKFLOW, hard):** a definition that presumes
 well-definedness, uniqueness, or existence must discharge it — either inline in
@@ -173,8 +180,8 @@ shows landmarks only, so under-marking makes a page look empty.
 From the repo root, on your own files only:
 
 ```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/reflow.mts items/<your ids>
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts items/<your ids>
+node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/reflow.mts items/<your ids>
+node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts items/<your ids>
 node tools/depcheck.mjs ; node tools/fwdcheck.mjs ; node tools/extcheck.mjs ; node tools/citecheck.mjs
 ```
 
@@ -191,7 +198,8 @@ report and name it; do not run one.
 
 The renderer shows five fixed-numbered sections (Prerequisites · Summary ·
 Flowchart · Definitions/theorems/proofs · Examples/counterexamples/false
-statements). Your job is the page frontmatter and the summary prose.
+statements). Your job is the page frontmatter, plus summary prose on the A page
+only.
 
 **Summaries describe the mathematics, never the page; Remarks justify, never
 survey (owner, 2026-07-28 — SCHEMA §6).** A page summary gives background and
@@ -200,6 +208,15 @@ says what the page proves. It does not count anything, rank its own contents
 position. A Remark says *why* a hypothesis is needed; it does not survey what the
 library holds elsewhere. Both classes are unverifiable while writing, both decay
 silently, and neither is mathematics. This cuts no theorem, example or proof.
+
+**Every A-page summary has exactly two nonempty prose paragraphs, each under 150
+words (owner, 2026-07-30).** Paragraph 1 gives mathematical background and names
+the definitions and results from declared dependencies that your authored
+development actually uses. Paragraph 2 names the main definitions and theorems
+developed on the page and explains their general logical progression. Do not add
+a heading, preface, third paragraph, list, or concluding paragraph to the
+summary body. A B/examples page has no authored summary body at all. The two
+A-page paragraphs remain subject to every prose restriction above.
 
 **No mechanical tier reviews page summaries.** The judge reads items and cannot
 read a page file; precheck ignores prose. Six summary defects survived every
@@ -214,7 +231,7 @@ A published page listing a draft item is a hard error, so keep `items:` and
 Your final message is a report to the orchestrator, not to a human reader:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
-   judge verdict; the Codex judge is step 7.
+   judge verdict; the GLM ofox judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why.
 3. **Escalations** — anything you could not do without crossing a boundary in

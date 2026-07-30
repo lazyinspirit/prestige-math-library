@@ -8,6 +8,7 @@ deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-
        def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-hausdorff-space,
        def-interior-closure-boundary-top, def-topological-space]
 justified_by: []
+forward_refs: [fs-every-regular-space-is-normal]
 aliases: []
 landmark: false
 short: "Sierpinski space in the hierarchy"
@@ -17,8 +18,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -92,7 +93,7 @@ and fails the axiom immediately above it.
 
 ## Remarks
 
-- **Normality without $T_1$ does not imply regularity.** This space is normal and not regular. Other combinations occur too: the indiscrete two-point space is regular and normal but not $T_0$, and the cofinite topology on an infinite set is $T_1$ and neither regular nor normal, both worked on this page. Whether regularity implies normality is a question this library leaves open, no witness being reachable from the material available here ([[rem-separation-axiom-conventions]]); nothing above asserts that the two conditions are incomparable. Only with $T_1$ does normality imply regularity ([[def-normal-and-t4-spaces]]).
+- **Normality without $T_1$ does not imply regularity.** This space is normal and not regular. Other combinations occur too: the indiscrete two-point space is regular and normal but not $T_0$, and the cofinite topology on an infinite set is $T_1$ and neither regular nor normal, both worked on this page. This page leaves the converse open; it is refuted later by [[fs-every-regular-space-is-normal]]. Only with $T_1$ does normality imply regularity ([[def-normal-and-t4-spaces]]).
 
 - **Why "the closed point" is the right name for $a$.** $\{a\}$ is closed and $\{b\}$ is not, so the two points of $S$ are not interchangeable even though the set has only two elements; the labelling is fixed once and for all in [[def-standard-topologies]].
 

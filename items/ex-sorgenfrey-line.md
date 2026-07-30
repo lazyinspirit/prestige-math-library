@@ -12,6 +12,7 @@ deps: [thm-basis-criterion, def-topology-basis-subbasis, def-topological-space, 
        lem-of-naturals-positive, lem-of-add-order, cor-of-one-positive, lem-nat-nonzero-is-successor,
        def-neighbourhood-top]
 justified_by: []
+forward_refs: [def-separable-space]
 aliases: [ex-lower-limit-topology]
 landmark: false
 short: "the Sorgenfrey line"
@@ -21,13 +22,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-27
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -66,8 +62,8 @@ of bounded half-open intervals of $\mathbb{R}$ ([[def-interval]]). Then:
    $y_k := x - 1/(k+1)$ converges to $x$ in the usual topology and does not
    converge to $x$ in $\mathcal{T}_{\mathrm{S}}$.
 
-The word *separable* is not used here: no item in this library defines it, and
-claim 4 says in full what it would abbreviate.
+At this point in the reading order, separability has not yet been defined; the
+later definition [[def-separable-space]] abbreviates claim 4.
 
 ## Facts & Assumptions
 

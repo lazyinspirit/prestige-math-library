@@ -5,13 +5,16 @@
 
 # Beta-<n>-<i> brief — step 6a batch audit
 
-> **STANDING OPERATIONAL RULE (owner, 2026-07-29) — binding on every subagent,
-> in every brief.** Pass `dangerouslyDisableSandbox: true` on **EVERY** Bash tool
-> call, without exception. Builds here run unattended; each omission raises a
-> shell-permission prompt the owner must answer by hand.
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
+> Sandboxed Codex runtimes stay within granted workspace permissions. If an
+> indispensable operation has no escalation-free form, report a blocker.
 
 > **Model/routing rule (owner, 2026-07-30).** You are **GPT 5.6 Sol via the Codex
-> subscription plan**. Do not run GPT-family work through ofox.
+> subscription plan at `xhigh` reasoning**. Do not run GPT-family work through
+> ofox.
 
 You scaffolded this batch at steps 1–2. The pages have since been authored. Your
 job now is to audit your own batch exhaustively and fix what you find.
@@ -23,10 +26,21 @@ For **every proof item in your batch**:
 1. Read every proof step.
 2. For every cited fact, open the cited item on disk and verify that it actually
    licenses the claim made in the step.
-3. Verify the dependency list: each dependency is necessary, allowed by plan
+3. Enforce direct, natural mathematical prose throughout, removing canned
+   headings, meta-commentary, and rhetorical filler. Enforce maximum citation
+   fidelity: each `[F#]`, `[A#]`, or
+   `[L#]` fact must state the cited Definition or Statement itself, exactly when
+   practical or as a concise shortening that preserves its domain, quantifiers,
+   hypotheses, conclusion, and direction. Replace AI-sounding labels or filler
+   such as `Null definition:` and `the key bridge says`.
+4. Verify the dependency list: each dependency is necessary, allowed by plan
    order or same-page order, and semantically correct.
-4. Check titles and Statements against what the proof actually proves.
-5. Re-read every Remark and page summary with proof-step suspicion.
+5. Check titles and Statements against what the proof actually proves.
+6. Re-read every Remark and page summary with proof-step suspicion. Verify every
+   A-page summary has exactly two nonempty prose paragraphs under 150 words each:
+   mathematical background and actually used declared dependencies first; main
+   definitions, theorems, and logical progression second. Verify every B page
+   has no authored summary body.
 
 For **examples, counterexamples, false statements and remarks**, verify the
 mathematical claim, the witness, and every dependency citation with the same
@@ -62,6 +76,13 @@ Return a structured report:
 4. Anything unresolved or outside your write boundary.
 5. **Coverage statement:** list the batch items and state whether every proof
    step and dependency citation was read. Name any exception explicitly.
+6. **Fatal-error ledger for step 9:** for every publish-blocking mathematical
+   error, record the affected id/file, defect type, location
+   (title/Statement, proof/refutation, Facts/dependencies, Remark, or page
+   prose/summary), and exact fix disposition (drop/defer, restate, repair/replace
+   proof, repair prose, correct dependencies/hypotheses, or add a lemma/result).
+   Minor mechanical or 30-second-gap edits are not fatal; do not inflate this
+   ledger, but do not omit a fatal defect.
 
 Triage remains: mathematical accuracy, logical validity and correct citation are
 non-negotiable; minor citational quirks and 30-second gaps are not worth a repair

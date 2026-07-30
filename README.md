@@ -34,10 +34,12 @@ from the page's items by the renderer (never hand-set):
   `session` (authored in coding sessions under the per-level workflow).
 - **Verification** (accumulative): mechanical precheck (always, both origins);
   cross-family LLM judge; owner audit (always — it gates `status: published`).
-  Current session workflow (owner, 2026-07-30): authoring uses **GLM 5.2 via
-  ofox**, while Beta/Alpha audit and the independent judge use **GPT 5.6 Sol via
-  the Codex subscription plan**. GPT-family models are never run through ofox for
-  this workflow. The production pipeline keeps its own generator/judge lineups in
+  Current session workflow (owner, 2026-07-30): authoring uses **GPT 5.6 Terra
+  via the Codex subscription plan**, Beta/Alpha audit uses **GPT 5.6 Sol via the
+  Codex subscription plan**, and the independent judge uses **GLM 5.2 via the
+  ofox API**. All use `xhigh` reasoning. GPT-family models are never run through
+  ofox for this workflow. The production pipeline keeps its own generator/judge
+  lineups in
   the app repo; do not use a generator-family model to judge its own pipeline
   output. `deepseek/deepseek-v4-flash` remains barred as judge: it passed an
   injected, blatantly false claim.

@@ -5,17 +5,15 @@
 
 # Level-<n> scaffolding brief (steps 1 and 2 of the owner's per-level build)
 
-> **STANDING OPERATIONAL RULE (owner, 2026-07-29) — binding on every subagent,
-> in every brief.** Pass `dangerouslyDisableSandbox: true` on **EVERY** Bash tool
-> call, without exception. Builds here run unattended; each omission raises a
-> shell-permission prompt the owner must answer by hand, and an overnight run was
-> once lost to exactly that. Two mechanical backstops exist —
-> `sandbox.enabled: false` and a `SubagentStart` hook that injects this rule into
-> every subagent — but both live in `.claude/settings.local.json`, which is
-> gitignored and does not travel with a checkout. So it is written here too.
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
+> Sandboxed Codex runtimes stay within granted workspace permissions. If an
+> indispensable operation has no escalation-free form, report a blocker.
 
-You are **Beta-<n>-<i>**, running **GPT 5.6 Sol via the Codex subscription plan**
-(owner, 2026-07-30), scaffolding level <n> of the public math library at
+You are **Beta-<n>-<i>**, running **GPT 5.6 Sol via the Codex subscription plan
+at `xhigh` reasoning** (owner, 2026-07-30), scaffolding level <n> of the public math library at
 `/root/Projects/prestige-math-library`. Betas run in parallel. Your batch is
 named in your own prompt.
 
@@ -36,6 +34,30 @@ defects in the prose while you are the one holding it in mind.
 
 Then read, on disk, every published item you intend to cite. Not the scaffold's
 description of it — the item.
+
+### Standing web-research and published-library rule
+
+**Owner instruction, 2026-07-30, binding in every future session.** Before you
+construct an A/B pair's item list, search reputable mathematical sources on the
+web for the relevant definitions, theorem and corollary statements,
+counterexamples, and proof strategies. Prefer authoritative or scholarly sources
+such as peer-reviewed or open textbooks, university-hosted notes, the Stacks
+Project, and the Encyclopedia of Mathematics. Verify every URL you record. In
+your notes, include a concise source ledger saying which planned material each
+source supports and flag every convention disagreement you found. Do not copy
+source prose, fabricate a source, or describe session-authored content as
+scraped.
+
+You have read access to the full published `items/` and `library/` corpus. Use
+it. Search the whole published pool before minting an id. For every external
+dependency you propose, open the actual item and verify `status: published`, the
+exact Definition or Statement, its domain and quantifiers, hypotheses,
+conclusion, and direction. Every load-bearing dependency must be either an
+earlier item inside this A/B pair or an actually published item on a strictly
+earlier page. A reputable web source does not substitute for an unbuilt library
+dependency. If the dependency is unavailable, decompose or rescope the result,
+or drop it with a precise note saying what would license it under the
+self-contained-scope rule.
 
 ## 1. What you produce, and the ONLY files you may write
 
@@ -111,6 +133,36 @@ because `absolute-convergence-and-rearrangement` (order 36) had an empty item
 list. If your batch scaffolds order 36, its "absolute implies convergent" slot
 MUST reuse or alias that id. Minting a second is an error.
 
+## 4a. Per-pair proof decomposition and mathematical richness
+
+Apply this pass **separately to every A/B pair in your batch** before finalising
+its item list.
+
+1. **Break long proofs into intermediate lemmas.** If a planned theorem or lemma
+   would contain several independently nameable subarguments, repeated technical
+   steps, or a long chain whose internal claims deserve separate verification,
+   scaffold those claims as earlier lemmas with explicit dependencies. The author
+   must receive a sequence of focused proofs, not one monolith. Do not manufacture
+   one-line microlemmas for routine algebra; decomposition must improve reuse,
+   auditability, or mathematical exposition.
+2. **Run a corollary pass.** After placing each main theorem or substantial lemma,
+   ask which useful immediate consequences now follow cheaply. Add mathematically
+   meaningful corollaries with short honest proofs and explicit dependencies.
+   Corollaries enrich the development, but restatements, duplicates, and cosmetic
+   variants do not.
+3. **Use the larger page ceiling correctly.** An A page may now carry up to **100
+   total items** before `validate-plan` emits its size warning, raised from 60.
+   One hundred is a review ceiling, **not a target or minimum**: never pad a page to
+   approach it. Conversely, never drop a valuable definition, proposition,
+   theorem, lemma, corollary, example, counterexample, false statement, or remark
+   merely for ergonomics or to keep the list short. If a mathematically coherent
+   page genuinely exceeds 60, retain the valuable results and report whether a
+   structural page split would improve the reading order; do not silently prune.
+
+Record every decomposition lemma and every added corollary in the per-page item
+list and in your new-id report, including what larger result it supports or what
+immediate consequence it captures.
+
 ## 5. The defect classes this library actually ships
 
 Every one was found in published or near-published text here.
@@ -124,8 +176,15 @@ Every one was found in published or near-published text here.
 2. **A natural number here is a von Neumann natural, i.e. a set**, so it is not
    an element of ℝ. `1/k` means `1/\iota(k)` — see `items/def-canonical-natural.md`.
    Scaffold titles accordingly.
-3. **Citing an item for a claim it does not make.** The dominant defect class.
-   Open the item; read its Statement; cite what it says.
+3. **Citing or paraphrasing an item inaccurately.** Write direct, natural
+   mathematical prose, without canned headings, meta-commentary, or rhetorical
+   filler that sounds generated rather than written for a reader. Open the item
+   and read its Definition or Statement. State that proposition itself: quote it exactly when
+   practical, or shorten it concisely while preserving its domain, quantifiers,
+   hypotheses, conclusion, and direction with maximum fidelity. Do not propose
+   AI-sounding labels or interpretive filler such as `Null definition:`, `the key
+   bridge says`, `serves as`, or `captures the idea that`; never replace the
+   proposition with a summary of what it is for.
 4. **Counts stated in prose.** "Seven items on this page depend on it" was
    published when the truth was nineteen. Nobody re-counts a count.
 5. **Scope-denial claims that decay.** Never write "this library does not
@@ -197,22 +256,34 @@ splicing, which is my job — so report what you believe the result will be, and
 I will run the authoritative gate (amendment 6: no stage advances on an agent's
 report alone).
 
-## 9. What to report back (this is step 3, and it goes to the owner)
+## 9. What to report back (input to orchestrator step 3)
 
 Your final message is a report to the orchestrator, not to a human reader.
 
 1. **Per-page item list** — every id, kind and title, in reading order, with a
    count I can recount from the list. Never a summary fraction.
-2. **Findings**, each stated as ONE recommendation the owner can approve, defer
-   or ask a follow-up on. Order them by severity. For each: what is wrong, what
-   you propose, and what breaks if it is deferred. The owner iterates these one
-   at a time, so do not bundle two decisions into one bullet.
-3. **Forward references** you kept, with the target page and why it was
+2. **Per-pair richness report** — for each A/B pair, name every long proof you
+   decomposed and its intermediate lemmas; list the useful corollaries added;
+   state explicitly that you performed both passes even when either found
+   nothing; and report any page above the 100-item review ceiling without pruning
+   it to silence the warning.
+3. **Findings**, each stated as one recommendation for the orchestrator to
+   approve or decline. Order them by severity. For each: what is wrong, what you
+   propose, and what breaks if it is declined. Do not bundle independent
+   decisions. The orchestrator verifies from disk and decides by this priority:
+   mathematical accuracy and correct dependency citation are non-negotiable;
+   then minimize forward references; then preserve mathematical richness.
+4. **Forward references** you kept, with the target page and why it was
    unavoidable.
-4. **New ids you propose**, with the grep you ran to confirm they do not exist.
-5. **Cross-batch dependencies** — anything your batch needs from the other
+5. **New ids you propose**, with the grep you ran to confirm they do not exist.
+6. **Cross-batch dependencies** — anything your batch needs from the other
    batch of level <n>, or that you believe the other batch will need from you.
-6. **An honest confidence statement**, including what you did NOT verify.
+7. **An honest confidence statement**, including what you did NOT verify.
+8. **Web research ledger and dependency-closure statement** — working URLs,
+   which planned definitions/results/proof strategies they support, convention
+   disagreements, and an explicit statement that every proposed published
+   dependency was opened from disk and every load-bearing dependency is internal
+   to the pair or available in published content, naming any exception.
 
 Do not claim a gate passed that you did not run. An accurate partial report is
 worth more than a tidy false one.

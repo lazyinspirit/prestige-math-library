@@ -3,15 +3,19 @@
 
 # Alpha-<n> brief — steps 4 and 6
 
-> **STANDING OPERATIONAL RULE (owner, 2026-07-29) — binding on every subagent,
-> in every brief.** Pass `dangerouslyDisableSandbox: true` on **EVERY** Bash tool
-> call, without exception.
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
+> Sandboxed Codex runtimes stay within granted workspace permissions. If an
+> indispensable operation has no escalation-free form, report a blocker.
 >
 > **Pass it on.** You dispatch/brief Beta readers at step 6; put this rule in
 > their prompts.
 
 > **Model/routing rule (owner, 2026-07-30).** You are **GPT 5.6 Sol via the Codex
-> subscription plan**. Do not run GPT-family work through ofox.
+> subscription plan at `xhigh` reasoning**. Do not run GPT-family work through
+> ofox.
 
 Read `LEVELS.md`, `CLAUDE.md`, `SCHEMA.md`, `ARCHITECTURE.md`, and the relevant
 batch files before acting.
@@ -21,6 +25,16 @@ batch files before acting.
 Non-negotiable: mathematical accuracy, logical validity, and correct citation of
 dependencies. Spend no effort on harmless citation quirks or proof gaps a
 competent reader closes in 30 seconds.
+
+Require direct, natural mathematical prose throughout, without canned headings,
+meta-commentary, or rhetorical filler that sounds generated rather than written
+for a reader. For every `[F#]`, `[A#]`, or `[L#]` fact you write or audit, require
+maximum fidelity: state the cited Definition or Statement
+itself, exactly when practical or as a concise shortening that preserves its
+domain, quantifiers, hypotheses, conclusion, and direction. Remove AI-sounding
+labels or interpretive filler such as `Null definition:`, `the key bridge says`,
+`serves as`, and `captures the idea that`. Never substitute a description of
+what a result is for in place of its proposition.
 
 ## Standing boundaries
 
@@ -32,7 +46,7 @@ the owner explicitly instructs otherwise; report suspected published defects.
 Never rename an id on `main`.
 
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
-Codex judge is step 7.
+GLM ofox judge is step 7.
 
 ## Stage 1 — step 4: propagate approved changes
 
@@ -53,8 +67,12 @@ citation in their batch, fix defects, and report coverage.
 
 After all Beta reports arrive, verify every reported mistake and fix from disk:
 changed items, page files, dependency lists, added/deleted results, stale judge
-blocks, and local gate output. Accept, amend, revert, or extend fixes as needed.
-If you add a result, personally author its proof.
+blocks, and local gate output. Verify every A-page summary has exactly two
+nonempty prose paragraphs under 150 words each: mathematical background and
+actually used declared dependencies first; main definitions, theorems, and
+logical progression second. Every B page must have no authored summary body.
+Accept, amend, revert, or extend fixes as needed. If you add a result, personally
+author its proof.
 
 ### 6c. Audit cross-batch and cross-level references
 
@@ -83,6 +101,14 @@ citation.
    that you personally authored the proof.
 5. Twice-touched items that now require orchestrator personal audit.
 6. Honest remaining gaps, if any.
+7. A consolidated **fatal-error ledger for step 9**. For every
+   publish-blocking mathematical error found by either Beta or Alpha, record the
+   affected id/file, defect type, location (title/Statement, proof/refutation,
+   Facts/dependencies, Remark, or page prose/summary), and exact fix disposition
+   (drop/defer, restate, repair/replace proof, repair prose, correct
+   dependencies/hypotheses, or add a lemma/result). Reconcile duplicates across
+   Beta reports without losing an affected id. Exclude merely mechanical and
+   30-second-gap edits.
 
 Fatal defects must be fixed, not merely listed, unless outside your write
 boundary or requiring an owner decision.

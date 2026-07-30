@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-suslin-hypothesis-independent]
 justified_by: []
-forward_refs: []
+forward_refs: [def-separable-space]
 aliases: []
 landmark: false
 short: "Settled: L Suslin implies L x L is not ccc (Kunen 1980, II Lemma 4.3); previously flagged unverified, the check has now been done"
@@ -68,9 +68,9 @@ and with $(a_\alpha, c_\alpha)$ avoiding every $b_\xi$ already chosen, which is
 possible because $L$ is not separable. The $\omega_1$ many open rectangles
 $V_\alpha = (a_\alpha, b_\alpha) \times (b_\alpha, c_\alpha)$ are then nonempty
 and pairwise disjoint, so $L^2$ is not ccc. The obstacle here is the setting, not
-the difficulty: the library now has the order topology and $\omega_1$ with
-recursion along it, and has no notion of separability at all — that last conjunct
-is the one that keeps the argument out of reach.
+the difficulty: separability is developed later in [[def-separable-space]], but
+this item still records rather than proves Kunen's specialised $\omega_1$-length
+recursion.
 
 **Relation to the partial-order form.** [[rem-suslin-hypothesis-independent]]
 records, with citations, that a Suslin line yields a ccc *partial order* whose

@@ -15,8 +15,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -64,7 +64,7 @@ uses of any choice principle in the proof; the inclusions already proved in
 
 [L2] $p \in \overline{A}$ if and only if every neighbourhood of $p$ meets $A$ ([[thm-closure-characterisation-top]], clause (b)).
 
-[L3] A finite intersection of neighbourhoods of $p$ is a neighbourhood of $p$, every point lies in each of its neighbourhoods, and $X$ itself is a neighbourhood of $p$ ([[def-neighbourhood-top]]).
+[L3] A finite intersection of neighbourhoods of $p$ is a neighbourhood of $p$; every superset of a neighbourhood of $p$ is a neighbourhood of $p$; every point lies in each of its neighbourhoods; and $X$ itself is a neighbourhood of $p$ ([[def-neighbourhood-top]]).
 
 [L4] A nonempty at most countable set is the image of a surjection from $\mathbb{N}$ ([[lem-countable-iff-surjection-from-n]]).
 
@@ -102,4 +102,4 @@ uses of any choice principle in the proof; the inclusions already proved in
 
 - **Why the base is made decreasing.** Without the nesting of step 2.1 the chosen points $x_k \in N_k \cap A$ need not converge to $p$: the sets $N_k$ may oscillate, and a point chosen from a large $N_k$ carries no information about membership in a small one. The running intersections repair this and cost only a recursion.
 
-- **The real-analysis track states the same phenomenon for function limits, at the same cost in choice.** $\mathbb{R}$ with its usual topology is metrizable ([[def-metrizable-space]], [[lem-real-line-is-a-metric-space]]), hence first countable by the bullet above, and the Heine criterion [[thm-sequential-criterion-for-function-limits]] is the function-limit form of this theorem there: sequences detect the $\varepsilon$-$\delta$ limit at a limit point of the domain, its sequence-to-$\varepsilon$ direction spends countable choice on a shrinking-neighbourhood selection exactly as the proof above does, and its other direction is choice-free ([[rem-heine-criterion-choice-cost]]). Neither result cites the other, and neither is proved from the other: the criterion is proved from the order and the absolute value of $\mathbb{R}$ directly. They are one phenomenon seen twice, and the phenomenon is that sequences suffice exactly where a countable neighbourhood base is available.
+- **The real-analysis track states the same phenomenon for function limits, at the same cost in choice.** $\mathbb{R}$ with its usual topology is metrizable ([[def-metrizable-space]], [[lem-real-line-is-a-metric-space]]), hence first countable by the bullet above, and the Heine criterion [[thm-sequential-criterion-for-function-limits]] is the function-limit form of this theorem there: sequences detect the $\varepsilon$-$\delta$ limit at a limit point of the domain, its sequence-to-$\varepsilon$ direction spends countable choice on a shrinking-neighbourhood selection exactly as the proof above does, and its other direction is choice-free ([[rem-heine-criterion-choice-cost]]). Neither result cites the other, and neither is proved from the other: the criterion is proved from the order and the absolute value of $\mathbb{R}$ directly. This is a sufficient first-countable instance of the broader sequential phenomenon, not a characterisation.

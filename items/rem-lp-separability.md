@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-riesz-fischer]
 justified_by: []
-forward_refs: [def-countable]
+forward_refs: [def-countable, def-separable-space]
 aliases: []
 landmark: false
 short: "L^p is separable for finite p over a countably generated measure; L^infinity is not"
@@ -59,10 +59,9 @@ negative half: nothing beyond the displayed computation, once
 $\|\cdot\|_{\infty}$ and the notion of a countable set ([[def-countable]]) are
 available.
 
-**Which page it serves.** The metric spaces page, where separability is defined
-and where $\mathbb{R}^n$ and $C[a,b]$ are shown separable, and the countability
-page, which supplies the notion of countable. The pair of statements above is the
-standard first example of a natural Banach space that is not separable, and it is
+**Which page it serves.** Separability is defined later in
+[[def-separable-space]]. The pair of statements above is the standard first
+example of a natural Banach space that is not separable, and it is
 also why $L^{\infty}$ behaves differently from every $L^p$ with $p$ finite. It is
 not separable, so it has no countable dense subset to run approximation arguments
 on, and the duality stops at it. For $\sigma$-finite $\mu$ the space

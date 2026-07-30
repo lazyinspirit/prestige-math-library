@@ -1,0 +1,42 @@
+---
+id: cor-topological-groups-are-completely-regular
+kind: corollary
+title: "Every topological group is uniformizable, and assuming dependent choice it is completely regular"
+status: published
+origin: session
+deps: [thm-topological-group-uniformities-induce-the-given-topology, thm-uniformizable-iff-completely-regular, def-dependent-choice]
+aliases: []
+landmark: true
+proof_strategy: direct
+verification:
+  precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-31
+  audited: 2026-07-31
+sources:
+  scraped: []
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+pipeline_run: null
+---
+
+## Statement
+
+Every topological group is uniformizable. Assuming dependent choice, every topological group is completely regular.
+
+## Facts & Assumptions
+
+**Given:** A topological group.
+
+[L1] Its left uniformity induces its given topology ([[thm-topological-group-uniformities-induce-the-given-topology]]).
+
+[L2] Under dependent choice, uniformizable spaces are completely regular ([[thm-uniformizable-iff-completely-regular]], [[def-dependent-choice]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The left uniformity of [L1] makes the group uniformizable. [L1]
+
+2.1 Under dependent choice, [L2] applied to step 1.1 makes it completely regular. [step 1.1, L2] ∎

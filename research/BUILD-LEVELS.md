@@ -3,7 +3,7 @@
 
 189 pairs across 31 levels. Build frontier: **level 3**.
 
-A pages: 36 published · 153 unscaffolded
+A pages: 42 published · 147 unscaffolded
 
 **A pair's level is its A page's.** Its B companion always sits exactly one
 level higher, because it requires the A page. **Pairs sharing a level are
@@ -34,51 +34,47 @@ with no blockers is buildable today regardless of its level.
 | 4 | 122 | `limsup-and-subsequential-limits` | real-analysis | 23 | published | 9 | published | — |
 | 4 | 131 | `topology-of-r` | real-analysis | 22 | published | 11 | published | — |
 | 4 | 245 | `ordinal-arithmetic` | foundations | 28 | published | 8 | published | — |
-| 5 | 22 | `inclusion-exclusion-and-the-pigeonhole-principle` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | — |
+| 5 | 22 | `inclusion-exclusion-and-the-pigeonhole-principle` | combinatorics | 21 | published | 10 | published | — |
 | 5 | 26 | `divisibility-gcd-and-bezout` | number-theory | 26 | published | 9 | published | — |
 | 5 | 118 | `completeness-and-uniform-continuity` | topology | 24 | published | 12 | published | — |
 | 5 | 125 | `equivalent-forms-of-completeness` | real-analysis | 21 | published | 10 | published | — |
 | 5 | 127 | `series-and-nonnegative-tests` | real-analysis | 25 | published | 12 | published | — |
 | 5 | 135 | `limits-of-real-functions` | real-analysis | 21 | published | 12 | published | — |
-| 5 | 247 | `cardinal-arithmetic-and-cofinality` | foundations | 0 | unscaffolded | 0 | unscaffolded | — |
+| 5 | 247 | `cardinal-arithmetic-and-cofinality` | foundations | 26 | published | 8 | published | — |
 | 5 | 249 | `topological-spaces-and-continuity` | topology | 26 | published | 14 | published | — |
 | 6 | 28 | `primes-and-the-fundamental-theorem-of-arithmetic` | number-theory | 18 | published | 9 | published | — |
 | 6 | 46 | `rings-subrings-and-integral-domains` | abstract-algebra | 26 | published | 10 | published | — |
 | 6 | 120 | `compactness-in-metric-spaces` | topology | 26 | published | 11 | published | — |
 | 6 | 129 | `absolute-convergence-and-rearrangement` | real-analysis | 26 | published | 14 | published | — |
 | 6 | 133 | `cantor-set-baire-and-measure-zero` | real-analysis | 24 | published | 12 | published | — |
-| 6 | 191 | `chains-antichains-sperner-and-dilworth` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | inclusion-exclusion-and-the-pigeonhole-principle |
+| 6 | 191 | `chains-antichains-sperner-and-dilworth` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | — |
 | 6 | 251 | `subspaces-products-and-quotients` | topology | 24 | published | 13 | published | — |
-| 7 | 30 | `congruences-and-the-chinese-remainder-theorem` | number-theory | 0 | unscaffolded | 0 | unscaffolded | inclusion-exclusion-and-the-pigeonhole-principle |
+| 7 | 30 | `congruences-and-the-chinese-remainder-theorem` | number-theory | 0 | unscaffolded | 0 | unscaffolded | — |
 | 7 | 72 | `vector-spaces-and-subspaces` | linear-algebra | 17 | published | 8 | published | — |
 | 7 | 137 | `continuity-ivt-evt-and-uniform-continuity` | real-analysis | 21 | published | 10 | published | — |
 | 7 | 203 | `incidence-algebras-and-mobius-inversion` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | chains-antichains-sperner-and-dilworth |
-| 7 | 207 | `graphs-walks-and-connectivity` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | inclusion-exclusion-and-the-pigeonhole-principle, chains-antichains-sperner-and-dilworth |
-| 7 | 253 | `connectedness` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
-| 7 | 255 | `compactness` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
+| 7 | 207 | `graphs-walks-and-connectivity` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | chains-antichains-sperner-and-dilworth |
+| 7 | 253 | `connectedness` | topology | 28 | published | 8 | published | — |
 | 7 | 261 | `separation-axioms` | topology | 28 | published | 8 | published | — |
-| 7 | 273 | `countability-axioms-and-cardinal-functions` | topology | 0 | unscaffolded | 0 | unscaffolded | cardinal-arithmetic-and-cofinality |
+| 7 | 273 | `countability-axioms-and-cardinal-functions` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
 | 7 | 283 | `function-space-topologies` | topology | 24 | published | 9 | published | — |
 | 8 | 32 | `cosets-and-lagranges-theorem` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | congruences-and-the-chinese-remainder-theorem |
 | 8 | 74 | `linear-independence-bases-and-dimension` | linear-algebra | 20 | published | 8 | published | — |
 | 8 | 209 | `trees-forests-and-spanning-trees` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | graphs-walks-and-connectivity |
-| 8 | 259 | `nets-and-filters` | topology | 0 | unscaffolded | 0 | unscaffolded | compactness |
-| 8 | 263 | `hausdorff-via-the-diagonal` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
-| 8 | 267 | `urysohn-lemma-and-tietze` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
-| 8 | 279 | `uniform-spaces` | topology | 0 | unscaffolded | 0 | unscaffolded | compactness |
+| 8 | 255 | `compactness` | topology | 31 | published | 8 | published | — |
 | 9 | 34 | `normal-subgroups-and-quotient-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | cosets-and-lagranges-theorem |
 | 9 | 151 | `monotone-functions-and-discontinuities` | real-analysis | 32 | published | 12 | published | — |
 | 9 | 211 | `eulerian-and-hamiltonian-graphs` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | trees-forests-and-spanning-trees |
-| 9 | 265 | `hereditary-and-productive-separation` | topology | 0 | unscaffolded | 0 | unscaffolded | hausdorff-via-the-diagonal, compactness |
-| 9 | 269 | `partitions-of-unity-and-paracompactness` | topology | 0 | unscaffolded | 0 | unscaffolded | urysohn-lemma-and-tietze, compactness |
-| 9 | 271 | `tychonoff-embedding-and-stone-cech` | topology | 0 | unscaffolded | 0 | unscaffolded | urysohn-lemma-and-tietze, nets-and-filters |
+| 9 | 259 | `nets-and-filters` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
+| 9 | 263 | `hausdorff-via-the-diagonal` | topology | 13 | published | 8 | published | — |
+| 9 | 279 | `uniform-spaces` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
 | 10 | 36 | `group-homomorphisms-and-the-isomorphism-theorems` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | normal-subgroups-and-quotient-groups |
 | 10 | 48 | `ideals-and-quotient-rings` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | normal-subgroups-and-quotient-groups |
 | 10 | 153 | `the-derivative-and-mean-value-theorems` | real-analysis | 19 | published | 10 | published | — |
 | 10 | 159 | `the-riemann-integral` | real-analysis | 18 | published | 10 | published | — |
 | 10 | 213 | `matchings-covers-menger-and-network-flows` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | eulerian-and-hamiltonian-graphs, chains-antichains-sperner-and-dilworth |
-| 10 | 275 | `metrization-theorems` | topology | 0 | unscaffolded | 0 | unscaffolded | countability-axioms-and-cardinal-functions, partitions-of-unity-and-paracompactness |
-| 10 | 281 | `uniform-completeness-and-samuel-compactification` | topology | 0 | unscaffolded | 0 | unscaffolded | uniform-spaces, tychonoff-embedding-and-stone-cech |
+| 10 | 265 | `hereditary-and-productive-separation` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
+| 10 | 267 | `urysohn-lemma-and-tietze` | topology | 13 | published | 8 | published | — |
 | 11 | 38 | `cyclic-groups-and-direct-products` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | group-homomorphisms-and-the-isomorphism-theorems |
 | 11 | 42 | `group-actions-and-cayleys-theorem` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | group-homomorphisms-and-the-isomorphism-theorems |
 | 11 | 50 | `euclidean-domains-pids-and-unique-factorisation` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | ideals-and-quotient-rings |
@@ -88,7 +84,8 @@ with no blockers is buildable today regardless of its level.
 | 11 | 155 | `darboux-lhopital-and-taylor` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | — |
 | 11 | 161 | `properties-of-the-integral-and-the-working-ftc` | real-analysis | 20 | published | 13 | published | — |
 | 11 | 215 | `graph-colouring` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | matchings-covers-menger-and-network-flows |
-| 11 | 277 | `complete-metrizability-and-baire` | topology | 0 | unscaffolded | 0 | unscaffolded | metrization-theorems |
+| 11 | 269 | `partitions-of-unity-and-paracompactness` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
+| 11 | 271 | `tychonoff-embedding-and-stone-cech` | topology | 0 | unscaffolded | 0 | unscaffolded | nets-and-filters |
 | 12 | 40 | `the-structure-of-finite-abelian-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | cyclic-groups-and-direct-products |
 | 12 | 44 | `symmetric-groups-and-the-sign-homomorphism` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | group-actions-and-cayleys-theorem |
 | 12 | 52 | `polynomial-rings-and-roots` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | euclidean-domains-pids-and-unique-factorisation |
@@ -98,7 +95,9 @@ with no blockers is buildable today regardless of its level.
 | 12 | 163 | `bounded-variation-and-riemann-stieltjes` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | — |
 | 12 | 165 | `improper-integrals` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | — |
 | 12 | 167 | `rn-as-a-normed-space` | real-analysis | 22 | published | 12 | published | — |
-| 12 | 217 | `ramsey-theory` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | graph-colouring, inclusion-exclusion-and-the-pigeonhole-principle |
+| 12 | 217 | `ramsey-theory` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | graph-colouring |
+| 12 | 275 | `metrization-theorems` | topology | 0 | unscaffolded | 0 | unscaffolded | countability-axioms-and-cardinal-functions, partitions-of-unity-and-paracompactness |
+| 12 | 281 | `uniform-completeness-and-samuel-compactification` | topology | 0 | unscaffolded | 0 | unscaffolded | uniform-spaces, tychonoff-embedding-and-stone-cech |
 | 12 | 359 | `categories-functors-and-natural-transformations` | category-theory | 0 | unscaffolded | 0 | unscaffolded | group-homomorphisms-and-the-isomorphism-theorems, modules-and-module-homomorphisms |
 | 13 | 54 | `field-extensions-and-the-complex-numbers` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | polynomial-rings-and-roots |
 | 13 | 64 | `conjugacy-and-simplicity-in-the-symmetric-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | symmetric-groups-and-the-sign-homomorphism |
@@ -111,7 +110,8 @@ with no blockers is buildable today regardless of its level.
 | 13 | 229 | `the-total-derivative` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | darboux-lhopital-and-taylor |
 | 13 | 235 | `the-riemann-integral-in-rn-and-jordan-content` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | — |
 | 13 | 239 | `the-fundamental-theorems-of-calculus` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | bounded-variation-and-riemann-stieltjes |
-| 13 | 257 | `the-topology-of-euclidean-space` | topology | 0 | unscaffolded | 0 | unscaffolded | compactness, connectedness |
+| 13 | 257 | `the-topology-of-euclidean-space` | topology | 0 | unscaffolded | 0 | unscaffolded | — |
+| 13 | 277 | `complete-metrizability-and-baire` | topology | 0 | unscaffolded | 0 | unscaffolded | metrization-theorems |
 | 13 | 361 | `universal-properties-and-the-yoneda-lemma` | category-theory | 0 | unscaffolded | 0 | unscaffolded | categories-functors-and-natural-transformations |
 | 14 | 56 | `splitting-fields` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | field-extensions-and-the-complex-numbers |
 | 14 | 66 | `composition-series-and-solvable-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | conjugacy-and-simplicity-in-the-symmetric-groups, group-homomorphisms-and-the-isomorphism-theorems, cyclic-groups-and-direct-products |
@@ -122,7 +122,7 @@ with no blockers is buildable today regardless of its level.
 | 14 | 241 | `line-integrals-and-the-gradient-theorem` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | the-fundamental-theorems-of-calculus, the-total-derivative, arc-length-and-rectifiable-curves |
 | 14 | 289 | `homotopy-and-homotopy-equivalence` | topology | 0 | unscaffolded | 0 | unscaffolded | the-topology-of-euclidean-space |
 | 14 | 357 | `plane-graphs-euler-and-the-five-colour-theorem` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | the-topology-of-euclidean-space, graph-colouring, matchings-covers-menger-and-network-flows, trees-forests-and-spanning-trees |
-| 14 | 363 | `limits-and-colimits` | category-theory | 0 | unscaffolded | 0 | unscaffolded | universal-properties-and-the-yoneda-lemma, cardinal-arithmetic-and-cofinality |
+| 14 | 363 | `limits-and-colimits` | category-theory | 0 | unscaffolded | 0 | unscaffolded | universal-properties-and-the-yoneda-lemma |
 | 15 | 58 | `symmetric-polynomials` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | splitting-fields |
 | 15 | 68 | `semidirect-products-and-automorphism-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | composition-series-and-solvable-groups, congruences-and-the-chinese-remainder-theorem, free-groups-and-presentations |
 | 15 | 86 | `eigenvalues-eigenvectors-and-the-characteristic-polynomial` | linear-algebra | 0 | unscaffolded | 0 | unscaffolded | the-determinant-of-a-linear-operator, polynomial-rings-and-roots |
@@ -132,7 +132,7 @@ with no blockers is buildable today regardless of its level.
 | 15 | 175 | `the-exponential-function` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | power-series-and-real-analytic-functions |
 | 15 | 233 | `inverse-and-implicit-function-theorems` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | mixed-partials-taylor-and-extrema, uniform-convergence-of-functions |
 | 15 | 285 | `ascoli-arzela` | topology | 0 | unscaffolded | 0 | unscaffolded | approximation-and-compactness-in-ck |
-| 15 | 287 | `stone-weierstrass-general` | topology | 0 | unscaffolded | 0 | unscaffolded | approximation-and-compactness-in-ck, compactness |
+| 15 | 287 | `stone-weierstrass-general` | topology | 0 | unscaffolded | 0 | unscaffolded | approximation-and-compactness-in-ck |
 | 15 | 291 | `the-fundamental-group` | topology | 0 | unscaffolded | 0 | unscaffolded | homotopy-and-homotopy-equivalence, group-homomorphisms-and-the-isomorphism-theorems |
 | 15 | 365 | `adjunctions-and-the-adjoint-functor-theorems` | category-theory | 0 | unscaffolded | 0 | unscaffolded | limits-and-colimits |
 | 16 | 70 | `sylow-theorems-and-nilpotent-groups` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | semidirect-products-and-automorphism-groups, group-actions-and-cayleys-theorem |
@@ -144,7 +144,7 @@ with no blockers is buildable today regardless of its level.
 | 16 | 179 | `sine-cosine-and-the-definition-of-pi` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | the-exponential-function |
 | 16 | 195 | `linear-recurrences-and-rational-generating-functions` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | formal-power-series, eigenvalues-eigenvectors-and-the-characteristic-polynomial, splitting-fields |
 | 16 | 237 | `fubini-and-change-of-variables` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | the-riemann-integral-in-rn-and-jordan-content, inverse-and-implicit-function-theorems |
-| 16 | 293 | `covering-spaces-and-lifting` | topology | 0 | unscaffolded | 0 | unscaffolded | the-fundamental-group, compactness |
+| 16 | 293 | `covering-spaces-and-lifting` | topology | 0 | unscaffolded | 0 | unscaffolded | the-fundamental-group |
 | 16 | 367 | `monads-and-their-algebras` | category-theory | 0 | unscaffolded | 0 | unscaffolded | adjunctions-and-the-adjoint-functor-theorems |
 | 17 | 90 | `triangularisation-and-jordan-canonical-form` | linear-algebra | 0 | unscaffolded | 0 | unscaffolded | diagonalisation-and-the-minimal-polynomial |
 | 17 | 108 | `chain-conditions-and-semisimple-modules` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | tensor-products-of-modules, composition-series-and-solvable-groups |
@@ -159,7 +159,7 @@ with no blockers is buildable today regardless of its level.
 | 18 | 141 | `the-spectral-theorem-and-singular-value-decomposition` | linear-algebra | 0 | unscaffolded | 0 | unscaffolded | the-fundamental-theorem-of-algebra, inner-product-spaces-and-orthogonality, triangularisation-and-jordan-canonical-form |
 | 18 | 143 | `the-group-algebra-and-representations` | abstract-algebra | 0 | unscaffolded | 0 | unscaffolded | chain-conditions-and-semisimple-modules, the-fundamental-theorem-of-algebra, sylow-theorems-and-nilpotent-groups, matrices-and-the-matrix-of-a-linear-map |
 | 18 | 187 | `further-trigonometric-identities-and-inverses` | real-analysis | 0 | unscaffolded | 0 | unscaffolded | fundamental-trigonometric-identities |
-| 18 | 199 | `set-partitions-stirling-numbers-and-exponential-generating-functions` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | lattice-paths-and-catalan-numbers, inclusion-exclusion-and-the-pigeonhole-principle |
+| 18 | 199 | `set-partitions-stirling-numbers-and-exponential-generating-functions` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | lattice-paths-and-catalan-numbers |
 | 18 | 223 | `linear-algebra-methods-in-combinatorics` | combinatorics | 0 | unscaffolded | 0 | unscaffolded | finite-probability-and-the-probabilistic-method, inner-product-spaces-and-orthogonality, gaussian-elimination-and-row-reduction, polynomial-rings-and-roots |
 | 18 | 297 | `the-seifert-van-kampen-theorem` | topology | 0 | unscaffolded | 0 | unscaffolded | the-fundamental-group-of-the-circle, free-products-and-amalgamation |
 | 18 | 299 | `classification-of-covering-spaces` | topology | 0 | unscaffolded | 0 | unscaffolded | covering-spaces-and-lifting, the-fundamental-group-of-the-circle |
@@ -197,7 +197,7 @@ with no blockers is buildable today regardless of its level.
 | 26 | 321 | `the-argument-principle-and-rouche` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | the-residue-theorem |
 | 26 | 355 | `domains-of-holomorphy-and-pseudoconvexity` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | the-hartogs-phenomena, holomorphic-functions-of-several-variables, subharmonic-functions-and-the-dirichlet-problem, convexity |
 | 26 | 391 | `spectral-sequences` | category-theory | 0 | unscaffolded | 0 | unscaffolded | ext-and-tor |
-| 27 | 323 | `the-riemann-sphere-and-mobius-transformations` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | the-argument-principle-and-rouche, compactness, the-topology-of-euclidean-space |
+| 27 | 323 | `the-riemann-sphere-and-mobius-transformations` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | the-argument-principle-and-rouche, the-topology-of-euclidean-space |
 | 27 | 331 | `normal-families-and-montels-theorem` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | harmonic-functions-and-the-poisson-integral, the-argument-principle-and-rouche, approximation-and-compactness-in-ck |
 | 27 | 353 | `holomorphic-inverse-and-weierstrass-preparation` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | holomorphic-functions-of-several-variables, inverse-and-implicit-function-theorems, the-argument-principle-and-rouche, euclidean-domains-pids-and-unique-factorisation |
 | 28 | 325 | `conformal-mapping-branches-and-the-schwarz-lemma` | complex-analysis | 0 | unscaffolded | 0 | unscaffolded | the-riemann-sphere-and-mobius-transformations, the-winding-number-and-the-global-cauchy-theorem, the-logarithm-and-general-powers |

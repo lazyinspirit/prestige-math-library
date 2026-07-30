@@ -25,8 +25,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -100,6 +100,6 @@ topologies coincide.
 
 - **What goes wrong is arbitrarily far out.** On any fixed bounded region the maps $g_k$ do flatten to $0$, and a compact subset of $\mathbb{R}$ is bounded; the discrepancy $|g_k(x)| = |x|/(k+1)$ reaches $1$ only at $x = k+1$, which escapes every compact set as $k$ grows. Uniform convergence asks for control at every point at once, including those.
 
-- **The same family shows the two topologies are different as topologies**, not merely that one sequence behaves differently in them: a topology is determined by its convergent sequences only in a first countable space, but here the difference is already visible in a basic neighbourhood, since $B_{\bar\rho}(\mathbf{0},1/2)$ contains no $g_k$ while every compact-convergence neighbourhood of $\mathbf{0}$ contains a tail of them.
+- **The same family shows the two topologies are different as topologies**, not merely that one sequence behaves differently in them: the difference is already visible in a basic neighbourhood, since $B_{\bar\rho}(\mathbf{0},1/2)$ contains no $g_k$ while every compact-convergence neighbourhood of $\mathbf{0}$ contains a tail of them.
 
 - **The index shift is the usual one.** $\mathbb{N}$ contains $0$, so the family is written with $\iota(k+1)$; at $k = 0$ this is $1$ and $g_0$ is the identity, which is exactly the intended first term. Writing $x/\iota(k)$ would divide by $0$ at $k = 0$.

@@ -232,8 +232,8 @@ Errors: `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`,
 `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`,
 `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on an item
 on a B/examples page — B pages are leaves), `b-requires-a`, `dup-id`, `prefix`,
-`kind`, `companion`. Warnings: `orphan`, `size` (above 30 items),
-`redundant-prereq` (a declared prerequisite already reachable transitively; 12
+`kind`, `companion`. Warnings: `orphan`, `size` (above 100 A-page items; a review
+ceiling, not a target or permission to prune), `redundant-prereq` (a declared prerequisite already reachable transitively; 12
 stand in the spec as of 2026-07-27 and are kept deliberately where the direct
 edge is mathematically real). 19 codes total.
 
@@ -322,11 +322,10 @@ not repair.
 
 ## 5. The judge
 
-**Current routing (owner, 2026-07-30): session-item judging uses GPT 5.6 Sol
-through the Codex subscription plan.** GPT-family models are never run through
-`ofox` for this workflow. `tools/judge.mts` remains as a legacy ofox refuter, a
-record of the GLM/DeepSeek injection experiments, and a non-GPT experimental
-harness; it is not the default path for the GPT judge.
+**Current routing (owner, 2026-07-30): session-item judging uses GLM 5.2 through
+the ofox API at `xhigh` reasoning.** It is cross-family from the GPT 5.6 Terra
+author. `tools/judge.mts` is the default judge path and retains the GLM/DeepSeek
+injection-test record.
 
 **When it runs:** once, after the step-6 Beta/Alpha audit, on final text. The old
 reason still applies: judging before audit bought verdicts that later rewrites
@@ -370,11 +369,11 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 
 | file | actor | carries |
 |---|---|---|
-| `beta-scaffold.md` | Beta-n-i, steps 1–2 | plan order, namespaced writes, dep resolution, id reuse, seams |
+| `beta-scaffold.md` | Beta-n-i, steps 1–2 | reputable-web-source research ledger, full published-corpus read access, plan order, dependency closure, namespaced writes, id reuse, seams, per-pair proof decomposition, corollary pass, 100-item review ceiling |
 | `beta-step8-audit.md` | Beta-n-i, **step 6a batch auditor** (historical filename retained) | exhaustive batch proof-step and citation audit; fixes; added/deleted in-flight results |
-| `authoring.md` | GLM authoring agent, step 5 | precheck traps, shipped-defect checklist, no-judge rule |
+| `authoring.md` | GPT 5.6 Terra authoring agent, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
 | `alpha.md` | Alpha-n, steps 4 and 6 | propagation; audits Beta fixes; audits cross-batch and cross-level references |
-| `codex-judge.md` | GPT 5.6 Sol judge, step 7 | Codex-subscription judge prompt and JSON verdict contract |
+| `codex-judge.md` | GLM 5.2 ofox judge, step 7 (historical filename) | ofox judge prompt and JSON verdict contract |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical
@@ -384,17 +383,60 @@ non-fatal quirks, letter-level imperfection. It is repeated rather than
 referenced because an agent that does not receive it damages correct text roughly
 three times per real repair.
 
-### 6.1 The sandbox rule, and its two mechanical backstops (owner, 2026-07-29)
+**Every content-facing brief also carries the natural-voice and citation rule
+(owner, 2026-07-30).** Agents write direct mathematical prose without canned
+headings, meta-commentary, or rhetorical filler. A `[F#]`, `[A#]`, or `[L#]`
+fact states the cited proposition,
+not an AI-sounding label or an interpretation of what the result is for. Exact
+Definition/Statement text is preferred; a concise shortening must preserve the
+domain, quantifiers, hypotheses, conclusion, and direction. The live defect that
+prompted the rule was `Null definition: a null perturbation is eventually
+smaller ...`, which obscured the ordinary quantified null-sequence definition.
 
-Every brief above states: **pass `dangerouslyDisableSandbox: true` on EVERY Bash
-tool call.** A subagent that omits it raises a shell-permission prompt, and these
-builds run unattended — an overnight run was lost to exactly that, which is why
-`research/NEXT-SESSION-PROMPT.md` carried the instruction by hand.
+**Beta scaffolding is source-grounded and dependency-closed (owner,
+2026-07-30).** Before constructing page item lists, Beta searches reputable
+mathematical sources on the web for definitions, theorem and corollary
+statements, counterexamples, and proof strategies, recording working URLs,
+supported planned material, and convention disagreements in its namespaced
+notes. This is deliberately paired with full read access to published `items/`
+and `library/`: every proposed published dependency is opened from disk and
+checked for exact statement, hypotheses, direction, and status. Web evidence can
+correct a scaffold, but cannot license a load-bearing result the library has not
+established; that result must be decomposed, rescoped, or dropped under the
+self-contained-scope rule.
 
-Stating it in a brief is necessary and **not sufficient**: it was in the
-`frontier-2` scaffolding briefs and both Betas still prompted. Prose in a prompt
-is advice; the failure is mechanical, so the fix is too. Two backstops, both in
-`.claude/settings.local.json`:
+**Step-3 adjudication is an orchestrator mechanism (owner, 2026-07-30).** Beta
+reports discrete recommendations with evidence; the orchestrator verifies them
+from disk and approves or declines them without a routine owner pause. Its
+ordered decision rule is: mathematical accuracy and correct dependency citation
+are non-negotiable; then minimize forward references; then preserve
+mathematical richness. The decision ledger is the durable audit trail.
+
+**The step-9 fatal-error rundown is a durable aggregation mechanism (owner,
+2026-07-30).** Beta audit reports and Alpha's audit ledger classify every
+publish-blocking defect by mathematical type, location in the artifact, affected
+id, and fix disposition. Judge and touch ledgers add refutation/repair history;
+the orchestrator adjudication log adds approved reversals and drops. Step 9
+aggregates those records into a concise but complete owner report grouped by
+type and location. Grouping may compress repeated defects, but every fatal item
+must remain named and every resolution must be stated.
+
+### 6.1 No shell-permission prompts, and the mechanical backstops
+
+**Owner rule, 2026-07-30:** neither the orchestrator nor any current or future
+subagent may ask the owner for shell-command permission. Routine repository
+reads, writes, and gates must use command forms already allowed inside the
+workspace sandbox. A runtime without an escalation-free form records a blocker;
+it does not raise an approval prompt.
+
+On Claude runtimes, every brief still says to pass
+`dangerouslyDisableSandbox: true` on every Bash call. On sandboxed Codex
+runtimes, that parameter does not exist, so agents instead remain inside the
+granted workspace and use non-escalated equivalents. This distinction preserves
+the unattended-build outcome without asking the owner to approve prefixes one
+command at a time.
+
+Two Claude-side backstops remain in `.claude/settings.local.json`:
 
 | backstop | what it does |
 |---|---|
@@ -404,7 +446,7 @@ is advice; the failure is mechanical, so the fix is too. Two backstops, both in
 The hook was verified end to end rather than assumed: a probe subagent reported
 the rule present verbatim and its Bash call needed no approval.
 
-**Why the rule is ALSO written in every brief.** `.claude/settings.local.json` is
+**Why the rule is also written in every brief.** `.claude/settings.local.json` is
 gitignored and does not travel with a checkout, so a fresh clone — or any machine
 but this one — has neither backstop. The briefs are the only copy that ships.
 Belt and braces is the correct redundancy here, not duplication to be tidied away.
@@ -450,7 +492,12 @@ State this honestly rather than implying coverage.
   level 7; two published summaries were false at level 8. Level 7-algebra added
   one more: a summary opened "Nothing here assumes anything about numbers" while
   a theorem purely about ℤ was homed on that same page, contradicted by the
-  summary's OWN later paragraph.
+  summary's OWN later paragraph. The prompt-side backstop is now a fixed page
+  contract (owner, 2026-07-30): every A summary is exactly two nonempty prose
+  paragraphs under 150 words each, first for mathematical background and used
+  declared dependencies, second for the main definitions/results and their
+  logical progression; B pages carry no authored summary body. This remains a
+  reading rule, not a mechanical gate.
 - **`depsource` cannot see `forward_refs`** (§3.8).
 - **`b-leaf` is enforced only against the SPEC, never against `items/`.**
   `validate-plan` owns the check and reads `research/plan-spec.json`;

@@ -611,75 +611,80 @@ representatives and diagonalising); name AC in Facts, not silently.
 Forward references: NONE load-bearing. Mentions of independence go through
 `external_refs` (‡, exempt class).
 
-## EU-1. The Topology of Euclidean Space  (order 197, topology)
+## EU-1. The Topology of Euclidean Space  (spec order 257, topology)
 
-`requires`: `compactness` (195), `connectedness` (193),
-`subspaces-products-and-quotients` (191), `compactness-in-metric-spaces`
-(106), `rn-as-a-normed-space` (145)
+**Frontier-4 propagation, 2026-07-30.** The machine scaffold has **23 A-page
+items and 6 B-page items**. Its approved direct prerequisites are exactly
+`compactness`, `rn-as-a-normed-space`, and
+`finite-counting-and-binomial-coefficients`. The first prerequisite already
+reaches the connectedness, subspace/product, and metric-compactness results used
+below; the finite-counting page supplies the finite-power countability argument
+and finite-index constructions.
 
-The page that answers the commission's "various equivalent definitions for
-$\mathbb{R}^n$": one home for the equivalences, built by CITATION into the
-published metric development wherever possible, with the dictionary items
-that keep the library's three developments of "open" (R-native at 117, metric
-at 102, product/topological at 189/191) speaking to each other.
+This is the common home for the equivalent topologies and compactness properties
+of Euclidean space. It cites the published metric, norm, product, real-line, and
+compactness results rather than restating them.
 
-DEFS: pseudocompact (for subsets of a metric space: every continuous
-real-valued function is bounded); polygonally connected (well-definedness #9);
-the sphere $S^{n-1}$ and closed ball as subspaces (via the norm of 145).
+DEFS: pseudocompact topological space, meaning that every continuous
+real-valued map has bounded image, with no separation axiom built into the
+term; polygonal path and polygonally connected subset of $\mathbb{R}^n$;
+Euclidean spheres and closed balls as subspaces.
 
-THMS: **the grand equivalence** (landmark) for $A \subseteq \mathbb{R}^n$:
-compact $\iff$ closed and bounded $\iff$ sequentially compact $\iff$ complete
-and totally bounded $\iff$ countably compact $\iff$ limit point compact
-$\iff$ pseudocompact $\iff$ every continuous real function on $A$ attains a
-maximum — assembled from the published order-106 equivalences,
-`thm-heine-borel-rn`, and the two genuinely new implications (pseudocompact
-$\Rightarrow$ totally bounded + closed; the EVT-property direction); the
-dictionary items: the product, metric and (for $n = 1$) R-native notions agree
-(cites `lem-product-topology-on-rn` and `lem-real-and-metric-notions-agree`,
-adds nothing new — restating them would BE the two-notions defect); **open
-connected $\iff$ path-connected $\iff$ polygonally connected** (landmark; the
-clopenness-of-the-reachable-set argument); $\mathbb{R}^n$ is connected,
-locally connected, locally path-connected, locally compact, $\sigma$-compact,
-second countable, separable ("has a countable dense subset" if separability is
-still unworded at this order — check the T-pages' convention at authoring
-time), complete; $S^{n-1}$ is path-connected for $n \ge 2$ and compact;
-$\mathbb{R}^n \setminus \{0\}$ deformation-retracts onto $S^{n-1}$ — STATED
-here only as the explicit straight-line map $x \mapsto x/\lVert x \rVert$ being
-continuous with the segment homotopy (the WORD "deformation retract" and the
-homotopy formalism arrive at HT-1, which cites this page's map; here it is a
-concrete continuous map with concrete properties); $\mathbb{R} \not\cong
-\mathbb{R}^n$ for $n \ge 2$ (remove a point, connectedness — the cheap half of
-dimension invariance, in scope per the ‡ catalogue's own remark); norm
-equivalence CITED from 145 (`rn-as-a-normed-space` owns "all norms on
-$\mathbb{R}^n$ are equivalent"; this page cites, never restates).
+THMS: **the ZF Euclidean compactness equivalence** (landmark): for a
+**nonempty** subset $A\subseteq\mathbb{R}^n$, compactness, closedness and
+boundedness, pseudocompactness, and attainment of both a maximum and a minimum
+by every continuous real-valued function are equivalent. The proof separates
+the two new pseudocompactness lemmas from the published Heine--Borel and
+continuous-image/extreme-value results. Assuming countable choice and dependent
+choice, a corollary adds sequential compactness, countable compactness, limit
+point compactness, and completeness together with total boundedness, by the
+published metric compactness equivalence theorem. The empty subset is excluded
+because the extreme-value condition is otherwise false or vacuous, depending on
+its formulation.
 
-FS: closed and bounded implies compact in every metric space (already
-published at 106 — cite the existing `fs-`, do not re-mint; if a page-local
-statement is wanted it is a link, not an item); connected implies polygonally
-connected without openness (witness: the circle $S^1$, connected, no segment
-of it lies in it — or cite T4's sine-curve items if earlier; keep the witness
-inline and cheap); pseudocompact implies compact for arbitrary topological
-spaces (out of the metric scope of this page's definition — DROP unless the
-witness is buildable from published material; the scaffolding Beta decides,
-and a drop is recorded).
+The product, Euclidean-metric and norm topologies on $\mathbb{R}^n$ agree, and
+for $n=1$ they agree with the real-line topology. For open subsets of
+$\mathbb{R}^n$, connectedness, path-connectedness and polygonal connectedness
+are equivalent; connected components of open sets are therefore open and
+polygonally connected. The page also proves local compactness and
+$\sigma$-compactness of $\mathbb{R}^n$, that $\mathbb{Q}^n$ is an at most
+countable dense subset and rational open boxes form an at most countable basis,
+and the compactness of closed balls and positive-radius spheres. It does not use
+“separable” or “second countable” as defined terms before
+`countability-axioms-and-cardinal-functions`.
 
-B: the closed ball and sphere worked through the grand equivalence; an open
-bounded set that is not compact; a closed unbounded set that is not compact;
-the open unit ball is polygonally connected with an explicit two-segment
-path between given points; $GL_1(\mathbb{R}) = \mathbb{R} \setminus \{0\}$ is
-disconnected while $\mathbb{R}^2 \setminus \{0\}$ is path-connected (the
-$n = 1$ vs $n \ge 2$ split that HT-7 exploits).
+For $n\ge 2$, punctured Euclidean space is polygonally connected and
+$S^{n-1}$ is path-connected. Radial normalisation is continuous, and the
+straight-line map
+$H(x,t)=((1-t)+t/\lVert x\rVert_2)x$ is stated with its concrete endpoint,
+fixed-point and nonvanishing properties; homotopy terminology is left to the
+later homotopy block. Removing a point then proves
+$\mathbb{R}\not\cong\mathbb{R}^n$ for $n\ge2$. Norm equivalence is cited from
+`rn-as-a-normed-space`, never restated as a new result here.
 
-Traps. (i) This page is 80% assembly; its value is CITATION DISCIPLINE — every
-clause of the grand equivalence names the published item that carries it, and
-only the two new implications get proofs. (ii) The deformation-retract
-formalism does NOT exist yet at order 197; state the concrete map and its
-properties, let HT-1 name it (backward citation from 229 — this is how the
-zero-forward-reference constraint is honoured). (iii) "Separable": check
-whether any page below 197 has worded separability; the level-9 rule was to
-write "has a countable dense subset". Follow whatever the T-pages fixed.
-(iv) Segments and convex combinations need the vector-space and norm structure
-of 68/145; cite, do not rebuild coordinates by hand.
+FS: the published metric false statement “closed and bounded implies compact in
+every metric space” is cited rather than re-minted. “Every connected subset of
+$\mathbb{R}^n$ is polygonally connected” is refuted by the unit circle. Keep
+the claim “every pseudocompact topological space is compact” and refute it
+self-containedly on the B page: in an infinite particular-point space every
+continuous real-valued map is constant, while the cover
+$\{\{p,x\}:x\ne p\}$ has no finite subcover.
+
+B: the closed ball and sphere worked through the choice-qualified compactness
+chart; an open bounded set that is not compact; a closed unbounded set that is
+not compact; an open Euclidean ball with its straight-segment polygonal path;
+$GL_1(\mathbb{R})=\mathbb{R}\setminus\{0\}$ disconnected while
+$\mathbb{R}^2\setminus\{0\}$ is polygonally connected; and the infinite
+particular-point pseudocompact noncompact space.
+
+Traps. (i) Every clause of either compactness equivalence names the published
+item that carries it, and only the genuinely new implications receive new
+proofs. Keep the ZF core separate from the
+countable-choice-and-dependent-choice extension. (ii) State the radial map and
+its concrete properties without importing later homotopy terminology.
+(iii) State countable dense subsets and countable bases in full rather than
+using countability-axiom vocabulary defined only at order 273. (iv) Segments
+and convex combinations cite the existing vector-space and norm structures.
 
 Forward references: NONE. (HT-1 cites INTO this page, not the reverse.)
 

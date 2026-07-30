@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-urysohn-lemma-not-a-zf-theorem]
 justified_by: []
-forward_refs: [rem-choice-ledger, def-axiom-of-choice]
+forward_refs: [def-axiom-of-choice, thm-stone-metric-spaces-are-paracompact, rem-paracompactness-choice-and-convention-ledger]
 aliases: []
 landmark: false
 short: "not provable in ZF + DC; not implied by BPI"
@@ -64,9 +64,10 @@ needing a transfer theorem.
 
 ## Remarks
 
-- **Not proved in this library.** No part of this is proved here; no topology
-  track exists at this point in the library, so even the statement of
-  paracompactness is being borrowed.
+- **Not proved in this library.** No part of the independence analysis is proved
+  here. Paracompactness and the choice-based proof of Stone's theorem are
+  unavailable at this point in the reading order; they are developed later in
+  [[thm-stone-metric-spaces-are-paracompact]].
 
 - **What would prove it.** Permutation models with Pincus-style transfer, the
   same track named in [[rem-cohen-forcing-ac-independent]], together with a ZF
@@ -75,10 +76,9 @@ needing a transfer theorem.
 - **Why it matters here.** Paracompactness of metric spaces is used silently
   wherever partitions of unity, metrisation theorems or Stone-type refinements
   appear, and it is the sort of statement that reads as pure point-set topology.
-  When this library reaches those pages, Stone's theorem must be recorded in
-  [[rem-choice-ledger]] as a use of choice, not as a free structural fact, and
-  the honest entry has to say that its exact strength relative to
-  [[def-axiom-of-choice]] is open.
+  The later proof records its costs in
+  [[rem-paracompactness-choice-and-convention-ledger]]; its exact strength
+  relative to [[def-axiom-of-choice]] remains open.
 
 - **Conditional discipline.** Clauses (a) and (b) are relative to the consistency
   of ZF. Clause (c) mixes two things and they are kept apart: "not known to be

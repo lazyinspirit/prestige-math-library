@@ -14,7 +14,8 @@
 //   7. orphan        every dep target has a home page (page-level prereqs need one)
 //   8. dup-id        no id declared twice, and no clash with an existing item id
 //   9. prefix        item id prefix matches its declared kind (SCHEMA.md §2)
-//  10. size          WARN when an A page exceeds --max-items (default 30)
+//  10. size          WARN when an A page exceeds --max-items (default 100;
+//                    review ceiling, not a target or a reason to drop results)
 //  11. companion     every A page names a B companion that exists, and vice versa
 //
 // PAGE-LEVEL PREREQUISITES (`requires: [pageId, ...]` on each page)
@@ -45,7 +46,7 @@ import { join } from 'node:path';
 const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
 const repo = argVal('--repo') ?? '/root/Projects/prestige-math-library';
-const maxItems = Number(argVal('--max-items') ?? 30);
+const maxItems = Number(argVal('--max-items') ?? 100);
 if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N]');
 
 function argVal(flag) {
@@ -300,7 +301,7 @@ for (const p of pages) {
 
 for (const p of pages) {
   if (p.kind === 'A' && p.items.length > maxItems)
-    warn('size', `page ${p.id} has ${p.items.length} items (target <= ${maxItems}); consider splitting`);
+    warn('size', `page ${p.id} has ${p.items.length} items (review ceiling ${maxItems}, not a target); consider structural splitting, but do not drop valuable results for ergonomics`);
   if (p.kind === 'A') {
     if (!p.companion) err('companion', `A page ${p.id} declares no companion examples page`);
     else if (!pages.some((q) => q.id === p.companion && q.kind === 'B'))

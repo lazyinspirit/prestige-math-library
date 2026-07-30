@@ -12,12 +12,11 @@ landmark: true
 short: "normal space, $T_4$ space"
 verification:
   precheck: n/a
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -73,8 +72,8 @@ this page, the first as a false statement and both on the companion page.
   hereditary behaviour of regularity. This page's own prerequisites still supply
   neither: cardinal arithmetic and cofinality is now built, but *below* this
   one, and nothing here draws on it; the hereditary and productive behaviour of
-  the separation axioms is planned for a page *above* this one and remains
-  unbuilt. So nothing above asserts an answer and no false statement asserting
+  the separation axioms is developed later in the reading order. So nothing above
+  asserts an answer and no false statement asserting
   one is planted here ([[rem-separation-axiom-conventions]]).
 
 - **Normality is the axiom that behaves worst**, and the companion page shows

@@ -6,6 +6,7 @@ status: published
 origin: session
 deps: [def-interior-closure-boundary-top, thm-closure-characterisation-top, def-topology-basis-subbasis]
 justified_by: []
+forward_refs: [def-separable-space]
 aliases: [def-nowhere-dense-top, def-codense-top]
 landmark: false
 short: "dense, nowhere dense, codense"
@@ -14,8 +15,8 @@ verification:
   judge:
     model: z-ai/glm-5.2
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -84,7 +85,7 @@ precisely when it is codense, since then $\overline{A} = A$.
   nowhere dense only when $X = \varnothing$.
 
 - **What is deliberately not defined here.** Separability, meaning the existence
-  of an at most countable dense subset, is a countability axiom belonging with
-  the other cardinal restrictions on a space, and no item in this library defines
-  it. Where a space on the companion page has an at most countable dense subset,
-  that is what is said, in full, and the word "separable" is not used.
+  of an at most countable dense subset, is a countability axiom not developed at
+  this point in the reading order; it is defined later in
+  [[def-separable-space]]. Where a space on the companion page has an at most
+  countable dense subset, that is what is said in full.

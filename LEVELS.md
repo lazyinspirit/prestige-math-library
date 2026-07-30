@@ -20,10 +20,10 @@ Everything below is verified against the code as of 2026-07-30.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-8 adjudication of every judge rejection**, reporting |
-| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan** | spawned at **step 4**, resumed at **step 6**; propagates approved changes into higher-level prose; audits every Beta fix from disk; audits cross-batch and cross-level references |
-| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
-| **authoring agent** | **GLM 5.2 via the ofox API** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
-| **judge** | **GPT 5.6 Sol via the Codex subscription plan** | cheap adversarial screen. GPT-family models are never run through ofox for this workflow |
+| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`** | spawned at **step 4**, resumed at **step 6**; propagates approved changes into higher-level prose; audits every Beta fix from disk; audits cross-batch and cross-level references |
+| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
+| **authoring agent** | **GPT 5.6 Terra via the Codex subscription plan, `xhigh`** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
+| **judge** | **GLM 5.2 via the ofox API, `xhigh`** | cheap cross-family adversarial screen; invoked through `tools/judge.mts` |
 
 ## Artifacts
 
@@ -36,8 +36,8 @@ Everything below is verified against the code as of 2026-07-30.
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
-| `briefs/judge-conventions.txt` | the judge's conventions block. For subscription GPT judges it is pasted into the Codex prompt; `tools/judge.mts` is legacy/ofox-only |
-| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, Codex judge). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **standing sandbox rule** (`ARCHITECTURE.md` §6.1) |
+| `briefs/judge-conventions.txt` | the judge's conventions block, passed to the GLM ofox judge through `tools/judge.mts` |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, GLM judge). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **no shell-permission prompts rule** (`ARCHITECTURE.md` §6.1) |
 
 ### `order` is not stable across insertions — recompute, never remember
 
@@ -145,6 +145,35 @@ Each Beta reads the prose scaffold sections for its pages, plus every published
 item it intends to cite — **the item on disk, not the scaffold's description of
 it** — and emits machine-readable per-item scaffolds.
 
+**Source-grounded research pass (owner, 2026-07-30).** Before fixing the item
+list, each Beta searches reputable mathematical sources on the web for the
+pair's definitions, theorem and corollary statements, counterexamples, and proof
+strategies. Prefer authoritative or scholarly sources such as peer-reviewed or
+open textbooks, university-hosted notes, the Stacks Project, and the
+Encyclopedia of Mathematics. Verify every URL recorded in the notes, say what
+planned material it supports, and record convention disagreements rather than
+silently choosing one. Web research informs the scaffold; it does not turn
+session-authored material into fabricated scraped provenance.
+
+**Published-library read and closure pass (owner, 2026-07-30).** Beta has read
+access to the full published `items/` and `library/` corpus. It must search the
+pool before minting ids and open every published dependency it proposes, checking
+the exact Definition or Statement, hypotheses, conclusion, direction, and
+`status: published`. Every load-bearing dependency must be either an earlier
+item inside the A/B pair or established by published content on a strictly
+earlier page. If not, Beta decomposes or rescopes the result, or drops it with a
+licensing note under the self-contained-scope rule.
+
+**Per-pair richness pass (owner, 2026-07-30).** For each A/B pair independently,
+the Beta must (1) split a theorem or lemma with a long, multi-part proof into
+focused earlier intermediate lemmas when that improves reuse, auditability, or
+exposition; and (2) inspect every substantial result for useful immediate
+corollaries that are cheap to prove. Do not create cosmetic variants or trivial
+microlemmas. `validate-plan` now warns only above **100 total items on an A page**,
+raised from 60. One hundred is a review ceiling, not a target or minimum: do not pad,
+and do not drop valuable results merely for ergonomics. If coherent content
+exceeds it, retain the mathematics and report a possible structural page split.
+
 **Hard constraint — plan order.** An item may cite only an item earlier on its
 own page, or an item on a page with a strictly smaller `order`. No exceptions.
 Fractional orders exist (`formal-laurent-series-field` is 31.5), so a page can be
@@ -160,8 +189,9 @@ Every external dependency must resolve to one of: a **published item on disk**;
 an item **earlier on the same page**; an item on a **page earlier in plan order**
 inside this level; or a **declared forward reference**.
 
-Priority order, owner's words: **mathematical accuracy > robust dependencies and
-citations > minimal forward references.**
+Priority order, owner's words: **mathematical accuracy and correct dependency
+citation are non-negotiable; then minimize forward references; then preserve
+mathematical richness.**
 
 **Self-contained scope (hard rule).** A theorem or example needing machinery
 beyond current scope — measure theory, functional analysis, anything unbuilt —
@@ -179,12 +209,16 @@ recoverable.**
 `plan-spec.json` before minting; reuse or alias an existing id for an existing
 statement.
 
-## Step 3 — Report to the owner (orchestrator)
+## Step 3 — Adjudicate recommendations (orchestrator)
 
 I verify every load-bearing claim from disk first (amendment 6: no stage advances
-on an agent's report alone), then present findings **one recommendation at a
-time**, each with **approve / defer / follow-up** and an explicit statement of
-what breaks if deferred. Decisions are logged.
+on an agent's report alone), then exercise best judgment and **approve or
+decline** each Beta recommendation. Mathematical accuracy and correct citation
+of dependencies are non-negotiable; among mathematically valid choices, minimize
+forward references before preserving additional richness. I may investigate or
+ask an agent for clarification before deciding, but routine scaffold
+adjudication does not pause for owner approval. Every decision and its rationale
+are logged.
 
 ## Step 4 — Apply and propagate (orchestrator + Alpha-n)
 
@@ -201,16 +235,24 @@ overwrite.
 > gates are clean and its report is written. Judging is step 7 and runs after the
 > step-6 audit. This is where most of the wall-clock saving lives.
 
-**Model change (owner, 2026-07-30): authoring agents are GLM 5.2 via the ofox
-API.** They are no longer Opus/Sonnet subagents. GPT-family models remain on the
-Codex subscription plan and are not called through ofox. GLM authors use the
-same `briefs/authoring.md` contract and must emit normal repo files; the
-orchestrator remains responsible for running the gates of record.
+**Model change (owner, 2026-07-30): authoring agents are GPT 5.6 Terra via the
+Codex subscription plan at `xhigh` reasoning.** GPT-family models are not called
+through ofox. Terra authors use the same `briefs/authoring.md` contract and must
+emit normal repo files; the orchestrator remains responsible for running the
+gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
 silence a checker when the proof does not use it is the dominant historical
 defect class and is forbidden.
+
+Every A-page summary is written last in exactly two nonempty prose paragraphs,
+each under 150 words. The first gives mathematical background and names the
+definitions and results from declared dependencies that are used. The second
+names the main definitions and theorems developed on the page and explains their
+general logical progression. A B page has no authored summary body. A summaries
+remain subject to SCHEMA §6's bans on counts, self-ranking, unsupported
+reading-position claims, and surveys of other pages.
 
 **AUTHOR THE WHOLE LEVEL AT ONCE (owner, 2026-07-28).** A dependency level is
 authored in ONE round, every A/B pair in it dispatched in parallel, however wide
@@ -234,7 +276,8 @@ correct. Splitting a single level is not.
 ## Step 6 — Audit (Betas first, then Alpha-n)
 
 **Model (owner, 2026-07-30): Beta-n-i and Alpha-n are GPT 5.6 Sol run through
-the Codex subscription plan.** Do not run GPT-family audit work through ofox.
+the Codex subscription plan at `xhigh` reasoning.** Do not run GPT-family audit
+work through ofox.
 
 This is the final mathematical reading tier before the judge and the owner. It
 has three ordered parts.
@@ -255,8 +298,10 @@ For every authored item in the batch, the Beta must:
    declared forward reference, and actually states the proposition for which it
    is cited. The common failure mode is citing a true theorem for a stronger or
    different claim than it makes.
-3. **Read the page summaries and Remarks with proof-step suspicion.** No count in
-   prose, no unsupported position claim, and no corpus-wide scope denial.
+3. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
+   the fixed two-paragraph, under-150-words-per-paragraph A-summary contract and
+   the absence of an authored B-page body. No count in prose, no unsupported
+   position claim, and no corpus-wide scope denial.
 4. **Fix every defect it is licensed to fix**, not merely report it. If the fix
    requires adding or deleting a lemma/proposition/theorem/corollary/example/
    counterexample/false-statement, the Beta may do so inside the in-flight level.
@@ -312,12 +357,13 @@ necessary fixes.
 
 ## Step 7 — Judge (after the audit, one sweep, on final text)
 
-**Model change (owner, 2026-07-30): the session-item judge is GPT 5.6 Sol through
-the Codex subscription plan.** GPT-family models are never run through ofox for
-this workflow. `tools/judge.mts` remains a legacy ofox refuter and injection-test
-record, but it is not the default path for GPT judging.
+**Model change (owner, 2026-07-30): the session-item judge is GLM 5.2 through
+the ofox API at `xhigh` reasoning.** It is cross-family from the GPT 5.6 Terra
+author. `tools/judge.mts` is the default judge path and retains the historical
+injection-test record.
 
-Use `briefs/codex-judge.md` plus `briefs/judge-conventions.txt`. The judge's
+Use `briefs/codex-judge.md` (historical filename) plus
+`briefs/judge-conventions.txt`. The judge's
 context unit stays the **A/B pair**: the item page and its `-examples` companion
 in full, plus only the pages the item's own page both declares in `requires` and
 actually cites. Compute that batch mechanically; do not pass every sibling page.
@@ -362,8 +408,23 @@ owner's re-audit. After any such repair, re-grep the file you repaired.
 
 Full report: added/deleted in-flight results; forward references present; judge
 coverage counted from frontmatter on disk; gate results; escalation set; Beta
-batch-audit coverage; Alpha cross-edge coverage; and readiness to publish. Then
-stop for the owner.
+batch-audit coverage; Alpha cross-edge coverage; and readiness to publish.
+
+The rundown also contains a **concise but complete fatal-error report**. It
+enumerates every publish-blocking mathematical defect encountered and fixed,
+grouped first by type (invalid proof inference; incorrect or missing dependency
+citation; false/overstrong definition, title, Statement, theorem, example or
+witness; missing hypothesis or choice scope; circular/forward/out-of-scope use)
+and then by location (title/Statement, proof/refutation, Facts/frontmatter
+dependencies, Remark, page prose/summary). Each entry names the item/page and
+states the fix disposition: dropped/deferred, restated/weakened, proof
+repaired/replaced, prose repaired, dependencies added/removed/rebound, choice
+hypothesis restored, or new lemma/result added. Counts and grouping keep it
+concise; no fatal defect may be omitted. Beta audit ledgers, the Alpha ledger,
+judge verdict log, touch ledger, and orchestrator adjudication log are the
+evidence sources.
+
+Then stop for the owner.
 
 ---
 
@@ -409,6 +470,14 @@ Repairs are **measured from disk**, never counted from an agent's report.
   **(4) A page summary describes the mathematics, never the page**, and a Remark
   justifies rather than surveys (SCHEMA §6). No counts, no self-ranking, no
   claims about other pages. No mechanical tier reads a summary at all.
+- **Natural voice and citation fidelity (owner, 2026-07-30):** write direct,
+  natural mathematical prose throughout, without canned headings,
+  meta-commentary, or rhetorical filler. In `[F#]`, `[A#]`, or `[L#]` facts, use
+  no AI-sounding labels or interpretive filler. State the cited
+  proposition itself. Quote its Definition or Statement exactly when practical;
+  if shortening, preserve the domain, quantifiers, hypotheses, conclusion, and
+  direction with maximum fidelity. `Null definition: a null perturbation ...`
+  is the defect pattern; the null-sequence condition itself is the repair.
 - **Explicitly acceptable, spend no effort:** minor citational quirks; logical
   gaps a competent reader closes **within 30 seconds**; other non-fatal quirks;
   imperfection at the level of the letter.
@@ -428,7 +497,7 @@ items). **Do not trim landmarks.**
 | `extcheck.mjs` | `unproved-kind`, `unproved-has-proof`, `unproved-judged`, `unproved-precheck`, `unproved-on-published`, `unproved-uncited`, `external-dangling`, `external-in-deps`, `external-not-unproved`, `external-unused` |
 | `citecheck.mjs` | mis-attribution heuristic — the largest historical defect class (14 of 50) |
 | `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `unreadable` |
-| `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>30 items), `redundant-prereq` (19 total) |
+| `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>100 A-page items; review only, never a pruning target), `redundant-prereq` (19 total) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
 | `prosecheck.mjs` | **the prose defect class**, which is where 100% of this library's found defects live. ERROR `position-contradiction` (a "later/earlier page" claim contradicting `plan-spec` order — decidable, no judgement). WARNINGS `count-in-prose`, `count-of-this-page`, `library-scope-denial`. `--warnings` lists them, `--strict` fails on them |
 

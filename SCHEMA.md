@@ -122,10 +122,10 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: gpt-5.6-sol-codex-subscription
-                                     #   session workflow: GPT 5.6 Sol via the
-                                     #   Codex subscription plan; GPT-family
-                                     #   models are never run through ofox.
+    model: z-ai/glm-5.2
+                                     #   session workflow: GLM 5.2 via the ofox
+                                     #   API at xhigh reasoning; the GPT 5.6
+                                     #   Terra author runs via Codex.
                                      #   Pipeline items use the production lineup
     verdict: pass
     date: 2026-07-25
@@ -218,6 +218,12 @@ anywhere in prose; every wikilink must resolve to an item id or alias.
 Layout rules for proof-bearing bodies (mechanical, renderer-enforced look):
 - **`## Facts & Assumptions`**: an optional `**Given:** …` context paragraph,
   then ONE fact per paragraph, each starting with its label (`[A1]`, `[L1]`, …).
+  A cited fact states the source proposition itself, not an AI-sounding label or
+  an interpretive summary of its purpose. Quote the cited Definition or Statement
+  exactly when practical; otherwise shorten it concisely while preserving the
+  domain, quantifiers, hypotheses, conclusion, and direction with maximum
+  fidelity. For example, write the null-sequence condition itself, not `Null
+  definition: a null perturbation is eventually smaller ...`.
 - **`## Proof`**: the FIRST paragraph is the technique line
   `**Proof technique:** <strategy>.` (mirrors `proof_strategy` frontmatter);
   then ONE numbered step per paragraph, each ending with its justification tags.
@@ -269,9 +275,15 @@ status: draft                        # page-level gate, independent of items
 items: [def-cauchy-sequence, lem-…, thm-…]   # Section 4, in reading order
 examples: [ex-…, cex-…, fs-…]                # Section 5, in reading order
 ---
-(body = Section 2, the authored summary: background + what we prove. The ONLY
-hand-written prose on a page.)
+(A-page body = Section 2, the authored two-paragraph summary. A B/examples page
+has no authored body. This is the only hand-written page prose.)
 ```
+
+For scaffolding, an A page has a **100-total-item review ceiling** before
+`validate-plan` emits `size`, raised from 60 on 2026-07-30. This is neither a
+target nor a publish limit: do not pad toward it, and do not drop valuable
+results merely for ergonomics. A coherent page above the ceiling is reviewed for
+a structural split rather than silently pruned.
 
 ### The summary describes the MATHEMATICS, never the page (owner, 2026-07-28)
 
@@ -292,6 +304,18 @@ text in the library, and every summary defect ever found here was the page
 - rank its own contents ("the hardest", "the sharpest", "the only");
 - claim what other pages do, contain, or lack;
 - state a position in the reading order that is not derived from the spec.
+
+**Page-summary shape (owner, 2026-07-30).** An A-page body has exactly two
+nonempty prose paragraphs, each under 150 words:
+
+1. mathematical background and the definitions and results from declared
+   dependencies that the development uses;
+2. the main definitions and theorems developed on this page, with their general
+   logical progression.
+
+A B/examples page has no authored summary body. This is a content constraint;
+the frozen renderer remains responsible for its fixed page sections. Both
+A-page paragraphs remain subject to the prohibitions above.
 
 Each of those is a claim about a file the writer is not looking at, and none of
 them is mathematics. `tools/prosecheck.mjs` gates the count and position halves;

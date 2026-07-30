@@ -45,8 +45,8 @@ there, this pins the metric, the order and the order-native descriptions of
 $\mathbb{R}$'s topology as one collection of open sets. The Sorgenfrey line takes
 the half-open intervals $[a,b)$ as a basis instead, and is strictly finer, first
 countable, and possessed of an at most countable dense subset, with sequences that
-converge only from the right ([[ex-sorgenfrey-line]]); the word *separable* is not
-used, since no item in this library defines it. The counting question is
+converge only from the right ([[ex-sorgenfrey-line]]); separability is not yet
+defined at this point in the reading order. The counting question is
 Kuratowski's: closure and complement generate at most fourteen sets from any
 subset of any space, and $(0,1) \cup (1,2) \cup \{3\} \cup ([4,5] \cap \mathbb{Q})$
 attains fourteen in $\mathbb{R}$ ([[ex-kuratowski-fourteen-sets]]).

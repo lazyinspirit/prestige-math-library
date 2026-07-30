@@ -1,0 +1,60 @@
+---
+id: thm-uniform-completion-universal-property-and-uniqueness
+kind: theorem
+title: "Every uniformly continuous map into a complete Hausdorff uniform space extends uniquely across the Hausdorff completion; consequently completions are unique up to a unique uniform isomorphism"
+status: published
+origin: session
+deps: [thm-hausdorff-completion-of-a-uniform-space, def-uniformly-continuous-map, def-uniform-embedding-and-uniform-isomorphism, def-complete-uniform-space, def-separated-uniform-space, def-completion-of-a-uniform-space, lem-minimal-cauchy-filter-associated-to-a-cauchy-filter, lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity, lem-symmetric-entourages-form-a-base, thm-uniformly-continuous-maps-are-continuous, cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]
+aliases: []
+landmark: true
+proof_strategy: constructive
+verification:
+  precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-31
+  audited: 2026-07-31
+sources:
+  scraped: []
+  references: [{title: "I. James, Completeness and Completion", url: "https://www.cambridge.org/core/books/abs/introduction-to-uniform-spaces/completeness-and-completion/8978C977C907740F625119680B7DC42E"}]
+pipeline_run: null
+---
+
+## Statement
+
+For a Hausdorff completion $\eta:X\to\widehat X$ and a uniformly continuous $f:X\to Y$ into a complete separated uniform space $Y$, there is a unique uniformly continuous $\widehat f:\widehat X\to Y$ with $\widehat f\eta=f$. Consequently Hausdorff completions are unique up to a unique uniform isomorphism commuting with their canonical maps.
+
+## Facts & Assumptions
+
+**Given:** A Hausdorff completion $\eta:X\to\widehat X$ and a uniformly continuous $f:X\to Y$ with $Y$ complete and separated.
+
+[L1] The minimal-Cauchy-filter construction gives a Hausdorff completion $\eta_c:X\to X_c$ ([[thm-hausdorff-completion-of-a-uniform-space]]), and every Cauchy filter has a canonical associated minimal Cauchy filter ([[lem-minimal-cauchy-filter-associated-to-a-cauchy-filter]]).
+
+[L2] Uniform continuity, uniform isomorphism, completeness, and separatedness have their stated meanings ([[def-uniformly-continuous-map]], [[def-uniform-embedding-and-uniform-isomorphism]], [[def-complete-uniform-space]], [[def-separated-uniform-space]]).
+
+[L3] The basic entourages of $X_c$ declare two minimal Cauchy filters close when they have cross-close members ([[lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity]]), and symmetric entourages with prescribed finite-composite control exist ([[lem-symmetric-entourages-form-a-base]]).
+
+[L4] Uniformly continuous maps are continuous, and two continuous maps into a Hausdorff space that agree on a dense subset agree everywhere ([[thm-uniformly-continuous-maps-are-continuous]], [[cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]]).
+
+[A1] A Hausdorff completion has dense image and its source uniformity is exactly the pullback of the target uniformity ([[def-completion-of-a-uniform-space]]).
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 First use the canonical completion $X_c$. For a minimal Cauchy filter $\mathcal M\in X_c$, its image filter $$ f_*\mathcal M:=\{B\subseteq Y:f^{-1}[B]\in\mathcal M\} $$ is Cauchy: for a target entourage $V$, uniform continuity supplies a source entourage $E$ whose $E$-related pairs have $V$-related images, and an $E$-small member of $\mathcal M$ has $V$-small image. Completeness gives a limit, which is unique by separatedness. Define $\widehat f_c(\mathcal M)$ to be that limit. [L1, L2, construct]
+
+2.1 For $x\in X$, the image under $f$ of the minimal point filter $\eta_c(x)$ converges to $f(x)$: for a neighbourhood ball $V[f(x)]$, uniform continuity supplies a source ball at $x$ whose image lies in it. Therefore $\widehat f_c\eta_c=f$. [step 1.1, L1, L2]
+
+2.2 The map $\widehat f_c$ is uniformly continuous. Given a target entourage $V$, choose a symmetric $W$ with $W^{\circ3}\subseteq V$, and a source entourage $E$ whose $E$-related pairs have $W$-related images. If $\mathcal M\,\widehat E\,\mathcal N$, take witnesses $A\in\mathcal M$ and $B\in\mathcal N$ with $A\times B\subseteq E$. Since the image filters converge to $\widehat f_c(\mathcal M)$ and $\widehat f_c(\mathcal N)$, respectively, their members $f[A]$ and $f[B]$ meet the corresponding $W$-balls. Thus the two limits are related by $W\circ W\circ W\subseteq V$. [step 1.1, L2, L3]
+
+3.1 Any two uniformly continuous extensions across $\eta_c$ agree on the dense set $\eta_c[X]$, hence agree everywhere by [L4]. Thus the canonical completion has the asserted extension property. [step 2.1, step 2.2, L1, L4]
+
+4.1 Now let $\eta:X\to\widehat X$ be an arbitrary Hausdorff completion. Step 3.1 applied to $\eta$ gives a uniformly continuous $T:X_c\to\widehat X$ with $T\eta_c=\eta$. For $z\in\widehat X$, let $\mathcal F_z$ be the filter on $X$ generated by the sets $$ A_V(z):=\{x\in X:(\eta(x),z)\in V\}, $$ where $V$ ranges over symmetric entourages of $\widehat X$. Density makes these sets nonempty; intersections are refined by intersecting entourages. The pullback condition in [A1], together with a symmetric square root in $\widehat X$, shows that $\mathcal F_z$ is Cauchy. Define $S(z):=m(\mathcal F_z)\in X_c$. [step 3.1, L1, L3, A1, construct]
+
+5.1 The same pullback calculation gives $S\eta=\eta_c$. It also proves that $S$ is uniformly continuous: for a basic $\widehat E$ of $X_c$, choose a symmetric source entourage $D$ with $D^{\circ3}\subseteq E$, then a symmetric target entourage $V$ whose pullback lies in $D$ and a symmetric $W$ with $W^{\circ3}\subseteq V$. If $(z,z')\in W$, then $A_W(z)\times A_W(z')$ is $D$-small across the two filters; enlarging these sets by $D$ gives members of their associated minimal filters whose cross product lies in $D^{\circ3}\subseteq E$. Hence $(S(z),S(z'))\in\widehat E$. [step 4.1, L1, L3, A1]
+
+6.1 The maps $ST:X_c\to X_c$ and $TS:\widehat X\to\widehat X$ agree with the respective identity maps on the dense images of $X$. By [L4] they are the identity maps. Thus $T$ and $S$ are inverse uniform isomorphisms, uniquely so because any competing map agrees with $T$ on the dense image. [step 4.1, step 5.1, L1, L2, L4]
+
+7.1 For the original map $f:X\to Y$, the composite $\widehat f:=\widehat f_c\circ S:\widehat X\to Y$ is uniformly continuous and satisfies $\widehat f\eta=f$. Uniqueness follows from density and [L4]. Consequently every Hausdorff completion has the extension property, and step 6.1 proves uniqueness of completions up to the unique stated uniform isomorphism. [step 2.1, step 2.2, step 5.1, step 6.1, L4, discharge-construct] ∎

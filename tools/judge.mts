@@ -1,10 +1,10 @@
-// LEGACY topic-neutral cross-family refuter-judge for library items (ofox gateway).
-// Default legacy ofox judge: z-ai/glm-5.2.
+// Topic-neutral cross-family refuter-judge for library items (ofox gateway).
+// Current default session judge: z-ai/glm-5.2 at xhigh reasoning.
 //
-// Owner update 2026-07-30: the session-item judge is GPT 5.6 Sol through the
-// Codex subscription plan. GPT-family judge calls must NOT be routed through
-// this ofox tool; use briefs/codex-judge.md instead. This file remains for
-// non-GPT experiments, historical GLM ledgers, and injection-test records.
+// Owner update 2026-07-30: session-item authors use GPT 5.6 Terra through the
+// Codex subscription plan and the judge uses GLM 5.2 through this ofox tool.
+// GPT-family calls must NOT be routed through ofox. This file also retains the
+// historical GLM/DeepSeek injection-test record.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -150,13 +150,12 @@ const PAYMENT_EXIT = 3;
 const API_URL = (process.env.OFOX_BASE_URL ?? "https://api.ofox.ai") + "/v1/chat/completions";
 const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// SESSION items only. The production generator lineup is
-// ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"] (worker/src/ofox.ts genLineup), so
-// this default is an IDENTITY collision with the first generator entry. Since
-// 2026-07-30 session authoring also uses GLM 5.2, this tool is no longer the
-// default session judge path. A PIPELINE item must NOT be judged with this
-// default either, since that is a generator grading its own work. Pipeline items
-// keep the origin-conditioned lineup in worker/src/ofox.ts.
+// SESSION items only. Session authoring uses GPT 5.6 Terra, so this GLM default
+// is cross-family for the current session workflow. The production generator
+// lineup is ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"]
+// (worker/src/ofox.ts genLineup), so a PIPELINE item must NOT be judged with this
+// default: that would let a generator grade its own work. Pipeline items keep the
+// origin-conditioned lineup in worker/src/ofox.ts.
 const model = opts.model ?? "z-ai/glm-5.2";
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
@@ -557,6 +556,7 @@ const CONTEXT_RULES = `
 CITED CONTEXT: the exact text of every item this one cites is supplied below the item. Use it, and note that it cuts BOTH ways.
   * If an [L#] fact FAITHFULLY restates its cited item, then any step citing that [L#] is LICENSED. Do NOT object that such a step is unjustified, and do NOT assume a cited item says less than the supplied text says. Read the supplied text before claiming a step lacks support.
   * If an [L#] fact is STRONGER than its cited item, or restates it inaccurately, that IS a specific defect: name the fact and the discrepancy.
+  * NATURAL VOICE AND CITATION FIDELITY (owner, 2026-07-30): prose must be direct and mathematical, without canned headings, meta-commentary, or rhetorical filler. Every [F#], [A#], and [L#] fact must state the cited Definition or Statement itself, exactly when practical or in a concise version preserving its domain, quantifiers, hypotheses, conclusion, and direction. Flag AI-sounding labels or interpretive filler such as "Null definition:" when they replace the proposition with a description of what it is for. Write your own verdict reason in direct, natural prose.
   * An item marked RECORDED, NOT PROVED IN THIS LIBRARY is a deliberate external citation, not a gap. Depending on one is not a defect.
 
 PAGE CONTEXT: the other items published on this item's page are supplied after the cited items. They are there so you can catch defects that live BETWEEN items, which are invisible when an item is read alone:
@@ -629,6 +629,7 @@ if (bools.has("dump-prompt")) {
 const payload = {
   model,
   temperature: 0,
+  reasoning_effort: "xhigh",
   // Raised 3000 -> 8000 -> 40000 on 2026-07-26 (owner). Under the full-page context
   // the reason strings grew, and a truncated reason arrives as unparseable JSON ->
   // keep=null, which reads as a call failure rather than as a verdict. A page agent
