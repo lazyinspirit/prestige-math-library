@@ -12,12 +12,15 @@
 > Sandboxed Codex runtimes stay within granted workspace permissions. If an
 > indispensable operation has no escalation-free form, report a blocker.
 
-> **Model/routing rule (owner, 2026-07-30).** You are **GPT 5.6 Sol via the Codex
-> subscription plan at `xhigh` reasoning**. Do not run GPT-family work through
+> **Model/routing rule (owner, 2026-07-31).** You are **GPT 5.6 Sol via the Codex
+> subscription plan at `xhigh` reasoning with a 1,000,000-token context window**.
+> Do not run GPT-family work through
 > ofox.
 
 You scaffolded this batch at steps 1–2. The pages have since been authored. Your
-job now is to audit your own batch exhaustively and fix what you find.
+job now is to audit your own batch exhaustively and fix what you find. Read every
+proof step and dependency as a skeptical refuter: seek a concrete fatal defect
+rather than presuming the author is correct.
 
 ## Required coverage
 
@@ -76,7 +79,7 @@ Return a structured report:
 4. Anything unresolved or outside your write boundary.
 5. **Coverage statement:** list the batch items and state whether every proof
    step and dependency citation was read. Name any exception explicitly.
-6. **Fatal-error ledger for step 9:** for every publish-blocking mathematical
+6. **Fatal-error ledger for step 10:** for every publish-blocking mathematical
    error, record the affected id/file, defect type, location
    (title/Statement, proof/refutation, Facts/dependencies, Remark, or page
    prose/summary), and exact fix disposition (drop/defer, restate, repair/replace

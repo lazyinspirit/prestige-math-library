@@ -1,0 +1,59 @@
+---
+id: cex-dini-needs-monotonicity
+kind: counterexample
+title: "Continuous triangular spikes on $[0,1]$ converge pointwise to zero but not uniformly when monotonicity is absent"
+status: published
+origin: session
+deps: [thm-dini-on-a-closed-interval, def-continuity-real, thm-algebra-of-continuous-functions, def-max-min, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  audited: 2026-07-31
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "KTH Real Analysis Lecture Notes, §6.3"
+      url: "https://people.kth.se/~dogge/files/analysis.pdf"
+pipeline_run: null
+---
+
+## Statement refuted
+
+**Refuted claim:** the monotonicity hypothesis in Dini's theorem can be
+dropped.
+
+For $k\in\mathbb{N}$ put $a_k:=\iota(k+1)$ and define the triangular spike
+
+$$h_k(x):=\max\{0,\ 1-|2a_kx-1|\}\qquad(0\le x\le1).$$
+
+Each $h_k$ is continuous and $h_k\to0$ pointwise, but the convergence is not
+uniform.
+
+## Facts & Assumptions
+
+**Given:** The functions $h_k$ in the Statement, with $a_k=\iota(k+1)>0$.
+
+[L1] Constants, the identity, sums, products, absolute values, and pointwise maxima of continuous real functions are continuous ([[thm-algebra-of-continuous-functions]], [[def-max-min]], [[def-continuity-real]]).
+
+[L2] For every real $\varepsilon>0$ there is $N\ge1$ with $1/\iota(N)<\varepsilon$; canonical naturals increase and positive reciprocals decrease ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]], [[lem-of-inverse-positive]]).
+
+[L3] Absolute value is nonnegative and has the usual multiplicative law ([[lem-of-abs-value]]).
+
+[L4] Dini's theorem on a closed interval requires one pointwise monotonicity direction for the whole sequence ([[thm-dini-on-a-closed-interval]]).
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 Every $h_k$ is continuous by [L1], and the zero function is continuous. [L1]
+
+1.2 If $x=0$, then $h_k(x)=0$. If $x>0$, choose $N$ with $1/\iota(N)<x$; for all sufficiently large $k$, $a_kx\ge1$, so $|2a_kx-1|\ge1$ and $h_k(x)=0$. Thus $h_k\to0$ pointwise. [L2, L3, choose, algebra]
+
+1.3 At $x_k:=1/(2a_k)$ one has $h_k(x_k)=1$, so the convergence is not uniform. [given, algebra]
+
+1.4 At $x=1/4$, the values at $k=0,1,2$ are respectively $1/2,1,1/2$, so the sequence is neither pointwise nondecreasing nor pointwise nonincreasing. [given, algebra]
+
+2.1 All Dini hypotheses except monotonicity hold while uniform convergence fails, so monotonicity cannot be dropped. [step 1.1, step 1.2, step 1.3, step 1.4, L4] ∎

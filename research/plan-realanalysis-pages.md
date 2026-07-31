@@ -979,41 +979,54 @@ commit that publishes the level, never before.
 **RA-23 Sequences and Series of Functions; Uniform Convergence**
 <- RA-22, RA-19
 
-**BINDING when this page is scaffolded (Alpha-F1, step 9, 2026-07-28). UNIFORM
-CONVERGENCE ALREADY EXISTS IN THE LIBRARY, AT A HIGHER ORDER THAN THIS PAGE.**
-`frontier-1` minted `def-topology-of-uniform-convergence`, `thm-uniform-limit-
-theorem` and `thm-dini` on `function-space-topologies`, **order 283** — while this
-page is order **169**. So the plan's earlier home is the *second* one to be built,
-and the moment 169 is authored the library holds **two notions under one name**
-unless the agreement is recorded.
+**BINDING scaffold decision (Erdős cycle 1, step 3, 2026-07-31).** Uniform
+convergence is developed natively here for real-valued functions. The quantified
+definitions of pointwise convergence, uniform convergence and the uniformly
+Cauchy condition use only the real limit and function-space foundations. The
+uniform Cauchy criterion, the real-valued uniform limit theorem and the
+closed-interval form of Dini's theorem receive dependency-closed proofs on this
+page. The later items `def-topology-of-uniform-convergence`,
+`lem-uniform-convergence-in-the-uniform-metric`, `thm-uniform-limit-theorem` and
+`thm-dini` on `function-space-topologies` are not used as load-bearing
+dependencies.
 
-Nothing is false today: 283 asserts nothing about 169, and 169 does not exist.
-This note is the whole mitigation, and it exists because
-`rem-function-space-conventions` §6 records exactly this obligation for the two
-other objects 283 newly minted and **not** for uniform convergence itself — the
-one place it was needed. Step 9 deliberately did not add that prose rather than
-put unreviewed text into a page at the last tier; the same call the orchestrator
-made on the ω-exponentiation seam.
+The agreement with that later general development is recorded only in
+`rem-uniform-convergence-agrees-with-the-later-uniform-topology`, with the four
+later ids declared as `forward_refs`. The remark states that the quantified
+definition agrees with convergence in the supremum metric when the functions
+involved are bounded, that the native continuity theorem is the real-valued
+metric-domain specialization of the later theorem for an arbitrary topological
+domain and metric target, and that the native Dini theorem is restricted to a
+closed real interval while the later one has a compact metric domain. No proof
+may cite the remark or any of its later targets.
 
-**So when this page is scaffolded: either define uniform convergence as the
-special case of 283's topology and cite it, or define it natively and record the
-agreement explicitly in the dictionary style of `def-metrizable-space`.** Silent
-re-definition is the level-7 two-notions-of-open defect, and this is the clearest
-warning of one the library has ever had in advance.
+DEFS and THMS: pointwise, uniform and uniformly Cauchy convergence of
+real-valued function sequences; series of real functions through partial sums;
+the uniform Cauchy criteria for sequences and series; sums, scalar multiples and
+bounded products of uniform limits; preservation of continuity and uniform
+continuity; completeness of $C(K,\mathbb{R})$ in the supremum metric for
+nonempty compact metric $K$, after boundedness is established by the extreme
+value theorem; **interchange with the Riemann integral** through a uniform
+integral-error estimate; **the derivative-limit theorem** on a closed interval,
+using both parts of the working FTC and convergence at one point; **Dini's
+theorem** on a closed interval; the **Weierstrass M-test**; and uniform Dirichlet
+and Abel tests with genuinely uniform bounds.
 
-pointwise and uniform convergence; the sup metric; uniformly Cauchy; the uniform
-Cauchy criterion; a uniform limit of continuous functions is continuous;
-**interchange with the integral**; **the derivative theorem** (f_n' -> g
-uniformly plus convergence at one point); **Dini's theorem**; the **Weierstrass
-M-test**; uniform Dirichlet and Abel tests; C(K) with the sup norm is complete.
-B: x^n on [0,1]; **the moving bump** n.1_{[1/n,2/n]} with integral 1 converging
-pointwise to 0; **G&O Ch.7 item 12: sequences satisfying any THREE of Dini's four
-hypotheses and failing** (the cleanest proof in the literature that a theorem's
-hypotheses are independent); **Rudin 7.2** s_{m,n} = m/(m+n) (the prototype
-interchange failure); **Rudin 7.4** lim_n (cos m! pi x)^{2n} -> Dirichlet, a
-double limit of continuous functions that is not Riemann integrable
-(forward-citing); f_n(x) = x/(1 + n^2 x^2) converges uniformly yet f_n'(0) = 1;
-a sequence converging pointwise on R but uniformly on no interval.
+B: $x^{k+1}$ on $[0,1]$; the moving rectangle of height $k+2$ on
+$[1/(k+2),2/(k+2)]$, whose integral is one while it converges pointwise to zero;
+separate witnesses showing the need for compact domain, continuous
+approximants, continuous limit and monotonicity in Dini's theorem; the
+zero-index-safe double sequence $s_{m,n}=(m+1)/(m+n+2)$ with unequal iterated
+limits; and $x/(1+(k+1)^2x^2)$, which converges uniformly to zero while every
+derivative at zero equals one.
+
+NOT SCAFFOLDED: the cosine/double-limit example requires the unbuilt
+trigonometric development and the definition of $\pi$; it may return when
+`sine-cosine-and-the-definition-of-pi` is published. The proposed sequence
+converging pointwise on all of $\mathbb{R}$ but uniformly on no interval is also
+deferred: a closed witness here would duplicate later function-space examples or
+need machinery not established by this page's prerequisites. Neither omission
+licenses a forward whitelist on the B page.
 
 **RA-24 Approximation and Compactness in C(K)** <- RA-23, RA-11
 equicontinuity, uniform equicontinuity, pointwise and uniform boundedness;

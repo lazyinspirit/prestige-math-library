@@ -1445,7 +1445,7 @@ numbering).
     consequence: `thm-the-exponential-law` must say bijection (or
     correspondence) in its own title and Statement, and the page summary must not
     describe it as a homeomorphism — a title asserting more than the proof gives
-    is the fatal class `LEVELS.md` step 9 exists for. Licensed by: page 255 plus
+    is the fatal class reported at the end of `LEVELS.md` step 10. Licensed by: page 255 plus
     the product/quotient machinery a homeomorphism proof needs.
 13. **Paracompactness, locally finite refinements and partitions of unity at
     page 255.** Every theorem about them on T5's list needs normality, defined at

@@ -8,6 +8,8 @@ deps: [def-metric-space, def-bounded-set, lem-sup-unique, def-complete-ordered-f
        lem-of-triangle-inequality, lem-of-abs-value, def-abs-value,
        lem-finite-set-has-max, def-max-min, lem-of-add-order, def-ordered-field,
        rem-sup-conventions]
+forward_refs: [def-pointwise-uniform-and-uniformly-cauchy-convergence,
+               rem-uniform-convergence-agrees-with-the-later-uniform-topology]
 justified_by: []
 aliases: [def-sup-metric]
 landmark: true
@@ -16,10 +18,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+    date: 2026-07-31
+  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -51,10 +53,13 @@ above (step 1.1 below), so its least upper bound exists
 **Then $d_\infty$ is a metric on $\mathcal{B}(S)$** ([[def-metric-space]]), the
 **supremum metric** (also called the uniform metric).
 
-Both hypotheses are used and neither may be dropped. Boundedness of $f$ and $g$
-is what makes $D(f,g)$ bounded above, and nonemptiness of $S$ is what makes it
-nonempty; without either, $\sup D(f,g)$ does not exist, this library having no
-extended real line ([[rem-sup-conventions]]).
+The hypotheses ensure that the formula is a finite real-valued metric for every
+pair in the stated function space. Boundedness of $f$ and $g$ makes $D(f,g)$
+bounded above, and nonemptiness of $S$ makes it nonempty. Some unbounded pairs
+can still have a finite supremum, but allowing all real-valued functions would
+not give a finite-valued metric: for example, on $S=\mathbb{R}$ the functions
+$f(s)=s$ and $g(s)=0$ make $D(f,g)$ unbounded above
+([[rem-sup-conventions]]).
 
 ## Facts & Assumptions
 
@@ -98,7 +103,9 @@ extended real line ([[rem-sup-conventions]]).
   [[rem-metric-axiom-conventions]]).
 - **The supremum need not be attained**, so $d_\infty(f,g)$ is genuinely a
   supremum and not a maximum; the companion page carries a witness.
-- **The name "uniform metric" points at a later page.** Convergence in
-  $d_\infty$ is what is ordinarily called uniform convergence of functions; that
-  notion is not defined in this library yet, and the identification is not made
-  here.
+- **The name "uniform metric" points at later material.** The quantified
+  definition of uniform convergence of functions appears in
+  [[def-pointwise-uniform-and-uniformly-cauchy-convergence]]. The later
+  [[rem-uniform-convergence-agrees-with-the-later-uniform-topology]] records
+  its agreement with convergence in $d_\infty$; this lemma proves only that
+  $d_\infty$ is a metric on the stated bounded-function space.

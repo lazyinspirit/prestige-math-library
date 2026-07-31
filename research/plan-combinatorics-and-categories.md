@@ -1141,57 +1141,87 @@ Forward references: NONE.
 
 ## CB-3. Chains, Antichains, Sperner and Dilworth  (order 173, combinatorics)
 
-`requires`: `inclusion-exclusion-and-the-pigeonhole-principle` (22),
-`order-zorn-and-the-axiom-of-choice` (10)
+`requires`: `order-zorn-and-the-axiom-of-choice`,
+`countability-and-uncountability`,
+`finite-counting-and-binomial-coefficients`, and
+`inclusion-exclusion-and-the-pigeonhole-principle`.
+
+The examples companion additionally requires
+`primes-and-the-fundamental-theorem-of-arithmetic`, because the concrete divisor
+lattice uses unique prime factorisation.
 
 The pure-counting half of extremal set theory. The linear-algebra half is CB-13
 at 205; the split follows Oxford C8.3's and CMU 21-301's ordering, which both
 isolate the field-dependent methods into a later contiguous block.
 
-DEFS: finite poset (citing the published `def-partial-order`, never re-mint),
-chain and antichain (`def-chain` is published, and the ANTIchain is new);
-**height and width** (well-definedness #8); the Boolean lattice $2^{[n]}$; graded
-poset and rank; lattice, meet and join; distributive lattice; the shadow
-$\partial\mathcal{F}$; an intersecting family; a sunflower and its core.
+DEFS: antichains, chain covers and antichain covers, reusing the published
+`def-partial-order` and `def-chain`; **height and width of a nonempty finite
+poset**; graded posets and rank; the Boolean lattice $2^{[n]}$ and its levels;
+lattices, distributive lattices, order ideals and join-irreducibles; lower and
+upper shadows; intersecting uniform families; and sunflowers, petals and their
+common core.
 
-THMS: **Dilworth's theorem** (landmark: width $=$ minimum number of chains
-covering); **Mirsky's theorem** (the dual, height $=$ minimum antichain cover);
-the two are not each other's corollary and both are proved; **the LYM
-inequality** $\sum_{F \in \mathcal{F}} \binom{n}{\lvert F\rvert}^{-1} \le 1$ for
-an antichain in $2^{[n]}$ (double counting over maximal chains — CB-2's item);
-**Sperner's theorem** (landmark: the largest antichain in $2^{[n]}$ has
-$\binom{n}{\lfloor n/2\rfloor}$ elements), as a corollary of LYM, with the
-extremal families characterised; the local LYM inequality; the symmetric chain
-decomposition of $2^{[n]}$ (a second, constructive proof of Sperner);
-**Erdős–Ko–Rado** (landmark; Katona's cycle method, a double count, so it needs
-nothing but CB-2); the **sunflower lemma** of Erdős–Rado; **Birkhoff's
-representation theorem** for finite distributive lattices; Mirsky/Dilworth
-applied to give Erdős–Szekeres a second proof (an explicit agreement remark
-with CB-2's, per the anti-duplication rule).
+THMS: **finite Dilworth** (landmark: for a nonempty finite poset, width equals
+the minimum size of a chain cover), decomposed into the maximal-antichain
+down-set/up-set lemma and the induction/splicing lemma; **finite Mirsky** (height
+equals the minimum size of an antichain cover); the two are not treated as
+corollaries of one another; the **LYM inequality**
+$\sum_{F\in\mathcal{F}}\binom{n}{\lvert F\rvert}^{-1}\leq 1$ for an antichain in
+$2^{[n]}$, proved by counting maximal chains; the upper-shadow form of the local
+LYM inequality, with the equivalent lower-shadow form retained in a Remark;
+binomial symmetry and unimodality; and **Sperner's theorem** (landmark),
+including its equality cases. For odd $n$, a maximum antichain is one complete
+middle level, not a mixture of the two middle levels; this classification uses
+the local LYM equality analysis and does not follow from the bare LYM inequality
+alone. A symmetric chain decomposition of $2^{[n]}$ gives a second constructive
+proof of Sperner's bound.
 
-FS: every antichain in a finite poset extends to a maximum one of the same size
-as the width (subtle and false — the width is a max, not a bound on every
-maximal antichain); Dilworth's theorem holds for infinite posets with finite
-width in the naive form (the honest statement is that it does, for finite width,
-but the general infinite version fails — **check this at authoring time and
-DROP the `fs-` if the witness cannot be built from published material**);
-Erdős–Ko–Rado's bound holds for $n < 2k$ (it does not; the whole family is
-intersecting).
+The remaining finite results are **Erdős–Ko–Rado** for $1\leq k$ and
+$n\geq 2k$, giving the bound
+$\lvert\mathcal{F}\rvert\leq\binom{n-1}{k-1}$ and proving that a star attains
+it, without claiming uniqueness of extremizers; the Erdős–Rado sunflower lemma
+for distinct $k$-sets with $r\geq 2$ and the strict threshold
+$\lvert\mathcal{F}\rvert>k!(r-1)^k$; **Birkhoff's representation theorem** for
+finite distributive lattices; and the Erdős–Szekeres monotone-subsequence
+corollary obtained from finite Mirsky.
 
-B: $2^{[4]}$ drawn with a maximum antichain marked; a poset of width 3 decomposed
-into 3 chains; the divisor lattice of $60$ (cites the published FTA machinery at
-new order 28); a sunflower extracted from a concrete family; an intersecting
-family of $k$-sets meeting the EKR bound.
+The proof scaffold retains the closed intermediate results: maximal-chain
+counting for LYM, the symmetric-chain induction step, Katona's cyclic-interval
+bound, the maximal-disjoint-subfamily lemma for sunflowers, and the
+join-irreducible decomposition, join-prime and order-ideal-lattice lemmas for
+Birkhoff's theorem.
 
-CEX: a maximal antichain that is not maximum; a family satisfying the LYM sum
-with equality that is not a level of the cube; a non-distributive lattice
-($M_3$, $N_5$) showing Birkhoff's hypothesis is needed.
+FS: every maximal antichain in a finite poset has maximum cardinality; and the
+Erdős–Ko–Rado bound holds without $n\geq 2k$.
+
+NOT SCAFFOLDED: no infinite-Dilworth false statement is asserted. Dilworth has
+valid infinite extensions, while a genuine failure at infinite width requires
+cardinal-valued width and chain-cover definitions and a dependency-closed
+witness not developed here. The page proves only the finite theorem. The
+classification of Erdős–Ko–Rado extremizers is likewise omitted: uniqueness is
+false at the boundary $n=2k$, while the sharp bound and the attaining star are
+closed within the finite scaffold.
+
+B: $2^{[4]}$ with ranks, width, shadows and a symmetric chain decomposition; a
+six-element poset of width three together with a three-chain cover; the divisor
+lattice of $60$, using the separately declared fundamental-theorem-of-arithmetic
+prerequisite; a four-petal sunflower with nonempty core; and an Erdős–Ko–Rado
+star attaining the bound.
+
+CEX: a maximal antichain that is not maximum; for example, with
+$k<n<2k$, the whole $k$th level is intersecting and is larger than a star; and
+explicit distributive-law failures in $M_3$ and $N_5$. There is no proposed
+counterexample to the LYM equality case: that proposal was false and is replaced
+by the proved equality classification in Sperner's theorem.
 
 Traps. (i) `def-partial-order` and `def-chain` are **published**; re-minting
 them is the level-7 defect. The antichain is genuinely new. (ii) Dilworth's
 finite proof is an induction with a case split that is easy to get subtly
 wrong; budget for it and make each case a numbered step. (iii) Kruskal–Katona
-is DENIED (§9.11) — do not let the shadow definition drag it in.
+is DENIED (§9.11) — do not let the shadow definition drag it in. (iv) Machine
+`strategy` fields use only the schema vocabulary; double counting, compactness,
+Katona's cycle method and counterexample construction belong in the proof
+technique prose, not in `strategy`.
 
 Forward references: NONE.
 
@@ -3523,3 +3553,143 @@ And, decisively for this library, **its own published items**:
 `items/thm-transfinite-recursion.md` ("Because $G$ is a class function rather
 than a set, this is a **theorem schema**"), `items/thm-burali-forti.md` and
 `items/fs-ordinals-form-a-set.md`.
+
+---
+
+# 16. Erdős–Hajnal extension from arXiv:2606.06258v2
+
+This extension follows a full reading of the target paper: paragraphs, proofs,
+captions and bibliography as well as displayed definitions and environments.
+The v2 source has 54 formal environments: 10 theorems, 29 lemmas, 13 claims,
+one corollary and one conjecture. Its three headline reductions are restated
+later, so the library will give each one canonical item and later source labels
+only as backward-linking remarks.
+
+This is a scaffold addition, not a publication of the paper's mathematics.
+Every future A page must establish its load-bearing results in focused items;
+B pages contain examples and are leaves. A-page summaries remain exactly two
+nonempty paragraphs, each below 150 words; B pages have no summary section.
+
+## 16.1 Amendments to pre-existing graph scaffolds
+
+- GT-1 Graphs, Walks and Connectivity must own graph order, vertex and edge
+  deletion, neighborhoods, degrees, leaves and pendant edges, E(X,Y), induced
+  copies/isomorphism, complements, clique/stable-set notation and
+  alpha/omega, connected and anticonnected components, P_n, C_n, K_n,
+  K_{s,t}, stars, 1-subdivision, wheels and disjoint unions. It must give the
+  handshake theorem on A, because the existing instance is B-only. Bull, E,
+  Bird and their complements receive A-page edge-list definitions.
+- GT-5 Graph Colouring adds the proved greedy stable-set bound and the
+  chi(G) >= |G|/alpha(G) corollary used in the sparse-set exits.
+- CB-11 Ramsey Theory adds the power-form finite Ramsey corollary: a K_t-free
+  n-vertex graph has a polynomial-size stable set, as used in Lemma 2.1.
+- CB-12 Finite Probability adds Erdős's finite G(n,1/2) construction with no
+  clique or stable set of size 2 log_2 n for all sufficiently large n.
+- The real-analysis support must add real ceilings, their floor/ceiling
+  inequalities, finite geometric sums, and the elementary power/exponential
+  estimates used in the iterative exponent calculations. The logarithm and
+  general-powers page is therefore load-bearing.
+
+Every graph is finite, simple and undirected. Induced-H-free means no induced
+copy, never the ordinary-subgraph convention. The paper uses homogeneous set
+both for clique/stable set and for module; this extension calls the latter
+module (homogeneous set). Sparse-to is directional, weak sparsity is symmetric,
+and a blockade is an ordered sequence. All proposed proofs are finite and add
+no choice principle beyond ZF.
+
+## 16.2 Added A/B pairs
+
+| order | A page | B page | rigorous future scope |
+|---|---|---|---|
+| 393/394 | induced-subgraphs-and-hereditary-graph-classes | induced-subgraphs-and-hereditary-graph-classes-examples | Induced embeddings, ind_H(G), hereditary classes, complements, connected/anticonnected components, pure/mixed pairs and basic notation. |
+| 395/396 | erdos-hajnal-property-and-homogeneous-sets | erdos-hajnal-property-and-homogeneous-sets-examples | EH constants, the conjecture, complement invariance, monotonicity and family/single-graph formulations. |
+| 397/398 | modules-substitution-and-prime-graphs | modules-substitution-and-prime-graphs-examples | Modules, prime graphs, substitution and the Alon–Pach–Solymosi theorem (1.4). |
+| 399/400 | regular-pairs-and-induced-counting | regular-pairs-and-induced-counting-examples | Density, regularity, energy increment, slicing, induced counting and induced removal. |
+| 401/402 | sparse-restricted-subgraphs-and-rodl-nikiforov | sparse-restricted-subgraphs-and-rodl-nikiforov-examples | c-sparse/restricted sets and full Rödl/Nikiforov theorems (1.1–1.2). |
+| 403/404 | classical-and-loglog-erdos-hajnal-bounds | classical-and-loglog-erdos-hajnal-bounds-examples | The classical and log-log general EH lower bounds quoted in the introduction. |
+| 405/406 | polynomial-rodl-and-viral-equivalence | polynomial-rodl-and-viral-equivalence-examples | Polynomial Rödl, viral properties and Bucić–Fox–Pham equivalence (1.3). |
+| 407/408 | blockades-combs-and-pattern-graphs | blockades-combs-and-pattern-graphs-examples | Blockades, combs, patterns, sparse orientations, and Lemmas 2.3 and 2.6. |
+| 409/410 | pure-pairs-forests-and-path-antipath-classes | pure-pairs-forests-and-path-antipath-classes-examples | Pure pairs, forest/path-antipath results, and leaf/co-leaf viral preservation (1.7–1.8). |
+| 411/412 | bull-free-graphs-and-the-erdos-hajnal-property | bull-free-graphs-and-the-erdos-hajnal-property-examples | The complete bull-free structural proof and its EH conclusion. |
+| 413/414 | cographs-perfect-patterns-and-pure-pairs | cographs-perfect-patterns-and-pure-pairs-examples | Cographs, perfect patterns, tau-criticality, B-rainbow copies and pure-pair lemmas. |
+| 415/416 | the-five-cycle-and-erdos-hajnal | the-five-cycle-and-erdos-hajnal-examples | The full C_5 EH theorem (1.5) and its comb/blockade recurrence. |
+| 417/418 | star-expansions-and-erdos-hajnal | star-expansions-and-erdos-hajnal-examples | Star expansions, theorem 1.9, and C_6, C_7 and hat-C_5 consequences. |
+| 419/420 | iterative-sparsification-and-the-five-vertex-path | iterative-sparsification-and-the-five-vertex-path-examples | Nice graphs and the full P_5/co-P_5 EH theorem (1.6). |
+| 421/422 | small-graph-erdos-hajnal-consequences | small-graph-erdos-hajnal-consequences-examples | Graphs through five vertices, prime six-vertex figures, E, Bird, H-plus/minus and H_0,...,H_5. |
+| 423/424 | iterative-restriction-and-comb-extraction-lemmas | iterative-restriction-and-comb-extraction-lemmas-examples | Lemmas 2.4, 2.5 and 2.7–2.10, including all rounding and exponent bounds. |
+| 425/426 | leaf-reducibility-and-wonderful-families | leaf-reducibility-and-wonderful-families-examples | Leaf-reducibility, wonderfulness, Lemmas 2.1–2.2 and their pattern-embedding proof. |
+| 427/428 | generalized-niceness-and-reduction-outcomes | generalized-niceness-and-reduction-outcomes-examples | Generalized niceness and Lemmas 3.1–3.3, decomposed by outcome and scale. |
+| 429/430 | from-generalized-niceness-to-erdos-hajnal | from-generalized-niceness-to-erdos-hajnal-examples | Rödl initialization and Lemmas 3.4–3.5/1.12. |
+| 431/432 | property-star-and-comb-outcomes | property-star-and-comb-outcomes-examples | Property (*), comb alternatives and Lemmas 4.1–4.5/1.13. |
+| 433/434 | the-structural-criterion-for-property-star | the-structural-criterion-for-property-star-examples | Lemma 5.1/1.14: partitions, pattern lifting, geometric layers and contradiction. |
+| 435/436 | quotient-blockades-and-mixing-relations | quotient-blockades-and-mixing-relations-examples | Mixed-block equivalence, quotients, termination and Lemmas 6.1–6.2. |
+| 437/438 | co-e-free-comb-structure | co-e-free-comb-structure-examples | H_5/co-E auxiliary EH theorem (6.3), Claims 6.4.1–6.4.3 and Lemma 6.4. |
+| 439/440 | co-bird-free-comb-structure | co-bird-free-comb-structure-examples | P_2+P_1/P_3+P_1 witnesses, E-overlap relation and Lemma 6.5. |
+| 441/442 | erdos-hajnal-for-the-e-graph-and-bird | erdos-hajnal-for-the-e-graph-and-bird-examples | Explicit final deductions of Theorems 1.10–1.11 and a dependency ledger. |
+
+## 16.3 Item-level proof and example requirements
+
+No source theorem above may be a citation-only Fact. Regularity gets energy,
+defect Cauchy–Schwarz, slicing and induced-embedding lemmas before removal;
+Rödl/Nikiforov gets reduced-graph selection, induced-count bookkeeping and
+parameter-transfer lemmas; Bucić–Fox–Pham gets finite-family exponent,
+hereditary amplification and induced-count lemmas before the equivalence.
+
+The bull proof gets narrow/perfect/composite cases and weighted functions. The
+C_5 and star-expansion proofs are separate so their cograph/perfect-pattern and
+pure-pair machinery stays below the 100-item A-page ceiling. The P_5 source owns
+its two iteration chains. Sections 2–6 each expose every sparse-pair
+orientation, maximal sequence, local adjacency case, induced witness,
+equivalence closure, rounding loss and termination claim as a named lemma.
+
+B pages must check every figure by finite adjacency data: bull; both prime
+six-vertex graphs; P_4 star expansion; E, Bird and complements; H_0,H_1,H_5;
+both co-E and co-Bird witnesses; all relevant C_5, P_5, H_5 and E neighborhood
+patterns; and numerical weak-versus-directional sparse blockades. A later A
+page may not cite a B item.
+
+## 16.4 Article coverage and final routes
+
+Conjecture 1 and introductory language map to 393–396; the historical Ramsey
+and random-graph paragraphs to the amended CB-11/CB-12; general bounds to 403.
+Theorems 1.1–1.2, 1.3, 1.4, 1.5, 1.6, 1.7–1.8 and 1.9 map respectively to
+401, 405, 397, 415, 419, 409 and 417. The repeated reductions 1.12/3.5,
+1.13/4.5 and 1.14/5.1 canonicalize on 429, 431 and 433. Lemmas 2.1–2.2 map to
+425; 2.3 and 2.6 to 407; 2.4–2.5 and 2.7–2.10 to 423; and Sections 3–6 map in
+order to 427–440.
+
+The E proof route is pendant-leaf deletion to P_5, wonderfulness, property (*)
+from co-E structure and the H_5/co-E auxiliary class, generalized niceness,
+then EH. The Bird route deletes to the bull and uses the established E theorem
+as auxiliary input. Both routes must be explicit theorem items on 441, not
+mere prose inferences after Lemma 6.5.
+
+## 16.5 Source and correction ledger
+
+Open these sources in full during future scaffold/authoring work: target
+[arXiv v2](https://arxiv.org/html/2606.06258v2);
+[Diestel](https://diestel-graph-theory.com/) and
+[Bondy–Murty](https://link.springer.com/book/9781846289699);
+[Erdős–Hajnal](https://doi.org/10.1016/0166-218X(89)90045-0),
+[Chudnovsky's survey](https://arxiv.org/abs/1606.08827) and the
+[log-log improvement](https://arxiv.org/abs/2301.10147);
+[Rödl](https://doi.org/10.1016/0012-365X(86)90076-2),
+[Nikiforov](https://arxiv.org/abs/math/0404503), and
+[induced regularity/removal](https://doi.org/10.1007/s004930070001);
+[Bucić–Fox–Pham](https://arxiv.org/abs/2403.08303) and
+[Alon–Pach–Solymosi](https://doi.org/10.1007/s004930100016);
+[bull-free graphs](https://doi.org/10.1016/j.jctb.2008.02.005),
+[C_5/star expansions](https://arxiv.org/abs/2102.04994),
+[P_5](https://arxiv.org/abs/2312.15333),
+[leaf extension](https://arxiv.org/abs/2307.06455),
+[bounded-VC iteration](https://arxiv.org/abs/2312.15572),
+[paths and antipaths](https://doi.org/10.1016/j.jctb.2015.01.001), and
+[forest pure pairs](https://arxiv.org/abs/1809.00919).
+
+Wikipedia may check a name or drawing but is never proof authority. Correct the
+target source explicitly rather than silently: the first Lemma 2.7 size bound
+needs its |G| factor; Lemma 3.1's D,D_i should be B,B_i; affected Lemma 4.5
+language should quantify G, not F; Section 6.2 is co-Bird-free; Theorem 1.7
+needs its complement notation restored; Lemma 2.1's first alternative needs an
+explicit existential graph; and geometric layers need integral floor/ceiling
+bounds.

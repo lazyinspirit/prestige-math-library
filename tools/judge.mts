@@ -1,10 +1,12 @@
-// Topic-neutral cross-family refuter-judge for library items (ofox gateway).
-// Current default session judge: z-ai/glm-5.2 at xhigh reasoning.
+// Topic-neutral cross-provider refuter-judge for library items. Normal paired
+// mode runs DeepSeek V4 Pro directly against a freshly spawned GPT-5.6 Terra
+// Codex-subscription process on the identical frozen prompt.
 //
-// Owner update 2026-07-30: session-item authors use GPT 5.6 Terra through the
-// Codex subscription plan and the judge uses GLM 5.2 through this ofox tool.
-// GPT-family calls must NOT be routed through ofox. This file also retains the
-// historical GLM/DeepSeek injection-test record.
+// Owner update 2026-07-31: session-item authors use GPT 5.6 Sol through the
+// Codex subscription plan at xhigh reasoning with a 1M-token context window;
+// the judge uses direct DeepSeek V4 Pro and GPT-5.6 Terra in parallel. GPT-family
+// calls must NOT be routed through a third-party gateway. This file retains the
+// historical GLM/DeepSeek injection-test record as model-evaluation evidence.
 //
 // MEASURED TWICE, so no future session re-runs either experiment.
 //
@@ -82,8 +84,8 @@
 // before swapping a model, not after.
 // Run from the repo root (the app worker's tsx supplies the TS loader):
 //   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
-//     items/<id>.md [--model z-ai/glm-5.2] [--topic "..."] [--conventions "..."] \
-//     [--batch "<A-page-slug>,<A-page-slug>,..."] [--allow-claude]
+//     items/<id>.md [--parallel | --model deepseek-v4-pro] [--topic "..."] [--conventions "..."] \
+//     [--batch "<A-page-slug>,<A-page-slug>,..."]
 //
 // CONTEXT SUPPLIED, in the order the prompt carries it (see the blocks below):
 //   1. the item itself
@@ -101,16 +103,18 @@
 //   keep=null  -> call/parse error (reason explains)
 //
 // Appends {id,model,pt,ct} to $JUDGE_COSTLOG when set, for the session cost report.
-// Appends the FULL VERDICT {id,model,keep,reason,at} to $JUDGE_VERDICTLOG when set.
+// Appends the FULL VERDICT {id,model,keep,reason,context_sha256,at} to
+// $JUDGE_VERDICTLOG when set.
 // Set that one for every judge run of a level, at a stable path, so refutations
 // survive their own repair — the owner's twice-refuted escalation rule counts
 // rejections per proof across runs and cannot work off stdout alone.
 //
-// Honesty rule (README): a session item must NOT be judged by a Claude-family
-// model. This tool refuses an anthropic/claude model unless --allow-claude is
-// passed. Needs OFOXAI_API_KEY in the environment.
-import { readFileSync, appendFileSync, existsSync, readdirSync } from "node:fs";
-import { basename } from "node:path";
+// Needs DEEPSEEK_API_KEY, supplied directly or from the sibling Prestige
+// Intelligence .env file. Terra uses the already-authenticated Codex CLI.
+import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { basename, join } from "node:path";
+import { spawn } from "node:child_process";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -129,8 +133,9 @@ for (let i = 0; i < argv.length; i++) {
   }
 }
 if (!file && !bools.has("preflight")) {
-  console.error('usage: tsx tools/judge.mts items/<id>.md [--model M] [--topic "T"] [--conventions "C"] [--batch "slug,slug"] [--allow-claude]');
-  console.error('       tsx tools/judge.mts --preflight [--model M]   # one cheap call: is the account funded?');
+  console.error('usage: tsx tools/judge.mts items/<id>.md [--parallel | --model M] [--topic "T"] [--conventions "C"] [--batch "slug,slug"]');
+  console.error('       tsx tools/judge.mts --preflight [--parallel | --model M]   # cheap account check for the selected judge(s)');
+  console.error('       tsx tools/judge.mts items/<id>.md --context-hash          # no-network current-prompt attestation');
   process.exit(2);
 }
 
@@ -147,63 +152,137 @@ if (!file && !bools.has("preflight")) {
 const PAYMENT_EXIT = 3;
 // Endpoint override, so the payment path above can be EXERCISED in a test rather
 // than only reasoned about. Defaults to production; nothing in the workflow sets it.
-const API_URL = (process.env.OFOX_BASE_URL ?? "https://api.ofox.ai") + "/v1/chat/completions";
+const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com";
+const DEEPSEEK_API_URL = DEEPSEEK_BASE_URL.replace(/\/$/, "") + "/chat/completions";
 const isPaymentError = (status: number, raw: string): boolean =>
   status === 402 || /insufficient[_ ]credits|"code"\s*:\s*402/i.test(raw);
-// SESSION items only. Session authoring uses GPT 5.6 Terra, so this GLM default
-// is cross-family for the current session workflow. The production generator
-// lineup is ["z-ai/glm-5.2", "deepseek/deepseek-v4-pro"]
-// (worker/src/ofox.ts genLineup), so a PIPELINE item must NOT be judged with this
-// default: that would let a generator grade its own work. Pipeline items keep the
-// origin-conditioned lineup in worker/src/ofox.ts.
-const model = opts.model ?? "z-ai/glm-5.2";
+// SESSION items only. Session authoring uses GPT 5.6 Sol; its paired judges are
+// therefore direct DeepSeek V4 Pro and fresh GPT-5.6 Terra Codex processes. The
+// production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
+const DEEPSEEK_MODEL = "deepseek-v4-pro";
+const TERRA_MODEL = "gpt-5.6-terra";
+const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL];
+// A normal invocation is always the paired comparison. `--model` is reserved
+// for a targeted replay of exactly one incomplete/changed model verdict; the
+// retained `--parallel` spelling is an explicit no-op alias for the default.
+const models = opts.model ? [opts.model] : [DEEPSEEK_MODEL, TERRA_MODEL];
 const topic = opts.topic ?? "";
 const conventions = opts.conventions ?? "";
 const id = basename(file).replace(/\.md$/, "");
 
-if (/(^|\/)(anthropic|claude)/i.test(model) && !bools.has("allow-claude")) {
-  console.error(`refusing to judge with a Claude-family model (${model}); session items need a cross-family judge. Pass --allow-claude to override.`);
-  process.exit(2);
-}
-if (/(^|\/)(openai\/)?gpt|gpt-/i.test(model)) {
-  console.error(`refusing to judge with a GPT-family model through ofox (${model}); owner rule 2026-07-30 says all GPT models run via the Codex subscription plan. Use briefs/codex-judge.md.`);
-  process.exit(2);
-}
-const key = process.env.OFOXAI_API_KEY;
-if (!key) {
-  console.error("OFOXAI_API_KEY not set");
-  process.exit(2);
-}
-
-// --preflight: ONE minimal call, before a sweep spends anything. A dead account
-// then costs a single request instead of one per item.
-if (bools.has("preflight")) {
-  const pm = opts.model ?? "z-ai/glm-5.2";
-  let status = 0;
-  let raw = "";
-  try {
-    const r = await fetch(API_URL, {
-      method: "POST",
-      headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
-      body: JSON.stringify({ model: pm, max_tokens: 1, messages: [{ role: "user", content: "ok" }] }),
-      signal: AbortSignal.timeout(60_000),
-    });
-    status = r.status;
-    raw = await r.text();
-  } catch (e) {
-    console.error(`[judge] preflight: transport failure — ${String((e as Error)?.message ?? e)}`);
-    process.exit(PAYMENT_EXIT);
-  }
-  if (isPaymentError(status, raw)) {
-    console.error(`[judge] PREFLIGHT FAILED: the account cannot pay. ${raw.slice(0, 200)}`);
-    console.error("[judge] Do not start a sweep. This needs an owner top-up; no retry will succeed.");
-    process.exit(PAYMENT_EXIT);
-  }
-  if (status >= 400) {
-    console.error(`[judge] preflight: HTTP ${status} — ${raw.slice(0, 200)}`);
+for (const judgeModel of models) {
+  if (!SUPPORTED_MODELS.includes(judgeModel)) {
+    console.error(`--model must be one of ${SUPPORTED_MODELS.join(", ")}`);
     process.exit(2);
   }
-  console.error(`[judge] preflight OK (${pm}) — the account is funded.`);
+}
+
+const deepseekKey = (): string => {
+  if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
+  const envPath = process.env.DEEPSEEK_ENV_FILE ?? "/root/Projects/prestige-intelligence/.env";
+  try {
+    const line = readFileSync(envPath, "utf8").split(/\r?\n/).find((entry) =>
+      /^(?:export\s+)?DEEPSEEK_API_KEY\s*=/.test(entry),
+    );
+    const value = line?.replace(/^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*/, "").trim()
+      .replace(/^['"]|['"]$/g, "");
+    if (value) return value;
+  } catch { /* report a key-free configuration error below */ }
+  throw new Error("DEEPSEEK_API_KEY is not set and was not found in the configured DeepSeek .env file");
+};
+
+type CodexRun = { stdout: string; stderr: string; code: number | null; timedOut: boolean };
+const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+  // Codex subscription authentication lives in the user's normal CODEX_HOME,
+  // but this judge must run read-only and must not let Codex initialise there.
+  // Give every judge call a 0700 temporary home containing only its auth record
+  // AND an empty working directory. The latter keeps the Codex lane from having
+  // item files to inspect outside the supplied frozen prompt. Remove both on
+  // every exit path. The token is never placed in a prompt, ledger, command
+  // argument, or process output.
+  const sourceHome = process.env.CODEX_HOME ?? "/root/.codex";
+  const temporaryHome = mkdtempSync("/tmp/prestige-math-library-terra-");
+  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-terra-work-");
+  const sourceAuth = join(sourceHome, "auth.json");
+  if (existsSync(sourceAuth)) {
+    copyFileSync(sourceAuth, join(temporaryHome, "auth.json"));
+    chmodSync(join(temporaryHome, "auth.json"), 0o600);
+  }
+  const child = spawn(process.env.CODEX_BIN ?? "codex", [
+    "--ask-for-approval", "never", "exec", "--ephemeral", "--model", TERRA_MODEL,
+    "-c", 'model_reasoning_effort="xhigh"',
+    "--sandbox", "read-only", "--skip-git-repo-check", "--cd", temporaryWork, "-",
+  ], { stdio: ["pipe", "pipe", "pipe"], env: { ...process.env, CODEX_HOME: temporaryHome } });
+  let stdout = "";
+  let stderr = "";
+  let settled = false;
+  let timedOut = false;
+  const finish = (code: number | null) => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timeout);
+    try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort credential cleanup */ }
+    try { rmSync(temporaryWork, { recursive: true, force: true }); } catch { /* best-effort workdir cleanup */ }
+    resolve({ stdout, stderr, code, timedOut });
+  };
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    child.kill("SIGTERM");
+  }, timeoutMs);
+  child.stdout.on("data", (chunk) => { stdout += chunk; });
+  child.stderr.on("data", (chunk) => { stderr += chunk; });
+  child.on("error", (error) => { stderr += String(error); finish(null); });
+  child.on("close", finish);
+  child.stdin.end(prompt);
+});
+
+// --preflight: one minimal call per selected model, before a sweep spends
+// anything. A dead account then costs a single request per independent judge.
+if (bools.has("preflight")) {
+  const checks = await Promise.all(models.map(async (judgeModel) => {
+    if (judgeModel === TERRA_MODEL) {
+      const terra = await runFreshTerra('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
+      return { judgeModel, status: terra.code === 0 && terra.stdout.trim() ? 200 : 0, raw: terra.stdout || terra.stderr || "Codex produced no output" };
+    }
+    try {
+      // A deliberately tiny direct completion tests the endpoint, model,
+      // credentials, and JSON mode used by normal judging. It omits the costly
+      // maximum-reasoning setting because this is a reachability preflight, not
+      // an item verdict. The supplied text is not item material and no verdict
+      // ledger is written during preflight.
+      const r = await fetch(DEEPSEEK_API_URL, {
+        method: "POST",
+        headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
+        body: JSON.stringify({
+          model: DEEPSEEK_MODEL,
+          response_format: { type: "json_object" },
+          max_tokens: 512,
+          messages: [{ role: "user", content: 'Return exactly this json object: {"ok":true}.' }],
+        }),
+        signal: AbortSignal.timeout(60_000),
+      });
+      const raw = await r.text();
+      return { judgeModel, status: r.status, raw };
+    } catch (e) {
+      return { judgeModel, status: 0, raw: `transport failure — ${String((e as Error)?.message ?? e)}` };
+    }
+  }));
+  for (const { judgeModel, status, raw } of checks) {
+    if (status === 0) {
+      console.error(`[judge] preflight (${judgeModel}): ${raw}`);
+      process.exit(PAYMENT_EXIT);
+    }
+    if (isPaymentError(status, raw)) {
+      console.error(`[judge] PREFLIGHT FAILED (${judgeModel}): the account cannot pay. ${raw.slice(0, 200)}`);
+      console.error("[judge] Do not start a sweep. This needs an owner top-up; no retry will succeed.");
+      process.exit(PAYMENT_EXIT);
+    }
+    if (status >= 400) {
+      console.error(`[judge] preflight (${judgeModel}): HTTP ${status} — ${raw.slice(0, 200)}`);
+      process.exit(2);
+    }
+    console.error(`[judge] preflight OK (${judgeModel}) — the account is funded.`);
+  }
   process.exit(0);
 }
 
@@ -273,8 +352,8 @@ function quotedTextOf(src: string): string {
  * page. quotedTextOf's proof-free summary is what made the judge structurally
  * blind to an unbacked step or a mis-stated [L#] inside a sibling, which is the
  * defect class the reading tiers keep finding. The largest page in the repo is
- * ~124k chars (~35k tokens) of body, well inside GLM 5.2's 1M window, so the old
- * 3000-char cap was protecting a gateway timeout, not a context limit. The
+ * ~124k chars (~35k tokens) of body, well inside the selected judges' long-context
+ * budgets. The old 3000-char cap was protecting a gateway timeout, not a context limit. The
  * request timeout is raised alongside this.
  */
 function fullTextOf(src: string): string {
@@ -612,24 +691,45 @@ Your ONLY job is to find a SPECIFIC defect. Flag the item (keep=false) ONLY if y
 
 DEPENDENCIES: any step citing another library item by [[id]] or by a fact label ([L#]) whose content restates a cited item may be treated as ASSUMED-CORRECT (those items are audited separately). Judge only THIS item's own reasoning: does its proof correctly establish its stated claim FROM its cited facts?${conventions ? `\n\nConventions in use:\n${conventions}` : ""}${withContext ? CONTEXT_RULES : ""}${hasDiagram ? DIAGRAM_RULES : ""}
 
-Output STRICT minified JSON ONLY, no prose around it:
+Output STRICT minified JSON ONLY, no prose around it. Keep \`reason\` to at most
+280 characters so that the complete JSON verdict is never truncated:
 {"keep":true|false,"reason":"<if keep=false, the specific defect and where; if keep=true, a one-line note on what you verified>"}`;
 
 const sys = refuterSys;
+const buildUserPrompt = () => "Audit this library item. Return only the JSON verdict. Do not read files or call tools: the supplied context is authoritative.\n\n---\n" + body + citedContext(body) + pageContext(body);
 
-// --dump-prompt prints the exact system + user message and exits, so the context
-// assembly can be inspected without spending a call.
+// Build the entire prompt ONCE before either request starts. Context assembly
+// de-duplicates page and cited-item blocks with `shownIds`, so assembling it
+// inside each parallel call would give the second model a different prompt.
+const userPrompt = buildUserPrompt();
+// This exact payload, byte for byte, is the sole model-visible audit prompt for
+// both providers. Their provider envelopes necessarily differ, but neither gets
+// a model-specific system prompt, context block, or verdict from the other.
+const frozenPrompt = sys + "\n\n=== AUDIT MATERIAL ===\n" + userPrompt;
+const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
+// --dump-prompt prints the exact frozen payload and exits without a network call.
 if (bools.has("dump-prompt")) {
-  const user = "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(body);
-  console.log("========== SYSTEM ==========\n" + sys + "\n\n========== USER ==========\n" + user);
-  console.error(`\n[dump-prompt] system ${sys.length} chars, user ${user.length} chars`);
+  console.log(frozenPrompt);
+  console.error(`\n[dump-prompt] frozen prompt ${frozenPrompt.length} chars`);
+  process.exit(0);
+}
+if (bools.has("context-hash")) {
+  console.log(JSON.stringify({ id, context_sha256: contextSha256 }));
   process.exit(0);
 }
 
-const payload = {
-  model,
-  temperature: 0,
-  reasoning_effort: "xhigh",
+const DEEPSEEK_INITIAL_MAX_TOKENS = 40_000;
+const DEEPSEEK_LENGTH_RETRY_MAX_TOKENS = 80_000;
+const configuredAttemptLimit = Number(process.env.JUDGE_MAX_ATTEMPTS ?? 3);
+const MAX_CALL_ATTEMPTS = Number.isInteger(configuredAttemptLimit) && configuredAttemptLimit >= 1
+  ? Math.min(configuredAttemptLimit, 3)
+  : 3;
+const retryAllowed = process.env.JUDGE_RETRY_ALLOWED !== "0";
+const payloadForDeepSeek = (maxTokens: number) => ({
+  model: DEEPSEEK_MODEL,
+  reasoning_effort: "max",
+  thinking: { type: "enabled" },
+  response_format: { type: "json_object" },
   // Raised 3000 -> 8000 -> 40000 on 2026-07-26 (owner). Under the full-page context
   // the reason strings grew, and a truncated reason arrives as unparseable JSON ->
   // keep=null, which reads as a call failure rather than as a verdict. A page agent
@@ -639,61 +739,204 @@ const payload = {
   //
   // This is a CEILING, not a target: billing is on tokens actually produced, and
   // measured completions run about 1.4k. Headroom here costs nothing.
-  // GLM 5.2's max_completion_tokens is 128000, so 40000 is comfortably in range;
-  // check that field before raising it further, and note the GPT-5.4 fallback is
-  // also 128000 while the Gemini fallback caps at 65536.
-  max_tokens: 40000,
-  messages: [
-    { role: "system", content: sys },
-    { role: "user", content: "Audit this library item. Return only the JSON verdict.\n\n---\n" + body + citedContext(body) + pageContext(body) },
-  ],
-};
+  // DeepSeek v4 Pro exhausted 40000 tokens on maximum reasoning without an answer
+  // on the Cycle-1 uniform-Cauchy theorem (2026-07-31). It now starts at 40000
+  // then retries that explicit length failure once at 80000. This keeps
+  // ordinary calls short without weakening the skeptical prompt or abandoning
+  // the hard cases that genuinely need more reasoning room.
+  max_tokens: maxTokens,
+  messages: [{ role: "user", content: frozenPrompt }],
+});
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-interface OfoxResp {
-  choices?: { message?: { content?: string } }[];
+interface JudgeResp {
+  choices?: { message?: { content?: string }; finish_reason?: string | null }[];
   usage?: { prompt_tokens?: number; completion_tokens?: number };
 }
 
-async function call(): Promise<{ content: string; usage?: OfoxResp["usage"]; raw: string; payment?: boolean }> {
-  for (let attempt = 0; attempt < 3; attempt++) {
+const attemptLog = process.env.JUDGE_ATTEMPTLOG;
+const configuredAttemptNumber = Number(process.env.JUDGE_ATTEMPT_NUMBER ?? 1);
+const attemptNumberOffset = Number.isInteger(configuredAttemptNumber) && configuredAttemptNumber >= 1
+  ? configuredAttemptNumber - 1
+  : 0;
+const emitAttempt = (judgeModel: string, attempt: number, event: Record<string, unknown>): void => {
+  if (!attemptLog) return;
+  try {
+    appendFileSync(attemptLog, JSON.stringify({
+      id,
+      model: judgeModel,
+      attempt: attemptNumberOffset + attempt + 1,
+      context_sha256: contextSha256,
+      at: new Date().toISOString(),
+      ...event,
+    }) + "\n");
+  } catch { /* telemetry must never suppress a verdict */ }
+};
+const rateLimitHeaders = (headers: Headers) => ({
+  limit_requests: headers.get("x-ratelimit-limit-requests"),
+  remaining_requests: headers.get("x-ratelimit-remaining-requests"),
+  reset_requests: headers.get("x-ratelimit-reset-requests"),
+  retry_after: headers.get("retry-after"),
+});
+const transportError = (error: unknown) => {
+  const e = error as { name?: unknown; message?: unknown; code?: unknown; errno?: unknown; cause?: unknown };
+  const cause = e?.cause as { name?: unknown; message?: unknown; code?: unknown; errno?: unknown } | undefined;
+  return {
+    name: typeof e?.name === "string" ? e.name : "Error",
+    message: String(e?.message ?? error).slice(0, 500),
+    code: typeof e?.code === "string" ? e.code : null,
+    errno: typeof e?.errno === "string" || typeof e?.errno === "number" ? e.errno : null,
+    cause: cause ? {
+      name: typeof cause.name === "string" ? cause.name : "Error",
+      message: String(cause.message ?? cause).slice(0, 500),
+      code: typeof cause.code === "string" ? cause.code : null,
+      errno: typeof cause.errno === "string" || typeof cause.errno === "number" ? cause.errno : null,
+    } : null,
+  };
+};
+const backoffMs = (attempt: number, retryAfter: string | null = null): number => {
+  const requested = Number(retryAfter ?? NaN);
+  const base = Number.isFinite(requested) ? Math.min(requested * 1000, 60_000) : (attempt + 1) * 4000;
+  return base + Math.floor(Math.random() * 1000);
+};
+const retryAfterMs = (retryAfter: string | null): number | null => {
+  const requested = Number(retryAfter ?? NaN);
+  return Number.isFinite(requested) ? Math.min(requested * 1000, 60_000) : null;
+};
+
+type RetryKind = "transient" | "length";
+type CallResult = {
+  content: string;
+  usage?: JudgeResp["usage"];
+  raw: string;
+  payment?: boolean;
+  retry?: RetryKind;
+  retry_after_ms?: number | null;
+};
+
+async function callDeepSeek(): Promise<CallResult> {
+  let deepseekLengthFallbackUsed = process.env.JUDGE_DEEPSEEK_LENGTH_FALLBACK === "1";
+  for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
+    const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     let resp: Response;
+    const max_tokens = deepseekLengthFallbackUsed ? DEEPSEEK_LENGTH_RETRY_MAX_TOKENS : DEEPSEEK_INITIAL_MAX_TOKENS;
+    const started = performance.now();
     try {
-      resp = await fetch(API_URL, {
+      resp = await fetch(DEEPSEEK_API_URL, {
         method: "POST",
-        headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
+        body: JSON.stringify(payloadForDeepSeek(max_tokens)),
         signal: AbortSignal.timeout(420_000),
       });
     } catch (e) {
-      if (attempt < 2) { await sleep((attempt + 1) * 4000); continue; }
-      return { content: "", raw: String((e as Error)?.message ?? e) };
+      const latency_ms = Math.round(performance.now() - started);
+      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "transport_failure", latency_ms, max_tokens, transport: transportError(e) });
+      if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
+      return {
+        content: "",
+        raw: String((e as Error)?.message ?? e),
+        retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
+      };
     }
     const raw = await resp.text();
+    const latency_ms = Math.round(performance.now() - started);
+    const headers = rateLimitHeaders(resp.headers);
     // A payment error is TERMINAL. Never retry it, and never let it leave here
     // wearing the same clothes as a dropped verdict — see PAYMENT_EXIT above.
-    if (isPaymentError(resp.status, raw)) return { content: "", raw, payment: true };
-    if ((resp.status === 429 || resp.status >= 500) && attempt < 2) {
-      const ra = Number(resp.headers.get("retry-after") ?? NaN);
-      await sleep(!Number.isNaN(ra) ? Math.min(ra * 1000, 60_000) : (attempt + 1) * 4000);
+    if (isPaymentError(resp.status, raw)) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "payment_required", status: resp.status, latency_ms, max_tokens, rate_limit: headers, raw_bytes: raw.length });
+      return { content: "", raw, payment: true };
+    }
+    if (resp.status === 429 || resp.status >= 500) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "retryable_http", status: resp.status, latency_ms, max_tokens, rate_limit: headers, raw_bytes: raw.length });
+      if (retryPossible) { await sleep(backoffMs(attempt, headers.retry_after)); continue; }
+      return {
+        content: "",
+        raw,
+        retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
+        retry_after_ms: retryAfterMs(headers.retry_after),
+      };
+    }
+    let j: JudgeResp = {};
+    try { j = JSON.parse(raw) as JudgeResp; } catch { /* leave raw for the error path */ }
+    const choice = j.choices?.[0];
+    const content = choice?.message?.content ?? "";
+    const finish_reason = choice?.finish_reason ?? null;
+    const successful = resp.status >= 200 && resp.status < 300;
+    const event = {
+      outcome: content ? "response" : !successful ? "empty_http_error" : finish_reason === null ? "empty_incomplete" : "empty_terminal",
+      status: resp.status,
+      latency_ms,
+      max_tokens,
+      rate_limit: headers,
+      finish_reason,
+      has_content: Boolean(content),
+      usage: j.usage ?? null,
+      raw_bytes: raw.length,
+    };
+    // An empty completion with no terminal finish reason is a gateway-side
+    // interruption, not a substantive null verdict. Retry it with jitter. A
+    // DeepSeek length stop gets one 80k fallback after its normal 40k attempt;
+    // a second length stop remains a measurable reasoning-budget null.
+    if (successful && !content && finish_reason === null && retryPossible) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "empty_incomplete_retry" });
+      await sleep(backoffMs(attempt, headers.retry_after));
       continue;
     }
-    let j: OfoxResp = {};
-    try { j = JSON.parse(raw) as OfoxResp; } catch { /* leave raw for the error path */ }
-    return { content: j.choices?.[0]?.message?.content ?? "", usage: j.usage, raw };
+    if (successful && !content && finish_reason === "length" && !deepseekLengthFallbackUsed && retryPossible) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "length_retry" });
+      deepseekLengthFallbackUsed = true;
+      await sleep(backoffMs(attempt, headers.retry_after));
+      continue;
+    }
+    if (successful && !content && finish_reason === null && MAX_CALL_ATTEMPTS === 1 && retryAllowed) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "empty_incomplete_retry" });
+      return { content, usage: j.usage, raw, retry: "transient", retry_after_ms: retryAfterMs(headers.retry_after) };
+    }
+    if (successful && !content && finish_reason === "length" && !deepseekLengthFallbackUsed && MAX_CALL_ATTEMPTS === 1 && retryAllowed) {
+      emitAttempt(DEEPSEEK_MODEL, attempt, { ...event, outcome: "length_retry" });
+      return { content, usage: j.usage, raw, retry: "length", retry_after_ms: retryAfterMs(headers.retry_after) };
+    }
+    emitAttempt(DEEPSEEK_MODEL, attempt, event);
+    return { content, usage: j.usage, raw };
   }
   return { content: "", raw: "retries exhausted" };
 }
 
-const { content, usage, raw, payment } = await call();
-
-const costlog = process.env.JUDGE_COSTLOG;
-if (costlog) {
-  try {
-    appendFileSync(costlog, JSON.stringify({ id, model, pt: usage?.prompt_tokens ?? 0, ct: usage?.completion_tokens ?? 0 }) + "\n");
-  } catch { /* non-fatal */ }
+async function callTerra(): Promise<CallResult> {
+  for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
+    const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
+    const started = performance.now();
+    const run = await runFreshTerra(frozenPrompt, 12 * 60_000);
+    const latency_ms = Math.round(performance.now() - started);
+    const content = run.stdout.trim();
+    const event = {
+      outcome: content && run.code === 0 ? "response" : run.timedOut ? "timeout" : "codex_exit",
+      status: run.code,
+      latency_ms,
+      max_tokens: null,
+      finish_reason: run.code === 0 ? "codex_complete" : run.timedOut ? "timeout" : "codex_exit",
+      has_content: Boolean(content),
+      raw_bytes: (run.stdout.length + run.stderr.length),
+    };
+    if (run.code === 0 && content) {
+      emitAttempt(TERRA_MODEL, attempt, event);
+      return { content, raw: run.stderr };
+    }
+    emitAttempt(TERRA_MODEL, attempt, event);
+    if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
+    return {
+      content: "",
+      raw: (run.stderr || run.stdout || `codex exited ${String(run.code)}`).slice(0, 1000),
+      retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
+    };
+  }
+  return { content: "", raw: "Terra retries exhausted" };
 }
+
+const call = (judgeModel: string): Promise<CallResult> =>
+  judgeModel === DEEPSEEK_MODEL ? callDeepSeek() : callTerra();
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
 // until now a rejection existed solely on stdout and vanished the moment it was
@@ -701,13 +944,13 @@ if (costlog) {
 // needs a COUNT PER PROOF ACROSS RUNS, so verdicts must outlive the run that
 // produced them. Set JUDGE_VERDICTLOG to the level's ledger and never rotate it
 // mid-level; the count is the whole point.
-const emit = (keep: boolean | null, reason: string): void => {
-  const line = JSON.stringify({ id, model, keep, reason });
+const emit = (judgeModel: string, keep: boolean | null, reason: string): void => {
+  const line = JSON.stringify({ id, model: judgeModel, keep, reason });
   process.stdout.write(line + "\n");
   const vlog = process.env.JUDGE_VERDICTLOG;
   if (vlog) {
     try {
-      appendFileSync(vlog, JSON.stringify({ id, model, keep, reason, at: new Date().toISOString() }) + "\n");
+      appendFileSync(vlog, JSON.stringify({ id, model: judgeModel, keep, reason, context_sha256: contextSha256, at: new Date().toISOString() }) + "\n");
     } catch { /* non-fatal: stdout is still the primary channel */ }
   }
 };
@@ -720,21 +963,54 @@ const emit = (keep: boolean | null, reason: string): void => {
 // times was this proof refuted", and a payment failure is not a verdict about
 // the proof at all. 46 such lines entered the frontier-1 ledger before this
 // existed and had to be filtered out of every count made from it afterwards.
-if (payment) {
-  process.stdout.write(JSON.stringify({ id, model, keep: null, reason: "PAYMENT_REQUIRED: " + raw.slice(0, 200) }) + "\n");
-  console.error("[judge] ACCOUNT CANNOT PAY — stopping. This is terminal: no retry will succeed and this is not a dropped verdict.");
-  console.error("[judge] Needs an owner top-up. Run `tsx tools/judge.mts --preflight` to confirm before restarting a sweep.");
+type Verdict = { judgeModel: string; keep: boolean | null; reason: string; usage?: JudgeResp["usage"]; payment?: boolean; retry?: RetryKind; retry_after_ms?: number | null };
+
+const judgeOne = async (judgeModel: string): Promise<Verdict> => {
+  const { content, usage, raw, payment, retry, retry_after_ms } = await call(judgeModel);
+  if (payment) return { judgeModel, keep: null, reason: "PAYMENT_REQUIRED: " + raw.slice(0, 200), usage, payment: true };
+  if (retry) return { judgeModel, keep: null, reason: "RETRY_REQUIRED: " + raw.slice(0, 200), usage, retry, retry_after_ms };
+  if (!content) return { judgeModel, keep: null, reason: "NO_CONTENT: " + raw.slice(0, 300), usage };
+  const cleaned = content.replace(/^```json/i, "").replace(/^```/, "").replace(/```$/, "").trim();
+  try {
+    const v = JSON.parse(cleaned) as { keep?: boolean; reason?: string };
+    return { judgeModel, keep: typeof v.keep === "boolean" ? v.keep : null, reason: v.reason ?? content, usage };
+  } catch {
+    // A few reasoning models occasionally overrun the requested reason length
+    // after first emitting an unambiguous `{"keep":true, ...` verdict. An
+    // acceptance has no defect rationale to preserve, so record that explicit
+    // leading accept rather than burning repeat calls on JSON punctuation. A
+    // partial rejection is NEVER accepted: it lacks the specific defect that
+    // Step 8 must adjudicate, and remains a null for a targeted retry.
+    const leading = cleaned.match(/^\{\s*"keep"\s*:\s*(true|false)\b/);
+    if (leading?.[1] === "true") {
+      return { judgeModel, keep: true, reason: "TRUNCATED_ACCEPT: " + content.slice(0, 300), usage };
+    }
+    return { judgeModel, keep: null, reason: `UNPARSEABLE (${content.length} chars): ` + content.slice(0, 300), usage };
+  }
+};
+
+// `Promise.all` is intentional: --parallel gives both independent refuters the
+// exact same frozen prompt, rather than letting either model's result influence
+// the other's context or verdict.
+const verdicts = await Promise.all(models.map(judgeOne));
+const costlog = process.env.JUDGE_COSTLOG;
+for (const verdict of verdicts) {
+  if (costlog) {
+    try {
+      appendFileSync(costlog, JSON.stringify({ id, model: verdict.judgeModel, pt: verdict.usage?.prompt_tokens ?? 0, ct: verdict.usage?.completion_tokens ?? 0 }) + "\n");
+    } catch { /* non-fatal */ }
+  }
+  if (verdict.retry) {
+    process.stdout.write(JSON.stringify({ id, model: verdict.judgeModel, retry: verdict.retry, retry_after_ms: verdict.retry_after_ms ?? null }) + "\n");
+  } else {
+    emit(verdict.judgeModel, verdict.keep, verdict.reason);
+  }
+}
+if (verdicts.some((verdict) => verdict.payment)) {
+  console.error("[judge] ACCOUNT CANNOT PAY — stopping. This is terminal: no retry will succeed and this is not a verdict about the proof.");
+  console.error("[judge] Needs an owner top-up. Run `tsx tools/judge.mts --preflight --parallel` to confirm both judges before restarting a paired sweep.");
   process.exit(PAYMENT_EXIT);
 }
-
-if (!content) {
-  emit(null, "NO_CONTENT: " + raw.slice(0, 300));
-  process.exit(0);
-}
-const cleaned = content.replace(/^```json/i, "").replace(/^```/, "").replace(/```$/, "").trim();
-try {
-  const v = JSON.parse(cleaned) as { keep?: boolean; reason?: string };
-  emit(typeof v.keep === "boolean" ? v.keep : null, v.reason ?? content);
-} catch {
-  emit(null, "UNPARSEABLE: " + content.slice(0, 300));
+if (verdicts.some((verdict) => verdict.retry)) {
+  process.exit(verdicts.some((verdict) => verdict.retry === "length") ? 5 : 4);
 }

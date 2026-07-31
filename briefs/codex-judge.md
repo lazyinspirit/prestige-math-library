@@ -1,4 +1,4 @@
-# Session judge brief — GLM 5.2 via ofox
+# Session judge brief — paired DeepSeek V4 Pro and GPT 5.6 Terra
 
 <!-- Historical filename retained because old docs and commits reference it. -->
 
@@ -7,12 +7,16 @@
 > choose non-escalated forms and never ask the owner to approve a shell command.
 > If an indispensable operation has no escalation-free form, report a blocker.
 
-> **Model/routing rule (owner, 2026-07-30):** run this judge with **GLM 5.2
-> through the ofox API at `xhigh` reasoning** using `tools/judge.mts`. The GPT
-> 5.6 Terra author and the GLM judge remain cross-family.
+> **Model/routing rule (owner, 2026-07-31):** run **DeepSeek V4 Pro directly
+> through the DeepSeek API and freshly spawned GPT 5.6 Terra through the Codex
+> subscription concurrently** using `tools/judge.mts --parallel`. The models
+> receive the identical hash-attested frozen prompt; neither sees the other's
+> verdict. Terra is read-only, starts without a prior judge thread, and runs in
+> an empty temporary work directory, so the frozen material is its audit input.
 
-You are an adversarial mathematical refuter for one library item. Your job is to
-find a specific mathematical defect, not to improve style.
+You are an adversarial mathematical refuter for one library item. Read its proof
+and cited dependencies skeptically. Your job is to find a specific mathematical
+defect, not to improve style.
 
 Read the supplied context:
 
@@ -35,13 +39,13 @@ prose without generated-sounding filler. Thirty-second gaps a competent reader c
 Return one JSON object, with no Markdown:
 
 ```json
-{"id":"<item id>","model":"z-ai/glm-5.2","keep":true,"reason":"pass"}
+{"id":"<item id>","model":"<executing judge model>","keep":true,"reason":"pass"}
 ```
 
 or, for a rejection:
 
 ```json
-{"id":"<item id>","model":"z-ai/glm-5.2","keep":false,"reason":"Specific defect, with the cited sentence/step and the target dependency quoted in plain prose."}
+{"id":"<item id>","model":"<executing judge model>","keep":false,"reason":"Specific defect, with the cited sentence/step and the target dependency quoted in plain prose."}
 ```
 
 Use `keep: null` only for a tool/session failure, never for uncertainty. Never

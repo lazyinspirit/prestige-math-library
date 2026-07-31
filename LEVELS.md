@@ -1,4 +1,4 @@
-# The per-level build, step 0 to 9 — canonical
+# The per-level build, step 0 to 10 — canonical
 
 The owner builds this library **one A-page dependency level at a time**. This
 file is the single description of that process — *what happens in what order*.
@@ -10,7 +10,7 @@ of a single page's journey.
 All four normative docs are updated **in the same commit as the change they
 describe** (owner, 2026-07-27).
 
-Everything below is verified against the code as of 2026-07-30.
+Everything below is verified against the code as of 2026-07-31.
 
 ---
 
@@ -20,10 +20,10 @@ Everything below is verified against the code as of 2026-07-30.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-8 adjudication of every judge rejection**, reporting |
-| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`** | spawned at **step 4**, resumed at **step 6**; propagates approved changes into higher-level prose; audits every Beta fix from disk; audits cross-batch and cross-level references |
-| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
-| **authoring agent** | **GPT 5.6 Terra via the Codex subscription plan, `xhigh`** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
-| **judge** | **GLM 5.2 via the ofox API, `xhigh`** | cheap cross-family adversarial screen; invoked through `tools/judge.mts` |
+| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | spawned at **step 4**, resumed at **step 6**; dispatches read-only skeptical proof-refuters, adjudicates their findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every Beta fix and cross-batch/cross-level reference from disk |
+| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
+| **authoring agent** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
+| **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned GPT 5.6 Terra via Codex (`xhigh`)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the cross-family lane; Terra is the apples-to-apples comparison lane. |
 
 ## Artifacts
 
@@ -34,10 +34,11 @@ Everything below is verified against the code as of 2026-07-30.
 | `research/plan-spec.json` | **machine scaffold**. `pages[]` of `{order, id, kind, category, title, companion, requires[], items[]}`; each item `{id, kind, title, strategy?, deps[]}` |
 | `research/level<n>-batch-<i>.pages.json` / `.notes.md` | Beta-n-i's **only** writable outputs |
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
+| `research/level<n>-judge-attempts.jsonl` | **judge transport/latency ledger** (`JUDGE_ATTEMPTLOG`), written by the sweep |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
-| `briefs/judge-conventions.txt` | the judge's conventions block, passed to the GLM ofox judge through `tools/judge.mts` |
-| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, GLM judge). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **no shell-permission prompts rule** (`ARCHITECTURE.md` §6.1) |
+| `briefs/judge-conventions.txt` | the paired judges' conventions block, passed unchanged to DeepSeek and Terra through `tools/judge.mts --parallel` |
+| `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, paired judges). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **no shell-permission prompts rule** (`ARCHITECTURE.md` §6.1) |
 
 ### `order` is not stable across insertions — recompute, never remember
 
@@ -107,17 +108,19 @@ rather than trusting the sweep.
 workflow is now numbered in the order it actually runs.
 
 ```
-0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
-                        ▲   ▲   ▲   ▲
-          author, gates ┘   │   │   └ sweep, rundown, pause
-          only, NO judge    │   └ adjudicate judge rejections
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
+                        ▲   ▲   ▲   ▲    ▲
+          author, gates ┘   │   │   │    └ rundown, sole owner pause
+          only, NO judge    │   │   └ sweep only; continue directly
+                            │   └ adjudicate judge rejections
                             └ judge ONCE, after the audit
 ```
 
 **Legacy mapping for old notes:** old step 9 (and the retired old step 8 duties)
-is now **step 6**; old step 6 is now **step 7**; old step 7 is now **step 8**;
-old step 10 is now **step 9**. Historical research notes may still use the old
-numbers; normative instructions below use the new ones.
+is now **step 6**; old step 6 is now **step 7**; old step 7 is now **step 8**.
+The old step 10 sweep is now **step 9**; its former final rundown and owner
+pause are now the distinct **step 10**. Historical research notes may still use
+the old numbers; normative instructions below use the new ones.
 
 **Why the judge stays after the audit.** Measured on `frontier-1`: **292 judge
 calls for 212 items.** Audits rewrite prose, and SCHEMA §3 correctly voids a
@@ -235,11 +238,11 @@ overwrite.
 > gates are clean and its report is written. Judging is step 7 and runs after the
 > step-6 audit. This is where most of the wall-clock saving lives.
 
-**Model change (owner, 2026-07-30): authoring agents are GPT 5.6 Terra via the
-Codex subscription plan at `xhigh` reasoning.** GPT-family models are not called
-through ofox. Terra authors use the same `briefs/authoring.md` contract and must
-emit normal repo files; the orchestrator remains responsible for running the
-gates of record.
+**Model change (owner, 2026-07-31): authoring agents are GPT 5.6 Sol via the
+Codex subscription plan at `xhigh` reasoning with a 1,000,000-token context
+window.** GPT-family models are not called through ofox. Sol authors use the
+same `briefs/authoring.md` contract and must emit normal repo files; the
+orchestrator remains responsible for running the gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
@@ -275,12 +278,24 @@ correct. Splitting a single level is not.
 
 ## Step 6 — Audit (Betas first, then Alpha-n)
 
-**Model (owner, 2026-07-30): Beta-n-i and Alpha-n are GPT 5.6 Sol run through
-the Codex subscription plan at `xhigh` reasoning.** Do not run GPT-family audit
-work through ofox.
+**Model (owner, 2026-07-31): Beta-n-i and Alpha-n are GPT 5.6 Sol run through
+the Codex subscription plan at `xhigh` reasoning with a 1,000,000-token context
+window.** Do not run GPT-family audit work through ofox.
 
 This is the final mathematical reading tier before the judge and the owner. It
 has three ordered parts.
+
+**Alpha proof-refuters (owner, 2026-07-31).** For every future Alpha-n audit,
+Alpha dispatches one or more GPT 5.6 Sol proof-reading subagents with
+**read-only access** to the in-flight level and all published library content.
+Where the runtime exposes file permissions, grant no write capability; otherwise
+their prompt forbids `apply_patch`, file writes, and fixes. They work with the
+same adversarial standard as both step-7 judges: trace every proof step against
+its cited facts and dependencies, read those dependencies before claiming they
+are insufficient, and report only a specific logical, statement, hypothesis, or
+citation defect. They return evidence, never edits. Alpha-n remains the single
+adjudicator: it verifies every reported issue from disk, may refute a false
+positive, and alone may repair and gate in-flight content.
 
 ### 6a. Beta batch audits, in parallel
 
@@ -290,9 +305,10 @@ batch files.
 
 For every authored item in the batch, the Beta must:
 
-1. **Verify every proof step of every proof.** Read the step, its cited facts,
-   and the cited dependency items from disk. A step is clean only if the cited
-   material mathematically licenses exactly what the step claims.
+1. **Verify every proof step of every proof skeptically.** Read the step, its
+   cited facts, and the cited dependency items from disk as a refuter would. A
+   step is clean only if the cited material mathematically licenses exactly what
+   the step claims.
 2. **Verify every dependency citation in the batch**, syntactically and
    semantically: the target exists, is an allowed earlier/same-page dependency or
    declared forward reference, and actually states the proposition for which it
@@ -319,10 +335,11 @@ citation in the batch was read, or naming any exception.
 ### 6b. Alpha audit of Beta fixes
 
 After all Betas finish, Alpha-n audits the mistakes and fixes reported by every
-Beta. Alpha verifies from disk, not from the report: changed item text, added or
-deleted results, dependency lists, page lists, stale judge blocks, and gate
-status. Alpha may accept, amend, revert, or extend a Beta fix. If Alpha adds a
-result, Alpha personally authors its proof.
+Beta and the evidence reported by Alpha's read-only proof-refuters. Alpha
+verifies from disk, not from any report: changed item text, added or deleted
+results, dependency lists, page lists, stale judge blocks, and gate status.
+Alpha may confirm, refute, amend, revert, or extend a reported error or Beta
+fix. If Alpha adds a result, Alpha personally authors its proof.
 
 ### 6c. Alpha cross-batch and cross-level citation audit
 
@@ -357,39 +374,79 @@ necessary fixes.
 
 ## Step 7 — Judge (after the audit, one sweep, on final text)
 
-**Model change (owner, 2026-07-30): the session-item judge is GLM 5.2 through
-the ofox API at `xhigh` reasoning.** It is cross-family from the GPT 5.6 Terra
-author. `tools/judge.mts` is the default judge path and retains the historical
-injection-test record.
+**Model change (owner, 2026-07-31): the session-item judges are DeepSeek V4 Pro
+directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
+Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
+one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
+cross-process ten-call global pool, so either model moves to its next item as
+soon as a slot is free. Both receive the same exact hash-attested frozen prompt
+for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
+author; Terra is retained as an independent same-context comparison lane, not
+as a cross-family claim. The harness retains the historical injection-test
+record.
 
 Use `briefs/codex-judge.md` (historical filename) plus
-`briefs/judge-conventions.txt`. The judge's
+`briefs/judge-conventions.txt`. Each judge's
 context unit stays the **A/B pair**: the item page and its `-examples` companion
 in full, plus only the pages the item's own page both declares in `requires` and
 actually cites. Compute that batch mechanically; do not pass every sibling page.
 
 Record a full verdict ledger at `research/level<n>-judge.jsonl` with at least
-`{id, model, keep, reason, at}` for every call. `verification.judge` records only
-passes. Never record a pass the judge did not give; a null/failed subscription
-run is not a verdict.
+`{id, model, keep, reason, context_sha256, at}` for **both** model calls on
+every item. The two `context_sha256` values must match: this is the mechanical
+attestation that the judges saw the same frozen context. Use
+`tools/judge-sweep.mjs` to resume a selected page set. Pass its A-page ids: the
+sweep automatically includes every selected A page's B/examples companion, so
+all items in each A/B pair receive coverage. It skips only complete
+pairs whose hash also matches freshly assembled current context.
+The sweep assembles each selected item's current prompt hash once before
+scheduling and uses that single attestation for both model queues.
+For a targeted recovery, `--models <model>` retries only that model's missing
+current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
+The sweep runs at most ten judge calls total, with no DeepSeek/Terra split or
+per-item barrier: a finished call takes the next eligible call for its own
+model while the other model continues independently.
+It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
+finish reason, and structured transport cause. An empty response with no terminal
+finish reason is retried with jitter up to the normal three-attempt limit;
+the sweep, rather than a slot-holding child, schedules that retry, so its global
+slot is released during the wait and other model calls continue.
+DeepSeek's empty `finish_reason: length` first pass is retried once at 80k tokens
+after its ordinary 40k-token maximum-reasoning pass. A second length stop remains an
+explicit reasoning-budget null.
+`verification.judge` records a pass only after both models passed the text.
+Never record a pass a judge did not give; a null/failed call is not a verdict.
+At step 10, compare both-pass, both-reject, Terra-only rejection, DeepSeek-only
+rejection, and incomplete/null outcomes with their adjudications. Record one
+owner adjudication for every model rejection in
+`research/level<n>-judge-adjudications.jsonl`, keyed by `{id, model,
+context_sha256}`, with `outcome` (`confirmed_fatal`, `confirmed_nonfatal`, or
+`false_positive`) and, when fatal, `defect_type` (`logic`,
+`dependency_citation`, or `other`). Run
+`tools/judge-compare.mjs <ledger> --adjudications <file>` in step 10: only its
+adjudicated fatal logic/dependency-citation counts support a judge-effectiveness
+comparison; raw rejection counts do not.
 
-Before adopting any different judge model or context shape, run an injection test
-with a defect known to be false under the library's own conventions. The old GLM
-and DeepSeek measurements remain evidence that a low rejection rate is not a
-judge-quality metric.
+The existing injection record for GLM and DeepSeek v4 Flash remains evidence
+that a low rejection rate is not a judge-quality metric; it does not substitute
+for the paired per-level comparison required here.
 
 ## Step 8 — Adjudicate judge rejections (orchestrator)
 
-A rejection now lands on text that has cleared the step-6 audit, so the
-orchestrator adjudicates it personally. **Adjudicate, do not comply.** Each
-rejection gets either a fix, with the defect named, or a refutation, with a
-verbatim quote from the cited item. Then delete `verification.judge` on anything
-materially rewritten and re-judge only what changed.
+A rejection from **either** judge now lands on text that has cleared the step-6
+audit, so the orchestrator adjudicates it personally. **Adjudicate, do not
+comply.** Each rejection gets either a fix, with the defect named, or a
+refutation, with a verbatim quote from the cited item. Append a per-model,
+per-context owner decision to `research/level<n>-judge-adjudications.jsonl` so
+step 10 can separate confirmed fatal logic/dependency-citation detections from
+nonfatal findings and false positives. Then delete
+`verification.judge` on anything materially rewritten and re-run both judges
+only on what changed.
 
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.
 Remark prose is where falsehoods hide.
 
-## Step 9 — Sweep, rundown, then pause
+## Step 9 — Scope-denial sweep
 
 ### 9a. Scope-denial sweep of the published corpus
 
@@ -404,11 +461,17 @@ Amendments to published pages land in the same commit that publishes the level,
 never before, with `verification.audited` cleared so `depcheck` forces the
 owner's re-audit. After any such repair, re-grep the file you repaired.
 
-### 9b. Rundown, then pause
+Do not pause after this sweep. Continue directly to step 10, including any
+required re-grep or re-audit caused by a repair.
 
-Full report: added/deleted in-flight results; forward references present; judge
-coverage counted from frontmatter on disk; gate results; escalation set; Beta
-batch-audit coverage; Alpha cross-edge coverage; and readiness to publish.
+## Step 10 — Final rundown and sole owner pause
+
+Full report: added/deleted in-flight results; forward references present; paired
+judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Terra
+agreement, model-only findings, and the owner-adjudicated fatal logic and
+dependency-citation detection comparison; gate results;
+escalation set; Beta batch-audit coverage; Alpha cross-edge coverage; and
+readiness to publish.
 
 The rundown also contains a **concise but complete fatal-error report**. It
 enumerates every publish-blocking mathematical defect encountered and fixed,
@@ -424,7 +487,8 @@ concise; no fatal defect may be omitted. Beta audit ledgers, the Alpha ledger,
 judge verdict log, touch ledger, and orchestrator adjudication log are the
 evidence sources.
 
-Then stop for the owner.
+This is the **only owner pause** in the per-level build. Stop for the
+owner here, short of owner audit, publication, commit, or push.
 
 ---
 
@@ -443,11 +507,12 @@ independent triggers; count **refutations + repairs combined, per item**:
 The personal audit must state the **nature** of the fault (mathematical
 inaccuracy / mis-cited dependency / unjustified step / judge false positive) and
 the **ramification of dropping** the result: what cites it, what breaks, whether
-a weaker true statement serves. Then report and iterate with the owner.
-Beta/Alpha may add or delete in-flight draft results under step 6, but published
-items and items outside the in-flight level still require explicit owner approval
-before removal; at 21–24% precision a repeated rejection can be a repeated false
-positive.
+a weaker true statement serves. Record the finding in the escalation set and
+continue the build; the end-of-step-10 report is the sole owner pause. Beta/Alpha
+may add or delete in-flight draft results under step 6, but a published item or
+an item outside the in-flight level is never removed without explicit owner
+approval; defer that owner-bound decision to the step-10 report. At 21–24%
+precision a repeated rejection can be a repeated false positive.
 
 ```
 node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage>"   # after EVERY item-modifying stage

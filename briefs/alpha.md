@@ -13,8 +13,9 @@
 > **Pass it on.** You dispatch/brief Beta readers at step 6; put this rule in
 > their prompts.
 
-> **Model/routing rule (owner, 2026-07-30).** You are **GPT 5.6 Sol via the Codex
-> subscription plan at `xhigh` reasoning**. Do not run GPT-family work through
+> **Model/routing rule (owner, 2026-07-31).** You are **GPT 5.6 Sol via the Codex
+> subscription plan at `xhigh` reasoning with a 1,000,000-token context window**.
+> Do not run GPT-family work through
 > ofox.
 
 Read `LEVELS.md`, `CLAUDE.md`, `SCHEMA.md`, `ARCHITECTURE.md`, and the relevant
@@ -48,6 +49,27 @@ Never rename an id on `main`.
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
 GLM ofox judge is step 7.
 
+## Your read-only proof-refuter subagents (owner, 2026-07-31)
+
+For every future step-6 audit, dispatch one or more proof-reading subagents
+before your own adjudication. Give each **read-only access** to the in-flight
+level and all published library content. If the launcher supports capability
+restrictions, grant no write capability; otherwise explicitly forbid all file
+writes, `apply_patch`, and fixes. They report evidence only.
+
+Their review standard is the same skeptical, adversarial standard used by GLM
+5.2 and DeepSeek v4 Pro at step 7. Instruct each reader to trace every proof
+step against the exact cited facts and dependency statements; read the cited
+item before saying a fact is too weak; seek concrete false claims, invalid
+inferences, missing hypotheses, scope/quantifier errors, or inaccurate
+dependency citations; and accept an item when no specific defect exists. A
+terse but licensed routine move is not an error. Require id, exact location,
+and the dependency text or counterexample supporting every finding.
+
+You are the **sole Alpha adjudicator**. Verify every reader report from disk and
+either confirm it, refute it with the relevant text or mathematics, or apply the
+warranted in-flight fix yourself. Reader conclusions never directly edit content.
+
 ## Stage 1 — step 4: propagate approved changes
 
 Apply approved `.notes.md` amendments from every `research/level<n>-batch-<i>.notes.md`
@@ -65,14 +87,15 @@ citation in their batch, fix defects, and report coverage.
 
 ### 6b. Audit every Beta fix
 
-After all Beta reports arrive, verify every reported mistake and fix from disk:
+After all Beta and proof-refuter reports arrive, adjudicate every reported
+mistake or candidate defect from disk:
 changed items, page files, dependency lists, added/deleted results, stale judge
 blocks, and local gate output. Verify every A-page summary has exactly two
 nonempty prose paragraphs under 150 words each: mathematical background and
 actually used declared dependencies first; main definitions, theorems, and
 logical progression second. Every B page must have no authored summary body.
-Accept, amend, revert, or extend fixes as needed. If you add a result, personally
-author its proof.
+Confirm, refute, amend, revert, or extend fixes as the evidence warrants. If
+you add a result, personally author its proof.
 
 ### 6c. Audit cross-batch and cross-level references
 
@@ -95,13 +118,15 @@ citation.
 
 1. Beta reports received and whether their coverage was complete.
 2. Every Beta fix you audited, accepted, amended or rejected.
-3. Every cross-batch/cross-level edge audited, or the manifest path plus explicit
+3. Every read-only proof-refuter finding, its evidence, and your confirmation,
+   refutation, or repair disposition.
+4. Every cross-batch/cross-level edge audited, or the manifest path plus explicit
    statement that all non-same-batch edges were read.
-4. Items/pages you changed, added, or deleted; for any added proof result, state
+5. Items/pages you changed, added, or deleted; for any added proof result, state
    that you personally authored the proof.
-5. Twice-touched items that now require orchestrator personal audit.
-6. Honest remaining gaps, if any.
-7. A consolidated **fatal-error ledger for step 9**. For every
+6. Twice-touched items that now require orchestrator personal audit.
+7. Honest remaining gaps, if any.
+8. A consolidated **fatal-error ledger for step 10**. For every
    publish-blocking mathematical error found by either Beta or Alpha, record the
    affected id/file, defect type, location (title/Statement, proof/refutation,
    Facts/dependencies, Remark, or page prose/summary), and exact fix disposition

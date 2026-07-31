@@ -122,14 +122,18 @@ verification:
   precheck: pass                     # pass | n/a  (n/a only for kinds with no
                                      #   phase-stratified body: def, ex, rem)
   judge:                             # omit only if not yet judged
-    model: z-ai/glm-5.2
-                                     #   session workflow: GLM 5.2 via the ofox
-                                     #   API at xhigh reasoning; the GPT 5.6
-                                     #   Terra author runs via Codex.
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+                                     #   session workflow: DeepSeek V4 Pro runs
+                                     #   directly and fresh GPT 5.6 Terra runs via
+                                     #   Codex on identical frozen context; the GPT
+                                     #   5.6 Sol author also runs via Codex with a
+                                     #   1M-token context.
                                      #   Pipeline items use the production lineup
     verdict: pass
     date: 2026-07-25
-    # RECORD ONLY A VERDICT THE JUDGE ACTUALLY GAVE, for the text now on disk.
+    # RECORD ONLY A PAIRED PASS BOTH JUDGES ACTUALLY GAVE, for the text now on
+    # disk. The full per-model verdicts and any rejection remain in the level
+    # ledger for Step-10 comparison.
     # A rejection is NOT recorded here in any form: it is evidence for the
     # auditor, not a verdict (WORKFLOW.md §0). An item cleared by the auditor
     # over a verified judge false positive is recorded `audited` ALONE.

@@ -1,0 +1,61 @@
+---
+id: cex-dini-needs-a-compact-domain
+kind: counterexample
+title: "Dini's theorem fails on $[0,\\infty)$: $x/(\\iota(k+1)+x)$ decreases pointwise to zero but not uniformly"
+status: published
+origin: session
+deps: [thm-dini-on-a-closed-interval, def-continuity-real, thm-algebra-of-continuous-functions, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, thm-heine-borel-characterisation-r, def-bounded-set]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  audited: 2026-07-31
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "KTH Real Analysis Lecture Notes, §6.3"
+      url: "https://people.kth.se/~dogge/files/analysis.pdf"
+pipeline_run: null
+---
+
+## Statement refuted
+
+**Refuted claim:** the compact-domain hypothesis in Dini's theorem can be
+dropped.
+
+On $[0,\infty)$ define
+
+$$f_k(x):=\frac{x}{\iota(k+1)+x}.$$
+
+The functions $f_k$ and their pointwise limit $0$ are continuous, and
+$f_{k+1}(x)\le f_k(x)$ for every $x\ge0$, but $f_k\to0$ is not uniform.
+
+## Facts & Assumptions
+
+**Given:** The functions $f_k$ in the Statement, with $a_k:=\iota(k+1)>0$.
+
+[L1] Constants and the identity are continuous; sums and quotients with nonvanishing denominator preserve continuity ([[thm-algebra-of-continuous-functions]], [[def-continuity-real]]).
+
+[L2] For every real $\varepsilon>0$ there is $N\ge1$ with $1/\iota(N)<\varepsilon$, and the positive canonical naturals increase while their reciprocals decrease ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]], [[lem-of-inverse-positive]]).
+
+[L3] A subset of $\mathbb{R}$ is compact exactly when it is closed and bounded; $[0,\infty)$ is unbounded ([[thm-heine-borel-characterisation-r]], [[def-bounded-set]]).
+
+[L4] Dini's theorem on a closed interval concludes uniform convergence from continuity, pointwise monotonicity, and a continuous pointwise limit ([[thm-dini-on-a-closed-interval]]).
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 For every $k$, the denominator $a_k+x$ is positive on $[0,\infty)$, so $f_k$ is continuous by [L1]; the zero function is continuous as well. [given, L1]
+
+1.2 Since $a_{k+1}>a_k>0$, one has $a_{k+1}+x>a_k+x>0$, hence $f_{k+1}(x)\le f_k(x)$ for every $x\ge0$. [L2, algebra]
+
+1.3 Fix $x\ge0$. If $x=0$ then $f_k(x)=0$; if $x>0$, then $0\le f_k(x)\le x/a_k$, and [L2] gives $x/a_k\to0$. Thus $f_k(x)\to0$ for every $x$. [L2, algebra]
+
+1.4 At $x_k:=a_k$ one has $f_k(x_k)=a_k/(a_k+a_k)=1/2$, so the convergence is not uniform. [given, algebra]
+
+1.5 The domain $[0,\infty)$ is not compact by [L3]. [L3]
+
+2.1 Hence all the listed Dini hypotheses except compactness hold, while the uniform conclusion fails; compactness cannot be dropped. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, L4] ∎

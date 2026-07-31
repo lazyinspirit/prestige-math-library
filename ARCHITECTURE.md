@@ -8,7 +8,7 @@ built to prevent*. `SCHEMA.md` and `CLAUDE.md` win where they differ.
 here in the same commit. A mechanism nobody can find is a mechanism that gets
 rebuilt worse. See §9.
 
-Verified against the code 2026-07-30.
+Verified against the code 2026-07-31.
 
 ---
 
@@ -32,9 +32,11 @@ That is the design claim, and it is measured, not assumed.
 
 The asymmetry worth internalising: **mechanical gates prove absence of a defect
 class; reading tiers find defects; the judge is a cheap screen and finds almost
-nothing.** Measured judge precision on this corpus is **21–24%**, and it scored
-**0/3** on real historical defects. Never model it as the thing that finds
-problems.
+nothing.** Historical judge measurements on this corpus were **21–24%**
+precision and **0/3** on real historical defects. The current DeepSeek/Terra
+pair receives no inherited quality claim: its effectiveness is reported only
+from owner-adjudicated per-level findings. Never model it as the thing that
+finds problems.
 
 ## 2. The content contract (`SCHEMA.md`)
 
@@ -283,6 +285,7 @@ them.
 | ledger | written by | answers |
 |---|---|---|
 | `research/level<n>-judge.jsonl` | `judge.mts` via `JUDGE_VERDICTLOG` | how many times was this proof refuted? |
+| `research/level<n>-judge-attempts.jsonl` | `judge.mts` via `JUDGE_ATTEMPTLOG` | why did a judge call slow, retry, or fail? |
 | `research/level<n>-touches.json` | `touchlog.mjs` | how many times was this proof repaired? |
 
 Both exist for the **twice-touched escalation rule**, and both were built because
@@ -308,7 +311,8 @@ prevent.
 The rule in `LEVELS.md` — snap "after EVERY item-modifying stage" — is not
 advice, and two snapshots at the ends of a build do not satisfy it. Minimum for a
 build: baseline, **after authoring**, after step 6 audit, after step 8
-adjudication, and after step 9. The judge ledger still supplied refutation counts, so the
+adjudication, and after the step-9 sweep (plus after any item repair in step
+10). The judge ledger still supplied refutation counts, so the
 escalation rule fired correctly on its other trigger; repairs were the half that
 went unrecorded.
 
@@ -320,12 +324,32 @@ stamped items with a phantom repair in one pass. It keeps `title`, `deps`,
 mathematical edit despite living in frontmatter. First appearance = creation,
 not repair.
 
+**Attempt telemetry is separate from the verdict ledger.** A verdict line says
+only whether the model produced a mathematical pass, refutation, or honest null;
+it must not be polluted by an individual socket error or rate-limit retry. The
+attempt ledger instead records the per-attempt latency, HTTP status and available
+rate-limit headers, terminal finish reason, token usage, and structured transport
+error cause. Empty non-final responses (`content: ""`, no finish reason) are
+requeued by the sweep with jitter under the existing three-attempt limit; the
+slot is released during the wait so other independent calls are not starved.
+DeepSeek starts at
+40k maximum-reasoning output tokens and receives a single 80k fallback only for an empty
+`length` response; a second length response is retained as a reasoning-budget
+null so its distinct failure mode remains measurable.
+
 ## 5. The judge
 
-**Current routing (owner, 2026-07-30): session-item judging uses GLM 5.2 through
-the ofox API at `xhigh` reasoning.** It is cross-family from the GPT 5.6 Terra
-author. `tools/judge.mts` is the default judge path and retains the GLM/DeepSeek
-injection-test record.
+**Current routing (owner, 2026-07-31): session-item judging runs DeepSeek V4
+Pro directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
+Codex subscription at `xhigh`, in parallel.** Both receive the exact same
+hash-attested frozen item, A/B-pair, dependency, and conventions prompt; Terra
+runs read-only from an empty temporary work directory. Every
+GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-token
+context window. DeepSeek is the cross-family screen from the Sol author; Terra
+is an independent same-context comparison lane, not a claim of cross-family
+separation. `tools/judge.mts --parallel` supports a one-item paired call and
+retains the historical GLM/DeepSeek injection-test record. The normal sweep
+uses independent model lanes so a slow judge never blocks the other's next item.
 
 **When it runs:** once, after the step-6 Beta/Alpha audit, on final text. The old
 reason still applies: judging before audit bought verdicts that later rewrites
@@ -334,7 +358,8 @@ calls and 30 destroyed passes. Judging after audit preserves coverage and makes
 verdicts describe the text that ships.
 
 **Prompt files:** `briefs/codex-judge.md` plus `briefs/judge-conventions.txt`.
-The conventions file is still stored because forgetting it makes the judge flag
+They instruct both judges to read proofs and dependency citations skeptically.
+The conventions file is still stored because forgetting it makes a judge flag
 30-second gaps and drives useless repair cycles.
 
 **Context unit:** the A/B pair. The judge receives the target item, its own page
@@ -343,17 +368,57 @@ target page both declares in `requires` and actually cites. That edge-restricted
 context rule was measured on `frontier-1`: passing every sibling page produced a
 mean 93,810-token prompt and omitted three of five siblings on every call.
 
-**Ledger:** every judge run writes a full line to `research/level<n>-judge.jsonl`
-with at least `{id, model, keep, reason, at}`. `verification.judge` records
-passes only; an absent block means unjudged or owner-audited over a refuted false
-positive. `keep: null` is not a pass.
+**Ledger:** every paired judge run writes two full lines to
+`research/level<n>-judge.jsonl`, one per model, with at least
+`{id, model, keep, reason, context_sha256, at}`. The matching
+`context_sha256` attests that the pair saw the same frozen prompt.
+`verification.judge` records a pass only when both models passed the current
+text; an absent block means unjudged or owner-audited over a refuted false
+positive. `keep: null` is not a pass. `tools/judge-sweep.mjs` resumes selected
+plan pages: naming an A page automatically includes the item list on its
+B/examples companion, so A/B-pair coverage cannot silently omit examples. It
+skips only complete pairs whose hash also matches a freshly
+assembled current prompt. It assembles that hash once per selected item and
+shares it across both model queues. At step 10, `tools/judge-compare.mjs` reports both
+latest-attempt and latest-usable agreement: a later null cannot erase an
+earlier complete verdict on the same prompt, but a later substantive verdict
+does. It also summarizes model-only findings for the owner report. Its optional
+`--adjudications` input measures which judge actually found owner-confirmed
+fatal logic or dependency-citation defects; rejection volume alone is never
+treated as effectiveness.
+The ordinary sweep selects both judges; a targeted `--models` recovery selects
+only the named model's missing current-context verdicts and never re-spends a
+complete verdict from its peer.
 
-**Injection tests still govern model changes.** DeepSeek v4-flash was reverted
-after passing a blatantly false injected claim; GLM caught that injection but
-still scored 0/3 on real historical defects. A low rejection rate and fluent
-reasons are not evidence of a good judge. Before adopting any future judge model
-or materially different context shape, inject a defect known to be false under
-this library's conventions and verify the model catches it.
+**Effectiveness ledger:** step 8 appends one owner decision per rejected
+`{id, model, context_sha256}` to
+`research/level<n>-judge-adjudications.jsonl`: `outcome` is
+`confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; a fatal outcome
+also classifies `defect_type` as `logic`, `dependency_citation`, or `other`.
+`tools/judge-compare.mjs <ledger> --adjudications <file>` reports the two
+models' owner-confirmed fatal detection counts and fatal-confirmation rate among
+adjudicated rejection candidates. It makes no unsupported recall claim, because
+the complete universe of fatal defects is not independently enumerated.
+
+**Concurrency cap (owner, 2026-07-31):** `tools/judge-sweep.mjs` uses one
+file-backed, cross-process global pool. DeepSeek and Terra never wait for one
+another before advancing to their next items; a freed slot takes the next
+eligible call for whichever model is ready. The hard ceiling is ten judge calls
+total, with no per-model quota. The ten numbered slots live under `/tmp`,
+are acquired atomically, heartbeat while a child judge runs, and are reclaimed
+only after a five-minute stale heartbeat, so a second resumed sweep cannot add
+calls past the cap and a killed run cannot block it forever.
+
+**Injection tests still govern future model changes.** DeepSeek v4-flash was
+reverted after passing a blatantly false injected claim; GLM caught that
+injection but still scored 0/3 on real historical defects. A low rejection rate
+and fluent reasons are not evidence of a good judge. The owner has nevertheless
+required a DeepSeek v4 Pro parallel screen. The historical GLM result is
+preserved as evidence, but the current DeepSeek/Terra comparison is measured
+from paired Step-10 owner adjudications, especially fatal logic and
+dependency-citation detections. Before any further judge model or context-shape
+change, inject a defect known to be false under this library's conventions and
+verify the model catches it.
 
 ## 5b. Audit-manifest coverage backstop
 
@@ -371,9 +436,9 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 |---|---|---|
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | reputable-web-source research ledger, full published-corpus read access, plan order, dependency closure, namespaced writes, id reuse, seams, per-pair proof decomposition, corollary pass, 100-item review ceiling |
 | `beta-step8-audit.md` | Beta-n-i, **step 6a batch auditor** (historical filename retained) | exhaustive batch proof-step and citation audit; fixes; added/deleted in-flight results |
-| `authoring.md` | GPT 5.6 Terra authoring agent, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
-| `alpha.md` | Alpha-n, steps 4 and 6 | propagation; audits Beta fixes; audits cross-batch and cross-level references |
-| `codex-judge.md` | GLM 5.2 ofox judge, step 7 (historical filename) | ofox judge prompt and JSON verdict contract |
+| `authoring.md` | GPT 5.6 Sol authoring agent, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
+| `alpha.md` | Alpha-n, steps 4 and 6 | dispatches read-only skeptical proof-refuters; adjudicates their findings; propagates, audits Beta fixes, and audits cross-batch and cross-level references |
+| `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | shared frozen judge prompt and JSON verdict contract |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical
@@ -412,14 +477,16 @@ ordered decision rule is: mathematical accuracy and correct dependency citation
 are non-negotiable; then minimize forward references; then preserve
 mathematical richness. The decision ledger is the durable audit trail.
 
-**The step-9 fatal-error rundown is a durable aggregation mechanism (owner,
-2026-07-30).** Beta audit reports and Alpha's audit ledger classify every
+**The step-10 fatal-error rundown and sole owner pause are durable aggregation
+mechanisms (owner, 2026-07-31).** Step 9 completes the scope-denial sweep and
+continues without a pause. Beta audit reports and Alpha's audit ledger classify every
 publish-blocking defect by mathematical type, location in the artifact, affected
 id, and fix disposition. Judge and touch ledgers add refutation/repair history;
-the orchestrator adjudication log adds approved reversals and drops. Step 9
+the orchestrator adjudication log adds approved reversals and drops. Step 10
 aggregates those records into a concise but complete owner report grouped by
-type and location. Grouping may compress repeated defects, but every fatal item
-must remain named and every resolution must be stated.
+type and location, then makes the only owner pause. Grouping may
+compress repeated defects, but every fatal item must remain named and every
+resolution must be stated.
 
 ### 6.1 No shell-permission prompts, and the mechanical backstops
 

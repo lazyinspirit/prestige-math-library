@@ -14,11 +14,11 @@ visual tier, how each works and which failure it prevents. Read it before
 adding or changing a mechanism.
 
 **Subagent brief templates: `briefs/`** — the prompt-side half of the workflow
-(scaffold, step-6 batch audit, authoring, GLM judge). `LEVELS.md` describes
+(scaffold, step-6 batch audit, authoring, paired judges). `LEVELS.md` describes
 them; those files are the actual text.
 
-**Per-level build, step 0 to 9: `LEVELS.md`** — the canonical description of
-how a dependency level is built (actors, artifacts, the nine gates, the
+**Per-level build, step 0 to 10: `LEVELS.md`** — the canonical description of
+how a dependency level is built (actors, artifacts, the ten gates, the
 self-contained-scope rule, the twice-touched escalation). Read it before
 starting or resuming a level.
 
@@ -37,20 +37,27 @@ run a page from prompt to publish; the normative docs above win where they diffe
    canonical stratification into the file and re-run until clean (the repo stores
    the strictly stratified form: a step citing phase-k steps sits in phase k+1).
    Record `verification.precheck: pass`.
-3. **Cross-family judge** — **RUNS ONCE, AFTER the step-6 Beta/Alpha audit, on
+3. **Paired skeptical judge** — **RUNS ONCE, AFTER the step-6 Beta/Alpha audit, on
    final text**; authors do not judge. Current session workflow (owner,
-   2026-07-30): authoring agents use **GPT 5.6 Terra via the Codex subscription
-   plan**, Beta/Alpha use **GPT 5.6 Sol via the Codex subscription plan**, and
-   the judge uses **GLM 5.2 via the ofox API**. All run at `xhigh` reasoning.
-   GPT-family models are never run through ofox for this workflow.
-   `tools/judge.mts` is the GLM judge path and preserves the injection-test
-   record.
+   2026-07-31): authoring, Beta, and Alpha agents use **GPT 5.6 Sol via the
+   Codex subscription plan**; the paired judges use **DeepSeek V4 Pro directly
+   through the DeepSeek API** and a freshly spawned **GPT 5.6 Terra through the
+   Codex subscription**. GPT 5.6 Sol authoring/audit agents run at `xhigh`
+   reasoning with a **1,000,000-token context window**; Terra runs as a fresh
+   read-only Codex judge process at `xhigh`. `tools/judge.mts --parallel` runs both
+   judges concurrently and preserves the injection-test record.
    **The judge's context unit is the A/B PAIR:** it receives the item's own page
    and `-examples` companion in full, plus exactly the pages the item's own page
-   both declares in `requires` and actually cites. Record model/verdict/date in
-   `verification.judge`; never record a pass the judge did not give. Commit the
-   full verdict ledger at `research/level<n>-judge.jsonl`. A proof refuted or
-   repaired more than once escalates per WORKFLOW.md §"Twice-touched proofs".
+   both declares in `requires` and actually cites. Both models receive the
+   identical context and read proofs and dependency citations skeptically.
+   DeepSeek supplies the cross-family screen; Terra is an independent
+   subscription-backed comparison lane, not a claim of cross-family separation
+   from the Sol author.
+   Record a paired pass in `verification.judge` only when both models actually
+   pass the text; commit their full verdict ledger at
+   `research/level<n>-judge.jsonl`. Compare the models' findings at step 10. A
+   proof refuted or repaired more than once escalates per WORKFLOW.md
+   §"Twice-touched proofs".
 3b. **Final Alpha-n audit — WHEN PUBLISHING A LEVEL**. Before the owner audit,
    Alpha-n audits the WHOLE level under `LEVELS.md` step 6: Betas verify every
    proof step and in-batch dependency citation, Alpha audits Beta fixes from
@@ -82,6 +89,14 @@ banner; the public sees only `published`.
   operation truly cannot be expressed without new authority, stop and record a
   blocker instead of raising a permission prompt.
 
+- **GPT 5.6 Sol dispatch default (owner, 2026-07-31).** Every authoring, Beta,
+  Alpha, or other GPT 5.6 Sol subagent is dispatched as **GPT 5.6 Sol** at
+  `xhigh` reasoning with a **1,000,000-token context window**. This is the
+  binding default for this and all future sessions. Where the active launcher
+  exposes a context-window field, set it explicitly to `1000000`; otherwise do
+  not silently substitute another model or a smaller requested window. The
+  authoring role uses Sol, not Terra.
+
 - **Step-3 decisions belong to the orchestrator (owner, 2026-07-30).** In this
   and every future session, the orchestrator verifies each Beta recommendation
   from disk and then **approves or declines it using best judgment**; it does not
@@ -91,8 +106,9 @@ banner; the public sees only `published`.
   mathematical richness. Investigate uncertainty before deciding and log the
   decision plus rationale.
 
-- **Step-9 fatal-error report (owner, 2026-07-30).** At the end of step 9,
-  before the publication pause, the orchestrator gives the owner a concise but
+- **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 is
+  a sweep only: it does not pause the build. At the end of step 10, before the
+  publication/owner-audit pause, the orchestrator gives the owner a concise but
   complete account of every fatal mathematical error encountered and fixed.
   Group errors by defect type (for example invalid inference, incorrect
   dependency citation, false/overstrong definition or theorem, missing
@@ -102,6 +118,50 @@ banner; the public sees only `published`.
   restated, proof repaired/replaced, prose corrected, dependencies corrected, or
   a new lemma/result added. Detailed Beta/Alpha/judge ledgers remain the evidence
   source; concision must not omit a fatal defect.
+
+- **Paired skeptical judges (owner, 2026-07-31).** At step 7, run
+  `deepseek-v4-pro` directly with `gpt-5.6-terra` through `tools/judge.mts`.
+  DeepSeek reads `DEEPSEEK_API_KEY` directly from the configured environment or
+  `/root/Projects/prestige-intelligence/.env`; Terra is a fresh, read-only Codex
+  subscription process in an empty temporary work directory. They receive the
+  same hash-attested frozen prompt and must read proofs and dependencies as
+  adversarial refuters.
+  `tools/judge-sweep.mjs` keeps their calls independent in one file-backed,
+  cross-process global pool: each model moves to its next item when a slot is
+  free, without waiting for the other model.
+  Before scheduling, it assembles each selected item's current prompt hash once
+  and shares that attestation across both model queues.
+  The sweep records every transport/HTTP attempt, latency, finish reason, and
+  rate-limit headers in the paired attempt ledger; an empty non-final response
+  is retried with jitter and is never treated as a mathematical verdict.
+  The sweep itself requeues retryable attempts, releasing their global slot
+  during backoff so unrelated DeepSeek or Terra work continues.
+  Supply `tools/judge-sweep.mjs --pages` with A-page ids; it includes the
+  corresponding B/examples item lists automatically, because coverage is for
+  the whole A/B pair.
+  A targeted replay may pass `--models` to retry one model's incomplete current
+  verdicts without spending calls on an already-complete other-model verdict.
+  DeepSeek starts at a 40k-token maximum-reasoning budget and receives one 80k retry only
+  after an empty `finish_reason: length` response; its prompt and scrutiny are
+  otherwise unchanged.
+  Preserve every per-model verdict in the level ledger, adjudicate a rejection
+  from either model in `research/level<n>-judge-adjudications.jsonl` as
+  `{id, model, context_sha256, outcome, defect_type?}` (`outcome` is
+  `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; fatal types are
+  `logic`, `dependency_citation`, or `other`), and compare agreement,
+  model-only rejections, nulls, and owner-confirmed fatal findings at the end of
+  step 10. No more than ten judge calls total may be in flight; there is no
+  per-model quota within that global cap.
+
+- **Alpha proof-refuter delegation (owner, 2026-07-31).** For every future
+  Alpha-n audit, Alpha dispatches read-only proof-refuter subagents. They use
+  the same skeptical standard as the DeepSeek V4 Pro/GPT 5.6 Terra judges: read each
+  proof step and cited dependency as an adversarial refuter, report only a
+  concrete false claim, unlicensed inference, missing hypothesis, or inaccurate
+  citation, and inspect the supplied dependency before alleging it is too weak.
+  Alpha alone adjudicates every finding from disk: it may confirm it, refute it
+  with evidence, or apply and gate the necessary in-flight repair. A reader
+  subagent never writes content or applies a fix.
 
 - **Keep the normative docs current (owner, 2026-07-27).** `CLAUDE.md`,
   `WORKFLOW.md`, `LEVELS.md` and `ARCHITECTURE.md` are normative and are
@@ -124,9 +184,10 @@ banner; the public sees only `published`.
   ends is depending on them. Forward-looking: published items are not
   retrofitted. Full rule in `WORKFLOW.md` §"Self-contained scope".
 - Generation for this library NEVER goes through the public billed pipelines.
-  Current session route: GPT 5.6 Terra authoring and GPT 5.6 Sol Beta/Alpha
-  audit through the Codex subscription plan; GLM 5.2 judging through ofox. Do
-  not wire a subscription account into the worker service.
+  Current session route: GPT 5.6 Sol authoring, Beta, and Alpha audit through
+  the Codex subscription plan, all at `xhigh` with a 1,000,000-token context
+  window; direct DeepSeek judging plus fresh GPT 5.6 Terra judges through the
+  Codex subscription. Do not wire a subscription account into the worker service.
 - Mathematical content requires the step-6 Alpha/Beta audit before publish, even
   when judged.
 - **Scaffold richness (owner, 2026-07-30).** For every A/B pair, Beta decomposes
