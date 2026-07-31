@@ -62,10 +62,12 @@ anything, read:
 
 Follow those files, not this runbook, wherever they differ.
 
-**Current per-level model/routing rule (owner, 2026-07-31):** authoring agents,
-Beta-n-i, and Alpha-n run **GPT 5.6 Sol via the Codex subscription plan** at
+**Current per-level model/routing rule (owner, 2026-07-31):** Beta-n-i authors
+its own post-Step-4 batch content; independent Step-6 readers and Alpha-n run
+**GPT 5.6 Sol via the Codex subscription plan** at
 `xhigh` reasoning with a **1,000,000-token context window**; the independent
-paired judges run **DeepSeek V4 Pro directly via the DeepSeek API** and freshly
+paired judges run **DeepSeek V4 Pro directly via the DeepSeek API at `xhigh`
+thinking (official API value: `max`)** and freshly
 spawned **GPT 5.6 Terra through the Codex subscription** on the identical
 hash-attested skeptical prompt. GPT-family models are not routed through ofox.
 DeepSeek is the cross-family lane; Terra is the same-context comparison lane.
@@ -332,10 +334,11 @@ and the runtime it ran on.
 | Role | Model | Runtime and cost |
 |------|-------|------------------|
 | Orchestrator | current coding session | subscription/tooling of the active orchestrator |
-| Beta-n-i scaffold and batch audit | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
+| Beta-n-i scaffold and Step-5 author | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox; does not audit its own authored content |
+| Independent Step-6 reader | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; audits a batch it did not scaffold or author |
 | Alpha-n lead adjudicator, propagation, and cross-level audit | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
 | Alpha proof-refuter subagents | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; read-only access; never ofox |
-| Authoring agent | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
+| Step-5 author | the same Beta-n-i, GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
 | Paired judges | DeepSeek V4 Pro (`max`) + GPT 5.6 Terra (`xhigh`) | direct DeepSeek API + fresh Codex subscription process; identical frozen context, concurrent calls |
 | Final audit and publish gate | human owner | n/a |
 
@@ -343,8 +346,9 @@ The historical Opus/Fable and older judge lineups in research notes are not the
 current workflow. `deepseek/deepseek-v4-flash` remains barred as judge because it
 passed an injected false claim.
 
-For a resumable level sweep, run `tools/judge-sweep.mjs` with the stable paired
-ledger, cost ledger, and A-page slugs. Each supplied A page automatically adds
+For the **initial Step-7 sweep**, run `tools/judge-sweep.mjs` with the stable paired
+ledger, cost ledger, and **every A-page slug in the completed level**. This is
+mandatory even for content untouched by Alpha at Step 6. Each supplied A page automatically adds
 its B/examples companion's item list, so the sweep covers the entire A/B pair.
 It invokes `tools/judge.mts` once per
 model call and treats a pair as complete only when both latest verdicts are
@@ -376,9 +380,9 @@ says whose verdict survives a disagreement.
 | tier | who | scope it can see | what it decides | overruled by |
 |---|---|---|---|---|
 | Generator | GPT 5.6 Sol author via Codex | one A/B pair | draft content | every tier below |
-| **Beta batch auditor** | GPT 5.6 Sol via Codex | its batch, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
+| **Independent Step-6 reader** | GPT 5.6 Sol via Codex | a batch it did not scaffold or author, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
 | **Alpha proof-refuter reader** | GPT 5.6 Sol via Codex | read-only level and published dependencies | skeptically reports concrete proof/citation defects only | Alpha, owner |
-| **Alpha lead adjudicator** | GPT 5.6 Sol via Codex | the level plus published dependencies | confirms or refutes reader/Beta findings; audits, repairs, and gates in-flight content | owner |
+| **Alpha lead adjudicator** | GPT 5.6 Sol via Codex | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content | owner |
 | **Paired judges** | DeepSeek V4 Pro direct + fresh GPT 5.6 Terra via Codex | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | orchestrator, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
@@ -725,7 +729,8 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 Run the judge, then report and fix.
 
 **Paired judges.** Current session judging runs DeepSeek V4 Pro directly at
-maximum reasoning and freshly spawned GPT 5.6 Terra through the Codex
+owner-requested `xhigh` thinking (the documented API value is `max`) and freshly
+spawned GPT 5.6 Terra through the Codex
 subscription at `xhigh`, concurrently with
 `tools/judge.mts --parallel`, `briefs/codex-judge.md` (historical filename), and
 `briefs/judge-conventions.txt`. Each receives the same frozen context and reads
@@ -735,11 +740,40 @@ defect. Record both verdicts in `research/level<n>-judge.jsonl` as
 screen; Terra provides the independent apples-to-apples comparison and does not
 make the pair cross-family by itself.
 
+The initial Step-7 paired sweep covers **every item in every completed A/B pair**,
+not merely Alpha-touched items. Only after that full sweep may Alpha select the
+exact materially repaired items for a targeted rejudge.
+
 Dependencies cited by an item are treated as separately-verified, so the judge
 grades only the item's own reasoning — but it is given the text of those
 dependencies, of its own page, and of its A/B companion page, so "faithfully
 restated?" and "actually licensed?" are checkable rather than assumed. `--batch`
 adds the rest of the level. See `ARCHITECTURE.md` §5.
+
+**Adjudication.** Alpha, not the orchestrator, adjudicates every paired-judge
+rejection in this and all future sessions. It reads the frozen verdict against
+the text on disk, records `confirmed_fatal`, `confirmed_nonfatal`, or
+`false_positive`, applies any permitted draft repair, and limits rejudging to
+the changed items. The orchestrator maintains the ledgers and runs the gates.
+Alpha treats a logical gap a competent human can close within 30 seconds as
+nonfatal; it may polish the prose but does not start a fatal repair cycle for it.
+
+**Beta dependency discipline (owner, 2026-07-31).** At scaffolding and Step 5,
+Beta writes each load-bearing dependency fact from the source item on disk:
+verbatim when practical, otherwise as the least-deviating faithful shortening.
+It may not turn a nearby result into a stronger result, reverse an implication,
+or hide a missing hypothesis. If the source does not license the move, Beta
+expands the proof with the necessary internal steps, changes strategy, or
+reassesses whether the proposed theorem/example/counterexample is true.
+
+**Beta proof-design discipline (owner, 2026-07-31).** Before prose, Beta maps
+each substantive subclaim to an exact dependency or inline derivation, then
+checks empty cases, zero/one indices, degenerate parameters, endpoints,
+nonempty choices, and both directions of iff claims. A step may use only an
+explicit fact, earlier step, given hypothesis, or elementary algebra. Distinct
+conceptual moves are separated into focused lemmas. If those licensed moves do
+not close the proof, Beta narrows or drops the claim instead of overstating a
+dependency.
 
 **Report.** List every problematic pair regardless of whether the judge accepted,
 rejected, escalated, or dropped it. "Problematic" is the driver's determination,

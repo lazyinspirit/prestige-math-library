@@ -38,9 +38,12 @@ from the page's items by the renderer (never hand-set):
   Current session workflow (owner, 2026-07-31): authoring and Beta/Alpha audit
   use **GPT 5.6 Sol via the Codex subscription plan**, at `xhigh` reasoning with
   a **1,000,000-token context window**; the independent paired judges use
-  **DeepSeek V4 Pro directly via the DeepSeek API and GPT 5.6 Terra via the
+  **DeepSeek V4 Pro directly via the DeepSeek API at `xhigh` thinking (official
+  API value: `max`) and GPT 5.6 Terra via the
   Codex subscription**, on identical frozen context. Terra is never routed
-  through a third-party gateway for this workflow.
+  through a third-party gateway for this workflow. At the initial Step 7 sweep,
+  both judges cover every item in every completed A/B pair, including items
+  untouched by Alpha's Step-6 audit.
   The production pipeline keeps its own generator/judge
   lineups in
   the app repo; do not use a generator-family model to judge its own pipeline

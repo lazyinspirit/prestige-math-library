@@ -19,10 +19,10 @@ Everything below is verified against the code as of 2026-07-31.
 | actor | model | does |
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
-| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, **step-8 adjudication of every judge rejection**, reporting |
-| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | spawned at **step 4**, resumed at **step 6**; dispatches read-only skeptical proof-refuters, adjudicates their findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every Beta fix and cross-batch/cross-level reference from disk |
-| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding; at **step 6**, audits its own batch end-to-end, fixes defects, and personally authors any result it adds |
-| **authoring agent** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per A/B pair; step 5 proof generation and gates. **Does not judge and does not adjudicate** (owner, 2026-07-28) |
+| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, ledgers, and reporting |
+| **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | spawned at **step 4**, resumed at **steps 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
+| **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
+| **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
 | **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned GPT 5.6 Terra via Codex (`xhigh`)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the cross-family lane; Terra is the apples-to-apples comparison lane. |
 
 ## Artifacts
@@ -232,7 +232,7 @@ page metadata but takes the **union of `requires`** (Beta computes the closure
 amendments into higher-level prose scaffolds — one writer, so no silent
 overwrite.
 
-## Step 5 — Author (one agent per A/B pair, in parallel)
+## Step 5 — Author (the scaffold Betas, by batch)
 
 > **Authors do NOT judge (owner, 2026-07-28).** An author is finished when its
 > gates are clean and its report is written. Judging is step 7 and runs after the
@@ -248,6 +248,24 @@ Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
 silence a checker when the proof does not use it is the dominant historical
 defect class and is forbidden.
+
+**Dependency discipline (owner, 2026-07-31).** The scaffold Beta authors every
+load-bearing citation with the actual cited Definition or Statement in view.
+Quote it when practical; otherwise use the smallest faithful shortening,
+preserving domain, hypotheses, quantifiers, direction, and conclusion. If the
+real statement does not license a step, never silently strengthen its
+restatement: add the necessary inline proof steps, reconsider the proof
+strategy, or reconsider the truth/scope of the theorem, example, or
+counterexample.
+
+**Proof-design discipline (owner, 2026-07-31).** Before drafting prose, Beta
+maps each non-routine subclaim to a precise dependency or inline derivation,
+then runs a boundary pass over empty cases, zero/one indices, degenerate
+parameters, endpoints, nonempty selections, and each direction of every iff.
+Every proof step may use only an explicit fact, earlier step, given hypothesis,
+or elementary algebra. Separate conceptual moves belong in focused lemmas. A
+claim whose proof cannot close from these licensed moves is narrowed or dropped,
+not rescued by an overstrong citation.
 
 Every A-page summary is written last in exactly two nonempty prose paragraphs,
 each under 150 words. The first gives mathematical background and names the
@@ -276,7 +294,7 @@ reason it can state; it is opt-in and no longer the default.
 depends on 70, and orders 131 and 137 both depend on 129. Splitting there was
 correct. Splitting a single level is not.
 
-## Step 6 — Audit (Betas first, then Alpha-n)
+## Step 6 — Audit (independent readers, then Alpha-n)
 
 **Model (owner, 2026-07-31): Beta-n-i and Alpha-n are GPT 5.6 Sol run through
 the Codex subscription plan at `xhigh` reasoning with a 1,000,000-token context
@@ -297,13 +315,14 @@ citation defect. They return evidence, never edits. Alpha-n remains the single
 adjudicator: it verifies every reported issue from disk, may refute a false
 positive, and alone may repair and gate in-flight content.
 
-### 6a. Beta batch audits, in parallel
+### 6a. Independent batch audits, in parallel
 
-Each Beta-n-i that scaffolded a batch at steps 1–2 returns as that batch's audit
-reader. Betas work in parallel and have write authority over their own in-flight
+Alpha assigns independent readers for each batch. A Beta that scaffolded or
+authored a batch is excluded from auditing it. Independent readers work in
+parallel and have write authority over their assigned in-flight
 batch files.
 
-For every authored item in the batch, the Beta must:
+For every authored item in the batch, the independent reader must:
 
 1. **Verify every proof step of every proof skeptically.** Read the step, its
    cited facts, and the cited dependency items from disk as a refuter would. A
@@ -320,26 +339,26 @@ For every authored item in the batch, the Beta must:
    position claim, and no corpus-wide scope denial.
 4. **Fix every defect it is licensed to fix**, not merely report it. If the fix
    requires adding or deleting a lemma/proposition/theorem/corollary/example/
-   counterexample/false-statement, the Beta may do so inside the in-flight level.
-   Anything it adds must be personally authored by that Beta, including the full
+   counterexample/false-statement, the independent reader may do so inside the in-flight level.
+   Anything it adds must be personally authored by that independent reader, including the full
    proof when the kind requires one. Item ids remain immutable once on `main`.
 5. Delete any stale `verification.judge` block after a material rewrite, run
    `tools/reflow.mts` and `tools/precheck.mts` on changed proof items, and run the
    relevant gates locally. Do **not** judge; judging is step 7.
 
-Each Beta reports to Alpha-n: every item changed; every added/deleted result and
+Each independent reader reports to Alpha-n: every item changed; every added/deleted result and
 why; every proof step or citation defect found; unresolved concerns; and an
 explicit coverage statement saying that every proof step and every dependency
 citation in the batch was read, or naming any exception.
 
-### 6b. Alpha audit of Beta fixes
+### 6b. Alpha audit of independent-reader fixes
 
-After all Betas finish, Alpha-n audits the mistakes and fixes reported by every
-Beta and the evidence reported by Alpha's read-only proof-refuters. Alpha
+After all independent readers finish, Alpha-n audits the mistakes and fixes they
+reported, plus the evidence reported by Alpha's read-only proof-refuters. Alpha
 verifies from disk, not from any report: changed item text, added or deleted
 results, dependency lists, page lists, stale judge blocks, and gate status.
-Alpha may confirm, refute, amend, revert, or extend a reported error or Beta
-fix. If Alpha adds a result, Alpha personally authors its proof.
+Alpha may confirm, refute, amend, revert, or extend a reported error or
+independent-reader fix. If Alpha adds a result, Alpha personally authors its proof.
 
 ### 6c. Alpha cross-batch and cross-level citation audit
 
@@ -366,6 +385,8 @@ reader's responsibility.
 licensed by its cited facts; citing an item for a claim it does not make; a title
 or Statement asserting more than the proof gives; unlicensed forward references;
 and any cross-level citation whose target is not actually strong enough.
+An omitted bridge a competent human reader closes in 30 seconds is nonfatal:
+record or polish it if useful, but do not escalate it as a fatal proof defect.
 
 **Interaction with the twice-touched rule.** A repair here to an item already
 repaired earlier takes it to two touches and escalates to a personal audit by the
@@ -390,6 +411,13 @@ Use `briefs/codex-judge.md` (historical filename) plus
 context unit stays the **A/B pair**: the item page and its `-examples` companion
 in full, plus only the pages the item's own page both declares in `requires` and
 actually cites. Compute that batch mechanically; do not pass every sibling page.
+
+**Coverage is mandatory and level-wide (owner, 2026-07-31).** The initial
+Step-7 sweep receives **every A-page id in the completed level**, so both judges
+read every item in every A/B pair — whether or not Alpha or an independent
+reader touched that item at Step 6. A selected subset is not a valid initial
+Step-7 sweep. `--items` is reserved for a later Alpha-selected rejudge after a
+material repair, and `--models` only recovers an incomplete verdict.
 
 Record a full verdict ledger at `research/level<n>-judge.jsonl` with at least
 `{id, model, keep, reason, context_sha256, at}` for **both** model calls on
@@ -431,10 +459,10 @@ The existing injection record for GLM and DeepSeek v4 Flash remains evidence
 that a low rejection rate is not a judge-quality metric; it does not substitute
 for the paired per-level comparison required here.
 
-## Step 8 — Adjudicate judge rejections (orchestrator)
+## Step 8 — Adjudicate judge rejections (Alpha-n)
 
 A rejection from **either** judge now lands on text that has cleared the step-6
-audit, so the orchestrator adjudicates it personally. **Adjudicate, do not
+audit, so Alpha-n adjudicates it from disk. **Adjudicate, do not
 comply.** Each rejection gets either a fix, with the defect named, or a
 refutation, with a verbatim quote from the cited item. Append a per-model,
 per-context owner decision to `research/level<n>-judge-adjudications.jsonl` so

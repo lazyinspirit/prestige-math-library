@@ -37,11 +37,14 @@ run a page from prompt to publish; the normative docs above win where they diffe
    canonical stratification into the file and re-run until clean (the repo stores
    the strictly stratified form: a step citing phase-k steps sits in phase k+1).
    Record `verification.precheck: pass`.
-3. **Paired skeptical judge** — **RUNS ONCE, AFTER the step-6 Beta/Alpha audit, on
-   final text**; authors do not judge. Current session workflow (owner,
+3. **Paired skeptical judge** — **RUNS ONCE, AFTER the step-6 audit, on
+   final text, for EVERY item in the completed level**; authors do not judge.
+   Step-7 coverage is not limited to items Alpha or an independent reader changed:
+   both judges read every item in every completed A/B pair. Current session workflow (owner,
    2026-07-31): authoring, Beta, and Alpha agents use **GPT 5.6 Sol via the
    Codex subscription plan**; the paired judges use **DeepSeek V4 Pro directly
-   through the DeepSeek API** and a freshly spawned **GPT 5.6 Terra through the
+   through the DeepSeek API at `xhigh` thinking (official API value: `max`)** and
+   a freshly spawned **GPT 5.6 Terra through the
    Codex subscription**. GPT 5.6 Sol authoring/audit agents run at `xhigh`
    reasoning with a **1,000,000-token context window**; Terra runs as a fresh
    read-only Codex judge process at `xhigh`. `tools/judge.mts --parallel` runs both
@@ -59,9 +62,10 @@ run a page from prompt to publish; the normative docs above win where they diffe
    proof refuted or repaired more than once escalates per WORKFLOW.md
    §"Twice-touched proofs".
 3b. **Final Alpha-n audit — WHEN PUBLISHING A LEVEL**. Before the owner audit,
-   Alpha-n audits the WHOLE level under `LEVELS.md` step 6: Betas verify every
-   proof step and in-batch dependency citation, Alpha audits Beta fixes from
-   disk, then Alpha audits cross-batch and cross-level citations. Fatal includes
+   Alpha-n audits the WHOLE level under `LEVELS.md` step 6: independent readers
+   verify every proof step and in-batch dependency citation in content they did
+   not author, Alpha audits their fixes from disk, then Alpha audits cross-batch
+   and cross-level citations. Fatal includes
    a title or Statement asserting more than the proof gives — the judge reads
    Statements and cannot see a false title. `LEVELS.md` §"Step 6".
 4. **Owner audit** gates `status: published` (set `verification.audited`).
@@ -96,6 +100,13 @@ banner; the public sees only `published`.
   exposes a context-window field, set it explicitly to `1000000`; otherwise do
   not silently substitute another model or a smaller requested window. The
   authoring role uses Sol, not Terra.
+
+- **Future Step-5/6 ownership (owner, 2026-07-31).** In every future session,
+  the Beta agents that scaffolded the batches personally author all Step-5
+  content after Step 4. At Step 6 they are excluded from auditing any content
+  they authored; Alpha assigns independent audit readers and adjudicates their
+  findings. The prior separate author-agent and self-auditing-Beta arrangement
+  is retired for future runs.
 
 - **Step-3 decisions belong to the orchestrator (owner, 2026-07-30).** In this
   and every future session, the orchestrator verifies each Beta recommendation
@@ -138,10 +149,14 @@ banner; the public sees only `published`.
   during backoff so unrelated DeepSeek or Terra work continues.
   Supply `tools/judge-sweep.mjs --pages` with A-page ids; it includes the
   corresponding B/examples item lists automatically, because coverage is for
-  the whole A/B pair.
+  the whole A/B pair. **For the initial Step-7 sweep, supply every A page in the
+  completed level:** both judges must judge every item whether or not Alpha
+  changed it at Step 6. `--items` is reserved for a later, Alpha-selected
+  rejudge of an item materially repaired after that complete sweep.
   A targeted replay may pass `--models` to retry one model's incomplete current
   verdicts without spending calls on an already-complete other-model verdict.
-  DeepSeek starts at a 40k-token maximum-reasoning budget and receives one 80k retry only
+  DeepSeek runs with thinking enabled at `xhigh` (official API `max`), starts at
+  a 40k-token maximum-reasoning budget and receives one 80k retry only
   after an empty `finish_reason: length` response; its prompt and scrutiny are
   otherwise unchanged.
   Preserve every per-model verdict in the level ledger, adjudicate a rejection
@@ -152,6 +167,19 @@ banner; the public sees only `published`.
   model-only rejections, nulls, and owner-confirmed fatal findings at the end of
   step 10. No more than ten judge calls total may be in flight; there is no
   per-model quota within that global cap.
+
+- **Alpha adjudicates judges (owner, 2026-07-31).** For this and every future
+  session, Alpha is the sole adjudicator of a paired-judge rejection. Alpha
+  reads the frozen verdict and current disk text, confirms a fatal defect,
+  confirms a nonfatal defect, or records a false positive; it applies any
+  permitted draft repair and selects the exact changed items for rejudge. The
+  orchestrator runs gates and maintains ledgers but does not substitute its own
+  adjudication for Alpha's.
+- **Alpha's 30-second threshold (owner, 2026-07-31).** In every future Alpha
+  audit or judge adjudication, a logical gap between proof steps that a competent
+  human reader can close in 30 seconds is **nonfatal**. Alpha may record or
+  polish it when useful, but it must not classify it as a fatal proof defect or
+  initiate a fatal repair cycle on that basis.
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every future
   Alpha-n audit, Alpha dispatches read-only proof-refuter subagents. They use
@@ -212,6 +240,25 @@ banner; the public sees only `published`.
   conclusion, and direction with maximum fidelity. Never replace the proposition
   with a synthetic summary of what it is "for". This binds the orchestrator and
   every scaffold, author, Beta, Alpha, and judge agent.
+- **Beta dependency discipline (owner, 2026-07-31).** A Beta precisely cites
+  every load-bearing dependency. Its `[F#]`, `[A#]`, and `[L#]` facts reproduce
+  the cited Definition or Statement where practical; otherwise they are the
+  smallest faithful shortening, with no changed domain, quantifier, hypothesis,
+  direction, conclusion, or invented converse. If a dependency appears
+  insufficient, do not inflate its restatement or add an unused edge: add needed
+  inline proof steps, reconsider the proof strategy, or reconsider whether the
+  theorem/example/counterexample is true as stated. This binds Beta scaffolding
+  and Step-5 authoring in every future run.
+- **Beta proof-design discipline (owner, 2026-07-31).** Before authoring a proof,
+  Beta prepares a proof-obligation map that assigns every substantive subclaim
+  to an exact dependency or an inline derivation. It performs a boundary pass
+  for empty objects, zero/one indices, degenerate parameters, endpoints,
+  nonempty choices, and both directions of an iff. Each written proof step uses
+  only an explicit fact, earlier step, given hypothesis, or elementary algebra.
+  Split proofs with distinct conceptual moves into focused lemmas. If a proof
+  still does not close honestly, narrow or drop the stated theorem/example/
+  counterexample rather than patching it with an overstated dependency. This is
+  required in every future Beta scaffold and Step-5 authoring run.
 - **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
   two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
   mathematical background and names definitions and results from declared

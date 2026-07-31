@@ -161,6 +161,12 @@ const isPaymentError = (status: number, raw: string): boolean =>
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
 const DEEPSEEK_MODEL = "deepseek-v4-pro";
 const TERRA_MODEL = "gpt-5.6-terra";
+// Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
+// API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
+// spelling that maps to `max`, so preserve the requested level explicitly and
+// send the canonical wire value.
+const DEEPSEEK_THINKING_LEVEL = "xhigh";
+const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
 const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL];
 // A normal invocation is always the paired comparison. `--model` is reserved
 // for a targeted replay of exactly one incomplete/changed model verdict; the
@@ -246,8 +252,8 @@ if (bools.has("preflight")) {
     }
     try {
       // A deliberately tiny direct completion tests the endpoint, model,
-      // credentials, and JSON mode used by normal judging. It omits the costly
-      // maximum-reasoning setting because this is a reachability preflight, not
+      // credentials, JSON mode, and configured xhigh setting used by normal
+      // judging. This is a reachability preflight, not
       // an item verdict. The supplied text is not item material and no verdict
       // ledger is written during preflight.
       const r = await fetch(DEEPSEEK_API_URL, {
@@ -255,6 +261,8 @@ if (bools.has("preflight")) {
         headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
         body: JSON.stringify({
           model: DEEPSEEK_MODEL,
+          reasoning_effort: DEEPSEEK_API_REASONING_EFFORT,
+          thinking: { type: "enabled" },
           response_format: { type: "json_object" },
           max_tokens: 512,
           messages: [{ role: "user", content: 'Return exactly this json object: {"ok":true}.' }],
@@ -727,7 +735,8 @@ const MAX_CALL_ATTEMPTS = Number.isInteger(configuredAttemptLimit) && configured
 const retryAllowed = process.env.JUDGE_RETRY_ALLOWED !== "0";
 const payloadForDeepSeek = (maxTokens: number) => ({
   model: DEEPSEEK_MODEL,
-  reasoning_effort: "max",
+  // `max` is DeepSeek's documented API representation of owner-requested xhigh.
+  reasoning_effort: DEEPSEEK_API_REASONING_EFFORT,
   thinking: { type: "enabled" },
   response_format: { type: "json_object" },
   // Raised 3000 -> 8000 -> 40000 on 2026-07-26 (owner). Under the full-page context

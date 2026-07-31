@@ -351,7 +351,9 @@ separation. `tools/judge.mts --parallel` supports a one-item paired call and
 retains the historical GLM/DeepSeek injection-test record. The normal sweep
 uses independent model lanes so a slow judge never blocks the other's next item.
 
-**When it runs:** once, after the step-6 Beta/Alpha audit, on final text. The old
+**When it runs:** once, after the step-6 independent-reader/Alpha audit, on final
+text, with **both judges covering every item in the completed level** regardless
+of whether Alpha changed it. The old
 reason still applies: judging before audit bought verdicts that later rewrites
 invalidated. Measured on `frontier-1`, 292 calls for 212 items produced 80 repeat
 calls and 30 destroyed passes. Judging after audit preserves coverage and makes
@@ -435,11 +437,17 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | file | actor | carries |
 |---|---|---|
 | `beta-scaffold.md` | Beta-n-i, steps 1–2 | reputable-web-source research ledger, full published-corpus read access, plan order, dependency closure, namespaced writes, id reuse, seams, per-pair proof decomposition, corollary pass, 100-item review ceiling |
-| `beta-step8-audit.md` | Beta-n-i, **step 6a batch auditor** (historical filename retained) | exhaustive batch proof-step and citation audit; fixes; added/deleted in-flight results |
-| `authoring.md` | GPT 5.6 Sol authoring agent, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
-| `alpha.md` | Alpha-n, steps 4 and 6 | dispatches read-only skeptical proof-refuters; adjudicates their findings; propagates, audits Beta fixes, and audits cross-batch and cross-level references |
+| `beta-step8-audit.md` | independent Step-6 reader, **step 6a batch auditor** (historical filename retained) | exhaustive audit of a batch the reader did not author; fixes; added/deleted in-flight results |
+| `authoring.md` | the same GPT 5.6 Sol Beta-n-i that scaffolded the batch, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
+| `alpha.md` | Alpha-n, steps 4, 6, and 8 | dispatches read-only skeptical proof-refuters; adjudicates their and judges' findings; propagates, audits independent-reader fixes, and audits cross-batch and cross-level references |
 | `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | shared frozen judge prompt and JSON verdict contract |
 | `judge-conventions.txt` | the judge | the triage rule and library conventions |
+
+**Beta proof-design backstop (owner, 2026-07-31).** The scaffold and authoring
+briefs require a proof-obligation map, a boundary-case pass, step-level
+dependency whitelisting, focused lemmas for distinct conceptual moves, and
+claim-narrowing or dropping when the licensed proof does not close. These act
+before the independent Step-6 audit; they do not replace it.
 
 **Every one states the triage rule verbatim.** Non-negotiable: mathematical
 accuracy, logical validity, correct citation. Explicitly acceptable, zero effort:
@@ -519,7 +527,7 @@ but this one — has neither backstop. The briefs are the only copy that ships.
 Belt and braces is the correct redundancy here, not duplication to be tidied away.
 
 `briefs/alpha.md` additionally carries a **pass-it-on** clause, because Alpha-n
-briefs Beta auditors at step 6 and those prompts may be composed by Alpha, not by
+briefs independent Step-6 readers at step 6 and those prompts may be composed by Alpha, not by
 this repo.
 
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)

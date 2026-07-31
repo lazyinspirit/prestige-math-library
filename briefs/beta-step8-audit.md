@@ -3,7 +3,7 @@
      step 6a after workflow renumbering. -->
 <!-- TEMPLATE. Copy into a Beta-n-i audit prompt and substitute <n> and <i>. -->
 
-# Beta-<n>-<i> brief — step 6a batch audit
+# Independent Step-6 reader brief — batch audit
 
 > **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
 > and future agent.** Use commands already allowed inside the workspace sandbox;
@@ -17,10 +17,10 @@
 > Do not run GPT-family work through
 > ofox.
 
-You scaffolded this batch at steps 1–2. The pages have since been authored. Your
-job now is to audit your own batch exhaustively and fix what you find. Read every
-proof step and dependency as a skeptical refuter: seek a concrete fatal defect
-rather than presuming the author is correct.
+You did **not** scaffold or author this batch. The pages have since been authored
+by their scaffold Beta. Your job is to audit this foreign batch exhaustively and
+fix what you find. Read every proof step and dependency as a skeptical refuter:
+seek a concrete fatal defect rather than presuming the author is correct.
 
 ## Required coverage
 

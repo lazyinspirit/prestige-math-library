@@ -18,10 +18,11 @@ scaffolding level <n> of the public math library at
 `/root/Projects/prestige-math-library`. Betas run in parallel. Your batch is
 named in your own prompt.
 
-Your job is **not** to write proofs. It is to turn a prose scaffold into a
-machine-readable per-item scaffold that a step-5 authoring agent can build from
-without rediscovering your reasoning, and to fix the mathematical and dependency
-defects in the prose while you are the one holding it in mind.
+At steps 1–2, your job is to turn a prose scaffold into a machine-readable
+per-item scaffold and fix its mathematical and dependency defects while you are
+holding the design in mind. **After Step 4, you personally return as the Step-5
+author for this same batch**; prepare a scaffold you can author faithfully
+without rediscovering its reasoning.
 
 ## 0. Read first, in this order
 
@@ -59,6 +60,24 @@ earlier page. A reputable web source does not substitute for an unbuilt library
 dependency. If the dependency is unavailable, decompose or rescope the result,
 or drop it with a precise note saying what would license it under the
 self-contained-scope rule.
+
+For every planned dependency, preserve the actual source statement exactly when
+practical and otherwise make the smallest faithful shortening: do not change its
+domain, quantifiers, hypotheses, direction, or conclusion. A similar result is
+not one that licenses the intended proof. If the real statement is insufficient,
+plan the needed inline argument, select another proof strategy, or re-evaluate
+whether the theorem, example, or counterexample is mathematically true.
+
+### Proof-obligation and boundary pass
+
+Before you hand the scaffold to your future Step-5 self, list each substantive
+proof subclaim and assign either the exact library dependency or the inline
+derivation that will establish it. Check empty objects, zero and one indices,
+degenerate parameter values, endpoints, nonempty selections, and both directions
+of every iff. Separate distinct conceptual moves into earlier focused lemmas.
+If this map does not close, narrow or drop the planned theorem, example, or
+counterexample; never rely on an unstated background property or a stronger
+version of a cited result.
 
 ## 1. What you produce, and the ONLY files you may write
 

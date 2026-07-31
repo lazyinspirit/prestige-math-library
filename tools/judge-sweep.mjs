@@ -1,4 +1,6 @@
 // Run hash-attested paired judge calls for every item on selected plan pages.
+// Workflow rule: the initial Step-7 call supplies every completed-level A page;
+// --items is only for Alpha-selected rejudges after a material repair.
 // Calls share one ten-slot global pool. DeepSeek and Terra start their next item
 // as soon as a slot is free, without waiting for one another on the same item.
 // Retry backoffs return work to this scheduler, releasing the slot so unrelated
@@ -16,10 +18,11 @@ const ledger = value("--ledger");
 const cost = value("--cost");
 const attempts = value("--attempts") || (ledger ? (ledger.endsWith(".jsonl") ? ledger.replace(/\.jsonl$/, "-attempts.jsonl") : `${ledger}.attempts.jsonl`) : "");
 const pagesArg = value("--pages");
+const itemsArg = value("--items");
 const limitArg = value("--limit");
 const modelsArg = value("--models");
-if (!ledger || !cost || !pagesArg) {
-  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl --pages a-page,another-page [--models model,model] [--limit N]  # each A page includes its B companion");
+if (!ledger || !cost || (!pagesArg && !itemsArg)) {
+  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl (--pages a-page,another-page | --items item-id,item-id) [--models model,model] [--limit N]");
   process.exit(2);
 }
 const limit = limitArg ? Number(limitArg) : Infinity;
@@ -37,6 +40,7 @@ if (!models.length || models.some((model) => !supportedModels.includes(model))) 
   throw new Error(`--models must contain only ${supportedModels.join(", ")}`);
 }
 const requestedPages = new Set(pagesArg.split(",").map((s) => s.trim()).filter(Boolean));
+const requestedItems = new Set(itemsArg.split(",").map((s) => s.trim()).filter(Boolean));
 const plan = JSON.parse(readFileSync("research/plan-spec.json", "utf8"));
 const pagesById = new Map(plan.pages.map((page) => [page.id, page]));
 // A normal sweep is named by its A pages, but judge coverage is per A/B pair:
@@ -49,9 +53,12 @@ for (const id of requestedPages) {
   const page = pagesById.get(id);
   if (page?.kind === "A" && typeof page.companion === "string") selectedPages.add(page.companion);
 }
-const ids = plan.pages
+const pageIds = plan.pages
   .filter((page) => selectedPages.has(page.id))
   .flatMap((page) => page.items.map((item) => item.id));
+const ids = requestedItems.size ? [...requestedItems] : pageIds;
+const plannedIds = new Set(plan.pages.flatMap((page) => page.items.map((item) => item.id)));
+if ([...requestedItems].some((id) => !plannedIds.has(id))) throw new Error("--items includes an unknown planned item id");
 if (!ids.length || new Set(ids).size !== ids.length) {
   throw new Error(`selected pages produced ${ids.length} non-unique items`);
 }
@@ -149,7 +156,7 @@ const pendingFor = (model) => ids
   })
   .slice(0, limit);
 const pending = Object.fromEntries(models.map((model) => [model, pendingFor(model)]));
-console.log(`[judge-sweep] DeepSeek pending ${pending[DEEPSEEK].length}/${ids.length}; Terra pending ${pending[TERRA].length}/${ids.length}; one independent global pool uses at most ${MAX_CONCURRENT_CALLS} calls total.`);
+console.log(`[judge-sweep] DeepSeek pending ${pending[DEEPSEEK]?.length ?? 0}/${ids.length}; Terra pending ${pending[TERRA]?.length ?? 0}/${ids.length}; one independent global pool uses at most ${MAX_CONCURRENT_CALLS} calls total.`);
 
 const runAttempt = async (task) => {
   const { id, model } = task;

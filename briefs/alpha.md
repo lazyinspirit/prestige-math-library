@@ -10,7 +10,7 @@
 > Sandboxed Codex runtimes stay within granted workspace permissions. If an
 > indispensable operation has no escalation-free form, report a blocker.
 >
-> **Pass it on.** You dispatch/brief Beta readers at step 6; put this rule in
+> **Pass it on.** You dispatch/brief independent readers at step 6; put this rule in
 > their prompts.
 
 > **Model/routing rule (owner, 2026-07-31).** You are **GPT 5.6 Sol via the Codex
@@ -26,6 +26,11 @@ batch files before acting.
 Non-negotiable: mathematical accuracy, logical validity, and correct citation of
 dependencies. Spend no effort on harmless citation quirks or proof gaps a
 competent reader closes in 30 seconds.
+
+**Binding 30-second threshold (owner, 2026-07-31).** A logical gap between proof
+steps that a competent human reader can close in 30 seconds is nonfatal. You may
+record or polish it, but never classify it as a fatal proof defect or start a
+fatal repair cycle from it.
 
 Require direct, natural mathematical prose throughout, without canned headings,
 meta-commentary, or rhetorical filler that sounds generated rather than written
@@ -78,16 +83,16 @@ writer of those files so parallel batches cannot overwrite one another.
 
 ## Stage 2 — step 6: audit
 
-### 6a. Ensure Beta batch audits happen
+### 6a. Ensure independent batch audits happen
 
-Each Beta that scaffolded a batch must audit that batch using
-`briefs/beta-step8-audit.md` (historical filename; current role is step 6a).
-Betas work in parallel. They must read every proof step and every dependency
-citation in their batch, fix defects, and report coverage.
+Assign `briefs/beta-step8-audit.md` (historical filename; current role is step
+6a) to an independent reader for each batch. The reader must not have scaffolded
+or authored that batch. Readers work in parallel, read every proof step and
+dependency citation, fix defects, and report coverage.
 
-### 6b. Audit every Beta fix
+### 6b. Audit every independent-reader fix
 
-After all Beta and proof-refuter reports arrive, adjudicate every reported
+After all independent-reader and proof-refuter reports arrive, adjudicate every reported
 mistake or candidate defect from disk:
 changed items, page files, dependency lists, added/deleted results, stale judge
 blocks, and local gate output. Verify every A-page summary has exactly two
@@ -116,8 +121,8 @@ citation.
 
 ## Report
 
-1. Beta reports received and whether their coverage was complete.
-2. Every Beta fix you audited, accepted, amended or rejected.
+1. Independent-reader reports received and whether their coverage was complete.
+2. Every independent-reader fix you audited, accepted, amended or rejected.
 3. Every read-only proof-refuter finding, its evidence, and your confirmation,
    refutation, or repair disposition.
 4. Every cross-batch/cross-level edge audited, or the manifest path plus explicit
