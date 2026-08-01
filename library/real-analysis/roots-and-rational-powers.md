@@ -17,12 +17,12 @@ examples: [fs-negative-has-square-root, fs-rational-power-of-negative-base]
 can honestly be built with the tools the library currently owns, and then proves
 the classical inequalities that live at that level. The tools are the field
 axioms, the order, and the least-upper-bound property
-([[def-complete-ordered-field]]). The library has no exponential function, no
-logarithm, no continuity and no infinite series; a limit of a sequence of reals
-is defined in the Cauchy construction ([[def-real-limit]]), but no proof on this
-page uses one. So **every exponent on this page is an integer or a rational, and
-every proof is a finite algebraic argument plus, in exactly one proof, the
-least-upper-bound property.**
+([[def-complete-ordered-field]]). No proof on this page uses the exponential
+function, logarithm, continuity, or infinite series; a limit of a sequence of
+reals is defined in the Cauchy construction ([[def-real-limit]]), but no proof
+on this page uses one. So **every exponent on this page is an integer or a
+rational, and every proof is a finite algebraic argument plus, in exactly one
+proof, the least-upper-bound property.**
 
 The construction runs in three stages. First, finite sums and finite products
 are defined by recursion ([[def-finite-sum]], resting on [[thm-recursion]]) and
@@ -81,5 +81,5 @@ the rational-power formula does not survive the passage to negative bases
 ([[rem-real-exponents-deferred]]) is honest about the ceiling: $a^{x}$ for real
 $x$ can be defined here as $\sup\{a^{r} : r \in \mathbb{Q},\ r \le x\}$, and that
 supremum does exist, but the power laws for it cannot be proved without limits.
-The library reaches general powers later, through the exponential and the
-logarithm, and that page is not linked from here because it does not exist yet.
+General powers require further analytic development, through the exponential
+and logarithm, and are deliberately outside this page's dependency closure.

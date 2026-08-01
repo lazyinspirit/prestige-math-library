@@ -1,7 +1,7 @@
 ---
 id: thm-integers-modulo-n-basic-algebra
 kind: theorem
-title: "For every natural $n$, $(\\mathbb Z/n,+)$ is an abelian group, multiplication is a commutative monoid operation, and both distributive laws hold"
+title: "For every natural $n$, $(\\mathbb{Z}/n,+)$ is an abelian group, multiplication is a commutative monoid operation, and both distributive laws hold"
 status: published
 origin: session
 deps: [def-addition-and-multiplication-modulo-n, thm-int-comm-ring, def-group, def-semigroup-and-monoid]

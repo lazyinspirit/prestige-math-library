@@ -1,7 +1,7 @@
 ---
 id: ex-free-ultrafilter-on-naturals
 kind: example
-title: "An ultrafilter extending the Fréchet filter on $\\mathbb N$ is free, and its existence uses the ultrafilter lemma"
+title: "An ultrafilter extending the Fréchet filter on $\\mathbb{N}$ is free, and its existence uses the ultrafilter lemma"
 status: published
 origin: session
 deps: [thm-ultrafilter-lemma, ex-frechet-filter, def-ultrafilter, thm-ultrafilter-characterisation]

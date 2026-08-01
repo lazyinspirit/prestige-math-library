@@ -723,31 +723,34 @@ as `lem-absolute-convergence-implies-convergence` at level 8. The Beta-8-2
 retraction above already fixed the wiring question; this fixes the placement
 question.
 
-**RA-16 Darboux, L'Hopital, and Taylor's Theorem** <- RA-15
-higher derivatives; **C^k and C^infinity**; **Darboux's theorem** and its
-memorable form "a derivative has no jump discontinuity"; a function with a jump
-is not a derivative; partial converses (Darboux + injective / monotone /
-Baire-1 implies continuous); **L'Hopital** in all forms (0/0, infinity/infinity,
-finite and infinite points, one-sided); **Taylor's theorem with all five
-remainders**: Lagrange, Cauchy, Peano, integral (deferred to RA-19), and
-**Schlomilch-Roche** as the general form containing Lagrange (p = n) and Cauchy
-(p = 1); higher-order Rolle; the second- and higher-derivative tests; **Borel's
-theorem** (every formal power series is some C^infinity function's Taylor
-series); **Dini derivates**. B: the Hermite-spline oscillator w, and
-x^2 w(1/x) differentiable with discontinuous derivative; x^{k+1}|x| is C^k and
-not C^{k+1} (the owner's "differentiable k times but not k+1" family);
-x + 2x^2 w(1/x) has positive derivative at 0 and is monotone in no neighbourhood;
-**Boas's pair** f = x + sin x cos x, g = e^{sin x}(x + sin x cos x) (L'Hopital's
-conclusion is strictly one-directional); L'Hopital fails when g' vanishes near a;
-f(x) = x^2(2 + sin(1/x)) has an absolute minimum at 0 although f' changes sign
-infinitely often in every neighbourhood.
-INHERITED FROM RA-15 (Beta-9-1, level 9). This page inherits **the general
-Leibniz rule**, dropped from RA-15 because higher derivatives live here and
-binomial coefficients live nowhere. When this page is scaffolded it must ALSO
-mint a binomial-coefficient definition (Pascal's rule and C(n,k) as a natural
-number) — it needs one for Taylor's theorem regardless — and only then state
-Leibniz. Verified 2026-07-28: no `def-binomial-*`, no binomial theorem and no
-combinatorics page exists anywhere in `plan-spec.json` or `items/`.
+**RA-16 Darboux, L'Hopital, and Taylor's Theorem** <- RA-15,
+`finite-counting-and-binomial-coefficients`
+higher derivatives and the classes **C^k and C^infinity**; the general Leibniz
+rule using the published binomial coefficients and Pascal rule; higher-order
+Rolle; **Darboux's theorem** and the consequence that derivatives have neither
+removable nor jump discontinuities; the valid partial converse that an
+injective or monotone derivative is continuous; **L'Hopital** for 0/0 and
+infinity/infinity at finite and infinite approach points, including one-sided
+forms and finite or infinite target limits; Taylor polynomials; the
+**Schlomilch-Roche** remainder with a natural parameter, its Lagrange and Cauchy
+special cases, and the Peano remainder; remainder bounds; and the second- and
+first-nonzero-derivative tests.
+
+B: a periodic polynomial Hermite-spline oscillator and the resulting
+differentiable function with discontinuous derivative; x^k|x| is C^k and not
+C^{k+1}; a positive derivative at zero with no local monotonicity; a rational
+removable quotient for L'Hopital; a spline-based counterexample to the converse
+of L'Hopital; the exact geometric Taylor remainder; and the x^4, -x^4, x^3
+trichotomy when the second derivative vanishes.
+
+Traps. Darboux plus Baire class one does not imply continuity: discontinuous
+derivatives have both properties. The 0/0 proof at infinity is reduced by
+t=1/x rather than by an invalid fixed-basepoint argument. Peano's remainder
+uses induction and Cauchy's mean-value theorem without assuming continuity of
+the highest derivative. Taylor's integral remainder is deferred to
+`properties-of-the-integral-and-the-working-ftc`; Borel's theorem and Dini
+derivatives are also deferred until their prerequisites are built. The
+polynomial oscillator removes the need for a sine/cosine forward reference.
 
 **RA-17 Convexity** <- RA-16
 convex and concave functions; midpoint convexity; supporting lines; convex iff
@@ -1071,20 +1074,24 @@ belongs here, where Abel's limit theorem makes it worth stating.
 ### Block IX: the elementary functions
 
 **RA-26 The Exponential Function** <- RA-25, RA-09
-`rem-exponential-roadmap` stating the routes and the circularity hazards.
-**E1** power series; **E3** the IVP y' = y, y(0) = 1; **E2** the product limit
-(1 + x/n)^n; **E6** the functional equation with regularity (citing RA-14's
-Cauchy equation); **E11** Bartle & Sherbert's Picard iteration, whose iterates
-ARE the partial sums. Theorems: infinite radius; the addition formula by the
-Cauchy product; exp > 0 and never 0; exp' = exp; strictly increasing; a bijection
-onto (0, infinity); **exp beats every polynomial**; the equivalence theorem
-E1 = E2 = E3 = E6 = E11 (landmark). The number e: sum 1/n!, the error bound
-0 < e - s_n < 1/(n! n), **e is irrational**, and the UG-appropriate members of the
-sixteen known characterizations. B: 2 < e < 3 with an explicit bound; the
-**e^{-1/x^2} bump**, C^infinity with Taylor series identically zero; a smooth
-compactly supported bump and a partition of unity; a **discontinuous solution of
-f(x+y) = f(x)f(y)**; (1 + x/n)^n -> e^x but NOT uniformly on R; a C^infinity
-function analytic at no point.
+`rem-exponential-roadmap-and-circularity` records the construction order and
+the circularity hazards. **E1** is the everywhere-convergent power series;
+**E2** is the product limit (1+x/n)^n; **E3** is the IVP y'=y, y(0)=1;
+**E6** is the normalized multiplicative functional equation; and **E11** is
+Picard iteration, whose iterates are the exact partial sums. Theorems establish
+the addition formula by the Cauchy product, positivity and reciprocals,
+exp'=exp, strict increase, the limits and range, bijectivity onto the positive
+reals, domination of every polynomial, and the equivalence of these five
+constructions. The factorial tail gives 2<e<3 and proves that e is irrational.
+
+B: a negative-input product-limit computation; failure of uniform convergence
+of (1+x/n)^n on R; the flat exponential function and a nonzero smooth compactly
+supported bump; a discontinuous positive solution of F(x+y)=F(x)F(y) built
+from a Hamel-basis additive map and the Axiom of Choice; and failure of uniform
+continuity of exp on R. Logarithms and arbitrary real powers remain outside
+this page. A general smooth partition of unity and a smooth function analytic
+nowhere are deferred because their constructions are not dependency-closed
+here.
 
 **RA-27 The Logarithm, General Powers, and the Sup Definition** <- RA-26, RA-19
 log as exp inverse; **E4**: L(x) = int_1^x dt/t is well defined (integer powers
@@ -1271,15 +1278,27 @@ IFT genuinely needs C^1 and not mere differentiability; f(x,y) = (x, xy);
 the **Jacobian conjecture** as a live open problem.
 
 **RA-37 The Riemann Integral in R^m and Jordan Content** <- RA-18, RA-22
-rectangles and partitions; Darboux sums and the integral over a rectangle;
-Riemann's criterion in R^n; continuous implies integrable; measure zero versus
-**content zero** in R^n; **Lebesgue's criterion in R^n**; Jordan inner and outer
-content; **Jordan measurable iff the boundary has measure zero**; the integral
-over a Jordan measurable set; graphs of continuous functions have content zero;
-C^1 images of null sets are null. B: a bounded plane set without area; a compact
-one; a bounded open set built from a fat Cantor set whose boundary has positive
-measure; **Munkres calls Jordan measurable sets "rectifiable"**, a real citation
-hazard.
+for m>=1, axis-parallel rectangles, grid partitions, common refinements and
+mesh; multidimensional Darboux and tagged sums; Riemann's criterion and the
+agreement of the two integral definitions; and the dictionary with the
+one-dimensional Riemann integral on R. Nullity uses countable cube covers and
+content zero uses finite cube covers, while Jordan outer content uses finite
+rectangle covers. The development proves the multidimensional Lebesgue
+criterion from an explicit cover-to-grid lemma; Jordan inner and outer content;
+the indicator and boundary criteria; the well-defined integral over a Jordan
+measurable set; finite additivity; the equal-dimensional theorem that Lipschitz
+maps R^m to R^m preserve null sets; and content zero for graphs of continuous
+functions.
+
+B: the unit-box computation; rational points in the unit square as a bounded
+null set without Jordan content; compact and bounded-open fat-Cantor examples;
+a parabola graph; the right triangle; a Cantor slab; and the terminological
+warning that Munkres uses "rectifiable" for Jordan measurable sets. The
+one-dimensional null/content-zero agreement is explicit because R^1 and R are
+isometric rather than literally identical. A general C^1-image theorem is
+deferred until the total derivative and compact local-Lipschitz machinery are
+built. Fubini, iterated integration, and change of variables belong to RA-38
+and are not used here.
 Level-8 note (Alpha-8, 2026-07-26): any integer-part / floor step on this page
 (mesh counts, grid-cube counts) cites `lem-integer-part`
 (`limits-of-real-functions`); do not rebuild it inline. And per the level-8
@@ -1438,9 +1457,10 @@ cannot be stated in their usual form at that point. Three options:
   `validate-plan.mjs` permits them there and nowhere else, reporting each one
   rather than hiding it. Any further forward citation is a hard error.
   **CORRECTED (Alpha-F1, 2026-07-28), read off `research/plan-spec.json`: the
-  whitelist is SEVEN B pages, not eight — RA-04, RA-10, RA-12, RA-15, RA-16,
-  RA-18, RA-23 (spec orders 113, 132, 136, 154, 156, 160, 170), each carrying the
-  single target `sine-cosine-and-the-definition-of-pi`. RA-13
+  grandfathered entries are RA-04, RA-10, RA-12, RA-15, RA-18, and RA-23, each
+  carrying the single target `sine-cosine-and-the-definition-of-pi`. Frontier-6
+  removed RA-16's stale entry because its polynomial oscillator closes every
+  planned example without trigonometry. RA-13
   (`continuity-ivt-evt-and-uniform-continuity-examples`, order 138) is NOT on it,
   and neither is RA-22's companion `rn-as-a-normed-space-examples` (order 168).**
   **And option (c) no longer licenses a NEW forward citation.** The

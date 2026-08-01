@@ -1,7 +1,7 @@
 ---
 id: lem-wilson-inverse-pairing
 kind: lemma
-title: "In $(\\mathbb Z/p)^\\times$, inversion pairs every class except $[1]_p$ and $[-1]_p$, which are the only self-inverse classes"
+title: "In $(\\mathbb{Z}/p)^\\times$, inversion pairs every class except $[1]_p$ and $[-1]_p$, which are the only self-inverse classes"
 status: published
 origin: session
 deps: [thm-z-mod-p-is-a-field, def-unit-group-modulo-n-and-euler-totient, lem-inverse-unique, thm-standard-representatives-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]

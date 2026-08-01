@@ -16,7 +16,7 @@ verification:
     verdict: pass
     date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  audited: 2026-08-01
 sources:
   scraped: []
   references:
@@ -95,7 +95,7 @@ below turns into a contradiction.
 
 ## Remarks
 
-- **Darboux's theorem is not used, and is not available.** The slick argument — a derivative has the intermediate value property, and $s$ does not — rests on Darboux's theorem on the intermediate value property of derivatives, which this library does not have: it is planned for the page on Darboux's theorem, l'Hopital's rule and Taylor expansion, and that page is not built, so the result is unavailable here whatever its position in the reading order. The refutation above uses only [[cor-zero-derivative-implies-constant]] and the one-sided limits of a difference quotient, both already published.
+- **Darboux's theorem is not used.** The slick argument — a derivative has the intermediate value property, and $s$ does not — rests on Darboux's theorem on the intermediate value property of derivatives. The refutation above uses only [[cor-zero-derivative-implies-constant]] and the one-sided limits of a difference quotient, both already published.
 
 - **The tension with the first fundamental theorem is only apparent.** $F$ *is* differentiable with $F' = s$ at every point of $[-1,1]$ except $0$, which is exactly what [[thm-ftc-first-part]] promises, since $s$ is continuous exactly off $0$. What fails is the existence of *any* function differentiable at $0$ too with derivative $s(0)$ there, and step 4.1 shows the obstruction is the jump of $s$ at $0$, not a defect of $F$.
 

@@ -107,10 +107,8 @@ this point in the reading order — and both its sum and its integral begin at $
 since $\mathbb{N}$ contains $0$.
 
 **What is deliberately absent.** Taylor's integral remainder needs higher
-derivatives, which the plan puts on the page for Darboux's theorem, l'Hopital's
-rule and Taylor expansion — a page that is not built, so the result is
-unavailable here whatever its position in the reading order, and the scaffold
-records that it belongs there rather than on this page. Bounded variation with
+derivatives and is deliberately developed with Darboux's theorem, l'Hopital's
+rule, and Taylor expansion rather than on this page. Bounded variation with
 the Riemann-Stieltjes integral, and improper integrals, are each a later page of
 this track; the sharp form of the fundamental theorem is not a planned page at
 all but a recorded-not-proved result, [[rem-ftc-absolutely-continuous]]. Arzelà's bounded

@@ -188,7 +188,9 @@ Exists because two defects reached the owner's eye at level 8 in text that was
 valid markdown, valid frontmatter, valid phase format and mathematically
 correct. `wikilink-in-math` (the renderer rewrites `[[id]]` before KaTeX, so a
 wikilink inside `$…$` silently kills the block while every other gate stays
-green), `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`,
+green), `unsupported-tex-delimiter` (remark-math leaves `\(…\)` and `\[…\]`
+literal, so authors must use `$…$` and `$$…$$`), `nested-dollar-in-display`,
+`dollar-in-tag`, `multiline-display`,
 `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, and
 **`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX, plus
 `unreadable` for a file it cannot open.

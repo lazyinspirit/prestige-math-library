@@ -1,7 +1,7 @@
 ---
 id: thm-standard-representatives-modulo-n
 kind: theorem
-title: "For $n\\ge 1$, every class in $\\mathbb Z/n$ has one representative $r$ with $0\\le r<n$, so $\\lvert\\mathbb Z/n\\rvert=n$; while $\\mathbb Z/0$ is in bijection with $\\mathbb Z$"
+title: "For $n\\ge 1$, every class in $\\mathbb{Z}/n$ has one representative $r$ with $0\\le r<n$, so $\\lvert\\mathbb{Z}/n\\rvert=n$; while $\\mathbb{Z}/0$ is in bijection with $\\mathbb{Z}$"
 status: published
 origin: session
 deps: [def-integers-modulo-n, thm-division-algorithm-in-z, def-finite-cardinality, def-injection-surjection-bijection, def-natural-numbers, lem-nat-embeds-int]

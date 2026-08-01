@@ -58,6 +58,11 @@ not a novelty claim, and `proved_here` separately states whether a complete
 local proof is present. Do not set `verification.audited` — that field is the
 owner's alone, and setting it is a fabrication. Publishing is not your job.
 
+For mathematical notation, use only `$...$` for inline math and `$$...$$` for
+display math. The renderer treats TeX `\\(...\\)` and `\\[...\\]` delimiters as
+ordinary text. Keep TeX display line breaks such as `\\\\[4pt]` inside `$$...$$`;
+they are unrelated and valid.
+
 ## 2. Absolute boundaries
 
 - **Write only inside your own id set.** Never edit, and never rename, an item

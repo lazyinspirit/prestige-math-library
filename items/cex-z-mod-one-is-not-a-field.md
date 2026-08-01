@@ -1,7 +1,7 @@
 ---
 id: cex-z-mod-one-is-not-a-field
 kind: counterexample
-title: "$\\mathbb Z/1$ has one element and satisfies $[0]_1=[1]_1$, so it is not a field"
+title: "$\\mathbb{Z}/1$ has one element and satisfies $[0]_1=[1]_1$, so it is not a field"
 status: published
 origin: session
 deps: [thm-standard-representatives-modulo-n, thm-integers-modulo-n-basic-algebra, def-field]

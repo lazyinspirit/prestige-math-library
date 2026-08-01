@@ -1,7 +1,7 @@
 ---
 id: lem-congruence-is-an-equivalence-relation
 kind: lemma
-title: "Congruence modulo every integer is an equivalence relation on $\\mathbb Z$"
+title: "Congruence modulo every integer is an equivalence relation on $\\mathbb{Z}$"
 status: published
 origin: session
 deps: [def-congruence-modulo-an-integer, def-equivalence-relation, lem-divisibility-basic]

@@ -1,7 +1,7 @@
 ---
 id: ex-zero-divisors-modulo-composites
 kind: example
-title: "A modulus $n>1$ is composite exactly when two nonzero classes in $\\mathbb Z/n$ have product $[0]_n$"
+title: "A modulus $n>1$ is composite exactly when two nonzero classes in $\\mathbb{Z}/n$ have product $[0]_n$"
 status: published
 origin: session
 deps: [def-prime, def-addition-and-multiplication-modulo-n, thm-unit-criterion-modulo-n, thm-standard-representatives-modulo-n, def-common-divisor-and-gcd]

@@ -1,7 +1,7 @@
 ---
 id: def-integers-modulo-n
 kind: definition
-title: "The congruence class $[a]_n$ and the quotient set $\\mathbb Z/n$"
+title: "The congruence class $[a]_n$ and the quotient set $\\mathbb{Z}/n$"
 status: published
 origin: session
 deps: [lem-congruence-is-an-equivalence-relation, def-equivalence-relation, lem-equivalence-classes-partition]

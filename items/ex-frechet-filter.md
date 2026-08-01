@@ -1,7 +1,7 @@
 ---
 id: ex-frechet-filter
 kind: example
-title: "The subsets of $\\mathbb N$ containing a tail form the Fréchet filter, and it is proper and not an ultrafilter"
+title: "The subsets of $\\mathbb{N}$ containing a tail form the Fréchet filter, and it is proper and not an ultrafilter"
 status: published
 origin: session
 deps: [def-filter, def-filter-base, lem-filter-base-generates, thm-ultrafilter-characterisation, def-natural-numbers, def-nat-order, def-nat-addition, thm-induction-principle, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-add-commutative, lem-nat-discrete]

@@ -1,7 +1,7 @@
 ---
 id: def-unit-group-modulo-n-and-euler-totient
 kind: definition
-title: "The unit group $(\\mathbb Z/n)^\\times$ and Euler's totient $\\varphi(n)=\\lvert(\\mathbb Z/n)^\\times\\rvert$ for $n\\ge1$"
+title: "The unit group $(\\mathbb{Z}/n)^\\times$ and Euler's totient $\\varphi(n)=\\lvert(\\mathbb{Z}/n)^\\times\\rvert$ for $n\\ge1$"
 status: published
 origin: session
 deps: [thm-integers-modulo-n-basic-algebra, def-invertible-element, lem-monoid-units-form-a-group, thm-standard-representatives-modulo-n, def-finite-cardinality, thm-subset-of-a-finite-set, def-field]

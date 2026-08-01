@@ -39,6 +39,10 @@
 // looks right: spacing, line breaking, a formula that parses but says the wrong
 // thing. If KaTeX cannot be loaded the parse pass is skipped and reported as
 // skipped, never as passed.
+//
+// Canonical delimiters are `$…$` and `$$…$$`. Common TeX delimiters `\(…\)`
+// and `\[…\]` are NOT parsed by remark-math, so they are literal source text
+// in the rendered library; flag them before they reach a reader.
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -137,6 +141,22 @@ for (const path of targets) {
   }
   const rel = relative(REPO, path);
   const { body } = splitFrontmatter(src);
+
+  // ---- unsupported TeX delimiters
+  // The negative lookbehind deliberately excludes TeX line-break spacing such
+  // as `\\\\[6pt]`: that has two source backslashes, whereas an unsupported
+  // display delimiter has one (`\\[`).
+  const proseBody = body
+    .split(/(```[\s\S]*?```)/g)
+    .filter((_, index) => index % 2 === 0)
+    .join("");
+  for (const alt of proseBody.matchAll(/(?<!\\)\\(?:\[|\]|\(|\))/g))
+    err(
+      rel,
+      "unsupported-tex-delimiter",
+      "remark-math renders \\(…\\) and \\[…\\] literally; use `$…$` or `$$…$$`",
+      clip(proseBody.slice(Math.max(0, alt.index - 40), (alt.index ?? 0) + 80)),
+    );
 
   // Mask escaped dollars so they never count as delimiters.
   const masked = body.replace(/\\\$/g, "  ");

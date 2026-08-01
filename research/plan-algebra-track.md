@@ -743,57 +743,41 @@ needs nothing. $n = 0$ and $n = 1$ are checked everywhere; $\mathbb{Z}/1$ is the
 one-element structure and is **not** a field, since `def-field` requires
 $0 \ne 1$.
 
-## AA-2. Cosets, Index and Lagrange's Theorem  (order 28)
+## AA-2. Cosets, Index and Lagrange's Theorem  (order 32)
 
 `requires`: `congruences-and-the-chinese-remainder-theorem`
 
-Left and right cosets; cosets partition the group (via the equivalence relation
-$a \sim b \iff a^{-1}b \in H$); every coset is equinumerous with $H$
-(well-definedness #2); **index** $[G:H]$; **Lagrange's theorem**; the order of an
-element divides the order of the group; a group of prime order is cyclic;
-$g^{|G|} = e$; **Fermat's little theorem** and **Euler's theorem** as corollaries
-in $(\mathbb{Z}/n)^\times$.
+Left and right cosets; membership and equality criteria; the coset equivalence
+relation and partition; explicit bijections between a subgroup and each coset
+and between the left- and right-coset sets; the index [G:H], finite when the
+coset set is finite and infinity otherwise; the finite coset-partition lemma;
+Lagrange's theorem; element order divides group order; g^{|G|}=e; prime-order
+groups are cyclic; the finite index-tower formula; and index one iff H=G.
+Euler's theorem and Fermat's little theorem are corollaries in the published
+unit group (Z/n)^times and cite the published unit criterion and totient values.
 
-Those last two are **licensed as of D5** and were not before. NT-3 at order 26
-supplies $(\mathbb{Z}/n)^\times$, the unit criterion and $\varphi$, so both are
-now one line each from $g^{|G|} = e$: Euler is that identity in
-$(\mathbb{Z}/n)^\times$, and Fermat is Euler at $n = p$. Do not re-derive the
-arithmetic; cite NT-3.
+B page: the cosets of nZ in Z; the two trivial subgroup indices; subgroup
+orders in Sym({1,2,3}); a left coset unequal to the corresponding right coset;
+every positive divisor of a finite cyclic group's order occurring as a subgroup
+order; the distinction between finite index and equinumerosity for 2Z <= Z; a
+product HK of two subgroups that is not a subgroup; and the false statement that
+every coset is itself a subgroup.
 
-B page: cosets of $n\mathbb{Z}$ in $\mathbb{Z}$; a group with no subgroup of a
-given order dividing $|G|$ (so **the converse of Lagrange is false**: $A_4$ has no
-subgroup of order 6) as a false-statement item; left cosets that are not right
-cosets.
+Traps. Lagrange requires G finite, while index is defined without finiteness.
+The finite cardinality notation is natural-valued, but divisibility and primality
+are integer notions; use the canonical embedding explicitly at every seam.
+The index-tower proof cancels |K| only after noting K contains the identity, so
+|K| is nonzero. Euler and Fermat use the already-published arithmetic and do not
+rederive the unit criterion or totient. The A_4 counterexample to the converse
+of Lagrange remains a firm obligation of the later symmetric-group/sign B page:
+the economical proof requires sign and |A_4|=12.
 
-Traps. Lagrange needs $G$ finite; the index is defined without finiteness and the
-statement must say which is which. $A_4$: the reason for deferring it recorded
-here originally — that $S_4$ arrives only at AA-7 — is **wrong as of level
-7-algebra**, which moved `def-symmetric-group` down to order 20, where it is now
-published. $S_4$, cycle notation and transpositions are all available at order
-28. What is still missing is $\operatorname{sgn}$, without which $A_4$ can only
-be given as an explicit twelve-element set whose closure is verified by hand,
-whereas AA-7 gets $A_4$ and $|A_n| = n!/2$ for free. So the conclusion stands and
-the reason changes: the counterexample lives on **AA-7's B page, order 41**, and
-that obligation is **firm, not advisory**, because nothing else in the library
-refutes the converse of Lagrange. Note the refutation argument itself needs
-nothing above this page: index $2$ forces every square into $H$, and the eight
-$3$-cycles are squares. The coset partition
-cites `def-equivalence-relation` and `lem-equivalence-classes-partition`,
-minted on AA-1 (batch-1 audit note 1); this page does not build its own
-equivalence-relation machinery.
+The former warning that finite cardinal arithmetic was absent is superseded.
+`finite-counting-and-binomial-coefficients` now publishes finite cardinality,
+subsets and power sets of finite sets, finite-index sums, and the sum rule; this
+page cites those results and mints no competing counting theory.
 
-**The library has no finite cardinal arithmetic, and Lagrange cannot be proved
-without it.** Verified from disk 2026-07-27: nothing published says a subset of a
-finite set is finite, that a surjective image of a finite set is finite, or that
-$|A \sqcup B| = |A| + |B|$. `lem-subset-of-countable`, `lem-pigeonhole` and
-`thm-product-of-countable` are all about *at most countable*, which is a weaker
-statement and does not specialise for free. This page must mint the counting
-lemmas it needs — the sharper bounded-subset clause inside
-`lem-subset-of-countable`'s Statement and the canonical-min argument of
-`lem-countable-iff-surjection-from-n` license them with **no choice principle** —
-and AA-6, AA-7, AA-5b and LA-2 then reuse rather than re-mint. This is the defect
-class no dependency gate can see: `depsource` reports 0 unresolved for a scaffold
-that silently assumes arithmetic nobody declared.
+Forward references: NONE.
 
 ## AA-3. Normal Subgroups and Quotient Groups  (order 30)
 

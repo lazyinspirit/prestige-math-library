@@ -1649,47 +1649,39 @@ handshake lemma is CB-2's double counting instantiated — cite, do not reprove.
 
 Forward references: NONE.
 
-## GT-2. Trees, Forests and Spanning Trees  (order 191, combinatorics)
+## GT-2. Trees, Forests and Spanning Trees  (order 209, combinatorics)
 
-`requires`: `graphs-walks-and-connectivity` (189)
+`requires`: `graphs-walks-and-connectivity` (207)
 
-DEFS: tree, forest, leaf; rooted tree; spanning tree; **$\tau(G)$**
-(well-definedness #28); the Prüfer sequence; a weighted graph and a minimum
-spanning tree.
+DEFS: tree, forest and leaf; rooted tree, parent and level; spanning tree; the
+finite set of spanning trees and tau(G); labelled Prüfer encoding and decoding;
+a real-weighted graph and minimum spanning tree.
 
-THMS: **the tree characterisation theorem** (landmark): for a graph on $n \ge 1$
-vertices, TFAE — connected and acyclic; connected with $n-1$ edges; acyclic with
-$n-1$ edges; unique path between any two vertices; minimally connected;
-maximally acyclic; every nontrivial tree has at least two leaves; every connected
-graph has a spanning tree (finite case, **choice-free** — say so, because the
-infinite case does not have that luxury and is denied here); the fundamental
-cycle and cut of a spanning tree; **Cayley's formula $\tau(K_n) = n^{n-2}$**
-(landmark), by the **Prüfer bijection**, which is elementary and self-contained;
-Kruskal's and Prim's algorithms are correct (the exchange argument — keep only
-if the page is under the cap, and note that "algorithm" here means a
-constructive existence proof, since the library has no computational model);
-the number of labelled forests, if it drops out cheaply.
+THMS: every nonempty forest has a vertex of degree at most one; the forest
+identity |V|=|E|+c and the tree edge count; deletion of a tree edge and addition
+of a nonedge; the full nonempty finite-tree characterisation theorem; every
+nontrivial tree has two leaves; rooted-tree parent and level properties; a
+maximal acyclic spanning subgraph of a connected graph is a spanning tree, and
+a finite graph is connected iff it has a spanning tree; fundamental cycles and
+cuts; finiteness of the spanning-tree set; the Prüfer bijection and Cayley's
+formula; the spanning-tree exchange lemma; exact MST cut and cycle properties;
+distinct edge weights imply uniqueness; and correctness of Kruskal and Prim as
+constructive finite existence procedures, with arbitrary tie-breaking.
 
-FS: every acyclic graph is a tree (connectedness); a graph with $n-1$ edges is a
-tree; the minimum spanning tree of a weighted graph is unique (false with
-repeated weights; **true when all weights are distinct**, and that positive
-statement is the theorem beside it); Cayley's formula counts unlabelled trees.
+B: trees through five vertices; a Prüfer computation in both directions;
+tau(C_n)=n and tau(K_4)=16; fundamental cycle and cut computations; two spanning
+trees in one graph; a complete Kruskal/Prim computation; disconnected acyclic
+and n-1-edge counterexamples; a nonunique MST with repeated weights; and the
+false statements that Cayley counts unlabelled trees and that every edge belongs
+to every spanning tree.
 
-B: all trees on $\le 5$ vertices; a Prüfer sequence computed both directions;
-$\tau(C_n) = n$ and $\tau(K_4) = 16$ verified against Cayley; a weighted graph
-with two distinct minimum spanning trees.
-
-CEX: an acyclic disconnected graph; two spanning trees of the same graph; a
-graph where a greedy choice by vertex rather than edge fails.
-
-Traps. (i) Cayley's formula gets a **second proof** on GT-7 by the matrix-tree
-theorem; the agreement remark is mandatory and is written here as a
-`forward_refs` orientation note or, better, written there as a backward
-citation. Prefer the latter — GT-7 cites GT-2. (ii) The infinite spanning tree
-theorem (every connected graph has a spanning tree) is **equivalent to AC** and
-is DENIED at this page's finiteness convention; record it. (iii) MST
-"algorithms" are existence proofs; do not import complexity language the library
-cannot define.
+Traps. Every graph here is finite, simple and undirected. The null graph is not
+connected, K_1 is a tree with no degree-one leaf, and the equivalence list is
+stated for a nonempty graph. Write |V|=|E|+c rather than natural subtraction.
+Prüfer labels are the von Neumann natural n={0,...,n-1}; the code and formula are
+stated for n>=2, with tau(K_0)=0 and tau(K_1)=1 handled separately. Cayley's
+formula is labelled, not unlabelled. The infinite spanning-tree theorem is
+outside scope. MST algorithms carry no computational-complexity assertion.
 
 Forward references: NONE.
 
@@ -3601,7 +3593,7 @@ no choice principle beyond ZF.
 
 | order | A page | B page | rigorous future scope |
 |---|---|---|---|
-| 393/394 | induced-subgraphs-and-hereditary-graph-classes | induced-subgraphs-and-hereditary-graph-classes-examples | Induced embeddings, ind_H(G), hereditary classes, complements, connected/anticonnected components, pure/mixed pairs and basic notation. |
+| 393/394 | induced-subgraphs-and-hereditary-graph-classes | induced-subgraphs-and-hereditary-graph-classes-examples | Injective induced embeddings and the injection count ind_H(G); H-free and family-free graphs; isomorphism-closed hereditary graph classes and their unique possibly infinite minimal forbidden induced-subgraph bases; complementation; clique and stable-set numbers; connected/anticonnected components; and complete, anticomplete, pure and mixed disjoint vertex-set pairs. |
 | 395/396 | erdos-hajnal-property-and-homogeneous-sets | erdos-hajnal-property-and-homogeneous-sets-examples | EH constants, the conjecture, complement invariance, monotonicity and family/single-graph formulations. |
 | 397/398 | modules-substitution-and-prime-graphs | modules-substitution-and-prime-graphs-examples | Modules, prime graphs, substitution and the Alon–Pach–Solymosi theorem (1.4). |
 | 399/400 | regular-pairs-and-induced-counting | regular-pairs-and-induced-counting-examples | Density, regularity, energy increment, slicing, induced counting and induced removal. |
@@ -3626,6 +3618,14 @@ no choice principle beyond ZF.
 | 437/438 | co-e-free-comb-structure | co-e-free-comb-structure-examples | H_5/co-E auxiliary EH theorem (6.3), Claims 6.4.1–6.4.3 and Lemma 6.4. |
 | 439/440 | co-bird-free-comb-structure | co-bird-free-comb-structure-examples | P_2+P_1/P_3+P_1 witnesses, E-overlap relation and Lemma 6.5. |
 | 441/442 | erdos-hajnal-for-the-e-graph-and-bird | erdos-hajnal-for-the-e-graph-and-bird-examples | Explicit final deductions of Theorems 1.10–1.11 and a dependency ledger. |
+
+CONVENTION AMENDMENT (Beta-F6-1). Here ind_H(G) counts injective maps preserving
+both adjacency and nonadjacency, not unlabelled vertex subsets; in particular
+ind_{K_2}(G)=2|E(G)|. Hereditary means closed under isomorphism as well as under
+induced subgraphs. A forbidden basis is unique only up to graph isomorphism and
+may be infinite. Every graph is finite, simple and undirected. Complete and
+anticomplete are both vacuously true when one of the two disjoint vertex sets is
+empty, so such a pair is pure, not mixed.
 
 ## 16.3 Item-level proof and example requirements
 

@@ -1,7 +1,7 @@
 ---
 id: ex-units-modulo-eight-are-not-cyclic
 kind: example
-title: "$(\\mathbb Z/8)^\\times=\\{[1],[3],[5],[7]\\}$ is not cyclic because every element squares to $[1]$"
+title: "$(\\mathbb{Z}/8)^\\times=\\{[1],[3],[5],[7]\\}$ is not cyclic because every element squares to $[1]$"
 status: published
 origin: session
 deps: [thm-unit-criterion-modulo-n, def-unit-group-modulo-n-and-euler-totient, def-group-power, def-order-in-a-group, def-generated-subgroup, lem-order-characterisation, thm-standard-representatives-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]

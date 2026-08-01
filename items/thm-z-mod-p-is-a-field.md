@@ -1,7 +1,7 @@
 ---
 id: thm-z-mod-p-is-a-field
 kind: theorem
-title: "For every prime $p$, the two operations on $\\mathbb Z/p$ make it a field"
+title: "For every prime $p$, the two operations on $\\mathbb{Z}/p$ make it a field"
 status: published
 origin: session
 deps: [thm-integers-modulo-n-basic-algebra, thm-unit-criterion-modulo-n, lem-prime-not-dividing-is-coprime, def-prime, def-field, def-integers-modulo-n, def-congruence-modulo-an-integer]
