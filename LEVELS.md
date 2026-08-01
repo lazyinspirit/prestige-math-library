@@ -183,8 +183,11 @@ Fractional orders exist (`formal-laurent-series-field` is 31.5), so a page can b
 inserted without renumbering.
 
 **Namespaced write protocol.** Beta may read anything and run any gate, but
-writes **only** its two `research/level<n>-batch-<i>.*` files. Parallel batches
+writes **only** its three `research/level<n>-batch-<i>.*` files. Parallel batches
 writing shared prose would overwrite each other silently — prose is not gated.
+The third is `research/level<n>-batch-<i>.proof-contracts.json`, the
+machine-readable proof-obligation, citation, and boundary worksheet required by
+`QUALITY-CONTROLS.md`; it is merged by the orchestrator, never jointly edited.
 
 ## Step 2 — Resolve dependencies (Beta-n-i)
 
@@ -267,6 +270,14 @@ or elementary algebra. Separate conceptual moves belong in focused lemmas. A
 claim whose proof cannot close from these licensed moves is narrowed or dropped,
 not rescued by an overstrong citation.
 
+**Durable contract gate (owner, 2026-08-01).** The author updates its own batch
+proof-contract for every proof-bearing item. It covers every direct fact citation
+with an exact source clause, every numbered proof step with stated inputs, and
+all standard boundary cases. The orchestrator merges batch contracts and runs
+the strict proof-contract, selected finite-smoke, and risk-routing gates on the
+whole level after Step 5. A finite smoke pass is only bounded falsification
+evidence, never a proof.
+
 Every A-page summary is written last in exactly two nonempty prose paragraphs,
 each under 150 words. The first gives mathematical background and names the
 definitions and results from declared dependencies that are used. The second
@@ -302,6 +313,15 @@ window.** Do not run GPT-family audit work through ofox.
 
 This is the final mathematical reading tier before the judge and the owner. It
 has three ordered parts.
+
+**Contract and risk coverage (owner, 2026-08-01).** Independent readers update
+the contract belonging to the batch they audit whenever a repair changes proof
+text, citations, step numbers, or boundary handling. Before Step 7, Alpha merges
+the batch contracts and re-runs the three gates in `QUALITY-CONTROLS.md`. Every
+high/critical risk item receives an additional Alpha proof-refuter reading; the
+Alpha `risk_review` field records what that reading established or why a routing
+signal was inapplicable. This does not replace full reader coverage for any
+ordinary item.
 
 **Alpha proof-refuters (owner, 2026-07-31).** For every future Alpha-n audit,
 Alpha dispatches one or more GPT 5.6 Sol proof-reading subagents with
@@ -399,8 +419,9 @@ necessary fixes.
 directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
 Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
 one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
-cross-process ten-call global pool, so either model moves to its next item as
-soon as a slot is free. Both receive the same exact hash-attested frozen prompt
+cross-process model pools with **12 concurrent DeepSeek calls and 12 concurrent
+Terra calls**. Either model moves to its next item as soon as one of its own
+slots is free (24 calls maximum combined). Both receive the same exact hash-attested frozen prompt
 for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
 author; Terra is retained as an independent same-context comparison lane, not
 as a cross-family claim. The harness retains the historical injection-test
@@ -431,14 +452,14 @@ The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that single attestation for both model queues.
 For a targeted recovery, `--models <model>` retries only that model's missing
 current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
-The sweep runs at most ten judge calls total, with no DeepSeek/Terra split or
-per-item barrier: a finished call takes the next eligible call for its own
-model while the other model continues independently.
+The sweep permits at most 12 DeepSeek calls and 12 Terra calls at once (24
+combined), with no per-item barrier: a finished call takes the next eligible
+call for its own model while the other model continues independently.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
 finish reason, and structured transport cause. An empty response with no terminal
 finish reason is retried with jitter up to the normal three-attempt limit;
-the sweep, rather than a slot-holding child, schedules that retry, so its global
-slot is released during the wait and other model calls continue.
+the sweep, rather than a slot-holding child, schedules that retry, so its model
+slot is released during the wait and other calls in that lane continue.
 DeepSeek's empty `finish_reason: length` first pass is retried once at 80k tokens
 after its ordinary 40k-token maximum-reasoning pass. A second length stop remains an
 explicit reasoning-budget null.
@@ -580,7 +601,7 @@ self-contained, accurate* library, not a perfect one. Prefer one reusable lemma
 over a repeated inline argument (`cor-archimedean-reciprocal` retired a gap in 24
 items). **Do not trim landmarks.**
 
-## The nine gates — the orchestrator runs the authoritative pass
+## The twelve gates — the orchestrator runs the authoritative pass
 
 | gate | catches |
 |---|---|
@@ -593,6 +614,10 @@ items). **Do not trim landmarks.**
 | `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>100 A-page items; review only, never a pruning target), `redundant-prereq` (19 total) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
 | `prosecheck.mjs` | **the prose defect class**, which is where 100% of this library's found defects live. ERROR `position-contradiction` (a "later/earlier page" claim contradicting `plan-spec` order — decidable, no judgement). WARNINGS `count-in-prose`, `count-of-this-page`, `library-scope-denial`. `--warnings` lists them, `--strict` fails on them |
+
+| `proof-contract.mjs` | strict, versioned proof-obligation / citation / boundary worksheet. Each direct fact citation gets a declared source and exact source clause; each numbered step gets exactly one stated-input entry; every standard boundary case is checked or specifically not applicable. Checks accountable links, not mathematical truth |
+| `finite-smoke.mjs` | selected bounded countermodel searches for finite/combinatorial claims. A failure supplies a concrete model or convention discrepancy; a pass is **not** a general proof |
+| `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
 
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).

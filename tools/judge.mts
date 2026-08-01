@@ -728,6 +728,13 @@ if (bools.has("context-hash")) {
 
 const DEEPSEEK_INITIAL_MAX_TOKENS = 40_000;
 const DEEPSEEK_LENGTH_RETRY_MAX_TOKENS = 80_000;
+// A full A/B-pair context at owner-requested xhigh can legitimately take more
+// than the former seven-minute transport window (several completed Frontier-6
+// calls already took more than six minutes).  Do not turn that live reasoning
+// into an unrecorded failure: let the direct API have the same twelve-minute
+// allowance as the Terra lane.  This changes only transport patience, not the
+// frozen prompt, thinking level, or token budget.
+const DEEPSEEK_REQUEST_TIMEOUT_MS = 12 * 60_000;
 const configuredAttemptLimit = Number(process.env.JUDGE_MAX_ATTEMPTS ?? 3);
 const MAX_CALL_ATTEMPTS = Number.isInteger(configuredAttemptLimit) && configuredAttemptLimit >= 1
   ? Math.min(configuredAttemptLimit, 3)
@@ -836,7 +843,7 @@ async function callDeepSeek(): Promise<CallResult> {
         method: "POST",
         headers: { authorization: `Bearer ${deepseekKey()}`, "content-type": "application/json" },
         body: JSON.stringify(payloadForDeepSeek(max_tokens)),
-        signal: AbortSignal.timeout(420_000),
+        signal: AbortSignal.timeout(DEEPSEEK_REQUEST_TIMEOUT_MS),
       });
     } catch (e) {
       const latency_ms = Math.round(performance.now() - started);

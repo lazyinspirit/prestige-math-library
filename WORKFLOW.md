@@ -356,15 +356,15 @@ non-null, carry the same frozen-context SHA-256, and that hash matches freshly
 assembled current context. A later null retry does not erase an earlier complete
 verdict on that identical prompt; a later substantive verdict does. Both models
 share one freshly assembled current hash per selected item before scheduling.
-DeepSeek and Terra use a file-backed, cross-process ten-call global pool: either model
-advances as soon as a pool slot is free, never after the other model's call. At
-most ten judge calls are in flight, with no per-model quota.
+DeepSeek and Terra use file-backed, cross-process pools with separate caps of
+12 calls each: either model advances as soon as one of its own pool slots is
+free, never after the other model's call. At most 24 judge calls run together.
 For recovery of only one incomplete judge, pass its exact model id through `--models`;
 the sweep then leaves the other model's already-current verdict untouched.
 The sweep also writes a sibling `-attempts.jsonl` ledger: each attempt records
 latency, HTTP/rate-limit metadata, terminal finish reason, and structured
 transport cause. Empty responses without a finish reason are retried with
-jitter by the sweep scheduler, which releases the global slot during backoff.
+jitter by the sweep scheduler, which releases that model's slot during backoff.
 DeepSeek otherwise starts at 40k tokens and receives a single 80k-token
 retry only for an empty `length` stop, preserving its maximum-reasoning prompt and keeping
 a second length stop separately diagnosable.
@@ -774,6 +774,18 @@ explicit fact, earlier step, given hypothesis, or elementary algebra. Distinct
 conceptual moves are separated into focused lemmas. If those licensed moves do
 not close the proof, Beta narrows or drops the claim instead of overstating a
 dependency.
+
+**Durable proof contracts and high-risk routing (owner, 2026-08-01).** The
+private proof-obligation map and boundary pass are now persisted per batch in
+`research/level<n>-batch-<i>.proof-contracts.json`; see
+`QUALITY-CONTROLS.md` for the schema. A contract records exact source excerpts
+for every fact citation, the input map for every numbered proof step, and the
+disposition of every standard boundary case. The orchestrator merges the
+namespaced files before the whole-level `proof-contract.mjs --strict` gate,
+runs any selected independently computed finite countermodel checks, and routes
+high-risk items to an extra Alpha refuter via `risk-report.mjs`. Finite checks
+falsify bounded cases only; passing never establishes a theorem. Repeat all
+three gates after Step-6 repairs and before freezing Step-7 judge context.
 
 **Report.** List every problematic pair regardless of whether the judge accepted,
 rejected, escalated, or dropped it. "Problematic" is the driver's determination,

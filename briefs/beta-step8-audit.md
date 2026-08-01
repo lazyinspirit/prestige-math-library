@@ -61,6 +61,13 @@ that proof** in house style and run the gates. Do not rename existing ids on
 If a material rewrite changes an item with `verification.judge`, delete that
 block. Do not judge; judging is step 7.
 
+Update your batch's `research/level<n>-batch-<i>.proof-contracts.json` whenever
+you change a proof, a citation, a proof-step number, or boundary handling. Keep
+the contract's exact source excerpts and use lists faithful to the text. If a
+finite smoke check fails, report the concrete model to Alpha and do not treat a
+passing bounded test as a proof. Report any high-risk item that needs Alpha's
+additional proof-refuter read.
+
 ## Gates before reporting
 
 Run the relevant file-level checks for everything you changed, including

@@ -82,7 +82,7 @@ version of a cited result.
 ## 1. What you produce, and the ONLY files you may write
 
 **Amendment 4 of the workflow, the namespaced write protocol.** You may READ
-anything in the repo and RUN any gate. You may WRITE exactly two files:
+anything in the repo and RUN any gate. You may WRITE exactly three files:
 
 - `research/level<n>-batch-<i>.pages.json` — your batch's page objects in final
   form, as a JSON array. Shape is exactly `research/level8-batch-1.pages.json`:
@@ -92,6 +92,12 @@ anything in the repo and RUN any gate. You may WRITE exactly two files:
   APPLYABLE edits (file, section, exact old text, exact new text), plus
   authoring-time notes that have no scaffold anchor but must reach the step-5
   author.
+- `research/level<n>-batch-<i>.proof-contracts.json` — the version-1
+  machine-readable proof contract for every planned proof-bearing item. Use the
+  exact schema in `QUALITY-CONTROLS.md`: source clause and uses for every direct
+  fact citation; an input map for every planned numbered step; all eight
+  boundary-case dispositions; selected finite smoke checks where a bounded model
+  is meaningful. This file is your Step-5 self's durable obligation map.
 
 Do not touch `research/plan-spec.json`, any `items/*.md`, any `library/*/*.md`,
 or the other batch's files. I splice, gate and commit; Alpha-n applies your

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "level": "example-only",
+  "scope": ["lem-cauchy-bounded"],
+  "contracts": {
+    "lem-cauchy-bounded": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-rat-triangle",
+          "source_section": "Statement",
+          "quote": "$|x + y| \\le |x| + |y|$",
+          "uses": ["1.2"]
+        }
+      ],
+      "derivations": [
+        { "id": "choose-tail", "claim": "Choose a Cauchy tail with error below one.", "step": "1.1", "inputs": ["A1"] },
+        { "id": "triangle-bound", "claim": "Bound every term in the tail by the selected anchor.", "step": "1.2", "inputs": ["L1"] },
+        { "id": "tail-estimate", "claim": "Combine the Cauchy estimate with the triangle bound.", "step": "2.1", "inputs": ["step 1.1", "step 1.2", "algebra"] },
+        { "id": "finite-anchor", "claim": "Select a finite maximum covering the prefix and tail anchor.", "step": "2.2", "inputs": ["step 1.1", "choose"] },
+        { "id": "prefix-bound", "claim": "The finite prefix lies below that maximum.", "step": "3.1", "inputs": ["step 2.2", "algebra"] },
+        { "id": "tail-bound", "claim": "The selected tail lies below that maximum.", "step": "3.2", "inputs": ["step 2.1", "step 2.2", "algebra"] },
+        { "id": "combine-ranges", "claim": "The two index ranges exhaust the sequence.", "step": "4.1", "inputs": ["step 3.1", "step 3.2"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The given sequence is indexed by positive natural numbers and the proof does not form a finite object." },
+        { "case": "zero", "status": "not_applicable", "reason": "The stated sequence convention starts at n >= 1." },
+        { "case": "one", "status": "checked", "evidence": "step 1.1 uses the positive tolerance epsilon = 1." },
+        { "case": "degenerate", "status": "checked", "evidence": "statement allows constant and zero sequences; steps 1.1--4.1 use no nonzero term." },
+        { "case": "endpoints", "status": "checked", "evidence": "step 3.1 covers n < N and step 3.2 covers n >= N." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "step 1.1 obtains N from the Cauchy assumption before step 2.2 forms the finite maximum." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The statement is one directional." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The statement is one directional." }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "example",
+        "notes": "Demonstration fixture only; it documents the required review record shape."
+      }
+    }
+  }
+}

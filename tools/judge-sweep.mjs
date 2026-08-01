@@ -1,11 +1,11 @@
 // Run hash-attested paired judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Calls share one ten-slot global pool. DeepSeek and Terra start their next item
-// as soon as a slot is free, without waiting for one another on the same item.
-// Retry backoffs return work to this scheduler, releasing the slot so unrelated
-// calls can continue. The pool has no per-model quota, while no result from
-// either model influences the other.
+// Each model has its own twelve-slot cross-process pool. DeepSeek and Terra
+// start their next item as soon as one of their own slots is free, without
+// waiting for the other model on the same item. At most 24 calls run combined.
+// Retry backoffs return work to this scheduler, releasing that model's slot so
+// unrelated calls in the same lane can continue. No result influences the other.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
 import { spawn, spawnSync } from "node:child_process";
 
@@ -95,42 +95,52 @@ const currentContextHash = (id) => {
 // once per item rather than parsing the same A/B-pair context twice before any
 // API call can start.
 const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
-const MAX_CONCURRENT_CALLS = 10;
+// Owner policy, 2026-08-01: independently cap each judge lane at 12 calls.
+// `--limit` caps how many ITEMS each model covers; it is not concurrency.
+const MODEL_CONCURRENCY = Object.freeze({
+  [DEEPSEEK]: 12,
+  [TERRA]: 12,
+});
+const MAX_CONCURRENT_CALLS = Object.values(MODEL_CONCURRENCY).reduce((sum, n) => sum + n, 0);
 const RETRY_EXIT = 4;
 const LENGTH_RETRY_EXIT = 5;
-// This semaphore is shared across *all* sweep invocations. An in-process pool
-// alone would let two resumed sweeps exceed the owner's global ten-call limit.
-// The directory slots are atomic on this host filesystem; each holder refreshes
-// its mtime, and an abandoned slot is reclaimed only after its heartbeat is
-// stale for five minutes.
+// These semaphores are shared across *all* sweep invocations. An in-process
+// pool alone would let two resumed sweeps exceed a model lane's cap. Directory
+// slots are atomic on this host filesystem; each holder refreshes its mtime,
+// and an abandoned slot is reclaimed only after its heartbeat is stale for five
+// minutes. Model-specific directories preserve the independent 12/12 caps.
 const GLOBAL_SLOT_DIR = "/tmp/prestige-math-library-judge-slots";
 const SLOT_STALE_MS = 5 * 60_000;
 const SLOT_HEARTBEAT_MS = 30_000;
 const SLOT_RETRY_MS = 250;
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const reapStaleSlots = () => {
+const slotDirFor = (model) => `${GLOBAL_SLOT_DIR}/${model}`;
+const reapStaleSlots = (model) => {
   try {
-    for (const entry of readdirSync(GLOBAL_SLOT_DIR, { withFileTypes: true })) {
-      if (!entry.isDirectory() || !/^slot-[0-9]$/.test(entry.name)) continue;
-      const slot = `${GLOBAL_SLOT_DIR}/${entry.name}`;
+    for (const entry of readdirSync(slotDirFor(model), { withFileTypes: true })) {
+      if (!entry.isDirectory() || !/^slot-[0-9]+$/.test(entry.name)) continue;
+      const slot = `${slotDirFor(model)}/${entry.name}`;
       try {
         if (Date.now() - statSync(slot).mtimeMs > SLOT_STALE_MS) {
           rmSync(slot, { recursive: true, force: true });
-          console.error(`[judge-sweep] reclaimed stale global slot ${entry.name}.`);
+          console.error(`[judge-sweep] reclaimed stale ${model} slot ${entry.name}.`);
         }
       } catch { /* a concurrent release/reclaim won the race */ }
     }
   } catch { /* the first acquirer creates the directory below */ }
 };
-const acquireGlobalSlot = async () => {
-  mkdirSync(GLOBAL_SLOT_DIR, { recursive: true });
+const acquireModelSlot = async (model) => {
+  const dir = slotDirFor(model);
+  const cap = MODEL_CONCURRENCY[model];
+  if (!cap) throw new Error(`no concurrency cap configured for ${model}`);
+  mkdirSync(dir, { recursive: true });
   while (true) {
-    reapStaleSlots();
-    for (let index = 0; index < MAX_CONCURRENT_CALLS; index += 1) {
-      const slot = `${GLOBAL_SLOT_DIR}/slot-${index}`;
+    reapStaleSlots(model);
+    for (let index = 0; index < cap; index += 1) {
+      const slot = `${dir}/slot-${index}`;
       try {
         mkdirSync(slot);
-        writeFileSync(`${slot}/holder.json`, JSON.stringify({ pid: process.pid, acquired_at: new Date().toISOString() }) + "\n");
+        writeFileSync(`${slot}/holder.json`, JSON.stringify({ model, pid: process.pid, acquired_at: new Date().toISOString() }) + "\n");
         const heartbeat = setInterval(() => {
           try { utimesSync(slot, new Date(), new Date()); } catch { /* released or replaced */ }
         }, SLOT_HEARTBEAT_MS);
@@ -156,12 +166,12 @@ const pendingFor = (model) => ids
   })
   .slice(0, limit);
 const pending = Object.fromEntries(models.map((model) => [model, pendingFor(model)]));
-console.log(`[judge-sweep] DeepSeek pending ${pending[DEEPSEEK]?.length ?? 0}/${ids.length}; Terra pending ${pending[TERRA]?.length ?? 0}/${ids.length}; one independent global pool uses at most ${MAX_CONCURRENT_CALLS} calls total.`);
+console.log(`[judge-sweep] DeepSeek pending ${pending[DEEPSEEK]?.length ?? 0}/${ids.length}; Terra pending ${pending[TERRA]?.length ?? 0}/${ids.length}; independent cross-process caps are DeepSeek=${MODEL_CONCURRENCY[DEEPSEEK]}, Terra=${MODEL_CONCURRENCY[TERRA]} (at most ${MAX_CONCURRENT_CALLS} calls combined).`);
 
 const runAttempt = async (task) => {
   const { id, model } = task;
   console.log(`[judge-sweep] start ${model} ${id} attempt ${task.attempt + 1}`);
-  const releaseSlot = await acquireGlobalSlot();
+  const releaseSlot = await acquireModelSlot(model);
   try {
     return await new Promise((resolve) => {
       let stdout = "";
@@ -268,15 +278,16 @@ const worker = async () => {
         lengthFallback: task.lengthFallback || result.code === LENGTH_RETRY_EXIT,
         ready_at,
       });
-      console.log(`[judge-sweep] requeued ${task.model} ${task.id} for attempt ${task.attempt + 2}; the global slot is free during backoff.`);
+      console.log(`[judge-sweep] requeued ${task.model} ${task.id} for attempt ${task.attempt + 2}; its model slot is free during backoff.`);
     } else if (result.code !== 0) {
       console.error(`[judge-sweep] ${task.model} ${task.id}: judge exited ${result.code}; continue so the Step-10 comparison exposes the incomplete item.`);
     }
   }
 };
 const totalPending = models.reduce((sum, model) => sum + pending[model].length, 0);
+const workerLimit = models.reduce((sum, model) => sum + MODEL_CONCURRENCY[model], 0);
 await Promise.all(Array.from(
-  { length: Math.min(MAX_CONCURRENT_CALLS, totalPending) },
+  { length: Math.min(workerLimit, totalPending) },
   () => worker(),
 ));
 if (paymentFailed) process.exit(3);

@@ -137,16 +137,18 @@ banner; the public sees only `published`.
   subscription process in an empty temporary work directory. They receive the
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.
-  `tools/judge-sweep.mjs` keeps their calls independent in one file-backed,
-  cross-process global pool: each model moves to its next item when a slot is
-  free, without waiting for the other model.
+  `tools/judge-sweep.mjs` keeps their calls independent in file-backed,
+  cross-process model pools: DeepSeek has a cap of 12 concurrent calls and
+  Terra has a separate cap of 12. Each model moves to its next item when one of
+  its own slots is free, without waiting for the other model (24 calls maximum
+  combined).
   Before scheduling, it assembles each selected item's current prompt hash once
   and shares that attestation across both model queues.
   The sweep records every transport/HTTP attempt, latency, finish reason, and
   rate-limit headers in the paired attempt ledger; an empty non-final response
   is retried with jitter and is never treated as a mathematical verdict.
-  The sweep itself requeues retryable attempts, releasing their global slot
-  during backoff so unrelated DeepSeek or Terra work continues.
+  The sweep itself requeues retryable attempts, releasing that model's slot
+  during backoff so unrelated work in the same lane continues.
   Supply `tools/judge-sweep.mjs --pages` with A-page ids; it includes the
   corresponding B/examples item lists automatically, because coverage is for
   the whole A/B pair. **For the initial Step-7 sweep, supply every A page in the
@@ -165,8 +167,8 @@ banner; the public sees only `published`.
   `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; fatal types are
   `logic`, `dependency_citation`, or `other`), and compare agreement,
   model-only rejections, nulls, and owner-confirmed fatal findings at the end of
-  step 10. No more than ten judge calls total may be in flight; there is no
-  per-model quota within that global cap.
+  step 10. The two model pools are independently capped at 12 calls each (24
+  maximum combined); neither model's throughput is throttled by the other.
 
 - **Alpha adjudicates judges (owner, 2026-07-31).** For this and every future
   session, Alpha is the sole adjudicator of a paired-judge rejection. Alpha
@@ -259,6 +261,20 @@ banner; the public sees only `published`.
   still does not close honestly, narrow or drop the stated theorem/example/
   counterexample rather than patching it with an overstated dependency. This is
   required in every future Beta scaffold and Step-5 authoring run.
+- **Durable proof-contract and high-risk gates (owner, 2026-08-01).** In every
+  future level, each Beta writes and maintains a namespaced
+  `research/level<n>-batch-<i>.proof-contracts.json` for every proof-bearing
+  item it owns. It records (a) the exact cited source clause and every step
+  using each `[F#]`/`[A#]`/`[L#]` fact, (b) a stated input map covering every
+  numbered step exactly once, and (c) an anchored disposition of empty, zero,
+  one, degenerate, endpoint, nonempty-choice, and both iff-direction cases.
+  The orchestrator merges the batch files before the whole-level gate with
+  `tools/merge-proof-contracts.mjs`, then runs `proof-contract.mjs --strict`,
+  `finite-smoke.mjs`, and `risk-report.mjs --require-reviewed` after Step 5 and
+  again after Step-6 repairs, before freezing Step-7 context. Finite smoke tests
+  are bounded countermodel searches, never general proofs. A high/critical risk
+  result routes the item to an additional Alpha proof-refuter and requires an
+  Alpha `risk_review` record. `QUALITY-CONTROLS.md` is the complete contract.
 - **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
   two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
   mathematical background and names definitions and results from declared

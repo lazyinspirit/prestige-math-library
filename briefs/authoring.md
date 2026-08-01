@@ -42,6 +42,10 @@ For your A page and your B page:
 - one `library/<category>/<page-id>.md` per page, matching the shape of an
   existing published page (read `library/real-analysis/limsup-and-subsequential-limits.md`
   for the house page format).
+- update only your own `research/level<n>-batch-<i>.proof-contracts.json` so it
+  exactly matches final prose: every direct fact citation has its exact source
+  excerpt and all uses; every numbered step has exactly one input-map entry; and
+  every standard boundary case is checked or specifically not applicable.
 
 Everything is authored `status: draft` and `origin: session`. Do not set
 `verification.audited` — that field is the owner's alone, and setting it is a
@@ -99,6 +103,13 @@ that`; never replace the source proposition with a summary of what it is for. A
 citation to an item for a claim it does not make is a fatal defect; "I remembered
 what that lemma probably says" has produced more defects here than any other
 habit.
+
+**Persist the map.** `QUALITY-CONTROLS.md` turns that map into your batch proof
+contract. Do not leave it as private reasoning. An exact source excerpt must be
+copied from the cited item's Statement/Definition/Example; a finite-smoke entry
+must quote the actual claim it probes and is only a bounded countermodel search,
+not a proof. Run `node tools/proof-contract.mjs
+research/level<n>-batch-<i>.proof-contracts.json --strict` before reporting.
 
 **Definition-justification rule (WORKFLOW, hard):** a definition that presumes
 well-definedness, uniqueness, or existence must discharge it — either inline in
@@ -248,7 +259,7 @@ A published page listing a draft item is a hard error, so keep `items:` and
 Your final message is a report to the orchestrator, not to a human reader:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
-   judge verdict; the GLM ofox judge is step 7.
+   judge verdict; the paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why.
 3. **Escalations** — anything you could not do without crossing a boundary in

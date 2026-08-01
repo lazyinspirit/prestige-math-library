@@ -52,7 +52,7 @@ the owner explicitly instructs otherwise; report suspected published defects.
 Never rename an id on `main`.
 
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
-GLM ofox judge is step 7.
+paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 
 ## Your read-only proof-refuter subagents (owner, 2026-07-31)
 
@@ -62,8 +62,8 @@ level and all published library content. If the launcher supports capability
 restrictions, grant no write capability; otherwise explicitly forbid all file
 writes, `apply_patch`, and fixes. They report evidence only.
 
-Their review standard is the same skeptical, adversarial standard used by GLM
-5.2 and DeepSeek v4 Pro at step 7. Instruct each reader to trace every proof
+Their review standard is the same skeptical, adversarial standard used by
+DeepSeek V4 Pro and GPT 5.6 Terra at step 7. Instruct each reader to trace every proof
 step against the exact cited facts and dependency statements; read the cited
 item before saying a fact is too weak; seek concrete false claims, invalid
 inferences, missing hypotheses, scope/quantifier errors, or inaccurate
@@ -101,6 +101,17 @@ actually used declared dependencies first; main definitions, theorems, and
 logical progression second. Every B page must have no authored summary body.
 Confirm, refute, amend, revert, or extend fixes as the evidence warrants. If
 you add a result, personally author its proof.
+
+### 6b.1 Reconcile proof contracts and high-risk routing
+
+Require each independent reader to update its own batch proof-contract whenever
+it changes proof text, citations, step numbers, or a boundary case. Merge all
+batch files and run the three controls in `QUALITY-CONTROLS.md` before Step 7.
+For every `high` or `critical` item in `risk-report.mjs`, give at least one
+additional read-only proof-refuter the item, its contract, and cited sources;
+then record a complete `risk_review` with your own adjudicated disposition.
+A finite-smoke pass is bounded falsification evidence only and never replaces
+your reading. Re-run the merge and controls after any repair they trigger.
 
 ### 6c. Audit cross-batch and cross-level references
 

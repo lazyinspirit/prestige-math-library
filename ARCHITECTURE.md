@@ -25,7 +25,7 @@ That is the design claim, and it is measured, not assumed.
         │  validate-plan + depsource gate it BEFORE authoring
         ▼
   CONTENT                 items/*.md, library/*/*.md
-        │  9 gates + Beta/Alpha reading audit + 1 judge
+        │  12 gates + Beta/Alpha reading audit + 1 judge
         ▼
   RENDERED PAGE           app repo, read-only bind mount
 ```
@@ -67,7 +67,7 @@ remark would inject a false logical edge into acyclicity, the page prerequisite
 closure and the flowchart — `def-axiom-of-choice` does not *depend* on Cohen's
 theorem.
 
-## 3. The nine gates
+## 3. The twelve gates
 
 Run from the repo root. The orchestrator runs the authoritative pass **after**
 every agent in a stage finishes; no stage advances on an agent's report.
@@ -249,6 +249,36 @@ can declare dozens of forward references while `depsource` reports
 `planned-later 0`. This caused a false "zero forward references" claim at
 level 9.
 
+### 3.10 Proof contracts, finite smoke, and risk routing
+
+`tools/proof-contract.mjs` turns Beta's formerly private proof-obligation map
+into a versioned, per-level audit artifact. For each scoped proof-bearing item
+it checks that every direct fact citation names a declared dependency, quotes a
+clause from the actual cited Statement/Definition/Example, and lists every step
+using that fact. It also requires every numbered step to have exactly one input
+map entry and every standard boundary case to be checked or specifically ruled
+out. It verifies accountable *links*, not the truth of the inference; Alpha and
+the judges still read the mathematics. `--strict` turns absent scoped contracts
+into gate errors.
+
+Parallel Betas write only namespaced batch contract files. `merge-proof-contracts.mjs`
+is the deterministic single-writer handoff that combines them for each
+whole-level gate and rejects duplicate ownership. This avoids a shared JSON file
+becoming a new parallel-write failure mode.
+
+`tools/finite-smoke.mjs` runs selected, independently computed finite-model
+checks for graph-tree, induced-complement, and cyclic-subgroup invariants. Each
+test must name an exact item excerpt that it probes. It is a **falsification
+screen**: a pass has no general-proof force, while a fail provides a concrete
+countermodel or convention discrepancy for Alpha to adjudicate.
+
+`tools/risk-report.mjs` exposes a transparent score for dependency fan-in,
+proof length, biconditionals, existence/well-definedness, boundary-sensitive
+language, induction, quotient constructions, and analytic limits. High and
+critical results route to an additional Alpha proof-refuter and require a
+recorded `risk_review` before Step 7. It is deliberately not a defect detector:
+the score explains *where to spend reading attention*, not what is false.
+
 ### Helpers
 `reflow.mts` (join soft-wrapped steps; purely syntactic, never changes
 mathematics) · `adopt-repair.mjs` · `consumers.mjs --changed` (who cites what I
@@ -402,14 +432,13 @@ models' owner-confirmed fatal detection counts and fatal-confirmation rate among
 adjudicated rejection candidates. It makes no unsupported recall claim, because
 the complete universe of fatal defects is not independently enumerated.
 
-**Concurrency cap (owner, 2026-07-31):** `tools/judge-sweep.mjs` uses one
-file-backed, cross-process global pool. DeepSeek and Terra never wait for one
-another before advancing to their next items; a freed slot takes the next
-eligible call for whichever model is ready. The hard ceiling is ten judge calls
-total, with no per-model quota. The ten numbered slots live under `/tmp`,
-are acquired atomically, heartbeat while a child judge runs, and are reclaimed
-only after a five-minute stale heartbeat, so a second resumed sweep cannot add
-calls past the cap and a killed run cannot block it forever.
+**Concurrency cap (owner, 2026-08-01):** `tools/judge-sweep.mjs` uses two
+file-backed, cross-process model pools: twelve DeepSeek slots and twelve Terra
+slots. Each lane advances independently when one of its own slots is free; the
+hard ceiling is 24 calls combined. The numbered slots live under model-specific
+directories in `/tmp`, are acquired atomically, heartbeat while a child judge
+runs, and are reclaimed only after a five-minute stale heartbeat, so a second
+resumed sweep cannot exceed either cap and a killed run cannot block it forever.
 
 **Injection tests still govern future model changes.** DeepSeek v4-flash was
 reverted after passing a blatantly false injected claim; GLM caught that
@@ -578,7 +607,7 @@ State this honestly rather than implying coverage.
   `validate-plan` owns the check and reads `research/plan-spec.json`;
   `depcheck` is the only gate that reads authored content and contains **zero**
   b-leaf checks (verified 2026-07-27). An authoring agent that adds a `deps` edge
-  onto a B-page item after the splice is therefore invisible to all nine gates.
+  onto a B-page item after the splice is therefore invisible to all twelve gates.
   Note the rule's exact shape before "fixing" a report of one:
   `validate-plan.mjs` guards with `dp.kind === 'B' && dp.id !== p.id`, so an item
   citing an **earlier item on its own B page is legal** — ordinary intra-page
