@@ -26,3 +26,25 @@ A **rooted tree** is a pair $(T,r)$ consisting of a tree $T$ and a distinguished
 The **depth** of $v$ is $d_T(r,v)$, and the **height** of $(T,r)$ is the maximum vertex depth ([[def-graph-distance-and-girth]]). A vertex $u$ is an **ancestor** of $v$, and $v$ a **descendant** of $u$, when $u$ lies on the root path of $v$. If $v\ne r$, the neighbour of $v$ immediately preceding it on its root path is its **parent**; the vertices having parent $v$ are the **children** of $v$.
 
 The vertices of depth $k$ form **level $k$**. The root has depth zero and is its own ancestor, but it has no parent.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\small}]
+  \tikzset{vertex/.style={circle,draw,fill=white,inner sep=1.4pt,minimum size=5mm}}
+  \draw[dashed,gray] (-2.7,2.4)--(2.7,2.4);
+  \draw[dashed,gray] (-2.7,1.2)--(2.7,1.2);
+  \draw[dashed,gray] (-2.7,0)--(2.7,0);
+  \node[anchor=west] at (2.8,2.4) {\scriptsize level $0$};
+  \node[anchor=west] at (2.8,1.2) {\scriptsize level $1$};
+  \node[anchor=west] at (2.8,0) {\scriptsize level $2$};
+
+  \node[vertex,fill=blue!18,very thick] (r) at (0,2.4) {$r$};
+  \node[vertex] (u) at (-1.2,1.2) {$u$};
+  \node[vertex] (w) at (1.2,1.2) {$w$};
+  \node[vertex] (v) at (-1.8,0) {$v$};
+  \node[vertex] (x) at (-0.6,0) {$x$};
+  \node[vertex] (y) at (1.2,0) {$y$};
+  \draw (r)--(u) (r)--(w) (u)--(v) (u)--(x) (w)--(y);
+  \node[blue] at (0.75,2.75) {\scriptsize root};
+  \node at (-2.25,0.65) {\scriptsize $u$ is parent of $v$};
+\end{tikzpicture}
+```

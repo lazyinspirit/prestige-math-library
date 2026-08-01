@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // content-policy.mjs — enforce future-session provenance and containment rules.
 //
-//   node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--json]
+//   node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]
 //
 // This gate deliberately receives an explicit in-flight batch scope.  The
 // library has a large legacy corpus whose provenance was not recorded under the
 // present contract; retrospectively guessing those tags would be dishonest.  A
-// future authored item, however, must disclose its provenance and cannot turn a
-// newly generated convenience claim into shared load-bearing infrastructure.
+// future authored item, however, must disclose its provenance and cannot make
+// an AI-generated Statement/Construction a dependency. Proof provenance is
+// deliberately irrelevant: the cited claim, not its local derivation, bounds
+// downstream propagation.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
@@ -16,16 +18,24 @@ import { fileURLToPath } from 'node:url';
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
-const files = argv.filter((arg) => arg !== '--json');
+// Step 0 needs to reject an over-cap or malformed manifest *before* authoring.
+// The normal policy additionally verifies the corresponding item files after
+// Step 5.  Keeping these modes explicit prevents expected missing draft files
+// from being misreported as a failed pre-authoring gate.
+const manifestOnly = argv.includes('--manifest-only');
+const files = argv.filter((arg) => arg !== '--json' && arg !== '--manifest-only');
 if (!files.length) usage();
 
-const AUTHORSHIP = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
+const STATEMENT_PROVENANCE = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
+const PROOF_PROVENANCE = new Set([...STATEMENT_PROVENANCE, 'not-supplied', 'not-applicable']);
 const GENERATED_ROLE = new Map([
-  ['lemma', 'proof-decomposition-lemma'],
   ['corollary', 'direct-corollary'],
   ['example', 'example'],
   ['counterexample', 'counterexample'],
 ]);
+// Owner policy, 2026-08-01: each Beta owns at most two A/B pairs.  This is a
+// future-scope gate, so historical three-pair manifests remain readable.
+const BATCH_A_PAIR_CAP = 2;
 
 const errors = [];
 const warnings = [];
@@ -107,7 +117,10 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
     fm,
     body,
     kind: scalar(fm, 'kind'),
-    authorship: scalar(fm, 'authorship'),
+    provenance: {
+      statement: nested(fm, 'provenance', 'statement'),
+      proof: nested(fm, 'provenance', 'proof'),
+    },
     deps: list(fm, 'deps'),
     provedHere: scalar(fm, 'proved_here') !== 'false',
   };
@@ -116,10 +129,31 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
 
+// The Step-0 form also detects a newly minted id that would shadow an existing
+// item or another page's plan entry.  It deliberately allows a page's own
+// already-spliced entry, so the same manifest can be rechecked immediately
+// after Step 4.
+const planHomes = new Map();
+try {
+  const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
+  for (const page of plan.pages ?? []) for (const planned of page.items ?? []) {
+    const id = typeof planned === 'string' ? planned : planned?.id;
+    if (typeof id === 'string' && id && !planHomes.has(id)) planHomes.set(id, page.id);
+  }
+} catch (cause) {
+  error('plan-read', `research/plan-spec.json: ${cause.message}`);
+}
+
 const scope = [];
 const seen = new Set();
+const plannedItems = new Map();
 for (const file of files) {
-  for (const page of readBatch(file)) {
+  const batch = readBatch(file);
+  const aPages = batch.filter((page) => page?.kind === 'A');
+  if (aPages.length > BATCH_A_PAIR_CAP) {
+    error('batch-a-pair-cap', `${file}: contains ${aPages.length} A/B pairs; a Beta may scaffold and author at most ${BATCH_A_PAIR_CAP}`);
+  }
+  for (const page of batch) {
     for (const planned of page.items ?? []) {
       const id = typeof planned === 'string' ? planned : planned?.id;
       if (typeof id !== 'string' || !id) {
@@ -131,68 +165,100 @@ for (const file of files) {
         continue;
       }
       seen.add(id);
+      if (manifestOnly) {
+        if (items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
+        const priorHome = planHomes.get(id);
+        if (priorHome && priorHome !== page?.id) {
+          error('batch-plan-id-collision', `${id} is already planned on ${priorHome}, not ${page?.id ?? '?'}`, id);
+        }
+        plannedItems.set(id, {
+          file,
+          page: page?.id ?? '?',
+          pageKind: page?.kind,
+          order: page?.order,
+          deps: Array.isArray(planned?.deps) ? planned.deps : [],
+        });
+      }
       scope.push(id);
     }
   }
 }
 
-const directConsumers = new Map();
-for (const item of items.values()) {
-  for (const raw of item.deps) {
-    const target = resolve(raw);
-    if (!target) continue;
-    if (!directConsumers.has(target)) directConsumers.set(target, new Set());
-    directConsumers.get(target).add(item.id);
+// A scaffold has enough information to reject the dependency faults that are
+// independent of prose: a missing target, a backwards reading-order edge, or
+// any edge into a B/examples page.  This is deliberately narrower than the
+// post-authoring graph/provenance gate, which reads the actual item files.
+if (manifestOnly) for (const [id, planned] of plannedItems) {
+  for (const raw of planned.deps) {
+    if (typeof raw !== 'string' || !raw) {
+      error('batch-dependency-shape', `${planned.file}: ${id} has a malformed dependency`, id);
+      continue;
+    }
+    const target = plannedItems.get(raw);
+    if (target) {
+      if (target.pageKind === 'B') {
+        error('batch-b-leaf-target', `${id} depends on B-page item ${raw} (${target.page})`, id);
+      }
+      if (typeof target.order === 'number' && typeof planned.order === 'number' && target.order > planned.order) {
+        error('batch-forward-dependency', `${id} depends on later item ${raw} (${target.page})`, id);
+      }
+      continue;
+    }
+    if (!resolve(raw)) error('batch-dependency-missing', `${id} depends on ${raw}, which is neither declared by this batch nor an item on disk`, id);
   }
 }
 
-for (const id of scope) {
+if (!manifestOnly) for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) {
     error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
     continue;
   }
-  if (!item.authorship) error('authorship-missing', `${item.file}: every in-flight mathematical-content item needs authorship`, item.id);
-  else if (!AUTHORSHIP.has(item.authorship)) error('authorship-invalid', `${item.file}: authorship must be ai-generated, ai-altered, or literature-derived`, item.id);
-  // Both source-backed provenance labels make a falsifiable claim about where
-  // the mathematical content came from.  Require at least one reader-visible
-  // reference so Alpha and the judges have an object to compare against rather
-  // than treating an untraceable label as a provenance record.
-  if (['literature-derived', 'ai-altered'].includes(item.authorship) && !referenceUrls(item.fm).length) {
-    error('source-backed-authorship-uncited', `${item.file}: ${item.authorship} content requires a sources.references URL`, item.id);
+  const statement = item.provenance.statement;
+  const proof = item.provenance.proof;
+  if (!statement) error('provenance-statement-missing', `${item.file}: every in-flight mathematical-content item needs provenance.statement`, item.id);
+  else if (!STATEMENT_PROVENANCE.has(statement)) error('provenance-statement-invalid', `${item.file}: provenance.statement must be ai-generated, ai-altered, or literature-derived`, item.id);
+  if (!proof) error('provenance-proof-missing', `${item.file}: every in-flight mathematical-content item needs provenance.proof`, item.id);
+  else if (!PROOF_PROVENANCE.has(proof)) error('provenance-proof-invalid', `${item.file}: provenance.proof must be ai-generated, ai-altered, literature-derived, not-supplied, or not-applicable`, item.id);
+  // A source-backed component makes a falsifiable claim about where that part
+  // of the item came from. Require a reader-visible reference for Alpha and
+  // the judges to compare against rather than accepting an untraceable label.
+  if ([statement, proof].some((value) => ['literature-derived', 'ai-altered'].includes(value)) && !referenceUrls(item.fm).length) {
+    error('source-backed-provenance-uncited', `${item.file}: source-backed statement or proof provenance requires a sources.references URL`, item.id);
+  }
+
+  // A deps edge is a load-bearing use of the target's Statement/Construction.
+  // Only that component controls this rule: a literature-derived or AI-altered
+  // statement stays eligible even if its local proof is AI-generated, while an
+  // AI-generated statement stays ineligible even if its proof is sourced.
+  for (const raw of item.deps) {
+    const targetId = resolve(raw);
+    const target = targetId && items.get(targetId);
+    if (target?.provenance.statement === 'ai-generated') {
+      error(
+        'ai-generated-statement-dependency',
+        item.file + ': ' + item.id + ' may not depend on ' + target.id
+          + '; its provenance.statement is ai-generated. Use a literature-derived or ai-altered statement, prove the needed step inline, rescope, or use the documented external fallback.',
+        item.id,
+      );
+    }
   }
 
   const generationPresent = hasSection(item.fm, 'generation');
-  if (item.authorship !== 'ai-generated' && generationPresent) {
-    error('generation-on-non-generated', `${item.file}: generation metadata is reserved for ai-generated content`, item.id);
+  if (statement !== 'ai-generated' && generationPresent) {
+    error('generation-on-non-generated-statement', `${item.file}: generation metadata is reserved for an ai-generated statement or construction`, item.id);
   }
-  if (item.authorship === 'ai-generated') {
+  if (statement === 'ai-generated') {
     const expectedRole = GENERATED_ROLE.get(item.kind);
     if (!expectedRole) {
-      error('generated-kind', `${item.file}: an ai-generated ${item.kind ?? 'item'} is forbidden; use source-backed material or an allowed decomposition lemma/corollary/example`, item.id);
+      error('generated-kind', `${item.file}: an ai-generated ${item.kind ?? 'item'} is forbidden; use source-backed material or an allowed non-load-bearing corollary/example/counterexample`, item.id);
     } else {
       const role = nested(item.fm, 'generation', 'role');
       if (role !== expectedRole) error('generated-role', `${item.file}: ai-generated ${item.kind} requires generation.role: ${expectedRole}`, item.id);
 
-      if (item.kind === 'lemma') {
-        const parentRaw = nested(item.fm, 'generation', 'parent');
-        const parent = parentRaw && resolve(parentRaw);
-        for (const key of ['parent', 'subclaim', 'consumer', 'why_not_inline']) {
-          if (!nested(item.fm, 'generation', key)) error('generated-lemma-record', `${item.file}: generation.${key} is required for an ai-generated decomposition lemma`, item.id);
-        }
-        if (!parent) error('generated-lemma-parent', `${item.file}: generation.parent must name an existing item`, item.id);
-        else {
-          const parentItem = items.get(parent);
-          if (!parentItem.deps.map(resolve).includes(item.id)) {
-            error('generated-lemma-parent-use', `${item.file}: named parent ${parent} must directly depend on this lemma`, item.id);
-          }
-          for (const consumer of directConsumers.get(item.id) ?? []) {
-            if (consumer !== parent) error('generated-lemma-escape', `${item.file}: ai-generated decomposition lemma is also load-bearing for ${consumer}, not only its named parent ${parent}`, item.id);
-          }
-        }
-      } else if ((directConsumers.get(item.id) ?? new Set()).size) {
-        error('generated-nonlemma-loadbearing', `${item.file}: an ai-generated ${item.kind} may not be a dependency-spine item`, item.id);
-      }
+      // An ai-generated lemma cannot be a legal dependency target, so a
+      // decomposition belongs inline unless an eligible source-backed statement
+      // can replace it. The permitted generated roles are all non-load-bearing.
     }
   }
 
@@ -225,6 +291,6 @@ else {
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]');
   process.exit(2);
 }

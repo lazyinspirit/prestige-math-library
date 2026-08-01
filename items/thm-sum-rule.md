@@ -55,6 +55,34 @@ pipeline_run: null
 step, the injectivity of the splice map, and dropping it makes clause 1 false;
 the companion page carries that false statement with its smallest witness.
 
+```tikz
+\begin{tikzpicture}[x=1.05cm,y=1cm]
+  \node at (1,2.45) {$A$};
+  \node at (5.2,2.45) {$B$};
+  \node at (3.1,2.45) {$p,q>0$};
+  \node (f0) at (0,1.55) {$f(0)$};
+  \node (fd) at (1,1.55) {$\cdots$};
+  \node (fp) at (2,1.55) {$f(p-1)$};
+  \node (g0) at (4.2,1.55) {$g(0)$};
+  \node (gd) at (5.2,1.55) {$\cdots$};
+  \node (gq) at (6.2,1.55) {$g(q-1)$};
+  \node (d0) at (0,0) {$0$};
+  \node (dd1) at (1,0) {$\cdots$};
+  \node (dp) at (2,0) {$p-1$};
+  \node (dpp) at (4.2,0) {$p$};
+  \node (dd2) at (5.2,0) {$\cdots$};
+  \node (dpq) at (6.2,0) {$p+q-1$};
+  \draw[->] (d0) -- (f0);
+  \draw[->] (dp) -- (fp);
+  \draw[->] (dpp) -- (g0);
+  \draw[->] (dpq) -- (gq);
+  \draw[dashed] (3.1,-0.45) -- (3.1,2.15);
+  \node at (1,-0.65) {$h(k)=f(k)$};
+  \node at (5.2,-0.65) {$h(p+j)=g(j)$};
+  \node at (3.1,-1.2) {$h:p+q\longrightarrow A\cup B$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** Finite sets as in the statement, and the truncated difference and the two finite sums of [[def-nat-finite-sum-and-product]]. Throughout, $\ast$ denotes either $+$ or $\cdot$ on $\mathbb{R}$ or on $\mathbb{N}$, $e$ the corresponding identity, and $\bigstar_{k<n} c_k$ the associated iterated operation; the four cases are proved by one argument, as in [[lem-finite-sum-permutation-invariance]].

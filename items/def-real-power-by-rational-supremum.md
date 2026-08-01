@@ -1,0 +1,37 @@
+---
+id: def-real-power-by-rational-supremum
+kind: definition
+title: "Real powers from suprema of rational powers, with the reciprocal convention below base one"
+status: draft
+origin: session
+authorship: ai-altered
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-upper-bound, def-complete-ordered-field, def-rational-power, lem-rat-embeds-dense, lem-rational-power-monotone, thm-of-archimedean]
+justified_by: []
+aliases: []
+landmark: true
+verification:
+  precheck: n/a
+sources:
+  scraped: []
+  references:
+    - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
+      url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 full lecture notes"
+      url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+pipeline_run: null
+---
+
+## Definition
+
+For $a>1$ and $x\in\mathbb R$, set
+$$S_a(x):=\{a^q:q\in\mathbb Q,\ q<x\},\qquad a^{[x]}:=\sup S_a(x).$$
+The set is nonempty because a rational lies below $x$. It is bounded above: choose a natural $m>x$, so every $q<x$ satisfies $q<m$ and $a^q\le a^m$. Thus the supremum exists in $\mathbb R$.
+
+For $0<a<1$, define $a^{[x]}:=1/(a^{-1})^{[-x]}$; for $a=1$, define $1^{[x]}:=1$. The notation $a^{[x]}$ distinguishes this rational-supremum construction from the exponential construction until their agreement is proved.
+
+## Remarks
+
+The direct supremum formula is intentionally restricted to $a>1$. When $0<a<1$, the set $\{a^q:q<x\}$ is unbounded above as $q$ tends to negative infinity.

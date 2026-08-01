@@ -44,51 +44,55 @@ kind: theorem                        # one of the kinds above
 title: "Completeness of $\\mathbb{R}$ (Cauchy criterion)"   # inline LaTeX ok
 status: draft                        # draft | published  (THE publish gate)
 origin: session                      # pipeline | session
-authorship: ai-generated             # OPTIONAL for legacy items; REQUIRED on
-                                     # every future mathematical-content item:
-                                     # ai-generated | ai-altered | literature-derived
-  # Mathematical-text provenance, not a claim of mathematical novelty and not
-  # the same as `origin` or `proved_here`:
-  #   ai-generated       AI formulated the mathematical claim, proof, witness,
-  #                      or counterexample without a reliable, reasonably
-  #                      direct literature basis for that particular content.
-  #                      This is REQUIRED whenever the content is not both
-  #                      well-established and documented in the literature.
-  #   ai-altered         a literature-derived result/proof was materially
-  #                      reformulated, extended, repaired, or otherwise
-  #                      changed by AI.
-  #   literature-derived faithfully transcribed/adapted only cosmetically from
-  #                      identified literature. A local proof is present iff
-  #                      `proved_here: true`; its absence is separately shown
-  #                      by the existing ‡ “not proved here” marker.
-  # Applies to definitions, propositions, theorems, lemmas, corollaries,
-  # examples, counterexamples, false statements, and mathematical remarks.
-  # Beta assigns this field while authoring. Alpha verifies it at Step 6 and
-  # updates it after a material AI alteration. AI-generated content receives a
-  # heightened truth audit; a concrete suspicion requires a counterexample
-  # search before a proof repair is accepted. Do not backfill legacy items
-  # merely to satisfy this future-session disclosure rule. Future
-  # `literature-derived` and `ai-altered` items need a URL in
-  # `sources.references`, so `content-policy.mjs` can make that provenance
-  # traceable.
-generation:                         # REQUIRED iff authorship: ai-generated
-  role: proof-decomposition-lemma   # lemma | corollary | example | counterexample:
-                                    # proof-decomposition-lemma | direct-corollary |
-                                    # example | counterexample, respectively
-  parent: thm-parent-result          # required for a generated lemma
-  subclaim: "The exact parent-proof subclaim discharged"
-  consumer: thm-parent-result        # the generated lemma's sole direct consumer
-  why_not_inline: "Why this is not an inline derivation or a sourced result"
-  # Generated theorems, propositions, definitions, false statements and remarks
-  # are prohibited in future batch scope. A generated corollary/example/
-  # counterexample may not be a `deps` target. A generated lemma is permitted
-  # only as the recorded decomposition of its named parent proof and may be a
-  # dependency only of that parent. `tools/content-policy.mjs` enforces this on
-  # every future batch manifest; do not retrofit legacy items.
+provenance:                         # REQUIRED on every future mathematical item
+  statement: ai-generated           # ai-generated | ai-altered | literature-derived
+  proof: ai-generated               # same | not-supplied | not-applicable
+  # These are COMPONENT labels, not an overall novelty or correctness claim:
+  #   statement = the Definition/Statement, or the specific construction for
+  #               examples, counterexamples and false statements.
+  #   proof     = the local Proof, or Verification/Refutation for a construction.
+  #
+  #   literature-derived faithfully follows identified literature with cosmetic
+  #                      editorial changes only;
+  #   ai-altered         is literature-based but AI materially reformulated,
+  #                      extended, repaired, or otherwise adapted it;
+  #   ai-generated       was formulated locally by AI without a direct source
+  #                      for that particular component;
+  #   not-supplied       no local proof or verification is supplied;
+  #   not-applicable     used only when a definition or remark has no proof
+  #                      component.
+  # A source-backed statement OR proof requires a URL in sources.references.
+  # `authorship` is the optional legacy one-axis field. It stays readable for
+  # legacy items but MUST NOT be used instead of provenance on future content.
+  # Beta records a rationale for BOTH components in its batch notes. Alpha
+  # verifies both at Step 6. An ai-generated STATEMENT/construction receives the
+  # heightened truth audit and counterexample search; an AI-generated proof
+  # alone does not make its statement AI-generated.
+generation:                         # REQUIRED iff provenance.statement is ai-generated
+  role: direct-corollary             # corollary | example | counterexample:
+                                    # direct-corollary | example | counterexample
+  # Generated theorems, propositions, definitions, lemmas, false statements,
+  # and remarks are prohibited in future batch scope. A generated corollary,
+  # example, or counterexample is non-load-bearing and may never be a deps
+  # target. Keep a would-be generated proof-decomposition lemma inline, or
+  # replace it with a literature-derived or AI-altered statement.
+  # Dependency eligibility is determined ONLY by the target's
+  # provenance.statement: literature-derived and ai-altered statements are
+  # eligible; ai-generated statements are forbidden as deps targets. The
+  # provenance.proof value never changes that decision. An eligible ai-altered
+  # statement is still not automatically trusted: check reputable literature
+  # before citing it whenever its exact claim or conventions leave doubt.
+  # tools/content-policy.mjs enforces this in every future batch scope; do not
+  # retrofit legacy items.
 deps: [def-cauchy-sequence, lem-triangle-inequality]
   # every item this item's statement OR proof LOGICALLY DEPENDS ON (single list;
   # drives the prerequisite closure and the flowchart). Must reference existing
-  # ids. THIS GRAPH MUST BE ACYCLIC — see §7.
+  # ids whose provenance.statement is literature-derived or ai-altered; an
+  # ai-generated Statement/Construction is never a legal deps target. Its local
+  # proof provenance is irrelevant to this rule. An ai-altered target remains
+  # subject to a reputable-literature check whenever its exact claim or
+  # conventions are in doubt.
+  # This graph MUST BE ACYCLIC — see §7.
 justified_by: []                     # OPTIONAL, definitions only in practice.
   # Items that discharge this item's well-definedness obligations (WORKFLOW.md
   # "Definition justification"). These point FORWARD: the discharging lemma is
@@ -100,8 +104,8 @@ proved_here: true                    # OPTIONAL, defaults to true. Set FALSE whe
   # this item RECORDS a result that this library does NOT prove, because the
   # track that would prove it has not been built (DEFERRED.md), or as the
   # narrow, documented external-dependency fallback below. For that fallback,
-  # Beta must avoid an `ai-generated` dependency when a literature-backed route
-  # exists, check a reputable source's exact Statement and conventions, and
+  # Beta must never use an ai-generated Statement/Construction as a dependency;
+  # it checks a reputable source's exact Statement and conventions, and
   # first attempt a proof from available library dependencies. The batch notes
   # and proof contract record that source, the failed local route, and necessity.
   # Such an item:
@@ -148,8 +152,8 @@ external_refs: []                    # OPTIONAL. Recorded-not-proved items (i.e.
   #
   # A logically required external result is NOT an `external_refs` mention.
   # Under the future-session, last-resort exception to self-contained scope,
-  # Beta avoids an `ai-generated` dependency where a literature-backed route
-  # exists, searches reputable sources for its exact Statement, and attempts an
+  # Beta never uses an ai-generated Statement/Construction as a dependency,
+  # searches reputable sources for its exact Statement, and attempts an
   # in-library proof. Only if that proof cannot be built from available
   # dependencies may Beta create a source-cited `rem-` item with
   # `proved_here: false`, record why in batch notes, and list that item in
@@ -233,6 +237,13 @@ verification:
     # the first thing. A reader and a future session must be able to tell which is
     # which, so the delegation is recorded as what it was.
     # `delegated_by: owner` marks an item published on that basis.
+    # A material repair to a published dependency invalidates its historical
+    # `audited` date: remove that obsolete stamp and write `verified` only after
+    # an independent current reader has checked the corrected text under the
+    # owner-delegated published-dependency-repair protocol. Use
+    # `scope: published-dependency-repair`; the repair ledger records the exact
+    # source or elementary derivation and the downstream-impact receipt. The
+    # agent that authored the correction never certifies it.
   sources_checked:                   # ONLY on `proved_here: false` items, where it
     date: 2026-07-26                 #   REPLACES `audited` as the publish gate.
     scope: citations                 #   what was actually checked
@@ -251,8 +262,9 @@ verification:
     # schema exists to prevent. A reader is told the difference too: these items
     # carry the fuchsia recorded-not-proved marking, never a judge or audited chip.
   audited: 2026-07-25                # owner audit date; REQUIRED for published
-                                     #   UNLESS `proved_here: false`, which uses
-                                     #   `sources_checked` above instead.
+                                     #   unless an owner-delegated `verified`
+                                     #   record is present, or `proved_here:
+                                     #   false` uses `sources_checked` instead.
 sources:
   scraped: []                        # [{url, title, license}] — extraction sources
   references:                        # standard references (NOT scraped; labeled so)
@@ -312,7 +324,22 @@ contrapositive / induction / cases / constructive), QED-final. `## Scratch`
 (exploratory work) is optional and precedes `## Facts & Assumptions`; it is
 rendered collapsed. EVERY phase-format body must pass precheck before `published`.
 
-### 5.1 Commutative diagrams (diagram chasing)
+### 5.1 TikZ diagrams and commutative diagrams
+
+An illustrative finite structure may be placed in a non-proof prose section
+(`## Definition`, `## Statement`, `## Statement refuted`, `## Example`, or
+`## Remarks`) in a fenced `tikz` block. The block contains a complete
+`\begin{tikzpicture}...\end{tikzpicture}`. It is an aid to reading, not a
+source of mathematical assertions: the vertices, edges, labels, and every fact
+used in a proof must also be stated in the ordinary item text. Do not place one
+inside `## Facts & Assumptions` or a phase-format proof: this includes
+`## Proof`, `## Refutation`, `## Counterexample`, and `## Verification`, whose
+paragraph shape is mechanically checked.
+
+The renderer compiles both `tikz` and `tikzcd` fenced blocks to cached inline
+SVGs on the server. `tikz` is for ordinary TikZ figures such as finite graphs,
+Hasse diagrams, and set diagrams; `tikzcd` is specifically for commutative
+diagrams.
 
 Proofs that reason about a commutative diagram carry two co-located pieces, a
 deliberate dual source: the cells drive verification, the tikzcd drives the
@@ -331,8 +358,8 @@ picture. Keep them consistent.
   diagram rules (auto-activated when a `**Diagram:**` block is present) enforce this.
 - **Rendering** lives in a prose section (e.g. `## Statement`) as a fenced
   ` ```tikzcd ` block. The renderer compiles it to an inline SVG on the server
-  (tikz-cd via node-tikzjax, cached). The block may hold a bare cd body or a full
-  `\begin{tikzcd}...\end{tikzcd}`.
+  (TikZ/tikz-cd via node-tikzjax, cached). The block may hold a bare cd body or
+  a full `\begin{tikzcd}...\end{tikzcd}`.
 
 ## 6. Page composition files
 
@@ -444,7 +471,9 @@ refactored under an audited content change.
 
 `status: published` on an item is valid only if: id == filename; kind/prefix
 match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);
-`verification.audited` set; every `sources.scraped` entry has url+license; every `sources.references` entry has title + a working url;
+`verification.audited` or an owner-delegated `verification.verified` set (or
+`sources_checked` for `proved_here: false`); every `sources.scraped` entry has
+url+license; every `sources.references` entry has title + a working url;
 share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders.
 
 The gate is **eight tools**, run from the repo root; all must be clean before

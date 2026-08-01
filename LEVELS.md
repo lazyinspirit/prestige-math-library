@@ -38,6 +38,7 @@ Everything below is verified against the code as of 2026-07-31.
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `research/level<n>-audit-manifest.json` | generated full relationship checklist for the independent-reader and Alpha audit |
 | `research/level<n>-impact-audit.json` | Alpha dispositions for every consumer exposed by a changed public interface |
+| `research/level<n>-published-dependency-repairs.md` | Alpha's evidence ledger for any owner-delegated repair to a published dependency |
 | `research/level<n>-audit-coverage.json` | Alpha's manifest-bound whole-level audit receipt |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
 | `briefs/judge-conventions.txt` | the paired judges' canonical conventions block, loaded by `tools/judge.mts` into the frozen prompt and hash for both lanes |
@@ -132,16 +133,41 @@ judged, and 30 earned passes were destroyed** and had to be bought again.
 Judging after the audit costs nothing in coverage — every item is still judged —
 and the verdicts describe the text that ships.
 
+### Context-continuity checkpoint (orchestrator, owner 2026-08-01)
+
+The orchestrator treats 50% active-context use as a mandatory **durable
+checkpoint**, not a workflow pause. At that threshold, and before a
+context-heavy operation when practical, update `research/level<n>-RESUME.md`
+(or the active named-run equivalent) with the owner instructions that differ
+from the standing rules, current numbered step and frozen-text state, batches,
+active agents/ownership, material artifact paths and gate results, ledger paths,
+open defects and constraints, working-tree baseline, and the exact next action.
+It must be concise, factual, and contain no credentials or copied long
+transcripts. After a platform-triggered or available compaction, read the
+checkpoint first, verify any action-critical state from disk, and immediately
+continue the same step. Checkpoints are updated after material state changes;
+they neither authorize publication nor create an owner pause.
+
+Beta-n-i and Alpha-n apply the same procedure at **60% of their own context
+length**. A Beta's checkpoint is an appended, concise section of its namespaced
+`level<n>-batch-<i>.notes.md`; Alpha's is in its namespaced Alpha report or
+handoff. Those role checkpoints identify the owned artifact set, current
+substage, completed checks, open mathematical question/constraint, and exact
+next action. On resumption the same agent reads it and verifies the relevant
+disk state before continuing; it does not wait for the orchestrator to repeat
+the brief.
+
 ## Step 0 — Batch (orchestrator)
 
 1. Compute the **frontier from disk**, never from a remembered page count: an
    unpublished page all of whose `requires` are published. Do not trust
    `rounds.mjs` levels for this — they ignore publication state.
-2. Divide the level's **A-pages into groups of at most 3**. A batch = one group
-   **plus its example siblings**, so at most 6 pages. A batch always contains at
+2. Divide the level's **A-pages into groups of at most 2**. A batch = one group
+   **plus its example siblings**, so at most 4 pages. A batch always contains at
    least one A-page; a batch of orphan B-pages is not a defined shape.
-3. **Pack to the cap of 3** by prerequisite affinity, so seams fall *inside* a
-   batch. Merging batches can only remove cross-batch edges.
+3. **Pack to the cap of 2** by prerequisite affinity, so seams fall *inside* a
+   batch. `content-policy.mjs --manifest-only` rejects a future batch manifest with more than
+   two A pages. Merging batches can only remove cross-batch edges.
 4. Report the **cross-batch seam count before spawning**. If the pages have no
    item lists yet the count cannot be computed — say so rather than reporting 0.
 
@@ -161,12 +187,13 @@ planned material it supports, and record convention disagreements rather than
 silently choosing one. Web research informs the scaffold; it does not turn
 session-authored material into fabricated scraped provenance.
 
-**Authorship and truth-risk pass (owner, 2026-08-01).** For every planned
+**Component-provenance and truth-risk pass (owner, 2026-08-02).** For every planned
 mathematical-content item, including definitions, propositions, theorems,
 lemmas, corollaries, examples, counterexamples, false statements, and
-mathematical remarks, Beta records an `authorship` value and rationale in its
-batch notes. If the particular claim, proof, witness, or refutation is not both
-well-established and documented in reliable literature, it is `ai-generated`.
+mathematical remarks, Beta records `provenance.statement` and `provenance.proof`
+with a rationale for each in its batch notes. A claim/witness/construction not
+both well-established and documented in reliable literature has
+`provenance.statement: ai-generated`.
 That label requires a heightened truth check: when there is concrete doubt,
 Beta searches for a counterexample before keeping or repairing the item. A proof
 repair alone does not establish the Statement; a counterexample requires a
@@ -175,21 +202,22 @@ narrower claim, a different witness, or a dropped item.
 **Generated-claim minimization pass (owner, 2026-08-01).** The scaffold starts
 from source-backed statements; do not mint an AI-generated theorem,
 proposition, definition, false statement, or mathematical remark to add
-richness or bridge a proof. A new AI-generated lemma is allowed only when it
-decomposes a complex named parent proof; a corollary only when it is directly
-and easily verifiable from stated material; and examples/counterexamples only
-with a checkable witness. Do not make generated corollaries or examples part of
-the load-bearing spine. For every generated lemma, the batch notes name its
-parent theorem, exact discharged subclaim, intended consumer, and why an inline
-derivation or established result would not do. Minimize every load-bearing
-AI-generated statement.
+richness or bridge a proof. A generated corollary is allowed only when directly
+and easily verifiable from stated material, and generated examples/counterexamples
+only with a checkable witness. Every AI-generated Statement/Construction is
+non-load-bearing: it may never be a `deps` target. Keep a would-be generated
+proof-decomposition lemma inline or replace it with a literature-derived or
+AI-altered statement.
 
 **Published-library read and closure pass (owner, 2026-08-01).** Beta has read
 access to the full published `items/` and `library/` corpus. It must search the
 pool before minting ids and open every published dependency it proposes, checking
 the exact Definition or Statement, hypotheses, conclusion, direction, and
-`status: published`. Do not choose an `ai-generated` dependency where a
-well-established, literature-backed route is available. Every load-bearing
+`status: published`. Never choose a dependency whose `provenance.statement` is
+`ai-generated`; its proof provenance is irrelevant. Literature-derived and
+AI-altered statements are eligible but never auto-trusted: reopen the target
+and, whenever an AI adaptation leaves doubt, verify its exact statement and
+conventions against reputable literature. Every load-bearing
 dependency must normally be either an earlier item inside the A/B pair or
 established by published content on a strictly earlier page. If not, first
 search an exact reputable source and attempt a local proof; then decompose,
@@ -283,25 +311,20 @@ orchestrator remains responsible for running the gates of record.
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. Every mathematical-content item, including examples,
 counterexamples, false statements, and mathematical remarks, carries
-`authorship: ai-generated | ai-altered | literature-derived`, selected under
-SCHEMA.md's reader-facing provenance rule and recorded with a reason in the
-batch notes. An item whose particular claim, proof, witness, or refutation is
-not both well-established and documented in reliable literature is
-`ai-generated`; it receives a counterexample search whenever its truthfulness
-is in concrete doubt, including during any proof repair. **Never** sets
+separate `provenance.statement` and `provenance.proof` values under SCHEMA.md
+with a reason for each in the batch notes. An AI-generated Statement/Construction
+receives a counterexample search whenever its truthfulness is in concrete doubt;
+an AI-generated proof alone does not alter the statement's eligibility. **Never** sets
 `verification.audited`. Adding a dep to silence a checker when the proof does
 not use it is the dominant historical defect class and is forbidden.
 
 **Generated-claim authoring check (owner, 2026-08-01).** Do not expand the
 approved scaffold with a newly invented theorem, proposition, definition, false
-statement, or remark. Retain an AI-generated lemma only when it is the focused
-decomposition step of its named complex parent proof; retain a generated
-corollary only when its derivation is directly and easily verifiable; and use
-generated examples/counterexamples only with checkable witnesses. Generated
-corollaries, examples, and counterexamples are not load-bearing dependencies.
-Before retaining a generated lemma in the dependency spine, record its parent,
-subclaim, consumer, and the reason an inline proof or established result was
-not adequate.
+statement, lemma, or remark. Retain a generated corollary only when its
+derivation is directly and easily verifiable, and use generated
+examples/counterexamples only with checkable witnesses. Every AI-generated
+Statement/Construction is non-load-bearing. Keep a would-be generated
+proof-decomposition lemma inline or replace it with a source-backed statement.
 
 **Dependency discipline (owner, 2026-07-31).** The scaffold Beta authors every
 load-bearing citation with the actual cited Definition or Statement in view.
@@ -312,9 +335,11 @@ restatement: add the necessary inline proof steps, reconsider the proof
 strategy, or reconsider the truth/scope of the theorem, example, or
 counterexample.
 
-**Dependency provenance order (owner, 2026-08-01).** Do not make an
-`ai-generated` item a load-bearing authoring dependency where a
-well-established, literature-backed result can serve. For each needed
+**Dependency provenance rule (owner, 2026-08-02).** Never make an
+`ai-generated` Statement/Construction a load-bearing authoring dependency.
+The target proof's provenance is irrelevant; literature-derived and AI-altered
+statements remain eligible but an AI-adapted target must be source-checked
+whenever its exact claim or conventions are in doubt. For each needed
 well-known result absent from the library, search reputable sources for its
 exact statement, prove that statement from available library dependencies when
 possible, and use the new local proof. The only exception is the documented
@@ -340,12 +365,23 @@ evidence, never a proof.
 
 **Future-scope containment gate (owner, 2026-08-01).** After authoring, the
 orchestrator runs `tools/content-policy.mjs` on every batch manifest. It requires
-the provenance tag on every in-flight item, restricts generated content to the
-recorded decomposition/corollary/example roles, forbids generated results from
-quietly becoming shared dependency infrastructure, and requires a structured
+both component-provenance tags on every in-flight item, restricts generated
+content to non-load-bearing corollary/example roles, forbids every
+AI-generated Statement/Construction as a dependency target, and requires a structured
 source/local-proof/necessity record for any external fallback. Then generate
 `audit-manifest.mjs --json`; Alpha's Step-6 receipt is bound to that actual
 relationship manifest, not a self-reported list of citations.
+
+**Narrow published-dependency exception (owner, 2026-08-01).** A Step-5 Beta
+may repair a published dependency used by its current level only under
+`CLAUDE.md`'s obvious-published-dependency-repair protocol. It first records the
+specific falsehood and exact source or elementary derivation in its namespaced
+batch notes; it then takes a dedicated touch baseline before editing. This is
+not permission to edit unrelated published material, alter a convention by
+preference, rename/remove an id, or make a speculative theorem repair. Alpha
+owns the shared repair ledger and independently certifies a Beta's completed
+repair. The corrected public interface and every consumer in `impact-audit`'s
+computed set must be resolved before the level can continue.
 
 Every A-page summary is written last in exactly two nonempty prose paragraphs,
 each under 150 words. The first gives mathematical background and names the
@@ -356,8 +392,9 @@ remain subject to SCHEMA §6's bans on counts, self-ranking, unsupported
 reading-position claims, and surveys of other pages.
 
 **AUTHOR THE WHOLE LEVEL AT ONCE (owner, 2026-07-28).** A dependency level is
-authored in ONE round, every A/B pair in it dispatched in parallel, however wide
-the level is. Do **not** split a level into sequential sub-rounds.
+authored in ONE round, every one- or two-pair Beta batch in it dispatched in
+parallel, however wide the level is. Do **not** split a level into sequential
+sub-rounds.
 
 The old `--max 8` cap did exactly that, turning 19 dependency levels into 36
 rounds. It bought nothing: pages sharing a level are *provably* mutually
@@ -399,6 +436,17 @@ citation consumers. Alpha records a concrete disposition for every listed item
 before Step 7. A proof-only repair remains subject to its own audit and rejudge,
 but does not create a false downstream work queue.
 
+For an owner-delegated published-dependency repair, take the baseline immediately
+before the repair, not merely at the start of authoring. Alpha appends the exact
+old and corrected text, source or elementary derivation, provenance transition,
+independent reviewer, impact-receipt path, and targeted paired-judge result to
+`research/level<n>-published-dependency-repairs.md`. A Beta repair is reviewed
+by Alpha; an Alpha repair is reviewed by an independent Step-6 reader. Clear
+the stale `judge` block and obsolete `audited` stamp, then use the independent
+current `verified` block with `scope: published-dependency-repair` and
+`delegated_by: owner` only after that review. A `proved_here: false` item instead
+needs a fresh source check. Do not continue with an unresolved consumer queue.
+
 **Alpha proof-refuters (owner, 2026-07-31).** For every future Alpha-n audit,
 Alpha dispatches one or more GPT 5.6 Sol proof-reading subagents with
 **read-only access** to the in-flight level and all published library content.
@@ -409,7 +457,8 @@ its cited facts and dependencies, read those dependencies before claiming they
 are insufficient, and report only a specific logical, statement, hypothesis, or
 citation defect. They return evidence, never edits. Alpha-n remains the single
 adjudicator: it verifies every reported issue from disk, may refute a false
-positive, and alone may repair and gate in-flight content.
+positive, and alone may repair and gate in-flight content. The only public-item
+exception is the owner-delegated obvious-published-dependency protocol above.
 
 ### 6a. Independent batch audits, in parallel
 
@@ -429,16 +478,20 @@ For every authored item in the batch, the independent reader must:
    declared forward reference, and actually states the proposition for which it
    is cited. The common failure mode is citing a true theorem for a stronger or
    different claim than it makes.
-3. **Check authorship disclosure and AI-generated truth risk.** For every
-   mathematical-content item, including examples, counterexamples, false
-   statements, and mathematical remarks, verify the `authorship` tag against
-   the actual source and edit history. A material AI change to
-   literature-derived mathematical text, proof, or witness requires
-   `ai-altered`; content not both well-established and documented in reliable
-   literature is `ai-generated`, and remains so after later AI repair. For an
-   AI-generated item with any concrete truth concern, search for a relevant
-   counterexample before accepting a repair; repairing the proof does not by
-   itself validate the Statement or witness. Do not backfill legacy content.
+3. **Check component provenance and AI-generated truth risk.** For every
+mathematical-content item, including examples, counterexamples, false
+   statements, and mathematical remarks, verify `provenance.statement` and
+   `provenance.proof` separately against the actual source and edit history.
+   A material AI change to a source-backed statement/witness requires
+   statement `ai-altered`; an AI-generated proof does not taint a source-backed
+   statement. Reject every `deps` target whose Statement/Construction is
+   `ai-generated`, but permit literature-derived and AI-altered statements
+   regardless of proof provenance. For an AI-adapted target, reopen its exact
+   statement and source-check it against reputable literature whenever the
+   adaptation, hypotheses, conclusion, or conventions leave doubt. For an
+   AI-generated Statement/Construction
+   with any concrete truth concern, search for a relevant counterexample before
+   accepting a repair. Do not backfill legacy content.
 4. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
    the fixed two-paragraph, under-150-words-per-paragraph A-summary contract and
    the absence of an authored B-page body. No count in prose, no unsupported
@@ -462,7 +515,7 @@ citation in the batch was read, or naming any exception.
 After all independent readers finish, Alpha-n audits the mistakes and fixes they
 reported, plus the evidence reported by Alpha's read-only proof-refuters. Alpha
 verifies from disk, not from any report: changed item text, added or deleted
-results, dependency lists, page lists, authorship tags, stale judge blocks, and
+results, dependency lists, page lists, component-provenance tags, stale judge blocks, and
 gate status.
 Alpha may confirm, refute, amend, revert, or extend a reported error or
 independent-reader fix. If Alpha adds a result, Alpha personally authors its proof.
@@ -482,6 +535,12 @@ is semantically and mathematically accurate: right statement, right hypotheses,
 right direction, no hidden stronger claim. Alpha fixes failures directly when
 possible and may add/delete in-flight results as needed, personally authoring any
 proof it adds.
+
+If that reading discovers an obvious falsehood in the published dependency
+itself, Alpha may apply the narrowly delegated published-dependency repair rather
+than merely reporting it. The exact source or elementary derivation, dedicated
+touch baseline, full impact receipt, independent certification, provenance
+transition, and targeted paired rejudge remain mandatory.
 
 The mechanical backstop is `tools/audit-manifest.mjs`: generate the per-batch and
 cross-edge checklist, including `deps`, `justified_by`, `forward_refs`, and
@@ -507,9 +566,9 @@ necessary fixes.
 directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
 Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
 one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
-cross-process model pools with **12 concurrent DeepSeek calls and 12 concurrent
+cross-process model pools with **16 concurrent DeepSeek calls and 16 concurrent
 Terra calls**. Either model moves to its next item as soon as one of its own
-slots is free (24 calls maximum combined). Both receive the same exact hash-attested frozen prompt
+slots is free (32 calls maximum combined). Both receive the same exact hash-attested frozen prompt
 for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
 author; Terra is retained as an independent same-context comparison lane, not
 as a cross-family claim. The harness retains the historical injection-test
@@ -540,7 +599,7 @@ The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that single attestation for both model queues.
 For a targeted recovery, `--models <model>` retries only that model's missing
 current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
-The sweep permits at most 12 DeepSeek calls and 12 Terra calls at once (24
+The sweep permits at most 16 DeepSeek calls and 16 Terra calls at once (32
 combined), with no per-item barrier: a finished call takes the next eligible
 call for its own model while the other model continues independently.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
@@ -724,7 +783,7 @@ items). **Do not trim landmarks.**
 | `proof-contract.mjs` | strict, versioned proof-obligation / citation / boundary worksheet. Each direct fact citation gets a declared source and exact source clause; each numbered step gets exactly one stated-input entry; every standard boundary case is checked or specifically not applicable. Checks accountable links, not mathematical truth |
 | `finite-smoke.mjs` | selected bounded countermodel searches for finite/combinatorial claims. A failure supplies a concrete model or convention discrepancy; a pass is **not** a general proof |
 | `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
-| `content-policy.mjs` | future-batch authorship, generated-claim containment, and structured external fallback |
+| `content-policy.mjs` | future-batch component provenance, AI-generated-statement dependency prohibition, generated-claim containment, and structured external fallback |
 | `impact-audit.mjs` | required Alpha disposition of every computed downstream consumer of a changed public interface |
 | `level-coverage.mjs` | batch/relationship/contract scope, plan-dependency reconciliation, current paired-judge coverage, Alpha receipt, and spine receipt |
 | `spine-audit.mjs` | independent content-hashed read of proof-bearing items in the largest transitive dependency cones |

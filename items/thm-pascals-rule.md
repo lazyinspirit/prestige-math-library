@@ -44,6 +44,22 @@ For all $n, k \in \mathbb{N}$:
    $\mathbb{N}$-valued finite sum of [[def-nat-finite-sum-and-product]] over
    $i = 0, 1, \dots, n$.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node at (0,3.8) {$|A|=n+1$};
+  \node[draw,rounded corners] (all) at (0,3) {$[A]^{k+1}$, with $A'=A\setminus\{a\}$};
+  \node[draw,rounded corners] (yes) at (-3,1.75) {$P=\{S:a\in S\}$};
+  \node[draw,rounded corners] (no) at (3,1.75) {$Q=\{S:a\notin S\}$};
+  \node[draw,rounded corners] (left) at (-3,0.35) {$[A']^k$};
+  \node[draw,rounded corners] (right) at (3,0.35) {$[A']^{k+1}$};
+  \draw[->] (all) -- (yes);
+  \draw[->] (all) -- (no);
+  \draw[->] (yes) -- node[left] {$S\mapsto S\setminus\{a\}$} (left);
+  \draw[->] (no) -- node[right] {$S\mapsto S$} (right);
+  \node at (0,-0.75) {${n+1\choose k+1}={n\choose k}+{n\choose k+1}$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** Naturals $n$, $k$; $\sigma(m) = m+1$; and $\binom{m}{j} = \lvert [X]^{j}\rvert$ for any finite $X$ with $\lvert X\rvert = m$.

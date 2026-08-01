@@ -44,6 +44,22 @@ $I := 2$, let $A_0$ be the set of subsets of $X$ containing $0$ and $A_1$ the se
 of subsets containing $1$. Then $\lvert A_0\rvert = \lvert A_1\rvert = 8$, so the
 right-hand side is $16$, while $\lvert A_0 \cup A_1\rvert = 12$.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw (-2.6,-1.7) rectangle (2.6,1.8);
+  \draw (-0.8,0) circle (1.35);
+  \draw (0.8,0) circle (1.35);
+  \node at (2.05,1.5) {$\mathcal{P}(X)$};
+  \node at (-1.45,1.4) {$A_0$};
+  \node at (1.45,1.4) {$A_1$};
+  \node at (-1.35,0) {$4$};
+  \node at (0,0) {$4$};
+  \node at (1.35,0) {$4$};
+  \node at (2.15,-1.25) {$4$};
+  \node at (0,-2.25) {$|A_0|+|A_1|=8+8=16,\qquad|A_0\cup A_1|=4+4+4=12$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** $X = 4 = \{0,1,2,3\}$; $A_0 := \{\, S \subseteq X : 0 \in S \,\}$; $A_1 := \{\, S \subseteq X : 1 \in S \,\}$; and $C := \{\, S \subseteq X : 0 \notin S \text{ and } 1 \notin S \,\}$.

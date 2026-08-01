@@ -45,3 +45,24 @@ The class of edgeless graphs is complementary to the class of complete graphs, a
 1.2 The two basis graphs satisfy $\overline{\overline K_2}=K_2$. [L1, L2]
 
 2.1 Thus the displayed bases are complementary, exactly as the general theorem predicts. [step 1.1, step 1.2, L3] ∎
+
+## Remarks
+
+```tikz
+\begin{tikzpicture}[
+  vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt},
+  edge/.style={draw=blue!70!black,line width=1.2pt},
+  caption/.style={font=\small,align=center}
+]
+\node[vertex] (a1) at (0,0) {};
+\node[vertex] (a2) at (1.5,0) {};
+\node[caption] at (.75,-.7) {$\overline K_2\in\mathcal B(\mathcal K)$};
+
+\draw[<->,line width=.9pt] (2.05,0)--node[above,font=\scriptsize] {complement} (3.55,0);
+
+\node[vertex] (b1) at (4.1,0) {};
+\node[vertex] (b2) at (5.6,0) {};
+\draw[edge] (b1)--(b2);
+\node[caption] at (4.85,-.7) {$K_2\in\mathcal B(\mathcal E)$};
+\end{tikzpicture}
+```

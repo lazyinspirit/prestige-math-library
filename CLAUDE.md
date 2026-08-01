@@ -29,8 +29,8 @@ run a page from prompt to publish; the normative docs above win where they diffe
 
 1. **Author as `status: draft`** per SCHEMA.md. Session-authored content is
    `origin: session`; never fabricate scraped sources (use `references`). Every
-   future mathematical-content item also declares its reader-facing
-   `authorship` provenance.
+   future mathematical-content item also declares separate reader-facing
+   statement/construction and proof/verification provenance.
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
    node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts
@@ -95,6 +95,24 @@ banner; the public sees only `published`.
   operation truly cannot be expressed without new authority, stop and record a
   blocker instead of raising a permission prompt.
 
+- **Context continuity and compaction (owner, 2026-08-01).** Treat 50% active
+  context use as a checkpoint trigger, never as a reason to pause a build. At
+  that threshold (and before a context-heavy operation when practical), the
+  orchestrator updates the active run's `research/<run>-RESUME.md` with the
+  objective, current step/frozen-text state, owner policy changes, selected
+  batches, active agents and ownership, material files and gate results,
+  ledgers, open risks, exact next action, and the working-tree baseline. Keep it
+  concise and factual; never put credentials, tokens, or copied long transcripts
+  in it. If the platform offers or performs compaction, checkpoint first, then
+  immediately read that record and verify the relevant disk state before
+  continuing the same workflow. A checkpoint is not an owner pause and must not
+  delay a stage once the state is safely recorded.
+  **Beta and Alpha agents use the same rule at 60% of their own context length.**
+  A Beta appends its concise checkpoint to its namespaced batch notes; Alpha
+  writes it to its namespaced Alpha report/handoff. Each reads its own checkpoint
+  and verifies the relevant files after compaction, then continues without
+  waiting for an orchestrator replay.
+
 - **GPT 5.6 Sol dispatch default (owner, 2026-07-31).** Every authoring, Beta,
   Alpha, or other GPT 5.6 Sol subagent is dispatched as **GPT 5.6 Sol** at
   `xhigh` reasoning with a **1,000,000-token context window**. This is the
@@ -109,6 +127,12 @@ banner; the public sees only `published`.
   they authored; Alpha assigns independent audit readers and adjudicates their
   findings. The prior separate author-agent and self-auditing-Beta arrangement
   is retired for future runs.
+
+- **Beta batch capacity (owner, 2026-08-01).** In every future session, each
+  Beta scaffolds and authors at most **two A/B pairs**. Step 0 keeps every batch
+  manifest at that cap, and `content-policy.mjs --manifest-only` rejects an in-flight manifest
+  with more than two A pages. The capacity bound does not create dependencies
+  between otherwise independent pairs or change their legal build order.
 
 - **Step-3 decisions belong to the orchestrator (owner, 2026-07-30).** In this
   and every future session, the orchestrator verifies each Beta recommendation
@@ -140,9 +164,9 @@ banner; the public sees only `published`.
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.
   `tools/judge-sweep.mjs` keeps their calls independent in file-backed,
-  cross-process model pools: DeepSeek has a cap of 12 concurrent calls and
-  Terra has a separate cap of 12. Each model moves to its next item when one of
-  its own slots is free, without waiting for the other model (24 calls maximum
+  cross-process model pools: DeepSeek has a cap of 16 concurrent calls and
+  Terra has a separate cap of 16. Each model moves to its next item when one of
+  its own slots is free, without waiting for the other model (32 calls maximum
   combined).
   Before scheduling, it assembles each selected item's current prompt hash once
   and shares that attestation across both model queues.
@@ -169,7 +193,7 @@ banner; the public sees only `published`.
   `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; fatal types are
   `logic`, `dependency_citation`, or `other`), and compare agreement,
   model-only rejections, nulls, and owner-confirmed fatal findings at the end of
-  step 10. The two model pools are independently capped at 12 calls each (24
+  step 10. The two model pools are independently capped at 16 calls each (32
   maximum combined); neither model's throughput is throttled by the other.
 
 - **Alpha adjudicates judges (owner, 2026-07-31).** For this and every future
@@ -208,8 +232,12 @@ banner; the public sees only `published`.
 - A published page listing a draft item is a hard error, never a silent skip.
 - **Self-contained scope and external fallback (owner, 2026-08-01).** The
   normal rule is that no item rests on a result the library has not established.
-  Beta must first avoid an `ai-generated` dependency, search reputable sources
-  for the exact statement of any well-known result it needs, and try to prove
+  Beta must never cite a dependency whose `provenance.statement` is
+  `ai-generated`; the proof-provenance label is irrelevant. It may freely use
+  `literature-derived` and `ai-altered` statements, but an AI-adapted target is
+  never auto-trusted: when its exact claim or conventions are in doubt, Beta or
+  Alpha verifies it against reputable literature. Beta then searches reputable sources
+  for the exact statement of any well-known result it needs, and tries to prove
   that result from available library dependencies. If that fails, Beta
   decomposes, rescopes, or drops the item with a licensing note. The narrow last
   resort is a well-established, source-checked result whose local proof cannot
@@ -237,28 +265,28 @@ banner; the public sees only `published`.
 - **Generated-claim minimization (owner, 2026-08-01).** Source-backed
   statements are the default. Beta must not invent a new theorem, proposition,
   definition, false statement, or mathematical remark merely to enrich a page
-  or bridge an inconvenient proof. It may introduce an `ai-generated` lemma
-  only as a focused decomposition of a complex proof, an easily and directly
-  verifiable corollary, or an example/counterexample. Do not use an
-  AI-generated corollary, example, or counterexample as load-bearing
-  infrastructure. An AI-generated lemma may be load-bearing only for its named
-  parent proof-decomposition, and its batch notes must name that parent, the
-  exact subclaim it discharges, and why the argument was not better kept inline
-  or replaced by an established result. Minimize all load-bearing AI-generated
-  statements; a theorem in the dependency backbone needs reliable literature
-  support or a locally proved, source-grounded route.
+  or bridge an inconvenient proof. It may introduce only an easily and directly
+  verifiable `ai-generated` corollary, or a checkable example/counterexample.
+  None may be load-bearing infrastructure: every AI-generated
+  Statement/Construction is forbidden as a dependency target. Keep a would-be
+  proof-decomposition lemma inline, or replace it with a literature-derived or
+  AI-altered statement. A theorem in the dependency backbone needs reliable
+  literature support or a locally proved, source-grounded route.
 - **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30).**
   Before constructing an A/B scaffold, Beta searches reputable mathematical
   sources on the web for the relevant definitions, theorem and corollary
   statements, counterexamples, and proof strategies, and records the sources
   and any convention disagreements in its notes. Beta has read access to the
   full published library and must open every published item it intends to cite.
-  It does not select `ai-generated` content as a load-bearing dependency while a
-  literature-backed route exists. Every load-bearing dependency must normally
+  It never selects an `ai-generated` Statement/Construction as a load-bearing
+  dependency; proof provenance never changes that rule. An AI-adapted target
+  is source-checked whenever its exact statement or conventions leave doubt.
+  Every load-bearing dependency must normally
   be established by published content or by an earlier item inside the pair;
   the only exception is the documented external fallback in the
-  self-contained-scope rule. A published item without `authorship` is
-  `legacy-unclassified`, not evidence that it is AI-generated and not a reason
+  self-contained-scope rule. A published item without component `provenance`
+  (or the older `authorship` fallback) is `legacy-unclassified`, not evidence
+  that it is AI-generated and not a reason
   to invent a provenance label. Before Beta uses one, it must open the item and
   either confirm from its own mathematical knowledge that the exact statement
   is an established result, or search reputable sources for that exact
@@ -283,8 +311,10 @@ banner; the public sees only `published`.
   theorem/example/counterexample is true as stated. This binds Beta scaffolding
   and Step-5 authoring in every future run.
 - **Dependency provenance order (owner, 2026-08-01).** Beta must not use an
-  `ai-generated` item as a load-bearing scaffold or proof dependency when a
-  well-established, literature-backed route is available. For a needed
+  `ai-generated` Statement/Construction as a load-bearing scaffold or proof
+  dependency. The target proof's provenance is irrelevant. An AI-adapted target
+  still requires a reputable-source check whenever its exact statement or
+  conventions are in doubt. For a needed
   well-known result, find a reputable source for its exact statement and
   conventions, then add and prove the result from available library material if
   possible. Only when that local proof cannot be built in scope may Beta use the
@@ -302,27 +332,25 @@ banner; the public sees only `published`.
   still does not close honestly, narrow or drop the stated theorem/example/
   counterexample rather than patching it with an overstated dependency. This is
   required in every future Beta scaffold and Step-5 authoring run.
-- **Authorship disclosure and AI-generated truth risk (owner, 2026-08-01).**
-  Every future Beta assigns `authorship: ai-generated | ai-altered |
-  literature-derived` to every mathematical-content item it authors, including
-  definitions, propositions, theorems, lemmas, corollaries, examples,
-  counterexamples, false statements, and mathematical remarks, and records the
-  reason in its batch notes. This describes mathematical-text provenance, not
-  novelty: use `literature-derived` only for a faithful source transcription
-  with cosmetic edits; use `ai-altered` when a source-derived result, proof, or
-  witness is materially reformulated, extended, repaired, or otherwise changed
-  by AI; use `ai-generated` when the particular claim, proof, witness, or
-  counterexample is not both well-established and documented in reliable
-  literature. A generated proof makes a source-derived result `ai-altered`.
+- **Component provenance and AI-generated truth risk (owner, 2026-08-01).**
+  Every future Beta assigns `provenance.statement` and `provenance.proof` to
+  every mathematical-content item it authors, including definitions,
+  propositions, theorems, lemmas, corollaries, examples, counterexamples, false
+  statements, and mathematical remarks. It records a rationale for each in its
+  batch notes. Statement means the Definition/Statement or the exact
+  construction; proof means the local Proof, Verification, or Refutation. Each
+  component is `literature-derived`, `ai-altered`, or `ai-generated`; proof may
+  instead be `not-supplied`, and definitions/remarks use `not-applicable`. A
+  generated proof does not make a source-derived statement AI-generated.
   `proved_here` separately says whether the library supplies a complete proof.
-  Beta treats `ai-generated` content as a truth-risk flag and searches for a
-  counterexample before authoring or repairing it whenever there is concrete
-  doubt. Alpha checks every tag at Step 6, retags a materially altered
-  literature-derived item, and independently probes an AI-generated claim,
-  witness, or refutation for counterexamples whenever its truthfulness is in
-  doubt; repairing a proof does not establish the Statement. An already
-  AI-generated item remains `ai-generated`. Never retrofit legacy items merely
-  to satisfy this rule.
+  Beta treats an AI-generated statement or construction, not merely an
+  AI-generated proof, as the truth-risk flag and searches for a counterexample
+  before authoring or repairing it whenever there is concrete doubt. Alpha
+  checks both labels at Step 6, retags each materially altered component, and
+  independently probes an AI-generated claim, witness, or refutation for
+  counterexamples whenever its truthfulness is in doubt; repairing a proof does
+  not establish the Statement. Never retrofit legacy items merely to satisfy
+  this rule.
 - **Durable proof-contract and high-risk gates (owner, 2026-08-01).** In every
   future level, each Beta writes and maintains a namespaced
   `research/level<n>-batch-<i>.proof-contracts.json` for every proof-bearing
@@ -355,6 +383,40 @@ banner; the public sees only `published`.
   The structured `external_dependency` record is required for any future
   `proved_here: false` fallback. These controls are forward-looking and never
   fabricate provenance for legacy items.
+- **Obvious published-dependency repair (owner, 2026-08-01).** This owner
+  delegation narrowly overrides the ordinary read-only boundary: Beta and Alpha
+  may repair a **published item that the current level uses as a dependency**
+  when its present Definition, Statement, Fact, citation, or equally
+  load-bearing mathematical prose is an unambiguous falsehood. It is not a
+  licence to choose between conventions, improve exposition, complete a
+  nonfatal 30-second gap, or make a speculative extension. The replacement must
+  be either (a) the exact statement, including its conventions and hypotheses,
+  checked against a reputable source and recorded with its working URL, or (b)
+  a directly checkable elementary correction. “Elementary” means a short
+  arithmetic, set-theoretic, logical, or definition-unfolding derivation written
+  in the repair record; it never licenses an unsupported nontrivial theorem.
+  Before the first edit, take a dedicated touch snapshot. Record the old error,
+  the replacement, validation route, source or derivation, and component-provenance change
+  in Alpha's `research/level<n>-published-dependency-repairs.md`. Make the
+  smallest correction, never rename or remove an existing id, and retag
+  materially AI-repaired statement or proof `ai-altered` (an already
+  `ai-generated` item remains so). Then run `impact-audit.mjs` from that
+  dedicated baseline and give every logical and direct-citation consumer an
+  evidence-based disposition, repairing each one that is no longer licensed,
+  before treating the correction as complete. A Beta
+  repair is independently checked and certified by Alpha; an Alpha repair is
+  independently checked by a Step-6 reader. No author certifies its own repair.
+  Delete stale `verification.judge`; after the final text, both current judge
+  lanes rejudge the corrected item and every materially repaired consumer on its
+  matching frozen context. Do not write `verification.audited`: remove the obsolete
+  owner-audit stamp and record the independent current reading as
+  `verification.verified` with `scope: published-dependency-repair` and
+  `delegated_by: owner`, which `depcheck` already recognizes as the delegated
+  publication gate. For `proved_here: false`, recheck and replace its
+  `sources_checked` record instead of judging a nonexistent proof. If the
+  correction or any affected consumer needs a debatable restatement, a new
+  theorem, deletion, changed reading order, or an unresolved impact queue, it is
+  not “obvious”: do not make a partial public repair; report it for the owner.
 - **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
   two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
   mathematical background and names definitions and results from declared

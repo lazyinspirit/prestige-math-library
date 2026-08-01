@@ -47,9 +47,9 @@ Frontmatter fields, and what enforces each:
 | `id` | must equal filename | `depcheck` (`id-filename`) |
 | `kind` | definition/lemma/theorem/corollary/example/counterexample/false-statement/remark | `depcheck` (`kind-prefix`), `validate-plan` (`prefix`) |
 | `status` | `draft` → `published` | `depcheck` (`draft-on-published-page`) |
-| `authorship` | reader-facing mathematical-text provenance on future mathematical-content items, including examples and counterexamples | `depcheck` validates a supplied value and kind; `content-policy` requires it in every future batch scope |
-| `generation` | constrained role and parent record for AI-generated future content | `content-policy` permits only recorded decomposition lemmas, direct corollaries and checkable examples/counterexamples; prevents dependency-spine escape |
-| `deps` | **logical** dependencies | `depcheck` (cycles, resolution), `citecheck` |
+| `provenance.statement` / `.proof` | separate reader-facing provenance of the Statement/Construction and its local Proof/Verification | `depcheck` validates supplied component values; `content-policy` requires both in every future batch scope |
+| `generation` | constrained role record for a non-load-bearing AI-generated Statement/Construction | `content-policy` permits only direct corollaries and checkable examples/counterexamples |
+| `deps` | **logical** dependencies | `depcheck` (cycles, resolution), `citecheck`; `content-policy`, `proof-contract`, and `level-coverage` reject an AI-generated Statement/Construction target |
 | `justified_by` | forward-pointing discharge of a definition's obligation | `depcheck` (target must transitively depend on the citer) |
 | `forward_refs` | references to later material | `fwdcheck` |
 | `external_refs` | *mentions* of unproved items | `extcheck` |
@@ -187,8 +187,8 @@ judge): `unproved-kind`, `unproved-has-proof`, `unproved-judged`,
 `external-unused`.
 
 The tier primarily records the deferred catalogue. Its narrow new-content use
-is a genuine external dependency: Beta must avoid an `ai-generated` dependency
-when a literature-backed route exists, search a reputable source for the exact
+is a genuine external dependency: Beta must never use an AI-generated
+Statement/Construction dependency, search a reputable source for the exact
 statement, and attempt a local proof first. Only a well-established result that
 cannot be proved from available library dependencies may become a source-cited
 `proved_here: false` `rem-` dependency. It goes in `deps` (not `external_refs`)
@@ -219,7 +219,9 @@ wikilink inside `$…$` silently kills the block while every other gate stays
 green), `unsupported-tex-delimiter` (remark-math leaves `\(…\)` and `\[…\]`
 literal, so authors must use `$…$` and `$$…$$`), `nested-dollar-in-display`,
 `dollar-in-tag`, `multiline-display`,
-`unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, and
+`unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`,
+`tikz-in-proof-section` (a fence in a section rendered by `ProofBlock` would
+bypass the server diagram extractor and reach the reader as raw code), and
 **`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX, plus
 `unreadable` for a file it cannot open.
 
@@ -315,13 +317,19 @@ the score explains *where to spend reading attention*, not what is false.
 
 `tools/content-policy.mjs` is deliberately scoped by the active batch manifests.
 It closes rules that cannot truthfully be backfilled over legacy content:
-authorship is mandatory; `ai-generated` content has an allowed role; a generated
-lemma names its parent, subclaim, consumer, and reason it is not inline; only
-that parent may depend on it; generated corollaries/examples/counterexamples
-may not be dependencies; and a future external fallback carries a source URL,
+component provenance is mandatory; only non-load-bearing generated
+corollaries/examples/counterexamples have allowed roles; every
+AI-generated Statement/Construction is forbidden as a dependency target; and a
+future external fallback carries a source URL,
 exact statement, failed local route, and necessity matching a reference URL.
-The gate does not decide whether a literature source is semantically correct;
-it makes that exact check an explicit Alpha obligation.
+In its explicit `--manifest-only` Step-0 mode it also rejects more than two A
+pages, duplicate or colliding ids, missing dependency targets, backwards
+reading-order edges, and any edge into a B/examples page. This enforces the
+owner's future-session maximum of two A/B pairs per Beta without rewriting
+historical three-pair manifests. The gate does not decide whether a literature
+source is semantically correct; it makes that exact check an explicit Alpha
+obligation, especially when an AI-adapted target's exact claim or conventions
+are in doubt.
 
 `tools/impact-audit.mjs` turns a repair's blast radius into a hard receipt. Each
 `touchlog` snapshot now records both the full mathematical-content hash and a
@@ -329,6 +337,23 @@ public-interface hash. When an interface changes, the tool computes every
 transitive reverse-`deps` consumer and every direct citation consumer, then
 requires Alpha to account for each one. Proof-only changes do not manufacture a
 large consumer queue, but still require their ordinary audit and rejudge.
+
+**Published-dependency correction is a deliberately narrow use of those existing
+mechanisms (owner, 2026-08-01).** A current Beta or Alpha may correct an already
+published dependency only for an unambiguous falsehood whose exact replacement
+is source-checked or directly elementary. Semantic obviousness is a reading
+judgment, not something a gate can honestly infer, so the protocol records the
+old claim, corrected claim, source or derivation, and provenance transition in
+Alpha's per-level repair ledger. It takes a dedicated before/after touch pair,
+then uses `impact-audit`'s actual reverse-dependency and direct-citation sets;
+every listed consumer needs a concrete disposition. A material correction
+invalidates its old judge pass and owner-audit date. `depcheck` already permits
+the independent reader's `verification.verified` slot as the delegated publish
+gate; the protocol records `delegated_by: owner`, rather than misrepresenting
+that reader as the owner. The corrected item and every materially repaired
+consumer receive a current paired rejudge. The exception permits correction, not
+id renames, removals, speculative theorem repair, or an unresolved public
+impact queue.
 
 `tools/level-coverage.mjs` is the whole-level closure gate. It derives item and
 relationship scope from actual batch manifests, demands a contract for every
@@ -356,7 +381,8 @@ into 36 rounds; it is now opt-in and off by default. Splitting a level bought
 nothing, because pages sharing a level are provably mutually independent — a
 dependency would force the dependent page to a strictly higher level — so there
 is no ordering to discover inside a level. The whole level is authored in
-parallel, one agent per A/B pair. Only a real dependency edge forces sequencing.
+parallel by its Beta batches, each owning one or two A/B pairs and never more
+than two. Only a real dependency edge forces sequencing.
 
 **`rounds.mjs --pairs`** (owner, 2026-07-28) prints one row per A/B pair ranked
 by dependency level, so a session can build the library layer by layer with
@@ -381,6 +407,7 @@ them.
 | `research/level<n>-judge.jsonl` | `judge.mts` via `JUDGE_VERDICTLOG` | how many times was this proof refuted? |
 | `research/level<n>-judge-attempts.jsonl` | `judge.mts` via `JUDGE_ATTEMPTLOG` | why did a judge call slow, retry, or fail? |
 | `research/level<n>-touches.json` | `touchlog.mjs` | how many times was this proof repaired? |
+| `research/level<n>-RESUME.md` | orchestrator | what durable run state must survive context compaction? |
 
 Both exist for the **twice-touched escalation rule**, and both were built because
 the data was being destroyed:
@@ -417,6 +444,25 @@ stamped items with a phantom repair in one pass. It keeps `title`, `deps`,
 `forward_refs`, `external_refs` and `proved_here`, since changing those *is* a
 mathematical edit despite living in frontmatter. First appearance = creation,
 not repair.
+
+**Context-continuity checkpoint (owner 2026-08-01).** The active run's
+`research/<run>-RESUME.md` is refreshed at 50% active-context use and before a
+context-heavy action when practical. It is deliberately a small operational
+handoff, not another content ledger: owner policy deltas, current step and
+frozen-text state, batch/agent ownership, material artifact and ledger paths,
+gates, open risks, working-tree baseline, and exact next action — never secrets
+or copied transcripts. A platform compaction follows the checkpoint; on resume,
+the orchestrator reads it and verifies action-critical disk state before
+continuing immediately. This closes the otherwise fragile gap between a live
+agent's working context and the durable evidence ledgers without adding a pause
+or a publication authority.
+
+**Role-level continuity.** The orchestrator's threshold is 50% of its active
+context. Beta and Alpha apply the same compact-and-resume procedure at **60% of
+their own context length**, but keep it in their write-authorized namespace:
+Beta appends a concise checkpoint to its batch notes and Alpha to its Alpha
+report/handoff. This preserves the single-writer boundary while retaining the
+agent's owned artifacts, completed checks, constraints, and exact next action.
 
 **Attempt telemetry is separate from the verdict ledger.** A verdict line says
 only whether the model produced a mathematical pass, refutation, or honest null;
@@ -501,9 +547,9 @@ adjudicated rejection candidates. It makes no unsupported recall claim, because
 the complete universe of fatal defects is not independently enumerated.
 
 **Concurrency cap (owner, 2026-08-01):** `tools/judge-sweep.mjs` uses two
-file-backed, cross-process model pools: twelve DeepSeek slots and twelve Terra
+file-backed, cross-process model pools: sixteen DeepSeek slots and sixteen Terra
 slots. Each lane advances independently when one of its own slots is free; the
-hard ceiling is 24 calls combined. The numbered slots live under model-specific
+hard ceiling is 32 calls combined. The numbered slots live under model-specific
 directories in `/tmp`, are acquired atomically, heartbeat while a child judge
 runs, and are reclaimed only after a five-minute stale heartbeat, so a second
 resumed sweep cannot exceed either cap and a killed run cannot block it forever.
@@ -572,8 +618,10 @@ statements, counterexamples, and proof strategies, recording working URLs,
 supported planned material, and convention disagreements in its namespaced
 notes. This is deliberately paired with full read access to published `items/`
 and `library/`: every proposed published dependency is opened from disk and
-checked for exact statement, hypotheses, direction, and status. Beta avoids an
-`ai-generated` load-bearing dependency where a literature-backed route exists.
+checked for exact statement, hypotheses, direction, and status. Beta never
+uses an `ai-generated` Statement/Construction as a dependency; the target
+proof's provenance is irrelevant. An AI-adapted target remains eligible but is
+source-checked whenever its exact claim or conventions are in doubt.
 For a needed well-known result absent from the library, it searches an exact
 source and first attempts a local proof. Only the source-checked,
 proof-impossible-in-scope fallback may remain external, as a visible
@@ -581,25 +629,23 @@ proof-impossible-in-scope fallback may remain external, as a visible
 recorded; otherwise the result is decomposed, rescoped, or dropped.
 
 **AI-generated truth-risk route (owner, 2026-08-01).** Every future
-mathematical-content item receives an `authorship` tag, including examples,
-counterexamples, false statements, and mathematical remarks. If Beta cannot
-show that the particular claim or witness is both well-established and directly
-documented in reliable literature, it tags the item `ai-generated` and records
-that gap in the source ledger. The tag raises scrutiny rather than lowering the
-standard: Beta and Alpha test the claim or witness for counterexamples whenever
-there is concrete doubt, using a relevant construction, finite model, or
-literature search before accepting a proof repair. A repaired derivation is not
-evidence that its Statement was true; a found counterexample requires narrowing,
-restating, or dropping the item.
+mathematical-content item receives `provenance.statement` and
+`provenance.proof`, including examples, counterexamples, false statements, and
+mathematical remarks. The former labels the claim/witness/construction, the
+latter its local derivation. If Beta cannot show that the particular claim or
+witness is both well-established and directly documented in reliable literature,
+it marks the Statement/Construction `ai-generated` and records that gap in the
+source ledger. That label raises scrutiny rather than lowering the standard:
+Beta and Alpha test the claim or witness for counterexamples whenever there is
+concrete doubt. An AI-generated proof by itself does not taint a source-backed
+statement; a repaired derivation is not evidence that its Statement was true.
 
 **Generated-claim minimization route (owner, 2026-08-01).** Source-backed
 statements, not invented theorems, form the development. Beta may generate only
-a focused lemma for a named complex-proof decomposition, an easily verifiable
-corollary, or a checkable example/counterexample. The batch ledger identifies a
-generated lemma's parent, subclaim, consumer, and reason it is not inline or
-replaced by an established result. Generated corollaries and examples are not
-dependency-spine infrastructure; Alpha and the independent Beta reader reject
-unjustified load-bearing AI-generated statements.
+an easily verifiable corollary or a checkable example/counterexample. Every
+AI-generated Statement/Construction is excluded from dependency infrastructure;
+a would-be decomposition lemma stays inline or is replaced by a source-backed
+statement. Alpha and the independent Beta reader reject any prohibited edge.
 
 **Step-3 adjudication is an orchestrator mechanism (owner, 2026-07-30).** Beta
 reports discrete recommendations with evidence; the orchestrator verifies them
@@ -661,7 +707,8 @@ restyle without an explicit in-session owner instruction.
 | file | owns |
 |---|---|
 | `web/lib/library-kinds.ts` | per-kind palette; colour always paired with the kind label |
-| `web/components/library/ItemBody.tsx` | sectioned proof rendering, per-citation tag chips |
+| `web/components/library/ItemBody.tsx` | sectioned proof rendering, per-citation tag chips, and extraction of fenced `tikz` / `tikzcd` blocks for server-side SVG rendering |
+| `web/lib/tikz.ts` | cached server-side TikZ/tikz-cd SVG compiler; serializes cache misses because node-tikzjax has one mutable TeX runtime |
 | `web/components/library/badges.tsx` | kind chips, DRAFT banner, provenance + verification chips |
 | `web/components/library/Mermaid.tsx` | flowchart v2, birds-eye, `landmark: true` nodes only |
 | `web/lib/library-forward.ts` | the sky / dashed / ↗ forward-reference accent |

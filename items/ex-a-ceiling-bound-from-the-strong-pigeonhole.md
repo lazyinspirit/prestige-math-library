@@ -54,6 +54,32 @@ $f : A \to B$ has all its fibres smaller than $4$, and some $f$ has none larger
 than $4$: the ceiling bound is exactly right for this pair of sizes and cannot be
 raised to $5$.
 
+```tikz
+\begin{tikzpicture}
+  \draw (-0.55,0) rectangle (0.55,2.3);
+  \draw (1.05,0) rectangle (2.15,2.3);
+  \draw (2.65,0) rectangle (3.75,2.3);
+  \draw (4.25,0) rectangle (5.35,2.3);
+  \draw (5.85,0) rectangle (6.95,2.3);
+  \foreach \y in {0.45,0.95,1.45,1.95} {\fill (0,\y) circle (2.2pt);}
+  \foreach \y in {0.45,0.95,1.45,1.95} {\fill (1.6,\y) circle (2.2pt);}
+  \foreach \y in {0.45,0.95,1.45} {\fill (3.2,\y) circle (2.2pt);}
+  \foreach \y in {0.45,0.95,1.45} {\fill (4.8,\y) circle (2.2pt);}
+  \foreach \y in {0.45,0.95,1.45} {\fill (6.4,\y) circle (2.2pt);}
+  \node at (0,2.65) {$4$};
+  \node at (1.6,2.65) {$4$};
+  \node at (3.2,2.65) {$3$};
+  \node at (4.8,2.65) {$3$};
+  \node at (6.4,2.65) {$3$};
+  \node at (0,-0.35) {$b=0$};
+  \node at (1.6,-0.35) {$b=1$};
+  \node at (3.2,-0.35) {$b=2$};
+  \node at (4.8,-0.35) {$b=3$};
+  \node at (6.4,-0.35) {$b=4$};
+  \node at (3.2,-1.05) {$|f^{-1}[\{b\}]|:\quad 4+4+3+3+3=17$.};
+\end{tikzpicture}
+```
+
 **The counting form behind it.** $17 > 3\cdot 5 = 15$, so clause 1 of
 [[thm-the-strong-pigeonhole-principle]] already gives a fibre with more than $3$
 elements, that is with at least $4$; and $17 > 4\cdot 5 = 20$ is false, so clause

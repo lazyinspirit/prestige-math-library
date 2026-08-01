@@ -29,6 +29,37 @@ The **principal ideal** below $y$ and the **principal filter** above $x$ are
 
 $$P_{\le y}:=\{z\in P:z\le y\},\qquad P_{\ge x}:=\{z\in P:x\le z\}.$$
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  elt/.style={draw,circle,minimum size=7mm,inner sep=1pt,fill=white},
+  interval/.style={elt,draw=blue!75!black,fill=blue!12,line width=.9pt},
+  ideal/.style={elt,draw=green!55!black,fill=green!13,line width=.8pt},
+  filter/.style={elt,draw=orange!85!black,fill=orange!16,line width=.8pt}
+]
+\node[ideal]    (b) at (0,0) {$b$};
+\node[ideal]    (w) at (-1,1.2) {$w$};
+\node[interval] (x) at (1,1.2) {$x$};
+\node[interval] (u) at (0,2.4) {$u$};
+\node[interval] (v) at (2,2.4) {$v$};
+\node[interval] (y) at (1,3.6) {$y$};
+\node[filter]   (t) at (1,4.8) {$t$};
+\node[elt]      (r) at (3.5,1.2) {$r$};
+
+\draw[gray!70]
+  (b)--(w) (b)--(x)
+  (w)--(u) (x)--(u) (x)--(v)
+  (u)--(y) (v)--(y) (y)--(t);
+
+\node[interval,minimum size=4.5mm] at (-1.1,-.8) {};
+\node[anchor=west] at (-.8,-.8) {$[x,y]$};
+\node[ideal,minimum size=4.5mm] at (.7,-.8) {};
+\node[anchor=west] at (1,-.8) {$P_{\le y}\setminus[x,y]$};
+\node[filter,minimum size=4.5mm] at (3.65,-.8) {};
+\node[anchor=west] at (3.95,-.8) {$P_{\ge x}\setminus[x,y]$};
+\end{tikzpicture}
+```
+
 The poset $P$ is
 
 - **locally finite** when $[x,y]$ is finite for every $x\le y$;

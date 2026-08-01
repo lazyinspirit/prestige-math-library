@@ -37,6 +37,30 @@ is Pascal's triangle. Rows $0$ to $6$ are
 
 $$\begin{array}{c} 1 \\ 1 \quad 1 \\ 1 \quad 2 \quad 1 \\ 1 \quad 3 \quad 3 \quad 1 \\ 1 \quad 4 \quad 6 \quad 4 \quad 1 \\ 1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1 \\ 1 \quad 6 \quad 15 \quad 20 \quad 15 \quad 6 \quad 1 \end{array}$$
 
+```tikz
+\begin{tikzpicture}[x=0.9cm,y=0.75cm]
+  \node (r00) at (0,4) {$1$};
+  \node (r10) at (-0.5,3) {$1$};
+  \node (r11) at (0.5,3) {$1$};
+  \node (r20) at (-1,2) {$1$};
+  \node (r21) at (0,2) {$2$};
+  \node (r22) at (1,2) {$1$};
+  \node (r30) at (-1.5,1) {$1$};
+  \node (r31) at (-0.5,1) {$3$};
+  \node (r32) at (0.5,1) {$3$};
+  \node (r33) at (1.5,1) {$1$};
+  \node (r40) at (-2,0) {$1$};
+  \node (r41) at (-1,0) {$4$};
+  \node[draw,circle] (r42) at (0,0) {$6$};
+  \node (r43) at (1,0) {$4$};
+  \node (r44) at (2,0) {$1$};
+  \draw[->] (r31) -- (r42);
+  \draw[->] (r32) -- (r42);
+  \node at (3.25,0.35) {$3+3=6$};
+  \node at (0,-0.85) {${4\choose2}={3\choose1}+{3\choose2}$};
+\end{tikzpicture}
+```
+
 Every entry is produced twice below: once by [[thm-pascals-rule]] from the row
 above, and once by the closed formula of [[thm-binomial-closed-formula]]. The row
 sums and the alternating row sums are then checked against

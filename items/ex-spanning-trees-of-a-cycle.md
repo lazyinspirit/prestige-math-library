@@ -24,6 +24,20 @@ pipeline_run: null
 
 For every $n\ge3$, the cycle graph $C_n$ has exactly $n$ spanning trees.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\small}]
+  \tikzset{vertex/.style={circle,draw,fill=white,inner sep=1.3pt,minimum size=4.5mm}}
+  \node[vertex] (v0) at (90:1.55) {$0$};
+  \node[vertex] (v1) at (18:1.55) {$1$};
+  \node[vertex] (v2) at (-54:1.55) {$2$};
+  \node[vertex] (v3) at (-126:1.55) {$3$};
+  \node[vertex] (v4) at (162:1.55) {$4$};
+  \draw[blue,very thick] (v0)--(v1)--(v2)--(v3)--(v4);
+  \draw[red,dashed,very thick] (v4)--node[above] {\scriptsize deleted $e$} (v0);
+  \node[blue] at (0,-2.05) {$P_5$ after deleting $e$ from $C_5$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** $n\ge3$ and the cycle graph $C_n$.

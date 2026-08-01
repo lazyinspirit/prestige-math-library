@@ -32,6 +32,116 @@ members:
 
 $$\partial\mathcal F=\{\{1\},\{2\},\{3\}\},\qquad \nabla\mathcal F=\{\{1,2,3\},\{1,2,4\},\{1,3,4\}\}.$$
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  set/.style={draw,circle,minimum size=7.5mm,inner sep=1pt,fill=white},
+  lower/.style={set,draw=blue!75!black,fill=blue!12,line width=.8pt},
+  family/.style={set,draw=orange!85!black,fill=orange!18,line width=.9pt},
+  upper/.style={set,draw=green!55!black,fill=green!13,line width=.8pt}
+]
+\node[set] (e) at (0,0) {$\emptyset$};
+
+\node[lower] (s1) at (-4.5,1.45) {$1$};
+\node[lower] (s2) at (-1.5,1.45) {$2$};
+\node[lower] (s3) at (1.5,1.45) {$3$};
+\node[set]   (s4) at (4.5,1.45) {$4$};
+
+\node[family] (p12) at (-5,2.9) {$12$};
+\node[family] (p13) at (-3,2.9) {$13$};
+\node[set]    (p14) at (-1,2.9) {$14$};
+\node[set]    (p23) at (1,2.9) {$23$};
+\node[set]    (p24) at (3,2.9) {$24$};
+\node[set]    (p34) at (5,2.9) {$34$};
+
+\node[upper] (t123) at (-4.5,4.35) {$123$};
+\node[upper] (t124) at (-1.5,4.35) {$124$};
+\node[upper] (t134) at (1.5,4.35) {$134$};
+\node[set]   (t234) at (4.5,4.35) {$234$};
+
+\node[set] (a) at (0,5.8) {$1234$};
+
+\draw[gray!55]
+  (e)--(s1) (e)--(s2) (e)--(s3) (e)--(s4)
+  (s1)--(p12) (s1)--(p13) (s1)--(p14)
+  (s2)--(p12) (s2)--(p23) (s2)--(p24)
+  (s3)--(p13) (s3)--(p23) (s3)--(p34)
+  (s4)--(p14) (s4)--(p24) (s4)--(p34)
+  (p12)--(t123) (p12)--(t124)
+  (p13)--(t123) (p13)--(t134)
+  (p14)--(t124) (p14)--(t134)
+  (p23)--(t123) (p23)--(t234)
+  (p24)--(t124) (p24)--(t234)
+  (p34)--(t134) (p34)--(t234)
+  (t123)--(a) (t124)--(a) (t134)--(a) (t234)--(a);
+
+\draw[orange!85!black,line width=1.1pt]
+  (s1)--(p12) (s2)--(p12) (s1)--(p13) (s3)--(p13)
+  (p12)--(t123) (p12)--(t124) (p13)--(t123) (p13)--(t134);
+
+\node[font=\scriptsize] at (-6.25,0) {$B(A)_0$};
+\node[font=\scriptsize] at (-6.25,1.45) {$B(A)_1$};
+\node[font=\scriptsize] at (-6.25,2.9) {$B(A)_2$};
+\node[font=\scriptsize] at (-6.25,4.35) {$B(A)_3$};
+\node[font=\scriptsize] at (-6.25,5.8) {$B(A)_4$};
+
+\node[lower,minimum size=5mm] at (-3.8,-.85) {};
+\node[anchor=west] at (-3.5,-.85) {$\partial\mathcal F$};
+\node[family,minimum size=5mm] at (-.55,-.85) {};
+\node[anchor=west] at (-.25,-.85) {$\mathcal F$};
+\node[upper,minimum size=5mm] at (2.05,-.85) {};
+\node[anchor=west] at (2.35,-.85) {$\nabla\mathcal F$};
+\end{tikzpicture}
+```
+
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  member/.style={draw,circle,minimum size=7mm,inner sep=1pt,fill=white}
+]
+\draw[gray!45,dashed] (2,.55)--(2,-6.05);
+\node[font=\scriptsize,anchor=south] at (2,.55) {middle rank};
+
+\node[font=\scriptsize] at (0,1.05) {rank $0$};
+\node[font=\scriptsize] at (1,1.05) {rank $1$};
+\node[font=\scriptsize] at (2,1.05) {rank $2$};
+\node[font=\scriptsize] at (3,1.05) {rank $3$};
+\node[font=\scriptsize] at (4,1.05) {rank $4$};
+
+\node[font=\scriptsize,anchor=east] at (-.55,0) {$C_1$};
+\node[member] (c10) at (0,0) {$\emptyset$};
+\node[member] (c11) at (1,0) {$1$};
+\node[member] (c12) at (2,0) {$12$};
+\node[member] (c13) at (3,0) {$123$};
+\node[member] (c14) at (4,0) {$1234$};
+\draw[blue!70!black,line width=1pt] (c10)--(c11)--(c12)--(c13)--(c14);
+
+\node[font=\scriptsize,anchor=east] at (-.55,-1.1) {$C_2$};
+\node[member] (c21) at (1,-1.1) {$4$};
+\node[member] (c22) at (2,-1.1) {$14$};
+\node[member] (c23) at (3,-1.1) {$124$};
+\draw[orange!85!black,line width=1pt] (c21)--(c22)--(c23);
+
+\node[font=\scriptsize,anchor=east] at (-.55,-2.2) {$C_3$};
+\node[member] (c31) at (1,-2.2) {$2$};
+\node[member] (c32) at (2,-2.2) {$23$};
+\node[member] (c33) at (3,-2.2) {$234$};
+\draw[green!55!black,line width=1pt] (c31)--(c32)--(c33);
+
+\node[font=\scriptsize,anchor=east] at (-.55,-3.3) {$C_4$};
+\node[member] at (2,-3.3) {$24$};
+
+\node[font=\scriptsize,anchor=east] at (-.55,-4.4) {$C_5$};
+\node[member] (c51) at (1,-4.4) {$3$};
+\node[member] (c52) at (2,-4.4) {$13$};
+\node[member] (c53) at (3,-4.4) {$134$};
+\draw[red!70!black,line width=1pt] (c51)--(c52)--(c53);
+
+\node[font=\scriptsize,anchor=east] at (-.55,-5.5) {$C_6$};
+\node[member] at (2,-5.5) {$34$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The set $A=\{1,2,3,4\}$ and the family $\mathcal F$ in the Example.

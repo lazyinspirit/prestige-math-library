@@ -119,6 +119,8 @@ function validateItem(id, item, entry) {
     const sourceItem = loadItem(source);
     if (!sourceItem) {
       error('citation-source-missing', `${fact} cites missing item ${source}`, id);
+    } else if (sourceItem.statementProvenance === 'ai-generated') {
+      error('citation-ai-generated-statement', `${fact} cites ${source}, whose provenance.statement is ai-generated`, id);
     } else if (!SOURCE_SECTIONS.has(section)) {
       error('citation-section', `${fact} -> ${source} needs a valid source_section`, id);
     } else if (typeof quote !== 'string' || !quote.trim()) {
@@ -251,12 +253,24 @@ function loadItem(id) {
   if (!existsSync(path)) return null;
   const source = readFileSync(path, 'utf8');
   const { fm, body } = split(source);
-  return { id, body, deps: list(fm, 'deps'), justified: list(fm, 'justified_by') };
+  return {
+    id,
+    body,
+    deps: list(fm, 'deps'),
+    justified: list(fm, 'justified_by'),
+    statementProvenance: nested(fm, 'provenance', 'statement'),
+  };
 }
 
 function split(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   return match ? { fm: match[1], body: match[2] } : { fm: '', body: source };
+}
+function nested(fm, parent, child) {
+  const start = fm.search(new RegExp('^' + parent + ':[ \\t]*(?:#.*)?$', 'm'));
+  if (start < 0) return undefined;
+  const match = fm.slice(start).match(new RegExp('^[ \\t]+' + child + ':[ \\t]*(.*)$', 'm'));
+  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
 function list(fm, key) {
   const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));

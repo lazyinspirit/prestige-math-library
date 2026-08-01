@@ -1,0 +1,528 @@
+[
+  {
+    "order": 157,
+    "id": "convexity",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Convexity",
+    "companion": "convexity-examples",
+    "requires": [
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "def-convex-concave-and-midpoint-convex-functions",
+        "kind": "definition",
+        "title": "Convex, strictly convex, concave, strictly concave, and midpoint-convex real functions on an interval",
+        "deps": ["def-interval"]
+      },
+      {
+        "id": "lem-three-slope-inequality-for-convex-functions",
+        "kind": "lemma",
+        "title": "For a convex function and $x<y<z$, the three secant slopes satisfy $s(x,y)\\le s(x,z)\\le s(y,z)$",
+        "strategy": "Rewrite each point as a convex combination of the other two and clear only positive denominators. State all three inequalities, including the middle whole-chord slope, so later one-sided-limit arguments never silently strengthen the lemma.",
+        "deps": ["def-convex-concave-and-midpoint-convex-functions"]
+      },
+      {
+        "id": "thm-convex-functions-are-locally-lipschitz-and-continuous",
+        "kind": "theorem",
+        "title": "A convex real function is Lipschitz on every closed bounded subinterval of the interior of its domain, hence continuous throughout the interior",
+        "strategy": "Trap all secant slopes on a compactly contained interval between two fixed outer secant slopes supplied by the three-slope lemma. Convert the resulting difference-quotient bound into a Lipschitz estimate and then continuity, keeping endpoints outside the claim unless the function is separately continuous there.",
+        "deps": [
+          "lem-three-slope-inequality-for-convex-functions",
+          "def-continuity-real",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "def-one-sided-derivatives-of-real-functions",
+        "kind": "definition",
+        "title": "The left and right derivatives of a real function as one-sided limits of its difference quotient",
+        "deps": ["def-one-sided-limits", "def-derivative"]
+      },
+      {
+        "id": "thm-one-sided-derivatives-of-convex-functions",
+        "kind": "theorem",
+        "title": "A convex function on an open interval has finite left and right derivatives everywhere, with $f'_-(u)\\le f'_+(u)\\le (f(v)-f(u))/(v-u)\\le f'_-(v)\\le f'_+(v)$ for $u<v$",
+        "strategy": "Use monotonicity and local boundedness of the appropriate secant-slope functions to obtain their one-sided limits. Pass the finite three-slope inequalities to those limits and identify the limits with the one-sided derivatives exactly as defined on the preceding item.",
+        "deps": [
+          "lem-three-slope-inequality-for-convex-functions",
+          "thm-convex-functions-are-locally-lipschitz-and-continuous",
+          "def-one-sided-derivatives-of-real-functions"
+        ]
+      },
+      {
+        "id": "thm-convex-functions-are-differentiable-off-a-countable-set",
+        "kind": "theorem",
+        "title": "A convex function on an open interval is differentiable except at at most countably many points",
+        "strategy": "Let $g=f'_+$. The ordered one-sided-derivative inequalities make $g$ nondecreasing; identify its left limit at $c$ with $f'_-(c)$. Thus a failure of differentiability is a jump discontinuity of $g$, and Froda's theorem makes the exceptional set at most countable.",
+        "deps": [
+          "thm-one-sided-derivatives-of-convex-functions",
+          "thm-froda",
+          "def-monotone-function"
+        ]
+      },
+      {
+        "id": "def-supporting-line-for-a-real-function",
+        "kind": "definition",
+        "title": "A supporting line of slope $m$ for a real function at an interior point",
+        "deps": ["def-interval"]
+      },
+      {
+        "id": "thm-supporting-lines-for-convex-functions",
+        "kind": "theorem",
+        "title": "Every slope between the left and right derivatives of a convex function gives a supporting line",
+        "strategy": "For $x<c$, compare the secant slope from $x$ to $c$ with $f'_-(c)$; for $x>c$, compare $f'_+(c)$ with the secant slope from $c$ to $x$. Insert the chosen slope between the one-sided derivatives and rearrange, treating $x=c$ by equality.",
+        "deps": [
+          "def-supporting-line-for-a-real-function",
+          "thm-one-sided-derivatives-of-convex-functions"
+        ]
+      },
+      {
+        "id": "thm-differentiable-convex-functions-and-monotone-derivatives",
+        "kind": "theorem",
+        "title": "A differentiable function on an open interval is convex if and only if its derivative is nondecreasing",
+        "strategy": "In the forward direction specialize the ordered one-sided-derivative inequality to ordinary derivatives. In the reverse direction use derivative monotonicity and the derivative-sign theorem on either side of a base point to establish the tangent supporting-line inequality, then recover the convex-combination inequality from the two endpoint supporting inequalities.",
+        "deps": [
+          "thm-one-sided-derivatives-of-convex-functions",
+          "thm-supporting-lines-for-convex-functions",
+          "thm-monotonicity-from-the-derivative",
+          "cor-differentiable-implies-continuous",
+          "def-monotone-function"
+        ]
+      },
+      {
+        "id": "cor-convex-differentiable-functions-have-continuous-derivatives",
+        "kind": "corollary",
+        "title": "A differentiable convex function on an open interval has a continuous derivative",
+        "strategy": "The preceding equivalence makes the derivative nondecreasing. Darboux's theorem says every derivative has the intermediate-value property, and the published monotone-derivative corollary then gives continuity without assuming a second derivative.",
+        "deps": [
+          "thm-differentiable-convex-functions-and-monotone-derivatives",
+          "cor-injective-or-monotone-derivative-is-continuous"
+        ]
+      },
+      {
+        "id": "cor-second-derivative-characterises-convexity",
+        "kind": "corollary",
+        "title": "A twice-differentiable function on an open interval is convex if and only if its second derivative is nonnegative",
+        "strategy": "Apply the differentiable convexity criterion to $f$, then apply the published derivative-sign/monotonicity theorem to $f'$. Preserve both directions and the weak inequality; do not replace nonnegative by positive.",
+        "deps": [
+          "thm-differentiable-convex-functions-and-monotone-derivatives",
+          "thm-monotonicity-from-the-derivative",
+          "def-higher-derivatives-and-smoothness"
+        ]
+      },
+      {
+        "id": "lem-midpoint-convexity-extends-to-dyadic-weights",
+        "kind": "lemma",
+        "title": "Midpoint convexity gives the convexity inequality at every dyadic weight $k/2^n$",
+        "strategy": "Induct on $n$, with $0\\le k\\le 2^n$. Even numerators reduce to the preceding level; odd numerators are the midpoint of the adjacent even dyadic weights. Keep the $n=0$ level and the endpoint weights $0,1$ explicit under the library's zero-based natural-number convention.",
+        "deps": [
+          "def-convex-concave-and-midpoint-convex-functions",
+          "thm-induction-principle",
+          "def-integer-power",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "thm-continuous-midpoint-convex-functions-are-convex",
+        "kind": "theorem",
+        "title": "A continuous midpoint-convex function on an interval is convex",
+        "strategy": "For a fixed weight in $[0,1]$, use the Archimedean property to choose dyadic weights converging to it (derive the needed approximation inline because the later dyadic-topology item is unavailable at this order). Apply the dyadic inequality and pass to the limit by continuity. Cover weights $0$ and $1$ directly.",
+        "deps": [
+          "lem-midpoint-convexity-extends-to-dyadic-weights",
+          "def-continuity-real",
+          "cor-archimedean-reciprocal",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "thm-finite-jensen-inequality",
+        "kind": "theorem",
+        "title": "Finite Jensen inequality for a convex function and nonnegative weights summing to one",
+        "strategy": "Induct on a positive natural number of terms. Split off the final weight. When it equals one, all earlier weights vanish; otherwise normalize the preceding weights by their positive sum, apply induction, and then apply two-point convexity. State the $n=1$ base separately so no empty normalized family is formed.",
+        "deps": [
+          "def-convex-concave-and-midpoint-convex-functions",
+          "thm-induction-principle",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "cor-local-minima-of-convex-functions-are-global",
+        "kind": "corollary",
+        "title": "Every local minimum of a convex function on an interval is a global minimum",
+        "strategy": "If a point with smaller value existed, convex combinations with weights tending to zero would lie arbitrarily close to the local minimizer and have smaller values. Use the local-neighbourhood radius explicitly and include the one-point-domain case.",
+        "deps": [
+          "def-convex-concave-and-midpoint-convex-functions",
+          "def-local-extremum",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "cor-strictly-convex-functions-have-at-most-one-minimizer",
+        "kind": "corollary",
+        "title": "A strictly convex function has at most one global minimizer",
+        "strategy": "Two distinct minimizers would have a midpoint in the interval whose value is strictly below their common minimum. Treat the empty minimizer set and singleton domain as allowed, not as existence claims.",
+        "deps": ["def-convex-concave-and-midpoint-convex-functions"]
+      },
+      {
+        "id": "def-inflection-point-by-change-of-convexity",
+        "kind": "definition",
+        "title": "An inflection point as a point of continuity where convexity changes to concavity or conversely",
+        "deps": [
+          "def-convex-concave-and-midpoint-convex-functions",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "cor-second-derivative-sign-change-gives-an-inflection-point",
+        "kind": "corollary",
+        "title": "A continuous function whose second derivative has opposite signs on the two sides of a point has an inflection point there",
+        "strategy": "Use the second-derivative convexity criterion on each one-sided interval, applying it to $-f$ for the concave side, and then invoke the definition's continuity clause. Do not claim that $f''(c)=0$ alone is sufficient.",
+        "deps": [
+          "def-inflection-point-by-change-of-convexity",
+          "cor-second-derivative-characterises-convexity",
+          "def-higher-derivatives-and-smoothness"
+        ]
+      },
+      {
+        "id": "rem-convexity-conventions-and-choice",
+        "kind": "remark",
+        "title": "Convexity conventions, endpoint scope, dyadic approximation, and the exact use of the Axiom of Choice in the midpoint-convex counterexample",
+        "deps": ["def-axiom-of-choice", "lem-hamel-basis-exists"]
+      }
+    ]
+  },
+  {
+    "order": 158,
+    "id": "convexity-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Convexity: Examples and Counterexamples",
+    "requires": ["convexity"],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-absolute-value-is-convex",
+        "kind": "example",
+        "title": "The absolute-value function is convex",
+        "strategy": "Apply the triangle inequality to $|\\lambda x+(1-\\lambda)y|$ and absolute homogeneity for the nonnegative coefficients. Link in a remark, but do not cite as a dependency, the already-published companion-page counterexample showing nondifferentiability at zero.",
+        "deps": [
+          "def-convex-concave-and-midpoint-convex-functions",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "ex-finite-jensen-gives-the-mean-square-inequality",
+        "kind": "example",
+        "title": "Finite Jensen for $x\\mapsto x^2$ gives that the square of a weighted mean is at most the weighted mean of the squares",
+        "strategy": "Verify convexity of the square by expanding the Jensen gap as $\\lambda(1-\\lambda)(x-y)^2\\ge0$, then instantiate finite Jensen. Include arbitrary finite positive length, zero weights, and the equality statement only when it is actually proved.",
+        "deps": [
+          "thm-finite-jensen-inequality",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "lem-of-square-positive",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "cex-discontinuous-midpoint-convex-hamel-function",
+        "kind": "counterexample",
+        "title": "Assuming Choice, a Hamel coefficient map is midpoint convex but discontinuous and therefore not convex",
+        "strategy": "Choose a Hamel basis vector and its published coefficient map. Additivity and rational homogeneity give midpoint equality. The nontrivial complementary span shows the map is not of the form $x\\mapsto cx$; the published Cauchy-equation regularity theorem then makes it discontinuous. Since convex functions are continuous on the interior, it is not convex.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-hamel-basis-exists",
+          "def-additive-function",
+          "thm-cauchy-functional-equation-regularity",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "thm-convex-functions-are-locally-lipschitz-and-continuous"
+        ]
+      },
+      {
+        "id": "ex-cubic-has-an-inflection-point-at-zero",
+        "kind": "example",
+        "title": "$x\\mapsto x^3$ changes from concave to convex at zero and has an inflection point there",
+        "strategy": "Compute the first and second derivatives from the power rule. The second derivative is negative to the left of zero and positive to the right; continuity at zero and the sign-change corollary finish. Explicitly contrast this with the already-published $x^4$ example, without depending on that B-page item.",
+        "deps": [
+          "cor-second-derivative-sign-change-gives-an-inflection-point",
+          "def-inflection-point-by-change-of-convexity",
+          "lem-derivative-of-a-power",
+          "def-higher-derivatives-and-smoothness"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 229,
+    "id": "the-total-derivative",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "The Total Derivative in R^m -> R^n",
+    "companion": "the-total-derivative-examples",
+    "requires": [
+      "rn-as-a-normed-space",
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "def-euclidean-linear-map",
+        "kind": "definition",
+        "title": "A linear map $L:\\mathbb{R}^m\\to\\mathbb{R}^n$ in Euclidean coordinates",
+        "deps": ["def-euclidean-inner-product"]
+      },
+      {
+        "id": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+        "kind": "lemma",
+        "title": "Every Euclidean linear map has a unique matrix and satisfies $\\|Lh\\|_2\\le K\\|h\\|_2$ for some $K\\ge0$",
+        "strategy": "Expand $h$ in the published standard basis, use linearity to obtain $Lh=\\sum_j h_jL(e_j)$, and read off the unique matrix columns. Bound the norm by the finite triangle inequality and $|h_j|\\le\\|h\\|_2$, taking $K=\\sum_j\\|L(e_j)\\|_2$. Check $m=0$ is outside the standing hypotheses and zero maps give $K=0$.",
+        "deps": [
+          "def-euclidean-linear-map",
+          "lem-standard-basis-of-f-n",
+          "def-euclidean-inner-product",
+          "def-norm-and-normed-space",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "def-convex-subset-of-euclidean-space",
+        "kind": "definition",
+        "title": "A convex subset of $\\mathbb{R}^m$ contains every line segment between two of its points",
+        "deps": ["def-euclidean-inner-product", "def-interval"]
+      },
+      {
+        "id": "def-directional-and-partial-derivatives",
+        "kind": "definition",
+        "title": "Directional derivatives and partial derivatives of a map $U\\subseteq\\mathbb{R}^m\\to\\mathbb{R}^n$",
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-valued-functions-limits-and-continuity",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "def-total-derivative-in-euclidean-space",
+        "kind": "definition",
+        "title": "The total (Fréchet) derivative $Df(a)$ as the linear first-order approximation with $o(\\|h\\|_2)$ remainder",
+        "deps": [
+          "def-euclidean-linear-map",
+          "def-norm-and-normed-space",
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "lem-uniqueness-of-the-total-derivative",
+        "kind": "lemma",
+        "title": "The total derivative at a point is unique",
+        "strategy": "If $L$ and $M$ both satisfy the remainder estimate, test along $h=tv$ inside an open ball about the point. Divide by $|t|$ for $t\\ne0$ and use an epsilon contradiction to obtain $(L-M)v=0$ for every $v$, including $v=0$ separately.",
+        "deps": ["def-total-derivative-in-euclidean-space"]
+      },
+      {
+        "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+        "kind": "theorem",
+        "title": "Total differentiability gives a local $O(\\|h\\|_2)$ increment bound and therefore continuity",
+        "strategy": "Bound $Df(a)h$ by the Euclidean linear-map lemma and make the normalized remainder at most one on a sufficiently small ball. The triangle inequality gives $\\|f(a+h)-f(a)\\|_2\\le(K+1)\\|h\\|_2$, from which epsilon-delta continuity follows; keep the zero-map and zero-increment cases explicit.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "def-jacobian-matrix-and-gradient",
+        "kind": "definition",
+        "title": "The Jacobian matrix of partial derivatives and the gradient in the scalar-valued case",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "def-euclidean-inner-product",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+        "kind": "theorem",
+        "title": "A total derivative computes every directional derivative, and its matrix is the Jacobian",
+        "strategy": "Restrict the total remainder estimate to $h=tv$. After division by $t$, homogeneity makes the remainder tend to zero and the derivative of $t\\mapsto f(a+tv)$ equals $Df(a)v$. Specialize to standard basis vectors and invoke the matrix-column representation to identify the Jacobian, preserving the $v=0$ case.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded"
+        ]
+      },
+      {
+        "id": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+        "kind": "theorem",
+        "title": "For a differentiable scalar field, $D_vf(a)=\\langle\\nabla f(a),v\\rangle$ and the unit direction of steepest ascent is the normalized gradient",
+        "strategy": "Use the Jacobian representation in the scalar case to obtain the inner-product formula. Cauchy-Schwarz bounds unit-direction derivatives by the gradient norm, with equality in the normalized gradient direction when the gradient is nonzero; when it is zero, every directional derivative is zero and there is no unique steepest direction.",
+        "deps": [
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ]
+      },
+      {
+        "id": "thm-algebra-of-total-derivatives",
+        "kind": "theorem",
+        "title": "Sums and scalar multiples of totally differentiable maps are totally differentiable with the expected derivatives",
+        "strategy": "Add or scale the two remainder identities and use the norm triangle inequality or absolute homogeneity. Verify that the proposed derivative is linear, and split the scalar-zero case only where division by its absolute value would otherwise occur.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-linear-map",
+          "def-norm-and-normed-space"
+        ]
+      },
+      {
+        "id": "thm-chain-rule-for-total-derivatives",
+        "kind": "theorem",
+        "title": "The chain rule for total derivatives: $D(g\\circ f)(a)=Dg(f(a))\\circ Df(a)$",
+        "strategy": "Write $f(a+h)-f(a)=Ah+r(h)$ and $g(f(a)+k)-g(f(a))=Bk+s(k)$. The local linear bound makes $k=O(\\|h\\|)$, so $s(k)=o(\\|k\\|)=o(\\|h\\|)$, while boundedness of $B$ gives $B r(h)=o(\\|h\\|)$. Treat $k=0$ without forming the normalized outer remainder and verify the composite linear map explicitly.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "def-euclidean-linear-map"
+        ]
+      },
+      {
+        "id": "lem-coordinate-telescoping-on-a-euclidean-ball",
+        "kind": "lemma",
+        "title": "Small coordinate-by-coordinate increments stay inside a Euclidean ball and telescope the total increment",
+        "strategy": "For $h\\in\\mathbb{R}^m$, define $p_j=a+\\sum_{k<j}h_ke_k$. The norm of each coordinate prefix is at most $\\|h\\|_2$, so a small increment keeps every $p_j$ in the chosen ball. The finite telescoping identity expresses $f(a+h)-f(a)$ as the sum of the increments $f(p_{j+1})-f(p_j)$.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "lem-standard-basis-of-f-n",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+        "kind": "theorem",
+        "title": "If all partial derivatives exist on a neighbourhood and are continuous at a point, then the map is totally differentiable there with Jacobian derivative",
+        "strategy": "Choose a ball where every partial derivative vector is uniformly close to its value at the base point. Telescope along coordinate segments using the preceding lemma; apply the published vector mean-value inequality to each segment after subtracting the fixed linear term. Sum the errors and compare the coordinate $1$-norm with the Euclidean norm. Verify the Jacobian map is linear before invoking the definition.",
+        "deps": [
+          "lem-coordinate-telescoping-on-a-euclidean-ball",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-total-derivative-in-euclidean-space",
+          "thm-mean-value-inequality",
+          "thm-componentwise-limits-and-continuity"
+        ]
+      },
+      {
+        "id": "thm-mean-value-inequality-for-total-derivatives",
+        "kind": "theorem",
+        "title": "On a convex open set, a uniform bound $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ implies $\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2$",
+        "strategy": "Parametrize the segment from $x$ to $y$ by $\\gamma(t)=x+t(y-x)$. Convexity keeps the curve in the domain, the chain rule gives $(f\\circ\\gamma)'(t)=Df(\\gamma(t))(y-x)$, and the published vector mean-value inequality supplies the endpoint estimate. Treat $x=y$ directly and use no global operator-norm definition.",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-mean-value-inequality",
+          "def-total-derivative-in-euclidean-space"
+        ]
+      },
+      {
+        "id": "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+        "kind": "corollary",
+        "title": "A totally differentiable map with zero derivative on a convex open set is constant",
+        "strategy": "Apply the total-derivative mean-value inequality with $M=0$ to arbitrary points of the domain. Include the empty-domain case (vacuously constant under the library's definition) and singleton/zero-dimensional exclusions explicitly rather than importing the later connected-open-set theorem.",
+        "deps": ["thm-mean-value-inequality-for-total-derivatives"]
+      },
+      {
+        "id": "rem-total-derivative-conventions-and-linear-map-seam",
+        "kind": "remark",
+        "title": "Dimension, openness, norm, Jacobian, and the native Euclidean linear-map agreement seam",
+        "deps": [
+          "rem-rn-conventions-and-scope",
+          "def-euclidean-linear-map",
+          "def-total-derivative-in-euclidean-space"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 230,
+    "id": "the-total-derivative-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "The Total Derivative in R^m -> R^n: Examples and Counterexamples",
+    "requires": ["the-total-derivative"],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-polynomial-map-total-derivative-and-jacobian",
+        "kind": "example",
+        "title": "The polynomial map $(x,y)\\mapsto(1+x+2y+x^2,\\,2x+3y+xy)$ and its Jacobian",
+        "strategy": "Compute all four partial derivatives with the one-variable algebra and power rules. Their continuity makes the continuous-partials theorem applicable, and the resulting Jacobian matrix gives the total derivative at an arbitrary point. Verify one increment expansion directly as a check on the matrix.",
+        "deps": [
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-jacobian-matrix-and-gradient",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ]
+      },
+      {
+        "id": "cex-partial-derivatives-without-continuity",
+        "kind": "counterexample",
+        "title": "$xy/(x^2+y^2)$ has both partial derivatives at the origin but is discontinuous there",
+        "strategy": "Define the value at the origin to be zero. Both coordinate-axis restrictions are identically zero, so both partial derivatives exist and vanish. Along $y=x\\ne0$ the function is $1/2$, contradicting continuity at the origin.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "cex-straight-line-continuity-tests-do-not-imply-continuity",
+        "kind": "counterexample",
+        "title": "$x^2y/(x^4+y^2)$ tends to zero on every line through the origin but not along $y=x^2$",
+        "strategy": "Define the origin value to be zero. Substitute $(x,y)=(ta,tb)$ and separate $b=0$ from $b\\ne0$ to show every straight-line restriction tends to zero. Along $(t,t^2)$ the value is $1/2$, so the map is not continuous at the origin.",
+        "deps": [
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-metric-continuity",
+          "def-vector-valued-derivative-and-integral"
+        ]
+      },
+      {
+        "id": "cex-directional-derivatives-without-total-differentiability",
+        "kind": "counterexample",
+        "title": "$x^2y/(x^2+y^2)$ has every directional derivative at the origin but is not totally differentiable there",
+        "strategy": "Compute the directional derivative along $v=(a,b)$ as $a^2b/(a^2+b^2)$ for $v\\ne0$ and zero for $v=0$. Exhibit a failure of additivity of this direction map. If a total derivative existed, the directional-derivative theorem would make the map linear, a contradiction.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-euclidean-linear-map"
+        ]
+      },
+      {
+        "id": "cex-zero-directional-derivatives-without-continuity",
+        "kind": "counterexample",
+        "title": "The map $y(x^2+y^2)/x$ off the line $x=0$, extended by zero on that line, has every directional derivative zero at the origin but is discontinuous there",
+        "strategy": "On every fixed line through the origin the function is quadratic in the line parameter, so the directional difference quotient tends to zero. Along the curved path $x=y^3$ the values tend to one, proving discontinuity and hence failure of total differentiability.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "cex-bounded-total-derivative-on-a-nonconvex-domain-need-not-give-global-lipschitz",
+        "kind": "counterexample",
+        "title": "A locally constant step map on the disconnected open set $\\mathbb{R}\\setminus\\{0\\}$ has zero total derivative but is not globally Lipschitz",
+        "strategy": "In the $\\mathbb{R}^1$ identification, take value zero on the negative component and one on the positive component. Each point has a neighbourhood on which the map is constant, so its total derivative is zero. The points $-t$ and $t$ have image distance one and domain distance $2t$, which defeats every proposed global Lipschitz constant for small positive $t$.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-lipschitz-holder-contraction"
+        ]
+      }
+    ]
+  }
+]

@@ -1,9 +1,9 @@
 // Run hash-attested paired judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Each model has its own twelve-slot cross-process pool. DeepSeek and Terra
+// Each model has its own sixteen-slot cross-process pool. DeepSeek and Terra
 // start their next item as soon as one of their own slots is free, without
-// waiting for the other model on the same item. At most 24 calls run combined.
+// waiting for the other model on the same item. At most 32 calls run combined.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
@@ -95,11 +95,11 @@ const currentContextHash = (id) => {
 // once per item rather than parsing the same A/B-pair context twice before any
 // API call can start.
 const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
-// Owner policy, 2026-08-01: independently cap each judge lane at 12 calls.
+// Owner policy, 2026-08-01: independently cap each judge lane at 16 calls.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 const MODEL_CONCURRENCY = Object.freeze({
-  [DEEPSEEK]: 12,
-  [TERRA]: 12,
+  [DEEPSEEK]: 16,
+  [TERRA]: 16,
 });
 const MAX_CONCURRENT_CALLS = Object.values(MODEL_CONCURRENCY).reduce((sum, n) => sum + n, 0);
 const RETRY_EXIT = 4;
@@ -108,7 +108,7 @@ const LENGTH_RETRY_EXIT = 5;
 // pool alone would let two resumed sweeps exceed a model lane's cap. Directory
 // slots are atomic on this host filesystem; each holder refreshes its mtime,
 // and an abandoned slot is reclaimed only after its heartbeat is stale for five
-// minutes. Model-specific directories preserve the independent 12/12 caps.
+// minutes. Model-specific directories preserve the independent 16/16 caps.
 const GLOBAL_SLOT_DIR = "/tmp/prestige-math-library-judge-slots";
 const SLOT_STALE_MS = 5 * 60_000;
 const SLOT_HEARTBEAT_MS = 30_000;

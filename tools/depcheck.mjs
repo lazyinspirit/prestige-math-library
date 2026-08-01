@@ -51,6 +51,7 @@ const PREFIX_OF_KIND = {
   'false-statement': 'fs', remark: 'rem',
 };
 const AUTHORSHIP_VALUES = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
+const PROOF_PROVENANCE_VALUES = new Set([...AUTHORSHIP_VALUES, 'not-supplied', 'not-applicable']);
 const AUTHORSHIP_KINDS = new Set(Object.keys(PREFIX_OF_KIND));
 
 const errors = [];
@@ -129,6 +130,9 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   const id = scalar(fm, 'id');
   const kind = scalar(fm, 'kind');
   const authorship = scalar(fm, 'authorship');
+  const provenanceStatement = nested(fm, 'provenance', 'statement');
+  const provenanceProof = nested(fm, 'provenance', 'proof');
+  const provenancePresent = /^provenance:[ \t]*(?:#.*)?$/m.test(fm);
   const stem = basename(f, '.md');
 
   if (!id) { err('id-filename', `${file}: no id in frontmatter`); continue; }
@@ -141,6 +145,12 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     err('authorship-invalid', `${file}: authorship must be ai-generated, ai-altered, or literature-derived, got "${authorship}"`);
   if (authorship !== undefined && !AUTHORSHIP_KINDS.has(kind))
     err('authorship-kind', `${file}: authorship is allowed only on a mathematical content item, got kind "${kind}"`);
+  if (provenancePresent && !AUTHORSHIP_VALUES.has(provenanceStatement))
+    err('provenance-statement-invalid', `${file}: provenance.statement must be ai-generated, ai-altered, or literature-derived`);
+  if (provenancePresent && !PROOF_PROVENANCE_VALUES.has(provenanceProof))
+    err('provenance-proof-invalid', `${file}: provenance.proof must be ai-generated, ai-altered, literature-derived, not-supplied, or not-applicable`);
+  if (provenanceProof === 'not-applicable' && !['definition', 'remark'].includes(kind))
+    err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for definitions and remarks`);
 
   const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((m) => m[1].trim());
 

@@ -59,6 +59,31 @@ the blocks a partition of $A$ automatically, so that
 [[thm-sum-rule]] and [[thm-cardinality-of-a-set-of-functions]] apply verbatim.
 $\mathcal{B}(A,k)$ is a subset of the finite set $m^{A}$, hence finite.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=0.72cm]
+  \draw (0,1.75) ellipse (0.9 and 2.25);
+  \draw (4.4,1.75) ellipse (0.9 and 1.65);
+  \node at (0,4.35) {$A$};
+  \node at (4.4,3.8) {$m=3$};
+  \node (a1) at (0,3.25) {$a_1$};
+  \node (a2) at (0,2.65) {$a_2$};
+  \node (b1) at (0,1.75) {$b_1$};
+  \node (c1) at (0,0.85) {$c_1$};
+  \node (c2) at (0,0.25) {$c_2$};
+  \node (c3) at (0,-0.35) {$c_3$};
+  \node (z0) at (4.4,2.75) {$0$};
+  \node (z1) at (4.4,1.75) {$1$};
+  \node (z2) at (4.4,0.75) {$2$};
+  \draw[->] (a1) -- (z0);
+  \draw[->] (a2) -- (z0);
+  \draw[->] (b1) -- (z1);
+  \draw[->] (c1) -- (z2);
+  \draw[->] (c2) -- (z2);
+  \draw[->] (c3) -- (z2);
+  \node at (2.2,-1.05) {$(|c^{-1}(0)|,|c^{-1}(1)|,|c^{-1}(2)|)=(2,1,3)$};
+\end{tikzpicture}
+```
+
 **The hypothesis is part of the definition, and it is forced.** The fibres
 $c^{-1}[\{i\}]$, $i < m$, are pairwise disjoint with union $A$, so
 [[thm-sum-rule]] gives

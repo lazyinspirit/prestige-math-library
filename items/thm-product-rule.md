@@ -47,6 +47,27 @@ At $m = 0$ clause 2 reads $\big\lvert\prod_{i<0} A_i\big\rvert = 1$: there is
 exactly one function with domain $\varnothing$, the empty function, and the empty
 product is $1$. Both sides are computed, not stipulated.
 
+```tikz
+\begin{tikzpicture}[x=1.45cm,y=0.9cm]
+  \node at (0,2.45) {$a_0$};
+  \node at (1,2.45) {$a_1$};
+  \node at (2,2.45) {$a_2$};
+  \node at (-1.1,1.5) {$b_0$};
+  \node at (-1.1,0.5) {$b_1$};
+  \draw (-0.5,0) rectangle (2.5,2);
+  \draw (0.5,0) -- (0.5,2);
+  \draw (1.5,0) -- (1.5,2);
+  \draw (-0.5,1) -- (2.5,1);
+  \node at (0,1.5) {$(a_0,b_0)$};
+  \node at (1,1.5) {$(a_1,b_0)$};
+  \node at (2,1.5) {$(a_2,b_0)$};
+  \node at (0,0.5) {$(a_0,b_1)$};
+  \node at (1,0.5) {$(a_1,b_1)$};
+  \node at (2,0.5) {$(a_2,b_1)$};
+  \node at (1,-0.6) {$|A\times B|=3\cdot2=6$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** Finite sets $A$, $B$ and a finite list $A_0, \dots, A_{m-1}$ of finite sets. Recall $\sigma(m) = m \cup \{m\}$ and $m = \{\,i : i < m\,\}$.

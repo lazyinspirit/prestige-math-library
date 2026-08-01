@@ -1685,44 +1685,53 @@ outside scope. MST algorithms carry no computational-complexity assertion.
 
 Forward references: NONE.
 
-## GT-3. Eulerian Circuits, Hamiltonian Cycles and Tournaments  (order 193, combinatorics)
+## GT-3. Eulerian Circuits, Hamiltonian Cycles and Tournaments  (order 211, combinatorics)
 
-`requires`: `trees-forests-and-spanning-trees` (191)
+`requires`: `trees-forests-and-spanning-trees` (209)
 
-DEFS: Eulerian trail and circuit; Hamiltonian path and cycle; tournament;
-Hamiltonian-connected; the closure of a graph (for Bondy–Chvátal).
+DEFS: multigraph degree with loops counted twice; digraph indegree and
+outdegree with a loop counted once in each; underlying/weak connectivity;
+directed walks, trails, paths and cycles and strong connectivity; Euler trails
+and circuits in multigraphs and digraphs; Hamilton paths and cycles,
+Hamiltonian and Hamilton-connected graphs; the Bondy–Chvátal closure; finite
+tournaments.
 
-THMS: **Euler's theorem** (landmark): a connected graph has an Eulerian circuit
-iff every degree is even, and an Eulerian trail iff exactly two degrees are odd
-— with the directed version stated separately; Hierholzer's construction as the
-existence proof; **Dirac's theorem** ($\delta \ge n/2$, $n \ge 3$ $\Rightarrow$
-Hamiltonian, landmark); **Ore's theorem** (the degree-sum condition, which
-implies Dirac — state the implication as an item, so the two are not two
-notions); Bondy–Chvátal via the closure; every tournament has a Hamiltonian
-path (Rédei, an induction); every strongly connected tournament is Hamiltonian
-(Camion) — keep if the page is under the cap; a Hamiltonian graph is
-2-connected.
+THMS: the two focused Hierholzer lemmas (a maximal unused-edge trail closes,
+and edge-disjoint closed trails sharing a vertex splice); **Euler's theorem**
+for connected finite undirected multigraphs, proved constructively; the exact
+trail corollary: an Euler trail exists iff there are **zero or two** odd-degree
+vertices, and an open Euler trail exists exactly in the two-odd-vertex case;
+the directed Euler-circuit theorem for finite digraphs without isolated
+vertices: weak connectivity plus equality of indegree and outdegree at every
+vertex; the Hamilton-cycle vertex-deletion component bound and the corollary
+that a Hamiltonian graph on at least three vertices is 2-connected; the
+Bondy–Chvátal edge-addition lemma, closure well-definedness, and closure
+theorem; **Ore's theorem**; the implication Dirac condition => Ore condition;
+**Dirac's theorem**; **Rédei's theorem** by induction; the tournament
+cycle-insertion lemma; **Camion's theorem** for strongly connected tournaments
+on at least three vertices.
 
-FS: a connected graph with all degrees even has a Hamiltonian cycle; Dirac's
-bound $n/2$ can be lowered to $n/2 - 1$ (witness: two disjoint copies of
-$K_{n/2}$, and the near-extremal witness is the point); every graph with a
-Hamiltonian path has a Hamiltonian cycle; Eulerian and Hamiltonian are dual
-notions.
+B: the Königsberg bridges degree obstruction; two triangles sharing one vertex
+as Eulerian but non-Hamiltonian; $K_4$ as Hamiltonian but non-Eulerian; $P_3$
+as having a Hamilton path but no Hamilton cycle; two disjoint copies of $K_m$
+showing sharpness one below Dirac's even-order threshold; an explicit Hamilton
+cycle in $K_{3,3}$; $K_4$ plus a vertex adjacent to two clique vertices as Ore
+without Dirac; the transitive tournament; the directed three-cycle tournament.
 
-B: the Königsberg bridges as the historical instance, stated as a multigraph
-degree computation; the Petersen graph is not Hamiltonian (a real, finite case
-analysis — **keep only if it can be written as a bounded number of numbered
-steps**; if not, DROP with a note, because a hand-waved case check is worse than
-no item); $K_{3,3}$ is Hamiltonian; a graph satisfying Ore but not Dirac.
+DROP: the Petersen non-Hamiltonicity item. No bounded, dependency-closed proof
+was located that is short enough for this pair, and a hand-waved finite case
+check is not licensed. It can be restored on a later examples page with an
+explicit case decomposition.
 
-CEX: an Eulerian non-Hamiltonian graph and a Hamiltonian non-Eulerian one; a
-graph just below Dirac's bound with no Hamiltonian cycle.
-
-Traps. (i) Hierholzer's argument is a construction and every step must be a
-numbered step; "keep walking until stuck" is not one. (ii) There is no
-characterisation of Hamiltonicity, and the page must say so plainly, in the
-non-decaying form (what is proved here), not as a claim about mathematics at
-large. (iii) The Petersen item is the page's size risk.
+Traps. Euler trail includes the closed case, so "iff exactly two odd degrees"
+is false; use zero or two, and reserve exactly two for an open trail. Do not
+confuse weak connectivity with strong connectivity in the directed Euler
+theorem. The local cycle convention has at least three distinct vertices, so
+Camion's theorem is stated for order at least three. Every Hierholzer extension
+and splice is a numbered constructive step. No false-statement items are
+created: the scaffold's false sentences are removed rather than promoted into
+AI-generated claims. There is no characterisation of Hamiltonicity among the
+results proved on this page.
 
 Forward references: NONE.
 

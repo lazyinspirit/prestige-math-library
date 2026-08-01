@@ -30,6 +30,32 @@ $$\{a_1<b_1\},\qquad\{a_2<b_2\},\qquad\{a_3<b_3\}$$
 
 is a chain cover. The width is exactly $3$, and this cover is minimum.
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  elt/.style={draw,circle,minimum size=8mm,inner sep=1pt,fill=white},
+  anti/.style={elt,draw=orange!85!black,fill=orange!18,line width=.9pt}
+]
+\node[anti] (a1) at (-2.4,0) {$a_1$};
+\node[anti] (a2) at (0,0) {$a_2$};
+\node[anti] (a3) at (2.4,0) {$a_3$};
+\node[elt] (b1) at (-2.4,1.7) {$b_1$};
+\node[elt] (b2) at (0,1.7) {$b_2$};
+\node[elt] (b3) at (2.4,1.7) {$b_3$};
+
+\draw[blue!70!black,line width=1.2pt] (a1)--(b1);
+\draw[green!50!black,line width=1.2pt] (a2)--(b2);
+\draw[red!70!black,line width=1.2pt] (a3)--(b3);
+
+\node[font=\scriptsize] at (-2.4,2.35) {$C_1$};
+\node[font=\scriptsize] at (0,2.35) {$C_2$};
+\node[font=\scriptsize] at (2.4,2.35) {$C_3$};
+\draw[orange!85!black,dashed] (-3.05,-.55)--(3.05,-.55);
+\node[font=\scriptsize,anchor=north] at (0,-.62)
+  {maximum antichain $\{a_1,a_2,a_3\}$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The six-element poset $P$ described in the Example.

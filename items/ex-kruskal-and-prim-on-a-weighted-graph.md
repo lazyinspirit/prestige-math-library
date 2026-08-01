@@ -24,6 +24,23 @@ pipeline_run: null
 
 Let $G$ have edges $ab,bc,cd,ad,ac$ of weights $1,2,3,4,5$, respectively. Kruskal's procedure chooses $ab,bc,cd$. Prim's procedure started at $a$ makes the same choices, and the resulting MST has total weight $6$.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\small}]
+  \tikzset{vertex/.style={circle,draw,fill=white,inner sep=1.5pt,minimum size=5mm}}
+  \node[vertex] (a) at (-1.4,1) {$a$};
+  \node[vertex] (b) at (1.4,1) {$b$};
+  \node[vertex] (c) at (1.4,-1) {$c$};
+  \node[vertex] (d) at (-1.4,-1) {$d$};
+  \draw[gray] (a)--node[left,fill=white,inner sep=1pt] {$4$} (d);
+  \draw[gray] (a)--node[below,fill=white,inner sep=1pt] {$5$} (c);
+  \draw[blue,very thick] (a)--node[above,fill=white,inner sep=1pt] {$1$} (b);
+  \draw[blue,very thick] (b)--node[right,fill=white,inner sep=1pt] {$2$} (c);
+  \draw[blue,very thick] (c)--node[below,fill=white,inner sep=1pt] {$3$} (d);
+  \node[blue] at (0,-1.7) {chosen in order: ab, bc, cd; total weight 6};
+  \node at (0,1.7) {Kruskal and Prim from $a$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The weighted graph $(G,w)$ above.

@@ -18,6 +18,14 @@
 > Do not run GPT-family work through
 > ofox.
 
+> **Context continuity (owner, 2026-08-01).** At 60% of your own context length,
+> and before a context-heavy operation when practical, update your namespaced
+> Alpha report/handoff with your active substage, owned artifacts, completed
+> checks, frozen-text state, open mathematical constraints, and exact next
+> action. Never record credentials or copied transcripts. If compaction occurs,
+> read it first, verify the action-critical files, and continue immediately;
+> this is not a pause or a request for orchestrator replay.
+
 Read `LEVELS.md`, `CLAUDE.md`, `SCHEMA.md`, `ARCHITECTURE.md`, and the relevant
 batch files before acting.
 
@@ -47,29 +55,35 @@ what a result is for in place of its proposition.
 You may add or delete in-flight definitions, propositions, theorems, lemmas,
 corollaries, examples, counterexamples, false-statements and remarks as needed.
 If you add a result that needs a proof, **you personally author the proof** and
-run the gates. Published items outside the in-flight level are read-only unless
-the owner explicitly instructs otherwise; report suspected published defects.
-Never rename an id on `main`.
+run the gates. Published items outside the in-flight level are read-only except
+for the owner's obvious-published-dependency-repair delegation in `CLAUDE.md`.
+Use it only for a current dependency's unambiguous falsehood, with an exact
+reputable source and conventions or a written direct elementary derivation.
+Own `research/level<n>-published-dependency-repairs.md`; take a dedicated
+touch baseline, verify every computed `impact-audit` consumer, retag a material
+AI repair honestly, clear stale verification, and arrange a current paired
+rejudge. Independently certify a Beta repair, but when you authored the repair,
+obtain the independent Step-6 reader's check instead; neither repairer
+self-certifies. Do not use the exception for a convention choice, an id
+rename/removal, a speculative theorem change, or a partial repair. Never rename
+an id on `main`.
 
 Every future mathematical-content item, including definitions, propositions,
 theorems, lemmas, corollaries, examples, counterexamples, false statements, and
-mathematical remarks, must carry the reader-facing `authorship` tag. Verify its
-provenance from the source ledger and actual edits: `literature-derived` only
-for faithful source text with cosmetic edits; `ai-altered` for a material AI
-reformulation, extension, repair, generated proof, or changed witness; and
-`ai-generated` where the particular claim, proof, witness, or refutation is not
-both well-established and documented in reliable literature. This is not a
-novelty claim and `proved_here` separately says whether a complete proof is
-local. Do not backfill legacy content. If you or a Step-6 reader materially
-alters literature-derived mathematical text, retag it `ai-altered`; an already
-AI-generated item remains `ai-generated`. Treat `ai-generated` as a heightened
-truth-risk flag: whenever there is concrete suspicion about its Statement,
-example, witness, or refutation, search for a relevant counterexample before
-accepting a proof repair. A repaired proof does not by itself establish the
-Statement; narrow, replace, or drop the item if the search falsifies it.
+mathematical remarks, must carry separate `provenance.statement` and
+`provenance.proof` values. Verify each against the source ledger and actual
+edits. The Statement/Construction, not the local proof, controls dependency
+eligibility. Reject every `deps` target whose statement is `ai-generated`,
+regardless of proof provenance. Literature-derived and AI-altered statements
+are eligible, but never automatically trusted: reopen the target and, whenever
+an adaptation leaves doubt about its exact claim, hypotheses, conclusion, or
+conventions, verify it against reputable literature before accepting the edge.
+An AI-generated Statement/Construction is a heightened truth-risk flag; search
+for a relevant counterexample whenever there is concrete suspicion. Do not
+backfill legacy content.
 
-For every load-bearing dependency, confirm that an `ai-generated` item was not
-selected where a well-established, literature-backed route was available. A
+For every load-bearing dependency, confirm the target statement is eligible
+under that rule. A
 `proved_here: false` dependency is permitted only as the documented last resort:
 its source-cited `rem-` must reproduce an exact reputable statement, and the
 batch notes and proof contract must explain the failed local proof route and its
@@ -81,14 +95,10 @@ local attempt, and necessity must be concrete rather than placeholders.
 Enforce generated-claim minimization. Reject a newly invented AI-generated
 theorem, proposition, definition, false statement, or mathematical remark;
 source-backed material must instead carry the appropriate source-derived
-provenance. A generated lemma is permitted only for a documented complex
-parent-proof decomposition, with its exact subclaim and consumer recorded; an
-easily verifiable corollary or a checkable example/counterexample must not
-become dependency-spine infrastructure. Require an inline or established
-replacement whenever it avoids a load-bearing AI-generated statement.
-Verify `generation` frontmatter from disk: a generated lemma names its parent,
-subclaim, consumer, and why-not-inline record, and only that parent may directly
-depend on it; generated corollaries/examples/counterexamples have no consumers.
+provenance. A generated corollary or checkable example/counterexample may not
+become dependency infrastructure; a would-be generated decomposition lemma
+belongs inline or needs a source-backed replacement. Verify `generation`
+frontmatter from disk for the permitted non-load-bearing roles.
 For every `literature-derived` or `ai-altered` item, verify from disk that
 `sources.references` contains a reader-visible source URL before accepting the
 provenance label.
@@ -114,7 +124,11 @@ terse but licensed routine move is not an error. Require id, exact location,
 and the dependency text or counterexample supporting every finding. For any
 AI-generated item assigned to them, also require a targeted counterexample
 search whenever a concrete truth concern arises; do not let a plausible repaired
-proof substitute for testing the Statement or witness.
+proof substitute for testing the Statement or witness. For every dependency,
+require statement-level provenance: reject an `ai-generated` Statement/Construction;
+for an AI-altered target, consult reputable literature whenever the adaptation
+leaves doubt about its exact statement or conventions. The proof-provenance
+label is not a reason to reject an otherwise eligible statement.
 
 You are the **sole Alpha adjudicator**. Verify every reader report from disk and
 either confirm it, refute it with the relevant text or mathematics, or apply the
@@ -139,7 +153,7 @@ dependency citation, fix defects, and report coverage.
 
 After all independent-reader and proof-refuter reports arrive, adjudicate every reported
 mistake or candidate defect from disk:
-changed items, page files, dependency lists, authorship tags, added/deleted
+changed items, page files, dependency lists, component-provenance tags, added/deleted
 results, stale judge blocks, and local gate output. Verify every A-page summary has exactly two
 nonempty prose paragraphs under 150 words each: mathematical background and
 actually used declared dependencies first; main definitions, theorems, and

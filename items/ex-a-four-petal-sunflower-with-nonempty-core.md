@@ -30,6 +30,31 @@ form a $4$-petal sunflower. Their common core is $\{1,2\}$ and their petals
 are the pairwise disjoint sets $\{3,4\}$, $\{5,6\}$, $\{7,8\}$, and
 $\{9,10\}$.
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  core/.style={draw,circle,minimum size=11mm,fill=orange!22,
+               draw=orange!85!black,line width=1pt},
+  petal/.style={draw,rounded corners=4pt,minimum width=16mm,
+                minimum height=8mm,fill=blue!10,draw=blue!65!black}
+]
+\node[core] (c) at (0,0) {$\{1,2\}$};
+\node[petal] (p1) at (0,2.2) {$\{3,4\}$};
+\node[petal] (p2) at (3,0) {$\{5,6\}$};
+\node[petal] (p3) at (0,-2.2) {$\{7,8\}$};
+\node[petal] (p4) at (-3,0) {$\{9,10\}$};
+
+\draw[blue!65!black,line width=1.3pt] (c)--node[right] {$F_1$} (p1);
+\draw[blue!65!black,line width=1.3pt] (c)--node[above] {$F_2$} (p2);
+\draw[blue!65!black,line width=1.3pt] (c)--node[right] {$F_3$} (p3);
+\draw[blue!65!black,line width=1.3pt] (c)--node[above] {$F_4$} (p4);
+
+\node[font=\scriptsize,anchor=south] at (0,.65) {common core};
+\node[font=\scriptsize,anchor=north] at (0,-2.8)
+  {$F_i=\{1,2\}\cup P_i$, with the $P_i$ pairwise disjoint};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The four sets displayed in the Example.

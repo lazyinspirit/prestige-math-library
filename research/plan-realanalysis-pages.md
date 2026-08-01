@@ -753,13 +753,19 @@ derivatives are also deferred until their prerequisites are built. The
 polynomial oscillator removes the need for a sine/cosine forward reference.
 
 **RA-17 Convexity** <- RA-16
-convex and concave functions; midpoint convexity; supporting lines; convex iff
-the derivative is increasing iff f'' >= 0; convex implies continuous on the
-interior; **convex implies differentiable off a countable set, with one-sided
-derivatives everywhere**; Jensen's inequality; inflection points. B: |x| convex
-and not differentiable; a **discontinuous midpoint-convex function** (midpoint
-convexity without measurability does not give convexity); Jensen applied;
-x^4 defeats the second-derivative test.
+convex, strictly convex, concave and midpoint-convex functions; the three-slope
+inequality; local Lipschitz continuity in the interior; finite one-sided
+derivatives and supporting lines; convex functions are differentiable off an
+at-most-countable set; for differentiable functions, convexity iff the derivative
+is nondecreasing, and for twice-differentiable functions iff the second derivative
+is nonnegative; a differentiable convex function has continuous derivative;
+continuous midpoint convexity implies convexity; finite Jensen; local minima are
+global and strict convexity gives uniqueness; inflection points by change of
+convexity. B: absolute value is convex (its already-published
+nondifferentiability item is linked but not cited); weighted mean-square from
+finite Jensen; assuming Choice, a discontinuous midpoint-convex Hamel coefficient
+map; and the cubic inflection point. The already-published x^4
+second-derivative-test witness is not duplicated.
 **Scope note 2026-07-27.** The parenthetical justification for the discontinuous
 midpoint-convex witness previously read "midpoint convexity without
 measurability does not give convexity". Measurability is out of scope, so the
@@ -776,6 +782,14 @@ level), with `lem-restriction-of-scalars` making R a Q-vector space. Cite it;
 do not rebuild it. (Batch 1's note saying order 70 "has no item list" predates
 the level-9 splice and is superseded — the page has 20 items in
 `plan-spec.json` as of 2026-07-28.)
+
+FRONTIER-7 BATCH-3 AMENDMENT (2026-08-01). The midpoint-convex regularity
+theorem derives dyadic approximation inline because
+def-the-dyadic-rationals-of-the-unit-interval is homed after this page and is
+not a legal dependency. When that later definition is read, the two dyadic
+conventions must agree. The Hamel witness cites only the A-page items
+lem-hamel-basis-exists and thm-cauchy-functional-equation-regularity; it does
+not cite the published B-page Hamel example.
 
 ### Block VII: the Riemann integral
 
@@ -1094,19 +1108,25 @@ nowhere are deferred because their constructions are not dependency-closed
 here.
 
 **RA-27 The Logarithm, General Powers, and the Sup Definition** <- RA-26, RA-19
-log as exp inverse; **E4**: L(x) = int_1^x dt/t is well defined (integer powers
-only, so no circularity), strictly increasing, L' = 1/x, L(xy) = L(x) + L(y),
-bijective onto R, and its inverse solves y' = y, so E4 = E3. **E7** Rudin's
-sup-over-rationals a^x = sup{a^q : q rational, q < x} and **E8** Tao's
-limit-over-rationals (DISTINCT constructions, both needing RA-13's dense-extension
-theorem). **E10** Landau's log x = lim 2^n (x^{1/n} - 1), with no integral and no
-series. Then: the log laws including log(x^r) = r log x for REAL r; the series
+log as the inverse of the already-built exp; prove that this equals
+L(x) = int_1^x dt/t by comparing derivatives and the value at 1. **E7**: for
+a > 1 define the rational-supremum power by
+sup{a^q : q rational, q < x}; define the 0 < a < 1 case through the reciprocal
+base, and a = 1 separately. (The unqualified supremum formula is false for
+0 < a < 1 because that set is unbounded above.) Prove this construction equals
+exp(x log a). **E8**: every rational sequence q_n -> x has a^{q_n} -> a^x,
+independently of the sequence. **E10** (Landau root limit):
+log x = lim_{n->infinity} 2^n (x^{1/2^n} - 1), with no integral or log series.
+Then: the log laws including log(x^r) = r log x for REAL r; the series
 for log(1+x) on (-1,1] with the endpoint by Abel; a^x := exp(x log a);
 **`thm-power-agrees-with-rational-exponent`** (the owner's explicit requirement:
 a^{p/q} in the new sense is the old algebraic q-th root of a^p); the laws of real
 exponents; d/dx a^x and d/dx x^alpha; change of base; log grows slower than every
-positive power; **the p-series for real p, closing RA-08**; convexity of exp and
-hence AM-GM, **Young, Holder, Minkowski**; hyperbolic functions with the full
+positive power; **the p-series for real p, closing RA-08**; the explicit two-point inequality
+exp((1-t)x+ty) <= (1-t)exp(x)+t exp(y), 0 <= t <= 1, proved directly by
+one-variable calculus without citing the later general convexity page; hence
+weighted AM-GM for real weights, and **Young, Holder, Minkowski** for real
+exponents; hyperbolic functions with the full
 identity and inverse-logarithm inventory. B: 2^{sqrt 2} by the sup definition and
 by exp(sqrt 2 log 2), agreeing; the alternating harmonic series equals log 2;
 growth-rate comparisons; x^x -> 1 as x -> 0+; the log series diverges at -1.
@@ -1127,7 +1147,17 @@ the nonnegative criterion with both elementary bounds
 1 + sum p <= prod(1+p) <= 1/(1 - sum p), the (1 - p_k) form including
 "partial products -> 0 when sum p diverges", and absolute convergence from
 sum |p_k|. Build the signed criterion ON that theorem plus this page's
-log(1+x) series; do not restate the log-free bounds. If this page is
+log(1+x) series; do not restate the log-free bounds.
+
+Under this library's definition, finitely many zero factors are allowed: if
+p_n = -1 at an initial index, the product may converge with value 0. Therefore
+the signed criterion is stated with no artificial hypothesis p_n != -1 for
+every n. From sum p_n^2 < infinity one gets p_n -> 0, hence eventually
+1+p_n > 0; apply log only on that tail and use
+log(1+t) = t + O(t^2). Tail invariance then proves both directions and handles
+all finite initial factors exactly as `def-infinite-product` requires.
+
+If this page is
 scaffolded without the criterion, the deferral becomes a silent loss — this
 note is the plan line's only carrier.
 
@@ -1140,6 +1170,14 @@ remark); the smallest positive zero; **pi := 2 x_0**; **the convention split**
 (Tao's pi := inf{x > 0 : sin x = 0}, no factor 2) with the lemma reconciling them
 via sin 2x = 2 sin x cos x; values at multiples of pi/2; **2pi is the fundamental
 period**; monotonicity intervals, zero sets and ranges; tan, cot, sec, csc.
+The proof order is binding: establish sin/cos series convergence and
+derivatives; prove uniqueness for y''=-y by the constant energy of the
+difference; obtain the addition formulas; use the alternating bounds
+sin x >= x-x^3/6 > 0 on (0,2] and cos 2 <= -1/3; define gamma as the unique
+zero of cos in (0,2), then pi := 2 gamma. Reconcile the alternative first-sine-
+zero convention only after the shift formulas show sin x > 0 on (0,pi) and
+sin pi = 0. The limit sin x/x = 1 is then the derivative of sin at zero; the
+sector-area argument remains only a false-statement/refutation item.
 B: **Bartle & Sherbert's bound sqrt 2 < gamma < sqrt(6 - 2 sqrt 3)**, giving
 2.828 < pi < 3.185; the classical x sin(1/x) and x^2 sin(1/x) restated (closing
 the loop with RA-16's spline versions); **`fs-sin-x-over-x-by-sector-areas`**:
@@ -1242,18 +1280,29 @@ fails over C** (path dependence, valid only mod 2 pi i).
 ### Block X: several variables
 
 **RA-34 The Total Derivative in R^m -> R^n** <- RA-22, RA-16
-directional and partial derivatives; the **total (Frechet) derivative**;
-uniqueness; differentiable implies continuous; the derivative computes all
-directional derivatives; the Jacobian; **continuous partials imply
-differentiability**; the chain rule; the gradient and steepest ascent; the mean
-value inequality; a vanishing derivative on a connected open set implies
-constancy. B: xy/(x^2+y^2) (partials exist, discontinuous); x^2 y/(x^4 + y^2)
-(every straight-line limit is 0, no limit exists); **x^3/(x^2+y^2)** (all
-directional derivatives exist, not differentiable); **y(x^2+y^2)/x** (all
-directional derivatives vanish at 0, discontinuous on a whole line); a
-differentiable function that is not C^1; Lebl's **angle function on a slit
-annulus** (bounded derivative, not globally Lipschitz: convexity is essential in
-the mean value inequality).
+a native Euclidean definition of a linear map R^m -> R^n, its unique matrix
+representation and a norm bound, with an explicit future agreement seam to
+the unbuilt general linear-map page; convex subsets of Euclidean space;
+directional and partial derivatives; the total (Fréchet) derivative;
+uniqueness; a local linear increment bound and differentiable implies
+continuous; the derivative computes all directional and partial derivatives;
+the Jacobian; the gradient and steepest ascent; algebra of derivatives; the
+chain rule; a coordinate-telescoping lemma; continuous partials imply
+differentiability; the mean-value inequality on convex open sets; and a zero
+derivative on a convex open set implies constancy. The stronger connected-open
+statement is deferred until connectedness and Euclidean polygonal
+connectedness are legal dependencies.
+
+B: the polynomial map (x,y) -> (1+x+2y+x^2, 2x+3y+xy) and its Jacobian;
+xy/(x^2+y^2) (partials exist, discontinuous); x^2y/(x^4+y^2) (every
+straight-line restriction tends to zero, but the function is discontinuous);
+x^2y/(x^2+y^2) (all directional derivatives exist, not differentiable);
+y(x^2+y^2)/x off x=0, extended by zero on x=0 (all directional derivatives
+at zero vanish, but the function is discontinuous); and a locally constant
+step map on the disconnected open set R minus {0} (zero derivative but no
+global Lipschitz bound). The already-published differentiable-but-not-C1
+example is not duplicated, and Lebl’s slit-annulus angle example is deferred
+until its angle-function machinery is available.
 
 **RA-35 Mixed Partials, Taylor, and Extrema in Several Variables** <- RA-34
 C^k in several variables; multi-index notation; the Hessian;

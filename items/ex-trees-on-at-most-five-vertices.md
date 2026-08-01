@@ -26,6 +26,47 @@ Up to isomorphism, the numbers of trees on $1,2,3,4,5$ vertices are respectively
 
 $$K_1;\quad K_2;\quad P_3;\quad P_4,K_{1,3};\quad P_5,K_{1,4},\text{ and the tree with degree sequence }(3,2,1,1,1).$$
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\scriptsize}]
+  \tikzset{v/.style={circle,draw,fill=white,inner sep=0pt,minimum size=3.5mm}}
+
+  \begin{scope}[shift={(0,2.2)}]
+    \node[v] at (0,0) {};
+    \node at (0,-0.55) {$K_1$};
+  \end{scope}
+  \begin{scope}[shift={(2.2,2.2)}]
+    \node[v] (a) at (-0.4,0) {}; \node[v] (b) at (0.4,0) {}; \draw (a)--(b);
+    \node at (0,-0.55) {$K_2$};
+  \end{scope}
+  \begin{scope}[shift={(4.8,2.2)}]
+    \node[v] (a) at (-0.7,0) {}; \node[v] (b) at (0,0) {}; \node[v] (c) at (0.7,0) {};
+    \draw (a)--(b)--(c); \node at (0,-0.55) {$P_3$};
+  \end{scope}
+  \begin{scope}[shift={(8,2.2)}]
+    \node[v] (a) at (-1.05,0) {}; \node[v] (b) at (-0.35,0) {}; \node[v] (c) at (0.35,0) {}; \node[v] (d) at (1.05,0) {};
+    \draw (a)--(b)--(c)--(d); \node at (0,-0.55) {$P_4$};
+  \end{scope}
+
+  \begin{scope}[shift={(0.8,0)}]
+    \node[v] (c) at (0,0) {}; \node[v] (a) at (-0.75,0) {}; \node[v] (b) at (0.5,0.65) {}; \node[v] (d) at (0.5,-0.65) {};
+    \draw (c)--(a) (c)--(b) (c)--(d); \node at (0,-1) {$K_{1\hbox{,}3}$};
+  \end{scope}
+  \begin{scope}[shift={(4,0)}]
+    \node[v] (a) at (-1.4,0) {}; \node[v] (b) at (-0.7,0) {}; \node[v] (c) at (0,0) {}; \node[v] (d) at (0.7,0) {}; \node[v] (e) at (1.4,0) {};
+    \draw (a)--(b)--(c)--(d)--(e); \node at (0,-0.55) {$P_5$};
+  \end{scope}
+  \begin{scope}[shift={(7.6,0)}]
+    \node[v] (c) at (0,0) {}; \node[v] (a) at (-0.8,0) {}; \node[v] (b) at (0.8,0) {}; \node[v] (d) at (0,0.8) {}; \node[v] (e) at (0,-0.8) {};
+    \draw (c)--(a) (c)--(b) (c)--(d) (c)--(e); \node at (0,-1.15) {$K_{1\hbox{,}4}$};
+  \end{scope}
+  \begin{scope}[shift={(11,0)}]
+    \node[v] (c) at (0,0) {}; \node[v] (a) at (-0.75,0.55) {}; \node[v] (b) at (-0.75,-0.55) {}; \node[v] (d) at (0.75,0) {}; \node[v] (e) at (1.5,0) {};
+    \draw (c)--(a) (c)--(b) (c)--(d)--(e);
+    \node at (0.4,-1) {(3, 2, 1, 1, 1)};
+  \end{scope}
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** A tree $T$ on at most five vertices.

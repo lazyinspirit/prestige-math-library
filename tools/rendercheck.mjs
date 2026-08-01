@@ -130,6 +130,30 @@ const tryKatex = (rel, tex, displayMode) => {
   }
 };
 
+// ItemBody renders phase-format sections through ProofBlock, not the prose
+// diagram extractor. A TikZ fence there therefore reaches MathMarkdown as raw
+// code even when its TeX itself is valid. Keep this structural check here with
+// the other source-to-renderer mismatches.
+const proofRenderedSections = new Set([
+  "Facts & Assumptions",
+  "Proof",
+  "Refutation",
+  "Counterexample",
+  "Verification",
+]);
+
+const proofSectionTikzFences = (body) => {
+  const out = [];
+  let section = "(preamble)";
+  for (const [index, line] of body.split("\n").entries()) {
+    const heading = line.match(/^## (.+)$/);
+    if (heading) section = heading[1].trim();
+    if (/^```tikz(?:cd)?\s*$/.test(line) && proofRenderedSections.has(section))
+      out.push({ line: index + 1, section });
+  }
+  return out;
+};
+
 // ------------------------------------------------------------------ checks
 for (const path of targets) {
   let src;
@@ -141,6 +165,14 @@ for (const path of targets) {
   }
   const rel = relative(REPO, path);
   const { body } = splitFrontmatter(src);
+
+  for (const fence of proofSectionTikzFences(body))
+    err(
+      rel,
+      "tikz-in-proof-section",
+      `a TikZ fence in ## ${fence.section} bypasses the prose diagram renderer and displays as raw code; move it to a non-proof prose section`,
+      `line ${fence.line}`,
+    );
 
   // ---- unsupported TeX delimiters
   // The negative lookbehind deliberately excludes TeX line-break spacing such

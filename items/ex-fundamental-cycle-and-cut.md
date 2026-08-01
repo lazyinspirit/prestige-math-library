@@ -24,6 +24,31 @@ pipeline_run: null
 
 Let $G$ have vertices $\{1,2,3,4\}$ and edges $\{12,23,34,14,13\}$. For the spanning tree $T$ with edges $\{12,23,34\}$, the edge $14$ has fundamental cycle $1,2,3,4,1$. The edge $23$ has fundamental cut $\{23,13,14\}$.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\small}]
+  \tikzset{vertex/.style={circle,draw,fill=white,inner sep=1.4pt,minimum size=5mm}}
+  \begin{scope}[shift={(0,0)}]
+    \node[vertex] (a1) at (-1,1) {$1$}; \node[vertex] (a2) at (1,1) {$2$};
+    \node[vertex] (a3) at (1,-1) {$3$}; \node[vertex] (a4) at (-1,-1) {$4$};
+    \draw[gray] (a1)--(a3);
+    \draw[blue,very thick] (a1)--(a2)--(a3)--(a4);
+    \draw[red,very thick] (a4)--node[left] {\scriptsize outside edge 14} (a1);
+    \node[blue] at (0,-1.65) {cycle: 1-2-3-4-1};
+  \end{scope}
+  \begin{scope}[shift={(5,0)}]
+    \node[vertex] (b1) at (-1,1) {$1$}; \node[vertex] (b2) at (1,1) {$2$};
+    \node[vertex] (b3) at (1,-1) {$3$}; \node[vertex] (b4) at (-1,-1) {$4$};
+    \draw (b1)--(b2) (b3)--(b4);
+    \draw[red,very thick] (b2)--node[right] {\scriptsize tree edge 23} (b3);
+    \draw[red,very thick] (b1)--(b3) (b1)--(b4);
+    \draw[red,dashed] (-1.55,0)--(1.55,0);
+    \node at (0,1.45) {\scriptsize side 1, 2};
+    \node at (0,-1.45) {\scriptsize side 3, 4};
+    \node[red] at (0,-1.95) {cut edges: 23, 13, 14};
+  \end{scope}
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The graph $G$ and spanning subgraph $T$ above.

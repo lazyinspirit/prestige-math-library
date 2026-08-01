@@ -41,6 +41,25 @@ $$R_x := \{\, y \in Y \ :\ (x,y) \in R \,\}, \qquad R^{y} := \{\, x \in X \ :\ (
 
 the **row fibre** of $R$ at $x$ and the **column fibre** of $R$ at $y$.
 
+```tikz
+\begin{tikzpicture}
+  \node at (0,3.0) {$X$};
+  \node at (4.8,3.0) {$Y$};
+  \node[draw,circle,inner sep=2pt] (x1) at (0,2.2) {$x_1$};
+  \node[draw,circle,very thick,inner sep=2pt] (x2) at (0,1.1) {$x_2$};
+  \node[draw,circle,inner sep=2pt] (x3) at (0,0) {$x_3$};
+  \node[draw,circle,inner sep=2pt] (y1) at (4.8,2.2) {$y_1$};
+  \node[draw,circle,very thick,inner sep=2pt] (y2) at (4.8,1.1) {$y_2$};
+  \node[draw,circle,inner sep=2pt] (y3) at (4.8,0) {$y_3$};
+  \draw (x1) -- (y1);
+  \draw (x1) -- (y2);
+  \draw (x2) -- (y2);
+  \draw (x2) -- (y3);
+  \draw (x3) -- (y1);
+  \node at (2.4,-0.75) {Sample: $R_{x_2}=\{y_2,y_3\}$ and $R^{y_2}=\{x_1,x_2\}$.};
+\end{tikzpicture}
+```
+
 **(a) Everything here is finite.** $X \times Y$ is finite ([[thm-product-rule]],
 clause 1), so $R$ is finite as a subset of it, and $R_x \subseteq Y$ and
 $R^{y} \subseteq X$ are finite as subsets of finite sets

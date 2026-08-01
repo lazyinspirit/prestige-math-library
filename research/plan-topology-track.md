@@ -1054,6 +1054,22 @@ B: Sierpinski space; cofinite; the Sorgenfrey line and plane; the Niemytzki
 (Moore) plane; the Tychonoff plank; the Tychonoff corkscrew; the K-topology on R.
 CEX: one per failing implication in the chain, matched explicitly.
 
+**Frontier-7 page-271 scaffold (2026-08-01).** The split-off page
+`tychonoff-embedding-and-stone-cech` defines point–closed-set separating
+families of unit-interval-valued functions, their evaluation maps, Hausdorff
+compactifications, and the Stone–Čech extension property. It proves the
+Tychonoff cube-embedding theorem without a compactness assumption. Assuming
+the ultrafilter lemma, the closure of the full evaluation image is a compact
+Hausdorff compactification; dependent choice is additionally stated where the
+published compact-Hausdorff-to-Tychonoff theorem is used to pass from
+unit-interval extensions to arbitrary compact Hausdorff targets. The universal
+property and uniqueness are not silently attributed to compactness of the cube
+alone. The companion computes finite discrete spaces and $\beta\mathbb N$'s
+bounded-function extension property, and the one-point compactification of
+discrete $\mathbb N$ supplies a compactification that is not Stone–Čech.
+No ultrafilter model of $\beta\mathbb N$, cardinality claim, no-convergent-
+sequence theorem, Gelfand spectrum, or Wallman construction is asserted here.
+
 ---
 
 ## T8. Countability, Metrization, and Baire   [needs F1]
@@ -1180,18 +1196,25 @@ proves only the ccc result actually planned here.
 
 ### T8b. Metrization Theorems   (spec order 275)
 
-DEFS: sigma-locally-finite and sigma-discrete bases (the local finiteness notion
-comes from 269, `partitions-of-unity-and-paracompactness`).
+DEFS: discrete families; sigma-locally-finite and sigma-discrete bases; locally
+metrizable spaces; stars, star refinements, and compatible normal sequences of
+open covers. "Regular" does not include $T_1$ in this library, so every
+metrization criterion states $T_1$ separately.
 
-THMS: **URYSOHN METRIZATION** (regular + second countable + $T_1$ $\Rightarrow$
-metrizable); **NAGATA–SMIRNOV** (metrizable $\iff$ regular $T_1$ with a
-sigma-locally-finite basis); **BING** (the sigma-discrete form); **SMIRNOV**
-(locally metrizable + paracompact + Hausdorff $\Rightarrow$ metrizable).
+THMS (with Choice stated as a sufficient hypothesis for the proofs given): the
+Alexandroff–Urysohn compatible-normal-sequence metrization lemma; metric spaces
+have sigma-locally-finite and sigma-discrete bases; **NAGATA–SMIRNOV**
+(metrizable iff regular $T_1$ with a sigma-locally-finite basis); **BING** (the
+sigma-discrete form); **URYSOHN METRIZATION** as the second-countable corollary;
+and **SMIRNOV** (metrizable iff paracompact, Hausdorff, and locally metrizable).
+The Smirnov sufficiency proof merges sigma-locally-finite bases over a locally
+finite metrizable cover and then invokes Nagata–Smirnov.
 
-FS: every regular space is metrizable.
-
-B (276): the Niemytzki plane (Tychonoff, not normal, not metrizable); the
-Sorgenfrey line again, now as the standard failure of Urysohn's hypotheses.
+FS: every regular space is metrizable. B (276): an uncountable discrete metric space shows that second
+countability is sufficient rather than necessary; the lower-limit line is the
+regular separable nonmetrizable witness; and the Niemytzki plane is the
+Tychonoff locally metrizable nonnormal witness showing why Smirnov needs
+paracompactness.
 
 ---
 

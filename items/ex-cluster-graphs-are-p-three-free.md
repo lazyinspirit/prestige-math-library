@@ -45,3 +45,26 @@ A finite graph is $P_3$-free if and only if each of its connected components is 
 2.1 Minimality of the path gives $v_0v_2\notin E(G)$, so $G[\{v_0,v_1,v_2\}]\cong P_3$. [step 1.2, F2]
 
 3.1 Therefore a $P_3$-free graph cannot have a noncomplete component. Combining both directions proves the equivalence. [step 1.1, step 2.1, F1] ∎
+
+## Remarks
+
+```tikz
+\begin{tikzpicture}[
+  vertex/.style={draw,circle,fill=white,minimum size=7mm,inner sep=1pt},
+  edge/.style={draw=blue!70!black,line width=1.2pt},
+  caption/.style={font=\small,align=center}
+]
+\node[vertex] (a) at (0,0) {};
+\node[vertex] (b) at (1.15,1.3) {};
+\node[vertex] (c) at (2.3,0) {};
+\draw[edge] (a)--(b)--(c)--cycle;
+\node[caption] at (1.15,-.65) {complete component $K_3$};
+
+\node[vertex] (d) at (4.1,.65) {};
+\node[vertex] (e) at (5.55,.65) {};
+\draw[edge] (d)--(e);
+\node[caption] at (4.825,-.65) {complete component $K_2$};
+
+\node[caption] at (2.85,-1.25) {$K_3\mathbin{\dot\cup}K_2$ is a cluster graph and is $P_3$-free};
+\end{tikzpicture}
+```

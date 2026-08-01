@@ -26,6 +26,32 @@ vertices, is cubic, has girth $5$, and satisfies
 
 $$\kappa(G)=\lambda(G)=3.$$
 
+```tikz
+\begin{tikzpicture}[
+  vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\scriptsize},
+  ordinary/.style={draw=gray!65,line width=.9pt},
+  fivecycle/.style={draw=blue!75!black,line width=1.6pt}
+]
+% The blue outer pentagon is the cycle 12,34,15,23,45,12.
+\node[vertex] (o12) at (0,2.8) {$12$};
+\node[vertex] (o34) at (2.65,.86) {$34$};
+\node[vertex] (o15) at (1.64,-2.26) {$15$};
+\node[vertex] (o23) at (-1.64,-2.26) {$23$};
+\node[vertex] (o45) at (-2.65,.86) {$45$};
+\node[vertex] (i35) at (0,1.25) {$35$};
+\node[vertex] (i25) at (1.19,.39) {$25$};
+\node[vertex] (i24) at (.74,-1.01) {$24$};
+\node[vertex] (i14) at (-.74,-1.01) {$14$};
+\node[vertex] (i13) at (-1.19,.39) {$13$};
+\draw[fivecycle] (o12)--(o34)--(o15)--(o23)--(o45)--cycle;
+\draw[ordinary] (o12)--(i35) (o34)--(i25) (o15)--(i24)
+                (o23)--(i14) (o45)--(i13);
+\draw[ordinary] (i13)--(i24)--(i35)--(i14)--(i25)--cycle;
+\node[font=\scriptsize,blue!75!black] at (0,-3.05)
+  {the $5$-cycle $12,34,15,23,45,12$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The Petersen graph $G$ whose vertices are the two-element subsets of $\Omega=\{1,2,3,4,5\}$, adjacent exactly when disjoint.

@@ -111,6 +111,27 @@ $\mathcal{C}(0,1) = \varnothing$.
   than by constructing the inverse directly, which spares an appeal to the
   increasing enumeration of an arbitrary subset.
 
+```tikz
+\begin{tikzpicture}[x=0.85cm,y=1cm]
+  \node at (2.55,1.25) {$k=(2,0,3)$};
+  \node at (0,0) {$\star$};
+  \node at (0.85,0) {$\star$};
+  \draw[line width=1pt] (1.7,-0.3) -- (1.7,0.3);
+  \draw[line width=1pt] (2.55,-0.3) -- (2.55,0.3);
+  \node at (3.4,0) {$\star$};
+  \node at (4.25,0) {$\star$};
+  \node at (5.1,0) {$\star$};
+  \node at (0,-0.65) {$0$};
+  \node at (0.85,-0.65) {$1$};
+  \node at (1.7,-0.65) {$2$};
+  \node at (2.55,-0.65) {$3$};
+  \node at (3.4,-0.65) {$4$};
+  \node at (4.25,-0.65) {$5$};
+  \node at (5.1,-0.65) {$6$};
+  \node at (2.55,-1.35) {$S(k)=\{2,3\}\subseteq 7$};
+\end{tikzpicture}
+```
+
 - **Why the count is proved by induction and not by the bijection alone.**
   Building the inverse of $S$ by hand needs the increasing enumeration of an
   arbitrary $M$-element subset of $n+M$, which is more machinery than the

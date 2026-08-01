@@ -31,6 +31,50 @@ Let $G$ have vertices $1,2,3,4$ and edges $12,23,34,41,13$. Then:
 The contraction deletes the loop arising from $12$ and merges the two copies of
 $x3$ arising from $13$ and $23$.
 
+```tikz
+\begin{tikzpicture}[
+  vertex/.style={draw,circle,fill=white,minimum size=7mm,inner sep=1pt,font=\scriptsize},
+  merged/.style={vertex,draw=blue!75!black,fill=blue!12,line width=1.3pt},
+  edge/.style={draw=gray!75,line width=1pt},
+  caption/.style={font=\small}
+]
+% Original graph G.
+\begin{scope}[shift={(0,2.8)}]
+  \node[vertex] (g1) at (0,1) {$1$};
+  \node[vertex] (g2) at (1.5,1) {$2$};
+  \node[vertex] (g3) at (1.5,-.5) {$3$};
+  \node[vertex] (g4) at (0,-.5) {$4$};
+  \draw[edge] (g1)--(g2)--(g3)--(g4)--cycle (g1)--(g3);
+  \node[caption] at (.75,-1.15) {$G$};
+\end{scope}
+% Vertex deletion.
+\begin{scope}[shift={(4.3,2.8)}]
+  \node[vertex] (v1) at (0,1) {$1$};
+  \node[vertex] (v2) at (1.5,1) {$2$};
+  \node[vertex] (v3) at (1.5,-.5) {$3$};
+  \draw[edge] (v1)--(v2)--(v3)--cycle;
+  \node[caption] at (.75,-1.15) {$G-4$};
+\end{scope}
+% Edge deletion.
+\begin{scope}
+  \node[vertex] (e1) at (0,1) {$1$};
+  \node[vertex] (e2) at (1.5,1) {$2$};
+  \node[vertex] (e3) at (1.5,-.5) {$3$};
+  \node[vertex] (e4) at (0,-.5) {$4$};
+  \draw[edge] (e1)--(e2)--(e3)--(e4)--cycle;
+  \node[caption] at (.75,-1.15) {$G-13=C_4$};
+\end{scope}
+% Edge contraction.
+\begin{scope}[shift={(4.3,0)}]
+  \node[merged] (x) at (0,1) {$x$};
+  \node[vertex] (c3) at (1.5,-.5) {$3$};
+  \node[vertex] (c4) at (-1.5,-.5) {$4$};
+  \draw[edge] (x)--(c3)--(c4)--cycle;
+  \node[caption] at (0,-1.15) {$G/12$: a triangle minor};
+\end{scope}
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The graph $G$ displayed in the Example.

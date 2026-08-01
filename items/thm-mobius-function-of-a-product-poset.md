@@ -30,6 +30,31 @@ This relation is a partial order, the product poset is locally finite, and for c
 
 $$\mu_{P\times Q}\big((p,q),(p',q')\big)=\mu_P(p,p')\mu_Q(q,q').$$
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  elt/.style={draw,rounded corners=2pt,minimum width=15mm,minimum height=7mm,inner sep=1pt,fill=white}
+]
+\node[elt] (a00) at (0,0) {$(p_0,q_0)$};
+\node[elt] (a10) at (2.5,0) {$(p_1,q_0)$};
+\node[elt] (a01) at (.8,1.25) {$(p_0,q_1)$};
+\node[elt] (a11) at (3.3,1.25) {$(p_1,q_1)$};
+\node[elt] (a02) at (1.6,2.5) {$(p_0,q_2)$};
+\node[elt] (a12) at (4.1,2.5) {$(p_1,q_2)$};
+
+\draw[blue!75!black,line width=.9pt]
+  (a00)--(a10) (a01)--(a11) (a02)--(a12);
+\draw[orange!85!black,line width=.9pt]
+  (a00)--(a01)--(a02) (a10)--(a11)--(a12);
+
+\node[anchor=west] at (4.9,1.65) {$C_2\times C_3$};
+\draw[blue!75!black,line width=.9pt] (4.95,1.05)--(5.55,1.05);
+\node[anchor=west] at (5.7,1.05) {$P$-coordinate cover};
+\draw[orange!85!black,line width=.9pt] (4.95,.5)--(5.55,.5);
+\node[anchor=west] at (5.7,.5) {$Q$-coordinate cover};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** Locally finite posets $P,Q$ and elements $p\le_Pp'$, $q\le_Qq'$.

@@ -2,7 +2,7 @@
 // audit-manifest.mjs — coverage checklist for the Beta/Alpha audit stage.
 //
 // Usage:
-//   node tools/audit-manifest.mjs research/level<N>-batch-*.pages.json [--json]
+//   node tools/audit-manifest.mjs research/level<N>-batch-*.pages.json [--json] [--output receipt.json]
 //
 // It enumerates in-flight batch membership and every declared mathematical
 // relationship from authored items on disk: logical `deps`, well-definedness
@@ -11,16 +11,22 @@
 // omitted reader check visible by classifying each relationship as same-batch,
 // cross-batch, published/backward, forward, or unresolved.
 
-import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const args = process.argv.slice(2);
 const asJson = args.includes('--json');
-const files = args.filter((a) => a !== '--json');
+const outputIndex = args.indexOf('--output');
+const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : null;
+const files = args.filter((arg, index) => arg !== '--json' && arg !== '--output' && index !== outputIndex + 1);
+if (outputIndex >= 0 && !outputPath) {
+  console.error('ERROR output-path: --output needs a path');
+  process.exit(2);
+}
 if (!files.length) {
-  console.error('usage: node tools/audit-manifest.mjs research/level<N>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/audit-manifest.mjs research/level<N>-batch-*.pages.json [--json] [--output receipt.json]');
   process.exit(2);
 }
 
@@ -32,6 +38,12 @@ function scalar(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   if (!m) return '';
   return m[1].trim().replace(/^['"]|['"]$/g, '');
+}
+function nested(fm, parent, child) {
+  const start = fm.search(new RegExp('^' + parent + ':[ \\t]*(?:#.*)?$', 'm'));
+  if (start < 0) return '';
+  const m = fm.slice(start).match(new RegExp('^[ \\t]+' + child + ':[ \\t]*(.*)$', 'm'));
+  return m ? m[1].trim().replace(/^['"]|['"]$/g, '') : '';
 }
 function list(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(?:\\r?\\n((?:[ \\t]*-[^\\n]*\\r?\\n?)+)|\\[([^\\]]*)\\])`, 'm'));
@@ -69,6 +81,7 @@ for (const full of walk(join(REPO, 'items')).filter((f) => f.endsWith('.md'))) {
     id,
     file: full.slice(REPO.length + 1),
     status: scalar(fm, 'status') || 'draft',
+    statement_provenance: nested(fm, 'provenance', 'statement') || null,
     deps: list(fm, 'deps'),
     justified_by: list(fm, 'justified_by'),
     forward_refs: list(fm, 'forward_refs'),
@@ -123,6 +136,7 @@ for (const [id, batch] of itemBatch) {
         batch,
         target,
         declared_target: declaredTarget,
+        target_statement_provenance: target ? items.get(target)?.statement_provenance ?? null : null,
         targetPage: target ? home.get(target) ?? null : null,
         targetBatch: target ? itemBatch.get(target) ?? null : null,
         edge_type,
@@ -138,8 +152,13 @@ for (const [id, batch] of itemBatch) {
 const summary = {};
 for (const e of edges) summary[e.kind] = (summary[e.kind] ?? 0) + 1;
 const out = { batches: Object.fromEntries(batchPages), summary, edges };
-if (asJson) console.log(JSON.stringify(out, null, 2));
-else {
+const json = JSON.stringify(out, null, 2);
+if (outputPath) {
+  const resolved = outputPath.startsWith('/') ? outputPath : join(process.cwd(), outputPath);
+  writeFileSync(resolved, `${json}\n`);
+}
+if (asJson && !outputPath) console.log(json);
+else if (!asJson) {
   console.log('# Audit manifest');
   console.log('\n## Batches');
   for (const [b, pages] of batchPages) console.log(`- ${b}: ${pages.join(', ')}`);

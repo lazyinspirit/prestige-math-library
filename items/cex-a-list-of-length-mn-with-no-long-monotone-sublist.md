@@ -55,6 +55,30 @@ Its longest strictly increasing sublist has length $3$, for example
 $a_0, a_2, a_4$, and its longest strictly decreasing sublist has length $2$, for
 example $a_0, a_1$.
 
+```tikz
+\begin{tikzpicture}[x=0.9cm,y=0.48cm]
+  \draw[->] (-0.6,0) -- (5.8,0) node[anchor=west] {position};
+  \draw[->] (-0.35,0) -- (-0.35,6.8) node[anchor=south] {value};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p0) at (0,2) {$2$};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p1) at (1,1) {$1$};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p2) at (2,4) {$4$};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p3) at (3,3) {$3$};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p4) at (4,6) {$6$};
+  \node[draw,circle,fill=white,inner sep=1.8pt] (p5) at (5,5) {$5$};
+  \draw[very thick] (p0) -- (p1);
+  \draw[very thick] (p2) -- (p3);
+  \draw[very thick] (p4) -- (p5);
+  \draw[thick,dashed] (p0) -- (p2) -- (p4);
+  \node at (0.5,-0.75) {$P_0$};
+  \node at (2.5,-0.75) {$P_1$};
+  \node at (4.5,-0.75) {$P_2$};
+  \draw[very thick] (0,-1.55) -- (0.7,-1.55);
+  \node[anchor=west] at (0.85,-1.55) {decreasing blocks of length $2$};
+  \draw[thick,dashed] (3.45,-1.55) -- (4.15,-1.55);
+  \node[anchor=west] at (4.3,-1.55) {the increasing sublist $2,4,6$};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The list $a : 6 \to \mathbb{R}$ above, and the three index blocks $P_0 := \{0,1\}$, $P_1 := \{2,3\}$, $P_2 := \{4,5\}$, with $\mathrm{blk}(i) := b$ for $i \in P_b$.

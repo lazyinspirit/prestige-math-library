@@ -35,4 +35,27 @@ $$(f*g)(x,y):=\sum_{z\in[x,y]}f(x,z)g(z,y)\qquad(x\le y),$$
 
 where the sum is the finite commutative-monoid sum of [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of $R$.
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  elt/.style={draw,circle,minimum size=7mm,inner sep=1pt,fill=white}
+]
+\node[elt] (x) at (0,0) {$x$};
+\node[elt,draw=blue!75!black,fill=blue!12,line width=.9pt] (z) at (-1.15,1.35) {$z$};
+\node[elt] (w) at (1.15,1.35) {$w$};
+\node[elt] (y) at (0,2.7) {$y$};
+
+\draw[gray!60] (x)--(w)--(y);
+\draw[blue!75!black,line width=1pt] (x)--(z);
+\draw[orange!85!black,line width=1pt] (z)--(y);
+
+\node[anchor=west] at (2.1,1.75) {one summand, for a chosen $z\in[x,y]$:};
+\node[anchor=west] at (2.1,1.15) {$f(x,z)\,g(z,y)$};
+\draw[blue!75!black,line width=1pt] (2.15,.55)--(2.75,.55);
+\node[anchor=west] at (2.9,.55) {$f(x,z)$};
+\draw[orange!85!black,line width=1pt] (4.15,.55)--(4.75,.55);
+\node[anchor=west] at (4.9,.55) {$g(z,y)$};
+\end{tikzpicture}
+```
+
 This operation is well defined precisely at the stated level of generality: local finiteness makes $[x,y]$ finite for each comparable pair, so the displayed ring-valued sum has finitely many terms. The definition makes no claim about sums over an entire principal ideal or principal filter.

@@ -779,27 +779,46 @@ page cites those results and mints no competing counting theory.
 
 Forward references: NONE.
 
-## AA-3. Normal Subgroups and Quotient Groups  (order 30)
+## AA-3. Normal Subgroups and Quotient Groups  (order 34)
 
 `requires`: `cosets-and-lagranges-theorem`
 
-**Normal subgroup**; the equivalent characterisations ($gNg^{-1} = N$,
-$gNg^{-1} \subseteq N$ for all $g$, every left coset is a right coset); every
-subgroup of an abelian group is normal; index 2 implies normal; the centre; the
-commutator subgroup; **the quotient group $G/N$** with the coset product
-(well-definedness #3, the central obligation of this page: the product is
-independent of representatives **iff** $N$ is normal, and both directions are
-proved); the canonical projection $\pi: G \to G/N$; the order of $G/N$.
+DEFS: a normal subgroup; the normal closure of a subset; the centre $Z(G)$;
+commutators $[g,h]=ghg^{-1}h^{-1}$ and the commutator subgroup $[G,G]$; the
+quotient group $G/N$ with coset product $(gN)(hN)=ghN$.
 
-B page: $\mathbb{Z}/n\mathbb{Z}$ as a quotient; a non-normal subgroup with an
-explicit pair of representatives whose products land in different cosets, which is
-the counterexample that makes #3 mean something; $S_3 / A_3$.
+THMS: the equivalent conjugate, containment, and left/right-coset
+characterisations of normality; every subgroup of an abelian group is normal;
+every index-two subgroup is normal; intersections of nonempty families of
+normal subgroups are normal; the centre and commutator subgroup are normal;
+coset multiplication is well defined iff the subgroup is normal, with both
+directions proved without assuming the conclusion; the quotient group laws;
+the canonical projection is a surjective homomorphism; $|G/N|=[G:N]$ and, for
+finite $G$, $|G/N|=|G|/|N|$; $G/N$ is abelian iff $[G,G]\subseteq N$; every
+quotient of an abelian group is abelian.
 
-Traps. The failure direction of #3 is what justifies the definition, so it is a
-numbered item, not a remark. Do not assume $N$ normal while proving that
-normality is necessary. The quotient set $G/N$ itself cites
-`def-equivalence-relation` and `lem-equivalence-classes-partition` from AA-1
-(batch-1 audit note 1), not machinery of its own.
+**Spine seam:** the A page contains the proved proposition that, for every
+$n\in\mathbb N$ (including the library's $n=0$ and $n=1$ conventions), the
+published congruence-class group $(\mathbb Z/n,+)$ is the quotient
+$(\mathbb Z,+)/n\mathbb Z$. This is on the A spine because B pages are leaves;
+it must agree with the existing modulo-$n$ definitions and theorem rather than
+minting a competing construction. Do not use isomorphism terminology before
+the next page defines it.
+
+B: an explicit nonnormal two-element subgroup of
+$\operatorname{Sym}(\{1,2,3\})$ for which coset multiplication changes with
+representatives; the explicit three-cycle subgroup and its two-element
+quotient (without the not-yet-defined notation $S_3/A_3$); the four cosets of
+$4\mathbb Z$ worked against the A-page proposition; the two extreme quotients
+$G/\{e\}$ and $G/G$; the centre and commutator subgroup of an abelian group.
+
+Traps. The necessity direction of coset-product well-definedness is a numbered
+proof, not a remark. The definition of quotient group is justified by both the
+iff theorem and the quotient-law theorem. Composition in the symmetric-group
+examples follows the published convention that the right-hand factor acts
+first. The normal-closure definition is justified by the preceding
+intersection lemma. The commutator convention must be displayed because some
+sources use its inverse.
 
 ## AA-4. Group Homomorphisms and the Isomorphism Theorems  (order 32)
 

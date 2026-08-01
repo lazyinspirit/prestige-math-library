@@ -31,6 +31,45 @@ Divisibility is componentwise comparison of the exponent triples. Meet and
 join are componentwise minimum and maximum, so this is a finite distributive
 lattice.
 
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\scriptsize},
+  elt/.style={draw,circle,minimum size=7.5mm,inner sep=1pt,fill=white},
+  ji/.style={elt,draw=blue!75!black,fill=blue!13,line width=.9pt}
+]
+\node[elt] (d1) at (0,0) {$1$};
+\node[ji]  (d3) at (-1.8,.8) {$3$};
+\node[ji]  (d5) at (2.3,.8) {$5$};
+\node[elt] (d15) at (.5,1.6) {$15$};
+
+\node[ji]  (d2) at (0,2.2) {$2$};
+\node[elt] (d6) at (-1.8,3) {$6$};
+\node[elt] (d10) at (2.3,3) {$10$};
+\node[elt] (d30) at (.5,3.8) {$30$};
+
+\node[ji]  (d4) at (0,4.4) {$4$};
+\node[elt] (d12) at (-1.8,5.2) {$12$};
+\node[elt] (d20) at (2.3,5.2) {$20$};
+\node[elt] (d60) at (.5,6) {$60$};
+
+\draw[gray!70]
+  (d1)--(d2) (d1)--(d3) (d1)--(d5)
+  (d2)--(d4) (d2)--(d6) (d2)--(d10)
+  (d3)--(d6) (d3)--(d15)
+  (d5)--(d10) (d5)--(d15)
+  (d4)--(d12) (d4)--(d20)
+  (d6)--(d12) (d6)--(d30)
+  (d10)--(d20) (d10)--(d30)
+  (d15)--(d30)
+  (d12)--(d60) (d20)--(d60) (d30)--(d60);
+
+\node[ji,minimum size=5mm] at (-1.25,-.75) {};
+\node[anchor=west] at (-.95,-.75) {join-irreducible};
+\node[font=\scriptsize,anchor=west] at (3.05,2.95)
+  {$d\prec e$ when $e/d$ is prime};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The positive divisors of $60$, ordered by divisibility.

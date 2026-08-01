@@ -85,6 +85,22 @@ applied to $T(x)$ gives $\lvert [T(x)]^{j}\rvert = \binom{t(x)}{j}$, and for
 nonempty $J$ the condition $x \in A_J$ with $\lvert J\rvert = j$ says exactly
 that $J \in [T(x)]^{j}$.
 
+```tikz
+\begin{tikzpicture}
+  \draw[rounded corners] (-3,-2.1) rectangle (3,2.1);
+  \node[anchor=north west] at (-2.9,2.0) {$X$};
+  \draw (-0.85,0.35) ellipse (1.55 and 1.1);
+  \draw (0.85,0.35) ellipse (1.55 and 1.1);
+  \draw (0,-0.55) ellipse (1.55 and 1.1);
+  \node at (-2.15,1.35) {$A_0$};
+  \node at (2.15,1.35) {$A_1$};
+  \node at (0,-1.75) {$A_2$};
+  \fill (-0.55,-0.45) circle (2pt);
+  \node[anchor=west] at (-0.45,-0.45) {$x$};
+  \node at (0,-2.65) {$x\in A_{\{0,2\}},\qquad T(x)=\{0,2\}$.};
+\end{tikzpicture}
+```
+
 ## Remarks
 
 - **The counts stay in $\mathbb{N}$; the identities do not.** Each

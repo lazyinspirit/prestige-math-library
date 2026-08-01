@@ -53,6 +53,23 @@ irreflexive relation whose related unordered pairs are $\{0,1\}$, $\{1,2\}$ and
 $\{2,3\}$, the neighbour counts are $d(0) = 1$, $d(1) = 2$, $d(2) = 2$,
 $d(3) = 1$, summing to $6 = 2\cdot 3$, and $\lvert E\rvert = 3$.
 
+```tikz
+\begin{tikzpicture}
+  \node[draw,circle,inner sep=2pt] (v0) at (0,0) {$0$};
+  \node[draw,circle,inner sep=2pt] (v1) at (2,0) {$1$};
+  \node[draw,circle,inner sep=2pt] (v2) at (4,0) {$2$};
+  \node[draw,circle,inner sep=2pt] (v3) at (6,0) {$3$};
+  \draw[very thick] (v0) -- (v1);
+  \draw[very thick] (v1) -- (v2);
+  \draw[very thick] (v2) -- (v3);
+  \node at (0,-0.65) {$d(0)=1$};
+  \node at (2,-0.65) {$d(1)=2$};
+  \node at (4,-0.65) {$d(2)=2$};
+  \node at (6,-0.65) {$d(3)=1$};
+  \node at (3,-1.4) {Each segment $\{x,y\}\in E$ represents $(x,y)$ and $(y,x)$ in $R$.};
+\end{tikzpicture}
+```
+
 **The extreme instance.** If $R$ relates every pair of distinct elements of $V$
 then $E = [V]^{2}$ and $d(x) = N - 1$ for every $x$, where $N := \lvert V\rvert$;
 the identity then reads $N\,(N-1) = 2\binom{N}{2}$, which is

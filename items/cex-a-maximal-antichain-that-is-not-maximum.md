@@ -40,3 +40,25 @@ every maximal antichain in a finite poset has maximum cardinality.
 1.2 The pair $\{b,c\}$ is an antichain. No three-element antichain exists, because the only three-element subset is $P$ itself and it contains the comparable pair $a,b$; hence the width of $P$ is $2$. [given, F1]
 
 2.1 Thus $\{a\}$ is maximal of cardinality $1$ but not maximum, providing the required counterexample. [step 1.1, step 1.2] ∎
+
+## Remarks
+
+```tikz
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  elt/.style={draw,circle,minimum size=9mm,inner sep=1pt,fill=white},
+  maximal/.style={elt,draw=orange!85!black,fill=orange!20,line width=1pt},
+  maximum/.style={elt,draw=blue!75!black,fill=blue!13,line width=1pt}
+]
+\node[maximal] (a) at (0,0) {$a$};
+\node[maximum] (b) at (-1.5,1.6) {$b$};
+\node[maximum] (c) at (1.5,1.6) {$c$};
+\draw[gray!75,line width=.9pt] (a)--(b) (a)--(c);
+
+\node[font=\scriptsize,anchor=north] at (0,-.65)
+  {maximal antichain $\{a\}$};
+\draw[blue!75!black,dashed] (-2.05,2.2)--(2.05,2.2);
+\node[font=\scriptsize,anchor=south] at (0,2.27)
+  {maximum antichain $\{b,c\}$};
+\end{tikzpicture}
+```

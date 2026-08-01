@@ -8,7 +8,7 @@
 //   [--verify-current-context] research/level<n>-batch-*.pages.json
 //
 // The batch manifests are the scope of record.  This gate prevents four silent
-// omissions: an authored item without provenance, a proof omitted from the
+// omissions: an authored item without component provenance, a proof omitted from the
 // contract, an item omitted from either judge lane, and an Alpha audit receipt
 // that no longer matches the actual in-flight items and relationships.
 
@@ -45,6 +45,13 @@ function split(source) {
 }
 function scalar(fm, key) {
   const match = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
+  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
+}
+function nested(fm, parent, child) {
+  const start = fm.search(new RegExp(`^${parent}:[ \\t]*(?:#.*)?$`, 'm'));
+  if (start < 0) return undefined;
+  const rest = fm.slice(start);
+  const match = rest.match(new RegExp(`^[ \\t]+${child}:[ \\t]*(.*)$`, 'm'));
   return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
 function list(fm, key) {
@@ -85,7 +92,10 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
     id,
     file: `items/${file}`,
     body,
-    authorship: scalar(fm, 'authorship'),
+    provenance: {
+      statement: nested(fm, 'provenance', 'statement'),
+      proof: nested(fm, 'provenance', 'proof'),
+    },
     deps: list(fm, 'deps'),
     justified_by: list(fm, 'justified_by'),
     forward_refs: list(fm, 'forward_refs'),
@@ -115,7 +125,25 @@ scope.sort();
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
-  else if (!item.authorship) error('authorship-missing', `${item.file}: in-flight level coverage requires authorship`, item.id);
+  else {
+    if (!item.provenance.statement || !item.provenance.proof)
+      error('provenance-missing', `${item.file}: in-flight level coverage requires provenance.statement and provenance.proof`, item.id);
+    // A final independent backstop for the future-scope policy: a dependency
+    // consumes the target's claim, not its proof. Therefore an AI-generated
+    // proof is immaterial here, but an AI-generated Statement/Construction is
+    // never eligible as a deps target.
+    for (const raw of item.deps) {
+      const target = items.get(resolve(raw) ?? raw);
+      if (target?.provenance.statement === 'ai-generated') {
+        error(
+          'ai-generated-statement-dependency',
+          item.file + ': ' + item.id + ' depends on ' + target.id
+            + ', whose provenance.statement is ai-generated',
+          item.id,
+        );
+      }
+    }
+  }
 }
 const proofScope = scope.filter((id) => isProofBearing(items.get(resolve(id) ?? id)?.body ?? ''));
 

@@ -28,6 +28,23 @@ $$\{02,12,23,24\}$$
 
 has Prüfer code $(2,2,2)$, and decoding this word returns the same tree.
 
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,line width=0.7pt,every node/.style={font=\small}]
+  \tikzset{vertex/.style={circle,draw,fill=white,inner sep=1.5pt,minimum size=5mm}}
+  \node[vertex] (z) at (-2,0) {$0$};
+  \node[vertex] (o) at (0,1.4) {$1$};
+  \node[vertex,fill=blue!15] (t) at (0,0) {$2$};
+  \node[vertex] (h) at (0,-1.4) {$3$};
+  \node[vertex] (f) at (2,0) {$4$};
+  \draw[blue,very thick] (z)--node[above] {\scriptsize 1:2} (t);
+  \draw[blue,very thick] (o)--node[right] {\scriptsize 2:2} (t);
+  \draw[blue,very thick] (h)--node[right] {\scriptsize 3:2} (t);
+  \draw (t)--node[above] {\scriptsize final edge} (f);
+  \node at (0,-2.05) {deletion stage : recorded neighbour};
+  \node[blue] at (0,2.05) {Prufer code (2, 2, 2)};
+\end{tikzpicture}
+```
+
 ## Facts & Assumptions
 
 **Given:** The displayed labelled graph $T$.

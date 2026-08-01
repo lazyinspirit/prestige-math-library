@@ -1,0 +1,268 @@
+[
+  {
+    "order": 271,
+    "id": "tychonoff-embedding-and-stone-cech",
+    "kind": "A",
+    "category": "topology",
+    "title": "The Tychonoff Embedding and the Stone–Čech Compactification",
+    "companion": "tychonoff-embedding-and-stone-cech-examples",
+    "requires": ["urysohn-lemma-and-tietze", "nets-and-filters", "hereditary-and-productive-separation"],
+    "items": [
+      {
+        "id": "def-unit-interval-function-family-separates-points-from-closed-sets",
+        "kind": "definition",
+        "title": "A family of continuous unit-interval-valued functions that separates points from closed sets",
+        "deps": ["def-continuous-map-top", "def-interval"]
+      },
+      {
+        "id": "def-evaluation-map-into-unit-cube",
+        "kind": "definition",
+        "title": "The evaluation map from a space into the unit cube indexed by a family of continuous functions",
+        "deps": ["def-unit-interval-function-family-separates-points-from-closed-sets", "def-product-topology"]
+      },
+      {
+        "id": "lem-evaluation-map-of-separating-family-is-an-embedding",
+        "kind": "lemma",
+        "title": "The evaluation map of a point–closed-set separating family is a topological embedding",
+        "strategy": "Prove continuity coordinatewise, injectivity by separating one point from the singleton containing the other, and recovery of the source topology by separating a point from the complement of an arbitrary neighbourhood.",
+        "deps": ["def-evaluation-map-into-unit-cube", "def-unit-interval-function-family-separates-points-from-closed-sets", "thm-product-universal-property", "def-homeomorphism-and-open-maps"]
+      },
+      {
+        "id": "thm-tychonoff-embedding-theorem",
+        "kind": "theorem",
+        "title": "A space is Tychonoff if and only if it embeds in a cube $[0,1]^J$",
+        "strategy": "Use all continuous maps to the unit interval for the forward evaluation embedding. For the reverse implication use productivity and heredity of complete regularity and of the $T_1$ axiom.",
+        "deps": ["lem-evaluation-map-of-separating-family-is-an-embedding", "def-completely-regular-and-tychonoff-spaces", "lem-products-preserve-complete-regularity", "lem-complete-regularity-is-hereditary", "lem-products-preserve-t0-t1-and-hausdorff", "lem-t0-t1-and-hausdorff-are-hereditary"]
+      },
+      {
+        "id": "def-compactification-of-a-tychonoff-space",
+        "kind": "definition",
+        "title": "A Hausdorff compactification as a dense embedding into a compact Hausdorff space",
+        "deps": ["def-homeomorphism-and-open-maps", "def-dense-top", "def-compact-space", "def-hausdorff-space"]
+      },
+      {
+        "id": "cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma",
+        "kind": "corollary",
+        "title": "Assuming the ultrafilter lemma, every Tychonoff space has a Hausdorff compactification",
+        "strategy": "Embed the space in its unit cube, use compactness of the cube under the ultrafilter lemma, and take the closure of the image.",
+        "deps": ["thm-tychonoff-embedding-theorem", "def-compactification-of-a-tychonoff-space", "thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-closure-characterisation-top"]
+      },
+      {
+        "id": "def-stone-cech-compactification",
+        "kind": "definition",
+        "title": "The Stone–Čech compactification by its compact-Hausdorff extension property",
+        "deps": ["def-compactification-of-a-tychonoff-space", "def-continuous-map-top"]
+      },
+      {
+        "id": "lem-unit-interval-functions-extend-over-evaluation-closure",
+        "kind": "lemma",
+        "title": "Every continuous $[0,1]$-valued function extends uniquely over the closure of the full evaluation image",
+        "strategy": "Use the function's coordinate projection for existence and uniqueness of continuous extensions from agreement on the dense evaluation image.",
+        "deps": ["def-evaluation-map-into-unit-cube", "thm-product-universal-property", "cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal", "thm-closure-characterisation-top"]
+      },
+      {
+        "id": "lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice",
+        "kind": "lemma",
+        "title": "Under dependent choice, every compact Hausdorff space embeds in a unit cube",
+        "strategy": "Apply the published compact-Hausdorff-to-Tychonoff result and then the Tychonoff embedding theorem, keeping dependent choice explicit.",
+        "deps": ["cor-a-compact-hausdorff-space-is-tychonoff", "thm-tychonoff-embedding-theorem", "def-dependent-choice"]
+      },
+      {
+        "id": "thm-stone-cech-evaluation-closure-universal-property",
+        "kind": "theorem",
+        "title": "Under the ultrafilter lemma and dependent choice, the closure of the full evaluation image is the Stone–Čech compactification",
+        "strategy": "Extend the coordinates of a map into a compact Hausdorff target's cube, assemble them into a continuous product map, and show its image lies in the closed embedded target because the dense image already does. Use density and Hausdorffness for uniqueness.",
+        "deps": ["cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma", "def-stone-cech-compactification", "lem-unit-interval-functions-extend-over-evaluation-closure", "lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice", "thm-product-universal-property", "thm-compact-subset-of-a-hausdorff-space-is-closed", "cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal"]
+      },
+      {
+        "id": "cor-stone-cech-compactification-is-unique-over-x",
+        "kind": "corollary",
+        "title": "Stone–Čech compactifications are uniquely homeomorphic over the original space",
+        "strategy": "Apply the two universal properties to obtain maps in both directions and use uniqueness on the dense copy to show that the composites are identities.",
+        "deps": ["def-stone-cech-compactification", "thm-stone-cech-evaluation-closure-universal-property", "cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal"]
+      },
+      {
+        "id": "cor-stone-cech-of-compact-hausdorff-space-is-itself",
+        "kind": "corollary",
+        "title": "The Stone–Čech compactification of a compact Hausdorff space adds no points",
+        "strategy": "The compact embedded image is closed in the Hausdorff compactification and is dense, hence equals the whole compactification.",
+        "deps": ["def-stone-cech-compactification", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-closure-characterisation-top"]
+      }
+    ]
+  },
+  {
+    "order": 272,
+    "id": "tychonoff-embedding-and-stone-cech-examples",
+    "kind": "B",
+    "category": "topology",
+    "title": "The Tychonoff Embedding and the Stone–Čech Compactification: Examples and Counterexamples",
+    "requires": ["tychonoff-embedding-and-stone-cech"],
+    "items": [
+      {
+        "id": "ex-stone-cech-of-a-finite-discrete-space",
+        "kind": "example",
+        "title": "A finite discrete space is already its Stone–Čech compactification",
+        "strategy": "Verify compactness and Hausdorffness directly and invoke the compact-Hausdorff fixed-point corollary.",
+        "deps": ["cor-stone-cech-of-compact-hausdorff-space-is-itself", "def-standard-topologies", "def-compact-space"]
+      },
+      {
+        "id": "ex-bounded-functions-on-n-extend-to-beta-n",
+        "kind": "example",
+        "title": "Every function from discrete $\\mathbb N$ to $[0,1]$ extends uniquely to $\\beta\\mathbb N$",
+        "strategy": "Every map from a discrete domain is continuous, so the Stone–Čech extension property applies directly; uniqueness comes from density and Hausdorffness.",
+        "deps": ["def-stone-cech-compactification", "def-standard-topologies", "def-natural-numbers"]
+      },
+      {
+        "id": "cex-one-point-compactification-of-n-is-not-beta-n",
+        "kind": "counterexample",
+        "title": "The one-point compactification of discrete $\\mathbb N$ is not $\\beta\\mathbb N$",
+        "strategy": "Use the parity-valued function on the discrete naturals. Any extension to the point at infinity would have to be eventually close to a single value, while both parity classes meet every cofinite neighbourhood.",
+        "deps": ["def-one-point-compactification", "thm-one-point-compactification-properties", "def-stone-cech-compactification", "def-natural-numbers"]
+      },
+      {
+        "id": "fs-every-hausdorff-compactification-is-stone-cech",
+        "kind": "false-statement",
+        "title": "FALSE: every Hausdorff compactification has the Stone–Čech extension property",
+        "strategy": "Refute the claim with the one-point compactification of the discrete naturals and its nonextendable parity function.",
+        "deps": ["def-compactification-of-a-tychonoff-space", "def-stone-cech-compactification", "def-one-point-compactification", "thm-one-point-compactification-properties", "def-natural-numbers"]
+      }
+    ]
+  },
+  {
+    "order": 275,
+    "id": "metrization-theorems",
+    "kind": "A",
+    "category": "topology",
+    "title": "Metrization: Urysohn, Nagata–Smirnov, Bing, Smirnov",
+    "companion": "metrization-theorems-examples",
+    "requires": ["countability-axioms-and-cardinal-functions", "partitions-of-unity-and-paracompactness"],
+    "items": [
+      {
+        "id": "def-discrete-family-and-sigma-bases",
+        "kind": "definition",
+        "title": "Discrete families and $\\sigma$-locally-finite and $\\sigma$-discrete bases",
+        "deps": ["def-cover-refinement-and-local-finiteness", "def-topology-basis-subbasis", "def-countable"]
+      },
+      {
+        "id": "lem-discrete-families-are-locally-finite",
+        "kind": "lemma",
+        "title": "Every discrete family is locally finite, so every $\\sigma$-discrete basis is $\\sigma$-locally finite",
+        "strategy": "Unfold the two neighbourhood conditions and then retain the same countable decomposition.",
+        "deps": ["def-discrete-family-and-sigma-bases", "def-cover-refinement-and-local-finiteness"]
+      },
+      {
+        "id": "def-locally-metrizable-space",
+        "kind": "definition",
+        "title": "A locally metrizable space: every point has a metrizable open neighbourhood",
+        "deps": ["def-neighbourhood-top", "def-subspace-topology-top", "def-metrizable-space"]
+      },
+      {
+        "id": "def-compatible-normal-sequence-of-open-covers",
+        "kind": "definition",
+        "title": "Compatible normal sequences of open covers",
+        "deps": ["def-cover-refinement-and-local-finiteness", "def-neighbourhood-top"]
+      },
+      {
+        "id": "lem-alexandroff-urysohn-metrization-lemma",
+        "kind": "lemma",
+        "title": "A $T_1$ space with a compatible normal sequence of open covers is metrizable",
+        "strategy": "Construct dyadic-scale symmetric entourages from successive star refinements, define the chain infimum pseudometric, prove the triangle inequality, and use compatibility plus $T_1$ to obtain point separation and the original topology.",
+        "deps": ["def-compatible-normal-sequence-of-open-covers", "def-t0-and-t1-spaces", "def-metrizable-space", "def-metric-space"]
+      },
+      {
+        "id": "lem-metric-spaces-have-sigma-locally-finite-bases",
+        "kind": "lemma",
+        "title": "Under choice, every metric space has a $\\sigma$-locally-finite basis",
+        "strategy": "For each positive scale refine the cover by balls of that scale locally finitely using Stone's theorem; the union of these refinements is a basis because the mesh tends to zero.",
+        "deps": ["thm-stone-metric-spaces-are-paracompact", "def-discrete-family-and-sigma-bases", "def-metric-space", "def-axiom-of-choice"]
+      },
+      {
+        "id": "rem-sigma-locally-finite-base-produces-compatible-normal-sequence",
+        "kind": "remark",
+        "title": "Under choice, a regular $T_1$ space with a $\\sigma$-locally-finite basis has a compatible normal sequence",
+        "strategy": "Record the source-backed normal-cover construction as an explicitly external fallback after the local pointwise-shrinking route is shown invalid; retain no fictitious local dependency edge.",
+        "deps": []
+      },
+      {
+        "id": "thm-nagata-smirnov-metrization",
+        "kind": "theorem",
+        "title": "Under choice, a space is metrizable if and only if it is regular, $T_1$, and has a $\\sigma$-locally-finite basis",
+        "strategy": "Use the metric-basis lemma for necessity. For sufficiency turn the basis into a compatible normal sequence and apply the Alexandroff–Urysohn metrization lemma.",
+        "deps": ["lem-metric-spaces-have-sigma-locally-finite-bases", "rem-sigma-locally-finite-base-produces-compatible-normal-sequence", "lem-alexandroff-urysohn-metrization-lemma", "def-regular-and-t3-spaces", "def-t0-and-t1-spaces", "def-metrizable-space"]
+      },
+      {
+        "id": "rem-metric-spaces-have-sigma-discrete-bases",
+        "kind": "remark",
+        "title": "Under choice, every metric space has a $\\sigma$-discrete basis",
+        "strategy": "Record Bing's source-backed necessity construction as an explicitly external fallback after the proposed first-centre cells are shown not to be open; retain no fictitious local dependency edge.",
+        "deps": []
+      },
+      {
+        "id": "thm-bing-metrization",
+        "kind": "theorem",
+        "title": "Under choice, a space is metrizable if and only if it is regular, $T_1$, and has a $\\sigma$-discrete basis",
+        "strategy": "Use the sigma-discrete basis lemma for necessity. For sufficiency a discrete family is locally finite and Nagata–Smirnov applies.",
+        "deps": ["rem-metric-spaces-have-sigma-discrete-bases", "lem-discrete-families-are-locally-finite", "thm-nagata-smirnov-metrization", "def-regular-and-t3-spaces", "def-t0-and-t1-spaces"]
+      },
+      {
+        "id": "cor-urysohn-metrization",
+        "kind": "corollary",
+        "title": "Under choice, every regular $T_1$ second-countable space is metrizable",
+        "strategy": "Enumerate a countable basis as a countable union of singleton, hence locally finite, families and apply Nagata–Smirnov.",
+        "deps": ["thm-nagata-smirnov-metrization", "def-second-countable-space", "def-discrete-family-and-sigma-bases"]
+      },
+      {
+        "id": "lem-locally-finite-union-of-sigma-locally-finite-bases",
+        "kind": "lemma",
+        "title": "A locally finite open cover by subspaces with $\\sigma$-locally-finite bases yields a $\\sigma$-locally-finite basis of the whole space",
+        "strategy": "At each countable layer take the union of the corresponding relative bases. Local finiteness of the cover reduces the neighbourhood check to finitely many subspaces, and openness of the cover members makes the union a basis.",
+        "deps": ["def-discrete-family-and-sigma-bases", "def-cover-refinement-and-local-finiteness", "def-subspace-topology-top"]
+      },
+      {
+        "id": "thm-smirnov-local-metrization",
+        "kind": "theorem",
+        "title": "Under choice, a space is metrizable if and only if it is paracompact, Hausdorff, and locally metrizable",
+        "strategy": "For sufficiency refine the cover by metrizable neighbourhoods locally finitely, take sigma-locally-finite bases in the refinements, merge them, and apply Nagata–Smirnov using paracompact Hausdorff regularity. For necessity use Stone's theorem and the space itself as a metrizable neighbourhood.",
+        "deps": ["def-locally-metrizable-space", "lem-locally-finite-union-of-sigma-locally-finite-bases", "lem-metric-spaces-have-sigma-locally-finite-bases", "thm-nagata-smirnov-metrization", "thm-stone-metric-spaces-are-paracompact", "lem-paracompact-hausdorff-is-regular", "def-paracompact-space", "def-hausdorff-space"]
+      }
+    ]
+  },
+  {
+    "order": 276,
+    "id": "metrization-theorems-examples",
+    "kind": "B",
+    "category": "topology",
+    "title": "Metrization: Urysohn, Nagata–Smirnov, Bing, Smirnov: Examples and Counterexamples",
+    "requires": ["metrization-theorems"],
+    "items": [
+      {
+        "id": "ex-uncountable-discrete-space-meets-bing-not-urysohn",
+        "kind": "example",
+        "title": "An uncountable discrete space is metrizable and has a discrete basis, but is not second countable",
+        "strategy": "Use the zero-one discrete metric and the singleton basis; any basis must contain every singleton, so an uncountable underlying set prevents second countability.",
+        "deps": ["def-discrete-family-and-sigma-bases", "def-metrizable-space", "def-second-countable-space", "def-standard-topologies", "thm-r-uncountable"]
+      },
+      {
+        "id": "ex-lower-limit-line-is-regular-and-not-metrizable",
+        "kind": "example",
+        "title": "Under choice, the lower-limit line is regular and separable but not second countable and therefore not metrizable",
+        "strategy": "Use the published clopen basis and rational density. A putative countable basis must assign to every real point a distinct basis member whose least point is that real; this contradicts uncountability. The metric countability equivalence then rules out metrizability.",
+        "deps": ["def-lower-limit-topology", "lem-lower-limit-line-is-regular-and-lindelof", "def-separable-space", "def-second-countable-space", "thm-metric-countability-equivalences", "thm-rationals-countable", "lem-rat-embeds-dense", "thm-r-uncountable", "def-axiom-of-choice"]
+      },
+      {
+        "id": "fs-every-regular-space-is-metrizable",
+        "kind": "false-statement",
+        "title": "FALSE: every regular space is metrizable",
+        "strategy": "Use the regular nonmetrizable lower-limit line and identify its missing countability hypothesis.",
+        "deps": ["def-lower-limit-topology", "lem-lower-limit-line-is-regular-and-lindelof", "def-separable-space", "def-second-countable-space", "thm-metric-countability-equivalences", "thm-rationals-countable", "lem-rat-embeds-dense", "thm-r-uncountable", "def-regular-and-t3-spaces", "def-axiom-of-choice"]
+      },
+      {
+        "id": "ex-niemytzki-plane-metrization-profile",
+        "kind": "example",
+        "title": "Under choice, the Niemytzki plane is Tychonoff and locally metrizable but not normal, paracompact, or metrizable",
+        "strategy": "Build the tangent-disk basis and verify its point-separation and local metrization directly. Prove complete regularity with explicit tangent-disk bump functions. Its countable dense upper-half-plane subset and uncountable closed discrete boundary contradict Jones's normal-space bound; Stone and paracompact-Hausdorff normality then rule out metrizability and paracompactness.",
+        "deps": ["def-locally-metrizable-space", "def-completely-regular-and-tychonoff-spaces", "thm-basis-criterion", "def-topology-basis-subbasis", "lem-jones-normal-density-discrete-bound", "thm-cardinal-power-set-and-cantor", "thm-rationals-countable", "thm-r-uncountable", "thm-stone-metric-spaces-are-paracompact", "thm-paracompact-hausdorff-implies-normal", "def-axiom-of-choice"]
+      }
+    ]
+  }
+]
