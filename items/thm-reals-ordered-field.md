@@ -35,7 +35,7 @@ The relation of [[def-real-order]] is well defined and makes $\mathbb{R}$
 
 **Given:** Reals $x, y$ with representatives $(a_n), (b_n)$.
 
-[L1] Null definition: a null perturbation is eventually smaller than any positive rational ([[def-null-sequence]]).
+[L1] A sequence $(u_n)_{n \ge 1}$ of rational numbers is null if, for every rational $\varepsilon > 0$, there is $N \in \mathbb{N}$ such that $|u_n| < \varepsilon$ for every $n \ge N$ ([[def-null-sequence]]).
 
 [L2] Ordered-field arithmetic in $\mathbb{Q}$: $\delta/2 > 0$; sums and products of eventual lower bounds ([[thm-rat-ordered-field]]).
 

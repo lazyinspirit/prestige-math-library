@@ -123,6 +123,21 @@ quantifiers, hypotheses, conclusion, and direction with maximum fidelity. This
 rule binds scaffolding, authoring, Beta/Alpha audit, judge review, and the
 orchestrator's own edits.
 
+### Authorship disclosure and AI-generated truth risk (hard rule)
+
+Every future mathematical-content item carries `authorship: ai-generated |
+ai-altered | literature-derived`, including definitions, propositions, theorems,
+lemmas, corollaries, examples, counterexamples, false statements, and
+mathematical remarks. Use `ai-generated` whenever its particular claim, proof,
+witness, or refutation is not both well-established and documented in reliable
+literature. Beta records the evidence or the absence of it in the batch source
+ledger; Alpha verifies the tag at Step 6. The tag is a heightened truth-risk
+route: if there is concrete doubt about an AI-generated statement or witness,
+search for counterexamples before authoring or accepting a proof repair. A proof
+repair does not establish that its Statement is true. A counterexample requires
+the claim to be narrowed, the witness to be replaced, or the item to be dropped.
+Do not backfill legacy content merely to meet this future-session rule.
+
 ### Definition justification (hard rule)
 
 Every definition must be fully justified for logical validity and
@@ -237,12 +252,24 @@ and prints the escalation set: every id whose total exceeds one.
 
 Measure repairs from disk; do not count them from what an agent reported.
 
-### Self-contained scope (hard rule, owner instruction 2026-07-27)
+### Self-contained scope and last-resort external fallback (hard rule, owner instruction 2026-08-01)
 
-**No item may rest on a result this library has not established.** If a theorem,
-example or counterexample requires machinery beyond the current scope — measure
-theory, functional analysis, or anything else the library has not yet built — it
-is **DROPPED from the scaffold**, not marked and kept.
+**No item normally rests on a result this library has not established.** If a
+theorem, example, or counterexample needs a well-known result absent from the
+library, Beta must first avoid `ai-generated` dependencies, search reputable
+sources for the exact statement and conventions, and try to prove that result
+from available library dependencies. If that does not close, it decomposes,
+rescopes, or **drops the item from the scaffold** with a note saying why and
+what would license it.
+
+**The narrow last resort:** where the needed result is well-established and
+literature-backed, the exact source statement has been checked, and a local
+proof cannot be built in scope, Beta may create a source-cited `rem-` item with
+`proved_here: false`. The dependent item lists that `rem-` in `deps`; the batch
+notes and proof contract record the exact source, the attempted local route and
+why it failed, and why the external result is necessary. This is the only new
+load-bearing use of the ‡ tier. `external_refs` is for non-logical mentions
+only, and may never be used to disguise a dependency.
 
 **The one exception is a foundational axiom the library has already adopted**:
 the Axiom of Choice and its relatives (`def-axiom-of-choice`,
@@ -253,34 +280,34 @@ Feferman-Levy model, the constructible universe) are exempt on the same
 grounds: they are cited as external facts about an axiom, never used as a step
 inside a mathematical proof.
 
-**What this changes.** Until now an unproved dependency was permitted whenever
-it was visibly marked — the fuchsia / dotted / ‡ "not proved here" tier. **That
-tier is not removed.** The `deferred-*` pages exist precisely to record results
-the library does not prove, they stay, and their rendering is untouched. What
-changes is that **nothing in the mathematical development may depend on them**.
-The ‡ tier is a catalogue, not a licence to build on unproved material.
+**What this changes.** The fuchsia / dotted / ‡ "not proved here" tier remains
+visible, and the `deferred-*` pages remain its main catalogue. It is not a
+general licence to build on unproved material: its only new load-bearing use is
+the source-checked, documented last resort above. The marker makes that
+exception honest to readers rather than hiding it.
 
 **Consequences for scaffolding.** When a prose scaffold lists a result whose
 standard proof needs out-of-scope machinery:
 
-- drop the item from the page, and
-- record in the scaffold **why** it was dropped and **what would license it**,
-  so it can be restored when the prerequisite track exists.
+- search for and record the exact reputable source statement;
+- attempt to derive it from existing library dependencies, adding a local proof
+  item if that succeeds;
+- use the source-cited ‡ fallback only if that proof cannot be built in scope;
+  otherwise drop the item and record **why** and **what would license it**.
 
 Richness is added back later, at or below the current dependency level, as the
 advanced topics are developed. **A dropped item is deferred, not deleted** — the
 scaffold note is what makes it recoverable.
 
 **This is forward-looking** (owner: "from now on"). Published items are not
-retrofitted. As of 2026-07-27 only nine items carry a load-bearing dependency on
-a ‡ item, and every one is a choice or independence result covered by the
-exception above, so the existing corpus is already compliant.
+retrofitted. Existing external dependencies retain their recorded provenance;
+new ones must satisfy the source-checked fallback above.
 
 **Where it bites first.** A scaffold that says "this is true but the standard
 proof uses Lebesgue measurability", or that reaches for a Vitali set, a
 non-measurable function, a positive-measure hypothesis, or a Banach-space
-theorem, is describing an item that must be dropped and noted — not authored
-with a ‡ dependency.
+theorem, triggers the exact-source search and local-proof attempt above; absent
+the documented fallback, it is dropped and noted.
 
 The obligations that recur, and what each requires:
 
@@ -953,7 +980,7 @@ directory directly.
 
 The library records three orthogonal axes per item: origin (session or pipeline),
 authorship provenance (`ai-generated`, `ai-altered`, or `literature-derived` on
-future theorems, lemmas, and corollaries), and verification (mechanical
+future mathematical-content items), and verification (mechanical
 precheck, paired judge including a cross-family DeepSeek lane, owner audit).
 The authorship chip tells the reader whether the mathematical text was generated,
 materially altered, or faithfully derived from literature; `proved_here` still

@@ -1,0 +1,1539 @@
+[
+  {
+    "order": 163,
+    "id": "bounded-variation-and-riemann-stieltjes",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Bounded Variation and the Riemann–Stieltjes Integral",
+    "companion": "bounded-variation-and-riemann-stieltjes-examples",
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-variation-and-total-variation",
+        "kind": "definition",
+        "title": "Bounded variation and total variation of a real function on $[a,b]$",
+        "strategy": "For a partition $P=(n,t)$ put $V(f,P)=\\sum_{i<n}|f(t_{i+1})-f(t_i)|$. Define bounded variation by boundedness above of the nonempty set of all $V(f,P)$, and define $\\operatorname{Var}_{[a,b]}f$ as its supremum. Discharge existence and uniqueness of the supremum from completeness, and state separately that the definition is for $a<b$; on a singleton the variation is set to $0$. Keep the finite sum indexed by $i<n$, since $\\mathbb N$ contains $0$.",
+        "deps": [
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-bounded-set",
+          "def-complete-ordered-field",
+          "lem-sup-unique",
+          "def-interval",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "lem-basic-properties-of-total-variation",
+        "kind": "lemma",
+        "title": "Total variation bounds every increment; a function of bounded variation is bounded, and zero variation means constant",
+        "strategy": "Insert any two points $x<y$ into a partition to obtain $|f(y)-f(x)|\\leq\\operatorname{Var}_{[a,b]}f$. With $x=a$, the triangle inequality gives a global bound for $f$. Prove $\\operatorname{Var}f=0$ iff every increment vanishes; include the constant-function computation. These clauses are the reusable boundedness and separation facts needed by the algebra and integral estimates.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "lem-variation-additive-on-subintervals",
+        "kind": "lemma",
+        "title": "Total variation is additive over adjacent subintervals and decreases under restriction",
+        "strategy": "For $a<c<b$, splice partitions of $[a,c]$ and $[c,b]$ to obtain one inequality. For the reverse inequality, insert $c$ into an arbitrary partition of $[a,b]$ and split the variation sum at the resulting index. Take suprema only after both finite-sum inequalities are established. Conclude $\\operatorname{Var}_{[a,b]}f=\\operatorname{Var}_{[a,c]}f+\\operatorname{Var}_{[c,b]}f$ and the restriction bound for every subinterval.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-sup-unique",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-variation-function-and-positive-negative-variation",
+        "kind": "definition",
+        "title": "The variation function and the positive and negative variations of a function of bounded variation",
+        "strategy": "For $f$ of bounded variation on $[a,b]$, define $V_f(a)=0$ and $V_f(x)=\\operatorname{Var}_{[a,x]}f$ for $x>a$. Define $P_f(x)=\\tfrac12(V_f(x)+f(x)-f(a))$ and $N_f(x)=\\tfrac12(V_f(x)-f(x)+f(a))$. Every term is already a real by the preceding items. Do not call $P_f,N_f$ monotone in the definition; that is the content of the next lemma.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "lem-variation-additive-on-subintervals",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-variation-function-and-jordan-identities",
+        "kind": "lemma",
+        "title": "The variation function and the positive and negative variations are nondecreasing, with $f=f(a)+P_f-N_f$ and $V_f=P_f+N_f$",
+        "strategy": "For $x<y$, additivity gives $V_f(y)-V_f(x)=\\operatorname{Var}_{[x,y]}f\\geq|f(y)-f(x)|$. The two inequalities obtained by removing the absolute value show that both increments of $P_f$ and $N_f$ are nonnegative. The displayed identities are direct algebra from their definitions. Record $P_f(a)=N_f(a)=0$.",
+        "deps": [
+          "def-variation-function-and-positive-negative-variation",
+          "lem-variation-additive-on-subintervals",
+          "lem-basic-properties-of-total-variation",
+          "def-monotone-function",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "thm-jordan-decomposition-for-bv-functions",
+        "kind": "theorem",
+        "title": "Jordan decomposition: a real function on $[a,b]$ has bounded variation iff it is a difference of two nondecreasing functions",
+        "strategy": "The forward implication is the canonical decomposition $f=f(a)+P_f-N_f$. Conversely, if $f=g-h$ with $g,h$ nondecreasing, every partition sum of absolute increments is at most $(g(b)-g(a))+(h(b)-h(a))$. Add the minimality clause: for every normalised decomposition $f=f(a)+g-h$ with nondecreasing $g,h$ and $g(a)=h(a)=0$, one has $P_f\\leq g$, $N_f\\leq h$, and hence $V_f\\leq g+h$. This makes the theorem more than an existence statement.",
+        "deps": [
+          "lem-variation-function-and-jordan-identities",
+          "def-bounded-variation-and-total-variation",
+          "def-monotone-function",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "cor-bv-functions-have-no-second-kind-discontinuities",
+        "kind": "corollary",
+        "title": "A function of bounded variation has finite one-sided limits at every relevant point and no discontinuity of the second kind",
+        "strategy": "Apply the published one-sided-limit theorem to the nondecreasing functions in the Jordan decomposition and subtract their finite one-sided limits. At an interior point the function is continuous exactly when the resulting left and right limits agree with its value; every discontinuity is therefore removable or a jump, never of the second kind. Do not claim almost-everywhere differentiability.",
+        "deps": [
+          "thm-jordan-decomposition-for-bv-functions",
+          "thm-monotone-discontinuities-are-jumps",
+          "def-one-sided-limits",
+          "thm-algebra-of-function-limits"
+        ]
+      },
+      {
+        "id": "lem-total-variation-seminorm-laws",
+        "kind": "lemma",
+        "title": "Total variation is homogeneous and subadditive: $\\operatorname{Var}(cf)=|c|\\operatorname{Var}(f)$ and $\\operatorname{Var}(f+g)\\leq\\operatorname{Var}(f)+\\operatorname{Var}(g)$",
+        "strategy": "Prove both inequalities first for every fixed partition by the absolute-value laws and finite-sum scaling or additivity, then take suprema. Include $\\operatorname{Var}(-f)=\\operatorname{Var}(f)$ and closure of bounded variation under linear combinations as explicit consequences.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "thm-bv-functions-form-an-algebra",
+        "kind": "theorem",
+        "title": "Functions of bounded variation form an algebra, with $\\operatorname{Var}(fg)\\leq M_f\\operatorname{Var}(g)+M_g\\operatorname{Var}(f)$ when $|f|\\leq M_f$ and $|g|\\leq M_g$",
+        "strategy": "Use $f(y)g(y)-f(x)g(x)=f(y)(g(y)-g(x))+g(x)(f(y)-f(x))$ on each partition interval, then sum. Boundedness of every BV function is supplied by the basic-properties lemma, so the estimate proves closure under products. State closure under sums and scalar multiples by citation to the seminorm laws rather than redoing it.",
+        "deps": [
+          "lem-total-variation-seminorm-laws",
+          "lem-basic-properties-of-total-variation",
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "cor-bv-functions-are-riemann-integrable",
+        "kind": "corollary",
+        "title": "Every function of bounded variation on a closed bounded interval is Riemann integrable",
+        "strategy": "Write the function as a difference of nondecreasing functions by Jordan decomposition. Each summand is Riemann integrable by the published monotone-function theorem, and linearity of the integral handles the difference. This proof deliberately identifies the ordinary Riemann integral and introduces no Stieltjes notation yet.",
+        "deps": [
+          "thm-jordan-decomposition-for-bv-functions",
+          "thm-monotone-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "def-darboux-integral"
+        ]
+      },
+      {
+        "id": "thm-c1-lipschitz-continuous-bv-hierarchy",
+        "kind": "theorem",
+        "title": "A continuously differentiable function on $[a,b]$ is Lipschitz, and every Lipschitz function there is continuous and of bounded variation",
+        "strategy": "If $f'$ is continuous on $[a,b]$, compactness bounds $|f'|$ and the published bounded-derivative corollary makes $f$ Lipschitz. If $f$ is $L$-Lipschitz, every variation sum is at most $L\\sum_i(t_{i+1}-t_i)=L(b-a)$, so $f$ is BV; continuity follows through the real/metric dictionary and regularity hierarchy. Claim only the inclusions. Their strictness is exhibited on the companion page and is not a dependency of this theorem.",
+        "deps": [
+          "def-derivative",
+          "def-continuity-real",
+          "cor-boundedness-theorem-r",
+          "cor-bounded-derivative-implies-lipschitz",
+          "def-lipschitz-holder-contraction",
+          "lem-real-and-metric-notions-agree",
+          "thm-metric-regularity-hierarchy",
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "def-riemann-stieltjes-sum-and-integral",
+        "kind": "definition",
+        "title": "Riemann–Stieltjes sums and the Riemann–Stieltjes integral $\\int_a^b f\\,d\\alpha$",
+        "strategy": "For a tagged partition $(P,\\xi)$ define $S(f,\\alpha;P,\\xi)=\\sum_{i<n}f(\\xi_i)(\\alpha(t_{i+1})-\\alpha(t_i))$. Define integrability by the existence of a real $I$ such that every tagged partition of sufficiently small mesh has sum within $\\varepsilon$ of $I$. Extend the notation by $\\int_a^a f\\,d\\alpha=0$ and reversal of limits, matching the orientation convention for the ordinary integral. Emphasise that this is a new integral depending on both $f$ and $\\alpha$, not a relabelling of $\\int f\\,dx$.",
+        "deps": [
+          "def-partition-and-refinement",
+          "def-tagged-partition-and-riemann-sum",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-interval",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "lem-riemann-stieltjes-integral-unique",
+        "kind": "lemma",
+        "title": "A Riemann–Stieltjes integral, when it exists, has a unique value",
+        "strategy": "If $I$ and $J$ both satisfy the small-mesh condition, choose one uniform tagged partition whose mesh is below both corresponding thresholds. The triangle inequality gives $|I-J|<2\\varepsilon$ for every positive $\\varepsilon$, hence $I=J$. Existence of arbitrarily fine uniform partitions uses the canonical naturals and the reciprocal Archimedean corollary. This lemma discharges the definition's naming obligation.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-partition-and-refinement",
+          "cor-archimedean-reciprocal",
+          "def-canonical-natural",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "lem-riemann-stieltjes-refinement-estimate",
+        "kind": "lemma",
+        "title": "Refining a tagged partition changes a Stieltjes sum by at most the oscillation of the integrand times the total variation of the integrator",
+        "strategy": "Let $Q$ refine $P$. Group the subintervals of $Q$ inside each subinterval of $P$ and telescope the increments of $\\alpha$. If all values of $f$ within each coarse interval differ by at most $\\omega$, compare the refined tags with the coarse tag and obtain $|S_Q-S_P|\\leq 2\\omega\\operatorname{Var}_{[a,b]}\\alpha$ (or the sharper constant if the grouping gives it). State also the same estimate for two taggings of one partition. This is the focused technical lemma used by the existence theorem.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-bounded-variation-and-total-variation",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "thm-riemann-stieltjes-existence-continuous-bv",
+        "kind": "theorem",
+        "title": "A continuous integrand is Riemann–Stieltjes integrable against every integrator of bounded variation",
+        "strategy": "Use Heine–Cantor to make the oscillation of $f$ small on intervals of small mesh. Form a sequence of left-tag sums on uniform partitions; the refinement estimate makes it Cauchy, so completeness gives a limit $I$. Compare an arbitrary sufficiently fine tagged sum with a common refinement of it and a sufficiently fine uniform partition; the same estimate puts it near $I$. Treat zero variation separately to avoid dividing by it. Mark this as a landmark existence theorem.",
+        "deps": [
+          "lem-riemann-stieltjes-refinement-estimate",
+          "lem-riemann-stieltjes-integral-unique",
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-bounded-variation-and-total-variation",
+          "thm-heine-cantor-r",
+          "def-continuity-real",
+          "thm-cauchy-criterion-via-lub",
+          "def-real-limit",
+          "def-sequence",
+          "def-partition-and-refinement"
+        ]
+      },
+      {
+        "id": "cor-riemann-stieltjes-integral-bound",
+        "kind": "corollary",
+        "title": "If $|f|\\leq M$, $\\alpha$ has bounded variation and $\\int_a^b f\\,d\\alpha$ exists, then $|\\int_a^b f\\,d\\alpha|\\leq M\\operatorname{Var}_{[a,b]}\\alpha$",
+        "strategy": "Every Stieltjes sum satisfies the displayed bound by the triangle inequality and the definition of total variation. Pass to the integral through the defining small-mesh limit and preservation of non-strict inequalities. The statement applies beyond the continuous-integrand existence theorem whenever existence has been obtained by another route.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-bounded-variation-and-total-variation",
+          "lem-riemann-stieltjes-integral-unique",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-limit-preserves-order",
+          "lem-of-triangle-inequality",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "thm-riemann-stieltjes-linearity-and-additivity",
+        "kind": "theorem",
+        "title": "The Riemann–Stieltjes integral is linear in the integrand and integrator; it is additive across a cut where the integrand is continuous",
+        "strategy": "Linearity follows from the exact finite-sum identities and uniqueness. For $a<c<b$, prove the interval formula by inserting $c$ and splicing tagged partitions; continuity of $f$ at $c$ controls the one interval affected when a partition does not already contain $c$. State the converse carefully: integrability on the two pieces implies integrability on the whole under this continuity hypothesis. Do not assert unconditional interval additivity; the companion page gives a shared-jump counterexample.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "lem-riemann-stieltjes-integral-unique",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-continuity-real",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "thm-riemann-stieltjes-integration-by-parts",
+        "kind": "theorem",
+        "title": "Riemann–Stieltjes integration by parts: if one of $\\int_a^b f\\,d\\alpha$ and $\\int_a^b\\alpha\\,df$ exists, so does the other, and their sum is $f(b)\\alpha(b)-f(a)\\alpha(a)$",
+        "strategy": "Start from summation by parts on the partition increments. Match the tags in the complementary sum explicitly and estimate the endpoint-tag discrepancy as the mesh shrinks; do not cite the ordinary integration-by-parts theorem, whose hypotheses concern derivatives and are unrelated. The argument is symmetric, so existence of either integral yields the other and the boundary identity. Keep the endpoint convention visible.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "lem-riemann-stieltjes-integral-unique",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-abel-summation-by-parts"
+        ]
+      },
+      {
+        "id": "cor-riemann-stieltjes-existence-bv-continuous",
+        "kind": "corollary",
+        "title": "A function of bounded variation is Riemann–Stieltjes integrable against every continuous integrator",
+        "strategy": "Apply the continuous-integrand existence theorem to $\\alpha$ as integrand and $f$ as BV integrator, obtaining $\\int\\alpha\\,df$. Integration by parts then produces $\\int f\\,d\\alpha$. This is the second elementary rung of the existence ladder and needs no theorem about common discontinuities.",
+        "deps": [
+          "thm-riemann-stieltjes-existence-continuous-bv",
+          "thm-riemann-stieltjes-integration-by-parts",
+          "def-bounded-variation-and-total-variation",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "cor-riemann-stieltjes-agrees-with-riemann",
+        "kind": "corollary",
+        "title": "For the identity integrator $\\alpha(x)=x$, Riemann–Stieltjes integrability and Riemann integrability agree and $\\int_a^b f\\,d\\alpha=\\int_a^b f(x)\\,dx$",
+        "strategy": "For every tagged partition the Stieltjes increment is $\\alpha(t_{i+1})-\\alpha(t_i)=t_{i+1}-t_i$, so the Stieltjes sum is exactly the published Riemann sum, term by term. Invoke the Darboux–Riemann agreement theorem in both directions. This explicit dictionary keeps the two integrals distinct while recording their genuine overlap.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-tagged-partition-and-riemann-sum",
+          "thm-darboux-equals-riemann",
+          "def-darboux-integral",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "thm-riemann-stieltjes-c1-integrator-reduction",
+        "kind": "theorem",
+        "title": "If $f$ is Riemann integrable and $\\alpha$ is differentiable with a continuous derivative, then $\\int_a^b f\\,d\\alpha=\\int_a^b f(x)\\alpha'(x)\\,dx$",
+        "strategy": "Assume $\\alpha$ is continuous on $[a,b]$ and differentiable on $(a,b)$ with continuous derivative there extending continuously to the endpoints. On each partition interval the mean value theorem gives $\\alpha(t_{i+1})-\\alpha(t_i)=\\alpha'(\\eta_i)\\Delta_i$. Uniform continuity of $\\alpha'$ and boundedness of the integrable $f$ compare this Stieltjes sum with a Riemann sum for $f\\alpha'$. Product integrability is already published. Pass through the two mesh definitions and state the identity-integrator corollary as the special case $\\alpha'=1$.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "cor-riemann-stieltjes-agrees-with-riemann",
+          "cor-mean-value-theorem",
+          "def-derivative",
+          "def-continuity-real",
+          "thm-heine-cantor-r",
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "thm-darboux-equals-riemann"
+        ]
+      },
+      {
+        "id": "lem-young-partition-sum-estimate",
+        "kind": "lemma",
+        "title": "Young's partition estimate for Hölder functions with rational exponents whose sum exceeds $1$",
+        "strategy": "Let $f$ be $\\gamma$-Hölder and $\\alpha$ be $\\beta$-Hölder, with rational $0<\\gamma,\\beta\\leq1$ and $p=\\gamma+\\beta>1$. Remove interior partition points one at a time. Choose a point whose adjacent total length is at most $2(v-u)/(k-1)$; removing it changes the left-point sum by at most $C_fC_\\alpha$ times that length to the power $p$. Summing these errors is bounded by the convergent rational $p$-series. Localise the bound to every interval of a coarse partition to obtain $|S_Q-S_P|\\leq K_pC_fC_\\alpha(b-a)\\|P\\|^{p-1}$ for refinements, and include the analogous tagged-versus-left-tag estimate. This is the long-proof decomposition needed by Young existence.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-lipschitz-holder-contraction",
+          "lem-real-and-metric-notions-agree",
+          "def-rational-power",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "thm-p-series-rational",
+          "def-partition-and-refinement",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "thm-young-riemann-stieltjes-existence",
+        "kind": "theorem",
+        "title": "Young existence: if $f$ is $\\gamma$-Hölder and $\\alpha$ is $\\beta$-Hölder with rational $\\gamma+\\beta>1$, then $\\int_a^b f\\,d\\alpha$ exists",
+        "strategy": "Apply the partition estimate to left-tag sums on uniform partitions to obtain a Cauchy sequence and hence a limit. The refinement and tagging clauses then put every sufficiently fine tagged sum near that limit. The proof is elementary and rests on the rational $p$-series at $p=\\gamma+\\beta$; it uses neither measure theory nor functional analysis. State the Young estimate for the difference from $f(a)(\\alpha(b)-\\alpha(a))$ as a quantitative consequence.",
+        "deps": [
+          "lem-young-partition-sum-estimate",
+          "def-riemann-stieltjes-sum-and-integral",
+          "lem-riemann-stieltjes-integral-unique",
+          "thm-cauchy-criterion-via-lub",
+          "def-real-limit",
+          "def-sequence",
+          "def-lipschitz-holder-contraction",
+          "lem-real-and-metric-notions-agree"
+        ]
+      },
+      {
+        "id": "rem-riemann-stieltjes-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions and proved scope for bounded variation and the Riemann–Stieltjes integral",
+        "strategy": "Record the orientation convention, the distinction between the Riemann and Riemann–Stieltjes integrals, the $a<b$ convention for variation, and that Hölder exponents are rational because only rational powers are available in the declared prerequisites. State exactly what is proved: Jordan decomposition, the elementary existence ladder, integration by parts, the identity and continuously differentiable integrator agreements, and Young existence. Do not mention almost-everywhere derivatives, Lebesgue integration, or the recorded-not-proved absolute-continuity item.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "thm-jordan-decomposition-for-bv-functions",
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-riemann-stieltjes-existence-continuous-bv",
+          "cor-riemann-stieltjes-existence-bv-continuous",
+          "thm-riemann-stieltjes-integration-by-parts",
+          "cor-riemann-stieltjes-agrees-with-riemann",
+          "thm-riemann-stieltjes-c1-integrator-reduction",
+          "thm-young-riemann-stieltjes-existence"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 164,
+    "id": "bounded-variation-and-riemann-stieltjes-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Bounded Variation and the Riemann–Stieltjes Integral: Examples and Counterexamples",
+    "requires": [
+      "bounded-variation-and-riemann-stieltjes"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-absolute-value-lipschitz-not-c1",
+        "kind": "example",
+        "title": "$x\\mapsto|x|$ on $[-1,1]$ is Lipschitz and of bounded variation but is not continuously differentiable",
+        "strategy": "Use the reverse triangle inequality for the Lipschitz constant $1$, compute variation $2$ by monotonicity on each side of $0$ and interval additivity, and compute the two difference-quotient limits at $0$ directly to show non-differentiability. This is the strictness witness for the continuously-differentiable-to-Lipschitz inclusion without citing an examples-page item.",
+        "deps": [
+          "thm-c1-lipschitz-continuous-bv-hierarchy",
+          "def-bounded-variation-and-total-variation",
+          "lem-variation-additive-on-subintervals",
+          "def-lipschitz-holder-contraction",
+          "lem-real-and-metric-notions-agree",
+          "def-derivative",
+          "def-abs-value",
+          "cor-of-reverse-triangle"
+        ]
+      },
+      {
+        "id": "ex-cantor-function-bv-not-lipschitz",
+        "kind": "example",
+        "title": "The Cantor function is continuous and of bounded variation but is not Lipschitz",
+        "strategy": "Continuity and monotonicity are published, so its total variation is $c(1)-c(0)=1$. For the Lipschitz failure use endpoints whose ternary descriptions first differ at stage $n$: their distance is $3^{-n}$ while the Cantor-function increment is $2^{-n}$, and the ratios $(3/2)^n$ are unbounded. Keep the index at $n\\geq1$ and use integer powers.",
+        "deps": [
+          "thm-c1-lipschitz-continuous-bv-hierarchy",
+          "def-bounded-variation-and-total-variation",
+          "thm-cantor-function-properties",
+          "cor-cantor-function-is-continuous",
+          "thm-cantor-set-ternary-description",
+          "def-lipschitz-holder-contraction",
+          "def-integer-power",
+          "lem-geometric-sequence-null"
+        ]
+      },
+      {
+        "id": "cex-continuous-function-of-unbounded-variation",
+        "kind": "counterexample",
+        "title": "The continuous function $x\\mapsto x\\,d(1/x,\\mathbb Z)$ on $(0,1]$, extended by $0$ at $0$, has unbounded variation",
+        "strategy": "Let $d(t,\\mathbb Z)$ be the distance to the embedded integers. Its $1$-Lipschitz property gives continuity away from $0$, while $0\\leq x d(1/x,\\mathbb Z)\\leq x/2$ gives continuity at $0$. At reciprocal integers the value is $0$; at reciprocals of half-integers it is comparable to $1/\\iota(k+1)$. Partitions alternating through these points have variation bounded below by harmonic partial sums, which are unbounded. Write all natural numbers inside real expressions through $\\iota$.",
+        "deps": [
+          "def-bounded-variation-and-total-variation",
+          "lem-integer-part",
+          "def-metric-bounded-diameter",
+          "lem-distance-to-set-is-lipschitz",
+          "lem-real-and-metric-notions-agree",
+          "thm-p-series-rational",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-continuity-real",
+          "def-partition-and-refinement"
+        ]
+      },
+      {
+        "id": "ex-step-integrator-evaluates-at-the-jump",
+        "kind": "example",
+        "title": "A unit step integrator evaluates a continuous integrand at its jump: $\\int_a^b f\\,dH_c=f(c)$",
+        "strategy": "For $a<c<b$ take $H_c(x)=0$ for $x<c$ and $H_c(x)=1$ for $x\\geq c$. Every Stieltjes sum has only the interval carrying the jump as a nonzero contribution. Its tag approaches $c$ with the mesh, so continuity of $f$ gives the limit $f(c)$. Verify directly that $H_c$ has total variation $1$.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-riemann-stieltjes-existence-continuous-bv",
+          "def-bounded-variation-and-total-variation",
+          "def-continuity-real",
+          "def-partition-and-refinement"
+        ]
+      },
+      {
+        "id": "ex-cantor-function-as-riemann-stieltjes-integrator",
+        "kind": "example",
+        "title": "For the Cantor function $c$, $\\int_0^1 1\\,dc=1$",
+        "strategy": "The Cantor function is continuous and nondecreasing from $0$ to $1$, hence BV. Every Stieltjes sum for the constant integrand $1$ telescopes exactly to $c(1)-c(0)=1$, independently of tags and mesh. State no claim about $c'$ almost everywhere.",
+        "deps": [
+          "def-riemann-stieltjes-sum-and-integral",
+          "thm-cantor-function-properties",
+          "cor-cantor-function-is-continuous",
+          "def-bounded-variation-and-total-variation",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "cex-common-jump-prevents-riemann-stieltjes-integrability",
+        "kind": "counterexample",
+        "title": "Both subinterval Stieltjes integrals can exist while the whole integral fails when integrand and integrator share a jump",
+        "strategy": "On $[-1,1]$ let $\\alpha(x)=0$ for $x<0$ and $1$ for $x\\geq0$, and let $f(x)=0$ for $x\\leq0$ and $1$ for $x>0$. The integrals on $[-1,0]$ and $[0,1]$ are both $0$: on the left the jump is sampled at values where $f=0$, and on the right $\\alpha$ is constant. On the whole interval, tagged partitions with one interval crossing $0$ give sums $0$ or $1$ according as the tag lies on the nonpositive or positive side, with arbitrarily small mesh. This is the precise failure behind the continuity hypothesis in interval additivity.",
+        "deps": [
+          "thm-riemann-stieltjes-linearity-and-additivity",
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-partition-and-refinement",
+          "def-tagged-partition-and-riemann-sum"
+        ]
+      },
+      {
+        "id": "ex-riemann-stieltjes-polynomial-computation",
+        "kind": "example",
+        "title": "$\\int_0^1 x\\,d(x^2)=2/3$",
+        "strategy": "Apply the continuously differentiable integrator reduction with $\\alpha(x)=x^2$ and $\\alpha'(x)=2x$, then evaluate $\\int_0^1 2x^2\\,dx$ by the working FTC and the natural-power derivative rule. Keep the ordinary and Stieltjes integral symbols distinct through the calculation.",
+        "deps": [
+          "thm-riemann-stieltjes-c1-integrator-reduction",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "def-integer-power",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "ex-riemann-stieltjes-nondifferentiable-integrator",
+        "kind": "example",
+        "title": "$\\int_0^1 x\\,d|x-1/2|=1/4$, although the integrator is not differentiable at $1/2$",
+        "strategy": "The integrator is continuous and BV, so existence follows from the BV-integrand/continuous-integrator corollary with $f(x)=x$. Integration by parts gives the value as $[x|x-1/2|]_0^1-\\int_0^1|x-1/2|\\,dx=1/2-1/4$. Compute the ordinary integral by splitting at $1/2$. Verify the two one-sided difference quotients to show the continuously differentiable reduction does not apply.",
+        "deps": [
+          "cor-riemann-stieltjes-existence-bv-continuous",
+          "thm-riemann-stieltjes-integration-by-parts",
+          "def-bounded-variation-and-total-variation",
+          "thm-additivity-over-subintervals",
+          "cor-primitives-of-a-continuous-function",
+          "def-derivative",
+          "def-abs-value"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 165,
+    "id": "improper-integrals",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Improper Integrals",
+    "companion": "improper-integrals-examples",
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc"
+    ],
+    "items": [
+      {
+        "id": "def-improper-integral-at-infinity",
+        "kind": "definition",
+        "title": "Improper integrals over $[a,\\infty)$ and $(-\\infty,b]$ as limits of proper Riemann integrals",
+        "strategy": "Require $f$ to be Riemann integrable on every compact truncation. Define $\\int_a^\\infty f$ as $\\lim_{R\\to+\\infty}\\int_a^R f$ and $\\int_{-\\infty}^b f$ analogously, using the published limit-at-infinity definition; the symbols $\\pm\\infty$ are not real endpoints. Uniqueness is inherited from the uniqueness clause proved in that definition. Use conventional $\\lim$ notation after this well-definedness is established.",
+        "deps": [
+          "def-oriented-integral",
+          "def-limits-at-infinity",
+          "lem-integrability-on-a-subinterval",
+          "def-darboux-integral",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-improper-integral-at-a-finite-endpoint",
+        "kind": "definition",
+        "title": "Improper integrals at a finite endpoint as one-sided limits of proper Riemann integrals",
+        "strategy": "For a function on $(a,b]$ integrable on every $[c,b]$ with $a<c<b$, define $\\int_a^b f=\\lim_{c\\to a^+}\\int_c^b f$; define the right-endpoint form symmetrically. State that the value of $f$ at the singular endpoint is irrelevant and may be undefined. One-sided-limit uniqueness makes the notation denote.",
+        "deps": [
+          "def-oriented-integral",
+          "def-one-sided-limits",
+          "lem-function-limit-unique",
+          "lem-integrability-on-a-subinterval",
+          "def-darboux-integral",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-mixed-improper-integral",
+        "kind": "definition",
+        "title": "Mixed improper integrals and integrals with two singular endpoints",
+        "strategy": "If both endpoints or an endpoint and infinity are improper, choose an interior split point $c$ and define the integral as the sum of the two corresponding one-ended improper integrals, requiring both to converge separately. Define the full-line integral similarly from $(-\\infty,c]$ and $[c,\\infty)$. Do not use one two-parameter limit; separate convergence is the convention. The next lemma proves independence of $c$.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-oriented-integral",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-improper-integral-splitting-and-tail-invariance",
+        "kind": "lemma",
+        "title": "The value of a mixed improper integral is independent of the split point, and convergence is unchanged by altering a finite initial segment",
+        "strategy": "For two split points, apply proper additivity on the compact interval between them and cancel the added finite integral. Carry the identity through the defining one-sided or infinite limits by a direct epsilon estimate; the published algebra-of-function-limits theorem is used only for finite one-sided limits, not at infinity. Record the tail formulas $\\int_a^\\infty f=\\int_a^c f+\\int_c^\\infty f$ and their endpoint analogues.",
+        "deps": [
+          "def-mixed-improper-integral",
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-function-limits",
+          "def-limits-at-infinity",
+          "def-one-sided-limits"
+        ]
+      },
+      {
+        "id": "thm-linearity-of-improper-integrals",
+        "kind": "theorem",
+        "title": "Improper integrals are linear whenever the integrals on the right exist",
+        "strategy": "Apply proper linearity on every truncation. At a finite singular endpoint pass to the limit through the published algebra of function limits. At infinity prove the sum and scalar limit laws directly from the defining epsilon condition, because the published finite-point theorem explicitly does not cover infinity. Extend to mixed integrals using split independence.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-mixed-improper-integral",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-linearity-of-the-integral",
+          "thm-algebra-of-function-limits",
+          "def-limits-at-infinity"
+        ]
+      },
+      {
+        "id": "thm-cauchy-criterion-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Cauchy criteria for improper integrals at infinity and at a finite endpoint",
+        "strategy": "At $+\\infty$, prove convergence iff for every $\\varepsilon>0$ there is $M$ such that $|\\int_u^v f|<\\varepsilon$ whenever $v>u>M$. Necessity is the Cauchy property of a convergent truncation function. For sufficiency use the always-defined truncations $R_k=a+\\iota(k)$; their integrals form a Cauchy sequence and converge by completeness, and an arbitrary large truncation is compared with a sufficiently large $R_k$. At a finite left endpoint use $c_k=a+(b-a)/\\iota(k+2)$, which lies in $(a,b)$ even at $k=0$, and the same argument. State the right-endpoint and negative-infinity versions with their quantifiers written out; do not hide an undefined initial truncation in a sequence.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "thm-additivity-over-subintervals",
+          "thm-cauchy-criterion-via-lub",
+          "lem-convergent-implies-cauchy",
+          "def-real-limit",
+          "def-sequence",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ]
+      },
+      {
+        "id": "def-absolute-and-conditional-improper-convergence",
+        "kind": "definition",
+        "title": "Absolute and conditional convergence of an improper integral",
+        "strategy": "Call an improper integral of $f$ absolutely convergent when the corresponding improper integral of $|f|$ converges, with the same endpoint pattern and separate convergence at every singular end. Call it conditionally convergent when it converges but not absolutely. Require $|f|$ to be properly integrable on every truncation; this follows automatically from proper integrability of $f$ by the published lattice-operation corollary, but state the citation.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-mixed-improper-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "def-abs-value"
+        ]
+      },
+      {
+        "id": "thm-absolute-improper-convergence-implies-convergence",
+        "kind": "theorem",
+        "title": "Absolute convergence of an improper integral implies convergence, with $|\\int f|\\leq\\int|f|$",
+        "strategy": "For a tail $[u,v]$, the proper triangle inequality gives $|\\int_u^v f|\\leq\\int_u^v|f|$. The Cauchy criterion for the convergent improper integral of $|f|$ therefore gives the Cauchy criterion for $f$. Pass the proper inequality to the limit for the value estimate, respecting orientation at each end. Handle mixed integrals by applying the one-ended result to each piece.",
+        "deps": [
+          "def-absolute-and-conditional-improper-convergence",
+          "thm-cauchy-criterion-for-improper-integrals",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "lem-limit-preserves-order",
+          "lem-improper-integral-splitting-and-tail-invariance"
+        ]
+      },
+      {
+        "id": "cor-improper-integral-tails-tend-to-zero",
+        "kind": "corollary",
+        "title": "The tails of a convergent improper integral tend to $0$",
+        "strategy": "If $\\int_a^\\infty f=I$, split at $R$ to obtain $\\int_R^\\infty f=I-\\int_a^R f$ and take the limit. Give the finite-endpoint analogue and the quantitative Cauchy-criterion form. This is the inexpensive consequence used by Dirichlet and Abel estimates.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-cauchy-criterion-for-improper-integrals"
+        ]
+      },
+      {
+        "id": "thm-comparison-test-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Comparison tests for nonnegative and absolutely convergent improper integrals",
+        "strategy": "If $0\\leq f\\leq g$ eventually and $\\int g$ converges, proper monotonicity bounds every tail integral of $f$ by the corresponding tail of $g$, so the Cauchy criterion gives convergence. State the absolute form: if $|f|\\leq g$ eventually and $\\int g$ converges, then $\\int f$ converges absolutely. Finite initial pieces are removed by tail invariance. Include all one-ended versions without hiding orientation changes.",
+        "deps": [
+          "thm-cauchy-criterion-for-improper-integrals",
+          "thm-absolute-improper-convergence-implies-convergence",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations"
+        ]
+      },
+      {
+        "id": "cor-limit-comparison-test-for-improper-integrals",
+        "kind": "corollary",
+        "title": "Limit comparison for positive improper integrals at infinity",
+        "strategy": "Let $f,g>0$ eventually and suppose $f(x)/g(x)\\to L$ as $x\\to+\\infty$ with $0<L<\\infty$. The limit condition gives $L/2\\leq f/g\\leq 3L/2$ on a tail, hence two ordinary comparison tests show that $\\int f$ and $\\int g$ converge or diverge together. State the finite-endpoint version by one-sided limits. Do not include the cases $L=0$ or infinite in this equivalence.",
+        "deps": [
+          "thm-comparison-test-for-improper-integrals",
+          "def-limits-at-infinity",
+          "def-one-sided-limits",
+          "lem-sign-preservation-near-a-limit",
+          "lem-of-inverse-positive"
+        ]
+      },
+      {
+        "id": "cor-improper-integral-test-for-series",
+        "kind": "corollary",
+        "title": "For nonnegative nonincreasing $f$ on $[0,\\infty)$, $\\sum_{k\\geq0}f(\\iota(k))$ converges iff $\\int_0^\\infty f$ converges",
+        "strategy": "The published proper-integral test says the series converges iff the nondecreasing sequence $J_N=\\int_0^{\\iota(N)}f$ is bounded. By monotone convergence for real sequences, boundedness of $J_N$ is equivalent to convergence. Show that convergence of these canonical truncations is equivalent to the full function limit defining $\\int_0^\\infty f$, using monotonicity to bracket $J_R$ between adjacent canonical truncations. Preserve the $k\\geq0$ indexing and identify the classical $k\\geq1$ form as a tail.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "thm-integral-test-for-series",
+          "cor-monotone-converges-iff-bounded",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-of-archimedean",
+          "def-canonical-natural",
+          "def-series",
+          "lem-series-tail-invariance"
+        ]
+      },
+      {
+        "id": "lem-truncated-integrals-of-rational-powers",
+        "kind": "lemma",
+        "title": "For rational $p>0$ with $p\\neq1$, $\\int_A^B x^{-p}\\,dx=(B^{1-p}-A^{1-p})/(1-p)$ on $0<A<B$",
+        "strategy": "Write $p=m/q$ with positive natural denominator $q$. Substitute $x=t^q$ using the published substitution theorem; the transformed integrand is $q t^{q-m-1}$, an integer power whose primitive is covered by the natural and negative-integer power rules when $m\\neq q$. Translate the endpoints back using rational-power laws. For $p=1$, do not invoke a logarithm: add dyadic lower and upper bounds for $\\int_1^R dx/x$ sufficient to prove divergence in the next theorem.",
+        "deps": [
+          "def-rational-power",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "thm-nth-roots-exist",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-substitution",
+          "cor-primitives-of-a-continuous-function",
+          "thm-ftc-second-part",
+          "def-integer-power",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "thm-improper-p-test-rational",
+        "kind": "theorem",
+        "title": "For rational $p>0$, $\\int_1^\\infty x^{-p}\\,dx$ converges iff $p>1$, while $\\int_0^1 x^{-p}\\,dx$ converges iff $p<1$",
+        "strategy": "Use the truncated formula when $p\\neq1$. For $p>1$, $R^{1-p}\\to0$ at infinity; for $p<1$, $c^{1-p}\\to0$ as $c\\to0^+$. In the opposite ranges compare with $1/x$, and prove the $p=1$ divergence from dyadic blocks, each contributing a fixed positive lower bound. The exponent is rational throughout; do not state a theorem for real $p$.",
+        "deps": [
+          "lem-truncated-integrals-of-rational-powers",
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "thm-comparison-test-for-improper-integrals",
+          "def-rational-power",
+          "lem-rational-power-monotone",
+          "lem-rational-power-laws",
+          "lem-geometric-sequence-null",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "def-cauchy-principal-value",
+        "kind": "definition",
+        "title": "Cauchy principal values at a finite singularity and over the real line",
+        "strategy": "For an interior singularity $c$, define the principal value on $[a,b]$ as the right limit at $0$ of $\\int_a^{c-\\varepsilon}f+\\int_{c+\\varepsilon}^b f$. On the real line define it as $\\lim_{R\\to+\\infty}\\int_{-R}^{R}f$. Require proper integrability on every truncated region. State visibly that a principal value couples the two tails and does not require either one-sided improper integral to converge.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-one-sided-limits",
+          "def-limits-at-infinity",
+          "def-oriented-integral",
+          "def-darboux-integral"
+        ]
+      },
+      {
+        "id": "thm-improper-convergence-implies-principal-value",
+        "kind": "theorem",
+        "title": "Separate improper convergence implies existence of the Cauchy principal value, with the same value",
+        "strategy": "At a finite singularity, add the two convergent one-sided truncation limits; on the whole line, split at $0$ and use the two convergent tails. A direct epsilon estimate shows the symmetric truncations approach the sum. State that the converse fails and point only in Remarks to the companion-page reciprocal example; do not use it as a dependency.",
+        "deps": [
+          "def-cauchy-principal-value",
+          "def-mixed-improper-integral",
+          "lem-improper-integral-splitting-and-tail-invariance",
+          "thm-linearity-of-improper-integrals"
+        ]
+      },
+      {
+        "id": "thm-dirichlet-test-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Dirichlet's test for improper integrals",
+        "strategy": "Let $f$ be locally Riemann integrable on $[a,\\infty)$ with bounded primitives $F(x)=\\int_a^x f$, and let $g$ be nonnegative, nonincreasing and tend to $0$. Apply Bonnet's second mean value theorem to each tail $[u,v]$ and bound both primitive increments by twice the bound for $F$. This gives $|\\int_u^v fg|\\leq Cg(u)$, which tends to $0$ and satisfies the improper Cauchy criterion. State the endpoint analogue by a change of variables only if all hypotheses are written explicitly.",
+        "deps": [
+          "thm-cauchy-criterion-for-improper-integrals",
+          "thm-second-mean-value-theorem-for-integrals",
+          "thm-additivity-over-subintervals",
+          "def-monotone-function",
+          "def-limits-at-infinity",
+          "def-darboux-integral",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "cor-abel-test-for-improper-integrals",
+        "kind": "corollary",
+        "title": "Abel's test for improper integrals",
+        "strategy": "Assume $\\int_a^\\infty f$ converges and $g$ is bounded and monotone. Prove from the least-upper-bound property that $g$ has a finite limit $L$ at infinity. Write $g=L+h$, where $h$ or $-h$ is nonnegative, nonincreasing and tends to $0$. The term $Lf$ is integrable by linearity and the remaining term by Dirichlet's test. This proof keeps the monotonicity hypothesis load-bearing.",
+        "deps": [
+          "thm-dirichlet-test-for-improper-integrals",
+          "thm-linearity-of-improper-integrals",
+          "def-improper-integral-at-infinity",
+          "def-monotone-function",
+          "def-limits-at-infinity",
+          "def-complete-ordered-field",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-frullani-integral-proper-factor",
+        "kind": "theorem",
+        "title": "Frullani's formula: $\\int_0^\\infty (f(ax)-f(bx))\\,dx/x=(f(0)-L)\\int_a^b dt/t$",
+        "strategy": "Assume $a,b>0$, $f$ is continuous on $[0,\\infty)$, and $f(x)\\to L$ at infinity. On $[\\varepsilon,R]$, substitution rewrites the difference as $\\int_a^b f(\\varepsilon t)dt/t-\\int_a^b f(Rt)dt/t$, with oriented limits if $b<a$. Uniform estimates on the fixed compact interval between $a$ and $b$ send these terms to $f(0)\\int_a^b dt/t$ and $L\\int_a^b dt/t$. This proves convergence without defining a logarithm; do not replace the proper factor by $\\log(b/a)$.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "thm-substitution",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "def-continuity-real",
+          "def-limits-at-infinity",
+          "def-oriented-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations"
+        ]
+      },
+      {
+        "id": "rem-improper-integral-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions and proved scope for improper integrals",
+        "strategy": "Record separate convergence at each singular end, split-point independence, the distinction between improper convergence and principal value, and the rational restriction in the $p$-test. State Frullani's value with the proper factor $\\int_a^b dt/t$ because no logarithm is among this page's declared prerequisites. State no conclusion about Lebesgue integrability and do not link any recorded-not-proved measure item.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-mixed-improper-integral",
+          "def-absolute-and-conditional-improper-convergence",
+          "def-cauchy-principal-value",
+          "thm-improper-p-test-rational",
+          "thm-frullani-integral-proper-factor"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 166,
+    "id": "improper-integrals-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Improper Integrals: Examples and Counterexamples",
+    "requires": [
+      "improper-integrals"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-principal-value-of-one-over-x",
+        "kind": "example",
+        "title": "$1/x$ on $[-1,1]$ has Cauchy principal value $0$ and no improper integral",
+        "strategy": "For every $\\varepsilon>0$, the symmetric truncated integrals cancel exactly, so the principal value is $0$. Each one-sided improper integral diverges by the rational $p$-test at $p=1$, with opposite signs. This gives the converse failure to the principal-value agreement theorem without treating infinity as a real value.",
+        "deps": [
+          "def-cauchy-principal-value",
+          "thm-improper-convergence-implies-principal-value",
+          "thm-improper-p-test-rational",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "ex-conditionally-convergent-step-function-integral",
+        "kind": "example",
+        "title": "The step function with value $\\varepsilon_k/\\iota(k+1)$ on $[\\iota(k),\\iota(k+1))$ has a conditionally convergent improper integral",
+        "strategy": "Use the alternating sequence $\\varepsilon_k$ of the published parity lemma. The integral over $[0,\\iota(N)]$ is exactly the $N$-th partial sum of the alternating harmonic series, so it converges by the alternating-series test. The integral of the absolute value has harmonic partial sums and diverges by the rational $p$-series theorem. Check local Riemann integrability: each compact interval contains only finitely many jumps.",
+        "deps": [
+          "def-absolute-and-conditional-improper-convergence",
+          "def-improper-integral-at-infinity",
+          "lem-alternating-sequence",
+          "thm-alternating-series-test",
+          "thm-p-series-rational",
+          "thm-additivity-over-subintervals",
+          "lem-changing-a-function-at-finitely-many-points",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ]
+      },
+      {
+        "id": "ex-convergent-positive-continuous-unbounded-integrand",
+        "kind": "example",
+        "title": "A strictly positive continuous integrand can have a convergent improper integral while being unbounded on every tail",
+        "strategy": "Start with $(1+x)^{-2}$ on $[0,\\infty)$. For each natural $k\\geq1$, add a triangular bump centred at $\\iota(k)$, of height $\\iota(k)$ and half-width $2^{-k-2}/\\iota(k)$; choose the supports disjoint. The bump area is $2^{-k-2}$, so additivity and the geometric series give a finite total integral, while the values at the centres are unbounded. Local finiteness of the supports gives continuity. This single construction proves both failure of the term-test analogue and possible unboundedness on every tail.",
+        "deps": [
+          "def-improper-integral-at-infinity",
+          "thm-cauchy-criterion-for-improper-integrals",
+          "thm-additivity-over-subintervals",
+          "thm-linearity-of-the-integral",
+          "thm-geometric-series",
+          "lem-derivative-of-a-power",
+          "cor-primitives-of-a-continuous-function",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-integer-power",
+          "def-continuity-real"
+        ]
+      },
+      {
+        "id": "ex-one-over-square-root-improper-integral",
+        "kind": "example",
+        "title": "$\\int_0^1 x^{-1/2}\\,dx=2$",
+        "strategy": "Apply the finite-endpoint rational $p$-test for existence. Evaluate the truncation $\\int_c^1x^{-1/2}dx=2(1-\\sqrt c)$ through the rational-power formula, then let $c\\to0^+$. The integrand is unbounded, so the ordinary Riemann integral on $[0,1]$ is undefined; say this explicitly.",
+        "deps": [
+          "thm-improper-p-test-rational",
+          "lem-truncated-integrals-of-rational-powers",
+          "def-improper-integral-at-a-finite-endpoint",
+          "def-rational-power",
+          "thm-nth-roots-exist",
+          "def-darboux-sums"
+        ]
+      },
+      {
+        "id": "ex-rational-p-integrals-at-both-endpoints",
+        "kind": "example",
+        "title": "$x^{-2}$ is integrable on $[1,\\infty)$ and not on $(0,1]$, while $x^{-1/2}$ has the opposite endpoint behaviour",
+        "strategy": "Apply both halves of the rational $p$-test at $p=2$ and $p=1/2$. Compute $\\int_1^\\infty x^{-2}dx=1$ and $\\int_0^1x^{-1/2}dx=2$ from the truncated formula. This comparison makes clear that the same exponent threshold reverses when the singular endpoint moves from infinity to zero.",
+        "deps": [
+          "thm-improper-p-test-rational",
+          "lem-truncated-integrals-of-rational-powers",
+          "ex-one-over-square-root-improper-integral"
+        ]
+      },
+      {
+        "id": "ex-frullani-rational-kernel",
+        "kind": "example",
+        "title": "$\\int_0^\\infty \\big((1+ax)^{-1}-(1+bx)^{-1}\\big)\\,dx/x=\\int_a^b dt/t$ for $a,b>0$",
+        "strategy": "Apply Frullani with $f(t)=(1+t)^{-1}$, for which $f(0)=1$ and $f(t)\\to0$ at infinity. Also simplify the integrand for $x>0$ to $(b-a)/((1+ax)(1+bx))$, showing directly that the apparent singularity at $0$ is removable and the tail is comparable with $x^{-2}$. Keep the answer as a proper integral; no logarithm is available.",
+        "deps": [
+          "thm-frullani-integral-proper-factor",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-improper-p-test-rational",
+          "thm-algebra-of-function-limits",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "ex-absolutely-convergent-rational-integral-on-the-line",
+        "kind": "example",
+        "title": "$\\int_{-\\infty}^{\\infty}(1+x^2)^{-1}dx$ converges absolutely",
+        "strategy": "The integrand is continuous and nonnegative. On $|x|\\geq1$ it is at most $x^{-2}$, so comparison with the rational $p$-test gives convergence of both tails; the compact middle piece is proper. Do not evaluate the integral as $\\pi$, since trigonometric functions and their inverse are not among this page's declared prerequisites.",
+        "deps": [
+          "def-mixed-improper-integral",
+          "def-absolute-and-conditional-improper-convergence",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-improper-p-test-rational",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "def-darboux-integral"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 235,
+    "id": "the-riemann-integral-in-rn-and-jordan-content",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "The Riemann Integral in R^m and Jordan Content",
+    "companion": "the-riemann-integral-in-rn-and-jordan-content-examples",
+    "requires": [
+      "the-riemann-integral",
+      "rn-as-a-normed-space"
+    ],
+    "items": [
+      {
+        "id": "def-multidimensional-rectangle-and-volume",
+        "kind": "definition",
+        "title": "Axis-parallel rectangles in $\\mathbb R^m$ and their volume",
+        "strategy": "Fix $m\\geq1$. For vectors $a,b\\in\\mathbb R^m$ with $a_j\\leq b_j$, define $[a,b]=\\{x:a_j\\leq x_j\\leq b_j\\text{ for }j<m\\}$ and $\\operatorname{vol}([a,b])=\\prod_{j<m}(b_j-a_j)$. Call the rectangle nondegenerate when every inequality is strict. The finite product is the published recursive product, so volume exists; prove nonnegativity and the effect of a coordinate cut. State that at $m=1$ this is the published interval and its length.",
+        "deps": [
+          "lem-metrics-on-rn",
+          "def-p-norms-on-rn",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-interval",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ]
+      },
+      {
+        "id": "def-multidimensional-grid-partition",
+        "kind": "definition",
+        "title": "Grid partitions of a rectangle in $\\mathbb R^m$, their cells, refinements and mesh",
+        "strategy": "A grid partition is a list of one-dimensional partitions indexed by $j<m$. Its cells are indexed by the multi-indices $i\\in\\mathbb N^m$ satisfying $i_j<n_j$, and each cell is the product of the corresponding subintervals. Define every sum over cells as an iterated finite sum, recursively in the $m$ coordinate index ranges; this avoids importing the finite-index-set sum from a page outside the fixed prerequisite closure. Define the mesh as the maximum coordinate subinterval length; by the norm/metric dictionary this is the $d_\\infty$ diameter of the largest cell. Define coordinatewise refinement and common refinement, prove the cells cover the rectangle with disjoint interiors, and prove by induction on $m$ that the iterated sum of cell volumes is the rectangle volume. No multidimensional partition or sum may be left as an informal picture.",
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "def-partition-and-refinement",
+          "thm-induction-principle",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-finite-set-has-max",
+          "def-max-min"
+        ]
+      },
+      {
+        "id": "def-multidimensional-darboux-sums",
+        "kind": "definition",
+        "title": "Lower and upper Darboux sums over a grid partition in $\\mathbb R^m$",
+        "strategy": "For bounded $f$ on a nondegenerate rectangle and each grid cell $Q_i$, take $m_i=\\inf f[Q_i]$ and $M_i=\\sup f[Q_i]$, then form the iterated finite sums of $m_i\\operatorname{vol}(Q_i)$ and $M_i\\operatorname{vol}(Q_i)$ fixed in the grid definition. Prove the extrema exist, the sums are finite reals, and lower sum $\\leq$ upper sum. Record that the gap is the corresponding iterated sum of cell oscillations times cell volumes.",
+        "deps": [
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "def-bounded-set",
+          "def-complete-ordered-field",
+          "def-infimum",
+          "lem-sup-unique",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "lem-multidimensional-refinement-inequalities",
+        "kind": "lemma",
+        "title": "Refinement raises multidimensional lower sums and lowers upper sums, with a quantitative boundary-slab estimate",
+        "strategy": "For one inserted coordinate hyperplane, split the relevant coordinate sum and group the resulting iterated finite sums inside each old cell to prove monotonicity. Iterate coordinatewise for a general refinement. Add the quantitative clause needed for mesh-based Riemann sums: after refining an arbitrary fine grid by one fixed grid, only cells meeting the fixed interior hyperplanes can change the coarse Darboux bounds; their total volume is bounded by a fixed cross-sectional constant times the fine mesh. Prove that slab bound by induction and finite-product distributivity rather than appealing to measure or to sums over abstract finite sets.",
+        "deps": [
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-induction-principle",
+          "def-canonical-natural"
+        ]
+      },
+      {
+        "id": "def-multidimensional-darboux-integral",
+        "kind": "definition",
+        "title": "The lower and upper Darboux integrals over a rectangle in $\\mathbb R^m$",
+        "strategy": "Take the supremum of all lower grid sums and infimum of all upper grid sums, and call $f$ integrable when they agree. Prove the family of grids is nonempty using coordinatewise one-cell partitions and prove the two extremal sets are bounded using the refinement inequalities, exactly as in the published one-dimensional definition. The common value is a unique real. Keep this native definition separate until the agreement item at $m=1$.",
+        "deps": [
+          "def-multidimensional-darboux-sums",
+          "lem-multidimensional-refinement-inequalities",
+          "def-multidimensional-grid-partition",
+          "def-complete-ordered-field",
+          "def-infimum",
+          "lem-sup-unique",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-multidimensional-riemann-criterion",
+        "kind": "theorem",
+        "title": "Riemann's criterion in $\\mathbb R^m$: integrability is equivalent to arbitrarily small Darboux gaps",
+        "strategy": "Repeat the published supremum/infimum argument with grid partitions: equality of the lower and upper integrals gives a grid good for the lower side and one good for the upper side, and their coordinatewise common refinement is good for both. Conversely one small Darboux gap bounds the integral gap. The proof should cite the multidimensional refinement lemma at every point where the one-dimensional proof cites its analogue.",
+        "deps": [
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-darboux-sums",
+          "lem-multidimensional-refinement-inequalities",
+          "def-multidimensional-grid-partition",
+          "lem-sup-epsilon",
+          "lem-inf-epsilon"
+        ]
+      },
+      {
+        "id": "def-multidimensional-tagged-partition-and-riemann-sum",
+        "kind": "definition",
+        "title": "Tagged grid partitions and Riemann sums in $\\mathbb R^m$",
+        "strategy": "A tagging assigns one point to each multi-indexed grid cell. A canonical lower-corner tagging proves existence without choice; when arbitrary cellwise selections are needed, enumerate the finitely nested coordinate ranges and apply finite choice inductively. Define $S(f,P,\\xi)$ by the iterated finite-sum convention of the grid definition. Define mesh convergence to $I$ by requiring every tagged grid of sufficiently small mesh to have sum near $I$. Prove each Riemann sum lies between the Darboux sums of the same grid.",
+        "deps": [
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-rectangle-and-volume",
+          "lem-finite-choice",
+          "def-choice-function",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-multidimensional-darboux-equals-riemann",
+        "kind": "theorem",
+        "title": "The multidimensional Darboux and tagged-mesh definitions of the Riemann integral agree",
+        "strategy": "The easy direction traps every tagged sum between the Darboux sums of one grid. For the converse, choose a fixed grid with small Darboux gap, refine an arbitrary sufficiently fine grid by it, and use the quantitative boundary-slab estimate to control the change in upper and lower sums. Choose near-extremal tags cellwise by finite choice, exactly as the published one-dimensional proof does. This is a long proof already decomposed by the refinement lemma; do not rebuild that estimate inside the theorem.",
+        "deps": [
+          "def-multidimensional-tagged-partition-and-riemann-sum",
+          "def-multidimensional-darboux-integral",
+          "thm-multidimensional-riemann-criterion",
+          "lem-multidimensional-refinement-inequalities",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-grid-partition",
+          "lem-sup-epsilon",
+          "lem-inf-epsilon",
+          "lem-finite-choice"
+        ]
+      },
+      {
+        "id": "cor-one-dimensional-and-multidimensional-riemann-agree",
+        "kind": "corollary",
+        "title": "At $m=1$, multidimensional rectangles, grid sums and the integral are exactly the published one-dimensional notions",
+        "strategy": "Identify $\\mathbb R^1$ with $\\mathbb R$ through the published isometry. A coordinate grid is one partition, its cells are the published subintervals, volume is length, and both Darboux and tagged sums are the same written finite sums. Conclude that the integrability classes and values agree. This dictionary is mandatory; without it the library would hold two silent definitions of the Riemann integral.",
+        "deps": [
+          "thm-multidimensional-darboux-equals-riemann",
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-tagged-partition-and-riemann-sum",
+          "def-darboux-integral",
+          "def-tagged-partition-and-riemann-sum",
+          "thm-darboux-equals-riemann",
+          "lem-metrics-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics"
+        ]
+      },
+      {
+        "id": "thm-multidimensional-integral-properties",
+        "kind": "theorem",
+        "title": "Linearity, monotonicity, the absolute-value estimate and coordinate-slice additivity for the Riemann integral in $\\mathbb R^m$",
+        "strategy": "Prove linearity and monotonicity from Darboux sums as in one dimension, and derive $|\\int f|\\leq\\int|f|$ after proving $|f|$ integrable. For a coordinate cut of the rectangle, splice the coordinate partitions and split the appropriate nested finite sum to obtain additivity and the converse integrability statement. State the estimate only with the positively oriented rectangle convention; no orientation of rectangles is introduced.",
+        "deps": [
+          "def-multidimensional-darboux-integral",
+          "thm-multidimensional-riemann-criterion",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-grid-partition",
+          "lem-finite-sum-laws",
+          "def-abs-value",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+        "kind": "theorem",
+        "title": "Every continuous function on a closed rectangle in $\\mathbb R^m$ is Riemann integrable",
+        "strategy": "A closed rectangle is compact by Heine–Borel in $\\mathbb R^m$. The norm/metric dictionary makes a continuous scalar function uniformly continuous by metric Heine–Cantor and bounded by compactness. Choose a uniform coordinate grid with mesh below the uniform-continuity threshold; every cell oscillation is small and the cell volumes sum to the rectangle volume, so the multidimensional Riemann criterion applies. Carry $m\\geq1$ throughout.",
+        "deps": [
+          "thm-multidimensional-riemann-criterion",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "def-metric-continuity",
+          "def-metric-compactness",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-extreme-value-metric",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "def-null-and-content-zero-in-rn",
+        "kind": "definition",
+        "title": "Measure zero and content zero in $\\mathbb R^m$ by countable and finite cube covers",
+        "strategy": "For $m\\geq1$, define a closed axis-parallel cube and its volume. A set is null when for every $\\varepsilon>0$ it has a countable cube cover whose volume series is at most $\\varepsilon$; it has content zero when a finite such cover exists. Cube covers are chosen because Lipschitz images are controlled by cubes without aspect-ratio defects. Prove inheritance by subsets and finite-cover padding. Do not define Lebesgue measure or outer measure.",
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "def-series",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-countable",
+          "def-complete-ordered-field"
+        ]
+      },
+      {
+        "id": "cor-one-dimensional-null-and-content-zero-agree",
+        "kind": "corollary",
+        "title": "At $m=1$, cube-nullity and cube-content-zero are exactly the published interval-cover notions",
+        "strategy": "Under the isometry $\\mathbb R^1\\cong\\mathbb R$, a closed cube is a closed interval and its volume is its length. The countable and finite cover quantifiers, including their finite-sum and series bounds, are therefore word for word those of the published definition. Record both directions explicitly so later items may move between the vocabularies.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "def-measure-zero-and-content-zero",
+          "def-multidimensional-rectangle-and-volume",
+          "lem-metrics-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics"
+        ]
+      },
+      {
+        "id": "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+        "kind": "lemma",
+        "title": "Subsets and countable unions of null subsets of $\\mathbb R^m$ are null",
+        "strategy": "Subset closure is immediate. For a sequence of null sets, assign the $j$-th set a geometric fraction of the $\\varepsilon$ budget, use countable choice to select one cube cover for each set, and enumerate the doubly indexed cubes through the published bijection $\\mathbb N^2\\to\\mathbb N$. Bound finite partial sums by finite rectangles of indices, as the published one-dimensional theorem does. State the countable-choice cost in the theorem.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "def-countable-choice",
+          "thm-n-cross-n-countable",
+          "thm-geometric-series",
+          "def-series",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "lem-compact-null-iff-content-zero-in-rn",
+        "kind": "lemma",
+        "title": "For compact subsets of $\\mathbb R^m$, measure zero and content zero coincide",
+        "strategy": "Content zero implies nullity by padding. Conversely enlarge every closed covering cube slightly to an open cube, spending a geometric fraction of the remaining volume budget; compactness gives a finite subcover, and bounding its finitely many indices controls the total enlarged volume. Use Heine–Borel only to identify compact sets when needed, not as a substitute for the finite-subcover definition.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "def-metric-topology",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-geometric-series",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "def-oscillation-in-rn",
+        "kind": "definition",
+        "title": "Oscillation of a real function on subsets of $\\mathbb R^m$ and at a point",
+        "strategy": "For $f:A\\to\\mathbb R$ define $\\omega_f(S)=\\sup\\{|f(x)-f(y)|:x,y\\in S\\}$ in the extended reals and $\\omega_f(c)=\\inf_{r>0}\\omega_f(A\\cap B(c,r))$, using Euclidean balls. Prove well-posedness and monotonicity under inclusion as in the published real-domain definition. Include the dictionary clause that under $\\mathbb R^1\\cong\\mathbb R$ this is exactly `def-oscillation`.",
+        "deps": [
+          "def-oscillation",
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-metric-ball",
+          "lem-metrics-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-bounded-set",
+          "def-infimum",
+          "lem-of-abs-value"
+        ]
+      },
+      {
+        "id": "lem-oscillation-characterisation-in-rn",
+        "kind": "lemma",
+        "title": "A function on a subset of $\\mathbb R^m$ is continuous at $x$ iff its oscillation there is $0$, and every oscillation superlevel set is closed",
+        "strategy": "Translate the epsilon definition of metric continuity into small oscillation on a ball for one direction; for the other, use one point fixed at $x$ in the oscillation bound. To prove $\\{x:\\omega_f(x)\\geq\\varepsilon\\}$ closed relative to the domain, show its complement is open: one ball with oscillation below $\\varepsilon$ works for every sufficiently nearby centre after shrinking the radius. State the result for bounded $f$ when real-valued oscillations are needed by integration.",
+        "deps": [
+          "def-oscillation-in-rn",
+          "def-metric-continuity",
+          "def-metric-ball",
+          "def-metric-topology",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "lem-finite-cube-covers-admit-grid-control",
+        "kind": "lemma",
+        "title": "A set covered by finitely many cubes admits a covering by grid cells whose total volume is arbitrarily close to the covering volume",
+        "strategy": "Enlarge each cube in a given finite cover by a positive margin so that the sum of the enlarged volumes increases by less than a prescribed $\\eta$; continuity of the finitely many integer-power volume functions at margin $0$ supplies the choice. Take the minimum of the finitely many positive margins, insert every enlarged-cube endpoint into the corresponding coordinate partition, and pass to a common refinement of mesh below that minimum. Every refined cell meeting the originally covered set then lies inside one of the enlarged cubes. Split the iterated cell sum along the aligned endpoints to bound the total volume of those cells by the sum of the enlarged-cube volumes. Treat closed-cell boundary overlap explicitly. This is the cover-to-grid lemma used twice in the multidimensional Lebesgue criterion.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-integer-power",
+          "thm-algebra-of-continuous-functions",
+          "def-continuity-real",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "thm-induction-principle",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "thm-lebesgue-criterion-in-rn",
+        "kind": "theorem",
+        "title": "Lebesgue's criterion in $\\mathbb R^m$: a bounded function on a rectangle is Riemann integrable iff its discontinuity set is null",
+        "strategy": "For sufficiency, write the discontinuity set as the countable union of closed oscillation superlevel sets. Each is compact in the rectangle and null, hence content zero; cover it by finitely many small cubes, refine their coordinate endpoints into a grid, and split cells into good and bad ones. Good cells have small oscillation; bad cells have small total volume. For necessity, a grid with small Darboux gap makes each fixed oscillation superlevel set lie in cells whose total volume is small, hence content zero; their countable union is null. Use only cube-cover nullity, compactness and Darboux sums. The name is historical; no Lebesgue measure or integral appears.",
+        "deps": [
+          "thm-multidimensional-riemann-criterion",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-grid-partition",
+          "def-null-and-content-zero-in-rn",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "lem-compact-null-iff-content-zero-in-rn",
+          "def-oscillation-in-rn",
+          "lem-oscillation-characterisation-in-rn",
+          "lem-finite-cube-covers-admit-grid-control",
+          "thm-heine-borel-rn",
+          "def-countable-choice",
+          "cor-archimedean-reciprocal",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "def-jordan-inner-and-outer-content",
+        "kind": "definition",
+        "title": "Jordan inner and outer content and Jordan measurable bounded sets in $\\mathbb R^m$",
+        "strategy": "For bounded $E$, define outer content as the infimum of the ordinary finite sums of volumes of listed axis-parallel rectangle covers. Define inner content as the supremum of the finite sums of volumes of listed families of rectangles contained in $E$ whose interiors are pairwise disjoint. Prove both extrema exist as finite reals by placing $E$ in one bounding rectangle, and prove inner content $\\leq$ outer content by refining all rectangle endpoints into one grid and splitting nested finite sums. Call $E$ Jordan measurable when the two agree and define its Jordan content as the common value. Cover degenerate and empty sets explicitly.",
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "def-multidimensional-grid-partition",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-bounded-set",
+          "def-complete-ordered-field",
+          "def-infimum",
+          "lem-sup-unique"
+        ]
+      },
+      {
+        "id": "thm-jordan-content-and-indicator-integrability",
+        "kind": "theorem",
+        "title": "A bounded set is Jordan measurable iff its indicator is Riemann integrable, and the integral is its Jordan content",
+        "strategy": "Choose a bounding rectangle $Q$. On each grid cell the indicator's infimum is $1$ exactly when the cell lies in $E$, and its supremum is $1$ exactly when the cell meets $E$. Thus lower and upper Darboux sums are inner and outer grid approximations. Show arbitrary finite rectangle covers and inscribed families may be refined to such grids without changing total volume bounds. Apply the multidimensional Riemann criterion and prove the value is independent of the initial bounding rectangle.",
+        "deps": [
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-darboux-sums",
+          "thm-multidimensional-riemann-criterion",
+          "def-multidimensional-grid-partition",
+          "lem-multidimensional-refinement-inequalities",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "thm-jordan-boundary-criterion",
+        "kind": "theorem",
+        "title": "A bounded set in $\\mathbb R^m$ is Jordan measurable iff its boundary is null, equivalently of content zero",
+        "strategy": "The indicator of $E$ is discontinuous exactly at the metric boundary $\\partial E$. Apply the multidimensional Lebesgue criterion. The boundary of a bounded set is closed and bounded, hence compact by Heine–Borel, so nullity is equivalent to content zero by the compact-null lemma. Combine this with the indicator criterion to identify the Jordan content. This short theorem is the bridge between integration and geometry.",
+        "deps": [
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-lebesgue-criterion-in-rn",
+          "def-metric-interior-closure-boundary",
+          "thm-heine-borel-rn",
+          "lem-compact-null-iff-content-zero-in-rn",
+          "def-null-and-content-zero-in-rn",
+          "def-jordan-inner-and-outer-content"
+        ]
+      },
+      {
+        "id": "def-riemann-integral-over-a-jordan-set",
+        "kind": "definition",
+        "title": "The Riemann integral of a bounded function over a bounded Jordan measurable set",
+        "strategy": "Let $E$ be bounded and Jordan measurable and $f:E\\to\\mathbb R$ bounded. Choose a rectangle $Q$ containing $E$, extend $f$ by $0$ on $Q\\setminus E$, and call $f$ integrable over $E$ when that extension is Riemann integrable; define $\\int_Ef$ as its integral. Record the following lemma in `justified_by`: changing $Q$ does not alter either integrability or value. For $f=1$, the definition must recover Jordan content by the indicator theorem.",
+        "deps": [
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-content-and-indicator-integrability",
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-rectangle-and-volume",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "lem-jordan-set-integral-well-defined",
+        "kind": "lemma",
+        "title": "The Riemann integral over a Jordan set is independent of the bounding rectangle",
+        "strategy": "Given bounding rectangles $Q_1,Q_2$, place both in a larger rectangle $Q$. Coordinate-slice additivity shows that extending a function by $0$ from $Q_i$ to $Q$ preserves integrability and integral: every added coordinate slab has zero integrand. Apply this in both directions. The same argument handles translated or enlarged boxes and proves that the notation in the definition denotes.",
+        "deps": [
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-multidimensional-integral-properties",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume"
+        ]
+      },
+      {
+        "id": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+        "kind": "theorem",
+        "title": "A continuous real function on a compact Jordan measurable set is Riemann integrable over that set",
+        "strategy": "Compactness makes $f$ bounded. In a bounding rectangle, the zero extension is continuous at every interior point of $E$ and every point outside $E$ not on the boundary; its discontinuities are contained in $\\partial E$. The boundary is null by the Jordan criterion, so the multidimensional Lebesgue criterion makes the extension integrable. Use the metric notion of continuity and the published compact-image theorem; no extension theorem for $f$ is needed.",
+        "deps": [
+          "def-riemann-integral-over-a-jordan-set",
+          "lem-jordan-set-integral-well-defined",
+          "thm-jordan-boundary-criterion",
+          "thm-lebesgue-criterion-in-rn",
+          "def-metric-continuity",
+          "def-metric-interior-closure-boundary",
+          "def-metric-compactness",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "cor-jordan-content-finite-additivity",
+        "kind": "corollary",
+        "title": "Jordan content is finitely additive when the overlap has content zero",
+        "strategy": "For Jordan measurable bounded $E,F$ with $E\\cap F$ of content zero, use $1_{E\\cup F}=1_E+1_F-1_{E\\cap F}$ and multidimensional linearity. The indicator of a content-zero set has integral $0$ by the indicator theorem. State the disjoint case explicitly and obtain finite families by induction, not by a count in prose.",
+        "deps": [
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-multidimensional-integral-properties",
+          "def-jordan-inner-and-outer-content",
+          "def-null-and-content-zero-in-rn",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+        "kind": "theorem",
+        "title": "A Lipschitz map $\\mathbb R^m\\to\\mathbb R^m$ sends null sets to null sets",
+        "strategy": "Cover the null set by cubes. A cube of side $\\ell$ has Euclidean diameter at most $\\iota(m)\\ell$ using the norm comparisons. An $L$-Lipschitz image of it lies in a cube of side $2L\\iota(m)\\ell$, whose volume is the fixed factor $(2L\\iota(m))^m$ times the original volume. Allocate the input cover the corresponding scaled $\\varepsilon$ budget and sum. Treat $L=0$ separately. Restrict to equal domain and codomain dimensions; the statement is false across arbitrary dimensions.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "def-lipschitz-holder-contraction",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-multidimensional-rectangle-and-volume",
+          "def-integer-power",
+          "def-canonical-natural",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "thm-graphs-of-continuous-functions-have-content-zero",
+        "kind": "theorem",
+        "title": "The graph of a continuous function on a closed rectangle in $\\mathbb R^m$ has content zero in $\\mathbb R^{m+1}$",
+        "strategy": "Uniform continuity gives a sufficiently fine coordinate grid on the domain for which the vertical oscillation of $f$ on each cell is small. Above each domain cell, stack finitely many $(m+1)$-dimensional cubes whose side is the grid scale; the integer-part lemma bounds the number of cubes by the vertical oscillation divided by that scale plus a fixed endpoint allowance. Summed over the domain grid, their total volume is bounded by a fixed rectangle-dependent constant times the oscillation bound plus the grid scale, and therefore can be made arbitrarily small. This produces the cube covers required by `def-null-and-content-zero-in-rn`, not merely skinny rectangle covers. State $m\\geq1$; no metric on $\\mathbb R^0$ is needed.",
+        "deps": [
+          "def-null-and-content-zero-in-rn",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "def-metric-continuity",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-integer-part",
+          "def-canonical-natural",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "lem-product-lower-bound-for-jordan-content",
+        "kind": "lemma",
+        "title": "If every finite interval cover of $A\\subseteq\\mathbb R$ has total length at least $c$, then every rectangle cover of $A\\times[0,d]$ has total area at least $cd$",
+        "strategy": "List a finite rectangle cover and clip it to a bounding rectangle, then partition $[0,d]$ at all listed vertical endpoints. On each resulting horizontal strip, choose an interior height; the horizontal projections of the covering rectangles active there cover $A$, so their widths total at least $c$. Multiply by the strip height and sum. Reindex the resulting nested finite sums using splitting and distributivity. This elementary product estimate supplies the positive-content claim in the compact and open counterexamples without using Fubini or abstract finite-index-set sums.",
+        "deps": [
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-rectangle-and-volume",
+          "def-multidimensional-grid-partition",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "rem-multidimensional-riemann-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions and proved scope for the Riemann integral in $\\mathbb R^m$ and Jordan content",
+        "strategy": "Record $m\\geq1$, axis-parallel grids, cube covers for nullity, arbitrary finite rectangle covers for Jordan outer content, and both one-dimensional agreement results. State that `thm-lebesgue-criterion-in-rn` uses only cover-nullity and no Lebesgue measure. Record the proved Lipschitz-image theorem. Say only that a continuously differentiable image theorem is not asserted on this page; do not mention an unbuilt total derivative as though it were a dependency.",
+        "deps": [
+          "cor-one-dimensional-and-multidimensional-riemann-agree",
+          "cor-one-dimensional-null-and-content-zero-agree",
+          "thm-lebesgue-criterion-in-rn",
+          "thm-jordan-boundary-criterion",
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "thm-graphs-of-continuous-functions-have-content-zero"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 236,
+    "id": "the-riemann-integral-in-rn-and-jordan-content-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "The Riemann Integral in R^m and Jordan Content: Examples and Counterexamples",
+    "requires": [
+      "the-riemann-integral-in-rn-and-jordan-content"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-unit-box-volume-and-integral",
+        "kind": "example",
+        "title": "The unit box in $\\mathbb R^m$ has volume $1$, and the integral of a constant $c$ over it is $c$",
+        "strategy": "Every side length is $1$, so the finite product volume is $1$, including the indexing check over $j<m$. On every grid, the lower and upper sums of the constant function coincide with $c$ times the sum of cell volumes, hence with $c$. This is a direct computation from the definitions, not an appeal to iterated integration.",
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-darboux-sums",
+          "def-multidimensional-darboux-integral",
+          "lem-finite-sum-laws",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "cex-rational-points-in-unit-square-have-no-jordan-content",
+        "kind": "counterexample",
+        "title": "The rational points of $[0,1]^2$ form a bounded null set that is not Jordan measurable",
+        "strategy": "The set $(\\mathbb Q\\cap[0,1])^2$ is countable, using countability of $\\mathbb Q$ and the published pairing of naturals, hence null by the countable-union lemma applied to singleton cubes. Density of the rationals and irrationals in each coordinate makes both the set and its complement dense in the square, so its boundary is the whole square. The unit square is not null, and the Jordan boundary criterion gives non-measurability. This is the bounded plane set without area.",
+        "deps": [
+          "thm-jordan-boundary-criterion",
+          "def-null-and-content-zero-in-rn",
+          "lem-null-sets-in-rn-closed-under-subsets-and-countable-unions",
+          "thm-rationals-countable",
+          "thm-n-cross-n-countable",
+          "def-countable",
+          "lem-q-and-irrationals-dense-r",
+          "def-metric-interior-closure-boundary",
+          "lem-compact-null-iff-content-zero-in-rn",
+          "thm-jordan-content-and-indicator-integrability",
+          "ex-unit-box-volume-and-integral"
+        ]
+      },
+      {
+        "id": "cex-compact-set-without-jordan-content",
+        "kind": "counterexample",
+        "title": "The Smith–Volterra–Cantor slab $S\\times[0,1]$ is compact and not Jordan measurable",
+        "strategy": "The fat Cantor set $S$ is compact, nowhere dense, and every interval cover has total length at least $1/2$. The product slab is closed and bounded in $\\mathbb R^2$, hence compact, and has empty interior, so it equals its boundary. The product lower-bound lemma gives Jordan outer content at least $1/2$ for that boundary. The boundary criterion therefore rules out Jordan measurability. No product measure or Fubini theorem is used.",
+        "deps": [
+          "def-fat-cantor-set",
+          "thm-fat-cantor-set-has-positive-measure",
+          "lem-product-lower-bound-for-jordan-content",
+          "thm-jordan-boundary-criterion",
+          "thm-heine-borel-rn",
+          "def-metric-interior-closure-boundary",
+          "def-jordan-inner-and-outer-content"
+        ]
+      },
+      {
+        "id": "cex-bounded-open-set-with-nonnull-boundary",
+        "kind": "counterexample",
+        "title": "$((0,1)\\setminus S)\\times(0,1)$ is bounded and open, but its boundary has positive Jordan outer content",
+        "strategy": "The complement of the closed fat Cantor set inside $(0,1)$ is open, so the product is open and bounded. Its boundary contains $S\\times[0,1]$ (verify neighbourhood intersections with the open set using nowhere density and with its complement using membership in $S$). Outer-content monotonicity and the slab lower bound give a positive lower bound for the boundary, so the open set is not Jordan measurable.",
+        "deps": [
+          "cex-compact-set-without-jordan-content",
+          "def-fat-cantor-set",
+          "thm-fat-cantor-set-has-positive-measure",
+          "lem-product-lower-bound-for-jordan-content",
+          "thm-jordan-boundary-criterion",
+          "def-metric-interior-closure-boundary",
+          "def-jordan-inner-and-outer-content"
+        ]
+      },
+      {
+        "id": "ex-parabola-graph-has-content-zero",
+        "kind": "example",
+        "title": "The parabola segment $\\{(x,x^2):0\\leq x\\leq1\\}$ has content zero in $\\mathbb R^2$",
+        "strategy": "Apply the graph theorem to the continuous polynomial $x\\mapsto x^2$ on $[0,1]$. Also give the direct uniform-grid estimate: on an interval of width $1/\\iota(N)$ the vertical oscillation is at most $2/\\iota(N)$, so rectangles covering the graph have total area tending to $0$. Write every reciprocal of a natural through $\\iota$.",
+        "deps": [
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-algebra-of-continuous-functions",
+          "def-integer-power",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-null-and-content-zero-in-rn"
+        ]
+      },
+      {
+        "id": "ex-triangle-has-jordan-content-one-half",
+        "kind": "example",
+        "title": "The right triangle $\\{(x,y)\\in[0,1]^2:x+y\\leq1\\}$ has Jordan content $1/2$",
+        "strategy": "Use uniform $N$-by-$N$ grids. Count cells wholly inside and cells meeting the triangle; the two staircase areas differ by at most $1/\\iota(N)$ and bracket $1/2$. Prove the finite identity $\\sum_{k<N}\\iota(k)=\\iota(N)\\iota(N-1)/2$ by induction or cite a published equivalent only after reading it. The Riemann criterion for the indicator gives Jordan measurability and the common limit $1/2$. The sloping boundary also follows as a graph-content-zero check.",
+        "deps": [
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-content-and-indicator-integrability",
+          "thm-jordan-boundary-criterion",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-rectangle-and-volume",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "ex-cantor-slab-has-content-zero",
+        "kind": "example",
+        "title": "The Cantor slab $C\\times[0,1]$ has content zero in $\\mathbb R^2$",
+        "strategy": "For a given budget, cover the Cantor set by finitely many intervals of small total length using its published content-zero property; replace degenerate members by positive-width intervals within the budget and arrange that every width is sufficiently small. Over an interval of width $\\ell>0$, stack finitely many squares of side $\\ell$ to cover its product with $[0,1]$; the integer-part lemma bounds the number by the reciprocal of $\\ell$ plus a fixed endpoint allowance, so the total area is at most $\\ell+2\\ell^2$. The summed area is arbitrarily small, and hence the slab has cube-content zero in the exact sense of `def-null-and-content-zero-in-rn`. Conclude Jordan measurability and Jordan content $0$ from the boundary or indicator criterion, and contrast it with the fat-Cantor slab.",
+        "deps": [
+          "thm-cantor-set-properties",
+          "def-measure-zero-and-content-zero",
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-content-and-indicator-integrability",
+          "def-multidimensional-rectangle-and-volume",
+          "lem-integer-part",
+          "def-canonical-natural",
+          "cex-compact-set-without-jordan-content"
+        ]
+      },
+      {
+        "id": "rem-jordan-rectifiable-terminology",
+        "kind": "remark",
+        "title": "The term “rectifiable” for Jordan measurable sets is unrelated to rectifiable curves",
+        "strategy": "Record with a checked Munkres reference that some multivariable-analysis texts call bounded sets with null boundary rectifiable. State the proposition itself: in this page's terminology these are the Jordan measurable bounded sets by the boundary criterion. Warn that this usage does not mean finite curve length and creates no dependency on the arc-length page. Keep the remark terminological and source-backed.",
+        "deps": [
+          "thm-jordan-boundary-criterion",
+          "def-jordan-inner-and-outer-content"
+        ]
+      }
+    ]
+  }
+]

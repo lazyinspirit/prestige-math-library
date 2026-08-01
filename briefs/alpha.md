@@ -51,15 +51,29 @@ run the gates. Published items outside the in-flight level are read-only unless
 the owner explicitly instructs otherwise; report suspected published defects.
 Never rename an id on `main`.
 
-Every future theorem, lemma, and corollary must carry the reader-facing
-`authorship` tag. Verify its provenance from the source ledger and actual edits:
-`literature-derived` only for faithful source text with cosmetic edits;
-`ai-altered` for a material AI reformulation, extension, repair, or generated
-proof; `ai-generated` where no identified source text was faithfully derived.
-This is not a novelty claim and `proved_here` separately says whether a complete
-proof is local. Do not backfill legacy content. If you or a Step-6 reader
-materially alters literature-derived mathematical text, retag it `ai-altered`;
-an already AI-generated item remains `ai-generated`.
+Every future mathematical-content item, including definitions, propositions,
+theorems, lemmas, corollaries, examples, counterexamples, false statements, and
+mathematical remarks, must carry the reader-facing `authorship` tag. Verify its
+provenance from the source ledger and actual edits: `literature-derived` only
+for faithful source text with cosmetic edits; `ai-altered` for a material AI
+reformulation, extension, repair, generated proof, or changed witness; and
+`ai-generated` where the particular claim, proof, witness, or refutation is not
+both well-established and documented in reliable literature. This is not a
+novelty claim and `proved_here` separately says whether a complete proof is
+local. Do not backfill legacy content. If you or a Step-6 reader materially
+alters literature-derived mathematical text, retag it `ai-altered`; an already
+AI-generated item remains `ai-generated`. Treat `ai-generated` as a heightened
+truth-risk flag: whenever there is concrete suspicion about its Statement,
+example, witness, or refutation, search for a relevant counterexample before
+accepting a proof repair. A repaired proof does not by itself establish the
+Statement; narrow, replace, or drop the item if the search falsifies it.
+
+For every load-bearing dependency, confirm that an `ai-generated` item was not
+selected where a well-established, literature-backed route was available. A
+`proved_here: false` dependency is permitted only as the documented last resort:
+its source-cited `rem-` must reproduce an exact reputable statement, and the
+batch notes and proof contract must explain the failed local proof route and its
+necessity. It is a real `deps` edge, not an `external_refs` mention.
 
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
 paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
@@ -79,7 +93,10 @@ item before saying a fact is too weak; seek concrete false claims, invalid
 inferences, missing hypotheses, scope/quantifier errors, or inaccurate
 dependency citations; and accept an item when no specific defect exists. A
 terse but licensed routine move is not an error. Require id, exact location,
-and the dependency text or counterexample supporting every finding.
+and the dependency text or counterexample supporting every finding. For any
+AI-generated item assigned to them, also require a targeted counterexample
+search whenever a concrete truth concern arises; do not let a plausible repaired
+proof substitute for testing the Statement or witness.
 
 You are the **sole Alpha adjudicator**. Verify every reader report from disk and
 either confirm it, refute it with the relevant text or mathematics, or apply the

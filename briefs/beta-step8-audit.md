@@ -37,13 +37,25 @@ For **every proof item in your batch**:
    hypotheses, conclusion, and direction. Replace AI-sounding labels or filler
    such as `Null definition:` and `the key bridge says`.
 4. Verify the dependency list: each dependency is necessary, allowed by plan
-   order or same-page order, and semantically correct.
+   order or same-page order, and semantically correct. Reject an
+   `ai-generated` load-bearing dependency where a well-established,
+   literature-backed route is available. For any `proved_here: false` dependency,
+   verify the source-cited `rem-`, its exact source statement, the recorded
+   failed in-library route, and necessity; it belongs in `deps`, never
+   `external_refs`.
 5. Check titles and Statements against what the proof actually proves.
-6. For every theorem, lemma, and corollary, check the reader-facing `authorship`
-   tag against the actual source and edit history. `literature-derived` is only
-   a faithful source transcription with cosmetic edits; a material AI rewrite,
-   extension, repair, or generated proof requires `ai-altered`. An originally
-   AI-generated item remains `ai-generated` after later AI repair. Do not
+6. For every mathematical-content item, including definitions, propositions,
+   theorems, lemmas, corollaries, examples, counterexamples, false statements,
+   and mathematical remarks, check the reader-facing `authorship` tag against
+   the actual source and edit history. `literature-derived` is only a faithful
+   source transcription with cosmetic edits; a material AI rewrite, extension,
+   repair, generated proof, or changed witness requires `ai-altered`. Content
+   whose particular claim, proof, witness, or refutation is not both
+   well-established and documented in reliable literature is `ai-generated`.
+   An originally AI-generated item remains `ai-generated` after later AI repair.
+   For every AI-generated item where there is concrete doubt about truthfulness,
+   search for a relevant counterexample before accepting a proof repair. A
+   repaired proof does not by itself validate the Statement or witness. Do not
    backfill legacy items.
 7. Re-read every Remark and page summary with proof-step suspicion. Verify every
    A-page summary has exactly two nonempty prose paragraphs under 150 words each:
@@ -67,10 +79,12 @@ that proof** in house style and run the gates. Do not rename existing ids on
 If a material rewrite changes an item with `verification.judge`, delete that
 block. Do not judge; judging is step 7.
 
-If your change materially alters literature-derived mathematical text or proof,
-retag it `ai-altered`. Preserve `ai-generated` for an item that was already
-AI-generated. If you add a theorem, lemma, or corollary, set its `authorship`
-tag before reporting.
+If your change materially alters literature-derived mathematical text, proof, or
+witness, retag it `ai-altered`. Preserve `ai-generated` for an item that was
+already AI-generated. If you add any mathematical-content item, set its
+`authorship` tag before reporting; tag it `ai-generated` when its particular
+claim or witness is not both well-established and documented in reliable
+literature.
 
 Update your batch's `research/level<n>-batch-<i>.proof-contracts.json` whenever
 you change a proof, a citation, a proof-step number, or boundary handling. Keep

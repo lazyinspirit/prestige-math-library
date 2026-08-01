@@ -158,14 +158,28 @@ planned material it supports, and record convention disagreements rather than
 silently choosing one. Web research informs the scaffold; it does not turn
 session-authored material into fabricated scraped provenance.
 
-**Published-library read and closure pass (owner, 2026-07-30).** Beta has read
+**Authorship and truth-risk pass (owner, 2026-08-01).** For every planned
+mathematical-content item, including definitions, propositions, theorems,
+lemmas, corollaries, examples, counterexamples, false statements, and
+mathematical remarks, Beta records an `authorship` value and rationale in its
+batch notes. If the particular claim, proof, witness, or refutation is not both
+well-established and documented in reliable literature, it is `ai-generated`.
+That label requires a heightened truth check: when there is concrete doubt,
+Beta searches for a counterexample before keeping or repairing the item. A proof
+repair alone does not establish the Statement; a counterexample requires a
+narrower claim, a different witness, or a dropped item.
+
+**Published-library read and closure pass (owner, 2026-08-01).** Beta has read
 access to the full published `items/` and `library/` corpus. It must search the
 pool before minting ids and open every published dependency it proposes, checking
 the exact Definition or Statement, hypotheses, conclusion, direction, and
-`status: published`. Every load-bearing dependency must be either an earlier
-item inside the A/B pair or established by published content on a strictly
-earlier page. If not, Beta decomposes or rescopes the result, or drops it with a
-licensing note under the self-contained-scope rule.
+`status: published`. Do not choose an `ai-generated` dependency where a
+well-established, literature-backed route is available. Every load-bearing
+dependency must normally be either an earlier item inside the A/B pair or
+established by published content on a strictly earlier page. If not, first
+search an exact reputable source and attempt a local proof; then decompose,
+rescope, or drop it with a licensing note unless the documented external
+fallback applies.
 
 **Per-pair richness pass (owner, 2026-07-30).** For each A/B pair independently,
 the Beta must (1) split a theorem or lemma with a long, multi-part proof into
@@ -199,17 +213,21 @@ Priority order, owner's words: **mathematical accuracy and correct dependency
 citation are non-negotiable; then minimize forward references; then preserve
 mathematical richness.**
 
-**Self-contained scope (hard rule).** A theorem or example needing machinery
-beyond current scope — measure theory, functional analysis, anything unbuilt —
-is **DROPPED from the scaffold with a note recording why and what would license
-it**, never authored with a `proved_here: false` dependency. A **mention** via
-`external_refs` counts as an instance to eliminate, not only a load-bearing
-`dep`. The sole exception is a **foundational axiom already adopted** (AC,
-countable choice, dependent choice) and the independence facts *about* those
-axioms, which are cited as external facts and never used as a proof step. The ‡
-tier and the `deferred-*` catalogue pages stay; what ends is depending on them.
-**A dropped item is deferred, not deleted — the note is what makes it
-recoverable.**
+**Self-contained scope and external fallback (hard rule).** A theorem or
+example needing machinery beyond current scope is normally **dropped from the
+scaffold with a note recording why and what would license it**. Before dropping
+it, Beta must avoid `ai-generated` dependencies, search reputable sources for
+the exact statement and conventions of a needed well-known result, and attempt
+to prove that result from available library dependencies. Only if that local
+proof cannot be built in scope may Beta use the last-resort external fallback:
+create a source-cited `rem-` item with `proved_here: false`, list it in `deps`,
+and record the exact source, failed in-library route, and necessity in the batch
+notes and proof contract. `external_refs` is only for a non-load-bearing
+mention; it cannot conceal a logical dependency. The fuchsia ‡ marker is the
+external-dependency tag. Foundational axioms already adopted (AC, countable
+choice, dependent choice) and the independence facts about them remain
+separately permitted. **A dropped item is deferred, not deleted — the note is
+what makes it recoverable.**
 
 **Reuse discipline.** Ids are IMMUTABLE on `main`. Grep `items/` and
 `plan-spec.json` before minting; reuse or alias an existing id for an existing
@@ -248,12 +266,16 @@ same `briefs/authoring.md` contract and must emit normal repo files; the
 orchestrator remains responsible for running the gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
-draft`, `origin: session`. Every theorem, lemma, and corollary carries
+draft`, `origin: session`. Every mathematical-content item, including examples,
+counterexamples, false statements, and mathematical remarks, carries
 `authorship: ai-generated | ai-altered | literature-derived`, selected under
 SCHEMA.md's reader-facing provenance rule and recorded with a reason in the
-batch notes. **Never** sets `verification.audited`. Adding a dep to silence a
-checker when the proof does not use it is the dominant historical defect class
-and is forbidden.
+batch notes. An item whose particular claim, proof, witness, or refutation is
+not both well-established and documented in reliable literature is
+`ai-generated`; it receives a counterexample search whenever its truthfulness
+is in concrete doubt, including during any proof repair. **Never** sets
+`verification.audited`. Adding a dep to silence a checker when the proof does
+not use it is the dominant historical defect class and is forbidden.
 
 **Dependency discipline (owner, 2026-07-31).** The scaffold Beta authors every
 load-bearing citation with the actual cited Definition or Statement in view.
@@ -263,6 +285,15 @@ real statement does not license a step, never silently strengthen its
 restatement: add the necessary inline proof steps, reconsider the proof
 strategy, or reconsider the truth/scope of the theorem, example, or
 counterexample.
+
+**Dependency provenance order (owner, 2026-08-01).** Do not make an
+`ai-generated` item a load-bearing authoring dependency where a
+well-established, literature-backed result can serve. For each needed
+well-known result absent from the library, search reputable sources for its
+exact statement, prove that statement from available library dependencies when
+possible, and use the new local proof. The only exception is the documented
+`proved_here: false` external fallback from Step 2; it must remain visibly
+marked and fully justified in the batch notes and proof contract.
 
 **Proof-design discipline (owner, 2026-07-31).** Before drafting prose, Beta
 maps each non-routine subclaim to a precise dependency or inline derivation,
@@ -356,11 +387,16 @@ For every authored item in the batch, the independent reader must:
    declared forward reference, and actually states the proposition for which it
    is cited. The common failure mode is citing a true theorem for a stronger or
    different claim than it makes.
-3. **Check authorship disclosure.** For every theorem, lemma, and corollary,
-   verify the `authorship` tag against the actual source and edit history. A
-   material AI change to literature-derived mathematical text or proof requires
-   `ai-altered`; an AI-generated item remains `ai-generated` after later AI
-   repair. Do not backfill legacy content.
+3. **Check authorship disclosure and AI-generated truth risk.** For every
+   mathematical-content item, including examples, counterexamples, false
+   statements, and mathematical remarks, verify the `authorship` tag against
+   the actual source and edit history. A material AI change to
+   literature-derived mathematical text, proof, or witness requires
+   `ai-altered`; content not both well-established and documented in reliable
+   literature is `ai-generated`, and remains so after later AI repair. For an
+   AI-generated item with any concrete truth concern, search for a relevant
+   counterexample before accepting a repair; repairing the proof does not by
+   itself validate the Statement or witness. Do not backfill legacy content.
 4. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
    the fixed two-paragraph, under-150-words-per-paragraph A-summary contract and
    the absence of an authored B-page body. No count in prose, no unsupported

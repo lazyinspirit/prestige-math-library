@@ -50,24 +50,38 @@ source supports and flag every convention disagreement you found. Do not copy
 source prose, fabricate a source, or describe session-authored content as
 scraped.
 
-For every planned theorem, lemma, and corollary, also record the expected
-reader-facing `authorship` value and why: `literature-derived` only for faithful
-source text with cosmetic edits; `ai-altered` for a source-derived result or
-proof that Step 5 will materially reformulate, extend, repair, or generate; and
-`ai-generated` when the result will be formulated by AI without faithfully
-deriving it from one identified literature text. This does not claim novelty.
-`proved_here` independently says whether the library includes a complete proof.
+For every planned mathematical-content item, including definitions,
+propositions, theorems, lemmas, corollaries, examples, counterexamples, false
+statements, and mathematical remarks, record the expected reader-facing
+`authorship` value and why: `literature-derived` only for faithful source text
+with cosmetic edits; `ai-altered` for a source-derived result, proof, or witness
+that Step 5 will materially reformulate, extend, repair, or generate; and
+`ai-generated` whenever the particular claim, proof, witness, or refutation is
+not both well-established and documented in reliable literature. This does not
+claim novelty. `proved_here` independently says whether the library includes a
+complete proof. Treat `ai-generated` as a truth-risk flag: if there is concrete
+doubt, search for a counterexample before planning or repairing the item; a
+proof repair does not establish its Statement.
 
 You have read access to the full published `items/` and `library/` corpus. Use
-it. Search the whole published pool before minting an id. For every external
-dependency you propose, open the actual item and verify `status: published`, the
-exact Definition or Statement, its domain and quantifiers, hypotheses,
-conclusion, and direction. Every load-bearing dependency must be either an
-earlier item inside this A/B pair or an actually published item on a strictly
-earlier page. A reputable web source does not substitute for an unbuilt library
-dependency. If the dependency is unavailable, decompose or rescope the result,
-or drop it with a precise note saying what would license it under the
-self-contained-scope rule.
+it. Search the whole published pool before minting an id. For every dependency
+you propose, open the actual item and verify `status: published`, the exact
+Definition or Statement, its domain and quantifiers, hypotheses, conclusion,
+and direction. Do **not** choose an `ai-generated` item as a load-bearing
+dependency where a well-established, literature-backed route is available.
+Every load-bearing dependency must normally be either an earlier item inside
+this A/B pair or an actually published item on a strictly earlier page.
+
+If a well-known, literature-backed result is needed but unavailable, search a
+reputable source for its exact statement and conventions, then plan a local
+proof using available library dependencies. Add that proven local result to the
+scaffold if the proof closes. Only if the local proof cannot be built in scope
+may you plan the narrow external fallback: a source-cited `rem-` item with
+`proved_here: false`, listed in the consumer's `deps` (never `external_refs`).
+Record in the source ledger, notes, and proof contract the exact source, the
+attempted local route and why it failed, and why the result is necessary. Its
+fuchsia ‡ marker is the reader-facing external-dependency tag. Otherwise,
+decompose or rescope the result, or drop it with a precise licensing note.
 
 For every planned dependency, preserve the actual source statement exactly when
 practical and otherwise make the smallest faithful shortening: do not change its
@@ -99,8 +113,11 @@ anything in the repo and RUN any gate. You may WRITE exactly three files:
 - `research/level<n>-batch-<i>.notes.md` — prose-scaffold amendments as precise
   APPLYABLE edits (file, section, exact old text, exact new text), plus
   authoring-time notes that have no scaffold anchor but must reach the step-5
-  author. For every planned theorem, lemma, and corollary, include its expected
-  `authorship` value and the source/edit-history rationale.
+  author. For every planned mathematical-content item, include its expected
+  `authorship` value and the source/edit-history rationale, and record any
+  `ai-generated` truth-risk/counterexample-search obligation. For every
+  external fallback, record its exact source statement, failed local proof
+  route, and necessity.
 - `research/level<n>-batch-<i>.proof-contracts.json` — the version-1
   machine-readable proof contract for every planned proof-bearing item. Use the
   exact schema in `QUALITY-CONTROLS.md`: source clause and uses for every direct

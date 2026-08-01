@@ -14,7 +14,7 @@
 //                   (YAML eats it; the item then loads wrong or not at all)
 //   kind-prefix     id prefix must match the declared kind (SCHEMA.md §2)
 //   authorship-invalid  authorship must be an allowed reader-facing provenance tag
-//   authorship-kind     authorship is reserved for theorem/lemma/corollary items
+//   authorship-kind     authorship must occur on a mathematical content kind
 //   dep-unresolved  a deps: entry names no existing item id or alias
 //   link-unresolved a [[wikilink]] names no existing item id or alias
 //   self-dep        an item lists itself in deps
@@ -48,7 +48,7 @@ const PREFIX_OF_KIND = {
   'false-statement': 'fs', remark: 'rem',
 };
 const AUTHORSHIP_VALUES = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
-const AUTHORSHIP_KINDS = new Set(['theorem', 'lemma', 'corollary']);
+const AUTHORSHIP_KINDS = new Set(Object.keys(PREFIX_OF_KIND));
 
 const errors = [];
 const warns = [];
@@ -137,7 +137,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   if (authorship !== undefined && !AUTHORSHIP_VALUES.has(authorship))
     err('authorship-invalid', `${file}: authorship must be ai-generated, ai-altered, or literature-derived, got "${authorship}"`);
   if (authorship !== undefined && !AUTHORSHIP_KINDS.has(kind))
-    err('authorship-kind', `${file}: authorship is reserved for theorem, lemma, or corollary items, got kind "${kind}"`);
+    err('authorship-kind', `${file}: authorship is allowed only on a mathematical content item, got kind "${kind}"`);
 
   const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((m) => m[1].trim());
 

@@ -29,7 +29,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
 
 1. **Author as `status: draft`** per SCHEMA.md. Session-authored content is
    `origin: session`; never fabricate scraped sources (use `references`). Every
-   future theorem, lemma, and corollary also declares its reader-facing
+   future mathematical-content item also declares its reader-facing
    `authorship` provenance.
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
@@ -206,15 +206,22 @@ banner; the public sees only `published`.
 
 - Item ids are IMMUTABLE on `main`; renames go through `aliases` (SCHEMA §2).
 - A published page listing a draft item is a hard error, never a silent skip.
-- **Self-contained scope (owner, 2026-07-27).** No item may rest on a result the
-  library has not established. A theorem or example needing out-of-scope
-  machinery (measure theory, functional analysis, …) is **DROPPED from the
-  scaffold with a note saying why and what would license it**, never authored
-  with a ‡ dependency. The sole exception is a foundational axiom already
-  adopted — AC, countable choice, dependent choice — and the independence facts
-  about those axioms. The ‡ tier and the `deferred-*` catalogue pages STAY; what
-  ends is depending on them. Forward-looking: published items are not
-  retrofitted. Full rule in `WORKFLOW.md` §"Self-contained scope".
+- **Self-contained scope and external fallback (owner, 2026-08-01).** The
+  normal rule is that no item rests on a result the library has not established.
+  Beta must first avoid an `ai-generated` dependency, search reputable sources
+  for the exact statement of any well-known result it needs, and try to prove
+  that result from available library dependencies. If that fails, Beta
+  decomposes, rescopes, or drops the item with a licensing note. The narrow last
+  resort is a well-established, source-checked result whose local proof cannot
+  be built in scope: record it as a source-cited `rem-` item with
+  `proved_here: false`, cite that item in `deps`, and record the exact source,
+  failed in-library route, and necessity in the batch notes and proof contract.
+  `external_refs` is for non-load-bearing mentions only. The visible fuchsia ‡
+  marker is the reader-facing external-dependency tag. Foundational axioms
+  already adopted — AC, countable choice, dependent choice — and independence
+  facts about them remain separately permitted. All other unbuilt machinery is
+  dropped. This is forward-looking; published items are not retrofitted. Full
+  rule in `WORKFLOW.md` §"Self-contained scope".
 - Generation for this library NEVER goes through the public billed pipelines.
   Current session route: GPT 5.6 Sol authoring, Beta, and Alpha audit through
   the Codex subscription plan, all at `xhigh` with a 1,000,000-token context
@@ -233,9 +240,11 @@ banner; the public sees only `published`.
   statements, counterexamples, and proof strategies, and records the sources
   and any convention disagreements in its notes. Beta has read access to the
   full published library and must open every published item it intends to cite.
-  Every load-bearing dependency must be established by published content or by
-  an earlier item inside the pair; otherwise the result is decomposed,
-  rescoped, or dropped under the self-contained-scope rule.
+  It does not select `ai-generated` content as a load-bearing dependency while a
+  literature-backed route exists. Every load-bearing dependency must normally
+  be established by published content or by an earlier item inside the pair;
+  the only exception is the documented external fallback in the
+  self-contained-scope rule.
 - **Natural mathematical voice and citation fidelity (owner, 2026-07-30).** Do
   not write AI-sounding labels or interpretive filler such as "Null definition:"
   or "the key bridge says". In every `[F#]`, `[A#]`, or `[L#]` dependency fact,
@@ -253,6 +262,16 @@ banner; the public sees only `published`.
   inline proof steps, reconsider the proof strategy, or reconsider whether the
   theorem/example/counterexample is true as stated. This binds Beta scaffolding
   and Step-5 authoring in every future run.
+- **Dependency provenance order (owner, 2026-08-01).** Beta must not use an
+  `ai-generated` item as a load-bearing scaffold or proof dependency when a
+  well-established, literature-backed route is available. For a needed
+  well-known result, find a reputable source for its exact statement and
+  conventions, then add and prove the result from available library material if
+  possible. Only when that local proof cannot be built in scope may Beta use the
+  documented `proved_here: false` external-dependency fallback; it must be a
+  source-cited `rem-` item in `deps`, never an `external_refs` mention, with the
+  exact source, failed local route, and necessity recorded in the batch notes
+  and proof contract.
 - **Beta proof-design discipline (owner, 2026-07-31).** Before authoring a proof,
   Beta prepares a proof-obligation map that assigns every substantive subclaim
   to an exact dependency or an inline derivation. It performs a boundary pass
@@ -263,19 +282,27 @@ banner; the public sees only `published`.
   still does not close honestly, narrow or drop the stated theorem/example/
   counterexample rather than patching it with an overstated dependency. This is
   required in every future Beta scaffold and Step-5 authoring run.
-- **Authorship disclosure (owner, 2026-08-01).** Every future Beta assigns
-  `authorship: ai-generated | ai-altered | literature-derived` to every theorem,
-  lemma, and corollary it authors, and records the reason in its batch notes.
-  This describes mathematical-text provenance, not novelty: use
-  `literature-derived` only for a faithful source transcription with cosmetic
-  edits; use `ai-altered` when a source-derived result or proof is materially
-  reformulated, extended, repaired, or otherwise changed by AI; use
-  `ai-generated` when AI formulated it without faithfully deriving it from one
-  identified literature text. A generated proof makes a source-derived result
-  `ai-altered`. `proved_here` separately says whether the library supplies a
-  complete proof. Alpha checks every tag at Step 6 and retags a materially
-  altered literature-derived item; an already AI-generated item remains
-  `ai-generated`. Never retrofit legacy items merely to satisfy this rule.
+- **Authorship disclosure and AI-generated truth risk (owner, 2026-08-01).**
+  Every future Beta assigns `authorship: ai-generated | ai-altered |
+  literature-derived` to every mathematical-content item it authors, including
+  definitions, propositions, theorems, lemmas, corollaries, examples,
+  counterexamples, false statements, and mathematical remarks, and records the
+  reason in its batch notes. This describes mathematical-text provenance, not
+  novelty: use `literature-derived` only for a faithful source transcription
+  with cosmetic edits; use `ai-altered` when a source-derived result, proof, or
+  witness is materially reformulated, extended, repaired, or otherwise changed
+  by AI; use `ai-generated` when the particular claim, proof, witness, or
+  counterexample is not both well-established and documented in reliable
+  literature. A generated proof makes a source-derived result `ai-altered`.
+  `proved_here` separately says whether the library supplies a complete proof.
+  Beta treats `ai-generated` content as a truth-risk flag and searches for a
+  counterexample before authoring or repairing it whenever there is concrete
+  doubt. Alpha checks every tag at Step 6, retags a materially altered
+  literature-derived item, and independently probes an AI-generated claim,
+  witness, or refutation for counterexamples whenever its truthfulness is in
+  doubt; repairing a proof does not establish the Statement. An already
+  AI-generated item remains `ai-generated`. Never retrofit legacy items merely
+  to satisfy this rule.
 - **Durable proof-contract and high-risk gates (owner, 2026-08-01).** In every
   future level, each Beta writes and maintains a namespaced
   `research/level<n>-batch-<i>.proof-contracts.json` for every proof-bearing
@@ -371,12 +398,14 @@ before any rendering change, and preserve their behaviour):
 
   Fuchsia is used nowhere else, and the bottom tier OUTRANKS the middle one.
 
-  **Content-side policy change, owner 2026-07-27 — the RENDERING below is
-  untouched and stays frozen, but the ‡ tier no longer licenses new content.**
-  New items may not depend on a `proved_here: false` item at all (see Hard rules
-  above); the tier now serves the `deferred-*` catalogue pages, which record
-  results the library does not prove, plus the pre-existing choice/independence
-  citations. Do not delete this machinery — it is still in use.
+  **Content-side policy change, owner 2026-08-01 — the RENDERING below is
+  untouched and stays frozen.** The ‡ tier ordinarily serves the `deferred-*`
+  catalogue pages and the pre-existing choice/independence citations. The sole
+  new-content exception is the documented external fallback in the hard rules:
+  a well-established, exact-source-checked result that Beta cannot prove from
+  available library dependencies may be a source-cited `proved_here: false`
+  `rem-` dependency. Do not delete this machinery — it makes that exception
+  visible and honest to readers.
   Owned by `web/lib/library-external.ts` (accent + the `unprovedDependence`
   closure, which propagates along `deps` so consequences are marked too);
   `web/components/library/ItemBody.tsx` marks the FACT row carrying an unproved

@@ -45,12 +45,15 @@ title: "Completeness of $\\mathbb{R}$ (Cauchy criterion)"   # inline LaTeX ok
 status: draft                        # draft | published  (THE publish gate)
 origin: session                      # pipeline | session
 authorship: ai-generated             # OPTIONAL for legacy items; REQUIRED on
-                                     # every future theorem, lemma, and corollary:
+                                     # every future mathematical-content item:
                                      # ai-generated | ai-altered | literature-derived
   # Mathematical-text provenance, not a claim of mathematical novelty and not
   # the same as `origin` or `proved_here`:
-  #   ai-generated       AI formulated the result/proof without faithfully
-  #                      deriving it from one identified literature text.
+  #   ai-generated       AI formulated the mathematical claim, proof, witness,
+  #                      or counterexample without a reliable, reasonably
+  #                      direct literature basis for that particular content.
+  #                      This is REQUIRED whenever the content is not both
+  #                      well-established and documented in the literature.
   #   ai-altered         a literature-derived result/proof was materially
   #                      reformulated, extended, repaired, or otherwise
   #                      changed by AI.
@@ -58,8 +61,12 @@ authorship: ai-generated             # OPTIONAL for legacy items; REQUIRED on
   #                      identified literature. A local proof is present iff
   #                      `proved_here: true`; its absence is separately shown
   #                      by the existing ‡ “not proved here” marker.
+  # Applies to definitions, propositions, theorems, lemmas, corollaries,
+  # examples, counterexamples, false statements, and mathematical remarks.
   # Beta assigns this field while authoring. Alpha verifies it at Step 6 and
-  # updates it after a material AI alteration. Do not backfill legacy items
+  # updates it after a material AI alteration. AI-generated content receives a
+  # heightened truth audit; a concrete suspicion requires a counterexample
+  # search before a proof repair is accepted. Do not backfill legacy items
   # merely to satisfy this future-session disclosure rule.
 deps: [def-cauchy-sequence, lem-triangle-inequality]
   # every item this item's statement OR proof LOGICALLY DEPENDS ON (single list;
@@ -74,7 +81,13 @@ justified_by: []                     # OPTIONAL, definitions only in practice.
   # otherwise it is a genuine prerequisite and belongs in `deps`.
 proved_here: true                    # OPTIONAL, defaults to true. Set FALSE when
   # this item RECORDS a result that this library does NOT prove, because the
-  # track that would prove it has not been built (DEFERRED.md). Such an item:
+  # track that would prove it has not been built (DEFERRED.md), or as the
+  # narrow, documented external-dependency fallback below. For that fallback,
+  # Beta must avoid an `ai-generated` dependency when a literature-backed route
+  # exists, check a reputable source's exact Statement and conventions, and
+  # first attempt a proof from available library dependencies. The batch notes
+  # and proof contract record that source, the failed local route, and necessity.
+  # Such an item:
   #   * is a `rem-` (it states, it does not establish), with `verification.
   #     precheck: n/a` and NO `## Proof` section;
   #   * MUST carry a real citation in `sources.references`;
@@ -107,6 +120,16 @@ external_refs: []                    # OPTIONAL. Recorded-not-proved items (i.e.
   # the flowchart. The definition of the Axiom of Choice does not depend on
   # Cohen's independence theorem; it mentions it. Recording the mention in `deps`
   # would inject a false edge into all four consumers at once.
+  #
+  # A logically required external result is NOT an `external_refs` mention.
+  # Under the future-session, last-resort exception to self-contained scope,
+  # Beta avoids an `ai-generated` dependency where a literature-backed route
+  # exists, searches reputable sources for its exact Statement, and attempts an
+  # in-library proof. Only if that proof cannot be built from available
+  # dependencies may Beta create a source-cited `rem-` item with
+  # `proved_here: false`, record why in batch notes, and list that item in
+  # `deps`. The resulting fuchsia ‡ marker truthfully identifies an external
+  # dependency to the reader.
   # Enforced by tools/extcheck.mjs: every entry must name an existing item, that
   # item must have `proved_here: false`, it may not also be in `deps` (a logical
   # dependency is already the stronger seed), and the body must actually link it.

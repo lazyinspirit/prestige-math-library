@@ -47,12 +47,12 @@ Frontmatter fields, and what enforces each:
 | `id` | must equal filename | `depcheck` (`id-filename`) |
 | `kind` | definition/lemma/theorem/corollary/example/counterexample/false-statement/remark | `depcheck` (`kind-prefix`), `validate-plan` (`prefix`) |
 | `status` | `draft` → `published` | `depcheck` (`draft-on-published-page`) |
-| `authorship` | reader-facing mathematical-text provenance on future theorem/lemma/corollary items | `depcheck` validates a supplied value and kind; Beta/Alpha audit assignment and accuracy |
+| `authorship` | reader-facing mathematical-text provenance on future mathematical-content items, including examples and counterexamples | `depcheck` validates a supplied value and kind; Beta/Alpha audit assignment and accuracy |
 | `deps` | **logical** dependencies | `depcheck` (cycles, resolution), `citecheck` |
 | `justified_by` | forward-pointing discharge of a definition's obligation | `depcheck` (target must transitively depend on the citer) |
 | `forward_refs` | references to later material | `fwdcheck` |
 | `external_refs` | *mentions* of unproved items | `extcheck` |
-| `proved_here: false` | this item is a ‡ catalogue entry | `extcheck` |
+| `proved_here: false` | visible ‡ record of a result not proved locally | `extcheck` |
 | `landmark` | appears as a flowchart node | curation only |
 | `verification.precheck` | phase-format result | `precheck` |
 | `verification.judge` | **passes only, never rejections** | honesty rule |
@@ -67,6 +67,14 @@ justification.
 remark would inject a false logical edge into acyclicity, the page prerequisite
 closure and the flowchart — `def-axiom-of-choice` does not *depend* on Cohen's
 theorem.
+
+Conversely, a genuinely load-bearing external result belongs in `deps`, not
+`external_refs`: its effect must propagate through the dependency graph and be
+shown to the reader. The future-session exception permits this only for a
+well-established, exact-source-checked result whose proof Beta could not build
+from available library dependencies. It is represented by a source-cited
+`rem-` item with `proved_here: false`; batch notes and proof contracts record
+the exact source, failed local route, and necessity.
 
 ## 3. The twelve gates
 
@@ -166,6 +174,15 @@ judge): `unproved-kind`, `unproved-has-proof`, `unproved-judged`,
 `unproved-precheck`, `unproved-on-published`, `unproved-uncited`. For references:
 `external-dangling`, `external-in-deps`, `external-not-unproved`,
 `external-unused`.
+
+The tier primarily records the deferred catalogue. Its narrow new-content use
+is a genuine external dependency: Beta must avoid an `ai-generated` dependency
+when a literature-backed route exists, search a reputable source for the exact
+statement, and attempt a local proof first. Only a well-established result that
+cannot be proved from available library dependencies may become a source-cited
+`proved_here: false` `rem-` dependency. It goes in `deps` (not `external_refs`)
+and its source, failed local route, and necessity go in the batch notes and
+proof contract.
 
 **A DEPENDENCE propagates; a MENTION does not.** Owner decision on a
 measurement: propagating mentions marked 26 items instead of 13, including
@@ -506,10 +523,25 @@ statements, counterexamples, and proof strategies, recording working URLs,
 supported planned material, and convention disagreements in its namespaced
 notes. This is deliberately paired with full read access to published `items/`
 and `library/`: every proposed published dependency is opened from disk and
-checked for exact statement, hypotheses, direction, and status. Web evidence can
-correct a scaffold, but cannot license a load-bearing result the library has not
-established; that result must be decomposed, rescoped, or dropped under the
-self-contained-scope rule.
+checked for exact statement, hypotheses, direction, and status. Beta avoids an
+`ai-generated` load-bearing dependency where a literature-backed route exists.
+For a needed well-known result absent from the library, it searches an exact
+source and first attempts a local proof. Only the source-checked,
+proof-impossible-in-scope fallback may remain external, as a visible
+`proved_here: false` `rem-` dependency with its necessity and failed local route
+recorded; otherwise the result is decomposed, rescoped, or dropped.
+
+**AI-generated truth-risk route (owner, 2026-08-01).** Every future
+mathematical-content item receives an `authorship` tag, including examples,
+counterexamples, false statements, and mathematical remarks. If Beta cannot
+show that the particular claim or witness is both well-established and directly
+documented in reliable literature, it tags the item `ai-generated` and records
+that gap in the source ledger. The tag raises scrutiny rather than lowering the
+standard: Beta and Alpha test the claim or witness for counterexamples whenever
+there is concrete doubt, using a relevant construction, finite model, or
+literature search before accepting a proof repair. A repaired derivation is not
+evidence that its Statement was true; a found counterexample requires narrowing,
+restating, or dropping the item.
 
 **Step-3 adjudication is an orchestrator mechanism (owner, 2026-07-30).** Beta
 reports discrete recommendations with evidence; the orchestrator verifies them

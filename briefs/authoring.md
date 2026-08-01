@@ -47,16 +47,22 @@ For your A page and your B page:
   excerpt and all uses; every numbered step has exactly one input-map entry; and
   every standard boundary case is checked or specifically not applicable.
 
-Everything is authored `status: draft` and `origin: session`. Every theorem,
-lemma, and corollary MUST also carry `authorship: ai-generated | ai-altered |
+Everything is authored `status: draft` and `origin: session`. Every
+mathematical-content item, including definitions, propositions, theorems,
+lemmas, corollaries, examples, counterexamples, false statements, and
+mathematical remarks, MUST also carry `authorship: ai-generated | ai-altered |
 literature-derived`; put one short reason for each selection in your batch
 notes. Use `literature-derived` only for faithful source text with cosmetic
-edits, `ai-altered` for a source-derived result or proof materially changed by
-AI (including a generated proof), and `ai-generated` for a result formulated by
-AI without faithfully deriving it from one identified literature text. This is
-not a novelty claim, and `proved_here` separately states whether a complete
-local proof is present. Do not set `verification.audited` — that field is the
-owner's alone, and setting it is a fabrication. Publishing is not your job.
+edits, `ai-altered` for a source-derived result, proof, or witness materially
+changed by AI (including a generated proof), and `ai-generated` when the
+particular claim, proof, witness, or refutation is not both well-established
+and documented in reliable literature. This is not a novelty claim, and
+`proved_here` separately states whether a complete local proof is present. An
+`ai-generated` tag is a truth-risk flag: where you have concrete doubt about the
+Statement, example, witness, or refutation, search for a counterexample before
+you author or repair it. A repaired proof does not by itself make the Statement
+true. Do not set `verification.audited` — that field is the owner's alone, and
+setting it is a fabrication. Publishing is not your job.
 
 For mathematical notation, use only `$...$` for inline math and `$$...$$` for
 display math. The renderer treats TeX `\\(...\\)` and `\\[...\\]` delimiters as
@@ -86,6 +92,18 @@ straitjacket. Add a dep when your proof genuinely uses it; drop one when it does
 not. What you may never do is **add a dep to silence a checker when the proof
 does not actually use it** — that is the dominant defect class in this library's
 history.
+
+**Dependency provenance order.** Do **not** cite an `ai-generated` item as a
+load-bearing proof dependency when a well-established, literature-backed route
+is available. If your proof needs a well-known result missing from the library,
+first search reputable sources for its exact statement and conventions. Then
+prove that result from available library dependencies and cite the local proof
+if you can. Only if that local proof cannot be built in scope may you use the
+documented external fallback: a source-cited `rem-` item with
+`proved_here: false`, placed in `deps` (never `external_refs`). Its source,
+attempted local route and why it failed, and necessity must appear in your batch
+notes and proof contract. The fuchsia ‡ marker is the reader-facing disclosure;
+it is not a general shortcut for unbuilt mathematics.
 
 **When a dependency is insufficient.** Never repair a proof by restating a cited
 item more strongly than it actually says, reversing its implication, or adding
@@ -273,9 +291,10 @@ Your final message is a report to the orchestrator, not to a human reader:
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
    judge verdict; the paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
-   from the scaffold, with one line on what changed and why; for every theorem,
-   lemma, and corollary, include its `authorship` value and the source/edit
-   history that supports it.
+   from the scaffold, with one line on what changed and why; for every
+   mathematical-content item, include its `authorship` value and the source/edit
+   history that supports it. For an `ai-generated` item, record any
+   counterexample search, its scope, and its outcome.
 3. **Escalations** — anything you could not do without crossing a boundary in
    §2: a needed item that does not exist, a suspected defect in a published
    item, a scaffold item you believe is false or unauthorable as stated.
