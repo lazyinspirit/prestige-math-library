@@ -56,6 +56,11 @@
 //                          and marked, but worth seeing every run)
 //
 // Exit 0 iff there are no hard errors.
+//
+// This repository-wide gate keeps legacy recorded results structurally valid.
+// `tools/content-policy.mjs` adds the stricter future-batch requirement that a
+// newly introduced external fallback expose its exact source URL, exact sourced
+// statement, failed local route, and necessity.
 
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';

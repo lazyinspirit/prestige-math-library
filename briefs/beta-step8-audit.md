@@ -43,6 +43,9 @@ For **every proof item in your batch**:
    verify the source-cited `rem-`, its exact source statement, the recorded
    failed in-library route, and necessity; it belongs in `deps`, never
    `external_refs`.
+   In an in-flight fallback, verify `external_dependency.source_url` matches a
+   `sources.references` URL and that the exact-statement, local-attempt and
+   necessity fields are concrete.
 5. Check titles and Statements against what the proof actually proves.
 6. For every mathematical-content item, including definitions, propositions,
    theorems, lemmas, corollaries, examples, counterexamples, false statements,
@@ -57,7 +60,20 @@ For **every proof item in your batch**:
    search for a relevant counterexample before accepting a proof repair. A
    repaired proof does not by itself validate the Statement or witness. Do not
    backfill legacy items.
-7. Re-read every Remark and page summary with proof-step suspicion. Verify every
+7. Verify generated-claim minimization: reject a newly invented AI-generated
+   theorem, proposition, definition, false statement, or remark; source-backed
+   material must instead carry the appropriate source-derived provenance. Accept
+   a generated lemma only where the notes identify
+   a named complex parent proof, exact discharged subclaim, consumer, and a
+   reason it cannot be inline or source-backed. A generated corollary must be
+   directly/easily verifiable, and a generated example/counterexample must have
+   a checkable witness. Generated corollaries, examples, and counterexamples
+   must not be load-bearing dependencies.
+   Check the corresponding `generation` frontmatter too: a decomposition lemma
+   names its parent, subclaim, consumer and why-not-inline record, and only that
+   parent may depend on it; generated corollaries/examples/counterexamples have
+   no dependency consumers.
+8. Re-read every Remark and page summary with proof-step suspicion. Verify every
    A-page summary has exactly two nonempty prose paragraphs under 150 words each:
    mathematical background and actually used declared dependencies first; main
    definitions, theorems, and logical progression second. Verify every B page
@@ -85,6 +101,12 @@ already AI-generated. If you add any mathematical-content item, set its
 `authorship` tag before reporting; tag it `ai-generated` when its particular
 claim or witness is not both well-established and documented in reliable
 literature.
+For every load-bearing legacy-unclassified dependency you introduce or retain,
+record whether the exact statement was established from mathematical knowledge
+or source-checked; include the reputable source URL for the latter. Do not
+invent a provenance label on an untouched historical item.
+An `ai-altered` or `literature-derived` item must retain a supporting URL in
+`sources.references`.
 
 Update your batch's `research/level<n>-batch-<i>.proof-contracts.json` whenever
 you change a proof, a citation, a proof-step number, or boundary handling. Keep

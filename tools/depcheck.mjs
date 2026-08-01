@@ -25,6 +25,9 @@
 //   page-item-dup   a page lists the same item twice
 //   draft-on-published-page   a published page lists a non-published item
 //   published-unaudited       a published item has no verification.audited
+//   b-leaf-content            an authored dependency reaches an item that lives
+//                              only on an examples/B page (except within that
+//                              same B page)
 //
 // WARNINGS
 //   orphan          a published item that appears on no page (it is then
@@ -184,6 +187,31 @@ const pages = [];  // {page, title, status, file, cat, items:[], examples:[]}
   }
 })(join(REPO, 'library'), []);
 
+// The plan records the authoritative B-page classification.  Page-file suffixes
+// are retained as a conservative fallback so an authored B page is still
+// protected while a newly spliced plan entry is being reconciled.
+const bPages = new Set(pages.filter((p) => p.page.endsWith('-examples')).map((p) => p.page));
+try {
+  const plan = JSON.parse(readFileSync(join(REPO, 'research/plan-spec.json'), 'utf8'));
+  for (const page of plan.pages ?? []) if (page?.kind === 'B' && typeof page.id === 'string') bPages.add(page.id);
+} catch {
+  // `validate-plan` owns malformed or absent plan diagnostics.  depcheck still
+  // applies the safe filename fallback above to the authored corpus.
+}
+const legacyBLeafEdges = new Map();
+try {
+  const allowlist = JSON.parse(readFileSync(join(REPO, 'research/b-leaf-legacy-allowlist.json'), 'utf8'));
+  if (allowlist.version !== 1 || !Array.isArray(allowlist.edges)) throw new Error('expected version 1 with an edges array');
+  for (const edge of allowlist.edges) {
+    if (typeof edge?.source !== 'string' || typeof edge?.target !== 'string' || typeof edge?.reason !== 'string' || !edge.reason.trim()) {
+      throw new Error('every edge needs source, target, and a nonempty reason');
+    }
+    legacyBLeafEdges.set(`${edge.source}\u0000${edge.target}`, edge.reason);
+  }
+} catch (cause) {
+  err('b-leaf-allowlist', `research/b-leaf-legacy-allowlist.json: ${cause.message}`);
+}
+
 // ---------------------------------------------------------- resolve references
 
 for (const it of items.values()) {
@@ -212,6 +240,7 @@ for (const it of items.values()) {
 // -------------------------------------------------------------- page hygiene
 
 const homeOf = new Map();  // itemId -> first page that lists it
+const homesOf = new Map(); // itemId -> every page that lists it
 for (const p of pages) {
   const all = [...p.items, ...p.examples];
   const seen = new Set();
@@ -222,6 +251,8 @@ for (const p of pages) {
     if (!r) { err('page-item-missing', `${p.file}: lists "${id}", which is not an item`); continue; }
     if (p.status === 'published' && items.get(r).status !== 'published')
       err('draft-on-published-page', `${p.file} is published but lists non-published item "${r}"`);
+    if (!homesOf.has(r)) homesOf.set(r, new Set());
+    homesOf.get(r).add(p.page);
     if (homeOf.has(r)) warn('multi-home', `"${r}" appears on both ${homeOf.get(r)} and ${p.page}`);
     else homeOf.set(r, p.page);
   }
@@ -243,6 +274,31 @@ for (const it of items.values()) {
     err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))
     warn('orphan', `${it.id} is published but appears on no page (dropped from page-level Prerequisites)`);
+}
+
+// `validate-plan` prevents a planned A page from depending on a planned B page,
+// but authors legitimately revise `deps` after a scaffold is spliced.  Check the
+// actual item graph as well: an item that lives *only* on B/examples pages may be
+// used by an earlier item on that same B page, but never by another page.  This
+// preserves ordinary intra-example exposition without allowing examples to enter
+// the theorem spine after planning.
+for (const p of pages) {
+  for (const source of [...p.items, ...p.examples]) {
+    const sourceId = resolve(source);
+    if (!sourceId) continue;
+    for (const dep of items.get(sourceId).deps) {
+      const targetId = resolve(dep);
+      const targetHomes = targetId && homesOf.get(targetId);
+      if (!targetHomes?.size || ![...targetHomes].every((page) => bPages.has(page))) continue;
+      if (targetHomes.has(p.page)) continue; // legal earlier item on the same B page
+      const legacyReason = legacyBLeafEdges.get(`${sourceId}\u0000${targetId}`);
+      if (legacyReason) {
+        warn('b-leaf-legacy', `${items.get(sourceId).file}: grandfathered B-page dependency "${dep}" — ${legacyReason}`);
+      } else {
+        err('b-leaf-content', `${items.get(sourceId).file}: depends on "${dep}", which lives only on B/examples page(s) ${[...targetHomes].join(', ')}`);
+      }
+    }
+  }
 }
 
 // ------------------------------------------------- load-bearing citations vs deps

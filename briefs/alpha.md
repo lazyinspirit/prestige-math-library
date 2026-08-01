@@ -74,6 +74,24 @@ selected where a well-established, literature-backed route was available. A
 its source-cited `rem-` must reproduce an exact reputable statement, and the
 batch notes and proof contract must explain the failed local proof route and its
 necessity. It is a real `deps` edge, not an `external_refs` mention.
+For an in-flight fallback, also verify the item's `external_dependency` block:
+its exact-source URL must match `sources.references`, and its exact statement,
+local attempt, and necessity must be concrete rather than placeholders.
+
+Enforce generated-claim minimization. Reject a newly invented AI-generated
+theorem, proposition, definition, false statement, or mathematical remark;
+source-backed material must instead carry the appropriate source-derived
+provenance. A generated lemma is permitted only for a documented complex
+parent-proof decomposition, with its exact subclaim and consumer recorded; an
+easily verifiable corollary or a checkable example/counterexample must not
+become dependency-spine infrastructure. Require an inline or established
+replacement whenever it avoids a load-bearing AI-generated statement.
+Verify `generation` frontmatter from disk: a generated lemma names its parent,
+subclaim, consumer, and why-not-inline record, and only that parent may directly
+depend on it; generated corollaries/examples/counterexamples have no consumers.
+For every `literature-derived` or `ai-altered` item, verify from disk that
+`sources.references` contains a reader-visible source URL before accepting the
+provenance label.
 
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
 paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
@@ -140,6 +158,13 @@ then record a complete `risk_review` with your own adjudicated disposition.
 A finite-smoke pass is bounded falsification evidence only and never replaces
 your reading. Re-run the merge and controls after any repair they trigger.
 
+Run `content-policy.mjs` on the batch manifests before Step 7. It is a hard
+future-scope gate, not an optional provenance lint. After every item-modifying
+stage, take the required touch snapshot and run `impact-audit.mjs` against the
+authoring baseline. Complete its receipt by reading every listed logical and
+direct-citation consumer; proof-only changes still receive ordinary rejudge but
+do not need a fabricated consumer pass.
+
 ### 6c. Audit cross-batch and cross-level references
 
 Generate the mechanical checklist:
@@ -148,10 +173,11 @@ Generate the mechanical checklist:
 node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json > research/level<n>-audit-manifest.json
 ```
 
-Then audit every edge not wholly inside one Beta batch: cross-batch edges,
-backward edges to published content, and every declared forward reference. For
-each edge, read the source use and the target item on disk. Verify right
-statement, right hypotheses, right direction and no hidden stronger claim.
+Then audit every relationship not wholly inside one Beta batch: cross-batch
+edges, backward edges to published content, well-definedness discharges,
+external mentions, and every declared forward reference. For each relationship,
+read the source use and target item on disk. Verify right statement, right
+hypotheses, right direction and no hidden stronger claim.
 
 A declared edge list of zero is a finding, not a clean bill: ask whether two
 same-level pages should connect but are duplicating or using prose instead of a
@@ -169,7 +195,10 @@ citation.
    that you personally authored the proof.
 6. Twice-touched items that now require orchestrator personal audit.
 7. Honest remaining gaps, if any.
-8. A consolidated **fatal-error ledger for step 10**. For every
+8. The completed impact-audit receipt and the manifest-bound coverage receipt;
+   state any planned-versus-authored dependency reconciliation and why it was
+   mathematically necessary.
+9. A consolidated **fatal-error ledger for step 10**. For every
    publish-blocking mathematical error found by either Beta or Alpha, record the
    affected id/file, defect type, location (title/Statement, proof/refutation,
    Facts/dependencies, Remark, or page prose/summary), and exact fix disposition

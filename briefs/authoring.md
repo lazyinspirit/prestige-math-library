@@ -1,7 +1,5 @@
 <!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
-     <i> (batch). Kept in the repo because these briefs ARE the prompt-side
-     half of the workflow: LEVELS.md describes them, this is the text. They
-     lived in a session scratchpad until 2026-07-27 and would have been lost. -->
+     <i> (batch). -->
 
 # level <n> authoring brief (step 5 of the owner's per-level build)
 
@@ -58,6 +56,8 @@ changed by AI (including a generated proof), and `ai-generated` when the
 particular claim, proof, witness, or refutation is not both well-established
 and documented in reliable literature. This is not a novelty claim, and
 `proved_here` separately states whether a complete local proof is present. An
+`ai-altered` or `literature-derived` item must include the supporting URL in
+`sources.references`; an untraceable source-backed provenance label is invalid.
 `ai-generated` tag is a truth-risk flag: where you have concrete doubt about the
 Statement, example, witness, or refutation, search for a counterexample before
 you author or repair it. A repaired proof does not by itself make the Statement
@@ -80,6 +80,13 @@ they are unrelated and valid.
   A page. Your B-page items may additionally cite your own A page. If a proof
   seems to need an item homed on another pair's B page, that is a scaffold
   defect — report it, do not cite it.
+- **Legacy-unclassified dependency rule.** If you add or retain a load-bearing
+  dependency whose published target has no `authorship`, open its actual text
+  and either confirm from mathematical knowledge that the exact statement is
+  established or source-check the exact statement and conventions with a
+  reputable source. Record the chosen route in the batch notes. Do not invent a
+  provenance tag on the old item; if confidence does not close, prove the fact
+  locally, rescope, or use the narrow documented external fallback.
 - **Presentation is FROZEN.** Author to SCHEMA.md's layout rules so your pages
   render identically to what exists. Do not invent new visual devices.
 - **Generation stays inside this session.** Never route anything through the
@@ -104,6 +111,24 @@ documented external fallback: a source-cited `rem-` item with
 attempted local route and why it failed, and necessity must appear in your batch
 notes and proof contract. The fuchsia ‡ marker is the reader-facing disclosure;
 it is not a general shortcut for unbuilt mathematics.
+Also write `external_dependency.source_url`, `exact_statement`,
+`local_proof_attempt`, and `necessity` on that `rem-`; the URL must exactly
+match an entry in `sources.references`.
+
+**Generated-claim minimization.** Do not invent a theorem, proposition,
+definition, false statement, or mathematical remark to fill space or bridge an
+awkward proof. Retain an `ai-generated` lemma only as a focused decomposition
+of its named complex parent proof. Retain an AI-generated corollary only when
+its derivation is directly and easily verifiable from named material; use
+generated examples/counterexamples only with checkable witnesses. Generated
+corollaries, examples, and counterexamples are never load-bearing dependencies.
+For every generated lemma, put its parent theorem, discharged subclaim,
+consumer, and why an inline proof or established result was insufficient in the
+batch notes; do not generalize it into the dependency spine for convenience.
+Write the same data in `generation`: a lemma uses
+`proof-decomposition-lemma` plus `parent`, `subclaim`, `consumer`, and
+`why_not_inline`; a corollary/example/counterexample uses its matching role.
+Only the named parent may directly depend on a generated lemma.
 
 **When a dependency is insufficient.** Never repair a proof by restating a cited
 item more strongly than it actually says, reversing its implication, or adding

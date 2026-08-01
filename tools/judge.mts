@@ -173,7 +173,29 @@ const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL];
 // retained `--parallel` spelling is an explicit no-op alias for the default.
 const models = opts.model ? [opts.model] : [DEEPSEEK_MODEL, TERRA_MODEL];
 const topic = opts.topic ?? "";
-const conventions = opts.conventions ?? "";
+// The normal sweep used to omit --conventions, leaving the documented
+// triage/citation rules in a dead file.  Load one canonical conventions file by
+// default and put its literal bytes in the frozen prompt hash.  A targeted
+// experiment may still pass literal replacement text with --conventions; a
+// readable path is accepted as a convenience for reproducible experiments.
+const DEFAULT_CONVENTIONS_PATH = join(process.cwd(), 'briefs/judge-conventions.txt');
+const conventionArgument = opts.conventions;
+const conventionsPath = conventionArgument && existsSync(conventionArgument)
+  ? conventionArgument
+  : DEFAULT_CONVENTIONS_PATH;
+let conventions = "";
+try {
+  conventions = conventionArgument && !existsSync(conventionArgument)
+    ? conventionArgument
+    : readFileSync(conventionsPath, 'utf8').trim();
+} catch (cause) {
+  console.error(`[judge] cannot load required conventions from ${conventionsPath}: ${String((cause as Error).message ?? cause)}`);
+  process.exit(2);
+}
+if (!conventions) {
+  console.error(`[judge] required conventions file is empty: ${conventionsPath}`);
+  process.exit(2);
+}
 const id = basename(file).replace(/\.md$/, "");
 
 for (const judgeModel of models) {

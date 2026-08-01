@@ -8,7 +8,7 @@ built to prevent*. `SCHEMA.md` and `CLAUDE.md` win where they differ.
 here in the same commit. A mechanism nobody can find is a mechanism that gets
 rebuilt worse. See §9.
 
-Verified against the code 2026-07-31.
+Verified against the code 2026-08-01.
 
 ---
 
@@ -47,12 +47,13 @@ Frontmatter fields, and what enforces each:
 | `id` | must equal filename | `depcheck` (`id-filename`) |
 | `kind` | definition/lemma/theorem/corollary/example/counterexample/false-statement/remark | `depcheck` (`kind-prefix`), `validate-plan` (`prefix`) |
 | `status` | `draft` → `published` | `depcheck` (`draft-on-published-page`) |
-| `authorship` | reader-facing mathematical-text provenance on future mathematical-content items, including examples and counterexamples | `depcheck` validates a supplied value and kind; Beta/Alpha audit assignment and accuracy |
+| `authorship` | reader-facing mathematical-text provenance on future mathematical-content items, including examples and counterexamples | `depcheck` validates a supplied value and kind; `content-policy` requires it in every future batch scope |
+| `generation` | constrained role and parent record for AI-generated future content | `content-policy` permits only recorded decomposition lemmas, direct corollaries and checkable examples/counterexamples; prevents dependency-spine escape |
 | `deps` | **logical** dependencies | `depcheck` (cycles, resolution), `citecheck` |
 | `justified_by` | forward-pointing discharge of a definition's obligation | `depcheck` (target must transitively depend on the citer) |
 | `forward_refs` | references to later material | `fwdcheck` |
 | `external_refs` | *mentions* of unproved items | `extcheck` |
-| `proved_here: false` | visible ‡ record of a result not proved locally | `extcheck` |
+| `proved_here: false` | visible ‡ record of a result not proved locally | `extcheck`; `content-policy` requires structured source, local-attempt and necessity evidence in future batch scope |
 | `landmark` | appears as a flowchart node | curation only |
 | `verification.precheck` | phase-format result | `precheck` |
 | `verification.judge` | **passes only, never rejections** | honesty rule |
@@ -76,7 +77,7 @@ from available library dependencies. It is represented by a source-cited
 `rem-` item with `proved_here: false`; batch notes and proof contracts record
 the exact source, failed local route, and necessity.
 
-## 3. The twelve gates
+## 3. The base gates and future-scope closures
 
 Run from the repo root. The orchestrator runs the authoritative pass **after**
 every agent in a stage finishes; no stage advances on an agent's report.
@@ -115,13 +116,23 @@ authored. Errors: `id-filename`, `yaml-escape`, `kind-prefix`, `authorship-inval
 `authorship-kind`, `dep-unresolved`,
 `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`,
 `page-item-dup`, `draft-on-published-page`, `published-unaudited`,
-`published-unchecked`, `orphan`, `multi-home`, `cited-not-in-deps`,
-`justification-backward`, `justification-duplicated`,
-`sources-checked-on-proved` (21 total).
+`published-unchecked`, `justification-backward`, `justification-duplicated`,
+`sources-checked-on-proved`, `b-leaf-content`, and `b-leaf-allowlist`.
+Warnings are `orphan`, `multi-home`, `cited-not-in-deps`, and the explicitly
+grandfathered `b-leaf-legacy` edge.
 
 **This is the mechanical guarantee behind "no circular reasoning."**
 `published-unaudited` is what forces the owner's re-audit when an amendment
 changes published text.
+
+**Authored B-leaf closure (owner, 2026-08-01).** `validate-plan` had always
+checked the intended scaffold, but an author could add a `deps` edge to an item
+living only on an examples/B page after the splice. `depcheck` now derives B
+pages from the plan (with the `-examples` filename fallback) and rejects that
+actual-content edge unless both items are on the same B page. A single known
+published legacy edge is listed with its reason in
+`research/b-leaf-legacy-allowlist.json`, emits `b-leaf-legacy` on every run,
+and is not a general exemption. New B-page dependencies hard-fail.
 
 ### 3.3 `fwdcheck.mjs` — forward references
 `forward-on-spine` is the hard one: a *load-bearing* forward reference on a
@@ -300,6 +311,38 @@ critical results route to an additional Alpha proof-refuter and require a
 recorded `risk_review` before Step 7. It is deliberately not a defect detector:
 the score explains *where to spend reading attention*, not what is false.
 
+### 3.11 Future-scope containment and coverage
+
+`tools/content-policy.mjs` is deliberately scoped by the active batch manifests.
+It closes rules that cannot truthfully be backfilled over legacy content:
+authorship is mandatory; `ai-generated` content has an allowed role; a generated
+lemma names its parent, subclaim, consumer, and reason it is not inline; only
+that parent may depend on it; generated corollaries/examples/counterexamples
+may not be dependencies; and a future external fallback carries a source URL,
+exact statement, failed local route, and necessity matching a reference URL.
+The gate does not decide whether a literature source is semantically correct;
+it makes that exact check an explicit Alpha obligation.
+
+`tools/impact-audit.mjs` turns a repair's blast radius into a hard receipt. Each
+`touchlog` snapshot now records both the full mathematical-content hash and a
+public-interface hash. When an interface changes, the tool computes every
+transitive reverse-`deps` consumer and every direct citation consumer, then
+requires Alpha to account for each one. Proof-only changes do not manufacture a
+large consumer queue, but still require their ordinary audit and rejudge.
+
+`tools/level-coverage.mjs` is the whole-level closure gate. It derives item and
+relationship scope from actual batch manifests, demands a contract for every
+proof-bearing item, verifies an Alpha receipt against a current manifest hash,
+and requires both judge models to have a usable verdict for every item. With
+`--verify-current-context` it recomputes each no-network judge prompt hash, so
+an old pass cannot be reused after its item, cited statement, pair context, or
+conventions changed. It also computes every planned-versus-authored `deps`
+difference from the batch manifest; Alpha must record the exact planned and
+actual lists plus a reason, so a legitimate proof-driven change cannot drift
+silently into the scaffold. It requires `spine-audit.mjs`'s independent,
+hash-bound reading receipt for proof-bearing items among the 100 largest
+transitive dependency cones.
+
 ### Helpers
 `reflow.mts` (join soft-wrapped steps; purely syntactic, never changes
 mathematics) · `adopt-repair.mjs` · `consumers.mjs --changed` (who cites what I
@@ -410,10 +453,14 @@ invalidated. Measured on `frontier-1`, 292 calls for 212 items produced 80 repea
 calls and 30 destroyed passes. Judging after audit preserves coverage and makes
 verdicts describe the text that ships.
 
-**Prompt files:** `briefs/codex-judge.md` plus `briefs/judge-conventions.txt`.
-They instruct both judges to read proofs and dependency citations skeptically.
-The conventions file is still stored because forgetting it makes a judge flag
-30-second gaps and drives useless repair cycles.
+**Prompt source:** the adversarial refuter instructions live in
+`tools/judge.mts`; `briefs/judge-conventions.txt` is loaded by that program by
+default and its literal bytes enter the frozen prompt hash. `--conventions` is
+only a deliberate experiment override. This closes the old sweep-path drift in
+which documentation named the conventions file but `judge-sweep` never passed
+it. The conventions remain a separate canonical block because omitting their
+30-second threshold drives useless repair cycles. `briefs/codex-judge.md` is a
+human-readable historical brief, not a runtime prompt source.
 
 **Context unit:** the A/B pair. The judge receives the target item, its own page
 and companion `-examples` page in full, plus only additional A pages that the
@@ -475,10 +522,12 @@ verify the model catches it.
 ## 5b. Audit-manifest coverage backstop
 
 `tools/audit-manifest.mjs` supports step 6. Given the level batch JSON files, it
-classifies authored dependency edges as same-batch, cross-batch,
-published-backward, forward, unresolved, or missing-source. It does not certify
-semantic correctness; it makes omissions visible so Beta and Alpha reports can be
-reconciled against an explicit checklist.
+classifies every authored `deps`, `justified_by`, `forward_refs`, and
+`external_refs` relationship as same-batch, cross-batch, published-backward,
+forward, unresolved, or missing-source. It does not certify semantic correctness;
+it makes omissions visible so Beta and Alpha reports can be reconciled against an
+explicit checklist. `level-coverage.mjs` hashes that actual checklist into
+Alpha's receipt.
 
 ## 6. The prompt-side mechanisms (`briefs/`)
 
@@ -490,8 +539,8 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `beta-step8-audit.md` | independent Step-6 reader, **step 6a batch auditor** (historical filename retained) | exhaustive audit of a batch the reader did not author; fixes; added/deleted in-flight results |
 | `authoring.md` | the same GPT 5.6 Sol Beta-n-i that scaffolded the batch, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
 | `alpha.md` | Alpha-n, steps 4, 6, and 8 | dispatches read-only skeptical proof-refuters; adjudicates their and judges' findings; propagates, audits independent-reader fixes, and audits cross-batch and cross-level references |
-| `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | shared frozen judge prompt and JSON verdict contract |
-| `judge-conventions.txt` | the judge | the triage rule and library conventions |
+| `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
+| `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
 
 **Beta proof-design backstop (owner, 2026-07-31).** The scaffold and authoring
 briefs require a proof-obligation map, a boundary-case pass, step-level
@@ -542,6 +591,15 @@ there is concrete doubt, using a relevant construction, finite model, or
 literature search before accepting a proof repair. A repaired derivation is not
 evidence that its Statement was true; a found counterexample requires narrowing,
 restating, or dropping the item.
+
+**Generated-claim minimization route (owner, 2026-08-01).** Source-backed
+statements, not invented theorems, form the development. Beta may generate only
+a focused lemma for a named complex-proof decomposition, an easily verifiable
+corollary, or a checkable example/counterexample. The batch ledger identifies a
+generated lemma's parent, subclaim, consumer, and reason it is not inline or
+replaced by an established result. Generated corollaries and examples are not
+dependency-spine infrastructure; Alpha and the independent Beta reader reject
+unjustified load-bearing AI-generated statements.
 
 **Step-3 adjudication is an orchestrator mechanism (owner, 2026-07-30).** Beta
 reports discrete recommendations with evidence; the orchestrator verifies them
@@ -639,52 +697,33 @@ State this honestly rather than implying coverage.
   logical progression; B pages carry no authored summary body. This remains a
   reading rule, not a mechanical gate.
 - **`depsource` cannot see `forward_refs`** (§3.8).
-- **`b-leaf` is enforced only against the SPEC, never against `items/`.**
-  `validate-plan` owns the check and reads `research/plan-spec.json`;
-  `depcheck` is the only gate that reads authored content and contains **zero**
-  b-leaf checks (verified 2026-07-27). An authoring agent that adds a `deps` edge
-  onto a B-page item after the splice is therefore invisible to all twelve gates.
-  Note the rule's exact shape before "fixing" a report of one:
-  `validate-plan.mjs` guards with `dp.kind === 'B' && dp.id !== p.id`, so an item
-  citing an **earlier item on its own B page is legal** — ordinary intra-page
-  structure, covered by `intra-order`. A level-7-algebra audit misread this and
-  rewrote a correct item on a false premise.
-- **`b-leaf` used to be unreachable for a dep that was ALREADY PUBLISHED — fixed
-  2026-07-28.** The main check loop begins `if (existing.has(d)) continue;`, so
-  any dep resolving to an item already in `items/` skipped the leaf test
-  entirely, and the rule was enforced against planned items only. A second loop
-  now runs the same test against `homePageOf` after that map is built.
-  **The hole was PARTLY masked, and the unmasked case is the dangerous one:** if
-  the depending page does not declare the examples page in `requires`, the
-  violation surfaces as `undeclared-prereq` instead — a real failure, but under
-  the wrong name. If the page DOES declare it, the old gate passed the spec
-  clean. That is exactly the shape an agent produces when it believes depending
-  on a B page is allowed. Verified by injection both ways before and after the
-  fix, and the current spec is unaffected (still exits 0).
-- **Nothing reconciles the spec's `deps` against the authored items' `deps`.**
-  Step 5 authors legitimately adjust deps as proofs take shape (19 of 40 items
-  did at level 7-algebra), and no tool ever compares the two afterwards. The
-  spec and the content drift apart silently, which is also why the gap above
-  cannot be caught by re-running `validate-plan`.
+- **Authored B-leaf edges are now covered.** `depcheck` reads actual page homes
+  and rejects any `deps` edge to an item that lives only on B/examples pages,
+  except an earlier item on the same B page. This closes the post-splice hole
+  that `validate-plan` could never see. One published legacy edge is explicitly
+  allowlisted and emits a warning on every run; it is not silently treated as
+  conforming and no new edge receives that exception.
+- **Plan/content dependency drift is now receipt-bound for future levels.**
+  Step 5 may legitimately adjust deps as proofs take shape, but
+  `level-coverage.mjs` compares every manifest entry's planned list with the
+  authored list. Alpha records each exact difference and its reason in the
+  manifest-hashed receipt. Legacy levels retain their historical manifests and
+  are not retroactively rewritten.
 - **Scope-denial decay has no detector.** A claim true when written that a later
   level falsifies changes no file, so every gate passes forever. Only the step-9a
   sweep finds it — and a repair confirmed by reading the diff can leave the same
   falsehood elsewhere in the same file, which happened at level 8.
 - **`citecheck` is a heuristic**, not a proof of correct attribution.
-- **No reader at any tier has read the PROOFS of cited dependencies.** Readers
-  open a cited item's Statement and check the `[L#]` restates it faithfully,
-  which catches the dominant defect class and nothing about whether the cited
-  proof is itself sound. Measured 2026-07-28, and the shape is better than it
-  sounds: the dep graph is a power law, so this is a **~40-item problem, not a
-  1204-item one**. Of the top 100 items by consumer count, 60 are definitions
-  with no proof to read; the proof-bearing 40 total **342 proof steps** (median
-  9, max 20). The top 20 carry 28% of all 11,705 dep edges and the top 100 carry
-  64%; `def-natural-numbers` alone has 945 transitive consumers.
-  **If this is ever closed, rank by blast radius and not by level** — auditing
-  per level re-reads `lem-of-abs-value` (233 consumers, 9 steps) every level and
-  still never finishes it, whereas reading it once covers every future level.
-  Key it to a content hash so a repair lapses the read. Do NOT point the judge
-  at it. Owner deferred 2026-07-28; recorded so the measurement is not redone.
+- **High-blast-radius dependency proofs now have a dedicated reading receipt.**
+  Readers normally open a cited item's Statement, which catches misattribution
+  but not a false proof inside that item. The graph is a power law, so
+  `spine-audit.mjs` selects proof-bearing items among the top 100 transitive
+  consumer cones. The set is recomputed rather than remembered, because a new
+  dependency can legitimately change the ranking. An independent reader's content-hashed receipt is required by future
+  `level-coverage` gates and lapses on a mathematical edit. It does not replace
+  ordinary per-level reading of lower-fan-out dependencies, nor does a receipt
+  mechanically establish a proof; it makes the previously ownerless high-impact
+  read explicit. Do not point the judge at the whole spine.
 - **No page has ever been visually rendered.** `rendercheck` closes part of this.
 - **The step-6 Alpha/Beta audit** required by `CLAUDE.md` before publishing
   mathematical content is the reading tier; it is not replaced by the judge.

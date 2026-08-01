@@ -138,6 +138,20 @@ repair does not establish that its Statement is true. A counterexample requires
 the claim to be narrowed, the witness to be replaced, or the item to be dropped.
 Do not backfill legacy content merely to meet this future-session rule.
 
+### Generated-claim minimization (hard rule, owner instruction 2026-08-01)
+
+Beta builds from well-established, literature-backed statements rather than
+inventing new theorems to make a page look rich or a proof convenient. Do not
+create an AI-generated theorem, proposition, definition, false statement, or
+mathematical remark for that purpose. The permitted generated content is narrow:
+focused lemmas that decompose a named complex parent proof; directly and easily
+verifiable corollaries; and examples or counterexamples with checkable
+witnesses. Generated corollaries, examples, and counterexamples must not become
+load-bearing dependencies. A generated lemma may support only its documented
+parent decomposition; the batch notes identify the parent, precise subclaim,
+consumer, and why a local inline step or established result was inadequate.
+Minimize load-bearing AI-generated statements throughout the dependency spine.
+
 ### Definition justification (hard rule)
 
 Every definition must be fully justified for logical validity and
@@ -250,6 +264,19 @@ Beta/Alpha audit, and step-8 judge adjudication. A file appearing for the first 
 counts as creation, not a repair. `audit` combines repairs with judge refutations
 and prints the escalation set: every id whose total exceeds one.
 
+Each new snapshot also records a public-interface fingerprint. After an audit
+stage, run `tools/impact-audit.mjs` against the authoring baseline. If a title,
+dependency declaration, Fact, Statement/Definition/Example, or Remark changed,
+Alpha records a disposition for every transitive logical and direct-citation
+consumer. A proof-only repair is still audited and rejudged, but does not create
+a spurious full downstream work queue.
+
+Before a future level closes, `spine-audit.mjs` also requires an independent,
+content-hashed proof reading of the proof-bearing items among the 100 largest
+transitive dependency cones. This deliberately spends attention by blast radius,
+not by the current level; the receipt lapses when an audited proof changes and is
+checked by the whole-level coverage gate.
+
 Measure repairs from disk; do not count them from what an agent reported.
 
 ### Self-contained scope and last-resort external fallback (hard rule, owner instruction 2026-08-01)
@@ -269,7 +296,9 @@ proof cannot be built in scope, Beta may create a source-cited `rem-` item with
 notes and proof contract record the exact source, the attempted local route and
 why it failed, and why the external result is necessary. This is the only new
 load-bearing use of the ‡ tier. `external_refs` is for non-logical mentions
-only, and may never be used to disguise a dependency.
+only, and may never be used to disguise a dependency. The same four records are machine-required in the item's
+`external_dependency` block, and its `source_url` must be one of
+`sources.references`; `content-policy.mjs` enforces that future-batch contract.
 
 **The one exception is a foundational axiom the library has already adopted**:
 the Axiom of Choice and its relatives (`def-axiom-of-choice`,
@@ -759,10 +788,11 @@ Run the judge, then report and fix.
 owner-requested `xhigh` thinking (the documented API value is `max`) and freshly
 spawned GPT 5.6 Terra through the Codex
 subscription at `xhigh`, concurrently with
-`tools/judge.mts --parallel`, `briefs/codex-judge.md` (historical filename), and
-`briefs/judge-conventions.txt`. Each receives the same frozen context and reads
-proofs and dependencies skeptically. Each accepts unless it can name a specific
-defect. Record both verdicts in `research/level<n>-judge.jsonl` as
+`tools/judge.mts --parallel`. That program loads
+`briefs/judge-conventions.txt` by default into the frozen prompt and its hash;
+`briefs/codex-judge.md` is historical human documentation, not a second runtime
+prompt. Each receives the same frozen context and reads proofs and dependencies
+skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/level<n>-judge.jsonl` as
 `{id, model, keep, reason, context_sha256, at}`. DeepSeek is the cross-family
 screen; Terra provides the independent apples-to-apples comparison and does not
 make the pair cross-family by itself.
@@ -813,6 +843,15 @@ runs any selected independently computed finite countermodel checks, and routes
 high-risk items to an extra Alpha refuter via `risk-report.mjs`. Finite checks
 falsify bounded cases only; passing never establishes a theorem. Repeat all
 three gates after Step-6 repairs and before freezing Step-7 judge context.
+
+**Scope closure and downstream containment (owner, 2026-08-01).** Future levels
+also run `content-policy.mjs` over their batch manifests, save the full
+`audit-manifest.mjs` relationship checklist, and bind Alpha's reader coverage to
+it with `level-coverage.mjs`. A changed public interface runs through
+`impact-audit.mjs`, which requires Alpha to inspect every computed consumer. The
+post-Step-7 coverage gate checks current prompt hashes, not merely historical
+ledger rows, and records every planned-versus-authored dependency difference in
+the signed Alpha receipt.
 
 **Report.** List every problematic pair regardless of whether the judge accepted,
 rejected, escalated, or dropped it. "Problematic" is the driver's determination,

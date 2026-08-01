@@ -36,8 +36,11 @@ Everything below is verified against the code as of 2026-07-31.
 | `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
 | `research/level<n>-judge-attempts.jsonl` | **judge transport/latency ledger** (`JUDGE_ATTEMPTLOG`), written by the sweep |
 | `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
+| `research/level<n>-audit-manifest.json` | generated full relationship checklist for the independent-reader and Alpha audit |
+| `research/level<n>-impact-audit.json` | Alpha dispositions for every consumer exposed by a changed public interface |
+| `research/level<n>-audit-coverage.json` | Alpha's manifest-bound whole-level audit receipt |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
-| `briefs/judge-conventions.txt` | the paired judges' conventions block, passed unchanged to DeepSeek and Terra through `tools/judge.mts --parallel` |
+| `briefs/judge-conventions.txt` | the paired judges' canonical conventions block, loaded by `tools/judge.mts` into the frozen prompt and hash for both lanes |
 | `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, paired judges). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **no shell-permission prompts rule** (`ARCHITECTURE.md` §6.1) |
 
 ### `order` is not stable across insertions — recompute, never remember
@@ -169,6 +172,18 @@ Beta searches for a counterexample before keeping or repairing the item. A proof
 repair alone does not establish the Statement; a counterexample requires a
 narrower claim, a different witness, or a dropped item.
 
+**Generated-claim minimization pass (owner, 2026-08-01).** The scaffold starts
+from source-backed statements; do not mint an AI-generated theorem,
+proposition, definition, false statement, or mathematical remark to add
+richness or bridge a proof. A new AI-generated lemma is allowed only when it
+decomposes a complex named parent proof; a corollary only when it is directly
+and easily verifiable from stated material; and examples/counterexamples only
+with a checkable witness. Do not make generated corollaries or examples part of
+the load-bearing spine. For every generated lemma, the batch notes name its
+parent theorem, exact discharged subclaim, intended consumer, and why an inline
+derivation or established result would not do. Minimize every load-bearing
+AI-generated statement.
+
 **Published-library read and closure pass (owner, 2026-08-01).** Beta has read
 access to the full published `items/` and `library/` corpus. It must search the
 pool before minting ids and open every published dependency it proposes, checking
@@ -277,6 +292,17 @@ is in concrete doubt, including during any proof repair. **Never** sets
 `verification.audited`. Adding a dep to silence a checker when the proof does
 not use it is the dominant historical defect class and is forbidden.
 
+**Generated-claim authoring check (owner, 2026-08-01).** Do not expand the
+approved scaffold with a newly invented theorem, proposition, definition, false
+statement, or remark. Retain an AI-generated lemma only when it is the focused
+decomposition step of its named complex parent proof; retain a generated
+corollary only when its derivation is directly and easily verifiable; and use
+generated examples/counterexamples only with checkable witnesses. Generated
+corollaries, examples, and counterexamples are not load-bearing dependencies.
+Before retaining a generated lemma in the dependency spine, record its parent,
+subclaim, consumer, and the reason an inline proof or established result was
+not adequate.
+
 **Dependency discipline (owner, 2026-07-31).** The scaffold Beta authors every
 load-bearing citation with the actual cited Definition or Statement in view.
 Quote it when practical; otherwise use the smallest faithful shortening,
@@ -311,6 +337,15 @@ all standard boundary cases. The orchestrator merges batch contracts and runs
 the strict proof-contract, selected finite-smoke, and risk-routing gates on the
 whole level after Step 5. A finite smoke pass is only bounded falsification
 evidence, never a proof.
+
+**Future-scope containment gate (owner, 2026-08-01).** After authoring, the
+orchestrator runs `tools/content-policy.mjs` on every batch manifest. It requires
+the provenance tag on every in-flight item, restricts generated content to the
+recorded decomposition/corollary/example roles, forbids generated results from
+quietly becoming shared dependency infrastructure, and requires a structured
+source/local-proof/necessity record for any external fallback. Then generate
+`audit-manifest.mjs --json`; Alpha's Step-6 receipt is bound to that actual
+relationship manifest, not a self-reported list of citations.
 
 Every A-page summary is written last in exactly two nonempty prose paragraphs,
 each under 150 words. The first gives mathematical background and names the
@@ -356,6 +391,13 @@ high/critical risk item receives an additional Alpha proof-refuter reading; the
 Alpha `risk_review` field records what that reading established or why a routing
 signal was inapplicable. This does not replace full reader coverage for any
 ordinary item.
+
+After every item-modifying audit stage, take the required `touchlog.mjs` snap.
+If the public-interface fingerprint changed since the Step-5 baseline,
+`impact-audit.mjs` computes the transitive reverse-`deps` cone and direct
+citation consumers. Alpha records a concrete disposition for every listed item
+before Step 7. A proof-only repair remains subject to its own audit and rejudge,
+but does not create a false downstream work queue.
 
 **Alpha proof-refuters (owner, 2026-07-31).** For every future Alpha-n audit,
 Alpha dispatches one or more GPT 5.6 Sol proof-reading subagents with
@@ -442,8 +484,9 @@ possible and may add/delete in-flight results as needed, personally authoring an
 proof it adds.
 
 The mechanical backstop is `tools/audit-manifest.mjs`: generate the per-batch and
-cross-edge checklist, then reconcile Alpha's report against it so omission is
-visible. The script enumerates edges; the semantic verdict is the Beta/Alpha
+cross-edge checklist, including `deps`, `justified_by`, `forward_refs`, and
+`external_refs`, then reconcile Alpha's report against it so omission is visible.
+The script enumerates relationships; the semantic verdict is the Beta/Alpha
 reader's responsibility.
 
 **Fatal, must fix:** mathematical inaccuracy; logical invalidity; a step not
@@ -472,8 +515,8 @@ author; Terra is retained as an independent same-context comparison lane, not
 as a cross-family claim. The harness retains the historical injection-test
 record.
 
-Use `briefs/codex-judge.md` (historical filename) plus
-`briefs/judge-conventions.txt`. Each judge's
+`tools/judge.mts` loads `briefs/judge-conventions.txt` into its frozen prompt by
+default; `briefs/codex-judge.md` is historical human documentation. Each judge's
 context unit stays the **A/B pair**: the item page and its `-examples` companion
 in full, plus only the pages the item's own page both declares in `requires` and
 actually cites. Compute that batch mechanically; do not pass every sibling page.
@@ -525,6 +568,19 @@ The existing injection record for GLM and DeepSeek v4 Flash remains evidence
 that a low rejection rate is not a judge-quality metric; it does not substitute
 for the paired per-level comparison required here.
 
+**Whole-level coverage receipt (owner, 2026-08-01).** After the initial sweep,
+generate `research/level<n>-audit-coverage.json` with
+`tools/level-coverage.mjs --template`. Alpha completes only its reviewer and
+attestation fields. Before Step 8, rerun `level-coverage.mjs` with the merged
+proof contract, paired ledger, dependency-spine receipt, Alpha receipt, and
+`--verify-current-context`. The gate
+recomputes the item/relationship manifest from disk, requires a contract for
+every proof-bearing item, and requires one usable DeepSeek and Terra verdict on
+the same *current* frozen prompt for every item. It is not satisfied by a broad
+agent report or by a stale pass after a repair. The spine receipt independently
+reads the proof-bearing items among the largest transitive dependency cones and
+lapses whenever their mathematical content changes.
+
 ## Step 8 — Adjudicate judge rejections (Alpha-n)
 
 A rejection from **either** judge now lands on text that has cleared the step-6
@@ -536,6 +592,11 @@ step 10 can separate confirmed fatal logic/dependency-citation detections from
 nonfatal findings and false positives. Then delete
 `verification.judge` on anything materially rewritten and re-run both judges
 only on what changed.
+
+Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
+the audit receipt and repeat the final `level-coverage.mjs
+--verify-current-context` gate after its targeted paired rejudge. A stale
+receipt or pair of ledger rows is not publication evidence.
 
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.
 Remark prose is where falsehoods hide.
@@ -646,12 +707,12 @@ self-contained, accurate* library, not a perfect one. Prefer one reusable lemma
 over a repeated inline argument (`cor-archimedean-reciprocal` retired a gap in 24
 items). **Do not trim landmarks.**
 
-## The twelve gates — the orchestrator runs the authoritative pass
+## The base gates and future-scope closures — the orchestrator runs the authoritative pass
 
 | gate | catches |
 |---|---|
 | `precheck.mts` | phase-proof format. `no-given`, `no-steps`, `no-qed`, `qed-not-final[-postrepair]`, `untagged-steps`, `bad-tag`, `strategy-missing(...)`. Strategies: direct, contradiction, cases, induction, contrapositive, constructive. Tag families open→discharge: `contrapositive-reduce`→`discharge-contrapositive`, `assume-contra`→`discharge-contradiction`, `base`/`ih`→`discharge-induction`, `assume-case`/`cases-exhaustive`→`cases`. **Line-based** — run `reflow.mts` first; adopt REPAIR output with `adopt-repair.mjs` |
-| `depcheck.mjs` | `id-filename`, `yaml-escape`, `kind-prefix`, `dep-unresolved`, `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`, `page-item-dup`, `draft-on-published-page`, `published-unaudited`, `published-unchecked`, `orphan`, `multi-home`, `cited-not-in-deps`, `justification-backward`, `justification-duplicated`, `sources-checked-on-proved` (19 total) |
+| `depcheck.mjs` | actual-content id/kind/reference/cycle/page-publish checks, definition-justification direction, and `b-leaf-content` (no dependency onto a B-only item outside that B page). Warnings retain multi-home/orphan/citation leads and the single explicit legacy B-leaf edge. |
 | `fwdcheck.mjs` | `forward-on-spine` (load-bearing forward ref on a def/lemma/prop/theorem), `forward-undeclared`, `forward-in-deps`, `forward-not-later`, `forward-same-page`, `forward-dangling`, `forward-unused`, `forward-cycle`, `stack-cycle`; marks `direct`/`inherited` |
 | `extcheck.mjs` | `unproved-kind`, `unproved-has-proof`, `unproved-judged`, `unproved-precheck`, `unproved-on-published`, `unproved-uncited`, `external-dangling`, `external-in-deps`, `external-not-unproved`, `external-unused` |
 | `citecheck.mjs` | mis-attribution heuristic — the largest historical defect class (14 of 50) |
@@ -663,6 +724,10 @@ items). **Do not trim landmarks.**
 | `proof-contract.mjs` | strict, versioned proof-obligation / citation / boundary worksheet. Each direct fact citation gets a declared source and exact source clause; each numbered step gets exactly one stated-input entry; every standard boundary case is checked or specifically not applicable. Checks accountable links, not mathematical truth |
 | `finite-smoke.mjs` | selected bounded countermodel searches for finite/combinatorial claims. A failure supplies a concrete model or convention discrepancy; a pass is **not** a general proof |
 | `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
+| `content-policy.mjs` | future-batch authorship, generated-claim containment, and structured external fallback |
+| `impact-audit.mjs` | required Alpha disposition of every computed downstream consumer of a changed public interface |
+| `level-coverage.mjs` | batch/relationship/contract scope, plan-dependency reconciliation, current paired-judge coverage, Alpha receipt, and spine receipt |
+| `spine-audit.mjs` | independent content-hashed read of proof-bearing items in the largest transitive dependency cones |
 
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).

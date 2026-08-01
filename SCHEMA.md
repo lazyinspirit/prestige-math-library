@@ -67,7 +67,24 @@ authorship: ai-generated             # OPTIONAL for legacy items; REQUIRED on
   # updates it after a material AI alteration. AI-generated content receives a
   # heightened truth audit; a concrete suspicion requires a counterexample
   # search before a proof repair is accepted. Do not backfill legacy items
-  # merely to satisfy this future-session disclosure rule.
+  # merely to satisfy this future-session disclosure rule. Future
+  # `literature-derived` and `ai-altered` items need a URL in
+  # `sources.references`, so `content-policy.mjs` can make that provenance
+  # traceable.
+generation:                         # REQUIRED iff authorship: ai-generated
+  role: proof-decomposition-lemma   # lemma | corollary | example | counterexample:
+                                    # proof-decomposition-lemma | direct-corollary |
+                                    # example | counterexample, respectively
+  parent: thm-parent-result          # required for a generated lemma
+  subclaim: "The exact parent-proof subclaim discharged"
+  consumer: thm-parent-result        # the generated lemma's sole direct consumer
+  why_not_inline: "Why this is not an inline derivation or a sourced result"
+  # Generated theorems, propositions, definitions, false statements and remarks
+  # are prohibited in future batch scope. A generated corollary/example/
+  # counterexample may not be a `deps` target. A generated lemma is permitted
+  # only as the recorded decomposition of its named parent proof and may be a
+  # dependency only of that parent. `tools/content-policy.mjs` enforces this on
+  # every future batch manifest; do not retrofit legacy items.
 deps: [def-cauchy-sequence, lem-triangle-inequality]
   # every item this item's statement OR proof LOGICALLY DEPENDS ON (single list;
   # drives the prerequisite closure and the flowchart). Must reference existing
@@ -102,6 +119,14 @@ proved_here: true                    # OPTIONAL, defaults to true. Set FALSE whe
   # that fact are marked ‡ too, and an always-visible note reminds the reader the
   # dependency is not developed in this library. Enforced by tools/extcheck.mjs;
   # rendered by web/lib/library-external.ts.
+external_dependency:                 # REQUIRED for a future `proved_here: false`
+  source_url: "https://example.edu/exact-result"
+  exact_statement: "The exact sourced statement and conventions used here"
+  local_proof_attempt: "The in-scope route tried and why it cannot close"
+  necessity: "Why rescoping or decomposition would not meet this page's remit"
+  # `source_url` must exactly match one `sources.references` URL. These fields
+  # do not prove the source semantically supports the item; they make the
+  # source, failed local route and necessity explicit audit obligations.
 external_refs: []                    # OPTIONAL. Recorded-not-proved items (i.e.
   # items with `proved_here: false`) that this item MENTIONS without logically
   # depending on them. Declaring one here is what makes THIS item carry the ‡
@@ -408,7 +433,12 @@ Pages are read in a single global order. An item may cite only items on its own
 page (earlier in the `items` list) or on a strictly earlier page. Examples pages
 are leaves: nothing depends on an item that lives only on an examples page, which
 is what lets an examples page cite forward when the classical form of an example
-needs machinery introduced later.
+needs machinery introduced later. `depcheck.mjs` enforces this against authored
+items as well as `validate-plan.mjs` enforcing it against the scaffold. An
+earlier item on the *same* B page is ordinary local exposition and remains
+legal. The isolated legacy exception is named, rather than hidden, in
+`research/b-leaf-legacy-allowlist.json` and remains a warning until separately
+refactored under an audited content change.
 
 ## 8. Mechanical publish checklist (enforced by CI/renderer, not by memory)
 
@@ -435,6 +465,22 @@ node tools/depsource.mjs     # where each dep lives; only `unresolved` fails
 counted; the surviving false positives are documented in its own header.
 `depsource` fails only on `unresolved`. The other six exit non-zero on failure
 and are hard gates.
+
+For a future authored level, run the additional scoped controls after authoring
+and again after Step-6/8 interface repairs:
+
+```
+node tools/content-policy.mjs research/level<n>-batch-*.pages.json
+node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json
+node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --receipt research/level<n>-impact-audit.json
+node tools/level-coverage.mjs --contracts research/level<n>-proof-contracts.json --judge-ledger research/level<n>-judge.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/level<n>-audit-coverage.json --verify-current-context research/level<n>-batch-*.pages.json
+```
+
+The first enforces future-only provenance, generated-claim containment, and the
+structured external-fallback record. The next two bind Alpha's audit to actual
+relationships and to every downstream item exposed by a changed public
+interface. The final gate proves batch scope, proof-contract scope, paired-judge
+coverage on the current frozen prompt, and Alpha's manifest-bound attestation.
 
 **`validate-plan.mjs` requires the spec path as an argument.** Run bare it prints
 usage and exits non-zero, which looks exactly like a gate failure and is not one.

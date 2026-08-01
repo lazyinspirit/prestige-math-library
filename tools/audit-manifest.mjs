@@ -4,9 +4,11 @@
 // Usage:
 //   node tools/audit-manifest.mjs research/level<N>-batch-*.pages.json [--json]
 //
-// It enumerates in-flight batch membership and dependency edges from authored
-// items on disk. It does NOT certify semantic correctness; it makes omissions in
-// the human/LLM audit visible by classifying each edge as same-batch,
+// It enumerates in-flight batch membership and every declared mathematical
+// relationship from authored items on disk: logical `deps`, well-definedness
+// `justified_by` discharges, orientation-only `forward_refs`, and recorded
+// external mentions. It does NOT certify semantic correctness; it makes an
+// omitted reader check visible by classifying each relationship as same-batch,
 // cross-batch, published/backward, forward, or unresolved.
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -59,11 +61,22 @@ for (const f of files) {
 }
 
 const items = new Map();
+const aliases = new Map();
 for (const full of walk(join(REPO, 'items')).filter((f) => f.endsWith('.md'))) {
   const { fm } = split(readFileSync(full, 'utf8'));
   const id = scalar(fm, 'id') || basename(full).replace(/\.md$/, '');
-  items.set(id, { id, file: full.slice(REPO.length + 1), status: scalar(fm, 'status') || 'draft', deps: list(fm, 'deps'), forward_refs: list(fm, 'forward_refs') });
+  items.set(id, {
+    id,
+    file: full.slice(REPO.length + 1),
+    status: scalar(fm, 'status') || 'draft',
+    deps: list(fm, 'deps'),
+    justified_by: list(fm, 'justified_by'),
+    forward_refs: list(fm, 'forward_refs'),
+    external_refs: list(fm, 'external_refs'),
+  });
+  for (const alias of list(fm, 'aliases')) aliases.set(alias, id);
 }
+const resolve = (id) => items.has(id) ? id : aliases.get(id);
 
 const home = new Map();
 for (const full of walk(join(REPO, 'library')).filter((f) => f.endsWith('.md') && !basename(f).startsWith('_'))) {
@@ -73,21 +86,52 @@ for (const full of walk(join(REPO, 'library')).filter((f) => f.endsWith('.md') &
 }
 
 const edges = [];
+function classify(source, target, edgeType) {
+  const resolved = resolve(target);
+  const targetItem = resolved && items.get(resolved);
+  if (!targetItem) return { target: resolved ?? target, kind: 'unresolved' };
+  // A declared orientation reference is forward by definition. Preserve that
+  // fact even where the target is already published.
+  if (edgeType === 'forward_ref') return { target: resolved, kind: 'forward' };
+  const sourceBatch = itemBatch.get(source);
+  const targetBatch = itemBatch.get(resolved);
+  if (targetBatch === sourceBatch) return { target: resolved, kind: 'same-batch' };
+  if (targetBatch) return { target: resolved, kind: 'cross-batch' };
+  if (targetItem.status === 'published') return { target: resolved, kind: 'published-backward' };
+  return { target: resolved, kind: 'unresolved' };
+}
+
 for (const [id, batch] of itemBatch) {
   const it = items.get(id);
   if (!it) {
-    edges.push({ source: id, batch, target: null, kind: 'missing-source' });
+    edges.push({ source: id, batch, target: null, edge_type: 'source', kind: 'missing-source', requires_semantic_audit: true });
     continue;
   }
-  for (const target of it.deps) {
-    const tb = itemBatch.get(target);
-    const targetItem = items.get(target);
-    let kind = 'unresolved';
-    if (tb === batch) kind = 'same-batch';
-    else if (tb) kind = 'cross-batch';
-    else if (targetItem?.status === 'published') kind = 'published-backward';
-    else if (it.forward_refs.includes(target)) kind = 'forward';
-    edges.push({ source: id, sourcePage: home.get(id) ?? null, batch, target, targetPage: home.get(target) ?? null, targetBatch: tb ?? null, kind });
+  const relationships = [
+    ['dependency', it.deps],
+    ['well_definedness_discharge', it.justified_by],
+    ['forward_ref', it.forward_refs],
+    ['external_mention', it.external_refs],
+  ];
+  for (const [edge_type, targets] of relationships) {
+    for (const declaredTarget of targets) {
+      const classified = classify(id, declaredTarget, edge_type);
+      const target = classified.target;
+      edges.push({
+        source: id,
+        sourcePage: home.get(id) ?? null,
+        batch,
+        target,
+        declared_target: declaredTarget,
+        targetPage: target ? home.get(target) ?? null : null,
+        targetBatch: target ? itemBatch.get(target) ?? null : null,
+        edge_type,
+        kind: classified.kind,
+        // Forward references and external mentions are not proof premises, but
+        // their surrounding claims still need an explicit semantic read.
+        requires_semantic_audit: true,
+      });
+    }
   }
 }
 
@@ -101,8 +145,8 @@ else {
   for (const [b, pages] of batchPages) console.log(`- ${b}: ${pages.join(', ')}`);
   console.log('\n## Edge summary');
   for (const [k, v] of Object.entries(summary).sort()) console.log(`- ${k}: ${v}`);
-  console.log('\n## Edges to audit outside a single batch');
+  console.log('\n## Relationships to audit outside a single batch');
   for (const e of edges.filter((x) => x.kind !== 'same-batch')) {
-    console.log(`- [${e.kind}] ${e.source} (${e.sourcePage ?? '?'}, ${e.batch}) -> ${e.target ?? '?'} (${e.targetPage ?? '?'})`);
+    console.log(`- [${e.edge_type}; ${e.kind}] ${e.source} (${e.sourcePage ?? '?'}, ${e.batch}) -> ${e.target ?? '?'} (${e.targetPage ?? '?'})`);
   }
 }

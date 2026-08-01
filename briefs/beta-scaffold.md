@@ -1,7 +1,5 @@
 <!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
-     <i> (batch). Kept in the repo because these briefs ARE the prompt-side
-     half of the workflow: LEVELS.md describes them, this is the text. They
-     lived in a session scratchpad until 2026-07-27 and would have been lost. -->
+     <i> (batch). -->
 
 # Level-<n> scaffolding brief (steps 1 and 2 of the owner's per-level build)
 
@@ -62,6 +60,8 @@ claim novelty. `proved_here` independently says whether the library includes a
 complete proof. Treat `ai-generated` as a truth-risk flag: if there is concrete
 doubt, search for a counterexample before planning or repairing the item; a
 proof repair does not establish its Statement.
+For every planned `literature-derived` or `ai-altered` item, identify the exact
+supporting URL that Step 5 will place in `sources.references`.
 
 You have read access to the full published `items/` and `library/` corpus. Use
 it. Search the whole published pool before minting an id. For every dependency
@@ -71,6 +71,17 @@ and direction. Do **not** choose an `ai-generated` item as a load-bearing
 dependency where a well-established, literature-backed route is available.
 Every load-bearing dependency must normally be either an earlier item inside
 this A/B pair or an actually published item on a strictly earlier page.
+
+An item with no `authorship` field is **legacy-unclassified**. Do not infer or
+write a provenance label for it merely because you want to cite it. Before using
+it as a load-bearing dependency, first open its actual text and either use your
+mathematical knowledge to confirm that its exact statement is an established
+result, or search reputable sources for that exact statement and conventions.
+For every such dependency, record in the batch notes whether the confidence
+route was `established-from-knowledge` or `source-checked`, with a source URL
+for the latter. If you cannot make that judgment confidently, do not use the
+item as a dependency: plan a local proof, rescope, or use the documented
+external fallback.
 
 If a well-known, literature-backed result is needed but unavailable, search a
 reputable source for its exact statement and conventions, then plan a local
@@ -82,6 +93,32 @@ Record in the source ledger, notes, and proof contract the exact source, the
 attempted local route and why it failed, and why the result is necessary. Its
 fuchsia ‡ marker is the reader-facing external-dependency tag. Otherwise,
 decompose or rescope the result, or drop it with a precise licensing note.
+The authored fallback also needs `external_dependency.source_url`,
+`exact_statement`, `local_proof_attempt`, and `necessity`; its URL must exactly
+match a `sources.references` entry.
+
+### Generated-claim minimization
+
+Build the item list from well-established, literature-backed statements. Do
+**not** invent a theorem, proposition, definition, false statement, or
+mathematical remark merely to make the pair richer or bridge an inconvenient
+proof. You may plan an `ai-generated` lemma only as a focused decomposition of
+a complex named parent proof; an `ai-generated` corollary only when it is
+directly and easily verifiable from named earlier material; and generated
+examples/counterexamples only with a checkable witness. Do not make generated
+corollaries, examples, or counterexamples load-bearing dependencies.
+
+For every planned generated lemma, record in the source ledger and batch notes:
+its parent theorem, exact subclaim, intended consumer, and why an inline
+derivation or established source-backed result cannot replace it. Minimize
+AI-generated statements in the dependency spine; do not promote a generated
+lemma into general infrastructure merely because it is convenient.
+
+Plan the matching `generation` frontmatter. A generated lemma needs
+`role: proof-decomposition-lemma`, `parent`, `subclaim`, `consumer`, and
+`why_not_inline`; its named parent must be its only direct dependency consumer.
+A generated corollary/example/counterexample carries only its matching role and
+may never become a `deps` target.
 
 For every planned dependency, preserve the actual source statement exactly when
 practical and otherwise make the smallest faithful shortening: do not change its
@@ -177,13 +214,6 @@ listed.
 `research/plan-spec.json` for the statement. If the result already exists under
 another id, reuse that id or alias it — never mint a second id for the same
 statement.
-
-One live obligation at this level, recorded at level 8:
-**`lem-absolute-convergence-implies-convergence` already exists** and is
-published on `series-and-nonnegative-tests` (order 34). It was coined there
-because `absolute-convergence-and-rearrangement` (order 36) had an empty item
-list. If your batch scaffolds order 36, its "absolute implies convergent" slot
-MUST reuse or alias that id. Minting a second is an error.
 
 ## 4a. Per-pair proof decomposition and mathematical richness
 

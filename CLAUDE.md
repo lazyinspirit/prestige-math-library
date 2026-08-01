@@ -234,6 +234,19 @@ banner; the public sees only `published`.
   for useful, cheaply proved corollaries. The A-page size-warning ceiling is 100
   total items, raised from 60. It is a review ceiling, not a target: never pad,
   and never drop valuable results merely for ergonomics or to stay below it.
+- **Generated-claim minimization (owner, 2026-08-01).** Source-backed
+  statements are the default. Beta must not invent a new theorem, proposition,
+  definition, false statement, or mathematical remark merely to enrich a page
+  or bridge an inconvenient proof. It may introduce an `ai-generated` lemma
+  only as a focused decomposition of a complex proof, an easily and directly
+  verifiable corollary, or an example/counterexample. Do not use an
+  AI-generated corollary, example, or counterexample as load-bearing
+  infrastructure. An AI-generated lemma may be load-bearing only for its named
+  parent proof-decomposition, and its batch notes must name that parent, the
+  exact subclaim it discharges, and why the argument was not better kept inline
+  or replaced by an established result. Minimize all load-bearing AI-generated
+  statements; a theorem in the dependency backbone needs reliable literature
+  support or a locally proved, source-grounded route.
 - **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30).**
   Before constructing an A/B scaffold, Beta searches reputable mathematical
   sources on the web for the relevant definitions, theorem and corollary
@@ -244,7 +257,14 @@ banner; the public sees only `published`.
   literature-backed route exists. Every load-bearing dependency must normally
   be established by published content or by an earlier item inside the pair;
   the only exception is the documented external fallback in the
-  self-contained-scope rule.
+  self-contained-scope rule. A published item without `authorship` is
+  `legacy-unclassified`, not evidence that it is AI-generated and not a reason
+  to invent a provenance label. Before Beta uses one, it must open the item and
+  either confirm from its own mathematical knowledge that the exact statement
+  is an established result, or search reputable sources for that exact
+  statement and its conventions. Record which route was used in the batch
+  notes. If neither route establishes confidence, do not make it load-bearing:
+  prove it locally, rescope, or use the narrow documented external fallback.
 - **Natural mathematical voice and citation fidelity (owner, 2026-07-30).** Do
   not write AI-sounding labels or interpretive filler such as "Null definition:"
   or "the key bridge says". In every `[F#]`, `[A#]`, or `[L#]` dependency fact,
@@ -317,6 +337,24 @@ banner; the public sees only `published`.
   are bounded countermodel searches, never general proofs. A high/critical risk
   result routes the item to an additional Alpha proof-refuter and requires an
   Alpha `risk_review` record. `QUALITY-CONTROLS.md` is the complete contract.
+- **Scope and blast-radius closure (owner, 2026-08-01).** Every future level
+  also runs `content-policy.mjs` on the batch manifests, generates the complete
+  `audit-manifest.mjs` relationship checklist, and records the Alpha audit
+  receipt. After any public-interface change, `impact-audit.mjs` computes every
+  downstream logical and direct-citation consumer from touch snapshots and
+  requires an Alpha disposition before the item can continue. After Step 7,
+  `level-coverage.mjs --verify-current-context` is the hard receipt gate: every
+  scoped item needs provenance, every proof-bearing item needs a merged contract,
+  and both DeepSeek/Terra lanes need matching current frozen-context
+  `keep=true` verdicts. Source-backed `literature-derived` and `ai-altered`
+  items need a reader-visible `sources.references` URL.
+  It also requires the current independent `spine-audit.mjs` receipt for the
+  proof-bearing items among the 100 largest transitive dependency cones; that
+  receipt lapses on a mathematical-content change. This prevents future levels
+  from silently relying on an unreviewed high-fan-out proof.
+  The structured `external_dependency` record is required for any future
+  `proved_here: false` fallback. These controls are forward-looking and never
+  fabricate provenance for legacy items.
 - **Page-summary contract (owner, 2026-07-30).** Every A-page summary is exactly
   two nonempty prose paragraphs, each under 150 words. Paragraph 1 gives the
   mathematical background and names definitions and results from declared

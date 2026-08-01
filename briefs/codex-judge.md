@@ -2,6 +2,11 @@
 
 <!-- Historical filename retained because old docs and commits reference it. -->
 
+`tools/judge.mts` owns the executable refuter prompt. It automatically loads
+`briefs/judge-conventions.txt` into the same frozen, hash-attested context for
+DeepSeek and Terra; this file is the human-readable role brief, not a second
+prompt source.
+
 > **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
 > and future agent.** Use commands already allowed inside the workspace sandbox;
 > choose non-escalated forms and never ask the owner to approve a shell command.

@@ -48,7 +48,9 @@ from the page's items by the renderer (never hand-set):
   `proved_here: false`: Beta first seeks a literature-backed exact statement and
   an in-library proof, then uses a source-cited ‡ record only when that proof
   cannot be built in scope. A logical dependency is recorded in `deps`, never
-  hidden in `external_refs`, which is only for mentions.
+  hidden in `external_refs`, which is only for mentions. Future fallback records
+  additionally expose an exact source URL, sourced statement, failed local
+  route, and necessity; the batch-scope policy gate requires all four.
 - **Verification** (accumulative): mechanical precheck (always, both origins);
   paired LLM judge including a cross-family DeepSeek screen; owner audit
   (always — it gates `status: published`).
@@ -61,6 +63,10 @@ from the page's items by the renderer (never hand-set):
   through a third-party gateway for this workflow. At the initial Step 7 sweep,
   both judges cover every item in every completed A/B pair, including items
   untouched by Alpha's Step-6 audit.
+  Future levels also gate scope coverage mechanically: every in-flight item has
+  provenance, every proof-bearing item a proof contract, every changed public
+  interface an audited downstream-impact receipt, and both judges a verdict on
+  the current shared frozen prompt.
   The production pipeline keeps its own generator/judge
   lineups in
   the app repo; do not use a generator-family model to judge its own pipeline

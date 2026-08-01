@@ -20,9 +20,11 @@
 //   node tools/touchlog.mjs report research/level9-touches.json [--min 2]
 //   node tools/touchlog.mjs audit  research/level9-touches.json research/level9-judge.jsonl
 //
-// `snap` records a sha256 per items/*.md. Take one after EVERY stage that can
-// modify items: authoring, step-7 fixes, each step-8 batch audit, step-9 Alpha
-// (the final whole-level audit; the separate seam stage was removed 2026-07-28).
+// `snap` records a full mathematical sha256 and a narrower public-interface
+// sha256 per items/*.md. Take one after EVERY stage that can modify items:
+// authoring, step-7 fixes, each step-8 batch audit, step-9 Alpha (the final
+// whole-level audit; the separate seam stage was removed 2026-07-28). The
+// interface hashes feed tools/impact-audit.mjs's downstream-consumer receipt.
 // `report` counts, per id, the snapshot-to-snapshot transitions whose hash
 // changed — that is the repair count.
 // `audit` adds refutations from the judge ledger and prints the escalation set:
@@ -71,6 +73,28 @@ const hashes = () => {
   return out;
 };
 
+/** A public mathematical interface is what downstream items may rely on.
+ *
+ * A proof-only repair does not normally require reopening every consumer, but a
+ * changed title, dependency declaration, Statement/Definition/Example, Fact, or
+ * Remark might.  Store a separate fingerprint so impact-audit can distinguish
+ * those cases without trusting an agent's description of its own edit. */
+const publicSurface = (text) => {
+  const withoutVerification = stripVerification(text);
+  const m = /^([\s\S]*?\n---\n)([\s\S]*)$/.exec(withoutVerification);
+  if (!m) return withoutVerification;
+  const body = m[2].replace(/^## (?:Scratch|Proof|Refutation|Counterexample|Verification)\b[^\n]*\n[\s\S]*?(?=^## |$(?![\s\S]))/gm, "");
+  return m[1] + body;
+};
+const surfaces = () => {
+  const out = {};
+  for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
+    out[f.slice(0, -3)] = createHash("sha256")
+      .update(publicSurface(readFileSync(join(ITEMS, f), "utf8")))
+      .digest("hex").slice(0, 16);
+  return out;
+};
+
 /** repair count per id: snapshot-to-snapshot transitions whose content changed.
  *  A file appearing for the first time is CREATION, not a repair. */
 function repairs(led) {
@@ -89,7 +113,7 @@ if (cmd === "snap") {
   const label = rest[0];
   if (!label) die("snap needs a label");
   const led = load();
-  led.snapshots.push({ label, at: new Date().toISOString(), hashes: hashes() });
+  led.snapshots.push({ label, at: new Date().toISOString(), hashes: hashes(), surfaces: surfaces() });
   writeFileSync(ledgerPath, JSON.stringify(led, null, 1) + "\n");
   const r = repairs(led);
   console.log(`snapshot "${label}" recorded — ${Object.keys(led.snapshots.at(-1).hashes).length} items, ` +
