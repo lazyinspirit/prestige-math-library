@@ -2,7 +2,7 @@
 id: def-pi-via-first-positive-cosine-zero
 kind: definition
 title: "Pi as twice the smallest positive zero of cosine"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

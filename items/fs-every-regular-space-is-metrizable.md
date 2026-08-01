@@ -2,7 +2,7 @@
 id: fs-every-regular-space-is-metrizable
 kind: false-statement
 title: "FALSE: every regular space is metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

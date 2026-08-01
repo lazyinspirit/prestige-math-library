@@ -1,7 +1,7 @@
 ---
 page: metrization-theorems
 title: "Metrization: Urysohn, Nagata–Smirnov, Bing, Smirnov"
-status: draft
+status: published
 items: [def-discrete-family-and-sigma-bases, lem-discrete-families-are-locally-finite, def-locally-metrizable-space, def-compatible-normal-sequence-of-open-covers, lem-alexandroff-urysohn-metrization-lemma, lem-metric-spaces-have-sigma-locally-finite-bases, rem-sigma-locally-finite-base-produces-compatible-normal-sequence, thm-nagata-smirnov-metrization, rem-metric-spaces-have-sigma-discrete-bases, thm-bing-metrization, cor-urysohn-metrization, lem-locally-finite-union-of-sigma-locally-finite-bases, thm-smirnov-local-metrization]
 examples: []
 ---

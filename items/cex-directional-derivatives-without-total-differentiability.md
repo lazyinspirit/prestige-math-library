@@ -2,7 +2,7 @@
 id: cex-directional-derivatives-without-total-differentiability
 kind: counterexample
 title: "$x^2y/(x^2+y^2)$ has every directional derivative at the origin but is not totally differentiable there"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

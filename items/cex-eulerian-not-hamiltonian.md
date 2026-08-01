@@ -2,7 +2,7 @@
 id: cex-eulerian-not-hamiltonian
 kind: counterexample
 title: "Two triangles sharing one vertex form an Eulerian graph with no Hamilton cycle"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

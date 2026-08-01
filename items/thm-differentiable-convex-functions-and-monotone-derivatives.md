@@ -2,7 +2,7 @@
 id: thm-differentiable-convex-functions-and-monotone-derivatives
 kind: theorem
 title: "A differentiable function on an open interval is convex if and only if its derivative is nondecreasing"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-intersection-of-normal-subgroups
 kind: lemma
 title: "The intersection of a nonempty family of normal subgroups is normal"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

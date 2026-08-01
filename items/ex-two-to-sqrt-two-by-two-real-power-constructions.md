@@ -2,7 +2,7 @@
 id: ex-two-to-sqrt-two-by-two-real-power-constructions
 kind: example
 title: "Two to the square root of two from rational suprema and from exp(sqrt(2) log 2)"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

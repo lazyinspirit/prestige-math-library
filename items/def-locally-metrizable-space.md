@@ -2,7 +2,7 @@
 id: def-locally-metrizable-space
 kind: definition
 title: "A locally metrizable space: every point has a metrizable open neighbourhood"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

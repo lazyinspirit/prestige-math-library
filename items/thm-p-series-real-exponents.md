@@ -2,7 +2,7 @@
 id: thm-p-series-real-exponents
 kind: theorem
 title: "The p-series for a real exponent p converges exactly when p is greater than one"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

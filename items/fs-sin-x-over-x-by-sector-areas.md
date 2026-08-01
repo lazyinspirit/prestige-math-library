@@ -2,7 +2,7 @@
 id: fs-sin-x-over-x-by-sector-areas
 kind: false-statement
 title: "A sector-area squeeze proves lim sin(x)/x=1 without first calibrating angle measure"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

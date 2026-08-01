@@ -2,7 +2,7 @@
 id: thm-continuous-partial-derivatives-imply-total-differentiability
 kind: theorem
 title: "If all partial derivatives exist on a neighbourhood and are continuous at a point, then the map is totally differentiable there with Jacobian derivative"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

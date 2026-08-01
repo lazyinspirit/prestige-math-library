@@ -2,7 +2,7 @@
 id: prop-integers-modulo-n-as-a-quotient-group
 kind: proposition
 title: 'For every $n\in\mathbb N$, the congruence-class group $(\mathbb Z/n,+)$ is the quotient group $(\mathbb Z,+)/n\mathbb Z$'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

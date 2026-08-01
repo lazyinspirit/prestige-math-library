@@ -2,7 +2,7 @@
 id: thm-log-one-plus-x-power-series
 kind: theorem
 title: "The power series for log(1+x) on (-1,1], including the Abel endpoint"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

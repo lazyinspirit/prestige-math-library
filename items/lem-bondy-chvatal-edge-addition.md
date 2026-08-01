@@ -2,7 +2,7 @@
 id: lem-bondy-chvatal-edge-addition
 kind: lemma
 title: "If nonadjacent $u,v$ in an $n$-vertex graph satisfy $\\deg(u)+\\deg(v)\\ge n$, then adding $uv$ preserves Hamiltonicity in both directions"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-commutator-and-commutator-subgroup
 kind: definition
 title: "Commutators $[g,h]=ghg^{-1}h^{-1}$ and the commutator subgroup $[G,G]$"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -14,6 +14,7 @@ aliases: [def-derived-subgroup]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

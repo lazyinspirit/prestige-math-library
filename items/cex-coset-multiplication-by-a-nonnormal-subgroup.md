@@ -2,7 +2,7 @@
 id: cex-coset-multiplication-by-a-nonnormal-subgroup
 kind: counterexample
 title: "A nonnormal two-element subgroup of $\\operatorname{Sym}(\\{1,2,3\\})$ makes coset multiplication depend on representatives"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-jacobian-matrix-and-gradient
 kind: definition
 title: "The Jacobian matrix of partial derivatives and the gradient in the scalar-valued case"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

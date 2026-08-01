@@ -2,7 +2,7 @@
 id: lem-evaluation-map-of-separating-family-is-an-embedding
 kind: lemma
 title: "The evaluation map of a point–closed-set separating family is a topological embedding"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

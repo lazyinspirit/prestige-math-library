@@ -2,7 +2,7 @@
 id: cex-dirac-threshold-sharp
 kind: counterexample
 title: "Two disjoint copies of $K_m$ show that Dirac's bound cannot be lowered to $n/2-1$ for even $n=2m\\ge4$"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

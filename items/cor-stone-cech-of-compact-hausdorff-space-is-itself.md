@@ -2,7 +2,7 @@
 id: cor-stone-cech-of-compact-hausdorff-space-is-itself
 kind: corollary
 title: "The Stone–Čech compactification of a compact Hausdorff space adds no points"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

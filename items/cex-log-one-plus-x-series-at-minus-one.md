@@ -2,7 +2,7 @@
 id: cex-log-one-plus-x-series-at-minus-one
 kind: counterexample
 title: "The log(1+x) power series diverges at x=-1"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

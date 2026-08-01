@@ -2,7 +2,7 @@
 id: lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice
 kind: lemma
 title: "Under dependent choice, every compact Hausdorff space embeds in a unit cube"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

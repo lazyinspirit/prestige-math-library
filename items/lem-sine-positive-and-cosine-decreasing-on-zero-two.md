@@ -2,7 +2,7 @@
 id: lem-sine-positive-and-cosine-decreasing-on-zero-two
 kind: lemma
 title: "Sine is positive and cosine is strictly decreasing on (0,2), with cos 2 at most -1/3"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

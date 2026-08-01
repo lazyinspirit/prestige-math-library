@@ -2,7 +2,7 @@
 id: def-multigraph-and-digraph-degrees-and-connectivity
 kind: definition
 title: "Degree in a multigraph, indegree and outdegree in a digraph, and their underlying connectivity"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: null
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-zero-total-derivative-on-a-convex-open-set-is-constant
 kind: corollary
 title: "A totally differentiable map with zero derivative on a convex open set is constant"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

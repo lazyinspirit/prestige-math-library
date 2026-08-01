@@ -2,7 +2,7 @@
 id: cor-local-minima-of-convex-functions-are-global
 kind: corollary
 title: "Every local minimum of a convex function on an interval is a global minimum"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

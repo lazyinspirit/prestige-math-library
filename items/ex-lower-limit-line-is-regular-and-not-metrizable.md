@@ -2,7 +2,7 @@
 id: ex-lower-limit-line-is-regular-and-not-metrizable
 kind: example
 title: "Under choice, the lower-limit line is regular and separable but not second countable and therefore not metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

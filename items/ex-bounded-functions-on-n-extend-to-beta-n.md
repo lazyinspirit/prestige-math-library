@@ -2,7 +2,7 @@
 id: ex-bounded-functions-on-n-extend-to-beta-n
 kind: example
 title: 'Every function from discrete $\mathbb N$ to $[0,1]$ extends uniquely to $\beta\mathbb N$'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: sine-cosine-and-the-definition-of-pi
 title: "Sine, Cosine, and the Definition of Pi"
-status: draft
+status: published
 items: [def-sine-and-cosine-by-power-series,
         lem-sine-and-cosine-series-converge-everywhere,
         thm-sine-and-cosine-derivatives,

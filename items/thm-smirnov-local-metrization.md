@@ -2,7 +2,7 @@
 id: thm-smirnov-local-metrization
 kind: theorem
 title: "Under choice, a space is metrizable if and only if it is paracompact, Hausdorff, and locally metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

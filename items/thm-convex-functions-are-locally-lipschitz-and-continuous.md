@@ -2,7 +2,7 @@
 id: thm-convex-functions-are-locally-lipschitz-and-continuous
 kind: theorem
 title: "A convex real function is Lipschitz on every closed bounded subinterval of the interior of its domain, hence continuous throughout the interior"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

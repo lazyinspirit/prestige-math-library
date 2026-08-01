@@ -2,7 +2,7 @@
 id: thm-real-power-agrees-with-rational-exponent
 kind: theorem
 title: "The exponential definition of real powers agrees with the existing rational powers"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

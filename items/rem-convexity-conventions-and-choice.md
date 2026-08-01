@@ -2,7 +2,7 @@
 id: rem-convexity-conventions-and-choice
 kind: remark
 title: "Convexity conventions, endpoint scope, dyadic approximation, and the exact use of the Axiom of Choice in the midpoint-convex counterexample"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

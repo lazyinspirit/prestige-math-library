@@ -1,7 +1,7 @@
 ---
 page: the-logarithm-and-general-powers
 title: "The Logarithm and General Powers"
-status: draft
+status: published
 items: [def-natural-logarithm,
         thm-natural-logarithm-laws,
         thm-logarithm-derivative-and-integral,

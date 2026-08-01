@@ -2,7 +2,7 @@
 id: cex-one-point-compactification-of-n-is-not-beta-n
 kind: counterexample
 title: 'The one-point compactification of discrete $\mathbb N$ is not $\beta\mathbb N$'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

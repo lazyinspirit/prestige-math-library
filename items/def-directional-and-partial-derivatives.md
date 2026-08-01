@@ -2,7 +2,7 @@
 id: def-directional-and-partial-derivatives
 kind: definition
 title: "Directional derivatives and partial derivatives of a map $U\\subseteq\\mathbb{R}^m\\to\\mathbb{R}^n$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

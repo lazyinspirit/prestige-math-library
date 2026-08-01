@@ -1,7 +1,7 @@
 ---
 page: convexity
 title: "Convexity"
-status: draft
+status: published
 items: [def-convex-concave-and-midpoint-convex-functions, lem-three-slope-inequality-for-convex-functions, thm-convex-functions-are-locally-lipschitz-and-continuous, def-one-sided-derivatives-of-real-functions, thm-one-sided-derivatives-of-convex-functions, thm-convex-functions-are-differentiable-off-a-countable-set, def-supporting-line-for-a-real-function, thm-supporting-lines-for-convex-functions, thm-differentiable-convex-functions-and-monotone-derivatives, cor-convex-differentiable-functions-have-continuous-derivatives, cor-second-derivative-characterises-convexity, lem-midpoint-convexity-extends-to-dyadic-weights, thm-continuous-midpoint-convex-functions-are-convex, thm-finite-jensen-inequality, cor-local-minima-of-convex-functions-are-global, cor-strictly-convex-functions-have-at-most-one-minimizer, def-inflection-point-by-change-of-convexity, cor-second-derivative-sign-change-gives-an-inflection-point, rem-convexity-conventions-and-choice]
 examples: []
 ---

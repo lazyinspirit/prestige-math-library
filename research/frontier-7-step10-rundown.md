@@ -114,3 +114,10 @@ before a separate authorized publication change and owner audit.
 The draft build is otherwise ready for the owner's publication decision. The
 next authorized operation is owner audit (including the staged oscillator
 prose amendment if publishing), not automatic publication, commit, or push.
+
+## Publication addendum — 2026-08-02
+
+The owner authorized publication. All 185 items and 16 A/B pages listed above
+are now published, and the two staged oscillator-orientation amendments landed
+in the same publication change. The final status/audit and gate record is
+`research/frontier-7-publication.md`.

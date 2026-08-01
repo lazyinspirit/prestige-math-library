@@ -2,7 +2,7 @@
 id: ex-trivial-and-total-quotients
 kind: example
 title: "$G/\\{e\\}$ reproduces $G$, while $G/G$ is the one-element quotient group"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

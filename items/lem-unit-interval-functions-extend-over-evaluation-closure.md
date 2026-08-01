@@ -2,7 +2,7 @@
 id: lem-unit-interval-functions-extend-over-evaluation-closure
 kind: lemma
 title: "Every continuous $[0,1]$-valued function extends uniquely over the closure of the full evaluation image"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

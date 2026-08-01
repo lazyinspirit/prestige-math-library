@@ -2,7 +2,7 @@
 id: ex-uncountable-discrete-space-meets-bing-not-urysohn
 kind: example
 title: "An uncountable discrete space is metrizable and has a discrete basis, but is not second countable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

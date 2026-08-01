@@ -2,7 +2,7 @@
 id: ex-cubic-has-an-inflection-point-at-zero
 kind: example
 title: "$x\\mapsto x^3$ changes from concave to convex at zero and has an inflection point there"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

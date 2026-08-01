@@ -2,7 +2,7 @@
 id: ex-niemytzki-plane-metrization-profile
 kind: example
 title: "Under choice, the Niemytzki plane is Tychonoff and locally metrizable but not normal, paracompact, or metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

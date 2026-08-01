@@ -2,7 +2,7 @@
 id: rem-sigma-locally-finite-base-produces-compatible-normal-sequence
 kind: remark
 title: 'Under choice, a regular $T_1$ space with a $\sigma$-locally-finite basis has a compatible normal sequence'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:

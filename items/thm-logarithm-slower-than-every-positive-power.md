@@ -2,7 +2,7 @@
 id: thm-logarithm-slower-than-every-positive-power
 kind: theorem
 title: "The logarithm grows more slowly than every positive real power"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

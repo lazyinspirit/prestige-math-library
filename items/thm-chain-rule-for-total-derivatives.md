@@ -2,7 +2,7 @@
 id: thm-chain-rule-for-total-derivatives
 kind: theorem
 title: "The chain rule for total derivatives: $D(g\\circ f)(a)=Dg(f(a))\\circ Df(a)$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-finite-jensen-gives-the-mean-square-inequality
 kind: example
 title: "Finite Jensen for $x\\mapsto x^2$ gives that the square of a weighted mean is at most the weighted mean of the squares"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

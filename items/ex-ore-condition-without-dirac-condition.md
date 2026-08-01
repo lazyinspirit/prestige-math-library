@@ -2,7 +2,7 @@
 id: ex-ore-condition-without-dirac-condition
 kind: example
 title: "$K_4$ with one new vertex adjacent to two clique vertices satisfies Ore's condition but not Dirac's condition"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

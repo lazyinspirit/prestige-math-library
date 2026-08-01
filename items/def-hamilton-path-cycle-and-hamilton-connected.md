@@ -2,7 +2,7 @@
 id: def-hamilton-path-cycle-and-hamilton-connected
 kind: definition
 title: "Hamilton paths, Hamilton cycles, Hamiltonian graphs and Hamilton-connected graphs"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: null
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

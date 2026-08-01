@@ -2,7 +2,7 @@
 id: thm-cosine-has-a-smallest-positive-zero
 kind: theorem
 title: "Cosine has a smallest positive zero, lying strictly between zero and two"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

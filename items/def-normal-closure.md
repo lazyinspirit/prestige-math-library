@@ -2,7 +2,7 @@
 id: def-normal-closure
 kind: definition
 title: "The normal closure of a subset of a group"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

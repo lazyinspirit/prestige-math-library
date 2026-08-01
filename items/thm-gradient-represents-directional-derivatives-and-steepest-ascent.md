@@ -2,7 +2,7 @@
 id: thm-gradient-represents-directional-derivatives-and-steepest-ascent
 kind: theorem
 title: "For a differentiable scalar field, $D_vf(a)=\\langle\\nabla f(a),v\\rangle$ and the unit direction of steepest ascent is the normalized gradient"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

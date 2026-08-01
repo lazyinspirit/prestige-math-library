@@ -2,7 +2,7 @@
 id: thm-tangent-cotangent-secant-cosecant-derivatives-and-periods
 kind: theorem
 title: "Derivatives and fundamental periods of tangent, cotangent, secant, and cosecant"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

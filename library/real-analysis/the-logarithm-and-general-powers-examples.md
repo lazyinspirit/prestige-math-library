@@ -1,7 +1,7 @@
 ---
 page: the-logarithm-and-general-powers-examples
 title: "The Logarithm and General Powers: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-two-to-sqrt-two-by-two-real-power-constructions,
            ex-alternating-harmonic-series-sums-to-log-two,

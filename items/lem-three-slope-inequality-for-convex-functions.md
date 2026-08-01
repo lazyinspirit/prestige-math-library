@@ -2,7 +2,7 @@
 id: lem-three-slope-inequality-for-convex-functions
 kind: lemma
 title: "For a convex function and $x<y<z$, the three secant slopes satisfy $s(x,y)\\le s(x,z)\\le s(y,z)$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

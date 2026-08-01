@@ -2,7 +2,7 @@
 id: ex-x-sine-of-one-over-x-tends-to-zero
 kind: example
 title: "x sin(1/x) tends to zero despite its oscillation"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-eulers-euler-circuit-characterisation
 kind: theorem
 title: "Euler's theorem and Hierholzer's construction: a connected finite undirected multigraph has an Euler circuit if and only if every degree is even"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

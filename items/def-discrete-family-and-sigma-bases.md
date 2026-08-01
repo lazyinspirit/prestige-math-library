@@ -2,7 +2,7 @@
 id: def-discrete-family-and-sigma-bases
 kind: definition
 title: 'Discrete families and $\sigma$-locally-finite and $\sigma$-discrete bases'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

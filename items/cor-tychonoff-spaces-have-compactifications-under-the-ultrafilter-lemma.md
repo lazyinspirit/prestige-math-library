@@ -2,7 +2,7 @@
 id: cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma
 kind: corollary
 title: "Assuming the ultrafilter lemma, every Tychonoff space has a Hausdorff compactification"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: rem-total-derivative-conventions-and-linear-map-seam
 kind: remark
 title: "Dimension, openness, norm, Jacobian, and the native Euclidean linear-map agreement seam"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

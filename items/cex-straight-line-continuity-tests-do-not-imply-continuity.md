@@ -2,7 +2,7 @@
 id: cex-straight-line-continuity-tests-do-not-imply-continuity
 kind: counterexample
 title: "$x^2y/(x^4+y^2)$ tends to zero on every line through the origin but not along $y=x^2$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

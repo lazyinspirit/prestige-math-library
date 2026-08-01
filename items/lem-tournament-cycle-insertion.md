@@ -2,7 +2,7 @@
 id: lem-tournament-cycle-insertion
 kind: lemma
 title: "A tournament vertex having an in-neighbour and an out-neighbour on a directed cycle can be inserted into that cycle"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

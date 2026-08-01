@@ -2,7 +2,7 @@
 id: def-inflection-point-by-change-of-convexity
 kind: definition
 title: "An inflection point as a point of continuity where convexity changes to concavity or conversely"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

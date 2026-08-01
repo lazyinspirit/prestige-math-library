@@ -2,7 +2,7 @@
 id: def-euclidean-linear-map
 kind: definition
 title: "A linear map $L:\\mathbb{R}^m\\to\\mathbb{R}^n$ in Euclidean coordinates"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

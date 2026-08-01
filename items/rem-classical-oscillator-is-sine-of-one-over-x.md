@@ -7,15 +7,12 @@ origin: session
 deps: [cex-psi-of-one-over-x-has-no-limit-at-zero, ex-distance-to-the-integers, ex-x-times-psi-tends-to-zero, lem-integer-part]
 justified_by: []
 aliases: []
+forward_refs: [cex-sine-of-one-over-x-has-no-limit-at-zero, ex-x-sine-of-one-over-x-tends-to-zero]
 landmark: false
 short: "why $\\psi$ and not $\\sin$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  audited: 2026-08-02
 sources:
   scraped: []
   references:
@@ -42,23 +39,15 @@ correspondence is **orientation only**: the two displayed statements are reporte
 as what the classical treatment proves, not asserted here, and nothing on this
 page uses or proves anything about $\sin$.
 
-## Why $\sin$ is not available here
+## The later analytic construction
 
-This library has not defined $\sin$. Doing so honestly is a substantial piece of
-work that has not been done: one needs the exponential and trigonometric
-functions built from power series, or from a differential equation, or from arc
-length — and then the number $\pi$ has to be *defined*, as (twice) the first
-positive zero of the cosine or by an equivalent characterisation, and that
-definition has to be justified by proving the zero exists and is unique. None of
-that machinery — power series, convergence of series of functions,
-differentiation — exists in this library at this point in the reading order. It
-belongs to a later page of the plan, on sine, cosine and the definition of $\pi$,
-which has not yet been written.
-
-Because that page has no items yet, this remark contains **no link** to a sine or
-cosine item: there is no id to link to, and inventing one would leave a dangling
-reference. When that page is authored, this remark is the natural place to add a
-forward reference to it, declared in `forward_refs` as the schema requires.
+This library now constructs sine and cosine from their power series, proves
+their differential and addition laws, and defines pi from the first positive
+zero of cosine. The promised classical examples are
+[[cex-sine-of-one-over-x-has-no-limit-at-zero]] and
+[[ex-x-sine-of-one-over-x-tends-to-zero]]. They occur later in the reading
+order, so both links are orientation-only forward references declared in this
+item's `forward_refs`; no proof on this earlier page depends on them.
 
 ## What $\psi$ supplies instead
 
@@ -92,5 +81,5 @@ $\sin(1/x)$, $x\sin(1/x)$ also carries information about smoothness, about power
 series and about the topologist's sine curve, none of which $\psi$ can carry,
 since $\psi$ is assembled from the order, the absolute value and the integer part
 alone and none of those notions is defined in this library yet. Those phenomena
-are not in scope here, and when they come into scope they will be stated with
-$\sin$, on the page that defines it.
+are not in scope on this earlier page; the forward-linked analytic examples
+state them with $\sin$ on the later page that defines it.

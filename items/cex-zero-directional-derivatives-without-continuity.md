@@ -2,7 +2,7 @@
 id: cex-zero-directional-derivatives-without-continuity
 kind: counterexample
 title: "The map $y(x^2+y^2)/x$ off the line $x=0$, extended by zero on that line, has every directional derivative zero at the origin but is discontinuous there"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

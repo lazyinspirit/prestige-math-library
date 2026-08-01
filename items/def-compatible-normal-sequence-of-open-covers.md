@@ -2,7 +2,7 @@
 id: def-compatible-normal-sequence-of-open-covers
 kind: definition
 title: "Compatible normal sequences of open covers"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -1,9 +1,9 @@
 # Frontier 7 — staged published prose amendments
 
-These are **not applied**. All Frontier-7 content is draft, so the current
-published prose remains true. The two amendments become necessary only if the
-sine/cosine A/B pair is approved for publication: they must land in that same
-authorized publication change, after the owner audit, never beforehand.
+These amendments were **applied on 2026-08-02** in the owner-authorized
+Frontier-7 publication change, together with the sine/cosine A/B pair. This
+file preserves the exact pre-publication scope-denial finding and the changes
+that resolved it.
 
 ## Scope-denial sweep result
 
@@ -19,10 +19,10 @@ surfaces of the same earlier oscillator orientation:
 2. `library/real-analysis/limits-of-real-functions-examples.md` repeats that
    there is no sine item because its page has not been written.
 
-That is currently accurate because the new sine items/pages are drafts. If they
-are published, both sentences become false. No other Frontier-7 subject has a
-published scope-denial claim falsified by the still-draft content. No published
-file was edited in this run, so no post-repair re-grep is due now.
+That was accurate while the new sine items/pages were drafts. Publication would
+make both sentences false, so the two amendments below were applied in the same
+authorized change. No other Frontier-7 subject had a published scope-denial
+claim falsified by the new content.
 
 ## Amendment 1 — oscillator orientation item
 
@@ -71,11 +71,10 @@ nothing on this earlier page uses or proves anything about sine, and its
 elementary $\psi$ proofs remain the material developed here.
 ```
 
-## Publication-time verification required
+## Publication-time verification
 
-Apply the two amendments only after the Frontier-7 sine items are published in
-the same authorized change. Then clear the old published verification stamps
-from the amended item, audit it under the owner-approved publication protocol,
-run `fwdcheck`, `prosecheck`, and a targeted re-grep of both files, and record
-the result in the publication receipt. This is an orientation/prose correction,
+The amendments landed after the Frontier-7 sine items were published in the same
+authorized change. The stale model-verdict stamp was cleared, the item received
+the owner's current audit date, and the targeted checks are recorded in
+`research/frontier-7-publication.md`. This is an orientation/prose correction,
 not a repair to a published mathematical dependency.

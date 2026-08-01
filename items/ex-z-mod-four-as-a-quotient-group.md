@@ -2,7 +2,7 @@
 id: ex-z-mod-four-as-a-quotient-group
 kind: example
 title: "The four cosets of $4\\mathbb Z$ in $(\\mathbb Z,+)$ reproduce addition modulo $4$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

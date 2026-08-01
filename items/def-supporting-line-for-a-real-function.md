@@ -2,7 +2,7 @@
 id: def-supporting-line-for-a-real-function
 kind: definition
 title: "A supporting line of slope $m$ for a real function at an interior point"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

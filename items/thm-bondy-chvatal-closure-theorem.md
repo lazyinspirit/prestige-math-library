@@ -2,7 +2,7 @@
 id: thm-bondy-chvatal-closure-theorem
 kind: theorem
 title: "A graph is Hamiltonian if and only if its Bondy-Chvatal closure is Hamiltonian"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

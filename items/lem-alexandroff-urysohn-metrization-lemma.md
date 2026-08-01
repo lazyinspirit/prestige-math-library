@@ -2,7 +2,7 @@
 id: lem-alexandroff-urysohn-metrization-lemma
 kind: lemma
 title: "A $T_1$ space with a compatible normal sequence of open covers is metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

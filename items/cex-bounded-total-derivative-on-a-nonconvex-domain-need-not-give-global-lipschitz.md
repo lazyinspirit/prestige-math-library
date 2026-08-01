@@ -2,7 +2,7 @@
 id: cex-bounded-total-derivative-on-a-nonconvex-domain-need-not-give-global-lipschitz
 kind: counterexample
 title: "A locally constant step map on the disconnected open set $\\mathbb{R}\\setminus\\{0\\}$ has zero total derivative but is not globally Lipschitz"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

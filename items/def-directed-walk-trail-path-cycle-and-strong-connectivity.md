@@ -2,7 +2,7 @@
 id: def-directed-walk-trail-path-cycle-and-strong-connectivity
 kind: definition
 title: "Directed walks, trails, paths and cycles, and strong connectivity"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: null
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

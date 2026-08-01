@@ -2,7 +2,7 @@
 id: cor-second-derivative-characterises-convexity
 kind: corollary
 title: "A twice-differentiable function on an open interval is convex if and only if its second derivative is nonnegative"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

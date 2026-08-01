@@ -2,7 +2,7 @@
 id: thm-camion-strong-tournament-hamiltonian
 kind: theorem
 title: "Camion's theorem: every strongly connected tournament on at least three vertices has a directed Hamilton cycle"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

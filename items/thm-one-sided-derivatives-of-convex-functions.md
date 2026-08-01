@@ -2,7 +2,7 @@
 id: thm-one-sided-derivatives-of-convex-functions
 kind: theorem
 title: "A convex function on an open interval has finite left and right derivatives everywhere, with $f'_-(u)\\le f'_+(u)\\le (f(v)-f(u))/(v-u)\\le f'_-(v)\\le f'_+(v)$ for $u<v$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

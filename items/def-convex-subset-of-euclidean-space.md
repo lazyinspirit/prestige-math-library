@@ -2,7 +2,7 @@
 id: def-convex-subset-of-euclidean-space
 kind: definition
 title: "A convex subset of $\\mathbb{R}^m$ contains every line segment between two of its points"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

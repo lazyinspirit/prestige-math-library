@@ -2,7 +2,7 @@
 id: def-evaluation-map-into-unit-cube
 kind: definition
 title: "The evaluation map from a space into the unit cube indexed by a family of continuous functions"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

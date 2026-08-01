@@ -2,7 +2,7 @@
 id: cex-hamiltonian-not-eulerian
 kind: counterexample
 title: "$K_4$ is Hamiltonian but has no Euler circuit"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

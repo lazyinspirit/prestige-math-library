@@ -2,7 +2,7 @@
 id: lem-coordinate-telescoping-on-a-euclidean-ball
 kind: lemma
 title: "Small coordinate-by-coordinate increments stay inside a Euclidean ball and telescope the total increment"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

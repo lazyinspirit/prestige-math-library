@@ -2,7 +2,7 @@
 id: rem-metric-spaces-have-sigma-discrete-bases
 kind: remark
 title: 'Under choice, every metric space has a $\sigma$-discrete basis'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:

@@ -2,7 +2,7 @@
 id: lem-hierholzer-maximal-unused-edge-trail-closes
 kind: lemma
 title: "In an even multigraph or balanced digraph, a trail maximal among unused incident edges returns to its start"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

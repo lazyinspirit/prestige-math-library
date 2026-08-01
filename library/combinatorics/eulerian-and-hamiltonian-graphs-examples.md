@@ -1,7 +1,7 @@
 ---
 page: eulerian-and-hamiltonian-graphs-examples
 title: "Eulerian and Hamiltonian Graphs: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-konigsberg-bridges-has-no-euler-trail,
            cex-eulerian-not-hamiltonian,

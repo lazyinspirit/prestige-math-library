@@ -2,7 +2,7 @@
 id: thm-convex-functions-are-differentiable-off-a-countable-set
 kind: theorem
 title: "A convex function on an open interval is differentiable except at at most countably many points"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

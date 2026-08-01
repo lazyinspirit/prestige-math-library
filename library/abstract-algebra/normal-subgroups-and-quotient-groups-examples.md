@@ -1,7 +1,7 @@
 ---
 page: normal-subgroups-and-quotient-groups-examples
 title: "Normal Subgroups and Quotient Groups: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-coset-multiplication-by-a-nonnormal-subgroup,
            ex-three-cycle-quotient-of-s3,

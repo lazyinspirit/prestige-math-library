@@ -2,7 +2,7 @@
 id: ex-center-and-commutator-subgroup-of-an-abelian-group
 kind: example
 title: "For an abelian group $G$, $Z(G)=G$ and $[G,G]=\\{e\\}$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

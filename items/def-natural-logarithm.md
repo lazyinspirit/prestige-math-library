@@ -2,7 +2,7 @@
 id: def-natural-logarithm
 kind: definition
 title: "The natural logarithm as the inverse of the exponential function"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

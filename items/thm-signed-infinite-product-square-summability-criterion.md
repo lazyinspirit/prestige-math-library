@@ -2,7 +2,7 @@
 id: thm-signed-infinite-product-square-summability-criterion
 kind: theorem
 title: "Under square summability, the signed product of (1+p_n) converges iff the series of p_n converges"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

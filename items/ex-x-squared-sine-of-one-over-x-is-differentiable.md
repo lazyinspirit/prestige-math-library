@@ -2,7 +2,7 @@
 id: ex-x-squared-sine-of-one-over-x-is-differentiable
 kind: example
 title: "The extension of x^2 sin(1/x) by zero is differentiable but its derivative is discontinuous at zero"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

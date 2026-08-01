@@ -2,7 +2,7 @@
 id: thm-ores-hamiltonicity-theorem
 kind: theorem
 title: "Ore's theorem: an $n$-vertex graph with $n\\ge3$ and $\\deg(u)+\\deg(v)\\ge n$ for every nonadjacent pair is Hamiltonian"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

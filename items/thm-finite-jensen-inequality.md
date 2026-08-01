@@ -2,7 +2,7 @@
 id: thm-finite-jensen-inequality
 kind: theorem
 title: "Finite Jensen inequality for a convex function and nonnegative weights summing to one"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

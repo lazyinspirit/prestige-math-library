@@ -2,7 +2,7 @@
 id: thm-tychonoff-embedding-theorem
 kind: theorem
 title: "A space is Tychonoff if and only if it embeds in a cube $[0,1]^J$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

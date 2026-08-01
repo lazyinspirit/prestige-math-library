@@ -2,7 +2,7 @@
 id: def-logarithm-to-a-base
 kind: definition
 title: "The logarithm to a positive base other than one"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

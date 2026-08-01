@@ -2,7 +2,7 @@
 id: thm-hyperbolic-identities-and-derivatives
 kind: theorem
 title: "Addition formulas, identities, parity, and derivatives of the hyperbolic functions"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

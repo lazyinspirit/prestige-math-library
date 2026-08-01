@@ -2,7 +2,7 @@
 id: thm-redei-tournament-hamilton-path
 kind: theorem
 title: "Redei's theorem: every nonempty tournament has a directed Hamilton path"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

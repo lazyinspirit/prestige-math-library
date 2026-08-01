@@ -1,7 +1,7 @@
 ---
 page: normal-subgroups-and-quotient-groups
 title: "Normal Subgroups and Quotient Groups"
-status: draft
+status: published
 items: [def-normal-subgroup,
         thm-normal-subgroup-characterisations,
         cor-subgroups-of-abelian-groups-are-normal,

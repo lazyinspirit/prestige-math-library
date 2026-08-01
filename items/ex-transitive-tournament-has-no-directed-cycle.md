@@ -2,7 +2,7 @@
 id: ex-transitive-tournament-has-no-directed-cycle
 kind: example
 title: "A transitive tournament has a directed Hamilton path and no directed cycle"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

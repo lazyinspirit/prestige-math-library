@@ -2,7 +2,7 @@
 id: ex-bartle-sherbert-bounds-for-pi
 kind: example
 title: "The Bartle-Sherbert bounds 2.828 < pi < 3.185"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

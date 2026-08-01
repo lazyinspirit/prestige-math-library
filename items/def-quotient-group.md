@@ -2,7 +2,7 @@
 id: def-quotient-group
 kind: definition
 title: "The quotient group $G/N$ and coset product $(gN)(hN)=ghN$"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -14,6 +14,7 @@ aliases: [def-factor-group]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-compactification-of-a-tychonoff-space
 kind: definition
 title: "A Hausdorff compactification as a dense embedding into a compact Hausdorff space"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

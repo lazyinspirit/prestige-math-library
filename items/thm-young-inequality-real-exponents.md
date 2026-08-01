@@ -2,7 +2,7 @@
 id: thm-young-inequality-real-exponents
 kind: theorem
 title: "Young's inequality for conjugate real exponents"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

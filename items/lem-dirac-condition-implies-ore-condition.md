@@ -2,7 +2,7 @@
 id: lem-dirac-condition-implies-ore-condition
 kind: lemma
 title: "The minimum-degree condition $\\delta(G)\\ge n/2$ implies Ore's degree-sum condition"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

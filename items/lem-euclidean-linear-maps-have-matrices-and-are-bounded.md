@@ -2,7 +2,7 @@
 id: lem-euclidean-linear-maps-have-matrices-and-are-bounded
 kind: lemma
 title: "Every Euclidean linear map has a unique matrix and satisfies $\\|Lh\\|_2\\le K\\|h\\|_2$ for some $K\\ge0$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-euler-trail-characterisation
 kind: corollary
 title: "A connected finite undirected multigraph has an Euler trail if and only if it has zero or two odd-degree vertices; an open Euler trail occurs exactly in the two-vertex case"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

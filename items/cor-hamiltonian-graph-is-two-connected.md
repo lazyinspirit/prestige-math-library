@@ -2,7 +2,7 @@
 id: cor-hamiltonian-graph-is-two-connected
 kind: corollary
 title: "Every Hamiltonian graph on at least three vertices is $2$-connected"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

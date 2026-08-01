@@ -2,7 +2,7 @@
 id: def-one-sided-derivatives-of-real-functions
 kind: definition
 title: "The left and right derivatives of a real function as one-sided limits of its difference quotient"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

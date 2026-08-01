@@ -2,7 +2,7 @@
 id: lem-splicing-edge-disjoint-closed-trails
 kind: lemma
 title: "Edge-disjoint closed trails sharing a vertex can be spliced into one closed trail"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-bondy-chvatal-closure-well-defined
 kind: lemma
 title: "The Bondy-Chvatal closure is independent of the order of eligible edge additions"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

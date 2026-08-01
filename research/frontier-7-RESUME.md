@@ -145,3 +145,11 @@ editing published content. The complete fatal-error and mechanism-effectiveness
 rundown is `research/frontier-7-step10-rundown.md`. Stop here for the owner:
 the next action requires an explicit owner decision on audit/publication. Do
 not publish, commit, or push automatically.
+
+## Publication update — 2026-08-02
+
+The owner authorized publication after the completed audit. All 185 Frontier-7
+items and all 16 Frontier-7 A/B pages are now `published`. The publication also
+applied the two required oscillator-orientation amendments and refreshed the
+amended published remark's owner audit date. The separate publication receipt is
+`research/frontier-7-publication.md`.

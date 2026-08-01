@@ -1,7 +1,7 @@
 ---
 page: eulerian-and-hamiltonian-graphs
 title: "Eulerian and Hamiltonian Graphs"
-status: draft
+status: published
 items: [def-multigraph-and-digraph-degrees-and-connectivity,
         def-directed-walk-trail-path-cycle-and-strong-connectivity,
         def-euler-trail-and-circuit,

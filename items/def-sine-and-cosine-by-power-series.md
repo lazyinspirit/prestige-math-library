@@ -2,7 +2,7 @@
 id: def-sine-and-cosine-by-power-series
 kind: definition
 title: "Sine and cosine defined by their real power series"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

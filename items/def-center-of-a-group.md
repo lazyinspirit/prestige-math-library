@@ -2,7 +2,7 @@
 id: def-center-of-a-group
 kind: definition
 title: "The center $Z(G)$ of a group"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

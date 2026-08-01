@@ -2,7 +2,7 @@
 id: def-tangent-cotangent-secant-cosecant
 kind: definition
 title: "Tangent, cotangent, secant, and cosecant on their exact natural domains"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

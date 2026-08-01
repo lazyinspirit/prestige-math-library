@@ -2,7 +2,7 @@
 id: lem-locally-finite-union-of-sigma-locally-finite-bases
 kind: lemma
 title: 'A locally finite open cover by subspaces with $\sigma$-locally-finite bases yields a $\sigma$-locally-finite basis of the whole space'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

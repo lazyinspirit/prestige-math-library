@@ -2,7 +2,7 @@
 id: cor-sin-x-over-x-limit
 kind: corollary
 title: "The limit of sin x divided by x at zero is one"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

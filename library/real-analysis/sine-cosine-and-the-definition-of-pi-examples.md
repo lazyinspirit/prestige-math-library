@@ -1,7 +1,7 @@
 ---
 page: sine-cosine-and-the-definition-of-pi-examples
 title: "Sine, Cosine, and the Definition of Pi: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-bartle-sherbert-bounds-for-pi,
            cex-sine-of-one-over-x-has-no-limit-at-zero,

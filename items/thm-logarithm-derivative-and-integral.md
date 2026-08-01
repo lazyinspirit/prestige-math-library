@@ -2,7 +2,7 @@
 id: thm-logarithm-derivative-and-integral
 kind: theorem
 title: "The natural logarithm has derivative 1/x and equals the integral from 1 to x of 1/t"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

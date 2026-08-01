@@ -2,7 +2,7 @@
 id: cor-urysohn-metrization
 kind: corollary
 title: "Under choice, every regular $T_1$ second-countable space is metrizable"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

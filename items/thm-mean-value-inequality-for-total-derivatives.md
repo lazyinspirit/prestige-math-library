@@ -2,7 +2,7 @@
 id: thm-mean-value-inequality-for-total-derivatives
 kind: theorem
 title: "On a convex open set, a uniform bound $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ implies $\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

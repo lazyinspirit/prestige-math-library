@@ -2,7 +2,7 @@
 id: def-real-power
 kind: definition
 title: "Real powers for positive bases, with the zero-base positive-exponent convention"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

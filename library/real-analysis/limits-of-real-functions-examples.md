@@ -109,10 +109,7 @@ the same domain — the formula determines a unique value. That is why
 $\lim_{x \to 0} f(x)$ is left undefined on such a domain.
 
 **Why $\psi$ and not $\sin$.** [[rem-classical-oscillator-is-sine-of-one-over-x]]
-records that the classical form of the two oscillator items is $\sin(1/x)$ and
-$x \sin(1/x)$, and that this library cannot yet write them: $\sin$ needs power
-series and a definition of $\pi$, none of which exists at this point in the
-reading order. The remark is orientation only; it reports the classical
-statements without asserting them, nothing on this page uses or proves anything
-about $\sin$, and it carries no link to a sine item,
-because the page that will define one has not been written.
+records the classical form of the two oscillator items as $\sin(1/x)$ and
+$x\sin(1/x)$, and points forward to the later analytic examples. The remark is
+orientation only: nothing on this earlier page uses or proves anything about
+sine, and its elementary $\psi$ proofs remain the material developed here.

@@ -2,7 +2,7 @@
 id: def-real-power-by-rational-supremum
 kind: definition
 title: "Real powers from suprema of rational powers, with the reciprocal convention below base one"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

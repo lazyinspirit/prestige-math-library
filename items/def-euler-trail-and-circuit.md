@@ -2,7 +2,7 @@
 id: def-euler-trail-and-circuit
 kind: definition
 title: "Euler trails and Euler circuits in multigraphs and digraphs"
-status: draft
+status: published
 origin: session
 authorship: literature-derived
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: null
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

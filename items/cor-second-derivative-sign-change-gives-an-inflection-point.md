@@ -2,7 +2,7 @@
 id: cor-second-derivative-sign-change-gives-an-inflection-point
 kind: corollary
 title: "A continuous function whose second derivative has opposite signs on the two sides of a point has an inflection point there"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

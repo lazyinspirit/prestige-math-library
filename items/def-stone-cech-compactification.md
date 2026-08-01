@@ -2,7 +2,7 @@
 id: def-stone-cech-compactification
 kind: definition
 title: "The Stone–Čech compactification by its compact-Hausdorff extension property"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

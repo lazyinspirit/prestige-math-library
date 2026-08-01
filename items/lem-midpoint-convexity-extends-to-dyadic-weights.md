@@ -2,7 +2,7 @@
 id: lem-midpoint-convexity-extends-to-dyadic-weights
 kind: lemma
 title: "Midpoint convexity gives the convexity inequality at every dyadic weight $k/2^n$"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

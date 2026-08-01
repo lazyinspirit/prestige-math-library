@@ -2,7 +2,7 @@
 id: cor-diracs-hamiltonicity-theorem
 kind: corollary
 title: "Dirac's theorem: every $n$-vertex graph with $n\\ge3$ and $\\delta(G)\\ge n/2$ is Hamiltonian"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

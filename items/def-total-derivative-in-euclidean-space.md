@@ -2,7 +2,7 @@
 id: def-total-derivative-in-euclidean-space
 kind: definition
 title: "The total (Fréchet) derivative $Df(a)$ as the linear first-order approximation with $o(\\|h\\|_2)$ remainder"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

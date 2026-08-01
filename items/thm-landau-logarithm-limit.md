@@ -2,7 +2,7 @@
 id: thm-landau-logarithm-limit
 kind: theorem
 title: "Landau's root limit: log x is the limit of 2^n times (x^(1/2^n) minus 1)"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

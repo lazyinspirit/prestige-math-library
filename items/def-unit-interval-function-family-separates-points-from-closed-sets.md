@@ -2,7 +2,7 @@
 id: def-unit-interval-function-family-separates-points-from-closed-sets
 kind: definition
 title: "A family of continuous unit-interval-valued functions that separates points from closed sets"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-canonical-quotient-map
 kind: proposition
 title: 'The canonical projection $\pi:G\to G/N$, $\pi(g)=gN$, is a surjective group homomorphism'
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

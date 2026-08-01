@@ -2,7 +2,7 @@
 id: cor-strictly-convex-functions-have-at-most-one-minimizer
 kind: corollary
 title: "A strictly convex function has at most one global minimizer"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:

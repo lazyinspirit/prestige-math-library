@@ -2,7 +2,7 @@
 id: thm-quarter-turn-values-and-shift-formulas
 kind: theorem
 title: "Quarter-turn values and shifts by pi/2 and pi"
-status: draft
+status: published
 origin: session
 authorship: ai-altered
 provenance:
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-02
 sources:
   scraped: []
   references:
