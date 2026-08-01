@@ -50,6 +50,14 @@ source supports and flag every convention disagreement you found. Do not copy
 source prose, fabricate a source, or describe session-authored content as
 scraped.
 
+For every planned theorem, lemma, and corollary, also record the expected
+reader-facing `authorship` value and why: `literature-derived` only for faithful
+source text with cosmetic edits; `ai-altered` for a source-derived result or
+proof that Step 5 will materially reformulate, extend, repair, or generate; and
+`ai-generated` when the result will be formulated by AI without faithfully
+deriving it from one identified literature text. This does not claim novelty.
+`proved_here` independently says whether the library includes a complete proof.
+
 You have read access to the full published `items/` and `library/` corpus. Use
 it. Search the whole published pool before minting an id. For every external
 dependency you propose, open the actual item and verify `status: published`, the
@@ -91,7 +99,8 @@ anything in the repo and RUN any gate. You may WRITE exactly three files:
 - `research/level<n>-batch-<i>.notes.md` — prose-scaffold amendments as precise
   APPLYABLE edits (file, section, exact old text, exact new text), plus
   authoring-time notes that have no scaffold anchor but must reach the step-5
-  author.
+  author. For every planned theorem, lemma, and corollary, include its expected
+  `authorship` value and the source/edit-history rationale.
 - `research/level<n>-batch-<i>.proof-contracts.json` — the version-1
   machine-readable proof contract for every planned proof-bearing item. Use the
   exact schema in `QUALITY-CONTROLS.md`: source clause and uses for every direct

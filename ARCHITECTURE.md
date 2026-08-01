@@ -47,6 +47,7 @@ Frontmatter fields, and what enforces each:
 | `id` | must equal filename | `depcheck` (`id-filename`) |
 | `kind` | definition/lemma/theorem/corollary/example/counterexample/false-statement/remark | `depcheck` (`kind-prefix`), `validate-plan` (`prefix`) |
 | `status` | `draft` → `published` | `depcheck` (`draft-on-published-page`) |
+| `authorship` | reader-facing mathematical-text provenance on future theorem/lemma/corollary items | `depcheck` validates a supplied value and kind; Beta/Alpha audit assignment and accuracy |
 | `deps` | **logical** dependencies | `depcheck` (cycles, resolution), `citecheck` |
 | `justified_by` | forward-pointing discharge of a definition's obligation | `depcheck` (target must transitively depend on the citer) |
 | `forward_refs` | references to later material | `fwdcheck` |
@@ -102,12 +103,13 @@ exist in `tools/`; adding one is a tool change and carries the §9 doc obligatio
 
 ### 3.2 `depcheck.mjs` — dependency and circularity
 Runs over **actual content**, not the plan, so it stays true as things are
-authored. Errors: `id-filename`, `yaml-escape`, `kind-prefix`, `dep-unresolved`,
+authored. Errors: `id-filename`, `yaml-escape`, `kind-prefix`, `authorship-invalid`,
+`authorship-kind`, `dep-unresolved`,
 `link-unresolved`, `self-dep`, `item-cycle`, `page-cycle`, `page-item-missing`,
 `page-item-dup`, `draft-on-published-page`, `published-unaudited`,
 `published-unchecked`, `orphan`, `multi-home`, `cited-not-in-deps`,
 `justification-backward`, `justification-duplicated`,
-`sources-checked-on-proved` (19 total).
+`sources-checked-on-proved` (21 total).
 
 **This is the mechanical guarantee behind "no circular reasoning."**
 `published-unaudited` is what forces the owner's re-audit when an amendment

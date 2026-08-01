@@ -44,6 +44,23 @@ kind: theorem                        # one of the kinds above
 title: "Completeness of $\\mathbb{R}$ (Cauchy criterion)"   # inline LaTeX ok
 status: draft                        # draft | published  (THE publish gate)
 origin: session                      # pipeline | session
+authorship: ai-generated             # OPTIONAL for legacy items; REQUIRED on
+                                     # every future theorem, lemma, and corollary:
+                                     # ai-generated | ai-altered | literature-derived
+  # Mathematical-text provenance, not a claim of mathematical novelty and not
+  # the same as `origin` or `proved_here`:
+  #   ai-generated       AI formulated the result/proof without faithfully
+  #                      deriving it from one identified literature text.
+  #   ai-altered         a literature-derived result/proof was materially
+  #                      reformulated, extended, repaired, or otherwise
+  #                      changed by AI.
+  #   literature-derived faithfully transcribed/adapted only cosmetically from
+  #                      identified literature. A local proof is present iff
+  #                      `proved_here: true`; its absence is separately shown
+  #                      by the existing ‡ “not proved here” marker.
+  # Beta assigns this field while authoring. Alpha verifies it at Step 6 and
+  # updates it after a material AI alteration. Do not backfill legacy items
+  # merely to satisfy this future-session disclosure rule.
 deps: [def-cauchy-sequence, lem-triangle-inequality]
   # every item this item's statement OR proof LOGICALLY DEPENDS ON (single list;
   # drives the prerequisite closure and the flowchart). Must reference existing

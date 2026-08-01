@@ -39,7 +39,13 @@ For **every proof item in your batch**:
 4. Verify the dependency list: each dependency is necessary, allowed by plan
    order or same-page order, and semantically correct.
 5. Check titles and Statements against what the proof actually proves.
-6. Re-read every Remark and page summary with proof-step suspicion. Verify every
+6. For every theorem, lemma, and corollary, check the reader-facing `authorship`
+   tag against the actual source and edit history. `literature-derived` is only
+   a faithful source transcription with cosmetic edits; a material AI rewrite,
+   extension, repair, or generated proof requires `ai-altered`. An originally
+   AI-generated item remains `ai-generated` after later AI repair. Do not
+   backfill legacy items.
+7. Re-read every Remark and page summary with proof-step suspicion. Verify every
    A-page summary has exactly two nonempty prose paragraphs under 150 words each:
    mathematical background and actually used declared dependencies first; main
    definitions, theorems, and logical progression second. Verify every B page
@@ -60,6 +66,11 @@ that proof** in house style and run the gates. Do not rename existing ids on
 
 If a material rewrite changes an item with `verification.judge`, delete that
 block. Do not judge; judging is step 7.
+
+If your change materially alters literature-derived mathematical text or proof,
+retag it `ai-altered`. Preserve `ai-generated` for an item that was already
+AI-generated. If you add a theorem, lemma, or corollary, set its `authorship`
+tag before reporting.
 
 Update your batch's `research/level<n>-batch-<i>.proof-contracts.json` whenever
 you change a proof, a citation, a proof-step number, or boundary handling. Keep
@@ -85,7 +96,8 @@ Return a structured report:
 3. Every proof-step defect and every semantic citation defect found.
 4. Anything unresolved or outside your write boundary.
 5. **Coverage statement:** list the batch items and state whether every proof
-   step and dependency citation was read. Name any exception explicitly.
+   step, dependency citation, and required authorship tag was read. Name any
+   exception explicitly.
 6. **Fatal-error ledger for step 10:** for every publish-blocking mathematical
    error, record the affected id/file, defect type, location
    (title/Statement, proof/refutation, Facts/dependencies, Remark, or page

@@ -51,6 +51,16 @@ run the gates. Published items outside the in-flight level are read-only unless
 the owner explicitly instructs otherwise; report suspected published defects.
 Never rename an id on `main`.
 
+Every future theorem, lemma, and corollary must carry the reader-facing
+`authorship` tag. Verify its provenance from the source ledger and actual edits:
+`literature-derived` only for faithful source text with cosmetic edits;
+`ai-altered` for a material AI reformulation, extension, repair, or generated
+proof; `ai-generated` where no identified source text was faithfully derived.
+This is not a novelty claim and `proved_here` separately says whether a complete
+proof is local. Do not backfill legacy content. If you or a Step-6 reader
+materially alters literature-derived mathematical text, retag it `ai-altered`;
+an already AI-generated item remains `ai-generated`.
+
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
 paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 
@@ -94,8 +104,8 @@ dependency citation, fix defects, and report coverage.
 
 After all independent-reader and proof-refuter reports arrive, adjudicate every reported
 mistake or candidate defect from disk:
-changed items, page files, dependency lists, added/deleted results, stale judge
-blocks, and local gate output. Verify every A-page summary has exactly two
+changed items, page files, dependency lists, authorship tags, added/deleted
+results, stale judge blocks, and local gate output. Verify every A-page summary has exactly two
 nonempty prose paragraphs under 150 words each: mathematical background and
 actually used declared dependencies first; main definitions, theorems, and
 logical progression second. Every B page must have no authored summary body.

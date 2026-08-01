@@ -28,7 +28,9 @@ seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to
 run a page from prompt to publish; the normative docs above win where they differ.
 
 1. **Author as `status: draft`** per SCHEMA.md. Session-authored content is
-   `origin: session`; never fabricate scraped sources (use `references`).
+   `origin: session`; never fabricate scraped sources (use `references`). Every
+   future theorem, lemma, and corollary also declares its reader-facing
+   `authorship` provenance.
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
    node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts
@@ -261,6 +263,19 @@ banner; the public sees only `published`.
   still does not close honestly, narrow or drop the stated theorem/example/
   counterexample rather than patching it with an overstated dependency. This is
   required in every future Beta scaffold and Step-5 authoring run.
+- **Authorship disclosure (owner, 2026-08-01).** Every future Beta assigns
+  `authorship: ai-generated | ai-altered | literature-derived` to every theorem,
+  lemma, and corollary it authors, and records the reason in its batch notes.
+  This describes mathematical-text provenance, not novelty: use
+  `literature-derived` only for a faithful source transcription with cosmetic
+  edits; use `ai-altered` when a source-derived result or proof is materially
+  reformulated, extended, repaired, or otherwise changed by AI; use
+  `ai-generated` when AI formulated it without faithfully deriving it from one
+  identified literature text. A generated proof makes a source-derived result
+  `ai-altered`. `proved_here` separately says whether the library supplies a
+  complete proof. Alpha checks every tag at Step 6 and retags a materially
+  altered literature-derived item; an already AI-generated item remains
+  `ai-generated`. Never retrofit legacy items merely to satisfy this rule.
 - **Durable proof-contract and high-risk gates (owner, 2026-08-01).** In every
   future level, each Beta writes and maintains a namespaced
   `research/level<n>-batch-<i>.proof-contracts.json` for every proof-bearing

@@ -53,8 +53,8 @@ anything, read:
 
 - `SCHEMA.md`: the item and page contract (frontmatter, ids, the phase-proof
   format, the publish checklist).
-- `README.md`: provenance (the origin and verification axes), the judge lineup by
-  origin, and the citation honesty rules.
+- `README.md`: provenance (origin, authorship, and verification), the judge
+  lineup by origin, and the citation honesty rules.
 - `CLAUDE.md`: project rules, including the frozen presentation constraint.
 - `items/lem-cauchy-bounded.md`: the approved house-style exemplar proof. Match
   its frontmatter shape, section headings, step numbering, and prose density.
@@ -951,14 +951,18 @@ directory directly.
 
 ## Verification honesty
 
-The library records two orthogonal axes per item: origin (session or pipeline)
-and verification (mechanical precheck, paired judge including a cross-family
-DeepSeek lane, owner audit). Page
-badges are derived mechanically from the items. The honesty rules are strict:
-sources are never fabricated, a judge pass is never recorded unless the judge
-gave it, and the owner audit is always the final gate before publish. When the
-guardrail overrules the judge, the record shows owner audit without a judge pass,
-so a reader can see exactly how each item was verified.
+The library records three orthogonal axes per item: origin (session or pipeline),
+authorship provenance (`ai-generated`, `ai-altered`, or `literature-derived` on
+future theorems, lemmas, and corollaries), and verification (mechanical
+precheck, paired judge including a cross-family DeepSeek lane, owner audit).
+The authorship chip tells the reader whether the mathematical text was generated,
+materially altered, or faithfully derived from literature; `proved_here` still
+separately says whether this library supplies a proof. Page badges are derived
+mechanically from the items. The honesty rules are strict: sources are never
+fabricated, a judge pass is never recorded unless the judge gave it, and the
+owner audit is always the final gate before publish. When the guardrail overrules
+the judge, the record shows owner audit without a judge pass, so a reader can
+see exactly how each item was verified.
 
 ---
 

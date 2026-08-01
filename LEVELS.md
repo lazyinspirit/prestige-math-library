@@ -248,9 +248,12 @@ same `briefs/authoring.md` contract and must emit normal repo files; the
 orchestrator remains responsible for running the gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
-draft`, `origin: session`. **Never** sets `verification.audited`. Adding a dep to
-silence a checker when the proof does not use it is the dominant historical
-defect class and is forbidden.
+draft`, `origin: session`. Every theorem, lemma, and corollary carries
+`authorship: ai-generated | ai-altered | literature-derived`, selected under
+SCHEMA.md's reader-facing provenance rule and recorded with a reason in the
+batch notes. **Never** sets `verification.audited`. Adding a dep to silence a
+checker when the proof does not use it is the dominant historical defect class
+and is forbidden.
 
 **Dependency discipline (owner, 2026-07-31).** The scaffold Beta authors every
 load-bearing citation with the actual cited Definition or Statement in view.
@@ -353,16 +356,21 @@ For every authored item in the batch, the independent reader must:
    declared forward reference, and actually states the proposition for which it
    is cited. The common failure mode is citing a true theorem for a stronger or
    different claim than it makes.
-3. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
+3. **Check authorship disclosure.** For every theorem, lemma, and corollary,
+   verify the `authorship` tag against the actual source and edit history. A
+   material AI change to literature-derived mathematical text or proof requires
+   `ai-altered`; an AI-generated item remains `ai-generated` after later AI
+   repair. Do not backfill legacy content.
+4. **Read the A-page summaries and Remarks with proof-step suspicion.** Verify
    the fixed two-paragraph, under-150-words-per-paragraph A-summary contract and
    the absence of an authored B-page body. No count in prose, no unsupported
    position claim, and no corpus-wide scope denial.
-4. **Fix every defect it is licensed to fix**, not merely report it. If the fix
+5. **Fix every defect it is licensed to fix**, not merely report it. If the fix
    requires adding or deleting a lemma/proposition/theorem/corollary/example/
    counterexample/false-statement, the independent reader may do so inside the in-flight level.
    Anything it adds must be personally authored by that independent reader, including the full
    proof when the kind requires one. Item ids remain immutable once on `main`.
-5. Delete any stale `verification.judge` block after a material rewrite, run
+6. Delete any stale `verification.judge` block after a material rewrite, run
    `tools/reflow.mts` and `tools/precheck.mts` on changed proof items, and run the
    relevant gates locally. Do **not** judge; judging is step 7.
 
@@ -376,7 +384,8 @@ citation in the batch was read, or naming any exception.
 After all independent readers finish, Alpha-n audits the mistakes and fixes they
 reported, plus the evidence reported by Alpha's read-only proof-refuters. Alpha
 verifies from disk, not from any report: changed item text, added or deleted
-results, dependency lists, page lists, stale judge blocks, and gate status.
+results, dependency lists, page lists, authorship tags, stale judge blocks, and
+gate status.
 Alpha may confirm, refute, amend, revert, or extend a reported error or
 independent-reader fix. If Alpha adds a result, Alpha personally authors its proof.
 
