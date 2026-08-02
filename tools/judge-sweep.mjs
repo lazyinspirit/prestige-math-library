@@ -19,10 +19,20 @@ const cost = value("--cost");
 const attempts = value("--attempts") || (ledger ? (ledger.endsWith(".jsonl") ? ledger.replace(/\.jsonl$/, "-attempts.jsonl") : `${ledger}.attempts.jsonl`) : "");
 const pagesArg = value("--pages");
 const itemsArg = value("--items");
+// --manifests: comma-separated audit batch manifests (wave<k>-<cat>.pages.json).
+// The audit workflow's scope of record is the manifest, whose item lists come
+// from the PAGE FILES — plan-spec's `items` arrays are stale for legacy pages
+// (the documented --pairs bug), so a --pages sweep over old pages under-covers.
+// Measured wave 0, 2026-08-02: --pages selected 180 of the 276 in-scope items.
+const manifestsArg = value("--manifests");
 const limitArg = value("--limit");
 const modelsArg = value("--models");
-if (!ledger || !cost || (!pagesArg && !itemsArg)) {
-  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl (--pages a-page,another-page | --items item-id,item-id) [--models model,model] [--limit N]");
+if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
+  console.error("usage: node tools/judge-sweep.mjs --ledger research/level<n>-judge-paired.jsonl --cost research/level<n>-judge-paired-cost.jsonl (--pages a-page,another-page | --items item-id,item-id | --manifests wave<k>-a.pages.json,wave<k>-b.pages.json) [--models model,model] [--limit N]");
+  process.exit(2);
+}
+if (manifestsArg && (pagesArg || itemsArg)) {
+  console.error("judge-sweep: --manifests cannot be combined with --pages/--items");
   process.exit(2);
 }
 const limit = limitArg ? Number(limitArg) : Infinity;
@@ -69,7 +79,12 @@ for (const id of requestedPages) {
 const pageIds = plan.pages
   .filter((page) => selectedPages.has(page.id))
   .flatMap((page) => page.items.map((item) => item.id));
-const ids = requestedItems.size ? [...requestedItems] : pageIds;
+const manifestIds = manifestsArg
+  ? [...new Set(manifestsArg.split(",").map((s) => s.trim()).filter(Boolean)
+      .flatMap((file) => JSON.parse(readFileSync(file, "utf8"))
+        .flatMap((page) => page.items.map((item) => item.id))))]
+  : [];
+const ids = manifestsArg ? manifestIds : requestedItems.size ? [...requestedItems] : pageIds;
 const plannedIds = new Set(plan.pages.flatMap((page) => page.items.map((item) => item.id)));
 if ([...requestedItems].some((id) => !plannedIds.has(id))) throw new Error("--items includes an unknown planned item id");
 if (!ids.length || new Set(ids).size !== ids.length) {

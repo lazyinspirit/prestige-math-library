@@ -435,6 +435,13 @@ disposition instead of an instant error.
 and `level-coverage.mjs`): `deepseek+terra` (default, the build) or
 `deepseek+opus` (the audit). See §5 for the Opus lane.
 
+**`judge-sweep.mjs --manifests`** (2026-08-02): audit sweeps supply the batch
+manifests, not `--pages` — the sweep's `--pages` universe is plan-spec's
+`items` arrays, which are stale for legacy pages (measured: 180 of wave 0's
+276 in-scope items). Manifest mode reads the same files the gates read and
+dedupes shared-prelude items. The ledger skip (item × model × current context
+hash) makes a completion re-run free of duplicate calls.
+
 ### Helpers
 `reflow.mts` (join soft-wrapped steps; purely syntactic, never changes
 mathematics) · `adopt-repair.mjs` · `consumers.mjs --changed` (who cites what I
