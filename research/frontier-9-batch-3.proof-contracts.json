@@ -1,0 +1,2136 @@
+{
+  "version": 1,
+  "level": "frontier-9",
+  "scope": [
+    "lem-linear-map-elementary-properties",
+    "thm-linear-kernel-image-and-injectivity",
+    "lem-kernel-basis-extension-gives-image-basis",
+    "thm-rank-nullity",
+    "ex-forward-shift-injective-not-surjective",
+    "lem-module-elementary-consequences",
+    "lem-submodule-criterion-sums-and-intersections",
+    "thm-module-kernel-image-and-injectivity",
+    "thm-quotient-module-laws",
+    "prop-canonical-quotient-module-map",
+    "thm-quotient-module-universal-property",
+    "thm-first-isomorphism-theorem-modules",
+    "ex-integers-modulo-n-as-a-z-module",
+    "ex-ideals-as-submodules-of-the-regular-module"
+  ],
+  "contracts": {
+    "lem-linear-map-elementary-properties": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is ",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-vector-space-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). For all\n$\\lambda \\in F$ and $v \\in V$:\n\n1. $0_F v = 0_V$;\n2. $\\lambda 0_V = 0_V$;\n3. $(-\\lambda)v = -(\\lambda v)$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]), with additive identity $0_F$, multiplicative\nidentity $1_F$, and the field axioms as stated there. A **vector space over $F$**,\nalso called an **$F$-vector space**, consists of\n\n- a set $V$, whose elements are called **vecto",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-linear-kernel-image-and-injectivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear s",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-linear-subspace-criterion",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$W \\subseteq V$ be **nonempty**. Then $W$ is a linear subspace of $V$\n([[def-linear-subspace]]) **if and o",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is ",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-linear-map-elementary-properties",
+          "source_section": "Statement",
+          "quote": "If $T:V\\to W$ is linear, then $T(0_V)=0_W$, $T(-v)=-T(v)$, and\n$T(u-v)=T(u)-T(v)$ for all $u,v\\in V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets and let $f : A \\to B$ be a function.\n\n- $f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$, for all\n  $x, y \\in A$.\n- $f$ is **surjective** ",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Derive the stated conclusion of step 1.3 from its cited inputs.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Derive the stated conclusion of step 1.4 from its cited inputs.",
+          "step": "1.4",
+          "inputs": [
+            "L3",
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "lem-kernel-basis-extension-gives-image-basis": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-independent-set-is-no-larger-than-a-finite-spanning-set",
+          "source_section": "Statement",
+          "quote": "is finite ([[def-countable]])",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "A subset $B \\subseteq V$ is a **basis of $V$** when",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-monoid-finite-product",
+          "source_section": "Definition",
+          "quote": "$$P_g(0) = e, \\qquad P_g(\\sigma(n)) = P_g(n) \\cdot g_n \\quad (n \\in \\mathbb{N}),$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-nat-addition",
+          "source_section": "Definition",
+          "quote": "$$m + 0 = m, \\qquad m + \\sigma(n) = \\sigma(m + n).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "$$T(au+bv)=aT(u)+bT(v)$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-vector-space-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "2. $\\lambda 0_V = 0_V$;",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "1. $B$ is finite;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is\n   finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "- $f$ is **bijective** if it is both injective and surjective.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[th",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "kernel-basis-extension",
+          "claim": "Choose a finite basis of the kernel, extend it to a basis of the domain, and isolate its finite complement.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L7",
+            "given"
+          ]
+        },
+        {
+          "id": "finite-sum-linearity",
+          "claim": "Prove that a linear map preserves finite linear combinations and that spliced sums split into their two blocks.",
+          "step": "1.2",
+          "inputs": [
+            "L5",
+            "L6",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "ordered-splice",
+          "claim": "Enumerate the kernel basis and its complement and splice them into an ordered basis of the domain.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L5",
+            "L7",
+            "L8",
+            "construct"
+          ]
+        },
+        {
+          "id": "image-spanning",
+          "claim": "Apply the map to domain coordinates and delete the kernel block to prove that the complement images span the image.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "L1",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "image-independence",
+          "claim": "Lift a vanishing image relation to the kernel and use independence of the spliced domain basis.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "L1",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "basis-and-bijection",
+          "claim": "Combine spanning and independence and identify the restriction on the complement as a bijection onto the image basis.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "L3",
+            "L8"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "claim": "Collect existence and the complement properties to conclude the lemma.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and zero-space paragraph in Remarks identify all four relevant bases and complements with the empty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and zero-space paragraph in Remarks check the zero-dimensional domain and zero image."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1--4.1 allow either basis block to have cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1--4.1 include both the zero map, where the kernel is all of the domain, and an injective map, where the kernel basis is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1--4.1 cover the endpoint kernels $\\{0_V\\}$ and $V$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses only the finite-dimensional basis-extension theorem; the final Remarks explicitly records that no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Alpha should refute the coordinate-splicing and image-independence steps against the finite-sum conventions."
+      }
+    },
+    "thm-rank-nullity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "$$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad\n  \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-kernel-basis-extension-gives-image-basis",
+          "source_section": "Statement",
+          "quote": "Then $C$ is finite, the restriction\n\n$$T|_C:C\\longrightarrow T[C]$$\n\nis a bijection, and $T[C]$ is a basis of $\\operatorname{im}T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "bijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cardinality-split",
+          "claim": "Split the domain basis into the kernel basis and its complement and transport the complement size to the image basis.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "dimension-formula",
+          "claim": "Translate the three basis cardinalities into dimension, nullity, and rank.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "equivalent-form",
+          "claim": "Unfold rank and nullity to obtain the kernel-image dimension formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and first Remarks bullet check the empty bases of the zero-dimensional domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and first Remarks bullet check the formula $0=0+0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1--2.1 apply unchanged when the domain dimension, rank, or nullity is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1--2.1 include the zero map and maps into the zero space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes the endpoint complements $C=\\varnothing$ and $K=\\varnothing$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 cites the finite basis construction isolated in L2; no new family of choices is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The equivalent display is definitional, not a biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The equivalent display is definitional, not a biconditional assertion."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Alpha should verify that all three dimensions are defined and that no finite-dimensional codomain hypothesis entered."
+      }
+    },
+    "ex-forward-shift-injective-not-surjective": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-function-space",
+          "source_section": "Definition",
+          "quote": "$$(f + g)(x) \\;:=\\; f(x) + g(x), \\qquad (\\lambda f)(x) \\;:=\\; \\lambda\\, f(x), \\qquad 0_{F^{X}}(x) \\;:=\\; 0_F,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "$$T(au+bv)=aT(u)+bT(v)$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "- $f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$, for all\n  $x, y \\in A$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "two distinguished elements $0 \\ne 1$ of $F$",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-nat-nonzero-is-successor",
+          "source_section": "Statement",
+          "quote": "Equivalently, every natural number is either $0$ or a successor.",
+          "uses": [
+            "1.1",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "shift-definition",
+          "claim": "Use the zero/successor dichotomy to define every coordinate of the forward shift.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "construct"
+          ]
+        },
+        {
+          "id": "linearity",
+          "claim": "Check the linearity identity separately at coordinate zero and at successor coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "injectivity",
+          "claim": "Recover every input coordinate from the next output coordinate.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "failure-of-surjectivity",
+          "claim": "Exhibit the unit vector at coordinate zero, which no shifted sequence can equal.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "claim": "Combine linearity, injectivity, and failure of surjectivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The index set is $\\mathbb N$, which contains zero; no empty family is quantified over."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.3 explicitly use output coordinate zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.3 uses the field element $1_F$ and its distinction from zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A field is required to satisfy $0_F\\ne1_F$, so the one-element scalar structure is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1--2.3 split the natural coordinates exhaustively into zero and successors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness sequence and all coordinates are explicitly defined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a conjunction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a conjunction, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Routine example; Alpha should verify the ambient space is all sequences and that coordinate zero is outside the image."
+      }
+    },
+    "lem-module-elementary-consequences": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\qu",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-ring",
+          "source_section": "Definition",
+          "quote": "$(R, +, 0)$ is an abelian group ([[def-group]])",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-group-cancellation",
+          "source_section": "Statement",
+          "quote": "if $gx = gy$ then $x = y$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "L1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "lem-submodule-criterion-sums-and-intersections": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\qu",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-module-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "For every left $R$-module $M$, scalar $r\\in R$, and element $m\\in M$,\n\n$$0_Rm=0_M,\\qquad r0_M=0_M,\\qquad (-r)m=-(rm),\\qquad r(-m)=-(rm).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-subgroup-criterion",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$ and let $H \\subseteq G$ be\nnonempty. Then $H$ is a subgroup of $G$ ([[def-subgroup]]) **if and only if**\n\n$$g h^{-1} \\in H \\qqu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-submodule",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a left $R$-module. A subset $N\\subseteq M$ is a **submodule** when\nit is a subgroup of the additive group of $M$ and is closed under scalars:\n\n$$r\\in R,\\ n\\in N\\quad\\Lon",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Derive the stated conclusion of step 1.3 from its cited inputs.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "1.3",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Derive the stated conclusion of step 4.1 from its cited inputs.",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-module-kernel-image-and-injectivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-module-homomorphism-kernel-image-and-cokernel",
+          "source_section": "Definition",
+          "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-submodule-criterion-sums-and-intersections",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a left $R$-module. A nonempty subset $S\\subseteq M$ is a submodule\nif and only if\n\n$$ru+v\\in S\\qquad(r\\in R, u,v\\in S).$$\n\nConsequently, the intersection of every nonemp",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-module-homomorphism-kernel-image-and-cokernel",
+          "source_section": "Definition",
+          "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-group-homomorphism-basic-properties",
+          "source_section": "Statement",
+          "quote": "Let $G$ and $G'$ be groups with identities $e$ and $e'$, and let $f : G \\to G'$\nbe a group homomorphism ([[def-group-homomorphism]]), so $f(xy) = f(x)f(y)$ for\nall $x, y \\in G$. Th",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-group-homomorphism-injective-iff-trivial-kernel",
+          "source_section": "Statement",
+          "quote": "A group homomorphism is injective if and only if its kernel is trivial.\n\nFor a group homomorphism $f:G\\to H$, $f$ is injective exactly when\n$\\ker f=\\{e_G\\}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-module-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "For every left $R$-module $M$, scalar $r\\in R$, and element $m\\in M$,\n\n$$0_Rm=0_M,\\qquad r0_M=0_M,\\qquad (-r)m=-(rm),\\qquad r(-m)=-(rm).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Derive the stated conclusion of step 1.3 from its cited inputs.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-quotient-module-laws": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "Let $H\\le G$ and let $a,b,x\\in G$. Then\n\n$$x\\in aH\\iff a^{-1}x\\in H,$$\n\nand\n\n$$aH=bH\\iff a^{-1}b\\in H.$$\n\nThe corresponding right-coset criterion is $Ha=Hb$ if and only if\n$ab^{-1}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-submodule",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a left $R$-module. A subset $N\\subseteq M$ is a **submodule** when\nit is a subgroup of the additive group of $M$ and is closed under scalars:\n\n$$r\\in R,\\ n\\in N\\quad\\Lon",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-quotient-group-laws",
+          "source_section": "Statement",
+          "quote": "Let $N\\mathrel{\\trianglelefteq}G$. The left cosets form a group $G/N$ under\n\n$$ (gN)(hN)=ghN.$$\n\nIts identity is $N=eN$, and the inverse of $gN$ is $g^{-1}N$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\qu",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-module-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "For every left $R$-module $M$, scalar $r\\in R$, and element $m\\in M$,\n\n$$0_Rm=0_M,\\qquad r0_M=0_M,\\qquad (-r)m=-(rm),\\qquad r(-m)=-(rm).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Derive the stated conclusion of step 1.3 from its cited inputs.",
+          "step": "1.3",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.3",
+            "1.2",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "prop-canonical-quotient-module-map": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-quotient-module-laws",
+          "source_section": "Statement",
+          "quote": "Let $N\\le M$ be a submodule of a left $R$-module. The rule\n\n$$r(m+N):=rm+N$$\n\nis independent of the representative $m+N$ and, together with the additive\nquotient group, makes $M/N$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-canonical-quotient-map",
+          "source_section": "Statement",
+          "quote": "Let $N\\mathrel{\\trianglelefteq}G$. The canonical projection\n\n$$\\pi:G\\longrightarrow G/N,\\qquad \\pi(g):=gN,$$\n\nis a surjective group homomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-module-homomorphism-kernel-image-and-cokernel",
+          "source_section": "Definition",
+          "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "Let $H\\le G$ and let $a,b,x\\in G$. Then\n\n$$x\\in aH\\iff a^{-1}x\\in H,$$\n\nand\n\n$$aH=bH\\iff a^{-1}b\\in H.$$\n\nThe corresponding right-coset criterion is $Ha=Hb$ if and only if\n$ab^{-1}",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-submodule",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a left $R$-module. A subset $N\\subseteq M$ is a **submodule** when\nit is a subgroup of the additive group of $M$ and is closed under scalars:",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Derive the stated conclusion of step 1.2 from its cited inputs.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Derive the stated conclusion of step 1.3 from its cited inputs.",
+          "step": "1.3",
+          "inputs": [
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-quotient-module-universal-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-canonical-quotient-module-map",
+          "source_section": "Statement",
+          "quote": "For a submodule $N\\le M$, the canonical map\n\n$$\\pi:M\\longrightarrow M/N,\\qquad \\pi(m):=m+N,$$\n\nis a surjective $R$-module homomorphism and has kernel $N$. Hence every\nsubmodule is ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.\n\nIf $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and\n$N\\subseteq\\ker f$, th",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-module-homomorphism-kernel-image-and-cokernel",
+          "source_section": "Definition",
+          "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Derive the stated conclusion of step 4.1 from its cited inputs.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-first-isomorphism-theorem-modules": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-module-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For an $R$-module homomorphism $f:M\\to N$, both $\\ker f$ and\n$\\operatorname{im}f$ are submodules. Moreover,\n\n$$f\\text{ is injective}\\quad\\Longleftrightarrow\\quad\\ker f=\\{0_M\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quotient-module-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $f:M\\to P$ be a module homomorphism and let $N\\le M$ satisfy\n$N\\subseteq\\ker f$. There is a unique module homomorphism\n\n$$\\bar f:M/N\\longrightarrow P$$\n\nsuch that $\\bar f(m+N)=",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-module-homomorphism-kernel-image-and-cokernel",
+          "source_section": "Definition",
+          "quote": "For left $R$-modules $M,N$, a function $f:M\\to N$ is an **$R$-module\nhomomorphism** if\n\n$$f(m+m')=f(m)+f(m')\\quad\\text{and}\\quad f(rm)=rf(m)$$\n\nfor all $m,m'\\in M$ and $r\\in R$. It",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Derive the stated conclusion of step 2.2 from its cited inputs.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Derive the stated conclusion of step 4.1 from its cited inputs.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "ex-integers-modulo-n-as-a-z-module": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-addition-and-multiplication-modulo-n",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, including $n=0$ and $n=1$. For classes in\n$\\mathbb Z/n$ ([[def-integers-modulo-n]]) define\n\n$$[a]_n+[b]_n:=[a+b]_n,\\qquad [a]_n[b]_n:=[ab]_n.$$\n\nThese are bina",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-int-comm-ring",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of [[def-int-operations]] is\na commutative ring with multiplicative identity, in which every element has the\nadditive inverse $-[",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\qu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb Z/n,+,[0]_n)$ is an abelian group",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Derive the stated conclusion of step 1.1 from its cited inputs.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derive the stated conclusion of step 2.1 from its cited inputs.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Derive the stated conclusion of step 3.1 from its cited inputs.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the permitted empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover the zero case when it is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 cover singleton or unit cases when they are permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 retain the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or limiting-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "ex-ideals-as-submodules-of-the-regular-module": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-submodule",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a left $R$-module. A subset $N\\subseteq M$ is a **submodule** when\nit is a subgroup of the additive group of $M$ and is closed under scalars:",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-left-right-and-two-sided-ideal",
+          "source_section": "Definition",
+          "quote": "An additive subgroup $I\\le(R,+)$ is a **left ideal** when\n$r i\\in I$ for every $r\\in R$ and $i\\in I$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-ring",
+          "source_section": "Definition",
+          "quote": "- **(R3)** multiplication distributes over addition **on both sides**: for all\n  $x, y, z \\in R$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "regular-module",
+          "claim": "Verify the left-module axioms for the ring acting on itself by multiplication.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "ideal-to-submodule",
+          "claim": "Read the additive-subgroup and left-absorption clauses as the submodule conditions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "submodule-to-ideal",
+          "claim": "Read scalar closure in the regular module as left-ideal absorption.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "equivalence",
+          "claim": "Combine the two implications.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A ring and every submodule contain an additive identity, so an empty carrier or empty candidate is not in scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1--3.1 remain valid for the zero ring and its zero regular module."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 explicitly verifies the unital axiom $1_Rx=x$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1--3.1 include the one-element zero ring, which the library permits as a ring."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1--3.1 apply to both endpoint left ideals $\\{0_R\\}$ and $R$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice or representative selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves left ideal implies regular-submodule."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.2 proves regular-submodule implies left ideal."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Routine dictionary example; Alpha should verify handedness is consistently left throughout."
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+---
+page: graph-colouring-examples
+title: "Graph Colouring — Examples"
+status: draft
+items: []
+examples: [ex-chromatic-number-of-a-complete-graph,
+           cex-greedy-order-on-p-four]
+---

@@ -1,0 +1,1185 @@
+{
+  "version": 1,
+  "level": "frontier-9",
+  "scope": [
+    "lem-greedy-colouring-bound",
+    "thm-clique-independence-chromatic-bounds",
+    "ex-chromatic-number-of-a-complete-graph",
+    "cex-greedy-order-on-p-four",
+    "thm-fundamental-group-laws",
+    "thm-induced-fundamental-group-map-functoriality",
+    "thm-convex-subsets-have-trivial-fundamental-group",
+    "ex-fundamental-group-of-the-unit-interval"
+  ],
+  "contracts": {
+    "lem-greedy-colouring-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let $k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function $$c:V\\longrightarrow k$$ such that $c(",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a graph ([[def-finite-simple-graph]]). Distinct vertices $u,v$ are **adjacent**, or **neighbours**, when $\\{u,v\\}\\in E$. A vertex $v$ and an edge $e$ are **inciden",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-pigeonhole",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N}$ be the von Neumann naturals, with $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $<$ be the order of [[def-nat-order]], so tha",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "\nEvery nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "\nLet $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-nat-trichotomy",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Available colours remain after earlier neighbours are excluded.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Introduce the induction property and verify its empty base case.",
+          "step": "1.2",
+          "inputs": [
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Extend the unique greedy prefix by its uniquely least available colour.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Inductively obtain a greedy colouring of every vertex.",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The greedy colouring is proper.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The proper colouring bounds the chromatic number.",
+          "step": "5.1",
+          "inputs": [
+            "4.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes a nonnull graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers maximum degree zero and leaves one available colour."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the colouring for a one-vertex graph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include nonnull edgeless graphs with maximum degree zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting-endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the available-colour set nonempty and step 2.1 takes its least element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-clique-independence-chromatic-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let $k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function $$c:V\\longrightarrow k$$ such that $c(",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-clique-and-independence-numbers",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph. A subset $S\\subseteq V$ is **independent**, or **stable**, when no two distinct elements of $S$ are adjacent. A subset $K\\subseteq V$ is a *",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ ([[def-finite-cardinality]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $K$ is a clique, then [L1] makes $c|_K$ injective into the $\\chi(G)$-element colour set, so $|K|\\leq\\chi(G)$; maximizing over cliques gives $\\omega(G)\\leq\\chi(G)$. [L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each colour class $C_j$ is independent, since two vertices in it have the same colour and therefore cannot be adjacent by [L1]; hence $|C_j|\\leq\\alpha(G)$ by [L2]. [L1, L2]",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The colour classes are pairwise disjoint and have union $V$, so [L3] and step 1.2 give $|V|=\\sum_{j\\in\\chi(G)}|C_j|\\leq\\sum_{j\\in\\chi(G)}\\alpha(G)=\\chi(G)\\alpha(G)$. [step 1.2, L3]",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2",
+            "step 1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 prove the two claimed bounds, including the empty family of colour classes when $V=\\varnothing$. [step 1.1, step 2.1] ∎",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly includes the null graph, and step 3.1 retains the empty colour-class family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement records that every displayed quantity is zero for the null graph."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 apply without change to singleton graphs and singleton colour classes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes edgeless graphs, whose colour classes are independent."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting-endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains inequalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains inequalities, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "ex-chromatic-number-of-a-complete-graph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and the **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element labelled set, these are",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let $k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function $$c:V\\longrightarrow k$$ such that $c(",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In a proper colouring of $K_n$, [L1] and [L2] force all vertices to receive distinct colours, so at least $n$ colours are required; this is also true at $n=0$, where the assertion is vacuous. [L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The identity function $n\\to n$ is a proper $n$-colouring because distinct vertices receive distinct values. [L1, L2]",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The lower bound in step 1.1 and the colouring in step 1.2 give $\\chi(K_n)=n$. [step 1.1, step 1.2, L2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example explicitly includes n=0, which steps 1.1 and 1.2 verify."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 names the vacuous n=0 lower bound and step 1.2 supplies the empty colouring."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 apply to K_1 and give one required and sufficient colour."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example includes the edgeless complete graphs K_0 and K_1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting-endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The colouring in step 1.2 is the explicit identity function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states an equality, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "cex-greedy-order-on-p-four": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "On a finite vertex set $V$, the **empty graph** has edge set $\\varnothing$ and the **complete graph** $K_V$ has edge set $[V]^2$. When $V$ is an $n$-element labelled set, these are",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-greedy-colouring-bound",
+          "source_section": "Statement",
+          "quote": "Let $G=(V,E)$ be a nonnull finite simple graph. Then $$\\chi(G)\\leq\\Delta(G)+1.$$ More precisely, after the vertices are put in any finite order, assigning to each vertex the least ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E)$ be a finite simple graph ([[def-finite-simple-graph]]) and let $k\\in\\mathbb N$. A **proper $k$-vertex-colouring** is a function $$c:V\\longrightarrow k$$ such that $c(",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the displayed order, vertices $0$ and $3$ are nonadjacent and both receive colour $0$; vertex $1$ is adjacent to $0$ and receives colour $1$; vertex $2$ is adjacent to $3$ of colour $0$ and to $1$ of colour $1$, so it receives colour $2$. Thus greedy uses three colours. [L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The assignment $0,2\\mapsto0$ and $1,3\\mapsto1$ is a proper $2$-colouring, while the edge $\\{0,1\\}$ rules out a $1$-colouring. Hence $\\chi(P_4)=2$. [L1, L3]",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 show that the number of colours used by greedy colouring depends on the vertex order and can exceed the chromatic number. [step 1.1, step 1.2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Counterexample fixes the four-vertex graph P_4."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Counterexample fixes four vertices and two or three colours."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Counterexample fixes the nontrivial path P_4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 explicitly compare the nonoptimal greedy output with an optimal colouring."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting-endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The least-available rule and vertex order are explicit in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Counterexample is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Counterexample is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-fundamental-group-laws": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$** is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$ ([[def-path-connected]]). Two based loops are ",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "Throughout, $I := [0,1] = \\{\\, t \\in \\mathbb{R} : 0 \\le t \\le 1 \\,\\}$ ([[def-interval]]) carries the subspace topology inherited from $\\mathbb{R}$ with its usual topology ([[def-su",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-homotopy-relative-and-path-homotopy",
+          "source_section": "Definition",
+          "quote": "Write $I=[0,1]$ with its usual subspace topology, as in [[def-path-connected]]. Let $X$ and $Y$ be topological spaces, and let $f,g:X\\to Y$ be continuous maps ([[def-continuous-map",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let $P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$ ([[def-product-topology]]). Then:",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "**Composites.** If $f : X \\to Y$ and $g : Y \\to Z$ are continuous",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace topology ([[def-subspace-topology-top]]). Then: 1. **Composites.** If $f : X \\to Y$ and $g : Y \\to ",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every element is invertible ([[def-invertible-element]]). Written out, a group is a set $G$ with a binary ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-straight-line-homotopies-are-continuous",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. A subset $C\\subseteq\\mathbb R^n$ is called **convex** here when",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Paste the endpoint-fixed homotopies of the two factors to establish well-definedness of concatenation.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Use the straight-line homotopy in the convex interval and composition to justify endpoint-fixing reparametrisation.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Paste the explicit contraction homotopies to obtain inverses represented by reversed loops.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use a continuous piecewise-affine reparametrisation to establish associativity on classes.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Use endpoint-fixing reparametrisations to establish the two-sided constant-loop identity.",
+          "step": "2.2",
+          "inputs": [
+            "1.2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Collect the operation, associativity, identity and inverse results under the group axioms.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "L7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A pointed space in the Statement has a specified basepoint and is therefore nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero-parameter boundary occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 1.3 include the constant-loop and singleton-space cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 explicitly handle constant loops and unit laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2 and 1.3 explicitly keep both path endpoints fixed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All homotopies and reparametrisations are given by explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-induced-fundamental-group-map-functoriality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous and let $x_0\\in X$. Composition sends a loop $\\alpha$ at $x_0$ to the loop $f\\circ\\alpha$ at $f(x_0)$. The proposed **induced homomorphism** is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-composition-respects-homotopy",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to Y$ be continuous and suppose $f\\simeq_A g$ for a subspace $A\\subseteq X$. 1. If $u:W\\to X$ is continuous, $B\\subseteq W$, and $u[B]\\subseteq A$, then $f\\circ u\\simeq_",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$** is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$ ([[def-path-connected]]). Two based loops are ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "Let $(M,\\cdot,e)$ and $(M',\\cdot',e')$ be monoids ([[def-semigroup-and-monoid]]). A **monoid homomorphism** from $M$ to $M'$ is a function $f : M \\to M'$ such that - **(H1)** $f(x ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "\nFor every pointed topological space $(X,x_0)$, the product",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\alpha_0$ and $\\alpha_1$ are endpoint-homotopic, postcomposing their homotopy by $f$ gives an endpoint-homotopy from $f\\circ\\alpha_0$ to $f\\circ\\alpha_1$ by [L2]; hence the formula in [L1] is independent of the representative. [L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The concatenation formulas give the literal equality $f\\circ(\\alpha*\\beta)=(f\\circ\\alpha)*(f\\circ\\beta)$, so $f_*([\\alpha][\\beta])=f_*([\\alpha])f_*([\\beta])$; thus $f_*$ is a group homomorphism. [L1, L3, L4]",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For every loop $\\alpha$, $\\operatorname{id}\\circ\\alpha=\\alpha$ and $(g\\circ f)\\circ\\alpha=g\\circ(f\\circ\\alpha)$, which proves the identity and composition formulas on every loop class. [L1]",
+          "step": "1.3",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "If $H$ is a homotopy from $f_0$ to $f_1$ fixing $x_0$, precomposition by a based loop $\\alpha$ gives an endpoint-fixed path homotopy from $f_0\\circ\\alpha$ to $f_1\\circ\\alpha$ by [L2], so $(f_0)_*([\\alpha])=(f_1)_*([\\alpha])$. [L1, L2]",
+          "step": "1.4",
+          "inputs": [
+            "L2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1--1.4 prove well-definedness, the homomorphism law, functoriality and based-homotopy invariance. [step 1.1, step 1.2, step 1.3, step 1.4] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns pointed spaces, each with a specified basepoint."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero-parameter boundary occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 verifies the identity map and therefore includes one-element fundamental groups."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.4 includes constant based homotopies and constant loop representatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.4 explicitly use endpoint-fixed path homotopies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The induced map and all homotopies are explicit; no selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "thm-convex-subsets-have-trivial-fundamental-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-straight-line-homotopies-are-continuous",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. A subset $C\\subseteq\\mathbb R^n$ is called **convex** here when $$u,v\\in C,\\ t\\in[0,1]\\quad\\Longrightarrow\\quad(1-t)u+tv\\in C.$$ If $X$ is a topological space and $f,g",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-contractible-spaces-are-path-connected",
+          "source_section": "Statement",
+          "quote": "Every nonempty contractible topological space is path-connected.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-convex-subsets-of-rn-are-contractible",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Every nonempty convex subset $C\\subseteq\\mathbb R^n$, with its Euclidean subspace topology, is contractible. More precisely, for each $c\\in C$ the formula $$H(x,t)=(1-",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$** is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$ ([[def-path-connected]]). Two based loops are ",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product $$[\\alpha][\\beta]=[\\alpha*\\beta]$$ is well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of the con",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-simply-connected",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **simply connected** when it is nonempty and path-connected ([[def-path-connected]]) and, for every $x_0\\in X$, the group $\\pi_1(X,x_0)$ has exactly one ",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [L1] to the maps $\\alpha:I\\to C$ and $c_{x_0}:I\\to C$; it gives the displayed continuous homotopy $H(s,t)=(1-t)\\alpha(s)+t x_0$. [L1]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\alpha(0)=\\alpha(1)=x_0$, one has $H(0,t)=x_0=H(1,t)$ for every $t$, so this homotopy is relative to the endpoints. [step 1.1, L3]",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1 and 2.1 show that every loop at every basepoint represents the constant-loop class, so each fundamental group has one element; [L2] supplies nonempty path-connectedness. [step 1.1, step 2.1, L2, L3]",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore $C$ is simply connected by [L4]. [step 3.1, L4] ∎",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes C is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes n is at least one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes singleton convex subsets and their one loop class."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 include constant loops and singleton convex sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes H(0,t)=H(1,t)=x_0 for every t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The basepoint is given and the straight-line homotopy is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    },
+    "ex-fundamental-group-of-the-unit-interval": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]). A subset $I \\subseteq \\mathbb{R}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-convex-subsets-have-trivial-fundamental-group",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$ and let $C\\subseteq\\mathbb R^n$ be nonempty and convex, with its Euclidean subspace topology. Then $C$ is simply connected. More explicitly, for every basepoint $x_0\\i",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$** is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$ ([[def-path-connected]]). Two based loops are ",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the interval satisfies the hypotheses of [L2], so the displayed formula is an endpoint-fixed homotopy from $\\alpha$ to the constant loop at $x_0$. [L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus every class in $\\pi_1(I,x_0)$ equals the constant-loop class, and the group has exactly one element. [step 1.1, L3] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes the nonempty unit interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example includes the endpoint basepoint x_0=0, and step 1.1 applies to every x_0 in I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example includes the endpoint basepoint x_0=1, and step 1.1 applies to every x_0 in I."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the constant loop class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 supplies an endpoint-fixed homotopy for every basepoint in the closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The basepoint and contraction formula are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "",
+        "notes": "Awaiting independent Step-6 review."
+      }
+    }
+  }
+}
