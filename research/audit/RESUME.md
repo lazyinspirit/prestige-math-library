@@ -59,6 +59,26 @@ bottom-up, batches = category × dependency level.
   `thm-reals-dedekind-field`; `ex-euclidean-algorithm-on-consecutive-
   fibonacci-numbers`; `thm-vandermonde-identity`; `lem-cut-reciprocal`;
   3 topology decay items).
+  **Also for A10 / wave-1 process (evidence in wave0-alpha.md):**
+  (a) LANE PRECISION DIFFERS SHARPLY — DeepSeek 2/27 rejections wrong (7%)
+  and it found 6 of the 7 fatals; Sonnet 14/33 wrong (42%), dominant failure
+  being `reject` recorded while its own reason text concludes *keep*. That
+  is verdict extraction, not reasoning — Sonnet's prose was often the
+  sharper of the two, and it alone caught the gcd circularity. Fixing the
+  extraction path is the highest-value judge improvement available.
+  (b) STATEMENT-VS-PROOF OVERCLAIM COVERAGE — four confirmed in wave 0; the
+  judges caught three and missed `lem-rat-embeds-dense` ENTIRELY. It
+  surfaced only from a corpus-wide grep during blast-radius closure; no
+  reading tier found it either. Consider a mechanical wave-1 gate: grep
+  title/Statement for structural claims ("subfield", "embedding of ordered
+  fields", "isomorphism") whose proof never mentions the matching structure.
+  (c) ALPHA'S TWO PROCESS MISSES, both caught by its readers rather than by
+  Alpha itself: it skipped consumer closure on its OWN interface-narrowing
+  repair (three consumer texts kept asserting a claim it had just
+  adjudicated fatal), and its A6 gate sweep omitted `prosecheck` — the very
+  gate for the claims-about-other-files class its repairs were in. Wave 1:
+  make consumer closure and the full gate list explicit in the Alpha brief's
+  self-repair path.
 
 - **(historical) A0–A4 detail:** All 8 batches
   through A1/A2 (findings+ledgers+contracts on disk), A3 adjudicated
