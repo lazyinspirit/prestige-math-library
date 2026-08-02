@@ -19,6 +19,12 @@ short: "post-office metric"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

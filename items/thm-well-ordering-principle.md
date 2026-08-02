@@ -14,6 +14,12 @@ short: "every nonempty $S\\subseteq\\mathbb N$ has a least element"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

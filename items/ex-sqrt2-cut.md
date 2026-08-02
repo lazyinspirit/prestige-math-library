@@ -1,18 +1,23 @@
 ---
 id: ex-sqrt2-cut
 kind: example
-title: "The cut $S = \\{q : q<0 \\text{ or } q^2<2\\}$ is $\\sqrt{2}$"
+title: "The cut $S = \\{q : q<0 \\text{ or } q^2<2\\}$ is an irrational real number"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-dedekind-cut, def-real-dedekind, thm-rat-ordered-field, fs-sqrt2-rational]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-25
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -33,8 +38,8 @@ pipeline_run: null
 
 The set $S := \{ q \in \mathbb{Q} : q < 0 \text{ or } q^2 < 2 \}$ is a Dedekind
 cut ([[def-dedekind-cut]]), hence a real number ([[def-real-dedekind]]), yet no
-rational lies "at its boundary": it is the real number $\sqrt{2}$ that
-$\mathbb{Q}$ lacks. It is the canonical witness that cuts capture limits missing
+rational lies "at its boundary": it is the cut that names $\sqrt{2}$, the real
+number $\mathbb{Q}$ lacks. It is the canonical witness that cuts capture limits missing
 from $\mathbb{Q}$, and the standard test case for the completeness of $\mathbb{R}$.
 
 ## Facts & Assumptions
@@ -61,4 +66,4 @@ from $\mathbb{Q}$, and the standard test case for the completeness of $\mathbb{R
 
 3.1 By steps 1.1, 1.2 and 2.1, $S$ satisfies (C1)–(C3); it is a Dedekind cut ([[def-dedekind-cut]]), i.e. a real number ([[def-real-dedekind]]). [step 1.1, step 1.2, step 2.1]
 
-4.1 Finally $S \ne p^\ast$ for every $p \in \mathbb{Q}$: were $S = p^\ast = \{ r : r < p \}$, then $p \notin S$ would give $p > 0$ and $p^2 \ge 2$, while $p^2 = 2$ is impossible by [L2], so $p^2 > 2$; as $p > 0$ we have $p + 2 > 0$, and then $s := \dfrac{2p+2}{p+2}$ satisfies $0 < s < p$ and $s^2 > 2$, so $s \notin S$, yet $s < p$ puts $s \in p^\ast = S$, a contradiction. Thus $S$ is a cut represented by no rational: it is the real number $\sqrt{2}$ absent from $\mathbb{Q}$. [step 3.1, L2, algebra] ∎
+4.1 Finally $S \ne p^\ast$ for every $p \in \mathbb{Q}$: were $S = p^\ast = \{ r : r < p \}$, then $p \notin S$ would give $p > 0$ and $p^2 \ge 2$, while $p^2 = 2$ is impossible by [L2], so $p^2 > 2$; as $p > 0$ we have $p + 2 > 0$, and then $s := \dfrac{2p+2}{p+2}$ satisfies $0 < s < p$ and $s^2 > 2$, so $s \notin S$, yet $s < p$ puts $s \in p^\ast = S$, a contradiction. Thus $S$ is a cut represented by no rational: it is the cut that names $\sqrt{2}$, the real number absent from $\mathbb{Q}$. [step 3.1, L2, algebra] ∎

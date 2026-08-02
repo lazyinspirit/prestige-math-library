@@ -12,6 +12,12 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -40,7 +46,7 @@ cut has an additive inverse and $(\mathbb{R}, +)$ is a group.
 
 [A1] Cut axioms (C1)–(C3), and the restatement that for $a \in A$ and $b \notin A$ one has $a < b$; the contrapositive of (C2): if $x \notin A$ and $y > x$ then $y \notin A$ ([[def-dedekind-cut]]).
 
-[A2] A nonempty set $K \subseteq \mathbb{Z}$ with $k < M$ for every $k \in K$ has a greatest element: $\{\, M - k : k \in K \,\}$ is then a nonempty set of positive integers, so it has a least element $M - n$ by "every nonempty subset $S \subseteq \mathbb{N}$ has a least element" ([[thm-well-ordering-principle]]), and that $n$ is the greatest element of $K$.
+[A2] A nonempty set $K \subseteq \mathbb{Z}$ with $k < M$ for every $k \in K$, where $M \in \mathbb{Z}$, has a greatest element: $\{\, M - k : k \in K \,\}$ is then a nonempty set of positive integers, so it has a least element $M - n$ by "every nonempty subset $S \subseteq \mathbb{N}$ has a least element" ([[thm-well-ordering-principle]]), and that $n$ is the greatest element of $K$.
 
 [L1] $\mathbb{Q}$ is Archimedean: for every rational $x$ there is a natural number $n$ with $x < n$ ([[lem-rat-archimedean]]).
 

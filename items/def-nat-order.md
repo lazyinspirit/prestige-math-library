@@ -13,7 +13,12 @@ landmark: false
 short: "$m\\le n\\iff\\exists k\\,(m+k=n)$"
 verification:
   precheck: n/a
-  audited: 2026-07-25
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -52,6 +57,7 @@ arithmetic ([[lem-nat-order-add-compatible]],
 In the von Neumann model this order coincides with membership and inclusion:
 $m \le n \iff m \subseteq n$ and $m < n \iff m \in n$, matching the picture of
 each natural number as the set $\{0, 1, \dots, n-1\}$ of its predecessors
-([[def-natural-numbers]]). The least-element property of every nonempty subset,
+([[def-natural-numbers]]). That coincidence is not proved here; it is derived
+from the additive definition above on a later page. The least-element property of every nonempty subset,
 the **well-ordering principle** ([[thm-well-ordering-principle]]), is the deepest
 consequence.

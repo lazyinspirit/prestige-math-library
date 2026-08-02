@@ -17,6 +17,12 @@ landmark: false
 short: "bounded, $\\operatorname{diam}$, $d(x,A)$"
 verification:
   precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -75,8 +81,10 @@ $$d(A,B) := \inf E(A,B).$$
 
 **Every one of the three scope restrictions is load bearing.** In this library
 $\sup$ and $\inf$ denote real numbers and are written only after existence has
-been established; the extended real line is not used for suprema, and there is
-no convention $\sup \emptyset = -\infty$ ([[rem-sup-conventions]]). Accordingly:
+been established; the extended real line is introduced on a later page and is
+not used for the suprema and infima taken here, and no convention
+$\sup \emptyset = -\infty$ is in force in this development
+([[rem-sup-conventions]]). Accordingly:
 
 - $\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**
   bounded. It is not defined for $A = \emptyset$, and it is not defined, not even

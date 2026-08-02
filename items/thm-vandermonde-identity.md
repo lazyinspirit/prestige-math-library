@@ -17,6 +17,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -56,7 +62,7 @@ coefficients are $0$ ([[def-binomial-coefficient]]).
 
 [L6] Maps ([[def-injection-surjection-bijection]], [[def-equinumerous]]): a map with a two-sided inverse is a bijection.
 
-[L7] Arithmetic: if $i + t = k$ then $t = k-i$, since $\le$ is defined additively and addition is cancellative; and $k < \sigma(k) \iff k \le k$, so $\sigma(k) = \{0,1,\dots,k\}$ ([[def-nat-order]], [[lem-nat-add-cancellative]], [[lem-nat-order-is-membership]]). The cardinalities $\lvert M\rvert = m$ and $\lvert N\rvert = n$ are not assumed here; they are computed in step 1.1.
+[L7] Arithmetic: if $i + t = k$ then $t = k-i$, since $\le$ is defined additively and addition is cancellative; and $j < \sigma(k) \iff j \le k$ for every $j \in \mathbb{N}$, so $\sigma(k) = \{0,1,\dots,k\}$ ([[def-nat-order]], [[lem-nat-add-cancellative]], [[lem-nat-order-is-membership]]). The cardinalities $\lvert M\rvert = m$ and $\lvert N\rvert = n$ are not assumed here; they are computed in step 1.1.
 
 ## Proof
 

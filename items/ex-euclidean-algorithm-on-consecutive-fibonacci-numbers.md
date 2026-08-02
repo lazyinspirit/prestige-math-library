@@ -4,6 +4,9 @@ kind: example
 title: "Consecutive Fibonacci numbers are coprime, and for every $m \\in \\mathbb{N}$ the Euclidean algorithm on $(F_{m+3}, F_{m+2})$ takes exactly $m+1$ divisions, with quotient $1$ in the first $m$ of them and quotient $2$ in the last"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-recursion, thm-induction-principle, def-natural-numbers, def-nat-addition, def-nat-order, lem-nat-discrete, thm-euclidean-algorithm, lem-gcd-euclidean-step, def-common-divisor-and-gcd, lem-gcd-basic-values, def-coprime, thm-division-algorithm-in-z, lem-nat-embeds-int, def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, def-int-order, thm-int-comm-ring, def-int-operations, def-integers]
 justified_by: []
 aliases: []

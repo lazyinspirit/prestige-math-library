@@ -4,6 +4,9 @@ kind: lemma
 title: "Null sequences are Cauchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-null-sequence, def-rational-cauchy-sequence, lem-rat-triangle, thm-rat-field, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct

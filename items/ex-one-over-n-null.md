@@ -4,6 +4,9 @@ kind: example
 title: "The sequence $1/n$ is null"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-null-sequence, lem-rat-archimedean, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct

@@ -57,5 +57,6 @@ $\mathbb{Q}$.
 
 **Destination.** $\mathbb{R}$ is a totally ordered field that is complete: every
 Cauchy sequence of reals converges to a real. Completeness is the payoff of the
-construction, and it fills the holes once and for all, since completing
-$\mathbb{R}$ by the same device yields nothing new.
+construction, and the construction cannot be iterated to gain anything further:
+[[thm-reals-cauchy-complete]] already gives every Cauchy sequence of reals a
+real limit.

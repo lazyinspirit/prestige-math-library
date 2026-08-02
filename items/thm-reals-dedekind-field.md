@@ -14,13 +14,17 @@ short: "ℝ field"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Appendix: construction of ℝ)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
-    - title: "T. Tao, Analysis I, 3rd ed."
-      url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
       url: "https://mathemanu.github.io/ConstructionofR.pdf"
     - title: "Construction of the real numbers (Wikipedia)"

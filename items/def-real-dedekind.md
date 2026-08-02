@@ -20,8 +20,6 @@ sources:
   references:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Appendix: construction of ℝ)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
-    - title: "T. Tao, Analysis I, 3rd ed."
-      url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
       url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
     - title: "Construction of the real numbers (Wikipedia)"

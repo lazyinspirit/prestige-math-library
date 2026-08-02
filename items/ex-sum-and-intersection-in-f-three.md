@@ -4,6 +4,9 @@ kind: example
 title: "Two planes in $F^{3}$ whose sum is $F^{3}$ and whose intersection is a line, computed explicitly"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sum-of-linear-subspaces, lem-intersection-of-linear-subspaces, lem-span-of-a-single-vector, def-linear-combination-and-span, def-linear-subspace, lem-linear-subspace-criterion, def-internal-direct-sum, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: []

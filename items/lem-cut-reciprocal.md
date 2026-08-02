@@ -7,19 +7,23 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-cut-multiplication, def-dedekind-cut, def-cut-order, lem-rat-archimedean, thm-rat-field, thm-well-ordering-principle]
+deps: [def-cut-multiplication, def-dedekind-cut, def-cut-order, lem-rat-archimedean, thm-rat-field, thm-rat-ordered-field, thm-well-ordering-principle]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Appendix: construction of ℝ)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
-    - title: "T. Tao, Analysis I, 3rd ed."
-      url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
       url: "https://mathemanu.github.io/ConstructionofR.pdf"
     - title: "Construction of the real numbers (Wikipedia)"
@@ -42,11 +46,11 @@ Dedekind cut with $A^{-1} > 0^{*}$, and $A \cdot A^{-1} = 1^{*}$.
 
 [L3] $A > 0^{*}$ means $A$ contains a positive rational; and every cut is a proper, downward-closed set of rationals with no greatest element ([[def-cut-order]], [[def-dedekind-cut]]).
 
-[L4] $\mathbb{Q}$ is a field: rational addition and multiplication are commutative and associative, multiplication distributes over addition, the order is compatible with the arithmetic, and every nonzero rational is invertible ([[thm-rat-field]]).
+[L4] $\mathbb{Q}$ is a field: rational addition and multiplication are commutative and associative, multiplication distributes over addition, and every nonzero rational is invertible ([[thm-rat-field]]); the order is total, $x \le y$ implies $x + z \le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$ ([[thm-rat-ordered-field]]).
 
 [L6] Every nonempty subset $S \subseteq \mathbb{N}$ has a least element: there is $\ell \in S$ with $\ell \le s$ for all $s \in S$ ([[thm-well-ordering-principle]]).
 
-[L5] Rational power growth: for a rational $y > 1$ one has $y^{n} \ge 1 + n(y-1)$ for every natural $n \ge 1$ (Bernoulli, by induction from $\mathbb{Q}$ arithmetic), and by the Archimedean property every rational is exceeded by some such power; since a cut is proper it omits a rational upper bound, so for any $a_{0} > 0$ some $a_{0} y^{n} \notin A$ ([[lem-rat-archimedean]], [[def-dedekind-cut]]).
+[L5] Rational power growth: for a rational $y > 1$ one has $y^{n} \ge 1 + n(y-1)$ for every natural $n \ge 1$, by induction from $\mathbb{Q}$ arithmetic — at $n = 1$ both sides are $y$, and if $y^{n} \ge 1 + n(y-1)$ then, multiplying by $y > 0$ and writing $y = 1 + (y-1)$, $y^{n+1} \ge (1 + (y-1))(1 + n(y-1)) = 1 + (n+1)(y-1) + n(y-1)^{2} \ge 1 + (n+1)(y-1)$ because $n(y-1)^{2} \ge 0$; and by the Archimedean property every rational is exceeded by some such power; since a cut is proper it omits a rational upper bound, so for any $a_{0} > 0$ some $a_{0} y^{n} \notin A$ ([[lem-rat-archimedean]], [[def-dedekind-cut]]).
 
 ## Proof
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "The reciprocal on the rationals is well-defined"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-rationals, def-rat-operations, thm-int-comm-ring]
 aliases: []
 landmark: false

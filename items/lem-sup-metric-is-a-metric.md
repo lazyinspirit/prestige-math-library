@@ -20,6 +20,12 @@ short: "sup metric on $\\mathcal{B}(S)$"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -93,6 +99,6 @@ $f(s)=s$ and $g(s)=0$ make $D(f,g)$ unbounded above
 
 ## Remarks
 
-- **Why the bounded functions and not all functions.** For unbounded $f$ the set $D(f,g)$ need not be bounded above and $\sup D(f,g)$ then does not exist, so $d_\infty$ would not be a function into $\mathbb{R}$ at all. Texts that write $d_\infty(f,g) = +\infty$ in that case are working in the extended real line, which this library does not use for suprema ([[rem-sup-conventions]], [[rem-metric-axiom-conventions]]).
+- **Why the bounded functions and not all functions.** For unbounded $f$ the set $D(f,g)$ need not be bounded above and $\sup D(f,g)$ then does not exist, so $d_\infty$ would not be a function into $\mathbb{R}$ at all. Texts that write $d_\infty(f,g) = +\infty$ in that case are working in the extended real line, which is introduced on a later page and is not used for the suprema taken here ([[rem-sup-conventions]], [[rem-metric-axiom-conventions]]).
 - **The supremum need not be attained**, so $d_\infty(f,g)$ is genuinely a supremum and not a maximum; the companion page carries a witness.
 - **The name "uniform metric" points at later material.** The quantified definition of uniform convergence of functions appears in [[def-pointwise-uniform-and-uniformly-cauchy-convergence]]. The later [[rem-uniform-convergence-agrees-with-the-later-uniform-topology]] records its agreement with convergence in $d_\infty$; this lemma proves only that $d_\infty$ is a metric on the stated bounded-function space.
