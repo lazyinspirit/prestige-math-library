@@ -76,9 +76,12 @@ drift:
   (`QUALITY-CONTROLS.md` §Scope). This workflow replaces guessing with an
   audited determination: every retro-tag carries an evidence class, a working
   source URL where the class requires one, and a rationale in a durable ledger.
-  Where evidence is inconclusive the tag defaults **conservatively to
-  `ai-generated`** — the label that raises scrutiny — never toward
-  `literature-derived`.
+  Uncertainty never falls toward a *sourced* label (`literature-derived` /
+  `semantic-source` require a located, verified source), and — owner amendment
+  2026-08-02 — it never falls toward `ai-generated` either: that label
+  requires a positive determination of genuine novelty (§6); a recoverable
+  restatement of established mathematics is `ai-altered`, and a genuinely
+  undecidable case escalates to Alpha instead of defaulting.
 - **Published-audit repair delegation (owner decision R1, 2026-08-02:
   delegate everything found).** The narrow
   obvious-published-dependency-repair protocol (`CLAUDE.md`) is extended,
@@ -194,8 +197,8 @@ new frontmatter labels — with an **evidence class** recorded in the ledger:
 |---|---|---|---|
 | exact statement located (same hypotheses, quantifiers, direction, conventions; cosmetic edits only) | `literature-derived` | `exact-source` | working URL added to `sources.references` |
 | no exact match, but a **semantically identical** statement located (reformulated, renotated, specialised/merged without changing content) | `ai-altered` | `semantic-source` | working URL added to `sources.references`; exact convention deltas recorded in the ledger |
-| no semantically identical statement located | `ai-generated` | `none` | full truth-risk route below |
-| Beta recognizes it as an established standard result but cannot locate a source after a real search (**owner decision D2**) | `ai-altered` **without a URL** — model-recognized standard knowledge counts as the source | `established-knowledge` | requires **Alpha's independent concurrence** that the statement is standard (Beta's recognition alone never clears it; disagreement falls back to `ai-generated`); `content-policy --audit` waives the URL requirement only for this ledger evidence class |
+| no semantically identical statement located AND Beta positively judges the claim genuinely AI-invented — a bespoke witness/example, an invented bridge claim, or a composition with no recognizable counterpart in established mathematics (owner, 2026-08-02: `ai-generated` requires this positive determination, never mere failure to find a source) | `ai-generated` | `none` | full truth-risk route below; the rationale must state why the claim is judged novel, not just unsourced |
+| Beta recognizes it as an established standard result but cannot locate a source after a real search (**owner decision D2**) | `ai-altered` **without a URL** — model-recognized standard knowledge counts as the source | `established-knowledge` | requires **Alpha's independent concurrence** that the statement is standard (Beta's recognition alone never clears it; on refusal Alpha determines the final label under the positive-determination standard below); `content-policy --audit` waives the URL requirement only for this ledger evidence class |
 | trivially true: directly and easily verifiable from its stated dependencies (the direct-corollary / checkable-witness standard) | `ai-generated` + `generation.role` where the existing role vocabulary fits | `trivial` | verification recorded in the ledger; low repair priority; still excluded from future `deps` targets by `content-policy` |
 
 `provenance.proof` is assigned independently: `literature-derived` (follows a
@@ -205,13 +208,25 @@ session-authored corpus), `not-supplied`, or `not-applicable` per kind. Per
 SCHEMA, **proof provenance never changes dependency eligibility and a repaired
 proof never establishes its Statement**.
 
-Hard rules carried over verbatim: an `ai-generated` statement is the
-truth-risk flag — on any concrete doubt Beta searches for a counterexample
-before accepting the item or a repair of it; inconclusive evidence defaults to
-`ai-generated`, never to a sourced label; every `literature-derived` /
-`ai-altered` tag requires a reader-visible working `sources.references` URL —
-with the single D2 exception above (`established-knowledge`, Alpha-concurred,
-ledger-recorded).
+Hard rules: an `ai-generated` statement is the truth-risk flag — on any
+concrete doubt Beta searches for a counterexample before accepting the item or
+a repair of it; every `literature-derived` / `ai-altered` tag requires a
+reader-visible working `sources.references` URL — with the single D2 exception
+above (`established-knowledge`, Alpha-concurred, ledger-recorded).
+
+**The `ai-generated` positive-determination standard (owner, 2026-08-02,
+supersedes the earlier inconclusive-defaults-to-`ai-generated` rule).** Beta
+tags a statement `ai-generated` only when it is **absolutely sure the claim is
+genuinely AI-invented** — not merely restated, renotated, specialised, or
+otherwise recoverably altered from an established result. A statement that is
+a recoverable restatement or alteration of established mathematics is
+`ai-altered` even when no URL surfaces (evidence `established-knowledge`,
+Alpha concurrence). When Beta genuinely cannot decide between "recoverable
+from established mathematics" and "invented", it does not default either way:
+it records the evidence and escalates the item to Alpha, who adjudicates the
+label. What never changed: uncertainty never falls toward a *sourced* label —
+`literature-derived`/`exact-source` and `semantic-source` still require an
+actually located, verified source.
 
 **Legacy `authorship` retirement (owner decision D5).** The one-axis
 `authorship` field (185 items on disk: 165 `ai-altered`, 9 `ai-generated`, 11

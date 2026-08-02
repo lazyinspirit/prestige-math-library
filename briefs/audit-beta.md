@@ -74,7 +74,7 @@ in `research/audit/wave<k>-<category>.provenance.jsonl`:
 |---|---|---|---|
 | the exact statement (same hypotheses, quantifiers, direction, conventions) | `literature-derived` | `exact-source` | working URL into `sources.references` |
 | a semantically identical statement, differently worded/notated | `ai-altered` | `semantic-source` | working URL into `sources.references`; convention deltas in the rationale |
-| nothing semantically identical | `ai-generated` | `none` | truth-risk route below |
+| nothing semantically identical AND you positively judge the claim genuinely AI-invented (bespoke witness/example, invented bridge claim, composition with no recognizable counterpart in established mathematics) | `ai-generated` | `none` | truth-risk route below; rationale must say why the claim is novel, not just unsourced |
 | you are confident it is an established standard result but no source surfaced after a real search | `ai-altered` **without URL** | `established-knowledge` | valid only after Alpha's independent concurrence (`alpha_concurred: true`); until then it is `ai-generated` |
 | trivially true: directly verifiable from its stated dependencies | `ai-generated` | `trivial` | record the verification in the rationale |
 
@@ -84,10 +84,18 @@ proof, URL), `ai-altered` (adapted from a sourced argument), `ai-generated`
 `not-applicable`. A repaired proof never establishes its Statement; proof
 provenance never changes dependency eligibility.
 
-Hard rules: inconclusive evidence defaults to `ai-generated`, never to a
-sourced label. An `ai-generated` statement is the truth-risk flag: on any
-concrete doubt, search for a counterexample before accepting the item. Every
-URL you record must return HTTP 200. Delete the legacy one-axis `authorship`
+Hard rules: **`ai-generated` requires a positive determination (owner,
+2026-08-02): tag a statement `ai-generated` only when you are absolutely sure
+it is genuinely AI-invented, never merely because a source failed to surface.**
+A recoverable restatement or alteration of an established result is
+`ai-altered` even without a URL (`established-knowledge`, Alpha concurrence).
+If you genuinely cannot decide between recoverable and invented, do not
+default either way — record the evidence and escalate the item to Alpha in
+your findings file. Uncertainty still never falls toward a *sourced* label:
+`exact-source`/`semantic-source` require a located, verified source. An
+`ai-generated` statement is the truth-risk flag: on any concrete doubt,
+search for a counterexample before accepting the item. Every URL you record
+must return HTTP 200. Delete the legacy one-axis `authorship`
 line in the same edit that writes the `provenance` block (owner decision D5).
 A pure retro-tag (frontmatter provenance/sources only, no mathematical text
 changed) does not delete `verification.judge` or the audit stamp.

@@ -239,8 +239,11 @@ banner; the public sees only `published`.
   is normative for the retro-audit of published pages. Inside audit scope it
   supersedes three standing rules by explicit owner decision: (1) legacy
   provenance IS retro-tagged, by evidence-based determination with a durable
-  per-item ledger row — inconclusive evidence defaults to `ai-generated`,
-  never toward a sourced label, and the sole URL waiver is the Alpha-concurred
+  per-item ledger row — `ai-generated` requires a positive determination of
+  genuine novelty (owner, 2026-08-02: never assign it merely because a source
+  failed to surface; a recoverable restatement of established mathematics is
+  `ai-altered`, and an undecidable case escalates to Alpha), uncertainty never
+  falls toward a sourced label, and the sole URL waiver is the Alpha-concurred
   `established-knowledge` evidence class; (2) every audit role (Audit-Beta,
   Alpha, readers, refuters) is **Opus 5 (`claude-opus-5`) at high reasoning
   effort** through the Claude runtime, and the paired judges are DeepSeek V4

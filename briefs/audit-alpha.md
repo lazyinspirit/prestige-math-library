@@ -48,11 +48,16 @@ a fatal defect or start a repair cycle on it.
    repair. Write `verification.verified` with `scope: published-audit` and
    `delegated_by: owner` only after the independent current reading of the
    final text.
-2. **Adjudicate D2 concurrences:** for every ledger row claiming
-   `established-knowledge`, independently decide whether the statement is a
-   standard established result. Concur (`alpha_concurred: true`) or refuse —
-   a refused row falls back to `ai-generated`. Beta's recognition alone never
-   clears it.
+2. **Adjudicate D2 concurrences and classification escalations:** for every
+   ledger row claiming `established-knowledge`, independently decide whether
+   the statement is a standard established result. Concur
+   (`alpha_concurred: true`) or refuse. Beta's recognition alone never clears
+   it. On a refusal, and on every item Beta escalated as undecidable, YOU
+   determine the final label under the positive-determination standard
+   (owner, 2026-08-02): `ai-generated` only when you are sure the claim is
+   genuinely AI-invented — a recoverable restatement or alteration of
+   established mathematics is `ai-altered`; record your determination and
+   rationale in the ledger row you amend.
 3. **Dispatch read-only proof-refuters** on every `risk-report` high/critical
    item, every `ai-generated` seed, and the largest-cone consumers. They use
    the judges' adversarial standard, inspect a cited dependency before
