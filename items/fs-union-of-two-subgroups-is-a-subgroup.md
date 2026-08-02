@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: The union of two subgroups is a subgroup"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-subgroup, lem-subgroup-criterion, lem-intersection-of-subgroups, def-group, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, thm-division-algorithm-in-z, lem-nat-embeds-int]
 justified_by: []
 aliases: []

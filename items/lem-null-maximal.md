@@ -4,6 +4,9 @@ kind: lemma
 title: "The null ideal is maximal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-cauchy-away-from-zero, thm-cauchy-ring, lem-null-ideal, lem-rat-triangle, def-null-sequence, thm-rat-ordered-field]
 aliases: []
 landmark: true
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.3"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "L. S. Krapp, Constructions of the real numbers: a set theoretical approach (Oxford, 2014)"
+      url: "https://www.math.uni-konstanz.de/~krapp/research/Constructions_of_the_real_numbers.pdf"
 pipeline_run: null
 ---
 

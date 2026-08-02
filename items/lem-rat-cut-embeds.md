@@ -4,13 +4,15 @@ kind: lemma
 title: "The rational cuts embed densely as an ordered subfield"
 status: published
 origin: session
-deps: [def-real-dedekind, def-cut-order, def-cut-addition, def-cut-multiplication, thm-rat-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, thm-rat-ordered-field]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -18,6 +20,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
 pipeline_run: null
 ---
 
@@ -34,7 +42,7 @@ rational $q$ with $A < q^{*} < B$.
 
 **Given:** Rationals $p, q$, the embedding $q \mapsto q^{*} = \{\, r \in \mathbb{Q} : r < q \,\}$, and cuts $A, B$ ([[def-real-dedekind]]).
 
-[L1] Cut structure: downward closure ($p \in A$, $q < p \Rightarrow q \in A$), the separation property ($a \in A$, $b \notin A \Rightarrow a < b$), and the absence of a greatest element ([[def-real-dedekind]]).
+[L1] Cut structure: downward closure ($p \in A$, $q < p \Rightarrow q \in A$), the separation property ($a \in A$, $b \notin A \Rightarrow a < b$), and the absence of a greatest element ([[def-dedekind-cut]]), holding of every element of $\mathbb{R}$ ([[def-real-dedekind]]).
 
 [L2] Order is inclusion: $A < B$ means $A \subsetneq B$ ([[def-cut-order]]).
 

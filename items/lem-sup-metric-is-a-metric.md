@@ -4,6 +4,9 @@ kind: lemma
 title: "The supremum metric $d_\\infty(f,g) = \\sup_x |f(x) - g(x)|$ is a metric on the bounded real-valued functions on a nonempty set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-bounded-set, lem-sup-unique, def-complete-ordered-field,
        lem-of-triangle-inequality, lem-of-abs-value, def-abs-value,
        lem-finite-set-has-max, def-max-min, lem-of-add-order, def-ordered-field,
@@ -17,11 +20,6 @@ short: "sup metric on $\\mathcal{B}(S)$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -95,17 +93,6 @@ $f(s)=s$ and $g(s)=0$ make $D(f,g)$ unbounded above
 
 ## Remarks
 
-- **Why the bounded functions and not all functions.** For unbounded $f$ the set
-  $D(f,g)$ need not be bounded above and $\sup D(f,g)$ then does not exist, so
-  $d_\infty$ would not be a function into $\mathbb{R}$ at all. Texts that write
-  $d_\infty(f,g) = +\infty$ in that case are working in the extended real line,
-  which this library does not use ([[rem-sup-conventions]],
-  [[rem-metric-axiom-conventions]]).
-- **The supremum need not be attained**, so $d_\infty(f,g)$ is genuinely a
-  supremum and not a maximum; the companion page carries a witness.
-- **The name "uniform metric" points at later material.** The quantified
-  definition of uniform convergence of functions appears in
-  [[def-pointwise-uniform-and-uniformly-cauchy-convergence]]. The later
-  [[rem-uniform-convergence-agrees-with-the-later-uniform-topology]] records
-  its agreement with convergence in $d_\infty$; this lemma proves only that
-  $d_\infty$ is a metric on the stated bounded-function space.
+- **Why the bounded functions and not all functions.** For unbounded $f$ the set $D(f,g)$ need not be bounded above and $\sup D(f,g)$ then does not exist, so $d_\infty$ would not be a function into $\mathbb{R}$ at all. Texts that write $d_\infty(f,g) = +\infty$ in that case are working in the extended real line, which this library does not use for suprema ([[rem-sup-conventions]], [[rem-metric-axiom-conventions]]).
+- **The supremum need not be attained**, so $d_\infty(f,g)$ is genuinely a supremum and not a maximum; the companion page carries a witness.
+- **The name "uniform metric" points at later material.** The quantified definition of uniform convergence of functions appears in [[def-pointwise-uniform-and-uniformly-cauchy-convergence]]. The later [[rem-uniform-convergence-agrees-with-the-later-uniform-topology]] records its agreement with convergence in $d_\infty$; this lemma proves only that $d_\infty$ is a metric on the stated bounded-function space.

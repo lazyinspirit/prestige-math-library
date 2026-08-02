@@ -4,6 +4,9 @@ kind: counterexample
 title: "$6 \\mid 4 \\cdot 9$ while $6 \\nmid 4$ and $6 \\nmid 9$: dividing a product does not force dividing a factor, and the coprimality hypothesis is what fails"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-divides-in-z, lem-divisibility-basic, lem-coprime-divides-product, def-coprime, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, thm-division-algorithm-in-z, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []
@@ -22,6 +25,8 @@ sources:
   references:
     - title: "Euclid's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
+    - title: "Coprime integers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Coprime_integers"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "If $a = qb + r$ then $a, b$ and $b, r$ have exactly the same common divisors, so $\\gcd(a,b) = \\gcd(b,r)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, thm-int-comm-ring, def-int-operations]
 justified_by: []
 aliases: []

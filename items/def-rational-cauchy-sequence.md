@@ -4,6 +4,9 @@ kind: definition
 title: "Cauchy sequence of rationals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
 landmark: true
@@ -18,6 +21,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Real number (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Real_number"
 pipeline_run: null
 ---
 

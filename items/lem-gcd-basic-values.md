@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\gcd$ is symmetric and unchanged by signs: $\\gcd(a,b) = \\gcd(b,a) = \\gcd(|a|,|b|)$; moreover $\\gcd(a,0) = |a|$, $\\gcd(a,1) = 1$, $\\gcd(a,a) = |a|$, and $\\gcd(a,b) \\ge 1$ unless $a = b = 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, lem-units-of-z, def-int-abs, lem-int-abs-properties, def-int-order, thm-int-ordered-ring, thm-int-comm-ring, def-int-operations]
 justified_by: []
 aliases: []

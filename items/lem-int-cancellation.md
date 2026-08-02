@@ -4,6 +4,9 @@ kind: lemma
 title: "The integers have no zero divisors; multiplicative cancellation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-int-operations, thm-int-comm-ring, thm-int-ordered-ring]
 aliases: []
 proof_strategy: cases
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

@@ -4,6 +4,11 @@ kind: example
 title: "All $8$ functions $3 \\to 2$, the $0$ injections $3 \\to 2$, and the $8$ subsets of a $3$-element set"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-cardinality-of-a-set-of-functions, thm-number-of-injections,
        cor-cardinality-of-the-power-set, cor-binomial-theorem-consequences,
        def-binomial-coefficient, lem-pigeonhole, def-nat-power, def-finite-cardinality,
@@ -28,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Binomial coefficient (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Binomial_coefficient"
+    - title: "Twelvefold way (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Twelvefold_way"
 pipeline_run: null
 ---
 

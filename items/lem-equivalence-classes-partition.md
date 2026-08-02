@@ -4,6 +4,9 @@ kind: lemma
 title: "The equivalence classes of an equivalence relation are nonempty, cover $A$, and are pairwise equal or disjoint; conversely every such cover arises from exactly one equivalence relation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-equivalence-relation]
 justified_by: []
 aliases: [lem-partition-theorem]

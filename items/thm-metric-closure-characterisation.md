@@ -4,6 +4,9 @@ kind: theorem
 title: "The closure of a nonempty $A$ is $\\{x : d(x,A) = 0\\}$, equals $A$ together with its limit points, and is the smallest closed superset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-interior-closure-boundary, def-metric-bounded-diameter,
        thm-metric-open-set-algebra, lem-inf-epsilon, def-metric-topology,
        def-metric-ball, def-infimum, lem-metric-nonnegativity, def-metric-space,
@@ -25,8 +28,8 @@ sources:
   references:
     - title: "Closure (topology) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Closure_(topology)"
-    - title: "Distance from a point to a set (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_set"
+    - title: "Hausdorff distance (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Hausdorff_distance"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
 pipeline_run: null

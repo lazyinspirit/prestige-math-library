@@ -4,6 +4,9 @@ kind: theorem
 title: "The integers form a commutative ring"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-integers, def-int-operations, lem-int-add-well-defined, lem-int-mul-well-defined]
 aliases: []
 proof_strategy: direct
@@ -20,7 +23,9 @@ sources:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "E. Landau, Foundations of Analysis"
-      url: "https://bookstore.ams.org/chel-79"
+      url: "https://archive.org/details/foundationsofana0000land"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

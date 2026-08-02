@@ -4,6 +4,9 @@ kind: lemma
 title: "The naturals embed in the integers"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-integers, def-int-operations, def-int-order, def-natural-numbers, def-nat-order, lem-nat-add-identity, lem-nat-mult-identity, thm-nat-linear-order]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

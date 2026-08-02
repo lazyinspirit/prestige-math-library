@@ -4,6 +4,9 @@ kind: definition
 title: "Semigroup and monoid"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-binary-operation, def-identity-element, lem-identity-unique]
 justified_by: []
 aliases: [def-monoid, def-semigroup]

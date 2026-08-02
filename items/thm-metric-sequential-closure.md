@@ -4,6 +4,9 @@ kind: theorem
 title: "A point lies in the closure of $A$ iff some sequence in $A$ converges to it, and a set is closed iff it is sequentially closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-closure-characterisation, def-metric-convergence,
        lem-metric-ball-neighbourhood-base, def-countable-choice, def-metric-topology,
        def-metric-interior-closure-boundary, thm-metric-open-set-algebra,
@@ -17,11 +20,6 @@ short: "closure = sequential closure"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -33,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
+    - title: "Sequential space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sequential_space"
 pipeline_run: null
 ---
 
@@ -60,7 +60,7 @@ closed, are choice free. This is flagged at the step that spends it.
 
 [A1] Closure: $x \in \overline{A}$ means $B(x,r) \cap A \ne \emptyset$ for every real $r > 0$ ([[def-metric-interior-closure-boundary]], [[def-metric-ball]]).
 
-[A2] Convergence in $(X,d)$: $a_k \to x$ means that for every rational $\varepsilon > 0$ there is $K$ with $d(a_k,x) < \varepsilon$ for all $k \ge K$, and it is enough to produce such a $K$ for every REAL $\varepsilon > 0$, since below any positive real lies a positive rational ([[def-metric-convergence]], [[def-real-limit]], [[lem-rat-embeds-dense]], [[lem-metric-nonnegativity]]).
+[A2] Convergence in $(X,d)$: $a_k \to x$ means that for every rational $\varepsilon > 0$ there is $K$ with $d(a_k,x) < \varepsilon$ for all $k \ge K$, and it is enough to produce such a $K$ for every REAL $\varepsilon > 0$, since below any positive real lies a positive rational ([[def-metric-convergence]], [[def-real-limit]], [[lem-rat-embeds-dense]], [[lem-metric-nonnegativity]]); and $d(u,v) = d(v,u)$ for all $u, v \in X$, which is the symmetry axiom (M2) ([[def-metric-space]]).
 
 [L1] The balls $B(x,1/n)$, $n \ge 1$, are open, contain $x$, and form a neighbourhood base at $x$: every open $U \ni x$ contains one of them ([[lem-metric-ball-neighbourhood-base]]).
 
@@ -76,7 +76,7 @@ closed, are choice free. This is flagged at the step that spends it.
 
 **Proof technique:** direct.
 
-1.1 Suppose $(a_k)$ is a sequence with $a_k \in A$ for every $k$ and $a_k \to x$, and let $r > 0$ be an arbitrary real; then there is $K$ with $d(a_k,x) < r$ for all $k \ge K$, so $a_K \in B(x,r) \cap A$ by symmetry of $d$, and since $r$ was arbitrary $x \in \overline{A}$. [A1, A2]
+1.1 Suppose $(a_k)$ is a sequence with $a_k \in A$ for every $k$ and $a_k \to x$, and let $r > 0$ be an arbitrary real; then there is $K$ with $d(a_k,x) < r$ for all $k \ge K$, so $d(x,a_K) = d(a_K,x) < r$ by the symmetry axiom (M2) of [A2] and hence $a_K \in B(x,r) \cap A$, and since $r$ was arbitrary $x \in \overline{A}$. [A1, A2]
 
 1.2 Suppose $x \in \overline{A}$; then for every $n \in \mathbb{N}$ the radius $1/(n+1)$ is a positive real and $A_n = B(x,1/(n+1)) \cap A$ is nonempty, so countable choice supplies a sequence $(a_n)$ with $a_n \in A_n \subseteq A$ for every $n$. [A1, L3, L4, choose]
 
@@ -92,19 +92,6 @@ closed, are choice free. This is flagged at the step that spends it.
 
 ## Remarks
 
-- **Where first countability enters.** Step 2.1 is the only place, and it uses
-  [[lem-metric-ball-neighbourhood-base]] to convert an arbitrary ball around $x$
-  into one of the countably many balls $B(x,1/N)$. Nothing here should be read
-  as saying that sequences describe the closure in a general topological space;
-  the tool that always works there is the net, and that is a later page.
-- **The indexing is from $0$.** The radii used are $1/(n+1)$ for $n \in \mathbb{N}$,
-  not $1/n$, precisely because $\mathbb{N}$ contains $0$ here
-  ([[def-natural-numbers]], [[def-sequence]]) and $1/0$ does not exist. A version
-  of this proof copied from a text that indexes sequences from $1$ has to be
-  reindexed, and this is the reindexing.
-- **The use of choice is not concealed.** It enters at exactly one place,
-  namely step 1.2, which makes one selection per natural number, and that is
-  what $\mathrm{AC}_\omega$ licenses ([[def-countable-choice]]). Whether some proof
-  in ZF alone reaches the same conclusion for arbitrary metric spaces is a
-  question this library does not settle; what it does is record the assumption at
-  the step that spends it.
+- **Where first countability enters.** Step 2.1 is the only place, and it uses [[lem-metric-ball-neighbourhood-base]] to convert an arbitrary ball around $x$ into one of the countably many balls $B(x,1/N)$. Nothing here should be read as saying that sequences describe the closure in a general topological space; the tool that always works there is the net, and that is a later page.
+- **The indexing is from $0$.** The radii used are $1/(n+1)$ for $n \in \mathbb{N}$, not $1/n$, precisely because $\mathbb{N}$ contains $0$ here ([[def-natural-numbers]], [[def-sequence]]) and $1/0$ does not exist. A version of this proof copied from a text that indexes sequences from $1$ has to be reindexed, and this is the reindexing.
+- **The use of choice is not concealed.** It enters at exactly one place, namely step 1.2, which makes one selection per natural number, and that is what $\mathrm{AC}_\omega$ licenses ([[def-countable-choice]]). Whether some proof in ZF alone reaches the same conclusion for arbitrary metric spaces is a question this library does not settle; what it does is record the assumption at the step that spends it.

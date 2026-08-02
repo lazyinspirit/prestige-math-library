@@ -4,6 +4,9 @@ kind: lemma
 title: "The intersection of a nonempty family of subgroups of $G$ is a subgroup of $G$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subgroup, lem-subgroup-criterion, def-group]
 justified_by: []
 aliases: []

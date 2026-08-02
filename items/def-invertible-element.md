@@ -4,6 +4,9 @@ kind: definition
 title: "Left inverse, right inverse, and invertible element of a monoid"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-semigroup-and-monoid, def-identity-element, def-binary-operation]
 justified_by: []
 aliases: [def-unit, def-invertible]

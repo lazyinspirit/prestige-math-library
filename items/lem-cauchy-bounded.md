@@ -4,6 +4,9 @@ kind: lemma
 title: "Every Cauchy sequence of rationals is bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-rational-cauchy-sequence, lem-rat-triangle]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Cauchy sequence (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$(gh)^{n} = g^{n}h^{n}$ fails without commutativity: two transpositions in $\\operatorname{Sym}(\\{1,2,3\\})$ with $(gh)^{2} \\ne g^{2}h^{2}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group-power, lem-group-power-laws, def-symmetric-group, lem-symmetric-group-is-a-group, def-group, def-identity-element, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Symmetric_group"
     - title: "Abelian group (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Abelian_group"
+    - title: "Exponentiation (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Exponentiation"
 pipeline_run: null
 ---
 

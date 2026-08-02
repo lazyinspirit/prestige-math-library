@@ -4,6 +4,9 @@ kind: definition
 title: "Topologically, uniformly and Lipschitz equivalent metrics on a set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-topology, def-metric-space, def-metric-continuity, def-metric-ball]
 justified_by: []
 aliases: [def-topologically-equivalent, def-uniformly-equivalent, def-lipschitz-equivalent]

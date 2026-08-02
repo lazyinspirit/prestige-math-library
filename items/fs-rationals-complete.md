@@ -4,7 +4,10 @@ kind: false-statement
 title: "FALSE: the rationals are complete"
 status: published
 origin: session
-deps: [fs-sqrt2-rational, def-rational-cauchy-sequence, def-null-sequence, lem-rat-archimedean, thm-rat-ordered-field, lem-rat-triangle, lem-null-ideal, lem-cauchy-bounded]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [fs-sqrt2-rational, def-rational-cauchy-sequence, def-null-sequence, lem-rat-archimedean, thm-rat-ordered-field, lem-rat-triangle, lem-null-ideal]
 aliases: []
 proof_strategy: direct
 verification:
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Archimedean property (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Archimedean_property"
 pipeline_run: null
 ---
 

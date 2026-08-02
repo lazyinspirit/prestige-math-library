@@ -4,6 +4,9 @@ kind: theorem
 title: "The principle of mathematical induction"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-natural-numbers, def-inductive-set, lem-omega-smallest-inductive]
 aliases: [principle-of-induction, induction-principle]
 landmark: true
@@ -11,11 +14,6 @@ short: "$0\\in S$, $\\sigma$-closed $\\Rightarrow S=\\mathbb N$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mathematical_induction"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
+    - title: "Peano axioms (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Peano_axioms"
 pipeline_run: null
 ---
 
@@ -48,4 +50,4 @@ Let $S \subseteq \mathbb{N}$. If $0 \in S$ and $\sigma(n) \in S$ whenever $n \in
 
 4.1 With $S \subseteq \mathbb{N}$ by hypothesis, $S = \mathbb{N}$. [step 3.1, given]
 
-5.1 The property form is the set case with $S = \{n \in \mathbb{N} : P(n)\}$: $P(0)$ and $P(n) \Rightarrow P(\sigma(n))$ give $0 \in S$ and $\sigma$-closure, so $S = \mathbb{N}$, i.e. $P$ holds for all $n$. [step 4.1] ∎
+5.1 The property form is the set case with $S = \{n \in \mathbb{N} : P(n)\}$: $P(0)$ and $P(n) \Rightarrow P(\sigma(n))$ give $0 \in S$ and $\sigma$-closure, so $S = \mathbb{N}$, i.e. $P$ holds for all $n$; conversely the set form is the property form applied to $P(n) :\equiv n \in S$, so the two are equivalent. [step 4.1] ∎

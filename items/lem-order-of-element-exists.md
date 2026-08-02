@@ -4,6 +4,9 @@ kind: lemma
 title: "In a finite group, every element $g$ satisfies $g^{n} = e$ for some natural $n \\ge 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group, def-group-power, lem-group-power-laws, lem-group-cancellation, def-countable, lem-pigeonhole, def-equinumerous, def-injection-surjection-bijection, def-nat-order, lem-nat-order-is-membership, def-natural-numbers, lem-nat-trichotomy, lem-nat-nonzero-is-successor, lem-nat-add-commutative]
 justified_by: []
 aliases: []

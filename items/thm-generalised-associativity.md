@@ -4,6 +4,9 @@ kind: theorem
 title: "Generalised associativity: in a monoid the product of a finite list does not depend on the bracketing, and in a commutative monoid it does not depend on the order of the factors either"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-monoid-finite-product, def-semigroup-and-monoid, thm-induction-principle, def-symmetric-group, def-natural-numbers, def-nat-order, def-nat-addition, def-injection-surjection-bijection, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-cancellative, lem-nat-order-add-compatible, lem-nat-order-is-membership, lem-nat-discrete, lem-nat-nonzero-is-successor, lem-nat-trichotomy]
 justified_by: []
 aliases: [thm-general-associativity, thm-general-commutativity]

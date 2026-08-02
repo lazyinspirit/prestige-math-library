@@ -4,6 +4,9 @@ kind: example
 title: "Five-card hands from a $52$-card deck: $\\binom{52}{5} = 2598960$, and the count of hands with all cards of one suit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-binomial-coefficient, thm-binomial-closed-formula, thm-sum-rule,
        def-sum-over-a-finite-index-set, def-finite-cardinality, thm-product-rule,
        def-factorial-and-falling-factorial, lem-nat-mult-cancellative]

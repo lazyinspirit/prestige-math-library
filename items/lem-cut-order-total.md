@@ -4,17 +4,15 @@ kind: lemma
 title: "Inclusion totally orders the Dedekind reals"
 status: published
 origin: session
-deps: [def-cut-order, def-dedekind-cut]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-cut-order, def-dedekind-cut, thm-rat-ordered-field]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -22,6 +20,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "Dedekind cut (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dedekind_cut"
 pipeline_run: null
 ---
 
@@ -39,7 +41,7 @@ $A \subseteq B$ or $B \subseteq A$.
 
 [A1] Set inclusion $\subseteq$ is a partial order on any family of sets: reflexive ($A \subseteq A$), antisymmetric (mutual inclusion $A \subseteq B$, $B \subseteq A$ gives $A = B$), and transitive.
 
-[A2] The order on $\mathbb{Q}$ is total (trichotomy): for rationals $x, y$ exactly one of $x < y$, $x = y$, $y < x$ holds.
+[A2] The order on $\mathbb{Q}$ is total ([[thm-rat-ordered-field]]): for rationals $x, y$ exactly one of $x < y$, $x = y$, $y < x$ holds.
 
 [L1] Downward closure (C2): if $p \in A$ and $q < p$ then $q \in A$, and likewise for $B$ ([[def-dedekind-cut]]).
 

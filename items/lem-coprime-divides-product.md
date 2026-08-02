@@ -4,6 +4,9 @@ kind: lemma
 title: "If $\\gcd(a,b) = 1$ and $a \\mid bc$ then $a \\mid c$; and if $a \\mid c$, $b \\mid c$ and $\\gcd(a,b) = 1$ then $ab \\mid c$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-coprime, lem-coprime-criterion, lem-gcd-basic-values, def-common-divisor-and-gcd, lem-divisibility-basic, def-divides-in-z, thm-int-comm-ring, def-int-operations]
 justified_by: []
 forward_refs: [cex-divides-a-product-without-dividing-a-factor]
@@ -23,6 +26,8 @@ sources:
   references:
     - title: "Euclid's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
+    - title: "Coprime integers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Coprime_integers"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The rationals form a field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-rat-operations, lem-rat-ops-well-defined, thm-int-comm-ring, lem-int-cancellation]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Rational number — formal construction (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Rational_number"
 pipeline_run: null
 ---
 

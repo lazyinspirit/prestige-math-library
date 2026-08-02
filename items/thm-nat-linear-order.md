@@ -4,18 +4,16 @@ kind: theorem
 title: "$\\le$ is a linear order on $\\mathbb{N}$"
 status: published
 origin: session
-deps: [def-nat-order, def-nat-addition, lem-nat-add-identity, lem-nat-add-associative, lem-nat-add-commutative, lem-nat-add-cancellative, lem-nat-nonzero-is-successor, lem-nat-trichotomy]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-nat-order, def-nat-addition, lem-nat-add-identity, lem-nat-add-associative, lem-nat-add-commutative, lem-nat-add-cancellative, lem-nat-nonzero-is-successor, lem-nat-trichotomy, thm-omega-is-peano-system]
 aliases: []
 landmark: true
 short: "reflexive, antisymmetric, transitive, total"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 
@@ -38,11 +38,13 @@ The relation $\le$ on $\mathbb{N}$, where $m \le n \iff \exists k\ (m + k = n)$ 
 
 [L2] Cancellation: $m + k = n + k \Rightarrow m = n$ ([[lem-nat-add-cancellative]]).
 
-[L3] Every nonzero natural is a successor and $\sigma(j) \ne 0$ ([[lem-nat-nonzero-is-successor]]).
+[L3] Every nonzero natural is a successor: if $j \ne 0$ then $j = \sigma(i)$ for some $i$ ([[lem-nat-nonzero-is-successor]]).
 
 [L4] Trichotomy: exactly one of $m < n$, $m = n$, $m > n$ holds ([[lem-nat-trichotomy]]).
 
 [L5] Addition is commutative ([[lem-nat-add-commutative]]).
+
+[L6] $\sigma(x) \ne 0$ for every $x$ (Peano axiom P1) ([[thm-omega-is-peano-system]]).
 
 ## Proof
 
@@ -52,7 +54,7 @@ The relation $\le$ on $\mathbb{N}$, where $m \le n \iff \exists k\ (m + k = n)$ 
 
 1.2 Transitive: if $m \le n$ and $n \le p$, say $m + k = n$ and $n + j = p$, then $m + (k + j) = (m + k) + j = n + j = p$, so $m \le p$. [given, L1]
 
-1.3 A sum is zero only if both summands are: if $k + j = 0$ with $j \ne 0$ then $j = \sigma(i)$ and $k + j = k + \sigma(i) = \sigma(k + i) \ne 0$, a contradiction, so $k = j = 0$. [L1, L3]
+1.3 A sum is zero only if both summands are: if $k + j = 0$ with $j \ne 0$ then $j = \sigma(i)$ and $k + j = k + \sigma(i) = \sigma(k + i) \ne 0$ [L6], a contradiction, so $k = j = 0$. [L1, L3, L6]
 
 1.4 Total: by trichotomy one of $m < n$, $m = n$, $m > n$ holds, and each of these gives $m \le n$ or $n \le m$. [L4]
 

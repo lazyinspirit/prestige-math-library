@@ -4,6 +4,9 @@ kind: theorem
 title: "The sum rule: a finite disjoint union is finite with $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ and $\\lvert\\bigcup_{i \\in I} A_i\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$, and a sum over a finite index set splits along a partition"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-finite-cardinality, def-sum-over-a-finite-index-set, lem-finite-sum-permutation-invariance, thm-subset-of-a-finite-set,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
        def-finite-sum, lem-finite-sum-laws, def-injection-surjection-bijection,

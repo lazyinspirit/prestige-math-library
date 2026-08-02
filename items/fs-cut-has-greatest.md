@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every Dedekind cut has a greatest element"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-dedekind-cut, def-real-dedekind, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Appendix: construction of ℝ)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "Dedekind cut (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dedekind_cut"
 pipeline_run: null
 ---
 

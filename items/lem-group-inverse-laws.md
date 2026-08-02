@@ -4,6 +4,9 @@ kind: lemma
 title: "In a group $e^{-1} = e$, $(g^{-1})^{-1} = g$ and $(gh)^{-1} = h^{-1}g^{-1}$, the order of the last product being essential"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group, def-invertible-element, lem-inverse-unique, def-identity-element]
 justified_by: []
 aliases: [lem-socks-and-shoes]

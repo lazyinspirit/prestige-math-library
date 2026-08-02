@@ -4,6 +4,9 @@ kind: definition
 title: "Associates in $\\mathbb{Z}$: integers each of which divides the other"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-divides-in-z, def-equivalence-relation]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "Division with remainder in $\\mathbb{Z}$: for $a \\in \\mathbb{Z}$ and $b > 0$ there are unique $q, r \\in \\mathbb{Z}$ with $a = qb + r$ and $0 \\le r < b$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, thm-well-ordering-principle, def-natural-numbers, def-nat-order, lem-nat-nonzero-is-successor, lem-nat-trichotomy, lem-nat-add-commutative]
 justified_by: []
 aliases: [thm-euclidean-division, thm-division-with-remainder]

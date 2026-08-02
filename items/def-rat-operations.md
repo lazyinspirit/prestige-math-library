@@ -4,8 +4,11 @@ kind: definition
 title: "Arithmetic on the rationals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-rationals, lem-int-cancellation]
-justified_by: [lem-rat-inverse-well-defined]
+justified_by: [lem-rat-ops-well-defined, lem-rat-inverse-well-defined]
 aliases: []
 verification:
   precheck: n/a
@@ -15,6 +18,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Rational number — formal construction (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Rational_number"
 pipeline_run: null
 ---
 

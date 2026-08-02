@@ -4,7 +4,10 @@ kind: corollary
 title: "Every common divisor of $a$ and $b$ divides $\\gcd(a,b)$; consequently $d = \\gcd(a,b)$ exactly when $d \\ge 0$, $d \\mid a$, $d \\mid b$, and every common divisor of $a$ and $b$ divides $d$ — a characterisation that holds at $(a,b) = (0,0)$ as well"
 status: published
 origin: session
-deps: [thm-bezout-identity, def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, lem-associates-characterisation, def-int-abs, lem-int-abs-properties, def-int-order, thm-int-ordered-ring]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-bezout-identity, def-common-divisor-and-gcd, def-divides-in-z, lem-divisibility-basic, lem-associates-characterisation, def-int-abs, lem-int-abs-properties]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,11 +15,6 @@ short: "$c \\mid a, c \\mid b \\Rightarrow c \\mid \\gcd(a,b)$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -55,8 +53,6 @@ included, where it returns the value $\gcd(0,0) = 0$ fixed by convention.
 
 [L6] $|x| = x$ when $x \ge 0$ ([[def-int-abs]], [[lem-int-abs-properties]]).
 
-[L7] The order on $\mathbb{Z}$ is total, antisymmetric and transitive ([[thm-int-ordered-ring]], [[def-int-order]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -77,13 +73,6 @@ included, where it returns the value $\gcd(0,0) = 0$ fixed by convention.
 
 ## Remarks
 
-- **This is the statement later pages should cite.** "Greatest in the order of
-  $\mathbb{Z}$" is how $\gcd$ was defined, but it is not a property that survives
-  at $(0,0)$ and it is not what any later argument uses. "Nonnegative, a common
-  divisor, and divisible by every common divisor" is uniform, and it is the
-  definition that generalises beyond $\mathbb{Z}$.
+- **This is the statement later pages should cite.** "Greatest in the order of $\mathbb{Z}$" is how $\gcd$ was defined, but it is not a property that survives at $(0,0)$ and it is not what any later argument uses. "Nonnegative, a common divisor, and divisible by every common divisor" is uniform, and it is the definition that generalises beyond $\mathbb{Z}$.
 
-- **Both halves of claim 2 are needed.** Dropping $d \ge 0$ leaves $d$ determined
-  only up to sign, since $-g$ also divides $a$ and $b$ and is divided by every
-  common divisor ([[lem-associates-characterisation]]). Dropping "every common
-  divisor divides $d$" leaves every nonnegative common divisor a candidate.
+- **Both halves of claim 2 are needed.** Dropping $d \ge 0$ leaves $d$ determined only up to sign, since $-g$ also divides $a$ and $b$ and is divided by every common divisor ([[lem-associates-characterisation]]). Dropping "every common divisor divides $d$" leaves every nonnegative common divisor a candidate.

@@ -4,6 +4,9 @@ kind: example
 title: "$\\min(|x-y|, 1)$ on $\\mathbb{R}$ has the usual topology and diameter at most $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-bounded-remetrisation, def-equivalent-metrics, def-metric-bounded-diameter,
        def-max-min, lem-real-line-is-a-metric-space, thm-metric-equivalence-hierarchy,
        lem-finite-set-has-max, lem-of-abs-value, def-abs-value, cor-of-one-positive,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "J. Munkres, Topology, 2nd ed., §20"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

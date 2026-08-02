@@ -4,6 +4,9 @@ kind: definition
 title: "Interior, closure, boundary, limit point, isolated point and dense subset of a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-metric-space]
 justified_by: []
 aliases: [def-closure, def-interior, def-boundary, def-limit-point, def-dense]
@@ -27,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_point"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Boundary (topology) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Boundary_(topology)"
+    - title: "Isolated point (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Isolated_point"
 pipeline_run: null
 ---
 

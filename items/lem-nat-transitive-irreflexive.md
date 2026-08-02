@@ -4,6 +4,9 @@ kind: lemma
 title: "Every natural number is a transitive set and is not a member of itself"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-natural-numbers, thm-induction-principle]
 aliases: []
 landmark: false
@@ -11,11 +14,6 @@ short: "$n$ transitive, $n\\notin n$"
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
     - title: "Mathematical induction (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Mathematical_induction"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
 pipeline_run: null
 ---
 
@@ -48,4 +48,4 @@ For every $n \in \mathbb{N}$: (a) $n$ is transitive, i.e. $x \in n \Rightarrow x
 
 2.2 $\sigma(n) \notin \sigma(n)$: suppose $\sigma(n) \in \sigma(n) = n \cup \{n\}$, so $\sigma(n) \in n$ or $\sigma(n) = n$; if $\sigma(n) = n$ then $n \in n$ (as $n \in \{n\} \subseteq \sigma(n) = n$), contradicting the inductive hypothesis $n \notin n$; if $\sigma(n) \in n$ then $\sigma(n) \subseteq n$ by transitivity of $n$, and since $n \in n \cup \{n\} = \sigma(n) \subseteq n$ we get $n \in n$, again contradicting $n \notin n$; hence $\sigma(n) \notin \sigma(n)$. [step 1.2]
 
-3.1 Hence $P(\sigma(n))$ holds; by induction $P(n)$ for all $n \in \mathbb{N}$: every natural number is transitive and satisfies $n \notin n$. [step 2.1, step 2.2, discharge-induction] ∎
+3.1 Hence $P(\sigma(n))$ holds; by induction [L1], $P(n)$ for all $n \in \mathbb{N}$: every natural number is transitive and satisfies $n \notin n$. [step 2.1, step 2.2, discharge-induction] ∎

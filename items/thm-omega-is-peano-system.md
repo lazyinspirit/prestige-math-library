@@ -4,6 +4,9 @@ kind: theorem
 title: "The von Neumann naturals form a Peano system"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-natural-numbers, def-peano-system, thm-induction-principle, lem-nat-transitive-irreflexive]
 aliases: []
 landmark: true
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "Mathematics 144: Set Theory (UC Riverside lecture notes)"
+      url: "https://math.ucr.edu/~res/math153-2019/set-theory-notes.pdf"
 pipeline_run: null
 ---
 

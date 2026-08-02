@@ -4,6 +4,9 @@ kind: lemma
 title: "In a monoid, a left inverse and a right inverse of the same element are equal; hence an invertible element has exactly one inverse, and it is two-sided"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-semigroup-and-monoid, def-invertible-element, def-identity-element, def-binary-operation]
 justified_by: []
 aliases: []

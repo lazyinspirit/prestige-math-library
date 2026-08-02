@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\operatorname{span}\\{v\\} = \\{\\, \\lambda v : \\lambda \\in F \\,\\}$, which is $\\{0_V\\}$ when $v = 0_V$, and when $v \\ne 0_V$ contains $0_V$ only as the multiple $0_F v$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-combination-and-span, lem-linear-subspace-criterion, lem-vector-space-elementary-consequences, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
 aliases: [lem-line-through-the-origin]

@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\lvert A\\rvert}$ for finite $A$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-cardinality-of-a-set-of-functions, def-nat-power, def-finite-cardinality,
        thm-cantor-powerset, lem-pigeonhole, lem-nat-trichotomy, def-nat-order,
        def-injection-surjection-bijection, def-equinumerous, def-natural-numbers]
@@ -24,9 +27,11 @@ sources:
     - title: "Power set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Power_set"
     - title: "Cantor's theorem (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Cardinality"
+      url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
     - title: "P. Halmos, Naive Set Theory, §13"
       url: "https://en.wikipedia.org/wiki/Naive_Set_Theory_(book)"
+    - title: "J. Sylvestre, Elementary Foundations 12.02, Properties of finite sets and their cardinality (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Foundations:_An_Introduction_to_Topics_in_Discrete_Mathematics_(Sylvestre)/12:_Cardinality/12.02:_Properties_of_finite_sets_and_their_cardinality"
 pipeline_run: null
 ---
 

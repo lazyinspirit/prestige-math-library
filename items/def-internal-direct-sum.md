@@ -4,6 +4,9 @@ kind: definition
 title: "Internal direct sum $V = \\bigoplus_{i<n} U_i$: the sum is everything and each summand meets the sum of the others only in $0_V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-direct-sum-of-subspaces]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 1"
       url: "https://linear.axler.net/"
+    - title: "Direct sum (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Direct_sum"
 pipeline_run: null
 ---
 

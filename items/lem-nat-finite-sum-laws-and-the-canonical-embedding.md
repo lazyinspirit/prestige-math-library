@@ -4,6 +4,9 @@ kind: lemma
 title: "Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-nat-finite-sum-and-product, def-finite-sum, def-canonical-natural,
        lem-of-naturals-positive, lem-of-zero-mult, thm-induction-principle,
        thm-omega-is-peano-system, def-nat-addition, def-nat-multiplication,

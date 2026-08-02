@@ -4,6 +4,9 @@ kind: definition
 title: "Peano system"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: []
 aliases: [peano-axioms, def-peano-axioms]
 landmark: true
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
     - title: "T. Tao, Analysis I, 3rd ed., §2.1 (Peano axioms)"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 

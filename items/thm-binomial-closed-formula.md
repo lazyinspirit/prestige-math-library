@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\binom{n}{k}\\,k!\\,(n-k)! = n!$ for $k \\le n$; hence $\\binom{n}{k}\\,k! = n^{\\underline{k}}$, the quotient $n!/(k!(n-k)!)$ is a natural number, and $\\binom{n}{k} = \\binom{n}{n-k}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-binomial-coefficient, thm-number-of-bijections-of-a-finite-set,
        def-factorial-and-falling-factorial, thm-sum-rule, thm-product-rule,
        def-sum-over-a-finite-index-set, def-finite-cardinality, thm-subset-of-a-finite-set,

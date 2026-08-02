@@ -4,7 +4,10 @@ kind: example
 title: "$\\gcd$ at the boundary: $\\gcd(a,0) = |a|$, $\\gcd(0,0) = 0$, and the convention $\\gcd(0,0) = 0$ is exactly what makes $\\gcd(ca,cb) = |c|\\gcd(a,b)$ true at $c = 0$"
 status: published
 origin: session
-deps: [lem-nat-embeds-int, def-integers, def-common-divisor-and-gcd, lem-gcd-basic-values, lem-gcd-scaling, cor-common-divisor-divides-gcd, def-divides-in-z, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [lem-nat-embeds-int, def-integers, def-common-divisor-and-gcd, lem-gcd-basic-values, lem-gcd-scaling, cor-common-divisor-divides-gcd, def-divides-in-z, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, def-int-operations]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,6 @@ short: "$\\gcd(0,0) = 0$ is forced"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -48,8 +46,6 @@ $\gcd(0,0) = (1+1)\gcd(0,0)$, and an integer $g$ with $g = g + g$ is $0$.
 
 [L1] $\mathbb{Z}$ is a commutative ring: $x \cdot 0 = 0$, $x + 0 = x$, $x \cdot 1 = x$, multiplication distributes over addition, and every $x$ has an additive inverse ([[thm-int-comm-ring]], [[def-int-operations]]).
 
-[L2] The order on $\mathbb{Z}$ is total, antisymmetric and transitive ([[thm-int-ordered-ring]], [[def-int-order]]).
-
 [L3] $\gcd(u,0) = |u|$ for every $u$ ([[lem-gcd-basic-values]]).
 
 [L4] $\gcd(0,0) = 0$ by the convention of [[def-common-divisor-and-gcd]], and $\gcd(u,v) \ge 0$ always.
@@ -80,11 +76,6 @@ $\gcd(0,0) = (1+1)\gcd(0,0)$, and an integer $g$ with $g = g + g$ is $0$.
 
 ## Remarks
 
-- **What goes wrong without a convention** is not that some identity becomes
-  awkward but that $\gcd(0,0)$ names nothing at all: the common divisors of
-  $(0,0)$ are all of $\mathbb{Z}$ and have no greatest element
-  ([[cex-common-divisors-of-zero-have-no-greatest-element]]).
+- **What goes wrong without a convention** is not that some identity becomes awkward but that $\gcd(0,0)$ names nothing at all: the common divisors of $(0,0)$ are all of $\mathbb{Z}$ and have no greatest element ([[cex-common-divisors-of-zero-have-no-greatest-element]]).
 
-- **$\gcd(a,0) = |a|$ is where the absolute value earns its place.** Without it
-  the natural guess $\gcd(a,0) = a$ would be negative for negative $a$, and
-  $\gcd$ would fail to be nonnegative.
+- **$\gcd(a,0) = |a|$ is where the absolute value earns its place.** Without it the natural guess $\gcd(a,0) = a$ would be negative for negative $a$, and $\gcd$ would fail to be nonnegative.

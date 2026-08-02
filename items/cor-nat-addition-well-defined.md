@@ -4,18 +4,16 @@ kind: corollary
 title: "Addition is a well-defined total operation"
 status: published
 origin: session
-deps: [thm-recursion, def-natural-numbers]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-recursion, def-natural-numbers, thm-omega-is-peano-system]
 aliases: []
 landmark: false
 short: "$+$ total, well-defined"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,10 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 
@@ -36,11 +38,13 @@ For each $m \in \mathbb{N}$ there is a unique function $s_m : \mathbb{N} \to \ma
 
 [L1] The recursion theorem: for a set $A$, an element $a \in A$, and a function $f : A \to A$ there is a unique $g : \mathbb{N} \to A$ with $g(0) = a$ and $g(\sigma(n)) = f(g(n))$ ([[thm-recursion]]).
 
+[L2] $(\mathbb{N}, 0, \sigma)$ is a Peano system ([[thm-omega-is-peano-system]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Fix $m \in \mathbb{N}$ and apply the recursion theorem with $A = \mathbb{N}$, $a = m$, and $f = \sigma$: there is a unique function $s_m : \mathbb{N} \to \mathbb{N}$ with $s_m(0) = m$ and $s_m(\sigma(n)) = \sigma(s_m(n))$. [L1]
+1.1 Fix $m \in \mathbb{N}$; since $(\mathbb{N}, 0, \sigma)$ is a Peano system [L2], apply the recursion theorem with $A = \mathbb{N}$, $a = m$, and $f = \sigma$: there is a unique function $s_m : \mathbb{N} \to \mathbb{N}$ with $s_m(0) = m$ and $s_m(\sigma(n)) = \sigma(s_m(n))$. [L1, L2]
 
 2.1 Define $m + n := s_m(n)$; since $s_m$ is a total function on $\mathbb{N}$ for every $m \in \mathbb{N}$, the assignment $(m,n) \mapsto m + n$ is a well-defined function $\mathbb{N} \times \mathbb{N} \to \mathbb{N}$. [step 1.1]
 

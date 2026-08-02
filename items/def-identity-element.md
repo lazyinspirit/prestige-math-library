@@ -4,6 +4,9 @@ kind: definition
 title: "Left identity, right identity, and two-sided identity for a binary operation"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-binary-operation]
 justified_by: []
 aliases: [def-neutral-element]

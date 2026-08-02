@@ -4,6 +4,9 @@ kind: definition
 title: "Powers $g^{n}$: natural exponents in a monoid and integer exponents in a group, with $g^{0} = e$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-semigroup-and-monoid, def-group, def-invertible-element, lem-inverse-unique, thm-recursion, def-natural-numbers, def-integers, def-int-operations, def-int-order, thm-int-ordered-ring, lem-nat-embeds-int]
 justified_by: []
 aliases: [def-integer-power-in-a-group]

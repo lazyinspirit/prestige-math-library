@@ -4,6 +4,9 @@ kind: counterexample
 title: "The union of the two coordinate axes of $F^{2}$ is closed under scalar multiplication and is not closed under addition, so neither closure condition implies the other"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-span-of-a-single-vector, def-linear-combination-and-span, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership, cex-subset-closed-under-addition-but-not-scaling]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Examples of vector spaces (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Examples_of_vector_spaces"
+    - title: "The union of vector subspaces (Andrea Minini)"
+      url: "https://www.andreaminini.net/math/the-union-of-vector-subspaces"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

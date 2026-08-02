@@ -4,6 +4,9 @@ kind: lemma
 title: "A left identity and a right identity for the same binary operation are equal; hence there is at most one two-sided identity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-binary-operation, def-identity-element]
 justified_by: []
 aliases: []

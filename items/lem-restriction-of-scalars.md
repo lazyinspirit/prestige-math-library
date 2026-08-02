@@ -4,6 +4,9 @@ kind: lemma
 title: "A field is a vector space over itself, and over any subfield $K \\subseteq F$ every $F$-vector space is a $K$-vector space by restricting the scalars"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-space, def-subfield, def-field]
 justified_by: []
 aliases: [lem-field-is-a-vector-space-over-itself]

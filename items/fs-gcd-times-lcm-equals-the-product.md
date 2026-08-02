@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: For all integers $a$ and $b$, $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = ab$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-gcd-lcm-product, def-lcm, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-divisibility-basic, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []
@@ -12,21 +15,13 @@ short: "FALSE: $\\gcd \\cdot \\operatorname{lcm} = ab$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Least common multiple (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Least_common_multiple"
+    - title: "Greatest common divisor (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Greatest_common_divisor"
 pipeline_run: null
 ---
 
@@ -79,21 +74,14 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 
 1.3 $6 \ne -6$: otherwise $6 + 6 = 0$, that is $\iota(12) = 0 = \iota(0)$, whence $12 = 0$ in $\mathbb{N}$, contradicting injectivity of $\iota$. [L1, L8, algebra]
 
-2.1 By [L3], $\gcd(-2,3)\operatorname{lcm}(-2,3) = |(-2) \cdot 3| = 6$; with step 1.1 this reads $1 \cdot \operatorname{lcm}(-2,3) = 6$, so $\operatorname{lcm}(-2,3) = 6$. [step 1.1, step 1.2, L1, L3]
+2.1 By [L3], $\gcd(-2,3)\operatorname{lcm}(-2,3) = |(-2) \cdot 3| = 6$; with step 1.1 this reads $1 \cdot \operatorname{lcm}(-2,3) = 6$, so $\operatorname{lcm}(-2,3) = 6$ by cancellation of the nonzero factor $1$. [step 1.1, step 1.2, L1, L3, L7]
 
 3.1 Therefore $\gcd(-2,3)\operatorname{lcm}(-2,3) = 1 \cdot 6 = 6$, while $(-2) \cdot 3 = -6$, and these differ: [L9] is false at $(a,b) = (-2,3)$. [step 1.1, step 1.2, step 2.1, step 1.3, L1, L9] ∎
 
 ## Remarks
 
-- **Every pair with $ab < 0$ refutes it**, not just this one: $\gcd$ and
-  $\operatorname{lcm}$ are both nonnegative by construction
-  ([[def-common-divisor-and-gcd]], [[def-lcm]]), so their product is nonnegative,
-  while $ab$ is negative. The witness above is simply a small instance.
+- **Every pair with $ab < 0$ refutes it**, not just this one: $\gcd$ and $\operatorname{lcm}$ are both nonnegative by construction ([[def-common-divisor-and-gcd]], [[def-lcm]]), so their product is nonnegative, while $ab$ is negative. The witness above is simply a small instance.
 
-- **The claim is true when $a$ and $b$ are both nonnegative**, which is why it is
-  a natural slip: in that case $|ab| = ab$ and the two statements coincide.
-  [[thm-gcd-lcm-product]] is the version that holds for all integers.
+- **The claim is true when $a$ and $b$ are both nonnegative**, which is why it is a natural slip: in that case $|ab| = ab$ and the two statements coincide. [[thm-gcd-lcm-product]] is the version that holds for all integers.
 
-- **The absolute value is not the only convention doing work.** At $a = 0$ the
-  true identity reads $\gcd(0,b) \cdot 0 = 0 = |0 \cdot b|$, which holds only
-  because $\operatorname{lcm}(0,b) = 0$ was fixed in [[def-lcm]].
+- **The absolute value is not the only convention doing work.** At $a = 0$ the true identity reads $\gcd(0,b) \cdot 0 = 0 = |0 \cdot b|$, which holds only because $\operatorname{lcm}(0,b) = 0$ was fixed in [[def-lcm]].

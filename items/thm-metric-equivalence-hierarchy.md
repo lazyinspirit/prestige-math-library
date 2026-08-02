@@ -4,6 +4,9 @@ kind: theorem
 title: "Lipschitz equivalence implies uniform equivalence implies topological equivalence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-equivalent-metrics, def-metric-topology, thm-metric-continuity-characterisations,
        def-metric-ball, def-metric-continuity, def-metric-space, lem-of-inverse-positive,
        lem-of-sign-rules, lem-of-add-order, def-ordered-field, def-complete-ordered-field]

@@ -4,6 +4,9 @@ kind: corollary
 title: "If $d = \\gcd(a,b)$ is nonzero then $a/d$ and $b/d$ are coprime"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-gcd-scaling, def-coprime, def-common-divisor-and-gcd, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: definition
 title: "Order on the Dedekind reals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-dedekind-cut, def-real-dedekind]
 aliases: []
 landmark: false
@@ -21,6 +24,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
 pipeline_run: null
 ---
 

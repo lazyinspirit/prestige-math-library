@@ -4,6 +4,9 @@ kind: theorem
 title: "A subset of a finite set is finite, with $\\lvert B\\rvert \\le \\lvert A\\rvert$, and equality holds if and only if $B = A$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-finite-cardinality, def-countable, def-equinumerous, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-order-is-membership, def-nat-order, def-nat-addition,
        thm-induction-principle, lem-nat-add-cancellative, lem-nat-order-add-compatible,
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dedekind-infinite_set"
     - title: "P. Halmos, Naive Set Theory, §13"
       url: "https://en.wikipedia.org/wiki/Naive_Set_Theory_(book)"
+    - title: "J. Sylvestre, Elementary Foundations 12.02, Properties of finite sets and their cardinality (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Foundations:_An_Introduction_to_Topics_in_Discrete_Mathematics_(Sylvestre)/12:_Cardinality/12.02:_Properties_of_finite_sets_and_their_cardinality"
 pipeline_run: null
 ---
 

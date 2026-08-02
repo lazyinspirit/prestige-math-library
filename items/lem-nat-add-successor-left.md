@@ -4,6 +4,9 @@ kind: lemma
 title: "Left successor law for addition"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-nat-addition, thm-induction-principle]
 aliases: []
 landmark: false
@@ -22,6 +25,12 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Mathematical induction (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Mathematical_induction"
+    - title: "Peano axioms (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 proof_strategy: induction
 ---

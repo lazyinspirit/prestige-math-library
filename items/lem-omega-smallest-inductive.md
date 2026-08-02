@@ -4,6 +4,9 @@ kind: lemma
 title: "The natural numbers exist: a smallest inductive set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-inductive-set]
 aliases: []
 landmark: false
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_infinity"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
 pipeline_run: null
 ---
 

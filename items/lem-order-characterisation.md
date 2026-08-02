@@ -4,6 +4,9 @@ kind: lemma
 title: "If $\\operatorname{ord}(g) = n$ then $g^{k} = e$ iff $k$ is an integer multiple of $n$, the powers $g^{0}, \\dots, g^{n-1}$ are distinct, and $\\langle g \\rangle$ has exactly $n$ elements; if $g$ has infinite order then $g^{j} = g^{k}$ only for $j = k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-order-in-a-group, def-group-power, lem-group-power-laws, lem-group-cancellation, lem-group-inverse-laws, lem-cyclic-subgroup-is-the-set-of-powers, thm-division-algorithm-in-z, thm-induction-principle, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-integers, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, lem-nat-order-is-membership, def-nat-order, lem-nat-trichotomy]
 justified_by: []
 aliases: [lem-order-divides]

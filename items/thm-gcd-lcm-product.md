@@ -4,6 +4,9 @@ kind: theorem
 title: "Every common multiple of $a$ and $b$ is a multiple of $\\operatorname{lcm}(a,b)$, and $\\gcd(a,b) \\cdot \\operatorname{lcm}(a,b) = |ab|$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lcm, def-common-divisor-and-gcd, lem-gcd-basic-values, cor-gcd-quotients-coprime, lem-coprime-divides-product, lem-divisibility-basic, lem-divisor-bound, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
 forward_refs: [fs-gcd-times-lcm-equals-the-product]
@@ -23,6 +26,8 @@ sources:
   references:
     - title: "Least common multiple (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Least_common_multiple"
+    - title: "Greatest common divisor (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Greatest_common_divisor"
 pipeline_run: null
 ---
 

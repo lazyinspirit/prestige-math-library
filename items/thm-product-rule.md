@@ -4,6 +4,9 @@ kind: theorem
 title: "The product rule: $\\lvert A \\times B\\rvert = \\lvert A\\rvert\\,\\lvert B\\rvert$, and $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-finite-cardinality, thm-sum-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, def-injection-surjection-bijection,
        def-equinumerous, def-nat-multiplication, lem-nat-mult-commutative,
@@ -25,7 +28,7 @@ sources:
     - title: "Rule of product (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rule_of_product"
     - title: "Cartesian product (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Set_(mathematics)"
+      url: "https://en.wikipedia.org/wiki/Cartesian_product"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 1"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
 pipeline_run: null

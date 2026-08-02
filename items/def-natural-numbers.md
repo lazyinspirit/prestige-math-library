@@ -4,6 +4,9 @@ kind: definition
 title: "The natural numbers $\\mathbb{N}$ (von Neumann)"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-inductive-set, lem-omega-smallest-inductive, def-peano-system]
 aliases: [def-omega, natural-numbers]
 landmark: true
@@ -18,6 +21,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
     - title: "Axiom of infinity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_infinity"
+    - title: "Peano axioms (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
 pipeline_run: null
 ---
 

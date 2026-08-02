@@ -4,6 +4,9 @@ kind: theorem
 title: "The reals are complete"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-real-limit, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-numbers, def-rational-cauchy-sequence, def-real-order]
 aliases: []
 landmark: true
@@ -23,6 +26,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "L. S. Krapp, Constructions of the real numbers: a set theoretical approach (Oxford, 2014)"
+      url: "https://www.math.uni-konstanz.de/~krapp/research/Constructions_of_the_real_numbers.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The metrics $d_1$, $d_2$ and $d_\\infty$ on $\\mathbb{R}^n$ are metrics and are Lipschitz equivalent, with explicit constants"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-equivalent-metrics, thm-metric-equivalence-hierarchy,
        thm-cauchy-schwarz-finite, def-finite-sum, lem-finite-set-has-max,
        lem-metrics-on-rn, lem-finite-sum-laws, thm-of-square-roots,
@@ -33,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Taxicab_geometry"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "A nonempty subset of a group closed under the operation need not be a subgroup: the nonnegative integers inside $(\\mathbb{Z}, +)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subgroup, lem-subgroup-criterion, def-binary-operation, def-group, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Subgroup"
     - title: "Submonoid (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Monoid#Submonoids"
+    - title: "Cancellation property (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cancellation_property"
 pipeline_run: null
 ---
 

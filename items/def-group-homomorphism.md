@@ -4,6 +4,9 @@ kind: definition
 title: "Monoid homomorphism and group homomorphism"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-semigroup-and-monoid, def-group, def-identity-element, def-binary-operation]
 justified_by: []
 aliases: [def-monoid-homomorphism, def-homomorphism]

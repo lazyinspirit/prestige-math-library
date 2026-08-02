@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\sum_{i<n} U_i = \\operatorname{span}\\bigl(\\bigcup_{i<n} U_i\\bigr)$, so the sum is the smallest linear subspace containing every $U_i$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sum-of-linear-subspaces, def-linear-combination-and-span, def-linear-subspace, def-monoid-finite-product, def-vector-space, thm-induction-principle, lem-nat-order-is-membership, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Linear span (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_span"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Binary operation on a set; associativity, commutativity, and a subset closed under the operation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: []
 justified_by: []
 aliases: [def-closed-under-operation]

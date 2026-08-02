@@ -4,6 +4,9 @@ kind: example
 title: "Pascal's triangle computed to row $6$, with Pascal's rule checked at every entry"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-binomial-coefficient, thm-pascals-rule, thm-binomial-closed-formula,
        cor-binomial-theorem-consequences, def-factorial-and-falling-factorial,
        def-nat-power, def-nat-finite-sum-and-product, def-canonical-natural]

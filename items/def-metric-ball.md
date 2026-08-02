@@ -4,6 +4,9 @@ kind: definition
 title: "Open ball, closed ball and sphere in a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-real-order, lem-metric-nonnegativity,
        def-complete-ordered-field, def-ordered-field]
 justified_by: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

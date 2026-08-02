@@ -8,6 +8,9 @@ landmark: false
 short: "$mk=nk,\\ k\\neq0\\Rightarrow m=n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 proof_strategy: contradiction
 sources:
   references:
@@ -15,13 +18,10 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 pipeline_run: null
 ---
 
@@ -31,7 +31,7 @@ For all $m,n,k\in\mathbb{N}$ with $k\ne 0$: if $m\cdot k=n\cdot k$ then $m=n$.
 
 ## Facts & Assumptions
 
-**Given:** multiplication defined by $m\cdot 0=0$ and $m\cdot\sigma(j)=m\cdot j+m$; the strict order $m<n\iff\exists j\ne 0\ (m+j=n)$.
+**Given:** multiplication defined by $m\cdot 0=0$ and $m\cdot\sigma(j)=m\cdot j+m$; the order $m\le n\iff\exists j\ (m+j=n)$, with $m<n$ meaning $m\le n$ and $m\ne n$.
 
 [L1] Trichotomy: for all $m,n\in\mathbb{N}$ exactly one of $m<n$, $m=n$, $m>n$ holds ([[lem-nat-trichotomy]]).
 

@@ -4,7 +4,11 @@ kind: definition
 title: "Order on the integers"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-integers]
+justified_by: [thm-int-ordered-ring]
 aliases: []
 verification:
   precheck: n/a
@@ -14,6 +18,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

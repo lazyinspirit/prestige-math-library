@@ -4,6 +4,9 @@ kind: counterexample
 title: "The common divisors of $(0,0)$ are all of $\\mathbb{Z}$ and have no greatest element in the order of $\\mathbb{Z}$, so $\\gcd(0,0)$ cannot be defined as a maximum and is fixed by convention"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-divides-in-z, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-int-bounded-above-has-greatest, def-int-order, thm-int-ordered-ring, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []
@@ -22,6 +25,8 @@ sources:
   references:
     - title: "Greatest common divisor (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Greatest_common_divisor"
+    - title: "Divisor (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Divisor"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "For any field $F$, $(F, +)$ and $(F \\setminus \\{0\\}, \\cdot)$ are abelian groups; in particular $(\\mathbb{Q}, +)$, $(\\mathbb{Q} \\setminus \\{0\\}, \\cdot)$, $(\\mathbb{R}, +)$ and $(\\mathbb{R} \\setminus \\{0\\}, \\cdot)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-field, def-group, def-semigroup-and-monoid, def-binary-operation, def-identity-element, def-invertible-element, thm-rat-field, thm-reals-field]
 justified_by: []
 aliases: []

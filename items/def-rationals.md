@@ -4,7 +4,11 @@ kind: definition
 title: "The rationals as equivalence classes of pairs of integers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-integers, thm-int-comm-ring]
+justified_by: [lem-rat-equivalence]
 aliases: []
 landmark: true
 short: "ℚ"
@@ -17,7 +21,9 @@ sources:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "E. Landau, Foundations of Analysis"
-      url: "https://bookstore.ams.org/chel-79"
+      url: "https://archive.org/details/foundationsofana0000land"
+    - title: "Rational number — formal construction (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Rational_number"
 pipeline_run: null
 ---
 

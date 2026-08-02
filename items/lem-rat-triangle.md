@@ -4,6 +4,9 @@ kind: lemma
 title: "Absolute value and the triangle inequality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-rat-ordered-field]
 aliases: []
 landmark: true
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.3"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Absolute value — ordered rings (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Absolute_value"
 pipeline_run: null
 ---
 

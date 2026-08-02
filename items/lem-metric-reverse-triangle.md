@@ -4,6 +4,9 @@ kind: lemma
 title: "The reverse triangle inequality $|d(x,z) - d(y,z)| \\le d(x,y)$ in any metric space"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-metric-space, lem-of-abs-value, lem-of-add-order, def-ordered-field,
        def-abs-value, def-complete-ordered-field]
 justified_by: []

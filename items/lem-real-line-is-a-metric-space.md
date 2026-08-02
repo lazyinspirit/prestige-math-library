@@ -4,6 +4,9 @@ kind: lemma
 title: "The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-metric-ball, def-metric-topology, def-metric-bounded-diameter,
        def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-interval,
        thm-of-archimedean, def-complete-ordered-field, def-ordered-field,
@@ -15,11 +18,6 @@ short: "$(\\mathbb{R}, |x-y|)$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -29,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Real_line"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 
@@ -95,24 +95,6 @@ $d_{\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:
 
 ## Remarks
 
-- **This is the metric every later ceiling rests on.** Every real-line example on
-  the companion page, and every subspace of $\mathbb{R}$ used there, takes its
-  metric from $d_{\mathbb{R}}$ through the subspace construction of
-  [[def-isometry-and-metric-embedding]].
-- **Unboundedness needs no Archimedean input, and no completeness either.** No
-  ordered field is bounded under $d(u,v) = |u-v|$, and the reason is a single
-  element rather than any cofinality property: given a centre $c$ and a radius
-  $r > 0$, the element $c + r + 1$ satisfies
-  $d(c,\, c + r + 1) = |{-(r+1)}| = r + 1 > r$, because $1 > 0$ and $r + 1 > 0$
-  ([[lem-of-abs-value]], [[cor-of-one-positive]], [[lem-of-add-order]]); so it
-  lies outside $B(c,r)$ and no ball contains the field. Step 1.6 above chooses
-  its witness with [[thm-of-archimedean]] instead, which is a convenience and not
-  a necessity: it delivers a witness that is a canonical natural, and claim 4
-  needs no such thing. Claim 4 therefore holds verbatim in every ordered field
-  with this $d$, Archimedean or not. Note also that a radius is an element of
-  $\mathbb{R}$, so "a ball of infinite radius" is not something that can be
-  written here.
-- **The claim that $\operatorname{diam}(\mathbb{R})$ is "not defined" is a claim
-  about this library's conventions** ([[rem-sup-conventions]],
-  [[def-metric-bounded-diameter]]): there is no extended real line here, so an
-  unbounded set has no diameter at all rather than a diameter $+\infty$.
+- **This is the metric every later ceiling rests on.** Every real-line example on the companion page, and every subspace of $\mathbb{R}$ used there, takes its metric from $d_{\mathbb{R}}$ through the subspace construction of [[def-isometry-and-metric-embedding]].
+- **Unboundedness needs no Archimedean input, and no completeness either.** No ordered field is bounded under $d(u,v) = |u-v|$, and the reason is a single element rather than any cofinality property: given a centre $c$ and a radius $r > 0$, the element $c + r + 1$ satisfies $d(c,\, c + r + 1) = |{-(r+1)}| = r + 1 > r$, because $1 > 0$ and $r + 1 > 0$ ([[lem-of-abs-value]], [[cor-of-one-positive]], [[lem-of-add-order]]); so it lies outside $B(c,r)$ and no ball contains the field. Step 1.6 above chooses its witness with [[thm-of-archimedean]] instead, which is a convenience and not a necessity: it delivers a witness that is a canonical natural, and claim 4 needs no such thing. Claim 4 therefore holds verbatim in every ordered field with this $d$, Archimedean or not. Note also that a radius is an element of $\mathbb{R}$, so "a ball of infinite radius" is not something that can be written here.
+- **The claim that $\operatorname{diam}(\mathbb{R})$ is "not defined" is a claim about this library's conventions** ([[rem-sup-conventions]], [[def-metric-bounded-diameter]]): suprema here are real numbers and the extended real line is not used for them, so an unbounded set has no diameter at all rather than a diameter $+\infty$.

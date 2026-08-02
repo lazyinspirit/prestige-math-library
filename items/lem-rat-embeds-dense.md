@@ -4,6 +4,9 @@ kind: lemma
 title: "The rationals embed densely in the reals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-numbers, def-real-order, thm-reals-ordered-field, def-rational-cauchy-sequence, thm-rat-ordered-field, thm-rat-field]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Dense set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dense_set"
 pipeline_run: null
 ---
 

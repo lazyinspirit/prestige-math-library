@@ -4,6 +4,9 @@ kind: example
 title: "$(\\mathbb{Z}, +)$ is an abelian group, $(\\mathbb{Z}, \\cdot)$ is a commutative monoid that is not a group, and its group of units is $\\{1, -1\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group, def-semigroup-and-monoid, def-invertible-element, def-identity-element, lem-monoid-units-form-a-group, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, lem-nat-nonzero-is-successor, lem-nat-add-commutative, def-nat-order, def-natural-numbers]
 justified_by: []
 aliases: []

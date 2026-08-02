@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}$ carries both an unbounded and a bounded metric inducing the same topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-boundedness-is-a-topological-property, lem-bounded-remetrisation,
        def-metric-bounded-diameter, ex-bounded-remetrisation-of-r,
        lem-real-line-is-a-metric-space, thm-metric-equivalence-hierarchy,
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Equivalence_of_metrics"
     - title: "J. Munkres, Topology, 2nd ed., §20"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

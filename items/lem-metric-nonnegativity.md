@@ -4,6 +4,9 @@ kind: lemma
 title: "Nonnegativity of a metric is a consequence of the other axioms, not an axiom"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, lem-of-add-order, def-real-order, def-complete-ordered-field,
        def-ordered-field, def-max-min, lem-finite-set-has-max]
 justified_by: []

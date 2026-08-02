@@ -4,6 +4,9 @@ kind: theorem
 title: "For $m \\ge 1$ the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$, and the number of compositions is $\\binom{n-1}{m-1}$ for $n \\ge 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-composition-of-a-natural-number, def-multinomial-coefficient, def-binomial-coefficient,
        thm-pascals-rule, thm-sum-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,

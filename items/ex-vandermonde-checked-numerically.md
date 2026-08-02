@@ -4,6 +4,11 @@ kind: example
 title: "Vandermonde's identity checked at $m = 4$, $n = 3$, $k = 3$, both sides equal to $35$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-vandermonde-identity, def-binomial-coefficient, thm-binomial-closed-formula,
        thm-sum-rule, thm-product-rule, def-factorial-and-falling-factorial,
        lem-nat-mult-cancellative, def-nat-finite-sum-and-product]

@@ -4,6 +4,9 @@ kind: lemma
 title: "A non-null Cauchy sequence is eventually bounded away from zero, with constant sign"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-null-sequence, def-rational-cauchy-sequence, lem-rat-triangle, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "L. S. Krapp, Constructions of the real numbers: a set theoretical approach (Oxford, 2014)"
+      url: "https://www.math.uni-konstanz.de/~krapp/research/Constructions_of_the_real_numbers.pdf"
 pipeline_run: null
 ---
 

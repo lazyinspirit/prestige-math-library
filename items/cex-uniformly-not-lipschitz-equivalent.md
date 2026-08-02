@@ -4,6 +4,9 @@ kind: counterexample
 title: "On $\\mathbb{R}$ the metrics $|x-y|$ and $\\min(|x-y|,1)$ are uniformly but not Lipschitz equivalent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-bounded-remetrisation, thm-metric-equivalence-hierarchy, def-equivalent-metrics,
        thm-of-archimedean, def-max-min, lem-real-line-is-a-metric-space,
        lem-of-inverse-positive, lem-of-sign-rules, lem-of-naturals-positive,
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

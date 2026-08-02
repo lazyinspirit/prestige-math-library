@@ -4,6 +4,9 @@ kind: example
 title: "The cut $S = \\{q : q<0 \\text{ or } q^2<2\\}$ is $\\sqrt{2}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-dedekind-cut, def-real-dedekind, thm-rat-ordered-field, fs-sqrt2-rational]
 aliases: []
 proof_strategy: direct
@@ -17,6 +20,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Dedekind cut (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dedekind_cut"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
 pipeline_run: null
 ---
 

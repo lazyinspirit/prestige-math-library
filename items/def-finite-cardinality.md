@@ -4,6 +4,9 @@ kind: definition
 title: "The cardinality $\\lvert A\\rvert$ of a finite set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-countable, lem-pigeonhole, def-equinumerous, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-order-is-membership, def-nat-order]
 justified_by: []

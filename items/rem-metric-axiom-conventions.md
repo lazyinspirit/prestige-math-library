@@ -4,6 +4,9 @@ kind: remark
 title: "Which metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, lem-metric-nonnegativity, rem-sup-conventions,
        def-complete-ordered-field]
 justified_by: []
@@ -11,11 +14,6 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -27,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Extended_real_number_line"
     - title: "Quasimetric space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Quasimetric_space"
+    - title: "Ultrametric space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrametric_space"
 pipeline_run: null
 ---
 
@@ -78,16 +78,17 @@ to take the value $+\infty$, so that its codomain is $[0,\infty]$ rather than
 $[0,\infty)$; the axioms are read with the usual arithmetic of $+\infty$. The
 construction is useful, for instance when one wants to glue metric spaces
 without connecting them, and it is standard in metric geometry. It is not
-available in this library, for one reason and one reason only: its values would
-have to live in the extended real line
-$\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, and
-$\overline{\mathbb{R}}$ has deliberately not been built. The reasons are set out
-in [[rem-sup-conventions]]: $\overline{\mathbb{R}}$ is not a field, the
-expressions $(+\infty) + (-\infty)$ and $0 \cdot (+\infty)$ have no definition
-compatible with the field axioms, and writing an infinite value silently moves
-the discussion into a different structure, after which every algebraic step
-needs its own justification. The library's $\mathbb{R}$ is the complete ordered
-field ([[def-complete-ordered-field]]) and nothing else.
+treated here, for one reason: its values would have to live in the extended real
+line $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, whereas the
+axioms of [[def-metric-space]] are stated over the complete ordered field
+$\mathbb{R}$ ([[def-complete-ordered-field]]) and are never read anywhere else.
+Why they are kept there is set out in [[rem-sup-conventions]]:
+$\overline{\mathbb{R}}$ is not a field, the expressions
+$(+\infty) + (-\infty)$ and $0 \cdot (+\infty)$ have no definition compatible
+with the field axioms, and writing an infinite value silently moves the
+discussion into a different structure, after which every algebraic step needs
+its own justification. Every value of every metric in this library is therefore
+an element of $\mathbb{R}$.
 
 Two consequences of that decision are visible on this page and are not
 oversights. First, an unbounded set has no diameter at all here, rather than a
@@ -96,8 +97,8 @@ metric is defined on the *bounded* real-valued functions only
 ([[lem-sup-metric-is-a-metric]]), where texts working in
 $\overline{\mathbb{R}}$ define it on all of them.
 
-If a later page needs extended metrics, the honest way to add them is to build
-$\overline{\mathbb{R}}$ first, as a new object with its own order and its own
-partial arithmetic, and then to restate [[def-metric-space]] over it. Nothing in
-the plan for this library currently requires that, and until it does, every
-metric here takes real values.
+Adding extended metrics honestly would mean restating [[def-metric-space]] over
+a totally ordered set with a greatest element, carrying its own partial
+arithmetic, and re-proving over it everything this page proves over
+$\mathbb{R}$. No such restatement is made anywhere in this library, and until
+one is, every metric here takes real values.

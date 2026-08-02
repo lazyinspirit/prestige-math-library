@@ -4,6 +4,9 @@ kind: counterexample
 title: "The first quadrant of $\\mathbb{R}^{2}$ contains $0$ and is closed under addition and is not a linear subspace, since it is not closed under multiplication by $-1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-linear-subspace-is-a-subgroup, lem-vector-space-elementary-consequences, def-subgroup, def-function-space, def-vector-space, def-ordered-field, lem-of-square-positive, thm-reals-field, thm-reals-ordered-field, def-real-numbers, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Ordered field (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_field"
+    - title: "D. Margalit and J. Rabinoff, Interactive Linear Algebra, 2.6 Subspaces"
+      url: "https://math.libretexts.org/Bookshelves/Linear_Algebra/Interactive_Linear_Algebra_(Margalit_and_Rabinoff)/02%3A_Systems_of_Linear_Equations-_Geometry/2.06%3A_Subspaces"
 pipeline_run: null
 ---
 

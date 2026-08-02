@@ -4,6 +4,9 @@ kind: example
 title: "$12\\mathbb{Z} + 18\\mathbb{Z} = 6\\mathbb{Z}$ and $12\\mathbb{Z} \\cap 18\\mathbb{Z} = 36\\mathbb{Z}$, the arithmetic of $\\gcd$ and $\\operatorname{lcm}$ read off the subgroups of $(\\mathbb{Z},+)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-gcd-generates-the-subgroup, lem-subgroups-of-z-are-cyclic, thm-gcd-lcm-product, def-lcm, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-divisibility-basic, def-divides-in-z, def-subgroup, def-generated-subgroup, def-group, lem-int-cancellation, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
   references:
     - title: "Cyclic group (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cyclic_group"
+    - title: "Bézout's identity (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity"
+    - title: "Least common multiple (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Least_common_multiple"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Coprime integers: $\\gcd(a,b) = 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-common-divisor-and-gcd, lem-gcd-basic-values, lem-units-of-z, def-int-abs, lem-int-abs-properties]
 justified_by: []
 aliases: [def-relatively-prime]

@@ -8,6 +8,9 @@ landmark: false
 short: "$mn=0\\Rightarrow m=0\\lor n=0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 proof_strategy: contrapositive
 sources:
   references:
@@ -15,6 +18,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 verification:
   precheck: pass
   judge:

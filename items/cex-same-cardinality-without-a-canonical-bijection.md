@@ -4,6 +4,11 @@ kind: counterexample
 title: "Two sets of the same finite cardinality between which no bijection is distinguished"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-finite-cardinality, lem-pigeonhole, thm-number-of-bijections-of-a-finite-set,
        def-binomial-coefficient, def-equinumerous, def-injection-surjection-bijection,
        def-factorial-and-falling-factorial, def-natural-numbers]

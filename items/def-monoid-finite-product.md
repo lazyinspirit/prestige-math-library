@@ -4,6 +4,9 @@ kind: definition
 title: "The product $g_0 g_1 \\cdots g_{n-1}$ of a finite list in a monoid, by recursion, with the empty product ($n = 0$) equal to the identity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-semigroup-and-monoid, thm-recursion, def-natural-numbers, def-binary-operation, thm-induction-principle, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-finite-product-in-a-monoid]

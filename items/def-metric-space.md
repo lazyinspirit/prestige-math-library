@@ -4,6 +4,9 @@ kind: definition
 title: "Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-numbers, def-real-order, def-complete-ordered-field, def-ordered-field,
        def-max-min, lem-finite-set-has-max]
 justified_by: []
@@ -28,6 +31,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis II, 3rd ed., Ch. 1"
       url: "https://terrytao.wordpress.com/books/analysis-ii/"
+    - title: "Pseudometric space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Pseudometric_space"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

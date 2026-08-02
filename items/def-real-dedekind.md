@@ -4,6 +4,9 @@ kind: definition
 title: "The real numbers $\\mathbb{R}$ as Dedekind cuts"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-dedekind-cut, def-rationals]
 justified_by: [lem-rational-cut-is-cut]
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
 pipeline_run: null
 ---
 

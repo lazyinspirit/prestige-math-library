@@ -4,6 +4,9 @@ kind: definition
 title: "The multinomial coefficient $\\binom{n}{k_0,\\dots,k_{m-1}}$ as the number of ordered partitions of an $n$-set into blocks of prescribed sizes"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-binomial-coefficient, thm-cardinality-of-a-set-of-functions, thm-subset-of-a-finite-set,
        thm-sum-rule, def-sum-over-a-finite-index-set, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-finite-cardinality,

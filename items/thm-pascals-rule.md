@@ -4,6 +4,9 @@ kind: theorem
 title: "Pascal's rule $\\binom{n+1}{k+1} = \\binom{n}{k} + \\binom{n}{k+1}$, and the hockey-stick identity $\\sum_{i \\le n}\\binom{i}{k} = \\binom{n+1}{k+1}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-binomial-coefficient, thm-sum-rule, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-finite-cardinality,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection,
@@ -15,11 +18,6 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -66,7 +64,7 @@ For all $n, k \in \mathbb{N}$:
 
 [L1] Induction ([[thm-induction-principle]]).
 
-[L2] Binomial coefficients ([[def-binomial-coefficient]]): $\lvert [X]^{j}\rvert = \binom{\lvert X\rvert}{j}$; $\binom{m}{0} = 1$; $\binom{m}{j} = 0$ for $j > m$; $\binom{m}{m} = 1$.
+[L2] Binomial coefficients ([[def-binomial-coefficient]]): $\lvert [X]^{j}\rvert = \binom{\lvert X\rvert}{j}$; $\binom{m}{0} = 1$; $\binom{m}{j} = 0$ for $j > m$; $\binom{m}{m} = 1$; $\binom{m}{1} = m$.
 
 [L3] The sum rule for two disjoint blocks, and the recursion clause $\sum_{i<\sigma(n)} c_i = \sum_{i<n} c_i + c_n$ ([[thm-sum-rule]], [[def-nat-finite-sum-and-product]]).
 
@@ -100,15 +98,8 @@ For all $n, k \in \mathbb{N}$:
 
 ## Remarks
 
-- **The rule needs no range hypothesis** because the boundary values of
-  [[def-binomial-coefficient]] make every out-of-range coefficient $0$ rather
-  than undefined. Both edges were checked in step 2.1 rather than assumed.
+- **The rule needs no range hypothesis** because the boundary values of [[def-binomial-coefficient]] make every out-of-range coefficient $0$ rather than undefined. Both edges were checked in step 2.1 rather than assumed.
 
-- **The hockey stick sums a column, not a row.** The index $i$ runs over
-  $0, 1, \dots, n$ with $k$ fixed, and the terms with $i < k$ vanish, so the
-  identity is a statement about the entries $\binom{k}{k}, \binom{k+1}{k}, \dots$
-  of one column of Pascal's triangle. The base case $n = 0$ is the only place
-  where the two readings $k = 0$ and $k \ge 1$ have to be separated.
+- **The hockey stick sums a column, not a row.** The index $i$ runs over $0, 1, \dots, n$ with $k$ fixed, and the terms with $i < k$ vanish, so the identity is a statement about the entries $\binom{k}{k}, \binom{k+1}{k}, \dots$ of one column of Pascal's triangle. The base case $n = 0$ is the only place where the two readings $k = 0$ and $k \ge 1$ have to be separated.
 
-- **Everything here is an identity in $\mathbb{N}$.** No embedding into
-  $\mathbb{R}$ is used or needed; the sum is the $\mathbb{N}$-valued one.
+- **Everything here is an identity in $\mathbb{N}$.** No embedding into $\mathbb{R}$ is used or needed; the sum is the $\mathbb{N}$-valued one.

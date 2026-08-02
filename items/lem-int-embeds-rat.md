@@ -4,21 +4,21 @@ kind: lemma
 title: "The integers embed in the rationals"
 status: published
 origin: session
-deps: [def-rat-operations, def-rat-order, def-rationals, thm-int-comm-ring, lem-nat-embeds-int]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-rat-operations, def-rat-order, def-int-order, def-rationals, thm-int-comm-ring, lem-nat-embeds-int]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-24
-  audited: 2026-07-24
 sources:
   scraped: []
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Rational number — formal construction (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Rational_number"
 pipeline_run: null
 ---
 
@@ -34,7 +34,7 @@ $\mathbb{Q}$; we write $k$ for $j(k)$ throughout.
 
 [L1] Ring arithmetic in $\mathbb{Z}$ ([[thm-int-comm-ring]]).
 
-[L2] The orders on $\mathbb{Z}$ and $\mathbb{Q}$ ([[def-rat-order]]).
+[L2] The order on $\mathbb{Q}$ ([[def-rat-order]]), whose defining inequality is read in the order on $\mathbb{Z}$ ([[def-int-order]]).
 
 [L3] Equality in $\mathbb{Q}$: $[(a,b)] = [(c,d)]$ iff $ad = cb$ ([[def-rationals]]).
 

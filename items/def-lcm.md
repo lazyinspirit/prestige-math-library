@@ -4,6 +4,9 @@ kind: definition
 title: "Common multiple, and the least common multiple $\\operatorname{lcm}(a,b)$, taken to be $0$ when $a = 0$ or $b = 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-divides-in-z, lem-divisibility-basic, thm-well-ordering-principle, lem-nat-embeds-int, def-natural-numbers, def-nat-order, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-ordered-ring, def-int-order, thm-int-comm-ring, def-int-operations]
 justified_by: []
 aliases: []

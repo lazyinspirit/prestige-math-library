@@ -4,6 +4,9 @@ kind: definition
 title: "Linear combination of a finite list, and the span $\\operatorname{span}(S)$ as the smallest linear subspace containing $S$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-vector-space, def-linear-subspace, lem-intersection-of-linear-subspaces, def-monoid-finite-product, def-semigroup-and-monoid, def-group, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
 aliases: [def-span, def-linear-combination, def-spanning-set]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_span"
     - title: "Linear combination (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_combination"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

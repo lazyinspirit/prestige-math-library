@@ -4,6 +4,9 @@ kind: counterexample
 title: "The induction axiom is independent of the other Peano axioms"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-peano-system, def-natural-numbers]
 aliases: []
 landmark: false
@@ -11,11 +14,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
     - title: "Mathematical induction (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Mathematical_induction"
+    - title: "Peano axioms (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Peano_axioms"
+    - title: "K. Sutner, Dedekind-Peano Axioms (Carnegie Mellon)"
+      url: "https://www.cs.cmu.edu/~sutner/pdf/30-Peano.pdf"
 pipeline_run: null
 ---
 
@@ -47,11 +49,11 @@ separately.
 
 **Proof technique:** direct.
 
-1.1 P1 holds: $\sigma$ is the successor within each copy; $0$ is the $\mathbb{N}$-copy zero, which is not the successor of any element (nothing in $N_{\mathbb{N}}$ maps to it, and $\sigma$ maps $N_{\mathbb{Z}}$ into $N_{\mathbb{Z}}$), so $\sigma(x) \neq 0$ for all $x$. [given]
+1.1 P1 holds: $\sigma$ is the successor within each copy; $0$ is the $\mathbb{N}$-copy zero, which is not the successor of any element (nothing in $N_{\mathbb{N}}$ maps to it, and $\sigma$ maps $N_{\mathbb{Z}}$ into $N_{\mathbb{Z}}$), so $\sigma(x) \neq 0$ for all $x$. [given, L1]
 
-1.2 P2 holds: $\sigma$ is injective on $N_{\mathbb{N}}$ and on $N_{\mathbb{Z}}$ separately, and $\sigma$ maps each copy into itself, so $\sigma$ is injective on $N$. [given]
+1.2 P2 holds: $\sigma$ is injective on $N_{\mathbb{N}}$ and on $N_{\mathbb{Z}}$ separately, and $\sigma$ maps each copy into itself, so $\sigma$ is injective on $N$. [given, L1]
 
-1.3 P3 fails: let $S = N_{\mathbb{N}}$, the $\mathbb{N}$-copy; then $0 \in S$ and $\sigma$ maps $S$ into $S$ ($\sigma(N_{\mathbb{N}}) \subseteq N_{\mathbb{N}}$), so $S$ contains $0$ and is closed under $\sigma$. [given]
+1.3 P3 fails: let $S = N_{\mathbb{N}}$, the $\mathbb{N}$-copy; then $0 \in S$ and $\sigma$ maps $S$ into $S$ ($\sigma(N_{\mathbb{N}}) \subseteq N_{\mathbb{N}}$), so $S$ contains $0$ and is closed under $\sigma$; the $\mathbb{N}$-copy is the standard model [L2]. [given, L1, L2]
 
 2.1 But $S = N_{\mathbb{N}} \neq N$, since the $\mathbb{Z}$-copy $N_{\mathbb{Z}}$ is disjoint from $S$ and nonempty. [step 1.3]
 

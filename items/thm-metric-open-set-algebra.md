@@ -4,6 +4,9 @@ kind: theorem
 title: "Arbitrary unions and finite intersections of open sets are open, open balls are open and closed balls are closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-topology, def-metric-ball, lem-finite-set-has-max, def-max-min,
        lem-of-add-order, def-metric-space, lem-metric-reverse-triangle,
        def-ordered-field, def-complete-ordered-field]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

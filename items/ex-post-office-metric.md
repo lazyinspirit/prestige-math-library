@@ -4,6 +4,9 @@ kind: example
 title: "The post-office metric $d(x,y) = \\|x\\| + \\|y\\|$ for $x \\ne y$ on $\\mathbb{R}^n$, and its isolated points"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-metric-interior-closure-boundary, def-metric-ball,
        lem-metrics-on-rn, lem-metric-nonnegativity, lem-finite-sum-laws,
        def-finite-sum, thm-of-square-roots, lem-of-add-order, cor-of-one-positive,
@@ -16,11 +19,6 @@ short: "post-office metric"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -30,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Isolated_point"
     - title: "Euclidean space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclidean_space"
+    - title: "SNCF metric (PlanetMath)"
+      url: "https://planetmath.org/sncfmetric"
 pipeline_run: null
 ---
 
@@ -95,18 +95,6 @@ $\mathbb{R}^n$ is isolated.
 
 ## Remarks
 
-- **The topology is almost discrete.** Every singleton $\{x\}$ with
-  $x \ne \mathbf{0}$ is open by claim 2, so every subset of
-  $\mathbb{R}^n \setminus \{\mathbf{0}\}$ is open
-  ([[thm-metric-open-set-algebra]]); the only points a set has to be careful
-  about are those near $\mathbf{0}$.
-- **This is not equivalent to any of $d_1$, $d_2$, $d_\infty$**, not even
-  topologically. Those three share a topology ([[ex-p-metrics-on-rn]]) in which
-  no point is isolated: for $x \in \mathbb{R}^n$ and $r > 0$ the element $x + w$,
-  with $w$ the vector of step 1.3, satisfies $d_2(x, x+w) = \|w\| = r/2 < r$ and
-  differs from $x$. In $\rho$, by claim 2, every point but $\mathbf{0}$ is
-  isolated.
-- **The same construction works over any metric space with a distinguished
-  point**, replacing $\|x\|$ by the distance to that point; nothing above uses
-  more about $\|\cdot\|$ than nonnegativity and vanishing exactly at
-  $\mathbf{0}$.
+- **The topology is almost discrete.** Every singleton $\{x\}$ with $x \ne \mathbf{0}$ is open by claim 2, so every subset of $\mathbb{R}^n \setminus \{\mathbf{0}\}$ is open ([[thm-metric-open-set-algebra]]); the only points a set has to be careful about are those near $\mathbf{0}$.
+- **This is not equivalent to any of $d_1$, $d_2$, $d_\infty$**, not even topologically. Those three share a topology ([[ex-p-metrics-on-rn]]) in which no point is isolated: for $x \in \mathbb{R}^n$ and $r > 0$ the element $y$ with $y_0 := x_0 + r/2$ and $y_k := x_k$ for $1 \le k < n$ satisfies $d_2(x, y) = r/2 < r$, by the computation of step 1.3, and differs from $x$. In $\rho$, by claim 2, every point but $\mathbf{0}$ is isolated.
+- **The same construction works over any metric space with a distinguished point**, replacing $\|x\|$ by the distance to that point; nothing above uses more about $\|\cdot\|$ than nonnegativity and vanishing exactly at $\mathbf{0}$.

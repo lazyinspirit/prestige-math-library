@@ -4,6 +4,9 @@ kind: definition
 title: "Order on the natural numbers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-natural-numbers, def-nat-addition]
 aliases: []
 landmark: false
@@ -18,6 +21,10 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "Peano axioms (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 
@@ -33,7 +40,8 @@ addition ([[def-nat-addition]]).
 ## Remarks
 
 Read $m \le n$ as "$n$ is $m$ plus something": the gap $k$ with $m + k = n$ is
-unique when it exists (by cancellation, [[lem-nat-add-cancellative]]) and is
+unique when it exists (by commutativity and cancellation,
+[[lem-nat-add-commutative]], [[lem-nat-add-cancellative]]) and is
 written $n - m$ once subtraction is available. That $\le$ is genuinely a linear
 order, reflexive, antisymmetric, transitive, and total, is proved in
 [[thm-nat-linear-order]] and [[lem-nat-trichotomy]]; compatibility with the

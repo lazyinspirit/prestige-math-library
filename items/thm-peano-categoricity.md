@@ -4,6 +4,9 @@ kind: theorem
 title: "Categoricity: the natural numbers are unique up to unique isomorphism"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-peano-system, thm-recursion, thm-induction-principle]
 aliases: [peano-uniqueness]
 landmark: true
@@ -11,11 +14,6 @@ short: "any two Peano systems uniquely isomorphic"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -36,7 +34,7 @@ Let $(N, 0, \sigma)$ and $(N', 0', \sigma')$ be Peano systems ([[def-peano-syste
 
 [L1] Recursion theorem, valid in any Peano system since its proof uses only the axioms P1 to P3: for a set $A$, an element $a \in A$, and $f : A \to A$, there is a unique $g : N \to A$ with $g(0) = a$ and $g(\sigma(n)) = f(g(n))$ ([[thm-recursion]]).
 
-[L2] Induction holds in each system (axiom P3): a subset containing the base point and closed under the successor is the whole system ([[def-peano-system]], [[thm-induction-principle]]).
+[L2] Induction holds in each system (axiom P3): a subset containing the base point and closed under the successor is the whole system ([[def-peano-system]]).
 
 ## Proof
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The set $A^{B}$ of functions $B \\to A$ between finite sets is finite, with $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-nat-power, thm-product-rule, thm-sum-rule, def-finite-cardinality,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection, def-equinumerous,
        thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership,
@@ -29,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Function_(mathematics)"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 1"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Twelvefold way (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Twelvefold_way"
+    - title: "Power set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Power_set"
 pipeline_run: null
 ---
 

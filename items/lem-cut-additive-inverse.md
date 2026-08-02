@@ -4,16 +4,14 @@ kind: lemma
 title: "For a cut $A$, $-A$ is a cut and $A + (-A) = 0^{*}$"
 status: published
 origin: session
-deps: [def-cut-addition, def-dedekind-cut, lem-cut-add-well-defined, lem-rat-archimedean, thm-rat-ordered-field]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-cut-addition, def-dedekind-cut, lem-cut-add-well-defined, lem-rat-archimedean, thm-rat-ordered-field, thm-well-ordering-principle]
 aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -21,6 +19,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
 pipeline_run: null
 ---
 
@@ -38,7 +40,7 @@ cut has an additive inverse and $(\mathbb{R}, +)$ is a group.
 
 [A1] Cut axioms (C1)–(C3), and the restatement that for $a \in A$ and $b \notin A$ one has $a < b$; the contrapositive of (C2): if $x \notin A$ and $y > x$ then $y \notin A$ ([[def-dedekind-cut]]).
 
-[A2] Well-ordering of $\mathbb{Z}$: every nonempty set of integers that is bounded above has a greatest element.
+[A2] A nonempty set $K \subseteq \mathbb{Z}$ with $k < M$ for every $k \in K$ has a greatest element: $\{\, M - k : k \in K \,\}$ is then a nonempty set of positive integers, so it has a least element $M - n$ by "every nonempty subset $S \subseteq \mathbb{N}$ has a least element" ([[thm-well-ordering-principle]]), and that $n$ is the greatest element of $K$.
 
 [L1] $\mathbb{Q}$ is Archimedean: for every rational $x$ there is a natural number $n$ with $x < n$ ([[lem-rat-archimedean]]).
 

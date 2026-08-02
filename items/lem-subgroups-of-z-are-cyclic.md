@@ -4,6 +4,9 @@ kind: lemma
 title: "Every subgroup of $(\\mathbb{Z}, +)$ is $\\langle n \\rangle = n\\mathbb{Z}$ for exactly one natural number $n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-group, def-subgroup, lem-subgroup-criterion, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, def-group-power, thm-recursion, thm-division-algorithm-in-z, thm-well-ordering-principle, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
 aliases: []

@@ -4,7 +4,11 @@ kind: definition
 title: "Arithmetic on the integers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-integers, def-nat-addition, def-nat-multiplication]
+justified_by: [lem-int-add-well-defined, lem-int-mul-well-defined]
 aliases: []
 verification:
   precheck: n/a
@@ -14,6 +18,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The symmetric group $\\operatorname{Sym}(X)$: the bijections of a set $X$ under composition"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-injection-surjection-bijection, def-binary-operation, def-identity-element]
 justified_by: []
 aliases: [def-permutation, def-symmetric-group-of-a-set]

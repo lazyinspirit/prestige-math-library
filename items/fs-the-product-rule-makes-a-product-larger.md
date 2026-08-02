@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: for all sets $A$ and $B$ with $B$ having at least two elements, $A \\times B$ is strictly larger than $A$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-n-cross-n-countable, thm-product-rule, thm-cantor-powerset, def-countable,
        def-equinumerous, def-finite-cardinality, def-nat-power, def-natural-numbers,
        lem-nat-order-mult-compatible, lem-nat-order-add-compatible, lem-nat-discrete,
@@ -15,11 +18,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -28,7 +26,9 @@ sources:
     - title: "Cardinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality"
     - title: "Cantor's theorem (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Power_set"
+      url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
+    - title: "Countable set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Countable_set"
 pipeline_run: null
 ---
 
@@ -61,8 +61,6 @@ when $A$ is infinite.
 
 [L5] $0 \ne 1$ in $\mathbb{N}$, so $\mathbb{N}$ has at least two elements ([[thm-omega-is-peano-system]]).
 
-[L6] $X \prec \mathcal{P}(X)$ for **every** set $X$ ([[thm-cantor-powerset]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -77,12 +75,6 @@ when $A$ is infinite.
 
 ## Remarks
 
-- **The contrast with Cantor's theorem is the point.** $X \prec \mathcal{P}(X)$
-  holds for every set whatsoever ([L6]), finite or infinite; strict increase
-  survives to the infinite case there and not here. Passing to the power set is a
-  genuinely different operation from multiplying by a fixed set.
+- **The contrast with Cantor's theorem is the point.** $X \prec \mathcal{P}(X)$ holds for every set whatsoever ([[thm-cantor-powerset]]), finite or infinite; strict increase survives to the infinite case there and not here. Passing to the power set is a genuinely different operation from multiplying by a fixed set.
 
-- **Read the cited theorem before using it.** [[thm-n-cross-n-countable]] states
-  that $J(m,n) = 2^{m}(2n+1)$ is a bijection onto the **nonzero** naturals, and
-  the bijection onto $\mathbb{N}$ is obtained by composing with the inverse of
-  the successor. The statement used above is the one that item actually proves.
+- **Read the cited theorem before using it.** [[thm-n-cross-n-countable]] states that $J(m,n) = 2^{m}(2n+1)$ is a bijection onto the **nonzero** naturals, and the bijection onto $\mathbb{N}$ is obtained by composing with the inverse of the successor. The statement used above is the one that item actually proves.

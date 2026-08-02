@@ -4,6 +4,9 @@ kind: example
 title: "The supremum metric $d_\\infty(f,g) = \\sup_x |f(x) - g(x)|$ on the bounded real-valued functions on a set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-bounded-set, lem-sup-epsilon, lem-sup-unique,
        def-complete-ordered-field, lem-sup-metric-is-a-metric,
        def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space,
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sequence_space"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 7"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Isometry (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Isometry"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-metric-ball, def-metric-space]
 justified_by: []
 aliases: [def-open-set-metric, def-closed-set-metric]
@@ -11,11 +14,6 @@ landmark: true
 short: "metric topology"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -25,6 +23,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 
@@ -62,7 +62,8 @@ same one; the systematic comparison is [[def-equivalent-metrics]].
 - **What "topology" means here.** $\mathcal{T}_d$ is defined above as a
   collection of subsets of $X$; the abstract notion of a topological space, a
   collection of subsets closed under arbitrary unions and finite intersections
-  taken as primitive data, is not introduced in this library yet. What is proved
+  taken as primitive data, is introduced on a later page and is not used
+  here. What is proved
   here is that $\mathcal{T}_d$ has exactly those closure properties
   ([[thm-metric-open-set-algebra]]), which is what licenses the word.
 - **Open and closed are not opposites.** A set may be neither ($[0,1)$ inside

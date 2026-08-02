@@ -4,6 +4,9 @@ kind: definition
 title: "Equivalence relation, equivalence class, and the quotient set $A/{\\sim}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: []
 justified_by: []
 aliases: [def-equivalence-class, def-quotient-set]

@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-natural-numbers, def-finite-sum, thm-minkowski-finite,
        thm-cauchy-schwarz-finite, lem-finite-set-has-max, thm-of-square-roots,
        lem-of-abs-value, lem-finite-sum-laws, def-max-min, lem-of-square-monotone,
@@ -33,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lp_space"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

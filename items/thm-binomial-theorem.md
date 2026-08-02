@@ -4,6 +4,9 @@ kind: theorem
 title: "The binomial theorem in $\\mathbb{R}$: $(x+y)^{n} = \\sum_{k<n+1} \\iota\\!\\binom{n}{k}\\, x^{k} y^{\\,n-k}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-pascals-rule, def-binomial-coefficient, def-finite-sum, lem-finite-sum-laws,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
        def-integer-power, def-canonical-natural, lem-of-zero-mult,

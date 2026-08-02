@@ -4,6 +4,9 @@ kind: theorem
 title: "The recursion theorem"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-peano-system, def-natural-numbers, thm-induction-principle]
 aliases: [dedekind-recursion, recursion-theorem]
 landmark: true
@@ -23,6 +26,10 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
 pipeline_run: null
 ---
 

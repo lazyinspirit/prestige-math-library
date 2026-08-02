@@ -4,23 +4,23 @@ kind: theorem
 title: "The rationals form a totally ordered field"
 status: published
 origin: session
-deps: [def-rat-order, def-rat-operations, thm-rat-field, thm-int-ordered-ring, lem-int-cancellation]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-rat-order, def-rat-operations, thm-rat-field, thm-int-ordered-ring]
 aliases: []
 landmark: true
 short: "ℚ ordered field"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-24
-  audited: 2026-07-24
 sources:
   scraped: []
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "L. S. Krapp, Constructions of the real numbers: a set theoretical approach (Oxford, 2014)"
+      url: "https://www.math.uni-konstanz.de/~krapp/research/Constructions_of_the_real_numbers.pdf"
 pipeline_run: null
 ---
 
@@ -36,8 +36,6 @@ $0 < xy$.
 **Given:** Rationals $x = [(a,b)]$, $y = [(c,d)]$, $z = [(e,f)]$ with $b, d, f > 0$.
 
 [L1] $\mathbb{Z}$ is a totally ordered commutative ring; positives are closed under products ([[thm-int-ordered-ring]]).
-
-[L2] $\mathbb{Z}$ has no zero divisors; cancellation holds ([[lem-int-cancellation]]).
 
 ## Proof
 

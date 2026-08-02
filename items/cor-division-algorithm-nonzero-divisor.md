@@ -4,6 +4,9 @@ kind: corollary
 title: "Division with remainder for any nonzero divisor: for $a \\in \\mathbb{Z}$ and $b \\ne 0$ there are unique $q, r \\in \\mathbb{Z}$ with $a = qb + r$ and $0 \\le r < |b|$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-division-algorithm-in-z, def-int-abs, lem-int-abs-properties, def-divides-in-z, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
 aliases: []

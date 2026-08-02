@@ -4,6 +4,9 @@ kind: definition
 title: "Exponentiation of natural numbers, $m^{n}$, and its agreement with the integer power in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-recursion, thm-induction-principle, def-nat-addition, def-nat-multiplication,
        lem-nat-mult-associative, lem-nat-mult-commutative, lem-nat-mult-identity,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -13,11 +16,6 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -49,8 +47,9 @@ numbers, and an identity between them has to be an identity in $\mathbb{N}$. The
 two operations are related by clause (d) below and by nothing weaker.
 
 **(a) $0^{0} = 1$ and $0^{n} = 0$ for $n \ge 1$.** The first is the base clause.
-For the second, $0^{\sigma(n)} = 0^{n}\cdot 0 = 0$ ([[lem-nat-mult-identity]]),
-and every $n \ge 1$ is a successor.
+For the second, $0^{\sigma(n)} = 0^{n}\cdot 0 = 0$, the clause $x \cdot 0 = 0$
+being definitional ([[def-nat-multiplication]]), and every $n \ge 1$ is a
+successor.
 
 **(b) $1^{n} = 1$ for every $n$.** Induction: $1^{0} = 1$, and
 $1^{\sigma(n)} = 1^{n}\cdot 1 = 1^{n}$ ([[lem-nat-mult-identity]],

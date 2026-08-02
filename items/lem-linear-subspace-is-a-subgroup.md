@@ -4,6 +4,9 @@ kind: lemma
 title: "The additive group of a vector space is an abelian group and every linear subspace is a subgroup of it; conversely a subgroup closed under scalar multiplication is a linear subspace"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, def-vector-space, def-subgroup, lem-vector-space-elementary-consequences, def-group]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Subgroup (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Subgroup"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

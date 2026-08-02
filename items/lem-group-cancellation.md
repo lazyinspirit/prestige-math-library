@@ -4,6 +4,9 @@ kind: lemma
 title: "Cancellation in a group: $gx = gy$ or $xg = yg$ forces $x = y$; equivalently left and right translation by $g$ are bijections of $G$, so $gx = h$ and $xg = h$ each have exactly one solution"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group, lem-group-inverse-laws, def-injection-surjection-bijection, def-identity-element]
 justified_by: []
 aliases: [lem-cancellation-in-a-group, lem-translation-bijective]
@@ -12,11 +15,6 @@ short: "cancellation; translations are bijections"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -48,8 +46,6 @@ translation** $\rho_g : G \to G$ by $\rho_g(x) = xg$. Then:
 
 [L1] The group axioms: associativity, $e$ a two-sided identity, and $g^{-1}g = e = g g^{-1}$ ([[def-group]], [[def-identity-element]]).
 
-[L2] $(g^{-1})^{-1} = g$ ([[lem-group-inverse-laws]]).
-
 [L3] A map is bijective exactly when it has a two-sided inverse map; injective means $f(x) = f(y)$ forces $x = y$ ([[def-injection-surjection-bijection]]).
 
 ## Proof
@@ -76,6 +72,6 @@ translation** $\rho_g : G \to G$ by $\rho_g(x) = xg$. Then:
 
 ## Remarks
 
-- Claim 2 is the form used most often: it says every row and every column of the multiplication table of a group is a rearrangement of $G$, since $\lambda_g$ and $\rho_g$ permute $G$. Fact [L2] records that inversion pairs $g$ with $g^{-1}$, so the two families of translations are indexed by the same elements.
+- Claim 2 is the form used most often: it says every row and every column of the multiplication table of a group is a rearrangement of $G$, since $\lambda_g$ and $\rho_g$ permute $G$. Inversion pairs $g$ with $g^{-1}$ ([[lem-group-inverse-laws]]), so the two families of translations are indexed by the same elements.
 
 - Cancellation is strictly weaker than invertibility. A commutative monoid can satisfy both cancellation laws without being a group; $(\mathbb{N},+)$ is such a monoid, recorded on the companion page.

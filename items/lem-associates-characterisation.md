@@ -4,6 +4,9 @@ kind: lemma
 title: "For integers $a$ and $b$ the following are equivalent: $a \\mid b$ and $b \\mid a$; $b = ua$ for a unit $u$; $|a| = |b|$. Being associates is an equivalence relation whose class of $a$ is $\\{a, -a\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-associates-in-z, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, lem-units-of-z, def-int-abs, lem-int-abs-properties, def-equivalence-relation, lem-equivalence-classes-partition, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-int-operations]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
   references:
     - title: "Divisibility (ring theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Divisibility_(ring_theory)"
+    - title: "Divisor (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Divisor"
+    - title: "Unit (ring theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Unit_(ring_theory)"
 pipeline_run: null
 ---
 

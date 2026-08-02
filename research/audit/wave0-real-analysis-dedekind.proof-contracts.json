@@ -1,0 +1,2346 @@
+{
+  "version": 1,
+  "level": "audit-wave0-real-analysis-dedekind",
+  "scope": [
+    "lem-rational-cut-is-cut",
+    "lem-cut-order-total",
+    "lem-cut-add-well-defined",
+    "lem-cut-additive-inverse",
+    "lem-cut-reciprocal",
+    "thm-reals-dedekind-field",
+    "lem-rat-cut-embeds",
+    "thm-reals-dedekind-ordered-field",
+    "lem-cut-archimedean",
+    "thm-dedekind-complete",
+    "ex-sqrt2-cut",
+    "fs-cut-has-greatest"
+  ],
+  "contracts": {
+    "lem-rational-cut-is-cut": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1): $q-1 \\in q^{*}$ makes $q^{*}$ nonempty and $q \\notin q^{*}$ makes it proper.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C2): $p<q$ and $r<p$ give $r<q$ by transitivity of the rational order, so $q^{*}$ is downward closed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(C3): for $p \\in q^{*}$ the midpoint $m=(p+q)/2$ satisfies $p<m<q$, so $m \\in q^{*}$ exceeds $p$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "(C1)-(C3) hold, so $q^{*}$ is a cut; instantiating at $q=0$ and $q=1$ puts $0^{*}$ and $1^{*}$ in $\\mathbb{R}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 exhibits $q-1 \\in q^{*}$, so the set is never empty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 instantiates the result at $q=0$, giving $0^{*} \\in \\mathbb{R}$"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 instantiates the result at $q=1$, giving $1^{*} \\in \\mathbb{R}$"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 uses only $q-1<q<q+1$, valid for every rational $q$; no parameter degenerates"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 disposes of the boundary rational $q$ itself, which is excluded because $q \\not< q$"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.3 chooses the midpoint, which exists in $\\mathbb{Q}$ for every $p<q$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is the single implication that every $q^{*}$ is a Dedekind cut."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is the single implication that every $q^{*}$ is a Dedekind cut."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "Audit-Beta (wave 0, real-analysis/dedekind) read every step and citation; no defect found. Awaiting Alpha disposition."
+      }
+    },
+    "lem-cut-order-total": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "**(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$;",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Inclusion is reflexive, antisymmetric and transitive, so $\\le$ is a partial order on $\\mathbb{R}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Reduction: assuming $A \\not\\subseteq B$ it suffices to prove $B \\subseteq A$.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From $A \\not\\subseteq B$ choose a rational $x \\in A$ with $x \\notin B$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every $y \\in B$ satisfies $y<x$: otherwise trichotomy gives $x \\le y$ and downward closure of $B$ puts $x \\in B$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $y \\in B$, $y<x$ and $x \\in A$ give $y \\in A$ by downward closure of $A$; hence $B \\subseteq A$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Totality holds, and with the partial-order properties inclusion is a total order on $\\mathbb{R}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 quantifies over $y \\in B$ and yields $B \\subseteq A$ vacuously if $B$ were empty; cut axiom (C1) additionally forbids an empty cut"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement concerns the order relation only; no arithmetic zero occurs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative unit or one-element case occurs in an order-theoretic statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 covers $A=B$: reflexivity and antisymmetry give comparability in that case"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles the boundary case $x=y$ explicitly, placing $x \\in B$ and contradicting the choice at step 2.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1's choice of $x \\in A \\setminus B$ is licensed by the assumption $A \\not\\subseteq B$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement lists order properties; it contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement lists order properties; it contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D7 applied at A4: [A2] now cites thm-rat-ordered-field for totality of the rational order, and that item is in deps. Contract describes the repaired text. No proof defect."
+      }
+    },
+    "lem-cut-add-well-defined": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1) for $A+B$: $a+b$ witnesses nonemptiness and $a'+b'$ with $a' \\notin A$, $b' \\notin B$ is excluded, so $A+B \\ne \\mathbb{Q}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C2) for $A+B$: $q<a+b$ gives $q-a<b$, so $q-a \\in B$ and $q=a+(q-a) \\in A+B$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(C3) for $A+B$: (C3) for $A$ supplies $a'>a$ in $A$, so $a'+b>a+b$ lies in $A+B$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Commutativity and associativity of $+$ on cuts descend from the same laws in $\\mathbb{Q}$.",
+          "step": "1.4",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "$A+0^{*} \\subseteq A$: for $a \\in A$ and $q<0$, $a+q<a$ lies in $A$ by (C2).",
+          "step": "1.5",
+          "inputs": [
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "$A \\subseteq A+0^{*}$: (C3) supplies $r>a$ in $A$, and $a=r+(a-r)$ with $a-r<0$.",
+          "step": "1.6",
+          "inputs": [
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$A+B$ satisfies (C1)-(C3), hence is a Dedekind cut.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The two inclusions give the identity law $A+0^{*}=A$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.5",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cut addition is closed, commutative, associative, and has two-sided identity $0^{*}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.4",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 proves $A+B \\ne \\emptyset$ using (C1) nonemptiness of both summands"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.5 and 1.6 dispose of the additive zero $0^{*}$"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative unit appears; the lemma is about addition only."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.4 covers $A=B$ and repeated summands, the laws being inherited from $\\mathbb{Q}$"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses excluded rationals $a' \\notin A$, $b' \\notin B$ to bound $A+B$ away from $\\mathbb{Q}$; step 1.6 uses (C3) to avoid the missing boundary point"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses $a \\in A$, $b \\in B$, $a' \\notin A$, $b' \\notin B$, all licensed by (C1)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction of closure, commutativity, associativity, and the identity law; no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction of closure, commutativity, associativity, and the identity law; no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "[A1] cites def-dedekind-cut for the separation restatement ($a \\in A$, $b \\notin A \\Rightarrow a<b$), which lives in that item's Remarks rather than its Definition. Nonfatal; recorded."
+      }
+    },
+    "lem-cut-additive-inverse": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-rat-archimedean",
+          "source_section": "Statement",
+          "quote": "For every rational $x$ there is a natural number $n$ with $x < n$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.2",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cut-add-well-defined",
+          "source_section": "Statement",
+          "quote": "For Dedekind cuts $A, B$, the sumset $A + B = \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}$ ([[def-cut-addition]]) is again a Dedekind cut.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1) nonempty: from $s \\notin A$, $p_{0}=-s-1$ lies in $-A$ with witness $r=1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C1) proper: for $a \\in A$, $-a \\notin -A$, since a witness $r>0$ would force $a-r \\notin A$ against (C2).",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(C2): if $p \\in -A$ with witness $r$ and $q<p$ then $-q-r>-p-r$ is also outside $A$, so $q \\in -A$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "(C3): $t=p+r/2>p$ lies in $-A$ with witness $r/2$, since $-t-r/2=-p-r \\notin A$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "$A+(-A) \\subseteq 0^{*}$: separation gives $a<-p-r$, so $a+p<-r<0$.",
+          "step": "1.5",
+          "inputs": [
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "Setup for the reverse inclusion: fix $v \\in 0^{*}$, put $w=-v/2>0$, and choose $a_{0} \\in A$, $b_{0} \\notin A$.",
+          "step": "1.6",
+          "inputs": [
+            "A1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$-A$ satisfies (C1)-(C3), hence is a Dedekind cut.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$K=\\{k \\in \\mathbb{Z} : kw \\in A\\}$ is bounded above: Archimedes gives $M$ with $b_{0}<Mw$, so $Mw \\notin A$ and every $k \\in K$ has $k<M$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.6",
+            "L1",
+            "L2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "$K$ is nonempty: Archimedes gives $N$ with $-Nw<a_{0}$, so $-Nw \\in A$ and $-N \\in K$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.6",
+            "L1",
+            "L2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$K$ has a greatest element $n$: $nw \\in A$ while $(n+1)w \\notin A$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.2",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "$0^{*} \\subseteq A+(-A)$: $p=-(n+2)w$ lies in $-A$ with witness $w$, and $nw+p=-2w=v$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "A1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The two inclusions give $A+(-A)=0^{*}$, with $-A$ a cut and $A+(-A)$ a cut by cut addition.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.5",
+            "step 4.1",
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 proves $-A \\ne \\emptyset$ and step 1.6 uses (C1) to choose $a_{0} \\in A$"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.6 fixes an arbitrary $v \\in 0^{*}$ and step 4.1 realises it as $nw+p$; the identity $A+(-A)=0^{*}$ is the zero case itself"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the witness $r=1$; no other unit case arises"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.4 halves the witness to $r/2$, so a witness never degenerates to $0$ and $-A$ keeps no greatest element"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 locates the exact index boundary, $nw \\in A$ and $(n+1)w \\notin A$, and step 4.1 steps one further to $-(n+2)w$ to keep the witness strict"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.6 chooses $a_{0} \\in A$ and $b_{0} \\notin A$, licensed by (C1) $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction (that $-A$ is a cut and that $A+(-A)=0^{*}$), not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction (that $-A$ is a cut and that $A+(-A)=0^{*}$), not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D4 applied at A4: [A2] now derives the greatest element of a bounded-above K subset Z from thm-well-ordering-principle via the map k |-> M-k onto a nonempty set of positive integers, and that item is in deps. Contract describes the repaired text."
+      }
+    },
+    "lem-cut-reciprocal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "$$A \\cdot B := \\{\\, q \\in \\mathbb{Q} : q \\le 0 \\,\\} \\;\\cup\\; \\{\\, a b : a \\in A,\\ b \\in B,\\ a > 0,\\ b > 0 \\,\\}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "$$A^{-1} := \\{\\, p \\in \\mathbb{Q} : p \\le 0 \\,\\} \\;\\cup\\; \\{\\, p > 0 : \\exists\\, s \\in \\mathbb{Q},\\ s > 0,\\ s \\notin A,\\ p < 1/s \\,\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "A cut $A$ is called **positive** iff $0^{*} < A$, and **nonnegative** iff $0^{*} \\le A$, where $0^{*} = \\{\\, r \\in \\mathbb{Q} : r < 0 \\,\\}$ is the cut of $0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-rat-archimedean",
+          "source_section": "Statement",
+          "quote": "For every rational $x$ there is a natural number $n$ with $x < n$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "**(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty);",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$A^{-1}$ is a cut with $A^{-1}>0^{*}$: it is nonempty, proper (bounded by $1/a_{0}$), downward closed, contains a positive rational, and has no greatest element.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "$A \\cdot A^{-1} \\subseteq 1^{*}$: for positive $a \\in A$ and $p \\in A^{-1}$ with witness $s$, $a<s$ and $p<1/s$ give $ap<1$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $0<x<1$ pick $t$ with $x<t<1$, set $y=1/t>1$ and $a_{0}>0$ in $A$; some power $a_{0}y^{n}$ leaves $A$.",
+          "step": "1.3",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $n \\ge 1$ be least with $a_{0}y^{n} \\notin A$; then $a=a_{0}y^{n-1} \\in A$ and $s=ay \\notin A$ are positive.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L6",
+            "step 1.3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$p=x/a$ satisfies $1/p=a/x>ay=s$, so $p \\in A^{-1}$ and $x=ap \\in A \\cdot A^{-1}$; hence $1^{*} \\subseteq A \\cdot A^{-1}$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "step 1.1",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The two inclusions give $A \\cdot A^{-1}=1^{*}$, with $A^{-1}$ a cut and $A^{-1}>0^{*}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 proves $A^{-1} \\ne \\emptyset$ (it contains every rational $\\le 0$)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 records the $\\{p \\le 0\\}$ clause and shows $A^{-1}>0^{*}$; the hypothesis $A>0^{*}$ excludes the zero cut, for which no reciprocal is defined"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.3 fixes the target range $0<x<1$, the boundary $x=1$ being excluded because $1 \\notin 1^{*}$"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 shows $A^{-1}$ has no greatest element by halving the gap to $1/s$, so no witness degenerates"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 locates the exact exponent boundary $a_{0}y^{n-1} \\in A$, $a_{0}y^{n} \\notin A$, giving the strict witness needed at step 3.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.3 chooses a positive $a_{0} \\in A$, licensed by $A>0^{*}$, and a rational $t$ strictly between $x$ and $1$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction of assertions about $A^{-1}$, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a conjunction of assertions about $A^{-1}$, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D5 applied at A4: [L6] now states and cites thm-well-ordering-principle verbatim, and that item is in deps. D6 (Bernoulli's inequality $y^{n} \\ge 1+n(y-1)$ folded into [L5], not proved in the library) was DEFERRED at A3 to Alpha at A6; it is true, elementary, and the proof closes."
+      }
+    },
+    "thm-reals-dedekind-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "$$A \\cdot B := \\{\\, q \\in \\mathbb{Q} : q \\le 0 \\,\\} \\;\\cup\\; \\{\\, a b : a \\in A,\\ b \\in B,\\ a > 0,\\ b > 0 \\,\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "- $A \\cdot B := 0^{*}$ if $A = 0^{*}$ or $B = 0^{*}$; - $A \\cdot B := |A| \\cdot |B|$ if $A, B$ are both $> 0^{*}$ or both $< 0^{*}$; - $A \\cdot B := -\\bigl(|A| \\cdot |B|\\bigr)$ if $A, B$ have opposite signs.",
+          "uses": [
+            "1.1",
+            "1.5",
+            "1.6",
+            "2.4",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "**Absolute value.** $|A| := A$ if $A \\ge 0^{*}$, and $|A| := -A$ otherwise",
+          "uses": [
+            "1.6",
+            "2.4",
+            "3.2",
+            "7.1",
+            "7.2",
+            "7.3",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cut-addition",
+          "source_section": "Definition",
+          "quote": "**Sum.** The sum is the Minkowski sumset in $\\mathbb{Q}$: $$A + B := \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}.$$",
+          "uses": [
+            "1.5",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.2",
+            "7.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cut-add-well-defined",
+          "source_section": "Statement",
+          "quote": "For Dedekind cuts $A, B$, the sumset $A + B = \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}$ ([[def-cut-addition]]) is again a Dedekind cut.",
+          "uses": [
+            "1.5",
+            "7.1",
+            "7.2",
+            "7.3",
+            "8.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cut-additive-inverse",
+          "source_section": "Statement",
+          "quote": "is again a Dedekind cut, and $A + (-A) = 0^{*}$, where $0^{*} = \\{\\, q \\in \\mathbb{Q} : q < 0 \\,\\}$.",
+          "uses": [
+            "1.5",
+            "7.1",
+            "7.2",
+            "7.3",
+            "8.1",
+            "9.1",
+            "11.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cut-order-total",
+          "source_section": "Statement",
+          "quote": "is reflexive, antisymmetric (with antisymmetry delivering set equality $A = B$), and transitive, and it is moreover **total**: for any two cuts $A, B$, either $A \\subseteq B$ or $B \\subseteq A$.",
+          "uses": [
+            "1.1",
+            "1.6",
+            "8.1",
+            "10.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-rat-cut-embeds",
+          "source_section": "Statement",
+          "quote": "is injective and order-preserving-and-reflecting, $p < q \\iff p^{*} \\subsetneq q^{*}$, and a ring embedding: $(p+q)^{*} = p^{*} + q^{*}$, $(pq)^{*} = p^{*} \\cdot q^{*}$, $0 \\mapsto 0^{*}$, $1 \\mapsto 1^{*}$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "lem-cut-reciprocal",
+          "source_section": "Statement",
+          "quote": "For $A > 0^{*}$, the reciprocal $A^{-1}$ ([[def-cut-multiplication]]) is a Dedekind cut with $A^{-1} > 0^{*}$, and $A \\cdot A^{-1} = 1^{*}$.",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "lem-cut-add-well-defined",
+          "source_section": "Statement",
+          "quote": "For Dedekind cuts $A, B$, the sumset $A + B = \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}$ ([[def-cut-addition]]) is again a Dedekind cut.",
+          "uses": [
+            "7.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "lem-cut-additive-inverse",
+          "source_section": "Statement",
+          "quote": "is again a Dedekind cut, and $A + (-A) = 0^{*}$, where $0^{*} = \\{\\, q \\in \\mathbb{Q} : q < 0 \\,\\}$.",
+          "uses": [
+            "7.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "A cut $A$ is called **positive** iff $0^{*} < A$, and **nonnegative** iff $0^{*} \\le A$, where $0^{*} = \\{\\, r \\in \\mathbb{Q} : r < 0 \\,\\}$ is the cut of $0$.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L11",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "**(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A,B>0^{*}$ the product $A \\cdot B$ is a cut (nonempty, proper, downward closed, no greatest element), and $0^{*} \\cdot B=0^{*}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L6",
+            "L7",
+            "L11"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Multiplication of nonnegative cuts is commutative, since $\\{ab\\}=\\{ba\\}$ in $\\mathbb{Q}$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "$A \\cdot 1^{*}=A$ for $A \\ge 0^{*}$, by the two inclusions plus the sign rule at $A=0^{*}$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "$1^{*} \\ne 0^{*}$, because the rational embedding is injective and $1 \\ne 0$.",
+          "step": "1.4",
+          "inputs": [
+            "L8"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "Degenerate distributivity cases: if $A$, $B$ or $C$ equals $0^{*}$ both sides agree.",
+          "step": "1.5",
+          "inputs": [
+            "L2",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "Sign rule: $(-X) \\cdot Y=-(X \\cdot Y)=X \\cdot (-Y)$, since $|-X|=|X|$ and negating one factor flips the sign class.",
+          "step": "1.6",
+          "inputs": [
+            "L2",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Associativity on nonnegatives: both $(A \\cdot B) \\cdot C$ and $A \\cdot (B \\cdot C)$ have positive part $\\{abc\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Distributivity inclusion $A \\cdot (B+C) \\subseteq A \\cdot B+A \\cdot C$ for nonnegative cuts, via $a(b+c)=ab+ac$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L4",
+            "L7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For $A,B,C>0^{*}$ the cuts $A \\cdot B$ and $A \\cdot C$ contain positive rationals arbitrarily close to $0$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.5",
+            "step 1.1",
+            "L1",
+            "L11"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "Every $A \\ne 0^{*}$ is invertible: directly for $A>0^{*}$, and by the sign rule and $A^{-1}=-((-A)^{-1})$ for $A<0^{*}$.",
+          "step": "2.4",
+          "inputs": [
+            "L2",
+            "L3",
+            "L9",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Normalisation for the reverse inclusion: any $u>0$ in $A \\cdot B+A \\cdot C$ can be written $u=s+t$ with $s,t>0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Commutativity, associativity and the identity law extend from nonnegatives to all cuts by matching magnitude and sign.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "With $s,t>0$, write $s=a_{1}b_{1}$, $t=a_{2}c_{1}$ and set $a=\\max(a_{1},a_{2}) \\in A$, $a>0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.1",
+            "L11"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "With $b=s/a \\le b_{1}$ and $c=t/a \\le c_{1}$, $u=a(b+c) \\in A \\cdot (B+C)$.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "L7",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Distributivity holds for all $A,B,C \\ge 0^{*}$, combining the two inclusions and the degenerate cases.",
+          "step": "6.1",
+          "inputs": [
+            "L1",
+            "step 1.5",
+            "step 2.2",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Distributivity for $A \\ge 0^{*}$ and $B,C \\le 0^{*}$, using $-(X+Y)=(-X)+(-Y)$ and the sign rule.",
+          "step": "7.1",
+          "inputs": [
+            "L10",
+            "L3",
+            "L5",
+            "step 6.1",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-7-2",
+          "claim": "Mixed-sign case with $B+C \\ge 0^{*}$: from $B=(B+C)+|C|$ and nonnegative distributivity.",
+          "step": "7.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "step 6.1",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-7-3",
+          "claim": "Mixed-sign case with $B+C<0^{*}$: from $|C|=B+|B+C|$ and nonnegative distributivity.",
+          "step": "7.3",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "step 6.1",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Distributivity for $A \\ge 0^{*}$ and arbitrary $B,C$, the four sign cases being exhaustive by trichotomy.",
+          "step": "8.1",
+          "inputs": [
+            "step 6.1",
+            "step 7.1",
+            "step 7.2",
+            "step 7.3",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Distributivity for $A<0^{*}$, by negating the nonnegative case for $|A|$.",
+          "step": "9.1",
+          "inputs": [
+            "step 8.1",
+            "L3",
+            "L5",
+            "L10",
+            "step 1.6"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "Distributivity holds for all cuts, by trichotomy on the sign of $A$.",
+          "step": "10.1",
+          "inputs": [
+            "step 8.1",
+            "step 9.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-11-1",
+          "claim": "$\\mathbb{R}$ is a field: abelian additive group, commutative associative multiplication with identity $1^{*} \\ne 0^{*}$, distributivity, and inverses for nonzero cuts.",
+          "step": "11.1",
+          "inputs": [
+            "L5",
+            "step 3.2",
+            "step 1.4",
+            "step 10.1",
+            "step 2.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 proves the product cut is nonempty and proper; cut axiom (C1) forbids an empty factor"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.5 and the sign rule at step 1.1 dispose of $A=0^{*}$, $B=0^{*}$ and $C=0^{*}$, and step 2.4 excludes $0^{*}$ from the inverse claim"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.3 and 3.2 establish $A \\cdot 1^{*}=A$, and step 1.4 gives $1^{*} \\ne 0^{*}$"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.6 supplies the sign rule so that repeated or negated factors are covered; step 4.1 handles $a_{1}=a_{2}$ through the maximum"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 disposes of the boundary case in which one summand is $\\le 0$, replacing it by a strictly positive representative"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.3 licenses the choice of a positive $t'<u$ in $A \\cdot C$, and step 4.1 chooses positive representatives $a_{1},b_{1},a_{2},c_{1}$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the field axioms; it contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the field axioms; it contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D1 applied at A4: [L6] now claims only the trichotomy that lem-cut-order-total supplies, and the positivity clause moved to a new [L11] citing def-cut-order and def-dedekind-cut, both added to deps; the tags at steps 1.1, 2.3 and 4.1 were redistributed accordingly. Contract describes the repaired text. Steps 3.2 and 2.1 argue the general-sign associativity/commutativity by magnitude-and-sign matching; the gaps there are closable in seconds but are the least explicit part of the proof."
+      }
+    },
+    "lem-rat-cut-embeds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.8",
+            "2.5",
+            "2.6"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-real-dedekind",
+          "source_section": "Definition",
+          "quote": "$$\\mathbb{R} := \\{\\, A \\subseteq \\mathbb{Q} : A \\text{ is a Dedekind cut} \\,\\}.$$ Elements of $\\mathbb{R}$ are written $A, B, C, \\dots$; each is a subset of $\\mathbb{Q}$ satisfying (C1)–(C3).",
+          "uses": [
+            "1.8",
+            "2.5",
+            "2.6"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "$$A \\le B \\iff A \\subseteq B, \\qquad A < B \\iff A \\subsetneq B.$$",
+          "uses": [
+            "1.8",
+            "2.4",
+            "2.5",
+            "2.6",
+            "2.7"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.9",
+            "2.3",
+            "2.5",
+            "2.7"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cut-addition",
+          "source_section": "Definition",
+          "quote": "$$-A := \\{\\, p \\in \\mathbb{Q} : \\exists\\, r \\in \\mathbb{Q},\\ r > 0,\\ \\text{with } -p - r \\notin A \\,\\}.$$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.9"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "$$A \\cdot B := \\{\\, q \\in \\mathbb{Q} : q \\le 0 \\,\\} \\;\\cup\\; \\{\\, a b : a \\in A,\\ b \\in B,\\ a > 0,\\ b > 0 \\,\\}.$$",
+          "uses": [
+            "1.3",
+            "1.6",
+            "1.7",
+            "2.2",
+            "2.7",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "1.6",
+            "1.7",
+            "1.9"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Order preservation: $p<q$ gives $p^{*} \\subseteq q^{*}$, properly because $p \\in q^{*} \\setminus p^{*}$.",
+          "step": "1.1",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Order reflection: $p^{*} \\subsetneq q^{*}$ supplies $r$ with $p \\le r<q$, hence $p<q$.",
+          "step": "1.2",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The embedding sends $0$ to $0^{*}$ and $1$ to $1^{*}$, the fixed additive and multiplicative identities.",
+          "step": "1.3",
+          "inputs": [
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "$p^{*}+q^{*} \\subseteq (p+q)^{*}$, since $a<p$ and $b<q$ give $a+b<p+q$.",
+          "step": "1.4",
+          "inputs": [
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "$(p+q)^{*} \\subseteq p^{*}+q^{*}$, splitting $r<p+q$ as $(p-d)+(q-d)$ with $d=(p+q-r)/2>0$.",
+          "step": "1.5",
+          "inputs": [
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "$p^{*} \\cdot q^{*} \\subseteq (pq)^{*}$ for $p,q>0$, since $0<a<p$ and $0<b<q$ give $ab<pq$.",
+          "step": "1.6",
+          "inputs": [
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1-7",
+          "claim": "$(pq)^{*} \\subseteq p^{*} \\cdot q^{*}$ for $p,q>0$, factoring $0<r<pq$ as $ab$ with $r/q<a<p$ and $b=r/a<q$.",
+          "step": "1.7",
+          "inputs": [
+            "L5",
+            "L6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-8",
+          "claim": "Density setup: from $A \\subsetneq B$ choose $x \\in B \\setminus A$ and then $y \\in B$ with $y>x$.",
+          "step": "1.8",
+          "inputs": [
+            "L1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-9",
+          "claim": "Negation identity $-(p^{*})=(-p)^{*}$, by unwinding the witness definition of $-A$.",
+          "step": "1.9",
+          "inputs": [
+            "L4",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$(p+q)^{*}=p^{*}+q^{*}$, combining the two inclusions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.4",
+            "step 1.5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$(pq)^{*}=p^{*} \\cdot q^{*}$ for $p,q \\ge 0$, the zero case coming from the sign rule.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.6",
+            "step 1.7",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Injectivity: $p^{*}=q^{*}$ excludes both strict inclusions, so trichotomy forces $p=q$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "The embedding preserves and reflects order: $p<q \\iff p^{*}<q^{*}$.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-5",
+          "claim": "$A \\subsetneq y^{*}$, by separation $a<x<y$ for $a \\in A$ and $x \\in y^{*} \\setminus A$.",
+          "step": "2.5",
+          "inputs": [
+            "step 1.8",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-6",
+          "claim": "$y^{*} \\subsetneq B$, by downward closure of $B$ and $y \\in B \\setminus y^{*}$.",
+          "step": "2.6",
+          "inputs": [
+            "step 1.8",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-7",
+          "claim": "Absolute-value identity $|p^{*}|=|p|^{*}$, using $p \\ge 0 \\iff p^{*} \\ge 0^{*}$ and the negation identity.",
+          "step": "2.7",
+          "inputs": [
+            "step 1.9",
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$(pq)^{*}=p^{*} \\cdot q^{*}$ for all signs, by the sign rules, the absolute-value identity, and the negation identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.7",
+            "step 1.9",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Taking $q=y$ gives density, and with injectivity, order preservation/reflection and the ring identities the map is a dense ordered-field embedding.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.3",
+            "step 2.3",
+            "step 2.4",
+            "step 2.5",
+            "step 2.6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.8's choice of $x \\in B \\setminus A$ is licensed by $A \\subsetneq B$; cut axiom (C1) makes every cut nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.3 gives $0 \\mapsto 0^{*}$ and step 2.2 covers $p=0$ or $q=0$ through the sign rule"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.3 gives $1 \\mapsto 1^{*}$"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.3 covers $p=q$, where both strict inclusions fail"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the excluded boundary rational $p \\notin p^{*}$, and step 2.6 uses $y \\notin y^{*}$"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.7 chooses the strict midpoint $a$ and step 1.8 chooses $x$ and then $y>x$ in $B$ using (C3)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves the forward direction $p<q \\Rightarrow p^{*} \\subsetneq q^{*}$ of the order equivalence"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.2 proves the reverse direction $p^{*} \\subsetneq q^{*} \\Rightarrow p<q$"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D2 applied at A4: [L1] now cites def-dedekind-cut for downward closure, separation and the absence of a greatest element, keeping def-real-dedekind for membership in R; def-dedekind-cut was added to deps. Contract describes the repaired text."
+      }
+    },
+    "thm-reals-dedekind-ordered-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-reals-dedekind-field",
+          "source_section": "Statement",
+          "quote": "The set $\\mathbb{R}$ of Dedekind cuts of $\\mathbb{Q}$ ([[def-real-dedekind]]), with cut addition and cut multiplication ([[def-cut-addition]], [[def-cut-multiplication]]), is a field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cut-order-total",
+          "source_section": "Statement",
+          "quote": "is reflexive, antisymmetric (with antisymmetry delivering set equality $A = B$), and transitive, and it is moreover **total**: for any two cuts $A, B$, either $A \\subseteq B$ or $B \\subseteq A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cut-addition",
+          "source_section": "Definition",
+          "quote": "**Sum.** The sum is the Minkowski sumset in $\\mathbb{Q}$: $$A + B := \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cut-multiplication",
+          "source_section": "Definition",
+          "quote": "$$A \\cdot B := \\{\\, q \\in \\mathbb{Q} : q \\le 0 \\,\\} \\;\\cup\\; \\{\\, a b : a \\in A,\\ b \\in B,\\ a > 0,\\ b > 0 \\,\\}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "A cut $A$ is called **positive** iff $0^{*} < A$, and **nonnegative** iff $0^{*} \\le A$, where $0^{*} = \\{\\, r \\in \\mathbb{Q} : r < 0 \\,\\}$ is the cut of $0$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Inclusion is a reflexive, antisymmetric, transitive and total order on $\\mathbb{R}$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Translation invariance: $A \\subseteq B$ gives $A+C \\subseteq B+C$ elementwise.",
+          "step": "1.2",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Products of nonnegatives are nonnegative: the sign rule covers a zero factor, and otherwise $A \\cdot B \\supseteq \\{q \\le 0\\} \\supseteq 0^{*}$.",
+          "step": "1.3",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$\\mathbb{R}$ is a field with a total, translation-invariant order closed under products of nonnegatives: a totally ordered field.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem quantifies over cuts, and cut axiom (C1) already forbids an empty cut; no set-emptiness case arises in the argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.3 treats $A=0^{*}$ and $B=0^{*}$ separately via the sign rule"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The multiplicative identity plays no role in the order axioms proved here; it is established in thm-reals-dedekind-field."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 covers $A=B$ through reflexivity and antisymmetry"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 handles the boundary of nonnegativity, $0^{*} \\le A$ with equality allowed"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is chosen; steps 1.2 and 1.3 argue by elementwise inclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a conjunction of order-compatibility properties, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a conjunction of order-compatibility properties, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "Audit-Beta read every step and citation; the proof closes and the statement matches the standard ordered-field axioms. No defect found."
+      }
+    },
+    "lem-cut-archimedean": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-real-dedekind",
+          "source_section": "Definition",
+          "quote": "$$\\mathbb{R} := \\{\\, A \\subseteq \\mathbb{Q} : A \\text{ is a Dedekind cut} \\,\\}.$$ Elements of $\\mathbb{R}$ are written $A, B, C, \\dots$; each is a subset of $\\mathbb{Q}$ satisfying (C1)–(C3).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-rat-archimedean",
+          "source_section": "Statement",
+          "quote": "For every rational $x$ there is a natural number $n$ with $x < n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-rat-cut-embeds",
+          "source_section": "Statement",
+          "quote": "is injective and order-preserving-and-reflecting, $p < q \\iff p^{*} \\subsetneq q^{*}$, and a ring embedding: $(p+q)^{*} = p^{*} + q^{*}$, $(pq)^{*} = p^{*} \\cdot q^{*}$, $0 \\mapsto 0^{*}$, $1 \\mapsto 1^{*}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "$$A \\le B \\iff A \\subseteq B, \\qquad A < B \\iff A \\subsetneq B.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-reals-dedekind-ordered-field",
+          "source_section": "Statement",
+          "quote": "a **totally ordered field**: the order is total, translation-invariant ($A \\le B \\Rightarrow A + C \\le B + C$), and closed under multiplication of nonnegatives ($0^{*} \\le A$ and $0^{*} \\le B \\Rightarrow 0^{*} \\le A \\cdot B$).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $A \\ne \\mathbb{Q}$, choose a rational $q \\notin A$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the rational Archimedean property choose a natural $n>q$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$A \\subseteq q^{*}$, since separation gives $a<q$ for every $a \\in A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$q^{*} \\subsetneq n^{*}$, by order preservation of the embedding.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$A \\subseteq q^{*} \\subsetneq n^{*}$, so $A<n^{*}$ and the rational cuts are cofinal.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Cut axiom (C1) makes $A$ nonempty; step 2.1 is in any case vacuously true for an empty $A$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 allows $q<0$, in which case any natural $n$ works; the argument does not assume $q>0$"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit case arises: the natural number produced at step 1.2 is arbitrary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 permits $A=q^{*}$; the strictness needed for $A<n^{*}$ comes from step 2.2, not from step 2.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the excluded rational $q \\notin A$ as the boundary, and step 2.2 moves strictly beyond it"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses $q \\notin A$, licensed by (C1) $A \\ne \\mathbb{Q}$"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an existence claim, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "D3 applied at A4: [L1] now cites def-dedekind-cut for properness and separation, keeping def-real-dedekind for membership in R; def-dedekind-cut was added to deps. Contract describes the repaired text."
+      }
+    },
+    "thm-dedekind-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty); - **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$; - **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cut-order",
+          "source_section": "Definition",
+          "quote": "$$A \\le B \\iff A \\subseteq B, \\qquad A < B \\iff A \\subsetneq B.$$",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cut-order-total",
+          "source_section": "Statement",
+          "quote": "is reflexive, antisymmetric (with antisymmetry delivering set equality $A = B$), and transitive, and it is moreover **total**: for any two cuts $A, B$, either $A \\subseteq B$ or $B \\subseteq A$.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-reals-dedekind-ordered-field",
+          "source_section": "Statement",
+          "quote": "a **totally ordered field**: the order is total, translation-invariant ($A \\le B \\Rightarrow A + C \\le B + C$), and closed under multiplication of nonnegatives ($0^{*} \\le A$ and $0^{*} \\le B \\Rightarrow 0^{*} \\le A \\cdot B$).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1) for $C$: it is nonempty because some $A_{0} \\in S$ is, and proper because $C \\subseteq B \\ne \\mathbb{Q}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C2) for $C$: $p \\in A \\subseteq C$ and $q<p$ give $q \\in A \\subseteq C$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(C3) for $C$: $p \\in A$ has some $r>p$ in $A$, and $r \\in C$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "$C$ is an upper bound: every $A \\in S$ satisfies $A \\subseteq C$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "$C$ is below every upper bound $D$, since $A \\subseteq D$ for all $A \\in S$ forces $C \\subseteq D$.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$C$ satisfies (C1)-(C3), hence is a Dedekind cut.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$\\sup S$ exists and equals $C$, so $\\mathbb{R}$ has the least-upper-bound property and is a complete totally ordered field.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.4",
+            "step 1.5",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 uses the hypothesis that $S$ is nonempty; the empty $S$ is excluded by the statement, since it has no least upper bound in an unbounded-below order"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No arithmetic zero occurs; the theorem is purely order-theoretic."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.4 covers a singleton $S=\\{A\\}$, where $C=A$"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.5 covers the case $D=C$, in which the least-upper-bound inequality is an equality"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the upper bound $B$ as the boundary that keeps $C$ proper, the exact place where boundedness above is needed"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses $A_{0} \\in S$, licensed by the nonemptiness hypothesis"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-identification claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-identification claim, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "Audit-Beta read every step and citation; the union argument closes and the statement matches the sourced least-upper-bound property. No defect found."
+      }
+    },
+    "ex-sqrt2-cut": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "fs-sqrt2-rational",
+          "source_section": "Statement",
+          "quote": "**False claim:** there exists $x \\in \\mathbb{Q}$ with $x^2 = 2$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1): $0 \\in S$ and $2 \\notin S$, so $S$ is nonempty and proper.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C2): $q<p$ with $p \\in S$ gives $q \\in S$, splitting on $q<0$ and $0 \\le q<p$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(C3) for $q \\le 0$: $r=1 \\in S$ exceeds $q$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "(C3) for $q>0$: $r=(2q+2)/(q+2)$ satisfies $r>q$ and $r^{2}<2$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "(C3) holds for every $q \\in S$, so $S$ has no greatest element.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$S$ satisfies (C1)-(C3): it is a Dedekind cut and hence a real number.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "$S \\ne p^{*}$ for every rational $p$: otherwise $p^{2}>2$ and $s=(2p+2)/(p+2)$ lies in $p^{*}=S$ yet not in $S$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 exhibits $0 \\in S$"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.3 treat $q \\le 0$ separately, which is where the clause $q<0$ of the construction matters"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.3 uses $1 \\in S$ as the witness above every nonpositive element"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 splits at $q=0$, the only place where the two defining clauses meet"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 examines the putative boundary rational $p$ and derives a contradiction from $p \\notin S$"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.4 constructs the explicit witness $r=(2q+2)/(q+2)$ rather than choosing one"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts that a specific set is a cut and is not rational; there is no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts that a specific set is a cut and is not rational; there is no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "The title and the Example prose call $S$ 'the real number $\\sqrt{2}$'; the verification establishes only that $S$ is a cut distinct from every rational cut, never that $S \\cdot S = 2^{*}$. Sources use the same naming a posteriori. Recorded as a nonfatal debatable-restatement proposal for Alpha."
+      }
+    },
+    "fs-cut-has-greatest": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "a totally ordered field: the order is total, $x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(C1, C2) for $0^{*}$: it is nonempty, proper, and downward closed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(C3) for $0^{*}$: $q/2$ lies in $0^{*}$ and exceeds $q$, so no element is greatest.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$0^{*}$ satisfies (C1)-(C3): it is a Dedekind cut with no greatest element.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "$0^{*}$ refutes the claim; more strongly, (C3) fails the claim for every cut.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 exhibits $-1 \\in 0^{*}$, so the witness cut is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 records that $0 \\notin 0^{*}$, which is exactly what makes the cut proper"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative unit or one-element case occurs in the refutation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.2 uses $q/2$, which is strictly between $q$ and $0$ for every $q<0$; no degenerate $q$ escapes"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 treats the boundary rational $0$, excluded from $0^{*}$"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 constructs the witness $q/2$ explicitly rather than choosing one"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A false statement is refuted by one counterexample; there is no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A false statement is refuted by one counterexample; there is no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "pending",
+        "reviewer": "Alpha",
+        "notes": "Audit-Beta read every step and citation; the refutation is correct and the witness is the standard rational cut. No defect found."
+      }
+    }
+  }
+}

@@ -4,6 +4,9 @@ kind: example
 title: "In $F^{3}$ the three coordinate lines are linear subspaces whose internal direct sum is $F^{3}$, and $F^{0}$ is the zero space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-function-space, def-vector-space, def-linear-subspace, def-linear-combination-and-span, lem-span-of-a-single-vector, def-sum-of-linear-subspaces, def-internal-direct-sum, lem-direct-sum-criterion, def-natural-numbers, lem-nat-order-is-membership, def-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Examples_of_vector_spaces"
     - title: "Direct sum of modules (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

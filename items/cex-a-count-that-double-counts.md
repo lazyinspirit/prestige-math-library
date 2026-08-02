@@ -4,6 +4,11 @@ kind: counterexample
 title: "A count that overcounts because the blocks are not disjoint, and exactly where the sum rule's hypothesis is spent"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-sum-rule, def-finite-cardinality, cor-cardinality-of-the-power-set,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection, def-nat-power,
        def-sum-over-a-finite-index-set, lem-nat-add-cancellative, def-natural-numbers]
@@ -14,11 +19,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -84,20 +84,10 @@ right-hand side is $16$, while $\lvert A_0 \cup A_1\rvert = 12$.
 
 2.2 The union has twelve. A subset of $X$ lies in $A_0 \cup A_1$ exactly when it contains $0$ or contains $1$, so $\mathcal{P}(X)$ is the disjoint union of $A_0\cup A_1$ and $C$; and $C$ is in bijection with $\mathcal{P}(\{2,3\})$ under the identity map, since a subset of $X$ containing neither $0$ nor $1$ is precisely a subset of $\{2,3\}$, giving $\lvert C\rvert = 2^{2} = 4$. By [L2], $16 = \lvert A_0\cup A_1\rvert + 4$, so $\lvert A_0 \cup A_1\rvert = 12$ by [L5]. [step 1.1, L1, L2, L3, L4, L5]
 
-3.1 The claim fails: $12 \ne 16$. The overcount is exactly $4$, the number of subsets containing both $0$ and $1$, and it is the same $4$ as $\lvert C\rvert$ only by coincidence of this example. [step 2.1, step 2.2] ∎
+3.1 The claim fails: $12 \ne 16$. The overcount is exactly $4$, the number of subsets containing both $0$ and $1$, and it agrees with $\lvert C\rvert$ because $S \mapsto S \cup \{0,1\}$ is a bijection of $C$ onto $A_0 \cap A_1$, with inverse $T \mapsto T \setminus \{0,1\}$. [step 2.1, step 2.2, L4] ∎
 
 ## Remarks
 
-- **Where the proof of [[thm-sum-rule]] breaks.** Its step 1.1 splices bijections
-  $f : p \to A$ and $g : q \to B$ into $h : p+q \to A \cup B$, and the only place
-  disjointness enters is the third case of injectivity: an index below $p$ must
-  give a value different from an index at least $p$, and that is guaranteed only
-  because $f$ lands in $A$, $g$ lands in $B$ and $A \cap B = \varnothing$. Here
-  the four subsets containing both $0$ and $1$ are each hit twice, so $h$ is
-  surjective but not injective, and one gets $\lvert A_0\cup A_1\rvert \le 16$
-  rather than equality.
+- **Where the proof of [[thm-sum-rule]] breaks.** Its step 1.1 splices bijections $f : p \to A$ and $g : q \to B$ into $h : p+q \to A \cup B$, and the only place disjointness enters is the third case of injectivity: an index below $p$ must give a value different from an index at least $p$, and that is guaranteed only because $f$ lands in $A$, $g$ lands in $B$ and $A \cap B = \varnothing$. Here the four subsets containing both $0$ and $1$ are each hit twice, so $h$ is surjective but not injective, and one gets $\lvert A_0\cup A_1\rvert \le 16$ rather than equality.
 
-- **The systematic repair is inclusion and exclusion**, which subtracts the count
-  of the overlap. It is the next page of this track and is not available here, so
-  the correction is not stated as a formula: what this item establishes is that
-  some correction is needed.
+- **The systematic repair is inclusion and exclusion**, which subtracts the count of the overlap. It is the next page of this track and is not available here, so the correction is not stated as a formula: what this item establishes is that some correction is needed.

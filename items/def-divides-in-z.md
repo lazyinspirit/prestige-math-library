@@ -4,6 +4,9 @@ kind: definition
 title: "Divisibility in $\\mathbb{Z}$: $d \\mid a$ when $a = dq$ for some integer $q$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-integers, def-int-operations, thm-int-comm-ring, thm-division-algorithm-in-z]
 justified_by: []
 aliases: [def-divisibility-in-z]

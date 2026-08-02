@@ -4,6 +4,9 @@ kind: definition
 title: "The order $|G|$ of a finite group and the order $\\operatorname{ord}(g)$ of an element, with $\\operatorname{ord}(g) = \\infty$ when no positive power of $g$ is the identity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-group, def-group-power, lem-order-of-element-exists, thm-well-ordering-principle, def-countable, def-equinumerous, lem-pigeonhole, def-natural-numbers, def-nat-order]
 justified_by: []
 aliases: [def-order-of-an-element, def-order-of-a-group]

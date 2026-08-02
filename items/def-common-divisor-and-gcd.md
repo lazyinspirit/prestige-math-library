@@ -4,6 +4,9 @@ kind: definition
 title: "Common divisor, and the greatest common divisor $\\gcd(a,b)$, with the convention $\\gcd(0,0) := 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-divides-in-z, lem-divisor-bound, lem-int-bounded-above-has-greatest, def-int-abs, def-int-order, thm-int-ordered-ring]
 justified_by: []
 forward_refs: [cex-common-divisors-of-zero-have-no-greatest-element]

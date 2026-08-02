@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: some rational number squares to 2"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-rationals, thm-rat-field]
 aliases: []
 proof_strategy: contradiction
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Square root of 2 — proofs of irrationality (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Square_root_of_2"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The set $[A]^{k}$ of $k$-element subsets and the binomial coefficient $\\binom{n}{k} := \\lvert [n]^{k}\\rvert$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-finite-cardinality, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-equinumerous, def-natural-numbers,
        def-nat-order, lem-nat-order-is-membership, lem-nat-trichotomy]

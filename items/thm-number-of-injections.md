@@ -4,6 +4,9 @@ kind: theorem
 title: "The number of injections from a $k$-element set into an $n$-element set is $n^{\\underline{k}}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-factorial-and-falling-factorial, thm-cardinality-of-a-set-of-functions,
        thm-subset-of-a-finite-set, thm-sum-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, def-finite-cardinality,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Permutation"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 1"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Twelvefold way (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Twelvefold_way"
 pipeline_run: null
 ---
 

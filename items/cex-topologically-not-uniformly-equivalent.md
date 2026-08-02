@@ -4,6 +4,9 @@ kind: counterexample
 title: "On $(0,\\infty)$ the metrics $|x-y|$ and $|1/x - 1/y|$ have the same topology and are not uniformly equivalent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-equivalence-hierarchy, def-equivalent-metrics, def-metric-space,
        thm-of-archimedean, lem-of-inverse-positive, cor-archimedean-reciprocal,
        def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space,
@@ -20,11 +23,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -90,18 +88,6 @@ implication of the hierarchy is strict.
 
 ## Remarks
 
-- **Why the failure is at the origin end.** The pairs $1/n$ and $1/(n+1)$ get
-  arbitrarily close in $d$ while their images $n$ and $n+1$ under $\iota$ stay a
-  fixed distance apart. Uniform equivalence would have to control this with a
-  single $\delta$, and no single $\delta$ can, because $\iota$ stretches by the
-  unbounded factor $(xy)^{-1}$ near $0$.
-- **The two metrics are isometric copies of each other**, via $\iota$: the map
-  $\iota : (X,\rho) \to (X,d)$ satisfies $d(\iota x, \iota y) = \rho(x,y)$ by
-  step 1.1, so the two spaces are isometric ([[def-isometry-and-metric-embedding]]).
-  Being isometric as spaces says nothing about the identity map being uniformly
-  bicontinuous, and that is exactly the distinction this example draws.
-- **Completeness is the usual casualty.** Uniform equivalence preserves Cauchy
-  sequences and topological equivalence does not; here the sequence $1/n$ is
-  Cauchy for $d$ and not for $\rho$, since $\rho(1/n, 1/m) = |n - m|$. Cauchy
-  sequences in a metric space are not defined in this library yet, so that
-  comparison is orientation only and belongs to the completeness page.
+- **Why the failure is at the origin end.** The pairs $1/n$ and $1/(n+1)$ get arbitrarily close in $d$ while their images $n$ and $n+1$ under $\iota$ stay a fixed distance apart. Uniform equivalence would have to control this with a single $\delta$, and no single $\delta$ can, because $\iota$ stretches by the unbounded factor $(xy)^{-1}$ near $0$.
+- **The two metrics are isometric copies of each other**, via $\iota$: the map $\iota : (X,\rho) \to (X,d)$ satisfies $d(\iota x, \iota y) = \rho(x,y)$ by step 1.1, so the two spaces are isometric ([[def-isometry-and-metric-embedding]]). Being isometric as spaces says nothing about the identity map being uniformly bicontinuous, and that is exactly the distinction this example draws.
+- **Completeness is the usual casualty.** Uniform equivalence preserves Cauchy sequences and topological equivalence does not; here the sequence $1/n$ is Cauchy for $d$ and not for $\rho$, since $\rho(1/n, 1/m) = |n - m|$. Cauchy sequences in a metric space are defined on a later page and are not available here, so that comparison is orientation only and belongs to the completeness page.

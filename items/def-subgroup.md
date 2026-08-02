@@ -4,6 +4,9 @@ kind: definition
 title: "Subgroup"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-group, def-binary-operation, def-identity-element, def-invertible-element]
 justified_by: []
 aliases: []

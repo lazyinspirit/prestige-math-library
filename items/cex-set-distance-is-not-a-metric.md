@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{Z}$ and $\\{n + 1/n : n \\ge 2\\}$ are disjoint closed subsets of $\\mathbb{R}$ at distance $0$, so the set-to-set distance is not a metric"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-bounded-diameter, def-metric-space, thm-metric-closure-characterisation,
        def-integers, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive,
        def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space,
@@ -30,8 +33,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Distance from a point to a set (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_set"
+    - title: "Hausdorff distance (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Hausdorff_distance"
     - title: "Hausdorff distance (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_distance"
     - title: "Closed set (Wikipedia)"

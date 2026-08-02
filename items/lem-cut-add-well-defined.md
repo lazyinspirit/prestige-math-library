@@ -4,6 +4,9 @@ kind: lemma
 title: "Cut addition: $A+B$ is a cut, commutative and associative, with identity $0^{*}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cut-addition, def-dedekind-cut, thm-rat-ordered-field]
 aliases: []
 proof_strategy: direct
@@ -21,6 +24,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
 pipeline_run: null
 ---
 

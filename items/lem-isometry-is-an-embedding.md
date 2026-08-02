@@ -4,6 +4,9 @@ kind: lemma
 title: "An isometric embedding is injective and carries the metric topology of the source onto the subspace topology of its image"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-isometry-and-metric-embedding, def-metric-continuity,
        thm-metric-continuity-characterisations, def-metric-ball, def-metric-topology,
        def-metric-space, def-injection-surjection-bijection]

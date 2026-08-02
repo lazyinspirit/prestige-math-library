@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{R}$ is a vector space over itself and, by restriction of scalars along the embedded copy of $\\mathbb{Q}$, a vector space over $\\mathbb{Q}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-restriction-of-scalars, def-vector-space, def-subfield, def-field, def-ordered-field, def-field-homomorphism, lem-of-q-embeds, thm-rat-field, thm-reals-field, thm-reals-ordered-field, def-real-numbers]
 justified_by: []
 aliases: []

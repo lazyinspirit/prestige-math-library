@@ -4,6 +4,9 @@ kind: definition
 title: "Multiplication and reciprocals of Dedekind cuts"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-dedekind-cut, def-real-dedekind, def-cut-order, def-cut-addition]
 aliases: []
 verification:
@@ -20,6 +23,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every injection of a set into itself is a bijection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-subset-of-a-finite-set, lem-pigeonhole, thm-omega-is-peano-system,
        lem-nat-nonzero-is-successor, def-countable, def-injection-surjection-bijection,
        def-equinumerous, def-finite-cardinality, def-natural-numbers]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Surjective_function"
     - title: "Pigeonhole principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+    - title: "Finite set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Finite_set"
 pipeline_run: null
 ---
 

@@ -4,7 +4,10 @@ kind: example
 title: "$2+2=4$ from the recursion"
 status: published
 origin: session
-deps: [def-nat-addition, def-natural-numbers, ex-one-plus-one]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-nat-addition, def-natural-numbers]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -22,6 +25,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 

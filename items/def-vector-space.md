@@ -4,6 +4,9 @@ kind: definition
 title: "Vector space over a field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-field, def-group, def-binary-operation, def-identity-element, def-invertible-element, lem-identity-unique, lem-inverse-unique]
 justified_by: []
 aliases: [def-vector, def-scalar-multiplication]

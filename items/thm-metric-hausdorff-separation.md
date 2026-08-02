@@ -4,6 +4,9 @@ kind: theorem
 title: "Distinct points of a metric space have disjoint balls around them"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-metric-space, def-metric-ball, def-metric-topology, lem-of-add-order,
        lem-metric-nonnegativity, thm-metric-open-set-algebra, cor-of-one-positive,
        lem-of-inverse-positive, lem-of-sign-rules, def-field, def-ordered-field,

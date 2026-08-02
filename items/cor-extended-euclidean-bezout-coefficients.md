@@ -4,6 +4,9 @@ kind: corollary
 title: "The extended Euclidean algorithm: the same descent produces integers $x, y$ with $ax + by = \\gcd(a,b)$, so Bézout coefficients are computed and not merely shown to exist"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-euclidean-algorithm, def-common-divisor-and-gcd, thm-division-algorithm-in-z, thm-recursion, thm-induction-principle, def-natural-numbers, thm-int-comm-ring, def-int-operations, def-integers, thm-int-ordered-ring, def-int-order]
 justified_by: []
 forward_refs: [ex-bezout-coefficients-not-unique]

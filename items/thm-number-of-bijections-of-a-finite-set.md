@@ -4,6 +4,9 @@ kind: theorem
 title: "A finite set $A$ with $\\lvert A\\rvert = n$ has exactly $n!$ bijections onto itself, and $n!$ bijections onto any set of the same cardinality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-number-of-injections, thm-subset-of-a-finite-set, def-factorial-and-falling-factorial,
        def-finite-cardinality, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []

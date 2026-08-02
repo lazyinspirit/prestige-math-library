@@ -4,6 +4,9 @@ kind: definition
 title: "Linear subspace of a vector space"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-vector-space, def-subgroup, def-group, lem-vector-space-elementary-consequences]
 justified_by: []
 aliases: [def-linear-subspace-of-a-vector-space]

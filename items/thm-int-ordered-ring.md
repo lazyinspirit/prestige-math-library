@@ -4,6 +4,9 @@ kind: theorem
 title: "The integers form a totally ordered ring"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring]
 aliases: []
 landmark: true
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "A nonempty set of integers bounded above has a greatest element, and a nonempty set of integers bounded below has a least element"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, thm-well-ordering-principle, def-natural-numbers, def-nat-order]
 justified_by: []
 forward_refs: [cex-common-divisors-of-zero-have-no-greatest-element]
@@ -23,6 +26,8 @@ sources:
   references:
     - title: "Well-ordering principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Well-ordering_principle"
+    - title: "Sets of integers bounded above have a largest element (Millersville University number theory notes)"
+      url: "https://sites.millersville.edu/bikenaga/number-theory/greatest-integer-function/greatest-integer-function.html"
 pipeline_run: null
 ---
 

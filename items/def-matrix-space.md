@@ -4,6 +4,9 @@ kind: definition
 title: "The vector space $M_{m \\times n}(F) := F^{\\,m \\times n}$ of $m$ by $n$ matrices over a field, with entrywise operations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-function-space, def-vector-space, def-field, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-matrix]

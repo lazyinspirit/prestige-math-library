@@ -4,6 +4,9 @@ kind: definition
 title: "Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-recursion, thm-induction-principle, def-natural-numbers, def-nat-addition,
        def-nat-multiplication, lem-nat-add-identity, lem-nat-mult-identity,
        lem-nat-order-is-membership, def-nat-order, lem-nat-add-cancellative, def-finite-sum]

@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\sum_{k<n+1}\\binom{n}{k} = 2^{n}$, and $\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for $n \\ge 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-binomial-theorem, cor-cardinality-of-the-power-set, thm-sum-rule,
        def-binomial-coefficient, def-nat-power, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-integer-power,

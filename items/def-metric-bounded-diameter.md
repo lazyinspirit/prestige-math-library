@@ -4,6 +4,9 @@ kind: definition
 title: "Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-ball, def-bounded-set, def-infimum,
        thm-infimum-property, lem-sup-unique, def-complete-ordered-field,
        lem-metric-nonnegativity, rem-sup-conventions, lem-of-add-order,
@@ -14,11 +17,6 @@ landmark: false
 short: "bounded, $\\operatorname{diam}$, $d(x,A)$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -26,10 +24,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Bounded_set"
     - title: "Diameter (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Diameter"
-    - title: "Distance from a point to a set (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_set"
+    - title: "Hausdorff distance (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Hausdorff_distance"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 
@@ -75,8 +75,8 @@ $$d(A,B) := \inf E(A,B).$$
 
 **Every one of the three scope restrictions is load bearing.** In this library
 $\sup$ and $\inf$ denote real numbers and are written only after existence has
-been established; there is no extended real line and no convention
-$\sup \emptyset = -\infty$ ([[rem-sup-conventions]]). Accordingly:
+been established; the extended real line is not used for suprema, and there is
+no convention $\sup \emptyset = -\infty$ ([[rem-sup-conventions]]). Accordingly:
 
 - $\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**
   bounded. It is not defined for $A = \emptyset$, and it is not defined, not even

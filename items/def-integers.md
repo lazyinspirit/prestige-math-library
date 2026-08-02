@@ -4,7 +4,11 @@ kind: definition
 title: "The integers as equivalence classes of pairs of naturals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-natural-numbers, def-nat-addition]
+justified_by: [lem-int-equivalence]
 aliases: []
 landmark: true
 short: "ℤ"
@@ -17,7 +21,9 @@ sources:
     - title: "T. Tao, Analysis I, 3rd ed., §4.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "E. Landau, Foundations of Analysis"
-      url: "https://bookstore.ams.org/chel-79"
+      url: "https://archive.org/details/foundationsofana0000land"
+    - title: "Integer — construction from pairs of naturals (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integer"
 pipeline_run: null
 ---
 

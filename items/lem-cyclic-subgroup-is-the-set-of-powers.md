@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\langle g \\rangle = \\{\\, g^{n} : n \\in \\mathbb{Z} \\,\\}$, and every cyclic group is abelian"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-generated-subgroup, def-group-power, lem-group-power-laws, lem-subgroup-criterion, def-subgroup, def-integers, thm-induction-principle, thm-int-comm-ring, lem-nat-embeds-int, def-int-order, thm-int-ordered-ring]
 justified_by: []
 aliases: []

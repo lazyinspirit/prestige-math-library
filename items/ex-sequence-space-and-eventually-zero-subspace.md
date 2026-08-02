@@ -4,6 +4,9 @@ kind: example
 title: "$F^{\\mathbb{N}}$ is a vector space and the eventually zero families form a linear subspace of it that is the span of the standard unit families"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-monoid-finite-product, thm-induction-principle, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, thm-nat-linear-order, def-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Examples_of_vector_spaces"
     - title: "Sequence space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequence_space"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

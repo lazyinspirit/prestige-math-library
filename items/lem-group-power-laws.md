@@ -4,6 +4,9 @@ kind: lemma
 title: "Exponent laws in a group: $g^{m+n} = g^{m}g^{n}$ and $(g^{m})^{n} = g^{mn}$ for all $m, n \\in \\mathbb{Z}$, and $(gh)^{n} = g^{n}h^{n}$ **when $g$ and $h$ commute**"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group-power, def-group, def-semigroup-and-monoid, lem-group-inverse-laws, thm-induction-principle, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order, lem-nat-embeds-int, lem-nat-trichotomy, def-natural-numbers, def-nat-addition, def-nat-order, lem-nat-add-commutative]
 justified_by: []
 aliases: [lem-exponent-laws-in-a-group]

@@ -4,6 +4,9 @@ kind: lemma
 title: "A sequence in a metric space has at most one limit"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-metric-convergence, def-metric-space, def-real-limit, lem-rat-embeds-dense,
        lem-metric-nonnegativity, def-abs-value, lem-of-abs-value, cor-of-one-positive,
        lem-of-add-order, lem-of-inverse-positive, lem-of-sign-rules, def-field,

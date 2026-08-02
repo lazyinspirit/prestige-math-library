@@ -4,17 +4,15 @@ kind: lemma
 title: "The Dedekind reals are Archimedean"
 status: published
 origin: session
-deps: [def-real-dedekind, def-cut-order, lem-rat-cut-embeds, lem-rat-archimedean, thm-reals-dedekind-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, lem-rat-cut-embeds, lem-rat-archimedean, thm-reals-dedekind-ordered-field]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -22,6 +20,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Archimedean property (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Archimedean_property"
 pipeline_run: null
 ---
 
@@ -36,7 +36,7 @@ upper bound for all of them.
 
 **Given:** A cut $A$.
 
-[L1] A cut is a proper subset of $\mathbb{Q}$ ($A \ne \mathbb{Q}$), and $a \in A$, $b \notin A \Rightarrow a < b$ ([[def-real-dedekind]]).
+[L1] A cut is a proper subset of $\mathbb{Q}$ ($A \ne \mathbb{Q}$), and $a \in A$, $b \notin A \Rightarrow a < b$ ([[def-dedekind-cut]]); the elements of $\mathbb{R}$ are exactly these cuts ([[def-real-dedekind]]).
 
 [L2] Rational Archimedean property: for every $q \in \mathbb{Q}$ there is a natural number $n$ with $n > q$ ([[lem-rat-archimedean]]).
 

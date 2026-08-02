@@ -4,6 +4,9 @@ kind: example
 title: "The discrete metric induces the discrete topology, in which every subset is clopen"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra,
        lem-metric-nonnegativity, cor-of-one-positive, lem-of-add-order,
        def-ordered-field, def-complete-ordered-field]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "J. Munkres, Topology, 2nd ed., §12"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

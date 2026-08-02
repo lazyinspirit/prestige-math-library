@@ -4,6 +4,9 @@ kind: lemma
 title: "$a$ and $b$ are coprime if and only if $ax + by = 1$ for some integers $x, y$; and in that case the only common divisors of $a$ and $b$ are $1$ and $-1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-coprime, thm-bezout-identity, cor-common-divisor-divides-gcd, def-common-divisor-and-gcd, lem-divisibility-basic, lem-units-of-z, def-divides-in-z, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
 forward_refs: [ex-linear-diophantine-equation-solvability]

@@ -4,6 +4,9 @@ kind: example
 title: "$\\operatorname{Sym}(\\{1,2,3\\})$ has exactly six elements, is non-abelian, and its elements have orders $1$, $2$ and $3$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-symmetric-group, lem-symmetric-group-is-a-group, def-group, def-group-power, lem-group-power-laws, def-order-in-a-group, lem-order-characterisation, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, lem-nat-transitive-irreflexive]
 justified_by: []
 aliases: [ex-s3]

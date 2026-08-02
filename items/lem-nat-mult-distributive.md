@@ -4,6 +4,9 @@ kind: lemma
 title: "Distributivity and the successor law for multiplication"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-nat-multiplication, def-nat-addition, lem-nat-add-associative, lem-nat-add-commutative, thm-induction-principle]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 proof_strategy: induction
 ---

@@ -4,6 +4,9 @@ kind: lemma
 title: "A finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-finite-sum, lem-finite-sum-laws, def-nat-finite-sum-and-product, def-injection-surjection-bijection,
        thm-induction-principle, thm-omega-is-peano-system, def-natural-numbers,
        lem-nat-order-is-membership, lem-nat-nonzero-is-successor, lem-nat-discrete,

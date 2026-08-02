@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\operatorname{span}(S)$ is exactly the set of linear combinations of finite lists of elements of $S$, and $\\operatorname{span}(\\varnothing) = \\{0_V\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-combination-and-span, def-monoid-finite-product, lem-linear-subspace-criterion, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
 aliases: []

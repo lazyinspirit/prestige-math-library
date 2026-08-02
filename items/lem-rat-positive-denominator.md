@@ -4,6 +4,9 @@ kind: lemma
 title: "Every rational has a positive-denominator representative"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-rationals, thm-int-comm-ring, thm-int-ordered-ring, def-rat-order]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Rational number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rational_number"
+    - title: "L. S. Krapp, Constructions of the real numbers: a set theoretical approach (Oxford, 2014)"
+      url: "https://www.math.uni-konstanz.de/~krapp/research/Constructions_of_the_real_numbers.pdf"
 pipeline_run: null
 proof_strategy: direct
 ---

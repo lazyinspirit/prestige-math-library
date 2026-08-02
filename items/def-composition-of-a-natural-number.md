@@ -4,6 +4,9 @@ kind: definition
 title: "Compositions and weak compositions of a natural number into a fixed number of parts"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-multinomial-coefficient, thm-multinomial-theorem, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, thm-cardinality-of-a-set-of-functions,
        thm-subset-of-a-finite-set, def-finite-cardinality, def-nat-order, def-natural-numbers,

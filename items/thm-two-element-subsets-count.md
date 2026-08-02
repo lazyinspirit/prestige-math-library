@@ -4,6 +4,9 @@ kind: theorem
 title: "A finite set with $n$ elements has exactly $\\binom{n}{2}$ two-element subsets, and $2\\binom{n}{2} = n(n-1)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-binomial-closed-formula, def-binomial-coefficient, def-factorial-and-falling-factorial,
        def-finite-cardinality, lem-nat-finite-sum-laws-and-the-canonical-embedding,
        def-canonical-natural, def-nat-multiplication, lem-nat-mult-commutative,

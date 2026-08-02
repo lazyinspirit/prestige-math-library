@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\gcd(ca, cb) = |c|\\,\\gcd(a,b)$ for all integers $a, b, c$, the identity holding at $c = 0$ and at $(a,b) = (0,0)$ as well"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, thm-bezout-identity, lem-divisibility-basic, lem-divisor-bound, def-divides-in-z, def-int-abs, lem-int-abs-properties, lem-int-cancellation, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order]
 justified_by: []
 forward_refs: [ex-gcd-with-zero]

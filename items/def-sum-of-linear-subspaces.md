@@ -4,6 +4,9 @@ kind: definition
 title: "The sum $U + W$ of two linear subspaces and the sum $\\sum_{i<n} U_i$ of a finite family"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, lem-linear-subspace-criterion, def-vector-space, def-monoid-finite-product, def-linear-combination-and-span, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-field]
 justified_by: []
 aliases: [def-subspace-sum]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Direct sum of modules (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

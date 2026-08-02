@@ -4,6 +4,9 @@ kind: lemma
 title: "The intersection of a nonempty family of linear subspaces of $V$ is a linear subspace of $V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, lem-linear-subspace-criterion, def-vector-space]
 justified_by: []
 aliases: []

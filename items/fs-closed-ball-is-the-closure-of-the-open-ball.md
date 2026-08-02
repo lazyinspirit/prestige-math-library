@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: in every metric space the closure of $B(x,r)$ is the closed ball of radius $r$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-closure-characterisation, def-metric-ball, thm-metric-open-set-algebra,
        def-metric-space, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        def-interval, def-metric-topology, def-metric-interior-closure-boundary,
@@ -16,11 +19,6 @@ short: "closure of a ball is not the closed ball"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -30,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closure_(topology)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Isolated point (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Isolated_point"
 pipeline_run: null
 ---
 
@@ -46,7 +46,8 @@ is the closed ball of the same centre and radius ([[def-metric-ball]]).
 One inclusion is a theorem and the other is false. The names *open ball* and
 *closed ball* do not by themselves license the equality, and the intuition
 behind it comes from $\mathbb{R}^n$ with a Euclidean metric, where it happens to
-be true; it fails already in a two-point subspace of the real line.
+be true; it fails already in a subspace of the real line with a gap, and the
+witness used below is $\{0\} \cup [1,2]$.
 
 ## Facts & Assumptions
 
@@ -80,18 +81,6 @@ be true; it fails already in a two-point subspace of the real line.
 
 ## Remarks
 
-- **Where the intuition comes from and why it does not transfer.** In
-  $\mathbb{R}^n$ with the Euclidean metric ([[lem-metrics-on-rn]]) the segment
-  from the centre to a point of the closed ball lies in the space, and running
-  along it approaches that point from inside the open ball; that is the usual
-  route to the equality there, and this library does not prove it. A metric space
-  need not contain
-  any such segment: in the witness above, nothing of $X$ lies strictly between
-  $0$ and $1$, so the point $1$ of the closed ball is not approached from inside
-  $B(0,1) = \{0\}$ at all.
-- **The failure is not exotic.** A discrete metric on a set with at least two
-  points produces the same phenomenon in a starker form, with
-  $\overline{B(p,1)} = \{p\}$ and $\bar B(p,1)$ the whole space; the companion
-  page carries both witnesses.
-- **The sphere is not the boundary of the ball either**, and that failure is
-  recorded separately on the companion page.
+- **Where the intuition comes from and why it does not transfer.** In $\mathbb{R}^n$ with the Euclidean metric ([[lem-metrics-on-rn]]) the segment from the centre to a point of the closed ball lies in the space, and running along it approaches that point from inside the open ball; that is the usual route to the equality there, and this library does not prove it. A metric space need not contain any such segment: in the witness above, nothing of $X$ lies strictly between $0$ and $1$, so the point $1$ of the closed ball is not approached from inside $B(0,1) = \{0\}$ at all.
+- **The failure is not exotic.** A discrete metric on a set with at least two points produces the same phenomenon in a starker form, with $\overline{B(p,1)} = \{p\}$ and $\bar B(p,1)$ the whole space; the companion page carries both witnesses.
+- **The sphere is not the boundary of the ball either**, and that failure is recorded separately on the companion page.

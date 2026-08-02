@@ -4,6 +4,9 @@ kind: lemma
 title: "One-step subgroup test: a nonempty $H \\subseteq G$ is a subgroup iff $gh^{-1} \\in H$ for all $g, h \\in H$; the identity and the inverses of $H$ are then those of $G$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subgroup, def-group, lem-group-inverse-laws, lem-group-cancellation, lem-inverse-unique]
 justified_by: []
 aliases: [lem-one-step-subgroup-test]

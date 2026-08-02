@@ -4,6 +4,9 @@ kind: theorem
 title: "Dedekind completeness: the least-upper-bound property"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-real-dedekind, def-cut-order, def-dedekind-cut, lem-cut-order-total, thm-reals-dedekind-ordered-field]
 aliases: []
 landmark: true
@@ -23,6 +26,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
+    - title: "Dedekind cut (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dedekind_cut"
 pipeline_run: null
 ---
 

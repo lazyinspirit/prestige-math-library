@@ -4,6 +4,9 @@ kind: counterexample
 title: "In the discrete metric the boundary of $B(p,1)$ is empty while the sphere of radius $1$ is everything but $p$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-discrete-metric, def-metric-ball, def-metric-interior-closure-boundary,
        def-metric-topology, thm-metric-closure-characterisation, def-metric-space]
 justified_by: []

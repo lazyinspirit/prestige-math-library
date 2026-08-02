@@ -4,6 +4,9 @@ kind: definition
 title: "Limits and Cauchy sequences of reals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-numbers, def-real-order]
 aliases: []
 verification:
@@ -14,6 +17,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Cauchy sequence (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
 pipeline_run: null
 ---
 

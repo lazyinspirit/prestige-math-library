@@ -4,6 +4,9 @@ kind: counterexample
 title: "A commutative monoid in which cancellation holds need not be a group: $(\\mathbb{N}, +)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-semigroup-and-monoid, def-group, def-invertible-element, def-identity-element, def-binary-operation, def-natural-numbers, def-nat-addition, lem-nat-add-associative, lem-nat-add-commutative, lem-nat-add-identity, lem-nat-add-cancellative]
 justified_by: []
 aliases: []

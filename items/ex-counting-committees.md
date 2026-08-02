@@ -4,6 +4,11 @@ kind: example
 title: "Choosing a committee: $\\binom{10}{3} = 120$, and the ordered count $10^{\\underline{3}} = 720$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [def-binomial-coefficient, thm-binomial-closed-formula, thm-number-of-injections,
        def-factorial-and-falling-factorial, def-finite-cardinality]
 justified_by: []

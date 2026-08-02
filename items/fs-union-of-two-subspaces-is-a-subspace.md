@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: The union of two linear subspaces is a linear subspace"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, lem-linear-subspace-criterion, lem-span-of-a-single-vector, def-linear-combination-and-span, lem-intersection-of-linear-subspaces, def-function-space, def-vector-space, def-field, lem-of-zero-mult, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
@@ -29,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
     - title: "Union (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Union_(set_theory)"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
+    - title: "The union of vector subspaces (Andrea Minini)"
+      url: "https://www.andreaminini.net/math/the-union-of-vector-subspaces"
 pipeline_run: null
 ---
 

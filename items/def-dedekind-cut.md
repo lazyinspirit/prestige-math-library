@@ -4,6 +4,9 @@ kind: definition
 title: "Dedekind cut"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-rationals, thm-rat-ordered-field]
 aliases: []
 landmark: true
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
+    - title: "Dedekind cut (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dedekind_cut"
 pipeline_run: null
 ---
 

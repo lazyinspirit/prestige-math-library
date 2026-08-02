@@ -4,6 +4,9 @@ kind: theorem
 title: "The Dedekind reals form a totally ordered field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-reals-dedekind-field, def-cut-order, lem-cut-order-total, def-cut-addition, def-cut-multiplication]
 aliases: []
 landmark: true
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Ordered field (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ordered_field"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
 pipeline_run: null
 ---
 

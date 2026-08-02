@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\min(d,1)$ and $d/(1+d)$ are metrics uniformly equivalent to $d$, so every metric space carries a bounded metric with the same topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-equivalent-metrics, thm-metric-equivalence-hierarchy,
        def-metric-bounded-diameter, lem-of-add-order, lem-of-inverse-positive,
        def-max-min, lem-finite-set-has-max, lem-of-sign-rules, cor-of-one-positive,
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Equivalence_of_metrics"
     - title: "J. Munkres, Topology, 2nd ed., §20"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 20: The Metric Topology (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 ---
 

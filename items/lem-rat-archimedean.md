@@ -4,6 +4,9 @@ kind: lemma
 title: "The rationals are Archimedean"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-rat-order, thm-rat-ordered-field, lem-nat-embeds-int, lem-int-embeds-rat, thm-int-ordered-ring]
 aliases: []
 landmark: true
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §4.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Archimedean property (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Archimedean_property"
 pipeline_run: null
 ---
 

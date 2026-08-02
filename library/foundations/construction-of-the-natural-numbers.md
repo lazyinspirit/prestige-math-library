@@ -73,8 +73,8 @@ trichotomy ([[lem-nat-trichotomy]]), compatible with addition and multiplication
 in that $\sigma(n)$ is the immediate successor of $n$ ([[lem-nat-discrete]]). Its
 deepest consequence is the **well-ordering principle** ([[thm-well-ordering-principle]]):
 every nonempty set of naturals has a least element. From it comes **strong
-induction** ([[thm-strong-induction]]), and ordinary induction, strong induction,
-and well-ordering are three faces of one property.
+induction** ([[thm-strong-induction]]), so ordinary induction, well-ordering and strong
+induction are available interchangeably in what follows.
 
 **Uniqueness.** Finally, the natural numbers are pinned down: any two Peano
 systems are isomorphic by a unique isomorphism ([[thm-peano-categoricity]]),
@@ -82,8 +82,8 @@ proved from the recursion theorem exactly as the uniqueness of $\mathbb{R}$ is
 proved one level up. So the set-theoretic encoding chosen at the start is
 immaterial, and it is legitimate to speak of *the* natural numbers.
 
-**Why the axioms are sharp.** The optional items show the Peano axioms are
-independent. Dropping induction leaves room for extra elements a proof by
+**Why the axioms are sharp.** The optional items show that the induction axiom and
+the injectivity of the successor cannot be dropped. Dropping induction leaves room for extra elements a proof by
 induction would never reach ([[cex-induction-axiom-necessary]]); dropping
 injectivity of the successor allows a finite model in which distinct numbers
 collapse ([[cex-successor-injective-necessary]]); and induction genuinely needs

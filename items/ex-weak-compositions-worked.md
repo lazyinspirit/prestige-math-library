@@ -4,6 +4,11 @@ kind: example
 title: "The $15$ weak compositions of $4$ into $3$ parts, listed and matched against stars and bars"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-stars-and-bars, def-composition-of-a-natural-number, def-multinomial-coefficient,
        def-binomial-coefficient, thm-binomial-closed-formula, def-nat-finite-sum-and-product,
        def-factorial-and-falling-factorial, lem-nat-mult-cancellative]

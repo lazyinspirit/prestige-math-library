@@ -4,6 +4,9 @@ kind: example
 title: "$ax + by = c$ has an integer solution exactly when $\\gcd(a,b) \\mid c$: $6x + 15y = 9$ is solvable and $6x + 15y = 7$ is not"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-bezout-identity, cor-common-divisor-divides-gcd, def-common-divisor-and-gcd, lem-divisibility-basic, def-divides-in-z, thm-division-algorithm-in-z, thm-int-comm-ring, def-int-operations, thm-int-ordered-ring, def-int-order, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []

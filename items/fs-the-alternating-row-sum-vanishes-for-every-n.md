@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\sum_{k<n+1}(-1)^{k}\\iota\\!\\binom{n}{k} = 0$ for every $n \\in \\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-binomial-theorem-consequences, thm-binomial-theorem, def-binomial-coefficient,
        def-integer-power, def-canonical-natural, def-finite-sum, def-natural-numbers,
        lem-finite-sum-laws, lem-of-zero-mult, def-field]

@@ -4,6 +4,9 @@ kind: definition
 title: "The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-recursion, thm-induction-principle, def-nat-finite-sum-and-product,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-nat-multiplication,
        lem-nat-mult-associative, lem-nat-mult-commutative, lem-nat-mult-identity,
@@ -15,11 +18,6 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -99,8 +97,9 @@ clause for the factorial.
 clause; $n^{\underline{n}} = n!$, since clause (c) at $k = n$ gives
 $n^{\underline{n}}\cdot 0! = n!$ and $0! = 1$; and
 $n^{\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives
-$n^{\underline{\sigma(n)}} = n^{\underline{n}}\cdot 0 = 0$
-([[lem-nat-mult-identity]]), and if $n^{\underline{k}} = 0$ then
+$n^{\underline{\sigma(n)}} = n^{\underline{n}}\cdot 0 = 0$, the clause
+$x \cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if
+$n^{\underline{k}} = 0$ then
 $n^{\underline{\sigma(k)}} = 0$ as well, so $n^{\underline{k}} = 0$ for every
 $k \ge \sigma(n)$ by induction.
 

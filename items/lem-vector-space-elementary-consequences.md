@@ -4,6 +4,9 @@ kind: lemma
 title: "In any vector space $0_F v = 0_V$, $\\lambda 0_V = 0_V$, $(-\\lambda)v = -(\\lambda v)$, $(-1_F)v = -v$, and $\\lambda v = 0_V$ forces $\\lambda = 0_F$ or $v = 0_V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-vector-space, def-field, def-group, lem-group-cancellation, lem-of-inverse-unique]
 justified_by: []
 aliases: []
@@ -12,11 +15,6 @@ short: "$0_F v = 0_V$, $(-1_F)v = -v$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -68,7 +66,7 @@ $-v$ is the additive inverse of $v$ in the abelian group $(V,+,0_V)$.
 
 1.4 Since $0_V$ is a two-sided identity for $+$: $\lambda 0_V = 0_V + \lambda 0_V$. [L2]
 
-1.5 The vector $\lambda v$ has an additive inverse $-(\lambda v)$ with $\lambda v + (-(\lambda v)) = 0_V$, and it is the unique vector with that property. [L2]
+1.5 The vector $\lambda v$ has an additive inverse $-(\lambda v)$ with $\lambda v + (-(\lambda v)) = 0_V$. [L2]
 
 2.1 Combining steps 1.1 and 1.2 gives $0_F v + 0_F v = 0_V + 0_F v$; cancelling $0_F v$ on the right yields $0_F v = 0_V$, which is claim 1. [step 1.1, step 1.2, L3]
 
@@ -90,19 +88,8 @@ $-v$ is the additive inverse of $v$ in the abelian group $(V,+,0_V)$.
 
 ## Remarks
 
-- **None of this is an axiom.** The scalar axioms (V2)–(V5) say nothing directly
-  about $0_F$, $0_V$ or negatives; each claim above is extracted by writing one
-  element in two ways and cancelling in the abelian group $(V,+,0_V)$. That is the
-  same device that gives $0 \cdot a = 0$ in a field ([[lem-of-zero-mult]]), and
-  the proofs are deliberately parallel.
+- **None of this is an axiom.** The scalar axioms (V2)–(V5) say nothing directly about $0_F$, $0_V$ or negatives; each claim above is extracted by writing one element in two ways and cancelling in the abelian group $(V,+,0_V)$. That is the same device that gives $0 \cdot a = 0$ in a field ([[lem-of-zero-mult]]), and the proofs are deliberately parallel.
 
-- **Claim 5 is what makes $\{0_V\}$ the only "degenerate" scalar multiple.** It is
-  used below to compute $\operatorname{span}\{v\}$ ([[lem-span-of-a-single-vector]])
-  and, in that form, is the vector-space analogue of a field having no zero
-  divisors ([[lem-of-no-zero-divisors]]). Its converse directions, claims 1 and 2,
-  say that both degenerate products really are $0_V$.
+- **Claim 5 is what makes $\{0_V\}$ the only "degenerate" scalar multiple.** It is used below to compute $\operatorname{span}\{v\}$ ([[lem-span-of-a-single-vector]]) and, in that form, is the vector-space analogue of a field having no zero divisors ([[lem-of-no-zero-divisors]]). Its converse directions, claims 1 and 2, say that both degenerate products really are $0_V$.
 
-- **Claim 4 is the bridge to the additive group.** It says the additive inverse of
-  a vector is a scalar multiple of it, which is why closure under scalar
-  multiplication already forces closure under negatives; that is what makes a
-  linear subspace a subgroup of $(V,+)$ without a separate axiom.
+- **Claim 4 is the bridge to the additive group.** It says the additive inverse of a vector is a scalar multiple of it, which is why closure under scalar multiplication already forces closure under negatives; that is what makes a linear subspace a subgroup of $(V,+)$ without a separate axiom.

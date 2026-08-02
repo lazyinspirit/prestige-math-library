@@ -4,6 +4,9 @@ kind: theorem
 title: "For a map of metric spaces the following agree: $\\varepsilon$-$\\delta$ continuity everywhere, preimages of open sets are open, preimages of closed sets are closed, sequential continuity, and $f(\\overline{A}) \\subseteq \\overline{f(A)}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-continuity, def-metric-topology, thm-metric-sequential-closure,
        thm-metric-closure-characterisation, def-metric-convergence, def-countable-choice,
        def-metric-ball, thm-metric-open-set-algebra, def-metric-interior-closure-boundary,
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Munkres, Topology, 2nd ed., §18"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Closure (topology) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Closure_(topology)"
 pipeline_run: null
 ---
 

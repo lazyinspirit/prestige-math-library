@@ -4,6 +4,9 @@ kind: lemma
 title: "Each rational cut $q^{*}$ is a Dedekind cut"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-dedekind-cut, def-real-dedekind, thm-rat-ordered-field]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Math 331 course handout: Dedekind Cuts and Real Numbers (Hobart and William Smith Colleges)"
+      url: "https://math.hws.edu/~mitchell/Math331S14/DedekindCutsHandOUt.pdf"
 pipeline_run: null
 proof_strategy: direct
 ---

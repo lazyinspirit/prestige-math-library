@@ -1,0 +1,3912 @@
+{
+ "version": 1,
+ "level": "audit-wave0-foundations",
+ "scope": [
+  "lem-omega-smallest-inductive",
+  "thm-induction-principle",
+  "lem-nat-transitive-irreflexive",
+  "thm-omega-is-peano-system",
+  "thm-recursion",
+  "cor-nat-addition-well-defined",
+  "cor-nat-multiplication-well-defined",
+  "lem-nat-successor-neq-self",
+  "lem-nat-nonzero-is-successor",
+  "lem-nat-add-identity",
+  "lem-nat-add-successor-left",
+  "lem-nat-add-associative",
+  "lem-nat-add-commutative",
+  "lem-nat-add-cancellative",
+  "lem-nat-mult-identity",
+  "lem-nat-mult-distributive",
+  "lem-nat-mult-associative",
+  "lem-nat-mult-commutative",
+  "lem-nat-no-zero-divisors",
+  "lem-nat-trichotomy",
+  "thm-nat-linear-order",
+  "lem-nat-order-add-compatible",
+  "lem-nat-order-mult-compatible",
+  "lem-nat-discrete",
+  "lem-nat-mult-cancellative",
+  "thm-well-ordering-principle",
+  "thm-strong-induction",
+  "thm-peano-categoricity",
+  "ex-one-plus-one",
+  "ex-two-plus-two",
+  "cex-induction-axiom-necessary",
+  "cex-successor-injective-necessary",
+  "fs-induction-without-base"
+ ],
+ "contracts": {
+  "lem-omega-smallest-inductive": {
+   "citations": [],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "By the Axiom of Infinity fix an inductive set $I_0$.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "By Separation the collection $\\omega := \\{x \\in I_0 : x \\in J \\text{ for every inductive set } J\\}$ is a set.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "$\\omega$ is inductive: $\\varnothing \\in J$ for every inductive $J$ (so $\\varnothing \\in I_0$ and $\\varnothing \\in \\omega$), and if $x \\in \\omega$ then $x \\in J$ for every inductive $J$, hence $x^{+} \\in J$ for every inductive $J$, and $x^{+} \\in I_0$ since $x \\in I_0$ and $I_0$ is inductive, so $x^{+} \\in \\omega$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2.2",
+     "claim": "$\\omega \\subseteq J$ for every inductive $J$: any $x \\in \\omega$ satisfies $x \\in J$ by definition.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Uniqueness: if $\\omega'$ is also inductive and contained in every inductive set, then $\\omega \\subseteq \\omega'$ (as $\\omega'$ is inductive) and $\\omega' \\subseteq \\omega$ (as $\\omega$ is inductive), so $\\omega = \\omega'$ by Extensionality.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 2.1 verifies $\\varnothing \\in \\omega$; the empty set is the base point of every inductive set"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 2.1 treats $0 = \\varnothing$ explicitly"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 fixes an inductive $I_0$, so the intersection formed in step 1.2 is taken inside a set and over a nonempty collection"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "no ordered parameter or interval occurs; the claim is about set inclusion"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 1.1 chooses $I_0$ from the collection of inductive sets, nonempty by the Axiom of Infinity"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence-and-uniqueness claim, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence-and-uniqueness claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-induction-principle": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-omega-smallest-inductive",
+     "source_section": "Statement",
+     "quote": "is a subset of every inductive set; it is unique",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Suppose $S \\subseteq \\mathbb{N}$ with $0 = \\varnothing \\in S$ and ($x \\in S \\Rightarrow \\sigma(x) = x \\cup \\{x\\} \\in S$).",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Then $S$ contains $\\varnothing$ and is closed under $x \\mapsto x \\cup \\{x\\}$, so $S$ is an inductive set.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "$\\mathbb{N} = \\omega \\subseteq S$ because $\\omega$ is a subset of every inductive set.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "With $S \\subseteq \\mathbb{N}$ by hypothesis, $S = \\mathbb{N}$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-5.1",
+     "claim": "The property form is the set case with $S = \\{n \\in \\mathbb{N} : P(n)\\}$: $P(0)$ and $P(n) \\Rightarrow P(\\sigma(n))$ give $0 \\in S$ and $\\sigma$-closure, so $S = \\mathbb{N}$, i.e. $P$ holds for all $n$; conversely the set form is the property form applied to $P(n) :\\equiv n \\in S$, so the two are equivalent.",
+     "step": "5.1",
+     "inputs": [
+      "step 4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1 assumes $0 \\in S$, so the hypothesis rules out $S = \\varnothing$"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 4.1 disposes of the extremal case: $\\mathbb{N} \\subseteq S$ with the hypothesis $S \\subseteq \\mathbb{N}$ gives $S = \\mathbb{N}$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "step 5.1 derives the property form from the set form"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement calls the set and property forms equivalent but only the set-to-property direction is written (step 5.1); the converse instantiation $P(n) :\\equiv n \\in S$ is immediate and is not claimed as a separate result"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-transitive-irreflexive": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $P(0)$: $0 = \\varnothing$ has no members, so it is vacuously transitive and $\\varnothing \\notin \\varnothing$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $P(n)$ holds, i.e. $n$ is transitive and $n \\notin n$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "$\\sigma(n) = n \\cup \\{n\\}$ is transitive: take $x \\in \\sigma(n)$; if $x \\in n$ then $x \\subseteq n \\subseteq \\sigma(n)$ by the inductive hypothesis transitivity; if $x = n$ then $x = n \\subseteq \\sigma(n)$ since $n \\subseteq n \\cup \\{n\\}$; either way $x \\subseteq \\sigma(n)$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2.2",
+     "claim": "$\\sigma(n) \\notin \\sigma(n)$: suppose $\\sigma(n) \\in \\sigma(n) = n \\cup \\{n\\}$, so $\\sigma(n) \\in n$ or $\\sigma(n) = n$; if $\\sigma(n) = n$ then $n \\in n$ (as $n \\in \\{n\\} \\subseteq \\sigma(n) = n$), contradicting the inductive hypothesis $n \\notin n$; if $\\sigma(n) \\in n$ then $\\sigma(n) \\subseteq n$ by transitivity of $n$, and since $n \\in n \\cup \\{n\\} = \\sigma(n) \\subseteq n$ we get $n \\in n$, again contradicting $n \\notin n$; hence $\\sigma(n) \\notin \\sigma(n)$.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Hence $P(\\sigma(n))$ holds; by induction [L1], $P(n)$ for all $n \\in \\mathbb{N}$: every natural number is transitive and satisfies $n \\notin n$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2",
+      "L1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1: $0 = \\varnothing$ has no members, so transitivity holds vacuously"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 splits $x \\in \\sigma(n)$ into $x \\in n$ and $x = n$, covering the adjoined singleton"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a conjunction of two universally quantified claims, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a conjunction of two universally quantified claims, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-omega-is-peano-system": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-transitive-irreflexive",
+     "source_section": "Statement",
+     "quote": "(a) $n$ is transitive, i.e. $x \\in n \\Rightarrow x \\subseteq n$; and (b) $n \\notin n$",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "(P3) The induction axiom holds: it is exactly the induction principle.",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "(P1) For every $n$, $\\sigma(n) = n \\cup \\{n\\}$ contains $n$, so $\\sigma(n)$ is nonempty and $\\sigma(n) \\neq \\varnothing = 0$.",
+     "step": "1.2",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "(P2) Suppose $\\sigma(m) = \\sigma(n)$, i.e. $m \\cup \\{m\\} = n \\cup \\{n\\}$; then $m \\in n \\cup \\{n\\}$ so $m \\in n$ or $m = n$, and symmetrically $n \\in m$ or $n = m$; if $m \\neq n$ then $m \\in n$ and $n \\in m$, whence by transitivity [L2] $m \\in n$ gives $m \\subseteq n$, and $n \\in m \\subseteq n$ gives $n \\in n$, contradicting $n \\notin n$ [L2]; therefore $m = n$ and $\\sigma$ is injective.",
+     "step": "1.3",
+     "inputs": [
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "P1, P2, P3 all hold, so $(\\mathbb{N}, 0, \\sigma)$ is a Peano system; in particular a Peano system exists.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.2 uses that $\\sigma(n)$ contains $n$ and so is nonempty, separating it from $0 = \\varnothing$"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.2 verifies (P1) at $0 = \\varnothing$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.3 treats the subcase $m = n$ of $\\sigma(m) = \\sigma(n)$ separately from $m \\neq n$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement asserts that three axioms hold, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement asserts that three axioms hold, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-recursion": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "2.1",
+      "5.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-peano-system",
+     "source_section": "Definition",
+     "quote": "**(P1) Zero is not a successor.** For every $n \\in N$, $\\sigma(n) \\neq 0$.",
+     "uses": [
+      "2.2",
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "The set $N \\times A$ is closed, so the collection of closed subsets of $N \\times A$ is nonempty; let $g := \\bigcap \\{ R : R \\subseteq N \\times A \\text{ closed} \\}$, which is itself closed, since if every closed $R$ contains $(0,a)$ then so does $g$, and if $(n,x) \\in g$ then $(n,x) \\in R$ for each closed $R$, whence $(\\sigma(n),f(x)) \\in R$ for each such $R$, so $(\\sigma(n),f(x)) \\in g$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "construct"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Let $D = \\{ n \\in N : \\exists x \\in A,\\ (n,x) \\in g \\}$; then $0 \\in D$ since $(0,a) \\in g$, and if $n \\in D$ with $(n,x) \\in g$ then $(\\sigma(n),f(x)) \\in g$ by closure, so $\\sigma(n) \\in D$; by induction $D = N$, hence $g$ relates every $n$ to at least one $x$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-2.2",
+     "claim": "Suppose $(0,b) \\in g$ with $b \\ne a$; then $g \\setminus \\{(0,b)\\}$ still contains $(0,a)$ and is closed, since any generated pair $(\\sigma(m),f(z))$ has $\\sigma(m) \\ne 0$ by P1 and so is never equal to $(0,b)$; this contradicts the minimality of $g$, so $a$ is the unique second coordinate paired with $0$.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Let $U = \\{ n \\in N : \\text{there is exactly one } x \\text{ with } (n,x) \\in g \\}$; then $0 \\in U$ by step 2.2.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "Assume $n \\in U$ with unique value $x$, so $(n,x) \\in g$ and $(\\sigma(n),f(x)) \\in g$ by closure; if $(\\sigma(n),c) \\in g$ with $c \\ne f(x)$, then $g \\setminus \\{(\\sigma(n),c)\\}$ contains $(0,a)$ because $\\sigma(n) \\ne 0$, and is closed, because a generated pair $(\\sigma(m),f(z))$ with $(m,z) \\in g \\setminus \\{(\\sigma(n),c)\\}$ can equal $(\\sigma(n),c)$ only if $\\sigma(m) = \\sigma(n)$ and $f(z) = c$, but $\\sigma(m) = \\sigma(n)$ forces $m = n$ by injectivity, then $z = x$ by uniqueness at $n$, giving $f(z) = f(x) \\ne c$, a contradiction; hence $g \\setminus \\{(\\sigma(n),c)\\}$ is closed and smaller than $g$, contradicting minimality, so $f(x)$ is the unique value at $\\sigma(n)$ and $\\sigma(n) \\in U$.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-5.1",
+     "claim": "By induction $U = N$, so together with the totality from step 2.1 the relation $g$ is a function $g : N \\to A$; it satisfies $g(0) = a$, and closure with uniqueness gives $g(\\sigma(n)) = f(g(n))$ for all $n$.",
+     "step": "5.1",
+     "inputs": [
+      "step 2.1",
+      "step 3.1",
+      "step 4.1",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-6.1",
+     "claim": "If $h : N \\to A$ also satisfies $h(0) = a$ and $h(\\sigma(n)) = f(h(n))$, then the set $\\{ n : g(n) = h(n) \\}$ contains $0$ and is closed under $\\sigma$, since $g(n) = h(n)$ implies $g(\\sigma(n)) = f(g(n)) = f(h(n)) = h(\\sigma(n))$, so by induction it equals $N$, that is $h = g$.",
+     "step": "6.1",
+     "inputs": [
+      "step 5.1",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1 notes $N \\times A$ is itself closed, so the collection intersected is nonempty; $A$ is nonempty because $a \\in A$ is given"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 2.2 and step 3.1 establish the value at $0$ and its uniqueness"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 4.1 covers the case of a second pair $(\\sigma(n),c)$ over $\\sigma(n)$, using P1 and injectivity of $\\sigma$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 1.1 uses the given $a \\in A$ as the base pair, so no unjustified choice from $A$ is made"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence-and-uniqueness claim, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence-and-uniqueness claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "cor-nat-addition-well-defined": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-recursion",
+     "source_section": "Statement",
+     "quote": "there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "satisfies the three Peano axioms",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Fix $m \\in \\mathbb{N}$; since $(\\mathbb{N}, 0, \\sigma)$ is a Peano system [L2], apply the recursion theorem with $A = \\mathbb{N}$, $a = m$, and $f = \\sigma$: there is a unique function $s_m : \\mathbb{N} \\to \\mathbb{N}$ with $s_m(0) = m$ and $s_m(\\sigma(n)) = \\sigma(s_m(n))$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Define $m + n := s_m(n)$; since $s_m$ is a total function on $\\mathbb{N}$ for every $m \\in \\mathbb{N}$, the assignment $(m,n) \\mapsto m + n$ is a well-defined function $\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "The recursion equations become $m + 0 = s_m(0) = m$ and $m + \\sigma(n) = s_m(\\sigma(n)) = \\sigma(s_m(n)) = \\sigma(m + n)$, the defining clauses of addition.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 3.1 verifies $m + 0 = m$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 ranges over every $m \\in \\mathbb{N}$, including $m = 0$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence, uniqueness and identity claim, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence, uniqueness and identity claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "cor-nat-multiplication-well-defined": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-recursion",
+     "source_section": "Statement",
+     "quote": "there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-nat-addition",
+     "source_section": "Definition",
+     "quote": "**Addition** $+ : \\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ is defined by recursion on the second argument",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "satisfies the three Peano axioms",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Fix $m \\in \\mathbb{N}$; the map $\\mathrm{add}_m : \\mathbb{N} \\to \\mathbb{N}$, $\\mathrm{add}_m(x) = x + m$, is a well-defined function.",
+     "step": "1.1",
+     "inputs": [
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Since $(\\mathbb{N}, 0, \\sigma)$ is a Peano system [L3], apply the recursion theorem with $A = \\mathbb{N}$, $a = 0$, $f = \\mathrm{add}_m$: there is a unique $p_m : \\mathbb{N} \\to \\mathbb{N}$ with $p_m(0) = 0$ and $p_m(\\sigma(n)) = \\mathrm{add}_m(p_m(n)) = p_m(n) + m$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Define $m \\cdot n := p_m(n)$; as $p_m$ is total for each $m \\in \\mathbb{N}$, the assignment $(m,n) \\mapsto m \\cdot n$ is a well-defined function $\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ with $m \\cdot 0 = 0$ and $m \\cdot \\sigma(n) = m \\cdot n + m$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 3.1 verifies $m \\cdot 0 = 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 3.1 ranges over every $m \\in \\mathbb{N}$, including $m = 0$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence, uniqueness and identity claim, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence, uniqueness and identity claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-successor-neq-self": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base case $n = 0$: $\\sigma(0) \\neq 0$ by P1, so $0 \\neq \\sigma(0)$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $n \\neq \\sigma(n)$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "If $\\sigma(n) = \\sigma(\\sigma(n))$ then injectivity of $\\sigma$ gives $n = \\sigma(n)$, contradicting the hypothesis; hence $\\sigma(n) \\neq \\sigma(\\sigma(n))$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L2], $n \\neq \\sigma(n)$ for all $n \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L2",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 reduces $\\sigma(n) = \\sigma(\\sigma(n))$ to the inductive hypothesis by injectivity"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-nonzero-is-successor": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base case: $0 \\in S$ since $0 = 0$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $n \\in S$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "$\\sigma(n)$ is the successor of $n$, so $\\sigma(n) \\in S$ (it satisfies $\\exists m,\\ \\sigma(n) = \\sigma(m)$ with $m = n$).",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L1], $S = \\mathbb{N}$, so every $n \\in \\mathbb{N}$ is $0$ or a successor; if $n \\neq 0$ then $n = \\sigma(m)$ for some $m$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1 places $0$ in $S$ so that the induction axiom, which requires $0 \\in S$, applies"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 3.1 separates the two disjuncts, $n = 0$ and $n$ a successor"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 2.1 exhibits the predecessor witness $m = n$ explicitly rather than asserting existence"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is an implication with an equivalent restatement, not a biconditional between two distinct claims"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an implication with an equivalent restatement, not a biconditional between two distinct claims"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-add-identity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $n = 0$: $0 + 0 = 0$ by the clause $m + 0 = m$ at $m = 0$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $0 + n = n$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $0 + \\sigma(n) = \\sigma(0 + n) = \\sigma(n)$, using $m + \\sigma(n) = \\sigma(m + n)$ at $m = 0$, then the hypothesis.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L1], $0 + n = n$ for all $n \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $n = 0$, where both sides reduce by the clause $m + 0 = m$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-add-successor-left": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $n = 0$: $\\sigma(m) + 0 = \\sigma(m)$ by $x + 0 = x$, and $\\sigma(m + 0) = \\sigma(m)$ by $m + 0 = m$, so $\\sigma(m) + 0 = \\sigma(m + 0)$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $\\sigma(m) + n = \\sigma(m + n)$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $\\sigma(m) + \\sigma(n) = \\sigma(\\sigma(m) + n) = \\sigma(\\sigma(m + n)) = \\sigma(m + \\sigma(n))$, applying $x + \\sigma(k) = \\sigma(x + k)$ at the outer sum, then the hypothesis, then $m + \\sigma(n) = \\sigma(m + n)$ backward inside $\\sigma$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L1], $\\sigma(m) + n = \\sigma(m + n)$ for all $n$, and since $m$ was arbitrary, for all $m, n \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $n = 0$, checked on both sides separately"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-add-associative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $c = 0$: $(a + b) + 0 = a + b$ and $a + (b + 0) = a + b$, so they are equal.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $(a + b) + c = a + (b + c)$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $(a + b) + \\sigma(c) = \\sigma((a + b) + c) = \\sigma(a + (b + c)) = a + \\sigma(b + c) = a + (b + \\sigma(c))$, using $m + \\sigma(n) = \\sigma(m + n)$ twice and the hypothesis.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L1], $(a + b) + c = a + (b + c)$ for all $c$, hence for all $a, b, c \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $c = 0$, checked on both sides separately"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-add-commutative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-add-successor-left",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $\\sigma(m) + n = \\sigma(m + n)$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $n = 0$: $m + 0 = m$ and $0 + m = m$ by [L1], so $m + 0 = 0 + m$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $m + n = n + m$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $m + \\sigma(n) = \\sigma(m + n) = \\sigma(n + m)$ by the recursion and the hypothesis; and the left successor law [L2] gives $\\sigma(n) + m = \\sigma(n + m)$, so $m + \\sigma(n) = \\sigma(n + m) = \\sigma(n) + m$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L3], $m + n = n + m$ for all $n$, hence for all $m, n \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L3",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $n = 0$ and uses [L1] for the left identity, which is not definitional"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-add-cancellative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P2) $\\sigma$ is injective",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $k = 0$: if $m + 0 = n + 0$ then $m = n$, since $m + 0 = m$ and $n + 0 = n$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: for all $m, n$, $m + k = n + k \\Rightarrow m = n$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: suppose $m + \\sigma(k) = n + \\sigma(k)$; then $\\sigma(m + k) = \\sigma(n + k)$ by $m + \\sigma(j) = \\sigma(m + j)$, so $m + k = n + k$ by injectivity [L1], hence $m = n$ by the hypothesis.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L2], cancellation holds for all $k$, hence for all $m, n, k \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L2",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $k = 0$, where the hypothesis collapses to $m = n$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-mult-identity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Right unit $n \\cdot 1 = n$: $n \\cdot 1 = n \\cdot \\sigma(0) = n \\cdot 0 + n = 0 + n = n$, using the multiplication recursion then [L1].",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Base of the left inductions: $0 \\cdot 0 = 0$ and $1 \\cdot 0 = 0$ by the clause $m \\cdot 0 = 0$.",
+     "step": "1.2",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "Inductive hypothesis: $0 \\cdot n = 0$ and $1 \\cdot n = n$.",
+     "step": "1.3",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $0 \\cdot \\sigma(n) = 0 \\cdot n + 0 = 0 + 0 = 0$, using the hypothesis $0 \\cdot n = 0$ and $0 + 0 = 0$ (the instance $k = 0$ of [L1]); and $1 \\cdot \\sigma(n) = 1 \\cdot n + 1 = n + 1 = \\sigma(n)$, where $n + 1 = n + \\sigma(0) = \\sigma(n + 0) = \\sigma(n)$ by the addition recursion $m + \\sigma(k) = \\sigma(m + k)$ and $n + 0 = n$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3",
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L2], $0 \\cdot n = 0$ and $1 \\cdot n = n$ for all $n$; together with step 1.1, $n \\cdot 1 = n$ for all $n$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L2",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.2 gives $0 \\cdot 0 = 0$ and $1 \\cdot 0 = 0$ from the clause $m \\cdot 0 = 0$"
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "step 1.1 proves $n \\cdot 1 = n$ and step 2.1 proves $1 \\cdot \\sigma(n) = \\sigma(n)$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.2 is the base of both left inductions"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-mult-distributive": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-associative",
+     "source_section": "Statement",
+     "quote": "For all $a, b, c \\in \\mathbb{N}$: $(a + b) + c = a + (b + c)$",
+     "uses": [
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $c = 0$: $a \\cdot (b + 0) = a \\cdot b = a \\cdot b + 0 = a \\cdot b + a \\cdot 0$, using $b + 0 = b$ and $a \\cdot 0 = 0$.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $a \\cdot (b + c) = a \\cdot b + a \\cdot c$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "Successor-left law $\\sigma(a) \\cdot n = a \\cdot n + n$, by a second induction on $n$: base $n = 0$ gives $\\sigma(a) \\cdot 0 = 0 = a \\cdot 0 + 0$; assuming $\\sigma(a) \\cdot n = a \\cdot n + n$, the step gives $\\sigma(a) \\cdot \\sigma(n) = \\sigma(a) \\cdot n + \\sigma(a) = (a \\cdot n + n) + \\sigma(a) = a \\cdot n + (n + \\sigma(a)) = a \\cdot n + \\sigma(n + a) = a \\cdot n + \\sigma(a + n) = a \\cdot n + (a + \\sigma(n)) = (a \\cdot n + a) + \\sigma(n) = a \\cdot \\sigma(n) + \\sigma(n)$, using associativity and commutativity [L1] and $a + \\sigma(k) = \\sigma(a + k)$.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $a \\cdot (b + \\sigma(c)) = a \\cdot \\sigma(b + c) = a \\cdot (b + c) + a = (a \\cdot b + a \\cdot c) + a = a \\cdot b + (a \\cdot c + a) = a \\cdot b + a \\cdot \\sigma(c)$, using $b + \\sigma(c) = \\sigma(b + c)$, the multiplication recursion, the hypothesis, associativity [L1], and $a \\cdot \\sigma(c) = a \\cdot c + a$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L2], $a \\cdot (b + c) = a \\cdot b + a \\cdot c$ for all $c$ (hence all $a, b, c$) and $\\sigma(a) \\cdot n = a \\cdot n + n$ for all $a, n$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.3",
+      "step 2.1",
+      "L2",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $c = 0$ and the base $n = 0$ of the second induction is inside step 1.3"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.3 carries its own induction for the successor-left law, so each of the two claims has its own base case"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-mult-associative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-mult-distributive",
+     "source_section": "Statement",
+     "quote": "(left distributivity) $a \\cdot (b + c) = a \\cdot b + a \\cdot c$; and (successor-left law) $\\sigma(a) \\cdot n = a \\cdot n + n$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $c = 0$: $(a \\cdot b) \\cdot 0 = 0$ and $a \\cdot (b \\cdot 0) = a \\cdot 0 = 0$, so the two sides are equal.",
+     "step": "1.1",
+     "inputs": [
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $(a \\cdot b) \\cdot \\sigma(c) = (a \\cdot b) \\cdot c + a \\cdot b = a \\cdot (b \\cdot c) + a \\cdot b = a \\cdot (b \\cdot c + b) = a \\cdot (b \\cdot \\sigma(c))$, using the multiplication recursion, the hypothesis, left distributivity [L1], and $b \\cdot \\sigma(c) = b \\cdot c + b$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L2], $(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)$ for all $c$, hence for all $a, b, c \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L2",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $c = 0$, where both sides reduce to $0$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-mult-commutative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-mult-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 \\cdot n = 0$, $1 \\cdot n = n$, and $n \\cdot 1 = n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-mult-distributive",
+     "source_section": "Statement",
+     "quote": "(left distributivity) $a \\cdot (b + c) = a \\cdot b + a \\cdot c$; and (successor-left law) $\\sigma(a) \\cdot n = a \\cdot n + n$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Base $n = 0$: $m \\cdot 0 = 0$ and $0 \\cdot m = 0$ by [L1], so $m \\cdot 0 = 0 \\cdot m$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Inductive hypothesis: $m \\cdot n = n \\cdot m$.",
+     "step": "1.2",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Step: $m \\cdot \\sigma(n) = m \\cdot n + m = n \\cdot m + m = \\sigma(n) \\cdot m$, using the multiplication recursion, the hypothesis, then the successor-left law [L2].",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By induction [L3], $m \\cdot n = n \\cdot m$ for all $n$, hence for all $m, n \\in \\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L3",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 is the base $n = 0$ and needs $0 \\cdot m = 0$ from [L1], not only the definitional $m \\cdot 0 = 0$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a universally quantified identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-no-zero-divisors": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-nonzero-is-successor",
+     "source_section": "Statement",
+     "quote": "For every $n \\in \\mathbb{N}$ with $n \\neq 0$, there exists $m \\in \\mathbb{N}$ with $n = \\sigma(m)$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "It suffices to prove the contrapositive: if $m\\ne 0$ and $n\\ne 0$ then $m\\cdot n\\ne 0$.",
+     "step": "1.1",
+     "inputs": [
+      "contrapositive-reduce"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Assume $m\\ne 0$ and $n\\ne 0$.",
+     "step": "1.2",
+     "inputs": [
+      "assume-hyp"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "By [L1] write $m=\\sigma(a)$ and $n=\\sigma(b)$ for some $a,b\\in\\mathbb{N}$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.2",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Then $m\\cdot n=m\\cdot\\sigma(b)=m\\cdot b+m=m\\cdot b+\\sigma(a)=\\sigma(m\\cdot b+a)$, using the multiplication recursion, $m=\\sigma(a)$, and $c+\\sigma(a)=\\sigma(c+a)$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "By [L2], $\\sigma(m\\cdot b+a)\\ne 0$, so $m\\cdot n\\ne 0$; this proves the contrapositive, hence if $m\\cdot n=0$ then $m=0$ or $n=0$.",
+     "step": "4.1",
+     "inputs": [
+      "step 3.1",
+      "L2",
+      "discharge-contrapositive"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.2 assumes $m \\neq 0$ and $n \\neq 0$; step 4.1 concludes $\\sigma(m \\cdot b + a) \\neq 0$ from P1"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 writes both nonzero factors as successors, so the subcases $a = 0$ and $b = 0$ are covered uniformly"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 2.1 obtains the predecessors $a, b$ from [L1] rather than choosing them"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "step 1.1 reduces the Statement to its contrapositive, discharged at step 4.1"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is one implication together with its contrapositive, which is the same claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-trichotomy": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$",
+     "uses": [
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-add-successor-left",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $\\sigma(m) + n = \\sigma(m + n)$",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-add-associative",
+     "source_section": "Statement",
+     "quote": "For all $a, b, c \\in \\mathbb{N}$: $(a + b) + c = a + (b + c)$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-nat-nonzero-is-successor",
+     "source_section": "Statement",
+     "quote": "For every $n \\in \\mathbb{N}$ with $n \\neq 0$, there exists $m \\in \\mathbb{N}$ with $n = \\sigma(m)$",
+     "uses": [
+      "1.2",
+      "1.4",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "1.2",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "lem-nat-add-cancellative",
+     "source_section": "Statement",
+     "quote": "For all $m, n, k \\in \\mathbb{N}$: if $m + k = n + k$ then $m = n$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "At most one of the three holds where equality is involved: $m < n$ forces $m \\ne n$ and $m > n$ forces $n \\ne m$, so $m = n$ is incompatible with either strict relation.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "The two strict relations are incompatible: if $m < n$ and $m > n$ then $m + j = n$ and $n + i = m$ with $i, j \\ne 0$, so $m + (j + i) = (m + j) + i = n + i = m = m + 0$; by commutativity [L7], $(j + i) + m = 0 + m$, so $j + i = 0$ by cancellation [L6]; yet $j = \\sigma(a)$ [L4] gives, by the left successor law [L2], $j + i = \\sigma(a) + i = \\sigma(a + i) \\ne 0$ [L5], a contradiction.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "For every $n$ one has $n < \\sigma(n)$, since $n + \\sigma(0) = \\sigma(n + 0) = \\sigma(n)$ by the recursion, with $\\sigma(0) \\ne 0$ [L5].",
+     "step": "1.3",
+     "inputs": [
+      "L5",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.4",
+     "claim": "Base case $n = 0$: for arbitrary $m$, either $m = 0$, giving $m = n$, or $m \\ne 0$ so $0 + m = m$ [L1] with $m \\ne 0$ gives $0 < m$, that is $n < m$; so at least one of $m < n$, $m = n$, $m > n$ holds.",
+     "step": "1.4",
+     "inputs": [
+      "L1",
+      "L4",
+      "base"
+     ]
+    },
+    {
+     "id": "step-1.5",
+     "claim": "Inductive hypothesis: fix $n$ and assume that for every $m$ at least one of $m < n$, $m = n$, $m > n$ holds.",
+     "step": "1.5",
+     "inputs": [
+      "ih"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Successor step: for arbitrary $m$, apply the hypothesis; if $m < n$ then $n = m + k$ with $k \\ne 0$, and the recursion gives $m + \\sigma(k) = \\sigma(m + k) = \\sigma(n)$, so $\\sigma(n) = m + \\sigma(k)$ with $\\sigma(k) \\ne 0$ [L5], giving $m < \\sigma(n)$; if $m = n$ then $m + \\sigma(0) = \\sigma(m + 0) = \\sigma(m) = \\sigma(n)$, so $\\sigma(n) = m + \\sigma(0)$ with $\\sigma(0) \\ne 0$, giving $m < \\sigma(n)$; if $m > n$ then $m = n + i$ with $i \\ne 0$, so $i = \\sigma(a)$ [L4], and the recursion gives $n + \\sigma(a) = \\sigma(n + a)$ while the left successor law [L2] gives $\\sigma(n) + a = \\sigma(n + a)$, so $m = n + \\sigma(a) = \\sigma(n + a) = \\sigma(n) + a$, whence $a = 0$ gives $m = \\sigma(n)$ and $a \\ne 0$ gives $\\sigma(n) < m$; in every case at least one of $m < \\sigma(n)$, $m = \\sigma(n)$, $m > \\sigma(n)$ holds.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.5",
+      "L2",
+      "L4",
+      "L5",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By the induction principle with base 1.4, hypothesis 1.5, and step 2.1, comparability holds for all $m, n$, and with the incompatibilities 1.1 and 1.2 exactly one of $m < n$, $m = n$, $m > n$ holds, so the order is total.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.4",
+      "step 1.5",
+      "step 2.1",
+      "discharge-induction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.4 is the base case $n = 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 splits the successor step into $m < n$, $m = n$ and $m > n$, and inside the third into $a = 0$ and $a \\neq 0$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "steps 1.1 and 1.2 give the 'at most one' half"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "step 1.4 and step 2.1 give the 'at least one' half"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-nat-linear-order": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$",
+     "uses": [
+      "1.2",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-associative",
+     "source_section": "Statement",
+     "quote": "For all $a, b, c \\in \\mathbb{N}$: $(a + b) + c = a + (b + c)$",
+     "uses": [
+      "1.2",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-add-cancellative",
+     "source_section": "Statement",
+     "quote": "For all $m, n, k \\in \\mathbb{N}$: if $m + k = n + k$ then $m = n$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-nonzero-is-successor",
+     "source_section": "Statement",
+     "quote": "For every $n \\in \\mathbb{N}$ with $n \\neq 0$, there exists $m \\in \\mathbb{N}$ with $n = \\sigma(m)$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-nat-trichotomy",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds",
+     "uses": [
+      "1.4"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Reflexive: $m + 0 = m$, so $m \\le m$.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Transitive: if $m \\le n$ and $n \\le p$, say $m + k = n$ and $n + j = p$, then $m + (k + j) = (m + k) + j = n + j = p$, so $m \\le p$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "A sum is zero only if both summands are: if $k + j = 0$ with $j \\ne 0$ then $j = \\sigma(i)$ and $k + j = k + \\sigma(i) = \\sigma(k + i) \\ne 0$ [L6], a contradiction, so $k = j = 0$.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L3",
+      "L6"
+     ]
+    },
+    {
+     "id": "step-1.4",
+     "claim": "Total: by trichotomy one of $m < n$, $m = n$, $m > n$ holds, and each of these gives $m \\le n$ or $n \\le m$.",
+     "step": "1.4",
+     "inputs": [
+      "L4"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "Antisymmetric: if $m \\le n$ and $n \\le m$, say $m + k = n$ and $n + j = m$, then $m + (k + j) = (m + k) + j = n + j = m = m + 0$; commuting both sides [L5] gives $(k + j) + m = 0 + m$, and cancelling the common right summand $m$ [L2] gives $k + j = 0$, hence $k = j = 0$ by step 1.3 and $m = n$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3",
+      "L1",
+      "L2",
+      "L5",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Reflexivity, antisymmetry, transitivity, and totality all hold, so $\\le$ is a linear order on $\\mathbb{N}$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.4",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1 uses $m + 0 = m$ for reflexivity and step 1.3 disposes of the sum $k + j = 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.3 covers the degenerate sum $k + j = 0$, on which antisymmetry in step 2.1 turns"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement asserts four order properties, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement asserts four order properties, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-order-add-compatible": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-associative",
+     "source_section": "Statement",
+     "quote": "For all $a, b, c \\in \\mathbb{N}$: $(a + b) + c = a + (b + c)$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-add-cancellative",
+     "source_section": "Statement",
+     "quote": "For all $m, n, k \\in \\mathbb{N}$: if $m + k = n + k$ then $m = n$",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Forward: if $m \\le n$, say $m + j = n$, then $(m + k) + j = (m + j) + k = n + k$, so $m + k \\le n + k$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Backward: if $m + k \\le n + k$, say $(m + k) + j = n + k$, then $(m + j) + k = n + k$, so $m + j = n$ by cancellation, giving $m \\le n$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "The strict forms follow: $m < n$ means $m \\le n$ and $m \\ne n$, while $m + k = n + k \\iff m = n$ by cancellation, so $m < n \\iff m + k < n + k$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "the witness $j$ may be $0$; step 2.1 handles exactly that case, where $m = n$ and $m + k = n + k$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 transfers $m \\neq n$ to $m + k \\neq n + k$ by cancellation, so the strict form is not assumed"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "step 1.2"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-order-mult-compatible": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-mult-distributive",
+     "source_section": "Statement",
+     "quote": "(left distributivity) $a \\cdot (b + c) = a \\cdot b + a \\cdot c$; and (successor-left law) $\\sigma(a) \\cdot n = a \\cdot n + n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L1",
+     "source": "lem-nat-mult-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m \\cdot n = n \\cdot m$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-no-zero-divisors",
+     "source_section": "Statement",
+     "quote": "if $m\\cdot n=0$ then $m=0$ or $n=0$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-add-cancellative",
+     "source_section": "Statement",
+     "quote": "For all $m, n, k \\in \\mathbb{N}$: if $m + k = n + k$ then $m = n$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "If $m \\le n$, write $m + d = n$; then $n \\cdot k = (m + d) \\cdot k = m \\cdot k + d \\cdot k$ by right distributivity, so $m \\cdot k \\le n \\cdot k$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "If moreover $m < n$ then $d \\ne 0$, for $d = 0$ would give $n = m + 0 = m$, contradicting $m \\ne n$; then with $k \\ne 0$ we get $d \\cdot k \\ne 0$ by [L2], so $m \\cdot k + d \\cdot k = n \\cdot k$ with $d \\cdot k \\ne 0$; and $m \\cdot k \\ne n \\cdot k$, since equality would give $m \\cdot k + d \\cdot k = m \\cdot k + 0$, hence $d \\cdot k + m \\cdot k = 0 + m \\cdot k$ by [L4] and $d \\cdot k = 0$ by [L3], a contradiction; therefore $m \\cdot k < n \\cdot k$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2",
+      "L3",
+      "L4",
+      "given"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 2.1 excludes $d = 0$ from $m < n$ and uses the hypothesis $k \\neq 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 allows $d = 0$, i.e. $m = n$, which yields only the weak inequality"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-discrete": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-nonzero-is-successor",
+     "source_section": "Statement",
+     "quote": "For every $n \\in \\mathbb{N}$ with $n \\neq 0$, there exists $m \\in \\mathbb{N}$ with $n = \\sigma(m)$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-add-successor-left",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $\\sigma(m) + n = \\sigma(m + n)$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-add-cancellative",
+     "source_section": "Statement",
+     "quote": "For all $m, n, k \\in \\mathbb{N}$: if $m + k = n + k$ then $m = n$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "lem-nat-add-commutative",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m + n = n + m$",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Forward: if $m < n$ then $m \\le n$ and $m \\ne n$, so $m + j = n$ for some $j$, with $j \\ne 0$ since $j = 0$ would give $m = n$; then $j = \\sigma(i)$ [L1] and $n = m + \\sigma(i) = \\sigma(m + i) = \\sigma(m) + i$ [L2], hence $\\sigma(m) \\le n$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Backward: if $\\sigma(m) \\le n$ then $\\sigma(m) + i = n$, so $n = \\sigma(m) + i = \\sigma(m + i) = m + \\sigma(i)$ [L2], hence $m \\le n$; and $m \\ne n$, since $m = n$ would give $m + \\sigma(i) = m = m + 0$, so $\\sigma(i) + m = 0 + m$ by [L5] and $\\sigma(i) = 0$ by [L3], contradicting [L4]; therefore $m < n$.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "No $k$ satisfies $n < k < \\sigma(n)$: if $n < k$ then $\\sigma(n) \\le k$ by the equivalence, so $k \\ge \\sigma(n)$, contradicting $k < \\sigma(n)$; thus $\\sigma(n)$ is the immediate successor.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1 uses $j \\neq 0$ and step 1.2 uses $\\sigma(i) \\neq 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.2 allows $i = 0$, the case $n = \\sigma(m)$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "step 1.1"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "step 1.2"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "lem-nat-mult-cancellative": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nat-trichotomy",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-order-mult-compatible",
+     "source_section": "Statement",
+     "quote": "if in addition $k \\ne 0$ and $m < n$, then $m \\cdot k < n \\cdot k$",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Suppose $m\\cdot k=n\\cdot k$ with $k\\ne 0$ but $m\\ne n$.",
+     "step": "1.1",
+     "inputs": [
+      "assume-contra"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "By trichotomy [L1], $m\\ne n$ forces $m<n$ or $n<m$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "If $m<n$ then $m\\cdot k<n\\cdot k$ by [L2] (since $k\\ne 0$); if $n<m$ then $n\\cdot k<m\\cdot k$ by [L2]; either way $m\\cdot k\\ne n\\cdot k$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "This contradicts $m\\cdot k=n\\cdot k$, so the assumption $m\\ne n$ is impossible and $m=n$.",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "step 3.1",
+      "discharge-contradiction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "the hypothesis $k \\neq 0$ is what licenses [L2] at step 3.1; without it the claim fails at $k = 0$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 splits $m \\neq n$ into $m < n$ and $n < m$"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-well-ordering-principle": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-discrete",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m < n \\iff \\sigma(m) \\le n$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-trichotomy",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds",
+     "uses": [
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-nat-discrete",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $m < n \\iff \\sigma(m) \\le n$",
+     "uses": [
+      "2.1",
+      "2.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P2) $\\sigma$ is injective",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "lem-nat-add-successor-left",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$: $\\sigma(m) + n = \\sigma(m + n)$",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "lem-nat-add-identity",
+     "source_section": "Statement",
+     "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Suppose $S$ is nonempty but has no least element.",
+     "step": "1.1",
+     "inputs": [
+      "assume-contra"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "If $m < \\sigma(n)$ then $m \\le n$: by [L2] applied to $m$ and $\\sigma(n)$ we get $\\sigma(m) \\le \\sigma(n)$, say $\\sigma(m) + i = \\sigma(n)$; then $\\sigma(m + i) = \\sigma(m) + i = \\sigma(n)$ [L5], so $m + i = n$ by injectivity [L4], hence $m \\le n$.",
+     "step": "1.2",
+     "inputs": [
+      "L2",
+      "L4",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "First, $0 \\in T$: if $0 \\in S$ then $0 \\le s$ for all $s \\in S$, since $0 + s = s$ [L6], making $0$ a least element, contrary to the assumption; hence $0 \\notin S$; moreover $m \\le 0$ forces $m = 0$, because $m \\ne 0$ would give $0 < m$ (as $0 + m = m$ [L6] with $m \\ne 0$) while $m \\le 0$ gives $m < 0$, and [L3] admits at most one of these; so every $m \\le 0$ lies outside $S$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L3",
+      "L6",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.2",
+     "claim": "Next, $T$ is closed under $\\sigma$: assume $n \\in T$; if $\\sigma(n) \\in S$ then no $s \\in S$ satisfies $s < \\sigma(n)$ (else $s \\le n$ by step 1.2, so $s \\notin S$ because $n \\in T$, a contradiction), hence $\\sigma(n) \\le s$ for all $s \\in S$ by [L3], making $\\sigma(n)$ a least element, contrary to the assumption; therefore $\\sigma(n) \\notin S$, and any $m$ with $m \\le \\sigma(n)$ satisfies $m = \\sigma(n)$ or $m \\ne \\sigma(n)$; in the second case $m \\le \\sigma(n)$ together with $m \\ne \\sigma(n)$ gives $m < \\sigma(n)$ by the definition of the strict order, hence $m \\le n$ by step 1.2 and $m \\notin S$ because $n \\in T$, while in the first case $m = \\sigma(n) \\notin S$; so every $m \\le \\sigma(n)$ lies outside $S$, giving $\\sigma(n) \\in T$.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By the induction principle [L1], from $0 \\in T$ and closure under $\\sigma$, $T = \\mathbb{N}$; then for every $n$, taking $m = n \\le n$ shows $n \\notin S$, so $S = \\varnothing$, contradicting nonemptiness; therefore $S$ has a least element.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2",
+      "L1",
+      "discharge-contradiction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 3.1 derives $S = \\varnothing$ and contradicts the nonemptiness hypothesis; the empty subset is excluded by hypothesis and is the only subset with no least element"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 2.1 is the base case $0 \\in T$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.2 splits $m \\le \\sigma(n)$ into $m = \\sigma(n)$ and $m < \\sigma(n)$"
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "step 2.1 uses that $0$ is least in $\\mathbb{N}$, the lower endpoint"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "the nonemptiness of $S$ is used only to contradict $S = \\varnothing$ at step 3.1; no element of $S$ is chosen"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single existence claim, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single existence claim, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-strong-induction": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-well-ordering-principle",
+     "source_section": "Statement",
+     "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-nat-trichotomy",
+     "source_section": "Statement",
+     "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Suppose $P$ fails somewhere; let $S = \\{\\, n \\in \\mathbb{N} : P(n) \\text{ is false} \\,\\}$, a nonempty subset of $\\mathbb{N}$.",
+     "step": "1.1",
+     "inputs": [
+      "assume-contra"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "By well-ordering [L1], $S$ has a least element $\\ell$, so $\\ell \\le s$ for every $s \\in S$; hence every $m < \\ell$ lies outside $S$, since $m \\in S$ would give $\\ell \\le m$, which [L2] does not allow alongside $m < \\ell$; that is, $P(m)$ holds for all $m < \\ell$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "By the hypothesis $H$ applied at $\\ell$, $P(\\ell)$ holds, so $\\ell \\notin S$.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "But $\\ell \\in S$ by construction, a contradiction; hence $S$ is empty and $P(n)$ holds for all $n \\in \\mathbb{N}$.",
+     "step": "4.1",
+     "inputs": [
+      "step 2.1",
+      "step 3.1",
+      "discharge-contradiction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1 forms the failure set $S$ and assumes it nonempty; step 4.1 concludes it is empty"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 3.1 applies the hypothesis at the least failure $\\ell$, which may be $0$, where the antecedent is vacuous as the Statement notes"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 2.1 covers $\\ell = 0$, where 'every $m < \\ell$' is vacuously satisfied"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 2.1 obtains $\\ell$ from well-ordering applied to the nonempty $S$ of step 1.1"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "thm-peano-categoricity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-recursion",
+     "source_section": "Statement",
+     "quote": "there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$",
+     "uses": [
+      "1.1",
+      "1.2",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-peano-system",
+     "source_section": "Definition",
+     "quote": "**(P1) Zero is not a successor.** For every $n \\in N$, $\\sigma(n) \\neq 0$.",
+     "uses": [
+      "2.1",
+      "2.2",
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Apply the recursion theorem [L1] in $(N, 0, \\sigma)$ with $A = N'$, $a = 0'$, $f = \\sigma'$: there is a unique $h : N \\to N'$ with $h(0) = 0'$ and $h(\\sigma(n)) = \\sigma'(h(n))$.",
+     "step": "1.1",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "Symmetrically, apply [L1] in $(N', 0', \\sigma')$ with $A = N$, $a = 0$, $f = \\sigma$: there is a unique $h' : N' \\to N$ with $h'(0') = 0$ and $h'(\\sigma'(n')) = \\sigma(h'(n'))$.",
+     "step": "1.2",
+     "inputs": [
+      "L1"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "The composite $h' \\circ h : N \\to N$ satisfies $(h' \\circ h)(0) = h'(0') = 0$ and $(h' \\circ h)(\\sigma(n)) = h'(\\sigma'(h(n))) = \\sigma(h'(h(n))) = \\sigma((h' \\circ h)(n))$; the identity $\\mathrm{id}_N$ satisfies the same two equations, so by induction [L2] the set $\\{\\, n : (h' \\circ h)(n) = n \\,\\}$ is all of $N$, i.e. $h' \\circ h = \\mathrm{id}_N$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2.2",
+     "claim": "Likewise $h \\circ h' = \\mathrm{id}_{N'}$ by the same argument carried out in $N'$.",
+     "step": "2.2",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Hence $h$ is a bijection with inverse $h'$, and it preserves the base point and the successor, so it is an isomorphism of Peano systems.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "step-4.1",
+     "claim": "Uniqueness: any $h_1 : N \\to N'$ with $h_1(0) = 0'$ and $h_1(\\sigma(n)) = \\sigma'(h_1(n))$ satisfies the recursion clauses defining $h$ in step 1.1, so $h_1 = h$ by the uniqueness in [L1] (equivalently $\\{\\, n : h_1(n) = h(n) \\,\\}$ contains $0$ and is closed under $\\sigma$, hence is all of $N$ by induction [L2]).",
+     "step": "4.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter or empty carrier occurs; each Peano system contains its base point and so is nonempty"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "steps 1.1 and 1.2 pin the values at the base points $0$ and $0'$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "steps 2.1 and 2.2 treat the two composites separately, so neither system is tacitly identified with the other"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "step 3.1 gives existence of the isomorphism"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Statement is an existence-and-uniqueness claim, not a biconditional; uniqueness is discharged separately at step 4.1"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "ex-one-plus-one": {
+   "citations": [],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "By definition $1 = \\sigma(0)$ and $2 = \\sigma(1) = \\sigma(\\sigma(0))$.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "$1 + 0 = 1$, by $m + 0 = m$ with $m = 1$.",
+     "step": "1.2",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "$1 + 1 = 1 + \\sigma(0) = \\sigma(1 + 0)$, by $m + \\sigma(n) = \\sigma(m + n)$ with $m = 1$, $n = 0$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Hence $1 + 1 = \\sigma(1 + 0) = \\sigma(1) = 2$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.2 uses $1 + 0 = 1$"
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "step 1.1 unfolds the numeral $1 = \\sigma(0)$, the only unit involved"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 fixes the numerals $1$ and $2$ before any computation"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Example is a single arithmetic identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Example is a single arithmetic identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "ex-two-plus-two": {
+   "citations": [],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Write $2 = \\sigma(\\sigma(0))$; then $2 + 2 = 2 + \\sigma(\\sigma(0))$.",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "$2 + 0 = 2$, by $m + 0 = m$.",
+     "step": "1.2",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "$2 + \\sigma(\\sigma(0)) = \\sigma(2 + \\sigma(0)) = \\sigma(\\sigma(2 + 0))$, applying $m + \\sigma(n) = \\sigma(m + n)$ twice.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Hence $2 + 2 = \\sigma(\\sigma(2)) = \\sigma(\\sigma(\\sigma(\\sigma(0)))) = 4$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.2",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "no set-valued parameter, indexed family or empty carrier occurs; the claim quantifies over individual natural numbers"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.2 uses $2 + 0 = 2$"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no unit case arises; the numerals used are $2$ and $4$, unfolded in step 1.1"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.1 fixes the numerals $2$ and $4$ before any computation"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the Example is a single arithmetic identity, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the Example is a single arithmetic identity, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "cex-induction-axiom-necessary": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-peano-system",
+     "source_section": "Definition",
+     "quote": "**(P1) Zero is not a successor.** For every $n \\in N$, $\\sigma(n) \\neq 0$.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-natural-numbers",
+     "source_section": "Definition",
+     "quote": "The set of **natural numbers** is the **smallest inductive set**",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "P1 holds: $\\sigma$ is the successor within each copy; $0$ is the $\\mathbb{N}$-copy zero, which is not the successor of any element (nothing in $N_{\\mathbb{N}}$ maps to it, and $\\sigma$ maps $N_{\\mathbb{Z}}$ into $N_{\\mathbb{Z}}$), so $\\sigma(x) \\neq 0$ for all $x$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "P2 holds: $\\sigma$ is injective on $N_{\\mathbb{N}}$ and on $N_{\\mathbb{Z}}$ separately, and $\\sigma$ maps each copy into itself, so $\\sigma$ is injective on $N$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "P3 fails: let $S = N_{\\mathbb{N}}$, the $\\mathbb{N}$-copy; then $0 \\in S$ and $\\sigma$ maps $S$ into $S$ ($\\sigma(N_{\\mathbb{N}}) \\subseteq N_{\\mathbb{N}}$), so $S$ contains $0$ and is closed under $\\sigma$; the $\\mathbb{N}$-copy is the standard model [L2].",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "But $S = N_{\\mathbb{N}} \\neq N$, since the $\\mathbb{Z}$-copy $N_{\\mathbb{Z}}$ is disjoint from $S$ and nonempty.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.3"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "Thus $(N, 0, \\sigma)$ satisfies P1 and P2 but not P3, refuting the claim: induction is independent of P1 and P2 and cannot be dropped.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 2.1 uses that the $\\mathbb{Z}$-copy is nonempty, which is what makes $S \\neq N$"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1 verifies that the base point, the $\\mathbb{N}$-copy zero, is not a successor"
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "no parameter is specialised to $1$; the successor step is uniform in $n$"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.2 checks injectivity on each copy and uses that $\\sigma$ maps each copy into itself, so no cross-copy collapse is left unchecked"
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "step 1.1 uses that the $\\mathbb{Z}$-copy has no least element, so no element of it maps onto $0$"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 2.1 names the nonempty $\\mathbb{Z}$-copy as the witness that $S \\neq N$"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "cex-successor-injective-necessary": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-peano-system",
+     "source_section": "Definition",
+     "quote": "**(P1) Zero is not a successor.** For every $n \\in N$, $\\sigma(n) \\neq 0$.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "P1 holds: the values of $\\sigma$ are $\\sigma(0) = 1$, $\\sigma(1) = 2$, $\\sigma(2) = 2$, none of which is $0$, so $\\sigma(x) \\neq 0$ for all $x$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "P3 holds: if $S \\subseteq N$ with $0 \\in S$ and $S$ closed under $\\sigma$, then $0 \\in S$ forces $1 = \\sigma(0) \\in S$, then $2 = \\sigma(1) \\in S$, so $S = \\{0, 1, 2\\} = N$; thus induction holds.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.3",
+     "claim": "P2 fails: $\\sigma(1) = 2 = \\sigma(2)$ but $1 \\neq 2$, so $\\sigma$ is not injective.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "So $(N, 0, \\sigma)$ satisfies P1 and P3 but not P2, refuting the claim; note the failure permits the pathology $\\sigma(2) = 2$ (a number that is its own successor) and a finite model in which distinct numerals collapse.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "the carrier $\\{0,1,2\\}$ is finite and nonempty and no empty case arises"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 1.1 verifies that $0$ is not a value of $\\sigma$"
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "step 1.2 uses $1 = \\sigma(0) \\in S$ in the induction check"
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "step 1.3 exhibits the degenerate fixed point $\\sigma(2) = 2$"
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "step 1.2 exhausts the finite carrier $\\{0,1,2\\}$, both ends included"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "no element is selected from a set whose nonemptiness would have to be established"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  },
+  "fs-induction-without-base": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-induction-principle",
+     "source_section": "Statement",
+     "quote": "If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-omega-is-peano-system",
+     "source_section": "Statement",
+     "quote": "(P1) $\\sigma(n) \\neq 0$ for all $n$",
+     "uses": [
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1.1",
+     "claim": "Take $S = \\mathbb{N} \\setminus \\{0\\} = \\{n \\in \\mathbb{N} : n \\neq 0\\}$, the set of nonzero naturals; it is nonempty (for instance $1 = \\sigma(0) \\in S$).",
+     "step": "1.1",
+     "inputs": [
+      "given"
+     ]
+    },
+    {
+     "id": "step-1.2",
+     "claim": "$S$ is closed under $\\sigma$: for any $n$, $\\sigma(n) \\neq 0$ by P1 [L2], so $\\sigma(n) \\in S$.",
+     "step": "1.2",
+     "inputs": [
+      "L2"
+     ]
+    },
+    {
+     "id": "step-2.1",
+     "claim": "But $0 \\notin S$, so $S \\neq \\mathbb{N}$; the nonempty successor-closed set $S$ is not all of $\\mathbb{N}$, refuting the claim.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3.1",
+     "claim": "The base case $0 \\in S$ is therefore indispensable in the induction principle [L1]; successor-closure and nonemptiness do not suffice.",
+     "step": "3.1",
+     "inputs": [
+      "step 2.1",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "step 1.1 checks that $S = \\mathbb{N} \\setminus \\{0\\}$ is nonempty, the hypothesis the false statement offers in place of a base case"
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "step 2.1 uses $0 \\notin S$"
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "step 1.1 exhibits $1 = \\sigma(0) \\in S$ as the nonemptiness witness"
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "no degenerate parameter occurs; the single witness set is fixed in step 1.1"
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "$\\mathbb{N}$ has least element $0$ and no greatest element, and no interval or endpoint parameter occurs; the only boundary is the base case, disposed under `zero`"
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "step 1.1 supplies the explicit element $1 = \\sigma(0)$ rather than asserting nonemptiness"
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "the item refutes a single implication, not a biconditional"
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "pending",
+    "reviewer": "Alpha (wave 0 audit)",
+    "notes": "Audit-Beta A2 capture; Alpha disposition required for any high/critical risk-report routing."
+   }
+  }
+ },
+ "notes": "Audit-Beta capture for wave 0 foundations, regenerated at A4 to describe the FINAL post-repair text (2026-08-02). All A3-approved repairs D1a-e, D2a-b, D3a-c, D4a-f, D5a-b are reflected here; D5c was deferred to Alpha and no edit was made. proof-contract.mjs --strict passes with 0 errors."
+}

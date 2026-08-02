@@ -4,14 +4,16 @@ kind: theorem
 title: "The Dedekind reals form a field"
 status: published
 origin: session
-deps: [def-real-dedekind, def-cut-addition, def-cut-multiplication, lem-cut-add-well-defined, lem-cut-additive-inverse, lem-cut-order-total, lem-rat-cut-embeds, thm-rat-field, lem-cut-reciprocal]
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, lem-cut-add-well-defined, lem-cut-additive-inverse, lem-cut-order-total, lem-rat-cut-embeds, thm-rat-field, lem-cut-reciprocal]
 aliases: []
 landmark: true
 short: "ℝ field"
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -19,6 +21,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "M. Girotti, Addendum — Construction of $\\mathbb{R}$ via Dedekind's method (MATH 317, Advanced Calculus of One Variable)"
+      url: "https://mathemanu.github.io/ConstructionofR.pdf"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
 pipeline_run: null
 ---
 
@@ -42,7 +48,7 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 [L5] $(\mathbb{R}, +)$ is an abelian group: $+$ is well defined, commutative, associative, with identity $0^{*}$ ([[lem-cut-add-well-defined]]) and inverses $A + (-A) = 0^{*}$ ([[lem-cut-additive-inverse]]).
 
-[L6] Inclusion totally orders $\mathbb{R}$, so exactly one of $A > 0^{*}$, $A = 0^{*}$, $A < 0^{*}$ holds; and $A > 0^{*}$ means $A$ contains a positive rational ([[lem-cut-order-total]]).
+[L6] Inclusion totally orders $\mathbb{R}$, so exactly one of $A > 0^{*}$, $A = 0^{*}$, $A < 0^{*}$ holds ([[lem-cut-order-total]]).
 
 [L7] $\mathbb{Q}$ is a field: rational multiplication is commutative, associative, distributes over addition, every nonzero rational is invertible, and products of positives are positive ([[thm-rat-field]]).
 
@@ -52,11 +58,13 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 [L10] Negation is an additive homomorphism on $(\mathbb{R}, +)$: $-(X + Y) = (-X) + (-Y)$, since $\bigl((-X) + (-Y)\bigr) + (X + Y) = 0^{*}$ by commutativity, associativity, and the inverse law, so $(-X) + (-Y)$ is the unique additive inverse of $X + Y$ ([[lem-cut-add-well-defined]], [[lem-cut-additive-inverse]]).
 
+[L11] A cut $A$ is positive iff $0^{*} < A$, and $0^{*} < A$ holds exactly when $0 \in A$; in that case (C3) supplies $a \in A$ with $a > 0$ ([[def-cut-order]], [[def-dedekind-cut]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For $A, B > 0^{*}$, $A \cdot B$ is a cut: it is nonempty and proper, downward closed because any $0 < y < ab$ equals $(y/b)\,b$ with $0 < y/b < a$ in $A$ (so the positive part of $A \cdot B$ is exactly $\{ab : a \in A, b \in B, a, b > 0\}$), and it has no greatest element because $A$ has none: given $ab$ with $a \in A$, $b \in B$, $a, b > 0$, choose $a' \in A$ with $a' > a$, and then $a'b \in A \cdot B$ with $a'b > ab$ since $b > 0$; and $0^{*} \cdot B = 0^{*}$ by the sign rule, so multiplication of nonnegatives lands in $\mathbb{R}$. [L1, L2, L6, L7]
+1.1 For $A, B > 0^{*}$, $A \cdot B$ is a cut: it is nonempty and proper, downward closed because any $0 < y < ab$ equals $(y/b)\,b$ with $0 < y/b < a$ in $A$ (so the positive part of $A \cdot B$ is exactly $\{ab : a \in A, b \in B, a, b > 0\}$), and it has no greatest element because $A$ has none: given $ab$ with $a \in A$, $b \in B$, $a, b > 0$, choose $a' \in A$ with $a' > a$, and then $a'b \in A \cdot B$ with $a'b > ab$ since $b > 0$; and $0^{*} \cdot B = 0^{*}$ by the sign rule, so multiplication of nonnegatives lands in $\mathbb{R}$. [L1, L2, L6, L7, L11]
 
 1.2 On nonnegatives multiplication is commutative: $A \cdot B$ and $B \cdot A$ are the same set, since $\{ab\} = \{ba\}$ by commutativity of rational multiplication. [L1, L7]
 
@@ -72,7 +80,7 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 2.2 Distributivity on nonnegatives, inclusion $\subseteq$ for $A, B, C \ge 0^{*}$: a positive element of $A \cdot (B + C)$ is $a \cdot w$ with $a \in A$, $w \in B + C$, $a, w > 0$, and $w = b + c$ for some $b \in B$, $c \in C$; then $a \cdot w = ab + ac$ where $ab \in A \cdot B$ and $ac \in A \cdot C$ (each product lies in the positive part of its factor product when positive, otherwise in that product's $\{q \le 0\}$ clause), so $a \cdot w \in A \cdot B + A \cdot C$; with the $\{q \le 0\}$ clause this gives $A \cdot (B + C) \subseteq A \cdot B + A \cdot C$. [L1, L4, L7, step 1.1]
 
-2.3 For the reverse inclusion assume $A, B, C > 0^{*}$, the degenerate cases being step 1.5; then $A \cdot B$ and $A \cdot C$ each contain a positive rational and, being downward-closed cuts (step 1.1), contain positive rationals arbitrarily close to $0$. [L1, L6, step 1.1, step 1.5]
+2.3 For the reverse inclusion assume $A, B, C > 0^{*}$, the degenerate cases being step 1.5; then $A \cdot B$ and $A \cdot C$ each contain a positive rational and, being downward-closed cuts (step 1.1), contain positive rationals arbitrarily close to $0$. [L1, L11, step 1.1, step 1.5]
 
 2.4 Every $A \ne 0^{*}$ has a multiplicative inverse: for $A > 0^{*}$ the reciprocal $A^{-1}$ satisfies $A \cdot A^{-1} = 1^{*}$; for $A < 0^{*}$ we have $-A > 0^{*}$ and $A^{-1} = -((-A)^{-1})$, so applying the sign rule to both factors gives $A \cdot A^{-1} = (-A) \cdot (-A)^{-1} = 1^{*}$ by the reciprocal of the positive cut $-A$. [L2, L3, L9, step 1.6]
 
@@ -80,7 +88,7 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 3.2 The nonnegative laws now extend by signs: $A \cdot B$ and $B \cdot A$ share magnitude $|A| |B| = |B| |A|$ and the same sign, hence are equal (step 1.2); $(A \cdot B) \cdot C$ and $A \cdot (B \cdot C)$ share magnitude $|A| |B| |C|$ and the sign given by the product of the three factor signs, hence are equal (step 2.1); and $A \cdot 1^{*} = A$, since $1^{*} > 0^{*}$ leaves the sign of $A$ unchanged and $|A| \cdot 1^{*} = |A|$ (step 1.3). [L2, L3, step 1.2, step 1.3, step 2.1]
 
-4.1 With $s, t > 0$ from step 3.1, step 1.1 gives $s = a_{1} b_{1}$ and $t = a_{2} c_{1}$ with $a_{1}, a_{2} \in A$, $b_{1} \in B$, $c_{1} \in C$ all positive; set $a := \max(a_{1}, a_{2})$, so $a \in A$ and $a > 0$. [L6, step 1.1, step 3.1]
+4.1 With $s, t > 0$ from step 3.1, step 1.1 gives $s = a_{1} b_{1}$ and $t = a_{2} c_{1}$ with $a_{1}, a_{2} \in A$, $b_{1} \in B$, $c_{1} \in C$ all positive; set $a := \max(a_{1}, a_{2})$, so $a \in A$ and $a > 0$. [L11, step 1.1, step 3.1]
 
 5.1 Put $b := s/a$ and $c := t/a$: then $0 < b = a_{1} b_{1}/a \le b_{1}$, so $b \in B$, and $0 < c = a_{2} c_{1}/a \le c_{1}$, so $c \in C$, both by downward closure; hence $u = s + t = ab + ac = a(b + c)$ with $b + c \in B + C$, $b + c > 0$, $a \in A$, $a > 0$, so $u \in A \cdot (B + C)$. [L1, L4, L7, step 4.1]
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The absolute value $|a|$ of an integer"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring]
 justified_by: []
 aliases: []

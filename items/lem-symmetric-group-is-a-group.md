@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\operatorname{Sym}(X)$ is a group under composition, and it is non-abelian whenever $X$ has at least three distinct elements"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-symmetric-group, def-group, def-injection-surjection-bijection, def-semigroup-and-monoid, def-invertible-element]
 justified_by: []
 aliases: []

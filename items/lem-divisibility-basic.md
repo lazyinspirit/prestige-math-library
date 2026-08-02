@@ -4,6 +4,9 @@ kind: lemma
 title: "Divisibility is reflexive and transitive on $\\mathbb{Z}$, and is linear: if $d \\mid a$ and $d \\mid b$ then $d \\mid ax + by$ for all integers $x, y$; also $d \\mid a$ implies $d \\mid ac$, $-d \\mid a$ and $d \\mid -a$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-divides-in-z, def-integers, def-int-operations, thm-int-comm-ring]
 justified_by: []
 aliases: []

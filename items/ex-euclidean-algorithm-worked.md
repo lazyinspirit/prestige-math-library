@@ -4,6 +4,9 @@ kind: example
 title: "$\\gcd(1071, 462) = 21$ by the Euclidean algorithm, with the back-substitution giving $21 = 7 \\cdot 462 - 3 \\cdot 1071$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-euclidean-algorithm, cor-extended-euclidean-bezout-coefficients, lem-gcd-euclidean-step, lem-gcd-basic-values, thm-bezout-identity, def-common-divisor-and-gcd, def-divides-in-z, thm-division-algorithm-in-z, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, def-int-abs, lem-int-abs-properties]
 justified_by: []
 aliases: []

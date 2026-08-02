@@ -4,6 +4,9 @@ kind: definition
 title: "Group and abelian group"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-semigroup-and-monoid, def-invertible-element, lem-inverse-unique, def-identity-element, def-binary-operation]
 justified_by: []
 aliases: [def-abelian-group]

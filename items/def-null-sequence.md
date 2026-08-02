@@ -4,6 +4,9 @@ kind: definition
 title: "Null sequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-rationals, lem-rat-triangle]
 aliases: []
 verification:
@@ -14,6 +17,8 @@ sources:
   references:
     - title: "T. Tao, Analysis I, 3rd ed., §5.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Real number (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Real_number"
 pipeline_run: null
 ---
 

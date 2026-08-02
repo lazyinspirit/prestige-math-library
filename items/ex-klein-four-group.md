@@ -4,6 +4,9 @@ kind: example
 title: "The Klein four-group as the subgroup $\\{\\mathrm{id}, (12)(34), (13)(24), (14)(23)\\}$ of $\\operatorname{Sym}(\\{1,2,3,4\\})$: abelian of order $4$, non-cyclic, every non-identity element of order $2$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-symmetric-group, lem-symmetric-group-is-a-group, def-subgroup, lem-subgroup-criterion, def-generated-subgroup, def-group-power, def-order-in-a-group, lem-order-characterisation, def-group, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, lem-nat-transitive-irreflexive]
 justified_by: []
 aliases: [ex-klein-group, ex-viergruppe]

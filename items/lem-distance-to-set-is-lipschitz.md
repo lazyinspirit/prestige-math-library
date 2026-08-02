@@ -4,6 +4,9 @@ kind: lemma
 title: "$|d(x,A) - d(y,A)| \\le d(x,y)$, so the distance to a fixed nonempty set is $1$-Lipschitz"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-bounded-diameter, lem-metric-reverse-triangle, thm-infimum-property,
        def-metric-space, def-infimum, lem-of-abs-value, def-abs-value,
        lem-of-add-order, def-ordered-field, def-complete-ordered-field,
@@ -23,8 +26,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Distance from a point to a set (Wikipedia)"
-      url: "https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_set"
+    - title: "Hausdorff distance (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Hausdorff_distance"
     - title: "Lipschitz continuity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"

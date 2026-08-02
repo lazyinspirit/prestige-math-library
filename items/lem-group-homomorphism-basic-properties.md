@@ -4,6 +4,9 @@ kind: lemma
 title: "A group homomorphism automatically satisfies $f(e) = e'$ and $f(g^{-1}) = f(g)^{-1}$, and $f(g^{n}) = f(g)^{n}$ for every $n \\in \\mathbb{Z}$; for monoid homomorphisms preservation of the identity must be assumed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-group-homomorphism, def-group, def-semigroup-and-monoid, lem-group-cancellation, lem-group-inverse-laws, lem-inverse-unique, def-group-power, lem-group-power-laws, thm-induction-principle, thm-int-comm-ring, def-int-operations, def-int-order, thm-int-ordered-ring, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []

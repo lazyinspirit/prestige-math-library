@@ -4,6 +4,9 @@ kind: theorem
 title: "Vandermonde's identity $\\binom{m+n}{k} = \\sum_{i<k+1}\\binom{m}{i}\\binom{n}{k-i}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-binomial-coefficient, thm-sum-rule, thm-product-rule, def-sum-over-a-finite-index-set,
        def-nat-finite-sum-and-product, def-finite-cardinality, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-equinumerous, def-nat-order,
@@ -14,11 +17,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -58,7 +56,7 @@ coefficients are $0$ ([[def-binomial-coefficient]]).
 
 [L6] Maps ([[def-injection-surjection-bijection]], [[def-equinumerous]]): a map with a two-sided inverse is a bijection.
 
-[L7] Arithmetic: if $i + t = k$ then $t = k-i$; $\lvert M\rvert = m$ and $\lvert N\rvert = n$ ([[def-nat-order]], [[lem-nat-add-cancellative]], [[lem-nat-order-is-membership]]).
+[L7] Arithmetic: if $i + t = k$ then $t = k-i$, since $\le$ is defined additively and addition is cancellative; and $k < \sigma(k) \iff k \le k$, so $\sigma(k) = \{0,1,\dots,k\}$ ([[def-nat-order]], [[lem-nat-add-cancellative]], [[lem-nat-order-is-membership]]). The cardinalities $\lvert M\rvert = m$ and $\lvert N\rvert = n$ are not assumed here; they are computed in step 1.1.
 
 ## Proof
 
@@ -76,23 +74,8 @@ coefficients are $0$ ([[def-binomial-coefficient]]).
 
 ## Remarks
 
-- **Why disjointness is arranged rather than assumed.** The counting argument
-  needs $M$ and $N$ disjoint, and two arbitrary sets of cardinalities $m$ and $n$
-  need not be. Replacing them by $m\times\{0\}$ and $n\times\{1\}$ costs one line
-  and the transport clause of [[def-finite-cardinality]], and it is what makes
-  the sum rule applicable.
+- **Why disjointness is arranged rather than assumed.** The counting argument needs $M$ and $N$ disjoint, and two arbitrary sets of cardinalities $m$ and $n$ need not be. Replacing them by $m\times\{0\}$ and $n\times\{1\}$ costs one line and the transport clause of [[def-finite-cardinality]], and it is what makes the sum rule applicable.
 
-- **Not by generating functions, and not by comparing coefficients.** Both of the
-  usual quick proofs need machinery that is far later in the reading order:
-  formal power series in the first case, and a polynomial ring in the second.
-  The double count needs neither.
+- **Not by generating functions, and not by comparing coefficients.** Both of the usual quick proofs need machinery that is far later in the reading order: formal power series in the first case, and a polynomial ring in the second. The double count needs neither.
 
-- **Pascal's rule is the special case $m = 1$**, read through
-  $\binom{1}{0} = \binom{1}{1} = 1$ and $\binom{1}{i} = 0$ for $i \ge 2$: for
-  $k \ge 1$ the identity collapses to
-  $\binom{1+n}{k} = \binom{n}{k} + \binom{n}{k-1}$, while at $k = 0$ the sum has
-  the single term $\binom{1}{0}\binom{n}{0} = 1 = \binom{n+1}{0}$. The
-  restriction $k \ge 1$ is not cosmetic: $n - m$ is the **truncated** difference
-  throughout this page ([[def-nat-finite-sum-and-product]]), so writing the
-  collapsed identity at $k = 0$ would read $\binom{n}{0-1}$ as $\binom{n}{0} = 1$
-  and assert $1 = 1 + 1$.
+- **Pascal's rule is the special case $m = 1$**, read through $\binom{1}{0} = \binom{1}{1} = 1$ and $\binom{1}{i} = 0$ for $i \ge 2$: for $k \ge 1$ the identity collapses to $\binom{1+n}{k} = \binom{n}{k} + \binom{n}{k-1}$, while at $k = 0$ the sum has the single term $\binom{1}{0}\binom{n}{0} = 1 = \binom{n+1}{0}$. The restriction $k \ge 1$ is not cosmetic: $n - m$ is the **truncated** difference throughout this page ([[def-nat-finite-sum-and-product]]), so writing the collapsed identity at $k = 0$ would read $\binom{n}{0-1}$ as $\binom{n}{0} = 1$ and assert $1 = 1 + 1$.

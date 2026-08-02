@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$ for all finite $A$ and $B$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-sum-rule, def-finite-cardinality, def-injection-surjection-bijection,
        def-natural-numbers, lem-nat-trichotomy]
 justified_by: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Cardinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality"
+    - title: "J. Sylvestre, Elementary Foundations 12.02, Properties of finite sets and their cardinality (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Foundations:_An_Introduction_to_Topics_in_Discrete_Mathematics_(Sylvestre)/12:_Cardinality/12.02:_Properties_of_finite_sets_and_their_cardinality"
 pipeline_run: null
 ---
 

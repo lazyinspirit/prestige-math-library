@@ -4,7 +4,10 @@ kind: example
 title: "Bézout coefficients are not unique: $1071 \\cdot (-3) + 462 \\cdot 7 = 21$ and $1071 \\cdot 19 + 462 \\cdot (-44) = 21$, and for nonzero $a, b$ every solution has the form $(x_0 + t b/d,\\; y_0 - t a/d)$"
 status: published
 origin: session
-deps: [thm-bezout-identity, cor-extended-euclidean-bezout-coefficients, ex-euclidean-algorithm-worked, cor-gcd-quotients-coprime, lem-coprime-divides-product, lem-gcd-basic-values, def-common-divisor-and-gcd, def-coprime, def-divides-in-z, lem-int-cancellation, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-bezout-identity, ex-euclidean-algorithm-worked, cor-gcd-quotients-coprime, lem-coprime-divides-product, lem-gcd-basic-values, def-common-divisor-and-gcd, def-coprime, def-divides-in-z, lem-int-cancellation, thm-int-comm-ring, def-int-operations, lem-nat-embeds-int, def-integers]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,16 +15,13 @@ short: "the family of Bézout pairs"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
     - title: "Bézout's identity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity"
+    - title: "Diophantine equation (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Diophantine_equation"
 pipeline_run: null
 ---
 
@@ -52,8 +52,6 @@ identity below is the image of the corresponding identity in $\mathbb{N}$.
 **Given:** Nonzero integers $a$ and $b$, $d := \gcd(a,b)$, and a solution $(x_0,y_0)$ of $ax + by = d$; and, for the numerical part, $a = 1071$, $b = 462$, $d = 21$.
 
 [L1] $\mathbb{Z}$ is a commutative ring: addition and multiplication are associative and commutative, $x \cdot 1 = x$, $x \cdot 0 = 0$, multiplication distributes over addition, and every $x$ has an additive inverse; we write $u - v$ for $u + (-v)$ ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]]).
-
-[L2] For $(a,b) \ne (0,0)$ there are integers $x, y$ with $ax + by = \gcd(a,b)$ ([[thm-bezout-identity]]), and the extended Euclidean descent computes such a pair ([[cor-extended-euclidean-bezout-coefficients]]).
 
 [L3] If $d = \gcd(a,b) \ne 0$ then $a = d a'$ and $b = d b'$ for unique integers $a' = a/d$ and $b' = b/d$, and $\gcd(a',b') = 1$ ([[cor-gcd-quotients-coprime]], [[def-common-divisor-and-gcd]], [[def-coprime]]).
 
@@ -89,13 +87,6 @@ identity below is the image of the corresponding identity in $\mathbb{N}$.
 
 ## Remarks
 
-- **The family is infinite.** Distinct values of $t$ give distinct pairs, since
-  $b' \ne 0$ and $x_0 + t b' = x_0 + t' b'$ forces $t = t'$ by cancellation. So a
-  Bézout equation with $a, b$ both nonzero never has a unique solution.
+- **The family is infinite.** Distinct values of $t$ give distinct pairs, since $b' \ne 0$ and $x_0 + t b' = x_0 + t' b'$ forces $t = t'$ by cancellation. So a Bézout equation with $a, b$ both nonzero never has a unique solution.
 
-- **Why the statement is restricted to $a, b$ both nonzero.** With $b = 0$ and
-  $a \ne 0$ the quotient $b/d$ is $0$ and the family collapses to
-  $(x_0,\, y_0 - t a/d)$, which is still the complete solution set but for a
-  different reason: $x$ is then forced and $y$ is free. The uniform statement
-  above is the one used elsewhere, and the degenerate case is recorded here so
-  that its absence from the claim is deliberate rather than an oversight.
+- **Why the statement is restricted to $a, b$ both nonzero.** With $b = 0$ and $a \ne 0$ the quotient $b/d$ is $0$ and the family collapses to $(x_0,\, y_0 - t a/d)$, which is still the complete solution set but for a different reason: $x$ is then forced and $y$ is free. The uniform statement above is the one used elsewhere, and the degenerate case is recorded here so that its absence from the claim is deliberate rather than an oversight.

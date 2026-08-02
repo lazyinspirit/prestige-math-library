@@ -4,6 +4,9 @@ kind: counterexample
 title: "In $\\{0\\} \\cup [1,2]$ with the metric of $\\mathbb{R}$, the closure of $B(0,1) = \\{0\\}$ is $\\{0\\}$ while the closed ball is $\\{0,1\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-closed-ball-is-the-closure-of-the-open-ball, def-metric-ball,
        thm-metric-closure-characterisation, def-interval, def-isometry-and-metric-embedding,
        lem-real-line-is-a-metric-space, def-metric-topology,
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closure_(topology)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Isolated point (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Isolated_point"
 pipeline_run: null
 ---
 

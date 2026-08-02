@@ -4,6 +4,9 @@ kind: definition
 title: "Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-metric-space, def-metric-ball]
 justified_by: []
 aliases: [def-continuous-map-metric]

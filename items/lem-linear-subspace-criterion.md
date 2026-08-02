@@ -4,6 +4,9 @@ kind: lemma
 title: "One-step subspace test: a nonempty $W \\subseteq V$ is a linear subspace if and only if $\\lambda u + v \\in W$ for all $\\lambda \\in F$ and $u, v \\in W$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, def-field]
 justified_by: []
 aliases: [lem-one-step-subspace-test]

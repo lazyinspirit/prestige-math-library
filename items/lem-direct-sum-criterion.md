@@ -4,6 +4,9 @@ kind: lemma
 title: "$V = \\bigoplus_{i<n} U_i$ if and only if every $v \\in V$ is $\\sum_{i<n} u_i$ with $u_i \\in U_i$ in exactly one way; equivalently, if and only if the sum is $V$ and $\\sum_{i<n} u_i = 0_V$ with $u_i \\in U_i$ forces every $u_i = 0_V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-internal-direct-sum, def-sum-of-linear-subspaces, def-linear-subspace, def-vector-space, lem-vector-space-elementary-consequences, def-monoid-finite-product, lem-group-cancellation, def-group, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [lem-unique-decomposition-criterion]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 1"
       url: "https://linear.axler.net/"
+    - title: "Direct sum (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Direct_sum"
 pipeline_run: null
 ---
 

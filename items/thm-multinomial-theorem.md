@@ -4,6 +4,9 @@ kind: theorem
 title: "The multinomial coefficient equals $n!/\\prod_{i<m} k_i!$, and $(x_0+\\dots+x_{m-1})^{n} = \\sum \\iota\\!\\binom{n}{k}\\prod_{i<m} x_i^{k_i}$ in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-multinomial-coefficient, thm-binomial-theorem, thm-binomial-closed-formula,
        def-sum-over-a-finite-index-set, def-finite-sum, lem-finite-sum-laws,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,

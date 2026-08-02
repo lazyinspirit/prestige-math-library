@@ -4,6 +4,9 @@ kind: example
 title: "$n\\mathbb{Z}$ is a subgroup of $(\\mathbb{Z}, +)$ for every $n \\in \\mathbb{Z}$, and every subgroup of $(\\mathbb{Z}, +)$ has this form"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subgroup, lem-subgroup-criterion, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, def-group-power, thm-division-algorithm-in-z, thm-well-ordering-principle, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int, def-group, def-natural-numbers, def-nat-order, lem-nat-trichotomy, lem-nat-nonzero-is-successor, lem-nat-add-commutative, thm-induction-principle]
 justified_by: []
 aliases: []

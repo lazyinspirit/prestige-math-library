@@ -4,6 +4,9 @@ kind: lemma
 title: "No natural number equals its own successor"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-natural-numbers, thm-omega-is-peano-system, thm-induction-principle]
 aliases: []
 landmark: false
@@ -11,11 +14,6 @@ short: "$n\\neq\\sigma(n)$"
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
@@ -23,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
     - title: "Mathematical induction (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Mathematical_induction"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 
@@ -48,4 +48,4 @@ For every $n \in \mathbb{N}$, $n \neq \sigma(n)$.
 
 2.1 If $\sigma(n) = \sigma(\sigma(n))$ then injectivity of $\sigma$ gives $n = \sigma(n)$, contradicting the hypothesis; hence $\sigma(n) \neq \sigma(\sigma(n))$. [step 1.2, L1]
 
-3.1 By induction, $n \neq \sigma(n)$ for all $n \in \mathbb{N}$. [step 1.1, step 2.1, discharge-induction] ∎
+3.1 By induction [L2], $n \neq \sigma(n)$ for all $n \in \mathbb{N}$. [step 1.1, step 2.1, discharge-induction] ∎

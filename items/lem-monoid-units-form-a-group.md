@@ -4,6 +4,9 @@ kind: lemma
 title: "The invertible elements of a monoid form a group under the restricted operation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-semigroup-and-monoid, def-invertible-element, lem-inverse-unique, def-group, def-binary-operation]
 justified_by: []
 aliases: [lem-unit-group]

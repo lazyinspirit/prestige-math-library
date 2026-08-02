@@ -4,6 +4,9 @@ kind: definition
 title: "The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-vector-space, def-field, def-binary-operation, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-coordinate-space, def-tuple-space]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Function_space"
     - title: "Examples of vector spaces (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Examples_of_vector_spaces"
+    - title: "S. Axler, Linear Algebra Done Right, 4th ed. (free PDF, CC BY-NC)"
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

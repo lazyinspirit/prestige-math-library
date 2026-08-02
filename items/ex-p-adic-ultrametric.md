@@ -4,6 +4,9 @@ kind: example
 title: "The $2$-adic absolute value gives an ultrametric on $\\mathbb{Q}$, in which every triangle is isosceles and every point of a ball is a centre"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclids-lemma, def-p-adic-valuation, thm-fundamental-theorem-of-arithmetic, lem-p-adic-valuation-on-q, def-metric-space, def-metric-ball, def-integers, def-rationals, def-integer-power,
        thm-strong-induction, lem-alternating-sequence, thm-induction-principle,
        def-nat-addition, lem-nat-add-successor-left, def-nat-order, lem-nat-discrete,

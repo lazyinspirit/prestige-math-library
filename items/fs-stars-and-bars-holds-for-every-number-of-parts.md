@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the number of weak compositions of $n$ into $m$ parts is $\\binom{n+m-1}{m-1}$ for every $m \\in \\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-stars-and-bars, def-composition-of-a-natural-number, def-binomial-coefficient,
        def-nat-finite-sum-and-product, def-natural-numbers, def-nat-order,
        def-finite-cardinality, lem-nat-trichotomy]
@@ -13,11 +16,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -52,8 +50,6 @@ number.
 
 [L2] $\binom{N}{0} = 1$ and $\binom{N}{N} = 1$ for every natural $N$ ([[def-binomial-coefficient]]).
 
-[L3] The true statement, for $m \ge 1$: $\lvert\mathcal{W}(n,m)\rvert = \binom{n+m-1}{m-1}$ ([[thm-stars-and-bars]]).
-
 [L4] $\binom{n}{k}$ is defined only for $n, k \in \mathbb{N}$, and $-1$ is not a natural number ([[def-binomial-coefficient]], [[def-natural-numbers]], [[def-nat-order]]).
 
 [L5] $0 \ne 1$ ([[lem-nat-trichotomy]], [[def-natural-numbers]]).
@@ -70,18 +66,8 @@ number.
 
 ## Remarks
 
-- **The formula is correct for every $m \ge 1$**, and the two edges are worth
-  seeing. At $m = 1$ it reads $\binom{n}{0} = 1$, matching the unique weak
-  composition $(n)$. At $n = 0$ it reads $\binom{m-1}{m-1} = 1$, matching the
-  unique weak composition all of whose parts are $0$. Neither of these is the
-  failing case; the failure is confined to $m = 0$.
+- **The formula is correct for every $m \ge 1$**, which is what [[thm-stars-and-bars]] asserts: $\lvert\mathcal{W}(n,m)\rvert = \binom{n+m-1}{m-1}$ under that hypothesis. The two edges are worth seeing. At $m = 1$ it reads $\binom{n}{0} = 1$, matching the unique weak composition $(n)$. At $n = 0$ it reads $\binom{m-1}{m-1} = 1$, matching the unique weak composition all of whose parts are $0$. Neither of these is the failing case; the failure is confined to $m = 0$.
 
-- **A false statement whose falsity is ill-formedness** is worth stating in
-  exactly those terms. What [[thm-stars-and-bars]] asserts is a statement about
-  $m \ge 1$; the object $\binom{n+m-1}{m-1}$ simply does not exist at $m = 0$
-  unless one adopts a truncation convention, and adopting one makes the value
-  wrong rather than absent.
+- **A false statement whose falsity is ill-formedness** is worth stating in exactly those terms. What [[thm-stars-and-bars]] asserts is a statement about $m \ge 1$; the object $\binom{n+m-1}{m-1}$ simply does not exist at $m = 0$ unless one adopts a truncation convention, and adopting one makes the value wrong rather than absent.
 
-- **The companion true values** are recorded in
-  [[def-composition-of-a-natural-number]]: at $m = 0$ there is exactly one weak
-  composition of $0$ and none of any $n \ge 1$.
+- **The companion true values** are recorded in [[def-composition-of-a-natural-number]]: at $m = 0$ there is exactly one weak composition of $0$ and none of any $n \ge 1$.

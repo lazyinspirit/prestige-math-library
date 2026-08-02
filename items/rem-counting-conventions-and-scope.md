@@ -4,6 +4,9 @@ kind: remark
 title: "Conventions fixed on this page, and what counting is deliberately not done here"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [cor-binomial-theorem-consequences, def-finite-cardinality, def-nat-finite-sum-and-product, def-sum-over-a-finite-index-set,
        def-factorial-and-falling-factorial, def-nat-power, def-binomial-coefficient,
        def-multinomial-coefficient, thm-binomial-closed-formula, thm-binomial-theorem,

@@ -4,6 +4,9 @@ kind: example
 title: "Arrangements of a word with repeated letters, counted by the multinomial coefficient"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-multinomial-coefficient, thm-multinomial-theorem, def-nat-finite-sum-and-product,
        def-finite-cardinality, def-factorial-and-falling-factorial, lem-nat-mult-cancellative]
 justified_by: []
@@ -12,11 +15,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -68,11 +66,6 @@ $k = (1,4,4,2)$.
 
 ## Remarks
 
-- **Why the letters are identified with $\{0,1,2,3\}$.**
-  [[def-multinomial-coefficient]] takes the colour set to be a natural number, so
-  the alphabet has to be presented as one; any bijection will do, and the count
-  does not depend on which, by the invariance clause of that definition.
+- **Why the letters are identified with $\{0,1,2,3\}$.** [[def-multinomial-coefficient]] takes the colour set to be a natural number, so the alphabet has to be presented as one; any bijection will do, and the count does not depend on which. A different identification permutes the tuple $k$, and by clause 1 of [[thm-multinomial-theorem]] the coefficient is determined by $n$ together with the product $\prod_{i<m} k_i!$, which a permutation of the parts leaves unchanged. The invariance clause of [[def-multinomial-coefficient]] is a different statement: it says the count depends only on $\lvert A\rvert$, that is, only on the domain up to bijection.
 
-- **The check in step 2.1 is not a formality.** If the multiplicities did not sum
-  to the length, $\mathcal{B}(A,k)$ would be empty and the symbol
-  $\binom{11}{k}$ would not be defined at all.
+- **The check in step 2.1 is not a formality.** If the multiplicities did not sum to the length, $\mathcal{B}(A,k)$ would be empty and the symbol $\binom{11}{k}$ would not be defined at all.

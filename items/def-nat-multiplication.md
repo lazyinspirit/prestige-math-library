@@ -4,6 +4,9 @@ kind: definition
 title: "Multiplication of natural numbers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-natural-numbers, def-nat-addition, thm-recursion, cor-nat-multiplication-well-defined]
 aliases: []
 landmark: false
@@ -18,6 +21,12 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Peano axioms (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "B. Kaya, MATH 320 Set Theory (METU lecture notes)"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/320lecturenotes.pdf"
+    - title: "Mathematics 144: Set Theory (UC Riverside lecture notes)"
+      url: "https://math.ucr.edu/~res/math153-2019/set-theory-notes.pdf"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
 pipeline_run: null
 ---
 

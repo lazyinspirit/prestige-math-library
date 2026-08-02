@@ -4,6 +4,9 @@ kind: definition
 title: "Isometry, isometric embedding, and the subspace metric on a subset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-topology, def-injection-surjection-bijection,
        def-metric-ball]
 justified_by: []

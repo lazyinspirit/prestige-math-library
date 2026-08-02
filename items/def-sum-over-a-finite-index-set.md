@@ -4,6 +4,9 @@ kind: definition
 title: "The sum $\\sum_{i \\in S} a_i$ over a finite index set, and its product form"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-finite-sum-permutation-invariance, def-finite-cardinality, def-finite-sum,
        def-nat-finite-sum-and-product, lem-nat-finite-sum-laws-and-the-canonical-embedding,
        lem-finite-sum-laws, def-injection-surjection-bijection, def-equinumerous,
