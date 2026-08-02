@@ -20,7 +20,9 @@ const args = process.argv.slice(2);
 const asJson = args.includes('--json');
 const outputIndex = args.indexOf('--output');
 const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : null;
-const files = args.filter((arg, index) => arg !== '--json' && arg !== '--output' && index !== outputIndex + 1);
+const files = args.filter((arg, index) =>
+  arg !== '--json' && arg !== '--output' && !(outputIndex >= 0 && index === outputIndex + 1),
+);
 if (outputIndex >= 0 && !outputPath) {
   console.error('ERROR output-path: --output needs a path');
   process.exit(2);

@@ -636,7 +636,11 @@ proof contract, paired ledger, dependency-spine receipt, Alpha receipt, and
 recomputes the item/relationship manifest from disk, requires a contract for
 every proof-bearing item, and requires one usable DeepSeek and Terra verdict on
 the same *current* frozen prompt for every item. It is not satisfied by a broad
-agent report or by a stale pass after a repair. The spine receipt independently
+agent report or by a stale pass after a repair. Give it
+`--judge-adjudications research/level<n>-judge-adjudications.jsonl`: a current
+rejection passes only with Alpha's exact-hash `confirmed_nonfatal` or
+`false_positive` decision; a missing decision or `confirmed_fatal` remains a
+hard failure. The spine receipt independently
 reads the proof-bearing items among the largest transitive dependency cones and
 lapses whenever their mathematical content changes.
 

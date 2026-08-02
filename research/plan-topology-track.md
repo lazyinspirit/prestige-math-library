@@ -1301,6 +1301,46 @@ countable domain; uniqueness on $[0,1]$; the nonuniformizable $K$-topology; and
 under the ultrafilter lemma an uncountable Cantor cube that is compact Hausdorff
 and uniformizable but not first countable.
 
+### T9b. Uniform Completeness and the Samuel Compactification
+
+`requires`: `uniform-spaces`, `tychonoff-embedding-and-stone-cech`
+
+This page does not duplicate the completion theory already developed on
+`uniform-spaces`. It constructs the Samuel precompact reflection from the
+gauge $p_f(x,y)=|f(x)-f(y)|$ over uniformly continuous maps
+$f:X\to[0,1]$, proves that the resulting uniformity is coarser than the given
+one and totally bounded, and uses the existing Hausdorff completion.
+Affine rescaling shows that all bounded real-valued uniformly continuous
+functions generate the same uniformity.
+
+Under dependent choice the Samuel uniformity induces the original topology;
+for a separated uniform space its completion map is therefore a topological
+embedding. Under the ultrafilter lemma, completeness plus total boundedness
+makes the Hausdorff completion compact. Only in this separated,
+choice-qualified situation is the object called a compactification of the
+original space; for a nonseparated space it is a Hausdorff reflection and
+completion.
+
+The compact-Hausdorff target extension theorem is proved using the target's
+unique compatible uniformity and its continuous $[0,1]$-valued coordinates.
+It gives uniqueness of the Samuel compactification. A totally bounded
+uniformity agrees with its Samuel uniformity, so its Samuel compactification
+agrees with its ordinary completion. The Stone–Čech universal property gives a
+canonical continuous surjection from $\beta X$ onto the Samuel
+compactification; no converse map or injectivity is asserted.
+
+B: compact Hausdorff spaces are unchanged; $(0,1)$ completes to $[0,1]$ for
+the usual metric uniformity; the discrete natural numbers give $\beta\mathbb N$;
+the Samuel map on an infinite discrete space is a topological embedding under
+dependent choice but not a uniform embedding for the original discrete
+uniformity; and the Hausdorff Samuel reflection of a nonempty indiscrete
+uniform space is one point.
+
+DEFER: the metric-sequence/filter-completeness bridge; an unrestricted
+identification of Samuel and ordinary completion; Gelfand-spectrum, proximity
+and function-algebra catalogues; and a choice-free compact-target universal
+property. There are no forward references or `proved_here: false` fallbacks.
+
 ---
 
 ## T10. Function Spaces and Convergence Topologies

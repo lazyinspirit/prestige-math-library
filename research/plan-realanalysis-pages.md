@@ -1046,19 +1046,38 @@ need machinery not established by this page's prerequisites. Neither omission
 licenses a forward whitelist on the B page.
 
 **RA-24 Approximation and Compactness in C(K)** <- RA-23, RA-11
-equicontinuity, uniform equicontinuity, pointwise and uniform boundedness;
-**Arzela-Ascoli**; **the Weierstrass approximation theorem** via Bernstein
-polynomials; **Stone-Weierstrass**, real and complex; the **Baire-category proof
-that the generic continuous function is nowhere differentiable**; the explicit
-**Weierstrass nowhere-differentiable function** (spline form, by the M-test).
-B: the three-way separation of Arzela-Ascoli's hypotheses (**Rudin 7.21**
-x^2/(x^2 + (1 - nx)^2) is uniformly bounded and not equicontinuous;
-f_n == n is equicontinuous and not bounded; sin(sqrt(t + 4 n^2 pi^2)) is both,
-on a NONCOMPACT domain, and fails: compactness of the domain is essential);
-**Rudin 7.20** sin nx is pointwise bounded with no pointwise convergent
-subsequence; **complex Stone-Weierstrass fails without self-adjointness**;
-**Stieltjes' moment example** e^{-x^{1/4}} sin(x^{1/4}) (polynomials are not
-dense on unbounded intervals).
+
+requires: uniform-convergence-of-functions; compactness-in-metric-spaces;
+finite-counting-and-binomial-coefficients.
+
+DEFS: equicontinuity, pointwise boundedness and uniform boundedness for
+families in the real space $C(K,\mathbb R)$ when $K$ is compact metric;
+Bernstein polynomials on $[0,1]$; unital point-separating real subalgebras of
+$C(K,\mathbb R)$; and the tent function and Takagi series.
+
+THMS: equicontinuity on a compact metric domain is uniform; equicontinuity and
+pointwise boundedness give uniform boundedness and finite supremum-metric nets;
+real Arzelà–Ascoli, with compact closure iff the family is equicontinuous and
+pointwise bounded, and its sequential corollary. Bernstein moment identities
+give uniform convergence of Bernstein polynomials, Weierstrass approximation
+on $[0,1]$, and its closed-interval form. The lattice and two-point
+interpolation lemmas give the real Stone–Weierstrass theorem for compact metric
+spaces. A local complete-metric-space Baire theorem supports density of nowhere
+differentiable functions in $C([0,1])$; the Takagi series supplies an explicit
+continuous nowhere differentiable function.
+
+B: bounded rational spikes that are not equicontinuous; constant functions
+that are equicontinuous but not pointwise bounded; translates of a fixed bump
+on $\mathbb R$ showing the compact-domain hypothesis; Bernstein polynomials of
+$x^2$; the compact family $x\mapsto|x-a|$; even polynomials showing the need to
+separate points; and polynomials vanishing at zero showing the need for
+constants.
+
+DEFER: complex Stone–Weierstrass and its self-adjointness obstruction; the
+trigonometric families $\sin(nx)$ and the Stieltjes unbounded-interval example;
+and the general function-space definition of equicontinuity. This page uses
+only the real compact-metric formulation and has no forward dependency on
+`function-space-topologies`.
 
 **RA-25 Power Series and Real-Analytic Functions** <- RA-23, RA-09
 formal power series; radius of convergence; **Cauchy-Hadamard**; absolute
@@ -1233,15 +1252,33 @@ by substitution; Niven worked in full; the **"pi = 4" staircase paradox**;
 numerical Wallis and Basel.
 
 **RA-31 Fundamental Trigonometric Identities** <- RA-28
-Pythagorean; parity; cofunction; supplementary; **reflection in 3pi/4 and in pi**
-(two categories my draft missed); shift and periodicity; addition and subtraction
-for all six functions; double, triple and general multiple angle; **de Moivre in
-real form**; **Chebyshev polynomials** (cos n theta = T_n(cos theta),
-sin((n+1) theta) = U_n(cos theta) sin theta, the recurrence, orthogonality with
-weight 1/sqrt(1-x^2), and T_n/2^{n-1} as the minimax monic polynomial); half
-angle; power reduction; product-to-sum; sum-to-product; the **tangent half-angle
-(Weierstrass) substitution**; linear combination / harmonic addition.
-B: worked verifications; Morrie's law; the values at 18, 36 and 72 degrees.
+
+requires: sine-cosine-and-the-definition-of-pi; finite-counting-and-binomial-coefficients.
+
+DEFS: real polynomial, degree, leading coefficient and monic normalization;
+Chebyshev polynomials T_n and U_n by recurrence.
+
+THMS: the Pythagorean and parity identities for all six trigonometric
+functions, always on their natural domains; cofunction, supplementary,
+reflection, shift and periodicity identities (including the 3pi/4 evaluations
+as substitutions, not as a competing primitive rule); sine and cosine
+subtraction; addition and subtraction for tangent, cotangent, secant and
+cosecant with every denominator condition displayed; double-angle,
+power-reduction, triple-angle and signed half-angle identities;
+product-to-sum and sum-to-product; the tangent-half-angle rational
+parametrization; parametrization of the unit circle; harmonic addition;
+polynomial factor-at-a-root and a root bound; Chebyshev degree, leading
+coefficient and extreme-value facts; Chebyshev and binomial real multiple-angle
+formulas; T_n/2^(n-1) is the minimax monic polynomial on [-1,1] for n >= 1.
+
+B: a worked pi/12 verification; Morrie's law; the exact values at 18, 36 and
+72 degrees; the first Chebyshev polynomials; a counterexample to an unsigned
+half-angle formula; and a counterexample showing that the tangent addition
+formula is false when its denominator/domain condition is omitted.
+
+DEFER: Chebyshev orthogonality is deferred until the required improper-integral
+machinery is on the spine. The differential Weierstrass substitution is
+deferred to RA-32; this page proves only the rational parametrization.
 
 **RA-32 Further Trigonometric Identities and Inverse Functions**
 <- RA-31, RA-14, RA-25
@@ -1260,22 +1297,42 @@ B: Machin's formula; numerical Leibniz; arcsin(sin x) is not x; arcsin is not
 differentiable at +-1; **tan is unbounded on a bounded interval**;
 sin(x^2) is bounded and continuous and NOT uniformly continuous.
 
-**RA-33 The Complex Exponential and Euler's Formula** <- RA-28, RA-25
-C as R^2; modulus, conjugate; completeness of C; complex series and
-Cauchy-Hadamard in C; the complex exponential; the addition formula; it extends
-the real exponential; termwise differentiation; **Euler's formula** (four
-proofs); **Euler's identity**; |e^{i theta}| = 1; **ker exp = 2 pi i Z**, which
-supplies the last characterization of pi (half the fundamental period of exp on
-the imaginary axis); exp maps C onto C minus 0; polar form; de Moivre; n-th roots
-and roots of unity, which sum to 0; the **exact sequence 0 -> Z -> R -> T -> 0**;
-the principal logarithm; **no continuous logarithm exists on all of C minus 0**
-(a winding obstruction); complex powers are multivalued; the trig/hyperbolic
-dictionary; **the fundamental theorem of algebra** by the minimum-modulus
-argument. B: i^i is real; log(-1) is multivalued; the fifth roots of unity;
-sin is unbounded on the imaginary axis; **(z^a)^b != z^{ab}**; the
-1 = e^{2 pi i} paradox; **the functional-equation characterization FAILS over C**,
-witnessed by f(x + iy) = e^x(cos 2y + i sin 2y); **the integral definition of log
-fails over C** (path dependence, valid only mod 2 pi i).
+**RA-33 The Complex Exponential and Euler's Formula** <- RA-28, RA-31, RA-25
+
+requires: sine-cosine-and-the-definition-of-pi;
+fundamental-trigonometric-identities; the-logarithm-and-general-powers;
+completeness-and-uniform-continuity; rn-as-a-normed-space;
+compactness-in-metric-spaces.
+
+DEFS: C as R^2 with arithmetic and real embedding; complex integer powers;
+conjugate, real and imaginary parts and modulus; the Euclidean metric,
+convergence, Cauchy sequences and continuity; complex series, absolute
+convergence, power series and radius; exp by its power series; complex
+logarithms, the principal argument and principal logarithm, and principal and
+multivalued powers; complex trigonometric and hyperbolic functions; complex
+polynomials, degree, leading coefficient and monic normalization.
+
+THMS: C is a field and complete; conjugation and modulus laws; the complex
+binomial theorem; absolute convergence and rearrangement; Cauchy-Hadamard and
+the absolutely convergent Cauchy product; convergence of exp everywhere;
+exp(z+w)=exp(z)exp(w) and agreement with the real exponential; Euler's formula
+by the power-series proof; Cartesian form, Euler's identity and modulus;
+kernel and fibres of exp; unique principal polar form; surjectivity onto the
+punctured plane; complex de Moivre; n-th roots and roots of unity and their
+sum; classification of all logarithms; no continuous logarithm on all of the
+punctured plane; the trigonometric/hyperbolic dictionary; and the fundamental
+theorem of algebra by the minimum-modulus argument, with growth, attainment
+and d'Alembert descent as explicit lemmas.
+
+B: all values of i^i; all logarithms of -1; fifth roots of unity; complex sine
+on the imaginary axis; failure of the principal-power exponent law; the
+1=exp(2pi i) logarithm paradox; a continuous multiplicative map C -> C^x that
+is not the standard exponential; and the complex geometric power series.
+
+DEFER: termwise complex differentiation (no complex derivative is yet defined);
+three alternative proofs of Euler's formula; exact-sequence terminology; path
+integrals and path-dependence of logarithms. These are not used by any retained
+claim.
 
 ### Block X: several variables
 
@@ -1305,16 +1362,36 @@ example is not duplicated, and Lebl’s slit-annulus angle example is deferred
 until its angle-function machinery is available.
 
 **RA-35 Mixed Partials, Taylor, and Extrema in Several Variables** <- RA-34
-C^k in several variables; multi-index notation; the Hessian;
-**Clairaut-Schwarz** via **Rudin's rectangle lemma 9.40**, plus the weaker
-**Peano** and **Young** hypothesis sets as separate items; symmetry of D^2 f as a
-bilinear map and of D^r f under any permutation; Taylor in several variables;
-the Hessian test; Lagrange multipliers; **Morse's lemma**. B: **xy(x^2-y^2)/(x^2+
-y^2)** has unequal mixed partials; **Peano's surface** (y - x^2)(y - 2x^2), where
-every line through the origin restricts to a strict local minimum yet there is no
-extremum, and its smooth refinement with e^{-1/x^2}; **a single critical point
-that is a strict local but not global minimum** (true only for n >= 2);
-the monkey saddle; Lagrange multipliers at a degenerate constraint.
+
+requires: the-total-derivative; finite-counting-and-binomial-coefficients;
+compactness-in-metric-spaces.
+
+DEFS: $C^k$ maps and multi-index derivatives in Euclidean space; the Hessian
+and critical points; multivariable Taylor polynomials; local and strict local
+extrema; and definite, semidefinite and indefinite quadratic forms.
+
+THMS: the rectangular second-difference lemma; Peano's and Young's mixed
+partial theorems with their distinct hypotheses; Clairaut–Schwarz under
+continuous second partials; Hessian symmetry; and invariance of continuous
+higher mixed partials under finite permutations. Restriction to a line and the
+multinomial theorem give multivariable Taylor formulas with Lagrange and Peano
+remainders. Fermat's necessary condition and a compact-sphere bound for
+definite quadratic forms give the multivariable second-derivative test and its
+two-variable determinant corollary. The constrained-extremum result is limited
+to velocities of an explicit differentiable parametrization, with a Lagrange
+multiplier corollary for a regular graph constraint.
+
+B: Peano's unequal mixed partials; $(y-3x^2)(y-x^2)$ and its smooth flat
+refinement, each minimized on every line through the origin but not at a local
+extremum; a unique critical point that is a nonglobal strict local minimum;
+the monkey saddle; strict minimum, strict maximum and saddle examples with zero
+Hessian; a computed second-order Taylor polynomial; an affine graph constraint;
+and a degenerate constraint for which the multiplier conclusion fails.
+
+DEFER: Morse's lemma and the arbitrary regular-level-set Lagrange multiplier
+theorem require the inverse or implicit function machinery of
+`the-inverse-and-implicit-function-theorems`. A semidefinite Hessian is stated
+to be inconclusive, not as a classification case.
 
 **RA-36 The Inverse and Implicit Function Theorems** <- RA-35, RA-23
 the contraction mapping theorem (Banach) in R^n; **the inverse function

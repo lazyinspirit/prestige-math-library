@@ -858,6 +858,7 @@ async function callDeepSeek(): Promise<CallResult> {
   for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     let resp: Response;
+    let raw: string;
     const max_tokens = deepseekLengthFallbackUsed ? DEEPSEEK_LENGTH_RETRY_MAX_TOKENS : DEEPSEEK_INITIAL_MAX_TOKENS;
     const started = performance.now();
     try {
@@ -867,6 +868,11 @@ async function callDeepSeek(): Promise<CallResult> {
         body: JSON.stringify(payloadForDeepSeek(max_tokens)),
         signal: AbortSignal.timeout(DEEPSEEK_REQUEST_TIMEOUT_MS),
       });
+      // A reset can arrive while the response body is being read, not only
+      // while the request is opened.  Keep both operations in this transport
+      // guard so judge-sweep receives retry exit 4 instead of a raw Node
+      // process exit that leaves a current-context verdict missing.
+      raw = await resp.text();
     } catch (e) {
       const latency_ms = Math.round(performance.now() - started);
       emitAttempt(DEEPSEEK_MODEL, attempt, { outcome: "transport_failure", latency_ms, max_tokens, transport: transportError(e) });
@@ -877,7 +883,6 @@ async function callDeepSeek(): Promise<CallResult> {
         retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
       };
     }
-    const raw = await resp.text();
     const latency_ms = Math.round(performance.now() - started);
     const headers = rateLimitHeaders(resp.headers);
     // A payment error is TERMINAL. Never retry it, and never let it leave here

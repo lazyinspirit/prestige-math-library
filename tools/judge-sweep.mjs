@@ -115,6 +115,27 @@ const SLOT_HEARTBEAT_MS = 30_000;
 const SLOT_RETRY_MS = 250;
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const slotDirFor = (model) => `${GLOBAL_SLOT_DIR}/${model}`;
+// An interrupted parent used to leave all of its directory semaphores behind
+// until their five-minute stale timeout.  That is safe, but it unnecessarily
+// stalls an otherwise independent recovery sweep.  Keep only this process's
+// release callbacks so SIGINT/SIGTERM can synchronously clean up its own
+// slots without touching a concurrent sweep's slots.
+const heldSlotReleases = new Set();
+let receivedTerminationSignal = false;
+const releaseHeldSlots = () => {
+  for (const release of [...heldSlotReleases]) {
+    try { release(); } catch { /* best-effort shutdown cleanup */ }
+  }
+  heldSlotReleases.clear();
+};
+const terminateAfterSlotCleanup = () => {
+  if (receivedTerminationSignal) return;
+  receivedTerminationSignal = true;
+  releaseHeldSlots();
+  process.exit(130);
+};
+process.once("SIGINT", terminateAfterSlotCleanup);
+process.once("SIGTERM", terminateAfterSlotCleanup);
 const reapStaleSlots = (model) => {
   try {
     for (const entry of readdirSync(slotDirFor(model), { withFileTypes: true })) {
@@ -172,6 +193,7 @@ const runAttempt = async (task) => {
   const { id, model } = task;
   console.log(`[judge-sweep] start ${model} ${id} attempt ${task.attempt + 1}`);
   const releaseSlot = await acquireModelSlot(model);
+  heldSlotReleases.add(releaseSlot);
   try {
     return await new Promise((resolve) => {
       let stdout = "";
@@ -221,6 +243,7 @@ const runAttempt = async (task) => {
       });
     });
   } finally {
+    heldSlotReleases.delete(releaseSlot);
     releaseSlot();
   }
 };

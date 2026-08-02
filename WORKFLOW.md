@@ -879,7 +879,10 @@ it with `level-coverage.mjs`. A changed public interface runs through
 `impact-audit.mjs`, which requires Alpha to inspect every computed consumer. The
 post-Step-7 coverage gate checks current prompt hashes, not merely historical
 ledger rows, and records every planned-versus-authored dependency difference in
-the signed Alpha receipt.
+the signed Alpha receipt. It also consumes Alpha's exact-hash judge
+adjudications: a current `confirmed_fatal` or unadjudicated rejection blocks
+closure, while an explicitly `confirmed_nonfatal` or `false_positive` finding
+does not override the 30-second nonfatal-gap policy.
 
 **Obvious published-dependency repair (owner, 2026-08-01).** The owner has
 delegated a narrow exception to the usual published-content read-only boundary:

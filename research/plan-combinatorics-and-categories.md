@@ -1735,65 +1735,73 @@ results proved on this page.
 
 Forward references: NONE.
 
-## GT-4. Matchings, Covers, Menger and Network Flows  (order 195, combinatorics)
+## GT-4. Matchings, Covers, Menger and Network Flows  (order 213, combinatorics)
 
-`requires`: `eulerian-and-hamiltonian-graphs` (193),
-`chains-antichains-sperner-and-dilworth` (173),
-`filters-and-ultrafilters` (12)
+`requires`: `eulerian-and-hamiltonian-graphs` (211),
+`incidence-algebras-and-mobius-inversion` (203)
 
-**The ordering decision this page records.** Two coherent syllabi exist: Diestel,
-West, Cambridge and Bollobás prove Menger and Hall combinatorially and treat
-flows separately; Oxford B8.5 derives "Menger's theorem and Hall's theorem" as
-applications of max-flow min-cut. **This scaffold takes the first route**, and
-the reason is a dependency reason, not a taste: the flow route makes Menger and
-Hall inherit Ford–Fulkerson's integrality-and-termination hypothesis, which
-neither of them needs. Flows come afterwards and re-derive both as corollaries,
-with an explicit agreement remark.
+DEFS: matchings, saturated vertices, maximal and maximum matchings, perfect
+matchings and $\nu(G)$; a source-backed remark fixing maximal versus maximum;
+vertex covers and edge covers with $\tau(G)$ and $\rho(G)$; alternating and
+augmenting paths; bipartite neighbourhoods, Hall's condition and systems of
+distinct representatives; finite integral networks with distinguishable arcs,
+integer capacities, feasible integral flows, values, cuts, and labelled
+forward/reverse residual arcs; arc-, edge-, and internally vertex-disjoint path
+families and their corresponding local separators.
 
-DEFS: matching, maximal vs **maximum** matching (two words, one letter apart,
-and a `rem-` fixing them), perfect matching, $\nu(G)$; vertex cover, $\tau(G)$;
-augmenting path; a system of distinct representatives; network, capacity, flow,
-value, cut; the residual network.
+THMS: switching along an augmenting path; the alternating path/even-cycle
+decomposition of the symmetric difference of two matchings; **Berge's theorem**;
+the strict and tight subinstances in the standard inductive proof of **Hall's
+finite marriage theorem**; the finite-family SDR form; Hall's deficiency formula;
+the alternating-reachability cover construction and **König's theorem**
+$\nu(G)=\tau(G)$ for finite bipartite graphs; **Gallai's edge-cover identity**
+$\nu(G)+\rho(G)=|V(G)|$ for graphs without isolated vertices.
 
-THMS: **Berge's theorem** (a matching is maximum iff there is no augmenting
-path, landmark); **Hall's marriage theorem** (landmark), proved combinatorially
-by induction, with the SDR restatement; **König's theorem** ($\nu = \tau$ in
-bipartite graphs, landmark) and the König–Egerváry edge-cover form; the
-defect version of Hall; **Tutte's 1-factor theorem** (landmark; Lovász's proof,
-elementary); the Tutte–Berge formula; **Menger's theorem** in all four forms
-(vertex/edge, local/global, undirected/directed), proved by induction on edges
-(landmark); the global vertex form: $G$ is $k$-connected iff any two vertices
-are joined by $k$ internally disjoint paths (Whitney) — **this is the form
-GT-8's Kuratowski proof consumes**, so it is a numbered A-page theorem;
-**max-flow min-cut** (landmark) for **integer or rational** capacities, with the
-termination argument explicit and the hypothesis in the Statement; the
-integrality theorem; **Menger and Hall re-derived from max-flow min-cut**, each
-with an agreement remark naming the first proof; **the infinite marriage theorem
-for a family of finite sets** (Rado), whose Statement names **BPI** and cites
-the published `thm-ultrafilter-lemma` (§7).
+For integral networks, the flow-across-a-cut identity and weak duality precede
+the residual augmentation and tight-reachable-cut lemmas. They yield a complete
+Ford–Fulkerson termination proof and **max-flow min-cut for finite integer
+capacities**, with an integral optimum. Integral flow decomposition is proved
+before the unit bipartite network identifies matching size with flow value and
+vertex-cover size with cut capacity; this records the agreement with the earlier
+Hall and König proofs without duplicating either theorem.
 
-FS: Hall's condition is sufficient for a family of arbitrary infinite sets
-(denied version, §9.17 — the `fs-` states it and refutes it with the standard
-witness: one set $\mathbb{N}$ and countably many singletons... **check the
-witness closes from published material; if it does not, this `fs-` DROPS and
-the denial note stands alone**); every maximal matching is maximum; $\nu = \tau$
-in every graph (witness $C_5$ or $K_3$); Ford–Fulkerson terminates for arbitrary
-real capacities (the classic irrational-capacity non-termination example —
-**keep only if it can be built from published real-analysis material; else DROP
-with a note**, since it is the honest reason the Statement says rational).
+**Menger's theorem** is stated with four explicit finite clauses: directed arc,
+undirected edge, directed internally vertex-disjoint paths for terminals with no
+source-to-sink arc, and undirected internally vertex-disjoint paths for
+nonadjacent terminals. The directed arc form follows from unit-capacity flow and
+flow decomposition; antiparallel cancellation gives the undirected edge form;
+labelled vertex splitting with capacity-one bottlenecks gives the two vertex
+forms. The global Whitney corollary states that, for $k\ge1$, a finite graph on
+at least $k+1$ vertices is $k$-connected iff every two vertices are joined by
+$k$ internally disjoint paths, including an explicit adjacent-terminal case.
 
-B: a bipartite graph with a perfect matching found by augmenting paths; Hall's
-condition failing on a concrete family; $K_3$ with $\nu = 1 < 2 = \tau$; a small
-network with its max flow and min cut exhibited; the SDR of a small set system.
+B: $P_4$ with a maximal nonmaximum middle-edge matching and its augmenting path;
+three left vertices with only two collective neighbours; a three-set SDR; the
+triangle with $\nu=1<2=\tau$; a four-vertex integral network with maximum flow
+and minimum cut both five; and the three internally disjoint paths and
+three-vertex separator between the size-two part of $K_{2,3}$.
 
-CEX: a maximal matching that is not maximum; a graph satisfying Tutte's
-condition minus one component; a non-bipartite graph where König fails.
+DROP/DEFER: Tutte's theorem and the Tutte–Berge formula require nonbipartite
+matching structure (factor-critical components or blossom machinery) not built
+by the declared prerequisites. The infinite marriage theorem and its exact
+choice-strength attribution are deferred to an infinite matching development;
+the source pass confirmed an AC-dependent locally finite form but did not
+license the prose scaffold's exact BPI claim from the available closure. The
+arbitrary-infinite-set Hall denial is deferred with it. Arbitrary rational and
+real capacities are not asserted: the page proves the integer form by a
+terminating augmenting-path argument, and does not need the irrational
+nontermination construction. No `proved_here: false` fallback is necessary for
+the finite results retained here.
 
-Traps. (i) Menger's four forms are four statements; prove one and derive the
-others, and say which is primary. (ii) The rational-capacity hypothesis is
-load-bearing and must be in the Statement, not the proof. (iii) The BPI cost of
-the infinite marriage theorem goes in the Statement (§7), and the page carries a
-`rem-choice-ledger`. (iv) Maximal/maximum is this page's notational trap.
+Traps. Residual arcs are labelled copies of original arcs, so a forward
+residual arc and the reverse copy of an antiparallel original arc never collapse
+into one arc. A residual augmentation states separately how much cancels a
+reverse original flow and how much uses unused forward capacity. In the
+undirected edge-Menger reduction, opposing flows are cancelled before path
+decomposition so two paths cannot use opposite orientations of one undirected
+edge. Vertex Menger excludes adjacent terminals locally; the global Whitney
+corollary handles adjacent terminals by applying the local theorem to $G-uv$
+and then restoring the edge $uv$. Maximal and maximum remain distinct.
 
 Forward references: NONE.
 

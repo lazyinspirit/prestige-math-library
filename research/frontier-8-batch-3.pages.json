@@ -1,0 +1,662 @@
+[
+  {
+    "order": 171,
+    "id": "approximation-and-compactness-in-ck",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Approximation and Compactness in C(K)",
+    "companion": "approximation-and-compactness-in-ck-examples",
+    "requires": [
+      "uniform-convergence-of-functions",
+      "compactness-in-metric-spaces",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "def-equicontinuity-and-boundedness-in-ck",
+        "kind": "definition",
+        "title": "Equicontinuity, pointwise boundedness, and uniform boundedness for families in $C(K,\\mathbb R)$",
+        "deps": ["def-continuous-real-functions-on-a-compact-metric-space"]
+      },
+      {
+        "id": "lem-equicontinuity-on-a-compact-domain-is-uniform",
+        "kind": "lemma",
+        "title": "An equicontinuous family on a compact metric space is uniformly equicontinuous",
+        "strategy": "Choose one equicontinuity neighbourhood at each point, extract a finite half-radius cover, and use a triangle estimate through the corresponding centre. Keep the empty family and empty domain explicit.",
+        "deps": [
+          "def-equicontinuity-and-boundedness-in-ck",
+          "def-metric-compactness"
+        ]
+      },
+      {
+        "id": "lem-equicontinuity-and-pointwise-boundedness-give-uniform-boundedness",
+        "kind": "lemma",
+        "title": "Equicontinuity and pointwise boundedness on a compact metric space imply uniform boundedness",
+        "strategy": "Use uniform equicontinuity at tolerance one and a finite cover; combine the finitely many pointwise bounds with the triangle inequality.",
+        "deps": [
+          "lem-equicontinuity-on-a-compact-domain-is-uniform",
+          "def-equicontinuity-and-boundedness-in-ck"
+        ]
+      },
+      {
+        "id": "lem-equicontinuous-families-have-finite-sup-nets",
+        "kind": "lemma",
+        "title": "An equicontinuous pointwise-bounded family in $C(K,\\mathbb R)$ has a finite net in the supremum metric",
+        "strategy": "Sample on a finite domain net, discretize the bounded sample vectors by a finite grid, and show functions in one grid cell are uniformly close using equicontinuity. Treat the empty family separately.",
+        "deps": [
+          "lem-equicontinuity-on-a-compact-domain-is-uniform",
+          "lem-equicontinuity-and-pointwise-boundedness-give-uniform-boundedness",
+          "def-totally-bounded",
+          "def-continuous-real-functions-on-a-compact-metric-space"
+        ]
+      },
+      {
+        "id": "lem-uniformly-convergent-sequences-form-equicontinuous-families",
+        "kind": "lemma",
+        "title": "A uniformly convergent sequence of continuous functions, together with its limit, is equicontinuous",
+        "strategy": "Control the finite initial segment by intersecting finitely many continuity neighbourhoods and control the tail by two uniform-error terms plus continuity of the limit.",
+        "deps": [
+          "def-equicontinuity-and-boundedness-in-ck",
+          "thm-uniform-limit-continuous-real-functions"
+        ]
+      },
+      {
+        "id": "thm-arzela-ascoli-for-real-ck",
+        "kind": "theorem",
+        "title": "Arzelà–Ascoli for real $C(K)$: compact closure iff equicontinuous and pointwise bounded",
+        "strategy": "For sufficiency use the finite-sup-net lemma, completeness of $C(K)$, and the metric compactness equivalences. For necessity, compactness gives bounded evaluation images and finite sup nets; use continuity of finitely many centres to recover equicontinuity. Prove both directions and include empty cases.",
+        "deps": [
+          "lem-equicontinuous-families-have-finite-sup-nets",
+          "thm-c-k-complete-in-the-sup-metric",
+          "thm-complete-subspace-iff-closed",
+          "thm-metric-compactness-equivalences",
+          "def-equicontinuity-and-boundedness-in-ck"
+        ]
+      },
+      {
+        "id": "cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence",
+        "kind": "corollary",
+        "title": "Every pointwise-bounded equicontinuous sequence in $C(K,\\mathbb R)$ has a uniformly convergent subsequence",
+        "strategy": "Apply Arzelà–Ascoli to the range of the sequence and then sequential compactness of its compact closure.",
+        "deps": [
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-metric-compactness-equivalences"
+        ]
+      },
+      {
+        "id": "def-bernstein-polynomial",
+        "kind": "definition",
+        "title": "The Bernstein polynomial $B_n(f)$ on $[0,1]$",
+        "deps": [
+          "def-finite-sum",
+          "def-binomial-coefficient",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "lem-bernstein-basis-moment-identities",
+        "kind": "lemma",
+        "title": "The zeroth, first, and second centred moments of the Bernstein basis",
+        "strategy": "Use the binomial theorem and the identities $k{n\\choose k}=n{n-1\\choose k-1}$ and $k(k-1){n\\choose k}=n(n-1){n-2\\choose k-2}$, with $n=0,1$ separated before division.",
+        "deps": [
+          "def-bernstein-polynomial",
+          "thm-binomial-theorem",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "thm-bernstein-polynomials-converge-uniformly",
+        "kind": "theorem",
+        "title": "Bernstein polynomials converge uniformly to every continuous function on $[0,1]$",
+        "strategy": "Use uniform continuity to split the Bernstein average into near and far indices; bound the far mass by the second centred moment. Choose the integer degree after fixing epsilon and keep both endpoints explicit.",
+        "deps": [
+          "lem-bernstein-basis-moment-identities",
+          "thm-heine-cantor-metric",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "cor-weierstrass-approximation-on-the-unit-interval",
+        "kind": "corollary",
+        "title": "Polynomials are uniformly dense in $C([0,1],\\mathbb R)$",
+        "strategy": "Each Bernstein approximant is a polynomial and the preceding theorem supplies uniform convergence.",
+        "deps": ["thm-bernstein-polynomials-converge-uniformly"]
+      },
+      {
+        "id": "cor-weierstrass-approximation-on-a-closed-interval",
+        "kind": "corollary",
+        "title": "Polynomials are uniformly dense in $C([a,b],\\mathbb R)$ for every closed interval",
+        "strategy": "For $a<b$, transport the unit-interval approximation by the affine homeomorphism; handle the singleton interval $a=b$ by a constant polynomial.",
+        "deps": [
+          "cor-weierstrass-approximation-on-the-unit-interval",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-unital-separating-real-function-algebra",
+        "kind": "definition",
+        "title": "A unital point-separating real subalgebra of $C(K,\\mathbb R)$",
+        "deps": ["def-continuous-real-functions-on-a-compact-metric-space"]
+      },
+      {
+        "id": "lem-uniform-closure-of-a-real-function-algebra-is-a-lattice",
+        "kind": "lemma",
+        "title": "The uniform closure of a unital real function algebra is closed under absolute value, maximum, and minimum",
+        "strategy": "Approximate the absolute-value function uniformly on a large closed interval by polynomials whose constant term is adjusted to zero; substitute a bounded function into those polynomials, then use the algebraic formulas for maximum and minimum.",
+        "deps": [
+          "def-unital-separating-real-function-algebra",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-c-k-complete-in-the-sup-metric"
+        ]
+      },
+      {
+        "id": "lem-two-point-interpolation-in-a-separating-real-function-algebra",
+        "kind": "lemma",
+        "title": "A unital separating real function algebra interpolates arbitrary values at two distinct points",
+        "strategy": "Normalize a separating function affinely; the denominator is nonzero because the two sampled values differ. Treat coincident points only when the requested values agree.",
+        "deps": ["def-unital-separating-real-function-algebra"]
+      },
+      {
+        "id": "thm-real-stone-weierstrass-for-compact-metric-spaces",
+        "kind": "theorem",
+        "title": "Real Stone–Weierstrass theorem for compact metric spaces",
+        "strategy": "Work in the uniform closure. For each first point, use two-point interpolation and compactness to take a finite maximum dominating the target everywhere while matching at that point; compactness again gives a finite minimum approximating the target uniformly. Invoke the lattice lemma at both stages.",
+        "deps": [
+          "lem-uniform-closure-of-a-real-function-algebra-is-a-lattice",
+          "lem-two-point-interpolation-in-a-separating-real-function-algebra",
+          "def-metric-compactness"
+        ]
+      },
+      {
+        "id": "thm-baire-category-for-complete-metric-spaces",
+        "kind": "theorem",
+        "title": "A complete metric space is not a countable union of closed sets with empty interior",
+        "strategy": "Given nonempty open data, recursively choose nested closed balls with radii tending to zero and each avoiding the next closed set. Dependent choice supplies the sequence; completeness supplies its limit, which lies in the original open set and outside every closed set. Include the empty-space convention.",
+        "deps": [
+          "def-complete-metric-space",
+          "def-dependent-choice",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "lem-pointwise-lipschitz-sets-in-c01-are-closed",
+        "kind": "lemma",
+        "title": "Functions satisfying a fixed local Lipschitz bound somewhere form a closed subset of $C([0,1])$",
+        "strategy": "Let a sequence in the fixed pointwise-Lipschitz set converge in the supremum metric. Unwind metric convergence and the supremum bound to obtain uniform convergence, use the earlier real-valued uniform-limit theorem for continuity of the limit, and apply Bolzano-Weierstrass to the witness points in $[0,1]$. Pass the defining inequality to the convergent witness subsequence using uniform convergence and continuity, with the endpoint interpretation explicit.",
+        "deps": [
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "lem-sup-metric-is-a-metric",
+          "def-metric-convergence",
+          "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-bolzano-weierstrass",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "lem-steep-polygonal-functions-are-dense-in-c01",
+        "kind": "lemma",
+        "title": "Polygonal functions with sufficiently steep nonvertex slopes are dense in $C([0,1])$",
+        "strategy": "Choose a fine uniform partition from uniform continuity, perturb the sampled vertex values by a small alternating sawtooth, and linearly interpolate. Bound the sup error and choose the perturbation frequency so every nonvertex slope has the prescribed magnitude.",
+        "deps": [
+          "thm-heine-cantor-metric",
+          "cor-archimedean-reciprocal",
+          "def-continuous-real-functions-on-a-compact-metric-space"
+        ]
+      },
+      {
+        "id": "thm-nowhere-differentiable-functions-are-dense-in-c01",
+        "kind": "theorem",
+        "title": "Continuous nowhere differentiable functions form a dense subset of $C([0,1],\\mathbb R)$",
+        "strategy": "For each integer bound, show the functions having that local difference-quotient bound somewhere form a closed set with empty interior, using the two preceding lemmas. Apply the locally proved Baire theorem and identify the complement with functions having no finite derivative, using one-sided derivatives at endpoints.",
+        "deps": [
+          "thm-baire-category-for-complete-metric-spaces",
+          "lem-pointwise-lipschitz-sets-in-c01-are-closed",
+          "lem-steep-polygonal-functions-are-dense-in-c01",
+          "thm-c-k-complete-in-the-sup-metric",
+          "def-derivative"
+        ]
+      },
+      {
+        "id": "def-tent-function-and-takagi-series",
+        "kind": "definition",
+        "title": "The tent function $\\phi(t)=\\operatorname{dist}(t,\\mathbb Z)$ and the Takagi series $T(x)=\\sum_{n\\ge0}2^{-n}\\phi(2^n x)$",
+        "deps": [
+          "def-series-of-real-functions",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "thm-takagi-function-is-continuous-and-nowhere-differentiable",
+        "kind": "theorem",
+        "title": "The Takagi series converges uniformly to a continuous nowhere differentiable function",
+        "strategy": "Apply the M-test using $0\\le\\phi\\le1/2$. On dyadic intervals record the exact integer slopes of partial sums; compare symmetric or one-sided dyadic difference quotients and show they cannot converge to a finite limit, separating dyadic and nondyadic points.",
+        "deps": [
+          "def-tent-function-and-takagi-series",
+          "thm-weierstrass-m-test-for-function-series",
+          "thm-uniform-limit-continuous-real-functions",
+          "def-derivative"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 172,
+    "id": "approximation-and-compactness-in-ck-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Approximation and Compactness in C(K): Examples and Counterexamples",
+    "companion": "approximation-and-compactness-in-ck",
+    "requires": ["approximation-and-compactness-in-ck"],
+    "items": [
+      {
+        "id": "cex-rudin-bounded-spikes-are-not-equicontinuous",
+        "kind": "counterexample",
+        "title": "Rudin's bounded rational spikes are not equicontinuous and have no uniformly convergent subsequence",
+        "strategy": "For $f_n(x)=x^2/(x^2+(1-nx)^2)$ on $[0,1]$, verify $0\\le f_n\\le1$, $f_n(0)=0$, and $f_n(1/n)=1$. This defeats equicontinuity at zero; any uniform subsequential limit would be continuous but must be zero at every positive point and equal one along the moving peaks.",
+        "deps": [
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-uniform-limit-continuous-real-functions"
+        ]
+      },
+      {
+        "id": "cex-constant-functions-are-equicontinuous-not-pointwise-bounded",
+        "kind": "counterexample",
+        "title": "All constant functions form an equicontinuous family that is not pointwise bounded",
+        "strategy": "Every function difference is zero, so one delta works for the whole family; at any point the values range over all real numbers.",
+        "deps": ["def-equicontinuity-and-boundedness-in-ck"]
+      },
+      {
+        "id": "cex-noncompact-domain-breaks-arzela-ascoli",
+        "kind": "counterexample",
+        "title": "Translations of a fixed bump on $\\mathbb R$ are uniformly bounded and equicontinuous but have no uniformly convergent subsequence",
+        "strategy": "Use the triangular bump $b(x)=\\max(1-|x|,0)$ and its integer translates. They share a Lipschitz constant and a uniform bound, while distinct translates with centres separated by at least two have sup distance one; every subsequence contains such a separated pair.",
+        "deps": [
+          "def-equicontinuity-and-boundedness-in-ck",
+          "def-pointwise-uniform-and-uniformly-cauchy-convergence"
+        ]
+      },
+      {
+        "id": "ex-bernstein-polynomials-of-the-square-function",
+        "kind": "example",
+        "title": "The Bernstein polynomials of $f(x)=x^2$ equal $x^2+x(1-x)/n$",
+        "strategy": "Use the first two Bernstein moment identities and compute the exact uniform error, including the degree-zero convention separately.",
+        "deps": [
+          "def-bernstein-polynomial",
+          "lem-bernstein-basis-moment-identities"
+        ]
+      },
+      {
+        "id": "ex-distance-functions-form-a-compact-family-in-c01",
+        "kind": "example",
+        "title": "The family $x\\mapsto|x-a|$, $a\\in[0,1]$, is compact in $C([0,1])$",
+        "strategy": "The reverse triangle inequality gives a common Lipschitz bound and identifies the sup distance between parameters with $|a-b|$. Apply Arzelà–Ascoli, or directly transport sequential compactness of the parameter interval.",
+        "deps": [
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-metric-compactness-equivalences"
+        ]
+      },
+      {
+        "id": "cex-even-polynomial-algebra-is-not-dense",
+        "kind": "counterexample",
+        "title": "Even polynomials on $[-1,1]$ form a unital algebra but are not dense because they do not separate $-1$ and $1$",
+        "strategy": "Uniform limits preserve equality at the two endpoints, whereas the identity function has unequal endpoint values and stays at least distance one from every even function.",
+        "deps": [
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "def-unital-separating-real-function-algebra"
+        ]
+      },
+      {
+        "id": "cex-separating-algebra-without-constants-is-not-dense",
+        "kind": "counterexample",
+        "title": "Polynomials vanishing at zero separate points of $[0,1]$ but are not dense in $C([0,1])$",
+        "strategy": "The identity function already separates every pair, so the algebra separates points. Every member and every uniform limit vanishes at zero, so the constant-one function cannot be approximated.",
+        "deps": [
+          "thm-real-stone-weierstrass-for-compact-metric-spaces",
+          "def-unital-separating-real-function-algebra"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 231,
+    "id": "mixed-partials-taylor-and-extrema",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Mixed Partials, Taylor, and Extrema in Several Variables",
+    "companion": "mixed-partials-taylor-and-extrema-examples",
+    "requires": [
+      "the-total-derivative",
+      "finite-counting-and-binomial-coefficients",
+      "compactness-in-metric-spaces"
+    ],
+    "items": [
+      {
+        "id": "def-ck-and-multi-index-notation-in-several-variables",
+        "kind": "definition",
+        "title": "$C^k$ maps and multi-index derivative notation in Euclidean space",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "def-multinomial-coefficient",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "def-hessian-and-euclidean-critical-point",
+        "kind": "definition",
+        "title": "The Hessian matrix and critical points of a scalar field",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-space"
+        ]
+      },
+      {
+        "id": "lem-rectangle-second-difference-mean-value-formula",
+        "kind": "lemma",
+        "title": "A rectangular second difference equals a mixed partial times the side lengths",
+        "strategy": "Apply the one-variable mean value theorem in one coordinate to the difference across the other coordinate, then apply it again to the resulting one-variable function. State the closed-rectangle and interior differentiability hypotheses exactly.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "cor-mean-value-theorem"
+        ]
+      },
+      {
+        "id": "thm-peano-mixed-partial-theorem",
+        "kind": "theorem",
+        "title": "Peano's mixed-partial theorem from continuity of one mixed partial",
+        "strategy": "Apply the rectangle formula to shrinking rectangles based at the point. Continuity of one mixed partial controls the quotient, while the assumed existence of the reverse iterated derivative along the coordinate line identifies the other iterated limit.",
+        "deps": [
+          "lem-rectangle-second-difference-mean-value-formula",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ]
+      },
+      {
+        "id": "thm-young-mixed-partial-theorem",
+        "kind": "theorem",
+        "title": "Young's theorem: total differentiability of the first partials forces equality of mixed partials",
+        "strategy": "Expand the two first-partial functions at the base point with total-derivative remainders and insert those expansions into a symmetric rectangular difference quotient. Cancellation leaves the two mixed coefficients equal.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ]
+      },
+      {
+        "id": "thm-clairaut-schwarz-mixed-partials",
+        "kind": "theorem",
+        "title": "Clairaut–Schwarz theorem for continuous second partial derivatives",
+        "strategy": "Continuity of the relevant second partials gives the hypotheses of Peano's theorem (and, alternatively, Young's differentiability hypothesis); specialize to every coordinate pair.",
+        "deps": [
+          "thm-peano-mixed-partial-theorem",
+          "thm-young-mixed-partial-theorem",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ]
+      },
+      {
+        "id": "cor-hessian-is-symmetric",
+        "kind": "corollary",
+        "title": "The Hessian of a $C^2$ scalar field is symmetric",
+        "strategy": "Apply Clairaut–Schwarz to each pair of coordinate indices and translate the equalities into matrix entries.",
+        "deps": [
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-hessian-and-euclidean-critical-point"
+        ]
+      },
+      {
+        "id": "thm-symmetry-of-higher-mixed-partials",
+        "kind": "theorem",
+        "title": "Continuous mixed partials of order $k$ are invariant under permutations",
+        "strategy": "Show invariance under one adjacent transposition by applying Clairaut–Schwarz after freezing the other derivatives; decompose every finite permutation into adjacent transpositions and induct over their number.",
+        "deps": [
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-symmetric-group"
+        ]
+      },
+      {
+        "id": "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+        "kind": "lemma",
+        "title": "Repeated derivatives along a line expand by the multinomial formula",
+        "strategy": "Apply the total-derivative chain rule once, then induct on the derivative order. Use symmetry of higher mixed partials to collect ordered coordinate choices into multinomial coefficients.",
+        "deps": [
+          "thm-chain-rule-for-total-derivatives",
+          "thm-symmetry-of-higher-mixed-partials",
+          "thm-multinomial-theorem"
+        ]
+      },
+      {
+        "id": "def-multivariable-taylor-polynomial",
+        "kind": "definition",
+        "title": "The multivariable Taylor polynomial in multi-index notation",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-taylor-polynomial-and-remainder"
+        ]
+      },
+      {
+        "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+        "kind": "theorem",
+        "title": "Multivariable Taylor formula with a Lagrange remainder along a line segment",
+        "strategy": "Restrict the function to the segment, apply the one-variable Lagrange Taylor formula, and substitute the line-derivative multinomial expansion. Convexity keeps the segment inside the domain; separate zero increment.",
+        "deps": [
+          "def-multivariable-taylor-polynomial",
+          "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+          "cor-taylor-lagrange-and-cauchy-remainders",
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "cor-multivariable-taylor-formula-with-peano-remainder",
+        "kind": "corollary",
+        "title": "Multivariable Taylor formula with $o(\\|h\\|^k)$ remainder",
+        "strategy": "Apply the one-variable Peano theorem to the line restriction and use the multinomial line-derivative identity; convert the scalar parameter remainder to the Euclidean increment norm.",
+        "deps": [
+          "def-multivariable-taylor-polynomial",
+          "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+          "thm-taylor-peano-remainder"
+        ]
+      },
+      {
+        "id": "cor-second-order-taylor-expansion-with-the-hessian",
+        "kind": "corollary",
+        "title": "Second-order Taylor expansion $f(a+h)=f(a)+\\nabla f(a)\\cdot h+\\tfrac12h^TH_f(a)h+o(\\|h\\|^2)$",
+        "strategy": "Specialize the Peano formula to order two and collect the first- and second-order multi-index terms as the gradient inner product and Hessian quadratic form.",
+        "deps": [
+          "cor-multivariable-taylor-formula-with-peano-remainder",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "def-euclidean-local-extrema-and-critical-points",
+        "kind": "definition",
+        "title": "Local and strict local extrema for scalar fields on Euclidean open sets",
+        "deps": [
+          "def-hessian-and-euclidean-critical-point",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "thm-fermat-for-euclidean-local-extrema",
+        "kind": "theorem",
+        "title": "Fermat's theorem: an interior differentiable local extremum has zero gradient",
+        "strategy": "Restrict to each coordinate line through the point, apply the one-variable Fermat theorem, and identify the resulting partial derivatives as the gradient coordinates.",
+        "deps": [
+          "def-euclidean-local-extrema-and-critical-points",
+          "thm-fermat-interior-extremum",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "def-definite-and-indefinite-hessian-quadratic-forms",
+        "kind": "definition",
+        "title": "Positive definite, negative definite, semidefinite, and indefinite quadratic forms",
+        "deps": [
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+        "kind": "lemma",
+        "title": "A definite quadratic form has a uniform signed bound on the Euclidean unit sphere",
+        "strategy": "For $n\\ge 1$, prove directly that the Euclidean unit sphere is nonempty, closed, and bounded: use $e_0$ for nonemptiness, continuity of the Euclidean norm for closedness, and the norm equation for boundedness. Heine-Borel then makes the sphere compact. Prove continuity of the fixed quadratic form from its finite coordinate formula, apply the extreme value theorem, and use definiteness to make the attained minimum positive or the attained maximum negative.",
+        "deps": [
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "def-euclidean-inner-product",
+          "lem-finite-sum-laws",
+          "lem-triangle-inequality-finite",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "thm-metric-continuity-characterisations",
+          "def-metric-topology",
+          "def-metric-bounded-diameter",
+          "lem-standard-basis-of-f-n",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ]
+      },
+      {
+        "id": "thm-multivariable-second-derivative-test",
+        "kind": "theorem",
+        "title": "The multivariable second-derivative test by definiteness of the Hessian",
+        "strategy": "At a critical point combine the second-order Taylor expansion with the uniform sphere bound. Positive or negative definiteness dominates the little-o remainder and gives a strict extremum; two directions of opposite quadratic sign give saddle behaviour. Make the semidefinite case explicitly inconclusive.",
+        "deps": [
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+          "def-euclidean-local-extrema-and-critical-points"
+        ]
+      },
+      {
+        "id": "cor-two-variable-hessian-determinant-test",
+        "kind": "corollary",
+        "title": "The two-variable Hessian determinant test",
+        "strategy": "For the symmetric matrix with entries $A,B,C$, complete the square when $A\\ne0$. The determinant sign classifies definiteness or indefiniteness; if the determinant is zero, state that the test gives no conclusion.",
+        "deps": [
+          "thm-multivariable-second-derivative-test",
+          "cor-hessian-is-symmetric"
+        ]
+      },
+      {
+        "id": "thm-parametrized-constraint-necessary-condition",
+        "kind": "theorem",
+        "title": "A constrained local extremum annihilates every velocity of a differentiable parametrization",
+        "strategy": "Compose the objective with each differentiable curve in the constraint set through the point. One-variable Fermat and the total-derivative chain rule give $Df(a)\\gamma'(0)=0$.",
+        "deps": [
+          "thm-chain-rule-for-total-derivatives",
+          "thm-fermat-interior-extremum",
+          "def-euclidean-local-extrema-and-critical-points"
+        ]
+      },
+      {
+        "id": "cor-lagrange-multiplier-rule-for-graph-constraints",
+        "kind": "corollary",
+        "title": "Lagrange multipliers for a regular graph constraint $y=\\psi(x)$",
+        "strategy": "Parametrize the graph by $x\\mapsto(x,\\psi(x))$. The parametrized necessary condition says the objective gradient is orthogonal to all graph tangent vectors; solve the coordinate equations to obtain $\\nabla f=\\lambda\\nabla(y-\\psi(x))$, whose last coordinate is nonzero.",
+        "deps": [
+          "thm-parametrized-constraint-necessary-condition",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 232,
+    "id": "mixed-partials-taylor-and-extrema-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Mixed Partials, Taylor, and Extrema in Several Variables: Examples and Counterexamples",
+    "companion": "mixed-partials-taylor-and-extrema",
+    "requires": [
+      "mixed-partials-taylor-and-extrema",
+      "the-exponential-function"
+    ],
+    "items": [
+      {
+        "id": "cex-peano-unequal-mixed-partials",
+        "kind": "counterexample",
+        "title": "Peano's function has unequal mixed partials at the origin",
+        "strategy": "For $f(x,y)=xy(x^2-y^2)/(x^2+y^2)$ off the origin and zero at the origin, compute the two axis first partials and then their derivatives at zero, obtaining opposite values. Also verify continuity at the origin by a quadratic bound.",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-clairaut-schwarz-mixed-partials"
+        ]
+      },
+      {
+        "id": "cex-peano-surface-linewise-minimum-without-an-extremum",
+        "kind": "counterexample",
+        "title": "Peano's surface has a strict minimum on every line through the origin but no local extremum",
+        "strategy": "Use $f(x,y)=(y-3x^2)(y-x^2)$. Substitution on an arbitrary line gives a positive leading even power near zero, with vertical lines separate; along the parabola $y=2x^2$ the values are negative.",
+        "deps": ["def-euclidean-local-extrema-and-critical-points"]
+      },
+      {
+        "id": "cex-smooth-linewise-minimum-without-an-extremum",
+        "kind": "counterexample",
+        "title": "A smooth flat refinement has a strict minimum on every line through the origin but no local extremum",
+        "strategy": "Let $\\phi(x)=e^{-1/x^2}$ for $x\\ne0$ and $\\phi(0)=0$, and set $F=(y-3\\phi(x))(y-\\phi(x))$. Exponential domination proves smooth flatness and linewise positivity; the curve $y=2\\phi(x)$ gives negative values approaching the origin.",
+        "deps": [
+          "def-euclidean-local-extrema-and-critical-points",
+          "thm-exponential-beats-every-polynomial"
+        ]
+      },
+      {
+        "id": "cex-unique-critical-point-is-a-nonglobal-strict-local-minimum",
+        "kind": "counterexample",
+        "title": "$x^2+y^2(1-x)^3$ has a unique critical point, a strict local but nonglobal minimum",
+        "strategy": "Solve the two gradient equations to show the origin is the sole critical point. Its Hessian is positive definite, while values with $x>1$ and sufficiently large $|y|$ are negative, so the local minimum is not global.",
+        "deps": [
+          "def-hessian-and-euclidean-critical-point",
+          "thm-multivariable-second-derivative-test"
+        ]
+      },
+      {
+        "id": "ex-monkey-saddle",
+        "kind": "example",
+        "title": "The monkey saddle $x^3-3xy^2$ has an indefinite higher-order critical point",
+        "strategy": "Compute the zero gradient and zero Hessian at the origin, then evaluate along three rays to exhibit alternating signs. Conclude directly that the origin is a saddle although the quadratic test is silent.",
+        "deps": [
+          "def-hessian-and-euclidean-critical-point",
+          "thm-multivariable-second-derivative-test"
+        ]
+      },
+      {
+        "id": "cex-zero-hessian-does-not-classify-a-critical-point",
+        "kind": "counterexample",
+        "title": "A zero Hessian occurs at a strict minimum, a strict maximum, and a saddle",
+        "strategy": "Compare $x^4+y^4$, $-(x^4+y^4)$, and $x^4-y^4$ at the origin. Compute the common zero gradient and Hessian, then classify by signs.",
+        "deps": [
+          "def-hessian-and-euclidean-critical-point",
+          "thm-multivariable-second-derivative-test"
+        ]
+      },
+      {
+        "id": "ex-second-order-multivariable-taylor-polynomial-computed",
+        "kind": "example",
+        "title": "A second-order Taylor polynomial computed from gradient and Hessian data",
+        "strategy": "For $f(x,y)=e^x(1+y+y^2)$ at the origin, compute the value, gradient, and Hessian and substitute them into the second-order formula; verify the coefficients by multiplying the one-variable expansions.",
+        "deps": [
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "thm-algebra-of-derivatives"
+        ]
+      },
+      {
+        "id": "ex-lagrange-multiplier-on-an-affine-graph",
+        "kind": "example",
+        "title": "A constrained extremum on an affine graph satisfies the graph Lagrange rule",
+        "strategy": "Minimize $x^2+y^2$ on $y=x+1$ by completing the square in the graph parameter, then compute both gradients and the multiplier at the unique minimizer.",
+        "deps": ["cor-lagrange-multiplier-rule-for-graph-constraints"]
+      },
+      {
+        "id": "cex-lagrange-multiplier-rule-needs-a-regular-constraint",
+        "kind": "counterexample",
+        "title": "The degenerate constraint $x^2+y^2=0$ defeats the multiplier conclusion",
+        "strategy": "The constraint set is the singleton origin, so $f(x,y)=x$ has a constrained extremum there. But $\\nabla g(0,0)=0$ and $\\nabla f(0,0)=(1,0)$, so no scalar multiplier can satisfy the usual equation.",
+        "deps": [
+          "thm-parametrized-constraint-necessary-condition",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      }
+    ]
+  }
+]

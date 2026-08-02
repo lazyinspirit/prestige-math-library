@@ -1,0 +1,11 @@
+---
+page: mixed-partials-taylor-and-extrema
+title: "Mixed Partials, Taylor Formulae, and Extrema"
+status: published
+items: [def-ck-and-multi-index-notation-in-several-variables, def-hessian-and-euclidean-critical-point, lem-rectangle-second-difference-mean-value-formula, thm-peano-mixed-partial-theorem, thm-young-mixed-partial-theorem, thm-clairaut-schwarz-mixed-partials, cor-hessian-is-symmetric, thm-symmetry-of-higher-mixed-partials, lem-derivatives-along-a-line-have-the-multinomial-expansion, def-multivariable-taylor-polynomial, thm-multivariable-taylor-formula-with-lagrange-remainder, cor-multivariable-taylor-formula-with-peano-remainder, cor-second-order-taylor-expansion-with-the-hessian, def-euclidean-local-extrema-and-critical-points, thm-fermat-for-euclidean-local-extrema, def-definite-and-indefinite-hessian-quadratic-forms, lem-definite-quadratic-forms-have-a-uniform-sphere-bound, thm-multivariable-second-derivative-test, cor-two-variable-hessian-determinant-test, thm-parametrized-constraint-necessary-condition, cor-lagrange-multiplier-rule-for-graph-constraints]
+examples: [cex-peano-unequal-mixed-partials, cex-peano-surface-linewise-minimum-without-an-extremum, cex-smooth-linewise-minimum-without-an-extremum, cex-unique-critical-point-is-a-nonglobal-strict-local-minimum, ex-monkey-saddle, cex-zero-hessian-does-not-classify-a-critical-point, ex-second-order-multivariable-taylor-polynomial-computed, ex-lagrange-multiplier-on-an-affine-graph, cex-lagrange-multiplier-rule-needs-a-regular-constraint]
+---
+
+For scalar fields on Euclidean open sets, total derivatives provide gradients and the one-variable Taylor theorems provide the analytic input along a line segment. Finite multinomial identities organize repeated directional differentiation, and Euclidean compactness supplies the uniform quadratic estimates used in the Hessian test.
+
+The development introduces multi-index and Hessian notation, separates Peano's and Young's hypotheses for equality of mixed partials, and derives Taylor expansions with Lagrange and Peano remainders. It then treats necessary conditions for extrema, the definite-Hessian test with its semidefinite limitation, and the multiplier equation for explicitly parametrized graph constraints.

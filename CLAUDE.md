@@ -373,8 +373,11 @@ banner; the public sees only `published`.
   requires an Alpha disposition before the item can continue. After Step 7,
   `level-coverage.mjs --verify-current-context` is the hard receipt gate: every
   scoped item needs provenance, every proof-bearing item needs a merged contract,
-  and both DeepSeek/Terra lanes need matching current frozen-context
-  `keep=true` verdicts. Source-backed `literature-derived` and `ai-altered`
+  and both DeepSeek/Terra lanes need matching current frozen-context verdicts.
+  A current rejection is a hard stop unless Alpha has recorded an exact-hash
+  adjudication: `confirmed_fatal` blocks closure, while `confirmed_nonfatal`
+  and `false_positive` may clear that rejection under Alpha's 30-second rule.
+  Source-backed `literature-derived` and `ai-altered`
   items need a reader-visible `sources.references` URL.
   It also requires the current independent `spine-audit.mjs` receipt for the
   proof-bearing items among the 100 largest transitive dependency cones; that

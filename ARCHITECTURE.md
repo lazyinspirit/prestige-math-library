@@ -358,7 +358,12 @@ impact queue.
 `tools/level-coverage.mjs` is the whole-level closure gate. It derives item and
 relationship scope from actual batch manifests, demands a contract for every
 proof-bearing item, verifies an Alpha receipt against a current manifest hash,
-and requires both judge models to have a usable verdict for every item. With
+and requires both judge models to have a usable verdict for every item. A
+current `keep: false` verdict is never silently cleared: the gate requires an
+exact `{id, model, context_sha256}` Alpha adjudication from
+`--judge-adjudications`; `confirmed_fatal` and a missing adjudication fail,
+while `confirmed_nonfatal` and `false_positive` are retained as warnings under
+the explicit 30-second-gap policy. With
 `--verify-current-context` it recomputes each no-network judge prompt hash, so
 an old pass cannot be reused after its item, cited statement, pair context, or
 conventions changed. It also computes every planned-versus-authored `deps`

@@ -1,0 +1,11 @@
+---
+page: the-complex-exponential-and-eulers-formula
+title: "The Complex Exponential and Euler's Formula"
+status: published
+items: [def-complex-numbers-and-arithmetic, thm-complex-numbers-form-a-field, def-complex-integer-powers, lem-binomial-theorem-over-complex-numbers, def-complex-conjugate-real-imaginary-part-and-modulus, lem-complex-conjugation-and-modulus-laws, def-complex-metric-convergence-and-continuity, thm-complex-plane-is-complete, def-complex-series-power-series-and-absolute-convergence, thm-absolute-convergence-of-complex-series, thm-cauchy-hadamard-for-complex-power-series, lem-cauchy-product-of-absolutely-convergent-complex-series, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-complex-exponential-addition-and-real-extension, thm-eulers-formula, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-kernel-and-fibres-of-complex-exponential, thm-polar-form-with-unique-principal-argument, thm-complex-exponential-surjects-onto-the-punctured-plane, cor-complex-de-moivre-formula, thm-complex-nth-roots-and-roots-of-unity, cor-sum-of-roots-of-unity, def-complex-logarithms-principal-logarithm-and-complex-powers, thm-classification-of-complex-logarithms, thm-no-continuous-logarithm-on-the-punctured-complex-plane, def-complex-trigonometric-and-hyperbolic-functions, thm-complex-trigonometric-hyperbolic-dictionary, def-complex-polynomial-degree-and-monic, lem-complex-polynomial-growth-and-minimum-modulus, lem-dalembert-minimum-modulus-descent, thm-fundamental-theorem-of-algebra-minimum-modulus-proof]
+examples: []
+---
+
+This development treats $\mathbb C$ as the Euclidean plane. The declared prerequisites provide real exponential and trigonometric series, metric completeness, finite monoid sums, absolute convergence, and compactness; Heine--Borel and the metric extreme-value theorem are used explicitly in the minimum-modulus argument.
+
+It constructs complex arithmetic, series, exponential, logarithms, and trigonometric functions, then proves Euler's formula, the exponential fibre classification, polar form, roots of unity, and the principal-logarithm conventions. The final polynomial lemmas establish growth, global minimum modulus, and d'Alembert descent, yielding the fundamental theorem of algebra.

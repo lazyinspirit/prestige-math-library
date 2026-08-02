@@ -121,7 +121,9 @@ is generated and verified by `tools/level-coverage.mjs`, which binds the receipt
 to a hash of the actual in-flight items and every such relationship. It also
 requires the merged proof contract to include every proof-bearing item and both
 judge ledgers to contain a complete paired verdict on the same current frozen
-context for every scoped item, with both final verdicts `keep=true`. Finally it
+context for every scoped item. A `keep=false` verdict needs Alpha's exact-hash
+adjudication: missing or `confirmed_fatal` is an error; `confirmed_nonfatal`
+and `false_positive` remain visible warnings. Finally it
 compares each item's planned `deps`
 from the batch manifest against authored `deps`; any difference must be recorded
 in the Alpha receipt with exact before/after lists and a concrete reason.
@@ -181,5 +183,5 @@ the Alpha receipt, then enforce it against the final disk text:
 ```sh
 node tools/level-coverage.mjs --template research/level<n>-audit-coverage.json research/level<n>-batch-*.pages.json
 # Alpha fills reviewer and attestation only; do not alter the generated scope/hash.
-node tools/level-coverage.mjs --contracts research/level<n>-proof-contracts.json --judge-ledger research/level<n>-judge.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/level<n>-audit-coverage.json --verify-current-context research/level<n>-batch-*.pages.json
+node tools/level-coverage.mjs --contracts research/level<n>-proof-contracts.json --judge-ledger research/level<n>-judge.jsonl --judge-adjudications research/level<n>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/level<n>-audit-coverage.json --verify-current-context research/level<n>-batch-*.pages.json
 ```

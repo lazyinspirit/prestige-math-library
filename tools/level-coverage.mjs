@@ -4,6 +4,7 @@
 // node tools/level-coverage.mjs \
 //   --contracts research/level<n>-proof-contracts.json \
 //   --judge-ledger research/level<n>-judge.jsonl \
+//   --judge-adjudications research/level<n>-judge-adjudications.jsonl \
 //   --audit-receipt research/level<n>-audit-coverage.json \
 //   [--verify-current-context] research/level<n>-batch-*.pages.json
 //
@@ -24,12 +25,13 @@ const asJson = argv.includes('--json');
 const verifyCurrent = argv.includes('--verify-current-context');
 const contractsPath = option('--contracts');
 const judgePath = option('--judge-ledger');
+const judgeAdjudicationsPath = option('--judge-adjudications');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
 const templatePath = option('--template');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--audit-receipt', '--spine-receipt', '--template'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--audit-receipt', '--spine-receipt', '--template'].includes(argv[index - 1]);
 });
 if (!batchFiles.length || (!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
 
@@ -258,6 +260,36 @@ if (judgePath && existsSync(resolvePath(judgePath))) {
   error('judge-ledger-read', `${judgePath}: file does not exist`);
 }
 
+// Alpha's verdict distinguishes a genuine fatal defect from a strict but
+// nonfatal citation/gap finding.  It is keyed to the exact prompt context, so
+// a decision about pre-repair text can never clear a changed item.
+const judgeOutcomes = new Map();
+const judgeOutcomeKey = (id, model, context) => `${id}\u0000${model}\u0000${context}`;
+if (judgeAdjudicationsPath) {
+  if (!existsSync(resolvePath(judgeAdjudicationsPath))) {
+    error('judge-adjudications-read', `${judgeAdjudicationsPath}: file does not exist`);
+  } else {
+    for (const [index, line] of readFileSync(resolvePath(judgeAdjudicationsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
+      let record;
+      try { record = JSON.parse(line); } catch {
+        error('judge-adjudication-json', `${judgeAdjudicationsPath}:${index + 1}: invalid JSON`);
+        continue;
+      }
+      const validOutcome = ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'].includes(record.outcome);
+      const validFatalType = ['logic', 'dependency_citation', 'other'].includes(record.defect_type);
+      if (
+        typeof record.id !== 'string' || !JUDGES.includes(record.model) ||
+        typeof record.context_sha256 !== 'string' || !record.context_sha256 || !validOutcome ||
+        (record.outcome === 'confirmed_fatal' && !validFatalType)
+      ) {
+        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome}; confirmed_fatal also needs defect_type`);
+        continue;
+      }
+      judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);
+    }
+  }
+}
+
 function currentContextHash(id) {
   const loader = '/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs';
   const result = spawnSync(process.execPath, ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], {
@@ -286,20 +318,32 @@ for (const id of judgePath ? scope : []) {
   eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
   const [hash, byModel] = eligible[0];
   const models = Object.fromEntries(JUDGES.map((model) => [model, byModel.get(model).keep]));
-  // A paired run is only coverage, not clearance.  A false verdict must remain
-  // a hard stop until the item is repaired and both independent lanes accept
-  // the *same current* context.  Otherwise a ledger could record that a fatal
-  // defect was found yet still let the level close merely because both models
-  // happened to run.
+  // A paired run is coverage, not unchecked clearance.  Each current rejection
+  // must either be independently classified by Alpha as nonfatal/false-positive
+  // or be repaired and rejudged.  Confirmed fatal and unadjudicated rejections
+  // remain hard stops; this preserves the fatal-error gate while honoring the
+  // workflow's explicit <30-second nonfatal-gap policy.
   if (!JUDGES.every((model) => models[model] === true)) {
-    const refuters = JUDGES.filter((model) => models[model] === false).join(', ');
-    error('judge-verdict-refuted', `${id}: current complete judge pair contains a refutation from ${refuters}; repair and obtain a fresh paired keep=true verdict`, id);
+    for (const model of JUDGES.filter((candidate) => models[candidate] === false)) {
+      if (!judgeAdjudicationsPath) {
+        error('judge-adjudication-missing', `${id}: current ${model} rejection needs --judge-adjudications and an exact Alpha outcome`, id);
+        continue;
+      }
+      const outcome = judgeOutcomes.get(judgeOutcomeKey(id, model, hash));
+      if (!outcome) {
+        error('judge-adjudication-missing', `${id}: current ${model} rejection has no exact Alpha outcome for context ${hash}`, id);
+      } else if (outcome.outcome === 'confirmed_fatal') {
+        error('judge-verdict-confirmed-fatal', `${id}: Alpha confirmed a current ${model} rejection as fatal (${outcome.defect_type}); repair and rejudge`, id);
+      } else {
+        warn('judge-verdict-adjudicated-nonfatal', `${id}: Alpha classified current ${model} rejection as ${outcome.outcome}`, id);
+      }
+    }
   }
   judgeCoverage.push({ id, context_sha256: hash, models });
 }
 
 const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_pairs: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
-const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, errors, warnings };
+const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
 if (asJson) console.log(JSON.stringify(result, null, 2));
 else {
   if (templatePath) console.log(`level-coverage: wrote audit receipt template ${templatePath}`);
@@ -310,6 +354,6 @@ else {
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
   process.exit(2);
 }
