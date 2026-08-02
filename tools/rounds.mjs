@@ -38,7 +38,7 @@
 // --md emits the table as markdown for committing. REGENERATE IT, never hand-edit
 // the committed copy: the spec moves under it every time a track is spliced.
 
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -141,6 +141,80 @@ function pageFile(p) {
     if (existsSync(f)) return f;
   }
   return null;
+}
+
+// ------------------------------------------------- audit batch manifests
+//
+// --audit-batches (owner, 2026-08-02, AUDIT-WORKFLOW.md): emit the published-
+// page audit's batch manifests. A WAVE is a dependency level of the same level
+// function above; a BATCH is one category inside that wave, holding every
+// published A/B pair whose A page sits at that level. Manifests use the same
+// array-of-pages shape as the build's batch files, so content-policy,
+// audit-manifest, and level-coverage read them unchanged.
+//
+// Item lists come from the PAGE FILE, not the spec — the spec's `items` arrays
+// are not maintained for pages built before it existed (the --pairs bug above).
+// Each item entry records its CURRENT authored deps as the batch baseline, so
+// level-coverage's plan-drift reconciliation surfaces exactly what audit
+// repairs changed.
+//
+//   node tools/rounds.mjs --audit-batches [--wave K] [--outdir research/audit]
+
+if (has('--audit-batches')) {
+  const outdir = flag('--outdir', 'research/audit');
+  const onlyWave = flag('--wave', null);
+  const fmOf = (path) => readFileSync(path, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '';
+  const fmList = (fm, key) => {
+    const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
+    if (start < 0) return [];
+    const open = fm.indexOf('[', start);
+    let depth = 0;
+    for (let i = open; i < fm.length; i += 1) {
+      if (fm[i] === '[') depth += 1;
+      else if (fm[i] === ']' && --depth === 0) {
+        return fm.slice(open + 1, i).split(',').map((v) => v.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+      }
+    }
+    return [];
+  };
+  const itemEntries = (ids) => ids.map((id) => {
+    const f = join(repo, 'items', `${id}.md`);
+    if (!existsSync(f)) return { id, deps: [] };
+    return { id, deps: fmList(fmOf(f), 'deps') };
+  });
+  const pageEntry = (p, kind, file) => {
+    const fm = fmOf(file);
+    const ids = [...fmList(fm, 'items'), ...fmList(fm, 'examples')];
+    return { id: p.id, kind, order: p.order, category: p.category ?? file.split('/').at(-2), items: itemEntries(ids) };
+  };
+
+  const batches = new Map(); // "wave<k>-<category>" -> pages[]
+  for (const a of spec.pages.filter((p) => p.kind === 'A')) {
+    const aFile = pageFile(a);
+    if (!aFile || pageState(a) !== 'published') continue;
+    const wave = lvl.get(a.id);
+    if (onlyWave !== null && Number(onlyWave) !== wave) continue;
+    const category = a.category ?? aFile.split('/').at(-2);
+    const key = `wave${wave}-${category}`;
+    if (!batches.has(key)) batches.set(key, []);
+    batches.get(key).push(pageEntry(a, 'A', aFile));
+    const b = byId.get(a.companion ?? `${a.id}-examples`);
+    const bFile = b ? pageFile(b) : null;
+    if (b && bFile) batches.get(key).push(pageEntry(b, 'B', bFile));
+  }
+  if (!batches.size) { console.error('audit-batches: no published pages matched'); process.exit(2); }
+  const outRoot = outdir.startsWith('/') ? outdir : join(process.cwd(), outdir);
+  mkdirSync(outRoot, { recursive: true });
+  let itemTotal = 0;
+  for (const [key, pages] of [...batches].sort()) {
+    const path = join(outRoot, `${key}.pages.json`);
+    writeFileSync(path, `${JSON.stringify(pages, null, 2)}\n`);
+    const count = pages.reduce((sum, page) => sum + page.items.length, 0);
+    itemTotal += count;
+    console.log(`${path}  ${pages.length} page(s), ${count} item(s)`);
+  }
+  console.log(`audit-batches: ${batches.size} batch manifest(s), ${itemTotal} item(s) total`);
+  process.exit(0);
 }
 
 if (has('--pairs')) {

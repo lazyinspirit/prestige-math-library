@@ -1,10 +1,12 @@
-# The published-page audit, step A0 to A10 — PROPOSAL (decisions resolved)
+# The published-page audit, step A0 to A10
 
-**Status: PROPOSAL with all open decisions resolved by the owner
-(2026-08-02, one at a time, recorded in §11).** Not yet normative. On
-approval to execute, the same-commit doc rule applies: the tool changes it
-names land together with updates to `CLAUDE.md`, `LEVELS.md`,
-`ARCHITECTURE.md`, and this file becoming normative.
+**Status: NORMATIVE for the published-page audit workflow (owner approved
+execution 2026-08-02; decisions resolved one at a time, recorded in §11).**
+Maintained under the same-commit doc rule beside `CLAUDE.md`, `LEVELS.md`,
+and `ARCHITECTURE.md`: every tool or brief named here changes in the same
+commit as this description. `LEVELS.md` remains the per-level BUILD workflow;
+this file is the retro-audit of already-published pages. Tool behaviour below
+is verified against the code as of 2026-08-02.
 
 This is the retro-audit counterpart of `LEVELS.md`: the per-level **build**
 workflow minus scaffolding and authoring (steps 1–5 of the build have no
@@ -372,21 +374,22 @@ commit.
 `consumers.mjs`. The orchestrator runs the authoritative pass after every
 stage; no stage advances on an agent's report.
 
-**Modified (backward-compatible; build defaults untouched):**
+**Modified (backward-compatible; build defaults untouched, all implemented
+2026-08-02):**
 
 | tool | change |
 |---|---|
-| `tools/judge.mts` | add an `OPUS_MODEL = "claude-opus-5"` lane: spawn the local `claude` CLI (verified present, v2.1.220) headless — `claude -p --model claude-opus-5` with an ephemeral config home, an empty temporary read-only work directory, and all tools disabled — the exact `runFreshTerra` pattern (`judge.mts:231–241`) with the Codex binary swapped for Claude. Lineup selected by `JUDGE_LINEUP=deepseek+opus` (default remains `deepseek+terra`); the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
-| `tools/judge-sweep.mjs` | model constants derived from the same lineup; a third 16-slot pool directory for the Opus lane (per-lane caps unchanged: 16 + 16, 32 combined) |
-| `tools/level-coverage.mjs` | `JUDGES` (line 42) derived from the lineup instead of hard-coded; accepts audit batch manifests as scope |
-| `tools/rounds.mjs` | `--audit-batches` mode: emit `research/audit/wave<k>-<category>.pages.json` from the existing level function + on-disk published state |
-| `tools/content-policy.mjs` | `--audit` mode scoped by audit manifests: requires both provenance components on every scoped item, a `sources.references` URL for every sourced label, and a ledger row for every tag; it does **not** apply the future-batch prohibition retroactively (a legacy load-bearing `ai-generated` item is a `genrisk` finding to disposition, not an instant gate failure) |
+| `tools/judge.mts` | `OPUS_MODEL = "claude-opus-5"` lane: `runFreshOpus` spawns the local `claude` CLI (verified v2.1.220) headless — `-p --model claude-opus-5 --effort high --no-session-persistence` (`--bare` measured to skip OAuth login and deliberately absent), an empty temporary working directory as cwd (repo project settings/hooks out of scope), and every core tool explicitly `--disallowed-tools` — the `runFreshTerra` pattern with the Codex binary swapped for Claude. Lineup selected by env `JUDGE_LINEUP` (`deepseek+terra` default, `deepseek+opus` for this workflow); preflight covers the Opus lane; the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
+| `tools/judge-sweep.mjs` | model lanes derived from the same `JUDGE_LINEUP`; the Opus lane has its own 16-slot cross-process pool directory (per-lane caps unchanged: 16 + 16, 32 combined); the child judge inherits the env var so sweep and judges cannot disagree about the lineup |
+| `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; new `--audit` flag downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition (everything else stays hard); audit batch manifests are accepted as scope unchanged |
+| `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` from the existing level function plus on-disk published state, item lists from the page files (spec lists are stale for old pages), each item carrying its current authored `deps` as the reconciliation baseline |
+| `tools/content-policy.mjs` | `--audit --ledger <provenance.jsonl>…` mode: requires both provenance components and a matching evidence-ledger row (`audit-ledger-missing-row`, `audit-ledger-mismatch`, `audit-ledger-evidence[-mismatch]`, `audit-ledger-rationale`) for every scoped item; mechanizes D2 (`established-knowledge` needs `alpha_concurred: true` and is the only URL waiver, surfaced as the `established-knowledge-unsourced` warning) and D5 (`legacy-authorship-retained` error); downgrades to warnings what cannot bind history — `ai-generated-statement-dependency` (routed to genrisk), `generated-kind`/`generated-role`, and `external-record-missing` on legacy deferred items |
 
-**New:**
+**New (implemented 2026-08-02):**
 
 | tool | does |
 |---|---|
-| `tools/genrisk.mjs` | seeds = published `ai-generated` statements; computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering); requires an Alpha disposition per load-bearing seed; `--receipt` verifies completeness. Standing report, regenerated per wave |
+| `tools/genrisk.mjs` | seeds = published `ai-generated` statements plus legacy untagged `authorship: ai-generated` items (D5); computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering). Report mode regenerates `research/audit/genrisk.json` preserving dispositions by seed id; `--receipt` requires one concrete Alpha disposition (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/`owner-queue`, with reviewer + notes) per load-bearing seed, verifies retag/restate/unfold/narrow claims against disk, and fails on stale cones. Baseline measured 2026-08-02: 23 seeds, all zero-cone |
 
 **Coverage gate per wave (the A7→A8 receipt, mirroring the build):**
 
@@ -394,12 +397,22 @@ stage; no stage advances on an agent's report.
 node tools/merge-proof-contracts.mjs --level audit-wave<k> research/audit/wave<k>-proof-contracts.json research/audit/wave<k>-*.proof-contracts.json
 node tools/proof-contract.mjs research/audit/wave<k>-proof-contracts.json --strict
 node tools/risk-report.mjs research/audit/wave<k>-proof-contracts.json --require-reviewed
-node tools/content-policy.mjs --audit research/audit/wave<k>-*.pages.json
+node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.provenance.jsonl [...] research/audit/wave<k>-*.pages.json
 node tools/audit-manifest.mjs research/audit/wave<k>-*.pages.json --json > research/audit/wave<k>-audit-manifest.json
 node tools/genrisk.mjs --receipt research/audit/genrisk.json
 node tools/impact-audit.mjs --touches research/audit/wave<k>-touches.json --from <baseline> --receipt research/audit/wave<k>-impact-audit.json
-JUDGE_LINEUP=deepseek+opus node tools/level-coverage.mjs --contracts ... --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
+JUDGE_LINEUP=deepseek+opus node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
 ```
+
+The judge sweep itself runs under the same lineup:
+
+```sh
+JUDGE_LINEUP=deepseek+opus node tools/judge-sweep.mjs --ledger research/audit/wave<k>-judge.jsonl --cost research/audit/wave<k>-judge-cost.jsonl --pages <every A page in the wave>
+```
+
+**The prompt-side half:** `briefs/audit-beta.md` (A1/A2/A4) and
+`briefs/audit-alpha.md` (A6/A8), both opening with the no-shell-permission
+rule and carrying the triage rule verbatim, like every build brief.
 
 ## 9. Repair protocol for published items (verification-stamp honesty)
 

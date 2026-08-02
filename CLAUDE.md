@@ -22,6 +22,12 @@ how a dependency level is built (actors, artifacts, the ten gates, the
 self-contained-scope rule, the twice-touched escalation). Read it before
 starting or resuming a level.
 
+**Published-page audit, step A0 to A10: `AUDIT-WORKFLOW.md`** — the canonical
+retro-audit of already-published pages (provenance retro-tagging, citation-
+precision audit, generated-statement blast radius, the wave/batch model, the
+`deepseek+opus` judge lineup). Read it before starting or resuming an audit
+wave.
+
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
 roles, the modified reasoning/disproof engines, the RAG distiller, the
 seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to
@@ -220,13 +226,35 @@ banner; the public sees only `published`.
   subagent never writes content or applies a fix.
 
 - **Keep the normative docs current (owner, 2026-07-27).** `CLAUDE.md`,
-  `WORKFLOW.md`, `LEVELS.md` and `ARCHITECTURE.md` are normative and are
+  `WORKFLOW.md`, `LEVELS.md`, `ARCHITECTURE.md` and `AUDIT-WORKFLOW.md` are
+  normative and are
   updated **in the same commit as the change they describe** — a new or
   retired tool, a new gate error code, a change to the agent hierarchy or a
   brief, a new owner rule, a change to the frontmatter contract, or a
   measured fact about a mechanism. Verify against the code, never from
   memory: when a doc and the code disagree, the code is the truth and the
   doc is the bug.
+
+- **Published-page audit workflow (owner, 2026-08-02).** `AUDIT-WORKFLOW.md`
+  is normative for the retro-audit of published pages. Inside audit scope it
+  supersedes three standing rules by explicit owner decision: (1) legacy
+  provenance IS retro-tagged, by evidence-based determination with a durable
+  per-item ledger row — inconclusive evidence defaults to `ai-generated`,
+  never toward a sourced label, and the sole URL waiver is the Alpha-concurred
+  `established-knowledge` evidence class; (2) every audit role (Audit-Beta,
+  Alpha, readers, refuters) is **Opus 5 (`claude-opus-5`) at high reasoning
+  effort** through the Claude runtime, and the paired judges are DeepSeek V4
+  Pro plus a fresh headless Opus 5 lane selected by env
+  `JUDGE_LINEUP=deepseek+opus` (the build's `deepseek+terra` default is
+  untouched); (3) the published-item repair delegation extends to
+  citation-precision repairs, provenance retags, and debatable restatements
+  with Alpha as final adjudicator — deletions, id changes, and reading-order
+  changes remain owner-only. All build safeguards carry over: touch
+  snapshots, impact closure, no self-certification, stale-verdict deletion,
+  targeted rejudge, and the twice-touched escalation. The repair stamp is
+  `verification.verified` with `scope: published-audit` and
+  `delegated_by: owner`. Full workflow, decisions D1–D5/R1–R2, and gates:
+  `AUDIT-WORKFLOW.md`.
 
 - Item ids are IMMUTABLE on `main`; renames go through `aliases` (SCHEMA §2).
 - A published page listing a draft item is a hard error, never a silent skip.

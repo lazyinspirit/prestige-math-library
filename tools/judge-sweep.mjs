@@ -32,7 +32,20 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
 
 const DEEPSEEK = "deepseek-v4-pro";
 const TERRA = "gpt-5.6-terra";
-const supportedModels = [DEEPSEEK, TERRA];
+const OPUS = "claude-opus-5";
+// JUDGE_LINEUP mirrors tools/judge.mts: the per-level build defaults to
+// deepseek+terra; the published-page audit workflow (AUDIT-WORKFLOW.md) sets
+// deepseek+opus. The child judge inherits the same env var, so the sweep and
+// its judges can never disagree about the active lineup.
+const LINEUPS = Object.freeze({
+  "deepseek+terra": [DEEPSEEK, TERRA],
+  "deepseek+opus": [DEEPSEEK, OPUS],
+});
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const supportedModels = LINEUPS[lineupName];
+if (!supportedModels) {
+  throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
+}
 const models = modelsArg
   ? [...new Set(modelsArg.split(",").map((model) => model.trim()).filter(Boolean))]
   : supportedModels;
@@ -97,11 +110,14 @@ const currentContextHash = (id) => {
 const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
 // Owner policy, 2026-08-01: independently cap each judge lane at 16 calls.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
+// Every lane has its own model-named slot directory, so the Opus lane's pool
+// is disjoint from Terra's and a lineup switch cannot double-book a cap.
 const MODEL_CONCURRENCY = Object.freeze({
   [DEEPSEEK]: 16,
   [TERRA]: 16,
+  [OPUS]: 16,
 });
-const MAX_CONCURRENT_CALLS = Object.values(MODEL_CONCURRENCY).reduce((sum, n) => sum + n, 0);
+const MAX_CONCURRENT_CALLS = supportedModels.reduce((sum, model) => sum + MODEL_CONCURRENCY[model], 0);
 const RETRY_EXIT = 4;
 const LENGTH_RETRY_EXIT = 5;
 // These semaphores are shared across *all* sweep invocations. An in-process
@@ -187,7 +203,7 @@ const pendingFor = (model) => ids
   })
   .slice(0, limit);
 const pending = Object.fromEntries(models.map((model) => [model, pendingFor(model)]));
-console.log(`[judge-sweep] DeepSeek pending ${pending[DEEPSEEK]?.length ?? 0}/${ids.length}; Terra pending ${pending[TERRA]?.length ?? 0}/${ids.length}; independent cross-process caps are DeepSeek=${MODEL_CONCURRENCY[DEEPSEEK]}, Terra=${MODEL_CONCURRENCY[TERRA]} (at most ${MAX_CONCURRENT_CALLS} calls combined).`);
+console.log(`[judge-sweep] lineup ${lineupName}: ${models.map((model) => `${model} pending ${pending[model]?.length ?? 0}/${ids.length} (cap ${MODEL_CONCURRENCY[model]})`).join("; ")} — at most ${MAX_CONCURRENT_CALLS} calls combined.`);
 
 const runAttempt = async (task) => {
   const { id, model } = task;

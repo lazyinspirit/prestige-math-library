@@ -39,7 +39,23 @@ const errors = [];
 const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
-const JUDGES = ['deepseek-v4-pro', 'gpt-5.6-terra'];
+// JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
+// default is deepseek+terra; the published-page audit (AUDIT-WORKFLOW.md)
+// verifies deepseek+opus verdict pairs on the same current frozen context.
+const JUDGE_LINEUPS = Object.freeze({
+  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
+  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
+});
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
+const JUDGES = JUDGE_LINEUPS[lineupName];
+if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}`); process.exit(2); }
+// --audit: published-page audit scope (AUDIT-WORKFLOW.md). A legacy published
+// item whose retro-tag exposes an ai-generated statement in the dependency
+// backbone is a genrisk finding to disposition, not an instant gate failure —
+// the future-batch prohibition cannot be applied retroactively without either
+// blocking every wave on history or inviting dishonest retagging. Everything
+// else (provenance coverage, contracts, receipts, judge pairs) stays hard.
+const auditMode = argv.includes('--audit');
 
 function split(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -137,10 +153,12 @@ for (const id of scope) {
     for (const raw of item.deps) {
       const target = items.get(resolve(raw) ?? raw);
       if (target?.provenance.statement === 'ai-generated') {
-        error(
+        const report = auditMode ? warn : error;
+        report(
           'ai-generated-statement-dependency',
           item.file + ': ' + item.id + ' depends on ' + target.id
-            + ', whose provenance.statement is ai-generated',
+            + ', whose provenance.statement is ai-generated'
+            + (auditMode ? ' (legacy audit scope: requires a genrisk.mjs disposition for the seed)' : ''),
           item.id,
         );
       }
@@ -312,7 +330,7 @@ for (const id of judgePath ? scope : []) {
   const eligible = [...contexts.entries()].filter(([hash, byModel]) =>
     (!verifyCurrent || hash === current) && JUDGES.every((model) => byModel.has(model)));
   if (!eligible.length) {
-    error('judge-coverage-missing', `${id}: no complete DeepSeek/Terra verdict pair${verifyCurrent ? ' for the current frozen context' : ''}`, id);
+    error('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context' : ''}`, id);
     continue;
   }
   eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);

@@ -23,8 +23,32 @@ const asJson = argv.includes('--json');
 // Step 5.  Keeping these modes explicit prevents expected missing draft files
 // from being misreported as a failed pre-authoring gate.
 const manifestOnly = argv.includes('--manifest-only');
-const files = argv.filter((arg) => arg !== '--json' && arg !== '--manifest-only');
-if (!files.length) usage();
+// --audit (owner, 2026-08-02, AUDIT-WORKFLOW.md): published-page audit scope.
+// The scope is retro-tagged legacy content, so the future-batch containment
+// rules that cannot be applied retroactively (generated roles, the
+// ai-generated dependency prohibition, structured external records) downgrade
+// to visible warnings routed to genrisk/owner dispositions, while provenance
+// coverage and source accountability stay hard. Every scoped item must have a
+// row in the supplied --ledger provenance evidence ledger(s) matching its
+// on-disk tags, and the single URL waiver is the owner's D2 decision:
+// evidence `established-knowledge` with Alpha's recorded concurrence.
+const auditMode = argv.includes('--audit');
+const ledgerPaths = [];
+for (let index = 0; index < argv.length; index += 1) {
+  if (argv[index] === '--ledger' && argv[index + 1]) ledgerPaths.push(argv[index + 1]);
+}
+const files = argv.filter((arg, index) =>
+  arg !== '--json' && arg !== '--manifest-only' && arg !== '--audit' &&
+  arg !== '--ledger' && argv[index - 1] !== '--ledger');
+if (!files.length || (manifestOnly && auditMode) || (auditMode && !ledgerPaths.length)) usage();
+
+const AUDIT_EVIDENCE = new Map([
+  ['exact-source', 'literature-derived'],
+  ['semantic-source', 'ai-altered'],
+  ['established-knowledge', 'ai-altered'],
+  ['trivial', 'ai-generated'],
+  ['none', 'ai-generated'],
+]);
 
 const STATEMENT_PROVENANCE = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
 const PROOF_PROVENANCE = new Set([...STATEMENT_PROVENANCE, 'not-supplied', 'not-applicable']);
@@ -129,6 +153,26 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
 
+// The audit provenance evidence ledger: one row per retro-tagged item,
+// {id, statement, proof, evidence, urls, rationale, alpha_concurred?, at}.
+// A later row for the same id supersedes an earlier one (a deeper search or an
+// Alpha retag), so the map keeps the last row in file order.
+const auditLedger = new Map();
+if (auditMode) for (const path of ledgerPaths) {
+  let lines;
+  try { lines = readFileSync(resolvePath(path), 'utf8').split(/\r?\n/).filter(Boolean); }
+  catch (cause) { error('audit-ledger-read', `${path}: ${cause.message}`); continue; }
+  for (const [index, line] of lines.entries()) {
+    try {
+      const row = JSON.parse(line);
+      if (typeof row.id !== 'string' || !row.id) throw new Error('row has no id');
+      auditLedger.set(row.id, { ...row, source: `${path}:${index + 1}` });
+    } catch (cause) {
+      error('audit-ledger-json', `${path}:${index + 1}: ${cause.message}`);
+    }
+  }
+}
+
 // The Step-0 form also detects a newly minted id that would shadow an existing
 // item or another page's plan entry.  It deliberately allows a page's own
 // already-spliced entry, so the same manifest can be rechecked immediately
@@ -150,7 +194,10 @@ const plannedItems = new Map();
 for (const file of files) {
   const batch = readBatch(file);
   const aPages = batch.filter((page) => page?.kind === 'A');
-  if (aPages.length > BATCH_A_PAIR_CAP) {
+  // The two-pair Beta capacity binds scaffolding/authoring batches. An audit
+  // batch is a whole category-level of already-published pairs; the capacity
+  // rule is applied to the Betas assigned inside it, not to the manifest.
+  if (!auditMode && aPages.length > BATCH_A_PAIR_CAP) {
     error('batch-a-pair-cap', `${file}: contains ${aPages.length} A/B pairs; a Beta may scaffold and author at most ${BATCH_A_PAIR_CAP}`);
   }
   for (const page of batch) {
@@ -224,7 +271,43 @@ if (!manifestOnly) for (const id of scope) {
   // of the item came from. Require a reader-visible reference for Alpha and
   // the judges to compare against rather than accepting an untraceable label.
   if ([statement, proof].some((value) => ['literature-derived', 'ai-altered'].includes(value)) && !referenceUrls(item.fm).length) {
-    error('source-backed-provenance-uncited', `${item.file}: source-backed statement or proof provenance requires a sources.references URL`, item.id);
+    // The single owner-decided waiver (D2, AUDIT-WORKFLOW.md §6): a statement
+    // the auditing models recognize as established standard knowledge may be
+    // ai-altered WITHOUT a URL, but only with the ledger's evidence class
+    // `established-knowledge` and Alpha's recorded concurrence. Everything
+    // else keeps the hard reader-visible source requirement.
+    const row = auditMode ? auditLedger.get(item.id) : undefined;
+    if (row?.evidence === 'established-knowledge' && row?.alpha_concurred === true) {
+      warn('established-knowledge-unsourced', `${item.file}: ai-altered without URL under the established-knowledge waiver (Alpha concurred; ${row.source})`, item.id);
+    } else {
+      error('source-backed-provenance-uncited', `${item.file}: source-backed statement or proof provenance requires a sources.references URL`, item.id);
+    }
+  }
+
+  if (auditMode) {
+    const row = auditLedger.get(item.id);
+    if (!row) error('audit-ledger-missing-row', `${item.file}: no provenance evidence ledger row for ${item.id}`, item.id);
+    else {
+      if (row.statement !== statement || row.proof !== proof) {
+        error('audit-ledger-mismatch', `${item.file}: ledger row (${row.source}) declares statement=${row.statement}, proof=${row.proof} but the item carries statement=${statement}, proof=${proof}`, item.id);
+      }
+      if (!AUDIT_EVIDENCE.has(row.evidence)) {
+        error('audit-ledger-evidence', `${item.file}: ledger evidence must be one of ${[...AUDIT_EVIDENCE.keys()].join(', ')}`, item.id);
+      } else if (AUDIT_EVIDENCE.get(row.evidence) !== statement) {
+        error('audit-ledger-evidence-mismatch', `${item.file}: evidence ${row.evidence} implies provenance.statement ${AUDIT_EVIDENCE.get(row.evidence)}, not ${statement}`, item.id);
+      }
+      if (row.evidence === 'established-knowledge' && row.alpha_concurred !== true) {
+        error('audit-ledger-alpha-concurrence', `${item.file}: established-knowledge requires Alpha's recorded concurrence (alpha_concurred: true); without it the statement falls back to ai-generated`, item.id);
+      }
+      if (typeof row.rationale !== 'string' || !row.rationale.trim()) {
+        error('audit-ledger-rationale', `${item.file}: ledger row needs a concrete rationale`, item.id);
+      }
+    }
+    // Owner decision D5: the legacy one-axis field is deleted in the same edit
+    // that writes the audited provenance block.
+    if (scalar(item.fm, 'authorship')) {
+      error('legacy-authorship-retained', `${item.file}: remove the superseded authorship field in the same edit that writes audited provenance`, item.id);
+    }
   }
 
   // A deps edge is a load-bearing use of the target's Statement/Construction.
@@ -235,10 +318,18 @@ if (!manifestOnly) for (const id of scope) {
     const targetId = resolve(raw);
     const target = targetId && items.get(targetId);
     if (target?.provenance.statement === 'ai-generated') {
-      error(
+      // In audit scope this is a discovered legacy fact, not a fresh authoring
+      // choice: the seed and its cone belong to genrisk.mjs, whose receipt
+      // requires an Alpha disposition (retag/restate/unfold/narrow/
+      // verified-generated) before the wave closes.
+      const report = auditMode ? warn : error;
+      report(
         'ai-generated-statement-dependency',
-        item.file + ': ' + item.id + ' may not depend on ' + target.id
-          + '; its provenance.statement is ai-generated. Use a literature-derived or ai-altered statement, prove the needed step inline, rescope, or use the documented external fallback.',
+        item.file + ': ' + item.id + (auditMode ? ' depends on ' : ' may not depend on ') + target.id
+          + '; its provenance.statement is ai-generated. '
+          + (auditMode
+            ? 'Legacy audit scope: the seed requires a genrisk.mjs disposition.'
+            : 'Use a literature-derived or ai-altered statement, prove the needed step inline, rescope, or use the documented external fallback.'),
         item.id,
       );
     }
@@ -251,10 +342,19 @@ if (!manifestOnly) for (const id of scope) {
   if (statement === 'ai-generated') {
     const expectedRole = GENERATED_ROLE.get(item.kind);
     if (!expectedRole) {
-      error('generated-kind', `${item.file}: an ai-generated ${item.kind ?? 'item'} is forbidden; use source-backed material or an allowed non-load-bearing corollary/example/counterexample`, item.id);
+      // A legacy retro-tagged theorem/lemma/definition can honestly BE
+      // ai-generated; the future kind restriction cannot rewrite history. The
+      // warning keeps it visible and genrisk owns its load-bearing surface.
+      const report = auditMode ? warn : error;
+      report('generated-kind', `${item.file}: an ai-generated ${item.kind ?? 'item'} is ${auditMode ? 'a legacy truth-risk finding: counterexample-search it and disposition its genrisk cone' : 'forbidden; use source-backed material or an allowed non-load-bearing corollary/example/counterexample'}`, item.id);
     } else {
       const role = nested(item.fm, 'generation', 'role');
-      if (role !== expectedRole) error('generated-role', `${item.file}: ai-generated ${item.kind} requires generation.role: ${expectedRole}`, item.id);
+      if (role !== expectedRole) {
+        // Legacy items predate the generation block; in audit scope its absence
+        // is recorded, not fatal.
+        const report = auditMode ? warn : error;
+        report('generated-role', `${item.file}: ai-generated ${item.kind} ${auditMode ? 'has no recorded' : 'requires'} generation.role: ${expectedRole}`, item.id);
+      }
 
       // An ai-generated lemma cannot be a legal dependency target, so a
       // decomposition belongs inline unless an eligible source-backed statement
@@ -270,7 +370,10 @@ if (!manifestOnly) for (const id of scope) {
     const values = Object.fromEntries(['source_url', 'exact_statement', 'local_proof_attempt', 'necessity']
       .map((key) => [key, nested(item.fm, 'external_dependency', key)]));
     for (const [key, value] of Object.entries(values)) {
-      if (!value) error('external-record-missing', `${item.file}: external_dependency.${key} is required for an in-flight external fallback`, item.id);
+      // Legacy deferred-catalogue items predate the structured record; in audit
+      // scope its absence is visible but the sources_checked refresh, not this
+      // record, is their gate.
+      if (!value) (auditMode ? warn : error)('external-record-missing', `${item.file}: external_dependency.${key} is ${auditMode ? 'absent on this legacy proved_here: false item' : 'required for an in-flight external fallback'}`, item.id);
     }
     if (values.source_url && !/^https?:\/\//.test(values.source_url)) {
       error('external-source-url', `${item.file}: external_dependency.source_url must be an http(s) URL`, item.id);
@@ -292,5 +395,6 @@ process.exit(errors.length ? 1 : 0);
 
 function usage() {
   console.error('usage: node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]');
+  console.error('       node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.provenance.jsonl [--ledger ...] research/audit/wave<k>-*.pages.json [--json]');
   process.exit(2);
 }

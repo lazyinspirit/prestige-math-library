@@ -373,6 +373,50 @@ silently into the scaffold. It requires `spine-audit.mjs`'s independent,
 hash-bound reading receipt for proof-bearing items among the 100 largest
 transitive dependency cones.
 
+### 3.12 The published-page audit closures (owner, 2026-08-02)
+
+`AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.
+
+**`genrisk.mjs`** — the generated-statement blast-radius ledger. Seeds are
+published items with `provenance.statement: ai-generated`, plus legacy
+untagged `authorship: ai-generated` items (owner decision D5). Cones are the
+transitive reverse-`deps` closure plus direct citation consumers —
+impact-audit's consumer computation run corpus-wide, because a dependence
+propagates and a mention does not — ranked by cone size like `spine-audit`.
+Report mode regenerates `research/audit/genrisk.json` preserving dispositions
+by seed id; `--receipt` requires one concrete Alpha disposition per
+load-bearing seed (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/
+`owner-queue`), verifies applied dispositions against disk, and fails on stale
+cones. Baseline 2026-08-02: 23 seeds, all zero-cone — the containment rule
+held historically.
+
+**`rounds.mjs --audit-batches`** — emits the audit batch manifests
+(`research/audit/wave<k>-<category>.pages.json`): waves are the existing level
+function over published state, batches are one category per wave, item lists
+come from the page files (spec lists are stale for old pages), and each item
+records its current authored `deps` as the reconciliation baseline. Measured
+2026-08-02: 50 batch manifests, 2,435 items.
+
+**`content-policy.mjs --audit --ledger …`** — the retro-tag accountability
+gate. Every scoped item needs both provenance components and a matching
+evidence-ledger row; evidence classes map mechanically to labels
+(`exact-source`→literature-derived, `semantic-source`→ai-altered,
+`established-knowledge`→ai-altered with mandatory `alpha_concurred: true` —
+the sole URL waiver (D2), `trivial`/`none`→ai-generated). It enforces D5
+(`legacy-authorship-retained`) and downgrades to warnings only what cannot
+bind history: the ai-generated dependency prohibition (routed to genrisk),
+generated kind/role restrictions, and structured external records on legacy
+deferred items.
+
+**`level-coverage.mjs --audit`** — same hard gate as the build (provenance,
+contracts, receipts, current paired verdicts), with exactly one difference: a
+legacy `ai-generated` dep target is a warning routed to the genrisk
+disposition instead of an instant error.
+
+**`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
+and `level-coverage.mjs`): `deepseek+terra` (default, the build) or
+`deepseek+opus` (the audit). See §5 for the Opus lane.
+
 ### Helpers
 `reflow.mts` (join soft-wrapped steps; purely syntactic, never changes
 mathematics) · `adopt-repair.mjs` · `consumers.mjs --changed` (who cites what I
@@ -486,7 +530,25 @@ null so its distinct failure mode remains measurable.
 
 **Current routing (owner, 2026-07-31): session-item judging runs DeepSeek V4
 Pro directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
-Codex subscription at `xhigh`, in parallel.** Both receive the exact same
+Codex subscription at `xhigh`, in parallel.**
+
+**Lineup parameter (owner, 2026-08-02).** `JUDGE_LINEUP` selects the paired
+lineup without forking the tools: `deepseek+terra` (default, the build) or
+`deepseek+opus` (the published-page audit, `AUDIT-WORKFLOW.md`). The Opus lane
+is `runFreshOpus` in `judge.mts`: a fresh headless Claude Code process —
+`claude -p --model claude-opus-5 --effort high --no-session-persistence`, an
+empty temporary working directory (which also keeps the repo's project
+settings and hooks out of scope), every core tool `--disallowed-tools` — the
+`runFreshTerra` isolation pattern with the Codex binary swapped for the local
+`claude` CLI. `--bare` is deliberately absent: it was measured (2026-08-02)
+to skip OAuth credential loading and the lane reports "Not logged in". The frozen prompt, hash
+attestation, verdict contract, attempt telemetry, and retry semantics are
+identical across lineups, and `judge-sweep.mjs` gives the lane its own
+16-slot cross-process pool. The corpus was authored largely by Claude/GPT
+sessions, so DeepSeek remains the cross-family screen; the Opus lane is an
+independent same-family comparison lane, exactly as Terra was labeled
+relative to Sol. The injection-test requirement below applies to the Opus
+lane like any other judge change. Both receive the exact same
 hash-attested frozen item, A/B-pair, dependency, and conventions prompt; Terra
 runs read-only from an empty temporary work directory. Every
 GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-token
@@ -592,6 +654,8 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `alpha.md` | Alpha-n, steps 4, 6, and 8 | dispatches read-only skeptical proof-refuters; adjudicates their and judges' findings; propagates, audits independent-reader fixes, and audits cross-batch and cross-level references |
 | `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
 | `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
+| `audit-beta.md` | Audit-Beta, audit steps A1/A2/A4 (`AUDIT-WORKFLOW.md`) | provenance determination table, evidence ledger row contract, citation-precision duties, full proof-contract capture (D1), repair classes and A3 approval boundary |
+| `audit-alpha.md` | audit Alpha, audit steps A6/A8 | sole-adjudicator role, D2 concurrences, refuter dispatch, cross-edge audit, genrisk dispositions, exact-hash judge adjudication |
 
 **Beta proof-design backstop (owner, 2026-07-31).** The scaffold and authoring
 briefs require a proof-obligation map, a boundary-case pass, step-level
@@ -790,6 +854,7 @@ the same commit as the change they describe**:
 | `CLAUDE.md` | session entry point, hard rules, publish path |
 | `WORKFLOW.md` | per-page runbook and the hard rules in full |
 | `LEVELS.md` | the per-level build, step 0 → 10 |
+| `AUDIT-WORKFLOW.md` | the published-page audit, step A0 → A10 |
 | `ARCHITECTURE.md` | this file — every mechanism, how it works, why |
 
 **Triggers:** a new or retired tool; a new gate error code; a change to the agent

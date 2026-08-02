@@ -2,6 +2,9 @@
 
 The owner builds this library **one A-page dependency level at a time**. This
 file is the single description of that process — *what happens in what order*.
+The retro-audit of **already-published** pages is a separate workflow with its
+own steps A0–A10, judge lineup, and briefs: `AUDIT-WORKFLOW.md`. This file
+stays the build.
 **`ARCHITECTURE.md` is its companion**: what each mechanism IS, how it works,
 and which failure it was built to prevent. `SCHEMA.md` and `CLAUDE.md` win
 where they differ; `WORKFLOW.md` is the older per-page runbook and remains true
