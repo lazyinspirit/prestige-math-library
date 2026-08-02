@@ -38,8 +38,11 @@ mechanical: `rounds.mjs --audit-batches` drops tagged items at scope
 generation, so every downstream gate and the judge sweep inherit it, and a
 pair whose items are all tagged drops out entirely. `genrisk.mjs` still reads
 the whole corpus — blast-radius tracking of a tagged `ai-generated` seed is
-not an audit of that seed. Measured 2026-08-02: 41 batch manifests, 2,007
-items in scope, 428 already-tagged appearances excluded.
+not an audit of that seed. Measured 2026-08-02 (site-parity levels): 40 batch
+manifests across waves 0–14, 2,179 items in scope, 428 already-tagged
+appearances excluded; the in-scope pair levels agree with the app's own
+`pageGraph` output on all 66 pairs, and the 16 published pairs absent from
+scope are exactly the fully-tagged frontier pairs (R3).
 2. **Citation-precision and accuracy audit.** Every proof step and every
    dependency citation in the published corpus is read skeptically — the same
    duties as build step 6a — including cross-page and cross-batch edges, with
@@ -119,26 +122,37 @@ namespaced batch notes; Alpha at 60% into its Alpha report.
 The owner works in concurrent batches: **one batch = one category × one
 dependency level**, all batches of a wave running in parallel.
 
-- **Wave k** = every published A/B pair whose A page sits at level k of the
-  existing `rounds.mjs` level function (`level(p) = 1 + max over requires`,
-  computed over the spec with published state read from page files, exactly as
-  `--pairs` does). Pages sharing a level are provably mutually independent, so
-  intra-wave batches cannot depend on one another; every dependency edge from
-  wave k lands in a wave < k.
+- **Wave k** = every published A/B pair whose A page shows **dependency level
+  k on the live `/library` index** (owner, 2026-08-02: the audit order must
+  agree with the site). That level is the app's `pageGraph` computation
+  (`web/lib/library-categories.ts`), ported verbatim into
+  `rounds.mjs --audit-batches`: page P depends on page Q when an item of P
+  transitively `deps`-reaches an item whose home page is Q (home = first
+  published page listing the item; an item listed on P is always local to P);
+  edges are kept within P's own category and transitively reduced; the level
+  is the longest path from a category root, **roots at 0** — so the first
+  wave is wave 0. It is NOT the plan-spec `requires` function that orders the
+  build. The pre-plan pages (the ℕ/ℝ constructions, `foundations-of-the-real-
+  numbers`, `formal-laurent-series-field`) are ordinary pages here and land
+  at their site level; the `not-proved-here` catalogue pages are excluded
+  from scope by owner instruction (they still take part in the home map).
 - **Batch** = the pairs of one category inside that wave, e.g.
-  `wave4-abstract-algebra` = the level-4 abstract-algebra pairs. A batch wider
+  `wave1-abstract-algebra` = the level-1 abstract-algebra pairs. A batch wider
   than two pairs is split across multiple Audit-Betas (capacity rule), but the
   batch remains the ledger and manifest unit.
-- **Waves run bottom-up.** This is what makes citation-precision auditing and
-  blast-radius tracking sound: when wave k is audited, every dependency target
-  it cites already carries an audited provenance tag and an audited Statement,
-  so (a) a citation can be checked against a verified target, and (b) the
-  reverse-`deps` closure of any `ai-generated` seed discovered below is already
-  known before its consumers are read.
+- **Waves run bottom-up, and the guarantee is category-local.** Levels are
+  computed per category, so within a category every dependency target of a
+  wave-k page was audited in a wave < k: a citation into your own category is
+  checked against a verified target, and the reverse-`deps` closure of any
+  `ai-generated` seed below is known before its consumers are read. A
+  **cross-category** target may sit in the same or a later wave; those edges
+  are exactly the cross-batch edges Alpha audits at A6, and their provenance
+  tags arrive when the target's own wave runs.
 - Cross-page and cross-batch edges are first-class: Beta audits edges internal
-  to its batch; **Alpha audits every edge leaving the batch** (cross-batch
-  within the wave — necessarily into other categories — and backward into
-  earlier waves), the direct analogue of build step 6c.
+  to its batch; **Alpha audits every edge leaving the batch** (backward into
+  earlier waves of the same category, and into other categories at any wave —
+  the levels are category-local, so a cross-category target can share the
+  wave or sit above it), the direct analogue of build step 6c.
 
 `tools/rounds.mjs` already computes everything needed; a thin
 `--audit-batches` mode (§8) emits the per-wave, per-category batch manifests
@@ -258,7 +272,7 @@ queue with its cone and a proposed replacement route.
 No renderer change (owner decision D4: **ledger-only for now**): the
 presentation is frozen, and the provenance pill already renders component
 provenance for items that carry it. Whether consumers of a generated statement
-get a visible fourth accent is revisited after wave 1's `genrisk` report shows
+get a visible fourth accent is revisited after the first wave's `genrisk` report shows
 how large real cones are; commissioning that tier is a separate owner decision
 then.
 
@@ -394,7 +408,7 @@ stage; no stage advances on an agent's report.
 | `tools/judge.mts` | `OPUS_MODEL = "claude-opus-5"` lane: `runFreshOpus` spawns the local `claude` CLI (verified v2.1.220) headless — `-p --model claude-opus-5 --effort high --no-session-persistence` (`--bare` measured to skip OAuth login and deliberately absent), an empty temporary working directory as cwd (repo project settings/hooks out of scope), and every core tool explicitly `--disallowed-tools` — the `runFreshTerra` pattern with the Codex binary swapped for Claude. Lineup selected by env `JUDGE_LINEUP` (`deepseek+terra` default, `deepseek+opus` for this workflow); preflight covers the Opus lane; the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
 | `tools/judge-sweep.mjs` | model lanes derived from the same `JUDGE_LINEUP`; the Opus lane has its own 16-slot cross-process pool directory (per-lane caps unchanged: 16 + 16, 32 combined); the child judge inherits the env var so sweep and judges cannot disagree about the lineup |
 | `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; new `--audit` flag downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition (everything else stays hard); audit batch manifests are accepted as scope unchanged |
-| `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` from the existing level function plus on-disk published state, item lists from the page files (spec lists are stale for old pages), each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
+| `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` entirely from disk. The wave is the **site's dependency level** — the app's `pageGraph` (item `deps` projected to pages via the home convention, in-category edges, transitive reduction, longest path from a category root, roots at 0) ported verbatim, so the audit order and the `/library` index can never disagree (owner, 2026-08-02); the plan-spec `requires` function keeps ordering the build only. Pages read from `library/*/*.md` with `status: published`; pair = A page + its published `-examples` companion; `not-proved-here` excluded from scope; item lists from the page files, each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
 | `tools/content-policy.mjs` | `--audit --ledger <provenance.jsonl>…` mode: requires both provenance components and a matching evidence-ledger row (`audit-ledger-missing-row`, `audit-ledger-mismatch`, `audit-ledger-evidence[-mismatch]`, `audit-ledger-rationale`) for every scoped item; mechanizes D2 (`established-knowledge` needs `alpha_concurred: true` and is the only URL waiver, surfaced as the `established-knowledge-unsourced` warning) and D5 (`legacy-authorship-retained` error); downgrades to warnings what cannot bind history — `ai-generated-statement-dependency` (routed to genrisk), `generated-kind`/`generated-role`, and `external-record-missing` on legacy deferred items |
 
 **New (implemented 2026-08-02):**
@@ -476,7 +490,7 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
   its rundown and queue; approved repairs and retags commit and ship
   immediately, wave by wave.
 - **D4 — reader-facing cone marker: LEDGER-ONLY FOR NOW.** No renderer
-  change; revisit an additive fourth tier after wave 1's `genrisk` report
+  change; revisit an additive fourth tier after the first wave's `genrisk` report
   shows real cone sizes.
 - **D5 — legacy `authorship`: REMOVE ONCE SUPERSEDED.** Deleted in the same
   edit that writes the audited `provenance`; git history and the batch ledger

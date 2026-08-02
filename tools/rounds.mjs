@@ -38,7 +38,7 @@
 // --md emits the table as markdown for committing. REGENERATE IT, never hand-edit
 // the committed copy: the spec moves under it every time a track is spliced.
 
-import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -146,10 +146,22 @@ function pageFile(p) {
 // ------------------------------------------------- audit batch manifests
 //
 // --audit-batches (owner, 2026-08-02, AUDIT-WORKFLOW.md): emit the published-
-// page audit's batch manifests. A WAVE is a dependency level of the same level
-// function above; a BATCH is one category inside that wave, holding every
-// published A/B pair whose A page sits at that level. Manifests use the same
-// array-of-pages shape as the build's batch files, so content-policy,
+// page audit's batch manifests. A WAVE is the READER-FACING dependency level:
+// the number printed in the /library index's "Dependency level" column (owner,
+// 2026-08-02 — the audit order must agree with the live site). That level is
+// NOT the plan-spec `requires` function above; it is the app's pageGraph
+// (web/lib/library-categories.ts): page P depends on page Q when an item of P
+// transitively `deps`-reaches an item whose HOME page is Q (home = first
+// published page listing the item, except an item listed on P is always local
+// to P), edges are kept within P's own category and transitively reduced, and
+// the level is the longest path from a category root, roots at 0. Waves are
+// therefore numbered from 0 and are category-local: wave 0 holds every
+// category's root pairs. Cross-category dependency targets may share a wave —
+// the within-category bottom-up guarantee holds, the cross-category one does
+// not, and A6's cross-edge audit covers those edges. A BATCH is one category
+// inside a wave. The `not-proved-here` catalogue pages are excluded from scope
+// by owner instruction (they still take part in the home map). Manifests use
+// the same array-of-pages shape as the build's batch files, so content-policy,
 // audit-manifest, and level-coverage read them unchanged.
 //
 // Item lists come from the PAGE FILE, not the spec — the spec's `items` arrays
@@ -204,26 +216,107 @@ if (has('--audit-batches')) {
     }
     return [{ id, deps: fmList(fm, 'deps') }];
   });
-  const pageEntry = (p, kind, file) => {
-    const fm = fmOf(file);
-    const ids = [...fmList(fm, 'items'), ...fmList(fm, 'examples')];
-    return { id: p.id, kind, order: p.order, category: p.category ?? file.split('/').at(-2), items: itemEntries(ids) };
-  };
 
+  // ---- published pages from disk, in the renderer's walk order ------------
+  const libRoot = join(repo, 'library');
+  const disk = [];
+  for (const cat of readdirSync(libRoot).sort()) {
+    const dir = join(libRoot, cat);
+    if (!statSync(dir).isDirectory()) continue;
+    for (const f of readdirSync(dir).sort()) {
+      if (!f.endsWith('.md') || f === '_category.md') continue;
+      const fm = fmOf(join(dir, f));
+      if (!/^status:[ \t]*['"]?published['"]?[ \t]*$/m.test(fm)) continue;
+      const id = f.slice(0, -3);
+      disk.push({ id, category: cat, key: `${cat}/${id}`,
+                  items: fmList(fm, 'items'), examples: fmList(fm, 'examples') });
+    }
+  }
+
+  // ---- item `deps` for the whole corpus (BFS chains through drafts too) ---
+  const itemDeps = new Map();
+  for (const f of readdirSync(join(repo, 'items'))) {
+    if (!f.endsWith('.md')) continue;
+    itemDeps.set(f.slice(0, -3), fmList(fmOf(join(repo, 'items', f)), 'deps'));
+  }
+
+  // ---- site-parity page level (web/lib/library-categories.ts pageGraph) ---
+  const home = new Map();
+  for (const p of disk) {
+    for (const id of [...p.items, ...p.examples]) if (!home.has(id)) home.set(id, p.key);
+  }
+  const depth = new Map(); // page key -> category-local dependency level
+  for (const cat of [...new Set(disk.map((p) => p.category))]) {
+    const group = disk.filter((p) => p.category === cat);
+    const inGroup = new Set(group.map((p) => p.key));
+    const raw = new Set();
+    for (const p of group) {
+      const own = new Set([...p.items, ...p.examples]);
+      const seenPages = new Set();
+      const visited = new Set();
+      const queue = [...p.items, ...p.examples];
+      while (queue.length) {
+        const id = queue.shift();
+        if (visited.has(id)) continue;
+        visited.add(id);
+        const deps = itemDeps.get(id);
+        if (!deps) continue;
+        const h = own.has(id) ? p.key : home.get(id);
+        if (h && h !== p.key && !seenPages.has(h)) {
+          seenPages.add(h);
+          if (inGroup.has(h)) raw.add(`${h}>${p.key}`);
+        }
+        queue.push(...deps);
+      }
+    }
+    const adj = new Map([...inGroup].map((k) => [k, new Set()]));
+    for (const e of raw) { const [a, b] = e.split('>'); adj.get(a)?.add(b); }
+    const reachesWithout = (start, target) => {
+      const seen = new Set();
+      const stack = [...(adj.get(start) ?? [])].filter((n) => n !== target);
+      while (stack.length) {
+        const x = stack.pop();
+        if (x === target) return true;
+        if (seen.has(x)) continue;
+        seen.add(x);
+        for (const n of adj.get(x) ?? []) stack.push(n);
+      }
+      return false;
+    };
+    const parents = new Map([...inGroup].map((k) => [k, []]));
+    for (const e of raw) {
+      const [a, b] = e.split('>');
+      if (!reachesWithout(a, b)) parents.get(b).push(a);
+    }
+    const active = new Set();
+    const depthOf = (k) => {
+      if (depth.has(k)) return depth.get(k);
+      if (active.has(k)) return 0;
+      active.add(k);
+      const ps = parents.get(k) ?? [];
+      const v = ps.length ? Math.max(...ps.map(depthOf)) + 1 : 0;
+      active.delete(k);
+      depth.set(k, v);
+      return v;
+    };
+    for (const k of inGroup) depthOf(k);
+  }
+
+  // ---- batches: one category per wave, pair = A page + published companion -
+  const EX = '-examples';
+  const byKeyDisk = new Map(disk.map((p) => [p.key, p]));
+  const pageEntry = (p, kind) => ({ id: p.id, kind, category: p.category, items: itemEntries([...p.items, ...p.examples]) });
   const batches = new Map(); // "wave<k>-<category>" -> pages[]
-  for (const a of spec.pages.filter((p) => p.kind === 'A')) {
-    const aFile = pageFile(a);
-    if (!aFile || pageState(a) !== 'published') continue;
-    const wave = lvl.get(a.id);
+  for (const a of disk) {
+    if (a.category === 'not-proved-here') continue;      // owner exclusion
+    if (a.id.endsWith(EX)) continue;                     // B pages ride with their A page
+    const wave = depth.get(a.key);
     if (onlyWave !== null && Number(onlyWave) !== wave) continue;
-    const category = a.category ?? aFile.split('/').at(-2);
-    const aEntry = pageEntry(a, 'A', aFile);
-    const b = byId.get(a.companion ?? `${a.id}-examples`);
-    const bFile = b ? pageFile(b) : null;
-    const bEntry = b && bFile ? pageEntry(b, 'B', bFile) : null;
-    const pages = [aEntry, bEntry].filter((page) => page && page.items.length);
+    const b = byKeyDisk.get(`${a.category}/${a.id}${EX}`) ?? null;
+    const pages = [pageEntry(a, 'A'), b ? pageEntry(b, 'B') : null]
+      .filter((page) => page && page.items.length);
     if (!pages.length) continue; // the whole pair is already tagged — out of scope
-    const key = `wave${wave}-${category}`;
+    const key = `wave${wave}-${a.category}`;
     if (!batches.has(key)) batches.set(key, []);
     batches.get(key).push(...pages);
   }

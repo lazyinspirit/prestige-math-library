@@ -391,17 +391,29 @@ cones. Baseline 2026-08-02: 23 seeds, all zero-cone — the containment rule
 held historically.
 
 **`rounds.mjs --audit-batches`** — emits the audit batch manifests
-(`research/audit/wave<k>-<category>.pages.json`): waves are the existing level
-function over published state, batches are one category per wave, item lists
-come from the page files (spec lists are stale for old pages), and each item
-records its current authored `deps` as the reconciliation baseline. Items
-already carrying both component-provenance tags are excluded at scope
-generation (owner standing rule 2026-08-02 — tagged content was audited and
-judged at authoring and is never re-audited), so every downstream gate and
-the judge sweep inherit the exclusion; a fully-tagged pair drops out of the
-wave plan. `genrisk.mjs` deliberately still reads the whole corpus. Measured
-2026-08-02: 41 batch manifests, 2,007 items in scope, 428 already-tagged
-appearances excluded.
+(`research/audit/wave<k>-<category>.pages.json`) entirely from disk: the wave
+is the **site's reader-facing dependency level** (owner, 2026-08-02 — the
+audit order must agree with the `/library` index), computed by a verbatim
+port of the app's `pageGraph` (`web/lib/library-categories.ts`): item `deps`
+projected onto pages via the home convention (home = first published page
+listing an item; an item listed on P is always local to P), in-category edges
+only, transitive reduction, longest path from a category root, roots at 0 —
+so waves start at wave 0 and the bottom-up guarantee is category-local
+(cross-category edges are A6's cross-batch audit). The plan-spec `requires`
+level function keeps ordering the build only. Batches are one category per
+wave; pairs are A page + published `-examples` companion; `not-proved-here`
+is excluded from scope (its pages still take part in the home map); item
+lists come from the page files (spec lists are stale for old pages), and
+each item records its current authored `deps` as the reconciliation
+baseline. Items already carrying both component-provenance tags are excluded
+at scope generation (owner standing rule 2026-08-02 — tagged content was
+audited and judged at authoring and is never re-audited), so every
+downstream gate and the judge sweep inherit the exclusion; a fully-tagged
+pair drops out of the wave plan. `genrisk.mjs` deliberately still reads the
+whole corpus. Measured 2026-08-02: 40 batch manifests across waves 0–14,
+2,179 items in scope, 428 already-tagged appearances excluded; all 66
+in-scope pair levels equal the app's own `pageGraph` output, and the 16
+absent published pairs are exactly the fully-tagged frontier pairs.
 
 **`content-policy.mjs --audit --ledger …`** — the retro-tag accountability
 gate. Every scoped item needs both provenance components and a matching

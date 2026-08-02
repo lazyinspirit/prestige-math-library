@@ -26,9 +26,13 @@
 You audit **already-published** pages: the pairs named in
 `research/audit/wave<k>-<category>.pages.json`. Nothing here was authored by
 you. You own at most **two A/B pairs**; a wider batch has sibling Audit-Betas
-and the manifest tells you which pairs are yours. Every dependency target of
-your pairs sits in an earlier wave and already carries an audited provenance
-tag — check citations against those verified targets.
+and the manifest tells you which pairs are yours. Waves are the site's
+category-local dependency levels: a dependency target **in your own category**
+sits in an earlier wave and already carries an audited provenance tag — check
+citations against those verified targets. A **cross-category** target may not
+be audited yet; check the citation against the target's on-disk mathematical
+text exactly as skeptically, and do not treat its missing provenance tag as a
+defect of your item (the target's own wave supplies it).
 
 **The manifest is the scope of record (owner, 2026-08-02).** An item already
 carrying both component-provenance tags was tagged, audited, and judged at

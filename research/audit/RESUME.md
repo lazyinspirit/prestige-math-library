@@ -10,19 +10,27 @@ bottom-up, batches = category × dependency level.
 - Workflow BUILT, tested, MERGED to `main` and pushed: commits `6e2cbb1`
   (tools/briefs/docs) and `e8c4cbe` (R3 scope exclusion). Branch
   `audit-published-pages` retained at 6e2cbb1; worktree removed.
-- **No wave has started. Next action is Step A0 for wave 1:**
-  `node tools/rounds.mjs --audit-batches --wave 1` (writes to
+- **Wave definition changed (owner, 2026-08-02): waves are the SITE's
+  dependency levels** — the app's `pageGraph` (category-local, item-`deps`
+  projected to pages, roots at 0) ported verbatim into
+  `rounds.mjs --audit-batches`; NOT the plan-spec `requires` function. First
+  wave is **wave 0** (every category's level-0 pairs, incl. the pre-plan
+  ℕ/ℝ construction pages; `not-proved-here` excluded). Verified 2026-08-02:
+  all 66 in-scope pair levels equal the app's own output; 40 manifests,
+  waves 0–14, 2,179 items in scope, 428 tagged appearances excluded.
+- **No wave has started. Next action is Step A0 for wave 0:**
+  `node tools/rounds.mjs --audit-batches --wave 0` (writes to
   `research/audit/`), take the `touchlog` baseline snapshot
-  (`node tools/touchlog.mjs snap research/audit/wave1-touches.json baseline`),
+  (`node tools/touchlog.mjs snap research/audit/wave0-touches.json baseline`),
   report batch/pair/seam counts, then dispatch Audit-Betas per
   `briefs/audit-beta.md` (A1 provenance + A2 citation audit; no repairs before
   A3 approval).
 - Opus 5 judge lane preflighted AND injection-tested (PASS 4 record in
   `tools/judge.mts` header): control keep=true, injected false step caught.
-- Baselines (2026-08-02): 41 batch manifests / 2,007 items in scope / 428
-  already-tagged appearances excluded; `genrisk` 23 seeds, all zero-cone
-  (test outputs were written to scratch only — regenerate real manifests
-  into `research/audit/` at A0).
+- Baselines (2026-08-02, site-parity levels): 40 batch manifests, waves 0–14
+  / 2,179 items in scope / 428 already-tagged appearances excluded; `genrisk`
+  23 seeds, all zero-cone (test outputs were written to scratch only —
+  regenerate real manifests into `research/audit/` at A0).
 
 ## Owner rules binding this run (beyond the standing repo rules)
 
