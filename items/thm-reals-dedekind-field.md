@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, lem-cut-add-well-defined, lem-cut-additive-inverse, lem-cut-order-total, lem-rat-cut-embeds, thm-rat-field, lem-cut-reciprocal]
+deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, lem-cut-add-well-defined, lem-cut-additive-inverse, lem-cut-order-total, lem-rat-cut-embeds, thm-rat-field, thm-rat-ordered-field, lem-cut-reciprocal]
 aliases: []
 landmark: true
 short: "ℝ field"
@@ -54,7 +54,7 @@ with cut addition and cut multiplication ([[def-cut-addition]],
 
 [L6] Inclusion totally orders $\mathbb{R}$, so exactly one of $A > 0^{*}$, $A = 0^{*}$, $A < 0^{*}$ holds ([[lem-cut-order-total]]).
 
-[L7] $\mathbb{Q}$ is a field: rational multiplication is commutative, associative, distributes over addition, every nonzero rational is invertible, and products of positives are positive ([[thm-rat-field]]).
+[L7] $\mathbb{Q}$ is a field: rational multiplication is commutative, associative, distributes over addition, and every nonzero rational is invertible ([[thm-rat-field]]); its order is total, $x \le y$ implies $x + z \le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$ ([[thm-rat-ordered-field]]).
 
 [L8] The embedding $q \mapsto q^{*}$ is an injective ring map with $(pq)^{*} = p^{*} \cdot q^{*}$ and $1^{*} \ne 0^{*}$ ([[lem-rat-cut-embeds]]).
 

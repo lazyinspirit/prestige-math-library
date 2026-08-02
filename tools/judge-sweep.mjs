@@ -90,8 +90,15 @@ const manifestIds = manifestsArg
         .flatMap((page) => page.items.map((item) => item.id))))]
   : [];
 const ids = manifestsArg ? manifestIds : requestedItems.size ? [...requestedItems] : pageIds;
+// The guard is a typo catcher, and plan-spec alone is the wrong authority for
+// it: the spec's `items` arrays are stale for pre-spec pages, so a legitimate
+// published item can be absent from them (measured 2026-08-02 — an audit
+// rejudge of 13 items died on lem-rat-cut-embeds and thm-reals-dedekind-field,
+// both published and on disk for months). Accept an id that is either planned
+// OR an authored item file; a typo satisfies neither.
 const plannedIds = new Set(plan.pages.flatMap((page) => page.items.map((item) => item.id)));
-if ([...requestedItems].some((id) => !plannedIds.has(id))) throw new Error("--items includes an unknown planned item id");
+const unknownItems = [...requestedItems].filter((id) => !plannedIds.has(id) && !existsSync(`items/${id}.md`));
+if (unknownItems.length) throw new Error(`--items includes unknown item id(s): ${unknownItems.join(", ")}`);
 if (!ids.length || new Set(ids).size !== ids.length) {
   throw new Error(`selected pages produced ${ids.length} non-unique items`);
 }

@@ -15,11 +15,12 @@ short: "$f(e)=e'$, $f(g^{-1})=f(g)^{-1}$, $f(g^{n})=f(g)^{n}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -54,7 +55,7 @@ monoid $(\mathbb{Z},\cdot,1)$, yet $u(1) = 0 \ne 1$.
 
 [L1] The group laws in $G$ and in $G'$ ([[def-group]], [[def-semigroup-and-monoid]]).
 
-[L2] Cancellation in $G'$: $ab = ac$ implies $b = c$ ([[lem-group-cancellation]]).
+[L2] Cancellation in $G'$: $ab = ac$ implies $b = c$, and $ba = ca$ implies $b = c$ ([[lem-group-cancellation]]).
 
 [L3] Uniqueness of inverses in the sharp form: if $x$ is invertible and $yx = e'$ or $xy = e'$, then $y = x^{-1}$ ([[lem-inverse-unique]]); and $(u^{-1})^{-1} = u$ ([[lem-group-inverse-laws]]).
 

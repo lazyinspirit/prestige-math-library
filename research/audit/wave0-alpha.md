@@ -612,3 +612,349 @@ bare-`[A#]` ℕ-arithmetic sweep on the ℤ/ℚ prelude):
    when it is sub-30-second.
 6. **`merge-proof-contracts.mjs` must not be re-run from the batch files** for
    wave 0 without re-applying Alpha's 177 `risk_review` records (§7).
+
+---
+---
+
+# Wave 0 — Audit-Alpha, step A8 (adjudication of the paired-judge rejections)
+
+Date: 2026-08-02. Alpha: Opus 5 (`claude-opus-5`) at high reasoning effort.
+Lineup change recorded by the orchestrator mid-stage by owner instruction: the
+Claude judge lane is **Sonnet 5**, not Opus (the headless Opus lane refused
+about 80% of calls under 16-way concurrency — a capacity refusal, not a
+verdict). Effective lineup `deepseek+sonnet`, injection-tested (`judge.mts`
+PASS 5). The parked Opus rows in `wave0-judge-opus-superseded.jsonl` are
+informational and were not adjudicated against.
+
+## A8.0 Coverage and the hash check
+
+276/276 items covered in both lanes, zero nulls. DeepSeek 249 keep / 27 reject;
+Sonnet 243 keep / 33 reject; **60 rejections over 48 distinct items, 12 of them
+rejected by both lanes.**
+
+Before adjudicating anything I verified the ledger mechanically: every one of
+the 60 rejections in `wave0-judge-rejections.json` matches the **current** row
+for its `id`+`model` in `wave0-judge.jsonl` (552 distinct id|model pairs from
+553 rows, last-wins), **60 hash matches, 0 mismatches or missing rows**. Every
+adjudication in `wave0-judge-adjudications.jsonl` therefore carries the
+`context_sha256` of the exact verdict it answers, taken from the ledger rather
+than transcribed.
+
+## A8.1 Outcomes
+
+| outcome | rows |
+|---|---|
+| `false_positive` | **16** |
+| `confirmed_nonfatal` | **38** |
+| `confirmed_fatal` (`dependency_citation` 3, `other` 3) | **6** over **5 distinct items** |
+| total | **60** |
+
+Method: five read-only Opus 5 evidence investigators, clustered by subject, each
+required to quote the item text and the cited target's text side by side and to
+answer a fixed six-field template — is the claim true; is it derivable from the
+cited target *plus the item's declared `deps`*; does any step's conclusion fail.
+**I verified every finding that would flip an outcome to `false_positive` or
+`confirmed_fatal` myself, from disk.** That mattered: the topology investigator's
+first summary claimed `[L3]` of `lem-metric-limits-unique` "restates
+nonnegativity" and that `def-metric-ball` "names both items", and my own reading
+found both claims wrong — `def-metric-space` deliberately omits nonnegativity
+from its axiom list, and the Remark names one item. Both rejections were graded
+nonfatal rather than dismissed as a result.
+
+### The dividing line I applied
+
+The 30-second rule governs **gaps between proof steps**; it does not license a
+**false assertion**, which is not a gap. Within citation defects I separated two
+shapes that the judges tend to report identically:
+
+- **under-reporting a correct source** — the fact names the right target and the
+  target's Statement contains the needed clause, so the reader closes it by
+  looking → `confirmed_nonfatal` (e.g. `lem-associates-characterisation`,
+  `thm-gcd-lcm-product`, `lem-group-homomorphism-basic-properties`);
+- **misattribution to a wrong source, or a source absent from `deps` entirely,
+  for a load-bearing claim** → `confirmed_fatal / dependency_citation` (e.g.
+  `thm-reals-dedekind-field`, `ex-integers-mod-n-additive-group`).
+
+And, following the step-6 charter, **a title asserting more than the proof
+gives is fatal-class**, because the judges cannot see titles — which is exactly
+why it lands on me.
+
+### Why 16 false positives
+
+Nine of the sixteen are the lane talking itself out of its own verdict inside
+the reason text and recording `reject` anyway — `thm-division-algorithm-in-z`
+("On reflection the proof is sound"), `def-sum-over-a-finite-index-set` ("keep
+true actually"), `thm-generalised-associativity` ("so this is licensed"),
+`def-group-power` ("no defect found"), `ex-sum-and-intersection-in-f-three` ("No
+fatal defect found; accepting"), plus two degenerate outputs whose "reason" is
+audit-harness meta-text (`thm-rat-field`, `cor-nat-multiplication-well-defined`).
+The rest are misreadings I checked personally: `lem-gcd-basic-values` (the judge
+read only the first display of `lem-divisor-bound`'s Statement and missed its
+second paragraph, which states the cited clause verbatim);
+`lem-symmetric-group-is-a-group` (the cited definition's Remarks say
+word-for-word what the judge said was absent); `lem-order-characterisation`
+(DeepSeek asserted two items are not page siblings — the page file lists both);
+`lem-rat-triangle` (the cited theorem's own words assert ℚ is a *field*);
+`lem-cut-order-total` (treats "the order is total" as weaker than a total
+order); `ex-integers-under-addition` (names `[L2]` as supplying the very move it
+calls unlicensed, and `[L2]` is tagged on the step).
+
+This is a useful measurement for A10: **27% of rejections in this lineup were
+not defects**, and the single largest sub-class is a lane recording `reject`
+while its own reason concludes `keep`.
+
+### Per-lane comparison (for A10 and the lineup decision)
+
+| lane | rejections | false positive | confirmed nonfatal | confirmed fatal | precision |
+|---|---|---|---|---|---|
+| `deepseek-v4-pro` | 27 | **2 (7%)** | 20 | **5** | high |
+| `claude-sonnet-5` | 33 | **14 (42%)** | 18 | **1** | low |
+
+The two lanes are not interchangeable in this lineup. DeepSeek found **five of
+the six fatal rows** and was wrong about a rejection only twice. Sonnet's
+rejections were false positives 42% of the time, and the dominant failure is
+structural rather than mathematical: **recording `reject` while its own reason
+text concludes `keep`** ("On reflection the proof is sound", "keep true
+actually", "no defect found on inspection"), plus two outputs whose "reason" is
+audit-harness meta-text. That pattern is a verdict-extraction problem, not a
+reasoning problem — Sonnet's *prose* is often right where its *flag* is wrong,
+and on the both-lane findings its analysis was frequently the sharper of the
+two (it named the exact missing right-cancellation clause, and it alone caught
+the gcd(0,0) circularity). Worth the owner's attention when the lineup is next
+revisited: the Sonnet lane may need a stricter verdict-parsing contract rather
+than replacement.
+
+Of the 48 distinct rejected items, **14 had every rejection dismissed as a false
+positive**, and **5 carried a confirmed fatal**.
+
+## A8.2 The six `confirmed_fatal` rows, and their repairs
+
+| item | lane(s) | type | defect | repair |
+|---|---|---|---|---|
+| `lem-rat-cut-embeds` `[L5]` | deepseek | `dependency_citation` | **Literally false.** The fact asserted the cut-product formula "for $A, B \ge 0^{*}$". At $A = 0^{*}$ no $a \in A$ is positive, so the second set is empty and the formula yields $\{q \le 0\}$ — which has greatest element $0$, is therefore **not a cut at all**, and is not $0^{*}$. `def-cut-multiplication` restricts it to $A,B > 0^{*}$ and its Remark explicitly disclaims the boundary. `[L5]` was also self-contradictory, its next clause giving $A\cdot B = 0^{*}$ when $A$ is $0^{*}$ | `\ge 0^{*}` → `> 0^{*}` |
+| `thm-reals-dedekind-field` `[L7]` | deepseek | `dependency_citation` | Attributed "products of positives are positive" to `thm-rat-field`, whose Statement has **no order content whatever**; `thm-rat-ordered-field` was absent from `deps` while steps 1.1, 1.3, 2.1 and 5.1 use ℚ's order substantially | `[L7]` split, field clauses → `thm-rat-field`, order clauses → `thm-rat-ordered-field`, which is added to `deps` |
+| `ex-integers-mod-n-additive-group` step 3.1 | deepseek | `dependency_citation` | "the elements of the natural number $n$ being exactly the naturals $s<n$" is **load-bearing** (surjectivity of $\varphi$, hence $\lvert\mathbb{Z}/n\rvert = n$) and licensed by nothing: `lem-nat-order-is-membership` appears nowhere in the item, `deps` included, and the cited `def-nat-order` *explicitly disclaims* the property | clause added to `[L2]` citing the lemma; lemma added to `deps` |
+| `ex-r-as-a-vector-space-over-q` title | **both** | `other` | The title named a proof method the item's own Statement says **cannot** be used: "Claim 3 … is proved directly rather than by restricting scalars, because restriction of scalars requires a subfield." `lem-restriction-of-scalars` concludes over the subfield $\mathbb{Q}_{\mathbb{R}}$, never over $\mathbb{Q}$ | retitled to attach restriction of scalars to the embedded copy and to say the ℚ-structure comes via the embedding |
+| `ex-pascals-triangle-to-row-six` title | deepseek | `other` | Title claimed "Pascal's rule checked at **every** entry"; boundary entries come from `[L1]`, and a left-boundary $\binom{n}{0}$ is not of the form $\binom{n+1}{k+1}$, so Pascal's rule **cannot** be applied to it at all | title → "every **interior** entry"; Example prose and step 4.1 corrected to match the coverage actually achieved |
+
+## A8.3 Repairs made to `confirmed_nonfatal` findings, and the policy behind them
+
+I repaired a nonfatal finding only under a stated rule, so the line is
+inspectable: **repair a nonfatal only when both adversarial lanes independently
+flagged it AND the fix is an exact-fidelity restatement introducing no new
+mathematics** — independent agreement is evidence of real reader confusion, and
+a fidelity edit carries no mathematical risk. Everything else is recorded, not
+chased.
+
+| item | why repaired |
+|---|---|
+| `def-nat-finite-sum-and-product` | Both lanes. Uniqueness of the truncated difference was derived from right-cancellation alone; left cancellation needs commutativity, and `lem-nat-add-commutative` was in neither the citation nor `deps`. Decisive: the **identical** claim in `def-nat-order`'s Remark was repaired earlier today to cite both lemmas, so leaving this was an internal inconsistency |
+| `lem-associates-characterisation` `[L2]` | Both lanes. `[L2]` reported only "total, antisymmetric and transitive" while steps 1.2/5.1 use addition-compatibility and positive-closure — both clauses of the cited Statement |
+| `ex-euclidean-algorithm-on-consecutive-fibonacci-numbers` `[L4]` | Both lanes. The discreteness clause is genuinely absent from `lem-nat-embeds-int`; `lem-nat-discrete` was already in `deps` and cited at `[L2]`, so the fix is a co-citation with the derivation written out |
+| `lem-group-homomorphism-basic-properties` `[L2]` | Both lanes. The restatement dropped the right-cancellation clause that step 2.1 actually uses; the cited target contains both |
+| `lem-metric-limits-unique` step 2.1 | Both lanes. Tag-only: `[A1]`, which cites `lem-metric-nonnegativity`, added to the step that uses $d(p,q)\ge 0$ |
+| `def-common-divisor-and-gcd` **and** `lem-gcd-scaling` | Orchestrator-escalated; see A8.4 |
+
+## A8.4 The gcd(0,0) circularity — the escalated finding
+
+Sonnet's rejection is **upheld**, and I verified it from disk rather than from
+the Beta's earlier judgement that it was a valid deduction:
+
+- `lem-gcd-scaling` step 1.2: "Case $c = 0$ … the left side is $\gcd(0,0) = 0$ … `[L3]`"
+- `lem-gcd-scaling` step 1.3: "Case $(a,b) = (0,0)$ … the left side is $\gcd(0,0) = 0$ … `[L3]`"
+- `lem-gcd-scaling` `[L3]`: "$\gcd(0,0) = 0$ **by convention** ([[def-common-divisor-and-gcd]])"
+
+So both boundary branches read the value off the convention, while
+`def-common-divisor-and-gcd` said the value "**is forced by** the scaling
+identity … proved below as `lem-gcd-scaling`", and `lem-gcd-scaling`'s own
+Remark repeated it. The justification is circular as written.
+
+**Graded `confirmed_nonfatal`, not fatal, and here is why:** nothing in the
+library is mathematically wrong. The convention is a stipulation that fixes a
+total function; `lem-gcd-scaling`'s Statement is true under it and its proof is
+valid, since invoking a definition is legitimate and the lemma never claims to
+*derive* the boundary value; no proof step exists in the Definition at all; and
+every downstream consumer uses the value, never the motivation. The defect is
+confined to motivating prose.
+
+**Repaired anyway, prose-only, in both places**, because the intended content is
+both true and non-circular and deserves to be stated that way. The clean pin,
+which I checked: at $c = 0$ with any $(a,b) \ne (0,0)$ the identity reads
+$\gcd(0,0) = \lvert 0\rvert\gcd(a,b) = 0$, and **its right-hand side never
+mentions $\gcd(0,0)$** — a genuine uniqueness-of-extension argument that uses
+only the *requirement* that the identity hold, never the lemma's proof of it.
+Both passages now say that, and `lem-gcd-scaling`'s Remark now states plainly
+that its steps 1.2/1.3 read the value off the convention rather than proving it.
+No Statement, `deps`, value or proof step changed in either item, so no impact
+cone is disturbed. `ex-gcd-with-zero` needed no change — it already says "once
+the scaling identity is **required** to hold at every triple".
+
+## A8.4b Independent certification of the A8 repairs
+
+Three independent read-only Opus 5 readers, none certifying content it authored:
+
+| reader | scope | verdict |
+|---|---|---|
+| 1 | the five `confirmed_fatal` repairs | **5 CERTIFY, 0 REFUTE**; 3 nonfatal notes, all pre-existing |
+| 2 | the seven nonfatal-but-repaired items | **7 CERTIFY, 0 REFUTE**; 4 nonfatal notes |
+| 3 | the `[A1]` widening (below) | pending at the time of writing; the item is held unstamped until it lands |
+
+Two things the readers caught that I had got wrong or left incomplete, both fixed:
+
+1. **A missing `deps` entry of my own making.** I added the
+   `lem-nat-add-commutative` citation to `def-nat-finite-sum-and-product`'s
+   truncated-difference paragraph but not, at first, to its `deps` list — exactly
+   the defect the repair was correcting. I caught it myself mid-review and added
+   it; reader 2 independently confirmed the timing and flagged that any context
+   frozen before that write is the defective one. No context was frozen in that
+   window, so nothing is affected.
+2. **`[A1]` of `lem-metric-limits-unique` was still too narrow.** My first fix
+   was tag-only: adding `A1` to step 2.1. Reader 2 observed that `[A1]`'s
+   nonnegativity clause is instantiated at the pair $(x_k, p)$, while step 2.1
+   needs $d(p,q) \ge 0$, so the fact text remained narrower than the use. Since
+   **both lanes** rejected this item, leaving that would likely have drawn the
+   same rejection again at the targeted rejudge, so I widened `[A1]` to
+   "$d(x,y) \ge 0$ for all $x, y \in X$, so in particular $d(x_k,p) \ge 0$ …",
+   which is what `lem-metric-nonnegativity` actually states. That second edit
+   went to a third, independent reader rather than to the reader who proposed
+   the wording.
+
+Recorded from reader 1, out of scope and already in the A10 queue as dedekind
+D9: `construction-of-r-via-dedekind-cuts.md` still lists
+`thm-reals-dedekind-field` before the `lem-rat-cut-embeds` it cites at `[L8]`.
+Reading-order changes are owner-only.
+
+## A8.5 Twice-touched escalations
+
+The coordinator asked me to watch the items already at the threshold. **None of
+`thm-vandermonde-identity`, `lem-cut-additive-inverse`, `def-metric-bounded-diameter`,
+`lem-sup-metric-is-a-metric` or `lem-real-line-is-a-metric-space` drew a single
+rejection from either lane** — positive evidence for the A6 repairs, and I had a
+reader confirm from disk that the three extended-real-line corrections are
+untouched and still accurate.
+
+Items now past the threshold because A8 repaired something A4 had already
+repaired (these go in the A10 owner report):
+
+| item | touches |
+|---|---|
+| `lem-rat-cut-embeds` | A4 (D2, `[L1]` re-attribution) → A6 certified → **A8 (`[L5]` false domain)** |
+| `thm-reals-dedekind-field` | A4 (D1, `[L6]`/`[L11]` split) → A6 certified → **A8 (`[L7]` split)** |
+| `ex-euclidean-algorithm-on-consecutive-fibonacci-numbers` | A6 (D2 provenance concurrence) → **A8 (`[L4]`)** |
+
+Already listed from A6 and unchanged: `thm-vandermonde-identity` (three touches
+on one fact), `lem-cut-reciprocal` (three touches on three facts), and the three
+topology decay items.
+
+## A8.5b A gate my own A6 pass had not run
+
+Running the full gate set at the end of A8 surfaced a hard `prosecheck` failure
+I had missed at A6, because my A6 closing sweep ran `rendercheck`, `fwdcheck`
+and `extcheck` but **not** `prosecheck`:
+
+```
+[position-contradiction] items/lem-sup-metric-is-a-metric.md:
+  "rem-sup-conventions" called LATER but its page is order 14 < 116
+```
+
+It was caused by my own A6 decay repair. `prosecheck` scans from a direction
+word to the end of its sentence and flags any wikilink in that window whose home
+page order contradicts the direction. My sentence's "later page" refers to the
+**extended real line** (page order 122 > 116, true), but `[[rem-sup-conventions]]`
+(order 14) sat in the same sentence and was swept in.
+
+The tool's standing instruction is "NEVER silence one by rewording a true
+sentence into a vaguer one — fix it or leave it", so I split the sentence rather
+than hedging it, which makes the referent *more* explicit, not less:
+
+> …working in the extended real line, which is introduced on a later page. **The
+> suprema taken here are real numbers**, and the extended real line is not used
+> for them ([[rem-sup-conventions]], [[rem-metric-axiom-conventions]]).
+
+The added clause is true of the item — step 1.1 establishes that $D(f,g)$ is
+nonempty and bounded above, so $\sup D(f,g)$ exists in $\mathbb{R}$ by the
+least-upper-bound property. `prosecheck` now reports "OK — no positional claim
+contradicts the spec". The item's A6 stamp was deleted and the edit sent to an
+independent reader.
+
+**Process note worth carrying forward:** an Alpha repair should be followed by
+the *same* gate set the Betas run, not a subset. `prosecheck` exists precisely
+to catch claims about other files, which is the class my A6 repairs were in.
+
+## A8.6 Gate state after the A8 repairs
+
+12 item files changed. Stale `verification.judge` and `audited`/`verified`
+blocks deleted on all 12; `verification.verified` is written only after the
+independent readings.
+
+| gate | result |
+|---|---|
+| `precheck.mts` on the 10 proof-bearing repairs | **10 checked, 0 failing** |
+| `reflow.mts` on all 12 | clean |
+| `proof-contract.mjs --strict` | **0 errors, 209/209** — four new citation contracts written with exact quotes (`thm-rat-ordered-field` on `[L7]`, `lem-nat-order-is-membership` on `[L2]`, `lem-nat-discrete` on `[L4]`, and `[A1]`'s new step-2.1 use) |
+| `risk-report.mjs --require-reviewed` | **0 errors, 209 routed** |
+| `genrisk.mjs --receipt` | **exit 0** |
+| `depcheck.mjs` | no cycles, all references resolve; the 3 added `deps` edges introduce none. 12 `published-unaudited`, the designed transient |
+| `rendercheck` / `citecheck` / `fwdcheck` / `extcheck` | all exit 0 |
+| `prosecheck.mjs` | **OK — no positional claim contradicts the spec** (after the A8.5b fix; it had been failing since A6) |
+| `impact-audit.mjs --receipt` | **exit 0**, regenerated: **276** changed interfaces (up from 270 — the six D2 held rows gained their provenance blocks at A6), **2,452** dispositions, reviewer updated to "steps A6 and A8" |
+| `genrisk.mjs --receipt` | exit 0 |
+
+**Note for the orchestrator:** the A7 sweep did **not** write `verification.judge`
+blocks to the items — every wave-0 item still carries its pre-audit
+`z-ai/glm-5.2` block, so the A7 verdicts live only in the ledger. That is a
+mismatch between the ledger and the reader-facing stamps worth resolving before
+publication, independently of this stage.
+
+## A8.7 Targeted rejudge list
+
+Thirteen items were materially changed at A8 and need both lanes to return a
+verdict on the new frozen context. Twelve are the A8 repairs; the thirteenth,
+`lem-sup-metric-is-a-metric`, is the A8.5b `prosecheck` fix to an A6 repair.
+
+```
+def-common-divisor-and-gcd
+def-nat-finite-sum-and-product
+ex-euclidean-algorithm-on-consecutive-fibonacci-numbers
+ex-integers-mod-n-additive-group
+ex-pascals-triangle-to-row-six
+ex-r-as-a-vector-space-over-q
+lem-associates-characterisation
+lem-gcd-scaling
+lem-group-homomorphism-basic-properties
+lem-metric-limits-unique
+lem-rat-cut-embeds
+lem-sup-metric-is-a-metric
+thm-reals-dedekind-field
+```
+
+`lem-gcd-scaling` is on the list although **no lane rejected it**: its Remark
+carried the same circular claim as `def-common-divisor-and-gcd`, and repairing
+one while leaving the other would have left the corpus contradicting itself.
+
+Every one of the thirteen now carries `verification.verified`
+(`model: claude-opus-5`, `scope: published-audit`, `delegated_by: owner`,
+`2026-08-02`) written only after an independent reading, and carries **no**
+`verification.judge` block — the A7 verdicts for these items are superseded and
+must not be reused.
+
+## A8.8 What remains open
+
+1. **The targeted rejudge above** — orchestrator-run, both lanes, new frozen
+   context.
+2. **A fresh touch snapshot.** The impact receipt was regenerated at the end of
+   A8 and passes, but it still spans `pre-A4 → current disk`. If the
+   orchestrator wants a receipt that distinguishes the A6 and A8 stages it needs
+   its own snapshots.
+3. **`verification.judge` is stale corpus-wide.** The A7 sweep wrote verdicts to
+   the ledger but not to the items, so all 276 wave-0 items still carry
+   pre-audit `z-ai/glm-5.2` judge blocks. Not mine to fix, but it should not
+   reach publication.
+4. **The A10 owner queue gained nothing new from A8** beyond the escalations in
+   A8.5 and the lane-precision finding in A8.1. The items recorded but not
+   repaired (the `[L2]`-under-reporting family in number theory, the
+   `thm-recursion` wikilink, `def-metric-ball`'s navigational clause, the two
+   Statement-level infinitude claims, `lem-nat-embeds-int`'s and
+   `thm-int-ordered-ring`'s thin Facts blocks) are all nonfatal and all named
+   above with their evidence, so a later fidelity sweep can pick them up
+   without re-deriving anything.

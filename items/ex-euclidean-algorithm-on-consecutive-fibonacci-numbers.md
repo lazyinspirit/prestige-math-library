@@ -15,11 +15,12 @@ short: "Euclid on Fibonacci pairs"
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -78,7 +79,7 @@ terms of the size of the inputs is available at this point in the reading order.
 
 [L3] For a set $X$, an $\alpha \in X$ and $f : X \to X$ there is exactly one $g : \mathbb{N} \to X$ with $g(0) = \alpha$ and $g(\sigma(k)) = f(g(k))$ ([[thm-recursion]]).
 
-[L4] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective, preserves order, and has image the nonnegative integers, so $0 < x$ in $\mathbb{Z}$ implies $1 \le x$ ([[lem-nat-embeds-int]]).
+[L4] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective, preserves order, and has image the nonnegative integers ([[lem-nat-embeds-int]]); hence $0 < x$ in $\mathbb{Z}$ implies $1 \le x$, since $x = \iota(k)$ with $k \ne 0$, so $\sigma(0) \le k$ by the discreteness of [L2] and order preservation gives $1 = \iota(1) \le \iota(k) = x$ ([[lem-nat-discrete]]).
 
 [L5] For $u \in \mathbb{Z}$ and $v > 0$ there is exactly one pair $(q,r)$ with $u = qv + r$ and $0 \le r < v$ ([[thm-division-algorithm-in-z]]).
 
@@ -114,21 +115,8 @@ terms of the size of the inputs is available at this point in the reading order.
 
 ## Remarks
 
-- **The last quotient is $2$, not $1$, and the reason is the repeated value
-  $F_1 = F_2 = 1$.** The chain of quotient-$1$ divisions
-  $F_{k+2} = 1 \cdot F_{k+1} + F_k$ is a valid division only while
-  $F_k < F_{k+1}$, which fails exactly at $k = 1$. The descent therefore ends at
-  the pair $(F_3,F_2) = (2,1)$ with the single division $2 = 2 \cdot 1 + 0$.
-  A statement of the form "quotient $1$ at every step" is false for that reason,
-  and the count would also be wrong at the first index if the sequence were
-  indexed from $1$.
+- **The last quotient is $2$, not $1$, and the reason is the repeated value $F_1 = F_2 = 1$.** The chain of quotient-$1$ divisions $F_{k+2} = 1 \cdot F_{k+1} + F_k$ is a valid division only while $F_k < F_{k+1}$, which fails exactly at $k = 1$. The descent therefore ends at the pair $(F_3,F_2) = (2,1)$ with the single division $2 = 2 \cdot 1 + 0$. A statement of the form "quotient $1$ at every step" is false for that reason, and the count would also be wrong at the first index if the sequence were indexed from $1$.
 
-- **Coprimality does not need the division count**, and the count does not need
-  coprimality; they are recorded together because both are read off the same
-  identity $F_{k+2} = F_{k+1} + F_k$, once through
-  [[lem-gcd-euclidean-step]] and once through
-  [[thm-division-algorithm-in-z]].
+- **Coprimality does not need the division count**, and the count does not need coprimality; they are recorded together because both are read off the same identity $F_{k+2} = F_{k+1} + F_k$, once through [[lem-gcd-euclidean-step]] and once through [[thm-division-algorithm-in-z]].
 
-- **No worst-case claim.** Lamé's theorem — that the Fibonacci pairs minimise
-  the size of the inputs for a given number of divisions — is a genuinely
-  different statement, and nothing above establishes or assumes it.
+- **No worst-case claim.** Lamé's theorem — that the Fibonacci pairs minimise the size of the inputs for a given number of divisions — is a genuinely different statement, and nothing above establishes or assumes it.

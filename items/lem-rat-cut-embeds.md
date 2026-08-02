@@ -56,7 +56,7 @@ rational $q$ with $A < q^{*} < B$.
 
 [L4] Cut addition is the rational sumset $A + B = \{\, a + b : a \in A,\ b \in B \,\}$, the additive inverse is $-A = \{\, p \in \mathbb{Q} : \exists\, r > 0,\ -p - r \notin A \,\}$, and $0^{*} = \{\, q \in \mathbb{Q} : q < 0 \,\}$ is the additive identity of the embedding ([[def-cut-addition]]).
 
-[L5] Cut multiplication: for $A, B \ge 0^{*}$, $A \cdot B = \{\, q \le 0 \,\} \cup \{\, ab : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}$; the sign rules $A \cdot B = 0^{*}$ when $A$ or $B$ is $0^{*}$, $A \cdot B = |A|\,|B|$ for equal signs and $A \cdot B = -(|A|\,|B|)$ for opposite signs; and $|A| = A$ for $A \ge 0^{*}$ else $|A| = -A$, with $1^{*} = \{\, r < 1 \,\}$ the multiplicative identity ([[def-cut-multiplication]]).
+[L5] Cut multiplication: for $A, B > 0^{*}$, $A \cdot B = \{\, q \le 0 \,\} \cup \{\, ab : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}$; the sign rules $A \cdot B = 0^{*}$ when $A$ or $B$ is $0^{*}$, $A \cdot B = |A|\,|B|$ for equal signs and $A \cdot B = -(|A|\,|B|)$ for opposite signs; and $|A| = A$ for $A \ge 0^{*}$ else $|A| = -A$, with $1^{*} = \{\, r < 1 \,\}$ the multiplicative identity ([[def-cut-multiplication]]).
 
 [L6] $\mathbb{Q}$ is an ordered field: rational addition and multiplication are commutative, associative, and distributive, the order is compatible ($a < b \Rightarrow a + c < b + c$; $0 < a$ and $0 < b \Rightarrow 0 < ab$; and multiplying $a < b$ by a positive preserves the order), and every pair $r < s$ has the strict midpoint $r < (r+s)/2 < s$ ([[thm-rat-ordered-field]]).
 

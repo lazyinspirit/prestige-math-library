@@ -15,11 +15,12 @@ short: "associates: $|a| = |b|$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -54,7 +55,7 @@ which is $\{0\}$ when $a = 0$ and has exactly two elements otherwise.
 
 [L1] $\mathbb{Z}$ is a commutative ring, with $-(-x) = x$, $(-x)y = -(xy)$, $x \cdot 1 = x$ and $x \cdot 0 = 0$ ([[thm-int-comm-ring]], [[def-int-operations]]).
 
-[L2] The order on $\mathbb{Z}$ is total, antisymmetric and transitive ([[thm-int-ordered-ring]], [[def-int-order]]).
+[L2] The order on $\mathbb{Z}$ is total, antisymmetric and transitive, is compatible with addition ($x \le y$ implies $x + z \le y + z$), and positives are closed under multiplication ($0 < x$ and $0 < y$ imply $0 < xy$) ([[thm-int-ordered-ring]], [[def-int-order]]).
 
 [L3] $d \mid a$ means $a = dq$ for some $q$; $0 \mid a$ only for $a = 0$ ([[def-divides-in-z]]).
 
@@ -96,13 +97,6 @@ which is $\{0\}$ when $a = 0$ and has exactly two elements otherwise.
 
 ## Remarks
 
-- **This is the "up to sign" of elementary number theory made precise.** Every
-  statement below that fixes a sign — $\gcd(a,b) \ge 0$,
-  $\operatorname{lcm}(a,b) \ge 0$, the nonnegative generator of a subgroup of
-  $(\mathbb{Z},+)$ — is choosing one representative from a class $\{a,-a\}$, and
-  claim 3 is what says the choice is between exactly two candidates.
+- **This is the "up to sign" of elementary number theory made precise.** Every statement below that fixes a sign — $\gcd(a,b) \ge 0$, $\operatorname{lcm}(a,b) \ge 0$, the nonnegative generator of a subgroup of $(\mathbb{Z},+)$ — is choosing one representative from a class $\{a,-a\}$, and claim 3 is what says the choice is between exactly two candidates.
 
-- **The equivalence of claims 1 and 2 is the general ring-theoretic statement**,
-  and it is the reason associates are defined by mutual divisibility rather than
-  by "differ by a sign": mutual divisibility is the formulation that survives
-  when the unit group is larger than $\{1,-1\}$.
+- **The equivalence of claims 1 and 2 is the general ring-theoretic statement**, and it is the reason associates are defined by mutual divisibility rather than by "differ by a sign": mutual divisibility is the formulation that survives when the unit group is larger than $\{1,-1\}$.

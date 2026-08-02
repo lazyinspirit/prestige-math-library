@@ -9,18 +9,20 @@ provenance:
   proof: ai-generated
 deps: [thm-recursion, thm-induction-principle, def-natural-numbers, def-nat-addition,
        def-nat-multiplication, lem-nat-add-identity, lem-nat-mult-identity,
-       lem-nat-order-is-membership, def-nat-order, lem-nat-add-cancellative, def-finite-sum]
+       lem-nat-order-is-membership, def-nat-order, lem-nat-add-commutative,
+       lem-nat-add-cancellative, def-finite-sum]
 justified_by: []
 forward_refs: [def-monoid-finite-product]
 aliases: []
 landmark: true
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -91,8 +93,8 @@ defined here and $\sum^{\mathbb{R}}$, $\prod^{\mathbb{R}}$ for those of
 **Truncated difference, fixed here for the whole page.** For $m, n \in \mathbb{N}$
 we write $n - m$ for the unique $j \in \mathbb{N}$ with $m + j = n$ when
 $m \le n$, and for $0$ when $n < m$. Existence in the first case is the
-definition of $\le$ ([[def-nat-order]]) and uniqueness is cancellation
-([[lem-nat-add-cancellative]]), so the notation names a single natural number.
+definition of $\le$ ([[def-nat-order]]) and uniqueness is commutativity with
+cancellation ([[lem-nat-add-commutative]], [[lem-nat-add-cancellative]]), so the notation names a single natural number.
 **Every use of $n-m$ on this page is this operation**; no negative number is ever
 formed, and where a statement is true only under $m \le n$ that hypothesis is
 written out.

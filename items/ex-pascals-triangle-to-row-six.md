@@ -1,7 +1,7 @@
 ---
 id: ex-pascals-triangle-to-row-six
 kind: example
-title: "Pascal's triangle computed to row $6$, with Pascal's rule checked at every entry"
+title: "Pascal's triangle computed to row $6$, with Pascal's rule checked at every interior entry"
 status: published
 origin: session
 provenance:
@@ -16,11 +16,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -64,8 +65,10 @@ $$\begin{array}{c} 1 \\ 1 \quad 1 \\ 1 \quad 2 \quad 1 \\ 1 \quad 3 \quad 3 \qua
 \end{tikzpicture}
 ```
 
-Every entry is produced twice below: once by [[thm-pascals-rule]] from the row
-above, and once by the closed formula of [[thm-binomial-closed-formula]]. The row
+Every interior entry is produced below by [[thm-pascals-rule]] from the row
+above, the boundary entries being the values $\binom{n}{0} = \binom{n}{n} = 1$;
+four interior entries are cross-checked against the closed formula of
+[[thm-binomial-closed-formula]]. The row
 sums and the alternating row sums are then checked against
 [[cor-binomial-theorem-consequences]], including the row where the alternating
 sum is **not** zero.
@@ -96,14 +99,10 @@ sum is **not** zero.
 
 3.3 The alternating row sums are $1$ for row $0$, and $1-1 = 0$, $1-2+1 = 0$, $1-3+3-1 = 0$, $1-4+6-4+1 = 0$, $1-5+10-10+5-1 = 0$, $1-6+15-20+15-6+1 = 0$ for rows $1$ to $6$. Row $0$ is the exception, and it is exactly the row where the hypothesis $n \ge 1$ of [L4] fails: the sum there has the single term $\binom{0}{0} = 1$. [step 2.1, L1, L4]
 
-4.1 Rows $0$ to $6$ are as displayed, each interior entry agreeing with both [L2] and [L3], the row sums with the powers of $2$, and the alternating sums with $0$ from row $1$ onwards and with $1$ at row $0$. [step 3.1, step 3.2, step 3.3] ∎
+4.1 Rows $0$ to $6$ are as displayed, each interior entry agreeing with [L2] and the four checked in step 3.1 agreeing with [L3], the row sums with the powers of $2$, and the alternating sums with $0$ from row $1$ onwards and with $1$ at row $0$. [step 3.1, step 3.2, step 3.3] ∎
 
 ## Remarks
 
-- **The exceptional row is the point of the last check.** A reader who computes
-  only rows $1$ to $6$ sees an alternating sum that is always $0$ and will state
-  the identity for every $n$. Row $0$ is where that statement is false, and this
-  page's companion records it as a false statement for exactly that reason.
+- **The exceptional row is the point of the last check.** A reader who computes only rows $1$ to $6$ sees an alternating sum that is always $0$ and will state the identity for every $n$. Row $0$ is where that statement is false, and this page's companion records it as a false statement for exactly that reason.
 
-- **Symmetry is visible in every row** and is
-  [[thm-binomial-closed-formula]] clause 3: row $6$ read backwards is row $6$.
+- **Symmetry is visible in every row** and is [[thm-binomial-closed-formula]] clause 3: row $6$ read backwards is row $6$.

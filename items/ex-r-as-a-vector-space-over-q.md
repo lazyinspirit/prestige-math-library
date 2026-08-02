@@ -1,7 +1,7 @@
 ---
 id: ex-r-as-a-vector-space-over-q
 kind: example
-title: "$\\mathbb{R}$ is a vector space over itself and, by restriction of scalars along the embedded copy of $\\mathbb{Q}$, a vector space over $\\mathbb{Q}$"
+title: "$\\mathbb{R}$ is a vector space over itself, over the embedded copy of $\\mathbb{Q}$ by restriction of scalars, and over $\\mathbb{Q}$ itself via the embedding"
 status: published
 origin: session
 provenance:
@@ -15,11 +15,12 @@ short: "$\\mathbb{R}$ over $\\mathbb{R}$ and over $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -97,19 +98,8 @@ restricting scalars, because restriction of scalars requires a subfield.
 
 ## Remarks
 
-- **Three structures on one set.** The vectors are the same reals throughout and
-  the addition is the same in all three cases; what changes is which scalars are
-  allowed to act. Claims 2 and 3 differ only in bookkeeping: the scalars are the
-  elements of $\mathbb{Q}_{\mathbb{R}}$ in one and the elements of $\mathbb{Q}$ in
-  the other, and $\iota$ matches them up bijectively, being injective onto its
-  image.
+- **Three structures on one set.** The vectors are the same reals throughout and the addition is the same in all three cases; what changes is which scalars are allowed to act. Claims 2 and 3 differ only in bookkeeping: the scalars are the elements of $\mathbb{Q}_{\mathbb{R}}$ in one and the elements of $\mathbb{Q}$ in the other, and $\iota$ matches them up bijectively, being injective onto its image.
 
-- **Nothing here is said about size.** How big $\mathbb{R}$ is as a vector space
-  over $\mathbb{Q}$ is a question about bases and dimension, which are developed on
-  a later page; no claim about either is made above, and the verification uses
-  neither.
+- **Nothing here is said about size.** How big $\mathbb{R}$ is as a vector space over $\mathbb{Q}$ is a question about bases and dimension, which are developed on a later page; no claim about either is made above, and the verification uses neither.
 
-- **Why the ordered field hypothesis appears at all.** The embedding
-  $\iota$ is supplied by [[lem-of-q-embeds]], which is stated for an ordered
-  field, and $\mathbb{R}$ is one. The order plays no further role: once $\iota$ is
-  in hand, every step above uses only that it is a field homomorphism.
+- **Why the ordered field hypothesis appears at all.** The embedding $\iota$ is supplied by [[lem-of-q-embeds]], which is stated for an ordered field, and $\mathbb{R}$ is one. The order plays no further role: once $\iota$ is in hand, every step above uses only that it is a field homomorphism.

@@ -16,11 +16,12 @@ short: "$\\gcd(ca,cb) = |c|\\gcd(a,b)$"
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -86,13 +87,6 @@ every triple, including $c = 0$ and $(a,b) = (0,0)$, where both sides are $0$.
 
 ## Remarks
 
-- **The boundary cases are the point, not an aside.** The identity at
-  $(a,b) = (0,0)$ is exactly what forces the convention $\gcd(0,0) = 0$: it reads
-  $\gcd(0,0) = |c|\gcd(0,0)$ for every $c$, and taking $|c| = 1+1$ gives
-  $\gcd(0,0) = 0$. That argument is recorded where the convention is made
-  ([[def-common-divisor-and-gcd]]) and instantiated on the companion page
-  ([[ex-gcd-with-zero]]).
+- **The boundary cases are the point, not an aside.** The convention $\gcd(0,0) = 0$ is the only value under which this identity extends to $(a,b) = (0,0)$: it would read $\gcd(0,0) = |c|\gcd(0,0)$ for every $c$, and taking $|c| = 1+1$ gives $\gcd(0,0) = 0$. That is a constraint on the choice, not a derivation from this lemma — steps 1.2 and 1.3 above read the boundary value off the convention rather than proving it. The choice is made where the convention is fixed ([[def-common-divisor-and-gcd]]) and instantiated on the companion page ([[ex-gcd-with-zero]]).
 
-- **Why $|c|$ and not $c$.** $\gcd$ is nonnegative by construction, so the right
-  side must be too; with $c < 0$ and $g > 0$ the product $cg$ is negative and
-  could not be a greatest common divisor.
+- **Why $|c|$ and not $c$.** $\gcd$ is nonnegative by construction, so the right side must be too; with $c < 0$ and $g > 0$ the product $cg$ is negative and could not be a greatest common divisor.

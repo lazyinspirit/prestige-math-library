@@ -15,11 +15,12 @@ landmark: true
 short: "$\\gcd(a,b)$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -69,11 +70,15 @@ reasons are recorded here rather than deferred:
   divisor", which is the sense that [[cor-common-divisor-divides-gcd]] shows
   holds at **every** pair, $(0,0)$ included, whereas "greatest in the order of
   $\mathbb{Z}$" fails there.
-- **It is forced by the scaling identity.** $\gcd(ca,cb) = |c|\gcd(a,b)$ is
-  proved below as [[lem-gcd-scaling]]. At $a = b = 0$ it reads
-  $\gcd(0,0) = |c|\gcd(0,0)$ for every $c$; taking $c = 1 + 1$, so that
-  $|c| = 1 + 1$, gives $g = g + g$ and hence $g = 0$. No other value makes the
-  identity true at $c = 0$ or anywhere else on that boundary.
+- **It is the only value under which the scaling identity extends to this
+  boundary.** Requiring $\gcd(ca,cb) = |c|\gcd(a,b)$ to hold at every triple
+  leaves no freedom here. At $c = 0$ with any $(a,b) \ne (0,0)$ it would read
+  $\gcd(0,0) = |0|\gcd(a,b) = 0$, whose right-hand side does not involve
+  $\gcd(0,0)$ at all; and at $a = b = 0$ with $c = 1 + 1$ it reads $g = g + g$,
+  again giving $g = 0$. The value is therefore chosen here, and
+  [[lem-gcd-scaling]] then proves the identity for every triple with this
+  convention in force; its own $(0,0)$ case reads the value off this definition
+  rather than establishing it.
 - **It is consistent with the product formula** —
   $\gcd(a,b)\operatorname{lcm}(a,b) = |ab|$ ([[thm-gcd-lcm-product]]) reads
   $0 \cdot 0 = 0$ at $(0,0)$, using $\operatorname{lcm}(0,0) = 0$ from
