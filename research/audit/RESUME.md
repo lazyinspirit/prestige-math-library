@@ -29,25 +29,25 @@ bottom-up, batches = category × dependency level.
   A7: 276/276 both lanes, 0 nulls. DeepSeek 249 keep/27 reject; Sonnet 243/33.
   A8: 64 adjudications over 2 rounds — 6+1 confirmed_fatal, rest nonfatal or
   false positive. 63 items carry `verification.verified`.
+  **A8 IS COMPLETE AND COMMITTED (`15e18a4`), all gates independently
+  re-verified by the orchestrator. Nothing is in flight. Handing off to a
+  codex session at the owner's request (Claude usage limit).**
+  A8 final: 64 adjudications (16 false_positive / 41 confirmed_nonfatal /
+  7 confirmed_fatal), 64 items with `scope: published-audit`. Touch
+  snapshots: baseline / pre-A4-dedekind / pre-A4 / post-A4 / post-A6 /
+  post-A8.
   **EXACT NEXT ACTIONS, in order:**
-  1. IN FLIGHT: scoped Alpha repairing `lem-rat-embeds-dense` (Statement
-     claims "embedding of ordered fields"; no inverse preservation proved;
-     neither lane caught it). Orchestrator decision: PROVE in place, do not
-     narrow (consumer `lem-cauchy-with-convergent-subsequence` [L3] leans on
-     the unproved half). Requires consumer closure + independent
-     certification before completion. Commit only after its gates pass.
-  2. CLOSING FULL-MANIFEST SWEEP (not just --items): A8 repairs invalidated
+  1. CLOSING FULL-MANIFEST SWEEP (not just --items): A8 repairs invalidated
      the pair-context hash of 184/276 items. Use
      `JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs --manifests
      research/audit/wave0-*.pages.json ...` — ledger skip makes current
      verdicts free. Staged rejudge ids: def-cut-multiplication,
      def-nat-finite-sum-and-product, def-real-dedekind,
-     ex-pascals-triangle-to-row-six, lem-rat-cut-embeds, plus whatever the
-     in-flight repair adds.
-  3. `node tools/apply-judge-stamps.mjs --ledger ... --manifests ... --apply`
+     ex-pascals-triangle-to-row-six, lem-rat-cut-embeds, lem-rat-embeds-dense.
+  2. `node tools/apply-judge-stamps.mjs --ledger ... --manifests ... --apply`
      (owner-approved 2026-08-02). Dry-run first; it stamps ONLY items where
      both lanes returned keep=true on the CURRENT hash.
-  4. A9 scope-denial re-grep, then A10 owner rundown (the wave's sole pause).
+  3. A9 scope-denial re-grep, then A10 owner rundown (the wave's sole pause).
   **A10 queue so far:** dedekind reading-order swap (D9); legacy page-count
   prose; about-the-book URL pattern (Stanley/Halmos/Rudin/Tao);
   bare-[A#] ℤ/ℚ prelude sweep; optional von Neumann order/membership lemma;
@@ -111,8 +111,8 @@ bottom-up, batches = category × dependency level.
   adjudicator; owner-only: deletions, id changes, reading-order changes.
   R2 judge every in-scope item every wave. R3 already-tagged items are NEVER
   audit scope (mechanical in `rounds.mjs --audit-batches`).
-- Models: all audit agents Opus 5 high effort via Claude runtime; judges
-  `JUDGE_LINEUP=deepseek+opus` (DeepSeek key via env or
+- Models: all audit ROLES (Beta/Alpha/readers/refuters) Opus 5 high effort;
+  judges `JUDGE_LINEUP=deepseek+sonnet` (owner amendment 2026-08-02; key via env or
   /root/Projects/prestige-intelligence/.env). Build lineup untouched.
 - Repair stamp: `verification.verified` {scope: published-audit,
   delegated_by: owner}. Gates + per-wave receipt commands:
@@ -120,8 +120,13 @@ bottom-up, batches = category × dependency level.
 
 ## Gotchas already measured
 
-- `claude --bare` breaks OAuth ("Not logged in") — runFreshOpus deliberately
+- `claude --bare` breaks OAuth ("Not logged in") — runFreshClaude deliberately
   omits it; do not re-add.
+- A non-Anthropic (codex) session may run ORCHESTRATOR duties only: gates,
+  sweeps, ledgers, stamps, commits, the A10 report. Judge lanes are
+  subprocesses and work from any session. It must NOT act as an Opus audit
+  role (Beta/Alpha/reader/refuter); if the closing sweep raises a NEW
+  rejection, queue it for the owner instead of adjudicating. See AGENTS.md.
 - `rounds.mjs --repo` defaults to the main checkout path; fine when running
   from the repo root.
 - The judge context-hash / sweeps must run from the repo root (relative
