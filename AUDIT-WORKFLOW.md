@@ -28,6 +28,18 @@ nonfatal ranks below them):
    by guessing. AI-generated statements are then contained: every downstream
    consumer is computed and flagged for scrutiny, and each generated statement
    is made as little load-bearing as the mathematics allows.
+
+**Already-tagged content is out of scope (owner, 2026-08-02, standing rule for
+this and all future sessions).** An item that already carries both component
+provenance tags (a literature-derived/ai-altered/ai-generated statement label
+and a proof label) was tagged, audited, and judged when it was authored under
+the current contract; the audit does not re-audit it. The exclusion is
+mechanical: `rounds.mjs --audit-batches` drops tagged items at scope
+generation, so every downstream gate and the judge sweep inherit it, and a
+pair whose items are all tagged drops out entirely. `genrisk.mjs` still reads
+the whole corpus — blast-radius tracking of a tagged `ai-generated` seed is
+not an audit of that seed. Measured 2026-08-02: 41 batch manifests, 2,007
+items in scope, 428 already-tagged appearances excluded.
 2. **Citation-precision and accuracy audit.** Every proof step and every
    dependency citation in the published corpus is read skeptically — the same
    duties as build step 6a — including cross-page and cross-batch edges, with
@@ -382,7 +394,7 @@ stage; no stage advances on an agent's report.
 | `tools/judge.mts` | `OPUS_MODEL = "claude-opus-5"` lane: `runFreshOpus` spawns the local `claude` CLI (verified v2.1.220) headless — `-p --model claude-opus-5 --effort high --no-session-persistence` (`--bare` measured to skip OAuth login and deliberately absent), an empty temporary working directory as cwd (repo project settings/hooks out of scope), and every core tool explicitly `--disallowed-tools` — the `runFreshTerra` pattern with the Codex binary swapped for Claude. Lineup selected by env `JUDGE_LINEUP` (`deepseek+terra` default, `deepseek+opus` for this workflow); preflight covers the Opus lane; the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
 | `tools/judge-sweep.mjs` | model lanes derived from the same `JUDGE_LINEUP`; the Opus lane has its own 16-slot cross-process pool directory (per-lane caps unchanged: 16 + 16, 32 combined); the child judge inherits the env var so sweep and judges cannot disagree about the lineup |
 | `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; new `--audit` flag downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition (everything else stays hard); audit batch manifests are accepted as scope unchanged |
-| `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` from the existing level function plus on-disk published state, item lists from the page files (spec lists are stale for old pages), each item carrying its current authored `deps` as the reconciliation baseline |
+| `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` from the existing level function plus on-disk published state, item lists from the page files (spec lists are stale for old pages), each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
 | `tools/content-policy.mjs` | `--audit --ledger <provenance.jsonl>…` mode: requires both provenance components and a matching evidence-ledger row (`audit-ledger-missing-row`, `audit-ledger-mismatch`, `audit-ledger-evidence[-mismatch]`, `audit-ledger-rationale`) for every scoped item; mechanizes D2 (`established-knowledge` needs `alpha_concurred: true` and is the only URL waiver, surfaced as the `established-knowledge-unsourced` warning) and D5 (`legacy-authorship-retained` error); downgrades to warnings what cannot bind history — `ai-generated-statement-dependency` (routed to genrisk), `generated-kind`/`generated-role`, and `external-record-missing` on legacy deferred items |
 
 **New (implemented 2026-08-02):**
@@ -478,6 +490,11 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
   mandatory; only deletions, id changes, and reading-order restructures queue
   for the owner.
 - **R2 — judge coverage: EVERY ITEM, EVERY WAVE.** Full paired
-  DeepSeek + Opus 5 coverage of each wave on final post-audit text
-  (≈4,800 calls across the run), producing a complete fresh ledger under the
-  new lineup.
+  DeepSeek + Opus 5 coverage of each wave on final post-audit text,
+  producing a complete fresh ledger under the new lineup. (Scoped by R3:
+  ≈4,000 calls over the 2,007 in-scope items.)
+- **R3 — already-tagged content excluded (owner, 2026-08-02, standing for all
+  future sessions).** Items already carrying both component-provenance tags
+  are never audit scope; the exclusion is mechanical at batch generation
+  (§1). This narrows R2's coverage to in-scope items and removes fully-tagged
+  pairs from the wave plan.

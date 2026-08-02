@@ -30,6 +30,13 @@ and the manifest tells you which pairs are yours. Every dependency target of
 your pairs sits in an earlier wave and already carries an audited provenance
 tag — check citations against those verified targets.
 
+**The manifest is the scope of record (owner, 2026-08-02).** An item already
+carrying both component-provenance tags was tagged, audited, and judged at
+authoring and is deliberately absent from your manifest: do **not** audit,
+retag, or ledger it, even when it sits on a page beside your in-scope items.
+You still read such an item whenever it is a dependency target of an in-scope
+citation — reading a verified target is citation checking, not re-auditing.
+
 ## Triage — the standing rule (verbatim, binding)
 
 - **Non-negotiable:** mathematical accuracy, logical validity, correct

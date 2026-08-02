@@ -394,8 +394,14 @@ held historically.
 (`research/audit/wave<k>-<category>.pages.json`): waves are the existing level
 function over published state, batches are one category per wave, item lists
 come from the page files (spec lists are stale for old pages), and each item
-records its current authored `deps` as the reconciliation baseline. Measured
-2026-08-02: 50 batch manifests, 2,435 items.
+records its current authored `deps` as the reconciliation baseline. Items
+already carrying both component-provenance tags are excluded at scope
+generation (owner standing rule 2026-08-02 — tagged content was audited and
+judged at authoring and is never re-audited), so every downstream gate and
+the judge sweep inherit the exclusion; a fully-tagged pair drops out of the
+wave plan. `genrisk.mjs` deliberately still reads the whole corpus. Measured
+2026-08-02: 41 batch manifests, 2,007 items in scope, 428 already-tagged
+appearances excluded.
 
 **`content-policy.mjs --audit --ledger …`** — the retro-tag accountability
 gate. Every scoped item needs both provenance components and a matching

@@ -158,6 +158,16 @@ function pageFile(p) {
 // level-coverage's plan-drift reconciliation surfaces exactly what audit
 // repairs changed.
 //
+// ALREADY-TAGGED CONTENT IS OUT OF SCOPE (owner, 2026-08-02, standing rule).
+// An item that already carries BOTH component-provenance tags was tagged,
+// audited, and judged when it was authored under the current contract; the
+// retro-audit covers only the legacy untagged corpus. Such items are excluded
+// here, at scope generation, so every downstream gate (content-policy --audit,
+// audit-manifest, level-coverage --audit, the judge sweep) inherits the
+// exclusion. A page whose items are all tagged drops out entirely; genrisk.mjs
+// deliberately still reads the whole corpus, because blast-radius tracking is
+// not an audit of the seed.
+//
 //   node tools/rounds.mjs --audit-batches [--wave K] [--outdir research/audit]
 
 if (has('--audit-batches')) {
@@ -177,10 +187,22 @@ if (has('--audit-batches')) {
     }
     return [];
   };
-  const itemEntries = (ids) => ids.map((id) => {
+  const fmNested = (fm, parent, child) => {
+    const start = fm.search(new RegExp(`^${parent}:[ \\t]*(?:#.*)?$`, 'm'));
+    if (start < 0) return undefined;
+    const m = fm.slice(start).match(new RegExp(`^[ \\t]+${child}:[ \\t]*(.*)$`, 'm'));
+    return m ? m[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
+  };
+  let alreadyTagged = 0;
+  const itemEntries = (ids) => ids.flatMap((id) => {
     const f = join(repo, 'items', `${id}.md`);
-    if (!existsSync(f)) return { id, deps: [] };
-    return { id, deps: fmList(fmOf(f), 'deps') };
+    if (!existsSync(f)) return [{ id, deps: [] }];
+    const fm = fmOf(f);
+    if (fmNested(fm, 'provenance', 'statement') && fmNested(fm, 'provenance', 'proof')) {
+      alreadyTagged += 1;
+      return [];
+    }
+    return [{ id, deps: fmList(fm, 'deps') }];
   });
   const pageEntry = (p, kind, file) => {
     const fm = fmOf(file);
@@ -195,12 +217,15 @@ if (has('--audit-batches')) {
     const wave = lvl.get(a.id);
     if (onlyWave !== null && Number(onlyWave) !== wave) continue;
     const category = a.category ?? aFile.split('/').at(-2);
-    const key = `wave${wave}-${category}`;
-    if (!batches.has(key)) batches.set(key, []);
-    batches.get(key).push(pageEntry(a, 'A', aFile));
+    const aEntry = pageEntry(a, 'A', aFile);
     const b = byId.get(a.companion ?? `${a.id}-examples`);
     const bFile = b ? pageFile(b) : null;
-    if (b && bFile) batches.get(key).push(pageEntry(b, 'B', bFile));
+    const bEntry = b && bFile ? pageEntry(b, 'B', bFile) : null;
+    const pages = [aEntry, bEntry].filter((page) => page && page.items.length);
+    if (!pages.length) continue; // the whole pair is already tagged — out of scope
+    const key = `wave${wave}-${category}`;
+    if (!batches.has(key)) batches.set(key, []);
+    batches.get(key).push(...pages);
   }
   if (!batches.size) { console.error('audit-batches: no published pages matched'); process.exit(2); }
   const outRoot = outdir.startsWith('/') ? outdir : join(process.cwd(), outdir);
@@ -213,7 +238,7 @@ if (has('--audit-batches')) {
     itemTotal += count;
     console.log(`${path}  ${pages.length} page(s), ${count} item(s)`);
   }
-  console.log(`audit-batches: ${batches.size} batch manifest(s), ${itemTotal} item(s) total`);
+  console.log(`audit-batches: ${batches.size} batch manifest(s), ${itemTotal} item(s) in scope; ${alreadyTagged} already-tagged item(s) excluded (owner rule 2026-08-02)`);
   process.exit(0);
 }
 

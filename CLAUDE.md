@@ -253,8 +253,11 @@ banner; the public sees only `published`.
   snapshots, impact closure, no self-certification, stale-verdict deletion,
   targeted rejudge, and the twice-touched escalation. The repair stamp is
   `verification.verified` with `scope: published-audit` and
-  `delegated_by: owner`. Full workflow, decisions D1–D5/R1–R2, and gates:
-  `AUDIT-WORKFLOW.md`.
+  `delegated_by: owner`. **Already-tagged content is never audit scope
+  (owner, 2026-08-02, standing for all future sessions):** an item that
+  already carries both component-provenance tags is not re-audited;
+  `rounds.mjs --audit-batches` excludes it mechanically at scope generation.
+  Full workflow, decisions D1–D5/R1–R3, and gates: `AUDIT-WORKFLOW.md`.
 
 - Item ids are IMMUTABLE on `main`; renames go through `aliases` (SCHEMA §2).
 - A published page listing a draft item is a hard error, never a silent skip.
