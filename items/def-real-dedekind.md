@@ -14,7 +14,12 @@ landmark: true
 short: "ℝ (cuts)"
 verification:
   precheck: n/a
-  audited: 2026-07-25
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -57,7 +62,7 @@ $\mathbb{Q}$ leaves a hole, which is why $\mathbb{R}$ is complete while
 $\mathbb{Q}$ is not.
 
 The order on $\mathbb{R}$ is set inclusion, $A \le B :\Leftrightarrow A \subseteq B$
-([[def-cut-order]]). That $q \mapsto q^{*}$ is an order-preserving field
+([[def-cut-order]]). That $q \mapsto q^{*}$ is an order-preserving ring
 embedding, and that its image is dense, is recorded in [[lem-rat-cut-embeds]];
 the arithmetic and order structure making $\mathbb{R}$ a complete ordered field
 is developed in [[thm-reals-dedekind-ordered-field]] and [[thm-dedekind-complete]].

@@ -958,3 +958,236 @@ must not be reused.
    `thm-int-ordered-ring`'s thin Facts blocks) are all nonfatal and all named
    above with their evidence, so a later fidelity sweep can pick them up
    without re-deriving anything.
+
+---
+
+# Wave 0 — step A8, round 2 (rejections on the repaired text)
+
+The targeted rejudge of the 13 items returned **10 passes and 4 rejections**,
+all on paired hashes (both lanes saw the identical frozen context for every one
+of the 13). I verified the pairing mechanically before adjudicating.
+
+## A8r2.1 Outcomes
+
+| item | lane | outcome |
+|---|---|---|
+| `lem-rat-cut-embeds` (title + step 4.1) | deepseek | **`confirmed_fatal` / `other`** |
+| `lem-rat-cut-embeds` (`[L6]`) | sonnet | `confirmed_nonfatal` — repaired anyway |
+| `def-nat-finite-sum-and-product` | deepseek | `confirmed_nonfatal` — repaired anyway |
+| `ex-pascals-triangle-to-row-six` | sonnet | `confirmed_nonfatal` — repaired anyway |
+
+Running totals across both A8 rounds: **64 adjudications, 16 false positive,
+41 confirmed nonfatal, 7 confirmed fatal.**
+
+## A8r2.2 `lem-rat-cut-embeds` — the repair exposed the next defect, it did not cause it
+
+The coordinator asked whether my `[L5]` fix introduced these or merely exposed
+them. **Exposed.** Neither the title nor step 4.1 nor `[L6]` was touched by that
+repair; DeepSeek had rejected on the false `[L5]` domain in the first sweep and,
+with that gone, reported the next thing it found. That is the sweep working
+correctly, not a regression.
+
+**The fatal one (DeepSeek).** The title read "…embed densely as an ordered
+**subfield**" and step 4.1 concluded "a dense embedding of **ordered fields**",
+while the Statement establishes only injectivity, order preservation and
+reflection, the four ring identities and density. Closure of the image under
+reciprocals — which "subfield" requires — is not proved, and **cannot be proved
+in place**: it needs ℝ to be a field, which `thm-reals-dedekind-field`
+establishes *using this lemma*. So the title asserted something the item is
+structurally unable to establish. Retitled to match the Statement clause for
+clause, and step 4.1 narrowed to the Statement's own phrase with the gap stated
+explicitly. I did **not** wikilink `thm-reals-dedekind-field` in that caveat:
+it lists `lem-rat-cut-embeds` in its own `deps`, so the link would be circular.
+
+**The nonfatal one (Sonnet), and a consistency point I had to settle.** Sonnet
+is right that `[L6]` attributed ℚ's ring axioms and the strict midpoint property
+to `thm-rat-ordered-field` with `thm-rat-field` absent from `deps`. I graded it
+**nonfatal**, not fatal, and the distinction matters because I called the
+mirror-image defect in `thm-reals-dedekind-field` `[L7]` fatal in round 1:
+
+- `[L7]` there cited the **order-free** `thm-rat-field` for an **order**
+  property. The reader following the citation finds nothing about order — a dead
+  end, with the correct source absent from `deps`.
+- `[L6]` here cites `thm-rat-ordered-field`, whose Statement literally reads
+  "makes the **field** ℚ (`[[thm-rat-field]]`) a totally ordered field". The
+  field structure is part of what the cited theorem asserts, and it links its own
+  source, so the reader is one hop away, not at a dead end.
+
+That is the same ground on which I ruled the `lem-rat-triangle` rejection a
+false positive in round 1, and I have kept that ruling rather than quietly
+reversing it. Repaired here regardless, because the item was already reopened
+for the fatal and a third rejection was foreseeable.
+
+## A8r2.3 The other two
+
+- **`def-nat-finite-sum-and-product`.** The coordinator flagged that the
+  well-definedness angle might exceed a citation gap. On inspection it does not:
+  the split on `m ≤ n` versus `n < m` **is** exhaustive and exclusive under
+  `def-nat-order`, the notation does name a single natural for every pair, and
+  comparability of naturals is proved on an earlier page (`lem-nat-trichotomy`,
+  page order 6, against this item's 20). Nothing is ill-defined; the declaration
+  was simply missing. Clause written out, `lem-nat-trichotomy` added to `deps`.
+- **`ex-pascals-triangle-to-row-six`.** Sonnet is right and I verified it from
+  the page files: **both** this item and
+  `fs-the-alternating-row-sum-vanishes-for-every-n` are listed in
+  `library/combinatorics/finite-counting-and-binomial-coefficients-examples.md`,
+  so "this page's **companion** records it" pointed at the wrong page. Corrected
+  to "this page records it", now naming the sibling explicitly so the pointer is
+  checkable rather than merely fixed.
+
+## A8r2.4 `lem-rat-cut-embeds` — full touch history for the A10 owner report
+
+**The most-touched item of wave 0: four touches, three of them repairs in this
+audit, and it is the only item both lanes rejected twice on different grounds.**
+
+| stage | commit | change | outcome |
+|---|---|---|---|
+| A4 | `c355590` | D2: `[L1]` re-attributed from `def-real-dedekind` to `def-dedekind-cut`; `deps` += `def-dedekind-cut` | certified at A6 |
+| A6 | `240fac2` | no text change; `verification.verified` written after independent reading | — |
+| A7 sweep | ledger hash `c47a46c9` | — | deepseek **reject** (`[L5]`), sonnet keep |
+| A8 r1 | `298f953` | `[L5]` domain `\ge 0^{*}` → `> 0^{*}` (**confirmed_fatal**: the fact was literally false at `0^{*}`) | certified |
+| A7 rejudge | ledger hash `6583dc1e` | — | **both lanes reject**, on two different new grounds |
+| A8 r2 | this stage | title + step 4.1 narrowed (**confirmed_fatal**); `[L6]` split, `deps` += `thm-rat-field` | certified |
+
+Net against the pre-audit baseline: 15 insertions, 7 deletions. Every defect
+found was real and none was introduced by an earlier repair — but four passes
+over one item's Facts block and title is a signal about the item, and the owner
+should see it. `thm-reals-dedekind-field` (A4 `[L6]`/`[L11]` split → A8 r1 `[L7]`
+split) remains the second most-touched.
+
+## A8r2.4b Blast-radius closure — a gap in my own round-2 work, caught by the certifying reader
+
+The reader that certified the four round-2 repairs also found something I had
+missed, and it is the most important finding of this round. **Repair 1 narrowed
+a public interface** — the title and step 4.1's conclusion — and I had not run
+the consumer closure that a public-interface change requires. `tools/consumers.mjs
+lem-rat-cut-embeds` reports four consumers plus the home page, and three of them
+still asserted, on this lemma's authority, exactly the claim I had just
+adjudicated `confirmed_fatal` in the lemma's own title.
+
+| consumer | stale claim | repair |
+|---|---|---|
+| `library/real-analysis/construction-of-r-via-dedekind-cuts.md` (home page prose) | "into which $\mathbb{Q}$ embeds densely as an **ordered subfield**" — verbatim the fatal claim, live on the page that homes the item | "…embeds densely, **preserving sums, products, $0$, $1$ and the order**" |
+| `items/def-cut-multiplication.md` Remark | attributed $(q^{*})^{-1} = (1/q)^{*}$ to `lem-rat-cut-embeds`, which now **explicitly disclaims** reciprocals | product identity kept on `lem-rat-cut-embeds`; the reciprocal now derived from $q^{*}\cdot(1/q)^{*} = 1^{*}$ with the reciprocal supplied by `lem-cut-reciprocal` (Remark wikilink only — a `deps` edge would cycle, since `lem-cut-reciprocal` depends on `def-cut-multiplication`) |
+| `items/def-real-dedekind.md` Remark | "an order-preserving **field** embedding" | one word: **ring** embedding |
+
+The two remaining consumers were verified still licensed and left untouched:
+`thm-reals-dedekind-field` `[L8]` asks only for an injective ring map with the
+product identity and $1^{*} \ne 0^{*}$, and `lem-cut-archimedean` `[L3]` asks
+only for order preservation. Neither touches reciprocals.
+
+**This also made the `impact-audit` receipt stale, and I corrected it.** Its
+shared evidence note asserted that "no Statement, Definition or title changed in
+any of the 65 material items" — true when I wrote it at A6, and **false** once
+A8 narrowed three titles (`ex-pascals-triangle-to-row-six`,
+`ex-r-as-a-vector-space-over-q`, `lem-rat-cut-embeds`). The note now states the
+distinction honestly, and each of the three carries its own disposition
+recording that the change was a *narrowing*, that its consumers were enumerated
+with `consumers.mjs`, and — for `lem-rat-cut-embeds` — exactly which three
+consumer texts had to be repaired and which two did not.
+`impact-audit --receipt` passes on the corrected file: 276 interfaces, 2,452
+dispositions.
+
+**The lesson, recorded because it generalises:** I applied the consumer-closure
+discipline rigorously to the Betas' A4 repairs and then failed to apply it to my
+own A8 repair. A title narrowing looks like a cosmetic edit and is not — it is a
+public-interface change, and the workflow's own rule ("after any public-interface
+change, `impact-audit` computes every downstream consumer and requires an Alpha
+disposition") applies to Alpha's edits exactly as it does to a Beta's.
+
+### Certification of the closure repairs
+
+A third independent reader certified all three (**A, B, C: CERTIFY**) and
+independently confirmed the two untouched consumers, quoting each:
+`thm-reals-dedekind-field` `[L8]` asks only for "an injective ring map with
+$(pq)^{*} = p^{*}\cdot q^{*}$ and $1^{*} \ne 0^{*}$" — used at step 1.4 only,
+with its multiplicative inverses coming from `[L9]` (`lem-cut-reciprocal`), not
+from this lemma; `lem-cut-archimedean` `[L3]` asks only for order preservation,
+used at step 2.2. Neither ever leaned on the withdrawn content.
+
+Three things the reader established that strengthen the record beyond my own
+check:
+
+- The reciprocal identity in Repair B is **true by direct computation from
+  `def-cut-multiplication`'s own definition**, independently of the derivation
+  offered: for $q > 0$, $s \notin q^{*}$ means $s \ge q$, so
+  $(q^{*})^{-1} = \{p \le 0\} \cup \{0 < p < 1/q\} = (1/q)^{*}$. So the
+  repaired sentence rests on something provable in place, not only on the
+  citation chain.
+- `depcheck.mjs:319` documents that Remark wikilinks are excluded from
+  dependency assertions, which is why the new `lem-cut-reciprocal` mention
+  induces no edge and no cycle — the `deps` line is confirmed unchanged.
+- Repair C's "ring embedding" is safe on the strong reading too:
+  `lem-rat-cut-embeds` step 1.9 proves $-(p^{*}) = (-p)^{*}$ outright, so
+  negation preservation is established rather than merely inherited.
+
+**Nonfatal note recorded, not repaired** (the reader explicitly did not treat it
+as a defect): Repair B's step from $q^{*}\cdot(1/q)^{*} = 1^{*}$ to
+$(q^{*})^{-1} = (1/q)^{*}$ uses uniqueness of inverses, which is left implicit —
+but associativity and commutativity are stated in the *immediately following
+bullet of the same Remark*, so the closure is instant. Its suggested tighter
+phrasing is on file if a later sweep wants it.
+
+## A8r2.4c A parallel defect found in passing on the Cauchy construction — recorded, not repaired
+
+Sweeping the corpus for other stale "ordered subfield" claims after the closure
+above, I found the same shape on the **Cauchy** construction of ℝ, in an item
+**no lane rejected**:
+
+- `items/lem-rat-embeds-dense.md` Statement: "The map $q \mapsto \hat q$ is an
+  **embedding of ordered fields**"; step 4.1: "The rationals embed as an
+  **ordered subfield**".
+- The item contains **zero** occurrences of "inverse", "reciprocal" or "$1/$" —
+  it proves injectivity, order preservation, sums, products and density, exactly
+  like its Dedekind twin, and never treats reciprocals.
+- It is load-bearing downstream: `lem-cauchy-with-convergent-subsequence` `[L3]`
+  reads "the embedding of $\mathbb{Q}$ in $\mathbb{R}$ is a **field embedding**,
+  so the image of $\varepsilon/2$ is half the image of $\varepsilon$
+  ([[lem-rat-embeds-dense]])" — a use that needs precisely the unproved half.
+
+**I graded this nonfatal and did not repair it, and the reason is the exact
+distinction that made its twin fatal.** `lem-rat-cut-embeds` is *structurally
+unable* to prove inverse preservation in place: it would need ℝ to be a field,
+and `thm-reals-dedekind-field` proves that **using** the lemma. Here there is no
+such obstruction — `lem-rat-embeds-dense` already declares `thm-reals-ordered-field`
+and `thm-rat-field` in its `deps`, and `thm-reals-field` does **not** depend on
+it (verified), so the missing three lines ($\hat q \cdot \widehat{1/q} =
+\widehat{q \cdot 1/q} = \hat 1$, then uniqueness of inverses in the field ℝ)
+are available from material the item has already declared. A claim that is true
+and closable in a few lines from declared dependencies is the 30-second class,
+not the fatal class.
+
+It is recorded here rather than left silent because it is Statement-level, it
+has a load-bearing consumer, and **neither judge lane caught it** — which makes
+it a useful measurement of what full-coverage judging still misses. It is in
+wave-0 scope (`pure_retag`), so repairing it would materialise an item and pull
+in its own consumer closure; that belongs to a deliberate decision by the
+orchestrator or a later fidelity sweep, not to the tail of a rejection round.
+
+## A8r2.5 Gate state and rejudge list
+
+All gates green after the round-2 repairs: `depcheck` OK (no cycles, all
+references resolve — including the two new `deps` edges and the new Remark
+wikilink), `proof-contract --strict` **0 errors / 209 items** (a new exact-quote
+citation contract written for `[L6] → thm-rat-field`),
+`risk-report --require-reviewed` 0 errors, `precheck` clean on the changed
+proof-bearing items, `reflow` clean.
+
+**Rejudge list — 5 items** (the 3 rejected-and-repaired, plus the 2 consumers
+repaired for blast-radius closure in A8r2.4b):
+
+```
+def-cut-multiplication
+def-nat-finite-sum-and-product
+def-real-dedekind
+ex-pascals-triangle-to-row-six
+lem-rat-cut-embeds
+```
+
+The home page file `construction-of-r-via-dedekind-cuts.md` was also corrected;
+page files carry no verification stamp and are not judged.
+
+Each of the five carries `verification.verified` written only after an
+independent reading, and no `verification.judge` block — any earlier verdict is
+superseded. Note for the stamping tool: all five are mid-repair and must be
+skipped until their rejudge returns.

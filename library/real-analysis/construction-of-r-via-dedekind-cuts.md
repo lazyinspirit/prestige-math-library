@@ -49,8 +49,8 @@ $-A$ chosen so that $A + (-A) = 0^{*}$ ([[def-cut-addition]],
 [[lem-cut-additive-inverse]]). Multiplication is defined first on the
 nonnegative cuts and then extended by signs ([[def-cut-multiplication]],
 [[lem-cut-reciprocal]]). These operations make $\mathbb{R}$ a field
-([[thm-reals-dedekind-field]]) into which $\mathbb{Q}$ embeds densely as an
-ordered subfield ([[lem-rat-cut-embeds]]).
+([[thm-reals-dedekind-field]]) into which $\mathbb{Q}$ embeds densely,
+preserving sums, products, $0$, $1$ and the order ([[lem-rat-cut-embeds]]).
 
 **Order.** Inclusion makes this field totally ordered
 ([[thm-reals-dedekind-ordered-field]]) and Archimedean ([[lem-cut-archimedean]]),

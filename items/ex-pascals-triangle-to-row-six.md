@@ -103,6 +103,6 @@ sum is **not** zero.
 
 ## Remarks
 
-- **The exceptional row is the point of the last check.** A reader who computes only rows $1$ to $6$ sees an alternating sum that is always $0$ and will state the identity for every $n$. Row $0$ is where that statement is false, and this page's companion records it as a false statement for exactly that reason.
+- **The exceptional row is the point of the last check.** A reader who computes only rows $1$ to $6$ sees an alternating sum that is always $0$ and will state the identity for every $n$. Row $0$ is where that statement is false, and this page records it as a false statement for exactly that reason ([[fs-the-alternating-row-sum-vanishes-for-every-n]]).
 
 - **Symmetry is visible in every row** and is [[thm-binomial-closed-formula]] clause 3: row $6$ read backwards is row $6$.

@@ -1,13 +1,13 @@
 ---
 id: lem-rat-cut-embeds
 kind: lemma
-title: "The rational cuts embed densely as an ordered subfield"
+title: "The rational cuts embed densely in $\\mathbb{R}$, preserving sums, products, $0$, $1$ and the order"
 status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, thm-rat-ordered-field]
+deps: [def-real-dedekind, def-dedekind-cut, def-cut-order, def-cut-addition, def-cut-multiplication, thm-rat-field, thm-rat-ordered-field]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -58,7 +58,7 @@ rational $q$ with $A < q^{*} < B$.
 
 [L5] Cut multiplication: for $A, B > 0^{*}$, $A \cdot B = \{\, q \le 0 \,\} \cup \{\, ab : a \in A,\ b \in B,\ a > 0,\ b > 0 \,\}$; the sign rules $A \cdot B = 0^{*}$ when $A$ or $B$ is $0^{*}$, $A \cdot B = |A|\,|B|$ for equal signs and $A \cdot B = -(|A|\,|B|)$ for opposite signs; and $|A| = A$ for $A \ge 0^{*}$ else $|A| = -A$, with $1^{*} = \{\, r < 1 \,\}$ the multiplicative identity ([[def-cut-multiplication]]).
 
-[L6] $\mathbb{Q}$ is an ordered field: rational addition and multiplication are commutative, associative, and distributive, the order is compatible ($a < b \Rightarrow a + c < b + c$; $0 < a$ and $0 < b \Rightarrow 0 < ab$; and multiplying $a < b$ by a positive preserves the order), and every pair $r < s$ has the strict midpoint $r < (r+s)/2 < s$ ([[thm-rat-ordered-field]]).
+[L6] $\mathbb{Q}$ is a field: rational addition and multiplication are commutative and associative, multiplication distributes over addition, and every nonzero rational is invertible ([[thm-rat-field]]); its order is total, $x \le y$ implies $x + z \le y + z$, and $0 < x$, $0 < y$ imply $0 < xy$ ([[thm-rat-ordered-field]]). Consequently multiplying $a < b$ by a positive preserves the order, and every pair $r < s$ has the strict midpoint $r < (r+s)/2 < s$, since $2 = 1 + 1 > 0$ is invertible and $2r < r + s < 2s$.
 
 ## Proof
 
@@ -98,4 +98,4 @@ rational $q$ with $A < q^{*} < B$.
 
 3.1 Multiplicative identity for all signs: the sign rules give $p^{*} \cdot q^{*} = \pm(|p^{*}| \cdot |q^{*}|)$, and $|p^{*}| \cdot |q^{*}| = |p|^{*} \cdot |q|^{*} = (|p|\,|q|)^{*}$ by the absolute-value identity and the nonnegative case; when $p, q$ share a sign $pq \ge 0$ and $|p|\,|q| = pq$, so $p^{*} \cdot q^{*} = (pq)^{*}$, and when they have opposite signs $pq < 0$, $|p|\,|q| = -pq$, and $-\bigl((-pq)^{*}\bigr) = (pq)^{*}$ by the negation identity, so again $p^{*} \cdot q^{*} = (pq)^{*}$ (the $p = 0$ or $q = 0$ case being step 2.2); hence $(pq)^{*} = p^{*} \cdot q^{*}$ for all $p, q$. [step 2.2, step 2.7, step 1.9, L5]
 
-4.1 Taking $q = y$ yields $A < q^{*} < B$, so the image is dense; with injectivity, order preservation/reflection, and the ring identities $(p+q)^{*} = p^{*} + q^{*}$, $(pq)^{*} = p^{*} \cdot q^{*}$, $0 \mapsto 0^{*}$, $1 \mapsto 1^{*}$, the map $q \mapsto q^{*}$ is a dense embedding of ordered fields. [step 2.1, step 3.1, step 1.3, step 2.3, step 2.4, step 2.5, step 2.6] ∎
+4.1 Taking $q = y$ yields $A < q^{*} < B$, so the image is dense; with injectivity, order preservation/reflection, and the ring identities $(p+q)^{*} = p^{*} + q^{*}$, $(pq)^{*} = p^{*} \cdot q^{*}$, $0 \mapsto 0^{*}$, $1 \mapsto 1^{*}$, the map $q \mapsto q^{*}$ is a dense, order-preserving ring embedding of $\mathbb{Q}$ into $\mathbb{R}$. Closure of the image under reciprocals, which a subfield would also require, is not established here. [step 2.1, step 3.1, step 1.3, step 2.3, step 2.4, step 2.5, step 2.6] ∎

@@ -10,7 +10,7 @@ provenance:
 deps: [thm-recursion, thm-induction-principle, def-natural-numbers, def-nat-addition,
        def-nat-multiplication, lem-nat-add-identity, lem-nat-mult-identity,
        lem-nat-order-is-membership, def-nat-order, lem-nat-add-commutative,
-       lem-nat-add-cancellative, def-finite-sum]
+       lem-nat-add-cancellative, lem-nat-trichotomy, def-finite-sum]
 justified_by: []
 forward_refs: [def-monoid-finite-product]
 aliases: []
@@ -94,7 +94,7 @@ defined here and $\sum^{\mathbb{R}}$, $\prod^{\mathbb{R}}$ for those of
 we write $n - m$ for the unique $j \in \mathbb{N}$ with $m + j = n$ when
 $m \le n$, and for $0$ when $n < m$. Existence in the first case is the
 definition of $\le$ ([[def-nat-order]]) and uniqueness is commutativity with
-cancellation ([[lem-nat-add-commutative]], [[lem-nat-add-cancellative]]), so the notation names a single natural number.
+cancellation ([[lem-nat-add-commutative]], [[lem-nat-add-cancellative]]). The two cases are exhaustive and mutually exclusive, since exactly one of $m < n$, $m = n$, $n < m$ holds ([[lem-nat-trichotomy]]), so the notation names a single natural number for every $m$ and $n$.
 **Every use of $n-m$ on this page is this operation**; no negative number is ever
 formed, and where a statement is true only under $m \le n$ that hypothesis is
 written out.

@@ -11,11 +11,12 @@ deps: [def-dedekind-cut, def-real-dedekind, def-cut-order, def-cut-addition]
 aliases: []
 verification:
   precheck: n/a
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -73,8 +74,9 @@ $A / B := A \cdot B^{-1}$ for $B \ne 0^{*}$.
   instead by the first sign rule, $A \cdot B = 0^{*}$, so the operation is well
   posed on all cuts.
 - On the rational embedding $q \mapsto q^{*}$ the operation agrees with
-  $\mathbb{Q}$: $(pq)^{*} = p^{*} \cdot q^{*}$, and $(q^{*})^{-1} = (1/q)^{*}$
-  for $q > 0$ ([[lem-rat-cut-embeds]]).
+  $\mathbb{Q}$: $(pq)^{*} = p^{*} \cdot q^{*}$ ([[lem-rat-cut-embeds]]); with
+  $q^{*} \cdot (1/q)^{*} = 1^{*}$ that gives $(q^{*})^{-1} = (1/q)^{*}$ for
+  $q > 0$, the reciprocal being the one supplied by [[lem-cut-reciprocal]].
 - That these operations send cuts to cuts and satisfy the field axioms (
   commutativity, associativity, distributivity over addition, identity $1^{*}$,
   and $A \cdot A^{-1} = 1^{*}$ for every $A \ne 0^{*}$) is
