@@ -18,7 +18,49 @@ bottom-up, batches = category × dependency level.
   ℕ/ℝ construction pages; `not-proved-here` excluded). Verified 2026-08-02:
   all 66 in-scope pair levels equal the app's own output; 40 manifests,
   waves 0–14, 2,179 items in scope, 428 tagged appearances excluded.
-- **WAVE 0: A0–A4 COMPLETE, A6 (Alpha) RUNNING (2026-08-02).** All 8 batches
+- **WAVE 0: A0–A8 COMPLETE, PAUSED BEFORE A9 (owner, 2026-08-02).**
+  Commits: A4 `c355590`, A6 `240fac2`, A7 `93cbf89`, A8r1 `298f953`,
+  A8r2 `52becaa`, stamp tool + finding `749a355`.
+  **Judge lane changed mid-wave (owner): Opus 5 -> Sonnet 5**, lineup
+  `JUDGE_LINEUP=deepseek+sonnet`, injection-tested (judge.mts PASS 5).
+  Cause: headless Opus exited status 1 on 303/382 calls at 16-way
+  concurrency (capacity refusal, 101 nulls). Superseded Opus rows parked in
+  `wave0-judge-opus-superseded.jsonl`.
+  A7: 276/276 both lanes, 0 nulls. DeepSeek 249 keep/27 reject; Sonnet 243/33.
+  A8: 64 adjudications over 2 rounds — 6+1 confirmed_fatal, rest nonfatal or
+  false positive. 63 items carry `verification.verified`.
+  **EXACT NEXT ACTIONS, in order:**
+  1. IN FLIGHT: scoped Alpha repairing `lem-rat-embeds-dense` (Statement
+     claims "embedding of ordered fields"; no inverse preservation proved;
+     neither lane caught it). Orchestrator decision: PROVE in place, do not
+     narrow (consumer `lem-cauchy-with-convergent-subsequence` [L3] leans on
+     the unproved half). Requires consumer closure + independent
+     certification before completion. Commit only after its gates pass.
+  2. CLOSING FULL-MANIFEST SWEEP (not just --items): A8 repairs invalidated
+     the pair-context hash of 184/276 items. Use
+     `JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs --manifests
+     research/audit/wave0-*.pages.json ...` — ledger skip makes current
+     verdicts free. Staged rejudge ids: def-cut-multiplication,
+     def-nat-finite-sum-and-product, def-real-dedekind,
+     ex-pascals-triangle-to-row-six, lem-rat-cut-embeds, plus whatever the
+     in-flight repair adds.
+  3. `node tools/apply-judge-stamps.mjs --ledger ... --manifests ... --apply`
+     (owner-approved 2026-08-02). Dry-run first; it stamps ONLY items where
+     both lanes returned keep=true on the CURRENT hash.
+  4. A9 scope-denial re-grep, then A10 owner rundown (the wave's sole pause).
+  **A10 queue so far:** dedekind reading-order swap (D9); legacy page-count
+  prose; about-the-book URL pattern (Stanley/Halmos/Rudin/Tao);
+  bare-[A#] ℤ/ℚ prelude sweep; optional von Neumann order/membership lemma;
+  Hausdorff-distance forward promise; `rem-sup-conventions` root-cause claim;
+  Sonnet's 42% false-positive rate (9/16 were reject-with-keep-reasoning — a
+  verdict-extraction problem); abstract-algebra Beta's momentary `git stash`
+  on the shared tree (recovered, no damage); twice-touched escalations
+  (`lem-rat-cut-embeds` = 4 touches, most-touched of the wave;
+  `thm-reals-dedekind-field`; `ex-euclidean-algorithm-on-consecutive-
+  fibonacci-numbers`; `thm-vandermonde-identity`; `lem-cut-reciprocal`;
+  3 topology decay items).
+
+- **(historical) A0–A4 detail:** All 8 batches
   through A1/A2 (findings+ledgers+contracts on disk), A3 adjudicated
   (`wave0-*.A3.md`), A4 applied and committed (`c355590`): 269 items
   retro-tagged/repaired, ZERO fatal defects wave-wide, zero `ai-generated`
