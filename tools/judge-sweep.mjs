@@ -43,6 +43,10 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
 const DEEPSEEK = "deepseek-v4-pro";
 const TERRA = "gpt-5.6-terra";
 const OPUS = "claude-opus-5";
+// Owner, 2026-08-02: the audit lane moves Opus 5 -> Sonnet 5 after the headless
+// Opus process exited status 1 on 303/382 wave-0 attempts under 16-way lane
+// concurrency (a capacity refusal, not a verdict; 101 null verdicts).
+const SONNET = "claude-sonnet-5";
 // JUDGE_LINEUP mirrors tools/judge.mts: the per-level build defaults to
 // deepseek+terra; the published-page audit workflow (AUDIT-WORKFLOW.md) sets
 // deepseek+opus. The child judge inherits the same env var, so the sweep and
@@ -50,6 +54,7 @@ const OPUS = "claude-opus-5";
 const LINEUPS = Object.freeze({
   "deepseek+terra": [DEEPSEEK, TERRA],
   "deepseek+opus": [DEEPSEEK, OPUS],
+  "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
 const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const supportedModels = LINEUPS[lineupName];
@@ -131,6 +136,7 @@ const MODEL_CONCURRENCY = Object.freeze({
   [DEEPSEEK]: 16,
   [TERRA]: 16,
   [OPUS]: 16,
+  [SONNET]: 16,
 });
 const MAX_CONCURRENT_CALLS = supportedModels.reduce((sum, model) => sum + MODEL_CONCURRENCY[model], 0);
 const RETRY_EXIT = 4;

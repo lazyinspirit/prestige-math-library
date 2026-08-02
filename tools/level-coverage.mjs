@@ -45,6 +45,9 @@ const warn = (code, message, id = null) => warnings.push({ code, message, id });
 const JUDGE_LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
+  // Owner, 2026-08-02: audit second lane moved Opus 5 -> Sonnet 5 (headless
+  // Opus refused ~80% of calls under 16-way lane concurrency).
+  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
 const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
 const JUDGES = JUDGE_LINEUPS[lineupName];

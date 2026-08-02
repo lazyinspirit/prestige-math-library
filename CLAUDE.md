@@ -25,7 +25,7 @@ starting or resuming a level.
 **Published-page audit, step A0 to A10: `AUDIT-WORKFLOW.md`** — the canonical
 retro-audit of already-published pages (provenance retro-tagging, citation-
 precision audit, generated-statement blast radius, the wave/batch model, the
-`deepseek+opus` judge lineup). Read it before starting or resuming an audit
+`deepseek+sonnet` judge lineup). Read it before starting or resuming an audit
 wave.
 
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
@@ -247,8 +247,8 @@ banner; the public sees only `published`.
   `established-knowledge` evidence class; (2) every audit role (Audit-Beta,
   Alpha, readers, refuters) is **Opus 5 (`claude-opus-5`) at high reasoning
   effort** through the Claude runtime, and the paired judges are DeepSeek V4
-  Pro plus a fresh headless Opus 5 lane selected by env
-  `JUDGE_LINEUP=deepseek+opus` (the build's `deepseek+terra` default is
+  Pro plus a fresh headless Sonnet 5 lane selected by env
+  `JUDGE_LINEUP=deepseek+sonnet` (the build's `deepseek+terra` default is
   untouched); (3) the published-item repair delegation extends to
   citation-precision repairs, provenance retags, and debatable restatements
   with Alpha as final adjudicator — deletions, id changes, and reading-order

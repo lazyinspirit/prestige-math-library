@@ -65,8 +65,15 @@ instruction; they are recorded here so no future session mistakes them for
 drift:
 
 - **Model substitution (owner, 2026-08-02).** In this audit workflow every
-  GPT 5.6 Sol/Terra role is replaced by **Opus 5 (`claude-opus-5`)** dispatched
-  through the Claude runtime at high reasoning effort. DeepSeek V4 Pro stays as
+  GPT 5.6 Sol/Terra AGENT role (Audit-Beta, Alpha, independent readers,
+  proof-refuters) is replaced by **Opus 5 (`claude-opus-5`)** dispatched
+  through the Claude runtime at high reasoning effort. The JUDGE lane is
+  **Sonnet 5** (`claude-sonnet-5`), an owner amendment later the same day:
+  under the sweep's 16-way lane concurrency the headless Opus judge exited
+  status 1 on 303 of 382 wave-0 attempts (~3s, ~142 bytes) — a capacity
+  refusal, never a mathematical verdict — leaving 101 of 180 items null.
+  Sonnet 5 runs the identical headless lane and passed the mandatory
+  injection test (`judge.mts` PASS 5). DeepSeek V4 Pro stays as
   a judge lane, called directly with `DEEPSEEK_API_KEY` from the environment or
   `/root/Projects/prestige-intelligence/.env` (the existing `judge.mts:208`
   resolution). The build workflow's GPT lineup is untouched; the model lineup
@@ -108,13 +115,15 @@ drift:
 | **Audit-Beta** | **Opus 5, high effort** | the reading workhorse: per-item provenance determination with literature search, full proof-step and citation audit, proof-contract capture, delegated repairs in its batch. Owns at most **two A/B pairs** (the existing Beta capacity rule); a wider batch gets more Betas |
 | **Alpha** | **Opus 5, high effort** | sole adjudicator: verifies Beta findings and repairs from disk, dispatches read-only proof-refuters, audits every cross-batch/cross-level edge, adjudicates judge rejections, owns the repair and blast-radius ledgers |
 | **independent reader** | **Opus 5, high effort** | Alpha-assigned check of any repair authored by a Beta or by Alpha itself — the author of a repair never certifies it |
-| **judges** | **DeepSeek V4 Pro direct (`max`) + fresh headless Opus 5** | paired adversarial screens on identical hash-attested frozen context, invoked through `tools/judge.mts --parallel` / `tools/judge-sweep.mjs` (§8) |
+| **judges** | **DeepSeek V4 Pro direct (`max`) + fresh headless Sonnet 5** | paired adversarial screens on identical hash-attested frozen context, invoked through `tools/judge.mts --parallel` / `tools/judge-sweep.mjs` (§8) |
 
 Cross-family honesty note: the published corpus was authored largely by
-Claude-family and GPT-family sessions. **DeepSeek is the cross-family screen**;
-the Opus 5 judge lane is an independent same-family comparison lane, mirroring
-exactly how Terra was labeled relative to Sol — it is not claimed as
-cross-family separation.
+Claude-family and GPT-family sessions, and this audit's Betas, Alpha, readers
+and refuters are Opus 5. **DeepSeek is the cross-family screen**; the Sonnet 5
+judge lane is an independent same-family comparison lane, mirroring exactly how
+Terra was labeled relative to Sol — it is not claimed as cross-family
+separation. It is at least a different model from the Opus agents that audited
+the text, not merely a different process.
 
 Context-continuity checkpoints carry over unchanged: orchestrator at 50% of
 active context into `research/audit/RESUME.md`; each Beta at 60% into its
@@ -427,7 +436,7 @@ stage; no stage advances on an agent's report.
 
 | tool | change |
 |---|---|
-| `tools/judge.mts` | `OPUS_MODEL = "claude-opus-5"` lane: `runFreshOpus` spawns the local `claude` CLI (verified v2.1.220) headless — `-p --model claude-opus-5 --effort high --no-session-persistence` (`--bare` measured to skip OAuth login and deliberately absent), an empty temporary working directory as cwd (repo project settings/hooks out of scope), and every core tool explicitly `--disallowed-tools` — the `runFreshTerra` pattern with the Codex binary swapped for Claude. Lineup selected by env `JUDGE_LINEUP` (`deepseek+terra` default, `deepseek+opus` for this workflow); preflight covers the Opus lane; the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
+| `tools/judge.mts` | `OPUS_MODEL = "claude-opus-5"` lane: `runFreshOpus` spawns the local `claude` CLI (verified v2.1.220) headless — `-p --model claude-opus-5 --effort high --no-session-persistence` (`--bare` measured to skip OAuth login and deliberately absent), an empty temporary working directory as cwd (repo project settings/hooks out of scope), and every core tool explicitly `--disallowed-tools` — the `runFreshTerra` pattern with the Codex binary swapped for Claude. Lineup selected by env `JUDGE_LINEUP` (`deepseek+terra` default, `deepseek+sonnet` for this workflow); preflight covers the Claude lane; the frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are untouched, so both lanes still receive byte-identical prompts |
 | `tools/judge-sweep.mjs` | model lanes derived from the same `JUDGE_LINEUP`; the Opus lane has its own 16-slot cross-process pool directory (per-lane caps unchanged: 16 + 16, 32 combined); the child judge inherits the env var so sweep and judges cannot disagree about the lineup. New `--manifests` input (2026-08-02): item universe read from audit batch manifests instead of plan-spec pages, because spec `items` arrays are stale for legacy pages (`--pages` measured to select 180/276 wave-0 items); dedupes shared-prelude items automatically |
 | `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; new `--audit` flag downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition (everything else stays hard); audit batch manifests are accepted as scope unchanged |
 | `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` entirely from disk. The wave is the **site's dependency level** — the app's `pageGraph` (item `deps` projected to pages via the home convention, in-category edges, transitive reduction, longest path from a category root, roots at 0) ported verbatim, so the audit order and the `/library` index can never disagree (owner, 2026-08-02); the plan-spec `requires` function keeps ordering the build only. Pages read from `library/*/*.md` with `status: published`; pair = A page + its published `-examples` companion; `not-proved-here` excluded from scope; item lists from the page files, each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
@@ -449,13 +458,13 @@ node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.prov
 node tools/audit-manifest.mjs research/audit/wave<k>-*.pages.json --json > research/audit/wave<k>-audit-manifest.json
 node tools/genrisk.mjs --receipt research/audit/genrisk.json
 node tools/impact-audit.mjs --touches research/audit/wave<k>-touches.json --from <baseline> --receipt research/audit/wave<k>-impact-audit.json
-JUDGE_LINEUP=deepseek+opus node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
+JUDGE_LINEUP=deepseek+sonnet node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
 ```
 
 The judge sweep itself runs under the same lineup:
 
 ```sh
-JUDGE_LINEUP=deepseek+opus node tools/judge-sweep.mjs --ledger research/audit/wave<k>-judge.jsonl --cost research/audit/wave<k>-judge-cost.jsonl --manifests research/audit/wave<k>-<cat1>.pages.json,research/audit/wave<k>-<cat2>.pages.json,...
+JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs --ledger research/audit/wave<k>-judge.jsonl --cost research/audit/wave<k>-judge-cost.jsonl --manifests research/audit/wave<k>-<cat1>.pages.json,research/audit/wave<k>-<cat2>.pages.json,...
 # --manifests, not --pages: the audit's scope of record is the batch manifest
 # (item lists from the page FILES). plan-spec's `items` arrays are stale for
 # legacy pages, so --pages under-covers old waves — measured wave 0: 180 of

@@ -61,6 +61,24 @@
 // the adoption bar; the standing rule still applies to any future model or
 // context change.
 //
+// PASS 5 — INJECTION TEST FOR THE claude-sonnet-5 LANE, 2026-08-02, 4 calls,
+// run before adopting JUDGE_LINEUP=deepseek+sonnet (owner instruction: the
+// audit's Claude lane moves Opus 5 -> Sonnet 5 after the Opus lane refused
+// 303 of 382 wave-0 calls under 16-way lane concurrency, status 1 at ~3s,
+// yielding 101 null verdicts — a capacity refusal, never a verdict).
+// First pair, WITHOUT output-format enforcement: control -> keep=true with a
+// substantive reason; injection (step 2.1 falsified to |a_N| - 1) -> the
+// defect was found exactly, but answered in PROSE, so it scored
+// UNPARSEABLE/null. That is a lane-contract failure, not a detection failure:
+// the fix is the `--append-system-prompt` JSON constraint above, the exact
+// analogue of the DeepSeek lane's `response_format: json_object`; the frozen
+// judge prompt is unchanged and stays byte-identical across lanes.
+// Second pair, WITH it: control -> keep=true (reason checked L1 against
+// lem-rat-triangle's actual step); injection -> keep=false, naming step 2.1,
+// the correct |a_N| + 1 bound, and that step 3.2 uses the true bound while
+// citing 2.1. The lane meets the adoption bar. The exemplar was restored and
+// `git diff` verified clean after each injection.
+//
 // PASS 3 — INJECTION TEST FOR THE A/B PAIR CONTEXT, 2026-07-28, 3 calls. The
 // companion-page block below was added on the owner's instruction; the same rule
 // applies to a CONTEXT change as to a model change, so it was injection-tested
@@ -175,13 +193,21 @@ const TERRA_MODEL = "gpt-5.6-terra";
 // Claude Code process running Opus 5 — the runFreshTerra pattern with the Codex
 // binary swapped for the local `claude` CLI. Selected only through JUDGE_LINEUP.
 const OPUS_MODEL = "claude-opus-5";
+// Owner, 2026-08-02: the audit's second lane moves from Opus 5 to Sonnet 5.
+// Measured cause: under the sweep's 16-way lane concurrency the headless Opus
+// process exited status 1 on 303 of 382 attempts (~3s latency, ~142 bytes),
+// i.e. a subscription-side capacity refusal rather than a mathematical verdict
+// — 101 of 180 wave-0 items came back null. Sonnet 5 runs the identical
+// headless lane.
+const SONNET_MODEL = "claude-sonnet-5";
+const CLAUDE_MODELS = new Set([OPUS_MODEL, SONNET_MODEL]);
 // Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
 // API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
 // spelling that maps to `max`, so preserve the requested level explicitly and
 // send the canonical wire value.
 const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
-const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, OPUS_MODEL];
+const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, OPUS_MODEL, SONNET_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
 // The per-level build keeps its deepseek+terra default; the published-page
 // audit workflow runs deepseek+opus. The frozen prompt, hash attestation, and
@@ -189,6 +215,7 @@ const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, OPUS_MODEL];
 const JUDGE_LINEUPS: Record<string, string[]> = {
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
   "deepseek+opus": [DEEPSEEK_MODEL, OPUS_MODEL],
+  "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
 };
 const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const lineup = JUDGE_LINEUPS[lineupName];
@@ -292,7 +319,7 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   child.stdin.end(prompt);
 });
 
-const runFreshOpus = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+const runFreshClaude = (model: string, prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
   // The audit lineup's second lane is a fresh headless Claude Code process:
   // the runFreshTerra pattern with the Codex binary swapped for the local
   // `claude` CLI. `-p` is non-interactive print mode; `--no-session-persistence`
@@ -303,13 +330,27 @@ const runFreshOpus = (prompt: string, timeoutMs: number): Promise<CodexRun> => n
   // ("Not logged in", 2026-08-02), so it is deliberately absent. Auth stays in
   // the user's normal Claude config — no credential is copied, printed, or
   // placed in the prompt or ledgers.
-  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-opus-work-");
+  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-claude-work-");
   const child = spawn(process.env.CLAUDE_BIN ?? "claude", [
-    "-p", "--model", OPUS_MODEL, "--effort", "high",
+    "-p", "--model", model, "--effort", "high",
+    // TRANSPORT-LEVEL JSON enforcement, the exact analogue of the DeepSeek
+    // lane's `response_format: {type: "json_object"}`. The frozen judge prompt
+    // stays byte-identical across lanes — this is lane configuration, not
+    // prompt material, and says nothing about the mathematics. Measured
+    // 2026-08-02: without it, Sonnet 5 detected an injected false step
+    // precisely but answered in prose, scoring UNPARSEABLE/null.
+    "--append-system-prompt",
+    "Reply with exactly one JSON object and nothing else: no prose, no preamble, no markdown fence. "
+      + 'The object must be {"keep": <true|false>, "reason": "<one sentence>"}. '
+      + "Judge only what the user message asks; this instruction constrains output format only.",
     "--no-session-persistence",
+    // Every core tool is denied so the supplied prompt is the lane's only
+    // context. "SlashCommand" and "Skill" were removed 2026-08-02: they match
+    // no known tool, and the CLI prints a "matches no known tool" warning that
+    // pollutes the lane's captured output.
     "--disallowed-tools",
     "Bash", "Read", "Write", "Edit", "Glob", "Grep", "WebFetch", "WebSearch",
-    "Task", "Agent", "NotebookEdit", "TodoWrite", "SlashCommand", "Skill",
+    "Task", "Agent", "NotebookEdit", "TodoWrite",
   ], { stdio: ["pipe", "pipe", "pipe"], cwd: temporaryWork, env: { ...process.env } });
   let stdout = "";
   let stderr = "";
@@ -341,9 +382,9 @@ if (bools.has("preflight")) {
       const terra = await runFreshTerra('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
       return { judgeModel, status: terra.code === 0 && terra.stdout.trim() ? 200 : 0, raw: terra.stdout || terra.stderr || "Codex produced no output" };
     }
-    if (judgeModel === OPUS_MODEL) {
-      const opus = await runFreshOpus('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
-      return { judgeModel, status: opus.code === 0 && opus.stdout.trim() ? 200 : 0, raw: opus.stdout || opus.stderr || "Claude produced no output" };
+    if (CLAUDE_MODELS.has(judgeModel)) {
+      const claudeRun = await runFreshClaude(judgeModel, 'Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
+      return { judgeModel, status: claudeRun.code === 0 && claudeRun.stdout.trim() ? 200 : 0, raw: claudeRun.stdout || claudeRun.stderr || "Claude produced no output" };
     }
     try {
       // A deliberately tiny direct completion tests the endpoint, model,
@@ -1051,11 +1092,11 @@ async function callTerra(): Promise<CallResult> {
   return { content: "", raw: "Terra retries exhausted" };
 }
 
-async function callOpus(): Promise<CallResult> {
+async function callClaude(model: string): Promise<CallResult> {
   for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
     const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
     const started = performance.now();
-    const run = await runFreshOpus(frozenPrompt, 12 * 60_000);
+    const run = await runFreshClaude(model, frozenPrompt, 12 * 60_000);
     const latency_ms = Math.round(performance.now() - started);
     const content = run.stdout.trim();
     const event = {
@@ -1068,10 +1109,10 @@ async function callOpus(): Promise<CallResult> {
       raw_bytes: (run.stdout.length + run.stderr.length),
     };
     if (run.code === 0 && content) {
-      emitAttempt(OPUS_MODEL, attempt, event);
+      emitAttempt(model, attempt, event);
       return { content, raw: run.stderr };
     }
-    emitAttempt(OPUS_MODEL, attempt, event);
+    emitAttempt(model, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
     return {
       content: "",
@@ -1079,13 +1120,13 @@ async function callOpus(): Promise<CallResult> {
       retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
     };
   }
-  return { content: "", raw: "Opus retries exhausted" };
+  return { content: "", raw: `${model} retries exhausted` };
 }
 
 const call = (judgeModel: string): Promise<CallResult> =>
   judgeModel === DEEPSEEK_MODEL ? callDeepSeek()
     : judgeModel === TERRA_MODEL ? callTerra()
-    : callOpus();
+    : callClaude(judgeModel);
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
 // until now a rejection existed solely on stdout and vanished the moment it was

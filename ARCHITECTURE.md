@@ -433,7 +433,8 @@ disposition instead of an instant error.
 
 **`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
 and `level-coverage.mjs`): `deepseek+terra` (default, the build) or
-`deepseek+opus` (the audit). See §5 for the Opus lane.
+`deepseek+sonnet` (the audit; `deepseek+opus` stays selectable but its
+headless lane refused ~80% of calls at 16-way concurrency). See §5.
 
 **`judge-sweep.mjs --manifests`** (2026-08-02): audit sweeps supply the batch
 manifests, not `--pages` — the sweep's `--pages` universe is plan-spec's
@@ -559,7 +560,7 @@ Codex subscription at `xhigh`, in parallel.**
 
 **Lineup parameter (owner, 2026-08-02).** `JUDGE_LINEUP` selects the paired
 lineup without forking the tools: `deepseek+terra` (default, the build) or
-`deepseek+opus` (the published-page audit, `AUDIT-WORKFLOW.md`). The Opus lane
+`deepseek+sonnet` (the published-page audit, `AUDIT-WORKFLOW.md`). The Opus lane
 is `runFreshOpus` in `judge.mts`: a fresh headless Claude Code process —
 `claude -p --model claude-opus-5 --effort high --no-session-persistence`, an
 empty temporary working directory (which also keeps the repo's project
