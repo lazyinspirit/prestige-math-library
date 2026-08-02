@@ -18,13 +18,21 @@ bottom-up, batches = category × dependency level.
   ℕ/ℝ construction pages; `not-proved-here` excluded). Verified 2026-08-02:
   all 66 in-scope pair levels equal the app's own output; 40 manifests,
   waves 0–14, 2,179 items in scope, 428 tagged appearances excluded.
-- **No wave has started. Next action is Step A0 for wave 0:**
-  `node tools/rounds.mjs --audit-batches --wave 0` (writes to
-  `research/audit/`), take the `touchlog` baseline snapshot
-  (`node tools/touchlog.mjs snap research/audit/wave0-touches.json baseline`),
-  report batch/pair/seam counts, then dispatch Audit-Betas per
-  `briefs/audit-beta.md` (A1 provenance + A2 citation audit; no repairs before
-  A3 approval).
+- **WAVE 0 IN FLIGHT (A0 done, A1/A2 running, 2026-08-02).** A0 artifacts on
+  disk: 7 manifests (298 item entries; 276 distinct — the two ℝ construction
+  pages share a 22-item ℤ/ℚ prelude), `wave0-touches.json` baseline snapshot,
+  `wave0-audit-manifest.json` (1,166 same-batch / 631 cross-batch / 448
+  published-backward / 25 forward edges). **8 Audit-Betas dispatched** (Opus,
+  A1+A2 only, no repairs before A3): one per batch, except real-analysis split
+  into sub-batches `cauchy` (owns all 40 cauchy-page items incl. the shared
+  prelude) and `dedekind` (its 17 exclusive items), writing sub-namespaced
+  `wave0-real-analysis-{cauchy,dedekind}.*` files; `content-policy.mjs
+  --ledger` is repeatable so both ledgers feed the gate. Expected Beta outputs
+  per batch: `.provenance.jsonl`, `.findings.md`, `.proof-contracts.json`.
+  **Next action: on Beta completion, A3 — orchestrator adjudicates every
+  proposed repair from disk, then approves A4 application; then A6 Alpha,
+  A7 judge sweep (`JUDGE_LINEUP=deepseek+opus`, `judge-sweep.mjs --pages`
+  with all 7 wave-0 A page ids), A8, A9, A10 owner rundown.
 - Opus 5 judge lane preflighted AND injection-tested (PASS 4 record in
   `tools/judge.mts` header): control keep=true, injected false step caught.
 - Baselines (2026-08-02, site-parity levels): 40 batch manifests, waves 0–14
