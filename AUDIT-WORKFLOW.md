@@ -1,8 +1,9 @@
-# The published-page audit, step A0 to A10 — PROPOSAL
+# The published-page audit, step A0 to A10 — PROPOSAL (decisions resolved)
 
-**Status: PROPOSAL, awaiting owner approval (2026-08-02).** Nothing in this
-file is normative yet. On approval, the same-commit doc rule applies: the tool
-changes it names land together with updates to `CLAUDE.md`, `LEVELS.md`,
+**Status: PROPOSAL with all open decisions resolved by the owner
+(2026-08-02, one at a time, recorded in §11).** Not yet normative. On
+approval to execute, the same-commit doc rule applies: the tool changes it
+names land together with updates to `CLAUDE.md`, `LEVELS.md`,
 `ARCHITECTURE.md`, and this file becoming normative.
 
 This is the retro-audit counterpart of `LEVELS.md`: the per-level **build**
@@ -61,17 +62,22 @@ drift:
   Where evidence is inconclusive the tag defaults **conservatively to
   `ai-generated`** — the label that raises scrutiny — never toward
   `literature-derived`.
-- **Published-audit repair delegation.** The narrow
+- **Published-audit repair delegation (owner decision R1, 2026-08-02:
+  delegate everything found).** The narrow
   obvious-published-dependency-repair protocol (`CLAUDE.md`) is extended,
-  inside audit scope only, to three repair classes: (a) unambiguous falsehoods
+  inside audit scope only, to four repair classes: (a) unambiguous falsehoods
   (the existing protocol, unchanged); (b) semantically imprecise dependency
   citations — a fact or step citing an item for more than, or other than, it
   states; (c) provenance retags and their required `sources.references`
-  additions. All existing safeguards carry over: dedicated touch snapshots,
+  additions; (d) **debatable restatements** — convention choices (settled by
+  the standing convention rule: most widely adopted form, Wikipedia as
+  tiebreaker), narrowing an overstrong Statement to what the proof licenses,
+  and equivalent judgment-call rewrites, with **Alpha as final adjudicator**.
+  All existing safeguards carry over: dedicated touch snapshots,
   `impact-audit` closure on any public-interface change, no self-certification,
-  stale-verdict deletion, targeted paired rejudge. Anything debatable — a
-  restatement between conventions, a deletion, a new theorem, a changed reading
-  order — is **not** delegated; it goes to the owner queue at A10.
+  stale-verdict deletion, targeted paired rejudge. Only **deletions, id
+  renames/removals, and structural reading-order changes** remain owner-only;
+  they go to the A10 queue with evidence and a proposed route.
 
 ## 3. Actors
 
@@ -135,7 +141,7 @@ build namespace clean.
 | `wave<k>-<cat>.pages.json` | generated batch manifest (pages + item lists, from disk) |
 | `wave<k>-<cat>.provenance.jsonl` | Beta's **provenance evidence ledger**: one row per item, `{id, statement, proof, evidence, urls[], rationale, at}` |
 | `wave<k>-<cat>.findings.md` | Beta's batch notes: defects found, repairs proposed/applied, coverage statement, checkpoint section |
-| `wave<k>-<cat>.proof-contracts.json` | Beta's namespaced proof contracts for scoped proof-bearing items (§7) |
+| `wave<k>-<cat>.proof-contracts.json` | Beta's namespaced full proof contracts for every proof-bearing item in the batch (D1) |
 | `wave<k>-audit-manifest.json` | generated relationship checklist for the wave |
 | `wave<k>-alpha.md` | Alpha's report: adjudications, cross-edge coverage, refuter evidence |
 | `wave<k>-published-repairs.md` | the repair ledger: old text, new text, class (falsehood / citation-precision / retag), source or elementary derivation, certifier, impact receipt path |
@@ -161,7 +167,7 @@ new frontmatter labels — with an **evidence class** recorded in the ledger:
 | exact statement located (same hypotheses, quantifiers, direction, conventions; cosmetic edits only) | `literature-derived` | `exact-source` | working URL added to `sources.references` |
 | no exact match, but a **semantically identical** statement located (reformulated, renotated, specialised/merged without changing content) | `ai-altered` | `semantic-source` | working URL added to `sources.references`; exact convention deltas recorded in the ledger |
 | no semantically identical statement located | `ai-generated` | `none` | full truth-risk route below |
-| Beta recognizes it as an established standard result but cannot yet locate a source | **keep searching** — a genuinely standard result virtually always has a findable source. If the search still fails: `ai-generated`, `evidence: established-unsourced` | `established-unsourced` | truth-risk route, but ranked below `none` in scrutiny ordering (open decision D2) |
+| Beta recognizes it as an established standard result but cannot locate a source after a real search (**owner decision D2**) | `ai-altered` **without a URL** — model-recognized standard knowledge counts as the source | `established-knowledge` | requires **Alpha's independent concurrence** that the statement is standard (Beta's recognition alone never clears it; disagreement falls back to `ai-generated`); `content-policy --audit` waives the URL requirement only for this ledger evidence class |
 | trivially true: directly and easily verifiable from its stated dependencies (the direct-corollary / checkable-witness standard) | `ai-generated` + `generation.role` where the existing role vocabulary fits | `trivial` | verification recorded in the ledger; low repair priority; still excluded from future `deps` targets by `content-policy` |
 
 `provenance.proof` is assigned independently: `literature-derived` (follows a
@@ -175,8 +181,16 @@ Hard rules carried over verbatim: an `ai-generated` statement is the
 truth-risk flag — on any concrete doubt Beta searches for a counterexample
 before accepting the item or a repair of it; inconclusive evidence defaults to
 `ai-generated`, never to a sourced label; every `literature-derived` /
-`ai-altered` tag requires a reader-visible working `sources.references` URL
-(the existing `content-policy` requirement).
+`ai-altered` tag requires a reader-visible working `sources.references` URL —
+with the single D2 exception above (`established-knowledge`, Alpha-concurred,
+ledger-recorded).
+
+**Legacy `authorship` retirement (owner decision D5).** The one-axis
+`authorship` field (185 items on disk: 165 `ai-altered`, 9 `ai-generated`, 11
+`literature-derived`) is **deleted in the same edit** that writes the audited
+`provenance` block; the original self-declaration survives in git history and
+in the batch ledger row. The 9 `authorship: ai-generated` items are seeded
+into `genrisk` from wave 0 regardless of when their wave is audited.
 
 **What a retro-tag does and does not invalidate.** `touchlog.mjs` hashes
 exclude the `verification` block and (verified against the code) do not treat
@@ -227,10 +241,12 @@ Deleting or replacing a published id is never delegated (ids are immutable;
 removals are owner-only) — a seed that *should* die goes to the A10 owner
 queue with its cone and a proposed replacement route.
 
-No renderer change is proposed: the presentation is frozen, and the provenance
-pill already renders component provenance for items that carry it. A visible
-"rests on a generated statement" tier would be a fourth accent and is left as
-an explicit owner decision (D4), default **no**.
+No renderer change (owner decision D4: **ledger-only for now**): the
+presentation is frozen, and the provenance pill already renders component
+provenance for items that carry it. Whether consumers of a generated statement
+get a visible fourth accent is revisited after wave 1's `genrisk` report shows
+how large real cones are; commissioning that tier is a separate owner decision
+then.
 
 ## 7. Execution order
 
@@ -271,9 +287,11 @@ build step-6a duties, executed while the item is open:
    earlier/same-page dependency, and **actually states the proposition for
    which it is cited** — right hypotheses, right quantifiers, right direction,
    no hidden stronger claim (the dominant historical defect class);
-3. capture the proof contract (`citations` with exact quotes, step input map,
-   boundary worksheet) for scoped proof-bearing items — incremental cost,
-   since the Beta is reading every step anyway; scope per open decision D1;
+3. capture the **full three-part proof contract** (`citations` with exact
+   quotes, step input map, boundary worksheet) for **every proof-bearing item
+   in the batch** (owner decision D1: full contracts everywhere) — the
+   citations block is incremental while reading; the input map and boundary
+   worksheet are the deliberate extra spend the owner chose;
 4. read Remarks and A-page summaries with proof-step suspicion; triage prose
    defects per the standing rule (nonfatal classes are recorded, not chased);
 5. propose (not yet apply) repairs, classed per §2's delegation: falsehood /
@@ -334,7 +352,10 @@ No pause.
   the item and disposition;
 - judge comparison from `judge-compare.mjs --adjudications`: agreement,
   model-only rejections, nulls, owner-confirmed fatal detections per lane;
-- the owner queue: every non-delegated repair proposal with evidence;
+- the owner queue (narrowed by R1): proposed deletions, id renames/removals,
+  and structural reading-order changes only, each with evidence and a proposed
+  route; plus the full record of delegated debatable restatements Alpha
+  adjudicated, so the delegation stays inspectable;
 - gate results and the coverage receipt.
 
 The wave's repairs ship (commit + push, conventional style, no trailers) after
@@ -406,30 +427,44 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
 ## 10. Scale, cost, and sequencing estimate
 
 - Retro-tagging: ≈2,220 published items lacking provenance, each needing a
-  read + literature search. This, not judging, is the wall-clock center.
+  read + literature search. This, plus full contract capture (D1) for every
+  proof-bearing item, is the wall-clock center, not judging.
 - Judging: ≈2,400 items × 2 lanes ≈ 4,800 calls across the run, paced by the
   16+16 pools; the sweep is resumable and skips completed current-context
   pairs, so waves are safely interruptible.
 - ~11 published waves (levels 1–10/11), per-wave width 1–8+ pairs. Waves are
   sequential by design; batches inside a wave are concurrent.
 
-## 11. Open decisions for the owner
+## 11. Resolved owner decisions (2026-08-02, decided one at a time)
 
-- **D1 — proof-contract scope.** Default proposed: full contracts for every
-  proof-bearing item in audit scope (maximally faithful to the build, largest
-  cost). Alternative: contracts only for repaired + high/critical-risk +
-  spine-selected + `ai-generated`-citing items.
-- **D2 — `established-unsourced`.** The commissioning instruction can be read
-  as letting "part of the LLM's existing knowledge" rescue an unsourced
-  statement from `ai-generated`. Proposed resolution keeps the schema honest:
-  such an item is tagged `ai-generated` with a distinguishing evidence class
-  and reduced scrutiny ranking, because `literature-derived`/`ai-altered`
-  require a URL that does not exist. Confirm or override.
-- **D3 — pause granularity.** One owner pause per wave (proposed, mirrors the
-  per-level build) vs. a single end-of-run pause.
-- **D4 — reader-facing marker for generated-statement cones.** Ledger-only by
-  default (presentation is frozen). A visible fourth tier is possible but is
-  an owner-level restyle decision.
-- **D5 — legacy `authorship` field.** 202 items carry the one-axis legacy
-  field; proposed: leave it in place (SCHEMA keeps it readable) and let the
-  new component tags stand beside it.
+- **D1 — proof-contract scope: FULL.** The complete three-part contract
+  (citation quotes, step input map, boundary worksheet) is required for every
+  proof-bearing item in audit scope; `proof-contract.mjs --strict` gates it
+  per wave. Maximally faithful to the build; the cost was accepted knowingly.
+- **D2 — established-but-unsourced: `ai-altered` WITHOUT URL.**
+  Model-recognized standard knowledge counts as a source. Safeguards: ledger
+  evidence class `established-knowledge`; Alpha must independently concur the
+  statement is standard (disagreement → `ai-generated`); `content-policy
+  --audit` waives the URL requirement for exactly this evidence class and no
+  other.
+- **D3 — pause granularity: ONE PAUSE PER WAVE.** Each wave ends at A10 with
+  its rundown and queue; approved repairs and retags commit and ship
+  immediately, wave by wave.
+- **D4 — reader-facing cone marker: LEDGER-ONLY FOR NOW.** No renderer
+  change; revisit an additive fourth tier after wave 1's `genrisk` report
+  shows real cone sizes.
+- **D5 — legacy `authorship`: REMOVE ONCE SUPERSEDED.** Deleted in the same
+  edit that writes the audited `provenance`; git history and the batch ledger
+  keep the original declaration. (Measured: 185 items — 165 `ai-altered`, 9
+  `ai-generated`, 11 `literature-derived`; the 9 are immediate `genrisk`
+  seeds.)
+- **R1 — repair delegation: DELEGATE EVERYTHING FOUND.** Falsehoods,
+  citation-precision repairs, retags, and debatable restatements (conventions
+  per the standing most-widely-adopted/Wikipedia-tiebreak rule) are all
+  agent-repairable with Alpha as final adjudicator and every safeguard
+  mandatory; only deletions, id changes, and reading-order restructures queue
+  for the owner.
+- **R2 — judge coverage: EVERY ITEM, EVERY WAVE.** Full paired
+  DeepSeek + Opus 5 coverage of each wave on final post-audit text
+  (≈4,800 calls across the run), producing a complete fresh ledger under the
+  new lineup.
