@@ -18,21 +18,38 @@ bottom-up, batches = category × dependency level.
   ℕ/ℝ construction pages; `not-proved-here` excluded). Verified 2026-08-02:
   all 66 in-scope pair levels equal the app's own output; 40 manifests,
   waves 0–14, 2,179 items in scope, 428 tagged appearances excluded.
-- **WAVE 0 IN FLIGHT (A0 done, A1/A2 running, 2026-08-02).** A0 artifacts on
-  disk: 7 manifests (298 item entries; 276 distinct — the two ℝ construction
-  pages share a 22-item ℤ/ℚ prelude), `wave0-touches.json` baseline snapshot,
-  `wave0-audit-manifest.json` (1,166 same-batch / 631 cross-batch / 448
-  published-backward / 25 forward edges). **8 Audit-Betas dispatched** (Opus,
-  A1+A2 only, no repairs before A3): one per batch, except real-analysis split
-  into sub-batches `cauchy` (owns all 40 cauchy-page items incl. the shared
-  prelude) and `dedekind` (its 17 exclusive items), writing sub-namespaced
-  `wave0-real-analysis-{cauchy,dedekind}.*` files; `content-policy.mjs
-  --ledger` is repeatable so both ledgers feed the gate. Expected Beta outputs
-  per batch: `.provenance.jsonl`, `.findings.md`, `.proof-contracts.json`.
-  **Next action: on Beta completion, A3 — orchestrator adjudicates every
-  proposed repair from disk, then approves A4 application; then A6 Alpha,
-  A7 judge sweep (`JUDGE_LINEUP=deepseek+opus`, `judge-sweep.mjs --pages`
-  with all 7 wave-0 A page ids), A8, A9, A10 owner rundown.
+- **WAVE 0: A0–A4 COMPLETE, A6 (Alpha) RUNNING (2026-08-02).** All 8 batches
+  through A1/A2 (findings+ledgers+contracts on disk), A3 adjudicated
+  (`wave0-*.A3.md`), A4 applied and committed (`c355590`): 269 items
+  retro-tagged/repaired, ZERO fatal defects wave-wide, zero `ai-generated`
+  statements except 7 combinatorics `trivial` witnesses (2 load-bearing
+  genrisk seeds, cone 1). Six `established-knowledge` rows HELD unwritten for
+  Alpha concurrence (NT×1, cauchy×3, LA×2). ~65 material items are stampless
+  (`published-unaudited`) awaiting Alpha's `verification.verified`
+  {scope: published-audit, delegated_by: owner}. A6 prep committed
+  (`08f01ce`): merged contracts (209 items), impact template (270 interfaces
+  / 2,451 affected), git-diff classification 205 pure / 65 material
+  (baseline `87c4025` → applied `c355590`), genrisk regenerated. Touch
+  snapshots: baseline / pre-A4-dedekind / pre-A4 / post-A4 (the 17
+  "double-repaired" dedekind items are a snapshot-window artifact, one
+  logical repair each). **Alpha (Opus) is dispatched for A6**: certify 65
+  material repairs via independent readers, 6 D2 concurrences, deferred
+  debatable restatements (√2 retitle, Bernoulli, Tao/Rudin curation, D5c,
+  extended-reals linkage), 1,104 cross-batch/backward edge audit, risk
+  reviews, 2 genrisk dispositions, impact receipt; report =
+  `research/audit/wave0-alpha.md`.
+  **Next after A6: A7 judge sweep** — `JUDGE_LINEUP=deepseek+opus
+  node tools/judge-sweep.mjs --pages` with ALL 7 wave-0 A page ids
+  (monoids-groups-and-subgroups, finite-counting-and-binomial-coefficients,
+  construction-of-the-natural-numbers, vector-spaces-and-subspaces,
+  divisibility-gcd-and-bezout, construction-of-r-via-cauchy-sequences +
+  construction-of-r-via-dedekind-cuts, metric-spaces) — every in-scope item,
+  both lanes; then A8 Alpha adjudication of rejections, A9 scope-denial
+  re-grep, A10 owner rundown (queue so far: dedekind reading-order swap D9,
+  legacy page-count prose, about-the-book URL pattern (Stanley/Halmos/Rudin),
+  bare-[A#] prelude sweep, optional von Neumann lemma, Hausdorff-distance
+  forward promise; also report the abstract-algebra Beta's momentary git
+  stash on the shared tree, recovered without damage).
 - Opus 5 judge lane preflighted AND injection-tested (PASS 4 record in
   `tools/judge.mts` header): control keep=true, injected false step caught.
 - Baselines (2026-08-02, site-parity levels): 40 batch manifests, waves 0–14
