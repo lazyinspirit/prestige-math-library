@@ -235,13 +235,20 @@ actually located, verified source.
 in the batch ledger row. The 9 `authorship: ai-generated` items are seeded
 into `genrisk` from wave 0 regardless of when their wave is audited.
 
-**What a retro-tag does and does not invalidate.** `touchlog.mjs` hashes
-exclude the `verification` block and (verified against the code) do not treat
-provenance/sources additions as mathematical edits; SCHEMA's material-rewrite
+**What a retro-tag does and does not invalidate.** SCHEMA's material-rewrite
 test ("would the judge have seen something different" — adding a citation that
 changes no claim does not count) means a **pure retro-tag preserves existing
 `verification.judge` and `audited`/`verified` stamps**. Any repair to
-mathematical text follows §9 and voids them as usual.
+mathematical text follows §9 and voids them as usual. **Measured correction
+(wave 0, 2026-08-02):** `touchlog.mjs`'s public-surface hash keeps ALL
+frontmatter except the `verification` block, so writing a `provenance`/
+`sources` block DOES flip the interface hash — by design, the tool never
+trusts an agent's description of its own edit. The workflow therefore
+classifies the changed interfaces mechanically from the git diff (pure
+additive retag frontmatter vs anything else) into
+`research/audit/wave<k>-impact-classification.json`; Alpha disposes the pure
+class wholesale and reviews the material class item by item in the
+`impact-audit` receipt.
 
 ### Generated-statement containment (blast radius)
 
