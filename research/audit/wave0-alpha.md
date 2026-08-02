@@ -1191,3 +1191,122 @@ Each of the five carries `verification.verified` written only after an
 independent reading, and no `verification.judge` block — any earlier verdict is
 superseded. Note for the stamping tool: all five are mid-repair and must be
 skipped until their rejudge returns.
+
+---
+
+# Wave 0 — step A8, round 3 (`lem-rat-embeds-dense`, on owner instruction)
+
+I had graded this one nonfatal and queued it. **The owner overruled that, and was
+right.** My reasoning conflated *cheap to repair* with *currently accurate*: the
+published text overclaimed regardless of how easily it could stop, and it is the
+same Statement-vs-proof class this wave confirmed fatal three times. Recorded
+plainly because the misgrading is itself a finding about my triage.
+
+## A8r3.1 The defect
+
+`items/lem-rat-embeds-dense.md` (Cauchy construction of ℝ):
+
+- Statement: "The map $q \mapsto \hat q$ is an **embedding of ordered fields**"
+- step 4.1: "The rationals embed as an **ordered subfield**"
+- the item contained **zero** occurrences of "inverse" or "reciprocal" — it proved
+  injectivity, order preservation and reflection, sums, products and density, and
+  never touched multiplicative inverses
+- **neither judge lane caught it**, across the full sweep and the rejudge
+
+## A8r3.2 Repaired by proving, not by narrowing
+
+The owner directed the proof route, and I confirmed before writing that it closes:
+`thm-reals-ordered-field` (already declared) asserts ℝ is a totally ordered
+**field** and links `thm-reals-field`; **neither depends on this lemma**, so there
+is no circularity; and `def-real-numbers` builds ℝ as the quotient ring
+$\mathcal{C}/\mathcal{N}$, whose zero and one are precisely the constant classes
+$\hat 0, \hat 1$.
+
+| change | content |
+|---|---|
+| `deps` | += `thm-reals-field` (ℝ's field structure is load-bearing for the new step) |
+| `[L2]` | extended: every nonzero rational $q$ has a reciprocal $1/q$ with $q\cdot(1/q) = 1$ (`thm-rat-field`) |
+| `[L5]` **new** | ℝ = $\mathcal{C}/\mathcal{N}$ is a field (`thm-reals-field`); $0_{\mathbb{R}} = \hat 0$, $1_{\mathbb{R}} = \hat 1$ (`def-real-numbers`); and a multiplicative inverse is unique, with the one-line reason written out |
+| step **2.2** new | $\hat q \ne 0_{\mathbb{R}}$ by injectivity; $\hat q \cdot \widehat{1/q} = \widehat{q\cdot(1/q)} = \hat 1 = 1_{\mathbb{R}}$ by termwise operations; uniqueness gives $(\hat q)^{-1} = \widehat{1/q}$ |
+| step 4.1 | now names what earns "ordered subfield": injectivity, order both ways, ring operations, **and reciprocals** |
+
+**Title and Statement untouched**, per instruction — the Statement's original claim
+is now simply true.
+
+## A8r3.3 Consumer closure — 123 consumers, none needing repair, and why that is not the earlier mistake
+
+`tools/consumers.mjs lem-rat-embeds-dense` reports **123** consumers plus a
+page-prose link. I ran the closure before calling this done, applying the lesson
+from my round-2 miss — but the conclusion is genuinely different, and the reason
+is structural: **this change is purely additive.** `git diff --stat` shows 7
+insertions and 3 deletions, and all three deletions are lines rewritten in place
+(the `deps` line, `[L2]`, step 4.1). The Statement, the title and every
+pre-existing step are byte-identical. **Nothing was withdrawn, so no consumer can
+have lost a licence** — the exact mirror of the `lem-rat-cut-embeds` narrowing,
+where a claim *was* withdrawn and three consumers broke.
+
+I nonetheless read the consumers that actually assert the property, rather than
+resting on the structural argument alone. Six do, and **all six were
+under-licensed before this repair and are fully licensed now**:
+
+| consumer | its claim |
+|---|---|
+| `lem-cauchy-with-convergent-subsequence` `[L3]` | "the embedding of $\mathbb{Q}$ in $\mathbb{R}$ is a **field embedding**, so the image of $\varepsilon/2$ is half the image of $\varepsilon$" — the very use the owner flagged; it needs inverse preservation and now has it |
+| `ex-completion-of-q-is-r` `[L1]` | "an injective, order-preserving **embedding of ordered fields**" |
+| `def-sequence` | "is an **embedding of ordered fields** ([[lem-rat-embeds-dense]])" |
+| `cex-rationals-in-an-interval-are-disconnected` `[L5]` | "an injective **embedding of ordered fields**" |
+| `thm-euler-totient-product-formula` `[L6]` | "embeds injectively as an **ordered subfield** of $\mathbb{R}$" |
+| `rem-sequence-conventions` | "the **ordered-field** embedding" |
+
+This is the strongest argument that the owner's proof-over-narrowing call was
+right: narrowing would have broken all six, and `lem-cauchy-with-convergent-subsequence`
+load-bearingly.
+
+## A8r3.4 The third member of the family is clean
+
+Checked, because the coordinator asked whether a third find of this class exists.
+`lem-of-q-embeds` — the **axiomatic-ℝ** analogue, and the natural third place for
+this defect — is **not** defective: its Statement constructs the map through
+inverses outright ("$\iota(p/q) = \iota(p)\,(q \cdot 1_F)^{-1}$") and treats
+reciprocals throughout. It is also outside wave-0 scope. **No third find.**
+
+So the class stands at **four confirmed Statement-or-title overclaims in wave 0**
+(`ex-r-as-a-vector-space-over-q`, `ex-pascals-triangle-to-row-six`,
+`lem-rat-cut-embeds`, `lem-rat-embeds-dense`), of which the judges caught three
+and missed one entirely — and the one they missed was found only by a corpus-wide
+grep during blast-radius closure, not by any reading tier.
+
+## A8r3.5 A receipt inaccuracy this round exposed
+
+Regenerating the `impact-audit` receipt surfaced a defect in **my own note
+logic**: it classified each consumer's upstream interfaces from the A4 git-diff
+split, so any item that was a *pure retag at A4* and later received a *material
+repair at A6 or A8* was still being described to the reader as a frontmatter-only
+retag. Fourteen items were affected, including every A8 repair that had been a
+pure retag. The generator now carries an explicit `LATER_MATERIAL` set that moves
+them into the material branch, so each consumer's note names the real change.
+Consumers affected only by pure retags drops from 45 to 43 accordingly.
+
+## A8r3.6 Gate state and the final rejudge list
+
+`proof-contract --strict` **0 errors / 209 items** (new derivation contract for
+step 2.2, new exact-quote citations for `[L5] → thm-reals-field` and
+`[L5] → def-real-numbers`, `[L2]`'s use list extended to 2.2, step 4.1's inputs
+updated); `risk-report --require-reviewed` 0 errors; `depcheck` no cycles, all
+references resolve; `prosecheck` OK; `impact-audit --receipt` exit 0 at 276
+interfaces / 2,452 dispositions; `rendercheck`, `citecheck`, `fwdcheck`,
+`extcheck`, `precheck` all clean.
+
+**Final rejudge list — 6 items:**
+
+```
+def-cut-multiplication
+def-nat-finite-sum-and-product
+def-real-dedekind
+ex-pascals-triangle-to-row-six
+lem-rat-cut-embeds
+lem-rat-embeds-dense
+```
+
+Plus the page file `construction-of-r-via-dedekind-cuts.md`, which carries no
+verification stamp and is not judged.
