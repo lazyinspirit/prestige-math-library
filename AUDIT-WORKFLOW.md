@@ -394,6 +394,25 @@ the defect named, or refute with a verbatim quote. Exact-hash rows in
 rewrites; targeted `--items` rejudge of exactly what changed; re-run
 `impact-audit` and the coverage gate after any interface repair.
 
+**A8 invalidates A7 coverage page-wide — plan for a closing sweep (measured
+wave 0, 2026-08-02).** The frozen context unit is the A/B PAIR, so repairing
+ONE item changes the context hash of EVERY item on its page (and of items
+whose pages cite it). After wave 0's A8 repairs, 184 of 276 items no longer
+had a current-context verdict — not stale mathematics, just the attestation
+doing its job. Consequences, in order:
+
+1. The `--items` rejudge of the repaired items is necessary but never
+   sufficient; expect a **closing full-manifest sweep** after the LAST A8
+   repair round. The ledger skip (id × model × current hash) makes it cheap:
+   only genuinely changed-context items cost a call.
+2. A8 can need more than one round — a rejudge of repaired text can draw a
+   fresh rejection (wave 0: 3 of 13, one of them from both lanes on a repair
+   of a confirmed-fatal defect). Iterate A8 → rejudge until no current-context
+   rejection is unadjudicated.
+3. **Write judge stamps LAST**, once the text is final, with
+   `tools/apply-judge-stamps.mjs` (§8). Stamping mid-round records a pass that
+   the next repair immediately invalidates.
+
 **A9 — Scope-denial re-grep.** Re-grep every repaired file for the prose
 defect classes; because this workflow *reads the whole corpus level by level*,
 Betas also flag published-claim decay (claims true when written, falsified by
@@ -447,6 +466,7 @@ stage; no stage advances on an agent's report.
 | tool | does |
 |---|---|
 | `tools/genrisk.mjs` | seeds = published `ai-generated` statements plus legacy untagged `authorship: ai-generated` items (D5); computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering). Report mode regenerates `research/audit/genrisk.json` preserving dispositions by seed id; `--receipt` requires one concrete Alpha disposition (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/`owner-queue`, with reviewer + notes) per load-bearing seed, verifies retag/restate/unfold/narrow claims against disk, and fails on stale cones. Baseline measured 2026-08-02: 23 seeds, all zero-cone |
+| `tools/apply-judge-stamps.mjs` | writes `verification.judge` into items FROM the paired verdict ledger, for the text currently on disk. Recomputes each item's frozen-context hash with the same builder the sweep attests with, and stamps only when BOTH lanes returned `keep: true` on THAT hash; a rejection, a null, a stale-hash verdict or a missing lane leaves the item untouched and is reported with its reason. An adjudication grading a rejection nonfatal or a false positive never manufactures a pass. Frontmatter only, dry-run by default (`--apply` writes). Built 2026-08-02 after wave 0's A7 left 197 audited items still advertising their original publication lineup's pass |
 
 **Coverage gate per wave (the A7→A8 receipt, mirroring the build):**
 
