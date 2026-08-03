@@ -28,6 +28,12 @@ precision audit, generated-statement blast radius, the wave/batch model, the
 `deepseek+terra` judge lineup). Read it before starting or resuming an audit
 wave.
 
+**Unattended runs, and supervising one: `UNATTENDED.md`** — the driver
+(`run-level.mjs`), its halt codes, the preflight, the per-step gate runner, the
+role dispatcher, and the systemd unit. Read it before starting or attaching to a
+run that has no session. It never publishes: step 10 remains the sole owner
+pause.
+
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
 roles, the modified reasoning/disproof engines, the RAG distiller, the
 seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to

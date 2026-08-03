@@ -1,0 +1,67 @@
+# systemd user unit — one unattended level build.
+#
+# Install (as the user who owns the Codex and DeepSeek credentials, NOT root
+# unless that user is root on the VPS):
+#
+#   mkdir -p ~/.config/systemd/user ~/.config/prestige-math-library
+#   cp ops/run-level@.service ~/.config/systemd/user/
+#   cat > ~/.config/prestige-math-library/frontier-10.env <<'EOF'
+#   RUN_NAME=frontier-10
+#   RUN_LEVEL=10
+#   RUN_JUDGMENT=halt
+#   RUN_PARK_AFTER=3
+#   RUN_JUDGE_BUDGET=0
+#   PRESTIGE_APP_DIR=/root/Projects/prestige-intelligence
+#   EOF
+#   systemctl --user daemon-reload
+#   loginctl enable-linger "$USER"      # <-- the run survives logout ONLY with this
+#   systemctl --user start run-level@frontier-10
+#
+# Watch it:  journalctl --user -u run-level@frontier-10 -f
+#            node tools/run-level.mjs --run frontier-10 --status
+# Steer it:  node tools/run-control.mjs --run frontier-10 pause
+#
+# enable-linger is the difference between "runs while I am logged in" and "runs
+# while I am not". Without it systemd tears down the user manager at logout and
+# the build dies with the session it was supposed to outlive.
+
+[Unit]
+Description=Prestige math library — unattended level build (%i)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Projects/prestige-math-library
+EnvironmentFile=%h/.config/prestige-math-library/%i.env
+
+# Refuse to start a build the machine cannot finish. Without this a missing tsx
+# or an expired Codex token is discovered several steps in, after agent time has
+# been spent. --judges is deliberately NOT used here: it costs a live call per
+# lane on every restart. Run it by hand before a long build.
+ExecStartPre=/usr/bin/node tools/preflight.mjs
+
+ExecStart=/usr/bin/node tools/run-level.mjs \
+  --run ${RUN_NAME} \
+  --level ${RUN_LEVEL} \
+  --judgment ${RUN_JUDGMENT} \
+  --park-after ${RUN_PARK_AFTER} \
+  --judge-budget ${RUN_JUDGE_BUDGET}
+
+# on-abnormal only: restart after a signal, a core dump or a watchdog timeout —
+# never after a clean nonzero exit. Every such exit from run-level is a HALT: a
+# failed gate, a judgement call, an owner pause. Those are decisions waiting for
+# a human, and restarting into them would spin, spend, and bury the reason.
+Restart=on-abnormal
+RestartSec=60
+
+# A build runs for hours; do not let a stop signal orphan agent processes.
+KillMode=mixed
+TimeoutStopSec=120
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=prestige-run-%i
+
+[Install]
+WantedBy=default.target

@@ -555,6 +555,29 @@ candidate set. The spine receipt is resolved by whichever name the run actually
 uses (`<run>-spine-audit.json`, `<run>-dependency-spine-audit.json`, then the
 shared path the docs name), because practice and documentation diverged there.
 
+**`tools/dispatch.mjs`** spawns one briefed role as a plain process, so a build
+no longer depends on the subagent mechanism of whatever session started it. The
+sandbox is a property of the ROLE, not of the prompt: refuters get
+`--sandbox read-only` mechanically, because CLAUDE.md's read-only rule is a
+guarantee and a prompt asking an agent not to write is not one. Alpha's lane cap
+is 1 for the same reason — Alpha is the single writer of the prose scaffolds.
+A leftover `<n>` in a brief is fatal (briefing an agent about "level <n>" is how
+it ends up guessing), while genuinely generic placeholders only warn.
+`tools/slots.mjs` is the cross-process directory-semaphore pool it shares with
+the judge lanes' design, checked by `tools/slots.test.mjs`.
+
+**`tools/run-level.mjs`** is the driver, and `UNATTENDED.md` is its normative
+description. It owns `research/<run>-run-state.json` — step, policy, parked
+items, and a journal — so a session becomes a client of a run rather than its
+life support. Every stop is a halt with a code, a reason and a resume command;
+a halted run refuses to restart without `--from-step`, because resuming
+automatically would spin through whatever caused the halt. Judgement steps (0, 3,
+4, 9) default to halting rather than delegating. The owner pause at step 10 exits
+**0**: it is the successful end of an unattended run, and reporting it as failure
+would train an operator to ignore failures. `tools/run-control.mjs` writes the
+control file the driver polls between transitions — never mid-step, since a
+half-applied step is the expensive state to reason about later.
+
 ## 4. The ledgers — state that must outlive its own repair
 
 | ledger | written by | answers |

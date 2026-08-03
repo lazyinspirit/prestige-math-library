@@ -829,6 +829,11 @@ items). **Do not trim landmarks.**
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).
 
+**To run a level without a session attached, `UNATTENDED.md` is normative:**
+`tools/run-level.mjs` drives steps 0–10 and halts at the step-10 owner pause,
+with `tools/run-control.mjs` to steer it and `ops/run-level@.service` to survive
+logout. It changes no rule in this file — it sequences them.
+
 **The gates for a step are a table, not a recollection:** `node tools/gates.mjs
 --step <0..10> --run <name>` runs exactly the gates of record for that step
 (`--list` prints the whole table, `--json` feeds a driver). It only ever reads —
