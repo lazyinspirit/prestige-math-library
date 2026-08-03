@@ -603,7 +603,7 @@ The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that single attestation for both model queues.
 For a targeted recovery, `--models <model>` retries only that model's missing
 current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
-The sweep permits at most 16 DeepSeek calls and 16 Terra calls at once (32
+The sweep permits at most 24 DeepSeek calls and 16 Terra calls at once (40
 combined), with no per-item barrier: a finished call takes the next eligible
 call for its own model while the other model continues independently.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,

@@ -668,10 +668,14 @@ models' owner-confirmed fatal detection counts and fatal-confirmation rate among
 adjudicated rejection candidates. It makes no unsupported recall claim, because
 the complete universe of fatal defects is not independently enumerated.
 
-**Concurrency cap (owner, 2026-08-01):** `tools/judge-sweep.mjs` uses two
-file-backed, cross-process model pools: sixteen DeepSeek slots and sixteen Terra
-slots. Each lane advances independently when one of its own slots is free; the
-hard ceiling is 32 calls combined. The numbered slots live under model-specific
+**Concurrency cap (owner, 2026-08-01; DeepSeek raised 2026-08-03):**
+`tools/judge-sweep.mjs` uses two file-backed, cross-process model pools:
+twenty-four DeepSeek slots and sixteen Terra slots. Each lane advances
+independently when one of its own slots is free; the hard ceiling is 40 calls
+combined. DeepSeek's lane was raised from sixteen because its per-call latency,
+not its throughput, gates every sweep — at the end of wave 1b's A7, Terra had
+finished all 174 items while DeepSeek still had 36 pending with every slot
+held. The numbered slots live under model-specific
 directories in `/tmp`, are acquired atomically, heartbeat while a child judge
 runs, and are reclaimed only after a five-minute stale heartbeat, so a second
 resumed sweep cannot exceed either cap and a killed run cannot block it forever.

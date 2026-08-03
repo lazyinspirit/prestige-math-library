@@ -40,8 +40,10 @@ const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+terra; the published-page audit (AUDIT-WORKFLOW.md)
-// verifies deepseek+opus verdict pairs on the same current frozen context.
+// default is deepseek+terra, and the published-page audit (AUDIT-WORKFLOW.md)
+// verifies the same deepseek+terra pairs on the current frozen context. The
+// audit lane went Opus -> Sonnet -> Terra on 2026-08-02; older Opus/Sonnet rows
+// are historical evidence and do not constitute coverage.
 const JUDGE_LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],

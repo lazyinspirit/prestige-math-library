@@ -209,8 +209,11 @@ const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
 const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, OPUS_MODEL, SONNET_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The per-level build keeps its deepseek+terra default; the published-page
-// audit workflow runs deepseek+opus. The frozen prompt, hash attestation, and
+// The per-level build keeps its deepseek+terra default, and since 2026-08-02
+// the published-page audit workflow runs the same pair (its lane went
+// Opus -> Sonnet -> Terra; older rows stay as historical evidence only, and the
+// other two lineups remain selectable for a deliberate experiment). The frozen
+// prompt, hash attestation, and
 // verdict contract are identical across lineups.
 const JUDGE_LINEUPS: Record<string, string[]> = {
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
