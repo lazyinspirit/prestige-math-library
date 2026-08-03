@@ -17,10 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 828fd89aed6ea20154c57c8bfa7084ba920ca7e5ab69ef13a634654ddf615ca5
+    item_sha256: 1304f5cf1e906efc2fbd50abc8782e199e5a58919facbb0ec15c5775a428d1d3
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -88,6 +96,6 @@ that assigns distance $1$ to distinct points.
 
 **What the witness fails is total boundedness, not boundedness.** The space $(\mathbb{N},d)$ has diameter $1$, so it is as bounded as a nonempty space can be; but a finite $1/2$-net would have to contain every point, and $\mathbb{N}$ is not finite ([[cex-bounded-not-totally-bounded]], [[fs-bounded-implies-totally-bounded]]). Since a compact space is totally bounded ([[thm-compact-implies-complete-and-totally-bounded]]), that alone already settles non-compactness; the explicit cover of step 3.2 is given because it makes the failure visible without any theory.
 
-**The witness is complete, so completeness is not the missing ingredient either.** In $(\mathbb{N},d)$ a Cauchy sequence is eventually constant, hence convergent, so this is a complete, bounded, closed space that is not compact. The pair that *is* equivalent to compactness is completeness together with total boundedness ([[thm-metric-compactness-equivalences]]).
+**The witness is complete, so completeness is not the missing ingredient either.** In $(\mathbb{N},d)$ a Cauchy sequence is eventually constant, hence convergent, so this is a complete, bounded, closed space that is not compact. The pair that *is* equivalent to compactness, once the Axiom of Countable Choice and the Axiom of Dependent Choice are assumed, is completeness together with total boundedness ([[thm-metric-compactness-equivalences]]).
 
 **A second, analytically natural witness** is the closed unit ball of the bounded real-valued functions on $\mathbb{N}$ under the supremum metric, where the indicator functions of the singletons are pairwise at distance $1$ ([[cex-closed-and-bounded-not-compact-in-the-sup-metric]]).

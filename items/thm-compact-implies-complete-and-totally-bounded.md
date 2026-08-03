@@ -17,10 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 2f14fa5f0cb4db93da18ed7a507344f9fb2cd5c881ecd56936cb13d2cb479309
+    item_sha256: 8b5a75636fed21ea687c1fc0b52c081fd77b601bee8f90bc9d571a96afdf7908
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -91,4 +99,4 @@ taken.
 
 **Why the textbook route is avoided.** The usual proof of completeness takes a Cauchy sequence, extracts a convergent subsequence and appeals to [[lem-metric-cauchy-with-convergent-subsequence]]. That is correct, but it goes through sequential compactness, and the reader tracking the ledger then has to check the cost of *that* implication before believing this one. The tail-closure argument above is shorter and manifestly selects nothing: the sets $T_n$ are given by a formula, the point $p$ is produced by one existential instantiation, and the index $j$ in step 7.1 by another.
 
-**Neither converse holds.** A complete metric space need not be totally bounded and need not be compact ($\mathbb{R}$ is complete and unbounded), and a totally bounded space need not be compact ([[fs-totally-bounded-implies-compact]], [[cex-totally-bounded-not-compact]]). What is true is that the two together are equivalent to compactness, and the missing direction is [[thm-complete-and-totally-bounded-implies-compact]], which is where a choice principle finally has to be spent.
+**Neither converse holds.** A complete metric space need not be totally bounded and need not be compact ($\mathbb{R}$ is complete and unbounded), and a totally bounded space need not be compact ([[fs-totally-bounded-implies-compact]], [[cex-totally-bounded-not-compact]]). What is true is that, assuming the Axiom of Countable Choice, the two together are equivalent to compactness; the missing direction is [[thm-complete-and-totally-bounded-implies-compact]], and that is exactly where the Axiom of Countable Choice is spent.

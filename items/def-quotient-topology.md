@@ -16,10 +16,18 @@ short: "quotient topology, quotient map, saturated set"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 6fe7367bdb17729e97d98de50d375b3c6889ee0dea5baa5c453cd7ff421fb95b
+    item_sha256: 125e9d782e6c8a4eb7fbb67d61d675ad0cf2a1833acfd602933bd611bb6208c6
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -99,9 +107,10 @@ nothing else. Saturated sets for $\sim_B$ are the sets $A$ with $A \cap B \in
 
 **Two conventions used throughout.** First, "quotient map" is a property of a map
 *together with the two topologies*, never of the map alone. Second, a quotient
-topology is determined by $q$ alone and not by the pair $(X,Y)$: two different
-surjections onto the same set can give different topologies, and where more than
-one is in play the map is named.
+topology is determined by $q$ together with the topology on its domain, and not by
+the underlying pair of sets $(X,Y)$: two different surjections onto the same set
+can give different topologies, the same surjection gives different topologies when
+its domain is retopologised, and where more than one is in play the map is named.
 
 ## Remarks
 

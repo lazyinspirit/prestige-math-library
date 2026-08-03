@@ -13,8 +13,20 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 0697ccf61c9bc5cff88f79f634f1c1c74990246f38162150dc05b9f5256b8894
+    item_sha256: f4036866177b88dd818181d346d0c21d8e64a97b7c3b153e6b81591a6acab986
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,7 +55,7 @@ $[A]^{(n-1)/2}$ and $[A]^{(n+1)/2}$.
 
 [L2] The binomial coefficients have their maximum at the middle rank, uniquely for even $n$ and at the two middle ranks for odd $n$ ([[lem-binomial-coefficients-symmetric-and-unimodal]]).
 
-[L3] For $\mathcal G\subseteq[A]^k$, local LYM gives $|\mathcal G|/\binom nk\le|\nabla\mathcal G|/\binom n{k+1}$, with equality exactly when every set in the upper shadow contains all its $k$-subsets in $\mathcal G$ ([[thm-local-lym-inequality]]).
+[L3] For $k<n$ and $\mathcal G\subseteq[A]^k$, local LYM gives $|\mathcal G|/\binom nk\le|\nabla\mathcal G|/\binom n{k+1}$, with equality exactly when every set in the upper shadow contains all its $k$-subsets in $\mathcal G$; the hypothesis $k<n$ is needed, since at $k=n$ the right-hand denominator $\binom n{n+1}$ is zero ([[thm-local-lym-inequality]]).
 
 [F1] The rank-$k$ level of the Boolean lattice is $[A]^k$ and has cardinality $\binom nk$ ([[def-boolean-lattice-and-levels]], [[def-binomial-coefficient]]).
 

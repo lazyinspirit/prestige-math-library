@@ -22,6 +22,13 @@ landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: d2b59e29f751321edaa884e639932b4c4734c5f461cd799d480315625e6328d4
+    item_sha256: 44b31cb0dd716639c3e5701d8bb2b9947c80f2b47aace30782104555d4470d4a
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -97,9 +104,13 @@ Each of the following is a genuine choice principle: not provable in ZF
   for a statement that costs strictly less: exactly the overpayment set out in
   [[rem-choice-strengths]], and the reason a cost may not be read off a proof.
 - **Dependent choice (DC)**, that if every element of a nonempty set $X$ stands
-  in a relation $R$ to some element of $X$, then there is a **sequence**
-  $(x_n)_{n \in \mathbb{N}}$ in $X$ with $x_n \mathbin{R} x_{n+1}$ for every $n$.
-  What DC delivers is an $\mathbb{N}$-indexed sequence, not a chain in this
+  in a relation $R$ to some element of $X$, then for **every** $a \in X$ there is a
+  **sequence** $(x_n)_{n \in \mathbb{N}}$ in $X$ with $x_0 = a$ and
+  $x_n \mathbin{R} x_{n+1}$ for every $n$ ([[def-dependent-choice]]). The
+  prescribed starting point belongs to the statement: deleting the clause
+  $x_0 = a$ gives a **formally weaker** principle, which that item records as an
+  immediate consequence and does not derive DC back from, so the two are not
+  interchangeable here. What DC delivers is an $\mathbb{N}$-indexed sequence, not a chain in this
   library's sense ([[def-chain]], a totally ordered subset of a poset): $R$ need
   not be an order at all, and the terms need not be distinct. Implied by the
   Axiom of Choice, and implies countable choice; neither implication reverses,
@@ -107,7 +118,8 @@ Each of the following is a genuine choice principle: not provable in ZF
   assumption that ZF is consistent. It
   is the principle quietly used whenever a sequence is built by picking each term
   in terms of the previous one. The two non-reversals are external results that
-  this library neither proves nor records; they are quoted from the references.
+  this library does not prove; it records them, with their sources, in
+  [[def-dependent-choice]].
 - **Countable choice ($\mathrm{AC}_\omega$)**, choice functions for countable
   families. Implied by dependent choice, and still not a theorem of ZF: Cohen's
   first model contains an infinite set of reals with no countably infinite subset

@@ -119,9 +119,11 @@ constructions, and only the cylinder is identified with a space built earlier.
 
 - **The two constructions differ in one sign and in nothing else.** They use the
   same square, the same two edges and the same kind of relation; the Mobius band
-  glues the left edge to the right edge after reversing it. Every statement proved
-  above holds for both, which is exactly why an invariant is needed to separate
-  them, and why none is claimed here.
+  glues the left edge to the right edge after reversing it. Claim 1 is proved for
+  both. Claim 2 is not: it identifies the cylinder with
+  $(\mathbb{R}/\mathbb{Z}) \times [0,1]$, and no analogous description of the
+  Mobius band is attempted here. Separating the two spaces would need an invariant,
+  and none is claimed here.
 
 - **Why closedness rather than openness.** Neither projection is open. Take
   $U := \{\, (s,t) \in S : s < 1/2 \,\}$, which is open in $S$; its saturation is

@@ -1,7 +1,7 @@
 ---
 id: def-adjunction-cone-suspension
 kind: definition
-title: "The adjunction space $Y \\cup_f X$ glued along a continuous map, and the cone and the suspension of a space as quotients of $X \\times [0,1]$"
+title: "The adjunction space $Y \\cup_f X$ glued along a continuous map, and, for a nonempty space, the cone and the suspension as quotients of $X \\times [0,1]$"
 status: published
 origin: session
 provenance:
@@ -17,11 +17,12 @@ landmark: true
 short: "adjunction space, cone, suspension"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,7 +43,10 @@ subspace topology inherited from the usual topology of $\mathbb{R}$
 [[def-metrizable-space]]), and $X \times [0,1]$ the binary product with the
 product topology ([[def-product-topology]]). All three constructions below are
 quotients ([[def-quotient-topology]]) of a space already built on this page, and
-none of them needs anything further.
+none of them needs anything further. The one exception is the degenerate case
+$X = \varnothing$: then $X \times [0,1]$ is empty, so the one-point cone and the
+two-point suspension stipulated below are **not** quotients of it, and they are
+fixed by that stipulation rather than by the construction.
 
 **Adjunction space.** Let $X$ and $Y$ be topological spaces, let $A \subseteq X$
 carry the subspace topology, and let $f : A \to Y$ be continuous
@@ -117,8 +121,9 @@ space.
 
 ## Remarks
 
-- **Every construction above is a quotient of a coproduct or of a product, and
-  that is the whole point.** The adjunction space needs the disjoint union
+- **For a nonempty space every construction above is a quotient of a coproduct or
+  of a product, and that is the whole point** (the stipulated empty-space cone and
+  suspension are the sole exception, as the opening records). The adjunction space needs the disjoint union
   ([[def-disjoint-union-topology]]) so that $X$ and $Y$ start out unattached, and
   then one quotient to attach them; the cone and the suspension need the product
   with $[0,1]$ and then one quotient. So the constructions of this page suffice,

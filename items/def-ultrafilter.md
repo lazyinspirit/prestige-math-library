@@ -15,16 +15,19 @@ landmark: true
 short: "maximal filter"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-26
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 14bec335264427502af0c3869f304eaf18b212e2cdbd5bab9f097529081c8dcb
+    item_sha256: 9dfe08a5d70b6b14bb2f4371e9f7e81b17f9cc556cec5d32564e98a8cda9682b
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -96,8 +99,10 @@ $\{\, A \subseteq X : x \in A \,\}$ for some $x \in X$, and **free**, or
   **every** set at once does not follow from Feferman's model, which concerns
   $\mathbb{N}$; it is the separate and stronger external result
   [[rem-blass-model-without-ultrafilters]], likewise recorded and not proved
-  here. By [[fs-every-ultrafilter-principal]] the principal ultrafilters are
-  nevertheless not all of them.
+  here. Once the ultrafilter lemma is available -- and this library proves
+  it from the Axiom of Choice ([[thm-ultrafilter-lemma]]) -- the principal
+  ultrafilters are nevertheless not all of them
+  ([[fs-every-ultrafilter-principal]]); in ZF alone that cannot be concluded.
 - Principal ultrafilters really are ultrafilters: $\{A \subseteq X : x \in A\}$
   is a filter, and if a filter $\mathcal{G}$ contains it then any $B \in
   \mathcal{G}$ must meet $\{x\}$, since otherwise $B \cap \{x\} = \emptyset$ lies

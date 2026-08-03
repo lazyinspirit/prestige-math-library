@@ -15,11 +15,18 @@ short: "$\\aleph(A)$: least ordinal not injecting into $A$, choice free"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 519614a3ec9665c6ac2d0e5772c17829f630f7c9fca8b9e6cc3f7993d0d64ac5
+    item_sha256: a2c3c45245885ce633be99b2ac70f1dbb6fca47f7e8a52d9b061ab922ee53c0a
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
 sources:
   scraped: []
@@ -88,7 +95,7 @@ ordinal too long to be laid inside $A$.
 
 **Where choice would have crept in, and why it does not.** A careless proof says "for each well-orderable subset of $A$ choose a well-ordering of it", which is a genuine use of choice. The construction above never chooses: it collects all pairs $(S, R)$, so the well-ordering is part of the datum, and it then maps each pair to its order type, which is unique by [[thm-mostowski-collapse]]. The passage from a class of well-orders to a set of ordinals is Replacement, not choice.
 
-**What the theorem does and does not say.** It does not say $A$ can be well ordered, and it gives no injection of $A$ into an ordinal. It says only that the ordinals run out of room to sit inside $A$. Under the Axiom of Choice, $A$ is well orderable ([[thm-well-ordering-theorem]]) and $\aleph(A)$ is the least ordinal strictly larger than the cardinality of $A$; without choice, $\aleph(A)$ may be incomparable with $A$ in size, and that is still enough for the applications.
+**What the theorem does and does not say.** It does not say $A$ can be well ordered, and it gives no injection of $A$ into an ordinal. It says only that the ordinals run out of room to sit inside $A$. Under the Axiom of Choice, $A$ is well orderable ([[thm-well-ordering-theorem]]) and $\aleph(A)$ is the least ordinal that does **not** inject into $A$, that is the least cardinal strictly larger than the cardinality of $A$ -- not merely the least ordinal strictly larger than an ordinal equinumerous with $A$, since for $A = \mathbb{N}$ that would be $\omega + 1$, which still injects into $\mathbb{N}$; without choice, $\aleph(A)$ may be incomparable with $A$ in size, and that is still enough for the applications.
 
 **The ZF substitute for cardinal comparability.** "Any two sets are comparable in size" is equivalent to the Axiom of Choice, so it is unavailable here. What survives is this theorem together with [[lem-well-order-comparability]]: well-orders are always comparable, and every set has an ordinal it cannot absorb. Hartogs proved in 1915 that cardinal comparability implies the well-ordering theorem, and this construction is the engine of that proof.
 

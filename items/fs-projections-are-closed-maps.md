@@ -8,10 +8,9 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 deps: [thm-product-universal-property, lem-product-topology-on-rn, def-product-topology,
-       def-homeomorphism-and-open-maps,
-       def-metric-continuity, thm-metric-continuity-characterisations,
-       lem-real-line-is-a-metric-space, lem-of-abs-value,
-       lem-of-inverse-positive, def-max-min]
+       def-homeomorphism-and-open-maps, def-metric-continuity,
+       thm-metric-continuity-characterisations, lem-real-line-is-a-metric-space, lem-of-abs-value,
+       lem-of-inverse-positive, def-max-min, lem-of-triangle-inequality]
 justified_by: []
 forward_refs: [cex-projection-is-not-closed]
 aliases: []
@@ -66,7 +65,7 @@ is not closed in $\mathbb{R}$.
 
 [A2] $f$ is a closed map when images of closed sets are closed ([[def-homeomorphism-and-open-maps]]).
 
-[L1] The multiplication map $m : \mathbb{R}^2 \to \mathbb{R}$, $m(x,y) := xy$, is continuous. Indeed, at $(a,b)$ and for $\varepsilon > 0$, put $$\delta := \min\left\{1,\ \frac{\varepsilon}{|a|+|b|+1}\right\}>0.$$ If $d_\infty((x,y),(a,b))<\delta$, then $|x|<|a|+1$ and $$|xy-ab|\le |x|\,|y-b|+|b|\,|x-a| < (|a|+|b|+1)\delta\le\varepsilon.$$ This is the metric definition of continuity ([[def-metric-continuity]], [[lem-of-abs-value]], [[lem-of-inverse-positive]], [[def-max-min]]).
+[L1] The multiplication map $m : \mathbb{R}^2 \to \mathbb{R}$, $m(x,y) := xy$, is continuous. Indeed, at $(a,b)$ and for $\varepsilon > 0$, put $$\delta := \min\left\{1,\ \frac{\varepsilon}{|a|+|b|+1}\right\}>0.$$ If $d_\infty((x,y),(a,b))<\delta$, then $|x|<|a|+1$ and $$|xy-ab|\le |x|\,|y-b|+|b|\,|x-a| < (|a|+|b|+1)\delta\le\varepsilon.$$ The bound uses $xy-ab = x(y-b)+b(x-a)$, the triangle inequality $|u+v|\le|u|+|v|$ ([[lem-of-triangle-inequality]]) and $|uv|=|u|\,|v|$ ([[lem-of-abs-value]]). This is the metric definition of continuity ([[def-metric-continuity]], [[lem-of-inverse-positive]], [[def-max-min]]).
 
 [L2] The singleton $\{1\}$ is closed in $\mathbb{R}$: if $t\ne1$, the open interval of radius $|t-1|/2$ about $t$ avoids $1$. A continuous map of metric spaces has closed preimages of closed sets ([[lem-real-line-is-a-metric-space]], [[thm-metric-continuity-characterisations]], clause (c)).
 

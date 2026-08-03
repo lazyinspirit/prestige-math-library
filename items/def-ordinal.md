@@ -14,16 +14,19 @@ landmark: true
 short: "transitive set strictly well ordered by $\\in$"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-25
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: cfe523068b3a4a9d268c1fc74db61d539713a4533bfff6692e9f2c5503f23a86
+    item_sha256: ec3fcf9442ea792619dba09dc639dabe7741ddbb8bc4f060de5b4165c3cfbe2f
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -75,8 +78,9 @@ $\alpha$.
   the notation above, $\alpha = \{\beta : \beta < \alpha\}$, so the ordinals
   carry their own order relation as membership. This is von Neumann's device,
   and it is what makes it unnecessary to define an order type as an equivalence
-  class of well-orders: such a class is never a set, whereas the representative
-  chosen here is.
+  class of well-orders: apart from the class of the empty well-order, which is the
+  singleton $\{\varnothing\}$, such a class is a proper class rather than a set,
+  whereas the representative chosen here is always a set.
 - **The natural numbers are ordinals, and so is $\omega$.** Each natural number
   is a transitive set ([[lem-nat-transitive-irreflexive]]), and on $\mathbb{N}$
   membership coincides with the usual strict order, so each natural number and

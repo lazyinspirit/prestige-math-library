@@ -14,11 +14,12 @@ landmark: true
 short: "hereditary property"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -61,8 +62,9 @@ with no separate induction.
 
 **Heredity is a statement about a property, not about a space.** It quantifies
 over all spaces having $P$ and all their subspaces, so a single space whose
-subspaces all inherit $P$ says nothing; and a single space with one subspace
-lacking $P$ refutes heredity outright. That asymmetry is why the failures are
+subspaces all inherit $P$ says nothing; and a single space that **has** $P$ and
+has one subspace lacking $P$ refutes heredity outright. A space that lacks $P$
+refutes nothing, however its subspaces behave. That asymmetry is why the failures are
 recorded here as counterexamples and the successes as theorems.
 
 **Only topological properties are worth asking about.** Taking $S = X$ shows that

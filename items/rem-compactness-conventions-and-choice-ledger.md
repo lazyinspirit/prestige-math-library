@@ -12,6 +12,13 @@ landmark: false
 short: "conventions and the choice ledger"
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 92a81083e1cb4e8653e3c328477706747b7e400c35de3a8ad1515454f3529f4a
+    item_sha256: 58b21fb0c68c466bab80c0591310fd6198d2da78c11e796a90cb49f3b8e5b6ca
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -109,7 +116,8 @@ obtain a maximal open cover without a finite subcover; [[thm-tychonoff]] inherit
 that use and spends it a second time directly, to produce a point of a product of
 nonempty sets; and [[fs-compact-implies-sequentially-compact]] inherits both,
 since its witness is compact by Tychonoff. Tychonoff's theorem **implies** the
-Axiom of Choice, which is why no proof of it can be choice-free; the exact form of
+Axiom of Choice, so, under the standing assumption that ZF is consistent, no proof
+of it in ZF alone can exist; the exact form of
 that implication, and the correction of the classical derivation, are recorded in
 [[rem-schechter-kelley-tychonoff]], which this library states and does not prove.
 Where the ultrafilter lemma sits between the two is [[rem-choice-strengths]].

@@ -7,7 +7,13 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-totally-bounded, def-metric-compactness, thm-compact-implies-complete-and-totally-bounded, def-complete-metric-space, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-ball, def-metric-topology, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
+deps: [def-totally-bounded, def-metric-compactness,
+       thm-compact-implies-complete-and-totally-bounded, def-complete-metric-space,
+       lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space,
+       def-isometry-and-metric-embedding, def-interval, def-metric-ball, def-metric-topology,
+       thm-well-ordering-principle, lem-finite-set-has-max, def-max-min,
+       cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space,
+       def-countable-choice, thm-complete-and-totally-bounded-implies-compact]
 justified_by: []
 forward_refs: [cex-evt-fails-without-compactness, cex-heine-cantor-fails-without-compactness]
 aliases: []
@@ -16,6 +22,13 @@ short: "FALSE: totally bounded implies compact"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 8120be49ec9d13555813264de572e5eef626e62756eb9fae934a4c50a40e1a1c
+    item_sha256: 0fcdd64f06af061547f322ce75f1c2ea99cb43fe18ea77be2286e63a80180bf0
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -40,8 +53,9 @@ compact ([[def-metric-compactness]]).
 **Where the claim comes from, and what is actually true.** A compact metric space
 *is* totally bounded, and it is also complete
 ([[thm-compact-implies-complete-and-totally-bounded]]); the converse needs both
-of those conditions, not one of them
-([[thm-complete-and-totally-bounded-implies-compact]]). The claim above drops
+of those conditions, not one of them, and, as stated in this library, it also
+assumes the Axiom of Countable Choice
+([[thm-complete-and-totally-bounded-implies-compact]], [[def-countable-choice]]). The claim above drops
 completeness, and dropping it is fatal.
 
 The refutation takes the open interval $(0,1)$ ([[def-interval]]) as a metric

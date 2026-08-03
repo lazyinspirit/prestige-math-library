@@ -13,7 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -91,4 +96,4 @@ $$\kappa(G)=\lambda(G)=3.$$
 
 4.1 By [L2] and step 1.1, $\lambda(G)\le\delta(G)=3$. Together with step 3.2 this gives $\lambda(G)=3$. [step 1.1, step 3.2, L2]
 
-5.1 Whitney's inequality [L2] and step 4.1 give $\kappa(G)\le3$, while step 3.3 gives the reverse bound. Hence $\kappa(G)=\lambda(G)=3$, with both lower bounds proved independently of cubic regularity. [step 4.1, step 3.3, L2] ∎
+5.1 Whitney's inequality [L2] and step 4.1 give $\kappa(G)\le3$, while step 3.3 gives the reverse bound. Hence $\kappa(G)=\lambda(G)=3$; both lower bounds were obtained in steps 3.2 and 3.3, which use the cubic regularity of $G$. [step 4.1, step 3.3, L2] ∎

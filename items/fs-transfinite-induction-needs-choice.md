@@ -15,16 +15,19 @@ short: "both are ZF theorems; the choosing is a separate cost"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-25
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: abe004d523a61a92d1809d7bdfd8c44a9212557f3e8c035a6f889f4ea64365b0
+    item_sha256: bcc3c9bc0505c81b165db2bc162b03f3304c35733a3ba282d374375810968ee6
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -77,13 +80,13 @@ is never the recursion.
 
 2.1 Both principles are therefore available in ZF without any choice principle, so the claim is false. [step 1.1, step 1.2, A1]
 
-3.1 The correct diagnosis is that the cost lies in the class function fed to the recursion: when it is given by a formula, as it is for the order type assignment and the Hartogs construction on this page, the whole construction is choice-free, whereas the informal rule "at stage $a$ take some element not yet used" names no formula and needs a choice function supplied in advance, which is exactly how the well-ordering theorem spends the axiom. [step 2.1, A1, L2, L3]
+3.1 The correct diagnosis is that the recursion is never itself the cost: by [L2] it is a theorem schema of ZF for **every** class function given by a formula. What can cost the Axiom of Choice is obtaining that class function, which happens when its defining formula carries a parameter that ZF does not supply, or when ZF does not prove the formula total and functional. A formula whose only parameters are available in ZF, as with the order type assignment and the Hartogs construction on this page, gives a choice-free construction; the informal rule "at stage $a$ take some element not yet used" becomes such a formula only after a choice function has been supplied as a parameter, and supplying it is exactly how the well-ordering theorem spends the axiom, whether through Zorn's lemma or through Zermelo's direct recursion along a choice function. [step 2.1, A1, L2, L3]
 
 4.1 Transfinite induction and transfinite recursion are theorems of ZF, and the claim is refuted. [step 2.1, step 3.1] ∎
 
 ## Remarks
 
-**A useful test.** Ask what the value at stage $a$ is. If the answer is a definite description, "the least ordinal such that", "the order type of", "the union of the earlier values", then the recursion is choice-free. If the answer is "some element with the following property", and there is generally more than one, then a choice function is being used and must be paid for.
+**A useful test.** Ask what the value at stage $a$ is. If the answer is a definite description, "the least ordinal such that", "the order type of", "the union of the earlier values", **and every object the description mentions is one ZF supplies**, then the construction is choice-free. If the answer is "some element with the following property", and there is generally more than one, then a choice function is being used and must be paid for. The parameter clause is not decoration: "the element $c$ picks from the set of points not yet used" is a perfectly definite description, and it is Zermelo's construction, whose whole cost is obtaining $c$.
 
 **Three choice-free constructions on this page.** The collapsing map of [[thm-mostowski-collapse]], the family of order types in [[thm-hartogs]], and the comparison map of [[lem-well-order-comparability]] are all defined by formulas, which is why each is a ZF theorem. Their proofs say so explicitly, and the reason is always the same: rigidity of well-orders makes the relevant witnesses unique ([[lem-well-order-rigid]]).
 

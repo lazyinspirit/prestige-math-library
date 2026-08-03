@@ -19,6 +19,13 @@ landmark: false
 short: "what this page leaves open"
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 046bbd117fe6508ae9f03bfe523ce450b166f903d538d5077f4ab7ef98ed9bfb
+    item_sha256: e9b9e080cfe2cf64df5e31e91732b47ad489f36c814136ecbc8be03b5d2596d1
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -76,7 +83,7 @@ any separation condition other than the Hausdorff one is hereditary.
 
 **3. The invariants that would distinguish the glued spaces.**
 [[def-adjunction-cone-suspension]] builds the adjunction space, the cone and the
-suspension, and the companion page builds the circle, the torus, the cylinder and
+suspension, and the companion page builds $\mathbb{R}/\mathbb{Z}$, the torus, the cylinder and
 the Mobius band as quotients of an interval or a square. These are constructions,
 not classifications. Deciding that two of them are *not* homeomorphic requires an
 invariant, and the standard invariants for these particular spaces are

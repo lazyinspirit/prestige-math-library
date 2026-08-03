@@ -17,10 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 0e088685d26d24178b069b293180e4ce983cf4e9564d9806de0aa79aef969fa8
+    item_sha256: a62f8ca66b68922f5e146f0371abb7ed0cf664d9f1343404178edd4100914704
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -89,6 +97,6 @@ routinely not compact.
 
 ## Remarks
 
-**What goes wrong is room, not size.** The ball $K$ has diameter $2$, so it is small in the metric sense; but it contains infinitely many points that are pairwise at distance $1$, so no finite family of small balls reaches all of them. That is exactly the failure of total boundedness, and by [[thm-metric-compactness-equivalences]] it is one of the two conditions compactness is equivalent to.
+**What goes wrong is room, not size.** The ball $K$ has diameter $2$, so it is small in the metric sense; but it contains infinitely many points that are pairwise at distance $1$, so no finite family of small balls reaches all of them. That is exactly the failure of total boundedness, and it is one of the two conditions that, by [[thm-metric-compactness-equivalences]], are together equivalent to compactness once the Axiom of Countable Choice and the Axiom of Dependent Choice are assumed.
 
 **What the argument does and does not settle.** It shows that $K$ fails total boundedness, and that alone rules out compactness by [L3]. Nothing above is claimed about whether $K$ is complete; the point of the witness is that closedness and boundedness, the two conditions that suffice in $\mathbb{R}^n$ ([[thm-heine-borel-rn]]), do not suffice here.

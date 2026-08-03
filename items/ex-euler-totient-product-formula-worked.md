@@ -14,7 +14,19 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: e835017bbb59dafa985ae886440e71ebc4c10033018e89aedff65b89a2fe39d8
+    item_sha256: 7dbf7c11275fb004ffe0292689dd1bd8485ae2ad5b107c09cf0fd7c3f337c303
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,7 +50,7 @@ $2,3,5$ or by multiplying the prime-power contributions.
 
 [L1] Its canonical prime factorisation is $360=2^3\cdot3^2\cdot5$ ([[thm-canonical-prime-factorisation]]).
 
-[L2] Euler's formula may be read both as finite inclusion-exclusion over distinct prime divisors and as the product of the factors $p^k-p^{k-1}$ ([[thm-euler-totient-product-formula]]).
+[L2] Euler's formula gives $\varphi(n)=\prod_{i<r}\bigl(p_i^{k_i}-p_i^{k_i-1}\bigr)$ over the distinct prime divisors of $n$ and, after carrying the natural numbers into $\mathbb{Q}$, the equivalent form $\varphi(n)=n\prod_{i<r}\left(1-\frac1{p_i}\right)$ ([[thm-euler-totient-product-formula]]). Multiplying out that second product over the subsets of $\{p_0,\ldots,p_{r-1}\}$ is the inclusion-exclusion display used below; the cited theorem states the two products, not that display.
 
 ## Verification
 

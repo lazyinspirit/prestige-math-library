@@ -15,16 +15,19 @@ short: "FIP $\\iff$ contained in a filter"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-26
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: dd0a4d5043e28bc66a931ad89940c41f6ec9cc86815bf5cb1e61bf01900e597e
+    item_sha256: 92b5220a7c8fc28967efcda57afa4c27f6aac352722c8253a6d443fafbeaad13
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -71,7 +74,7 @@ only if it has the finite intersection property.
 
 [L2] A filter base on $X$ is nonempty, omits $\emptyset$, and is downward directed; its upward closure is the smallest filter on $X$ containing it ([[def-filter-base]], [[lem-filter-base-generates]]).
 
-[L3] In the von Neumann encoding $\sigma(n) = n \cup \{n\}$ and $n \notin n$, so a function $u : n \to \mathcal{A}$ extends to a function $u' : \sigma(n) \to \mathcal{A}$ by prescribing $u'(n)$ freely ([[def-natural-numbers]], [[lem-nat-transitive-irreflexive]]).
+[L3] In the von Neumann encoding $\sigma(n) = n \cup \{n\}$ and $n \notin n$, so, $\mathcal{A}$ being nonempty, a function $u : n \to \mathcal{A}$ extends to a function $u' : \sigma(n) \to \mathcal{A}$ by prescribing $u'(n)$ to be any member of $\mathcal{A}$ ([[def-natural-numbers]], [[lem-nat-transitive-irreflexive]]).
 
 [L4] Induction on $\mathbb{N}$: a property holding at $0$ and passing from $n$ to $\sigma(n)$ holds for every natural number ([[thm-induction-principle]]).
 

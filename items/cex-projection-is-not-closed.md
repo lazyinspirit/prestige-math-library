@@ -8,10 +8,9 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 deps: [fs-projections-are-closed-maps, lem-product-topology-on-rn, thm-product-universal-property,
-       def-metric-continuity,
-       thm-metric-continuity-characterisations, lem-of-inverse-positive,
+       def-metric-continuity, thm-metric-continuity-characterisations, lem-of-inverse-positive,
        lem-real-line-is-a-metric-space, def-max-min, lem-of-abs-value,
-       def-homeomorphism-and-open-maps, ex-rn-as-a-product]
+       def-homeomorphism-and-open-maps, ex-rn-as-a-product, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: false
@@ -19,6 +18,13 @@ short: "a projection that is not closed"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 1163e9bff3a7f8713cef06db920c30bcc7622b3a79dde14d6d7c8c84865cefc9
+    item_sha256: 5c4161f31bdd5b1e639358ae48ad9a427324ad2bba9feec59371399f50b4df39
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
@@ -65,7 +71,7 @@ $\pi_0$ is not a closed map, although it is a continuous open surjection
 
 [A2] $f$ is a closed map when images of closed sets are closed; every projection is continuous and open ([[def-homeomorphism-and-open-maps]], [[thm-product-universal-property]]).
 
-[L1] The multiplication map $m : \mathbb{R}^2 \to \mathbb{R}$, $m(x,y) := xy$, is continuous. At $(a,b)$ and for $\varepsilon > 0$, take $$\delta := \min\left\{1,\ \frac{\varepsilon}{|a|+|b|+1}\right\}>0.$$ If $d_\infty((x,y),(a,b))<\delta$, then $|x|<|a|+1$ and $$|xy-ab|\le |x|\,|y-b|+|b|\,|x-a| < (|a|+|b|+1)\delta\le\varepsilon.$$ This is the metric definition of continuity ([[def-metric-continuity]], [[lem-of-abs-value]], [[lem-of-inverse-positive]], [[def-max-min]]).
+[L1] The multiplication map $m : \mathbb{R}^2 \to \mathbb{R}$, $m(x,y) := xy$, is continuous. At $(a,b)$ and for $\varepsilon > 0$, take $$\delta := \min\left\{1,\ \frac{\varepsilon}{|a|+|b|+1}\right\}>0.$$ If $d_\infty((x,y),(a,b))<\delta$, then $|x|<|a|+1$ and $$|xy-ab|\le |x|\,|y-b|+|b|\,|x-a| < (|a|+|b|+1)\delta\le\varepsilon.$$ The bound uses $xy-ab = x(y-b)+b(x-a)$, the triangle inequality $|u+v|\le|u|+|v|$ ([[lem-of-triangle-inequality]]) and $|uv|=|u|\,|v|$ ([[lem-of-abs-value]]). This is the metric definition of continuity ([[def-metric-continuity]], [[lem-of-inverse-positive]], [[def-max-min]]).
 
 [L2] The singleton $\{1\}$ is closed in $\mathbb{R}$: the open interval of radius $|t-1|/2$ about any $t\ne1$ avoids $1$. A continuous map of metric spaces has closed preimages of closed sets ([[lem-real-line-is-a-metric-space]], [[thm-metric-continuity-characterisations]], clause (c)).
 

@@ -16,16 +16,19 @@ short: "AC implies every set carries a well-order"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-25
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 6e29123abb81fbf1d8d52a5593c1ed36ade7be870a93625327bd4847d6bd21f9
+    item_sha256: b2179cede16eb4bdfdf02db27ea873390775aa386a929ebebfa7c2e82ef9f217
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -65,7 +68,7 @@ argument below.
 
 [L5] A maximal element has nothing strictly above it ([[def-maximal-element]]).
 
-[L6] A well-order is a total order in which every nonempty subset has a least element ([[def-well-order]]).
+[L6] A well-order is given in two interchangeable presentations, and the two determine each other ([[def-well-order]]): **weakly**, as a total order $\le$ in which every nonempty subset has a least element; **strictly**, as a relation $<$ that is irreflexive, transitive and trichotomous and in which every nonempty subset $S$ has an element $\ell$ with no $s \in S$ satisfying $s < \ell$. **This proof uses the strict presentation throughout**, as does [[def-initial-segment]]; the end-extension order $\preceq$ on $P$ below is a separate relation and is weak, since Zorn's lemma is about partial orders.
 
 [L7] An initial segment is a downward closed subset ([[def-initial-segment]]).
 
@@ -73,7 +76,7 @@ argument below.
 
 **Proof technique:** direct.
 
-1.1 Let $P$ be the collection of pairs $(B, R)$ with $B \subseteq X$ and $R \subseteq B \times B$ a well-order of $B$; this is a set by Power Set and Separation applied to $\mathcal{P}(X) \times \mathcal{P}(X \times X)$, and it is nonempty because $(\emptyset, \emptyset) \in P$. [L6, construct]
+1.1 Let $P$ be the collection of pairs $(B, R)$ with $B \subseteq X$ and $R \subseteq B \times B$ a **strict** well-order of $B$; this is a set by Power Set and Separation applied to $\mathcal{P}(X) \times \mathcal{P}(X \times X)$, and it is nonempty because $(\emptyset, \emptyset) \in P$. [L6, construct]
 
 2.1 Order $P$ by end extension; this relation is reflexive, transitive, and antisymmetric, since mutual end extension forces the underlying sets and relations to coincide, so $(P, \preceq)$ is a poset. [step 1.1, L2, L7, construct]
 

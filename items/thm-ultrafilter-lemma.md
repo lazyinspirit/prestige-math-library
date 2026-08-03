@@ -1,13 +1,14 @@
 ---
 id: thm-ultrafilter-lemma
 kind: theorem
-title: "The ultrafilter lemma: every filter extends to an ultrafilter"
+title: "The ultrafilter lemma, from the Axiom of Choice: every filter extends to an ultrafilter"
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-ultrafilter, thm-zorn, lem-union-of-chain-of-filters, def-filter, def-maximal-element, def-partial-order, def-chain, def-upper-bound]
+deps: [def-ultrafilter, thm-zorn, lem-union-of-chain-of-filters, def-filter, def-maximal-element,
+       def-partial-order, def-chain, def-upper-bound, def-axiom-of-choice]
 justified_by: []
 aliases: [thm-ultrafilter-extension]
 landmark: true
@@ -15,16 +16,19 @@ short: "every filter extends to an ultrafilter"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-26
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 2f3ed2524d81f95f4c39e0a7d751ab682b5887c653ebac6d5981a74e89b5943a
+    item_sha256: 2525d690c66ee3a857baed088b05d4ffe3ea1a6e0bdc8d927926c5a14d919e3c
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,9 +47,12 @@ pipeline_run: null
 
 ## Statement
 
-Let $X$ be a set and let $\mathcal{F}_0$ be a filter on $X$ ([[def-filter]]).
-Then there is an ultrafilter $\mathcal{U}$ on $X$ ([[def-ultrafilter]]) with
-$\mathcal{F}_0 \subseteq \mathcal{U}$.
+**Assume the Axiom of Choice** ([[def-axiom-of-choice]]). Let $X$ be a set and let
+$\mathcal{F}_0$ be a filter on $X$ ([[def-filter]]). Then there is an ultrafilter
+$\mathcal{U}$ on $X$ ([[def-ultrafilter]]) with $\mathcal{F}_0 \subseteq \mathcal{U}$.
+
+The hypothesis is spent exactly once, through Zorn's lemma at step 4.1; the rest
+of the argument is a theorem of ZF.
 
 In particular, every set that carries a filter carries an ultrafilter. The proof
 uses Zorn's lemma ([[thm-zorn]]) and therefore the Axiom of Choice. That some
@@ -58,7 +65,7 @@ independence result, not proved in this library; see the remarks below.
 
 [A1] $\mathcal{F}_0$ is a filter on $X$: $X \in \mathcal{F}_0$, $\emptyset \notin \mathcal{F}_0$, and $\mathcal{F}_0$ is closed under pairwise intersection and upward in $X$ ([[def-filter]]).
 
-[L1] Zorn's lemma: a nonempty poset in which every chain has an upper bound has a maximal element; the hypothesis is about all chains, the empty chain included ([[thm-zorn]]).
+[L1] Zorn's lemma, which assumes the Axiom of Choice: a nonempty poset in which every chain has an upper bound has a maximal element; the hypothesis is about all chains, the empty chain included ([[thm-zorn]], [[def-axiom-of-choice]]).
 
 [L2] The union of a nonempty inclusion-chain of filters on $X$ is a filter on $X$ and an upper bound of the chain ([[lem-union-of-chain-of-filters]]).
 
