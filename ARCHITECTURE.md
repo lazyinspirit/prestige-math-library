@@ -363,7 +363,10 @@ current `keep: false` verdict is never silently cleared: the gate requires an
 exact `{id, model, context_sha256}` Alpha adjudication from
 `--judge-adjudications`; `confirmed_fatal` and a missing adjudication fail,
 while `confirmed_nonfatal` and `false_positive` are retained as warnings under
-the explicit 30-second-gap policy. With
+the explicit 30-second-gap policy — and under R1 they close the rejection
+without any edit, which `step8-guard.mjs` below enforces. Every row also
+requires `item_sha256` (`judge-adjudication-unhashed`), the text state the
+decision was made against. With
 `--verify-current-context` it recomputes each no-network judge prompt hash, so
 an old pass cannot be reused after its item, cited statement, pair context, or
 conventions changed. It also computes every planned-versus-authored `deps`
@@ -372,6 +375,27 @@ actual lists plus a reason, so a legitimate proof-driven change cannot drift
 silently into the scaffold. It requires `spine-audit.mjs`'s independent,
 hash-bound reading receipt for proof-bearing items among the 100 largest
 transitive dependency cones.
+
+`tools/step8-guard.mjs` enforces **R1: step 8 is fatal-only** (owner,
+2026-08-03). `level-coverage` lets a `confirmed_nonfatal` or `false_positive`
+clear closure as a warning, so no gate ever demanded the accompanying edit — and
+`AUDIT-WORKFLOW.md` §9 already forbade it at A8. The failure it prevents is a
+loop, not a wrong answer: any edit is a material rewrite under SCHEMA §3, whose
+test is deliberately broad, so a cosmetic polish applied to a nonfatal finding
+voids `verification.judge`, forces a rejudge, and resamples a refuter that
+"tends to surface a different nitpick on each stochastic run of the same long
+proof". Each turn costs two judge calls and an adjudication and converges on
+nothing. The guard reads a dedicated `touchlog` baseline taken immediately
+before adjudication — the same dedicated-baseline pattern as `impact-audit` —
+and requires every item changed since it to be licensed by a `confirmed_fatal`
+row recorded against the pre-edit text state, which each adjudication row now
+carries as `item_sha256`. Scoping to that explicit window is what makes it
+exact: a step-9 scope-denial repair is simply not in it. **Fatal repairs are
+uncapped by deliberate design** — a proof that keeps yielding real fatal defects
+is either converging toward correctness or is actually false — so the guard
+counts licences, never attempts, and the twice-touched escalation stays
+advisory. `tools/item-hash.mjs` is the single normalization both it and
+`touchlog` use, so the two can never disagree about what a repair is.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 

@@ -197,6 +197,52 @@ A declared edge list of zero is a finding, not a clean bill: ask whether two
 same-level pages should connect but are duplicating or using prose instead of a
 citation.
 
+## Stage 3 — step 8: adjudicate judge rejections
+
+A rejection from **either** judge lands on text that has already cleared your
+step-6 audit, so adjudicate it from disk. **Adjudicate, do not comply.** Each
+rejection gets either a fix, with the defect named, or a refutation, with a
+verbatim quote from the cited item. Append a per-model, per-context row to
+`research/level<n>-judge-adjudications.jsonl`:
+`{id, model, context_sha256, outcome, item_sha256, defect_type?}`. `outcome` is
+`confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; a fatal outcome
+also classifies `defect_type` as `logic`, `dependency_citation`, or `other`.
+`item_sha256` is the full sha256 of the normalized item text — the file with its
+`verification:` block removed — as it stood when you adjudicated.
+
+**Step 8 is fatal-only (R1, owner 2026-08-03).** Only `confirmed_fatal`
+licenses you to touch the item. `confirmed_nonfatal` and `false_positive` close
+the rejection on the ledger row and change **nothing**: no content, page,
+frontmatter, contract, impact, or judge mutation. Your 30-second threshold still
+decides what is nonfatal — but the accompanying polish it used to permit is
+withdrawn here. If a gap is worth tidying, that is step-6 work, done before the
+text is frozen.
+
+The reason is a loop, not a doubt about your judgement. Any edit is a material
+rewrite under SCHEMA §3, so a polish deletes `verification.judge`, forces a
+rejudge, and resamples a refuter that surfaces a different nitpick on each run.
+**Fatal repairs are uncapped** — repair a real fatal defect as many times as it
+takes.
+
+Before you adjudicate anything, take the baseline snapshot; when you are done,
+gate the stage:
+
+```
+node tools/touchlog.mjs snap research/level<n>-touches.json "pre-step8"
+node tools/step8-guard.mjs --touches research/level<n>-touches.json \
+  --baseline "pre-step8" --adjudications research/level<n>-judge-adjudications.jsonl
+```
+
+`nonfatal-edit` means you changed an item no confirmed-fatal finding licensed:
+revert it, or record the fatal adjudication that justifies it. Then delete
+`verification.judge` on anything materially rewritten and re-run both judges
+only on what changed. A public-interface repair also re-runs `impact-audit.mjs`
+and repeats the final `level-coverage.mjs --verify-current-context` gate after
+its targeted paired rejudge; a stale receipt is not publication evidence.
+
+Standing instruction: re-read your own Remarks with a numbered step's suspicion.
+Remark prose is where falsehoods hide.
+
 ## Report
 
 1. Independent-reader reports received and whether their coverage was complete.

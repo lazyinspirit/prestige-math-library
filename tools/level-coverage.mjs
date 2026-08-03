@@ -303,7 +303,19 @@ if (judgeAdjudicationsPath) {
         typeof record.context_sha256 !== 'string' || !record.context_sha256 || !validOutcome ||
         (record.outcome === 'confirmed_fatal' && !validFatalType)
       ) {
-        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome}; confirmed_fatal also needs defect_type`);
+        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome, item_sha256}; confirmed_fatal also needs defect_type`);
+        continue;
+      }
+      // R1 (owner, 2026-08-03): the text state the decision was made against.
+      // tools/step8-guard.mjs matches a confirmed_fatal row against it to decide
+      // whether a step-8 edit was licensed; without it a fatal row would license
+      // every edit forever and a nonfatal polish could not be distinguished from
+      // a fatal repair. Forward-looking: ledgers written before R1 do not carry
+      // it, and their levels are published rather than re-gated.
+      if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
+        error('judge-adjudication-unhashed',
+          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256, ` +
+          'the full sha256 of the normalized item text (verification block excluded) at adjudication time', record.id);
         continue;
       }
       judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);

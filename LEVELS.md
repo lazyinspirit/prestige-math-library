@@ -660,6 +660,35 @@ nonfatal findings and false positives. Then delete
 `verification.judge` on anything materially rewritten and re-run both judges
 only on what changed.
 
+**Step 8 is fatal-only (R1, owner 2026-08-03).** Only a `confirmed_fatal`
+adjudication licenses an edit. `confirmed_nonfatal` and `false_positive` close
+the rejection on their ledger row and change nothing: no content, page,
+frontmatter, contract, impact, or judge mutation. Cosmetic polish and
+30-second-gap tidying are **step-6** work, done before the text is frozen, where
+no verdict exists to void. Any edit here is a material rewrite under SCHEMA §3,
+so a polish voids the verdict, forces a rejudge, and resamples a refuter that
+surfaces a fresh nitpick each run — an unbounded loop that costs two judge calls
+a turn and converges on nothing. **Fatal repairs are uncapped**; the
+twice-touched escalation remains advisory, because a proof that keeps yielding
+real fatal defects is either converging toward correctness or is actually false.
+
+Every adjudication row carries `item_sha256`, the full sha256 of the normalized
+item text (verification block excluded) at adjudication time. Snapshot the
+baseline immediately before adjudicating, then gate the stage:
+
+```
+node tools/touchlog.mjs snap research/level<n>-touches.json "pre-step8"
+# ... Alpha adjudicates and applies only confirmed-fatal repairs ...
+node tools/step8-guard.mjs --touches research/level<n>-touches.json \
+  --baseline "pre-step8" --adjudications research/level<n>-judge-adjudications.jsonl
+```
+
+`nonfatal-edit` names any item changed without a licensing confirmed-fatal row;
+`judge-adjudication-unhashed` names a row that cannot license anything because
+it records no text state. The guard is scoped to that explicit baseline window,
+so a later legitimate stage — a step-9 scope-denial repair, an owner-directed
+change — is never mistaken for a nonfatal polish.
+
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
 the audit receipt and repeat the final `level-coverage.mjs
 --verify-current-context` gate after its targeted paired rejudge. A stale
@@ -793,6 +822,7 @@ items). **Do not trim landmarks.**
 | `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
 | `content-policy.mjs` | future-batch component provenance, AI-generated-statement dependency prohibition, generated-claim containment, and structured external fallback |
 | `impact-audit.mjs` | required Alpha disposition of every computed downstream consumer of a changed public interface |
+| `step8-guard.mjs` | R1, step 8 is fatal-only: `nonfatal-edit` (an item changed since the `pre-step8` baseline with no `confirmed_fatal` adjudication against that text state), `judge-adjudication-unhashed` (a row with no `item_sha256`, which can license nothing). Warns on `step8-creation`/`step8-deletion`, which are step-6 powers. Fatal repairs are uncapped |
 | `level-coverage.mjs` | batch/relationship/contract scope, plan-dependency reconciliation, current paired-judge coverage, Alpha receipt, and spine receipt |
 | `spine-audit.mjs` | independent content-hashed read of proof-bearing items in the largest transitive dependency cones |
 

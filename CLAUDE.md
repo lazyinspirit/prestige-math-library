@@ -215,7 +215,33 @@ banner; the public sees only `published`.
   audit or judge adjudication, a logical gap between proof steps that a competent
   human reader can close in 30 seconds is **nonfatal**. Alpha may record or
   polish it when useful, but it must not classify it as a fatal proof defect or
-  initiate a fatal repair cycle on that basis.
+  initiate a fatal repair cycle on that basis. **At step 8 the polish is
+  withdrawn — see the fatal-only rule below.**
+
+- **Step 8 is fatal-only (R1; owner, 2026-08-03).** At build step 8, only a
+  `confirmed_fatal` adjudication licenses an edit to an item. A
+  `confirmed_nonfatal` or `false_positive` closes the rejection on its exact-hash
+  ledger row with **no content, page, frontmatter, contract, impact, or judge
+  mutation** — the rule `AUDIT-WORKFLOW.md` §9 already states for audit A8, now
+  binding on the build and mechanically enforced in both. Cosmetic polish and
+  30-second-gap tidying belong at **step 6**, before the text is frozen, where no
+  verdict exists to void. **Fatal repairs are deliberately uncapped:** a proof
+  that keeps yielding real fatal defects is either converging toward correctness
+  or is actually false, and both must run to conclusion. The twice-touched
+  escalation stays advisory.
+  Reason: any edit is a material rewrite under SCHEMA §3, so a polish voids
+  `verification.judge`, forces a rejudge, and resamples a refuter that surfaces a
+  fresh nitpick on each stochastic run — an unbounded loop costing two judge
+  calls per turn and converging on nothing.
+  Mechanism: every adjudication row additionally records `item_sha256`, the full
+  sha256 of the normalized item text (verification block excluded) at
+  adjudication time. Take a dedicated `touchlog.mjs` baseline snapshot
+  immediately before step-8 adjudication begins, then run
+  `tools/step8-guard.mjs`; every item changed since that baseline must be
+  licensed by a `confirmed_fatal` row recorded against the pre-edit text state.
+  Error codes `nonfatal-edit` and `judge-adjudication-unhashed`. Forward-looking:
+  adjudication ledgers written before R1 lack `item_sha256`, and their levels are
+  published rather than re-gated.
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every future
   Alpha-n audit, Alpha dispatches read-only proof-refuter subagents. They use

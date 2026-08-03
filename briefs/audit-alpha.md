@@ -100,9 +100,26 @@ comply.** Each rejection gets either a fix, with the defect named, or a
 refutation, with a verbatim quote from the cited item. Append a per-model,
 per-context owner decision to `research/audit/wave<k>-judge-adjudications.jsonl` so
 step 10 can separate confirmed fatal logic/dependency-citation detections from
-nonfatal findings and false positives. Then delete
+nonfatal findings and false positives. Every row also carries `item_sha256`, the
+full sha256 of the normalized item text (its `verification:` block removed) as it
+stood when you adjudicated. Then delete
 `verification.judge` on anything materially rewritten and re-run both judges
 only on what changed.
+
+**A8 is fatal-only (R1, owner 2026-08-03) — now enforced, not only written.**
+§9's rule stands: only `confirmed_fatal` licenses a mutation, and
+`confirmed_nonfatal`/`false_positive` get their ledger row and nothing else.
+Snapshot before you adjudicate and gate the stage after:
+
+```
+node tools/touchlog.mjs snap research/audit/wave<k>-touches.json "pre-a8"
+node tools/step8-guard.mjs --touches research/audit/wave<k>-touches.json \
+  --baseline "pre-a8" --adjudications research/audit/wave<k>-judge-adjudications.jsonl
+```
+
+`nonfatal-edit` names an item you changed that no confirmed-fatal finding
+licensed: revert it, or record the fatal adjudication that justifies it. Fatal
+repairs are uncapped.
 
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
 the audit receipt and repeat the final `level-coverage.mjs

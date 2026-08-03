@@ -36,6 +36,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
+import { stripVerification, itemContentHash, shortHash } from "./item-hash.mjs";
 
 const [, , cmd, ledgerPath, ...rest] = process.argv;
 const ITEMS = "items";
@@ -46,30 +47,15 @@ if (!cmd || !ledgerPath) die("usage: touchlog.mjs snap|report|audit <ledger.json
 const load = () =>
   existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, "utf8")) : { snapshots: [], seeded: [] };
 
-/** Hash everything that a REPAIR would change, and nothing a STAMP would.
- *
- *  Recording a judge verdict, a precheck result or the owner's audit date
- *  rewrites the file without touching a single character of mathematics. Hashing
- *  the raw bytes therefore charged every stamped item with a phantom repair —
- *  53 of them in one pass — which would have fired the twice-touched escalation
- *  on items nobody had edited. So the `verification:` block is excluded.
- *
- *  Everything else stays in: the body obviously, but also `title`, `deps`,
- *  `forward_refs`, `external_refs` and `proved_here`, because changing any of
- *  those IS a mathematical edit even though it lives in frontmatter. */
-const stripVerification = (text) => {
-  const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(text);
-  if (!m) return text;                              // no frontmatter: hash as-is
-  const fm = m[1].replace(/^verification:(?:\n(?:[ \t]+.*\n?)*|[^\n]*\n?)/m, "");
-  return fm + "\n---\n" + m[2];
-};
+// Hash everything that a REPAIR would change, and nothing a STAMP would. That
+// normalization now lives in tools/item-hash.mjs, because tools/step8-guard.mjs
+// must answer "did the mathematics change?" identically — see that file for why
+// the `verification:` block is excluded and everything else is kept.
 
 const hashes = () => {
   const out = {};
   for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
-    out[f.slice(0, -3)] = createHash("sha256")
-      .update(stripVerification(readFileSync(join(ITEMS, f), "utf8")))
-      .digest("hex").slice(0, 16);
+    out[f.slice(0, -3)] = shortHash(itemContentHash(readFileSync(join(ITEMS, f), "utf8")));
   return out;
 };
 
