@@ -64,10 +64,21 @@ These three deltas are owner decisions embodied in the commissioning
 instruction; they are recorded here so no future session mistakes them for
 drift:
 
-- **Model substitution (owner, 2026-08-02).** Audit-Beta and Alpha use **GPT
-  5.6 Sol** through the Codex subscription at `xhigh` with a 1,000,000-token
-  context window. Independent readers and proof-refuters also use **GPT 5.6
-  Sol** through the Codex subscription at `xhigh`.
+- **Model substitution (owner, 2026-08-02; Alpha amended 2026-08-03).**
+  Audit-Beta uses **GPT 5.6 Sol** through the Codex subscription at `xhigh`
+  with a 1,000,000-token context window. **Alpha is `claude-opus-5`** (owner,
+  2026-08-03), dispatched as an Anthropic subagent of the orchestrator session
+  — not through the Codex subscription. Independent readers and proof-refuters
+  remain **GPT 5.6 Sol** through the Codex subscription at `xhigh`; that is
+  deliberate, not an oversight, because it makes every reader who certifies an
+  Alpha-authored repair a different model family from Alpha and so strengthens
+  the no-self-certification rule.
+  Alpha's model change needs no injection test: the standing injection bar
+  (`ARCHITECTURE.md` §5) governs **judge lanes**, which return a mechanical
+  keep/reject verdict, and Alpha is an adjudicator whose findings are recorded
+  with evidence and re-checked by readers and gates. The `claude-opus-5` lane
+  nonetheless already holds an injection PASS record (`tools/judge.mts` header,
+  PASS 4, 2026-08-02).
   Every resumed Alpha must complete the durable-context recovery protocol in
   `briefs/audit-alpha.md` before acting. The JUDGE lanes are **DeepSeek V4
   Pro** plus fresh **GPT 5.6 Terra** via the Codex subscription, selected by
@@ -110,13 +121,25 @@ drift:
 | **owner** | human | approves this proposal; receives the per-wave A10 rundown; decides every non-delegated repair |
 | **orchestrator** | this session | wave/batch computation, briefs, the gate of record, ledgers, twice-touched personal audits, the A10 report |
 | **Audit-Beta** | **GPT 5.6 Sol, `xhigh`** | the reading workhorse: per-item provenance determination with literature search, full proof-step and citation audit, proof-contract capture, delegated repairs in its batch. Owns at most **two A/B pairs** (the existing Beta capacity rule); a wider batch gets more Betas |
-| **Alpha** | **GPT 5.6 Sol, `xhigh`** | sole adjudicator: verifies Beta findings and repairs from disk, dispatches read-only proof-refuters, audits every cross-batch/cross-level edge, adjudicates judge rejections, owns the repair and blast-radius ledgers; must recover the prior durable record before resuming |
+| **Alpha** | **`claude-opus-5`** (owner, 2026-08-03) | sole adjudicator: verifies Beta findings and repairs from disk, dispatches read-only proof-refuters, audits every cross-batch/cross-level edge, adjudicates judge rejections, owns the repair and blast-radius ledgers; must recover the prior durable record before resuming |
 | **independent reader** | **GPT 5.6 Sol, `xhigh`** | Alpha-assigned check of any repair authored by a Beta or by Alpha itself — the author of a repair never certifies it |
 | **judges** | **DeepSeek V4 Pro direct (`max`) + fresh GPT 5.6 Terra** | paired adversarial screens on identical hash-attested frozen context, invoked through the build's `tools/judge.mts --parallel` / `tools/judge-sweep.mjs` (§8), with 16 independent concurrent calls per model |
 
-Cross-family honesty note: the published corpus was authored largely by
-Claude-family and GPT-family sessions; this audit's Betas, Alpha, readers, and
-refuters are Sol. **DeepSeek is the cross-family screen**;
+Cross-family honesty note (updated 2026-08-03 for the Opus Alpha): the
+published corpus was authored largely by Claude-family and GPT-family
+sessions. This audit's Betas, readers, and refuters are Sol; **Alpha is
+`claude-opus-5`**. Two consequences, and the second is a cost, not a benefit:
+
+- Alpha now sits in a different family from the Betas whose repairs it
+  certifies and from the readers who certify Alpha's own repairs, so the
+  adjudication layer is no longer single-family. That is a strengthening.
+- Alpha is the **same family as a large part of the legacy corpus it
+  adjudicates**, and the orchestrator is also `claude-opus-5`. Alpha is
+  therefore not an independent family screen on Claude-authored legacy
+  content, and must not be described as one. The independence that matters
+  there is unchanged and lives elsewhere: **DeepSeek is the cross-family
+  screen**, and Sol readers/refuters are cross-family relative to Alpha.
+
 Terra is a fresh independent same-family comparison lane relative to Sol, not a
 claim of cross-family separation.
 

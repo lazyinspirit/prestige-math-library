@@ -246,10 +246,16 @@ banner; the public sees only `published`.
   failed to surface; a recoverable restatement of established mathematics is
   `ai-altered`, and an undecidable case escalates to Alpha), uncertainty never
   falls toward a sourced label, and the sole URL waiver is the Alpha-concurred
-  `established-knowledge` evidence class; (2) Audit-Beta and Alpha use **GPT
-  5.6 Sol** through the Codex subscription at `xhigh` with a 1,000,000-token
-  context window; independent readers and proof-refuters also use **GPT 5.6
-  Sol**;
+  `established-knowledge` evidence class; (2) Audit-Beta uses **GPT 5.6 Sol**
+  through the Codex subscription at `xhigh` with a 1,000,000-token context
+  window, and **audit Alpha is `claude-opus-5`** (owner, 2026-08-03),
+  dispatched as an Anthropic subagent of the orchestrator rather than through
+  Codex; independent readers and proof-refuters remain **GPT 5.6 Sol**, which
+  keeps every certifier of an Alpha-authored repair in a different family from
+  Alpha. This changes the AUDIT Alpha only; the build-workflow Alpha of
+  `LEVELS.md` stays GPT 5.6 Sol under the dispatch default above until the
+  owner says otherwise. No injection test is required, because that bar
+  governs judge lanes rather than adjudicators.
   Alpha must first recover the durable prior-session audit record; paired
   judges are DeepSeek V4 Pro plus fresh GPT 5.6 Terra selected by env
   `JUDGE_LINEUP=deepseek+terra`, with the build's same independent 24+16
