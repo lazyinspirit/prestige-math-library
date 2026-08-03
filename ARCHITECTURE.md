@@ -535,6 +535,26 @@ subscription token, which takes out the Sol and Terra lanes simultaneously and
 cannot be repaired without a human. Exit 1 means at least one required check
 failed.
 
+**`tools/gates.mjs`** is the gates of record for one step, as a table instead of
+as prose an orchestrator reassembles by hand each time: `node tools/gates.mjs
+--step 6 --run frontier-10`, `--list` to print the table without executing, and
+`--json` for a driver. Two invariants make it safe to re-run. **A gate never
+modifies content** — `reflow.mts`, `adopt-repair.mjs` and
+`merge-proof-contracts.mjs` all write, so they are repair or prepare actions the
+driver runs *before* this, never members of the table. **A gate never spends** —
+`judge-sweep.mjs` is an action with a bill; `level-coverage.mjs` is the receipt
+gate that checks what the sweep produced, which is what lets a step be re-gated
+after a crash without re-buying its verdicts. A `needs` receipt that is absent
+fails as `missing-receipt` rather than being skipped, because an unattended run
+shrugging at an absent judge ledger is the exact failure this whole layer
+exists to prevent. Steps 1 and 3 legitimately have no mechanical gate. Step 9
+runs `prosecheck` for its decidable `position-contradiction` error only: with
+`--strict` it would also fail on 589 heuristic warnings the published corpus
+carries with legitimate cases, so that list is advisory and is the sweep's
+candidate set. The spine receipt is resolved by whichever name the run actually
+uses (`<run>-spine-audit.json`, `<run>-dependency-spine-audit.json`, then the
+shared path the docs name), because practice and documentation diverged there.
+
 ## 4. The ledgers — state that must outlive its own repair
 
 | ledger | written by | answers |

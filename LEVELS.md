@@ -829,6 +829,14 @@ items). **Do not trim landmarks.**
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).
 
+**The gates for a step are a table, not a recollection:** `node tools/gates.mjs
+--step <0..10> --run <name>` runs exactly the gates of record for that step
+(`--list` prints the whole table, `--json` feeds a driver). It only ever reads —
+`reflow`, `adopt-repair` and `merge-proof-contracts` write, so they are actions
+run before it — and it never spends, so `judge-sweep` is the step-7 action while
+`level-coverage` is the gate that checks its output. A required receipt that is
+missing fails the step rather than being skipped.
+
 **Before starting or resuming a level, run `node tools/preflight.mjs`** (add
 `--judges` to also spend one minimal call per judge lane). It verifies the app
 repo, tsx loader, precheck source, KaTeX, Codex CLI and auth, DeepSeek key

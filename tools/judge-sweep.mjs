@@ -120,7 +120,9 @@ if (existsSync(ledger)) {
     history.set(row.id, histories);
   }
 }
-const loader = tsxLoader();
+let loader;
+try { loader = tsxLoader(); }
+catch (cause) { console.error(`[judge-sweep] ${cause.message}`); process.exit(2); }
 const currentContextHash = (id) => {
   const result = spawnSync(process.execPath, ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], {
     encoding: "utf8",

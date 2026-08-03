@@ -327,7 +327,11 @@ if (judgeAdjudicationsPath) {
 }
 
 function currentContextHash(id) {
-  const loader = tsxLoader();
+  // Missing tsx is an environment failure, not a coverage verdict: report it as
+  // one error against this item rather than throwing out of the whole gate.
+  let loader;
+  try { loader = tsxLoader(); }
+  catch (cause) { error('context-hash', `${id}: ${cause.message}`, id); return null; }
   const result = spawnSync(process.execPath, ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], {
     cwd: REPO,
     encoding: 'utf8',

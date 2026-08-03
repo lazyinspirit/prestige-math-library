@@ -22,7 +22,9 @@ import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { REPO, workerPrefix } from './paths.mjs';
 
-const PRECHECK = ['--prefix', workerPrefix(), 'tsx', 'tools/precheck.mts'];
+let PRECHECK;
+try { PRECHECK = ['--prefix', workerPrefix(), 'tsx', 'tools/precheck.mts']; }
+catch (cause) { console.error(`adopt-repair: ${cause.message}`); process.exit(2); }
 const STEP = /^(\d+\.\d+)\s/;
 
 const args = process.argv.slice(2);

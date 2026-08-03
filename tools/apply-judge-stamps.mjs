@@ -59,7 +59,9 @@ if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)) {
   process.exit(2);
 }
 
-const LOADER = tsxLoader();
+let LOADER;
+try { LOADER = tsxLoader(); }
+catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
 const today = new Date().toISOString().slice(0, 10);
 
 // A stamp is evidence about the item, not a mathematical change to it.  Exclude
