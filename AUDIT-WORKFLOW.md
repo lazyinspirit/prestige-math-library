@@ -502,6 +502,7 @@ stage; no stage advances on an agent's report.
 | tool | does |
 |---|---|
 | `tools/genrisk.mjs` | seeds = published `ai-generated` statements plus legacy untagged `authorship: ai-generated` items (D5); computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering). Report mode regenerates `research/audit/genrisk.json` preserving dispositions by seed id; `--receipt` requires one concrete Alpha disposition (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/`owner-queue`, with reviewer + notes) per load-bearing seed, verifies retag/restate/unfold/narrow claims against disk, and fails on stale cones. Baseline measured 2026-08-02: 23 seeds, all zero-cone |
+| `tools/step8-guard.mjs` | R1, A8/step-8 fatal-only. Compares every item against a dedicated `touchlog` baseline (`--baseline "pre-a8"`) and requires each change to be licensed by a `confirmed_fatal` adjudication recorded against that pre-edit `item_sha256`. Errors `nonfatal-edit`, `judge-adjudication-unhashed`; warns `step8-creation`/`step8-deletion`. `--against <label>` re-checks a completed stage from the ledger alone. Fatal repairs are uncapped |
 | `tools/apply-judge-stamps.mjs` | writes `verification.judge` from the paired verdict ledger. The normal route recomputes the current frozen-context hash and stamps only a two-lane `keep: true` pair. Audit A8 additionally accepts `--audit-targeted-rejudges`: it requires DeepSeek/Terra `keep: true` rows at the receipt's exact context and the receipt's unchanged item SHA-256 (excluding only the judge block it writes), then stamps only those material repair targets. Thus the exact targeted Step-8 rule remains verifiable without manufacturing a pass from an adjudication or rerunning unchanged items. Frontmatter only, dry-run by default (`--apply` writes). |
 
 **Coverage gate per wave (the A7→A8 receipt, mirroring the build):**
@@ -544,7 +545,12 @@ rule and carrying the triage rule verbatim, like every build brief.
 
 At A8, invoke this protocol **only for a confirmed-fatal adjudication**;
 `confirmed_nonfatal` and `false_positive` get their exact-hash ledger row and
-no content, page, frontmatter, contract, impact, or judge mutation. For every
+no content, page, frontmatter, contract, impact, or judge mutation. Since R1
+(owner, 2026-08-03) that rule is mechanically enforced rather than only written:
+snapshot `"pre-a8"` before adjudicating and run `tools/step8-guard.mjs` after,
+so every changed item must be licensed by a `confirmed_fatal` row against its
+pre-edit `item_sha256`. The same rule now also binds build step 8, which
+previously had neither the prose nor the gate. Fatal repairs stay uncapped. For every
 applied repair, in order: dedicated `touchlog` snapshot immediately
 before the edit → smallest correction, never an id rename/removal → ledger row
 in `wave<k>-published-repairs.md` (old text, new text, class, source URL or

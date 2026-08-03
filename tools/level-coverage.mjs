@@ -18,6 +18,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tsxLoader } from './paths.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -40,8 +41,10 @@ const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+terra; the published-page audit (AUDIT-WORKFLOW.md)
-// verifies deepseek+opus verdict pairs on the same current frozen context.
+// default is deepseek+terra, and the published-page audit (AUDIT-WORKFLOW.md)
+// verifies the same deepseek+terra pairs on the current frozen context. The
+// audit lane went Opus -> Sonnet -> Terra on 2026-08-02; older Opus/Sonnet rows
+// are historical evidence and do not constitute coverage.
 const JUDGE_LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
@@ -303,7 +306,19 @@ if (judgeAdjudicationsPath) {
         typeof record.context_sha256 !== 'string' || !record.context_sha256 || !validOutcome ||
         (record.outcome === 'confirmed_fatal' && !validFatalType)
       ) {
-        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome}; confirmed_fatal also needs defect_type`);
+        error('judge-adjudication-shape', `${judgeAdjudicationsPath}:${index + 1}: requires {id, model, context_sha256, outcome, item_sha256}; confirmed_fatal also needs defect_type`);
+        continue;
+      }
+      // R1 (owner, 2026-08-03): the text state the decision was made against.
+      // tools/step8-guard.mjs matches a confirmed_fatal row against it to decide
+      // whether a step-8 edit was licensed; without it a fatal row would license
+      // every edit forever and a nonfatal polish could not be distinguished from
+      // a fatal repair. Forward-looking: ledgers written before R1 do not carry
+      // it, and their levels are published rather than re-gated.
+      if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
+        error('judge-adjudication-unhashed',
+          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256, ` +
+          'the full sha256 of the normalized item text (verification block excluded) at adjudication time', record.id);
         continue;
       }
       judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);
@@ -312,7 +327,11 @@ if (judgeAdjudicationsPath) {
 }
 
 function currentContextHash(id) {
-  const loader = '/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs';
+  // Missing tsx is an environment failure, not a coverage verdict: report it as
+  // one error against this item rather than throwing out of the whole gate.
+  let loader;
+  try { loader = tsxLoader(); }
+  catch (cause) { error('context-hash', `${id}: ${cause.message}`, id); return null; }
   const result = spawnSync(process.execPath, ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], {
     cwd: REPO,
     encoding: 'utf8',

@@ -17,6 +17,35 @@ step** (22 `other`, 7 `dependency_citation`, 1 `logic`).
 real-analysis 725, topology 522, combinatorics 191, foundations 113.
 abstract-algebra, linear-algebra, not-proved-here and number-theory are DONE.
 
+### `step8-guard.mjs` binds from wave 3 onward, NOT retroactively
+
+`feat/unattended-build-workflow` (merged 2026-08-04) adds `tools/step8-guard.mjs`,
+enforcing "A8 is fatal-only": only a `confirmed_fatal` adjudication licenses an
+edit, and it binds each adjudication to an exact text state via a new
+**`item_sha256`** field on every ledger row.
+
+Run against wave 2 it reports **171 errors — 146 `judge-adjudication-unhashed`
+and 25 `nonfatal-edit`**. This is a retroactive-field artifact, not a wave-2
+compliance failure:
+
+- All 146 wave-2 rows predate the `item_sha256` field, so none can be hash-bound.
+- The 25 `nonfatal-edit` errors are purely downstream of that: with no hash, no
+  adjudication can license any edit. **The guard's own messages say "Alpha
+  recorded gpt-5.6-terra:confirmed_fatal"** for these items — it sees the fatal
+  adjudication, it just cannot bind it to a text state.
+- Wave 2 complied substantively: every repair traced to a `confirmed_fatal`
+  row, and Alpha absorbed 6 of 7 round-3 rejections as adjudications precisely
+  because nonfatal findings do not license edits.
+
+**Do NOT backfill `item_sha256` into the wave-2 ledger.** Hashes computed now
+would attest to the post-repair text, not the text Alpha actually adjudicated —
+that is fabricated attestation, the same error class as recording a null judge
+response as a pass. The rows stay unhashed and honest.
+
+**From wave 3, Alpha must write `item_sha256` on every adjudication row** (the
+merged `briefs/audit-alpha.md` §A8 now requires it), snapshot `pre-a8` before
+adjudicating, and gate the stage with `step8-guard.mjs`.
+
 **Carry to the next wave (owner queue, `wave2-A10.md` §8):**
 1. `thm-metric-sequential-closure` (third corroboration) + rider
    `thm-metric-continuity-characterisations` (18 consumers).

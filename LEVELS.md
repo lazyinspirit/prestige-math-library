@@ -603,7 +603,7 @@ The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that single attestation for both model queues.
 For a targeted recovery, `--models <model>` retries only that model's missing
 current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
-The sweep permits at most 16 DeepSeek calls and 16 Terra calls at once (32
+The sweep permits at most 24 DeepSeek calls and 16 Terra calls at once (40
 combined), with no per-item barrier: a finished call takes the next eligible
 call for its own model while the other model continues independently.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
@@ -659,6 +659,35 @@ step 10 can separate confirmed fatal logic/dependency-citation detections from
 nonfatal findings and false positives. Then delete
 `verification.judge` on anything materially rewritten and re-run both judges
 only on what changed.
+
+**Step 8 is fatal-only (R1, owner 2026-08-03).** Only a `confirmed_fatal`
+adjudication licenses an edit. `confirmed_nonfatal` and `false_positive` close
+the rejection on their ledger row and change nothing: no content, page,
+frontmatter, contract, impact, or judge mutation. Cosmetic polish and
+30-second-gap tidying are **step-6** work, done before the text is frozen, where
+no verdict exists to void. Any edit here is a material rewrite under SCHEMA §3,
+so a polish voids the verdict, forces a rejudge, and resamples a refuter that
+surfaces a fresh nitpick each run — an unbounded loop that costs two judge calls
+a turn and converges on nothing. **Fatal repairs are uncapped**; the
+twice-touched escalation remains advisory, because a proof that keeps yielding
+real fatal defects is either converging toward correctness or is actually false.
+
+Every adjudication row carries `item_sha256`, the full sha256 of the normalized
+item text (verification block excluded) at adjudication time. Snapshot the
+baseline immediately before adjudicating, then gate the stage:
+
+```
+node tools/touchlog.mjs snap research/level<n>-touches.json "pre-step8"
+# ... Alpha adjudicates and applies only confirmed-fatal repairs ...
+node tools/step8-guard.mjs --touches research/level<n>-touches.json \
+  --baseline "pre-step8" --adjudications research/level<n>-judge-adjudications.jsonl
+```
+
+`nonfatal-edit` names any item changed without a licensing confirmed-fatal row;
+`judge-adjudication-unhashed` names a row that cannot license anything because
+it records no text state. The guard is scoped to that explicit baseline window,
+so a later legitimate stage — a step-9 scope-denial repair, an owner-directed
+change — is never mistaken for a nonfatal polish.
 
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
 the audit receipt and repeat the final `level-coverage.mjs
@@ -793,11 +822,34 @@ items). **Do not trim landmarks.**
 | `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
 | `content-policy.mjs` | future-batch component provenance, AI-generated-statement dependency prohibition, generated-claim containment, and structured external fallback |
 | `impact-audit.mjs` | required Alpha disposition of every computed downstream consumer of a changed public interface |
+| `step8-guard.mjs` | R1, step 8 is fatal-only: `nonfatal-edit` (an item changed since the `pre-step8` baseline with no `confirmed_fatal` adjudication against that text state), `judge-adjudication-unhashed` (a row with no `item_sha256`, which can license nothing). Warns on `step8-creation`/`step8-deletion`, which are step-6 powers. Fatal repairs are uncapped |
 | `level-coverage.mjs` | batch/relationship/contract scope, plan-dependency reconciliation, current paired-judge coverage, Alpha receipt, and spine receipt |
 | `spine-audit.mjs` | independent content-hashed read of proof-bearing items in the largest transitive dependency cones |
 
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).
+
+**To run a level without a session attached, `UNATTENDED.md` is normative:**
+`tools/run-level.mjs` drives steps 0–10 and halts at the step-10 owner pause,
+with `tools/run-control.mjs` to steer it and `ops/run-level@.service` to survive
+logout. It changes no rule in this file — it sequences them.
+
+**The gates for a step are a table, not a recollection:** `node tools/gates.mjs
+--step <0..10> --run <name>` runs exactly the gates of record for that step
+(`--list` prints the whole table, `--json` feeds a driver). It only ever reads —
+`reflow`, `adopt-repair` and `merge-proof-contracts` write, so they are actions
+run before it — and it never spends, so `judge-sweep` is the step-7 action while
+`level-coverage` is the gate that checks its output. A required receipt that is
+missing fails the step rather than being skipped.
+
+**Before starting or resuming a level, run `node tools/preflight.mjs`** (add
+`--judges` to also spend one minimal call per judge lane). It verifies the app
+repo, tsx loader, precheck source, KaTeX, Codex CLI and auth, DeepSeek key
+reachability, Node, git state and disk. It exists because several of those fail
+*soft* — `rendercheck` SKIPS without KaTeX and still exits 0 — so a gate that
+never ran reads like a gate that passed. `tools/paths.mjs` resolves the app repo
+(`$PRESTIGE_APP_DIR`, else the sibling checkout, else the VPS path), and
+`node tools/tsx-run.mjs tools/<x>.mts` is the invocation for every `.mts` tool.
 
 ## Publish (after owner audit)
 

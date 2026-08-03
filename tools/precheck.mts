@@ -1,12 +1,18 @@
 // Mechanical phase-format verifier for library items.
-// Run from the content repo root (worker's tsx supplies the TS loader):
-//   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts [item.md ...]
+// Run from the content repo root (the app repo's tsx supplies the TS loader):
+//   node tools/tsx-run.mjs tools/precheck.mts [item.md ...]
 // Bare invocation checks every proof-bearing item under items/.
 // Normative checker: worker/src/precheck.ts (do not substitute the stale
 // test-fixture pc-reference.cjs — its tag vocabulary predates choose/suffices/C#).
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
-import { proposedPrecheck } from '/root/Projects/prestige-intelligence/worker/src/precheck.ts';
+import { pathToFileURL } from 'url';
+import { precheckSource } from './paths.mjs';
+
+// The normative checker lives in the app repo, whose location is resolved at run
+// time rather than hardcoded (tools/paths.mjs). A static import cannot take a
+// computed path, so this is a top-level dynamic import; tsx resolves the .ts.
+const { proposedPrecheck } = await import(pathToFileURL(precheckSource()).href);
 
 const BODY_MARKER = /\n## (Proof|Refutation|Verification|Counterexample)\n/;
 

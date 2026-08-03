@@ -363,7 +363,10 @@ current `keep: false` verdict is never silently cleared: the gate requires an
 exact `{id, model, context_sha256}` Alpha adjudication from
 `--judge-adjudications`; `confirmed_fatal` and a missing adjudication fail,
 while `confirmed_nonfatal` and `false_positive` are retained as warnings under
-the explicit 30-second-gap policy. With
+the explicit 30-second-gap policy — and under R1 they close the rejection
+without any edit, which `step8-guard.mjs` below enforces. Every row also
+requires `item_sha256` (`judge-adjudication-unhashed`), the text state the
+decision was made against. With
 `--verify-current-context` it recomputes each no-network judge prompt hash, so
 an old pass cannot be reused after its item, cited statement, pair context, or
 conventions changed. It also computes every planned-versus-authored `deps`
@@ -372,6 +375,27 @@ actual lists plus a reason, so a legitimate proof-driven change cannot drift
 silently into the scaffold. It requires `spine-audit.mjs`'s independent,
 hash-bound reading receipt for proof-bearing items among the 100 largest
 transitive dependency cones.
+
+`tools/step8-guard.mjs` enforces **R1: step 8 is fatal-only** (owner,
+2026-08-03). `level-coverage` lets a `confirmed_nonfatal` or `false_positive`
+clear closure as a warning, so no gate ever demanded the accompanying edit — and
+`AUDIT-WORKFLOW.md` §9 already forbade it at A8. The failure it prevents is a
+loop, not a wrong answer: any edit is a material rewrite under SCHEMA §3, whose
+test is deliberately broad, so a cosmetic polish applied to a nonfatal finding
+voids `verification.judge`, forces a rejudge, and resamples a refuter that
+"tends to surface a different nitpick on each stochastic run of the same long
+proof". Each turn costs two judge calls and an adjudication and converges on
+nothing. The guard reads a dedicated `touchlog` baseline taken immediately
+before adjudication — the same dedicated-baseline pattern as `impact-audit` —
+and requires every item changed since it to be licensed by a `confirmed_fatal`
+row recorded against the pre-edit text state, which each adjudication row now
+carries as `item_sha256`. Scoping to that explicit window is what makes it
+exact: a step-9 scope-denial repair is simply not in it. **Fatal repairs are
+uncapped by deliberate design** — a proof that keeps yielding real fatal defects
+is either converging toward correctness or is actually false — so the guard
+counts licences, never attempts, and the twice-touched escalation stays
+advisory. `tools/item-hash.mjs` is the single normalization both it and
+`touchlog` use, so the two can never disagree about what a repair is.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
@@ -480,6 +504,79 @@ distinguishes a B companion that is outstanding work from one the owner has said
 is never being built — five A pages are published with no B page file at all, and
 labelling those `not-building` is what stops every future session re-proposing
 them.
+
+### 3.13 Environment resolution and preflight (2026-08-03)
+
+This repo has no `node_modules` of its own. tsx, the normative precheck source
+and KaTeX all live in the `prestige-intelligence` checkout next door, and every
+tool that needed one reached in through a hardcoded `/root/Projects/...`
+literal. **`tools/paths.mjs`** replaces all of them with one resolver: the app
+repo is `$PRESTIGE_APP_DIR`, else the sibling checkout, else the original VPS
+path, first existing directory winning; this repo's own root is derived from the
+module's location and is never configured. Every accessor throws with the remedy
+(`npm install in <worker>`) rather than returning a path that does not exist, and
+nothing resolves at import time, so a tool that never needs tsx does not fail to
+load because tsx is absent. `tools/tsx-run.mjs` is the launcher every doc and
+brief now names — `node tools/tsx-run.mjs tools/precheck.mts` — instead of
+repeating a loader path that only resolved on one machine. `CODEX_HOME` defaults
+to `~/.codex` rather than `/root/.codex` for the same reason.
+
+**`tools/preflight.mjs`** answers "can this machine run a build at all" before a
+run starts spending model calls. The failure it exists for is the SOFT one:
+`rendercheck` reports `real KaTeX (SKIPPED)` and exits 0, so a gate that never
+ran is indistinguishable in an unattended log from a gate that found nothing
+wrong. It checks the app repo, tsx loader, precheck source, KaTeX resolution, the
+Codex CLI and its `auth.json`, the optional Claude CLI, DeepSeek key reachability
+(never printing it), Node version, git cleanliness and branch, and free disk.
+`--judges` additionally spends one minimal call per lane through `judge.mts
+--preflight`; it is opt-in because it costs a live token, and it is the check
+most likely to catch what actually kills an overnight run — an expired Codex
+subscription token, which takes out the Sol and Terra lanes simultaneously and
+cannot be repaired without a human. Exit 1 means at least one required check
+failed.
+
+**`tools/gates.mjs`** is the gates of record for one step, as a table instead of
+as prose an orchestrator reassembles by hand each time: `node tools/gates.mjs
+--step 6 --run frontier-10`, `--list` to print the table without executing, and
+`--json` for a driver. Two invariants make it safe to re-run. **A gate never
+modifies content** — `reflow.mts`, `adopt-repair.mjs` and
+`merge-proof-contracts.mjs` all write, so they are repair or prepare actions the
+driver runs *before* this, never members of the table. **A gate never spends** —
+`judge-sweep.mjs` is an action with a bill; `level-coverage.mjs` is the receipt
+gate that checks what the sweep produced, which is what lets a step be re-gated
+after a crash without re-buying its verdicts. A `needs` receipt that is absent
+fails as `missing-receipt` rather than being skipped, because an unattended run
+shrugging at an absent judge ledger is the exact failure this whole layer
+exists to prevent. Steps 1 and 3 legitimately have no mechanical gate. Step 9
+runs `prosecheck` for its decidable `position-contradiction` error only: with
+`--strict` it would also fail on 589 heuristic warnings the published corpus
+carries with legitimate cases, so that list is advisory and is the sweep's
+candidate set. The spine receipt is resolved by whichever name the run actually
+uses (`<run>-spine-audit.json`, `<run>-dependency-spine-audit.json`, then the
+shared path the docs name), because practice and documentation diverged there.
+
+**`tools/dispatch.mjs`** spawns one briefed role as a plain process, so a build
+no longer depends on the subagent mechanism of whatever session started it. The
+sandbox is a property of the ROLE, not of the prompt: refuters get
+`--sandbox read-only` mechanically, because CLAUDE.md's read-only rule is a
+guarantee and a prompt asking an agent not to write is not one. Alpha's lane cap
+is 1 for the same reason — Alpha is the single writer of the prose scaffolds.
+A leftover `<n>` in a brief is fatal (briefing an agent about "level <n>" is how
+it ends up guessing), while genuinely generic placeholders only warn.
+`tools/slots.mjs` is the cross-process directory-semaphore pool it shares with
+the judge lanes' design, checked by `tools/slots.test.mjs`.
+
+**`tools/run-level.mjs`** is the driver, and `UNATTENDED.md` is its normative
+description. It owns `research/<run>-run-state.json` — step, policy, parked
+items, and a journal — so a session becomes a client of a run rather than its
+life support. Every stop is a halt with a code, a reason and a resume command;
+a halted run refuses to restart without `--from-step`, because resuming
+automatically would spin through whatever caused the halt. Judgement steps (0, 3,
+4, 9) default to halting rather than delegating. The owner pause at step 10 exits
+**0**: it is the successful end of an unattended run, and reporting it as failure
+would train an operator to ignore failures. `tools/run-control.mjs` writes the
+control file the driver polls between transitions — never mid-step, since a
+half-applied step is the expensive state to reason about later.
 
 ## 4. The ledgers — state that must outlive its own repair
 
@@ -644,10 +741,14 @@ models' owner-confirmed fatal detection counts and fatal-confirmation rate among
 adjudicated rejection candidates. It makes no unsupported recall claim, because
 the complete universe of fatal defects is not independently enumerated.
 
-**Concurrency cap (owner, 2026-08-01):** `tools/judge-sweep.mjs` uses two
-file-backed, cross-process model pools: sixteen DeepSeek slots and sixteen Terra
-slots. Each lane advances independently when one of its own slots is free; the
-hard ceiling is 32 calls combined. The numbered slots live under model-specific
+**Concurrency cap (owner, 2026-08-01; DeepSeek raised 2026-08-03):**
+`tools/judge-sweep.mjs` uses two file-backed, cross-process model pools:
+twenty-four DeepSeek slots and sixteen Terra slots. Each lane advances
+independently when one of its own slots is free; the hard ceiling is 40 calls
+combined. DeepSeek's lane was raised from sixteen because its per-call latency,
+not its throughput, gates every sweep — at the end of wave 1b's A7, Terra had
+finished all 174 items while DeepSeek still had 36 pending with every slot
+held. The numbered slots live under model-specific
 directories in `/tmp`, are acquired atomically, heartbeat while a child judge
 runs, and are reclaimed only after a five-minute stale heartbeat, so a second
 resumed sweep cannot exceed either cap and a killed run cannot block it forever.
@@ -801,8 +902,9 @@ this repo.
 
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)
 
-Implemented in the **app repo**, `/root/Projects/prestige-intelligence`. Do not
-restyle without an explicit in-session owner instruction.
+Implemented in the **app repo** (the `prestige-intelligence` checkout that
+`tools/paths.mjs` resolves; `/root/Projects/prestige-intelligence` on the VPS).
+Do not restyle without an explicit in-session owner instruction.
 
 | file | owns |
 |---|---|

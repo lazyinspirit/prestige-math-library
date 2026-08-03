@@ -28,6 +28,12 @@ precision audit, generated-statement blast radius, the wave/batch model, the
 `deepseek+terra` judge lineup). Read it before starting or resuming an audit
 wave.
 
+**Unattended runs, and supervising one: `UNATTENDED.md`** — the driver
+(`run-level.mjs`), its halt codes, the preflight, the per-step gate runner, the
+role dispatcher, and the systemd unit. Read it before starting or attaching to a
+run that has no session. It never publishes: step 10 remains the sole owner
+pause.
+
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
 roles, the modified reasoning/disproof engines, the RAG distiller, the
 seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to
@@ -39,7 +45,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
    statement/construction and proof/verification provenance.
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
-   node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts
+   node tools/tsx-run.mjs tools/precheck.mts
    ```
    Bare = all items; or pass specific files. On REPAIR output, adopt the printed
    canonical stratification into the file and re-run until clean (the repo stores
@@ -166,7 +172,7 @@ banner; the public sees only `published`.
 - **Paired skeptical judges (owner, 2026-07-31).** At step 7, run
   `deepseek-v4-pro` directly with `gpt-5.6-terra` through `tools/judge.mts`.
   DeepSeek reads `DEEPSEEK_API_KEY` directly from the configured environment or
-  `/root/Projects/prestige-intelligence/.env`; Terra is a fresh, read-only Codex
+  the app repo's `.env`, located by `tools/paths.mjs`; Terra is a fresh, read-only Codex
   subscription process in an empty temporary work directory. They receive the
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.
@@ -215,7 +221,33 @@ banner; the public sees only `published`.
   audit or judge adjudication, a logical gap between proof steps that a competent
   human reader can close in 30 seconds is **nonfatal**. Alpha may record or
   polish it when useful, but it must not classify it as a fatal proof defect or
-  initiate a fatal repair cycle on that basis.
+  initiate a fatal repair cycle on that basis. **At step 8 the polish is
+  withdrawn — see the fatal-only rule below.**
+
+- **Step 8 is fatal-only (R1; owner, 2026-08-03).** At build step 8, only a
+  `confirmed_fatal` adjudication licenses an edit to an item. A
+  `confirmed_nonfatal` or `false_positive` closes the rejection on its exact-hash
+  ledger row with **no content, page, frontmatter, contract, impact, or judge
+  mutation** — the rule `AUDIT-WORKFLOW.md` §9 already states for audit A8, now
+  binding on the build and mechanically enforced in both. Cosmetic polish and
+  30-second-gap tidying belong at **step 6**, before the text is frozen, where no
+  verdict exists to void. **Fatal repairs are deliberately uncapped:** a proof
+  that keeps yielding real fatal defects is either converging toward correctness
+  or is actually false, and both must run to conclusion. The twice-touched
+  escalation stays advisory.
+  Reason: any edit is a material rewrite under SCHEMA §3, so a polish voids
+  `verification.judge`, forces a rejudge, and resamples a refuter that surfaces a
+  fresh nitpick on each stochastic run — an unbounded loop costing two judge
+  calls per turn and converging on nothing.
+  Mechanism: every adjudication row additionally records `item_sha256`, the full
+  sha256 of the normalized item text (verification block excluded) at
+  adjudication time. Take a dedicated `touchlog.mjs` baseline snapshot
+  immediately before step-8 adjudication begins, then run
+  `tools/step8-guard.mjs`; every item changed since that baseline must be
+  licensed by a `confirmed_fatal` row recorded against the pre-edit text state.
+  Error codes `nonfatal-edit` and `judge-adjudication-unhashed`. Forward-looking:
+  adjudication ledgers written before R1 lack `item_sha256`, and their levels are
+  published rather than re-gated.
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every future
   Alpha-n audit, Alpha dispatches read-only proof-refuter subagents. They use

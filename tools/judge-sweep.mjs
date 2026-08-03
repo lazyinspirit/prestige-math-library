@@ -1,13 +1,14 @@
 // Run hash-attested paired judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Each model has its own sixteen-slot cross-process pool. DeepSeek and Terra
+// Each model has its own cross-process pool: 24 DeepSeek slots, 16 Terra. They
 // start their next item as soon as one of their own slots is free, without
-// waiting for the other model on the same item. At most 32 calls run combined.
+// waiting for the other model on the same item. At most 40 calls run combined.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
 import { spawn, spawnSync } from "node:child_process";
+import { tsxLoader } from "./paths.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -47,10 +48,13 @@ const OPUS = "claude-opus-5";
 // Opus process exited status 1 on 303/382 wave-0 attempts under 16-way lane
 // concurrency (a capacity refusal, not a verdict; 101 null verdicts).
 const SONNET = "claude-sonnet-5";
-// JUDGE_LINEUP mirrors tools/judge.mts: the per-level build defaults to
-// deepseek+terra; the published-page audit workflow (AUDIT-WORKFLOW.md) sets
-// deepseek+opus. The child judge inherits the same env var, so the sweep and
-// its judges can never disagree about the active lineup.
+// JUDGE_LINEUP mirrors tools/judge.mts. Both the per-level build and the
+// published-page audit (AUDIT-WORKFLOW.md) run deepseek+terra — the audit lane
+// went Opus -> Sonnet -> Terra on 2026-08-02, and existing Opus/Sonnet ledger
+// rows are append-only historical evidence, not current coverage. Those two
+// lineups stay selectable for a deliberate experiment only. The child judge
+// inherits the same env var, so the sweep and its judges can never disagree
+// about the active lineup.
 const LINEUPS = Object.freeze({
   "deepseek+terra": [DEEPSEEK, TERRA],
   "deepseek+opus": [DEEPSEEK, OPUS],
@@ -116,7 +120,9 @@ if (existsSync(ledger)) {
     history.set(row.id, histories);
   }
 }
-const loader = "/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs";
+let loader;
+try { loader = tsxLoader(); }
+catch (cause) { console.error(`[judge-sweep] ${cause.message}`); process.exit(2); }
 const currentContextHash = (id) => {
   const result = spawnSync(process.execPath, ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], {
     encoding: "utf8",
@@ -135,7 +141,8 @@ const currentContextHash = (id) => {
 // once per item rather than parsing the same A/B-pair context twice before any
 // API call can start.
 const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
-// Owner policy, 2026-08-01: independently cap each judge lane at 16 calls.
+// Owner policy, 2026-08-01: cap each judge lane independently — 24 DeepSeek,
+// 16 for every other lane (raised for DeepSeek only, owner 2026-08-03).
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so the Opus lane's pool
 // is disjoint from Terra's and a lineup switch cannot double-book a cap.
@@ -156,7 +163,7 @@ const LENGTH_RETRY_EXIT = 5;
 // pool alone would let two resumed sweeps exceed a model lane's cap. Directory
 // slots are atomic on this host filesystem; each holder refreshes its mtime,
 // and an abandoned slot is reclaimed only after its heartbeat is stale for five
-// minutes. Model-specific directories preserve the independent 16/16 caps.
+// minutes. Model-specific directories preserve the independent per-lane caps.
 const GLOBAL_SLOT_DIR = "/tmp/prestige-math-library-judge-slots";
 const SLOT_STALE_MS = 5 * 60_000;
 const SLOT_HEARTBEAT_MS = 30_000;

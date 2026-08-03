@@ -2,7 +2,7 @@
 // validate-plan.mjs — mechanical circularity + ordering validator for the
 // planned page stack. Run BEFORE authoring a single item.
 //
-//   node validate-plan.mjs plan-spec.json [--repo /root/Projects/prestige-math-library]
+//   node validate-plan.mjs plan-spec.json [--repo DIR]   # --repo defaults to this checkout
 //
 // Guarantees checked (each a hard error unless marked WARN):
 //   1. resolve       every dep resolves to a planned item or an item already in items/
@@ -42,10 +42,11 @@
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { REPO } from './paths.mjs';
 
 const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
-const repo = argVal('--repo') ?? '/root/Projects/prestige-math-library';
+const repo = argVal('--repo') ?? REPO;
 const maxItems = Number(argVal('--max-items') ?? 100);
 if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N]');
 

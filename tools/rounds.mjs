@@ -40,6 +40,7 @@
 
 import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { REPO } from './paths.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -48,7 +49,7 @@ const specPath = args.find((a) => !a.startsWith('--') && args[args.indexOf(a) - 
   ?? 'research/plan-spec.json';
 const MAX = Number(flag('--max', Infinity));   // default: no split, one round per level
 const only = flag('--round', null);
-const repo = flag('--repo', '/root/Projects/prestige-math-library');
+const repo = flag('--repo', REPO);
 
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const byId = new Map(spec.pages.map((p) => [p.id, p]));
