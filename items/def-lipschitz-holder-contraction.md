@@ -4,6 +4,9 @@ kind: definition
 title: "Lipschitz map, $\\alpha$-Hölder map for rational $0 < \\alpha \\le 1$, and contraction"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-uniform-continuity, def-metric-space, def-rational-power,
        def-rat-order, lem-metric-nonnegativity, def-integer-power]
 justified_by: []
@@ -14,10 +17,18 @@ short: "Lipschitz, Hölder, contraction"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 6ba2b991536bc17f37491fe225d5ca0331683968cabffb15013849f789373315
+    item_sha256: 7580b1f334d2d1aa4963b16bc10cb18dc484349fdedcdeb64d60dfc5c8999aa1
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -58,9 +69,11 @@ $a^{\alpha}$ for every $a > 0$ and, by its supplementary clause, sets
 $0^{\alpha} = 0$ for every rational $\alpha > 0$. Since $\alpha > 0$ is required
 here, the displayed inequality at $x = x'$ reads $0 \le C \cdot 0$, which holds;
 so no separate clause and no restriction to $x \ne x'$ is needed. Note that this
-is exactly why the exponent is required to be strictly positive: at $\alpha = 0$
-the convention $0^0 = 1$ of [[def-integer-power]] would make the condition read
-$d_Y(f(x),f(x')) \le C$ at equal points, a different statement.
+does not by itself explain the strict inequality $\alpha>0$: if one extended the
+formula to $\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the
+equal-point inequality would still be the automatic $0\le C$. Globally, however,
+that extension would reduce to the bounded-diameter condition
+$d_Y(f(x),f(x'))\le C$, outside the standard Hölder range adopted here.
 
 **Why the exponent is a rational and why it is at most $1$.** This library has no
 real exponents ([[def-rational-power]]), so $\alpha$ ranges over the rationals;

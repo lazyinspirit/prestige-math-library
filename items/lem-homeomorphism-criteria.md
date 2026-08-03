@@ -4,6 +4,9 @@ kind: lemma
 title: "A continuous bijection is a homeomorphism iff it is open iff it is closed, and homeomorphy is an equivalence relation on spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-homeomorphism-and-open-maps, thm-continuity-characterisations-top, def-continuous-map-top, lem-continuity-is-local-and-pastes]
 justified_by: []
 aliases: []

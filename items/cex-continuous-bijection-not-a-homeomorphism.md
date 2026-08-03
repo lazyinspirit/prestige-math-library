@@ -4,6 +4,9 @@ kind: counterexample
 title: "The identity from the discrete topology on $\\mathbb{R}$ to the usual topology is a continuous bijection that is not a homeomorphism"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-continuous-bijection-is-a-homeomorphism, def-standard-topologies, lem-homeomorphism-criteria,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-homeomorphism-and-open-maps,
        def-continuous-map-top, thm-continuity-characterisations-top, def-metric-ball, def-metric-topology,

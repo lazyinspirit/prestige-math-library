@@ -4,6 +4,9 @@ kind: definition
 title: "Ordered field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-field]
 aliases: []
 landmark: true
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "University of Illinois Chicago notes: Ordered field axioms"
+      url: "https://homepages.math.uic.edu/~jbaldwin/math215/fieldax.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: corollary
 title: "Every nonzero integer $n$ is $u \\prod_{i<r} p_i$ with $u \\in \\{1,-1\\}$ and every $p_i$ prime; $u$ and $r$ are determined by $n$, and the list is determined up to a permutation"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists, def-prime,
        def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product,
        def-symmetric-group, def-int-abs, lem-int-abs-properties, lem-int-cancellation,
@@ -16,17 +19,20 @@ landmark: false
 short: "$n = u \\prod p_i$ for nonzero $n$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Fundamental theorem of arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 
@@ -65,8 +71,6 @@ commutative monoid $(\mathbb{Z},\cdot,1)$ of [[lem-units-of-z]], as in
 [L7] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective, preserves the order, and has as image exactly the nonnegative integers, with $\iota(0) = 0$ and $\iota(1) = 1$ ([[lem-nat-embeds-int]]).
 
 [L8] On $\mathbb{N}$: $0 \le k$ for every $k$ ([[def-nat-order]]); $m < k$ exactly when $\sigma(m) \le k$ ([[lem-nat-discrete]]); $1 = \sigma(0)$ ([[def-natural-numbers]]).
-
-[L9] $1 \ne -1$ ([[lem-units-of-z]]).
 
 ## Proof
 

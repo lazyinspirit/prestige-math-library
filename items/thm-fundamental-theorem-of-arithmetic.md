@@ -4,6 +4,9 @@ kind: theorem
 title: "The fundamental theorem of arithmetic: every integer $n \\ge 1$ is a product of primes, and the factorisation is unique up to order — if $\\prod_{i<r} p_i = \\prod_{j<s} q_j$ with every $p_i$ and $q_j$ prime, then $r = s$ and $q_i = p_{\\pi(i)}$ for some $\\pi \\in \\operatorname{Sym}(r)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-prime-factorisation-exists, cor-euclids-lemma-for-finite-products,
        thm-euclids-lemma, def-prime, def-symmetric-group, lem-symmetric-group-is-a-group,
        def-injection-surjection-bijection, def-semigroup-and-monoid, lem-units-of-z,
@@ -19,17 +22,20 @@ landmark: true
 short: "unique factorisation in $\\mathbb{Z}$"
 proof_strategy: induction
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Fundamental theorem of arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 
@@ -128,6 +134,6 @@ empty list, and the permutation condition is vacuous.
 
 - **The theorem is stated for $n \ge 1$.** It is not stated for $n \ge 2$, which would exclude the empty product and gain nothing, and it is not stated for all nonzero $n$, which is false as it stands because a negative integer is not a product of primes. The signed form is [[cor-factorisation-of-a-nonzero-integer]], where the sign is carried by a unit.
 
-- **Where each hypothesis is used.** Primality of the $q_j$ enters only through [[cor-euclids-lemma-for-finite-products]], which is what supplies the index $k$; primality of $p_r$ enters twice, once to make it a nonzero cancellable factor and once to make it differ from $1$ so that $p_r = q_k$. Drop Euclid's lemma and the argument collapses at exactly that step — [[cex-hilbert-monoid-factorisation-not-unique]] is the witness.
+- **Where each hypothesis is used.** Primality of $p_r$ lets [[cor-euclids-lemma-for-finite-products]] supply the index $k$, and also makes $p_r$ a nonzero factor different from $1$. Primality of the selected $q_k$ is then used separately in step 2.2: the positive divisor $p_r\mid q_k$, being different from $1$, must equal $q_k$. Drop Euclid's lemma and the argument collapses before that comparison — [[cex-hilbert-monoid-factorisation-not-unique]] is the witness.
 
 - **Reading the theorem by exponents.** Collecting equal primes turns clause 2 into [[thm-canonical-prime-factorisation]], which records the multiplicity of each prime as its $p$-adic valuation. That is the same theorem in different notation, not a further result.

@@ -4,6 +4,9 @@ kind: theorem
 title: "A subspace of a complete metric space is complete iff it is closed, and a complete subspace of any metric space is closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, def-isometry-and-metric-embedding,
        thm-metric-sequential-closure, def-metric-topology, def-cauchy-in-metric,
        lem-metric-limits-unique, lem-metric-convergent-implies-cauchy,

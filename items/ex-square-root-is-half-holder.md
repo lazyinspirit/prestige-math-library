@@ -4,6 +4,9 @@ kind: example
 title: "$\\sqrt{\\cdot}$ on $[0,\\infty)$ is uniformly continuous and exactly $1/2$-Hölder, and is not Lipschitz"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-regularity-hierarchy, def-lipschitz-holder-contraction, thm-of-square-roots,
        def-rational-power, def-metric-uniform-continuity, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, lem-rational-power-monotone,

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Inside the space of eventually zero families, the linear subspace spanned by $\\{\\, e_i : i \\ge 1 \\,\\}$ is proper and has a basis equinumerous with a basis of the whole space, so \"equal dimension forces equality\" fails without finite dimension"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-basis-of-the-eventually-zero-families, thm-dimension-of-a-linear-subspace, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-standard-basis-of-f-n, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-injection-surjection-bijection, def-countable, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-nat-nonzero-is-successor]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: false
 short: "a proper subspace with an equinumerous basis"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dimension_(vector_space)"
     - title: "Sequence space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequence_space"
+    - title: "University of Vermont notes: Infinite-dimensional vector spaces"
+      url: "https://www.uvm.edu/~smillere/Curio2.pdf"
 pipeline_run: null
 ---
 
@@ -78,8 +84,6 @@ cardinal numbers.
 [L6] In $F$: $\lambda 0_F = 0_F$ and $1_F \ne 0_F$ ([[lem-vector-space-elementary-consequences]], [[def-field]]).
 
 [L7] $\sigma$ is injective on $\mathbb{N}$, $k < \sigma(k)$, and every $j \ne 0$ is $\sigma(k)$ for a unique $k$ ([[def-natural-numbers]], [[lem-nat-nonzero-is-successor]], [[def-nat-order]], [[lem-nat-order-is-membership]]); bijections, images and $\approx$ are as in [[def-injection-surjection-bijection]], [[def-equinumerous]], [[def-countable]].
-
-[L8] If $\dim_F V = n$ and $U$ is a linear subspace of $V$ with $\dim_F U = n$, then $U = V$ ([[thm-dimension-of-a-linear-subspace]], claim 2).
 
 ## Counterexample
 

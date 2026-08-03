@@ -4,6 +4,9 @@ kind: example
 title: "$2$ is prime, and it is the only even prime: every even integer $n > 2$ is composite"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
        def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, thm-int-comm-ring,
        def-int-operations, def-int-order, def-integers, lem-nat-embeds-int,
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Prime_number"
     - title: "Parity (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Parity_(mathematics)"
+    - title: "Old Dominion University: Two is the only even prime"
+      url: "https://www.cs.odu.edu/~tkennedy/cs417/s25/Public/aQuickWarmUp1/twoIsPrime.mmd.html"
 pipeline_run: null
 ---
 

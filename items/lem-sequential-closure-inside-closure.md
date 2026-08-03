@@ -4,6 +4,9 @@ kind: lemma
 title: "The sequential closure is contained in the closure, continuity implies sequential continuity, and sequential limits need not be unique"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence-convergence-top, thm-closure-characterisation-top, def-continuous-map-top, def-standard-topologies, def-neighbourhood-top]
 justified_by: []
 forward_refs: [cex-sequential-closure-strictly-inside-closure, cex-sequentially-continuous-not-continuous]
@@ -13,11 +16,12 @@ short: "seqcl $\\subseteq$ closure; continuity $\\Rightarrow$ sequential continu
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -84,6 +88,6 @@ topological space: the symbol would not denote.
 
 - **The second inclusion of claim 1 does not reverse, and the implication of claim 2 does not reverse either.** The witnesses are on the companion page and are both in the cocountable topology on $\mathbb{R}$: the sequential closure of $[0,1]$ is $[0,1]$ while its closure is all of $\mathbb{R}$ ([[cex-sequential-closure-strictly-inside-closure]]), and the identity from the cocountable topology to the usual topology is sequentially continuous and not continuous ([[cex-sequentially-continuous-not-continuous]]). This lemma therefore asserts the two inclusions and the one implication and nothing more.
 
-- **A countability hypothesis repairs both.** In a first countable space the second inclusion of claim 1, $\operatorname{seqcl}(A) \subseteq \overline{A}$, is an equality, and the implication of claim 2 reverses; that is the theorem two items below, and it is where countable choice is spent.
+- **A countability hypothesis repairs both, assuming countable choice.** Under the Axiom of Countable Choice, in a first countable space the inclusion of claim 1, $\operatorname{seqcl}(A) \subseteq \overline{A}$, is an equality and the implication of claim 2 reverses; that is the theorem two items below, and it is where the choice hypothesis is spent.
 
 - **Claim 3 is not an artefact of a strange space.** It is the generic situation: uniqueness of sequential limits is equivalent to a separation property of the space, and it holds in every metric space ([[lem-metric-limits-unique]]) because distinct points there are separated by disjoint balls.

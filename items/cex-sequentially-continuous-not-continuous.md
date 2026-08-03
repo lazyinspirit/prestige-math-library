@@ -4,6 +4,9 @@ kind: counterexample
 title: "The identity from the cocountable topology on $\\mathbb{R}$ to the usual topology is sequentially continuous and not continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-sequentially-continuous-implies-continuous, ex-cocountable-topology-on-r, def-sequence-convergence-top,
        def-metrizable-space, lem-real-line-is-a-metric-space, cor-interval-uncountable, lem-subset-of-countable,
        def-interval, def-continuous-map-top, thm-continuity-characterisations-top, def-standard-topologies,
@@ -17,10 +20,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 9dfa78ccc5c2429c2deee0cd02035b305fc047eefafff5340b72d7cf8ebbd6ed
+    item_sha256: ed057fb37dfe0c1153a450cfaa60e2778dbfe57f28b42990dc54e7c636696aeb
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -85,6 +96,6 @@ convergent sequences of the source identified once and for all in
 
 - **The two topologies are incomparable, so the identity is discontinuous in both directions.** The set $(-1,1)$ is open in the usual topology and not in the cocountable one, which is the counterexample above. In the other direction $\mathbb{R} \setminus \mathbb{Q}$ is cocountable-open, $\mathbb{Q}$ being at most countable ([[thm-rationals-countable]]), and is not open in the usual topology, since every ball contains a rational ([[lem-rat-embeds-dense]]). So neither topology is finer than the other, and this pair is not an instance of the continuous-bijection failure recorded in [[fs-continuous-bijection-is-a-homeomorphism]], which needs two comparable topologies.
 
-- **What makes the source pathological is the absence of small neighbourhoods.** Every nonempty open set of $\mathcal{T}_{\mathrm{coc}}$ omits at most countably many points, so no point has a small neighbourhood in any sense, and a sequence, which visits at most countably many points, can be excluded from a neighbourhood by hand. That is precisely the failure of first countability.
+- **Why sequences are blind here.** A sequence visits at most countably many points, and the cocountable topology supplies a neighbourhood of its proposed limit omitting every other point in that range; this is exactly the mechanism used in step 1.3 through [L1]. Assuming the Axiom of Countable Choice, [[thm-first-countable-sequences-suffice]] then shows that this failure of the sequential test forces the source not to be first countable.
 
 - **The target's good behaviour is irrelevant.** It is metrizable, hence as well behaved as possible, and the failure is entirely on the source side, which is where sequential continuity is tested.

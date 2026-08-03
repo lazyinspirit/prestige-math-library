@@ -8,22 +8,18 @@ deps: [def-connected-space, lem-connected-subsets-and-separated-sets,
        def-connected-component-and-quasicomponent, def-locally-connected,
        def-path-connected, def-order-topology-on-a-linearly-ordered-set,
        def-connected-r, cor-connected-subsets-of-the-line, def-standard-topologies,
-       rem-topology-conventions, thm-quasicomponents-contain-components]
+       thm-quasicomponents-contain-components]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-03
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -94,8 +90,8 @@ order-convex and is not claimed to agree otherwise.
 **Two inherited conventions that change how this page is read.** A neighbourhood
 need not be open, so "open connected neighbourhood" is written out in full
 wherever openness is wanted; and the empty intersection of a subbasis is the
-whole space, so no covering hypothesis is imposed on the subbasis of rays. Both
-are fixed by [[rem-topology-conventions]] and are not restated in the items above.
+whole space, so no covering hypothesis is imposed on the subbasis of rays. These
+conventions are in force throughout the items above.
 
 **Notation used without further comment.** $\mathbf{2}$ is the two-point discrete
 space ([[def-standard-topologies]]); $C(x)$, $Q(x)$ and $P(x)$ are the component,

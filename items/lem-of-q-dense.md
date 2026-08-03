@@ -4,6 +4,9 @@ kind: lemma
 title: "ℚ is dense in every Archimedean ordered field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-archimedean-field, lem-of-q-embeds, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules, thm-well-ordering-principle, lem-nat-embeds-int, def-int-order]
 aliases: []
 landmark: false
@@ -19,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "University of Pennsylvania Math 360 notes: Ordered fields"
+      url: "https://www2.math.upenn.edu/~zhaotwei/math_360_fall_2012/math_360_fall_2012_description.pdf"
 pipeline_run: null
 ---
 

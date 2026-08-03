@@ -17,15 +17,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-03
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -81,7 +77,7 @@ further pair.
 
 ## Remarks
 
-- **Where an axiom would have been needed, and why it was not.** Each pick is a single existential instantiation from a single nonempty set, licensed by first-order logic alone. Three of them are made, one at a time, and three is a natural number, so the process stops. What ZF cannot do is make infinitely many such instantiations at once, and that is the whole of the gap that the Axiom of Choice fills.
+- **Where an axiom would have been needed, and why it was not.** Each pick is a single existential instantiation from a single nonempty set, licensed by first-order logic alone. Three of them are made, one at a time, and three is a natural number, so the process stops. What ZF does not supply is a choice function for every arbitrary family of nonempty sets. An infinite family can still have a choice function given by a defining rule — such as the minimum rule below — so the gap filled by the Axiom of Choice is arbitrary families, not mere infinitude.
 
 - **Choice functions are not unique.** Taking the larger element of each pair gives another one, with values $1, 2, 3$; since each member has two elements there are $2 \cdot 2 \cdot 2 = 8$ choice functions for $\mathcal{F}$ in all. Nothing in the definition prefers one of them.
 

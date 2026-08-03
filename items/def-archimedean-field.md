@@ -4,6 +4,9 @@ kind: definition
 title: "Archimedean ordered field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordered-field, def-field]
 aliases: []
 landmark: false
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "UTSA Mathematics: The Archimedean property"
+      url: "https://mathresearch.utsa.edu/wiki/index.php?title=Real_Numbers%3AArchimedean_Property"
 pipeline_run: null
 ---
 

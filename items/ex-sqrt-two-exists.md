@@ -4,6 +4,9 @@ kind: example
 title: "$\\sqrt{2}$ exists in every complete ordered field, and is irrational"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-of-square-roots, lem-of-q-embeds, def-complete-ordered-field, fs-sqrt2-rational]
 aliases: []
 landmark: false
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §5.5"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "University of Colorado analysis notes: The real numbers"
+      url: "https://spot.colorado.edu/~baggett/chap1.pdf"
+    - title: "Elias Zakon, Mathematical Analysis: Irrational numbers"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/02%3A_Real_Numbers_and_Fields/2.06%3A_Powers_with_Arbitrary_Real_Exponents._Irrationals"
 pipeline_run: null
 ---
 

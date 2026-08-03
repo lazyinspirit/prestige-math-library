@@ -4,6 +4,9 @@ kind: counterexample
 title: "A field homomorphism of ordered fields need not preserve order"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-field-homomorphism, def-ordered-field, thm-of-square-roots, lem-of-hom-order-preserving, fs-sqrt2-rational]
 aliases: []
 landmark: false
@@ -12,10 +15,18 @@ cx_machine_verified: false
 verification:
   precheck: pass
   judge:
-    model: openai/gpt-5.4
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 0b8458fddd09607b97538d03e3507b5b758ce5fee8edaca8ba62bdba9bb5e062
+    item_sha256: dbcd59b139e320b9dd0b2519aeaf024259b2420a5039d8e4fe9604d805c44eef
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "University of Wisconsin Math 521 notes: Real analysis"
+      url: "https://people.math.wisc.edu/~jwrobbin/521dir/521.pdf"
 pipeline_run: null
 ---
 
@@ -80,4 +93,4 @@ positive element $\sqrt{2}$ to the negative element $-\sqrt{2}$.
 
 5.1 Steps 2.1 and 4.1 exhibit a field homomorphism $\sigma$ between ordered fields with $\sqrt{2} > 0$ in the domain yet $\sigma(\sqrt{2}) = -\sqrt{2} < 0$ by step 3.4, so $\sigma$ is not order-preserving, refuting the claim that every field homomorphism between ordered fields is order-preserving. [step 2.1, step 4.1, step 3.4, L4]
 
-6.1 There is no conflict with [L5], whose hypothesis fails here: since $K$ contains the dense subfield $\mathbb{Q}$, the bounded set $\{r \in K : r > 0, r^2 < \sqrt{2}\}$ has least upper bound $2^{1/4}$ in $\mathbb{R}$ but, by step 2.3, no least upper bound in $K$, so $K$ is not complete. [step 2.3, step 5.1, L5] ∎
+6.1 There is no conflict with [L5]: if $K$ were complete, [L5] would make $\sigma$ order-preserving, contrary to step 5.1. Hence $K$ is not complete. [step 5.1, L5] ∎

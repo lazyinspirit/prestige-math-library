@@ -4,6 +4,9 @@ kind: definition
 title: "Ordered-field isomorphism"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-field-homomorphism, def-ordered-field]
 aliases: []
 landmark: false
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed."
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "University of Wisconsin Math 521 notes: Real analysis"
+      url: "https://people.math.wisc.edu/~jwrobbin/521dir/521.pdf"
 pipeline_run: null
 ---
 

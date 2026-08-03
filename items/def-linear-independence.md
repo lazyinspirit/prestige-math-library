@@ -4,6 +4,9 @@ kind: definition
 title: "Linear independence: a finite list $v : n \\to V$ is independent when $\\sum_{i<n} \\lambda_i v_i = 0_V$ forces every $\\lambda_i = 0_F$, and a subset $S \\subseteq V$ is independent when every injective finite list into $S$ is independent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-vector-space, def-field, lem-vector-space-elementary-consequences, def-linear-combination-and-span, def-monoid-finite-product, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-linearly-independent, def-linear-dependence]
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_independence"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Interactive Linear Algebra: Linear Independence"
+      url: "https://textbooks.math.gatech.edu/ila/linear-independence.html"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

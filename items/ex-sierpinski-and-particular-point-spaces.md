@@ -4,6 +4,9 @@ kind: example
 title: "Sierpinski space and the particular-point topology, with their closures and their continuous maps"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-interior-closure-boundary-top, thm-continuity-characterisations-top,
        def-topological-space, def-dense-top, def-continuous-map-top]
 justified_by: []
@@ -14,10 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 544b3751b18e7bf2e99a5d101964e95298c278bdbde136ed51b4410506de3390
+    item_sha256: 5053322b3e3941663f26d134911a716e83c7b38838b3dc09e11c0eff242d9b76
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -93,6 +104,6 @@ $\mathcal{T}_p = \{\varnothing\} \cup \{\, U \subseteq X : p \in U \,\}$
 
 - **Sierpinski space is the smallest space that is not indiscrete and not discrete**, and claim 5 is why it matters: it represents the notion "open set" as a mapping problem, in the same way that a two-element set represents "subset". Every topology on $Y$ is recovered as the set of continuous maps $Y \to S$.
 
-- **The particular-point topology separates points only in the weakest sense.** Any two distinct points are distinguished by an open set: if one of them is $p$, then $\{p\}$ is open and contains $p$ but not the other; and if neither is $p$, then $\{x,p\}$ is open and contains $x$ but not $y$. Nothing stronger holds: by claim 3 no two points lie in disjoint open sets, and by claim 2 the singleton $\{p\}$ is dense, every nonempty open set containing $p$ by definition of the topology, so no open set separates any point from $p$. It is nevertheless first countable, since $\{\{x, p\}\}$ is a one-element neighbourhood base at $x$: any neighbourhood of $x$ contains an open set containing $x$, which contains $p$ as well.
+- **When $X$ has at least two points, the particular-point topology separates distinct points only in the weakest sense.** Any two distinct points are distinguished by an open set: if one of them is $p$, then $\{p\}$ is open and contains $p$ but not the other; and if neither is $p$, then $\{x,p\}$ is open and contains $x$ but not $y$. It is not Hausdorff: every two nonempty open sets meet at $p$, and $\{p\}$ is dense by claim 2. When $X=\{p\}$, by contrast, the topology is discrete and the separation axioms hold vacuously. In every case the space is first countable, since $\{\{x,p\}\}$ is a one-element neighbourhood base at $x$: any neighbourhood of $x$ contains an open set containing $x$, which contains $p$ as well.
 
-- **A comparison with the cofinite topology.** Both have the property that any two nonempty open sets meet ([[ex-cofinite-topology]]), but the particular-point topology achieves it with a single point doing all the work, and it has non-closed points, which the cofinite topology does not.
+- **A comparison with the cofinite topology.** When $X$ is infinite, both have the property that any two nonempty open sets meet ([[ex-cofinite-topology]]), but the particular-point topology achieves it with a single point doing all the work. When $X$ has at least two points, its particular point $p$ is not closed, whereas every point is closed in the cofinite topology.

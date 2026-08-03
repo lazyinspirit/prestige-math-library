@@ -4,6 +4,9 @@ kind: lemma
 title: "A field has no zero divisors: $ab = 0 \\Rightarrow a = 0$ or $b = 0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-field, lem-of-zero-mult]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "Tom Denton, Introduction to Algebraic Structures: The Problem of Division"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Introduction_to_Algebraic_Structures_%28Denton%29/08%3A_Rings_II/8.01%3A_The_Problem_of_Division"
 pipeline_run: null
 ---
 

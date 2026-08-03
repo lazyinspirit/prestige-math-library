@@ -4,6 +4,9 @@ kind: definition
 title: "Dense, nowhere dense and codense subsets of a topological space, and the criterion by basic open sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-interior-closure-boundary-top, thm-closure-characterisation-top, def-topology-basis-subbasis]
 justified_by: []
 forward_refs: [def-separable-space]
@@ -12,11 +15,12 @@ landmark: false
 short: "dense, nowhere dense, codense"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -75,10 +79,10 @@ precisely when it is codense, since then $\overline{A} = A$.
 ## Remarks
 
 - **Density is a property of the pair, not of the set.** A subset dense in $X$
-  need not be dense in a space with a finer topology, and every subset is dense
-  in the indiscrete topology on $X$ except $\varnothing$, whose closure is
-  $\varnothing$. Where a density claim is made below the topology is always
-  named.
+  need not be dense in a space with a finer topology. In a nonempty indiscrete
+  space every nonempty subset is dense, while $\varnothing$ is not; in the empty
+  space $\varnothing$ is dense as well. Where a density claim is made below the
+  topology is always named.
 
 - **The empty set.** $\varnothing$ is nowhere dense and codense in every space,
   and it is dense only in $X = \varnothing$. $X$ itself is dense in $X$ and is

@@ -4,6 +4,9 @@ kind: corollary
 title: "A rational root of $x^{k} = m$ is an integer: if $k \\ge 1$, $m \\in \\mathbb{Z}$, $x \\in \\mathbb{Q}$ and $x^{k}$ is the image of $m$, then $x$ is the image of an integer"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclids-lemma, lem-every-integer-above-one-has-a-prime-divisor, def-prime,
        def-coprime, cor-gcd-quotients-coprime, lem-coprime-criterion,
        def-common-divisor-and-gcd, lem-gcd-basic-values, def-divides-in-z,
@@ -31,6 +34,8 @@ sources:
   references:
     - title: "Rational root theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rational_root_theorem"
+    - title: "University of Toronto MAT 246 solutions: Rational roots"
+      url: "https://www.math.toronto.edu/vtk/246Winter2015/hw6sol.pdf"
 pipeline_run: null
 ---
 

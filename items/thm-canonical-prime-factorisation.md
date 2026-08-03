@@ -4,28 +4,23 @@ kind: theorem
 title: "For $n \\ge 1$ and any injective list $p : r \\to \\mathbb{Z}$ of primes containing every prime divisor of $n$, one has $n = \\prod_{i<r} p_i^{\\,v_{p_i}(n)}$; the exponents are determined by $n$, and $v_q(n) = 0$ for every prime $q$ outside the list"
 status: published
 origin: session
-deps: [thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists,
-       lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
-       def-prime, lem-every-integer-above-one-has-a-prime-divisor, thm-euclids-lemma,
-       def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product,
-       def-group-power, lem-group-power-laws, def-injection-surjection-bijection,
-       thm-induction-principle, def-divides-in-z, lem-divisibility-basic,
-       lem-nat-order-is-membership, lem-nat-discrete, lem-int-cancellation,
-       def-nat-order, def-nat-addition, lem-nat-add-commutative, def-integers,
-       def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring,
-       def-natural-numbers, lem-nat-embeds-int]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-fundamental-theorem-of-arithmetic, lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation, def-prime, lem-every-integer-above-one-has-a-prime-divisor, def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product, def-group-power, lem-group-power-laws, def-injection-surjection-bijection, thm-induction-principle, def-divides-in-z, lem-divisibility-basic, lem-nat-order-is-membership, lem-nat-discrete, def-nat-order, def-nat-addition, lem-nat-add-commutative, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, def-natural-numbers, lem-nat-embeds-int]
 justified_by: []
 aliases: [thm-canonical-factorisation]
 landmark: true
 short: "$n = \\prod p_i^{v_{p_i}(n)}$"
 proof_strategy: induction
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -33,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
     - title: "P-adic valuation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
+    - title: "Neil Donaldson, Math 180A notes: Unique factorisation"
+      url: "https://www.math.uci.edu/~ndonalds/math180a/2unique.pdf"
 pipeline_run: null
 ---
 
@@ -76,12 +73,6 @@ Clause 3 needs only injectivity of the list, not the covering hypothesis.
 [L8] On $\mathbb{N}$: $m \le n$ means $m + c = n$ for some $c$ ([[def-nat-order]]); $\sigma(k) = k+1$ and addition is commutative ([[def-nat-addition]], [[lem-nat-add-commutative]], [[def-natural-numbers]]); $t < \sigma(t)$ and $i < \sigma(t)$ exactly when $i \le t$ ([[lem-nat-order-is-membership]]); $m < n$ exactly when $\sigma(m) \le n$ ([[lem-nat-discrete]]).
 
 [L9] $\mathbb{Z}$ is a commutative ring; its order is total, antisymmetric and transitive, is compatible with addition, and positives are closed under multiplication; $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with image the nonnegative integers, $\iota(0) = 0$, $\iota(1) = 1$ ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]], [[thm-int-ordered-ring]], [[def-int-order]], [[lem-nat-embeds-int]]).
-
-[L10] A product of two nonzero integers is nonzero, and $xz = yz$ with $z \ne 0$ gives $x = y$ ([[lem-int-cancellation]]).
-
-[L11] Every integer $n \ge 1$ is a finite product of primes, and every finite product of primes is $\ge 1$ ([[thm-prime-factorisation-exists]]); such a factorisation is unique up to a permutation ([[thm-fundamental-theorem-of-arithmetic]]).
-
-[L12] If $u$ is prime and $u \mid ab$ then $u \mid a$ or $u \mid b$ ([[thm-euclids-lemma]]).
 
 ## Proof
 

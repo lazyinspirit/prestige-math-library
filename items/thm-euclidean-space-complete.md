@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{R}$ and $\\mathbb{R}^n$ for $n \\ge 1$ with the Euclidean metric are complete, componentwise from the Cauchy criterion in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, thm-cauchy-criterion-via-lub, def-cauchy-in-metric,
        def-metric-space, def-metric-convergence, def-finite-sum, thm-of-square-roots,
        lem-metrics-on-rn, lem-real-line-is-a-metric-space, lem-finite-set-has-max,

@@ -4,6 +4,9 @@ kind: counterexample
 title: "In the indiscrete topology every sequence converges to every point, and in the cofinite topology on an infinite set an injective sequence converges to every point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence-convergence-top, def-standard-topologies, ex-cofinite-topology,
        lem-sequential-closure-inside-closure, def-injection-surjection-bijection, def-countable,
        lem-subset-of-countable, lem-pigeonhole, def-equinumerous, def-natural-numbers,

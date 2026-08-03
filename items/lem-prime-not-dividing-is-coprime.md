@@ -4,6 +4,9 @@ kind: lemma
 title: "For a prime $p$ and any integer $a$, $\\gcd(p,a)$ is $p$ when $p \\mid a$ and $1$ otherwise; so $p \\nmid a$ makes $p$ and $a$ coprime"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-prime, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd,
        lem-gcd-basic-values, def-coprime, def-divides-in-z, lem-divisibility-basic,
        lem-units-of-z, def-integers, def-int-operations, def-int-order,
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
     - title: "Coprime integers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Coprime_integers"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 

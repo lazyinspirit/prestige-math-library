@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: there exist two non-isomorphic complete ordered fields"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-uniqueness-complete-ordered-field, def-complete-ordered-field, def-ordered-field-isomorphism]
 aliases: []
 landmark: false

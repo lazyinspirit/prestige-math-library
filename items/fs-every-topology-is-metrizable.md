@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every topology is induced by some metric"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metrizable-space, def-standard-topologies, thm-metric-hausdorff-separation, def-metric-topology,
        def-topological-space, def-sequence-convergence-top, lem-metric-limits-unique]
 justified_by: []
@@ -14,7 +17,19 @@ short: "not every topology is metrizable"
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-27
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 9b1630f5376cd90785eb1af2fb033cabceea27e02e681409c81879a9ab2dba01
+    item_sha256: e953ddb207383bcf18b9b7cf025e93a660f5d86123b4a4dc23ed09d773211cdb
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -67,6 +82,6 @@ two points has no two disjoint nonempty open sets at all
 
 - **A second reading of the same failure, in terms of limits.** In the indiscrete topology on $X$ every sequence converges to every point ([[def-sequence-convergence-top]]), whereas in a metric space a sequence has at most one limit ([[lem-metric-limits-unique]]). A constant sequence therefore converges to two distinct points here and could not do so under any metric. This is the same obstruction as the one used above, since uniqueness of limits is a consequence of the separation of distinct points by disjoint balls.
 
-- **Separation is one obstruction and countability is another.** Every metrizable space is Hausdorff, which is what the refutation above uses, and every metrizable space is also first countable ([[def-metrizable-space]], [[def-first-countable-top]]). The cocountable topology on $\mathbb{R}$ fails the second: were it first countable, [[thm-first-countable-sequences-suffice]] would make the identity onto the usual topology continuous, which it is not ([[fs-sequentially-continuous-implies-continuous]]). So it is not metrizable either, on grounds independent of the two-point witness. Neither obstruction is a characterisation: metrization theorems need separation and countability axioms beyond what is available at this point in the reading order.
+- **Separation is one obstruction and countability is another.** Every metrizable space is Hausdorff, which is what the refutation above uses, and every metrizable space is also first countable ([[def-metrizable-space]], [[def-first-countable-top]]). Assuming the Axiom of Countable Choice, the cocountable topology on $\mathbb{R}$ fails the second: were it first countable, [[thm-first-countable-sequences-suffice]] would make the identity onto the usual topology continuous, which it is not ([[fs-sequentially-continuous-implies-continuous]]). Under that assumption it is therefore not metrizable by this second obstruction as well. Neither obstruction is a characterisation: metrization theorems need separation and countability axioms beyond what is available at this point in the reading order.
 
 - **What is being refuted is an existence claim**, so the refutation must rule out *every* metric, which is why it argues from a property that all metric topologies share rather than by inspecting candidate metrics. The witness is worked again on the companion page ([[cex-non-metrizable-topology]]).

@@ -1,22 +1,26 @@
 ---
 id: thm-first-countable-sequences-suffice
 kind: theorem
-title: "In a first countable space the sequential closure equals the closure and sequential continuity at a point equals continuity there"
+title: "Assuming Countable Choice, in a first countable space sequential closure equals closure and sequential continuity at a point equals continuity there"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-first-countable-top, lem-sequential-closure-inside-closure, thm-closure-characterisation-top, def-sequence-convergence-top, def-countable-choice, def-continuous-map-top, def-neighbourhood-top, thm-recursion, lem-countable-iff-surjection-from-n]
 justified_by: []
 aliases: []
 landmark: true
-short: "first countable: sequences suffice"
+short: "under Countable Choice, first countable: sequences suffice"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -96,7 +100,7 @@ uses of any choice principle in the proof; the inclusions already proved in
 
 ## Remarks
 
-- **The hypothesis cannot be dropped.** The cocountable topology on $\mathbb{R}$ is not first countable, and both conclusions fail there: the sequential closure of $[0,1]$ is $[0,1]$ while its closure is $\mathbb{R}$, and the identity onto the usual topology is sequentially continuous without being continuous. Both are on the companion page, and the second is recorded on this page as a false statement.
+- **The hypothesis cannot be dropped.** Under the standing Axiom of Countable Choice assumption, the cocountable topology on $\mathbb{R}$ is not first countable, and both conclusions fail there: the sequential closure of $[0,1]$ is $[0,1]$ while its closure is $\mathbb{R}$, and the identity onto the usual topology is sequentially continuous without being continuous. Both are on the companion page, and the second is recorded on this page as a false statement.
 
 - **Every metrizable space satisfies the hypothesis.** The balls of radius $1/n$ form an at most countable neighbourhood base at each point ([[lem-metric-ball-neighbourhood-base]]), so claim 1 specialises to the sequential characterisation of the closure in a metric space ([[thm-metric-sequential-closure]]), which spends countable choice in exactly the same one of its two directions. Nothing here is new in the metric setting; what is new is that first countability alone is enough.
 

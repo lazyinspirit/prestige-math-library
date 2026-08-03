@@ -4,8 +4,11 @@ kind: counterexample
 title: "In the cocountable topology on $\\mathbb{R}$ the sequential closure of $[0,1]$ is $[0,1]$ while its closure is all of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-cocountable-topology-on-r, lem-sequential-closure-inside-closure, def-sequence-convergence-top,
-       thm-closure-characterisation-top, cor-interval-uncountable, def-interval, lem-subset-of-countable,
+       thm-closure-characterisation-top, cor-interval-uncountable, def-interval,
        def-standard-topologies, def-countable, cor-of-one-positive]
 justified_by: []
 aliases: []
@@ -15,10 +18,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 3b2a737b0b959d32e7e712567f8e8d421f02f47ad1ffe8b199a28f4d40221a11
+    item_sha256: 83ed55644852e868c62bf127b78ab31c5ef06b26f933b0a284ea1ff4b91f1022
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -57,8 +68,6 @@ $$\operatorname{seqcl}(A) = [0,1] \subsetneq \mathbb{R} = \overline{A} .$$
 
 [L4] $\operatorname{seqcl}(A) \subseteq \overline{A}$ in every topological space ([[lem-sequential-closure-inside-closure]], claim 1), and $\overline{A}$ is the smallest closed superset of $A$ ([[thm-closure-characterisation-top]], claim 2).
 
-[L5] Every subset of an at most countable set is at most countable ([[lem-subset-of-countable]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -79,6 +88,6 @@ $$\operatorname{seqcl}(A) = [0,1] \subsetneq \mathbb{R} = \overline{A} .$$
 
 - **The set $[0,1]$ plays no special role beyond being uncountable and not all of $\mathbb{R}$.** Any uncountable proper subset would do, and by claim 3 of [[ex-cocountable-topology-on-r]] the sequential closure of *any* subset of this space is the subset itself, so the sequential closure operator here is the identity while the closure operator is far from it.
 
-- **What the witness rules out.** It shows that no theorem of the form "$\operatorname{seqcl} = \overline{\ \cdot\ }$ in every space" is available, so the countability hypothesis of [[thm-first-countable-sequences-suffice]] is doing real work. It also shows that the cocountable topology on $\mathbb{R}$ is not first countable, since that theorem would otherwise apply.
+- **What the witness rules out.** It shows that no theorem of the form "$\operatorname{seqcl} = \overline{\ \cdot\ }$ in every space" is available, so the countability hypothesis of [[thm-first-countable-sequences-suffice]] is doing real work. Assuming the Axiom of Countable Choice, as that theorem does, it also shows that the cocountable topology on $\mathbb{R}$ is not first countable.
 
 - **Sequences are the wrong index set here, not the wrong idea.** Replacing sequences by nets or filters restores the equality in every space; neither is developed in this library at this point, and the failure above is exactly the reason they exist.

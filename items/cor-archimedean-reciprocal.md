@@ -4,6 +4,9 @@ kind: corollary
 title: "For every $\\varepsilon > 0$ in a complete ordered field there is a natural $n \\ge 1$ with $1/n < \\varepsilon$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-of-archimedean, lem-of-inverse-positive, def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
+    - title: "UTSA Mathematics: The Archimedean property"
+      url: "https://mathresearch.utsa.edu/wiki/index.php?title=Real_Numbers%3AArchimedean_Property"
 ---
 
 ## Statement

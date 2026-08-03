@@ -4,6 +4,9 @@ kind: counterexample
 title: "In $\\mathbb{R}$ the interiors of $\\mathbb{Q}$ and of its complement are both empty while the interior of their union is everything"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-interior-closure-boundary-identities, def-interior-closure-boundary-top, def-metrizable-space,
        lem-rat-embeds-dense, lem-real-line-is-a-metric-space, cor-interval-uncountable, thm-rationals-countable,
        lem-subset-of-countable, def-countable, def-interval, def-metric-ball, def-metric-topology,

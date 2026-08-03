@@ -4,6 +4,9 @@ kind: theorem
 title: "A finite list $v : n \\to V$ is an ordered basis if and only if every $x \\in V$ equals $\\sum_{i<n} \\lambda_i v_i$ for exactly one $\\lambda : n \\to F$; those scalars are the coordinates of $x$ in that ordered basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, def-linear-subspace, lem-linear-subspace-criterion, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-coordinates, thm-coordinates-unique]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 3"
       url: "https://linear.axler.net/"
+    - title: "UC Berkeley Math 54 notes: Bases and coordinates"
+      url: "https://math.berkeley.edu/~arash/54/notes/04_04.pdf"
 pipeline_run: null
 ---
 

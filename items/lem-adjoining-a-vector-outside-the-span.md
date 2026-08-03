@@ -4,6 +4,9 @@ kind: lemma
 title: "If $S \\subseteq V$ is linearly independent and $w \\notin \\operatorname{span}(S)$ then $S \\cup \\{w\\}$ is linearly independent and $\\operatorname{span}(S) \\subsetneq \\operatorname{span}(S \\cup \\{w\\})$; and if $w \\in \\operatorname{span}(S)$ then $\\operatorname{span}(S \\cup \\{w\\}) = \\operatorname{span}(S)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-linear-independence, lem-independent-list-is-injective, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-linear-subspace, def-sum-of-linear-subspaces, def-monoid-finite-product, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, def-injection-surjection-bijection]
 justified_by: []
 aliases: [lem-extend-independent-by-one]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_independence"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Dartmouth College linear algebra lecture notes: Linear independence"
+      url: "https://math.dartmouth.edu/~m24w21/lecture-05.pdf"
 pipeline_run: null
 ---
 

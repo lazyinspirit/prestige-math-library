@@ -4,6 +4,9 @@ kind: proposition
 title: "Multiplying inequalities of positives"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, lem-of-sign-rules]
 aliases: []
 landmark: false
@@ -21,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "Purdue University analysis notes: Ordered fields and absolute value"
+      url: "https://www.math.purdue.edu/~gcavigli/Swanson.pdf"
 pipeline_run: null
 proof_strategy: direct
 ---

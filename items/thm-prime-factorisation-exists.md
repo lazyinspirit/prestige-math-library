@@ -4,6 +4,9 @@ kind: theorem
 title: "Every integer $n \\ge 1$ is a finite product of primes: there are $r \\in \\mathbb{N}$ and a list $p : r \\to \\mathbb{Z}$ of primes with $n = \\prod_{i<r} p_i$, the case $n = 1$ being the empty product"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-every-integer-above-one-has-a-prime-divisor, def-prime,
        def-semigroup-and-monoid, lem-units-of-z, def-monoid-finite-product,
        thm-strong-induction, thm-induction-principle, lem-nat-order-is-membership,
@@ -28,6 +31,8 @@ sources:
   references:
     - title: "Fundamental theorem of arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+    - title: "Number Theory: In Context — Fundamental Theorem of Arithmetic"
+      url: "https://math-cs.gordon.edu/ntic/ntic2020/section-fta.html"
 pipeline_run: null
 ---
 

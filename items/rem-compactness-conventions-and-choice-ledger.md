@@ -4,24 +4,20 @@ kind: remark
 title: "The quasicompact convention, why compactness of a subset is read intrinsically here, and what each result on this page costs in choice"
 status: published
 origin: session
-deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-compactness-choice-ledger-metric, rem-choice-strengths, rem-topology-conventions]
+deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-compactness-choice-ledger-metric, rem-choice-strengths]
 justified_by: []
 external_refs: [rem-schechter-kelley-tychonoff, rem-baire-category-choice-strength]
 aliases: [rem-compactness-choice-ledger]
 landmark: false
 short: "conventions and the choice ledger"
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: n/a
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -68,9 +64,9 @@ available.** Claim 4 of [[thm-compactness-variants-hierarchy]] needs every
 singleton to be closed. That condition is a named separation axiom, and the page
 naming it is not among this page's declared prerequisites, so the hypothesis is
 stated in the vocabulary of open and closed sets and nothing is asserted about the
-axiom it belongs to. The general convention forks of this subject — that a
-neighbourhood need not be open, and that the intersection of no sets is the whole
-space — are settled in [[rem-topology-conventions]] and are in force here.
+axiom it belongs to. On this page a neighbourhood need not be open, and the
+intersection of no sets is the whole space; these two general conventions are in
+force without further comment.
 
 ## The choice ledger
 

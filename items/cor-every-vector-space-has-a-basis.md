@@ -4,6 +4,9 @@ kind: corollary
 title: "Every vector space has a basis"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
 aliases: [cor-basis-exists]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

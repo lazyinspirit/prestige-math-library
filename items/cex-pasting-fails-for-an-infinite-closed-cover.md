@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}$ covered by its closed singletons: every restriction of the indicator of $\\{0\\}$ is continuous and the map is not, so the closed pasting lemma needs finiteness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-continuity-is-local-and-pastes, def-continuous-map-top, def-metrizable-space, def-metric-topology,
        def-metric-ball, lem-real-line-is-a-metric-space, def-subspace-topology-top,
        thm-continuity-characterisations-top, def-interval, def-topological-space,

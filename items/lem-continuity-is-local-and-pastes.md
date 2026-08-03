@@ -4,6 +4,9 @@ kind: lemma
 title: "Continuity may be checked on any open cover, and on any finite closed cover; composites of continuous maps are continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-continuity-characterisations-top, def-continuous-map-top, def-topological-space, def-subspace-topology-top]
 justified_by: []
 forward_refs: [cex-pasting-fails-for-an-infinite-closed-cover]

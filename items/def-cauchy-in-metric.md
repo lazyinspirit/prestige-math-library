@@ -4,6 +4,9 @@ kind: definition
 title: "Cauchy sequence in a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-convergence, def-sequence, def-real-limit,
        lem-rat-embeds-dense, lem-metric-nonnegativity, lem-real-line-is-a-metric-space,
        lem-index-map-grows]

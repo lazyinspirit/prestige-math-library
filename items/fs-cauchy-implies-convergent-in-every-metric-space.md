@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every Cauchy sequence in a metric space converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cauchy-in-metric, def-complete-metric-space, lem-metric-convergent-implies-cauchy,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        cor-archimedean-reciprocal, def-metric-convergence, lem-metric-limits-unique,

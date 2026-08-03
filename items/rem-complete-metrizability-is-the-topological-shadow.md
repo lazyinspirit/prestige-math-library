@@ -4,6 +4,9 @@ kind: remark
 title: "Completeness belongs to the metric; the topological invariant is complete metrizability, which this page introduces and only a much later page characterises"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [fs-completeness-is-a-topological-property, def-complete-metric-space,
        def-equivalent-metrics, def-metric-completion, def-metric-topology,
        thm-complete-subspace-iff-closed, thm-metric-completion-exists,

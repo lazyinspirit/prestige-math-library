@@ -4,6 +4,9 @@ kind: theorem
 title: "Kuratowski: operators satisfying $c(\\varnothing) = \\varnothing$, $A \\subseteq c(A)$, $c(c(A)) = c(A)$ and $c(A \\cup B) = c(A) \\cup c(B)$ correspond bijectively to topologies"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-interior-closure-boundary-top, lem-interior-closure-boundary-identities, def-topological-space, def-injection-surjection-bijection]
 justified_by: []
 forward_refs: [ex-kuratowski-fourteen-sets]
@@ -14,10 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 794f157469f02c762cfc550fac780d4156b0977108b14cdf6396ef7f539b4d15
+    item_sha256: e1df0c28269b04a2d7917a327eeee1869c2d8fa889a9a6e3009daae6232daae4
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -97,7 +108,7 @@ consequence of (K4), derived in the proof.
 
 ## Remarks
 
-- **(K3) is what makes the fixed points a topology and not merely a closure system.** Dropping it leaves an operator whose fixed points still satisfy (C1), (C2) and (C3) — steps 1.3, 1.4 and 2.1 do not use it — but the closure operator of the resulting topology is then only the smallest fixed point above $A$, which need not be $c(A)$. It is step 4.1 that spends (K3).
+- **(K3) is what makes $c$ recoverable as the closure operator of its fixed-point topology.** Dropping it leaves an operator whose fixed points still satisfy (C1), (C2) and (C3) — steps 1.3, 1.4 and 2.1 do not use it — but the closure operator of the resulting topology is then only the smallest fixed point above $A$, which need not be $c(A)$. It is step 4.1 that spends (K3).
 
 - **(K1) is genuinely independent of the others.** The operator $c(A) := X$ for all $A$, on a nonempty $X$, satisfies (K2), (K3) and (K4) and fails (K1); its fixed points are $\{X\}$ alone, which is not the family of closed sets of any topology, since $\varnothing$ is missing.
 

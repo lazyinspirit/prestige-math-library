@@ -4,6 +4,9 @@ kind: counterexample
 title: "The standard unit families $\\{\\, e_i : i \\in \\mathbb{N} \\,\\}$ are linearly independent in $F^{\\mathbb{N}}$ but do not span it: the constant family $1_F$ is not a finite linear combination of them"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-basis-of-the-eventually-zero-families, def-linear-independence, def-linear-basis, def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-every-independent-set-extends-to-a-basis, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-function-space, def-linear-subspace, def-vector-space, def-field, def-countable, def-equinumerous, lem-pigeonhole, def-natural-numbers, def-nat-order, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sequence_space"
     - title: "Linear independence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_independence"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

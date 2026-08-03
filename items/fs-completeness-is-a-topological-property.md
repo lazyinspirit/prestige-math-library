@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: completeness of a metric space is determined by its topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, def-equivalent-metrics, def-metric-topology,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        lem-of-inverse-positive, cor-archimedean-reciprocal, def-metric-ball,

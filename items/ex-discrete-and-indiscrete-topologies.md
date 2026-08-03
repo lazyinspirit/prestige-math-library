@@ -4,6 +4,9 @@ kind: example
 title: "The discrete and indiscrete topologies, their closures and interiors, and their continuous maps in each direction"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-interior-closure-boundary-top, thm-continuity-characterisations-top,
        def-topological-space, def-continuous-map-top, def-topology-basis-subbasis, thm-basis-criterion]
 justified_by: []

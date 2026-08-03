@@ -4,6 +4,9 @@ kind: proposition
 title: "When $ab < b$ for positive $a, b$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, lem-of-sign-rules, lem-of-mult-neg]
 aliases: []
 landmark: false

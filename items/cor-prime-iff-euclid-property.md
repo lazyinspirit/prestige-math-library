@@ -4,6 +4,9 @@ kind: corollary
 title: "For an integer $p > 1$: $p$ is prime if and only if, for all integers $a$ and $b$, $p \\mid ab$ implies $p \\mid a$ or $p \\mid b$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclids-lemma, def-prime, def-divides-in-z, lem-divisibility-basic,
        lem-associates-characterisation, lem-units-of-z, lem-int-cancellation,
        def-int-abs, lem-int-abs-properties, def-integers, def-int-operations,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
     - title: "Prime number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Prime_number"
+    - title: "Neil Donaldson, Math 180A notes: Unique factorisation"
+      url: "https://www.math.uci.edu/~ndonalds/math180a/2unique.pdf"
 pipeline_run: null
 ---
 

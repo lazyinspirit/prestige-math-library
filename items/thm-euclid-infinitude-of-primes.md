@@ -4,6 +4,9 @@ kind: theorem
 title: "Euclid's theorem: for every $n \\in \\mathbb{N}$ and every list $p : n \\to \\mathbb{Z}$ of primes there is a prime not among $p_0, \\dots, p_{n-1}$; consequently the set of primes is not finite"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-prime, lem-every-integer-above-one-has-a-prime-divisor,
        thm-prime-factorisation-exists, def-semigroup-and-monoid, lem-units-of-z,
        def-monoid-finite-product, thm-generalised-associativity, def-equinumerous,
@@ -29,6 +32,8 @@ sources:
   references:
     - title: "Euclid's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_theorem"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 

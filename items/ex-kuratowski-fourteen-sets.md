@@ -4,6 +4,9 @@ kind: example
 title: "Closure and complement generate at most fourteen sets from any subset, and $(0,1) \\cup (1,2) \\cup \\{3\\} \\cup ([4,5] \\cap \\mathbb{Q})$ attains fourteen"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-kuratowski-closure-axioms, lem-interior-closure-boundary-identities, thm-closure-characterisation-top,
        def-interior-closure-boundary-top, def-topological-space, def-metrizable-space, def-interval,
        lem-rat-embeds-dense, lem-real-line-is-a-metric-space, cor-interval-uncountable, thm-rationals-countable,

@@ -4,17 +4,21 @@ kind: corollary
 title: "The Cauchy-sequence reals have the least-upper-bound property"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-complete-ordered-field, thm-reals-cauchy-complete, lem-cauchy-reals-archimedean, thm-reals-ordered-field, def-real-limit, def-real-order, lem-rat-embeds-dense]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Purdue University notes: Number systems and the real numbers"
+      url: "https://www.math.purdue.edu/~jlipman/503/numbers.pdf"
+    - title: "East Tennessee State University notes: Uniqueness of the real numbers"
+      url: "https://faculty.etsu.edu/gardnerr/4217/Beamer-proofs/Proofs-Reals-Unique.pdf"
 pipeline_run: null
 ---
 
@@ -40,7 +48,7 @@ $\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).
 
 [L2] Every Cauchy sequence of reals converges to a real ([[thm-reals-cauchy-complete]]).
 
-[L3] Convergence and the Cauchy condition for real sequences, quantified over rational $\varepsilon$; limits preserve $\le$ ([[def-real-limit]]).
+[L3] Convergence and the Cauchy condition for real sequences are quantified over positive rational $\varepsilon$ ([[def-real-limit]]).
 
 [L4] $\mathbb{R}_C$ is Archimedean, so the reals $2^k$ are cofinal and $(b_0 - a_0)/2^k \to 0$ ([[lem-cauchy-reals-archimedean]]).
 
@@ -62,10 +70,10 @@ $\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).
 
 5.1 For $j, l \ge k$ both $a_j, a_l, b_j, b_l$ lie in the nested interval $[a_k, b_k]$, so $|a_j - a_l| \le b_k - a_k < \hat\varepsilon$ and likewise $|b_j - b_l| < \hat\varepsilon$; hence $(a_k)$ and $(b_k)$ are Cauchy sequences of reals. [step 3.1, step 4.1, L3, L5]
 
-6.1 By [L2] $(a_k)$ converges to a real $s$ and $(b_k)$ to a real $s'$; since $b_k - a_k \to 0$ by step 4.1, $s' = s$, with $a_k \le s \le b_k$ for all $k$. [step 4.1, step 5.1, L2, L3]
+6.1 By [L2], $(a_k)$ converges to a real $s$ and $(b_k)$ to a real $s'$. If $s < s'$, choose by [L6] a positive rational $\varepsilon$ with $3\hat\varepsilon < s'-s$. For all large $k$, convergence and step 4.1 give $|a_k-s| < \hat\varepsilon$, $|b_k-s'| < \hat\varepsilon$ and $b_k-a_k < \hat\varepsilon$, whence $s'-s \le |s'-b_k|+(b_k-a_k)+|a_k-s| < 3\hat\varepsilon$, a contradiction. If $s' < s$, choose $2\hat\varepsilon < s-s'$; for all large $k$, $a_k \le b_k$ and the two convergence bounds give $s-s' \le |s-a_k|+(a_k-b_k)+|b_k-s'| < 2\hat\varepsilon$, again a contradiction. Thus $s=s'$. For fixed $k$ and every $j \ge k$, step 3.1 gives $a_k \le a_j \le b_j \le b_k$. If $s<a_k$, choose $0<\hat\varepsilon<a_k-s$ and use $a_j\to s$; if $b_k<s$, choose $0<\hat\varepsilon<s-b_k$ and use $b_j\to s$. Each choice contradicts the displayed inequalities for all large $j$, so $a_k \le s \le b_k$. [step 3.1, step 4.1, step 5.1, L2, L3, L5, L6, algebra]
 
-7.1 Every $t \in S$ satisfies $t \le b_k$ for all $k$ (each $b_k$ is an upper bound), and $b_k \to s$, so $t \le s$: thus $s$ is an upper bound of $S$. [step 3.1, step 6.1, L1, L3]
+7.1 Every $t \in S$ satisfies $t \le b_k$ for all $k$, since each $b_k$ is an upper bound. If $s<t$, choose by [L6] a positive rational $\varepsilon$ with $\hat\varepsilon<t-s$. Since $b_k\to s$, eventually $|b_k-s|<\hat\varepsilon$, hence $b_k<s+\hat\varepsilon<t$, contradicting $t\le b_k$. Therefore $t\le s$, so $s$ is an upper bound of $S$. [step 3.1, step 6.1, L1, L3, L5, L6]
 
-7.2 If $v$ is any upper bound of $S$, then for each $k$ some element of $S$ exceeds $a_k$ (as $a_k$ is not an upper bound), giving $a_k < v$; since $a_k \to s$, $s \le v$: thus $s$ is the least upper bound. [step 3.1, step 6.1, L1, L3]
+7.2 If $v$ is any upper bound of $S$, then for each $k$ some element of $S$ exceeds $a_k$, because $a_k$ is not an upper bound; hence $a_k<v$. If $v<s$, choose by [L6] a positive rational $\varepsilon$ with $\hat\varepsilon<s-v$. Since $a_k\to s$, eventually $|a_k-s|<\hat\varepsilon$, so $a_k>s-\hat\varepsilon>v$, a contradiction. Thus $s\le v$, and $s$ is the least upper bound. [step 3.1, step 6.1, L1, L3, L5, L6]
 
 8.1 Hence $s = \sup S$ exists in $\mathbb{R}_C$; as $S$ was an arbitrary nonempty bounded-above set, $\mathbb{R}_C$ has the least-upper-bound property and is a complete ordered field. [step 7.1, step 7.2, L1] ∎

@@ -4,6 +4,9 @@ kind: lemma
 title: "For a prime $p$ and a nonzero integer $a$: $p^{v_p(a)} \\mid a$ and $p^{v_p(a)+1} \\nmid a$; $p^{k} \\mid a$ holds exactly for $k \\le v_p(a)$; $v_p(a) \\ge 1$ exactly when $p \\mid a$; $v_p(1) = v_p(-1) = 0$; and $v_p(p) = 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-p-adic-valuation, def-prime, def-group-power, lem-group-power-laws,
        def-semigroup-and-monoid, lem-units-of-z, def-divides-in-z, lem-divisibility-basic,
        lem-int-cancellation, thm-induction-principle, lem-nat-order-is-membership, lem-nat-discrete,
@@ -27,6 +30,8 @@ sources:
   references:
     - title: "P-adic valuation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
+    - title: "University of Chicago REU notes: p-adic numbers"
+      url: "https://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/Herwig.pdf"
 pipeline_run: null
 ---
 

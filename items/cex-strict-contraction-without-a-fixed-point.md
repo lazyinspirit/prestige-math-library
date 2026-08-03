@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto x + 1/x$ on $[1,\\infty)$ strictly decreases every distance and has no fixed point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-strict-contraction-has-a-fixed-point, thm-banach-fixed-point,
        def-lipschitz-holder-contraction, def-complete-metric-space, thm-of-archimedean,
        lem-of-inverse-positive, thm-complete-subspace-iff-closed,
@@ -20,11 +23,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -83,7 +87,7 @@ $d(f(x),f(y)) \le q\,d(x,y)$ for all $x,y \in X$.
 
 2.2 $f$ has no fixed point: $f(x) - x = 1/x > 0$ for every $x \in X$, so $f(x) \ne x$. [step 1.2, L3]
 
-3.1 $f$ is not a contraction. Suppose $0 \le q < 1$ satisfied $d(f(x),f(y)) \le q\,d(x,y)$ for all $x,y \in X$. Taking $x := n+1$ and $y := n$ for a natural $n \ge 1$ gives $|x - y| = 1$ and, by step 1.3, $d(f(x),f(y)) = 1 - \dfrac{1}{n(n+1)}$, so $1 - \dfrac{1}{n(n+1)} \le q$, that is $1 - q \le \dfrac{1}{n(n+1)} \le \dfrac{1}{n}$. [step 1.3, step 2.1, L1, L3, L4]
+3.1 $f$ is not a contraction. Suppose $0 \le q < 1$ satisfied $d(f(x),f(y)) \le q\,d(x,y)$ for all $x,y \in X$. Taking $x := n+1$ and $y := n$ for a natural $n \ge 1$ gives $|x - y| = 1$ and, by step 1.3, $d(f(x),f(y)) = 1 - \dfrac{1}{n(n+1)}$, so $1 - \dfrac{1}{n(n+1)} \le q$, that is $1 - q \le \dfrac{1}{n(n+1)} \le \dfrac{1}{n}$. [step 1.3, step 2.1, L1, L3, L4, L5]
 
 4.1 But $1 - q > 0$, so [L4] supplies a natural $n \ge 1$ with $1/n < 1-q$, contradicting step 3.1. Hence no such $q$ exists. [step 3.1, L4]
 

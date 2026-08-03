@@ -9,7 +9,7 @@ deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-normal-and-t4-spaces, def-completely-normal-and-perfectly-normal-spaces,
        def-zero-sets-and-cozero-sets, thm-the-separation-implication-chain,
        thm-perfectly-normal-implies-completely-normal, def-metrizable-space,
-       def-countable-choice, rem-topology-conventions,
+       def-countable-choice,
        def-compact-space, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
 external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
@@ -19,10 +19,10 @@ short: "separation-axiom conventions and the missing arrow"
 verification:
   precheck: n/a
   verified:
-    model: claude-sonnet-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-03
+    scope: published-audit
     delegated_by: owner
 sources:
   scraped: []
@@ -41,9 +41,10 @@ most sharply about vocabulary, and where a reader arriving with the other
 convention misreads statements rather than merely finding them unfamiliar. This
 remark settles the disagreements that are live on this page, records the one
 implication of the classical chain that this page does not prove, and states the
-choice cost of the one implication whose proof spends a choice principle. It
-extends [[rem-topology-conventions]], which settles the four forks of the
-underlying topological vocabulary and is not repeated here.
+choice cost of the one implication whose proof spends a choice principle. The
+standing topological vocabulary is used throughout: neighbourhoods need not be
+open, empty intersections equal the whole carrier, a basis is always relative to
+a topology, and comparisons use *coarser* and *finer*.
 
 ## 1. Whether *regular* and *normal* include $T_1$
 

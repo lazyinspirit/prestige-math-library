@@ -4,6 +4,9 @@ kind: definition
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-countable, lem-subset-of-countable, thm-countable-union-of-countable,
        def-equinumerous, def-injection-surjection-bijection, def-natural-numbers,
        lem-nat-order-is-membership, lem-nat-transitive-irreflexive, thm-induction-principle]

@@ -4,6 +4,9 @@ kind: theorem
 title: "A family is a basis for a unique topology iff it covers the set and every point of an intersection of two members lies in a member inside that intersection; finite intersections of any subbasis form a basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-basis-subbasis, def-topological-space]
 justified_by: []
 aliases: []

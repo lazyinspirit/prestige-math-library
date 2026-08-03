@@ -4,6 +4,11 @@ kind: example
 title: "The vector $(1,2) \\in \\mathbb{R}^{2}$ has coordinate list $(1,2)$ in the standard ordered basis, $(2,1)$ in its reversal, and $(2,-1)$ in the ordered basis $\\bigl((1,1),(1,0)\\bigr)$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-unique-coordinates-with-respect-to-an-ordered-basis, lem-standard-basis-of-f-n, def-linear-basis, def-linear-independence, def-function-space, def-linear-combination-and-span, def-monoid-finite-product, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-reals-field, def-real-numbers, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: []

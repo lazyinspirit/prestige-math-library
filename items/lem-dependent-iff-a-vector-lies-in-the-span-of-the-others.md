@@ -4,6 +4,9 @@ kind: lemma
 title: "A subset $S \\subseteq V$ is linearly dependent if and only if some $s \\in S$ lies in $\\operatorname{span}(S \\setminus \\{s\\})$; and $\\operatorname{span}(S)$ is already the set of linear combinations of INJECTIVE finite lists into $S$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-linear-independence, lem-independent-list-is-injective, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, def-injection-surjection-bijection]
 justified_by: []
 aliases: [lem-dependent-iff-redundant]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_independence"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Interactive Linear Algebra: Linear Independence"
+      url: "https://textbooks.math.gatech.edu/ila/linear-independence.html"
 pipeline_run: null
 ---
 

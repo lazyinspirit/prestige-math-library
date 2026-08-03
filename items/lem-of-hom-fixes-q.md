@@ -4,6 +4,9 @@ kind: lemma
 title: "Field homomorphisms between ordered fields fix $\\mathbb{Q}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-field-homomorphism, lem-of-q-embeds, lem-of-naturals-positive]
 aliases: []
 landmark: false
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "University of Wisconsin Math 521 notes: Real analysis"
+      url: "https://people.math.wisc.edu/~jwrobbin/521dir/521.pdf"
 pipeline_run: null
 ---
 

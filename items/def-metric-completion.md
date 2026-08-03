@@ -4,6 +4,9 @@ kind: definition
 title: "A completion of a metric space: a complete metric space together with an isometric embedding onto a dense subspace"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-complete-metric-space, def-isometry-and-metric-embedding,
        def-metric-interior-closure-boundary, def-metric-space,
        lem-isometry-is-an-embedding]

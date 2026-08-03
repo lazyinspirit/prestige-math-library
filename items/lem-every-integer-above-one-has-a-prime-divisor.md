@@ -4,28 +4,30 @@ kind: lemma
 title: "Every integer $n > 1$ has a prime divisor; indeed the least divisor of $n$ that exceeds $1$ is prime"
 status: published
 origin: session
-deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
-       lem-int-bounded-above-has-greatest, def-int-abs, lem-int-abs-properties,
-       def-integers, def-int-operations, def-int-order, thm-int-comm-ring,
-       thm-int-ordered-ring, def-natural-numbers, def-nat-order, lem-nat-embeds-int,
-       lem-nat-discrete]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, lem-int-bounded-above-has-greatest, def-int-abs, lem-int-abs-properties, def-int-order, thm-int-ordered-ring, def-natural-numbers, def-nat-order, lem-nat-embeds-int, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
 short: "$n > 1$ has a prime divisor"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Fundamental theorem of arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+    - title: "Janssen and Lindsey, Rings with Inquiry: Primes and Factorization"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Rings_with_Inquiry_%28Janssen_and_Lindsey%29/01%3A_The_Integers/1.03%3A_Primes_and_Factorization"
 pipeline_run: null
 ---
 
@@ -43,8 +45,6 @@ prime divisor.
 
 **Given:** An integer $n$ with $n > 1$, and the set $S$ above.
 
-[L1] $d \mid u$ means $u = dq$ for some $q \in \mathbb{Z}$ ([[def-divides-in-z]]).
-
 [L2] Divisibility is reflexive and transitive ([[lem-divisibility-basic]]).
 
 [L3] A nonempty set of integers with a lower bound has a unique least element ([[lem-int-bounded-above-has-greatest]]).
@@ -54,8 +54,6 @@ prime divisor.
 [L5] $p$ is prime exactly when $p > 1$ and every positive divisor of $p$ is $1$ or $p$ ([[def-prime]]).
 
 [L6] The order on $\mathbb{Z}$ is total, antisymmetric and transitive and is compatible with addition; $x < y$ means $x \le y$ together with $x \ne y$ ([[thm-int-ordered-ring]], [[def-int-order]]).
-
-[L7] $\mathbb{Z}$ is a commutative ring: addition is associative and commutative, $x + 0 = x$, and every $x$ has an additive inverse $-x$ ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]]).
 
 [L8] The embedding $\iota : \mathbb{N} \to \mathbb{Z}$ is injective, preserves addition and order, and has as image exactly the nonnegative integers, with $\iota(0) = 0$ and $\iota(1) = 1$ ([[lem-nat-embeds-int]]).
 

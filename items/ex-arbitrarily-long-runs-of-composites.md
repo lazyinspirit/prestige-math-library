@@ -4,12 +4,10 @@ kind: example
 title: "For every $n \\in \\mathbb{N}$ there are $n$ consecutive composite integers: with $N := \\prod_{j<n}(j+2)$, each of $N+2, \\dots, N+n+1$ is composite"
 status: published
 origin: session
-deps: [def-prime, def-factorial-and-falling-factorial, def-monoid-finite-product, thm-generalised-associativity,
-       lem-units-of-z, def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic,
-       lem-divisor-bound, thm-induction-principle, lem-nat-order-is-membership,
-       lem-nat-discrete, lem-nat-add-commutative, lem-nat-embeds-int, def-natural-numbers,
-       def-nat-order, def-nat-addition, thm-int-comm-ring, thm-int-ordered-ring,
-       def-int-operations, def-int-order, def-integers]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-prime, def-factorial-and-falling-factorial, def-monoid-finite-product, thm-generalised-associativity, lem-units-of-z, def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic, thm-induction-principle, lem-nat-order-is-membership, lem-nat-discrete, lem-nat-add-commutative, lem-nat-embeds-int, def-natural-numbers, def-nat-order, def-nat-addition, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, def-integers]
 justified_by: []
 forward_refs: [lem-factorial-beats-geometric]
 aliases: [ex-prime-gaps-are-unbounded]
@@ -18,16 +16,19 @@ short: "$n$ consecutive composites, for every $n$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Prime gap (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Prime_gap"
+    - title: "Harvey Mudd College Math Fun Facts: Gaps in primes"
+      url: "https://math.hmc.edu/funfacts/gaps-in-primes/"
 pipeline_run: null
 ---
 
@@ -58,8 +59,6 @@ composite integers.
 [L3] $n > 1$ that is not prime is composite; $p$ is prime when $p > 1$ and its only positive divisors are $1$ and $p$ ([[def-prime]]).
 
 [L4] Divisibility is reflexive and transitive and is linear: $d \mid u$ and $d \mid w$ give $d \mid u + w$; $d \mid u$ means $u = dc$ for some $c$ ([[lem-divisibility-basic]], [[def-divides-in-z]]).
-
-[L5] If $d \mid a$ and $a \ne 0$ then $|d| \le |a|$ ([[lem-divisor-bound]]).
 
 [L6] Induction on $\mathbb{N}$ ([[thm-induction-principle]]).
 

@@ -4,18 +4,29 @@ kind: definition
 title: "Finite-dimensional vector space, and its dimension $\\dim_F V$; infinite-dimensional means having no finite basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-any-two-finite-bases-have-the-same-size, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-restriction-of-scalars, def-subfield, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers]
 justified_by: []
 aliases: [def-finite-dimensional, def-infinite-dimensional]
 landmark: true
 short: "$\\dim_F V$"
 verification:
-  audited: 2026-07-28
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 00c5f9e7b8d68228285e9a2319a6cc98f3a1d6982c44b52bdc03f0f2b9feea4d
+    item_sha256: b1e7ccec53efbe1df92ba5a9cdfdce9fd51f466194a4ae3295eb879d599f7114
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +34,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dimension_(vector_space)"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Interactive Linear Algebra: Dimension"
+      url: "https://textbooks.math.gatech.edu/ila/dimension.html"
+    - title: "Sheldon Axler, Linear Algebra Done Right, 4th ed."
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 
@@ -62,8 +77,9 @@ $V = \operatorname{span}(\varnothing) = \{0_V\}$
 
 - **The subscript $F$ is not ornamental.** By [[lem-restriction-of-scalars]] the
   same set with the same addition is a vector space over any subfield
-  $K \subseteq F$ ([[def-subfield]]), and the two structures have different bases
-  and different dimensions. The companion page's basis of $\mathbb{R}$ over
+  $K \subseteq F$ ([[def-subfield]]), and for a proper subfield the two
+  structures can have different bases and different dimensions. The companion
+  page's basis of $\mathbb{R}$ over
   $\mathbb{Q}$ is the extreme case: $\mathbb{R}$ is a vector
   space both over itself and over the embedded copy of $\mathbb{Q}$ inside it, and
   it is infinite-dimensional over the latter. So "the dimension of $V$" is

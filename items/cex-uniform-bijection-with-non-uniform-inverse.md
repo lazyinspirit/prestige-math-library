@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto \\sqrt{x}$ is a uniformly continuous bijection of $[0,\\infty)$ onto itself whose inverse $x \\mapsto x^2$ is not uniformly continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-uniform-continuity, thm-metric-regularity-hierarchy, thm-of-square-roots,
        lem-power-difference-factorisation, lem-of-abs-value, cor-archimedean-reciprocal,
        thm-of-archimedean, lem-of-inverse-positive, lem-real-line-is-a-metric-space,

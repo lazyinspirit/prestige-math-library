@@ -4,26 +4,23 @@ kind: example
 title: "No rational squares to $3$ or to $6$, and none cubes to $2$: three instances of the rational-root corollary"
 status: published
 origin: session
-deps: [cor-rational-root-of-an-integer-is-an-integer, def-prime,
-       thm-fundamental-theorem-of-arithmetic, def-coprime, cor-gcd-quotients-coprime,
-       def-common-divisor-and-gcd, def-divides-in-z, def-rationals, def-rat-operations,
-       thm-rat-field, lem-int-embeds-rat, def-field, def-group-power, lem-group-power-laws,
-       lem-units-of-z, def-semigroup-and-monoid, def-int-abs, lem-int-abs-properties,
-       thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order,
-       lem-int-cancellation, def-integers, lem-nat-embeds-int, lem-nat-discrete,
-       def-natural-numbers, def-nat-order]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [cor-rational-root-of-an-integer-is-an-integer, def-rationals, def-rat-operations, thm-rat-field, lem-int-embeds-rat, def-field, def-group-power, lem-group-power-laws, def-semigroup-and-monoid, def-int-abs, lem-int-abs-properties, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, lem-int-cancellation, def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order]
 justified_by: []
 aliases: []
 landmark: false
 short: "no rational squares to $3$ or $6$, none cubes to $2$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +28,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Rational_root_theorem"
     - title: "Square root of 2 (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Square_root_of_2"
+    - title: "Wichita State University notes: Logic and proofs"
+      url: "https://www.math.wichita.edu/~hammond/class-notes/section-logic-proofs.html"
+    - title: "Michigan State University Math 310 course notes"
+      url: "https://users.math.msu.edu/users/magyarp/math310/"
+    - title: "University of Minnesota Duluth number theory solutions"
+      url: "https://www.d.umn.edu/~jgreene/Number_Theory/Homework/HW_3_sol.pdf"
 pipeline_run: null
 ---
 
@@ -62,8 +65,6 @@ out the finitely many integer candidates by size, which is done below.
 [L5] $\mathbb{Z}$ is a commutative ring; its order is total, antisymmetric and transitive, is compatible with addition, and positives are closed under multiplication ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]], [[thm-int-ordered-ring]], [[def-int-order]], [[lem-int-cancellation]]).
 
 [L6] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with image the nonnegative integers, $\iota(0) = 0$, $\iota(1) = 1$ ([[lem-nat-embeds-int]]); $m < k$ exactly when $\sigma(m) \le k$, and $1 = \sigma(0)$ ([[lem-nat-discrete]], [[def-natural-numbers]], [[def-nat-order]]).
-
-[L7] Primality and unique factorisation, which the corollary of [L1] rests on ([[def-prime]], [[thm-fundamental-theorem-of-arithmetic]], [[def-coprime]], [[cor-gcd-quotients-coprime]], [[def-common-divisor-and-gcd]], [[def-divides-in-z]], [[lem-units-of-z]]).
 
 ## Verification
 

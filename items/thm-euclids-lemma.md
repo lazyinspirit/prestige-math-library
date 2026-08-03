@@ -4,6 +4,9 @@ kind: theorem
 title: "Euclid's lemma: if $p$ is prime and $p \\mid ab$ then $p \\mid a$ or $p \\mid b$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-prime, lem-prime-not-dividing-is-coprime, lem-coprime-divides-product,
        def-coprime, def-common-divisor-and-gcd, def-divides-in-z,
        lem-divisibility-basic, def-integers, def-int-operations, thm-int-comm-ring]
@@ -24,6 +27,8 @@ sources:
   references:
     - title: "Euclid's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 

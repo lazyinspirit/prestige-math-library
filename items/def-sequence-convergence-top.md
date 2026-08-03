@@ -4,6 +4,9 @@ kind: definition
 title: "Convergence and cluster points of a sequence in a topological space, sequential continuity, and the sequential closure"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-neighbourhood-top, def-sequence, def-natural-numbers, def-continuous-map-top,
        lem-limit-unique, lem-metric-limits-unique, lem-metric-ball-neighbourhood-base, def-metric-convergence]
 justified_by: []

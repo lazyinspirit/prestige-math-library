@@ -4,6 +4,11 @@ kind: example
 title: "$360 = 2^{3} \\cdot 3^{2} \\cdot 5$ and $84 = 2^{2} \\cdot 3 \\cdot 7$, with $\\gcd(360,84) = 12$ and $\\operatorname{lcm}(360,84) = 2520$ read off the exponents"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-gcd-and-lcm-from-valuations, thm-canonical-prime-factorisation,
        lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
        thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists, def-prime,

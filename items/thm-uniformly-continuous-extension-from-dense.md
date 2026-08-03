@@ -4,6 +4,9 @@ kind: theorem
 title: "A uniformly continuous map from a dense subspace into a complete metric space extends uniquely to a uniformly continuous map on the whole space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-intersection-metric, def-complete-metric-space,
        def-metric-interior-closure-boundary, thm-metric-sequential-closure,
        def-metric-uniform-continuity, def-countable-choice, lem-metric-limits-unique,

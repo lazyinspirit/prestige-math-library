@@ -4,6 +4,9 @@ kind: theorem
 title: "Every complete ordered field is Archimedean"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-complete-ordered-field, lem-of-naturals-positive, cor-of-one-positive, def-ordered-field]
 aliases: []
 landmark: true
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Neil Donaldson, Math 140A notes: Completeness and the Archimedean property"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/1complete.html"
 pipeline_run: null
 ---
 

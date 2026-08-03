@@ -4,6 +4,9 @@ kind: definition
 title: "Prime and composite integers: $p$ is prime when $p > 1$ and its only positive divisors are $1$ and $p$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-divides-in-z, lem-divisibility-basic, lem-divisor-bound, def-int-abs,
        lem-int-abs-properties, lem-associates-characterisation, lem-units-of-z,
        def-integers, def-int-operations, def-int-order, thm-int-comm-ring,
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Prime_number"
     - title: "Composite number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Composite_number"
+    - title: "Inquiry into Advanced Algebra: Division, primes, and factorisation"
+      url: "https://web.math.utk.edu/~dcartwr1/iaawa/section-division-algorithm.html"
 pipeline_run: null
 ---
 

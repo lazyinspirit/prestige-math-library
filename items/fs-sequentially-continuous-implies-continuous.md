@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a sequentially continuous map between topological spaces is continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence-convergence-top, def-standard-topologies, thm-first-countable-sequences-suffice,
        def-continuous-map-top, thm-continuity-characterisations-top, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra,
@@ -17,11 +20,12 @@ short: "sequential continuity does not imply continuity"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,11 +45,11 @@ sequentially continuous ([[def-sequence-convergence-top]]), then $f$ is
 continuous ([[def-continuous-map-top]]).
 
 One half of the relation between the two notions is a theorem: continuity always
-implies sequential continuity, and in a **first countable** source the converse
-holds as well ([[thm-first-countable-sequences-suffice]]). The claim above drops
-the countability hypothesis, and it is exactly that hypothesis that carries the
-weight. The witness is the identity map from $\mathbb{R}$ with the cocountable
-topology to $\mathbb{R}$ with its usual topology
+implies sequential continuity, and, assuming the Axiom of Countable Choice, in
+a **first countable** source the converse holds as well
+([[thm-first-countable-sequences-suffice]]). The claim above drops the
+first-countability hypothesis, and the witness is the identity map from
+$\mathbb{R}$ with the cocountable topology to $\mathbb{R}$ with its usual topology
 ([[def-standard-topologies]], [[def-metrizable-space]]), and it is exhibited in
 full below rather than cited, so that this page does not depend on its companion.
 
@@ -93,7 +97,7 @@ full below rather than cited, so that this page does not depend on its companion
 
 ## Remarks
 
-- **What the witness shows about the source.** The cocountable topology on $\mathbb{R}$ is **not first countable**: were it, [[thm-first-countable-sequences-suffice]] would make the map above continuous, and it is not. So some point of it has no at most countable neighbourhood base. That much is a genuine consequence of the refutation and not an extra assumption; the sharper statement that **no** point has one is true but is not established here, since the refutation exhibits a single failure of continuity rather than one at every point. it is also the reason the cocountable topology is the standard source of examples in which sequences fail to see the topology.
+- **What the witness shows about the source.** Assuming the Axiom of Countable Choice, the cocountable topology on $\mathbb{R}$ is **not first countable**: were it, [[thm-first-countable-sequences-suffice]] would make the map above continuous, and it is not. Under that assumption some point therefore has no at most countable neighbourhood base. The sharper statement that **no** point has one is true but is not established here, since the refutation exhibits a single failure of continuity rather than one at every point. This is also why the cocountable topology is the standard source of examples in which sequences fail to see the topology.
 
 - **The failure is not about the target.** The target here is metrizable, hence as well behaved as a space can be; all the pathology is in the source, which is where sequential continuity is tested.
 

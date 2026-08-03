@@ -4,6 +4,9 @@ kind: remark
 title: "The four live convention forks of general topology and which side this library takes on each"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-neighbourhood-top, def-topological-space, def-standard-topologies, def-first-countable-top,
        def-topology-basis-subbasis, thm-basis-criterion, def-countable, def-sequence-convergence-top,
        def-natural-numbers, def-sequence]
@@ -14,10 +17,18 @@ short: "convention forks of general topology"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: b8daa0066be69a8cb42fc67df73b3c637107d2f050f65cd8ac6bedcca76f9638
+    item_sha256: aae41d44bfcd5e2e6365cfa5cc0a4b8ef87e17d8ad9732ca979ee887c900cb5b
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,12 +53,13 @@ these two pages. Where this library's choice is the less common one it is said s
 **1. A neighbourhood need not be open.** A set $N$ is a neighbourhood of $x$ when
 some open $U$ satisfies $x \in U \subseteq N$ ([[def-neighbourhood-top]]). The
 competing convention, used by Munkres among many others, reserves the word for
-*open* sets containing $x$. Nothing on this page depends on the fork, because
-every condition of the form "for every neighbourhood $N$ of $x$ ..." is equivalent
-to its restriction to open neighbourhoods; the wider notion is chosen because it
-makes the neighbourhoods of a point a filter, and because a neighbourhood *base*
-is then allowed to consist of sets that are not open. This library writes **open
-neighbourhood** in full whenever openness is being used.
+*open* sets containing $x$. A condition quantified over every neighbourhood is
+equivalent to its restriction to open neighbourhoods when the condition is
+preserved on enlarging the set, as eventual-membership and the standard local
+tests are; this is not true for an arbitrary predicate. The wider notion is
+chosen because it makes the neighbourhoods of a point a filter, and because a
+neighbourhood *base* is then allowed to consist of sets that are not open. This
+library writes **open neighbourhood** in full whenever openness is being used.
 
 **2. The empty intersection is the whole set, and a subbasis need not cover.**
 In [[thm-basis-criterion]] the finite intersections of a subbasis $\mathcal{S}$

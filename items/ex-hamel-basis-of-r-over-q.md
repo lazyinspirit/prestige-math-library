@@ -4,19 +4,30 @@ kind: example
 title: "$\\mathbb{R}$ as a vector space over $\\mathbb{Q}$ has a basis, and every such basis is infinite; the existence proof exhibits none"
 status: published
 origin: session
-deps: [cor-every-vector-space-has-a-basis, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-linear-basis, def-linear-independence, def-dimension, def-linear-combination-and-span, def-monoid-finite-product, lem-restriction-of-scalars, def-subfield, def-field-homomorphism, lem-of-q-embeds, def-ordered-field, thm-reals-ordered-field, thm-rationals-countable, thm-product-of-countable, thm-r-uncountable, lem-subset-of-countable, lem-pigeonhole, def-countable, def-equinumerous, def-injection-surjection-bijection, def-function-space, def-vector-space, def-field, def-rationals, def-real-numbers, thm-rat-field, thm-reals-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [cor-every-vector-space-has-a-basis, def-axiom-of-choice, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-linear-basis, def-linear-independence, def-dimension, def-linear-combination-and-span, def-monoid-finite-product, lem-restriction-of-scalars, def-subfield, def-field-homomorphism, lem-of-q-embeds, def-ordered-field, thm-reals-ordered-field, cor-cauchy-reals-lub-complete, def-complete-ordered-field, thm-rationals-countable, thm-product-of-countable, thm-r-uncountable, lem-subset-of-countable, lem-pigeonhole, def-countable, def-equinumerous, def-injection-surjection-bijection, def-function-space, def-vector-space, def-field, def-rationals, def-real-numbers, thm-rat-field, thm-reals-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [ex-hamel-basis]
 landmark: false
 short: "a Hamel basis of $\\mathbb{R}$ over $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: ff3022315d73b9da68f16ae0a9988d72cc3258ff7c7720e37577cc05df079e74
+    item_sha256: b89c7eed4ea43833c1288e7bc4bdde98bc4536d6309f619c68a15a51569ec399
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,14 +35,19 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "University of Vermont notes: Infinite-dimensional vector spaces"
+      url: "https://www.uvm.edu/~smillere/Curio2.pdf"
 pipeline_run: null
 ---
 
 ## Example
 
-Let $\mathbb{R}$ be the real numbers ([[def-real-numbers]]), a field
+**Assume the Axiom of Choice** ([[def-axiom-of-choice]]). Let $\mathbb{R}$ be
+the real numbers ([[def-real-numbers]]), a field
 ([[thm-reals-field]]) and an ordered field ([[thm-reals-ordered-field]],
-[[def-ordered-field]]), and let $\mathbb{Q}$ be the rationals
+[[def-ordered-field]]), with the least-upper-bound property and hence complete
+as an ordered field ([[cor-cauchy-reals-lub-complete]],
+[[def-complete-ordered-field]]), and let $\mathbb{Q}$ be the rationals
 ([[def-rationals]]), a field ([[thm-rat-field]]). Let
 $\iota : \mathbb{Q} \to \mathbb{R}$ be the unique field homomorphism
 ([[lem-of-q-embeds]], [[def-field-homomorphism]]), which is injective, and put
@@ -60,17 +76,17 @@ established nothing of the kind.
 
 ## Facts & Assumptions
 
-**Given:** The field $\mathbb{R}$, the field $\mathbb{Q}$, the unique field homomorphism $\iota : \mathbb{Q} \to \mathbb{R}$, and $\mathbb{Q}_{\mathbb{R}} = \iota[\mathbb{Q}]$.
+**Given:** The Axiom of Choice; the complete ordered field $\mathbb{R}$, the field $\mathbb{Q}$, the unique field homomorphism $\iota : \mathbb{Q} \to \mathbb{R}$, and $\mathbb{Q}_{\mathbb{R}} = \iota[\mathbb{Q}]$.
 
 [L1] There is a unique field homomorphism $\iota : \mathbb{Q} \to \mathbb{R}$ and it is injective ([[lem-of-q-embeds]]); a field homomorphism satisfies $\varphi(x+y) = \varphi(x)+\varphi(y)$, $\varphi(xy) = \varphi(x)\varphi(y)$, $\varphi(1) = 1$, $\varphi(0) = 0$, $\varphi(-x) = -\varphi(x)$ and $\varphi(x^{-1}) = \varphi(x)^{-1}$ for $x \ne 0$ ([[def-field-homomorphism]]); a subfield is a subset containing $1$, closed under $a - b$ and $ab$, and containing $x^{-1}$ for each nonzero $x$ in it ([[def-subfield]]).
 
 [L2] A field is a vector space over itself, and an $F$-vector space is a $K$-vector space for every subfield $K \subseteq F$ by restricting the scalar multiplication ([[lem-restriction-of-scalars]], [[def-vector-space]], [[def-field]]).
 
-[L3] Every vector space has a basis ([[cor-every-vector-space-has-a-basis]]); a basis is a linearly independent spanning subset, an ordered basis is an injective list whose image is a basis, and $\dim_F V$ is defined exactly when some basis is finite ([[def-linear-basis]], [[def-linear-independence]], [[def-dimension]], [[def-linear-combination-and-span]]).
+[L3] Under the Axiom of Choice every vector space has a basis ([[def-axiom-of-choice]], [[cor-every-vector-space-has-a-basis]]); a basis is a linearly independent spanning subset, an ordered basis is an injective list whose image is a basis, and $\dim_F V$ is defined exactly when some basis is finite ([[def-linear-basis]], [[def-linear-independence]], [[def-dimension]], [[def-linear-combination-and-span]]).
 
 [L4] A list $v : n \to V$ is an ordered basis if and only if every $x \in V$ is $\sum_{i<n}\lambda_i v_i$ for exactly one $\lambda : n \to F$ ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]); finite sums are those of [[def-monoid-finite-product]] read additively.
 
-[L5] $\mathbb{Q} \approx \mathbb{N}$ ([[thm-rationals-countable]]); a product of two at most countable sets is at most countable ([[thm-product-of-countable]]); a subset of an at most countable set is at most countable ([[lem-subset-of-countable]]); $\mathbb{R}$ is uncountable ([[thm-r-uncountable]]); a finite set is equinumerous with exactly one natural ([[lem-pigeonhole]]); "at most countable" means finite or equinumerous with $\mathbb{N}$, and this property transfers along a bijection ([[def-countable]], [[def-equinumerous]], [[def-injection-surjection-bijection]]).
+[L5] $\mathbb{Q} \approx \mathbb{N}$ ([[thm-rationals-countable]]); a product of two at most countable sets is at most countable ([[thm-product-of-countable]]); a subset of an at most countable set is at most countable ([[lem-subset-of-countable]]); the Cauchy-sequence reals have the least-upper-bound property and hence form a complete ordered field ([[cor-cauchy-reals-lub-complete]], [[def-complete-ordered-field]]), so $\mathbb{R}$ is uncountable ([[thm-r-uncountable]]); a finite set is equinumerous with exactly one natural ([[lem-pigeonhole]]); "at most countable" means finite or equinumerous with $\mathbb{N}$, and this property transfers along a bijection ([[def-countable]], [[def-equinumerous]], [[def-injection-surjection-bijection]]).
 
 [L6] $K^{X}$ is the set of functions $X \to K$ ([[def-function-space]]); $\sigma(n) = n \cup \{n\}$ with $n \notin n$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]); induction ([[thm-induction-principle]]).
 

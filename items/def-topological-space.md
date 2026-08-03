@@ -4,6 +4,9 @@ kind: definition
 title: "Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partial-order]
 justified_by: []
 aliases: [def-topology, def-open-set-top, def-closed-set-top]

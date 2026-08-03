@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto 1/x$ is continuous on $(0,1)$ and sends the Cauchy sequence $(1/(k+2))_{k \\ge 0}$ to an unbounded one"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-uniform-continuity-preserves-cauchy, def-metric-uniform-continuity,
        def-metric-continuity, def-cauchy-in-metric, cor-archimedean-reciprocal,
        thm-of-archimedean, lem-of-inverse-positive, def-interval,

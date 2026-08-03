@@ -4,6 +4,9 @@ kind: example
 title: "The completion of $\\mathbb{Q}$ under the usual metric is $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-completion-exists, thm-metric-completion-unique, def-metric-completion,
        def-rationals, lem-rat-embeds-dense, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, thm-euclidean-space-complete,

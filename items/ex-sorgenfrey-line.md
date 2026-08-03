@@ -4,6 +4,9 @@ kind: example
 title: "The Sorgenfrey line: $\\mathbb{R}$ with the half-open intervals $[a,b)$ as a basis is strictly finer than the usual topology, is first countable, has a countable dense subset, and its sequences converge only from the right"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-basis-criterion, def-topology-basis-subbasis, def-topological-space, def-first-countable-top,
        def-dense-top, def-sequence-convergence-top, lem-rat-embeds-dense, def-interval,
        lem-real-line-is-a-metric-space, cor-archimedean-reciprocal, lem-of-inverse-positive,

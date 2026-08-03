@@ -4,6 +4,9 @@ kind: definition
 title: "The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-field, def-natural-numbers, thm-recursion]
 justified_by: []
 forward_refs: [def-metric-completion]
@@ -20,6 +23,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Characteristic_(algebra)"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Elias Zakon, Mathematical Analysis: Natural Numbers and Induction"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/02%3A_Real_Numbers_and_Fields/2.02%3A_Natural_Numbers._Induction"
 pipeline_run: null
 ---
 

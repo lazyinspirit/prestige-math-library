@@ -4,6 +4,9 @@ kind: definition
 title: "Homeomorphism, open map, closed map, embedding, and what it means for a property to be topological"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-continuous-map-top, def-injection-surjection-bijection, def-topological-space, def-subspace-topology-top, def-standard-topologies]
 justified_by: []
 aliases: [def-homeomorphism-top, def-open-map-top, def-closed-map-top, def-embedding-top]

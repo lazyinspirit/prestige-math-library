@@ -4,26 +4,23 @@ kind: false-statement
 title: "FALSE: for every finite list $p_0, \\dots, p_{n-1}$ of distinct primes, $p_0 \\cdots p_{n-1} + 1$ is prime"
 status: published
 origin: session
-deps: [thm-euclid-infinitude-of-primes, def-prime,
-       lem-every-integer-above-one-has-a-prime-divisor, def-monoid-finite-product,
-       def-semigroup-and-monoid, lem-units-of-z, def-injection-surjection-bijection,
-       thm-division-algorithm-in-z, def-divides-in-z, lem-divisibility-basic,
-       lem-divisor-bound, lem-int-cancellation, def-int-abs, lem-int-abs-properties,
-       thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order,
-       def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers,
-       def-nat-order]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [thm-euclid-infinitude-of-primes, def-prime, lem-every-integer-above-one-has-a-prime-divisor, def-monoid-finite-product, def-semigroup-and-monoid, lem-units-of-z, def-injection-surjection-bijection, thm-division-algorithm-in-z, def-divides-in-z, lem-divisibility-basic, lem-int-cancellation, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order]
 justified_by: []
 aliases: [fs-euclid-number-is-prime]
 landmark: false
 short: "FALSE: $p_0 \\cdots p_{n-1} + 1$ is prime"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Euclid_number"
     - title: "Euclid's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_theorem"
+    - title: "Discrete mathematics notes: Prime numbers and Euclid's argument"
+      url: "https://homepage.iis.sinica.edu.tw/~bywang/courses/discrete-math/note-3.pdf"
 pipeline_run: null
 ---
 
@@ -71,8 +70,6 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 [L3] Every integer $n > 1$ has a prime divisor, and the least divisor of $n$ exceeding $1$ is prime ([[lem-every-integer-above-one-has-a-prime-divisor]]).
 
 [L4] For $a \in \mathbb{Z}$ and $b > 0$ there is exactly one pair $(q,r)$ with $a = qb + r$ and $0 \le r < b$, and $b \mid a$ exactly when $r = 0$ ([[thm-division-algorithm-in-z]]).
-
-[L5] If $d \mid a$ and $a \ne 0$ then $d \ne 0$ and $|d| \le |a|$ ([[lem-divisor-bound]]); $|x| = x$ for $x \ge 0$ ([[def-int-abs]], [[lem-int-abs-properties]]).
 
 [L6] $d \mid a$ means $a = dc$ for some $c$; divisibility is transitive ([[def-divides-in-z]], [[lem-divisibility-basic]]).
 

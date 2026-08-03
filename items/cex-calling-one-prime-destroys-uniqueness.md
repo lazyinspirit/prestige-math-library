@@ -4,6 +4,9 @@ kind: counterexample
 title: "If $1$ were admitted as a prime, uniqueness would fail: $6 = 2 \\cdot 3 = 1 \\cdot 2 \\cdot 3 = 1 \\cdot 1 \\cdot 2 \\cdot 3$, lists of different lengths that no permutation matches"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-prime, thm-fundamental-theorem-of-arithmetic, thm-prime-factorisation-exists,
        def-symmetric-group, lem-pigeonhole, def-equinumerous,
        def-injection-surjection-bijection, def-monoid-finite-product,
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
     - title: "Prime number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Prime_number"
+    - title: "Janssen and Lindsey, Rings with Inquiry: Primes and Factorization"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Rings_with_Inquiry_%28Janssen_and_Lindsey%29/01%3A_The_Integers/1.03%3A_Primes_and_Factorization"
 pipeline_run: null
 ---
 

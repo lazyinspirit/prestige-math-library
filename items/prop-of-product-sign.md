@@ -4,6 +4,9 @@ kind: proposition
 title: "The sign of a product"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, lem-of-sign-rules, lem-of-no-zero-divisors, lem-of-zero-mult]
 aliases: []
 landmark: false
@@ -21,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "University of Innsbruck notes: Ordered fields"
+      url: "https://www.uibk.ac.at/media/filer_public/28/02/280225fd-dde6-4e9c-bff6-baad33ff4a05/ragen.pdf"
 pipeline_run: null
 proof_strategy: cases
 ---

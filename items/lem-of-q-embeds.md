@@ -4,6 +4,9 @@ kind: lemma
 title: "The unique embedding of ℚ into an ordered field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules, def-field-homomorphism, def-ordered-field, thm-rat-ordered-field]
 aliases: []
 landmark: false
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "University of Wisconsin Math 521 notes: Real analysis"
+      url: "https://people.math.wisc.edu/~jwrobbin/521dir/521.pdf"
 pipeline_run: null
 ---
 

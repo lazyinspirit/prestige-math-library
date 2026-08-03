@@ -4,6 +4,9 @@ kind: definition
 title: "Metrizable space: a topological space whose topology is induced by some metric; metrizability is topological, the metric is not"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-metric-topology, def-metric-space, thm-metric-open-set-algebra, def-equivalent-metrics,
        def-subspace-topology-top, def-isometry-and-metric-embedding,
        def-metric-ball, def-neighbourhood-top, def-interior-closure-boundary-top, def-continuous-map-top,
@@ -18,10 +21,18 @@ short: "metrizable space; the usual topology of $\\mathbb{R}$"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 481fc46dfb5166d1c7254e753d62020d03b9c022b265f7afd686ea1f9dd7ff0a
+    item_sha256: 36f4a57f6ea43198decefdca5ecb7883fa754f6a0fa1ef34d13dc55d3704c788
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -50,16 +61,19 @@ arbitrary unions, which is (T2), and under intersections of $n \ge 1$ members,
 which contains (T3). So every metric space is a topological space, and the
 metric-space development of this library is a special case of the present one.
 
-**The two developments agree notion by notion, and the agreement is definitional
-rather than a coincidence.** Let $d$ be a metric on $X$ and give $X$ the topology
-$\mathcal{T}_d$.
+**The standard local notions in the two developments agree after translating
+their neighbourhood conventions.** Let $d$ be a metric on $X$ and give $X$ the
+topology $\mathcal{T}_d$.
 
-- *Neighbourhoods and balls.* For $x \in X$ the balls $B(x,r)$, $r > 0$
-  ([[def-metric-ball]]), are open ([[thm-metric-open-set-algebra]]) and form a
-  neighbourhood base at $x$ in the sense of [[def-neighbourhood-top]]: each is a
-  neighbourhood of $x$, and any neighbourhood $N$ of $x$ contains an open
-  $U \ni x$, hence a ball around $x$ by [[def-metric-topology]]. The balls of
-  radius $1/n$ alone already suffice ([[lem-metric-ball-neighbourhood-base]]).
+- *Neighbourhoods and balls.* [[def-metric-topology]] uses "neighbourhood" for
+  an open set containing $x$, whereas [[def-neighbourhood-top]] also allows a
+  non-open superset of such a set. Thus the two collections are not literally
+  equal, but the open metric neighbourhoods are cofinal in the broader
+  neighbourhood filter. The balls $B(x,r)$, $r > 0$ ([[def-metric-ball]]), are
+  open ([[thm-metric-open-set-algebra]]) and form a neighbourhood base at $x$:
+  any neighbourhood $N$ contains an open $U \ni x$, hence a ball around $x$ by
+  [[def-metric-topology]]. The balls of radius $1/n$ alone already suffice
+  ([[lem-metric-ball-neighbourhood-base]]).
 - *Interior, closure, boundary.* [[def-metric-interior-closure-boundary]] defines
   them by the same conditions with balls in place of neighbourhoods, and the
   previous bullet makes the two conditions equivalent; the metric closure is the
@@ -87,10 +101,12 @@ $\mathcal{T}_d$.
   which is $d_X$-open, satisfies $U \cap A = W$, and involves no choice principle,
   the union being taken over a set of pairs rather than over a selection.
 
-Consequently every notion the metric-space pages define — neighbourhood,
-interior, closure, boundary, dense, convergence, continuity, subspace — is the
-notion defined here, and every statement proved about them there may be quoted
-verbatim for a metrizable space once a metric is named, and conversely.
+Consequently the metric-space notions of interior, closure, boundary, density,
+convergence, continuity and subspace agree with the topological notions here,
+and statements about them transfer once a metric is named. For neighbourhoods
+the transfer uses the explicit convention change above: a metric-page
+neighbourhood is an open topological neighbourhood, while every topological
+neighbourhood contains one.
 
 **Metrizability is a topological property; the metric is not part of it.** If
 $h : X \to Y$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]) and $d$
@@ -136,7 +152,8 @@ and no example re-derives any of it.
   order-neighbourhoods — are literally the same collection, and hence that
   interior, closure, boundary, limit point, density and sequential convergence
   agree on the two sides. That identification is quoted here for orientation only;
-  nothing on these two pages uses the order-native description.
+  the order-topology example on the companion page is where the order-native
+  description is used.
 
 - **A metrizable space comes with many metrics and no canonical one.** The
   statement "$X$ is metrizable" asserts existence, and every argument that uses a

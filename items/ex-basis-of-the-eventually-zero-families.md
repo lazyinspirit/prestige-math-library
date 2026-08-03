@@ -4,6 +4,9 @@ kind: example
 title: "The standard unit families $e_k \\in F^{\\mathbb{N}}$ form a basis of the linear subspace of eventually zero families: an explicit infinite basis, built with no choice principle"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, lem-standard-basis-of-f-n, def-function-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-induction-principle, lem-pigeonhole, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sequence_space"
     - title: "Basis (linear algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

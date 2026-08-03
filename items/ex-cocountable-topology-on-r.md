@@ -4,6 +4,9 @@ kind: example
 title: "In the cocountable topology on $\\mathbb{R}$ the closed sets are the countable sets and $\\mathbb{R}$, and a sequence converges iff it is eventually constant"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-sequence-convergence-top, thm-closure-characterisation-top, def-countable,
        thm-r-uncountable, lem-countable-iff-surjection-from-n, lem-subset-of-countable,
        def-interior-closure-boundary-top, def-neighbourhood-top, def-topological-space]
@@ -14,11 +17,12 @@ short: "cocountable topology on $\\mathbb{R}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -89,7 +93,7 @@ while the topology itself is very far from discrete by claim 2.
 
 ## Remarks
 
-- **This space is not first countable**, since if it were, [[thm-first-countable-sequences-suffice]] would force $\operatorname{seqcl}(A) = \overline{A}$ for every $A$, and claim 3 makes the sequential closure of $[0,1]$ equal to $[0,1]$ while claim 2 makes its closure all of $\mathbb{R}$ ([[cex-sequential-closure-strictly-inside-closure]]). So it is not metrizable either.
+- **Assuming the Axiom of Countable Choice, this space is not first countable.** Under that hypothesis [[thm-first-countable-sequences-suffice]] would otherwise force $\operatorname{seqcl}(A)=\overline{A}$ for every $A$, whereas claim 3 makes the sequential closure of $[0,1]$ equal to $[0,1]$ and claim 2 makes its closure all of $\mathbb{R}$ ([[cex-sequential-closure-strictly-inside-closure]]). Under the same hypothesis it is therefore not metrizable either.
 
 - **No two nonempty open sets are disjoint here either.** If $U$ and $V$ are nonempty and open then $\mathbb{R} \setminus (U \cap V)$ is a union of two at most countable sets and hence at most countable, so $U \cap V$ cannot be empty, $\mathbb{R}$ being uncountable ([[thm-r-uncountable]]). The argument is the one used for the cofinite topology ([[ex-cofinite-topology]]) with "at most countable" in place of "finite".
 

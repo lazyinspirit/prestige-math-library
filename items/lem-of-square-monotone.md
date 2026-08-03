@@ -4,6 +4,9 @@ kind: lemma
 title: "Squaring is monotone on the nonnegatives"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, lem-of-sign-rules, lem-of-zero-mult, lem-of-abs-value]
 aliases: []
 landmark: false

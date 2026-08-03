@@ -4,27 +4,23 @@ kind: theorem
 title: "For positive integers $a$ and $b$ and every prime $p$: $v_p(\\gcd(a,b)) = \\min\\{v_p(a), v_p(b)\\}$ and $v_p(\\operatorname{lcm}(a,b)) = \\max\\{v_p(a), v_p(b)\\}$; so the exponent-wise greatest common divisor is the $\\gcd$ of the divisibility page and not a second notion"
 status: published
 origin: session
-deps: [lem-divisibility-via-valuations, lem-p-adic-valuation-additive,
-       lem-p-adic-valuation-basic, def-p-adic-valuation, def-common-divisor-and-gcd,
-       cor-common-divisor-divides-gcd, lem-gcd-basic-values, def-lcm, thm-gcd-lcm-product,
-       def-prime, thm-nat-linear-order, lem-nat-add-commutative, lem-nat-add-cancellative,
-       def-group-power, def-semigroup-and-monoid, lem-units-of-z, def-divides-in-z,
-       lem-divisibility-basic, lem-associates-characterisation, def-int-abs,
-       lem-int-abs-properties, lem-int-cancellation, def-integers, def-int-operations,
-       def-int-order, thm-int-comm-ring, thm-int-ordered-ring, def-natural-numbers,
-       def-nat-order, def-nat-addition, lem-nat-embeds-int, lem-nat-discrete]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [lem-divisibility-via-valuations, lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation, def-common-divisor-and-gcd, cor-common-divisor-divides-gcd, lem-gcd-basic-values, def-lcm, thm-gcd-lcm-product, def-prime, thm-nat-linear-order, lem-nat-add-commutative, lem-nat-add-cancellative, def-group-power, def-semigroup-and-monoid, lem-units-of-z, lem-associates-characterisation, def-int-abs, lem-int-abs-properties, lem-int-cancellation, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, def-natural-numbers, def-nat-order, def-nat-addition, lem-nat-embeds-int, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: true
 short: "$v_p(\\gcd) = \\min$, $v_p(\\operatorname{lcm}) = \\max$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Greatest_common_divisor"
     - title: "Least common multiple (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Least_common_multiple"
+    - title: "Carnegie Mellon University notes: Modern arithmetic"
+      url: "https://www.cs.cmu.edu/~sutner/pdf/60-modari.pdf"
+    - title: "Harris Kwong, A Spiral Workbook for Discrete Mathematics: Fundamental Theorem of Arithmetic"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/A_Spiral_Workbook_for_Discrete_Mathematics_%28Kwong%29/05%3A_Basic_Number_Theory/5.06%3A_Fundamental_Theorem_of_Arithmetic"
 pipeline_run: null
 ---
 
@@ -71,8 +71,6 @@ the minimum and maximum being taken in $\mathbb{N}$, whose order is total
 [L6] For a prime $p$ and nonzero $u$: $p^{k} \mid u$ exactly when $k \le v_p(u)$; and $p^{k} \ge 1$ for every $k$ ([[lem-p-adic-valuation-basic]], [[def-group-power]], [[def-semigroup-and-monoid]], [[lem-units-of-z]]).
 
 [L7] $u \mid w$ and $w \mid u$ hold together exactly when $|u| = |w|$ ([[lem-associates-characterisation]]); $|x| = x$ for $x \ge 0$ ([[def-int-abs]], [[lem-int-abs-properties]]).
-
-[L8] Divisibility is reflexive and transitive; $d \mid u$ means $u = dc$ for some $c$ ([[lem-divisibility-basic]], [[def-divides-in-z]]).
 
 [L9] On $\mathbb{N}$: the order is total, so any two naturals have a minimum and a maximum ([[thm-nat-linear-order]]); addition is commutative ([[lem-nat-add-commutative]]) and cancellative ([[lem-nat-add-cancellative]]); $m \le n$ means $m + c = n$ for some $c$ ([[def-nat-order]], [[def-nat-addition]]); $m < n$ exactly when $\sigma(m) \le n$, and $1 = \sigma(0)$ ([[lem-nat-discrete]], [[def-natural-numbers]]).
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "On the positive integers the metrics $|m-n|$ and $|1/m - 1/n|$ both induce the discrete topology, and only the first is complete"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-completeness-is-a-topological-property, def-complete-metric-space,
        def-equivalent-metrics, def-metric-topology, cor-archimedean-reciprocal,
        thm-of-archimedean, lem-of-inverse-positive, lem-real-line-is-a-metric-space,

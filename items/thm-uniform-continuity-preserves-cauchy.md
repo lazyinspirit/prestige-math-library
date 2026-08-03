@@ -4,6 +4,9 @@ kind: theorem
 title: "A uniformly continuous map sends Cauchy sequences to Cauchy sequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-uniform-continuity, def-cauchy-in-metric, def-metric-space,
        lem-rat-embeds-dense, def-equivalent-metrics]
 justified_by: []

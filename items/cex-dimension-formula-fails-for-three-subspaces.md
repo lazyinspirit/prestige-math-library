@@ -4,6 +4,9 @@ kind: counterexample
 title: "Three distinct lines $U_0, U_1, U_2$ in $F^{2}$ have $\\dim_F(U_0+U_1+U_2) = 2$ while the inclusion-exclusion analogue of the dimension formula predicts $3$, so the two-subspace formula does not extend"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-dimension-formula, def-dimension, thm-any-two-finite-bases-have-the-same-size, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, lem-intersection-of-linear-subspaces, lem-span-of-a-single-vector, lem-standard-basis-of-f-n, def-linear-basis, def-linear-independence, def-linear-subspace, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-monoid-finite-product, def-nat-addition, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-equinumerous, def-countable, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dimension_theorem_for_vector_spaces"
     - title: "Inclusion-exclusion principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
+    - title: "UC Berkeley Math 110 notes: Linear algebra"
+      url: "https://math.berkeley.edu/~btw/110-script.pdf"
 pipeline_run: null
 ---
 

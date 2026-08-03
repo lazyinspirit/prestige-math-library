@@ -4,6 +4,9 @@ kind: lemma
 title: "Canonical naturals are positive and strictly increasing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-of-one-positive, lem-of-add-order, def-field]
 aliases: []
 landmark: false
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "Elias Zakon, Mathematical Analysis: Natural Numbers and Induction"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/02%3A_Real_Numbers_and_Fields/2.02%3A_Natural_Numbers._Induction"
 pipeline_run: null
 ---
 

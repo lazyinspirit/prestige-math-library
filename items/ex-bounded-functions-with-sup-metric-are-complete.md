@@ -4,6 +4,9 @@ kind: example
 title: "The bounded real-valued functions on a set, with the supremum metric, form a complete metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, def-cauchy-in-metric, def-metric-space, def-bounded-set,
        thm-cauchy-criterion-via-lub, lem-sup-metric-is-a-metric, lem-limit-preserves-order,
        def-real-limit, def-complete-ordered-field, lem-limit-unique, thm-algebra-of-limits,

@@ -4,6 +4,9 @@ kind: corollary
 title: "Every spanning subset of a vector space contains a basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field]
 justified_by: []
 aliases: [cor-spanning-contains-basis]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "University of Colorado notes: Linear algebra and vector spaces"
+      url: "https://math.colorado.edu/~nita/LAVectorSpaces.pdf"
 pipeline_run: null
 ---
 

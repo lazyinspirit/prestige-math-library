@@ -4,6 +4,9 @@ kind: example
 title: "The map $x \\mapsto (x + 2/x)/2$ is a contraction of $[1,2]$ with fixed point $\\sqrt{2}$, and the a priori bound gives the error after $n$ steps"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-banach-fixed-point, cor-banach-error-estimates, def-lipschitz-holder-contraction,
        thm-of-square-roots, thm-euclidean-space-complete, def-interval,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,

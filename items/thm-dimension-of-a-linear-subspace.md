@@ -4,6 +4,9 @@ kind: theorem
 title: "If $\\dim_F V = n$ and $U$ is a linear subspace of $V$, then $U$ is finite-dimensional, $\\dim_F U \\le n$, and $\\dim_F U = n$ if and only if $U = V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, lem-adjoining-a-vector-outside-the-span, def-linear-basis, def-linear-independence, def-linear-subspace, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-vector-space, def-field, thm-well-ordering-principle, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, thm-nat-linear-order, lem-nat-nonzero-is-successor]
 justified_by: []
 aliases: [thm-subspace-dimension]
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dimension_(vector_space)"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Purdue University Algebra 511 notes: Dimension"
+      url: "https://www.math.purdue.edu/~eremenko/dvi/511/lect5.pdf"
+    - title: "Sheldon Axler, Linear Algebra Done Right, 4th ed."
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

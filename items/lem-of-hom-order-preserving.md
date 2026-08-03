@@ -4,6 +4,9 @@ kind: lemma
 title: "Homomorphisms out of a complete ordered field are order-preserving"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-field-homomorphism, thm-of-square-roots, lem-of-square-positive, def-ordered-field]
 aliases: []
 landmark: false

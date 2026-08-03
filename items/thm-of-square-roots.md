@@ -4,6 +4,9 @@ kind: theorem
 title: "Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-complete-ordered-field, lem-of-sign-rules, lem-of-square-monotone, lem-of-square-positive, prop-of-multiply-inequalities, def-ordered-field]
 aliases: []
 landmark: true
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 8"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "University of Colorado analysis notes: The real numbers"
+      url: "https://spot.colorado.edu/~baggett/chap1.pdf"
 pipeline_run: null
 ---
 

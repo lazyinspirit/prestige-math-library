@@ -4,29 +4,30 @@ kind: false-statement
 title: "FALSE: every Fermat number $2^{2^{n}} + 1$ is prime"
 status: published
 origin: session
-deps: [def-prime, def-group-power, lem-group-power-laws, lem-units-of-z,
-       def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic,
-       lem-divisor-bound, thm-induction-principle, thm-int-comm-ring,
-       thm-int-ordered-ring, def-int-operations, def-int-order, def-integers,
-       lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order,
-       def-nat-addition]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-prime, def-group-power, lem-group-power-laws, lem-units-of-z, def-semigroup-and-monoid, def-divides-in-z, lem-divisibility-basic, thm-induction-principle, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order, def-nat-addition]
 justified_by: []
 aliases: [fs-fermat-numbers-are-prime]
 landmark: false
 short: "FALSE: every Fermat number is prime"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Fermat number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fermat_number"
+    - title: "Millersville University notes: Fermat numbers"
+      url: "https://sites.millersville.edu/bikenaga/number-theory/fermat-numbers/fermat-numbers.html"
 pipeline_run: null
 ---
 
@@ -69,8 +70,6 @@ statement with an explicit witness.
 [L3] Exponent laws for natural exponents in a monoid: $g^{a+b} = g^{a}g^{b}$, $(g^{a})^{b} = g^{ab}$, and $(gh)^{b} = g^{b}h^{b}$ when $gh = hg$ ([[lem-group-power-laws]]).
 
 [L4] $d \mid a$ means $a = dc$ for some $c \in \mathbb{Z}$; divisibility is reflexive and linear, so $d \mid a$ and $d \mid b$ give $d \mid a - b$ ([[def-divides-in-z]], [[lem-divisibility-basic]]).
-
-[L5] If $d \mid a$ and $a \ne 0$ then $|d| \le |a|$ ([[lem-divisor-bound]]).
 
 [L6] $\mathbb{Z}$ is a commutative ring: addition and multiplication are associative and commutative, $x \cdot 1 = x$, multiplication distributes over addition, and every $x$ has an additive inverse; we write $u - v$ for $u + (-v)$ ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]]).
 

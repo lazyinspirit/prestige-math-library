@@ -1,7 +1,7 @@
 ---
 id: cex-same-cardinality-without-a-canonical-bijection
 kind: counterexample
-title: "Two sets of the same finite cardinality between which no bijection is distinguished"
+title: "Two sets of the same finite cardinality between which the bijection is not unique"
 status: published
 origin: session
 provenance:
@@ -19,11 +19,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,14 +39,12 @@ pipeline_run: null
 
 ## Statement refuted
 
-**Refuted claim:** for finite sets $A$ and $B$, the equality
-$\lvert A\rvert = \lvert B\rvert$ determines a bijection $A \to B$; equivalently,
-two equinumerous finite sets admit **exactly one** bijection between them.
+**Refuted claim:** two equinumerous finite sets admit **exactly one** bijection
+between them.
 
 The witness is $A := 2 = \{\varnothing,\{\varnothing\}\} = \{0,1\}$ and
 $B := [2]^{1} = \{\{0\},\{1\}\}$, the set of one-element subsets of $2$. Both have
-cardinality $2$, and there are exactly two bijections between them, neither
-distinguished from the other by anything in this library.
+cardinality $2$, and there are exactly two bijections between them.
 
 ## Facts & Assumptions
 
@@ -71,17 +70,10 @@ distinguished from the other by anything in this library.
 
 3.1 There are exactly two. By [L3] the set of bijections $A \to B$ has $2! = 2$ elements, so $f$ and $g$ of step 2.1 are all of them. [step 1.1, L3]
 
-4.1 The refuted claim fails: $\lvert A\rvert = \lvert B\rvert$ holds, and there are two bijections $A \to B$, not one. Nothing in [[def-finite-cardinality]] selects either: that definition asserts only that **some** bijection $A \to \lvert A\rvert$ exists, and what makes the resulting number unambiguous is [L5], a statement about natural numbers, not about maps. So the cardinality is canonical while the bijection realising it is not. [step 2.1, step 3.1, L1, L5] ∎
+4.1 The refuted claim fails: $\lvert A\rvert = \lvert B\rvert$ holds, and there are two bijections $A \to B$, not one. [[def-finite-cardinality]] asserts only that **some** bijection $A \to \lvert A\rvert$ exists; [L5] makes the resulting natural number unique, not the witnessing map. [step 2.1, step 3.1, L1, L5] ∎
 
 ## Remarks
 
-- **What is canonical and what is not.** Cardinality is a well-defined function
-  of the set; a bijection witnessing an equality of cardinalities is not. The
-  distinction matters whenever a construction is made "along a bijection": one
-  has to check, as [[def-sum-over-a-finite-index-set]] does, that the result does
-  not depend on which bijection was used.
+- **What is unique and what is not.** Cardinality is a well-defined function of the set, but a bijection witnessing an equality of cardinalities need not be unique. Whenever a construction is made "along a bijection", one has to check, as [[def-sum-over-a-finite-index-set]] does, that the result does not depend on which bijection was used.
 
-- **The count grows fast.** For $\lvert A\rvert = n$ there are $n!$ bijections
-  onto any set of the same cardinality
-  ([[thm-number-of-bijections-of-a-finite-set]]), so a distinguished one exists
-  only for $n \le 1$.
+- **The count grows fast.** For $\lvert A\rvert = n$ there are $n!$ bijections onto any set of the same cardinality ([[thm-number-of-bijections-of-a-finite-set]]), so the bijection is unique only for $n \le 1$.

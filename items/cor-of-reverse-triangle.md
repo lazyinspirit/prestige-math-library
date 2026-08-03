@@ -4,6 +4,9 @@ kind: corollary
 title: "The reverse triangle inequality"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-of-triangle-inequality, lem-of-abs-value, def-ordered-field]
 aliases: []
 landmark: false
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Purdue University analysis notes: Ordered fields and absolute value"
+      url: "https://www.math.purdue.edu/~gcavigli/Swanson.pdf"
 pipeline_run: null
 ---
 

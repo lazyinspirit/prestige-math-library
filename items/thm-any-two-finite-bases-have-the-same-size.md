@@ -4,6 +4,9 @@ kind: theorem
 title: "If $V$ has a basis with $n$ elements and a basis with $m$ elements then $n = m$; and if $V$ has one finite basis then every basis of $V$ is finite"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-independent-set-is-no-larger-than-a-finite-spanning-set, thm-steinitz-exchange, def-linear-basis, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: [thm-dimension-well-defined, thm-invariance-of-basis-number]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dimension_theorem_for_vector_spaces"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Sheldon Axler, Linear Algebra Done Right, 4th ed."
+      url: "https://linear.axler.net/LADR4e.pdf"
 pipeline_run: null
 ---
 

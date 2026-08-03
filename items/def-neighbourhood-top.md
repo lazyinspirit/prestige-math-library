@@ -4,6 +4,9 @@ kind: definition
 title: "Neighbourhood of a point and neighbourhood base, with this library's convention that a neighbourhood need not be open"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-topology-basis-subbasis]
 justified_by: []
 aliases: [def-neighbourhood-base-top]
@@ -12,10 +15,18 @@ short: "neighbourhood, neighbourhood base"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: bdc41ee3553c62ad7ffa23eb8a9315579cc671c9836708c819eafe237b79eec7
+    item_sha256: 4458190d9dd13e026a4be25d56858bc99377b2d4ccf6729c349381630a633343
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -82,16 +93,18 @@ $\mathcal{B}_x$ is called a **basic neighbourhood** of $x$.
 ## Remarks
 
 - **The convention costs nothing and buys one thing.** Every statement of the
-  form "for every neighbourhood $N$ of $x$ ... " is equivalent to the statement
-  with $N$ restricted to open neighbourhoods, by consequence 2 above in one
-  direction and by the definition in the other, so no theorem below is sensitive
-  to the fork. What the wider notion buys is that $\mathcal{N}(x)$ is a filter on
-  $X$ in the sense of [[def-filter]]: consequence 1 is (F1), consequence 3 is
-  (F3), consequence 2 is (F4), and (F2) holds because $x \in U \subseteq \varnothing$
-  is impossible, so $\varnothing$ is a neighbourhood of no point. Under the
-  narrower convention the family of open sets containing $x$ fails (F4) as soon
-  as some non-open set contains an open set around $x$, so the name
-  "neighbourhood filter" would not be available.
+  form "for every neighbourhood $N$ of $x$ ... " whose predicate is preserved
+  when $N$ is enlarged is equivalent to the statement with $N$ restricted to
+  open neighbourhoods: every neighbourhood contains an open one, and the
+  predicate then passes to the larger set. Eventual-membership and the usual
+  local-existence tests have this form; an arbitrary predicate need not. What
+  the wider notion buys is that $\mathcal{N}(x)$ is a filter on $X$ in the sense
+  of [[def-filter]]: consequence 1 is (F1), consequence 3 is (F3), consequence 2
+  is (F4), and (F2) holds because $x \in U \subseteq \varnothing$ is impossible,
+  so $\varnothing$ is a neighbourhood of no point. Under the narrower convention
+  the family of open sets containing $x$ fails (F4) as soon as some non-open set
+  contains an open set around $x$, so the name "neighbourhood filter" would not
+  be available.
 
 - **A neighbourhood base is not required to be closed under intersection**, and
   the bases used below usually are not; what is required is only that its members

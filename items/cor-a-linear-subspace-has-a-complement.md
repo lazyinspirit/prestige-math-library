@@ -4,6 +4,9 @@ kind: corollary
 title: "Every linear subspace $U$ of a vector space $V$ has a complement: a linear subspace $W$ with $V = U \\oplus W$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-every-independent-set-extends-to-a-basis, cor-every-vector-space-has-a-basis, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-independent-list-is-injective, def-linear-basis, def-linear-independence, def-internal-direct-sum, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, def-linear-subspace, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: [cor-complement-exists]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 1"
       url: "https://linear.axler.net/"
+    - title: "University of Colorado notes: Linear algebra and vector spaces"
+      url: "https://math.colorado.edu/~nita/LAVectorSpaces.pdf"
 pipeline_run: null
 ---
 

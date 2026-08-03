@@ -4,6 +4,9 @@ kind: definition
 title: "Complete metric space: every Cauchy sequence converges in the space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-cauchy-in-metric, def-metric-convergence, def-metric-space,
        lem-metric-limits-unique, def-isometry-and-metric-embedding,
        def-complete-ordered-field]

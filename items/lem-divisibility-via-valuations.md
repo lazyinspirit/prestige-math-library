@@ -4,6 +4,9 @@ kind: lemma
 title: "For positive integers $a$ and $b$: $a \\mid b$ if and only if $v_p(a) \\le v_p(b)$ for every prime $p$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
        lem-every-integer-above-one-has-a-prime-divisor, def-prime, thm-strong-induction,
        def-divides-in-z, lem-divisibility-basic, lem-int-cancellation,
@@ -27,6 +30,8 @@ sources:
   references:
     - title: "P-adic valuation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
+    - title: "Carnegie Mellon University notes: Modern arithmetic"
+      url: "https://www.cs.cmu.edu/~sutner/pdf/60-modari.pdf"
 pipeline_run: null
 ---
 

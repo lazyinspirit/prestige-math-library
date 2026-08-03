@@ -4,6 +4,9 @@ kind: lemma
 title: "Every convergent sequence in a metric space is Cauchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cauchy-in-metric, def-metric-convergence, def-metric-space,
        lem-rat-embeds-dense, def-real-limit]
 justified_by: []
@@ -13,10 +16,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 223c9386e7be54c3cde97c0eb200149b8eb09419d068ed4991830d2d8458dbb6
+    item_sha256: 78d77e6f92d683f542eea1a1a822ec1bef90938a258fb73ad199df1c132f8fd4
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -60,5 +71,5 @@ The converse fails, and that failure is the subject of this page
 
 ## Remarks
 
-- **The proof spends the triangle inequality and nothing else.** In particular it does not use the separation axiom (M1), so the same argument shows that a sequence converging in a pseudometric space ([[def-metric-space]]) is Cauchy for the pseudometric.
+- **The proof spends the triangle inequality and symmetry, but not separation.** Symmetry rewrites $d(p,x_n)$ as the bounded quantity $d(x_n,p)$ in step 2.1. The separation axiom (M1) is not used, so the same argument shows that a sequence converging in a pseudometric space ([[def-metric-space]]) is Cauchy for the pseudometric.
 - **Halving is the whole idea.** The Cauchy condition compares two terms of the sequence, and a limit compares one term with the limit; routing $m$ and $n$ through $p$ costs two applications of the convergence hypothesis, so each is run at half the target. Every proof on this page that produces a Cauchy sequence out of a convergent one repeats this step.

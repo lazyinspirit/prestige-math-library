@@ -4,6 +4,9 @@ kind: counterexample
 title: "In the multiplicative monoid $H = \\{1, 4, 7, 10, \\dots\\}$ of positive integers one more than a multiple of $3$, the element $100$ has two genuinely different factorisations into irreducibles, $4 \\cdot 25$ and $10 \\cdot 10$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-prime, thm-euclids-lemma, thm-fundamental-theorem-of-arithmetic,
        thm-prime-factorisation-exists, lem-every-integer-above-one-has-a-prime-divisor,
        def-semigroup-and-monoid, def-binary-operation, def-identity-element,
@@ -18,12 +21,13 @@ landmark: false
 short: "$100 = 4 \\cdot 25 = 10 \\cdot 10$ in $H$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hilbert_number"
     - title: "Fundamental theorem of arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+    - title: "San Diego State University notes: Introduction to factorisation"
+      url: "https://vadim.sdsu.edu/intro-factorization.pdf"
 pipeline_run: null
 ---
 
@@ -87,8 +93,6 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 [L9] A product of two nonzero integers is nonzero, and $xz = yz$ with $z \ne 0$ gives $x = y$ ([[lem-int-cancellation]]).
 
 [L10] The order on $\mathbb{Z}$ is total, antisymmetric and transitive, is compatible with addition, and positives are closed under multiplication ([[thm-int-ordered-ring]], [[def-int-order]]); $\iota$ is injective and order preserving with image the nonnegative integers ([[lem-nat-embeds-int]], [[def-natural-numbers]], [[def-nat-order]], [[lem-nat-discrete]]).
-
-[L11] In $\mathbb{Z}$, factorisation into primes exists for every $n \ge 1$ and is unique up to a permutation ([[thm-prime-factorisation-exists]], [[thm-fundamental-theorem-of-arithmetic]], [[def-symmetric-group]]).
 
 ## Counterexample
 

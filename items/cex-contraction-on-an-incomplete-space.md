@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto x/2$ maps $(0,1]$ into itself, is a $1/2$-contraction, and has no fixed point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-banach-fixed-point, def-complete-metric-space, def-lipschitz-holder-contraction,
        def-interval, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        def-cauchy-in-metric, lem-metric-convergent-implies-cauchy,

@@ -4,6 +4,9 @@ kind: corollary
 title: "The a priori bound $d(x^{*}, x_n) \\le q^n d(x_1,x_0)/(1-q)$ and the a posteriori bound $d(x^{*}, x_{n+1}) \\le q\\,d(x_{n+1},x_n)/(1-q)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-banach-fixed-point, def-lipschitz-holder-contraction, def-integer-power,
        lem-metric-reverse-triangle, lem-limit-preserves-order, def-metric-convergence,
        def-complete-metric-space, def-real-limit, lem-limit-unique, def-metric-space,

@@ -5,18 +5,19 @@ title: "$T_0$ (Kolmogorov) and $T_1$ (Frechet) spaces"
 status: published
 origin: session
 deps: [def-topological-space, def-neighbourhood-top, def-interior-closure-boundary-top,
-       def-standard-topologies, rem-topology-conventions]
+       def-standard-topologies]
 justified_by: []
 aliases: [def-t0-space, def-t1-space, def-kolmogorov-space, def-frechet-space]
 landmark: true
 short: "$T_0$ and $T_1$ spaces"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -94,5 +95,5 @@ indiscrete topology on a set with at least two points satisfies neither.
   not proved here.
 
 - **No separation is built into the word *space*.** [[def-topological-space]]
-  assumes none, and [[rem-topology-conventions]] records that decision; every
-  separation property on this page is a hypothesis written out where it is used.
+  assumes none; every separation property on this page is a hypothesis written
+  out where it is used.

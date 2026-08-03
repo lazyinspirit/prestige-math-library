@@ -4,6 +4,9 @@ kind: lemma
 title: "Complete metrizability: admitting a topologically equivalent complete metric is preserved by homeomorphism and by closed subspaces, and $(0,\\infty)$ has it without being complete"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, def-equivalent-metrics, def-metric-topology, def-metric-space,
        def-metric-continuity, thm-metric-continuity-characterisations,
        def-isometry-and-metric-embedding, lem-isometry-is-an-embedding,

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Not every ordered field is Archimedean"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordered-field, def-archimedean-field, thm-of-archimedean, thm-reals-ordered-field]
 aliases: []
 landmark: false
@@ -11,11 +14,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Non-Archimedean ordered field (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Non-Archimedean_ordered_field"
 pipeline_run: null
 ---
 
@@ -46,17 +52,17 @@ number, so the naturals are not cofinal.
 
 [L3] Every complete ordered field is Archimedean ([[thm-of-archimedean]]).
 
-[L4] $\mathbb{R}$ is an ordered field, so $\mathbb{R}[t]$ is an integral domain and a nonzero real polynomial has finitely many real roots and a sign at $+\infty$ equal to that of its leading coefficient ([[thm-reals-ordered-field]]).
+[L4] $\mathbb{R}$ is a totally ordered field ([[thm-reals-ordered-field]]).
 
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 A nonzero $f = p/q \in \mathbb{R}(t)$ with $p, q \in \mathbb{R}[t]$ has only finitely many real zeros and poles, so there is a real $X$ beyond which $f(x)$ has constant nonzero sign, equal to the sign of the ratio of the leading coefficients of $p$ and $q$; hence exactly one of $f \in P$, $-f \in P$ holds. [given, L4, algebra]
+1.1 Let $f=p/q\ne0$, where $p(x)=a_mx^m+\cdots+a_0$ and $q(x)=b_nx^n+\cdots+b_0$ have nonzero leading coefficients. For $x>1$, dividing by the leading terms gives $p(x)=a_mx^m(1+\sum_{i<m}(a_i/a_m)x^{i-m})$ and the analogous formula for $q$. If $x$ is larger than $1$ plus the sums of the absolute values of the lower coefficient ratios, then both lower-term sums have absolute value less than $1$. Thus $p(x)$ and $q(x)$ eventually have the signs of $a_m$ and $b_n$, respectively, and $f(x)$ has the constant nonzero eventual sign of $a_m/b_n$. Hence exactly one of $f\in P$ and $-f\in P$ holds. [given, L4, algebra]
 
 1.2 If $f, g \in P$ then $f(x) > 0$ and $g(x) > 0$ for all large $x$, so $(f + g)(x) > 0$ and $(fg)(x) > 0$ for all large $x$, giving $f + g \in P$ and $fg \in P$. [given, algebra]
 
-1.3 For each natural number $n$ the rational function $t - n \cdot 1 = t - n$ satisfies $(t - n)(x) = x - n > 0$ for all $x > n$, so $t - n \in P$. [given, L4, algebra]
+1.3 For each natural number $n$ the rational function $t - n \cdot 1 = t - n$ satisfies $(t - n)(x) = x - n > 0$ for all $x > n$, so $t - n \in P$. [given, algebra]
 
 2.1 By the trichotomy of step 1.1 and the closure of step 1.2, $P$ is a positive cone, so $\mathbb{R}(t)$ is an ordered field. [step 1.1, step 1.2, L1]
 

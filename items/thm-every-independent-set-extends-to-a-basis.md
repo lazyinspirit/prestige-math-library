@@ -4,6 +4,9 @@ kind: theorem
 title: "Zorn's lemma gives a basis between any linearly independent set and any spanning set containing it: if $L \\subseteq S \\subseteq V$ with $L$ independent and $\\operatorname{span}(S) = V$, there is a basis $B$ of $V$ with $L \\subseteq B \\subseteq S$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-zorn, def-axiom-of-choice, def-partial-order, def-chain, def-upper-bound, def-maximal-element, lem-independence-has-finite-character, lem-adjoining-a-vector-outside-the-span, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field]
 justified_by: []
 aliases: [thm-basis-extension, thm-extend-to-a-basis]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
+    - title: "University of Colorado notes: Linear algebra and vector spaces"
+      url: "https://math.colorado.edu/~nita/LAVectorSpaces.pdf"
 pipeline_run: null
 ---
 

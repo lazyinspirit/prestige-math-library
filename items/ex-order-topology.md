@@ -4,6 +4,9 @@ kind: example
 title: "The order topology on a totally ordered set, with the open rays as a subbasis, and its agreement with the usual topology of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-basis-subbasis, thm-basis-criterion, def-partial-order, def-real-order, def-interval,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-topological-space, def-metric-ball,
        def-metric-topology, thm-metric-open-set-algebra, def-ordered-field]

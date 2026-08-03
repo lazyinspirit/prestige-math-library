@@ -4,23 +4,23 @@ kind: false-statement
 title: "FALSE: $n^{2} + n + 41$ is prime for every natural number $n$"
 status: published
 origin: session
-deps: [def-prime, def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
-       def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z,
-       thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order,
-       def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers,
-       def-nat-order]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-prime, def-divides-in-z, lem-divisibility-basic, def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z, thm-int-comm-ring, thm-int-ordered-ring, def-int-operations, def-int-order, def-integers, lem-nat-embeds-int, lem-nat-discrete, def-natural-numbers, def-nat-order]
 justified_by: []
 aliases: [fs-euler-polynomial-is-always-prime]
 landmark: false
 short: "FALSE: $n^2+n+41$ is always prime"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -28,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Formula_for_primes"
     - title: "Lucky numbers of Euler (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lucky_numbers_of_Euler"
+    - title: "Purdue University MA 341 Lecture 2"
+      url: "https://www.math.purdue.edu/~catlind/2017MA341/MA341-Lecture2.pdf"
 pipeline_run: null
 ---
 
@@ -61,8 +63,6 @@ the whole expression is $40 \cdot 41 + 41 = 41 \cdot 41$.
 [L2] $g^{0} = 1$ and $g^{\sigma(k)} = g^{k} g$ in $(\mathbb{Z},\cdot,1)$, so $g^{2} = g \cdot g$ ([[def-group-power]], [[lem-group-power-laws]], [[def-semigroup-and-monoid]], [[lem-units-of-z]]).
 
 [L3] $d \mid a$ means $a = dc$ for some $c \in \mathbb{Z}$ ([[def-divides-in-z]], [[lem-divisibility-basic]]).
-
-[L4] If $d \mid a$ and $a \ne 0$ then $|d| \le |a|$ ([[lem-divisor-bound]]).
 
 [L5] $\mathbb{Z}$ is a commutative ring: multiplication is associative and commutative, $x \cdot 1 = x$, and multiplication distributes over addition ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]]).
 

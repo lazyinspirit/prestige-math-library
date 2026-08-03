@@ -4,6 +4,9 @@ kind: lemma
 title: "The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-basis, def-dimension, def-linear-independence, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-function-space, def-linear-combination-and-span, def-sum-of-linear-subspaces, def-monoid-finite-product, lem-restriction-of-scalars, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection, def-equinumerous, def-countable]
 justified_by: []
 aliases: [lem-standard-basis, def-standard-unit-vectors]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Standard_basis"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

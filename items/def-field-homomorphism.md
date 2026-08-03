@@ -4,6 +4,9 @@ kind: definition
 title: "Field homomorphism and embedding"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-field, lem-of-inverse-unique]
 aliases: []
 landmark: false
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "University of Colorado notes: Commutative rings and fields"
+      url: "https://math.colorado.edu/~pflaum/papers/CRingProject.pdf"
 pipeline_run: null
 ---
 

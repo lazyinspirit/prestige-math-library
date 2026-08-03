@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: two metrics inducing the same topology have the same Cauchy sequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-equivalent-metrics, def-cauchy-in-metric, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, cor-archimedean-reciprocal,
        lem-of-inverse-positive, def-metric-topology, def-metric-ball, def-interval,
@@ -18,11 +21,12 @@ short: "FALSE: same topology, same Cauchy sequences"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -86,5 +90,5 @@ is not a topological notion.
 
 - **What is true instead.** Uniformly equivalent metrics do share their Cauchy sequences, and the reason is one line: uniform equivalence says both identity maps are uniformly continuous ([[def-equivalent-metrics]], [[def-metric-uniform-continuity]]), and a uniformly continuous map sends Cauchy sequences to Cauchy sequences ([[thm-uniform-continuity-preserves-cauchy]]). So the pair above is also a witness that topological equivalence does not imply uniform equivalence.
 - **The failure is symmetric.** The sequence $y_k := k+2$ is $d'$-Cauchy, because $d'(y_k,y_l) = |1/(k+2) - 1/(l+2)|$ is small for large indices by the same computation as step 1.4, and it is not $d$-Cauchy, because $d(y_K,y_{K+1}) = 1$ for every $K$. So neither metric's Cauchy sequences contain the other's.
-- **Consequences for completeness.** Since Cauchyness is not shared, completeness is not shared either ([[fs-completeness-is-a-topological-property]]). The two failures are the same failure seen twice.
+- **This pair does not separate completeness.** Both displayed metric spaces are incomplete: $x_k=1/(k+2)$ is $d$-Cauchy with missing limit $0$, while $y_k=k+2$ is $d'$-Cauchy and its reciprocals again have missing limit $0$. Topologically equivalent metrics can nevertheless differ in completeness, as [[fs-completeness-is-a-topological-property]] records; that requires a different witness.
 - **The worked witness**, with both directions of the Cauchy comparison, is [[cex-same-topology-different-cauchy-sequences]] on the companion page.

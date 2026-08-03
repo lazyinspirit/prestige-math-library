@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\{(1,0), (0,1), (1,1)\\}$ spans $F^{2}$ and is linearly dependent, so a spanning set need not be a basis; each of its three two-element subsets is a basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-independence, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-basis, cor-every-spanning-set-contains-a-basis, lem-basis-iff-maximal-independent-iff-minimal-spanning, lem-standard-basis-of-f-n, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-dimension, thm-any-two-finite-bases-have-the-same-size, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-monoid-finite-product, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "Linear independence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_independence"
+    - title: "Auburn University notes: Spanning sets and linear independence"
+      url: "https://webhome.auburn.edu/~tamtiny/key3-3-math2660.pdf"
 pipeline_run: null
 ---
 

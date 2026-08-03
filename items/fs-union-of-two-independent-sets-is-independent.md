@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the union of two linearly independent subsets of a vector space is linearly independent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cex-spanning-set-that-is-not-independent, def-linear-independence, lem-independent-list-is-injective, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, lem-adjoining-a-vector-outside-the-span, lem-standard-basis-of-f-n, lem-span-of-a-single-vector, def-linear-basis, def-linear-combination-and-span, def-monoid-finite-product, def-function-space, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_independence"
     - title: "Basis (linear algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+    - title: "Jim Hefferon, Linear Algebra: Answers to exercises"
+      url: "https://webpages.math.luc.edu/~lauve/courses/315-fa2012/Hefferon/jhanswer.pdf"
 pipeline_run: null
 ---
 

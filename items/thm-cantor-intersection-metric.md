@@ -4,6 +4,9 @@ kind: theorem
 title: "In a complete metric space nested nonempty closed sets whose diameters tend to $0$ meet in exactly one point, and this property characterises completeness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-metric-space, def-metric-bounded-diameter,
        thm-metric-closure-characterisation, def-cauchy-in-metric, def-countable-choice,
        thm-metric-sequential-closure, def-metric-topology, def-real-limit,

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $d(fx, fy) < d(x,y)$ for all $x \\ne y$ on a complete metric space forces a fixed point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-banach-fixed-point, def-lipschitz-holder-contraction, def-complete-metric-space,
        lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding,
        thm-complete-subspace-iff-closed, lem-of-inverse-positive,

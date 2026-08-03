@@ -4,6 +4,9 @@ kind: theorem
 title: "Uniqueness of the complete ordered field: $\\mathbb{R}$ up to a unique isomorphism"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-complete-ordered-field, def-ordered-field, thm-of-archimedean, lem-of-q-embeds, lem-of-q-dense, lem-of-hom-fixes-q, lem-of-hom-order-preserving, thm-of-square-roots, def-ordered-field-isomorphism, def-field-homomorphism, lem-of-add-order, lem-of-sign-rules]
 aliases: []
 landmark: true
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "H. Jerome Keisler, Foundations of Infinitesimal Calculus"
+      url: "https://people.math.wisc.edu/~hkeisler/foundations.pdf"
 verification:
   precheck: pass
   judge:

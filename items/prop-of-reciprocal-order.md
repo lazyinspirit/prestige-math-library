@@ -4,6 +4,9 @@ kind: proposition
 title: "Reciprocals and order: $1/r$ against $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-of-inverse-positive, cor-of-one-positive, def-field]
 aliases: []
 landmark: false
@@ -21,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "University of Innsbruck notes: Ordered fields"
+      url: "https://www.uibk.ac.at/media/filer_public/28/02/280225fd-dde6-4e9c-bff6-baad33ff4a05/ragen.pdf"
 pipeline_run: null
 proof_strategy: direct
 ---

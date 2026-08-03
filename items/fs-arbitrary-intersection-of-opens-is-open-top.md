@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: an arbitrary intersection of open sets is open in every topological space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topological-space, def-standard-topologies, def-metrizable-space, lem-real-line-is-a-metric-space,
        def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-interval, def-abs-value,
        lem-of-abs-value, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive,

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every continuous bijection of topological spaces is a homeomorphism"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-standard-topologies,
        def-continuous-map-top, thm-continuity-characterisations-top]
 justified_by: []

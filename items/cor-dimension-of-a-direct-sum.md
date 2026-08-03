@@ -4,19 +4,30 @@ kind: corollary
 title: "If $V = \\bigoplus_{i<n} U_i$ with every $U_i$ finite-dimensional, then $V$ is finite-dimensional and $\\dim_F V = \\sum_{i<n} \\dim_F U_i$; in particular $\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$"
 status: published
 origin: session
-deps: [thm-dimension-formula, thm-dimension-of-a-linear-subspace, def-dimension, def-internal-direct-sum, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, lem-intersection-of-linear-subspaces, def-linear-subspace, def-linear-basis, def-monoid-finite-product, def-nat-addition, def-vector-space, def-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-nat-order]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-dimension-formula, thm-dimension-of-a-linear-subspace, def-dimension, def-internal-direct-sum, def-sum-of-linear-subspaces, lem-sum-is-span-of-union, lem-intersection-of-linear-subspaces, def-linear-subspace, def-linear-basis, def-monoid-finite-product, def-nat-addition, lem-nat-add-identity, lem-nat-add-associative, lem-nat-add-commutative, def-vector-space, def-field, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-nat-order]
 justified_by: []
 aliases: [cor-dim-direct-sum]
 landmark: false
 short: "dimension of a direct sum"
 proof_strategy: induction
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-08-03
+    scope: published-audit-targeted
+    context_sha256: 0c030ec700869c70277194cb2148080354c4d3b64e7e6d33b9175d3235fc059e
+    item_sha256: 961289dd8fff39e325002b765cdeeb4ef5aef6871c86e6de9ddb864157320dce
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Direct_sum_of_modules"
     - title: "Dimension (vector space) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dimension_(vector_space)"
+    - title: "University of Pennsylvania notes: Vector spaces and direct sums"
+      url: "https://www.cis.upenn.edu/~cis5150/cis515-15-sl1-c.pdf"
 pipeline_run: null
 ---
 
@@ -43,7 +56,8 @@ $$\dim_F V \;=\; \sum_{i<n} \dim_F U_i ,$$
 
 the right-hand side being the finite sum of [[def-monoid-finite-product]] read
 additively in the commutative monoid $(\mathbb{N}, +, 0)$
-([[def-nat-addition]]).
+([[def-nat-addition]], [[lem-nat-add-identity]],
+[[lem-nat-add-associative]], [[lem-nat-add-commutative]]).
 
 **The base case is a genuine case.** At $n = 0$ the direct sum of the empty
 family is $\{0_V\}$ and the empty sum of natural numbers is $0$, so the formula
@@ -68,7 +82,7 @@ which are proved in finite dimension without one.
 
 [L5] $\dim_F\{0_V\} = 0$, and $\dim_F$ depends only on the space and the field ([[def-dimension]]).
 
-[L6] Finite sums of natural numbers: $\sum_{i<0}d_i = 0$ and $\sum_{i<\sigma(p)}d_i = \bigl(\sum_{i<p}d_i\bigr) + d_p$ in $(\mathbb{N},+,0)$ ([[def-monoid-finite-product]], [[def-nat-addition]]).
+[L6] Addition makes $(\mathbb{N},+,0)$ a commutative monoid, and its finite sums satisfy $\sum_{i<0}d_i = 0$ and $\sum_{i<\sigma(p)}d_i = \bigl(\sum_{i<p}d_i\bigr) + d_p$ ([[def-nat-addition]], [[lem-nat-add-identity]], [[lem-nat-add-associative]], [[lem-nat-add-commutative]], [[def-monoid-finite-product]]).
 
 [L7] Induction on $\mathbb{N}$, with $\sigma(p) = p \cup \{p\}$ and $p = \{\,i : i < p\,\}$ ([[thm-induction-principle]], [[def-natural-numbers]], [[lem-nat-order-is-membership]], [[def-nat-order]]).
 

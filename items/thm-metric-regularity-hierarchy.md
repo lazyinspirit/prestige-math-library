@@ -4,6 +4,9 @@ kind: theorem
 title: "Contraction implies Lipschitz implies uniformly continuous implies continuous; every Hölder map is uniformly continuous, and a Lipschitz map on a bounded space is Hölder for every exponent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-lipschitz-holder-contraction, def-metric-uniform-continuity,
        def-metric-continuity, def-rational-power, lem-rational-power-monotone,
        def-metric-bounded-diameter, lem-rational-power-laws, def-metric-space,

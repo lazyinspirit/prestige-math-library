@@ -4,6 +4,9 @@ kind: theorem
 title: "A completion is unique up to a unique isometry fixing the original space, and uniformly continuous maps into complete spaces extend through it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-completion-exists, thm-uniformly-continuous-extension-from-dense,
        def-metric-completion, def-isometry-and-metric-embedding,
        lem-isometry-is-an-embedding, def-metric-uniform-continuity,

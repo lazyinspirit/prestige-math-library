@@ -4,6 +4,9 @@ kind: corollary
 title: "If a prime $p$ divides a finite product $\\prod_{i<n} a_i$ of integers then $p \\mid a_i$ for some $i < n$; at $n = 0$ the product is $1$ and the hypothesis cannot hold"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclids-lemma, def-prime, def-semigroup-and-monoid, lem-units-of-z,
        def-monoid-finite-product, thm-induction-principle, lem-nat-order-is-membership,
        def-divides-in-z, lem-divisibility-basic, def-integers, def-int-operations,
@@ -26,6 +29,8 @@ sources:
   references:
     - title: "Euclid's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclid%27s_lemma"
+    - title: "Number Theory: In Context — Fundamental Theorem of Arithmetic"
+      url: "https://math-cs.gordon.edu/ntic/ntic2020/section-fta.html"
 pipeline_run: null
 ---
 

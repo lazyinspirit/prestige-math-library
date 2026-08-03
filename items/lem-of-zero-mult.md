@@ -4,6 +4,9 @@ kind: lemma
 title: "Multiplication by zero: $0 \\cdot a = 0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-field]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "Janssen and Lindsey, Rings with Inquiry: Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Rings_with_Inquiry_%28Janssen_and_Lindsey%29/02%3A_Fields_and_Rings/2.01%3A_Fields"
 pipeline_run: null
 ---
 

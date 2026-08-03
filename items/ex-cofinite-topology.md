@@ -4,6 +4,9 @@ kind: example
 title: "On an infinite set the cofinite topology has every infinite subset dense and no two nonempty open sets disjoint"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-dense-top, thm-closure-characterisation-top, def-countable,
        def-topological-space, def-interior-closure-boundary-top]
 justified_by: []

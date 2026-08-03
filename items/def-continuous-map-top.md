@@ -4,6 +4,9 @@ kind: definition
 title: "Continuity of a map of topological spaces at a point and globally"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-neighbourhood-top, def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-continuity-top]

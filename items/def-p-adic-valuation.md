@@ -4,6 +4,9 @@ kind: definition
 title: "The $p$-adic valuation $v_p(a)$ of a nonzero integer: the greatest $k \\in \\mathbb{N}$ with $p^{k} \\mid a$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-prime, def-group-power, def-semigroup-and-monoid, lem-units-of-z,
        def-divides-in-z, lem-divisibility-basic, lem-divisor-bound,
        lem-int-bounded-above-has-greatest, thm-induction-principle, def-int-abs,
@@ -26,6 +29,8 @@ sources:
   references:
     - title: "P-adic valuation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
+    - title: "University of Chicago REU notes: p-adic numbers"
+      url: "https://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/Herwig.pdf"
 pipeline_run: null
 ---
 

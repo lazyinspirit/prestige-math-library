@@ -4,6 +4,9 @@ kind: lemma
 title: "A Cauchy sequence in a metric space with a convergent subsequence converges to that subsequence’s limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cauchy-in-metric, def-metric-convergence, def-subsequential-limit,
        lem-index-map-grows, def-metric-space, lem-finite-set-has-max, def-max-min,
        lem-rat-embeds-dense]
@@ -13,11 +16,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -45,7 +49,7 @@ one exactly when it converges.
 
 [A1] Cauchyness: for every real $\eta > 0$ there is $K_1$ with $d(x_m,x_l) < \eta$ for all $m,l \ge K_1$ ([[def-cauchy-in-metric]], [[lem-rat-embeds-dense]]).
 
-[A2] Convergence of the subsequence: for every real $\eta > 0$ there is $K_2$ with $d(x_{n_j}, p) < \eta$ for all $j \ge K_2$ ([[def-metric-convergence]], [[lem-rat-embeds-dense]]).
+[A2] Metric convergence: a sequence $(y_j)$ converges to $p$ if and only if for every real $\eta > 0$ there is $K$ such that $d(y_j,p) < \eta$ for all $j \ge K$. Applied to $y_j = x_{n_j}$, the subsequence hypothesis gives $K_2$ with $d(x_{n_j},p) < \eta$ for all $j \ge K_2$ ([[def-metric-convergence]], [[lem-rat-embeds-dense]]).
 
 [L1] A strictly increasing index map satisfies $n_j \ge j$ for every $j$ ([[lem-index-map-grows]]).
 

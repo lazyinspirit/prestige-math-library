@@ -7,7 +7,7 @@ origin: session
 deps: [def-topology-of-pointwise-convergence, def-topology-of-uniform-convergence,
        def-topology-of-compact-convergence, def-compact-open-topology,
        def-locally-compact-metric-space, def-evaluation-map, def-metric-compactness,
-       def-metrizable-space, def-hausdorff-space, rem-topology-conventions,
+       def-metrizable-space, def-hausdorff-space,
        rem-metric-axiom-conventions, rem-sup-conventions,
        lem-uniform-metric-on-a-function-space, lem-sup-metric-is-a-metric,
        def-function-space, def-product-topology, def-equicontinuity,
@@ -20,11 +20,12 @@ landmark: false
 short: "conventions of this page"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -47,8 +48,9 @@ uses.** Where the domain *must* be metric, that is forced rather than chosen: an
 item quantifying over the **compact** subsets of the domain needs a notion of
 compactness, and the only one available at this point in the reading order is
 [[def-metric-compactness]], which is defined for metric spaces. Compactness for
-an arbitrary topological space is not developed anywhere in this library at
-present, and nothing here anticipates it. The items with a metric domain for that reason are
+an arbitrary topological space is developed only later in the reading order, so
+it is unavailable on this page and nothing here anticipates it. The items with a
+metric domain for that reason are
 [[def-locally-compact-metric-space]],
 [[lem-compact-closed-balls-in-a-locally-compact-metric-space]],
 [[lem-tube-lemma-for-a-compact-metric-factor]], [[def-compact-open-topology]],
@@ -135,10 +137,10 @@ and scalar multiplication. Nothing on this page uses those operations, and the
 target is not assumed to carry any algebraic structure at all. Where both are in
 play, the algebraic structure is named.
 
-**8. General conventions of the two ambient developments apply unchanged**: the
-topological ones of [[rem-topology-conventions]] — *coarser* and *finer* rather
-than *weaker* and *stronger*, neighbourhoods not required to be open — and the
-metric ones of [[rem-metric-axiom-conventions]] — real-valued metrics only, no
+**8. General conventions of the two ambient developments apply unchanged**:
+topologies are compared as *coarser* and *finer*, never *weaker* and *stronger*,
+and neighbourhoods are not required to be open. The metric conventions of
+[[rem-metric-axiom-conventions]] also apply — real-valued metrics only, no
 extended metrics. $\mathbb{N}$ contains $0$ and every sequence on this page is
 indexed from $0$, so every reciprocal written here is $1/(k+1)$ or $1/(k+2)$ and
 never $1/k$.

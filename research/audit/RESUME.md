@@ -1,6 +1,392 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-Updated 2026-08-03, Wave 1 COMPLETE (A10 pause released, published, pushed). Objective: run the published-page audit
+## WAVE 1b COMPLETE THROUGH A10 — AT THE OWNER PAUSE (2026-08-03 ~20:45)
+
+**A0–A10 all complete. The rundown is `research/audit/wave1b-A10.md`.**
+Nothing committed or pushed. `verification.audited` never written (0 additions).
+239 uncommitted files — **a `git clean`/reset destroys the wave.**
+
+Final state: 108 adjudication rows (98 round 1 + 10 round 2), 398 paired-ledger
+rows (348 A7 + 48 targeted rejudge + 2 round-2 rejudge), receipt with 15
+targets, 15/15 stamped, all 9 gates exit 0, A9 0 errors over 185 files.
+**A8 converged:** round 2 gave 9 `confirmed_nonfatal` + 1 `confirmed_fatal`
+(`ex-hamel-basis-of-r-over-q`, DeepSeek), repaired and passed by both lanes.
+The 9 nonfatal-cleared items deliberately carry NO judge stamp — a judge
+rejected them and Alpha cleared it; a pass would assert what no judge said.
+
+**On owner release:** ship repairs + retro-tags in one commit, conventional
+style, no trailers.
+
+**Two things for the next session regardless of what the owner decides:**
+1. **Alpha cannot launch judge children (`EPERM`) under `workspace-write`.**
+   Every future Alpha hits this. Judge-lane execution is the ORCHESTRATOR's.
+   The docs still imply Alpha runs it — flagged in A10 §7 for a decision.
+2. `build-receipt.mjs` must bind the context hash **from the ledger row**, not a
+   freshly recomputed one — `apply-judge-stamps.mjs:153` does the same in
+   targeted mode so an unrelated companion-page edit cannot stale a receipt.
+   Recomputing dropped a valid target when a co-page item was edited later.
+
+---
+
+## PRIOR STATE 2026-08-03 ~20:15 — A8 ROUND 1 DONE, REJUDGE RUN, ROUND 2 IN FLIGHT (superseded)
+
+**This section supersedes every dated section below it.** Everything below is
+kept for history and is stale on A8.
+
+**Verify from disk before ANY action:**
+```
+git log --oneline -1                       # expect HEAD 8289fc0, audit NOT committed
+git diff --name-only HEAD -- items library | wc -l    # expect 185
+wc -l research/audit/wave1b-judge-adjudications.jsonl # expect 98 (round 1) + round 2 rows
+wc -l research/audit/wave1b-judge-paired.jsonl        # expect 396 (348 A7 + 48 rejudge)
+```
+
+### A8 round 1 — COMPLETE and verified from disk
+
+- 98 adjudication rows, exactly one per A7 rejection key `(id, model,
+  context_sha256)`; 83 distinct items. Terra 18 fatal / 60 nonfatal / 4 false
+  positive; DeepSeek 1 / 13 / 2.
+- 24 items materially repaired (18 fatal targets + 6 impact consumers), each
+  **independently certified** by a separate Sol reader lane with a recorded
+  pre-stamp SHA-256. Record: `wave1b-published-repairs.md`.
+- 47 touch snapshots incl. a dedicated pre-repair snapshot per item.
+- Twice-touched escalation recorded (`wave1b-alpha.md` §"Multiple-repair
+  escalation"): 8 items, none proposed for deletion.
+- All 24 had `verification.judge` deleted. `verification.audited` never written.
+- Gates: 22/24 green. The 2 red were ONLY the rejudge steps below.
+
+### The EPERM blocker and who resolved it
+
+Alpha's sandbox (`--sandbox workspace-write`) returns **EPERM** launching judge
+child processes, so it could not run the targeted rejudge. It recorded the
+blocker and invented nothing — correct behaviour, and it will recur for every
+future Alpha. **Judge-lane execution is the orchestrator's job.**
+Note it CAN spawn reader subagents; only the judge child (needs network) fails.
+
+**The orchestrator ran the targeted rejudge** on all 24, both lanes, 48/48
+verdicts, zero nulls, ledger `wave1b-judge-paired.jsonl` 348 -> 396.
+Race guard: all 24 item SHA-256 byte-identical before and after the sweep.
+
+### Rejudge result: 14 pass both lanes, 10 REJECTED
+
+Rejected — terra unless noted: `def-dense-top`,
+`fs-equivalent-metrics-share-cauchy-sequences`,
+`lem-sequential-closure-inside-closure`,
+`fs-sequentially-continuous-implies-continuous`, `def-first-countable-top`,
+`ex-cocountable-topology-on-r`, `thm-first-countable-sequences-suffice`,
+`ex-uncountable-cantor-cube-uniformizable-not-first-countable`,
+`thm-fundamental-theorem-of-arithmetic`, and `ex-hamel-basis-of-r-over-q`
+(**deepseek**).
+
+**All 10 are one class: a step under-cited. NONE alleges a false claim.**
+Several concern text round 1 never touched — Terra rereads the whole item, not
+the diff. **This is a non-termination risk:** repair all 10 and the rewritten
+text invites 10 more. The 30-second rule is the termination condition.
+`ex-hamel-basis-of-r-over-q` is the one that looks materially different (an
+unconditional ℝ-uncountable claim resting on a theorem needing completeness the
+item never establishes).
+
+**NO RECEIPT WRITTEN AND NO STAMPS APPLIED.** Stamps go last, once text is
+final. Builder staged at `scratchpad/build-receipt.mjs` (`--write` to emit);
+it takes only current-context both-lane passes and uses the same hash exclusion
+as `apply-judge-stamps.mjs`.
+
+### In flight
+
+**A8 round 2**, pid in `scratchpad/A8r2.pid`, log `A8r2.log`, brief
+`A8r2-prompt.md`, monitor `bfs4vwn2f`. Adjudicates the 10. It CANNOT rejudge —
+it must list ids needing rejudge and stop; the orchestrator runs it.
+Round-1 process (pid 375255) was stopped after it had delivered everything it
+could; tree verified intact after the stop.
+
+### Exact next action
+
+1. Read `research/audit/wave1b-A8-round2.md`; verify its rows from disk.
+2. Rejudge only ids it lists (`judge-sweep.mjs --items`, `JUDGE_LINEUP=deepseek+terra`,
+   ledger `research/audit/wave1b-judge-paired.jsonl`). Snapshot hashes first.
+3. When no rejection remains: `node scratchpad/build-receipt.mjs --write`, then
+   `apply-judge-stamps.mjs --audit-targeted-rejudges ... --apply`.
+4. **A9** scope-denial re-grep — script staged at `scratchpad/A9-sweep.sh`,
+   baseline `8289fc0`. Precedent: `wave1-A9.md`.
+5. **A10** rundown (draft at `scratchpad/A10-draft.md`, census/containment/judge
+   sections already verified), then **PAUSE — the owner's sole pause.**
+   Owner queue must include the deferred earlier-wave finding:
+   `thm-metric-sequential-closure` has an unqualified title/Statement while its
+   proof spends Countable Choice; **21 consumers**; correctly NOT opened in scope.
+   A10 must also flag the two mid-wave tool changes (`judge.mts` 1M window,
+   `judge-sweep.mjs` DeepSeek cap 24) as mechanism, not content.
+
+### Dominant defect class this wave — worth telling the owner
+
+At least 9 of the 24 fatal repairs are the same fault: a first-countability or
+sequence-detection result stated **without the Countable Choice hypothesis** its
+cited theorem spends. It propagated through titles and Remarks, which no
+mechanical gate reads.
+
+---
+
+## SESSION CHECKPOINT 2026-08-03 (60% context rule) — WAVE 1b, A8 IN FLIGHT (STALE — see above)
+
+**Verify from disk before ANY action** (a prior session trusted a stale summary
+and rebuilt an already-published level):
+```
+git log --oneline -3        # expect HEAD 8289fc0, audit NOT committed
+git status --porcelain | wc -l
+node tools/depcheck.mjs; node tools/genrisk.mjs --receipt
+```
+
+### Status: A0–A7 COMPLETE, A8 RUNNING pid 375255, elapsed 24:07, A9/A10 NOT STARTED
+
+Scope `wave1b-audit-manifest.json`: 4 batches / 9 pages / **174 items**
+(linear-algebra 28, number-theory 27, real-analysis 43, topology 76).
+**Nothing committed. HEAD 8289fc0. ~227 uncommitted tree changes.**
+Do NOT `git clean` or reset — that destroys the whole wave.
+
+- **A3** (`wave1b-A3.md`): every Beta proposal adjudicated. I overturned FOUR
+  that Beta escalated to the owner queue — owner-only deletion means IDS and
+  READING ORDER, not unused fact blocks (wave-0 D2b precedent).
+- **A4** (`wave1b-A4.md`): 170/174 retags, 104 reference URLs, 4 citation
+  repairs, 14 Fact deletions, 23 unused dep-edge deletions, 3 page summaries
+  rewritten (1341/1148/1074 words → 116/143/135). No stamp written.
+- **A6** (`wave1b-alpha.md`): 15 repairs certified + stamped; **5
+  confirmed-fatal refuter findings repaired**; 2,137 edges audited (2,113
+  active, 24 retired); 2,070 impact consumers dispositioned; 5 topology
+  contract errors fixed (57/57). genrisk: `rem-topology-conventions` →
+  **unfold**, its logical dependents 5 → 0; three mention-only seeds →
+  verified-generated. 3 established-knowledge waivers concurred.
+- **A7** (`wave1b-judge-paired.jsonl`): full 174/174 both lanes, **zero nulls**.
+  DeepSeek 158 pass / **16 reject (9%)**; Terra 92 pass / **82 reject (47%)**.
+  Overlap: 15 both, 1 DeepSeek-only, **67 Terra-only**. A8 workload = 83 items.
+- **A8**: Alpha adjudicating all 83. Ledger
+  `wave1b-judge-adjudications.jsonl` (not yet written at checkpoint).
+
+### THE OPEN QUESTION A8 MUST ANSWER
+
+**Terra's 47% is far above its historical average and there is a confound I
+created: I changed Terra's context window to 1,000,000 tokens immediately
+before this sweep** (`tools/judge.mts`, `runFreshTerra` — its temp CODEX_HOME
+holds only auth.json, so `config.toml` is NOT inherited and the flag had to be
+passed explicitly). A7 is the first cycle under that config. Terra passed its
+injection test and its control rejection of `lem-cauchy-bounded` was a
+legitimate finding, so the lane is not obviously miscalibrated. **A8's report
+must state how many of the 67 Terra-only rejections were real vs false
+positives, and whether 47% reflects the corpus or the lane.** If largely false
+positives, consider reverting the window — adjudication cost scales with
+rejections and is the most expensive tier.
+
+### CORRECTED MEASUREMENT — the old numbers were badly stale
+
+Computed this session from all adjudication ledgers (frontiers 6–9, waves 0–1):
+
+| model | fatal | nonfatal | false pos | total | precision |
+|---|---|---|---|---|---|
+| gpt-5.6-terra | 142 | 836 | 58 | 1036 | **94.4%** |
+| deepseek-v4-pro | 129 | 434 | 55 | 618 | **91.1%** |
+| claude-sonnet-5 (retired) | 1 | 20 | 14 | 35 | 60.0% |
+
+Fatal-item overlap: 80 both, 23 Terra-only, 10 DeepSeek-only — dropping
+DeepSeek loses 9% of fatals, dropping Terra loses 20%. **Both lanes pay for
+themselves.** frontier-7 is an unexplained outlier (65%/70%).
+**The often-quoted "judge precision 21–24%" is GLM 5.2 era and is WRONG for the
+current lineup.**
+
+### OWNER DECISIONS THIS SESSION (all applied)
+
+1. **DeepSeek concurrency 16 → 24** (Terra stays 16, combined 40).
+   `tools/judge-sweep.mjs` + CLAUDE.md ×3, WORKFLOW.md, AUDIT-WORKFLOW.md ×4,
+   LEVELS.md. Reason, measured: at A7's end Terra had finished all 174 while
+   DeepSeek had 36 pending with every slot held.
+2. **A4 runs one Beta per category batch, in parallel** (AUDIT-WORKFLOW A4).
+   Write sets are disjoint. The gate run and the touchlog snap stay serial.
+   `briefs/audit-beta.md` was ALREADY per-category; the serialisation was my
+   dispatch error, costing ~20 min.
+3. **All GPT agents get `model_context_window = 1000000`** — set in
+   `~/.codex/config.toml` (backup `.bak`) AND passed explicitly in
+   `tools/judge.mts`. It was NEVER set before; the 1M figure existed only in
+   prose.
+4. **Provenance wording rewritten** as three bullets, in BOTH places it lives
+   (`MathematicalProvenanceGuide` and `AUTHORSHIP_TITLE` tooltips), app repo.
+   Owner chose their own AI-adapted wording over mine; I noted ~41 of 140
+   ai-altered rows describe combining/strengthening/generalising, which that
+   wording reads narrower than. Recorded, not re-litigated.
+5. **Build workflow: no change.** Verified — `judge-sweep` is shared so the cap
+   already applies, and build steps 1/5/6 are already parallel. No A4-equivalent
+   serial stage exists there.
+
+### APP REPO (separate, already deployed)
+
+`prestige-intelligence` commit **e4ef830** on branch
+`feat/reasoning-training-controls`, pushed, built, deployed, verified live.
+12 files: tikz-in-prose rendering, `/library/plan` route, provenance wording.
+Two root strays (`e1716b.json`, `increment5-review-digest.md`) deliberately NOT
+committed — working artifacts.
+
+### EXACT NEXT ACTION
+
+1. Verify A8 from disk (adjudication rows, stamps, gates) — never from report.
+2. Get A8's verdict on the Terra anomaly; decide on the 1M window.
+3. **A9** scope-denial re-grep over every repaired file, items AND page
+   summaries.
+4. **A10** rundown, then **PAUSE — the owner's sole pause.** Never write
+   `verification.audited`. Do not publish, commit or push without release.
+   The A10 rundown must also flag `tools/judge.mts` and `tools/judge-sweep.mjs`
+   as mechanism changes needing their own note.
+
+### REMAINING SCOPE AFTER THIS WAVE
+
+**1,649 of 2,716 published items still untagged (61%)** — real-analysis 725,
+topology 523, combinatorics 191, foundations 113, not-proved-here 64,
+number-theory 33. ~9.5 more waves at 174/wave. **Calendar time is dominated by
+per-wave owner pauses, not compute** — prefer fewer, larger waves sized by
+concentration (real-analysis first) over balanced four-category waves.
+
+
+## READ THIS FIRST — WAVE 1b, HANDOFF 2026-08-03
+
+**Before ANY action, verify state from disk, not from a summary:**
+```
+git log --oneline -3          # expect HEAD 8289fc0, nothing committed by the audit
+git status --porcelain | wc -l
+node tools/depcheck.mjs; node tools/genrisk.mjs
+```
+A prior session trusted a stale conversation summary, concluded a level build
+was outstanding, and rebuilt an already-published level. Do not repeat it.
+
+### Where wave 1b stands
+
+| step | owner | state |
+|---|---|---|
+| A0 batching | orchestrator | DONE (`wave1b-audit-manifest.json`) |
+| A1 provenance | Audit-Beta | DONE — 174/174 rows determined |
+| A2 contracts + citation audit | Audit-Beta | DONE |
+| A3 adjudication | orchestrator | DONE — `wave1b-A3.md` |
+| A4 apply | Audit-Beta (Sol) | DONE — `wave1b-A4.md` |
+| **A6 Alpha audit** | Alpha (Sol) | **IN FLIGHT at handoff** — `/tmp/claude-0/-root-Projects-prestige-math-library/97976f1a-1b37-45ed-844a-424414778444/scratchpad/A6.log` |
+| A7 paired judges | orchestrator | NOT STARTED |
+| A8 adjudicate / A9 re-grep | Alpha / orchestrator | NOT STARTED |
+| A10 rundown + OWNER PAUSE | orchestrator | NOT STARTED |
+
+**Nothing is committed. HEAD is 8289fc0. All wave-1b artifacts are UNTRACKED
+plus ~175 modified item/page files from A4.** Do not `git clean`, do not reset:
+that destroys the entire audit.
+
+### A4 results (verified by me from disk, not taken on report)
+
+170 of 174 retags applied; 104 reader-visible reference URLs added; 4
+citation-precision repairs; 14 number-theory Fact deletions; 23 unused
+dependency-edge deletions; 3 A-page summaries rewritten to 116/143/135 words
+(from 1341/1148/1074). **No verification stamp written** — correct.
+Gates: precheck 139 proof items 0 failing; fwdcheck/extcheck/citecheck/
+rendercheck/prosecheck exit 0. `depcheck` exits 1 **solely** on 15 honestly
+unstamped material repairs awaiting A6 certification — that is the gate working.
+
+### The four items A4 deliberately did NOT retag (my A3 carve-outs)
+
+- `rem-topology-conventions` — `ai-generated` STATEMENT with **5 genuine
+  LOGICAL dependents** (`def-t0-and-t1-spaces` (a DEFINITION = spine),
+  `rem-compactness-conventions-and-choice-ledger`, `rem-connectedness-conventions`,
+  `rem-function-space-conventions`, `rem-separation-axiom-conventions`).
+  Applying the tag makes it a live forbidden dependency target, so the tag and
+  its genrisk ladder disposition must land in the SAME pass. Ladder:
+  retag/restate/unfold/narrow/verified-generated. Retag looks unavailable (no
+  source exists for a house convention); unfold or verified-generated are the
+  honest candidates.
+- `lem-of-square-monotone`, `prop-of-ab-less-b`, `lem-of-hom-order-preserving`
+  — the `established-knowledge` evidence class, whose sole URL waiver requires
+  **Alpha concurrence**, and `alpha_concurred` is absent on all 174 rows.
+
+### Correction to my own A3, found by A4
+
+I ruled three seeds "cone-0 leaves"; `genrisk` counts direct CITATION consumers
+too, so they are cone-1: `ex-prime-factorisation-worked`,
+`rem-complete-metrizability-is-the-topological-shadow`,
+`cex-cantor-intersection-needs-vanishing-diameters`. **All three still have ZERO
+`deps` edges**, so none is a dependency target; the cone is a
+wikilink/`forward_refs` mention, and a mention does not propagate. Wave 1
+precedent disposed four such seeds `verified-generated`. `genrisk --receipt`
+exits 1 until they are disposed.
+
+**Count discipline:** a `grep '^deps:.*<id>'` UNDERCOUNTS, because many `deps`
+lists wrap across lines. Parse with `re.S`. Grep said 1 dependent for
+`rem-topology-conventions`; the truth is 5.
+
+### EXACT NEXT ACTION
+
+1. Confirm A6 finished: `tail /tmp/claude-0/-root-Projects-prestige-math-library/97976f1a-1b37-45ed-844a-424414778444/scratchpad/A6.log`; verify its claims from disk.
+2. Re-run `node tools/genrisk.mjs` and confirm `--receipt` no longer exits 1.
+3. `depcheck` must reach an empty `published-unaudited` class before A7.
+4. **A7:** `JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --manifests`
+   over **every** item in all four batches (coverage is the mechanism), after
+   the Terra injection test. Ledger `research/audit/wave1b-judge-paired.jsonl`.
+5. A8 (Alpha adjudicates rejections from disk, adjudications jsonl), A9
+   (scope-denial re-grep over every repaired file), A10 (rundown + PAUSE).
+
+**A10 is the sole owner pause. Never write `verification.audited`. Do not
+publish or push without explicit owner release.**
+
+
+## WAVE 1b IS IN FLIGHT AND UNCOMMITTED (recorded 2026-08-03, late)
+
+**This section was missing until now, and its absence cost a whole session.**
+The record below still said "Wave 1 COMPLETE" while a second tranche was
+mid-flight, so a later session read a stale snapshot, concluded a level build
+was outstanding, and rebuilt an already-published level instead of continuing
+here. **Update this file at every substage, not only at a wave boundary.**
+
+### Scope (manifest `wave1b-audit-manifest.json`, frozen 10:35, 2026-08-03)
+
+4 batches / 9 pages / **174 items**, all UNTRACKED, nothing committed:
+
+| category | pages | items |
+|---|---|---|
+| linear-algebra | 2 | 28 |
+| number-theory | 2 | 27 |
+| real-analysis | 1 | 43 |
+| topology | 4 | 76 |
+
+Edge summary: published-backward 1317, same-batch 625, cross-batch 153,
+forward 42.
+
+### Where it actually stands: **A1-A3 COMPLETE, A4 onward NOT STARTED**
+
+- **A1 provenance: 174/174 rows determined**, each with `statement`, `proof`,
+  `evidence`, `rationale`. Distribution: ai-altered/ai-generated 96,
+  ai-altered/not-applicable 27, literature-derived/ai-altered 19,
+  ai-altered/ai-altered 17, then small tails.
+  Evidence classes: semantic-source 137, exact-source 28, trivial 4,
+  established-knowledge 3, **none 2**.
+- **A2 proof contracts written** for all four categories.
+- **A3 repair proposals written** in each `wave1-<cat>.findings.md`.
+  Includes an **unambiguous nonmathematical falsehood in the number-theory
+  A-page summary**, citation-precision repairs in linear-algebra (1),
+  real-analysis (2) and topology (1), and 2 debatable restatements in topology.
+  Unambiguous mathematical falsehoods: 0 reported.
+
+### FOUR THINGS TO SETTLE BEFORE A4 CAN CLOSE
+
+1. **`alpha_concurred` is absent on ALL 174 rows.** The sole URL waiver in the
+   hard rules is the *Alpha-concurred* `established-knowledge` class, and the
+   3 rows using it therefore have no waiver yet.
+2. **2 rows carry evidence `none`.** Uncertainty must never fall toward a
+   sourced label; these need an explicit disposition.
+3. **6 items were tagged `ai-generated` in the STATEMENT slot** (4 with
+   ai-generated proof, 2 not-applicable). Owner rule: `ai-generated` requires a
+   POSITIVE determination of genuine novelty and must never be assigned merely
+   because a source failed to surface. Each needs that determination on record.
+4. **Generated-statement blast radius.** An `ai-generated` Statement is
+   forbidden as a dependency target. The 6 above must be checked for existing
+   dependents before anything else is decided.
+
+### Stale text warning
+
+The three findings files for linear-algebra, number-theory and real-analysis
+open with a "continuity checkpoint / in progress" header. **Those headers are
+stale**: mtimes show the findings files were written LAST in each category
+(11:05-11:14), after the ledgers (10:56-11:05) and contracts (10:59-11:07).
+Read the body, not the header.
+
+
+Updated 2026-08-03. Wave 1 FIRST TRANCHE complete (A10 released, pushed); wave 1b in flight, see above. Objective: run the published-page audit
 workflow (`AUDIT-WORKFLOW.md`, NORMATIVE) — provenance retro-tagging +
 citation-precision audit of the legacy untagged published corpus, waves
 bottom-up, batches = category × dependency level.

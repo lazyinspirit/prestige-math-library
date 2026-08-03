@@ -4,6 +4,9 @@ kind: theorem
 title: "Every metric space has a completion, constructed as the equivalence classes of its Cauchy sequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-completion, def-cauchy-in-metric, def-complete-metric-space,
        def-metric-space, def-isometry-and-metric-embedding, def-countable-choice,
        thm-cauchy-criterion-via-lub, def-real-limit, lem-metric-reverse-triangle,

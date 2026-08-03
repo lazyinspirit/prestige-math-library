@@ -4,6 +4,9 @@ kind: lemma
 title: "Finite sums re-indexed along an injection, with a zero term deleted, and concatenated; and the closure properties of linear independence: an independent list is injective and never $0_V$, its sublists are independent, a list is independent exactly when it is injective with linearly independent image, and every subset of a linearly independent set is linearly independent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-independence, def-linear-combination-and-span, def-monoid-finite-product, def-sum-of-linear-subspaces, thm-generalised-associativity, def-vector-space, def-field, lem-vector-space-elementary-consequences, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, lem-nat-trichotomy, lem-nat-nonzero-is-successor, lem-nat-discrete, lem-nat-add-cancellative, lem-nat-add-commutative, lem-nat-order-add-compatible, thm-nat-linear-order, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 aliases: [lem-sublist-of-independent-is-independent, lem-reindex-finite-sum]
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_independence"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Sheldon Axler, Linear Algebra Done Right, 4th ed."
+      url: "https://linear.axler.net/LADR4e.pdf"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

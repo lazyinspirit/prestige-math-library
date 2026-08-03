@@ -4,6 +4,9 @@ kind: lemma
 title: "The $p$-adic valuation extends to the nonzero rationals by $v_p(a/b) := v_p(a) - v_p(b) \\in \\mathbb{Z}$, independently of the representation; it satisfies $v_p(xy) = v_p(x) + v_p(y)$, and $v_p(x+y) \\ge \\min\\{v_p(x), v_p(y)\\}$ whenever $x$, $y$ and $x+y$ are nonzero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-p-adic-valuation-additive, lem-p-adic-valuation-basic, def-p-adic-valuation,
        def-prime, def-rationals, def-rat-operations, thm-rat-field, lem-int-embeds-rat,
        def-field, lem-int-cancellation, def-nat-addition, lem-nat-add-commutative,
@@ -17,12 +20,13 @@ landmark: false
 short: "$v_p$ on $\\mathbb{Q}^{\\times}$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,6 +34,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
     - title: "Valuation (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Valuation_(algebra)"
+    - title: "University of Chicago REU notes: p-adic numbers"
+      url: "https://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/Herwig.pdf"
+    - title: "Jürgen Neukirch, Algebraic Number Theory"
+      url: "https://www.math.toronto.edu/~ila/Neukirch_Algebraic_number_theory.pdf"
 pipeline_run: null
 ---
 
@@ -108,7 +116,7 @@ into $\mathbb{Z}$ along $\iota$.
 
 ## Remarks
 
-- **This is the well-definedness that [[ex-p-adic-ultrametric]] said it did not have.** That published example builds the $2$-adic absolute value on $\mathbb{Q}$ and records that the general $p$-adic valuation "needs primality and unique factorisation in $\mathbb{Z}$, neither of which this item develops or assumes", so it works at $p = 2$ by parity alone. The missing ingredient is Euclid's lemma, through the additivity of [[lem-p-adic-valuation-additive]], and it is supplied here: representation-independence is exactly the statement that $ad = cb$ forces the two candidate values to agree.
+- **Relation to the published $2$-adic example.** The published [[ex-p-adic-ultrametric]] records that the general $p$-adic machinery is available, but nevertheless develops $p=2$ from parity alone. The present lemma supplies the general algebraic extension: representation-independence is exactly the assertion that $ad=cb$ forces the two candidate values to agree.
 
 - **Nothing metric is stated here, deliberately.** The $p$-adic absolute value $|x|_p = p^{-v_p(x)}$ and the ultrametric it induces need real powers with integer exponents and the definition of a metric space, all of which live far above this page in the library's order; they are not defined here and nothing on this page depends on them. What is proved is the algebra: a homomorphism from the nonzero rationals under multiplication to $\mathbb{Z}$ under addition, satisfying the ultrametric inequality on valuations.
 

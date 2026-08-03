@@ -4,6 +4,9 @@ kind: definition
 title: "Interior, closure, boundary, exterior, derived set and isolated point in a topological space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-neighbourhood-top]
 justified_by: []
 aliases: [def-closure-top, def-interior-top, def-boundary-top, def-derived-set-top]

@@ -4,6 +4,9 @@ kind: lemma
 title: "$S \\subseteq V$ is linearly independent if and only if every finite subset of $S$ is; consequently the union of a nonempty chain of linearly independent subsets of $V$, ordered by inclusion, is linearly independent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-linear-independence, lem-independent-list-is-injective, def-partial-order, def-chain, def-vector-space, def-field, def-linear-combination-and-span, def-countable, def-equinumerous, def-injection-surjection-bijection, thm-induction-principle, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [lem-independence-finite-character]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Matroid"
     - title: "Linear independence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_independence"
+    - title: "Carnegie Mellon University linear algebra notes: Bases"
+      url: "https://www.math.cmu.edu/~gautam/teaching/2009-10/341-linear-algebra/page3.pdf"
 pipeline_run: null
 ---
 

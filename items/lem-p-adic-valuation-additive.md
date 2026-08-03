@@ -4,12 +4,10 @@ kind: lemma
 title: "$v_p(ab) = v_p(a) + v_p(b)$ for nonzero integers $a, b$, and $v_p(a+b) \\ge \\min\\{v_p(a), v_p(b)\\}$ whenever $a$, $b$ and $a+b$ are all nonzero"
 status: published
 origin: session
-deps: [def-p-adic-valuation, lem-p-adic-valuation-basic, thm-euclids-lemma, def-prime,
-       def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z,
-       def-divides-in-z, lem-divisibility-basic, thm-nat-linear-order,
-       lem-nat-order-is-membership, lem-nat-discrete, def-nat-order, def-nat-addition,
-       def-natural-numbers, lem-nat-add-associative, lem-nat-add-commutative, lem-int-cancellation, def-integers, def-int-operations,
-       def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-p-adic-valuation, lem-p-adic-valuation-basic, thm-euclids-lemma, def-prime, def-group-power, lem-group-power-laws, def-semigroup-and-monoid, lem-units-of-z, def-divides-in-z, lem-divisibility-basic, thm-nat-linear-order, lem-nat-order-is-membership, lem-nat-discrete, def-nat-order, def-nat-addition, def-natural-numbers, lem-int-cancellation, def-integers, def-int-operations, def-int-order, thm-int-comm-ring, thm-int-ordered-ring, lem-nat-embeds-int]
 justified_by: []
 forward_refs: [ex-prime-factorisation-worked]
 aliases: []
@@ -17,12 +15,13 @@ landmark: false
 short: "$v_p(ab) = v_p(a) + v_p(b)$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/P-adic_valuation"
     - title: "Valuation (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Valuation_(algebra)"
+    - title: "University of Chicago REU notes: p-adic numbers"
+      url: "https://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/Herwig.pdf"
+    - title: "Jürgen Neukirch, Algebraic Number Theory"
+      url: "https://www.math.toronto.edu/~ila/Neukirch_Algebraic_number_theory.pdf"
 pipeline_run: null
 ---
 
@@ -65,8 +68,6 @@ $\mathbb{N}$ is total ([[thm-nat-linear-order]]).
 [L6] $\mathbb{Z}$ is a commutative ring: multiplication is associative and commutative and $x \cdot 1 = x$ ([[thm-int-comm-ring]], [[def-int-operations]], [[def-integers]]); its order is total, antisymmetric and transitive ([[thm-int-ordered-ring]], [[def-int-order]], [[lem-nat-embeds-int]]).
 
 [L7] On $\mathbb{N}$: $\le$ is a linear order, so any two naturals are comparable and have a minimum ([[thm-nat-linear-order]]); $m \le n$ means $m + c = n$ for some $c$ ([[def-nat-order]]); $\sigma(k) = k + 1$ ([[def-nat-addition]], [[def-natural-numbers]]); $m < n$ exactly when $\sigma(m) \le n$ ([[lem-nat-discrete]]), and $m < \sigma(n)$ exactly when $m \le n$ ([[lem-nat-order-is-membership]]).
-
-[L8] Addition on $\mathbb{N}$ is associative and commutative ([[lem-nat-add-associative]], [[lem-nat-add-commutative]], [[def-nat-addition]]).
 
 ## Proof
 

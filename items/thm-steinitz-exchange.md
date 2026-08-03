@@ -4,6 +4,9 @@ kind: theorem
 title: "The Steinitz exchange lemma: if $L \\subseteq V$ is linearly independent and $S \\subseteq V$ spans $V$ with $S$ finite of size $n$, then $L$ is finite with $|L| = m \\le n$, and there is $T \\subseteq S$ of size $n - m$ such that $L \\cup T$ spans $V$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-linear-independence, lem-independent-list-is-injective, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-combination-and-span, lem-span-is-the-set-of-linear-combinations, lem-span-monotone-and-idempotent, def-linear-subspace, def-sum-of-linear-subspaces, def-monoid-finite-product, def-vector-space, def-field, lem-vector-space-elementary-consequences, def-natural-numbers, lem-nat-order-is-membership, def-nat-order, def-nat-addition, thm-induction-principle, lem-nat-add-successor-left, lem-nat-add-commutative, lem-nat-add-cancellative, lem-nat-nonzero-is-successor, lem-nat-discrete, thm-nat-linear-order, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole]
 justified_by: []
 aliases: [thm-exchange-lemma, lem-steinitz]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Steinitz_exchange_lemma"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Western Washington University notes: Bases and the Steinitz exchange lemma"
+      url: "https://faculty.curgus.wwu.edu/Courses/504_201710/Bases2013.pdf"
 pipeline_run: null
 ---
 

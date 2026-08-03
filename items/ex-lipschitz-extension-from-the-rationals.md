@@ -4,6 +4,9 @@ kind: example
 title: "A Lipschitz function on $\\mathbb{Q}$ extends uniquely to a Lipschitz function on $\\mathbb{R}$ with the same constant"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-uniformly-continuous-extension-from-dense, def-lipschitz-holder-contraction,
        lem-rat-embeds-dense, thm-euclidean-space-complete, lem-real-line-is-a-metric-space,
        def-isometry-and-metric-embedding, lem-limit-preserves-order, thm-algebra-of-limits,

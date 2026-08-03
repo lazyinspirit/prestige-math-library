@@ -4,6 +4,9 @@ kind: corollary
 title: "The multiplicative identity is positive"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-of-square-positive, def-field]
 aliases: []
 landmark: false
@@ -21,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
+    - title: "Elias Zakon, Mathematical Analysis: Axioms and Basic Definitions"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/02%3A_Real_Numbers_and_Fields/2.01%3A_Axioms_and_Basic_Definitions"
 pipeline_run: null
 proof_strategy: direct
 ---

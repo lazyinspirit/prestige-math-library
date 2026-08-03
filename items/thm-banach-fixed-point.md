@@ -4,6 +4,9 @@ kind: theorem
 title: "A contraction of a nonempty complete metric space into itself has exactly one fixed point, the limit of the iterates from any starting point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-lipschitz-holder-contraction, def-complete-metric-space, def-cauchy-in-metric,
        thm-recursion, lem-geometric-sequence-null, def-integer-power,
        def-metric-convergence, lem-metric-limits-unique, thm-metric-regularity-hierarchy,

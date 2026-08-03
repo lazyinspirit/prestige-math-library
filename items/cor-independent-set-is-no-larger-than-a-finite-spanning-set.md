@@ -4,6 +4,9 @@ kind: corollary
 title: "If $V$ has a spanning set with $n$ elements, then every linearly independent subset of $V$ is finite with at most $n$ elements; in particular $V$ has no linearly independent subset equinumerous with $\\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-steinitz-exchange, def-linear-independence, def-linear-combination-and-span, def-vector-space, def-field, def-countable, def-equinumerous, def-injection-surjection-bijection, lem-pigeonhole, def-natural-numbers, def-nat-order]
 justified_by: []
 aliases: [cor-independent-bounded-by-spanning]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Steinitz_exchange_lemma"
     - title: "Dimension (vector space) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dimension_(vector_space)"
+    - title: "Western Washington University notes: Bases and the Steinitz exchange lemma"
+      url: "https://faculty.curgus.wwu.edu/Courses/504_201710/Bases2013.pdf"
 pipeline_run: null
 ---
 

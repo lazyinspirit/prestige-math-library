@@ -4,6 +4,9 @@ kind: definition
 title: "Absolute value in an ordered field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-ordered-field]
 aliases: []
 landmark: false
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Dartmouth College analysis notes: Absolute value"
+      url: "https://math.dartmouth.edu/~m63w21/lecture-m63-02.pdf"
 pipeline_run: null
 ---
 

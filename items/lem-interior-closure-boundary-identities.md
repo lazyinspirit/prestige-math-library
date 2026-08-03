@@ -4,6 +4,9 @@ kind: lemma
 title: "Interior commutes with finite intersections and closure with finite unions, while the two reverse combinations are inclusions only and both fail for infinite families; the space is the disjoint union of interior, boundary and exterior"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-interior-closure-boundary-top, def-standard-topologies, def-topological-space, def-countable]
 justified_by: []
 forward_refs: [cex-interior-of-a-union-is-larger]

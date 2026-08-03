@@ -4,6 +4,9 @@ kind: definition
 title: "Uniform continuity of a map of metric spaces: one $\\delta$ serving every point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-continuity, def-metric-space, def-equivalent-metrics,
        def-metric-ball]
 justified_by: []

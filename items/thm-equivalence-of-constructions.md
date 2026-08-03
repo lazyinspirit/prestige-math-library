@@ -4,6 +4,9 @@ kind: theorem
 title: "Equivalence of the Cauchy and Dedekind constructions of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-uniqueness-complete-ordered-field, cor-cauchy-reals-lub-complete, thm-reals-ordered-field, thm-dedekind-complete, thm-reals-dedekind-ordered-field, def-complete-ordered-field]
 aliases: []
 landmark: true
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Michael_Spivak"
     - title: "E. Landau, Foundations of Analysis"
       url: "https://bookstore.ams.org/chel-79"
+    - title: "Robert Lubarsky, On the Cauchy and Dedekind reals"
+      url: "https://www.math.fau.edu/people/faculty/lubarsky/dedreals.pdf"
+    - title: "Construction of the real numbers (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Construction_of_the_real_numbers"
 pipeline_run: null
 ---
 

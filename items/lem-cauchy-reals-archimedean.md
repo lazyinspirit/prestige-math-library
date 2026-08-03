@@ -4,6 +4,9 @@ kind: lemma
 title: "The Cauchy-sequence reals are Archimedean"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-archimedean-field, lem-rat-embeds-dense, lem-rat-archimedean, thm-reals-ordered-field, def-real-order]
 aliases: []
 landmark: false
@@ -22,6 +25,8 @@ sources:
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "California State University San Marcos notes: Construction of the real numbers"
+      url: "https://public.csusm.edu/aitken_html/m378_summer2019/Ch10RealNumbers.pdf"
 pipeline_run: null
 ---
 

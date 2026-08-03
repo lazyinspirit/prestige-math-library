@@ -4,6 +4,9 @@ kind: lemma
 title: "For $B \\subseteq V$ the following are equivalent: $B$ is a basis; $B$ is a maximal linearly independent subset of $V$; $B$ is a minimal spanning subset of $V$ — maximality and minimality being in the inclusion order"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-linear-basis, def-linear-independence, lem-independent-list-is-injective, lem-adjoining-a-vector-outside-the-span, lem-dependent-iff-a-vector-lies-in-the-span-of-the-others, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-partial-order, def-maximal-element, def-vector-space, def-field]
 justified_by: []
 aliases: [lem-basis-characterisations]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
     - title: "S. Axler, Linear Algebra Done Right, 4th ed., Ch. 2"
       url: "https://linear.axler.net/"
+    - title: "Cambridge University Press excerpt: Vector spaces and bases"
+      url: "https://assets.cambridge.org/97810092/43902/excerpt/9781009243902_excerpt.pdf"
 pipeline_run: null
 ---
 

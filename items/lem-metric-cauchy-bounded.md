@@ -4,6 +4,9 @@ kind: lemma
 title: "Every Cauchy sequence in a metric space is bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cauchy-in-metric, def-metric-bounded-diameter, lem-finite-set-has-max,
        def-max-min, def-metric-space, def-metric-ball, lem-metric-nonnegativity,
        lem-rat-embeds-dense, def-sequence]

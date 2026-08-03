@@ -4,6 +4,9 @@ kind: definition
 title: "First countable space: a countable neighbourhood base at every point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-neighbourhood-top, def-countable, def-equinumerous, def-topological-space, def-homeomorphism-and-open-maps]
 justified_by: []
 forward_refs: [thm-first-countable-frechet-urysohn-sequential-hierarchy, ex-uncountable-cantor-cube-uniformizable-not-first-countable, def-second-countable-space]
@@ -12,11 +15,12 @@ landmark: false
 short: "first countable"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-03
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -67,8 +71,9 @@ inclusion, and a bijection preserves at most countability
   necessary: the later hierarchy
   [[thm-first-countable-frechet-urysohn-sequential-hierarchy]] distinguishes
   first countable, Fréchet--Urysohn, and sequential spaces. Without an additional
-  hypothesis sequences can be too weak, and both failures occur in the
-  cocountable topology on $\mathbb{R}$, which is therefore not first countable.
+  hypothesis sequences can be too weak. Under that same choice assumption, both
+  failures occur in the cocountable topology on $\mathbb{R}$, so the cited
+  implication shows that space is not first countable.
 
 - **Every metric space is first countable**, the balls of radius $1/n$ for
   $n \ge 1$ forming an at most countable neighbourhood base at each point
@@ -78,10 +83,12 @@ inclusion, and a bijection preserves at most countability
   Hausdorff obstruction used elsewhere on this page: the indiscrete topology on
   two points is first countable, as the paragraph above records, and is not
   Hausdorff, so it is caught by the Hausdorff obstruction and not by this one.
-  The converse failure does occur: the later Cantor-cube example
+  The converse failure does occur under the ultrafilter lemma and countable
+  choice: with those hypotheses, the later Cantor-cube example
   [[ex-uncountable-cantor-cube-uniformizable-not-first-countable]] is compact
-  Hausdorff and not first countable. Together with the indiscrete example, neither
-  first countability nor Hausdorffness implies the other.
+  Hausdorff and not first countable. Together with the indiscrete example, this
+  shows under those hypotheses that neither first countability nor Hausdorffness
+  implies the other.
 
 - **Second countability is not developed at this point in the reading order.**
   The stronger axiom, an at most countable basis for the whole topology, is
