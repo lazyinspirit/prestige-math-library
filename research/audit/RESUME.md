@@ -1,13 +1,13 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-Updated 2026-08-03, Wave 1 A10 owner pause. Objective: run the published-page audit
+Updated 2026-08-03, Wave 1 COMPLETE (A10 pause released, published, pushed). Objective: run the published-page audit
 workflow (`AUDIT-WORKFLOW.md`, NORMATIVE) — provenance retro-tagging +
 citation-precision audit of the legacy untagged published corpus, waves
 bottom-up, batches = category × dependency level.
 
 ## State
 
-### Wave 1 A10 owner pause (2026-08-03)
+### Wave 1 A10 — complete, pause released (2026-08-03)
 
 - The complete owner rundown is `research/audit/wave1-A10.md`. The owner
   extended the B-page deletion decision to the whole library: all 36 remaining
@@ -25,9 +25,17 @@ bottom-up, batches = category × dependency level.
   wording were retained. The audit stamp rule is now aligned with the exact
   targeted Step-8 mechanism: `wave1-targeted-judge-receipt.json` binds the sole
   A8 fatal repair's unchanged item text to its exact DeepSeek/Terra paired
-  rejudge, and the targeted stamp dry run passed. Wave 1 remains at the A10
-  owner pause. Do not commit, push, publish, apply a stamp, rename, or reopen
-  A8 while this pause stands.
+  rejudge, and the targeted stamp dry run passed.
+- **A10 pause RELEASED (owner, 2026-08-03).** The owner lifted the pause and
+  authorized the stamps, the commit and the push. `verification.verified` with
+  `scope: published-audit` and `delegated_by: owner` was written to the 54
+  repaired published items whose obsolete `verification.audited` A8 had
+  stripped. This transcribes the independent Sol current-text certifications
+  already recorded in `wave1-alpha.md` §3 and §"A8 iterative and closing-sweep
+  continuation"; no new certification was performed and no rejection was
+  upgraded. `depcheck` now passes with an empty `published-unaudited` class.
+  Wave 1 is committed and pushed on `main`. A8 stays closed and no id was
+  renamed.
 - Four unique fatal defects (five judge-lane detections) were repaired:
   `def-quaternions`, `lem-finite-choice`, `thm-zorn-implies-ac`, and
   `fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term`. The
@@ -50,7 +58,7 @@ bottom-up, batches = category × dependency level.
   passed its current context. **A9 is complete:** `wave1-A9.md` records the
   scope-denial re-grep over 124 repaired item/page files (zero positional
   errors; five scope and eleven count-prose heuristic candidates). **A10 is
-  complete and the owner pause is active.**
+  complete and the owner pause has been released.**
 - Earlier Wave-1 A8 nonfatal repairs are retained as historical completed
   edits; the amendment governs all remaining work and does not risk a
   destructive rollback of independently certified text.
