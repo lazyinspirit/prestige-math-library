@@ -4,27 +4,20 @@ kind: example
 title: "For a finite symmetric irreflexive relation the sum of the neighbour counts is twice the number of unordered related pairs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        thm-two-element-subsets-count, def-binomial-coefficient,
        def-sum-over-a-finite-index-set, thm-sum-rule, def-finite-cardinality,
        def-injection-surjection-bijection, thm-subset-of-a-finite-set,
-       cor-cardinality-of-the-power-set]
+       cor-cardinality-of-the-power-set, def-nat-finite-sum-and-product]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Handshaking_lemma"
     - title: "Double counting (proof technique) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Double_counting_(proof_technique)"
+    - title: "Graph Theory, Chapter 1 (King Saud University notes)"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/Graph%20Chap%201Math%205301.pdf"
 pipeline_run: null
 ---
 
@@ -83,9 +78,9 @@ the identity then reads $N\,(N-1) = 2\binom{N}{2}$, which is
 
 [L2] $R$ is finite, and so is $[V]^{2}$ and hence its subset $E$ ([[def-a-finite-incidence-relation-and-its-fibres]], clause (a), [[def-binomial-coefficient]], [[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]]).
 
-[L3] The sum rule for a finite partition, and a constant natural summand $\sum_{p \in S}c = \lvert S\rvert\cdot c$ ([[thm-sum-rule]], clause 2, [[def-sum-over-a-finite-index-set]], clause (c)).
+[L3] The sum rule for a finite partition, and a constant natural summand $\sum_{p \in S}c = \lvert S\rvert\cdot c$ ([[thm-sum-rule]], clause 2, [[def-sum-over-a-finite-index-set]], clause (c)). In particular, if $x\in V$ and $|V|=N$, then the disjoint union $V=\{x\}\sqcup(V\setminus\{x\})$ gives $|V\setminus\{x\}|=N-1$ ([[def-finite-cardinality]], [[def-nat-finite-sum-and-product]]).
 
-[L4] Cardinality of a listed set with distinct entries, and transport along a bijection ([[def-finite-cardinality]], clauses (a) and (c), [[def-injection-surjection-bijection]]).
+[L4] If $x\ne y$, then $0\mapsto x$, $1\mapsto y$ is a bijection $2\to\{x,y\}$, so $|\{x,y\}|=|2|=2$; more generally, a bijection from a finite set transports its cardinality to the codomain ([[def-finite-cardinality]], clauses (a) and (c), [[def-injection-surjection-bijection]]).
 
 [L5] $\lvert [V]^{2}\rvert = \binom{N}{2}$ and $2\binom{N}{2} = N(N-1)$ for every $N \in \mathbb{N}$ ([[thm-two-element-subsets-count]]).
 
@@ -100,7 +95,7 @@ the identity then reads $N\,(N-1) = 2\binom{N}{2}$, which is
 
 2.1 Counting $R$ by the fibres of $\Psi$. The fibres of $\Psi$ are pairwise disjoint finite sets indexed by the finite set $E$, with union $R$, so [L3] gives $\lvert R\rvert = \sum_{S \in E}\lvert\Psi^{-1}[\{S\}]\rvert = \sum_{S \in E}2 = \lvert E\rvert\cdot 2$. [step 1.1, step 1.2, L2, L3]
 
-3.1 Combining with [L1], $\sum_{x \in V}d(x) = \lvert R\rvert = 2\,\lvert E\rvert$, which is the identity. In the extreme case where $R$ relates every pair of distinct elements, $E = [V]^{2}$ and $d(x) = N-1$ for every $x$, so the identity reads $N(N-1) = 2\binom{N}{2}$ by [L3] and [L5]. [step 2.1, L1, L3, L5] ∎
+3.1 Combining with [L1], $\sum_{x \in V}d(x) = \lvert R\rvert = 2\,\lvert E\rvert$, which is the identity. In the extreme case where $R$ relates every pair of distinct elements, $E = [V]^{2}$ and the neighbours of $x$ are exactly $V\setminus\{x\}$, so $d(x)=N-1$ by [L3]; the identity therefore reads $N(N-1) = 2\binom{N}{2}$ by [L3] and [L5]. [step 2.1, L1, L3, L5, given] ∎
 
 ## Remarks
 

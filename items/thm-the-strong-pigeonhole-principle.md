@@ -4,6 +4,9 @@ kind: theorem
 title: "If $\\lvert A\\rvert > k\\lvert B\\rvert$ then every $f : A \\to B$ has a fibre with more than $k$ elements, and for nonempty $B$ some fibre has at least $\\lceil \\lvert A\\rvert / \\lvert B\\rvert\\rceil$ elements"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-the-ceiling-of-a-quotient-of-naturals, thm-sum-rule, def-sum-over-a-finite-index-set,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-finite-cardinality,
        thm-subset-of-a-finite-set, def-injection-surjection-bijection, def-nat-order,
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Floor and ceiling functions (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Floor_and_ceiling_functions"
+    - title: "Sylvestre, Pigeonhole Principle (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Foundations%3A_An_Introduction_to_Topics_in_Discrete_Mathematics_%28Sylvestre%29/20%3A_Counting/20.05%3A_Pigeonhole_Principle"
 pipeline_run: null
 ---
 

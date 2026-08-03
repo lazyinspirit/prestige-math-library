@@ -1,11 +1,116 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-Updated 2026-08-02, pre-compaction. Objective: run the published-page audit
+Updated 2026-08-03, Wave 1 A10 owner pause. Objective: run the published-page audit
 workflow (`AUDIT-WORKFLOW.md`, NORMATIVE) — provenance retro-tagging +
 citation-precision audit of the legacy untagged published corpus, waves
 bottom-up, batches = category × dependency level.
 
 ## State
+
+### Wave 1 A10 owner pause (2026-08-03)
+
+- The complete owner rundown is `research/audit/wave1-A10.md`. The owner
+  extended the B-page deletion decision to the whole library: all 36 remaining
+  authored B-page bodies were removed mechanically, preserving frontmatter and
+  item/example lists. All 73 B pages now meet the no-body contract; full-set
+  prose and renderer checks pass. The owner then approved the exact
+  `ex-russells-socks` A9 repair: it now points forward to `def-countable` for
+  finiteness and accurately says Jech--Sochor is recorded but not locally
+  proved. The owner also approved removal of `def-commutative-ring`'s invalid
+  same-page forward-reference declaration; its Remark link remains ordinary and
+  global `fwdcheck` now passes. The remaining A9 candidates were disposed from
+  the existing A9 report without a rerun: the scope-bearing items
+  `fs-zorn-provable-in-zf` and `lem-finite-choice` were fixed; eleven exact
+  count-language descriptions and the residual exact `ex-russells-socks`
+  wording were retained. The audit stamp rule is now aligned with the exact
+  targeted Step-8 mechanism: `wave1-targeted-judge-receipt.json` binds the sole
+  A8 fatal repair's unchanged item text to its exact DeepSeek/Terra paired
+  rejudge, and the targeted stamp dry run passed. Wave 1 remains at the A10
+  owner pause. Do not commit, push, publish, apply a stamp, rename, or reopen
+  A8 while this pause stands.
+- Four unique fatal defects (five judge-lane detections) were repaired:
+  `def-quaternions`, `lem-finite-choice`, `thm-zorn-implies-ac`, and
+  `fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term`. The
+  final repair has independent Sol certification plus current paired DeepSeek
+  and Terra passes. No confirmed fatal is unresolved in this cycle.
+- A9 is complete at `research/audit/wave1-A9.md`: 124 repaired item/page files,
+  zero positional errors, and 16 nonblocking heuristic warnings. The A10 report
+  records the exact gate, provenance, generated-seed, impact, and judge history.
+
+### Active Wave 1 A8 amendment (2026-08-03)
+
+- The owner amended A8 to use the **exact build Step-8 prompt and mechanism**:
+  Alpha adjudicates each rejection from disk, records its per-model/per-context
+  outcome, removes a stale pass only after a material rewrite, and re-runs both
+  judges **only on what changed**. A public-interface repair repeats impact
+  closure and current coverage; A8 never schedules a whole-wave closing sweep.
+- The interrupted Wave-1 whole-manifest sweep is frozen: no judge process
+  remains and its partial ledger rows are evidence only. The sole r8 fatal is
+  rejudged only as the changed item in both lanes; DeepSeek and Terra both
+  passed its current context. **A9 is complete:** `wave1-A9.md` records the
+  scope-denial re-grep over 124 repaired item/page files (zero positional
+  errors; five scope and eleven count-prose heuristic candidates). **A10 is
+  complete and the owner pause is active.**
+- Earlier Wave-1 A8 nonfatal repairs are retained as historical completed
+  edits; the amendment governs all remaining work and does not risk a
+  destructive rollback of independently certified text.
+
+### Active owner routing amendment (2026-08-02)
+
+- Wave 0 **A8 remains complete and committed** (`15e18a4`). Do not reopen it
+  or backfill its historical Sonnet verdicts: the owner directs the
+  orchestrator to proceed directly with **A9**.
+- For all future audit work, Audit-Beta and Alpha use **GPT 5.6 Sol** via the
+  Codex subscription at `xhigh` with a 1,000,000-token context window. Alpha
+  must first recover the previous Claude Code session's durable audit record
+  under `briefs/audit-alpha.md` before taking an audit action. Independent
+  readers and proof-refuters also use GPT 5.6 Sol.
+- Future judge sweeps use **DeepSeek V4 Pro + fresh GPT 5.6 Terra** under
+  `JUDGE_LINEUP=deepseek+terra`, through the unmodified build dual-judge
+  mechanism: identical frozen context and separate 16-call pools per model.
+  Sonnet rows remain historical evidence only.
+- **A9 complete:** `research/audit/wave0-A9.md` records the scope-denial
+  re-grep over all 279 wave-repaired item/page files: zero positional errors;
+  seven scope-wording and fourteen count-prose heuristic candidates join the
+  A10 queue. No A8 text, verdict, adjudication, stamp, or judge coverage was
+  altered. **A10 is now the sole owner-pause boundary.**
+
+### Wave 1 selected-scope start (2026-08-02)
+
+- Owner directed Wave 1 to begin **only** for abstract algebra,
+  combinatorics, and foundations. The frozen A0 manifests are
+  `wave1-abstract-algebra.pages.json` (4 pages / 59 items / 2 pairs),
+  `wave1-combinatorics.pages.json` (2 / 31 / 1), and
+  `wave1-foundations.pages.json` (2 / 32 / 1): 8 pages, 122 in-scope items,
+  4 pairs. Wave-1 linear algebra, number theory, real analysis, and topology
+  are deliberately unstarted and have no repository manifest.
+- A0 baseline: `research/audit/wave1-touches.json`, snapshot `baseline`,
+  recorded 2,684 item hashes. `research/audit/wave1-audit-manifest.json`
+  records 346 same-batch, 2 cross-batch, 601 published-backward, and 16
+  forward relationships; zero unresolved. Selected-manifest SHA-256 values:
+  abstract algebra `1c7fa683b660f9993434a78ad9abc94f7d2c761437259ee8cbdafd7112c08402`,
+  combinatorics `0ace325bd318be634affe8d04ea69168d75886f74b4b27a73f10aa563c857049`,
+  foundations `d35f88b9168b7bce660f263ab41dadf5abe71739c8588d46adbd3a941ca9a9d9`.
+- Current step: dispatch A1/A2 to three GPT 5.6 Sol Audit-Betas, one per
+  selected category. `briefs/audit-beta.md` now carries the owner-mandated Sol
+  model routing. No Wave-1 item/page text, provenance, proof contract,
+  verdict, or repair has been written yet.
+
+- A1/A2 subsequently completed for all 122 items: abstract algebra 59 items
+  (45 proof contracts), combinatorics 31 (25), foundations 32 (23). The three
+  ledger/findings/contract artifact sets are on disk. A3 approved all
+  provenance determinations and the verified non-deletion repairs: eleven
+  abstract-algebra citation/claim fixes; the combinatorics convention-Remark
+  correction plus its A-summary rewrite; and the foundations A-summary rewrite.
+  The three B-page body deletions (combinatorics and foundations, plus any
+  later legacy-page deletion) remain owner-only A10 queue entries. The
+  abstract-algebra rings legacy page-prose count warnings also remain for A9.
+  Three Sol Betas are carrying out only those A4 actions after the recorded
+  `pre-A4` touch snapshot. No commits or judge runs.
+- A4 is now stable across all selected batches; the shared `post-A4` snapshot
+  records 122 item changes. Next: aggregate gates/impact/genrisk, then Sol
+  Alpha A6 (mandatory recovery plus current-wave read). Do not run A8 or a
+  judge sweep before Alpha closes its work.
 
 - Workflow BUILT, tested, MERGED to `main` and pushed: commits `6e2cbb1`
   (tools/briefs/docs) and `e8c4cbe` (R3 scope exclusion). Branch
@@ -37,17 +142,10 @@ bottom-up, batches = category × dependency level.
   snapshots: baseline / pre-A4-dedekind / pre-A4 / post-A4 / post-A6 /
   post-A8.
   **EXACT NEXT ACTIONS, in order:**
-  1. CLOSING FULL-MANIFEST SWEEP (not just --items): A8 repairs invalidated
-     the pair-context hash of 184/276 items. Use
-     `JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs --manifests
-     research/audit/wave0-*.pages.json ...` — ledger skip makes current
-     verdicts free. Staged rejudge ids: def-cut-multiplication,
-     def-nat-finite-sum-and-product, def-real-dedekind,
-     ex-pascals-triangle-to-row-six, lem-rat-cut-embeds, lem-rat-embeds-dense.
-  2. `node tools/apply-judge-stamps.mjs --ledger ... --manifests ... --apply`
-     (owner-approved 2026-08-02). Dry-run first; it stamps ONLY items where
-     both lanes returned keep=true on the CURRENT hash.
-  3. A9 scope-denial re-grep, then A10 owner rundown (the wave's sole pause).
+  Superseded by the active owner routing amendment above: do not backfill the
+  completed wave-0 Sonnet coverage or reopen A8. Proceed directly with A9
+  scope-denial re-grep, then A10 owner rundown (the wave's sole pause). Future
+  sweeps use `JUDGE_LINEUP=deepseek+terra`.
   **A10 queue so far:** dedekind reading-order swap (D9); legacy page-count
   prose; about-the-book URL pattern (Stanley/Halmos/Rudin/Tao);
   bare-[A#] ℤ/ℚ prelude sweep; optional von Neumann order/membership lemma;
@@ -131,12 +229,15 @@ bottom-up, batches = category × dependency level.
   adjudicator; owner-only: deletions, id changes, reading-order changes.
   R2 judge every in-scope item every wave. R3 already-tagged items are NEVER
   audit scope (mechanical in `rounds.mjs --audit-batches`).
-- Models: all audit ROLES (Beta/Alpha/readers/refuters) Opus 5 high effort;
-  judges `JUDGE_LINEUP=deepseek+sonnet` (owner amendment 2026-08-02; key via env or
-  /root/Projects/prestige-intelligence/.env). Build lineup untouched.
+- Models: Audit-Beta and Alpha GPT 5.6 Sol through the Codex subscription at
+  `xhigh` / 1,000,000-token context; readers and refuters GPT 5.6 Sol;
+  future judges `JUDGE_LINEUP=deepseek+terra` through the build's independent
+  16+16 dual scheduler. Historical Sonnet records remain evidence only.
 - Repair stamp: `verification.verified` {scope: published-audit,
-  delegated_by: owner}. Gates + per-wave receipt commands:
-  `AUDIT-WORKFLOW.md` §8.
+  delegated_by: owner}. The initial A7 receipt is full-wave; after a material
+  A8 repair, use only `wave<k>-targeted-judge-receipt.json` plus
+  `apply-judge-stamps --audit-targeted-rejudges` for each rejudged target.
+  Gates + receipt commands: `AUDIT-WORKFLOW.md` §8.
 
 ## Gotchas already measured
 
@@ -144,7 +245,7 @@ bottom-up, batches = category × dependency level.
   omits it; do not re-add.
 - A non-Anthropic (codex) session may run ORCHESTRATOR duties only: gates,
   sweeps, ledgers, stamps, commits, the A10 report. Judge lanes are
-  subprocesses and work from any session. It must NOT act as an Opus audit
+  subprocesses and work from any session. It must NOT act as an assigned audit
   role (Beta/Alpha/reader/refuter); if the closing sweep raises a NEW
   rejection, queue it for the owner instead of adjudicating. See AGENTS.md.
 - `rounds.mjs --repo` defaults to the main checkout path; fine when running

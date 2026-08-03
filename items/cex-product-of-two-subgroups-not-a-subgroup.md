@@ -4,6 +4,9 @@ kind: counterexample
 title: "The product set $HK$ of two subgroups need not be a subgroup"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-lagrange, def-subgroup, def-symmetric-group, lem-symmetric-group-is-a-group, def-order-in-a-group]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
 pipeline_run: null
 ---
 
@@ -31,7 +36,7 @@ $HK=\{hk:h\in H,\ k\in K\}$ is a subgroup of $G$.
 
 [F1] $S_3$ is a group under rightmost-first composition, and $H,K$ are subgroups because each transposition squares to $e$ ([[def-symmetric-group]], [[lem-symmetric-group-is-a-group]], [[def-subgroup]]).
 
-[L1] The order of a subgroup of a finite group divides the order of the group ([[thm-lagrange]], [[def-order-in-a-group]]).
+[L1] If $H$ is a subgroup of a finite group $G$, then under the canonical embedding $\iota:\mathbb N\to\mathbb Z$ one has $\iota(|H|)\mid\iota(|G|)$ ([[thm-lagrange]], [[def-order-in-a-group]]).
 
 ## Counterexample
 
@@ -41,4 +46,4 @@ $HK=\{hk:h\in H,\ k\in K\}$ is a subgroup of $G$.
 
 1.2 Direct multiplication gives $HK=\{e,(12),(23),(12)(23)\}=\{e,(12),(23),(123)\}$, a set of four distinct elements. [F1]
 
-2.1 If $HK$ were a subgroup, [L1] would force $4\mid6$, which is false. Hence $HK$ is not a subgroup. [step 1.1, step 1.2, L1] ∎
+2.1 If $HK$ were a subgroup, [L1] would force $\iota(4)\mid\iota(6)$ in $\mathbb Z$, that is $4\mid6$, which is false. Hence $HK$ is not a subgroup. [step 1.1, step 1.2, L1] ∎

@@ -4,23 +4,16 @@ kind: definition
 title: "A finite list of reals, and its strictly increasing and strictly decreasing sublists"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordered-field, def-natural-numbers, def-nat-order, lem-nat-order-is-membership,
-       def-injection-surjection-bijection, def-finite-cardinality]
+       lem-nat-trichotomy, lem-pigeonhole, def-injection-surjection-bijection, def-finite-cardinality]
 justified_by: []
 aliases: []
 landmark: true
 verification:
   precheck: n/a
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -28,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Szekeres_theorem"
     - title: "Longest increasing subsequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Longest_increasing_subsequence"
+    - title: "Morris, Combinatorics: The Pigeonhole Principle (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_%28Morris%29/02%253A_Enumeration/10%253A_Other_Basic_Counting_Techniques/10.01%253A_The_Pigeonhole_Principle"
 pipeline_run: null
 ---
 
@@ -44,7 +39,8 @@ $i \ne j$ ([[def-injection-surjection-bijection]]).
 A **sublist of $a$ of length $L$**, for $L \in \mathbb{N}$, is a function
 $s : L \to N$ that is **strictly increasing on indices**, meaning $s(p) < s(q)$
 whenever $p < q < L$; its terms are $a_{s(0)}, \dots, a_{s(L-1)}$. Such an $s$ is
-injective, since $p \ne q$ gives $p<q$ or $q<p$ and hence $s(p) \ne s(q)$.
+injective, since natural-order trichotomy gives $p<q$ or $q<p$ when $p\ne q$,
+and hence $s(p)\ne s(q)$ ([[lem-nat-trichotomy]]).
 
 The sublist $s$ is
 
@@ -58,7 +54,8 @@ sublist of length $0$ or $1$ has no pair $p < q < L$ at all, so it is both
 strictly increasing and strictly decreasing, vacuously. A list of length $N$ has
 a sublist of length $1$ exactly when $N \ge 1$, namely $s(0) := i$ for any
 $i < N$; and it has no sublist of length $L$ with $L > N$, since $s$ would be an
-injection of $L$ into $N$.
+injection of $L$ into $N$, contrary to the finite pigeonhole principle
+([[lem-pigeonhole]], clause 2).
 
 **Every count here is a natural number.** The length of a list and the length of
 a sublist are naturals, and no cardinality of an infinite set is used; a list is

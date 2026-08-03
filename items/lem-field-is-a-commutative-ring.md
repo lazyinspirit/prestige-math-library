@@ -4,6 +4,9 @@ kind: lemma
 title: "Every field is a commutative ring with $1 \\ne 0$; it is an integral domain, and it is a commutative division ring"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-field, def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, def-division-ring, def-group, def-semigroup-and-monoid, def-invertible-element, lem-of-no-zero-divisors, lem-of-inverse-unique]
 justified_by: []
 aliases: []
@@ -12,16 +15,6 @@ short: "field ⇒ commutative ring"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-28
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
     - title: "Integral domain (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Integral_domain"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 
@@ -80,7 +75,7 @@ operations, and the ring's zero and identity are the field's $0$ and $1$.
 
 3.1 Claim 2: by step 2.1 the ring $F$ is commutative with $1 \ne 0$, and by step 1.4 it has no zero divisors, so it is an integral domain. [step 2.1, step 1.4, L2]
 
-3.2 Claim 3: $1 \ne 0$ by [A4]; and if $x \in F$ with $x \ne 0$, axiom (M) supplies $x^{-1} \in F$ with $x \cdot x^{-1} = 1$, and $x^{-1} \cdot x = 1$ as well, by the commutativity of multiplication that (M) asserts. So $x$ is a unit of the ring $F$, and $F$ is a division ring; it is commutative by step 2.1. [step 2.1, A4, L3]
+3.2 Claim 3: $1 \ne 0$ by [A4]; and if $x \in F$ with $x \ne 0$, axiom (M) supplies $x^{-1} \in F$ with $x \cdot x^{-1} = 1$, and $x^{-1} \cdot x = 1$ as well, by the commutativity of multiplication that (M) asserts. So $x$ is a unit of the ring $F$, and $F$ is a division ring; it is commutative by step 2.1. [step 2.1, A1, A4, L3]
 
 4.1 Claims 1, 2 and 3 are established in steps 2.1, 3.1 and 3.2. [step 2.1, step 3.1, step 3.2] ∎
 

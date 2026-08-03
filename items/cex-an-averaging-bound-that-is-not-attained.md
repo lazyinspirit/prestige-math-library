@@ -4,6 +4,11 @@ kind: counterexample
 title: "A relation whose row fibres all differ from the average size, so the averaging principle gives a bound that no fibre meets exactly"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [cor-the-averaging-principle, thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
        def-ordered-field, def-field, lem-nat-finite-sum-laws-and-the-canonical-embedding,
@@ -15,16 +20,6 @@ proof_strategy: constructive
 cx_machine_verified: false
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Double_counting_(proof_technique)"
     - title: "Pigeonhole principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+    - title: "Mathematics for Computer Science (MIT OpenCourseWare)"
+      url: "https://live.ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
 pipeline_run: null
 ---
 
@@ -64,7 +61,7 @@ fibres have sizes $1$ and $2$.
 
 [L3] Double counting: $\sum_{x \in X}\lvert R_x\rvert = \lvert R\rvert = \sum_{y \in Y}\lvert R^{y}\rvert$ ([[thm-double-counting]], [[def-sum-over-a-finite-index-set]]).
 
-[L4] The averaging principle ([[cor-the-averaging-principle]]).
+[L4] If $R\subseteq X\times Y$ is a finite incidence relation with $X\ne\varnothing$ and $\mu=\iota(|R|)/\iota(|X|)$, then some $x_+\in X$ satisfies $\iota(|R_{x_+}|)\ge\mu$ and some $x_-\in X$ satisfies $\iota(|R_{x_-}|)\le\mu$ ([[cor-the-averaging-principle]]).
 
 [L5] $\mathbb{R}$ is an ordered field, so $\mu$ is defined once $\iota(\lvert X\rvert) \ne 0$, and $\iota$ is strictly increasing with $\iota(0) = 0$, $\iota(1) = 1$, $\iota(2) = 1+1$, $\iota(3) = 1+1+1$ ([[def-ordered-field]], [[def-field]], [[lem-nat-finite-sum-laws-and-the-canonical-embedding]], clauses 0 and 7).
 

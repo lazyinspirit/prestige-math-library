@@ -4,7 +4,10 @@ kind: counterexample
 title: "$2\\mathbb{Z}$ is closed under addition, negation and multiplication and is not a subring of $\\mathbb{Z}$, because it does not contain $1$"
 status: published
 origin: session
-deps: [def-subring, lem-subring-criterion, def-ring, def-subgroup, def-divides-in-z, lem-divisibility-basic, lem-units-of-z, ex-integers-as-a-commutative-ring, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order, lem-nat-embeds-int, def-invertible-element]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-subring, lem-subring-criterion, def-ring, def-subgroup, def-divides-in-z, lem-divisibility-basic, lem-units-of-z, lem-int-cancellation, ex-integers-as-a-commutative-ring, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order, lem-nat-embeds-int, def-invertible-element]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,6 @@ short: "$2\\mathbb{Z}$ is not a subring"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Subring"
     - title: "Rng (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rng_(algebra)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 
@@ -54,7 +54,7 @@ $\mathbb{Z}$.
 
 [L4] $u \mid 1$ holds exactly for $u = 1$ and $u = -1$; equivalently $\mathbb{Z}^{\times} = \{1,-1\}$ ([[lem-units-of-z]], [[def-invertible-element]]).
 
-[L5] The order on $\mathbb{Z}$ is total and compatible with addition, and $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with $\iota(0) = 0$, $\iota(1) = 1$ ([[thm-int-ordered-ring]], [[def-int-order]], [[lem-nat-embeds-int]], [[def-integers]]).
+[L5] The order on $\mathbb{Z}$ is total and compatible with addition, and $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with $\iota(0) = 0$, $\iota(1) = 1$ ([[thm-int-ordered-ring]], [[def-int-order]], [[lem-nat-embeds-int]], [[def-integers]], [[def-int-operations]]).
 
 [L6] A subring must satisfy (T1) $1_R \in S$, (T2) closure under addition, (T3) closure under additive inverses and (T4) closure under multiplication ([[def-subring]]); equivalently $1_R \in S$ together with $a - b \in S$ and $ab \in S$ ([[lem-subring-criterion]]).
 
@@ -80,20 +80,8 @@ $\mathbb{Z}$.
 
 ## Remarks
 
-- **What $2\mathbb{Z}$ is, since it is not a subring.** It is a subgroup of
-  $(\mathbb{Z},+,0)$ closed under multiplication, and with the restricted
-  operations it satisfies every clause of [[def-ring]] except the existence of a
-  multiplicative identity. Such a structure is called a **non-unital ring** in
-  this library, and it is not called a ring, by the convention fixed in
-  [[def-ring]].
+- **What $2\mathbb{Z}$ is, since it is not a subring.** It is a subgroup of $(\mathbb{Z},+,0)$ closed under multiplication, and with the restricted operations it satisfies every clause of [[def-ring]] except the existence of a multiplicative identity. Such a structure is called a **non-unital ring** in this library, and it is not called a ring, by the convention fixed in [[def-ring]].
 
-- **This is why the subring criterion tests $1_R \in S$ separately.**
-  [[lem-subring-criterion]] compresses the three additive and multiplicative
-  closure conditions into "$a - b \in S$ and $ab \in S$" but leaves
-  $1_R \in S$ standing on its own, and the present witness is the reason: no
-  amount of closure implies it.
+- **This is why the subring criterion tests $1_R \in S$ separately.** [[lem-subring-criterion]] compresses the three additive and multiplicative closure conditions into "$a - b \in S$ and $ab \in S$" but leaves $1_R \in S$ standing on its own, and the present witness is the reason: no amount of closure implies it.
 
-- **$2\mathbb{Z}$ has no identity at all**, not merely a different one. If
-  $e \in 2\mathbb{Z}$ satisfied $ex = x$ for every $x \in 2\mathbb{Z}$, then
-  taking $x = 2$ gives $2e = 2 = 2 \cdot 1$, so $e = 1$ by multiplicative cancellation in $\mathbb{Z}$ ([[lem-int-cancellation]]),
-  which is not in $2\mathbb{Z}$ by the argument above.
+- **$2\mathbb{Z}$ has no identity at all**, not merely a different one. If $e \in 2\mathbb{Z}$ satisfied $ex = x$ for every $x \in 2\mathbb{Z}$, then taking $x = 2$ gives $2e = 2 = 2 \cdot 1$, so $e = 1$ by multiplicative cancellation in $\mathbb{Z}$ ([[lem-int-cancellation]]), which is not in $2\mathbb{Z}$ by the argument above.

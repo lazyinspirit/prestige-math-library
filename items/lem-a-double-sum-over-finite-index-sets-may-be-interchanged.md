@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\sum_{i \\in S}\\sum_{j \\in T} a_{ij} = \\sum_{(i,j) \\in S \\times T} a_{ij} = \\sum_{j \\in T}\\sum_{i \\in S} a_{ij}$ for finite index sets $S$ and $T$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sum-over-a-finite-index-set, thm-sum-rule, thm-product-rule, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-finite-sum, def-nat-finite-sum-and-product]
 justified_by: []
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Double_counting_(proof_technique)"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 1"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Mathematics for Computer Science (MIT OpenCourseWare)"
+      url: "https://live.ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
 pipeline_run: null
 ---
 

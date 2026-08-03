@@ -4,7 +4,10 @@ kind: theorem
 title: "Fermat's little theorem: for prime $p$, $p\\nmid a$ implies $a^{p-1}\\equiv1\\pmod p$, and always $a^p\\equiv a\\pmod p$"
 status: published
 origin: session
-deps: [thm-eulers-theorem, cor-totient-at-one-and-at-a-prime, def-prime, lem-prime-not-dividing-is-coprime, def-divides-in-z, def-congruence-modulo-an-integer, lem-congruence-respects-integer-arithmetic, def-group-power, lem-group-power-laws]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [thm-eulers-theorem, cor-totient-at-one-and-at-a-prime, def-prime, lem-prime-not-dividing-is-coprime, lem-gcd-basic-values, def-divides-in-z, def-congruence-modulo-an-integer, lem-congruence-respects-integer-arithmetic, def-group-power, lem-group-power-laws]
 justified_by: []
 aliases: []
 landmark: true
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.3: Fermat's and Euler's Theorems"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.03%3A_Fermat%27s_and_Euler%27s_Theorems"
 pipeline_run: null
 ---
 
@@ -34,7 +39,7 @@ $$a^p\equiv a\pmod p.$$
 
 **Given:** A prime integer $p$ and an integer $a$.
 
-[F1] A prime satisfies $p>1$, and $p\nmid a$ implies $\gcd(a,p)=1$ ([[def-prime]], [[lem-prime-not-dividing-is-coprime]]).
+[F1] A prime satisfies $p>1$, and $p\nmid a$ implies $\gcd(p,a)=1$, hence $\gcd(a,p)=1$ by symmetry of the gcd ([[def-prime]], [[lem-prime-not-dividing-is-coprime]], [[lem-gcd-basic-values]]).
 
 [L1] Euler's theorem gives $a^{\varphi(p)}\equiv1\pmod p$ when $\gcd(a,p)=1$, and $\varphi(p)=p-1$ for prime $p$ ([[thm-eulers-theorem]], [[cor-totient-at-one-and-at-a-prime]]).
 

@@ -4,6 +4,9 @@ kind: example
 title: "A product of two rings with $1 \\ne 0$ always has zero divisors: $(1,0)(0,1) = (0,0)$ in $\\mathbb{Z} \\times \\mathbb{Z}$, so a product of integral domains is never an integral domain"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-product-ring, def-zero-divisor-and-integral-domain, def-ring, def-commutative-ring, lem-ring-elementary-consequences, ex-integers-as-a-commutative-ring, ex-integers-are-an-integral-domain-not-a-field, thm-int-comm-ring, def-integers, def-int-operations]
 justified_by: []
 aliases: []
@@ -12,10 +15,6 @@ short: "$R \\times S$ has zero divisors"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   audited: 2026-07-28
 sources:
   scraped: []
@@ -69,19 +68,8 @@ and let $R \times S$ be the product ring ([[def-product-ring]]). Then:
 
 ## Remarks
 
-- **This is the cheapest source of zero divisors available.** No arithmetic
-  beyond $x \cdot 0 = 0$ is used, and the two witnesses are written down rather
-  than found. The other standard source is a ring of functions on a set with at
-  least two points ([[def-ring-of-functions]]), and the two constructions are the
-  same phenomenon: a point where one factor vanishes and the other does not.
+- **This is the cheapest source of zero divisors available.** No arithmetic beyond $x \cdot 0 = 0$ is used, and the two witnesses are written down rather than found. The other standard source is a ring of functions from a set with at least two points to a coefficient ring with $1\ne0$ ([[def-ring-of-functions]]), and the two constructions are the same phenomenon: a point where one factor vanishes and the other does not.
 
-- **The hypothesis is on both factors.** If $S$ is the one-element ring then
-  $(0_R,1_S) = (0_R,0_S)$ is the zero of $R \times S$ and the argument collapses;
-  indeed $R \times S$ is then essentially $R$ again, and may well be a domain.
-  That is why both $1_R \ne 0_R$ and $1_S \ne 0_S$ are assumed.
+- **The hypothesis is on both factors.** If $S$ is the one-element ring then $(0_R,1_S) = (0_R,0_S)$ is the zero of $R \times S$ and the argument collapses; indeed $R \times S$ is then essentially $R$ again, and may well be a domain. That is why both $1_R \ne 0_R$ and $1_S \ne 0_S$ are assumed.
 
-- **The failure is not about commutativity.** $R$ and $S$ need not be
-  commutative for claim 1; commutativity enters only in claim 2, because
-  [[def-zero-divisor-and-integral-domain]] requires a domain to be commutative
-  and the product of two commutative rings is commutative
-  ([[def-product-ring]]).
+- **The failure is not about commutativity.** $R$ and $S$ need not be commutative for claim 1; commutativity enters only in claim 2, because [[def-zero-divisor-and-integral-domain]] requires a domain to be commutative and the product of two commutative rings is commutative ([[def-product-ring]]).

@@ -4,6 +4,9 @@ kind: lemma
 title: "Every ordered field is an ordered ring, and its order is the one its positive cone induces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, lem-field-is-a-commutative-ring, def-field, lem-of-square-positive]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordered_field"
     - title: "Ordered ring (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_ring"
+    - title: "Field (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
 pipeline_run: null
 ---
 

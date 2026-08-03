@@ -4,7 +4,10 @@ kind: example
 title: "$\\mathbb{Z}$ sits inside $\\mathbb{Q}$ as a subring that is not a subfield, so the inverse-closure clause of the subfield definition is doing work"
 status: published
 origin: session
-deps: [def-subring, lem-subring-criterion, def-subfield, def-ring, def-commutative-ring, def-field, def-invertible-element, lem-ring-units-form-a-group, lem-units-of-z, lem-int-embeds-rat, ex-rationals-and-reals-as-fields, ex-integers-as-a-commutative-ring, thm-rat-field, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-integers, lem-nat-embeds-int, lem-field-is-a-commutative-ring]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-subring, lem-subring-criterion, def-subfield, def-ring, def-commutative-ring, def-field, def-invertible-element, lem-ring-units-form-a-group, lem-units-of-z, lem-int-embeds-rat, ex-rationals-and-reals-as-fields, ex-integers-as-a-commutative-ring, thm-rat-field, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, def-integers, def-int-operations, lem-nat-embeds-int, lem-field-is-a-commutative-ring, lem-group-cancellation]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,6 @@ short: "ℤ inside ℚ: subring, not subfield"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Subring"
     - title: "Field (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)#Subfields"
+    - title: "Field (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
+    - title: "Integral domain (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integral_domain"
 pipeline_run: null
 ---
 
@@ -53,7 +55,7 @@ $\mathbb{Z}$. Then:
 
 [L3] $\mathbb{Z}$ is a commutative ring; its order is total and compatible with addition ([[ex-integers-as-a-commutative-ring]], [[thm-int-comm-ring]], [[thm-int-ordered-ring]], [[def-int-order]]).
 
-[L4] Cancellation in the additive group of $\mathbb{Q}$, and: in a field, $x \cdot x = x$ with $x \ne 0$ forces $x = 1$, since multiplying by $x^{-1}$ gives $x = 1$ ([[def-field]], [[lem-field-is-a-commutative-ring]]).
+[L4] Cancellation in the additive group of $\mathbb{Q}$; and, in a field, $x \cdot x = x$ with $x \ne 0$ forces $x = 1$, since multiplying by $x^{-1}$ gives $x = 1$ ([[def-field]], [[lem-field-is-a-commutative-ring]], [[lem-group-cancellation]]).
 
 [L5] Subring criterion: $S \subseteq R$ is a subring exactly when $1_R \in S$ and $u - v \in S$ and $uv \in S$ for all $u, v \in S$ ([[lem-subring-criterion]], [[def-subring]]).
 
@@ -61,7 +63,7 @@ $\mathbb{Z}$. Then:
 
 [L7] The group of units of $\mathbb{Z}$ is $\{1,-1\}$ ([[lem-units-of-z]], [[lem-ring-units-form-a-group]], [[def-invertible-element]]).
 
-[L8] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with $\iota(0) = 0$, $\iota(1) = 1$ ([[lem-nat-embeds-int]]).
+[L8] $\iota : \mathbb{N} \to \mathbb{Z}$ is injective and order preserving with $\iota(0) = 0$, $\iota(1) = 1$ ([[lem-nat-embeds-int]], [[def-int-operations]]).
 
 ## Verification
 
@@ -75,24 +77,14 @@ $\mathbb{Z}$. Then:
 
 2.2 $j(2) \ne 0_{\mathbb{Q}}$: by step 1.2, $2 \ne 0_{\mathbb{Z}}$, and $j$ is injective with $j(0_{\mathbb{Z}}) = 0_{\mathbb{Q}}$ by step 1.1. So $j(2)$ has an inverse $j(2)^{-1}$ in the field $\mathbb{Q}$. [step 1.1, step 1.2, L1, L2]
 
-3.1 $j(2)^{-1} \notin K$. Suppose it were, say $j(2)^{-1} = j(m)$ for some $m \in \mathbb{Z}$. Then $j(2m) = j(2)j(m) = 1_{\mathbb{Q}} = j(1_{\mathbb{Z}})$, so $2m = 1_{\mathbb{Z}}$ by injectivity of $j$; that makes $2$ a unit of $\mathbb{Z}$, contradicting step 1.2. [step 1.1, step 1.2, step 2.2, L1, L7]
+3.1 $j(2)^{-1} \notin K$. Suppose it were, say $j(2)^{-1} = j(m)$ for some $m \in \mathbb{Z}$. Then $j(2m) = j(2)j(m) = 1_{\mathbb{Q}} = j(1_{\mathbb{Z}})$, so $2m = 1_{\mathbb{Z}}$ by injectivity of $j$; commutativity also gives $m2=1$, so $m$ is a two-sided inverse and $2$ is a unit of $\mathbb{Z}$, contradicting step 1.2. [step 1.1, step 1.2, step 2.2, L1, L3, L7]
 
 4.1 Claims 2 and 3: by claim 1 the set $K$ is a subring of $\mathbb{Q}$, and by steps 2.2 and 3.1 it contains a nonzero element whose inverse in $\mathbb{Q}$ is not in $K$; so (K2) of [L6] fails and $K$ is not a subfield. Since $K$ satisfies (K1), the clause (K2) is not implied by (K1). [step 2.1, step 2.2, step 3.1, L6] ∎
 
 ## Remarks
 
-- **The example is about an image, not a subset.** [[lem-int-embeds-rat]] is what
-  makes "$\mathbb{Z}$ inside $\mathbb{Q}$" meaningful, since an integer and a
-  rational are different kinds of object in this library. Every claim above is
-  about $K = j(\mathbb{Z})$, and $j$ being injective and operation-preserving is
-  what lets facts about $\mathbb{Z}$, in particular
-  [[lem-units-of-z]], be used about $K$.
+- **The example is about an image, not a subset.** [[lem-int-embeds-rat]] is what makes "$\mathbb{Z}$ inside $\mathbb{Q}$" meaningful, since an integer and a rational are different kinds of object in this library. Every claim above is about $K = j(\mathbb{Z})$, and $j$ being injective and operation-preserving is what lets facts about $\mathbb{Z}$, in particular [[lem-units-of-z]], be used about $K$.
 
-- **A subring of a field is automatically an integral domain**, since it is a
-  commutative ring with $1 \ne 0$ inheriting the absence of zero divisors from
-  the field. So $K$ is a domain and not a field, which is the same phenomenon as
-  [[ex-integers-are-an-integral-domain-not-a-field]] seen inside $\mathbb{Q}$.
+- **A subring of a field is automatically an integral domain**, since it is a commutative ring with $1 \ne 0$ inheriting the absence of zero divisors from the field. So $K$ is a domain and not a field, which is the same phenomenon as [[ex-integers-are-an-integral-domain-not-a-field]] seen inside $\mathbb{Q}$.
 
-- **One witness is enough.** [[def-subfield]] asks that *every* nonzero element
-  of $K$ have its inverse in $K$, so a single element failing it settles the
-  matter; the example produces $j(2)$ and nothing more.
+- **One witness is enough.** [[def-subfield]] asks that *every* nonzero element of $K$ have its inverse in $K$, so a single element failing it settles the matter; the example produces $j(2)$ and nothing more.

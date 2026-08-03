@@ -25,7 +25,7 @@ starting or resuming a level.
 **Published-page audit, step A0 to A10: `AUDIT-WORKFLOW.md`** — the canonical
 retro-audit of already-published pages (provenance retro-tagging, citation-
 precision audit, generated-statement blast radius, the wave/batch model, the
-`deepseek+sonnet` judge lineup). Read it before starting or resuming an audit
+`deepseek+terra` judge lineup). Read it before starting or resuming an audit
 wave.
 
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
@@ -245,15 +245,27 @@ banner; the public sees only `published`.
   failed to surface; a recoverable restatement of established mathematics is
   `ai-altered`, and an undecidable case escalates to Alpha), uncertainty never
   falls toward a sourced label, and the sole URL waiver is the Alpha-concurred
-  `established-knowledge` evidence class; (2) every audit role (Audit-Beta,
-  Alpha, readers, refuters) is **Opus 5 (`claude-opus-5`) at high reasoning
-  effort** through the Claude runtime, and the paired judges are DeepSeek V4
-  Pro plus a fresh headless Sonnet 5 lane selected by env
-  `JUDGE_LINEUP=deepseek+sonnet` (the build's `deepseek+terra` default is
-  untouched); (3) the published-item repair delegation extends to
+  `established-knowledge` evidence class; (2) Audit-Beta and Alpha use **GPT
+  5.6 Sol** through the Codex subscription at `xhigh` with a 1,000,000-token
+  context window; independent readers and proof-refuters also use **GPT 5.6
+  Sol**;
+  Alpha must first recover the durable prior-session audit record; paired
+  judges are DeepSeek V4 Pro plus fresh GPT 5.6 Terra selected by env
+  `JUDGE_LINEUP=deepseek+terra`, with the build's same independent 16+16
+  concurrent pools; (3) the published-item repair delegation extends to
   citation-precision repairs, provenance retags, and debatable restatements
   with Alpha as final adjudicator — deletions, id changes, and reading-order
-  changes remain owner-only. All build safeguards carry over: touch
+  changes remain owner-only. At audit A8, exactly as at build Step 8, Alpha
+  adjudicates the rejection from disk, deletes a stale pass after a material
+  rewrite, and re-runs both judges **only on what changed**. A
+  public-interface repair also repeats impact closure and refreshes a
+  **targeted rejudge receipt for the changed item only**; it does not trigger a
+  whole-wave Step-8 sweep or a full-current-context coverage run. The receipt
+  binds the target id, its exact paired rejudge context, and an item SHA-256
+  computed with only `verification.judge` excluded, so the stamp itself and a
+  later unrelated companion-page edit cannot stale it. `apply-judge-stamps`
+  validates that receipt before writing the target's audit judge stamp. All
+  build safeguards carry over: touch
   snapshots, impact closure, no self-certification, stale-verdict deletion,
   targeted rejudge, and the twice-touched escalation. The repair stamp is
   `verification.verified` with `scope: published-audit` and

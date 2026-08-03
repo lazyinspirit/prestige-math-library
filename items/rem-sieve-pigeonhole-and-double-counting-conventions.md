@@ -4,6 +4,9 @@ kind: remark
 title: "The conventions this page fixes: the empty intersection, where the counts live, the first index of every sum, and what the declared prerequisites do not supply"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-a-sieve-family-and-its-intersections, thm-inclusion-exclusion,
        thm-the-strong-pigeonhole-principle, def-the-ceiling-of-a-quotient-of-naturals,
        thm-double-counting, def-the-derangement-number, thm-the-number-of-surjections,
@@ -15,16 +18,6 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -51,16 +44,18 @@ with the family $(A_i)_{i \in I}$ and stipulates $A_\varnothing = X$. This is a
 stipulation and not a theorem: for nonempty $J$ the intersection is determined by
 the family, and for $J = \varnothing$ the description "belongs to every $A_i$
 with $i \in J$" is satisfied by everything, so it determines nothing without an
-ambient set to be relative to. The clause is used at exactly one place, the term
-of the complementary form of [[thm-inclusion-exclusion]] at $J = \varnothing$.
+ambient set to be relative to. The clause supplies the $J = \varnothing$ term in
+the complementary form of [[thm-inclusion-exclusion]] and in later sieves
+whenever an intersection must also be identified at the empty subfamily.
 
 **Counts live in $\mathbb{N}$; every alternating identity lives in $\mathbb{R}$.**
 A cardinality is a natural number, a natural number here is a set, and a set is
-not an element of $\mathbb{R}$. Every identity on this page that carries a minus
-sign, and every one that divides, is therefore stated in $\mathbb{R}$ with the
-counts carried across by the canonical natural $\iota$
+not an element of $\mathbb{R}$. Every identity on this page that uses a negative
+summand, and every one that divides counts, is therefore stated in $\mathbb{R}$
+with the counts carried across by the canonical natural $\iota$
 ([[def-canonical-natural]]), and read back through the injectivity of $\iota$
-where the conclusion is about natural numbers.
+where the conclusion is about natural numbers. Truncated natural differences
+such as $n-1$ and $n-2$ remain in $\mathbb N$ and are not negative summands.
 
 **Every index range starts at $0$, and the lower-bound hypotheses on this page
 exist only because of it.**
@@ -96,8 +91,9 @@ corresponding clauses about a sum over an initial segment together with the
 enumeration that defines the sum over an index set.
 
 **A relation, not a matrix.** [[def-a-finite-incidence-relation-and-its-fibres]]
-states double counting for a subset of a product of two finite sets, with its
-two fibre families. [[thm-double-counting]] is that statement and nothing more.
+sets up a subset of a product of two finite sets, its two fibre families and
+their slice partitions. [[thm-double-counting]] states the resulting equality
+of the two fibre sums with the size of the relation, and nothing more.
 
 **Fibres of a function.** [[thm-the-strong-pigeonhole-principle]] is stated about
 the fibres $f^{-1}[\{b\}]$ of a function between finite sets. Its two clauses are

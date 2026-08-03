@@ -4,26 +4,23 @@ kind: example
 title: "The chains of a poset, ordered by inclusion, form a chain-complete poset"
 status: published
 origin: session
-deps: [def-chain-complete-poset, thm-zorn, def-axiom-of-choice, def-chain, def-upper-bound, def-partial-order, ex-powerset-is-chain-complete]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-chain-complete-poset, thm-zorn, def-axiom-of-choice, def-chain, def-upper-bound, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
+    - title: "Bourbaki–Witt theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
     - title: "Complete partial order (Wikipedia)"
@@ -54,7 +51,7 @@ the engine of Zorn's lemma, running on its own.
 
 [L1] A subset $C \subseteq P$ is a chain when any two of its elements are comparable, and the empty set is a chain ([[def-chain]]).
 
-[L2] Inclusion partially orders $\mathcal{P}(P)$, and every subset $\mathcal{D} \subseteq \mathcal{P}(P)$ has least upper bound $\bigcup \mathcal{D}$ there ([[ex-powerset-is-chain-complete]]).
+[L2] Inclusion partially orders $\mathcal P(P)$. For any $\mathcal D\subseteq\mathcal P(P)$, every $C\in\mathcal D$ satisfies $C\subseteq\bigcup\mathcal D$, while any $V$ containing every $C\in\mathcal D$ also contains every element of $\bigcup\mathcal D$; hence $\bigcup\mathcal D$ is the least upper bound of $\mathcal D$ ([[def-partial-order]], [[def-upper-bound]]).
 
 [L3] $u$ is an upper bound of $S$ when $s \le u$ for every $s \in S$, and a least upper bound when in addition $u \le v$ for every upper bound $v$ of $S$ ([[def-upper-bound]]).
 

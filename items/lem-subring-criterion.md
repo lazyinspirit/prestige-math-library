@@ -4,6 +4,9 @@ kind: lemma
 title: "Subring criterion: $S \\subseteq R$ is a subring if and only if $1_R \\in S$ and $a - b \\in S$ and $ab \\in S$ for all $a, b \\in S$; and an intersection of subrings is a subring"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subring, def-ring, def-subgroup, lem-subgroup-criterion, lem-intersection-of-subgroups, def-group]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Subring"
     - title: "Subgroup test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Subgroup_test"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

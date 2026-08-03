@@ -4,6 +4,9 @@ kind: lemma
 title: "A ring homomorphism between fields is a field homomorphism in the published sense, and every such map is injective"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring-homomorphism, def-field-homomorphism, lem-field-is-a-commutative-ring, lem-ring-homomorphism-basic-properties, lem-ring-elementary-consequences, def-field, def-injection-surjection-bijection, def-ring]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ring_homomorphism"
     - title: "Field (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.5: Ring Homomorphisms and Ideals"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.05%3A_Ring_Homomorphisms_and_Ideals"
 pipeline_run: null
 ---
 

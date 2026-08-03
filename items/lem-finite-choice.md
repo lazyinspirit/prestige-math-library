@@ -1,27 +1,20 @@
 ---
 id: lem-finite-choice
 kind: lemma
-title: "Every finite family of nonempty sets has a choice function"
+title: "Every natural-number-indexed list of nonempty sets has a choice function on its family of values"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-choice-function, thm-induction-principle, def-natural-numbers, def-nat-addition, def-axiom-of-choice]
 justified_by: []
-forward_refs: [ex-finite-choice-by-induction, ex-russells-socks]
+forward_refs: [def-countable, ex-finite-choice-by-induction, ex-russells-socks]
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -49,12 +42,9 @@ says precisely that the members of $\mathcal{F}$ are listed as
 $F(0), \dots, F(n-1)$. The listing need not be injective, and $\mathcal{F}$ is the
 set of values, so repetitions are harmless and are not counted.
 
-The usual reading, that *every finite family of nonempty sets has a choice
-function*, is this statement together with the identification of the finite
-families with those admitting such a listing. That identification is deliberately
-**not** made here and is nowhere used below: no definition of finiteness is
-available at this point in the library, and the argument given does not need
-one.
+The displayed statement and its proof use only a natural-number-indexed
+function. They do not identify an arbitrary finite family with a particular
+enumeration.
 
 ## Facts & Assumptions
 
@@ -66,7 +56,7 @@ one.
 
 [L2] A choice function for a family $\mathcal{F}$ is a function $g$ with domain $\mathcal{F}$ such that $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 
-[L3] $0 = \emptyset$ and $\sigma(n) = n \cup \{n\}$, so $n \subseteq \sigma(n)$: a function with domain $\sigma(n)$ restricts to a function with domain $n$, and its values are $F[\sigma(n)] = F[n] \cup \{F(n)\}$ ([[def-natural-numbers]]).
+[L3] $0=\emptyset$ and $\sigma(n)=n\cup\{n\}$, so $n\subseteq\sigma(n)$ ([[def-natural-numbers]]). Thus a function $F$ with domain $\sigma(n)$ restricts to a function with domain $n$; moreover, directly from the definition of image, $y\in F[\sigma(n)]$ iff $y=F(i)$ for some $i\in n$ or $y=F(n)$, so $F[\sigma(n)]=F[n]\cup\{F(n)\}$.
 
 ## Proof
 
@@ -92,7 +82,10 @@ one.
 
 ## Remarks
 
-- **Where the Axiom of Choice would be needed, and why it is not needed here.** Step 2.2 picks one element out of one nonempty set. That is a single existential instantiation, licensed by first-order logic alone. The induction performs one such instantiation per stage, and the stages are indexed by a natural number, so the process terminates. What ZF cannot do is perform *infinitely many* instantiations at once, and that is exactly the gap [[def-axiom-of-choice]] fills.
+- **Later finiteness terminology.** A finite set is defined later as one
+  equinumerous with a natural number ([[def-countable]]). That terminology is
+  not used in the proof above, which keeps its exact indexed-family scope.
+- **Where the Axiom of Choice would be needed, and why it is not needed here.** Step 2.2 picks one element out of one nonempty set. That is a single existential instantiation, licensed by first-order logic alone. The induction performs one such instantiation per stage, and the stages are indexed by a natural number, so the process terminates. ZF cannot in general turn an arbitrary infinite family of nonempty sets into a simultaneous choice function; that is the gap [[def-axiom-of-choice]] fills. An infinite family with a distinguished element in each member may still have an explicit choice function in ZF, as [[ex-russells-socks]] shows.
 - **Why the family is presented as an indexed one.** Stated over "a family of exactly $n$ sets", the successor step would have to assert that deleting one member of a family of $n+1$ sets leaves exactly $n$, which is a claim about cardinality and needs a theory of finiteness this page does not have. Indexed by $n$, the same step is the restriction $F \restriction n$ of a function, which is immediate from $n \subseteq \sigma(n)$ and costs nothing. Nothing else in the argument changes.
 - The listing may repeat, and the argument is arranged so that repetition needs no separate treatment: $g$ is built by overwriting rather than by adjoining, so it is a function whether or not $S$ already occurs among $F(0), \dots, F(n-1)$. In particular $\mathcal{F}$ may have strictly fewer than $n$ members.
 - The lemma is not a special case of the Axiom of Choice that happens to be provable; it is the precise boundary of what is free. [[ex-russells-socks]] makes the boundary concrete, and [[ex-finite-choice-by-induction]] works this induction out on a small family.

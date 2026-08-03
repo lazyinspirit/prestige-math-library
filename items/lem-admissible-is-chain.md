@@ -4,6 +4,9 @@ kind: lemma
 title: "The smallest admissible set is a chain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-all-extremal, lem-extremal-comparability, def-chain, def-chain-complete-poset, def-partial-order]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Mathlib, Order.BourbakiWitt"
+      url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/BourbakiWitt.html"
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
     - title: "Bourbaki–Witt theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
 pipeline_run: null

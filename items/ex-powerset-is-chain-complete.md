@@ -4,6 +4,9 @@ kind: example
 title: "The power set is chain-complete, with union as supremum"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-chain-complete-poset, def-chain, def-upper-bound, def-partial-order]
 justified_by: []
 aliases: []
@@ -11,16 +14,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -51,6 +44,8 @@ Bourbaki–Witt argument consumes.
 
 **Given:** A set $X$ and its power set $\mathcal{P}(X) = \{A : A \subseteq X\}$, ordered by inclusion.
 
+[F1] **Axiom of Extensionality:** sets with exactly the same elements are equal.
+
 [L1] A partial order is a reflexive, antisymmetric and transitive relation ([[def-partial-order]]).
 
 [L2] $u$ is an upper bound of $S$ when $s \le u$ for every $s \in S$, and a least upper bound when in addition $u \le v$ for every upper bound $v$ of $S$ ([[def-upper-bound]]).
@@ -63,7 +58,7 @@ Bourbaki–Witt argument consumes.
 
 **Proof technique:** direct.
 
-1.1 Inclusion partially orders $\mathcal{P}(X)$: $A \subseteq A$; if $A \subseteq B$ and $B \subseteq A$ then $A$ and $B$ have the same elements, so $A = B$ by extensionality; and $A \subseteq B \subseteq C$ gives $A \subseteq C$. [given, L1]
+1.1 Inclusion partially orders $\mathcal{P}(X)$: $A \subseteq A$; if $A \subseteq B$ and $B \subseteq A$ then $A$ and $B$ have the same elements, so $A = B$ by extensionality; and $A \subseteq B \subseteq C$ gives $A \subseteq C$. [given, F1, L1]
 
 1.2 Let $\mathcal{D} \subseteq \mathcal{P}(X)$ and put $U = \bigcup \mathcal{D}$, so that $x \in U$ exactly when $x \in D$ for some $D \in \mathcal{D}$; each such $D$ satisfies $D \subseteq X$, hence $U \subseteq X$ and $U \in \mathcal{P}(X)$. [given, construct]
 
@@ -71,7 +66,7 @@ Bourbaki–Witt argument consumes.
 
 2.2 $U$ is least among the upper bounds: let $V \in \mathcal{P}(X)$ satisfy $D \subseteq V$ for every $D \in \mathcal{D}$; any $x \in U$ lies in some $D \in \mathcal{D}$ and hence in $V$, so $U \subseteq V$. [step 1.2, L2]
 
-3.1 So every subset $\mathcal{D}$ of $\mathcal{P}(X)$ has least upper bound $\bigcup \mathcal{D}$, and a chain is in particular a subset, so every chain has one and $(\mathcal{P}(X), \subseteq)$ is chain-complete. [step 2.1, step 2.2, L3, L4]
+3.1 So every subset $\mathcal{D}$ of $\mathcal{P}(X)$ has least upper bound $\bigcup \mathcal{D}$, and a chain is in particular a subset, so every chain has one and $(\mathcal{P}(X), \subseteq)$ is chain-complete. [step 1.1, step 2.1, step 2.2, L3, L4]
 
 4.1 The empty chain is the case $\mathcal{D} = \emptyset$, where $U = \bigcup \emptyset = \emptyset$; so $\bot = \sup \emptyset = \emptyset$, which is indeed the least element, since $\emptyset \subseteq A$ for every $A \in \mathcal{P}(X)$. [step 3.1, step 1.2, L4] ∎
 

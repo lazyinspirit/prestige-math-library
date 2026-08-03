@@ -1,9 +1,12 @@
 ---
 id: fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term
 kind: false-statement
-title: "FALSE: $\\lvert A \\cup B \\cup C\\rvert = \\lvert A\\rvert + \\lvert B\\rvert + \\lvert C\\rvert - \\lvert A \\cap B\\rvert - \\lvert A \\cap C\\rvert - \\lvert B \\cap C\\rvert$"
+title: "FALSE: the real-valued three-set inclusion-exclusion identity remains true after deleting the triple-intersection term"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
        def-integer-power, def-ordered-field, def-field]
@@ -13,16 +16,19 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-02
+    scope: published-audit-targeted
+    context_sha256: 5f7a26273c53781dac9bfcfc2409172d3d2281b79b59370c8834dd6dbbf42fd5
+    item_sha256: bad10bf53b05f1599dd2a7b9495327fe267963cd1ee6825f36ae7197380cc6e0
   verified:
     model: claude-fable-5
     verdict: certify
     date: 2026-07-29
     scope: page
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -30,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Cardinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality"
+    - title: "Guichard, The Inclusion-Exclusion Formula (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_and_Graph_Theory_%28Guichard%29/02%3A_Inclusion-Exclusion/2.01%3A_The_Inclusion-Exclusion_Formula"
 pipeline_run: null
 ---
 

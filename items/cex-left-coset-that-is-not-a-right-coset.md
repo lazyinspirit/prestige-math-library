@@ -4,6 +4,9 @@ kind: counterexample
 title: "A left coset that is not the corresponding right coset in $\\operatorname{Sym}(\\{1,2,3\\})$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-coset, def-symmetric-group, lem-symmetric-group-is-a-group, def-subgroup]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
 pipeline_run: null
 ---
 
@@ -33,7 +38,7 @@ $gH$ and $Hg$ are equal.
 
 [F2] The sets $gH=\{gh:h\in H\}$ and $Hg=\{hg:h\in H\}$ are the left and right cosets ([[def-coset]]).
 
-[F3] The set $H=\{e,(12)\}$ is a subgroup: it contains $e$, and $(12)^2=e$ ([[def-subgroup]]).
+[F3] Under rightmost-first composition, if $\tau=(12)$ then $ee=e$, $e\tau=\tau e=\tau$ and $\tau^2=e$; hence $e^{-1}=e$, $\tau^{-1}=\tau$, and $H=\{e,\tau\}$ contains the identity and is closed under products and inverses, so it is a subgroup ([[def-symmetric-group]], [[lem-symmetric-group-is-a-group]], [[def-subgroup]]).
 
 ## Counterexample
 

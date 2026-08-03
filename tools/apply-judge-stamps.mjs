@@ -5,6 +5,13 @@
 //   node tools/apply-judge-stamps.mjs --ledger research/audit/wave0-judge.jsonl \
 //     --manifests research/audit/wave0-a.pages.json,... [--apply] [--report out.json]
 //
+// Published-page audit A8 has one deliberately narrower route:
+//
+//   JUDGE_LINEUP=deepseek+terra node tools/apply-judge-stamps.mjs \
+//     --ledger research/audit/wave<k>-judge.jsonl \
+//     --audit-targeted-rejudges research/audit/wave<k>-targeted-judge-receipt.json \
+//     [--apply] [--report out.json]
+//
 // Default is a DRY RUN: it prints what it would write and changes nothing.
 //
 // WHY THIS EXISTS. A sweep records verdicts in its ledger; nothing carried them
@@ -28,35 +35,82 @@
 // cannot ever upgrade a rejection into a displayed pass — the property that
 // makes it safe to run over published content.
 //
-// The context hash is recomputed per item through `judge.mts --context-hash`,
-// the same builder the sweep attests with, so a verdict for text that has since
-// changed is silently ineligible rather than quietly reused.
+// The normal route recomputes each item's context hash through `judge.mts`, the
+// same builder the sweep attests with.  The audit-targeted route instead
+// requires an Alpha-recorded item-file SHA-256 and the exact paired rejudge
+// context.  This is intentional: later edits to an unrelated companion-page
+// summary must not turn the targeted-only A8 rule into a whole-wave rejudge.
+// It still refuses an item-text change, a missing lane, or any rejection.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
 const ledgerPath = value('--ledger');
 const manifestsArg = value('--manifests');
+const targetedReceiptPath = value('--audit-targeted-rejudges');
 const reportPath = value('--report');
 const apply = argv.includes('--apply');
-if (!ledgerPath || !manifestsArg) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> --manifests <a.pages.json,...> [--apply] [--report <out.json>]');
+if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)) {
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
 const LOADER = '/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs';
 const today = new Date().toISOString().slice(0, 10);
 
-const ids = [...new Set(manifestsArg.split(',').map((s) => s.trim()).filter(Boolean)
-  .flatMap((file) => JSON.parse(readFileSync(file, 'utf8'))
-    .flatMap((page) => page.items.map((item) => item.id))))];
+// A stamp is evidence about the item, not a mathematical change to it.  Exclude
+// only the block this tool writes so applying/reapplying a stamp cannot make its
+// own target receipt fail.  Any other frontmatter or body change remains bound.
+const attestedItemHash = (text) => createHash('sha256').update(
+  text.replace(/^ {2}judge:\n(?: {4}.*\n)*/m, ''),
+).digest('hex');
+let targeted = new Map();
+const ids = manifestsArg
+  ? [...new Set(manifestsArg.split(',').map((s) => s.trim()).filter(Boolean)
+    .flatMap((file) => JSON.parse(readFileSync(file, 'utf8'))
+      .flatMap((page) => page.items.map((item) => item.id))))]
+  : (() => {
+    let receipt;
+    try { receipt = JSON.parse(readFileSync(targetedReceiptPath, 'utf8')); }
+    catch (cause) {
+      console.error(`cannot read audit targeted-rejudge receipt ${targetedReceiptPath}: ${cause.message}`);
+      process.exit(2);
+    }
+    if (receipt.version !== 1 || receipt.mode !== 'published-audit-targeted-rejudge' || !Array.isArray(receipt.targets)) {
+      console.error(`${targetedReceiptPath}: expected {version: 1, mode: "published-audit-targeted-rejudge", targets: [...]}`);
+      process.exit(2);
+    }
+    for (const target of receipt.targets) {
+      if (!target || typeof target.id !== 'string' || !target.id ||
+        typeof target.context_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(target.context_sha256) ||
+        typeof target.item_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(target.item_sha256)) {
+        console.error(`${targetedReceiptPath}: every target needs id, context_sha256, and item_sha256`);
+        process.exit(2);
+      }
+      if (targeted.has(target.id)) {
+        console.error(`${targetedReceiptPath}: duplicate target ${target.id}`);
+        process.exit(2);
+      }
+      targeted.set(target.id, target);
+    }
+    if (!targeted.size) {
+      console.error(`${targetedReceiptPath}: targets must not be empty`);
+      process.exit(2);
+    }
+    return [...targeted.keys()];
+  })();
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 const models = [...new Set(rows.map((r) => r.model))].sort();
 if (models.length !== 2) {
   console.error(`expected exactly two judge lanes in ${ledgerPath}, found: ${models.join(', ') || 'none'}`);
+  process.exit(2);
+}
+if (targetedReceiptPath && JSON.stringify(models) !== JSON.stringify(['deepseek-v4-pro', 'gpt-5.6-terra'])) {
+  console.error(`audit targeted rejudge stamps require the DeepSeek/Terra lanes; found: ${models.join(', ')}`);
   process.exit(2);
 }
 
@@ -76,12 +130,27 @@ const writeBlock = (text, block) => {
   return null;
 };
 
-const result = { version: 1, at: today, ledger: ledgerPath, lanes: models, stamped: [], skipped: [] };
+const result = {
+  version: 1,
+  at: today,
+  ledger: ledgerPath,
+  lanes: models,
+  mode: targetedReceiptPath ? 'published-audit-targeted-rejudge' : 'current-context',
+  targeted_rejudge_receipt: targetedReceiptPath || null,
+  stamped: [],
+  skipped: [],
+};
 
 for (const id of ids) {
   const file = `items/${id}.md`;
   if (!existsSync(file)) { result.skipped.push({ id, reason: 'no-item-file' }); continue; }
-  const current = contextHash(id);
+  const text = readFileSync(file, 'utf8');
+  const target = targeted.get(id);
+  if (target && attestedItemHash(text) !== target.item_sha256) {
+    result.skipped.push({ id, reason: 'item-hash-changed-since-targeted-rejudge' });
+    continue;
+  }
+  const current = target ? target.context_sha256 : contextHash(id);
   const verdicts = models.map((model) => ({
     model,
     row: [...rows].reverse().find((r) => r.id === id && r.model === model && r.context_sha256 === current && typeof r.keep === 'boolean'),
@@ -91,8 +160,10 @@ for (const id of ids) {
   const rejecting = verdicts.filter((v) => v.row.keep === false).map((v) => v.model);
   if (rejecting.length) { result.skipped.push({ id, reason: 'lane-rejected', models: rejecting }); continue; }
 
-  const block = `  judge:\n    model: "${models.join(' + ')}"\n    verdict: pass\n    date: ${today}\n`;
-  const text = readFileSync(file, 'utf8');
+  const auditEvidence = target
+    ? `    scope: published-audit-targeted\n    context_sha256: ${current}\n    item_sha256: ${target.item_sha256}\n`
+    : '';
+  const block = `  judge:\n    model: "${models.join(' + ')}"\n    verdict: pass\n    date: ${today}\n${auditEvidence}`;
   const next = writeBlock(text, block);
   if (next === null) { result.skipped.push({ id, reason: 'no-verification-anchor' }); continue; }
   if (next !== text && apply) writeFileSync(file, next);

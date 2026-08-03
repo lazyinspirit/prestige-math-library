@@ -4,6 +4,9 @@ kind: theorem
 title: "Zorn's lemma"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-bourbaki-witt, def-axiom-of-choice, def-maximal-element, def-upper-bound, def-chain, def-partial-order]
 justified_by: []
 forward_refs: [cex-zorn-hypothesis-fails]
@@ -26,6 +29,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Encyclopedia of Mathematics, Zorn lemma"
+      url: "https://encyclopediaofmath.org/wiki/Zorn_lemma"
+    - title: "Bourbaki–Witt theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
     - title: "Axiom of choice (Wikipedia)"

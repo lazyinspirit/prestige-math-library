@@ -426,15 +426,21 @@ bind history: the ai-generated dependency prohibition (routed to genrisk),
 generated kind/role restrictions, and structured external records on legacy
 deferred items.
 
-**`level-coverage.mjs --audit`** — same hard gate as the build (provenance,
-contracts, receipts, current paired verdicts), with exactly one difference: a
+**`level-coverage.mjs --audit`** — same hard gate as the build at the initial
+A7 sweep (provenance, contracts, receipts, current paired verdicts), with
+exactly one difference: a
 legacy `ai-generated` dep target is a warning routed to the genrisk
-disposition instead of an instant error.
+disposition instead of an instant error. Its Step-8 mechanism is an exact copy
+of the build: Alpha adjudicates the rejection from disk, records the
+per-model/per-context outcome, deletes a stale pass on a material rewrite, and
+re-runs both judges **only on what changed**. A public-interface repair repeats
+impact closure and records a hash-attested targeted rejudge receipt, not a new
+whole-wave coverage run or sweep.
 
 **`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
-and `level-coverage.mjs`): `deepseek+terra` (default, the build) or
-`deepseek+sonnet` (the audit; `deepseek+opus` stays selectable but its
-headless lane refused ~80% of calls at 16-way concurrency). See §5.
+and `level-coverage.mjs`): `deepseek+terra` for both the build and all future
+audit sweeps. Historical Sonnet/Opus records remain readable evidence only.
+See §5.
 
 **`judge-sweep.mjs --manifests`** (2026-08-02): audit sweeps supply the batch
 manifests, not `--pages` — the sweep's `--pages` universe is plan-spec's
@@ -560,10 +566,9 @@ null so its distinct failure mode remains measurable.
 Pro directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
 Codex subscription at `xhigh`, in parallel.**
 
-**Lineup parameter (owner, 2026-08-02).** `JUDGE_LINEUP` selects the paired
-lineup without forking the tools: `deepseek+terra` (default, the build) or
-`deepseek+sonnet` (the published-page audit, `AUDIT-WORKFLOW.md`). The Opus lane
-is `runFreshOpus` in `judge.mts`: a fresh headless Claude Code process —
+**Lineup parameter (owner, 2026-08-02).** The build and all future audit work
+use `deepseek+terra`; historical Claude-lineup rows are retained only as
+evidence. The historical Opus lane was `runFreshOpus` in `judge.mts`: a fresh headless Claude Code process —
 `claude -p --model claude-opus-5 --effort high --no-session-persistence`, an
 empty temporary working directory (which also keeps the repo's project
 settings and hooks out of scope), every core tool `--disallowed-tools` — the
@@ -571,12 +576,10 @@ settings and hooks out of scope), every core tool `--disallowed-tools` — the
 `claude` CLI. `--bare` is deliberately absent: it was measured (2026-08-02)
 to skip OAuth credential loading and the lane reports "Not logged in". The frozen prompt, hash
 attestation, verdict contract, attempt telemetry, and retry semantics are
-identical across lineups, and `judge-sweep.mjs` gives the lane its own
-16-slot cross-process pool. The corpus was authored largely by Claude/GPT
-sessions, so DeepSeek remains the cross-family screen; the Opus lane is an
-independent same-family comparison lane, exactly as Terra was labeled
-relative to Sol. The injection-test requirement below applies to the Opus
-lane like any other judge change. Both receive the exact same
+identical across lineups. `judge-sweep.mjs` gives DeepSeek and Terra their own
+16-slot cross-process pools. The corpus was authored largely by Claude/GPT
+sessions, so DeepSeek remains the cross-family screen; Terra is an independent
+same-family comparison lane relative to Sol. Both receive the exact same
 hash-attested frozen item, A/B-pair, dependency, and conventions prompt; Terra
 runs read-only from an empty temporary work directory. Every
 GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-token

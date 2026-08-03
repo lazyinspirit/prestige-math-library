@@ -4,6 +4,9 @@ kind: counterexample
 title: "Two maximal elements and no greatest element"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-maximal-element, fs-maximal-is-greatest, def-partial-order, thm-zorn]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Greatest element and least element (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Greatest_element_and_least_element"
     - title: "Maximal and minimal elements (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Maximal_and_minimal_elements"
     - title: "Partially ordered set (Wikipedia)"

@@ -4,18 +4,16 @@ kind: definition
 title: "The characteristic of a ring: the least $n \\ge 1$ with $n \\cdot 1_R = 0$ when one exists, and $0$ otherwise"
 status: published
 origin: session
-deps: [def-ring, def-group, def-group-power, lem-integer-multiples-agree-with-canonical-natural, def-canonical-natural, def-field, def-order-in-a-group, thm-well-ordering-principle, def-natural-numbers, def-nat-order]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-ring, def-group, def-group-power, lem-integer-multiples-agree-with-canonical-natural, def-canonical-natural, def-field, def-order-in-a-group, thm-well-ordering-principle, def-natural-numbers, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: [def-characteristic]
 landmark: true
 short: "$\\operatorname{char}(R)$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -39,8 +37,9 @@ $$\operatorname{char}(R) \;:=\; \begin{cases} \min T_R & \text{if } T_R \ne \var
 
 **Why the least element exists.** $T_R$ is a subset of $\mathbb{N}$, so when it
 is nonempty it has a least element by the well-ordering principle
-([[thm-well-ordering-principle]]), and that element is unique, being a member of
-$T_R$ that is $\le$ every member of $T_R$ in the order of [[def-nat-order]]. So
+([[thm-well-ordering-principle]]), and that element is unique: two least members
+are below one another and hence equal by antisymmetry of the natural-number
+order ([[thm-nat-linear-order]], [[def-nat-order]]). So
 $\operatorname{char}(R)$ is a well-defined natural number in both cases.
 
 **The clause $n \ge 1$ is not decoration.** $\mathbb{N}$ contains $0$
@@ -85,9 +84,8 @@ $n \ge 1$ with $\iota(n) = 0_F$, or $0$ if there is none.
   characteristic is $0$ the right-hand side says $n = 0$, which is exactly right.
   That statement is [[lem-characteristic-and-additive-order]].
 
-- **A further property of the characteristic of an integral domain is not
-  stated here.** Stating it requires the notion of a prime number, and no
-  definition on this page, nor in any item this page cites, introduces that
-  notion; so the statement is not made here. It is taken up on a later page,
-  where primes are available, and what it needs from this page is
-  [[lem-characteristic-and-additive-order]].
+- **A further theorem about the possible characteristics of an integral domain
+  is not stated here.** The current corpus does not yet state or prove that
+  result. A future algebra page may add it from
+  [[lem-characteristic-and-additive-order]] once the needed prime-number
+  interface is brought into scope.

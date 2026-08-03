@@ -4,6 +4,9 @@ kind: example
 title: "The subgroup orders in $\\operatorname{Sym}(\\{1,2,3\\})$ are $1,2,3$ and $6$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-lagrange, def-symmetric-group, lem-symmetric-group-is-a-group, def-subgroup, lem-subgroup-criterion, def-generated-subgroup, def-order-in-a-group]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.2: Lagrange's Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.02%3A_Lagrange%27s_Theorem"
 pipeline_run: null
 ---
 

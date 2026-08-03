@@ -13,11 +13,14 @@ published-page audit at `research/audit/RESUME.md` (normative workflow:
 `AUDIT-WORKFLOW.md`).
 
 **Model rule, read before you take an audit role.** `AUDIT-WORKFLOW.md` §2/§3
-binds every audit ROLE — Audit-Beta, Alpha, independent readers,
-proof-refuters — to **Opus 5 at high reasoning effort**, and the judge lanes
-to DeepSeek V4 Pro plus headless Sonnet 5 (`JUDGE_LINEUP=deepseek+sonnet`).
+binds Audit-Beta and Alpha to **GPT 5.6 Sol through the Codex subscription**
+at `xhigh` with a 1,000,000-token context window. Independent readers and
+proof-refuters also use **GPT 5.6 Sol**. Alpha must recover
+the durable prior-session audit record before acting. Judge lanes are DeepSeek
+V4 Pro plus fresh GPT 5.6 Terra (`JUDGE_LINEUP=deepseek+terra`) through the
+same independent 16-call-per-model scheduler used by the build.
 A non-Anthropic session may run the ORCHESTRATOR duties (gates, sweeps,
 ledgers, commits, reports) — the judge lanes are subprocesses and work from
-any session — but it must not silently substitute itself for an Opus audit
+any session — but it must not silently substitute itself for an assigned audit
 role. Ask the owner to amend the rule first; record the amendment in
 `AUDIT-WORKFLOW.md` in the same commit.

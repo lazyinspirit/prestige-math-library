@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\iota(D_n) = \\iota(n)\\,\\iota(D_{n-1}) + (-1)^{n}$ for $n \\ge 1$, and $D_n = (n-1)(D_{n-1} + D_{n-2})$ for $n \\ge 2$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-the-derangement-formula, def-the-derangement-number, def-factorial-and-falling-factorial,
        def-canonical-natural, def-integer-power, def-finite-sum, lem-finite-sum-laws,
        lem-nat-finite-sum-laws-and-the-canonical-embedding, def-nat-order,
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Derangement"
     - title: "Rencontres numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rencontres_numbers"
+    - title: "Principle of Inclusion and Exclusion (Open Math Books)"
+      url: "https://openmathbooks.org/ecm/ecm/sec_adv-pie.html"
 pipeline_run: null
 ---
 

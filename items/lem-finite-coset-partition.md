@@ -4,6 +4,9 @@ kind: lemma
 title: "In a finite group, the subgroup, every coset and the set of cosets are finite"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-index, lem-coset-partition, lem-coset-equinumerous-with-subgroup, def-finite-cardinality, thm-subset-of-a-finite-set, cor-cardinality-of-the-power-set]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.2: Lagrange's Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.02%3A_Lagrange%27s_Theorem"
 pipeline_run: null
 ---
 

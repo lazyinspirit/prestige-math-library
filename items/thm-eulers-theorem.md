@@ -4,19 +4,23 @@ kind: theorem
 title: "Euler's theorem: if $n\\ge1$ and $\\gcd(a,n)=1$, then $a^{\\varphi(n)}\\equiv1\\pmod n$"
 status: published
 origin: session
-deps: [cor-g-to-the-group-order-is-identity, def-unit-group-modulo-n-and-euler-totient, thm-unit-criterion-modulo-n, def-addition-and-multiplication-modulo-n, def-congruence-modulo-an-integer, lem-congruence-respects-integer-arithmetic, def-group-power]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [cor-g-to-the-group-order-is-identity, def-unit-group-modulo-n-and-euler-totient, thm-unit-criterion-modulo-n, def-addition-and-multiplication-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer, lem-congruence-respects-integer-arithmetic, def-group-power]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
 sources:
   scraped: []
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.3: Fermat's and Euler's Theorems"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.03%3A_Fermat%27s_and_Euler%27s_Theorems"
 pipeline_run: null
 ---
 
@@ -36,7 +40,7 @@ $$a^{\varphi(n)}\equiv1\pmod n.$$
 
 [L2] Every element $u$ of a finite group satisfies $u^{|G|}=e$ ([[cor-g-to-the-group-order-is-identity]], [[def-group-power]]).
 
-[F2] Multiplication of residue classes satisfies $[x]_n[y]_n=[xy]_n$, so natural powers satisfy $[a]_n^k=[a^k]_n$; and $[x]_n=[y]_n$ exactly when $x\equiv y\pmod n$ ([[def-addition-and-multiplication-modulo-n]], [[def-congruence-modulo-an-integer]], [[lem-congruence-respects-integer-arithmetic]]).
+[F2] Multiplication of residue classes satisfies $[x]_n[y]_n=[xy]_n$, so natural powers satisfy $[a]_n^k=[a^k]_n$; and $[x]_n=[y]_n$ exactly when $x\equiv y\pmod n$ ([[def-addition-and-multiplication-modulo-n]], [[def-integers-modulo-n]], [[def-congruence-modulo-an-integer]], [[lem-congruence-respects-integer-arithmetic]]).
 
 ## Proof
 

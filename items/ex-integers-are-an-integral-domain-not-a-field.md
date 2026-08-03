@@ -4,7 +4,10 @@ kind: example
 title: "$\\mathbb{Z}$ is an integral domain of characteristic $0$ whose group of units is $\\{1,-1\\}$, so it is not a field: $2$ is nonzero and not invertible"
 status: published
 origin: session
-deps: [ex-integers-as-a-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-ring-characteristic, lem-characteristic-and-additive-order, def-field, def-invertible-element, lem-units-of-z, thm-int-comm-ring, thm-int-ordered-ring, lem-int-cancellation, def-integers, def-int-operations, def-int-order, def-group-power, lem-nat-embeds-int, thm-induction-principle, def-nat-addition, def-natural-numbers, def-ring, def-commutative-ring]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [ex-integers-as-a-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-ring-characteristic, def-field, def-invertible-element, lem-units-of-z, thm-int-comm-ring, thm-int-ordered-ring, lem-int-cancellation, def-integers, def-int-operations, def-int-order, def-group-power, lem-nat-embeds-int, thm-induction-principle, def-nat-addition, def-natural-numbers, def-ring, def-commutative-ring]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,6 @@ short: "ℤ: domain, char 0, not a field"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integral_domain"
     - title: "Unit (ring theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Unit_(ring_theory)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 
@@ -33,7 +33,7 @@ Let $\mathbb{Z}$ be the integers with the commutative ring structure of
 [[ex-integers-as-a-commutative-ring]], and let $2 := 1 + 1$. Then:
 
 1. $\mathbb{Z}$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);
-2. $\mathbb{Z}^{\times} = \{1,-1\}$ ([[lem-ring-units-form-a-group]]);
+2. $\mathbb{Z}^{\times} = \{1,-1\}$ ([[lem-units-of-z]], with the unit group structure from [[lem-ring-units-form-a-group]]);
 3. $2 \ne 0$ and $2 \notin \mathbb{Z}^{\times}$, so $\mathbb{Z}$ is **not** a
    field ([[def-field]]);
 4. $\operatorname{char}(\mathbb{Z}) = 0$ ([[def-ring-characteristic]]).
@@ -53,15 +53,13 @@ that the two notions differ.
 
 [L4] The order on $\mathbb{Z}$ is total and compatible with addition, and $\mathbb{Z}$ is a commutative ring ([[thm-int-ordered-ring]], [[thm-int-comm-ring]], [[def-int-order]]).
 
-[L5] $\iota : \mathbb{N} \to \mathbb{Z}$, $\iota(n) = [(n,0)]$, is injective, preserves addition, multiplication and order, and $\iota(0) = 0$, $\iota(1) = 1$ ([[lem-nat-embeds-int]]).
+[L5] $\iota : \mathbb{N} \to \mathbb{Z}$, $\iota(n) = [(n,0)]$, is injective and preserves addition, multiplication and order ([[lem-nat-embeds-int]]); the formulas for $0_{\mathbb Z}=[(0,0)]$ and $1_{\mathbb Z}=[(1,0)]$ give $\iota(0)=0$ and $\iota(1)=1$ ([[def-int-operations]]).
 
 [L6] Induction on $\mathbb{N}$, and $n + 1 = \sigma(n)$ on $\mathbb{N}$ ([[thm-induction-principle]], [[def-nat-addition]], [[def-natural-numbers]]).
 
 [L7] The additive multiples in a ring satisfy $0 \cdot 1 = 0$ and $\sigma(n) \cdot 1 = n \cdot 1 + 1$ for $n \in \mathbb{N}$ ([[def-group-power]]).
 
 [L8] $\operatorname{char}(R)$ is the least $n \ge 1$ with $n \cdot 1_R = 0_R$, or $0$ if there is none ([[def-ring-characteristic]]); a field is a commutative ring in which every nonzero element is a unit ([[lem-field-is-a-commutative-ring]], [[def-field]]).
-
-[L9] The characteristic of a ring is the additive order of $1_R$, and in an integral domain every nonzero element has that same additive order ([[lem-characteristic-and-additive-order]]).
 
 ## Verification
 
@@ -83,19 +81,8 @@ that the two notions differ.
 
 ## Remarks
 
-- **This is the standard witness that "integral domain" is strictly weaker than
-  "field".** $\mathbb{Z}$ satisfies every clause of
-  [[def-zero-divisor-and-integral-domain]] and fails the one extra clause a
-  field asks for. The gap is exactly the failure of $2$ to be invertible, and
-  [[lem-units-of-z]] is what pins the units down.
+- **This is the standard witness that "integral domain" is strictly weaker than "field".** $\mathbb{Z}$ satisfies every clause of [[def-zero-divisor-and-integral-domain]] and fails the one extra clause a field asks for. The gap is exactly the failure of $2$ to be invertible, and [[lem-units-of-z]] is what pins the units down.
 
-- **Characteristic $0$ and infinite additive order are the same statement here.**
-  By [[lem-characteristic-and-additive-order]] the characteristic is the additive
-  order of $1$, so claim 4 says that $1$ has infinite additive order in
-  $(\mathbb{Z},+)$; and since $\mathbb{Z}$ is a domain, the same lemma says every
-  nonzero integer has infinite additive order too.
+- **Characteristic $0$ and infinite additive order are the same statement here.** By [[lem-characteristic-and-additive-order]] the characteristic is the additive order of $1$, so claim 4 says that $1$ has infinite additive order in $(\mathbb{Z},+)$; and since $\mathbb{Z}$ is a domain, the same lemma says every nonzero integer has infinite additive order too.
 
-- **The units are read off [[lem-units-of-z]], not off the order.** That lemma
-  proves $\mathbb{Z}^{\times} = \{1,-1\}$ from the divisibility relation and the
-  bound on divisors; nothing on this page reproves it, and no group-theoretic
-  example page is cited for it.
+- **The units are read off [[lem-units-of-z]], not off the order.** That lemma proves $\mathbb{Z}^{\times} = \{1,-1\}$ from the divisibility relation and the bound on divisors; nothing on this page reproves it, and no group-theoretic example page is cited for it.

@@ -4,6 +4,9 @@ kind: corollary
 title: "If $X$ is nonempty, some row fibre is at least the average size and some row fibre is at most the average size"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-double-counting, def-a-finite-incidence-relation-and-its-fibres,
        def-sum-over-a-finite-index-set, lem-nat-finite-sum-laws-and-the-canonical-embedding,
        lem-finite-sum-laws, def-finite-sum, def-canonical-natural, def-finite-cardinality,
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Double_counting_(proof_technique)"
     - title: "Pigeonhole principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+    - title: "Mathematics for Computer Science (MIT OpenCourseWare)"
+      url: "https://live.ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf"
 pipeline_run: null
 ---
 

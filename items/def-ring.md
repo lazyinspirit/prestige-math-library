@@ -4,6 +4,9 @@ kind: definition
 title: "Ring: an abelian group under addition and a monoid under multiplication, with multiplication distributing over addition on both sides"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-group, def-semigroup-and-monoid, def-binary-operation, def-identity-element, lem-identity-unique, def-invertible-element, lem-inverse-unique]
 justified_by: []
 aliases: [def-unital-ring]
@@ -11,10 +14,6 @@ landmark: true
 short: "ring"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   audited: 2026-07-28
 sources:
   scraped: []
@@ -23,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ring_(mathematics)"
     - title: "Rng (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rng_(algebra)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 
@@ -90,5 +91,6 @@ need $1 \ne 0$ — integral domain, division ring, field — say so explicitly.
 - **Notation for repeated addition.** For $m \in \mathbb{Z}$ and $a \in R$ the
   expression $ma$ means the integer power of $a$ in the additive group
   $(R,+,0)$, written additively as in [[def-group-power]]. It is not a product
-  in $R$: an integer is not an element of $R$. The arithmetic of these multiples
-  is [[lem-integer-multiples-in-a-ring]].
+  formed with the ring multiplication: $m$ is an external integer scalar, even
+  when the underlying set of $R$ happens to contain integers. The arithmetic of
+  these multiples is [[lem-integer-multiples-in-a-ring]].

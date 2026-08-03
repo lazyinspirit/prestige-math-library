@@ -4,26 +4,23 @@ kind: lemma
 title: "The cut at an extremal element is closed under $f$"
 status: published
 origin: session
-deps: [def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-partial-order]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-bw-extremal, lem-admissible-set-exists, def-admissible-set, def-chain-complete-poset, def-partial-order]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "Mathlib, Order.BourbakiWitt"
+      url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/BourbakiWitt.html"
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
     - title: "Bourbaki–Witt theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
 pipeline_run: null
@@ -43,7 +40,7 @@ cut $M_x$ satisfies $f(y) \in M_x$ for every $y \in M_x$.
 
 [A2] $M_x = \{z \in M : z \le x \text{ or } f(x) \le z\}$ ([[def-bw-extremal]]).
 
-[L1] $M$ is admissible, so it is closed under $f$ and under suprema of its chains ([[lem-admissible-set-exists]]).
+[L1] $M$ is admissible, so it is closed under $f$ and under suprema of its chains ([[lem-admissible-set-exists]], [[def-admissible-set]]).
 
 [L2] $f$ is progressive: $z \le f(z)$ for every $z \in P$ ([[def-chain-complete-poset]]).
 

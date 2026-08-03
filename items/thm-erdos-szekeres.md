@@ -4,6 +4,9 @@ kind: theorem
 title: "Every list of $mn+1$ pairwise distinct reals has a strictly increasing sublist of length $m+1$ or a strictly decreasing sublist of length $n+1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-a-monotone-sublist-of-a-finite-list-of-reals, lem-pigeonhole, thm-product-rule,
        def-finite-cardinality, thm-well-ordering-principle, def-ordered-field,
        def-injection-surjection-bijection, def-nat-order, lem-nat-order-is-membership,
@@ -15,16 +18,6 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -34,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Longest increasing subsequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Longest_increasing_subsequence"
+    - title: "Morris, Combinatorics: The Pigeonhole Principle (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_%28Morris%29/02%253A_Enumeration/10%253A_Other_Basic_Counting_Techniques/10.01%253A_The_Pigeonhole_Principle"
 pipeline_run: null
 ---
 
@@ -55,7 +50,7 @@ one of length $1$ is also available.
 
 **Given:** Naturals $m$ and $n$, the length $N := mn+1$, and a pairwise distinct list $a : N \to \mathbb{R}$. For $i < N$ and $L \ge 1$, call $s : L \to N$ an **increasing run ending at $i$** when $s$ is a strictly increasing sublist of $a$ (in both senses of [[def-a-monotone-sublist-of-a-finite-list-of-reals]]) with $s(L-1) = i$, and define a **decreasing run ending at $i$** in the same way with the values strictly decreasing.
 
-[L1] A nonempty subset of $\mathbb{N}$ with an upper bound has a greatest element. Let $E \subseteq \mathbb{N}$ be nonempty with $E \subseteq \sigma(M)$ for some $M$. The set $C := \{\, c \in \mathbb{N} : e \le c \text{ for every } e \in E \,\}$ contains $M$, so it has a least element $c_0$ by [[thm-well-ordering-principle]]. If $c_0 \notin E$ then every $e \in E$ satisfies $e \le c_0$ and $e \ne c_0$, hence $e < c_0$ and $\sigma(e) \le c_0$ by [[lem-nat-discrete]]; since $E$ is nonempty, $c_0 \ne 0$, so $c_0 = \sigma(c_1)$ for some $c_1$ ([[lem-nat-nonzero-is-successor]]) and $e \le c_1$ for every $e \in E$, putting $c_1 \in C$ below $c_0$ and contradicting minimality. So $c_0 \in E$ and $c_0$ is the greatest element of $E$.
+[L1] A nonempty subset of $\mathbb{N}$ with an upper bound has a greatest element. Let $E \subseteq \mathbb{N}$ be nonempty with $E \subseteq \sigma(M)$ for some $M$. Every $e\in E$ then satisfies $e\le M$ by [[lem-nat-order-is-membership]], so the set $C := \{\, c \in \mathbb{N} : e \le c \text{ for every } e \in E \,\}$ contains $M$ and has a least element $c_0$ by [[thm-well-ordering-principle]]. If $c_0 \notin E$ then every $e \in E$ satisfies $e \le c_0$ and $e \ne c_0$, hence $e < c_0$ and $\sigma(e) \le c_0$ by [[lem-nat-discrete]]; since $E$ is nonempty, $c_0 \ne 0$, so $c_0 = \sigma(c_1)$ for some $c_1$ ([[lem-nat-nonzero-is-successor]]) and $e \le c_1$ for every $e \in E$, putting $c_1 \in C$ below $c_0$ and contradicting minimality. So $c_0 \in E$ and $c_0$ is the greatest element of $E$.
 
 [L2] For every $i < N$ there is an increasing run and a decreasing run ending at $i$, both of length $1$: take $s : 1 \to N$ with $s(0) = i$, which is vacuously monotone in both senses ([[def-a-monotone-sublist-of-a-finite-list-of-reals]]).
 
@@ -71,7 +66,7 @@ one of length $1$ is also available.
 
 **Proof technique:** contradiction.
 
-1.1 Suppose, for contradiction, that $a$ has no strictly increasing sublist of length $m+1$ and no strictly decreasing sublist of length $n+1$. [assume-contra]
+1.1 If $m=0$ or $n=0$, then $N=mn+1=1$, and the one-term sublist ending at $0$ supplied by [L2] has the required length $1=m+1$ or $1=n+1$, respectively. Hence assume $m,n\ge1$ and suppose, for contradiction, that $a$ has neither required sublist. [L2, cases, assume-contra]
 
 1.2 The two run lengths. For $i < N$ let $\mathrm{Inc}(i)$ be the set of lengths of increasing runs ending at $i$ and $\mathrm{Dec}(i)$ the set of lengths of decreasing runs ending at $i$. Both are nonempty by [L2] and both are contained in $\sigma(N)$ by [L3] and [L4], so both have a greatest element by [L1]; write $\mathrm{inc}(i)$ and $\mathrm{dec}(i)$ for those greatest elements. Both are at least $1$. [L1, L2, L3, L4, construct]
 

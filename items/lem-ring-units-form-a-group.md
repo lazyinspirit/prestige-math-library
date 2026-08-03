@@ -4,6 +4,9 @@ kind: lemma
 title: "The units of a ring are the invertible elements of its multiplicative monoid, and $R^{\\times}$ is a group under multiplication; $0 \\in R^{\\times}$ only in the zero ring"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring, def-invertible-element, lem-inverse-unique, lem-monoid-units-form-a-group, def-semigroup-and-monoid, lem-ring-elementary-consequences, def-group]
 justified_by: []
 aliases: [lem-units-of-a-ring]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Unit_(ring_theory)"
     - title: "Ring (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ring_(mathematics)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

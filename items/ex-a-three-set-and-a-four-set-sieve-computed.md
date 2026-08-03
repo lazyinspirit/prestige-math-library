@@ -1,29 +1,25 @@
 ---
 id: ex-a-three-set-and-a-four-set-sieve-computed
 kind: example
-title: "The sieve run in full on three explicit finite sets and then on four, with every intersection listed"
+title: "The sieve run in full on three explicit finite sets and then on four, with every nonempty intersection listed"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections, def-finite-cardinality,
        def-sum-over-a-finite-index-set, def-canonical-natural, def-integer-power,
        def-binomial-coefficient, thm-sum-rule, def-injection-surjection-bijection,
-       lem-nat-finite-sum-laws-and-the-canonical-embedding, def-ordered-field]
+       thm-subset-of-a-finite-set, lem-nat-finite-sum-laws-and-the-canonical-embedding,
+       def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Cardinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality"
+    - title: "Guichard, The Inclusion-Exclusion Formula (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_and_Graph_Theory_%28Guichard%29/02%3A_Inclusion-Exclusion/2.01%3A_The_Inclusion-Exclusion_Formula"
 pipeline_run: null
 ---
 
@@ -90,9 +88,9 @@ $X \setminus (A_0\cup A_1\cup A_2\cup A_3) = \varnothing$.
 
 [L1] A listed set with distinct entries has as many elements as entries: if $x_0, \dots, x_{k-1}$ are distinct then $j \mapsto x_j$ is a bijection of $k$ onto $\{x_0,\dots,x_{k-1}\}$, so that set is finite of cardinality $k$ ([[def-finite-cardinality]], clauses (a) and (c), [[def-injection-surjection-bijection]]).
 
-[L2] The sieve identity and its complementary form, for a sieve family with ambient set $X$ and index set $I$, with $A_\varnothing = X$ ([[thm-inclusion-exclusion]], [[def-a-sieve-family-and-its-intersections]]).
+[L2] For a sieve family with ambient set $X$, finite index set $I$, union $U=\bigcup_{i\in I}A_i$ and $A_\varnothing=X$, the sieve identity and its complementary form are $$\iota|U|=\sum_{\varnothing\ne J\subseteq I}(-1)^{|J|+1}\iota|A_J|, \qquad \iota|X\setminus U|=\sum_{J\subseteq I}(-1)^{|J|}\iota|A_J|$$ ([[thm-inclusion-exclusion]], [[def-a-sieve-family-and-its-intersections]]).
 
-[L3] Grouping the nonempty subsets of $I$ by size: the sets $[I]^{j}$ for $1 \le j \le \lvert I\rvert$ partition $\mathcal{P}(I)\setminus\{\varnothing\}$, and the sign attached to $J$ in clause 1 is $(-1)^{\lvert J\rvert+1}$, which is $+1$ for $\lvert J\rvert$ odd and $-1$ for $\lvert J\rvert$ even ([[thm-sum-rule]], clause 3, [[def-sum-over-a-finite-index-set]], [[def-binomial-coefficient]], [[def-integer-power]]).
+[L3] Every $J\subseteq I$ is finite with a unique natural cardinality $|J|\le|I|$, while $[I]^j=\{J\subseteq I:|J|=j\}$; hence the levels $[I]^j$ for $1\le j\le|I|$ are pairwise disjoint and have union $\mathcal P(I)\setminus\{\varnothing\}$. The sign attached to $J$ is $(-1)^{|J|+1}$, positive for odd $|J|$ and negative for even $|J|$ ([[def-finite-cardinality]], [[thm-subset-of-a-finite-set]], [[def-binomial-coefficient]], [[thm-sum-rule]], clause 3, [[def-sum-over-a-finite-index-set]], [[def-integer-power]]).
 
 [L4] $\iota$ is additive and injective, so the arithmetic of the displayed sums may be carried out on the natural numbers and read in $\mathbb{R}$ ([[lem-nat-finite-sum-laws-and-the-canonical-embedding]], clauses 0 and 7, [[def-ordered-field]]).
 
@@ -114,7 +112,7 @@ $X \setminus (A_0\cup A_1\cup A_2\cup A_3) = \varnothing$.
 
 2.2 The complementary form for three sets. Clause 2 of [L2] adds the term at $J = \varnothing$, which is $\iota\lvert A_\varnothing\rvert = \iota\lvert X\rvert = \iota(8)$, and reverses every sign, giving $\iota(8) - \iota(11) + \iota(5) - \iota(1) = \iota(1)$, which matches the complement computed in step 1.3. [step 1.1, step 1.2, step 1.3, L2, L3, L4]
 
-2.3 The sieve for four sets. The singleton terms now sum to $4+4+3+3 = 14$, the pair terms to $2+1+0+2+1+1 = 7$, the triple terms to $1+0+0+0 = 1$ and the single four-element term is $0$; so clause 1 of [L2] reads $\iota(14) - \iota(7) + \iota(1) - \iota(0) = \iota(8)$, which matches step 1.5, and clause 2 reads $\iota(8) - \iota(14) + \iota(7) - \iota(1) + \iota(0) = \iota(0)$, again matching. [step 1.4, step 1.5, L2, L3, L4]
+2.3 The sieve for four sets. The singleton terms now sum to $4+4+3+3 = 14$, the pair terms to $2+1+0+2+1+1 = 7$, the triple terms to $1+0+0+0 = 1$ and the single four-element term is $0$; so clause 1 of [L2] reads $\iota(14) - \iota(7) + \iota(1) - \iota(0) = \iota(8)$, which matches step 1.5, and clause 2 reads $\iota(8) - \iota(14) + \iota(7) - \iota(1) + \iota(0) = \iota(0)$, again matching. [step 1.1, step 1.2, step 1.4, step 1.5, L2, L3, L4]
 
 3.1 Both families therefore satisfy both forms of the identity, with every intersection exhibited rather than inferred. [step 2.1, step 2.2, step 2.3] ∎
 

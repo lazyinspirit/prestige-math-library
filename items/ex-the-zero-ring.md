@@ -4,6 +4,9 @@ kind: example
 title: "The zero ring $\\{0\\}$, in which $1 = 0$: a commutative ring of characteristic $1$ that is not a domain, not a division ring and not a field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, def-division-ring, def-ring-characteristic, lem-ring-elementary-consequences, def-field, def-group-power]
 justified_by: []
 aliases: [ex-trivial-ring]
@@ -22,6 +25,8 @@ sources:
   references:
     - title: "Zero ring (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zero_ring"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

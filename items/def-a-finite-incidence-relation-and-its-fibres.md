@@ -4,6 +4,9 @@ kind: definition
 title: "A relation $R \\subseteq X \\times Y$ between finite sets, its row fibres $R_x$ and its column fibres $R^y$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-cardinality, thm-subset-of-a-finite-set, thm-product-rule,
        def-injection-surjection-bijection, def-countable]
 justified_by: []

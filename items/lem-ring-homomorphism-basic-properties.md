@@ -4,6 +4,9 @@ kind: lemma
 title: "A ring homomorphism satisfies $f(0) = 0$, $f(-a) = -f(a)$ and $f(ma) = m f(a)$ for $m \\in \\mathbb{Z}$, carries units to units, and has a subring as its image; composites of ring homomorphisms are ring homomorphisms"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring-homomorphism, def-ring, def-group-homomorphism, lem-group-homomorphism-basic-properties, def-subring, lem-subring-criterion, def-invertible-element, lem-inverse-unique, lem-ring-units-form-a-group, lem-integer-multiples-in-a-ring, def-group-power]
 justified_by: []
 aliases: []
@@ -12,16 +15,13 @@ short: "ring hom: basic properties"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
     - title: "Ring homomorphism (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ring_homomorphism"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.5: Ring Homomorphisms and Ideals"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.05%3A_Ring_Homomorphisms_and_Ideals"
 pipeline_run: null
 ---
 
@@ -43,13 +43,19 @@ Let $R$ and $S$ be rings ([[def-ring]]) and $f : R \to S$ a ring homomorphism
 
 ## Facts & Assumptions
 
-**Given:** Rings $R$, $S$ with zeros $0_R$, $0_S$ and identities $1_R$, $1_S$, and a function $f : R \to S$ with $f(x+y) = f(x)+f(y)$, $f(xy) = f(x)f(y)$ and $f(1_R) = 1_S$ ([[def-ring-homomorphism]]).
+**Given:** Rings $R$, $S$ with zeros $0_R$, $0_S$ and identities $1_R$, $1_S$, and a function $f : R \to S$ with $f(x+y) = f(x)+f(y)$, $f(xy) = f(x)f(y)$ and $f(1_R) = 1_S$. For claim 5, let $T$ be a ring and let $g : S \to T$ be a ring homomorphism ([[def-ring-homomorphism]]).
 
 [A1] $f(x+y) = f(x) + f(y)$ for all $x, y \in R$.
 
 [A2] $f(xy) = f(x)f(y)$ for all $x, y \in R$.
 
 [A3] $f(1_R) = 1_S$.
+
+[A4] $g(y+z) = g(y) + g(z)$ for all $y,z\in S$ ([[def-ring-homomorphism]]).
+
+[A5] $g(yz) = g(y)g(z)$ for all $y,z\in S$ ([[def-ring-homomorphism]]).
+
+[A6] $g(1_S) = 1_T$ ([[def-ring-homomorphism]]).
 
 [L1] $(R,+,0_R)$ and $(S,+,0_S)$ are abelian groups, and by [A1] the map $f$ is a homomorphism of these groups in the sense of [[def-group-homomorphism]] ([[def-ring]]).
 
@@ -67,7 +73,7 @@ Let $R$ and $S$ be rings ([[def-ring]]) and $f : R \to S$ a ring homomorphism
 
 1.1 By [L1] the map $f$ is a homomorphism from the additive group of $R$ to the additive group of $S$, so [L2] applies to it. [A1, L1]
 
-1.2 Claim 5: for $x, y \in R$, $(g \circ f)(x+y) = g(f(x)+f(y)) = g(f(x)) + g(f(y))$ and $(g\circ f)(xy) = g(f(x)f(y)) = g(f(x))g(f(y))$, while $(g \circ f)(1_R) = g(1_S) = 1_T$. The identity map satisfies the three conditions trivially. [A1, A2, A3]
+1.2 Claim 5: for $x, y \in R$, $(g \circ f)(x+y) = g(f(x)+f(y)) = g(f(x)) + g(f(y))$ and $(g\circ f)(xy) = g(f(x)f(y)) = g(f(x))g(f(y))$, while $(g \circ f)(1_R) = g(1_S) = 1_T$. The identity map satisfies the three conditions trivially. [A1, A2, A3, A4, A5, A6]
 
 1.3 Claim 3: let $u \in R^{\times}$ with inverse $u^{-1}$, so $u u^{-1} = 1_R = u^{-1}u$. Applying $f$ and using [A2] and [A3], $f(u)f(u^{-1}) = f(1_R) = 1_S = f(u^{-1})f(u)$. So $f(u)$ has the two-sided inverse $f(u^{-1})$ in $S$, hence $f(u) \in S^{\times}$, and $f(u)^{-1} = f(u^{-1})$ because inverses in a monoid are unique. [A2, A3, L4]
 
@@ -81,18 +87,8 @@ Let $R$ and $S$ be rings ([[def-ring]]) and $f : R \to S$ a ring homomorphism
 
 ## Remarks
 
-- **Claim 1 is free, claim 3 is not.** $f(0_R) = 0_S$ comes from additivity
-  alone, because the additive structure is a group and cancellation is available
-  there ([[lem-group-homomorphism-basic-properties]]). The multiplicative
-  analogue would be $f(1_R) = 1_S$, and it is *not* free: it is axiom (RH3) of
-  [[def-ring-homomorphism]], and the step proving claim 3 above uses it twice.
+- **Claim 1 is free, claim 3 is not.** $f(0_R) = 0_S$ comes from additivity alone, because the additive structure is a group and cancellation is available there ([[lem-group-homomorphism-basic-properties]]). The multiplicative analogue would be $f(1_R) = 1_S$, and it is *not* free: it is axiom (RH3) of [[def-ring-homomorphism]], and the step proving claim 3 above uses it twice.
 
-- **The image is a subring, not merely a non-unital one**, and that too rests on
-  (RH3): without it the image would still be closed under subtraction and
-  multiplication but might miss $1_S$, and the companion page's map
-  $n \mapsto (n,0)$ has exactly that image.
+- **The image is a subring, not merely a non-unital one**, and that too rests on (RH3): without it the image would still be closed under subtraction and multiplication but might miss $1_S$, and the companion page's map $n \mapsto (n,0)$ has exactly that image.
 
-- **Claim 2 is a dictionary entry, not new arithmetic.** The multiples on both
-  sides are the additive powers of [[def-group-power]], so the statement is the
-  power law of [[lem-group-homomorphism-basic-properties]] with additive
-  notation; nothing is proved twice.
+- **Claim 2 is a dictionary entry, not new arithmetic.** The multiples on both sides are the additive powers of [[def-group-power]], so the statement is the power law of [[lem-group-homomorphism-basic-properties]] with additive notation; nothing is proved twice.

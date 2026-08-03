@@ -4,6 +4,9 @@ kind: lemma
 title: "In any ring $0 \\cdot a = a \\cdot 0 = 0$, $(-a)b = a(-b) = -(ab)$, $(-a)(-b) = ab$, $(-1)a = -a$ and $a(b - c) = ab - ac$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring, def-group, lem-group-cancellation, lem-group-inverse-laws, def-identity-element]
 justified_by: []
 aliases: [lem-ring-sign-rules]
@@ -22,6 +25,8 @@ sources:
   references:
     - title: "Ring (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ring_(mathematics)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

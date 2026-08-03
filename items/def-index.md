@@ -4,6 +4,9 @@ kind: definition
 title: "The coset set $G/H$ and the index $[G:H]$ of a subgroup"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-coset-partition, lem-left-and-right-cosets-equinumerous, def-finite-cardinality]
 justified_by: []
 aliases: []
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.2: Lagrange's Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.02%3A_Lagrange%27s_Theorem"
 pipeline_run: null
 ---
 

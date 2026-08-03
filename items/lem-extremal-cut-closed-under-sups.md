@@ -4,6 +4,9 @@ kind: lemma
 title: "The cut at an extremal element is closed under chain suprema"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-bw-extremal, lem-admissible-set-exists, def-chain-complete-poset, def-upper-bound, def-partial-order]
 justified_by: []
 aliases: []
@@ -11,19 +14,13 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "Mathlib, Order.BourbakiWitt"
+      url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/BourbakiWitt.html"
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
     - title: "Bourbaki–Witt theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
 pipeline_run: null
@@ -45,7 +42,7 @@ $\sup C \in M_x$ for every chain $C \subseteq M_x$.
 
 [L2] Every chain of $P$ has a least upper bound in $P$ ([[def-chain-complete-poset]]).
 
-[L3] A least upper bound is below every upper bound of the same set ([[def-upper-bound]]).
+[L3] A least upper bound of a set is itself an upper bound of that set and is below every other upper bound ([[def-upper-bound]]).
 
 [L4] $\le$ is a partial order, in particular transitive: $u \le v$ and $v \le w$ imply $u \le w$ ([[def-partial-order]]).
 
@@ -63,7 +60,7 @@ $\sup C \in M_x$ for every chain $C \subseteq M_x$.
 
 2.1 In the first case $x$ is an upper bound of $C$, so $s \le x$ because $s$ is the least upper bound, hence $s \in M_x$. [step 1.3, step 1.1, L3, step 1.2, A1]
 
-2.2 In the second case $z_0 \in M_x$ together with $z_0 \not\le x$ forces $f(x) \le z_0$, and $z_0 \le s$ since $s$ is an upper bound of $C$, so $f(x) \le s$ by transitivity, hence $s \in M_x$. [step 1.4, A1, step 1.1, step 1.2, L4]
+2.2 In the second case $z_0 \in M_x$ together with $z_0 \not\le x$ forces $f(x) \le z_0$, and $z_0 \le s$ since $s$ is an upper bound of $C$, so $f(x) \le s$ by transitivity, hence $s \in M_x$. [step 1.4, A1, step 1.1, step 1.2, L3, L4]
 
 3.1 Either every element of $C$ is below $x$ or some element is not, so the two cases are exhaustive and $\sup C \in M_x$ in both. [step 2.1, step 2.2, cases-exhaustive] ∎
 

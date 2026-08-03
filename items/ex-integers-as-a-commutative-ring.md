@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Z}$ is a commutative ring and an ordered ring, the published construction being an instance of the general definitions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring, def-commutative-ring, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, thm-int-comm-ring, thm-int-ordered-ring, def-integers, def-int-operations, def-int-order]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integer"
     - title: "Ordered ring (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_ring"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

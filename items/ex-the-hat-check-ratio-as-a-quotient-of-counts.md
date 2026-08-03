@@ -4,6 +4,9 @@ kind: example
 title: "The ratio $\\iota(D_n)/\\iota(n!)$ computed for small $n$ as a quotient of two counts, with no probability space claimed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-derangement-number, thm-the-derangement-formula, cor-the-derangement-recurrences,
        def-factorial-and-falling-factorial, def-canonical-natural, def-integer-power,
        def-finite-sum, lem-finite-sum-laws, def-ordered-field, def-field,
@@ -14,16 +17,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Derangement"
     - title: "Rencontres numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rencontres_numbers"
+    - title: "Derangements (OpenText at the University of Lethbridge)"
+      url: "https://opentext.uleth.ca/Combinatorics/sect_gen-fns-apps-Derangements.html"
 pipeline_run: null
 ---
 
@@ -90,9 +85,9 @@ the quotient is the displayed alternating sum.
 
 1.1 The quotient form. Dividing the identity of [L1] by the nonzero $\iota(n!)$ gives $r_n = \sum_{i<n+1}(-1)^{i}/\iota(i!)$ for every $n \in \mathbb{N}$. [L1, L2, L4]
 
-1.2 The derangement numbers up to $6$. From $D_2 = 1$ and [L3]: $\iota(D_3) = 3\cdot 1 - 1 = 2$, $\iota(D_4) = 4\cdot 2 + 1 = 9$, $\iota(D_5) = 5\cdot 9 - 1 = 44$ and $\iota(D_6) = 6\cdot 44 + 1 = 265$; since $\iota$ is injective these are the natural numbers $D_3 = 2$, $D_4 = 9$, $D_5 = 44$, $D_6 = 265$. [L3, L4]
+1.2 The derangement numbers up to $6$. From $D_2 = 1$ and [L3]: $\iota(D_3) = 3\cdot 1 - 1 = 2$, $\iota(D_4) = 4\cdot 2 + 1 = 9$, $\iota(D_5) = 5\cdot 9 - 1 = 44$ and $\iota(D_6) = 6\cdot 44 + 1 = 265$; since $\iota$ is injective these are the natural numbers $D_3 = 2$, $D_4 = 9$, $D_5 = 44$, $D_6 = 265$. [L2, L3, L4]
 
-2.1 The tabulated ratios. Dividing step 1.2 by the factorials of [L5] gives $r_0 = 1/1 = 1$, $r_1 = 0/1 = 0$, $r_2 = 1/2$, $r_3 = 2/6 = 1/3$, $r_4 = 9/24 = 3/8$, $r_5 = 44/120 = 11/30$ and $r_6 = 265/720 = 53/144$. [step 1.2, L4, L5]
+2.1 The tabulated ratios. Dividing the base values in [L3] and the values from step 1.2 by the factorials of [L5] gives $r_0 = 1/1 = 1$, $r_1 = 0/1 = 0$, $r_2 = 1/2$, $r_3 = 2/6 = 1/3$, $r_4 = 9/24 = 3/8$, $r_5 = 44/120 = 11/30$ and $r_6 = 265/720 = 53/144$. [step 1.2, L3, L4, L5]
 
 2.2 A cross-check at $n = 4$ through step 1.1: $\sum_{i<5}(-1)^{i}/\iota(i!) = 1 - 1 + 1/2 - 1/6 + 1/24 = 9/24 = 3/8$, which is $r_4$. [step 1.1, L4, L5]
 

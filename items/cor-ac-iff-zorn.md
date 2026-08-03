@@ -4,6 +4,9 @@ kind: corollary
 title: "The Axiom of Choice and Zorn's lemma are equivalent"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-zorn, thm-zorn-implies-ac, def-axiom-of-choice]
 justified_by: []
 forward_refs: [rem-choice-strengths, thm-ultrafilter-lemma]
@@ -26,6 +29,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Encyclopedia of Mathematics, Zorn lemma"
+      url: "https://encyclopediaofmath.org/wiki/Zorn_lemma"
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
     - title: "Axiom of choice (Wikipedia)"

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every list of $mn$ pairwise distinct reals has a strictly increasing sublist of length $m+1$ or a strictly decreasing sublist of length $n+1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-erdos-szekeres, thm-the-erdos-szekeres-bound-is-sharp,
        def-a-monotone-sublist-of-a-finite-list-of-reals, def-nat-order, def-ordered-field,
        def-nat-multiplication]

@@ -4,6 +4,9 @@ kind: definition
 title: "Chain in a poset"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-partial-order]
 justified_by: []
 aliases: []

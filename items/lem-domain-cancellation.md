@@ -4,6 +4,9 @@ kind: lemma
 title: "Cancellation characterises domains: in a commutative ring with $1 \\ne 0$, the implication $ab = ac$ and $a \\ne 0$ imply $b = c$ holds if and only if the ring has no zero divisors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-zero-divisor-and-integral-domain, def-commutative-ring, def-ring, lem-ring-elementary-consequences, lem-group-cancellation, def-group]
 justified_by: []
 aliases: []
@@ -12,10 +15,6 @@ short: "cancellation iff domain"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   audited: 2026-07-28
 sources:
   scraped: []
@@ -24,6 +23,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integral_domain"
     - title: "Cancellation property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cancellation_property"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 
@@ -48,7 +49,7 @@ an integral domain.
 
 [L3] Cancellation in the additive group: $x + z = y + z$ implies $x = y$ ([[lem-group-cancellation]], [[def-group]]).
 
-[L4] $a$ is a zero divisor when $a \ne 0$ and $ab = 0$ for some $b \ne 0$; $R$ has no zero divisors exactly when $ab = 0$ implies $a = 0$ or $b = 0$ ([[def-zero-divisor-and-integral-domain]]).
+[L4] $a$ is a zero divisor when $a \ne 0$ and $ab = 0$ for some $b \ne 0$; $R$ has no zero divisors exactly when $ab = 0$ implies $a = 0$ or $b = 0$; and an integral domain is exactly a commutative ring with $1\ne0$ and no zero divisors ([[def-zero-divisor-and-integral-domain]]).
 
 ## Proof
 
@@ -66,20 +67,8 @@ an integral domain.
 
 ## Remarks
 
-- **The hypothesis $1 \ne 0$ is used nowhere in the equivalence itself.** It is
-  carried in the statement only so that "(C) holds exactly when $R$ is an
-  integral domain" is literally true, since (D1) of
-  [[def-zero-divisor-and-integral-domain]] is part of being a domain. In the
-  one-element ring both (C) and (Z) hold vacuously and the ring is still not a
-  domain.
+- **The hypothesis $1 \ne 0$ is used nowhere in the equivalence itself.** It is carried in the statement only so that "(C) holds exactly when $R$ is an integral domain" is literally true, since (D1) of [[def-zero-divisor-and-integral-domain]] is part of being a domain. In the one-element ring both (C) and (Z) hold vacuously and the ring is still not a domain.
 
-- **Cancellation is by $a$, not by $0$.** The clause $a \ne 0$ cannot be dropped:
-  $0 \cdot b = 0 \cdot c$ holds for all $b$ and $c$ in every ring
-  ([[lem-ring-elementary-consequences]]), so cancelling $0$ would collapse the
-  ring.
+- **Cancellation is by $a$, not by $0$.** The clause $a \ne 0$ cannot be dropped: $0 \cdot b = 0 \cdot c$ holds for all $b$ and $c$ in every ring ([[lem-ring-elementary-consequences]]), so cancelling $0$ would collapse the ring.
 
-- **Multiplicative cancellation does not make the nonzero elements a group.**
-  It makes $(R \setminus \{0\}, \cdot, 1)$ a cancellative commutative monoid,
-  and $\mathbb{Z}$ shows that is strictly weaker than being a group: $2$ cancels
-  and is not invertible. The rings where the nonzero elements do form a group
-  are the fields ([[lem-commutative-division-ring-is-a-field]]).
+- **Multiplicative cancellation does not make the nonzero elements a group.** It makes $(R \setminus \{0\}, \cdot, 1)$ a cancellative commutative monoid, and $\mathbb{Z}$ shows that is strictly weaker than being a group: $2$ cancels and is not invertible. The rings where the nonzero elements do form a group are the fields ([[lem-commutative-division-ring-is-a-field]]).

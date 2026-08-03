@@ -4,6 +4,9 @@ kind: lemma
 title: "The characteristic of a ring is the additive order of $1_R$, with $0$ recording infinite order; $n \\cdot 1_R = 0$ holds exactly when $\\operatorname{char}(R) \\mid n$; and in an integral domain every nonzero element has the same additive order as $1_R$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring-characteristic, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-integer-multiples-in-a-ring, lem-ring-elementary-consequences, def-order-in-a-group, lem-order-characterisation, def-group-power, def-group, def-divides-in-z, def-ring, thm-int-comm-ring, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -12,11 +15,6 @@ short: "char = additive order of $1$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Characteristic_(algebra)"
     - title: "Order (group theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Order_(group_theory)"
+    - title: "Integral domain (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Integral_domain"
 pipeline_run: null
 ---
 
@@ -66,7 +66,7 @@ of [[lem-nat-embeds-int]]. Then:
 
 [L6] In an integral domain, $xy = 0$ implies $x = 0$ or $y = 0$ ([[def-zero-divisor-and-integral-domain]], [[def-commutative-ring]]).
 
-[L7] $\mathbb{Z}$ is a commutative ring, so $0 \cdot q = 0$ for every integer $q$; and $d \mid a$ means $a = dq$ for some $q \in \mathbb{Z}$ ([[thm-int-comm-ring]], [[def-divides-in-z]]). The embedding $\iota_{\mathbb{Z}}$ is injective and preserves addition, multiplication and order, its image being the nonnegative integers ([[lem-nat-embeds-int]]).
+[L7] $\mathbb{Z}$ is a commutative ring, so $0 \cdot q = 0$ for every integer $q$; and $d \mid a$ means $a = dq$ for some $q \in \mathbb{Z}$ ([[thm-int-comm-ring]], [[lem-ring-elementary-consequences]], [[def-divides-in-z]]). The embedding $\iota_{\mathbb{Z}}$ is injective and preserves addition, multiplication and order, its image being the nonnegative integers ([[lem-nat-embeds-int]]).
 
 ## Proof
 
@@ -78,7 +78,7 @@ of [[lem-nat-embeds-int]]. Then:
 
 2.1 Claim 2, the case $\operatorname{char}(R) = c$ with $c \ge 1$. By step 1.1, $\operatorname{ord}(1_R) = c$, so [L3] read additively in $(R,+,0_R)$ gives, for every $n \in \mathbb{Z}$: $n \cdot 1_R = 0_R$ if and only if $c \mid n$. [step 1.1, L3, L7]
 
-2.2 Claim 2, the case $\operatorname{char}(R) = 0$. By step 1.1, $\operatorname{ord}(1_R) = \infty$, so [L3] gives that $n \cdot 1_R = m \cdot 1_R$ forces $n = m$; taking $m = 0$ and using $0 \cdot 1_R = 0_R$, we get $n \cdot 1_R = 0_R$ if and only if $n = 0$. On the other side, $0 \mid n$ means $n = 0 \cdot q$ for some integer $q$, and $0 \cdot q = 0$ in $\mathbb{Z}$, so $0 \mid n$ holds exactly when $n = 0$. The two conditions therefore agree. [step 1.1, L3, L7]
+2.2 Claim 2, the case $\operatorname{char}(R) = 0$. By step 1.1, $\operatorname{ord}(1_R) = \infty$, so [L3] gives that $n \cdot 1_R = m \cdot 1_R$ forces $n = m$; taking $m = 0$ and using the additive reading $0 \cdot 1_R = 0_R$ from [L2], we get $n \cdot 1_R = 0_R$ if and only if $n = 0$. On the other side, $0 \mid n$ means $n = 0 \cdot q$ for some integer $q$, and $0 \cdot q = 0$ in $\mathbb{Z}$, so $0 \mid n$ holds exactly when $n = 0$. The two conditions therefore agree. [step 1.1, L2, L3, L7]
 
 3.1 Claim 2 follows from steps 2.1 and 2.2, since $\operatorname{char}(R)$ is either $0$ or at least $1$. [step 2.1, step 2.2, L1]
 
@@ -86,24 +86,8 @@ of [[lem-nat-embeds-int]]. Then:
 
 ## Remarks
 
-- **The convention $\operatorname{char} = 0$ is what makes claim 2 a single
-  statement.** With $\infty$ in place of $0$ the right-hand side would have to be
-  split into two cases, since $\infty$ is not an integer and
-  "$\infty \mid n$" has no meaning. With $0$, the divisibility relation of
-  [[def-divides-in-z]] does the work in both cases, because $0 \mid n$ holds
-  exactly for $n = 0$.
+- **The convention $\operatorname{char} = 0$ is what makes claim 2 a single statement.** With $\infty$ in place of $0$ the right-hand side would have to be split into two cases, since $\infty$ is not an integer and "$\infty \mid n$" has no meaning. With $0$, the divisibility relation of [[def-divides-in-z]] does the work in both cases, because $0 \mid n$ holds exactly for $n = 0$.
 
-- **Claim 3 is where the ring structure enters.** Claims 1 and 2 are statements
-  about the additive group alone, and would be true in any abelian group with a
-  distinguished element. Claim 3 uses $na = (n\,1_R)a$, which is
-  [[lem-integer-multiples-in-a-ring]], and then the absence of zero divisors.
-  Without the domain hypothesis the argument breaks at a named place: the step
-  deducing $n \cdot 1_R = 0_R$ from $(n\,1_R)a = 0_R$ is an appeal to the absence
-  of zero divisors, and nothing on this page replaces it for a ring that has
-  them.
+- **Claim 3 is where the ring structure enters.** Claims 1 and 2 are statements about the additive group alone, and would be true in any abelian group with a distinguished element. Claim 3 uses $na = (n\,1_R)a$, which is [[lem-integer-multiples-in-a-ring]], and then the absence of zero divisors. Without the domain hypothesis the argument breaks at a named place: the step deducing $n \cdot 1_R = 0_R$ from $(n\,1_R)a = 0_R$ is an appeal to the absence of zero divisors, and nothing on this page replaces it for a ring that has them.
 
-- **$\operatorname{char}(R)$ is a natural number and $n$ is an integer**, so the
-  divisibility in claim 2 is a statement in $\mathbb{Z}$ about
-  $\iota_{\mathbb{Z}}(\operatorname{char}(R))$ and $n$, as the Statement says.
-  The two are not the same kind of object, and reading the claim without the
-  embedding would be a category error rather than an abbreviation.
+- **$\operatorname{char}(R)$ is a natural number and $n$ is an integer**, so the divisibility in claim 2 is a statement in $\mathbb{Z}$ about $\iota_{\mathbb{Z}}(\operatorname{char}(R))$ and $n$, as the Statement says. The two are not the same kind of object, and reading the claim without the embedding would be a category error rather than an abbreviation.

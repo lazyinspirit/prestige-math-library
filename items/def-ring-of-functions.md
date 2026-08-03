@@ -4,6 +4,9 @@ kind: definition
 title: "The ring $R^{X}$ of all functions from a set $X$ into a ring, with pointwise operations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, def-binary-operation, lem-ring-elementary-consequences]
 justified_by: []
 aliases: [def-function-ring]

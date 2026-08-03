@@ -4,6 +4,9 @@ kind: definition
 title: "The derangement number $D_n$: the number of bijections of an $n$-element set with no fixed point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [thm-number-of-bijections-of-a-finite-set, def-finite-cardinality, thm-subset-of-a-finite-set,
        def-injection-surjection-bijection, def-natural-numbers, def-factorial-and-falling-factorial]
 justified_by: []
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Rencontres_numbers"
     - title: "Inclusion-exclusion principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
+    - title: "DLMF §26.13: Permutations: Cycle Notation"
+      url: "https://dlmf.nist.gov/26.13"
 pipeline_run: null
 ---
 

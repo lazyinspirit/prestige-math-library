@@ -4,6 +4,9 @@ kind: example
 title: "In a finite set with a symmetric irreflexive relation and at least two elements, two elements have equally many neighbours"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-the-strong-pigeonhole-principle, def-a-finite-incidence-relation-and-its-fibres,
        def-finite-cardinality, thm-subset-of-a-finite-set, def-injection-surjection-bijection,
        def-nat-order, thm-sum-rule, def-nat-finite-sum-and-product, lem-nat-order-is-membership,
@@ -14,16 +17,6 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +24,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Handshaking lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Handshaking_lemma"
+    - title: "Graph Theory, Chapter 1 (King Saud University notes)"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/Graph%20Chap%201Math%205301.pdf"
 pipeline_run: null
 ---
 
@@ -60,13 +55,15 @@ $d(2) = 0$, and the elements $0$ and $1$ have equally many neighbours.
 
 [L2] $\lvert V\setminus\{x\}\rvert = N - 1$, since $\{x\}$ and $V \setminus \{x\}$ are disjoint with union $V$ and $\lvert\{x\}\rvert = 1$ ([[thm-sum-rule]], clause 1, [[def-finite-cardinality]], [[def-nat-finite-sum-and-product]] for the truncated difference).
 
-[L3] If $d(y) = N-1$ then $R_y = V\setminus\{y\}$, since $R_y$ is a subset of $V \setminus \{y\}$ of the same cardinality ([[thm-subset-of-a-finite-set]], clause 3).
+[L3] If $d(y) = N-1$ then [L1] gives $R_y\subseteq V\setminus\{y\}$, while [L2] gives $|R_y|=N-1=|V\setminus\{y\}|$; hence $R_y=V\setminus\{y\}$ ([[def-a-finite-incidence-relation-and-its-fibres]], [[thm-sum-rule]], [[def-finite-cardinality]], [[thm-subset-of-a-finite-set]], clause 3).
 
 [L4] Symmetry: $x \in R_y$ if and only if $y \in R_x$ ([[def-a-finite-incidence-relation-and-its-fibres]], clause (d)).
 
 [L5] The counting form of the strong pigeonhole principle: if $\lvert A\rvert > 1\cdot\lvert B\rvert$ then some fibre of any $f : A \to B$ has more than one element ([[thm-the-strong-pigeonhole-principle]], clause 1, [[def-injection-surjection-bijection]]).
 
 [L6] Order and membership in $\mathbb{N}$: $k \le N-2$ if and only if $k < N-1$, that is $k \in N-1$; $N \ge 2$ gives $N-1 \ge 1$ and $(N-1)-1 = N-2$; and exactly one of $p<q$, $p=q$, $q<p$ holds ([[lem-nat-order-is-membership]], [[def-nat-order]], [[lem-nat-trichotomy]], [[lem-nat-order-add-compatible]], [[def-natural-numbers]], [[def-nat-finite-sum-and-product]]).
+
+[L7] Every natural number is a finite set whose cardinality is itself; in particular $|N-1|=N-1$ ([[def-finite-cardinality]], clause (a)).
 
 ## Verification
 
@@ -76,9 +73,9 @@ $d(2) = 0$, and the elements $0$ and $1$ have equally many neighbours.
 
 1.2 The two extreme values cannot both be attained. Suppose $d(x_0) = 0$ and $d(y) = N-1$ for some $x_0, y \in V$. Then $x_0 \ne y$, since $0 \ne N-1$ by [L6]; by [L3] we have $R_y = V\setminus\{y\}$, so $x_0 \in R_y$, so $y \in R_{x_0}$ by [L4], so $d(x_0) \ge 1$, contradicting $d(x_0) = 0$. [L1, L3, L4, L6]
 
-2.1 Case (a): no $x \in V$ has $d(x) = 0$. Then $1 \le d(x) \le N-1$ for every $x$, so $d(x) - 1 \le N-2$, that is $d(x)-1 \in N-1$ by [L6]; thus $x \mapsto d(x)-1$ maps $V$ into the set $N-1$, whose cardinality is $N-1$. Since $N > N-1$, [L5] gives two distinct $x \ne y$ with $d(x)-1 = d(y)-1$, and since both counts are at least $1$ this forces $d(x) = d(y)$. [assume-case pos, step 1.1, L5, L6]
+2.1 Case (a): no $x \in V$ has $d(x) = 0$. Then $1 \le d(x) \le N-1$ for every $x$, so $d(x) - 1 \le N-2$, that is $d(x)-1 \in N-1$ by [L6]; thus $x \mapsto d(x)-1$ maps $V$ into the set $N-1$, whose cardinality is $N-1$. Since $N > N-1$, [L5] gives two distinct $x \ne y$ with $d(x)-1 = d(y)-1$, and since both counts are at least $1$ this forces $d(x) = d(y)$. [assume-case pos, step 1.1, L5, L6, L7]
 
-2.2 Case (b): some $x_0 \in V$ has $d(x_0) = 0$. Then by step 1.2 no $y$ has $d(y) = N-1$, so $d(x) \le N-2$ for every $x$ by [L1], [L2] and [L6], that is $d(x) \in N-1$; thus $d$ maps $V$ into the set $N-1$, of cardinality $N-1$. Since $N > N-1$, [L5] gives two distinct $x \ne y$ with $d(x) = d(y)$. [assume-case zero, step 1.1, step 1.2, L1, L2, L5, L6]
+2.2 Case (b): some $x_0 \in V$ has $d(x_0) = 0$. Then by step 1.2 no $y$ has $d(y) = N-1$, so $d(x) \le N-2$ for every $x$ by [L1], [L2] and [L6], that is $d(x) \in N-1$; thus $d$ maps $V$ into the set $N-1$, of cardinality $N-1$. Since $N > N-1$, [L5] gives two distinct $x \ne y$ with $d(x) = d(y)$. [assume-case zero, step 1.1, step 1.2, L1, L2, L5, L6, L7]
 
 3.1 The two cases are exhaustive, so in either case two distinct elements of $V$ have equally many neighbours. [step 2.1, step 2.2, cases-exhaustive] ∎
 

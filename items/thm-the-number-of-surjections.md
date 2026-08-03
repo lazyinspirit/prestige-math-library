@@ -4,6 +4,9 @@ kind: theorem
 title: "The number of surjections from an $n$-element set onto a $k$-element set is $\\sum_{i<k+1}(-1)^{i}\\binom{k}{i}(k-i)^{n}$, read in $\\mathbb{R}$ through $\\iota$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        thm-cardinality-of-a-set-of-functions, def-nat-power, def-binomial-coefficient,
        thm-sum-rule, def-sum-over-a-finite-index-set, def-canonical-natural,
@@ -17,16 +20,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -36,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Twelvefold way (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Twelvefold_way"
+    - title: "Algebraic Combinatorics Blueprint: Surjections"
+      url: "https://faabian.github.io/algebraic-combinatorics/blueprint/sect0032.html"
 pipeline_run: null
 ---
 
@@ -81,7 +76,7 @@ rather than stipulated.**
 
 [L3] $f \in \operatorname{Map}(A,B)$ is a surjection exactly when $f[A] = B$, that is exactly when there is no $b \in B$ with $b \notin f[A]$ ([[def-injection-surjection-bijection]]). Hence $\operatorname{Surj}(A,B) = X \setminus \bigcup_{b \in B}F_b$, and it is finite as a subset of $X$ ([[thm-subset-of-a-finite-set]]).
 
-[L4] The complementary form of the sieve identity ([[thm-inclusion-exclusion]], clause 2).
+[L4] For a finite sieve family $(F_b)_{b\in B}$ in $X$ with $F_\varnothing=X$, the complementary identity is $\iota|X\setminus\bigcup_{b\in B}F_b|=\sum_{J\in\mathcal P(B)}(-1)^{|J|}\iota|F_J|$ ([[thm-inclusion-exclusion]], clause 2).
 
 [L5] For $J \subseteq B$: $\lvert J\rvert + \lvert B \setminus J\rvert = \lvert B\rvert$, so $\lvert B\setminus J\rvert = k - \lvert J\rvert$ ([[thm-sum-rule]], clause 1, and the truncated difference of [[def-nat-finite-sum-and-product]]).
 

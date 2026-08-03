@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Q}$ and $\\mathbb{R}$ are fields, hence commutative rings, integral domains and ordered rings, all of characteristic $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-field, lem-field-is-a-commutative-ring, def-zero-divisor-and-integral-domain, def-ordered-ring, lem-ordered-ring-cone-and-order-agree, lem-ordered-field-is-an-ordered-ring, def-ordered-field, def-ring-characteristic, lem-integer-multiples-agree-with-canonical-natural, def-canonical-natural, lem-of-naturals-positive, thm-rat-field, thm-reals-field, thm-rat-ordered-field, thm-reals-ordered-field, def-ring, def-commutative-ring]
 justified_by: []
 aliases: []
@@ -12,10 +15,6 @@ short: "ℚ and ℝ as rings"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   audited: 2026-07-28
 sources:
   scraped: []
@@ -24,6 +23,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
     - title: "Characteristic (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Characteristic_(algebra)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 
@@ -70,7 +71,7 @@ Let $F$ be either $\mathbb{Q}$ ([[thm-rat-field]]) or $\mathbb{R}$
 
 2.1 By [L2] the published order on $F$ is a total order satisfying (OR1) and (OR2) of [[def-ordered-ring]] verbatim; with step 1.1 this makes $F$ an ordered ring. [L1, L2, L3]
 
-3.1 By [L4] applied to that ordered ring, $P = \{\, x \in F : 0 < x \,\}$ satisfies trichotomy and closure, and the relation $a < b :\iff b - a \in P$ is the published order. Trichotomy and closure are exactly axioms (O1) and (O2) of [[def-ordered-field]], so $(F,P)$ is an ordered field whose order is the published one. This is claim 2. [step 2.1, L4, L5]
+3.1 By [L4] applied to that ordered ring, $P = \{\, x \in F : 0 < x \,\}$ satisfies trichotomy and closure, and the relation $a < b :\iff b - a \in P$ is the published order. Together with the field structure from step 1.1, trichotomy and closure are exactly axioms (O1) and (O2) of [[def-ordered-field]], so $(F,P)$ is an ordered field whose order is the published one. This is claim 2. [step 1.1, step 2.1, L4, L5]
 
 4.1 By step 3.1 the ordered-field structure of $F$ is available, so [L7] applies. Its multiples and the multiples of [L8] are the same elements: both agree with the canonical natural $\iota(n)$ of [[def-canonical-natural]] by [L6], since $\iota(1) = \iota(0) + 1_F = 1_F$ and both recursions add $1_F$ at each successor. Hence $n \cdot 1_F > 0$ for every natural $n \ge 1$, and $n \cdot 1_F \ne 0_F$ because $0_F$ is not positive by trichotomy. [step 3.1, L5, L6, L7]
 
@@ -80,23 +81,8 @@ Let $F$ be either $\mathbb{Q}$ ([[thm-rat-field]]) or $\mathbb{R}$
 
 ## Remarks
 
-- **Two presentations of one order, reconciled here rather than assumed.** The
-  published [[thm-rat-ordered-field]] and [[thm-reals-ordered-field]] state the
-  order form; the published [[def-ordered-field]] states the positive-cone form.
-  The step establishing claim 2 above passes between them using
-  [[lem-ordered-ring-cone-and-order-agree]], and that is the only reason
-  [[lem-of-naturals-positive]], which is stated for an ordered field, may be
-  applied to $\mathbb{Q}$ and $\mathbb{R}$ here.
+- **Two presentations of one order, reconciled here rather than assumed.** The published [[thm-rat-ordered-field]] and [[thm-reals-ordered-field]] state the order form; the published [[def-ordered-field]] states the positive-cone form. The step establishing claim 2 above passes between them using [[lem-ordered-ring-cone-and-order-agree]], and that is the only reason [[lem-of-naturals-positive]], which is stated for an ordered field, may be applied to $\mathbb{Q}$ and $\mathbb{R}$ here.
 
-- **The multiples agree with the canonical naturals.** By [L6] the element
-  $n \cdot 1_F$ appearing in [[def-ring-characteristic]] is the $\iota(n)$ of
-  [[def-canonical-natural]], so claim 3 is also the statement that $\iota$ never
-  takes the value $0_F$ on $n \ge 1$ in these two fields. More is true and is
-  quoted rather than proved here: [[lem-of-naturals-positive]] shows $\iota$ is
-  strictly increasing on $n \ge 1$, hence injective.
+- **The multiples agree with the canonical naturals.** By [L6] the element $n \cdot 1_F$ appearing in [[def-ring-characteristic]] is the $\iota(n)$ of [[def-canonical-natural]], so claim 3 is also the statement that $\iota$ never takes the value $0_F$ on $n \ge 1$ in these two fields. More is true and is quoted rather than proved here: [[lem-of-naturals-positive]] shows $\iota$ is strictly increasing on $n \ge 1$, hence injective.
 
-- **$\mathbb{Q}$ and $\mathbb{R}$ are domains for a reason stronger than
-  necessary.** They have no zero divisors because every nonzero element is
-  invertible, not because of any cancellation argument; the same reasoning gives
-  nothing about $\mathbb{Z}$, whose domain property is recorded separately in
-  [[ex-integers-are-an-integral-domain-not-a-field]].
+- **$\mathbb{Q}$ and $\mathbb{R}$ are domains for a reason stronger than necessary.** They have no zero divisors because every nonzero element is invertible, not because of any cancellation argument; the same reasoning gives nothing about $\mathbb{Z}$, whose domain property is recorded separately in [[ex-integers-are-an-integral-domain-not-a-field]].

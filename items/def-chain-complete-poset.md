@@ -4,6 +4,9 @@ kind: definition
 title: "Chain-complete poset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-chain, def-upper-bound]
 justified_by: []
 forward_refs: [cex-progressive-map-without-fixed-point, ex-powerset-is-chain-complete]

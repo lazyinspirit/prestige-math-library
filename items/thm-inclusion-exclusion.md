@@ -4,6 +4,9 @@ kind: theorem
 title: "Inclusion and exclusion: $\\iota\\lvert\\bigcup_{i \\in I} A_i\\rvert = \\sum_{\\varnothing \\ne J \\subseteq I}(-1)^{\\lvert J\\rvert + 1}\\,\\iota\\lvert A_J\\rvert$, together with the complementary form counting the elements in none of the $A_i$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-a-sieve-family-and-its-intersections, lem-a-double-sum-over-finite-index-sets-may-be-interchanged,
        thm-sum-rule, def-sum-over-a-finite-index-set, cor-binomial-theorem-consequences,
        def-binomial-coefficient, def-canonical-natural, def-integer-power,
@@ -22,10 +25,6 @@ verification:
     date: 2026-07-29
     scope: page
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -35,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Binomial_coefficient"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 2"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Guichard, The Inclusion-Exclusion Formula (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_and_Graph_Theory_%28Guichard%29/02%3A_Inclusion-Exclusion/2.01%3A_The_Inclusion-Exclusion_Formula"
 pipeline_run: null
 ---
 
@@ -70,7 +71,7 @@ enter with a plus sign.
 
 **Given:** A sieve family $X$, $I$, $(A_i)_{i \in I}$ with intersections $A_J$, union $U$, traces $T(x)$ and $t(x) := \lvert T(x)\rvert$, all as in [[def-a-sieve-family-and-its-intersections]]; the abbreviation $\mathcal{J} := \mathcal{P}(I)\setminus\{\varnothing\}$; and, for $V \subseteq X$, the **indicator** $\mathbf{1}_V : X \to \mathbb{R}$ with $\mathbf{1}_V(x) = 1$ for $x \in V$ and $\mathbf{1}_V(x) = 0$ otherwise.
 
-[L1] Sieve facts ([[def-a-sieve-family-and-its-intersections]]): $\mathcal{P}(I)$, $\mathcal{J}$, each $[S]^{j}$, each $A_J$, $U$ and each $T(x)$ are finite ([[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]); for nonempty $J$, $x \in A_J$ if and only if $J \subseteq T(x)$; $x \in U$ if and only if $T(x) \ne \varnothing$; and $\lvert [S]^{j}\rvert = \binom{\lvert S\rvert}{j}$ ([[def-binomial-coefficient]]).
+[L1] Sieve facts ([[def-a-sieve-family-and-its-intersections]]): $\mathcal{P}(I)$, $\mathcal{J}$, each $[I]^{j}$, each $A_J$, $U$ and each $T(x)$ are finite ([[cor-cardinality-of-the-power-set]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]); for nonempty $J$, $x \in A_J$ if and only if $J \subseteq T(x)$; $x \in U$ if and only if $T(x) \ne \varnothing$; and $\lvert [I]^{j}\rvert = \binom{\lvert I\rvert}{j}$ ([[def-binomial-coefficient]]).
 
 [L2] Splitting a sum along a partition of its index set, and the sum rule for two disjoint blocks ([[thm-sum-rule]], clauses 3 and 1).
 
@@ -96,7 +97,7 @@ enter with a plus sign.
 
 1.3 Fix $x \in X$ and write $t := t(x)$. The sets $\mathcal{J}_1 := \{\,J \in \mathcal{J} : J \subseteq T(x)\,\}$ and $\mathcal{J}\setminus\mathcal{J}_1$ are disjoint with union $\mathcal{J}$; by [L1] we have $\mathbf{1}_{A_J}(x) = 1$ for $J \in \mathcal{J}_1$ and $\mathbf{1}_{A_J}(x) = 0$ for $J \in \mathcal{J}\setminus\mathcal{J}_1$, so splitting by [L2] gives $\sum_{J \in \mathcal{J}}h(J,x) = \sum_{J \in \mathcal{J}_1}(-1)^{\lvert J\rvert + 1}$, and $\mathcal{J}_1 = \mathcal{P}(T(x))\setminus\{\varnothing\}$. [L1, L2, L3]
 
-1.4 Grouping the subsets of $T(x)$ by size. By [L6] applied to $T(x)$, then the constant clause of [L3] on each block, then scaling by $-1$ and $(-1)^{j+1} = -(-1)^{j}$ from [L7], $$\sum_{J \in \mathcal{P}(T(x))}(-1)^{\lvert J\rvert + 1} = \sum_{j<t+1}\Big(\sum_{J \in [T(x)]^{j}}(-1)^{j+1}\Big) = \sum_{j<t+1}\iota\binom{t}{j}\,(-1)^{j+1} = -\sum_{j<t+1}(-1)^{j}\,\iota\binom{t}{j}.$$ [L1, L3, L5, L6, L7]
+1.4 Grouping the subsets of $T(x)$ by size. By [L6] applied to $T(x)$, then the constant clause of [L3] on each block, then scaling by $-1$ and $(-1)^{j+1} = -(-1)^{j}$ from [L7], $$\sum_{J \in \mathcal{P}(T(x))}(-1)^{\lvert J\rvert + 1} = \sum_{j<t+1}\Big(\sum_{J \in [T(x)]^{j}}(-1)^{j+1}\Big) = \sum_{j<t+1}\iota\binom{t}{j}\,(-1)^{j+1} = -\sum_{j<t+1}(-1)^{j}\,\iota\binom{t}{j}.$$ [L1, L2, L3, L5, L6, L7]
 
 1.5 Splitting off the empty subset. $\{\varnothing\}$ and $\mathcal{P}(T(x))\setminus\{\varnothing\}$ are disjoint with union $\mathcal{P}(T(x))$, so [L2] and [L7] give $\sum_{J \in \mathcal{P}(T(x))}(-1)^{\lvert J\rvert + 1} = (-1)^{0+1} + \sum_{J \in \mathcal{P}(T(x))\setminus\{\varnothing\}}(-1)^{\lvert J\rvert + 1} = -1 + \sum_{J \in \mathcal{P}(T(x))\setminus\{\varnothing\}}(-1)^{\lvert J\rvert + 1}$. [L2, L3, L7]
 

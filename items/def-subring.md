@@ -4,6 +4,9 @@ kind: definition
 title: "Subring: a subset containing $1_R$ and closed under addition, additive inverses and multiplication"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-subgroup, def-binary-operation, def-identity-element]
 justified_by: []
 aliases: []

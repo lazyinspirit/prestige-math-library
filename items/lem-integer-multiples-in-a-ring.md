@@ -4,6 +4,9 @@ kind: lemma
 title: "Integer multiples in a ring: $(m + n)a = ma + na$, $m(a + b) = ma + mb$, $(ma)b = m(ab) = a(mb)$ and $(ma)(nb) = (mn)(ab)$ for all $m, n \\in \\mathbb{Z}$ and $a, b \\in R$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ring, def-group, def-group-power, lem-group-power-laws, lem-ring-elementary-consequences, thm-induction-principle, def-natural-numbers, def-integers, def-int-operations, thm-int-comm-ring, thm-int-ordered-ring, def-int-order, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ring_(mathematics)"
     - title: "Characteristic (algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Characteristic_(algebra)"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

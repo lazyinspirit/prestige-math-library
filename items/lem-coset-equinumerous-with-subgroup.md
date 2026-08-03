@@ -4,6 +4,9 @@ kind: lemma
 title: "Every left or right coset of $H$ is equinumerous with $H$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-coset, lem-group-cancellation, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 aliases: []
@@ -11,12 +14,15 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
 sources:
   scraped: []
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.2: Lagrange's Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.02%3A_Lagrange%27s_Theorem"
 pipeline_run: null
 ---
 
@@ -51,4 +57,4 @@ $H$.
 
 1.2 The map $\rho_g:H\to Hg$, $h\mapsto hg$, is surjective by the definition of $Hg$ and injective by right cancellation. [F1, L1]
 
-2.1 Both maps are bijections, so $H$, $gH$ and $Hg$ are pairwise equinumerous. [step 1.1, step 1.2, F2] ∎
+2.1 Both maps are bijections. Thus $H$ is equinumerous with each coset; moreover $\rho_g\circ\lambda_g^{-1}:gH\to Hg$ is a bijection, so $H$, $gH$ and $Hg$ are pairwise equinumerous. [step 1.1, step 1.2, F2] ∎

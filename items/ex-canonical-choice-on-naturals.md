@@ -4,6 +4,9 @@ kind: example
 title: "$\\min$ is a choice function on $\\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-choice-function, thm-well-ordering-principle, thm-nat-linear-order, def-nat-order]
 justified_by: []
 forward_refs: [thm-well-ordering-theorem, lem-pigeonhole]
@@ -12,19 +15,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
     - title: "Choice function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Choice_function"
     - title: "Well-ordering principle (Wikipedia)"
@@ -80,6 +75,6 @@ subset; how large the family of nonempty subsets is then does not matter.
 
 - **[[lem-finite-choice]] does not apply**, and not for the reason usually given. That lemma carries no finiteness hypothesis at all, and it refuses that reading explicitly: it is stated over an *indexed* family, a natural number $n$ and a function $F$ with domain $n$ all of whose values are nonempty, and it gives a choice function for the family $F[n]$ of the values of $F$. What disqualifies $\mathcal{F} = \mathcal{P}(\mathbb{N}) \setminus \{\emptyset\}$ is that it is not $F[n]$ for any such $F$: sending each member of $F[n]$ to the least index at which $F$ takes it as a value injects $F[n]$ into $n$, the least index existing by [L1], whereas $\mathcal{F}$ already contains the $n + 1$ pairwise distinct singletons $\{0\}, \{1\}, \dots, \{n\}$, and no injection $\sigma(n) \to n$ exists ([[lem-pigeonhole]], which this library proves on a later page). Size is not what is at stake here, structure is, and [[ex-russells-socks]] is the contrasting case: a family of two element sets, with no listing of this kind and no rule either.
 
-- The same construction works verbatim on any set carrying a well-order, with "least element" read in that order. Whether every *arbitrary* set carries a well-order is a different question, and answering it affirmatively is again a form of the Axiom of Choice. The library does prove it, but only from that axiom and only on a later page ([[thm-well-ordering-theorem]]); nothing in this example uses it, and no item on this page cites it.
+- The same construction works verbatim on any set carrying a well-order, with "least element" read in that order. Whether every *arbitrary* set carries a well-order is a different question, and answering it affirmatively is again a form of the Axiom of Choice. The library does prove it, but only from that axiom and only on a later page ([[thm-well-ordering-theorem]]); nothing in this example uses it, and no item on this page lists it as a dependency.
 
 - Antisymmetry does the whole of the uniqueness work, and it is the only order axiom needed for it. This is the same one-line argument that makes $\sup$ legitimate notation in a poset ([[def-upper-bound]]).

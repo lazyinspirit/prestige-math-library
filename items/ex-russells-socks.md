@@ -4,8 +4,12 @@ kind: example
 title: "Russell's shoes and socks"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-axiom-of-choice, def-choice-function, lem-finite-choice, rem-fraenkel-socks-model]
 justified_by: []
+forward_refs: [def-countable]
 external_refs: [rem-cohen-forcing-ac-independent, rem-cohen-first-model]
 aliases: []
 landmark: false
@@ -25,6 +29,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
+    - title: "T. Jech, The Axiom of Choice, North-Holland (1973)"
+      url: "https://archive.org/details/axiomofchoice0000jech"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
@@ -84,9 +92,9 @@ theorem transferring the conclusion to ZF, and this library develops neither.
 
 - **What is proved and what is quoted.** Steps 1.1 to 3.1 are a complete ZF argument: a distinguishing set turns infinitely many choices into one formula. Step 5.1 rests on [A1], an external independence result. The honest reading is that the sock half is unavailable in ZF, not that it has been refuted here.
 
-- **Where [A1] sits in this library's record of unproved results.** [A1] concerns countable families of two element sets, so it is the failure of a choice principle far weaker than the Axiom of Choice, and the library records it in its own right, with sources, as [[rem-fraenkel-socks-model]]. It is stronger than the bare independence of the Axiom of Choice: the Axiom of Choice implies choice for countable families of pairs, so any ZF proof of the Axiom of Choice would yield a ZF proof of that weaker principle, and [A1] denies the latter, so [A1] already gives [[rem-cohen-forcing-ac-independent]]. [[rem-cohen-first-model]], that if ZF is consistent then so is ZF together with an infinite set of reals having no countably infinite subset, records a different failure of choice and is not what [A1] rests on. The standard Fraenkel-Mostowski "socks" model witnesses [A1] in **ZFA**, set theory with atoms, where the two socks of a pair are atoms and a permutation exchanging them is an automorphism; a permutation model is not a model of ZF, and the passage to ZF is the Jech-Sochor embedding theorem, which this library does not contain either.
+- **Where [A1] sits in this library's record of unproved results.** [A1] concerns countable families of two element sets, so it is the failure of a choice principle far weaker than the Axiom of Choice, and the library records it in its own right, with sources, as [[rem-fraenkel-socks-model]]. It is stronger than the bare independence of the Axiom of Choice: the Axiom of Choice implies choice for countable families of pairs, so any ZF proof of the Axiom of Choice would yield a ZF proof of that weaker principle, and [A1] denies the latter, so [A1] already gives [[rem-cohen-forcing-ac-independent]]. [[rem-cohen-first-model]], that if ZF is consistent then so is ZF together with an infinite set of reals having no countably infinite subset, records a different failure of choice and is not what [A1] rests on. The standard Fraenkel-Mostowski "socks" model witnesses [A1] in **ZFA**, set theory with atoms, where the two socks of a pair are atoms and a permutation exchanging them is an automorphism; a permutation model is not a model of ZF, and the passage to ZF is supplied by the Jech-Sochor embedding theorem, whose role is recorded but not proved in [[rem-fraenkel-socks-model]].
 
-- **Boundedly many pairs of socks are free.** Whenever the pairs can be listed as the values $F(0), \dots, F(n-1)$ of a function $F$ with domain a natural number $n$, a choice function exists outright by [[lem-finite-choice]], with the picks made one at a time. That lemma is stated over such an indexed family and deliberately does *not* say "finitely many": no definition of finiteness is available at this point in the library, and the identification of the finite families with the listable ones is nowhere made there. Russell's contrast is a genuinely infinite phenomenon, which is why he stated it for infinitely many pairs.
+- **Boundedly many pairs of socks are free.** Whenever the pairs can be listed as the values $F(0), \dots, F(n-1)$ of a function $F$ with domain a natural number $n$, a choice function exists outright by [[lem-finite-choice]], with the picks made one at a time. That lemma is stated over such an indexed family and deliberately does *not* say "finitely many." A finite set is defined later as one equinumerous with a natural number ([[def-countable]]); this example uses only the indexed-family statement and does not identify an arbitrary finite family with a particular enumeration. Russell's contrast is a genuinely infinite phenomenon, which is why he stated it for infinitely many pairs.
 
 - The shoe argument never used that the pairs are pairwise disjoint, or that they are indexed by $\mathbb{N}$, or that they have two elements. All it used is that some formula picks out one element of each member, which is the general reason a concrete family can have an explicit choice function ([[ex-canonical-choice-on-naturals]] is the same phenomenon with "least element" in place of "left shoe").
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: truncating the sieve at a fixed depth of at least two gives the exact size of the union"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-the-bonferroni-inequalities, def-a-sieve-family-and-its-intersections,
        def-finite-cardinality, def-canonical-natural, def-sum-over-a-finite-index-set,
        def-integer-power, def-binomial-coefficient, def-ordered-field, def-field,
@@ -14,16 +17,6 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +24,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Boole's inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Boole%27s_inequality"
+    - title: "Indicator Functions and Inclusion-Exclusion (University of South Carolina notes)"
+      url: "https://people.math.sc.edu/laszlo/indicator1.pdf"
+    - title: "Principle of Inclusion and Exclusion and Bonferroni Inequalities (Concordia notes)"
+      url: "https://users.encs.concordia.ca/~chvatal/notes/pie.html"
 pipeline_run: null
 ---
 
@@ -46,7 +43,8 @@ with $S_j$ and $T_m$ as in [[thm-the-bonferroni-inequalities]].
 The claim reads the Bonferroni inequalities as if a truncation at any depth
 beyond the first were already exact. What is true is that the truncation is an
 over-estimate at an odd depth and an under-estimate at an even depth, and that it
-becomes exact only once the depth reaches $\lvert I\rvert$; the hypothesis
+is guaranteed to become exact once the depth reaches $\lvert I\rvert$, though
+special families may become exact earlier; the hypothesis
 $m \ge 2$ does nothing to close that gap when $\lvert I\rvert$ exceeds $m$.
 
 ## Facts & Assumptions
@@ -77,6 +75,6 @@ $m \ge 2$ does nothing to close that gap when $\lvert I\rvert$ exceeds $m$.
 
 ## Remarks
 
-- **The claim is not repaired by raising the fixed depth.** For any fixed $m$ the same family with $I$ taken to have more than $m$ elements refutes it again, because the truncation is exact only from depth $\lvert I\rvert$ onwards. That is why the true statement fixes the depth relative to $\lvert I\rvert$ rather than absolutely.
+- **The claim is not repaired by raising the fixed depth.** For any fixed $m$ the same all-equal family with $I$ taken to have more than $m$ elements refutes it again; clause 3 guarantees exactness once the depth reaches $\lvert I\rvert$, while other families may already be exact sooner. That is why the true uniform guarantee fixes the depth relative to $\lvert I\rvert$ rather than absolutely.
 
 - **The direction of the error is not accidental.** Depth $2$ is an even truncation, and an even truncation under-estimates, so the truncated value is below the truth rather than above it. A witness at depth $3$ would over-shoot instead.

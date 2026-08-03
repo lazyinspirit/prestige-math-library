@@ -4,6 +4,9 @@ kind: definition
 title: "The product ring $R \\times S$ with componentwise operations, its identity $(1_R, 1_S)$ and its units $R^{\\times} \\times S^{\\times}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, def-invertible-element, lem-ring-elementary-consequences]
 justified_by: []
 aliases: [def-direct-product-of-rings]
@@ -11,11 +14,6 @@ landmark: false
 short: "product ring $R \\times S$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -78,7 +76,8 @@ using $x \cdot 0 = 0 = 0 \cdot x$ ([[lem-ring-elementary-consequences]]).
   cleanest source of zero divisors available at this point, and the companion
   page records the instance $\mathbb{Z} \times \mathbb{Z}$.
 
-- **The two projections are ring homomorphisms; the two injections are not.**
+- **The two projections are ring homomorphisms; the standard injections need
+  not be, and fail when the other factor is nonzero.**
   The maps $(a,b) \mapsto a$ and $(a,b) \mapsto b$ satisfy (RH1), (RH2) and
   (RH3) of [[def-ring-homomorphism]]. The map $a \mapsto (a, 0_S)$ satisfies
   (RH1) and (RH2) but sends $1_R$ to $(1_R, 0_S)$, which is not the identity of

@@ -4,6 +4,9 @@ kind: definition
 title: "Partial order and partially ordered set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: []
 justified_by: []
 aliases: [def-poset]

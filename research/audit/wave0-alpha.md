@@ -1310,3 +1310,114 @@ lem-rat-embeds-dense
 
 Plus the page file `construction-of-r-via-dedekind-cuts.md`, which carries no
 verification stamp and is not judged.
+
+---
+
+# Recovery receipt — amended GPT-5.6-Sol Audit Alpha handoff
+
+Recovered at `2026-08-02T19:14:17+10:00` under the 2026-08-02 owner amendment
+in `briefs/audit-alpha.md`. This is a recovery receipt only: I made no
+adjudication, repair, judge call, stamp change, ledger row, gate run, or content
+change.
+
+## Durable record read
+
+- Read in full: `CLAUDE.md`, `AUDIT-WORKFLOW.md`,
+  `research/audit/RESUME.md`, `briefs/audit-alpha.md`, and this complete Alpha
+  report.
+- Read all eight `wave0-*.findings.md` repair records and all eight
+  `wave0-*.A3.md` receipts. There is no separate
+  `wave0-*.published-repairs.md`; the durable A4 repair receipts are the A4
+  sections of the findings, with A6/A8 repairs and certifications recorded in
+  this report.
+- Read all eight `wave0-*.provenance.jsonl` ledgers; all eight per-batch
+  `wave0-*.proof-contracts.json` receipts; the merged contract receipt; all
+  seven `wave0-*.pages.json` manifests; and
+  `wave0-audit-manifest.json`. The page manifests contain 298 appearances / 276
+  distinct items. The audit manifest contains 2,270 edges (1,166 same-batch,
+  448 published-backward, 631 cross-batch, 25 forward). The merged contract
+  receipt is 209/209 contracts, 1,766 citations, 1,503 derivations, and 1,672
+  boundary dispositions; its SHA-256 is
+  `000b6d8abc2e0a08bba6025b10f38623deb37b067a97d7809fe9af01c0d86d61`.
+- Read the adjudication/judge receipts and ledgers:
+  `wave0-judge-adjudications.jsonl`, `wave0-judge.jsonl`,
+  `wave0-judge-attempts.jsonl`, `wave0-judge-cost.jsonl`,
+  `wave0-judge-opus-superseded.jsonl`, and
+  `wave0-judge-rejections.json`. The adjudication ledger has 64 unique exact
+  `(id, model, context_sha256)` triples; every triple joins to a historical
+  `keep: false` row, with 16 `false_positive`, 41 `confirmed_nonfatal`, and 7
+  `confirmed_fatal`. Its SHA-256 is
+  `bcc1ce1350a17908f2969781cb12a0c73b095fec81ee7629faf625236cc14d60`.
+- Read `genrisk.json`, `wave0-touches.json`,
+  `wave0-impact-classification.json`, and `wave0-impact-audit.json`. The touch
+  receipt has baseline / pre-A4-dedekind / pre-A4 / post-A4 / post-A6 /
+  post-A8 snapshots over 2,684 hashes, with adjacent deltas 0 / 17 / 270 / 21 /
+  16; SHA-256
+  `be6bff5921a235203c920c8a907cec4f61914deebb2afce62a06b7df019260cc`.
+  The impact receipt has 276 changed interfaces and 2,452/2,452
+  `still-licensed` dispositions; SHA-256
+  `cd24e785ee83e56cfddbe8aa218d92bf97b2451044f681cf644dd7d1fa64be24`.
+  The audit-manifest SHA-256 is
+  `6c11c724ca27e52f33adba102e3b7f5a3f7fc365ecc410c268f989cf11b32634`.
+
+## Baseline and current-text attestation
+
+- Baseline is `main` at
+  `e1fdc9796394bc9418784f74555950d3c68ed712`; `15e18a4` is an ancestor and is
+  the final A8 commit. The seven action-critical files below are byte-identical
+  between `15e18a4` and current `HEAD`. There are 64 current item stamps with
+  `scope: published-audit`.
+- Status at recovery start contained only the five owner-amendment instruction
+  edits (`AGENTS.md`, `AUDIT-WORKFLOW.md`, `CLAUDE.md`,
+  `briefs/audit-alpha.md`, `research/audit/RESUME.md`). While this read-only
+  recovery was running, the shared orchestrator added its unrelated A9 worktree
+  state (`ARCHITECTURE.md` modified and `research/audit/wave0-A9.md` untracked).
+  I did not read, alter, stage, or remove that work.
+- I reread the six final A8 item texts and the Dedekind page file from disk.
+  Their current no-network judge-context hashes / file SHA-256 hashes are:
+
+| file | context SHA-256 | file SHA-256 |
+|---|---|---|
+| `def-cut-multiplication` | `a2a5968160e0a5c771a3cf877791a826a33c7aaaf38e73dbc1eecf24dd3d0574` | `179cf1672837c53a01876ab2f63aba7532a5af41624fcad021e9a6cc7e903714` |
+| `def-nat-finite-sum-and-product` | `b2cefb67c4cfcd91825df89412a15133898def942de6048053d82c28df4c39db` | `851f18926778dd8757191a07863e5854796b164652f0094b93b269e02b85b763` |
+| `def-real-dedekind` | `7ddd8cbc2119f8602bd56ebfc9cf759ab435f570658197c4409112e07099f857` | `d24ecc122e9d6d536b3c957265073f1bd2ea818bd9f0691a20abdcf4a583c637` |
+| `ex-pascals-triangle-to-row-six` | `5fac3cfe090349cbb092e67a3d36d17fd7453677f6d23cf38ea8f6d6c9abc3bb` | `9eca3daf771863adee9018d9de06ed8b4e47cb0511c1a46fad948d0db80be4aa` |
+| `lem-rat-cut-embeds` | `2a6e39ead2c99088a9703647269ef37a68817af4194f6ef3afcfbe2fa24da64c` | `2e17c689a6601101459b585b974bc3b2cc43c22dacd0784625d1522ab29c245c` |
+| `lem-rat-embeds-dense` | `711b7ae8e51dc1a8c6ac1a9a802aa1b76879f1f216aea9483d6444d33ddc3206` | `6ed7a7b0ad36f6f6335c09841874fcea37012ad1058baf5ccbffdf1fce848452` |
+| `construction-of-r-via-dedekind-cuts.md` | not judged | `4a5500836c0337f665b8fb9d10cb352764d5a755e72202f57cce71503987b992` |
+
+## Recovered state and inherited A10 queue
+
+The controlling top amendment in `RESUME.md` supersedes the historical
+rejudge/action tails in this report: **A8 is final at `15e18a4`; A9 is the
+active next step. Do not reopen A8, rejudge these six contexts, or backfill
+historical Sonnet verdicts.** Future judge work is DeepSeek V4 Pro + fresh GPT
+5.6 Terra, but no judge work is authorised by this receipt.
+
+Inherited A10 owner queue: Dedekind D9 reading-order swap; legacy page-count and
+positional/survey prose; corpus-wide about-the-book URLs
+(Stanley/Halmos/Rudin/Tao); bare-`[A#]` natural-arithmetic facts in the
+integer/rational prelude; optional von Neumann order/membership lemma;
+Hausdorff-distance forward promise; the decayed/root-cause claim in
+`rem-sup-conventions`; whether future waves clear their share of the 114
+`cited-not-in-deps` warnings; risk-tier calibration (177/209 routed high or
+critical); the two undischarged Statement-level infinitude claims; and the
+warning not to regenerate merged contracts without preserving Alpha's 177
+completed risk reviews. Preserve the process evidence too: Sonnet's 42%
+false-positive/verdict-extraction failure; the recovered no-damage
+abstract-algebra Beta stash incident; a mechanical Statement/title-vs-proof
+overclaim check; and explicit consumer closure plus the full gate list after
+Alpha repairs.
+
+Twice-touched escalation history remains open for owner review:
+`lem-rat-cut-embeds` (four touches, wave maximum),
+`thm-reals-dedekind-field`,
+`ex-euclidean-algorithm-on-consecutive-fibonacci-numbers`,
+`thm-vandermonde-identity`, `lem-cut-reciprocal`, and the three topology decay
+items `def-metric-bounded-diameter`, `lem-sup-metric-is-a-metric`, and
+`lem-real-line-is-a-metric-space`.
+
+**Exact next action:** return control to the orchestrator with A9 active. The
+orchestrator performs the A9 scope-denial re-grep and records its own A9
+receipt; this recovered Alpha takes no further action unless the owner assigns
+a new Alpha adjudication after A9/A10.

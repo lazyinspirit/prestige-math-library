@@ -4,6 +4,9 @@ kind: theorem
 title: "Double counting: $\\sum_{x \\in X}\\lvert R_x\\rvert = \\lvert R\\rvert = \\sum_{y \\in Y}\\lvert R^y\\rvert$ for a relation between finite sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-a-finite-incidence-relation-and-its-fibres, thm-sum-rule,
        def-sum-over-a-finite-index-set, def-finite-cardinality,
        def-injection-surjection-bijection]
@@ -13,16 +16,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -53,7 +46,7 @@ roles of $X$ and $Y$ exchanged.
 
 [L1] $R$, every $R_x$ and every $R^{y}$ are finite, so all the cardinalities written below are defined ([[def-a-finite-incidence-relation-and-its-fibres]], clause (a), [[def-finite-cardinality]]).
 
-[L2] The row slices $\{x\} \times R_x$, $x \in X$, are pairwise disjoint finite sets with union $R$; likewise the column slices $R^{y} \times \{y\}$, $y \in Y$ ([[def-a-finite-incidence-relation-and-its-fibres]], clause (c)).
+[L2] The row slices $\{x\}\times R_x$ and column slices $R^y\times\{y\}$ are pairwise disjoint within their respective families and each family has union $R$ by clause (c); they are finite because clause (b) bijects them with the finite fibres from [L1] ([[def-a-finite-incidence-relation-and-its-fibres]], clauses (b) and (c), [[def-finite-cardinality]], clause (c)).
 
 [L3] $\lvert\{x\} \times R_x\rvert = \lvert R_x\rvert$ and $\lvert R^{y} \times \{y\}\rvert = \lvert R^{y}\rvert$, by the slice bijections of clause (b) of [[def-a-finite-incidence-relation-and-its-fibres]] and the transport clause (c) of [[def-finite-cardinality]] ([[def-injection-surjection-bijection]]).
 

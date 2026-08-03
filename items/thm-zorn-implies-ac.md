@@ -4,26 +4,23 @@ kind: theorem
 title: "Zorn's lemma implies the Axiom of Choice"
 status: published
 origin: session
-deps: [thm-zorn, def-choice-function, def-maximal-element, def-partial-order]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-choice-function, def-maximal-element, def-partial-order, def-chain]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
+    - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
+      url: "https://plato.stanford.edu/entries/axiom-choice/"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
     - title: "Axiom of choice (Wikipedia)"
@@ -33,7 +30,8 @@ pipeline_run: null
 
 ## Statement
 
-Assume Zorn's lemma ([[thm-zorn]]). Then every family of nonempty sets has a
+Assume Zorn's lemma: every nonempty poset in which every chain has an upper
+bound has a maximal element. Then every family of nonempty sets has a
 choice function ([[def-choice-function]]); that is, the Axiom of Choice holds.
 
 ## Facts & Assumptions
@@ -42,13 +40,15 @@ choice function ([[def-choice-function]]); that is, the Axiom of Choice holds.
 
 [A1] Every member of $\mathcal{F}$ is nonempty.
 
-[L1] A nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
+[A2] By the assumed Zorn principle, a nonempty poset in which every chain has an upper bound has a maximal element.
 
 [L2] A choice function for a family $\mathcal{G}$ is a function $h$ with domain $\mathcal{G}$ such that $h(S) \in S$ for every $S \in \mathcal{G}$ ([[def-choice-function]]).
 
 [L3] $m$ is maximal when there is no element strictly above it ([[def-maximal-element]]).
 
 [L4] A partial order is a relation that is reflexive, antisymmetric and transitive, and a poset is a set carrying one ([[def-partial-order]]).
+
+[L5] A chain is a subset of a poset in which any two members are comparable ([[def-chain]]).
 
 ## Proof
 
@@ -60,11 +60,11 @@ choice function ([[def-choice-function]]); that is, the Axiom of Choice holds.
 
 2.1 $P$ is nonempty, since the empty function is a choice function for the empty subfamily, so $(\emptyset, \emptyset) \in P$. [step 1.2, L2]
 
-2.2 Every chain in $P$ has an upper bound: given a chain, take the union of the domains and the union of the functions, which is a function because any two of its members are compatible, being comparable in the chain, and which is a choice function for the union of the domains. [step 1.2, L2]
+2.2 Every chain in $P$ has an upper bound: given a chain, take the union of the domains and the union of the functions. Any two partial choice functions in the chain are comparable by [L5], so the smaller is a restriction of the larger; their values therefore agree on overlapping domains. Thus the union is a function and is a choice function for the union of the domains. [step 1.2, L2, L5]
 
 2.3 The relation just defined is a partial order on $P$: it is reflexive, since $\mathcal{G} \subseteq \mathcal{G}$ and $h$ restricted to $\mathcal{G}$ is $h$; antisymmetric, since $(\mathcal{G}, h) \le (\mathcal{G}', h')$ and $(\mathcal{G}', h') \le (\mathcal{G}, h)$ give $\mathcal{G} \subseteq \mathcal{G}'$ and $\mathcal{G}' \subseteq \mathcal{G}$, hence $\mathcal{G} = \mathcal{G}'$, and then $h = h'$ restricted to $\mathcal{G} = \mathcal{G}'$, which is $h'$ itself; and transitive, since $\mathcal{G} \subseteq \mathcal{G}' \subseteq \mathcal{G}''$ gives $\mathcal{G} \subseteq \mathcal{G}''$, while restricting $h''$ to $\mathcal{G}$ is the same as first restricting it to $\mathcal{G}'$, which gives $h'$, and then restricting $h'$ to $\mathcal{G}$, which gives $h$. So $(P, \le)$ is a poset. [step 1.2, L4]
 
-3.1 By Zorn's lemma $P$ has a maximal element $(\mathcal{G}, h)$. [step 2.1, step 2.2, step 2.3, L1]
+3.1 By the assumed Zorn principle $P$ has a maximal element $(\mathcal{G}, h)$. [step 2.1, step 2.2, step 2.3, A2]
 
 4.1 If $\mathcal{G} = \mathcal{F}$ then $h$ is a choice function for $\mathcal{F}$, contrary to the assumption; so there exists $S \in \mathcal{F}$ with $S \notin \mathcal{G}$. [step 3.1, step 1.1, L2, choose]
 

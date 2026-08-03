@@ -4,6 +4,9 @@ kind: definition
 title: "Upper bound, least upper bound, and strict upper bound"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partial-order]
 justified_by: []
 aliases: [def-supremum-poset]
@@ -11,16 +14,6 @@ landmark: false
 short: "upper bound"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -63,7 +56,9 @@ $s \in S$.
 - An upper bound of $S$ need not belong to $S$, and $S$ may have many upper
   bounds and no least one. In $\mathbb{Q}$ with its usual order, the set
   $\{q \in \mathbb{Q} : q^2 < 2\}$ has upper bounds but no least upper bound.
-- A strict upper bound is not merely an upper bound outside $S$: if $u$ is a
-  strict upper bound of $S$ then $u \notin S$, since $u < u$ is impossible. The
-  distinction matters in [[thm-zorn]], where the whole argument turns on
-  producing a *strict* upper bound rather than any upper bound.
+- In a poset, a strict upper bound is exactly an upper bound outside $S$. If
+  $u$ is strict then $u\notin S$, since $u<u$ is impossible. Conversely, if
+  $u$ is an upper bound and $u\notin S$, then every $s\in S$ satisfies
+  $s\le u$ and $s\ne u$, hence $s<u$. This distinction from an arbitrary upper
+  bound matters in [[thm-zorn]], where the argument must produce one outside
+  the chain.

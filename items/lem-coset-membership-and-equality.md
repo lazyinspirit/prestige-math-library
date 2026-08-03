@@ -4,6 +4,9 @@ kind: lemma
 title: "$x\\in aH$ iff $a^{-1}x\\in H$, and $aH=bH$ iff $a^{-1}b\\in H$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-coset, def-subgroup, def-group, lem-group-inverse-laws, lem-group-cancellation]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "UCL lecture notes, Cosets and Lagrange's theorem"
       url: "https://www.homepages.ucl.ac.uk/~ucahmto/0007/_book/4-6-cosets-and-lagranges-theorem.html"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Truncating the sieve at an odd depth over-estimates the size of the union and truncating it at an even depth under-estimates it"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-inclusion-exclusion, lem-the-partial-alternating-sum-of-a-binomial-row,
        def-a-sieve-family-and-its-intersections, lem-a-double-sum-over-finite-index-sets-may-be-interchanged,
        thm-sum-rule, def-sum-over-a-finite-index-set, def-binomial-coefficient,
@@ -17,16 +20,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -36,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Boole%27s_inequality"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 2"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Indicator Functions and Inclusion-Exclusion (University of South Carolina notes)"
+      url: "https://people.math.sc.edu/laszlo/indicator1.pdf"
+    - title: "Principle of Inclusion and Exclusion and Bonferroni Inequalities (Concordia notes)"
+      url: "https://users.encs.concordia.ca/~chvatal/notes/pie.html"
 pipeline_run: null
 ---
 
@@ -83,7 +80,7 @@ substantial even case is $r = 1$, where $T_2 = S_1 - S_2$.
 
 [L8] Inclusion and exclusion, clause 1 ([[thm-inclusion-exclusion]]).
 
-[L9] Boundary values of a binomial coefficient: $\binom{n}{j} = 0$ whenever $j > n$, so in particular $\binom{0}{j} = 0$ for $j \ge 1$ ([[def-binomial-coefficient]]); $\iota(0) = 0$ and $\iota(p) \ge 0$ for every natural $p$, $\iota$ being strictly increasing with $\iota(0) = 0$ ([[lem-nat-finite-sum-laws-and-the-canonical-embedding]], clause 7).
+[L9] Boundary values of a binomial coefficient: $\binom{n}{0}=1$ for every $n$, while $\binom{n}{j} = 0$ whenever $j > n$, so in particular $\binom{0}{j} = 0$ for $j \ge 1$ ([[def-binomial-coefficient]]); $\iota(0) = 0$ and $\iota(p) \ge 0$ for every natural $p$, $\iota$ being strictly increasing with $\iota(0) = 0$ ([[lem-nat-finite-sum-laws-and-the-canonical-embedding]], clause 7).
 
 [L10] $\mathbb{R}$ is an ordered field ([[def-ordered-field]], [[def-field]]).
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{H}$ is a division ring that is not commutative, hence not a field: $q^{-1} = \\bar q / N(q)$ for $q \\ne 0$, while $ij = k$ and $ji = -k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quaternions, def-ring, def-division-ring, def-commutative-ring, def-invertible-element, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-field, def-ordered-field, thm-reals-field, thm-reals-ordered-field, lem-of-square-positive, lem-of-zero-mult, def-real-numbers, def-monoid-finite-product, thm-generalised-associativity, def-semigroup-and-monoid, def-group, def-binary-operation, def-natural-numbers]
 justified_by: []
 aliases: [thm-quaternions-division-ring]
@@ -12,11 +15,6 @@ short: "$\\mathbb{H}$ is a division ring, not a field"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Quaternion"
     - title: "Division ring (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Division_ring"
+    - title: "Wolfram MathWorld, Quaternion"
+      url: "https://mathworld.wolfram.com/Quaternion.html"
 pipeline_run: null
 ---
 
@@ -56,7 +56,7 @@ $\lambda \mapsto \hat{\lambda}$, the conjugate $\bar{x}$ and the norm $N(x)$ of
 
 [L1] $\mathbb{R}$ is a field: $(\mathbb{R},+,0)$ is an abelian group, multiplication is associative and commutative with identity $1$, multiplication distributes over addition, $0 \ne 1$, and every $t \ne 0$ has an inverse $t^{-1}$ ([[thm-reals-field]], [[def-real-numbers]], [[def-field]], [[def-group]]). Also $0 \cdot t = t \cdot 0 = 0$ for every real $t$ ([[lem-of-zero-mult]]).
 
-[L2] $\mathbb{R}$ is a totally ordered field with positive cone $P$: exactly one of $t \in P$, $t = 0$, $-t \in P$ holds, and $P$ is closed under addition and multiplication ([[thm-reals-ordered-field]], [[def-ordered-field]]). In particular $1 > 0$, so $1 \ne -1$.
+[L2] $\mathbb{R}$ is a totally ordered field with positive cone $P$: exactly one of $t \in P$, $t = 0$, $-t \in P$ holds, and $P$ is closed under addition and multiplication ([[thm-reals-ordered-field]], [[def-ordered-field]]).
 
 [L3] In an ordered field the square of a nonzero element is positive ([[lem-of-square-positive]]).
 
@@ -76,7 +76,7 @@ $\lambda \mapsto \hat{\lambda}$, the conjugate $\bar{x}$ and the norm $N(x)$ of
 
 1.3 The cyclic symmetry of the table. Let $\gamma : 4 \to 4$ fix $0$ and send $1 \mapsto 2 \mapsto 3 \mapsto 1$, and let $\Gamma : \mathbb{H} \to \mathbb{H}$ be the coordinate permutation determined by $[\Gamma x]_{\gamma(p)} = x_p$, that is $\Gamma(x_0,x_1,x_2,x_3) = (x_0,x_3,x_1,x_2)$. Then $\Gamma$ is a bijection, $\Gamma(e_p) = e_{\gamma(p)}$, $\Gamma$ fixes each $\hat{\lambda}$, and $\Gamma(\lambda x) = \lambda\Gamma(x)$, all immediately from the definition of $\Gamma$. [L1, given]
 
-1.4 Claim 2: from the table, $ij = k = (0,0,0,1)$ and $ji = -k = (0,0,0,-1)$. These differ because $1 \ne -1$ in $\mathbb{R}$, which holds since $1 > 0$ and hence $-1 < 0$. So multiplication on $\mathbb{H}$ is not commutative. [L2, given]
+1.4 Claim 2: from the table, $ij = k = (0,0,0,1)$ and $ji = -k = (0,0,0,-1)$. By [L1], $1 \ne 0$, so [L3] gives $1=1^2>0$; the ordered-field definition in [L2] then gives $-1<0$, hence $1 \ne -1$. Thus the two products differ, and multiplication on $\mathbb{H}$ is not commutative. [L1, L2, L3, given]
 
 1.5 Claim 3, the norm identity. Evaluating the product formula at $y = \bar{x}$ gives coordinates $x_0x_0 - x_1(-x_1) - x_2(-x_2) - x_3(-x_3) = N(x)$, then $x_0(-x_1) + x_1x_0 + x_2(-x_3) - x_3(-x_2) = 0$, then $x_0(-x_2) + x_2x_0 + x_3(-x_1) - x_1(-x_3) = 0$, then $x_0(-x_3) + x_3x_0 + x_1(-x_2) - x_2(-x_1) = 0$; so $x\bar{x} = \widehat{N(x)}$. Evaluating it at $x := \bar{x}$, $y := x$ gives $x_0x_0 - (-x_1)x_1 - (-x_2)x_2 - (-x_3)x_3 = N(x)$ and, in the same way, $0$ in each of the other three coordinates; so $\bar{x}x = \widehat{N(x)}$ as well. [L1, given]
 
@@ -114,27 +114,10 @@ $\lambda \mapsto \hat{\lambda}$, the conjugate $\bar{x}$ and the norm $N(x)$ of
 
 ## Remarks
 
-- **No notion of linearity is used, and none is available here.** The reduction
-  of associativity to basis triples is carried out entirely inside $\mathbb{R}$:
-  the product is a fixed real formula, its coefficients are named, and the two
-  bracketings are expanded into the same shape of finite sum, whose coefficients
-  are then recognised as the coordinates of the corresponding basis products.
-  The only tools are the field arithmetic of $\mathbb{R}$ and the regrouping law
-  for finite sums ([[thm-generalised-associativity]]).
+- **No notion of linearity is used, and none is available here.** The reduction of associativity to basis triples is carried out entirely inside $\mathbb{R}$: the product is a fixed real formula, its coefficients are named, and the two bracketings are expanded into the same shape of finite sum, whose coefficients are then recognised as the coordinates of the corresponding basis products. The only tools are the field arithmetic of $\mathbb{R}$ and the regrouping law for finite sums ([[thm-generalised-associativity]]).
 
-- **How the count of cases falls.** Sixty-four basis triples; those in which one
-  of the three indices is $0$ collapse by the identity law, leaving twenty-seven;
-  the cyclic symmetry $i \mapsto j \mapsto k \mapsto i$ is a bijection commuting
-  with multiplication, and it acts on the twenty-seven triples with every orbit
-  of size three, so nine representatives suffice. The symmetry is checked, not
-  asserted: it rests on nine equations of the table.
+- **How the count of cases falls.** Sixty-four basis triples; those in which one of the three indices is $0$ collapse by the identity law, leaving twenty-seven; the cyclic symmetry $i \mapsto j \mapsto k \mapsto i$ is a bijection commuting with multiplication, and it acts on the twenty-seven triples with every orbit of size three, so nine representatives suffice. The symmetry is checked, not asserted: it rests on nine equations of the table.
 
-- **$\mathbb{H}$ separates three notions this page keeps apart.** It is a ring
-  that is not commutative; it is a division ring that is not a field; and it has
-  no zero divisors without being an integral domain, since a domain is required
-  to be commutative ([[def-zero-divisor-and-integral-domain]]).
+- **$\mathbb{H}$ separates three notions this page keeps apart.** It is a ring that is not commutative; it is a division ring that is not a field; and it has no zero divisors without being an integral domain, since a domain is required to be commutative ([[def-zero-divisor-and-integral-domain]]).
 
-- The inverse formula $x^{-1} = \widehat{N(x)^{-1}}\bar{x}$ is the exact analogue
-  of $\bar z/|z|^{2}$ for complex numbers, and the proof is the same
-  computation; the only quaternionic subtlety is that $x\bar{x}$ and $\bar{x}x$
-  have to be computed separately, which the norm-identity step above does.
+- The inverse formula $x^{-1} = \widehat{N(x)^{-1}}\bar{x}$ is the exact analogue of $\bar z/|z|^{2}$ for complex numbers, and the proof is the same computation; the only quaternionic subtlety is that $x\bar{x}$ and $\bar{x}x$ have to be computed separately, which the norm-identity step above does.

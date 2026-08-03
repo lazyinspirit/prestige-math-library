@@ -4,7 +4,10 @@ kind: lemma
 title: "Inversion induces a bijection $gH\\mapsto Hg^{-1}$ from left cosets to right cosets"
 status: published
 origin: session
-deps: [def-coset, lem-coset-membership-and-equality, lem-group-inverse-laws, def-injection-surjection-bijection, def-equinumerous]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-coset, def-subgroup, lem-coset-membership-and-equality, lem-group-inverse-laws, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 aliases: []
 landmark: false
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, Cosets and Lagrange's Theorem"
       url: "https://judsonbooks.org/abstract-algebra-theory-and-applications/"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.1: Cosets"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.01%3A_Cosets"
 pipeline_run: null
 ---
 
@@ -37,13 +42,15 @@ right cosets of $H$. Its inverse sends $Hg$ to $g^{-1}H$.
 
 [L2] In a group, $(uv)^{-1}=v^{-1}u^{-1}$ and $(u^{-1})^{-1}=u$ ([[lem-group-inverse-laws]]).
 
+[L3] A subgroup is closed under inverses ([[def-subgroup]]).
+
 [F1] A map with a two-sided inverse is a bijection ([[def-injection-surjection-bijection]], [[def-equinumerous]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $gH=kH$, then $g^{-1}k\in H$ by [L1], so $(g^{-1}k)^{-1}=k^{-1}g\in H$. The right-coset criterion gives $Hg^{-1}=Hk^{-1}$, so the rule is well defined. [given, L1, L2]
+1.1 If $gH=kH$, then $g^{-1}k\in H$ by [L1], so $(g^{-1}k)^{-1}=k^{-1}g\in H$ by subgroup inverse closure. The right-coset criterion gives $Hg^{-1}=Hk^{-1}$, so the rule is well defined. [given, L1, L2, L3]
 
 1.2 Define the reverse rule by $Hg\mapsto g^{-1}H$. The same argument, with left and right interchanged, shows that it is well defined. [L1, L2]
 

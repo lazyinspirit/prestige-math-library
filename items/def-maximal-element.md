@@ -4,6 +4,9 @@ kind: definition
 title: "Maximal element and greatest element"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-partial-order]
 justified_by: []
 forward_refs: [cex-maximal-not-greatest]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Greatest element and least element (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Greatest_element_and_least_element"
     - title: "Maximal and minimal elements (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Maximal_and_minimal_elements"
     - title: "Partially ordered set (Wikipedia)"

@@ -4,7 +4,10 @@ kind: example
 title: "The Cauchy sequences of rationals form a commutative ring that is not an integral domain: two eventually-constant sequences with disjoint supports multiply to zero"
 status: published
 origin: session
-deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-elementary-consequences, def-subring, lem-subring-criterion, def-ring-of-functions, thm-cauchy-ring, def-rational-cauchy-sequence, thm-rat-field, def-natural-numbers, def-nat-order]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-ring, def-commutative-ring, def-zero-divisor-and-integral-domain, lem-ring-elementary-consequences, def-subring, lem-subring-criterion, def-ring-of-functions, thm-cauchy-ring, def-rational-cauchy-sequence, thm-rat-field, def-natural-numbers, def-nat-order, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,6 @@ short: "𝒞 is not a domain"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
@@ -24,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
     - title: "Zero divisor (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zero_divisor"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 
@@ -67,7 +67,9 @@ $1$. Then:
 
 [L6] $0 \cdot t = t \cdot 0 = 0$ in any ring ([[lem-ring-elementary-consequences]]).
 
-[L7] $a$ is a zero divisor when $a \ne 0$ and $ab = 0$ for some $b \ne 0$; an integral domain is a commutative ring with $1 \ne 0$ and no zero divisors ([[def-zero-divisor-and-integral-domain]]).
+[L7] $a$ is a zero divisor when $a \ne 0$ and $ab = 0$ or $ba=0$ for some $b \ne 0$; in a commutative ring the two alternatives agree. An integral domain is a commutative ring with $1 \ne 0$ and no zero divisors ([[def-zero-divisor-and-integral-domain]]).
+
+[L8] If $n\in\mathbb N$ and $n\ge1$, then either $n=1$ or $n\ge2$, by discreteness of the natural order ([[def-nat-order]], [[lem-nat-discrete]]).
 
 ## Verification
 
@@ -79,7 +81,7 @@ $1$. Then:
 
 1.3 Any eventually constant sequence is Cauchy: if $c_n = c$ for all $n \ge N_0$, then for any rational $\varepsilon > 0$ and all $m, n \ge N_0$ we have $|c_m - c_n| = |c - c| = 0 < \varepsilon$. In particular $a$, $b$ and the constant sequences $0$ and $1$ lie in $\mathcal{C}$. [L2, L5, given]
 
-1.4 $ab = 0$: at the index $1$ the product is $a_1 b_1 = 1 \cdot 0 = 0$, and at every index $n \ge 2$ it is $a_n b_n = 0 \cdot 1 = 0$; every index of $X$ is $1$ or is $\ge 2$. [L2, L6, given]
+1.4 $ab = 0$: at the index $1$ the product is $a_1 b_1 = 1 \cdot 0 = 0$, and at every index $n \ge 2$ it is $a_n b_n = 0 \cdot 1 = 0$; every index of $X$ is $1$ or is $\ge 2$ by [L8]. [L2, L6, L8, given]
 
 2.1 Claim 2: $\mathcal{C} \subseteq \mathbb{Q}^{X}$, the identity of $\mathbb{Q}^{X}$ is the constant sequence $1$, which lies in $\mathcal{C}$ by step 1.3, and $\mathcal{C}$ is closed under termwise subtraction and multiplication because it is a ring under those operations by [L1] and they are the operations of $\mathbb{Q}^{X}$ by step 1.2. So the criterion [L4] applies. [step 1.2, step 1.3, L1, L4]
 
@@ -89,25 +91,8 @@ $1$. Then:
 
 ## Remarks
 
-- **The index set is stated because it is not $\mathbb{N}$.**
-  [[def-rational-cauchy-sequence]] indexes its sequences from $n = 1$, while
-  [[def-ring-of-functions]] takes an arbitrary index set; the ambient ring in
-  claim 2 is therefore $\mathbb{Q}^{X}$ with $X = \{\, n \in \mathbb{N} : n \ge 1 \,\}$,
-  not $\mathbb{Q}^{\mathbb{N}}$. Since $\mathbb{N}$ contains $0$
-  ([[def-natural-numbers]]) the two are different sets of functions, and the
-  subring claim would be false as stated about the second.
+- **The index set is stated because it is not $\mathbb{N}$.** [[def-rational-cauchy-sequence]] indexes its sequences from $n = 1$, while [[def-ring-of-functions]] takes an arbitrary index set; the ambient ring in claim 2 is therefore $\mathbb{Q}^{X}$ with $X = \{\, n \in \mathbb{N} : n \ge 1 \,\}$, not $\mathbb{Q}^{\mathbb{N}}$. Since $\mathbb{N}$ contains $0$ ([[def-natural-numbers]]) the two are different sets of functions, and the subring claim would be false as stated about the second.
 
-- **Why this matters for the construction of $\mathbb{R}$.** The real numbers are
-  defined as the quotient $\mathcal{C}/\mathcal{N}$ by the null sequences
-  ([[def-real-numbers]]), and [[thm-reals-field]] proves that quotient is a
-  field. The present example shows the field property cannot come from
-  $\mathcal{C}$ alone: $\mathcal{C}$ is not even a domain. What
-  [[thm-reals-field]] actually uses is [[lem-null-maximal]], a property of
-  $\mathcal{N}$ inside $\mathcal{C}$. The two zero divisors above cause no
-  trouble in the quotient: $a$ is a null sequence ([[def-null-sequence]]), so its
-  class is $0$, and $b$ differs from the constant sequence $1$ by a null
-  sequence, so its class is $1$.
+- **Why this matters for the construction of $\mathbb{R}$.** The real numbers are defined as the quotient $\mathcal{C}/\mathcal{N}$ by the null sequences ([[def-real-numbers]]), and [[thm-reals-field]] proves that quotient is a field. The present example shows the field property cannot come from $\mathcal{C}$ alone: $\mathcal{C}$ is not even a domain. What [[thm-reals-field]] actually uses is [[lem-null-maximal]], a property of $\mathcal{N}$ inside $\mathcal{C}$. The two zero divisors above cause no trouble in the quotient: $a$ is a null sequence ([[def-null-sequence]]), so its class is $0$, and $b$ differs from the constant sequence $1$ by a null sequence, so its class is $1$.
 
-- **The witnesses are chosen to keep the verification short.** Both are
-  eventually constant, hence Cauchy with no $\varepsilon$ bookkeeping, and their
-  supports are disjoint, which makes the product zero at every index.
+- **The witnesses are chosen to keep the verification short.** Both are eventually constant, hence Cauchy with no $\varepsilon$ bookkeeping, and their supports are disjoint, which makes the product zero at every index.

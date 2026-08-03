@@ -4,6 +4,9 @@ kind: theorem
 title: "Bourbaki–Witt fixed point theorem"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-admissible-is-chain, def-chain-complete-poset, lem-admissible-set-exists, def-partial-order]
 justified_by: []
 forward_refs: [cex-progressive-map-without-fixed-point]
@@ -26,6 +29,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Bourbaki-Witt Principle (Menemui Matematik 39(1), 2017)"
+      url: "https://persama.org.my/images/Menemui_Matematik/2017/MMv391_8_21.pdf"
     - title: "Bourbaki–Witt theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bourbaki%E2%80%93Witt_theorem"
     - title: "Complete partial order (Wikipedia)"

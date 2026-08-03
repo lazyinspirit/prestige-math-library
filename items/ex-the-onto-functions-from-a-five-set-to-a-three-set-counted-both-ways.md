@@ -4,6 +4,11 @@ kind: example
 title: "The surjections from a five-element set onto a three-element set counted by the sieve formula and by direct subtraction"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-the-number-of-surjections, thm-cardinality-of-a-set-of-functions, def-nat-power,
        def-binomial-coefficient, def-canonical-natural, def-integer-power, def-finite-cardinality,
        thm-sum-rule, def-sum-over-a-finite-index-set, def-injection-surjection-bijection,
@@ -15,16 +20,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -34,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Twelvefold_way"
     - title: "Inclusion-exclusion principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
+    - title: "Algebraic Combinatorics Blueprint: Surjections"
+      url: "https://faabian.github.io/algebraic-combinatorics/blueprint/sect0032.html"
 pipeline_run: null
 ---
 
@@ -78,9 +75,9 @@ so $\lvert\operatorname{Surj}(A,B)\rvert = 243 - 93 = 150$, in agreement.
 
 [L2] $\binom{3}{0} = \binom{3}{3} = 1$ and $\binom{3}{1} = \binom{3}{2} = 3$ ([[def-binomial-coefficient]]).
 
-[L3] The surjection count ([[thm-the-number-of-surjections]]).
+[L3] If $A,B$ are finite with $|A|=n$ and $|B|=k$, then $\iota|\operatorname{Surj}(A,B)|=\sum_{i<k+1}(-1)^i\iota\binom{k}{i}\,\iota((k-i)^n)$ ([[thm-the-number-of-surjections]]).
 
-[L4] The image partition: for $f \in \operatorname{Map}(A,B)$ put $S := f[A]$; the sets $M_S := \{\, f : f[A] = S \,\}$ for $S \subseteq B$ are pairwise disjoint subsets of $\operatorname{Map}(A,B)$ with union $\operatorname{Map}(A,B)$, and $M_S$ is in bijection with $\operatorname{Surj}(A,S)$ by restriction of the codomain, so $\lvert M_S\rvert = \lvert\operatorname{Surj}(A,S)\rvert$ ([[def-injection-surjection-bijection]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]).
+[L4] The image partition: for $f \in \operatorname{Map}(A,B)$ put $S := f[A]$; the sets $M_S := \{\, f : f[A] = S \,\}$ for $S \subseteq B$ are pairwise disjoint subsets of $\operatorname{Map}(A,B)$ with union $\operatorname{Map}(A,B)$, and $M_S$ is in bijection with $\operatorname{Surj}(A,S)$ by restriction of the codomain, so $\lvert M_S\rvert = \lvert\operatorname{Surj}(A,S)\rvert$. If finite $S,T$ have $|S|=|T|$, finite cardinality supplies a bijection $\phi:S\to T$, and $u\mapsto\phi\circ u$ is a bijection $\operatorname{Surj}(A,S)\to\operatorname{Surj}(A,T)$ with inverse $v\mapsto\phi^{-1}\circ v$; hence these surjection counts depend only on the codomain cardinality ([[def-injection-surjection-bijection]], [[thm-subset-of-a-finite-set]], [[def-finite-cardinality]]).
 
 [L5] The sum rule for a finite partition and the grouping of $\mathcal{P}(B)$ by cardinality, with $\lvert [B]^{j}\rvert = \binom{3}{j}$ ([[thm-sum-rule]], clauses 2 and 3, [[def-sum-over-a-finite-index-set]], [[def-binomial-coefficient]]).
 
@@ -92,7 +89,7 @@ so $\lvert\operatorname{Surj}(A,B)\rvert = 243 - 93 = 150$, in agreement.
 
 1.1 The four terms of the formula. By [L2] and [L1] they are $(+1)\cdot 1\cdot 243$, $(-1)\cdot 3\cdot 32$, $(+1)\cdot 3\cdot 1$ and $(-1)\cdot 1\cdot 0$, the signs coming from [L6]. [L1, L2, L6]
 
-1.2 The image partition is a partition, and the number of functions with image of size $j$ is $\binom{3}{j}$ times the number of surjections onto a fixed $j$-element subset, since $\lvert\operatorname{Surj}(A,S)\rvert$ depends on $S$ only through $\lvert S\rvert$ by [L3] and there are $\binom{3}{j}$ subsets of size $j$ by [L5]. [L3, L4, L5]
+1.2 The image partition is a partition, and the number of functions with image of size $j$ is $\binom{3}{j}$ times the number of surjections onto a fixed $j$-element subset: [L4] gives equality of the surjection counts for all $j$-element codomains, and there are $\binom{3}{j}$ such subsets by [L5]. [L4, L5]
 
 1.3 The three easy image sizes. There is no surjection from the nonempty $A$ onto $\varnothing$, so the $j = 0$ contribution is $0$; there is exactly one surjection onto a one-element set, the constant, so the $j = 1$ contribution is $3\cdot 1 = 3$; and a function from $A$ into a two-element set is non-surjective exactly when it is constant, so the number of surjections is $2^{5} - 2 = 30$ by [L1] and the $j = 2$ contribution is $3\cdot 30 = 90$. [L1, L2, L4]
 

@@ -4,6 +4,11 @@ kind: example
 title: "Finite choice written out: a choice function for three sets"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [lem-finite-choice, def-choice-function, def-natural-numbers]
 justified_by: []
 aliases: []

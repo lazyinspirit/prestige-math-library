@@ -4,6 +4,9 @@ kind: definition
 title: "Choice function"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: []
 justified_by: []
 forward_refs: [ex-canonical-choice-on-naturals, ex-russells-socks]
@@ -12,19 +15,11 @@ landmark: false
 short: "choice function"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
     - title: "Choice function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Choice_function"
     - title: "Axiom of choice (Wikipedia)"
@@ -46,8 +41,9 @@ family $\mathcal{P}(X) \setminus \{\emptyset\}$ of nonempty subsets of $X$.
 - The requirement is only that $g$ pick *some* element of each member. Nothing
   requires the choices to be coherent, definable, or computable, and this is
   exactly where the difficulty lies: for a single nonempty set $S$ the existence
-  of an element to pick is immediate, and for finitely many sets the picks can be
-  made one after another ([[lem-finite-choice]]). What is not available in ZF is
+  of an element to pick is immediate, and for a family presented as the values
+  of a function on a natural number the picks can be made one after another
+  ([[lem-finite-choice]]). What is not available in ZF is
   a *simultaneous* choice across an arbitrary family.
 - A choice function often exists for a concrete family with no appeal to any
   axiom, because the family carries extra structure that names a canonical

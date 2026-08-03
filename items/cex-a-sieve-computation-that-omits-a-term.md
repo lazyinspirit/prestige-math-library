@@ -4,6 +4,11 @@ kind: counterexample
 title: "A three-set count that drops the triple intersection and returns the wrong answer"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term, thm-inclusion-exclusion,
        def-a-sieve-family-and-its-intersections, def-finite-cardinality, def-canonical-natural,
        def-sum-over-a-finite-index-set, def-integer-power, def-injection-surjection-bijection,
@@ -32,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Cardinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality"
+    - title: "Guichard, The Inclusion-Exclusion Formula (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_and_Graph_Theory_%28Guichard%29/02%3A_Inclusion-Exclusion/2.01%3A_The_Inclusion-Exclusion_Formula"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "Every commutative division ring is a field, so \"field\" and \"commutative division ring\" name the same structures and the published definition and the ring-theoretic one agree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-division-ring, def-commutative-ring, def-ring, def-field, lem-ring-elementary-consequences, lem-ring-units-form-a-group, lem-field-is-a-commutative-ring, def-invertible-element, def-group]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
     - title: "Division ring (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Division_ring"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 

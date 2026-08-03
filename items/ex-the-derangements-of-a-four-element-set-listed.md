@@ -4,27 +4,20 @@ kind: example
 title: "All nine derangements of a four-element set listed, and the count checked against the formula and both recurrences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-derangement-number, thm-the-derangement-formula, cor-the-derangement-recurrences,
        thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial,
        def-canonical-natural, def-integer-power, def-finite-cardinality, def-finite-sum,
        lem-finite-sum-laws, def-injection-surjection-bijection, def-ordered-field,
-       thm-subset-of-a-finite-set]
+       thm-subset-of-a-finite-set, lem-nat-finite-sum-laws-and-the-canonical-embedding]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Derangement"
     - title: "Rencontres numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rencontres_numbers"
+    - title: "Principle of Inclusion and Exclusion (Open Math Books)"
+      url: "https://openmathbooks.org/ecm/ecm/sec_adv-pie.html"
 pipeline_run: null
 ---
 
@@ -60,17 +55,19 @@ clause, and $D_4 = 3\,(D_3 + D_2) = 3\,(2+1) = 9$ from its second.
 
 **Given:** $A = 4 = \{0,1,2,3\}$, the tuple notation above, and the canonical natural $\iota$ ([[def-canonical-natural]]).
 
-[L1] $\lvert\operatorname{Bij}(A)\rvert = 4! = 24$ ([[thm-number-of-bijections-of-a-finite-set]], [[def-factorial-and-falling-factorial]]), and a tuple of four distinct entries drawn from $A$ is a bijection $A \to A$, a function on a finite set being injective exactly when it is a bijection ([[def-injection-surjection-bijection]], [[thm-subset-of-a-finite-set]], clause 4).
+[L1] $|A|=|4|=4$ ([[def-finite-cardinality]], clause (a)), so $\lvert\operatorname{Bij}(A)\rvert = 4! = 24$ ([[thm-number-of-bijections-of-a-finite-set]], [[def-factorial-and-falling-factorial]]); and a tuple of four distinct entries drawn from $A$ is a bijection $A \to A$, a function on a finite set being injective exactly when it is a bijection ([[def-injection-surjection-bijection]], [[thm-subset-of-a-finite-set]], clause 4).
 
-[L2] A bijection $f$ of $A$ is a derangement exactly when $f(a) \ne a$ for every $a \in A$ ([[def-the-derangement-number]]); and $D_0 = 1$, $D_1 = 0$, $D_2 = 1$ are recorded there.
+[L2] For every finite set $B$, $\operatorname{Der}(B)$ is the set of bijections $f:B\to B$ with $f(b)\ne b$ for every $b\in B$, and $|\operatorname{Der}(B)|=D_{|B|}$; hence $D_4=|\operatorname{Der}(A)|$ because $|A|=4$ ([[def-the-derangement-number]], [[def-finite-cardinality]], clause (a)). The values $D_0=1$, $D_1=0$ and $D_2=1$ are also recorded in the cited definition.
 
-[L3] The derangement formula ([[thm-the-derangement-formula]]) and the two recurrences ([[cor-the-derangement-recurrences]]).
+[L3] For every $n\in\mathbb N$, $\iota(D_n)=\iota(n!)\sum_{i<n+1}(-1)^i/\iota(i!)$. For $n\ge1$, $\iota(D_n)=\iota(n)\iota(D_{n-1})+(-1)^n$; and for $n\ge2$, $D_n=(n-1)(D_{n-1}+D_{n-2})$ ([[thm-the-derangement-formula]], [[cor-the-derangement-recurrences]]).
 
 [L4] Factorials: $0! = 1$, $1! = 1$, $2! = 2$, $3! = 6$, $4! = 24$ ([[def-factorial-and-falling-factorial]]).
 
 [L5] Real finite sums and the arithmetic of $\mathbb{R}$: recursion clause, additivity and scaling ([[def-finite-sum]], [[lem-finite-sum-laws]], [[def-ordered-field]]); and $(-1)^{0} = 1$, $(-1)^{p+1} = -(-1)^{p}$ ([[def-integer-power]]).
 
 [L6] Cardinality of a listed set with distinct entries ([[def-finite-cardinality]], clauses (a) and (c)).
+
+[L7] The canonical natural $\iota:\mathbb N\to\mathbb R$ is additive, multiplicative and injective ([[lem-nat-finite-sum-laws-and-the-canonical-embedding]], clauses 0 and 7).
 
 ## Verification
 
@@ -86,11 +83,11 @@ clause, and $D_4 = 3\,(D_3 + D_2) = 3\,(2+1) = 9$ from its second.
 
 2.3 Case $f(0) = 3$. Then $f(1) \in \{0,2\}$. If $f(1) = 0$ the remaining values $\{1,2\}$ go to positions $2$ and $3$ with $f(2) \ne 2$, forcing $(3,0,1,2)$. If $f(1) = 2$ the remaining values are $\{0,1\}$ and neither placement is excluded, giving $(3,2,0,1)$ and $(3,2,1,0)$. [assume-case three, step 1.2, L2]
 
-3.1 The three cases are exhaustive and produce exactly the nine listed tuples, so $D_4 = 9$. [step 1.1, step 2.1, step 2.2, step 2.3, cases-exhaustive]
+3.1 The three cases are exhaustive and produce exactly the nine listed tuples, so $D_4 = 9$. [step 1.1, step 2.1, step 2.2, step 2.3, cases-exhaustive, L2]
 
 4.1 Against the formula. By [L3] and [L4], $\iota(D_4) = \iota(24)\big(1 - 1 + 1/2 - 1/6 + 1/24\big)$; the bracket is $9/24$ by [L5], so $\iota(D_4) = 9$, matching step 3.1. [step 3.1, L3, L4, L5]
 
-4.2 Against the recurrences. By [L2] and the first clause of [L3], $\iota(D_3) = \iota(3)\iota(D_2) + (-1)^{3} = 3 - 1 = 2$ and then $\iota(D_4) = \iota(4)\iota(D_3) + (-1)^{4} = 8 + 1 = 9$; by the second clause, $D_4 = 3(D_3 + D_2) = 3\cdot 3 = 9$. Both match step 3.1. [step 3.1, L2, L3, L5]
+4.2 Against the recurrences. By [L2] and the first clause of [L3], $\iota(D_3) = \iota(3)\iota(D_2) + (-1)^{3} = \iota(3) - \iota(1) = \iota(2)$, so $D_3=2$ by injectivity of $\iota$. Then $\iota(D_4) = \iota(4)\iota(D_3) + (-1)^{4} = \iota(8) + \iota(1) = \iota(9)$; by the second clause, $D_4 = 3(D_3 + D_2) = 3\cdot 3 = 9$. Both match step 3.1. [step 3.1, L2, L3, L5, L7]
 
 5.1 The list, the formula and the two recurrences therefore all give $D_4 = 9$. [step 3.1, step 4.1, step 4.2] ∎
 

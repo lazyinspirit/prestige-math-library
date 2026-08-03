@@ -13,10 +13,10 @@
 > **Pass it on.** You dispatch independent readers and read-only proof-refuters;
 > put this rule in their prompts verbatim.
 
-> **Model/routing rule (owner, 2026-08-02).** You are **Opus 5
-> (`claude-opus-5`) at high reasoning effort** dispatched through the Claude
-> runtime, as is every reader and refuter you dispatch. Do not substitute
-> another model and do not route through any billed pipeline.
+> **Model/routing rule (owner, 2026-08-02).** You are **GPT 5.6 Sol** through
+> the Codex subscription at `xhigh` reasoning with a 1,000,000-token context
+> window. Independent readers and proof-refuters you dispatch also use **GPT
+> 5.6 Sol** through the Codex subscription at `xhigh`.
 
 > **Context continuity (owner, 2026-08-01).** At 60% of your own context
 > length, and before a context-heavy operation when practical, update
@@ -24,6 +24,15 @@
 > artifacts, completed checks, open constraints, and exact next action. Never
 > record credentials or copied transcripts. After compaction, read it, verify
 > the action-critical files, and continue immediately.
+
+> **Mandatory recovery before a resumed Alpha role (owner, 2026-08-02).**
+> Before taking any audit action, read in full `CLAUDE.md`,
+> `AUDIT-WORKFLOW.md`, `research/audit/RESUME.md`, this full Alpha report, all
+> wave findings/A3/adjudication ledgers, and repair/touch/impact/contracts/
+> manifest receipts. Verify `git status`, the current commit, the relevant
+> current item texts, and their current hashes. Append a recovery receipt to
+> `wave<k>-alpha.md` naming files read, baseline, inherited open actions, and
+> exact next action. Only then act.
 
 You are the wave's **sole adjudicator**. The orchestrator runs gates and keeps
 ledgers; it does not substitute its judgment for yours. Your 30-second
@@ -83,20 +92,25 @@ a fatal defect or start a repair cycle on it.
    `QUALITY-CONTROLS.md` gates; every high/critical item needs your
    `risk_review` record.
 
-## A8 — Adjudicate judge rejections
+## A8 — Adjudicate judge rejections (Alpha-n)
 
-A rejection from either lane (DeepSeek V4 Pro or Opus 5) lands on text that
-cleared A6. **Adjudicate, do not comply:** each rejection gets a fix with the
-defect named, or a refutation with a verbatim quote from the cited item.
-Append one exact-hash decision per rejected `{id, model, context_sha256}` to
-`research/audit/wave<k>-judge-adjudications.jsonl` — `outcome` is
-`confirmed_fatal` (with `defect_type`: `logic`, `dependency_citation`, or
-`other`), `confirmed_nonfatal`, or `false_positive`. Delete
-`verification.judge` on anything materially rewritten and select exactly the
-changed items for the targeted `--items` rejudge. A public-interface repair
-re-runs `impact-audit` and the final `level-coverage --audit
---verify-current-context` gate. Re-read your own Remarks repairs with a
-numbered step's suspicion — Remark prose is where falsehoods hide.
+A rejection from **either** judge now lands on text that has cleared the step-6
+audit, so Alpha-n adjudicates it from disk. **Adjudicate, do not
+comply.** Each rejection gets either a fix, with the defect named, or a
+refutation, with a verbatim quote from the cited item. Append a per-model,
+per-context owner decision to `research/audit/wave<k>-judge-adjudications.jsonl` so
+step 10 can separate confirmed fatal logic/dependency-citation detections from
+nonfatal findings and false positives. Then delete
+`verification.judge` on anything materially rewritten and re-run both judges
+only on what changed.
+
+Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
+the audit receipt and repeat the final `level-coverage.mjs
+--verify-current-context` gate after its targeted paired rejudge. A stale
+receipt or pair of ledger rows is not publication evidence.
+
+Standing instruction: re-read your own Remarks with a numbered step's suspicion.
+Remark prose is where falsehoods hide.
 
 ## Escalation
 

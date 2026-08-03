@@ -4,6 +4,11 @@ kind: counterexample
 title: "A progressive map with no fixed point, on a poset that is not chain-complete"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-bourbaki-witt, def-chain-complete-poset, def-chain, def-upper-bound, def-nat-order, def-nat-addition, thm-nat-linear-order, lem-nat-successor-neq-self, lem-nat-order-add-compatible, cex-zorn-hypothesis-fails, thm-well-ordering-principle, thm-zorn]
 justified_by: []
 aliases: []

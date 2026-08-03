@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\iota(D_n) = \\iota(n!)\\sum_{i<n+1}(-1)^{i}/\\iota(i!)$, with the term at $i = 0$ equal to $1$ and $D_0 = 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-the-derangement-number, thm-inclusion-exclusion, def-a-sieve-family-and-its-intersections,
        thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial,
        thm-binomial-closed-formula, def-binomial-coefficient, thm-sum-rule,
@@ -18,16 +21,6 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -37,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "Rencontres numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rencontres_numbers"
+    - title: "Derangements (OpenText at the University of Lethbridge)"
+      url: "https://opentext.uleth.ca/Combinatorics/sect_gen-fns-apps-Derangements.html"
 pipeline_run: null
 ---
 
@@ -70,7 +65,7 @@ Since $\iota$ is injective, the identity determines $D_n$ as a natural number
 
 [L3] $\operatorname{Der}(n) = X \setminus \bigcup_{a \in n}A_a$, since a bijection of $n$ is a derangement exactly when it fixes no point ([[def-the-derangement-number]], [[def-injection-surjection-bijection]]).
 
-[L4] The complementary form of the sieve identity ([[thm-inclusion-exclusion]], clause 2).
+[L4] For a finite sieve family $(A_a)_{a\in n}$ in $X$ with $A_\varnothing=X$, the complementary identity is $\iota|X\setminus\bigcup_{a\in n}A_a|=\sum_{J\in\mathcal P(n)}(-1)^{|J|}\iota|A_J|$ ([[thm-inclusion-exclusion]], clause 2).
 
 [L5] Partition of a power set by cardinality: the sets $[n]^{i}$ for $i \in \sigma(n)$ are pairwise disjoint with union $\mathcal{P}(n)$, and $\lvert [n]^{i}\rvert = \binom{n}{i}$ ([[thm-subset-of-a-finite-set]], clause 2, [[def-binomial-coefficient]], [[cor-cardinality-of-the-power-set]]).
 

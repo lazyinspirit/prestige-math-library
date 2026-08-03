@@ -1,9 +1,12 @@
 ---
 id: def-quaternions
 kind: definition
-title: "The quaternions $\\mathbb{H}$: real quadruples with componentwise addition and the multiplication extended from the table on $1, i, j, k$"
+title: "The quaternions $\\mathbb{H}$: real quadruples with componentwise addition and an explicit multiplication formula matching the table on $1, i, j, k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-binary-operation, def-identity-element, def-field, thm-reals-field, def-real-numbers, def-natural-numbers, lem-nat-order-is-membership]
 justified_by: []
 aliases: [def-hamilton-quaternions]
@@ -11,16 +14,13 @@ landmark: false
 short: "$\\mathbb{H}$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-28
 sources:
   scraped: []
   references:
     - title: "Quaternion (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Quaternion"
+    - title: "Wolfram MathWorld, Quaternion"
+      url: "https://mathworld.wolfram.com/Quaternion.html"
 pipeline_run: null
 ---
 

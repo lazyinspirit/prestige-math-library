@@ -4,6 +4,9 @@ kind: theorem
 title: "Lagrange's theorem: $|G|=[G:H]|H|$ for every subgroup $H$ of a finite group $G$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-finite-coset-partition, lem-coset-partition, lem-coset-equinumerous-with-subgroup, def-index, def-order-in-a-group, def-finite-cardinality, thm-sum-rule, def-sum-over-a-finite-index-set, def-divides-in-z, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
 sources:
   scraped: []
   references:
     - title: "UCL lecture notes, Cosets and Lagrange's theorem"
       url: "https://www.homepages.ucl.ac.uk/~ucahmto/0007/_book/4-6-cosets-and-lagranges-theorem.html"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §6.2: Lagrange's Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/06%3A_Cosets_and_Lagrange%27s_Theorem/6.02%3A_Lagrange%27s_Theorem"
 pipeline_run: null
 ---
 
@@ -37,7 +41,7 @@ $\iota(|H|)$ divides $\iota(|G|)$.
 
 [L2] The subgroup, every coset, and $G/H$ are finite; every coset has cardinality $|H|$ and $|G/H|=[G:H]$ ([[lem-finite-coset-partition]], [[lem-coset-equinumerous-with-subgroup]], [[def-index]]).
 
-[L3] For a finite partition $A=\bigsqcup_{i\in I}A_i$, one has $|A|=\sum_{i\in I}|A_i|$ ([[thm-sum-rule]], [[def-sum-over-a-finite-index-set]]).
+[L3] For a finite partition $A=\bigsqcup_{i\in I}A_i$, one has $|A|=\sum_{i\in I}|A_i|$; if every summand has the same value $c$, then $\sum_{i\in I}c=|I|c$ ([[thm-sum-rule]], [[def-sum-over-a-finite-index-set]]).
 
 [F1] The order $|G|$ of a finite group is the unique natural equinumerous with its underlying set, hence agrees with finite cardinality ([[def-order-in-a-group]], [[def-finite-cardinality]]).
 

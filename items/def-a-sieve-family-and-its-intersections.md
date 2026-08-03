@@ -4,6 +4,9 @@ kind: definition
 title: "A finite family $(A_i)_{i \\in I}$ of subsets of a finite set $X$, the intersections $A_J$ for $J \\subseteq I$, and the convention $A_\\varnothing = X$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-cardinality, thm-subset-of-a-finite-set, cor-cardinality-of-the-power-set,
        def-binomial-coefficient, def-countable]
 justified_by: []
@@ -11,16 +14,6 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -28,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle"
     - title: "R. Stanley, Enumerative Combinatorics, Vol. 1, Ch. 2"
       url: "https://en.wikipedia.org/wiki/Enumerative_Combinatorics"
+    - title: "Guichard, The Inclusion-Exclusion Formula (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_and_Graph_Theory_%28Guichard%29/02%3A_Inclusion-Exclusion/2.01%3A_The_Inclusion-Exclusion_Formula"
 pipeline_run: null
 ---
 
@@ -115,7 +110,7 @@ that $J \in [T(x)]^{j}$.
   the sums run over, and $\lvert J\rvert$ rather than any position is what carries
   the sign.
 
-- **The clause $A_\varnothing = X$ is used in exactly one place**, the term of
-  the complementary form at $J = \varnothing$, where it contributes
-  $\lvert X\rvert$. Removing the stipulation would leave that term undefined and
-  the complementary form unstatable.
+- **The clause $A_\varnothing = X$ supplies every empty-subfamily term.** In the
+  complementary form at $J = \varnothing$ it contributes $\lvert X\rvert$;
+  later sieve instances also use it when identifying the intersection at the
+  empty subfamily. Removing the stipulation would leave those terms undefined.

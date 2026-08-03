@@ -4,6 +4,9 @@ kind: definition
 title: "Zero divisor, and integral domain: a commutative ring with $1 \\ne 0$ and no zero divisors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-commutative-ring, lem-ring-elementary-consequences]
 justified_by: []
 aliases: [def-integral-domain, def-zero-divisor]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Zero_divisor"
     - title: "Integral domain (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Integral_domain"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.4: Integral Domains and Fields"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.04%3A_Integral_Domains_and_Fields"
 pipeline_run: null
 ---
 

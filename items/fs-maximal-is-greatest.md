@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every maximal element is a greatest element"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-maximal-element, def-partial-order]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Greatest element and least element (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Greatest_element_and_least_element"
     - title: "Maximal and minimal elements (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Maximal_and_minimal_elements"
     - title: "Partially ordered set (Wikipedia)"

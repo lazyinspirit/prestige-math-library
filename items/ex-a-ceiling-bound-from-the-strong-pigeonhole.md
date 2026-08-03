@@ -4,6 +4,11 @@ kind: example
 title: "Distributing a finite set over a finite set of boxes, with the ceiling bound computed and attained"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-the-strong-pigeonhole-principle, def-the-ceiling-of-a-quotient-of-naturals,
        def-finite-cardinality, thm-sum-rule, def-sum-over-a-finite-index-set, def-nat-order,
        def-injection-surjection-bijection, def-nat-multiplication, lem-nat-trichotomy,
@@ -14,16 +19,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Floor and ceiling functions (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Floor_and_ceiling_functions"
+    - title: "Sylvestre, Pigeonhole Principle (LibreTexts)"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Foundations%3A_An_Introduction_to_Topics_in_Discrete_Mathematics_%28Sylvestre%29/20%3A_Counting/20.05%3A_Pigeonhole_Principle"
 pipeline_run: null
 ---
 
@@ -91,7 +88,7 @@ elements, that is with at least $4$; and $17 > 4\cdot 5 = 20$ is false, so claus
 
 [L1] The ceiling: $\lceil m/n\rceil$ is the least $q \in \mathbb{N}$ with $m \le nq$, for $n \ge 1$ ([[def-the-ceiling-of-a-quotient-of-naturals]]).
 
-[L2] The strong pigeonhole principle, both clauses ([[thm-the-strong-pigeonhole-principle]], [[def-injection-surjection-bijection]]).
+[L2] If $f:A\to B$ maps finite sets and $k\in\mathbb N$, then (i) $|A|>k|B|$ implies some fibre has more than $k$ elements, and (ii), when $B\ne\varnothing$, some fibre has at least $\lceil |A|/|B|\rceil$ elements ([[thm-the-strong-pigeonhole-principle]], [[def-injection-surjection-bijection]]).
 
 [L3] A listed set with distinct entries has as many elements as entries ([[def-finite-cardinality]], clauses (a) and (c), [[def-injection-surjection-bijection]]); and $\lvert 17\rvert = 17$, $\lvert 5\rvert = 5$.
 

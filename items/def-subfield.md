@@ -4,6 +4,9 @@ kind: definition
 title: "Subfield: a subring of a field closed under inverses of its nonzero elements, and therefore a field with the restricted operations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-field, def-subring, lem-subring-criterion, lem-field-is-a-commutative-ring, lem-commutative-division-ring-is-a-field, def-division-ring, def-commutative-ring, def-ordered-field]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Field (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Field_(mathematics)#Subfields"
+    - title: "Field (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Field_(mathematics)"
 pipeline_run: null
 ---
 

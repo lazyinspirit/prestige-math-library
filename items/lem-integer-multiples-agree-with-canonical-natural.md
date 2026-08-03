@@ -4,6 +4,9 @@ kind: lemma
 title: "In a field, the additive multiple $n \\cdot 1_F$ is the canonical natural $\\iota(n)$: the additive power of the group-power definition and the canonical natural are the same function, both being the unique one given by the recursion $\\iota(0) = 0_F$, $\\iota(\\sigma(n)) = \\iota(n) + 1_F$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-canonical-natural, def-group-power, def-field, lem-field-is-a-commutative-ring, def-ring, thm-recursion, def-natural-numbers, def-nat-addition, def-group]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Characteristic_(algebra)"
     - title: "Recursion (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Recursion#The_recursion_theorem"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.3: Rings"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.03%3A_Rings"
 pipeline_run: null
 ---
 

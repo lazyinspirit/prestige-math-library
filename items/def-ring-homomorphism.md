@@ -4,6 +4,9 @@ kind: definition
 title: "Ring homomorphism: additive, multiplicative, and required to send $1$ to $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ring, def-group-homomorphism, def-semigroup-and-monoid, def-identity-element]
 justified_by: []
 aliases: []
@@ -11,16 +14,14 @@ landmark: true
 short: "ring homomorphism"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   audited: 2026-07-28
 sources:
   scraped: []
   references:
     - title: "Ring homomorphism (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ring_homomorphism"
+    - title: "Thomas W. Judson, Abstract Algebra: Theory and Applications, §16.5: Ring Homomorphisms and Ideals"
+      url: "https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_%28Judson%29/16%3A_Rings/16.05%3A_Ring_Homomorphisms_and_Ideals"
 pipeline_run: null
 ---
 
@@ -43,7 +44,7 @@ $(R,+,0_R) \to (S,+,0_S)$, and for groups preservation of the identity is *free*
 it follows from (RH1) by cancellation
 ([[lem-group-homomorphism-basic-properties]]). Condition (RH2) says only that
 $f$ is a homomorphism of the multiplicative *semigroups*, and $(R,\cdot,1_R)$ is
-a monoid, not a group ([[def-semigroup-and-monoid]]); for monoids preservation
+a monoid that need not be a group ([[def-semigroup-and-monoid]]); for monoids preservation
 of the identity does **not** follow and must be assumed, which is precisely why
 [[def-group-homomorphism]] puts the clause $f(e) = e'$ into the definition of a
 monoid homomorphism and leaves it out of the definition of a group homomorphism

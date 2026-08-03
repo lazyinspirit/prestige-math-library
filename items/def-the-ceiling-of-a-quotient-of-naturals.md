@@ -4,6 +4,9 @@ kind: definition
 title: "$\\lceil m/n \\rceil$ for naturals $m$ and $n \\ge 1$: the least $q \\in \\mathbb{N}$ with $m \\le n q$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-well-ordering-principle, def-natural-numbers, def-nat-order, lem-nat-order-is-membership,
        def-nat-multiplication, lem-nat-mult-identity, lem-nat-mult-commutative,
        lem-nat-mult-distributive, lem-nat-add-commutative, lem-nat-trichotomy,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-ordering_principle"
     - title: "Pigeonhole principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+    - title: "Floor and ceiling functions (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ceiling_function"
 pipeline_run: null
 ---
 

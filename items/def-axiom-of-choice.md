@@ -4,6 +4,9 @@ kind: definition
 title: "The Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-choice-function]
 justified_by: []
 forward_refs: [ex-russells-socks, rem-choice-strengths]
@@ -26,6 +29,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "I. Khatchatourian, The Axiom of Choice (University of Toronto MAT327 notes)"
+      url: "https://www.math.utoronto.ca/ivan/mat327/docs/notes/11-choice.pdf"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "Choice function (Wikipedia)"
