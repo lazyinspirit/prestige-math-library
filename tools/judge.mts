@@ -111,7 +111,7 @@
 // blocks or reasoning-only content this harness cannot parse. Check parseability
 // before swapping a model, not after.
 // Run from the repo root (the app worker's tsx supplies the TS loader):
-//   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/judge.mts \
+//   node tools/tsx-run.mjs tools/judge.mts \
 //     items/<id>.md [--parallel | --model deepseek-v4-pro] [--topic "..."] [--conventions "..."] \
 //     [--batch "<A-page-slug>,<A-page-slug>,..."]
 //
@@ -143,6 +143,8 @@ import { readFileSync, appendFileSync, existsSync, readdirSync, mkdtempSync, cop
 import { createHash } from "node:crypto";
 import { basename, join } from "node:path";
 import { spawn } from "node:child_process";
+import { homedir } from "node:os";
+import { deepseekEnvFile } from "./paths.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -265,7 +267,11 @@ for (const judgeModel of models) {
 
 const deepseekKey = (): string => {
   if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
-  const envPath = process.env.DEEPSEEK_ENV_FILE ?? "/root/Projects/prestige-intelligence/.env";
+  const envPath = deepseekEnvFile();
+  if (!envPath) {
+    console.error("[judge] DEEPSEEK_API_KEY is not set and no prestige-intelligence checkout was found; set DEEPSEEK_API_KEY or PRESTIGE_APP_DIR");
+    process.exit(2);
+  }
   try {
     const line = readFileSync(envPath, "utf8").split(/\r?\n/).find((entry) =>
       /^(?:export\s+)?DEEPSEEK_API_KEY\s*=/.test(entry),
@@ -286,7 +292,7 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   // item files to inspect outside the supplied frozen prompt. Remove both on
   // every exit path. The token is never placed in a prompt, ledger, command
   // argument, or process output.
-  const sourceHome = process.env.CODEX_HOME ?? "/root/.codex";
+  const sourceHome = process.env.CODEX_HOME ?? join(homedir(), ".codex");
   const temporaryHome = mkdtempSync("/tmp/prestige-math-library-terra-");
   const temporaryWork = mkdtempSync("/tmp/prestige-math-library-terra-work-");
   const sourceAuth = join(sourceHome, "auth.json");

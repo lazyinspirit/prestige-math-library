@@ -829,6 +829,15 @@ items). **Do not trim landmarks.**
 Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).
 
+**Before starting or resuming a level, run `node tools/preflight.mjs`** (add
+`--judges` to also spend one minimal call per judge lane). It verifies the app
+repo, tsx loader, precheck source, KaTeX, Codex CLI and auth, DeepSeek key
+reachability, Node, git state and disk. It exists because several of those fail
+*soft* — `rendercheck` SKIPS without KaTeX and still exits 0 — so a gate that
+never ran reads like a gate that passed. `tools/paths.mjs` resolves the app repo
+(`$PRESTIGE_APP_DIR`, else the sibling checkout, else the VPS path), and
+`node tools/tsx-run.mjs tools/<x>.mts` is the invocation for every `.mts` tool.
+
 ## Publish (after owner audit)
 
 Flip `status: published` — **that is the publish action**, the live site reads

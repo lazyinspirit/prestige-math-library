@@ -39,7 +39,7 @@ run a page from prompt to publish; the normative docs above win where they diffe
    statement/construction and proof/verification provenance.
 2. **Precheck (mechanical, free)** — from the repo root:
    ```
-   node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts
+   node tools/tsx-run.mjs tools/precheck.mts
    ```
    Bare = all items; or pass specific files. On REPAIR output, adopt the printed
    canonical stratification into the file and re-run until clean (the repo stores
@@ -166,7 +166,7 @@ banner; the public sees only `published`.
 - **Paired skeptical judges (owner, 2026-07-31).** At step 7, run
   `deepseek-v4-pro` directly with `gpt-5.6-terra` through `tools/judge.mts`.
   DeepSeek reads `DEEPSEEK_API_KEY` directly from the configured environment or
-  `/root/Projects/prestige-intelligence/.env`; Terra is a fresh, read-only Codex
+  the app repo's `.env`, located by `tools/paths.mjs`; Terra is a fresh, read-only Codex
   subscription process in an empty temporary work directory. They receive the
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.

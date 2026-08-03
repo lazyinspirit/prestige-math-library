@@ -505,6 +505,36 @@ is never being built — five A pages are published with no B page file at all, 
 labelling those `not-building` is what stops every future session re-proposing
 them.
 
+### 3.13 Environment resolution and preflight (2026-08-03)
+
+This repo has no `node_modules` of its own. tsx, the normative precheck source
+and KaTeX all live in the `prestige-intelligence` checkout next door, and every
+tool that needed one reached in through a hardcoded `/root/Projects/...`
+literal. **`tools/paths.mjs`** replaces all of them with one resolver: the app
+repo is `$PRESTIGE_APP_DIR`, else the sibling checkout, else the original VPS
+path, first existing directory winning; this repo's own root is derived from the
+module's location and is never configured. Every accessor throws with the remedy
+(`npm install in <worker>`) rather than returning a path that does not exist, and
+nothing resolves at import time, so a tool that never needs tsx does not fail to
+load because tsx is absent. `tools/tsx-run.mjs` is the launcher every doc and
+brief now names — `node tools/tsx-run.mjs tools/precheck.mts` — instead of
+repeating a loader path that only resolved on one machine. `CODEX_HOME` defaults
+to `~/.codex` rather than `/root/.codex` for the same reason.
+
+**`tools/preflight.mjs`** answers "can this machine run a build at all" before a
+run starts spending model calls. The failure it exists for is the SOFT one:
+`rendercheck` reports `real KaTeX (SKIPPED)` and exits 0, so a gate that never
+ran is indistinguishable in an unattended log from a gate that found nothing
+wrong. It checks the app repo, tsx loader, precheck source, KaTeX resolution, the
+Codex CLI and its `auth.json`, the optional Claude CLI, DeepSeek key reachability
+(never printing it), Node version, git cleanliness and branch, and free disk.
+`--judges` additionally spends one minimal call per lane through `judge.mts
+--preflight`; it is opt-in because it costs a live token, and it is the check
+most likely to catch what actually kills an overnight run — an expired Codex
+subscription token, which takes out the Sol and Terra lanes simultaneously and
+cannot be repaired without a human. Exit 1 means at least one required check
+failed.
+
 ## 4. The ledgers — state that must outlive its own repair
 
 | ledger | written by | answers |
@@ -829,8 +859,9 @@ this repo.
 
 ## 7. Presentation (FROZEN — owner-approved 2026-07-24)
 
-Implemented in the **app repo**, `/root/Projects/prestige-intelligence`. Do not
-restyle without an explicit in-session owner instruction.
+Implemented in the **app repo** (the `prestige-intelligence` checkout that
+`tools/paths.mjs` resolves; `/root/Projects/prestige-intelligence` on the VPS).
+Do not restyle without an explicit in-session owner instruction.
 
 | file | owns |
 |---|---|

@@ -13,8 +13,8 @@
 You are the **same Beta-n-i that scaffolded this batch**, now returning as its
 Step-5 author. You run **GPT 5.6 Sol via the Codex subscription plan at `xhigh`
 reasoning with a 1,000,000-token context window** (owner, 2026-07-31), owning
-one or two A/B page pairs of the public math library at
-`/root/Projects/prestige-math-library`. Authoring runs in parallel across the
+one or two A/B page pairs of the public math library, whose checkout is the
+directory you were started in. Authoring runs in parallel across the
 whole level. Your batch is named in your own prompt and may never exceed two
 pairs.
 
@@ -273,8 +273,8 @@ shows landmarks only, so under-marking makes a page look empty.
 From the repo root, on your own files only:
 
 ```
-node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/reflow.mts items/<your ids>
-node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts items/<your ids>
+node tools/tsx-run.mjs tools/reflow.mts items/<your ids>
+node tools/tsx-run.mjs tools/precheck.mts items/<your ids>
 node tools/depcheck.mjs ; node tools/fwdcheck.mjs ; node tools/extcheck.mjs ; node tools/citecheck.mjs
 ```
 

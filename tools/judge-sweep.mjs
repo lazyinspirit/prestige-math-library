@@ -8,6 +8,7 @@
 // unrelated calls in the same lane can continue. No result influences the other.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
 import { spawn, spawnSync } from "node:child_process";
+import { tsxLoader } from "./paths.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -119,7 +120,7 @@ if (existsSync(ledger)) {
     history.set(row.id, histories);
   }
 }
-const loader = "/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs";
+const loader = tsxLoader();
 const currentContextHash = (id) => {
   const result = spawnSync(process.execPath, ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], {
     encoding: "utf8",

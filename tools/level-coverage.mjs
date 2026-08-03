@@ -18,6 +18,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tsxLoader } from './paths.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -326,7 +327,7 @@ if (judgeAdjudicationsPath) {
 }
 
 function currentContextHash(id) {
-  const loader = '/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs';
+  const loader = tsxLoader();
   const result = spawnSync(process.execPath, ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'], {
     cwd: REPO,
     encoding: 'utf8',

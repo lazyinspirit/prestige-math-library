@@ -480,7 +480,7 @@ The gate is **eight tools**, run from the repo root; all must be clean before
 anything is published. `ARCHITECTURE.md` §3 documents every error code:
 
 ```
-npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/precheck.mts
+node tools/tsx-run.mjs tools/precheck.mts
 node tools/depcheck.mjs      # deps resolve, graph acyclic, no draft on a published page
 node tools/fwdcheck.mjs      # forward refs declared, point forward, closed, off the spine
 node tools/extcheck.mjs      # recorded-not-proved items well formed; ‡ consequences marked

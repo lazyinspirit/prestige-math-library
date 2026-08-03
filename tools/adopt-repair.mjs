@@ -20,9 +20,9 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
+import { REPO, workerPrefix } from './paths.mjs';
 
-const REPO = '/root/Projects/prestige-math-library';
-const PRECHECK = ['--prefix', '/root/Projects/prestige-intelligence/worker', 'tsx', 'tools/precheck.mts'];
+const PRECHECK = ['--prefix', workerPrefix(), 'tsx', 'tools/precheck.mts'];
 const STEP = /^(\d+\.\d+)\s/;
 
 const args = process.argv.slice(2);

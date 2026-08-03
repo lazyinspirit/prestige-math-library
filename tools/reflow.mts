@@ -8,7 +8,7 @@
 // marker, '## ' headings, and blank-line paragraph breaks are left intact.
 // Idempotent and purely syntactic: it never changes the mathematics.
 //
-//   npx --prefix /root/Projects/prestige-intelligence/worker tsx tools/reflow.mts items/<id>.md [more.md ...]
+//   node tools/tsx-run.mjs tools/reflow.mts items/<id>.md [more.md ...]
 import { readFileSync, writeFileSync } from "node:fs";
 
 function reflow(md: string): string {

@@ -48,6 +48,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { katexCandidates } from "./paths.mjs";
 
 const REPO = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 
@@ -56,10 +57,7 @@ const REPO = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 const require_ = createRequire(import.meta.url);
 let katex = null;
 let katexWhy = "";
-for (const cand of [
-  "/root/Projects/prestige-intelligence/web/node_modules/katex",
-  "katex",
-]) {
+for (const cand of katexCandidates()) {
   try {
     katex = require_(cand);
     break;

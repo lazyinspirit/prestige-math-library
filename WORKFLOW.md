@@ -762,7 +762,7 @@ sources. Deploy note: the production `output: standalone` build must trace
 **Mechanical precheck** runs on every generated item (free, deterministic):
 
 ```
-node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/precheck.mts items/<id>.md
+node tools/tsx-run.mjs tools/precheck.mts items/<id>.md
 ```
 
 It verifies the phase stratification, tag vocabulary, strategy-specific required
@@ -776,7 +776,7 @@ step across several lines. The helper `tools/reflow.mts` joins wrapped step line
 back into one line; run it before precheck:
 
 ```
-node --import /root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs tools/reflow.mts items/<id>.md
+node tools/tsx-run.mjs tools/reflow.mts items/<id>.md
 ```
 
 ---

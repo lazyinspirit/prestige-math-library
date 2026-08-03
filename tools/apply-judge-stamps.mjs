@@ -45,6 +45,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { tsxLoader } from './paths.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -58,7 +59,7 @@ if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)) {
   process.exit(2);
 }
 
-const LOADER = '/root/Projects/prestige-intelligence/worker/node_modules/tsx/dist/loader.mjs';
+const LOADER = tsxLoader();
 const today = new Date().toISOString().slice(0, 10);
 
 // A stamp is evidence about the item, not a mathematical change to it.  Exclude
