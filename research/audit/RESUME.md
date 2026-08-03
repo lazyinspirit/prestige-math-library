@@ -99,17 +99,65 @@ snapshots so far: `baseline`, `pre-A4`. Betas must NOT write
   carries a well-order" (over-attribution to `def-well-order` gone); B2 `[F1]`
   and B3 `[L1]` removed.
 
-**Next action:** when topology exits — recount from disk, re-run all gates,
-**regenerate `genrisk.json`** (built at A0, before the new tags existed), merge
-proof contracts, run `content-policy --audit`, `impact-audit` from the `pre-A4`
-snapshot, then A6 with the **Opus 5 Alpha** (Agent tool, model `opus`;
-readers/refuters stay Sol via `codex exec`). Judge-lane execution at A7 is the
-ORCHESTRATOR's, not Alpha's (EPERM).
+### A6 DONE — first Opus 5 Alpha, committed `28d84d4`
 
-Alpha's A6 queue, already known: 8 combinatorics `established-knowledge`
-concurrences; the `generation.role` vocabulary gap for the two generated
-remarks; the 123 later-wave topology->real-analysis seam edges; genrisk
-dispositions for the 2 new zero-cone seeds.
+Report: `research/audit/wave2-alpha.md`. Gates RE-RUN INDEPENDENTLY by the
+orchestrator (not taken from Alpha's report): depcheck exit 0
+(`published-unaudited` now empty), fwd/ext/cite/render/prose/depsource OK,
+content-policy **16 -> 0 errors**, proof-contract --strict 0 errors 201/201,
+risk-report --require-reviewed 0 errors / 201 routed, genrisk + impact receipts
+exit 0 (261 interfaces / 1,958 dispositions). 39 items gained
+`verification.verified`; `verification.audited` never written.
+
+- **11 NEW fatal-class defects found after A3 and repaired.** Two were A4
+  impact-closure misses invisible to every mechanical gate — the argument for
+  A6 existing.
+- **8 waivers became 1.** Alpha found the root cause in the Beta ledger — **the
+  Beta sandbox cannot resolve DNS** — fetched sources itself at 200 and upgraded
+  7 to `semantic-source`. Its Sol certifier then caught the 8th:
+  `fs-erdos-ko-rado-without-the-ground-set-bound` is EKR with a hypothesis
+  DELETED, not semantic identity, so it returned to `established-knowledge`.
+  The cross-family certifier caught what Alpha itself passed — exactly why
+  readers stay Sol.
+- **The orchestrator was WRONG on `cited-not-in-deps` and Alpha overturned it.**
+  Only `cex-empty-set-has-no-sup` was new; 5 others pre-existed. Confirmed
+  independently by running depcheck in a worktree at `0dcd90e`. The bad
+  inference was "A4 changed this item" => "A4 introduced this error". **Do not
+  repeat it: attribute regressions by re-running the gate at the old commit.**
+- `generation.role`: Alpha DECLINED to extend the vocabulary — the gap is
+  deliberate (SCHEMA §3 + AUDIT-WORKFLOW §8). No doc change.
+- genrisk: both new seeds `unfold`. 3 real `deps` edges to `ai-generated`
+  remarks (forbidden targets) deleted with impact closure; logical cones now 0.
+- Cross-edges 1,092/1,092 audited, 0 wrong; the A0 topology obligation is
+  discharged 170/170, 0 target-suspect.
+- **Twice-touched real count is ZERO** (touchlog's 51 is a snapshot-window
+  artifact of 260 per-item snapshots from 5 concurrent Betas). Nothing escalates.
+
+**Current step: A7.** Paired sweep running, orchestrator-executed:
+`JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --ledger
+research/audit/wave2-judge.jsonl --cost research/audit/wave2-judge-cost.jsonl
+--manifests <the five wave2-*.pages.json>`. Target **516 verdicts** (258 items x
+2 lanes). Log `scratchpad/a7/sweep.log`.
+
+**A7 SECOND PASS REQUIRED — do not skip.** `--manifests` cannot combine with
+`--items`, so after the main sweep run a second append to the SAME ledger for
+the 3 items Alpha changed outside the manifests:
+`def-extended-reals` (prose changed — needs both lanes),
+`cor-bolzano-weierstrass-in-rn` and `rem-compactness-conventions-and-choice-ledger`
+(deps only).
+
+**Then A8** (Alpha adjudicates rejections — dispatch the SAME Opus 5 Alpha via
+SendMessage to keep its context), A9 prosecheck re-grep, A10 rundown + the sole
+owner pause.
+
+**Owner queue building for A10:**
+1. `thm-metric-sequential-closure` — now corroborated a THIRD time — **plus a new
+   rider `thm-metric-continuity-characterisations`** (18 consumers, same root
+   cause). Repair together.
+2. **Add link liveness to a gate** — third wave running; A6 also found 2 URLs
+   that resolve but do not contain the claim.
+3. **Beta/certifier sandboxes have no DNS.** That is what forced the waivers and
+   it will recur every wave until fixed.
 
 ### Measured this session, do not relearn
 
