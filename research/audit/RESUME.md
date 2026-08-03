@@ -1,10 +1,17 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 1b COMPLETE THROUGH A10 — AT THE OWNER PAUSE (2026-08-03 ~20:45)
+## WAVE 1b SHIPPED — owner released the pause, committed and pushed (2026-08-03)
 
-**A0–A10 all complete. The rundown is `research/audit/wave1b-A10.md`.**
-Nothing committed or pushed. `verification.audited` never written (0 additions).
-239 uncommitted files — **a `git clean`/reset destroys the wave.**
+**A0–A10 complete. Rundown: `research/audit/wave1b-A10.md`.**
+Commits on `main`, pushed to origin:
+- `628252d` mechanism — Terra 1M context window, DeepSeek cap 24, docs
+- `87236c1` wave 1b content — 239 files
+
+Working tree clean. `verification.audited` never written by any actor (0
+additions); the delegated gate is `verification.verified` with
+`scope: published-audit`.
+
+**NEXT WAVE STARTS FROM `87236c1`, not `8289fc0`.**
 
 Final state: 108 adjudication rows (98 round 1 + 10 round 2), 398 paired-ledger
 rows (348 A7 + 48 targeted rejudge + 2 round-2 rejudge), receipt with 15
