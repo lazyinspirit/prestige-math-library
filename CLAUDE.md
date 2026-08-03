@@ -171,10 +171,11 @@ banner; the public sees only `published`.
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.
   `tools/judge-sweep.mjs` keeps their calls independent in file-backed,
-  cross-process model pools: DeepSeek has a cap of 16 concurrent calls and
+  cross-process model pools: DeepSeek has a cap of 24 concurrent calls and
   Terra has a separate cap of 16. Each model moves to its next item when one of
-  its own slots is free, without waiting for the other model (32 calls maximum
-  combined).
+  its own slots is free, without waiting for the other model (40 calls maximum
+  combined). DeepSeek's cap was raised from 16 to 24 (owner, 2026-08-03)
+  because its latency, not Terra's, gates every sweep.
   Before scheduling, it assembles each selected item's current prompt hash once
   and shares that attestation across both model queues.
   The sweep records every transport/HTTP attempt, latency, finish reason, and
@@ -200,8 +201,8 @@ banner; the public sees only `published`.
   `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; fatal types are
   `logic`, `dependency_citation`, or `other`), and compare agreement,
   model-only rejections, nulls, and owner-confirmed fatal findings at the end of
-  step 10. The two model pools are independently capped at 16 calls each (32
-  maximum combined); neither model's throughput is throttled by the other.
+  step 10. The two model pools are independently capped — DeepSeek 24, Terra 16
+  (40 maximum combined); neither model's throughput is throttled by the other.
 
 - **Alpha adjudicates judges (owner, 2026-07-31).** For this and every future
   session, Alpha is the sole adjudicator of a paired-judge rejection. Alpha
@@ -251,7 +252,7 @@ banner; the public sees only `published`.
   Sol**;
   Alpha must first recover the durable prior-session audit record; paired
   judges are DeepSeek V4 Pro plus fresh GPT 5.6 Terra selected by env
-  `JUDGE_LINEUP=deepseek+terra`, with the build's same independent 16+16
+  `JUDGE_LINEUP=deepseek+terra`, with the build's same independent 24+16
   concurrent pools; (3) the published-item repair delegation extends to
   citation-precision repairs, provenance retags, and debatable restatements
   with Alpha as final adjudicator — deletions, id changes, and reading-order

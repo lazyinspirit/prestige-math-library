@@ -72,7 +72,7 @@ drift:
   `briefs/audit-alpha.md` before acting. The JUDGE lanes are **DeepSeek V4
   Pro** plus fresh **GPT 5.6 Terra** via the Codex subscription, selected by
   `JUDGE_LINEUP=deepseek+terra`. They use the build's exact paired mechanism:
-  independent, file-backed pools of 16 calls per model (32 combined), identical
+  independent, file-backed pools of 24 DeepSeek and 16 Terra calls (40 combined), identical
   frozen contexts, and neither lane waits for the other. Existing Sonnet rows
   remain append-only historical evidence but do not constitute Terra coverage.
 - **Legacy-provenance amendment.** The standing rule "never retrofit legacy
@@ -359,9 +359,28 @@ rationale. Decision priority: mathematical accuracy and citation precision are
 non-negotiable; then minimize AI-generated load-bearing surface; then preserve
 mathematical richness and exposition. No owner pause.
 
-**A4 — Apply (Beta).** Apply approved retags and repairs under §9. `reflow` +
-`precheck` on any changed proof item; snap `touchlog` after the stage;
-`impact-audit` template generated for any public-interface change.
+**A4 — Apply (Beta, all batches in parallel).** Apply approved retags and
+repairs under §9. `reflow` + `precheck` on any changed proof item; snap
+`touchlog` after the stage; `impact-audit` template generated for any
+public-interface change.
+
+**One Beta per category batch, run concurrently** — the same fan-out as A1/A2,
+and `briefs/audit-beta.md` is already scoped that way ("wave `<k>`, `<category>`
+batch"). This is safe because **A4's write sets are disjoint**: each Beta writes
+only the `items/` files and the A-page summary of its own batch, plus its own
+namespaced `wave<k>-<category>.*` artifacts. No two batches share a target file,
+so there is no silent-overwrite hazard of the kind that forces a single Alpha at
+A6 (owner, 2026-08-03).
+
+Measured at wave 1b, where A4 was run as a single Beta over all four batches:
+30 minutes for 170 retags, 4 citation repairs and 3 summary rewrites. Serial
+application is the only reason it took that long; the work itself is per-item
+and mechanical.
+
+Two things stay serial and must NOT be fanned out: the whole-wave gate run
+(the orchestrator's, after every Beta returns — amendment 6, no stage advances
+on an agent's report alone) and the `touchlog` snapshot, which is one snapshot
+per stage, not per batch.
 
 **A6 — Alpha audit.** Kept at the build's number because it is the same
 mechanism: (a) independent readers certify every Beta repair (and a reader
@@ -377,7 +396,7 @@ seconds is nonfatal, recorded at most.
 DeepSeek V4 Pro + fresh GPT 5.6 Terra sweep over **every item in every audited batch
 of the wave**, whether or not it was touched — coverage is the mechanism, and
 under the new lineup no prior verdict exists to reuse. Same frozen A/B-pair
-context unit, same single hash attestation shared by both lanes, same 16+16
+context unit, same single hash attestation shared by both lanes, same 24+16
 file-backed cross-process slot pools, same attempt-ledger/retry semantics,
 same `verification.judge`-is-passes-only honesty rule. **Before the first
 production sweep after a Terra-model or context change, the Terra lane must pass the standing injection test** — a
@@ -450,7 +469,7 @@ stage; no stage advances on an agent's report.
 | tool | change |
 |---|---|
 | `tools/judge.mts` | the build's `deepseek+terra` production pair: direct DeepSeek plus a fresh, read-only Codex-subscription Terra process. Frozen prompt, hash attestation, verdict JSON contract, and `briefs/judge-conventions.txt` loading are shared byte-for-byte by both lanes. Historical Claude-lineup code and ledger rows are retained only to read prior evidence |
-| `tools/judge-sweep.mjs` | the unmodified build dual scheduler: DeepSeek and Terra each have a separate 16-slot cross-process pool (32 combined), advance independently, and share the same frozen prompt hash per item. The child judge inherits `JUDGE_LINEUP=deepseek+terra` so sweep and judges cannot disagree. New `--manifests` input (2026-08-02): item universe read from audit batch manifests instead of plan-spec pages, because spec `items` arrays are stale for legacy pages (`--pages` measured to select 180/276 wave-0 items); dedupes shared-prelude items automatically |
+| `tools/judge-sweep.mjs` | the unmodified build dual scheduler: DeepSeek has a 24-slot and Terra a 16-slot cross-process pool (40 combined), advance independently, and share the same frozen prompt hash per item. The child judge inherits `JUDGE_LINEUP=deepseek+terra` so sweep and judges cannot disagree. New `--manifests` input (2026-08-02): item universe read from audit batch manifests instead of plan-spec pages, because spec `items` arrays are stale for legacy pages (`--pages` measured to select 180/276 wave-0 items); dedupes shared-prelude items automatically |
 | `tools/level-coverage.mjs` | `JUDGES` derived from `JUDGE_LINEUP`; new `--audit` flag downgrades `ai-generated-statement-dependency` to a warning routed to the `genrisk` disposition (everything else stays hard); audit batch manifests are accepted as scope unchanged |
 | `tools/rounds.mjs` | `--audit-batches [--wave K] [--outdir research/audit]`: emits `wave<k>-<category>.pages.json` entirely from disk. The wave is the **site's dependency level** — the app's `pageGraph` (item `deps` projected to pages via the home convention, in-category edges, transitive reduction, longest path from a category root, roots at 0) ported verbatim, so the audit order and the `/library` index can never disagree (owner, 2026-08-02); the plan-spec `requires` function keeps ordering the build only. Pages read from `library/*/*.md` with `status: published`; pair = A page + its published `-examples` companion; `not-proved-here` excluded from scope; item lists from the page files, each item carrying its current authored `deps` as the reconciliation baseline. Items already carrying both provenance tags are excluded at generation (owner rule 2026-08-02); fully-tagged pairs drop out |
 | `tools/content-policy.mjs` | `--audit --ledger <provenance.jsonl>…` mode: requires both provenance components and a matching evidence-ledger row (`audit-ledger-missing-row`, `audit-ledger-mismatch`, `audit-ledger-evidence[-mismatch]`, `audit-ledger-rationale`) for every scoped item; mechanizes D2 (`established-knowledge` needs `alpha_concurred: true` and is the only URL waiver, surfaced as the `established-knowledge-unsourced` warning) and D5 (`legacy-authorship-retained` error); downgrades to warnings what cannot bind history — `ai-generated-statement-dependency` (routed to genrisk), `generated-kind`/`generated-role`, and `external-record-missing` on legacy deferred items |
@@ -532,7 +551,7 @@ dropping; snap after **every** item-modifying stage or the ledger lies.
   read + literature search. This, plus full contract capture (D1) for every
   proof-bearing item, is the wall-clock center, not judging.
 - Judging: ≈2,400 items × 2 lanes ≈ 4,800 calls across the run, paced by the
-  16+16 pools; the sweep is resumable and skips completed current-context
+  24+16 pools; the sweep is resumable and skips completed current-context
   pairs, so waves are safely interruptible.
 - ~11 published waves (levels 1–10/11), per-wave width 1–8+ pairs. Waves are
   sequential by design; batches inside a wave are concurrent.

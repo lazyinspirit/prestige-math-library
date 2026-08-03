@@ -437,8 +437,8 @@ assembled current context. A later null retry does not erase an earlier complete
 verdict on that identical prompt; a later substantive verdict does. Both models
 share one freshly assembled current hash per selected item before scheduling.
 DeepSeek and Terra use file-backed, cross-process pools with separate caps of
-16 calls each: either model advances as soon as one of its own pool slots is
-free, never after the other model's call. At most 32 judge calls run together.
+24 and 16 calls: either model advances as soon as one of its own pool slots is
+free, never after the other model's call. At most 40 judge calls run together.
 For recovery of only one incomplete judge, pass its exact model id through `--models`;
 the sweep then leaves the other model's already-current verdict untouched.
 The sweep also writes a sibling `-attempts.jsonl` ledger: each attempt records

@@ -140,7 +140,11 @@ const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
 // Every lane has its own model-named slot directory, so the Opus lane's pool
 // is disjoint from Terra's and a lineup switch cannot double-book a cap.
 const MODEL_CONCURRENCY = Object.freeze({
-  [DEEPSEEK]: 16,
+  // DeepSeek gates every sweep: at the end of wave 1b's A7, Terra had
+  // finished all 174 while DeepSeek still had 36 pending with all of its
+  // slots held. Its per-call latency, not its throughput, sets wall clock.
+  // Raised 16 -> 24 (owner, 2026-08-03); Terra unchanged.
+  [DEEPSEEK]: 24,
   [TERRA]: 16,
   [OPUS]: 16,
   [SONNET]: 16,

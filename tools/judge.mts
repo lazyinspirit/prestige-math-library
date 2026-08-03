@@ -294,6 +294,11 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   const child = spawn(process.env.CODEX_BIN ?? "codex", [
     "--ask-for-approval", "never", "exec", "--ephemeral", "--model", TERRA_MODEL,
     "-c", 'model_reasoning_effort="xhigh"',
+    // The temporary CODEX_HOME below contains only auth.json, so the user's
+    // config.toml — including model_context_window — is deliberately NOT
+    // inherited. Pass the owner's 1,000,000-token window explicitly, or this
+    // lane silently runs at the Codex built-in default (owner, 2026-08-03).
+    "-c", "model_context_window=1000000",
     "--sandbox", "read-only", "--skip-git-repo-check", "--cd", temporaryWork, "-",
   ], { stdio: ["pipe", "pipe", "pipe"], env: { ...process.env, CODEX_HOME: temporaryHome } });
   let stdout = "";

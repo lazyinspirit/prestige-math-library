@@ -570,9 +570,9 @@ necessary fixes.
 directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
 Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
 one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
-cross-process model pools with **16 concurrent DeepSeek calls and 16 concurrent
+cross-process model pools with **24 concurrent DeepSeek calls and 16 concurrent
 Terra calls**. Either model moves to its next item as soon as one of its own
-slots is free (32 calls maximum combined). Both receive the same exact hash-attested frozen prompt
+slots is free (40 calls maximum combined). Both receive the same exact hash-attested frozen prompt
 for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
 author; Terra is retained as an independent same-context comparison lane, not
 as a cross-family claim. The harness retains the historical injection-test
