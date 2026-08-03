@@ -18,6 +18,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Euler's totient function (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Euler%27s_totient_function"
     - title: "K. Conrad, The Chinese Remainder Theorem"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
     - title: "Mathematics LibreTexts, Euler's phi Function"

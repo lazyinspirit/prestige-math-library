@@ -17,6 +17,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -44,11 +50,6 @@ A supremum would be a least element of that set, and $\mathbb{R}$ has no least
 element, because $w - 1 < w$ for every $w$. What fails is therefore the
 nonemptiness hypothesis of the least-upper-bound property
 ([[def-complete-ordered-field]]), not boundedness.
-
-Some texts repair the statement by declaring $\sup \emptyset = -\infty$ in the
-extended reals. That convention is consistent and is discussed in
-[[rem-sup-conventions]]; this library does not adopt it, because $-\infty$ is
-not an element of $\mathbb{R}$.
 
 ## Facts & Assumptions
 
@@ -78,4 +79,5 @@ not an element of $\mathbb{R}$.
 
 - The same argument, applied to lower bounds, shows that $\emptyset$ has no infimum either: every real is a lower bound and there is no greatest real, since $w < w + 1$ for every $w$.
 - Together with [[cex-unbounded-set-has-no-sup]] this shows that both hypotheses of the least-upper-bound property are load bearing, and that they fail independently: $\emptyset$ is bounded and not nonempty, while the naturals inside $\mathbb{R}$ are nonempty and not bounded above. Neither witness alone would establish that.
+- Some texts repair the refuted claim by declaring $\sup \emptyset = -\infty$ in the extended reals. That convention is consistent and is discussed in [[rem-sup-conventions]]; this library does not adopt it, because $-\infty$ is not an element of $\mathbb{R}$.
 - The convention $\sup \emptyset = -\infty$ is exactly the assertion that the empty set has a least upper bound in a larger ordered set in which every element bounds $\emptyset$ above and $-\infty$ is least. That larger set is not a field, which is why [[rem-sup-conventions]] keeps it out of the statements proved here rather than adopting it by default.

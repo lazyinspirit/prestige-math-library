@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-vertex-and-edge-connectivity-always-agree, def-vertex-and-edge-connectivity, def-graph-adjacency-incidence-neighbourhood-and-degree]
 aliases: []
 landmark: true

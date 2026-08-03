@@ -17,7 +17,7 @@ examples: [fs-ordinals-form-a-set, fs-every-set-well-orderable-in-zf,
 Well-orders extend ordinary induction by giving every nonempty subset a least
 element. The development uses partial orders, chains, natural-number induction
 and well-ordering, the pigeonhole principle, and the set-theoretic axioms of
-Separation, Union, Replacement, and Foundation. Zorn's lemma, choice functions,
+Separation, Union, and Replacement. Zorn's lemma, choice functions,
 and the Axiom of Choice enter only in the results comparing choice with the
 existence of well-orders on arbitrary sets.
 

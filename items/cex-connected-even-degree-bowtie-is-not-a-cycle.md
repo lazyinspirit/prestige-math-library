@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,7 +38,7 @@ connected simple graph whose degrees are all even is itself a cycle.
 
 [F1] Degree is the number of neighbours ([[def-graph-adjacency-incidence-neighbourhood-and-degree]]).
 
-[F2] Every vertex of a cycle graph has degree $2$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[F2] In the cycle graph $C_n$ each vertex is joined by an edge exactly to its predecessor and its successor modulo $n$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]); with [F1] this gives every vertex of a cycle graph degree $2$.
 
 ## Counterexample
 

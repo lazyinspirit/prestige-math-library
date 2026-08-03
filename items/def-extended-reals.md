@@ -12,11 +12,12 @@ landmark: true
 short: "$\\overline{\\mathbb{R}}$"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -149,12 +150,12 @@ explicit hypothesis saying so.
   only option that keeps every later statement about limits true without a
   side condition hidden inside the arithmetic.
 
-- **The promise of [[rem-sup-conventions]] is discharged here.** That remark
-  refused the conventions $\sup S = +\infty$ and $\inf \emptyset = +\infty$ inside
-  $\mathbb{R}$, and said that a later page needing $\overline{\mathbb{R}}$ would
-  "introduce it explicitly as a new object with its own order and its own partial
-  arithmetic, rather than quietly extending $\mathbb{R}$". This is that
-  introduction. The suprema and infima of [[def-complete-ordered-field]],
+- **This is the separate introduction that [[rem-sup-conventions]] points to.**
+  That remark refuses the conventions $\sup S = +\infty$ and
+  $\inf \emptyset = +\infty$ inside $\mathbb{R}$, and records that the extended
+  real line is introduced explicitly here, with its own order and its own partial
+  arithmetic kept separate from $\mathbb{R}$ rather than quietly extending it.
+  This is that introduction. The suprema and infima of [[def-complete-ordered-field]],
   [[def-infimum]] and the whole suprema page remain real numbers with their
   nonempty and bounded hypotheses intact; what is new is a *separate* supremum
   operation, taken in $\overline{\mathbb{R}}$ and named as such, supplied by

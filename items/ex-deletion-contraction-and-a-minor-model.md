@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-graph-deletion-contraction-minor-and-subdivision, def-subgraph-induced-subgraph-and-spanning-subgraph]
 aliases: []
 landmark: false

@@ -16,7 +16,9 @@ verification:
   precheck: n/a
 sources:
   scraped: []
-  references: []
+  references:
+    - title: "Sunflower (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sunflower_(mathematics)"
 pipeline_run: null
 ---
 

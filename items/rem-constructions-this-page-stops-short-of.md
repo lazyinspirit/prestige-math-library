@@ -19,11 +19,12 @@ landmark: false
 short: "what this page leaves open"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,8 +37,9 @@ sources:
 pipeline_run: null
 ---
 
-This page builds four constructions, the subspace, the product, the coproduct and
-the quotient, and proves the characteristic property of each. Four questions that
+This page builds three constructions, the product, the coproduct and the
+quotient, proves the characteristic property of each, and develops further the
+subspace topology introduced earlier in the reading order. Four questions that
 a reader will ask immediately are deliberately left open, and this remark records
 which they are and why. Each is a question whose answer needs vocabulary that is
 not available at this point in the reading order; none of them is a defect of the
@@ -82,7 +84,7 @@ connectedness, compactness and the homotopy notions. None of the three is
 available here in the form the question needs: connectedness and compactness are
 developed earlier in the reading order only for subsets of $\mathbb{R}$ and for
 metric spaces, neither of which covers a quotient that has not been shown
-metrizable, and the homotopy notions are absent from the library altogether.
+metrizable, and the homotopy notions are developed only later in the reading order.
 Accordingly no item on this page or its companion
 claims that two of these spaces differ; where two constructions are shown to agree,
 an explicit homeomorphism is exhibited.

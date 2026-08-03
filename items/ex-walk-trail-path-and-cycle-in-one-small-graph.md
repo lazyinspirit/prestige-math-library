@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-graph-walk-trail-path-and-cycle, def-finite-simple-graph]
 aliases: []
 landmark: false

@@ -20,11 +20,12 @@ short: "the line with two origins"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -123,8 +124,8 @@ Then:
   topology (step 2.1). Any bounded metric equivalent to the usual one on each
   copy would do.
 
-- **Every hypothesis one might add to the source fails to help.** $S$ is
-  metrizable, hence Hausdorff and first countable, and $q$ is an *open* quotient
-  map; none of that is enough. What would be needed is a condition on the
+- **Strengthening the source's separation and countability properties does not
+  help here.** $S$ is metrizable, hence Hausdorff and first countable, and $q$ is
+  an *open* quotient map; none of that is enough. What would be needed is a condition on the
   relation itself, and no such condition is stated at this point in the reading
   order ([[rem-constructions-this-page-stops-short-of]]).

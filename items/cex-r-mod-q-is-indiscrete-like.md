@@ -18,6 +18,12 @@ short: "$\\mathbb{R}/\\mathbb{Q}$ is indiscrete"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

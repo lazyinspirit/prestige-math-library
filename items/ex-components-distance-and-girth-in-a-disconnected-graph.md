@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-connected-graph-and-connected-component, def-graph-distance-and-girth, cor-connected-components-partition-the-vertex-set]
 aliases: []
 landmark: false

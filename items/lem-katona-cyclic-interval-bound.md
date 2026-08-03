@@ -14,9 +14,17 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: []
+  references:
+    - title: "Erdős-Ko-Rado theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ko%E2%80%93Rado_theorem"
 pipeline_run: null
 ---
 

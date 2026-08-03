@@ -8,9 +8,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 deps: [def-product-topology, thm-box-finer-than-product, def-topology-basis-subbasis,
-       def-metrizable-space, lem-real-line-is-a-metric-space, def-interval,
-       lem-finite-set-has-max, def-canonical-natural, lem-of-naturals-positive,
-       cor-of-one-positive, def-topological-space]
+       def-metrizable-space, lem-real-line-is-a-metric-space, def-interval, lem-finite-set-has-max,
+       def-canonical-natural, lem-of-naturals-positive, cor-of-one-positive, def-topological-space,
+       def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: false
@@ -18,11 +18,12 @@ short: "a product of open sets need not be product-open"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,8 +44,11 @@ What is true is the version with a restriction on how many factors may be cut
 down: $\prod_i U_i$ is open in the product topology when every $U_i$ is open
 **and** $U_i = X_i$ for all but finitely many $i$, those being exactly the basic
 product-open sets ([[def-product-topology]], [[def-topology-basis-subbasis]]).
-The unrestricted claim is the definition of the *box* topology, which is strictly
-finer ([[thm-box-finer-than-product]]).
+The unrestricted claim is the definition of the *box* topology, which is finer,
+and is strictly finer under the hypotheses of claim 3 of
+[[thm-box-finer-than-product]], which assumes the Axiom of Choice
+([[def-axiom-of-choice]]); the witness written out below exhibits the strictness
+in $\mathbb{R}^{\mathbb{N}}$ with no choice principle at all.
 
 The refutation uses $\mathbb{R}^{\mathbb{N}} = \prod_{k \in \mathbb{N}}\mathbb{R}$
 with the usual topology on each factor

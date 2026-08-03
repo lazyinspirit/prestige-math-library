@@ -4,7 +4,7 @@ kind: remark
 title: "The quasicompact convention, why compactness of a subset is read intrinsically here, and what each result on this page costs in choice"
 status: published
 origin: session
-deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-compactness-choice-ledger-metric, rem-choice-strengths]
+deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-choice-strengths]
 justified_by: []
 external_refs: [rem-schechter-kelley-tychonoff, rem-baire-category-choice-strength]
 aliases: [rem-compactness-choice-ledger]
@@ -15,7 +15,7 @@ verification:
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-08-03
+    date: 2026-08-04
     scope: published-audit
     delegated_by: owner
 sources:

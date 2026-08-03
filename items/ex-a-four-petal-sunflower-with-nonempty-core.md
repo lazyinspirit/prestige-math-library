@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-sunflower]
 justified_by: []
 aliases: []

@@ -1,7 +1,7 @@
 ---
 id: fs-every-ultrafilter-principal
 kind: false-statement
-title: "FALSE: every ultrafilter is principal"
+title: "FALSE, once the ultrafilter lemma is available: every ultrafilter is principal"
 status: published
 origin: session
 provenance:
@@ -17,15 +17,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -51,6 +47,12 @@ anybody can write down. Each is given by a formula in one parameter, they are
 easy to check, and on a finite $X$ there are no others. What the claim misses is
 that [[thm-ultrafilter-lemma]] manufactures ultrafilters from filters that no
 point generates, and it does so without ever naming the result.
+
+**What refutes the claim, and what that costs.** The refutation below assumes the
+ultrafilter lemma, which this library proves from the Axiom of Choice
+([[thm-ultrafilter-lemma]]). The claim is not refuted in ZF alone: as the remarks
+record, it is consistent with ZF that every ultrafilter on $\mathbb{N}$ is
+principal.
 
 ## Facts & Assumptions
 

@@ -13,6 +13,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,7 +40,7 @@ degree is a cycle graph.
 
 [F2] A connected graph has a path between every two vertices ([[def-connected-graph-and-connected-component]]).
 
-[F3] In a cycle graph every vertex has exactly two neighbours ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[F3] In the cycle graph $C_n$ each vertex is joined by an edge exactly to its predecessor and its successor modulo $n$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]); with [F1] this gives every vertex of a cycle graph exactly two neighbours.
 
 ## Refutation
 

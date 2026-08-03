@@ -16,11 +16,12 @@ landmark: true
 short: "product topology, box topology, projections"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -127,9 +128,9 @@ and the box topology has no such property.
 
 - **Where the two topologies actually differ.** The box topology is finer than
   the product topology by construction, since $\mathcal{R}^{\Pi} \subseteq
-  \mathcal{R}$. They agree whenever $I$ is finite; and for a family of **nonempty**
-  spaces they differ for infinite $I$ as soon as infinitely many factors have a
-  nonempty proper open subset. Nonemptiness is not decoration: if one factor is
+  \mathcal{R}$. They agree whenever $I$ is finite; and, assuming the Axiom of Choice, for a
+  family of **nonempty** spaces they differ for infinite $I$ as soon as infinitely
+  many factors have a nonempty proper open subset. Nonemptiness is not decoration: if one factor is
   empty then the product is empty and carries exactly one topology, so the two
   agree however the other factors are chosen. Both statements are proved two items
   below, with that hypothesis, and the failure is recorded on this page as a false

@@ -19,11 +19,12 @@ short: "a quotient of a Hausdorff space need not be Hausdorff"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -94,9 +95,9 @@ Then $S$ is Hausdorff and $L$ is not: the two classes $q(0,0)$ and $q(0,1)$, the
 
 ## Remarks
 
-- **The source is not merely Hausdorff but metrizable**, so no strengthening of
-  the hypothesis short of a genuine separation axiom on the *quotient* rescues
-  the claim. A metric inducing the topology of $S$ is exhibited on the companion
+- **The source is not merely Hausdorff but metrizable**, so strengthening the
+  separation and countability properties of the source is not by itself what
+  rescues the claim; what decides the matter is the relation being collapsed. A metric inducing the topology of $S$ is exhibited on the companion
   page, where the same witness is worked as [[cex-line-with-two-origins]], and
   the quotient map there is shown to be open as well.
 

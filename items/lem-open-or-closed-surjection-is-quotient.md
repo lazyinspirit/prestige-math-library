@@ -18,11 +18,12 @@ short: "open, closed or sectioned surjections are quotient maps"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -48,10 +49,9 @@ quotient map ([[def-quotient-topology]]).
    $q \circ s = \mathrm{id}_Y$. (Surjectivity of $q$ is then automatic and need
    not be assumed.)
 
-None of the three conditions is necessary. A quotient map need be neither open
-nor closed, and need admit no section; a witness that is a quotient map by clause
-3 while failing clauses 1 and 2 is worked on the companion page, and is named in
-the remarks below.
+Neither clause 1 nor clause 2 is necessary: a quotient map need be neither open
+nor closed. A witness that is a quotient map by clause 3 while failing clauses 1
+and 2 is worked on the companion page, and is named in the remarks below.
 
 ## Facts & Assumptions
 
@@ -93,12 +93,12 @@ the remarks below.
 
 ## Remarks
 
-- **The three clauses are genuinely different, and none of them reverses.** The
-  canonical projection of an identification space need be neither open nor
-  closed, and the companion page's
+- **The three clauses are genuinely different, and neither clause 1 nor clause 2
+  reverses.** The canonical projection of an identification space need be neither
+  open nor closed, and the companion page's
   [[cex-quotient-map-neither-open-nor-closed]] is a quotient map that fails both
-  conditions while satisfying clause 3. In the other direction, an open
-  surjection and a closed surjection are unrelated notions, as
+  conditions while satisfying clause 3. In the other direction, being an open
+  map and being a closed map are unrelated notions, as
   [[def-homeomorphism-and-open-maps]] records with a two-point witness.
 
 - **Clause 3 is the cheapest of the three in practice.** Exhibiting a continuous

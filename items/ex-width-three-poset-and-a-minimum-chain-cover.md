@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [thm-dilworth-finite-posets]
 justified_by: []
 aliases: []

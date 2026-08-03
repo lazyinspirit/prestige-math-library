@@ -17,7 +17,9 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references: []
+  references:
+    - title: "Erdős-Ko-Rado theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ko%E2%80%93Rado_theorem"
 pipeline_run: null
 ---
 

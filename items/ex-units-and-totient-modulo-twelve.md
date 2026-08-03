@@ -5,7 +5,7 @@ title: "$(\\mathbb{Z}/12)^\\times=\\{[1],[5],[7],[11]\\}$ and $\\varphi(12)=4$"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [thm-unit-criterion-modulo-n, thm-euler-totient-product-formula, thm-standard-representatives-modulo-n, def-unit-group-modulo-n-and-euler-totient, def-addition-and-multiplication-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []

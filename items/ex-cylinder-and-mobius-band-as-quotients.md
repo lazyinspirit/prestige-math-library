@@ -13,8 +13,7 @@ deps: [def-quotient-topology, lem-open-or-closed-surjection-is-quotient,
        thm-product-of-subspaces-and-closures, thm-quotient-universal-property,
        thm-product-universal-property, ex-circle-as-r-mod-z, ex-torus-as-a-quotient-of-the-square,
        lem-continuity-is-local-and-pastes, lem-integer-part, def-integers,
-       lem-real-line-is-a-metric-space, def-homeomorphism-and-open-maps,
-       rem-constructions-this-page-stops-short-of]
+       lem-real-line-is-a-metric-space, def-homeomorphism-and-open-maps]
 justified_by: []
 aliases: [ex-mobius-band, ex-cylinder-top]
 landmark: false
@@ -22,11 +21,12 @@ short: "cylinder and Mobius band"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

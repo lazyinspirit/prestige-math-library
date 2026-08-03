@@ -10,7 +10,7 @@ provenance:
 deps: [thm-box-finer-than-product, def-product-topology, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-interval, lem-of-inverse-positive,
        lem-finite-set-has-max, def-canonical-natural, lem-of-naturals-positive,
-       def-topological-space]
+       def-topological-space, def-axiom-of-choice]
 justified_by: []
 forward_refs: [cex-box-topology-diagonal-not-continuous]
 aliases: []
@@ -19,11 +19,12 @@ short: "product and box topologies differ"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -40,9 +41,11 @@ pipeline_run: null
 product topology and the box topology on $\prod_{i \in I} X_i$ are the same
 topology ([[def-product-topology]]).
 
-The claim is correct for a finite index set and fails as soon as the index set is
-infinite and the factors have enough open sets
-([[thm-box-finer-than-product]]). The refutation below writes down the standard
+The claim is correct for a finite index set. It fails when the index set is
+infinite and the factors have enough open sets, under the hypotheses of claim 3
+of [[thm-box-finer-than-product]], which assumes the Axiom of Choice
+([[def-axiom-of-choice]]); the witness written out below needs no choice
+principle at all. The refutation below writes down the standard
 witness explicitly, in $\mathbb{R}^{\mathbb{N}} = \prod_{k \in \mathbb{N}} \mathbb{R}$
 with every factor carrying the usual topology
 ([[lem-real-line-is-a-metric-space]], [[def-metrizable-space]]): the shrinking

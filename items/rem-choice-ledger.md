@@ -15,12 +15,19 @@ deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-
 justified_by: []
 forward_refs: [thm-cardinal-comparability-iff-ac, thm-perfectly-normal-implies-completely-normal,
                thm-urysohn-lemma, thm-tietze-extension-theorem,
-               lem-dependent-choice-along-a-sequence-of-relations]
+               lem-dependent-choice-along-a-sequence-of-relations,
+               thm-product-universal-property]
 aliases: [rem-choice-strength-ledger]
 landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -138,15 +145,18 @@ scale, and a phrase like "the weakest of the three" is simply not available.
 
 **Where this library spends choice.**
 
-There is exactly one *place* where the full Axiom of Choice is spent, and more
-than one *result* that assumes it, and there are a second and a third, weaker
-principle each assumed elsewhere. All four facts belong in the ledger.
+Full choice is spent at one step inside Zorn's lemma, and directly in some results
+that do not route through Zorn; more than one *result* assumes it, and there are a
+second and a third, weaker principle each assumed elsewhere. All four facts belong
+in the ledger.
 
-- **One step, in one proof.** The Axiom of Choice is used at a single step of the
+- **One step inside Zorn, and direct uses besides.** The Axiom of Choice is used at a single step of the
   proof of Zorn's lemma ([[thm-zorn]]), to select a strict upper bound for every
   chain at once; the fixed point theorem underlying it ([[thm-bourbaki-witt]]) is
-  choice-free. Every result in this library that assumes full choice reaches it
-  through that step and no other.
+  choice-free. Most results in this library that assume full choice reach it
+  through that step, but not all: some apply the Axiom of Choice directly instead,
+  for example [[thm-product-universal-property]], which uses it to obtain a point
+  of an arbitrary product of nonempty sets without routing through Zorn's lemma.
 - **The results that assume full choice.** [[thm-zorn]] itself is the first of
   them: its statement takes the Axiom of Choice as a standing hypothesis, which
   is why the step above lives inside it. On this page: the well-ordering
@@ -171,9 +181,11 @@ principle each assumed elsewhere. All four facts belong in the ledger.
   with the full-choice results above.
 - **A third principle below full AC.** [[thm-urysohn-lemma]] and
   [[thm-tietze-extension-theorem]] are each stated under dependent choice
-  ([[def-dependent-choice]]), spent through
-  [[lem-dependent-choice-along-a-sequence-of-relations]] to build an
-  $\mathbb{N}$-indexed sequence of approximations. DC implies $\mathrm{AC}_\omega$
+  ([[def-dependent-choice]]), each applying dependent choice directly to a single
+  relation on stage-tagged states to build an $\mathbb{N}$-indexed sequence of
+  approximations; the standalone stagewise form
+  [[lem-dependent-choice-along-a-sequence-of-relations]] is a related construction
+  that neither theorem cites. DC implies $\mathrm{AC}_\omega$
   and neither reverses (recorded above), so this is a third, distinct cost: not
   the Axiom of Choice, and not interchangeable with the countable-choice results
   either, even though DC happens to imply enough to reprove them.
