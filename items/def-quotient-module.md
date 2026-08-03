@@ -2,7 +2,7 @@
 id: def-quotient-module
 kind: definition
 title: 'Quotient module $M/N$ with scalar multiplication on additive cosets'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

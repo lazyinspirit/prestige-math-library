@@ -2,7 +2,7 @@
 id: def-induced-homomorphism-on-fundamental-groups
 kind: definition
 title: "The homomorphism on fundamental groups induced by a pointed continuous map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

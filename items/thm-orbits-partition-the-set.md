@@ -2,7 +2,7 @@
 id: thm-orbits-partition-the-set
 kind: theorem
 title: 'The orbits of a group action are the equivalence classes of $x\sim y$ iff $y=g\cdot x$ for some $g$, and hence partition the acted-on set'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

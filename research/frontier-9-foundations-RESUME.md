@@ -9,8 +9,10 @@ theorems, and the fundamental group.
 
 ## Scope and constraints
 
-- All 20 new pages and 83 items remain `status: draft`; publication is out of
-  scope. The five batches remain capped at two A/B pairs each.
+- **SUPERSEDED 2026-08-03: the owner released the Step-10 pause, audited, and
+  authorized publication.** All 20 pages and 83 items are now
+  `status: published` carrying `verification.audited: 2026-08-03`. The five
+  batches remain capped at two A/B pairs each.
 - The Frontier 9 authored commit was rebased, fast-forwarded into `main`, and
   pushed as `e9df73a feat(library): add frontier nine A/B pairs`.
 - The main checkout contains unrelated, uncommitted published-audit work under
@@ -20,13 +22,14 @@ theorems, and the fundamental group.
 - Creating a separate linked worktree is currently unavailable because the
   shared Git metadata mount rejects new ref locks. This is a local isolation
   limitation, not a failure of the completed merge or push.
-- No owner audit, publication, commit, or push is authorized at the Step-10
-  pause.
+- The Step-10 pause is CLOSED (owner, 2026-08-03): owner audit, publication,
+  commit and push are all authorized and complete.
 
 ## Current state (checkpoint 2026-08-03, after Step 10)
 
-- Steps 0--5 remain authored and mechanically validated: 20 draft pages, 83
-  scoped draft items, five batch manifests/notes, and 53 proof contracts.
+- Steps 0--5 remain authored and mechanically validated: 20 pages, 83 scoped
+  items, five batch manifests/notes, and 53 proof contracts. The pages and
+  items are published as of 2026-08-03.
 - Step 6 is formally complete. Alpha-9 (GPT 5.6 Sol, xhigh, 1M context) read
   all 83 items, 53 proof-bearing items, 20 pages, and 391 relationships;
   `research/frontier-9-audit-coverage.json` and
@@ -75,11 +78,15 @@ theorems, and the fundamental group.
 
 - `research/audit/` and its dirty published-audit content remain outside this
   run and must not be staged. The shared checkout is deliberately dirty.
-- No owner audit, publication, commit, or push is authorized at the Step-10
-  pause. All Frontier pages/items remain draft.
+- The Step-10 pause is CLOSED (owner, 2026-08-03). All Frontier pages/items are
+  published and the work is committed and pushed.
 
 ## Exact next action
 
-Stop at the sole owner pause. The next action requires owner audit/approval;
-only after that approval may a later session publish, commit, or push the
-Frontier work. Preserve the unrelated dirty published-audit work throughout.
+None — the run is closed. The owner audited and published Frontier 9 on
+2026-08-03; all 20 pages and 83 items are `status: published` with
+`verification.audited: 2026-08-03`, and the work is committed and pushed on
+`main`. Judge verdicts remain in `research/frontier-9-judge.jsonl` and were
+never stamped into the items, so the reader-facing verification caption counts
+these 83 as owner-verified rather than AI-judged; a later session may carry
+them across with `tools/apply-judge-stamps.mjs` if the owner wants that.

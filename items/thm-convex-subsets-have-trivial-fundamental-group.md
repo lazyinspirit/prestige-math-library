@@ -2,7 +2,7 @@
 id: thm-convex-subsets-have-trivial-fundamental-group
 kind: theorem
 title: "Every nonempty convex subset of $\\mathbb R^n$ is simply connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

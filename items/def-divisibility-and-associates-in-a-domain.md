@@ -2,7 +2,7 @@
 id: def-divisibility-and-associates-in-a-domain
 kind: definition
 title: "Divisibility and associates in an integral domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

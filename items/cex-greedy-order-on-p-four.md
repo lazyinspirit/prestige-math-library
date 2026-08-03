@@ -2,7 +2,7 @@
 id: cex-greedy-order-on-p-four
 kind: counterexample
 title: "A vertex order on $P_4$ makes greedy colouring use three colours although $\\chi(P_4)=2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: cex-arcsine-not-differentiable-at-endpoints
 kind: counterexample
 title: "Principal arcsine has no finite derivative at $-1$ or $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

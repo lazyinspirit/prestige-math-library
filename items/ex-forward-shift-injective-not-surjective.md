@@ -2,7 +2,7 @@
 id: ex-forward-shift-injective-not-surjective
 kind: example
 title: 'The forward shift on $F^{\mathbb N}$ is injective but not surjective'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

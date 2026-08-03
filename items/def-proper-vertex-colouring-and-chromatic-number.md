@@ -2,7 +2,7 @@
 id: def-proper-vertex-colouring-and-chromatic-number
 kind: definition
 title: "Proper vertex colourings and chromatic number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

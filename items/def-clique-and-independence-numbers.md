@@ -2,7 +2,7 @@
 id: def-clique-and-independence-numbers
 kind: definition
 title: "Cliques, independent sets, clique number and independence number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

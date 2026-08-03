@@ -2,7 +2,7 @@
 id: def-external-direct-product-of-groups
 kind: definition
 title: 'The external direct product $G\times H$ with componentwise multiplication'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

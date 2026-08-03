@@ -2,7 +2,7 @@
 id: lem-prime-implies-irreducible-in-a-domain
 kind: lemma
 title: "Every prime element of an integral domain is irreducible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

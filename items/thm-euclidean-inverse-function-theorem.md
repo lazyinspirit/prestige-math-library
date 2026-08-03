@@ -2,7 +2,7 @@
 id: thm-euclidean-inverse-function-theorem
 kind: theorem
 title: "The Euclidean inverse function theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contraction
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

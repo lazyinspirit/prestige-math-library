@@ -2,7 +2,7 @@
 id: lem-submodule-criterion-sums-and-intersections
 kind: lemma
 title: "The one-step submodule criterion; intersections and sums of submodules are submodules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

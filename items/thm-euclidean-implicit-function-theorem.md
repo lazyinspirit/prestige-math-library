@@ -2,7 +2,7 @@
 id: thm-euclidean-implicit-function-theorem
 kind: theorem
 title: "The Euclidean implicit function theorem with derivative formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: reduction
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

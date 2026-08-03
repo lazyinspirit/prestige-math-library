@@ -2,7 +2,7 @@
 id: prop-order-of-finite-direct-product
 kind: proposition
 title: 'For finite groups $G$ and $H$, $|G\times H|=|G|\,|H|$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

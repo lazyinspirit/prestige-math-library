@@ -2,7 +2,7 @@
 id: def-alphabet-words-and-reduction
 kind: definition
 title: "Words in an alphabet with formal inverses, elementary cancellation, and reduced words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

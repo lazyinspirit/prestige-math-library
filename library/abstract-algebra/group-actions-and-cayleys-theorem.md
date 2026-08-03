@@ -1,7 +1,7 @@
 ---
 page: group-actions-and-cayleys-theorem
 title: "Group Actions, Orbits, Stabilisers and Cayley's Theorem"
-status: draft
+status: published
 items: [def-group-action,
         thm-group-actions-correspond-to-homomorphisms,
         def-orbit-and-stabilizer,

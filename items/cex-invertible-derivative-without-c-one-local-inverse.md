@@ -2,7 +2,7 @@
 id: cex-invertible-derivative-without-c-one-local-inverse
 kind: counterexample
 title: "An invertible derivative at one point does not give a local inverse without $C^1$ regularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

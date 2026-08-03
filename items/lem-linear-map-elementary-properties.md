@@ -2,7 +2,7 @@
 id: lem-linear-map-elementary-properties
 kind: lemma
 title: "A linear map preserves zero, negatives, and subtraction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

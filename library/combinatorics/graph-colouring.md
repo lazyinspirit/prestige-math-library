@@ -1,7 +1,7 @@
 ---
 page: graph-colouring
 title: "Graph Colouring"
-status: draft
+status: published
 items: [def-proper-vertex-colouring-and-chromatic-number,
         lem-greedy-colouring-bound,
         def-clique-and-independence-numbers,

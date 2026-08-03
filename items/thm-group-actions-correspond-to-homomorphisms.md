@@ -2,7 +2,7 @@
 id: thm-group-actions-correspond-to-homomorphisms
 kind: theorem
 title: 'Actions of $G$ on $X$ correspond exactly to homomorphisms $G\to\operatorname{Sym}(X)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

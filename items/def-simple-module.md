@@ -2,7 +2,7 @@
 id: def-simple-module
 kind: definition
 title: "Simple module: a nonzero module with no proper nonzero submodule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

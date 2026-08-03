@@ -2,7 +2,7 @@
 id: def-irreducible-and-prime-elements-in-a-domain
 kind: definition
 title: "Irreducible and prime elements of an integral domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

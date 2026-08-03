@@ -1,7 +1,7 @@
 ---
 page: free-groups-and-presentations
 title: "Free Groups and Presentations"
-status: draft
+status: published
 items: [def-alphabet-words-and-reduction,
         def-free-group,
         thm-reduced-words-form-the-free-group,

@@ -2,7 +2,7 @@
 id: thm-subgroups-of-cyclic-groups-are-cyclic
 kind: theorem
 title: "Every subgroup of a cyclic group is cyclic; the least positive exponent in a nontrivial subgroup supplies a generator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

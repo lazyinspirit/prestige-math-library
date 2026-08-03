@@ -2,7 +2,7 @@
 id: thm-first-isomorphism-theorem-modules
 kind: theorem
 title: 'First isomorphism theorem for modules: $M/\ker f\cong\operatorname{im}f$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

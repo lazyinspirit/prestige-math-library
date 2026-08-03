@@ -2,7 +2,7 @@
 id: ex-integers-with-absolute-value-are-euclidean
 kind: example
 title: 'The integers are a Euclidean domain with Euclidean function $\delta(b)=|b|$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

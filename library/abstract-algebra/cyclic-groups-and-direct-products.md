@@ -1,7 +1,7 @@
 ---
 page: cyclic-groups-and-direct-products
 title: "Cyclic Groups and Direct Products"
-status: draft
+status: published
 items: [def-external-direct-product-of-groups,
         thm-external-direct-product-is-a-group,
         prop-order-of-finite-direct-product,

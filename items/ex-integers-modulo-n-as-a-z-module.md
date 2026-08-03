@@ -2,7 +2,7 @@
 id: ex-integers-modulo-n-as-a-z-module
 kind: example
 title: 'The residue classes $\mathbb Z/n$ as a $\mathbb Z$-module'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

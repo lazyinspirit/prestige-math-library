@@ -2,7 +2,7 @@
 id: def-principal-inverse-tangent
 kind: definition
 title: "The principal inverse tangent $\\arctan:\\mathbb R\\to(-\\pi/2,\\pi/2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

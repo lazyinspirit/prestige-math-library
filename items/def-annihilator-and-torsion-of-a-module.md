@@ -2,7 +2,7 @@
 id: def-annihilator-and-torsion-of-a-module
 kind: definition
 title: "Annihilators, torsion elements and the torsion subset of a module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-quotient-module-universal-property
 kind: theorem
 title: "A module homomorphism vanishing on $N$ factors uniquely through $M/N$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

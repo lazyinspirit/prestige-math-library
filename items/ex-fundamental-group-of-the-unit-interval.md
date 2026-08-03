@@ -2,7 +2,7 @@
 id: ex-fundamental-group-of-the-unit-interval
 kind: example
 title: "The fundamental group of the unit interval is trivial at every basepoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

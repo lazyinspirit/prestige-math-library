@@ -2,7 +2,7 @@
 id: thm-euclidean-domain-is-a-pid
 kind: theorem
 title: "Every Euclidean domain is a principal ideal domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

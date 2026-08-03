@@ -2,7 +2,7 @@
 id: lem-greedy-colouring-bound
 kind: lemma
 title: "The greedy colouring bound $\\chi(G)\\leq\\Delta(G)+1$ for every nonnull finite graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

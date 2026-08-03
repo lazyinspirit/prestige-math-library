@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-group-examples
 title: "The Fundamental Group — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-fundamental-group-of-the-unit-interval]
 ---

@@ -2,7 +2,7 @@
 id: prop-canonical-quotient-module-map
 kind: proposition
 title: 'The canonical map $M\to M/N$ is a surjective module homomorphism with kernel $N$; thus every submodule is a kernel'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-classification-of-cyclic-groups
 kind: theorem
 title: "Every cyclic group is isomorphic to $(\\mathbb Z,+)$ or to $(\\mathbb Z/n,+)$ for its finite order $n\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

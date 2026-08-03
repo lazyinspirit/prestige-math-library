@@ -1,7 +1,7 @@
 ---
 page: euclidean-domains-pids-and-unique-factorisation
 title: "Divisibility, Euclidean Domains, Principal Ideal Domains and Unique Factorisation"
-status: draft
+status: published
 items: [def-divisibility-and-associates-in-a-domain,
         def-irreducible-and-prime-elements-in-a-domain,
         def-euclidean-domain,

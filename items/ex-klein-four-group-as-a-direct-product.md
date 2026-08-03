@@ -2,7 +2,7 @@
 id: ex-klein-four-group-as-a-direct-product
 kind: example
 title: "The Klein four-group as the direct product of two groups of order $2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

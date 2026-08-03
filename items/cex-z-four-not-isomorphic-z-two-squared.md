@@ -2,7 +2,7 @@
 id: cex-z-four-not-isomorphic-z-two-squared
 kind: counterexample
 title: 'The cyclic group $\mathbb Z/4$ is not isomorphic to $\mathbb Z/2\times\mathbb Z/2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

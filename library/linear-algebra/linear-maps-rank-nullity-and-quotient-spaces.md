@@ -1,7 +1,7 @@
 ---
 page: linear-maps-rank-nullity-and-quotient-spaces
 title: "Linear Transformations, Rank-Nullity and Quotient Spaces"
-status: draft
+status: published
 items: [def-linear-map,
         lem-linear-map-elementary-properties,
         def-kernel-and-image-of-a-linear-map,

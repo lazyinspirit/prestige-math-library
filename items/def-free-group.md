@@ -2,7 +2,7 @@
 id: def-free-group
 kind: definition
 title: "Free group on a set of generators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

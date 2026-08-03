@@ -2,7 +2,7 @@
 id: ex-trivial-action-of-z-two-is-not-faithful
 kind: example
 title: 'The trivial action of $\mathbb Z/2$ on a singleton is transitive but not faithful'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-order-of-element-in-direct-product
 kind: theorem
 title: "If $g$ and $h$ have finite orders $m$ and $n$, then $\\iota(\\operatorname{ord}(g,h))=\\operatorname{lcm}(\\iota(m),\\iota(n))$ in $G\\times H$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

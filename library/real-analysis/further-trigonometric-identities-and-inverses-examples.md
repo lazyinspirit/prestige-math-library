@@ -1,7 +1,7 @@
 ---
 page: further-trigonometric-identities-and-inverses-examples
 title: "Further Trigonometric Identities and Inverse Functions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-machin-formula,
            cex-arcsine-of-sine-is-not-the-identity,

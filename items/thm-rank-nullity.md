@@ -2,7 +2,7 @@
 id: thm-rank-nullity
 kind: theorem
 title: 'Rank-nullity: $\dim_F V=\operatorname{nullity}T+\operatorname{rank}T$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

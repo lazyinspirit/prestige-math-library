@@ -2,7 +2,7 @@
 id: def-generated-cyclic-finitely-generated-and-free-modules
 kind: definition
 title: "Generated submodule, cyclic and finitely generated modules, module basis and free module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: further-trigonometric-identities-and-inverses
 title: "Further Trigonometric Identities and Inverse Functions"
-status: draft
+status: published
 items: [def-principal-inverse-sine-and-cosine,
         thm-principal-inverse-sine-and-cosine-derivatives,
         lem-tangent-principal-branch-is-bijective,

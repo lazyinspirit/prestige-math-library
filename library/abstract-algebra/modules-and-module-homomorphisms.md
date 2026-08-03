@@ -1,7 +1,7 @@
 ---
 page: modules-and-module-homomorphisms
 title: "Modules, Submodules, Quotient Modules and the Isomorphism Theorems"
-status: draft
+status: published
 items: [def-left-and-right-modules,
         lem-module-elementary-consequences,
         def-submodule,

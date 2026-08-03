@@ -2,7 +2,7 @@
 id: def-orbit-and-stabilizer
 kind: definition
 title: 'The orbit $G\cdot x$ and stabilizer $G_x$ of a point in a group action'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: inverse-and-implicit-function-theorems
 title: "The Inverse and Implicit Function Theorems"
-status: draft
+status: published
 items: [def-c-one-map-and-local-inverse,
         def-invertible-euclidean-linear-map,
         lem-newton-contraction-near-an-invertible-derivative,

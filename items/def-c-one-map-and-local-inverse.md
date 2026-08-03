@@ -2,7 +2,7 @@
 id: def-c-one-map-and-local-inverse
 kind: definition
 title: "Continuously differentiable maps, local inverses, and local diffeomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

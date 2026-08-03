@@ -2,7 +2,7 @@
 id: lem-kernel-basis-extension-gives-image-basis
 kind: lemma
 title: "Extending a basis of the kernel to a basis of the domain gives a basis of the image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

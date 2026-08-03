@@ -2,7 +2,7 @@
 id: lem-newton-contraction-near-an-invertible-derivative
 kind: lemma
 title: "Newton maps are uniform contractions near a point with invertible derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contraction
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

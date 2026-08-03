@@ -2,7 +2,7 @@
 id: ex-machin-formula
 kind: example
 title: "Machin's formula $\\pi/4=4\\arctan(1/5)-\\arctan(1/239)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:

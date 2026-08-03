@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-group
 title: "The Fundamental Group"
-status: draft
+status: published
 items: [def-based-loops-and-fundamental-group,
         thm-fundamental-group-laws,
         def-induced-homomorphism-on-fundamental-groups,

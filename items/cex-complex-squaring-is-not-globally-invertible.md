@@ -2,7 +2,7 @@
 id: cex-complex-squaring-is-not-globally-invertible
 kind: counterexample
 title: "The real complex-squaring map is locally but not globally invertible off the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-03
 sources:
   scraped: []
   references:
