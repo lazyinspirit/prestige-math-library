@@ -1,6 +1,35 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 2 IN FLIGHT — A1/A2 running (2026-08-03)
+## WAVE 2 AT THE A10 OWNER PAUSE — awaiting release (2026-08-04)
+
+**A0–A10 complete. Rundown: `research/audit/wave2-A10.md`.**
+Commits on `main`, **NOT pushed** — push only on owner release:
+`0dcd90e` (model rule + A0) · `21d2ba1` (A1–A4) · `28d84d4` (A6) ·
+`e6a7b54` (A7) · `a214a80` (A8–A10).
+
+258/258 items tagged; 25 fatal items repaired; 19 paired judge stamps; 53
+`verification.verified`; **0 `verification.audited`**. Working tree clean.
+
+**Only ONE fatal defect wave-wide was an unlicensed inference inside a proof
+step** (22 `other`, 7 `dependency_citation`, 1 `logic`).
+
+**NEXT WAVE BASELINES FROM `a214a80`.** Remaining: 1,326 items / 21 batches;
+real-analysis 725, topology 522, combinatorics 191, foundations 113.
+abstract-algebra, linear-algebra, not-proved-here and number-theory are DONE.
+
+**Carry to the next wave (owner queue, `wave2-A10.md` §8):**
+1. `thm-metric-sequential-closure` (third corroboration) + rider
+   `thm-metric-continuity-characterisations` (18 consumers).
+2. **`level-coverage --audit --verify-current-context` has NEVER run in any
+   wave** — needs a 68-item spine-audit receipt and an audit receipt that no
+   wave has produced, and belongs BEFORE A8's repairs, not after. Doc-vs-code
+   divergence; owner decides between running the spine audit or amending §8.
+3. Add link liveness to a gate (third wave running).
+4. **Beta/certifier sandboxes have no DNS** — this forced the waivers.
+5. One `σ` line in `briefs/judge-conventions.txt`: Terra reads `σ(n)` as
+   `{0,…,n−1}` instead of `n ∪ {n}`, causing 6 of 9 false positives.
+
+## WAVE 2 HISTORY — A1/A2 running (2026-08-03)
 
 **This section supersedes every section below it.** Everything below is history.
 
