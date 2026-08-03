@@ -127,7 +127,19 @@ changed) does not delete `verification.judge` or the audit stamp.
 
 ## A4 — Apply (after A3 approval only)
 
-Take the dedicated `touchlog` snapshot before the first edit of each item.
+Snapshot `touchlog` at the right granularity (measured, wave 2, 2026-08-04). A
+**material repair** takes its own dedicated snapshot before its first edit, named
+for the item — that is what anchors its `impact-audit` baseline. A **bulk
+pure-retag pass**, where nothing but frontmatter provenance and
+`sources.references` changes, takes **one stage snapshot for the pass**, not one
+per item: `pre-A4` and `post-A4` already bracket exactly that work.
+
+This is not a style preference. Every snapshot stores a hash for **every item in
+the corpus**, so wave 2's 267 per-item A4 snapshots produced a **95 MB** ledger
+(pruned to 6.4 MB) and made `touchlog report` announce 51 items "repaired more
+than once" when the true count was zero — a phantom that cost an Alpha
+escalation to disprove. Waves 0, 1 and 1b used stage snapshots and stayed under
+17 MB.
 Make the smallest correction; never rename or remove an id. Run
 `tools/reflow.mts` then `tools/precheck.mts` on any changed proof item, and the
 relevant gates locally. On a **material** repair (the judge would see
