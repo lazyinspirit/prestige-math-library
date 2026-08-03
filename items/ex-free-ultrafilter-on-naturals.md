@@ -4,6 +4,9 @@ kind: example
 title: "An ultrafilter extending the Fréchet filter on $\\mathbb{N}$ is free, and its existence uses the ultrafilter lemma"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-ultrafilter-lemma, ex-frechet-filter, def-ultrafilter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: false
@@ -18,6 +21,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ultrafilter_lemma"
     - title: "Ultrafilter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Open cover, subcover, compact metric space, and compact subset of a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-topology, def-metric-ball, def-isometry-and-metric-embedding, def-countable, lem-subset-of-countable]
 justified_by: []
 aliases: [def-compact-metric-space]

@@ -4,6 +4,9 @@ kind: definition
 title: "The congruence class $[a]_n$ and the quotient set $\\mathbb{Z}/n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-congruence-is-an-equivalence-relation, def-equivalence-relation, lem-equivalence-classes-partition]
 justified_by: []
 aliases: []

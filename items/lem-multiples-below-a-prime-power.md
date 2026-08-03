@@ -4,6 +4,9 @@ kind: lemma
 title: "For a prime $p$ and $k\\ge1$, multiplication by $p$ bijects the standard representatives modulo $p^{k-1}$ with the representatives modulo $p^k$ divisible by $p$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-prime, def-group-power, lem-group-power-laws, thm-standard-representatives-modulo-n, def-injection-surjection-bijection, def-finite-cardinality, lem-int-cancellation]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "K. Conrad, The Chinese Remainder Theorem"
+      url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "Carnegie Mellon, number-theory lecture notes"
+      url: "https://www.cs.cmu.edu/~goyal/15356/lecture_notes.pdf"
 pipeline_run: null
 ---
 

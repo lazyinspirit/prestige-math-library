@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a shortest walk between two vertices may repeat a vertex and fail to be a path"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-every-graph-walk-contains-a-path-between-its-endpoints, def-graph-distance-and-girth]
 aliases: []
 landmark: false

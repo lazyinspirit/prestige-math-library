@@ -4,6 +4,9 @@ kind: theorem
 title: "For every natural $n$, $(\\mathbb{Z}/n,+)$ is an abelian group, multiplication is a commutative monoid operation, and both distributive laws hold"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-addition-and-multiplication-modulo-n, thm-int-comm-ring, def-group, def-semigroup-and-monoid]
 justified_by: []
 aliases: []

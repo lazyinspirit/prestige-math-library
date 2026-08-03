@@ -4,6 +4,9 @@ kind: lemma
 title: "Congruence modulo every integer is an equivalence relation on $\\mathbb{Z}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-congruence-modulo-an-integer, def-equivalence-relation, lem-divisibility-basic]
 justified_by: []
 aliases: []

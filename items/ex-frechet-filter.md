@@ -4,13 +4,15 @@ kind: example
 title: "The subsets of $\\mathbb{N}$ containing a tail form the Fréchet filter, and it is proper and not an ultrafilter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-filter, def-filter-base, lem-filter-base-generates, thm-ultrafilter-characterisation, def-natural-numbers, def-nat-order, def-nat-addition, thm-induction-principle, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-add-commutative, lem-nat-discrete]
 aliases: [ex-cofinite-filter-on-naturals]
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -18,6 +20,10 @@ sources:
       url: "https://encyclopediaofmath.org/wiki/Cofinite_subset"
     - title: "Filter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
+    - title: "B. Kaya, Ultrafilters and How to Use Them"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/village2019lecturenotes.pdf"
 pipeline_run: null
 ---
 
@@ -44,8 +50,6 @@ $T_{\sigma(k)}$ and therefore belongs to $\mathcal F_{\mathrm{Fr}}$.
 ## Facts & Assumptions
 
 **Given:** The tails $T_k$, the family $\mathcal B_{\mathrm{tail}}$, and $\mathcal F_{\mathrm{Fr}}$ displayed above.
-
-[F1] A filter on $X$ contains $X$, omits $\emptyset$, is closed under pairwise intersection, and is closed upward in $X$ ([[def-filter]]).
 
 [F2] A filter base is nonempty, omits $\emptyset$, and is downward directed ([[def-filter-base]]).
 

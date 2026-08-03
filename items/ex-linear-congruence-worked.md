@@ -4,6 +4,9 @@ kind: example
 title: "The congruence $14x\\equiv30\\pmod{100}$ has exactly the two solutions $x\\equiv45,95\\pmod{100}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-linear-congruence-solvability-and-solution-count, cor-extended-euclidean-bezout-coefficients, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Linear Congruences"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.02%3A_Linear_Congruences"
+    - title: "UPC, Modular Arithmetic notes"
+      url: "https://www.cs.upc.edu/~mjserna/docencia/gm-aic/2021/10-AiC-modular.pdf"
 pipeline_run: null
 ---
 

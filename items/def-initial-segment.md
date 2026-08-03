@@ -4,6 +4,9 @@ kind: definition
 title: "Initial segment of a well-order"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-well-order]
 justified_by: []
 aliases: [def-initial-segment-of-well-order]
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Initial_segment"
     - title: "Well-order (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Well-order"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
+    - title: "Formalization of the Axiom of Choice and its Equivalent Theorems"
+      url: "https://arxiv.org/abs/1906.03930"
 pipeline_run: null
 ---
 

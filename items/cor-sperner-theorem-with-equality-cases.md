@@ -4,6 +4,9 @@ kind: corollary
 title: "Sperner's theorem and its equality cases: a largest antichain is a complete middle level"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-lym-inequality, thm-local-lym-inequality, lem-binomial-coefficients-symmetric-and-unimodal, def-boolean-lattice-and-levels, def-binomial-coefficient]
 justified_by: []
 aliases: []

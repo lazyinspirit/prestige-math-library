@@ -4,6 +4,9 @@ kind: theorem
 title: "Characteristic properties: a map into a space with the initial topology is continuous iff every composite with the defining family is, a map out of a space with the final topology is continuous iff every composite with the defining family is, and the two topologies are respectively the coarsest and the finest making that family continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-initial-and-final-topology, def-continuous-map-top,
        thm-continuity-characterisations-top, def-topology-basis-subbasis,
        thm-basis-criterion, def-topological-space, lem-continuity-is-local-and-pastes]

@@ -4,6 +4,9 @@ kind: theorem
 title: "Handshake lemma: the sum of the vertex degrees is twice the number of edges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-graph-adjacency-incidence-neighbourhood-and-degree, thm-double-counting, def-a-finite-incidence-relation-and-its-fibres]
 aliases: []
 landmark: true

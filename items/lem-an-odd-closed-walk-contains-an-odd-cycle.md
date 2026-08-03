@@ -4,6 +4,9 @@ kind: lemma
 title: "Every closed walk of odd length contains a cycle of odd length"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-graph-walk-trail-path-and-cycle, def-finite-cardinality, thm-induction-principle]
 aliases: []
 landmark: true

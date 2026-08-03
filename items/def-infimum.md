@@ -4,6 +4,9 @@ kind: definition
 title: "Greatest lower bound (infimum)"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-bounded-set]
 justified_by: [lem-sup-unique]
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "$(0,1) + (2,3) = (2,4)$, with supremum $4 = \\sup(0,1) + \\sup(2,3)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-sup-sum, lem-sup-translate, ex-sup-of-open-interval, lem-of-add-order,
        lem-of-sign-rules, lem-max-is-sup, def-max-min, def-complete-ordered-field,
        def-ordered-field, def-field, cor-of-one-positive, lem-of-zero-mult]
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Minkowski_addition"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Peter J. Olver, Continuous Calculus"
+      url: "https://www-users.cse.umn.edu/~olver/ln_/cc.pdf"
 pipeline_run: null
 ---
 

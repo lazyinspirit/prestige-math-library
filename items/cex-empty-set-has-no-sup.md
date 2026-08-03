@@ -4,9 +4,12 @@ kind: counterexample
 title: "The empty set is bounded and has no supremum"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-every-set-has-sup, cex-unbounded-set-has-no-sup, def-bounded-set,
-       rem-sup-conventions, def-complete-ordered-field, def-ordered-field,
-       cor-of-one-positive, lem-of-add-order]
+       def-complete-ordered-field, def-ordered-field, cor-of-one-positive,
+       lem-of-add-order]
 justified_by: []
 aliases: []
 landmark: false
@@ -14,16 +17,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -33,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Extended_real_number_line"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -65,8 +60,6 @@ not an element of $\mathbb{R}$.
 
 [L3] The refuted claim: every $S \subseteq \mathbb{R}$ has a supremum in $\mathbb{R}$ ([[fs-every-set-has-sup]]).
 
-[L4] Conventions: the extended-real conventions $\sup \emptyset = -\infty$ and $\inf \emptyset = +\infty$ are not adopted in this library, and $\sup \emptyset$ is simply undefined ([[rem-sup-conventions]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -79,7 +72,7 @@ not an element of $\mathbb{R}$.
 
 3.1 Hence $w \le w - 1$ fails by trichotomy, so $w$ is not $\le$ every upper bound of $\emptyset$ and is therefore not a supremum of $\emptyset$; as $w$ was an arbitrary upper bound, and every real is one, no real number is a supremum of $\emptyset$. [step 2.1, step 1.2, L1, L2]
 
-4.1 So $\emptyset$ is a bounded subset of $\mathbb{R}$ with no supremum in $\mathbb{R}$: the claim that every subset of $\mathbb{R}$ has a supremum is refuted, this time by a set that is bounded but not nonempty, and the nonemptiness hypothesis of the least-upper-bound property cannot be dropped either. [step 3.1, step 1.1, L3, L4] ∎
+4.1 So $\emptyset$ is a bounded subset of $\mathbb{R}$ with no supremum in $\mathbb{R}$: the claim that every subset of $\mathbb{R}$ has a supremum is refuted, this time by a set that is bounded but not nonempty, and the nonemptiness hypothesis of the least-upper-bound property cannot be dropped either. [step 3.1, step 1.1, L3] ∎
 
 ## Remarks
 

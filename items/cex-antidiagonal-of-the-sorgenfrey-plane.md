@@ -4,6 +4,9 @@ kind: counterexample
 title: "The antidiagonal $\\{(x,-x)\\}$ is an uncountable discrete subspace of the Sorgenfrey plane, so having a countable dense subset is not a hereditary property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-sorgenfrey-plane, def-hereditary-property, def-subspace-topology-top,
        thm-subspace-closure-and-interior, def-dense-top, def-standard-topologies,
        thm-r-uncountable, def-countable, lem-countable-iff-surjection-from-n,

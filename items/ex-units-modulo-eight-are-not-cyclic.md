@@ -4,6 +4,9 @@ kind: example
 title: "$(\\mathbb{Z}/8)^\\times=\\{[1],[3],[5],[7]\\}$ is not cyclic because every element squares to $[1]$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-unit-criterion-modulo-n, def-unit-group-modulo-n-and-euler-totient, def-group-power, def-order-in-a-group, def-generated-subgroup, lem-order-characterisation, thm-standard-representatives-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, Modular Arithmetic"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
+    - title: "University of Washington, Solutions for Assignment 2"
+      url: "https://sites.math.washington.edu/~greenber/MATH403-2019-PS2-Sols.pdf"
 pipeline_run: null
 ---
 

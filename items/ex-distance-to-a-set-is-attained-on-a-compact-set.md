@@ -4,6 +4,9 @@ kind: example
 title: "The distance from a point to a nonempty compact set is attained at a point of that set, and two disjoint compact sets are at positive distance"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-extreme-value-metric, thm-compact-subset-is-closed-and-bounded, lem-distance-to-set-is-lipschitz, def-metric-bounded-diameter, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, def-metric-continuity, def-metric-compactness, lem-compactness-is-intrinsic, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-infimum, lem-inf-epsilon, def-max-min, def-isometry-and-metric-embedding, def-metric-space]
 justified_by: []
 aliases: []

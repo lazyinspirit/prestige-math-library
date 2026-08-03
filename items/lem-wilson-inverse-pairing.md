@@ -4,6 +4,9 @@ kind: lemma
 title: "In $(\\mathbb{Z}/p)^\\times$, inversion pairs every class except $[1]_p$ and $[-1]_p$, which are the only self-inverse classes"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-z-mod-p-is-a-field, def-unit-group-modulo-n-and-euler-totient, lem-inverse-unique, thm-standard-representatives-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Mathematics LibreTexts, Wilson's Theorem"
-      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/03%3A_Prime_Numbers/3.02%3A_Wilsons_Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/03%3A_Primes_Numbers/3.02%3A_Wilson%27s_Theorem"
 pipeline_run: null
 ---
 

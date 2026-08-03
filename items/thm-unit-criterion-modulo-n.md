@@ -4,6 +4,9 @@ kind: theorem
 title: "For $n\\ge1$, $[a]_n$ is a unit if and only if $\\gcd(a,n)=1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-unit-group-modulo-n-and-euler-totient, thm-bezout-identity, def-common-divisor-and-gcd, def-coprime, lem-coprime-criterion, lem-divisibility-basic]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "UW Oshkosh, Number Theory Notes 3"
+      url: "https://www.uwosh.edu/faculty_staff/pennistd/ntn3.pdf"
 pipeline_run: null
 ---
 

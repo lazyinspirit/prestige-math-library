@@ -4,6 +4,9 @@ kind: definition
 title: "Lattices, distributive lattices, and order ideals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partial-order]
 justified_by: []
 aliases: []

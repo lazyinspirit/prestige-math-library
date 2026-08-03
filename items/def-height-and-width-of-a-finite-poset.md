@@ -4,6 +4,9 @@ kind: definition
 title: "Height and width of a nonempty finite poset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-antichain-and-poset-covers, def-finite-cardinality, thm-subset-of-a-finite-set, thm-well-ordering-principle]
 justified_by: []
 aliases: []

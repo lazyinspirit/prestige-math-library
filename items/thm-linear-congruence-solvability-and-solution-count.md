@@ -4,6 +4,9 @@ kind: theorem
 title: "For $n\\ge1$, $ax\\equiv b\\pmod n$ is solvable exactly when $\\gcd(a,n)\\mid b$, and then has exactly $\\gcd(a,n)$ solution classes modulo $n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-linear-congruence-reduction-by-the-gcd, thm-bezout-identity, lem-coprime-criterion, thm-standard-representatives-modulo-n, def-finite-cardinality, lem-divisibility-basic, def-common-divisor-and-gcd]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "Transfinite induction"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-well-order, def-initial-segment]
 justified_by: []
 aliases: [transfinite-induction]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Transfinite_induction"
     - title: "Well-order (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Well-order"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

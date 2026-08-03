@@ -4,6 +4,9 @@ kind: example
 title: "The Boolean lattice on four elements: ranks, width, shadows, and a symmetric chain decomposition"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-boolean-lattice-and-levels, def-shadow-of-a-uniform-family, cor-sperner-theorem-with-equality-cases, thm-symmetric-chain-decomposition-of-the-boolean-lattice]
 justified_by: []
 aliases: []

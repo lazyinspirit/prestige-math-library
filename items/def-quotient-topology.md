@@ -4,6 +4,9 @@ kind: definition
 title: "The quotient topology of a surjection, quotient maps, saturated sets, and the quotient of a space by an equivalence relation with its canonical projection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-initial-and-final-topology, def-topological-space, def-continuous-map-top,
        def-injection-surjection-bijection, thm-continuity-characterisations-top]
 justified_by: []

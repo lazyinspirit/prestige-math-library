@@ -4,6 +4,9 @@ kind: corollary
 title: "Every finite simple graph of minimum degree at least two contains a cycle"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-minimum-degree-forces-a-long-path, def-graph-walk-trail-path-and-cycle]
 aliases: []
 landmark: false

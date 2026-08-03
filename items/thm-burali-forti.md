@@ -4,6 +4,9 @@ kind: theorem
 title: "Burali-Forti: there is no set of all ordinals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: [burali-forti-paradox, thm-ordinals-proper-class]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Burali-Forti_paradox"
     - title: "Ordinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

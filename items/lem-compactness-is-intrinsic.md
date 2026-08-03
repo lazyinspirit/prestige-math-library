@@ -4,6 +4,9 @@ kind: lemma
 title: "A subset of a metric space is open in the subspace metric exactly when it is the trace of an open set of the ambient space, and it is compact as a metric space in its own right exactly when every family of open subsets of the ambient space covering it, indexed or not, has finitely many members covering it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, def-isometry-and-metric-embedding, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-metric-space, lem-finite-choice]
 justified_by: []
 aliases: [lem-relative-openness-and-compactness]

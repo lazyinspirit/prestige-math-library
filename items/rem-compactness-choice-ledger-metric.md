@@ -4,6 +4,9 @@ kind: remark
 title: "What each implication between the compactness properties of a metric space costs: which are theorems of ZF, which use countable choice, and which use dependent choice"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-metric-compactness-equivalences, thm-compact-subset-is-closed-and-bounded, thm-compact-implies-the-other-compactness-forms, thm-compact-implies-complete-and-totally-bounded, thm-complete-and-totally-bounded-implies-compact, thm-sequentially-compact-implies-totally-bounded, lem-sequentially-compact-implies-complete, lem-compact-metric-space-has-a-countable-dense-subset, thm-heine-borel-rn, def-countable-choice, def-dependent-choice]
 justified_by: []
 aliases: []

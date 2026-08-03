@@ -4,6 +4,9 @@ kind: example
 title: "$\\varphi(360)=96$ by both inclusion-exclusion and the prime-power product formula"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euler-totient-product-formula, thm-canonical-prime-factorisation]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "K. Conrad, The Chinese Remainder Theorem"
+      url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "Carnegie Mellon, number-theory lecture notes"
+      url: "https://www.cs.cmu.edu/~goyal/15356/lecture_notes.pdf"
 pipeline_run: null
 ---
 

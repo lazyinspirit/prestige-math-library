@@ -4,6 +4,9 @@ kind: example
 title: "A modulus $n>1$ is composite exactly when two nonzero classes in $\\mathbb{Z}/n$ have product $[0]_n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-prime, def-addition-and-multiplication-modulo-n, thm-unit-criterion-modulo-n, thm-standard-representatives-modulo-n, def-common-divisor-and-gcd]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, Modular Arithmetic"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
+    - title: "University of Colorado, proof practice on zero divisors"
+      url: "https://math.colorado.edu/~kstange/teaching-resources/crypto/proofs-practice-2.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "A sequentially compact metric space is totally bounded, proved from the axiom of dependent choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness-variants, def-totally-bounded, def-dependent-choice, cor-archimedean-reciprocal, thm-of-archimedean, def-metric-ball, def-cauchy-in-metric, lem-metric-convergent-implies-cauchy, def-metric-convergence, def-sequence, lem-index-map-grows, def-metric-space]
 justified_by: []
 aliases: []

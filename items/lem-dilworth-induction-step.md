@@ -4,6 +4,9 @@ kind: lemma
 title: "The down-set and up-set chain covers from a suitable maximum antichain splice to a width-sized chain cover"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-dilworth-maximal-antichain-decomposition, def-height-and-width-of-a-finite-poset, thm-subset-of-a-finite-set, def-partial-order]
 justified_by: []
 aliases: []

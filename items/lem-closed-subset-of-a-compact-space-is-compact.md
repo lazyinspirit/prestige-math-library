@@ -4,6 +4,9 @@ kind: lemma
 title: "A closed subset of a compact metric space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-topology, def-isometry-and-metric-embedding, def-metric-space]
 justified_by: []
 aliases: []

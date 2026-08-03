@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every ultrafilter is principal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ultrafilter, thm-ultrafilter-lemma, def-filter, def-filter-base, lem-filter-base-generates, def-natural-numbers, def-nat-order, thm-nat-linear-order, lem-nat-discrete]
 justified_by: []
 external_refs: [rem-blass-model-without-ultrafilters, rem-sierpinski-ultrafilter-not-measurable]
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fr%C3%A9chet_filter"
     - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
       url: "https://plato.stanford.edu/entries/axiom-choice/"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

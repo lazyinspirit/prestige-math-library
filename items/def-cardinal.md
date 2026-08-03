@@ -4,6 +4,9 @@ kind: definition
 title: "Cardinal (initial ordinal) and cardinality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice, lem-omega-least-limit-ordinal, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
 aliases: [def-initial-ordinal, def-cardinality]
@@ -28,6 +31,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cardinal_number"
     - title: "Von Neumann cardinal assignment (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Von_Neumann_cardinal_assignment"
+    - title: "J. T. Moore, MATH 6870: Set Theory"
+      url: "https://pi.math.cornell.edu/~justin/Limited2Cornell/lecture_notes.pdf"
+    - title: "Ordinal number (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ordinal_number"
 pipeline_run: null
 ---
 

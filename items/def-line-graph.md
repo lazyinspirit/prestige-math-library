@@ -4,6 +4,9 @@ kind: definition
 title: "The line graph whose vertices are the edges of the original graph and whose adjacency records a shared endpoint"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-graph-adjacency-incidence-neighbourhood-and-degree]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "For a quotient map $q : X \\to Y$, a map out of $Y$ is continuous iff its composite with $q$ is; a continuous map on $X$ constant on the fibres of $q$ factors uniquely through $q$; and a composite of quotient maps is a quotient map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, thm-initial-and-final-characteristic-properties,
        def-continuous-map-top, thm-continuity-characterisations-top,
        def-injection-surjection-bijection, def-topological-space]

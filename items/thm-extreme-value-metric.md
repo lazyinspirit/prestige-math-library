@@ -4,6 +4,9 @@ kind: theorem
 title: "A continuous real-valued function on a nonempty compact metric space is bounded and attains a greatest and a least value"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-metric-continuity, def-metric-compactness, def-bounded-set, def-infimum, lem-sup-epsilon, lem-inf-epsilon, def-max-min, def-complete-ordered-field, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-topology, def-metric-ball, def-interval, def-metric-bounded-diameter, def-isometry-and-metric-embedding, def-metric-space]
 justified_by: []
 forward_refs: [cex-evt-fails-without-compactness]

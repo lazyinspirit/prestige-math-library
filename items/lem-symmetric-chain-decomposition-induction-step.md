@@ -4,6 +4,9 @@ kind: lemma
 title: "A symmetric chain decomposition of one Boolean lattice lifts to the next Boolean lattice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-boolean-lattice-and-levels]
 justified_by: []
 aliases: []

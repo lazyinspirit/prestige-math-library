@@ -1,9 +1,12 @@
 ---
 id: thm-box-finer-than-product
 kind: theorem
-title: "The box topology is finer than the product topology, the two agree for a finite index set, and, for a family of nonempty spaces, the box topology is strictly finer whenever infinitely many factors have a nonempty proper open subset"
+title: "The box topology is finer than the product topology, the two agree for a finite index set in ZF, and, assuming the Axiom of Choice for nonempty factors, the box topology is strictly finer whenever infinitely many factors have a nonempty proper open subset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, def-topological-space, def-topology-basis-subbasis,
        def-standard-topologies, def-axiom-of-choice, def-choice-function,
        thm-basis-criterion]
@@ -14,11 +17,6 @@ short: "box finer than product, strictly so for infinite products"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -40,8 +38,9 @@ $\mathcal{T}^{\square}$ be the product and the box topology on $P$
 
 1. $\mathcal{T}^{\Pi} \subseteq \mathcal{T}^{\square}$: the box topology is finer
    than the product topology ([[def-topological-space]]).
-2. If $I$ is a natural number then $\mathcal{T}^{\Pi} = \mathcal{T}^{\square}$.
-3. Suppose every $X_i$ is nonempty and let
+2. If $I$ is a natural number then $\mathcal{T}^{\Pi} = \mathcal{T}^{\square}$;
+   this is a theorem of ZF.
+3. Assume the Axiom of Choice. Suppose every $X_i$ is nonempty and let
    $$J \;:=\; \{\, i \in I : X_i \text{ has an open subset } U \text{ with } \varnothing \ne U \ne X_i \,\} .$$
    If $J$ is not finite then $\mathcal{T}^{\Pi} \subsetneq \mathcal{T}^{\square}$:
    the inclusion of claim 1 is strict.
@@ -94,22 +93,8 @@ shows ([[def-standard-topologies]]), and for such a factor the conclusion fails.
 
 ## Remarks
 
-- **Both hypotheses of claim 3 are needed.** If some factor is empty then $P$ is
-  empty and there is exactly one topology on it, so the two agree. If only
-  finitely many factors have a nonempty proper open subset then every box is,
-  after replacing the unrestricted factors by $X_i$, already basic product-open,
-  and again the two agree; the indiscrete topology on a set with many points is
-  the standard case ([[def-standard-topologies]]).
+- **Both hypotheses of claim 3 are needed.** If some factor is empty then $P$ is empty and there is exactly one topology on it, so the two agree. If only finitely many factors have a nonempty proper open subset then every box is, after replacing the unrestricted factors by $X_i$, already basic product-open, and again the two agree; the indiscrete topology on a set with many points is the standard case ([[def-standard-topologies]]).
 
-- **The strictness argument is not constructive, and it does not have to be.**
-  Claim 3 as stated quantifies over arbitrary factors, so a choice principle is
-  unavoidable. In every concrete instance on the companion page the sets $U_i$ are
-  written down by a formula and no choice is spent; the false statement on this
-  page uses $\mathbb{R}^{\mathbb{N}}$ with $U_k = (-1/(k+1),\ 1/(k+1))$ and is
-  choice free.
+- **The strictness argument is not constructive, and it does not have to be.** Claim 3 as stated quantifies over arbitrary factors, so a choice principle is unavoidable. In every concrete instance on the companion page the sets $U_i$ are written down by a formula and no choice is spent; the false statement on this page uses $\mathbb{R}^{\mathbb{N}}$ with $U_k = (-1/(k+1),\ 1/(k+1))$ and is choice free.
 
-- **Finer means more open sets, and here it means too many.** The box topology
-  has so many open sets that maps into it are hard to make continuous, which is
-  exactly the failure the characteristic property of
-  [[thm-product-universal-property]] avoids. That is why "product" without
-  qualification means the product topology in this library.
+- **Finer means more open sets, and here it means too many.** The box topology has so many open sets that maps into it are hard to make continuous, which is exactly the failure the characteristic property of [[thm-product-universal-property]] avoids. That is why "product" without qualification means the product topology in this library.

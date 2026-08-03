@@ -4,6 +4,9 @@ kind: definition
 title: "Graph isomorphisms, automorphisms and graph complements"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-injection-surjection-bijection]
 justified_by: []
 aliases: []

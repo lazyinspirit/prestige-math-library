@@ -4,6 +4,9 @@ kind: definition
 title: "The initial topology of a family of maps into spaces and the final topology of a family of maps out of spaces, and the subspace topology as the model initial topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-topology-basis-subbasis, thm-basis-criterion,
        def-continuous-map-top, thm-continuity-characterisations-top,
        def-subspace-topology-top, def-standard-topologies]

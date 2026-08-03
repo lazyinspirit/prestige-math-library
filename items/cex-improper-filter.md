@@ -4,6 +4,9 @@ kind: counterexample
 title: "If the exclusion of $\\varnothing$ is dropped, $\\mathcal P(X)$ becomes the unique maximal improper filter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-filter, def-ultrafilter]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Filter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

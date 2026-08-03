@@ -4,6 +4,9 @@ kind: theorem
 title: "Erdős-Ko-Rado theorem: for $1\\le k$ and $n\\ge 2k$, an intersecting family of $k$-subsets of an $n$-set has size at most $\\binom{n-1}{k-1}$, and a star attains the bound"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-katona-cyclic-interval-bound, def-intersecting-family, def-binomial-coefficient, def-factorial-and-falling-factorial, thm-number-of-bijections-of-a-finite-set, thm-product-rule, thm-binomial-closed-formula]
 justified_by: []
 aliases: []
@@ -15,8 +18,6 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "J. Fox, MIT MAT 307, Lecture 12: Erdős-Ko-Rado by Katona's method"
-      url: "https://math.mit.edu/~fox/MAT307-lecture12.pdf"
     - title: "J. Matoušek and J. Vondrák, The Probabilistic Method, pp. 14-15"
       url: "https://www.cs.cmu.edu/~15850/handouts/matousek-vondrak-prob-ln.pdf"
 pipeline_run: null

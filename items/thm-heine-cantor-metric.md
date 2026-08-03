@@ -4,6 +4,9 @@ kind: theorem
 title: "Heine-Cantor: a continuous map from a compact metric space to any metric space is uniformly continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, thm-lebesgue-number-lemma, def-metric-continuity, def-metric-uniform-continuity, def-metric-ball, def-metric-bounded-diameter, def-metric-topology, thm-metric-open-set-algebra, lem-metric-nonnegativity, def-metric-space]
 justified_by: []
 forward_refs: [cex-heine-cantor-fails-without-compactness]

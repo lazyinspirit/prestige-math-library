@@ -4,6 +4,9 @@ kind: corollary
 title: "A symmetric chain decomposition gives a second proof of Sperner's bound"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-symmetric-chain-decomposition-of-the-boolean-lattice, def-antichain-and-poset-covers, def-boolean-lattice-and-levels, def-binomial-coefficient]
 justified_by: []
 aliases: []

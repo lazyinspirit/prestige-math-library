@@ -4,6 +4,9 @@ kind: counterexample
 title: "The diamond $M_3$ and pentagon $N_5$ violate distributivity by explicit joins and meets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-lattice-distributive-lattice-and-order-ideal]
 justified_by: []
 aliases: []

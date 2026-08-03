@@ -4,6 +4,9 @@ kind: definition
 title: "Connected graphs and connected components defined by the existence of vertex paths"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [rem-finite-simple-graph-convention, def-subgraph-induced-subgraph-and-spanning-subgraph, def-graph-walk-trail-path-and-cycle, lem-every-graph-walk-contains-a-path-between-its-endpoints]
 justified_by: []
 aliases: []

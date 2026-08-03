@@ -4,6 +4,9 @@ kind: lemma
 title: "A totally bounded metric space is bounded, every subspace of a totally bounded space is totally bounded, and the closure of a totally bounded subset is totally bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-totally-bounded, def-metric-bounded-diameter, def-metric-ball, lem-finite-set-has-max, def-max-min, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-isometry-and-metric-embedding, lem-finite-choice, def-metric-space]
 justified_by: []
 forward_refs: [cex-bounded-not-totally-bounded]

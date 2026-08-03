@@ -4,6 +4,9 @@ kind: definition
 title: "Intersecting uniform families of finite sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-binomial-coefficient]
 justified_by: []
 aliases: []
@@ -13,9 +16,7 @@ verification:
   precheck: n/a
 sources:
   scraped: []
-  references:
-    - title: "J. Fox, MIT MAT 307, Lecture 12: Erdős-Ko-Rado by Katona's method"
-      url: "https://math.mit.edu/~fox/MAT307-lecture12.pdf"
+  references: []
 pipeline_run: null
 ---
 

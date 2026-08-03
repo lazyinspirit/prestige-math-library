@@ -4,6 +4,9 @@ kind: definition
 title: "Ultrafilter"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-filter, def-maximal-element, def-partial-order]
 justified_by: []
 external_refs: [rem-feferman-no-free-ultrafilter-in-zf, rem-blass-model-without-ultrafilters]

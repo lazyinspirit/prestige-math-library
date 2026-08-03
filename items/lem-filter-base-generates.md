@@ -4,6 +4,9 @@ kind: lemma
 title: "The upward closure of a filter base is the smallest filter containing it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-filter-base, def-filter]
 justified_by: []
 aliases: []
@@ -29,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
     - title: "N. Bourbaki, General Topology: Chapters 1-4, Ch. I §6"
       url: "https://link.springer.com/book/9783540642411"
+    - title: "N. Strickland, Notes on Ultrafilters"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/ultra.pdf"
+    - title: "B. Kaya, Ultrafilters and How to Use Them"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/village2019lecturenotes.pdf"
 pipeline_run: null
 ---
 

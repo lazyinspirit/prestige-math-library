@@ -4,6 +4,9 @@ kind: counterexample
 title: "The open interval $(0,1)$ is totally bounded and not compact, the cover by the intervals $(1/(k+2), 1)$ having no finite subcover"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-totally-bounded-implies-compact, def-totally-bounded, def-metric-compactness, lem-compactness-is-intrinsic, def-complete-metric-space, thm-compact-implies-complete-and-totally-bounded, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-ball, def-metric-topology, lem-finite-set-has-max, def-max-min, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 aliases: []
@@ -13,11 +16,6 @@ short: "$(0,1)$ is totally bounded, not compact"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -64,8 +62,6 @@ what makes it work.
 
 [L4] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/m < \eta$, and reciprocals of positives are positive and reverse the order ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-inverse-positive]]).
 
-[L5] A compact metric space is complete ([[thm-compact-implies-complete-and-totally-bounded]], [[def-complete-metric-space]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -80,6 +76,6 @@ what makes it work.
 
 ## Remarks
 
-**What the witness lacks is completeness.** A compact metric space is complete [L5], and $(0,1)$ is not: the terms $1/(k+2)$ form a Cauchy sequence in it whose only candidate limit in $\mathbb{R}$ is $0$, a point the space omits. Adding completeness to total boundedness does restore compactness, at the cost of the Axiom of Countable Choice ([[thm-complete-and-totally-bounded-implies-compact]]).
+**What the witness lacks is completeness.** A compact metric space is complete ([[thm-compact-implies-complete-and-totally-bounded]], [[def-complete-metric-space]]), and $(0,1)$ is not: the terms $1/(k+2)$ form a Cauchy sequence in it whose only candidate limit in $\mathbb{R}$ is $0$, a point the space omits. Adding completeness to total boundedness does restore compactness, at the cost of the Axiom of Countable Choice ([[thm-complete-and-totally-bounded-implies-compact]]).
 
 **The same cover fails to have a Lebesgue number**, which is the other thing compactness would have supplied ([[cex-open-cover-with-no-lebesgue-number]]).

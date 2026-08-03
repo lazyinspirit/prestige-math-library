@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a closed and bounded subset of a metric space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, def-metric-compactness-variants, thm-compact-subset-is-closed-and-bounded, thm-compact-implies-complete-and-totally-bounded, thm-heine-borel-rn, def-totally-bounded, def-metric-space, def-metric-bounded-diameter, def-metric-ball, def-metric-topology, def-natural-numbers, def-canonical-natural, thm-of-archimedean, lem-finite-set-has-max, def-max-min]
 justified_by: []
 forward_refs: [cex-bounded-not-totally-bounded, cex-closed-and-bounded-not-compact-in-the-sup-metric]

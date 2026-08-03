@@ -4,6 +4,9 @@ kind: counterexample
 title: "The cover of $(0,1)$ by the intervals $(1/(k+2), 1)$ has no Lebesgue number, so the Lebesgue number lemma needs compactness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-lebesgue-number-lemma, cex-totally-bounded-not-compact, def-metric-compactness, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-bounded-diameter, def-metric-topology, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 aliases: []

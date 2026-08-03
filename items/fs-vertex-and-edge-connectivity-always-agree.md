@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: vertex connectivity, edge connectivity and minimum degree are always equal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-whitney-connectivity-inequalities, def-vertex-and-edge-connectivity]
 aliases: []
 landmark: false

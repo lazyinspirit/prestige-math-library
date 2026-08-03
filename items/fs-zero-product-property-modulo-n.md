@@ -4,6 +4,9 @@ kind: false-statement
 title: "False: $[a]_n[b]_n=[0]_n$ always implies $[a]_n=[0]_n$ or $[b]_n=[0]_n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-zero-divisors-modulo-composites, def-addition-and-multiplication-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, Modular Arithmetic"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
+    - title: "University of Colorado, proof practice on zero divisors"
+      url: "https://math.colorado.edu/~kstange/teaching-resources/crypto/proofs-practice-2.pdf"
 pipeline_run: null
 ---
 

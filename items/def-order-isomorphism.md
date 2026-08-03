@@ -4,6 +4,9 @@ kind: definition
 title: "Order embedding and order isomorphism"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-partial-order, def-well-order]
 justified_by: []
 aliases: [def-order-embedding, def-order-isomorphic]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Order_isomorphism"
     - title: "Partially ordered set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Partially_ordered_set"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

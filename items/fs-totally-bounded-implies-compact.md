@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a totally bounded metric space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-totally-bounded, def-metric-compactness, thm-compact-implies-complete-and-totally-bounded, def-complete-metric-space, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-ball, def-metric-topology, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 forward_refs: [cex-evt-fails-without-compactness, cex-heine-cantor-fails-without-compactness]
@@ -13,11 +16,6 @@ short: "FALSE: totally bounded implies compact"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -62,8 +60,6 @@ subspace of $\mathbb{R}$ with its usual metric $|x-y|$
 
 [L6] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/m < \eta$; reciprocals of positives are positive and reverse the order ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-inverse-positive]]).
 
-[L7] A compact metric space is complete ([[thm-compact-implies-complete-and-totally-bounded]], [[def-complete-metric-space]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -84,6 +80,6 @@ subspace of $\mathbb{R}$ with its usual metric $|x-y|$
 
 ## Remarks
 
-**What the witness lacks is completeness.** By [L7] a compact metric space is complete, and $(0,1)$ is not: the terms $1/(k+2)$ form a Cauchy sequence in $(0,1)$ whose only candidate limit in $\mathbb{R}$ is $0$, which is not a point of the space. Adding completeness to total boundedness does restore compactness ([[thm-complete-and-totally-bounded-implies-compact]]), at the cost of the Axiom of Countable Choice.
+**What the witness lacks is completeness.** A compact metric space is complete ([[thm-compact-implies-complete-and-totally-bounded]], [[def-complete-metric-space]]), and $(0,1)$ is not: the terms $1/(k+2)$ form a Cauchy sequence in $(0,1)$ whose only candidate limit in $\mathbb{R}$ is $0$, which is not a point of the space. Adding completeness to total boundedness does restore compactness ([[thm-complete-and-totally-bounded-implies-compact]]), at the cost of the Axiom of Countable Choice.
 
 **The same interval also witnesses that boundedness is far from compactness**, and it is the standard example behind the failure of the extreme value theorem and of Heine-Cantor off a compact domain ([[cex-evt-fails-without-compactness]], [[cex-heine-cantor-fails-without-compactness]]).

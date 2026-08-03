@@ -4,6 +4,9 @@ kind: definition
 title: "Subgraphs, induced subgraphs and spanning subgraphs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: lemma
 title: "For every nontrivial connected graph, $\\lambda(G)\\le\\delta(G)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-vertex-and-edge-connectivity, def-graph-adjacency-incidence-neighbourhood-and-degree]
 aliases: []
 landmark: false

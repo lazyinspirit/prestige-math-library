@@ -4,6 +4,9 @@ kind: counterexample
 title: "$C_6$ and the disjoint union of two triangles have the same degree sequence but are not isomorphic"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-degree-sequence-determines-a-simple-graph, def-standard-complete-bipartite-path-and-cycle-graphs, def-graph-isomorphism-and-complement, def-connected-graph-and-connected-component]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: lemma
 title: "A maximal antichain splits a finite poset into its down-set and up-set with the antichain as their intersection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-antichain-and-poset-covers, def-finite-cardinality, def-partial-order]
 justified_by: []
 aliases: []

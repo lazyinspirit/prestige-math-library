@@ -4,6 +4,9 @@ kind: theorem
 title: "Local LYM inequality comparing a uniform family with its upper shadow"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-shadow-of-a-uniform-family, def-binomial-coefficient, def-finite-cardinality, def-injection-surjection-bijection, thm-sum-rule, def-nat-order, lem-nat-add-cancellative, thm-product-rule, def-sum-over-a-finite-index-set, thm-binomial-closed-formula]
 justified_by: []
 aliases: []

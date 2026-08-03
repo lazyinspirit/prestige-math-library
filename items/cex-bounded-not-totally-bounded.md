@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{N}$ with the discrete metric is bounded and is not totally bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-bounded-implies-totally-bounded, ex-discrete-metric-compact-iff-finite, def-totally-bounded, lem-totally-bounded-basic, def-metric-bounded-diameter, def-metric-space, def-metric-ball, def-natural-numbers, def-countable, def-canonical-natural, thm-of-archimedean, lem-finite-set-has-max, def-max-min, def-metric-compactness]
 justified_by: []
 aliases: []
@@ -13,11 +16,6 @@ short: "bounded, not totally bounded"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -57,8 +55,6 @@ This item records the witness and says what makes it work.
 
 [L3] A nonempty finite set of reals has a maximum, one of its members, and for every real $M$ there is a natural $N \ge 1$ with $M < \iota(N)$, $\iota$ being the canonical natural of $\mathbb{R}$ ([[lem-finite-set-has-max]], [[def-max-min]], [[thm-of-archimedean]], [[def-canonical-natural]]).
 
-[L4] A totally bounded metric space is bounded ([[lem-totally-bounded-basic]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -73,6 +69,6 @@ This item records the witness and says what makes it work.
 
 ## Remarks
 
-**The implication that does hold is the converse.** A totally bounded metric space is bounded [L4], so this witness also shows that claim 1 of [[lem-totally-bounded-basic]] does not reverse.
+**The implication that does hold is the converse.** A totally bounded metric space is bounded ([[lem-totally-bounded-basic]]), so this witness also shows that claim 1 of that lemma does not reverse.
 
 **The same space refutes more.** It is closed in itself and bounded and not compact, which is the witness recorded in [[fs-closed-and-bounded-implies-compact-in-every-metric-space]], and it is complete, so no one of boundedness, closedness and completeness, nor all three together, implies compactness ([[ex-discrete-metric-compact-iff-finite]]).

@@ -4,6 +4,9 @@ kind: definition
 title: "The Petersen graph on the two-element subsets of a five-element set, adjacent when disjoint"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, thm-two-element-subsets-count]
 justified_by: []
 aliases: []

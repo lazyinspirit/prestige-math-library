@@ -4,6 +4,9 @@ kind: definition
 title: "Lower bound, bounded below, bounded set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Upper_and_lower_bounds"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

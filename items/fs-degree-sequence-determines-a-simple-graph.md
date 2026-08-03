@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a finite simple graph is determined up to isomorphism by its degree sequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-graph-isomorphism-and-complement, def-graph-adjacency-incidence-neighbourhood-and-degree, def-standard-complete-bipartite-path-and-cycle-graphs]
 aliases: []
 landmark: false

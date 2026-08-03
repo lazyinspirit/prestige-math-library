@@ -4,6 +4,9 @@ kind: example
 title: "A small graph separates walks, trails, paths, closed walks and cycles by explicit vertex lists"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [def-graph-walk-trail-path-and-cycle, def-finite-simple-graph]
 aliases: []
 landmark: false

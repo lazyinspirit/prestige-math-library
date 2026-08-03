@@ -4,6 +4,11 @@ kind: example
 title: "The cover of $[0,1]$ by $(-1, 2/3)$ and $(1/3, 2)$ has Lebesgue number $1/3$, and no larger one"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-lebesgue-number-lemma, thm-heine-borel-rn, def-metric-compactness, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-bounded-diameter, def-metric-topology, def-metric-ball, def-bounded-set]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: lemma
 title: "A continuous open surjection, a continuous closed surjection, and a continuous surjection admitting a continuous section are all quotient maps"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, def-homeomorphism-and-open-maps, def-continuous-map-top,
        thm-continuity-characterisations-top, def-injection-surjection-bijection,
        def-topological-space]

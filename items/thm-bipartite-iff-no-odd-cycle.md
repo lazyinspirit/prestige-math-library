@@ -4,6 +4,9 @@ kind: theorem
 title: "A finite graph is bipartite if and only if it has no odd cycle"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-bipartite-graph, lem-an-odd-closed-walk-contains-an-odd-cycle, lem-graph-reachability-is-an-equivalence-relation, cor-connected-components-partition-the-vertex-set, def-connected-graph-and-connected-component, def-graph-distance-and-girth]
 aliases: []
 landmark: true

@@ -4,6 +4,9 @@ kind: example
 title: "In any metric space the range of a convergent sequence together with its limit is compact, worked out for $\\{0\\} \\cup \\{1/(k+1) : k \\in \\mathbb{N}\\}$ in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, thm-compact-subset-is-closed-and-bounded, def-metric-convergence, def-sequence, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-metric-topology, def-metric-ball, lem-finite-choice, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 aliases: []

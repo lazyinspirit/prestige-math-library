@@ -4,6 +4,9 @@ kind: corollary
 title: "Every subspace of a metrizable space is metrizable and every subspace of a first countable space is first countable, the metric case being the subspace metric already identified with the subspace topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-hereditary-property, def-metrizable-space, def-isometry-and-metric-embedding,
        def-subspace-topology-top, def-first-countable-top, def-neighbourhood-top,
        def-metric-topology, def-countable, lem-countable-iff-surjection-from-n,

@@ -4,24 +4,18 @@ kind: remark
 title: "Conventions: $\\sup \\emptyset$, unbounded sets, and the extended reals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-complete-ordered-field, def-infimum, thm-infimum-property, fs-every-set-has-sup,
        lem-sup-epsilon, lem-inf-epsilon, lem-sup-monotone, lem-sup-translate,
        lem-sup-scale, lem-sup-sum, lem-sup-unique, lem-max-is-sup]
 justified_by: []
+forward_refs: [def-extended-reals]
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -31,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -88,7 +84,6 @@ Accordingly, in this library:
 A reader coming from a source that uses the extended-real conventions should
 therefore expect the statements here to look more heavily qualified than the ones
 they are used to. The mathematics is the same; the difference is where the case
-analysis is written down. If a later page needs $\overline{\mathbb{R}}$, for
-instance for limsup and liminf of a sequence that is not bounded, it will
-introduce it explicitly as a new object with its own order and its own partial
-arithmetic, rather than quietly extending $\mathbb{R}$.
+analysis is written down. The extended real line is introduced explicitly in
+[[def-extended-reals]] for later limsup and liminf arguments, with its order and
+partial arithmetic kept separate from $\mathbb{R}$.

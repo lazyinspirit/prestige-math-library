@@ -4,6 +4,9 @@ kind: remark
 title: "Unless stated otherwise, graph means finite, simple and undirected; orders, sizes and empty-set conventions are fixed here"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-finite-cardinality]
 aliases: []
 landmark: false

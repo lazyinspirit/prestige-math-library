@@ -4,6 +4,9 @@ kind: counterexample
 title: "The union of the two principal ultrafilters on a two-point set is not a filter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-principal-ultrafilter, def-filter, lem-union-of-chain-of-filters]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Filter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

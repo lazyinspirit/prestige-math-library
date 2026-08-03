@@ -4,6 +4,9 @@ kind: lemma
 title: "Rigidity of well-orders"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-well-order, def-order-isomorphism, thm-transfinite-induction, def-initial-segment]
 justified_by: []
 aliases: [lem-no-well-order-isomorphic-to-initial-segment]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-order"
     - title: "Order isomorphism (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Order_isomorphism"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

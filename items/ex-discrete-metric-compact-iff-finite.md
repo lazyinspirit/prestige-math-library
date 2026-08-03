@@ -4,6 +4,9 @@ kind: example
 title: "With the discrete metric $d(x,y) = 1$ for $x \\ne y$, a space is compact iff it is totally bounded iff it is finite, and it is complete whatever its size"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-space, def-metric-compactness, def-totally-bounded, thm-compact-implies-complete-and-totally-bounded, def-complete-metric-space, def-cauchy-in-metric, def-metric-convergence, def-metric-ball, def-metric-topology, def-countable, lem-finite-choice]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: example
 title: "The Chinese remainder bijection $\\mathbb{Z}/12\\to\\mathbb{Z}/3\\times\\mathbb{Z}/4$ computed on all standard representatives"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-chinese-remainder-theorem, thm-standard-representatives-modulo-n, def-addition-and-multiplication-modulo-n]
 justified_by: []
 aliases: []

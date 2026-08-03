@@ -4,6 +4,9 @@ kind: definition
 title: "Successor and limit ordinals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [def-successor-ordinal]

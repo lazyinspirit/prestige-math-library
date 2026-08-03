@@ -4,6 +4,9 @@ kind: corollary
 title: "There are $2^{\\binom{n}{2}}$ simple graphs on a fixed labelled $n$-element vertex set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-finite-simple-graph, thm-two-element-subsets-count, cor-cardinality-of-the-power-set]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: example
 title: "$\\sup\\{q \\in \\mathbb{Q} : q > 0,\\ q^2 < 2\\} = \\sqrt{2}$ in $\\mathbb{R}$, and no supremum in $\\mathbb{Q}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-sup-epsilon, thm-of-square-roots, fs-sqrt2-rational, fs-rationals-complete,
        lem-of-q-embeds, lem-of-q-dense, thm-of-archimedean, lem-of-square-monotone,
        lem-finite-set-has-max, def-max-min, def-archimedean-field,
@@ -15,16 +18,6 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
@@ -36,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "MIT 18.100A, Complete Lecture Notes"
+      url: "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec_full.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -73,7 +70,7 @@ and once by Cauchy sequences.
 
 [L4] Density: $\mathbb{R}$ is Archimedean, being a complete ordered field, and its rationals are dense in it, so for $x < y$ in $\mathbb{R}$ there is $q \in \mathbb{Q}$ with $x < \iota(q) < y$ ([[thm-of-archimedean]], [[def-archimedean-field]], [[lem-of-q-dense]]).
 
-[L5] No rational squares to $2$ ([[fs-sqrt2-rational]]).
+[L5] The claim that there exists $x \in \mathbb{Q}$ with $x^2 = 2$ is false ([[fs-sqrt2-rational]]).
 
 [L6] Epsilon characterisation of the supremum: for a nonempty $X \subseteq \mathbb{R}$ bounded above and an upper bound $w$ of $X$, one has $w = \sup X$ if and only if for every $\varepsilon > 0$ there is $x \in X$ with $w - \varepsilon < x$ ([[lem-sup-epsilon]]).
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Sunflowers, petals, and their common core"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-cardinality]
 justified_by: []
 aliases: []
@@ -13,9 +16,7 @@ verification:
   precheck: n/a
 sources:
   scraped: []
-  references:
-    - title: "L. Babai and P. Frankl, Linear Algebra Methods in Combinatorics"
-      url: "https://people.cs.uchicago.edu/~laci/babai-frankl-book2022.pdf"
+  references: []
 pipeline_run: null
 ---
 

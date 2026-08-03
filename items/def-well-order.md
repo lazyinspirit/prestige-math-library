@@ -4,6 +4,9 @@ kind: definition
 title: "Well-order and well-ordered set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-partial-order, def-chain, thm-well-ordering-principle, thm-nat-linear-order]
 justified_by: []
 external_refs: [rem-cohen-first-model]
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Total_order"
     - title: "Axiom of dependent choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

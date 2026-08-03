@@ -4,6 +4,9 @@ kind: definition
 title: "A finite simple graph is a finite vertex set together with a set of two-element vertex subsets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-cardinality]
 justified_by: []
 aliases: []

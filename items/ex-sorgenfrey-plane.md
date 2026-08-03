@@ -4,6 +4,9 @@ kind: example
 title: "The Sorgenfrey plane: the product of two half-open-interval lines has the rectangles $[a,b) \\times [c,d)$ as a basis and $\\mathbb{Q} \\times \\mathbb{Q}$ as a countable dense subset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, thm-basis-criterion, def-topology-basis-subbasis,
        def-dense-top, thm-closure-characterisation-top, lem-rat-embeds-dense,
        thm-rationals-countable, thm-product-of-countable, def-countable, def-interval,

@@ -4,6 +4,9 @@ kind: lemma
 title: "Suprema and infima are unique"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-complete-ordered-field, def-infimum, def-ordered-field]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

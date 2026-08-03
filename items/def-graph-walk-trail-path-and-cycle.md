@@ -4,6 +4,9 @@ kind: definition
 title: "Walks, closed walks, trails, paths and cycles, with length equal to the number of traversed edges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-graph-adjacency-incidence-neighbourhood-and-degree]
 justified_by: []
 aliases: []

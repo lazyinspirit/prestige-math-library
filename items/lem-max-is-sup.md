@@ -4,6 +4,9 @@ kind: lemma
 title: "The supremum is attained exactly when a maximum exists"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-max-min, lem-sup-unique, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Maximum_and_minimum"
     - title: "Infimum and supremum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
+    - title: "David H. Ernst, An Introduction to Proof via Inquiry-Based Learning, Section 5.1"
+      url: "https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/An_Introduction_to_Proof_via_Inquiry-Based_Learning_%28Ernst%29/05%253A_New_Page/5.01%253A_New_Page"
 pipeline_run: null
 ---
 

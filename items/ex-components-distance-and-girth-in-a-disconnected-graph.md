@@ -4,6 +4,9 @@ kind: example
 title: "Connected components, finite within-component distances, undefined cross-component distance and girth are computed in a disconnected graph"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [def-connected-graph-and-connected-component, def-graph-distance-and-girth, cor-connected-components-partition-the-vertex-set]
 aliases: []
 landmark: false

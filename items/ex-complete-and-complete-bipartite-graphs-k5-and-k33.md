@@ -4,6 +4,9 @@ kind: example
 title: "$K_5$ and $K_{3,3}$ illustrate complete and complete bipartite graphs, degrees and edge counts"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-complete-bipartite-path-and-cycle-graphs, thm-handshake-lemma-for-finite-simple-graphs, cor-complete-graph-edge-count]
 aliases: []
 landmark: false

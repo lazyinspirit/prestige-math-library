@@ -4,6 +4,9 @@ kind: remark
 title: "What the ultrafilter lemma costs: a choice principle strictly weaker than AC"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, thm-ultrafilter-lemma, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
       url: "https://plato.stanford.edu/entries/axiom-choice/"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

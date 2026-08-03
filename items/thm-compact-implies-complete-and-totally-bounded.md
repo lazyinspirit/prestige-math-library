@@ -4,6 +4,9 @@ kind: theorem
 title: "A compact metric space is complete and totally bounded, and neither implication uses any choice principle"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-totally-bounded, def-complete-metric-space, def-cauchy-in-metric, thm-compact-iff-finite-intersection-property, def-finite-intersection-property, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-convergence, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, lem-finite-set-has-max, def-max-min, def-canonical-natural, lem-of-naturals-positive, thm-nat-linear-order, def-metric-space]
 justified_by: []
 forward_refs: [cex-totally-bounded-not-compact]

@@ -4,6 +4,9 @@ kind: example
 title: "$(\\mathbb{Z}/12)^\\times=\\{[1],[5],[7],[11]\\}$ and $\\varphi(12)=4$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-unit-criterion-modulo-n, thm-euler-totient-product-formula, thm-standard-representatives-modulo-n, def-unit-group-modulo-n-and-euler-totient, def-addition-and-multiplication-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "UW Oshkosh, Number Theory Notes 3"
+      url: "https://www.uwosh.edu/faculty_staff/pennistd/ntn3.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "A map into a product is continuous iff each of its components is; the projections are continuous and open; and each projection is surjective when every factor is nonempty, which for an infinite index set uses the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, thm-initial-and-final-characteristic-properties,
        def-initial-and-final-topology, def-continuous-map-top,
        def-homeomorphism-and-open-maps, def-axiom-of-choice, def-choice-function,

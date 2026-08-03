@@ -4,6 +4,9 @@ kind: example
 title: "$\\sup(0,1) = 1$ and $\\inf(0,1) = 0$, with neither attained"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-sup-epsilon, lem-inf-epsilon, lem-max-is-sup, lem-finite-set-has-max,
        thm-infimum-property, def-max-min, def-bounded-set, def-infimum,
        def-complete-ordered-field, def-ordered-field, def-field,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Interval_(mathematics)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

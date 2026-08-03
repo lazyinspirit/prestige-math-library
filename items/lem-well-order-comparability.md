@@ -4,6 +4,9 @@ kind: lemma
 title: "Comparability of well-orders"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-well-order-rigid, def-initial-segment, def-order-isomorphism, def-well-order]
 justified_by: []
 aliases: [lem-well-orders-comparable]
@@ -12,16 +15,6 @@ short: "one of two well-orders embeds onto an initial segment of the other"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -29,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-order"
     - title: "Order isomorphism (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Order_isomorphism"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 
@@ -53,8 +48,6 @@ which is what makes this the choice-free substitute for cardinal comparability.
 **Given:** Two well-orders $(V, <_V)$ and $(W, <_W)$, and the axioms of ZF. Write $\cong$ for order isomorphism, and note that the defining condition below is symmetric in $V$ and $W$, so every argument may be repeated with their roles exchanged.
 
 [A1] The axioms of ZF are available, in particular Separation applied to the set $V \times W$. No choice principle is assumed.
-
-[L1] Every nonempty subset of a well-order has a least element and the order is total ([[def-well-order]]).
 
 [L2] $V_{<v} = \{x \in V : x <_V v\}$ is a proper initial segment and is itself a well-order; $(V_{<v'})_{<v} = V_{<v}$ whenever $v <_V v'$; and a proper initial segment is $V_{<v}$ for a unique $v$ ([[def-initial-segment]]).
 

@@ -4,6 +4,9 @@ kind: example
 title: "The Petersen graph has ten vertices, is cubic, has girth five and has $\\kappa=\\lambda=3$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-petersen-graph, thm-two-element-subsets-count, def-graph-distance-and-girth, def-vertex-and-edge-connectivity, thm-whitney-connectivity-inequalities]
 aliases: []
 landmark: true

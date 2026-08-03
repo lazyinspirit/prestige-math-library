@@ -4,6 +4,9 @@ kind: theorem
 title: "Birkhoff representation theorem: every finite distributive lattice is isomorphic to the lattice of order ideals of its join-irreducible poset"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-finite-lattice-join-irreducible-decomposition, lem-join-irreducible-is-join-prime, lem-order-ideals-form-a-distributive-lattice, def-injection-surjection-bijection, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []

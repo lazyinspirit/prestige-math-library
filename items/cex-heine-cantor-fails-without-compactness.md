@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto 1/x$ is continuous on $(0,1)$ and not uniformly continuous, so Heine-Cantor needs compactness of the domain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-heine-cantor-metric, cex-totally-bounded-not-compact, def-metric-uniform-continuity, def-metric-continuity, def-metric-compactness, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-sequence, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-canonical-natural, def-metric-space]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}/\\mathbb{Q}$ carries the indiscrete topology, although $\\mathbb{R}$ is metrizable and the quotient has more than one point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-quotient-topology, def-standard-topologies, def-dense-top, lem-rat-embeds-dense,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-interval,
        cor-irrationals-uncountable, def-rationals, def-hausdorff-space,
@@ -15,11 +18,6 @@ short: "$\\mathbb{R}/\\mathbb{Q}$ is indiscrete"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -27,15 +25,16 @@ sources:
       url: "https://en.wikipedia.org/wiki/Quotient_space_(topology)"
     - title: "Trivial topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Trivial_topology"
+    - title: "Topology, Spring 2005, Homework 1 [Flagg/Blecher]"
+      url: "https://www.math.uh.edu/~dblecher/6343H1S2.pdf"
 pipeline_run: null
 ---
 
 ## Statement refuted
 
-**Refuted:** that a quotient of a well behaved space retains any of its
-separation. Here the quotient of the metrizable space $\mathbb{R}$ collapses all
-the way to the indiscrete topology, which fails every separation condition at
-once and in particular is not Hausdorff ([[def-hausdorff-space]]).
+**Refuted:** that a quotient of a metrizable space must be Hausdorff. Here the
+quotient of $\mathbb{R}$ collapses to the indiscrete topology and, because it
+has more than one point, is not Hausdorff ([[def-hausdorff-space]]).
 
 **Witness.** Give $\mathbb{R}$ its usual topology
 ([[lem-real-line-is-a-metric-space]], [[def-metrizable-space]]), identify
@@ -82,20 +81,8 @@ point, since $\mathbb{R}$ has an irrational number
 
 ## Remarks
 
-- **What has been destroyed and what has not.** Nothing about $\mathbb{R}$ is
-  lost as a set: $R$ is uncountable, since its classes are the cosets $y +
-  \mathbb{Q}$ and each is at most countable. What is destroyed is every open set:
-  a saturated open set is a union of cosets, each of which is dense, so a
-  saturated open set that is nonempty is everything.
+- **What has been destroyed and what has not.** The quotient still has more than one point, as step 6.1 proves. What is destroyed is every proper nonempty open set: a saturated open set is a union of cosets, each of which is dense, so a saturated open set that is nonempty is everything.
 
-- **This is the extreme case of the failure recorded on the general page.** The
-  line with two origins ([[cex-line-with-two-origins]]) loses the Hausdorff
-  condition at exactly two points; here the quotient topology retains nothing at
-  all. Both quotient maps are open, so openness of the quotient map is no
-  protection whatever.
+- **This is the extreme case of the failure recorded on the general page.** The line with two origins ([[cex-line-with-two-origins]]) loses the Hausdorff condition at exactly two points; here the quotient topology retains nothing at all. Both quotient maps are open, so openness of the quotient map is no protection whatever.
 
-- **The quotient map is open here too.** For open $U \subseteq \mathbb{R}$ the
-  saturation is $\bigcup_{t \in \mathbb{Q}} (U + t)$, a union of translates and
-  hence open, exactly as in [[ex-circle-as-r-mod-z]]; step 4.1 shows that this
-  union is $\mathbb{R}$ whenever $U$ is nonempty, which is the whole phenomenon in
-  one line.
+- **The quotient map is open here too.** For open $U \subseteq \mathbb{R}$ the saturation is $\bigcup_{t \in \mathbb{Q}} (U + t)$, a union of translates and hence open, exactly as in [[ex-circle-as-r-mod-z]]; step 4.1 shows that this union is $\mathbb{R}$ whenever $U$ is nonempty, which is the whole phenomenon in one line.

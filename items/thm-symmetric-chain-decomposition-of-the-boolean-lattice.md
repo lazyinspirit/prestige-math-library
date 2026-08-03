@@ -4,6 +4,9 @@ kind: theorem
 title: "Every finite Boolean lattice has a symmetric chain decomposition"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-symmetric-chain-decomposition-induction-step, thm-induction-principle]
 justified_by: []
 aliases: []

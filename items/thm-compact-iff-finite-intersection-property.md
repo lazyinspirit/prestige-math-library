@@ -4,6 +4,9 @@ kind: theorem
 title: "A metric space is compact if and only if every family of closed subsets with the finite intersection property has nonempty intersection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, def-finite-intersection-property, def-metric-topology, def-metric-space]
 justified_by: []
 aliases: [thm-fip-compactness]

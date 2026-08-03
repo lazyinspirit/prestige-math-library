@@ -4,6 +4,9 @@ kind: theorem
 title: "The ultrafilter lemma: every filter extends to an ultrafilter"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ultrafilter, thm-zorn, lem-union-of-chain-of-filters, def-filter, def-maximal-element, def-partial-order, def-chain, def-upper-bound]
 justified_by: []
 aliases: [thm-ultrafilter-extension]
@@ -31,6 +34,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
+    - title: "N. Strickland, Notes on Ultrafilters"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/ultra.pdf"
 pipeline_run: null
 ---
 

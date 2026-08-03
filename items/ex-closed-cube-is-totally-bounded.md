@@ -4,6 +4,9 @@ kind: example
 title: "The cube $[-M,M]^n$ in $\\mathbb{R}^n$ is totally bounded, with an explicit finite $\\varepsilon$-net of grid points and no appeal to the integer part"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-totally-bounded, def-metric-compactness, thm-heine-borel-rn, thm-compact-implies-complete-and-totally-bounded, lem-metrics-on-rn, def-metric-ball, def-finite-sum, lem-finite-sum-laws, def-integer-power, def-isometry-and-metric-embedding, thm-well-ordering-principle, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, thm-of-square-roots, lem-of-square-monotone, def-canonical-natural, def-abs-value]
 justified_by: []
 aliases: []
@@ -12,11 +15,6 @@ short: "the cube has an explicit net"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -62,8 +60,6 @@ point of $Q$ is produced as a **least** natural meeting an inequality
 
 [L6] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/m < \eta$; reciprocals of positives are positive and reverse the order; and integer powers are those of [[def-integer-power]] ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-inverse-positive]]).
 
-[L7] A closed and bounded subset of $\mathbb{R}^n$ is compact, and a compact metric space is totally bounded ([[thm-heine-borel-rn]], [[thm-compact-implies-complete-and-totally-bounded]]).
-
 ## Verification
 
 **Proof technique:** direct.
@@ -84,6 +80,6 @@ point of $Q$ is produced as a **least** natural meeting an inequality
 
 ## Remarks
 
-**A second proof, and why the explicit one is worth having.** $Q$ is closed and bounded in $\mathbb{R}^n$, hence compact, hence totally bounded, which proves the same statement in one line [L7]. The explicit grid is given because it exhibits the net rather than asserting that one exists, and because the count of grid points, $(m+1)^n$, shows how the size of a net grows with the dimension — the feature that makes total boundedness a genuinely metric notion rather than a consequence of boundedness ([[fs-bounded-implies-totally-bounded]]).
+**A second proof, and why the explicit one is worth having.** $Q$ is closed and bounded in $\mathbb{R}^n$, hence compact ([[thm-heine-borel-rn]]), hence totally bounded ([[thm-compact-implies-complete-and-totally-bounded]]), which proves the same statement in one line. The explicit grid is given because it exhibits the net rather than asserting that one exists, and because the count of grid points, $(m+1)^n$, shows how the size of a net grows with the dimension — the feature that makes total boundedness a genuinely metric notion rather than a consequence of boundedness ([[fs-bounded-implies-totally-bounded]]).
 
 **Why the least index and not the integer part.** The natural choice of $j_k$ is the integer part of $(y_k+M)/h$, and this library has no integer-part function at this point in the reading order. Taking the least $j \le m$ with $y_k \le -M + jh$ produces the same index, using only that a nonempty set of naturals has a least element.

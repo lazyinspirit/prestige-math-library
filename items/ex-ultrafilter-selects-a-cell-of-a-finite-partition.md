@@ -4,6 +4,9 @@ kind: example
 title: "An ultrafilter selects exactly one cell of a finite disjoint list whose union it contains"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-ultrafilter-prime, def-filter, def-natural-numbers]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Ultrafilter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

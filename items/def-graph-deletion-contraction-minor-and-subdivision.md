@@ -4,6 +4,9 @@ kind: definition
 title: "Vertex and edge deletion, edge contraction, graph minors, subdivisions and topological minors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-subgraph-induced-subgraph-and-spanning-subgraph]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: definition
 title: "The product set $\\prod_{i \\in I} X_i$ of functions choosing a point in each factor, the projections, the box topology, and the product topology as the initial topology of the projections; the empty product is a one-point space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-initial-and-final-topology, def-topological-space, def-topology-basis-subbasis,
        thm-basis-criterion, def-choice-function, def-axiom-of-choice, lem-finite-choice,
        def-standard-topologies]

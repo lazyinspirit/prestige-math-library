@@ -4,6 +4,9 @@ kind: definition
 title: "The lower and upper shadows of a uniform set family"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-binomial-coefficient]
 justified_by: []
 aliases: []

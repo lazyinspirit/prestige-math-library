@@ -4,6 +4,9 @@ kind: lemma
 title: "A sequentially compact metric space is complete, with no choice principle used"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness-variants, def-complete-metric-space, def-cauchy-in-metric, lem-metric-cauchy-with-convergent-subsequence, def-metric-convergence, def-sequence, def-metric-space]
 justified_by: []
 aliases: []

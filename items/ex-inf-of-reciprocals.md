@@ -4,6 +4,9 @@ kind: example
 title: "$\\inf\\{1/n : n \\ge 1\\} = 0$, not attained, while $\\sup\\{1/n : n \\ge 1\\} = 1$ is"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-inf-epsilon, thm-of-archimedean, lem-max-is-sup, lem-of-naturals-positive,
        lem-of-inverse-positive, lem-of-sign-rules, def-archimedean-field,
        def-max-min, def-infimum, def-bounded-set, def-complete-ordered-field,
@@ -35,6 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,7 +4,10 @@ kind: counterexample
 title: "A supremum need not belong to its set: $\\sup(0,1) = 1 \\notin (0,1)$"
 status: published
 origin: session
-deps: [fs-sup-belongs-to-set, lem-sup-epsilon, ex-sup-of-open-interval,
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [fs-sup-belongs-to-set, ex-sup-of-open-interval,
        lem-max-is-sup, def-max-min, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -13,16 +16,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -32,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Maximum_and_minimum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -50,7 +45,7 @@ not repeated here; this item records only what that computation refutes.
 
 **Given:** The complete ordered field $\mathbb{R}$ and the open interval $I := \{x \in \mathbb{R} : 0 < x < 1\}$.
 
-[L1] The open unit interval: $I$ is nonempty, $1$ is an upper bound of $I$, $\sup I = 1$, and $1 \notin I$ ([[ex-sup-of-open-interval]], [[lem-sup-epsilon]]).
+[L1] The open unit interval: $I$ is nonempty, $1$ is an upper bound of $I$, $\sup I = 1$, and $1 \notin I$ ([[ex-sup-of-open-interval]]).
 
 [L2] Attainment: for a nonempty $X \subseteq \mathbb{R}$ whose supremum exists, $\sup X \in X$ holds exactly when $X$ has a maximum, and then $\sup X = \max X$ ([[lem-max-is-sup]], [[def-max-min]]).
 

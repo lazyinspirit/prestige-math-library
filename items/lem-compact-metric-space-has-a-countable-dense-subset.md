@@ -4,6 +4,9 @@ kind: lemma
 title: "A compact metric space has a countable dense subset, by countable choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, def-totally-bounded, thm-compact-implies-complete-and-totally-bounded, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, thm-countable-union-of-countable, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-ball, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 aliases: []

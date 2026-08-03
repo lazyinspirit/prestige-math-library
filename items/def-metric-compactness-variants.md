@@ -4,6 +4,9 @@ kind: definition
 title: "Countably compact, sequentially compact and limit point compact metric spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-compactness, def-metric-space, def-sequence, def-metric-convergence, lem-index-map-grows, def-metric-interior-closure-boundary, def-countable, lem-countable-iff-surjection-from-n, def-metric-topology, def-isometry-and-metric-embedding]
 justified_by: []
 aliases: [def-sequentially-compact-metric, def-limit-point-compact-metric, def-countably-compact-metric]

@@ -4,6 +4,9 @@ kind: corollary
 title: "Every finite graph has an even number of vertices of odd degree"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-handshake-lemma-for-finite-simple-graphs, def-finite-cardinality]
 aliases: []
 landmark: false

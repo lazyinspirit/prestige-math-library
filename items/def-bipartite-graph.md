@@ -4,6 +4,9 @@ kind: definition
 title: "A bipartite graph and a proper two-colouring of its vertices"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph]
 justified_by: []
 aliases: []

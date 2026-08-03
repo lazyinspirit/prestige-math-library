@@ -4,6 +4,9 @@ kind: lemma
 title: "A maximal pairwise disjoint subfamily either supplies a sunflower or gives a small transversal for the whole uniform family"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-sunflower, def-finite-cardinality, thm-subset-of-a-finite-set, thm-sum-rule]
 justified_by: []
 aliases: []
@@ -14,9 +17,7 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "L. Babai and P. Frankl, Linear Algebra Methods in Combinatorics"
-      url: "https://people.cs.uchicago.edu/~laci/babai-frankl-book2022.pdf"
+  references: []
 pipeline_run: null
 ---
 

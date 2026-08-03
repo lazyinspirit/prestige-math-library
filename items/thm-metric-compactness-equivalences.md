@@ -4,6 +4,9 @@ kind: theorem
 title: "For a metric space, compact, countably compact, limit point compact, sequentially compact, and complete together with totally bounded are all equivalent, given countable choice and dependent choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-compact-implies-complete-and-totally-bounded, thm-compact-implies-the-other-compactness-forms, lem-sequentially-compact-implies-complete, thm-sequentially-compact-implies-totally-bounded, thm-complete-and-totally-bounded-implies-compact, def-metric-compactness, def-metric-compactness-variants, def-totally-bounded, def-complete-metric-space, def-countable-choice, def-dependent-choice, def-metric-space]
 justified_by: []
 aliases: [thm-compactness-trichotomy-metric]

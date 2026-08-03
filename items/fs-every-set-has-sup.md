@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every subset of $\\mathbb{R}$ has a supremum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-complete-ordered-field, thm-of-archimedean, cor-of-one-positive, def-ordered-field, lem-of-add-order]
 justified_by: []
 aliases: []
@@ -30,6 +33,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "MIT 18.100A, Complete Lecture Notes"
+      url: "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec_full.pdf"
 pipeline_run: null
 ---
 

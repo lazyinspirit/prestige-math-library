@@ -4,6 +4,9 @@ kind: theorem
 title: "Chinese remainder theorem for a finite pairwise-coprime list: simultaneous residues determine one class modulo the product, and the resulting bijection preserves addition and multiplication"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-chinese-remainder-two-moduli, lem-pairwise-coprime-divisibility, def-monoid-finite-product, thm-generalised-associativity, thm-induction-principle, def-addition-and-multiplication-modulo-n, def-injection-surjection-bijection, def-congruence-modulo-an-integer, def-integers-modulo-n]
 justified_by: []
 aliases: []

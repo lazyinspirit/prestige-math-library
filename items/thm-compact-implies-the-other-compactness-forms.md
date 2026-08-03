@@ -4,7 +4,10 @@ kind: theorem
 title: "In any metric space compactness implies countable compactness and limit point compactness, and each of countable compactness and limit point compactness implies sequential compactness; every implication here is proved without a choice principle"
 status: published
 origin: session
-deps: [def-metric-compactness, def-metric-compactness-variants, lem-compactness-is-intrinsic, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-topology, thm-metric-open-set-algebra, def-metric-ball, thm-recursion, def-finite-sum, thm-well-ordering-principle, lem-finite-choice, lem-finite-set-has-max, def-max-min, def-canonical-natural, lem-of-naturals-positive, thm-nat-linear-order, def-metric-convergence, lem-index-map-grows, cor-archimedean-reciprocal, thm-of-archimedean, def-sequence, def-countable, lem-countable-iff-surjection-from-n, lem-subset-of-countable, def-injection-surjection-bijection, def-metric-space]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-metric-compactness, def-metric-compactness-variants, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-topology, thm-metric-open-set-algebra, def-metric-ball, thm-recursion, def-finite-sum, thm-well-ordering-principle, lem-finite-choice, lem-finite-set-has-max, def-max-min, def-canonical-natural, lem-of-naturals-positive, thm-nat-linear-order, def-metric-convergence, lem-index-map-grows, cor-archimedean-reciprocal, thm-of-archimedean, def-sequence, def-countable, lem-countable-iff-surjection-from-n, lem-subset-of-countable, def-injection-surjection-bijection, def-metric-space]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,11 +15,6 @@ short: "the choice-free implications"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -52,8 +50,6 @@ of ZF. Nothing below appeals to countable or to dependent choice.
 **Given:** A metric space $(X,d)$, whichever of the four properties is assumed in the claim under proof.
 
 [L1] The definitions: $(X,d)$ is compact when every family of open subsets with union $X$ has a finite subfamily with union $X$; countably compact when every such family that is at most countable does; sequentially compact when every sequence has a subsequence converging in $X$; limit point compact when every infinite subset has a limit point in $X$, where $p$ is a limit point of $A$ when $B(p,r) \cap (A \setminus \{p\}) \ne \emptyset$ for every real $r>0$ ([[def-metric-compactness]], [[def-metric-compactness-variants]], [[def-metric-interior-closure-boundary]], [[def-sequence]]).
-
-[L2] $X$ is a compact subset of itself, and compactness may be read against families of open subsets of $X$ indexed by an arbitrary set ([[lem-compactness-is-intrinsic]]).
 
 [L3] Open balls are open, an arbitrary union of open sets is open, and a set is closed exactly when its complement is open ([[thm-metric-open-set-algebra]], [[def-metric-topology]], [[def-metric-ball]]).
 

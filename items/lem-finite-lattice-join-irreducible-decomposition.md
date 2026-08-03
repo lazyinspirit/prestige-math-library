@@ -4,6 +4,9 @@ kind: lemma
 title: "A finite lattice has a bottom and a top, and every element is the join of the join-irreducible elements below it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lattice-distributive-lattice-and-order-ideal, def-join-irreducible-element, def-finite-cardinality, thm-subset-of-a-finite-set, thm-well-ordering-principle]
 justified_by: []
 aliases: []

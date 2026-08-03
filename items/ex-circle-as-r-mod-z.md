@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{R}/\\mathbb{Z}$: the quotient map is open, and the quotient is homeomorphic to $[0,1]$ with its endpoints identified"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, thm-quotient-universal-property, lem-open-or-closed-surjection-is-quotient,
        def-subspace-topology-top, def-homeomorphism-and-open-maps, def-integers,
        lem-integer-part, def-interval, def-metrizable-space, lem-real-line-is-a-metric-space,

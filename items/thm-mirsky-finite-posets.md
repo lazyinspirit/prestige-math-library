@@ -4,6 +4,9 @@ kind: theorem
 title: "Mirsky's theorem: the minimum number of antichains covering a finite poset equals its height"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-chain, def-antichain-and-poset-covers, def-height-and-width-of-a-finite-poset, thm-well-ordering-principle]
 justified_by: []
 aliases: []

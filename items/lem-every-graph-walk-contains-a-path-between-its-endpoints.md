@@ -4,6 +4,9 @@ kind: lemma
 title: "Every walk between two vertices contains a path between the same endpoints"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-graph-walk-trail-path-and-cycle, def-finite-cardinality]
 aliases: []
 landmark: true

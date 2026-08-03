@@ -4,6 +4,9 @@ kind: lemma
 title: "The union of a nonempty chain of filters is a filter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-filter, def-chain, def-partial-order, def-upper-bound]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
+    - title: "B. Kaya, Ultrafilters and How to Use Them"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/village2019lecturenotes.pdf"
 pipeline_run: null
 ---
 

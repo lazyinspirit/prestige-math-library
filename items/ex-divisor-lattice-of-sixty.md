@@ -4,6 +4,9 @@ kind: example
 title: "The divisors of $60$ form a finite distributive lattice and realize Birkhoff's representation concretely"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-birkhoff-representation-finite-distributive-lattices, thm-fundamental-theorem-of-arithmetic]
 justified_by: []
 aliases: []

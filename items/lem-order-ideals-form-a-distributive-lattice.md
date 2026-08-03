@@ -4,6 +4,9 @@ kind: lemma
 title: "The order ideals of a finite poset form a distributive lattice under union and intersection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lattice-distributive-lattice-and-order-ideal, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []

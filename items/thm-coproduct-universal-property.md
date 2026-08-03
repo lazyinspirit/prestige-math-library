@@ -4,6 +4,9 @@ kind: theorem
 title: "A map out of a disjoint union is continuous iff each of its restrictions is; the canonical injections are open and closed embeddings; and each summand is clopen in the union"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-disjoint-union-topology, thm-initial-and-final-characteristic-properties,
        def-continuous-map-top, def-homeomorphism-and-open-maps, def-subspace-topology-top,
        lem-homeomorphism-criteria, def-injection-surjection-bijection, def-topological-space]

@@ -4,6 +4,9 @@ kind: lemma
 title: "The Boolean lattice on an $n$-element set has $n!$ maximal chains, and exactly $k!(n-k)!$ contain a fixed $k$-set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-chain, def-boolean-lattice-and-levels, def-factorial-and-falling-factorial, thm-number-of-bijections-of-a-finite-set, thm-product-rule, thm-binomial-closed-formula]
 justified_by: []
 aliases: []

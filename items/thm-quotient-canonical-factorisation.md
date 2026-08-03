@@ -4,6 +4,9 @@ kind: theorem
 title: "Every quotient map $q : X \\to Y$ induces a homeomorphism from $X$ modulo the relation \"$q$ agrees\" onto $Y$, so up to homeomorphism the quotient maps out of $X$ are exactly the canonical projections"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, thm-quotient-universal-property, def-homeomorphism-and-open-maps,
        lem-homeomorphism-criteria, def-injection-surjection-bijection, def-continuous-map-top]
 justified_by: []

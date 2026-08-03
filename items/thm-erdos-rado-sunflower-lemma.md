@@ -4,6 +4,9 @@ kind: theorem
 title: "Erdős-Rado sunflower lemma: more than $k!(r-1)^k$ distinct $k$-sets contain an $r$-petal sunflower"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-sunflower-maximal-disjoint-subfamily, def-sunflower, def-factorial-and-falling-factorial, def-nat-power, thm-the-strong-pigeonhole-principle, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -14,9 +17,7 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "L. Babai and P. Frankl, Linear Algebra Methods in Combinatorics"
-      url: "https://people.cs.uchicago.edu/~laci/babai-frankl-book2022.pdf"
+  references: []
 pipeline_run: null
 ---
 

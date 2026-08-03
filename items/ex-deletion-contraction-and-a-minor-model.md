@@ -4,6 +4,9 @@ kind: example
 title: "A worked graph records vertex deletion, edge deletion, edge contraction and the resulting minor model"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [def-graph-deletion-contraction-minor-and-subdivision, def-subgraph-induced-subgraph-and-spanning-subgraph]
 aliases: []
 landmark: false

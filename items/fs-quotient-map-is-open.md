@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every quotient map is an open map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, def-homeomorphism-and-open-maps, def-interval,
        def-metrizable-space, lem-real-line-is-a-metric-space,
        lem-open-or-closed-surjection-is-quotient, def-topological-space]

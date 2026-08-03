@@ -4,6 +4,9 @@ kind: example
 title: "The Hilbert cube $[0,1]^{\\mathbb{N}}$ with the product topology is metrizable, by $d(x,y) = \\sum_{k} |x_k - y_k| / 2^{\\,k+1}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, def-metrizable-space, def-metric-space, def-metric-ball,
        def-metric-topology, def-series, thm-geometric-series, thm-direct-comparison-test,
        thm-nonnegative-series-bounded-partial-sums, def-interval, lem-real-line-is-a-metric-space,

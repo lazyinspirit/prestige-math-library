@@ -4,13 +4,15 @@ kind: false-statement
 title: "FALSE: a connected simple graph in which every vertex has even degree must itself be a cycle"
 status: published
 origin: session
-deps: [def-graph-adjacency-incidence-neighbourhood-and-degree, def-graph-walk-trail-path-and-cycle, def-connected-graph-and-connected-component]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-graph-adjacency-incidence-neighbourhood-and-degree, def-standard-complete-bipartite-path-and-cycle-graphs, def-connected-graph-and-connected-component]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -32,7 +34,7 @@ degree is a cycle graph.
 
 [F2] A connected graph has a path between every two vertices ([[def-connected-graph-and-connected-component]]).
 
-[F3] In a cycle graph every vertex has exactly two neighbours ([[def-graph-walk-trail-path-and-cycle]]).
+[F3] In a cycle graph every vertex has exactly two neighbours ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Refutation
 

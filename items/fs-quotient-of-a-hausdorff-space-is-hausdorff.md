@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a quotient of a Hausdorff space is Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-hausdorff-space, def-quotient-topology, def-disjoint-union-topology,
        thm-coproduct-universal-property, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-interval, def-max-min,

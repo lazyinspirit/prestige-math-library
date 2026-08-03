@@ -4,6 +4,9 @@ kind: theorem
 title: "Every nonempty finite simple graph contains a path with at least $\\delta(G)$ edges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-graph-adjacency-incidence-neighbourhood-and-degree, def-graph-walk-trail-path-and-cycle, def-finite-cardinality]
 aliases: []
 landmark: true

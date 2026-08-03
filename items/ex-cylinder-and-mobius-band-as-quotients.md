@@ -4,6 +4,9 @@ kind: example
 title: "The cylinder and the Mobius band as quotients of the square by $(0,y) \\sim (1,y)$ and by $(0,y) \\sim (1, 1-y)$, both by a closed quotient map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-quotient-topology, lem-open-or-closed-surjection-is-quotient,
        def-adjunction-cone-suspension, def-subspace-topology-top, lem-product-topology-on-rn,
        def-product-topology, def-interval, def-metrizable-space,

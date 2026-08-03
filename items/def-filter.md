@@ -4,6 +4,9 @@ kind: definition
 title: "Filter on a set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: []
 justified_by: []
 aliases: [def-proper-filter]
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Filter_(mathematics)"
     - title: "N. Bourbaki, General Topology: Chapters 1-4, Ch. I §6"
       url: "https://link.springer.com/book/9783540642411"
+    - title: "B. Kaya, Ultrafilters and How to Use Them"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/village2019lecturenotes.pdf"
 pipeline_run: null
 ---
 

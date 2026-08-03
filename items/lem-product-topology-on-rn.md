@@ -4,6 +4,9 @@ kind: lemma
 title: "For $n \\ge 1$ the product topology on $n$ copies of the usual topology of $\\mathbb{R}$ is the metric topology of $d_\\infty$ on $\\mathbb{R}^n$, and hence also of $d_1$ and $d_2$, so $\\mathbb{R}^n$ as a product and $\\mathbb{R}^n$ as a metric space are one space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, lem-metrics-on-rn, def-metric-topology, def-metric-ball,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-equivalent-metrics,
        thm-metric-equivalence-hierarchy, thm-of-square-roots, lem-finite-sum-laws,

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the ordinals form a set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-burali-forti, def-ordinal, lem-ordinal-basics]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Burali-Forti_paradox"
     - title: "Ordinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

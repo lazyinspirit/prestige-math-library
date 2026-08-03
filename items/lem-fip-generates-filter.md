@@ -4,6 +4,9 @@ kind: lemma
 title: "A family lies in a filter exactly when it has the finite intersection property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-intersection-property, def-filter, def-filter-base, lem-filter-base-generates, def-natural-numbers, thm-induction-principle, lem-nat-transitive-irreflexive]
 justified_by: []
 aliases: []
@@ -29,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Finite_intersection_property"
     - title: "Filter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "N. Strickland, Notes on Ultrafilters"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/ultra.pdf"
+    - title: "B. Kaya, Ultrafilters and How to Use Them"
+      url: "https://users.metu.edu.tr/burakk/lecturenotes/village2019lecturenotes.pdf"
 pipeline_run: null
 ---
 

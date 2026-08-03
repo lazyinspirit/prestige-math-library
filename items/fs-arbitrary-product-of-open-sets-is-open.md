@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\prod_i U_i$ is open in the product topology whenever every $U_i$ is open"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, thm-box-finer-than-product, def-topology-basis-subbasis,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-interval,
        lem-finite-set-has-max, def-canonical-natural, lem-of-naturals-positive,

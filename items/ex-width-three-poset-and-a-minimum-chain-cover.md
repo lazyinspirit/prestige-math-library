@@ -4,6 +4,9 @@ kind: example
 title: "A six-element poset of width three and a three-chain cover"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-dilworth-finite-posets]
 justified_by: []
 aliases: []

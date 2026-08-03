@@ -4,6 +4,9 @@ kind: example
 title: "$\\sup[0,1] = 1 = \\max[0,1]$ and $\\inf[0,1] = 0 = \\min[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-max-is-sup, ex-sup-of-open-interval, def-max-min, def-infimum,
        def-bounded-set, def-complete-ordered-field, def-ordered-field,
        cor-of-one-positive]
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Interval_(mathematics)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

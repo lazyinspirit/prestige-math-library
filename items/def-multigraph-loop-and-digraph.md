@@ -4,6 +4,9 @@ kind: definition
 title: "Multigraphs, loops and directed graphs as variants distinct from the default finite simple graph"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, rem-finite-simple-graph-convention]
 justified_by: []
 aliases: []

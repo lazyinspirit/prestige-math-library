@@ -4,13 +4,15 @@ kind: theorem
 title: "Dilworth's theorem: the minimum number of chains covering a finite poset equals its width"
 status: published
 origin: session
-deps: [lem-dilworth-induction-step, lem-dilworth-maximal-antichain-decomposition, def-height-and-width-of-a-finite-poset, thm-induction-principle]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [lem-dilworth-induction-step, def-height-and-width-of-a-finite-poset, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: induction
 verification:
-  audited: 2026-07-31
   precheck: pass
 sources:
   scraped: []
@@ -33,8 +35,6 @@ chains in a chain cover of $P$ equals $w(P)$.
 [F1] The width $w(P)$ is the maximum cardinality of an antichain in $P$ ([[def-height-and-width-of-a-finite-poset]]).
 
 [L1] A suitable non-boundary maximum antichain lets chain covers of its down-set and up-set splice into a width-sized chain cover ([[lem-dilworth-induction-step]]).
-
-[L2] A maximal antichain $A$ satisfies $P=P^-\cup P^+$ and $P^-\cap P^+=A$ ([[lem-dilworth-maximal-antichain-decomposition]]).
 
 [L3] The principle of induction on $\mathbb N$ ([[thm-induction-principle]]).
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "False: every maximal antichain in a finite poset has maximum cardinality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-antichain-and-poset-covers, def-height-and-width-of-a-finite-poset]
 justified_by: []
 aliases: []

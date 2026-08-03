@@ -4,13 +4,15 @@ kind: theorem
 title: "An $n$-vertex simple graph with more than $\\binom{n-1}{2}$ edges is connected"
 status: published
 origin: session
-deps: [def-connected-graph-and-connected-component, cor-connected-components-partition-the-vertex-set, cor-complete-graph-edge-count]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-connected-graph-and-connected-component, cor-connected-components-partition-the-vertex-set, def-finite-simple-graph, thm-two-element-subsets-count, thm-subset-of-a-finite-set, cor-complete-graph-edge-count]
 aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -30,7 +32,7 @@ $|E(G)|>\binom{n-1}{2}$, then $G$ is connected.
 
 [F1] If $G$ is disconnected, its components partition $V$ into at least two nonempty sets and no edge joins different components ([[def-connected-graph-and-connected-component]], [[cor-connected-components-partition-the-vertex-set]]).
 
-[L1] A simple graph on a $q$-element vertex set has at most $\binom q2$ edges, with equality for the complete graph ([[cor-complete-graph-edge-count]]).
+[L1] A simple graph on a $q$-element vertex set has at most $\binom q2$ edges, with equality for the complete graph ([[def-finite-simple-graph]], [[thm-two-element-subsets-count]], [[thm-subset-of-a-finite-set]], [[cor-complete-graph-edge-count]]).
 
 ## Proof
 

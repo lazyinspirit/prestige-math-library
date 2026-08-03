@@ -4,6 +4,9 @@ kind: theorem
 title: "Every well-order has a unique order type"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-transfinite-recursion, thm-transfinite-induction, def-ordinal, def-well-order, def-order-isomorphism, lem-ordinal-basics, lem-ordinal-trichotomy, lem-well-order-rigid, def-initial-segment]
 justified_by: []
 aliases: [thm-order-type, mostowski-collapse]
@@ -35,6 +38,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Zermelo_set_theory"
     - title: "Von Neumann universe (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Von_Neumann_universe"
+    - title: "The Mostowski Collapse Theorem (Archive of Formal Proofs)"
+      url: "https://isa-afp.org/entries/Mostowski_Collapse.html"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

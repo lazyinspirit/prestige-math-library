@@ -4,6 +4,9 @@ kind: theorem
 title: "Hartogs: an ordinal that does not inject into a given set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-mostowski-collapse, def-ordinal, lem-ordinal-trichotomy, def-well-order, lem-ordinal-basics, def-order-isomorphism, def-initial-segment]
 justified_by: []
 aliases: [thm-hartogs-number, hartogs-number]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hartogs_number"
     - title: "Ordinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
+    - title: "J. T. Moore, MATH 6870: Set Theory"
+      url: "https://pi.math.cornell.edu/~justin/Limited2Cornell/lecture_notes_historic.pdf"
 pipeline_run: null
 ---
 

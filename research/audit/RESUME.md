@@ -1,5 +1,127 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVE 2 IN FLIGHT — A1/A2 running (2026-08-03)
+
+**This section supersedes every section below it.** Everything below is history.
+
+**Owner instruction this session:** change Alpha's LLM from GPT 5.6 Sol to
+Opus 5, then start auditing. Both done.
+
+**Owner rule change, now in force:** the audit **Alpha is `claude-opus-5`**,
+dispatched as an Anthropic subagent of the orchestrator, NOT through Codex.
+Audit-Beta, independent readers and proof-refuters remain **GPT 5.6 Sol** at
+`xhigh` / 1,000,000-token context — deliberately, so every certifier of an
+Alpha-authored repair is a different family from Alpha. Judge lanes unchanged
+(`JUDGE_LINEUP=deepseek+terra`). No injection test required: that bar governs
+judge lanes, not adjudicators. **Scope: the AUDIT Alpha only** — the build
+Alpha of `LEVELS.md` stays Sol until the owner says otherwise. Docs updated in
+the same commit: `AUDIT-WORKFLOW.md`, `CLAUDE.md`, `briefs/audit-alpha.md`.
+
+**Baseline `720c747`. Committed so far: `0dcd90e`** (model rule + A0 artifacts).
+NOT pushed — push at the A10 release, so origin keeps matching shipped waves.
+
+**Wave 2 scope (`research/audit/wave2-A0.md` is the full report):** 5 batches,
+15 pages, 8 A/B pairs, **258 items**, 175 proof-bearing; 31 already-tagged
+excluded at generation. combinatorics 83 / topology 74 / foundations 43 /
+number-theory 33 / real-analysis 25. Every page 100% untagged. Waves 0 and 1
+emit no manifest at all — fully tagged, permanently out of scope.
+`ordinals-and-transfinite-recursion` has NO `-examples` companion; its A7 judge
+context is the A page alone.
+
+**Carry this into A6 — the wave's structural hazard.** 0 dangling deps
+corpus-wide, but 190 edges point at not-yet-audited targets and **123 of them
+are topology citing real-analysis pages at waves 3, 4, 5, 7, 8**
+(`countability-and-uncountability` x41, `monotone-sequences-and-cauchy-
+completeness` x31, `sequences-and-limits` x20, `roots-and-rational-powers` x15,
+`series-and-nonnegative-tests` x11, +2 more). Waves are category-local, so
+topology level 2 does NOT mean its cross-category targets are verified. Owner-
+level disposition taken: run wave 2 as computed, carry these as a named Alpha
+A6 obligation. A further 47 topology edges hit `suprema-and-infima`, audited
+concurrently by a sibling Beta this same wave.
+
+**A1/A2 DONE.** All five Sol Betas exited 0; 258/258 provenance rows; **zero
+item/page files touched** (propose-don't-apply held). Dispatch:
+`scratchpad/dispatch-betas.sh`, logs `scratchpad/beta-logs/`.
+
+**A3 DONE — `research/audit/wave2-A3.md` is the adjudication of record.**
+Verified from disk, not from Beta reports. Headline results:
+
+- Ledgers clean wave-wide: 0 malformed, 0 missing, 0 out-of-scope, 0
+  sourced-label-without-URL, **0 `established-knowledge`** (no Alpha concurrence
+  debt — the wave-1b failure mode does not recur).
+- **Finding 1 (blocker):** 3 of 75 ledger URLs do not return 200, carrying 12
+  rows, 10 with no fallback. MIT `~fox/MAT307-lecture12.pdf` is provably dead
+  (parent dir 404s too); uchicago 403 and utah timeout are unconfirmable. **No
+  gate catches this** — `level-coverage.mjs` checks a URL is present, not that it
+  resolves. Number-theory separately found a stale LibreTexts URL already live in
+  2 PUBLISHED items (verified old 404 / new 200). **A10 recommendation: add
+  link-liveness to a gate.**
+- **Finding 2:** 2 new `ai-generated` seeds in topology, both with **zero
+  propagating cone** — all 3 consumer edges are prose mentions above the Facts
+  block, not dependences. `genrisk.json` must be REGENERATED after A4 (it was
+  built at A0 before these tags existed).
+- **3 confirmed fatal, all topology:** `def-hausdorff-space` false singleton
+  Remark; `thm-box-finer-than-product` claim 3 unqualified; and
+  `cex-r-mod-q-is-indiscrete-like` over-strong separation sweep + unlicensed
+  uncountability (Countable Choice class, **third consecutive wave**).
+- **2 Beta classifications OVERTURNED + 1 DOWNGRADED**, each with disk evidence:
+  `suprema-and-infima` witness sentence (true under its grammatical antecedent);
+  `thm-product-universal-property` (choice declared in title AND claim);
+  `thm-product-of-subspaces-and-closures` (Statement discloses AC; only the title
+  omits it -> title-precision, not falsehood).
+- **B-01 independently corroborates the wave-1b owner queue:** a different Beta in
+  a different category re-derived the `thm-metric-sequential-closure` problem.
+  Local choice-free fix approved ($H$ = preimage of closed $\{1\}$ under
+  $(x,y)\mapsto xy$); the earlier-wave item itself stays owner-queued.
+- **Escalated to Alpha, NOT decided:** the two generated remarks have no fitting
+  `generation.role` value. Do not invent one to silence a gate.
+
+**Current step: A4.** Five Sol Betas re-dispatched with per-batch adjudicated work
+lists (`scratchpad/dispatch-a4.sh`, logs `scratchpad/a4-logs/`). Touchlog
+snapshots so far: `baseline`, `pre-A4`. Betas must NOT write
+`verification.verified` — A6 independent readers do that.
+
+### A4 verified from disk so far (4 of 5 Betas exited 0; topology still running)
+
+- **URL blocker CLEARED.** Zero dead URLs remain in any ledger; the stale
+  LibreTexts Wilson URL is gone from both published items. **All 72 non-empty
+  ledger URLs re-fetched at HTTP 200, zero failures.**
+- **Combinatorics took the `established-knowledge` fallback on 8 rows** rather
+  than inventing sources. That is the authorized honest route, but it creates
+  **8 Alpha concurrence obligations at A6** — this wave is no longer
+  zero-concurrence. `alpha_concurred: false` on all 8; Alpha must concur or the
+  rows fall to `ai-generated`.
+- **Stamp discipline clean:** 0 `verification.verified` and 0
+  `verification.audited` written by any Beta. 20 items had `audited:` removed;
+  12 of those had a judge block at HEAD and **all 12 had it deleted** — 0
+  material repairs retained a stale judge pass.
+- **Foundations spot-verified:** B1 `[A1]` now reads "By the Given, every set
+  carries a well-order" (over-attribution to `def-well-order` gone); B2 `[F1]`
+  and B3 `[L1]` removed.
+
+**Next action:** when topology exits — recount from disk, re-run all gates,
+**regenerate `genrisk.json`** (built at A0, before the new tags existed), merge
+proof contracts, run `content-policy --audit`, `impact-audit` from the `pre-A4`
+snapshot, then A6 with the **Opus 5 Alpha** (Agent tool, model `opus`;
+readers/refuters stay Sol via `codex exec`). Judge-lane execution at A7 is the
+ORCHESTRATOR's, not Alpha's (EPERM).
+
+Alpha's A6 queue, already known: 8 combinatorics `established-knowledge`
+concurrences; the `generation.role` vocabulary gap for the two generated
+remarks; the 123 later-wave topology->real-analysis seam edges; genrisk
+dispositions for the 2 new zero-cone seeds.
+
+### Measured this session, do not relearn
+
+- `codex exec` has **web search ON by default**; passed explicitly anyway.
+- `touchlog.mjs snap <ledger> "<label>"` takes the label **positionally** —
+  `--label baseline` records a snapshot literally named `--label`.
+- `rounds.mjs --audit-batches` **writes into `--outdir`**; run it into a scratch
+  dir when only computing, or it clobbers committed wave manifests.
+- Sol model id is `gpt-5.6-sol`, verified live.
+- A background redirect into a directory the script itself creates fails before
+  the script runs — `mkdir -p` first, or nothing launches.
+
 ## WAVE 1b SHIPPED — owner released the pause, committed and pushed (2026-08-03)
 
 **A0–A10 complete. Rundown: `research/audit/wave1b-A10.md`.**

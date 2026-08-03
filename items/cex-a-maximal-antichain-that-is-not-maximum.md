@@ -4,6 +4,9 @@ kind: counterexample
 title: "A maximal antichain of size one in a finite poset of width two"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-antichain-and-poset-covers, def-height-and-width-of-a-finite-poset, fs-maximal-antichain-need-not-be-maximum]
 justified_by: []
 aliases: []

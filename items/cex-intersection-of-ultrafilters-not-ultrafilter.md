@@ -4,6 +4,9 @@ kind: counterexample
 title: "The intersection of the two principal ultrafilters on a two-point set is a filter but not an ultrafilter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-principal-ultrafilter, def-filter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Ultrafilter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

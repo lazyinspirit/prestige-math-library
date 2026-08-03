@@ -4,6 +4,9 @@ kind: theorem
 title: "A compact subset of a metric space is closed and bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, thm-metric-hausdorff-separation, thm-metric-open-set-algebra, def-metric-topology, def-metric-bounded-diameter, def-metric-ball, lem-finite-set-has-max, def-max-min, def-metric-space]
 justified_by: []
 aliases: []

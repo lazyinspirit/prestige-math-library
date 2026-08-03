@@ -4,6 +4,9 @@ kind: counterexample
 title: "The diagonal $x \\mapsto (x,x,\\dots)$ from $\\mathbb{R}$ into $\\mathbb{R}^{\\mathbb{N}}$ is continuous for the product topology and not for the box topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-product-universal-property, thm-box-finer-than-product, def-product-topology,
        def-continuous-map-top, thm-continuity-characterisations-top, def-metrizable-space,
        lem-real-line-is-a-metric-space, cor-archimedean-reciprocal, lem-of-inverse-positive,

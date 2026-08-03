@@ -4,6 +4,9 @@ kind: lemma
 title: "Supremum of a sumset: $\\sup(S + T) = \\sup S + \\sup T$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field, cor-of-one-positive, lem-of-sign-rules, def-field, def-ordered-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
@@ -28,6 +31,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Peter J. Olver, Continuous Calculus"
+      url: "https://www-users.cse.umn.edu/~olver/ln_/cc.pdf"
 pipeline_run: null
 ---
 

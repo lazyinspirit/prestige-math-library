@@ -4,6 +4,9 @@ kind: theorem
 title: "For every positive integer $n$, $\\sum_{d\\mid n,\\ d>0}\\varphi(d)=n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-unit-group-modulo-n-and-euler-totient, thm-unit-criterion-modulo-n, thm-standard-representatives-modulo-n, def-common-divisor-and-gcd, def-divides-in-z, lem-divisor-bound, def-sum-over-a-finite-index-set, thm-sum-rule, thm-subset-of-a-finite-set, lem-gcd-scaling, lem-int-cancellation]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "J. J. P. Veerman, sum of Euler phi over divisors"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/An_Introduction_to_Number_Theory_%28Veerman%29/04%3A_Number_Theoretic_Functions/4.04%3A_New_Page"
 pipeline_run: null
 ---
 

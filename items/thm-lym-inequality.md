@@ -4,6 +4,9 @@ kind: theorem
 title: "Lubell-Yamamoto-Meshalkin inequality for antichains in a Boolean lattice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-maximal-chains-of-the-boolean-lattice, def-antichain-and-poset-covers, def-binomial-coefficient, def-sum-over-a-finite-index-set, thm-binomial-closed-formula]
 justified_by: []
 aliases: []

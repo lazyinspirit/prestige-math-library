@@ -4,6 +4,9 @@ kind: definition
 title: "Graph distance within a component, eccentricity, diameter and girth, including the acyclic convention"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-graph-walk-trail-path-and-cycle, def-connected-graph-and-connected-component, def-finite-cardinality]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "For every prime $p$, the two operations on $\\mathbb{Z}/p$ make it a field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-integers-modulo-n-basic-algebra, thm-unit-criterion-modulo-n, lem-prime-not-dividing-is-coprime, def-prime, def-field, def-integers-modulo-n, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, Modular Arithmetic"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
+    - title: "MIT 18.783 Lecture Notes 3"
+      url: "https://math.mit.edu/classes/18.783/2022/LectureNotes3.pdf"
 pipeline_run: null
 ---
 

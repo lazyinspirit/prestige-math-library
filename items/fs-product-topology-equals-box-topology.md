@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the product topology and the box topology agree on every product"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-box-finer-than-product, def-product-topology, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-interval, lem-of-inverse-positive,
        lem-finite-set-has-max, def-canonical-natural, lem-of-naturals-positive,

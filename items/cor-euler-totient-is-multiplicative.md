@@ -4,6 +4,9 @@ kind: corollary
 title: "Euler's totient is multiplicative: $\\gcd(m,n)=1$ implies $\\varphi(mn)=\\varphi(m)\\varphi(n)$ for positive $m,n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-chinese-remainder-theorem, def-unit-group-modulo-n-and-euler-totient, thm-product-rule]
 justified_by: []
 aliases: []

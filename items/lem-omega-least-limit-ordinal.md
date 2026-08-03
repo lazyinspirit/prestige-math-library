@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\omega$ is the least limit ordinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-limit-ordinal, def-ordinal, def-natural-numbers, def-nat-order, lem-omega-smallest-inductive, lem-nat-nonzero-is-successor, lem-nat-transitive-irreflexive, lem-nat-discrete, lem-nat-trichotomy, thm-nat-linear-order, thm-induction-principle, thm-well-ordering-principle, lem-nat-add-identity, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [lem-omega-is-an-ordinal]
@@ -29,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_ordinal"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "Ordinal number (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ordinal_number"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

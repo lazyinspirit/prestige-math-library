@@ -4,6 +4,9 @@ kind: lemma
 title: "For a finite pairwise-coprime list of positive integers, the product divides every common multiple, and each initial product is coprime to every remaining modulus"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-coprime, lem-coprime-divides-product, def-monoid-finite-product, thm-generalised-associativity, thm-induction-principle, cor-euclids-lemma-for-finite-products, lem-every-integer-above-one-has-a-prime-divisor, def-common-divisor-and-gcd]
 justified_by: []
 aliases: []

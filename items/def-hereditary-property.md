@@ -4,6 +4,9 @@ kind: definition
 title: "Hereditary, open-hereditary and closed-hereditary properties of topological spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-subspace-topology-top, def-homeomorphism-and-open-maps, def-topological-space]
 justified_by: []
 aliases: [def-hereditary, def-open-hereditary, def-closed-hereditary]

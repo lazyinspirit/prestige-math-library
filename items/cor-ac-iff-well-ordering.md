@@ -4,6 +4,9 @@ kind: corollary
 title: "Choice, Zorn and well-ordering are equivalent"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-zorn, def-axiom-of-choice]
 justified_by: []
 external_refs: [rem-godel-constructible-universe, rem-cohen-forcing-ac-independent]
@@ -30,6 +33,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "Well-ordering theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Well-ordering_theorem"
+    - title: "The Well-Ordering Problem (Open Logic Project)"
+      url: "https://builds.openlogicproject.org/content/set-theory/choice/wellorderingproblem.pdf"
+    - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
+      url: "https://plato.stanford.edu/entries/axiom-choice/"
 pipeline_run: null
 ---
 

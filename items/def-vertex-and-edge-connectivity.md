@@ -4,6 +4,9 @@ kind: definition
 title: "Vertex cuts, edge cuts, vertex connectivity $\\kappa(G)$ and edge connectivity $\\lambda(G)$, with conventions for complete and one-vertex graphs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-connected-graph-and-connected-component, def-graph-deletion-contraction-minor-and-subdivision, def-standard-complete-bipartite-path-and-cycle-graphs, def-finite-cardinality]
 justified_by: []
 aliases: []

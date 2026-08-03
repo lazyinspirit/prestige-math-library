@@ -4,6 +4,9 @@ kind: definition
 title: "Graded poset, rank function, and rank levels"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partial-order, def-maximal-element]
 justified_by: []
 aliases: []

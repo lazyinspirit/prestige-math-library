@@ -4,6 +4,9 @@ kind: counterexample
 title: "The system $x\\equiv1\\pmod2$, $x\\equiv2\\pmod4$ has no solution, so coprimality in the Chinese remainder theorem cannot be dropped"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-chinese-remainder-theorem, def-congruence-modulo-an-integer, lem-chinese-remainder-two-moduli]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, The Chinese Remainder Theorem"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "MIT, Chinese Remainder Theorem notes"
+      url: "https://math.mit.edu/~roed/courses/magic/CRT.pdf"
 pipeline_run: null
 ---
 

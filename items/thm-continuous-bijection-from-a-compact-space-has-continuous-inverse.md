@@ -4,6 +4,9 @@ kind: theorem
 title: "A continuous bijection from a compact metric space onto a metric space carries open sets to open sets, so its inverse is continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-continuous-image-of-a-compact-space-is-compact, lem-closed-subset-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, lem-compactness-is-intrinsic, def-metric-continuity, thm-metric-continuity-characterisations, def-injection-surjection-bijection, def-metric-topology, def-metric-compactness, def-metric-space]
 justified_by: []
 aliases: []

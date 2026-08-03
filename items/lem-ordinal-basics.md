@@ -4,6 +4,9 @@ kind: lemma
 title: "Basic closure properties of ordinals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal, def-well-order, lem-nat-transitive-irreflexive]
 justified_by: []
 aliases: [lem-ordinal-elementary-facts]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

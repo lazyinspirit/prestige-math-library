@@ -4,6 +4,9 @@ kind: definition
 title: "Congruence modulo an integer: $a\\equiv b\\pmod n$ when $n\\mid(a-b)$, including the moduli $0$ and $1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-divides-in-z]
 justified_by: []
 aliases: []

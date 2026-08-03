@@ -4,6 +4,9 @@ kind: example
 title: "The Cantor set is homeomorphic to $\\{0,1\\}^{\\mathbb{N}}$ with the product of discrete topologies, the ternary digits being the coordinates"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, thm-product-universal-property, def-standard-topologies,
        def-homeomorphism-and-open-maps, lem-homeomorphism-criteria, def-subspace-topology-top,
        def-cantor-set, thm-cantor-set-ternary-description, lem-product-topology-on-rn,

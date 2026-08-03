@@ -4,6 +4,9 @@ kind: example
 title: "The system $x\\equiv2\\pmod3$, $x\\equiv3\\pmod5$, $x\\equiv2\\pmod7$ has the unique solution $x\\equiv23\\pmod{105}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-chinese-remainder-theorem, def-congruence-modulo-an-integer]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, The Chinese Remainder Theorem"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "University of Southampton, Simultaneous Linear Congruences"
+      url: "https://www.southampton.ac.uk/~wright/1001/simultaneous-linear-congruences.html"
 pipeline_run: null
 ---
 

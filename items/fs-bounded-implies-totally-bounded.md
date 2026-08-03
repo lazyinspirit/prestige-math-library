@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a bounded metric space is totally bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-totally-bounded, lem-totally-bounded-basic, def-metric-compactness, def-metric-bounded-diameter, def-metric-space, def-metric-ball, def-natural-numbers, def-countable, def-canonical-natural, thm-of-archimedean, lem-finite-set-has-max, def-max-min]
 justified_by: []
 forward_refs: [cex-bounded-not-totally-bounded]

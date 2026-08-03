@@ -4,6 +4,9 @@ kind: lemma
 title: "Congruent integers may be added, subtracted and multiplied: representative changes preserve both arithmetic operations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-congruence-modulo-an-integer, lem-divisibility-basic, thm-int-comm-ring, def-group-power, thm-induction-principle]
 justified_by: []
 aliases: []

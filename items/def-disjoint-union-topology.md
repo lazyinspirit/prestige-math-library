@@ -4,6 +4,9 @@ kind: definition
 title: "The disjoint union (coproduct) $\\bigsqcup_i X_i$ with the final topology of the canonical injections: a set is open exactly when each of its traces is"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-initial-and-final-topology, def-topological-space, def-subspace-topology-top,
        def-homeomorphism-and-open-maps, def-injection-surjection-bijection]
 justified_by: []

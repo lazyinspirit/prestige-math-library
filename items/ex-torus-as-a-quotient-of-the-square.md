@@ -4,6 +4,9 @@ kind: example
 title: "The square with opposite edges identified is homeomorphic to the product $(\\mathbb{R}/\\mathbb{Z}) \\times (\\mathbb{R}/\\mathbb{Z})$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-circle-as-r-mod-z, def-quotient-topology, thm-quotient-universal-property,
        def-product-topology, thm-product-universal-property, lem-product-topology-on-rn,
        thm-product-of-subspaces-and-closures, def-homeomorphism-and-open-maps,

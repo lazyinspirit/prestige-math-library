@@ -4,6 +4,9 @@ kind: lemma
 title: "If $n\\ge1$, $d=\\gcd(a,n)$ and $d\\mid b$, then $ax\\equiv b\\pmod n$ reduces to a congruence with coprime coefficient modulo $n/d$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-congruence-modulo-an-integer, def-common-divisor-and-gcd, cor-gcd-quotients-coprime, def-divides-in-z, lem-divisibility-basic, lem-int-cancellation]
 justified_by: []
 aliases: []

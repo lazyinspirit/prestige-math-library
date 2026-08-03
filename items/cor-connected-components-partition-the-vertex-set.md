@@ -4,6 +4,9 @@ kind: corollary
 title: "The connected components of a graph partition its vertex set and are its maximal connected subgraphs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-graph-reachability-is-an-equivalence-relation, def-connected-graph-and-connected-component, def-subgraph-induced-subgraph-and-spanning-subgraph]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: example
 title: "All $k$-sets through a fixed point form an intersecting family attaining the Erdős-Ko-Rado bound"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-erdos-ko-rado, def-binomial-coefficient]
 justified_by: []
 aliases: []
@@ -14,9 +17,7 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "J. Fox, MIT MAT 307, Lecture 12: Erdős-Ko-Rado by Katona's method"
-      url: "https://math.mit.edu/~fox/MAT307-lecture12.pdf"
+  references: []
 pipeline_run: null
 ---
 

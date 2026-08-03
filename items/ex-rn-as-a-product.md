@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{R}^n$ as the product of $n$ copies of the real line: the product topology is the Euclidean topology and the projections are continuous, open and surjective"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-product-topology-on-rn, thm-product-universal-property, def-product-topology,
        lem-metrics-on-rn, def-metrizable-space, lem-real-line-is-a-metric-space,
        def-metric-topology, def-metric-ball, def-interval, def-continuous-map-top,

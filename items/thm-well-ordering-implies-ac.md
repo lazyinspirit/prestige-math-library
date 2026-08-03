@@ -4,6 +4,9 @@ kind: theorem
 title: "The well-ordering theorem implies the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-well-order, def-choice-function, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -12,16 +15,6 @@ short: "well-order the union, take least elements"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
@@ -29,6 +22,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-ordering_theorem"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "The Well-Ordering Problem (Open Logic Project)"
+      url: "https://builds.openlogicproject.org/content/set-theory/choice/wellorderingproblem.pdf"
+    - title: "Formalization of the Axiom of Choice and its Equivalent Theorems"
+      url: "https://arxiv.org/abs/1906.03930"
 pipeline_run: null
 ---
 
@@ -43,7 +40,7 @@ Work in ZF and assume that **every set can be well ordered**
 
 **Given:** The axioms of ZF together with the hypothesis that every set carries a well-order. Let $\mathcal{F}$ be an arbitrary family of nonempty sets.
 
-[A1] Every set carries a well-order ([[def-well-order]]).
+[A1] By the Given, every set carries a well-order.
 
 [L1] A choice function for $\mathcal{F}$ is a function $g$ on $\mathcal{F}$ with $g(S) \in S$ for every $S \in \mathcal{F}$ ([[def-choice-function]]).
 

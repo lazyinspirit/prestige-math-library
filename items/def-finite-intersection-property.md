@@ -4,6 +4,9 @@ kind: definition
 title: "Finite intersection property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-natural-numbers]
 justified_by: []
 aliases: [def-fip]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Finite_intersection_property"
     - title: "Filter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "N. Strickland, Notes on Ultrafilters"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/ultra.pdf"
 pipeline_run: null
 ---
 

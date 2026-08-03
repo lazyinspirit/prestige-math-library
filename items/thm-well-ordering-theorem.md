@@ -4,6 +4,9 @@ kind: theorem
 title: "The well-ordering theorem"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-zorn, def-axiom-of-choice, def-well-order, def-partial-order, def-initial-segment, def-upper-bound, def-maximal-element, def-chain]
 justified_by: []
 external_refs: [rem-cohen-forcing-ac-independent]
@@ -30,6 +33,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-ordering_theorem"
     - title: "Zorn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
+    - title: "The Well-Ordering Problem (Open Logic Project)"
+      url: "https://builds.openlogicproject.org/content/set-theory/choice/wellorderingproblem.pdf"
+    - title: "Formalization of the Axiom of Choice and its Equivalent Theorems"
+      url: "https://arxiv.org/abs/1906.03930"
 pipeline_run: null
 ---
 

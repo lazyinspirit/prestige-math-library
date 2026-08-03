@@ -4,6 +4,9 @@ kind: definition
 title: "Finite $\\varepsilon$-net and totally bounded metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-ball, def-metric-bounded-diameter, def-metric-compactness, def-isometry-and-metric-embedding]
 justified_by: []
 aliases: [def-epsilon-net]

@@ -4,6 +4,9 @@ kind: corollary
 title: "The Erdős-Szekeres monotone subsequence theorem follows by applying Mirsky's theorem to the index-value poset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-mirsky-finite-posets, def-a-monotone-sublist-of-a-finite-list-of-reals, thm-the-strong-pigeonhole-principle, def-partial-order]
 justified_by: []
 aliases: []

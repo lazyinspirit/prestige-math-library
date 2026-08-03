@@ -4,6 +4,9 @@ kind: theorem
 title: "The image of a compact metric space under a continuous map is compact, and so is the image of any compact subset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-continuity, thm-metric-continuity-characterisations, def-metric-topology, def-isometry-and-metric-embedding, def-injection-surjection-bijection, def-metric-space]
 justified_by: []
 aliases: []

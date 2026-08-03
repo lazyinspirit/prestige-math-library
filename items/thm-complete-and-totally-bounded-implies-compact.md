@@ -4,6 +4,9 @@ kind: theorem
 title: "A complete, totally bounded metric space is compact, proved from countable choice used exactly once"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, def-totally-bounded, def-complete-metric-space, def-countable-choice, def-cauchy-in-metric, def-metric-convergence, def-metric-ball, def-metric-topology, thm-recursion, def-finite-sum, thm-well-ordering-principle, lem-finite-choice, thm-nat-linear-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-sequence, def-metric-space]
 justified_by: []
 forward_refs: [cex-totally-bounded-not-compact]

@@ -4,6 +4,9 @@ kind: theorem
 title: "For $A \\subseteq S \\subseteq X$ the closure of $A$ in $S$ is $\\overline{A}^{X} \\cap S$, while the interior only contains $\\operatorname{int}^{X}(A) \\cap S$, with equality when $S$ is open; and a dense subset of $X$ traces to a dense subset of every open $S$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subspace-topology-top, def-interior-closure-boundary-top, def-dense-top,
        def-standard-topologies, def-topological-space]
 justified_by: []

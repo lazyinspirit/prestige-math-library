@@ -4,6 +4,9 @@ kind: lemma
 title: "Being joined by a walk or path is the same equivalence relation on the vertex set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-graph-and-connected-component, lem-every-graph-walk-contains-a-path-between-its-endpoints, def-equivalence-relation, def-graph-walk-trail-path-and-cycle]
 aliases: []
 landmark: false

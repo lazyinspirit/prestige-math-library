@@ -4,10 +4,13 @@ kind: counterexample
 title: "On $A = ([0,\\infty) \\times \\mathbb{R}) \\cup (\\mathbb{R} \\times \\{0\\})$ the first projection is a quotient map, by the section $x \\mapsto (x,0)$, and is neither open nor closed"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-quotient-map-is-open, lem-open-or-closed-surjection-is-quotient,
        def-quotient-topology, def-subspace-topology-top, thm-subspace-closure-and-interior,
        lem-product-topology-on-rn, def-product-topology, thm-product-universal-property,
-       def-homeomorphism-and-open-maps, def-metrizable-space, thm-metric-sequential-closure,
+       def-homeomorphism-and-open-maps, def-metrizable-space,
        def-interval, lem-real-line-is-a-metric-space, cor-archimedean-reciprocal,
        lem-of-inverse-positive, cex-projection-is-not-closed, lem-continuity-is-local-and-pastes]
 justified_by: []
@@ -17,11 +20,6 @@ short: "a quotient map that is neither open nor closed"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -31,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Open_and_closed_maps"
     - title: "Section (category theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Section_(category_theory)"
+    - title: "A quotient map which is neither open nor closed (UC Riverside Math 205A notes)"
+      url: "https://math.ucr.edu/~res/math205A/quotmap.pdf"
 pipeline_run: null
 ---
 
@@ -69,7 +69,7 @@ $q := \pi_0 \restriction A : A \to \mathbb{R}$ be the first projection. Then:
 
 [L2] A map into a binary product is continuous exactly when both components are; restrictions and corestrictions to subspaces of continuous maps are continuous; composites of continuous maps are continuous ([[thm-product-universal-property]], [[def-subspace-topology-top]], [[lem-continuity-is-local-and-pastes]]).
 
-[L3] $H := \{(x,y) : xy = 1\}$ is closed in $\mathbb{R}^2$ ([[cex-projection-is-not-closed]], [[thm-metric-sequential-closure]]); an intersection of two closed sets is closed.
+[L3] The repaired hyperbola result proves that $H := \{(x,y) : xy = 1\}$ is closed in $\mathbb{R}^2$ as the preimage of the closed singleton $\{1\}$ under continuous multiplication ([[cex-projection-is-not-closed]]); an intersection of two closed sets is closed.
 
 [L4] $[a,\infty) = \{t : a \le t\}$ and $(a,\infty) = \{t : a < t\}$; a subset of $\mathbb{R}$ is open exactly when each of its points has a bounded open interval around it inside the set, and $(a,\infty)$ is open ([[def-interval]], [[lem-real-line-is-a-metric-space]], [[def-metrizable-space]]).
 
@@ -107,25 +107,8 @@ $q := \pi_0 \restriction A : A \to \mathbb{R}$ be the first projection. Then:
 
 ## Remarks
 
-- **What makes $q[U]$ fail to be open is the shape of $A$ near the negative
-  axis.** The set $U = A \cap (\mathbb{R} \times (0,\infty))$ is open in $A$ for
-  the trivial reason that $\mathbb{R} \times (0,\infty)$ is open in
-  $\mathbb{R}^2$; the shape of $A$ has nothing to do with that. What the shape
-  does is fix the image. A point $(x,0)$ with $x < 0$ has $A$-neighbourhoods lying
-  entirely on the horizontal axis, because $A$ contains no point with $x < 0$ and
-  $y \ne 0$, so the axis to the left of the origin is, from inside $A$, a half-line
-  with nothing attached above or below it. Consequently $U$ reaches no first
-  coordinate below $0$ and $q[U] = [0,\infty)$, which contains the boundary point
-  $0$ without containing any neighbourhood of it.
+- **What makes $q[U]$ fail to be open is the shape of $A$ near the negative axis.** The set $U = A \cap (\mathbb{R} \times (0,\infty))$ is open in $A$ for the trivial reason that $\mathbb{R} \times (0,\infty)$ is open in $\mathbb{R}^2$; the shape of $A$ has nothing to do with that. What the shape does is fix the image. A point $(x,0)$ with $x < 0$ has $A$-neighbourhoods lying entirely on the horizontal axis, because $A$ contains no point with $x < 0$ and $y \ne 0$, so the axis to the left of the origin is, from inside $A$, a half-line with nothing attached above or below it. Consequently $U$ reaches no first coordinate below $0$ and $q[U] = [0,\infty)$, which contains the boundary point $0$ without containing any neighbourhood of it.
 
-- **All three clauses of [[lem-open-or-closed-surjection-is-quotient]] are
-  needed.** This map satisfies clause 3 and neither of the other two, so the
-  section clause is not redundant; conversely the collapse map of
-  [[fs-quotient-map-is-open]] is closed and not open, and the projection
-  $q \times q$ of [[ex-torus-as-a-quotient-of-the-square]] is open. The three
-  clauses cover genuinely different situations.
+- **All three clauses of [[lem-open-or-closed-surjection-is-quotient]] are needed.** This map satisfies clause 3 and neither of the other two, so the section clause is not redundant; conversely the collapse map of [[fs-quotient-map-is-open]] is closed and not open, and the projection $q \times q$ of [[ex-torus-as-a-quotient-of-the-square]] is open. The three clauses cover genuinely different situations.
 
-- **The failure of closedness is the hyperbola again.** $H^{+}$ is one branch of
-  the closed set of [[cex-projection-is-not-closed]], cut out by intersecting with
-  a closed half-plane; the image loses the point $0$ for exactly the same reason
-  as there.
+- **The failure of closedness is the hyperbola again.** $H^{+}$ is one branch of the closed set of [[cex-projection-is-not-closed]], cut out by intersecting with a closed half-plane; the image loses the point $0$ for exactly the same reason as there.

@@ -4,6 +4,9 @@ kind: counterexample
 title: "On $(0,1)$ the identity is bounded with no greatest value and $x \\mapsto 1/x$ is continuous and unbounded, so the extreme value theorem needs compactness and not merely boundedness of the domain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-extreme-value-metric, cex-totally-bounded-not-compact, def-metric-compactness, def-metric-continuity, lem-real-line-is-a-metric-space, def-isometry-and-metric-embedding, def-interval, def-max-min, lem-sup-epsilon, def-bounded-set, def-metric-bounded-diameter, def-complete-ordered-field, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-metric-space]
 justified_by: []
 aliases: []

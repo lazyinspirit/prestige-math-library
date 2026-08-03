@@ -1,9 +1,12 @@
 ---
 id: thm-product-of-subspaces-and-closures
 kind: theorem
-title: "The product of subspace topologies is the subspace topology of the product, and in the product topology the closure of $\\prod A_i$ is $\\prod \\overline{A_i}$"
+title: "Products commute with subspaces; for infinite nonempty families, the closure identity $\\overline{\\prod A_i}=\\prod \\overline{A_i}$ uses the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, def-subspace-topology-top, thm-product-universal-property,
        thm-initial-and-final-characteristic-properties, thm-closure-characterisation-top,
        def-interior-closure-boundary-top, thm-continuity-characterisations-top,
@@ -16,11 +19,6 @@ short: "products of subspaces; closure of a product"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -100,20 +98,8 @@ principle appears.
 
 ## Remarks
 
-- **Claim 1 is what lets "$\prod A_i$" be written without a warning.** Every later
-  item that forms a product of subspaces, the Hilbert cube and the Cantor set
-  among them, silently uses it: the topology on $[0,1]^{\mathbb{N}}$ obtained by
-  taking the product of the subspaces $[0,1] \subseteq \mathbb{R}$ is the
-  topology it inherits as a subset of $\mathbb{R}^{\mathbb{N}}$.
+- **Claim 1 is what lets "$\prod A_i$" be written without a warning.** Every later item that forms a product of subspaces, the Hilbert cube and the Cantor set among them, silently uses it: the topology on $[0,1]^{\mathbb{N}}$ obtained by taking the product of the subspaces $[0,1] \subseteq \mathbb{R}$ is the topology it inherits as a subset of $\mathbb{R}^{\mathbb{N}}$.
 
-- **Claim 2 fails for the box topology in the direction one might expect it to
-  hold.** Nothing above is claimed for $\mathcal{T}^{\square}$, and the inclusion
-  $\overline{A} \subseteq \prod \overline{A_i}$ is the only half that survives
-  there, since it uses only continuity of the projections, which holds for the box
-  topology as well.
+- **Claim 2 fails for the box topology in the direction one might expect it to hold.** Nothing above is claimed for $\mathcal{T}^{\square}$, and the inclusion $\overline{A} \subseteq \prod \overline{A_i}$ is the only half that survives there, since it uses only continuity of the projections, which holds for the box topology as well.
 
-- **The choice is spent on the coordinates that the basic open set leaves
-  unrestricted.** Those are all but finitely many, and for each of them the point
-  $y$ of step 2.2 needs *some* member of $A_i$; the finitely many restricted
-  coordinates are handled by [[lem-finite-choice]] alone. That split is exactly
-  why the finite case of claim 2 is a theorem of ZF.
+- **The choice is spent on the coordinates that the basic open set leaves unrestricted.** Those are all but finitely many, and for each of them the point $y$ of step 2.2 needs *some* member of $A_i$; the finitely many restricted coordinates are handled by [[lem-finite-choice]] alone. That split is exactly why the finite case of claim 2 is a theorem of ZF.

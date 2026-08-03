@@ -4,6 +4,9 @@ kind: lemma
 title: "Every join-irreducible element of a distributive lattice is join-prime"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lattice-distributive-lattice-and-order-ideal, def-join-irreducible-element]
 justified_by: []
 aliases: []

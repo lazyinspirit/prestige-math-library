@@ -4,6 +4,9 @@ kind: counterexample
 title: "When $k<n<2k$, the entire $k$th level is intersecting and exceeds the Erdős-Ko-Rado star bound"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-erdos-ko-rado-without-the-ground-set-bound, def-intersecting-family, def-binomial-coefficient, thm-binomial-closed-formula]
 justified_by: []
 aliases: []
@@ -14,9 +17,7 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "J. Fox, MIT MAT 307, Lecture 12: Erdős-Ko-Rado by Katona's method"
-      url: "https://math.mit.edu/~fox/MAT307-lecture12.pdf"
+  references: []
 pipeline_run: null
 ---
 

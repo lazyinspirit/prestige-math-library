@@ -4,6 +4,9 @@ kind: theorem
 title: "Transfinite recursion"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-transfinite-induction, def-well-order, def-initial-segment]
 justified_by: []
 aliases: [transfinite-recursion]
@@ -27,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_schema_of_replacement"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
+    - title: "J. T. Moore, MATH 6870: Set Theory"
+      url: "https://pi.math.cornell.edu/~justin/Limited2Cornell/lecture_notes_historic.pdf"
 pipeline_run: null
 ---
 

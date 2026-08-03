@@ -4,6 +4,9 @@ kind: theorem
 title: "Every open cover of a compact metric space has a Lebesgue number: a $\\delta > 0$ such that every nonempty subset of diameter less than $\\delta$ lies inside a single member of the cover"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, thm-extreme-value-metric, thm-compact-subset-is-closed-and-bounded, lem-distance-to-set-is-lipschitz, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, def-metric-continuity, def-metric-bounded-diameter, def-infimum, def-metric-ball, def-metric-topology, lem-compactness-is-intrinsic, lem-finite-set-has-max, def-max-min, def-metric-space]
 justified_by: []
 forward_refs: [cex-open-cover-with-no-lebesgue-number]

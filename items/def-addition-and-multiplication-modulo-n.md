@@ -4,6 +4,9 @@ kind: definition
 title: "Addition and multiplication on $\\mathbb{Z}/n$ by $[a]_n+[b]_n=[a+b]_n$ and $[a]_n[b]_n=[ab]_n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-congruence-respects-integer-arithmetic, def-integers-modulo-n, def-binary-operation]
 justified_by: []
 aliases: []

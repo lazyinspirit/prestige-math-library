@@ -4,6 +4,9 @@ kind: lemma
 title: "Trichotomy and well-ordering of the ordinals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-ordinal-basics, def-ordinal, thm-transfinite-induction, def-well-order, def-partial-order]
 justified_by: []
 aliases: [lem-ordinals-linearly-ordered]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "Well-order (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Well-order"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

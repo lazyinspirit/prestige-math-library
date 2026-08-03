@@ -4,6 +4,9 @@ kind: definition
 title: "Ordinal (von Neumann)"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-well-order, def-natural-numbers, lem-nat-transitive-irreflexive]
 justified_by: []
 aliases: [def-ordinal-number, def-von-neumann-ordinal]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

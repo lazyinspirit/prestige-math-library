@@ -4,6 +4,9 @@ kind: definition
 title: "Join-irreducible elements of a nonempty finite lattice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-lattice-distributive-lattice-and-order-ideal]
 justified_by: [lem-finite-lattice-join-irreducible-decomposition]
 aliases: []

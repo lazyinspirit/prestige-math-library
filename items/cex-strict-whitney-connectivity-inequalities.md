@@ -4,6 +4,9 @@ kind: counterexample
 title: "Two dense lobes meeting at one cut vertex give $\\kappa(G)=1<\\lambda(G)=2<\\delta(G)=3$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [fs-vertex-and-edge-connectivity-always-agree, def-vertex-and-edge-connectivity, def-graph-adjacency-incidence-neighbourhood-and-degree]
 aliases: []
 landmark: true

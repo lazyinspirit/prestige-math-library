@@ -4,6 +4,9 @@ kind: lemma
 title: "For coprime positive $m,n$, every pair of residue classes modulo $m$ and $n$ has a unique simultaneous class modulo $mn$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-coprime-criterion, def-congruence-modulo-an-integer, def-integers-modulo-n, def-common-divisor-and-gcd, cor-gcd-quotients-coprime, lem-divisibility-basic, lem-int-cancellation]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, The Chinese Remainder Theorem"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "MIT, Chinese Remainder Theorem notes"
+      url: "https://math.mit.edu/~roed/courses/magic/CRT.pdf"
 pipeline_run: null
 ---
 

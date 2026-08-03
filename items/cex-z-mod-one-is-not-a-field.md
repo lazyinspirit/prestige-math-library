@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{Z}/1$ has one element and satisfies $[0]_1=[1]_1$, so it is not a field"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-standard-representatives-modulo-n, thm-integers-modulo-n-basic-algebra, def-field]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "K. Conrad, Modular Arithmetic"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/modarithshort.pdf"
+    - title: "CSUSM, Polynomials over residue rings"
+      url: "https://public.csusm.edu/aitken_html/m372/polynomials.pdf"
 pipeline_run: null
 ---
 

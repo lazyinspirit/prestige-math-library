@@ -4,6 +4,9 @@ kind: theorem
 title: "Euler's product formula $\\varphi(n)=n\\prod_{p\\mid n}(1-1/p)=\\prod_{p^k\\parallel n}(p^k-p^{k-1})$ for $n\\ge1$, stated through a finite injective list of its prime divisors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-a-sieve-family-and-its-intersections, thm-inclusion-exclusion, thm-canonical-prime-factorisation, def-p-adic-valuation, lem-p-adic-valuation-basic, thm-unit-criterion-modulo-n, thm-standard-representatives-modulo-n, def-nat-finite-sum-and-product, def-finite-cardinality, lem-pairwise-coprime-divisibility, thm-induction-principle, lem-int-embeds-rat, thm-rat-field, def-unit-group-modulo-n-and-euler-totient, def-prime, lem-prime-not-dividing-is-coprime, lem-every-integer-above-one-has-a-prime-divisor, lem-rat-embeds-dense, lem-int-cancellation, cor-euler-totient-is-multiplicative, thm-totient-of-a-prime-power]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
     - title: "K. Conrad, The Chinese Remainder Theorem"
       url: "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf"
+    - title: "Carnegie Mellon, number-theory lecture notes"
+      url: "https://www.cs.cmu.edu/~goyal/15356/lecture_notes.pdf"
 pipeline_run: null
 ---
 

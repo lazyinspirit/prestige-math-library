@@ -4,6 +4,9 @@ kind: counterexample
 title: "In the bounded real-valued functions on $\\mathbb{N}$ with the supremum metric, the closed unit ball is closed and bounded and is not compact: the indicator functions of the singletons are pairwise at distance $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-closed-and-bounded-implies-compact-in-every-metric-space, lem-sup-metric-is-a-metric, def-metric-compactness, def-totally-bounded, thm-compact-implies-complete-and-totally-bounded, lem-compactness-is-intrinsic, def-metric-bounded-diameter, def-metric-topology, thm-metric-open-set-algebra, def-metric-ball, def-sequence, def-natural-numbers, def-bounded-set, thm-well-ordering-principle, lem-pigeonhole, lem-subset-of-countable, def-countable, def-injection-surjection-bijection, def-metric-space]
 justified_by: []
 aliases: []

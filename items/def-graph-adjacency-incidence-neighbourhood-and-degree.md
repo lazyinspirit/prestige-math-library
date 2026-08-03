@@ -4,6 +4,9 @@ kind: definition
 title: "Adjacency, incidence, open and closed neighbourhoods, vertex degree, minimum degree and maximum degree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-finite-cardinality]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the supremum of a set belongs to the set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-sup-epsilon, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, cor-of-one-positive, lem-of-sign-rules, def-field, lem-of-zero-mult]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "Maximum and minimum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Maximum_and_minimum"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

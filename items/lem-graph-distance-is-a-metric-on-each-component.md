@@ -4,6 +4,9 @@ kind: lemma
 title: "Shortest-path distance is a metric on every connected component"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-graph-distance-and-girth, lem-every-graph-walk-contains-a-path-between-its-endpoints]
 aliases: []
 landmark: false

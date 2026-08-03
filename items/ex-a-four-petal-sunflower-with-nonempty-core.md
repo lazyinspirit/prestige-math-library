@@ -4,6 +4,9 @@ kind: example
 title: "Four explicit petals with a common two-element core form a sunflower"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [def-sunflower]
 justified_by: []
 aliases: []
@@ -14,9 +17,7 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "L. Babai and P. Frankl, Linear Algebra Methods in Combinatorics"
-      url: "https://people.cs.uchicago.edu/~laci/babai-frankl-book2022.pdf"
+  references: []
 pipeline_run: null
 ---
 

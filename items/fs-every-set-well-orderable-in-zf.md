@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the well-ordering theorem is a theorem of ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [rem-cohen-forcing-ac-independent, thm-well-ordering-theorem, thm-well-ordering-implies-ac, cor-ac-iff-well-ordering, fs-zorn-provable-in-zf, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Well-ordering_theorem"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
+      url: "https://plato.stanford.edu/entries/axiom-choice/"
+    - title: "The Well-Ordering Problem (Open Logic Project)"
+      url: "https://builds.openlogicproject.org/content/set-theory/choice/wellorderingproblem.pdf"
 pipeline_run: null
 ---
 

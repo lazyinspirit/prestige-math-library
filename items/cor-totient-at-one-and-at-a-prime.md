@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\varphi(1)=1$, and $\\varphi(p)=p-1$ for every prime $p$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-unit-criterion-modulo-n, def-prime, lem-prime-not-dividing-is-coprime, thm-standard-representatives-modulo-n, def-finite-cardinality, thm-subset-of-a-finite-set, def-unit-group-modulo-n-and-euler-totient]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Mathematics LibreTexts, Euler's phi Function"
       url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "UW Oshkosh, Number Theory Notes 3"
+      url: "https://www.uwosh.edu/faculty_staff/pennistd/ntn3.pdf"
 pipeline_run: null
 ---
 

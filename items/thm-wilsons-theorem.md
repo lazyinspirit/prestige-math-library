@@ -4,6 +4,9 @@ kind: theorem
 title: "Wilson's theorem: for every prime $p$, $(p-1)!\\equiv-1\\pmod p$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-wilson-inverse-pairing, thm-z-mod-p-is-a-field, def-factorial-and-falling-factorial, def-monoid-finite-product, thm-generalised-associativity, def-addition-and-multiplication-modulo-n, def-integers-modulo-n, def-congruence-modulo-an-integer, thm-standard-representatives-modulo-n, thm-integers-modulo-n-basic-algebra]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Mathematics LibreTexts, Wilson's Theorem"
-      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/03%3A_Prime_Numbers/3.02%3A_Wilsons_Theorem"
+      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/03%3A_Primes_Numbers/3.02%3A_Wilson%27s_Theorem"
 pipeline_run: null
 ---
 

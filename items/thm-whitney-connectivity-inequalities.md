@@ -4,6 +4,9 @@ kind: theorem
 title: "Whitney's inequalities: $\\kappa(G)\\le\\lambda(G)\\le\\delta(G)$ for every nontrivial connected graph"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-edge-connectivity-at-most-minimum-degree, lem-vertex-connectivity-at-most-edge-connectivity]
 aliases: []
 landmark: true

@@ -4,6 +4,9 @@ kind: definition
 title: "Empty and complete graphs, complete bipartite graphs, and the convention that $P_n$ and $C_n$ have $n$ vertices"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, rem-finite-simple-graph-convention, def-bipartite-graph, def-graph-walk-trail-path-and-cycle]
 justified_by: []
 aliases: []

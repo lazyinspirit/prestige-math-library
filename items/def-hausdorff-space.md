@@ -4,6 +4,9 @@ kind: definition
 title: "Hausdorff space: distinct points have disjoint open neighbourhoods; every metrizable space is Hausdorff and the indiscrete topology on two points is not"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-neighbourhood-top, def-standard-topologies,
        def-metrizable-space, thm-metric-hausdorff-separation,
        def-homeomorphism-and-open-maps]
@@ -13,11 +16,6 @@ landmark: true
 short: "Hausdorff space"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
@@ -79,10 +77,13 @@ below as a false statement and witnessed on the companion page.
 
 ## Remarks
 
-- **The condition is about pairs of points, not about single points.** It says
-  nothing about whether singletons are closed, and it is not equivalent to that
-  weaker condition; the two are distinct members of the separation family, and
-  the distinction is not developed here.
+- **Hausdorff spaces have closed singletons.** Fix $x \in X$ and take the union
+  of all open subsets of $X$ that avoid $x$. Every $y \ne x$ belongs to one of
+  them, by Hausdorff separation of $x$ and $y$, while $x$ belongs to none. The
+  union is therefore exactly $X \setminus \{x\}$, so $\{x\}$ is closed.
+  Thus the Hausdorff property implies the singleton-closed ($T_1$) property.
+  The converse fails: closed singletons need not give disjoint neighbourhoods
+  of distinct points.
 
 - **What the Hausdorff condition buys, in the one place this page needs it.**
   Separation of distinct points by disjoint open sets is exactly what a quotient

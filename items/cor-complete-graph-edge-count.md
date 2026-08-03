@@ -4,6 +4,9 @@ kind: corollary
 title: "The complete graph on an $n$-element vertex set has $\\binom{n}{2}$ edges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-complete-bipartite-path-and-cycle-graphs, thm-two-element-subsets-count]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: remark
 title: "What the theory of these constructions still owes at this point in the reading order: preservation of quotient maps under products, separation beyond Hausdorff, and the invariants that tell the glued spaces apart"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-quotient-topology, def-product-topology, def-disjoint-union-topology,
        def-adjunction-cone-suspension, def-hausdorff-space,
        thm-product-universal-property, thm-coproduct-universal-property,

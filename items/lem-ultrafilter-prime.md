@@ -4,6 +4,9 @@ kind: lemma
 title: "Ultrafilters are prime: a union in $\\mathcal{U}$ has a member in $\\mathcal{U}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-ultrafilter-characterisation, def-ultrafilter, def-filter, def-natural-numbers, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
     - title: "Boolean prime ideal theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Two copies of $\\mathbb{R}$ glued along $\\mathbb{R} \\setminus \\{0\\}$ give a non-Hausdorff quotient of a metrizable space, by an open quotient map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-quotient-of-a-hausdorff-space-is-hausdorff, def-hausdorff-space,
        def-quotient-topology, def-disjoint-union-topology, thm-coproduct-universal-property,
        lem-open-or-closed-surjection-is-quotient, def-metrizable-space, def-metric-space,

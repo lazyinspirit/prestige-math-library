@@ -4,19 +4,19 @@ kind: lemma
 title: "At most $k$ cyclic intervals of length $k$ in a cyclic order are pairwise intersecting when the ground-set size is at least $2k$"
 status: published
 origin: session
-deps: [def-intersecting-family, def-finite-cardinality]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-intersecting-family]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
 sources:
   scraped: []
-  references:
-    - title: "J. Fox, MIT MAT 307, Lecture 12: Erdős-Ko-Rado by Katona's method"
-      url: "https://math.mit.edu/~fox/MAT307-lecture12.pdf"
+  references: []
 pipeline_run: null
 ---
 
@@ -31,8 +31,6 @@ family has at most $k$ members.
 **Given:** Natural numbers $1\le k$ and $n\ge2k$, a cyclic order $(a_0,\ldots,a_{n-1})$, and a pairwise intersecting family $\mathcal I$ of its length-$k$ cyclic intervals, with indices read modulo $n$.
 
 [F1] A family is intersecting when every two of its members have nonempty intersection ([[def-intersecting-family]]).
-
-[F2] The ground set is finite of cardinality $n$ ([[def-finite-cardinality]]).
 
 ## Proof
 

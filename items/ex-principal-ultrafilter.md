@@ -4,6 +4,9 @@ kind: example
 title: "The subsets of $X$ containing a fixed point $x$ form the principal ultrafilter at $x$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [ex-principal-filter-generated-by-a-set, def-ultrafilter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "Ultrafilter (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

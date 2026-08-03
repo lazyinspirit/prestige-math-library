@@ -4,6 +4,9 @@ kind: lemma
 title: "The binomial coefficients are symmetric and increase to the middle level before decreasing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-binomial-coefficient, thm-product-rule, def-sum-over-a-finite-index-set, thm-binomial-closed-formula]
 justified_by: []
 aliases: []

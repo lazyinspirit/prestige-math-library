@@ -4,6 +4,9 @@ kind: definition
 title: "The adjunction space $Y \\cup_f X$ glued along a continuous map, and the cone and the suspension of a space as quotients of $X \\times [0,1]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-quotient-topology, def-disjoint-union-topology, def-product-topology,
        def-subspace-topology-top, def-continuous-map-top, def-interval,
        def-metrizable-space, lem-real-line-is-a-metric-space,

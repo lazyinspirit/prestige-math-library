@@ -4,6 +4,9 @@ kind: theorem
 title: "Characterisation of ultrafilters: every set or its complement"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ultrafilter, def-filter, def-maximal-element, lem-fip-generates-filter]
 justified_by: []
 aliases: []

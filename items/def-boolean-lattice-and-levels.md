@@ -4,6 +4,9 @@ kind: definition
 title: "The Boolean lattice of subsets of a finite set and its rank levels"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-graded-poset-and-rank, def-binomial-coefficient, cor-cardinality-of-the-power-set]
 justified_by: []
 aliases: []

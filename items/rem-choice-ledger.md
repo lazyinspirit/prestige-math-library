@@ -4,6 +4,9 @@ kind: remark
 title: "The choice ledger: what costs the Axiom of Choice and what does not"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [cor-every-vector-space-has-a-basis, thm-every-independent-set-extends-to-a-basis, rem-godel-constructible-universe, rem-cohen-forcing-ac-independent, rem-schechter-kelley-tychonoff,
        rem-feferman-no-free-ultrafilter-in-zf, rem-halpern-levy-bpi-not-ac, rem-cohen-first-model,
        cor-ac-iff-well-ordering, cor-ac-iff-zorn, thm-hartogs, lem-well-order-comparability,
@@ -18,12 +21,6 @@ landmark: false
 short: "equivalents, strictly weaker principles, choice-free substitutes"
 verification:
   precheck: n/a
-  verified:
-    model: claude-sonnet-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -35,6 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
+    - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
+      url: "https://plato.stanford.edu/entries/axiom-choice/"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 
@@ -168,7 +169,7 @@ principle each assumed elsewhere. All four facts belong in the ledger.
   it. That is **not** a use of the Axiom of Choice: $\mathrm{AC}_\omega$ is
   strictly weaker, so neither theorem may be relabelled choice-free or lumped in
   with the full-choice results above.
-- **A third principle, weaker still.** [[thm-urysohn-lemma]] and
+- **A third principle below full AC.** [[thm-urysohn-lemma]] and
   [[thm-tietze-extension-theorem]] are each stated under dependent choice
   ([[def-dependent-choice]]), spent through
   [[lem-dependent-choice-along-a-sequence-of-relations]] to build an

@@ -4,13 +4,15 @@ kind: lemma
 title: "For every nontrivial connected graph, $\\kappa(G)\\le\\lambda(G)$"
 status: published
 origin: session
-deps: [def-vertex-and-edge-connectivity, def-connected-graph-and-connected-component, lem-every-graph-walk-contains-a-path-between-its-endpoints]
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [def-vertex-and-edge-connectivity, def-connected-graph-and-connected-component, lem-every-graph-walk-contains-a-path-between-its-endpoints, cor-connected-components-partition-the-vertex-set]
 aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -30,7 +32,7 @@ $\kappa(G)\le\lambda(G)$.
 
 [F1] $\kappa(G)$ is the least size of a vertex set whose deletion disconnects $G$ or leaves at most one vertex, and $\lambda(G)$ is the least size of an edge cut ([[def-vertex-and-edge-connectivity]]).
 
-[F2] The components of a disconnected graph partition its vertex set, and a walk between two different components must traverse an edge joining the two sides ([[def-connected-graph-and-connected-component]], [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]).
+[F2] The components of a disconnected graph partition its vertex set, and a walk between two different components must traverse an edge joining the two sides ([[cor-connected-components-partition-the-vertex-set]], [[def-connected-graph-and-connected-component]], [[lem-every-graph-walk-contains-a-path-between-its-endpoints]]).
 
 ## Proof
 

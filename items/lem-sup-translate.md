@@ -4,6 +4,9 @@ kind: lemma
 title: "Supremum of a translate: $\\sup(a + S) = a + \\sup S$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-sup-epsilon, lem-of-add-order, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Peter J. Olver, Continuous Calculus"
+      url: "https://www-users.cse.umn.edu/~olver/ln_/cc.pdf"
 pipeline_run: null
 ---
 

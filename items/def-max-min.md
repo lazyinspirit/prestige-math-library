@@ -4,6 +4,9 @@ kind: definition
 title: "Maximum and minimum of a set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Maximum_and_minimum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "David H. Ernst, An Introduction to Proof via Inquiry-Based Learning, Section 5.1"
+      url: "https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/An_Introduction_to_Proof_via_Inquiry-Based_Learning_%28Ernst%29/05%253A_New_Page/5.01%253A_New_Page"
 pipeline_run: null
 ---
 

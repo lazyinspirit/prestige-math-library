@@ -4,6 +4,9 @@ kind: lemma
 title: "Epsilon characterisation of the supremum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-complete-ordered-field, lem-sup-unique, def-ordered-field]
 justified_by: []
 aliases: []
@@ -30,6 +33,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed."
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "David H. Ernst, An Introduction to Proof via Inquiry-Based Learning, Section 5.1"
+      url: "https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/An_Introduction_to_Proof_via_Inquiry-Based_Learning_%28Ernst%29/05%253A_New_Page/5.01%253A_New_Page"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Filter base and the filter it generates"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-filter]
 justified_by: [lem-filter-base-generates]
 aliases: [def-filter-basis]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
     - title: "N. Bourbaki, General Topology: Chapters 1-4, Ch. I §6"
       url: "https://link.springer.com/book/9783540642411"
+    - title: "N. Strickland, Notes on Ultrafilters"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/ultra.pdf"
 pipeline_run: null
 ---
 

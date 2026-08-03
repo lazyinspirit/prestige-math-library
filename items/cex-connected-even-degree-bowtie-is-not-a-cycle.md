@@ -4,13 +4,15 @@ kind: counterexample
 title: "Two triangles sharing one vertex form a connected simple graph with all degrees even that is not a cycle"
 status: published
 origin: session
-deps: [fs-all-even-degrees-force-one-cycle, def-graph-adjacency-incidence-neighbourhood-and-degree, def-graph-walk-trail-path-and-cycle]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [fs-all-even-degrees-force-one-cycle, def-graph-adjacency-incidence-neighbourhood-and-degree, def-standard-complete-bipartite-path-and-cycle-graphs]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -30,7 +32,7 @@ connected simple graph whose degrees are all even is itself a cycle.
 
 [F1] Degree is the number of neighbours ([[def-graph-adjacency-incidence-neighbourhood-and-degree]]).
 
-[F2] Every vertex of a cycle graph has degree $2$ ([[def-graph-walk-trail-path-and-cycle]]).
+[F2] Every vertex of a cycle graph has degree $2$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Counterexample
 

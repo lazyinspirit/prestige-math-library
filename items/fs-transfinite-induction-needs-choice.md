@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: transfinite induction and recursion need the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-transfinite-induction, thm-transfinite-recursion, def-axiom-of-choice, thm-well-ordering-theorem, thm-zorn]
 justified_by: []
 aliases: []
@@ -33,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_schema_of_replacement"
     - title: "Axiom of dependent choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
+    - title: "The Axiom of Choice (Stanford Encyclopedia of Philosophy)"
+      url: "https://plato.stanford.edu/entries/axiom-choice/"
 pipeline_run: null
 ---
 
