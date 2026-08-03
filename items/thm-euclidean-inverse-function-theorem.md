@@ -37,17 +37,13 @@ Thus $f$ is a local diffeomorphism at $a$.
 
 **Given:** The dimensions, $C^1$ map, point, and invertible derivative in the statement.
 
-[L1] The local Newton lemma supplies a closed ball, a uniform contraction constant, a bound for $Df(a)^{-1}$, and invertibility of nearby derivatives ([[lem-newton-contraction-near-an-invertible-derivative]]).
+[L1] The local Newton lemma supplies a closed ball, a uniform contraction constant, a bound for $Df(a)^{-1}$, and invertibility of every nearby derivative with the uniform bound $\lVert Df(x)^{-1}v\rVert_2\le C(1-q)^{-1}\lVert v\rVert_2$ ([[lem-newton-contraction-near-an-invertible-derivative]]).
 
 [L2] A closed subspace of a complete metric space is complete; Euclidean space is complete ([[thm-complete-subspace-iff-closed]], [[thm-euclidean-space-complete]]).
 
 [L3] A self-contraction of a nonempty complete metric space has a unique fixed point ([[thm-banach-fixed-point]]).
 
-[L4] Total differentiability gives continuity, continuous maps pull open sets
-back to open sets, and total derivatives satisfy the chain rule
-([[thm-total-differentiability-gives-a-local-linear-bound-and-continuity]],
-[[thm-metric-continuity-characterisations]],
-[[thm-chain-rule-for-total-derivatives]]).
+[L4] Total differentiability gives continuity, continuous maps pull open sets back to open sets, and total derivatives satisfy the chain rule ([[thm-total-differentiability-gives-a-local-linear-bound-and-continuity]], [[thm-metric-continuity-characterisations]], [[thm-chain-rule-for-total-derivatives]]).
 
 [L5] Total differentiability means a linear approximation with an $o(\|h\|_2)$ remainder ([[def-total-derivative-in-euclidean-space]]).
 

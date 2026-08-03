@@ -40,16 +40,13 @@ is a submodule of $M$.
 
 **Given:** A left $R$-module $M$.
 
-[L1] The module axioms include $1_Rm=m$ and distributivity of scalar
-multiplication over both additions ([[def-left-and-right-modules]]).
+[L1] The module axioms include $1_Rm=m$ and distributivity of scalar multiplication over both additions ([[def-left-and-right-modules]]).
 
-[L2] In a module, $(-1_R)m=-m$ ([[lem-module-elementary-consequences]]).
+[L2] In a module, $(-r)m=-(rm)$; taking $r=1_R$ and using [L1] gives $(-1_R)m=-m$ ([[lem-module-elementary-consequences]]).
 
-[L3] A nonempty subset of a group is a subgroup exactly when it is closed under
-$xy^{-1}$ ([[lem-subgroup-criterion]]).
+[L3] A nonempty subset of a group is a subgroup exactly when it is closed under $xy^{-1}$ ([[lem-subgroup-criterion]]).
 
-[L4] A submodule is an additive subgroup closed under scalar multiplication
-([[def-submodule]]).
+[L4] A submodule is an additive subgroup closed under scalar multiplication ([[def-submodule]]).
 
 ## Proof
 

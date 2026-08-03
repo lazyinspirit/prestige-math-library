@@ -11,6 +11,12 @@ items: [def-group-action,
 examples: []
 ---
 
-Groups and group homomorphisms are the prerequisites for studying how a group acts by symmetries of a set. The symmetric group supplies the ambient group of permutations, while cosets, indices, and Lagrange's theorem provide the finite counting tools used to measure an orbit through its stabiliser.
+Groups, homomorphisms, and symmetric groups are the prerequisites for studying
+how a group acts by permutations of a set. Subgroups supply the natural
+setting for stabilisers, while equivalence relations provide the language for
+the orbit partition.
 
-The page will define actions, orbits, stabilisers, conjugacy classes, centralizers, and normalizers. It will prove the action–homomorphism correspondence, orbit–stabilizer theorem, and Cayley's theorem, before deriving the class equation and the nontrivial-centre theorem for finite nontrivial $p$-groups.
+This page defines group actions, orbits, and stabilisers. It proves that actions
+are equivalent to homomorphisms into a symmetric group, that stabilisers are
+subgroups, and that the orbits partition the acted-on set. The regular action
+then gives Cayley's theorem: every group is isomorphic to a permutation group.

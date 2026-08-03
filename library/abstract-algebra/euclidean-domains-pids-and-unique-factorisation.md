@@ -12,6 +12,12 @@ items: [def-divisibility-and-associates-in-a-domain,
 examples: []
 ---
 
-The theory of commutative rings, integral domains, ideals, and quotient rings supplies the setting for divisibility beyond the integers. Earlier integer results on division, greatest common divisors, Bézout identities, and primes guide the corresponding domain-level definitions while keeping all unit and associate conventions explicit.
+Commutative rings, integral domains, ideals, and units supply the setting for
+divisibility beyond the integers. The development keeps the roles of zero,
+units, and associates explicit so that irreducible and prime elements are not
+silently conflated.
 
-This page will define irreducibles, primes, Euclidean domains, principal ideal domains, unique factorisation domains, and fields of fractions. Its development will establish the Euclidean-domain-to-PID and PID-to-UFD implications, derive gcd and Bézout consequences from ideals, and compare the familiar arithmetic of $\mathbb Z$ with the general theory.
+This page defines divisibility and associates, irreducible and prime elements,
+Euclidean domains, principal ideal domains, and unique factorisation domains.
+It proves that every Euclidean domain is a principal ideal domain and that a
+prime element in an integral domain is irreducible.

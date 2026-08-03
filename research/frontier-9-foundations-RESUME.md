@@ -9,36 +9,58 @@ theorems, and the fundamental group.
 
 ## Scope and constraints
 
-- Worktree: `/root/Projects/prestige-math-library-build`, branch
-  `build-foundations-ab-pairs` only.
-- Never touch the main checkout or `research/audit/`.
-- All new pages and items remain `status: draft`; publication is out of scope.
-- Batch cap: two A/B pairs per batch. Batches 1--5 are all in scope and
-  authored; their manifests and proof contracts are the single-writer handoff.
-- Do not spawn subagents: the owner requires autonomous orchestration without
-  edit-approval prompts. Apply all authorized linked-worktree edits directly.
+- All 20 new pages and 83 items remain `status: draft`; publication is out of
+  scope. The five batches remain capped at two A/B pairs each.
+- The Frontier 9 authored commit was rebased, fast-forwarded into `main`, and
+  pushed as `e9df73a feat(library): add frontier nine A/B pairs`.
+- The main checkout contains unrelated, uncommitted published-audit work under
+  `research/audit/` and associated legacy items. Preserve it. Frontier work may
+  modify only the Frontier 9 in-flight items/pages and `research/frontier-9*`
+  artifacts; any later commit must stage only those named Frontier paths.
+- Creating a separate linked worktree is currently unavailable because the
+  shared Git metadata mount rejects new ref locks. This is a local isolation
+  limitation, not a failure of the completed merge or push.
+- No owner audit, publication, commit, or push is authorized at the Step-10
+  pause.
 
-## Current state
+## Current state (checkpoint 2026-08-03, after Step 10)
 
-- All 20 requested pages and all 83 scoped items are authored as
-  `status: draft`; A-page summaries have the required two paragraphs and B
-  pages have no authored body. Nothing on this branch is published.
-- Batches 1--5 have compact page manifests, notes, proof contracts and a merged
-  53-item contract at `research/frontier-9-proof-contracts.json`. Every per-batch
-  contract and the merged contract passes the strict gate.
-- `content-policy` passes for all five manifests. The 53 proof-bearing items
-  pass `precheck`; all 83 scoped items pass render and prose checks. The plan
-  validator reports no scoped dependency, forward-reference or B-leaf error;
-  its remaining warnings are global, pre-existing redundant page prerequisites.
-- The independent-judge coverage receipt is
-  `research/frontier-9-judge-coverage.json`: every scoped item has at least one
-  accepted DeepSeek V4 Pro or GPT-5.6 Terra verdict, and no item remains in the
-  re-judge queue. The raw temporary logs are
-  `/tmp/frontier-9-judge.jsonl`, `/tmp/frontier-9-judge-attempts.jsonl`, and
-  `/tmp/frontier-9-judge-cost.jsonl`; preserve them if the session is resumed.
-- Repair work covered direct-product order and cyclic classification, module
-  kernels and quotient laws, trigonometric inverse branches, graph colouring,
-  inverse/implicit-function hypotheses, and the fundamental-group laws.
+- Steps 0--5 remain authored and mechanically validated: 20 draft pages, 83
+  scoped draft items, five batch manifests/notes, and 53 proof contracts.
+- Step 6 is formally complete. Alpha-9 (GPT 5.6 Sol, xhigh, 1M context) read
+  all 83 items, 53 proof-bearing items, 20 pages, and 391 relationships;
+  `research/frontier-9-audit-coverage.json` and
+  `research/frontier-9-spine-audit.json` validate the current scope. Two
+  independent Sol proof refuters read the 68-proof current spine scope.
+- Step 7/8 current-context closure is complete for all 83 Frontier items.
+  `JUDGE_LINEUP=deepseek+terra` used independent 16+16 pools. The durable
+  verdict, attempt, and cost ledgers are `research/frontier-9-judge.jsonl`,
+  `research/frontier-9-judge-attempts.jsonl`, and
+  `research/frontier-9-judge-cost.jsonl`. The authoritative `level-coverage`
+  gate passed: 83 paired current contexts, 0 errors, and 11 expected
+  adjudicated warnings.
+- `research/frontier-9-judge-adjudications.jsonl` now has 28 exact-hash
+  decisions: 24 confirmed nonfatal, 4 false positives, and 0 judge-confirmed
+  fatal defects. The two actual fatal defects came from the independent spine
+  read: missing dependency/citation support in published
+  `thm-int-comm-ring` and `thm-int-ordered-ring`. Both were repaired,
+  independently read, impact-dispositioned, paired-rejudged, and now carry
+  `verification.verified` under the owner-delegated published-dependency
+  protocol. Evidence is `research/frontier-9-published-dependency-repairs.md`.
+- The one post-sweep material repair was the exact L6/step-5.1 citation in
+  `thm-int-ordered-ring`; its one-item paired rejudge was completed. Terra's
+  current rejection was separately adjudicated false positive; DeepSeek passed.
+- The owner continuity rule is now recorded in `CLAUDE.md`, `LEVELS.md`, and
+  `ARCHITECTURE.md`: checkpoint at 60% active context at a safe boundary,
+  compact when available, then read the record and verify disk state.
+- Step 9 is complete: the published-corpus scope-denial/position sweep found no
+  false published claim and required no amendment. Its record is
+  `research/frontier-9-step9-scope-denial.md`.
+- Step 10 is complete and paused for the owner. The final rundown is
+  `research/frontier-9-A10.md`; the required personal escalation audit is
+  `research/frontier-9-orchestrator-escalation.md`. They record two fatal
+  dependency-citation defects found and repaired, no remaining fatal defect,
+  and no proposed structural owner action.
 
 ## Active batches
 
@@ -51,14 +73,13 @@ theorems, and the fundamental group.
 
 ## Baseline and gates
 
-- The shared Git metadata mount rejects index writes with an `index.lock`
-  read-only-filesystem error. Step 9 (stage, commit, and push) is blocked until
-  that metadata is writable; do not ask for approval or retry the blocked write.
-- `research/audit/` is never in scope. Main checkout remains untouched.
+- `research/audit/` and its dirty published-audit content remain outside this
+  run and must not be staged. The shared checkout is deliberately dirty.
+- No owner audit, publication, commit, or push is authorized at the Step-10
+  pause. All Frontier pages/items remain draft.
 
 ## Exact next action
 
-When the shared Git metadata is writable, stage only the scoped Frontier 9 files,
-commit on `build-foundations-ab-pairs` without a Co-Authored-By trailer, and
-push with `git push -u origin build-foundations-ab-pairs`. Keep every item and
-page as `status: draft`; publication and the owner audit happen from main.
+Stop at the sole owner pause. The next action requires owner audit/approval;
+only after that approval may a later session publish, commit, or push the
+Frontier work. Preserve the unrelated dirty published-audit work throughout.

@@ -8,7 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-function-space, def-linear-map, def-injection-surjection-bijection,
-       def-field, lem-nat-nonzero-is-successor]
+       def-field, lem-nat-nonzero-is-successor, thm-omega-is-peano-system]
 justified_by: []
 aliases: []
 landmark: false
@@ -39,18 +39,13 @@ removed.
 
 **Given:** A field $F$ and the function space $F^{\mathbb N}$.
 
-[L1] Function equality and the vector-space operations on $F^X$ are pointwise
-([[def-function-space]]).
+[L1] Function equality and the vector-space operations on $F^X$ are pointwise ([[def-function-space]]).
 
-[L2] A function $T$ is linear when
-$T(au+bv)=aT(u)+bT(v)$ for all scalars and vectors ([[def-linear-map]]).
+[L2] A function $T$ is linear when $T(au+bv)=aT(u)+bT(v)$ for all scalars and vectors ([[def-linear-map]]).
 
-[L3] A function is injective when equal outputs force equal inputs, and it is
-surjective when every codomain element has a preimage
-([[def-injection-surjection-bijection]]).
+[L3] A function is injective when equal outputs force equal inputs, and it is surjective when every codomain element has a preimage ([[def-injection-surjection-bijection]]).
 
-[L4] A field has distinct elements $0_F\ne1_F$, and every nonzero natural is a
-successor ([[def-field]], [[lem-nat-nonzero-is-successor]]).
+[L4] A field has distinct elements $0_F\ne1_F$. Every natural is either zero or a successor; zero is not a successor; and the successor map is injective ([[def-field]], [[lem-nat-nonzero-is-successor]], [[thm-omega-is-peano-system]]).
 
 ## Proof
 
@@ -68,8 +63,5 @@ successor ([[def-field]], [[lem-nat-nonzero-is-successor]]).
 
 ## Remarks
 
-- The ambient space contains all scalar-valued sequences, not only the
-  eventually zero ones.
-- The reverse shift $L(x)(n)=x(\sigma(n))$ satisfies $L\circ S$ equal to the
-  identity, while $S\circ L$ need not be the identity; this is orientation and
-  is not used as a dependency.
+- The ambient space contains all scalar-valued sequences, not only the eventually zero ones.
+- The reverse shift $L(x)(n)=x(\sigma(n))$ satisfies $L\circ S$ equal to the identity, while $S\circ L$ need not be the identity; this is orientation and is not used as a dependency.

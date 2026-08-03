@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-principal-inverse-tangent, thm-derivative-of-an-inverse, def-tangent-cotangent-secant-cosecant, thm-sine-and-cosine-derivatives, thm-tangent-cotangent-secant-cosecant-derivatives-and-periods, thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions, def-oriented-integral, thm-ftc-first-part, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, cor-differentiable-implies-continuous, cor-zero-derivative-implies-constant, thm-geometric-series, cor-termwise-integration-of-a-real-power-series, thm-alternating-series-test, thm-abel-limit-theorem, thm-cofunction-supplementary-and-reflection-identities]
+deps: [def-principal-inverse-tangent, thm-derivative-of-an-inverse, def-tangent-cotangent-secant-cosecant, thm-sine-and-cosine-derivatives, thm-tangent-cotangent-secant-cosecant-derivatives-and-periods, thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions, def-oriented-integral, thm-ftc-first-part, thm-additivity-over-subintervals, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, cor-differentiable-implies-continuous, cor-zero-derivative-implies-constant, thm-geometric-series, cor-termwise-integration-of-a-real-power-series, thm-alternating-series-test, thm-abel-limit-theorem, thm-cofunction-supplementary-and-reflection-identities]
 justified_by: []
 aliases: [gregory-leibniz-series]
 landmark: true
@@ -46,13 +46,9 @@ $$\frac\pi4=1-\frac13+\frac15-\frac17+\cdots.$$
 
 [L2] The derivative of an inverse is the reciprocal of the original derivative when the latter is nonzero ([[thm-derivative-of-an-inverse]]).
 
-[L3] $(\tan u)'=\sec^2u=1+\tan^2u$ on the tangent domain, and
-$\tan0=0$ because $\sin0=0$, $\cos0=1$, and $\tan0=\sin0/\cos0$
-([[def-tangent-cotangent-secant-cosecant]], [[thm-sine-and-cosine-derivatives]],
-[[thm-tangent-cotangent-secant-cosecant-derivatives-and-periods]],
-[[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
+[L3] $(\tan u)'=\sec^2u=1+\tan^2u$ on the tangent domain, and $\tan0=0$ because $\sin0=0$, $\cos0=1$, and $\tan0=\sin0/\cos0$ ([[def-tangent-cotangent-secant-cosecant]], [[thm-sine-and-cosine-derivatives]], [[thm-tangent-cotangent-secant-cosecant-derivatives-and-periods]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
 
-[L4] A continuous integrand has the integral-function derivative asserted by the first fundamental theorem; oriented integrals reverse sign when their endpoints are reversed ([[thm-continuous-implies-integrable]], [[thm-ftc-first-part]], [[def-oriented-integral]]).
+[L4] A continuous integrand has the integral-function derivative asserted by the first fundamental theorem. Oriented integrals reverse sign and are additive over arbitrary successive endpoints ([[thm-continuous-implies-integrable]], [[thm-ftc-first-part]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]]).
 
 [L5] For $|r|<1$, $\sum_{n\ge0}r^n=1/(1-r)$, and a real power series may be integrated termwise on compact subintervals of its convergence interval ([[thm-geometric-series]], [[cor-termwise-integration-of-a-real-power-series]]).
 
@@ -60,11 +56,7 @@ $\tan0=0$ because $\sin0=0$, $\cos0=1$, and $\tan0=\sin0/\cos0$
 
 [L7] The cofunction identities and the Pythagorean identity give $\tan(\pi/4)=1$ ([[thm-cofunction-supplementary-and-reflection-identities]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
 
-[L8] Continuous functions are closed under the algebra used below; differentiable
-functions are continuous; and two continuous functions on an interval with the
-same derivative differ by a constant ([[thm-algebra-of-continuous-functions]],
-[[cor-differentiable-implies-continuous]],
-[[cor-zero-derivative-implies-constant]]).
+[L8] Continuous functions are closed under the algebra used below; differentiable functions are continuous; and two continuous functions on an interval with the same derivative differ by a constant ([[thm-algebra-of-continuous-functions]], [[cor-differentiable-implies-continuous]], [[cor-zero-derivative-implies-constant]]).
 
 ## Proof
 

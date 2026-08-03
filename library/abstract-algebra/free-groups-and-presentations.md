@@ -11,6 +11,12 @@ items: [def-alphabet-words-and-reduction,
 examples: []
 ---
 
-The preceding material on groups, homomorphisms, kernels, quotient groups, and isomorphisms supplies the algebraic framework for universal constructions. A presentation records a group by generators and relations, and quotient-group factorisation explains why relations determine a universal mapping property.
+Groups, homomorphisms, kernels, quotient groups, and isomorphisms supply the
+algebraic framework for the constructions here. Words in an alphabet provide
+concrete representatives, while quotienting a free group by a normal closure
+encodes relations.
 
-This page will construct free groups from reduced words, prove their universal property, and use it to define rank for finitely generated free groups. It will then formulate group presentations, prove their universal property, and obtain presentations of cyclic groups and the fact that every group is a quotient of a free group.
+This page defines words, reduction, free groups, and group presentations. It
+constructs the free group from reduced words and proves its universal property,
+uses that property to establish uniqueness up to unique isomorphism, and proves
+that every group admits a presentation.

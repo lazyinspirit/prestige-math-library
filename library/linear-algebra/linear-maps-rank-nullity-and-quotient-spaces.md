@@ -12,6 +12,12 @@ items: [def-linear-map,
 examples: []
 ---
 
-Vector spaces, linear combinations, bases, and finite dimension are the prerequisites for this development. The general language of homomorphisms and quotient structures also gives a useful template: a linear map has a kernel and image, and a quotient packages the information discarded by that kernel.
+Vector spaces, linear combinations, bases, and finite dimension are the
+prerequisites for this development. A linear map preserves the vector-space
+operations, and its kernel and image measure respectively what it collapses
+and what it reaches.
 
-This page will define linear maps, kernels, images, rank, nullity, linear isomorphisms, and quotient vector spaces. It will prove the universal property of a basis, rank–nullity, the finite-dimensional injective/surjective criteria, the universal property of a quotient, and the first isomorphism theorem for vector spaces.
+This page defines linear maps, kernels, images, rank, and nullity. It proves the
+elementary preservation laws, characterises injectivity by the kernel, extends
+a kernel basis to obtain a basis of the image, and derives the finite-dimensional
+rank–nullity theorem.

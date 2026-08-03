@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-c-one-map-and-local-inverse, def-derivative, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, cor-differentiable-implies-continuous, thm-continuous-inverse]
+deps: [def-c-one-map-and-local-inverse, def-derivative, thm-algebra-of-derivatives, thm-chain-rule, lem-derivative-of-a-power, thm-sine-and-cosine-derivatives, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, cor-differentiable-implies-continuous, thm-continuous-inverse]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,13 +38,11 @@ not contradict the $C^1$ inverse function theorem.
 
 **Given:** No hypotheses beyond those quantified in the statement.
 
-[L1] Derivatives obey the algebra and chain rules, and $(\sin x)'=\cos x$ ([[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[thm-sine-and-cosine-derivatives]]).
+[L1] Derivatives obey the algebra and chain rules; the power rule gives the derivatives of $x$, $x^2$, and $x^{-1}$ on its nonzero domain; and $(\sin x)'=\cos x$ ([[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[lem-derivative-of-a-power]], [[thm-sine-and-cosine-derivatives]]).
 
 [L2] Sine and cosine have the integer-multiple values determined by their zero sets, periods, and quarter-turn values ([[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
-[L3] Differentiability implies continuity, and a continuous injective real
-function on an interval is strictly monotone
-([[cor-differentiable-implies-continuous]], [[thm-continuous-inverse]]).
+[L3] Differentiability implies continuity, and a continuous injective real function on an interval is strictly monotone ([[cor-differentiable-implies-continuous]], [[thm-continuous-inverse]]).
 
 [L4] Sine is bounded by $1$ in absolute value ([[thm-sine-cosine-signs-monotonicity-and-ranges]]).
 

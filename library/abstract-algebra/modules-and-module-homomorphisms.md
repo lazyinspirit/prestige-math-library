@@ -19,6 +19,13 @@ items: [def-left-and-right-modules,
 examples: []
 ---
 
-Rings and ideals provide the scalars and quotient constructions used here, while vector spaces supply the motivating special case over a field. The prior group-isomorphism theorems also establish the pattern for kernels, images, factor maps, and correspondences that modules generalise.
+Rings and ideals provide the scalars and quotient constructions used here,
+while vector spaces supply the motivating special case over a field. Earlier
+group results establish the pattern for kernels, quotient maps, factorisations,
+and first isomorphism theorems.
 
-This page will define unital left and right modules, submodules, generated and free modules, annihilators, quotient modules, and module homomorphisms. It will establish their isomorphism and correspondence theorems, develop Hom and endomorphism structures, compare direct sums with products, and record carefully delimited counterexamples to tempting vector-space analogies.
+This page defines left and right modules, submodules, generated and free
+modules, simple modules, annihilators, torsion, quotient modules, and module
+homomorphisms. It proves the submodule criterion, kernel and image laws,
+quotient-module laws, the quotient universal property, and the first
+isomorphism theorem for modules.

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-principal-inverse-tangent, lem-tangent-principal-branch-is-bijective, thm-addition-and-subtraction-formulas-for-tangent-cotangent-secant-and-cosecant, thm-cofunction-supplementary-and-reflection-identities, thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]
+deps: [def-principal-inverse-tangent, lem-tangent-principal-branch-is-bijective, def-tangent-cotangent-secant-cosecant, thm-sine-and-cosine-derivatives, thm-addition-and-subtraction-formulas-for-tangent-cotangent-secant-and-cosecant, thm-cofunction-supplementary-and-reflection-identities, thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,13 +32,11 @@ $$\frac\pi4=4\arctan\frac15-\arctan\frac1{239}.$$
 
 **Given:** No hypotheses beyond those quantified in the statement.
 
-[L1] Principal arctangent takes values in $(-\pi/2,\pi/2)$, is the inverse
-of tangent there, and is strictly increasing
-([[def-principal-inverse-tangent]], [[lem-tangent-principal-branch-is-bijective]]).
+[L1] Principal arctangent takes values in $(-\pi/2,\pi/2)$, is the inverse of tangent there, and is strictly increasing ([[def-principal-inverse-tangent]], [[lem-tangent-principal-branch-is-bijective]]).
 
 [L2] The tangent addition and subtraction formulas hold when their displayed denominators and domains are nonzero ([[thm-addition-and-subtraction-formulas-for-tangent-cotangent-secant-and-cosecant]]).
 
-[L3] $\tan(\pi/4)=1$, by the cofunction and Pythagorean identities ([[thm-cofunction-supplementary-and-reflection-identities]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
+[L3] Tangent is the quotient of sine by cosine; $\sin0=0$ and $\cos0=1$; and the cofunction and Pythagorean identities give $\tan(\pi/4)=1$ ([[def-tangent-cotangent-secant-cosecant]], [[thm-sine-and-cosine-derivatives]], [[thm-cofunction-supplementary-and-reflection-identities]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]).
 
 ## Proof
 

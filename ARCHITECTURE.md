@@ -520,21 +520,23 @@ stamped items with a phantom repair in one pass. It keeps `title`, `deps`,
 mathematical edit despite living in frontmatter. First appearance = creation,
 not repair.
 
-**Context-continuity checkpoint (owner 2026-08-01).** The active run's
-`research/<run>-RESUME.md` is refreshed at 50% active-context use and before a
-context-heavy action when practical. It is deliberately a small operational
-handoff, not another content ledger: owner policy deltas, current step and
-frozen-text state, batch/agent ownership, material artifact and ledger paths,
-gates, open risks, working-tree baseline, and exact next action — never secrets
-or copied transcripts. A platform compaction follows the checkpoint; on resume,
-the orchestrator reads it and verifies action-critical disk state before
-continuing immediately. This closes the otherwise fragile gap between a live
-agent's working context and the durable evidence ledgers without adding a pause
-or a publication authority.
+**Context-continuity checkpoint (owner 2026-08-03).** Once active context
+reaches **60%**, the active run's `research/<run>-RESUME.md` is automatically
+refreshed at the next safe boundary, preferably after the current task or gate
+rather than mid-operation. It is deliberately a small operational handoff, not
+another content ledger: owner policy deltas, current step and frozen-text state,
+batch/agent ownership, material artifact and ledger paths, gates, open risks,
+working-tree baseline, and exact next action — never secrets or copied
+transcripts. After that durable session history is saved, context is compacted at
+a convenient safe boundary whenever the platform offers or performs compaction;
+on resume, the orchestrator reads it and verifies action-critical disk state
+before continuing immediately. This closes the otherwise fragile gap between a
+live agent's working context and the durable evidence ledgers without adding a
+pause or a publication authority.
 
-**Role-level continuity.** The orchestrator's threshold is 50% of its active
-context. Beta and Alpha apply the same compact-and-resume procedure at **60% of
-their own context length**, but keep it in their write-authorized namespace:
+**Role-level continuity.** The orchestrator, Beta, and Alpha threshold is 60%
+of the role's active context. Beta and Alpha keep the same compact-and-resume
+procedure in their write-authorized namespace:
 Beta appends a concise checkpoint to its batch notes and Alpha to its Alpha
 report/handoff. This preserves the single-writer boundary while retaining the
 agent's owned artifacts, completed checks, constraints, and exact next action.

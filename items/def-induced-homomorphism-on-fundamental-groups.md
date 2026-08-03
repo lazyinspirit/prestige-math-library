@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [thm-fundamental-group-laws, def-continuous-map-top,
+deps: [def-based-loops-and-fundamental-group, thm-fundamental-group-laws, def-continuous-map-top,
        def-group-homomorphism]
 justified_by: [thm-induced-fundamental-group-map-functoriality]
 aliases: []
@@ -25,7 +25,9 @@ pipeline_run: null
 ## Definition
 
 Let $f:X\to Y$ be continuous and let $x_0\in X$. Composition sends a loop
-$\alpha$ at $x_0$ to the loop $f\circ\alpha$ at $f(x_0)$. The proposed
+$\alpha$ at $x_0$ to the loop $f\circ\alpha$ at $f(x_0)$. Using the loop
+classes and fundamental group of [[def-based-loops-and-fundamental-group]],
+the proposed
 **induced homomorphism** is
 
 $$f_*:\pi_1(X,x_0)\longrightarrow\pi_1(Y,f(x_0)),\qquad f_*([\alpha]):=[f\circ\alpha].$$

@@ -33,17 +33,13 @@ such that $\bar f(m+N)=f(m)$, equivalently $f=\bar f\circ\pi$.
 
 ## Facts & Assumptions
 
-**Given:** A module homomorphism $f:M\to P$ and a submodule $N\le M$ with
-$N\subseteq\ker f$.
+**Given:** A module homomorphism $f:M\to P$ and a submodule $N\le M$ with $N\subseteq\ker f$.
 
-[L1] The canonical map $\pi:M\to M/N$ is a surjective module homomorphism
-([[prop-canonical-quotient-module-map]]).
+[L1] The canonical map $\pi:M\to M/N$ is a surjective module homomorphism with kernel $N$ ([[prop-canonical-quotient-module-map]]).
 
-[L2] A group homomorphism that kills a normal subgroup factors uniquely through
-the group quotient ([[thm-quotient-group-universal-property]]).
+[L2] A group homomorphism that kills a normal subgroup factors uniquely through the group quotient ([[thm-quotient-group-universal-property]]).
 
-[L3] A module homomorphism is additive and scalar-preserving, and its kernel is
-the preimage of zero ([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] A module homomorphism is additive and scalar-preserving, and its kernel is the preimage of zero ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
 ## Proof
 

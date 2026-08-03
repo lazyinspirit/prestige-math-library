@@ -101,23 +101,24 @@ banner; the public sees only `published`.
   operation truly cannot be expressed without new authority, stop and record a
   blocker instead of raising a permission prompt.
 
-- **Context continuity and compaction (owner, 2026-08-01).** Treat 50% active
-  context use as a checkpoint trigger, never as a reason to pause a build. At
-  that threshold (and before a context-heavy operation when practical), the
-  orchestrator updates the active run's `research/<run>-RESUME.md` with the
-  objective, current step/frozen-text state, owner policy changes, selected
-  batches, active agents and ownership, material files and gate results,
-  ledgers, open risks, exact next action, and the working-tree baseline. Keep it
-  concise and factual; never put credentials, tokens, or copied long transcripts
-  in it. If the platform offers or performs compaction, checkpoint first, then
-  immediately read that record and verify the relevant disk state before
-  continuing the same workflow. A checkpoint is not an owner pause and must not
-  delay a stage once the state is safely recorded.
-  **Beta and Alpha agents use the same rule at 60% of their own context length.**
-  A Beta appends its concise checkpoint to its namespaced batch notes; Alpha
-  writes it to its namespaced Alpha report/handoff. Each reads its own checkpoint
-  and verifies the relevant files after compaction, then continues without
-  waiting for an orchestrator replay.
+- **Context continuity and compaction (owner, 2026-08-03).** Once active
+  context reaches **60%**, automatically save durable session history at the
+  next safe boundary (preferably after completing the current task or gate,
+  never by abandoning work mid-operation). The orchestrator updates the active
+  run's `research/<run>-RESUME.md` with the objective, current step/frozen-text
+  state, owner policy changes, selected batches, active agents and ownership,
+  material files and gate results, ledgers, open risks, exact next action, and
+  the working-tree baseline. Keep it concise and factual; never put credentials,
+  tokens, or copied long transcripts in it. After saving that memory, compact
+  context at a convenient safe boundary whenever the platform offers or performs
+  compaction; then immediately read the record and verify relevant disk state
+  before continuing the same workflow. A checkpoint or compaction is not an
+  owner pause and must not delay a stage once the state is safely recorded.
+  **Beta and Alpha agents use the same 60% rule.** A Beta appends its concise
+  checkpoint to its namespaced batch notes; Alpha writes it to its namespaced
+  Alpha report/handoff. Each reads its own checkpoint and verifies relevant
+  files after compaction, then continues without waiting for an orchestrator
+  replay.
 
 - **GPT 5.6 Sol dispatch default (owner, 2026-07-31).** Every authoring, Beta,
   Alpha, or other GPT 5.6 Sol subagent is dispatched as **GPT 5.6 Sol** at

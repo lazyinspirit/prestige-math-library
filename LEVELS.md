@@ -136,20 +136,21 @@ judged, and 30 earned passes were destroyed** and had to be bought again.
 Judging after the audit costs nothing in coverage — every item is still judged —
 and the verdicts describe the text that ships.
 
-### Context-continuity checkpoint (orchestrator, owner 2026-08-01)
+### Context-continuity checkpoint (orchestrator, owner 2026-08-03)
 
-The orchestrator treats 50% active-context use as a mandatory **durable
-checkpoint**, not a workflow pause. At that threshold, and before a
-context-heavy operation when practical, update `research/level<n>-RESUME.md`
-(or the active named-run equivalent) with the owner instructions that differ
-from the standing rules, current numbered step and frozen-text state, batches,
-active agents/ownership, material artifact paths and gate results, ledger paths,
-open defects and constraints, working-tree baseline, and the exact next action.
-It must be concise, factual, and contain no credentials or copied long
-transcripts. After a platform-triggered or available compaction, read the
-checkpoint first, verify any action-critical state from disk, and immediately
-continue the same step. Checkpoints are updated after material state changes;
-they neither authorize publication nor create an owner pause.
+Once active context reaches **60%**, the orchestrator automatically saves a
+durable checkpoint at the next safe boundary (preferably after the current task
+or gate, never by abandoning work mid-operation), not a workflow pause. Update
+`research/level<n>-RESUME.md` (or the active named-run equivalent) with the
+owner instructions that differ from the standing rules, current numbered step
+and frozen-text state, batches, active agents/ownership, material artifact paths
+and gate results, ledger paths, open defects and constraints, working-tree
+baseline, and the exact next action. It must be concise, factual, and contain no
+credentials or copied long transcripts. After saving the checkpoint, compact at
+a convenient safe boundary whenever the platform offers or performs compaction;
+then read the checkpoint first, verify any action-critical state from disk, and
+immediately continue the same step. Checkpoints are updated after material state
+changes; they neither authorize publication nor create an owner pause.
 
 Beta-n-i and Alpha-n apply the same procedure at **60% of their own context
 length**. A Beta's checkpoint is an appended, concise section of its namespaced
