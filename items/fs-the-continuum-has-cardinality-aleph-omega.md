@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $2^{\\aleph_0} = \\aleph_\\omega$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-cofinality-of-a-cardinal-power, thm-regularity-of-the-alephs, def-cofinality, def-aleph-and-beth-hierarchies, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-axiom-of-choice, def-cardinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cardinality of the continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality_of_the_continuum"
     - title: "Easton's theorem (Wikipedia)"

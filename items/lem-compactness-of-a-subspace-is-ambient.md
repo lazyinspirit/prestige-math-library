@@ -4,6 +4,9 @@ kind: lemma
 title: "A subspace is compact exactly when every family of open subsets of the ambient space covering it, indexed or not, has finitely many members covering it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, def-subspace-topology-top, def-topological-space, lem-finite-choice]
 justified_by: []
 aliases: [lem-ambient-compactness-criterion]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Subspace_topology"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Section 5.12: Quasi-compact spaces and maps"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 ## Statement
@@ -91,8 +92,8 @@ anywhere below; the one place a selection is made is over a finite index set, an
 
 ## Remarks
 
-**Why the ambient reading needed a proof at all.** A subset $A$ of $X$ carries two candidate notions of open cover: families of sets open in $(A, \mathcal{T}_A)$, and families of sets open in $X$ whose union contains $A$. The trace description of the subspace topology is what turns one into the other, and it is the reason compactness of $A$ does not depend on which space $A$ is regarded as sitting inside. Every later item on this page that covers a subset by ambient open sets is using claim 1 or claim 2, and says so.
+**Why the ambient reading needed a proof at all.** A subset $A$ of $X$ carries two candidate notions of open cover: families of sets open in $(A, \mathcal{T}_A)$, and families of sets open in $X$ whose union contains $A$. The trace description of the subspace topology is what turns one into the other, and it shows that compactness can be checked using ambient open sets for this fixed induced topology. Another ambient is guaranteed to give the same answer when it induces the same topology on $A$; if the induced topology changes, the answer may change. Every later item on this page that covers a subset by ambient open sets is using claim 1 or claim 2, and says so.
 
 **The traces do not remember their sources.** A single relatively open $V$ is usually the trace of many different ambient open sets, and that is exactly why step 3.1 has to recover indices at all. Recovering infinitely many at once would be a choice principle; recovering finitely many is not, and the proof is arranged so that only finitely many are ever needed.
 
-**The metric statement of the same fact is [[lem-compactness-is-intrinsic]]**, whose claims 2 and 3 are claims 1 and 2 above with balls in place of an abstract topology. Its proof carries an extra first claim, that relative openness in a metric subspace is a trace, which here is the definition of the subspace topology and so needs no argument. Neither statement is used in the proof of the other; that the two agree is [[thm-compactness-agrees-with-metric-compactness]].
+**The metric statement of the same fact is [[lem-compactness-is-intrinsic]]**, whose claims 2 and 3 are claims 1 and 2 above with the open subsets of a metric space in place of the members of an abstract topology. Its proof carries an extra first claim, that relative openness in a metric subspace is a trace, which here is the definition of the subspace topology and so needs no argument. Neither statement is used in the proof of the other; that the two agree is [[thm-compactness-agrees-with-metric-compactness]].

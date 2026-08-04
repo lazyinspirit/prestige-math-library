@@ -4,6 +4,9 @@ kind: definition
 title: "The one-point (Alexandroff) compactification $X^{*} = X \\cup \\{\\infty\\}$, whose open sets are the open sets of $X$ together with the complements in $X^{*}$ of the closed compact subsets of $X$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-compact-space, def-topological-space, def-subspace-topology-top, thm-closed-subspace-of-a-compact-space-is-compact]
 justified_by: [thm-one-point-compactification-properties]
 aliases: [def-alexandroff-compactification]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
     - title: "J. Munkres, Topology, 2nd ed., §29"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 090A"
+      url: "https://stacks.math.columbia.edu/tag/090A"
 pipeline_run: null
 ---
 

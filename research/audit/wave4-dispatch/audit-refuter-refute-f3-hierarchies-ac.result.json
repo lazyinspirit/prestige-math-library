@@ -1,0 +1,17 @@
+{
+  "role": "audit-refuter",
+  "label": "refute-f3-hierarchies-ac",
+  "run": "wave4",
+  "runner": "codex",
+  "model": "gpt-5.6-sol",
+  "sandbox": "read-only",
+  "started_at": "2026-08-04T13:24:34.476Z",
+  "ended_at": "2026-08-04T13:36:39.643Z",
+  "ms": 725167,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave4-dispatch/audit-refuter-refute-f3-hierarchies-ac.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave4-dispatch/audit-refuter-refute-f3-hierarchies-ac.prompt.md",
+  "tail": "### FINDING 1 — cor-the-aleph-and-beth-hierarchies-are-well-defined — L7 drops the cited theorem’s well-orderability hypothesis\nLOCATION: Facts & Assumptions, line 88\nQUOTE: \"[L7] $\\lvert X \\rvert$ is the least ordinal equinumerous with $X$, and $\\lvert \\alpha \\rvert = \\alpha$ exactly when $\\alpha$ is a cardinal\"\nDEFECT: The first clause is asserted for every set, but the cited theorem defines this cardinality only for well-orderable sets. Under ZF it need not exist for an arbitrary set.\nEVIDENCE: The cited target states: \"**(b)** If $X$ is well-orderable there is a **least** ordinal equinumerous with $X$.\"\nSEVERITY: fatal\nMINIMAL REPAIR: Begin L7 with “For every well-orderable set X”.\n\n### FINDING 2 — cor-the-aleph-and-beth-hierarchies-are-well-defined — L4 attributes a least-upper-bound claim absent from its targets\nLOCATION: Facts & Assumptions, line 82\nQUOTE: \"[L4] For a set $A$ of ordinals, $\\bigcup A$ is an ordinal and is the least upper bound of $A$\"\nDEFECT: Neither cited target states that the union is the least upper bound. The claim is true, but the Fact block presents it as part of the cited proposition, and step 5.1 relies on it.\nEVIDENCE: The relevant clause of lem-ordinal-basics is only: \"**(e)** if $A$ is any set of ordinals then $\\bigcup A$ is an ordinal;\" Lem-ordinal-trichotomy states trichotomy and existence of least elements, not the asserted supremum property.\nSEVERITY: fatal\nMINIMAL REPAIR: Remove the least-upper-bound clause from L4 and derive it explicitly in step 5.1 from the definition of union: every member is contained in the union, and every common ordinal upper bound contains the union.\n\n### FINDING 3 — thm-tarski-square — L4 cites the wrong theorem for the infinite-cardinal criterion\nLOCATION: Facts & Assumptions, line 66\nQUOTE: \"a cardinal is infinite exactly when $\\omega \\le \\kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]])\"\nDEFECT: The cited theorem does not state this equivalence. The criterion is instead part of def-cardinal-arithmetic, which the item declares as a dependency but does not cite in L4.\nEVIDENCE: The cited target’s relevant clause is only: \"**(b)** Every infinite cardinal is a limit ordinal ([[def-limit-ordinal]]).\" The exact on-disk definition elsewhere says: \"**Finite and infinite cardinals.** A cardinal $\\kappa$ is **finite** when $\\kappa \\in \\omega$ and **infinite** when $\\omega \\subseteq \\kappa$, that is $\\omega \\le \\kappa$\".\nSEVERITY: fatal\nMINIMAL REPAIR: Cite def-cardinal-arithmetic for the infinite-cardinal criterion in L4.\n\n## Coverage\nItems read in full: def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-cardinal-comparability-iff-ac, thm-tarski-square, rem-cardinal-arithmetic-choice-ledger\nItems not read, and why: none\nFacts checked against their target on disk: 23\nFindings: 3 fatal, 0 nonfatal"
+}

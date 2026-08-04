@@ -4,6 +4,9 @@ kind: theorem
 title: "Algebra of limits: sums, scalar multiples, products and quotients"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-limit, def-sequence, lem-convergent-implies-bounded, lem-null-times-bounded, lem-of-triangle-inequality, lem-of-abs-value, cor-of-reverse-triangle, thm-of-archimedean, lem-of-inverse-positive, lem-rat-embeds-dense, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, thm-rat-ordered-field, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "OpenStax Calculus Volume 2, §5.1 Sequences"
+      url: "https://openstax.org/books/calculus-volume-2/pages/5-1-sequences"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"

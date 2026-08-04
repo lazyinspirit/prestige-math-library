@@ -4,6 +4,9 @@ kind: lemma
 title: "Every convergent sequence is bounded"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-real-limit, def-sequence, lem-finite-set-has-max, def-max-min, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, thm-rat-ordered-field, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"
@@ -76,6 +77,6 @@ $M \in \mathbb{R}$ with $|x_k| \le M$ for every $k \in \mathbb{N}$.
 
 - This is where [[lem-finite-set-has-max]] does its main work on this page: the first $K$ terms are bounded because a nonempty finite set of reals has a maximum, and that fact is proved once, by induction, rather than re-derived here. It is not the only consumer, and no claim of uniqueness is made: [[lem-null-times-bounded]] and [[rem-sequence-conventions]] cite the same lemma, each for a maximum of finitely many reals.
 
-- The converse is false. A bounded sequence need not converge ([[fs-bounded-implies-convergent]]). What is true in that direction is the Bolzano-Weierstrass theorem, which requires a passage to a subsequence; it is **not proved anywhere in this library as things stand**, being the subject of the next page of this track, planned and not yet written.
+- The converse is false. A bounded sequence need not converge ([[fs-bounded-implies-convergent]]). What is true in that direction is the Bolzano-Weierstrass theorem, which requires a passage to a subsequence; it is **not available at this point in the reading order**, being the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, where it is proved.
 
 - Boundedness is exactly what makes [[lem-null-times-bounded]] applicable to a convergent factor, and that is how boundedness enters the product rule of [[thm-algebra-of-limits]].

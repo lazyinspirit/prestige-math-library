@@ -4,6 +4,9 @@ kind: theorem
 title: "$X^{*}$ is compact and contains $X$ as an open subspace; $X$ is dense in $X^{*}$ exactly when $X$ is not compact; and $X^{*}$ is Hausdorff exactly when $X$ is locally compact and Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-one-point-compactification, def-compact-space, def-locally-compact-space, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-locally-compact-hausdorff-basics, def-subspace-topology-top, def-dense-top, def-interior-closure-boundary-top, thm-closure-characterisation-top, lem-compactness-of-a-subspace-is-ambient, def-topological-space, def-neighbourhood-top]
 justified_by: []
 aliases: [thm-alexandroff-compactification-properties]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
     - title: "J. Munkres, Topology, 2nd ed., §29"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 090A"
+      url: "https://stacks.math.columbia.edu/tag/090A"
 pipeline_run: null
 ---
 

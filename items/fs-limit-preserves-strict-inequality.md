@@ -4,7 +4,10 @@ kind: false-statement
 title: "FALSE: limits preserve strict inequalities"
 status: published
 origin: session
-deps: [lem-limit-preserves-order, lem-limit-unique, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, def-nat-order, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-limit-preserves-order, lem-limit-unique, thm-algebra-of-limits, def-real-limit, def-sequence, thm-of-archimedean, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-real-order, lem-nat-discrete, thm-nat-linear-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,18 +15,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
@@ -49,7 +50,7 @@ $x_k = 0$ and $y_k = 1/(k+1)$, whose limits are both $0$.
 
 **Given:** The constant sequence $x_k := 0$ and the sequence $y_k := \bigl((k+1) \cdot 1_{\mathbb{R}}\bigr)^{-1}$, where $n \cdot 1_{\mathbb{R}}$ denotes the canonical natural of $\mathbb{R}$ ([[lem-of-naturals-positive]], [[def-sequence]]).
 
-[L1] Convergence, quantified over rational $\varepsilon > 0$; a constant sequence converges to its value ([[def-real-limit]], [[def-sequence]]).
+[L1] $(x_k)$ converges to $x$ when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$ with $|x_k - x| < \hat\varepsilon$ for all $k \ge K$ ([[def-real-limit]]); a sequence of reals is a function $\mathbb{N} \to \mathbb{R}$ ([[def-sequence]]), so a constant sequence converges to its value, $|x - x| = 0 < \hat\varepsilon$ holding at every index.
 
 [L2] Archimedean property: for every $z \in \mathbb{R}$ there is a natural $N \ge 1$ with $z < N \cdot 1_{\mathbb{R}}$ ([[thm-of-archimedean]]).
 
@@ -59,9 +60,9 @@ $x_k = 0$ and $y_k = 1/(k+1)$, whose limits are both $0$.
 
 [L5] Absolute value: $|u| = u$ when $u \ge 0$, and $|u - 0| = |u|$ ([[lem-of-abs-value]], [[def-real-order]]).
 
-[L6] Order arithmetic: transitivity and trichotomy in $\mathbb{R}$, and in $\mathbb{N}$ the implication $k \ge N \Rightarrow k + 1 > N$ ([[def-complete-ordered-field]], [[def-ordered-field]], [[def-nat-order]], [[thm-nat-linear-order]]).
+[L6] Order arithmetic: transitivity and trichotomy in $\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]). On $\mathbb{N}$, $m < n$ if and only if $\sigma(m) \le n$, so $\sigma(k) = k + 1$ is the immediate successor of $k$ ([[lem-nat-discrete]]); transitivity of the linear order therefore gives $k \ge N \Rightarrow k + 1 > N$ ([[thm-nat-linear-order]]).
 
-[L7] Limits preserve non-strict inequalities ([[lem-limit-preserves-order]]).
+[L7] If sequences of reals $(x_k)$ and $(y_k)$ converge to $x$ and $y$ and $x_k \le y_k$ eventually, then $x \le y$ ([[lem-limit-preserves-order]]).
 
 [L8] A sequence of reals has at most one limit ([[lem-limit-unique]]), so the symbols $\lim_k x_k$ and $\lim_k y_k$ appearing in the false claim and below denote.
 

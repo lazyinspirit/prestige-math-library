@@ -4,6 +4,9 @@ kind: lemma
 title: "Limits preserve non-strict inequalities"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-limit, def-sequence, lem-limit-unique, thm-algebra-of-limits, thm-of-archimedean, lem-of-add-order, lem-rat-embeds-dense, lem-of-inverse-positive, lem-of-abs-value, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"

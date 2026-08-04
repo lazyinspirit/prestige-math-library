@@ -68,9 +68,9 @@ its own post-Step-4 batch content; independent Step-6 readers and Alpha-n run
 `xhigh` reasoning with a **1,000,000-token context window**; the independent
 paired judges run **DeepSeek V4 Pro directly via the DeepSeek API at `xhigh`
 thinking (official API value: `max`)** and freshly
-spawned **GPT 5.6 Terra through the Codex subscription** on the identical
+spawned **Claude Sonnet 5 through the local `claude` CLI** on the identical
 hash-attested skeptical prompt. GPT-family models are not routed through ofox.
-DeepSeek is the cross-family lane; Terra is the same-context comparison lane.
+DeepSeek is the cross-family lane; Sonnet is the same-context comparison lane.
 The current per-level step order and numbering are in
 `LEVELS.md`.
 
@@ -258,7 +258,7 @@ e.g.:
 export JUDGE_VERDICTLOG=research/level<n>-judge.jsonl
 ```
 
-The paired DeepSeek V4 Pro/Terra judges each record
+The paired DeepSeek V4 Pro/Sonnet judges each record
 `{id, model, keep, reason, context_sha256, at}` for every call, including `keep: null` tool
 failures. Commit the shared ledger with the level. Count refutations from either
 model per id; never rotate it mid-level, because the count is the entire point
@@ -405,7 +405,7 @@ cited proof-bearing item discharges it.*
 ## 0. Roles and models (every LLM in the loop)
 
 The library separates who *writes* math from who *checks* it, retaining a
-cross-family DeepSeek screen and an independent Terra comparison lane. Every
+cross-family DeepSeek screen and an independent Sonnet comparison lane. Every
 LLM that touched this session's work is named below, with its exact identifier
 and the runtime it ran on.
 
@@ -419,7 +419,7 @@ and the runtime it ran on.
 | Alpha-n lead adjudicator, propagation, and cross-level audit | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
 | Alpha proof-refuter subagents | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; read-only access; never ofox |
 | Step-5 author | the same Beta-n-i, GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
-| Paired judges | DeepSeek V4 Pro (`max`) + GPT 5.6 Terra (`xhigh`) | direct DeepSeek API + fresh Codex subscription process; identical frozen context, concurrent calls |
+| Paired judges | DeepSeek V4 Pro (`max`) + Claude Sonnet 5 (`high`) | direct DeepSeek API + fresh headless `claude -p` process; identical frozen context, concurrent calls |
 | Final audit and publish gate | human owner | n/a |
 
 The historical Opus/Fable and older judge lineups in research notes are not the
@@ -436,9 +436,9 @@ non-null, carry the same frozen-context SHA-256, and that hash matches freshly
 assembled current context. A later null retry does not erase an earlier complete
 verdict on that identical prompt; a later substantive verdict does. Both models
 share one freshly assembled current hash per selected item before scheduling.
-DeepSeek and Terra use file-backed, cross-process pools with separate caps of
-24 and 16 calls: either model advances as soon as one of its own pool slots is
-free, never after the other model's call. At most 40 judge calls run together.
+DeepSeek and Sonnet use file-backed, cross-process pools with separate caps of
+16 calls each: either model advances as soon as one of its own pool slots is
+free, never after the other model's call. At most 32 judge calls run together.
 For recovery of only one incomplete judge, pass its exact model id through `--models`;
 the sweep then leaves the other model's already-current verdict untouched.
 The sweep also writes a sibling `-attempts.jsonl` ledger: each attempt records
@@ -463,7 +463,7 @@ says whose verdict survives a disagreement.
 | **Independent Step-6 reader** | GPT 5.6 Sol via Codex | a batch it did not scaffold or author, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
 | **Alpha proof-refuter reader** | GPT 5.6 Sol via Codex | read-only level and published dependencies | skeptically reports concrete proof/citation defects only | Alpha, owner |
 | **Alpha lead adjudicator** | GPT 5.6 Sol via Codex | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content, plus only the documented obvious published-dependency repair | owner |
-| **Paired judges** | DeepSeek V4 Pro direct + fresh GPT 5.6 Terra via Codex | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | orchestrator, owner |
+| **Paired judges** | DeepSeek V4 Pro direct + fresh Claude Sonnet 5 | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | orchestrator, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
 **The order, and the bound** (owner, 2026-07-25). For an item rejected at least
@@ -531,7 +531,7 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Current session cost rule: GPT 5.6 Sol authoring, Beta, Alpha, and GPT 5.6 Terra
+Current session cost rule: GPT 5.6 Sol authoring, Beta, Alpha, and Claude Sonnet 5
 judging run through the Codex subscription plan; DeepSeek V4 Pro judging is
 direct DeepSeek API spend. GPT-family work must not be routed through ofox.
 
@@ -541,9 +541,9 @@ Two hard rules govern the models:
    subscription into the worker service. Current authoring uses GPT 5.6 Sol
    through the Codex subscription plan at `xhigh` reasoning with a
    1,000,000-token context window.
-2. GPT-family models (author, Beta, Alpha, and Terra judge) run via the Codex
+2. GPT-family models (author, Beta, Alpha) run via the Codex
    subscription plan, never through ofox. DeepSeek V4 Pro is the cross-family
-   judge; Terra is an independent same-context comparison lane. Never adopt an
+   judge; Sonnet is an independent same-context comparison lane. Never adopt an
    additional judge model on latency, price, or fluent reasons; inject a defect
    you know is there and see whether it says so. DeepSeek v4-flash remains
    barred as judge because it passed a blatant injected falsehood.
@@ -810,7 +810,7 @@ Run the judge, then report and fix.
 
 **Paired judges.** Current session judging runs DeepSeek V4 Pro directly at
 owner-requested `xhigh` thinking (the documented API value is `max`) and freshly
-spawned GPT 5.6 Terra through the Codex
+spawned Claude Sonnet 5 through the local `claude` CLI
 subscription at `xhigh`, concurrently with
 `tools/judge.mts --parallel`. That program loads
 `briefs/judge-conventions.txt` by default into the frozen prompt and its hash;
@@ -818,7 +818,7 @@ subscription at `xhigh`, concurrently with
 prompt. Each receives the same frozen context and reads proofs and dependencies
 skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/level<n>-judge.jsonl` as
 `{id, model, keep, reason, context_sha256, at}`. DeepSeek is the cross-family
-screen; Terra provides the independent apples-to-apples comparison and does not
+screen; Sonnet provides the independent second-lane comparison and does not
 make the pair cross-family by itself.
 
 The initial Step-7 paired sweep covers **every item in every completed A/B pair**,
@@ -1041,7 +1041,7 @@ directory directly.
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
    apify (step-0 scraping, zero when nothing was scraped) plus direct DeepSeek
-   judge spend. GPT 5.6 Sol authoring, Beta, Alpha, and Terra judge work run on
+   judge spend. GPT 5.6 Sol authoring, Beta, Alpha, and Sonnet judge work run on
    the Codex subscription plan and are not counted as direct-API spend.
 
 ---

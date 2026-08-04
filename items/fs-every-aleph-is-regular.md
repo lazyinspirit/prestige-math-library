@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\aleph_\\alpha$ is regular for every ordinal $\\alpha$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-regularity-of-the-alephs, def-cofinality, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-cardinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Regular cardinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Regular_cardinal"
     - title: "Cofinality (Wikipedia)"
@@ -50,7 +51,7 @@ choice principle at all.
 
 [L1] $\operatorname{cf}(\aleph_\omega) = \aleph_0$, and $\aleph_0 < \aleph_\omega$, so $\aleph_\omega$ is singular; this is a theorem of ZF (clause (c) of [[thm-regularity-of-the-alephs]]).
 
-[L2] A cardinal $\kappa$ is regular when $\operatorname{cf}(\kappa) = \kappa$ ([[def-cofinality]], [[def-cardinal]]).
+[L2] An infinite cardinal $\kappa$ is regular when $\operatorname{cf}(\kappa) = \kappa$, and singular when $\operatorname{cf}(\kappa) \ne \kappa$ ([[def-cofinality]], [[def-cardinal]]).
 
 [L3] The operation $\alpha \mapsto \aleph_\alpha$ is defined at every ordinal and is strictly increasing ([[cor-the-aleph-and-beth-hierarchies-are-well-defined]]).
 

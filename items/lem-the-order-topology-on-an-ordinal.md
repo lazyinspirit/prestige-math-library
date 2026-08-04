@@ -4,6 +4,9 @@ kind: lemma
 title: "On an ordinal with its order topology the sets $[0,\\beta]$ and $(\\alpha,\\beta]$ form a basis of clopen sets, the isolated points are exactly the non-limit ordinals, and the space is Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-order-topology-on-a-linearly-ordered-set, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-topology-basis-subbasis, thm-basis-criterion, def-topological-space, def-hausdorff-space, def-interior-closure-boundary-top, def-neighbourhood-top, def-partial-order]
 justified_by: []
 aliases: [lem-ordinal-space-basis]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -96,7 +95,7 @@ point in the reading order.
 
 ## Remarks
 
-**Why the half-open sets and not the open intervals.** In an ordinal every point other than a limit is isolated, and the sets $(\alpha,\beta]$ are exactly the basic sets that stay clopen: an open interval $(\alpha,\beta)$ need not be closed, while $(\alpha,\beta]$ always is, because its complement is again a union of sets of the two admissible forms. That every basic set is clopen is what makes an ordinal space totally disconnected in the naive sense and is used repeatedly in [[thm-ordinal-spaces-and-compactness]].
+**Why the half-open sets and not the open intervals.** In an ordinal every point other than a limit is isolated, and the sets $(\alpha,\beta]$ are the convenient basic sets that always stay clopen: an open interval $(\alpha,\beta)$ need not be closed, while $(\alpha,\beta]$ always is, because its complement is again a union of sets of the two admissible forms. That every basic set is clopen is what makes an ordinal space totally disconnected in the naive sense and is used repeatedly in [[thm-ordinal-spaces-and-compactness]].
 
 **The topology defined here is the general order topology and not a second notion.** It is [[def-order-topology-on-a-linearly-ordered-set]] applied to the linearly ordered set $\gamma$, and claim 1 says only that the general basis of rays and intervals may be replaced by the more convenient $\mathcal{B}_\gamma$. A published item elsewhere in the library states the same topology on an ordinal directly, as `def-order-topology-on-an-ordinal`; it is named here in plain text because its page comes later in the reading order, and the agreement between the two descriptions is exactly claim 1.
 

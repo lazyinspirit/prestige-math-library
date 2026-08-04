@@ -4,6 +4,9 @@ kind: theorem
 title: "Compact implies countably compact, Lindel\\\"of and limit point compact; countably compact together with Lindel\\\"of implies compact; and, at the cost of countable or dependent choice, sequentially compact implies countably compact, countably compact implies limit point compact, and the converse holds when every singleton is closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compactness-variants, def-compact-space, def-topological-space, def-countable, lem-countable-iff-surjection-from-n, def-countable-choice, def-dependent-choice, def-sequence-convergence-top, def-sequence, lem-index-map-grows, def-interior-closure-boundary-top, thm-closure-characterisation-top, def-neighbourhood-top, def-injection-surjection-bijection, def-natural-numbers]
 justified_by: []
 aliases: [thm-compactness-hierarchy]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_point_compact"
     - title: "Lindelöf space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lindel%C3%B6f_space"
+    - title: "Sequentially compact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sequentially_compact_space"
 pipeline_run: null
 ---
 
@@ -128,6 +129,6 @@ about the axiom it belongs to is asserted.
 
 **Why claim 4 needs the singleton hypothesis and claim 1(c) does not.** A limit point of the set $A$ built at step 2.1 need not be one of the $x_n$ with large index unless the finitely many early terms can be cut away, and cutting them away is exactly what closedness of singletons permits. Without that hypothesis the implication fails, and the witness is worked on this page's companion, as `cex-limit-point-compact-without-countable-compactness`: a space in which every nonempty subset has a limit point, for the trivial reason that each point has a partner it cannot be separated from, and which has a countable open cover with no finite subcover.
 
-**None of the reverse implications holds in general.** Compactness is strictly stronger than countable compactness ([[fs-countably-compact-implies-compact]]), sequential compactness neither implies nor is implied by compactness ([[fs-compact-implies-sequentially-compact]], [[fs-sequentially-compact-implies-compact]]), and each of those false statements carries a witness reachable from this page.
+**The individual reverse implications fail in general**, with the one exception proved above: claim 1(b) is the reverse of claim 1(a) taken jointly, and it holds in every space. Assuming the Axiom of Countable Choice, compactness is strictly stronger than countable compactness ([[fs-countably-compact-implies-compact]]) and sequential compactness does not imply compactness ([[fs-sequentially-compact-implies-compact]]); assuming the Axiom of Choice, compactness does not imply sequential compactness ([[fs-compact-implies-sequentially-compact]], whose witness is compact by Tychonoff's theorem). Each of those false statements carries a witness reachable from this page, and each states the choice principle its witness spends.
 
 **For a metrizable space the picture collapses.** Compactness, countable compactness, sequential compactness and limit point compactness are all equivalent there ([[thm-metric-compactness-equivalences]]), at a choice cost recorded arrow by arrow in [[rem-compactness-choice-ledger-metric]]; the implications proved without choice in the metric setting are [[thm-compact-implies-the-other-compactness-forms]]. Nothing in that collapse is available here, and the counterexamples of this page are all non-metrizable.

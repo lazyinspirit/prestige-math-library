@@ -4,7 +4,10 @@ kind: definition
 title: "Baire space: a topological space in which every countable intersection of dense open subsets is dense"
 status: published
 origin: session
-deps: [def-topological-space, def-dense-top, def-sequence, def-interior-closure-boundary-top, def-natural-numbers]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-topological-space, def-dense-top, def-sequence-convergence-top, def-interior-closure-boundary-top, def-natural-numbers]
 justified_by: []
 aliases: []
 external_refs: [rem-baire-category-choice-strength]
@@ -13,15 +16,11 @@ short: "Baire space"
 verification:
   precheck: n/a
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -38,7 +37,7 @@ A topological space $(X, \mathcal{T})$ ([[def-topological-space]]) is a **Baire
 space** when
 
 > for every sequence $(U_n)_{n \in \mathbb{N}}$ of subsets of $X$ that are open
-> and dense in $X$ ([[def-dense-top]], [[def-sequence]],
+> and dense in $X$ ([[def-dense-top]], [[def-sequence-convergence-top]],
 > [[def-natural-numbers]]), the intersection $\bigcap_{n \in \mathbb{N}} U_n$ is
 > dense in $X$.
 

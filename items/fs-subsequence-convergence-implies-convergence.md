@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a convergent subsequence forces the sequence to converge"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-subsequence-inherits-limit, lem-limit-unique, lem-convergent-implies-cauchy, def-sequence, def-real-limit, fs-bounded-implies-convergent, thm-reals-cauchy-complete]
 justified_by: []
 aliases: []
@@ -12,18 +15,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
+    - title: "CMU 21-269 notes, Compactness — subsequences"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/compactness.html"
     - title: "Subsequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Subsequence"
     - title: "Limit of a sequence (Wikipedia)"
@@ -71,6 +74,6 @@ The true statement in this direction runs the other way:
 
 - The witness is the same alternating sequence that refutes [[fs-bounded-implies-convergent]]. Its subsequence along the index map $n$, the even indices, is constant $1$, and its subsequence along the index map $m$, the odd indices, is constant $-1$; either one alone converges, and it is the disagreement between them that kills convergence of the whole sequence, by the divergence test in [[lem-subsequence-inherits-limit]].
 
-- A second repair exists and is **not proved on this page**: if $(x_k)$ is Cauchy, in the sense of [[def-real-limit]] whose other direction is [[lem-convergent-implies-cauchy]], and some subsequence converges to $x$, then $(x_k)$ converges to $x$. That is the standard bridge from Cauchy to convergence, and it belongs with the completeness material on the next page of this track, which is planned and not yet written. It is named here only to make clear which extra hypothesis repairs the false claim; nothing above uses it. It is worth adding, so that the reader is not left thinking the repair is unavailable, that for the $\mathbb{R}$ of this library the conclusion is already in hand by a shorter route: [[thm-reals-cauchy-complete]] gives that a Cauchy sequence of reals converges outright, with no subsequence hypothesis at all, and uniqueness of limits ([[lem-limit-unique]]) with [[lem-subsequence-inherits-limit]] then identifies its limit as $x$. What the next page will supply is that same conclusion proved from the least-upper-bound property rather than from a construction.
+- A second repair exists and is **not proved on this page**: if $(x_k)$ is Cauchy, in the sense of [[def-real-limit]] whose other direction is [[lem-convergent-implies-cauchy]], and some subsequence converges to $x$, then $(x_k)$ converges to $x$. That is the standard bridge from Cauchy to convergence, and it belongs with the completeness material on the next page of this track, which is not available at this point in the reading order. It is named here only to make clear which extra hypothesis repairs the false claim; nothing above uses it. It is worth adding, so that the reader is not left thinking the repair is unavailable, that for the $\mathbb{R}$ of this library the conclusion is already in hand by a shorter route: [[thm-reals-cauchy-complete]] gives that a Cauchy sequence of reals converges outright, with no subsequence hypothesis at all, and uniqueness of limits ([[lem-limit-unique]]) with [[lem-subsequence-inherits-limit]] then identifies its limit as $x$. What the next page supplies is that same conclusion proved from the least-upper-bound property rather than from a construction.
 
 - A useful way to remember the asymmetry: a subsequence sees only part of the sequence, so it can only ever certify what happens along the indices it keeps. Convergence is a statement about all indices, and no single subsequence carries that information.

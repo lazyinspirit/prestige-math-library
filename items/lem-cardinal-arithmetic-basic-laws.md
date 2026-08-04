@@ -4,6 +4,9 @@ kind: lemma
 title: "Commutativity, associativity, distributivity and monotonicity of $\\oplus$ and $\\otimes$, the unit laws, the two exponent laws, and $\\kappa \\le \\lambda$ if and only if $\\kappa$ injects into $\\lambda$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cardinal-arithmetic, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-ordinal-trichotomy, lem-ordinal-basics, thm-schroder-bernstein, def-axiom-of-choice, thm-well-ordering-theorem]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"

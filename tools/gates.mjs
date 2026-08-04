@@ -100,10 +100,17 @@ const BASE = () => [
 
 // The proof-obligation trio. All three read the MERGED contract, which
 // merge-proof-contracts.mjs must have written first — hence `needs`.
-const CONTRACT_TRIO = () => [
+//
+// `reviewed` is the caller's answer to "has Alpha had its turn yet?". A
+// `risk_review` is Alpha's disposition, written at A6 by the refuter pass the
+// risk tier routes; requiring one at A4 asks the Betas for a record only Alpha
+// may author — wave 4 halted there on six critical topology items whose reviews
+// were not yet due. So A4 computes the tiers and A6 requires the dispositions.
+const CONTRACT_TRIO = ({ reviewed = true } = {}) => [
   g('proof-contract.mjs', [CONTRACTS, '--strict'], { needs: [CONTRACTS], why: 'obligation/citation/boundary worksheet' }),
   g('finite-smoke.mjs', [CONTRACTS], { needs: [CONTRACTS], why: 'bounded countermodel search' }),
-  g('risk-report.mjs', [CONTRACTS, '--require-reviewed'], { needs: [CONTRACTS], why: 'high/critical routing needs an Alpha risk_review' }),
+  g('risk-report.mjs', reviewed ? [CONTRACTS, '--require-reviewed'] : [CONTRACTS],
+    { needs: [CONTRACTS], why: reviewed ? 'high/critical routing needs an Alpha risk_review' : 'tier computation only; the Alpha risk_review is due at A6' }),
 ];
 
 const COVERAGE = () => g('level-coverage.mjs', [
@@ -208,9 +215,17 @@ const AUDIT_STEPS = {
     g('proof-contract.mjs', [CONTRACTS, '--strict'], { required: false, needs: [CONTRACTS], why: 'advisory: unapplied citation-uses findings are expected here' }),
   ],
   A3: [],  // Orchestrator adjudication of Beta proposals. Judgment, not a gate.
+  // A4 is the one step whose own correct output BASE()'s depcheck rejects: every
+  // materially repaired published item loses its obsolete `audited` stamp here,
+  // and no self-certification rule lets the repairing Beta put one back — only
+  // A6's independent reading may. So depcheck runs with `--pending-audit-ok`,
+  // which demotes exactly that one class to a warning and leaves every other
+  // depcheck error fatal. Wave 4, the first unattended run, is what surfaced it:
+  // 20 correctly-repaired items halted the driver at `published-unaudited`.
   A4: [
-    ...BASE(),
-    ...CONTRACT_TRIO(),
+    ...BASE().filter((gate) => gate.tool !== 'depcheck.mjs'),
+    g('depcheck.mjs', ['--pending-audit-ok'], { why: 'ids, kinds, cycles, page/publish state; A4-created unaudited repairs are A6\'s to certify' }),
+    ...CONTRACT_TRIO({ reviewed: false }),
     g('content-policy.mjs', ['--audit', LEDGERS, MANIFESTS], { needs: [MANIFESTS], why: 'every scoped item tagged, with a matching evidence-ledger row' }),
     g('audit-manifest.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'the full relationship checklist' }),
   ],

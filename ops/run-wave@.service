@@ -48,11 +48,32 @@ EnvironmentFile=%h/.config/prestige-math-library/%i.env
 # waivers rather than failing loudly.
 ExecStartPre=/usr/bin/env node tools/preflight.mjs --audit
 
+# $WAVE_EXTRA_ARGS is unbraced ON PURPOSE: systemd word-splits `$VAR` and passes
+# `${VAR}` as one argument, so this is the only form in which an EMPTY value
+# contributes no argument at all. It exists for `--from-step A<n>`, which a
+# halted run requires to restart and which a fixed ExecStart cannot express.
+# CLEAR IT once the run is past that step, or every future start redoes it.
 ExecStart=/usr/bin/env node tools/run-wave.mjs \
   --wave ${WAVE} \
   --judgment ${WAVE_JUDGMENT} \
   --judge-budget ${WAVE_JUDGE_BUDGET} \
-  --park-after ${WAVE_PARK_AFTER}
+  --park-after ${WAVE_PARK_AFTER} \
+  $WAVE_EXTRA_ARGS
+
+# MEMORY GUARD (wave 4, 2026-08-04). The A3 orchestrator lane — a `claude`
+# runner, whose brief tells it to read every prior receipt in full — reached
+# 6.3 GiB anon RSS on a 7.8 GiB host and the kernel OOM killer took it. systemd's
+# default OOMPolicy=stop then killed the DRIVER too, so run-wave.mjs never wrote
+# a halt code and `wave<k>-run-state.json` was left saying `running` with nothing
+# running. These three lines bound the blast radius to the agent:
+#   MemoryHigh  reclaim pressure first, so a merely large agent swaps instead of dying
+#   MemoryMax   the cgroup ceiling; the kernel kills inside the unit, not machine-wide
+#   OOMPolicy   the driver SURVIVES its agent's death, sees the nonzero exit, and
+#               halts with `agent-failed` — a diagnosable stop instead of a corpse.
+MemoryHigh=4G
+MemoryMax=5G
+MemorySwapMax=2G
+OOMPolicy=continue
 
 # A halted run refuses to restart without --from-step, by design: a driver that
 # resumed automatically would spin through whatever caused the halt. So there is

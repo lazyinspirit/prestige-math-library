@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every subspace of a locally compact space is locally compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-locally-compact-space, def-compact-space, def-hereditary-property, def-subspace-topology-top, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, lem-q-and-irrationals-dense-r, lem-of-q-dense, def-metrizable-space, def-metric-topology, lem-real-line-is-a-metric-space, def-neighbourhood-top, def-interval, def-topological-space, def-interior-closure-boundary-top, thm-closure-characterisation-top]
 justified_by: []
 aliases: []
@@ -11,17 +14,13 @@ landmark: false
 short: "FALSE: local compactness is hereditary"
 proof_strategy: contradiction
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "Heine-Borel theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
+    - title: "I. Khatchatourian, Compactifications (MAT327 notes)"
+      url: "https://www.math.toronto.edu/ivan/mat327/docs/notes/19-compactifications.pdf"
 pipeline_run: null
 ---
 
@@ -42,7 +43,7 @@ hereditary property ([[def-hereditary-property]]): every subspace
 hereditary, and so are several other properties of the same shape, so the
 expectation is natural. What is true for local compactness is heredity along
 **open** subspaces and along **closed** subspaces of a locally compact Hausdorff
-space, and no more. The witness below is the rationals inside the real line,
+space; an arbitrary subspace need not inherit it. The witness below is the rationals inside the real line,
 which is neither open nor closed in it.
 
 ## Facts & Assumptions

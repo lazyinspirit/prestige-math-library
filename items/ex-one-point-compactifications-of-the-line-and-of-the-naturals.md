@@ -4,7 +4,10 @@ kind: example
 title: "$\\mathbb{R}^{*}$ is homeomorphic to the unit circle by inverse stereographic projection, and $\\mathbb{N}^{*}$ is the ordinal space $\\omega + 1$"
 status: published
 origin: session
-deps: [thm-heine-borel-r, def-one-point-compactification, thm-one-point-compactification-properties, lem-the-order-topology-on-an-ordinal, thm-ordinal-spaces-and-compactness, def-ordinal-addition, lem-omega-least-limit-ordinal, lem-ordinal-basics, def-ordinal, def-standard-topologies, def-natural-numbers, def-compact-space, def-subspace-topology-top, def-homeomorphism-and-open-maps, thm-compactness-under-continuous-maps, def-hausdorff-space, def-metrizable-space, cor-metrizability-and-first-countability-are-hereditary, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, lem-metrics-on-rn, lem-product-topology-on-rn, cor-heine-borel-in-the-product-topology, def-continuous-map-top, thm-continuity-characterisations-top, thm-product-universal-property, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, cor-archimedean-reciprocal, def-canonical-natural, def-topological-space, def-interval, def-product-topology, def-metric-bounded-diameter, def-complete-ordered-field, ex-compactness-in-the-standard-topologies]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-heine-borel-r, def-one-point-compactification, thm-one-point-compactification-properties, lem-the-order-topology-on-an-ordinal, thm-ordinal-spaces-and-compactness, def-ordinal-addition, lem-omega-least-limit-ordinal, lem-ordinal-basics, def-ordinal, def-standard-topologies, def-natural-numbers, def-compact-space, def-subspace-topology-top, def-homeomorphism-and-open-maps, thm-compactness-under-continuous-maps, def-hausdorff-space, def-metrizable-space, cor-metrizability-and-first-countability-are-hereditary, lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball, lem-metrics-on-rn, lem-product-topology-on-rn, cor-heine-borel-in-the-product-topology, def-continuous-map-top, thm-continuity-characterisations-top, thm-product-universal-property, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, cor-archimedean-reciprocal, def-canonical-natural, def-topological-space, def-interval, def-product-topology, def-metric-bounded-diameter, def-complete-ordered-field, ex-compactness-in-the-standard-topologies, thm-compactness-agrees-with-metric-compactness]
 justified_by: []
 aliases: []
 landmark: true
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -29,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
     - title: "Stereographic projection (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Stereographic_projection"
+    - title: "I. Khatchatourian, Compactifications (MAT327 notes)"
+      url: "https://www.math.toronto.edu/ivan/mat327/docs/notes/19-compactifications.pdf"
 pipeline_run: null
 ---
 
@@ -77,7 +78,7 @@ its inverse $(x,y) \mapsto x/(1-y)$ are rational.
 
 [L8] For every real $\varepsilon > 0$ there is a natural $m \ge 1$ with $1/m < \varepsilon$, and $\mathbb{R}$ is an ordered field ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[def-complete-ordered-field]], [[def-interval]], [[def-topological-space]]).
 
-[L9] A closed bounded interval of $\mathbb{R}$ is a compact subset of $\mathbb{R}$ ([[thm-heine-borel-r]]).
+[L9] A closed bounded interval of $\mathbb{R}$ is compact in the open-cover sense of real analysis ([[thm-heine-borel-r]]); that notion agrees with metric compactness (claim 5 of [[lem-real-and-metric-notions-agree]]), which in turn agrees with compactness of the subspace in the topological sense (claim 2 of [[thm-compactness-agrees-with-metric-compactness]]), so such an interval is a compact subset of the topological space $\mathbb{R}$.
 
 ## Verification
 
@@ -85,7 +86,7 @@ its inverse $(x,y) \mapsto x/(1-y)$ are rational.
 
 1.1 For $X = \mathbb{N}$ the added point is $\infty = \{\, n \in \mathbb{N} : n \notin n \,\} = \mathbb{N} = \omega$ by [L2], since every natural satisfies $n \notin n$. Hence $\mathbb{N}^{*} = \omega \cup \{\omega\} = \omega^{+} = \omega + 1$, an equality of sets and not merely a bijection. [L1, L2]
 
-1.2 For $X = \mathbb{R}$ the circle $S^1$ is closed in $\mathbb{R}^2$, being the set where the continuous function $(x,y) \mapsto x^2+y^2-1$ vanishes, and bounded, lying in the $d_\infty$-ball of radius $2$ about the origin; so it is a compact subset of $\mathbb{R}^2$ by [L5], and as a subspace of a metrizable space it is metrizable and Hausdorff. [L5, L6]
+1.2 For $X = \mathbb{R}$ the circle $S^1 \subseteq \mathbb{R}^2$ carries the subspace topology of $\mathbb{R}^2$, which is metrizable by [L5]; so $S^1$ is metrizable and hence Hausdorff by [L5]. Nothing below uses compactness of $S^1$. [L5]
 
 2.1 By [L3] the compact subsets of the discrete $\mathbb{N}$ are exactly its finite subsets, and every subset is closed; so by [L1] the open sets of $\mathbb{N}^{*}$ are the subsets of $\mathbb{N}$ together with the sets $\mathbb{N}^{*} \setminus F$ with $F \subseteq \mathbb{N}$ finite. [L1, L3, step 1.1]
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Comparability of arbitrary sets, that any two sets admit an injection one way or the other, is equivalent to the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-hartogs, thm-well-ordering-theorem, cor-ac-iff-well-ordering, def-axiom-of-choice, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-cardinality-of-a-well-orderable-set, lem-ordinal-trichotomy, lem-ordinal-basics, def-ordinal, def-well-order]
 justified_by: []
 aliases: [thm-cardinal-comparability]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Encyclopedia of Mathematics, Comparability of cardinals"
+      url: "https://encyclopediaofmath.org/wiki/Comparability_of_cardinals"
     - title: "Hartogs number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hartogs_number"
     - title: "Axiom of choice — equivalents (Wikipedia)"

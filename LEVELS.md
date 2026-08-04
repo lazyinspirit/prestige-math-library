@@ -26,7 +26,7 @@ Everything below is verified against the code as of 2026-07-31.
 | **Alpha-n** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | spawned at **step 4**, resumed at **steps 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
-| **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned GPT 5.6 Terra via Codex (`xhigh`)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the cross-family lane; Terra is the apples-to-apples comparison lane. |
+| **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned Claude Sonnet 5 (`high` effort)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Sonnet 5 is the second comparison lane, same family as the audit Alpha that adjudicates its rejections. |
 
 ## Artifacts
 
@@ -567,14 +567,14 @@ necessary fixes.
 ## Step 7 — Judge (after the audit, one sweep, on final text)
 
 **Model change (owner, 2026-07-31): the session-item judges are DeepSeek V4 Pro
-directly at maximum reasoning and freshly spawned GPT 5.6 Terra through the
+directly at maximum reasoning and freshly spawned Claude Sonnet 5 through the
 Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
 one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
 cross-process model pools with **24 concurrent DeepSeek calls and 16 concurrent
-Terra calls**. Either model moves to its next item as soon as one of its own
-slots is free (40 calls maximum combined). Both receive the same exact hash-attested frozen prompt
+Sonnet calls**. Either model moves to its next item as soon as one of its own
+slots is free (32 calls maximum combined). Both receive the same exact hash-attested frozen prompt
 for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
-author; Terra is retained as an independent same-context comparison lane, not
+author; Sonnet is retained as an independent same-context comparison lane, not
 as a cross-family claim. The harness retains the historical injection-test
 record.
 
@@ -603,7 +603,7 @@ The sweep assembles each selected item's current prompt hash once before
 scheduling and uses that single attestation for both model queues.
 For a targeted recovery, `--models <model>` retries only that model's missing
 current-context verdicts; ordinary first-pass sweeps omit the flag and run both.
-The sweep permits at most 24 DeepSeek calls and 16 Terra calls at once (40
+The sweep permits at most 16 calls per lane at once (32
 combined), with no per-item barrier: a finished call takes the next eligible
 call for its own model while the other model continues independently.
 It writes a separate per-attempt ledger with latency, HTTP/rate-limit metadata,
@@ -616,7 +616,7 @@ after its ordinary 40k-token maximum-reasoning pass. A second length stop remain
 explicit reasoning-budget null.
 `verification.judge` records a pass only after both models passed the text.
 Never record a pass a judge did not give; a null/failed call is not a verdict.
-At step 10, compare both-pass, both-reject, Terra-only rejection, DeepSeek-only
+At step 10, compare both-pass, both-reject, Sonnet-only rejection, DeepSeek-only
 rejection, and incomplete/null outcomes with their adjudications. Record one
 owner adjudication for every model rejection in
 `research/level<n>-judge-adjudications.jsonl`, keyed by `{id, model,
@@ -638,7 +638,7 @@ attestation fields. Before Step 8, rerun `level-coverage.mjs` with the merged
 proof contract, paired ledger, dependency-spine receipt, Alpha receipt, and
 `--verify-current-context`. The gate
 recomputes the item/relationship manifest from disk, requires a contract for
-every proof-bearing item, and requires one usable DeepSeek and Terra verdict on
+every proof-bearing item, and requires one usable DeepSeek and Sonnet verdict on
 the same *current* frozen prompt for every item. It is not satisfied by a broad
 agent report or by a stale pass after a repair. Give it
 `--judge-adjudications research/level<n>-judge-adjudications.jsonl`: a current
@@ -718,7 +718,7 @@ required re-grep or re-audit caused by a repair.
 ## Step 10 — Final rundown and sole owner pause
 
 Full report: added/deleted in-flight results; forward references present; paired
-judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Terra
+judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Sonnet
 agreement, model-only findings, and the owner-adjudicated fatal logic and
 dependency-citation detection comparison; gate results;
 escalation set; Beta batch-audit coverage; Alpha cross-edge coverage; and

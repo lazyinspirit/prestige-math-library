@@ -4,6 +4,9 @@ kind: theorem
 title: "A product of finitely many compact spaces is compact in the product topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, lem-tube-lemma-for-a-compact-factor, def-product-topology, thm-product-universal-property, thm-induction-principle, lem-compactness-of-a-subspace-is-ambient, thm-compactness-under-continuous-maps, lem-continuity-is-local-and-pastes, def-continuous-map-top, thm-continuity-characterisations-top, def-homeomorphism-and-open-maps, lem-homeomorphism-criteria, def-natural-numbers, def-topological-space, lem-finite-choice]
 justified_by: []
 aliases: [thm-finite-tychonoff]
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Product_topology"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 08ZU"
+      url: "https://stacks.math.columbia.edu/tag/08ZU"
 pipeline_run: null
 ---
 

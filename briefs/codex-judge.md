@@ -1,10 +1,10 @@
-# Session judge brief — paired DeepSeek V4 Pro and GPT 5.6 Terra
+# Session judge brief — paired DeepSeek V4 Pro and Claude Sonnet 5
 
 <!-- Historical filename retained because old docs and commits reference it. -->
 
 `tools/judge.mts` owns the executable refuter prompt. It automatically loads
 `briefs/judge-conventions.txt` into the same frozen, hash-attested context for
-DeepSeek and Terra; this file is the human-readable role brief, not a second
+DeepSeek and Sonnet; this file is the human-readable role brief, not a second
 prompt source.
 
 > **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
@@ -13,10 +13,10 @@ prompt source.
 > If an indispensable operation has no escalation-free form, report a blocker.
 
 > **Model/routing rule (owner, 2026-07-31):** run **DeepSeek V4 Pro directly
-> through the DeepSeek API and freshly spawned GPT 5.6 Terra through the Codex
+> through the DeepSeek API and freshly spawned Claude Sonnet 5 through the local `claude` CLI
 > subscription concurrently** using `tools/judge.mts --parallel`. The models
 > receive the identical hash-attested frozen prompt; neither sees the other's
-> verdict. Terra is read-only, starts without a prior judge thread, and runs in
+> verdict. Sonnet is read-only, starts without a prior judge thread, and runs in
 > an empty temporary work directory, so the frozen material is its audit input.
 
 You are an adversarial mathematical refuter for one library item. Read its proof

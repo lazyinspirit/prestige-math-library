@@ -1,9 +1,12 @@
 ---
 id: thm-the-long-line-is-countably-compact-and-not-compact
 kind: theorem
-title: "Every closed initial segment of the long ray is compact; the long ray is countably compact, assuming countable choice; and it is not compact and not Lindel\\\"of"
+title: "Every closed initial segment of the long ray is compact; the long ray is not compact; and, assuming countable choice, it is countably compact and not Lindel\\\"of"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-long-line, thm-the-long-line-is-a-connected-linear-continuum, def-compact-space, def-compactness-variants, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-upper-bound, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, lem-compactness-of-a-subspace-is-ambient, def-topological-space]
 justified_by: []
 aliases: [thm-long-ray-compactness]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -29,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Long_line_(topology)"
     - title: "Countably compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Countably_compact_space"
+    - title: "MIT OpenCourseWare, 18.901 Introduction to Topology notes"
+      url: "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/e319b3a36ca774261b6b8c45e11804c2_notes_c.pdf"
 pipeline_run: null
 ---
 
@@ -69,7 +70,7 @@ each of countably many nonempty sets.
 
 [L5] $A$ is a compact subset of $R$ exactly when every family of open subsets of $R$ covering $A$ has finitely many members covering $A$, or else $A = \varnothing$ ([[lem-compactness-of-a-subspace-is-ambient]], claim 1).
 
-[L6] A nonempty at most countable family may be listed as $(U_n)_{n \in \mathbb{N}}$, with repetitions allowed and no choice principle involved ([[lem-countable-iff-surjection-from-n]], [[def-countable]]).
+[L6] For a nonempty set, being at most countable and admitting a surjection from $\mathbb{N}$ are the same thing: a nonempty at most countable family may be listed as $(U_n)_{n \in \mathbb{N}}$ with repetitions allowed, and conversely the range of any such list is at most countable; no choice principle is involved ([[lem-countable-iff-surjection-from-n]], [[def-countable]]).
 
 ## Proof
 

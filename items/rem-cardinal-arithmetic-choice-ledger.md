@@ -4,6 +4,9 @@ kind: remark
 title: "What each result on this page costs in choice, and where the continuum escapes what ZFC can decide"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-cardinal, def-cardinal-arithmetic, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, thm-hessenberg, cor-cardinal-absorption, lem-successor-cardinal-exists, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-aleph-and-beth-hierarchies, thm-every-infinite-cardinal-is-an-aleph, thm-cardinal-comparability-iff-ac, thm-tarski-square, def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-cardinal-power-set-and-cantor, def-infinite-cardinal-sum-and-product, thm-konig, cor-cofinality-of-a-cardinal-power, def-axiom-of-choice, def-countable-choice, rem-choice-ledger, rem-continuum-hypothesis]
 justified_by: []
 external_refs: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, rem-gitik-all-uncountable-cardinals-singular]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Ch. 3"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"

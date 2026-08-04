@@ -4,6 +4,9 @@ kind: example
 title: "An ordinal $\\alpha$ with $\\aleph_\\alpha = \\alpha$, built as the supremum of the tower $\\aleph_0, \\aleph_{\\aleph_0}, \\aleph_{\\aleph_{\\aleph_0}}, \\dots$, and its cofinality is $\\aleph_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-recursion-on-the-ordinals, thm-transfinite-induction, def-cofinality, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-ordinal, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "MATH 5001, Fixed Points of the Aleph Sequence"
+      url: "https://math.osu.edu/~derdzinski.1/courses/5001/fixed-points.pdf"
     - title: "Aleph number — fixed points (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Aleph_number#Fixed_points_of_omega"
     - title: "Cofinality (Wikipedia)"
@@ -53,9 +54,11 @@ operation, and it is singular ([[def-cofinality]]).
 **So the aleph operation has fixed points**, even though it is strictly
 increasing and satisfies $\beta \le \aleph_\beta$ at every ordinal
 ([[cor-the-aleph-and-beth-hierarchies-are-well-defined]]). The power operation
-behaves differently: $\kappa < 2^{\kappa}$ at every cardinal
+behaves differently: assuming the Axiom of Choice, so that $2^{\kappa}$ is a
+cardinal at all, $\kappa < 2^{\kappa}$ at every cardinal
 ([[thm-cardinal-power-set-and-cantor]]), so there are no fixed points there at
-all.
+all. That comparison is an aside; nothing below uses it, and the example itself
+stays in ZF.
 
 ## Facts & Assumptions
 
@@ -73,7 +76,7 @@ all.
 
 [L6] For a limit ordinal $\lambda$: $\operatorname{cf}(\lambda)$ is an infinite cardinal, and every cofinal $C \subseteq \lambda$ satisfies $\operatorname{cf}(\lambda) \le \lvert C\rvert$ ([[thm-cofinality-basics]], [[def-cofinality]], [[def-cofinal-subset-of-an-ordinal]]).
 
-[L7] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]], [[def-injection-surjection-bijection]]).
+[L7] An injective map onto its range is a bijection to that range; for a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, and equinumerous sets receive the same cardinal ([[def-injection-surjection-bijection]], [[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
 
 [L8] A cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]]).
 
@@ -99,4 +102,4 @@ all.
 
 **Nothing is chosen, and nothing beyond Replacement is used.** The tower is a definable $\omega$-indexed family, Replacement makes its range a set, and every step of the verification is a computation. So the whole example is a theorem of ZF, like the aleph hierarchy it is built from.
 
-**Its cofinality is the smallest an infinite cardinal can have.** $\operatorname{cf}(\alpha) = \aleph_0$ says $\alpha$ is reached by an $\omega$-indexed family, which is exactly how it was built. So this fixed point is singular, and by [[cor-cofinality-of-a-cardinal-power]] it is therefore not a possible value of $2^{\aleph_0}$. Nothing above claims it is the least fixed point.
+**Its cofinality is the smallest an infinite cardinal can have.** $\operatorname{cf}(\alpha) = \aleph_0$ says $\alpha$ is reached by an $\omega$-indexed family, which is exactly how it was built. So this fixed point is singular, and, assuming the Axiom of Choice, by [[cor-cofinality-of-a-cardinal-power]] it is therefore not a possible value of $2^{\aleph_0}$. Nothing above claims it is the least fixed point.

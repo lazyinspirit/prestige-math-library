@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every sequentially compact space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ordinal-spaces-and-compactness, def-compact-space, def-compactness-variants, lem-the-order-topology-on-an-ordinal, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-countable-choice, def-limit-ordinal]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sequentially_compact_space"
     - title: "First uncountable ordinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
+    - title: "Order topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Order_topology"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "For positive terms, null and divergence to $+\\infty$ are reciprocal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-divergence-to-infinity, def-real-limit, def-sequence, lem-limit-of-tail, lem-of-inverse-positive, lem-of-abs-value, lem-rat-embeds-dense, thm-of-archimedean, def-field, def-real-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"

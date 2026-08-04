@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming the Axiom of Choice, $2^{\\kappa} = \\lvert \\mathcal{P}(\\kappa) \\rvert$, and Cantor's theorem in cardinal form: $\\kappa < 2^{\\kappa}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cardinal-arithmetic, thm-cantor-powerset, def-equinumerous, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, def-injection-surjection-bijection, lem-cardinal-arithmetic-basic-laws, def-cardinal, def-axiom-of-choice, thm-well-ordering-theorem, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Ch. 3"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cantor's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
@@ -89,4 +90,4 @@ as cardinals in the first place.
 
 **No fixed point.** Clause (b) holds for **every** cardinal, so no cardinal satisfies $2^{\kappa} = \kappa$ and the hierarchy of cardinals never terminates. The corresponding statement one level up — that $\alpha \mapsto \aleph_\alpha$ has no fixed point — is **false**, and the companion page exhibits one; the two operations behave quite differently, and it is the power operation, not the successor operation, that is unboundedly expansive.
 
-**Where the Axiom of Choice is and is not spent.** [[thm-cantor-powerset]] is choice free, and so is step 1.1. The hypothesis is used exactly twice, both times to know that a set has a cardinality: at $\mathcal{P}(\kappa)$ and at ${}^{\kappa}2$. In ZF alone, $\mathcal{P}(\omega)$ may fail to be well-orderable, and then $2^{\aleph_0}$ is not an ordinal and the inequality of clause (b) has no cardinal to compare $\kappa$ with — while the underlying statement "there is no surjection $\omega \to \mathcal{P}(\omega)$" remains a theorem.
+**Where the Axiom of Choice is and is not spent.** [[thm-cantor-powerset]] is choice free, and so is step 1.1. The hypothesis is used only to know that a set has a cardinality: at $\mathcal{P}(\kappa)$ and at ${}^{\kappa}2$ for clause (b), and again at $A$ and $\mathcal{P}(A)$ in the general form of clause (a). In ZF alone, $\mathcal{P}(\omega)$ may fail to be well-orderable, and then $2^{\aleph_0}$ is not an ordinal and the inequality of clause (b) has no cardinal to compare $\kappa$ with — while the underlying statement "there is no surjection $\omega \to \mathcal{P}(\omega)$" remains a theorem.

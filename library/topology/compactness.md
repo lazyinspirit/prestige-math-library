@@ -35,8 +35,9 @@ adjunction of a single point at infinity.
 
 **Compactness of a subset is intrinsic.** [[def-compact-space]] defines a compact
 space by open covers and calls a subset compact when the subspace it carries is
-compact. That is a statement about the subspace alone, so the notion does not
-depend on which larger space the subset is regarded as sitting in. The bridge to
+compact. That is a statement about the topological subspace, so it is invariant
+under homeomorphism. For the same underlying set in another ambient, the answer
+is guaranteed to agree when the induced topology agrees. The bridge to
 the working form is [[lem-compactness-of-a-subspace-is-ambient]]: a subset is
 compact exactly when every family of ambient open sets covering it has finitely
 many members that already cover it, in the indexed form as well as the unindexed

@@ -4,6 +4,9 @@ kind: theorem
 title: "Alexander's subbase lemma: if every cover by members of a fixed subbasis has a finite subcover then the space is compact; the proof is an application of Zorn's lemma"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, def-topology-basis-subbasis, thm-basis-criterion, thm-zorn, cor-ac-iff-zorn, def-axiom-of-choice, def-chain, def-maximal-element, def-partial-order, def-upper-bound, def-topological-space, lem-finite-choice, thm-induction-principle]
 justified_by: []
 aliases: [thm-alexander-subbasis-theorem]
@@ -13,15 +16,11 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Zorn%27s_lemma"
     - title: "Compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Compact_space"
+    - title: "Stacks Project, Lemma 5.12.15: Alexander subbase theorem"
+      url: "https://stacks.math.columbia.edu/tag/08ZP"
 pipeline_run: null
 ---
 
@@ -73,8 +74,6 @@ of a product are far easier to handle than its arbitrary open covers.
 [L6] Zorn's lemma: a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
 [L7] The intersections of finitely many members of $\mathcal{S}$ form a basis for $\mathcal{T}$, the intersection of none being $X$; and for a basis $\mathcal{B}$, every open $O$ and every $x \in O$ admit $B \in \mathcal{B}$ with $x \in B \subseteq O$ ([[thm-basis-criterion]], claim 2; [[def-topology-basis-subbasis]]).
-
-[L8] An arbitrary union of open sets is open, and so is an intersection of finitely many open sets when at least one is taken ([[def-topological-space]]).
 
 ## Proof
 

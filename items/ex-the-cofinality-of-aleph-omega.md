@@ -4,7 +4,10 @@ kind: example
 title: "$\\operatorname{cf}(\\aleph_\\omega) = \\aleph_0$, computed from the cofinal map $n \\mapsto \\aleph_n$"
 status: published
 origin: session
-deps: [def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cofinal-subset-of-an-ordinal, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-cardinal, def-equinumerous, def-injection-surjection-bijection]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-cofinality, thm-cofinality-basics, thm-regularity-of-the-alephs, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cofinal-subset-of-an-ordinal, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-cardinal, def-equinumerous]
 justified_by: []
 aliases: []
 landmark: false
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cofinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinality"
     - title: "Aleph number (Wikipedia)"
@@ -65,9 +66,9 @@ a limit ordinal, so its cofinality is an infinite cardinal
 
 [L4] For a limit ordinal $\lambda$: $\operatorname{cf}(\lambda)$ is an infinite cardinal, and every cofinal $C \subseteq \lambda$ satisfies $\operatorname{cf}(\lambda) \le \lvert C\rvert$ ([[thm-cofinality-basics]], [[def-cofinality]]).
 
-[L5] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
+[L5] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
 
-[L6] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and $\alpha \subseteq \beta \subseteq \alpha$ forces $\alpha = \beta$ ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-injection-surjection-bijection]]).
+[L6] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and $\alpha \subseteq \beta \subseteq \alpha$ forces $\alpha = \beta$ ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]]).
 
 ## Verification
 

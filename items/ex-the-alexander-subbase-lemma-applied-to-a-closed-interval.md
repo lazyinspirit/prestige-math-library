@@ -1,26 +1,19 @@
 ---
 id: ex-the-alexander-subbase-lemma-applied-to-a-closed-interval
 kind: example
-title: "Compactness of $[0,1]$ derived from the subbase lemma alone, using only the rays as a subbasis and the least upper bound property"
+title: "Assuming the Axiom of Choice, compactness of $[0,1]$ derived from the subbase lemma alone, using only the rays as a subbasis and the least upper bound property"
 status: published
 origin: session
-deps: [thm-alexander-subbase-lemma, def-compact-space, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-interval, def-complete-ordered-field, lem-sup-epsilon, def-upper-bound, def-subspace-topology-top, def-real-order, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-topological-space]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-alexander-subbase-lemma, def-compact-space, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-interval, def-complete-ordered-field, lem-sup-epsilon, def-upper-bound, def-subspace-topology-top, def-real-order, thm-reals-ordered-field, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-topological-space]
 justified_by: []
 aliases: []
 landmark: true
 short: "Alexander applied to $[0,1]$"
 proof_strategy: direct
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: pass
 sources:
   scraped: []
@@ -29,6 +22,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexander_subbase_theorem"
     - title: "Heine-Borel theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
+    - title: "Stacks Project, Lemma 5.12.15: Alexander subbase theorem"
+      url: "https://stacks.math.columbia.edu/tag/08ZP"
 pipeline_run: null
 ---
 
@@ -41,10 +36,10 @@ the **order topology** of that order
 
 $$\mathcal{S} \;:=\; \{\, L_{<b} : b \in L \,\} \cup \{\, L_{>a} : a \in L \,\}, \qquad L_{<b} = \{t \in L : t < b\}, \quad L_{>a} = \{t \in L : a < t\}.$$
 
-Then $L$ is compact ([[def-compact-space]]), and the proof below uses only
-[[thm-alexander-subbase-lemma]] and the least upper bound property of
-$\mathbb{R}$ ([[def-complete-ordered-field]]): no bisection, no metric, and no
-sequence.
+Then, assuming the Axiom of Choice, $L$ is compact ([[def-compact-space]]), and
+the proof below uses only [[thm-alexander-subbase-lemma]], which is where that
+hypothesis is spent, and the least upper bound property of $\mathbb{R}$
+([[def-complete-ordered-field]]): no bisection, no metric, and no sequence.
 
 **This is a genuinely different route to the same conclusion.** Compactness of
 $[0,1]$ also follows from Heine-Borel, and that is how it is obtained on the
@@ -56,15 +51,13 @@ all the work in one step.
 
 **Given:** $L = [0,1]$ with the order inherited from $\mathbb{R}$, its order topology, and the subbasis $\mathcal{S}$ of open rays.
 
-[L1] Alexander's subbase lemma: if $\mathcal{S}$ is a subbasis for the topology of a space $Z$ and every family $\mathcal{S}_0 \subseteq \mathcal{S}$ with $\bigcup \mathcal{S}_0 = Z$ has a finite subfamily with union $Z$, then $Z$ is compact ([[thm-alexander-subbase-lemma]], [[def-topology-basis-subbasis]]).
+[L1] Alexander's subbase lemma, assuming the Axiom of Choice in the form of Zorn's lemma: if $\mathcal{S}$ is a subbasis for the topology of a space $Z$ and every family $\mathcal{S}_0 \subseteq \mathcal{S}$ with $\bigcup \mathcal{S}_0 = Z$ has a finite subfamily with union $Z$, then $Z$ is compact ([[thm-alexander-subbase-lemma]], [[def-topology-basis-subbasis]]).
 
 [L2] $\mathcal{S}$ is a subbasis for the order topology of $L$ ([[def-order-topology-on-a-linearly-ordered-set]], [[def-topological-space]]).
 
 [L3] Every nonempty subset of $\mathbb{R}$ bounded above has a least upper bound, and for such a set $S$ and an upper bound $u$ one has $u = \sup S$ exactly when every real $\varepsilon > 0$ admits $s \in S$ with $u - \varepsilon < s$ ([[def-complete-ordered-field]], [[lem-sup-epsilon]], [[def-upper-bound]]).
 
-[L4] The order of $\mathbb{R}$ is total, and $0 \le t \le 1$ for every $t \in L$ ([[def-real-order]], [[def-interval]]).
-
-[L5] The order topology of $L$ and the subspace topology $L$ inherits from the usual topology of $\mathbb{R}$ are compared nowhere below; every statement here is about the order topology alone ([[def-subspace-topology-top]], [[def-metrizable-space]], [[lem-real-line-is-a-metric-space]], [[def-metric-topology]]).
+[L4] The order of [[def-real-order]] makes $\mathbb{R}$ a totally ordered field, so any two reals are comparable ([[thm-reals-ordered-field]]); and $0 \le t \le 1$ for every $t \in L$ ([[def-interval]]).
 
 ## Verification
 
@@ -83,6 +76,8 @@ all the work in one step.
 5.1 So the two members $L_{<b}$ and $L_{>a}$ of $\mathcal{S}_0$ cover $L$. As $\mathcal{S}_0$ was an arbitrary cover of $L$ by members of $\mathcal{S}$, [L1] and [L2] make $L$ compact. [L1, L2, step 3.1, step 4.1] ∎
 
 ## Remarks
+
+The order topology of $L$ and the subspace topology $L$ inherits from the usual topology of $\mathbb{R}$ are compared nowhere below; every statement here is about the order topology alone ([[def-subspace-topology-top]], [[def-metrizable-space]], [[lem-real-line-is-a-metric-space]], [[def-metric-topology]]).
 
 **Where the least upper bound property enters.** Exactly once, at step 2.1, to produce $s$; everything after that is bookkeeping about which of the two kinds of ray contains $s$. That is the whole content of the compactness of a closed interval, and the subbase lemma is what allows the argument to be run against rays only, which is why it comes out so short.
 

@@ -4,6 +4,9 @@ kind: example
 title: "Assuming countable choice, $\\operatorname{cf}(\\aleph_{\\omega_1}) = \\aleph_1$, so singular does not mean of countable cofinality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cofinality, thm-cofinality-basics, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, def-limit-ordinal, def-cofinal-subset-of-an-ordinal, def-cardinal, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cofinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinality"
     - title: "Regular cardinal (Wikipedia)"
@@ -66,11 +67,11 @@ $\mathrm{AC}_\omega$ is spent.
 
 [L6] For a limit ordinal $\lambda$: $\operatorname{cf}(\lambda)$ is an infinite cardinal, and every cofinal $C \subseteq \lambda$ satisfies $\operatorname{cf}(\lambda) \le \lvert C\rvert$; also $\operatorname{cf}(\lambda)$ is the least length of a cofinal map into $\lambda$ ([[thm-cofinality-basics]], [[def-cofinality]], [[def-cofinal-subset-of-an-ordinal]]).
 
-[L7] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, equinumerous sets receive the same one, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]], [[def-equinumerous]]).
+[L7] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, equinumerous sets receive the same one, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]], [[def-equinumerous]]).
 
 [L8] Every infinite cardinal is a limit ordinal, and a cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[lem-omega-least-limit-ordinal]]).
 
-[L9] Ordinals: trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$; $\bigcup$ of a set of ordinals is its least upper bound; every nonempty set of ordinals has an $\in$-least element ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-injection-surjection-bijection]]).
+[L9] Ordinals satisfy trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$; the union of a set of ordinals is its least upper bound; every nonempty set of ordinals has an $\in$-least element; and every strictly increasing map of ordinals is injective ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-injection-surjection-bijection]]).
 
 ## Verification
 

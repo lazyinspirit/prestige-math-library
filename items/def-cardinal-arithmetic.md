@@ -4,6 +4,9 @@ kind: definition
 title: "Cardinal sum $\\kappa \\oplus \\lambda$, product $\\kappa \\otimes \\lambda$ and exponentiation $\\kappa^{\\lambda}$, and why they are written apart from the ordinal operations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, rem-ordinal-versus-cardinal-exponentiation, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [def-cardinal-sum, def-cardinal-product, def-cardinal-exponentiation]
@@ -24,6 +27,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"

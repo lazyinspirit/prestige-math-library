@@ -1,0 +1,17 @@
+{
+  "role": "audit-refuter",
+  "label": "refute-t4-local-baire-onepoint",
+  "run": "wave4",
+  "runner": "codex",
+  "model": "gpt-5.6-sol",
+  "sandbox": "read-only",
+  "started_at": "2026-08-04T13:24:34.718Z",
+  "ended_at": "2026-08-04T13:49:09.595Z",
+  "ms": 1474877,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave4-dispatch/audit-refuter-refute-t4-local-baire-onepoint.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave4-dispatch/audit-refuter-refute-t4-local-baire-onepoint.prompt.md",
+  "tail": "### FINDING 1 — def-locally-compact-space — cited results do not establish the sup-metric topology or boundedness used\n\nLOCATION: Definition, lines 81–91\n\nQUOTE: \"Give $\\mathbb{R}^n$ the product topology, which is the metric topology of $d_\\infty$ ([[lem-metrics-on-rn]], [[cor-heine-borel-in-the-product-topology]]). ... it is bounded ([[def-metric-bounded-diameter]]), lying inside $B(p, 2)$; so $Q_p$ is compact by [[cor-heine-borel-in-the-product-topology]].\"\n\nDEFECT: Neither cited Statement establishes that the product topology is induced by the sup metric. The first only establishes that the displayed sup formula is a metric; the second identifies the product topology with the Euclidean metric topology and applies Heine–Borel to Euclidean boundedness. The item proves only sup-metric boundedness before invoking that corollary, so both the topology identification and the compactness inference are unlicensed by the cited facts.\n\nEVIDENCE: The Statement of `lem-metrics-on-rn` says, \"**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**.\" The Statement of `cor-heine-borel-in-the-product-topology` instead introduces \"$d_2$ [as] the Euclidean metric\" and says, \"The product topology on $\\mathbb{R}^n$ **is** the metric topology of $d_2$.\" Its closed-and-bounded characterization is made in that Euclidean-metric context.\n\nSEVERITY: fatal\n\nMINIMAL REPAIR: Replace every occurrence of $d_\\infty$ in lines 82–89 by $d_2$. The resulting Euclidean closed ball is closed and bounded in the precise metric used by the cited Heine–Borel corollary.\n\n## Coverage\n\nItems read in full: def-locally-compact-space, thm-locally-compact-hausdorff-basics, def-baire-space, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, def-one-point-compactification, thm-one-point-compactification-properties\n\nItems not read, and why: none\n\nFacts checked against their target on disk: 24\n\nFindings: 1 fatal, 0 nonfatal"
+}

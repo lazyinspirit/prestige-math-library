@@ -4,7 +4,10 @@ kind: theorem
 title: "In a compact Hausdorff space every quasicomponent is connected, so quasicomponents and components coincide"
 status: published
 origin: session
-deps: [def-connected-component-and-quasicomponent, thm-quasicomponents-contain-components, thm-components-partition-and-are-closed, def-connected-space, def-compact-space, thm-compact-iff-fip, def-hausdorff-space, thm-closed-subspace-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, def-topological-space, def-subspace-topology-top, def-finite-intersection-property]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-connected-component-and-quasicomponent, thm-quasicomponents-contain-components, thm-components-partition-and-are-closed, def-connected-space, def-compact-space, thm-compact-iff-fip, def-hausdorff-space, thm-closed-subspace-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, def-topological-space, def-subspace-topology-top, def-finite-intersection-property, thm-locally-connected-iff-components-of-open-sets-are-open]
 justified_by: []
 aliases: [thm-components-equal-quasicomponents-compact-hausdorff]
 landmark: true
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -29,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
+    - title: "D. Calegari, Notes on Point Set Topology"
+      url: "https://math.uchicago.edu/~dannyc/notes/point_set_topology.pdf"
+    - title: "Stacks Project, Tag 0059"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 
@@ -95,4 +98,4 @@ two hypotheses buy is the reverse inclusion. **No choice principle is used.**
 
 **The inclusion that can be strict.** In an arbitrary space a quasicomponent may properly contain a component, and the witness is a space that is not compact; the general containment is [[thm-quasicomponents-contain-components]], which explicitly declines to assert equality. This theorem is the standard hypothesis under which the two notions agree, and it is the reason the distinction is rarely visible in the compact Hausdorff spaces of everyday use.
 
-**What is not claimed.** Nothing above says the components are open, and nothing says $X$ is totally disconnected when its components are singletons in some other sense; openness of the components is local connectedness, a separate hypothesis ([[thm-components-partition-and-are-closed]]).
+**What is not claimed.** Nothing above says the components are open. If every component of $X$ is a singleton then $X$ is totally disconnected, that being the definition; what the theorem adds is that the quasicomponents are then singletons too. Components need not be open ([[thm-components-partition-and-are-closed]]); local connectedness is a separate hypothesis, and it is exactly the condition that every component of every **open subspace** is open, which also makes the components of $X$ itself clopen ([[thm-locally-connected-iff-components-of-open-sets-are-open]]).

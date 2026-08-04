@@ -4,6 +4,9 @@ kind: corollary
 title: "The clauses at $0$, at a successor and at a limit determine exactly one operation $\\alpha \\mapsto \\aleph_\\alpha$, in ZF, and — assuming the Axiom of Choice — exactly one operation $\\alpha \\mapsto \\beth_\\alpha$; each value is an infinite cardinal, each is strictly increasing and continuous at limits, and $\\alpha \\le \\aleph_\\alpha$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-recursion-on-the-ordinals, lem-successor-cardinal-exists, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, lem-omega-least-limit-ordinal, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, thm-schroder-bernstein, thm-transfinite-induction, def-equinumerous]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Aleph number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Aleph_number"
     - title: "Beth number (Wikipedia)"
@@ -74,13 +75,13 @@ beth half needs the Axiom of Choice, and needs it only because $2^{\kappa}$ does
 
 [L3] $\omega$ is a cardinal, and every infinite cardinal is a limit ordinal ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[lem-omega-least-limit-ordinal]], [[def-limit-ordinal]]).
 
-[L4] For a set $A$ of ordinals, $\bigcup A$ is an ordinal and is the least upper bound of $A$; ordinals satisfy trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$ ([[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]).
+[L4] For a set $A$ of ordinals, $\bigcup A$ is an ordinal (claim (e) of [[lem-ordinal-basics]]); ordinals satisfy trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$ ([[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]). Being the least upper bound of $A$ is then immediate from those two clauses: every $\beta \in A$ satisfies $\beta \subseteq \bigcup A$, and any ordinal $\gamma$ with $\beta \subseteq \gamma$ for all $\beta \in A$ satisfies $\bigcup A \subseteq \gamma$.
 
 [L5] Every ordinal is exactly one of $0$, a successor, or a limit ([[def-limit-ordinal]]).
 
 [L6] If $A \preceq B$ and $B \preceq A$ then $A \approx B$ ([[thm-schroder-bernstein]], [[def-equinumerous]]).
 
-[L7] $\lvert X \rvert$ is the least ordinal equinumerous with $X$, and $\lvert \alpha \rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]]).
+[L7] For a well-orderable set $X$, $\lvert X \rvert$ is the least ordinal equinumerous with $X$; and $\lvert \alpha \rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]]).
 
 [L8] Assuming the Axiom of Choice, $2^{\kappa} = \lvert \mathcal{P}(\kappa)\rvert$ is a cardinal and $\kappa < 2^{\kappa}$ ([[thm-cardinal-power-set-and-cantor]], [[def-cardinal-arithmetic]], [[def-axiom-of-choice]]).
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The squeeze theorem"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: literature-derived
 deps: [def-real-limit, def-sequence, lem-of-add-order, lem-of-abs-value, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: [sandwich-theorem]
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Squeeze theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Squeeze_theorem"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
@@ -77,4 +78,4 @@ rather than for computing a limit already known to exist.
 
 - Both bounding sequences must have the **same** limit. With $a_k = -1$, $b_k = 1$ and any $(x_k)$ taking values in $[-1, 1]$ the hypothesis $a_k \le x_k \le b_k$ holds and nothing whatever follows, since a bounded sequence need not converge ([[fs-bounded-implies-convergent]]).
 
-- The most common use is with $a_k = -c_k$ and $b_k = c_k$ for a null sequence $(c_k)$: if $|x_k| \le c_k$ eventually and $c_k \to 0$, then $x_k \to 0$. That special case also follows from [[lem-null-times-bounded]] whenever $x_k$ is presented as a product, but the squeeze needs no such presentation.
+- The most common use is with $a_k = -c_k$ and $b_k = c_k$ for a null sequence $(c_k)$: if $|x_k| \le c_k$ eventually and $c_k \to 0$, then $x_k \to 0$. That special case also follows from [[lem-null-times-bounded]] whenever $x_k$ is presented as a product of a null sequence and a bounded one, but the squeeze needs no such presentation.

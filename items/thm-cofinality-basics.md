@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\operatorname{cf}(\\alpha) \\le \\alpha$; $\\operatorname{cf}(0) = 0$ and $\\operatorname{cf}(\\alpha + 1) = 1$; for a limit ordinal $\\lambda$ the value $\\operatorname{cf}(\\lambda)$ is an infinite cardinal with $\\operatorname{cf}(\\operatorname{cf}(\\lambda)) = \\operatorname{cf}(\\lambda)$, so it is regular; and every cofinal subset of $\\lambda$ has cardinality at least $\\operatorname{cf}(\\lambda)$, a value that is attained"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cofinality, lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-cardinal, lem-omega-least-limit-ordinal, lem-cardinality-of-a-well-orderable-set, lem-cardinal-arithmetic-basic-laws, def-equinumerous, def-injection-surjection-bijection, def-ordinal-addition, def-cardinal-arithmetic, thm-mostowski-collapse, def-order-isomorphism, def-well-order]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cofinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinality"
     - title: "Regular cardinal (Wikipedia)"
@@ -77,7 +78,7 @@ the definition can be tested.
 
 [L7] Every well-order has a unique order type, and the isomorphism onto it is a bijection ([[thm-mostowski-collapse]], [[def-order-isomorphism]], [[def-equinumerous]]).
 
-[L8] A composition of a function with a bijection has the same range; a strictly increasing map of ordinals is injective, and satisfies $\xi \le \eta \Rightarrow g(\xi) \le g(\eta)$, both by trichotomy ([[def-injection-surjection-bijection]], [[lem-ordinal-trichotomy]]).
+[L8] Precomposing a function with a bijection onto its domain leaves its range unchanged, since $g \circ h$ has image $g[h[\mu]] = g[\beta]$ when $h : \mu \to \beta$ is onto; a strictly increasing map of ordinals is injective, and satisfies $\xi \le \eta \Rightarrow g(\xi) \le g(\eta)$, both by trichotomy ([[def-injection-surjection-bijection]], [[lem-ordinal-trichotomy]]).
 
 [L9] A cardinal $\kappa$ is infinite exactly when $\omega \le \kappa$ ([[def-cardinal-arithmetic]]).
 
@@ -105,4 +106,4 @@ the definition can be tested.
 
 **What clause (d) is for.** It converts a cofinality question into a counting question: to show $\operatorname{cf}(\lambda) \le \kappa$ it suffices to exhibit **any** cofinal subset of size $\kappa$, with no attention to its order type. That is how every cofinality on the companion page is computed, and the attainment half is what makes the bound sharp.
 
-**Where the strictly increasing witness is spent.** Twice, and both times essentially: in step 1.3, to know that a witness of successor length would have a largest value; and in step 2.1, to know that $g$ preserves $\le$, without which the composite $g \circ k$ need not be cofinal. That is why [[lem-cofinality-is-well-defined]] proves claim (b) rather than stopping at the existence of a least length.
+**Where the strictly increasing witness is spent.** Three times, and each time essentially: in step 1.3, to know that a witness of successor length would have a largest value; in step 2.1, to know that $g$ preserves $\le$, without which the composite $g \circ k$ need not be cofinal; and in step 3.1, to know that $g$ is injective, without which $g[\beta]$ need not have cardinality $\beta$. That is why [[lem-cofinality-is-well-defined]] proves claim (b) rather than stopping at the existence of a least length.

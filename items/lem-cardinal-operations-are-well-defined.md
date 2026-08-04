@@ -4,6 +4,9 @@ kind: lemma
 title: "Disjoint union, cartesian product, function space and power set respect equinumerosity, and for ordinals $\\alpha, \\beta$ the sets $\\alpha \\sqcup \\beta$ and $\\alpha \\times \\beta$ carry explicit well-orders, so their cardinalities exist in ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-cardinality-of-a-well-orderable-set, def-equinumerous, def-injection-surjection-bijection, def-well-order, def-ordinal, lem-ordinal-trichotomy, lem-ordinal-basics, def-cardinal, thm-well-ordering-theorem, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Ch. 3"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cardinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"
@@ -109,4 +110,4 @@ other set; that is where cardinal exponentiation gets its hypothesis.
 
 **The lexicographic order is not the order used for Hessenberg's theorem.** Step 1.7 well-orders $\alpha \times \beta$, which is everything claim (c) asks for. Its order type is in general much larger than $\alpha$: the lexicographic order on $\omega \times \omega$ has order type $\omega \cdot \omega$. The proof that $\lvert \kappa \times \kappa \rvert = \kappa$ for infinite $\kappa$ uses a different, cleverer well-order and is [[thm-hessenberg]].
 
-**Where the asymmetry between $\otimes$ and exponentiation comes from.** A product of two well-ordered sets is well-ordered by an order written down from the two given ones. A set of *functions* between well-ordered sets has no such canonical order: the obvious candidates need a choice at each argument. That is not a defect of this proof but the reason cardinal exponentiation is stated with the Axiom of Choice throughout this page.
+**Where the asymmetry between $\otimes$ and exponentiation comes from.** A product of two well-ordered sets is well-ordered by an order written down from the two given ones. A set of *functions* between well-ordered sets has no such canonical order: the obvious candidates need a choice at each argument. That is not a defect of this proof but the reason general cardinal exponentiation is stated with the Axiom of Choice on this page; the exponential unit laws ([[lem-cardinal-arithmetic-basic-laws]]) and the finite case ([[thm-cardinal-arithmetic-agrees-with-finite-counting]]) are choice-free, because the function sets they count carry a canonical well-order.

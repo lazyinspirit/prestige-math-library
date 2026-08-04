@@ -4,6 +4,9 @@ kind: lemma
 title: "For every set $A$ the Hartogs number $\\aleph(A)$ is a cardinal, and for every cardinal $\\kappa$ it is the least cardinal strictly above $\\kappa$; this is a theorem of ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-hartogs, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, lem-cardinality-of-a-well-orderable-set, lem-cardinal-arithmetic-basic-laws, def-injection-surjection-bijection]
 justified_by: []
 aliases: [lem-successor-cardinal]
@@ -12,19 +15,11 @@ short: "$\\aleph(\\kappa)$ is the least cardinal above $\\kappa$"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Definition 3.8"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Hartogs number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hartogs_number"
     - title: "Successor cardinal (Wikipedia)"
@@ -88,4 +83,4 @@ comparison is not decided by the axioms in use here.
 
 **No power set is involved.** [[thm-hartogs]] builds $\aleph(A)$ from the well-ordered subsets of $A$, so the successor cardinal is obtained without ever forming $\mathcal{P}(A)$ as a size. That separation is what makes the aleph hierarchy a ZF construction while the beth hierarchy is not.
 
-**The notation collides with the ordinal successor, and this page keeps them apart.** $\alpha^{+} = \alpha \cup \{\alpha\}$ is the **ordinal** successor ([[def-ordinal]]) and is almost never a cardinal: an infinite cardinal is a limit ordinal, so $\kappa \cup \{\kappa\}$ is not one. The cardinal successor is $\aleph(\kappa)$, which is much larger. Where an item on this page writes the superscript on an ordinal letter, as [[lem-cardinality-of-a-well-orderable-set]] does with $\alpha^{+}$, it carries the published ordinal meaning $\alpha \cup \{\alpha\}$; the cardinal successor is always written $\aleph(\kappa)$ on this page.
+**The notation collides with the ordinal successor, and this page keeps them apart.** $\alpha^{+} = \alpha \cup \{\alpha\}$ is the **ordinal** successor ([[def-ordinal]]) and is almost never a cardinal: an infinite cardinal is a limit ordinal, so $\kappa \cup \{\kappa\}$ is not one. The cardinal successor is $\aleph(\kappa)$, which is much larger. Where an item on this page writes the superscript on an ordinal letter, as [[lem-cardinality-of-a-well-orderable-set]] does with $\alpha^{+}$, it carries the published ordinal meaning $\alpha \cup \{\alpha\}$. This item writes the cardinal successor as $\aleph(\kappa)$ throughout; the abbreviation $\kappa^{+} := \aleph(\kappa)$, on a cardinal letter only, is introduced later on this page, and the superscript on an ordinal letter keeps the ordinal meaning there too.

@@ -17,7 +17,7 @@ binds Audit-Beta and Alpha to **GPT 5.6 Sol through the Codex subscription**
 at `xhigh` with a 1,000,000-token context window. Independent readers and
 proof-refuters also use **GPT 5.6 Sol**. Alpha must recover
 the durable prior-session audit record before acting. Judge lanes are DeepSeek
-V4 Pro plus fresh GPT 5.6 Terra (`JUDGE_LINEUP=deepseek+terra`) through the
+V4 Pro plus fresh Claude Sonnet 5 (`JUDGE_LINEUP=deepseek+sonnet`) through the
 same independent 16-call-per-model scheduler used by the build.
 A non-Anthropic session may run the ORCHESTRATOR duties (gates, sweeps,
 ledgers, commits, reports) — the judge lanes are subprocesses and work from

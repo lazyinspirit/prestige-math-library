@@ -4,6 +4,9 @@ kind: lemma
 title: "Tube lemma: if $K$ is compact and an open $N \\subseteq X \\times Z$ contains $K \\times \\{z_0\\}$, then $N$ contains $K \\times W$ for some open $W \\ni z_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-product-topology, def-topology-basis-subbasis, thm-basis-criterion, def-topological-space, def-subspace-topology-top]
 justified_by: []
 aliases: [lem-tube-lemma-top]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -83,7 +82,7 @@ be selected afterwards.
 
 ## Remarks
 
-**What the lemma is for.** It is the step that makes a product of two compact spaces compact ([[thm-finite-products-of-compact-spaces]]): a cover of $X \times Z$ restricted to the slice $X \times \{z_0\}$ can be thinned by compactness of $X$, and the tube lemma is what turns the resulting cover of the slice into a cover of a whole open band $X \times W$ around it. Compactness of $K$ is essential and cannot be weakened to closedness: the union of finitely many basic boxes over a non-compact $K$ need not contain any tube.
+**What the lemma is for.** It is the step that makes a product of two compact spaces compact ([[thm-finite-products-of-compact-spaces]]): a cover of $X \times Z$ restricted to the slice $X \times \{z_0\}$ can be thinned by compactness of $X$, and the tube lemma is what turns the resulting cover of the slice into a cover of a whole open band $X \times W$ around it. Compactness of $K$ is essential and cannot be weakened to closedness: an open set containing the slice over a non-compact $K$ need not contain any tube. Finiteness is what does the work — a union of *finitely many* basic boxes containing the slice always contains a tube, since intersecting the finitely many second factors that meet $z_0$ leaves an open $W \ni z_0$ — and it is compactness of $K$ that produces the finite subfamily.
 
 **Why the pairs are carried along.** A proof that says "for each $x \in K$ choose open $U_x \ni x$ and $V_x \ni z_0$ with $U_x \times V_x \subseteq N$" has selected a pair for every point of $K$ at once, which for an arbitrary compact $K$ is the Axiom of Choice. Indexing the cover by the pairs themselves removes the selection: the compactness criterion hands back finitely many *indices*, and an index here already carries its own $V$.
 

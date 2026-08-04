@@ -4,6 +4,9 @@ kind: theorem
 title: "Tarski: the Axiom of Choice is equivalent to the statement that $A \\times A \\approx A$ for every infinite set $A$, so extending Hessenberg's theorem from the alephs to arbitrary sets is exactly as strong as choice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-hessenberg, thm-hartogs, lem-successor-cardinal-exists, cor-ac-iff-well-ordering, thm-well-ordering-theorem, def-axiom-of-choice, def-equinumerous, def-injection-surjection-bijection, def-cardinal, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, lem-cardinal-arithmetic-basic-laws, def-cardinal-arithmetic, thm-cardinal-arithmetic-agrees-with-finite-counting, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-well-order, def-countable, def-finite-cardinality, lem-pigeonhole, thm-induction-principle]
 justified_by: []
 aliases: [thm-tarski-a-times-a]
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "A. Tarski, Sur quelques théorèmes qui équivalent à l'axiome du choix (1924)"
+      url: "https://pldml.icm.edu.pl/pldml/element/bwmeta1.element.bwnjournal-article-fmv5i1p18bwm"
     - title: "Tarski's theorem about choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Tarski%27s_theorem_about_choice"
     - title: "Hartogs number (Wikipedia)"
@@ -58,7 +59,7 @@ theorem, it is choice itself.
 
 [L3] Over ZF the Axiom of Choice is equivalent to the well-ordering theorem ([[cor-ac-iff-well-ordering]], [[def-well-order]]); and assuming the Axiom of Choice every set carries a well-order ([[thm-well-ordering-theorem]]).
 
-[L4] For a well-orderable $X$: $X \approx \lvert X \rvert$, the value is a cardinal, equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]]); a cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]]).
+[L4] For a well-orderable $X$: $X \approx \lvert X \rvert$, the value is a cardinal, equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]]); a cardinal $\kappa$ is finite when $\kappa \in \omega$ and infinite when $\omega \subseteq \kappa$, that is $\omega \le \kappa$ ([[def-cardinal-arithmetic]]).
 
 [L5] $\times$ respects $\approx$ ([[lem-cardinal-operations-are-well-defined]]); and for cardinals $\kappa \le \lambda$ iff $\kappa \preceq \lambda$ ([[lem-cardinal-arithmetic-basic-laws]]).
 

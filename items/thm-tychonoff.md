@@ -4,6 +4,9 @@ kind: theorem
 title: "Tychonoff's theorem: an arbitrary product of compact spaces is compact in the product topology, assuming the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-alexander-subbase-lemma, def-compact-space, def-product-topology, def-topology-basis-subbasis, def-axiom-of-choice, thm-zorn, def-topological-space]
 justified_by: []
 aliases: [thm-tychonoff-theorem]
@@ -14,15 +17,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexander_subbase_theorem"
     - title: "J. Munkres, Topology, 2nd ed., §37"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 08ZU"
+      url: "https://stacks.math.columbia.edu/tag/08ZU"
 pipeline_run: null
 ---
 
@@ -81,7 +82,7 @@ once directly at step 2.1, to produce a point of a product of nonempty sets.
 
 ## Remarks
 
-**Why a subbasic cover is easy and an arbitrary cover is not.** A member of $\mathcal{G}$ restricts exactly one coordinate, so a subbasic cover of $P$ sorts itself into the families $\mathcal{U}_i$, one per coordinate, and the whole argument is the observation that one of those families must already cover its own factor. An arbitrary open cover of $P$ mixes finitely many coordinates in each member and admits no such sorting, which is why the theorem is proved through [[thm-alexander-subbase-lemma]] rather than directly.
+**Why a subbasic cover is easy and an arbitrary cover is not.** A member of $\mathcal{G}$ restricts exactly one coordinate, so a subbasic cover of $P$ sorts itself into the families $\mathcal{U}_i$, one per coordinate, and the whole argument is the observation that one of those families must already cover its own factor. A member of an arbitrary open cover is a union of basic sets, each restricting its own finite set of coordinates, so such a member need not be determined by any finite set of coordinates and the cover admits no such sorting; that is why the theorem is proved through [[thm-alexander-subbase-lemma]] rather than directly.
 
 **The theorem implies the Axiom of Choice**, so the hypothesis cannot be dropped; that implication is not proved in this library, and the exact form it takes is recorded in [[rem-schechter-kelley-tychonoff]], which corrects the classical derivation. The choice ledger for this page is [[rem-compactness-conventions-and-choice-ledger]].
 

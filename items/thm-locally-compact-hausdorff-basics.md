@@ -4,6 +4,9 @@ kind: theorem
 title: "In a locally compact Hausdorff space every point has a neighbourhood base of compact sets, every open subspace and every closed subspace is locally compact, every open set around a point contains an open set with compact closure inside it, and every compact set sits inside an open set with compact closure"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-locally-compact-space, def-compact-space, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, def-neighbourhood-top, def-interior-closure-boundary-top, thm-closure-characterisation-top, def-subspace-topology-top, def-hereditary-property, lem-compactness-of-a-subspace-is-ambient, def-topological-space]
 justified_by: []
 aliases: [thm-locally-compact-hausdorff]
@@ -12,16 +15,6 @@ short: "locally compact Hausdorff basics"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -29,6 +22,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "J. Munkres, Topology, 2nd ed., §29"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 08ZQ"
+      url: "https://stacks.math.columbia.edu/tag/08ZQ"
+    - title: "I. Khatchatourian, Compactifications (MAT327 notes)"
+      url: "https://www.math.toronto.edu/ivan/mat327/docs/notes/19-compactifications.pdf"
 pipeline_run: null
 ---
 
@@ -113,4 +110,4 @@ members rather than indices.
 
 **Claim 2 splits into two halves of different strength.** The closed half is true in any locally compact space and its proof is three lines; the open half runs through claim 1 and therefore through the Hausdorff hypothesis. Together they do not give heredity: an arbitrary subspace of a locally compact Hausdorff space need not be locally compact, and [[fs-local-compactness-is-hereditary]] carries the witness.
 
-**Claim 4 is what the one-point compactification uses.** It says a compact set can always be padded to an open set that is still "bounded" in the only sense available here, namely having compact closure, and that padding is the standard route to separating a point of $X$ from the added point $\infty$ ([[thm-one-point-compactification-properties]]).
+**Claim 4 pads a compact set, not a point.** It says a compact set can always be padded to an open set that is still "bounded" in the only sense available here, namely having compact closure. Separating a single point of $X$ from the added point $\infty$ costs less than that: [[thm-one-point-compactification-properties]] does it at step 1.4 from claim 1 alone, taking a compact neighbourhood of the point and using that it is closed.

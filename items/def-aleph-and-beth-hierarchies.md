@@ -4,6 +4,9 @@ kind: definition
 title: "The successor cardinal $\\kappa^{+}$, the alephs $\\aleph_\\alpha$, the beths $\\beth_\\alpha$, successor and limit cardinals, and the identifications $\\aleph_0 = \\omega$ and $\\aleph_1 = \\omega_1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-hartogs, def-cardinal, def-cardinal-arithmetic, def-limit-ordinal, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-ordinal, def-countable, rem-ordinal-versus-cardinal-exponentiation]
 justified_by: []
 aliases: [def-aleph, def-beth, def-successor-cardinal]
@@ -24,6 +27,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Aleph number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Aleph_number"
     - title: "Beth number (Wikipedia)"

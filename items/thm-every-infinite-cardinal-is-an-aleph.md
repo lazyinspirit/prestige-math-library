@@ -4,7 +4,10 @@ kind: theorem
 title: "Every infinite cardinal is $\\aleph_\\alpha$ for exactly one ordinal $\\alpha$, in ZF; and, assuming the Axiom of Choice, every infinite set is equinumerous with exactly one aleph"
 status: published
 origin: session
-deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, lem-omega-least-limit-ordinal, def-limit-ordinal, thm-well-ordering-theorem, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, def-countable, def-equinumerous]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, lem-omega-least-limit-ordinal, def-limit-ordinal, thm-well-ordering-theorem, def-axiom-of-choice, lem-cardinality-of-a-well-orderable-set, def-countable, def-equinumerous, def-cardinal-arithmetic]
 justified_by: []
 aliases: []
 landmark: true
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Theorem 3.11"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Aleph number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Aleph_number"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"
@@ -60,7 +61,7 @@ a cardinality at all.
 
 [L4] Every ordinal is exactly one of $0$, a successor, or a limit ([[def-limit-ordinal]]); $\omega$ is the least limit ordinal ([[lem-omega-least-limit-ordinal]]).
 
-[L5] A cardinal $\kappa$ is infinite exactly when $\omega \le \kappa$, and $\omega$ is a cardinal ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-cardinal]]).
+[L5] A cardinal $\kappa$ is finite when $\kappa \in \omega$ and infinite when $\omega \subseteq \kappa$, that is $\omega \le \kappa$ ([[def-cardinal-arithmetic]]); and $\omega$ is a cardinal (claim (a) of [[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-cardinal]]).
 
 [L6] For a well-orderable $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, $X \approx \lvert X \rvert$, it is a cardinal, and $\lvert \alpha \rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]]).
 
@@ -88,4 +89,4 @@ a cardinality at all.
 
 **Clause (b) is exactly as strong as the well-ordering theorem.** If every infinite set were equinumerous with an aleph then every set would be well-orderable, since an aleph is an ordinal, and that is equivalent to the Axiom of Choice ([[cor-ac-iff-well-ordering]]). So clause (b) is not a theorem of ZF, and it is stated with its hypothesis rather than proved.
 
-**What is enumerated and what is not.** The alephs enumerate the infinite cardinals in increasing order. They do **not** enumerate the values of the power operation: $2^{\aleph_0}$ is an aleph by clause (a), but which one is not settled by the axioms in use here, and nothing on this page or its companion asserts a value.
+**What is enumerated and what is not.** The alephs enumerate the infinite cardinals in increasing order. They do **not** enumerate the values of the power operation: assuming the Axiom of Choice, so that $2^{\aleph_0}$ is a cardinal at all, it is an aleph by clause (a), but which one is not settled by the axioms in use here, and nothing on this page or its companion asserts a value.

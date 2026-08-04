@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\kappa < \\lambda$ implies $\\kappa^{\\mu} < \\lambda^{\\mu}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-hessenberg, thm-cardinal-power-set-and-cantor, lem-successor-cardinal-exists, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-aleph-and-beth-hierarchies, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-axiom-of-choice, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Lemma 3.19"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "Cardinality of the continuum (Wikipedia)"
@@ -42,8 +43,8 @@ $$\kappa < \lambda \quad \Longrightarrow \quad \kappa^{\mu} < \lambda^{\mu} .$$
 
 The claim is plausible because the **weak** form is true —
 $\kappa \le \lambda$ does give $\kappa^{\mu} \le \lambda^{\mu}$
-([[lem-cardinal-arithmetic-basic-laws]]) — and because strictness does hold in
-the other slot, where $\kappa < 2^{\kappa}$ at every cardinal
+([[lem-cardinal-arithmetic-basic-laws]]) — and because Cantor's theorem supplies
+the different strict inequality $\kappa < 2^{\kappa}$ at every cardinal
 ([[thm-cardinal-power-set-and-cantor]]). It fails already at
 $\kappa = \aleph_0$, $\lambda = \aleph_1$, $\mu = \aleph_0$, where both powers
 collapse to $2^{\aleph_0}$.
@@ -80,6 +81,6 @@ collapse to $2^{\aleph_0}$.
 
 **Why the collapse happens.** For an infinite exponent $\mu$: once the base is at least $2$ and at most $2^{\mu}$, raising it to the power $\mu$ gives the same value, because $(2^{\mu})^{\mu} = 2^{\mu \otimes \mu} = 2^{\mu}$ squeezes the chain shut. So for infinite $\mu$ strict monotonicity in the base can only survive where the base is allowed to exceed $2^{\mu}$, and it fails on the whole interval below it; for finite exponents $\ge 1$ the collapse does not occur, which is why the witness above takes $\mu = \aleph_0$. That is a fact about [[thm-hessenberg]] as much as about exponentiation.
 
-**The weak form is not damaged.** $\kappa \le \lambda \Rightarrow \kappa^{\mu} \le \lambda^{\mu}$ remains true, and so does strictness in the exponent slot in the one case proved on this page, $\kappa < 2^{\kappa}$. What fails is the strict form in the base, and it fails at the smallest infinite instance.
+**The weak form is not damaged.** $\kappa \le \lambda \Rightarrow \kappa^{\mu} \le \lambda^{\mu}$ remains true, and so does Cantor's strict inequality $\kappa < 2^{\kappa}$. What fails is the strict form in the base, and it fails at the smallest infinite instance.
 
 **A second casualty of the same computation.** The chain in step 2.1 also shows $\aleph_0^{\aleph_0} = 2^{\aleph_0}$, so raising $\aleph_0$ to its own power adds nothing beyond taking the power set of $\omega$. The companion page carries that computation on its own, together with the corresponding value for $\lvert \mathbb{R}^{\mathbb{R}} \rvert$.

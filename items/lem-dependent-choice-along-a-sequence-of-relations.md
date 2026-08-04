@@ -4,7 +4,10 @@ kind: lemma
 title: "Dependent choice along a sequence of relations: if $R_n$ is entire on $A$ for every $n$, then from any $a$ there is a sequence with $a_n \\mathbin{R_n} a_{n+1}$"
 status: published
 origin: session
-deps: [def-dependent-choice, def-sequence, def-natural-numbers, thm-induction-principle]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-dependent-choice, def-sequence-convergence-top, def-natural-numbers, thm-induction-principle]
 justified_by: []
 aliases: [lem-stagewise-dependent-choice]
 landmark: false
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -40,7 +39,7 @@ relations on $A$, indexed by $\mathbb{N}$ ([[def-natural-numbers]]), such that
 $$\text{for every } n \in \mathbb{N} \text{ and every } u \in A \text{ there is } v \in A \text{ with } u \mathbin{R_n} v .$$
 
 Then for every $a_0 \in A$ there is a function $a : \mathbb{N} \to A$
-([[def-sequence]]) with
+([[def-sequence-convergence-top]]) with
 
 $$a(0) = a_0 \qquad \text{and} \qquad a(n) \mathbin{R_n} a(n+1) \ \text{ for every } n \in \mathbb{N} .$$
 
@@ -58,7 +57,7 @@ proof below removes the gap by carrying the stage inside the set.
 
 [A1] For every $n \in \mathbb{N}$ and every $u \in A$ there is $v \in A$ with $u \mathbin{R_n} v$.
 
-[L1] Dependent choice: for every nonempty set $X$, every relation $S$ on $X$ that is entire on $X$ — meaning every element of $X$ is related to some element of $X$ — and every $p \in X$, there is a function $x : \mathbb{N} \to X$ with $x_0 = p$ and $x_n \mathbin{S} x_{n+1}$ for every $n \in \mathbb{N}$ ([[def-dependent-choice]], [[def-sequence]]).
+[L1] Dependent choice: for every nonempty set $X$, every relation $S$ on $X$ that is entire on $X$ — meaning every element of $X$ is related to some element of $X$ — and every $p \in X$, there is a function $x : \mathbb{N} \to X$ with $x_0 = p$ and $x_n \mathbin{S} x_{n+1}$ for every $n \in \mathbb{N}$ ([[def-dependent-choice]], [[def-sequence-convergence-top]]).
 
 [L2] $\mathbb{N}$ contains $0$ and every natural has the successor $n+1$ ([[def-natural-numbers]]).
 

@@ -1,0 +1,40 @@
+# audit-alpha/a6 2026-08-04T14:52:21.230Z
+
+## stdout
+The background dispatch already notifies me on completion, so no second watcher is needed. Here's where wave 4's A6 stands while the lane runs.
+
+**Recovery is complete and the picture is different from what the driver reported.**
+
+The halt that sent this dispatch back to A6 named `thm-sequential-criterion-for-function-limits` / `cited-not-in-deps`. That is not the failure. `depcheck.mjs:365` raises `cited-not-in-deps` through `warn()`, never `err()` — it is a warning, and there are 114 of them standing corpus-wide. The actual failure is a single ERROR:
+
+```
+[published-unaudited] items/ex-the-sorgenfrey-line-is-lindelof-and-its-square-is-not.md
+```
+
+**The cause is a general driver defect, not a wave-4 one.** `run-wave.mjs:508` builds the halt reason from `String(r.detail).split('\n')[0]` — the *first* line of a failing gate's output. `depcheck` prints all warnings before its error summary, so **every** `depcheck` gate failure, in every wave and every level, is misattributed to whichever warning happens to print first. That is now the third driver defect on wave 4's A10 list.
+
+**What actually remains.** Dispatch #2 closed A6 substantively — 41 fatal adjudications applied, 32 Alpha repairs, 9/9 cross-batch edges, 77/77 `risk_review` records — but it exited at 00:39 having only *templated* the round-3 certifier prompt. That lane has a `.prompt.md` and no `.log` or `.result.json`, unlike every other lane in the wave. So one repair in this wave is uncertified, I authored it, and I cannot certify my own work. Stamp reconciliation confirms it: **90 of 91 scoped items carry `verification.verified`; the Sorgenfrey item is the only gap.** One blocker, not two — the red gate and the missing certification are the same fact.
+
+The lane is now running (two `codex` processes alive, read-only sandbox, Sol — a different family from me).
+
+**Every other A6 gate is green, re-run by me rather than taken from dispatch #2's report:**
+
+| gate | result |
+|---|---|
+| `precheck.mts` | 2,111 checked, 0 failing |
+| `proof-contract --strict` | 0 errors, 0 warnings, 77/77 |
+| `finite-smoke` · `risk-report --require-reviewed` | 0 errors · 0 errors, 77 routed |
+| `content-policy --audit --ledger` ×3 | 91 scoped, 0 errors, 0 warnings |
+| `genrisk --receipt` · `impact-audit --receipt` | exit 0 · exit 0 |
+| `fwdcheck` `extcheck` `citecheck` `rendercheck` `prosecheck` `depsource` | all exit 0 |
+| `depcheck` | 1 ERROR — the Sorgenfrey stamp |
+
+I also read the round-3 repair against its targets myself. [L3] now says ℝ is a totally ordered field with the least-upper-bound property, hence a complete ordered field; `thm-reals-ordered-field` states "makes $\mathbb{R}$ a totally ordered field" and `cor-cauchy-reals-lub-complete` states the least-upper-bound property and the complete-ordered-field conclusion verbatim. Both are in `deps`. My reading is that it is exact — but my reading is not the certification, which is the point of the lane.
+
+One thing I checked and deliberately left alone: four items still carry legacy `glm-5.2` judge blocks from 2026-07-29. All four are the trailing-newline items dispatch #2 established are substantively pure retags, and `audit-split.mjs`'s own pure/material definition treats a frontmatter retag as pure. Kept, on the wave-3 precedent.
+
+I have written no `verification.audited`, run no judge lane, and applied no judge stamp. On CERTIFY I write the `verification.verified` stamp and close A6; on REFUSE I adjudicate the finding from disk and repair before re-certifying.
+
+
+## stderr
+

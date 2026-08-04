@@ -4,6 +4,9 @@ kind: theorem
 title: "Every natural number and $\\omega$ are cardinals, every infinite cardinal is a limit ordinal, and on the natural numbers the cardinal operations are the published finite counting operations, with $\\lvert A \\rvert$ in the finite sense equal to $\\lvert A \\rvert$ in the cardinal sense"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cardinal-arithmetic, lem-cardinality-of-a-well-orderable-set, def-finite-cardinality, thm-sum-rule, thm-product-rule, thm-cardinality-of-a-set-of-functions, def-nat-power, lem-pigeonhole, def-cardinal, lem-omega-least-limit-ordinal, thm-ordinal-arithmetic-agrees-on-omega, def-countable, def-natural-numbers, lem-nat-order-is-membership, lem-nat-nonzero-is-successor, thm-omega-is-peano-system, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number"
     - title: "Finite set (Wikipedia)"
@@ -69,7 +70,7 @@ and none is needed below.
 
 [L2] $\mathbb{N}$ is a transitive set and $m \in n$ if and only if $m < n$, so $n = \{m \in \mathbb{N} : m < n\}$ ([[lem-nat-order-is-membership]]).
 
-[L3] Every natural number is an ordinal, $\omega$ is an ordinal, and $\omega$ is the least limit ordinal ([[lem-omega-least-limit-ordinal]], [[def-ordinal]], [[def-limit-ordinal]]).
+[L3] Every natural number is an ordinal, and $\omega$ is an ordinal ([[lem-omega-least-limit-ordinal]] claim (ii), [[def-ordinal]]).
 
 [L4] Every element of an ordinal is an ordinal, $\alpha \notin \alpha$, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and ordinals satisfy trichotomy ([[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]).
 
@@ -89,9 +90,9 @@ and none is needed below.
 
 **Proof technique:** direct.
 
-1.1 Let $n \in \mathbb{N}$ and suppose $\alpha \in n$ with $\alpha \approx n$; then $\alpha \in \mathbb{N}$ by [L2], so $\alpha = n$ by [L1], giving $n \in n$, which [L4] forbids; so $n$ is a cardinal. [L1, L2, L4]
+1.1 Let $n \in \mathbb{N}$ and suppose $\alpha \in n$ with $\alpha \approx n$; then $\alpha \in \mathbb{N}$ by [L2], so $\alpha = n$ by [L1], giving $n \in n$, which [L4] forbids; so $n$ is a cardinal. [L1, L2, L3, L4]
 
-1.2 Suppose $\alpha \in \omega$ with $\alpha \approx \omega$; then $\alpha \in \mathbb{N}$ and $\mathbb{N} \approx \alpha$, which [L1] forbids; so $\omega$ is a cardinal, and claim (a) holds. [L1, L4]
+1.2 Suppose $\alpha \in \omega$ with $\alpha \approx \omega$; then $\alpha \in \mathbb{N}$ and $\mathbb{N} \approx \alpha$, which [L1] forbids; so $\omega$ is a cardinal, and claim (a) holds. [L1, L3, L4]
 
 1.3 Let $\kappa$ be an infinite cardinal, so $\omega \subseteq \kappa$; then $\kappa \ne 0$, and if $\kappa = \beta \cup \{\beta\}$ for an ordinal $\beta$ then $\beta \in \omega$ is impossible, since $\kappa = \sigma(\beta) \in \omega$ by [L8] would give $\kappa \in \kappa$ against [L4], so $\omega \subseteq \beta$ by [L4]; the map sending $\beta$ to $0$, each $j \in \omega$ to $\sigma(j)$, and each $\xi \in \beta$ with $\omega \subseteq \xi$ to itself is then a bijection $\kappa \to \beta$, its three pieces having the pairwise disjoint images $\{0\}$, $\omega \setminus \{0\}$ and $\{\xi \in \beta : \omega \subseteq \xi\}$ by [L8]; so $\beta \approx \kappa$ with $\beta \in \kappa$, contradicting that $\kappa$ is a cardinal, and $\kappa$ is therefore a limit ordinal, which is claim (b). [L4, L8, L9]
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{N} \\times \\{a,b\\}$ with the indiscrete topology on the second factor is limit point compact and not countably compact, so the hypothesis that singletons are closed is not decoration"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compactness-variants, def-compact-space, def-standard-topologies, def-product-topology, def-topological-space, def-interior-closure-boundary-top, def-neighbourhood-top, thm-compactness-variants-hierarchy, def-countable, def-natural-numbers]
 justified_by: []
 aliases: []

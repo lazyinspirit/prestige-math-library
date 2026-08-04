@@ -4,6 +4,9 @@ kind: definition
 title: "Open cover, subcover, and compact topological space; a compact subset is a subspace that is compact in its own right"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-subspace-topology-top, def-standard-topologies, def-countable, def-metric-compactness]
 justified_by: []
 aliases: [def-compact-topological-space, def-open-cover-top]
@@ -12,15 +15,11 @@ short: "open cover, compact space"
 verification:
   precheck: n/a
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -30,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cover_(topology)"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Section 5.12: Quasi-compact spaces and maps"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 ## Definition
@@ -59,10 +60,11 @@ The last clause speaks about the subspace $(A, \mathcal{T}_A)$ and its own open
 sets, not about families of open subsets of the ambient $X$. The two readings do
 agree, but that is a theorem and not a convention: it is
 [[lem-compactness-of-a-subspace-is-ambient]], and no item of this library may use
-the ambient reading without citing it. Taking the intrinsic reading as the
-definition is what makes "compact" a property of the space $(A, \mathcal{T}_A)$
-alone, so that a set compact in one ambient space is compact in every other one
-in which it sits as a subspace. This is exactly the convention already fixed for
+the ambient reading without citing it. Taking the intrinsic reading makes
+compactness a property of the topological space $(A, \mathcal{T}_A)$ alone.
+Hence it is preserved when $A$ is embedded homeomorphically as a subspace, or
+when another ambient space induces the same topology on $A$; it need not be
+preserved if the induced topology changes. This is exactly the convention already fixed for
 metric spaces by [[def-metric-compactness]], and the agreement of that
 definition with this one is [[thm-compactness-agrees-with-metric-compactness]].
 

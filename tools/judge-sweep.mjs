@@ -1,9 +1,10 @@
 // Run hash-attested paired judge calls for every item on selected plan pages.
 // Workflow rule: the initial Step-7 call supplies every completed-level A page;
 // --items is only for Alpha-selected rejudges after a material repair.
-// Each model has its own cross-process pool: 24 DeepSeek slots, 16 Terra. They
-// start their next item as soon as one of their own slots is free, without
-// waiting for the other model on the same item. At most 40 calls run combined.
+// Each model has its own cross-process pool: 16 slots per lane (owner,
+// 2026-08-05; DeepSeek was briefly 24). They start their next item as soon as
+// one of their own slots is free, without waiting for the other model on the
+// same item. At most 32 calls run combined under a two-model lineup.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
@@ -49,9 +50,12 @@ const OPUS = "claude-opus-5";
 // concurrency (a capacity refusal, not a verdict; 101 null verdicts).
 const SONNET = "claude-sonnet-5";
 // JUDGE_LINEUP mirrors tools/judge.mts. Both the per-level build and the
-// published-page audit (AUDIT-WORKFLOW.md) run deepseek+terra — the audit lane
-// went Opus -> Sonnet -> Terra on 2026-08-02, and existing Opus/Sonnet ledger
-// rows are append-only historical evidence, not current coverage. Those two
+// published-page audit (AUDIT-WORKFLOW.md) run deepseek+sonnet — owner
+// instruction 2026-08-04, moving the second lane Terra -> Sonnet 5. The lane
+// has gone Opus -> Sonnet -> Terra -> Sonnet; every earlier ledger row is
+// append-only historical evidence, not current coverage, INCLUDING the older
+// Sonnet rows (a lineup returning to a model does not inherit its own retired
+// verdicts — the frozen context they were cast against is gone). The other
 // lineups stay selectable for a deliberate experiment only. The child judge
 // inherits the same env var, so the sweep and its judges can never disagree
 // about the active lineup.
@@ -60,7 +64,7 @@ const LINEUPS = Object.freeze({
   "deepseek+opus": [DEEPSEEK, OPUS],
   "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
 const supportedModels = LINEUPS[lineupName];
 if (!supportedModels) {
   throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
@@ -141,8 +145,8 @@ const currentContextHash = (id) => {
 // once per item rather than parsing the same A/B-pair context twice before any
 // API call can start.
 const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
-// Owner policy, 2026-08-01: cap each judge lane independently — 24 DeepSeek,
-// 16 for every other lane (raised for DeepSeek only, owner 2026-08-03).
+// Owner policy, 2026-08-01: cap each judge lane independently — 16 per lane,
+// so at most 32 calls combined under a two-model lineup.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so the Opus lane's pool
 // is disjoint from Terra's and a lineup switch cannot double-book a cap.
@@ -150,8 +154,15 @@ const MODEL_CONCURRENCY = Object.freeze({
   // DeepSeek gates every sweep: at the end of wave 1b's A7, Terra had
   // finished all 174 while DeepSeek still had 36 pending with all of its
   // slots held. Its per-call latency, not its throughput, sets wall clock.
-  // Raised 16 -> 24 (owner, 2026-08-03); Terra unchanged.
-  [DEEPSEEK]: 24,
+  // That is why it was raised 16 -> 24 (owner, 2026-08-03), and it is BACK to
+  // 16 (owner, 2026-08-05) for a reason latency does not see: MEMORY. Every
+  // lane call is its own node+tsx process, and under the deepseek+sonnet
+  // lineup the other lane's 16 calls are 16 full `claude -p` processes. Wave 4
+  // measured the sweep at 3.9 GB with a 4.6 GB peak on a 7.8 GB host, past the
+  // unit's MemoryHigh=4G and closing on MemoryMax=5G. A lane killed by the
+  // kernel returns a capacity refusal, and a capacity refusal is not a verdict
+  // — the exact failure that retired the Opus lane with 101 nulls on wave 0.
+  [DEEPSEEK]: 16,
   [TERRA]: 16,
   [OPUS]: 16,
   [SONNET]: 16,

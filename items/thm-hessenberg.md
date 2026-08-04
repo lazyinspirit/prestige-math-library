@@ -4,6 +4,9 @@ kind: theorem
 title: "Hessenberg: $\\kappa \\otimes \\kappa = \\kappa$ for every infinite cardinal $\\kappa$, proved in ZF from the canonical well-order of $\\kappa \\times \\kappa$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, lem-cardinal-operations-are-well-defined, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-well-order, thm-transfinite-induction, thm-mostowski-collapse, def-order-isomorphism, def-initial-segment, lem-omega-least-limit-ordinal, def-limit-ordinal, def-equinumerous, def-injection-surjection-bijection, thm-n-cross-n-countable, def-countable]
 justified_by: []
 aliases: [thm-cardinal-square]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Theorem 3.15"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "Aleph number (Wikipedia)"

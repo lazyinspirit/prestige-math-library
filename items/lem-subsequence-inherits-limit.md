@@ -4,6 +4,9 @@ kind: lemma
 title: "Subsequences inherit the limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-sequence, def-real-limit, lem-index-map-grows, lem-limit-unique, thm-nat-linear-order, def-nat-order]
 justified_by: []
 aliases: []
@@ -13,18 +16,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
+    - title: "CMU 21-269 notes, Compactness — subsequences"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/compactness.html"
     - title: "Subsequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Subsequence"
     - title: "Limit of a sequence (Wikipedia)"
@@ -49,7 +52,7 @@ different limits, then $(x_k)$ does not converge.
 
 **Given:** A sequence $(x_k)$ of reals converging to a real $x$, and a strictly increasing $n : \mathbb{N} \to \mathbb{N}$, so that $(x_{n_k})$ is a subsequence of $(x_k)$ ([[def-sequence]], [[def-real-limit]]).
 
-[L1] Convergence, quantified over rational $\varepsilon > 0$ ([[def-real-limit]]).
+[L1] $(x_k)$ converges to $x$ when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$ with $|x_k - x| < \hat\varepsilon$ for all $k \ge K$ ([[def-real-limit]]).
 
 [L2] Growth of the index map: $n_k \ge k$ for every $k$ ([[lem-index-map-grows]]).
 
@@ -75,4 +78,4 @@ different limits, then $(x_k)$ does not converge.
 
 - The converse of the first claim is false: **one** convergent subsequence says nothing about the sequence ([[fs-subsequence-convergence-implies-convergence]]). It is the divergence test, not the convergence of a single subsequence, that is usable.
 
-- The divergence test is the standard way to show a concrete sequence diverges, and it is how [[fs-bounded-implies-convergent]] is refuted. The opposite direction, extracting a convergent subsequence from a bounded sequence, is Bolzano-Weierstrass; it is **not proved anywhere in this library as things stand**, being the subject of the next page of this track, planned and not yet written.
+- The divergence test is the standard way to show a concrete sequence diverges, and it is how [[fs-bounded-implies-convergent]] is refuted. The opposite direction, extracting a convergent subsequence from a bounded sequence, is Bolzano-Weierstrass; it is **not available at this point in the reading order**, being the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, where it is proved.

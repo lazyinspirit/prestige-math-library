@@ -4,6 +4,9 @@ kind: theorem
 title: "Every successor ordinal is compact in its order topology and every limit ordinal is not; and, assuming countable choice, $\\omega_1$ is countably compact and sequentially compact while $\\omega_1 + 1$ is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-order-topology-on-an-ordinal, def-compact-space, def-compactness-variants, thm-compactness-variants-hierarchy, def-order-topology-on-a-linearly-ordered-set, def-topology-basis-subbasis, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal-addition, def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, def-countable, lem-countable-iff-surjection-from-n, lem-subset-of-countable, def-sequence-convergence-top, def-sequence, lem-index-map-grows, thm-transfinite-induction, def-topological-space]
 justified_by: []
 aliases: [thm-ordinal-space-compactness]

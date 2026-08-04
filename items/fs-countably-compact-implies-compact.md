@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every countably compact space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-compact-space, def-compactness-variants, def-countable-choice, lem-the-order-topology-on-an-ordinal, def-first-uncountable-ordinal, def-the-long-line]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Countably_compact_space"
     - title: "Long line (topology) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Long_line_(topology)"
+    - title: "Order topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Order_topology"
 pipeline_run: null
 ---
 

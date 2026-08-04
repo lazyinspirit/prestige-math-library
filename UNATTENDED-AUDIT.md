@@ -67,6 +67,15 @@ loginctl enable-linger "$USER"
 Without it systemd tears down the user manager at logout and the wave dies with
 the session it was supposed to outlive.
 
+The unit also bounds memory: `MemoryHigh=4G`, `MemoryMax=5G`, `MemorySwapMax=2G`
+and `OOMPolicy=continue`. Wave 4's A3 orchestrator lane reached 6.3 GiB anon RSS
+on a 7.8 GiB host, the kernel OOM killer took it, and systemd's default
+`OOMPolicy=stop` killed the driver with it — so no halt code was written and the
+state file still read `running` with nothing running. With `continue`, the driver
+outlives its agent, reads the nonzero exit and halts `agent-failed`. Note the
+matching hole in the driver: `run-wave.mjs` refuses to restart only a `halted`
+run, so a state file stranded at `running` neither blocks nor warns.
+
 ---
 
 ## Supervising
@@ -101,6 +110,7 @@ intended route whenever the mathematics needs you.
 |---|---|---|
 | `wave-empty` | A0 produced no manifest: every page at this level is already tagged | nothing — try the next wave. Exits **0** |
 | `judgment-required` | A3 or A9 needs an orchestrator decision | make it, resume at the next step |
+| `judgment-empty` | the autonomous A3/A9 lane exited 0 without writing `wave<k>-A<n>.md` | read the dispatch log: a refusal and a decision look identical without the receipt |
 | `gate-failed` | a gate of record failed; the failing tool is quoted | fix the content, resume at that step |
 | `action-failed` | a driver tool exited nonzero | read the quoted output |
 | `agent-failed` | a dispatched role exited nonzero | read `research/audit/wave<k>-dispatch/<role>-<label>.log` |
@@ -114,7 +124,29 @@ intended route whenever the mathematics needs you.
 | `owner-pause` | **A10 reached — success** | audit and publish by hand. Exits **0** |
 
 A halted run refuses to restart without `--from-step`. Deliberate: a driver that
-resumed automatically would spin through whatever caused the halt.
+resumed automatically would spin through whatever caused the halt. The gap: a
+run whose driver was **killed** never reaches `halt()`, so its state file still
+says `running` and nothing — not the driver, not the unit — notices or blocks a
+second start on the same run.
+
+### The autonomous judgment lane (wave 4, 2026-08-04)
+
+`--judgment autonomous` dispatches the decision at A3 and A9 instead of halting
+for you. It was broken from the day it was written, in three compounding ways,
+and wave 4 is what found them:
+
+1. it handed the lane `briefs/audit-alpha.md`, Alpha's **A6/A8** duties, not the
+   step's — so the agent was briefed for a job it had not been asked to do;
+2. `PLAN.A<n>.note`, the actual instructions, was read only by the `halt()` on
+   the `--judgment halt` path, so under `autonomous` it reached nobody;
+3. exit 0 was journalled as a decision, so an agent **correctly refusing a
+   misrouted dispatch** was indistinguishable from one that had adjudicated.
+
+Wave 4 advanced to A4 with 91 provenance determinations and 13 repairs approved
+by nobody. Three Sol Betas independently refused to apply them and said why —
+which is luck, not a mechanism. The lane now uses `briefs/audit-orchestrator.md`,
+delivers the step note through `dispatch.mjs --task`, and requires a receipt at
+`research/audit/wave<k>-A<n>.md` that a no-op cannot produce.
 
 ---
 

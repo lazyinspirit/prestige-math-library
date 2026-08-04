@@ -4,27 +4,28 @@ kind: corollary
 title: "Absorption: for cardinals $\\kappa, \\lambda$ with $\\kappa$ infinite and $\\lambda \\le \\kappa$, $\\kappa \\oplus \\lambda = \\kappa$, and $\\kappa \\otimes \\lambda = \\kappa$ when $\\lambda \\ne 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, lem-ordinal-trichotomy, lem-ordinal-basics, lem-omega-least-limit-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
 landmark: true
-short: "$\\kappa \\oplus \\lambda = \\kappa \\otimes \\lambda = \\kappa$"
+short: "$\\kappa \\oplus \\lambda = \\kappa$, and $\\kappa \\otimes \\lambda = \\kappa$ for $\\lambda \\ne 0$"
 proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"
@@ -57,7 +58,7 @@ larger argument simply swallows the smaller one.
 
 [L3] For cardinals, $\kappa \le \lambda$ iff $\kappa \preceq \lambda$; $A \preceq B$ with both well-orderable gives $\lvert A\rvert \le \lvert B\rvert$; the unit laws $\kappa \otimes 1 = \kappa$ and $\kappa \otimes 0 = 0$ hold; and $\oplus$, $\otimes$ are monotone in each argument (claims (a), (d), (e) of [[lem-cardinal-arithmetic-basic-laws]]).
 
-[L4] $\lvert X\rvert$ is the least ordinal equinumerous with $X$ and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]]).
+[L4] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$; and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]]).
 
 [L5] Every natural number is a cardinal and $\omega$ is a cardinal, so $0, 1, 2 \in \omega \subseteq \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[lem-omega-least-limit-ordinal]]).
 
@@ -87,4 +88,4 @@ larger argument simply swallows the smaller one.
 
 **Why the hypothesis is $\lambda \le \kappa$ and not $\lambda < \kappa$.** The case $\lambda = \kappa$ is the interesting one and is used constantly: $\kappa \oplus \kappa = \kappa$ and $\kappa \otimes \kappa = \kappa$. Stating the corollary with $\le$ avoids a separate appeal to Hessenberg's theorem at every later use.
 
-**Absorption destroys cancellation.** From $\kappa \oplus \lambda = \kappa$ for every $\lambda \le \kappa$ it follows at once that $\oplus$ cannot be cancellative on infinite cardinals, and the companion false statement [[fs-cardinal-addition-is-cancellative]] records exactly that. The same collapse does **not** reach exponentiation, where [[thm-cardinal-power-set-and-cantor]] gives a strict increase at every cardinal.
+**Absorption destroys cancellation.** From $\kappa \oplus \lambda = \kappa$ for every $\lambda \le \kappa$ it follows at once that $\oplus$ cannot be cancellative on infinite cardinals, and the companion false statement [[fs-cardinal-addition-is-cancellative]] records exactly that. The same collapse does **not** reach exponentiation: assuming the Axiom of Choice, [[thm-cardinal-power-set-and-cantor]] gives a strict increase at every cardinal.

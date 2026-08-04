@@ -1,9 +1,12 @@
 ---
 id: cor-cofinality-of-a-cardinal-power
 kind: corollary
-title: "$\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ for every infinite cardinal $\\kappa$, and $\\operatorname{cf}(2^{\\kappa}) > \\kappa$; in particular $\\operatorname{cf}(2^{\\aleph_0}) > \\aleph_0$"
+title: "Assuming the Axiom of Choice: $\\kappa < \\kappa^{\\operatorname{cf}(\\kappa)}$ for every infinite cardinal $\\kappa$, and $\\operatorname{cf}(2^{\\kappa}) > \\kappa$; in particular $\\operatorname{cf}(2^{\\aleph_0}) > \\aleph_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-konig, def-infinite-cardinal-sum-and-product, def-cofinality, lem-cofinality-is-well-defined, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-hessenberg, thm-cardinal-power-set-and-cantor, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-aleph-and-beth-hierarchies, def-cardinal, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-equinumerous, def-injection-surjection-bijection, def-well-order]
 justified_by: []
 aliases: [cor-konig-cofinality]
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic, König’s Corollary"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "König's theorem (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/K%C3%B6nig%27s_theorem_(set_theory)"
     - title: "Cofinality (Wikipedia)"
@@ -67,13 +68,13 @@ cofinality is $\aleph_0$, and it selects none.
 
 [L6] $\kappa < 2^{\kappa}$, and $2^{\kappa}$ is a cardinal ([[thm-cardinal-power-set-and-cantor]]).
 
-[L7] Every infinite cardinal is a limit ordinal, and a cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-limit-ordinal]]).
+[L7] Every infinite cardinal is a limit ordinal (claim (b) of [[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-limit-ordinal]]), and a cardinal $\kappa$ is infinite exactly when $\omega \subseteq \kappa$, that is $\omega \le \kappa$ ([[def-cardinal-arithmetic]]).
 
-[L8] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, $X \approx \lvert X\rvert$, $\lvert \alpha\rvert \le \alpha$, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
+[L8] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, $X \approx \lvert X\rvert$, $\lvert \alpha\rvert \le \alpha$, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
 
 [L9] Assuming the Axiom of Choice every set is well-orderable, and a product of nonempty sets is nonempty ([[thm-well-ordering-theorem]], [[def-axiom-of-choice]], [[def-choice-function]]).
 
-[L10] Ordinals: trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$; $\bigcup$ of a set of ordinals is its least upper bound; every nonempty set of ordinals has an $\in$-least element ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-well-order]], [[def-injection-surjection-bijection]]).
+[L10] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, the union of a set of ordinals is its least upper bound, and every nonempty set of ordinals has an $\in$-least element; a function is injective when equality of two values forces equality of the corresponding inputs ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-well-order]], [[def-injection-surjection-bijection]]).
 
 ## Proof
 

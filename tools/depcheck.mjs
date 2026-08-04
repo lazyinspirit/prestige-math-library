@@ -44,6 +44,15 @@ import { fileURLToPath } from 'node:url';
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
+// --pending-audit-ok: demote `published-unaudited` to a warning. The ONE caller
+// is the audit workflow's A4 gate (tools/gates.mjs), and only because A4 is the
+// step that legitimately creates the class: a materially repaired published item
+// loses its obsolete `audited` stamp there, and the no-self-certification rule
+// means only A6's independent reading may replace it. A4 is therefore the single
+// window in which a published item is knowingly unverified. Everywhere else —
+// including A6, where an EMPTY published-unaudited class is the load-bearing
+// check that every A4 repair got certified — the class stays a hard error.
+const pendingAuditOk = process.argv.includes('--pending-audit-ok');
 
 const PREFIX_OF_KIND = {
   definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
@@ -279,7 +288,7 @@ for (const it of items.values()) {
   // owner's instruction (SCHEMA §3, amended 2026-07-26). Either gates publication;
   // they are kept distinct so the corpus never loses track of which is which.
   if (it.status === 'published' && it.provedHere && !it.audited && !it.verified)
-    err('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set`);
+    (pendingAuditOk ? warn : err)('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set`);
   if (it.provedHere && it.sourcesChecked)
     err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))

@@ -1,9 +1,14 @@
 ---
 id: ex-the-beth-hierarchy-computed
 kind: example
-title: "$\\beth_0 = \\aleph_0$, $\\beth_1 = 2^{\\aleph_0} = \\lvert \\mathbb{R} \\rvert$, $\\beth_2 = \\lvert \\mathcal{P}(\\mathbb{R}) \\rvert$, and $\\beth_\\omega$ has cofinality $\\aleph_0$"
+title: "Assuming the Axiom of Choice: $\\beth_0 = \\aleph_0$, $\\beth_1 = 2^{\\aleph_0} = \\lvert \\mathbb{R} \\rvert$, $\\beth_2 = \\lvert \\mathcal{P}(\\mathbb{R}) \\rvert$, and $\\beth_\\omega$ has cofinality $\\aleph_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, ex-the-cardinality-of-the-continuum, lem-cardinality-of-a-well-orderable-set, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cofinality, thm-cofinality-basics, def-cofinal-subset-of-an-ordinal, def-axiom-of-choice, thm-well-ordering-theorem, def-cardinal, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -13,15 +18,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -64,13 +65,13 @@ is continuous at limits.
 
 [L3] $\lvert \mathbb{R}\rvert = 2^{\aleph_0}$ ([[ex-the-cardinality-of-the-continuum]]).
 
-[L4] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, equinumerous sets receive the same one, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]], [[def-equinumerous]]); assuming the Axiom of Choice every set has a cardinality ([[thm-well-ordering-theorem]]).
+[L4] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, equinumerous sets receive the same one, and $\lvert \alpha\rvert = \alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]], [[def-equinumerous]]); assuming the Axiom of Choice every set has a cardinality ([[thm-well-ordering-theorem]]).
 
 [L5] For a limit ordinal $\lambda$: $\operatorname{cf}(\lambda)$ is an infinite cardinal, and every cofinal $C \subseteq \lambda$ satisfies $\operatorname{cf}(\lambda) \le \lvert C\rvert$ ([[thm-cofinality-basics]], [[def-cofinality]], [[def-cofinal-subset-of-an-ordinal]]).
 
 [L6] Every infinite cardinal is a limit ordinal, and a cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-limit-ordinal]]).
 
-[L7] $\omega$ is a limit ordinal ([[lem-omega-least-limit-ordinal]]); ordinals satisfy trichotomy, $\bigcup$ of a set of ordinals is its least upper bound, and $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$ ([[lem-ordinal-basics]], [[lem-ordinal-trichotomy]], [[def-injection-surjection-bijection]]).
+[L7] $\omega$ is a limit ordinal; ordinals satisfy trichotomy, the union of a set of ordinals is its least upper bound, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and every strictly increasing map of ordinals is injective ([[lem-omega-least-limit-ordinal]], [[lem-ordinal-basics]], [[lem-ordinal-trichotomy]], [[def-injection-surjection-bijection]]).
 
 ## Verification
 

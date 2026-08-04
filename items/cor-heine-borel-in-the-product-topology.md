@@ -4,6 +4,9 @@ kind: corollary
 title: "A subset of $\\mathbb{R}^n$ with the product topology is compact exactly when it is closed and bounded, the product topology being the Euclidean metric topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, lem-product-topology-on-rn, lem-metrics-on-rn, def-product-topology, def-metric-topology, def-metrizable-space, def-compact-space, def-metric-bounded-diameter, def-subspace-topology-top]
 justified_by: []
 aliases: [cor-heine-borel-top]
@@ -13,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -79,6 +78,6 @@ statement it is read off from is proved by bisection
 
 **This is a corollary in the strict sense.** Nothing is reproved: claim 1 is [[lem-product-topology-on-rn]], the passage between the two readings of "compact subset" is [[thm-compactness-agrees-with-metric-compactness]], and the mathematical content of claim 2 is [[thm-heine-borel-rn]]. What the corollary records is that the three fit together, so that a reader working in the product topology may use Heine-Borel without translating.
 
-**A second route to the compactness of a box.** For reals $a_k \le b_k$ the box $\prod_{k<n} [a_k, b_k]$ is a product of finitely many compact spaces, each $[a_k,b_k]$ being compact by claim 2 applied with $n = 1$, so [[thm-finite-products-of-compact-spaces]] makes it compact without any appeal to bisection. The two routes agree, as claim 1 requires; the bisection proof is the one that also delivers the converse.
+**A second route to the compactness of a box.** For reals $a_k \le b_k$ the box $\prod_{k<n} [a_k, b_k]$ is a product of finitely many compact spaces, each $[a_k,b_k]$ being compact by claim 2 applied with $n = 1$, so [[thm-finite-products-of-compact-spaces]] makes it compact using only the one-dimensional case of claim 2, and with it only the one-dimensional bisection. The two routes agree, as claim 1 requires; the bisection proof is the one that also delivers the converse.
 
-**Boundedness is metric and compactness is not.** "Bounded" in claim 2 is a property of the metric $d_2$, not of the topology it induces: a metrizable space carries metrics of every diameter inducing the same topology. What claim 2 says is that *for this particular metric on this particular space* the conjunction of closedness and boundedness detects compactness; the same conjunction fails to do so in a general metric space ([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]).
+**Boundedness is metric and compactness is not.** "Bounded" in claim 2 is a property of the metric $d_2$, not of the topology it induces: a metrizable space with at least two points carries, for every positive real $D$, a compatible metric of diameter $D$. What claim 2 says is that *for this particular metric on this particular space* the conjunction of closedness and boundedness detects compactness; the same conjunction fails to do so in a general metric space ([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]).

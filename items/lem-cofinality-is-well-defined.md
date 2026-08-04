@@ -4,6 +4,9 @@ kind: lemma
 title: "For every ordinal $\\alpha$ there is a least ordinal $\\beta$ admitting a map $\\beta \\to \\alpha$ with cofinal range, and that map may always be taken strictly increasing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cofinal-subset-of-an-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-transfinite-recursion, def-well-order, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cofinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinality"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"

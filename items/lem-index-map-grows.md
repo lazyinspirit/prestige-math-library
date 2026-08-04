@@ -4,6 +4,9 @@ kind: lemma
 title: "A strictly increasing index map satisfies $n_k \\ge k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence, thm-induction-principle, lem-nat-discrete, def-nat-order, def-nat-addition, lem-nat-add-identity, lem-nat-successor-neq-self, thm-nat-linear-order, lem-nat-trichotomy]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "CMU 21-269 notes, Compactness — subsequences"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/compactness.html"
+    - title: "University of Wisconsin Math 521, Homework 5"
+      url: "https://people.math.wisc.edu/~angenent/521.2016s/index.html"
     - title: "Subsequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Subsequence"
     - title: "Mathematical induction (Wikipedia)"

@@ -4,6 +4,11 @@ kind: example
 title: "$\\aleph_0 \\oplus \\aleph_0 = \\aleph_0 \\otimes \\aleph_0 = \\aleph_0$, $\\aleph_1 \\oplus \\aleph_0 = \\aleph_1$ and $5 \\oplus \\aleph_0 = \\aleph_0$, computed from absorption and, in the countable cases, independently from the published bijection $\\omega \\times \\omega \\approx \\omega$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [cor-cardinal-absorption, thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, lem-successor-cardinal-exists, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, thm-n-cross-n-countable, def-cardinal, def-countable, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -13,15 +18,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -60,7 +61,7 @@ input.
 
 [L5] $\omega \times \omega \approx \omega$ ([[thm-n-cross-n-countable]], [[def-countable]], [[def-equinumerous]]).
 
-[L6] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, $X \approx \lvert X\rvert$, and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]]).
+[L6] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, $X \approx \lvert X\rvert$, and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]]).
 
 [L7] Ordinals: trichotomy; $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$; $\alpha \subseteq \beta \subseteq \alpha$ forces $\alpha = \beta$; a subset inclusion is an injection ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-injection-surjection-bijection]]).
 
@@ -86,7 +87,7 @@ input.
 
 **What absorption replaces.** Step 2.2 is what a reader would have had to do before [[cor-cardinal-absorption]] existed: produce a bijection or a pair of injections for each computation separately. Step 2.1 does all four in one line, and the content of the corollary is exactly that the bookkeeping is unnecessary.
 
-**Why $\aleph_1 \oplus \aleph_0 = \aleph_1$ has no second computation here.** The countable cases are witnessed by explicit maps because $\omega$ is concrete. At $\aleph_1$ there is no comparable explicit bijection to write down, and the only route is through [[thm-hessenberg]], which [[cor-cardinal-absorption]] packages. That is not a gap in this example but the reason the general theorem is worth proving.
+**Why $\aleph_1 \oplus \aleph_0 = \aleph_1$ has no second computation here.** The countable cases are witnessed by explicit maps because $\omega$ is concrete. At $\aleph_1$ no comparable explicit bijection is written down here; the computation goes through [[thm-hessenberg]], which [[cor-cardinal-absorption]] packages. That is not a gap in this example but the reason the general theorem is worth proving.
 
 **The finite summand does not vanish for a trivial reason.** $5 \sqcup \omega$ does have more elements than $\omega$ in the naive sense: it carries a tagged copy of $\omega$ and five further points. The equality $5 \oplus \aleph_0 = \aleph_0$ says only that the two sets are equinumerous, and what makes that true is that an infinite well-ordered set absorbs finitely many extra points, the same shift that makes an infinite cardinal a limit ordinal in [[thm-cardinal-arithmetic-agrees-with-finite-counting]].
 

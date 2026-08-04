@@ -4,6 +4,9 @@ kind: theorem
 title: "König's theorem: assuming the Axiom of Choice, if $\\kappa_i < \\lambda_i$ for every $i \\in I$ then $\\sum_{i \\in I} \\kappa_i < \\prod_{i \\in I} \\lambda_i$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-infinite-cardinal-sum-and-product, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinality-of-a-well-orderable-set, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-ordinal-trichotomy, lem-ordinal-basics, def-well-order]
 justified_by: []
 aliases: [thm-koenig, thm-konig-inequality]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic, König’s Lemma"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "König's theorem (set theory) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/K%C3%B6nig%27s_theorem_(set_theory)"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 5 (Cardinal arithmetic)"

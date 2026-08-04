@@ -25,7 +25,7 @@
 // declined: audited-but-uncleared waves would stack up, and a systematic defect
 // would propagate through several of them before anyone looked.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
@@ -162,9 +162,10 @@ const execute = (what, bin, args, opts = {}) => {
 const node = (args) => execute(args[0], process.execPath, args);
 const runGates = (step) => execute(`gates ${step}`, process.execPath,
   ['tools/gates.mjs', '--audit', '--step', step, '--run', run, '--json']);
-const dispatchAgent = (role, brief, label, vars = {}) => execute(`dispatch ${role}/${label}`, process.execPath, [
+const dispatchAgent = (role, brief, label, vars = {}, task = null) => execute(`dispatch ${role}/${label}`, process.execPath, [
   'tools/dispatch.mjs', '--role', role, '--brief', brief, '--label', label, '--run', run,
   ...Object.entries(vars).flatMap(([k, v]) => ['--var', `${k}=${v}`]),
+  ...(task ? ['--task', task] : []),
 ]);
 
 // ---- control file -----------------------------------------------------------
@@ -272,7 +273,8 @@ const PLAN = {
     judgment: true,
     note: 'verify every load-bearing Beta claim FROM DISK, then approve or decline each proposal with a logged rationale. '
       + 'Priority: mathematical accuracy and citation precision are non-negotiable, then minimise AI-generated load-bearing surface, then preserve richness. '
-      + 'The driver has already checked every URL — read the liveness table before trusting a Beta\'s own report of it.',
+      + 'NOTHING has checked the ledger URLs — no liveness sweep exists in this driver, and wave 3 measured 6 of 63 ledger URLs dead. '
+      + 'Treat a Beta\'s own report that a source resolves as unverified, and spot-check the URLs carrying an exact-source determination yourself.',
   },
 
   A4: {
@@ -283,7 +285,17 @@ const PLAN = {
       role: 'audit-beta', brief: 'briefs/audit-beta.md', label: `${label}-apply`,
       vars: { k: state.wave, category: label },
     })),
-    afterAgents: () => [['tools/touchlog.mjs', 'snap', `${DIR}/${run}-touches.json`, 'post-A4']],
+    // The merge is the single-writer handoff the CONTRACT_TRIO gates depend on:
+    // each Beta owns only its namespaced batch contract, and proof-contract.mjs,
+    // finite-smoke.mjs and risk-report.mjs all read the MERGED file. Wave 4 found
+    // it missing — the driver never ran it, so A4's gates failed three times over
+    // with `missing-receipt` on a file no step produced. It runs before the
+    // snapshot so the gate and the touchlog see the same instant.
+    afterAgents: () => [
+      ['tools/merge-proof-contracts.mjs', '--level', `audit-${run}`, `${DIR}/${run}-proof-contracts.json`,
+        ...batchLabels().map((label) => `${DIR}/${run}-${label}.proof-contracts.json`)],
+      ['tools/touchlog.mjs', 'snap', `${DIR}/${run}-touches.json`, 'post-A4'],
+    ],
   },
 
   A6: {
@@ -377,9 +389,46 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       halt('judgment-required', `${step} (${plan.name}) needs an orchestrator decision.\n  ${plan.note}`,
         `do the step, then: ${resumeCmd(ORDER[ORDER.indexOf(step) + 1])}`);
     }
-    const result = dispatchAgent('orchestrator', 'briefs/audit-alpha.md', `${step}-judgment`, { k: state.wave });
+    // Wave 4 found this lane broken in three ways at once, and all three had the
+    // same shape: the autonomous path silently lacked what the halt path gets for
+    // free. It was handed briefs/audit-alpha.md — Alpha's A6/A8 duties, not this
+    // step's — while plan.note, the actual instructions, was read only by the
+    // halt() above and so reached nobody. Then exit 0 was recorded as a decision,
+    // and an agent that correctly refused a misrouted dispatch looked exactly like
+    // one that had adjudicated: the wave advanced to A4 with 91 provenance
+    // determinations and 13 repairs approved by no one. Three Betas refused to
+    // apply them, which is luck, not a mechanism. So: the step's own brief, the
+    // note delivered through dispatch.mjs's --task channel, and a receipt on disk
+    // that a no-op cannot produce.
+    const receiptRel = `${DIR}/${run}-${step}.md`;
+    const receipt = join(REPO, receiptRel);
+    const before = existsSync(receipt) ? statSync(receipt).mtimeMs : 0;
+    const taskRel = `${DIR}/${run}-${step}-task.md`;
+    if (!dryRun && !simulation) {
+      writeFileSync(join(REPO, taskRel), [
+        `# ${step} — ${plan.name} (wave ${state.wave})`, '',
+        'You are the orchestrator, dispatched by the unattended audit driver. This step is yours alone:',
+        'the Betas propose and apply, Alpha adjudicates judges, and neither may stand in for the decision below.', '',
+        `**The step:** ${plan.note}`, '',
+        `**Your receipt:** write the decision to \`${receiptRel}\` — every proposal, approved or declined,`,
+        'the evidence you read from disk, and a one-line rationale. The driver halts if that file is missing or',
+        'unchanged, because this step is the only gate between a Beta proposal and its application.', '',
+        '**If the dispatch is wrong** — wrong brief, missing artifacts, a step whose prerequisites are not on disk —',
+        'write that to the receipt and exit nonzero. Do not exit 0 on work you did not do.', '',
+      ].join('\n'));
+    }
+    const result = dispatchAgent('orchestrator', 'briefs/audit-orchestrator.md', `${step}-judgment`,
+      { k: state.wave }, taskRel);
     journal('judgment', { detail: `autonomous, exit ${result.code}` });
     if (result.code !== 0) halt('judgment-failed', `the autonomous orchestrator failed at ${step}: ${String(result.out).slice(-500)}`, resumeCmd(step));
+    const after = existsSync(receipt) ? statSync(receipt).mtimeMs : 0;
+    if (!dryRun && !simulation && after <= before) {
+      halt('judgment-empty',
+        `${step} exited 0 but wrote no decision to ${receiptRel}.\n`
+        + '  An agent that could not do the step exits 0 exactly like one that did; the receipt is the only difference.\n'
+        + `  Agent said: ${String(result.out).slice(-400)}`,
+        resumeCmd(step));
+    }
   }
 
   if (plan.requiresBatches && !batchLabels().length && !dryRun && !simulation) {
@@ -387,8 +436,12 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       resumeCmd('A0'));
   }
 
-  // The A6 precompute: URL liveness, the pure/material split, the impact
-  // template. All deterministic, all driver-side, none of it Alpha's to redo.
+  // The A6 precompute: the pure/material split and the impact template. Both
+  // deterministic, both driver-side, neither Alpha's to redo. NOT the URL
+  // liveness sweep — this comment claimed it for three waves and no code here
+  // ever did it (wave 4). AUDIT-WORKFLOW.md §7 leaves that sweep with the
+  // orchestrator, and A3's note now says so instead of promising a table that
+  // does not exist.
   if (plan.precompute) {
     const split = node(['tools/audit-split.mjs', '--scope', manifests().map((n) => `${DIR}/${n}`).join(','), '--json']);
     if (split.code !== 0) halt('action-failed', `audit-split failed: ${String(split.out).slice(-400)}`, resumeCmd(step));
@@ -437,7 +490,10 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       '--ledger', `${DIR}/${run}-judge.jsonl`,
       '--cost', `${DIR}/${run}-judge-cost.jsonl`,
       '--manifests', manifests().map((n) => `${DIR}/${n}`).join(','),
-    ], { env: { ...process.env, JUDGE_LINEUP: 'deepseek+terra' } });
+      // The lineup is the owner's to set and the sweep's child judges inherit
+      // whatever lands here, so an explicit env wins and the default follows
+      // tools/judge.mts rather than pinning a lineup the tools have moved off.
+    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+sonnet' } });
     journal('spend', { detail: `judge sweep exit ${sweep.code}` });
     if (sweep.code !== 0) halt('sweep-failed', `the judge sweep failed: ${String(sweep.out).slice(-500)}`, resumeCmd(step));
   }

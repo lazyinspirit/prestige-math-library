@@ -4,6 +4,9 @@ kind: theorem
 title: "For a metric space with its metric topology, compactness in the topological sense is compactness in the metric sense, and the two notions of compact subset coincide"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, def-metric-compactness, def-metric-topology, def-metrizable-space, def-metric-space, def-subspace-topology-top, def-isometry-and-metric-embedding, def-topological-space, cor-metrizability-and-first-countability-are-hereditary]
 justified_by: []
 aliases: [thm-metric-and-topological-compactness-agree]
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metrizable_space"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "S. Morris, Topology Without Tears"
+      url: "https://www.topologywithouttears.net/topbook.pdf"
 pipeline_run: null
 ---
 ## Statement

@@ -4,24 +4,23 @@ kind: theorem
 title: "A continuous image of a compact space is compact; a continuous real-valued map on a nonempty compact space attains a maximum and a minimum; and a continuous bijection from a compact space to a Hausdorff space is a homeomorphism"
 status: published
 origin: session
-deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-continuous-map-top, thm-continuity-characterisations-top, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-complete-ordered-field, def-real-order, def-max-min, lem-finite-set-has-max, def-interval, def-subspace-topology-top, def-topological-space, lem-finite-choice]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-continuous-map-top, thm-continuity-characterisations-top, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-complete-ordered-field, def-real-order, def-max-min, lem-finite-set-has-max, def-interval, def-subspace-topology-top, def-topological-space, lem-finite-choice, thm-reals-ordered-field]
 justified_by: []
 aliases: [thm-continuous-image-of-a-compact-space-is-compact-top, thm-extreme-value-top]
 landmark: true
 short: "continuous images, extreme values, homeomorphism"
 proof_strategy: direct
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Extreme_value_theorem"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 0059"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 ## Statement
@@ -78,7 +79,7 @@ set, where [[lem-finite-choice]] is a theorem of ZF.
 
 [L7] Every set of reals listable as $\{a_0, \dots, a_n\}$ with $n \in \mathbb{N}$ has a maximum and a minimum, each of them one of the listed members ([[lem-finite-set-has-max]], [[def-max-min]]).
 
-[L8] The order of $\mathbb{R}$ is a total order: no real satisfies $s < s$, and $s < t$ together with $t \le s$ is impossible ([[def-real-order]], [[def-complete-ordered-field]]).
+[L8] The order of [[def-real-order]] makes $\mathbb{R}$ a totally ordered field ([[thm-reals-ordered-field]]), so no real satisfies $s < s$, and $s < t$ together with $t \le s$ is impossible ([[def-complete-ordered-field]]).
 
 [L9] A closed subset of a compact space is a compact subset of it ([[thm-closed-subspace-of-a-compact-space-is-compact]], claim 1).
 

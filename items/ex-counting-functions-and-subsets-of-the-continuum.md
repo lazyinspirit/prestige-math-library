@@ -1,10 +1,15 @@
 ---
 id: ex-counting-functions-and-subsets-of-the-continuum
 kind: example
-title: "$\\aleph_0^{\\aleph_0} = 2^{\\aleph_0}$ and $\\lvert \\mathbb{R}^{\\mathbb{R}} \\rvert = 2^{2^{\\aleph_0}}$, computed from the exponent laws and Hessenberg"
+title: "Assuming the Axiom of Choice: $\\aleph_0^{\\aleph_0} = 2^{\\aleph_0}$ and $\\lvert \\mathbb{R}^{\\mathbb{R}} \\rvert = 2^{2^{\\aleph_0}}$, computed from the exponent laws and Hessenberg"
 status: published
 origin: session
-deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinal-operations-are-well-defined, thm-hessenberg, cor-cardinal-absorption, thm-cardinal-power-set-and-cantor, ex-the-cardinality-of-the-continuum, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-aleph-and-beth-hierarchies, def-axiom-of-choice, thm-well-ordering-theorem, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-ordinal-basics, lem-ordinal-trichotomy]
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+deps: [def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, lem-cardinal-operations-are-well-defined, thm-hessenberg, cor-cardinal-absorption, thm-cardinal-power-set-and-cantor, ex-the-cardinality-of-the-continuum, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-aleph-and-beth-hierarchies, def-axiom-of-choice, thm-well-ordering-theorem, def-cardinal, def-equinumerous, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
 landmark: false
@@ -13,15 +18,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -68,7 +69,7 @@ operation.
 
 [L6] $\aleph_0 = \omega$ is an infinite cardinal and $2 \in \omega$ is a cardinal with $2 \le \aleph_0$ ([[def-aleph-and-beth-hierarchies]], [[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-cardinal]]).
 
-[L7] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and $\alpha \subseteq \beta \subseteq \alpha$ forces $\alpha = \beta$ ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[def-injection-surjection-bijection]]).
+[L7] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, and $\alpha \subseteq \beta \subseteq \alpha$ forces $\alpha = \beta$ ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]]).
 
 ## Verification
 

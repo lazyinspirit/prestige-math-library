@@ -4,6 +4,9 @@ kind: lemma
 title: "A set equinumerous with some ordinal has a least such ordinal, that ordinal is a cardinal, and equinumerous sets get the same one; no choice principle is used"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cardinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-equinumerous, def-injection-surjection-bijection, thm-mostowski-collapse, def-well-order, def-order-isomorphism, thm-well-ordering-theorem, def-axiom-of-choice]
 justified_by: []
 aliases: [lem-zf-cardinality]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Ch. 3"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cardinal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number"
     - title: "Von Neumann cardinal assignment (Wikipedia)"

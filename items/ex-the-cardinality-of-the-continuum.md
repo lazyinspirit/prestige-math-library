@@ -4,7 +4,10 @@ kind: example
 title: "$\\mathbb{R} \\approx \\mathcal{P}(\\mathbb{N})$ in ZF, by the Cantor set for one injection and by the cuts $\\{q \\in \\mathbb{Q} : q < x\\}$ for the other; so $\\lvert \\mathbb{R} \\rvert = 2^{\\aleph_0}$ under the Axiom of Choice"
 status: published
 origin: session
-deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-rationals-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, def-real-numbers, def-real-order, def-sequence, thm-schroder-bernstein, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-aleph-and-beth-hierarchies, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, def-natural-numbers, def-countable]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-rationals-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, def-real-numbers, def-real-order, def-sequence, thm-schroder-bernstein, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-aleph-and-beth-hierarchies, def-cardinal, def-equinumerous, def-injection-surjection-bijection, def-axiom-of-choice, thm-well-ordering-theorem, def-natural-numbers, def-countable, thm-reals-ordered-field, cor-cauchy-reals-lub-complete]
 justified_by: []
 aliases: [ex-continuum-is-two-to-the-aleph-null]
 landmark: true
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "P. Koellner, Set Theory: The Independence Phenomenon, Exercise 3.8"
+      url: "https://people.math.harvard.edu/~wboney/fall16/settheory.pdf"
     - title: "Cardinality of the continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinality_of_the_continuum"
     - title: "Cantor set (Wikipedia)"
@@ -64,7 +65,7 @@ is choice free, which is what makes clause (a) a theorem of ZF.
 
 **Given:** $\mathbb{R}$ with its order and the canonical embedding $\iota : \mathbb{Q} \to \mathbb{R}$; the Axiom of Choice is assumed only in clause (b).
 
-[L1] $\mathbb{R}$ is a complete ordered field with a total order ([[def-real-numbers]], [[def-complete-ordered-field]], [[def-real-order]]), hence Archimedean ([[thm-of-archimedean]]), and $\iota : \mathbb{Q} \to \mathbb{R}$ is the unique order-preserving field embedding ([[lem-of-q-embeds]]).
+[L1] The order of [[def-real-order]] makes $\mathbb{R}$ ([[def-real-numbers]]) a totally ordered field ([[thm-reals-ordered-field]]) with the least-upper-bound property ([[cor-cauchy-reals-lub-complete]]), hence a complete ordered field ([[def-complete-ordered-field]]) and hence Archimedean ([[thm-of-archimedean]]); and $\iota : \mathbb{Q} \to \mathbb{R}$ is the unique order-preserving field embedding ([[lem-of-q-embeds]]).
 
 [L2] For $x < y$ in an Archimedean ordered field there is a rational $q$ with $x < \iota(q) < y$ ([[lem-of-q-dense]]).
 
@@ -76,7 +77,7 @@ is choice free, which is what makes clause (a) a theorem of ZF.
 
 [L6] If $A \preceq B$ and $B \preceq A$ then $A \approx B$ ([[thm-schroder-bernstein]]).
 
-[L7] $\lvert X\rvert$ is the least ordinal equinumerous with $X$ and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]]); assuming the Axiom of Choice every set has one ([[thm-well-ordering-theorem]]).
+[L7] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$ and equinumerous sets receive the same one ([[lem-cardinality-of-a-well-orderable-set]], [[def-cardinal]]); assuming the Axiom of Choice every set has one ([[thm-well-ordering-theorem]]).
 
 [L8] Assuming the Axiom of Choice, $2^{\kappa} = \lvert \mathcal{P}(\kappa)\rvert$, and $\aleph_0 = \omega$ ([[thm-cardinal-power-set-and-cantor]], [[def-cardinal-arithmetic]], [[def-aleph-and-beth-hierarchies]]).
 

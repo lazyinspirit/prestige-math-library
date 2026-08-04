@@ -4,6 +4,9 @@ kind: lemma
 title: "Every convergent sequence is Cauchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: literature-derived
 deps: [def-real-limit, def-sequence, def-real-numbers, thm-reals-cauchy-complete, thm-uniqueness-complete-ordered-field, lem-of-triangle-inequality, lem-of-abs-value, thm-rat-ordered-field, lem-rat-embeds-dense, cor-of-one-positive, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Cauchy sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"
@@ -44,7 +45,7 @@ Let $(x_k)$ be a sequence of reals converging to $x \in \mathbb{R}$
 
 **Given:** A sequence $(x_k)$ of reals converging to a real $x$ ([[def-sequence]], [[def-real-limit]]).
 
-[L1] Convergence and the Cauchy condition, both quantified over rational $\varepsilon > 0$ ([[def-real-limit]]).
+[L1] $(x_k)$ converges to $x$ when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$ with $|x_k - x| < \hat\varepsilon$ for all $k \ge K$; and $(x_k)$ is Cauchy when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$ with $|x_k - x_l| < \hat\varepsilon$ for all $k, l \ge K$ ([[def-real-limit]]).
 
 [L2] Triangle inequality: $|a + b| \le |a| + |b|$ in $\mathbb{R}$ ([[lem-of-triangle-inequality]], [[def-complete-ordered-field]]).
 
@@ -70,8 +71,8 @@ Let $(x_k)$ be a sequence of reals converging to $x \in \mathbb{R}$
 
 ## Remarks
 
-- The converse is a genuine theorem and is **not** proved here. "Every Cauchy sequence of reals converges" is the completeness of $\mathbb{R}$ in the Cauchy sense. It is the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, which is planned and not yet written; on that page it is the engine behind the monotone convergence theorem and Bolzano-Weierstrass.
+- The converse is a genuine theorem and is **not** proved here. "Every Cauchy sequence of reals converges" is the completeness of $\mathbb{R}$ in the Cauchy sense. It is the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, where it is proved from the least-upper-bound property, last of the four completeness results there, by way of Bolzano-Weierstrass, which is itself routed through the monotone convergence theorem. That proof is not available at this point in the reading order; the converse itself, for the $\mathbb{R}$ this library constructs, already is, by the different route the next remark records.
 
-- The converse is nevertheless already available in this library, and it should be said plainly rather than left to the next page. The $\mathbb{R}$ used throughout ([[def-real-numbers]], [[def-sequence]]) is the quotient of the ring of Cauchy sequences of rationals, and [[thm-reals-cauchy-complete]] proves for precisely that $\mathbb{R}$ that every Cauchy sequence of reals converges to a real. Nothing further is needed to have the converse in hand here; and any other complete ordered field inherits it, since any two are isomorphic by a unique ordered-field isomorphism ([[thm-uniqueness-complete-ordered-field]]). The reason the next page will prove it again, from the least-upper-bound property directly, is that the direct proof is the form the rest of analysis uses and does not route through a particular construction.
+- The converse is nevertheless already available in this library, and it should be said plainly rather than left to the next page. The $\mathbb{R}$ used throughout ([[def-real-numbers]], [[def-sequence]]) is the quotient of the ring of Cauchy sequences of rationals, and [[thm-reals-cauchy-complete]] proves for precisely that $\mathbb{R}$ that every Cauchy sequence of reals converges to a real. Nothing further is needed to have the converse in hand here; and any other complete ordered field inherits it, since any two are isomorphic by a unique ordered-field isomorphism ([[thm-uniqueness-complete-ordered-field]]). The reason the next page proves it again, from the least-upper-bound property, is that that proof is the form the rest of analysis uses and does not route through a particular construction.
 
 - The splitting $\varepsilon/2 + \varepsilon/2$ is the whole content. It is worth noticing that no property of $\mathbb{R}$ beyond the ordered-field axioms and the triangle inequality is used, so the same argument shows that a convergent sequence of rationals is Cauchy in $\mathbb{Q}$.

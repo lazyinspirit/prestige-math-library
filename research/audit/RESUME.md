@@ -1,5 +1,65 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVE 4 — A0–A6 COMPLETE, A7 IS THE NEXT ACTION (2026-08-05)
+
+**This section supersedes every section below it.**
+
+**Baseline `6c54914`. Nothing committed.** 92 changed files under `items/` +
+`library/topology/compactness.md`, plus the untracked `research/audit/wave4-*`
+artifacts. Do NOT `git clean` or reset.
+
+Scope: 3 batches / 5 pages / **91 items** / 77 proof-bearing (`wave4-A0.md`).
+A1/A2 by three Sol Betas; **A3 adjudicated in full by the orchestrator**
+(`wave4-A3.md`) after the first A3 dispatch was misrouted to the Alpha brief and
+correctly refused; A4 applied 91 retags + 20 material repairs.
+
+**A6 (claude-opus-5) is complete — full report `wave4-alpha.md` §§1–12.**
+16 read-only Sol refuter lanes covering **all 91 items** returned 57 findings:
+**41 confirmed fatal, 16 nonfatal, 1 refuted**. Only 2 of the 41 were inside a
+numbered step; the rest were Facts blocks, Remarks, Statement prose and **7
+titles or `short` labels no judge lane can see**. The largest single class (13)
+is a missing or miscounted choice hypothesis. Alpha repaired 32 items, then 7
+independent Sol certifier lanes read the final text: **round 1 certified 43 of
+52 and refused 9**, each refusal naming an independent surviving defect —
+**two of them defects in repairs Alpha itself had just authored**. Those 9 were
+repaired and re-certified in round 2.
+
+Also at A6: the dead `www.ucl.ac.uk` source URL carried by **8 published items**
+was repaired to the live `www.homepages.ucl.ac.uk` copy (verified by reading the
+PDF); 9 of 9 cross-batch edges audited clean; `genrisk` 60 seeds with the one new
+load-bearing seed disposed `verified-generated`; the impact receipt rebuilt
+(**the handed template was empty** — `impact-audit.mjs` resolves a duplicated
+snapshot label to the FIRST match and had bracketed a no-op round-1 pair) with
+91 interfaces / 1,315 dispositions; all 77 `risk_review` records written.
+
+**All gates green except `depcheck`'s `published-unaudited`, which empties as the
+certified items receive `verification.verified`.**
+
+### EXACT NEXT ACTION — A7, orchestrator
+
+```
+JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs \
+  --ledger research/audit/wave4-judge.jsonl \
+  --cost research/audit/wave4-judge-cost.jsonl \
+  --manifests research/audit/wave4-foundations.pages.json,research/audit/wave4-real-analysis.pages.json,research/audit/wave4-topology.pages.json
+```
+182 verdicts expected (91 × 2). Lineup and `briefs/judge-conventions.txt` are
+unchanged since wave 3's injection PASS — verify from git before skipping the
+test. Then A8 (Alpha, fatal-only, `pre-a8` snapshot + `step8-guard`), A9, A10.
+
+### Carry to A10 (with wave 3's queue)
+
+1. Fact-fidelity policy: may an `[F#]` state a one-line consequence of its cited
+   target? Nine findings this wave; third wave running.
+2. The corpus-wide `\mathbb{R}`-is-a-complete-ordered-field citation convention:
+   two lanes found it independently; only the two in-scope items were repaired.
+3. **Link liveness as a gate — sixth wave running, and this wave a dead URL was
+   live on eight published pages.**
+4. Two driver defects: `run-wave.mjs` dispatches judgment steps with the Alpha
+   brief and runs no URL sweep; `impact-audit.mjs` first-match label resolution.
+5. The three Betas took 22 per-item touch snapshots against the stage-only rule.
+
+
 ## WAVE 3 COMPLETE — A0 to A10, at the owner pause (2026-08-04)
 
 **Rundown: `research/audit/wave3-A10.md`. Committed, NOT pushed.**

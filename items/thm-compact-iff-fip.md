@@ -4,6 +4,9 @@ kind: theorem
 title: "A space is compact exactly when every family of closed subsets with the finite intersection property has nonempty intersection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, def-topological-space, def-finite-intersection-property, def-filter, lem-fip-generates-filter]
 justified_by: []
 aliases: [thm-compactness-fip-characterisation]
@@ -31,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Compact_space"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 0059"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 ## Statement

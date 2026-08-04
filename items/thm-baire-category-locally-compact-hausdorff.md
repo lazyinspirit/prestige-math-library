@@ -4,7 +4,10 @@ kind: theorem
 title: "Assuming dependent choice, every locally compact Hausdorff space is a Baire space"
 status: published
 origin: session
-deps: [lem-dependent-choice-along-a-sequence-of-relations, def-baire-space, def-compact-space, thm-compact-iff-fip, thm-compact-subset-of-a-hausdorff-space-is-closed, def-locally-compact-space, thm-locally-compact-hausdorff-basics, def-hausdorff-space, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-subspace-topology-top, def-dependent-choice, def-sequence, def-natural-numbers]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-dependent-choice-along-a-sequence-of-relations, def-baire-space, def-compact-space, thm-compact-iff-fip, thm-compact-subset-of-a-hausdorff-space-is-closed, def-locally-compact-space, thm-locally-compact-hausdorff-basics, def-hausdorff-space, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-subspace-topology-top, def-dependent-choice, def-sequence-convergence-top, def-natural-numbers]
 justified_by: []
 external_refs: [rem-baire-category-choice-strength]
 aliases: [thm-baire-category-lch]
@@ -14,15 +17,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "J. Munkres, Topology, 2nd ed., §48"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Section 5.13: Locally quasi-compact spaces"
+      url: "https://stacks.math.columbia.edu/tag/08ZQ"
 pipeline_run: null
 ---
 
@@ -43,7 +44,7 @@ Let $(X, \mathcal{T})$ be a locally compact Hausdorff space
 ([[def-locally-compact-space]], [[def-hausdorff-space]],
 [[def-topological-space]]). Then $X$ is a Baire space ([[def-baire-space]]): for
 every sequence $(U_n)_{n \in \mathbb{N}}$ of dense open subsets of $X$
-([[def-dense-top]], [[def-sequence]]), the intersection
+([[def-dense-top]], [[def-sequence-convergence-top]]), the intersection
 $\bigcap_{n \in \mathbb{N}} U_n$ is dense in $X$.
 
 **Dependent choice is sufficient here and no claim of necessity is made.** The
@@ -69,7 +70,7 @@ above.
 
 [L5] A space is compact exactly when every family of its closed subsets with the finite intersection property has nonempty intersection ([[thm-compact-iff-fip]]).
 
-[L6] Assuming dependent choice: if $A$ is nonempty and $(R_n)_{n \in \mathbb{N}}$ are relations on $A$ such that every $u \in A$ has some $v \in A$ with $u \mathbin{R_n} v$, then for every $a_0 \in A$ there is $a : \mathbb{N} \to A$ with $a(0) = a_0$ and $a(n) \mathbin{R_n} a(n+1)$ for every $n$ ([[lem-dependent-choice-along-a-sequence-of-relations]], [[def-sequence]], [[def-natural-numbers]]).
+[L6] Assuming dependent choice: if $A$ is nonempty and $(R_n)_{n \in \mathbb{N}}$ are relations on $A$ such that every $u \in A$ has some $v \in A$ with $u \mathbin{R_n} v$, then for every $a_0 \in A$ there is $a : \mathbb{N} \to A$ with $a(0) = a_0$ and $a(n) \mathbin{R_n} a(n+1)$ for every $n$ ([[lem-dependent-choice-along-a-sequence-of-relations]], [[def-sequence-convergence-top]], [[def-natural-numbers]]).
 
 ## Proof
 

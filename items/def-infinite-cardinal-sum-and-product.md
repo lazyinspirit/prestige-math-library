@@ -4,6 +4,9 @@ kind: definition
 title: "The sum $\\sum_{i \\in I} \\kappa_i$ and the product $\\prod_{i \\in I} \\kappa_i$ of an indexed family of cardinals, defined under the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-cardinal-arithmetic, lem-cardinal-operations-are-well-defined, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-axiom-of-choice, def-choice-function, thm-well-ordering-theorem, def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-infinite-cardinal-sum, def-infinite-cardinal-product]
@@ -24,6 +27,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
     - title: "König's theorem (set theory) (Wikipedia)"

@@ -4,6 +4,9 @@ kind: theorem
 title: "A closed subspace of a compact space is compact, and a finite union of compact subspaces is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, def-topological-space, def-subspace-topology-top, lem-finite-choice]
 justified_by: []
 aliases: [thm-closed-subset-of-a-compact-space-is-compact-top]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Compact_space"
     - title: "J. Munkres, Topology, 2nd ed., §26"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 0059"
+      url: "https://stacks.math.columbia.edu/tag/0059"
 pipeline_run: null
 ---
 ## Statement

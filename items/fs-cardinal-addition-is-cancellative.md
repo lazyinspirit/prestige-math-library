@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\kappa \\oplus \\mu = \\lambda \\oplus \\mu$ implies $\\kappa = \\lambda$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cardinal-arithmetic, cor-cardinal-absorption, lem-cardinal-arithmetic-basic-laws, def-aleph-and-beth-hierarchies, thm-cardinal-arithmetic-agrees-with-finite-counting, def-cardinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "K. Kearnes, Cardinal Arithmetic (Fall 2025 course handout)"
+      url: "https://math.colorado.edu/~kearnes/Teaching/Courses/F25/cardinals_arithmetic.pdf"
     - title: "Cardinal number — cardinal arithmetic (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cardinal_number#Cardinal_arithmetic"
 pipeline_run: null

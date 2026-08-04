@@ -211,18 +211,32 @@ const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
 const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, OPUS_MODEL, SONNET_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The per-level build keeps its deepseek+terra default, and since 2026-08-02
-// the published-page audit workflow runs the same pair (its lane went
-// Opus -> Sonnet -> Terra; older rows stay as historical evidence only, and the
-// other two lineups remain selectable for a deliberate experiment). The frozen
-// prompt, hash attestation, and
-// verdict contract are identical across lineups.
+// Owner instruction 2026-08-04: the second lane moves Terra -> Sonnet 5 for
+// both the build and the published-page audit, so the default below is
+// deepseek+sonnet. The lane has gone Opus -> Sonnet -> Terra -> Sonnet; every
+// older row stays as historical evidence only, and the other lineups remain
+// selectable for a deliberate experiment. The frozen prompt, hash attestation,
+// and verdict contract are identical across lineups.
+//
+// WHAT THE LEDGERS MEASURED BEFORE THIS SWITCH (frontiers 6-9, waves 0-1; the
+// evidence is in research/audit/RESUME.md, not in anyone's memory):
+//   gpt-5.6-terra    142 fatal / 58 false pos / 1036 adjudicated — 94.4% precision
+//   deepseek-v4-pro  129 fatal / 55 false pos /  618 adjudicated — 91.1% precision
+//   claude-sonnet-5    1 fatal / 14 false pos /   35 adjudicated — 60.0% precision
+// Sonnet's dominant failure was `reject` recorded while its own reason text
+// concluded *keep* — verdict EXTRACTION, not reasoning; its prose was often the
+// sharper of the two and it alone caught a gcd circularity. The transport-level
+// JSON constraint in runFreshClaude below is the fix for exactly that failure
+// and postdates most of those 35 adjudications, so the 60% is a small, stale
+// sample rather than a settled verdict on the model. Re-measure it at the next
+// A10 comparison; if it holds, the swap costs fatals (Terra-only fatal items
+// were 20% of the wave-0/1 total).
 const JUDGE_LINEUPS: Record<string, string[]> = {
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
   "deepseek+opus": [DEEPSEEK_MODEL, OPUS_MODEL],
   "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
 };
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
 const lineup = JUDGE_LINEUPS[lineupName];
 if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);

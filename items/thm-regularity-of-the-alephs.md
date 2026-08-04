@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\aleph_0$ is regular in ZF; assuming the Axiom of Choice every successor aleph $\\aleph_{\\alpha+1}$ is regular; $\\operatorname{cf}(\\aleph_\\omega) = \\aleph_0$, so $\\aleph_\\omega$ is singular, and under choice it is the least singular infinite cardinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-cofinality-basics, def-cofinality, lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-aleph-and-beth-hierarchies, cor-the-aleph-and-beth-hierarchies-are-well-defined, thm-every-infinite-cardinal-is-an-aleph, lem-successor-cardinal-exists, cor-cardinal-absorption, thm-hessenberg, def-cardinal-arithmetic, lem-cardinal-arithmetic-basic-laws, thm-cardinal-arithmetic-agrees-with-finite-counting, lem-cardinality-of-a-well-orderable-set, def-cardinal, def-axiom-of-choice, def-choice-function, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, lem-omega-least-limit-ordinal, def-equinumerous, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Regular cardinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Regular_cardinal"
     - title: "Cofinality (Wikipedia)"
@@ -67,17 +68,17 @@ half of (d) are choice free.
 
 [L3] $\aleph_0 = \omega$; $\aleph_{\alpha+1} = \aleph_\alpha^{+}$ is the least cardinal strictly above $\aleph_\alpha$; $\aleph_\lambda = \bigcup\{\aleph_\beta : \beta \in \lambda\}$ at limits; every $\aleph_\alpha$ is an infinite cardinal and the operation is strictly increasing ([[def-aleph-and-beth-hierarchies]], [[cor-the-aleph-and-beth-hierarchies-are-well-defined]], [[lem-successor-cardinal-exists]]).
 
-[L4] Every infinite cardinal is a limit ordinal, and a cardinal is infinite exactly when $\omega \le \kappa$ ([[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-limit-ordinal]], [[def-cardinal]]).
+[L4] Every infinite cardinal is a limit ordinal (claim (b) of [[thm-cardinal-arithmetic-agrees-with-finite-counting]], [[def-limit-ordinal]]), and a cardinal $\kappa$ is infinite exactly when $\omega \subseteq \kappa$, that is $\omega \le \kappa$ ([[def-cardinal-arithmetic]], [[def-cardinal]]).
 
 [L5] For an infinite cardinal $\mu$ and a cardinal $\nu$ with $0 \ne \nu \le \mu$, $\mu \otimes \nu = \mu$ ([[cor-cardinal-absorption]], [[thm-hessenberg]], [[def-cardinal-arithmetic]]).
 
 [L6] For cardinals $\kappa \le \lambda$ iff $\kappa \preceq \lambda$; $A \preceq B$ with both well-orderable gives $\lvert A\rvert \le \lvert B\rvert$; $\otimes$ is monotone ([[lem-cardinal-arithmetic-basic-laws]]).
 
-[L7] $\lvert X\rvert$ is the least ordinal equinumerous with $X$, satisfies $X \approx \lvert X\rvert$ and $\lvert \alpha\rvert \le \alpha$, and equals $\alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
+[L7] For a well-orderable set $X$, $\lvert X\rvert$ is the least ordinal equinumerous with $X$, satisfies $X \approx \lvert X\rvert$ and $\lvert \alpha\rvert \le \alpha$, and equals $\alpha$ exactly when $\alpha$ is a cardinal ([[lem-cardinality-of-a-well-orderable-set]], [[def-equinumerous]]).
 
 [L8] Every family of nonempty sets has a choice function ([[def-axiom-of-choice]], [[def-choice-function]]).
 
-[L9] Ordinals: trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, $\bigcup$ of a set of ordinals is its least upper bound, every nonempty set of ordinals has an $\in$-least element, $\omega$ is the least limit ordinal ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[lem-omega-least-limit-ordinal]], [[def-injection-surjection-bijection]]).
+[L9] Ordinals satisfy trichotomy, $\alpha \subseteq \beta$ iff $\alpha \in \beta$ or $\alpha = \beta$, the union of a set of ordinals is its least upper bound, every nonempty set of ordinals has an $\in$-least element, $\omega$ is the least limit ordinal, and every strictly increasing map of ordinals is injective ([[lem-ordinal-trichotomy]], [[lem-ordinal-basics]], [[lem-omega-least-limit-ordinal]], [[def-injection-surjection-bijection]]).
 
 [L10] Every infinite cardinal is $\aleph_\alpha$ for exactly one ordinal $\alpha$ ([[thm-every-infinite-cardinal-is-an-aleph]]).
 

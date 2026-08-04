@@ -4,6 +4,9 @@ kind: lemma
 title: "A null sequence times a bounded sequence is null"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-real-limit, def-sequence, lem-of-abs-value, lem-of-sign-rules, thm-of-archimedean, lem-rat-embeds-dense, prop-of-multiply-inequalities, lem-of-inverse-positive, lem-of-add-order, cor-of-one-positive, lem-finite-set-has-max, def-max-min, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "Reed College Math 112, §7.5 Theorems About Convergent Sequences"
+      url: "https://people.reed.edu/~mayer/math112.html/html2/node12.html"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "T. Tao, Analysis I, 3rd ed., §6.1"
@@ -48,7 +49,7 @@ rule for limits.
 
 **Given:** Sequences $(x_k)$ and $(y_k)$ of reals with $(x_k)$ converging to $0$, and a real $M$ with $|y_k| \le M$ for every $k \in \mathbb{N}$ ([[def-sequence]], [[def-real-limit]]).
 
-[L1] Convergence, quantified over rational $\varepsilon > 0$ ([[def-real-limit]]).
+[L1] $(x_k)$ converges to $x$ when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$ with $|x_k - x| < \hat\varepsilon$ for all $k \ge K$ ([[def-real-limit]]).
 
 [L2] Absolute value: $|uv| = |u|\,|v|$, $|u| \ge 0$, and $|u - 0| = |u|$ ([[lem-of-abs-value]]).
 

@@ -4,16 +4,28 @@ kind: remark
 title: "Conventions for sequences: indexing, eventually, $\\lim$, and rational $\\varepsilon$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-sequence, def-real-limit, lem-limit-of-tail, lem-limit-unique, lem-rat-embeds-dense, def-divergence-to-infinity, def-bounded-set, lem-of-abs-value, def-abs-value, def-real-order, lem-finite-set-has-max, def-max-min, def-countable, lem-subset-of-countable, lem-pigeonhole, lem-index-map-grows, lem-limit-preserves-order, thm-squeeze, thm-algebra-of-limits, lem-null-times-bounded, lem-reciprocal-of-null-diverges, lem-convergent-implies-cauchy, thm-reals-cauchy-complete, fs-bounded-implies-convergent, def-complete-ordered-field, def-ordered-field, lem-convergent-implies-bounded, thm-of-archimedean, lem-rat-archimedean, thm-rat-ordered-field, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
+    - title: "CMU 21-269 notes, Compactness — subsequences"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/compactness.html"
     - title: "Sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequence"
     - title: "Limit of a sequence (Wikipedia)"
@@ -147,7 +159,8 @@ real is already proved elsewhere in the library, by
 [[thm-reals-cauchy-complete]] on the Cauchy-construction page, and
 [[lem-convergent-implies-cauchy]] records where that leaves the two directions.
 The monotone convergence theorem and the Bolzano-Weierstrass theorem have no such
-exception: neither is proved anywhere in this library as things stand.
+exception: neither is available at this point in the reading order, and both are
+proved on that next page.
 **How far this page is really a page about $\mathbb{R}$.** It assumes only that
 $\mathbb{R}$ is a complete ordered field, and it uses completeness solely through
 the Archimedean property. It is tempting to conclude that every result here holds

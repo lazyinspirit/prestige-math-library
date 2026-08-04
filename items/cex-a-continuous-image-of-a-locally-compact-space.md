@@ -4,24 +4,23 @@ kind: counterexample
 title: "Collapsing the set of naturals inside $\\mathbb{R}$ to a point gives a quotient of $\\mathbb{R}$ that is not locally compact at the collapsed point"
 status: published
 origin: session
-deps: [def-locally-compact-space, def-quotient-topology, thm-quotient-universal-property, def-compact-space, def-continuous-map-top, def-neighbourhood-top, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-interval, def-canonical-natural, def-natural-numbers, thm-closed-subspace-of-a-compact-space-is-compact, def-standard-topologies, def-topological-space, def-subspace-topology-top, def-complete-ordered-field, thm-of-archimedean]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-locally-compact-space, def-quotient-topology, thm-quotient-universal-property, def-compact-space, def-continuous-map-top, def-neighbourhood-top, thm-compactness-agrees-with-metric-compactness, thm-heine-borel-rn, def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology, def-interval, def-canonical-natural, def-natural-numbers, thm-closed-subspace-of-a-compact-space-is-compact, def-standard-topologies, def-topological-space, def-subspace-topology-top, def-complete-ordered-field, thm-of-archimedean, lem-of-naturals-positive]
 justified_by: []
 aliases: []
 landmark: true
 short: "a quotient of a locally compact space"
 proof_strategy: direct
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "Quotient space (topology) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Quotient_space_(topology)"
+    - title: "J. M. Møller, General Topology"
+      url: "https://citeseerx.ist.psu.edu/document?doi=b49ec80d24320c11a1364c9f100fcf5631b20a73&repid=rep1&type=pdf"
+    - title: "I. Khatchatourian, Compactifications (MAT327 notes)"
+      url: "https://www.math.toronto.edu/ivan/mat327/docs/notes/19-compactifications.pdf"
 pipeline_run: null
 ---
 
@@ -56,7 +59,7 @@ locally compact: the point $\ast := N$ of $Y$ has no compact neighbourhood.
 
 [L2] $U \subseteq \mathbb{R}$ is open exactly when every $x \in U$ has a real $r > 0$ with $(x-r, x+r) \subseteq U$; $\mathbb{R}$ is metrizable and is locally compact, the set $\{t : |t - p| \le 1\}$ being a compact neighbourhood of $p$ ([[lem-real-line-is-a-metric-space]], [[def-metric-topology]], [[def-metrizable-space]], [[def-interval]], [[thm-heine-borel-rn]], [[thm-compactness-agrees-with-metric-compactness]], [[def-locally-compact-space]]).
 
-[L3] Distinct naturals have distinct canonical naturals and $\iota(n+1) = \iota(n) + 1$, so the members of $N$ are spaced at distance at least $1$; and for every real $t$ there is a natural $n$ with $t < \iota(n)$ ([[def-canonical-natural]], [[def-natural-numbers]], [[thm-of-archimedean]], [[def-complete-ordered-field]]).
+[L3] The canonical-natural map $\iota$ is strictly increasing, hence injective, and satisfies $\iota(n+1) = \iota(n) + 1$ ([[lem-of-naturals-positive]], [[def-canonical-natural]], [[def-natural-numbers]]), so distinct naturals have distinct canonical naturals and the members of $N$ are spaced at distance at least $1$; and for every real $t$ there is a natural $n$ with $t < \iota(n)$ ([[thm-of-archimedean]], [[def-complete-ordered-field]]).
 
 [L4] A subset $A$ is a compact subset when the subspace it carries is compact; a closed subset of a compact space is a compact subset of it; a space in which every singleton is open is discrete, and an infinite discrete space is not compact, its singletons covering it with no finite subcover ([[def-compact-space]], [[thm-closed-subspace-of-a-compact-space-is-compact]], [[def-standard-topologies]], [[def-subspace-topology-top]], [[def-topological-space]]).
 

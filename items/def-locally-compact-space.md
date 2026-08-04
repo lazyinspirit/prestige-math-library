@@ -4,6 +4,9 @@ kind: definition
 title: "Locally compact topological space: every point has a compact neighbourhood; and what this says in a metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-compact-space, def-neighbourhood-top, def-topological-space, def-subspace-topology-top, def-metrizable-space, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, thm-compactness-agrees-with-metric-compactness, cor-heine-borel-in-the-product-topology, lem-metrics-on-rn]
 justified_by: []
 aliases: [def-locally-compact]
@@ -12,15 +15,11 @@ short: "locally compact space"
 verification:
   precheck: n/a
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -28,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "J. Munkres, Topology, 2nd ed., §29"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Tag 08ZQ"
+      url: "https://stacks.math.columbia.edu/tag/08ZQ"
+    - title: "I. Khatchatourian, Compactifications (MAT327 notes)"
+      url: "https://www.math.toronto.edu/ivan/mat327/docs/notes/19-compactifications.pdf"
 pipeline_run: null
 ---
 
@@ -72,14 +75,14 @@ metrically and read topologically
 applied with either development's theorems.
 
 **$\mathbb{R}^n$ is locally compact for every $n \ge 1$.** Give $\mathbb{R}^n$
-the product topology, which is the metric topology of $d_\infty$
+the product topology, which is the metric topology of the Euclidean metric $d_2$
 ([[lem-metrics-on-rn]], [[cor-heine-borel-in-the-product-topology]]). For
 $p \in \mathbb{R}^n$ the set
 
-$$Q_p \;:=\; \{\, x \in \mathbb{R}^n : d_\infty(x,p) \le 1 \,\}$$
+$$Q_p \;:=\; \{\, x \in \mathbb{R}^n : d_2(x,p) \le 1 \,\}$$
 
-is closed, being the complement of the union of the open balls $B(y, d_\infty(y,p) - 1)$
-over the points $y$ with $d_\infty(y,p) > 1$, and it is bounded
+is closed, being the complement of the union of the open balls $B(y, d_2(y,p) - 1)$
+over the points $y$ with $d_2(y,p) > 1$, and it is bounded
 ([[def-metric-bounded-diameter]]), lying inside $B(p, 2)$; so $Q_p$ is compact by
 [[cor-heine-borel-in-the-product-topology]]. It contains the open ball $B(p,1)$,
 which contains $p$, so it is a compact neighbourhood of $p$. The space

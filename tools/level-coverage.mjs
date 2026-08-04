@@ -41,10 +41,11 @@ const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+terra, and the published-page audit (AUDIT-WORKFLOW.md)
-// verifies the same deepseek+terra pairs on the current frozen context. The
-// audit lane went Opus -> Sonnet -> Terra on 2026-08-02; older Opus/Sonnet rows
-// are historical evidence and do not constitute coverage.
+// default is deepseek+sonnet, and the published-page audit (AUDIT-WORKFLOW.md)
+// verifies the same deepseek+sonnet pairs on the current frozen context. The
+// lane went Opus -> Sonnet -> Terra -> Sonnet (owner, 2026-08-04); every older
+// row is historical evidence and does not constitute coverage, the retired
+// Sonnet rows included — coverage is per frozen context, not per model name.
 const JUDGE_LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
@@ -52,7 +53,7 @@ const JUDGE_LINEUPS = Object.freeze({
   // Opus refused ~80% of calls under 16-way lane concurrency).
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+sonnet';
 const JUDGES = JUDGE_LINEUPS[lineupName];
 if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}`); process.exit(2); }
 // --audit: published-page audit scope (AUDIT-WORKFLOW.md). A legacy published

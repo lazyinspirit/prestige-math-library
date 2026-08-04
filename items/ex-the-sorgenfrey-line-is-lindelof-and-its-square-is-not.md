@@ -1,27 +1,26 @@
 ---
 id: ex-the-sorgenfrey-line-is-lindelof-and-its-square-is-not
 kind: example
-title: "$\\mathbb{R}$ with the half-open intervals $[a,b)$ as a basis is Lindel\\\"of and not compact, while its square is not Lindel\\\"of, the antidiagonal being an uncountable closed discrete subspace"
+title: "$\\mathbb{R}$ with the half-open intervals $[a,b)$ as a basis is not compact and, assuming the Axiom of Countable Choice, is Lindel\\\"of, while its square is not Lindel\\\"of, the antidiagonal being an uncountable closed discrete subspace"
 status: published
 origin: session
-deps: [def-compactness-variants, def-compact-space, def-topology-basis-subbasis, thm-basis-criterion, def-product-topology, def-subspace-topology-top, def-topological-space, def-countable, lem-countable-iff-surjection-from-n, thm-r-uncountable, thm-rationals-countable, lem-of-q-dense, def-countable-choice, def-interval, def-real-order, def-complete-ordered-field, def-canonical-natural, thm-of-archimedean]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-compactness-variants, def-compact-space, def-topology-basis-subbasis, thm-basis-criterion, def-product-topology, def-subspace-topology-top, def-topological-space, def-countable, lem-countable-iff-surjection-from-n, thm-r-uncountable, thm-rationals-countable, lem-subset-of-countable, thm-product-of-countable, lem-of-q-dense, def-countable-choice, def-interval, def-real-order, def-complete-ordered-field, def-canonical-natural, thm-of-archimedean, thm-reals-ordered-field, cor-cauchy-reals-lub-complete]
 justified_by: []
 aliases: []
 landmark: true
 short: "the Sorgenfrey line and its square"
 proof_strategy: direct
 verification:
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
   precheck: pass
+  verified:
+    scope: published-audit
+    delegated_by: owner
+    at: 2026-08-05
+    by: certify-round4 (gpt-5.6-sol, read-only certifier)
+    note: independent certification of the wave-4 citation-precision repair to [L4] and steps 3.1/3.2
 sources:
   scraped: []
   references:
@@ -29,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lower_limit_topology"
     - title: "Lindelöf space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lindel%C3%B6f_space"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
 pipeline_run: null
 ---
 
@@ -64,9 +65,9 @@ treatment.
 
 [L2] The sets $B \times B'$ with $B, B' \in \mathcal{B}_\ell$ form a basis for the product topology on $\mathbb{R}_\ell \times \mathbb{R}_\ell$, the index set being a natural number ([[def-product-topology]], [[thm-basis-criterion]]).
 
-[L3] The order of $\mathbb{R}$ is total ([[def-real-order]], [[def-complete-ordered-field]]); for every real $t$ there is $n \in \mathbb{N}$ with $t < \iota(n)$ ([[thm-of-archimedean]], [[def-canonical-natural]]); and for reals $c<d$ there is a rational strictly between them ([[lem-of-q-dense]]).
+[L3] The order of [[def-real-order]] makes $\mathbb{R}$ a totally ordered field ([[thm-reals-ordered-field]]) with the least-upper-bound property ([[cor-cauchy-reals-lub-complete]]), hence a complete ordered field ([[def-complete-ordered-field]]); for every real $t$ there is therefore $n \in \mathbb{N}$ with $t < \iota(n)$ ([[thm-of-archimedean]], [[def-canonical-natural]]); and for reals $c<d$ there is a rational strictly between them ([[lem-of-q-dense]]).
 
-[L4] $\mathbb{Q}$ is countably infinite and $\mathbb{R}$ is uncountable; a set injecting into an at most countable set is at most countable; and the union of two at most countable sets is at most countable, obtained by interleaving two surjections from $\mathbb{N}$ ([[thm-rationals-countable]], [[thm-r-uncountable]], [[def-countable]], [[lem-countable-iff-surjection-from-n]]).
+[L4] A set is at most countable when it is finite or countably infinite ([[def-countable]]); $\mathbb{Q}$ is countably infinite ([[thm-rationals-countable]]) and $\mathbb{R}$ is uncountable ([[thm-r-uncountable]]); every subset of an at most countable set is at most countable ([[lem-subset-of-countable]]); if $A$ and $B$ are at most countable then so is $A \times B$ ([[thm-product-of-countable]]); and a nonempty set is at most countable iff it is a surjective image of $\mathbb{N}$, an injection back into $\mathbb{N}$ being obtained from any such surjection ([[lem-countable-iff-surjection-from-n]]). The union of two at most countable sets is then at most countable, by interleaving two such surjections.
 
 [L5] A space is Lindel&ouml;f when every open cover has an at most countable subcover, and compact when every open cover has a finite subcover ([[def-compactness-variants]], [[def-compact-space]]).
 
@@ -88,9 +89,9 @@ treatment.
 
 2.4 $\Delta$ is closed in $\mathbb{R}_\ell \times \mathbb{R}_\ell$: let $(u,v)$ have $u + v \ne 0$. If $u + v > 0$, every point $(y_1,y_2)$ of $[u,u+1) \times [v,v+1)$ has $y_1 + y_2 \ge u+v > 0$, so the box misses $\Delta$. If $u+v < 0$, put $\delta := -(u+v)/2 > 0$; every point of $[u, u+\delta) \times [v, v+\delta)$ has $y_1 + y_2$ at least $u+v$ and less than $u+v+2\delta = 0$, so again the box misses $\Delta$. So the complement of $\Delta$ is open. [L2, L3, step 1.1]
 
-3.1 $\mathbb{R} \setminus C$ is at most countable. Fix a surjection $\mathbb{N} \to \mathbb{Q}$ ([L4]) and for $x \notin C$ let $r(x)$ be the rational of least index with $x < r(x)$ and $[x, r(x)) \in \mathcal{D}$; such rationals exist, since $\mathcal{D}$ covers gives $[a,b) \in \mathcal{D}$ with $a \le x < b$, a rational $q$ with $x < q < b$ by [L3] then has $[x,q) \subseteq [a,b)$ and so $[x,q) \in \mathcal{D}$. Nothing is selected, the least index being determined by $x$. The map $r$ is injective on $\mathbb{R} \setminus C$: if $x < y$ lay outside $C$ with $r(x) = r(y) = q$, then $[x,q) \in \mathcal{D}$ gives $(x,q) \subseteq C$ and $x < y < q$ puts $y$ in $C$. So $\mathbb{R} \setminus C$ injects into $\mathbb{Q}$ and is at most countable by [L4]. [L3, L4, step 2.2]
+3.1 $\mathbb{R} \setminus C$ is at most countable. Fix a surjection $\mathbb{N} \to \mathbb{Q}$ ([L4]) and for $x \notin C$ let $r(x)$ be the rational of least index with $x < r(x)$ and $[x, r(x)) \in \mathcal{D}$; such rationals exist, since $\mathcal{D}$ covers gives $[a,b) \in \mathcal{D}$ with $a \le x < b$, a rational $q$ with $x < q < b$ by [L3] then has $[x,q) \subseteq [a,b)$ and so $[x,q) \in \mathcal{D}$. Nothing is selected, the least index being determined by $x$. The map $r$ is injective on $\mathbb{R} \setminus C$: if $x < y$ lay outside $C$ with $r(x) = r(y) = q$, then $[x,q) \in \mathcal{D}$ gives $(x,q) \subseteq C$ and $x < y < q$ puts $y$ in $C$. So $\mathbb{R} \setminus C$ injects into $\mathbb{Q}$, hence is equinumerous with a subset of $\mathbb{Q}$ and at most countable by [L4]. [L3, L4, step 2.2]
 
-3.2 $C$ is covered by the at most countable family $\mathcal{D}_{\mathbb{Q}} := \{\, [p,q) \in \mathcal{D} : p, q \in \mathbb{Q} \,\}$, at most countable by [L4] as a subfamily of a set indexed by pairs of rationals: given $x \in C$ there is $[a,b) \in \mathcal{D}$ with $a < x < b$, and [L3] gives rationals $p, q$ with $a < p < x < q < b$, whence $[p,q) \subseteq [a,b)$ lies in $\mathcal{D}$ and contains $x$. [L3, L4, step 2.2]
+3.2 $C$ is covered by the at most countable family $\mathcal{D}_{\mathbb{Q}} := \{\, [p,q) \in \mathcal{D} : p, q \in \mathbb{Q} \,\}$, at most countable because $[p,q) \mapsto (p,q)$ injects it into $\mathbb{Q} \times \mathbb{Q}$, which is at most countable by [L4], as is therefore the image subset: given $x \in C$ there is $[a,b) \in \mathcal{D}$ with $a < x < b$, and [L3] gives rationals $p, q$ with $a < p < x < q < b$, whence $[p,q) \subseteq [a,b)$ lies in $\mathcal{D}$ and contains $x$. [L3, L4, step 2.2]
 
 4.1 So $\mathcal{D}_0 := \mathcal{D}_{\mathbb{Q}} \cup \{\, [x, r(x)) : x \in \mathbb{R} \setminus C \,\}$ is an at most countable subfamily of $\mathcal{D}$ by [L4] and covers $\mathbb{R}$ by steps 3.1 and 3.2. Every member of $\mathcal{D}$ lies inside some member of $\mathcal{A}$, so [L6] applied to an indexing of $\mathcal{D}_0$ by $\mathbb{N}$ supplies one member of $\mathcal{A}$ for each member of $\mathcal{D}_0$, and those form an at most countable subcover of $\mathcal{A}$. Hence $\mathbb{R}_\ell$ is Lindel&ouml;f: claim 3. [L4, L5, L6, step 3.1, step 3.2]
 
@@ -104,6 +105,6 @@ treatment.
   re-minted here rather than cited. Nothing above depends on the published
   treatment.
 
-**What fails in the product.** Lindel&ouml;fness of $\mathbb{R}_\ell$ rests on the rationals being dense and at most countable, so that a cover can be thinned to countably many rational-endpoint intervals plus countably many exceptional points. In the square the antidiagonal is a set on which every basic box is a single point, and there are uncountably many of those points; no countability of the rationals helps, because the boxes never contain two of them at once.
+**What fails in the product.** Lindel&ouml;fness of $\mathbb{R}_\ell$ rests on the rationals being dense and at most countable, so that a cover can be thinned to countably many rational-endpoint intervals plus countably many exceptional points. In the square each point $(x,-x)$ of the antidiagonal has a basic box around it meeting the antidiagonal in that point alone, and there are uncountably many such points; no countability of the rationals helps, because those boxes are pairwise distinct and each of them isolates one antidiagonal point, so an at most countable subfamily of the cover they generate can reach only at most countably many of them.
 
 **Neither compactness nor Lindel&ouml;fness is what separates the topologies.** $\mathbb{R}_\ell$ is finer than the usual topology of $\mathbb{R}$, since every $(a,b)$ is a union of half-open intervals, and both spaces are Lindel&ouml;f and not compact; the difference shows up only in the square.

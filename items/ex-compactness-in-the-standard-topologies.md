@@ -4,6 +4,9 @@ kind: example
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies placed in the compactness hierarchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-of-naturals-positive, def-compact-space, def-compactness-variants, def-standard-topologies, def-topological-space, lem-compactness-of-a-subspace-is-ambient, def-countable, thm-r-uncountable, def-hausdorff-space, thm-compact-subset-of-a-hausdorff-space-is-closed, def-subspace-topology-top, lem-subset-of-countable, def-natural-numbers, def-canonical-natural]
 justified_by: []
 aliases: []
@@ -12,16 +15,6 @@ short: "compactness of the standard topologies"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -94,6 +87,6 @@ all.
 
 ## Remarks
 
-**Compactness alone separates nothing.** The cofinite topology on an infinite set is compact and has the property that any two nonempty open sets meet, so it is as far from Hausdorff as a topology can be; the indiscrete topology is compact and has only two open sets. Every theorem on the companion page that concludes something interesting from compactness carries a Hausdorff hypothesis for exactly this reason.
+**Compactness alone separates nothing.** The cofinite topology on an infinite set is compact and has the property that any two nonempty open sets meet, so it is as far from Hausdorff as a topology can be; the indiscrete topology is compact and has only two open sets. Every theorem on the companion page that concludes a *separation* property from compactness carries a Hausdorff hypothesis for exactly this reason. The purely covering conclusions there carry none: continuous images of compact spaces are compact, a continuous real function on a nonempty compact space attains its bounds, and products of compact spaces are compact, all without any separation hypothesis.
 
 **The discrete and the cocountable cases fail for different reasons.** A discrete space fails compactness because its singletons already form a cover with nothing to thin; the cocountable topology on $\mathbb{R}$ fails it because countably many points can be shaved off one at a time and no finite stage removes them all. The second failure is at the countable level, which is why it kills countable compactness too.

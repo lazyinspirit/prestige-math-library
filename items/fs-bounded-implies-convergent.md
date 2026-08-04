@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every bounded sequence converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-limit, def-sequence, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-index-map-grows, thm-recursion, thm-induction-principle, lem-of-abs-value, def-abs-value, def-real-order, cor-of-one-positive, lem-of-add-order, lem-nat-successor-neq-self, def-nat-order, def-nat-addition, thm-nat-linear-order, def-natural-numbers, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -12,18 +15,16 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
     - title: "Subsequence (Wikipedia)"
@@ -42,8 +43,11 @@ pipeline_run: null
 
 The implication in the opposite direction is true and is
 [[lem-convergent-implies-bounded]]: every convergent sequence is bounded. The
-claim above asserts the converse, and it is refuted below by the alternating
-sequence whose terms are $1$ and $-1$.
+claim above asserts the converse. It is refuted by the alternating sequence
+$(s_k)$ and the index map defined by $n_0 = 0$ and
+$n_{\sigma(j)} = \sigma(\sigma(n_j))$: the refutation proves that $n$ is
+strictly increasing, $s_{n_j} = 1$ for every $j$, and $(s_k)$ does not
+converge.
 
 The sequence usually written $x_k = (-1)^k$ is introduced here by recursion
 ([[thm-recursion]]), as the unique $(s_k)$ with $s_0 = 1$ and
@@ -56,7 +60,7 @@ unwound into them.
 
 **Given:** By the recursion theorem ([[thm-recursion]]) applied to the set $\mathbb{R}$, the element $1$ and the function $u \mapsto -u$, there is a unique sequence $(s_k)$ of reals with $s_0 = 1$ and $s_{\sigma(k)} = -s_k$ for every $k$. Applied to the set $\mathbb{N}$, the element $0$ and the function $i \mapsto \sigma(\sigma(i))$, it gives a unique $n : \mathbb{N} \to \mathbb{N}$ with $n_0 = 0$ and $n_{\sigma(j)} = \sigma(\sigma(n_j))$; applied to $\mathbb{N}$, the element $\sigma(0) = 1$ and the same function, it gives a unique $m : \mathbb{N} \to \mathbb{N}$ with $m_0 = \sigma(0)$ and $m_{\sigma(j)} = \sigma(\sigma(m_j))$ ([[def-natural-numbers]], [[def-sequence]]).
 
-[L1] Recursion theorem ([[thm-recursion]]) and the induction principle ([[thm-induction-principle]]).
+[L1] For any set $A$, any $a \in A$ and any $f : A \to A$ there is a unique $g : \mathbb{N} \to A$ with $g(0) = a$ and $g(\sigma(n)) = f(g(n))$ for every $n \in \mathbb{N}$ ([[thm-recursion]]); and if $P(0)$ holds and $P(n)$ implies $P(\sigma(n))$ for every $n$, then $P(n)$ holds for every $n \in \mathbb{N}$ ([[thm-induction-principle]]).
 
 [L2] Absolute value and field arithmetic: $|-u| = |u|$ ([[lem-of-abs-value]]); $|1| = 1$, because $1 > 0$ ([[cor-of-one-positive]]) and $|v| = v$ whenever $v \ge 0$ by the definition of the absolute value ([[def-real-order]], [[def-abs-value]]); and $-(-u) = u$ ([[def-field]]).
 
@@ -64,13 +68,13 @@ unwound into them.
 
 [L4] Order on $\mathbb{N}$: $i < \sigma(i)$ for every $i$, because $\sigma(i) = i + 1$ and $\sigma(i) \ne i$; and the order is transitive ([[def-nat-order]], [[def-nat-addition]], [[lem-nat-successor-neq-self]], [[thm-nat-linear-order]]).
 
-[L5] Consecutive comparisons suffice for strict increase ([[lem-index-map-grows]]).
+[L5] If $n : \mathbb{N} \to \mathbb{N}$ satisfies $n_i < n_{\sigma(i)}$ for every $i \in \mathbb{N}$, then $n$ is strictly increasing (claim 1 of [[lem-index-map-grows]]).
 
 [L6] Convergence, and the fact that a constant sequence converges to its value ([[def-real-limit]], [[def-sequence]]).
 
 [L7] Divergence test: a sequence with two subsequences converging to different limits does not converge ([[lem-subsequence-inherits-limit]]).
 
-[L8] Boundedness of a sequence ([[def-sequence]]).
+[L8] $(x_k)$ is bounded if there is $M \in \mathbb{R}$ with $|x_k| \le M$ for every $k \in \mathbb{N}$ ([[def-sequence]]).
 
 ## Refutation
 
@@ -96,7 +100,7 @@ unwound into them.
 
 - The refutation is self-contained: the witness is constructed by recursion, its boundedness and its two subsequential limits are each proved by induction, and the failure of convergence comes from the divergence test of [[lem-subsequence-inherits-limit]] together with uniqueness of limits ([[lem-limit-unique]]).
 
-- **What is true in this direction** is the Bolzano-Weierstrass theorem: every bounded sequence of reals has a convergent *subsequence*. That is a genuine theorem and it needs the least-upper-bound property. It is **not proved anywhere in this library as things stand**: it is the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, which is planned and not yet written. It is named here only to say what the correct statement is; nothing above uses it, and no item of this library may be cited for it. The false claim above is what one gets by deleting the word "subsequence" from it.
+- **What is true in this direction** is the Bolzano-Weierstrass theorem: every bounded sequence of reals has a convergent *subsequence*. That is a genuine theorem and it needs the least-upper-bound property. It is **not available at this point in the reading order**: it is the subject of the next page of this track, *Monotone Sequences, Bolzano-Weierstrass, and Cauchy Completeness*, where it is proved. It is named here only to say what the correct statement is; nothing above uses it, and no item available here may be cited for it. The false claim above is what one gets by deleting the word "subsequence" from it.
 
 - The error is tempting because boundedness feels like "no room to escape". It is not: boundedness forbids running away, but it does not forbid oscillating forever, and oscillation is exactly what $(s_k)$ does.
 

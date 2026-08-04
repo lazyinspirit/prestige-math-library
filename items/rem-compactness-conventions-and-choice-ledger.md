@@ -4,6 +4,9 @@ kind: remark
 title: "The quasicompact convention, why compactness of a subset is read intrinsically here, and what each result on this page costs in choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-baire-category-locally-compact-hausdorff, lem-dependent-choice-along-a-sequence-of-relations, thm-compactness-agrees-with-metric-compactness, thm-compact-iff-fip, thm-alexander-subbase-lemma, thm-tychonoff, thm-finite-products-of-compact-spaces, lem-tube-lemma-for-a-compact-factor, def-compactness-variants, thm-compactness-variants-hierarchy, thm-ordinal-spaces-and-compactness, thm-the-long-line-is-countably-compact-and-not-compact, def-locally-compact-space, def-one-point-compactification, def-hausdorff-space, thm-zorn, def-axiom-of-choice, def-countable-choice, def-dependent-choice, lem-finite-choice, rem-choice-strengths]
 justified_by: []
 external_refs: [rem-schechter-kelley-tychonoff, rem-baire-category-choice-strength]
@@ -12,17 +15,10 @@ landmark: false
 short: "conventions and the choice ledger"
 verification:
   precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-03
-    scope: published-audit-targeted
-    context_sha256: 92a81083e1cb4e8653e3c328477706747b7e400c35de3a8ad1515454f3529f4a
-    item_sha256: 58b21fb0c68c466bab80c0591310fd6198d2da78c11e796a90cb49f3b8e5b6ca
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-08-04
+    date: 2026-08-05
     scope: published-audit
     delegated_by: owner
 sources:
@@ -55,9 +51,10 @@ $A \subseteq X$ compact when the subspace $A$ carries is a compact space, not wh
 every family of open subsets of $X$ covering $A$ has finitely many members
 covering it. The two conditions agree, and that is a theorem,
 [[lem-compactness-of-a-subspace-is-ambient]]; no proof here uses the ambient
-reading without citing it. The point of the choice is that compactness then
-belongs to the space $A$ alone, so a set compact in one ambient space is compact
-in every other one in which it sits as a subspace. The metric development fixed
+reading without citing it. Compactness belongs to $A$ together with its
+topology. It is preserved under a homeomorphic realization as a subspace, but a
+different ambient may induce a different topology and a different compactness
+answer. The metric development fixed
 the same reading, and that the two developments describe one notion is
 [[thm-compactness-agrees-with-metric-compactness]].
 
@@ -97,15 +94,19 @@ independence result and this library proves none.
 [[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]], claim 1 of
 [[thm-compactness-variants-hierarchy]], claims 1 and 2 of
 [[thm-ordinal-spaces-and-compactness]], and claims 1 and 3 of
-[[thm-the-long-line-is-countably-compact-and-not-compact]].
+[[thm-the-long-line-is-countably-compact-and-not-compact]]. The refutations of
+[[fs-a-compact-subset-is-closed-in-every-space]] and of
+[[fs-local-compactness-is-hereditary]] are also theorems of ZF: each exhibits a
+single explicit witness and spends no choice principle.
 
 Where a proof in that list does make a selection, the selection is over a finite
-index set, and [[lem-finite-choice]] is itself a theorem of ZF. Two of those
-proofs avoid even that: [[lem-tube-lemma-for-a-compact-factor]] indexes its cover
-by *pairs* of open sets, so the compactness criterion hands back the second
-entries with the indices, and
-[[thm-compact-subset-of-a-hausdorff-space-is-closed]] collects the family of
-**all** open sets that work rather than choosing one for each point. The textbook
+index set, and [[lem-finite-choice]] is itself a theorem of ZF. [[lem-tube-lemma-for-a-compact-factor]] avoids even the finite
+selection: it indexes its cover by *pairs* of open sets, so the compactness
+criterion hands back the second entries with the indices.
+[[thm-compact-subset-of-a-hausdorff-space-is-closed]] avoids the *arbitrary*
+selection by collecting the family of **all** open sets that work rather than
+choosing one for each point, and then makes only the finite selections that
+[[lem-finite-choice]] supplies. The textbook
 phrase "for each $y \in K$ choose disjoint open $U_y, V_y$" is a selection over an
 arbitrary index set, that is the full Axiom of Choice
 ([[def-axiom-of-choice]]), and it is avoided throughout this page.
@@ -153,7 +154,9 @@ several versions of the statement correspond to different principles over ZF, as
 **The metric ledger is separate and remains in force.** What each implication
 between the compactness properties of a *metric* space costs is recorded in
 [[rem-compactness-choice-ledger-metric]]. Nothing here supersedes it: by
-[[thm-compactness-agrees-with-metric-compactness]] the metric statements are the
+[[thm-compactness-agrees-with-metric-compactness]] for compactness itself, and by
+the agreement clauses of [[def-compactness-variants]] for countable compactness,
+sequential compactness and limit point compactness, the metric statements are the
 statements of this page read in a metric topology, so the two ledgers describe the
 same arrows wherever they overlap and different arrows elsewhere.
 

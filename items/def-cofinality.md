@@ -4,26 +4,21 @@ kind: definition
 title: "Cofinality $\\operatorname{cf}(\\alpha)$, and regular and singular cardinals"
 status: published
 origin: session
-deps: [lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-ordinal, def-cardinal, def-aleph-and-beth-hierarchies]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [lem-cofinality-is-well-defined, def-cofinal-subset-of-an-ordinal, def-ordinal, def-cardinal, def-cardinal-arithmetic, def-aleph-and-beth-hierarchies]
 justified_by: [thm-cofinality-basics]
 aliases: [def-regular-cardinal, def-singular-cardinal]
 landmark: true
 short: "$\\operatorname{cf}(\\alpha)$; regular, singular"
 verification:
   precheck: n/a
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
+    - title: "UCL, Axiomatic Set Theory, Ch. 4: Cardinal Arithmetic"
+      url: "https://www.homepages.ucl.ac.uk/~ucahcjm/ast/ast_notes_4.pdf"
     - title: "Cofinality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinality"
     - title: "Regular cardinal (Wikipedia)"
@@ -44,8 +39,9 @@ that a witnessing map of that length may be taken strictly increasing, is
 [[lem-cofinality-is-well-defined]], and both are theorems of ZF. So
 $\operatorname{cf}$ is defined at every ordinal, without any choice principle.
 
-**Regular and singular.** An **infinite cardinal** $\kappa$
-([[def-cardinal]], [[def-aleph-and-beth-hierarchies]]) is
+**Regular and singular.** An **infinite cardinal** $\kappa$ — a cardinal
+([[def-cardinal]]) with $\omega \subseteq \kappa$ ([[def-cardinal-arithmetic]]),
+for instance any $\aleph_\alpha$ ([[def-aleph-and-beth-hierarchies]]) — is
 
 - **regular** when $\operatorname{cf}(\kappa) = \kappa$;
 - **singular** when $\operatorname{cf}(\kappa) \ne \kappa$.

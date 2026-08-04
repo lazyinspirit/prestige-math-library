@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every compact space is sequentially compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-tychonoff, def-compact-space, def-compactness-variants, def-product-topology, def-standard-topologies, def-sequence-convergence-top, def-sequence, lem-index-map-grows, def-topological-space, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sequentially_compact_space"
     - title: "Tychonoff's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Tychonoff%27s_theorem"
+    - title: "Stacks Project, Tag 08ZU"
+      url: "https://stacks.math.columbia.edu/tag/08ZU"
 pipeline_run: null
 ---
 

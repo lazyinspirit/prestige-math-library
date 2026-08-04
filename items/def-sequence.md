@@ -4,6 +4,9 @@ kind: definition
 title: "Sequences of reals: bounded, eventually, frequently, tails, subsequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-numbers, def-natural-numbers, def-nat-order, def-real-limit, def-real-order, def-complete-ordered-field, lem-rat-embeds-dense]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Ch. 3"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch3.pdf"
+    - title: "CMU 21-269 notes, Compactness — subsequences"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/compactness.html"
     - title: "Sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequence"
     - title: "Limit of a sequence (Wikipedia)"
