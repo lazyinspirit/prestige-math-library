@@ -190,7 +190,15 @@ const AUDIT_STEPS = {
   // until the same gate was re-run at the old commit.
   A0: [
     ...BASE(),
-    g('content-policy.mjs', [MANIFESTS, '--manifest-only'], { needs: [MANIFESTS], why: 'the two-A/B-pair Beta capacity cap' }),
+    // `--audit` alongside `--manifest-only`: the audit manifest is a list of
+    // PUBLISHED ids, so the future-batch minting and reading-order checks are
+    // vacuous here and fired on every item until 2026-08-04. What remains is
+    // manifest shape, an id claimed by two batches, and a dangling deps target.
+    // The two-A/B-pair Beta capacity cap is deliberately NOT checked in audit
+    // scope — content-policy.mjs applies it to the Betas assigned inside a
+    // batch, not to the manifest, because an audit batch is a whole
+    // category-level. Splitting an over-cap manifest is an A0 action.
+    g('content-policy.mjs', ['--audit', MANIFESTS, '--manifest-only'], { needs: [MANIFESTS], why: 'manifest shape, duplicate claims and dangling dependency targets' }),
   ],
   // Betas are reading and proposing. Nothing of theirs is applied yet, and the
   // contract is expected to be red: the Betas record truthful empty `uses` lists

@@ -2,6 +2,7 @@
 // content-policy.mjs — enforce future-session provenance and containment rules.
 //
 //   node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]
+//   node tools/content-policy.mjs --audit --manifest-only research/audit/wave<k>-*.pages.json
 //
 // This gate deliberately receives an explicit in-flight batch scope.  The
 // library has a large legacy corpus whose provenance was not recorded under the
@@ -23,6 +24,18 @@ const asJson = argv.includes('--json');
 // Step 5.  Keeping these modes explicit prevents expected missing draft files
 // from being misreported as a failed pre-authoring gate.
 const manifestOnly = argv.includes('--manifest-only');
+// `--manifest-only --audit` is the AUDIT's A0 shape. It exists because the two
+// modes ask different questions of the same file. For a future build batch,
+// manifest-only asks "may these ids be minted here?"; for an audit wave the
+// manifest lists ids that are published by construction, so those questions
+// answer themselves and the checks that encode them (batch-item-already-exists,
+// and the reading-order rules batch-b-leaf-target / batch-forward-dependency,
+// which legacy pages predate) fire on every well-formed audit manifest. What
+// still means something — shape, an id claimed by two batches, a dangling deps
+// target, a plan-spec home collision — is kept. Measured 2026-08-04 on wave 4:
+// 95 errors before, 0 after, with no check lost that could ever have been true.
+// A B-leaf or backwards edge in published content is a FINDING for the wave to
+// read, surfaced by audit-manifest.mjs; it is not a gate failure.
 // --audit (owner, 2026-08-02, AUDIT-WORKFLOW.md): published-page audit scope.
 // The scope is retro-tagged legacy content, so the future-batch containment
 // rules that cannot be applied retroactively (generated roles, the
@@ -40,7 +53,10 @@ for (let index = 0; index < argv.length; index += 1) {
 const files = argv.filter((arg, index) =>
   arg !== '--json' && arg !== '--manifest-only' && arg !== '--audit' &&
   arg !== '--ledger' && argv[index - 1] !== '--ledger');
-if (!files.length || (manifestOnly && auditMode) || (auditMode && !ledgerPaths.length)) usage();
+// The evidence ledger is required by the audit's POST-tagging mode, which reads
+// each item's on-disk provenance. Manifest-only never opens an item file, so it
+// has nothing to reconcile a ledger against and must not demand one.
+if (!files.length || (auditMode && !manifestOnly && !ledgerPaths.length)) usage();
 
 const AUDIT_EVIDENCE = new Map([
   ['exact-source', 'literature-derived'],
@@ -213,7 +229,8 @@ for (const file of files) {
       }
       seen.add(id);
       if (manifestOnly) {
-        if (items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
+        // Audit scope is published content: every id has a file, by definition.
+        if (!auditMode && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
         const priorHome = planHomes.get(id);
         if (priorHome && priorHome !== page?.id) {
           error('batch-plan-id-collision', `${id} is already planned on ${priorHome}, not ${page?.id ?? '?'}`, id);
@@ -243,10 +260,13 @@ if (manifestOnly) for (const [id, planned] of plannedItems) {
     }
     const target = plannedItems.get(raw);
     if (target) {
-      if (target.pageKind === 'B') {
+      // Both of these are rules about what a batch may be SCAFFOLDED to do.
+      // Published pages predate them, so in audit scope they are findings for
+      // the wave to read, not gate failures.
+      if (!auditMode && target.pageKind === 'B') {
         error('batch-b-leaf-target', `${id} depends on B-page item ${raw} (${target.page})`, id);
       }
-      if (typeof target.order === 'number' && typeof planned.order === 'number' && target.order > planned.order) {
+      if (!auditMode && typeof target.order === 'number' && typeof planned.order === 'number' && target.order > planned.order) {
         error('batch-forward-dependency', `${id} depends on later item ${raw} (${target.page})`, id);
       }
       continue;
@@ -396,5 +416,6 @@ process.exit(errors.length ? 1 : 0);
 function usage() {
   console.error('usage: node tools/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]');
   console.error('       node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.provenance.jsonl [--ledger ...] research/audit/wave<k>-*.pages.json [--json]');
+  console.error('       node tools/content-policy.mjs --audit --manifest-only research/audit/wave<k>-*.pages.json   # A0; no ledger exists yet');
   process.exit(2);
 }
