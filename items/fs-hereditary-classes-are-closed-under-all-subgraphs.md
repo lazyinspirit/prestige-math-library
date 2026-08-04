@@ -4,6 +4,9 @@ kind: false-statement
 title: "Every hereditary graph class is closed under taking arbitrary subgraphs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-hereditary-graph-class, ex-complete-graphs-as-a-hereditary-class, cex-a-subgraph-copy-need-not-be-induced]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

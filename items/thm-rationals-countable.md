@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{Q}$ is countably infinite"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-n-cross-n-countable, thm-product-of-countable, def-rationals, lem-rat-positive-denominator, def-countable, lem-subset-of-countable, def-integers, lem-countable-iff-surjection-from-n, thm-schroder-bernstein, def-equinumerous, def-injection-surjection-bijection, lem-nat-embeds-int, lem-int-embeds-rat, def-int-order, thm-int-ordered-ring, thm-omega-is-peano-system, lem-nat-order-is-membership]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Countable set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Countable_set"
     - title: "Rational number (Wikipedia)"

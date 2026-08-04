@@ -4,6 +4,9 @@ kind: example
 title: "$\\omega + \\omega$ is at most countable although it is not order isomorphic to $\\omega$: order type and cardinality are different invariants"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-countable, thm-product-of-countable, def-equinumerous, def-order-isomorphism, thm-ordinal-arithmetic-monotonicity, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "Countable set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Countable_set"
+    - title: "First uncountable ordinal (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
 pipeline_run: null
 ---
 

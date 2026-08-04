@@ -4,6 +4,9 @@ kind: lemma
 title: "Bernoulli's inequality $(1+x)^n \\ge 1 + nx$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-integer-power, thm-induction-principle, lem-of-add-order, lem-of-sign-rules, lem-of-square-positive, lem-of-zero-mult, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Bernoulli's inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bernoulli%27s_inequality"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

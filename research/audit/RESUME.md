@@ -1,5 +1,229 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVE 3 COMPLETE — A0 to A10, at the owner pause (2026-08-04)
+
+**Rundown: `research/audit/wave3-A10.md`. Committed, NOT pushed.**
+
+224/224 items tagged from 0. **16 confirmed fatal defects across 14 items** — 11
+found by A6 Sol refuters, 4 by the A7 judges on text A6 had certified, 1 the
+out-of-wave real-power definition. Only ONE of the sixteen was an invalid
+inference in a numbered step; 12 were Fact-block or Remark text. Fifth wave in a
+row with that shape.
+
+29 `verification.verified`; 0 `verification.audited` written; **0
+`established-knowledge` waivers** (wave 2 had 8, because this time the
+orchestrator verified sources itself). All gates green.
+
+Judges: Terra 40.6% reject / 96.8% precision / **all 4 fatals**; DeepSeek 12.1% /
+92.6% / none. 121 adjudications, 0 unadjudicated, every row hash-bound —
+`step8-guard` binding for the first time, 3/3 edits licensed.
+
+**Built this wave:** the unattended audit driver (`run-wave.mjs`,
+`gates.mjs --audit`, 4 dispatch roles, `preflight --audit`,
+`ops/run-wave@.service`, `UNATTENDED-AUDIT.md`, 20 passing properties) and
+`tools/audit-split.mjs`. **Wave 4 can be driven unattended.**
+
+**Owner queue: `wave3-A10.md` §8** — 8 items. The sharpest: `level-coverage
+--verify-current-context` structurally cannot pass after an A8 repair (55 of 58
+failures are untouched page-siblings), and link liveness as a gate — fifth wave
+running, and this time a REPAIR shipped a dead link.
+
+**NEXT WAVE: 4.** Baseline is this wave's commit. `combinatorics` completed at
+wave 3; `foundations` completes at wave 4; waves 5+ are real-analysis and
+topology only.
+
+
+## WAVE 3 HISTORY — in-flight record (2026-08-04)
+
+**This section supersedes every section below it.** Everything below is history.
+
+**Owner instruction this session:** compute the next auditable pages, then
+"Audit wave 3", then "continue autonomously all the way through to A10".
+A10 remains the sole owner pause.
+
+**Baseline commit `136fb35`.** Working tree at dispatch: clean, 0 unpushed.
+Wave 2 shipped at `a214a80` and was pushed on explicit owner instruction during
+the branch-merge task, so origin already matches.
+
+### Scope of record (A0 complete — `research/audit/wave3-A0.md`)
+
+**12 pages · 8 A/B pairs · 224 items · 161 proof-bearing · 100% untagged.**
+62 already-tagged items excluded at generation; reconciled exactly to three
+whole pairs that dropped out (`group-homomorphisms-and-the-isomorphism-theorems`
+25, `eulerian-and-hamiltonian-graphs` 31, `graph-colouring` 6).
+
+**Five Betas, not four:** the combinatorics manifest held three A/B pairs, over
+the two-pair cap, and was split into `wave3-combinatorics-graphs.pages.json`
+(74 items) and `wave3-combinatorics-incidence.pages.json` (34). The split is
+free — zero cross-pair edges, and the manifest cross-batch count is 58 before
+and after.
+
+| batch | items |
+|---|---|
+| `wave3-combinatorics-graphs` | 74 |
+| `wave3-combinatorics-incidence` | 34 |
+| `wave3-real-analysis` | 44 (two A pages, NEITHER has a B companion on disk) |
+| `wave3-foundations` | 36 |
+| `wave3-topology` | 36 |
+
+Seams: 95 pending edges, **58 resolve inside wave 3**, 4 are the excluded ‡ tier,
+and only **33 point into later waves** (all from topology). Wave 2 carried 123.
+
+Artifacts: `wave3-touches.json` (baseline, 2767 items) · `wave3-audit-manifest.json`
+(1687 edges: 956 published-backward, 669 same-batch, 58 cross-batch, 4 forward) ·
+`genrisk.json` regenerated (54 seeds, 10 load-bearing, largest cone 9; all ten
+carry a wave-1/1b/2 disposition). Pre-audit gates ALL PASS at `136fb35` —
+recorded so any later regression is attributable to this wave.
+
+### Done before A7, needs its injection test
+
+`briefs/judge-conventions.txt` now carries the sigma line (wave-2 queue item 5):
+"the successor of a von Neumann natural n is sigma(n) = n union {n} … sigma(n)
+is NOT {0,...,n-1}". The Terra misreading caused 6 of 9 wave-2 false positives,
+and **17 of the 224 wave-3 items mention sigma**, concentrated in
+`ordinal-arithmetic` and `countability-and-uncountability`. This is a judge-lane
+CONTEXT change, so ARCHITECTURE §5 requires an injection test before the first
+production sweep: inject a defect known false under this library's conventions,
+verify both lanes catch it. **Not yet run — do it at A7 before the sweep**, and
+record the result in ARCHITECTURE §5 and `wave3-A10.md`.
+
+### A1–A4 COMPLETE AND GATED (2026-08-04)
+
+**Owner instruction, standing:** run autonomously to A10; **no subagent may ever
+raise a shell-command or file-edit permission prompt.** Every Claude-runtime Bash
+call passes `dangerouslyDisableSandbox: true`; every Codex dispatch keeps
+`--ask-for-approval never --sandbox workspace-write`. A recorded blocker is the
+correct outcome; a prompt never is.
+
+**A1/A2** — five Sol Betas, all `EXIT=0`, 224/224 ledger rows, 174 contracts,
+every batch claiming no coverage exception.
+
+**A3** — `research/audit/wave3-A3.md`. The decisive fact: **the orchestrator has
+working `WebFetch`; every Beta sandbox has no DNS.** First wave where source
+claims were independently checked.
+
+- **2 class-(a) falsehoods approved**, both verified by me from disk:
+  `def-cofinal-subset-of-an-ordinal` (false equivalence; α=1, C={0} is cofinal,
+  strict fails, weak holds) — **independently corroborated by the topology Beta
+  from another batch with the same witness**; and
+  `fs-ordinal-addition-is-commutative`'s Remark ("the commutative special case is
+  exactly the finite one" — false, ω+ω commutes, and unsupported by its own
+  citation, which gives only the forward direction).
+- **Class (b) approved**: 9 MST items on a URL whose real heading is "Lecture 8:
+  Prüfer code"; 21 items on a **404** ISGCI URL; 8 on a **404** bull survey; the
+  13 declared-but-unused facts (19 contract errors); topology B1/B2; foundations
+  B1 (page only); incidence W3-CI-001…006. **Orchestrator addition no Beta
+  found:** 29 items citing the Diestel **landing portal**, redirected to the real
+  Ch1 PDF. 38 of 74 `combinatorics-graphs` items had a dead or contentless URL.
+- **Class (c) partially declined** for `combinatorics-graphs`: 74 rationales
+  collapsed to **6 templates**, 0/74 `exact-source`, and on cex/fs rows the
+  template asserted a source "supplies" the *false claim the item refutes*. Sent
+  back ~25 rows (10 cex/fs + 15 definitions). Labels were within precedent
+  (examples 83/120 `ai-altered` across prior waves) — the evidence record was the
+  defect. Other four ledgers approved as recorded.
+- **Class (d) declined**: the three wholesale A-page summary rewrites
+  (ordinal-arithmetic 10 paras/1023 words, countability 8/843, roots 5/707).
+  Real violations, but AUDIT-WORKFLOW §7 A2.4 makes this class "recorded, not
+  chased" and a full-body rewrite is the largest A4 blast radius available.
+  **Drafts preserved in the Beta findings files; A10 owner queue.** Approved the
+  narrow mathematical corrections inside that prose.
+
+**A4** — five Sol Betas, all `EXIT=0`. 224 items changed (exactly scope), 1 page
+(`library/foundations/ordinal-arithmetic.md`), nothing outside.
+
+**Orchestrator gate run after A4 (serial, Amendment 6):**
+
+| gate | result |
+|---|---|
+| `proof-contract --strict` | **0 errors, 0 warnings, 174/174** (was 19) |
+| `content-policy --audit --ledger` ×5 | **224 scoped, 0 errors, 2 warnings** (legacy `generated-role`) |
+| `precheck` | 174 checked, 0 failing |
+| `citecheck` `fwdcheck` `extcheck` `rendercheck` `prosecheck` `depsource` | exit 0 |
+| `finite-smoke` | 0 errors, 3 checks |
+| `risk-report` | 0 errors, 174 routed, **99 CRITICAL + 34 HIGH** |
+| `depcheck` | exit 1 — **17 `published-unaudited`**, all in scope |
+
+**The depcheck flip is expected, and I proved it rather than asserting it:**
+re-ran the gate in a `git worktree` at `136fb35` — the 114 `cited-not-in-deps`,
+38 `multi-home`, 1 `b-leaf-legacy` are byte-identical to baseline. The only delta
+is the 17 items whose obsolete `audited` stamp A4 correctly removed. A6's
+`verification.verified` restores the gate. (This is the wave-2 misattribution
+lesson: attribute a regression by re-running the gate at the old commit.)
+
+Snapshots in `wave3-touches.json`: `baseline`, `pre-A4`, `post-A4` — **3 total,
+stage-level only.** `genrisk.json` regenerated: 56 seeds (was 54), 10
+load-bearing unchanged, 2 new seeds are zero-cone.
+`wave3-impact-template.json`: 224 changed interfaces, 2,107 affected.
+
+### A6 Alpha dispatched — `claude-opus-5`, Anthropic subagent, running
+
+Given the 17 items to certify, the risk priority order, the 58 cross-batch edges,
+the 33 later-wave topology edges, genrisk, impact closure, and **three things A3
+deliberately withheld from A4**:
+
+1. Verify all **63 URLs** the retag wrote (Alpha has web access, the Betas do
+   not). Already flagged: `math.wvu.edu/.../node-9.html` returns ECONNREFUSED on
+   443 here though the topology Beta recorded HTTP 200 — **not established as
+   dead** (may be HTTP-only); Alpha resolves it and `node-11.html`.
+2. Decide the second `def-ordinal-exponentiation` exponent-law location — its
+   line-40 attribution reads accurate to me, so I withheld the edit.
+3. Verify `combinatorics-graphs` actually re-determined its ~25 rationales.
+
+### A6 COMPLETE / A7 RUNNING (2026-08-04)
+
+**A6 (claude-opus-5):** 11 confirmed fatal defects repaired and certified, all
+found by Sol refuter lanes rather than by Alpha. 26 verification.verified stamps
+written after independent Sol reading; depcheck published-unaudited empty.
+1,063 cross-edges audited, genrisk receipt exit 0, impact receipt 224/2,107.
+Alpha corrected two orchestrator errors: my "27 self-certifications" was a race
+artifact (26 were Alphas own, written after certification; 1 was wave 2), and my
+199/25 pure/material split has a blind spot — a title/deps/forward_refs change
+lives INSIDE frontmatter, so the hunk test cannot see it. Correct split 198/26.
+Alpha also refuted my proposal to narrow refuters to the changed set: **6 of the
+11 fatals were in items A4 left byte-identical.**
+
+**Owner-authorised published-dependency repair (out of wave scope):**
+def-real-power-by-rational-supremum had a spurious reciprocal making
+thm-rational-supremum-power-agrees-with-exp FALSE for every base in (0,1).
+Fixed, propagated, certified by an independent Sol reader, recorded in
+research/audit/wave3-published-dependency-repairs.md. Three judge rounds; both
+lanes caught a missing thm-real-power-laws dependency in MY repair. One DeepSeek
+rejection stays OPEN for Alpha at A8 (completeness citation); the Sol certifier
+refuted it with evidence but adjudication is Alphas.
+
+**A7 injection test PASSED** (ARCHITECTURE §5 now records it): control passed,
+injected false sigma-cardinality claim rejected by BOTH lanes citing the new
+convention line. File restored, sha256 identical.
+
+**A7 sweep running.** 448 rows expected (224 x 2). At 182 rows: Terra 40.7%
+reject, DeepSeek 12.2% — close to wave 2 (43.4%/8.9%). Terra rejections cluster
+on citation fidelity ("F# not faithfully supported by its citation"), heavily in
+combinatorics-graphs — the batch whose Beta I sent back at A3 for evidence
+quality. Worth testing that correlation at A10.
+
+### Exact next action
+
+Await the A6 completion notification. Then A7: **run the σ injection test first**
+(`briefs/judge-conventions.txt` gained the σ(n) = n ∪ {n} line this wave — a
+judge-lane context change, so ARCHITECTURE §5 requires it), then the full paired
+sweep over all 224 items via `--manifests`, then the coverage gate.
+
+### Rules newly binding this wave
+
+`step8-guard.mjs` binds from wave 3: `pre-a8` snapshot before adjudication,
+`item_sha256` on every adjudication row, only `confirmed_fatal` licenses an edit.
+The wave-2 ledger stays unhashed and is NOT backfilled.
+
+### Carried owner queue (from `wave2-A10.md` §8), re-raised at A10
+
+1. `thm-metric-sequential-closure` + rider `thm-metric-continuity-characterisations`.
+2. `level-coverage --audit --verify-current-context` has never run in any wave.
+3. Link liveness as a gate (fourth wave running).
+4. Beta/certifier sandboxes have no DNS — warned about explicitly in this wave's
+   Beta prompts.
+5. sigma line — **taken this wave**, pending its injection test.
+
+
 ## WAVE 2 AT THE A10 OWNER PAUSE — awaiting release (2026-08-04)
 
 **A0–A10 complete. Rundown: `research/audit/wave2-A10.md`.**

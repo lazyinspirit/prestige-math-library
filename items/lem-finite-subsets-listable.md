@@ -4,6 +4,9 @@ kind: lemma
 title: "The nonempty finite subsets of $\\mathbb{R}$ are exactly the listable ones"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-countable, def-equinumerous, thm-induction-principle, lem-nat-order-is-membership, lem-nat-transitive-irreflexive, def-injection-surjection-bijection, def-natural-numbers, def-nat-order, lem-nat-nonzero-is-successor, def-complete-ordered-field, lem-finite-set-has-max, def-max-min]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Finite set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Finite_set"
     - title: "Maximum and minimum (Wikipedia)"

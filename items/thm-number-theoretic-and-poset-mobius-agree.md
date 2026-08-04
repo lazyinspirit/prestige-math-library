@@ -4,6 +4,9 @@ kind: theorem
 title: "The number-theoretic Möbius function is the poset Möbius function of divisibility: $\\mu(n)=\\mu_{\\mid}(1,n)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-number-theoretic-mobius-function, def-poset-mobius-function, lem-divisibility-poset-is-lower-finite-and-factorises, thm-mobius-function-of-a-product-poset, thm-mobius-function-of-a-finite-chain, lem-poset-mobius-recurrence]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "MIT 18.785, Problem Set 8"
-      url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.8.4–3.8.5"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

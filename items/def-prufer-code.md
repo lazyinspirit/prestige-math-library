@@ -4,6 +4,9 @@ kind: definition
 title: "The Prüfer code of a tree on a finite set of natural labels"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-tree-forest-and-leaf, cor-nontrivial-tree-has-two-leaves, thm-well-ordering-principle, def-natural-numbers, def-finite-cardinality]
 justified_by: []
 aliases: [Pruefer code]
@@ -14,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

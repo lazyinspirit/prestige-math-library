@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every connected topological space is path-connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-oscillating-zigzag-curve, def-connected-space, def-path-connected,
        thm-path-connected-implies-connected, def-subspace-topology-top]
 justified_by: []
@@ -14,15 +17,11 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -30,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Topologist's sine curve (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Topologist%27s_sine_curve"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 
@@ -56,8 +57,6 @@ statement which the false one attempts to reverse.
 
 [L2] $\overline{G}$ is **not** path-connected ([[lem-the-oscillating-zigzag-curve]], claim 4).
 
-[L3] Every path-connected space is connected ([[thm-path-connected-implies-connected]], claim 2).
-
 ## Refutation
 
 **Proof technique:** contradiction.
@@ -72,7 +71,7 @@ statement which the false one attempts to reverse.
 
 ## Remarks
 
-- **What survives is the converse, and only the converse.** [L3] is a theorem: path-connectedness implies connectedness, always. The false claim is its reversal, and $\overline{G}$ shows that no amount of connectedness alone produces a path.
+- **What survives is the converse, and only the converse.** [[thm-path-connected-implies-connected]] is a theorem: path-connectedness implies connectedness, always. The false claim is its reversal, and $\overline{G}$ shows that no amount of connectedness alone produces a path.
 
 - **Where the failure sits in the witness.** By claim 2 of [[lem-the-oscillating-zigzag-curve]] the space $\overline{G}$ is the graph $G$ together with the segment $\{0\} \times [0,1]$. The graph on its own is path-connected; adjoining the segment keeps the space connected, because the closure of a connected set is connected, and destroys path-connectedness, because a path reaching the segment from $G$ would have to take the values $0$ and $1$ in its second coordinate arbitrarily late.
 

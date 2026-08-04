@@ -4,6 +4,9 @@ kind: theorem
 title: "Young's inequality for products (rational conjugate exponents)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-weighted-am-gm-rational, def-rational-power, lem-rational-power-laws, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, lem-of-q-embeds, lem-of-inverse-positive, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,12 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Finite inequalities (Cornell University)"
+      url: "https://e.math.cornell.edu/people/belk/measuretheory/Inequalities.pdf"
+    - title: "Young, Hölder, and Minkowski inequalities (Oregon State University)"
+      url: "https://math.oregonstate.edu/~show/old/142_Luenberger.pdf"
     - title: "Young's inequality for products (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Young%27s_inequality_for_products"
     - title: "Hölder's inequality (Wikipedia)"

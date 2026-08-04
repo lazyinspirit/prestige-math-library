@@ -4,6 +4,9 @@ kind: definition
 title: "Finite, countably infinite, countable, uncountable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-pigeonhole]
 justified_by: []
 aliases: [def-finite-set, def-countably-infinite, def-uncountable]
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Countable set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Countable_set"
     - title: "Finite set (Wikipedia)"

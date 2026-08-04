@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every infinite set has a countably infinite subset, in ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [rem-cohen-first-model, def-countable, def-countable-choice, def-equinumerous, lem-pigeonhole]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "Does DC imply countable choice uniformly? (Journal of Symbolic Logic)"
+      url: "https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/does-mathsf-dc-imply-mathsf-acomega-uniformly/05069A84199B3477B3BEA2E58EF21AF6"
     - title: "Dedekind-infinite set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dedekind-infinite_set"
     - title: "Amorphous set (Wikipedia)"
@@ -61,8 +62,6 @@ naming elements of $A$.
 
 [A1] **If** ZF is consistent, **then** there is a model of ZF containing an infinite set with no countably infinite subset (equivalently, an infinite set that is not Dedekind-infinite). Such models are produced by forcing, following Cohen (1963), whose first model is exactly of this kind ([[rem-cohen-first-model]]), and by transferring Fraenkel-Mostowski permutation models, where the witnesses are amorphous sets, into ZF by the Jech-Sochor embedding theorem. This is an external result, it is NOT proved in this library, and it presupposes the consistency of ZF assumed in the Given.
 
-[A2] ZF together with $\mathrm{AC}_\omega$ **does** prove $S$ ([[def-countable-choice]]). This is a standard result, quoted here for contrast and not proved in this library either.
-
 [L1] "Infinite" means not finite, that is, not equinumerous with any natural number; "countably infinite" means equinumerous with $\mathbb{N}$ ([[def-countable]], [[def-equinumerous]]).
 
 ## Refutation
@@ -81,7 +80,7 @@ naming elements of $A$.
 
 - **What is and is not proved here.** As in [[fs-zorn-provable-in-zf]] and [[fs-countable-union-theorem-of-zf]], the refutation is conditional on the consistency of ZF and rests on an independence result that this library does not prove. The honest reading is: $S$ is a theorem of ZF only if ZF is inconsistent.
 
-- **With $\mathrm{AC}_\omega$ the statement is true**, which is exactly why it feels obvious. Given an infinite $A$, for each $n$ the set of injections $n \to A$ is nonempty, and $\mathrm{AC}_\omega$ selects one for every $n$ at once; from that sequence a countably infinite subset is assembled with no further choices. The intuition behind the naive argument is therefore not wrong, it is just not a ZF argument.
+- **With [[def-countable-choice|$\mathrm{AC}_\omega$]] the statement is true**, which is exactly why it feels obvious. This standard contrast is not proved in this library either. Given an infinite $A$, for each $n$ the set of injections $n \to A$ is nonempty, and $\mathrm{AC}_\omega$ selects one for every $n$ at once; from that sequence a countably infinite subset is assembled with no further choices. The intuition behind the naive argument is therefore not wrong, it is just not a ZF argument.
 
 - **Two notions of infinite come apart in ZF.** A set is *Dedekind-infinite* when it is equinumerous with a proper subset of itself, equivalently when it has a countably infinite subset. Dedekind-infinite implies infinite in ZF, and that direction is a theorem of this library rather than a convention: it is claim 5 of [[lem-pigeonhole]], transported along a bijection. In detail, suppose $A$ were both finite and Dedekind-infinite, say $f : A \to n$ is a bijection onto a natural number and $g : A \to B$ is a bijection onto a proper subset $B \subsetneq A$. Then $f[B] \subseteq n$, and $f[B] \neq n$ because $f$ is injective and $B \neq A$, while $n \approx A \approx B \approx f[B]$; so $n$ is equinumerous with a proper subset of itself, which claim 5 forbids. The converse implication, that infinite implies Dedekind-infinite, is exactly $S$. So ZF does not prove the two notions equivalent, unless ZF is inconsistent: that separation is the conditional conclusion of the refutation above and inherits its consistency hypothesis, and an amorphous set, one that cannot be split into two infinite pieces at all, is infinite in the weak sense only.
 

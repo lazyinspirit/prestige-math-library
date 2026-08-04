@@ -4,6 +4,9 @@ kind: false-statement
 title: "False: classical Möbius inversion and inclusion-exclusion are unrelated inversion principles"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-classical-mobius-inversion, cor-inclusion-exclusion-is-boolean-mobius-inversion]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

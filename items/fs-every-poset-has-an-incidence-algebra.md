@@ -4,6 +4,9 @@ kind: false-statement
 title: "False: convolution defines an incidence algebra for every poset"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-incidence-algebra-and-convolution, def-poset-interval-and-finiteness-conditions, def-partial-order]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Y. Guan and Y. Zhang, Additive Biderivations of Incidence Algebras, §2.1"
+      url: "https://arxiv.org/abs/2412.18049"
 pipeline_run: null
 ---
 

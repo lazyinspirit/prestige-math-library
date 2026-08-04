@@ -4,6 +4,9 @@ kind: corollary
 title: "Every nonempty hereditary graph class contains the null graph"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-hereditary-graph-class, def-subgraph-induced-subgraph-and-spanning-subgraph, def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

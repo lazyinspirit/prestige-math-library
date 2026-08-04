@@ -4,6 +4,9 @@ kind: lemma
 title: "The set of spanning trees of a finite graph is finite"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-spanning-tree, def-finite-simple-graph, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

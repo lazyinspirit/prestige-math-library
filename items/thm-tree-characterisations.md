@@ -4,6 +4,9 @@ kind: theorem
 title: "Equivalent characterisations of a nonempty tree by unique paths, edge count, minimal connectivity and maximal acyclicity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-tree-forest-and-leaf, thm-forest-edge-component-count, cor-tree-edge-count, lem-edge-deletion-in-a-tree, lem-edge-addition-to-a-tree, def-subgraph-induced-subgraph-and-spanning-subgraph, def-connected-graph-and-connected-component, def-graph-walk-trail-path-and-cycle]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

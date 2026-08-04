@@ -4,6 +4,9 @@ kind: theorem
 title: "The long ray is a linear continuum, hence connected; every one of its at most countable subsets is bounded above, assuming countable choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-long-line, def-order-topology-on-a-linearly-ordered-set,
        thm-a-linear-continuum-is-connected, lem-ordinal-basics, lem-ordinal-trichotomy,
        def-ordinal, def-limit-ordinal, def-first-uncountable-ordinal,
@@ -35,6 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Long_line_(topology)"
     - title: "Linear continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_continuum"
+    - title: "MIT OpenCourseWare, The Long Line"
+      url: "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/e319b3a36ca774261b6b8c45e11804c2_notes_c.pdf"
 pipeline_run: null
 ---
 

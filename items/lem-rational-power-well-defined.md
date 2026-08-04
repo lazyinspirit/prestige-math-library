@@ -4,6 +4,9 @@ kind: lemma
 title: "Rational powers do not depend on the representative"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-rational-power, thm-nth-roots-exist, lem-power-monotone, lem-power-laws, def-rationals, def-integer-power, lem-of-inverse-positive, def-rat-order, def-int-order, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

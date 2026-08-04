@@ -4,6 +4,9 @@ kind: theorem
 title: "Cayley's formula: $\\tau(K_n)=n^{n-2}$ for $n\\ge2$, with $\\tau(K_1)=1$ and $\\tau(K_0)=0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-prufer-code-bijection, def-number-of-spanning-trees, def-standard-complete-bipartite-path-and-cycle-graphs, thm-cardinality-of-a-set-of-functions, def-nat-power]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

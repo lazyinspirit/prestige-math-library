@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\beta < \\gamma$ implies $\\beta + \\alpha < \\gamma + \\alpha$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-addition, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: []

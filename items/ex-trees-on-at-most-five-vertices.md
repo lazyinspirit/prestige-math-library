@@ -4,6 +4,9 @@ kind: example
 title: "The isomorphism types of trees on at most five vertices"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-tree-characterisations, cor-tree-edge-count, cor-nontrivial-tree-has-two-leaves, thm-handshake-lemma-for-finite-simple-graphs, def-standard-complete-bipartite-path-and-cycle-graphs, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

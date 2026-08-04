@@ -4,6 +4,9 @@ kind: theorem
 title: "On $\\omega$ the ordinal $+$ and $\\cdot$ are the Peano operations: $\\omega$ is closed under ordinal $+$, $\\cdot$ and exponentiation, and for naturals $m, n$ the ordinal $m + n$ and $m \\cdot n$ are the natural-number sum and product"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, def-nat-addition, def-nat-multiplication, thm-omega-is-peano-system, thm-induction-principle, def-natural-numbers, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-nat-order, def-ordinal]
 justified_by: []
 aliases: [thm-ordinal-arithmetic-extends-peano]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Peano_axioms"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
 pipeline_run: null
 ---
 

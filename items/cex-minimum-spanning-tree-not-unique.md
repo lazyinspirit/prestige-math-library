@@ -4,6 +4,9 @@ kind: counterexample
 title: "A weighted graph with two distinct minimum spanning trees"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-weighted-graph-and-minimum-spanning-tree, def-spanning-tree, def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. T. Wood, Graph Theory lecture notes, Minimum spanning trees"
-      url: "https://ptwiddle.github.io/MAS341-Graph-Theory-2017/lecturenotes/lecture8.html"
+    - title: "ISI Bangalore discrete mathematics notes, Minimal spanning trees"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S3.html"
 pipeline_run: null
 ---
 

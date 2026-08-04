@@ -4,6 +4,9 @@ kind: lemma
 title: "Monotonicity of $r \\mapsto a^{r}$ and of $a \\mapsto a^{r}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-rational-power, lem-rational-power-laws, lem-power-monotone, lem-power-laws, lem-rational-power-well-defined, def-rat-order, def-int-order, lem-nat-embeds-int, thm-nth-roots-exist, lem-rat-positive-denominator, lem-of-sign-rules, def-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

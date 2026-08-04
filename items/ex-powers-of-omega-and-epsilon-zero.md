@@ -4,6 +4,9 @@ kind: example
 title: "$\\omega^{2}$, $\\omega^{\\omega}$, and $\\varepsilon_0 = \\sup\\{\\omega, \\omega^{\\omega}, \\omega^{\\omega^{\\omega}}, \\dots\\}$ satisfying $\\omega^{\\varepsilon_0} = \\varepsilon_0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-exponentiation, def-ordinal-multiplication, thm-ordinal-exponent-laws, thm-ordinal-arithmetic-monotonicity, lem-recursion-on-the-ordinals, thm-induction-principle, thm-cantor-normal-form, def-limit-ordinal, lem-omega-least-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-natural-numbers, def-ordinal]
 justified_by: []
 aliases: [ex-epsilon-zero]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

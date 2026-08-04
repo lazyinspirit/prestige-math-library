@@ -4,6 +4,9 @@ kind: definition
 title: "The divisibility poset of positive integers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-divides-in-z, lem-divisibility-basic, def-partial-order, thm-int-ordered-ring, lem-divisor-bound]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "MIT 18.785, Problem Set 8"
-      url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.8.4–3.8.5"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Locally connected and locally path-connected spaces: a neighbourhood base of open connected, respectively open path-connected, sets at every point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-connected-space, def-path-connected, def-neighbourhood-top,
        def-topological-space, def-subspace-topology-top,
        def-connected-component-and-quasicomponent, def-standard-topologies]
@@ -27,8 +30,8 @@ sources:
   references:
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §25"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The induced-embedding count $\\operatorname{ind}_H(G)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-induced-embedding-and-induced-copy, thm-cardinality-of-a-set-of-functions, thm-subset-of-a-finite-set, def-finite-cardinality]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Swastik Kopparty, Local Structure: Subgraph Counts I"
+      url: "https://www.math.toronto.edu/swastik/courses/rutgers/graphtheory-F11/homs.pdf"
 pipeline_run: null
 ---
 

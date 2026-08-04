@@ -4,6 +4,9 @@ kind: definition
 title: "Finite sums and finite products, by recursion"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-recursion, thm-induction-principle, def-ordered-field, def-natural-numbers, def-nat-addition, def-field, def-complete-ordered-field, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
 aliases: [def-finite-product]
@@ -23,6 +26,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
     - title: "Empty sum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Empty_sum"
     - title: "T. Tao, Analysis I, 3rd ed., §7.1"

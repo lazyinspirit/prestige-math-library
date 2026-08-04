@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-countable, def-equinumerous, def-injection-surjection-bijection, lem-nat-no-zero-divisors, thm-strong-induction, thm-recursion, thm-induction-principle, thm-omega-is-peano-system, lem-nat-nonzero-is-successor, def-nat-addition, def-nat-multiplication, def-nat-order, def-natural-numbers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-cancellative, lem-nat-add-identity, lem-nat-add-successor-left, lem-nat-mult-commutative, lem-nat-mult-associative, lem-nat-mult-distributive, lem-nat-mult-identity, lem-nat-mult-cancellative, lem-nat-order-add-compatible, lem-nat-trichotomy, thm-nat-linear-order, lem-nat-discrete]
 justified_by: []
 aliases: [pairing-bijection]
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Pairing function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pairing_function"
     - title: "Countable set (Wikipedia)"

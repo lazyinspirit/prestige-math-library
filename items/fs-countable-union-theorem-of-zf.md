@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: countable unions of countable sets are countable is a theorem of ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [rem-feferman-levy-model, thm-countable-union-of-countable, def-countable-choice, thm-r-uncountable, def-countable, thm-n-cross-n-countable]
 justified_by: []
 aliases: []
@@ -13,18 +16,16 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
 sources:
   scraped: []
   references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 56"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap56.pdf"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "Zermelo-Fraenkel set theory (Wikipedia)"
@@ -61,8 +62,6 @@ exactly the Axiom of Countable Choice ([[def-countable-choice]]), and
 
 [L1] $\mathbb{R}$ is uncountable, and the proof is carried out in ZF alone, using no choice principle at any step ([[thm-r-uncountable]]); "uncountable" means "not at most countable" ([[def-countable]]).
 
-[L2] $U$ is provable from ZF together with $\mathrm{AC}_\omega$ ([[thm-countable-union-of-countable]], [[def-countable-choice]]).
-
 ## Refutation
 
 **Proof technique:** contradiction.
@@ -81,7 +80,7 @@ exactly the Axiom of Countable Choice ([[def-countable-choice]]), and
 
 - **What is and is not proved here.** The refutation is a correct argument given the cited independence result, but that result is not proved in this library: the Feferman-Levy model is built by forcing, which is deferred. The honest reading is conditional, namely that $U$ is a theorem of ZF only if ZF is inconsistent. It is recorded this way deliberately rather than presented as fully derived, exactly as in [[fs-zorn-provable-in-zf]].
 
-- **The correct reading of the true theorem.** [[thm-countable-union-of-countable]] assumes $\mathrm{AC}_\omega$ and is not weakened by this item; what this item says is that the assumption is doing real work and cannot be dropped. The library's habit of naming the exact step that spends a choice principle is what makes the difference visible.
+- **The correct reading of the true theorem.** [[thm-countable-union-of-countable]] proves $U$ from ZF together with [[def-countable-choice|$\mathrm{AC}_\omega$]] and is not weakened by this item; what this item says is that the choice assumption is doing real work and cannot be dropped. The library's habit of naming the exact step that spends a choice principle is what makes the difference visible.
 
 - **How strange the Feferman-Levy model is.** In it ([[rem-feferman-levy-model]]) $\mathbb{R}$ is a countable union of countable sets, yet $\mathbb{R}$ is still uncountable, since [[thm-r-uncountable]] is a ZF theorem. There is no contradiction: countably many countable sets can have an uncountable union when no single function enumerates them all simultaneously. What fails is not any statement about $\mathbb{R}$ but the ability to assemble the enumerations.
 

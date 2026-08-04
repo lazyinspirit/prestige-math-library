@@ -4,20 +4,29 @@ kind: remark
 title: "Why real exponents are deferred"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-complete-ordered-field, thm-nth-roots-exist, thm-of-square-roots, thm-cauchy-schwarz-finite, lem-max-is-sup, def-real-limit, lem-of-q-dense, thm-of-archimedean]
+forward_refs: [def-real-power, thm-real-power-laws]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Exercise 6)"
@@ -82,9 +91,9 @@ exponential is built as a power series or as the solution of a differential
 equation, the logarithm as its inverse, and the power laws for real exponents
 then fall out of the functional equation $\exp(u+v) = \exp(u)\exp(v)$ instead of
 being fought for one at a time. The supremum definition is then recovered as a
-theorem rather than taken as a definition. **No link is given here**, because
-the page that carries that development does not exist yet, and a wikilink to it
-would be unresolvable.
+theorem rather than taken as a definition. That later development is now
+published: [[def-real-power]] defines $a^{x} := \exp(x \log a)$ for $a > 0$ and
+real $x$, and [[thm-real-power-laws]] proves the power laws for those exponents.
 
 **Practical consequence for this page.** Everywhere an exponent appears in a
 statement on this page it is an integer or a rational, and where that looks like

@@ -4,6 +4,9 @@ kind: lemma
 title: "The pigeonhole principle on $\\mathbb{N}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-natural-numbers, def-nat-order, thm-induction-principle,
        lem-nat-order-is-membership, lem-nat-trichotomy,
        lem-nat-nonzero-is-successor, lem-nat-transitive-irreflexive,
@@ -29,6 +32,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Pigeonhole principle (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pigeonhole_principle"
     - title: "Finite set (Wikipedia)"

@@ -4,6 +4,9 @@ kind: corollary
 title: "A real-valued continuous map on a connected space has order-convex image, so it takes every value between any two of its values"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-continuous-image-of-a-connected-space, cor-connected-subsets-of-the-line,
        def-connected-space, def-continuous-map-top, def-interval,
        def-subspace-topology-top, def-metrizable-space, lem-real-line-is-a-metric-space,
@@ -29,8 +32,8 @@ sources:
   references:
     - title: "Intermediate value theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Connected_space"
 pipeline_run: null
 ---
 

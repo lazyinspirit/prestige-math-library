@@ -4,6 +4,9 @@ kind: definition
 title: "Cliques, stable sets, the clique number $\\omega(G)$ and stability number $\\alpha(G)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-subgraph-induced-subgraph-and-spanning-subgraph, def-standard-complete-bipartite-path-and-cycle-graphs, def-finite-cardinality, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set, thm-well-ordering-principle]
 justified_by: []
 aliases: [independent set, independence number]
@@ -15,7 +18,9 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

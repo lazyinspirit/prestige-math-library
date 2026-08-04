@@ -4,6 +4,9 @@ kind: example
 title: "The long ray is connected and locally connected, every proper initial segment is order-convex and connected, and, assuming countable choice, no at most countable subset is cofinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-long-line, thm-the-long-line-is-a-connected-linear-continuum,
        def-order-topology-on-a-linearly-ordered-set, def-connected-space,
        def-locally-connected, def-connected-component-and-quasicomponent,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Long_line_(topology)"
     - title: "Linear continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_continuum"
+    - title: "MIT OpenCourseWare, The Long Line"
+      url: "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/e319b3a36ca774261b6b8c45e11804c2_notes_c.pdf"
 pipeline_run: null
 ---
 

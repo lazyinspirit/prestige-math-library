@@ -4,6 +4,9 @@ kind: lemma
 title: "Triangle inequality for finite sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-sum, lem-of-triangle-inequality, thm-induction-principle, lem-of-abs-value, lem-of-add-order, def-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Young, Hölder, and Minkowski inequalities (Oregon State University)"
+      url: "https://math.oregonstate.edu/~show/old/142_Luenberger.pdf"
     - title: "Triangle inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Triangle_inequality"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

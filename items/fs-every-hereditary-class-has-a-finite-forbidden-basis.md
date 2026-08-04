@@ -4,6 +4,9 @@ kind: false-statement
 title: "Every hereditary graph class has a finite forbidden induced-subgraph basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-hereditary-classes-have-a-unique-minimal-forbidden-basis, def-bipartite-graph, thm-bipartite-iff-no-odd-cycle, def-standard-complete-bipartite-path-and-cycle-graphs, def-minimal-forbidden-induced-subgraph]
 justified_by: []
 aliases: []
@@ -15,8 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
+    - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

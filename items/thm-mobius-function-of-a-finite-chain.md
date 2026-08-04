@@ -4,6 +4,9 @@ kind: theorem
 title: "On a finite chain, the Möbius function is $1$ on the diagonal, $-1$ on covers and $0$ on longer intervals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-poset-mobius-recurrence, def-chain, def-finite-cardinality, thm-strong-induction, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "Deleting any edge of a tree separates it into exactly two tree components"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-tree-forest-and-leaf, def-graph-deletion-contraction-minor-and-subdivision, def-connected-graph-and-connected-component, def-graph-walk-trail-path-and-cycle]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

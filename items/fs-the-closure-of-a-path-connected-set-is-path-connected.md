@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the closure of a path-connected subspace is path-connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-oscillating-zigzag-curve, def-path-connected, thm-closure-of-a-connected-set,
        def-connected-space, def-subspace-topology-top, def-interior-closure-boundary-top]
 justified_by: []
@@ -14,15 +17,11 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -30,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Topologist's sine curve (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Topologist%27s_sine_curve"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 
@@ -58,8 +59,6 @@ is not.
 
 [L2] $\overline{G}$ is **not** path-connected ([[lem-the-oscillating-zigzag-curve]], claim 4).
 
-[L3] If $A$ is connected then so is every $B$ with $A \subseteq B \subseteq \overline{A}$; in particular $\overline{A}$ is connected ([[thm-closure-of-a-connected-set]], [[def-connected-space]]).
-
 ## Refutation
 
 **Proof technique:** contradiction.
@@ -74,7 +73,7 @@ is not.
 
 ## Remarks
 
-- **Exactly one word changes between the true statement and the false one.** [L3] holds in every topological space with no hypothesis at all, and the witness above shows that its path-connected analogue holds in none but the cases where some further hypothesis is present. The asymmetry has a cause: a point of $\overline{A} \setminus A$ is a limit of points of $A$, which is enough to prevent a separation but not enough to produce a path, a path being a single continuous map defined on the whole unit interval.
+- **Exactly one word changes between the true statement and the false one.** [[thm-closure-of-a-connected-set]], with connectedness as in [[def-connected-space]], holds in every topological space with no hypothesis at all, and the witness above shows that its path-connected analogue holds in none but the cases where some further hypothesis is present. The asymmetry has a cause: a point of $\overline{A} \setminus A$ is a limit of points of $A$, which is enough to prevent a separation but not enough to produce a path, a path being a single continuous map defined on the whole unit interval.
 
 - **The added set is as small as it can usefully be.** By claim 2 of [[lem-the-oscillating-zigzag-curve]], $\overline{G} \setminus G$ is one segment. So a path-connected set can lose path-connectedness on adjoining a single closed segment, and no larger or more complicated addition is needed.
 

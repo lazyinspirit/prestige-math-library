@@ -4,6 +4,9 @@ kind: definition
 title: "Edges between disjoint vertex sets; complete, anticomplete, pure and mixed pairs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-graph-adjacency-incidence-neighbourhood-and-degree]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Maria Chudnovsky, The structure of bull-free graphs"
-      url: "https://web.math.princeton.edu/~mchudnov/bullsurvey.pdf"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Rational powers $a^r$ of a positive base"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-nth-roots-exist, def-integer-power, def-rationals, lem-rat-positive-denominator, lem-nat-embeds-int, def-rat-order, lem-power-monotone, lem-power-laws, lem-of-inverse-positive]
 justified_by: [lem-rational-power-well-defined]
 aliases: []
@@ -11,19 +14,26 @@ landmark: true
 short: "$a^{m/n} := (a^{1/n})^m$, $a>0$"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-25
+    date: 2026-08-04
+    scope: published-audit-targeted
+    context_sha256: 22067f1978d2f781dd7327a6f5c81cccbbc2009bd13885930f7d56ba5a2ceb5e
+    item_sha256: 4f75fe6e8c39549d9a1c82a4fc920d13b890d3917b367621daddcaf70f377565
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "Nth root (Wikipedia)"
@@ -89,11 +99,11 @@ rather than for positive ones only.
   is what the inverse step is for. The exponent laws are
   [[lem-rational-power-laws]] and the order behaviour is
   [[lem-rational-power-monotone]].
-- **The exponent is a rational, never a real.** There is no $a^{x}$ for
-  irrational $x$ in this library. Nothing here is a limit, a series or a
-  continuous function, and $a^{r}$ is computed in finitely many field operations
-  once the root is available. What would be needed to go further, and why it is
-  deferred, is recorded in [[rem-real-exponents-deferred]].
+- **The exponent is a rational, never a real.** Nothing on this page is a limit,
+  a series or a continuous function, and $a^{r}$ is computed in finitely many
+  field operations once the root is available. What would be needed to go
+  further, why it is deferred here, and where the library later defines $a^{x}$
+  for real $x$ are recorded in [[rem-real-exponents-deferred]].
 - The convention $0^0 = 1$ of [[def-integer-power]] is untouched: $r = 0$ is not
   covered by the supplementary clause, which asks for $r > 0$. So $0^0 = 1$ while
   $0^{r} = 0$ for every rational $r > 0$. There is no inconsistency, only the

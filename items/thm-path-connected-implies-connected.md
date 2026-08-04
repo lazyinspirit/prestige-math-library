@@ -4,6 +4,9 @@ kind: theorem
 title: "Every path-connected space is connected, and every path component lies inside a component"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-path-connected, def-connected-space, cor-connected-subsets-of-the-line,
        thm-continuous-image-of-a-connected-space, thm-unions-of-connected-sets,
        def-interval, def-continuous-map-top, def-connected-component-and-quasicomponent,
@@ -29,8 +32,8 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "For every forest, $|V|=|E|+c$, where $c$ is the number of connected components"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-tree-forest-and-leaf, lem-nonempty-forest-has-low-degree-vertex, cor-connected-components-partition-the-vertex-set, def-graph-deletion-contraction-minor-and-subdivision, def-finite-cardinality, thm-induction-principle, lem-nat-add-associative, lem-nat-add-commutative, thm-sum-rule, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
@@ -16,7 +19,9 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---
 

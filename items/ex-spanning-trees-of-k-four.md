@@ -4,6 +4,9 @@ kind: example
 title: "$\\tau(K_4)=16$ by direct Prüfer enumeration and Cayley's formula"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cayley-formula, thm-prufer-code-bijection, def-number-of-spanning-trees]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

@@ -4,6 +4,9 @@ kind: definition
 title: "The order topology of a linearly ordered set, with the open rays as a subbasis; order-convex sets, order-density, the least upper bound property, and linear continua"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partial-order, def-topological-space, def-topology-basis-subbasis, thm-basis-criterion,
        def-subspace-topology-top, def-interval, def-upper-bound, def-maximal-element,
        def-real-order, def-ordered-field, def-complete-ordered-field,
@@ -33,8 +36,6 @@ sources:
       url: "https://en.wikipedia.org/wiki/Order_topology"
     - title: "Linear continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_continuum"
-    - title: "J. R. Munkres, Topology, 2nd ed., §14 and §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The closed long ray $\\omega_1 \\times [0,1)$ under the lexicographic order, and the long line, with the order topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-order-topology-on-a-linearly-ordered-set, def-first-uncountable-ordinal,
        thm-omega-one-is-the-least-uncountable-ordinal, def-ordinal, lem-ordinal-basics,
        lem-ordinal-trichotomy, def-interval, def-partial-order, def-real-order,
@@ -29,8 +32,8 @@ sources:
   references:
     - title: "Long line (topology) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Long_line_(topology)"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24 exercises"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "MIT OpenCourseWare, The Long Line"
+      url: "https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/e319b3a36ca774261b6b8c45e11804c2_notes_c.pdf"
 pipeline_run: null
 ---
 

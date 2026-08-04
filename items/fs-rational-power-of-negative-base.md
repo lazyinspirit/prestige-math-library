@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $a^{m/n} := (a^{1/n})^{m}$ extends to negative bases"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-rational-power, lem-rational-power-well-defined, thm-nth-roots-exist, def-rationals, def-rat-order, def-integer-power, def-ordered-field, lem-of-square-positive, lem-of-zero-mult, lem-power-laws, lem-power-monotone, lem-of-sign-rules, lem-of-mult-neg, lem-of-naturals-positive, lem-of-q-embeds, thm-of-square-roots, fs-negative-has-square-root]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "Nth root (Wikipedia)"

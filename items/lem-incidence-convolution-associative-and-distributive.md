@@ -4,6 +4,9 @@ kind: lemma
 title: "Incidence convolution is associative and distributes over pointwise addition"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-incidence-algebra-and-convolution, lem-finite-sum-reindexing-and-fubini, def-ring, def-commutative-ring]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Y. Guan and Y. Zhang, Additive Biderivations of Incidence Algebras, §2.1"
+      url: "https://arxiv.org/abs/2412.18049"
 pipeline_run: null
 ---
 

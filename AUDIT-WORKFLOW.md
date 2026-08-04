@@ -415,6 +415,81 @@ records `genrisk` dispositions and every `impact-audit` consumer disposition.
 Alpha's 30-second threshold is binding: a gap a competent reader closes in 30
 seconds is nonfatal, recorded at most.
 
+### A6 efficiency protocol (owner, 2026-08-04, binding on every future wave)
+
+A6 is the wave's long pole, and its cost is dominated by **reading legacy
+mathematics carefully — which is the product, not overhead.** The savings are all
+in bookkeeping and I/O, and they are taken by the orchestrator *before* Alpha is
+dispatched, never by narrowing what Alpha reads.
+
+1. **The orchestrator runs the URL sweep, not Alpha.** The orchestrator's shell
+   has outbound network; the Codex Beta/reader sandboxes do not, which is why
+   Betas verify URLs through the model-side web route and why wave 2's eight
+   `established-knowledge` waivers were mostly artefacts of a failed `curl`.
+   One shell loop checks every URL in the wave's ledgers *and* every URL
+   currently on disk in the scoped items:
+
+   ```sh
+   while read -r url; do
+     printf '%s %s\n' "$(curl -sSL -o /dev/null -w '%{http_code}' --max-time 22 "$url")" "$url"
+   done < urls.txt
+   ```
+
+   Alpha cannot parallelise fetches inside one context; the orchestrator does 110
+   of them in one command. Alpha still owns the **disposition** of anything dead
+   or off-topic. Measured wave 3: 6 of 63 ledger URLs dead, one of them written
+   at A4 *as a replacement*, and a Wikipedia article-about-a-book 404 on 19
+   published items.
+
+2. **The orchestrator precomputes the pure/material split with
+   `tools/audit-split.mjs`** and hands Alpha the material list. A4 rewrites the
+   frontmatter of every scoped item, so "changed" is not informative: wave 3 was
+   **198 pure retags / 26 material out of 224**. This collapses Alpha's impact
+   classification from a 224-way judgement into a checkable list plus a wholesale
+   disposition of the pure class. Alpha spot-checks the derivation rather than
+   redoing it.
+
+   **Classify by field, never by line position.** The orchestrator's first
+   attempt compared `git diff` hunk ranges against the frontmatter boundary and
+   was wrong: `title`, `deps`, `forward_refs`, `justified_by`, `external_refs`,
+   `kind` and `proved_here` all live *inside* the frontmatter and are all public
+   mathematical interface. That version classified
+   `thm-product-of-connected-spaces` as a pure retag when its **title** had
+   changed — and Alpha had confirmed that title as a fatal defect, because it
+   contradicted the item's own Statement about the Axiom of Choice.
+   `audit-split.mjs` is the corrected, field-aware version.
+
+3. **Refuter concurrency is cheap; use it.** Sol lanes are read-only and
+   independent. Wave 3's Alpha ran 14 concurrently with no contention.
+
+4. **Stage-level touch snapshots only.** The orchestrator takes `pre-A4`,
+   `post-A4` and `pre-a8`; Alpha and the Betas take none. Wave 2's 267 per-item
+   snapshots produced a 95 MB ledger and a phantom "51 items repaired more than
+   once" that cost an Alpha escalation to disprove.
+
+5. **A certifier must read FINAL text.** If the text changes under a running
+   certifier — a judge round closing a citation gap, say — kill it and
+   re-dispatch. Certifying text that no longer exists is worse than no
+   certification.
+
+6. **Do not census verification stamps while Alpha is running.** Wave 3's
+   orchestrator measured 27 items carrying `scope: published-audit` mid-run and
+   reported a Beta self-certification breach. There was none: 26 were Alpha's
+   own stamps, written after independent Sol readings, and 1 was wave 2's. The
+   `model` field names the *certifying reader*, which is a Sol model, so it does
+   not distinguish author from certifier. Census stamps only at a quiesced tree,
+   and attribute by date.
+
+**REJECTED, and recorded so no future session retries it: do NOT narrow Alpha's
+reading surface to the items A4 changed.** It looks like the obvious ~5×
+optimisation and it defeats the workflow. Measured wave 3: **6 of the 11
+confirmed fatal defects were in items A4 left byte-identical.** A retro-audit
+whose reading surface is what it changed can only find what it introduced, and
+the whole point is the legacy corpus. The `risk-report` level is a size heuristic
+— declared-dependency and step counts — not evidence of a defect; use it to
+*order* the reading, never to bound it, and state explicitly in the Alpha report
+what was read in full and what was sampled.
+
 **A7 — Judge (once, after the audit, on final text).** Paired
 DeepSeek V4 Pro + fresh GPT 5.6 Terra sweep over **every item in every audited batch
 of the wave**, whether or not it was touched — coverage is the mechanism, and
@@ -503,6 +578,7 @@ stage; no stage advances on an agent's report.
 |---|---|
 | `tools/genrisk.mjs` | seeds = published `ai-generated` statements plus legacy untagged `authorship: ai-generated` items (D5); computes reverse-`deps` + direct-citation cones (impact-audit's computation, corpus-wide); ranks by cone size (spine-audit's ordering). Report mode regenerates `research/audit/genrisk.json` preserving dispositions by seed id; `--receipt` requires one concrete Alpha disposition (`retag`/`restate`/`unfold`/`narrow`/`verified-generated`/`owner-queue`, with reviewer + notes) per load-bearing seed, verifies retag/restate/unfold/narrow claims against disk, and fails on stale cones. Baseline measured 2026-08-02: 23 seeds, all zero-cone |
 | `tools/step8-guard.mjs` | R1, A8/step-8 fatal-only. Compares every item against a dedicated `touchlog` baseline (`--baseline "pre-a8"`) and requires each change to be licensed by a `confirmed_fatal` adjudication recorded against that pre-edit `item_sha256`. Errors `nonfatal-edit`, `judge-adjudication-unhashed`; warns `step8-creation`/`step8-deletion`. `--against <label>` re-checks a completed stage from the ledger alone. Fatal repairs are uncapped |
+| `tools/audit-split.mjs` | A6 efficiency, §7. Classifies every changed item as **pure retag** (only `provenance`/`sources`/`authorship`/`verification`/`pipeline_run`/`generation` moved, body byte-identical) or **material** (body text, or any of `title`, `kind`, `status`, `deps`, `justified_by`, `forward_refs`, `external_refs`, `aliases`, `landmark`, `proved_here`, `short`, `proof_strategy`, `id`). Field-aware by construction: a line-range test against the frontmatter boundary misses `title`/`deps` changes, and in wave 3 that mistake hid a confirmed fatal. An unrecognised frontmatter key is treated as material, so a future schema addition fails safe. `--base <ref>`, `--scope <pages.json,...>`, `--json`. Exit 0 always — a classifier, not a gate. Measured wave 3: 224 changed → 198 pure / 26 material |
 | `tools/apply-judge-stamps.mjs` | writes `verification.judge` from the paired verdict ledger. The normal route recomputes the current frozen-context hash and stamps only a two-lane `keep: true` pair. Audit A8 additionally accepts `--audit-targeted-rejudges`: it requires DeepSeek/Terra `keep: true` rows at the receipt's exact context and the receipt's unchanged item SHA-256 (excluding only the judge block it writes), then stamps only those material repair targets. Thus the exact targeted Step-8 rule remains verifiable without manufacturing a pass from an adjudication or rerunning unchanged items. Frontmatter only, dry-run by default (`--apply` writes). |
 
 **Coverage gate per wave (the A7→A8 receipt, mirroring the build):**
@@ -515,11 +591,24 @@ node tools/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.prov
 node tools/audit-manifest.mjs research/audit/wave<k>-*.pages.json --json > research/audit/wave<k>-audit-manifest.json
 node tools/genrisk.mjs --receipt research/audit/genrisk.json
 node tools/impact-audit.mjs --touches research/audit/wave<k>-touches.json --from <baseline> --receipt research/audit/wave<k>-impact-audit.json
-JUDGE_LINEUP=deepseek+terra node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
+JUDGE_LINEUP=deepseek+terra node tools/level-coverage.mjs --audit --contracts research/audit/wave<k>-proof-contracts.json --judge-ledger research/audit/wave<k>-judge.jsonl --judge-adjudications research/audit/wave<k>-judge-adjudications.jsonl --spine-receipt research/audit/wave<k>-spine-audit.json --audit-receipt research/audit/wave<k>-coverage.json --verify-current-context research/audit/wave<k>-*.pages.json
 ```
 
-That is the initial A7 coverage gate. After a material A8 repair, do **not**
-repeat it for the wave. Alpha records only the rejudged target in the targeted
+**Corrected 2026-08-04, first time this gate was actually run in any wave.** Two
+things in the previous text were wrong, and the code is the truth:
+
+- The spine receipt path was `research/dependency-spine-audit.json`, **which does
+  not exist**. Wave 2 wrote `research/audit/wave2-spine-audit.json`, so the path
+  is per-wave, as above.
+- It was described as "the A7→A8 receipt", but `--judge-adjudications` cannot be
+  satisfied until Alpha has adjudicated, which is A8. **It runs after A8, not
+  between A7 and A8.** Run before A8 it reports one
+  `judge-adjudication-missing` per unadjudicated rejection row — in wave 3
+  exactly 118, matching the ledger's rejection count — plus a missing
+  adjudications file and a missing receipt. That is a useful pre-flight
+  arithmetic check on the sweep, and it is not a passing gate.
+
+After a material A8 repair, do **not** repeat it for the wave. Alpha records only the rejudged target in the targeted
 receipt, and the stamp gate is:
 
 ```sh

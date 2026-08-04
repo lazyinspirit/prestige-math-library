@@ -1,9 +1,12 @@
 ---
 id: thm-product-of-connected-spaces
 kind: theorem
-title: "A product of connected spaces is connected in the product topology; for an infinite index set the choice of a base point uses the Axiom of Choice"
+title: "A product of connected spaces is connected in the product topology, and that argument is a theorem of ZF; for an infinite index set it is the assertion that the product of nonempty spaces is nonempty that uses the Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-space, thm-unions-of-connected-sets, thm-closure-of-a-connected-set,
        def-product-topology, thm-product-universal-property, def-continuous-map-top,
        def-axiom-of-choice, def-choice-function, thm-closure-characterisation-top,
@@ -17,15 +20,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -33,8 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Product topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Product_topology"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
+    - title: "General topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/General_topology"
 pipeline_run: null
 ---
 

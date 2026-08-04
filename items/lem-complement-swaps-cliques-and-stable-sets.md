@@ -4,6 +4,9 @@ kind: lemma
 title: "Complementation swaps cliques with stable sets, so $\\omega(\\overline G)=\\alpha(G)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-clique-stable-set-and-numbers, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
@@ -16,7 +19,11 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
+    - title: "ISGCI, Self-complementary classes"
+      url: "https://www.graphclasses.org/classes/self_complementary.html"
 pipeline_run: null
 ---
 

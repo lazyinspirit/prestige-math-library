@@ -4,6 +4,9 @@ kind: definition
 title: "Rooted trees, ancestors, descendants, depth, height, parents and children"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-tree-forest-and-leaf, thm-tree-characterisations, def-graph-distance-and-girth]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "The Prüfer decoding procedure is well defined and produces a labelled tree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-prufer-code, def-tree-forest-and-leaf, lem-edge-addition-to-a-tree, lem-pigeonhole, thm-well-ordering-principle, thm-induction-principle, def-finite-cardinality]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

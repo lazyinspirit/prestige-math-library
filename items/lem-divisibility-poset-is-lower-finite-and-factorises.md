@@ -4,6 +4,9 @@ kind: lemma
 title: "The divisibility poset is lower-finite, and each divisor interval factorises as a product of finite chains of prime exponents"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-divisibility-poset-on-positive-integers, def-poset-interval-and-finiteness-conditions, lem-divisor-bound, thm-subset-of-a-finite-set, thm-canonical-prime-factorisation, lem-divisibility-via-valuations, def-p-adic-valuation, thm-product-rule, lem-nat-embeds-int]
 justified_by: []
 aliases: []
@@ -11,12 +14,17 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "MIT 18.785, Problem Set 8"
-      url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.8.4–3.8.5"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 
@@ -32,7 +40,7 @@ as posets, where the right side has coordinatewise order. The isomorphism sends 
 
 **Given:** Positive integers $a\mid b$, their positive quotient $q=b/a$, and the divisibility poset of [[def-divisibility-poset-on-positive-integers]].
 
-[L1] A positive divisor $d$ of a nonzero integer $n$ satisfies $1\le d\le n$ ([[lem-divisor-bound]]).
+[L1] A divisor $d$ of a nonzero integer $n$ satisfies $d\ne0$ and $|d|\le|n|$, so a positive divisor $d$ of a positive integer $n$ satisfies $1\le d\le n$ ([[lem-divisor-bound]]).
 
 [L2] Every nonnegative integer is the image of a unique natural number, and the embedding preserves order ([[lem-nat-embeds-int]]).
 

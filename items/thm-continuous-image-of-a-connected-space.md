@@ -4,6 +4,9 @@ kind: theorem
 title: "A continuous image of a connected space is connected, and connectedness is a topological property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-space, thm-connectedness-characterisations, def-continuous-map-top,
        def-subspace-topology-top, lem-continuity-is-local-and-pastes,
        def-homeomorphism-and-open-maps]
@@ -28,8 +31,8 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 

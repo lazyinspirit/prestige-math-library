@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: ordinal multiplication is commutative"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-multiplication, def-ordinal-addition, lem-ordinal-product-as-an-order-type, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ short: "$2\\cdot\\omega = \\omega \\ne \\omega+\\omega = \\omega\\cdot2$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 
@@ -48,8 +56,6 @@ $\omega \cdot 2 = \omega + \omega$, which is strictly larger.
 
 [L4] $\omega$ is a limit ordinal, so $\bigcup \omega = \omega$ and $0 \in \omega$ ([[lem-omega-least-limit-ordinal]], [[def-limit-ordinal]]); every ordinal is transitive, $\mu \subseteq \nu$ iff $\mu \in \nu$ or $\mu = \nu$, and $\mu \notin \mu$ ([[def-ordinal]], [[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]).
 
-[L5] $\alpha \cdot \beta$ is the order type of $\alpha \times \beta$ under last differences, that is $\beta$ copies of $\alpha$ ([[lem-ordinal-product-as-an-order-type]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -66,7 +72,7 @@ $\omega \cdot 2 = \omega + \omega$, which is strictly larger.
 
 ## Remarks
 
-**The picture.** By [L5], $2 \cdot \omega$ is $\omega$ copies of a two element set, laid end to end: that is a copy of $\omega$, since relabelling gives $0, 1, 2, \dots$ again. And $\omega \cdot 2$ is two copies of $\omega$, one entirely above the other, which is $\omega + \omega$ and has no greatest element but does have an element with infinitely many predecessors. The convention that fixes which is which is stated in [[def-ordinal-multiplication]]: the successor clause appends a copy of $\alpha$ on the right, so $\alpha \cdot \beta$ is $\beta$ copies of $\alpha$.
+**The picture.** By [[lem-ordinal-product-as-an-order-type]], $2 \cdot \omega$ is $\omega$ copies of a two element set, laid end to end: that is a copy of $\omega$, since relabelling gives $0, 1, 2, \dots$ again. And $\omega \cdot 2$ is two copies of $\omega$, one entirely above the other, which is $\omega + \omega$ and has no greatest element but does have an element with infinitely many predecessors. The convention that fixes which is which is stated in [[def-ordinal-multiplication]]: the successor clause appends a copy of $\alpha$ on the right, so $\alpha \cdot \beta$ is $\beta$ copies of $\alpha$.
 
 **What survives.** Multiplication is still associative and still distributes over addition **on the left** ([[thm-ordinal-multiplication-associative-and-left-distributive]]), and it is still strictly increasing and cancellative in the right argument when the left factor is nonzero ([[thm-ordinal-arithmetic-monotonicity]]). Right distributivity is a separate casualty, refuted in [[fs-ordinal-multiplication-is-right-distributive]].
 

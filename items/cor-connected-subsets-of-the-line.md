@@ -4,6 +4,9 @@ kind: corollary
 title: "The connected subspaces of $\\mathbb{R}$ with its usual topology are exactly the order-convex subsets, the published characterisation transported by the identification of the two descriptions of \"open in $\\mathbb{R}$\""
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-connected-subsets-and-separated-sets, def-connected-space,
        thm-connected-subsets-of-r-are-intervals, def-connected-r,
        def-open-and-closed-in-r, def-neighbourhood-r, lem-real-line-is-a-metric-space,
@@ -31,8 +34,6 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
 pipeline_run: null
 ---
 

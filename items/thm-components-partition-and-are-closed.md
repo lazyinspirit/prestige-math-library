@@ -4,6 +4,9 @@ kind: theorem
 title: "The components of a space are its maximal connected subsets, they partition it, and each of them is closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-component-and-quasicomponent, thm-unions-of-connected-sets,
        thm-closure-of-a-connected-set, def-connected-space, def-subspace-topology-top,
        def-interior-closure-boundary-top]
@@ -28,8 +31,8 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §25"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Lemma 5.7.3"
+      url: "https://stacks.math.columbia.edu/tag/004T"
 pipeline_run: null
 ---
 

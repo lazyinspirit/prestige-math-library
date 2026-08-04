@@ -764,6 +764,35 @@ dependency-citation detections. Before any further judge model or context-shape
 change, inject a defect known to be false under this library's conventions and
 verify the model catches it.
 
+**Measured, audit wave 3, 2026-08-04 — the σ context change and its injection
+test.** Wave 2's judge comparison found that **six of Terra's nine false
+positives were one repeated mistake**: it read `σ(n)` as `{0,…,n−1}` when
+`def-natural-numbers` sets `σ(n) := n ∪ {n}`, and on that misreading produced
+confident, specific off-by-one allegations against correct proofs. One sentence
+was therefore added to `briefs/judge-conventions.txt` stating that
+`n = {0,…,n−1}` while `σ(n) = {0,…,n}` has exactly `n+1` elements, and that an
+off-by-one objection resting on the other reading is a misreading of the library
+rather than a defect. Wave 3 has **17 of its 224 items mentioning σ**, mostly on
+`ordinal-arithmetic` and `countability-and-uncountability`, so the change was
+worth making — and because the conventions file enters the frozen prompt hash
+byte-for-byte, it is a context change and the rule above applied.
+
+The test ran on `lem-nat-order-is-membership`. **Control:** both lanes passed the
+unmodified item. **Injection:** step 1.2 gained the sentence "Moreover σ(n) has
+exactly n elements, since σ(n) = {0,1,…,n−1}", false under this library's
+conventions and deliberately sited in the region the new line governs.
+**Both lanes rejected it, and both cited the convention to do so** — DeepSeek:
+"In von Neumann encoding sigma(n) = n U {n} has exactly n+1 elements. Contradicts
+the library's explicit convention"; Terra: "That is n itself; sigma(n) is
+{0,…,n}". The file was restored and verified byte-identical by sha256.
+
+The point of the test was **not** that the lanes can catch an easy falsehood. It
+was the specific risk that a convention line telling a judge what is *not* a
+defect makes it credulous in exactly that region. It did the opposite: it made
+the region sharper. That is the property to re-test the next time a conventions
+line is added, because the failure mode is silent — a credulous lane returns
+`keep: true` and looks like a clean sweep.
+
 ## 5b. Audit-manifest coverage backstop
 
 `tools/audit-manifest.mjs` supports step 6. Given the level batch JSON files, it

@@ -4,6 +4,9 @@ kind: lemma
 title: "On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-natural-numbers, def-nat-order, def-nat-addition, thm-induction-principle,
        lem-nat-add-identity, lem-nat-trichotomy, thm-nat-linear-order, lem-nat-discrete,
        lem-nat-transitive-irreflexive, lem-nat-successor-neq-self]
@@ -28,6 +31,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Zapletal, Set Theory Notes"
+      url: "https://people.clas.ufl.edu/zapletal/files/notesset3.pdf"
     - title: "Set-theoretic definition of natural numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers"
     - title: "Ordinal number (Wikipedia)"

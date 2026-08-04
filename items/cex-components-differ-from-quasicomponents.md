@@ -4,6 +4,9 @@ kind: counterexample
 title: "In the subspace of $\\mathbb{R}^2$ made of the vertical unit segments over $1/(n+1)$ together with the two points $(0,0)$ and $(0,1)$, the component of $(0,0)$ is a singleton while its quasicomponent is $\\{(0,0), (0,1)\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-component-and-quasicomponent, thm-quasicomponents-contain-components,
        thm-components-partition-and-are-closed, cor-connected-subsets-of-the-line,
        def-connected-space, thm-connectedness-characterisations, def-subspace-topology-top,
@@ -35,6 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 

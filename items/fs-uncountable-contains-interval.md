@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every uncountable subset of $\\mathbb{R}$ contains an interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-irrationals-uncountable, lem-rat-embeds-dense, def-countable, lem-of-q-dense, lem-of-q-embeds, thm-of-archimedean, def-complete-ordered-field, thm-rationals-countable, lem-subset-of-countable, thm-r-uncountable, cor-interval-uncountable]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
     - title: "Irrational number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Irrational_number"
     - title: "Interval (mathematics) (Wikipedia)"

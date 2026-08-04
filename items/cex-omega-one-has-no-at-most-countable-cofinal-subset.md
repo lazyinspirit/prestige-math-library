@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted: every limit ordinal has an at most countable cofinal subset — $\\omega_1$ has none, assuming countable choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-countable-subsets-of-omega-one-are-bounded, rem-omega-one-and-the-cost-of-choice, def-cofinal-subset-of-an-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-first-uncountable-ordinal, def-countable-choice, def-countable, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, lem-omega-least-limit-ordinal, def-ordinal, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ short: "$\\omega_1$ refutes it, under $\\mathrm{AC}_\\omega$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
+    - title: "A. Karagila, Forcing course notes (2023)"
+      url: "https://karagila.org/files/Forcing-2023.pdf"
 pipeline_run: null
 ---
 
@@ -64,8 +70,6 @@ ordinals. That is recorded in [[rem-omega-one-and-the-cost-of-choice]].
 [L3] Assuming $\mathrm{AC}_\omega$: no at most countable subset of $\omega_1$ is cofinal in $\omega_1$ (claim (b) of [[thm-countable-subsets-of-omega-one-are-bounded]]).
 
 [L4] $\omega$ is a limit ordinal and is at most countable, being $\mathbb{N}$ ([[lem-omega-least-limit-ordinal]], [[def-countable]], [[def-natural-numbers]]).
-
-[L5] Every ordinal is transitive and $\mu \subseteq \nu$ iff $\mu \in \nu$ or $\mu = \nu$ ([[def-ordinal]], [[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]).
 
 ## Counterexample
 

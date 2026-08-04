@@ -4,6 +4,9 @@ kind: definition
 title: "The first uncountable ordinal $\\omega_1 := \\aleph(\\omega)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [thm-hartogs, def-ordinal, def-countable, def-natural-numbers, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: [thm-omega-one-is-the-least-uncountable-ordinal]
 aliases: [def-omega-one, def-omega-1]

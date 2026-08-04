@@ -4,6 +4,9 @@ kind: theorem
 title: "Cantor normal form: every nonzero ordinal is $\\omega^{\\beta_0}\\cdot c_0 + \\cdots + \\omega^{\\beta_{k-1}}\\cdot c_{k-1}$ with $\\beta_0 > \\cdots > \\beta_{k-1}$ and each $c_i$ a nonzero natural number, in exactly one way"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-ordinal-exponent-laws, thm-ordinal-division-with-remainder, thm-ordinal-arithmetic-monotonicity, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-addition-associative, lem-recursion-on-the-ordinals, def-ordinal-exponentiation, def-ordinal-multiplication, def-ordinal-addition, lem-omega-least-limit-ordinal, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
 aliases: [thm-cnf, cantor-normal-form]
@@ -12,11 +15,12 @@ short: "unique base-$\\omega$ normal form of a nonzero ordinal"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 
@@ -94,6 +100,6 @@ tighter than products, which bind tighter than sums
 
 **Additive indecomposability is the whole content of uniqueness.** Step 2.1 says that adding anything strictly smaller than $\omega^{\beta}$ on the left of $\omega^{\beta}$ changes nothing. Its consequence, step 3.1, is that the ordinals below $\omega^{\beta}$ are closed under addition, and that is exactly why a tail with strictly smaller exponents cannot reach up to the leading term and disturb it.
 
-**Base $\omega$ is not special.** The same argument with $\omega$ replaced by any ordinal $\gamma > 1$ gives a base-$\gamma$ normal form, with coefficients in $\gamma$ rather than in $\omega$. Only the base-$\omega$ case is stated here, because it is the one used, and because its coefficients are then ordinary natural numbers.
+**Beyond base $\omega$.** More general base-$\gamma$ expansions exist for ordinals $\gamma > 1$, with digits below $\gamma$, but their proof requires a general digit-and-carry argument. The theorem and proof here concern only base $\omega$.
 
 **What is not claimed.** Nothing here says the normal form is computable, and nothing here uses or proves anything about $\varepsilon_0$. The ordinals $\alpha$ with $\alpha = \omega^{\alpha}$ have normal form $\omega^{\alpha} \cdot 1$, whose exponent is $\alpha$ itself, so the normal form does not always reduce a problem to strictly smaller data; one such ordinal, $\varepsilon_0$, is exhibited on the companion examples page, where it is shown to satisfy $\omega^{\varepsilon_0} = \varepsilon_0$ and where it is recorded that its *leastness* among such fixed points is not proved.

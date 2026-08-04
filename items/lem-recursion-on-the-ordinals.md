@@ -4,6 +4,9 @@ kind: lemma
 title: "Transfinite recursion along the ordinals: a class rule determines exactly one operation defined at every ordinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-transfinite-recursion, def-ordinal, def-well-order, def-initial-segment, lem-ordinal-basics, lem-ordinal-trichotomy, thm-burali-forti]
 justified_by: []
 aliases: [lem-class-recursion-on-ordinals]
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 

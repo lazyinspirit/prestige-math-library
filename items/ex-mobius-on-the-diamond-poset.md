@@ -4,6 +4,9 @@ kind: example
 title: "The endpoint Möbius value of the four-element diamond is $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [thm-mobius-function-of-a-boolean-lattice, lem-poset-mobius-recurrence]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

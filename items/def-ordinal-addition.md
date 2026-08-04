@@ -4,6 +4,9 @@ kind: definition
 title: "Ordinal addition $\\alpha + \\beta$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [cor-ordinal-addition-well-defined, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-omega-least-limit-ordinal]
 justified_by: []
 aliases: [def-ordinal-sum]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
 pipeline_run: null
 ---
 

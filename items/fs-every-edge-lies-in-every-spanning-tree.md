@@ -4,6 +4,9 @@ kind: false-statement
 title: "Every edge of a connected graph lies in every spanning tree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-spanning-tree, ex-two-spanning-trees-of-one-graph, lem-fundamental-cycle-of-a-spanning-tree]
 justified_by: []
 aliases: []
@@ -16,7 +19,9 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
+    - title: "ISI Bangalore discrete mathematics notes, Minimal spanning trees"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S3.html"
 pipeline_run: null
 ---
 

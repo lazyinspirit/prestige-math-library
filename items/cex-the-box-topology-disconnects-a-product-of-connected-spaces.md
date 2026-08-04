@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}^{\\mathbb{N}}$ in the box topology is disconnected, the bounded and the unbounded sequences forming a separation, although every factor is connected and the product topology is connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-product-of-connected-spaces, def-connected-space, thm-connectedness-characterisations,
        def-product-topology, thm-box-finer-than-product, def-topological-space,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-metric-topology,

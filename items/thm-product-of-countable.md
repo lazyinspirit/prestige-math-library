@@ -4,6 +4,9 @@ kind: theorem
 title: "A product of two at most countable sets is at most countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-n-cross-n-countable, def-countable, lem-countable-iff-surjection-from-n, def-equinumerous, def-injection-surjection-bijection, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Countable set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Countable_set"
     - title: "T. Tao, Analysis I, 3rd ed., §8.1"

@@ -4,6 +4,9 @@ kind: theorem
 title: "Countable unions of at most countable sets, assuming $\\mathrm{AC}_\\omega$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-countable-choice, thm-n-cross-n-countable, lem-countable-iff-surjection-from-n, def-countable, thm-well-ordering-principle, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 56"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap56.pdf"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "Countable set (Wikipedia)"

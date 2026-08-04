@@ -4,6 +4,11 @@ kind: counterexample
 title: "On a two-element chain, an incidence function with a zero diagonal value is not convolution-invertible"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-incidence-algebra-invertibility-criterion, def-delta-and-zeta-incidence-functions]
 justified_by: []
 aliases: []

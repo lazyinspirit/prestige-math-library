@@ -14,7 +14,12 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
-  audited: 2026-08-02
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,9 +34,9 @@ pipeline_run: null
 
 For $a>1$ and $x\in\mathbb R$, set
 $$S_a(x):=\{a^q:q\in\mathbb Q,\ q<x\},\qquad a^{[x]}:=\sup S_a(x).$$
-The set is nonempty because a rational lies below $x$. It is bounded above: choose a natural $m>x$, so every $q<x$ satisfies $q<m$ and $a^q\le a^m$. Thus the supremum exists in $\mathbb R$.
+The set is nonempty because a rational lies below $x$ ([[lem-rat-embeds-dense]]). It is bounded above: choose a natural $m>x$ ([[thm-of-archimedean]]), so every $q<x$ satisfies $q<m$ and $a^q\le a^m$ ([[lem-rational-power-monotone]]). The supremum therefore exists in $\mathbb R$ by the least-upper-bound property of a complete ordered field ([[def-complete-ordered-field]], [[def-upper-bound]]), and it is strictly positive, because it is at least the element $a^q$ of $S_a(x)$ for any rational $q<x$ and every rational power of a positive base is positive ([[def-rational-power]]).
 
-For $0<a<1$, define $a^{[x]}:=1/(a^{-1})^{[-x]}$; for $a=1$, define $1^{[x]}:=1$. The notation $a^{[x]}$ distinguishes this rational-supremum construction from the exponential construction until their agreement is proved.
+For $0<a<1$, define $a^{[x]}:=1/\bigl((a^{-1})^{[x]}\bigr)$; for $a=1$, define $1^{[x]}:=1$. The notation $a^{[x]}$ distinguishes this rational-supremum construction from the exponential construction until their agreement is proved.
 
 ## Remarks
 

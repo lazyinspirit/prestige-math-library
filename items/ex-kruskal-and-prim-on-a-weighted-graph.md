@@ -4,6 +4,9 @@ kind: example
 title: "Kruskal's and Prim's procedures on the same weighted graph"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-kruskals-minimum-spanning-tree-algorithm, thm-prims-minimum-spanning-tree-algorithm, def-weighted-graph-and-minimum-spanning-tree]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. T. Wood, Graph Theory lecture notes, Minimum spanning trees"
-      url: "https://ptwiddle.github.io/MAS341-Graph-Theory-2017/lecturenotes/lecture8.html"
+    - title: "ISI Bangalore discrete mathematics notes, Kruskal and other algorithms"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S4.html"
 pipeline_run: null
 ---
 

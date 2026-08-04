@@ -4,6 +4,9 @@ kind: example
 title: "The Möbius function on the divisor poset of $12$ and its agreement with $\\mu(1),\\mu(2),\\mu(3),\\mu(4),\\mu(6),\\mu(12)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [thm-number-theoretic-and-poset-mobius-agree, def-divisibility-poset-on-positive-integers, lem-poset-mobius-recurrence]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "MIT 18.785, Problem Set 8"
-      url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.8.4–3.8.5"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

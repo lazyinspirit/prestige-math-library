@@ -4,6 +4,9 @@ kind: example
 title: "Edgeless graphs form the hereditary class with forbidden basis $\\{K_2\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-complete-graphs-as-a-hereditary-class, thm-complementation-preserves-hereditary-classes-and-bases, def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: []
@@ -15,8 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
+    - title: "ISGCI, Self-complementary classes"
+      url: "https://www.graphclasses.org/classes/self_complementary.html"
 pipeline_run: null
 ---
 

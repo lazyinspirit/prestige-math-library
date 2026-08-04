@@ -4,6 +4,9 @@ kind: theorem
 title: "Ordinal addition is associative"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-order-isomorphism, def-well-order, def-ordinal]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 

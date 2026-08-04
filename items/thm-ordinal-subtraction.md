@@ -4,6 +4,9 @@ kind: theorem
 title: "For $\\alpha \\le \\beta$ there is exactly one ordinal $\\gamma$ with $\\alpha + \\gamma = \\beta$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-addition, thm-ordinal-arithmetic-monotonicity, lem-ordinal-sum-as-an-order-type, thm-mostowski-collapse, def-initial-segment, def-well-order, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: [thm-left-subtraction-of-ordinals]

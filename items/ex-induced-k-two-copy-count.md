@@ -4,6 +4,9 @@ kind: example
 title: "$\\operatorname{ind}_{K_2}(G)=2|E(G)|$ under the induced-embedding convention"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-induced-copy-number, def-induced-embedding-and-induced-copy, thm-handshake-lemma-for-finite-simple-graphs]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Swastik Kopparty, Local Structure: Subgraph Counts I"
+      url: "https://www.math.toronto.edu/swastik/courses/rutgers/graphtheory-F11/homs.pdf"
 pipeline_run: null
 ---
 

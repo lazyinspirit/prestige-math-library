@@ -4,6 +4,9 @@ kind: lemma
 title: "Purity is symmetric; complementation swaps complete and anticomplete pairs and preserves mixed pairs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-edges-between-sets-and-pure-mixed-pairs, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
@@ -15,8 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Maria Chudnovsky, The structure of bull-free graphs"
-      url: "https://web.math.princeton.edu/~mchudnov/bullsurvey.pdf"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
+    - title: "ISGCI, Self-complementary classes"
+      url: "https://www.graphclasses.org/classes/self_complementary.html"
 pipeline_run: null
 ---
 

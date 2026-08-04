@@ -49,8 +49,9 @@ exponentiation: it runs over $0 < \beta < \lambda$, **not** over $\beta <
 \lambda$. With the unrestricted union the stray value $\alpha^{0} = 1$ would
 force $0^{\omega} = 1$; with the restriction, one formula is correct for every
 base including $0$, and no case split on the base is needed.
-[[cor-ordinal-exponentiation-well-defined]] carries the details and the exponent
-law that the naive clause falsifies.
+[[cor-ordinal-exponentiation-well-defined]] carries the well-definedness details;
+[[thm-ordinal-exponent-laws]] proves the exponent law that the naive clause
+would falsify.
 
 **The recursions define, the order types compute.** $\alpha + \beta$ is the
 order type of a copy of $\alpha$ followed by a copy of $\beta$
@@ -71,11 +72,10 @@ left factor is nonzero, since $0 \cdot \beta = 0$ for every $\beta$
 ([[thm-ordinal-arithmetic-monotonicity]] — the workhorse of the page:
 subtraction, division with remainder, the exponent laws and the Cantor normal
 form all run on it). Addition is associative; multiplication is
-associative and distributes over addition **on the left**. Every other law a
-reader might expect fails, and the five false statements in section 5 refute
-them one at a time: commutativity of $+$, commutativity of $\cdot$, right
-distributivity, strict monotonicity of $+$ in the left argument, and the belief
-that the ordinal $2^{\omega}$ is uncountable. The last of these is the notation
+associative and distributes over addition **on the left**. The companion false
+statements show that addition and multiplication need not be commutative, right
+distributivity and strict monotonicity of addition in the left argument fail,
+and the ordinal $2^{\omega}$ is countable. The last of these is the notation
 clash between ordinal and cardinal exponentiation, and
 [[rem-ordinal-versus-cardinal-exponentiation]] is the standing warning about it.
 

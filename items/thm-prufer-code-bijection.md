@@ -4,6 +4,9 @@ kind: theorem
 title: "Prüfer encoding and decoding are inverse bijections between labelled trees on $n\\ge2$ vertices and words of length $n-2$ on their labels"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-prufer-code, lem-prufer-decoding-produces-a-tree, cor-nontrivial-tree-has-two-leaves, def-injection-surjection-bijection, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

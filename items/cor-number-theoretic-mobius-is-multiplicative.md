@@ -4,6 +4,9 @@ kind: corollary
 title: "The number-theoretic Möbius function is multiplicative on coprime positive integers"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-number-theoretic-and-poset-mobius-agree, thm-mobius-function-of-a-product-poset, def-coprime, thm-fundamental-theorem-of-arithmetic, lem-poset-mobius-recurrence]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "MIT 18.785, Problem Set 8"
-      url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
+    - title: "Stanford Pairing-Based Cryptography notes, Möbius inversion"
+      url: "https://crypto.stanford.edu/pbc/notes/numbertheory/mobius.html"
 pipeline_run: null
 ---
 

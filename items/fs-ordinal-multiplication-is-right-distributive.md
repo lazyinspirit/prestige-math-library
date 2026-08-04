@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $(\\beta + \\gamma)\\cdot\\alpha = \\beta\\cdot\\alpha + \\gamma\\cdot\\alpha$ for all ordinals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 

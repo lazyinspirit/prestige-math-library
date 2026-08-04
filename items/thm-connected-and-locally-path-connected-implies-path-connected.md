@@ -4,6 +4,9 @@ kind: theorem
 title: "A connected, locally path-connected space is path-connected, because its path components are open"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-path-connected, def-locally-connected, def-connected-space,
        thm-connectedness-characterisations, def-topological-space,
        def-subspace-topology-top, def-connected-component-and-quasicomponent,
@@ -29,8 +32,8 @@ sources:
   references:
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §25"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
 pipeline_run: null
 ---
 

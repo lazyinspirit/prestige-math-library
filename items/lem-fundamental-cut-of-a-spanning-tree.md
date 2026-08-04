@@ -4,19 +4,27 @@ kind: lemma
 title: "Every edge of a spanning tree determines a fundamental cut, and every edge crossing it restores a spanning tree"
 status: published
 origin: session
-deps: [def-spanning-tree, lem-edge-deletion-in-a-tree, thm-tree-characterisations]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-spanning-tree, lem-edge-deletion-in-a-tree]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 
@@ -33,8 +41,6 @@ For every $f\in\delta_T(e)$, the graph $T-e+f$ is a spanning tree of $G$.
 **Given:** A spanning tree $T$ of $G$ and $e\in E(T)$.
 
 [L1] $T-e$ has exactly two tree components ([[lem-edge-deletion-in-a-tree]]).
-
-[F1] A graph is a tree exactly when every two vertices have a unique path ([[thm-tree-characterisations]]).
 
 [F2] A spanning tree contains every vertex of $G$ ([[def-spanning-tree]]).
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Every quasicomponent is a closed union of components, so each component is contained in a quasicomponent, and the quasicomponents partition the space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-component-and-quasicomponent, thm-components-partition-and-are-closed,
        thm-connectedness-characterisations, def-connected-space, def-topological-space,
        def-subspace-topology-top]
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 

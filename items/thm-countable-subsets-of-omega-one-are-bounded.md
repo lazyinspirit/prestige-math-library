@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice: every at most countable subset of $\\omega_1$ is bounded below $\\omega_1$, so no at most countable subset of $\\omega_1$ is cofinal in it, and a supremum of at most countably many at most countable ordinals is at most countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-cofinal-subset-of-an-ordinal, def-countable-choice, thm-countable-union-of-countable, def-countable, lem-countable-iff-surjection-from-n, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-limit-ordinal, def-natural-numbers]
 justified_by: []
 aliases: [thm-omega-one-is-regular-under-countable-choice]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 3 (Cardinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Karagila, Forcing course notes (2023)"
+      url: "https://karagila.org/files/Forcing-2023.pdf"
 pipeline_run: null
 ---
 

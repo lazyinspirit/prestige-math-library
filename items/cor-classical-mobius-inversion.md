@@ -4,6 +4,9 @@ kind: corollary
 title: "Classical Möbius inversion over positive divisors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-number-theoretic-and-poset-mobius-agree, thm-mobius-inversion-for-lower-finite-posets, lem-divisibility-poset-is-lower-finite-and-factorises, lem-finite-sum-reindexing-and-fubini]
 justified_by: []
 aliases: []
@@ -15,8 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Encyclopedia of Mathematics, Möbius series"
-      url: "https://encyclopediaofmath.org/wiki/M%C3%B6bius_series"
+    - title: "P. J. Cameron, Notes on Number Theory, Theorem 7.9"
+      url: "https://maths.qmul.ac.uk/~pjc/notes/nt.pdf"
+    - title: "Stanford Pairing-Based Cryptography notes, Möbius inversion"
+      url: "https://crypto.stanford.edu/pbc/notes/numbertheory/mobius.html"
 pipeline_run: null
 ---
 

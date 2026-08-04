@@ -30,6 +30,7 @@ import { REPO, APP_DIR, WORKER_DIR, describe, tsxLoader, precheckSource, katexCa
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const withJudges = argv.includes('--judges');
+const isAudit = argv.includes('--audit');
 
 const checks = [];
 /** @param status 'pass' | 'fail' | 'warn' | 'skip' */
@@ -123,6 +124,32 @@ attempt('disk', false, () => {
   if (gb < 2) throw new Error(`${gb.toFixed(1)} GiB free — judge ledgers and touch snapshots grow through a level`);
   return `${gb.toFixed(1)} GiB free`;
 });
+
+// ---- audit-only checks -------------------------------------------------------
+//
+// The retro-audit needs something the build does not: outbound HTTP from the
+// DRIVER. Every provenance row carries a source URL, and the orchestrator is the
+// only actor that can verify them — the Codex agent sandboxes have no DNS, which
+// is why wave 2 produced eight `established-knowledge` waivers, seven of which
+// dissolved the moment someone with a working fetch looked. A wave driven on a
+// machine with no egress would silently degrade to that failure mode.
+
+if (isAudit) {
+  attempt('outbound-http', true, () => {
+    const result = spawnSync('curl', ['-sSL', '-o', '/dev/null', '-w', '%{http_code}', '--max-time', '20',
+      'https://en.wikipedia.org/wiki/Ordinal_arithmetic'], { encoding: 'utf8', timeout: 30_000 });
+    if (result.error) throw new Error(`curl unavailable: ${result.error.message}`);
+    const code = (result.stdout || '').trim();
+    if (code !== '200') throw new Error(`expected 200, got ${code || 'no response'} — the URL liveness sweep cannot run`);
+    return 'curl reaches the open web (200)';
+  }, 'without this the wave cannot verify a single source URL');
+
+  attempt('audit-dir', true, () => {
+    const dir = join(REPO, 'research', 'audit');
+    if (!existsSync(dir)) throw new Error('research/audit/ is missing — every wave artifact lives there');
+    return 'research/audit/ present';
+  });
+}
 
 // ---- optional live lane check ----------------------------------------------
 

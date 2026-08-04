@@ -4,6 +4,9 @@ kind: example
 title: "A graph is $P_3$-free if and only if every connected component is complete"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-h-free-and-family-free-graph, def-induced-embedding-and-induced-copy, cor-connected-components-partition-the-vertex-set, def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: [cluster graph]
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "ISGCI, Cluster graphs"
+      url: "https://www.graphclasses.org/classes/gc_1237.html"
 pipeline_run: null
 ---
 

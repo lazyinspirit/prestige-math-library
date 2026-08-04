@@ -4,6 +4,9 @@ kind: theorem
 title: "For $\\alpha > 0$ every ordinal $\\beta$ is $\\alpha \\cdot \\xi + \\rho$ with $\\rho < \\alpha$, in exactly one way"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-subtraction, thm-ordinal-arithmetic-monotonicity, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal]
 justified_by: []
 aliases: [thm-ordinal-division-algorithm]

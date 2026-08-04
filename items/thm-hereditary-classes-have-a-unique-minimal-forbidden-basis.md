@@ -4,6 +4,9 @@ kind: theorem
 title: "Every hereditary graph class is determined by its unique minimal forbidden induced subgraphs"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-minimal-forbidden-induced-subgraph, def-hereditary-graph-class, def-h-free-and-family-free-graph, lem-forbidden-induced-subgraph-classes-are-hereditary, def-finite-cardinality, cor-cardinality-of-the-power-set, thm-well-ordering-principle]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

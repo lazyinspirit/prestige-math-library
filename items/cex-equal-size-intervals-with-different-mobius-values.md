@@ -4,6 +4,11 @@ kind: counterexample
 title: "A four-element chain and a four-element diamond have equal-size endpoint intervals but Möbius values $0$ and $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-mobius-depends-only-on-interval-cardinality, ex-mobius-on-a-four-element-chain, ex-mobius-on-the-diamond-poset]
 justified_by: []
 aliases: []
@@ -15,8 +20,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

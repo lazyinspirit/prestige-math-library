@@ -8,14 +8,19 @@ authorship: ai-altered
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-real-power-by-rational-supremum, def-real-power, thm-real-power-agrees-with-rational-exponent, thm-real-power-continuity-and-derivatives, thm-natural-logarithm-laws, thm-exponential-is-strictly-increasing, lem-rat-embeds-dense, lem-sup-epsilon]
+deps: [def-real-power-by-rational-supremum, def-real-power, thm-real-power-agrees-with-rational-exponent, thm-real-power-continuity-and-derivatives, thm-natural-logarithm-laws, thm-exponential-is-strictly-increasing, thm-real-power-laws, lem-rat-embeds-dense, lem-sup-epsilon]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,11 +39,13 @@ For every $a>0$ and $x\in\mathbb R$, the rational-supremum value $a^{[x]}$ of [[
 
 **Given:** A real $x$ and a positive base $a$.
 
-[L1] For $a>1$, write $S_a(x):=\{a^q:q\in\mathbb Q,\ q<x\}$ and set $a^{[x]}=\sup S_a(x)$; subunit bases are defined through reciprocals and base one is constant ([[def-real-power-by-rational-supremum]]).
+[L1] For $a>1$, $S_a(x):=\{a^q:q\in\mathbb Q,\ q<x\}$ and $a^{[x]}:=\sup S_a(x)$; for $0<a<1$, $a^{[x]}:=1/\bigl((a^{-1})^{[x]}\bigr)$; and $1^{[x]}:=1$ ([[def-real-power-by-rational-supremum]]).
 
 [L2] Rational powers agree with exponential real powers, and $t\mapsto a^t$ is continuous; if $a>1$, then $\log a>0$, so $t\mapsto a^t=\exp(t\log a)$ is strictly increasing ([[thm-real-power-agrees-with-rational-exponent]], [[thm-real-power-continuity-and-derivatives]], [[thm-natural-logarithm-laws]], [[thm-exponential-is-strictly-increasing]], [[def-real-power]]).
 
 [L3] Rational numbers are dense in $\mathbb R$, and the epsilon characterisation identifies a supremum of a nonempty bounded-above set ([[lem-rat-embeds-dense]], [[lem-sup-epsilon]]).
+
+[L4] For $a,b>0$ and $r,s\in\mathbb R$: $a^{r+s}=a^ra^s$, $(ab)^r=a^rb^r$, $(a/b)^r=a^r/b^r$, and $(a^r)^s=a^{rs}$ ([[thm-real-power-laws]]).
 
 
 
@@ -52,4 +59,4 @@ For every $a>0$ and $x\in\mathbb R$, the rational-supremum value $a^{[x]}$ of [[
 
 2.1 By the supremum characterisation, steps 1.1 and 1.2 give $a^{[x]}=a^x$ when $a>1$. [step 1.1, step 1.2, L3]
 
-3.1 For $a=1$ both values are $1$; for $0<a<1$, apply step 2.1 to $a^{-1}>1$ and $-x$, then use the reciprocal definitions and real-power laws. [step 2.1, L1, L2] ∎
+3.1 For $a=1$ both values are $1$. For $0<a<1$ the base $a^{-1}$ exceeds $1$, so step 2.1 applied to that base and the same exponent $x$ gives $(a^{-1})^{[x]}=(a^{-1})^{x}$; the subunit clause of [L1] then gives $a^{[x]}=1/\bigl((a^{-1})^{x}\bigr)$. By [L4] with $r=-1$ and $s=x$, $(a^{-1})^{x}=a^{-x}$; and by [L4] again, $a^{-x}a^{x}=a^{-x+x}=a^{0}=1$, so $1/a^{-x}=a^{x}$. Hence $a^{[x]}=a^{x}$. [step 2.1, L1, L2, L4] ∎

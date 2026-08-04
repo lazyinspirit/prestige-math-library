@@ -4,6 +4,9 @@ kind: theorem
 title: "A linear continuum is connected in its order topology, and so is every order-convex subset of it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-order-topology-on-a-linearly-ordered-set, def-connected-space,
        def-upper-bound, def-partial-order, def-topological-space,
        def-subspace-topology-top, def-topology-basis-subbasis]
@@ -28,8 +31,6 @@ sources:
   references:
     - title: "Linear continuum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_continuum"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
 pipeline_run: null
 ---
 

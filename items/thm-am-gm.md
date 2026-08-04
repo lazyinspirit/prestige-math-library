@@ -4,6 +4,9 @@ kind: theorem
 title: "The arithmetic mean, geometric mean inequality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-sum, lem-finite-sum-laws, lem-of-zero-mult, def-integer-power, thm-nth-roots-exist, thm-induction-principle, thm-recursion, lem-of-square-positive, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-q-embeds, def-ordered-field, def-nat-order, thm-nat-linear-order, lem-nat-order-add-compatible, lem-nat-discrete, lem-nat-add-associative, lem-nat-add-commutative]
 justified_by: []
 aliases: [thm-am-gm-inequality]
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "MIT 18.100A, AM-GM inequality handout"
+      url: "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_rec1.pdf"
+    - title: "Finite inequalities (Cornell University)"
+      url: "https://e.math.cornell.edu/people/belk/measuretheory/Inequalities.pdf"
     - title: "AM-GM inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/AM%E2%80%93GM_inequality"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

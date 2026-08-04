@@ -4,6 +4,9 @@ kind: corollary
 title: "The irrationals are uncountable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-r-uncountable, thm-rationals-countable, def-countable, lem-countable-iff-surjection-from-n, thm-n-cross-n-countable, lem-of-q-embeds, def-equinumerous, def-injection-surjection-bijection, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
     - title: "Irrational number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Irrational_number"
     - title: "Countable set (Wikipedia)"

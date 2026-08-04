@@ -40,6 +40,20 @@ const ROLES = Object.freeze({
   alpha:        { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   orchestrator: { runner: 'claude', model: null,      sandbox: null,              cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
+
+  // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
+  // Audit-Beta stays Sol; the audit ALPHA is claude-opus-5 by owner rule of
+  // 2026-08-03, deliberately a different family from the Sol readers that
+  // certify its repairs, so no repair Alpha authors is certified by its own
+  // model. That is the whole reason the two runners differ here.
+  'audit-beta':    { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
+  'audit-alpha':   { runner: 'claude', model: null,      sandbox: null,              cap: 1, dir: 'research/audit', why: 'SINGLE adjudicator at A6 and A8; owner rule makes it claude-opus-5' },
+  // Read-only at the SANDBOX, not by request. The owner rule says a refuter
+  // never edits and a certifier never certifies its own work; a prompt that
+  // merely asks for that is not a guarantee, and these two roles are the ones
+  // whose findings would be worthless if they could quietly fix what they found.
+  certifier:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author' },
+  'audit-refuter': { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, dir: 'research/audit', web: true, why: 'adversarial proof reading; returns evidence, never edits' },
 });
 
 const argv = process.argv.slice(2);
@@ -98,12 +112,19 @@ if (taskPath) {
 // is on. Other placeholders are often deliberately generic — Alpha's brief says
 // "every research/level<n>-batch-<i>.notes.md", where `<i>` means *each* batch
 // and substituting one value would be wrong — so those only warn.
-const unsubstituted = [...new Set([...prompt.matchAll(/<([a-z])>/g)].map((m) => m[1]))];
-if (unsubstituted.includes('n')) {
-  console.error('dispatch: the brief still says "<n>" — the level identity must be concrete. Pass --var n=<level>.');
+// The audit briefs use <k> for the wave and <category> for the batch, exactly as
+// the build briefs use <n> and <i>. Both identity placeholders are hard errors
+// for the same reason: an agent briefed about "wave <k>" guesses which wave it
+// is on, and a wave-2 Beta that guesses wave 3 audits the wrong pages.
+const unsubstituted = [...new Set([...prompt.matchAll(/<([a-z]+)>/g)].map((m) => m[1]))];
+const IDENTITY = ['n', 'k'];
+for (const name of IDENTITY) {
+  if (!unsubstituted.includes(name)) continue;
+  const what = name === 'n' ? 'level' : 'wave';
+  console.error(`dispatch: the brief still says "<${name}>" — the ${what} identity must be concrete. Pass --var ${name}=<${what}>.`);
   process.exit(2);
 }
-const generic = unsubstituted.filter((name) => name !== 'n');
+const generic = unsubstituted.filter((name) => !IDENTITY.includes(name));
 if (generic.length && !asJson) {
   console.error(`dispatch: note — brief retains generic placeholder(s) ${generic.map((n) => `<${n}>`).join(', ')}; ` +
     'pass --var to pin them if this role owns exactly one.');
@@ -111,7 +132,9 @@ if (generic.length && !asJson) {
 
 // ---- output paths ------------------------------------------------------------
 
-const outDir = join(REPO, 'research', `${run}-dispatch`);
+// Audit roles keep their dispatch record beside the wave's other artifacts, so a
+// wave and a level of the same number cannot collide on a log name.
+const outDir = join(REPO, spec.dir ?? 'research', `${run}-dispatch`);
 if (!dryRun) mkdirSync(outDir, { recursive: true });
 const logPath = join(outDir, `${role}-${label}.log`);
 const resultPath = join(outDir, `${role}-${label}.result.json`);
@@ -132,6 +155,13 @@ const buildCodex = (temporaryHome) => [
     // 1,000,000-token window explicitly or the lane silently runs at the
     // built-in default.
     '-c', 'model_context_window=1000000',
+    // Passed explicitly, never inherited. The temporary CODEX_HOME carries only
+    // auth.json, and wave 1b's defect was exactly an implicitly inherited
+    // setting that turned out not to be inherited. An audit role that cannot
+    // search cannot do provenance determination, and would fall back to
+    // `established-knowledge` waivers instead — wave 2 produced eight of those,
+    // seven of which evaporated once someone with a working fetch looked.
+    ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
     '--sandbox', spec.sandbox,
     '--skip-git-repo-check',
     '--cd', REPO,

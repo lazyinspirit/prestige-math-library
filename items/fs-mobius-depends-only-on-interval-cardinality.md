@@ -4,6 +4,9 @@ kind: false-statement
 title: "False: $\\mu_P(x,y)$ depends only on the cardinality of $[x,y]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-mobius-function-of-a-finite-chain, thm-mobius-function-of-a-boolean-lattice]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

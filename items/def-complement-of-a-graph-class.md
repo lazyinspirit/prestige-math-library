@@ -4,6 +4,9 @@ kind: definition
 title: "The complement of a graph class"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-hereditary-graph-class, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "ISGCI, Self-complementary classes"
+      url: "https://www.graphclasses.org/classes/self_complementary.html"
 pipeline_run: null
 ---
 

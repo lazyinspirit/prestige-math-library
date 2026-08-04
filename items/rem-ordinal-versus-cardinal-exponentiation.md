@@ -4,6 +4,9 @@ kind: remark
 title: "Ordinal $\\alpha^{\\beta}$ and cardinal $\\kappa^{\\lambda}$ are different operations that share one notation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordinal-exponentiation, fs-the-ordinal-two-to-the-omega-is-uncountable, thm-cantor-powerset, thm-r-uncountable, def-cardinal, def-countable, rem-continuum-hypothesis]
 justified_by: []
 aliases: []

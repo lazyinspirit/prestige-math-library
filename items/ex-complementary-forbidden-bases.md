@@ -4,6 +4,9 @@ kind: example
 title: "Complementary hereditary classes have complementary forbidden bases"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-complementation-preserves-hereditary-classes-and-bases, ex-complete-graphs-as-a-hereditary-class, ex-edgeless-graphs-as-a-hereditary-class]
 justified_by: []
 aliases: []
@@ -15,8 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISGCI, Information System on Graph Classes and their Inclusions"
-      url: "https://www.cs.sfu.ca/~pavol/graphclasses/"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
+    - title: "ISGCI, Self-complementary classes"
+      url: "https://www.graphclasses.org/classes/self_complementary.html"
 pipeline_run: null
 ---
 

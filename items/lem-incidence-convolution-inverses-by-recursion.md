@@ -4,6 +4,9 @@ kind: lemma
 title: "If every diagonal value of an incidence function is a unit, recursive interval formulas construct both a left and a right convolution inverse"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-incidence-functions-form-a-ring, def-poset-interval-and-finiteness-conditions, thm-strong-induction, def-finite-cardinality, lem-ring-units-form-a-group, def-finite-sum-in-a-commutative-monoid, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Y. Guan and Y. Zhang, Additive Biderivations of Incidence Algebras, §2.1"
+      url: "https://arxiv.org/abs/2412.18049"
+    - title: "Hameister–Rao–Simpson, Proposition 2.8"
+      url: "https://www-users.cse.umn.edu/~reiner/REU/HameisterRaoSimpson2017.pdf"
 pipeline_run: null
 ---
 

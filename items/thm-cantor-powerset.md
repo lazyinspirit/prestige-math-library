@@ -4,6 +4,9 @@ kind: theorem
 title: "Cantor's theorem: $A \\prec \\mathcal{P}(A)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 aliases: [thm-cantor-diagonal, cantors-theorem]
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Cantor's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
     - title: "Cantor's diagonal argument (Wikipedia)"

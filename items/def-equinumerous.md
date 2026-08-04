@@ -4,6 +4,9 @@ kind: definition
 title: "Equinumerous sets, $A \\approx B$ and $A \\preceq B$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-equipollent, def-same-cardinality]
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Equinumerosity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Equinumerosity"
     - title: "Countable set (Wikipedia)"

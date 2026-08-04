@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Q}$ as a subspace of $\\mathbb{R}$: every component is a single point, no point is isolated, and the space is not locally connected anywhere"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-component-and-quasicomponent, cor-connected-subsets-of-the-line,
        def-connected-space, def-subspace-topology-top, lem-q-and-irrationals-dense-r,
        lem-of-q-dense, def-standard-topologies, def-interval,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Totally_disconnected_space"
     - title: "Rational number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rational_number"
+    - title: "Connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Connected_space"
 pipeline_run: null
 ---
 

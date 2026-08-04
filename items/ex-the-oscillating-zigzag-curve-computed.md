@@ -4,6 +4,9 @@ kind: example
 title: "The zigzag curve and its closure worked out: the components, the path components, and the points at which local connectedness fails"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-oscillating-zigzag-curve, def-connected-space, def-path-connected,
        def-locally-connected, def-connected-component-and-quasicomponent,
        thm-components-partition-and-are-closed, thm-quasicomponents-contain-components,
@@ -19,15 +22,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -35,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Topologist%27s_sine_curve"
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 
@@ -79,8 +80,6 @@ classes, one of which is the whole added segment.
 
 [A5] $X$ is locally connected at $x$ when every open $U \ni x$ contains an open connected $V$ with $x \in V \subseteq U$; if $S$ is open in $X$ then a subset of $S$ is open in $S$ exactly when it is open in $X$ ([[def-locally-connected]], [[def-subspace-topology-top]]).
 
-[A6] If $A$ is connected and $A \subseteq B \subseteq \overline{A}$ then $B$ is connected ([[thm-closure-of-a-connected-set]]).
-
 ## Verification
 
 **Proof technique:** direct.
@@ -101,6 +100,6 @@ classes, one of which is the whole added segment.
 
 - **The two path components have different topological characters.** $\Sigma$ is homeomorphic to a closed bounded interval and $G$ to a half-open one, and only the first is closed in $\overline{G}$. So the partition into path components is not a partition into clopen pieces, which is exactly what [[thm-connected-and-locally-path-connected-implies-path-connected]] would supply if the space were locally path-connected — and it is not, by claim 4.
 
-- **Why $\overline{G}$ has one component and two path components at once.** Connectedness is destroyed only by a clopen splitting, and adjoining $\Sigma$ to $G$ creates none: every neighbourhood of a point of $\Sigma$ meets $G$ by [A6] and claim 2 of [[lem-the-oscillating-zigzag-curve]]. Path-connectedness is destroyed by a single continuity failure along one map, and that is enough.
+- **Why $\overline{G}$ has one component and two path components at once.** Connectedness is destroyed only by a clopen splitting, and adjoining $\Sigma$ to $G$ creates none: every neighbourhood of a point of $\Sigma$ meets $G$ by [[thm-closure-characterisation-top]], claim 1, and claim 2 of [[lem-the-oscillating-zigzag-curve]]. Path-connectedness is destroyed by a single continuity failure along one map, and that is enough.
 
 - **The quasicomponent carries no extra information here.** Since the space is connected, its unique quasicomponent equals its unique component, so this witness says nothing about the strictness of the inclusion $C(x) \subseteq Q(x)$; a separate space is needed for that.

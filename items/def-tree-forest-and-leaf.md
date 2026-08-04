@@ -4,6 +4,9 @@ kind: definition
 title: "Trees, forests, leaves and isolated vertices"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-finite-simple-graph, def-graph-walk-trail-path-and-cycle, def-connected-graph-and-connected-component, def-graph-adjacency-incidence-neighbourhood-and-degree]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

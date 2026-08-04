@@ -4,6 +4,9 @@ kind: definition
 title: "Connected components, quasicomponents, and totally disconnected spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-connected-space, thm-unions-of-connected-sets, def-topological-space,
        def-subspace-topology-top, def-standard-topologies]
 justified_by: []
@@ -28,8 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Totally disconnected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Totally_disconnected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §25"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 

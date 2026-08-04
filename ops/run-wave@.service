@@ -1,0 +1,68 @@
+# systemd user unit — one unattended published-page audit wave, A0 to A10.
+#
+# The audit twin of ops/run-level@.service. Install as the user who owns the
+# Codex and DeepSeek credentials:
+#
+#   mkdir -p ~/.config/systemd/user ~/.config/prestige-math-library
+#   cp ops/run-wave@.service ~/.config/systemd/user/
+#   cat > ~/.config/prestige-math-library/wave4.env <<'EOF'
+#   WAVE=4
+#   WAVE_JUDGMENT=halt
+#   WAVE_JUDGE_BUDGET=0
+#   WAVE_PARK_AFTER=3
+#   PRESTIGE_APP_DIR=/root/Projects/prestige-intelligence
+#   EOF
+#   systemctl --user daemon-reload
+#   loginctl enable-linger "$USER"      # <-- the run survives logout ONLY with this
+#   systemctl --user start run-wave@wave4
+#
+# Watch it:  journalctl --user -u run-wave@wave4 -f
+#            node tools/run-wave.mjs --wave 4 --status
+# Steer it:  node tools/run-control.mjs --run wave4 pause
+#
+# enable-linger is the difference between "runs while I am logged in" and "runs
+# while I am not". Without it systemd tears down the user manager at logout and
+# the wave dies with the session it was supposed to outlive.
+#
+# WAVE_JUDGE_BUDGET=0 means A7 HALTS rather than spending. Set a real number only
+# when you have decided to let the wave buy its own verdicts unattended; the
+# sweep is the one irreversible purchase in the workflow.
+#
+# WAVE_JUDGMENT=halt means A3 and A9 stop for a decision. `autonomous` replaces
+# you-in-the-loop with a model-in-the-loop and journals what it decided; it
+# should be something you switched on, not something you discovered.
+
+[Unit]
+Description=Prestige math library — unattended audit wave (%i)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Projects/prestige-math-library
+EnvironmentFile=%h/.config/prestige-math-library/%i.env
+
+# Refuse to start a wave the machine cannot finish. --audit additionally checks
+# outbound HTTP, because the audit's URL liveness sweep is driver-side work and a
+# machine with no egress would degrade silently into `established-knowledge`
+# waivers rather than failing loudly.
+ExecStartPre=/usr/bin/env node tools/preflight.mjs --audit
+
+ExecStart=/usr/bin/env node tools/run-wave.mjs \
+  --wave ${WAVE} \
+  --judgment ${WAVE_JUDGMENT} \
+  --judge-budget ${WAVE_JUDGE_BUDGET} \
+  --park-after ${WAVE_PARK_AFTER}
+
+# A halted run refuses to restart without --from-step, by design: a driver that
+# resumed automatically would spin through whatever caused the halt. So there is
+# no Restart= here. `owner-pause` and `wave-empty` exit 0 and systemd records a
+# clean finish — both are successes.
+Restart=no
+TimeoutStartSec=infinity
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

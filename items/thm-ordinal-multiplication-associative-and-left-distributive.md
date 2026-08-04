@@ -4,6 +4,9 @@ kind: theorem
 title: "Ordinal multiplication is associative, and $\\alpha \\cdot (\\beta + \\gamma) = \\alpha\\cdot\\beta + \\alpha\\cdot\\gamma$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-multiplication, def-ordinal-addition, thm-ordinal-addition-associative, thm-ordinal-arithmetic-monotonicity, thm-transfinite-induction, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: [thm-ordinal-left-distributivity]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 

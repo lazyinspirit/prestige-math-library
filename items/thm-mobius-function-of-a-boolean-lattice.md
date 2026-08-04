@@ -4,6 +4,9 @@ kind: theorem
 title: "For $A\\subseteq B$ in a finite Boolean lattice, $\\mu(A,B)=(-1)^{\\lvert B\\setminus A\\rvert}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-mobius-function-of-a-product-poset, def-boolean-lattice-and-levels, cor-binomial-theorem-consequences, def-integer-power, def-finite-cardinality, lem-finite-sum-reindexing-and-fubini, lem-poset-mobius-recurrence, def-group-power, thm-int-comm-ring]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "R. Stanley, Enumerative Combinatorics, Volume 1"
-      url: "https://math.mit.edu/~rstan/ec/ec1toc.html"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

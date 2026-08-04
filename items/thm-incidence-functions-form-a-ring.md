@@ -4,6 +4,9 @@ kind: theorem
 title: "Pointwise addition and convolution make $I(P,R)$ a ring with identity $\\delta$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-incidence-convolution-associative-and-distributive, def-delta-and-zeta-incidence-functions, def-ring, def-ring-of-functions]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Y. Guan and Y. Zhang, Additive Biderivations of Incidence Algebras, §2.1"
+      url: "https://arxiv.org/abs/2412.18049"
 pipeline_run: null
 ---
 

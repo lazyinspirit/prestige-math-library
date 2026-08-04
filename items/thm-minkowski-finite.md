@@ -4,6 +4,9 @@ kind: theorem
 title: "Minkowski's inequality for finite sums (rational exponent)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-holder-finite, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, lem-triangle-inequality-finite, lem-of-triangle-inequality, lem-of-abs-value, def-abs-value, def-rat-operations, def-rat-order, def-rationals, thm-rat-ordered-field, cor-of-one-positive, thm-nth-roots-exist, def-ordered-field, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order]
 justified_by: []
 aliases: []
@@ -25,6 +28,12 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Finite inequalities (Cornell University)"
+      url: "https://e.math.cornell.edu/people/belk/measuretheory/Inequalities.pdf"
+    - title: "Young, Hölder, and Minkowski inequalities (Oregon State University)"
+      url: "https://math.oregonstate.edu/~show/old/142_Luenberger.pdf"
     - title: "Minkowski inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Minkowski_inequality"
     - title: "Hölder's inequality (Wikipedia)"

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every real number has a real square root"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-of-square-roots, lem-of-square-positive, lem-of-zero-mult, thm-nth-roots-exist, def-complete-ordered-field, def-ordered-field, def-integer-power, cor-of-one-positive, cor-of-neg-one-squared, lem-of-sign-rules, lem-of-mult-neg, lem-power-laws, lem-power-monotone]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I"
+      url: "https://www.jirka.org/ra/realanal.pdf"
+    - title: "Radicals and rational exponents (Emory University)"
+      url: "https://mathcenter.oxford.emory.edu/site/math100/radicals/"
     - title: "Nth root (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nth_root"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

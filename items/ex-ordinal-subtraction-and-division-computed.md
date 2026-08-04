@@ -4,6 +4,9 @@ kind: example
 title: "Solving $\\omega + \\gamma = \\omega\\cdot 2$ and dividing $\\omega^{2} + \\omega + 3$ by $\\omega$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ordinal-subtraction, thm-ordinal-division-with-remainder, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-arithmetic-monotonicity, thm-ordinal-exponent-laws, def-ordinal-addition, def-ordinal-multiplication, def-ordinal-exponentiation, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
 aliases: []

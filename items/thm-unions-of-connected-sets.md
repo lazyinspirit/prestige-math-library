@@ -4,6 +4,9 @@ kind: theorem
 title: "A union of connected subspaces with a point in common is connected, and so is a union of a family in which every member meets a fixed connected member"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-space, thm-connectedness-characterisations, def-subspace-topology-top,
        def-continuous-map-top, def-standard-topologies]
 justified_by: []
@@ -13,22 +16,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 
@@ -78,7 +77,7 @@ the set $A$ in claim 2 are given rather than selected.
 
 ## Remarks
 
-- **Why a common point and not merely pairwise intersection.** Pairwise intersection is not enough for an arbitrary family, and the failure is not exotic: three sets can meet pairwise with empty total intersection, and claim 2 is the form that covers that case, since it asks only that each member meet one fixed connected set. Claim 1 is the special case in which that fixed set is a single point, a singleton being connected.
+- **Why a common point and not merely pairwise intersection.** Pairwise intersection does not give a common point, so it does not supply claim 1's hypothesis, and the failure is not exotic: three sets can meet pairwise with empty total intersection. Claim 2 is the form that covers that case, since it asks only that each member meet one fixed connected set — and for a nonempty pairwise-intersecting family one may take that fixed set to be any one member, so such a union is connected after all. Claim 1 is the special case in which the fixed set is a single point, a singleton being connected.
 
 - **Chains are covered by iterating claim 2.** If $A_0, A_1, A_2, \dots$ are connected and $A_n \cap A_{n+1} \ne \varnothing$ for every $n$, then each partial union $A_0 \cup \dots \cup A_n$ is connected by induction using claim 2, and the total union is connected by claim 1 applied to the partial unions, all of which contain $A_0$. The argument is written out where it is used rather than stated as a further clause here.
 

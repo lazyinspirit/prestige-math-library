@@ -4,6 +4,9 @@ kind: lemma
 title: "A maximal acyclic spanning subgraph of a connected graph is a spanning tree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-spanning-tree, def-tree-forest-and-leaf, def-connected-graph-and-connected-component, cor-connected-components-partition-the-vertex-set, lem-edge-addition-to-a-tree, cor-cardinality-of-the-power-set, def-finite-cardinality, thm-well-ordering-principle]
 justified_by: []
 aliases: []
@@ -16,7 +19,7 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

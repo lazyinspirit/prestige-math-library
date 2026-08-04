@@ -4,6 +4,9 @@ kind: definition
 title: "Injection, surjection, bijection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: []
 justified_by: []
 aliases: [def-injective, def-surjective, def-bijective]
@@ -20,6 +23,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Bijection, injection and surjection (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection"
     - title: "T. Tao, Analysis I, 3rd ed., §3.3 (Functions)"

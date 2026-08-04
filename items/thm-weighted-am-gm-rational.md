@@ -4,6 +4,9 @@ kind: theorem
 title: "Weighted AM-GM inequality with rational weights"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-am-gm, def-rational-power, lem-rational-power-laws, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, thm-recursion, lem-rat-positive-denominator, def-rationals, def-rat-operations, def-rat-order, def-int-order, lem-nat-embeds-int, lem-of-q-embeds, def-integer-power, thm-nth-roots-exist, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "MIT 18.100A, AM-GM inequality handout"
+      url: "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_rec1.pdf"
+    - title: "Finite inequalities (Cornell University)"
+      url: "https://e.math.cornell.edu/people/belk/measuretheory/Inequalities.pdf"
     - title: "AM-GM inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/AM%E2%80%93GM_inequality"
     - title: "Young's inequality for products (Wikipedia)"

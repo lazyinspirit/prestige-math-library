@@ -4,6 +4,9 @@ kind: lemma
 title: "Finite commutative-monoid sums are invariant under bijective reindexing, split over disjoint unions, and satisfy the finite Fubini rule"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-sum-in-a-commutative-monoid, thm-product-rule, thm-sum-rule, def-injection-surjection-bijection, thm-generalised-associativity]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
-      url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Andrade–da Cruz, Finite products in commutative monoids"
+      url: "https://arxiv.org/abs/2605.08089"
 pipeline_run: null
 ---
 

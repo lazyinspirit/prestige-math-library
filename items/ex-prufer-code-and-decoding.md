@@ -4,6 +4,9 @@ kind: example
 title: "A labelled tree and its Prüfer code computed in both directions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-prufer-code, lem-prufer-decoding-produces-a-tree, thm-prufer-code-bijection]
 justified_by: []
 aliases: []
@@ -15,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "ISI Bangalore discrete mathematics notes, Prüfer codes"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
       url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---

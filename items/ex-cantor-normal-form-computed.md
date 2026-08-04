@@ -4,6 +4,9 @@ kind: example
 title: "The Cantor normal form of $(\\omega^{2} + \\omega\\cdot 3 + 5) \\cdot \\omega^{2}$, computed by the division algorithm"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-normal-form, thm-ordinal-division-with-remainder, thm-ordinal-exponent-laws, thm-ordinal-multiplication-associative-and-left-distributive, thm-ordinal-addition-associative, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, def-ordinal-exponentiation, def-ordinal-multiplication, def-ordinal-addition, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-natural-numbers]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "A. Marks, Set Theory"
+      url: "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
 pipeline_run: null
 ---
 

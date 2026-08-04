@@ -4,6 +4,9 @@ kind: corollary
 title: "Ordinal exponentiation exists and is unique, with the limit clause taken over $0 < \\beta < \\lambda$ so that $0^{\\lambda} = 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-recursion-on-the-ordinals, def-ordinal-multiplication, cor-ordinal-multiplication-well-defined, def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []

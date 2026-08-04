@@ -4,6 +4,9 @@ kind: lemma
 title: "The graph of the piecewise-linear map oscillating between $0$ and $1$ on the intervals $[1/(n+2), 1/(n+1)]$ is path-connected, its closure adds the segment $\\{0\\} \\times [0,1]$, and that closure is connected, is not path-connected because no path joins the segment to the graph, and is not locally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-space, def-path-connected, def-locally-connected, def-homeomorphism-and-open-maps,
        thm-closure-of-a-connected-set, thm-continuous-image-of-a-connected-space,
        cor-connected-subsets-of-the-line, cor-intermediate-value-theorem-topological,
@@ -23,15 +26,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -41,6 +40,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 
@@ -96,7 +97,7 @@ $\varepsilon_n$ alone.
 
 [A1] An affine map $x \mapsto c + mx$ of $\mathbb{R}$ into $\mathbb{R}$ is continuous: $|(c+ms)-(c+mt)| = |m||s-t|$, so for $m \ne 0$ the ball of radius $\delta/|m|$ around $t$ maps into the ball of radius $\delta$, and a constant map is continuous outright ([[def-metric-ball]], [[def-metrizable-space]], [[lem-real-line-is-a-metric-space]], [[def-metric-topology]], [[def-continuous-map-top]]).
 
-[A2] Continuity may be checked on any open cover and on any **finite** closed cover, and composites and restrictions of continuous maps are continuous ([[lem-continuity-is-local-and-pastes]], claims 1, 2, 3, [[def-subspace-topology-top]]).
+[A2] Continuity may be checked on any open cover and on any **finite** closed cover, and composites and restrictions of continuous maps are continuous ([[lem-continuity-is-local-and-pastes]], claims 1, 2, 3, [[def-subspace-topology-top]]); a map is continuous at every point exactly when $f^{-1}[F]$ is closed for every closed $F$ in the codomain ([[thm-continuity-characterisations-top]], clauses (a) and (c)).
 
 [A3] A map into a product is continuous exactly when both components are; the projections are continuous; the sets $(a,b) \times (c,d)$ form a basis of $\mathbb{R}^2$, being the $d_\infty$-balls and their finite intersections ([[thm-product-universal-property]], [[def-product-topology]], [[lem-product-topology-on-rn]], [[lem-metrics-on-rn]], [[def-metric-topology]]).
 
@@ -148,7 +149,7 @@ $\varepsilon_n$ alone.
 
 6.2 Let $c := \sup J$, which exists by [A8]. Every open set containing $c$ contains an interval around it, which by [A8] meets $J$; so $c \in \overline{J}$, and $J$ is closed in $[0,1]$ while $\overline{J} \subseteq \overline{[0,1]} = [0,1]$, so $c \in J$ by [A5]. Hence $k(c) = 0$ and $c < 1$. [step 5.3, A5, A8]
 
-6.3 So $\pi_0[V]$ is a connected subset of $\mathbb{R}$ by [A4] and step 3.1, hence order-convex, and it contains $0$ and $x > 0$; therefore $[0,x] \subseteq \pi_0[V]$. By step 1.5 with $\rho := x$ there are $x_0, x_1 \in (0,x]$ with $f(x_0) = 0$ and $f(x_1) = 1$, so $V$ contains points $p_0, p_1$ with $\pi_0(p_i) = x_i > 0$, and $\pi_1(p_i) = f(x_i)$ by step 5.2. [step 5.2, step 1.5, step 4.3, A4]
+6.3 So $\pi_0[V]$ is a connected subset of $\mathbb{R}$ by [A2, A3, A4], hence order-convex, and it contains $0$ and $x > 0$; therefore $[0,x] \subseteq \pi_0[V]$. By step 1.5 with $\rho := x$ there are $x_0, x_1 \in (0,x]$ with $f(x_0) = 0$ and $f(x_1) = 1$, so $V$ contains points $p_0, p_1$ with $\pi_0(p_i) = x_i > 0$, and $\pi_1(p_i) = f(x_i)$ by step 5.2. [step 5.2, step 1.5, step 4.3, A2, A3, A4]
 
 7.1 By continuity of $h$ at $c$ there is $\delta > 0$ with $c + \delta \le 1$ and $|h(u) - h(c)| < 1/4$ for all $u \in [c, c+\delta]$; put $t := h(c)$. Moreover $k(c+\delta) > 0$, since $c + \delta > c = \sup J$ puts $c+\delta$ outside $J$ while $k \ge 0$ everywhere by step 1.4. [step 5.3, step 6.2, A3]
 

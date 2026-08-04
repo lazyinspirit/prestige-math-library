@@ -4,6 +4,9 @@ kind: remark
 title: "Choice ledger for this page: $\\omega_1$ exists in ZF, and the boundedness theorem does not"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-first-uncountable-ordinal, thm-hartogs, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded, def-countable-choice, thm-countable-union-of-countable, rem-choice-ledger]
 justified_by: []
 external_refs: [rem-feferman-levy-model]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
     - title: "Hartogs number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hartogs_number"
+    - title: "A. Karagila, Forcing course notes (2023)"
+      url: "https://karagila.org/files/Forcing-2023.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "A space is locally connected exactly when every component of every open subspace is open; in that case the components of the space itself are clopen"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-locally-connected, def-connected-component-and-quasicomponent, def-path-connected,
        thm-components-partition-and-are-closed, def-subspace-topology-top,
        def-topological-space, def-neighbourhood-top, def-connected-space]
@@ -28,8 +31,8 @@ sources:
   references:
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §25"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
 pipeline_run: null
 ---
 

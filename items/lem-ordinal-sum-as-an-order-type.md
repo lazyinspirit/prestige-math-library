@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\alpha + \\beta$ is the order type of $\\alpha$ followed by $\\beta$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-ordinal-addition, thm-mostowski-collapse, def-well-order, def-order-isomorphism, def-initial-segment, thm-transfinite-induction, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, def-ordinal]
 justified_by: []
 aliases: [lem-ordered-sum-order-type]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Order_type"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "Open Logic Project, Open Logic Text"
+      url: "https://builds.openlogicproject.org/open-logic-complete.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the intersection of two connected subspaces is connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-space, def-path-connected, thm-path-connected-implies-connected,
        thm-unions-of-connected-sets, lem-connected-subsets-and-separated-sets,
        thm-continuous-image-of-a-connected-space, cor-connected-subsets-of-the-line,
@@ -19,22 +22,16 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
 pipeline_run: null
 ---
 
@@ -73,8 +70,6 @@ disjoint closed segments.
 
 [A5] A product of closed sets is closed in $\mathbb{R}^2$, and $\{c\}$ and $[0,1]$ are closed in $\mathbb{R}$; a closed set equals its own closure ([[def-interior-closure-boundary-top]], [[def-product-topology]], [[def-interval]]).
 
-[A6] Path-connected sets are connected ([[thm-path-connected-implies-connected]], [[def-path-connected]]).
-
 ## Refutation
 
 **Proof technique:** contradiction.
@@ -99,4 +94,4 @@ disjoint closed segments.
 
 - **Why unions behave and intersections do not.** [A3] works because a point common to two connected sets welds them: a continuous two-valued function must agree on both. An intersection has no such welding point available, and indeed the intersection of two connected sets can be split as badly as one likes; taking longer chains of segments makes $A \cap B$ a union of any number of disjoint segments while keeping $A$ and $B$ connected.
 
-- **Both witnesses are as simple as the plane allows.** $A$ and $B$ are the boundary of the unit square with one side removed, in the two ways of doing so that leave the two vertical sides. Each is path-connected, hence connected by [A6], so the failure has nothing to do with the pathologies of the zigzag curve elsewhere on this page.
+- **Both witnesses are as simple as the plane allows.** $A$ and $B$ are the boundary of the unit square with one side removed, in the two ways of doing so that leave the two vertical sides. Each is path-connected, hence connected by [[thm-path-connected-implies-connected]] and [[def-path-connected]], so the failure has nothing to do with the pathologies of the zigzag curve elsewhere on this page.

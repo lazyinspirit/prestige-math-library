@@ -4,6 +4,9 @@ kind: counterexample
 title: "The comb space is path-connected and fails to be locally connected at every point of the limit tooth strictly above the base, so path-connectedness does not imply local connectedness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-path-connected, def-locally-connected, def-connected-space,
        thm-path-connected-implies-connected, def-connected-component-and-quasicomponent,
        def-subspace-topology-top, lem-product-topology-on-rn, def-interval,
@@ -36,6 +39,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Comb_space"
     - title: "Locally connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
+    - title: "Keith Conrad, Spaces That Are Connected but Not Path-Connected"
+      url: "https://kconrad.math.uconn.edu/blurbs/topology/connnotpathconn.pdf"
 pipeline_run: null
 ---
 

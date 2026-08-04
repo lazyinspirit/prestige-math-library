@@ -4,6 +4,9 @@ kind: theorem
 title: "Prim's growing-tree procedure produces a minimum spanning tree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-weighted-graph-and-minimum-spanning-tree, def-spanning-tree, thm-connected-iff-has-spanning-tree, thm-cut-and-cycle-properties-for-minimum-spanning-trees, lem-spanning-tree-exchange, def-finite-cardinality, lem-finite-set-has-max, thm-induction-principle]
 justified_by: []
 aliases: [Prim's algorithm]
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. T. Wood, Graph Theory lecture notes, Minimum spanning trees"
-      url: "https://ptwiddle.github.io/MAS341-Graph-Theory-2017/lecturenotes/lecture8.html"
+    - title: "ISI Bangalore discrete mathematics notes, Kruskal and other algorithms"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S4.html"
 pipeline_run: null
 ---
 

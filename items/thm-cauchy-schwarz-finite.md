@@ -4,6 +4,9 @@ kind: theorem
 title: "The Cauchy-Schwarz inequality for finite sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-sum, lem-finite-sum-laws, lem-of-square-positive, lem-of-zero-mult, thm-of-square-roots, def-integer-power, lem-of-square-monotone, lem-of-abs-value, def-abs-value, lem-of-sign-rules, lem-of-add-order, lem-of-inverse-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Young, Hölder, and Minkowski inequalities (Oregon State University)"
+      url: "https://math.oregonstate.edu/~show/old/142_Luenberger.pdf"
     - title: "Cauchy-Schwarz inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Thm 1.35)"

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: ordinal addition is commutative"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-addition, lem-ordinal-sum-as-an-order-type, thm-ordinal-arithmetic-monotonicity, thm-ordinal-arithmetic-agrees-on-omega, lem-omega-least-limit-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ short: "$1+\\omega = \\omega \\ne \\omega+1$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_arithmetic"
     - title: "T. Jech, Set Theory, 3rd millennium ed., Ch. 2 (Ordinal numbers)"
       url: "https://link.springer.com/book/10.1007/3-540-44761-X"
+    - title: "R. Moosa, Set Theory course notes"
+      url: "https://www.math.uwaterloo.ca/~rmoosa/pm433-notes.pdf"
 pipeline_run: null
 ---
 
@@ -49,8 +55,6 @@ infinite ordinal: $1 + \omega = \omega$ while $\omega + 1$ is strictly larger.
 
 [L4] $\omega$ is a limit ordinal, so $\bigcup \omega = \omega$ ([[lem-omega-least-limit-ordinal]], [[def-limit-ordinal]]); every ordinal is transitive, $\mu \subseteq \nu$ iff $\mu \in \nu$ or $\mu = \nu$, and $\mu \notin \mu$ ([[def-ordinal]], [[lem-ordinal-basics]], [[lem-ordinal-trichotomy]]).
 
-[L5] $\alpha + \beta$ is the order type of a copy of $\alpha$ followed by a copy of $\beta$ ([[lem-ordinal-sum-as-an-order-type]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -65,8 +69,8 @@ infinite ordinal: $1 + \omega = \omega$ while $\omega + 1$ is strictly larger.
 
 ## Remarks
 
-**The picture.** By [L5], $1 + \omega$ is one point followed by a copy of $\omega$, and relabelling that as $0, 1, 2, \dots$ shows it is again a copy of $\omega$: prepending a single point to $\omega$ changes nothing. Whereas $\omega + 1$ is a copy of $\omega$ with one point placed above everything, which has a greatest element and so cannot be order isomorphic to $\omega$. This is the whole phenomenon: adding on the left is absorbed, adding on the right is not.
+**The picture.** By [[lem-ordinal-sum-as-an-order-type]], $1 + \omega$ is one point followed by a copy of $\omega$, and relabelling that as $0, 1, 2, \dots$ shows it is again a copy of $\omega$: prepending a single point to $\omega$ changes nothing. Whereas $\omega + 1$ is a copy of $\omega$ with one point placed above everything, which has a greatest element and so cannot be order isomorphic to $\omega$. This is the whole phenomenon: adding on the left is absorbed, adding on the right is not.
 
-**What survives.** Addition is still associative ([[thm-ordinal-addition-associative]]), still strictly increasing and cancellative in the right argument, and still weakly increasing in the left ([[thm-ordinal-arithmetic-monotonicity]]). The commutative special case is exactly the finite one, by [[thm-ordinal-arithmetic-agrees-on-omega]] together with commutativity of Peano addition.
+**What survives.** Addition is still associative ([[thm-ordinal-addition-associative]]), still strictly increasing and cancellative in the right argument, and still weakly increasing in the left ([[thm-ordinal-arithmetic-monotonicity]]). Addition is commutative on finite ordinals because it agrees there with Peano addition ([[thm-ordinal-arithmetic-agrees-on-omega]]). The displayed witness shows that ordinal addition is not commutative in general.
 
 **A stronger failure lives next door.** Not only does $\alpha + \beta = \beta + \alpha$ fail; strict monotonicity in the left argument fails too, and for the same reason, since $0 + \omega = 1 + \omega$. That is [[fs-ordinal-addition-is-strictly-monotone-in-the-left-argument]].

@@ -4,19 +4,29 @@ kind: counterexample
 title: "A poset with a bottom, a top and countably many incomparable middle elements has an infinite interval, so convolution of constant-one functions is not defined"
 status: published
 origin: session
-deps: [fs-every-poset-has-an-incidence-algebra, def-incidence-algebra-and-convolution, def-poset-interval-and-finiteness-conditions, def-countable, def-natural-numbers]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [fs-every-poset-has-an-incidence-algebra, def-incidence-algebra-and-convolution, def-poset-interval-and-finiteness-conditions, def-countable, def-natural-numbers, lem-pigeonhole]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Y. Guan and Y. Zhang, Additive Biderivations of Incidence Algebras, §2.1"
+      url: "https://arxiv.org/abs/2412.18049"
 pipeline_run: null
 ---
 
@@ -28,7 +38,7 @@ Convolution of incidence functions is defined on every poset, even without local
 
 **Given:** A nonzero commutative ring $R$, the set $P:=\{\bot,\top\}\cup(\mathbb N\times\{m\})$, with all three pieces disjoint, and the relation in which $\bot<\top$ and $\bot<(n,m)<\top$ for every $n\in\mathbb N$, distinct middle elements are incomparable, and equality is allowed.
 
-[F1] $\mathbb N$ is the infinite set of natural numbers ([[def-natural-numbers]], [[def-countable]]).
+[F1] $\mathbb N$ is the infinite set of natural numbers ([[def-natural-numbers]], [[def-countable]], [[lem-pigeonhole]]).
 
 [F2] A poset is locally finite exactly when every interval is finite ([[def-poset-interval-and-finiteness-conditions]]).
 

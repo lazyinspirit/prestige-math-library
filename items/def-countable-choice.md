@@ -4,6 +4,9 @@ kind: definition
 title: "The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-choice-function, def-axiom-of-choice, def-countable, thm-well-ordering-principle, lem-countable-iff-surjection-from-n]
 justified_by: []
 external_refs: [rem-feferman-levy-model, rem-cohen-first-model]
@@ -25,6 +28,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 56"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap56.pdf"
     - title: "Axiom of countable choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "Axiom of dependent choice (Wikipedia)"

@@ -4,6 +4,9 @@ kind: definition
 title: "Integer powers $a^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-of-zero-mult, thm-int-ordered-ring]
 justified_by: [lem-power-laws]
 aliases: [def-power]
@@ -23,6 +26,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
     - title: "Exponentiation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Exponentiation"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

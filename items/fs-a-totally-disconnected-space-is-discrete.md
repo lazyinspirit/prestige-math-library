@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a totally disconnected space carries the discrete topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-component-and-quasicomponent, cor-connected-subsets-of-the-line,
        def-connected-space, def-standard-topologies, def-subspace-topology-top,
        lem-q-and-irrationals-dense-r, lem-of-q-dense, def-interval,
@@ -33,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Totally_disconnected_space"
     - title: "Discrete space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Discrete_space"
+    - title: "Connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Connected_space"
 pipeline_run: null
 ---
 

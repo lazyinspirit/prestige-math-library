@@ -4,6 +4,9 @@ kind: remark
 title: "The continuum hypothesis, and what this page does not prove"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [rem-independence-of-ch-and-gch, rem-gch-implies-ac, thm-cantor-powerset, thm-r-uncountable, def-countable, def-equinumerous, lem-countable-iff-surjection-from-n, lem-pigeonhole, fs-infinite-has-countable-subset-in-zf]
 justified_by: []
 aliases: [rem-ch]
@@ -20,6 +23,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Stanford Encyclopedia of Philosophy, The Continuum Hypothesis"
+      url: "https://plato.stanford.edu/entries/continuum-hypothesis/"
+    - title: "Sierpiński's theorem: GCH implies AC"
+      url: "https://www.ps.uni-saarland.de/extras/sierpinski/"
     - title: "Continuum hypothesis (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuum_hypothesis"
     - title: "Cardinality of the continuum (Wikipedia)"

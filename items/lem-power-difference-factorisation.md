@@ -4,6 +4,9 @@ kind: lemma
 title: "Factorisation of $b^n - a^n$, and the resulting Lipschitz estimate"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-integer-power, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, lem-power-monotone, lem-power-laws, prop-of-multiply-inequalities, lem-of-sign-rules, lem-of-naturals-positive, lem-of-q-embeds]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
     - title: "Telescoping series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Telescoping_series"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"

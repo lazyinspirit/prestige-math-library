@@ -4,6 +4,9 @@ kind: definition
 title: "Ordinal exponentiation $\\alpha^{\\beta}$, with the conventions $\\alpha^{0} = 1$ and $0^{0} = 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [cor-ordinal-exponentiation-well-defined, def-ordinal-multiplication, def-ordinal-addition, def-ordinal, def-limit-ordinal]
 justified_by: []
 aliases: [def-ordinal-power]
@@ -12,10 +15,10 @@ short: "$\\alpha^{0}=1$, $\\alpha^{\\beta^{+}}=\\alpha^{\\beta}\\cdot\\alpha$, s
 verification:
   precheck: n/a
   verified:
-    model: claude-sonnet-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
 sources:
   scraped: []
@@ -50,8 +53,9 @@ The first clause applies to every $\alpha$, so in particular $0^{0} = 1$.
   the answer: it would make $0^{\omega} = 1$ instead of $0$. With the
   restriction, one formula is correct for every $\alpha$ at once and no case
   split on $\alpha$ is needed. [[cor-ordinal-exponentiation-well-defined]]
-  carries the details, including the exponent law that the unrestricted clause
-  falsifies. For $\alpha \ge 1$ the two clauses agree, because then
+  carries the details of that restriction;
+  [[thm-ordinal-exponent-laws]] proves the exponent law that the unrestricted
+  clause would falsify. For $\alpha \ge 1$ the two clauses agree, because then
   $\alpha^{0} = 1 \le \alpha = \alpha^{1}$ and $1 < \lambda$, so dropping the
   term at $\beta = 0$ does not lower the supremum.
 

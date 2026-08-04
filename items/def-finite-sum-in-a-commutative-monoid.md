@@ -4,6 +4,9 @@ kind: definition
 title: "A finite sum in a commutative monoid indexed by an arbitrary finite set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-monoid-finite-product, thm-generalised-associativity, def-semigroup-and-monoid, def-finite-cardinality, def-injection-surjection-bijection, def-sum-over-a-finite-index-set]
 justified_by: []
 aliases: []
@@ -14,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
-      url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "Andrade–da Cruz, Finite products in commutative monoids"
+      url: "https://arxiv.org/abs/2605.08089"
 pipeline_run: null
 ---
 

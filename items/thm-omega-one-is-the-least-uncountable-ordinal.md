@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\omega_1$ is uncountable, every ordinal below it is at most countable, it is a cardinal and a limit ordinal, and its existence is a theorem of ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-first-uncountable-ordinal, thm-hartogs, def-countable, def-natural-numbers, def-cardinal, def-equinumerous, def-injection-surjection-bijection, lem-subset-of-countable, lem-countable-iff-surjection-from-n, lem-omega-least-limit-ordinal, def-limit-ordinal, def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: []

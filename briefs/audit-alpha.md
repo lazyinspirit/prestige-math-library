@@ -56,6 +56,32 @@ a fatal defect or start a repair cycle on it.
   gaps a competent reader closes **within 30 seconds**; other non-fatal
   quirks; imperfection at the level of the letter.
 
+## What the orchestrator hands you at A6, and must not be redone
+
+The orchestrator precomputes the mechanical parts so your context goes to
+mathematics (`AUDIT-WORKFLOW.md` §7, "A6 efficiency protocol"). Spot-check each,
+then use it:
+
+- **A URL liveness table** for every URL in the wave's ledgers and on disk in the
+  scoped items. The orchestrator's shell has outbound network; your Sol readers'
+  sandboxes do not. You own the **disposition** of anything dead or off-topic —
+  not the fetching.
+- **The pure/material split** from `tools/audit-split.mjs`. A4 rewrites the
+  frontmatter of every scoped item, so "changed" means nothing on its own:
+  wave 3 was 198 pure retags / 26 material out of 224. Your impact
+  classification is that list plus a wholesale disposition of the pure class.
+- **Stage touch snapshots** (`pre-A4`, `post-A4`, `pre-a8`). **Take none
+  yourself** — wave 2's per-item snapshots made a 95 MB ledger and a phantom
+  "51 twice-touched" that cost an escalation to disprove.
+
+**Your reading surface is NOT the changed set.** Measured wave 3: **6 of the 11
+confirmed fatal defects were in items A4 left byte-identical.** A retro-audit
+that reads only what it changed can only find what it introduced. Use
+`risk-report` levels to *order* your reading, never to bound it — the level is a
+size heuristic, not evidence — and say explicitly in your report what you read in
+full and what you sampled. Dispatch Sol lanes generously; they are read-only and
+independent, and wave 3 ran 14 concurrently without contention.
+
 ## A6 — Audit
 
 1. **Certify every Beta repair from disk, not from its report:** changed text,

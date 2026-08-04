@@ -4,6 +4,9 @@ kind: theorem
 title: "For a topological space the following agree: no separation exists, the only clopen subsets are $\\varnothing$ and $X$, and every continuous map to the two-point discrete space is constant"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-space, def-topological-space, def-standard-topologies,
        def-continuous-map-top, thm-continuity-characterisations-top,
        def-subspace-topology-top, def-interior-closure-boundary-top]
@@ -28,8 +31,6 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
 pipeline_run: null
 ---
 

@@ -4,19 +4,27 @@ kind: corollary
 title: "A connected graph with pairwise distinct edge weights has a unique minimum spanning tree"
 status: published
 origin: session
-deps: [thm-cut-and-cycle-properties-for-minimum-spanning-trees, lem-fundamental-cycle-of-a-spanning-tree, lem-spanning-tree-exchange, def-weighted-graph-and-minimum-spanning-tree, lem-finite-set-has-max]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-fundamental-cycle-of-a-spanning-tree, lem-spanning-tree-exchange, def-weighted-graph-and-minimum-spanning-tree, lem-finite-set-has-max]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "P. T. Wood, Graph Theory lecture notes, Minimum spanning trees"
-      url: "https://ptwiddle.github.io/MAS341-Graph-Theory-2017/lecturenotes/lecture8.html"
+    - title: "ISI Bangalore discrete mathematics notes, Minimal spanning trees"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S3.html"
 pipeline_run: null
 ---
 
@@ -29,8 +37,6 @@ If a connected graph has pairwise distinct real edge weights, then it has exactl
 **Given:** A connected weighted graph $(G,w)$ whose edge weights are pairwise distinct.
 
 [F1] At least one MST exists ([[def-weighted-graph-and-minimum-spanning-tree]]).
-
-[L1] A uniquely minimum edge of a cut belongs to every MST ([[thm-cut-and-cycle-properties-for-minimum-spanning-trees]]).
 
 [L2] Exchanging an outside edge for an edge on its fundamental cycle preserves the spanning-tree property ([[lem-spanning-tree-exchange]]).
 

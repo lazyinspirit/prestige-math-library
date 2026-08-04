@@ -4,6 +4,9 @@ kind: lemma
 title: "Laws of finite sums and finite products"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-finite-sum, thm-induction-principle, def-ordered-field, def-field, lem-of-add-order, lem-of-sign-rules, lem-of-zero-mult, cor-of-one-positive, lem-of-q-embeds, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
     - title: "T. Tao, Analysis I, 3rd ed., §7.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
     - title: "Telescoping series (Wikipedia)"

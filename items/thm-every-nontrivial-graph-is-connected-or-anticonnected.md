@@ -4,6 +4,9 @@ kind: theorem
 title: "Every graph with at least two vertices is connected or anticonnected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-anticonnected-graph-and-anticonnected-component, def-connected-graph-and-connected-component, cor-connected-components-partition-the-vertex-set, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Maria Chudnovsky, The structure of bull-free graphs"
-      url: "https://web.math.princeton.edu/~mchudnov/bullsurvey.pdf"
+    - title: "Cographs survey (Princeton PDF)"
+      url: "https://web.math.princeton.edu/~mchudnov/cographs.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Cofinal subset of an ordinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy]
 justified_by: []
 aliases: [def-cofinal-in-an-ordinal, def-unbounded-in-an-ordinal]
@@ -12,10 +15,10 @@ short: "$C \\subseteq \\alpha$ with every $\\xi \\in \\alpha$ below some member"
 verification:
   precheck: n/a
   verified:
-    model: claude-sonnet-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
 sources:
   scraped: []
@@ -35,8 +38,7 @@ Let $\alpha$ be an ordinal ([[def-ordinal]]). A subset $C \subseteq \alpha$ is
 $$\text{for every } \xi \in \alpha \text{ there is } \eta \in C \text{ with } \xi \le \eta.$$
 
 A subset that is not cofinal is **bounded below $\alpha$**: there is
-$\xi \in \alpha$ with $\eta < \xi$ for every $\eta \in C$, equivalently
-$\eta \le \xi$ for every $\eta \in C$ and some $\xi \in \alpha$.
+$\xi \in \alpha$ such that $\eta < \xi$ for every $\eta \in C$.
 
 ## Remarks
 

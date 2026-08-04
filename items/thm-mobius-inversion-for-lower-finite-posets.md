@@ -4,6 +4,9 @@ kind: theorem
 title: "Möbius inversion on a lower-finite poset, with the dual upper-finite form"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-poset-mobius-recurrence, def-poset-interval-and-finiteness-conditions, lem-finite-sum-reindexing-and-fubini, lem-integer-multiples-in-a-ring, def-commutative-ring]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

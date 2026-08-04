@@ -4,6 +4,9 @@ kind: theorem
 title: "The Möbius function of a product poset is the product of the Möbius functions"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-poset-mobius-recurrence, def-poset-interval-and-finiteness-conditions, lem-finite-sum-reindexing-and-fubini, thm-product-rule, thm-int-comm-ring, def-partial-order]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

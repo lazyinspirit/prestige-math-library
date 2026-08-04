@@ -4,6 +4,9 @@ kind: corollary
 title: "A tree on $n\\ge1$ vertices has $n-1$ edges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-forest-edge-component-count, def-tree-forest-and-leaf, def-connected-graph-and-connected-component]
 justified_by: []
 aliases: []
@@ -16,7 +19,9 @@ sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
+    - title: "ISI Bangalore discrete mathematics notes, Trees and Cayley’s theorem"
+      url: "https://www.isibang.ac.in/~d.yogesh/Course_Notes/DM1/Ch4.S1.html"
 pipeline_run: null
 ---
 

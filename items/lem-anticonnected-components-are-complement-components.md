@@ -4,6 +4,9 @@ kind: lemma
 title: "The anticonnected components of $G$ are exactly the connected components of $\\overline G$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-anticonnected-graph-and-anticonnected-component, lem-complement-commutes-with-induced-subgraphs, cor-connected-components-partition-the-vertex-set]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Maria Chudnovsky, The structure of bull-free graphs"
-      url: "https://web.math.princeton.edu/~mchudnov/bullsurvey.pdf"
+    - title: "Valerio Boncompagni, On hereditary graph classes defined by forbidding Truemper configurations (PhD thesis, 2018)"
+      url: "https://etheses.whiterose.ac.uk/id/eprint/23386/1/main.pdf"
 pipeline_run: null
 ---
 

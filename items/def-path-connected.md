@@ -4,6 +4,9 @@ kind: definition
 title: "Paths, path-connected spaces and path components"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-connected-space, def-continuous-map-top, def-interval, def-subspace-topology-top,
        lem-real-line-is-a-metric-space, def-metric-topology, def-metric-ball,
        def-metrizable-space, lem-continuity-is-local-and-pastes, def-topological-space]
@@ -29,8 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Connected_space"
     - title: "Path (topology) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Path_(topology)"
-    - title: "J. R. Munkres, Topology, 2nd ed., §24"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
 pipeline_run: null
 ---
 

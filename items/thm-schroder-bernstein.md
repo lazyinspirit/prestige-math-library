@@ -4,6 +4,9 @@ kind: theorem
 title: "The Schröder-Bernstein theorem"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-injection-surjection-bijection, def-equinumerous, thm-recursion, def-natural-numbers, lem-nat-nonzero-is-successor]
 justified_by: []
 aliases: [thm-cantor-schroder-bernstein, schroeder-bernstein]
@@ -25,6 +28,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
     - title: "Schröder-Bernstein theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem"
     - title: "Countable set (Wikipedia)"

@@ -4,6 +4,9 @@ kind: theorem
 title: "If $A$ is connected and $A \\subseteq B \\subseteq \\overline{A}$ then $B$ is connected; in particular the closure of a connected set is connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-connected-space, lem-connected-subsets-and-separated-sets,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
        def-subspace-topology-top]
@@ -14,22 +17,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Lemma 5.7.3"
+      url: "https://stacks.math.columbia.edu/tag/004T"
 pipeline_run: null
 ---
 
@@ -77,7 +76,7 @@ connected, and one may stop anywhere.
 
 ## Remarks
 
-- **What fails without the upper bound $B \subseteq \overline{A}$.** The conclusion is false for an arbitrary superset of a connected set: any set containing a connected set also contains, for instance, a far-away extra point, and a connected set together with a point outside its closure is disconnected by exactly the decomposition the proof rules out. The hypothesis is used only at step 5.1, and that is where it is needed: it forces $B_2$ to lie inside $\overline{A}$, hence inside $\overline{B_1}$, hence to be empty.
+- **What fails without the upper bound $B \subseteq \overline{A}$.** The conclusion is false for an arbitrary superset of a connected set. In $\mathbb{R}$ take $A = (0,1)$, which is connected, and $B = (0,1) \cup \{2\}$: the ambient open sets $(-1,1)$ and $(1,3)$ meet $B$ in $(0,1)$ and $\{2\}$, two nonempty disjoint relatively open pieces covering $B$, which is exactly the decomposition the proof rules out. The point $2$ lies outside $\overline{A} = [0,1]$, and that is what makes the separation available; in a general space lying outside the closure supplies only one half of a separation, so the hypothesis is stated as the inclusion $B \subseteq \overline{A}$ rather than as a condition on individual added points. The hypothesis is used only at step 5.1, and that is where it is needed: it forces $B_2$ to lie inside $\overline{A}$, hence inside $\overline{B_1}$, hence to be empty.
 
 - **The interior of a connected set need not be connected.** Nothing here transfers to interiors, and the two operations behave differently: closure adds points that cling to the set and cannot split it, whereas the interior may remove the very points holding two lumps together.
 

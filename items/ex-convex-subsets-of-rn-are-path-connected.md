@@ -4,9 +4,13 @@ kind: example
 title: "Every convex subset of $\\mathbb{R}^n$, in particular every ball and $\\mathbb{R}^n$ itself, is path-connected and hence connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-path-connected, thm-path-connected-implies-connected, def-connected-space,
        lem-product-topology-on-rn, def-product-topology, thm-product-universal-property,
-       lem-metrics-on-rn, def-norm-and-normed-space, def-p-norms-on-rn, def-vector-space,
+       lem-metrics-on-rn, def-norm-and-normed-space, def-p-norms-on-rn,
+       lem-p-norms-are-norms-and-induce-the-published-metrics, def-vector-space,
        def-continuous-map-top, def-interval, def-metric-topology, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-metric-ball, def-subspace-topology-top]
 justified_by: []
@@ -16,15 +20,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -32,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Convex_set"
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
 pipeline_run: null
 ---
 
@@ -73,7 +75,7 @@ $$x, y \in C \ \text{ and } \ t \in [0,1] \quad \Longrightarrow \quad (1-t)x + t
 
 [A4] Every path-connected subset is connected ([[thm-path-connected-implies-connected]], claim 2, [[def-connected-space]]).
 
-[A5] A norm satisfies $\lVert \lambda v\rVert = |\lambda|\,\lVert v\rVert$ and $\lVert u + v\rVert \le \lVert u\rVert + \lVert v\rVert$, and the ball $B(c,r)$ of the induced metric is $\{\, y : \lVert y - c\rVert < r \,\}$ ([[def-norm-and-normed-space]], [[def-p-norms-on-rn]], [[def-metric-ball]], [[lem-metrics-on-rn]]).
+[A5] A norm satisfies $\lVert \lambda v\rVert = |\lambda|\,\lVert v\rVert$ and $\lVert u + v\rVert \le \lVert u\rVert + \lVert v\rVert$, and the ball $B(c,r)$ of the induced metric is $\{\, y : \lVert y - c\rVert < r \,\}$ ([[def-norm-and-normed-space]], [[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]], [[def-metric-ball]], [[lem-metrics-on-rn]]).
 
 [A6] $\mathbb{R}^n$ is a real vector space, so it is closed under the scalar multiples and sums forming $(1-t)x + ty$ ([[def-vector-space]]); and an order-convex $J \subseteq \mathbb{R}$ contains every real lying between two of its elements ([[def-interval]]).
 

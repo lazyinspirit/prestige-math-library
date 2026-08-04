@@ -4,19 +4,27 @@ kind: lemma
 title: "Adding an edge between two nonadjacent vertices of a tree creates exactly one cycle"
 status: published
 origin: session
-deps: [def-tree-forest-and-leaf, def-subgraph-induced-subgraph-and-spanning-subgraph, def-graph-walk-trail-path-and-cycle, lem-edge-deletion-in-a-tree]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-tree-forest-and-leaf, def-subgraph-induced-subgraph-and-spanning-subgraph, def-graph-walk-trail-path-and-cycle]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-04
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
-      url: "https://diestel-graph-theory.com/basic.html?level=1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 
@@ -29,8 +37,6 @@ Let $T$ be a tree and let $u,v$ be nonadjacent vertices. Adding the edge $uv$ cr
 **Given:** A tree $T$ and nonadjacent vertices $u,v\in V(T)$.
 
 [F1] A tree is connected and acyclic ([[def-tree-forest-and-leaf]]).
-
-[L1] Deleting an edge of a tree separates its endpoints ([[lem-edge-deletion-in-a-tree]]).
 
 [F2] Paths and cycles have their usual vertex-simple meanings ([[def-graph-walk-trail-path-and-cycle]]).
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "The Möbius recurrence: $\\mu_P(x,x)=1$ and both interval sums of $\\mu_P$ vanish when $x<y$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-poset-mobius-function, def-incidence-algebra-and-convolution, def-delta-and-zeta-incidence-functions, def-finite-sum-in-a-commutative-monoid]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "F. Gotti, Incidence Algebras, MIT 18.211 notes"
       url: "https://math.mit.edu/~fgotti/docs/Courses/C.%20Combinatorial%20Analysis/38.%20Mobius%20Inversion%20Formula/Incidence%20Algebras.pdf"
+    - title: "R. Stanley, Enumerative Combinatorics, Volume 1, §§3.6–3.8"
+      url: "https://math.mit.edu/~rstan/ec/ec1.pdf"
 pipeline_run: null
 ---
 

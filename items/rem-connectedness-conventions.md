@@ -4,6 +4,9 @@ kind: remark
 title: "Which conventions this page fixes: the empty space and the one-point space, separated sets against disjoint open sets, and what is not developed here"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-connected-space, lem-connected-subsets-and-separated-sets,
        def-connected-component-and-quasicomponent, def-locally-connected,
        def-path-connected, def-order-topology-on-a-linearly-ordered-set,
@@ -14,10 +17,17 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-04
+    scope: published-audit-targeted
+    context_sha256: 92add9e96701c3aff3281f0636270e809a92b886a65e9be6fa5058544374c151
+    item_sha256: 3b7b3575fc65093946b97ad26ff1aee089ac857340e34ad2a5cb380dfe28575c
   verified:
     model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-08-03
+    date: 2026-08-04
     scope: published-audit
     delegated_by: owner
 sources:
@@ -29,6 +39,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
     - title: "Totally disconnected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Totally_disconnected_space"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 
@@ -54,8 +66,11 @@ stated without one.
 condition, and both are used.** [[def-connected-space]] defines a separation of a
 space by open sets, and defines $A_1, A_2$ to be *separated in $X$* when neither
 meets the other's closure. Those are not the same demand: separated sets need not
-be open, and disjoint open sets in a subspace need not be separated in the
-ambient space. [[lem-connected-subsets-and-separated-sets]] is the theorem
+be open, and the ambient open sets that witness a separation of a subspace need
+not be disjoint in $X$ at all — [[def-connected-space]] requires them to be
+disjoint only *on* the subspace, and "requiring $U \cap V = \varnothing$ outright
+is a strictly stronger demand and is a different notion".
+[[lem-connected-subsets-and-separated-sets]] is the theorem
 relating them, and it is what lets a computation be done in whichever of the two
 vocabularies is convenient. The real-line development uses the second
 ([[def-connected-r]]), the general development uses the first, and
@@ -64,8 +79,12 @@ $\mathbb{R}$ — an identification that is proved, never assumed.
 
 **3. Local connectedness demands OPEN connected sets.** [[def-locally-connected]]
 asks that every open $U$ containing $x$ contain an *open* connected $V$ with
-$x \in V \subseteq U$. Dropping the word *open* from $V$ gives a weaker condition
-at a point, called *connectedness im kleinen* in the literature. This page proves
+$x \in V \subseteq U$. Asking instead only that $U$ contain a connected $V$ that
+is a *neighbourhood* of $x$, without requiring $V$ itself to be open, gives a
+weaker condition at a point, called *connectedness im kleinen* in the
+literature; dropping *open* outright, so that any connected $V$ with
+$x \in V \subseteq U$ would serve, asks nothing at all, since the singleton
+$\{x\}$ always qualifies. This page proves
 nothing about that weaker condition and asserts no relation between the two. The
 same fork, with the same resolution, applies to local path-connectedness
 ([[def-path-connected]]).

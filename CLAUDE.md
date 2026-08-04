@@ -34,6 +34,12 @@ role dispatcher, and the systemd unit. Read it before starting or attaching to a
 run that has no session. It never publishes: step 10 remains the sole owner
 pause.
 
+**Unattended audit waves: `UNATTENDED-AUDIT.md`** — the audit twin of
+`UNATTENDED.md`: `run-wave.mjs`, its halt codes, the `--audit` gate table, the
+audit dispatch roles, and the systemd unit. A0 to A10 with no session and no
+owner input; A10 remains the sole owner pause and nothing there can publish.
+Read it before starting or attaching to an unattended wave.
+
 **End-to-end runbook:** `WORKFLOW.md` describes the full workflow (the model
 roles, the modified reasoning/disproof engines, the RAG distiller, the
 seven-step loop, serving over SSH, publish, and the gotchas). Read it for how to

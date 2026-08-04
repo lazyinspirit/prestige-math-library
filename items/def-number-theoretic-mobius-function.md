@@ -4,6 +4,9 @@ kind: definition
 title: "The number-theoretic Möbius function $\\mu(n)$ from prime factorisation"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [thm-fundamental-theorem-of-arithmetic, thm-canonical-prime-factorisation, def-p-adic-valuation, lem-p-adic-valuation-basic, def-group-power, thm-int-comm-ring]
 justified_by: []
 aliases: []
@@ -16,8 +19,8 @@ sources:
   references:
     - title: "MIT 18.785, Problem Set 8"
       url: "https://math.mit.edu/classes/18.785/2021fa/ProblemSet8.pdf"
-    - title: "Encyclopedia of Mathematics, Möbius series"
-      url: "https://encyclopediaofmath.org/wiki/M%C3%B6bius_series"
+    - title: "P. J. Cameron, Notes on Number Theory, §7.5"
+      url: "https://maths.qmul.ac.uk/~pjc/notes/nt.pdf"
 pipeline_run: null
 ---
 

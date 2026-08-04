@@ -4,6 +4,9 @@ kind: example
 title: "A fundamental cycle and a fundamental cut in a fixed spanning tree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-fundamental-cycle-of-a-spanning-tree, lem-fundamental-cut-of-a-spanning-tree, def-spanning-tree]
 justified_by: []
 aliases: []
@@ -15,8 +18,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. T. Wood, Graph Theory lecture notes, Minimum spanning trees"
-      url: "https://ptwiddle.github.io/MAS341-Graph-Theory-2017/lecturenotes/lecture8.html"
+    - title: "Reinhard Diestel, Graph Theory, Preview Chapter 1"
+      url: "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch1.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the ordinal $2^{\\omega}$ is uncountable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-ordinal-exponentiation, thm-ordinal-exponent-laws, thm-ordinal-arithmetic-agrees-on-omega, thm-ordinal-arithmetic-monotonicity, def-countable, def-equinumerous, lem-omega-least-limit-ordinal, def-limit-ordinal, def-natural-numbers, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal]
 justified_by: []
 aliases: []

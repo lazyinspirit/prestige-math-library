@@ -4,6 +4,9 @@ kind: definition
 title: "Separation of a topological space, connected and disconnected spaces, clopen sets, and connected subsets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-subspace-topology-top, def-standard-topologies,
        def-continuous-map-top, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-connected-r]
@@ -27,8 +30,8 @@ sources:
   references:
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
-    - title: "J. R. Munkres, Topology, 2nd ed., §23"
-      url: "https://en.wikipedia.org/wiki/Topology_(Munkres_book)"
+    - title: "The Stacks Project, Section 5.7: Connected components"
+      url: "https://stacks.math.columbia.edu/tag/004R"
 pipeline_run: null
 ---
 

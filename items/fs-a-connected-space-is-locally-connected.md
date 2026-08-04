@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every connected space is locally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-oscillating-zigzag-curve, def-locally-connected, def-connected-space,
        thm-locally-connected-iff-components-of-open-sets-are-open,
        def-connected-component-and-quasicomponent, def-subspace-topology-top]
@@ -15,15 +18,11 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -31,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_connected_space"
     - title: "Connected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Connected_space"
+    - title: "Paul Bankston, Metric Topology: A First Course"
+      url: "https://www.mscsnet.mu.edu/~paul/Paper/4450102text.pdf"
+    - title: "Topologist's sine curve (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Topologist%27s_sine_curve"
 pipeline_run: null
 ---
 
@@ -58,8 +61,6 @@ point of the segment $\{0\} \times [0,1]$.
 
 [L2] $\overline{G}$ is **not** locally connected at any point $(0,t)$ with $t \in [0,1]$, and such points belong to $\overline{G}$ ([[lem-the-oscillating-zigzag-curve]], claims 2 and 5).
 
-[L3] A space is locally connected exactly when every component of every open subspace is open in it, and then its own components are clopen ([[thm-locally-connected-iff-components-of-open-sets-are-open]], [[def-connected-component-and-quasicomponent]]).
-
 ## Refutation
 
 **Proof technique:** contradiction.
@@ -76,6 +77,6 @@ point of the segment $\{0\} \times [0,1]$.
 
 - **Connectedness is global and local connectedness is not, so no implication is to be expected in either direction.** Connectedness says the space cannot be cut in two; local connectedness says every point has arbitrarily small connected open neighbourhoods. A space can be a single unbroken piece and still be locally shredded at some of its points, which is what $\overline{G}$ is at every point of the added segment.
 
-- **What the failure costs.** By [L3] a locally connected space has clopen components and, inside every open set, open components. In $\overline{G}$ that machinery is unavailable, which is precisely why its partition into path components fails to be a partition into clopen pieces and why the space is connected without being path-connected.
+- **What the failure costs.** By [[thm-locally-connected-iff-components-of-open-sets-are-open]] and [[def-connected-component-and-quasicomponent]], a locally connected space has clopen components and, inside every open set, open components. In $\overline{G}$ that machinery is unavailable, which is precisely why its partition into path components fails to be a partition into clopen pieces and why the space is connected without being path-connected.
 
 - **The failure is confined to the segment.** Claim 5 of [[lem-the-oscillating-zigzag-curve]] locates it at the points $(0,t)$, and at every other point $\overline{G}$ agrees locally with $G$, which is locally connected by claim 1 there.

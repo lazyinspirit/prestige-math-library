@@ -4,11 +4,16 @@ kind: example
 title: "The discrete, indiscrete, cofinite, cocountable, particular-point and Sierpinski topologies placed in the connectedness hierarchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-connected-space, thm-connectedness-characterisations, def-standard-topologies,
        def-topological-space, def-connected-component-and-quasicomponent, def-countable,
        thm-r-uncountable, lem-countable-iff-surjection-from-n, thm-n-cross-n-countable,
        def-locally-connected, def-path-connected, def-subspace-topology-top,
-       thm-components-partition-and-are-closed, def-interval]
+       thm-components-partition-and-are-closed, def-interval,
+       thm-continuity-characterisations-top, def-continuous-map-top,
+       thm-path-connected-implies-connected]
 justified_by: []
 aliases: []
 landmark: false
@@ -16,15 +21,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -34,6 +35,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Particular_point_topology"
     - title: "Cofinite topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cofinite_topology"
+    - title: "Excluded point topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Excluded_point_topology"
+    - title: "Cocountable topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cocountable_topology"
 pipeline_run: null
 ---
 
@@ -57,22 +62,25 @@ connectedness as in [[def-connected-space]], local connectedness as in
 ([[def-standard-topologies]]), so its row is an instance of the row above it and
 is not verified separately.
 
-**Two entries are deliberately left open.** Whether the cofinite topology on an
-infinite $X$, or the cocountable topology on an uncountable $X$, is
-path-connected depends on the cardinality of $X$, and no item among this page's
-declared prerequisites settles it. Nothing here asserts either way.
+The component column reads at nonempty $X$; the empty space is connected and has
+no components at all, there being no points ([[thm-components-partition-and-are-closed]]).
+
+**Two entries are deliberately left open.** No item among this page's declared
+prerequisites settles whether the cofinite topology on an infinite $X$, or the
+cocountable topology on an uncountable $X$, is path-connected, so the table says
+nothing either way.
 
 ## Facts & Assumptions
 
 **Given:** A set $X$ carrying one of the six standard topologies.
 
-[A1] A separation of a space is a pair of open, nonempty, disjoint sets covering it; a space is connected when none exists, and a subset is connected when it is connected as a subspace ([[def-connected-space]], [[def-subspace-topology-top]], [[def-topological-space]]).
+[A1] A separation of a space is a pair of open, nonempty, disjoint sets covering it; a space is connected when none exists, and a subset is connected when it is connected as a subspace ([[def-connected-space]], [[def-subspace-topology-top]], [[def-topological-space]]). If $X$ is path-connected then $X$ is connected, and the same holds for a subset ([[thm-path-connected-implies-connected]], claim 2).
 
 [A2] The open sets are: all subsets (discrete); $\varnothing$ and $X$ (indiscrete); $\varnothing$ and the sets of finite complement (cofinite); $\varnothing$ and the sets of at most countable complement (cocountable); $\varnothing$ and the sets containing $p$ (particular point). A union of two finite sets is finite ([[def-standard-topologies]], [[def-countable]]).
 
 [A3] $X$ is locally connected when every open $U$ and every $x \in U$ admit an open connected $V$ with $x \in V \subseteq U$; a component of $X$ is the largest connected set through a point, and the components partition $X$ ([[def-locally-connected]], [[def-connected-component-and-quasicomponent]], [[thm-components-partition-and-are-closed]]).
 
-[A4] A map is continuous exactly when preimages of open sets are open; a space is connected exactly when every continuous map to the two-point discrete space is constant ([[thm-connectedness-characterisations]], claims 1 and 2).
+[A4] $f$ is continuous at every point exactly when $f^{-1}[V]$ is open for every open $V$ in the codomain ([[thm-continuity-characterisations-top]], claim (a) iff (b), [[def-continuous-map-top]]); and a space is connected exactly when every continuous map to the two-point discrete space is constant ([[thm-connectedness-characterisations]], claims 1 and 2).
 
 [A5] A nonempty set is at most countable exactly when some surjection $\mathbb{N} \to$ it exists; there is a bijection $\mathbb{N} \to \mathbb{N} \times \mathbb{N}$; $\mathbb{R}$ is uncountable ([[lem-countable-iff-surjection-from-n]], [[thm-n-cross-n-countable]], [[thm-r-uncountable]], [[def-countable]]).
 
@@ -84,7 +92,7 @@ declared prerequisites settles it. Nothing here asserts either way.
 
 1.1 **Discrete.** If $X$ has two distinct points $x, y$ then $(\{x\}, X \setminus \{x\})$ is a separation by [A2] and [A1], so $X$ is disconnected; every connected subset therefore has at most one point, the subspace topology on a subset again being discrete, so the components are the singletons by [A3], and $X$ is not path-connected, a path being in particular a connected image. Every singleton is open and connected, so $X$ is locally connected by [A3]. [A1, A2, A3]
 
-1.2 **Indiscrete.** The only open sets are $\varnothing$ and $X$ by [A2], so no two nonempty open sets are disjoint and $X$ is connected by [A1]; hence its only component is $X$ by [A3], and $X$ itself is an open connected set containing every point, so $X$ is locally connected by [A3]. [A1, A2, A3]
+1.2 **Indiscrete.** The only open sets are $\varnothing$ and $X$ by [A2], so no two nonempty open sets are disjoint and $X$ is connected by [A1]; hence, for nonempty $X$, its only component is $X$ by [A3], and $X$ itself is an open connected set containing every point, so $X$ is locally connected by [A3]. [A1, A2, A3]
 
 1.3 **Indiscrete, path-connectedness.** *Every* function $\gamma : [0,1] \to X$ is continuous by [A4], the preimages of $\varnothing$ and $X$ being $\varnothing$ and $[0,1]$; so for $x, y \in X$ the function with $\gamma(0) = x$ and $\gamma(t) = y$ for $t > 0$ is a path from $x$ to $y$, and $X$ is path-connected. [A2, A4]
 
@@ -100,7 +108,7 @@ declared prerequisites settles it. Nothing here asserts either way.
 
 3.1 **Cofinite and cocountable are locally connected.** A nonempty open $U$ carries as a subspace the cofinite, respectively cocountable, topology on $U$ by [A2] and [A1]; $U$ is infinite, respectively uncountable, its complement being finite, respectively at most countable, while $X$ is not. So $U$ is connected by step 1.4, respectively step 2.1, and being open and containing each of its points it witnesses [A3]. [step 1.4, step 2.1, A1, A2, A3]
 
-4.1 Sierpinski space is the particular-point topology on a two-point set with particular point its open point, by [A2], so steps 1.6 and 2.2 apply to it verbatim; and every connected space has its whole underlying set as its unique component by [A3]. This completes the table. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 2.2, step 3.1, A2, A3] ∎
+4.1 Sierpinski space is the particular-point topology on a two-point set with particular point its open point, by [A2], so steps 1.6 and 2.2 apply to it verbatim; and every nonempty connected space has its whole underlying set as its unique component by [A3]. This completes the table. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 2.2, step 3.1, A2, A3] ∎
 
 ## Remarks
 
@@ -108,4 +116,4 @@ declared prerequisites settles it. Nothing here asserts either way.
 
 - **Local connectedness here is never informative.** In every connected case above, every nonempty open subspace is again of the same kind and hence connected, so local connectedness holds for free. A space where local connectedness carries information must have open sets that are not themselves connected, which is what happens in $\mathbb{R}^2$ and its subspaces.
 
-- **Why two cells are left blank.** A path in the cofinite or cocountable topology is a continuous map out of $[0,1]$, and whether a non-constant one exists is a question about how large $X$ is compared with $\mathbb{R}$. This page's declared prerequisites contain no cardinal comparison of that kind, so the honest entry is that the question is not settled here.
+- **Why two cells are left blank.** A path in the cofinite or cocountable topology is a continuous map out of $[0,1]$, and deciding whether a non-constant one exists needs machinery this page's declared prerequisites do not supply: for the cofinite case a comparison of $|X|$ with the cardinality of $\mathbb{R}$, and for the cocountable case an argument about the image of a dense countable subset. Neither is available here, so the honest entry is that the question is not settled.

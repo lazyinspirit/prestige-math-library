@@ -4,6 +4,9 @@ kind: example
 title: "Möbius inversion of $\\sum_{d\\mid n}\\varphi(d)=n$ gives $\\varphi(n)=\\sum_{d\\mid n}\\mu(d)(n/d)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [cor-classical-mobius-inversion, thm-sum-of-totients-over-divisors, def-number-theoretic-mobius-function]
 justified_by: []
 aliases: []
@@ -14,8 +17,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Mathematics LibreTexts, Euler's phi Function"
-      url: "https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Yet_Another_Introductory_Number_Theory_Textbook_-_Cryptology_Emphasis_%28Poritz%29/02%3A_Congruences/2.05%3A_Euler%27s__%CF%95__Function"
+    - title: "P. J. Cameron, Notes on Number Theory, Theorem 7.11"
+      url: "https://maths.qmul.ac.uk/~pjc/notes/nt.pdf"
+    - title: "Stanford Pairing-Based Cryptography notes, Möbius inversion"
+      url: "https://crypto.stanford.edu/pbc/notes/numbertheory/mobius.html"
 pipeline_run: null
 ---
 

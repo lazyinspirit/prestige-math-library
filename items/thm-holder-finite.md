@@ -4,6 +4,9 @@ kind: theorem
 title: "Hölder's inequality for finite sums (rational exponents)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-young-inequality, def-finite-sum, lem-finite-sum-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, thm-cauchy-schwarz-finite, lem-triangle-inequality-finite, lem-of-abs-value, def-abs-value, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, def-rat-order]
 justified_by: []
 aliases: []
@@ -12,18 +15,20 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-opus-5
+    model: gpt-5.6-sol-codex-subscription
     verdict: certify
-    date: 2026-07-26
-    scope: page
+    date: 2026-08-04
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
 sources:
   scraped: []
   references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Finite inequalities (Cornell University)"
+      url: "https://e.math.cornell.edu/people/belk/measuretheory/Inequalities.pdf"
+    - title: "Young, Hölder, and Minkowski inequalities (Oregon State University)"
+      url: "https://math.oregonstate.edu/~show/old/142_Luenberger.pdf"
     - title: "Hölder's inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/H%C3%B6lder%27s_inequality"
     - title: "Young's inequality for products (Wikipedia)"
@@ -65,7 +70,7 @@ the display above to the root form.
 
 [L4] Absolute values ([[lem-of-abs-value]], [[def-abs-value]]): $|x| \ge 0$, $|xy| = |x||y|$, and $|x| = 0$ only for $x = 0$.
 
-[L5] Order arithmetic: adding inequalities, that is $u \le v$ and $u' \le v'$ imply $u + u' \le v + v'$, and scaling a $\le$ by a positive element. [[lem-of-add-order]] and [[lem-of-sign-rules]] state both moves for the STRICT order and only that, so the nonstrict forms used below are those statements together with the case of equality, which trichotomy settles ([[def-ordered-field]]); and inverses of positives are positive ([[lem-of-inverse-positive]], claim 1). Rational exponents are read in $\mathbb{R}$ through the order-preserving embedding of $\mathbb{Q}$ ([[lem-of-q-embeds]], [[def-rat-order]]).
+[L5] Order arithmetic: adding inequalities, that is $u \le v$ and $u' \le v'$ imply $u + u' \le v + v'$, and scaling a $\le$ by a positive element. [[lem-of-add-order]] and [[lem-of-sign-rules]] state both moves for the STRICT order and only that, so the nonstrict forms used below are those statements together with the case of equality, which trichotomy settles ([[def-ordered-field]]); and inverses of positives are positive ([[lem-of-inverse-positive]], claim 1). The rational **coefficients** $1/p$ and $1/q$ are read as elements of $\mathbb{R}$ through the unique injective order-preserving field embedding of $\mathbb{Q}$ ([[lem-of-q-embeds]], [[def-rat-order]]); the rational **exponents** $p$ and $q$ remain elements of $\mathbb{Q}$ and act through [[def-rational-power]].
 
 ## Proof
 
