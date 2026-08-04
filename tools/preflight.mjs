@@ -25,7 +25,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 import { createRequire } from 'node:module';
-import { REPO, APP_DIR, WORKER_DIR, describe, tsxLoader, precheckSource, katexCandidates, deepseekEnvFile } from './paths.mjs';
+import { REPO, APP_DIR, WORKER_DIR, describe, tsxLoader, precheckSource, katexCandidates, yamlCandidates, deepseekEnvFile } from './paths.mjs';
 
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
@@ -74,6 +74,18 @@ attempt('katex', true, () => {
   }
   throw new Error(`not resolvable from ${katexCandidates().join(' or ')}`);
 }, `npm install in ${APP_DIR ? join(APP_DIR, 'web') : '<app>/web'} — without it rendercheck SKIPS silently`);
+
+// Same soft failure, one layer up: without the renderer's own `yaml`,
+// rendercheck stops checking that each frontmatter block parses at all, and a
+// file the renderer silently drops from the corpus 404s every published page
+// that lists it.
+attempt('yaml', true, () => {
+  const req = createRequire(import.meta.url);
+  for (const candidate of yamlCandidates()) {
+    try { req.resolve(candidate); return candidate; } catch { /* try the next candidate */ }
+  }
+  throw new Error(`not resolvable from ${yamlCandidates().join(' or ')}`);
+}, `npm install in ${APP_DIR ? join(APP_DIR, 'web') : '<app>/web'} — without it rendercheck's frontmatter parse SKIPS silently`);
 
 // ---- model lanes ------------------------------------------------------------
 

@@ -12,8 +12,6 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-verification:
-  audited: 2026-07-31
 sources:
   scraped: []
   references:

@@ -812,7 +812,7 @@ items). **Do not trim landmarks.**
 | `fwdcheck.mjs` | `forward-on-spine` (load-bearing forward ref on a def/lemma/prop/theorem), `forward-undeclared`, `forward-in-deps`, `forward-not-later`, `forward-same-page`, `forward-dangling`, `forward-unused`, `forward-cycle`, `stack-cycle`; marks `direct`/`inherited` |
 | `extcheck.mjs` | `unproved-kind`, `unproved-has-proof`, `unproved-judged`, `unproved-precheck`, `unproved-on-published`, `unproved-uncited`, `external-dangling`, `external-in-deps`, `external-not-unproved`, `external-unused` |
 | `citecheck.mjs` | mis-attribution heuristic — the largest historical defect class (14 of 50) |
-| `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `unreadable` |
+| `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `frontmatter-unparsable` / `frontmatter-duplicate-key` (**the renderer's own `yaml`** — a file whose frontmatter throws is silently dropped from the corpus, and every published page listing it then 404s), `unreadable` |
 | `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>100 A-page items; review only, never a pruning target), `redundant-prereq` (19 total) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
 | `prosecheck.mjs` | **the prose defect class**, which is where 100% of this library's found defects live. ERROR `position-contradiction` (a "later/earlier page" claim contradicting `plan-spec` order — decidable, no judgement). WARNINGS `count-in-prose`, `count-of-this-page`, `library-scope-denial`. `--warnings` lists them, `--strict` fails on them |
@@ -844,9 +844,9 @@ missing fails the step rather than being skipped.
 
 **Before starting or resuming a level, run `node tools/preflight.mjs`** (add
 `--judges` to also spend one minimal call per judge lane). It verifies the app
-repo, tsx loader, precheck source, KaTeX, Codex CLI and auth, DeepSeek key
+repo, tsx loader, precheck source, KaTeX, `yaml`, Codex CLI and auth, DeepSeek key
 reachability, Node, git state and disk. It exists because several of those fail
-*soft* — `rendercheck` SKIPS without KaTeX and still exits 0 — so a gate that
+*soft* — `rendercheck` SKIPS without KaTeX or `yaml` and still exits 0 — so a gate that
 never ran reads like a gate that passed. `tools/paths.mjs` resolves the app repo
 (`$PRESTIGE_APP_DIR`, else the sibling checkout, else the VPS path), and
 `node tools/tsx-run.mjs tools/<x>.mts` is the invocation for every `.mts` tool.

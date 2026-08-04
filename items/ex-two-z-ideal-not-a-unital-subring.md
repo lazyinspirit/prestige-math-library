@@ -1,7 +1,7 @@
 ---
 id: ex-two-z-ideal-not-a-unital-subring
 kind: example
-title: '$2\mathbb Z$ is an ideal of $\mathbb Z$ but is not a subring under the library's unital convention'
+title: '$2\mathbb Z$ is an ideal of $\mathbb Z$ but is not a subring under the library''s unital convention'
 status: published
 origin: session
 provenance:

@@ -68,6 +68,13 @@ export const precheckSource = () =>
 export const katexCandidates = () =>
   [APP_DIR ? join(WEB_DIR, 'node_modules/katex') : null, 'katex'].filter(Boolean);
 
+/** The SAME YAML parser the renderer loads frontmatter with (web/lib/math-library.ts).
+ *  It must be that copy and not a second implementation: the whole point of the
+ *  strict-frontmatter check is that the gate and the renderer agree on what
+ *  parses, and two parsers cannot be made to agree by inspection. */
+export const yamlCandidates = () =>
+  [APP_DIR ? join(WEB_DIR, 'node_modules/yaml') : null, 'yaml'].filter(Boolean);
+
 /** Where DEEPSEEK_API_KEY is read from when it is not already in the env. */
 export const deepseekEnvFile = () =>
   process.env.DEEPSEEK_ENV_FILE ?? (APP_DIR ? join(APP_DIR, '.env') : null);

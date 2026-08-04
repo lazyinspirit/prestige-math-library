@@ -40,6 +40,15 @@
 // thing. If KaTeX cannot be loaded the parse pass is skipped and reported as
 // skipped, never as passed.
 //
+// IT ALSO PARSES THE FRONTMATTER, with the renderer's own YAML parser. Added
+// 2026-08-04 after two published pages were found returning 404 to the public
+// since the day each was published. The corpus loader wraps its parse in a bare
+// `catch {}`, so a frontmatter YAML error does not break the item — it deletes
+// it, and the page that lists it then refuses to render. Nine files, two
+// defects: a duplicate `verification:` key, and an unescaped apostrophe inside a
+// single-quoted title. Every gate passed, because every other gate reads
+// frontmatter with a regex that takes the first matching line.
+//
 // Canonical delimiters are `$…$` and `$$…$$`. Common TeX delimiters `\(…\)`
 // and `\[…\]` are NOT parsed by remark-math, so they are literal source text
 // in the rendered library; flag them before they reach a reader.
@@ -48,7 +57,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { katexCandidates } from "./paths.mjs";
+import { katexCandidates, yamlCandidates } from "./paths.mjs";
 
 const REPO = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 
@@ -65,6 +74,18 @@ for (const cand of katexCandidates()) {
     katexWhy = e.message;
   }
 }
+// The renderer's YAML parser, for the strict-frontmatter check below.
+let YAML = null;
+let yamlWhy = "";
+for (const cand of yamlCandidates()) {
+  try {
+    YAML = require_(cand);
+    break;
+  } catch (e) {
+    yamlWhy = e.message;
+  }
+}
+
 const argv = process.argv.slice(2);
 const asJson = argv.includes("--json");
 const quiet = argv.includes("--quiet");
@@ -162,7 +183,56 @@ for (const path of targets) {
     continue;
   }
   const rel = relative(REPO, path);
-  const { body } = splitFrontmatter(src);
+  const { fm, body } = splitFrontmatter(src);
+
+  // ---- the frontmatter must parse under the RENDERER's YAML parser
+  //
+  // `loadItemsUncached` / `walkPages` in web/lib/math-library.ts wrap the parse
+  // in a bare `catch {}`: a file whose frontmatter throws is silently absent
+  // from the corpus. The consequence is not a broken item but a dead PAGE —
+  // `[...path]/page.tsx` treats a listed-but-unloadable item as `missing` and
+  // calls `notFound()`, so the public gets a 404 on a page that is `published`,
+  // fully audited, and perfect on disk.
+  //
+  // Every other gate here reads frontmatter with a hand-rolled regex that takes
+  // the FIRST `key:` line, so all of them see a file the renderer cannot load.
+  // depcheck's `page-item-missing` and `draft-on-published-page` are the right
+  // rules and were blind for exactly this reason: "exists" has to mean "the
+  // renderer can load it", which is only true if the same parser decides.
+  //
+  // Measured when this was added (2026-08-04): 9 items, both defects invisible
+  // to every gate, two published pages 404 to the public since the day they
+  // were published — `power-series-and-real-analytic-functions` (8 items with a
+  // duplicate `verification:` key) and `ideals-and-quotient-rings-examples`
+  // (`title: '...the library's unital convention'`, an unescaped apostrophe
+  // inside a single-quoted scalar, which must be doubled as `''`).
+  if (YAML && fm) {
+    try {
+      YAML.parse(fm);
+    } catch (e) {
+      // Name the duplicate key when that is the cause: the strict parser reports
+      // only the position, and the lenient reading a human does in their head
+      // silently keeps the LAST block, losing whatever the first one carried.
+      let dup = null;
+      try {
+        const seen = new Set();
+        for (const node of YAML.parseDocument(fm, { uniqueKeys: false }).contents?.items ?? []) {
+          const k = node.key?.value;
+          if (typeof k !== "string") continue;
+          if (seen.has(k)) { dup = k; break; }
+          seen.add(k);
+        }
+      } catch { /* the lenient parse is a nicety; the strict failure already stands */ }
+      err(
+        rel,
+        dup ? "frontmatter-duplicate-key" : "frontmatter-unparsable",
+        dup
+          ? `duplicate top-level key \`${dup}\` — the renderer's YAML parser throws and drops this file from the corpus, so every published page listing it 404s`
+          : `frontmatter does not parse under the renderer's YAML parser, so the file is dropped from the corpus and every published page listing it 404s: ${String(e.message).replace(/\s+/g, " ").slice(0, 120)}`,
+        "",
+      );
+    }
+  }
 
   for (const fence of proofSectionTikzFences(body))
     err(
@@ -298,8 +368,9 @@ if (asJson) {
   } else {
     console.log(
       `\nOK — ${targets.length} file(s): no wikilink inside math, no nested or unbalanced` +
-        `\ndelimiters, no multiline display block, and every math span parses under the` +
-        `\nreal KaTeX${katex ? "" : " (SKIPPED: " + katexWhy.slice(0, 60) + ")"}.`,
+        `\ndelimiters, no multiline display block, every math span parses under the real` +
+        `\nKaTeX${katex ? "" : " (SKIPPED: " + katexWhy.slice(0, 60) + ")"}, and every frontmatter block parses under the renderer's` +
+        `\nYAML parser${YAML ? "" : " (SKIPPED: " + yamlWhy.slice(0, 60) + ")"}.`,
     );
   }
 }

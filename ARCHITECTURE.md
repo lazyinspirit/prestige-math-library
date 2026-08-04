@@ -225,6 +225,33 @@ bypass the server diagram extractor and reach the reader as raw code), and
 **`katex-parse-error` from a real KaTeX parse** using the app's own KaTeX, plus
 `unreadable` for a file it cannot open.
 
+**`frontmatter-unparsable` / `frontmatter-duplicate-key`, added 2026-08-04, are
+the same lesson one layer up.** The corpus loader parses frontmatter with the
+`yaml` package inside a bare `catch {}`, so a YAML error does not break an item —
+it *deletes* it, and `[...path]/page.tsx` then treats it as `missing` and calls
+`notFound()`. The public gets a 404 on a page that is `published`, audited, and
+perfect on disk; the owner gets the red "Broken published page" box.
+
+Two published pages were in that state, each since the day it was published:
+`real-analysis/power-series-and-real-analytic-functions` (8 items carrying a
+duplicate `verification:` key) and
+`abstract-algebra/ideals-and-quotient-rings-examples` (an unescaped apostrophe
+inside a single-quoted `title`, which YAML requires doubled as `''`). Nine files,
+found by neither the level build, five audit waves, nor any of the ten gates.
+
+**Why every gate missed it is structural, not an oversight.** `depcheck` already
+has exactly the right rules — `page-item-missing` and `draft-on-published-page` —
+and both were blind, because every tool in this repo reads frontmatter with a
+hand-rolled regex that takes the first matching `key:` line. A regex reader
+cannot see a duplicate key (it stops at the first) and cannot see a quoting
+error (it strips the quotes itself). So the gates were measuring a corpus the
+renderer does not have. `depcheck`'s `yaml-escape` rule shows the hazard was
+already known and was answered with a third hand-rolled rule rather than a
+parser. The fix is that the gate now loads **the renderer's own `yaml`**, via
+`paths.mjs`'s `yamlCandidates()`: agreement between gate and renderer has to be
+guaranteed by shared code, since two parsers cannot be made to agree by
+inspection.
+
 ### 3.7 `prosecheck.mjs` — the prose defect class (owner approved 2026-07-28)
 **Every defect this library has shipped for seven consecutive builds was in
 prose**, and almost none was mathematical: they were claims *about the library* —
@@ -525,7 +552,8 @@ to `~/.codex` rather than `/root/.codex` for the same reason.
 run starts spending model calls. The failure it exists for is the SOFT one:
 `rendercheck` reports `real KaTeX (SKIPPED)` and exits 0, so a gate that never
 ran is indistinguishable in an unattended log from a gate that found nothing
-wrong. It checks the app repo, tsx loader, precheck source, KaTeX resolution, the
+wrong — and the same is true of the frontmatter parse without `yaml`. It checks
+the app repo, tsx loader, precheck source, KaTeX and `yaml` resolution, the
 Codex CLI and its `auth.json`, the optional Claude CLI, DeepSeek key reachability
 (never printing it), Node version, git cleanliness and branch, and free disk.
 `--judges` additionally spends one minimal call per lane through `judge.mts

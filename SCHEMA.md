@@ -485,7 +485,8 @@ node tools/depcheck.mjs      # deps resolve, graph acyclic, no draft on a publis
 node tools/fwdcheck.mjs      # forward refs declared, point forward, closed, off the spine
 node tools/extcheck.mjs      # recorded-not-proved items well formed; ‡ consequences marked
 node tools/citecheck.mjs     # HEURISTIC: an elementary move whose home is not in deps
-node tools/rendercheck.mjs   # delimiters + a REAL KaTeX parse; defects visible only when rendered
+node tools/rendercheck.mjs   # delimiters, a REAL KaTeX parse, and a REAL YAML parse of every
+                             # frontmatter block; defects visible only when rendered
 node tools/validate-plan.mjs research/plan-spec.json   # the scaffold; TAKES THE SPEC PATH
 node tools/depsource.mjs     # where each dep lives; only `unresolved` fails
 ```
