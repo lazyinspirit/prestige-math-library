@@ -1,0 +1,17 @@
+{
+  "role": "audit-alpha",
+  "label": "a8-round2",
+  "run": "wave5",
+  "runner": "claude",
+  "model": "claude-opus-5",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-05T15:35:50.737Z",
+  "ended_at": "2026-08-05T15:51:10.474Z",
+  "ms": 919737,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-alpha-a8-round2.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-alpha-a8-round2.prompt.md",
+  "tail": "A8 round 2 is complete. Report appended to `research/audit/wave5-alpha.md`.\n\n## What I found\n\n**The dispatch handed me 25 rejections; disk holds 39.** Recomputing from `wave5-judge.jsonl` (last verdict per `(id, model)`, minus the 63 round-1 keys): 418 current paired verdicts, 66 rejects, **0 nulls** — so paired coverage really is 209/209 and your round-1 blocker is closed. But 14 unadjudicated rejections were missing from the list, mostly the Euclidean/ℝⁿ batch. That mattered: the one fatal was rejected by **both** lanes and only the Sonnet row was handed to me.\n\n## Outcome — 39 rows\n\n| outcome | rows |\n|---|---|\n| `confirmed_nonfatal` | 35 |\n| `confirmed_fatal` | **2** (one item, both lanes) |\n| `false_positive` | 2 |\n\n**The fatal: `cor-monotone-converges-iff-bounded`.** Its Remark said \"Without boundedness the forward direction is what fails\" — but the forward direction is *converges ⇒ bounded*, which never fails, and the item's own Statement says so explicitly three paragraphs above. The offered witness (a nondecreasing unbounded sequence) doesn't converge, so it can't witness a failed implication. Both lanes caught it independently. Repaired to say the true thing; certified **CERTIFY, 0 fatal** by an independent read-only Sonnet lane, which I did not author. Stamp written, `verification.audited` not.\n\n**Two DeepSeek false positives**, both refuted with verbatim text: `fs-rationals-complete` *does* carry the sₙ construction DeepSeek said it lacks, and `def-euclidean-spheres-and-closed-balls` *does* pin ‖·‖₂ down via its own stated identity plus `lem-metrics-on-rn`'s explicit formula.\n\n## Your rejudge list — 31 items, computed not estimated\n\nI touched **one** item, but `judge.mts --context-hash` run over all 209 scoped items shows exactly **31** stale contexts: the whole `monotone-sequences-and-cauchy-completeness` A/B pair, nothing outside it. The command is in the report. 62 verdicts; keep Sonnet at the reduced concurrency.\n\nWorth putting in A10: a **Remark-only** repair that `impact-audit` confirms changes zero public interfaces still invalidated 31 frozen contexts, 30 of them items I never opened.\n\n## Gates\n`step8-guard` OK (1/1 licensed) · A6 CLEAR 14/14 · `impact-audit` 0/0 · `depcheck` exit 0 · ledger 102 rows, 0 malformed, 0 dupes. `level-coverage` still fails on the missing `wave5-spine-audit.json` — unchanged, and yours.\n\nThree things back to you: the 31-item rejudge, that missing spine receipt, and `RESUME.md`, which is still headed WAVE 4 with wave 4's A7 as its next action after wave 5 has run A0 through A8 twice."
+}

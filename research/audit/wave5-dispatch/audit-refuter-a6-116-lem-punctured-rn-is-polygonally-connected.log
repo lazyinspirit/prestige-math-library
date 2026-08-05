@@ -1,19 +1,17 @@
-# audit-refuter/a6-116-lem-punctured-rn-is-polygonally-connected 2026-08-05T14:59:14.199Z
+# audit-refuter/a6-116-lem-punctured-rn-is-polygonally-connected 2026-08-05T15:06:07.143Z
 
 ## stdout
-### FINDING 1 — NONFATAL — location: step 2.1 / Facts block [L2]
-CLAIM AS WRITTEN:  
-Step 2.1: *"The segment from x to z avoids 0: an equality (1-t)x+tz=0 with 0<t≤1 would give z=-((1-t)/t)x∈span{x}, contrary to step 1.1. [L2, step 1.1]"*
+After a full adversarial reading of the lemma and its stated dependencies, I find no fatal defect. The proof constructs, for arbitrary nonzero \(x,y\), a two-segment polygonal path in \(\mathbb{R}^n\setminus\{0\}\) by way of a well-chosen intermediate point \(z\) and correctly verifies that both segments avoid the origin. The reasoning is essentially self-contained, the handling of the \(n\ge2\) hypothesis is precise, and no hidden choice principle is invoked. Minor infelicities (the phrasing of [L2], the brevity of the “similarly avoids 0” step, and a slightly loose citation) are all well within the “acceptable” boundaries set by the audit standard—the first two are gaps a competent reader closes instantly, and the last is a citational quirk.
 
-WHY IT FAILS: The step cites [L2] as if it licenses the claim, but [L2] states:  
-*"A vector outside span{x} cannot lie on a segment from x to 0, except at no point; the corresponding statement holds for y, by the vector-space axioms ([[def-linear-combination-and-span]], [[def-norm-and-normed-space]])."*  
-This is a claim about a vector outside span{x} not lying on the segment **from x to 0**. Step 2.1, however, needs the fact that **0 does not lie on the segment from x to z** (equivalently, that z is not on the segment from x to 0? Actually the step proves a contrapositive: if 0 were on the segment then z∈span{x}). The two statements are not the same, and [L2] does not directly provide the justification used in step 2.1. The algebraic reasoning inside step 2.1 is self‑contained and correct; the citation to [L2] is therefore inaccurate — it cites a fact that does not make the claimed assertion. The proof remains logically valid without it.
+**What I checked in detail**
+- The existence of \(z\notin\operatorname{span}\{x\}\cup\operatorname{span}\{y\}\) for \(n\ge2\): the case distinction (spans differ/spans agree) is exhaustive and the two constructions (\(x+y\) or a standard basis vector outside the common line) are valid without any non‑constructive choice.
+- The segment \(x\)–\(z\) avoids \(0\): the algebraic deduction \(z\in\operatorname{span}\{x\}\) from \((1-t)x+tz=0\) contradicts \(z\notin\operatorname{span}\{x\}\).
+- The segment \(z\)–\(y\) avoids \(0\): the same algebra yields \(y\in\operatorname{span}\{z\}\); because \(y\neq0\), this forces \(z\in\operatorname{span}\{y\}\), contradicting \(z\notin\operatorname{span}\{y\}\). The proof writes “similarly”, which indeed covers the extra symmetry step in <30 seconds.
+- The concatenation of the two segments is a polygonal path in the punctured space by the cited lemma `lem-euclidean-polygonal-paths-are-continuous` and the definition of polygonal connectedness.
+- Every dependency that is actually used supplies exactly the needed facts; the unnecessary citation of `def-norm-and-normed-space` is harmless.
+- The title matches the proved statement exactly.
 
-WHAT WOULD FIX IT: Either remove the “[L2, step 1.1]” citation from step 2.1 (the inline algebra already justifies the step), or replace [L2] with a fact that explicitly states: *If a vector is not in span{x} then the segment from x to that vector does not contain 0* (and similarly for y). The current [L2] could be removed or rewritten to match what the step actually uses.
-
----
-
-**0 fatal, 1 nonfatal**
+`0 fatal, 0 nonfatal`
 
 ## stderr
 

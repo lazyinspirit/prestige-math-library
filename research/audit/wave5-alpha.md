@@ -866,3 +866,297 @@ because a stale RESUME cost a whole session; it is stale again.
 
 **Exact next action:** orchestrator runs the three items above, then A9 and A10.
 No A8 adjudication is outstanding.
+
+---
+
+# A8 — Round 2
+
+## Recovery receipt (2026-08-06, A8 round-2 dispatch)
+
+**Baseline.** Branch `main`, HEAD `f6bb1af` ("fix(audit): wave 5 A8 — 63
+adjudications, spine receipt carried forward on byte-identity evidence").
+Working tree dirty with the wave's artifacts; **no item file modified at entry**
+beyond my own five round-1 repairs, which are committed.
+
+**Read in full.** `CLAUDE.md`; the round-2 dispatch brief; `research/audit/RESUME.md`
+(head section still WAVE 4 — the process finding I recorded at round 1 stands
+unaddressed); this whole report, including my A4-concurrence, A6 round-1/round-3
+and A8 round-1 sections; `research/audit/wave5-judge.jsonl` (all 647 rows);
+`research/audit/wave5-judge-adjudications.jsonl` (all 63 round-1 rows);
+`tools/item-hash.mjs`, `tools/step8-guard.mjs`, `tools/dispatch.mjs` role table,
+`tools/level-coverage.mjs` context-hash path; and on disk every item named below
+with the cited dependency targets that each allegation turns on.
+
+**Inherited open actions:** none of mine. The two blockers I handed back at
+round 1 (the 69 Sonnet nulls; the missing `wave5-spine-audit.json`) were the
+orchestrator's; the first is now closed — see below — and the second is not.
+
+## The dispatch handed me 25 rejections. Disk holds 39.
+
+Recomputed from `wave5-judge.jsonl` by taking the **last** verdict per
+`(id, model)` pair and subtracting the 63 round-1 adjudication keys:
+
+| | |
+|---|---|
+| current paired verdicts | 418 (209 items × 2 lanes) |
+| keep | 352 |
+| reject | 66 |
+| null | **0** |
+| already adjudicated at round 1 | 27 of those 66 |
+| **unadjudicated at this dispatch** | **39** |
+
+**Paired coverage is genuinely 209/209 with zero nulls** — the round-1 blocker
+is closed and A10 may now report this wave as paired-covered.
+
+The 14 the dispatch omitted are not a rounding difference; they are a
+systematically distinct group. Nine are the Euclidean/`\mathbb{R}^n` batch
+(`cor-euclidean-closed-balls-and-spheres-are-compact`,
+`def-euclidean-spheres-and-closed-balls`, `thm-rational-points-and-boxes-in-rn`,
+`cex-open-bounded-euclidean-subset-not-compact` ×2,
+`cex-closed-unbounded-euclidean-subset-not-compact` ×2,
+`cor-rn-is-polygonally-connected-and-locally-path-connected`,
+`cor-components-of-open-subsets-of-rn-are-polygonally-connected`,
+`lem-polygonally-reachable-set-is-clopen` sonnet lane), three are real-analysis
+(`cor-monotone-converges-iff-bounded` **deepseek lane**,
+`cex-cauchy-rationals-no-rational-limit`,
+`fs-consecutive-differences-null-implies-cauchy`), and one is
+`thm-radial-straight-line-map-on-punctured-rn`.
+
+**The omission mattered.** The single fatal defect this round was rejected by
+**both** lanes, and only the Sonnet row was in the handed list. Had I adjudicated
+the 25 as given, I would still have caught it — but I would have recorded it as a
+one-lane finding rather than as the cross-family agreement it is, and the
+cross-family lane is the only independent reader this audit has. This is the
+third time in wave 5 that a handed count undercounted the real surface (the A4
+halt record, the A6 gate display, and now this). **Every count in this section is
+from a direct recomputation, not from the dispatch.**
+
+## Adjudications — 39 rows
+
+| outcome | rows |
+|---|---|
+| `confirmed_nonfatal` | 35 |
+| `confirmed_fatal` | **2** (one item, both lanes) |
+| `false_positive` | 2 |
+
+By lane: DeepSeek 15 rejections → 1 fatal / 2 false positive / 12 nonfatal
+(**86.7% precision**). Sonnet 24 → 1 fatal / 0 false positive / 23 nonfatal
+(**100% precision**). Cumulative for the wave: DeepSeek 54 rejections at 90.7%,
+Sonnet 48 at 100%. Sonnet's measured 60.0% from the pre-JSON-constraint era does
+not reproduce anywhere in wave 5, across 48 adjudicated rejections and two
+separate sweeps. That is now a large enough sample to say so at A10.
+
+### CONFIRMED FATAL — `cor-monotone-converges-iff-bounded` (both lanes)
+
+Its final Remark read:
+
+> "**Neither hypothesis can be dropped.** Without monotonicity the converse
+> direction fails, by [[fs-bounded-implies-convergent]]. Without boundedness the
+> **forward direction is what fails**, and it fails in the describable way
+> recorded by [[lem-monotone-unbounded-diverges]]: a nondecreasing unbounded
+> sequence diverges to $+\infty$."
+
+The forward direction of this item's own biconditional is *converges implies
+bounded*. It holds for every sequence and cannot fail, and the item's **own
+Statement says so in terms**: "The forward implication holds for every sequence
+and is [[lem-convergent-implies-bounded]]." The Remark asserts the opposite three
+paragraphs later. The witness it offers is not one either: a nondecreasing
+unbounded sequence diverges, so it does not satisfy the antecedent of the
+implication it is produced to refute. Nor is "boundedness" a hypothesis that
+could be dropped — it is one side of the biconditional.
+
+Both lanes found this independently, DeepSeek naming it "a false claim" and
+Sonnet naming the direction mislabelling. Cross-family agreement on a false
+Remark claim contradicting the item's own Statement. Type `other`.
+
+**This is the fourth fatal of wave 5 that is a false claim in Remark prose**, and
+the seventh of eight overall. The pattern is now unambiguous: this corpus's
+mathematics is sound and its *prose about* its mathematics is where the
+falsehoods are. No gate reads Remark prose for mathematical content.
+
+**The repair** rewrites only that bullet, to say the true thing the bullet was
+reaching for: monotonicity is the droppable hypothesis, the forward direction
+needs none, and `lem-monotone-unbounded-diverges` sharpens rather than rescues
+it. Statement, Facts, every numbered step, `deps` and title are untouched, so
+this is not a public-interface change — `impact-audit` from a dedicated
+`pre-a8-round2` baseline confirms **0 changed public interfaces, 0 affected
+items**.
+
+**Certification.** I authored the repair, so I did not certify it. A read-only
+`claude-sonnet-5` certifier read the final text
+(`research/audit/wave5-dispatch/certifier-a8r2cert-001-cor-monotone-converges-iff-bounded.log`):
+**CERTIFY, 0 fatal, 1 nonfatal**. It opened all six declared dependencies plus
+the three Remark wikilink targets and confirmed each `[L#]` is an exact
+restatement. Its one nonfatal — the replacement illustrates only the
+nondecreasing half of `lem-monotone-unbounded-diverges` and leaves the
+nonincreasing dual to symmetry — is inside the 30-second threshold, and **R1
+forbids acting on it**: recorded, not repaired. The stale legacy `judge` block
+(`z-ai/glm-5.2`) and the obsolete `audited: 2026-07-26` stamp were deleted before
+the edit; `verification.verified` (`claude-sonnet-5`, `scope: published-audit`,
+`delegated_by: owner`) was written after the independent reading.
+**`verification.audited` was not written.**
+
+### FALSE POSITIVE — 2, both DeepSeek, both refuted with verbatim text
+
+1. **`cex-cauchy-rationals-no-rational-limit`.** DeepSeek: "[L1] cites
+   [[fs-rationals-complete]] for explicit construction and bounds of $s_n$, but
+   that item merely states the false claim with no construction; the proof's
+   central estimates are unsupported." `fs-rationals-complete` step 1.1 reads
+   verbatim: "For each $n$ let $k_n$ be the largest natural with
+   $k_n^2 \le 2 \cdot 10^{2n}$, and set $s_n = k_n / 10^n$; then
+   $s_n^2 \le 2 < (s_n + 10^{-n})^2$" — the construction and both bounds [L1]
+   cites it for, verbatim. Its step 2.1 proves $(s_n)$ Cauchy and its step 4.1
+   proves no rational limit. A refuted false statement still carries a full
+   proof of its refutation, and that proof is exactly the construction.
+2. **`def-euclidean-spheres-and-closed-balls`.** DeepSeek: the item "uses the
+   Euclidean norm $\lVert\cdot\rVert_2$ without defining it or citing its
+   definition … The definition is therefore not well-formed." The item's own
+   text closes this: "Since $d_2(c,x)=\lVert x-c\rVert_2$, they are precisely
+   the closed ball and sphere … of the metric-space definition", and the cited
+   `lem-metrics-on-rn` displays $d_2$ explicitly as
+   $\sqrt{\sum_{k<n}(x_k-y_k)^2}$. The identity plus the explicit formula pin
+   the norm down completely. The definition is well-formed.
+
+### CONFIRMED NONFATAL — 35 rows, and they are one class again
+
+**Roughly 30 of the 35 are the fact-fidelity class**: "`[F#]`/`[L#]` claims X
+citing Y; Y does not state X", where X is true and one line from its target.
+This wave's instances: $|t| = t$ for $t \ge 0$ attributed to `lem-of-abs-value`
+(which proves $|x| \ge 0$, $-|x| \le x \le |x|$ and the rest, but leaves that
+equality to `def-abs-value`, its own `[L1]`) — **three separate items**; affine
+real functions are continuous, asserted from the componentwise criterion alone
+(**both lanes**); convexity of a Euclidean ball cited to `lem-metrics-on-rn`
+(**both lanes**); the reverse triangle inequality; $\lVert e_0\rVert_2 = 1$
+cited to a purely algebraic basis lemma; "complementation reverses inclusion"
+attributed to `def-topological-space`; the closure-meets-every-neighbourhood
+criterion used without citing `thm-closure-characterisation-top` (**four
+separate nets/filters items**); filter upward-closure and finite intersections
+of neighbourhoods used without citing the filter axioms the item itself lists.
+
+**This is the fifth consecutive wave in which fact-fidelity dominates**, and the
+wave-4 A10 queue item — *may an `[F#]` state a one-line consequence of its cited
+target?* — is now on its **fifth** wave unanswered. Wave 5 alone produced ~75
+findings of this exact shape across two rounds. It remains the single
+highest-value policy question the owner could settle.
+
+Four nonfatals I want on the record as the sharpest, all raised to A10 rather
+than repaired:
+
+- **`lem-polygonally-reachable-set-is-clopen` `[L2]`** (both lanes) — "A straight
+  segment between two points of an Euclidean ball stays in that ball, by the
+  triangle inequality for the Euclidean norm ([[lem-metrics-on-rn]])". The cited
+  lemma proves only that $d_1,d_2,d_\infty$ are metrics, and **a general metric
+  ball need not be convex**, so metrichood alone genuinely supplies nothing here.
+  It is nonfatal only because the lemma also *displays* $d_2$ explicitly, and
+  homogeneity — the missing ingredient — is one line off that formula. Sonnet is
+  right that the companion example cites `def-norm-and-normed-space` for the same
+  move and this one does not. The sharpest citation defect of the round.
+- **`thm-contractive-implies-cauchy`** (sonnet) — the Remark "**Where
+  completeness is spent.** Only in step 10.1, through
+  [[thm-cauchy-criterion-via-lub]]". `[L13]` is that theorem and it is cited in
+  step **8.1**; step 10.1 cites `[L14]`. The substantive claim is true —
+  completeness is spent exactly once, for the existence of the limit, which *is*
+  step 8.1, as the Remark's own next sentence correctly describes. A misdirected
+  internal step pointer, ruled nonfatal for consistency with my round-1 ruling on
+  `fs-the-compact-open-topology-is-always-metrizable` and my A6 round-3 ruling on
+  `cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous`.
+  **This is the second instance in wave 5 of a wrong numeral in a
+  completeness/choice ledger specifically**, and it strengthens the A10 policy
+  question I raised at round 1: the ledger is a load-bearing house mechanism and
+  the owner may want a wrong locator *there* treated as fatal.
+- **`ex-arens-space-is-sequential-not-frechet-urysohn`** (sonnet) — step 1.2's
+  "If $\infty\in\overline C$, then infinitely many $x_n$ lie in $C$" is **false
+  as an unconditional claim**, and Sonnet supplies the witness: $C=\{\infty\}$ is
+  sequentially closed with no $x_n$ in it, and the constructed neighbourhood of
+  $\infty$ contains $\infty$, so it is not disjoint from $C$. Nonfatal
+  nonetheless, because the goal in that case is precisely $\infty \in C$, so
+  $\infty \in C$ discharges it in one line. Ruled nonfatal for the third time on
+  this item and this shape (A6 round 3; A8 round 1 on the DeepSeek lane; here).
+  Recording the concrete witness because Sonnet sharpened the finding, and the
+  case is now on the A10 list.
+- **`cor-euclidean-closed-balls-and-spheres-are-compact`** (sonnet) and
+  **`cex-open-bounded-euclidean-subset-not-compact`** (deepseek) — both `[L#]`s
+  restate `thm-euclidean-heine-borel-pseudocompactness-and-extreme-values`
+  dropping its explicit nonemptiness hypothesis, which that theorem's Statement
+  flags in terms ("The nonemptiness hypothesis is necessary for condition 4").
+  Nonfatal because the hypothesis is satisfied at every use — closed balls
+  contain their centre and spheres contain $c + re_0$ for $n \ge 1$ — but this
+  is the **dropped-hypothesis subclass**, which is what produced 13 fatals in
+  wave 4, and it is worth the owner knowing it recurs here in the benign form.
+
+## Escalation — twice-touched
+
+`cor-monotone-converges-iff-bounded` is a **first** touch: measured from disk it
+is byte-unchanged across every stage snapshot in `wave5-touches.json` before
+this round. Nothing escalates from round 2.
+
+`touchlog` reports "53 item(s) now repaired more than once" at the
+`pre-a8-round2` snap. That figure is the wave-2 snapshot-window artifact
+recurring, not 53 repairs: the ledger carries the nine per-item Beta snapshots I
+recorded as a process deviation at A6, and a 23-snapshot ledger counts a
+frontmatter retag seen from two stage angles as two touches. The real
+multiple-repair count for wave 5 remains **one** — `def-regular-and-t3-spaces`,
+from round 1.
+
+## Gate state
+
+| gate | result |
+|---|---|
+| `step8-guard` (baseline `pre-a8-round2`) | **OK — 1/1 change licensed by a confirmed fatal adjudication** |
+| `gates --audit --step A6` | **STEP A6 CLEAR, 14/14** |
+| `impact-audit` (from `pre-a8-round2`) | 0 changed public interfaces, 0 affected items |
+| `depcheck` | exit 0, `published-unaudited` empty |
+| `precheck` (repaired item) | 1 checked, 0 failing |
+| `citecheck` `fwdcheck` `extcheck` `rendercheck` `prosecheck` `depsource` | all exit 0 |
+| `proof-contract --strict` | 0 errors, 0 warnings, 155/155 |
+| `level-coverage` | still **FAIL — `missing: research/audit/wave5-spine-audit.json`** (orchestrator's, unchanged) |
+
+Two warnings persist and neither is a gate failure: `content-policy`
+`generated-kind` on `rem-function-space-conventions`, `genrisk`
+`verified-generated-seed` on `rem-counting-conventions-and-scope`.
+
+## The exact rejudge list — computed, not estimated
+
+The dispatch asked which items I touched so the rejudge can be precise. I touched
+**one**. But the judge context unit is the **A/B pair**, so repairing an item
+re-freezes every item whose context embeds that item's page.
+
+I computed this rather than guessing: `tools/judge.mts items/<id>.md
+--context-hash` recomputes a context hash with no network call, so I ran it over
+**all 209 scoped items** and diffed against the ledger. Exactly **31** items now
+carry a stale context — the whole
+`library/real-analysis/monotone-sequences-and-cauchy-completeness` A/B pair, and
+nothing outside it. No other page's context moved.
+
+```
+JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs \
+  --ledger research/audit/wave5-judge.jsonl \
+  --cost research/audit/wave5-judge-cost.jsonl \
+  --items thm-bolzano-weierstrass,lem-monotone-unbounded-diverges,lem-cauchy-with-convergent-subsequence,thm-cauchy-criterion-via-lub,def-contractive-sequence,def-monotone-sequence,def-subsequential-limit,lem-peak-monotone-subsequence,thm-monotone-convergence,lem-cauchy-sequence-bounded,thm-nested-interval-property,cor-monotone-converges-iff-bounded,rem-completeness-routes,lem-geometric-sequence-null,lem-alternating-sequence,fs-consecutive-differences-null-implies-cauchy,fs-convergent-subsequence-implies-bounded,def-interval,fs-nested-open-intervals-nonempty,ex-nested-intervals-single-point,ex-recursive-sqrt-two-plus-x,ex-babylonian-sqrt-two,cex-strictly-decreasing-gaps-no-limit,thm-contractive-implies-cauchy,cex-nested-open-intervals-empty,ex-contractive-sequence-fixed-point,cex-unbounded-with-convergent-subsequence,cex-cauchy-rationals-no-rational-limit,cex-sqrt-k-differences-null-not-cauchy,cex-nested-unbounded-closed-empty,ex-two-subsequential-limits
+```
+
+**62 verdicts expected.** Keep the Sonnet lane at the reduced concurrency that
+fixed the round-1 refusals; at 16 it returned 69 nulls.
+
+**A10 should record the structural fact this exposes**, which is the wave-3 queue
+item in its sharpest form yet: a **single Remark-only repair, touching no
+Statement, no Fact, no step and no `deps`, and confirmed by `impact-audit` to
+change zero public interfaces, still invalidates 31 frozen contexts** — 30 of
+them items I never opened. Page-granular context and item-granular repair are
+mismatched, and the cost of that mismatch is 60 judge calls per prose fix.
+
+## Handed back to the orchestrator
+
+1. **The 31-item targeted rejudge above.** Alpha cannot launch judge children
+   (the wave-1b `EPERM` finding stands).
+2. **`research/audit/wave5-spine-audit.json` still does not exist**, so
+   `level-coverage --verify-current-context` still cannot run. Unchanged from
+   round 1; waves 2 and 4 produced one.
+3. **`research/audit/RESUME.md` is still headed WAVE 4** with wave 4's A7 as its
+   "EXACT NEXT ACTION". Wave 5 has now run A0 through A8 round 2 without that
+   file being updated once. I raised this at round 1; it is worse now, because a
+   resumed session reading it would not learn that A8 has run at all.
+
+**Exact next action:** orchestrator runs the 31-item rejudge, then A9 and A10.
+No A8 adjudication is outstanding: 102 rows, one per current rejection, none
+unadjudicated.

@@ -14,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -86,8 +87,10 @@ is false for sequences in general.
   the subsequence is boundedness, inherited from the sequence, and not a bound on
   a particular side.
 
-- **Neither hypothesis can be dropped.** Without monotonicity the converse
-  direction fails, by [[fs-bounded-implies-convergent]]. Without boundedness the
-  forward direction is what fails, and it fails in the describable way recorded
-  by [[lem-monotone-unbounded-diverges]]: a nondecreasing unbounded sequence
-  diverges to $+\infty$.
+- **Monotonicity cannot be dropped.** Without it the converse direction fails,
+  by [[fs-bounded-implies-convergent]]. The forward direction is not in the same
+  position: it holds for every sequence, monotone or not, so there is no
+  hypothesis to drop from it. What monotonicity adds there is sharpness rather
+  than validity, and the sharpened form is recorded by
+  [[lem-monotone-unbounded-diverges]]: an unbounded nondecreasing sequence does
+  not merely fail to converge, it diverges to $+\infty$.
