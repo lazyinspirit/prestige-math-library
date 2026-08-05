@@ -850,3 +850,51 @@ it and is unchanged.
 2026-08-05): 6 read-only `claude-sonnet-5` certifiers and 4 tool-less DeepSeek
 V4 Pro `audit-refuter` lanes on Alpha-assembled context. Full record in
 `research/audit/wave4-A8-round2.md`.
+
+---
+
+## A8 round 3 — 2026-08-05 (Alpha, `claude-opus-5`)
+
+**Substage:** A8, third adjudication round. **Complete.** Full report:
+`research/audit/wave4-A8-round3.md`.
+
+**Recovery receipt.** Read before acting: `CLAUDE.md`, the A8-round-3 dispatch
+brief, `research/audit/wave4-A8-round2.md` (rounds 1–2 record, incl. §6
+`thm-konig`), `wave4-judge-adjudications.jsonl`, `wave4-judge.jsonl` (all
+`def-cofinality` verdicts), `wave4-touches.json` snapshot labels,
+`tools/step8-guard.mjs`, `tools/item-hash.mjs`, `tools/impact-audit.mjs`,
+`tools/dispatch.mjs`, and on disk `items/def-cofinality.md`,
+`items/thm-cofinality-basics.md`, `items/thm-regularity-of-the-alephs.md`,
+`items/fs-every-aleph-is-regular.md`, `items/def-cofinal-subset-of-an-ordinal.md`,
+`items/def-subnet.md`. Baseline verified: commit `9448c62`, tree clean under
+`items/` at round start.
+
+**Owned artifacts this round:** `research/audit/wave4-A8-round3.md`,
+`research/audit/wave4-a8-round3-impact-audit.json`, one adjudication row, one
+repaired clause in `items/def-cofinality.md`, dispatch records
+`audit-refuter-a8r3-cofinality-{blind,focused}`, `certifier-a8r3-def-cofinality`,
+briefs `audit-refuter-a8r3.brief.md` / `certifier-a8r3.brief.md`, task files
+`task-a8r3-*.md`, snapshots `pre-a8-round3-alpha` / `post-a8-round3`.
+
+**Decision:** `def-cofinality` / `deepseek-v4-pro` / `213fc8ea…` →
+**`confirmed_fatal`** (`other`), pre-edit `item_sha256` `4f1fbb6b…`. First Remark
+asserted, on its natural reading, that cf(α)=α at every infinite cardinal — the
+proposition `fs-every-aleph-is-regular` carries as FALSE on the same page.
+Repaired in one clause, certified by an independent `claude-sonnet-5` lane after
+the stale stamp was deleted pre-edit.
+
+**Gates:** `step8-guard` 1/1 licensed; `impact-audit` exit 0, 11/11
+`still-licensed`; `depcheck` OK; `precheck` clean.
+
+**Open, carried out of A8 (no licence to edit, owner queue):** `thm-konig`
+Remark (from round 2); `def-cofinality` Remark 4 heading "Only one notion of
+'cofinal' exists in this library", falsified by `def-subnet`'s eventually-cofinal
+index maps. Both are the same class, now six in wave 4 — see round-3 report §5,
+which proposes the A10 gate.
+
+**Exact next action (orchestrator's, not Alpha's):** targeted rejudge of
+`def-cofinality` alone at `context_sha256`
+`7588c88d630684842278476950414de2c4d848d9ac47066c7219ed9ecf85a5bb`,
+`item_sha256` `3515524fe4ea9be1dd9ab0b392d44e5e48f16cdd9b3011a4603e5268ef404e70`,
+then `apply-judge-stamps.mjs --audit-targeted-rejudges`. No `verification.judge`
+was written by Alpha.

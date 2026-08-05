@@ -14,6 +14,13 @@ landmark: true
 short: "$\\operatorname{cf}(\\alpha)$; regular, singular"
 verification:
   precheck: n/a
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: 7588c88d630684842278476950414de2c4d848d9ac47066c7219ed9ecf85a5bb
+    item_sha256: c4b480df34422d906befd733c03ff7402001f9358b2ebe337acc15a1a28385eb
   verified:
     model: claude-sonnet-5
     verdict: certify
@@ -64,9 +71,10 @@ of $\operatorname{cf}$ applies to every ordinal, and it must, because the
 construction quantifies over maps into $\alpha$ of every length. But
 $\operatorname{cf}(\alpha) = \alpha$ is an uninteresting condition on a general
 ordinal: it fails at $\omega + 1$ and at $\omega \cdot 2$ for reasons that have
-nothing to do with size, and it holds only at $0$, at $1$, and at those ordinals
-that are already infinite cardinals. Calling an ordinal regular would therefore
-say nothing new, which is why the words are attached to cardinals here.
+nothing to do with size, and it holds only at $0$, at $1$, and at infinite
+cardinals, where it is exactly the regularity defined above and so fails at every
+singular one. Calling an ordinal regular would therefore say nothing new, which
+is why the words are attached to cardinals here.
 
 **What a singular cardinal is, in one sentence.** A cardinal that is reachable
 from below by fewer than $\kappa$ steps: there is a strictly increasing family of
