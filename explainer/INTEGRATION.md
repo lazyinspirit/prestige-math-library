@@ -13,7 +13,8 @@ so editing an animation and saving it is the deploy. No rebuild, no restart.
 
 They share a palette and a set of conventions deliberately: one hue per role,
 matte black ground, one annotation line at a time. The second is the first one's
-step 5 to 8, opened up — and it is timed to 56 seconds so it can also be filmed
+step 5 to 8, opened up — and it is timed to 48.5 seconds, opening on the item and
+ending on the finished board with no title or end card, so it can also be filmed
 (see *Filming a page* below).
 
 Three small changes are needed in **`prestige-intelligence`**, and only one of
@@ -153,10 +154,12 @@ resolves puppeteer and ffmpeg from `--modules` (or `$RENDER_MODULES`) precisely
 so that **this repository stays dependency-free**: it is bind-mounted onto the
 serving path, and nothing on that path may acquire a `node_modules`.
 
-Two constraints if you retime the film: keep it **under 60 seconds**, which is
-comfortably inside every social-video limit and is why the run is 56, and keep
-body type at or above **26 world units** — at 1920 wide, that is the floor for
-legibility once a phone downscales the frame.
+Three constraints if you retime the film. Keep it **under 60 seconds**, which is
+comfortably inside every social-video limit and is why the run is 48.5. Keep body
+type at or above **26 world units** — at 1920 wide, that is the floor for
+legibility once a phone downscales the frame. And keep **frame 0 fully drawn**:
+the head cues in `T` are negative on purpose, so the opening frame already shows
+the item and works as a poster frame, which a fade from black would not.
 
 ## Editing the animations
 

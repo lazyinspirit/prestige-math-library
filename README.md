@@ -30,7 +30,8 @@ the app repo). This repo never runs a server; GitHub is backup and review only.
   0 to 10, at low magnification; `authoring-and-repair.html` animates a single
   item at high magnification — one real proof authored, stratified into phases by
   `precheck`, rejected by a judge, adjudicated, repaired, and rejudged — and runs
-  56 seconds so it can also be filmed. `explainer/INTEGRATION.md` has the app-side
+  48.5 seconds, with no title or end card, so it can also be filmed.
+  `explainer/INTEGRATION.md` has the app-side
   routes and the `/library` links; `node explainer/serve.mjs` previews both on
   `localhost:3000` with nothing installed. `explainer/render-video.mjs` captures
   either page to an MP4 (H.264 / yuv420p / faststart, the profile X accepts)

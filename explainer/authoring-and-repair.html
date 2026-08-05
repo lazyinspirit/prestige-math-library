@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Authoring a proof, and repairing one — the phase-stratified format</title>
-<meta name="description" content="A 56-second animated walkthrough of one real library item: how a proof is authored, how precheck stratifies it into phases, how a judge rejection is adjudicated, and how a repair re-stratifies the graph." />
+<meta name="description" content="A 48-second animated walkthrough of one real library item: how a proof is authored, how precheck stratifies it into phases, how a judge rejection is adjudicated, and how a repair re-stratifies the graph." />
 <style>
 /* ---------------------------------------------------------------------------
    COMPANION to build-workflow.html, and deliberately its opposite in scope.
@@ -86,13 +86,13 @@ body.film canvas { position: fixed; inset: 0; width: 1920px; height: 1080px; bor
 <canvas id="stage" width="1920" height="1080" aria-label="Animated walkthrough of authoring and repairing a phase-stratified proof"></canvas>
 <div class="wrap">
   <h1>Authoring a proof, and repairing one
-    <span class="sub">Fifty-six seconds on a single item — <span class="mono">lem-cauchy-bounded</span> — from a Beta's draft, through the phase stratification <span class="mono">precheck</span> enforces, to a judge rejection, an adjudication, a repair that changes the graph, and the targeted rejudge that closes it.</span>
+    <span class="sub">Forty-eight seconds on a single item — <span class="mono">lem-cauchy-bounded</span> — from a Beta's draft, through the phase stratification <span class="mono">precheck</span> enforces, to a judge rejection, an adjudication, a repair that changes the graph, and the targeted rejudge that closes it.</span>
   </h1>
   <div class="stage"><span id="slot"></span></div>
   <div class="bar">
     <button class="play" id="play" type="button">❚❚ Pause</button>
     <div class="scrub" id="scrub"><i id="scrubi"></i></div>
-    <div class="clock" id="clock">0:00 / 0:56</div>
+    <div class="clock" id="clock">0:00 / 0:48</div>
   </div>
   <p class="foot">The item is real and published: its facts, citations, final step labels and bracket tags are what is on disk in
     <span class="mono">items/lem-cauchy-bounded.md</span>, with the step prose condensed to fit a frame. The layering is the
@@ -378,33 +378,35 @@ const bandCount = (st, band) => {
    3. TIMELINE — seven acts on one clock. Nothing re-enters; every value is
       read from t alone.
    ========================================================================= */
+/* No title card and no end card (owner, 2026-08-05): frame 0 is already the
+   item — id, statement, facts — and the film ends on the clean board. The head
+   cues are therefore negative, so they read as fully arrived at t = 0 and the
+   first thing that MOVES is the proof being written. It also makes frame 0 a
+   usable poster frame, which a fade from black would not be. */
 const ACTS = [
-  { n: "", name: "", t0: 0.0, t1: 3.0 },
-  { n: "1", name: "Author", who: "Beta 12-1 — the agent that scaffolded this pair", t0: 3.0, t1: 14.5 },
-  { n: "2", name: "Stratify", who: "precheck — mechanical, and free", t0: 14.5, t1: 27.5 },
-  { n: "3", name: "Judge", who: "two lanes, one frozen context", t0: 27.5, t1: 34.5 },
-  { n: "4", name: "Adjudicate", who: "Alpha-12 — the sole adjudicator", t0: 34.5, t1: 41.0 },
-  { n: "5", name: "Repair", who: "Alpha-12, licensed by confirmed_fatal", t0: 41.0, t1: 48.5 },
-  { n: "6", name: "Rejudge", who: "the changed item only", t0: 48.5, t1: 53.5 },
-  { n: "", name: "", t0: 53.5, t1: 56.0 },
+  { n: "1", name: "Author", who: "Beta 12-1 — the agent that scaffolded this pair", t0: -0.8, t1: 8.4 },
+  { n: "2", name: "Stratify", who: "precheck — mechanical, and free", t0: 8.4, t1: 21.2 },
+  { n: "3", name: "Judge", who: "two lanes, one frozen context", t0: 21.2, t1: 28.2 },
+  { n: "4", name: "Adjudicate", who: "Alpha-12 — the sole adjudicator", t0: 28.2, t1: 34.7 },
+  { n: "5", name: "Repair", who: "Alpha-12, licensed by confirmed_fatal", t0: 34.7, t1: 42.2 },
+  { n: "6", name: "Rejudge", who: "the changed item only", t0: 42.2, t1: 48.5 },
 ];
-const TOTAL = 56.0;
+const TOTAL = 48.5;
 const actAt = (t) => { for (let i = 0; i < ACTS.length; i++) if (t < ACTS[i].t1) return ACTS[i]; return ACTS[ACTS.length - 1]; };
 
 /** every animated moment in the film, in one table */
 const T = {
-  boardIn: 2.4,
-  header: 3.2, title: 3.9, facts: 4.5, verif: 5.6,
-  step0: 6.2, stepGap: 1.25, stepDur: 0.85,
-  precheck: 15.0, repairVerdict: 16.4,
-  node0: 17.4, nodeGap: 0.74,
-  migrate: 22.4, migrateDur: 2.4, relabel: 23.0, retag: 24.6,
-  rerun: 26.0, pass: 26.9,
-  freeze: 28.0, lanes: 28.9, laneVerdict: 31.0, reject: 31.6,
-  alphaIn: 35.0, outcomes: 35.8, pick: 37.6, hashRow: 39.0,
-  insert: 42.0, restrat: 42.0, restratDur: 1.7, retag2: 43.2, pass2: 44.6,
-  rj: 49.0, rjDone: 50.6, stamp: 51.6,
-  endcard: 53.7,
+  boardIn: -0.6,
+  header: -0.8, title: -0.7, facts: -1.2, verif: -0.6,
+  step0: 0.7, stepGap: 1.15, stepDur: 0.8,
+  precheck: 8.7, repairVerdict: 10.1,
+  node0: 11.1, nodeGap: 0.74,
+  migrate: 16.1, migrateDur: 2.4, relabel: 16.7, retag: 18.3,
+  rerun: 19.7, pass: 20.6,
+  freeze: 21.7, lanes: 22.6, laneVerdict: 24.7, reject: 25.3,
+  alphaIn: 28.7, outcomes: 29.5, pick: 31.3, hashRow: 32.7,
+  insert: 35.7, restrat: 35.7, restratDur: 1.7, retag2: 36.9, pass2: 38.3,
+  rj: 42.7, rjDone: 44.3, stamp: 45.3,
 };
 
 /* =========================================================================
@@ -763,20 +765,20 @@ function finding(t, a) {
    7. ANNOTATION AND CAPTION
    ========================================================================= */
 const NOTES = [
-  [4.8, 9.0, "the Beta that scaffolded the pair authors it — never a fresh agent", C.beta],
-  [9.4, 14.2, "every step cites a fact, an earlier step, or elementary algebra", C.beta],
-  [15.4, 19.5, "precheck is mechanical and free: it reads the citations, not the mathematics", C.gate],
-  [19.9, 23.4, "layer(s) = 1 + the highest layer among the steps s cites", C.ink],
-  [23.7, 25.9, "the ∎ step is pinned one phase above every other", C.alpha],
-  [26.2, 27.4, "adopt the printed canonical form, then re-run until clean", C.ok],
-  [28.4, 31.2, "the text is frozen and hashed once; both lanes read the same bytes", C.ink],
-  [31.9, 34.3, "a rejection is evidence, not an instruction", C.judgeA],
-  [35.4, 38.9, "three outcomes — only confirmed_fatal may touch the text", C.alpha],
-  [39.4, 40.9, "the row carries item_sha256, so the licence names the exact text", C.alpha],
-  [41.4, 45.2, "the missing case: for n < N the bound was never discharged", C.bad],
-  [45.6, 48.3, "a new step changes the graph, so the phases are computed again", C.ink],
-  [49.2, 51.2, "only the changed item is rejudged, on its new frozen context", C.ink],
-  [51.6, 53.4, "a pass is recorded only when both models passed the text", C.ok],
+  [1.2, 4.6, "the Beta that scaffolded the pair authors it — never a fresh agent", C.beta],
+  [5.0, 8.2, "every step cites a fact, an earlier step, or elementary algebra", C.beta],
+  [9.1, 13.2, "precheck is mechanical and free: it reads the citations, not the mathematics", C.gate],
+  [13.6, 17.1, "layer(s) = 1 + the highest layer among the steps s cites", C.ink],
+  [17.4, 19.6, "the ∎ step is pinned one phase above every other", C.alpha],
+  [19.9, 21.1, "adopt the printed canonical form, then re-run until clean", C.ok],
+  [22.1, 24.9, "the text is frozen and hashed once; both lanes read the same bytes", C.ink],
+  [25.6, 28.0, "a rejection is evidence, not an instruction", C.judgeA],
+  [29.1, 32.6, "three outcomes — only confirmed_fatal may touch the text", C.alpha],
+  [33.1, 34.6, "the row carries item_sha256, so the licence names the exact text", C.alpha],
+  [35.1, 38.9, "the missing case: for n < N the bound was never discharged", C.bad],
+  [39.3, 42.0, "a new step changes the graph, so the phases are computed again", C.ink],
+  [42.9, 44.9, "only the changed item is rejudged, on its new frozen context", C.ink],
+  [45.3, 47.1, "a pass is recorded only when both models passed the text", C.ok],
 ];
 function annotate(t, a) {
   for (let i = 0; i < NOTES.length; i++) {
@@ -801,55 +803,7 @@ function caption(t, a) {
 }
 
 /* =========================================================================
-   8. TITLE AND END CARDS
-   ========================================================================= */
-function gradientText(s, x, y, size, a) {
-  const w = measure(s, { size: size, weight: 700 });
-  const grd = g.createLinearGradient(x - w / 2, 0, x + w / 2, 0);
-  grd.addColorStop(0, "#ffffff");
-  grd.addColorStop(0.46, "#ffd9b8");
-  grd.addColorStop(1, "#9fd0ff");
-  g.save();
-  g.globalAlpha = a;
-  g.font = FONT({ size: size, weight: 700 });
-  g.textAlign = "center"; g.textBaseline = "middle";
-  g.fillStyle = grd;
-  g.fillText(s, x, y);
-  g.restore();
-}
-function titleCard(t) {
-  const a = 1 - A(t, 2.2, 0.8);
-  if (a <= 0.01) return;
-  g.save();
-  g.globalAlpha = a;
-  g.fillStyle = "rgba(8,9,11,0.95)";
-  g.fillRect(0, 0, W, H);
-  g.restore();
-  const rise = easeOut(A(t, 0.15, 1.0));
-  gradientText("Authoring a proof, and repairing one", W / 2, 446 + (1 - rise) * 22, 64, a * rise);
-  text("the phase-stratified format the library's precheck enforces — on one real item",
-    W / 2, 524, { size: 29, weight: 500, color: C.muted, align: "center", alpha: a * A(t, 0.5, 0.9) });
-  const ck = a * A(t, 1.0, 0.9);
-  chip("lem-cauchy-bounded", W / 2, 596, { align: "center", mono: true, size: 22, h: 42, color: C.beta, alpha: ck });
-  text("app.prestige-intelligence.cc/library", W / 2, 674, { size: 21, weight: 600, mono: true, color: C.faint, align: "center", alpha: ck });
-}
-function endCard(t) {
-  const a = A(t, T.endcard, 0.7);
-  if (a <= 0.01) return;
-  g.save();
-  g.globalAlpha = a;
-  g.fillStyle = "#08090b";
-  g.fillRect(0, 0, W, H);
-  g.restore();
-  gradientText("Every step licensed. Every phase earned.", W / 2, 442, 56, a);
-  text("authored → stratified → judged → adjudicated → repaired → rejudged", W / 2, 522,
-    { size: 25, weight: 500, mono: true, color: C.muted, align: "center", alpha: a * A(t, T.endcard + 0.4, 0.7) });
-  text("app.prestige-intelligence.cc/library", W / 2, 604,
-    { size: 27, weight: 700, mono: true, color: C.orchestrator, align: "center", alpha: a * A(t, T.endcard + 0.8, 0.7) });
-}
-
-/* =========================================================================
-   9. PER-STEP STATE — position, label and tag, all functions of t.
+   8. PER-STEP STATE — position, label and tag, all functions of t.
    ========================================================================= */
 /** a crossfade that settles: once it completes, the new value is simply the
     value, drawn in the resting colour — a renumbered label must not stay lit. */
@@ -903,13 +857,13 @@ function rowStateFor(step, t, i) {
 }
 
 /* =========================================================================
-   10. THE FRAME
+   9. THE FRAME
    ========================================================================= */
 function draw(t) {
   TT = t;
   background();
 
-  const a = A(t, T.boardIn, 0.9) * (1 - A(t, T.endcard, 0.6));
+  const a = A(t, T.boardIn, 0.6);
   const post = t >= T.insert - 0.4;
   const st = post ? ST2 : ST1;
 
@@ -955,16 +909,14 @@ function draw(t) {
   finding(t, a);
   annotate(t, a);
 
-  text("prestige intelligence · math library", 60, CREDIT_Y, { size: 18, weight: 600, color: rgba(C.faint, 0.8), alpha: a * 0.9 });
+  text("app.prestige-intelligence.cc/library", 60, CREDIT_Y, { size: 18, weight: 600, color: rgba(C.faint, 0.8), alpha: a * 0.9 });
   text("LEVELS.md steps 5–8 · worker/src/precheck.ts", W - 60, CREDIT_Y,
     { size: 18, weight: 500, mono: true, color: rgba(C.faint, 0.7), align: "right", alpha: a * 0.9 });
 
-  titleCard(t);
-  endCard(t);
 }
 
 /* =========================================================================
-   11. PLAYER / FILM MODE
+   10. PLAYER / FILM MODE
    ========================================================================= */
 const FILM = new URLSearchParams(location.search).has("film");
 let T_NOW = 0, playing = true, last = 0;
