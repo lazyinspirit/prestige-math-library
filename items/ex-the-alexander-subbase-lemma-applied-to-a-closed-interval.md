@@ -15,6 +15,13 @@ short: "Alexander applied to $[0,1]$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: 98a0241c30b6f7ca70092005a416a7f5b606f41b942ff530af0719863b4bff55
+    item_sha256: 963d652b5c9fd033655537f6a6ecf2d62836e4b92740532394cbb20412aeab12
   verified:
     model: claude-sonnet-5
     verdict: certify

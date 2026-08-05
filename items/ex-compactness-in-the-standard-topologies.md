@@ -15,6 +15,13 @@ short: "compactness of the standard topologies"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: a00af4c9819a8097e3ab1e05c1fb041036aea33da9439d783cf9a24316ad9545
+    item_sha256: 95c2d5821e6060081f56995294f057e3741d2d4069e81ab3697880c4b26e6284
   verified:
     model: claude-sonnet-5
     verdict: certify

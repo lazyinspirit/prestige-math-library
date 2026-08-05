@@ -15,6 +15,13 @@ short: "locally compact Hausdorff basics"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: fed33be93bde8ad99046a35036889ffdf0f68d494b5b8b2a7c60c15811f23d3d
+    item_sha256: 5723c87cc24e160742c8ba282d62cb7b5ad7e5a2247478a5ecddf2cb051e796b
   verified:
     model: claude-sonnet-5
     verdict: certify

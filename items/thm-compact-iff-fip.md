@@ -15,6 +15,13 @@ short: "compact iff the FIP condition"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: 57fe31f2e7f11f5d665c37210d393d77626e81f5a27ef8abaeaaae585660b180
+    item_sha256: 4201165cbda0f675c940e878e76b3a90247f9408ade85442b8c945e75a305911
   verified:
     model: claude-sonnet-5
     verdict: certify

@@ -15,6 +15,13 @@ short: "$\\aleph(\\kappa)$ is the least cardinal above $\\kappa$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "claude-sonnet-5 + deepseek-v4-pro"
+    verdict: pass
+    date: 2026-08-05
+    scope: published-audit-targeted
+    context_sha256: 3040be9b00229f39a602d4c0d1342e12baadab71af6d56a57c8e155950bcbe85
+    item_sha256: da00ef029d47201d1b4f551e98b18fb47118ff44570e73ef79ee8ec90767f37c
   verified:
     model: claude-sonnet-5
     verdict: certify

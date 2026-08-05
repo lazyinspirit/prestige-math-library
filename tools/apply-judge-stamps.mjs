@@ -112,8 +112,26 @@ if (models.length !== 2) {
   console.error(`expected exactly two judge lanes in ${ledgerPath}, found: ${models.join(', ') || 'none'}`);
   process.exit(2);
 }
-if (targetedReceiptPath && JSON.stringify(models) !== JSON.stringify(['deepseek-v4-pro', 'gpt-5.6-terra'])) {
-  console.error(`audit targeted rejudge stamps require the DeepSeek/Terra lanes; found: ${models.join(', ')}`);
+// The targeted-rejudge path must stamp only a lineup the wave actually ran, and
+// that lineup is now configuration rather than a constant: the second lane moved
+// Terra -> Sonnet 5 on 2026-08-04 (owner) and this check was not moved with it,
+// so a correct 12-call rejudge under `deepseek+sonnet` was refused as if the
+// lanes were wrong. Resolve it the way judge.mts, judge-sweep.mjs and
+// level-coverage.mjs already do, so one env var stays the single source of truth
+// and a future lane change cannot desynchronise this file again.
+const LINEUPS = Object.freeze({
+  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
+  'deepseek+opus': ['claude-opus-5', 'deepseek-v4-pro'],
+  'deepseek+sonnet': ['claude-sonnet-5', 'deepseek-v4-pro'],
+});
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+sonnet';
+const expected = LINEUPS[lineupName];
+if (!expected) {
+  console.error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(', ')}; got ${lineupName}`);
+  process.exit(2);
+}
+if (targetedReceiptPath && JSON.stringify(models) !== JSON.stringify([...expected].sort())) {
+  console.error(`audit targeted rejudge stamps require the ${lineupName} lanes (${expected.join(', ')}); found: ${models.join(', ')}`);
   process.exit(2);
 }
 
