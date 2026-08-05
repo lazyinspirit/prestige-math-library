@@ -694,6 +694,22 @@ the audit receipt and repeat the final `level-coverage.mjs
 --verify-current-context` gate after its targeted paired rejudge. A stale
 receipt or pair of ledger rows is not publication evidence.
 
+**The rejudge is item-granular, not page-granular (owner, 2026-08-06).** The
+judge's context unit is the whole A/B pair, so repairing one item moves the
+frozen context hash of every item on that pair. Read strictly, that forced a
+rejudge of every untouched sibling. `judge.mts` now records `item_sha256` on
+every verdict beside `context_sha256`, and `level-coverage` accepts a verdict
+pair cast against **byte-identical text of that item** even when the pair
+context has moved. A repaired item is never covered that way — its own hash
+changed, so it always rejudges — but its unedited page-mates are spared. Ledger
+rows predating the field fall back to the strict context comparison and cannot
+benefit. Alpha must therefore **report the exact ids it edited**: that list is
+the rejudge set, and an unnamed repair reaches step 10 carrying a verdict cast
+against text that no longer exists. This is the same rule and the same mechanism
+as `AUDIT-WORKFLOW.md` §A8, which measured it: 2 repairs staled all 31 items on
+a pair, 12 of which cited the repaired items nowhere, and 10 repairs across four
+rounds cost ~130 rejudge calls.
+
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.
 Remark prose is where falsehoods hide.
 

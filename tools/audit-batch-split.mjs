@@ -6,11 +6,11 @@
 // WHY THIS EXISTS. `rounds.mjs --audit-batches` emits one manifest per category
 // per wave. That is raw SCOPE, not a work assignment: the two-A/B-pair capacity
 // rule binds the Audit-Beta assigned to a batch, so a generated manifest wider
-// than two pairs is not a legal batch (AUDIT-WORKFLOW.md §4). Nothing mechanical
-// catches it — `content-policy.mjs --audit` deliberately does not raise
-// `batch-a-pair-cap`, because the cap is a property of the assignment rather
-// than of the manifest text. So an over-cap manifest reaches A2 looking fine and
-// hands one Beta five pairs.
+// than two pairs is not yet a work assignment (AUDIT-WORKFLOW.md §4). It is not
+// an illegal manifest, and nothing mechanical rejects it: `content-policy.mjs`
+// skips `batch-a-pair-cap` under `--audit` by deliberate design, because the cap
+// is a property of the assignment rather than of the manifest text. So an
+// over-cap manifest reaches A2 looking fine and hands one Beta five pairs.
 //
 // Splitting used to be a manual A0 step, which meant the driver's own A0
 // regenerated straight over it: wave 5's topology manifest is five pairs, and a

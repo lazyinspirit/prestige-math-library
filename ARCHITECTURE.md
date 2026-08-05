@@ -951,7 +951,8 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `codex-judge.md` | DeepSeek V4 Pro + Claude Sonnet 5 judges, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
 | `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
 | `audit-beta.md` | Audit-Beta, audit steps A1/A2/A4 (`AUDIT-WORKFLOW.md`) | provenance determination table, evidence ledger row contract, citation-precision duties, full proof-contract capture (D1), repair classes and A3 approval boundary |
-| `audit-alpha.md` | audit Alpha, audit steps A6/A8 | sole-adjudicator role, D2 concurrences, refuter dispatch, cross-edge audit, genrisk dispositions, exact-hash judge adjudication |
+| `audit-alpha.md` | audit Alpha, audit steps A6/A8 | sole-adjudicator role, D2 concurrences, refuter dispatch, cross-edge audit, genrisk dispositions, exact-hash judge adjudication, the item-granular rejudge set |
+| `audit-orchestrator.md` | the orchestrator itself, audit steps A3/A9 | the two judgment steps and only those: A3 proposal adjudication with its fixed decision priority, the A9 scope-denial re-grep and published-claim-decay sweep, the decision-receipt contract, and the duty to refuse a wrong dispatch nonzero. Exists because wave 4 dispatched `audit-alpha.md` — a different role — to a judgment step |
 
 **Beta proof-design backstop (owner, 2026-07-31).** The scaffold and authoring
 briefs require a proof-obligation map, a boundary-case pass, step-level

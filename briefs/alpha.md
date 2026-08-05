@@ -240,6 +240,23 @@ only on what changed. A public-interface repair also re-runs `impact-audit.mjs`
 and repeats the final `level-coverage.mjs --verify-current-context` gate after
 its targeted paired rejudge; a stale receipt is not publication evidence.
 
+> **REPORT EXACTLY WHICH ITEMS YOU EDITED — that list IS the rejudge set**
+> (owner, 2026-08-06). "Only what changed" is now item-granular, not
+> page-granular: `judge.mts` records `item_sha256` on every verdict, and
+> `level-coverage` accepts a pair cast against byte-identical text of that item
+> even when the A/B pair's frozen context moved. A repaired item always
+> rejudges, because its own hash changed. Its **unedited page-mates do not**.
+>
+> So **name the edited items explicitly**, as a plain list of ids: the
+> orchestrator rejudges that list, and an item you repaired but did not name
+> reaches step 10 carrying a verdict cast against text that no longer exists.
+> And **batch your repairs per item, not per visit** — finishing an item in one
+> pass costs one rejudge, returning to it later costs another.
+>
+> Measured on the audit side before the fix: 2 repairs staled all 31 items on a
+> pair, 12 of which cited the repaired items nowhere, and 10 repairs cost ~130
+> rejudge calls.
+
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.
 Remark prose is where falsehoods hide.
 

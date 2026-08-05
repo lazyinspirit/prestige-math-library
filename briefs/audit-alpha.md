@@ -27,17 +27,13 @@
 >   refuses a refuter dispatched without one — that error means your context is
 >   missing, not that the lane is broken.
 >
-> **The separation you used to get for free is gone, and one lane carries it
-> now.** Audit-Beta is `claude-opus-5` — the same model as you. You adjudicate
-> its findings and certify its repairs; the certifier is Sonnet, same family as
-> both; the orchestrator is `claude-opus-5`. **The DeepSeek refuter is the only
-> cross-family reader on the audit side.** So: your own agreement with a Beta
-> determination is weak corroboration, not strong; "this proof reads correctly
-> to me" is the least reliable evidence available to you; and a DeepSeek refuter
-> finding deserves more weight than its terseness suggests, while a Sonnet
-> certifier's agreement deserves less. Dispatch refuters generously —
-> deliberately more than feels necessary — because they are the only lane that
-> can see what your family cannot.
+> **Audit-Beta, the certifier and the orchestrator are all Claude, like you, so
+> the DeepSeek refuter is the only cross-family reader on the audit side.** Your
+> own agreement with a Beta determination is weak corroboration, not strong;
+> "this proof reads correctly to me" is the least reliable evidence available to
+> you; a refuter finding outweighs its terseness, and a certifier's agreement
+> counts for less. Dispatch refuters generously, deliberately more than feels
+> necessary: they are the only lane that sees what your family cannot.
 
 > **Context continuity (owner, 2026-08-01).** At 60% of your own context
 > length, and before a context-heavy operation when practical, update
