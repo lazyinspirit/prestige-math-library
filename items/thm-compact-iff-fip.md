@@ -16,15 +16,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: claude-sonnet-5
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-05
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -93,7 +89,7 @@ bijection, so no member of a family ever has to be selected.
 
 ## Remarks
 
-**What the condition says, and why it is the useful form.** Compactness in the open-cover form is a statement about families that already cover; the closed-set form is a statement about families that already have all their finite intersections nonempty. In practice the second is easier to apply, because a nested family of nonempty closed sets has the finite intersection property for free, and the theorem then produces a point lying in all of them at once. That is how it is used below in [[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]].
+**What the condition says, and why it is the useful form.** Compactness in the open-cover form is a statement about families that already cover; the closed-set form is a statement about families that already have all their finite intersections nonempty. In practice the second is easier to apply, because a nested family of nonempty closed sets has the finite intersection property for free, and the theorem then produces a point lying in all of them at once. That is how it is used below in [[thm-baire-category-locally-compact-hausdorff]], whose step 7.1 turns a decreasing sequence of nonempty closed sets into a point common to all of them. [[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]] uses the theorem in the opposite direction: from a family of closed sets whose intersection is empty it extracts a finite subfamily whose intersection is already empty.
 
 **The finite intersection property is not a topological notion.** [[def-finite-intersection-property]] is a condition on an arbitrary family of subsets of a set, and [[lem-fip-generates-filter]] shows it is exactly the condition for the family to sit inside a filter. The topology enters this theorem only through the word "closed"; the theorem is that compactness of the topology is what makes that combinatorial condition detect a common point.
 

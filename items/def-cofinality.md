@@ -14,6 +14,12 @@ landmark: true
 short: "$\\operatorname{cf}(\\alpha)$; regular, singular"
 verification:
   precheck: n/a
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

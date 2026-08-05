@@ -808,3 +808,45 @@ asked for Sonnet's precision to be re-measured at this comparison.
 
 Dispatch 14 read-only Sol lanes, one per rejection, then adjudicate each from
 disk with a fix and a named defect or a refutation and a verbatim quote.
+
+---
+
+# A8 ROUND 2 — recovery receipt and continuation (Alpha, `claude-opus-5`, 2026-08-05)
+
+**Recovery completed before any action**, per `briefs/audit-alpha.md`
+§"Mandatory recovery".
+
+**Read in full:** `CLAUDE.md`, `AUDIT-WORKFLOW.md`, `research/audit/RESUME.md`
+(wave-4 section and the wave-3/2/1b history it supersedes),
+`research/audit/wave4-A8-round2-task.md`, this report's §§1–12,
+`research/audit/wave4-published-repairs.md`, and the round-1 certifier record
+`certifier-a8-def-cofinality.result.json`. Ledgers read and reconciled from
+disk: `wave4-judge.jsonl` (329 rows, 182 distinct `(id, model)` pairs),
+`wave4-judge-adjudications.jsonl` (14 rows), `wave4-touches.json`.
+
+**Baseline verified from disk.** `git log --oneline -1` = `fcc99b5`; working tree
+carries the wave's uncommitted item/page changes plus untracked
+`research/audit/wave4-*` and `wave5-*` artifacts. Nothing committed by this
+round.
+
+**The two inherited open actions, both confirmed from disk rather than taken on
+report:**
+
+1. **10 open judge rejections.** Recomputed independently: of 182 distinct
+   `(id, model)` current verdicts, 12 are rejections and 10 have no matching
+   adjudication row. The list matches the dispatch exactly.
+2. **5 published items carrying no verification stamp.** `depcheck.mjs` reports
+   `published-unaudited` on exactly `def-cofinality`,
+   `ex-compactness-in-the-standard-topologies`,
+   `ex-the-alexander-subbase-lemma-applied-to-a-closed-interval`,
+   `lem-successor-cardinal-exists`, `thm-locally-compact-hausdorff-basics`.
+
+**Pre-edit baseline for this round:** `touchlog` snapshot
+`"pre-a8-round2-alpha"` (2767 items, 36th in the ledger), taken before the first
+edit of this round. The orchestrator's own `"pre-a8-round2"` snapshot precedes
+it and is unchanged.
+
+**Lanes dispatched this round** (new all-Claude/DeepSeek lineup, owner
+2026-08-05): 6 read-only `claude-sonnet-5` certifiers and 4 tool-less DeepSeek
+V4 Pro `audit-refuter` lanes on Alpha-assembled context. Full record in
+`research/audit/wave4-A8-round2.md`.
