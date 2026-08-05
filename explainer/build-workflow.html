@@ -4,69 +4,51 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>How a level is built — step 0 to 10</title>
-<meta name="description" content="An animated walkthrough of the per-level build workflow of the Prestige Intelligence math library: batching, scaffolding, authoring, provenance, paired judging, adjudication and the sole owner pause." />
+<meta name="description" content="One continuous animated run of the per-level build workflow of the Prestige Intelligence math library: batching, scaffolding, authoring, provenance, paired judging, adjudication and the sole owner pause." />
 <style>
 /* ---------------------------------------------------------------------------
-   Presentation note. This page borrows the library's frozen visual vocabulary
-   rather than inventing one: translucent glass cards, the per-kind colour map
-   of web/lib/library-kinds.ts, indigo for an ordinary citation, sky + dashed +
-   ↗ for a forward reference, fuchsia + dotted + ‡ for a dependency not proved
-   here. Sky and fuchsia appear ONLY in those two reserved meanings. No webfont
-   is fetched; naming ui-rounded degrades to system-ui exactly as the app does.
+   ONE RUN, NOT ELEVEN CLIPS. The board is a single agent mesh that exists for
+   the whole runtime. Nothing is torn down between steps: the camera tracks
+   across the mesh, work keeps flowing on edges behind the camera, and every
+   piece of state — item, gate, ledger row, verdict — is a pure function of the
+   clock. That is what makes seeking to step 7 legal: there is no scene to
+   re-enter, only a time to evaluate.
 
-   TYPE SIZE. The stage is a 1600x820 world scaled to fit its box, so a world
-   unit renders at roughly 0.85 CSS px on a full-width desktop. Every size in
-   the canvas is therefore chosen in world units at ~2.5x what it would be in
-   CSS, and the amount on screen at once is cut to match: one annotation at a
-   time, six items to a page, two lanes rather than three.
+   PALETTE. Matte black ground, and colour carries meaning rather than
+   decoration: orange is the orchestrator, blue a Beta, violet Alpha, cyan an
+   independent reader, yellow and green the two judge lanes, red a fatal, amber
+   a gate still running. Each hue means one thing.
+
+   TYPE SIZE is unchanged. The stage is the same 1600x820 world, the camera
+   PANS ONLY and never zooms, and every type size is the same number of world
+   units it was before — so a glyph lands at exactly the size it did. What
+   changed is sampling: the backing store is drawn at up to 3.5x device pixels,
+   so the same letterforms resolve instead of smearing.
 --------------------------------------------------------------------------- */
 :root {
-  color-scheme: light dark;
-  --ink: #0f172a;
-  --muted: #475569;
-  --faint: #94a3b8;
-  --bg: #f6f8fb;
-  --bg2: #e9eef5;
-  --glass: rgba(255, 255, 255, 0.58);
-  --glass-2: rgba(255, 255, 255, 0.42);
-  --edge: rgba(15, 23, 42, 0.10);
-  --edge-strong: rgba(15, 23, 42, 0.16);
-  --indigo: #4f46e5;
-  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 32px -12px rgba(15, 23, 42, 0.22);
-  --radius: 1.75rem;
+  color-scheme: dark;
+  --ink: #f2f4f7;
+  --muted: #98a1ad;
+  --faint: #5d6672;
+  --bg: #08090b;
+  --bg2: #0c0e12;
+  --glass: rgba(255, 255, 255, 0.035);
+  --edge: rgba(255, 255, 255, 0.085);
+  --edge-strong: rgba(255, 255, 255, 0.16);
+  --orange: #ff8a3d;
+  --blue: #4aa8ff;
+  --violet: #a78bfa;
+  --cyan: #22d3ee;
+  --yellow: #ffd23f;
+  --green: #3ddc84;
+  --radius: 1.5rem;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ink: #e6edf6; --muted: #9fb0c4; --faint: #64748b;
-    --bg: #0a0f1a; --bg2: #05080f;
-    --glass: rgba(255, 255, 255, 0.055); --glass-2: rgba(255, 255, 255, 0.035);
-    --edge: rgba(255, 255, 255, 0.10); --edge-strong: rgba(255, 255, 255, 0.16);
-    --indigo: #818cf8;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 18px 44px -18px rgba(0, 0, 0, 0.75);
-  }
-}
-:root[data-theme="dark"] {
-  --ink: #e6edf6; --muted: #9fb0c4; --faint: #64748b;
-  --bg: #0a0f1a; --bg2: #05080f;
-  --glass: rgba(255, 255, 255, 0.055); --glass-2: rgba(255, 255, 255, 0.035);
-  --edge: rgba(255, 255, 255, 0.10); --edge-strong: rgba(255, 255, 255, 0.16);
-  --indigo: #818cf8;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 18px 44px -18px rgba(0, 0, 0, 0.75);
-}
-:root[data-theme="light"] {
-  --ink: #0f172a; --muted: #475569; --faint: #94a3b8;
-  --bg: #f6f8fb; --bg2: #e9eef5;
-  --glass: rgba(255, 255, 255, 0.58); --glass-2: rgba(255, 255, 255, 0.42);
-  --edge: rgba(15, 23, 42, 0.10); --edge-strong: rgba(15, 23, 42, 0.16);
-  --indigo: #4f46e5;
-  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 32px -12px rgba(15, 23, 42, 0.22);
-}
-
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
   background:
-    radial-gradient(1200px 620px at 12% -8%, color-mix(in srgb, var(--indigo) 12%, transparent), transparent 62%),
+    radial-gradient(1100px 560px at 8% -10%, rgba(255, 138, 61, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 92% 4%, rgba(74, 168, 255, 0.08), transparent 62%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   background-attachment: fixed;
   color: var(--ink);
@@ -74,247 +56,193 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
-.display { font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif; }
 .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
 
 .wrap { max-width: 1560px; margin: 0 auto; padding: 30px 22px 64px; }
 
-/* ---------- masthead ---------- */
-header.mast { display: flex; align-items: flex-start; gap: 18px; flex-wrap: wrap; }
-header.mast .grow { flex: 1 1 420px; min-width: 300px; }
-h1 { font-size: clamp(27px, 3.2vw, 40px); line-height: 1.12; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
-h1 .sub { display: block; font-size: clamp(15px, 1.35vw, 19px); font-weight: 500; letter-spacing: 0; color: var(--muted); margin-top: 10px; line-height: 1.5; max-width: 70ch; }
-.mast-actions { display: flex; gap: 9px; align-items: center; padding-top: 8px; }
-.backlink { color: var(--muted); text-decoration: none; font-size: 15px; border: 1px solid var(--edge); border-radius: 999px; padding: 9px 17px; background: var(--glass-2); backdrop-filter: blur(10px); font-family: inherit; cursor: pointer; }
-.backlink:hover { color: var(--ink); border-color: var(--edge-strong); }
+h1 {
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; margin: 0 0 4px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #ffffff 8%, #ffd9b8 46%, #9fd0ff 94%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+h1 .sub {
+  display: block; font-size: clamp(15px, 1.35vw, 19px); font-weight: 500;
+  letter-spacing: 0; color: var(--muted); margin-top: 10px; line-height: 1.5;
+  max-width: 70ch; background: none; -webkit-background-clip: border-box;
+  background-clip: border-box; -webkit-text-fill-color: var(--muted);
+}
 
-/* ---------- glass card ---------- */
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid var(--edge);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  position: relative;
-}
-.glass::before {
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; border-radius: var(--radius) var(--radius) 0 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-  opacity: 0.55; pointer-events: none;
-}
-@media (prefers-reduced-transparency: reduce) {
-  .glass { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 22px 50px -24px rgba(0,0,0,.9);
+  backdrop-filter: blur(18px) saturate(140%);
 }
 
-/* ---------- step rail ---------- */
-.rail { margin: 24px 0 14px; display: flex; gap: 7px; flex-wrap: wrap; }
+/* ---------- transport ---------- */
+.bar { margin: 22px 0 12px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.play {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  padding: 9px 17px 9px 14px; border-radius: 999px; font: 600 14px/1 system-ui, sans-serif;
+  color: #0b0c0e; background: linear-gradient(120deg, var(--orange), #ffb066);
+  border: 0; box-shadow: 0 6px 20px -8px rgba(255,138,61,.8);
+}
+.play:hover { filter: brightness(1.06); }
+.clock { font-size: 13px; color: var(--faint); }
+.scrub {
+  flex: 1 1 260px; min-width: 200px; height: 6px; border-radius: 99px;
+  background: rgba(255,255,255,.07); position: relative; cursor: pointer; overflow: hidden;
+}
+.scrub .done { position: absolute; inset: 0 auto 0 0; width: 0%; background: linear-gradient(90deg, var(--orange), var(--yellow)); }
+
+.rail { margin: 6px 0 14px; display: flex; gap: 7px; flex-wrap: wrap; }
 .rail button {
   position: relative; overflow: hidden; cursor: pointer;
-  border: 1px solid var(--edge); background: var(--glass-2); color: var(--muted);
-  border-radius: 13px; padding: 9px 14px 10px; font: 600 14px/1 system-ui, sans-serif;
-  backdrop-filter: blur(10px); transition: color .18s, border-color .18s, transform .18s;
-  display: flex; gap: 8px; align-items: baseline;
+  background: rgba(255,255,255,.03); color: var(--muted);
+  border: 1px solid var(--edge); border-radius: 12px;
+  padding: 8px 12px; font: 500 13.5px/1 system-ui, sans-serif;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: color .15s, border-color .15s, transform .15s;
 }
-.rail button .n { font-family: ui-monospace, monospace; font-size: 13px; opacity: .65; }
+.rail button .n { font-family: ui-monospace, monospace; font-size: 13px; opacity: .6; }
 .rail button:hover { color: var(--ink); border-color: var(--edge-strong); transform: translateY(-1px); }
-.rail button[aria-current="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--indigo) 55%, transparent); }
-.rail button[aria-current="true"] .n { opacity: 1; color: var(--indigo); }
-.rail button .fill { position: absolute; inset: auto 0 0 0; height: 2px; background: var(--indigo); width: 0%; }
-.rail button.done .fill { width: 100%; opacity: .35; }
+.rail button[aria-current="true"] { color: var(--ink); border-color: rgba(255,138,61,.6); background: rgba(255,138,61,.08); }
+.rail button[aria-current="true"] .n { opacity: 1; color: var(--orange); }
+.rail button .fill { position: absolute; inset: auto 0 0 0; height: 2px; background: var(--orange); width: 0%; }
+.rail button.done .fill { width: 100%; opacity: .3; }
 
 /* ---------- stage ---------- */
 .stage { margin-top: 4px; padding: 10px; overflow: hidden; }
-.stage canvas {
-  display: block; width: 100%; aspect-ratio: 1600 / 820;
-  max-height: 78vh; border-radius: calc(var(--radius) - 10px);
-}
-
-/* ---------- controls ---------- */
-.controls { display: flex; align-items: center; gap: 11px; margin-top: 16px; flex-wrap: wrap; }
-.controls button {
-  cursor: pointer; border: 1px solid var(--edge); background: var(--glass);
-  color: var(--ink); border-radius: 999px; height: 44px; min-width: 44px; padding: 0 18px;
-  font: 600 15px/1 system-ui, sans-serif; backdrop-filter: blur(12px);
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-}
-.controls button:hover { border-color: var(--edge-strong); }
-.controls button.primary { background: color-mix(in srgb, var(--indigo) 14%, var(--glass)); border-color: color-mix(in srgb, var(--indigo) 40%, transparent); }
-.controls .speed { display: inline-flex; gap: 2px; border: 1px solid var(--edge); border-radius: 999px; padding: 3px; background: var(--glass-2); }
-.controls .speed button { height: 36px; padding: 0 14px; border: 0; background: transparent; color: var(--muted); font-weight: 600; }
-.controls .speed button[aria-pressed="true"] { background: color-mix(in srgb, var(--indigo) 16%, transparent); color: var(--ink); }
-.scrub { flex: 1 1 180px; height: 5px; border-radius: 999px; background: var(--edge); overflow: hidden; min-width: 130px; }
-.scrub i { display: block; height: 100%; background: var(--indigo); width: 0%; }
+.stage canvas { display: block; width: 100%; aspect-ratio: 1600 / 820; border-radius: 1.05rem; }
 
 /* ---------- narration ---------- */
-.narr { margin-top: 20px; padding: 26px 30px 24px; }
-.narr .eyebrow { font: 600 14px/1 ui-monospace, monospace; letter-spacing: .10em; text-transform: uppercase; color: var(--indigo); }
-.narr h2 { margin: 12px 0 0; font-size: clamp(22px, 2.2vw, 30px); letter-spacing: -0.02em; font-weight: 650; }
-.narr h2 .who { color: var(--muted); font-weight: 500; font-size: 0.62em; letter-spacing: 0; margin-left: 4px; }
+.narr { margin-top: 22px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 26px; }
+.narr h2 { font-family: ui-rounded, system-ui, sans-serif; font-size: 25px; margin: 0; letter-spacing: -0.01em; }
+.narr .who { margin-top: 6px; font-size: 14px; color: var(--faint); }
 .narr p { margin: 14px 0 0; color: var(--muted); max-width: 76ch; font-size: 19px; line-height: 1.6; }
-.narr p code { font-family: ui-monospace, monospace; font-size: 0.88em; color: var(--ink); background: var(--glass-2); border: 1px solid var(--edge); border-radius: 5px; padding: 1px 5px; }
-.mechs { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; }
-.mechs li { font: 600 14px/1 system-ui, sans-serif; color: var(--muted); border: 1px solid var(--edge); border-radius: 999px; padding: 8px 14px; background: var(--glass-2); }
-
-/* ---------- legend + footnote ---------- */
-.legend { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 18px; padding: 17px 24px; }
-.legend .grp { display: flex; align-items: center; gap: 9px; font-size: 15px; color: var(--muted); }
-.legend .sw { width: 30px; height: 0; border-top-width: 3px; border-top-style: solid; }
-.legend .dot { width: 13px; height: 13px; border-radius: 4px; border: 2px solid; }
+.narr code { font-family: ui-monospace, monospace; font-size: .88em; color: var(--ink); background: rgba(255,255,255,.06); padding: 1px 6px; border-radius: 6px; }
+.mech { list-style: none; margin: 0; padding: 16px; }
+.mech li { font-size: 14.5px; color: var(--muted); padding: 7px 0 7px 18px; position: relative; }
+.mech li::before { content: ""; position: absolute; left: 0; top: 15px; width: 7px; height: 7px; border-radius: 2px; background: var(--orange); }
 .foot { margin-top: 28px; color: var(--faint); font-size: 15px; max-width: 80ch; }
 
+@media (max-width: 900px) { .narr { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
-  .wrap { padding: 18px 12px 40px; }
-  .narr { padding: 20px 18px; }
-  .narr p { font-size: 17px; }
+  .wrap { padding: 20px 14px 44px; }
   .rail button { padding: 7px 10px; font-size: 13px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .rail button { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .rail button { transition: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="mast">
-    <div class="grow">
-      <h1 class="display">How one dependency level gets built
-        <span class="sub">Step 0 to 10 of the workflow behind this library — batching, source-grounded scaffolding, authoring, provenance and citation, two independent judges, adjudication, and the single pause where the work reaches a human.</span>
-      </h1>
-    </div>
-    <div class="mast-actions">
-      <a class="backlink" href="/library">← Library</a>
-      <button class="backlink" id="themeBtn" type="button" aria-label="Switch colour theme">Theme</button>
-    </div>
-  </header>
+  <h1>How a level is built
+    <span class="sub">One continuous run of the eleven steps in <span class="mono">LEVELS.md</span> — from computing the frontier to the single owner pause. Every gate, ledger and refusal drawn here is one the repository actually enforces.</span>
+  </h1>
 
-  <nav class="rail" id="rail" aria-label="Workflow steps"></nav>
+  <div class="bar">
+    <button class="play" id="play" aria-label="Play or pause"><span id="playicon">❚❚</span><span id="playlabel">Pause</span></button>
+    <div class="scrub" id="scrub" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="done" id="scrubdone"></div></div>
+    <div class="clock mono" id="clock">0:00 / 3:20</div>
+  </div>
+
+  <div class="rail" id="rail"></div>
 
   <div class="glass stage">
     <canvas id="stage" aria-label="Animated diagram of the build workflow"></canvas>
   </div>
 
-  <div class="controls">
-    <button id="playBtn" class="primary" type="button" aria-label="Play or pause">❚❚ Pause</button>
-    <button id="prevBtn" type="button" aria-label="Previous step">←</button>
-    <button id="nextBtn" type="button" aria-label="Next step">→</button>
-    <div class="scrub" aria-hidden="true"><i id="scrub"></i></div>
-    <div class="speed" role="group" aria-label="Playback speed">
-      <button type="button" data-speed="0.6">0.6×</button>
-      <button type="button" data-speed="1" aria-pressed="true">1×</button>
-      <button type="button" data-speed="1.6">1.6×</button>
+  <div class="narr">
+    <div>
+      <h2 id="ntitle">Step 0 — Batch</h2>
+      <div class="who mono" id="nwho">orchestrator</div>
+      <p id="nbody"></p>
     </div>
+    <ul class="mech glass" id="nmech"></ul>
   </div>
 
-  <section class="glass narr" id="narr" aria-live="polite">
-    <div class="eyebrow" id="eyebrow">Step 0</div>
-    <h2 id="ntitle" class="display">Batch</h2>
-    <p id="nbody"></p>
-    <ul class="mechs" id="nmechs"></ul>
-  </section>
-
-  <div class="glass legend" aria-hidden="true">
-    <span class="grp"><span class="sw" id="lg1"></span> ordinary citation</span>
-    <span class="grp"><span class="sw" id="lg2" style="border-top-style:dashed"></span> forward reference ↗</span>
-    <span class="grp"><span class="sw" id="lg3" style="border-top-style:dotted"></span> not proved here ‡</span>
-    <span class="grp"><span class="dot" id="lg4"></span> definition</span>
-    <span class="grp"><span class="dot" id="lg5"></span> theorem / corollary</span>
-    <span class="grp"><span class="dot" id="lg6"></span> lemma</span>
-    <span class="grp"><span class="dot" id="lg7"></span> example</span>
-    <span class="grp"><span class="dot" id="lg8"></span> counterexample</span>
-  </div>
-
-  <p class="foot">
-    The page and item names are drawn from this library; the level shown is a
-    composite, small enough that one screen can hold the whole shape of a build.
-    The normative descriptions are <span class="mono">LEVELS.md</span> (steps
-    0–10), <span class="mono">ARCHITECTURE.md</span> (what each mechanism
-    prevents) and <span class="mono">SCHEMA.md</span> (the item contract).
-  </p>
+  <p class="foot">The workflow itself is normative and lives in the repository:
+    <span class="mono">LEVELS.md</span> for the eleven steps,
+    <span class="mono">ARCHITECTURE.md</span> for every gate and why it exists,
+    <span class="mono">CLAUDE.md</span> for the owner rules that bind each agent.
+    This page is an explainer: no gate reads it, and it carries no mathematics of its own.</p>
 </div>
 
 <script>
 "use strict";
 /* =========================================================================
-   0. PALETTE — resolved per frame so the theme toggle is instant.
+   0. PALETTE — one hue per role, matte black ground.
    ========================================================================= */
-const LIGHT = {
-  ink: "#0f172a", muted: "#475569", faint: "#94a3b8",
-  panel: "rgba(255,255,255,0.62)", panelEdge: "rgba(15,23,42,0.12)",
-  solid: "rgba(252,253,255,0.96)", sunk: "rgba(15,23,42,0.045)",
-  indigo: "#4f46e5", sky: "#0284c7", fuchsia: "#c026d3",
-  ok: "#15803d", warn: "#b45309", bad: "#e11d48",
-  orchestrator: "#4338ca", beta: "#0f766e", alpha: "#7c3aed",
-  deepseek: "#1d4ed8", terra: "#c2410c",
+const C = {
+  bg0: "#08090b",
+  grid: "rgba(255,255,255,0.030)",
+  ink: "#f2f4f7", muted: "#98a1ad", faint: "#5d6672",
+  panel: "rgba(255,255,255,0.040)", panelDeep: "rgba(255,255,255,0.022)",
+  edge: "rgba(255,255,255,0.10)", edgeSoft: "rgba(255,255,255,0.06)",
+
+  orchestrator: "#ff8a3d",   // orange — the only actor that decides
+  beta:         "#4aa8ff",   // blue   — scaffolds and authors
+  alpha:        "#a78bfa",   // violet — audits and adjudicates
+  reader:       "#22d3ee",   // cyan   — independent readers and refuters
+  judgeA:       "#ffd23f",   // yellow — DeepSeek lane
+  judgeB:       "#3ddc84",   // green  — the second lane
+  gate:         "#f7b955",   // amber  — a gate still running
+  ok:           "#3ddc84",
+  bad:          "#ff5c5c",
+  warn:         "#ffb020",
+  corpus:       "#8ea2b8",
+  fwd:          "#7dd3fc",   // reserved: forward reference
+  ext:          "#e879f9",   // reserved: not-proved-here
   kinds: {
-    definition:     { fill: "#dbeafe", border: "#3b82f6", text: "#1e3a8a" },
-    theorem:        { fill: "#ede9fe", border: "#8b5cf6", text: "#4c1d95" },
-    lemma:          { fill: "#ccfbf1", border: "#14b8a6", text: "#134e4a" },
-    corollary:      { fill: "#ede9fe", border: "#8b5cf6", text: "#4c1d95" },
-    example:        { fill: "#d1fae5", border: "#10b981", text: "#064e3b" },
-    counterexample: { fill: "#fef3c7", border: "#f59e0b", text: "#78350f" },
-    remark:         { fill: "#f1f5f9", border: "#94a3b8", text: "#334155" },
+    definition:     "#4aa8ff",
+    lemma:          "#2dd4bf",
+    theorem:        "#a78bfa",
+    example:        "#3ddc84",
+    counterexample: "#ffd23f",
+    remark:         "#8ea2b8",
   },
 };
-const DARK = {
-  ink: "#e6edf6", muted: "#9fb0c4", faint: "#64748b",
-  panel: "rgba(255,255,255,0.055)", panelEdge: "rgba(255,255,255,0.14)",
-  solid: "rgba(16,23,38,0.96)", sunk: "rgba(255,255,255,0.045)",
-  indigo: "#818cf8", sky: "#38bdf8", fuchsia: "#e879f9",
-  ok: "#4ade80", warn: "#fbbf24", bad: "#fb7185",
-  orchestrator: "#a5b4fc", beta: "#2dd4bf", alpha: "#c4b5fd",
-  deepseek: "#60a5fa", terra: "#fb923c",
-  kinds: {
-    definition:     { fill: "#172554", border: "#60a5fa", text: "#dbeafe" },
-    theorem:        { fill: "#2e1065", border: "#a78bfa", text: "#ede9fe" },
-    lemma:          { fill: "#042f2e", border: "#2dd4bf", text: "#ccfbf1" },
-    corollary:      { fill: "#2e1065", border: "#a78bfa", text: "#ede9fe" },
-    example:        { fill: "#022c22", border: "#34d399", text: "#d1fae5" },
-    counterexample: { fill: "#451a03", border: "#fbbf24", text: "#fef3c7" },
-    remark:         { fill: "#1e293b", border: "#64748b", text: "#f1f5f9" },
-  },
-};
-let P = LIGHT;
-function resolveTheme() {
-  const attr = document.documentElement.getAttribute("data-theme");
-  const dark = attr ? attr === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  P = dark ? DARK : LIGHT;
-}
 
 /* =========================================================================
-   1. MATH / DRAWING HELPERS
+   1. HELPERS AND THE CANVAS
    ========================================================================= */
-const W = 1600, H = 820;                       // world units
-const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const W = 1600, H = 820;              // the visible world — unchanged
+const WORLD_W = 3560;                 // the strip the camera pans across
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const lerp = (a, b, k) => a + (b - a) * k;
-const easeInOut = (k) => k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const easeInOut = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
 const easeOut = (k) => 1 - Math.pow(1 - k, 3);
-const easeOutBack = (k) => 1 + 2.7 * Math.pow(k - 1, 3) + 1.7 * Math.pow(k - 1, 2);
-/** progress of a cue starting at `s` and lasting `d` seconds, clamped to 0..1 */
 const A = (t, s, d) => clamp((t - s) / d, 0, 1);
-/** rises then falls — for a flash that must not linger */
 const pulse = (t, s, d) => Math.sin(A(t, s, d) * Math.PI);
-/** show between `from` and `to`, fading at both ends */
-const win = (t, from, to) => A(t, from, 0.6) * (1 - A(t, to, 0.6));
-const alphaOf = (c, a) => {
+const win = (t, from, to) => A(t, from, 0.5) * (1 - A(t, to, 0.5));
+const rgba = (c, a) => {
   if (a >= 1) return c;
   if (!c || c[0] !== "#") return c;
   const n = parseInt(c.slice(1), 16);
-  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${clamp(a, 0, 1)})`;
+  return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + clamp(a, 0, 1) + ")";
 };
+const hash01 = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
 const cv = document.getElementById("stage");
-const g = cv.getContext("2d");
-let DPR = 1;
+const g = cv.getContext("2d", { alpha: false });
+let DPR = 1, VIEW = 1;                // VIEW: world units -> backing pixels
 
 function resize() {
   const rect = cv.getBoundingClientRect();
-  DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+  // Supersample 1.5x the device ratio, capped. The world and every type size
+  // are unchanged, so this buys sampling only: the same glyphs, resolved.
+  DPR = clamp((window.devicePixelRatio || 1) * 1.5, 1, 3.5);
   cv.width = Math.max(1, Math.round(rect.width * DPR));
   cv.height = Math.max(1, Math.round(rect.height * DPR));
+  VIEW = cv.width / W;
 }
+window.addEventListener("resize", resize, { passive: true });
 
+/* -- primitives ---------------------------------------------------------- */
 function rr(x, y, w, h, r) {
   r = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
   g.beginPath();
@@ -325,1199 +253,641 @@ function rr(x, y, w, h, r) {
   g.arcTo(x, y, x + w, y, r);
   g.closePath();
 }
-function card(x, y, w, h, o = {}) {
-  const a = o.alpha ?? 1;
-  if (a <= 0.003) return;
+function panel(x, y, w, h, o) {
+  o = o || {};
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  if (a <= 0.004) return;
   g.save();
   g.globalAlpha *= a;
-  if (o.glow) { g.shadowColor = alphaOf(o.glow, 0.5); g.shadowBlur = o.glowSize ?? 34; }
-  rr(x, y, w, h, o.r ?? 18);
-  g.fillStyle = o.fill ?? P.panel;
+  rr(x, y, w, h, o.r === undefined ? 16 : o.r);
+  g.fillStyle = o.fill || C.panel;
   g.fill();
-  g.shadowBlur = 0;
-  if (o.stroke !== null) {
-    g.strokeStyle = o.stroke ?? P.panelEdge;
-    g.lineWidth = o.lw ?? 1.8;
-    if (o.dash) g.setLineDash(o.dash);
+  if (o.glow) {
+    g.save();
+    g.shadowColor = rgba(o.glow, 0.55);
+    g.shadowBlur = o.glowSize === undefined ? 24 : o.glowSize;
+    g.strokeStyle = rgba(o.glow, 0.9);
+    g.lineWidth = o.lw === undefined ? 2 : o.lw;
     g.stroke();
-    g.setLineDash([]);
+    g.restore();
+  } else if (o.stroke !== null) {
+    g.strokeStyle = o.stroke || C.edge;
+    g.lineWidth = o.lw === undefined ? 1.6 : o.lw;
+    g.stroke();
   }
   g.restore();
 }
-function text(s, x, y, o = {}) {
-  const size = o.size ?? 24;
-  const fam = o.mono ? 'ui-monospace, SFMono-Regular, Menlo, monospace'
-    : o.display ? 'ui-rounded, "SF Pro Rounded", system-ui, sans-serif'
-      : 'system-ui, -apple-system, "Segoe UI", sans-serif';
+function text(s, x, y, o) {
+  o = o || {};
   g.save();
-  g.globalAlpha *= (o.alpha ?? 1);
-  g.font = `${o.weight ?? 500} ${size}px ${fam}`;
-  g.fillStyle = o.color ?? P.ink;
-  g.textAlign = o.align ?? "left";
+  g.globalAlpha *= o.alpha === undefined ? 1 : o.alpha;
+  g.fillStyle = o.color || C.ink;
+  g.font = (o.weight || 600) + " " + (o.size || 24) + "px " +
+    (o.mono ? "ui-monospace, SFMono-Regular, Menlo, monospace" : "system-ui, -apple-system, Segoe UI, sans-serif");
+  g.textAlign = o.align || "left";
   g.textBaseline = "middle";
-  let str = s;
-  if (o.maxw && g.measureText(str).width > o.maxw) {
-    while (str.length > 2 && g.measureText(str + "…").width > o.maxw) str = str.slice(0, -1);
-    str += "…";
-  }
-  g.fillText(str, x, y);
+  g.fillText(s, x, y);
   g.restore();
 }
-function measure(s, size, weight, mono) {
-  g.save();
-  g.font = `${weight ?? 500} ${size ?? 24}px ${mono ? 'ui-monospace, monospace' : 'system-ui, sans-serif'}`;
-  const w = g.measureText(s).width;
-  g.restore();
-  return w;
+function dot(x, y, r, color, a) {
+  a = a === undefined ? 1 : a;
+  if (a <= 0.01) return;
+  g.save(); g.globalAlpha *= a; g.fillStyle = color;
+  g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); g.restore();
 }
-/** a labelled pill — the workhorse. `note()` is the opaque, floating variant. */
-function pill(s, x, y, o = {}) {
-  const size = o.size ?? 22, padx = o.padx ?? 18, h = o.h ?? 44;
-  const w = o.w ?? (measure(s, size, 600, o.mono) + padx * 2);
-  const ax = o.align === "center" ? x - w / 2 : o.align === "right" ? x - w : x;
-  card(ax, y - h / 2, w, h, {
-    r: o.r ?? 12, fill: o.fill ?? P.sunk, stroke: o.stroke ?? P.panelEdge,
-    alpha: o.alpha ?? 1, lw: o.lw ?? 1.4, glow: o.glow, glowSize: o.glowSize ?? 18, dash: o.dash,
-  });
-  text(s, ax + w / 2, y + 1, {
-    size, weight: 600, color: o.color ?? P.muted, align: "center",
-    alpha: o.alpha ?? 1, mono: o.mono, maxw: w - padx,
-  });
-  return { x: ax, y: y - h / 2, w, h };
+function tick(x, y, r, color, a) {
+  if (a <= 0.02) return;
+  g.save(); g.globalAlpha *= a;
+  g.strokeStyle = color; g.lineWidth = 3; g.lineCap = "round"; g.lineJoin = "round";
+  g.beginPath();
+  g.moveTo(x - r, y); g.lineTo(x - r * 0.25, y + r * 0.72); g.lineTo(x + r, y - r * 0.7);
+  g.stroke(); g.restore();
 }
-function note(s, x, y, o = {}) {
-  return pill(s, x, y, { ...o, fill: o.fill ?? P.solid, glow: o.glow === null ? null : (o.glow ?? o.color) });
+function cross(x, y, r, color, a) {
+  if (a <= 0.02) return;
+  g.save(); g.globalAlpha *= a;
+  g.strokeStyle = color; g.lineWidth = 3; g.lineCap = "round";
+  g.beginPath();
+  g.moveTo(x - r, y - r); g.lineTo(x + r, y + r);
+  g.moveTo(x + r, y - r); g.lineTo(x - r, y + r);
+  g.stroke(); g.restore();
 }
-/** bezier edge with animated draw-in and an optional travelling packet */
-function edge(x1, y1, x2, y2, o = {}) {
-  const k = clamp(o.prog ?? 1, 0, 1), a = o.alpha ?? 1;
-  if (k <= 0.001 || a <= 0.003) return;
-  const bend = o.bend ?? 0.42;
-  const cx1 = x1 + (x2 - x1) * bend, cx2 = x2 - (x2 - x1) * bend;
-  const seg = 40, pts = [];
-  for (let i = 0; i <= seg; i++) {
-    const u = i / seg, iu = 1 - u;
-    pts.push([
-      iu * iu * iu * x1 + 3 * iu * iu * u * cx1 + 3 * iu * u * u * cx2 + u * u * u * x2,
-      iu * iu * iu * y1 + 3 * iu * iu * u * y1 + 3 * iu * u * u * y2 + u * u * u * y2,
-    ]);
-  }
-  const upto = Math.max(1, Math.round(seg * k));
+
+/** A wire between two nodes; `packets` streams work along it continuously. */
+function wire(x1, y1, x2, y2, o) {
+  o = o || {};
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  if (a <= 0.01) return;
+  const bend = o.bend === undefined ? 0.18 : o.bend;
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const dx = x2 - x1, dy = y2 - y1;
+  const cx = mx - dy * bend, cy = my + dx * bend;
   g.save();
   g.globalAlpha *= a;
-  g.strokeStyle = o.color ?? P.indigo;
-  g.lineWidth = o.lw ?? 3;
-  g.lineCap = "round";
+  g.strokeStyle = o.color || C.edge;
+  g.lineWidth = o.lw === undefined ? 2 : o.lw;
   if (o.dash) g.setLineDash(o.dash);
   g.beginPath();
-  g.moveTo(pts[0][0], pts[0][1]);
-  for (let i = 1; i <= upto; i++) g.lineTo(pts[i][0], pts[i][1]);
-  g.stroke();
-  g.setLineDash([]);
-  if (o.packet != null) {
-    const p = pts[clamp(Math.round(o.packet * seg), 0, seg)];
-    g.fillStyle = o.color ?? P.indigo;
-    g.shadowColor = alphaOf(o.color ?? P.indigo, 0.85);
-    g.shadowBlur = 16;
-    g.beginPath(); g.arc(p[0], p[1], o.packetR ?? 6, 0, 7); g.fill();
-    g.shadowBlur = 0;
-  }
-  if (o.arrow && k > 0.97) {
-    const p = pts[seg], q = pts[seg - 2];
-    const ang = Math.atan2(p[1] - q[1], p[0] - q[0]);
-    g.fillStyle = o.color ?? P.indigo;
-    g.beginPath();
-    g.moveTo(p[0], p[1]);
-    g.lineTo(p[0] - 15 * Math.cos(ang - 0.42), p[1] - 15 * Math.sin(ang - 0.42));
-    g.lineTo(p[0] - 15 * Math.cos(ang + 0.42), p[1] - 15 * Math.sin(ang + 0.42));
-    g.fill();
-  }
-  g.restore();
-}
-/** an agent: soft orb with a rotating ring while it is working */
-function orb(x, y, r, o = {}) {
-  const a = o.alpha ?? 1;
-  if (a <= 0.003) return;
-  const col = o.color ?? P.indigo;
-  g.save();
-  g.globalAlpha *= a;
-  const grd = g.createRadialGradient(x, y, 0, x, y, r * 2.3);
-  grd.addColorStop(0, alphaOf(col, 0.32));
-  grd.addColorStop(1, alphaOf(col, 0));
-  g.fillStyle = grd;
-  g.beginPath(); g.arc(x, y, r * 2.3, 0, 7); g.fill();
-  g.fillStyle = alphaOf(col, 0.16);
-  g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
-  g.strokeStyle = col; g.lineWidth = 2.4;
-  g.beginPath(); g.arc(x, y, r, 0, 7); g.stroke();
-  if (o.busy) {
-    g.strokeStyle = alphaOf(col, 0.85);
-    g.lineWidth = 3.4;
-    const s = (o.busy % 1) * 7;
-    g.beginPath(); g.arc(x, y, r + 11, s, s + 1.9); g.stroke();
-    g.beginPath(); g.arc(x, y, r + 11, s + 3.14, s + 5.05); g.stroke();
-  }
-  if (o.icon) text(o.icon, x, y + 1, { size: o.iconSize ?? r, weight: 700, color: col, align: "center", display: true });
-  if (o.label) text(o.label, x, y + r + 28, { size: 21, weight: 600, color: P.muted, align: "center" });
-  g.restore();
-}
-function checkMark(x, y, s, col, k) {
-  if (k <= 0) return;
-  g.save();
-  g.strokeStyle = col; g.lineWidth = 4; g.lineCap = "round"; g.lineJoin = "round";
-  g.beginPath();
-  g.moveTo(x - s, y);
-  const m = [x - s * 0.25, y + s * 0.7], e = [x + s, y - s * 0.75];
-  if (k < 0.5) g.lineTo(lerp(x - s, m[0], k / 0.5), lerp(y, m[1], k / 0.5));
-  else {
-    g.lineTo(m[0], m[1]);
-    const u = (k - 0.5) / 0.5;
-    g.lineTo(lerp(m[0], e[0], u), lerp(m[1], e[1], u));
-  }
+  g.moveTo(x1, y1);
+  g.quadraticCurveTo(cx, cy, x2, y2);
   g.stroke();
   g.restore();
-}
-function crossMark(x, y, s, col, k) {
-  if (k <= 0) return;
-  g.save();
-  g.strokeStyle = col; g.lineWidth = 4; g.lineCap = "round";
-  const u = clamp(k * 2, 0, 1), v = clamp(k * 2 - 1, 0, 1);
-  g.beginPath(); g.moveTo(x - s, y - s); g.lineTo(lerp(x - s, x + s, u), lerp(y - s, y + s, u)); g.stroke();
-  if (v > 0) { g.beginPath(); g.moveTo(x + s, y - s); g.lineTo(lerp(x + s, x - s, v), lerp(y - s, y + s, v)); g.stroke(); }
-  g.restore();
-}
-function caption(title, sub, k) {
-  const a = easeOut(clamp(k, 0, 1));
-  text(title, 44, 44, { size: 34, weight: 700, color: P.ink, alpha: a, display: true });
-  if (sub) text(sub, 44, 84, { size: 21, weight: 500, color: P.faint, alpha: a });
-}
-
-/* =========================================================================
-   2. THE WORLD — one board that steps 0 to 6 keep transforming.
-   ========================================================================= */
-const CORPUS = ["foundations-of-r", "sequences-and-limits", "compactness-in-r"];
-/** the one horizontal band kept clear for annotations, in every scene */
-const NOTE_Y = 786;
-const kindOf = (id) => ({
-  def: "definition", lem: "lemma", thm: "theorem", cor: "corollary",
-  ex: "example", cex: "counterexample", rem: "remark",
-}[id.split("-")[0]] ?? "remark");
-
-/* provenance is two components: statement / proof.
-   L literature-derived · A ai-altered · G ai-generated · N not-supplied */
-const PAIRS = [
-  {
-    batch: 0, short: "uniform continuity", page: "continuity-and-uniform-continuity",
-    items: [
-      { id: "def-uniform-continuity", pv: "L/N" },
-      { id: "thm-heine-cantor", pv: "L/A" },
-      { id: "cor-uc-preserves-cauchy", pv: "G/G" },
-    ],
-    b: [{ id: "ex-sqrt-uc-on-r", pv: "A/A" }, { id: "cex-x2-not-uc-on-r", pv: "L/A" }],
-  },
-  {
-    batch: 0, short: "forms of completeness", page: "equivalent-forms-of-completeness",
-    items: [
-      { id: "def-cauchy-sequence", pv: "L/N" },
-      { id: "lem-cauchy-bounded", pv: "L/A" },
-      { id: "thm-bolzano-weierstrass", pv: "L/A" },
-    ],
-    b: [{ id: "ex-decimal-cauchy", pv: "A/A" }, { id: "cex-q-not-complete", pv: "L/A" }],
-  },
-  {
-    batch: 1, short: "rearrangement", page: "absolute-convergence-and-rearrangement",
-    items: [
-      { id: "def-abs-convergence", pv: "L/N" },
-      { id: "thm-rearrangement", pv: "L/A" },
-      { id: "rem-riemann-bound", pv: "L/N" },
-    ],
-    b: [{ id: "ex-alternating-series", pv: "L/A" }, { id: "cex-conditional-in-lp", pv: "L/A" }],
-  },
-];
-const BATCHES = [
-  { name: "Batch 1", agent: "Beta-12-1", x: 50, w: 840, pairs: [0, 1] },
-  { name: "Batch 2", agent: "Beta-12-2", x: 920, w: 430, pairs: [2] },
-];
-const PANEL_Y = 240, PANEL_H = 450, COL_W = 390, CHIP_H = 42, CHIP_STEP = 46;
-
-function buildLayout() {
-  BATCHES.forEach((b) => {
-    b.y = PANEL_Y; b.h = PANEL_H; b.cx = b.x + b.w / 2;
-    b.orbX = b.cx; b.orbY = 152;
-    b.cols = b.pairs.map((pi, ci) => {
-      const pair = PAIRS[pi];
-      const cx = b.x + 20 + ci * (COL_W + 20);
-      const col = { x: cx, w: COL_W, pair: pi };
-      col.aHead = { x: cx, y: PANEL_Y + 72, w: COL_W, h: 58 };
-      pair.items.forEach((it, i) => {
-        it.box = { x: cx, y: PANEL_Y + 138 + i * CHIP_STEP, w: COL_W, h: CHIP_H };
-        it.batch = b; it.si = i;
-      });
-      col.bHead = { x: cx, y: PANEL_Y + 284, w: COL_W, h: 44 };
-      pair.b.forEach((it, i) => {
-        it.box = { x: cx, y: PANEL_Y + 336 + i * CHIP_STEP, w: COL_W, h: CHIP_H };
-        it.batch = b; it.si = pair.items.length + i;
-      });
-      return col;
-    });
-  });
-  CORPUS.forEach((name, i) => { CORPUS_BOX[i] = { x: 40 + i * 410, y: 704, w: 390, h: 48, name }; });
-}
-const CORPUS_BOX = [];
-buildLayout();
-const ITEMS = PAIRS.flatMap((p) => [...p.items, ...p.b]);
-const N_ITEMS = ITEMS.length;
-
-/* Per-item state the scenes drive. Every enter() resets it, so jumping straight
-   to step 8 never inherits step 6's defect marks. */
-function resetItems(o = {}) {
-  ITEMS.forEach((it) => {
-    it.reveal = o.reveal ?? 0; it.prov = o.prov ?? 0; it.authored = o.authored ?? 0;
-    it.defect = 0; it.fixed = 0; it.judged = 0; it.keep = true;
-    it.dropped = 0; it.external = 0; it.forward = 0;
-  });
-}
-/** the two marks that stay TRUE of this level from step 2 onward */
-function structuralMarks() {
-  PAIRS[1].items[2].forward = 1;    // a declared forward reference
-  PAIRS[2].items[2].external = 1;   // the ‡ proved_here: false fallback
-}
-resetItems();
-
-/* =========================================================================
-   3. BOARD RENDERER
-   ========================================================================= */
-const LAYERS = { corpus: 0, panels: 0, panelFrame: 0, bheads: 0, items: 0, agents: 0 };
-const L = { ...LAYERS };
-let LT = { ...LAYERS };
-const layers = (o) => { LT = { ...LAYERS, ...o }; };
-
-function drawCorpusBand(a) {
-  if (a <= 0.004) return;
-  CORPUS_BOX.forEach((c, i) => {
-    const k = clamp(a * 1.5 - i * 0.05, 0, 1);
-    card(c.x, c.y, c.w, c.h, { r: 12, fill: P.sunk, stroke: P.panelEdge, alpha: k });
-    text(c.name, c.x + 18, c.y + c.h / 2, { size: 21, color: P.faint, alpha: k, mono: true, maxw: c.w - 36 });
-  });
-  text("published,", 1290, 716, { size: 20, weight: 600, color: P.faint, alpha: a });
-  text("already on disk", 1290, 740, { size: 20, weight: 600, color: P.faint, alpha: a });
-}
-
-function drawPanels(a) {
-  if (a <= 0.004) return;
-  const fr = L.panelFrame;
-  BATCHES.forEach((b, bi) => {
-    const k = clamp(a * 1.4 - bi * 0.1, 0, 1);
-    if (fr > 0.004) {
-      card(b.x, b.y, b.w, b.h, { r: 24, fill: P.panel, stroke: P.panelEdge, alpha: k * fr });
-      text(b.name, b.x + 24, b.y + 38, { size: 28, weight: 650, color: P.ink, alpha: k * fr, display: true });
-      text(b.pairs.length === 2 ? "2 A-pages · the cap" : "1 A-page", b.x + b.w - 24, b.y + 38,
-        { size: 20, weight: 600, color: P.faint, alpha: k * fr, align: "right" });
+  const n = o.packets || 0;
+  if (n > 0) {
+    const speed = o.speed === undefined ? 0.35 : o.speed;
+    const ph = o.phase || 0;
+    for (let i = 0; i < n; i++) {
+      const k = (CLOCK * speed + i / n + ph) % 1;
+      const u = 1 - k;
+      const px = u * u * x1 + 2 * u * k * cx + k * k * x2;
+      const py = u * u * y1 + 2 * u * k * cy + k * k * y2;
+      dot(px, py, o.pr || 5, o.pcolor || o.color || C.ink, a * Math.sin(k * Math.PI));
     }
-    b.cols.forEach((col) => {
-      const pair = PAIRS[col.pair];
-      card(col.aHead.x, col.aHead.y, col.aHead.w, col.aHead.h, { r: 12, fill: P.sunk, stroke: P.panelEdge, alpha: k });
-      text(pair.short, col.aHead.x + 16, col.aHead.y + 21, { size: 23, weight: 650, color: P.ink, alpha: k, maxw: col.w - 32 });
-      text("A page", col.aHead.x + 16, col.aHead.y + 43, { size: 18, weight: 600, color: P.faint, alpha: k });
-      const bk = k * L.bheads;
-      card(col.bHead.x, col.bHead.y, col.bHead.w, col.bHead.h, { r: 12, fill: P.sunk, stroke: P.panelEdge, alpha: bk });
-      text("…-examples · B page", col.bHead.x + 16, col.bHead.y + 22, { size: 20, weight: 600, color: P.muted, alpha: bk });
-    });
-  });
+  }
 }
 
-const PROV_COL = () => ({ L: P.ok, A: P.indigo, G: P.warn, N: P.faint });
-function drawItemChip(it, a) {
-  if (a <= 0.004 || it.reveal <= 0.004) return;
-  const b = it.box, ks = P.kinds[kindOf(it.id)];
-  const rv = clamp(easeOutBack(clamp(it.reveal, 0, 1)), 0.25, 1.02);
-  const al = a * clamp(it.reveal * 1.6, 0, 1) * (1 - it.dropped * 0.72);
-  const w = b.w * rv;
-  const defect = it.defect > 0 && it.fixed < 1;
-  card(b.x, b.y, w, b.h, {
-    r: 11,
-    fill: it.authored > 0.5 ? ks.fill : alphaOf(ks.fill, 0.32),
-    stroke: defect ? P.bad : it.external ? P.fuchsia : it.forward ? P.sky : ks.border,
-    lw: defect ? 3 : 1.8,
-    alpha: al,
-    dash: it.external ? [2, 4] : it.forward ? [7, 4] : null,
+/* =========================================================================
+   2. THE MESH — laid out once, alive for the whole run. Position only;
+   what is *on* at a given moment is computed in section 4.
+   ========================================================================= */
+const NODE = (id, x, y, w, h, label, color) => ({ id, x, y, w, h, label, color });
+const M = {
+  corpus:   NODE("corpus",   60, 250, 300, 330, "published corpus", C.corpus),
+  frontier: NODE("frontier", 60, 620, 300, 120, "the frontier", C.orchestrator),
+  orch:     NODE("orch",    470, 330, 260, 170, "orchestrator", C.orchestrator),
+  beta1:    NODE("beta1",   860, 120, 250, 150, "Beta n-1", C.beta),
+  beta2:    NODE("beta2",   860, 560, 250, 150, "Beta n-2", C.beta),
+  page1:    NODE("page1",  1210,  80, 330, 250, "A/B pair — batch 1", C.beta),
+  page2:    NODE("page2",  1210, 520, 330, 250, "A/B pair — batch 2", C.beta),
+  gates:    NODE("gates",  1640, 320, 250, 190, "gates of record", C.gate),
+  readers:  NODE("readers",1990, 110, 260, 160, "independent readers", C.reader),
+  alpha:    NODE("alpha",  2000, 335, 240, 150, "Alpha n", C.alpha),
+  refuters: NODE("refuters",1990,590, 260, 160, "read-only refuters", C.reader),
+  freeze:   NODE("freeze", 2360, 345, 190, 130, "frozen context", C.ink),
+  laneA:    NODE("laneA",  2640, 140, 300, 190, "DeepSeek V4 Pro", C.judgeA),
+  laneB:    NODE("laneB",  2640, 500, 300, 190, "second lane", C.judgeB),
+  ledger:   NODE("ledger", 3040, 300, 210, 260, "verdict ledger", C.ink),
+  owner:    NODE("owner",  3320, 330, 200, 200, "owner pause", C.orchestrator),
+};
+const cxOf = (n) => n.x + n.w / 2;
+const cyOf = (n) => n.y + n.h / 2;
+
+/** Six items to a page, two pages — the same census as before. */
+const KINDS = ["definition", "lemma", "theorem", "example", "counterexample", "remark"];
+// The chip carries the library's own id prefix, which is what a reader of the
+// repository actually sees: def-, lem-, thm-, ex-, cex-, rem-.
+const PREFIX = { definition: "def", lemma: "lem", theorem: "thm", example: "ex", counterexample: "cex", remark: "rem" };
+const ITEMS = [];
+[M.page1, M.page2].forEach((pg, pi) => {
+  for (let i = 0; i < 6; i++) {
+    const col = i % 2, row = (i / 2) | 0;
+    ITEMS.push({
+      id: pi * 6 + i, page: pi, kind: KINDS[i],
+      x: pg.x + 18, y: pg.y + 56, w: 138, h: 46,
+      px: pg.x + 18 + col * 152, py: pg.y + 56 + row * 62,
+      d: (pi * 6 + i) * 0.09 + hash01(pi * 6 + i) * 0.3,
+      dropped: i === 5, fatal: pi === 0 && i === 2,
+      fwd: pi === 1 && i === 3, ext: pi === 0 && i === 4,
+    });
+  }
+});
+
+/* =========================================================================
+   3. NODE RENDERERS
+   ========================================================================= */
+function agentCard(n, act, alpha, sub) {
+  if (alpha <= 0.01) return;
+  panel(n.x, n.y, n.w, n.h, {
+    alpha: alpha, r: 18,
+    fill: act > 0.05 ? rgba(n.color, 0.10 + 0.06 * act) : C.panelDeep,
+    stroke: rgba(n.color, 0.25 + 0.5 * act), lw: 1.8,
+    glow: act > 0.35 ? n.color : null, glowSize: 18 + 16 * act,
   });
-  const pre = it.external ? "‡ " : it.forward ? "↗ " : "";
-  text(pre + it.id, b.x + 14, b.y + b.h / 2, {
-    size: 22, weight: 600, mono: true, alpha: al,
-    color: it.authored > 0.5 ? ks.text : P.muted, maxw: w - (it.prov > 0.1 ? 66 : 28),
-  });
-  if (it.prov > 0.03) {          // statement bar over proof bar, at the chip's end
-    const [st, pf] = it.pv.split("/"), cols = PROV_COL();
+  const breathe = act > 0.05 ? 0.55 + 0.45 * Math.sin(CLOCK * 4 + n.x) : 0.25;
+  dot(n.x + 22, n.y + 26, 6, n.color, alpha * breathe);
+  text(n.label, n.x + 42, n.y + 26, { size: 22, color: rgba(C.ink, 0.94), alpha: alpha });
+  if (sub) text(sub, n.x + 22, n.y + 58, { size: 19, color: C.muted, alpha: alpha * 0.95, weight: 500 });
+  // token stream — the tell of an agent mid-call
+  if (act > 0.05) {
+    const top = n.y + n.h - 50;
+    for (let r = 0; r < 3; r++) {
+      const seed = n.x + r * 31;
+      const bw = (n.w - 44) * (0.3 + 0.62 * hash01(seed + ((CLOCK * 1.7 + r) | 0)));
+      g.save();
+      g.globalAlpha = alpha * act * 0.5 * (0.4 + 0.6 * Math.abs(Math.sin(CLOCK * 2.2 + seed)));
+      rr(n.x + 22, top + r * 13, bw, 5, 2.5);
+      g.fillStyle = n.color; g.fill(); g.restore();
+    }
+  }
+}
+
+function storeCard(n, fill01, alpha, rows, color) {
+  if (alpha <= 0.01) return;
+  rows = rows || 9;
+  panel(n.x, n.y, n.w, n.h, { alpha: alpha, r: 16, fill: C.panelDeep, stroke: rgba(n.color, 0.3), lw: 1.6 });
+  text(n.label, n.x + 18, n.y + 26, { size: 21, color: rgba(C.ink, 0.86), alpha: alpha });
+  const top = n.y + 52, gap = (n.h - 66) / rows;
+  for (let i = 0; i < rows; i++) {
+    const on = clamp(fill01 * rows - i, 0, 1);
     g.save();
-    g.globalAlpha *= al * it.prov;
-    [st, pf].forEach((c, i) => {
-      g.fillStyle = alphaOf(cols[c] ?? P.faint, c === "N" ? 0.3 : 0.85);
-      rr(b.x + w - 42, b.y + 9 + i * 13, 26, 9, 4); g.fill();
-    });
+    g.globalAlpha = alpha * (0.16 + 0.7 * on);
+    rr(n.x + 18, top + i * gap, (n.w - 36) * (0.5 + 0.5 * hash01(i + n.x)), Math.min(9, gap - 5), 3);
+    g.fillStyle = on > 0.5 ? (color || n.color) : C.muted;
+    g.fill(); g.restore();
+  }
+}
+
+function boardCard(n, alpha) {
+  if (alpha <= 0.01) return;
+  panel(n.x, n.y, n.w, n.h, { alpha: alpha, r: 18, fill: C.panelDeep, stroke: C.edgeSoft, lw: 1.5 });
+  text(n.label, n.x + 18, n.y + 26, { size: 20, color: C.muted, alpha: alpha, weight: 500 });
+}
+
+function itemChip(it, s) {
+  if (s.reveal <= 0.01) return;
+  const col = C.kinds[it.kind];
+  const a = s.reveal * (s.dropped > 0.5 ? 0.32 : 1);
+  const lift = (1 - easeOut(s.reveal)) * 14;
+  const y = it.py + lift;
+  panel(it.px, y, it.w, it.h, {
+    alpha: a, r: 11,
+    fill: rgba(col, 0.06 + 0.10 * s.authored),
+    stroke: rgba(col, 0.32 + 0.45 * s.authored), lw: 1.5,
+    glow: s.hot > 0.06 ? col : null, glowSize: 12 + 14 * s.hot,
+  });
+  dot(it.px + 15, y + it.h / 2, 4.5, col, a);
+  text(PREFIX[it.kind] + "-", it.px + 27, y + it.h / 2, { size: 22, color: rgba(C.ink, 0.9), alpha: a, mono: true });
+  if (s.prov > 0.02) {
+    dot(it.px + it.w - 36, y + it.h / 2, 3.4, C.ok, a * s.prov);
+    dot(it.px + it.w - 25, y + it.h / 2, 3.4, C.ok, a * clamp(s.prov * 2 - 1, 0, 1));
+  }
+  if (s.judged > 0.02) tick(it.px + it.w - 15, y + it.h / 2, 7, C.ok, a * s.judged * 0.95);
+  if (s.flagged > 0.02) cross(it.px + it.w - 15, y + it.h / 2, 7, C.bad, a * s.flagged);
+  if (s.dropped > 0.5) {
+    g.save(); g.globalAlpha = 0.55; g.strokeStyle = C.muted; g.lineWidth = 1.6;
+    g.beginPath(); g.moveTo(it.px + 8, y + it.h / 2); g.lineTo(it.px + it.w - 8, y + it.h / 2); g.stroke(); g.restore();
+  }
+  if (it.fwd && s.reveal > 0.6) text("↗", it.px + it.w - 52, y + it.h / 2, { size: 20, color: C.fwd, alpha: a });
+  if (it.ext && s.reveal > 0.6) text("‡", it.px + it.w - 52, y + it.h / 2, { size: 20, color: C.ext, alpha: a });
+}
+
+const GATE_NAMES = ["precheck", "depcheck", "fwdcheck", "extcheck", "rendercheck", "prosecheck", "citecheck", "contracts", "coverage"];
+function gateStack(n, prog, alpha) {
+  if (alpha <= 0.01) return;
+  panel(n.x, n.y, n.w, n.h, { alpha: alpha, r: 18, fill: C.panelDeep, stroke: rgba(C.gate, 0.3), lw: 1.6 });
+  text(n.label, n.x + 18, n.y + 26, { size: 21, color: rgba(C.ink, 0.9), alpha: alpha });
+  const top = n.y + 52, gap = (n.h - 66) / GATE_NAMES.length;
+  for (let i = 0; i < GATE_NAMES.length; i++) {
+    const k = clamp(prog * GATE_NAMES.length * 1.3 - i, 0, 1);
+    const green = k > 0.85;
+    g.save();
+    g.globalAlpha = alpha * (0.22 + 0.78 * clamp(k * 2, 0, 1));
+    rr(n.x + 16, top + i * gap, n.w - 46, Math.min(10, gap - 4), 3);
+    g.fillStyle = green ? rgba(C.ok, 0.8) : rgba(C.gate, 0.35 + 0.45 * k);
+    g.fill(); g.restore();
+    if (green) dot(n.x + n.w - 22, top + i * gap + 5, 3.2, C.ok, alpha);
+  }
+}
+
+function judgeLane(n, act, alpha, seed) {
+  if (alpha <= 0.01) return;
+  panel(n.x, n.y, n.w, n.h, {
+    alpha: alpha, r: 18,
+    fill: act > 0.05 ? rgba(n.color, 0.08) : C.panelDeep,
+    stroke: rgba(n.color, 0.28 + 0.42 * act), lw: 1.8,
+    glow: act > 0.4 ? n.color : null, glowSize: 20,
+  });
+  text(n.label, n.x + 20, n.y + 28, { size: 21, color: rgba(C.ink, 0.92), alpha: alpha });
+  text("16 concurrent · no barrier", n.x + 20, n.y + 56, { size: 18, color: C.muted, alpha: alpha * 0.9, weight: 500 });
+  const cols = 8, top = n.y + 86, cw = (n.w - 40) / cols;
+  for (let i = 0; i < 16; i++) {
+    const cx = n.x + 20 + (i % cols) * cw, cy = top + ((i / cols) | 0) * 32;
+    const per = 0.8 + hash01(i + seed) * 1.7;
+    const busy = act > 0.05 && ((CLOCK / per + hash01(i * 3 + seed)) % 1) < 0.72;
+    g.save();
+    g.globalAlpha = alpha * (busy ? 0.95 : 0.26);
+    rr(cx, cy, cw - 8, 19, 5);
+    g.fillStyle = busy ? rgba(n.color, 0.55) : C.panel;
+    g.fill(); g.restore();
+  }
+}
+
+/* =========================================================================
+   4. THE RUN — the eleven steps as windows on ONE timeline. Same names,
+   same order, same durations; state below is a pure function of the clock.
+   ========================================================================= */
+const STEPS = [
+  { n: 0, name: "Batch", who: "orchestrator", dur: 15, camx: 0,
+    body: "The frontier is computed from disk, never from a remembered page count: an unpublished page all of whose <code>requires</code> are already published. Those A-pages are grouped at most two at a time, each bringing its <code>-examples</code> companion, and the cross-batch seam count is reported before a single agent is spawned.",
+    mech: ["frontier from disk", "≤ 2 A-pages per batch", "the A/B pair is the unit", "seams counted first"] },
+  { n: 1, name: "Scaffold", who: "Beta-n-i, batches in parallel", dur: 17, camx: 430,
+    body: "One Beta per batch, all dispatched at once. Each opens every published item it means to cite — the item on disk, not the scaffold's description of it — searches reputable sources for the exact statements it needs, and tags every planned item with two provenance labels, one for the statement and one for the proof.",
+    mech: ["parallel Betas", "sources checked", "statement + proof provenance", "richness pass"] },
+  { n: 2, name: "Resolve deps", who: "Beta-n-i", dur: 18, camx: 740,
+    body: "Every load-bearing edge must land on a published item, an item earlier on the same page, or a declared forward reference. An <code>ai-generated</code> statement is never a legal target, whatever its proof provenance; what cannot be licensed is dropped with the note that makes it recoverable, or cited as a source-checked ‡ item proved elsewhere.",
+    mech: ["no ai-generated dependency", "dropped ≠ deleted", "↗ forward reference", "‡ external fallback"] },
+  { n: 3, name: "Adjudicate scaffold", who: "orchestrator", dur: 15, camx: 520,
+    body: "No stage advances on an agent's report alone. Each recommendation is verified from disk and then approved or declined on best judgment against a fixed priority — accuracy and correct citation are non-negotiable, then forward references are minimized, then richness is preserved. Routine scaffold adjudication never pauses for the owner.",
+    mech: ["verified from disk", "the orchestrator decides", "accuracy → fewer forward refs → richness"] },
+  { n: 4, name: "Apply · propagate", who: "orchestrator + Alpha-n", dur: 15, camx: 800,
+    body: "The batch outputs are spliced into <code>plan-spec.json</code>: the spec's page metadata is kept, <code>requires</code> becomes the union Beta computed, and an id clash is a hard failure. The splice renumbers orders, which is exactly why an agent is briefed by page id and file path and never by order. Alpha-n is spawned here, not at the audit.",
+    mech: ["union of requires", "id clash = hard fail", "order is never remembered", "Alpha spawns here"] },
+  { n: 5, name: "Author", who: "the scaffold Betas", dur: 19, camx: 980,
+    body: "The Beta that scaffolded a batch authors it, and the whole level is authored in one round. Proofs are phase-stratified — a step citing phase-k steps sits in phase k+1 — and the gates of record run on the result, with the orchestrator running the authoritative pass. An author never sets <code>verification.audited</code>.",
+    mech: ["phase-stratified proofs", "the gates of record", "proof contracts", "never self-certifies"] },
+  { n: 6, name: "Audit", who: "independent readers, then Alpha", dur: 20, camx: 1330,
+    body: "Nobody audits what they authored. Alpha assigns each batch a reader who did not write it, and dispatches read-only proof-refuters that return evidence and never edits. Every citation is checked against the target on disk — citing a true theorem for a stronger claim than it makes is this library's largest single defect class. A gap a competent reader closes in thirty seconds is nonfatal, and is polished here, before the text is frozen.",
+    mech: ["no self-audit", "read-only refuters", "fatal vs the 30-second gap", "cross-batch edges"] },
+  { n: 7, name: "Judge", who: "one paired sweep, on final text", dur: 22, camx: 1760,
+    body: "The text is frozen and each item's context — its own page, its companion, and only the pages it both declares and cites — is hashed once, then handed to both lanes. The pools are independent, sixteen calls to a lane, with no per-item barrier: a finished call takes the next item in its own lane. A pass is recorded only when both models passed the text.",
+    mech: ["one frozen hash, both lanes", "16 + 16, no barrier", "every A/B pair in the level", "both must pass"] },
+  { n: 8, name: "Adjudicate", who: "Alpha-n", dur: 20, camx: 1560,
+    body: "Adjudicate, do not comply. Alpha reads the frozen verdict against the current text and records one of three outcomes against that text's exact hash. Only <code>confirmed_fatal</code> licenses an edit; the other two close the rejection and change nothing — because any edit voids the verdict, forces a rejudge, and resamples a refuter that finds a fresh nitpick every run. Fatal repairs, by contrast, are uncapped.",
+    mech: ["three outcomes", "fatal-only edits", "item_sha256 on every row", "targeted rejudge"] },
+  { n: 9, name: "Scope-denial sweep", who: "the published corpus", dur: 17, camx: 900,
+    body: "Every level ends with a sweep of the published corpus, items and page summaries both, for the prose defect class where effectively all of this library's found defects live: a count written in prose, a positional claim the spec contradicts, and a denial scoped to the whole library rather than to this page's prerequisites. Grep is the entry point and never the sweep.",
+    mech: ["items and summaries", "grep is only the entry", "audited cleared → re-audit", "no pause here"] },
+  { n: 10, name: "Rundown · owner pause", who: "the only stop in the build", dur: 22, camx: 1960,
+    body: "One report — results added and dropped, judge coverage counted from the ledger and the frontmatter on disk rather than from anybody's summary, each lane's solo findings with their adjudications, and a complete fatal-error report. Then the build stops. Flipping <code>status: published</code> is the publish action and it belongs to the owner alone.",
+    mech: ["counted from disk", "lane comparison", "fatal-error report", "the sole owner pause"] },
+];
+let acc = 0;
+for (let i = 0; i < STEPS.length; i++) { STEPS[i].t0 = acc; acc += STEPS[i].dur; STEPS[i].t1 = acc; }
+const TOTAL = acc;
+function stepAt(t) {
+  for (let i = 0; i < STEPS.length; i++) if (t < STEPS[i].t1) return STEPS[i];
+  return STEPS[STEPS.length - 1];
+}
+const S = (n) => STEPS[n].t0;
+
+/** Agent activity — overlapping on purpose, so work never stops dead. */
+function activity(t) {
+  const on = (a, b) => A(t, a, 1.2) * (1 - A(t, b, 1.6));
+  return {
+    orch: Math.max(on(S(0), S(1) + 2), on(S(3), S(4) + 9), on(S(9) + 2, S(10) + 8), 0.12),
+    beta: Math.max(on(S(1), S(3) + 2), on(S(5), S(6) + 1)),
+    alpha: Math.max(on(S(4) + 6, S(5)) * 0.5, on(S(6) + 4, S(7) + 1), on(S(8), S(9))),
+    readers: on(S(6), S(6) + 15),
+    refuters: on(S(6) + 6, S(7) + 1),
+    gates: Math.max(on(S(5) + 8, S(6) + 1), on(S(9), S(9) + 11) * 0.7),
+    judges: on(S(7) + 4, S(8) + 3),
+    ledger: A(t, S(7) + 6, 15),
+    owner: A(t, S(10) + 6, 6),
+  };
+}
+
+/** Per-item state — monotone wherever the workflow is monotone. */
+function itemState(it, t) {
+  const reveal = A(t, S(1) + 3 + it.d * 2.2, 1.1);
+  const prov = A(t, S(1) + 11 + it.d, 1.4);
+  const dropped = it.dropped ? A(t, S(2) + 9, 1.2) : 0;
+  const authored = A(t, S(5) + 2 + it.d * 3, 1.6) * (1 - dropped);
+  const judged = A(t, S(7) + 8 + it.d * 3, 1.0) * (1 - dropped);
+  const flagged = it.fatal ? win(t, S(8) + 3, S(8) + 13) : 0;
+  const repaired = it.fatal ? A(t, S(8) + 13.5, 1.4) : 0;
+  const hot = Math.max(
+    it.fatal ? pulse(t, S(8) + 3, 4) : 0,
+    pulse(t, S(5) + 2 + it.d * 3, 2.2) * 0.6,
+    pulse(t, S(7) + 8 + it.d * 3, 1.6) * 0.5
+  );
+  return {
+    reveal: reveal, prov: prov, dropped: dropped, authored: authored,
+    judged: Math.max(judged * (1 - flagged), repaired), flagged: flagged, hot: hot,
+  };
+}
+
+/* =========================================================================
+   5. CAMERA — pan only. No zoom, so type size never changes; that is the
+   entire reason the camera does not scale.
+   ========================================================================= */
+let camX = 0;
+function cameraTarget(t) {
+  const s = stepAt(t);
+  const i = STEPS.indexOf(s);
+  const nxt = STEPS[Math.min(i + 1, STEPS.length - 1)];
+  const k = easeInOut(clamp((t - s.t0) / s.dur, 0, 1));
+  // drift toward the next anchor across the whole step: always moving, never cutting
+  return clamp(lerp(s.camx, nxt.camx, k * 0.55), 0, WORLD_W - W);
+}
+
+/* =========================================================================
+   6. THE BOARD
+   ========================================================================= */
+function background() {
+  g.fillStyle = C.bg0;
+  g.fillRect(0, 0, cv.width, cv.height);
+  g.save();
+  g.scale(VIEW, VIEW);
+  const gr = g.createLinearGradient(0, 0, 0, H);
+  gr.addColorStop(0, "rgba(255,255,255,0.022)");
+  gr.addColorStop(1, "rgba(0,0,0,0)");
+  g.fillStyle = gr;
+  g.fillRect(0, 0, W, H);
+  g.strokeStyle = C.grid;
+  g.lineWidth = 1;
+  const step = 80, off = -(camX % step);
+  g.beginPath();
+  for (let x = off; x < W + step; x += step) { g.moveTo(x, 0); g.lineTo(x, H); }
+  for (let y = 0; y < H; y += step) { g.moveTo(0, y); g.lineTo(W, y); }
+  g.stroke();
+  g.restore();
+}
+
+function drawMesh(t, act) {
+  /* ---- wires first, so nodes sit on top ---- */
+  const wOrch = A(t, S(0) + 2, 1.5);
+  wire(M.corpus.x + M.corpus.w, cyOf(M.corpus), M.orch.x, cyOf(M.orch) - 20,
+    { alpha: wOrch, color: rgba(C.corpus, 0.42), lw: 2.2, packets: 3, speed: 0.22, pcolor: C.corpus, pr: 4 });
+  wire(M.frontier.x + M.frontier.w, cyOf(M.frontier), M.orch.x, cyOf(M.orch) + 42,
+    { alpha: wOrch, color: rgba(C.orchestrator, 0.5), lw: 2.4, packets: 2, speed: 0.3, pcolor: C.orchestrator });
+
+  const wBeta = A(t, S(1), 1.2);
+  [M.beta1, M.beta2].forEach(function (b, i) {
+    wire(M.orch.x + M.orch.w, cyOf(M.orch) + (i ? 32 : -32), b.x, cyOf(b),
+      { alpha: wBeta, color: rgba(C.beta, 0.4), lw: 2.4, bend: i ? -0.16 : 0.16,
+        packets: act.beta > 0.1 ? 3 : 0, speed: 0.4, pcolor: C.beta, phase: i * 0.3 });
+    const pg = i ? M.page2 : M.page1;
+    wire(b.x + b.w, cyOf(b), pg.x, cyOf(pg),
+      { alpha: wBeta, color: rgba(C.beta, 0.28), lw: 2, bend: 0.04,
+        packets: act.beta > 0.1 ? 2 : 0, speed: 0.5, pcolor: C.beta, phase: i * 0.5 });
+  });
+
+  // the cross-batch seam — counted at step 0, drawn for the whole run
+  const seam = A(t, S(0) + 9, 1.6);
+  wire(M.page1.x + 40, M.page1.y + M.page1.h, M.page2.x + 40, M.page2.y,
+    { alpha: seam * 0.75, color: rgba(C.warn, 0.55), lw: 2.4, dash: [10, 8], bend: 0.35 });
+
+  const wGates = A(t, S(5) + 4, 1.4);
+  [M.page1, M.page2].forEach(function (pg, i) {
+    wire(pg.x + pg.w, cyOf(pg), M.gates.x, cyOf(M.gates) + (i ? 30 : -30),
+      { alpha: wGates, color: rgba(C.gate, 0.32), lw: 2.2, bend: i ? -0.1 : 0.1,
+        packets: act.gates > 0.1 ? 2 : 0, speed: 0.45, pcolor: C.gate });
+  });
+
+  const wAudit = A(t, S(6), 1.4);
+  wire(M.gates.x + M.gates.w, cyOf(M.gates) - 32, M.readers.x, cyOf(M.readers) + 40,
+    { alpha: wAudit, color: rgba(C.reader, 0.38), lw: 2.2, packets: act.readers > 0.1 ? 3 : 0, speed: 0.42, pcolor: C.reader });
+  wire(M.gates.x + M.gates.w, cyOf(M.gates) + 32, M.refuters.x, cyOf(M.refuters) - 40,
+    { alpha: wAudit, color: rgba(C.reader, 0.38), lw: 2.2, bend: -0.18, packets: act.refuters > 0.1 ? 3 : 0, speed: 0.42, pcolor: C.reader });
+  [M.readers, M.refuters].forEach(function (r, i) {
+    wire(cxOf(r), r.y + (i ? 0 : r.h), cxOf(M.alpha), M.alpha.y + (i ? M.alpha.h : 0),
+      { alpha: wAudit, color: rgba(C.alpha, 0.33), lw: 2, bend: 0.04,
+        packets: act.alpha > 0.1 ? 2 : 0, speed: 0.5, pcolor: C.alpha, phase: i * 0.4 });
+  });
+
+  const wJudge = A(t, S(7), 1.4);
+  wire(M.alpha.x + M.alpha.w, cyOf(M.alpha), M.freeze.x, cyOf(M.freeze),
+    { alpha: wJudge, color: rgba(C.ink, 0.22), lw: 2, packets: act.judges > 0.1 ? 1 : 0, speed: 0.5, pcolor: C.ink });
+  [[M.laneA, C.judgeA, 0.18], [M.laneB, C.judgeB, -0.18]].forEach(function (p) {
+    const ln = p[0], col = p[1], bend = p[2];
+    wire(M.freeze.x + M.freeze.w, cyOf(M.freeze), ln.x, cyOf(ln),
+      { alpha: wJudge, color: rgba(col, 0.4), lw: 2.4, bend: bend,
+        packets: act.judges > 0.1 ? 4 : 0, speed: 0.5, pcolor: col });
+    wire(ln.x + ln.w, cyOf(ln), M.ledger.x, cyOf(M.ledger) + (col === C.judgeA ? -42 : 42),
+      { alpha: wJudge, color: rgba(col, 0.3), lw: 2, bend: -bend,
+        packets: act.judges > 0.1 ? 3 : 0, speed: 0.4, pcolor: col });
+  });
+
+  // the rejudge loop — the one edge that runs backwards
+  wire(M.ledger.x, M.ledger.y + 10, cxOf(M.alpha), M.alpha.y - 12,
+    { alpha: win(t, S(8) + 13, S(8) + 20.5), color: rgba(C.bad, 0.6), lw: 2.6, bend: 0.42,
+      dash: [9, 7], packets: 2, speed: 0.6, pcolor: C.bad });
+
+  wire(M.ledger.x + M.ledger.w, cyOf(M.ledger), M.owner.x, cyOf(M.owner),
+    { alpha: A(t, S(10), 1.4), color: rgba(C.orchestrator, 0.45), lw: 2.6, packets: 2, speed: 0.28, pcolor: C.orchestrator });
+
+  /* ---- nodes ---- */
+  storeCard(M.corpus, A(t, S(0) + 1, 3) * 0.75 + A(t, S(10) + 12, 4) * 0.25, 1, 9, C.corpus);
+  storeCard(M.frontier, A(t, S(0) + 3, 2.5), A(t, S(0) + 1, 1), 3, C.orchestrator);
+  agentCard(M.orch, act.orch, 1, "decides · never authors");
+  agentCard(M.beta1, act.beta, A(t, S(1), 1), "batch 1");
+  agentCard(M.beta2, act.beta, A(t, S(1), 1), "batch 2");
+  boardCard(M.page1, A(t, S(1) + 1.5, 1.2));
+  boardCard(M.page2, A(t, S(1) + 1.5, 1.2));
+  for (let i = 0; i < ITEMS.length; i++) itemChip(ITEMS[i], itemState(ITEMS[i], t));
+  gateStack(M.gates, Math.max(A(t, S(5) + 9, 6), A(t, S(9) + 1, 6)), A(t, S(5) + 3, 1.2));
+  agentCard(M.readers, act.readers, A(t, S(6), 1), "never their own batch");
+  agentCard(M.refuters, act.refuters, A(t, S(6) + 5, 1), "evidence, never edits");
+  agentCard(M.alpha, act.alpha, A(t, S(4) + 6, 1.2), "the sole adjudicator");
+
+  const fz = A(t, S(7) + 1, 1.2);
+  panel(M.freeze.x, M.freeze.y, M.freeze.w, M.freeze.h, {
+    alpha: fz, r: 16, fill: C.panelDeep, stroke: rgba(C.ink, 0.22), lw: 1.6,
+    glow: pulse(t, S(7) + 2, 2.2) > 0.12 ? C.ink : null, glowSize: 16,
+  });
+  text("frozen context", M.freeze.x + 18, M.freeze.y + 28, { size: 20, color: rgba(C.ink, 0.86), alpha: fz });
+  text("sha256", M.freeze.x + 18, M.freeze.y + 58, { size: 18, color: C.muted, alpha: fz, weight: 500, mono: true });
+  text("a4f1…9c", M.freeze.x + 18, M.freeze.y + 84, { size: 19, color: C.judgeA, alpha: fz, mono: true });
+  text("one hash, both lanes", M.freeze.x + 18, M.freeze.y + 110, { size: 17, color: C.faint, alpha: fz, weight: 500 });
+
+  judgeLane(M.laneA, act.judges, A(t, S(7) + 2, 1.2), 11);
+  judgeLane(M.laneB, act.judges, A(t, S(7) + 2, 1.2), 71);
+  storeCard(M.ledger, act.ledger, A(t, S(7) + 4, 1.2), 10, C.judgeA);
+
+  const ow = A(t, S(10) + 2, 1.4);
+  panel(M.owner.x, M.owner.y, M.owner.w, M.owner.h, {
+    alpha: ow, r: 20, fill: rgba(C.orchestrator, 0.08), stroke: rgba(C.orchestrator, 0.5), lw: 2,
+    glow: act.owner > 0.2 ? C.orchestrator : null, glowSize: 24,
+  });
+  text("owner", cxOf(M.owner), M.owner.y + 68, { size: 26, color: C.ink, alpha: ow, align: "center" });
+  text("status: published", cxOf(M.owner), M.owner.y + 106, { size: 19, color: C.orchestrator, alpha: ow, align: "center", mono: true });
+  text("the only stop", cxOf(M.owner), M.owner.y + 138, { size: 18, color: C.muted, alpha: ow, align: "center", weight: 500 });
+}
+
+/* ---- annotation, drawn in screen space so type never moves with the camera -- */
+const NOTES = [
+  [0, 2.5, 8.0, "all requires published → on the frontier", C.ok],
+  [0, 8.5, 14.5, "cross-batch seam counted before any agent is spawned", C.warn],
+  [1, 2.0, 8.0, "every Beta dispatched at once — one per batch", C.beta],
+  [1, 9.0, 16.5, "two provenance labels per item: statement, then proof", C.ok],
+  [2, 2.0, 8.5, "a dependency must be published, earlier, or a declared ↗", C.fwd],
+  [2, 9.0, 17.5, "unlicensable → dropped with the note that makes it recoverable", C.muted],
+  [3, 2.0, 8.0, "verified from disk, not from the Beta's report", C.orchestrator],
+  [3, 8.5, 14.5, "accuracy → fewer forward references → richness", C.orchestrator],
+  [4, 2.0, 8.0, "requires becomes the union Beta computed; an id clash is fatal", C.warn],
+  [4, 8.5, 14.5, "Alpha-n spawns here, before a line is authored", C.alpha],
+  [5, 2.0, 9.0, "a step citing phase-k steps sits in phase k+1", C.beta],
+  [5, 9.5, 18.5, "the gates of record run on the result", C.gate],
+  [6, 2.0, 9.0, "nobody audits what they authored", C.reader],
+  [6, 9.5, 19.5, "citing a true theorem for a stronger claim — the largest defect class", C.bad],
+  [7, 2.0, 9.0, "the text is frozen, then hashed once", C.ink],
+  [7, 9.5, 21.5, "independent pools, no per-item barrier", C.judgeA],
+  [8, 2.0, 9.0, "three outcomes; only confirmed_fatal licenses an edit", C.alpha],
+  [8, 9.5, 19.5, "a repair voids the verdict → targeted rejudge", C.bad],
+  [9, 2.0, 9.0, "grep is the entry point, never the sweep", C.corpus],
+  [9, 9.5, 16.5, "a denial scoped to the library, not to this page", C.warn],
+  [10, 2.0, 10.0, "coverage counted from the ledger and the frontmatter on disk", C.ok],
+  [10, 10.5, 21.5, "the build stops here — publishing is the owner's alone", C.orchestrator],
+];
+function annotate(t) {
+  const s = stepAt(t), lt = t - s.t0;
+  for (let i = 0; i < NOTES.length; i++) {
+    const nt = NOTES[i];
+    if (nt[0] !== s.n) continue;
+    const a = win(lt, nt[1], nt[2]);
+    if (a <= 0.01) continue;
+    g.save();
+    g.font = "500 24px system-ui, -apple-system, Segoe UI, sans-serif";
+    const tw = g.measureText(nt[3]).width;
     g.restore();
+    const bw = tw + 52, bx = (W - bw) / 2, by = H - 76;
+    panel(bx, by, bw, 52, { alpha: a * 0.97, r: 14, fill: "rgba(9,10,12,0.86)", stroke: rgba(nt[4], 0.5), lw: 1.6 });
+    dot(bx + 22, by + 26, 4.5, nt[4], a);
+    text(nt[3], bx + 38, by + 26, { size: 24, color: rgba(C.ink, 0.96), alpha: a, weight: 500 });
   }
-  if (defect) crossMark(b.x + w + 22, b.y + b.h / 2, 9, P.bad, clamp(it.defect * 2, 0, 1));
-  else if (it.fixed > 0.5) checkMark(b.x + w + 22, b.y + b.h / 2, 9, P.ok, clamp((it.fixed - 0.5) * 2, 0, 1));
-  else if (it.judged > 0.5) {
-    const k = clamp((it.judged - 0.5) * 2, 0, 1);
-    if (it.keep) checkMark(b.x + w + 22, b.y + b.h / 2, 9, P.ok, k);
-    else crossMark(b.x + w + 22, b.y + b.h / 2, 9, P.bad, k);
-  }
-}
-function drawItems(a) { if (a > 0.004) ITEMS.forEach((it) => drawItemChip(it, a)); }
+  // Caption type is the previous version's exactly: title 34, sub 21.
+  const cap = easeOut(A(lt, 0.15, 0.7));
+  text("Step " + s.n + " — " + s.name, 44, 44, { size: 34, weight: 700, color: C.ink, alpha: cap });
+  text(s.who, 44, 84, { size: 21, weight: 500, color: C.faint, alpha: cap });
 
-const ORCH = { x: 110, y: 152 }, ALPHA = { x: 1490, y: 152 };
-function drawAgents(a, o = {}) {
-  if (a <= 0.004) return;
-  orb(ORCH.x, ORCH.y, 34, { color: P.orchestrator, icon: "◆", label: "orchestrator", alpha: a, busy: o.orchBusy });
-  if (o.alpha > 0.004) orb(ALPHA.x, ALPHA.y, 34, { color: P.alpha, icon: "A", label: "Alpha-12", alpha: a * o.alpha, busy: o.alphaBusy });
-  if (o.betas > 0.004) {
-    BATCHES.forEach((b, i) => orb(b.orbX, b.orbY, 30, {
-      color: P.beta, icon: "β", label: b.agent, alpha: a * clamp(o.betas * 1.4 - i * 0.12, 0, 1), busy: o.betaBusy,
-    }));
+  let authored = 0, judged = 0;
+  for (let i = 0; i < ITEMS.length; i++) {
+    const st = itemState(ITEMS[i], t);
+    if (st.authored > 0.6) authored++;
+    if (st.judged > 0.6) judged++;
   }
+  text("items " + authored + "/12   judged " + judged + "/12   lanes 16+16",
+    W - 34, 52, { size: 20, color: C.faint, align: "right", mono: true, weight: 500, alpha: 0.9 });
 }
 
 /* =========================================================================
-   4. CAMERA
+   7. PLAYER
    ========================================================================= */
-const cam = { x: 800, y: 410, s: 1 };
-let camT = { x: 800, y: 410, s: 1 };
-function applyCam() {
-  g.setTransform(DPR, 0, 0, DPR, 0, 0);
-  const base = Math.min((cv.width / DPR) / W, (cv.height / DPR) / H);
-  g.translate((cv.width / DPR) / 2, (cv.height / DPR) / 2);
-  g.scale(base * cam.s, base * cam.s);
-  g.translate(-cam.x, -cam.y);
-}
+let CLOCK = 0;          // wall clock for packet motion — never rewinds
+let T = 0;              // story time
+let playing = true;
+let last = 0;
 
-/* =========================================================================
-   5. SCENES
-   ========================================================================= */
-const SCENES = [];
-const S = (o) => SCENES.push(o);
-const FULL = { x: 800, y: 410, s: 1 };
-
-/* ---------- 0 · BATCH ------------------------------------------------- */
-S({
-  n: 0, name: "Batch", who: "orchestrator", dur: 15, cam: FULL,
-  body: "The frontier is computed from disk, never from a remembered page count: an unpublished page all of whose <code>requires</code> are already published. Those A-pages are grouped at most two at a time, each bringing its <code>-examples</code> companion, and the cross-batch seam count is reported before a single agent is spawned.",
-  mech: ["frontier from disk", "≤ 2 A-pages per batch", "the A/B pair is the unit", "seams counted first"],
-  enter() { resetItems(); layers({ corpus: 1, panels: 1, agents: 1 }); },
-  draw(t) {
-    LT.bheads = A(t, 5.0, 0.1);
-    LT.panelFrame = A(t, 7.6, 0.1);
-    caption("Step 0 — batching the frontier", "an unpublished page whose requires are all published", A(t, 0.1, 0.8));
-    // requires-edges up from the published band
-    const rq = A(t, 1.2, 2.6);
-    BATCHES.forEach((b, bi) => b.cols.forEach((col, ci) => {
-      const src = CORPUS_BOX[(bi * 2 + ci) % CORPUS_BOX.length];
-      const k = clamp(rq * 1.5 - (bi * 2 + ci) * 0.15, 0, 1);
-      edge(src.x + src.w / 2, src.y, col.aHead.x + col.w / 2, col.aHead.y + col.aHead.h,
-        { color: alphaOf(P.indigo, 0.6), prog: k, lw: 2.6, bend: 0.1, packet: k < 1 ? k : null });
-      if (k > 0.97) checkMark(col.aHead.x + col.w / 2, col.aHead.y + col.aHead.h + 26, 10, P.ok, A(t, 4.0 + (bi * 2 + ci) * 0.15, 0.4));
-    }));
-    note("all requires published → on the frontier", 800, NOTE_Y,
-      { align: "center", alpha: win(t, 4.2, 6.6), color: P.ok, stroke: alphaOf(P.ok, 0.55), size: 24, h: 50 });
-    note("each A page brings its B companion", 800, NOTE_Y,
-      { align: "center", alpha: win(t, 5.4, 7.4), color: P.ink, stroke: alphaOf(P.indigo, 0.45), size: 24, h: 50 });
-    note("at most 2 A-pages to a batch", 800, NOTE_Y,
-      { align: "center", alpha: win(t, 8.0, 10.4), color: P.indigo, stroke: alphaOf(P.indigo, 0.55), size: 24, h: 50 });
-    // the seam
-    const sm = A(t, 10.0, 1.8);
-    if (sm > 0) {
-      const a1 = BATCHES[0], a2 = BATCHES[1];
-      edge(a1.x + a1.w, a1.y + 230, a2.x, a2.y + 230,
-        { color: P.warn, prog: sm, lw: 3.4, dash: [10, 7], bend: 0.5 });
-      note("cross-batch seam — counted before any agent is spawned", 800, NOTE_Y,
-        { align: "center", alpha: win(t, 10.8, 99), color: P.warn, stroke: alphaOf(P.warn, 0.55), size: 24, h: 50 });
-    }
-  },
-});
-
-/* ---------- 1 · SCAFFOLD ---------------------------------------------- */
-S({
-  n: 1, name: "Scaffold", who: "Beta-n-i, batches in parallel", dur: 17, cam: FULL,
-  body: "One Beta per batch, all dispatched at once. Each opens every published item it means to cite — the item on disk, not the scaffold's description of it — searches reputable sources for the exact statements it needs, and tags every planned item with two provenance labels, one for the statement and one for the proof.",
-  mech: ["parallel Betas", "sources checked", "statement + proof provenance", "richness pass"],
-  enter() { resetItems(); layers({ corpus: 0.25, panels: 1, panelFrame: 1, bheads: 1, items: 1, agents: 1 }); },
-  draw(t) {
-    caption("Step 1 — scaffolding each pair from sources", "Beta writes only its own three namespaced batch files", A(t, 0.1, 0.8));
-    // source cards drop in beside the orchestrator, then leave
-    const SRC = ["Stacks Project", "an open textbook", "university notes"];
-    SRC.forEach((s, i) => {
-      const k = A(t, 0.8 + i * 0.4, 1.0), out = 1 - A(t, 5.8, 1.0);
-      const y = lerp(-40, 150, easeOut(k));
-      const box = note(s, 330 + i * 340, y, { align: "center", alpha: k * out, size: 22, h: 46, color: P.muted, glow: null });
-      if (k > 0.9) checkMark(box.x + box.w + 22, y, 9, P.ok, A(t, 2.0 + i * 0.35, 0.5) * out);
-    });
-    // items materialise — every batch at once, which is the point of step 1
-    const rev = A(t, 2.6, 3.8);
-    ITEMS.forEach((it) => {
-      it.reveal = clamp(rev * 2.0 - it.si * 0.12, 0, 1);
-      it.prov = A(t, 8.0, 2.0) * clamp(rev * 3 - it.si * 0.1, 0, 1);
-    });
-    note("every item it means to cite is opened on disk, not taken from the scaffold's description", 800, NOTE_Y,
-      { align: "center", alpha: win(t, 6.4, 8.8), size: 24, h: 50, color: P.ink, stroke: alphaOf(P.indigo, 0.4) });
-    // provenance legend, tied to the two bars now on every chip
-    if (t > 9.2) {
-      const k = win(t, 9.2, 12.8), c = PROV_COL();
-      [["statement", null], ["L literature", c.L], ["A ai-altered", c.A], ["G ai-generated", c.G]].forEach((e, i) => {
-        note(e[0], 380 + i * 290, NOTE_Y, {
-          align: "center", alpha: k, size: 22, h: 48,
-          color: e[1] ?? P.ink, stroke: e[1] ? alphaOf(e[1], 0.55) : alphaOf(P.indigo, 0.4), glow: null,
-        });
-      });
-    }
-    // the generated corollary
-    if (t > 13.2) {
-      const b = PAIRS[0].items[2].box, k = A(t, 13.2, 0.8);
-      card(b.x - 7, b.y - 7, b.w + 14, b.h + 14, { r: 15, fill: "transparent", stroke: P.warn, alpha: k, dash: [7, 5], lw: 2.6 });
-      edge(b.x + 200, b.y + b.h + 8, 800, NOTE_Y - 26, { color: P.warn, prog: k, lw: 2.4, bend: 0.3, alpha: 0.7 });
-      note("the one ai-generated claim — a corollary, never load-bearing", 800, NOTE_Y,
-        { align: "center", alpha: k, size: 24, h: 50, color: P.warn, stroke: alphaOf(P.warn, 0.55) });
-    }
-  },
-});
-
-/* ---------- 2 · RESOLVE DEPENDENCIES ----------------------------------- */
-S({
-  n: 2, name: "Resolve deps", who: "Beta-n-i", dur: 18, cam: FULL,
-  body: "Every load-bearing edge must land on a published item, an item earlier on the same page, or a declared forward reference. An <code>ai-generated</code> statement is never a legal target, whatever its proof provenance; what cannot be licensed is dropped with the note that makes it recoverable, or cited as a source-checked ‡ item proved elsewhere.",
-  mech: ["no ai-generated dependency", "dropped ≠ deleted", "↗ forward reference", "‡ external fallback"],
-  enter() { resetItems({ reveal: 1, prov: 1 }); layers({ corpus: 0.75, panels: 1, panelFrame: 1, bheads: 1, items: 1, agents: 1 }); },
-  draw(t) {
-    caption("Step 2 — every edge must resolve", "published · earlier on this page · a declared forward reference", A(t, 0.1, 0.8));
-    const say = (s, from, to, col) => note(s, 800, NOTE_Y, {
-      align: "center", alpha: win(t, from, to), size: 24, h: 50, color: col, stroke: alphaOf(col, 0.55),
-    });
-    // (a) backward edges into the published corpus
-    const k1 = A(t, 1.0, 2.2);
-    [[PAIRS[0].items[0], 0], [PAIRS[1].items[1], 1], [PAIRS[2].items[1], 2]].forEach((e, i) => {
-      const c = CORPUS_BOX[e[1]], b = e[0].box;
-      const k = clamp(k1 * 1.5 - i * 0.18, 0, 1);
-      edge(b.x + 20, b.y + b.h, c.x + c.w / 2, c.y, { color: P.indigo, prog: k, lw: 2.8, bend: 0.05, packet: k < 1 ? k : null, arrow: true });
-    });
-    say("resolved against a published item on disk", 3.0, 5.4, P.indigo);
-    // (b) same-page earlier edges
-    const k2 = A(t, 3.6, 1.8);
-    [[PAIRS[0].items[1], PAIRS[0].items[0]], [PAIRS[1].items[2], PAIRS[1].items[1]]].forEach((e, i) => {
-      const k = clamp(k2 * 1.6 - i * 0.2, 0, 1);
-      edge(e[1].box.x + e[1].box.w, e[1].box.y + 21, e[0].box.x + e[0].box.w, e[0].box.y + 21,
-        { color: P.indigo, prog: k, lw: 2.6, bend: -0.55, arrow: true });
-    });
-    // (c) the forbidden target
-    if (t > 5.8) {
-      const gen = PAIRS[0].items[2], user = PAIRS[0].b[0], k = A(t, 5.8, 0.9);
-      edge(user.box.x + 20, user.box.y, gen.box.x + 20, gen.box.y + gen.box.h,
-        { color: P.bad, prog: Math.min(k * 1.5, 1), lw: 3, bend: 0.4, dash: [8, 6] });
-      crossMark(gen.box.x - 26, gen.box.y + 44, 13, P.bad, A(t, 6.6, 0.4));
-      say("an ai-generated statement may never be a deps target", 6.6, 9.2, P.bad);
-    }
-    // (d) dropped with a licensing note — it needs machinery this level has not built
-    if (t > 9.0) {
-      const it = PAIRS[2].b[1], k = A(t, 9.0, 1.0);
-      it.dropped = k;
-      card(it.box.x - 7, it.box.y - 7, it.box.w + 14, it.box.h + 14,
-        { r: 15, fill: "transparent", stroke: P.warn, alpha: k * 0.8, dash: [7, 5], lw: 2.6 });
-      say("out of scope → dropped with the note that makes it recoverable", 9.6, 12.2, P.warn);
-    }
-    // (e) a declared forward reference
-    if (t > 12.2) {
-      const src = PAIRS[1].items[2], dst = PAIRS[2].items[1], k = A(t, 12.2, 0.9);
-      src.forward = k;
-      edge(src.box.x + src.box.w, src.box.y + 21, dst.box.x, dst.box.y + 21,
-        { color: P.sky, prog: k, lw: 3, dash: [10, 6], bend: 0.35, arrow: true });
-      say("↗ a declared forward reference — few, each justified", 12.8, 15.0, P.sky);
-    }
-    // (f) the narrow last resort
-    if (t > 15.0) {
-      PAIRS[2].items[2].external = A(t, 15.0, 0.9);
-      say("‡ source-cited, proved_here: false — the failed local route is recorded", 15.4, 99, P.fuchsia);
-    }
-  },
-});
-
-/* ---------- 3 · ADJUDICATE THE SCAFFOLD -------------------------------- */
-const RECS = [
-  { s: "split the rearrangement proof into a tail lemma", v: "approve" },
-  { s: "cite Baire category from a later page", v: "decline" },
-  { s: "drop the nested-intervals corollary", v: "decline" },
-];
-S({
-  n: 3, name: "Adjudicate scaffold", who: "orchestrator", dur: 15, cam: FULL,
-  body: "No stage advances on an agent's report alone. Each recommendation is verified from disk and then approved or declined on best judgment against a fixed priority — accuracy and correct citation are non-negotiable, then forward references are minimized, then richness is preserved. Routine scaffold adjudication never pauses for the owner.",
-  mech: ["verified from disk", "the orchestrator decides", "accuracy → fewer forward refs → richness"],
-  enter() { resetItems({ reveal: 1, prov: 1 }); structuralMarks(); layers({ panels: 0.28, panelFrame: 0.28, bheads: 0.28, items: 0.22, agents: 1 }); },
-  draw(t) {
-    caption("Step 3 — the orchestrator adjudicates", "no stage advances on an agent's report alone", A(t, 0.1, 0.8));
-    // the priority ladder
-    const lk = A(t, 0.8, 0.9);
-    text("priority", 90, 250, { size: 21, weight: 600, color: P.faint, alpha: lk });
-    ["1 · accuracy + citation", "2 · fewer forward refs", "3 · richness"].forEach((s, i) => {
-      note(s, 90, 300 + i * 62, {
-        alpha: clamp(lk * 1.5 - i * 0.2, 0, 1), size: 23, w: 400, h: 52,
-        color: i === 0 ? P.ink : P.muted, stroke: i === 0 ? alphaOf(P.indigo, 0.6) : P.panelEdge, glow: i === 0 ? P.indigo : null,
-      });
-    });
-    // recommendations arrive, are read from disk, then stamped
-    RECS.forEach((r, i) => {
-      const k = A(t, 2.0 + i * 3.4, 0.8);
-      if (k <= 0) return;
-      const y = 258 + i * 150;
-      const x = lerp(1700, 560, easeOut(k));
-      card(x, y, 840, 116, { r: 18, fill: P.solid, stroke: P.panelEdge, alpha: k, glow: P.indigo, glowSize: 26 });
-      text(r.s, x + 26, y + 40, { size: 25, weight: 600, color: P.ink, alpha: k, maxw: 620 });
-      const rd = A(t, 2.6 + i * 3.4, 0.8);
-      text(rd > 0.97 ? "verified from disk" : "reading the items from disk…", x + 26, y + 80,
-        { size: 20, color: rd > 0.97 ? P.ok : P.faint, alpha: k });
-      const dk = A(t, 3.6 + i * 3.4, 0.5);
-      if (dk > 0) {
-        const ok = r.v === "approve";
-        pill(ok ? "approve" : "decline", x + 814, y + 58, {
-          align: "right", alpha: dk, size: 22, h: 46, color: ok ? P.ok : P.bad,
-          stroke: alphaOf(ok ? P.ok : P.bad, 0.55), fill: alphaOf(ok ? P.ok : P.bad, 0.12),
-        });
-      }
-    });
-    note("every decision and its rationale → the level log", 800, NOTE_Y,
-      { align: "center", alpha: A(t, 12.6, 0.7), size: 23, h: 50 });
-  },
-});
-
-/* ---------- 4 · APPLY AND PROPAGATE ------------------------------------ */
-S({
-  n: 4, name: "Apply · propagate", who: "orchestrator + Alpha-n", dur: 15, cam: FULL,
-  body: "The batch outputs are spliced into <code>plan-spec.json</code>: the spec's page metadata is kept, <code>requires</code> becomes the union Beta computed, and an id clash is a hard failure. The splice renumbers orders, which is exactly why an agent is briefed by page id and file path and never by order. Alpha-n is spawned here, not at the audit.",
-  mech: ["union of requires", "id clash = hard fail", "order is never remembered", "Alpha spawns here"],
-  enter() { resetItems({ reveal: 1, prov: 1 }); structuralMarks(); layers({ panels: 1, panelFrame: 1, bheads: 1, items: 1, agents: 1 }); },
-  draw(t) {
-    caption("Step 4 — splice into the machine scaffold", "research/plan-spec.json — the one file that carries order", A(t, 0.1, 0.8));
-    const sx = 480, sy = 616, sw = 640, sh = 150;
-    card(sx, sy, sw, sh, { r: 20, fill: P.solid, stroke: P.panelEdge, alpha: A(t, 0.4, 0.8), glow: t > 5 && t < 8 ? P.indigo : null });
-    text("plan-spec.json", sx + 26, sy + 38, { size: 26, weight: 650, color: P.ink, alpha: A(t, 0.4, 0.8), mono: true });
-    // batch files stream in
-    BATCHES.forEach((b, i) => {
-      const k = A(t, 1.2 + i * 0.6, 1.8);
-      edge(b.cx, b.y + b.h, sx + 180 + i * 280, sy, { color: P.beta, prog: Math.min(k * 1.4, 1), lw: 2.8, bend: 0.3, packet: k < 1 ? k : null, arrow: true });
-    });
-    [["page metadata kept · requires unioned", 3.6, P.muted], ["an id clash is a hard failure", 4.4, P.bad]].forEach(([s, at, col], i) => {
-      text(s, sx + 26, sy + 82 + i * 34, { size: 22, weight: 600, color: col, alpha: A(t, at, 0.6), maxw: sw - 52 });
-    });
-    // renumbering
-    if (t > 6.6) {
-      const k = A(t, 6.6, 1.2);
-      ["order 141 → 149", "order 142 → 150"].forEach((s, i) => {
-        note(s, 1300, 620 + i * 58, { align: "center", alpha: clamp(k * 1.6 - i * 0.2, 0, 1), size: 22, mono: true, w: 260, h: 50, color: P.warn, stroke: alphaOf(P.warn, 0.55) });
-      });
-      note("brief by page id, never by order", 1330, 740,
-        { align: "center", alpha: A(t, 8.4, 0.7), size: 22, h: 48, color: P.ink, stroke: alphaOf(P.warn, 0.45) });
-    }
-    // Alpha spawns
-    if (t > 10.0) {
-      const k = A(t, 10.0, 1.0);
-      orb(ALPHA.x, ALPHA.y, 34, { color: P.alpha, alpha: k, busy: t * 0.5 });
-      note("Alpha-12 spawns here", 1478, 258,
-        { align: "center", alpha: k, size: 21, h: 46, w: 240, color: P.alpha, stroke: alphaOf(P.alpha, 0.55) });
-    }
-  },
-});
-
-/* ---------- 5 · AUTHOR -------------------------------------------------- */
-const PROOF_STEPS = [
-  { n: 1, ph: 0, s: "Let ε > 0 and cover K by ε/2-balls.", tag: "given" },
-  { n: 2, ph: 0, s: "K is compact: take a finite subcover.", tag: "[F2]" },
-  { n: 3, ph: 1, s: "Let δ be a Lebesgue number of it.", tag: "[F1]" },
-  { n: 4, ph: 2, s: "|x−y| < δ ⟹ |f(x)−f(y)| < ε.  ∎", tag: "steps 2, 3" },
-];
-const GATES = ["precheck", "depcheck", "citecheck", "rendercheck", "proof-contract", "content-policy"];
-S({
-  n: 5, name: "Author", who: "the scaffold Betas", dur: 19, cam: FULL,
-  body: "The Beta that scaffolded a batch authors it, and the whole level is authored in one round. Proofs are phase-stratified — a step citing phase-k steps sits in phase k+1 — and the gates of record run on the result, with the orchestrator running the authoritative pass. An author never sets <code>verification.audited</code>.",
-  mech: ["phase-stratified proofs", "the gates of record", "proof contracts", "never self-certifies"],
-  enter() { resetItems({ reveal: 1, prov: 1, authored: 1 }); structuralMarks(); layers({ panels: 0.1, panelFrame: 0.1, bheads: 0.1, items: 0.08, agents: 0.55 }); },
-  draw(t) {
-    caption("Step 5 — authoring, and the gates of record", "status: draft · origin: session", A(t, 0.1, 0.8));
-    const cx = 60, cy = 150, cw = 900, ch = 590;
-    card(cx, cy, cw, ch, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: A(t, 0.4, 0.8), glow: P.indigo });
-    text("thm-heine-cantor", cx + 30, cy + 44, { size: 28, weight: 650, color: P.kinds.theorem.text, alpha: A(t, 0.4, 0.8), mono: true });
-    pill("Theorem", cx + cw - 30, cy + 44, { align: "right", alpha: A(t, 0.4, 0.8), size: 20, h: 42, fill: P.kinds.theorem.fill, stroke: P.kinds.theorem.border, color: P.kinds.theorem.text });
-    text("A continuous function on a compact set is uniformly continuous.", cx + 30, cy + 96,
-      { size: 25, color: P.ink, alpha: A(t, 0.9, 0.7), maxw: cw - 60 });
-    // facts
-    [["[F1]", "lem-lebesgue-number"], ["[F2]", "compactness-in-r"]].forEach((f, i) => {
-      const k = A(t, 1.4 + i * 0.4, 0.6);
-      text(f[0], cx + 30, cy + 148 + i * 36, { size: 22, weight: 700, color: P.indigo, alpha: k, mono: true });
-      text(f[1], cx + 92, cy + 148 + i * 36, { size: 22, color: P.muted, alpha: k, mono: true, maxw: cw - 130 });
-    });
-    // steps arrive, then stratify into phase bands
-    const arrive = A(t, 2.8, 2.0), strat = A(t, 5.6, 1.6);
-    text("Proof · direct", cx + 30, cy + 236, { size: 21, weight: 700, color: P.faint, alpha: A(t, 2.6, 0.5) });
-    PROOF_STEPS.forEach((s, i) => {
-      const k = clamp(arrive * 1.5 - i * 0.16, 0, 1);
-      if (k <= 0) return;
-      const rowH = 62;
-      const y = lerp(cy + 268 + i * rowH, cy + 276 + s.ph * 14 + i * rowH, easeInOut(strat));
-      const px = lerp(0, s.ph * 26, easeInOut(strat));
-      g.save();
-      g.globalAlpha *= k;
-      if (strat > 0.05) card(cx + 24, y - 4, cw - 48, rowH - 12, { r: 10, fill: alphaOf(P.indigo, 0.05 + s.ph * 0.03), stroke: null, alpha: strat });
-      text(String(s.n), cx + 62 + px, y + 22, { size: 22, weight: 700, color: P.faint, align: "right", mono: true });
-      text(s.s, cx + 84 + px, y + 22, { size: 24, color: P.ink, maxw: cw - 300 });
-      pill(s.tag, cx + cw - 30, y + 22, { align: "right", size: 19, mono: true, h: 38, color: P.indigo, stroke: alphaOf(P.indigo, 0.4) });
-      if (strat > 0.5) text("phase " + s.ph, cx + 30, y + 22, { size: 17, color: alphaOf(P.indigo, 0.8), alpha: (strat - 0.5) * 2, mono: true });
-      g.restore();
-    });
-    note("precheck REPAIR → adopt the canonical stratification", 510, NOTE_Y,
-      { align: "center", alpha: pulse(t, 5.0, 2.6), size: 23, h: 50, color: P.warn, stroke: alphaOf(P.warn, 0.55) });
-    // the gates
-    const gx = 1000;
-    text("gates of record", gx, 172, { size: 24, weight: 650, color: P.faint, alpha: A(t, 8.0, 0.6), display: true });
-    GATES.forEach((s, i) => {
-      const k = A(t, 8.4 + i * 0.55, 0.5);
-      if (k <= 0) return;
-      const y = 210 + i * 64, failing = s === "precheck" && t < 11.6, done = k > 0.9;
-      card(gx, y, 540, 52, {
-        r: 13, fill: done ? alphaOf(failing ? P.warn : P.ok, 0.13) : P.sunk,
-        stroke: done ? alphaOf(failing ? P.warn : P.ok, 0.55) : P.panelEdge, alpha: k,
-      });
-      text(s, gx + 20, y + 26, { size: 23, weight: 600, color: P.ink, alpha: k, mono: true });
-      if (done) {
-        if (failing) text("REPAIR", gx + 518, y + 26, { size: 20, weight: 700, color: P.warn, align: "right", mono: true });
-        else checkMark(gx + 504, y + 26, 10, P.ok, clamp((k - 0.9) * 10, 0, 1));
-      }
-    });
-    if (t > 13.0) {
-      const k = A(t, 13.0, 0.8);
-      card(gx, 606, 540, 134, { r: 18, fill: P.solid, stroke: P.panelEdge, alpha: k });
-      text("the A-page summary, written last", gx + 20, 640, { size: 23, weight: 650, color: P.ink, alpha: k, maxw: 500 });
-      text("exactly two paragraphs · no counts in prose", gx + 20, 682, { size: 21, color: P.muted, alpha: A(t, 13.6, 0.6), maxw: 500 });
-      text("an author never sets verification.audited", gx + 20, 716, { size: 21, weight: 600, color: P.bad, alpha: A(t, 14.4, 0.6), maxw: 500 });
-    }
-  },
-});
-
-/* ---------- 6 · AUDIT --------------------------------------------------- */
-const DEFECTS = [
-  { pi: 1, ii: 2, s: "cited for a stronger claim than the target makes" },
-  { pi: 2, ii: 1, s: "step 4 is not licensed by [F2]" },
-  { pi: 0, ii: 2, s: "the title asserts more than the proof gives" },
-];
-S({
-  n: 6, name: "Audit", who: "independent readers, then Alpha", dur: 20, cam: FULL,
-  body: "Nobody audits what they authored. Alpha assigns each batch a reader who did not write it, and dispatches read-only proof-refuters that return evidence and never edits. Every citation is checked against the target on disk — citing a true theorem for a stronger claim than it makes is this library's largest single defect class. A gap a competent reader closes in thirty seconds is nonfatal, and is polished here, before the text is frozen.",
-  mech: ["no self-audit", "read-only refuters", "fatal vs the 30-second gap", "cross-batch edges"],
-  enter() { resetItems({ reveal: 1, prov: 1, authored: 1 }); structuralMarks(); layers({ corpus: 0.12, panels: 1, panelFrame: 1, bheads: 1, items: 1, agents: 1 }); },
-  draw(t) {
-    caption("Step 6 — the last mathematical reading before the judges", "readers, then Alpha on the fixes, then Alpha on every cross edge", A(t, 0.1, 0.8));
-    const NY = NOTE_Y;
-    // readers cross over
-    const rk = A(t, 0.8, 1.4);
-    BATCHES.forEach((b, i) => {
-      const from = BATCHES[(i + 1) % BATCHES.length];
-      const k = clamp(rk * 1.4 - i * 0.15, 0, 1);
-      edge(from.orbX, from.orbY - 40, b.cx, b.y - 10, { color: P.beta, prog: k, lw: 2.8, bend: 0.5, arrow: true });
-      if (t > 2.4 && t < 5.4) {
-        const kk = pulse(t, 2.4, 3.0);
-        edge(b.orbX, b.orbY + 34, b.cx - 60, b.y - 10, { color: P.bad, prog: 1, lw: 2.6, dash: [7, 6], alpha: kk, bend: 0 });
-        crossMark(b.cx - 60, b.y - 40, 13, P.bad, kk);
-      }
-    });
-    note("a Beta never audits the batch it authored", 800, NY,
-      { align: "center", alpha: win(t, 2.6, 5.6), size: 24, h: 50, color: P.bad, stroke: alphaOf(P.bad, 0.55) });
-    // read-only refuters, in the right gutter beside the batches
-    const fk = A(t, 4.0, 1.6);
-    [0, 1, 2].forEach((i) => {
-      const k = clamp(fk * 1.5 - i * 0.18, 0, 1);
-      const ty = 300 + i * 92;
-      edge(ALPHA.x, ALPHA.y + 40, 1480, ty, { color: P.alpha, prog: k, lw: 2.4, bend: 0.4, packet: k < 1 ? k : null, alpha: 0.75 });
-      if (k > 0.85) orb(1480, ty, 19, { color: P.alpha, icon: "◇", iconSize: 17, alpha: (k - 0.85) * 6.6 });
-    });
-    note("read-only refuters — evidence, never edits", 800, NY,
-      { align: "center", alpha: win(t, 6.0, 8.4), size: 24, h: 50, color: P.alpha, stroke: alphaOf(P.alpha, 0.55) });
-    // defects surface, then are fixed
-    DEFECTS.forEach((d, i) => {
-      const it = PAIRS[d.pi].items[d.ii];
-      it.defect = A(t, 8.0 + i * 1.0, 0.5);
-      it.fixed = A(t, 13.0 + i * 0.8, 0.8);
-      if (it.defect > 0.4 && it.fixed < 0.9) {
-        note(d.s, 800, NY, { align: "center", alpha: win(t, 8.4 + i * 1.0, 11.6 + i * 1.0), size: 24, h: 50, color: P.bad, stroke: alphaOf(P.bad, 0.55) });
-      }
-    });
-    note("nonfatal — a bridge a reader closes in 30 seconds. Polish it here, while nothing is frozen.", 800, NY,
-      { align: "center", alpha: win(t, 12.0, 15.0), size: 23, h: 50, color: P.muted, stroke: P.panelEdge });
-    // cross-batch edges, checked one by one
-    const ck = A(t, 15.2, 2.2);
-    [[PAIRS[0].items[2], PAIRS[2].items[1]], [PAIRS[2].items[2], PAIRS[1].items[1]]].forEach((e, i) => {
-      const k = clamp(ck * 1.6 - i * 0.25, 0, 1);
-      edge(e[0].box.x + e[0].box.w, e[0].box.y + 21, e[1].box.x + e[1].box.w, e[1].box.y + 21,
-        { color: P.indigo, prog: k, lw: 3, bend: -0.35, arrow: true, packet: k < 1 ? k : null });
-    });
-    note("Alpha reads every edge that leaves a batch", 800, NY,
-      { align: "center", alpha: win(t, 16.0, 18.4), size: 24, h: 50, color: P.indigo, stroke: alphaOf(P.indigo, 0.55) });
-    note("touch snapshot · impact closure · twice touched escalates", 800, NY,
-      { align: "center", alpha: A(t, 18.4, 0.7), size: 24, h: 50, color: P.ink, stroke: alphaOf(P.indigo, 0.4) });
-  },
-});
-
-/* ---------- 7 · JUDGE ---------------------------------------------------- */
-const DS_SLOTS = 24, TR_SLOTS = 16;
-const sweep = { calls: [], byEnd: [], active: {}, span: 1 };
-function seedSweep() {
-  sweep.calls = [];
-  ITEMS.forEach((it, i) => {
-    ["deepseek", "terra"].forEach((m) => {
-      const dur = m === "deepseek" ? 3.0 + ((i * 7) % 9) * 0.5 : 1.8 + ((i * 5) % 7) * 0.4;
-      const retry = m === "deepseek" && i === 6;     // an empty, non-final response
-      sweep.calls.push({
-        item: it, model: m, dur, retry,
-        keep: !((m === "deepseek" && i === 9) || (m === "terra" && i === 14)),
-        queued: i * 0.09 + (m === "terra" ? 0.15 : 0), start: 0, end: 0, slot: 0,
-      });
-    });
-  });
-  const pools = { deepseek: new Array(DS_SLOTS).fill(0), terra: new Array(TR_SLOTS).fill(0) };
-  [...sweep.calls].sort((a, b) => a.queued - b.queued).forEach((c) => {
-    const pool = pools[c.model];
-    let best = 0;
-    for (let i = 1; i < pool.length; i++) if (pool[i] < pool[best]) best = i;
-    c.start = Math.max(pool[best], c.queued);
-    c.slot = best;
-    c.end = c.start + c.dur + (c.retry ? 1.8 : 0);
-    pool[best] = c.end;
-  });
-  sweep.byEnd = [...sweep.calls].sort((a, b) => a.end - b.end);
-  sweep.span = Math.max(...sweep.calls.map((c) => c.end));
-  sweep.active = { deepseek: [], terra: [] };
-  for (let i = 0; i < DS_SLOTS; i++) sweep.active.deepseek.push([]);
-  for (let i = 0; i < TR_SLOTS; i++) sweep.active.terra.push([]);
-  sweep.calls.forEach((c) => sweep.active[c.model][c.slot].push(c));
-}
-function slotCall(model, slot, now) {
-  const q = sweep.active[model][slot];
-  for (let i = 0; i < q.length; i++) if (now >= q[i].start && now < q[i].end) return q[i];
-  return null;
-}
-S({
-  n: 7, name: "Judge", who: "one paired sweep, on final text", dur: 22, cam: FULL,
-  body: "The text is frozen and each item's context — its own page, its companion, and only the pages it both declares and cites — is hashed once, then handed to both lanes. The pools are independent, 24 DeepSeek calls and 16 Terra, with no per-item barrier: a finished call takes the next item in its own lane. A pass is recorded only when both models passed the text.",
-  mech: ["one frozen hash, both lanes", "24 + 16, no barrier", "every A/B pair in the level", "both must pass"],
-  enter() { resetItems(); layers({}); seedSweep(); },
-  draw(t) {
-    caption("Step 7 — two independent judges, one frozen context", "DeepSeek V4 Pro direct · a freshly spawned GPT 5.6 Terra", A(t, 0.1, 0.8));
-    // frozen context
-    const fk = A(t, 0.5, 1.0);
-    card(60, 170, 420, 330, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: fk });
-    text("frozen context", 88, 214, { size: 27, weight: 650, color: P.ink, alpha: fk, display: true });
-    ["the item's own page", "its …-examples companion", "pages it declares AND cites"].forEach((s, i) => {
-      text("· " + s, 88, 262 + i * 38, { size: 22, color: P.muted, alpha: A(t, 1.0 + i * 0.3, 0.5), maxw: 372 });
-    });
-    note("sha256 9f3ac41e…", 270, 412, { align: "center", alpha: A(t, 2.2, 0.6), size: 23, mono: true, h: 50, color: P.indigo, stroke: alphaOf(P.indigo, 0.55) });
-    text("hashed once · both lanes get it", 270, 462, { size: 21, color: P.faint, alpha: A(t, 2.6, 0.6), align: "center" });
-    // lanes
-    const lanes = [
-      { key: "deepseek", label: "DeepSeek V4 Pro", sub: "24 concurrent", x: 520, w: 520, cols: 6, n: DS_SLOTS, col: P.deepseek },
-      { key: "terra", label: "GPT 5.6 Terra", sub: "16 concurrent", x: 1080, w: 460, cols: 4, n: TR_SLOTS, col: P.terra },
-    ];
-    const runK = A(t, 3.0, 0.6);
-    const now = Math.max(0, t - 3.4) * (sweep.span / 11);
-    lanes.forEach((l) => {
-      card(l.x, 170, l.w, 330, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: runK });
-      text(l.label, l.x + 26, 212, { size: 26, weight: 650, color: l.col, alpha: runK, display: true });
-      text(l.sub, l.x + 26, 244, { size: 21, color: P.faint, alpha: runK });
-      const done = sweep.calls.reduce((n, k) => n + (k.model === l.key && now >= k.end ? 1 : 0), 0);
-      text(done + " / " + N_ITEMS, l.x + l.w - 26, 224, { size: 30, weight: 700, color: P.muted, alpha: runK, align: "right", mono: true });
-      const cw = (l.w - 52) / l.cols - 8, chh = 42;
-      for (let i = 0; i < l.n; i++) {
-        const c = i % l.cols, r = Math.floor(i / l.cols);
-        const x = l.x + 26 + c * (cw + 8), y = 274 + r * (chh + 8);
-        const call = slotCall(l.key, i, now);
-        const inRetry = call && call.retry && (now - call.start) > call.dur * 0.4 && (now - call.start) < call.dur * 0.4 + 1.8;
-        card(x, y, cw, chh, {
-          r: 9,
-          fill: call ? (inRetry ? alphaOf(P.warn, 0.18) : alphaOf(l.col, 0.15)) : P.sunk,
-          stroke: call ? (inRetry ? P.warn : alphaOf(l.col, 0.65)) : P.panelEdge, alpha: runK,
-        });
-        if (call && inRetry) text("retry", x + cw / 2, y + chh / 2, { size: 17, weight: 700, color: P.warn, align: "center", alpha: runK });
-        else if (call) {
-          const p = clamp((now - call.start) / call.dur, 0, 1);
-          g.save();
-          g.globalAlpha *= runK;
-          g.strokeStyle = alphaOf(l.col, 0.9); g.lineWidth = 4; g.lineCap = "round";
-          g.beginPath(); g.moveTo(x + 12, y + chh - 12); g.lineTo(x + 12 + (cw - 24) * p, y + chh - 12); g.stroke();
-          g.restore();
-        }
-      }
-    });
-    // the ledger
-    const lk = A(t, 5.0, 0.8);
-    card(60, 536, 1480, 176, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: lk });
-    text("level12-judge.jsonl", 88, 574, { size: 23, weight: 650, color: P.ink, alpha: lk, mono: true });
-    sweep.byEnd.filter((c) => now >= c.end).slice(-4).forEach((c, i) => {
-      const y = 612 + i * 26;
-      const fade = clamp((now - c.end) * 3, 0, 1);
-      text(c.model === "deepseek" ? "DS" : "TR", 88, y, { size: 19, weight: 700, color: c.model === "deepseek" ? P.deepseek : P.terra, alpha: lk * fade, mono: true });
-      text(c.item.id, 136, y, { size: 19, color: P.muted, alpha: lk * fade, mono: true, maxw: 400 });
-      if (c.keep) checkMark(560, y, 8, P.ok, fade); else crossMark(560, y, 8, P.bad, fade);
-    });
-    note("no per-item barrier — each lane takes its next item when one of its OWN slots frees", 1040, 640,
-      { align: "center", alpha: win(t, 6.0, 11.0), size: 23, h: 50, color: P.ink, stroke: alphaOf(P.indigo, 0.45) });
-    note("an empty response releases its slot and is retried — never recorded as a verdict", 1040, 640,
-      { align: "center", alpha: win(t, 11.4, 15.6), size: 23, h: 50, color: P.warn, stroke: alphaOf(P.warn, 0.55) });
-    note("a pass is recorded only when BOTH models passed the text", 1040, 640,
-      { align: "center", alpha: A(t, 16.4, 0.7), size: 23, h: 50, color: P.ok, stroke: alphaOf(P.ok, 0.55) });
-    note("level-coverage --verify-current-context · a stale pass after a repair is not coverage", 800, NOTE_Y,
-      { align: "center", alpha: A(t, 18.6, 0.8), size: 23, h: 50, color: P.indigo, stroke: alphaOf(P.indigo, 0.5) });
-  },
-});
-
-/* ---------- 8 · ADJUDICATE ------------------------------------------------ */
-const REJECTS = [
-  { id: "thm-rearrangement", m: "DeepSeek", out: 0, why: "step 5 uses a bound the cited lemma does not give" },
-  { id: "lem-cauchy-bounded", m: "Terra", out: 2, why: "the cited item states exactly this" },
-];
-S({
-  n: 8, name: "Adjudicate", who: "Alpha-n", dur: 20, cam: FULL,
-  body: "Adjudicate, do not comply. Alpha reads the frozen verdict against the current text and records one of three outcomes against that text's exact hash. Only <code>confirmed_fatal</code> licenses an edit; the other two close the rejection and change nothing — because any edit voids the verdict, forces a rejudge, and resamples a refuter that finds a fresh nitpick every run. Fatal repairs, by contrast, are uncapped.",
-  mech: ["three outcomes", "fatal-only edits", "item_sha256 on every row", "targeted rejudge"],
-  enter() { resetItems(); layers({}); },
-  draw(t) {
-    caption("Step 8 — a rejection is evidence, not an instruction", "only one of the three outcomes may touch the text", A(t, 0.1, 0.8));
-    orb(160, 340, 46, { color: P.alpha, icon: "A", label: "Alpha-12", alpha: A(t, 0.6, 0.7), busy: t > 1 ? t * 0.5 : 0 });
-    // rejections arrive
-    REJECTS.forEach((r, i) => {
-      const k = A(t, 1.4 + i * 4.0, 0.8);
-      if (k <= 0) return;
-      const y = 214 + i * 190;
-      const x = lerp(-460, 300, easeOut(k));
-      card(x, y, 500, 150, { r: 18, fill: P.solid, stroke: P.panelEdge, alpha: k });
-      pill(r.m, x + 24, y + 38, { alpha: k, size: 20, h: 40, color: r.m === "DeepSeek" ? P.deepseek : P.terra, stroke: alphaOf(r.m === "DeepSeek" ? P.deepseek : P.terra, 0.55) });
-      crossMark(x + 462, y + 38, 11, P.bad, k);
-      text(r.id, x + 24, y + 84, { size: 24, weight: 650, color: P.ink, alpha: k, mono: true, maxw: 452 });
-      text(r.why, x + 24, y + 118, { size: 21, color: P.muted, alpha: A(t, 2.2 + i * 4.0, 0.7), maxw: 452 });
-      const vk = A(t, 3.0 + i * 4.0, 1.0);
-      if (vk > 0) edge(x + 500, y + 75, 900, [244, 442, 606][r.out] + 48, {
-        color: r.out === 0 ? P.bad : P.muted, prog: vk, lw: 3, bend: 0.4, packet: vk < 1 ? vk : null, arrow: true,
-      });
-    });
-    // the three outcomes
-    const bins = [
-      { k: "confirmed_fatal", y: 244, col: () => P.bad, note: "the ONLY outcome that licenses an edit", h: 174 },
-      { k: "confirmed_nonfatal", y: 442, col: () => P.muted, note: "closes the row · changes nothing", h: 138 },
-      { k: "false_positive", y: 606, col: () => P.muted, note: "refuted with a verbatim quote", h: 138 },
-    ];
-    bins.forEach((b, i) => {
-      const k = A(t, 0.9 + i * 0.3, 0.8);
-      card(900, b.y, 640, b.h, {
-        r: 18, fill: P.solid, stroke: alphaOf(b.col(), i === 0 ? 0.6 : 0.28), alpha: k,
-        lw: i === 0 ? 3 : 1.8, glow: i === 0 ? P.bad : null, glowSize: 22,
-      });
-      text(b.k, 926, b.y + 42, { size: 26, weight: 700, color: b.col(), alpha: k, mono: true });
-      text(b.note, 926, b.y + 80, { size: 21, color: P.faint, alpha: k, maxw: 590 });
-      if (i === 0) {
-        text("repair · delete the stale verdict · rejudge that item", 926, b.y + 120,
-          { size: 21, color: P.muted, alpha: A(t, 2.0, 0.6), maxw: 590 });
-        text("fatal repairs are uncapped", 926, b.y + 150, { size: 21, weight: 600, color: P.ok, alpha: A(t, 2.6, 0.6), maxw: 590 });
-      } else {
-        text(i === 1 ? "no content, frontmatter, contract or judge mutation" : "no edit, and no rejudge", 926, b.y + 112,
-          { size: 21, color: P.muted, alpha: A(t, 2.2 + i * 0.3, 0.6), maxw: 590 });
-      }
-    });
-    // why the rule exists
-    if (t > 10.6 && t < 16.4) {
-      const k = pulse(t, 10.6, 5.8), cx = 210, cy = 606, r = 82;
-      g.save();
-      g.globalAlpha *= k;
-      g.strokeStyle = P.warn; g.lineWidth = 3; g.setLineDash([10, 8]);
-      g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke();
-      g.setLineDash([]);
-      g.restore();
-      ["polish", "verdict void", "rejudge", "fresh nitpick"].forEach((s, i) => {
-        const ang = -Math.PI / 2 + i * Math.PI / 2;
-        text(s, cx + Math.cos(ang) * (r + 56), cy + Math.sin(ang) * (r + 34),
-          { size: 21, weight: 600, color: P.warn, align: "center", alpha: k, mono: true });
-      });
-      crossMark(cx, cy, 26, P.bad, clamp((t - 12.4) * 1.2, 0, 1) * k);
-    }
-    note("cosmetic polish belongs to step 6, before the text is frozen", 800, NOTE_Y,
-      { align: "center", alpha: win(t, 12.8, 16.8), size: 23, h: 50, color: P.ink, stroke: alphaOf(P.warn, 0.5) });
-    note("step8-guard: an item changed without a confirmed_fatal row is a nonfatal-edit error", 800, NOTE_Y,
-      { align: "center", alpha: A(t, 17.0, 0.8), size: 22, h: 50, color: P.indigo, stroke: alphaOf(P.indigo, 0.5) });
-  },
-});
-
-/* ---------- 9 · SCOPE-DENIAL SWEEP ---------------------------------------- */
-const PROSE_HITS = [
-  { c: 3, r: 1, s: "“seven items on this page”", t: "count-in-prose" },
-  { c: 7, r: 3, s: "“proved on a later page”", t: "position-contradiction" },
-  { c: 11, r: 0, s: "“the library nowhere defines…”", t: "library-scope-denial" },
-];
-S({
-  n: 9, name: "Scope-denial sweep", who: "the published corpus", dur: 17, cam: FULL,
-  body: "Every level ends with a sweep of the published corpus, items and page summaries both, for the prose defect class where effectively all of this library's found defects live: a count written in prose, a positional claim the spec contradicts, and a denial scoped to the whole library rather than to this page's prerequisites. Grep is the entry point and never the sweep.",
-  mech: ["items and summaries", "grep is only the entry", "audited cleared → re-audit", "no pause here"],
-  enter() { resetItems(); layers({}); },
-  draw(t) {
-    caption("Step 9 — the prose defect class", "where effectively all of this library's found defects live", A(t, 0.1, 0.8));
-    const cols = 14, rows = 5, x0 = 70, y0 = 236, cw = 96, chh = 66, gap = 8;
-    const gk = A(t, 0.4, 0.8);
-    const beam = A(t, 1.2, 8.0) * (cols + 3) - 2;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const x = x0 + c * (cw + gap), y = y0 + r * (chh + gap);
-        const lit = clamp(1 - Math.abs(c - beam) / 2, 0, 1);
-        const hit = PROSE_HITS.find((h) => h.c === c && h.r === r);
-        const found = hit && beam > c;
-        card(x, y, cw, chh, {
-          r: 10,
-          fill: found ? alphaOf(P.bad, 0.24) : lit > 0 ? alphaOf(P.indigo, 0.1 + lit * 0.22) : P.sunk,
-          stroke: found ? P.bad : lit > 0.2 ? alphaOf(P.indigo, 0.55) : P.panelEdge, alpha: gk,
-        });
-        if (r === 0 && c % 3 === 0) text("¶", x + cw / 2, y + chh / 2, { size: 22, color: P.faint, align: "center", alpha: gk * 0.85 });
-      }
-    }
-    if (beam > -2 && beam < cols + 2) {
-      const bx = x0 + beam * (cw + gap) + cw / 2;
-      g.save();
-      const grd = g.createLinearGradient(bx - 70, 0, bx + 70, 0);
-      grd.addColorStop(0, alphaOf(P.indigo, 0));
-      grd.addColorStop(0.5, alphaOf(P.indigo, 0.3));
-      grd.addColorStop(1, alphaOf(P.indigo, 0));
-      g.fillStyle = grd;
-      g.fillRect(bx - 70, y0 - 20, 140, rows * (chh + gap) + 20);
-      g.restore();
-    }
-    text("¶ = a page summary", x0, 190, { size: 21, weight: 600, color: P.faint, alpha: gk });
-    // the grep vocabulary
-    ["neither", "lacks", "absent from", "silent on", "nowhere"].forEach((w, i) => {
-      note(w, 200 + i * 250, 150, { align: "center", alpha: A(t, 0.8 + i * 0.12, 0.6) * (1 - A(t, 9.6, 0.8)), size: 22, h: 46, mono: true, glow: null });
-    });
-    note("grep is the entry point, never the sweep", 800, 150,
-      { align: "center", alpha: win(t, 9.8, 12.4), size: 24, h: 50, color: P.ink, stroke: alphaOf(P.indigo, 0.45) });
-    note("look for the inverse defect too — a false claim that the library DOES prove it", 800, 150,
-      { align: "center", alpha: A(t, 12.6, 0.8), size: 23, h: 50, color: P.muted, stroke: P.panelEdge });
-    // hits
-    PROSE_HITS.forEach((h, i) => {
-      if (beam <= h.c) return;
-      const k = clamp((beam - h.c) * 0.9, 0, 1);
-      const x = x0 + h.c * (cw + gap), y = y0 + h.r * (chh + gap);
-      const ax = 70 + i * 500, ay = 636;
-      edge(x + cw / 2, y + chh, ax + 230, ay, { color: P.bad, prog: k, lw: 2.4, bend: 0.2, alpha: 0.7 });
-      card(ax, ay, 460, 86, { r: 14, fill: P.solid, stroke: alphaOf(P.bad, 0.55), alpha: k });
-      text(h.s, ax + 20, ay + 32, { size: 23, weight: 600, color: P.ink, alpha: k, maxw: 420 });
-      text(h.t, ax + 20, ay + 62, { size: 20, color: P.bad, alpha: k, mono: true });
-    });
-    note("a repair clears verification.audited and forces the owner's re-audit — and there is no pause here",
-      800, NOTE_Y, { align: "center", alpha: A(t, 14.0, 0.8), size: 23, h: 50, color: P.ok, stroke: alphaOf(P.ok, 0.5) });
-  },
-});
-
-/* ---------- 10 · RUNDOWN + OWNER PAUSE ------------------------------------ */
-S({
-  n: 10, name: "Rundown · owner pause", who: "the only stop in the build", dur: 22, cam: FULL,
-  body: "One report — results added and dropped, judge coverage counted from the ledger and the frontmatter on disk rather than from anybody's summary, each lane's solo findings with their adjudications, and a complete fatal-error report. Then the build stops. Flipping <code>status: published</code> is the publish action and it belongs to the owner alone.",
-  mech: ["counted from disk", "lane comparison", "fatal-error report", "the sole owner pause"],
-  enter() { resetItems(); layers({}); },
-  draw(t) {
-    caption("Step 10 — the rundown, and the only owner pause", "everything above ran without asking; this is where it stops", A(t, 0.1, 0.8));
-    // report
-    const rx = 60, ry = 150, rw = 720;
-    card(rx, ry, rw, 590, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: A(t, 0.4, 0.8) });
-    text("level 12 — rundown", rx + 28, ry + 42, { size: 28, weight: 700, color: P.ink, alpha: A(t, 0.4, 0.8), display: true });
-    [["items authored", String(N_ITEMS), 0.9, null],
-     ["added in flight", "2 lemmas", 1.2, null],
-     ["dropped, with a note", "1", 1.5, null],
-     ["forward references", "1 declared", 1.8, "sky"],
-     ["not proved here ‡", "1", 2.1, "fuchsia"],
-     ["judge coverage", N_ITEMS + " / " + N_ITEMS + ", both lanes", 2.4, "ok"],
-     ["escalation set", "1, audited personally", 2.7, "warn"],
-     ["gates", "clean on final text", 3.0, "ok"]].forEach(([k, v, at, tone], i) => {
-      const kk = A(t, at, 0.5), y = ry + 92 + i * 42;
-      text(k, rx + 28, y, { size: 23, color: P.muted, alpha: kk, maxw: 380 });
-      const col = tone === "ok" ? P.ok : tone === "warn" ? P.warn : tone === "sky" ? P.sky : tone === "fuchsia" ? P.fuchsia : P.ink;
-      text(v, rx + 430, y, { size: 23, weight: 600, color: col, alpha: kk, maxw: 262 });
-    });
-    const fy = ry + 452;
-    text("fatal errors — by type, then by location", rx + 28, fy, { size: 23, weight: 650, color: P.ink, alpha: A(t, 4.0, 0.7), maxw: rw - 56 });
-    [["invalid inference", "proof · 2", "step repaired", 4.4],
-     ["mis-cited dependency", "Facts · 1", "citation rebound", 4.8],
-     ["overstrong Statement", "title · 1", "restated", 5.2]].forEach(([a, b, c, at], i) => {
-      const kk = A(t, at, 0.5), y = fy + 42 + i * 38;
-      text(a, rx + 28, y, { size: 21, weight: 600, color: P.bad, alpha: kk, maxw: 300 });
-      text(b, rx + 350, y, { size: 20, color: P.muted, alpha: kk, mono: true });
-      text(c, rx + 500, y, { size: 21, color: P.ok, alpha: kk, maxw: 200 });
-    });
-    // lane comparison
-    const mk = A(t, 6.0, 0.9), mx = 820;
-    card(mx, ry, 720, 250, { r: 22, fill: P.solid, stroke: P.panelEdge, alpha: mk });
-    text("what the two lanes caught", mx + 28, ry + 42, { size: 26, weight: 650, color: P.ink, alpha: mk, display: true });
-    [["both passed", String(N_ITEMS - 2), P.ok], ["DeepSeek only", "1", P.deepseek], ["Terra only", "1", P.terra]]
-      .forEach((c, i) => {
-        const k = A(t, 6.4 + i * 0.3, 0.5), x = mx + 28 + i * 228;
-        card(x, ry + 78, 210, 130, { r: 14, fill: P.sunk, stroke: P.panelEdge, alpha: k });
-        text(c[1], x + 24, ry + 122, { size: 46, weight: 700, color: c[2], alpha: k, display: true });
-        text(c[0], x + 24, ry + 176, { size: 21, color: P.muted, alpha: k, maxw: 180 });
-      });
-    text("raw rejection counts are not a judge-quality metric — only adjudicated fatal findings are",
-      mx + 28, ry + 228, { size: 20, color: P.faint, alpha: A(t, 7.4, 0.6), maxw: 664 });
-    // the owner gate
-    const ok = A(t, 9.0, 1.0), gy = 434;
-    card(mx, gy, 720, 306, { r: 22, fill: P.solid, stroke: alphaOf(P.indigo, 0.55), alpha: ok, lw: 3, glow: t > 10 ? P.indigo : null });
-    text("the owner pause", mx + 30, gy + 46, { size: 30, weight: 700, color: P.ink, alpha: ok, display: true });
-    text("Steps 0 to 9 ran without asking anyone. Everything stops here.", mx + 30, gy + 90,
-      { size: 22, color: P.muted, alpha: A(t, 9.6, 0.7), maxw: 660 });
-    const flip = A(t, 12.0, 1.2);
-    card(mx + 30, gy + 118, 660, 92, { r: 14, fill: P.sunk, stroke: P.panelEdge, alpha: A(t, 11.4, 0.7) });
-    text("status:", mx + 52, gy + 164, { size: 26, color: P.muted, alpha: A(t, 11.6, 0.6), mono: true });
-    text("draft", mx + 152, gy + 164, { size: 26, weight: 700, color: P.warn, alpha: A(t, 11.6, 0.6) * (1 - flip * 0.85), mono: true });
-    if (flip > 0.1) {
-      text("→", mx + 244, gy + 164, { size: 26, color: P.faint, alpha: flip, mono: true });
-      text("published", mx + 292, gy + 164, { size: 26, weight: 700, color: P.ok, alpha: flip, mono: true });
-    }
-    text("flipping status IS the publish action — the live site reads this directory",
-      mx + 30, gy + 238, { size: 22, weight: 600, color: P.ink, alpha: A(t, 14.0, 0.8), maxw: 660 });
-    text("a published page listing a draft item is a hard error", mx + 30, gy + 272,
-      { size: 21, color: P.muted, alpha: A(t, 15.4, 0.8), maxw: 660 });
-  },
-});
-
-/* =========================================================================
-   6. PLAYER
-   ========================================================================= */
-const state = { i: 0, t: 0, playing: true, speed: 1, reduced: false };
-const railEl = document.getElementById("rail");
-const eyebrowEl = document.getElementById("eyebrow");
-const titleEl = document.getElementById("ntitle");
-const bodyEl = document.getElementById("nbody");
-const mechEl = document.getElementById("nmechs");
-const scrubEl = document.getElementById("scrub");
-const playBtn = document.getElementById("playBtn");
-
-SCENES.forEach((s, i) => {
+const rail = document.getElementById("rail");
+const btns = STEPS.map(function (s) {
   const b = document.createElement("button");
   b.type = "button";
-  b.innerHTML = `<span class="n">${s.n}</span><span class="nm">${s.name}</span><span class="fill"></span>`;
-  b.addEventListener("click", () => { goto(i); if (!state.reduced) setPlaying(true); });
-  railEl.appendChild(b);
+  b.innerHTML = '<span class="n">' + s.n + "</span>" + s.name + '<span class="fill"></span>';
+  b.addEventListener("click", function () { T = s.t0 + 0.01; syncNarration(true); });
+  rail.appendChild(b);
+  return b;
 });
-const railBtns = [...railEl.querySelectorAll("button")];
-const railFills = railBtns.map((b) => b.querySelector(".fill"));
-
-function syncNarration() {
-  const s = SCENES[state.i];
-  eyebrowEl.textContent = "Step " + s.n;
-  titleEl.innerHTML = s.name + ' <span class="who">· ' + s.who + "</span>";
-  bodyEl.innerHTML = s.body;
-  mechEl.innerHTML = s.mech.map((m) => `<li>${m}</li>`).join("");
-  railBtns.forEach((b, i) => {
-    b.setAttribute("aria-current", String(i === state.i));
-    b.classList.toggle("done", i < state.i);
-    if (i !== state.i) railFills[i].style.width = i < state.i ? "100%" : "0%";
-  });
+const el = {
+  title: document.getElementById("ntitle"), who: document.getElementById("nwho"),
+  body: document.getElementById("nbody"), mech: document.getElementById("nmech"),
+  clock: document.getElementById("clock"), scrub: document.getElementById("scrub"),
+  done: document.getElementById("scrubdone"), play: document.getElementById("play"),
+  icon: document.getElementById("playicon"), label: document.getElementById("playlabel"),
+};
+let shown = -1;
+function syncNarration(force) {
+  const s = stepAt(T);
+  if (s.n !== shown || force) {
+    shown = s.n;
+    el.title.textContent = "Step " + s.n + " — " + s.name;
+    el.who.textContent = s.who;
+    el.body.innerHTML = s.body;
+    el.mech.innerHTML = s.mech.map(function (m) { return "<li>" + m + "</li>"; }).join("");
+    btns.forEach(function (b, i) {
+      b.setAttribute("aria-current", i === s.n ? "true" : "false");
+      b.classList.toggle("done", i < s.n);
+    });
+  }
+  const b = btns[s.n];
+  if (b) b.querySelector(".fill").style.width = clamp((T - s.t0) / s.dur, 0, 1) * 100 + "%";
+  const mm = (v) => Math.floor(v / 60) + ":" + String(Math.floor(v % 60)).padStart(2, "0");
+  el.clock.textContent = mm(T) + " / " + mm(TOTAL);
+  el.done.style.width = (T / TOTAL) * 100 + "%";
+  el.scrub.setAttribute("aria-valuenow", Math.round((T / TOTAL) * 100));
 }
-function goto(i) {
-  state.i = (i + SCENES.length) % SCENES.length;
-  state.t = 0;
-  const s = SCENES[state.i];
-  camT = { ...s.cam };
-  s.enter && s.enter();
-  syncNarration();
-  if (state.reduced) state.t = s.dur * 0.94;   // hold each step at its resolved state
-}
-function setPlaying(p) {
-  state.playing = p;
-  playBtn.textContent = p ? "❚❚ Pause" : "▶ Play";
-}
-
-playBtn.addEventListener("click", () => setPlaying(!state.playing));
-document.getElementById("prevBtn").addEventListener("click", () => { goto(state.i - 1); if (!state.reduced) setPlaying(true); });
-document.getElementById("nextBtn").addEventListener("click", () => { goto(state.i + 1); if (!state.reduced) setPlaying(true); });
-[...document.querySelectorAll(".speed button")].forEach((b) => {
-  b.addEventListener("click", () => {
-    state.speed = parseFloat(b.dataset.speed);
-    [...document.querySelectorAll(".speed button")].forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
-  });
+el.play.addEventListener("click", function () {
+  playing = !playing;
+  el.icon.textContent = playing ? "❚❚" : "▶";
+  el.label.textContent = playing ? "Pause" : "Play";
 });
-document.addEventListener("keydown", (e) => {
-  if (e.key === " ") { e.preventDefault(); setPlaying(!state.playing); }
-  else if (e.key === "ArrowRight") goto(state.i + 1);
-  else if (e.key === "ArrowLeft") goto(state.i - 1);
-});
-
-const themeBtn = document.getElementById("themeBtn");
-themeBtn.addEventListener("click", () => {
-  const cur = document.documentElement.getAttribute("data-theme");
-  const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.setAttribute("data-theme", cur ? (cur === "dark" ? "light" : "dark") : (sysDark ? "light" : "dark"));
-  resolveTheme();
-  syncLegend();
-});
-function syncLegend() {
-  const set = (id, style) => { const el = document.getElementById(id); if (el) Object.assign(el.style, style); };
-  set("lg1", { borderTopColor: P.indigo });
-  set("lg2", { borderTopColor: P.sky });
-  set("lg3", { borderTopColor: P.fuchsia });
-  [["lg4", "definition"], ["lg5", "theorem"], ["lg6", "lemma"], ["lg7", "example"], ["lg8", "counterexample"]]
-    .forEach(([id, k]) => set(id, { background: P.kinds[k].fill, borderColor: P.kinds[k].border }));
+function seekFromEvent(e) {
+  const r = el.scrub.getBoundingClientRect();
+  T = clamp(((e.clientX - r.left) / r.width) * TOTAL, 0, TOTAL - 0.05);
+  syncNarration(true);
 }
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { resolveTheme(); syncLegend(); });
-
-state.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (state.reduced) setPlaying(false);
+el.scrub.addEventListener("pointerdown", function (e) { seekFromEvent(e); el.scrub.setPointerCapture(e.pointerId); });
+el.scrub.addEventListener("pointermove", function (e) { if (e.buttons) seekFromEvent(e); });
+el.scrub.addEventListener("keydown", function (e) {
+  if (e.key === "ArrowRight") { T = clamp(T + 3, 0, TOTAL - 0.05); syncNarration(true); }
+  if (e.key === "ArrowLeft") { T = clamp(T - 3, 0, TOTAL - 0.05); syncNarration(true); }
+});
 
 /* =========================================================================
-   7. FRAME
+   8. FRAME
    ========================================================================= */
-let last = performance.now();
 function frame(now) {
-  const dt = Math.min(0.05, (now - last) / 1000);
+  const dt = Math.min((now - last) / 1000, 0.05);
   last = now;
-  resolveTheme();
-
-  const sc = SCENES[state.i];
-  if (state.playing && !state.reduced) {
-    state.t += dt * state.speed;
-    if (state.t > sc.dur) { goto(state.i + 1); setPlaying(true); }
+  CLOCK += dt;
+  if (playing) {
+    T += dt;
+    if (T >= TOTAL) T = 0;              // the run loops; nothing is torn down
   }
+  const wpx = cv.getBoundingClientRect().width * DPR;
+  if (cv.width === 0 || Math.abs(wpx - cv.width) > 2) resize();
 
-  for (const k in LT) L[k] = lerp(L[k], LT[k], 1 - Math.pow(0.001, dt));
-  cam.x = lerp(cam.x, camT.x, 1 - Math.pow(0.004, dt));
-  cam.y = lerp(cam.y, camT.y, 1 - Math.pow(0.004, dt));
-  cam.s = lerp(cam.s, camT.s, 1 - Math.pow(0.004, dt));
+  const act = activity(T);
+  camX = lerp(camX, cameraTarget(T), 1 - Math.pow(0.0015, dt));   // frame-rate independent
 
-  g.setTransform(1, 0, 0, 1, 0, 0);
-  g.clearRect(0, 0, cv.width, cv.height);
-  applyCam();
-
-  drawCorpusBand(L.corpus);
-  drawPanels(L.panels);
-  drawItems(L.items);
-  drawAgents(L.agents, {
-    betas: state.i >= 1 ? 1 : 0,
-    alpha: state.i >= 5 ? 1 : 0,
-    betaBusy: state.i >= 1 && state.i <= 6 ? now / 900 : 0,
-    alphaBusy: state.i >= 6 ? now / 1100 : 0,
-    orchBusy: now / 1300,
-  });
-
+  background();
   g.save();
-  sc.draw(state.t);
+  g.scale(VIEW, VIEW);
+  g.translate(-camX, 0);
+  drawMesh(T, act);
   g.restore();
 
-  const pct = (clamp(state.t / sc.dur, 0, 1) * 100).toFixed(1) + "%";
-  scrubEl.style.width = pct;
-  if (railFills[state.i]) railFills[state.i].style.width = pct;
+  g.save();
+  g.scale(VIEW, VIEW);
+  annotate(T);
+  g.restore();
 
+  syncNarration(false);
   requestAnimationFrame(frame);
 }
 
-new ResizeObserver(resize).observe(cv);
 resize();
-resolveTheme();
-syncLegend();
-goto(0);
-requestAnimationFrame((n) => { last = n; frame(n); });
+syncNarration(true);
+requestAnimationFrame(function (n) { last = n; frame(n); });
 </script>
 </body>
 </html>

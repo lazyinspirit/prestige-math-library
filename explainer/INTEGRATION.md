@@ -89,9 +89,11 @@ as a preface to the taxonomy rather than as an entry in it.
 - **`output: "standalone"`.** The route reads from `MATH_LIBRARY_DIR` at
   request time, not from the bundle, so the standalone build needs no extra
   asset copying.
-- **Theme.** The page follows `prefers-color-scheme` and has its own toggle. It
-  does not read the app's theme cookie; that is deliberate, so it can be opened
-  directly.
+- **Theme.** The page is matte black in both themes (owner, 2026-08-05) and has
+  no toggle: the palette carries meaning — orange orchestrator, blue Beta, violet
+  Alpha, cyan reader, yellow and green the two judge lanes, red a fatal — and a
+  light inversion would break that mapping. It does not read the app's theme
+  cookie, so it can be opened directly.
 
 ## Local preview without the app
 
@@ -105,13 +107,21 @@ animation, so `/library/workflow` resolves locally exactly as it will in the app
 
 ## Editing the animation
 
-Everything is in `build-workflow.html`, in numbered sections: palette, drawing
-helpers, the world model, the board renderer, camera, the eleven scenes, the
-player, and the frame loop. A step is one entry in `SCENES` — its narration
-(`body`, `mech`), its duration, its camera target, an `enter()` that sets the
-layer opacities and item state, and a `draw(t)` where `t` is seconds into that
-step. `enter()` must set **every** layer through `layers({…})` and reset item
-state, because the rail lets a reader jump straight to any step.
+Everything is in `build-workflow.html`, in numbered sections: palette, helpers,
+the mesh, node renderers, the run, camera, board, player, frame loop.
+
+**It is one continuous run, not eleven clips** (owner, 2026-08-05). The mesh is
+laid out once and lives for the whole runtime; the camera pans across it and
+nothing is ever torn down. A step is one entry in `STEPS` — narration (`body`,
+`mech`), duration, and a camera anchor `camx`. There is no `enter()` and no
+per-scene reset, because **every piece of state is a pure function of the
+clock**: `activity(t)` for agents, `itemState(it, t)` for items, `A/win/pulse`
+for everything else. That is what makes the rail legal — seeking is evaluating
+the same functions at another `t`, so step 7 looks identical whether you played
+into it or jumped.
+
+If you add state, add it as a function of `t`. A mutable variable that a step
+writes on entry is exactly what this rewrite removed.
 
 Two things to keep in mind when changing the layout:
 
