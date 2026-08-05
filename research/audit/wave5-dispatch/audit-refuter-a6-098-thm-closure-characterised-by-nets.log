@@ -1,19 +1,30 @@
-# audit-refuter/a6-098-thm-closure-characterised-by-nets 2026-08-05T14:31:36.932Z
+# audit-refuter/a6-098-thm-closure-characterised-by-nets 2026-08-05T14:34:02.055Z
 
 ## stdout
-After adversarially reading the item and all cited dependencies, I find no defects. The proof is mathematically correct, the logic is valid, and the citations accurately reflect the provided dependency texts.
+### No fatal defects found
 
-**Checks performed:**
-- **Title vs. statement:** The title exactly matches the proved equivalence.
-- **Forward direction (1.1, 2.1, 2.2):** The construction of the net uses `[L1]` to ensure every neighbourhood meets \(A\) and `[L2]` for finite intersections. The order defined makes \(E\) a directed set (preorder, which is the standard definition of a directed set for nets; no antisymmetry required). The resulting function is a net in \(A\) and is eventually in every neighbourhood, hence converges by `[L3]`. No choice principle is used beyond existential instantiation.
-- **Reverse direction (1.2):** From a net in \(A\) converging to \(p\), `[L3]` gives that it is eventually in every neighbourhood, so every neighbourhood meets \(A\); then `[L1]` yields \(p\in\overline A\).
-- **Dependency accuracy:**
-  - `thm-closure-characterisation-top` states the equivalence (a) \(\Leftrightarrow\) (b) exactly as used in `[L1]`.
-  - `def-neighbourhood-top` explicitly states that the intersection of two (hence finitely many) neighbourhoods is a neighbourhood, matching `[L2]`.
-  - `def-net-convergence-and-cluster-point` defines convergence as “eventually in every neighbourhood,” as cited in `[L3]`.
-- **Hidden assumptions:** None. The proof works in any topological space and does not require the Axiom of Choice.
+I have scrutinised every step of the proof and cross-checked each citation against the verbatim dependency text provided.  
 
-No fatal or nonfatal defects found.
+**Forward direction (closure ⇒ net).**  
+The construction of the index set  
+\( E = \{(N,a) : N \in \mathcal{N}(p),\; a \in N \cap A\} \)  
+is a valid set in ZF. The order defined by \( (N,a) \preceq (M,b) \iff M \subseteq N \) makes \(E\) a preordered set. Step 2.1 shows it is directed: for any two elements \( (N,a),(M,b) \) the set \( N\cap M \) is a neighbourhood (by [L2]) and meets \(A\) (by [L1]); picking any \(c \in (N\cap M)\cap A\) gives \( (N\cap M,c) \in E \) which is above both. No choice is used – only the non‑emptiness of the intersection, which follows from [L1] and \(p\in\overline{A}\).  
+
+Step 2.2 verifies convergence: for a given neighbourhood \(N\) of \(p\), the non‑emptiness of \(N\cap A\) yields an \(a\) with \((N,a)\in E\); for every \((M,b) \succeq (N,a)\) one has \(M \subseteq N\), hence \(b \in M \subseteq N\), so the net is eventually in \(N\). By [L3] it converges to \(p\). Again no uniform choice is needed; the reasoning is a simple ∀∃ proof.
+
+**Reverse direction (net ⇒ closure).**  
+If a net in \(A\) converges to \(p\), then by [L3] it is eventually in every neighbourhood of \(p\); in particular each neighbourhood contains an element of the net, which lies in \(A\). Hence every neighbourhood meets \(A\), and [L1] gives \(p\in\overline{A}\).
+
+**Citations.**  
+- [L1] exactly matches the equivalence (a)⇔(b) in `thm-closure-characterisation-top`.  
+- [L2] exactly matches consequence 3 of `def-neighbourhood-top`.  
+- [L3] exactly matches the definition of convergence in `def-net-convergence-and-cluster-point`.
+
+**Choice.** The proof uses no choice principle beyond ZF, so no missing hypothesis of that class is present.  
+
+**Title.** The title matches the statement proved.
+
+I found no mathematical inaccuracies, no unlicensed inferences, and no citation of a dependency for a claim it does not make.
 
 0 fatal, 0 nonfatal
 

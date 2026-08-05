@@ -1,0 +1,17 @@
+{
+  "role": "audit-refuter",
+  "label": "a6-120-cex-open-bounded-euclidean-subset-not-compact",
+  "run": "wave5",
+  "runner": "deepseek",
+  "model": "deepseek-v4-pro",
+  "sandbox": "read-only",
+  "started_at": "2026-08-05T15:12:39.839Z",
+  "ended_at": "2026-08-05T15:17:51.378Z",
+  "ms": 311539,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-120-cex-open-bounded-euclidean-subset-not-compact.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-120-cex-open-bounded-euclidean-subset-not-compact.prompt.md",
+  "tail": "### FINDING 1 — FATAL — location: [L2] / step 1.2\nCLAIM AS WRITTEN: \"[L2] The unit vector $e_0$ exists and has Euclidean norm $1$ ([[lem-standard-basis-of-f-n]]).\"\nWHY IT FAILS: The quoted statement of `lem-standard-basis-of-f-n` defines standard unit vectors in $F^n$ and proves they form an ordered basis; it **never defines a norm, does not mention “Euclidean norm”, and asserts nowhere that any vector has norm $1$.** The relevant portion reads:\n> “For $i < n$ define the **standard unit vector** $e_i \\in F^{n}$ by\n> $$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$”\nThe lemma is purely algebraic. The citation therefore ascribes to it a claim it does not make. In step 1.2 the unlicensed “Euclidean norm 1” is used to conclude $e_0 \\notin B_2(0,1)$ and to compute $d(e_0,(1-\\varepsilon)e_0)=\\varepsilon$; without it the proof that the ball is not closed is unsupported.\nWHAT WOULD FIX IT: Either cite a definition of the Euclidean norm on $\\mathbb{R}^n$ together with a lemma that the standard basis vectors have norm $1$, or compute the distance directly from the definition of the Euclidean metric (which must itself be cited).\n\n### FINDING 2 — FATAL — location: steps 1.1, 1.2, [L3], and the overall proof\nCLAIM AS WRITTEN: The proof uses the Euclidean metric on $\\mathbb{R}^n$ and its specific distance properties, e.g. in step 1.2:\n> “for every $r>0$ the point $(1-\\varepsilon)e_0$, with $0<\\varepsilon<\\min(r,1)$, lies in both $B_2(0,1)$ and $B_2(e_0,r)$.”\nThe notation $B_2$ is employed throughout, and step 1.1 appeals to “distance less than 1 … from 0”.\nWHY IT FAILS: **None of the cited dependencies defines the Euclidean metric on $\\mathbb{R}^n$ or the notation $B_2$.**  \n`def-metric-ball` defines $B(x,r)$ for an arbitrary metric space $(X,d)$:\n> “$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}$.”\nIt does not specify a metric for $\\mathbb{R}^n$ and does not define the subscript $2$. The other dependencies (`def-metric-topology`, the Heine–Borel theorem, `lem-standard-basis-of-f-n`) likewise supply no metric on $\\mathbb{R}^n$. Consequently the assertions “the open unit ball is bounded” (step 1.1) and “it is not closed” (step 1.2) are not logically derived from the declared Facts and Assumptions; they depend on unstated definitions and properties of the Euclidean distance.\nWHAT WOULD FIX IT: Add a dependency that defines $\\mathbb{R}^n$ as a metric space with the Euclidean distance (e.g., the $\\ell^2$ norm) and either provides or permits the basic distance calculations used in the proof.\n\n2 fatal, 0 nonfatal"
+}
