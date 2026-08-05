@@ -89,24 +89,42 @@ attempt('yaml', true, () => {
 
 // ---- model lanes ------------------------------------------------------------
 
-// WHICH CLI IS REQUIRED DEPENDS ON WHICH WORKFLOW THIS IS (all-Claude audit
-// reroute, owner 2026-08-05). A BUILD spawns Sol through Codex for authoring,
-// Beta and Alpha, so Codex is required there. An AUDIT no longer touches Codex
-// at all — its Beta, Alpha and certifier are Claude CLI processes and its
-// refuters are DeepSeek HTTP calls — so requiring Codex for a wave would block
-// on a lane the wave never uses, and treating the Claude CLI as optional would
-// let a wave start that cannot dispatch a single agent.
-const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
-attempt('codex-cli', !isAudit, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
-  'install the Codex CLI — build authoring/Beta/Alpha and the Terra judge lane all spawn it');
-record('codex-auth', !isAudit, existsSync(join(codexHome, 'auth.json')) ? 'pass' : 'fail',
-  existsSync(join(codexHome, 'auth.json')) ? `${join(codexHome, 'auth.json')}` : `no auth.json under ${codexHome}`,
-  'run the Codex login flow; an expired token takes out every build Sol lane at once');
+// WHICH CLI IS REQUIRED IS COMPUTED, NOT ASSUMED (owner 2026-08-05 reroute).
+// Two independent consumers decide it, and getting either wrong lets a run start
+// that cannot finish:
+//
+//   AGENTS  — a BUILD dispatches Sol through Codex (authoring, Beta, reader,
+//             Alpha). An AUDIT dispatches claude-opus-5 Betas and Alpha and a
+//             claude-sonnet-5 certifier, and touches Codex nowhere.
+//   JUDGES  — both workflows judge with the SAME configured lineup, and the
+//             default `deepseek+sonnet` spawns a fresh `claude -p` per call.
+//
+// So the Claude CLI is required for a build too, whenever the lineup has a
+// claude lane: a build preflight that called it optional would pass on a machine
+// with no `claude`, and then fail every Sonnet call at step 7 — after the whole
+// authoring pass had already been spent. Symmetrically, Codex stays required for
+// a build's agents and for the retired Terra lane, and nothing else.
+const lineupModels = {
+  'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
+  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
+  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
+}[process.env.JUDGE_LINEUP ?? 'deepseek+sonnet'] ?? [];
+const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
+const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
+const needCodex = !isAudit || judgeNeedsCodex;
+const needClaude = isAudit || judgeNeedsClaude;
 
-attempt('claude-cli', isAudit, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  isAudit
-    ? 'REQUIRED for an audit wave: audit-beta, audit-alpha and certifier are all Claude CLI processes'
-    : 'only needed for the claude judge lanes and a headless orchestrator');
+const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
+attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
+  'install the Codex CLI — build authoring/Beta/Alpha and the Terra judge lane spawn it');
+record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass' : 'fail',
+  existsSync(join(codexHome, 'auth.json')) ? `${join(codexHome, 'auth.json')}` : `no auth.json under ${codexHome}`,
+  'run the Codex login flow; an expired token takes out every Sol lane at once');
+
+attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
+  needClaude
+    ? `REQUIRED here: ${[isAudit && 'audit agents are Claude CLI processes', judgeNeedsClaude && `the ${process.env.JUDGE_LINEUP ?? 'deepseek+sonnet'} judge lane spawns claude -p`].filter(Boolean).join('; ')}`
+    : 'not needed by this workflow or judge lineup');
 
 // The key itself is never printed, logged, or placed in any output.
 const envFile = deepseekEnvFile();

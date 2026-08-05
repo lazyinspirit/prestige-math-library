@@ -393,6 +393,32 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
   save();
 
   if (plan.terminal) {
+    // GATES FIRST, THEN COMMIT, THEN PAUSE. This block used to commit and halt
+    // without running A10's gates at all, so the gate-table entry for A10 —
+    // level-coverage, the hard receipt gate — was dead code that `--list`
+    // advertised and no run executed.
+    //
+    // Wave 4 is the cost of that: its A8 gate failed, the run was resumed past
+    // it at A9, no later step re-ran depcheck, and A10 committed and reported a
+    // clean owner-pause over five items left published with no verification
+    // stamp. The next wave's very first gate refused to start on them. Running
+    // the terminal gates here turns that into a halt at the end of the wave that
+    // caused it, which is where it is cheapest to fix.
+    //
+    // Ordering matters: gate BEFORE the commit, so a failing wave does not leave
+    // a commit whose message says "awaiting owner audit".
+    const terminalGates = runGates(step);
+    journal('gates', { detail: `exit ${terminalGates.code}` });
+    if (terminalGates.code !== 0) {
+      let detail = String(terminalGates.out);
+      try {
+        const parsed = JSON.parse(terminalGates.out);
+        detail = parsed.results.filter((r) => r.status === 'fail')
+          .map((r) => `${r.tool}: ${r.code} — ${String(r.detail).split('\n')[0]}`).join('\n  ');
+      } catch { /* not JSON: keep the raw output */ }
+      halt('gate-failed', `${step} gates failed — NOT an owner pause, and nothing was committed:\n  ${detail}`,
+        resumeCmd(step));
+    }
     // Commit, never push. A crash before here leaves a dirty tree, which is
     // recoverable; a push before the owner has read the diff is not.
     if (!dryRun && !simulation) {

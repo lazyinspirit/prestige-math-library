@@ -124,6 +124,18 @@ const manifests = (run, count) => {
   check('steps 0 through 9 are complete',
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].every((s) => r.state?.steps?.[String(s)]?.status === 'complete'));
   check('nothing claims to have published', !/publish/i.test(r.state?.halt?.resume ?? '') || /by hand/.test(r.state.halt.resume));
+
+  // Step 10's gate-table entry (depcheck among it) was dead code: the driver
+  // halted with owner-pause before any gate ran, so `gates.mjs --list`
+  // advertised checks no run performed. The audit twin of this is how wave 4
+  // ended — a clean-looking terminal pause over items left in a state the very
+  // next run's first gate refused. The terminal step is the handoff to the
+  // owner, so it is where a final consistency check is worth most.
+  const journal = r.state?.journal ?? [];
+  const gatesAt10 = journal.findIndex((e) => String(e.step) === '10' && e.event === 'gates');
+  const pauseAt = journal.findIndex((e) => e.event === 'owner-pause');
+  check('step 10 runs the gates its gate-table entry advertises', gatesAt10 >= 0);
+  check('step 10 gates run BEFORE the owner pause', gatesAt10 >= 0 && pauseAt >= 0 && gatesAt10 < pauseAt);
 }
 
 cleanup();

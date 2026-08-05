@@ -94,6 +94,26 @@ test('owner-pause exits 0 — reaching A10 is a success, not a failure', () => {
   assert.match(r.out, /owner-pause/);
 });
 
+// A gate that never executes is invisible: `gates.mjs --audit --list` advertised
+// A10's level-coverage and the driver halted before running it, so the entry was
+// dead code for four waves. Wave 4 is what that cost — its terminal step
+// reported a clean owner-pause over five items published with no verification
+// stamp, and the next wave's first gate was what finally refused. Ordering is
+// part of the property: gate BEFORE the commit, so a failing wave never leaves a
+// commit saying "awaiting owner audit".
+test('the terminal step runs its gates, before the commit and the pause', () => {
+  const r = drive(['--wave', '99', '--judgment', 'autonomous', '--judge-budget', '10'], Array(60).fill(ok));
+  assert.equal(r.code, 0);
+  const j = r.state?.journal ?? [];
+  const gates = j.findIndex((e) => e.step === 'A10' && e.event === 'gates');
+  const pause = j.findIndex((e) => e.event === 'owner-pause');
+  assert.ok(gates >= 0, 'A10 must run the gates its own gate-table entry advertises');
+  assert.ok(pause >= 0, 'A10 must still reach the owner pause');
+  assert.ok(gates < pause, 'A10 gates must run BEFORE the owner pause, not after it');
+  const commit = j.findIndex((e) => e.event === 'commit');
+  if (commit >= 0) assert.ok(gates < commit, 'A10 gates must run BEFORE the commit');
+});
+
 test('A10 is the terminus: nothing in the plan runs after it', () => {
   const source = readFileSync(join(REPO, 'tools/run-wave.mjs'), 'utf8');
   const order = source.match(/const ORDER = \[(.*?)\]/s)?.[1] ?? '';

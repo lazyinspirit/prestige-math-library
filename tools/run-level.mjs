@@ -293,6 +293,32 @@ for (let step = state.step; step <= 10; step += 1) {
 
   // Step 10 is the terminus. Nothing past it is automatable by policy.
   if (plan.terminal) {
+    // THE TERMINAL STEP'S GATES MUST RUN, AND RUN BEFORE THE PAUSE.
+    // This block used to halt immediately, which made step 10's whole gate-table
+    // entry — depcheck among it — dead code: `gates.mjs --list` advertised gates
+    // that no run ever executed. That is not a cosmetic gap. The audit twin of
+    // this bug is how wave 4 finished: its A8 gate failed, the run resumed past
+    // it, and the terminal step paused without re-checking, leaving five items
+    // published carrying no verification stamp at all. Nothing downstream
+    // noticed until the NEXT wave's first gate refused to start.
+    //
+    // The terminal step is the handoff to the owner, so it is the one place a
+    // final consistency check is worth most. A failure here halts with
+    // `gate-failed` instead of reporting a clean owner-pause — an owner told
+    // "ready for audit" about an inconsistent tree is the failure mode this
+    // prevents.
+    const terminalGates = runGates(step);
+    journal('gates', { detail: `exit ${terminalGates.code}` });
+    if (terminalGates.code !== 0) {
+      let detail = String(terminalGates.out);
+      try {
+        const parsed = JSON.parse(terminalGates.out);
+        detail = parsed.results.filter((r) => r.status === 'fail')
+          .map((r) => `${r.tool}: ${r.code} — ${String(r.detail).split('\n')[0]}`).join('\n  ');
+      } catch { /* not JSON: keep the raw output */ }
+      halt('gate-failed', `step ${step} gates failed — NOT an owner pause:\n  ${detail}`,
+        `fix, then: node tools/run-level.mjs --run ${run} --level ${state.level} --from-step ${step}`);
+    }
     journal('owner-pause');
     halt('owner-pause', `step 10 reached — ${OWNER_PAUSE}\n  ${plan.note}`,
       `review research/${run}-*, then audit and publish by hand`);
