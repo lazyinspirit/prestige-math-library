@@ -701,6 +701,23 @@ before any rendering change, and preserve their behaviour):
   all-or-nothing scripts so `a^{1/n}` stays `a^1/n` rather than becoming the
   false-reading `a¹/n`. Do not reintroduce a second, cruder copy.
 
+- **Navigation, owner-commissioned 2026-08-05 — ADDITIVE, not a restyle; keep
+  it.** The owner asked for a way back to the index from every `/library` view,
+  and a direct link from each item to its own page. Both are built from the
+  EXISTING vocabulary and introduce **no new accent**: sky and fuchsia remain
+  reserved for forward references and the ‡ tier. (1) The `← Math Library`
+  back-link that `group/[slug]`, `item/[id]` and `plan` already carried is now
+  also on `[...path]/page.tsx`, in the same neutral `<nav className="mb-4
+  text-[13px]">` markup — the page renderer was the only view without it, and
+  the most-visited one. The index itself correctly has none. The two
+  `explainer/` documents carry their own `.backnav` in their own palette,
+  because they are standalone HTML and inherit no app chrome. (2) Each
+  `ItemBlock` chip row ends with an **Open item page →** pill linking to
+  `/library/item/<id>`, in the same `rounded-full border px-2 py-0.5 text-xs`
+  geometry as the provenance and verification chips beside it, in indigo — the
+  ordinary link colour. Nothing existing moved; the item anchors (`id={item.id}`)
+  still work for in-page deep links.
+
 Global entry point for future sessions: the `/math-library` skill loads this
 file first. If a future session is tempted to "improve" the look, STOP — the
 look is settled; only the owner reopens it.

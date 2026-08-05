@@ -17,14 +17,15 @@ step 5 to 8, opened up — and it is timed to 48.5 seconds, opening on the item 
 ending on the finished board with no title or end card, so it can also be filmed
 (see *Filming a page* below).
 
-Three small changes are needed in **`prestige-intelligence`**, and only one of
-them touches an existing file.
+**Status (2026-08-05):** route 1 below **already exists** on `main` in
+`prestige-intelligence` (commit `47d0f23`) and `/library/workflow` serves. Route
+2 and the index link are still to do.
 
 ---
 
-## 1. The route — a new file, so it cannot conflict on merge
+## 1. The route — DONE, kept here for reference
 
-Create `web/app/library/workflow/route.ts`:
+`web/app/library/workflow/route.ts`:
 
 ```ts
 // The build-workflow explainer is a standalone document authored in the math
