@@ -314,13 +314,22 @@ banner; the public sees only `published`.
   failed to surface; a recoverable restatement of established mathematics is
   `ai-altered`, and an undecidable case escalates to Alpha), uncertainty never
   falls toward a sourced label, and the sole URL waiver is the Alpha-concurred
-  `established-knowledge` evidence class; (2) Audit-Beta uses **GPT 5.6 Sol**
-  through the Codex subscription at `xhigh` with a 1,000,000-token context
-  window, and **audit Alpha is `claude-opus-5`** (owner, 2026-08-03),
-  dispatched as an Anthropic subagent of the orchestrator rather than through
-  Codex; independent readers and proof-refuters remain **GPT 5.6 Sol**, which
-  keeps every certifier of an Alpha-authored repair in a different family from
-  Alpha. This changes the AUDIT Alpha only; the build-workflow Alpha of
+  `established-knowledge` evidence class; (2) **the audit lineup is all-Claude
+  plus DeepSeek as of 2026-08-05 (owner); GPT 5.6 Sol is no longer used
+  anywhere in the audit.** Audit-Beta is **`claude-opus-5` at `xhigh`**, audit
+  Alpha is **`claude-opus-5`** (owner, 2026-08-03), the certifier/independent
+  reader is **`claude-sonnet-5` at `xhigh`, read-only**, and proof-refuters are
+  **DeepSeek V4 Pro at `max`, read-only**. The refuter's routing to DeepSeek
+  rather than Sonnet is load-bearing: with Beta, Alpha and the certifier all
+  Claude, it is the only cross-family reader left on the audit side, and the
+  no-self-certification rule depends on it. The certifier stays agentic because
+  it must fetch the source backing a repair; the DeepSeek lane is tool-less, so
+  Alpha assembles a refuter's context into its `--task` file and `dispatch.mjs`
+  refuses a refuter dispatched without one. Read-only is enforced per runner —
+  `--sandbox read-only` on codex, a default-deny `--allowed-tools` allowlist on
+  claude, and tool-lessness on deepseek — after a 2026-08-05 probe showed a
+  deny-list-only claude lane escaping to a subagent and writing the file it was
+  asked to write. This changes the AUDIT only; the build workflow of
   `LEVELS.md` stays GPT 5.6 Sol under the dispatch default above until the
   owner says otherwise. No injection test is required, because that bar
   governs judge lanes rather than adjudicators.

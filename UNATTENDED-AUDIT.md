@@ -39,7 +39,7 @@ stochastic. What is deterministic is the control flow around them.
 | `tools/preflight.mjs --audit` | can this machine run a wave. Adds an **outbound-HTTP check** the build does not need |
 | `tools/gates.mjs --audit --step A<n>` | the gates of record for one audit step. Never writes, never spends |
 | `tools/audit-split.mjs` | classifies changed items pure-retag vs material, field-aware |
-| `tools/dispatch.mjs --role audit-*` | spawns one briefed audit role as a plain process |
+| `tools/dispatch.mjs --role audit-*` | runs one briefed audit role. All-Claude plus DeepSeek since 2026-08-05: `audit-beta` and `audit-alpha` are `claude-opus-5`, `certifier` is read-only `claude-sonnet-5`, `audit-refuter` is read-only DeepSeek V4 Pro (an HTTP call, not a process, so it needs its context in `--task`). `--check-read-only` prints the per-runner enforcement |
 | `tools/run-wave.mjs` | the state machine: steps, halts, durable state, journal |
 | `tools/run-control.mjs --run wave<k>` | talk to a wave that is already going |
 | `ops/run-wave@.service` | systemd user unit so the wave survives logout |

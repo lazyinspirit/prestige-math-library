@@ -64,15 +64,20 @@ These three deltas are owner decisions embodied in the commissioning
 instruction; they are recorded here so no future session mistakes them for
 drift:
 
-- **Model substitution (owner, 2026-08-02; Alpha amended 2026-08-03).**
-  Audit-Beta uses **GPT 5.6 Sol** through the Codex subscription at `xhigh`
-  with a 1,000,000-token context window. **Alpha is `claude-opus-5`** (owner,
-  2026-08-03), dispatched as an Anthropic subagent of the orchestrator session
-  — not through the Codex subscription. Independent readers and proof-refuters
-  remain **GPT 5.6 Sol** through the Codex subscription at `xhigh`; that is
-  deliberate, not an oversight, because it makes every reader who certifies an
-  Alpha-authored repair a different model family from Alpha and so strengthens
-  the no-self-certification rule.
+- **Model substitution (owner, 2026-08-02; Alpha amended 2026-08-03;
+  ALL-CLAUDE REROUTE 2026-08-05).** GPT 5.6 Sol is no longer used anywhere in
+  the audit. **Audit-Beta is `claude-opus-5` at `xhigh`**, **Alpha is
+  `claude-opus-5`** (owner, 2026-08-03), the **certifier is `claude-sonnet-5`
+  at `xhigh`, read-only**, and **proof-refuters are DeepSeek V4 Pro at `max`,
+  read-only**. All are dispatched by `tools/dispatch.mjs`, which owns the
+  per-runner read-only enforcement (§8).
+  The refuter's routing to DeepSeek rather than Sonnet is the load-bearing part
+  of this decision, not a detail: with Beta, Alpha and the certifier all Claude,
+  a Sonnet refuter would leave the audit with no cross-family reader outside the
+  judge lane. The previous Sol readers bought that separation; DeepSeek now buys
+  it, and the no-self-certification rule needs it.
+  The certifier stays on an agentic runner because it must fetch the source
+  backing a repair, and the DeepSeek lane is tool-less.
   Alpha's model change needs no injection test: the standing injection bar
   (`ARCHITECTURE.md` §5) governs **judge lanes**, which return a mechanical
   keep/reject verdict, and Alpha is an adjudicator whose findings are recorded
@@ -124,30 +129,39 @@ drift:
 |---|---|---|
 | **owner** | human | approves this proposal; receives the per-wave A10 rundown; decides every non-delegated repair |
 | **orchestrator** | this session | wave/batch computation, briefs, the gate of record, ledgers, twice-touched personal audits, the A10 report |
-| **Audit-Beta** | **GPT 5.6 Sol, `xhigh`** | the reading workhorse: per-item provenance determination with literature search, full proof-step and citation audit, proof-contract capture, delegated repairs in its batch. Owns at most **two A/B pairs** (the existing Beta capacity rule); a wider batch gets more Betas |
+| **Audit-Beta** | **`claude-opus-5`, `xhigh`** (owner, 2026-08-05) | the reading workhorse: per-item provenance determination with literature search, full proof-step and citation audit, proof-contract capture, delegated repairs in its batch. Owns at most **two A/B pairs** (the existing Beta capacity rule); a wider batch is split at A0 (§4) |
 | **Alpha** | **`claude-opus-5`** (owner, 2026-08-03) | sole adjudicator: verifies Beta findings and repairs from disk, dispatches read-only proof-refuters, audits every cross-batch/cross-level edge, adjudicates judge rejections, owns the repair and blast-radius ledgers; must recover the prior durable record before resuming |
-| **independent reader** | **GPT 5.6 Sol, `xhigh`** | Alpha-assigned check of any repair authored by a Beta or by Alpha itself — the author of a repair never certifies it |
+| **certifier** (independent reader) | **`claude-sonnet-5`, `xhigh`**, read-only (owner, 2026-08-05) | Alpha-assigned check of any repair authored by a Beta or by Alpha itself — the author of a repair never certifies it. Stays on an agentic runner because certifying a source-backed repair requires actually fetching the source |
+| **proof-refuter** | **DeepSeek V4 Pro** (`max`), read-only (owner, 2026-08-05) | adversarial proof reading on context Alpha assembles. Tool-less by transport, so Alpha must supply the item and its cited dependencies in the dispatch task file; `dispatch.mjs` refuses a refuter dispatched without one |
 | **judges** | **DeepSeek V4 Pro direct (`max`) + fresh Claude Sonnet 5** | paired adversarial screens on identical hash-attested frozen context, invoked through the build's `tools/judge.mts --parallel` / `tools/judge-sweep.mjs` (§8), with 16 independent concurrent calls per model |
 
-Cross-family honesty note (updated 2026-08-03 for the Opus Alpha): the
-published corpus was authored largely by Claude-family and GPT-family
-sessions. This audit's Betas, readers, and refuters are Sol; **Alpha is
-`claude-opus-5`**. Two consequences, and the second is a cost, not a benefit:
+Cross-family honesty note (rewritten 2026-08-05 for the all-Claude reroute).
+The published corpus was authored largely by Claude-family and GPT-family
+sessions. GPT 5.6 Sol has been removed from the audit entirely: Beta and Alpha
+are both `claude-opus-5`, the certifier is `claude-sonnet-5`, and the
+orchestrator is `claude-opus-5`. State the consequences plainly, because the
+previous arrangement existed to buy exactly what this one gives up:
 
-- Alpha now sits in a different family from the Betas whose repairs it
-  certifies and from the readers who certify Alpha's own repairs, so the
-  adjudication layer is no longer single-family. That is a strengthening.
-- Alpha is the **same family as a large part of the legacy corpus it
-  adjudicates**, and the orchestrator is also `claude-opus-5`. Alpha is
-  therefore not an independent family screen on Claude-authored legacy
-  content, and must not be described as one. The independence that matters
-  there is unchanged and lives elsewhere: **DeepSeek is the cross-family
-  screen**, and Sol readers/refuters are cross-family relative to Alpha.
+- **Beta and Alpha are now the same model.** Alpha adjudicates Beta's findings
+  at A6 and certifies Beta's repairs. A shared blind spot between author and
+  adjudicator no longer shows up as disagreement, so Alpha's agreement with a
+  Beta determination carries less evidential weight than it did, and Alpha must
+  not treat "it reads correctly to me" as corroboration.
+- **The certifier is the same family as both.** It is an independent *process*
+  and an independent *reading*, not an independent family.
+- **The refuter is the one remaining cross-family audit-side reader.** This is
+  why proof-refuters were routed to DeepSeek V4 Pro rather than to Sonnet: with
+  an all-Claude Beta/Alpha/certifier stack, a same-family refuter would have
+  left the audit with no non-Claude reader outside the judge lane at all.
+- **Alpha is the same family as a large part of the legacy corpus it
+  adjudicates.** It is not an independent family screen on Claude-authored
+  published content and must not be described as one.
 
-Sonnet 5 is a fresh independent comparison lane, cross-family relative to the
-Sol author but SAME-family as the audit Alpha (`claude-opus-5`) adjudicating its
-rejections and as much of the legacy corpus it reads — not a
-claim of cross-family separation.
+Net: **DeepSeek is the cross-family screen**, in both the refuter lane and the
+judge lane. Sonnet 5's judge lane is a fresh independent comparison lane, but it
+is SAME-family as the Beta that authored the repair, the Alpha adjudicating its
+rejections, and much of the legacy corpus it reads — not a claim of cross-family
+separation. Weight a DeepSeek finding accordingly, in both lanes.
 
 Context-continuity checkpoints carry over unchanged: orchestrator at 50% of
 active context into `research/audit/RESUME.md`; each Beta at 60% into its
@@ -173,9 +187,24 @@ dependency level**, all batches of a wave running in parallel.
   at their site level; the `not-proved-here` catalogue pages are excluded
   from scope by owner instruction (they still take part in the home map).
 - **Batch** = the pairs of one category inside that wave, e.g.
-  `wave1-abstract-algebra` = the level-1 abstract-algebra pairs. A batch wider
-  than two pairs is split across multiple Audit-Betas (capacity rule), but the
-  batch remains the ledger and manifest unit.
+  `wave1-abstract-algebra` = the level-1 abstract-algebra pairs. One batch is one
+  Audit-Beta, one manifest, and one namespaced ledger family; the three never
+  come apart.
+- **Splitting an over-cap manifest is an A0 action.**
+  `rounds.mjs --audit-batches` emits one manifest per category × wave, which is
+  raw scope, not a work assignment: the two-A/B-pair capacity rule binds the Beta
+  assigned to a batch, so a generated manifest wider than two pairs is not yet a
+  legal batch. A0 splits it into separate named manifests —
+  `wave<k>-<category>-<qualifier>.pages.json` — each of which then satisfies
+  "one batch, one Beta, one ledger" above. Wave 3 split `combinatorics` into
+  `wave3-combinatorics-graphs` (2 pairs) and `wave3-combinatorics-incidence`
+  (1 pair); wave 5 splits `topology`'s five pairs three ways. Choose the split to
+  sever cross-pair dependency edges where possible, and confirm from
+  `audit-manifest.mjs` that the cross-pair edge count is unchanged by the split
+  itself. `content-policy.mjs --audit` deliberately does **not** raise
+  `batch-a-pair-cap` (§8), because the cap is a property of the assignment
+  rather than of the manifest text; that silence is why the split has to be a
+  named A0 step and not a gate the driver can wait for.
 - **Waves run bottom-up, and the guarantee is category-local.** Levels are
   computed per category, so within a category every dependency target of a
   wave-k page was audited in a wave < k: a citation into your own category is
@@ -466,8 +495,12 @@ dispatched, never by narrowing what Alpha reads.
    contradicted the item's own Statement about the Axiom of Choice.
    `audit-split.mjs` is the corrected, field-aware version.
 
-3. **Refuter concurrency is cheap; use it.** Sol lanes are read-only and
-   independent. Wave 3's Alpha ran 14 concurrently with no contention.
+3. **Refuter concurrency is cheap; use it.** Refuter lanes are read-only and
+   independent. Wave 3's Alpha ran 14 concurrently with no contention. Since
+   2026-08-05 a refuter is an HTTP call rather than a process, so concurrency is
+   cheaper still in memory — but it is blind: Alpha assembles the item and its
+   cited dependencies into the dispatch task file, and `dispatch.mjs` refuses a
+   refuter dispatched without one rather than let it read nothing confidently.
 
 4. **Stage-level touch snapshots only.** The orchestrator takes `pre-A4`,
    `post-A4` and `pre-a8`; Alpha and the Betas take none. Wave 2's 267 per-item
@@ -483,9 +516,11 @@ dispatched, never by narrowing what Alpha reads.
    orchestrator measured 27 items carrying `scope: published-audit` mid-run and
    reported a Beta self-certification breach. There was none: 26 were Alpha's
    own stamps, written after independent Sol readings, and 1 was wave 2's. The
-   `model` field names the *certifying reader*, which is a Sol model, so it does
-   not distinguish author from certifier. Census stamps only at a quiesced tree,
-   and attribute by date.
+   `model` field names the *certifying reader*, not the author, so it does not
+   distinguish the two. Census stamps only at a quiesced tree, and attribute by
+   date. This got harder on 2026-08-05: the certifier is now `claude-sonnet-5`
+   and Alpha is `claude-opus-5`, both Claude, so the field no longer even
+   separates families. Date attribution is the only reliable route.
 
 **REJECTED, and recorded so no future session retries it: do NOT narrow Alpha's
 reading surface to the items A4 changed.** It looks like the obvious ~5×

@@ -19,19 +19,64 @@
 // writer of the prose scaffolds and two concurrent Alphas would silently
 // overwrite each other.
 //
-// Model routing follows the standing owner rule: GPT 5.6 Sol through the Codex
-// subscription at xhigh with a 1,000,000-token context window, passed
+// Model routing. BUILD roles follow the standing owner rule: GPT 5.6 Sol through
+// the Codex subscription at xhigh with a 1,000,000-token context window, passed
 // explicitly because the temporary CODEX_HOME deliberately does not inherit the
-// user's config.toml.
+// user's config.toml. AUDIT roles are all Claude as of 2026-08-05 (owner) — see
+// the audit block of the role table for what that costs.
+//
+// READ-ONLY IS ENFORCED PER RUNNER, AND THE TWO RUNNERS DO IT DIFFERENTLY.
+// Codex has `--sandbox read-only`, a kernel-level guarantee. The `claude` CLI
+// has no sandbox flag, so its analogue is `--disallowed-tools` naming every tool
+// that can reach the filesystem — Write, Edit, NotebookEdit AND Bash, since a
+// shell is a write primitive. A deny rule outranks `--permission-mode`, so the
+// mode may still grant WebFetch/WebSearch (a certifier that cannot check a
+// source falls back to guessing) while file mutation stays impossible. This is
+// weaker than a sandbox: it binds the tool layer rather than the process, and it
+// is only as good as the tool list. `--check-read-only` re-asserts the list from
+// the role table so a future tool addition cannot silently widen it.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, copyFileSync, chmodSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
-import { REPO } from './paths.mjs';
+import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
+const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5';
+const SONNET_MODEL = process.env.SONNET_MODEL ?? 'claude-sonnet-5';
+const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
+
+// READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
+//
+// Measured 2026-08-05, and this is the whole reason the shape is what it is: a
+// read-only probe carrying only `--disallowed-tools Bash Write Edit NotebookEdit`
+// CREATED THE FILE IT WAS ASKED TO CREATE. It delegated to a subagent, whose
+// tools do not inherit the parent's deny list — the agent's own words were "a
+// second agent apparently ran independently". A deny list is a blocklist, and a
+// blocklist cannot cover a tool that spawns a fresh tool set.
+//
+// So the guarantee is the ALLOW list: `--allowed-tools` restricts which tools
+// load at all, making the default deny. Re-probed with it, the same request
+// reported "no Write, Edit, or Bash tool was loaded or discoverable", while
+// WebSearch still retrieved and cited a live URL. The deny list is kept as a
+// second, redundant barrier naming the write primitives AND every delegation
+// tool, so that a future tool named outside CLAUDE_READ_TOOLS still cannot
+// reach the disk through a child agent.
+const CLAUDE_READ_TOOLS = Object.freeze(['Read', 'Glob', 'Grep', 'WebSearch', 'WebFetch']);
+const CLAUDE_WRITE_TOOLS = Object.freeze([
+  'Bash', 'Write', 'Edit', 'NotebookEdit',
+  // Delegation tools. Not writers themselves — they MINT a new agent whose tool
+  // set this process does not constrain. This is the line the 2026-08-05 probe
+  // walked through.
+  'Task', 'Agent', 'Workflow',
+]);
+// Stated separately and on purpose. CLAUDE_WRITE_TOOLS is the list we SEND;
+// this is the list a read-only role must be denied for the guarantee to mean
+// anything. Keeping them apart lets --check-read-only fail loudly if someone
+// trims the sent list, which is the realistic way this protection erodes.
+const REQUIRED_CLAUDE_DENIES = Object.freeze(['Bash', 'Write', 'Edit', 'NotebookEdit', 'Task', 'Agent', 'Workflow']);
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
@@ -42,18 +87,55 @@ const ROLES = Object.freeze({
   orchestrator: { runner: 'claude', model: null,      sandbox: null,              cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
 
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
-  // Audit-Beta stays Sol; the audit ALPHA is claude-opus-5 by owner rule of
-  // 2026-08-03, deliberately a different family from the Sol readers that
-  // certify its repairs, so no repair Alpha authors is certified by its own
-  // model. That is the whole reason the two runners differ here.
-  'audit-beta':    { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
-  'audit-alpha':   { runner: 'claude', model: null,      sandbox: null,              cap: 1, dir: 'research/audit', why: 'SINGLE adjudicator at A6 and A8; owner rule makes it claude-opus-5' },
-  // Read-only at the SANDBOX, not by request. The owner rule says a refuter
-  // never edits and a certifier never certifies its own work; a prompt that
-  // merely asks for that is not a guarantee, and these two roles are the ones
-  // whose findings would be worthless if they could quietly fix what they found.
-  certifier:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author' },
-  'audit-refuter': { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, dir: 'research/audit', web: true, why: 'adversarial proof reading; returns evidence, never edits' },
+  // ALL-CLAUDE AUDIT LINEUP (owner, 2026-08-05). Beta moved Sol -> claude-opus-5,
+  // certifier and audit-refuter moved Sol -> claude-sonnet-5; Alpha was already
+  // claude-opus-5 (owner, 2026-08-03). Effort is xhigh on all three rerouted
+  // lanes, matching the Sol lanes they replace rather than silently dropping to
+  // the claude runner's default.
+  //
+  // WHAT THIS COSTS, recorded because the previous arrangement existed to buy it.
+  // Until now Alpha was deliberately a different family from the Sol Betas whose
+  // repairs it certifies and the Sol readers who certify Alpha's own. That
+  // separation is gone: Beta is now the SAME MODEL as the Alpha adjudicating its
+  // findings at A6, and certifier/refuter are the same family as both. No
+  // audit-side reader is cross-family with any other. DeepSeek in the judge lane
+  // (§8) is the only non-Claude reader left anywhere in the audit, so a
+  // Sonnet-refuter agreement with an Opus-authored repair is weak evidence and a
+  // DeepSeek rejection is the strong signal. Weight the A10 comparison that way.
+  //
+  // MEMORY. These are `claude` processes now, not `codex` ones, and wave 4
+  // measured 16 concurrent claude judge processes at 3.9 GB with a 4.6 GB peak on
+  // a 7.8 GB host (MemoryHigh=4G, MemoryMax=5G). A6 can hold certifier (6) plus
+  // audit-refuter (8) at once — comparable load, on the same host, and now on the
+  // same runner. If a lane starts returning capacity refusals, lower these caps
+  // rather than reading the refusal as a verdict.
+  'audit-beta':    { runner: 'claude', model: OPUS_MODEL,   sandbox: 'workspace-write', effort: 'xhigh', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
+  'audit-alpha':   { runner: 'claude', model: OPUS_MODEL,   sandbox: 'workspace-write', cap: 1, dir: 'research/audit', why: 'SINGLE adjudicator at A6 and A8; owner rule makes it claude-opus-5' },
+  // Read-only MECHANICALLY, not by request. The owner rule says a refuter never
+  // edits and a certifier never certifies its own work; a prompt that merely asks
+  // for that is not a guarantee, and these two roles are the ones whose findings
+  // would be worthless if they could quietly fix what they found. On the claude
+  // runner the guarantee is the CLAUDE_WRITE_TOOLS deny list above.
+  //
+  // THE SPLIT BETWEEN THESE TWO IS CAPABILITY, NOT PREFERENCE (owner, 2026-08-05
+  // permitted DeepSeek "as a substitute for sonnet 5 certifier or refuter").
+  // A CERTIFIER must check a repair against a reputable source, which needs web
+  // access; it stays on Sonnet 5, measured 2026-08-05 retrieving and citing a
+  // live URL under the read-only tool set below. DeepSeek through the API has no
+  // tools at all — no disk, no web — so a DeepSeek certifier would be reduced to
+  // asserting from memory exactly where wave 2 showed that fails (eight
+  // `established-knowledge` waivers, seven of which dissolved once a reader
+  // could actually fetch).
+  // A REFUTER reads a proof adversarially and returns evidence, which is what
+  // the DeepSeek judge lane already does on assembled context. Routing it to
+  // DeepSeek restores the cross-family separation this all-Claude lineup
+  // otherwise loses: it is the one audit-side reader that is not the same family
+  // as the Opus Beta that wrote the repair or the Opus Alpha that adjudicates it.
+  // The price is that Alpha must ASSEMBLE the context — a DeepSeek lane cannot
+  // open a file, so a refuter dispatched without --task is blind, and dispatch
+  // refuses that below rather than letting it return a confident empty reading.
+  certifier:       { runner: 'claude',   model: SONNET_MODEL, sandbox: 'read-only', effort: 'xhigh', cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author; needs web to check sources' },
+  'audit-refuter': { runner: 'deepseek', model: DEEPSEEK_MODEL, sandbox: 'read-only', cap: 8, dir: 'research/audit', requiresTask: true, why: 'adversarial proof reading on assembled context; the only cross-family audit reader' },
 });
 
 const argv = process.argv.slice(2);
@@ -61,6 +143,34 @@ const asJson = argv.includes('--json');
 const dryRun = argv.includes('--dry-run');
 const option = (name) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
 const options = (name) => argv.reduce((acc, arg, i) => (arg === name && argv[i + 1] ? [...acc, argv[i + 1]] : acc), []);
+
+// --check-read-only: assert that every role declaring `sandbox: 'read-only'`
+// actually gets a mechanical guarantee on its own runner, and print the exact
+// enforcement so it is auditable without reading this file. Cheap, spawns
+// nothing, and belongs in a preflight: the failure it catches is a role that
+// silently became writable because its runner changed.
+if (argv.includes('--check-read-only')) {
+  const problems = [];
+  for (const [name, r] of Object.entries(ROLES)) {
+    if (r.sandbox !== 'read-only') continue;
+    if (r.runner === 'codex') {
+      console.log(`${name.padEnd(14)} codex    --sandbox read-only (process-level)`);
+    } else if (r.runner === 'deepseek') {
+      console.log(`${name.padEnd(14)} deepseek tool-less API lane, no filesystem (transport-level)`);
+    } else if (r.runner === 'claude') {
+      const missing = REQUIRED_CLAUDE_DENIES.filter((tool) => !CLAUDE_WRITE_TOOLS.includes(tool));
+      if (missing.length) problems.push(`${name}: deny list omits ${missing.join(', ')}`);
+      // The allow list is the guarantee; a read-only claude role without one is
+      // the exact configuration the 2026-08-05 probe walked out of.
+      if (!CLAUDE_READ_TOOLS.length) problems.push(`${name}: no allow list — deny-only is provably escapable via a subagent`);
+      console.log(`${name.padEnd(14)} claude   --allowed-tools ${CLAUDE_READ_TOOLS.join(' ')} (default-deny) + deny ${CLAUDE_WRITE_TOOLS.join(' ')}`);
+    } else {
+      problems.push(`${name}: runner ${r.runner} has no read-only enforcement`);
+    }
+  }
+  for (const problem of problems) console.error(`dispatch: ${problem}`);
+  process.exit(problems.length ? 1 : 0);
+}
 
 const role = option('--role');
 const briefPath = option('--brief');
@@ -102,6 +212,13 @@ const vars = new Map(options('--var').map((pair) => {
 vars.set('run', run);
 for (const [key, value] of vars) prompt = prompt.replaceAll(`<${key}>`, value);
 
+// A tool-less runner cannot open a file, so a brief that says "read the item on
+// disk" produces a confident reading of nothing. The task file IS the context
+// for those lanes, and its absence is a dispatch error rather than a quiet
+// degradation.
+if (spec.requiresTask && !taskPath) {
+  usage(`role ${role} runs on ${spec.runner}, which has no filesystem access — pass --task with the assembled context`);
+}
 if (taskPath) {
   if (!existsSync(resolveFile(taskPath))) usage(`task file not found: ${taskPath}`);
   prompt += `\n\n---\n\n# This dispatch\n\n${readFileSync(resolveFile(taskPath), 'utf8')}`;
@@ -170,16 +287,96 @@ const buildCodex = (temporaryHome) => [
   { CODEX_HOME: temporaryHome },
 ];
 
+// `acceptEdits` is kept even for a read-only role. It is safe because the ALLOW
+// list, not the permission mode, is what withholds the write tools — they are
+// never loaded, so there is nothing for the mode to accept. It is necessary
+// because the stricter `default` mode withholds web access too: probed
+// 2026-08-05, a read-only lane in `default` mode reported it could not confirm
+// web reachability, and a certifier that cannot fetch its source falls back to
+// asserting from memory — wave 2's eight `established-knowledge` waivers, seven
+// of which dissolved once a reader could actually fetch.
 const buildClaude = () => [
   process.env.CLAUDE_BIN ?? 'claude',
-  ['-p', '--effort', 'high', '--permission-mode', 'acceptEdits'],
+  [
+    '-p',
+    // null model = inherit the session model (the orchestrator role).
+    ...(spec.model ? ['--model', spec.model] : []),
+    '--effort', spec.effort ?? 'high',
+    '--permission-mode', 'acceptEdits',
+    // Allow list FIRST (it is the actual guarantee), deny list second (redundant
+    // barrier). Both are variadic, so each must be the last thing before the
+    // next flag — hence the explicit ordering rather than a spread at the end.
+    ...(spec.sandbox === 'read-only'
+      ? ['--allowed-tools', ...CLAUDE_READ_TOOLS, '--disallowed-tools', ...CLAUDE_WRITE_TOOLS]
+      : []),
+  ],
   {},
 ];
 
+// The DeepSeek lane is an HTTP call, not a process: no tools, no disk, no web.
+// That makes it read-only by construction — the strongest of the three
+// guarantees here — and simultaneously blind, which is why `requiresTask` is
+// enforced for it. Transport settings mirror the judge lane in tools/judge.mts
+// so a refuter and a judge read at the same depth: thinking enabled, the
+// owner's xhigh mapped to the API's `max`, and a reasoning-sized token budget.
+const DEEPSEEK_MAX_TOKENS = 40_000;
+
+const deepseekKey = () => {
+  if (process.env.DEEPSEEK_API_KEY) return process.env.DEEPSEEK_API_KEY;
+  const file = deepseekEnvFile();
+  if (!file || !existsSync(file)) return null;
+  const line = readFileSync(file, 'utf8').split(/\r?\n/)
+    .find((l) => /^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*\S/.test(l));
+  return line ? line.replace(/^(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*/, '').replace(/^["']|["']$/g, '').trim() : null;
+};
+
+const runDeepSeek = async (text, timeoutMs) => {
+  const key = deepseekKey();
+  if (!key) return { code: 1, timedOut: false, stdout: '', stderr: `no DEEPSEEK_API_KEY in env or ${deepseekEnvFile()}` };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        model: spec.model,
+        messages: [{ role: 'user', content: text }],
+        reasoning_effort: 'max',
+        thinking: { type: 'enabled' },
+        max_tokens: DEEPSEEK_MAX_TOKENS,
+      }),
+      signal: controller.signal,
+    });
+    const raw = await response.text();
+    if (response.status >= 400) return { code: 1, timedOut: false, stdout: '', stderr: `HTTP ${response.status}: ${raw.slice(0, 500)}` };
+    const body = JSON.parse(raw);
+    const content = body.choices?.[0]?.message?.content ?? '';
+    const finish = body.choices?.[0]?.finish_reason;
+    // A length stop is a truncated reading, not a clean refutation. Surface it
+    // as a failure so Alpha re-dispatches rather than adjudicating a fragment.
+    if (finish === 'length') return { code: 1, timedOut: false, stdout: content, stderr: 'finish_reason: length — reading truncated, re-dispatch with narrower context' };
+    if (!content.trim()) return { code: 1, timedOut: false, stdout: '', stderr: `empty response (finish_reason: ${finish})` };
+    return { code: 0, timedOut: false, stdout: content, stderr: '' };
+  } catch (error) {
+    const aborted = error?.name === 'AbortError';
+    return { code: aborted ? null : 1, timedOut: aborted, stdout: '', stderr: String(error) };
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
 if (dryRun) {
-  const [bin, args] = spec.runner === 'codex' ? buildCodex('<temp-home>') : buildClaude();
+  const [bin, args] = spec.runner === 'codex' ? buildCodex('<temp-home>')
+    : spec.runner === 'deepseek' ? [`POST api.deepseek.com/chat/completions model=${spec.model}`, []]
+    : buildClaude();
   const report = {
     role, label, run, runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
+    effort: spec.runner === 'claude' ? (spec.effort ?? 'high') : 'xhigh',
+    read_only_enforcement: spec.sandbox !== 'read-only' ? null
+      : spec.runner === 'codex' ? 'process: --sandbox read-only'
+      : spec.runner === 'deepseek' ? 'transport: tool-less API lane, no filesystem at all'
+      : `tools: --allowed-tools ${CLAUDE_READ_TOOLS.join(' ')} (default-deny) + --disallowed-tools ${CLAUDE_WRITE_TOOLS.join(' ')}`,
     lane_cap: spec.cap, timeout_s: timeoutSec,
     command: [bin, ...args].join(' '),
     prompt_bytes: Buffer.byteLength(prompt), prompt_lines: prompt.split('\n').length,
@@ -204,7 +401,13 @@ const started = new Date();
 const release = await pool.acquire(role);
 
 let temporaryHome = null;
-const result = await new Promise((resolve) => {
+const result = spec.runner === 'deepseek'
+  ? await (async () => {
+    const outcome = await runDeepSeek(prompt, timeoutSec * 1000);
+    writeFileSync(logPath, `# ${role}/${label} ${started.toISOString()}\n\n## stdout\n${outcome.stdout}\n\n## stderr\n${outcome.stderr}\n`);
+    return outcome;
+  })()
+  : await new Promise((resolve) => {
   let bin, args, extraEnv;
   if (spec.runner === 'codex') {
     // Give each agent a 0700 temporary home containing only its auth record, so

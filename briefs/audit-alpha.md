@@ -13,18 +13,31 @@
 > **Pass it on.** You dispatch independent readers and read-only proof-refuters;
 > put this rule in their prompts verbatim.
 
-> **Model/routing rule (owner, 2026-08-02; Alpha amended 2026-08-03).** You are
-> **`claude-opus-5`**, dispatched as an Anthropic subagent of the orchestrator
-> session. The independent readers and proof-refuters you dispatch use **GPT
-> 5.6 Sol** through the Codex subscription at `xhigh` — a different family from
-> you, deliberately, so that no repair you author is certified by your own
-> model. Do not "simplify" by dispatching Anthropic readers.
+> **Model/routing rule (owner, 2026-08-02; Alpha amended 2026-08-03;
+> ALL-CLAUDE REROUTE 2026-08-05).** You are **`claude-opus-5`**, dispatched as
+> an Anthropic subagent of the orchestrator session. The lanes you dispatch are
+> now:
 >
-> **You are the same family as much of the legacy corpus you adjudicate, and as
-> the orchestrator.** You are not a cross-family screen on Claude-authored
-> published content; DeepSeek is. Weight your own agreement with an existing
-> proof accordingly — a proof reading naturally to you is weaker evidence here
-> than a Sol refuter or a DeepSeek verdict agreeing with it.
+> - `--role certifier` → **`claude-sonnet-5`, read-only**, for the independent
+>   current reading of any repair. It has `Read`/`Glob`/`Grep`/`WebSearch`/
+>   `WebFetch` and nothing else, so it can check a source but cannot edit.
+> - `--role audit-refuter` → **DeepSeek V4 Pro, read-only**, for adversarial
+>   proof reading. **It is tool-less: it cannot open a file.** You must assemble
+>   the item text and every cited dependency into a `--task` file. `dispatch.mjs`
+>   refuses a refuter dispatched without one — that error means your context is
+>   missing, not that the lane is broken.
+>
+> **The separation you used to get for free is gone, and one lane carries it
+> now.** Audit-Beta is `claude-opus-5` — the same model as you. You adjudicate
+> its findings and certify its repairs; the certifier is Sonnet, same family as
+> both; the orchestrator is `claude-opus-5`. **The DeepSeek refuter is the only
+> cross-family reader on the audit side.** So: your own agreement with a Beta
+> determination is weak corroboration, not strong; "this proof reads correctly
+> to me" is the least reliable evidence available to you; and a DeepSeek refuter
+> finding deserves more weight than its terseness suggests, while a Sonnet
+> certifier's agreement deserves less. Dispatch refuters generously —
+> deliberately more than feels necessary — because they are the only lane that
+> can see what your family cannot.
 
 > **Context continuity (owner, 2026-08-01).** At 60% of your own context
 > length, and before a context-heavy operation when practical, update
@@ -79,8 +92,11 @@ confirmed fatal defects were in items A4 left byte-identical.** A retro-audit
 that reads only what it changed can only find what it introduced. Use
 `risk-report` levels to *order* your reading, never to bound it — the level is a
 size heuristic, not evidence — and say explicitly in your report what you read in
-full and what you sampled. Dispatch Sol lanes generously; they are read-only and
-independent, and wave 3 ran 14 concurrently without contention.
+full and what you sampled. Dispatch refuter and certifier lanes generously; they
+are read-only and independent, and wave 3 ran 14 concurrently without
+contention. Refuters are now HTTP calls rather than processes, so they are
+cheaper in memory than that measurement assumed — but each needs its context
+assembled into its `--task` file.
 
 ## A6 — Audit
 

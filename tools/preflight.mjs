@@ -89,15 +89,24 @@ attempt('yaml', true, () => {
 
 // ---- model lanes ------------------------------------------------------------
 
+// WHICH CLI IS REQUIRED DEPENDS ON WHICH WORKFLOW THIS IS (all-Claude audit
+// reroute, owner 2026-08-05). A BUILD spawns Sol through Codex for authoring,
+// Beta and Alpha, so Codex is required there. An AUDIT no longer touches Codex
+// at all — its Beta, Alpha and certifier are Claude CLI processes and its
+// refuters are DeepSeek HTTP calls — so requiring Codex for a wave would block
+// on a lane the wave never uses, and treating the Claude CLI as optional would
+// let a wave start that cannot dispatch a single agent.
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
-attempt('codex-cli', true, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
-  'install the Codex CLI — Sol authoring/Beta/Alpha and the Terra judge lane all spawn it');
-record('codex-auth', true, existsSync(join(codexHome, 'auth.json')) ? 'pass' : 'fail',
+attempt('codex-cli', !isAudit, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
+  'install the Codex CLI — build authoring/Beta/Alpha and the Terra judge lane all spawn it');
+record('codex-auth', !isAudit, existsSync(join(codexHome, 'auth.json')) ? 'pass' : 'fail',
   existsSync(join(codexHome, 'auth.json')) ? `${join(codexHome, 'auth.json')}` : `no auth.json under ${codexHome}`,
-  'run the Codex login flow; an expired token takes out the Sol and Terra lanes at once');
+  'run the Codex login flow; an expired token takes out every build Sol lane at once');
 
-attempt('claude-cli', false, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  'only needed for the claude judge lanes and a headless orchestrator');
+attempt('claude-cli', isAudit, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
+  isAudit
+    ? 'REQUIRED for an audit wave: audit-beta, audit-alpha and certifier are all Claude CLI processes'
+    : 'only needed for the claude judge lanes and a headless orchestrator');
 
 // The key itself is never printed, logged, or placed in any output.
 const envFile = deepseekEnvFile();

@@ -559,10 +559,12 @@ Codex CLI and its `auth.json`, the optional Claude CLI, DeepSeek key reachabilit
 `--judges` additionally spends one minimal call per lane through `judge.mts
 --preflight`; it is opt-in because it costs a live token, and it is the check
 most likely to catch what actually kills an overnight run — an expired Codex
-subscription token, which takes out every Sol lane — author, Beta, Alpha, readers,
-refuters — simultaneously and
-cannot be repaired without a human. Exit 1 means at least one required check
-failed.
+subscription token, which takes out every Sol lane simultaneously and
+cannot be repaired without a human. Since the all-Claude audit reroute
+(2026-08-05) that blast radius is the BUILD's author/Beta/reader/Alpha lanes
+only: the audit's Beta and certifier depend on the Claude CLI instead, and its
+proof-refuters on the DeepSeek key, so a Codex outage no longer halts an audit
+wave. Exit 1 means at least one required check failed.
 
 **`tools/gates.mjs`** is the gates of record for one step, as a table instead of
 as prose an orchestrator reassembles by hand each time: `node tools/gates.mjs
@@ -584,12 +586,35 @@ candidate set. The spine receipt is resolved by whichever name the run actually
 uses (`<run>-spine-audit.json`, `<run>-dependency-spine-audit.json`, then the
 shared path the docs name), because practice and documentation diverged there.
 
-**`tools/dispatch.mjs`** spawns one briefed role as a plain process, so a build
-no longer depends on the subagent mechanism of whatever session started it. The
-sandbox is a property of the ROLE, not of the prompt: refuters get
-`--sandbox read-only` mechanically, because CLAUDE.md's read-only rule is a
-guarantee and a prompt asking an agent not to write is not one. Alpha's lane cap
-is 1 for the same reason — Alpha is the single writer of the prose scaffolds.
+**`tools/dispatch.mjs`** runs one briefed role, so a build no longer depends on
+the subagent mechanism of whatever session started it. It has three runners:
+`codex` (every build role, GPT 5.6 Sol), `claude` (the audit's `claude-opus-5`
+Beta and Alpha, the `claude-sonnet-5` certifier, the orchestrator), and
+`deepseek` (audit proof-refuters — an HTTP call, not a process).
+
+Read-only is a property of the ROLE, not of the prompt, and **each runner
+enforces it differently because their guarantees differ in strength**:
+
+| runner | mechanism | strength |
+|---|---|---|
+| `codex` | `--sandbox read-only` | process-level |
+| `deepseek` | tool-less transport: no disk, no web, ever | absolute, and blind |
+| `claude` | `--allowed-tools Read Glob Grep WebSearch WebFetch` (default-deny), plus a redundant deny of `Bash Write Edit NotebookEdit Task Agent Workflow` | tool-level |
+
+**The claude row is written from a measured escape, not from first principles.**
+Probed 2026-08-05, a read-only lane carrying only the deny list `Bash Write Edit
+NotebookEdit` **created the file it was asked to create**: it delegated to a
+subagent, whose tool set does not inherit the parent's deny list, and said so —
+"a second agent apparently ran independently". A deny list cannot cover a tool
+that mints a fresh tool set, so the guarantee is now the ALLOW list, which
+restricts what loads at all; re-probed, the same request reported no write tool
+"loaded or discoverable" while `WebSearch` still retrieved and cited a live URL.
+`node tools/dispatch.mjs --check-read-only` re-asserts the table above and is
+cheap enough to belong in a preflight. `requiresTask` is enforced for the
+tool-less runner: a refuter dispatched without assembled context would read
+nothing, confidently.
+
+Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
 A leftover `<n>` in a brief is fatal (briefing an agent about "level <n>" is how
 it ends up guessing), while genuinely generic placeholders only warn.
 `tools/slots.mjs` is the cross-process directory-semaphore pool it shares with
@@ -718,7 +743,10 @@ GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-toke
 context window. DeepSeek is the cross-family screen from the Sol author; Sonnet
 is an independent same-context comparison lane, not a claim of cross-family
 separation — and it shares a family with the Alpha that adjudicates it, which
-DeepSeek does not. `tools/judge.mts --parallel` supports a one-item paired call and
+DeepSeek does not. After the all-Claude audit reroute (2026-08-05) that point
+sharpens: in an audit wave, Sonnet's judge lane now also shares a family with
+the Audit-Beta that authored the text it reads, so DeepSeek is the sole
+cross-family reader in BOTH the judge lane and the refuter lane. `tools/judge.mts --parallel` supports a one-item paired call and
 retains the historical GLM/DeepSeek injection-test record. The normal sweep
 uses independent model lanes so a slow judge never blocks the other's next item.
 
