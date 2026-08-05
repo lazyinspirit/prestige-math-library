@@ -4,6 +4,9 @@ kind: definition
 title: "Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-complete-ordered-field, def-ordered-field, def-real-order, def-bounded-set]
 justified_by: []
 aliases: []

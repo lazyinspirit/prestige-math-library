@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted: $C(X,Y)$ is closed in the topology of pointwise convergence. The ramps on $[0,1]$ converge pointwise to a discontinuous limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        thm-uniform-limit-theorem, def-continuous-map-top, def-metric-continuity,
        lem-continuity-is-local-and-pastes, def-interval, lem-real-line-is-a-metric-space,

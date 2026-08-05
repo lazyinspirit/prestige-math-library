@@ -4,6 +4,9 @@ kind: remark
 title: "The compact Hausdorff product theorem uses the ultrafilter lemma, while the published arbitrary compact product theorem assumes the full Axiom of Choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, thm-tychonoff, thm-ultrafilter-lemma, def-axiom-of-choice]
 aliases: []
 landmark: false
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "Ultrafilter lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ultrafilter_lemma"
+    - title: "Tychonoff's theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff%27s_theorem"
+    - title: "Boolean prime ideal theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted: a pointwise bounded family of continuous functions is equicontinuous. The spikes are bounded by $1$ everywhere and are not equicontinuous at $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-equicontinuity, def-metric-continuity, lem-continuity-is-local-and-pastes,
        fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets,
        def-interval, lem-real-line-is-a-metric-space, def-metrizable-space,

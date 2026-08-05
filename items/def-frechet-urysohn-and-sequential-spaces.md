@@ -4,6 +4,9 @@ kind: definition
 title: "Fréchet–Urysohn spaces and sequential spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-sequence-convergence-top, lem-sequential-closure-inside-closure, thm-closure-characterisation-top]
 aliases: []
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "Sequential space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequential_space"
+    - title: "Fréchet–Urysohn space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Fr%C3%A9chet%E2%80%93Urysohn_space"
 pipeline_run: null
 ---
 

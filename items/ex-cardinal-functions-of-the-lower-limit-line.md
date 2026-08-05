@@ -4,6 +4,9 @@ kind: example
 title: "For the lower-limit line, $\\chi=d=L=c=\\aleph_0$ and $w=2^{\\aleph_0}$ under choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-weight-density-and-character, def-lindelof-degree-and-cellularity, thm-basic-cardinal-function-inequalities, lem-lower-limit-line-is-regular-and-lindelof, def-interval, thm-basis-criterion, thm-rationals-countable, lem-rat-embeds-dense, thm-r-uncountable, ex-the-cardinality-of-the-continuum, cor-cardinal-absorption, def-axiom-of-choice]
 aliases: []
 verification:
@@ -13,7 +16,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Lower limit topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Lower_limit_topology"
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
 pipeline_run: null
 ---
 ## Example

@@ -4,6 +4,9 @@ kind: definition
 title: "Separability: the existence of an at most countable dense subset"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-dense-top, def-countable]
 aliases: []
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "UCR General Topology Notes"
       url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Separable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separable_space"
 pipeline_run: null
 ---
 

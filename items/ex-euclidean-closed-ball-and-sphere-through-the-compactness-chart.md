@@ -4,6 +4,11 @@ kind: example
 title: "The Euclidean closed ball and sphere worked through the compactness equivalence chart"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [def-euclidean-spheres-and-closed-balls, cor-euclidean-closed-balls-and-spheres-are-compact, cor-euclidean-compactness-equivalence-chart]
 aliases: []
 landmark: false

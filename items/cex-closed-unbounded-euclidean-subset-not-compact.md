@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}^n$ is closed and unbounded and is not compact for $n\\ge1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, def-metric-bounded-diameter, def-topological-space, thm-of-archimedean, lem-standard-basis-of-f-n]
 aliases: []
 landmark: false

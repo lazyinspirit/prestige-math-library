@@ -4,6 +4,9 @@ kind: definition
 title: "The evaluation map $e : C(X,Y) \\times X \\to Y$, $e(f,x) = f(x)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-compact-open-topology, def-product-topology, def-continuous-map-top,
        def-subspace-topology-top, def-topological-space, def-metric-space,
        def-metric-topology, def-metrizable-space, thm-product-universal-property,

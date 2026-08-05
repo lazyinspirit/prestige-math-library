@@ -4,6 +4,9 @@ kind: lemma
 title: "Every Cauchy sequence of reals is bounded"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-real-limit, def-sequence, lem-finite-set-has-max, lem-of-triangle-inequality, def-max-min, lem-rat-embeds-dense, lem-of-add-order, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

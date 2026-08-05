@@ -4,6 +4,9 @@ kind: example
 title: "The moving spikes on $[0,1]$ converge pointwise to $0$, do not converge uniformly, and do not converge in the topology of compact convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        def-topology-of-uniform-convergence, lem-uniform-convergence-in-the-uniform-metric,
        def-topology-of-compact-convergence, thm-comparison-of-the-three-function-space-topologies,

@@ -4,6 +4,9 @@ kind: theorem
 title: "A map of topological spaces is continuous at a point if and only if it preserves every net converging to that point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-closure-characterised-by-nets, def-net-convergence-and-cluster-point, def-continuous-map-top, thm-continuity-characterisations-top]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

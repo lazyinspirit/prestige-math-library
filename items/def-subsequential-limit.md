@@ -4,6 +4,9 @@ kind: definition
 title: "Subsequential limit of a real sequence, and the subsequential limit set"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-sequence, def-real-limit, lem-index-map-grows]
 justified_by: []
 forward_refs: [ex-two-subsequential-limits, cex-unbounded-with-convergent-subsequence]

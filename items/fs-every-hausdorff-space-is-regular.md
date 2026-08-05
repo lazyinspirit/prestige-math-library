@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every Hausdorff space is regular"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-the-k-topology-is-hausdorff-and-not-regular, def-hausdorff-space,
        def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        lem-urysohn-sits-between-hausdorff-and-regular-plus-t1, def-topological-space]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Regular_space"
     - title: "J. Munkres, Topology, 2nd ed., §31"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 31: The Separation Axioms (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-31.pdf"
 pipeline_run: null
 ---
 

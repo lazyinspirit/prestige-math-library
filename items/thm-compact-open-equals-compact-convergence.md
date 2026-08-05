@@ -4,6 +4,9 @@ kind: theorem
 title: "For a metric domain and a metric target the compact-open topology on $C(X,Y)$ is the topology of compact convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compact-open-topology, def-topology-of-compact-convergence,
        def-metric-compactness, lem-compactness-is-intrinsic,
        lem-closed-subset-of-a-compact-space-is-compact,

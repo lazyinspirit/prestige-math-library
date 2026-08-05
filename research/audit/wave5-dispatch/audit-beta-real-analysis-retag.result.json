@@ -1,0 +1,17 @@
+{
+  "role": "audit-beta",
+  "label": "real-analysis-retag",
+  "run": "wave5",
+  "runner": "claude",
+  "model": "claude-opus-5",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-05T11:58:18.449Z",
+  "ended_at": "2026-08-05T12:06:54.259Z",
+  "ms": 515810,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-beta-real-analysis-retag.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-beta-real-analysis-retag.prompt.md",
+  "tail": "\nscope items:                    31\nprovenance-statement-missing:   0\nprovenance-proof-missing:       0\naudit-ledger-mismatch:          0\naudit-ledger-evidence-mismatch: 0\nlegacy-authorship-retained:     0\nsource-backed-provenance-uncited: 0\nai-generated with generation.role: 3/3\n\n$ node tools/content-policy.mjs --audit --ledger …wave5-real-analysis.provenance.jsonl …pages.json\ncontent-policy: 31 scoped item(s), 0 error(s), 0 warning(s)        [exit 0]\n\n$ node tools/content-policy.mjs --audit  (all four wave-5 ledgers + manifests)\ncontent-policy: 209 scoped item(s), 0 error(s), 1 warning(s)       [exit 0]\n\n$ node tools/tsx-run.mjs tools/precheck.mts\n2111 checked, 0 failing — all clean                                [exit 0]\n\n$ node tools/depcheck.mjs                                          [exit 1]\n$ node tools/depcheck.mjs --pending-audit-ok\nOK — no cycles, all references resolve, no draft items on published pages   [exit 0]\n```\n\nThe one wave-wide warning is the function-spaces batch's pre-existing `generated-kind` on `rem-function-space-conventions`, not mine.\n\n## Two things to flag\n\n**`depcheck` bare does not exit 0, and cannot yet.** It reports 11 `published-unaudited` errors — the documented A4→A6 window. Two are mine (the A3-approved repairs whose stale stamps A4 deleted), nine belong to sibling batches. A retag writes no `verification:` block, so this pass neither caused nor changed any of them; only 2 of the 164 depcheck lines touch my items at all. `--pending-audit-ok` is the flag for this caller and exits 0.\n\n**`touchlog report --min 2` will now read 45, up from 43.** The two new entries are `ex-nested-intervals-single-point` and `cex-nested-open-intervals-empty`; their second transition is *this retag*, not a second repair. No mathematical text in either changed in this pass. The other 29 show one transition each.\n\n## For Alpha\n\nTwo ledger URLs recorded as A1 evidence are absent from their items and I did **not** add them, since neither is in A3's approved set:\n\n- `cor-monotone-converges-iff-bounded` — `https://www.jirka.org/ra/`, the Lebl **landing page**. §4d's whole finding is that a landing page is not evidence; I added the clause-carrying section instead.\n- `rem-completeness-routes` — `https://en.wikipedia.org/wiki/Archimedean_property`, live and clause-carrying, just outside §5b. A one-line addition if Alpha wants it; no gate depends on it.\n\nWritten this stage: the 31 item frontmatter blocks, the applier script, `research/audit/wave5-real-analysis.findings.md`, and two snapshot rows in `wave5-touches.json`. Not touched: the provenance ledger, the proof-contract file, any other batch's files."
+}

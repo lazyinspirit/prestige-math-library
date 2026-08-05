@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a pointwise convergent sequence of continuous functions converges uniformly on every compact set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        def-topology-of-compact-convergence, def-topology-of-uniform-convergence,
        lem-uniform-convergence-in-the-uniform-metric, lem-uniform-metric-on-a-function-space,
@@ -23,11 +26,6 @@ short: "pointwise does not give uniform on compacta"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -72,8 +70,6 @@ No choice principle is used; every function below is given by a formula.
 [L6] A subset of a metric space is closed exactly when its complement is open, and a set is open exactly when each of its points has a ball around it inside the set ([[def-metric-topology]], [[def-metric-ball]], [[def-metrizable-space]]).
 
 [L7] The basic sets of the topology of compact convergence are $B_K(f,\varepsilon) = \{\, g : d(f(x),g(x)) < \varepsilon \text{ for every } x \in K \,\}$, and a sequence converging to $f$ in a topology is eventually inside every neighbourhood of $f$ ([[def-topology-of-compact-convergence]], [[def-topology-of-pointwise-convergence]]).
-
-[L8] The minimum of a two-element set of reals exists and is one of the two elements ([[lem-finite-set-has-max]], [[def-max-min]]).
 
 ## Refutation
 

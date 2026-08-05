@@ -4,6 +4,9 @@ kind: definition
 title: "Polygonal paths and polygonally connected subsets of $\\mathbb{R}^n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-path-connected, def-finite-cardinality, def-interval, def-vector-space]
 aliases: []
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "Polygonal chain"
       url: "https://en.wikipedia.org/wiki/Polygonal_chain"
+    - title: "Path-connected space"
+      url: "https://en.wikipedia.org/wiki/Path-connected_space"
 pipeline_run: null
 ---
 

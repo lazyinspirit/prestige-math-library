@@ -4,6 +4,9 @@ kind: counterexample
 title: "An infinite particular-point space is pseudocompact and not compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pseudocompact-space, def-standard-topologies, def-compact-space, def-hausdorff-space, lem-real-line-is-a-metric-space, def-continuous-map-top]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Particular point topology"
       url: "https://en.wikipedia.org/wiki/Particular_point_topology"
+    - title: "Pseudocompact space"
+      url: "https://en.wikipedia.org/wiki/Pseudocompact_space"
 pipeline_run: null
 ---
 

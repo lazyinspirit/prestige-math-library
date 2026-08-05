@@ -4,6 +4,9 @@ kind: definition
 title: "$T_0$ (Kolmogorov) and $T_1$ (Frechet) spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topological-space, def-neighbourhood-top, def-interior-closure-boundary-top,
        def-standard-topologies]
 justified_by: []

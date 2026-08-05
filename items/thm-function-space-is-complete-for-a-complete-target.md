@@ -4,6 +4,9 @@ kind: theorem
 title: "If $(Y,d)$ is complete then $Y^{X}$ is complete in the uniform metric, and so is $C(X,Y)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-uniform-limit-theorem, def-topology-of-uniform-convergence,
        lem-uniform-metric-on-a-function-space, lem-bounded-remetrisation,
        def-complete-metric-space, def-cauchy-in-metric, def-metric-convergence,

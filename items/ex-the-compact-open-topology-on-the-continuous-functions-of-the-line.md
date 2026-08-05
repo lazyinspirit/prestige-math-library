@@ -4,6 +4,9 @@ kind: example
 title: "On $C(\\mathbb{R}, \\mathbb{R})$ the compact-open topology has the sets $\\{g : \\sup_{[-m,m]} |f-g| < \\varepsilon\\}$ as a neighbourhood base, and $\\mathbb{R}$ is locally compact so evaluation is continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compact-open-topology, thm-compact-open-equals-compact-convergence,
        def-topology-of-compact-convergence, def-locally-compact-metric-space,
        thm-evaluation-is-continuous-on-a-locally-compact-metric-domain,

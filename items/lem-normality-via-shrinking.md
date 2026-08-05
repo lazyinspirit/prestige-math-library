@@ -4,6 +4,9 @@ kind: lemma
 title: "A space is normal if and only if every closed $A$ inside an open $U$ admits an open $V$ with $A \\subseteq V \\subseteq \\overline{V} \\subseteq U$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-normal-and-t4-spaces, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-topological-space]
 justified_by: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Normal_space"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 31: The Separation Axioms (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-31.pdf"
 pipeline_run: null
 ---
 

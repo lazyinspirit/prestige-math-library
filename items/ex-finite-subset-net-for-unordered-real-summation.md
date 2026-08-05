@@ -4,6 +4,9 @@ kind: example
 title: "Finite partial sums of a real family form a net directed by inclusion"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-directed-set-and-net, def-net-convergence-and-cluster-point, def-sum-over-a-finite-index-set, thm-sum-rule, def-finite-cardinality]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Unconditional convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Unconditional_convergence"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

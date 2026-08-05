@@ -4,6 +4,9 @@ kind: example
 title: "The cocountable topology on $\\mathbb{R}$ is $T_1$, has unique sequential limits, and is neither Hausdorff nor regular nor normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-hausdorff-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
        def-sequence-convergence-top, def-countable, lem-subset-of-countable,

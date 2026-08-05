@@ -4,6 +4,9 @@ kind: corollary
 title: "Under choice, the five cardinal functions recover first countability, second countability, separability, Lindelöfness, and ccc at the $\\aleph_0$ threshold"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-first-countable-top, def-second-countable-space, def-separable-space, def-countable-chain-condition, def-compactness-variants, lem-weight-is-well-defined, lem-density-is-well-defined, lem-character-is-well-defined, lem-lindelof-degree-is-well-defined, lem-cellularity-is-well-defined]
 aliases: []
 landmark: true
@@ -15,7 +18,11 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "D. H. Fremlin, Measure Theory, Chapter 5A", url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
 pipeline_run: null
 ---
 

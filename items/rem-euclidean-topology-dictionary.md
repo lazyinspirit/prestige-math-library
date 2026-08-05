@@ -4,6 +4,9 @@ kind: remark
 title: "The product, Euclidean-metric and norm topologies on $\\mathbb{R}^n$ agree, and for $n=1$ they agree with the real-line topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-product-topology-on-rn, lem-real-and-metric-notions-agree, thm-all-norms-on-rn-are-equivalent]
 aliases: []
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "J. R. Munkres, Topology, 2nd ed., §§19, 20"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Product topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Product_topology"
+    - title: "Norm (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
 pipeline_run: null
 ---
 

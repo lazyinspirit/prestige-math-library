@@ -1,0 +1,39 @@
+# audit-beta/topology-separation 2026-08-05T10:09:01.799Z
+
+## stdout
+**Audit-Beta report — wave 5, `topology-separation` batch. A1 and A2 complete; nothing applied (A4 waits on A3).**
+
+## Coverage
+
+All **72 items** in the manifest (4 pages: `separation-axioms` + examples, `nets-and-filters` + examples) read from disk in full. Every one of the **339 numbered proof steps** in the **51 proof-bearing items** verified against its declared facts, and every one of the **374 fact→target citations** verified against the cited item's own on-disk section — **120 distinct targets opened**, including all cross-category ones (metric spaces, ordinals, filters, compactness, series). Both A-page summaries and every Remark read with proof-step suspicion. No sampling, no exception.
+
+## Headline: no fatal defect
+
+No false statement, no invalid inference, no mis-citation changing a hypothesis, quantifier, direction or conclusion — in any Statement, proof, Verification, Refutation or Remark. Ten nonfatal findings (N1–N10) and one provenance row escalated for Alpha's concurrence (E1).
+
+The two findings that need a decision:
+
+- **N1/N2 (class b, citation precision)** — `lem-ordinal-order-topology-is-t3` declares `[L6]` and `ex-the-particular-point-topology…` declares `[L3]`, and **no numbered step cites either**. The mathematics is fine (L6 is used unmarked at step 4.1; L3's content lives in a Remark), but it is why `proof-contract.mjs --strict` reports **3 errors** on this batch — everything else validates. One-line repairs proposed for each.
+- **E1** — `ex-free-ultrafilter-converging-in-a-convergent-sequence-space` is `ai-altered` / `established-knowledge` / no URL: textbook folklore (free ultrafilter on ℕ converging to ∞ in the one-point compactification), plainly not AI-invented, but no single source states the example. Valid only once Alpha independently concurs.
+
+N3–N10 are recorded and not chased per the triage rule: a definition cited for an existence claim (`def-max-min`), two 30-second missing trivial cases (sequential fan, Arens space), a codomain slip in the Tychonoff-from-UL proof (`p : I → ∏X_i` should be `p ∈ ∏X_i`), a lemma about ℝ cited for maxima of naturals, the ultrafilter-lemma-vs-AC citation situation on the nets page (not a defect — the items assume *less* than the target), the 99 URLs A4 must add, and one loose justification clause.
+
+## Provenance (A1)
+
+72 rows, none previously tagged. **No item classified `ai-generated`** — every statement is established mathematics with a located source (or E1's folklore), which also keeps every item dependency-eligible; this batch is heavily depended on (39 consumers for `def-t0-and-t1-spaces`). Split: 27 `literature-derived`/`exact-source`, 44 `ai-altered`/`semantic-source`, 1 `established-knowledge`. **All 47 distinct URLs verified HTTP 200.** Sources were read, not recalled: Wikipedia articles pulled as plain text through the action API, Munkres §13/§17/§31/§32/§33 notes fetched and extracted with `pdftotext` — which is how the convention forks got sourced evidence (Munkres §31 really does build closed singletons into *regular* and *normal*, exactly as the items claim).
+
+## Gates
+
+| gate | result |
+|---|---|
+| `citecheck.mjs`, 72 items | pass |
+| `proof-contract.mjs --strict` | 3 errors, all N1/N2; 374 quotes exact, 339 steps mapped once, 408 boundary dispositions accepted |
+| `risk-report.mjs` | 51 routed: 33 CRITICAL, 9 HIGH, 9 MODERATE (structural signals; all `risk_review: pending` for Alpha) |
+
+## Artifacts
+
+`research/audit/wave5-topology-separation.{provenance.jsonl,findings.md,proof-contracts.json}` plus the two generators and two read-only helpers that produced them. **No item file touched**; working-tree baseline `4fec483`. The A10 queue from this batch is empty.
+
+
+## stderr
+

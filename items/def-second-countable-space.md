@@ -4,6 +4,9 @@ kind: definition
 title: "Second countability: an at most countable basis for the topology"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-topology-basis-subbasis, def-countable]
 aliases: []
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "UCR General Topology Notes"
       url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Second-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Second-countable_space"
 pipeline_run: null
 ---
 

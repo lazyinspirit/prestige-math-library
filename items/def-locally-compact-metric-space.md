@@ -4,6 +4,9 @@ kind: definition
 title: "Locally compact metric space: every point has a compact neighbourhood"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-metric-space, def-metric-topology, def-metric-ball, def-metric-compactness,
        lem-compactness-is-intrinsic, def-isometry-and-metric-embedding,
        def-neighbourhood-top, def-metrizable-space, def-topological-space,

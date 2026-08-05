@@ -4,6 +4,9 @@ kind: lemma
 title: "A sequence converges in the topology of pointwise convergence exactly when it converges at every point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topology-of-pointwise-convergence, def-sequence-convergence-top,
        def-product-topology, def-neighbourhood-top, def-topology-basis-subbasis,
        thm-basis-criterion, thm-well-ordering-principle, lem-finite-set-has-max,

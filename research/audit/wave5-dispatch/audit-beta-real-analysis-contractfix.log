@@ -1,0 +1,37 @@
+# audit-beta/real-analysis-contractfix 2026-08-05T11:39:36.700Z
+
+## stdout
+## Verdict: all three are dead facts, not silent reliances
+
+The gate is right and the contract file was already right. `uses: []` is a true statement about both items, and **no edit to `research/audit/wave5-real-analysis.proof-contracts.json` can make the gate green** — so I did not invent one and nothing is applied.
+
+**`cex-nested-open-intervals-empty` `[L5]`** (nested interval property, closed intervals). Steps 1.1–4.1 exhibit a nested family of nonempty bounded *open* intervals with empty intersection, using `[L1]`, `[L2]`, `[L3]`, `[L4]`, `[L6]`. A theorem about closed intervals licenses no step of that argument. `[L5]` exists to set up the Remarks contrast, where `thm-nested-interval-property` is already wikilinked in prose — so the `deps` entry stays legitimate either way.
+
+**`ex-nested-intervals-single-point` `[L8]`** (trichotomy). No step needs trichotomy proper: steps 1.1 and 4.1 weaken `>` to `≥` and use reflexivity of `≤` (the definition of the order, not its trichotomy), and step 2.2's `n ≤ j+1` is in fact strict for `j ≥ n`, so `[L4]` applies with no case split. The row is a carry-over from the twin counterexample's `[L4]`, which *is* consumed at its contradiction step; this example has no contradiction step.
+
+So the only honest repairs are deletion of the rows or nothing — never "add the missing tag."
+
+## What this actually blocks on
+
+`proof-contract.mjs` requires every fact→target link to carry a contract *and* every contract to name a consuming step, so a declared-but-unconsumed fact is **unrepresentable**. Two routes, both above a Beta:
+
+1. **Repair the items.** Costed and precheck-tested in `/tmp` (no item touched): drop `[L8]` (last label, no step tags change) — PASS; drop `[L5]` and renumber `L6 → L5` in the row and step tags 1.1/4.1 — PASS; leaving a label gap instead also passes but is reader-visible on a published page. Both are material rewrites: delete the stale `verification.judge` and the `audited` stamp, A6 writes `verification.verified`. Not public-interface changes, so no impact closure.
+2. **Give the checker an auditable disposition** for a fact no step consumes (an `unused_reason` licensing an empty `uses`, error retained when unexplained). This is an `ARCHITECTURE.md` mechanism change.
+
+I lean to (2), because of the measurement below.
+
+## The finding that changes where the decision belongs
+
+Scanning all 2,067 items with both a facts block and numbered steps, using the checker's own extraction: **31 published items carry a fact row that no step cites** — including `thm-ftc-second-part`, `thm-ratio-test`, `thm-root-test`, `thm-integration-by-parts`, `thm-cauchy-schwarz-and-the-euclidean-norm`, `cor-bolzano-weierstrass-in-rn` (two rows). Two are mine. No prior level or audit contract in `research/` has a single empty `uses`, so waves 0–4 never hit this — they just never scoped one. Every future wave that does will stop in the same place.
+
+Worth flagging: this was already recorded as finding **N2** before the halt, with proposal 3 at A3 pricing the `[L8]` deletion. The dispatch framed it as contract bookkeeping; it is a (nonfatal) statement about the item text.
+
+## Writes
+
+- `research/audit/wave5-real-analysis.proof-contracts.json` — `unused_reason` on the three empty-`uses` entries, documentation only. The checker ignores unknown keys and `merge-proof-contracts.mjs` copies entries verbatim, so `--strict` still reports **3 errors, 0 warnings, 26/26 checked** — unchanged, deliberately.
+- `research/audit/wave5-real-analysis.findings.md` — N2 addendum (the dead-fact/silent-reliance discharge, the variant table, the corpus scan), revised proposal 3, updated checkpoint.
+- Both items verified untouched; no other batch's files written.
+
+
+## stderr
+

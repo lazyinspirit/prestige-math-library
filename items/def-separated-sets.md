@@ -4,6 +4,9 @@ kind: definition
 title: "Separated sets: $\\overline{A} \\cap B = A \\cap \\overline{B} = \\varnothing$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topological-space, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-subspace-topology-top,
        thm-subspace-closure-and-interior]

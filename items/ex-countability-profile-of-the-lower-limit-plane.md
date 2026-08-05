@@ -4,6 +4,9 @@ kind: example
 title: "Assuming choice, the lower-limit plane is first countable, separable, and ccc, but not second countable or Lindelöf"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-cardinal-functions-of-the-lower-limit-line, thm-countable-products-of-first-countable-spaces, prop-separable-spaces-are-ccc, prop-second-countability-is-hereditary, fs-separability-is-hereditary, fs-lindelofness-is-productive, def-second-countable-space, def-compactness-variants, thm-r-uncountable]
 aliases: []
 verification:
@@ -13,7 +16,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 ## Example

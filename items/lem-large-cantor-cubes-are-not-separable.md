@@ -4,6 +4,9 @@ kind: lemma
 title: "Under choice, if $|I|>2^{\\aleph_0}$, then the Cantor cube $2^I$ is not separable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-product-topology, def-separable-space, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor, def-axiom-of-choice, lem-countable-iff-surjection-from-n]
 aliases: []
 proof_strategy: contradiction
@@ -14,7 +17,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Cantor cube (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cantor_cube"
 pipeline_run: null
 ---
 ## Statement

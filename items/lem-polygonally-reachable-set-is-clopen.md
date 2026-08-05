@@ -4,6 +4,9 @@ kind: lemma
 title: "The points polygonally reachable from a fixed point form a clopen subset of every open subset of $\\mathbb{R}^n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, def-metric-topology, def-metric-ball, lem-metrics-on-rn]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Connected space"
       url: "https://en.wikipedia.org/wiki/Connected_space"
+    - title: "Locally connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Locally_connected_space"
 pipeline_run: null
 ---
 

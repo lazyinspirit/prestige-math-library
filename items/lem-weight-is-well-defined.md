@@ -4,6 +4,9 @@ kind: lemma
 title: "Under choice, $w(X)$ is a well-defined cardinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-weight-density-and-character, def-cardinal, thm-well-ordering-theorem, lem-ordinal-trichotomy]
 aliases: []
 proof_strategy: direct

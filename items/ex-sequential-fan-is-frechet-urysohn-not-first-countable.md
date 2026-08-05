@@ -4,6 +4,9 @@ kind: example
 title: "The sequential fan is Fréchet–Urysohn and not first countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-frechet-urysohn-and-sequential-spaces, def-first-countable-top, def-topology-basis-subbasis, thm-recursion, lem-finite-set-has-max, thm-well-ordering-principle]
 aliases: []
 landmark: false
@@ -18,8 +21,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Sequential fan (nLab)"
-      url: "https://ncatlab.org/nlab/show/sequential+fan"
+    - title: "D. Ma, A note on products of sequential fans (Dan Ma's Topology Blog)"
+      url: "https://dantopology.wordpress.com/2015/07/01/a-note-on-products-of-sequential-fans/"
+    - title: "Fréchet–Urysohn space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Fr%C3%A9chet%E2%80%93Urysohn_space"
 pipeline_run: null
 ---
 

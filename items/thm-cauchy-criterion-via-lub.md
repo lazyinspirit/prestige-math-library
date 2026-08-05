@@ -4,6 +4,9 @@ kind: theorem
 title: "The Cauchy criterion from the least-upper-bound property: in a complete ordered field every Cauchy sequence converges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-cauchy-sequence-bounded, thm-bolzano-weierstrass, lem-cauchy-with-convergent-subsequence, def-real-limit, def-complete-ordered-field]
 justified_by: []
 aliases: []

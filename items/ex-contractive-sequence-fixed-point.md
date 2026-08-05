@@ -4,6 +4,11 @@ kind: example
 title: "The sequence $x_{k+1} = (x_k + 1)/3$ is contractive with $c = 1/3$ and converges to $1/2$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-contractive-implies-cauchy, def-contractive-sequence, thm-algebra-of-limits, lem-limit-of-tail, lem-limit-unique, thm-recursion, def-sequence, def-real-limit, lem-of-abs-value, lem-of-inverse-positive, prop-of-reciprocal-order, cor-of-one-positive, lem-of-add-order, def-field, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

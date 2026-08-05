@@ -4,6 +4,9 @@ kind: corollary
 title: "Assuming $\\mathrm{AC}_\\omega$ and $\\mathrm{DC}$, compactness, sequential compactness, countable compactness, limit point compactness, completeness and total boundedness, pseudocompactness, closedness and boundedness, and the extreme-value property are equivalent for nonempty subsets of $\\mathbb{R}^n$ with $n\\ge1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, thm-metric-compactness-equivalences, def-compactness-variants, def-countable-choice, def-dependent-choice, thm-compactness-agrees-with-metric-compactness]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Sequentially compact space"
       url: "https://en.wikipedia.org/wiki/Sequentially_compact_space"
+    - title: "Heine-Borel theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
 pipeline_run: null
 ---
 

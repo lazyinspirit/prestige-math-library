@@ -4,6 +4,9 @@ kind: definition
 title: "Normal spaces and $T_4$ spaces, with the source disagreement over whether normality includes $T_1$ stated explicitly"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topological-space, def-t0-and-t1-spaces, def-separated-sets,
        def-standard-topologies, def-neighbourhood-top]
 justified_by: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "J. Munkres, Topology, 2nd ed., §32"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 31: The Separation Axioms (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-31.pdf"
 pipeline_run: null
 ---
 

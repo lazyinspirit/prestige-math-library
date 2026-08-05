@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the evaluation map on $C(X,Y)$ with the compact-open topology is continuous for every metric $X$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-evaluation-map, def-compact-open-topology, def-locally-compact-metric-space,
        def-metric-compactness, lem-compactness-is-intrinsic,
        thm-compact-subset-is-closed-and-bounded, lem-distance-to-set-is-lipschitz,

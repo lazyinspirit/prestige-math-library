@@ -4,6 +4,11 @@ kind: counterexample
 title: "$x_{k+1} = x_k + 1/x_k$ from $x_1 = 1$ has strictly decreasing consecutive gaps and diverges, so no uniform $c < 1$ exists"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-contractive-sequence, thm-contractive-implies-cauchy, def-divergence-to-infinity, def-monotone-sequence, thm-of-archimedean, thm-induction-principle, lem-power-monotone, lem-of-inverse-positive, lem-convergent-implies-bounded, thm-recursion, def-sequence, def-real-limit, def-integer-power, lem-of-abs-value, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

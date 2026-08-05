@@ -4,6 +4,9 @@ kind: lemma
 title: "Under choice, the uncountable $\\Delta$-system lemma for finite sets"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-countable, def-axiom-of-choice, def-countable-choice, thm-countable-union-of-countable, thm-zorn]
 aliases: []
 proof_strategy: induction
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Delta-system lemma (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Delta-system_lemma"
+    - title: "Sunflower lemma (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sunflower_lemma"
 pipeline_run: null
 ---
 ## Statement

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the compact-open topology on $C(X,Y)$ is metrizable for every metric $X$ and $Y$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compact-open-topology, def-topology-of-pointwise-convergence,
        def-product-topology, def-metric-space, def-metric-topology,
        def-metric-compactness, lem-compactness-is-intrinsic, def-metrizable-space,

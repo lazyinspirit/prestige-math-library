@@ -4,6 +4,9 @@ kind: definition
 title: "$G_\\delta$ and $F_\\sigma$ subsets of a topological space, agreeing with the real-line notion"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topological-space, def-countable, def-f-sigma-g-delta,
        def-metrizable-space, def-open-and-closed-in-r, def-neighbourhood-r,
        def-metric-topology, lem-real-line-is-a-metric-space, def-interval,

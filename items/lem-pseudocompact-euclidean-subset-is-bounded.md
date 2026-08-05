@@ -4,6 +4,9 @@ kind: lemma
 title: "A pseudocompact subset of $\\mathbb{R}^n$ is bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pseudocompact-space, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-metric-bounded-diameter, def-bounded-set]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Pseudocompact space"
       url: "https://en.wikipedia.org/wiki/Pseudocompact_space"
+    - title: "Heine-Borel theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
 pipeline_run: null
 ---
 

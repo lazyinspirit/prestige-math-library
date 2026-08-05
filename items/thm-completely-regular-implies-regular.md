@@ -4,6 +4,9 @@ kind: theorem
 title: "Every completely regular space is regular, and every Tychonoff space is $T_3$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-completely-regular-and-tychonoff-spaces, def-regular-and-t3-spaces,
        def-t0-and-t1-spaces, def-continuous-map-top, thm-continuity-characterisations-top,
        def-interval, def-subspace-topology-top, def-metrizable-space,
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Tychonoff_space"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

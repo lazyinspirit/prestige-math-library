@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{R}$ is not homeomorphic to $\\mathbb{R}^n$ for any $n\\ge2$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-punctured-rn-is-polygonally-connected, thm-path-connected-implies-connected, cor-connected-subsets-of-the-line, thm-continuous-image-of-a-connected-space, def-homeomorphism-and-open-maps]
 aliases: []
 landmark: true

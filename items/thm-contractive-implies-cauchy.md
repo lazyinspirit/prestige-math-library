@@ -4,6 +4,9 @@ kind: theorem
 title: "Every contractive sequence is Cauchy, hence converges, with error bound $|x - x_k| \\le c^{k-1}|x_2 - x_1|/(1-c)$ for $k \\ge 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-contractive-sequence, thm-cauchy-criterion-via-lub, lem-geometric-sequence-null, def-integer-power, lem-power-laws, lem-power-monotone, lem-power-difference-factorisation, lem-triangle-inequality-finite, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-real-limit, def-sequence, thm-algebra-of-limits, lem-limit-abs, lem-limit-preserves-order, lem-limit-of-tail, lem-of-inverse-positive, lem-of-abs-value, prop-of-multiply-inequalities, thm-nat-linear-order]
 justified_by: []
 forward_refs: [ex-contractive-sequence-fixed-point, cex-strictly-decreasing-gaps-no-limit]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fixed-point_iteration"
     - title: "J. Lebl, Basic Analysis I, §2.4"
       url: "https://www.jirka.org/ra/"
+    - title: "Contractive sequence (PlanetMath)"
+      url: "https://planetmath.org/contractivesequence"
 ---
 
 ## Statement

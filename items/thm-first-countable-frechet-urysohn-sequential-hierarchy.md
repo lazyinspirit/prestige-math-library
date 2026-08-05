@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, every first countable space is Fréchet–Urysohn; in ZF every Fréchet–Urysohn space is sequential"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-frechet-urysohn-and-sequential-spaces, thm-first-countable-sequences-suffice, def-countable-choice, lem-sequential-closure-inside-closure]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "Sequential space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequential_space"
+    - title: "Fréchet–Urysohn space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Fr%C3%A9chet%E2%80%93Urysohn_space"
+    - title: "First-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First-countable_space"
 pipeline_run: null
 ---
 

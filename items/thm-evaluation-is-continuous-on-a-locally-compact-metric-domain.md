@@ -4,6 +4,9 @@ kind: theorem
 title: "If $X$ is a locally compact metric space then the evaluation map is continuous for the compact-open topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-evaluation-map, def-compact-open-topology, def-locally-compact-metric-space,
        lem-compact-closed-balls-in-a-locally-compact-metric-space, def-product-topology,
        def-continuous-map-top, thm-continuity-characterisations-top, def-metric-ball,

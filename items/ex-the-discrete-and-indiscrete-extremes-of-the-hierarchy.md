@@ -4,6 +4,9 @@ kind: example
 title: "A discrete space satisfies every axiom in the chain; an indiscrete space with two points is regular, completely regular, normal, completely normal and perfectly normal, and fails $T_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-t0-and-t1-spaces, def-hausdorff-space,
        def-urysohn-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
        def-completely-normal-and-perfectly-normal-spaces,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Trivial_topology"
     - title: "Separation axiom (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
 pipeline_run: null
 ---
 

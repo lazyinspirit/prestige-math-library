@@ -24,13 +24,14 @@ All findings below are nonfatal under the standing triage rule.
 
 ## Checkpoint (substage / next action)
 
-- Substage: A1 + A2 complete. Awaiting A3 adjudication before any A4 edit.
-- Artifacts owned: `wave5-topology-countability.{provenance.jsonl,findings.md,proof-contracts.json}`.
-- Completed: full read of 73 items; dependency-target verification against 84
-  external targets; mechanical gates; source verification of all 22 URLs.
-- Next action: A3 — Alpha adjudicates N1–N9 and the four escalations; then the
-  A4 pure-retag pass under **one** stage snapshot (nothing here is a material
-  repair, so no per-item snapshot and no `verification.judge` deletion).
+- Substage: **A4 complete.** A1 + A2 were completed in the earlier dispatch.
+- Artifacts owned: `wave5-topology-countability.{provenance.jsonl,findings.md,proof-contracts.json}`,
+  plus the two apply scripts named in the A4 record below.
+- Completed at A4: 73 provenance blocks, 4 `generation.role` blocks, 65 reference
+  URLs across 50 items, 2 approved material repairs, 2 ledger rationale
+  corrections, 1 contract citation entry. All gates re-run; see the A4 record.
+- Next action: **A6 Alpha.** Two things are waiting there and one of them blocks
+  the A4 gate — see "Two things A4 could not close" below.
 
 ---
 
@@ -418,3 +419,287 @@ Recorded because these are the places a defect would most plausibly have hidden.
 
 Nothing. No deletion, id change or reading-order change is needed anywhere in
 this batch.
+
+---
+
+# A4 record — applied 2026-08-05
+
+Authority: `research/audit/wave5-A3.md` §9, which authorises for this batch a
+bulk pure-retag pass plus two of the three §6 accuracy repairs. Nothing in §1
+(F1) or §2 (the ten `citation-uses` errors) falls in this batch: my A2 contract
+was already `0 errors`, and I re-ran it to confirm before starting.
+
+## 1. Material repairs — two items
+
+Both are §6 repairs that A3 approved **over** my own A2 "no repair"
+recommendation. I re-read both from disk before applying; A3's reading is
+correct in each case and my A2 call was the weaker one.
+
+Each took a dedicated pre-edit `touchlog` snapshot, per the wave-2 granularity
+rule. The bulk retag rode the driver's single `pre-A4` stage snapshot.
+
+### R1 — `cor-components-of-open-subsets-of-rn-are-polygonally-connected`
+
+- **Class:** (b) citation precision. **Snapshot:**
+  `pre-A4-cor-components-of-open-subsets-of-rn-are-polygonally-connected`.
+- **Defect:** `[L1]` asserted "A Euclidean ball is path-connected, **hence
+  connected**" while citing only `def-metric-ball`,
+  `def-norm-and-normed-space` and `lem-euclidean-polygonal-paths-are-continuous`.
+  None of the three states the implication, and
+  `thm-path-connected-implies-connected` was absent from `deps`. Step 1.1 then
+  uses "The ball is connected by [L1]", so the untraceable inference was
+  load-bearing.
+- **Old text:** `[L1] A Euclidean ball is path-connected, hence connected: the
+  norm triangle inequality keeps every straight segment in the ball, and the
+  segment is continuous ([[def-metric-ball]], [[def-norm-and-normed-space]],
+  [[lem-euclidean-polygonal-paths-are-continuous]]).`
+- **New text:** `[L1] A Euclidean ball is path-connected, hence connected: the
+  norm triangle inequality keeps every straight segment in the ball, the segment
+  is continuous, and every path-connected space is connected
+  ([[def-metric-ball]], [[def-norm-and-normed-space]],
+  [[lem-euclidean-polygonal-paths-are-continuous]],
+  [[thm-path-connected-implies-connected]]).`
+  Plus `thm-path-connected-implies-connected` added to `deps`.
+- **Source:** the target's own Statement, claim 2: *"**Path-connected implies
+  connected.** If $X$ is path-connected then $X$ is connected. The same holds
+  for a subset: a path-connected subset of $X$ is a connected subset of $X$."*
+  Read from `items/thm-path-connected-implies-connected.md`, `status: published`,
+  `provenance.statement: ai-altered` — so a legal `deps` target. Its sibling
+  `cor-rn-is-polygonally-connected-and-locally-path-connected` already declares
+  the same target at its own `[L3]` for the identical inference.
+- **Provenance transition:** none. `proof` was already `ai-generated` and stays
+  so under the §9 rule; `statement` is untouched by a Facts repair.
+- **Contract:** one citation entry added to the batch contract —
+  `L1 → thm-path-connected-implies-connected`, `source_section: Statement`,
+  exact quote as above, `uses: ["1.1"]`. Without it `proof-contract --strict`
+  raises `citation-fact-uncontracted`, so the contract edit is not optional.
+- **Impact:** `impact-audit` from the dedicated baseline reports **0 logical,
+  0 direct-citation consumers**. Independently recomputed over all 2,767 item
+  files: nothing declares this id in `deps` or `justified_by`. Closure is empty.
+
+### R2 — `ex-countability-profile-of-omega-one`
+
+- **Class:** (a) unambiguous falsehood in reader-facing text (notation naming
+  the wrong object). **Snapshot:** `pre-A4-ex-countability-profile-of-omega-one`.
+- **Old text:** `The open initial segments $\{\alpha:\alpha<\omega_1\}$ cover
+  $\omega_1$, but any at most countable subfamily has bounded union and
+  therefore fails to cover.`
+- **New text:** `The open initial segments $\{\,[0,\beta] : \beta<\omega_1\,\}$
+  cover $\omega_1$, but any at most countable subfamily has bounded union and
+  therefore fails to cover.`
+- **Why this notation and not A3's `{[0,α) : α < ω₁}`.** A3's parenthetical was
+  illustrative; the load-bearing correction is that the expression must denote a
+  *family of open initial segments* rather than `ω₁` itself. I used the closed
+  form because it is the library's own: `def-order-topology-on-an-ordinal` —
+  which this item declares in `deps` — defines exactly `[0,\beta]` and
+  `(\alpha,\beta]` and *nothing else*, so `[0,\alpha)` would introduce notation
+  the reader has not been given. `thm-ordinal-spaces-and-compactness` step 1.2
+  writes the same cover the same way: "the family $\{\,[0,\beta] : \beta \in
+  \lambda\,\}$ consists of open sets by [L2] and covers $\lambda$".
+- **Elementary derivation that the repaired sentence is true.** Each
+  $[0,\beta]$ is basic open in the order topology. They cover: $\xi \in
+  [0,\xi]$ for every $\xi < \omega_1$. A countable subfamily
+  $\{[0,\beta_i]\}_{i\in\mathbb{N}}$ has union $[0,\sup_i \beta_i]$, and
+  $\sup_i \beta_i < \omega_1$ by `thm-countable-subsets-of-omega-one-are-bounded`
+  (already in this item's `deps`), so the union misses $(\sup_i\beta_i)^{+}$.
+  The item's next clause is exactly this and needed no change.
+- **Provenance transition:** none, same reason as R1.
+- **Contract:** none. The item has no numbered proof steps and is not in the
+  batch contract's 53-item scope.
+- **Impact:** `impact-audit` from the dedicated baseline reports **0 logical,
+  0 direct-citation consumers**; recomputed corpus-wide, likewise zero.
+
+### Stamps on both
+
+`verification.judge` (glm-5.2, 2026-07-31) and `verification.audited` deleted on
+both items, per §9 — the judge would see different text and I may not certify my
+own repair. Both now show as `[published-unaudited]` under
+`depcheck --pending-audit-ok`, which is the A4-correct state; **A6's independent
+reading owes each a `verification.verified` / `scope: published-audit` /
+`delegated_by: owner`**, and A7 owes each a targeted rejudge.
+
+## 2. Bulk pure-retag — 73 items, one stage snapshot
+
+Applied by `research/audit/wave5-topology-countability.apply-retag.mjs`
+(idempotent, frontmatter edited as text so no field is re-serialized):
+
+- **73** `provenance.statement` / `provenance.proof` blocks, inserted after
+  `origin:` per SCHEMA §3 field order. Distribution as balloted at A1:
+  13 `literature-derived`, 56 `ai-altered`, 4 `ai-generated` statements.
+- **4** `generation:` blocks on the `ai-generated` statements —
+  `ex-a-ccc-nonseparable-cantor-cube` and
+  `ex-euclidean-closed-ball-and-sphere-through-the-compactness-chart`
+  (`role: example`), `cex-separability-is-not-hereditary-worked` and
+  `cex-lindelofness-is-not-productive-worked` (`role: counterexample`).
+  Containment re-verified by me over all 2,767 item files, not taken from A3:
+  **each of the four has zero `deps`/`justified_by` consumers**, so no
+  `ai-generated-statement-dependency` edge exists and each `genrisk` cone is
+  empty.
+- **0** legacy `authorship` lines to delete — none of the 73 had one — so the
+  retag is purely additive and voided no stamp.
+
+## 3. Reference URLs — 65 added across 50 items, no URL removed
+
+**This is wider than the thirteen items A3 §5a enumerated, and the widening is
+deliberate. Flagging it so Alpha can reverse it cheaply at A6.**
+
+§5a approved the N1 repair: add the clause-carrying URL alongside the existing
+entry, never remove one. Applying that to the thirteen N1 items would have left
+**37 further items** whose approved ledger row rests on a source the reader
+cannot see — an item citing Fremlin 5A4A in its rationale while showing only the
+UCR notes. That is the same defect N1 is about, and A3 §5c approved exactly this
+action for the sibling `topology-separation` batch at exactly this scale ("99
+URLs across 60 items … a mechanical consequence of A1, not a defect"). So I
+synced the whole batch: **every URL recorded as evidence in the ledger is now
+reader-visible in that item's `sources.references`**, and nothing that was there
+before was touched.
+
+- Titles reuse the most common title already paired with that URL elsewhere in
+  the corpus, so a source reads the same on every page. Six URLs are new to the
+  corpus (`Cantor_cube`, `Cardinal_function`, `Delta-system_lemma`, `Fort_space`,
+  `Second-countable_space`, `Sunflower_lemma`) and take the dominant
+  `X (Wikipedia)` convention.
+- **All 39 distinct ledger URLs re-fetched by me at A4: 39/39 HTTP 200.**
+  Sixteen returned `429` on the first sweep and `200` on a backed-off retry —
+  Wikipedia rate limiting, not a dead link. Worth knowing for future waves: a
+  fast sequential URL sweep from this host, with sibling Betas sweeping at the
+  same time, produces false negatives.
+
+## 4. Ledger rationale corrections (A3 §4c)
+
+A3 found my A2 claim "UCR contains no one-point-compactification material" to be
+wrong. **I re-verified it myself rather than accepting the correction**: fetched
+`gentop-notes.pdf`, `pdftotext`'d it (423 KB), and confirmed a section headed
+*"The Alexandroff one point compactification"* carrying the construction for a
+locally compact non-compact Hausdorff `X`, its uniqueness, and the
+identification of the one-point compactification of `Rⁿ` with `Sⁿ`. My A2 search
+missed it because the notes write the phrase unhyphenated. A3 is right.
+
+Corrected the trailing note on both affected rows —
+`fs-lindelofness-is-hereditary` and
+`ex-cardinal-functions-of-a-one-point-compactification` — to record UCR as a
+genuine semantic source for the *construction*. The rest of each rationale
+stands, and so does the added URL: in the same extraction, **"hereditar" does
+not occur anywhere in the notes**, and neither do "chain condition", "ccc",
+"Sorgenfrey", "lower limit", "Cantor cube", "sunflower", "Δ-system", "ω1" or
+"first uncountable" (0 occurrences each, re-measured here). So UCR still does
+not carry either item's own claim.
+
+## 5. Two things A4 could not close
+
+### BLOCKER — the seven `established-knowledge` rows fail the A4 gate
+
+`content-policy.mjs --audit` on this batch reports **7 errors, 0 warnings**, all
+`audit-ledger-alpha-concurrence`:
+
+```
+lem-weight-is-well-defined            lem-density-is-well-defined
+lem-character-is-well-defined         lem-lindelof-degree-is-well-defined
+lem-cellularity-is-well-defined       rem-countability-axiom-implication-and-choice-ledger
+rem-euclidean-topology-dictionary
+```
+
+A3 §3 approved these rows to be written with `alpha_concurred: false` and routed
+the concurrence **to Alpha at A6**. The gate table does not permit that ordering.
+`tools/gates.mjs:229` puts `content-policy.mjs --audit` in the A4 list with no
+`required: false`, and `content-policy.mjs:319` errors unconditionally when
+`evidence === 'established-knowledge' && alpha_concurred !== true`. So the wave
+**halts at A4 with `gate-failed` before it can reach the step that resolves it** —
+the same shape of gate-ordering trap A3 §2 caught for `proof-contract --strict`,
+one step later in the same table. Wave-wide this is 8 rows: my 7 plus the
+separation batch's `ex-free-ultrafilter-converging-in-a-convergent-sequence-space`.
+
+I applied the rows exactly as approved and did **not** work around it. Setting
+`alpha_concurred: true` myself would forge the concurrence the field exists to
+record, and reclassifying the evidence is the judgement A3 explicitly reserved.
+
+Two resolutions, both above my authority:
+
+1. **Bring A3 §3's routing forward from A6 to A4** — Alpha concurs (or declines)
+   on these 8 rows now. The wave-0 ledgers show the mechanism: concurrence was
+   recorded by *appending* a corrected row, and `content-policy` keys its ledger
+   map by id so the last row wins.
+2. **Reclassify.** Worth Alpha's attention because it may be the true reading:
+   `established-knowledge` is defined by the brief as "no source surfaced after a
+   real search", and it is the **sole URL waiver**. All seven of these rows
+   *have* URLs and now show them, so none of them needs the waiver — with the
+   references synced, all seven pass `source-backed-provenance-uncited` on their
+   own. My A2 self used the class to mean something narrower: *the source states
+   the ambient material but not this separate lemma*. For the five
+   well-definedness lemmas that is precisely the situation — Fremlin 5A4A writes
+   "the least cardinal of any base for T", which **asserts** the minimum exists
+   without arguing it, and the lemma is the argument. Whether that makes Fremlin
+   a `semantic-source` for the existence claim is a real question and it is
+   Alpha's.
+
+### N10 — `content-policy.mjs` cannot read a flow-style `sources:` line
+
+Found at A4, not at A2, because it only fires once provenance is written. It
+produced **35 false `source-backed-provenance-uncited` errors on this batch** —
+items with a perfectly good reader-visible URL reported as having none.
+
+`tools/content-policy.mjs:117` `referenceUrls` says in its own comment that it
+supports "both the normal block form and YAML's inline flow form". It does not.
+Its locator is
+
+```js
+lines.findIndex((line) => /^\s{2}references:\s*/.test(line))
+```
+
+so `references:` must **start a line** under exactly two spaces. That matches
+`  references: [{…}]` under a block `sources:`, but a whole-mapping flow line
+
+```yaml
+sources: {scraped: [], references: [{title: "…", url: "…"}]}
+```
+
+keeps `references:` mid-line, the finder returns `-1`, and the reader reports no
+URLs at all. Diagnosis confirmed exactly: all 35 errors were on flow-style items,
+the other 3 flow-style items in the batch are the `ai-generated`/`ai-generated`
+ones the check does not apply to, and **no block-style item errored**.
+
+**Corpus-wide 67 items are written that way**, so this is latent for every wave
+that tags one of them, not a fact about this batch.
+
+**The real repair is one line in `content-policy.mjs` and is not a Beta's to
+make.** What I did instead, inside the items I was already editing: normalized
+this batch's 38 flow-style `sources:` mappings into the block form SCHEMA §3
+prescribes (`research/audit/wave5-topology-countability.normalize-sources.mjs`,
+which verifies the ordered `(title, url)` list is identical before and after and
+refuses to write otherwise). Same YAML, same rendered page, no claim touched —
+but the gate can now read a truth it previously could not see. **If the tool is
+fixed, this normalization is harmless and can stay; it is canonical form either
+way.**
+
+## 6. Gate results after A4 (all run on current disk)
+
+| gate | result |
+|---|---|
+| `precheck.mts` (73 files) | **53 checked, 0 failing** |
+| `reflow.mts` (2 repaired items) | unchanged |
+| `depcheck.mjs --pending-audit-ok` | **exit 0**; my batch contributes exactly the 2 expected `published-unaudited` rows and one pre-existing `b-leaf-legacy` warning. **No `cited-not-in-deps` on any of my 73** |
+| `proof-contract.mjs --strict` (batch) | **0 errors, 0 warnings, 53/53 checked** |
+| `finite-smoke.mjs` | 0 errors |
+| `risk-report.mjs` (tiers only) | 0 errors, 53 routed — tiers unchanged from A2; the `risk_review` dispositions remain Alpha's at A6 |
+| `content-policy.mjs --audit` | **7 errors** — the concurrence blocker above, and nothing else. 0 warnings |
+| `audit-manifest.mjs` | exit 0 |
+| `fwdcheck` / `extcheck` / `rendercheck` / `prosecheck` / `citecheck` / `depsource` | all exit 0; **zero lines mention any of my 73 items** |
+| `impact-audit.mjs` (both dedicated baselines) | exit 0; both repaired items have 0 logical and 0 direct-citation consumers |
+
+## 7. Coverage statement
+
+Every one of the 73 items in
+`research/audit/wave5-topology-countability.pages.json` now carries both
+component-provenance tags, has a matching ledger row, and shows every URL that
+row rests on. Every proof step and every dependency citation in the two pairs was
+read at A2 and nothing at A4 changed that reading except where recorded above.
+Two items were materially repaired and neither is certified — **A6 owes both an
+independent reading and A7 a targeted rejudge**; I certified nothing of my own.
+No id was renamed or removed, no deletion or reading-order change was made, and
+nothing outside the 73 manifest items was edited.
+
+Files written: the three namespaced batch artifacts, the two apply scripts named
+above, and the 73 item files. My two repairs are recorded here rather than in a
+shared `wave5-published-repairs.md`: wave 4's own ledger states that per-batch
+Beta repairs live in the batch findings files, and four Betas were applying A4
+concurrently, so a shared read-modify-write file was the wrong place for them.

@@ -4,6 +4,9 @@ kind: theorem
 title: "On $C(X,Y)$ with $X$ and $Y$ metric, uniform convergence is finer than compact convergence, which is finer than pointwise convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-of-pointwise-convergence, def-topology-of-uniform-convergence,
        def-topology-of-compact-convergence, def-compact-open-topology,
        thm-compact-open-equals-compact-convergence, lem-uniform-metric-on-a-function-space,

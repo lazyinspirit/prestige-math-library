@@ -4,6 +4,9 @@ kind: definition
 title: "Under choice, Lindelöf degree $L(X)$ and cellularity $c(X)$ as raw cardinal functions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-compact-space, def-topological-space, def-cardinal, def-cardinal-arithmetic, def-axiom-of-choice]
 justified_by: [lem-lindelof-degree-is-well-defined, lem-cellularity-is-well-defined]
 aliases: []
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
+    - title: "Cardinal function (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cardinal_function"
 pipeline_run: null
 ---
 

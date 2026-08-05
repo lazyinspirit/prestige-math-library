@@ -4,6 +4,9 @@ kind: definition
 title: "Urysohn ($T_{2\\frac{1}{2}}$) space: distinct points have neighbourhoods with disjoint closures"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topological-space, def-hausdorff-space, def-neighbourhood-top,
        def-interior-closure-boundary-top]
 justified_by: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "A point is a cluster point of a net if and only if some subnet converges to it"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-subnet, def-net-convergence-and-cluster-point, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Schlumprecht, Math 655 notes"
       url: "https://people.tamu.edu/~t-schlumprecht/course_notes_math655_23c.pdf"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

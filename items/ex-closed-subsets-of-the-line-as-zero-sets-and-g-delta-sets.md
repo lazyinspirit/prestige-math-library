@@ -4,6 +4,9 @@ kind: example
 title: "Every nonempty closed subset $A$ of $\\mathbb{R}$ is the zero set of $x \\mapsto d(x, A)$ and the intersection of the open sets $\\{x : d(x,A) < 1/(n+1)\\}$, worked for $[0,1]$ and for $\\{0\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-zero-sets-and-cozero-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-f-sigma-g-delta,
        lem-distance-to-set-is-lipschitz, def-metric-bounded-diameter,
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Normal_space"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Metrizable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Metrizable_space"
 pipeline_run: null
 ---
 

@@ -293,3 +293,251 @@ entries, 225 derivation entries, 200 boundary dispositions.**
 
 `finite_smoke` is empty throughout: nothing in this batch is a finite or
 combinatorial claim, so none of the four available checks applies.
+
+---
+
+# A4 — applied (2026-08-05)
+
+Authority: `research/audit/wave5-A3.md` §1 (F1 approved as a confirmed
+falsehood), §2 (the two contract-blocking fact deletions), §3/§9 (the bulk
+pure-retag pass). Nothing outside that receipt was applied; the one finding that
+falls outside it is recorded as F2 below and **not** applied.
+
+## Snapshot granularity
+
+Two dedicated snapshots for the two material repair groups, and **no per-item
+snapshot for the retag** — the stage's own `pre-A4`/`post-A4` bracket that work,
+per the wave-2 measurement in the brief. Ledger labels added by me:
+`pre-A4-fs-F1`, `post-A4-fs-F1`, `post-A4-fs-fact-deletions`.
+
+**`touchlog report --min 2` flags `rem-function-space-conventions` as "repaired
+more than once". It was repaired once.** The count is an artifact of where I put
+the middle snapshot: I applied the F1 clause replacement, snapshotted, then
+corrected my own wording in the same repair (see R1 below), so two
+snapshot-to-snapshot transitions record a change. This is the wave-2 phantom the
+brief warns about, in miniature. It is not a twice-touched escalation and should
+not be read as one.
+
+## R1 — F1, `rem-function-space-conventions` §1 (class (a), unambiguous falsehood)
+
+**Old:**
+> Where the domain *must* be metric, that is forced rather than chosen: an item
+> quantifying over the **compact** subsets of the domain needs a notion of
+> compactness, and the only one available at this point in the reading order is
+> [[def-metric-compactness]], which is defined for metric spaces. Compactness for
+> an arbitrary topological space is developed only later in the reading order, so
+> it is unavailable on this page and nothing here anticipates it.
+
+**New:**
+> Where the domain *must* be metric, the hypothesis is inherited rather than
+> decorative: an item quantifying over the **compact** subsets of the domain
+> reads compactness through [[def-metric-compactness]], and it does so because
+> [[def-compact-open-topology]], the definition this development is built over,
+> is stated for a metric $(X,d)$. That restriction is a scope choice of this page
+> and not a gap in the library. Compactness for an arbitrary topological space
+> ([[def-compact-space]]) is developed *earlier* in the reading order and is
+> available here; on a metric space the two readings of "compact subset" agree
+> ([[thm-compactness-agrees-with-metric-compactness]]), so nothing below is
+> weakened by taking the metric one.
+
+**Evidence, re-verified from disk at A4 rather than taken from the A3 receipt:**
+`items/def-compact-space.md` is `status: published` and defines compactness for
+an arbitrary topological space ("$(X,\mathcal{T})$ is **compact** when every open
+cover of it has a finite subcover"). It is hosted on `library/topology/compactness.md`.
+That page is *earlier*: `lem-tube-lemma-for-a-compact-metric-factor`, an item on
+**this** page, declares `lem-tube-lemma-for-a-compact-factor` (also on
+`compactness.md`) in its `deps` and carries no `forward_refs`, and a declared
+non-forward dependency is by construction earlier.
+`thm-compactness-agrees-with-metric-compactness` claim 2 supplies the agreement I
+now assert: "For every $A \subseteq X$: $A$ is a compact subset of the metric
+space $(X,d)$ if and only if $A$ is a compact subset of the topological space
+$(X, \mathcal{T}_d)$."
+
+**Note on my own first attempt.** My first replacement left the paragraph
+self-contradicting — it kept the original opening "that is forced rather than
+chosen" while adding "the metric domain is a scope choice of this page". I
+rewrote the opening clause so the paragraph states one position. The text above
+is the final state; the intermediate state reached no gate.
+
+## R2 — F1, `thm-the-exponential-law` Remark 2 (class (a), unambiguous falsehood)
+
+**Old:**
+> Neither is available here: $Z$ is an arbitrary topological space, and this
+> library defines compactness only for metric spaces ([[def-metric-compactness]]),
+> so "compact subset of $Z$" and "compact subset of $X \times Z$" have no meaning
+> at this point in the reading order. Supplying them needs the page that defines
+> compactness for arbitrary topological spaces; on top of that, the standard proof
+> of the homeomorphism form needs a tube lemma for a compact factor of an
+> arbitrary product, and, for the direction that $\Phi^{-1}$ is continuous, that a
+> compact subset of $X \times Z$ be covered by finitely many products of compacta.
+
+**New:**
+> Neither is available here, and not for want of a notion of compactness:
+> compactness for an arbitrary topological space ([[def-compact-space]]) and the
+> tube lemma for a compact factor of an arbitrary product
+> ([[lem-tube-lemma-for-a-compact-factor]]) are both developed earlier in the
+> reading order, so "compact subset of $Z$" and "compact subset of $X \times Z$"
+> do have meaning. What is missing is the topology itself:
+> [[def-compact-open-topology]] is stated for a **metric** domain, whereas $Z$
+> here is an arbitrary topological space and $X \times Z$ carries no metric, so
+> neither side is topologised by anything on this page. Beyond that, the
+> direction that $\Phi^{-1}$ is continuous also needs that a compact subset of
+> $X \times Z$ be covered by finitely many products of compacta, which this
+> library does not prove.
+
+**What the repair preserves, deliberately:** the theorem, its refusal to claim a
+homeomorphism, the residual finite-products-of-compacta requirement, and the
+closing "None of that is done here, and nothing above assumes it." The obstruction
+is *restated*, not removed — `def-compact-open-topology` really is stated for a
+metric $(X,d)$ (`items/def-compact-open-topology.md`, Definition: "Let $(X,d)$ be
+a metric space ... For a compact subset $K \subseteq X$
+([[def-metric-compactness]])"), and $Z$ really is an arbitrary topological space
+in this Statement, so neither side is topologised here. The old text named the
+wrong reason; the new text names the real one.
+
+## R3/R4 — the two uncited facts (class (b), citation precision; A3 §2)
+
+`proof-contract --strict` errors `citation-uses` on a declared fact no numbered
+step cites, and at A4 that gate is hard (`CONTRACT_TRIO({reviewed: false})`,
+no `required: false`). My A2 recommendation to leave them was wrong for that
+mechanical reason, and A3 overrode it; I applied the override.
+
+- **`lem-uniform-metric-on-a-function-space`**: deleted
+  `[L4] The minimum of a two-element set of reals exists, is one of the two
+  elements, and is a lower bound of both ([[lem-finite-set-has-max]], [[def-max-min]]).`
+- **`fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets`**:
+  deleted `[L8] The minimum of a two-element set of reals exists and is one of
+  the two elements ([[lem-finite-set-has-max]], [[def-max-min]]).`
+
+**Verified before deleting, from disk, not from the receipt.** Tag census over
+each proof: `lem-uniform-metric` cites only `L1` (×9), `L2` (×6), `L3` (×2) — no
+step cites `L4`, and the string `L4` does not occur anywhere after `## Proof`.
+`fs-pointwise` cites `L1`–`L7` and no step cites `L8`, which likewise does not
+occur after `## Refutation`. The only `\min` in either proof section is in a
+`lem-uniform-metric` Remark, and it cites `lem-bounded-remetrisation` claim 3,
+not `[L4]`. Both were the **last** label, so no renumbering and no gap in the
+rendered Facts list. **`deps` left untouched** per A3: an unused dep is not a
+defect and removing `lem-finite-set-has-max`/`def-max-min` would change the
+rendered prerequisite closure for nothing.
+
+## R5 — bulk provenance retag, 33 items (A3 §3)
+
+Applied by `research/audit/apply-wave5-fs-retag.mjs` (committed alongside, and
+idempotent — it skips an already-tagged item and refuses one carrying a legacy
+`authorship:` line). It writes `provenance.statement`/`provenance.proof` from the
+ledger, inserted after `origin:` so it precedes `deps:` as SCHEMA §3 shows, and
+touches **no** mathematical text, no `sources`, and no `verification` stamp.
+
+Pre-flight over the 33: none already carried `provenance`, none carried a legacy
+`authorship` line (so D5's deletion obligation was vacuous here), and all 33
+already carry at least one `sources.references` URL. Applied: 33 tagged, 0
+skipped, 0 errors. Distribution — `literature-derived/not-applicable` 5,
+`literature-derived/ai-generated` 6, `ai-altered/not-applicable` 1,
+`ai-altered/ai-generated` 20, `ai-generated/not-applicable` 1.
+
+**No `generation:` block written.** The batch's single `ai-generated` statement
+is `rem-function-space-conventions`, a page-conventions remark;
+`generation.role` admits only `direct-corollary`/`example`/`counterexample`, and
+`content-policy.mjs` errors `generation-on-non-generated-statement` on a role
+that does not apply. This matches the six retro-tag precedents A3 §3 names, which
+carry no generation block either. `content-policy --audit` reports the expected
+`generated-kind` **warning** on it and no error.
+
+## Stamps deleted (material repairs only)
+
+| item | deleted |
+|---|---|
+| `rem-function-space-conventions` | `verification.verified` (gpt-5.6-sol, `scope: published-audit`, 2026-08-03) |
+| `thm-the-exponential-law` | `verification.judge` (z-ai/glm-5.2, 2026-07-28) and `verification.audited: 2026-07-29` |
+| `lem-uniform-metric-on-a-function-space` | same pair |
+| `fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets` | same pair |
+
+`verification.precheck` retained on all four (re-run and passing). **I wrote no
+`verification.verified` and no `audited`** — A6's independent reading owns that,
+and I do not certify my own repair. The four `[published-unaudited]` lines
+`depcheck` now reports are exactly these and are A4's expected output; `depcheck
+--pending-audit-ok`, which is what the A4 table runs, exits 0.
+
+## Gates run locally, on current disk
+
+| gate | result |
+|---|---|
+| `reflow.mts` (4 changed items) | unchanged — already canonical |
+| `precheck.mts` (all 33) | 25 proof-bearing checked, 0 failing |
+| `depcheck.mjs --pending-audit-ok` | exit 0; the only lines naming my items are the 4 expected `published-unaudited` |
+| `proof-contract.mjs --strict` | **0 errors, 0 warnings, 25/25** (was 4 `citation-uses` errors in this batch) |
+| `finite-smoke.mjs` | 0 errors, 0 checks — the wave-wide norm; real-analysis, countability and separation all report 0 checks too |
+| `risk-report.mjs` (no `--require-reviewed`) | exit 0, 25 items routed; `risk_review` still `pending`, due from Alpha at A6 |
+| `content-policy.mjs --audit --ledger …` | 33 scoped, 0 errors, 1 expected `generated-kind` warning |
+
+Contract regenerated by `node research/audit/gen-wave5-fs-contracts.mjs` against
+the edited text: 25 items, 489 citations, 225 steps, 0 empty-`uses` entries
+remaining anywhere in the batch.
+
+## F2 — a THIRD false clause of the F1 class, found at A4, NOT applied
+
+**Escalated to Alpha. I did not repair it: A3 licensed two clauses and this is a
+third, and A3 approval is the only gate between a proposal and its application.**
+
+`rem-function-space-conventions` §6, second bullet, on disk now:
+
+> - [[def-locally-compact-metric-space]] is a metric special case of a notion this
+>   library does not yet define in general. Its own dictionary remark records the
+>   agreement and why the agreement is immediate.
+
+**"does not yet define in general" is false.** `items/def-locally-compact-space.md`
+is `status: published`, is titled "Locally compact topological space: every point
+has a compact neighbourhood; and what this says in a metric space", and defines
+it for an arbitrary topological space: "A topological space $(X, \mathcal{T})$ is
+**locally compact** when every point of $X$ has a compact neighbourhood". It is
+hosted on `library/topology/compactness.md` — the same earlier page as
+`def-compact-space`, by the reading-order argument in R1.
+
+This is the **identical decay pattern as F1, in the same item, and I missed it at
+A2**: the target's own dictionary remark was updated ("this was the metric special
+case of a notion this library did not yet define in general, **and now does**")
+while this remark was not. My A2 report of "two false clauses" was therefore
+incomplete, and the A3 receipt inherited that undercount.
+
+**Proposed repair, for Alpha to license at A6** (the item is already unstamped
+and awaiting A6 certification, so applying it there costs no extra judge or
+certification call):
+
+> - [[def-locally-compact-metric-space]] is the metric special case of
+>   [[def-locally-compact-space]], which is stated for an arbitrary topological
+>   space on an earlier page. Its own dictionary remark records the agreement and
+>   why the agreement is immediate.
+
+I did **not** touch §6's heading ("Two objects on this page are deliberately new
+rather than reused"). Whether that framing still holds once a general definition
+exists earlier is a judgement call, not an unambiguous falsehood, and it is
+Alpha's.
+
+## Unresolved concern — the URL asymmetry A3 left in this batch
+
+A3 §8.1 measures the book-title/stand-in-URL problem across the wave and counts
+"22 + 7 of 33 `function-spaces` items" in it, then says "§5 repairs it inside
+wave-5 scope by addition". But §5 has subsections for `topology-countability`
+(5a), `real-analysis` (5b) and `topology-separation` (5c) and **none for
+`topology-function-spaces`**, and §9's applied-URL list names only those three
+plus the §4d row. So the batch A3 counted as the largest instance of the defect is
+the one batch that receives no URL addition.
+
+I applied no URL additions here, because A4 applies what A3 approved. Flagging it
+rather than acting: my ledger already carries clause-carrying URLs for these items
+(for example the ETSU Munkres §43 and §20 PDFs on
+`lem-uniform-metric-on-a-function-space`, whose exact clause "$\bar\rho$ is the
+uniform metric on $Y^J$ corresponding to $d$" A3 §4e verified itself), so the
+addition is available and cheap whenever Alpha or the orchestrator licenses it.
+No gate fails without it — all 33 items already carry at least one
+`sources.references` URL, so `level-coverage`'s reader-visible-URL requirement is
+met mechanically.
+
+## Coverage statement for A4
+
+Every repair in the A3 receipt assigned to this batch was applied, and nothing
+else was. Each load-bearing claim in the receipt was re-verified from disk before
+I acted on it rather than taken from the receipt's prose. The four material
+repairs carry deleted stamps and no self-certification; the 33-item retag is pure
+frontmatter. Every gate in the A4 table that can be run against this batch alone
+was run and is green.

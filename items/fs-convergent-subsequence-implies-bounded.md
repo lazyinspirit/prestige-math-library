@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a sequence with a convergent subsequence is bounded (the converse of Bolzano-Weierstrass)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-bolzano-weierstrass, lem-alternating-sequence, def-subsequential-limit, def-sequence, def-real-limit, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 forward_refs: [cex-unbounded-with-convergent-subsequence]

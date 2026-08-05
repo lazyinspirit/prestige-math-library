@@ -4,6 +4,9 @@ kind: example
 title: "The coordinate-reading sequence in a compact binary cube has a convergent subnet but no convergent subsequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-compact-implies-sequentially-compact, thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, thm-compactness-via-nets-filters-and-ultrafilters, def-subnet, def-sequence-convergence-top, def-standard-topologies, thm-product-universal-property, thm-continuity-characterised-by-nets]
 aliases: []
 landmark: false
@@ -20,6 +23,12 @@ sources:
   references:
     - title: "Product topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Product_topology"
+    - title: "Compact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Compact_space"
+    - title: "Tychonoff's theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff%27s_theorem"
+    - title: "Sequential space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sequential_space"
 pipeline_run: null
 ---
 

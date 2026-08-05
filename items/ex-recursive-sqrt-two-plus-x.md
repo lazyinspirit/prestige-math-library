@@ -4,6 +4,9 @@ kind: example
 title: "The sequence $x_1 = 1$, $x_{k+1} = \\sqrt{2 + x_k}$ increases to $2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-monotone-convergence, def-monotone-sequence, thm-of-square-roots, thm-algebra-of-limits, lem-limit-of-tail, lem-limit-preserves-order, lem-power-monotone, lem-limit-unique, thm-recursion, def-sequence, def-real-limit, def-integer-power, def-bounded-set, lem-of-no-zero-divisors, cor-of-one-positive, lem-of-add-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

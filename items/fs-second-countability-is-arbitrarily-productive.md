@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming choice and countable choice, refuted: arbitrary products of second countable spaces are second countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-large-cantor-cubes-are-not-separable, thm-second-countable-implies-separable, def-standard-topologies, def-product-topology]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Second-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Second-countable_space"
+    - title: "Cantor cube (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cantor_cube"
 pipeline_run: null
 ---
 ## Statement

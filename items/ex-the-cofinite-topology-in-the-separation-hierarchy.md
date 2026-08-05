@@ -4,6 +4,9 @@ kind: example
 title: "The cofinite topology on an infinite set is $T_1$ but neither Hausdorff nor regular nor normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-hausdorff-space, def-regular-and-t3-spaces, def-normal-and-t4-spaces,
        def-countable, def-interior-closure-boundary-top, def-topological-space,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "L. Steen and J. Seebach, Counterexamples in Topology, §18"
       url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "T1 space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/T1_space"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: corollary
 title: "For $n\\ge2$, the sphere $S^{n-1}$ is path-connected and connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-punctured-rn-is-polygonally-connected, lem-radial-normalisation-is-continuous, lem-euclidean-polygonal-paths-are-continuous, thm-path-connected-implies-connected, def-euclidean-spheres-and-closed-balls]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Sphere"
       url: "https://en.wikipedia.org/wiki/Sphere"
+    - title: "Path-connected space"
+      url: "https://en.wikipedia.org/wiki/Path-connected_space"
 pipeline_run: null
 ---
 

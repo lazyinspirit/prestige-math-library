@@ -4,6 +4,9 @@ kind: definition
 title: "Completely normal ($T_5$) and perfectly normal ($T_6$) spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-normal-and-t4-spaces, def-separated-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-zero-sets-and-cozero-sets,
        def-t0-and-t1-spaces, def-topological-space]

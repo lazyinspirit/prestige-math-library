@@ -4,6 +4,9 @@ kind: false-statement
 title: "Refuted: separability is hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-separable-space, def-product-topology, def-subspace-topology-top, def-interval, thm-basis-criterion, thm-rationals-countable, lem-rat-embeds-dense, thm-r-uncountable, thm-product-of-countable, def-hereditary-property]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 ## Statement

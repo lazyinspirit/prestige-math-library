@@ -4,6 +4,9 @@ kind: counterexample
 title: "The nested closed unbounded sets $[k, \\infty)$ have empty intersection, so boundedness cannot be dropped"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-nested-interval-property, def-interval, thm-of-archimedean, lem-of-naturals-positive, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

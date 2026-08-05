@@ -4,6 +4,9 @@ kind: definition
 title: "Convergence and cluster points of a net in a topological space"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-directed-set-and-net, def-net-eventually-and-frequently, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "net (nLab)"
+      url: "https://ncatlab.org/nlab/show/net"
 pipeline_run: null
 ---
 

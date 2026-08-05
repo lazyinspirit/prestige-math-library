@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, a real family is summable as a finite-subset net if and only if it has at most countable support and its nonzero terms are absolutely summable; its sum is independent of the enumeration"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-finite-subset-net-for-unordered-real-summation, def-absolute-and-conditional-convergence, thm-dirichlet-rearrangement, thm-countable-union-of-countable, def-countable-choice, lem-positive-and-negative-parts, thm-nonnegative-series-bounded-partial-sums, cor-archimedean-reciprocal, def-sum-over-a-finite-index-set]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Unconditional convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Unconditional_convergence"
+    - title: "Absolute convergence (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Absolute_convergence"
 pipeline_run: null
 ---
 

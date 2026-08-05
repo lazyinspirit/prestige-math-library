@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, every second countable space is Lindelöf"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-second-countable-space, def-compactness-variants, def-countable-choice]
 aliases: []
 landmark: true
@@ -15,7 +18,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "nLab: second-countable spaces are Lindelöf", url: "https://ncatlab.org/nlab/show/second-countable%2Bspaces%2Bare%2BLindel%C3%B6f"}]}
+sources:
+  scraped: []
+  references:
+    - title: "nLab: second-countable spaces are Lindelöf"
+      url: "https://ncatlab.org/nlab/show/second-countable%2Bspaces%2Bare%2BLindel%C3%B6f"
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
 pipeline_run: null
 ---
 

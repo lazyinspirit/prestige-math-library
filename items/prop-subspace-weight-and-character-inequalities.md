@@ -4,6 +4,9 @@ kind: proposition
 title: "Under choice, for $Y\\subseteq X$, $w(Y)\\le w(X)$ and $\\chi(y,Y)\\le\\chi(y,X)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-weight-density-and-character, def-subspace-topology-top]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,11 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "D. H. Fremlin, Measure Theory, Chapter 5A", url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
 pipeline_run: null
 ---
 ## Statement

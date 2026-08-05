@@ -4,6 +4,9 @@ kind: definition
 title: "The canonical net indexed by the pairs $(A,x)$ with $A$ in a filter and $x\\in A$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-filter, def-directed-set-and-net]
 aliases: []
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
 pipeline_run: null
 ---
 

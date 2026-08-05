@@ -4,6 +4,9 @@ kind: lemma
 title: "Subnets preserve eventual properties and every limit of a net"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subnet, def-net-convergence-and-cluster-point, def-net-eventually-and-frequently]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "Schlumprecht, Math 655 notes"
       url: "https://people.tamu.edu/~t-schlumprecht/course_notes_math655_23c.pdf"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Subnet (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Subnet_(mathematics)"
 pipeline_run: null
 ---
 

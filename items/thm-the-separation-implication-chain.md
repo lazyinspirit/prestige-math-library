@@ -4,6 +4,9 @@ kind: theorem
 title: "The implications proved on this page: perfectly normal gives completely normal under countable choice, and completely normal gives normal; normal with $T_1$ gives $T_3$; completely regular gives regular; regular with $T_1$ gives Urysohn, hence Hausdorff, hence $T_1$, hence $T_0$; and metrizable gives every one of them"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-regular-and-t3-spaces, def-completely-regular-and-tychonoff-spaces,
        def-normal-and-t4-spaces, def-completely-normal-and-perfectly-normal-spaces,
@@ -33,6 +36,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/James_Munkres"
     - title: "S. Willard, General Topology, §13-15"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
+    - title: "Tychonoff space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_space"
+    - title: "Urysohn and completely Hausdorff spaces (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Urysohn_and_completely_Hausdorff_spaces"
 pipeline_run: null
 ---
 

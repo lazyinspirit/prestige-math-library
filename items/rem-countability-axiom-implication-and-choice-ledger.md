@@ -4,6 +4,9 @@ kind: remark
 title: "Implication, preservation, counterexample, and choice ledger for the countability axioms"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [cor-cardinal-functions-detect-countability-axioms, thm-second-countable-implies-first-countable, thm-second-countable-implies-separable, thm-second-countable-implies-lindelof, thm-metric-countability-equivalences, prop-second-countability-is-hereditary, thm-countable-products-of-second-countable-spaces, prop-separable-spaces-are-ccc, fs-ccc-spaces-are-separable, fs-first-countable-spaces-are-second-countable, fs-separable-spaces-are-second-countable, fs-separability-is-hereditary, fs-lindelofness-is-hereditary, fs-lindelofness-is-productive]
 aliases: []
 verification:
@@ -13,7 +16,11 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
 pipeline_run: null
 ---
 The implication chain is second countable $\Rightarrow$ first countable and, with $\mathrm{AC}_\omega$, second countable $\Rightarrow$ separable and Lindelöf. Separable spaces are ccc. The displayed counterexamples show that the reverse implications and the stated hereditary and productive extensions fail.

@@ -4,6 +4,9 @@ kind: definition
 title: "Uniform convergence, and the topology of uniform convergence: the metric topology of the uniform metric on $Y^{X}$ and on $C(X,Y)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [lem-uniform-metric-on-a-function-space, def-metric-topology, def-metrizable-space,
        def-subspace-topology-top, def-isometry-and-metric-embedding,
        def-continuous-map-top, def-metric-space, def-metric-ball,

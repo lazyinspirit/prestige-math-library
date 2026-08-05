@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming countable choice, refuted: Lindelöfness is productive"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compactness-variants, def-product-topology, def-interval, thm-basis-criterion, thm-rationals-countable, thm-r-uncountable, lem-rat-embeds-dense, lem-countable-iff-surjection-from-n, def-countable-choice]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
+    - title: "Lower limit topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Lower_limit_topology"
 pipeline_run: null
 ---
 ## Statement

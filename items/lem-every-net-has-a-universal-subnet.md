@@ -4,6 +4,9 @@ kind: lemma
 title: "Assuming the ultrafilter lemma, every net has a universal subnet"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-tail-filter-of-a-net, thm-ultrafilter-lemma, def-subnet, def-universal-net, thm-ultrafilter-characterisation]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Boolean prime ideal theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
 pipeline_run: null
 ---
 

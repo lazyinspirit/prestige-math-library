@@ -4,6 +4,9 @@ kind: definition
 title: "Pseudocompact space: every continuous real-valued function has bounded image"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-continuous-map-top, def-bounded-set, def-subspace-topology-top]
 aliases: []
 landmark: true

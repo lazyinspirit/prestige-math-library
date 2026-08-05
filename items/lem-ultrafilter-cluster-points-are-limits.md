@@ -4,6 +4,9 @@ kind: lemma
 title: "Every cluster point of an ultrafilter is a limit of that ultrafilter"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-filter-convergence-and-cluster-point, def-ultrafilter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: false
@@ -20,6 +23,12 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "ultrafilter (nLab)"
+      url: "https://ncatlab.org/nlab/show/ultrafilter"
 pipeline_run: null
 ---
 

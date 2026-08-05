@@ -4,6 +4,9 @@ kind: definition
 title: "Subnet via an eventually cofinal index map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-directed-set-and-net, def-net-eventually-and-frequently]
 aliases: []
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "Schlumprecht, Math 655 notes"
       url: "https://people.tamu.edu/~t-schlumprecht/course_notes_math655_23c.pdf"
+    - title: "Subnet (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Subnet_(mathematics)"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

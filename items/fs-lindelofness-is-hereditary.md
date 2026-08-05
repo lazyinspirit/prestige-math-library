@@ -4,6 +4,9 @@ kind: false-statement
 title: "Refuted: Lindelöfness is hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-compactness-variants, def-compact-space, def-one-point-compactification, thm-one-point-compactification-properties, def-standard-topologies, def-locally-compact-space, def-hausdorff-space, thm-r-uncountable, def-hereditary-property]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Fort space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Fort_space"
+    - title: "Alexandroff extension (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
 pipeline_run: null
 ---
 ## Statement

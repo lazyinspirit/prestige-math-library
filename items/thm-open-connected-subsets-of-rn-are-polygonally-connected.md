@@ -4,6 +4,9 @@ kind: theorem
 title: "For an open subset of $\\mathbb{R}^n$, connectedness, path-connectedness and polygonal connectedness are equivalent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-polygonally-reachable-set-is-clopen, thm-path-connected-implies-connected, def-connected-space, def-polygonal-path-and-polygonal-connectedness]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Path-connected space"
       url: "https://en.wikipedia.org/wiki/Path-connected_space"
+    - title: "Connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Connected_space"
 pipeline_run: null
 ---
 

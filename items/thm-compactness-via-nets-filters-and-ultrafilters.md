@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming the ultrafilter lemma, compactness is equivalent to every net having a cluster point, every net having a convergent subnet, every filter having a cluster point, and every ultrafilter converging"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-net-cluster-point-iff-convergent-subnet, thm-net-filter-convergence-dictionary, lem-ultrafilter-cluster-points-are-limits, thm-ultrafilter-lemma, thm-compact-iff-fip, def-compact-space, def-filter-convergence-and-cluster-point]
 aliases: []
 landmark: true
@@ -20,6 +23,14 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Compact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Compact_space"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Boolean prime ideal theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
 pipeline_run: null
 ---
 

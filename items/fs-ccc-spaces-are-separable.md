@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming choice, refuted: every ccc space is separable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-cubes-are-ccc, lem-large-cantor-cubes-are-not-separable]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Countable chain condition (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Countable_chain_condition"
+    - title: "Cantor cube (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cantor_cube"
 pipeline_run: null
 ---
 ## Statement

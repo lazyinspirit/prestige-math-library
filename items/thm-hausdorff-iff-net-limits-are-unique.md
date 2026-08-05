@@ -4,6 +4,9 @@ kind: theorem
 title: "A topological space is Hausdorff if and only if every net has at most one limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-net-convergence-and-cluster-point, def-hausdorff-space, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Hausdorff space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Hausdorff_space"
 pipeline_run: null
 ---
 

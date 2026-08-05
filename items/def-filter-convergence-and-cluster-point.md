@@ -4,6 +4,9 @@ kind: definition
 title: "Convergence and cluster points of a filter on a topological space"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-filter, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "ultrafilter (nLab)"
+      url: "https://ncatlab.org/nlab/show/ultrafilter"
 pipeline_run: null
 ---
 

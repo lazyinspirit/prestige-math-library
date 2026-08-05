@@ -4,6 +4,9 @@ kind: remark
 title: "Two independent proofs that $\\mathbb{R}$ is Cauchy complete, and why the library records both"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-cauchy-criterion-via-lub, thm-reals-cauchy-complete, thm-bolzano-weierstrass, thm-nested-interval-property, def-complete-ordered-field]
 justified_by: []
 aliases: []

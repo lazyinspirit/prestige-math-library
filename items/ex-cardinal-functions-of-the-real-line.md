@@ -4,6 +4,9 @@ kind: example
 title: "Under choice, for the usual real line, $w=d=\\chi=L=c=\\aleph_0$ under the raw convention"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-weight-density-and-character, def-lindelof-degree-and-cellularity, thm-basic-cardinal-function-inequalities, thm-metric-weight-equals-density, thm-metric-countability-equivalences, thm-rational-points-and-boxes-in-rn, lem-real-line-is-a-metric-space]
 aliases: []
 verification:
@@ -13,7 +16,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "D. H. Fremlin, Measure Theory, Chapter 5A", url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
+    - title: "Separable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separable_space"
 pipeline_run: null
 ---
 ## Example

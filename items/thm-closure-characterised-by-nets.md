@@ -4,6 +4,9 @@ kind: theorem
 title: "A point lies in the closure of a set if and only if a net in the set converges to it"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-net-convergence-and-cluster-point, thm-closure-characterisation-top, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "net (nLab)"
+      url: "https://ncatlab.org/nlab/show/net"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The one-point compactification of the discrete real line is compact and Lindelöf but is neither first countable nor separable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-one-point-compactification, thm-one-point-compactification-properties, def-first-countable-top, def-separable-space, def-compactness-variants, def-standard-topologies, thm-r-uncountable, thm-product-of-countable]
 aliases: []
 verification:
@@ -13,7 +16,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Fort space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Fort_space"
+    - title: "Alexandroff extension (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
 pipeline_run: null
 ---
 ## Example

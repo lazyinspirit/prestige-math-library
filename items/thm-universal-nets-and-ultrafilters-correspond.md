@@ -4,6 +4,9 @@ kind: theorem
 title: "A net is universal exactly when its tail filter is an ultrafilter, and the canonical net of an ultrafilter is universal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-universal-net, def-tail-filter-of-a-net, def-net-derived-from-a-filter, def-ultrafilter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: true
@@ -20,6 +23,12 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
 pipeline_run: null
 ---
 

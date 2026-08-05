@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a nested sequence of nonempty bounded open intervals has nonempty intersection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-nested-interval-property, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 forward_refs: [ex-nested-intervals-single-point, cex-nested-open-intervals-empty]

@@ -4,6 +4,9 @@ kind: definition
 title: "The topology of compact convergence on $C(X,Y)$ for metric $X$ and $Y$: uniform convergence on each compact subset of $X$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-space,
        def-metric-ball, def-isometry-and-metric-embedding, def-topology-basis-subbasis,
        thm-basis-criterion, def-max-min, lem-finite-set-has-max,

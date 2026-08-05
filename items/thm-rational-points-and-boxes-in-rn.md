@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{Q}^n$ is a countable dense subset of $\\mathbb{R}^n$, and rational open boxes form a countable basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-q-and-irrationals-dense-r, thm-rationals-countable, def-product-topology, def-topology-basis-subbasis, lem-finite-powers-of-countable-sets-are-countable, lem-finite-choice, lem-subset-of-countable, lem-real-and-metric-notions-agree]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Euclidean space"
       url: "https://en.wikipedia.org/wiki/Euclidean_space"
+    - title: "Separable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separable_space"
 pipeline_run: null
 ---
 

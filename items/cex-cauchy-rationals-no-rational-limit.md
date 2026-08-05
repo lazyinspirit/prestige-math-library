@@ -4,6 +4,9 @@ kind: counterexample
 title: "The truncated decimal approximations of $\\sqrt{2}$ form a Cauchy sequence of rationals with no rational limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-rationals-complete, fs-sqrt2-rational, def-rationals, lem-rat-embeds-dense, def-real-limit, def-sequence, thm-of-square-roots, thm-cauchy-criterion-via-lub, lem-convergent-implies-cauchy, lem-limit-unique, lem-geometric-sequence-null, thm-squeeze, thm-algebra-of-limits, lem-power-monotone, lem-power-laws, def-integer-power, lem-of-inverse-positive, prop-of-reciprocal-order, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\mathbb{R}^n$ is locally compact and $\\sigma$-compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-locally-compact-space, def-compactness-variants, cor-euclidean-closed-balls-and-spheres-are-compact, thm-of-archimedean]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Sigma-compact space"
       url: "https://en.wikipedia.org/wiki/Sigma-compact_space"
+    - title: "Locally compact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Locally_compact_space"
 pipeline_run: null
 ---
 

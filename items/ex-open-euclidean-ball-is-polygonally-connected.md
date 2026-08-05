@@ -4,6 +4,9 @@ kind: example
 title: "The straight segment between two points of an open Euclidean ball stays in the ball"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, def-norm-and-normed-space, def-metric-ball]
 aliases: []
 landmark: false

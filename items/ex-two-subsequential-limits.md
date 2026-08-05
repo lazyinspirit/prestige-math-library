@@ -4,6 +4,9 @@ kind: example
 title: "The sequence $(-1)^k(1 + 1/k)$ is bounded with subsequential limit set exactly $\\{-1, 1\\}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-alternating-sequence, def-subsequential-limit, thm-algebra-of-limits, lem-subsequence-inherits-limit, lem-limit-abs, lem-limit-unique, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-abs-value, def-sequence, def-real-limit, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.6"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "MIT 18.100A, Lecture 9: Limsup, Liminf, and the Bolzano-Weierstrass Theorem"
+      url: "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec92.pdf"
+    - title: "J. Lebl, Basic Analysis I, Limit superior, limit inferior, and Bolzano-Weierstrass"
+      url: "https://www.jirka.org/ra/html/sec_bw.html"
 ---
 
 ## Example

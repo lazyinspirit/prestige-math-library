@@ -4,6 +4,9 @@ kind: definition
 title: "Completely regular spaces and Tychonoff ($T_{3\\frac{1}{2}}$) spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-zero-sets-and-cozero-sets, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        def-continuous-map-top, def-interval, def-subspace-topology-top,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-topological-space,
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 33: The Urysohn Lemma (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-33.pdf"
 pipeline_run: null
 ---
 

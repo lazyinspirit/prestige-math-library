@@ -4,6 +4,9 @@ kind: lemma
 title: "A nondecreasing sequence that is not bounded above diverges to $+\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-monotone-sequence, def-divergence-to-infinity, def-sequence, def-bounded-set, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: lemma
 title: "For $n\\ge2$, the punctured space $\\mathbb{R}^n\\setminus\\{0\\}$ is polygonally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, lem-standard-basis-of-f-n, def-linear-combination-and-span, def-norm-and-normed-space]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Path-connected space"
       url: "https://en.wikipedia.org/wiki/Path-connected_space"
+    - title: "Euclidean space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Euclidean_space"
 pipeline_run: null
 ---
 

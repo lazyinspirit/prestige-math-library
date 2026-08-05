@@ -4,6 +4,9 @@ kind: example
 title: "$\\omega + 1$ as a convergent sequence together with its limit, and, assuming countable choice, $[0, \\omega_1)$, in which every sequence lies inside an at most countable initial segment"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3,
        def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal,
        thm-countable-subsets-of-omega-one-are-bounded, def-cofinal-subset-of-an-ordinal,

@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\mathbb{R}^n$ is polygonally connected, connected, locally path-connected and locally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, thm-path-connected-implies-connected, def-locally-connected, def-metric-ball, def-norm-and-normed-space, def-metric-topology]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Euclidean space"
       url: "https://en.wikipedia.org/wiki/Euclidean_space"
+    - title: "Locally connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Locally_connected_space"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a space in which every sequence has at most one limit is Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-sequence-convergence-top, def-hausdorff-space,
        def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed, def-countable,
        lem-subset-of-countable, lem-countable-iff-surjection-from-n,
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "S. Willard, General Topology, §13"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "Sequential space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sequential_space"
 pipeline_run: null
 ---
 

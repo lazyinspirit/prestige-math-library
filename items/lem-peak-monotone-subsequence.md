@@ -4,6 +4,9 @@ kind: lemma
 title: "Every real sequence has a monotone subsequence (the peak / rising-sun lemma)"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-sequence, def-monotone-sequence, def-real-order, def-complete-ordered-field, def-ordered-field, lem-index-map-grows, thm-recursion, thm-well-ordering-principle, def-nat-order, thm-nat-linear-order, lem-nat-discrete]
 justified_by: []
 aliases: []
@@ -27,6 +30,10 @@ sources:
       url: "https://www.jirka.org/ra/"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Peak Point Lemma (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Peak_Point_Lemma"
+    - title: "The Monotone Subsequence Theorem (Mathonline)"
+      url: "http://mathonline.wikidot.com/the-monotone-subsequence-theorem"
 ---
 
 ## Statement

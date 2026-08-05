@@ -4,6 +4,9 @@ kind: theorem
 title: "Bolzano-Weierstrass: every bounded real sequence has a convergent subsequence"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-peak-monotone-subsequence, cor-monotone-converges-iff-bounded, def-subsequential-limit, def-sequence, def-monotone-sequence]
 justified_by: []
 forward_refs: [cex-unbounded-with-convergent-subsequence]

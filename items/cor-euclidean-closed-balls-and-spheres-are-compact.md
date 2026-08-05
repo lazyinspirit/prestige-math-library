@@ -4,6 +4,9 @@ kind: corollary
 title: "For $n\\ge1$, every Euclidean closed ball and every Euclidean sphere of positive radius is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-euclidean-spheres-and-closed-balls, thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-metric-topology, def-metric-bounded-diameter]
 aliases: []
 landmark: true

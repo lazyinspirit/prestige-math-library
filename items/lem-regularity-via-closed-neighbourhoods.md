@@ -4,6 +4,9 @@ kind: lemma
 title: "A space is regular if and only if every point has a neighbourhood base of closed neighbourhoods, if and only if $x \\in U$ open gives an open $V$ with $x \\in V \\subseteq \\overline{V} \\subseteq U$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-regular-and-t3-spaces, def-neighbourhood-top,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
        def-topological-space]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Regular_space"
     - title: "J. Munkres, Topology, 2nd ed., §31"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 31: The Separation Axioms (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-31.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "A Cauchy sequence with a convergent subsequence converges, to that subsequence’s limit"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-real-limit, def-sequence, def-subsequential-limit, lem-index-map-grows, lem-of-triangle-inequality, lem-rat-embeds-dense, thm-nat-linear-order]
 justified_by: []
 aliases: []

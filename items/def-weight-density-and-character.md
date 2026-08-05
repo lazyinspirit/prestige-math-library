@@ -4,6 +4,9 @@ kind: definition
 title: "Under choice, weight $w(X)$, density $d(X)$, local character $\\chi(x,X)$, and character $\\chi(X)$ as raw cardinal minima and a supremum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topology-basis-subbasis, def-dense-top, def-neighbourhood-top, def-cardinal, def-cardinal-arithmetic, def-axiom-of-choice]
 justified_by: [lem-weight-is-well-defined, lem-density-is-well-defined, lem-character-is-well-defined]
 aliases: []
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
       url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
+    - title: "Cardinal function (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cardinal_function"
 pipeline_run: null
 ---
 

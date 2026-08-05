@@ -4,6 +4,9 @@ kind: theorem
 title: "For a nonempty subset of $\\mathbb{R}^n$ with $n\\ge1$, compactness, closedness and boundedness, pseudocompactness, and attainment of extrema by every continuous real-valued function are equivalent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-pseudocompact-euclidean-subset-is-bounded, lem-pseudocompact-euclidean-subset-is-closed, thm-heine-borel-rn, thm-compactness-under-continuous-maps, def-pseudocompact-space, thm-compactness-agrees-with-metric-compactness]
 aliases: []
 landmark: true

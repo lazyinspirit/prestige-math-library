@@ -4,6 +4,9 @@ kind: counterexample
 title: "The nested open intervals $(0, 1/k)$ have empty intersection"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-nested-open-intervals-nonempty, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, thm-nested-interval-property, def-sequence, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -12,11 +15,6 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
 sources:
   scraped: []
   references:
@@ -57,21 +55,19 @@ that computation is the preceding example on this page.
 
 [L4] Trichotomy of the order on $\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]).
 
-[L5] Nested interval property, for nonempty **closed** bounded intervals ([[thm-nested-interval-property]]).
-
-[L6] The refuted claim: a nested sequence of nonempty bounded open intervals has nonempty intersection.
+[L5] The refuted claim: a nested sequence of nonempty bounded open intervals has nonempty intersection.
 
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 Each $J_j$ is a nonempty bounded open interval and $J_{j+1} \subseteq J_j$, so the family is an instance of the claim, which asserts that its intersection is nonempty. [given, L1, L6]
+1.1 Each $J_j$ is a nonempty bounded open interval and $J_{j+1} \subseteq J_j$, so the family is an instance of the claim, which asserts that its intersection is nonempty. [given, L1, L5]
 
 2.1 Suppose $x$ belonged to every $J_j$. Then $x > 0$, and $x < 1/(j+1)$ for every $j \in \mathbb{N}$. [step 1.1, L1]
 
 3.1 Since $x > 0$, fix a natural $n \ge 1$ with $1/n < x$, and write $n = j + 1$ with $j \in \mathbb{N}$; step 2.1 then gives $x < 1/n$ as well, which trichotomy forbids. [step 2.1, L2, L3, L4]
 
-4.1 So no such $x$ exists: $\bigcap_j J_j = \emptyset$, and the claim is refuted by a family of nonempty bounded open intervals. [step 1.1, step 3.1, L1, L6] ∎
+4.1 So no such $x$ exists: $\bigcap_j J_j = \emptyset$, and the claim is refuted by a family of nonempty bounded open intervals. [step 1.1, step 3.1, L1, L5] ∎
 
 ## Remarks
 

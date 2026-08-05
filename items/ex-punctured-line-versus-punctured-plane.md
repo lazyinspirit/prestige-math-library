@@ -4,6 +4,9 @@ kind: example
 title: "$GL_1(\\mathbb{R})=\\mathbb{R}\\setminus\\{0\\}$ is disconnected, whereas $\\mathbb{R}^2\\setminus\\{0\\}$ is polygonally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-punctured-rn-is-polygonally-connected, cor-connected-subsets-of-the-line, def-connected-space]
 aliases: []
 landmark: false
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "General linear group"
       url: "https://en.wikipedia.org/wiki/General_linear_group"
+    - title: "Connected space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Connected_space"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: remark
 title: "Standing hypotheses on this page: a metric domain, where the target must be metric, and why the compact-open topology is built from metric compactness"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-topology-of-pointwise-convergence, def-topology-of-uniform-convergence,
        def-topology-of-compact-convergence, def-compact-open-topology,
        def-locally-compact-metric-space, def-evaluation-map, def-metric-compactness,
@@ -20,12 +23,6 @@ landmark: false
 short: "conventions of this page"
 verification:
   precheck: n/a
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-03
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -44,13 +41,17 @@ collected here once and then used silently.
 
 **1. "The domain is a metric space" is this page's standing convention, not a
 hypothesis every item needs; each Statement carries exactly what its own proof
-uses.** Where the domain *must* be metric, that is forced rather than chosen: an
-item quantifying over the **compact** subsets of the domain needs a notion of
-compactness, and the only one available at this point in the reading order is
-[[def-metric-compactness]], which is defined for metric spaces. Compactness for
-an arbitrary topological space is developed only later in the reading order, so
-it is unavailable on this page and nothing here anticipates it. The items with a
-metric domain for that reason are
+uses.** Where the domain *must* be metric, the hypothesis is inherited rather
+than decorative: an item quantifying over the **compact** subsets of the domain
+reads compactness through [[def-metric-compactness]], and it does so because
+[[def-compact-open-topology]], the definition this development is built over, is
+stated for a metric $(X,d)$. That restriction is a scope choice of this page and
+not a gap in the library. Compactness for an arbitrary topological space
+([[def-compact-space]]) is developed *earlier* in the reading order and is
+available here; on a metric space the two readings of "compact subset" agree
+([[thm-compactness-agrees-with-metric-compactness]]), so nothing below is
+weakened by taking the metric one. The items with a metric domain for that
+reason are
 [[def-locally-compact-metric-space]],
 [[lem-compact-closed-balls-in-a-locally-compact-metric-space]],
 [[lem-tube-lemma-for-a-compact-metric-factor]], [[def-compact-open-topology]],

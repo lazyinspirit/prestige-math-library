@@ -1,0 +1,34 @@
+# audit-beta/topology-countability-apply 2026-08-05T11:10:09.264Z
+
+## stdout
+A4 is applied for the wave-5 `topology-countability` batch. Everything below was run on disk; the two blockers at the end are real and one of them stops the driver.
+
+## What I applied
+
+**Bulk retag, 73 items, one stage snapshot** (`pre-A4`, taken by the driver):
+73 `provenance` blocks (13 `literature-derived` / 56 `ai-altered` / 4 `ai-generated`, matching the ledger row for row), 4 `generation.role` blocks, and **65 reference URLs across 50 items** with nothing removed. No item carried a legacy `authorship` line, so the retag voided no stamp.
+
+**Two material repairs**, each with its own dedicated pre-edit snapshot, stale `judge`+`audited` stamps deleted, impact closure computed:
+
+- `cor-components-of-open-subsets-of-rn-are-polygonally-connected` — `[L1]` asserted "path-connected, **hence connected**" citing three targets, none of which states the implication; `thm-path-connected-implies-connected` added to `[L1]` and to `deps`, with the matching citation contract entry (without it `--strict` raises `citation-fact-uncontracted`).
+- `ex-countability-profile-of-omega-one` — `$\{\alpha:\alpha<\omega_1\}$` denotes ω₁, not the covering family. Repaired to `$\{\,[0,\beta] : \beta<\omega_1\,\}$ ` rather than A3's illustrative `[0,α)`: `def-order-topology-on-an-ordinal`, which this item declares, defines only `[0,β]` and `(α,β]`, and `thm-ordinal-spaces-and-compactness` writes the same cover the same way.
+
+Both have **0 logical and 0 direct-citation consumers**, recomputed over all 2,767 files. Neither is certified — A6 owes both an independent reading, A7 a targeted rejudge.
+
+**A3 §4c ledger correction applied after re-verifying it myself:** I re-fetched and `pdftotext`'d the UCR notes. A3 is right — there is a section "The Alexandroff one point compactification"; my A2 search missed it on the hyphen. In the same extraction, "hereditar" occurs **zero** times, as do ccc, Sorgenfrey, Cantor cube, Δ-system and ω1, so the added URLs still stand.
+
+## Two things A4 could not close
+
+**1. The A4 gate is red, and A3's fix is scheduled behind it.** `content-policy.mjs --audit` reports 7 errors, all `audit-ledger-alpha-concurrence`. A3 §3 approved these `established-knowledge` rows with `alpha_concurred: false` and routed concurrence to **A6** — but `gates.mjs:229` makes that gate hard at **A4**, so the wave halts before reaching the step that resolves it. Same shape as the trap A3 §2 caught one step later in the same table. Wave-wide it is 8 rows (my 7 + separation's 1). I applied them as approved and did not work around it: setting the flag myself would forge the concurrence. Worth Alpha knowing that all 7 now carry visible URLs, so **none of them needs the waiver the class exists for** — reclassifying may be the truer reading, and that call is Alpha's.
+
+**2. A tool bug, found only because A4 writes provenance.** `content-policy.mjs:117` `referenceUrls` claims to support YAML flow form; its locator requires `references:` to start a line, so a whole-mapping `sources: {…}` line reads as **no URLs at all**. That produced 35 false `source-backed-provenance-uncited` errors here — exactly the flow-style source-backed items, zero block-style ones. **67 items corpus-wide** are written that way. The one-line fix is not mine to make; I normalized this batch's 38 items to the block form SCHEMA §3 prescribes, with a round-trip check, which changes no claim and no rendered page.
+
+## Gates
+
+`precheck` 53/53 · `proof-contract --strict` 0/0 · `finite-smoke` 0 · `risk-report` 0 · `depcheck --pending-audit-ok` exit 0 (my only rows are the 2 expected `published-unaudited`; **no `cited-not-in-deps` anywhere in my 73**) · `fwdcheck`/`extcheck`/`rendercheck`/`prosecheck`/`citecheck`/`depsource`/`audit-manifest` all clean, none mentioning my items · all 39 ledger URLs re-fetched, 39/39 HTTP 200 (16 needed a backoff retry — parallel Betas plus a fast sweep trips Wikipedia's rate limiter, which reads as a dead link if you only look once).
+
+Full record, including old/new text and the derivations, is in `research/audit/wave5-topology-countability.findings.md` under "A4 record".
+
+
+## stderr
+

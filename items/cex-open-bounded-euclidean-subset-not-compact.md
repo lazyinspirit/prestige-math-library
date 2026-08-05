@@ -4,6 +4,9 @@ kind: counterexample
 title: "The open unit ball in $\\mathbb{R}^n$ is bounded and not compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-ball, thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, def-metric-topology, lem-standard-basis-of-f-n]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Open ball"
       url: "https://en.wikipedia.org/wiki/Ball_(mathematics)"
+    - title: "Heine-Borel theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
 pipeline_run: null
 ---
 

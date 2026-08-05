@@ -4,6 +4,9 @@ kind: lemma
 title: "Tube lemma: if $K$ is a compact subset of a metric space $X$, $Z$ is a topological space and $N$ is open in $X \\times Z$ with $K \\times \\{z_0\\} \\subseteq N$, then $K \\times W \\subseteq N$ for some open $W \\ni z_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-product-topology,
        def-metric-topology, def-metrizable-space, def-topological-space,
        def-topology-basis-subbasis, thm-basis-criterion, def-metric-space,

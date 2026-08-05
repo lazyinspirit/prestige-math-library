@@ -4,6 +4,9 @@ kind: theorem
 title: "In a metric space any two separated sets have disjoint open neighbourhoods, so every metrizable space is completely normal"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-metric-space, def-metric-topology, def-metric-ball,
        def-metrizable-space, def-metric-bounded-diameter, thm-metric-closure-characterisation,
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Metric_space"
     - title: "J. Munkres, Topology, 2nd ed., §32"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 32: Normal Spaces (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-32.pdf"
 pipeline_run: null
 ---
 

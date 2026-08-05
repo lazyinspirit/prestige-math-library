@@ -4,6 +4,9 @@ kind: lemma
 title: "The image of a universal net under any map is universal, and a continuous map preserves its limits"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-universal-net, def-net-eventually-and-frequently, thm-continuity-characterised-by-nets]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

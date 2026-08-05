@@ -4,6 +4,9 @@ kind: lemma
 title: "A finite concatenation of straight segments in $\\mathbb{R}^n$ is a continuous path"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-polygonal-path-and-polygonal-connectedness, lem-continuity-is-local-and-pastes, thm-componentwise-limits-and-continuity, def-subspace-topology-top]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "Path-connected space"
       url: "https://en.wikipedia.org/wiki/Path-connected_space"
+    - title: "Pasting lemma (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Pasting_lemma"
+    - title: "Polygonal chain"
+      url: "https://en.wikipedia.org/wiki/Polygonal_chain"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Directed preorders and nets"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-partial-order, def-topological-space]
 aliases: []
 landmark: true
@@ -19,6 +22,12 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Directed set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Directed_set"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "net (nLab)"
+      url: "https://ncatlab.org/nlab/show/net"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "For a nonempty set $X$ and a metric space $(Y,d)$ the uniform metric $\\bar\\rho(f,g) = \\sup_{x} \\min\\{d(f(x),g(x)), 1\\}$ is a metric on $Y^{X}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-metric-space, lem-bounded-remetrisation, def-bounded-set,
        def-complete-ordered-field, lem-sup-unique, def-max-min, lem-finite-set-has-max,
        def-topology-of-pointwise-convergence, lem-metric-nonnegativity,
@@ -16,11 +19,6 @@ short: "uniform metric on $Y^{X}$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -69,8 +67,6 @@ the whole reason the truncation is there.
 [L2] Least-upper-bound property: a nonempty subset of $\mathbb{R}$ bounded above has a least upper bound, which is an upper bound lying below every upper bound, and it is unique ([[def-complete-ordered-field]], [[lem-sup-unique]], [[def-bounded-set]]).
 
 [L3] Order arithmetic: inequalities may be added and a constant added to both sides, in the strict form of [[lem-of-add-order]] and, with the case of equality settled by totality of the order, in the nonstrict form; and $a \le 0$ together with $a \ge 0$ gives $a = 0$ ([[def-ordered-field]], [[def-complete-ordered-field]]).
-
-[L4] The minimum of a two-element set of reals exists, is one of the two elements, and is a lower bound of both ([[lem-finite-set-has-max]], [[def-max-min]]).
 
 ## Proof
 

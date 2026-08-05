@@ -4,6 +4,9 @@ kind: example
 title: "Sierpinski space is $T_0$ and normal but neither $T_1$ nor regular: normality without $T_1$ implies nothing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-hausdorff-space,
        def-interior-closure-boundary-top, def-topological-space]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "J. Munkres, Topology, 2nd ed., §17"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Particular point topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Particular_point_topology"
 pipeline_run: null
 ---
 

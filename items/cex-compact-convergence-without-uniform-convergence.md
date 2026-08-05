@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted: convergence uniformly on every compact subset of $\\mathbb{R}$ implies uniform convergence. The maps $x \\mapsto x/(n+1)$ separate the two"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-topology-of-compact-convergence, def-topology-of-uniform-convergence,
        lem-uniform-convergence-in-the-uniform-metric, lem-uniform-metric-on-a-function-space,
        thm-comparison-of-the-three-function-space-topologies, def-metric-compactness,

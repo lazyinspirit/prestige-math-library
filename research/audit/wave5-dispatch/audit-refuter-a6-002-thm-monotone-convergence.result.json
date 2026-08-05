@@ -1,0 +1,17 @@
+{
+  "role": "audit-refuter",
+  "label": "a6-002-thm-monotone-convergence",
+  "run": "wave5",
+  "runner": "deepseek",
+  "model": "deepseek-v4-pro",
+  "sandbox": "read-only",
+  "started_at": "2026-08-05T12:21:25.234Z",
+  "ended_at": "2026-08-05T12:28:00.873Z",
+  "ms": 395639,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-002-thm-monotone-convergence.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-002-thm-monotone-convergence.prompt.md",
+  "tail": "```\n### FINDING 1 — NONFATAL — location: Remarks 3 and 4\n\nCLAIM AS WRITTEN:\n- (Remark 3) \"this is what makes [[cor-monotone-converges-iff-bounded]] an equivalence rather than a one-sided statement.\"\n- (Remark 4) \"a nondecreasing sequence that is not bounded above diverges to $+\\infty$ ([[lem-monotone-unbounded-diverges]])\"\n\nWHY IT FAILS:\nThese Remarks assert properties of other library items (`cor-monotone-converges-iff-bounded` and `lem-monotone-unbounded-diverges`) that are **not** listed in the item’s dependencies and whose text is not supplied with this audit.  Consequently the claims about them cannot be verified from the given material.  If those items do not exist or do not state what the Remarks imply, the Remarks would be inaccurate.  This does not affect the validity of the theorem’s statement or proof, but it means the Remarks are unverifiable cross‑references.\n\nWHAT WOULD FIX IT:\nEither include the referenced items in the dependencies (so their statements can be checked) or remove the unverifiable cross‑references, limiting the Remarks to facts that follow from the declared dependencies.\n\n---\n\n### Overall assessment\n\nI performed a thorough adversarial reading of the theorem statement, every proof step, and every declared dependency that was quoted verbatim.  In particular I checked:\n\n- the title against the statement (they match exactly);\n- the logical structure of the two cases (nondecreasing / nonincreasing);\n- the application of the least‑upper‑bound property (`def-complete-ordered-field`) and the greatest‑lower‑bound property (`thm-infimum-property`) to assert existence of supremum/infimum;\n- the use of `lem-sup-unique` for uniqueness;\n- the epsilon characterisations `lem-sup-epsilon` and `lem-inf-epsilon` (they are cited correctly and their hypotheses are satisfied);\n- the monotonicity steps together with the definition `def-monotone-sequence`;\n- the algebra that yields the absolute‑value bounds and the appeal to `lem‑of‑abs‑value`;\n- the transition from “for every real ε>0” to the rational‑ε definition of convergence (`def-real-limit` and `def-sequence`), which is logically sound;\n- the absence of any hidden choice principles or missing hypotheses.\n\n**No fatal defects were found.**  The proof is mathematically correct, every step is licensed by the cited dependencies, and the title agrees with what is proved.\n\n0 fatal, 1 nonfatal\n```"
+}

@@ -4,6 +4,9 @@ kind: definition
 title: "The order topology on an ordinal, with the half-open intervals $(\\alpha, \\beta]$ and the initial segments $[0, \\beta]$ as a basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordinal, def-limit-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy,
        lem-omega-least-limit-ordinal, def-topological-space, def-topology-basis-subbasis,
        thm-basis-criterion, def-standard-topologies,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordinal_number"
     - title: "J. Munkres, Topology, 2nd ed., §14 and §10"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "First uncountable ordinal (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
 pipeline_run: null
 ---
 

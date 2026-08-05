@@ -4,6 +4,9 @@ kind: lemma
 title: "Every finite power of an at most countable set is at most countable"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-product-of-countable, thm-induction-principle, def-countable, def-product-topology]
 aliases: []
 landmark: false

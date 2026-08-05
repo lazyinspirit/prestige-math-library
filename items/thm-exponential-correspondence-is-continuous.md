@@ -4,6 +4,9 @@ kind: theorem
 title: "If $f : X \\times Z \\to Y$ is continuous then its transpose $F : Z \\to C(X,Y)$, $F(z)(x) = f(x,z)$, is continuous for the compact-open topology, with no hypothesis on $X$ beyond being metric"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-tube-lemma-for-a-compact-metric-factor, def-compact-open-topology,
        def-product-topology, thm-product-universal-property, def-continuous-map-top,
        thm-continuity-characterisations-top, def-metric-compactness,

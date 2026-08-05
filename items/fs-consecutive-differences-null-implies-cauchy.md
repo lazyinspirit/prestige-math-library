@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if $|x_{k+1} - x_k| \\to 0$ then $(x_k)$ is Cauchy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-limit, def-sequence, def-contractive-sequence, thm-contractive-implies-cauchy, thm-of-square-roots, lem-power-difference-factorisation, lem-power-monotone, lem-power-laws, def-integer-power, lem-of-inverse-positive, cor-archimedean-reciprocal, thm-of-archimedean, lem-cauchy-sequence-bounded, lem-of-abs-value, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 forward_refs: [cex-sqrt-k-differences-null-not-cauchy, cex-strictly-decreasing-gaps-no-limit]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fixed-point_iteration"
     - title: "J. Lebl, Basic Analysis I, §2.4"
       url: "https://www.jirka.org/ra/"
+    - title: "Sequence of Square Roots of Natural Numbers is not Cauchy (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Sequence_of_Square_Roots_of_Natural_Numbers_is_not_Cauchy"
 ---
 
 ## Statement

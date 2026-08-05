@@ -4,6 +4,9 @@ kind: lemma
 title: "In a locally compact metric space every point has arbitrarily small compact closed balls, hence a neighbourhood base of compact sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-locally-compact-metric-space, def-metric-compactness, lem-compactness-is-intrinsic,
        lem-closed-subset-of-a-compact-space-is-compact, def-metric-ball, def-metric-topology,
        thm-metric-open-set-algebra, def-isometry-and-metric-embedding, def-metric-space,

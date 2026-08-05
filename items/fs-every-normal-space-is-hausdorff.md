@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every normal space is Hausdorff, so the $T_1$ hypothesis in $T_4$ is redundant"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-normal-and-t4-spaces, def-hausdorff-space, def-t0-and-t1-spaces,
        def-standard-topologies, def-topological-space, thm-t4-implies-t3]
 justified_by: []

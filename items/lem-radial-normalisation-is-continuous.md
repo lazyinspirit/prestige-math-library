@@ -4,6 +4,9 @@ kind: lemma
 title: "Radial normalisation $x\\mapsto x/\\lVert x\\rVert_2$ is continuous on $\\mathbb{R}^n\\setminus\\{0\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-euclidean-spheres-and-closed-balls]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Sphere"
       url: "https://en.wikipedia.org/wiki/Sphere"
+    - title: "Deformation retract"
+      url: "https://en.wikipedia.org/wiki/Deformation_retract"
 pipeline_run: null
 ---
 

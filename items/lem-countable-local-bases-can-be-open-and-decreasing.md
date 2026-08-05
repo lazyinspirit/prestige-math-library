@@ -4,6 +4,9 @@ kind: lemma
 title: "A countable local base can be chosen open and decreasing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-first-countable-top, def-neighbourhood-top, def-countable, lem-countable-iff-surjection-from-n]
 aliases: []
 proof_strategy: constructive
@@ -14,7 +17,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "First-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First-countable_space"
 pipeline_run: null
 ---
 

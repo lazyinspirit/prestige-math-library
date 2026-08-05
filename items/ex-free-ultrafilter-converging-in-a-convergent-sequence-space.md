@@ -4,6 +4,9 @@ kind: example
 title: "Assuming the ultrafilter lemma, a free ultrafilter on $\\mathbb{N}$ converges to the added point in the one-point convergent-sequence space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-filter, def-filter-convergence-and-cluster-point, thm-ultrafilter-lemma, def-tail-filter-of-a-net, def-ultrafilter, thm-ultrafilter-characterisation]
 aliases: []
 landmark: false

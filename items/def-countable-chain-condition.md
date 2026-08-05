@@ -4,6 +4,9 @@ kind: definition
 title: "The countable chain condition: every pairwise-disjoint family of nonempty open sets is at most countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-countable]
 aliases: [def-ccc]
 landmark: true
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "UCR General Topology Notes"
       url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Countable chain condition (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Countable_chain_condition"
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Dini's theorem: on a compact metric space a nondecreasing sequence of continuous real functions converging pointwise to a continuous limit converges uniformly"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-continuity,
        thm-metric-continuity-characterisations, lem-uniform-convergence-in-the-uniform-metric,
        def-topology-of-uniform-convergence, thm-monotone-convergence,

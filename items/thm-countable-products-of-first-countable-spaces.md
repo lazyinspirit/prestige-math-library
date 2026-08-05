@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, a countable product of first countable spaces is first countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-first-countable-top, def-product-topology, thm-product-of-countable, thm-countable-union-of-countable, def-countable-choice]
 aliases: []
 proof_strategy: constructive
@@ -14,7 +17,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "First-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First-countable_space"
 pipeline_run: null
 ---
 

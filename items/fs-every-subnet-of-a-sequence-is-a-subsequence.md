@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every subnet of a sequence is a subsequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subnet, lem-index-map-grows, def-net-eventually-and-frequently, def-sequence-convergence-top, def-standard-topologies]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "Schlumprecht, Math 655 notes"
       url: "https://people.tamu.edu/~t-schlumprecht/course_notes_math655_23c.pdf"
+    - title: "Subnet (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Subnet_(mathematics)"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

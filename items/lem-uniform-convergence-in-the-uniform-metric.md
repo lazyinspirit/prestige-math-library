@@ -4,6 +4,9 @@ kind: lemma
 title: "Convergence in the uniform metric is exactly uniform convergence: one $N$ serving every point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topology-of-uniform-convergence, lem-uniform-metric-on-a-function-space,
        lem-bounded-remetrisation, def-metric-convergence, def-metric-ball,
        def-metric-space, def-max-min, lem-finite-set-has-max, lem-rat-embeds-dense,

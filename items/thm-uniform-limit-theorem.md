@@ -4,6 +4,9 @@ kind: theorem
 title: "A uniform limit of continuous functions is continuous, so $C(X,Y)$ is closed in $Y^{X}$ under the uniform metric"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topology-of-uniform-convergence, lem-uniform-convergence-in-the-uniform-metric,
        lem-uniform-metric-on-a-function-space, def-continuous-map-top,
        thm-continuity-characterisations-top, def-neighbourhood-top, def-metric-ball,

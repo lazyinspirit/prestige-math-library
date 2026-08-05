@@ -4,6 +4,9 @@ kind: example
 title: "The particular-point topology is $T_0$ and not $T_1$, it is not regular once the set has at least two points, and it is not normal once the set has at least three"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-regular-and-t3-spaces, def-normal-and-t4-spaces, def-hausdorff-space,
        def-interior-closure-boundary-top, thm-closure-characterisation-top,
@@ -15,11 +18,6 @@ short: "particular-point topology in the hierarchy"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -29,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "L. Steen and J. Seebach, Counterexamples in Topology, §8"
       url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "Sierpiński space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sierpi%C5%84ski_space"
 pipeline_run: null
 ---
 
@@ -63,8 +63,6 @@ normal" begin at different sizes.
 [L1] $T_0$: some open set contains exactly one of two distinct points. $T_1$: every singleton is closed. Every Hausdorff space is $T_1$ ([[def-t0-and-t1-spaces]], [[thm-t1-iff-singletons-are-closed]], [[def-hausdorff-space]]).
 
 [L2] Regular: a point and a closed set not containing it have disjoint open supersets. Normal: two disjoint closed sets have disjoint open supersets ([[def-regular-and-t3-spaces]], [[def-normal-and-t4-spaces]]).
-
-[L3] A set is closed exactly when its complement is open, and $\overline{A}$ is the smallest closed superset of $A$ ([[def-interior-closure-boundary-top]], [[thm-closure-characterisation-top]], claim 2).
 
 ## Verification
 

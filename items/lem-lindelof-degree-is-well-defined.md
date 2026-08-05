@@ -4,6 +4,9 @@ kind: lemma
 title: "Under choice, $L(X)$ is a well-defined cardinal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-lindelof-degree-and-cellularity, def-cardinal, thm-well-ordering-theorem, lem-ordinal-trichotomy]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,11 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "D. H. Fremlin, Measure Theory, Chapter 5A", url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "D. H. Fremlin, Measure Theory, Chapter 5A"
+      url: "https://www1.essex.ac.uk/maths/people/fremlin/chap5a.pdf"
 pipeline_run: null
 ---
 

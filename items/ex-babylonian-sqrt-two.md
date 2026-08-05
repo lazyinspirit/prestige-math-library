@@ -4,6 +4,9 @@ kind: example
 title: "The Babylonian sequence $x_1 = 2$, $x_{k+1} = (x_k + 2/x_k)/2$ decreases to $\\sqrt{2}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-monotone-convergence, def-monotone-sequence, thm-of-square-roots, thm-algebra-of-limits, lem-limit-unique, thm-induction-principle, lem-power-monotone, lem-limit-preserves-order, lem-limit-of-tail, thm-recursion, def-sequence, def-real-limit, def-integer-power, def-bounded-set, lem-of-square-positive, lem-of-inverse-positive, cor-of-one-positive, lem-of-add-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

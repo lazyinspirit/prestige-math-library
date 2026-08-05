@@ -4,6 +4,9 @@ kind: false-statement
 title: "Refuted: every first countable space is second countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-first-countable-top, def-second-countable-space, def-standard-topologies, thm-r-uncountable]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,15 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "First-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First-countable_space"
+    - title: "Second-countable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Second-countable_space"
 pipeline_run: null
 ---
 ## Statement

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x_k = \\sqrt{k}$ has $x_{k+1} - x_k \\to 0$ and is not Cauchy"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-consecutive-differences-null-implies-cauchy, thm-of-square-roots, def-real-limit, def-sequence, def-divergence-to-infinity, cor-archimedean-reciprocal, thm-of-archimedean, lem-cauchy-sequence-bounded, lem-power-difference-factorisation, lem-power-monotone, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-integer-power, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §2.4"
       url: "https://www.jirka.org/ra/"
+    - title: "Sequence of Square Roots of Natural Numbers is not Cauchy (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Sequence_of_Square_Roots_of_Natural_Numbers_is_not_Cauchy"
 ---
 
 ## Statement refuted

@@ -4,6 +4,9 @@ kind: lemma
 title: "Every Urysohn space is Hausdorff, every Hausdorff space is $T_1$ and hence $T_0$, and every regular $T_1$ space is Urysohn"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-urysohn-space, def-hausdorff-space, def-regular-and-t3-spaces,
        lem-regularity-via-closed-neighbourhoods, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, def-interior-closure-boundary-top,
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Regular_space"
     - title: "J. Munkres, Topology, 2nd ed., §31"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

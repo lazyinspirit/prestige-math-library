@@ -4,6 +4,9 @@ kind: definition
 title: "Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-sequence, def-real-order, def-complete-ordered-field, def-bounded-set, def-nat-order, thm-nat-linear-order, lem-nat-discrete, thm-induction-principle]
 justified_by: []
 aliases: []

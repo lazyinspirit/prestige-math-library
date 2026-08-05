@@ -4,6 +4,9 @@ kind: lemma
 title: "A net and its tail filter have the same limits and cluster points"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-tail-filter-of-a-net, def-filter-convergence-and-cluster-point, def-net-convergence-and-cluster-point]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

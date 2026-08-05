@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted, assuming countable choice: every Hausdorff space built from ordinal spaces is normal. The deleted Tychonoff plank $((\\omega_1 + 1) \\times (\\omega + 1)) \\setminus \\{(\\omega_1, \\omega)\\}$ is Hausdorff and not normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3,
        def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal,
        thm-countable-subsets-of-omega-one-are-bounded, def-cofinal-subset-of-an-ordinal,
@@ -35,6 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Normal_space"
     - title: "L. Steen and J. Seebach, Counterexamples in Topology, §86-87"
       url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "First uncountable ordinal (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
 pipeline_run: null
 ---
 

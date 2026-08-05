@@ -4,6 +4,9 @@ kind: example
 title: "In the cocountable topology on $\\mathbb{R}$, a closure point outside $[0,1]$ is reached by a net in $[0,1]$ but by no sequence in $[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-closure-characterised-by-nets, def-standard-topologies, def-sequence-convergence-top, def-countable, cor-interval-uncountable]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Cocountable topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cocountable_topology"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

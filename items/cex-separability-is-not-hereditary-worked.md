@@ -4,6 +4,11 @@ kind: counterexample
 title: "Assuming choice, a separable space with a nonseparable subspace: the lower-limit plane and its antidiagonal"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [ex-countability-profile-of-the-lower-limit-plane, fs-separability-is-hereditary]
 aliases: []
 proof_strategy: direct
@@ -14,7 +19,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 ## Statement refuted

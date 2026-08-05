@@ -17,7 +17,11 @@ Artifacts written (the only files this Beta touched):
   items, 322 citation contracts, 211 step contracts, 208 boundary dispositions.
 - this file.
 
-**No item file was modified.** A4 has not run; nothing below has been applied.
+**Status as first written (A1/A2): no item file was modified.** A4 has since run
+on the two repairs A3 approved — `ex-nested-intervals-single-point` and
+`cex-nested-open-intervals-empty` — and both are applied. Everything else below
+records the A1/A2 state and is unapplied. See "A4 — repairs applied" at the end,
+which also supersedes N2 and the gate counts quoted in the coverage statement.
 
 ---
 
@@ -177,6 +181,14 @@ completeness" page has the obligation written down.
 
 *Class: (b) citation precision. Nonfatal. Recommendation: no repair.*
 
+> **Superseded at A3, applied at A4.** A3 adjudicated both facts and approved one
+> item edit for each: add `L8` to step 2.2's tag in
+> `ex-nested-intervals-single-point`, and delete `[L5]` with `L6 -> L5`
+> renumbering in `cex-nested-open-intervals-empty`. Both are applied; see
+> "A4 — repairs applied" below. The addendum's claim that `[L8]` is dead is
+> **withdrawn** and corrected there. The `[L5]` reading stands and A3 reached the
+> same conclusion, but its disposition is now deletion rather than no repair.
+
 - `ex-nested-intervals-single-point` `[L8]` — trichotomy, linking
   `def-complete-ordered-field` and `def-ordered-field`. No step tag cites `L8`.
 - `cex-nested-open-intervals-empty` `[L5]` — the nested interval property for
@@ -199,6 +211,74 @@ gap or force renumbering `L6` in two step tags. Either edit is a material rewrit
 under SCHEMA §3 that voids `verification.judge` and forces a rejudge, for no
 mathematical gain. If Alpha wants the gate green rather than explained, the
 minimal option is the `[L8]` deletion alone, which fixes two of the three errors.
+
+#### N2 addendum — dead fact, not silent reliance (added after the A4 gate halt)
+
+The A4 gate halted the wave on exactly these three `citation-uses` errors, and
+the halt asked the right question: is each fact *dead*, or does some step rely on
+it without saying so? Both are dead. Discharging the second alternative
+explicitly, since the distinction is the whole finding:
+
+- `cex-nested-open-intervals-empty` `[L5]`. The refutation never needs the true
+  nested interval property. Step 1.1 exhibits the family as an instance of the
+  refuted claim; 2.1 assumes a common point; 3.1 contradicts it from the
+  Archimedean property `[L3]` and trichotomy `[L4]`; 4.1 concludes the
+  intersection is empty. A theorem about **closed** intervals licenses no step of
+  that argument. `thm-nested-interval-property` stays a legitimate `deps` entry:
+  the Remarks wikilink it twice, and that is exactly the contrast `[L5]` was
+  written for.
+- `ex-nested-intervals-single-point` `[L8]`. No step needs trichotomy proper.
+  Steps 1.1 and 4.1 weaken `>` to `>=` and use reflexivity of `<=`, which is the
+  definition of the order relation, not its trichotomy. Step 2.2's `n <= j+1` for
+  `j >= n` is in fact strict — `j >= n` gives `j+1 >= n+1 > n` — so `[L4]` applies
+  with no case split, and the written `<=` is merely weaker than what holds. The
+  row is a carry-over from the twin `cex-nested-open-intervals-empty` `[L4]`,
+  which is genuinely consumed at that item's contradiction step 3.1; this example
+  has no contradiction step, so the same row arrived unused.
+
+Neither repair is therefore "add the missing tag". The only honest repairs are
+deletion of the row or nothing.
+
+**Costed and gate-tested (in `/tmp`, no item touched).** All three candidate
+edits pass `precheck.mts`:
+
+| variant | edit | precheck |
+|---|---|---|
+| A | drop `[L5]`, leave the `L4 -> L6` label gap; no step tag changes | PASS |
+| B | drop `[L5]` and renumber `L6 -> L5` in the row and in step tags 1.1, 4.1 | PASS |
+| C | drop `[L8]`; it is last, so no step tag changes | PASS |
+
+A label gap is thus mechanically legal, but it is reader-visible on a published
+page, so B is the better of A/B if `[L5]` goes at all. C additionally leaves
+`def-complete-ordered-field` and `def-ordered-field` declared in `deps` but
+wikilinked nowhere in the body; `depcheck` has no error or warning for a declared
+dependency that no fact cites (only `dep-unresolved`, `self-dep`, cycles and
+`orphan`), so that is legal and I would not also touch `deps` — a dependency edit
+would drag in `impact-audit` closure for a cosmetic gain.
+
+**This is corpus-wide, not a wave-5 defect.** Scanning all 2,067 items that have
+both a Facts & Assumptions block and numbered steps, **31 carry at least one fact
+row that no step cites** — among them `thm-ftc-second-part`, `thm-ratio-test`,
+`thm-root-test`, `thm-integration-by-parts`, `thm-cauchy-schwarz-and-the-euclidean-norm`,
+`cor-bolzano-weierstrass-in-rn` (two rows) and `ex-harmonic-series-diverges`. Two
+of those 31 are mine. No prior level or audit contract in `research/` contains a
+single empty `uses`, so waves 0–4 never met the wall; they simply did not scope
+one of these items.
+
+That changes where the decision belongs. `proof-contract.mjs` requires every
+fact/target link to carry a contract (`citation-fact-uncontracted`) *and* every
+contract to name at least one consuming step (`citation-uses`), so a declared but
+unconsumed fact is **unrepresentable** — the file cannot state the truth about
+the item. Repairing the item is one way out; the other is an explicit, auditable
+disposition in the checker (an `unused_reason` string licensing an empty `uses`,
+with the error retained for the unexplained case), which is a mechanism change
+under `ARCHITECTURE.md` and belongs to the orchestrator and Alpha, not to me. I
+have written that `unused_reason` text into all three citation entries of
+`research/audit/wave5-real-analysis.proof-contracts.json` as documentation only:
+the checker ignores unknown keys and `merge-proof-contracts.mjs` copies entries
+verbatim, so **the gate is still red at 3 errors** and nothing is papered over.
+Every other item in the batch is clean — `--strict` reports 26/26 checked, these
+3 errors, 0 warnings.
 
 ### N3 — `lem-geometric-sequence-null` step 3.5 cites the nonnegative product rule for a possibly negative factor
 
@@ -409,7 +489,16 @@ Nothing is proposed as required. Three optional items, all class (c) or (b):
    `ex-nested-intervals-single-point` — the one edit that would take
    `proof-contract.mjs --strict` from 3 errors to 1. It is a material rewrite for
    a cosmetic gain and I advise against it; recorded so Alpha has the option
-   costed.
+   costed. **Revised after the A4 halt (see the N2 addendum):** if the wave needs
+   the gate green, the complete edit is `[L8]` plus variant B on
+   `cex-nested-open-intervals-empty` (drop `[L5]`, renumber `L6 -> L5` in the row
+   and in step tags 1.1 and 4.1) — all three variants pass `precheck`. Both are
+   material rewrites: delete the stale `verification.judge` and the `audited`
+   stamp on each, and let A6 write `verification.verified` with
+   `scope: published-audit`. Neither is a public-interface change, so no impact
+   closure is due. My recommendation is still not to edit the items, and to take
+   the decision at mechanism level instead, because 31 published items corpus-wide
+   have the same shape and every future wave that scopes one of them stops here.
 
 Owner-only, for the A10 queue: N6 (the book-title/stand-in-URL convention,
 corpus-wide) and, if it is ever thought worth acting on, N1's title wording,
@@ -427,3 +516,330 @@ are all nonfatal and none blocks A3. Exact next action: hand this file, the
 provenance ledger and the proof contract to Alpha for A3 adjudication, and await
 approval before any A4 edit. Working-tree baseline at the time of writing:
 `8a3d814` plus the wave-5 A0 artifacts already present in the tree.
+
+**Update, A4 gate halt.** Substage: A4 halted on the three `citation-uses`
+errors of N2; nothing applied, no item touched. The only write since the
+checkpoint above is documentary: an `unused_reason` string on each of the three
+empty-`uses` citation entries in
+`research/audit/wave5-real-analysis.proof-contracts.json`, plus the N2 addendum
+and the revised proposal 3 in this file. The gate is unchanged at 3 errors,
+26/26 items checked, deliberately — the errors are true statements about two
+published items, and closing them needs either an approved item repair (variant
+B on `cex-nested-open-intervals-empty` and `[L8]` on
+`ex-nested-intervals-single-point`, both precheck-tested) or a checker
+disposition for a fact no step consumes. Both decisions are above a Beta. Exact
+next action: Alpha or the orchestrator picks one of those two routes.
+
+---
+
+## A4 — repairs applied
+
+Two **material** repairs, both adjudicated and approved at A3
+(`research/audit/wave5-A3.md`, the `citation-uses` disposition table). Neither
+was mine to decide; what follows is the application record and the checking I
+did before writing each one.
+
+### R1 — `ex-nested-intervals-single-point`: `[L8]` added to step 2.2's tag
+
+*Class: (b) citation precision. A3 disposition: ADD `L8` to step 2.2's tag;
+proposal 3 (delete `[L8]`) declined outright.*
+
+| | |
+|---|---|
+| old | `... since $\ell_j > 0$. [step 1.1, L3, L4, L5, L6, L7]` |
+| new | `... since $\ell_j > 0$. [step 1.1, L3, L4, L5, L6, L7, L8]` |
+
+Nothing else in the item changed; the fact rows, the prose and every other step
+are untouched.
+
+**I checked A3's mathematics before writing this, and A3 is right — my earlier
+reading was wrong.** Step 2.2 asserts the intermediate `0 < n <= j+1` and infers
+`0 < 1/(j+1) <= 1/n`. `[L4]` (`lem-of-inverse-positive`) states only the strict
+form, `0 < a < b => 0 < 1/b < 1/a`, so it does not license a nonstrict
+conclusion from a nonstrict hypothesis. The missing piece is the disjunction
+`a <= b` iff `a < b` or `a = b` — `def-ordered-field` *defines* `<=` that way and
+its Remark derives the totality of the order from (O1) Trichotomy — followed by
+`[L4]` in the strict case and reflexivity of `=` in the equality case. That is
+exactly `[L8]`. The fact is consumed by the step as written, so the tag is a
+citation repair, not tag padding.
+
+My N2 addendum argued the opposite on the ground that `j >= n` gives
+`j+1 >= n+1 > n`, so the strict inequality holds anyway. That observation is
+true, and it is beside the point: it describes an argument the item does not
+make. The written step routes through `<=`, and a reader checking the written
+step needs the equality case. Correcting a proof's *text* to the strict form
+would have been a second, unapproved edit; the approved repair cites what the
+existing text uses.
+
+**House precedent, which settles that `[L8]` is the conventional citation here
+rather than an invented one.** Three published items in this corpus state the
+same move explicitly, all citing `def-ordered-field`:
+
+- `lem-of-triangle-inequality` `[L2]`: "`lem-of-add-order` states the STRICT
+  forms and only those ...; the nonstrict form used here is those two together
+  with the cases `a = b` and `c = d`, settled by trichotomy, the order being
+  total (`def-ordered-field`)."
+- `lem-finite-sum-laws` `[L4]` and `lem-triangle-inequality-finite` `[L4]` say
+  the same thing in the same words.
+
+This also closes N4 for this item, which had recorded step 2.2's nonstrict use of
+a strict cited claim as an unflagged instance of that pattern. It is now flagged
+the way the library flags it elsewhere. N4's other instances are untouched: they
+are on items outside this repair's licence.
+
+### R2 — `cex-nested-open-intervals-empty`: `[L5]` deleted, `L6` renumbered to `L5`
+
+*Class: (b) citation precision. A3 disposition: DELETE `[L5]`, renumber
+`L6 -> L5` in the fact list and in steps 1.1 and 4.1.*
+
+| | |
+|---|---|
+| removed | `[L5] Nested interval property, for nonempty **closed** bounded intervals ([[thm-nested-interval-property]]).` |
+| renumbered | `[L6] The refuted claim: ...` -> `[L5] The refuted claim: ...` |
+| step 1.1 | `[given, L1, L6]` -> `[given, L1, L5]` |
+| step 4.1 | `[step 1.1, step 3.1, L1, L6]` -> `[step 1.1, step 3.1, L1, L5]` |
+
+The deleted fact was a theorem about **closed** intervals in an item about
+**open** ones; no step cited it and none could. Its content survives untouched in
+the first Remark, which carries its own `[[thm-nested-interval-property]]` link
+and states the contrast the fact was written for. No label gap remains.
+
+**`thm-nested-interval-property` stays in `deps`. The citation rules neither
+require nor permit removing it, and removing it would be a change of a different
+kind.** Precisely:
+
+- **Nothing requires the dep.** `depcheck`'s load-bearing scan
+  (`tools/depcheck.mjs`, the `cited-not-in-deps` block) reads Statement,
+  Statement refuted, Facts & Assumptions, Proof, Refutation, Counterexample and
+  Verification, and **excludes Remarks by design** — its own comment: "Remarks
+  are excluded, since a 'see also' there is not a dependency." After R2 the id
+  appears only in a Remark, so no gate demands a `deps` entry for it.
+- **Nothing forbids the dep either.** SCHEMA §3 makes `deps` a lower bound —
+  "every item this item's statement OR proof logically depends on" — not an exact
+  set, and `depcheck` has no error or warning class for a declared dependency that
+  no fact cites (its hard errors are `dep-unresolved`, `link-unresolved`,
+  `self-dep`, the two cycle classes, the page classes, `published-unaudited` and
+  `b-leaf-content`; its warnings are `orphan` and `multi-home`).
+- **So the question is dispositional, and the answer is leave it.** A `deps` edge
+  drives the rendered page-level Prerequisites closure and the flowchart, so
+  dropping one is a public-interface change that owes `impact-audit` closure —
+  spent for no mathematical gain. A3 gave exactly this instruction for the
+  parallel case (`lem-uniform-metric-on-a-function-space`: "Leave `deps`
+  untouched — an unused dep is not a defect"), and R2 is not licensed to go
+  further than the approved edit.
+
+### Contract changes
+
+`research/audit/wave5-real-analysis.proof-contracts.json`:
+
+- `ex-nested-intervals-single-point`: both `L8` citation entries
+  (`def-complete-ordered-field`, `def-ordered-field`) now carry `uses: ["2.2"]`;
+  the `step-2.2` derivation's `inputs` gains `"L8"`, which
+  `proof-contract.mjs` requires since `explicitTokens` reads the step's tag.
+- `cex-nested-open-intervals-empty`: the `L5 -> thm-nested-interval-property`
+  citation entry is deleted; the `1.1` and `4.1` derivation `inputs` now name
+  `L5` where they named `L6`.
+- All three `unused_reason` keys are removed. They documented a state these
+  repairs eliminate.
+
+**One discrepancy with the dispatch's instruction, resolved by the checker's own
+rule.** The dispatch said to "renumber the old `L6` entry to `L5`, keeping its
+`uses` intact". There was no `L6` **citation** entry to renumber, and correctly
+so: old `[L6]` was the refuted claim itself, a fact with no `[[link]]`, and
+`proof-contract.mjs` requires a citation contract only per fact/link pair
+(`citation-fact-uncontracted`, one per `fact.links` entry). The renumbering that
+was actually due was in the `derivations` `inputs`, where `L6` appeared for steps
+1.1 and 4.1, and that is what I changed. Nothing was dropped.
+
+### Stamps, snapshots, and what A6 still owes
+
+Both repairs are material — the judge sees a changed fact list and changed step
+tags — so on each item I deleted the stale `verification.judge` block
+(`z-ai/glm-5.2`, 2026-07-26) and the obsolete `audited: 2026-07-26` stamp. I
+certify neither repair; A6 writes `verification.verified` with
+`scope: published-audit`.
+
+Dedicated per-item `touchlog` snapshots, taken immediately before each item's
+first edit, into `research/audit/wave5-touches.json`:
+`pre-repair-ex-nested-intervals-single-point` and
+`pre-repair-cex-nested-open-intervals-empty`. Two rows, matching the
+`pre-repair-<id>` convention already in that ledger; the material-repair
+granularity rule, not the bulk-retag one.
+
+Neither repair changes a Statement, a Definition or a public mathematical claim,
+so no `impact-audit` closure is due beyond the baselines those snapshots anchor.
+
+### Gate results
+
+`node tools/proof-contract.mjs research/audit/wave5-real-analysis.proof-contracts.json --strict`:
+
+```
+proof-contract: 0 error(s), 0 warning(s), 26/26 item(s) checked
+```
+
+`node tools/tsx-run.mjs tools/precheck.mts` on the two edited items:
+
+```
+PASS items/ex-nested-intervals-single-point.md (direct)
+PASS items/cex-nested-open-intervals-empty.md (direct)
+
+2 checked, 0 failing — all clean
+```
+
+`node tools/tsx-run.mjs tools/precheck.mts` bare, whole corpus:
+
+```
+2111 checked, 0 failing — all clean
+```
+
+`node tools/depcheck.mjs` reports 11 `published-unaudited` errors, of which two
+are mine and nine belong to sibling batches' A4 repairs. That is the documented
+A4-to-A6 window: the flag `--pending-audit-ok` exists for exactly this caller and
+takes the run to 0 errors, 164 warnings. It closes when A6 certifies.
+
+**`tools/reflow.mts` was run and its output deliberately not kept.** Neither
+repair hard-wrapped anything, so reflow found nothing to fix in the Facts list or
+the numbered steps; its only effect on these two files was to unwrap the
+**Remarks bullets**, which the surrounding published corpus stores wrapped. I
+restored both files from `HEAD` and re-applied only the licensed edits, so the
+diff is exactly the repairs above plus the stale-stamp deletions. Verified after
+the fact: reflow's remaining diff on both files is confined to Remarks prose and
+touches no step and no fact row, and precheck passes on the stored form.
+
+## Checkpoint (context continuity) — A4 applied
+
+Substage: **A4 complete for the two A3-approved item repairs.** Applied: R1 and
+R2 above. Written this stage: `items/ex-nested-intervals-single-point.md`,
+`items/cex-nested-open-intervals-empty.md`,
+`research/audit/wave5-real-analysis.proof-contracts.json`, this file, and two
+snapshot rows in `research/audit/wave5-touches.json`. No provenance ledger row,
+no other batch's file, no other item was touched — the A1 retag pass (proposal 1)
+is still unapplied and belongs to its own bulk pass. Gate state: batch
+proof-contract 0 errors; precheck clean corpus-wide; depcheck in the expected
+pending-audit window. Exact next action: the orchestrator re-merges the batch
+contracts and re-runs the full A4 gate table; then A6 certifies both repaired
+items independently and writes `verification.verified` with
+`scope: published-audit`.
+
+## A4 — provenance retag applied (the pass that was never run)
+
+The A1 determinations were complete in
+`research/audit/wave5-real-analysis.provenance.jsonl` but had never been written
+to disk: none of the 31 items carried a `provenance:` block, which is why
+`content-policy --audit` reported 124 errors against this batch (31 each of
+`provenance-statement-missing`, `provenance-proof-missing`,
+`audit-ledger-mismatch`, `audit-ledger-evidence-mismatch`). Applied now by
+`research/audit/wave5-real-analysis.apply-retag.mjs`, the missing sibling of
+`apply-wave5-fs-retag.mjs`, `apply-wave5-sep-retag.mjs` and
+`wave5-topology-countability.apply-retag.mjs`.
+
+Nothing was re-determined. Every label is read from the ledger row and copied;
+the script fails loudly rather than adapting a label to a gate. Authorised by
+`research/audit/wave5-A3.md` §9, which lists three writes for this batch:
+
+1. **`provenance.statement` / `provenance.proof` on all 31 items**, inserted
+   after `origin:` where SCHEMA §3 and the rest of the corpus keep it.
+2. **`generation:\n  role:` on the three `trivial`-class `ai-generated`
+   statements** — `ex-contractive-sequence-fixed-point` (`example`),
+   `cex-unbounded-with-convergent-subsequence` and
+   `cex-strictly-decreasing-gaps-no-limit` (`counterexample`). Written on those
+   three and nowhere else: `content-policy` errors
+   `generation-on-non-generated-statement` over any other label.
+3. **Nine `sources.references` URLs across seven items** — the §5b set of six,
+   plus `jirka.org/ra/html/sec_seqsandlims.html` on
+   `cor-monotone-converges-iff-bounded` per §4d.
+
+| item | URL added | why |
+|---|---|---|
+| `cor-monotone-converges-iff-bounded` | `https://www.jirka.org/ra/html/sec_seqsandlims.html` | §4d: its three existing URLs are two book-landing pages and an article *about* Rudin, none carrying the clause. This page carries Lebl Thm 2.1.10 verbatim, "A monotone sequence \(\{x_n\}\) is bounded if and only if it is convergent" — I refetched and confirmed the sentence. Without it the row demotes to `semantic-source` |
+| `lem-peak-monotone-subsequence` | `proofwiki.org/wiki/Peak_Point_Lemma`, `mathonline.wikidot.com/the-monotone-subsequence-theorem` | §5b |
+| `def-contractive-sequence`, `thm-contractive-implies-cauchy` | `planetmath.org/contractivesequence` | §5b |
+| `fs-consecutive-differences-null-implies-cauchy`, `cex-sqrt-k-differences-null-not-cauchy` | `proofwiki.org/wiki/Sequence_of_Square_Roots_of_Natural_Numbers_is_not_Cauchy` | §5b |
+| `ex-two-subsequential-limits` | `ocw.mit.edu/.../mit18_100af20_lec92.pdf`, `www.jirka.org/ra/html/sec_bw.html` | §5b |
+
+All nine refetched as written on disk: **HTTP 200, nine of nine.** Titles follow
+the host convention already dominant in the corpus — `X (PlanetMath)` after
+"SNCF metric (PlanetMath)", `X (ProofWiki)`/`X (Mathonline)` after the
+`(Wikipedia)`/`(nLab)` pattern, `J. Lebl, Basic Analysis I, <section>` after the
+41 existing jirka.org entries, and `MIT 18.100A, Lecture 9: ...` after
+"MIT 18.100C, Lecture 11: Power Series". The OCW PDF's own first page reads
+"18.100A: Complete Lecture Notes / Lecture 9: Limsup, Liminf, and the
+Bolzano-Weierstrass Theorem", so the title names the lecture rather than guessing
+from the filename.
+
+**Two ledger URLs deliberately NOT added, offered to Alpha.** Both are gaps
+between a ledger row's `urls` and the item's reader-visible references, and
+neither is in A3's approved set, so adding either would be an unapproved
+frontmatter write:
+
+- `cor-monotone-converges-iff-bounded` — `https://www.jirka.org/ra/` is missing
+  from the item. It is the Lebl **landing page**, and §4d's finding is precisely
+  that a landing page is not evidence. Adding the clause-carrying section instead
+  is what §4d authorises, and that is what was done. Recommend the row's landing
+  URL simply not be read as evidence, as §4d says of the other sixteen.
+- `rem-completeness-routes` — `https://en.wikipedia.org/wiki/Archimedean_property`
+  is recorded as A1 evidence but absent from the item. It is live and
+  clause-carrying; it is just outside the approved §5b set. A one-line addition
+  if Alpha wants it, and no gate depends on it: the item already carries four
+  references and `content-policy` reports it clean.
+
+**D5:** no item in this batch carried a legacy `authorship` key, so nothing was
+deleted. The script implements the deletion and reports a count rather than
+assuming the absence — it printed `0 legacy authorship key(s) removed`.
+
+**Snapshots.** One stage snapshot for the whole pass, not one per item:
+`pre-A4-real-analysis-retag` and `post-A4-real-analysis-retag` in
+`research/audit/wave5-touches.json`. A pure retag changes no mathematical text
+and no `verification:` block, so it voids no judge verdict and needs no
+per-item impact baseline.
+
+**One thing the twice-touched counter will now say, and what it means.**
+`touchlog report --min 2` went from 43 to 45 items, the two new entries being
+`ex-nested-intervals-single-point` and `cex-nested-open-intervals-empty`. Their
+first transition is the A3-approved material repair recorded above; their second
+is **this retag**, not a second repair. No mathematical text in either item
+changed in this pass. The other 29 items show exactly one transition.
+
+### Gate state after the pass
+
+```
+content-policy --audit --ledger wave5-real-analysis.provenance.jsonl wave5-real-analysis.pages.json
+  content-policy: 31 scoped item(s), 0 error(s), 0 warning(s)
+
+content-policy --audit, all four wave-5 ledgers and manifests
+  content-policy: 209 scoped item(s), 0 error(s), 1 warning(s)
+  (the one warning is the function-spaces batch's legacy generated-kind on
+   rem-function-space-conventions, pre-existing and not this batch's)
+
+precheck.mts, bare, whole corpus
+  2111 checked, 0 failing — all clean
+
+depcheck.mjs                     FAIL — 11 published-unaudited, 2 mine, 9 sibling batches'
+depcheck.mjs --pending-audit-ok  OK — exit 0
+```
+
+The four halting codes are gone: 0/31 on each of
+`provenance-statement-missing`, `provenance-proof-missing`,
+`audit-ledger-mismatch`, `audit-ledger-evidence-mismatch`, and 0 on
+`legacy-authorship-retained` and `source-backed-provenance-uncited`, with 3/3
+`ai-generated` statements carrying `generation.role`.
+
+`depcheck`'s 11 `published-unaudited` errors are the documented A4-to-A6 window,
+unchanged in character from the previous checkpoint and not caused by this pass:
+a retag writes no `verification:` block. The two of them that are mine are the
+A3-approved repairs whose stale stamps A4 deleted; the nine others belong to
+sibling batches. `--pending-audit-ok` is the flag for this caller and exits 0.
+The window closes when A6 certifies.
+
+## Checkpoint (context continuity) — A4 retag applied
+
+Substage: **A4 complete for this batch** — both the two approved item repairs
+(previous checkpoint) and the 31-item provenance retag (this one). Written this
+stage: the 31 `items/*.md` frontmatter blocks,
+`research/audit/wave5-real-analysis.apply-retag.mjs`, this file, and two stage
+snapshot rows in `research/audit/wave5-touches.json`. Not touched: the provenance
+ledger, the proof-contract file, any other batch's items or files. Exact next
+action: the orchestrator re-runs the full A4 gate table; A6 then certifies the
+two repaired items independently and writes `verification.verified` with
+`scope: published-audit`, and Alpha disposes of the two unadded ledger URLs
+above.

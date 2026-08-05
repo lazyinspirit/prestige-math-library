@@ -4,6 +4,9 @@ kind: lemma
 title: "Every cluster point of a universal net is a limit of that net"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-universal-net, def-net-convergence-and-cluster-point]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
 pipeline_run: null
 ---
 

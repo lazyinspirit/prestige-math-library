@@ -4,6 +4,9 @@ kind: theorem
 title: "In a metric space every closed set is a zero set and a $G_\\delta$, and the distance function separates a point from a closed set, so every metrizable space is Tychonoff and perfectly normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-metric-spaces-are-completely-normal, def-completely-regular-and-tychonoff-spaces,
        def-completely-normal-and-perfectly-normal-spaces, def-zero-sets-and-cozero-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-metric-bounded-diameter,
@@ -35,6 +38,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Tychonoff_space"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Metrizable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Metrizable_space"
+    - title: "Gδ set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/G%CE%B4_set"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Euclidean spheres and closed balls as subspaces of $\\mathbb{R}^n$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-norm-and-normed-space, def-subspace-topology-top, def-metric-ball, lem-metrics-on-rn]
 aliases: []
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "Euclidean space"
       url: "https://en.wikipedia.org/wiki/Euclidean_space"
+    - title: "Sphere"
+      url: "https://en.wikipedia.org/wiki/Sphere"
 pipeline_run: null
 ---
 

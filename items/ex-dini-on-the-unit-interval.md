@@ -4,6 +4,9 @@ kind: example
 title: "Dini's theorem applied to a nondecreasing sequence of piecewise linear approximations on $[0,1]$, and what fails when the limit is not continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-dini, lem-uniform-convergence-in-the-uniform-metric,
        def-topology-of-uniform-convergence, def-metric-compactness, thm-heine-borel-rn,
        def-interval, lem-continuity-is-local-and-pastes, lem-real-line-is-a-metric-space,

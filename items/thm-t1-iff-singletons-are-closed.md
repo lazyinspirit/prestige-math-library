@@ -4,6 +4,9 @@ kind: theorem
 title: "A space is $T_1$ if and only if every singleton is closed, if and only if every finite subset is closed, if and only if its topology contains the cofinite topology"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-t0-and-t1-spaces, def-topological-space, def-standard-topologies,
        def-neighbourhood-top, def-countable]
 justified_by: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cofiniteness"
     - title: "J. Munkres, Topology, 2nd ed., §17"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 17: Closed Sets and Limit Points (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-17.pdf"
 pipeline_run: null
 ---
 

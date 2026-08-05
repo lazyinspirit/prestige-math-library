@@ -4,6 +4,9 @@ kind: lemma
 title: "A filter and its canonical derived net have the same limits and cluster points"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-net-derived-from-a-filter, def-filter-convergence-and-cluster-point, def-net-convergence-and-cluster-point]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
 pipeline_run: null
 ---
 

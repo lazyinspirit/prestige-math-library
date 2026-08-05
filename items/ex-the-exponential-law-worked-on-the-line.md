@@ -4,6 +4,9 @@ kind: example
 title: "The map $(x,z) \\mapsto x \\cdot z$ on $\\mathbb{R} \\times \\mathbb{R}$ and its transpose $z \\mapsto (x \\mapsto x \\cdot z)$ traced through the exponential law"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-the-exponential-law, thm-exponential-correspondence-is-continuous,
        thm-evaluation-is-continuous-on-a-locally-compact-metric-domain,
        def-compact-open-topology, def-locally-compact-metric-space, def-evaluation-map,

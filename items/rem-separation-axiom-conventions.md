@@ -4,6 +4,9 @@ kind: remark
 title: "Conventions on this page, and the one implication of the classical chain that is not available at this point in the reading order"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-urysohn-space,
        def-regular-and-t3-spaces, def-completely-regular-and-tychonoff-spaces,
        def-normal-and-t4-spaces, def-completely-normal-and-perfectly-normal-spaces,
@@ -33,6 +36,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Urysohn%27s_lemma"
     - title: "J. Munkres, Topology, 2nd ed., §31-33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Urysohn and completely Hausdorff spaces (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Urysohn_and_completely_Hausdorff_spaces"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
+    - title: "R. Gardner, Introduction to Topology, notes on Munkres Section 33: The Urysohn Lemma (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-33.pdf"
 pipeline_run: null
 ---
 

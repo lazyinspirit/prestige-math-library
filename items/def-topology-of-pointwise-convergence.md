@@ -4,6 +4,9 @@ kind: definition
 title: "The topology of pointwise convergence on $Y^{X}$, which is the product topology, and its restriction to $C(X,Y)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-product-topology, def-initial-and-final-topology, def-subspace-topology-top,
        def-topological-space, def-topology-basis-subbasis, thm-basis-criterion,
        def-continuous-map-top]

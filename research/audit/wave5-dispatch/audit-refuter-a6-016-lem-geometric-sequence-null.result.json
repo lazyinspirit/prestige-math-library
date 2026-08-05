@@ -1,0 +1,17 @@
+{
+  "role": "audit-refuter",
+  "label": "a6-016-lem-geometric-sequence-null",
+  "run": "wave5",
+  "runner": "deepseek",
+  "model": "deepseek-v4-pro",
+  "sandbox": "read-only",
+  "started_at": "2026-08-05T12:30:22.247Z",
+  "ended_at": "2026-08-05T12:39:56.737Z",
+  "ms": 574490,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-016-lem-geometric-sequence-null.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-refuter-a6-016-lem-geometric-sequence-null.prompt.md",
+  "tail": "I have adversarially read the item `lem-geometric-sequence-null` against every dependency quoted in the prompt.  The proof is mathematically sound; the title matches what is proved; the cases are exhaustive; and no choice principle beyond the ambient foundational axioms is silently used.  I record two nonfatal findings below.\n\n---\n### FINDING 1 — NONFATAL — location: step 3.5\nCLAIM AS WRITTEN: “use [L7] to fix a natural n ≥ 1 with M/h' < n; then M ≤ n h', since multiplying M/h' ≤ n by h' > 0 preserves the inequality. [step 2.3, L7, L9, choose]”\n\nWHY IT FAILS: The step cites **[L9]** (`prop-of-multiply-inequalities`) as the justification for multiplying the inequality by `h' > 0`.  The text of `prop-of-multiply-inequalities` is  \n> “If 0 < a < b and 0 < c < d then ac < bd. If 0 ≤ a ≤ b and 0 ≤ c ≤ d then ac ≤ bd.”  \n\nThis statement only licenses the inference when **all** quantities are non‑negative.  Here `M` is an arbitrary real number, so `M/h'` may be negative; therefore [L9] does **not** apply directly.  The inference itself is mathematically correct (it follows from the ordered‑field axioms, part of the item’s environment via `def‑ordered‑field`), but the specific citation given does not support the step as written.  A competent reader can close the gap immediately, making the defect citational rather than logical.\n\nWHAT WOULD FIX IT: Replace the citation [L9] with a reference to the basic ordered‑field fact “if a ≤ b and c > 0 then ac ≤ bc” (or split into the two cases `M/h' ≥ 0` and `M/h' < 0`).  The smallest change is simply adjusting the justification.\n\n---\n### FINDING 2 — NONFATAL — location: Remark 3 (“Where this is used”)\nCLAIM AS WRITTEN: “Claim 1 supplies the null sequence c^{k} that makes a contractive sequence Cauchy ([[thm-contractive-implies-cauchy]]) and the null sequence (1/10)^n that identifies the limit of the decimal truncations of √2 ([[cex-cauchy-rationals-no-rational-limit]]).”\n\nWHY IT FAILS: This remark asserts how two **other** items in the library use the present lemma.  The text of those items is not included in the dependencies provided for this dispatch, so the claim cannot be verified.  The adversarial‑reading protocol explicitly warns that such remarks are a frequent source of falsehoods and instructs the reader to say so rather than pass silently.\n\nWHAT WOULD FIX IT: Provide the full text of the referenced items for verification, or remove the unverifiable usage claims.  (The mathematical content of the lemma’s own statement and proof is unaffected.)\n\n---\n**0 fatal, 2 nonfatal**"
+}

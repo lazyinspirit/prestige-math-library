@@ -4,6 +4,9 @@ kind: example
 title: "$C([0,1], \\mathbb{R})$ is complete, and on it the uniform metric and the supremum metric induce the same topology"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-uniform-metric-on-a-function-space, def-topology-of-uniform-convergence,
        thm-function-space-is-complete-for-a-complete-target, thm-uniform-limit-theorem,
        lem-sup-metric-is-a-metric, thm-extreme-value-metric, def-metric-compactness,

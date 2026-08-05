@@ -4,6 +4,9 @@ kind: definition
 title: "The compact-open topology on $C(X,Y)$ for a metric domain $X$, with subbasis $S(K,V) = \\{f : f[K] \\subseteq V\\}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-topology,
        def-metrizable-space, def-continuous-map-top, def-topological-space,
        def-topology-basis-subbasis, thm-basis-criterion, def-metric-space,

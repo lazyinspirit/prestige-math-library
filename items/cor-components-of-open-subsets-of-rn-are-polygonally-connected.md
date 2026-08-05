@@ -4,17 +4,15 @@ kind: corollary
 title: "Every connected component of an open subset of $\\mathbb{R}^n$ is open and polygonally connected"
 status: published
 origin: session
-deps: [thm-open-connected-subsets-of-rn-are-polygonally-connected, def-metric-ball, def-norm-and-normed-space, lem-euclidean-polygonal-paths-are-continuous, def-connected-component-and-quasicomponent]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-open-connected-subsets-of-rn-are-polygonally-connected, def-metric-ball, def-norm-and-normed-space, lem-euclidean-polygonal-paths-are-continuous, thm-path-connected-implies-connected, def-connected-component-and-quasicomponent]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
 sources:
   scraped: []
   references:
@@ -31,7 +29,7 @@ Every connected component of an open subset $U\subseteq\mathbb{R}^n$ is open in 
 
 **Given:** An open subset $U\subseteq\mathbb{R}^n$ and a connected component $C$ of $U$.
 
-[L1] A Euclidean ball is path-connected, hence connected: the norm triangle inequality keeps every straight segment in the ball, and the segment is continuous ([[def-metric-ball]], [[def-norm-and-normed-space]], [[lem-euclidean-polygonal-paths-are-continuous]]).
+[L1] A Euclidean ball is path-connected, hence connected: the norm triangle inequality keeps every straight segment in the ball, the segment is continuous, and every path-connected space is connected ([[def-metric-ball]], [[def-norm-and-normed-space]], [[lem-euclidean-polygonal-paths-are-continuous]], [[thm-path-connected-implies-connected]]).
 
 [L2] A component is the largest connected subset containing each of its points ([[def-connected-component-and-quasicomponent]]).
 

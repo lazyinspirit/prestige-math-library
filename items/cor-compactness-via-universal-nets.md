@@ -4,6 +4,9 @@ kind: corollary
 title: "Assuming the ultrafilter lemma, a space is compact if and only if every universal net converges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-every-net-has-a-universal-subnet, lem-universal-net-cluster-points-are-limits, thm-compactness-via-nets-filters-and-ultrafilters, thm-net-cluster-point-iff-convergent-subnet]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Boolean prime ideal theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Boolean_prime_ideal_theorem"
 pipeline_run: null
 ---
 

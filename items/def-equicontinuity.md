@@ -4,6 +4,9 @@ kind: definition
 title: "Equicontinuity at a point, uniform equicontinuity, and pointwise boundedness of a family of maps between metric spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-metric-space, def-metric-ball, def-metric-continuity,
        def-metric-uniform-continuity, def-metric-bounded-diameter, def-metrizable-space,
        def-topology-of-pointwise-convergence, def-metric-topology,

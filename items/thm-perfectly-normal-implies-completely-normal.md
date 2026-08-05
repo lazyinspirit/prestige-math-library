@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, every perfectly normal space is completely normal: separated sets in a normal space whose open sets are all $F_\\sigma$ can be separated by disjoint open sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-g-delta-and-f-sigma-in-a-topological-space,
        lem-normality-via-shrinking, def-interior-closure-boundary-top,
@@ -30,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separated_sets"
     - title: "R. Engelking, General Topology, §1.5"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "Gδ set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/G%CE%B4_set"
 pipeline_run: null
 ---
 

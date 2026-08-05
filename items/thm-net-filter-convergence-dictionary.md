@@ -4,6 +4,9 @@ kind: theorem
 title: "The tail-filter and derived-net constructions preserve convergence and cluster points in both directions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-tail-filter-preserves-net-convergence-and-cluster-points, lem-filter-derived-net-preserves-convergence-and-cluster-points]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "WVU Math 581 Topology I"
       url: "https://math.wvu.edu/~jwojciec/teaching_files/2024_Spring-581/index.html"
+    - title: "Net (mathematics) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Net_(mathematics)"
+    - title: "Filter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Filter_(set_theory)"
 pipeline_run: null
 ---
 

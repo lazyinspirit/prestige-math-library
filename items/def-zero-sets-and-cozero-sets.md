@@ -4,6 +4,9 @@ kind: definition
 title: "Zero sets and cozero sets of continuous real-valued functions"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-topological-space, def-continuous-map-top, thm-continuity-characterisations-top,
        def-metrizable-space, lem-real-line-is-a-metric-space, def-interval,
        def-subspace-topology-top, def-g-delta-and-f-sigma-in-a-topological-space,
@@ -27,7 +30,7 @@ sources:
     - title: "Cozero set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cozero_set"
     - title: "L. Gillman and M. Jerison, Rings of Continuous Functions, Ch. 1"
-      url: "https://en.wikipedia.org/wiki/Rings_of_Continuous_Functions"
+      url: "https://link.springer.com/book/10.1007/978-1-4615-7819-2"
 pipeline_run: null
 ---
 

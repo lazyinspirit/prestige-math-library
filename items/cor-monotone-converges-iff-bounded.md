@@ -4,6 +4,9 @@ kind: corollary
 title: "A monotone sequence converges if and only if it is bounded"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-monotone-convergence, lem-convergent-implies-bounded, def-monotone-sequence, def-bounded-set, def-sequence, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.3"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "J. Lebl, Basic Analysis I, Sequences and limits (Theorem 2.1.10)"
+      url: "https://www.jirka.org/ra/html/sec_seqsandlims.html"
 ---
 
 ## Statement

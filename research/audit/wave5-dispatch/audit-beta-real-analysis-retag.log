@@ -1,0 +1,65 @@
+# audit-beta/real-analysis-retag 2026-08-05T11:58:18.449Z
+
+## stdout
+A4 retag applied. The determination was already correct in the ledger; the write is now on disk.
+
+## What I did
+
+Wrote `research/audit/wave5-real-analysis.apply-retag.mjs` — the missing sibling of the three existing scripts — and ran it under one stage `touchlog` snapshot pair (`pre-A4-real-analysis-retag` / `post-A4-real-analysis-retag`), not per-item. Nothing was re-derived: every label is copied from its ledger row, and the script throws rather than adapting a label to a gate.
+
+Per `wave5-A3.md` §9, which authorises three writes for this batch:
+
+- **provenance on all 31 items**, inserted after `origin:` per SCHEMA §3;
+- **`generation: role:` on the 3 `trivial`-class `ai-generated` statements** (`ex-contractive-sequence-fixed-point` → `example`; the two `cex-` → `counterexample`) — written there and nowhere else, since `content-policy` errors on that block over any other label;
+- **9 approved `sources.references` URLs across 7 items** — the §5b set of six, plus `jirka.org/ra/html/sec_seqsandlims.html` on `cor-monotone-converges-iff-bounded` per §4d, without which that row demotes to `semantic-source`. I refetched that page and confirmed Lebl Thm 2.1.10 carries the clause verbatim. All nine returned **HTTP 200** as written on disk.
+
+D5: no item carried a legacy `authorship` key; the script implements the deletion and reported `0 legacy authorship key(s) removed` rather than assuming it.
+
+## Verbatim
+
+```
+31/31 item(s) changed — 31 newly tagged, 3 generation.role, 9 url(s) added, 0 legacy authorship key(s) removed
+
+scope items:                    31
+provenance-statement-missing:   0
+provenance-proof-missing:       0
+audit-ledger-mismatch:          0
+audit-ledger-evidence-mismatch: 0
+legacy-authorship-retained:     0
+source-backed-provenance-uncited: 0
+ai-generated with generation.role: 3/3
+
+$ node tools/content-policy.mjs --audit --ledger …wave5-real-analysis.provenance.jsonl …pages.json
+content-policy: 31 scoped item(s), 0 error(s), 0 warning(s)        [exit 0]
+
+$ node tools/content-policy.mjs --audit  (all four wave-5 ledgers + manifests)
+content-policy: 209 scoped item(s), 0 error(s), 1 warning(s)       [exit 0]
+
+$ node tools/tsx-run.mjs tools/precheck.mts
+2111 checked, 0 failing — all clean                                [exit 0]
+
+$ node tools/depcheck.mjs                                          [exit 1]
+$ node tools/depcheck.mjs --pending-audit-ok
+OK — no cycles, all references resolve, no draft items on published pages   [exit 0]
+```
+
+The one wave-wide warning is the function-spaces batch's pre-existing `generated-kind` on `rem-function-space-conventions`, not mine.
+
+## Two things to flag
+
+**`depcheck` bare does not exit 0, and cannot yet.** It reports 11 `published-unaudited` errors — the documented A4→A6 window. Two are mine (the A3-approved repairs whose stale stamps A4 deleted), nine belong to sibling batches. A retag writes no `verification:` block, so this pass neither caused nor changed any of them; only 2 of the 164 depcheck lines touch my items at all. `--pending-audit-ok` is the flag for this caller and exits 0.
+
+**`touchlog report --min 2` will now read 45, up from 43.** The two new entries are `ex-nested-intervals-single-point` and `cex-nested-open-intervals-empty`; their second transition is *this retag*, not a second repair. No mathematical text in either changed in this pass. The other 29 show one transition each.
+
+## For Alpha
+
+Two ledger URLs recorded as A1 evidence are absent from their items and I did **not** add them, since neither is in A3's approved set:
+
+- `cor-monotone-converges-iff-bounded` — `https://www.jirka.org/ra/`, the Lebl **landing page**. §4d's whole finding is that a landing page is not evidence; I added the clause-carrying section instead.
+- `rem-completeness-routes` — `https://en.wikipedia.org/wiki/Archimedean_property`, live and clause-carrying, just outside §5b. A one-line addition if Alpha wants it; no gate depends on it.
+
+Written this stage: the 31 item frontmatter blocks, the applier script, `research/audit/wave5-real-analysis.findings.md`, and two snapshot rows in `wave5-touches.json`. Not touched: the provenance ledger, the proof-contract file, any other batch's files.
+
+
+## stderr
+

@@ -4,6 +4,9 @@ kind: example
 title: "Arens space $S_2$ is sequential but not Fréchet–Urysohn"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-frechet-urysohn-and-sequential-spaces, def-sequence-convergence-top, thm-closure-characterisation-top, lem-finite-set-has-max, thm-well-ordering-principle, thm-recursion]
 aliases: []
 landmark: false
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "Arens' space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sequential_space"
+    - title: "D. Ma, A note about the Arens space (Dan Ma's Topology Blog)"
+      url: "https://dantopology.wordpress.com/2010/08/18/a-note-about-the-arens-space/"
+    - title: "D. Ma, Sequential spaces, I (Dan Ma's Topology Blog)"
+      url: "https://dantopology.wordpress.com/2010/06/21/sequential-spaces-i/"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Contractive sequence: $|x_{k+2} - x_{k+1}| \\le c\\,|x_{k+1} - x_k|$ for a fixed $0 < c < 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-sequence, def-real-order, lem-of-abs-value]
 justified_by: []
 forward_refs: [ex-contractive-sequence-fixed-point, cex-strictly-decreasing-gaps-no-limit]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fixed-point_iteration"
     - title: "R. Bartle and D. Sherbert, Introduction to Real Analysis, 4th ed., §3.5 (contractive sequences)"
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
+    - title: "Contractive sequence (PlanetMath)"
+      url: "https://planetmath.org/contractivesequence"
 ---
 
 ## Definition

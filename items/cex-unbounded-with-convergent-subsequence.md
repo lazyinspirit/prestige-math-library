@@ -4,6 +4,11 @@ kind: counterexample
 title: "The sequence $1, 1, 2, 1, 3, 1, 4, \\dots$ is unbounded and has a convergent subsequence"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-convergent-subsequence-implies-bounded, lem-alternating-sequence, def-subsequential-limit, def-sequence, def-bounded-set, def-real-limit, lem-convergent-implies-bounded, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, thm-bolzano-weierstrass, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

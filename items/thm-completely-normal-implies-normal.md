@@ -4,6 +4,9 @@ kind: theorem
 title: "Every completely normal space is normal, and every perfectly normal space is normal"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-normal-and-t4-spaces,
        def-separated-sets, def-interior-closure-boundary-top,
        thm-closure-characterisation-top, def-topological-space]

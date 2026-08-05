@@ -4,6 +4,9 @@ kind: theorem
 title: "A normal $T_1$ space is regular, hence $T_3$, hence Urysohn, Hausdorff, $T_1$ and $T_0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, lem-urysohn-sits-between-hausdorff-and-regular-plus-t1,
        def-hausdorff-space, def-urysohn-space, def-topological-space]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
     - title: "J. Munkres, Topology, 2nd ed., §32"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Urysohn and completely Hausdorff spaces (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Urysohn_and_completely_Hausdorff_spaces"
 pipeline_run: null
 ---
 

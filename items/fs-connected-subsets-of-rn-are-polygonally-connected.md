@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every connected subset of $\\mathbb{R}^n$ is polygonally connected"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-euclidean-spheres-are-path-connected, def-polygonal-path-and-polygonal-connectedness, def-norm-and-normed-space, def-euclidean-inner-product]
 aliases: []
 landmark: false
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "Sphere"
       url: "https://en.wikipedia.org/wiki/Sphere"
+    - title: "Convex set"
+      url: "https://en.wikipedia.org/wiki/Convex_set"
 pipeline_run: null
 ---
 

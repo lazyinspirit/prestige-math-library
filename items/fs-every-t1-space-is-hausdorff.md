@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every $T_1$ space is Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed, def-hausdorff-space,
        def-standard-topologies, def-countable, thm-r-uncountable, def-topological-space,
        lem-urysohn-sits-between-hausdorff-and-regular-plus-t1]

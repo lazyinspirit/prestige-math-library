@@ -4,6 +4,9 @@ kind: false-statement
 title: "Refuted: every separable space is second countable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-separable-space, def-second-countable-space, def-interval, thm-basis-criterion, thm-rationals-countable, lem-rat-embeds-dense, thm-r-uncountable, lem-countable-iff-surjection-from-n]
 aliases: []
 proof_strategy: direct
@@ -14,7 +17,13 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Lower limit topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Lower_limit_topology"
 pipeline_run: null
 ---
 ## Statement

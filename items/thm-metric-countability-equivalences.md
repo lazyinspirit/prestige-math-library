@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, a metrizable space is second countable if and only if it is separable if and only if it is Lindelöf"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-metrizable-space, def-metric-topology, def-second-countable-space, def-separable-space, def-compactness-variants, thm-second-countable-implies-lindelof, def-countable-choice, thm-countable-union-of-countable]
 aliases: []
 landmark: true
@@ -15,7 +18,11 @@ verification:
     verdict: pass
     date: 2026-07-31
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "UCR General Topology Notes", url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
 pipeline_run: null
 ---
 

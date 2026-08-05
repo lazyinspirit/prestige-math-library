@@ -4,6 +4,9 @@ kind: example
 title: "The $1$-Lipschitz maps of a metric space into $\\mathbb{R}$ form a uniformly equicontinuous family, and the distance functions $x \\mapsto d(x,A)$ all belong to it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-equicontinuity, def-lipschitz-holder-contraction, lem-distance-to-set-is-lipschitz,
        def-metric-bounded-diameter, def-metric-uniform-continuity,
        lem-real-line-is-a-metric-space, def-metrizable-space, def-metric-space,

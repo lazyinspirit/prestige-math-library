@@ -1,0 +1,26 @@
+# orchestrator/A3-judgment 2026-08-05T10:55:48.465Z
+
+## stdout
+A3 adjudication complete. Receipt at `research/audit/wave5-A3.md`.
+
+## What I found
+
+**The decisive finding is one three of four Betas got wrong.** They recommended "no repair" for declared-but-unconsumed facts, reasoning the residual `proof-contract --strict` errors were an honest signal not worth a material edit. But `tools/gates.mjs` makes that gate `required: false` at A2 and **hard at A4** — and `proof-contract.mjs` errors on an empty `uses` (line 131) *and* on omitting the contract (line 157), so there is no way to pass A4 while leaving the text alone. I ran the merged contract myself: **10 errors, 0 warnings, 155/155 items**, all `citation-uses`, in 6 items. Following their recommendation would have halted the driver at the next step.
+
+**F1 confirmed as a falsehood, repair approved.** `rem-function-space-conventions:51` and `thm-the-exponential-law:106` tell the reader the library defines compactness only for metric spaces and lacks a general tube lemma. Both exist, published, on `compactness.md`, and *earlier* — `lem-tube-lemma-for-a-compact-metric-factor` declares the general lemma in `deps` with no `forward_refs`. Two items on the same page already say the opposite. `rem-function-space-conventions` carries a `published-audit` stamp from 2026-08-03 that missed it.
+
+**URL sweep (nothing in the driver does this):** all **129** ledger URLs return HTTP 200 — wave 3's dead-link rate does not recur. But liveness isn't correctness: I downloaded Fremlin §5A4 and the ETSU Munkres notes and confirmed the quoted clauses verbatim, and found **one** `exact-source` row (`cor-monotone-converges-iff-bounded`) whose three URLs are all book-landing pages carrying no statement. I located the clause-carrying replacement (`jirka.org/ra/html/sec_seqsandlims.html`, verbatim) rather than just demoting it.
+
+**One Beta claim corrected:** the UCR notes *do* cover the one-point compactification (lines 6208–6275, "The Alexandroff one point compactification") — the Beta searched the hyphenated spelling. Its other five absence claims check out.
+
+**Three repairs approved beyond what the Betas proposed**, where the text as written is false rather than merely incomplete — most importantly `cor-components-of-open-subsets-of-rn-are-polygonally-connected`, whose `[L1]` asserts "path-connected, **hence** connected" citing three items none of which states the implication, with the inference load-bearing at step 1.1. Its sibling declares the right target for the identical step.
+
+I also scanned all 2,767 item files: all 8 `ai-generated` statements have **zero** consumers, and `def-interval` has exactly 338.
+
+**Not decided here:** the 8 `established-knowledge` rows need Alpha's concurrence per owner rule, so I routed them to A6 rather than substituting my judgment — with one ledger fix required at A4, since E1 is recorded `escalated_to_alpha: false` while its findings file calls it escalated.
+
+Net: 209 items retag as a bulk pure-retag pass, **11 material repairs**, and A4 must regenerate the contracts to 0 strict errors before its gate run.
+
+
+## stderr
+
