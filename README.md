@@ -24,13 +24,20 @@ the app repo). This repo never runs a server; GitHub is backup and review only.
   stable IDs, dependency edges, license/attribution): **TBD — see SCHEMA.md
   once settled.** Do not add content items until the schema is fixed.
 - `explainer/` — reader-facing explainers about how the library is built, served
-  through the same bind mount as the content. `build-workflow.html` animates the
-  per-level build of `LEVELS.md`, step 0 to 10; it is a self-contained document
-  with no build step and no network fetches, so saving it is the deploy.
-  `explainer/INTEGRATION.md` has the app-side route and the `/library` link;
-  `node explainer/serve.mjs` previews it on `localhost:3000` with nothing
-  installed. It contains no item text and no draft mathematics, and it is not
-  content: no gate reads it and it carries no frontmatter.
+  through the same bind mount as the content. Two self-contained animated pages,
+  each one file with no build step and no network fetches, so saving one is the
+  deploy: `build-workflow.html` animates the per-level build of `LEVELS.md`, step
+  0 to 10, at low magnification; `authoring-and-repair.html` animates a single
+  item at high magnification — one real proof authored, stratified into phases by
+  `precheck`, rejected by a judge, adjudicated, repaired, and rejudged — and runs
+  56 seconds so it can also be filmed. `explainer/INTEGRATION.md` has the app-side
+  routes and the `/library` links; `node explainer/serve.mjs` previews both on
+  `localhost:3000` with nothing installed. `explainer/render-video.mjs` captures
+  either page to an MP4 (H.264 / yuv420p / faststart, the profile X accepts)
+  through the page's `?film=1` seek hook; it needs puppeteer and ffmpeg-static
+  installed *somewhere*, passed with `--modules`, and nothing is added to this
+  repository. The pages contain no item text and no draft mathematics, and they
+  are not content: no gate reads them and they carry no frontmatter.
 
 ## Provenance conventions (settled)
 

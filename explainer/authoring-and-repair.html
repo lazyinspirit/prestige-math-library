@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Authoring a proof, and repairing one — the phase-stratified format</title>
+<meta name="description" content="A 56-second animated walkthrough of one real library item: how a proof is authored, how precheck stratifies it into phases, how a judge rejection is adjudicated, and how a repair re-stratifies the graph." />
+<style>
+/* ---------------------------------------------------------------------------
+   COMPANION to build-workflow.html, and deliberately its opposite in scope.
+   That page is a whole level at low magnification; this one is a single item at
+   high magnification — one proof, authored, stratified, rejected, adjudicated,
+   repaired, rejudged. Same world: matte black ground, one hue per role (orange
+   the orchestrator, blue a Beta, violet Alpha, cyan a refuter, yellow and green
+   the two judge lanes, red a fatal, amber a gate still running), glass panels,
+   packet-carrying wires. Nothing is restyled; only the subject changed.
+
+   THE ITEM IS REAL. items/lem-cauchy-bounded.md, the house exemplar. Its facts,
+   its citations, its final seven steps and their labels are what is on disk;
+   the step prose is condensed to fit a frame, and the draft it starts from is
+   the pre-stratification form the checker would have rewritten. The layering is
+   the actual algorithm of `layerRepair` in worker/src/precheck.ts:
+   layer(s) = 1 + the highest layer among the steps s cites, floor 1, the ∎ step
+   pinned one phase above every other, then a stable relabel and reorder — and
+   because the pass is order-sensitive, the file is re-run until clean.
+
+   FILM MODE. `?film=1` freezes the clock and exposes window.__film.seek(t), so
+   an offscreen renderer can walk the timeline frame by frame at exactly
+   1920x1080. Every visual is a pure function of that one number: no wall clock,
+   no randomness, no scene to enter. That is what makes the capture reproducible.
+--------------------------------------------------------------------------- */
+:root {
+  --ink: #f2f4f7; --muted: #98a1ad; --faint: #5d6672;
+  --bg: #08090b; --bg2: #0c0e12;
+  --orange: #ff8a3d; --edge: rgba(255,255,255,.085);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); }
+body {
+  color: var(--ink);
+  font: 400 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1100px 560px at 8% -10%, rgba(255,138,61,.10), transparent 60%),
+    radial-gradient(900px 520px at 92% 4%, rgba(74,168,255,.08), transparent 62%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  background-attachment: fixed;
+}
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.wrap { max-width: 1480px; margin: 0 auto; padding: 26px 20px 56px; }
+h1 {
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-size: clamp(24px, 3vw, 38px); line-height: 1.12; margin: 0 0 6px; letter-spacing: -.02em;
+  background: linear-gradient(120deg, #fff 8%, #ffd9b8 46%, #9fd0ff 94%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+h1 .sub {
+  display: block; font-size: clamp(14px, 1.3vw, 18px); font-weight: 500; letter-spacing: 0;
+  color: var(--muted); margin-top: 9px; line-height: 1.5; max-width: 74ch;
+  -webkit-text-fill-color: var(--muted);
+}
+.stage {
+  margin-top: 18px; padding: 8px; border-radius: 1.2rem;
+  background: rgba(255,255,255,.035); border: 1px solid var(--edge);
+  box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 22px 50px -24px rgba(0,0,0,.9);
+}
+canvas { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: .85rem; }
+.bar { margin-top: 14px; display: flex; align-items: center; gap: 13px; flex-wrap: wrap; }
+.play {
+  cursor: pointer; border: 0; border-radius: 999px; padding: 9px 18px;
+  font: 600 14px/1 system-ui, sans-serif; color: #0b0c0e;
+  background: linear-gradient(120deg, var(--orange), #ffb066);
+  box-shadow: 0 6px 20px -8px rgba(255,138,61,.8);
+}
+.scrub { flex: 1 1 240px; min-width: 180px; height: 6px; border-radius: 99px; background: rgba(255,255,255,.07); position: relative; cursor: pointer; overflow: hidden; }
+.scrub i { position: absolute; inset: 0 auto 0 0; width: 0%; background: linear-gradient(90deg, var(--orange), #ffd23f); }
+.clock { font-size: 13px; color: var(--faint); font-family: ui-monospace, monospace; }
+.foot { margin-top: 24px; color: var(--faint); font-size: 14.5px; max-width: 82ch; }
+body.film { background: #08090b; }
+body.film .wrap { display: none; }
+body.film canvas { position: fixed; inset: 0; width: 1920px; height: 1080px; border-radius: 0; aspect-ratio: auto; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1920" height="1080" aria-label="Animated walkthrough of authoring and repairing a phase-stratified proof"></canvas>
+<div class="wrap">
+  <h1>Authoring a proof, and repairing one
+    <span class="sub">Fifty-six seconds on a single item — <span class="mono">lem-cauchy-bounded</span> — from a Beta's draft, through the phase stratification <span class="mono">precheck</span> enforces, to a judge rejection, an adjudication, a repair that changes the graph, and the targeted rejudge that closes it.</span>
+  </h1>
+  <div class="stage"><span id="slot"></span></div>
+  <div class="bar">
+    <button class="play" id="play" type="button">❚❚ Pause</button>
+    <div class="scrub" id="scrub"><i id="scrubi"></i></div>
+    <div class="clock" id="clock">0:00 / 0:56</div>
+  </div>
+  <p class="foot">The item is real and published: its facts, citations, final step labels and bracket tags are what is on disk in
+    <span class="mono">items/lem-cauchy-bounded.md</span>, with the step prose condensed to fit a frame. The layering is the
+    algorithm of <span class="mono">layerRepair</span> in the normative checker, and the workflow around it is
+    <span class="mono">LEVELS.md</span> steps 5 to 8. Companion page: the whole level, at low magnification, in
+    <span class="mono">build-workflow.html</span>.</p>
+</div>
+
+<script>
+"use strict";
+/* =========================================================================
+   0. PALETTE — one hue per role. Identical to build-workflow.html.
+   ========================================================================= */
+const C = {
+  bg0: "#08090b",
+  grid: "rgba(255,255,255,0.030)",
+  ink: "#f2f4f7", muted: "#98a1ad", faint: "#5d6672",
+  panel: "rgba(255,255,255,0.040)", panelDeep: "rgba(255,255,255,0.022)",
+  edge: "rgba(255,255,255,0.10)", edgeSoft: "rgba(255,255,255,0.06)",
+  orchestrator: "#ff8a3d",   // orange — decides, never authors
+  beta:         "#4aa8ff",   // blue   — scaffolds and authors
+  alpha:        "#a78bfa",   // violet — audits and adjudicates
+  reader:       "#22d3ee",   // cyan   — independent readers and refuters
+  judgeA:       "#ffd23f",   // yellow — DeepSeek lane
+  judgeB:       "#3ddc84",   // green  — Terra lane
+  gate:         "#f7b955",   // amber  — a gate still running
+  ok:           "#3ddc84",
+  bad:          "#ff5c5c",
+  warn:         "#ffb020",
+};
+
+/* =========================================================================
+   1. HELPERS
+   ========================================================================= */
+const W = 1920, H = 1080;
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const lerp = (a, b, k) => a + (b - a) * k;
+const easeInOut = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+const easeOut = (k) => 1 - Math.pow(1 - k, 3);
+const easeOutBack = (k) => 1 + 2.2 * Math.pow(k - 1, 3) + 1.4 * Math.pow(k - 1, 2);
+const A = (t, s, d) => clamp((t - s) / d, 0, 1);
+const pulse = (t, s, d) => Math.sin(A(t, s, d) * Math.PI);
+const win = (t, from, to) => A(t, from, 0.45) * (1 - A(t, to, 0.45));
+const rgba = (c, a) => {
+  if (a >= 1) return c;
+  if (!c || c[0] !== "#") return c;
+  const n = parseInt(c.slice(1), 16);
+  return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + clamp(a, 0, 1) + ")";
+};
+const hash01 = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+
+const cv = document.getElementById("stage");
+const g = cv.getContext("2d", { alpha: false });
+let TT = 0;   // the film clock — packets and breathing read it, so any seek is exact
+
+const FONT = (o) => (o.weight || 600) + " " + (o.size || 24) + "px " +
+  (o.mono ? "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+          : "system-ui, -apple-system, Segoe UI, Roboto, sans-serif");
+
+function rr(x, y, w, h, r) {
+  r = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
+  g.beginPath();
+  g.moveTo(x + r, y);
+  g.arcTo(x + w, y, x + w, y + h, r);
+  g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r);
+  g.arcTo(x, y, x + w, y, r);
+  g.closePath();
+}
+function panel(x, y, w, h, o) {
+  o = o || {};
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  if (a <= 0.004) return;
+  g.save();
+  g.globalAlpha *= a;
+  rr(x, y, w, h, o.r === undefined ? 16 : o.r);
+  g.fillStyle = o.fill || C.panel;
+  g.fill();
+  if (o.glow) {
+    g.save();
+    g.shadowColor = rgba(o.glow, 0.55);
+    g.shadowBlur = o.glowSize === undefined ? 24 : o.glowSize;
+    g.strokeStyle = rgba(o.glow, 0.9);
+    g.lineWidth = o.lw === undefined ? 2 : o.lw;
+    g.stroke();
+    g.restore();
+  } else if (o.stroke !== null) {
+    g.strokeStyle = o.stroke || C.edge;
+    g.lineWidth = o.lw === undefined ? 1.6 : o.lw;
+    if (o.dash) g.setLineDash(o.dash);
+    g.stroke();
+    g.setLineDash([]);
+  }
+  g.restore();
+}
+function text(s, x, y, o) {
+  o = o || {};
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  if (a <= 0.006) return;
+  g.save();
+  g.globalAlpha *= a;
+  g.fillStyle = o.color || C.ink;
+  g.font = FONT(o);
+  g.textAlign = o.align || "left";
+  g.textBaseline = "middle";
+  if (o.glow) { g.shadowColor = rgba(o.glow, 0.6); g.shadowBlur = o.glowSize || 14; }
+  g.fillText(s, x, y);
+  g.restore();
+}
+function measure(s, o) {
+  g.save(); g.font = FONT(o || {});
+  const w = g.measureText(s).width;
+  g.restore();
+  return w;
+}
+function dot(x, y, r, color, a) {
+  a = a === undefined ? 1 : a;
+  if (a <= 0.01) return;
+  g.save(); g.globalAlpha *= a; g.fillStyle = color;
+  g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); g.restore();
+}
+function tick(x, y, r, color, a, k) {
+  k = k === undefined ? 1 : clamp(k, 0, 1);
+  if (a <= 0.02 || k <= 0.02) return;
+  g.save(); g.globalAlpha *= a;
+  g.strokeStyle = color; g.lineWidth = 3.4; g.lineCap = "round"; g.lineJoin = "round";
+  const m = [x - r * 0.25, y + r * 0.72], e = [x + r, y - r * 0.7];
+  g.beginPath(); g.moveTo(x - r, y);
+  if (k < 0.5) g.lineTo(lerp(x - r, m[0], k / 0.5), lerp(y, m[1], k / 0.5));
+  else { g.lineTo(m[0], m[1]); const u = (k - 0.5) / 0.5; g.lineTo(lerp(m[0], e[0], u), lerp(m[1], e[1], u)); }
+  g.stroke(); g.restore();
+}
+function cross(x, y, r, color, a, k) {
+  k = k === undefined ? 1 : clamp(k, 0, 1);
+  if (a <= 0.02 || k <= 0.02) return;
+  const u = clamp(k * 2, 0, 1), v = clamp(k * 2 - 1, 0, 1);
+  g.save(); g.globalAlpha *= a;
+  g.strokeStyle = color; g.lineWidth = 3.4; g.lineCap = "round";
+  g.beginPath();
+  g.moveTo(x - r, y - r); g.lineTo(lerp(x - r, x + r, u), lerp(y - r, y + r, u));
+  g.stroke();
+  if (v > 0) {
+    g.beginPath();
+    g.moveTo(x + r, y - r); g.lineTo(lerp(x + r, x - r, v), lerp(y - r, y + r, v));
+    g.stroke();
+  }
+  g.restore();
+}
+/** a pill; returns its width so chips lay out in a row */
+function chip(s, x, y, o) {
+  o = o || {};
+  const size = o.size || 20, padx = o.padx === undefined ? 15 : o.padx, h = o.h || 36;
+  const w = o.w || measure(s, { size: size, weight: 600, mono: o.mono }) + padx * 2;
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  const ax = o.align === "right" ? x - w : o.align === "center" ? x - w / 2 : x;
+  panel(ax, y - h / 2, w, h, {
+    r: o.r === undefined ? 10 : o.r, alpha: a,
+    fill: o.fill || rgba(o.color || C.muted, 0.10),
+    stroke: o.stroke === null ? null : (o.stroke || rgba(o.color || C.muted, 0.42)),
+    lw: 1.4, glow: o.glow, glowSize: o.glowSize,
+  });
+  text(s, ax + w / 2, y + 1, {
+    size: size, weight: 600, mono: o.mono, align: "center",
+    color: o.color || C.muted, alpha: a,
+  });
+  return w;
+}
+/** quadratic wire with optional travelling packets; `prog` draws it in */
+function wire(x1, y1, x2, y2, o) {
+  o = o || {};
+  const a = o.alpha === undefined ? 1 : o.alpha;
+  const prog = o.prog === undefined ? 1 : clamp(o.prog, 0, 1);
+  if (a <= 0.01 || prog <= 0.01) return;
+  const bend = o.bend === undefined ? 0.16 : o.bend;
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const dx = x2 - x1, dy = y2 - y1;
+  const cx = mx - dy * bend, cy = my + dx * bend;
+  const seg = 32;
+  const pt = (u) => {
+    const iu = 1 - u;
+    return [iu * iu * x1 + 2 * iu * u * cx + u * u * x2, iu * iu * y1 + 2 * iu * u * cy + u * u * y2];
+  };
+  g.save();
+  g.globalAlpha *= a;
+  g.strokeStyle = o.color || C.edge;
+  g.lineWidth = o.lw === undefined ? 2 : o.lw;
+  g.lineCap = "round";
+  if (o.dash) g.setLineDash(o.dash);
+  g.beginPath();
+  g.moveTo(x1, y1);
+  for (let i = 1; i <= Math.max(1, Math.round(seg * prog)); i++) { const p = pt(i / seg); g.lineTo(p[0], p[1]); }
+  g.stroke();
+  g.setLineDash([]);
+  if (o.arrow && prog > 0.94) {
+    const p = pt(1), q = pt(0.93);
+    const ang = Math.atan2(p[1] - q[1], p[0] - q[0]);
+    g.fillStyle = o.color || C.edge;
+    g.beginPath();
+    g.moveTo(p[0], p[1]);
+    g.lineTo(p[0] - 12 * Math.cos(ang - 0.42), p[1] - 12 * Math.sin(ang - 0.42));
+    g.lineTo(p[0] - 12 * Math.cos(ang + 0.42), p[1] - 12 * Math.sin(ang + 0.42));
+    g.fill();
+  }
+  g.restore();
+  const n = o.packets || 0;
+  if (n > 0 && prog > 0.94) {
+    for (let i = 0; i < n; i++) {
+      const k = (TT * (o.speed === undefined ? 0.3 : o.speed) + i / n + (o.phase || 0)) % 1;
+      const p = pt(k);
+      dot(p[0], p[1], o.pr || 4.5, o.pcolor || o.color, a * Math.sin(k * Math.PI));
+    }
+  }
+}
+
+/* =========================================================================
+   2. THE ITEM — items/lem-cauchy-bounded.md, condensed to one frame.
+      `cites` uses the file's own vocabulary: "@key" is a step citation,
+      anything else is a fact or a tag exactly as the brackets carry it.
+   ========================================================================= */
+const FACTS = [
+  ["[A1]", "for every rational ε > 0 there is N with |a_m − a_n| < ε for all m, n ≥ N"],
+  ["[L1]", "|x| ≤ |x − y| + |y|   on ℚ   — lem-rat-triangle"],
+];
+/** the draft, in the order the Beta wrote it, all numbered inside one phase */
+const S = {
+  fixN: { key: "fixN", body: "fix N:  |a_m − a_n| < 1  for m, n ≥ N",  cites: ["A1"] },
+  tri:  { key: "tri",  body: "|a_n| ≤ |a_n − a_N| + |a_N|   (n ≥ N)",  cites: ["L1"] },
+  bnd:  { key: "bnd",  body: "|a_n| < |a_N| + 1   (n ≥ N)",            cites: ["@fixN", "@tri", "algebra"] },
+  leM:  { key: "leM",  body: "|a_n| < |a_N| + 1 ≤ M   (n ≥ N)",        cites: ["@bnd", "@defM", "algebra"] },
+  defM: { key: "defM", body: "M = max{ |a_1|, …, |a_N−1|, |a_N| + 1 }", cites: ["@fixN", "choose"] },
+  qed:  { key: "qed",  body: "|a_n| ≤ M for every n ≥ 1   ∎",          cites: ["@leM"], qed: true },
+  lt:   { key: "lt",   body: "|a_n| ≤ M   (n < N),  it is in the max", cites: ["@defM", "algebra"] },
+  qed2: { key: "qed",  body: "|a_n| ≤ M for every n ≥ 1   ∎",          cites: ["@lt", "@leM"], qed: true },
+};
+const DRAFT = [S.fixN, S.tri, S.bnd, S.leM, S.defM, S.qed];
+/** after the repair. Alpha edits the canonical file, so the order it inserts
+    into is the stratified one — which is why the new case lands at 3.1 and the
+    existing n ≥ N case slides to 3.2, exactly as the item reads on disk. */
+const REPAIRED = [S.fixN, S.tri, S.bnd, S.defM, S.lt, S.leM, S.qed2];
+
+/** layerRepair, as the normative checker computes it. */
+function stratify(list) {
+  const layer = {}, label = {}, place = {};
+  list.forEach((s) => {
+    let L = 1;
+    s.cites.forEach((c) => { if (c[0] === "@") L = Math.max(L, (layer[c.slice(1)] || 1) + 1); });
+    layer[s.key] = L;
+  });
+  const term = list.find((s) => s.qed);       // the ∎ step is pinned above every other phase
+  if (term) {
+    let mx = 0;
+    list.forEach((s) => { if (s.key !== term.key) mx = Math.max(mx, layer[s.key]); });
+    layer[term.key] = mx + 1;
+  }
+  const order = list.map((_, i) => i).sort((a, b) => layer[list[a].key] - layer[list[b].key] || a - b);
+  const per = {};
+  order.forEach((i, pos) => {
+    const L = layer[list[i].key];
+    per[L] = (per[L] || 0) + 1;
+    label[list[i].key] = L + "." + per[L];
+    place[list[i].key] = { band: L - 1, row: per[L] - 1, pos: pos };
+  });
+  return { layer: layer, label: label, place: place };
+}
+/** the draft's own numbering: one phase, in authored order */
+const FLAT = (function () {
+  const label = {}, place = {};
+  DRAFT.forEach((s, i) => { label[s.key] = "1." + (i + 1); place[s.key] = { band: null, row: i }; });
+  return { label: label, place: place };
+})();
+const ST1 = stratify(DRAFT);       // what precheck prints as the canonical form
+const ST2 = stratify(REPAIRED);    // and prints again after the repair
+
+const tagOf = (step, label) =>
+  "[" + step.cites.map((c) => (c[0] === "@" ? "step " + label[c.slice(1)] : c)).join(", ") + "]";
+const bandCount = (st, band) => {
+  let n = 0;
+  for (const k in st.place) if (st.place[k].band === band) n++;
+  return n;
+};
+
+/* =========================================================================
+   3. TIMELINE — seven acts on one clock. Nothing re-enters; every value is
+      read from t alone.
+   ========================================================================= */
+const ACTS = [
+  { n: "", name: "", t0: 0.0, t1: 3.0 },
+  { n: "1", name: "Author", who: "Beta 12-1 — the agent that scaffolded this pair", t0: 3.0, t1: 14.5 },
+  { n: "2", name: "Stratify", who: "precheck — mechanical, and free", t0: 14.5, t1: 27.5 },
+  { n: "3", name: "Judge", who: "two lanes, one frozen context", t0: 27.5, t1: 34.5 },
+  { n: "4", name: "Adjudicate", who: "Alpha-12 — the sole adjudicator", t0: 34.5, t1: 41.0 },
+  { n: "5", name: "Repair", who: "Alpha-12, licensed by confirmed_fatal", t0: 41.0, t1: 48.5 },
+  { n: "6", name: "Rejudge", who: "the changed item only", t0: 48.5, t1: 53.5 },
+  { n: "", name: "", t0: 53.5, t1: 56.0 },
+];
+const TOTAL = 56.0;
+const actAt = (t) => { for (let i = 0; i < ACTS.length; i++) if (t < ACTS[i].t1) return ACTS[i]; return ACTS[ACTS.length - 1]; };
+
+/** every animated moment in the film, in one table */
+const T = {
+  boardIn: 2.4,
+  header: 3.2, title: 3.9, facts: 4.5, verif: 5.6,
+  step0: 6.2, stepGap: 1.25, stepDur: 0.85,
+  precheck: 15.0, repairVerdict: 16.4,
+  node0: 17.4, nodeGap: 0.74,
+  migrate: 22.4, migrateDur: 2.4, relabel: 23.0, retag: 24.6,
+  rerun: 26.0, pass: 26.9,
+  freeze: 28.0, lanes: 28.9, laneVerdict: 31.0, reject: 31.6,
+  alphaIn: 35.0, outcomes: 35.8, pick: 37.6, hashRow: 39.0,
+  insert: 42.0, restrat: 42.0, restratDur: 1.7, retag2: 43.2, pass2: 44.6,
+  rj: 49.0, rjDone: 50.6, stamp: 51.6,
+  endcard: 53.7,
+};
+
+/* =========================================================================
+   4. GEOMETRY
+   ========================================================================= */
+const BAND_TOP = [356, 512, 668, 824], BAND_H = 146;
+const ROW_H = 52, ROW_IN = [32, 88];
+const FLAT_Y0 = 372, FLAT_PITCH = 66;
+const LX = 140, LW = 1150;                        // the file column
+const RX = 1320, RW = 550;                        // its citation graph
+const SPLIT = 1304;
+const SLOT = { x: RX, y: 96, w: RW, h: 188 };     // whichever actor is speaking
+const NOTE_Y = 976, CREDIT_Y = 1056;
+
+const rowY = (place) => (place.band === null || place.band === undefined
+  ? FLAT_Y0 + place.row * FLAT_PITCH
+  : BAND_TOP[place.band] + ROW_IN[place.row]);
+const nodeXY = (place, count) => [
+  count === 1 ? RX + RW / 2 : RX + RW * (place.row === 0 ? 0.27 : 0.73),
+  BAND_TOP[place.band] + 62,
+];
+
+/* =========================================================================
+   5. THE BOARD
+   ========================================================================= */
+function background() {
+  g.fillStyle = C.bg0;
+  g.fillRect(0, 0, W, H);
+  const gr = g.createLinearGradient(0, 0, W * 0.55, H);
+  gr.addColorStop(0, "rgba(255,138,61,0.05)");
+  gr.addColorStop(0.55, "rgba(74,168,255,0.022)");
+  gr.addColorStop(1, "rgba(0,0,0,0)");
+  g.fillStyle = gr;
+  g.fillRect(0, 0, W, H);
+  g.save();
+  g.strokeStyle = C.grid;
+  g.lineWidth = 1;
+  g.beginPath();
+  for (let x = 0; x <= W; x += 80) { g.moveTo(x, 0); g.lineTo(x, H); }
+  for (let y = 0; y <= H; y += 80) { g.moveTo(0, y); g.lineTo(W, y); }
+  g.stroke();
+  g.restore();
+}
+
+/* ---- the item's head: id, kind, statement, facts, verification ---------- */
+function itemHead(t, a) {
+  const k = A(t, T.header, 0.7) * a;
+  if (k <= 0.01) return;
+  text("lem-cauchy-bounded", 60, 118, { size: 38, weight: 700, mono: true, color: C.ink, alpha: k });
+  let x = 60 + measure("lem-cauchy-bounded", { size: 38, weight: 700, mono: true }) + 22;
+  x += chip("lemma", x, 118, { color: "#2dd4bf", size: 20, alpha: k }) + 10;
+  chip("status: draft", x, 118, { color: C.warn, size: 20, mono: true, alpha: k });
+
+  text("Every Cauchy sequence of rationals is bounded", 60, 168,
+    { size: 28, weight: 500, color: C.muted, alpha: A(t, T.title, 0.7) * a });
+
+  text("FACTS & ASSUMPTIONS", 60, 212, { size: 16, weight: 700, color: C.faint, alpha: A(t, T.facts, 0.6) * a });
+  FACTS.forEach((f, i) => {
+    const kk = A(t, T.facts + i * 0.45, 0.6) * a;
+    text(f[0], 60, 246 + i * 34, { size: 22, weight: 700, mono: true, color: C.beta, alpha: kk });
+    text(f[1], 118, 246 + i * 34, { size: 22, weight: 500, color: C.muted, alpha: kk });
+  });
+
+  // the verification strip: what the item may honestly claim, moment by moment
+  const kv = A(t, T.verif, 0.6) * a;
+  const pre = t < T.repairVerdict ? "precheck: —"
+    : t < T.pass ? "precheck: REPAIR"
+      : (t >= T.insert && t < T.pass2) ? "precheck: REPAIR" : "precheck: pass";
+  const preCol = pre.indexOf("pass") > 0 ? C.ok : pre.indexOf("REPAIR") > 0 ? C.warn : C.faint;
+  let vx = 60;
+  vx += chip(pre, vx, 312, { color: preCol, size: 20, mono: true, alpha: kv }) + 10;
+  const jud = t > T.stamp ? "judge: pass · deepseek + terra"
+    : t >= T.insert ? "judge: — · voided by the repair"
+      : t > T.reject ? "judge: reject · deepseek" : "judge: —";
+  const judCol = t > T.stamp ? C.ok : t >= T.insert ? C.faint : t > T.reject ? C.bad : C.faint;
+  chip(jud, vx, 312, { color: judCol, size: 20, mono: true, alpha: kv });
+}
+
+/* ---- phase bands: the graph gets them first, then the file adopts them --- */
+function bands(t, st, a) {
+  for (let b = 0; b < 4; b++) {
+    const live = bandCount(st, b) > 0 ? 1 : 0.3;
+    const kR = A(t, T.node0 - 0.9 + b * 0.16, 0.7) * a;
+    const kL = A(t, T.migrate - 0.7 + b * 0.16, 0.7) * a;
+    const fill = "rgba(255,255,255,0.020)", stroke = rgba(C.beta, 0.10 + 0.08 * live);
+    if (kR > 0.01) panel(SPLIT + 4, BAND_TOP[b], W - 62 - SPLIT - 4, BAND_H, { r: 18, alpha: kR * (0.5 + 0.5 * live), fill: fill, stroke: stroke, lw: 1.4 });
+    if (kL > 0.01) {
+      panel(62, BAND_TOP[b], SPLIT - 68, BAND_H, { r: 18, alpha: kL * (0.5 + 0.5 * live), fill: fill, stroke: stroke, lw: 1.4 });
+      // the label sits above row 0, clear of the pass/fail mark in the gutter
+      text("phase " + (b + 1), 80, BAND_TOP[b] + 17, {
+        size: 18, weight: 700, mono: true, color: rgba(C.beta, 0.2 + 0.55 * live), alpha: kL,
+      });
+    }
+  }
+  const ks = A(t, T.node0 - 0.9, 0.7) * a;
+  if (ks > 0.01) {
+    g.save();
+    g.globalAlpha = ks * 0.5;
+    g.strokeStyle = C.edgeSoft; g.lineWidth = 1.5;
+    g.setLineDash([6, 9]);
+    g.beginPath(); g.moveTo(SPLIT, 344); g.lineTo(SPLIT, 978); g.stroke();
+    g.setLineDash([]);
+    g.restore();
+  }
+}
+
+/* ---- one row of the proof ---------------------------------------------- */
+function proofRow(t, step, o) {
+  const a = o.alpha;
+  if (a <= 0.01) return;
+  const y = o.y, cy = y + ROW_H / 2;
+  const heat = Math.max(o.hot || 0, o.bad || 0, o.fresh || 0);
+  const accent = (o.bad || 0) > 0.02 ? C.bad : (o.fresh || 0) > 0.02 ? C.ok : (o.hot || 0) > 0.02 ? C.warn : null;
+  panel(LX, y, LW, ROW_H, {
+    r: 12, alpha: a,
+    fill: accent ? rgba(accent, 0.06 + 0.07 * heat) : C.panelDeep,
+    stroke: accent ? rgba(accent, 0.32 + 0.5 * heat) : C.edgeSoft,
+    lw: accent ? 1.9 : 1.4,
+    glow: heat > 0.35 ? accent : null, glowSize: 16,
+  });
+  if (o.labelB) {
+    text(o.labelA, LX + 20, cy, { size: 25, weight: 700, mono: true, color: C.faint, alpha: a * (1 - o.labelK) });
+    text(o.labelB, LX + 20, cy, { size: 25, weight: 700, mono: true, color: C.warn, alpha: a * o.labelK, glow: C.warn, glowSize: 12 * o.labelK });
+  } else {
+    text(o.labelA, LX + 20, cy, { size: 25, weight: 700, mono: true, color: C.faint, alpha: a });
+  }
+  const typed = o.typed === undefined ? 1 : o.typed;
+  const body = typed >= 1 ? step.body : step.body.slice(0, Math.max(0, Math.round(step.body.length * typed)));
+  text(body, LX + 92, cy, { size: 28, weight: 500, color: rgba(C.ink, 0.95), alpha: a });
+  if (typed < 1 && typed > 0) {
+    const cx = LX + 92 + measure(body, { size: 28, weight: 500 }) + 5;
+    g.save();
+    g.globalAlpha = a * (Math.sin(t * 20) > 0 ? 0.9 : 0.2);
+    g.fillStyle = C.beta;
+    g.fillRect(cx, cy - 15, 3, 30);
+    g.restore();
+  }
+  if (o.tagK > 0.02) {
+    const rEnd = LX + LW - 18;
+    if (o.tagB) {
+      text(o.tagA, rEnd, cy, { size: 21, weight: 600, mono: true, color: C.faint, align: "right", alpha: a * o.tagK * (1 - o.tagSwap) });
+      text(o.tagB, rEnd, cy, { size: 21, weight: 600, mono: true, color: C.warn, align: "right", alpha: a * o.tagK * o.tagSwap });
+    } else {
+      text(o.tagA, rEnd, cy, { size: 21, weight: 600, mono: true, color: rgba(C.beta, 0.82), align: "right", alpha: a * o.tagK });
+    }
+  }
+  if ((o.bad || 0) > 0.3) cross(LX - 28, cy, 11, C.bad, a, clamp((o.bad - 0.3) * 3, 0, 1));
+  else if ((o.okMark || 0) > 0.02) tick(LX - 28, cy, 11, C.ok, a, o.okMark);
+}
+
+/* ---- the citation graph ------------------------------------------------ */
+const FX = [RX + RW * 0.27, RX + RW * 0.73];
+function graph(t, v) {
+  const pos = {};
+  v.list.forEach((s) => { pos[s.key] = v.posOf(s.key); });
+  const fk = A(t, T.node0 - 0.5, 0.6) * v.alpha;
+  ["[A1]", "[L1]"].forEach((s, i) => {
+    chip(s, FX[i], 322, { align: "center", color: C.beta, mono: true, size: 20, h: 34, alpha: fk, fill: rgba(C.beta, 0.08) });
+  });
+  v.list.forEach((s) => {
+    const k = v.appear(s.key);
+    if (k <= 0.02) return;
+    s.cites.forEach((c) => {
+      let from = null;
+      if (c === "A1") from = [FX[0], 339];
+      else if (c === "L1") from = [FX[1], 339];
+      else if (c[0] === "@") { const p = pos[c.slice(1)]; if (p) from = [p[0], p[1] + 22]; }
+      if (!from) return;
+      const to = pos[s.key];
+      const isNew = v.newEdge && v.newEdge(s.key, c);
+      wire(from[0], from[1], to[0], to[1] - 23, {
+        color: rgba(isNew ? C.ok : C.beta, 0.5), lw: isNew ? 2.6 : 2, prog: k, arrow: true,
+        bend: 0.05, alpha: v.alpha, packets: k > 0.94 ? 1 : 0, speed: 0.22,
+        pcolor: rgba(isNew ? C.ok : C.beta, 0.9),
+      });
+    });
+  });
+  v.list.forEach((s) => {
+    const k = v.appear(s.key);
+    if (k <= 0.02) return;
+    const p = pos[s.key], heat = Math.max(v.hot(s.key), v.bad(s.key));
+    const col = v.bad(s.key) > 0.05 ? C.bad : s.qed ? C.alpha : C.beta;
+    const w = 134 * clamp(easeOutBack(k), 0.3, 1.03), h = 46, ka = v.alpha * clamp(k * 1.6, 0, 1);
+    panel(p[0] - w / 2, p[1] - h / 2, w, h, {
+      r: 11, alpha: ka,
+      fill: rgba(col, 0.10 + 0.10 * heat),
+      stroke: rgba(col, 0.42 + 0.45 * heat), lw: 1.7,
+      glow: heat > 0.3 ? col : null, glowSize: 15,
+    });
+    text(v.labelOf(s.key), p[0], p[1] + 1, { size: 24, weight: 700, mono: true, align: "center", color: rgba(C.ink, 0.96), alpha: ka });
+    const ln = v.layerNote(s.key);
+    if (ln > 0.02) {
+      const L = v.layerOf(s.key);
+      const msg = s.qed ? "∎ pinned above all" : L === 1 ? "facts only → 1" : "cites phase " + (L - 1) + " → " + L;
+      text(msg, p[0], p[1] + 44, { size: 18, weight: 600, mono: true, align: "center", color: C.warn, alpha: ln * v.alpha });
+    }
+  });
+}
+
+/* =========================================================================
+   6. THE ACTOR SLOT — whoever is speaking, top right.
+   ========================================================================= */
+function slotFrame(a, color, title, sub, busy) {
+  panel(SLOT.x, SLOT.y, SLOT.w, SLOT.h, {
+    r: 18, alpha: a, fill: rgba(color, 0.055), stroke: rgba(color, 0.34), lw: 1.8,
+    glow: busy > 0.3 ? color : null, glowSize: 20,
+  });
+  dot(SLOT.x + 24, SLOT.y + 30, 6.5, color, a * (0.5 + 0.5 * Math.abs(Math.sin(TT * 3))));
+  text(title, SLOT.x + 44, SLOT.y + 30, { size: 24, weight: 650, color: rgba(C.ink, 0.95), alpha: a });
+  if (sub) text(sub, SLOT.x + 24, SLOT.y + 62, { size: 18, weight: 500, color: C.muted, alpha: a });
+}
+function tokenStream(x, y, w, color, a, rows) {
+  for (let r = 0; r < rows; r++) {
+    const seed = x + r * 31;
+    const bw = w * (0.28 + 0.66 * hash01(seed + ((TT * 1.8 + r) | 0)));
+    g.save();
+    g.globalAlpha = a * 0.55 * (0.4 + 0.6 * Math.abs(Math.sin(TT * 2.4 + seed)));
+    rr(x, y + r * 15, bw, 5, 2.5);
+    g.fillStyle = color; g.fill(); g.restore();
+  }
+}
+function laneCard(x, y, w, h, name, color, a, o) {
+  panel(x, y, w, h, {
+    r: 14, alpha: a, fill: rgba(color, o.busy > 0.1 ? 0.08 : 0.03),
+    stroke: rgba(color, 0.3 + 0.4 * o.busy), lw: 1.6,
+    glow: o.busy > 0.4 ? color : null, glowSize: 16,
+  });
+  text(name, x + 15, y + 24, { size: 20, weight: 650, color: rgba(C.ink, 0.94), alpha: a });
+  text(o.sub, x + 15, y + 50, { size: 16, weight: 500, color: C.muted, alpha: a * 0.95 });
+  const cols = 8, cw = (w - 30) / cols;
+  for (let i = 0; i < 16; i++) {
+    const bx = x + 15 + (i % cols) * cw, by = y + 68 + ((i / cols) | 0) * 17;
+    const per = 0.7 + hash01(i + o.seed) * 1.6;
+    const busy = o.busy > 0.05 && ((TT / per + hash01(i * 3 + o.seed)) % 1) < 0.7;
+    g.save();
+    g.globalAlpha = a * (busy ? 0.95 : 0.22);
+    rr(bx, by, cw - 6, 10, 3);
+    g.fillStyle = busy ? rgba(color, 0.62) : C.panel;
+    g.fill(); g.restore();
+  }
+  if (o.vk > 0.02) {
+    const good = o.verdict === "pass";
+    chip(o.verdict, x + w - 13, y + h - 22, {
+      align: "right", color: good ? C.ok : C.bad, mono: true, size: 18, h: 30,
+      alpha: a * o.vk, fill: rgba(good ? C.ok : C.bad, 0.15), glow: good ? null : C.bad, glowSize: 12,
+    });
+  }
+}
+function actorSlot(t, board) {
+  /* act 1 — the Beta authoring */
+  const a1 = board * A(t, T.header, 0.6) * (1 - A(t, T.precheck - 0.5, 0.6));
+  if (a1 > 0.01) {
+    slotFrame(a1, C.beta, "Beta 12-1", "authors the batch it scaffolded", 1);
+    tokenStream(SLOT.x + 24, SLOT.y + 98, SLOT.w - 48, C.beta, a1, 3);
+    text("status: draft · origin: session", SLOT.x + 24, SLOT.y + 160,
+      { size: 18, weight: 600, mono: true, color: rgba(C.beta, 0.85), alpha: a1 });
+  }
+  /* act 2 — precheck */
+  const a2 = board * A(t, T.precheck - 0.4, 0.6) * (1 - A(t, T.freeze - 0.6, 0.6));
+  if (a2 > 0.01) {
+    const failing = t < T.pass;
+    slotFrame(a2, failing ? C.gate : C.ok, "precheck", "reads the citations, not the mathematics", failing ? 1 : 0);
+    text("tools/precheck.mts", SLOT.x + 24, SLOT.y + 96, { size: 18, weight: 600, mono: true, color: C.faint, alpha: a2 });
+    // the first pass, then the second: "re-run until clean" is two runs, drawn
+    const run1 = A(t, T.precheck, 1.2) * (1 - A(t, T.repairVerdict, 0.5));
+    const run2 = A(t, T.rerun, 0.8) * (1 - A(t, T.pass, 0.4));
+    const runK = Math.max(run1, run2), runW = run2 > run1 ? A(t, T.rerun, 0.8) : A(t, T.precheck, 1.2);
+    if (runK > 0.01) {
+      g.save();
+      g.globalAlpha = a2 * runK;
+      rr(SLOT.x + 24, SLOT.y + 114, (SLOT.w - 48) * runW, 6, 3);
+      g.fillStyle = rgba(run2 > run1 ? C.ok : C.gate, 0.85); g.fill();
+      g.restore();
+    }
+    const rv = A(t, T.repairVerdict, 0.5) * (1 - A(t, T.rerun, 0.5));
+    if (rv > 0.02) {
+      const w = chip("REPAIR", SLOT.x + 24, SLOT.y + 142, { color: C.warn, mono: true, size: 20, alpha: rv, fill: rgba(C.warn, 0.15) });
+      text("passes only after", SLOT.x + 34 + w, SLOT.y + 142, { size: 18, weight: 600, color: C.muted, alpha: rv });
+      text("auto-repair — adopt the canonical form", SLOT.x + 24, SLOT.y + 170, { size: 18, weight: 600, color: C.warn, alpha: rv });
+    }
+    const pv = A(t, T.pass, 0.5);
+    if (pv > 0.02) {
+      const w = chip("PASS", SLOT.x + 24, SLOT.y + 142, { color: C.ok, mono: true, size: 20, alpha: pv, fill: rgba(C.ok, 0.15) });
+      text("1 checked, 0 failing", SLOT.x + 34 + w, SLOT.y + 142, { size: 18, weight: 600, color: C.ok, alpha: pv });
+      text("the second pass is the receipt", SLOT.x + 24, SLOT.y + 170, { size: 17, weight: 500, color: C.faint, alpha: pv });
+    }
+  }
+  /* acts 3 and 6 — the two judge lanes */
+  const a3 = board * A(t, T.freeze - 0.4, 0.6) * (1 - A(t, T.alphaIn - 0.6, 0.6));
+  const a6 = board * A(t, T.rj - 0.8, 0.6);
+  const aj = Math.max(a3, a6);
+  if (aj > 0.01) {
+    const again = a6 > a3;
+    panel(SLOT.x, SLOT.y, SLOT.w, 34, { r: 10, alpha: aj, fill: C.panelDeep, stroke: C.edgeSoft, lw: 1.4 });
+    text("frozen · sha256 " + (again ? "3b9d…7e" : "a4f1…9c"), SLOT.x + 15, SLOT.y + 17,
+      { size: 17, weight: 600, mono: true, color: rgba(C.ink, 0.82), alpha: aj });
+    text(again ? "this item only" : "one hash, both lanes", SLOT.x + SLOT.w - 15, SLOT.y + 17,
+      { size: 16, weight: 600, color: C.faint, align: "right", alpha: aj });
+    const ly = SLOT.y + 44, lh = SLOT.h - 44, lw2 = (SLOT.w - 14) / 2;
+    const busy = again ? A(t, T.rj, 0.5) * (1 - A(t, T.rjDone, 0.5)) : A(t, T.lanes, 0.6) * (1 - A(t, T.laneVerdict, 0.6));
+    const vk = again ? A(t, T.rjDone, 0.5) : A(t, T.laneVerdict, 0.5);
+    laneCard(SLOT.x, ly, lw2, lh, "DeepSeek V4 Pro", C.judgeA, aj,
+      { busy: busy, seed: 11, vk: vk, verdict: again ? "pass" : "reject", sub: "direct API · xhigh" });
+    laneCard(SLOT.x + lw2 + 14, ly, lw2, lh, "GPT 5.6 Terra", C.judgeB, aj,
+      { busy: busy, seed: 71, vk: vk, verdict: "pass", sub: "fresh · read-only" });
+  }
+  /* acts 4 and 5 — Alpha */
+  const a4 = board * A(t, T.alphaIn - 0.4, 0.6) * (1 - A(t, T.rj - 1.0, 0.6));
+  if (a4 > 0.01) {
+    const repairing = t > T.insert - 0.8;
+    slotFrame(a4, C.alpha, "Alpha-12", repairing ? "applies the repair it licensed" : "reads the verdict against the text on disk", 1);
+    if (!repairing) {
+      [["confirmed_fatal", C.bad], ["confirmed_nonfatal", C.muted], ["false_positive", C.muted]].forEach((o, i) => {
+        const k = A(t, T.outcomes + i * 0.22, 0.5) * a4;
+        const picked = i === 0 ? A(t, T.pick, 0.5) : 0;
+        const dim = i === 0 ? 1 : 1 - A(t, T.pick, 0.5) * 0.6;
+        chip(o[0], SLOT.x + 22, SLOT.y + 104 + i * 32, {
+          size: 18, mono: true, h: 28, alpha: k * dim, color: o[1],
+          fill: rgba(o[1], 0.08 + 0.16 * picked), glow: picked > 0.3 ? C.bad : null, glowSize: 12,
+        });
+      });
+      const hk = A(t, T.hashRow, 0.6) * a4;
+      text("item_sha256", SLOT.x + 272, SLOT.y + 104, { size: 17, weight: 600, mono: true, color: C.alpha, alpha: hk });
+      text("7c2e…b0", SLOT.x + 272, SLOT.y + 128, { size: 17, weight: 600, mono: true, color: C.alpha, alpha: hk });
+      text("the exact text", SLOT.x + 272, SLOT.y + 154, { size: 16, weight: 500, color: C.faint, alpha: hk });
+      text("only confirmed_fatal may edit", SLOT.x + 22, SLOT.y + 178,
+        { size: 17, weight: 600, color: C.bad, alpha: A(t, T.hashRow + 0.6, 0.6) * a4 });
+    } else {
+      tokenStream(SLOT.x + 24, SLOT.y + 100, SLOT.w - 48, C.alpha, a4, 2);
+      text("+ the n < N case, cited to [step 2.2]", SLOT.x + 24, SLOT.y + 148,
+        { size: 18, weight: 600, mono: true, color: rgba(C.alpha, 0.92), alpha: A(t, T.insert - 0.4, 0.6) * a4 });
+      text("stale verdict deleted · rejudge queued", SLOT.x + 24, SLOT.y + 174,
+        { size: 17, weight: 500, color: C.faint, alpha: A(t, T.retag2, 0.6) * a4 });
+    }
+  }
+}
+
+/* ---- the refuting sentence --------------------------------------------- */
+function finding(t, a) {
+  const k = A(t, T.reject, 0.6) * (1 - A(t, T.insert - 0.4, 0.7)) * a;
+  if (k <= 0.01) return;
+  const x = RX, y = 348, w = RW, h = 126;
+  // opaque: it sits over the graph's phase-1 row, and a ghost node reading
+  // through a verdict is exactly the ambiguity this card is here to remove
+  panel(x, y, w, h, {
+    r: 16, alpha: k, fill: "#150b0e", stroke: rgba(C.bad, 0.55), lw: 1.8,
+    glow: pulse(t, T.reject, 1.6) > 0.1 ? C.bad : null, glowSize: 18,
+  });
+  chip("deepseek-v4-pro", x + 15, y + 26, { size: 16, mono: true, h: 26, color: C.judgeA, alpha: k });
+  text("reject", x + w - 15, y + 26, { size: 19, weight: 700, mono: true, color: C.bad, align: "right", alpha: k });
+  text("4.1 concludes for every n ≥ 1,", x + 15, y + 66, { size: 22, weight: 600, color: C.ink, alpha: k });
+  text("but only n ≥ N is discharged.", x + 15, y + 98, { size: 22, weight: 600, color: C.ink, alpha: k });
+}
+
+/* =========================================================================
+   7. ANNOTATION AND CAPTION
+   ========================================================================= */
+const NOTES = [
+  [4.8, 9.0, "the Beta that scaffolded the pair authors it — never a fresh agent", C.beta],
+  [9.4, 14.2, "every step cites a fact, an earlier step, or elementary algebra", C.beta],
+  [15.4, 19.5, "precheck is mechanical and free: it reads the citations, not the mathematics", C.gate],
+  [19.9, 23.4, "layer(s) = 1 + the highest layer among the steps s cites", C.ink],
+  [23.7, 25.9, "the ∎ step is pinned one phase above every other", C.alpha],
+  [26.2, 27.4, "adopt the printed canonical form, then re-run until clean", C.ok],
+  [28.4, 31.2, "the text is frozen and hashed once; both lanes read the same bytes", C.ink],
+  [31.9, 34.3, "a rejection is evidence, not an instruction", C.judgeA],
+  [35.4, 38.9, "three outcomes — only confirmed_fatal may touch the text", C.alpha],
+  [39.4, 40.9, "the row carries item_sha256, so the licence names the exact text", C.alpha],
+  [41.4, 45.2, "the missing case: for n < N the bound was never discharged", C.bad],
+  [45.6, 48.3, "a new step changes the graph, so the phases are computed again", C.ink],
+  [49.2, 51.2, "only the changed item is rejudged, on its new frozen context", C.ink],
+  [51.6, 53.4, "a pass is recorded only when both models passed the text", C.ok],
+];
+function annotate(t, a) {
+  for (let i = 0; i < NOTES.length; i++) {
+    const n = NOTES[i], k = win(t, n[0], n[1]) * a;
+    if (k <= 0.01) continue;
+    const bw = measure(n[2], { size: 30, weight: 500 }) + 66, bx = (W - bw) / 2;
+    panel(bx, NOTE_Y, bw, 58, { r: 15, alpha: k * 0.97, fill: "rgba(9,10,12,0.9)", stroke: rgba(n[3], 0.5), lw: 1.6 });
+    dot(bx + 26, NOTE_Y + 29, 5.5, n[3], k);
+    text(n[2], bx + 46, NOTE_Y + 29, { size: 30, weight: 500, color: rgba(C.ink, 0.96), alpha: k });
+  }
+}
+function caption(t, a) {
+  const act = actAt(t);
+  if (!act.name) return;
+  const k = easeOut(A(t, act.t0 + 0.1, 0.6)) * a;
+  text(act.n + " · " + act.name, 60, 42, { size: 34, weight: 700, color: C.ink, alpha: k });
+  text(act.who, 60, 76, { size: 20, weight: 500, color: C.faint, alpha: k });
+  const st = t < T.precheck ? "authoring" : t < T.pass ? "stratifying" : t < T.reject ? "judging"
+    : t < T.insert ? "adjudicating" : t < T.rj ? "repairing" : t < T.stamp ? "rejudging" : "clean";
+  text(st, W - 60, 42, { size: 20, weight: 600, mono: true, color: C.faint, align: "right", alpha: a * 0.9 });
+  text("items/lem-cauchy-bounded.md", W - 60, 72, { size: 17, weight: 500, mono: true, color: rgba(C.faint, 0.75), align: "right", alpha: a * 0.9 });
+}
+
+/* =========================================================================
+   8. TITLE AND END CARDS
+   ========================================================================= */
+function gradientText(s, x, y, size, a) {
+  const w = measure(s, { size: size, weight: 700 });
+  const grd = g.createLinearGradient(x - w / 2, 0, x + w / 2, 0);
+  grd.addColorStop(0, "#ffffff");
+  grd.addColorStop(0.46, "#ffd9b8");
+  grd.addColorStop(1, "#9fd0ff");
+  g.save();
+  g.globalAlpha = a;
+  g.font = FONT({ size: size, weight: 700 });
+  g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = grd;
+  g.fillText(s, x, y);
+  g.restore();
+}
+function titleCard(t) {
+  const a = 1 - A(t, 2.2, 0.8);
+  if (a <= 0.01) return;
+  g.save();
+  g.globalAlpha = a;
+  g.fillStyle = "rgba(8,9,11,0.95)";
+  g.fillRect(0, 0, W, H);
+  g.restore();
+  const rise = easeOut(A(t, 0.15, 1.0));
+  gradientText("Authoring a proof, and repairing one", W / 2, 446 + (1 - rise) * 22, 64, a * rise);
+  text("the phase-stratified format the library's precheck enforces — on one real item",
+    W / 2, 524, { size: 29, weight: 500, color: C.muted, align: "center", alpha: a * A(t, 0.5, 0.9) });
+  const ck = a * A(t, 1.0, 0.9);
+  chip("lem-cauchy-bounded", W / 2, 596, { align: "center", mono: true, size: 22, h: 42, color: C.beta, alpha: ck });
+  text("app.prestige-intelligence.cc/library", W / 2, 674, { size: 21, weight: 600, mono: true, color: C.faint, align: "center", alpha: ck });
+}
+function endCard(t) {
+  const a = A(t, T.endcard, 0.7);
+  if (a <= 0.01) return;
+  g.save();
+  g.globalAlpha = a;
+  g.fillStyle = "#08090b";
+  g.fillRect(0, 0, W, H);
+  g.restore();
+  gradientText("Every step licensed. Every phase earned.", W / 2, 442, 56, a);
+  text("authored → stratified → judged → adjudicated → repaired → rejudged", W / 2, 522,
+    { size: 25, weight: 500, mono: true, color: C.muted, align: "center", alpha: a * A(t, T.endcard + 0.4, 0.7) });
+  text("app.prestige-intelligence.cc/library", W / 2, 604,
+    { size: 27, weight: 700, mono: true, color: C.orchestrator, align: "center", alpha: a * A(t, T.endcard + 0.8, 0.7) });
+}
+
+/* =========================================================================
+   9. PER-STEP STATE — position, label and tag, all functions of t.
+   ========================================================================= */
+/** a crossfade that settles: once it completes, the new value is simply the
+    value, drawn in the resting colour — a renumbered label must not stay lit. */
+const swap = (from, to, k) => (from === to || k >= 1 ? { a: to, b: null, k: 0 } : { a: from, b: to, k: k });
+function labelAt(key, t) {
+  const lF = FLAT.label[key], l1 = ST1.label[key], l2 = ST2.label[key];
+  if (!lF) return { a: l2, b: null, k: 0 };                            // the inserted step
+  if (t >= T.restrat) return swap(l1, l2, A(t, T.restrat, 0.8));
+  if (t >= T.relabel) return swap(lF, l1, A(t, T.relabel, 0.9));
+  return { a: lF, b: null, k: 0 };
+}
+function tagAt(key, t) {
+  const d = DRAFT.find((s) => s.key === key), r = REPAIRED.find((s) => s.key === key);
+  const st2 = tagOf(r, ST2.label);
+  if (!d) return { a: st2, b: null, k: 0 };
+  const flat = tagOf(d, FLAT.label), st1 = tagOf(d, ST1.label);
+  if (t >= T.retag2) return swap(st1, st2, A(t, T.retag2, 0.8));
+  if (t >= T.retag) return swap(flat, st1, A(t, T.retag, 0.9));
+  return { a: flat, b: null, k: 0 };
+}
+const ROWS = () => (TT >= T.insert - 0.4 ? REPAIRED : DRAFT);
+const NODE_ORDER = ["fixN", "tri", "bnd", "defM", "leM", "qed"];
+const nodeIdx = (k) => Math.max(0, NODE_ORDER.indexOf(k));
+
+function rowStateFor(step, t, i) {
+  const isFix = step.key === "lt";
+  const born = isFix ? A(t, T.insert + 0.5, 0.7) : A(t, T.step0 + i * T.stepGap, 0.45);
+  if (born <= 0.01) return null;
+  const mig = easeInOut(A(t, T.migrate, T.migrateDur));
+  const rem = easeInOut(A(t, T.restrat, T.restratDur));
+  const yF = rowY(FLAT.place[step.key] || { band: null, row: i });
+  const y1 = ST1.place[step.key] ? rowY(ST1.place[step.key]) : rowY(ST2.place[step.key]);
+  const y2 = rowY(ST2.place[step.key]);
+  const lab = labelAt(step.key, t), tg = tagAt(step.key, t);
+  return {
+    y: lerp(lerp(yF, y1, mig), y2, rem),
+    alpha: clamp(born * 1.4, 0, 1),
+    typed: isFix ? clamp(born * 1.5, 0, 1) : A(t, T.step0 + i * T.stepGap, T.stepDur),
+    labelA: lab.a, labelB: lab.b, labelK: lab.k,
+    tagA: tg.b ? tg.a : tg.a, tagB: tg.b, tagSwap: tg.k,
+    tagK: isFix ? clamp(born * 1.4, 0, 1) : A(t, T.step0 + i * T.stepGap + T.stepDur * 0.8, 0.4),
+    hot: Math.max(
+      step.key === "defM" ? pulse(t, T.migrate + 0.4, 1.8) * 0.9 : 0,
+      lab.k > 0.03 && lab.k < 0.97 ? 0.75 : 0,
+      tg.k > 0.03 && tg.k < 0.97 ? 0.6 : 0
+    ),
+    bad: step.key === "qed" ? A(t, T.reject, 0.6) * (1 - A(t, T.insert - 0.4, 0.7)) : 0,
+    fresh: isFix ? pulse(t, T.insert + 0.5, 3.0) : 0,
+    okMark: step.key === "qed" ? A(t, T.stamp, 0.6) : 0,
+  };
+}
+
+/* =========================================================================
+   10. THE FRAME
+   ========================================================================= */
+function draw(t) {
+  TT = t;
+  background();
+
+  const a = A(t, T.boardIn, 0.9) * (1 - A(t, T.endcard, 0.6));
+  const post = t >= T.insert - 0.4;
+  const st = post ? ST2 : ST1;
+
+  caption(t, a);
+  itemHead(t, a);
+  bands(t, st, a);
+
+  // the file
+  const list = ROWS();
+  list.forEach((step, i) => {
+    const o = rowStateFor(step, t, step.key === "lt" ? 4 : DRAFT.findIndex((s) => s.key === step.key));
+    if (!o) return;
+    o.alpha *= a;
+    proofRow(t, step, o);
+  });
+
+  // its graph
+  const findA = A(t, T.reject, 0.6) * (1 - A(t, T.insert - 0.4, 0.7));
+  const gA = A(t, T.node0 - 0.8, 0.8) * a * (1 - 0.72 * findA);
+  if (gA > 0.01) {
+    const rem = easeInOut(A(t, T.restrat, T.restratDur));
+    const posOf = (k) => {
+      const p2 = ST2.place[k], xy2 = nodeXY(p2, bandCount(ST2, p2.band));
+      const p1 = ST1.place[k];
+      if (!p1) return xy2;
+      const xy1 = nodeXY(p1, bandCount(ST1, p1.band));
+      return [lerp(xy1[0], xy2[0], rem), lerp(xy1[1], xy2[1], rem)];
+    };
+    graph(t, {
+      list: list, alpha: gA, posOf: posOf,
+      labelOf: (k) => (t >= T.restrat + T.restratDur * 0.4 ? ST2.label[k] : (ST1.label[k] || ST2.label[k])),
+      layerOf: (k) => (post ? ST2.layer[k] : ST1.layer[k]),
+      appear: (k) => (k === "lt" ? A(t, T.insert + 0.3, 0.7) : A(t, T.node0 + nodeIdx(k) * T.nodeGap, 0.6)),
+      hot: (k) => (k === "lt" ? pulse(t, T.insert + 0.3, 3) : pulse(t, T.node0 + nodeIdx(k) * T.nodeGap, 1.4) * 0.8),
+      bad: (k) => (k === "qed" ? A(t, T.reject, 0.6) * (1 - A(t, T.insert - 0.4, 0.7)) : 0),
+      layerNote: (k) => (k === "lt" ? win(t, T.insert + 0.6, T.insert + 4.2)
+        : win(t, T.node0 + nodeIdx(k) * T.nodeGap + 0.25, T.node0 + nodeIdx(k) * T.nodeGap + 2.5)),
+      newEdge: (k, c) => t < T.insert + 5 && (k === "lt" || (k === "qed" && c === "@lt")),
+    });
+  }
+
+  actorSlot(t, a);
+  finding(t, a);
+  annotate(t, a);
+
+  text("prestige intelligence · math library", 60, CREDIT_Y, { size: 18, weight: 600, color: rgba(C.faint, 0.8), alpha: a * 0.9 });
+  text("LEVELS.md steps 5–8 · worker/src/precheck.ts", W - 60, CREDIT_Y,
+    { size: 18, weight: 500, mono: true, color: rgba(C.faint, 0.7), align: "right", alpha: a * 0.9 });
+
+  titleCard(t);
+  endCard(t);
+}
+
+/* =========================================================================
+   11. PLAYER / FILM MODE
+   ========================================================================= */
+const FILM = new URLSearchParams(location.search).has("film");
+let T_NOW = 0, playing = true, last = 0;
+
+if (FILM) {
+  document.body.classList.add("film");
+  window.__film = { duration: TOTAL, seek: function (t) { draw(clamp(t, 0, TOTAL)); return true; } };
+  draw(0);
+} else {
+  document.getElementById("slot").replaceWith(cv);
+  const play = document.getElementById("play");
+  const scrub = document.getElementById("scrub"), scrubi = document.getElementById("scrubi");
+  const clock = document.getElementById("clock");
+  const mm = (v) => Math.floor(v / 60) + ":" + String(Math.floor(v % 60)).padStart(2, "0");
+  play.addEventListener("click", function () {
+    playing = !playing;
+    play.textContent = playing ? "❚❚ Pause" : "▶ Play";
+  });
+  const seekAt = (e) => {
+    const r = scrub.getBoundingClientRect();
+    T_NOW = clamp(((e.clientX - r.left) / r.width) * TOTAL, 0, TOTAL - 0.02);
+  };
+  scrub.addEventListener("pointerdown", function (e) { seekAt(e); scrub.setPointerCapture(e.pointerId); });
+  scrub.addEventListener("pointermove", function (e) { if (e.buttons) seekAt(e); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === " ") { e.preventDefault(); play.click(); }
+    if (e.key === "ArrowRight") T_NOW = clamp(T_NOW + 2, 0, TOTAL - 0.02);
+    if (e.key === "ArrowLeft") T_NOW = clamp(T_NOW - 2, 0, TOTAL - 0.02);
+  });
+  const frame = (now) => {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    if (playing) { T_NOW += dt; if (T_NOW >= TOTAL) T_NOW = 0; }
+    draw(T_NOW);
+    scrubi.style.width = (T_NOW / TOTAL) * 100 + "%";
+    clock.textContent = mm(T_NOW) + " / " + mm(TOTAL);
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(function (n) { last = n; frame(n); });
+}
+</script>
+</body>
+</html>
