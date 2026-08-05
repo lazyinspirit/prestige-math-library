@@ -176,6 +176,25 @@ the audit receipt and repeat the final `level-coverage.mjs
 --verify-current-context` gate after its targeted paired rejudge. A stale
 receipt or pair of ledger rows is not publication evidence.
 
+> **REPORT EXACTLY WHICH ITEMS YOU EDITED — that list IS the rejudge set**
+> (owner, 2026-08-06). Only items whose own text you changed are rejudged. Their
+> unedited page-mates are not, even though your repair moves the whole A/B pair's
+> frozen context, because coverage is now bound to each item's own
+> `item_sha256`. Before that change, wave 5 measured 2 repairs forcing a rejudge
+> of all 31 items on a pair — 12 of which cited the repaired items nowhere — and
+> ~130 calls for 10 repairs.
+>
+> Two things follow for you. **Name the edited items explicitly** in your report,
+> as a plain list of ids; the orchestrator rejudges that list, so an item you
+> repaired but did not name goes to A10 carrying a verdict cast against text that
+> no longer exists. And **batch your repairs per item, not per visit**: finishing
+> an item's repairs in one pass costs one rejudge, while returning to it later
+> costs another.
+>
+> This does not soften what a repair means. A repaired proof is always rejudged
+> by both lanes before it can be stamped. What is spared is only the sibling you
+> did not touch.
+
 Standing instruction: re-read your own Remarks with a numbered step's suspicion.
 Remark prose is where falsehoods hide.
 

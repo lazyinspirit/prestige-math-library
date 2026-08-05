@@ -879,6 +879,32 @@ const userPrompt = buildUserPrompt();
 // a model-specific system prompt, context block, or verdict from the other.
 const frozenPrompt = sys + "\n\n=== AUDIT MATERIAL ===\n" + userPrompt;
 const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
+
+// THE ITEM'S OWN HASH, recorded ALONGSIDE the context hash and never instead of
+// it. The two answer different questions and A8 needs both:
+//
+//   context_sha256  did anything in the frozen prompt change? — the A/B PAIR in
+//                   full, so a page-mate's repair moves it.
+//   item_sha256     did THIS item's text change?
+//
+// Measured, wave 5 A8: Alpha repaired 2 items and `level-coverage
+// --verify-current-context` demanded a fresh verdict pair for all 31 items on
+// the pair, 12 of which cite the repaired items nowhere, even transitively. Four
+// rounds of that cost ~130 rejudge calls for 10 real repairs. The context hash
+// is the only thing the ledger recorded, so coverage could not tell "this proof
+// changed" from "a sibling on the same page changed".
+//
+// AUDIT-WORKFLOW.md and CLAUDE.md already state the rule this restores — audit
+// A8 "re-runs both judges only on what changed", with an item SHA-256 "so the
+// stamp itself and a later unrelated companion-page edit cannot stale it". The
+// field was simply never written, so the gate had nothing to honour it with.
+//
+// Normalisation matches apply-judge-stamps' attestedItemHash exactly: the whole
+// file with only the `judge:` block removed. Excluding it is what stops the act
+// of stamping a pass from invalidating the pass it records.
+const itemSha256 = createHash("sha256")
+  .update(readFileSync(file, "utf8").replace(/^ {2}judge:\n(?: {4}.*\n)*/m, ""))
+  .digest("hex");
 // --dump-prompt prints the exact frozen payload and exits without a network call.
 if (bools.has("dump-prompt")) {
   console.log(frozenPrompt);
@@ -886,7 +912,7 @@ if (bools.has("dump-prompt")) {
   process.exit(0);
 }
 if (bools.has("context-hash")) {
-  console.log(JSON.stringify({ id, context_sha256: contextSha256 }));
+  console.log(JSON.stringify({ id, context_sha256: contextSha256, item_sha256: itemSha256 }));
   process.exit(0);
 }
 
@@ -1168,7 +1194,7 @@ const emit = (judgeModel: string, keep: boolean | null, reason: string): void =>
   const vlog = process.env.JUDGE_VERDICTLOG;
   if (vlog) {
     try {
-      appendFileSync(vlog, JSON.stringify({ id, model: judgeModel, keep, reason, context_sha256: contextSha256, at: new Date().toISOString() }) + "\n");
+      appendFileSync(vlog, JSON.stringify({ id, model: judgeModel, keep, reason, context_sha256: contextSha256, item_sha256: itemSha256, at: new Date().toISOString() }) + "\n");
     } catch { /* non-fatal: stdout is still the primary channel */ }
   }
 };

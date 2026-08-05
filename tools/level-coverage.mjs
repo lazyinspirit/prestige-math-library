@@ -342,18 +342,60 @@ function currentContextHash(id) {
     error('context-hash', `${id}: judge context hash failed: ${(result.stderr || result.stdout || 'unknown failure').trim()}`, id);
     return null;
   }
-  try { return JSON.parse(result.stdout).context_sha256; }
+  try {
+    const row = JSON.parse(result.stdout);
+    return { context: row.context_sha256, item: row.item_sha256 ?? null };
+  }
   catch { error('context-hash', `${id}: judge context hash output was not JSON`, id); return null; }
 }
 
+// COVERAGE FOLLOWS THE ITEM, NOT THE PAGE.
+//
+// The judge's context unit is the A/B PAIR — an item is judged with its whole
+// page and companion in full, which is what lets a judge catch a claim its own
+// siblings falsify. A consequence nobody had costed: `context_sha256` moves when
+// ANY item on the pair is edited, so repairing one proof staled the verdicts of
+// every item beside it.
+//
+// Measured, wave 5 A8: 2 repairs demanded a fresh pair for all 31 items on the
+// pair, 12 of which cite the repaired items nowhere, not even transitively. Over
+// four rounds, 10 real repairs cost ~130 rejudge calls, and each round's repairs
+// staled the round before. That is not extra rigour — a judge re-reading an
+// unchanged proof against an unchanged argument returns the same verdict, and
+// pays for it.
+//
+// So an item is covered when EITHER
+//   (a) its verdicts were cast against the CURRENT pair context — strictly what
+//       was checked before, and still the strongest evidence; or
+//   (b) its OWN text is byte-identical to what those verdicts were cast against.
+//       The proof the judge read is the proof on disk; only a neighbour moved.
+//
+// (b) is not a relaxation invented here. AUDIT-WORKFLOW.md §9 and CLAUDE.md
+// already require audit A8 to "re-run both judges ONLY ON WHAT CHANGED", with an
+// item SHA-256 recorded "so the stamp itself and a later unrelated companion-page
+// edit cannot stale it". The field simply was never written to the ledger, so
+// this gate had nothing to honour the rule with. judge.mts now records it.
+//
+// A REPAIRED item is never covered by (b): its own hash changed, so it must be
+// rejudged. That is the guarantee this gate exists to enforce, and it is intact.
+// Legacy rows predating item_sha256 fall back to (a) alone, which is strict.
 const judgeCoverage = [];
 for (const id of judgePath ? scope : []) {
   const contexts = verdicts.get(id) ?? new Map();
-  const current = verifyCurrent ? currentContextHash(id) : null;
-  const eligible = [...contexts.entries()].filter(([hash, byModel]) =>
-    (!verifyCurrent || hash === current) && JUDGES.every((model) => byModel.has(model)));
+  const now = verifyCurrent ? currentContextHash(id) : null;
+  const current = now?.context ?? null;
+  const currentItem = now?.item ?? null;
+  const coversCurrent = ([hash, byModel]) => {
+    if (!verifyCurrent) return true;
+    if (hash === current) return true;
+    // (b): every lane's verdict was cast against this exact item text.
+    return Boolean(currentItem)
+      && JUDGES.every((model) => byModel.get(model)?.item_sha256 === currentItem);
+  };
+  const eligible = [...contexts.entries()].filter((entry) =>
+    coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
   if (!eligible.length) {
-    error('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context' : ''}`, id);
+    error('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context, and none cast against the item\'s current text' : ''}`, id);
     continue;
   }
   eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);

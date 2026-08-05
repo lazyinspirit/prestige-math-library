@@ -504,7 +504,13 @@ banner; the public sees only `published`.
   requires an Alpha disposition before the item can continue. After Step 7,
   `level-coverage.mjs --verify-current-context` is the hard receipt gate: every
   scoped item needs provenance, every proof-bearing item needs a merged contract,
-  and both DeepSeek/Sonnet lanes need matching current frozen-context verdicts.
+  and both DeepSeek/Sonnet lanes need current verdicts — cast either against the
+  current frozen pair context, or against byte-identical text of that item
+  (owner, 2026-08-06). Repairing one item moves the whole A/B pair's context
+  hash, so the strict reading forced a rejudge of every untouched sibling: wave 5
+  measured 2 repairs staling all 31 items on a pair, and ~130 rejudge calls for
+  10 repairs. A repaired item still always rejudges, because its own
+  `item_sha256` changed; only its unedited page-mates are spared.
   A current rejection is a hard stop unless Alpha has recorded an exact-hash
   adjudication: `confirmed_fatal` blocks closure, while `confirmed_nonfatal`
   and `false_positive` may clear that rejection under Alpha's 30-second rule.

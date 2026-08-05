@@ -395,8 +395,31 @@ without any edit, which `step8-guard.mjs` below enforces. Every row also
 requires `item_sha256` (`judge-adjudication-unhashed`), the text state the
 decision was made against. With
 `--verify-current-context` it recomputes each no-network judge prompt hash, so
-an old pass cannot be reused after its item, cited statement, pair context, or
-conventions changed. It also computes every planned-versus-authored `deps`
+an old pass cannot be reused after its item, cited statement, or conventions
+changed.
+
+**COVERAGE FOLLOWS THE ITEM, NOT THE PAGE** (owner, 2026-08-06). The judge's
+context unit is the A/B pair — an item is judged with its whole page and
+companion in full, which is what lets a judge catch a claim its own siblings
+falsify. The consequence nobody had costed: `context_sha256` moves when ANY item
+on the pair is edited, so repairing one proof staled the verdicts of every item
+beside it. Measured at wave 5's A8, 2 repairs demanded a fresh verdict pair for
+all 31 items on the pair, 12 of which cite the repaired items nowhere, not even
+transitively; over four rounds, 10 real repairs cost ~130 rejudge calls, and each
+round's repairs staled the round before. A judge re-reading an unchanged proof
+against an unchanged argument returns the same verdict and charges for it.
+So an item is covered when EITHER its verdicts were cast against the current pair
+context, OR **both lanes' verdicts were cast against byte-identical text of that
+item** — `judge.mts` now records `item_sha256` on every verdict beside
+`context_sha256`, normalised exactly as `apply-judge-stamps`' `attestedItemHash`
+(the file with only the `judge:` block removed, so stamping a pass cannot
+invalidate it). A REPAIRED item is never covered by the second route, because its
+own hash changed; that guarantee is the point of the gate and is intact. Rows
+predating the field fall back to the strict context check. This is not a new
+licence: `AUDIT-WORKFLOW.md` §9 and `CLAUDE.md` already required A8 to re-judge
+"only on what changed", with an item SHA-256 so "a later unrelated companion-page
+edit cannot stale it" — the field was simply never written, so the gate had
+nothing to honour the rule with. It also computes every planned-versus-authored `deps`
 difference from the batch manifest; Alpha must record the exact planned and
 actual lists plus a reason, so a legitimate proof-driven change cannot drift
 silently into the scaffold. It requires `spine-audit.mjs`'s independent,

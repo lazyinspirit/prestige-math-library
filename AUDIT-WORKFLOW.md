@@ -571,7 +571,23 @@ to an item SHA-256 with only `verification.judge` excluded. It is validated by
 stamp. This is **not** a replacement full-wave sweep: unchanged items and
 consumers disposed `still-licensed` are neither rejudged nor required to have
 a new current-context pair, and a later unrelated A/B-page prose edit does not
-stale the target. Standing instruction: re-read Remarks with a numbered step's
+stale the target.
+
+**ONLY REPAIRED ITEMS ARE REJUDGED — enforced, not merely stated** (owner,
+2026-08-06). The rule above was the intent from the beginning, but nothing made
+`level-coverage --verify-current-context` obey it. The judge's context unit is
+the A/B PAIR, so `context_sha256` moves when ANY item on the pair is edited, and
+the gate demanded a fresh pair for every sibling of a repair. Wave 5's A8
+measured the cost: 2 repairs staled all 31 items on a pair, 12 of which cite the
+repaired items nowhere, and 10 repairs across four rounds cost ~130 rejudge
+calls — each round staling the one before. `judge.mts` now records
+`item_sha256` on every verdict beside `context_sha256`, and coverage accepts a
+verdict pair cast against **byte-identical text of that item** even when the pair
+context has moved. A repaired item is never covered that way, because its own
+hash changed: it always rejudges. Ledger rows predating the field fall back to
+the strict context comparison. Alpha must therefore **report the exact ids it
+edited** — that list is the rejudge set, and an unnamed repair reaches A10
+carrying a verdict cast against text that no longer exists. Standing instruction: re-read Remarks with a numbered step's
 suspicion. Remark prose is where falsehoods hide. **Write judge stamps last**,
 once the text is final.
 
