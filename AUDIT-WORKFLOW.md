@@ -201,7 +201,16 @@ dependency level**, all batches of a wave running in parallel.
   (1 pair); wave 5 splits `topology`'s five pairs three ways. Choose the split to
   sever cross-pair dependency edges where possible, and confirm from
   `audit-manifest.mjs` that the cross-pair edge count is unchanged by the split
-  itself. `content-policy.mjs --audit` deliberately does **not** raise
+  itself.
+  **Declare the split, do not perform it by hand.** A0's first action regenerates
+  every manifest, so a hand split applied before launch is erased by the run that
+  consumes it. Write `research/audit/wave<k>-batch-split.json` mapping the
+  generated manifest to its targets, listing **A pages only** (each B companion
+  rides with its A page — the pair is the judge's context unit and must not be
+  divided). `tools/audit-batch-split.mjs` applies it immediately after
+  generation, refuses a target still over the cap or a split that leaves any page
+  unplaced, and writes nothing at all when it refuses, so a bad declaration
+  cannot silently shrink audit scope. It is idempotent; A0 may re-run. `content-policy.mjs --audit` deliberately does **not** raise
   `batch-a-pair-cap` (§8), because the cap is a property of the assignment
   rather than of the manifest text; that silence is why the split has to be a
   named A0 step and not a gate the driver can wait for.

@@ -239,6 +239,15 @@ const PLAN = {
     // published page files and excludes already-tagged items mechanically.
     actions: () => [
       ['tools/rounds.mjs', '--audit-batches', '--wave', String(state.wave), '--outdir', DIR],
+      // rounds.mjs emits one manifest per category, which is SCOPE, not an
+      // assignment: a category with more than two A/B pairs exceeds the Beta
+      // capacity rule and no gate catches it (content-policy --audit
+      // deliberately does not raise batch-a-pair-cap). Splitting used to be a
+      // manual pre-launch step, which this very action then regenerated over.
+      // Declaring it as <run>-batch-split.json and applying it here means A0 is
+      // re-runnable and the split cannot be silently undone. A wave with no
+      // declaration is unaffected.
+      ['tools/audit-batch-split.mjs', '--run', run, '--dir', DIR],
       ['tools/touchlog.mjs', 'snap', `${DIR}/${run}-touches.json`, 'baseline'],
       ['tools/genrisk.mjs', '--out', `${DIR}/genrisk.json`],
     ],

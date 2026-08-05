@@ -456,7 +456,23 @@ wave; pairs are A page + published `-examples` companion; `not-proved-here`
 is excluded from scope (its pages still take part in the home map); item
 lists come from the page files (spec lists are stale for old pages), and
 each item records its current authored `deps` as the reconciliation
-baseline. Items already carrying both component-provenance tags are excluded
+baseline. **Its output is scope, not a work assignment**: a category with more
+than two A/B pairs exceeds the Beta capacity rule, and no gate catches it —
+`content-policy.mjs --audit` deliberately does not raise `batch-a-pair-cap`,
+because the cap binds the assignment rather than the manifest.
+**`tools/audit-batch-split.mjs`** closes that: A0 runs it immediately after
+generation, applying `research/audit/wave<k>-batch-split.json`, which names A
+pages only (a B companion always rides with its A page — the pair is the judge's
+context unit). It refuses a target still over the cap, or any page left
+unplaced, and writes nothing when it refuses, because a split that quietly drops
+a pair would shrink audit scope while the wave still reported success. Declaring
+the split as data rather than performing it by hand is not a style choice: A0's
+first action regenerates every manifest, so a hand split is erased by the run
+that consumes it. Idempotent, so A0 re-runs safely. Wave 5 is the first user —
+`topology`'s five pairs become three batches of 2/2/1, chosen to sever a
+cross-pair edge, which moved exactly one edge from same-batch to cross-batch
+(501→500, 28→29) with the 1,927 total unchanged.
+Items already carrying both component-provenance tags are excluded
 at scope generation (owner standing rule 2026-08-02 — tagged content was
 audited and judged at authoring and is never re-audited), so every
 downstream gate and the judge sweep inherit the exclusion; a fully-tagged
