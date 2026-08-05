@@ -66,8 +66,12 @@ test('A3 halts for judgment by default, and names the decision', () => {
 });
 
 test('a failing gate halts with gate-failed and does not advance', () => {
-  // A0: three actions ok, audit-manifest ok, then the gate fails.
-  const r = drive(['--wave', '99'], [ok, ok, ok, ok, fail]);
+  // A0: FOUR actions ok (rounds, audit-batch-split, touchlog, genrisk),
+  // audit-manifest ok, then the gate fails. The fixture is consumed by index, so
+  // adding an action to A0 shifts every later outcome — audit-batch-split landed
+  // here on 2026-08-05 and silently moved the `fail` onto audit-manifest, which
+  // turned this into a test that the run reaches A3.
+  const r = drive(['--wave', '99'], [ok, ok, ok, ok, ok, fail]);
   assert.equal(r.code, 1);
   assert.match(r.out, /gate-failed/);
 });
@@ -79,7 +83,7 @@ test('a failing action halts with action-failed', () => {
 });
 
 test('the resume command always names the step that halted', () => {
-  const r = drive(['--wave', '99'], [ok, ok, ok, ok, fail]);
+  const r = drive(['--wave', '99'], [ok, ok, ok, ok, ok, fail]);
   assert.match(r.out, /--from-step A0/);
 });
 
@@ -148,14 +152,45 @@ test('every audit gate step in the driver exists in the gate table', () => {
   }
 });
 
+// Measured 2026-08-05: `sandbox: 'read-only'` in the role table is a LABEL, and
+// asserting the label is what let a real escape through. A claude-runner lane
+// carrying only a deny list created the file it was told to create, by
+// delegating to a subagent whose tools do not inherit that list. So this test
+// now asserts the ENFORCEMENT, per runner, and fails if a read-only role ever
+// reports a mechanism that does not actually withhold the disk.
 test('the read-only audit roles really are read-only', () => {
+  // audit-refuter runs on the tool-less DeepSeek lane, which cannot open a file
+  // and therefore REQUIRES assembled context; dispatching one without --task is
+  // an error by design, so the probe supplies one.
+  const taskFile = 'research/audit/wave4-A8-round3-task.md';
   for (const role of ['audit-refuter', 'certifier']) {
     const r = spawnSync(process.execPath, ['tools/dispatch.mjs', '--role', role,
-      '--brief', 'briefs/audit-alpha.md', '--label', 't', '--run', 'wave99', '--var', 'k=99', '--dry-run', '--json'],
+      '--brief', 'briefs/audit-alpha.md', '--label', 't', '--run', 'wave99', '--var', 'k=99',
+      '--task', taskFile, '--dry-run', '--json'],
       { cwd: REPO, encoding: 'utf8' });
-    assert.equal(r.status, 0, `${role} should dry-run cleanly`);
-    assert.equal(JSON.parse(r.stdout).sandbox, 'read-only', `${role} must be sandboxed read-only, not merely asked`);
+    assert.equal(r.status, 0, `${role} should dry-run cleanly: ${r.stderr}`);
+    const report = JSON.parse(r.stdout);
+    assert.equal(report.sandbox, 'read-only', `${role} must be sandboxed read-only, not merely asked`);
+    assert.ok(report.read_only_enforcement, `${role} declares read-only but reports no enforcement mechanism`);
+    if (report.runner === 'claude') {
+      // The allow list is the guarantee — a deny list alone is provably escapable.
+      assert.match(report.read_only_enforcement, /--allowed-tools/,
+        `${role} on the claude runner must restrict via an allow list, not a deny list alone`);
+      assert.match(report.command, /--disallowed-tools(?=.*\bTask\b)(?=.*\bAgent\b)(?=.*\bWorkflow\b)/,
+        `${role} must also deny every delegation tool; a subagent does not inherit this process's limits`);
+    }
   }
+});
+
+test('a blind lane cannot be dispatched without assembled context', () => {
+  // The DeepSeek refuter has no filesystem. Briefing it to "read the item on
+  // disk" and giving it nothing produces a confident reading of nothing, which
+  // is worse than a failure, so dispatch refuses it.
+  const r = spawnSync(process.execPath, ['tools/dispatch.mjs', '--role', 'audit-refuter',
+    '--brief', 'briefs/audit-alpha.md', '--label', 't', '--run', 'wave99', '--var', 'k=99', '--dry-run'],
+    { cwd: REPO, encoding: 'utf8' });
+  assert.equal(r.status, 2);
+  assert.match(r.stderr, /no filesystem access/);
 });
 
 test('an audit agent cannot be dispatched without a concrete wave identity', () => {

@@ -631,6 +631,21 @@ tool-less runner: a refuter dispatched without assembled context would read
 nothing, confidently.
 
 Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
+
+**The drivers dispatch a step's agents in PARALLEL** (owner, 2026-08-05, binding
+on this and every future session). Both `run-level.mjs` and `run-wave.mjs` used a
+serial `for` loop that blocked on each dispatch, which made the surrounding
+design inert: `beta`, `reader` and `audit-beta` all carry a lane cap of 5 so a
+level's or wave's batches run at once, and `AUDIT-WORKFLOW.md` §7 justifies the
+fan-out by the batches' disjoint write sets — but the cap never bound, and wave 5
+was on course to spend ~2 hours reading four batches strictly one after another.
+Concurrency is still bounded by the ROLE rather than by the driver, because
+`dispatch.mjs` acquires a cross-process slot before spawning its model; a
+single-agent step (Alpha, cap 1) is unchanged. Failure semantics changed with it:
+every agent now completes and the halt names ALL failures, because a broken brief
+or credential is usually broken for every lane at once. Dry-run and simulation
+stay serial on purpose — a simulation consumes its `outcomes` fixture by index,
+so a shuffled completion order would silently reassign outcomes to agents.
 A leftover `<n>` in a brief is fatal (briefing an agent about "level <n>" is how
 it ends up guessing), while genuinely generic placeholders only warn.
 `tools/slots.mjs` is the cross-process directory-semaphore pool it shares with

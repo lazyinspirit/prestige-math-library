@@ -1,0 +1,17 @@
+{
+  "role": "audit-beta",
+  "label": "real-analysis",
+  "run": "wave5",
+  "runner": "claude",
+  "model": "claude-opus-5",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-05T08:45:59.771Z",
+  "ended_at": "2026-08-05T09:15:23.303Z",
+  "ms": 1763532,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-beta-real-analysis.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/audit-beta-real-analysis.prompt.md",
+  "tail": "A1 and A2 are complete for the wave-5 `real-analysis` batch. Three files written, no item file touched.\n\n## What I found\n\n**No fatal defect.** All 31 items, all 211 proof steps, and every dependency citation were read against the on-disk text of the 60 external targets. Zero undeclared dependencies, zero dangling fact/step references, all 21 source URLs return 200.\n\n**A1 — provenance** (`wave5-real-analysis.provenance.jsonl`, 31 rows): 15 `literature-derived`/`exact-source`, 13 `ai-altered`/`semantic-source`, 3 `ai-generated`/`trivial`. No `established-knowledge` rows, so **no Alpha URL waiver is needed anywhere in this batch**. None of the 31 items carries a legacy `authorship` line, so the A4 retag is purely additive and voids no judge stamp.\n\nThe three `ai-generated` calls are the bespoke witnesses (`x_{k+1}=(x_k+1)/3`; the interleaving `1,1,2,1,3,…`; `x_{k+1}=x_k+1/x_k`), each tagged on the witness per the wave-0 precedent, each with the truth verification written out, and each with **zero `deps` consumers corpus-wide** — so the label is mechanically inert either way. I escalated all three as borderline. Conversely I kept `fs-convergent-subsequence-implies-bounded` at `statement: ai-altered` deliberately: it *is* a `deps` target, so the statement label has to classify the sourced refuted claim, not the local witness.\n\n`def-interval` — 338 consumers, the most load-bearing item in either wave — came out `ai-altered`, so every topology batch citing it stays legal.\n\n**A2 — proof contracts** (`wave5-real-analysis.proof-contracts.json`): 26 items, 322 citation contracts, 211 step contracts, 208 boundary dispositions. `proof-contract.mjs --strict` reports **3 errors, 0 warnings** — every quote verified verbatim in the named section, every step mapped exactly once.\n\nThose 3 errors are one real finding: `ex-nested-intervals-single-point [L8]` and `cex-nested-open-intervals-empty [L5]` are declared facts that **no proof step consumes**. I recorded them honestly with `uses: []` rather than omitting them. Nonfatal; I recommend no repair and costed the alternative for Alpha.\n\nFive other nonfatal observations, all with \"no repair\" recommended and reasons given — the sharpest is **N1**: `thm-cauchy-criterion-via-lub`'s title generalises to *every complete ordered field*, while its three cited lemmas are all stated for `ℝ` through `def-real-limit`'s rational-ε convention. The claim is true and standard; it just isn't discharged inline. And **N6**, corpus-wide rather than batch-local: 24 of 31 items pair a Rudin theorem citation with the Wikipedia article *about the book*, and five pair Bartle & Sherbert §3.5 with an unrelated page. I located open-access sources carrying the actual clauses (PlanetMath, ProofWiki, MIT OCW) and put them in the ledger.\n\nNext action is A3: Alpha adjudicates, then the bulk pure-retag pass at A4 under a single stage snapshot."
+}

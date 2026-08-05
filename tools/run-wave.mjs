@@ -26,7 +26,7 @@
 // would propagate through several of them before anyone looked.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
@@ -159,14 +159,42 @@ const execute = (what, bin, args, opts = {}) => {
   return { code: child.error ? null : child.status, out };
 };
 
+// The async twin of `execute`, used only for the agent fan-out (owner,
+// 2026-08-05: run batch agents in parallel, this session and every future one).
+// Everything else in this driver stays synchronous on purpose — a state machine
+// that mutates `state` and calls `halt()` is far easier to reason about when one
+// thing happens at a time, and no other step benefits.
+//
+// Dry-run and simulation deliberately fall through to the SYNC path: both must
+// stay deterministic and ordered, since a simulation consumes `outcomes` by
+// index and a shuffled order would silently reassign outcomes to agents.
+const executeAsync = (what, bin, args, opts = {}) => {
+  if (simulation || dryRun) return Promise.resolve(execute(what, bin, args, opts));
+  return new Promise((resolve) => {
+    const child = spawn(bin, args, { cwd: REPO, ...opts });
+    let out = '';
+    let settled = false;
+    const finish = (code) => { if (settled) return; settled = true; clearTimeout(timer); resolve({ code, out: out.trim() }); };
+    const timer = setTimeout(() => child.kill('SIGTERM'), 8 * 3600 * 1000);
+    child.stdout.on('data', (d) => { out += d; });
+    child.stderr.on('data', (d) => { out += d; });
+    child.on('error', (e) => { out += String(e); finish(null); });
+    child.on('close', finish);
+  });
+};
+
 const node = (args) => execute(args[0], process.execPath, args);
 const runGates = (step) => execute(`gates ${step}`, process.execPath,
   ['tools/gates.mjs', '--audit', '--step', step, '--run', run, '--json']);
-const dispatchAgent = (role, brief, label, vars = {}, task = null) => execute(`dispatch ${role}/${label}`, process.execPath, [
+const dispatchArgs = (role, brief, label, vars = {}, task = null) => [
   'tools/dispatch.mjs', '--role', role, '--brief', brief, '--label', label, '--run', run,
   ...Object.entries(vars).flatMap(([k, v]) => ['--var', `${k}=${v}`]),
   ...(task ? ['--task', task] : []),
-]);
+];
+const dispatchAgent = (role, brief, label, vars = {}, task = null) =>
+  execute(`dispatch ${role}/${label}`, process.execPath, dispatchArgs(role, brief, label, vars, task));
+const dispatchAgentAsync = (role, brief, label, vars = {}, task = null) =>
+  executeAsync(`dispatch ${role}/${label}`, process.execPath, dispatchArgs(role, brief, label, vars, task));
 
 // ---- control file -----------------------------------------------------------
 
@@ -462,10 +490,41 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
     journal('precompute', { detail: `impact template exit ${tmpl.code}` });
   }
 
-  for (const agent of plan.agents?.() ?? []) {
-    const result = dispatchAgent(agent.role, agent.brief, agent.label, agent.vars);
-    journal('agent', { detail: `${agent.role}/${agent.label} exit ${result.code}` });
-    if (result.code !== 0) halt('agent-failed', `${agent.role}/${agent.label} failed at ${step}: ${String(result.out).slice(-500)}`, resumeCmd(step));
+  // AGENT FAN-OUT IS PARALLEL (owner, 2026-08-05, binding on this and every
+  // future session). This was a serial `for` loop, which made the whole design
+  // around it inert: `audit-beta` carries a lane cap of 5 precisely so a wave's
+  // batches run at once, and AUDIT-WORKFLOW.md §7 justifies the fan-out by the
+  // batches' disjoint write sets — but the loop blocked on each dispatch, so the
+  // cap never bound and wave 5's four batches were quoted at ~2 hours of
+  // strictly sequential reading.
+  //
+  // CONCURRENCY IS BOUNDED BY THE ROLE, NOT HERE. dispatch.mjs acquires a
+  // cross-process slot before spawning its model, so the real limit is the role
+  // cap (audit-beta 5, audit-alpha 1). Launching every agent of a step at once
+  // is therefore safe by construction: excess ones park cheaply in a node
+  // process waiting for a slot, and a single-agent step (A6, A8) behaves exactly
+  // as before.
+  //
+  // FAILURE SEMANTICS CHANGE, DELIBERATELY. Serially, the first failure halted
+  // and the remaining agents never ran, so an operator learned about one broken
+  // lane per run. Now every agent completes and the halt names ALL of them —
+  // when a brief or a credential is wrong it is usually wrong for all four, and
+  // discovering that in one run instead of four is the point.
+  const agents = plan.agents?.() ?? [];
+  if (agents.length) {
+    const results = await Promise.all(agents.map((agent) =>
+      dispatchAgentAsync(agent.role, agent.brief, agent.label, agent.vars, agent.task ?? null)
+        .then((result) => ({ agent, result }))));
+    for (const { agent, result } of results) {
+      journal('agent', { detail: `${agent.role}/${agent.label} exit ${result.code}` });
+    }
+    const failed = results.filter(({ result }) => result.code !== 0);
+    if (failed.length) {
+      halt('agent-failed',
+        `${failed.length} of ${results.length} agent(s) failed at ${step}:\n`
+        + failed.map(({ agent, result }) => `  ${agent.role}/${agent.label}: ${String(result.out).slice(-400)}`).join('\n'),
+        resumeCmd(step));
+    }
   }
   for (const args of plan.afterAgents?.() ?? []) {
     const result = node(args);

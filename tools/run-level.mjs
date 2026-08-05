@@ -36,7 +36,7 @@
 // nonfatal rounds impossible, so every round this counts is a confirmed fatal.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, spawn } from 'node:child_process';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
 
@@ -168,10 +168,33 @@ const execute = (what, bin, args) => {
 const runGates = (step) => execute(`gates step ${step}`, process.execPath,
   ['tools/gates.mjs', '--step', String(step), '--run', run, '--json']);
 
-const dispatchAgent = (role, brief, agentLabel, vars = {}) => execute(`dispatch ${role}/${agentLabel}`, process.execPath, [
+const dispatchArgs = (role, brief, agentLabel, vars = {}) => [
   'tools/dispatch.mjs', '--role', role, '--brief', brief, '--label', agentLabel, '--run', run,
   ...Object.entries(vars).flatMap(([k, v]) => ['--var', `${k}=${v}`]),
-]);
+];
+const dispatchAgent = (role, brief, agentLabel, vars = {}) =>
+  execute(`dispatch ${role}/${agentLabel}`, process.execPath, dispatchArgs(role, brief, agentLabel, vars));
+
+// Async twin, used only for the agent fan-out — see the parallel block below.
+// Dry-run and simulation fall through to the sync path on purpose: a simulation
+// consumes `outcomes` by index, so a shuffled completion order would silently
+// reassign fixture outcomes to the wrong agents.
+const executeAsync = (what, bin, args) => {
+  if (simulation || dryRun) return Promise.resolve(execute(what, bin, args));
+  return new Promise((resolve) => {
+    const child = spawn(bin, args, { cwd: REPO });
+    let out = '';
+    let settled = false;
+    const finish = (code) => { if (settled) return; settled = true; clearTimeout(timer); resolve({ code, out: out.trim() }); };
+    const timer = setTimeout(() => child.kill('SIGTERM'), 6 * 3600 * 1000);
+    child.stdout.on('data', (d) => { out += d; });
+    child.stderr.on('data', (d) => { out += d; });
+    child.on('error', (e) => { out += String(e); finish(null); });
+    child.on('close', finish);
+  });
+};
+const dispatchAgentAsync = (role, brief, agentLabel, vars = {}) =>
+  executeAsync(`dispatch ${role}/${agentLabel}`, process.execPath, dispatchArgs(role, brief, agentLabel, vars));
 
 // ---- control file -----------------------------------------------------------
 
@@ -309,12 +332,33 @@ for (let step = state.step; step <= 10; step += 1) {
       `create the batch manifests, then: node tools/run-level.mjs --run ${run} --level ${state.level} --from-step ${step}`);
   }
 
-  // Agent work.
-  for (const agent of plan.agents?.() ?? []) {
-    const result = dispatchAgent(agent.role, agent.brief, agent.label, agent.vars);
-    journal('agent', { detail: `${agent.role}/${agent.label} exit ${result.code}` });
-    if (result.code !== 0) {
-      halt('agent-failed', `${agent.role}/${agent.label} failed at step ${step}: ${String(result.out).slice(-500)}`,
+  // Agent work — PARALLEL (owner, 2026-08-05, binding on this and every future
+  // session). This was a serial loop, which made the surrounding design inert:
+  // `beta` and `reader` carry lane caps of 5 so a level's batches run at once,
+  // but blocking on each dispatch meant the cap never bound.
+  //
+  // Concurrency is bounded by the ROLE, not here: dispatch.mjs acquires a
+  // cross-process slot before spawning its model, so launching a step's agents
+  // together is safe by construction, excess ones park cheaply waiting for a
+  // slot, and a single-agent step (Alpha, cap 1) behaves exactly as before.
+  //
+  // Failure semantics change deliberately: every agent now completes and the
+  // halt names ALL failures, because a broken brief or credential is usually
+  // broken for every lane, and learning that in one run beats learning it in
+  // four.
+  const agents = plan.agents?.() ?? [];
+  if (agents.length) {
+    const results = await Promise.all(agents.map((agent) =>
+      dispatchAgentAsync(agent.role, agent.brief, agent.label, agent.vars)
+        .then((result) => ({ agent, result }))));
+    for (const { agent, result } of results) {
+      journal('agent', { detail: `${agent.role}/${agent.label} exit ${result.code}` });
+    }
+    const failed = results.filter(({ result }) => result.code !== 0);
+    if (failed.length) {
+      halt('agent-failed',
+        `${failed.length} of ${results.length} agent(s) failed at step ${step}:\n`
+        + failed.map(({ agent, result }) => `  ${agent.role}/${agent.label}: ${String(result.out).slice(-400)}`).join('\n'),
         `node tools/run-level.mjs --run ${run} --level ${state.level} --from-step ${step}`);
     }
   }
