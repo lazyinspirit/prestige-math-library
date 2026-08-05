@@ -98,9 +98,19 @@ if (command === 'clear' || command === 'resume') {
   if (existsSync(statePath)) {
     const state = JSON.parse(readFileSync(statePath, 'utf8'));
     if (state.status !== 'running') {
+      // The restart command differs by workflow, and printing the wrong one is
+      // not a cosmetic slip: for a wave this used to emit
+      // `run-level.mjs --run wave5 --level undefined`, which names the BUILD
+      // driver and an undefined level. An operator pasting it gets a usage
+      // error at best. `workflow` is written by run-wave.mjs; a build state
+      // predates the field and is identified by carrying a level.
+      const isAudit = state.workflow === 'audit' || state.wave !== undefined;
       console.log(`\nthe run is ${state.status}; clearing the file does not restart it. Start it again with:`);
-      console.log(`  node tools/run-level.mjs --run ${run} --level ${state.level}` +
-        (state.status === 'halted' ? ` --from-step ${state.step}` : ''));
+      console.log(isAudit
+        ? `  node tools/run-wave.mjs --wave ${state.wave}` +
+          (state.status === 'halted' ? ` --from-step ${state.step}` : '')
+        : `  node tools/run-level.mjs --run ${run} --level ${state.level}` +
+          (state.status === 'halted' ? ` --from-step ${state.step}` : ''));
     }
   }
   process.exit(0);
