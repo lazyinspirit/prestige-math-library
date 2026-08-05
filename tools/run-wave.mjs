@@ -379,7 +379,13 @@ if (state.status === 'halted' && fromStep == null && !dryRun && !simulation) {
   console.error(`  ${state.halt?.reason}`);
   process.exit(2);
 }
+// Clear the halt on a successful restart. It is a record of why the run STOPPED,
+// so keeping it alongside status:running makes every later `--status` print a
+// live run and a halt reason together — wave 5 spent its whole A2 reporting a
+// depcheck failure that had been fixed hours earlier. The journal keeps the
+// history; this field is meant to describe the present.
 state.status = 'running';
+delete state.halt;
 state.policy = { judgment, park_after: parkAfter, judge_budget: judgeBudget };
 journal('start', { detail: `from ${state.step}` });
 save();

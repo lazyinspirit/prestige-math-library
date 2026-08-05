@@ -278,7 +278,11 @@ if (state.status === 'halted' && fromStep == null && !dryRun && !simulation) {
   console.error(`  ${state.halt?.reason}`);
   process.exit(2);
 }
+// Clear the halt on a successful restart — it records why the run STOPPED, and
+// keeping it beside status:running makes --status report a live run and a stale
+// failure at once. The journal keeps the history.
 state.status = 'running';
+delete state.halt;
 state.policy = { judgment, park_after: parkAfter, judge_budget: judgeBudget };
 journal('start', { detail: `from step ${state.step}` });
 save();
