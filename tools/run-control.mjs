@@ -48,8 +48,22 @@ const usage = (message) => {
 if (!run || !/^[A-Za-z0-9._-]+$/.test(run)) usage('--run is required and must be a plain run name');
 if (!command || !COMMANDS.includes(command)) usage(`command must be one of ${COMMANDS.join(', ')}`);
 
-const controlPath = join(REPO, 'research', `${run}-run-control.json`);
-const statePath = join(REPO, 'research', `${run}-run-state.json`);
+// A BUILD keeps its run files in research/; an AUDIT WAVE keeps them in
+// research/audit/, because run-wave.mjs namespaces everything under DIR so a
+// wave and a level of the same number cannot collide. This file hardcoded
+// research/, so every documented "steer it" command for a wave —
+// `run-control.mjs --run wave4 pause` in UNATTENDED-AUDIT.md — wrote a control
+// file that the audit driver never polls, and then PRINTED SUCCESS. A control
+// channel that silently does nothing is worse than one that errors: the operator
+// believes the wave is pausing and it runs straight on.
+//
+// Resolve by locating the run's own state file, which every started run writes.
+// Audit first, since a wave is the namespaced case; fall back to research/ so an
+// unstarted build still gets its historical path.
+const RUN_DIRS = ['research/audit', 'research'];
+const runDir = RUN_DIRS.find((d) => existsSync(join(REPO, d, `${run}-run-state.json`))) ?? 'research';
+const controlPath = join(REPO, runDir, `${run}-run-control.json`);
+const statePath = join(REPO, runDir, `${run}-run-state.json`);
 
 const write = (payload) => {
   writeFileSync(controlPath, JSON.stringify({ ...payload, at: new Date().toISOString() }, null, 2) + '\n');
