@@ -1481,3 +1481,218 @@ it is the single largest avoidable cost in the audit loop.
 **Exact next action:** orchestrator runs the 31-item rejudge, then A9 and A10.
 No A8 adjudication is outstanding: 108 rows, one per current rejection, none
 unadjudicated, none unhashed.
+
+---
+
+# A8 round 3 — the last six rejections. No items edited.
+
+**Recovery receipt.** Read before acting: `CLAUDE.md`, `briefs/audit-alpha.md`
+(as dispatched), `research/audit/wave5-a8-round3.task.md`, the tail of this
+report through the round-2 handoff, all 108 prior rows of
+`research/audit/wave5-judge-adjudications.jsonl`, and the six rejection rows in
+`research/audit/wave5-judge.jsonl`. Verified from disk: `git status` (clean of
+item changes), commit `0234c0e`, and the current text of all six targets plus
+every item their rejections cite — `fs-rationals-complete`, `lem-of-abs-value`,
+`def-abs-value`, `def-integer-power`, `lem-power-monotone`,
+`lem-convergent-implies-cauchy`. Baseline `pre-a8-round3` snapped before the
+first read: 2767 items, 26 snapshots.
+
+**Outcome: 0 confirmed_fatal, 0 items edited, 0 rejudge calls needed.**
+
+## The hash the dispatch printed is not the hash the gate compares
+
+The dispatch gave an `item <prefix>` for each rejection. **Every one of them is
+the wrong normalisation for this ledger**, and copying them in would have written
+six rows the guard can never match.
+
+There are two item hashes in this repo and they disagree on exactly these six
+files:
+
+| function | normalisation | consumed by |
+|---|---|---|
+| `judge.mts` / `apply-judge-stamps` | whole file, only the `judge:` **sub-block** removed | `wave5-judge.jsonl`, `level-coverage` clause (b) |
+| `tools/item-hash.mjs` | whole file, the **entire `verification:` block** removed | `touchlog`, **`step8-guard`** |
+
+`step8-guard.mjs:142` puts `shortHash(row.item_sha256)` into `fatalLicences` and
+compares it against a touchlog baseline hash — an `item-hash.mjs` value. The
+dispatch's prefixes are the `judge.mts` values, which for these items include the
+`precheck:`/`audited:`/`verified:` lines. Measured, all six:
+
+```
+                                        dispatch      item-hash.mjs (recorded)
+cex-cauchy-rationals-no-rational-limit  08b2f59681cd  beede7a2a17e
+cex-strictly-decreasing-gaps-no-limit   322a89fac705  500244f25ab2
+cor-monotone-converges-iff-bounded      8b8bb45b4a10  bd893e297777
+ex-nested-intervals-single-point        f78a0b3d2400  581f2d0519fd
+ex-two-subsequential-limits             d4e4b61852e4  963909ccec51
+lem-cauchy-sequence-bounded             81e425b0eee7  048956e6fefa
+```
+
+The consequence the dispatch drew from its own numbers is also wrong. It reasoned
+that `cex-cauchy-rationals-no-rational-limit` "has since changed to `08b2f59681`"
+and asked me to check what changed. **Nothing changed.** Its normalised hash is
+`beede7a2a1…`, byte-identical to the text behind all three prior
+`false_positive` rows. The same holds for four of the other five: the recorded
+hashes match their prior adjudication rows exactly. Only `ex-two-subsequential-limits`
+had no prior row. **No target of this round has been edited since it was last
+adjudicated** — the apparent movement was a judge stamp, which is precisely what
+`item-hash.mjs` exists to exclude.
+
+Rows were appended by `research/audit/wave5-a8r3-write-adjudications.mjs`, which
+computes each hash through `itemContentHash` rather than transcribing it, so the
+ledger cannot drift from the gate again.
+
+## The six rulings
+
+**1. `cex-cauchy-rationals-no-rational-limit` / deepseek — `false_positive` (4th).**
+The judge says `fs-rationals-complete` "contains only the statement of the false
+claim, not the required proof". It has a full `## Refutation` establishing every
+clause of `[L1]`, verbatim: step 1.1 *"let $k_n$ be the largest natural with
+$k_n^2 \le 2 \cdot 10^{2n}$, and set $s_n = k_n / 10^n$; then
+$s_n^2 \le 2 < (s_n + 10^{-n})^2$"*; step 2.1 *"$(s_n)$ is Cauchy"*; step 4.1
+*"$(s_n)$ is a Cauchy sequence of rationals with no rational limit"*. A `fs-`
+item states a false claim **in order to refute it**; the judge read the refuted
+claim as the whole content of the page.
+
+**2. `cex-strictly-decreasing-gaps-no-limit` / deepseek — `confirmed_nonfatal`.**
+The judge is right that neither cited item states $(u+v)^2 = u^2+2uv+v^2$;
+`lem-power-monotone` supplies `[L3]`'s *other* clause exactly (*"for $a, b \ge 0$,
+$a < b$ exactly when $a^2 < b^2$"*). The identity is one application of
+distributivity and commutativity, ambient ordered-field arithmetic is `[L1]`, and
+step 2.2 cites `[L1, L2, L3, L4]` together. True identity, licensed step,
+archetypal 30-second gap.
+
+**3. `cor-monotone-converges-iff-bounded` / deepseek — `confirmed_nonfatal`.**
+See the twice-touched section below.
+
+**4. `ex-nested-intervals-single-point` / deepseek — `confirmed_nonfatal`.**
+`[L6]` is *"$|t| = t$ when $t \ge 0$ ([[lem-of-abs-value]])"*. That clause is the
+first branch of `def-abs-value` — *"$|x| := x$ if $x \ge 0$"* — and appears
+verbatim as `[L1]` **inside `lem-of-abs-value` itself**: *"Absolute value:
+$|u| = u$ if $u \ge 0$"*. So it is in the supplied text of the cited item, just
+in its fact list rather than its Statement. The honest tidy is to co-cite
+`def-abs-value`, exactly as `ex-two-subsequential-limits` `[L5]` already does.
+
+**5. `ex-two-subsequential-limits` / deepseek — `confirmed_nonfatal`.**
+First-time rejection; read fresh. Three of `[L5]`'s four clauses are verbatim in
+the two co-cited items: `lem-of-abs-value` states *"$|x| \ge 0$"* and
+*"$|xy| = |x|\,|y|$"*, and `def-abs-value` gives $|t| = t$ for $t \ge 0$. The
+fourth, *"$|t| = 1$ forces $t = 1$ or $t = -1$"*, is not stated anywhere — the
+judge is right about the letter. It is one case split on `def-abs-value`'s
+$|t| \in \{t, -t\}$, and **step 4.1 already co-cites `[L9]`, trichotomy on
+$\mathbb{R}$**, which is exactly the split that performs it. The claim is true in
+any ordered field and the step carries its own licence. I checked the surrounding
+mathematics independently rather than only the citation: $|u_{n_i}| \to |L|$ by
+`lem-limit-abs`, $|u_{n_i}| = p_{n_i} \to 1$ by step 1.2, uniqueness gives
+$|L| = 1$. Sound.
+
+**6. `lem-cauchy-sequence-bounded` / sonnet — `confirmed_nonfatal`.**
+I read this one as prose that could be hiding a falsehood, per the standing
+instruction, and it is not. The Remark says the bounded alternating sequence,
+*"being divergent, is not Cauchy ([[lem-convergent-implies-cauchy]] would
+otherwise make it convergent by [[thm-cauchy-criterion-via-lub]])"*. The dispatch
+framed the test as whether the Remark asserts *a converse the library does not
+have*. **It does not: the library has Cauchy $\Rightarrow$ convergent, it is
+`thm-cauchy-criterion-via-lub`, and it is named in the same parenthetical, where
+it does all the work.** `lem-convergent-implies-cauchy` — whose Statement is only
+*"Let $(x_k)$ be a sequence of reals converging to $x$. Then $(x_k)$ is Cauchy"* —
+sits in the subject slot doing none. Delete that one name and the sentence is
+correct and fully licensed. A mis-slotted citation, not a false claim and not an
+unlicensed inference. Sonnet is my own family, so I weight my agreement with its
+*detection* lightly and rest the ruling on the quoted disk text instead.
+
+I did not dispatch refuters this round. All six allegations are fact-fidelity
+questions — does the cited item state this clause — answerable only by quoting
+the cited item, which I did from disk for every one. A refuter would have been
+given the same text and could not have added evidence. That is a narrower use of
+the lane than A6 warrants and I would not repeat it there.
+
+## Twice-touched list
+
+**`cor-monotone-converges-iff-bounded`** — 4 prior adjudications, two of them
+`confirmed_fatal` at context `3726503bbe` (both lanes). Escalated to the
+orchestrator's personal audit per the standing rule. **My ruling this round is
+`confirmed_nonfatal` and I made no fix.**
+
+`[L5]` reads *"Absolute value: $|t| \le M$ exactly when $-M \le t \le M$
+([[lem-of-abs-value]])"*. The judge is correct that `lem-of-abs-value` states
+only the strict form, *"for every $c > 0$, one has $|x| < c \iff -c < x < c$"*.
+But the same Statement also carries *"$-|x| \le x \le |x|$"* verbatim, and
+**step 1.2 uses only the forward direction**: from $|x_k| \le M$ it concludes
+$-M \le x_k \le M$, which is the two-link chain
+$-M \le -|x_k| \le x_k \le |x_k| \le M$ off that verbatim clause. The
+biconditional as written is also true unconditionally (for $M < 0$ both sides are
+false, since $|t| \ge 0 > M$ and $-M \le M$ fails). Nothing in the proof depends
+on the direction that is not used.
+
+Against my own round-2 stopping condition: I said a **third distinct fatal**
+stops the repairs and reopens the Statement, and that a third distinct nonfatal
+does not, because nonfatals license no edit under R1 and that is the loop the
+rule was written to prevent. This is a nonfatal. The Statement stands.
+
+## Gate state
+
+| gate | result |
+|---|---|
+| `step8-guard` (baseline `pre-a8-round3`) | **OK — 2767 items, 0 changed, 0 created, 0 deleted** |
+| `level-coverage --audit` | **exit 0 — 209 items, 155 proof-bearing, 1930 relationships, 209 complete judge pairs** |
+| `level-coverage --verify-current-context` | **exit 0 — the hard receipt gate now PASSES** |
+
+`research/audit/wave5-spine-audit.json` now exists, so the third-round blocker I
+handed back twice is cleared and `--verify-current-context` ran for the first
+time this wave. It is green. **A8 is closed.**
+
+## Concurrent write by another process — not mine, reported not reverted
+
+`library/topology/function-space-topologies.md` was modified at **03:08:30**,
+inside my dispatch window (03:02:57), between my ledger append and my final gate
+run. **I did not edit it**; I made no `Edit`/`Write` call against any file under
+`library/` or `items/`, and `git status -- items/` is empty. The only writers I
+ran are `touchlog snap`, my adjudication script, and read-only gates —
+`level-coverage` writes only under `--template`, which I did not pass, and
+`judge.mts --context-hash` exits before any append.
+
+It is a page-prose correction, and on its face a correct one: the old text
+claimed local compactness was *"a notion this library does not yet define in
+general"* and that compactness for arbitrary topological spaces *"is not
+available at this point in the reading order — the planned page carrying it sits
+below this one and is not yet built"*. The new text says both are developed
+earlier and that what is actually missing is the topology, `def-compact-open-topology`
+being stated for a metric domain only. That is the published-claim-decay class.
+
+Three things the orchestrator should know:
+
+1. **`step8-guard` cannot see it.** The guard tracks `items/` only, so a `library/`
+   page edit at A8 passes R1's mechanical enforcement silently, even though R1's
+   text forbids a "page" mutation without a fatal licence. That is a real gap
+   between the written rule and the gate.
+2. **It did not stale my receipt.** A page edit moves the frozen pair context for
+   every item on that page, but my `--verify-current-context` run at 03:09:44 was
+   *after* the 03:08:30 edit and still returned 209/209 — clause (b) of the new
+   item-granular coverage rule (commit `3bbae7f`) covered every item on the page
+   because no item's own text changed. This is the first live confirmation that
+   the fix works against a real sibling edit, and it saved a 31-item rejudge.
+3. **I left it in place.** Reverting another process's concurrent work is not an
+   adjudication and not mine to do.
+
+## For the A10 owner report
+
+- **Five of six rejections are the same fact-fidelity class**, and it is now on
+  its fifth wave unanswered: a `[F#]`/`[L#]` fact states a clause that is *true*,
+  *used*, and *one line from the cited item*, but not literally in that item's
+  Statement. Four of the six here resolve to it, plus roughly 75 of the wave's 91
+  nonfatals. **This is not a mathematics problem, it is an unwritten policy.**
+  The library has no rule saying whether a fact list may carry a clause derived
+  from its citation in one step. Until the owner writes one, both lanes will keep
+  finding it, Alpha will keep ruling nonfatal, and every wave will spend a round
+  on it. Item 4 above shows the cheap fix at A6: co-cite the definition.
+- **DeepSeek's `fs-` blind spot is now four-for-four.** Every one of the four
+  rejections of `cex-cauchy-rationals-no-rational-limit` is the same error — the
+  judge treats a false-statement page as containing only its false claim and not
+  its refutation. That is a fixable prompt defect, not a reasoning failure, and it
+  has cost four adjudications on one item.
+- **The dispatch's item hashes were the wrong normalisation** and their derived
+  claim ("this item has since changed") was false. Any future dispatch that
+  quotes an item hash should take it from `item-hash.mjs`, or say which of the two
+  it is.
+- `research/audit/RESUME.md` is **still headed WAVE 4**, fourth round running.

@@ -14,9 +14,27 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
   process.exit(2);
 }
 
-const DEEPSEEK = "deepseek-v4-pro";
-const TERRA = "gpt-5.6-terra";
-const models = [DEEPSEEK, TERRA];
+// JUDGE_LINEUP mirrors tools/judge.mts, judge-sweep.mjs and level-coverage.mjs.
+// This tool was pinned to deepseek+terra long after the owner retired that lane
+// (2026-08-04), so a wave judged by deepseek+sonnet reported one absent model
+// and silently dropped every Sonnet verdict from the step-10/A10 comparison.
+// The lane is resolved, never assumed; `lineup` is emitted so a saved report
+// says which two models it actually compared.
+const JUDGE_LINEUPS = Object.freeze({
+  "deepseek+terra": ["deepseek-v4-pro", "gpt-5.6-terra"],
+  "deepseek+opus": ["deepseek-v4-pro", "claude-opus-5"],
+  "deepseek+sonnet": ["deepseek-v4-pro", "claude-sonnet-5"],
+});
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
+const models = JUDGE_LINEUPS[lineupName];
+if (!models) {
+  console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);
+  process.exit(2);
+}
+const [PRIMARY, SECOND] = models;
+// Stable, lineup-independent key names: the model each one refers to is named
+// by `lineup` in the output rather than baked into the key.
+const ONLY_REJECT = Object.freeze({ [PRIMARY]: "primary_only_reject", [SECOND]: "second_only_reject" });
 const rows = readFileSync(ledger, "utf8").split("\n").filter(Boolean).map((line, index) => {
   try {
     const row = JSON.parse(line);
@@ -66,8 +84,8 @@ for (const row of selected) {
 const latestAttemptAgreement = {
   both_pass: [],
   both_reject: [],
-  terra_only_reject: [],
-  deepseek_only_reject: [],
+  primary_only_reject: [],
+  second_only_reject: [],
   incomplete_or_null: [],
 };
 const latestUsableVerdictAgreement = Object.fromEntries(
@@ -78,20 +96,18 @@ const contextIntegrity = {
   mismatched_or_unattested_context: [],
 };
 const classify = (target, id, byModel) => {
-  const terraRow = byModel.get(TERRA);
-  const deepseekRow = byModel.get(DEEPSEEK);
-  const terra = terraRow?.keep;
-  const deepseek = deepseekRow?.keep;
-  if (terra === true && deepseek === true) target.both_pass.push(id);
-  else if (terra === false && deepseek === false) target.both_reject.push(id);
-  else if (terra === false && deepseek === true) target.terra_only_reject.push(id);
-  else if (terra === true && deepseek === false) target.deepseek_only_reject.push(id);
+  const primary = byModel.get(PRIMARY)?.keep;
+  const second = byModel.get(SECOND)?.keep;
+  if (primary === true && second === true) target.both_pass.push(id);
+  else if (primary === false && second === false) target.both_reject.push(id);
+  else if (primary === false && second === true) target[ONLY_REJECT[PRIMARY]].push(id);
+  else if (primary === true && second === false) target[ONLY_REJECT[SECOND]].push(id);
   else target.incomplete_or_null.push(id);
 };
 for (const [id, byModel] of latest) {
-  const terraRow = byModel.get(TERRA);
-  const deepseekRow = byModel.get(DEEPSEEK);
-  if (terraRow?.context_sha256 && terraRow.context_sha256 === deepseekRow?.context_sha256) {
+  const primaryRow = byModel.get(PRIMARY);
+  const secondRow = byModel.get(SECOND);
+  if (primaryRow?.context_sha256 && primaryRow.context_sha256 === secondRow?.context_sha256) {
     contextIntegrity.matching_frozen_context.push(id);
   } else {
     contextIntegrity.mismatched_or_unattested_context.push(id);
@@ -197,6 +213,7 @@ if (adjudicationsPath) {
 
 process.stdout.write(JSON.stringify({
   ledger,
+  lineup: { name: lineupName, primary: PRIMARY, second: SECOND },
   models: perModel,
   latest_attempt_agreement: latestAttemptAgreement,
   latest_usable_verdict_agreement: latestUsableVerdictAgreement,

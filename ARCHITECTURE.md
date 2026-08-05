@@ -446,6 +446,16 @@ is either converging toward correctness or is actually false — so the guard
 counts licences, never attempts, and the twice-touched escalation stays
 advisory. `tools/item-hash.mjs` is the single normalization both it and
 `touchlog` use, so the two can never disagree about what a repair is.
+**Two scope limits, measured in wave 5 (2026-08-06) and stated so nobody reads
+the guard as wider than it is.** It tracks `items/` only, so a `library/` page-prose
+mutation inside the step-8 window passes it silently even though R1's text
+forbids a page mutation without a fatal licence; the guard is an item guard, and
+page prose is covered by the A9/step-9 sweep instead. And `item-hash.mjs` is
+*not* the normalization `judge.mts` writes into a verdict row's `item_sha256` —
+the judge strips only the `judge:` sub-block, the guard and `touchlog` strip the
+entire `verification:` block, so the two hashes differ for every stamped item.
+Quoting a judge-ledger item hash into an adjudication would write a value the
+guard can never match; adjudication rows take theirs from `item-hash.mjs`.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
@@ -844,7 +854,13 @@ earlier complete verdict on the same prompt, but a later substantive verdict
 does. It also summarizes model-only findings for the owner report. Its optional
 `--adjudications` input measures which judge actually found owner-confirmed
 fatal logic or dependency-citation defects; rejection volume alone is never
-treated as effectiveness.
+treated as effectiveness. It resolves the pair from `JUDGE_LINEUP` exactly as
+`judge.mts`, `judge-sweep.mjs` and `level-coverage.mjs` do, and emits the
+`lineup` it compared so a saved report names its own two models. **It was pinned
+to the retired `deepseek+terra` lane until wave 5 (2026-08-06)**, so a wave
+judged by `deepseek+sonnet` reported one absent model and silently dropped every
+Sonnet verdict; the agreement keys are `primary_only_reject` and
+`second_only_reject` rather than model names for that reason.
 The ordinary sweep selects both judges; a targeted `--models` recovery selects
 only the named model's missing current-context verdicts and never re-spends a
 complete verdict from its peer.

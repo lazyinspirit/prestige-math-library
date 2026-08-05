@@ -1,8 +1,43 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 4 — A0–A6 COMPLETE, A7 IS THE NEXT ACTION (2026-08-05)
+## WAVE 5 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-06)
 
 **This section supersedes every section below it.**
+
+**Full rundown: `research/audit/wave5-A10.md`.** Read that first; this is the
+pointer, not the record.
+
+Scope 209 items / 155 proof-bearing / 4 batches / 10 pages. **Every gate green**
+— A8, A9, and all 9 A10 gates. Coverage 209/209 complete judge pairs, 0
+mismatched contexts. Provenance: all 209 went from untagged to fully tagged
+(statement 66 literature-derived / 135 ai-altered / 8 ai-generated; proof 159
+ai-generated / 28 not-applicable / 22 ai-altered).
+
+**10 confirmed-fatal adjudications across 7 items**, 96 nonfatal, 8 false
+positives. Judges: DeepSeek 371 calls / 62 rejections / 6 fatal / **8 false
+positives** / 4 nulls; Sonnet 405 calls / 52 rejections / 4 fatal / **0 false
+positives** / 71 nulls. **Sonnet's precision re-measurement the owner asked for
+is done: 52/52, up from the retired lane's 60% over 35.** DeepSeek still found 6
+of the 10 fatals, 3 solo, and remains the only cross-family reader.
+
+**Nothing is running.** The wave is stopped at the A10 owner pause, which is the
+sole pause and cannot publish. Wave 4 is still at its own uncleared
+`owner-pause` behind it.
+
+**Next action: owner clears the A10 pause** (see `wave5-A10.md` §8 for the
+queue — 4 policy decisions, 5 carried items). Then wave 6 may be scoped with
+`rounds.mjs --audit-batches`.
+
+Two mechanism fixes shipped in this wave's final commit: `judge-compare.mjs`
+unpinned from the retired `deepseek+terra` lineup (it was dropping every Sonnet
+verdict from the A10 comparison), and `ARCHITECTURE.md` now records
+`step8-guard`'s two measured scope limits.
+
+---
+
+## WAVE 4 — A0–A6 COMPLETE, A7 IS THE NEXT ACTION (2026-08-05)
+
+**Superseded by the wave 5 section above; wave 4 remains at its own owner pause.**
 
 **Baseline `6c54914`. Nothing committed.** 92 changed files under `items/` +
 `library/topology/compactness.md`, plus the untracked `research/audit/wave4-*`

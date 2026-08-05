@@ -98,8 +98,9 @@ immediate while *joint* continuity is not.
 [[thm-evaluation-is-continuous-on-a-locally-compact-metric-domain]] supplies the
 hypothesis that makes it true. That hypothesis is
 [[def-locally-compact-metric-space]], minted here as the metric special case of a
-notion this library does not yet define in general, and carrying a dictionary
-remark saying so; [[lem-compact-closed-balls-in-a-locally-compact-metric-space]] upgrades
+notion the library also defines for arbitrary topological spaces, and carrying a
+dictionary remark recording that agreement;
+[[lem-compact-closed-balls-in-a-locally-compact-metric-space]] upgrades
 it to a neighbourhood base of compact closed balls.
 [[lem-tube-lemma-for-a-compact-metric-factor]] is the other half of the machinery,
 and [[thm-exponential-correspondence-is-continuous]] uses it to show that the
@@ -111,10 +112,14 @@ between $C(X \times Z, Y)$ and $C(Z, C(X,Y))$ for a locally compact metric $X$ a
 arbitrary spaces $Z$ and $Y$ — an assertion about two sets of continuous maps and a
 correspondence between them. **It is not a homeomorphism, and the page never says
 it is**: no topology is placed on either side, and the theorem's own remark states
-exactly what the homeomorphism form would additionally require, namely compactness
-for arbitrary topological spaces, which is not available at this point in the
-reading order — the planned page carrying it sits *below* this one and is not yet
-built, so no later page can supply it retroactively.
+exactly what the homeomorphism form would additionally require. It is not a
+missing notion of compactness: compactness for an arbitrary topological space, and
+the tube lemma for a compact factor of an arbitrary product, are both developed
+earlier in the reading order, so "compact subset" has meaning on both sides. What
+is missing is the topology itself — [[def-compact-open-topology]] is stated for a
+*metric* domain, whereas $Z$ here is an arbitrary topological space and
+$X \times Z$ carries no metric. None of that is done here, and nothing above
+assumes it.
 
 **Dini's theorem, and one definition for a later page.** [[thm-dini]] proves that
 on a compact metric space a nondecreasing sequence of continuous real functions
