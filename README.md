@@ -23,6 +23,14 @@ the app repo). This repo never runs a server; GitHub is backup and review only.
 - Item schema (one file per definition/theorem/proof/example/counterexample,
   stable IDs, dependency edges, license/attribution): **TBD — see SCHEMA.md
   once settled.** Do not add content items until the schema is fixed.
+- `explainer/` — reader-facing explainers about how the library is built, served
+  through the same bind mount as the content. `build-workflow.html` animates the
+  per-level build of `LEVELS.md`, step 0 to 10; it is a self-contained document
+  with no build step and no network fetches, so saving it is the deploy.
+  `explainer/INTEGRATION.md` has the app-side route and the `/library` link;
+  `node explainer/serve.mjs` previews it on `localhost:3000` with nothing
+  installed. It contains no item text and no draft mathematics, and it is not
+  content: no gate reads it and it carries no frontmatter.
 
 ## Provenance conventions (settled)
 
