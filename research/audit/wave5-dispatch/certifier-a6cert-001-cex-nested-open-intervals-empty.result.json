@@ -1,0 +1,17 @@
+{
+  "role": "certifier",
+  "label": "a6cert-001-cex-nested-open-intervals-empty",
+  "run": "wave5",
+  "runner": "claude",
+  "model": "claude-sonnet-5",
+  "sandbox": "read-only",
+  "started_at": "2026-08-05T12:52:53.325Z",
+  "ended_at": "2026-08-05T12:55:53.340Z",
+  "ms": 180015,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/certifier-a6cert-001-cex-nested-open-intervals-empty.log",
+  "prompt": "/root/Projects/prestige-math-library/research/audit/wave5-dispatch/certifier-a6cert-001-cex-nested-open-intervals-empty.prompt.md",
+  "tail": "```\n\n`ex-nested-intervals-single-point` is position 3; `cex-nested-open-intervals-empty`\nis position 7. The item immediately preceding it is\n`cex-cauchy-rationals-no-rational-limit`, not `ex-nested-intervals-single-point`.\nEven under the looser reading \"the preceding item of kind *example*,\" the\nnearest one is `ex-contractive-sequence-fixed-point` (position 5), still not\n`ex-nested-intervals-single-point`. Three items sit between the claimed\n\"preceding\" item and this one under any reading. The mathematical content of\nthe comparison itself is accurate (I checked `ex-nested-intervals-single-point`\non disk: it does compute $\\bigcap_{k\\ge1}[0,1/k] = \\{0\\}$), but the assertion\nabout *where it sits relative to this item* is false and would mislead a\nreader trying to locate it.\n\nWHAT WOULD FIX IT: Either drop \"on this page\" positional language and simply\nsay \"the closed family ... is computed in [[ex-nested-intervals-single-point]]\"\n(a plain citation, no ordering claim), or correct the wording to name the\nactual immediately preceding item / the true relative position.\n\n### ASSESSMENT\nI read the item's full text, checked every load-bearing `[L#]` citation against\nthe dependency it names (`fs-nested-open-intervals-nonempty`,\n`cor-archimedean-reciprocal`, `thm-of-archimedean`, `lem-of-inverse-positive`,\n`lem-of-naturals-positive`, `def-ordered-field`), and traced the proof\n(steps 1.1–4.1) end to end: the reciprocal-Archimedean witness $n$ with\n$1/n < x$, rewritten as $n = j+1$, collides with $x < 1/(j+1)$ from the\n(refuted) intersection-membership hypothesis, and trichotomy closes the\ncontradiction. This is valid and matches the parallel argument already proved\nin `fs-nested-open-intervals-nonempty`. The wave-5 repair itself (dropping the\nunused closed-interval-nested-property fact `L5`/old-`L6` renumbering, adding\n`provenance`, deleting the stale judge stamp) is clean and introduces no new\nclaim. I also verified the two Remarks that name other library items\n(`thm-nested-interval-property`'s missing-hypothesis claim, and\n`cex-nested-unbounded-closed-empty`'s boundedness-drops-separately claim)\nagainst those items on disk, and both are accurate. The one defect found is\nthe false \"preceding example on this page\" claim, which predates the repair\nbut is still current text on disk and is exactly the reading-order-falsehood\npattern the brief flags as this corpus's dominant fatal-defect source.\n\n1 fatal, 0 nonfatal"
+}

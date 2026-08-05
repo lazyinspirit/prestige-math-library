@@ -1,0 +1,29 @@
+# certifier/a6cert2-001-ex-the-particular-point-topology-in-the-separation-hierarchy 2026-08-05T13:01:57.133Z
+
+## stdout
+### VERDICT — CERTIFY
+
+### WHAT I READ
+- the item, in full: `items/ex-the-particular-point-topology-in-the-separation-hierarchy.md`
+- dependencies opened on disk: `def-standard-topologies`, `def-t0-and-t1-spaces`, `thm-t1-iff-singletons-are-closed`, `def-regular-and-t3-spaces`, `def-normal-and-t4-spaces`, `def-hausdorff-space`, `def-topological-space`, `thm-closure-characterisation-top`, `ex-sierpinski-space-is-t0-normal-and-not-regular`
+- URLs fetched: `https://en.wikipedia.org/wiki/Sierpi%C5%84ski_space` (the URL the repair added)
+
+### FINDING 1 — NONFATAL — location: frontmatter `deps:` list
+CLAIM AS WRITTEN: `deps: [..., def-interior-closure-boundary-top, thm-closure-characterisation-top, ...]`
+WHY IT FAILS: The repair deleted fact `[L3]`, which was the only place `def-interior-closure-boundary-top` was cited by a `[[...]]` tag in the body. It now appears only in the `deps:` list with no in-text citation anywhere (verified by grep) — an orphaned dependency declaration. `thm-closure-characterisation-top` is still legitimately used, in Remark 1.
+WHAT WOULD FIX IT: Drop `def-interior-closure-boundary-top` from `deps:` (or restore an in-text `[[def-interior-closure-boundary-top]]` citation if one is wanted). Purely a bookkeeping tidiness issue, not a mathematical or citation-accuracy defect.
+
+### ASSESSMENT
+Checked the topology `A1` against `def-standard-topologies`' particular-point-topology clause (5) — exact match, including the closed-set description. Checked `L1`/`L2` against `def-t0-and-t1-spaces`, `thm-t1-iff-singletons-are-closed`, `def-hausdorff-space` (its Remarks derive Hausdorff ⇒ closed singletons ⇒ $T_1$), `def-regular-and-t3-spaces`, `def-normal-and-t4-spaces` — all faithful, correct direction, no inflated hypotheses.
+
+Walked every proof step (1.1–4.1): the $T_0$ argument (1.2) is exhaustive over the three cases $x=p$, $y=p$, neither; the not-$T_1$/not-Hausdorff argument (1.3) correctly uses that $\{p\}$ is neither $X$ nor $p$-avoiding, hence not closed; the not-normal argument (2.2, needs $\ge 3$ points via 1.4) and not-regular argument (3.1, needs $\ge 2$ points via 1.3/2.1) both correctly hinge on "every nonempty open set contains $p$" (1.1); the final tally (4.1) matches steps to claims 1–4 in the right order. The size thresholds (2 points for $T_1$/regular, 3 points for normal) are exactly what the theorem needs and no more.
+
+Checked the Remarks against dependencies with the same scrutiny as numbered steps, per the brief: Remark 1's use of `thm-closure-characterisation-top` (closure of a closed set is itself; closure is the smallest closed superset) is exact — claim 2 of that theorem says precisely this. Remark 3's claim that the two-point particular-point topology *is* Sierpinski space matches both `def-standard-topologies` item 6 and the newly added Wikipedia source, which independently confirms Sierpinski space is the two-point special case of the particular-point topology with the stated open/closed sets and separation properties.
+
+Verified the title against what is actually proved: it asserts $T_0$ unconditionally, not-$T_1$-and-not-regular at $\ge 2$ points, not-normal at $\ge 3$ points — this exactly matches claims 1–4 and their stated hypotheses, no overclaim. Confirmed the deleted `[L3]` fact left no dangling citation (`grep` for `L3` in the file returns nothing).
+
+1 fatal, 1 nonfatal
+
+
+## stderr
+

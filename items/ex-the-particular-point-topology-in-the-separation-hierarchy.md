@@ -1,7 +1,7 @@
 ---
 id: ex-the-particular-point-topology-in-the-separation-hierarchy
 kind: example
-title: "The particular-point topology is $T_0$ and not $T_1$, it is not regular once the set has at least two points, and it is not normal once the set has at least three"
+title: "The particular-point topology is $T_0$, it is not $T_1$ and not regular once the set has at least two points, and it is not normal once the set has at least three"
 status: published
 origin: session
 provenance:
@@ -18,6 +18,12 @@ short: "particular-point topology in the hierarchy"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

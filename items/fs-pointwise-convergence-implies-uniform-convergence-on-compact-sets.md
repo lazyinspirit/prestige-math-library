@@ -26,6 +26,12 @@ short: "pointwise does not give uniform on compacta"
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -101,7 +107,7 @@ No choice principle is used; every function below is given by a formula.
 
 - **The failure is not about the size of the domain.** The domain here is compact, so "uniformly on every compact set" is the same as "uniformly", and the witness shows that pointwise convergence does not give uniform convergence even there. What moves is the *place* where the two functions differ: the spike has height $1$ for every $k$ and merely slides towards $0$.
 
-- **The area under the spike does tend to $0$**, which is why this example is also the standard warning that pointwise convergence controls no integral either. Nothing about integration is claimed here.
+- **The area under the spike does tend to $0$**, so this witness does *not* also separate the integral from its pointwise limit: the standard warning that pointwise convergence controls no integral needs a spike whose height grows as its base shrinks. Nothing about integration is claimed here.
 
 - **What is true in this direction.** Uniform convergence implies convergence on every compact set, which implies pointwise convergence ([[thm-comparison-of-the-three-function-space-topologies]]); the reverse of each implication fails, and the companion page separates the two rightmost topologies with a different witness on $\mathbb{R}$.
 

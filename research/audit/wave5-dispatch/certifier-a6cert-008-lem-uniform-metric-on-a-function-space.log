@@ -1,0 +1,32 @@
+# certifier/a6cert-008-lem-uniform-metric-on-a-function-space 2026-08-05T12:55:10.668Z
+
+## stdout
+### VERDICT — CERTIFY
+
+### WHAT I READ
+- the item, in full: `items/lem-uniform-metric-on-a-function-space.md`
+- dependencies opened on disk (cited in the Statement or Facts block): `def-metric-space`, `lem-bounded-remetrisation`, `def-bounded-set`, `def-complete-ordered-field`, `lem-sup-unique`, `lem-metric-nonnegativity`, `lem-of-add-order`, `def-ordered-field`, `rem-sup-conventions`, `def-topology-of-pointwise-convergence`, `lem-sup-metric-is-a-metric` (cited in Remarks), `thm-extreme-value-metric` (cited in Remarks)
+- URLs fetched: none — `sources.references` is unchanged by this repair and none of its entries is newly relied upon by the changed text, so no fetch was required by the brief
+
+### FINDING 1 — NONFATAL — location: frontmatter `deps:` list
+CLAIM AS WRITTEN: `deps: [... def-max-min, lem-finite-set-has-max ...]`
+WHY IT FAILS: These two ids are still listed as dependencies, but the repair deleted `[L4]` (the only Facts-block entry that cited them), and neither id appears anywhere else in the Statement, Facts block, Proof, or Remarks. They are now dead entries left over from the repair rather than a citation of anything actually used.
+WHAT WOULD FIX IT: Drop `def-max-min, lem-finite-set-has-max` from `deps:` on a future touch. This is bookkeeping, not a mathematical defect — nothing in the proof relies on a two-element minimum being separately justified, because `bar d = min{d,1}` is imported wholesale, already established as a metric with `0 ≤ bar d ≤ 1`, from `lem-bounded-remetrisation` (claims 1–2) and `lem-metric-nonnegativity`.
+
+### ASSESSMENT
+I read the full item and every dependency its Facts block actually cites (`L1`–`L3`), and separately checked the two Remarks-only citations (`lem-sup-metric-is-a-metric`, `thm-extreme-value-metric`) against their own pages on disk.
+
+- `L1` matches `lem-bounded-remetrisation` exactly: claim 1 (`d' = min{d,1}` is a metric), claim 2 (`d'(x,y) ≤ 1`), plus `lem-metric-nonnegativity` for the lower bound `bar d ≥ 0`.
+- `L2`/`L3` match `def-complete-ordered-field`, `lem-sup-unique`, `def-bounded-set`, `lem-of-add-order`, `def-ordered-field` — the extension of `lem-of-add-order`'s strict inequalities to the nonstrict form "via totality" is an unstated but immediate one-line fill, well inside the 30-second rule.
+- Every proof step (1.1–5.1) traces correctly through the metric axioms (M1)–(M3) using only `bar d`'s established properties and the supremum's upper-bound/least-upper-bound behaviour; I verified the algebra at each step (nonemptiness via the fixed `x_0`, the M1 forward and backward directions, symmetry via set equality of `R(f,g)`/`R(g,f)`, and the triangle inequality via the two-step sup-bounding argument).
+- The removal of the old `[L4]` (two-element-minimum existence) is a valid simplification: `L4` was cited nowhere in the current proof (I checked every step's citation bracket), because `bar d` is imported as an already-complete metric rather than built from a raw `min` here — its removal creates no gap.
+- Checked `Y^X` for `X = ∅` against `def-topology-of-pointwise-convergence` ("For `X = ∅` the set `Y^X` has exactly one element") and `sup ∅` against `rem-sup-conventions` ("`sup ∅` and `inf ∅` are simply undefined") — both remarks in the item match their targets exactly.
+- Checked the "replaces, does not generalise" Remark against `lem-sup-metric-is-a-metric` on disk: its domain (bounded real-valued functions on a nonempty set) and formula match what the Remark claims, and the assertion that the two metrics disagree whenever some pointwise distance exceeds 1 is correct (since `bar rho ≤ 1` always, while `sup D(f,g) > 1` forces `d_∞(f,g) > 1`).
+- Checked the new `provenance` block (`statement: literature-derived`, `proof: ai-generated`) against the construction: truncating a metric at 1 to build a metric on a full function space is the standard Munkres-style "uniform metric" construction, so `literature-derived` for the statement is a reasonable classification, and the proof is session-authored, so `ai-generated` is correct.
+- Title matches the Statement and proof exactly; no overclaim.
+
+0 fatal, 1 nonfatal
+
+
+## stderr
+

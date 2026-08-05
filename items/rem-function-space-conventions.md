@@ -23,6 +23,12 @@ landmark: false
 short: "conventions of this page"
 verification:
   precheck: n/a
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -127,9 +133,11 @@ says so where it is defined.**
   $1$ and needs no boundedness hypothesis. The companion page checks that on
   $C([0,1],\mathbb{R})$, where both are defined, they induce the same topology,
   so no second notion of convergence is created.
-- [[def-locally-compact-metric-space]] is a metric special case of a notion this
-  library does not yet define in general. Its own dictionary remark records the
-  agreement and why the agreement is immediate.
+- [[def-locally-compact-metric-space]] is the metric special case of
+  [[def-locally-compact-space]], the general topological notion, which the
+  library does define and which is available at this point in the reading order.
+  This page states the metric form and nothing else; that item's own dictionary
+  remark records the agreement and why the agreement is immediate.
 
 **7. $Y^{X}$ here is a bare set of functions with the product topology, not the
 vector space of [[def-function-space]].** That item writes $F^{X}$ for the same

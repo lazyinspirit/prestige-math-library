@@ -15,6 +15,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-05
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -41,7 +47,7 @@ The refutation is carried out in full in
 [[fs-nested-open-intervals-nonempty]] and is recorded here as the named
 counterexample. The comparison worth keeping in view is the closed family $[0, 1/k]$, which
 differs only by the inclusion of the left endpoint and intersects in $\{0\}$;
-that computation is the preceding example on this page.
+that computation is [[ex-nested-intervals-single-point]].
 
 ## Facts & Assumptions
 

@@ -1,0 +1,83 @@
+# certifier/a6cert-001-cex-nested-open-intervals-empty 2026-08-05T12:52:53.325Z
+
+## stdout
+### VERDICT — REFUSE
+
+### WHAT I READ
+- The item, in full: `items/cex-nested-open-intervals-empty.md`.
+- Dependencies opened on disk (all dependencies actually cited by the Facts &
+  Assumptions block, plus `thm-nested-interval-property`, which is linked in the
+  Remarks/Statement prose and remains in `deps`): `fs-nested-open-intervals-nonempty`,
+  `def-interval`, `cor-archimedean-reciprocal`, `thm-of-archimedean`,
+  `lem-of-inverse-positive`, `lem-of-naturals-positive`, `thm-nested-interval-property`,
+  `def-sequence`, `def-complete-ordered-field`, `def-ordered-field`. Also opened
+  the two items named in the Remarks for cross-check: `ex-nested-intervals-single-point`,
+  `cex-nested-unbounded-closed-empty`. Also read the page manifest
+  `library/real-analysis/monotone-sequences-and-cauchy-completeness-examples.md`
+  to check a reading-order claim.
+- URLs fetched: none. The repair diff added or relied on no URL in
+  `sources.references` (that block is untouched by the diff), so nothing new
+  needed fetching per the brief's instruction 4.
+
+### FINDING 1 — FATAL — location: "Statement refuted" section, final sentence
+CLAIM AS WRITTEN: "The comparison worth keeping in view is the closed family
+$[0, 1/k]$, which differs only by the inclusion of the left endpoint and
+intersects in $\{0\}$; that computation is the preceding example on this
+page."
+
+WHY IT FAILS: This asserts a reading-order fact — that
+`ex-nested-intervals-single-point` (the $[0,1/k]$ computation) is the item
+immediately preceding `cex-nested-open-intervals-empty` on their shared page.
+It is not. The page's frontmatter (`library/real-analysis/monotone-sequences-and-cauchy-completeness-examples.md`), whose `examples:` array SCHEMA.md
+documents as "Section 5, in reading order," lists:
+
+```
+examples: [ex-babylonian-sqrt-two, ex-recursive-sqrt-two-plus-x,
+           ex-nested-intervals-single-point, ex-two-subsequential-limits,
+           ex-contractive-sequence-fixed-point,
+           cex-cauchy-rationals-no-rational-limit,
+           cex-nested-open-intervals-empty, cex-nested-unbounded-closed-empty, ...]
+```
+
+`ex-nested-intervals-single-point` is position 3; `cex-nested-open-intervals-empty`
+is position 7. The item immediately preceding it is
+`cex-cauchy-rationals-no-rational-limit`, not `ex-nested-intervals-single-point`.
+Even under the looser reading "the preceding item of kind *example*," the
+nearest one is `ex-contractive-sequence-fixed-point` (position 5), still not
+`ex-nested-intervals-single-point`. Three items sit between the claimed
+"preceding" item and this one under any reading. The mathematical content of
+the comparison itself is accurate (I checked `ex-nested-intervals-single-point`
+on disk: it does compute $\bigcap_{k\ge1}[0,1/k] = \{0\}$), but the assertion
+about *where it sits relative to this item* is false and would mislead a
+reader trying to locate it.
+
+WHAT WOULD FIX IT: Either drop "on this page" positional language and simply
+say "the closed family ... is computed in [[ex-nested-intervals-single-point]]"
+(a plain citation, no ordering claim), or correct the wording to name the
+actual immediately preceding item / the true relative position.
+
+### ASSESSMENT
+I read the item's full text, checked every load-bearing `[L#]` citation against
+the dependency it names (`fs-nested-open-intervals-nonempty`,
+`cor-archimedean-reciprocal`, `thm-of-archimedean`, `lem-of-inverse-positive`,
+`lem-of-naturals-positive`, `def-ordered-field`), and traced the proof
+(steps 1.1–4.1) end to end: the reciprocal-Archimedean witness $n$ with
+$1/n < x$, rewritten as $n = j+1$, collides with $x < 1/(j+1)$ from the
+(refuted) intersection-membership hypothesis, and trichotomy closes the
+contradiction. This is valid and matches the parallel argument already proved
+in `fs-nested-open-intervals-nonempty`. The wave-5 repair itself (dropping the
+unused closed-interval-nested-property fact `L5`/old-`L6` renumbering, adding
+`provenance`, deleting the stale judge stamp) is clean and introduces no new
+claim. I also verified the two Remarks that name other library items
+(`thm-nested-interval-property`'s missing-hypothesis claim, and
+`cex-nested-unbounded-closed-empty`'s boundedness-drops-separately claim)
+against those items on disk, and both are accurate. The one defect found is
+the false "preceding example on this page" claim, which predates the repair
+but is still current text on disk and is exactly the reading-order-falsehood
+pattern the brief flags as this corpus's dominant fatal-defect source.
+
+1 fatal, 0 nonfatal
+
+
+## stderr
+

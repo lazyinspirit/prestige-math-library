@@ -1,0 +1,29 @@
+# audit-alpha/a6-round2 2026-08-05T12:46:45.189Z
+
+## stdout
+Good — the generator produces all 131 records, correctly distinguishing refuter-read from Alpha-read. Let me report status while the fleet runs.
+
+Here's where wave 5 A6 round 2 stands.
+
+**Duty 2 — `depcheck`: DONE.** All 11 items now carry `verification.verified` (`scope: published-audit`, `delegated_by: owner`); `depcheck` reports 0 `published-unaudited`. I dispatched a read-only `claude-sonnet-5` certifier per item rather than certifying my own repairs. Three came back **REFUSE**, and all three findings were real:
+
+- `ex-the-particular-point-topology-in-the-separation-hierarchy` — **confirmed fatal**. The title asserted "is $T_0$ and not $T_1$" unconditionally while hedging its other two clauses, but the body proves "not $T_1$" only for $|X|\ge 2$; on a singleton the space *is* $T_1$ (`def-t0-and-t1-spaces`: "a space with at most one point satisfies both conditions vacuously"), and `def-standard-topologies` item 5 permits $X=\{p\}$. Title narrowed to match claims 1–4.
+- `rem-function-space-conventions` — **confirmed fatal**, and a miss of mine. My round-1 repair fixed one stale reading-order claim in point 1; point 6 still said `def-locally-compact-metric-space` is "a metric special case of a notion this library does not yet define in general", contradicted by the cited item's own dictionary remark and by published `def-locally-compact-space`. Repaired.
+- `cex-nested-open-intervals-empty` — false locational claim ("the preceding example on this page"); the page manifest puts it at position 7 and its referent at position 3. Nonfatal, but a demonstrable falsehood, so repaired at A6 where polish is still permitted.
+
+I also repaired a fourth, from a certifier *nonfatal* I re-triaged: `fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets` claimed its moving-spike witness is "the standard warning that pointwise convergence controls no integral" — but that spike's area tends to 0, so the integral converges correctly. All four were then re-certified by fresh certifiers against their final text before stamping. Impact closure recomputed (4 changed interfaces, 7 consumers, all `still-licensed` on re-derived evidence); I amended those seven receipt rows because their existing notes asserted the targets stayed byte-identical, which my repairs made false.
+
+**Duty 3 — `genrisk`: analysis done, 1 of 3 waiting on a lane.** All three seeds have **empty logical cones** — nothing declares them in `deps`; every cone edge is a Remarks wikilink. Verified each statement myself (including the arithmetic: $|x_2-x_1| = |a-1/2|\cdot 2/9$ checks out). Disposition will be `verified-generated`, not `unfold` — `unfold` means deleting a `deps` edge and there are none, so it would misdescribe what I did. Notably, retag is *wrong* here: the workflow's `trivial` row deliberately assigns bespoke checkable witnesses to `ai-generated` precisely so `content-policy` bars them as future `deps` targets, so retagging would remove a protection.
+
+**Duty 1 — `risk_review`: in flight.** This is the long pole. The round-1 fleet never covered the 131 — it died at run 31 with only **16** lanes returning readings (the dispatch's "27 finished" overcounts; 23 lanes completed, 7 of those failed). I relaunched it with `--skip-done`; it's at 17/131 with the generator built and dry-running clean at 131/131.
+
+Two things worth flagging now:
+
+- **41% of refuter lanes are failing with `TypeError: terminated`** — transport drops, which the owner rule classes as null verdicts, never mathematical ones. Host memory (3.4/7.9 GB) and load are fine, so this is DeepSeek-side. The runner has no retry logic, unlike `judge-sweep`; I'll re-run with `--skip-done` to retry, but that's a real gap in `wave5-run-refuters.mjs` worth recording.
+- **The Munkres URL**: my round-1 report already decided this and the decision stands — it's a 144-item corpus-wide convention, not one item, Wikipedia has no article for the book, and the link is live and honestly titled. A10 owner queue, not an A6 repair.
+
+Fleet ETA is roughly 2 hours plus retries. I'll keep working it and won't write a `risk_review` note claiming refuter coverage for any item whose lane didn't return — those get an honest `alpha-read` note backed by my own reading.
+
+
+## stderr
+
