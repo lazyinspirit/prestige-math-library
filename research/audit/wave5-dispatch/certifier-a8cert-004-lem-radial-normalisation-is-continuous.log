@@ -1,0 +1,29 @@
+# certifier/a8cert-004-lem-radial-normalisation-is-continuous 2026-08-05T14:27:51.087Z
+
+## stdout
+### VERDICT — CERTIFY
+
+### WHAT I READ
+- the item, in full: `items/lem-radial-normalisation-is-continuous.md`
+- dependencies opened on disk: `def-vector-valued-functions-limits-and-continuity`, `thm-componentwise-limits-and-continuity`, `lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric`, `def-euclidean-spheres-and-closed-balls`, `def-subspace-topology-top`, plus `def-norm-and-normed-space` (checked for norm-axiom wording, not itself a declared dependency)
+- URLs fetched: none (the two `sources.references` Wikipedia links are generic background, not cited inline for any specific claim, so nothing there needed verification)
+
+### FINDING 1 — NONFATAL — location: Facts & Assumptions, [L2]
+CLAIM AS WRITTEN: "Componentwise continuity gives continuity into $\mathbb R^n$ ([[thm-componentwise-limits-and-continuity]], [[def-vector-valued-functions-limits-and-continuity]])"
+WHY IT FAILS: This is an accurate restatement of clause 1 of `thm-componentwise-limits-and-continuity` (one direction of its iff), but the proof never actually decomposes $\rho$ into components; step 1.2's bound $\lVert\rho(x)-\rho(a)\rVert_2\le4\lVert x-a\rVert_2/d$ is exactly the direct $\varepsilon$-$\delta$ criterion of `def-vector-valued-functions-limits-and-continuity`, with no need for the componentwise theorem. The citation is unused, not incorrect.
+WHAT WOULD FIX IT: Drop the `thm-componentwise-limits-and-continuity` half of [L2], or note explicitly it is not exercised here.
+
+### FINDING 2 — NONFATAL — location: Proof, step 1.2 (and step 2.1's "$\lVert\rho(x)\rVert_2=1$")
+CLAIM AS WRITTEN: "$\lVert\rho(x)-\rho(a)\rVert_2\le\lVert x-a\rVert_2/\lVert x\rVert_2+\lVert a\rVert_2|1/\lVert x\rVert_2-1/\lVert a\rVert_2|$"
+WHY IT FAILS: This decomposition uses the ordinary norm triangle inequality (N3) and absolute homogeneity (N2) of the Euclidean norm — confirmed as norm axioms (N1)-(N3) in `def-norm-and-normed-space`, which is not among this item's `deps` and is not restated in [L1]-[L3]. [L1] only states continuity and the *reverse* triangle inequality. Likewise step 2.1's $\lVert\rho(x)\rVert_2=1$ uses (N2) silently.
+WHY IT IS NONFATAL: (N2)/(N3) for the Euclidean norm are the most elementary, universally known norm properties, already implicit in the cited `lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric` (whose own Facts block lists them as [L1] for a general norm $N$). A competent reader supplies these in well under 30 seconds; nothing false or unlicensed-in-spirit is asserted.
+WHAT WOULD FIX IT: Add `def-norm-and-normed-space` to `deps` and an [L#] line stating (N2)/(N3) for $\lVert\cdot\rVert_2$, if the authors want the citation trail fully explicit.
+
+### ASSESSMENT
+I checked: the algebra of step 1.2 exactly (the decomposition $x/\lVert x\rVert-a/\lVert a\rVert=(x-a)/\lVert x\rVert+a(1/\lVert x\rVert-1/\lVert a\rVert)$ is correct, and the bound $\le 4\lVert x-a\rVert_2/d$ follows correctly using [L1]'s reverse triangle inequality and $\lVert x\rVert>d/2$ from step 1.1); the $\varepsilon$-$\delta$ closure from step 1.2's bound; the subspace-map argument via `def-subspace-topology-top`'s characteristic property, matched against $S^{n-1}$'s definition as $S_2(0,1)$ in `def-euclidean-spheres-and-closed-balls`; and the title against the Statement (no overclaim). Every dependency in `deps` is cited by the Facts block and none is a fatal misrepresentation of the cited item's content. The only issues found are unused/implicit citations, both squarely within the library's 30-second-gap and minor-citational-quirk exclusions.
+
+0 fatal, 2 nonfatal
+
+
+## stderr
+

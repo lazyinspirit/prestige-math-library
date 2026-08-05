@@ -16,11 +16,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -97,8 +98,10 @@ and every orbit converges to it.
   $|a - 1/2| \cdot 2/9$.
 
 - **Contractivity is exact here, not an estimate.** Step 1.2 gives equality,
-  $|x_{k+2} - x_{k+1}| = \tfrac13|x_{k+1} - x_k|$, so $c = 1/3$ is the smallest
-  admissible contraction constant and the error bound of
+  $|x_{k+2} - x_{k+1}| = \tfrac13|x_{k+1} - x_k|$, so for every starting value
+  $a \ne 1/2$ the constant $c = 1/3$ is the smallest admissible one; for
+  $a = 1/2$ the sequence is constant, every gap is $0$, and every
+  $c \in (0,1)$ is admissible ([[def-contractive-sequence]]). The error bound of
   [[thm-contractive-implies-cauchy]] is as sharp as that theorem can make it.
   Contrast [[cex-strictly-decreasing-gaps-no-limit]], where the ratio of
   consecutive gaps tends to $1$ and no admissible constant exists at all.

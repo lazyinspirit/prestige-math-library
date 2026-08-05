@@ -15,11 +15,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -122,7 +123,7 @@ between the two hypotheses is exactly the uniform ratio.
   than the last is not enough either, which is the separate witness
   [[cex-strictly-decreasing-gaps-no-limit]].
 
-- **Both false statements on this page have the same shape.** A condition that
+- **Two of the three false statements on this page have the same shape.** A condition that
   looks like the Cauchy condition, but at only one pair of indices per step, is
   not the Cauchy condition. The other one is
   [[fs-convergent-subsequence-implies-bounded]], where a condition holding along

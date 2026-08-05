@@ -21,7 +21,7 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const arg = (n, d) => { const i = process.argv.indexOf(n); return i >= 0 ? process.argv[i + 1] : d; };
 const dry = process.argv.includes('--dry-run');
 const adjPath = arg('--adjudications', 'research/audit/wave5-risk-adjudications.json');
-const REVIEWER = 'Audit-Alpha (claude-opus-5), wave 5 A6 round 2, 2026-08-05';
+const REVIEWER = 'Audit-Alpha (claude-opus-5), wave 5 A6 round 3, 2026-08-05';
 
 const BATCHES = ['real-analysis', 'topology-countability', 'topology-function-spaces', 'topology-separation'];
 const DISPATCH = join(REPO, 'research/audit/wave5-dispatch');
@@ -73,7 +73,9 @@ function noteFor(id) {
       ? `its DeepSeek refuter lane ${lane.label} did not return a reading (${lane.stderr || 'no verdict recorded'}), which under the owner's rule is a null result and never a verdict`
       : 'no DeepSeek refuter lane returned a reading for this item';
     return `${t.toUpperCase()} risk. Refuter coverage: NONE — ${why}. `
-      + `Alpha therefore read this item itself from disk, with its Statement, every numbered step and every [L#] fact checked against the cited dependency on disk. `
+      + `Alpha therefore read this item itself, in full, from disk in the wave-5 A6 round-3 pass: its Statement, its Facts, every numbered proof step against the facts that step cites, and its Remark prose read with a numbered step's suspicion. `
+      + `Each [F#]/[A#]/[L#] fact was checked against Alpha's own knowledge of the standard result it names; the cited dependency page was opened on disk only where the item's use of it was in doubt, and where that happened the note below says so. `
+      + `This is a single-reader, same-family reading and is weaker evidence than a cross-family refuter lane; the tier above is a score over dependency count, biconditionals and analytic limiting language, so it orders the reading and is not itself a finding. `
       + (adj ?? 'Adjudication: no fatal defect found; nothing rises above the 30-second threshold, and no repair is licensed.');
   }
 
@@ -85,8 +87,10 @@ function noteFor(id) {
     + `(tool-less; the item and its cited dependency text were assembled into its task file by Alpha), returning ${lane.tally ?? 'no parsable tally'} in ${lane.secs}s.`
     + findingText
     + ' '
+    + ' The tier above is a score over dependency count, biconditionals and analytic limiting language; it orders the reading and is not itself a finding.'
+    + ' '
     + (adj ?? (lane.fatalCount === 0
-      ? 'Alpha adjudication from disk: no finding rises to a fatal defect. Any cross-reference the tool-less lane could not verify was checked by Alpha against the named item on disk; nothing above the 30-second threshold, and no repair is licensed.'
+      ? 'Alpha adjudication from disk: the lane returned no fatal finding, and Alpha adjudicated each finding it did return against the current item text, recording confirmations, refutations and applied repairs in research/audit/wave5-alpha.md. Nothing here rises above the 30-second threshold and no repair is licensed on this item.'
       : 'Alpha adjudication: see the wave-5 Alpha report for this item.'));
 }
 

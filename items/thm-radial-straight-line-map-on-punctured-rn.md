@@ -7,17 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [lem-radial-normalisation-is-continuous, thm-product-universal-property, thm-componentwise-limits-and-continuity, def-product-topology, def-euclidean-spheres-and-closed-balls, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-algebra-of-continuous-functions, def-subspace-topology-top]
+deps: [lem-radial-normalisation-is-continuous, thm-product-universal-property, thm-componentwise-limits-and-continuity, def-product-topology, def-euclidean-spheres-and-closed-balls, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-algebra-of-continuous-functions, lem-continuity-is-local-and-pastes, def-subspace-topology-top]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,9 +43,9 @@ Then $H$ is continuous, $H(x,0)=x$, $H(x,1)=x/\lVert x\rVert_2$, $H(s,t)=s$ for 
 
 [L2] Coordinate projections and the map into a product are continuous as stated by the product universal property ([[thm-product-universal-property]], [[def-product-topology]]).
 
-[L3] The Euclidean norm is positive away from $0$ and the unit sphere consists of its norm-one points ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]], [[def-euclidean-spheres-and-closed-balls]]).
+[L3] The Euclidean norm is continuous for the Euclidean metric and is positive away from $0$, and the unit sphere consists of its norm-one points ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]], [[def-euclidean-spheres-and-closed-balls]]).
 
-[L4] Sums, products, and quotients with nowhere-zero denominator of continuous real-valued functions are continuous, and a vector-valued map is continuous exactly when its coordinate functions are continuous ([[thm-algebra-of-continuous-functions]], [[thm-componentwise-limits-and-continuity]]).
+[L4] For maps on a subset of a metric space, sums, scalar multiples and pointwise products of continuous real-valued functions are continuous, and a vector-valued map is continuous exactly when its coordinate functions are continuous ([[thm-componentwise-limits-and-continuity]], clauses 1 and 3, the product being the case $m = 1$ of the inner product); composites of continuous maps are continuous ([[lem-continuity-is-local-and-pastes]]); and $u \mapsto 1/u$ is continuous on $\mathbb{R} \setminus \{0\}$, this being clause 4 of ([[thm-algebra-of-continuous-functions]]) with $A = \mathbb{R}$, numerator $1$ and denominator the identity.
 
 [L5] A map into a subspace is continuous exactly when its composite with the ambient inclusion is continuous ([[def-subspace-topology-top]]).
 
@@ -54,7 +55,7 @@ Then $H$ is continuous, $H(x,0)=x$, $H(x,1)=x/\lVert x\rVert_2$, $H(s,t)=s$ for 
 
 1.1 The scalar $c(x,t):=(1-t)+t/\lVert x\rVert_2$ is positive, since $1-t\ge0$, $t\ge0$, and $\lVert x\rVert_2>0$. [L3]
 
-1.2 The coordinate projections on $P\times[0,1]$ are continuous by [L2]. Thus $c(x,t)$ is continuous by [L1] and the algebra rules in [L4], and each coordinate $H_i(x,t)=c(x,t)x_i$ is continuous. Componentwise continuity in [L4] makes $H$ continuous as a map into $\mathbb R^n$. [L1, L2, L4]
+1.2 The coordinate projections on $P\times[0,1]$ are continuous by [L2]. By [L3] the map $x\mapsto\lVert x\rVert_2$ is continuous on $P$ and never $0$ there, so composing it with $u\mapsto 1/u$ gives a continuous $x\mapsto 1/\lVert x\rVert_2$ by [L4]; hence $c(x,t)=(1-t)+t/\lVert x\rVert_2$ is continuous, being built from continuous functions by sums, scalar multiples and products as in [L4], and each coordinate $H_i(x,t)=c(x,t)x_i$ is continuous. Componentwise continuity in [L4] makes $H$ continuous as a map into $\mathbb R^n$. [L1, L2, L3, L4]
 
 1.3 Substituting $t=0$ and $t=1$ gives $H(x,0)=x$ and $H(x,1)=x/\lVert x\rVert_2$. If $s\in S^{n-1}$, then $\lVert s\rVert_2=1$ and $H(s,t)=s$. [L3]
 

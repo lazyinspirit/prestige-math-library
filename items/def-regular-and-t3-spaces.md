@@ -15,11 +15,12 @@ landmark: true
 short: "regular space, $T_3$ space"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -67,15 +68,17 @@ $X$ the only closed sets are $\varnothing$ and $X$, so the only pair $(C, x)$ to
 be separated has $C = \varnothing$, and $U = X$, $V = \varnothing$ separates it;
 yet no two distinct points are distinguished by any open set. Conversely $T_1$
 does not imply regularity. It is the *conjunction* $T_3$ that sits above
-Hausdorff in the hierarchy, and the proof of that is two items below.
+Hausdorff in the hierarchy, and the proof of that is three items below.
 
 ## Remarks
 
 - **A regular space is not required to separate two closed sets**, which is the
   stronger condition of normality defined later on this page; and a normal space
   is not required to separate a point from a closed set, since a point need not
-  be closed. Neither axiom implies the other without $T_1$, and the two false
-  statements of this page make that precise.
+  be closed. Normality does not imply regularity, and the witness is Sierpinski
+  space on the companion page. Whether regularity implies normality is a
+  question this page leaves open, and no statement here asserts an answer
+  ([[def-normal-and-t4-spaces]]).
 
 - **What regularity is really about.** The reformulation proved next — every
   point has a neighbourhood base of closed neighbourhoods — is the form in which

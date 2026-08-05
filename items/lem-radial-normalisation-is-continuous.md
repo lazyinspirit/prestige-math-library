@@ -7,17 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-euclidean-spheres-and-closed-balls]
+deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-euclidean-spheres-and-closed-balls, def-subspace-topology-top]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,7 +39,7 @@ For $n\ge1$, the map $\rho:\mathbb R^n\setminus\{0\}\to S^{n-1}$ defined by $\rh
 
 [L1] The Euclidean norm is continuous and satisfies $|\lVert u\rVert_2-\lVert v\rVert_2|\le\lVert u-v\rVert_2$ ([[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]]).
 
-[L2] Componentwise continuity gives continuity into $\mathbb R^n$, and the subspace criterion gives continuity into a subspace when the image lies there ([[thm-componentwise-limits-and-continuity]], [[def-vector-valued-functions-limits-and-continuity]]).
+[L2] Componentwise continuity gives continuity into $\mathbb R^n$ ([[thm-componentwise-limits-and-continuity]], [[def-vector-valued-functions-limits-and-continuity]]); and a map into a subspace is continuous exactly when its composite with the ambient inclusion is continuous, so a continuous map whose image lies in the subspace is continuous into it ([[def-subspace-topology-top]]).
 
 [L3] The unit sphere is the set of vectors with Euclidean norm $1$ ([[def-euclidean-spheres-and-closed-balls]]).
 

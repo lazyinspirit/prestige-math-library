@@ -1,0 +1,32 @@
+# audit-refuter/a6-056-cex-cauchy-rationals-no-rational-limit 2026-08-05T13:17:28.490Z
+
+## stdout
+```
+### FINDING 1 — FATAL — location: [L1] / step 5.1
+CLAIM AS WRITTEN: "[L1] The construction and its properties: $s_n \ge 0$, $s_n^2 \le 2 < (s_n + 10^{-n})^2$, and $(s_n)$ is a Cauchy sequence of rationals with no rational limit ([[fs-rationals-complete]])."
+WHY IT FAILS: The dependency `fs-rationals-complete` is provided with the following text verbatim:
+
+> **False claim:** every Cauchy sequence of rationals converges to a rational (where $(a_n) \to q$ means $(a_n - q)$ is null). This is precisely the defect the construction of $\mathbb{R}$ repairs.
+
+This text is the false claim the item is refuting. It contains **no** definition of $s_n$, **no** inequalities, and **no** statement that the sequence is Cauchy or has no rational limit. The entire counterexample depends on these facts — the inequalities are needed to bound $\sqrt2-s_n$ and apply the squeeze theorem, and the Cauchiness is needed for the sequence to serve as a Cauchy sequence of rationals. The citation therefore does not supply the required claims; the proof is unsubstantiated.
+WHAT WOULD FIX IT: Either make the item self‑contained (the inequalities follow immediately from the definition of $s_n$ already given in the item, and Cauchiness in $\mathbb{Q}$ follows from the convergence in $\mathbb{R}$ proved in step 3.1 together with the fact that the metric on $\mathbb{Q}$ is the restriction of the metric on $\mathbb{R}$), or ensure the full content of `fs-rationals-complete` actually contains those proofs and is provided as part of the dependency text.
+
+### FINDING 2 — FATAL — location: [L9] / step 5.1
+CLAIM AS WRITTEN: "[L9] No rational squares to $2$ ([[fs-sqrt2-rational]])."
+WHY IT FAILS: The dependency `fs-sqrt2-rational` is provided with the following text verbatim:
+
+> **False claim:** there exists $x \in \mathbb{Q}$ with $x^2 = 2$.
+
+This text states the false claim itself, **not** its negation. It does not supply the fact that no rational squares to $2$. The contradiction in step 5.1 (that the assumed rational limit would square to $2$, contradicting [L9]) depends on this fact. Without it the proof that the sequence has no rational limit is incomplete.
+WHAT WOULD FIX IT: The dependency must be a source that **asserts** the irrationality of $\sqrt2$ (i.e., that no rational squares to $2$). If `fs-sqrt2-rational` actually contains a proof of that fact, its statement (the theorem it proves) should be provided, not merely the false claim.
+
+### FINDING 3 — NONFATAL — location: Remarks (penultimate paragraph)
+CLAIM AS WRITTEN: "for instance the Babylonian iterates of [[ex-babylonian-sqrt-two]] started at $2$, which are all rational and converge to $\sqrt 2$."
+WHY IT FAILS: This is a mathematical claim about an external item that is not provided among the dependencies. It cannot be verified in this audit and may be incorrect. As a remark it does not affect the logical validity of the proof, but it is an unsubstantiated assertion.
+WHAT WOULD FIX IT: Omit the claim or ensure the referenced item is available and supports it.
+
+2 fatal, 1 nonfatal
+```
+
+## stderr
+
