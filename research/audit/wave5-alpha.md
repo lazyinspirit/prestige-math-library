@@ -1160,3 +1160,324 @@ mismatched, and the cost of that mismatch is 60 judge calls per prose fix.
 **Exact next action:** orchestrator runs the 31-item rejudge, then A9 and A10.
 No A8 adjudication is outstanding: 102 rows, one per current rejection, none
 unadjudicated.
+
+# A8 — Round 3
+
+## Recovery receipt (2026-08-06, A8 round-3 dispatch)
+
+**Baseline.** Branch `main`, HEAD `b9ab1e1` ("fix(audit): wave 5 A8 round 2 — 102
+adjudications, 8 fatal; coverage receipt generated"). Working tree dirty with the
+wave's artifacts and the three modified judge ledgers; **no item file modified at
+entry** — my round-1 and round-2 repairs are committed.
+
+**Read in full.** `CLAUDE.md`; the round-3 dispatch brief and this brief's Alpha
+half; `research/audit/RESUME.md` (head section **still WAVE 4**, third round
+running); this whole report; `research/audit/wave5-judge.jsonl` (709 rows) and
+`wave5-judge-adjudications.jsonl` (102 rows at entry); `tools/item-hash.mjs`,
+`tools/step8-guard.mjs`, `tools/level-coverage.mjs` receipt validation,
+`tools/dispatch.mjs`; on disk every item named below and every dependency target
+each allegation turns on — `lem-of-abs-value`, `prop-of-multiply-inequalities`,
+`ex-two-subsequential-limits`, `fs-rationals-complete`.
+
+**Snapshot.** `pre-a8-round3` taken before the first adjudication (24 snapshots
+in the ledger, 2767 items).
+
+**Inherited open actions:** none of mine. The `wave5-spine-audit.json` blocker
+and the stale `RESUME.md` remain the orchestrator's.
+
+## The dispatch handed me five items. Disk holds five items and six rows.
+
+Recomputed from `wave5-judge.jsonl` by taking the **last** verdict per
+`(id, model)` and subtracting the 102 adjudication keys:
+
+| | |
+|---|---|
+| current paired verdicts | 418 (209 items × 2 lanes) |
+| keep | 351 |
+| reject | 63 |
+| null | **4**, all `deepseek-v4-pro` `NO_CONTENT: terminated` |
+| already adjudicated | 57 of the 63 |
+| **unadjudicated at this dispatch** | **6 rows / 5 items** |
+
+The dispatch's count and mine agree this time: `cex-unbounded-with-convergent-
+subsequence` was rejected by both lanes and is one item in two rows.
+
+**The four nulls are all on `monotone-sequences-and-cauchy-completeness`** —
+`fs-nested-open-intervals-nonempty`, `ex-two-subsequential-limits`,
+`cex-strictly-decreasing-gaps-no-limit`, `cex-nested-open-intervals-empty`. They
+are therefore inside the pair my repair below re-freezes, and the one targeted
+rejudge closes both problems at once. Paired coverage before this round was
+**205/209 decided**, not 209/209.
+
+## Adjudications — 6 rows
+
+| outcome | rows |
+|---|---|
+| `confirmed_fatal` | **2** (one item, both lanes) |
+| `false_positive` | 2 |
+| `confirmed_nonfatal` | 2 |
+
+Wave cumulative: **108 rows, 0 unadjudicated, 0 unhashed.** 10 fatal across 7
+items, 91 nonfatal, 7 false positive. DeepSeek 50/57 precision, Sonnet 51/51.
+
+### CONFIRMED FATAL — `cex-unbounded-with-convergent-subsequence`, both lanes
+
+Its last Remark bullet read:
+
+> "With the unbounded branch replaced by a second constant, the same interleaving
+> gives a bounded divergent sequence with two subsequential limits
+> ([[ex-two-subsequential-limits]])."
+
+The parenthetical identifies `ex-two-subsequential-limits` as the sequence that
+modification produces. It is not. That item is $x_k = (-1)^k(1 + 1/k)$: an
+alternating **sign** carrying a non-constant null perturbation, written on
+$\mathbb{N}$ as $u_j = t_j p_j$ with $p_j = 1 + 1/(j+1)$. It is not an
+interleaving of two constants, and its own Remark says so in terms:
+
+> "**The perturbation is what makes the example more than the alternating
+> sequence.** With $p_j$ replaced by the constant $1$ the sequence is $\pm 1$
+> alternating and each subsequential limit is attained infinitely often. Here
+> $|x_k| > 1$ at every index, so neither subsequential limit is ever a value of
+> the sequence."
+
+So the cited item explicitly distinguishes itself from the construction this
+Remark attributed to it, and the constant version of the described modification
+is the plain alternating sequence, which is a different item again. The
+underlying mathematics is true — a two-constant interleaving is bounded,
+divergent, and has two subsequential limits — and the falsehood is the
+identification. Type `dependency_citation`.
+
+This is the **eighth of nine fatal findings in wave 5 that is a false claim in
+Remark or page-structure prose**, and the third that is specifically a false
+claim about what a *sibling item* is or does. Not one of the nine was an invalid
+inference inside a numbered proof step.
+
+**The repair** replaces only that bullet: it states the variant's two
+subsequential limits as $1$ and $c$ under the side condition $c \ne 1$, and then
+links `ex-two-subsequential-limits` for what it actually is, a different route to
+two limits in which neither limit is a value of the sequence. Statement, Facts,
+every numbered step, `deps` and title are untouched. `impact-audit` from the
+dedicated `pre-a8-round3` baseline: **0 changed public interfaces, 0 affected
+items.**
+
+**Certification.** I authored the repair, so I did not certify it. A read-only
+`claude-sonnet-5` certifier read the final text
+(`research/audit/wave5-dispatch/certifier-a8r3cert-001-cex-unbounded-with-convergent-subsequence.log`):
+**CERTIFY, 0 fatal, 0 nonfatal.** It opened twelve dependencies on disk, derived
+the $\{1, c\}$ claim itself and confirmed $c \ne 1$ is both necessary and
+sufficient (at $c = 1$ the variant collapses to the constant sequence and is not
+divergent), and checked the new description against
+`ex-two-subsequential-limits` clause by clause. The stale legacy `judge` block
+(`z-ai/glm-5.2`) and the obsolete `audited: 2026-07-26` stamp were deleted before
+the edit; `verification.verified` (`claude-sonnet-5`, `scope: published-audit`,
+`delegated_by: owner`) was written after the independent reading.
+**`verification.audited` was not written.**
+
+### FALSE POSITIVE — `def-interval` (deepseek-v4-pro)
+
+DeepSeek: defining closed intervals as those where "both written endpoints are
+included" contradicts the listed form $[a,\infty)$, "because the notation uses a
+parenthesis on the right, indicating the endpoint $\infty$ is excluded".
+
+The reading the allegation rests on is foreclosed by the item's own next
+paragraph, verbatim:
+
+> "**The symbols $\pm\infty$ are notation and not elements of $\mathbb{R}$.**
+> They mark which side carries no endpoint condition at all."
+
+Under the item's stated convention $[a,\infty)$ has exactly one written endpoint,
+$a$, and it is included. Every one of the eight classifications is then correct:
+$(a,b)$, $(a,\infty)$, $(-\infty,b)$ open; $[a,b]$, $[a,\infty)$, $(-\infty,b]$
+closed; and $(-\infty,\infty) = \mathbb{R}$ in **both** lists, which is right,
+since $\mathbb{R}$ is clopen.
+
+**That last form is what settles it, and DeepSeek did not notice it.** Under
+DeepSeek's reading — $\infty$ is a written endpoint, and the parenthesis beside it
+excludes it — $(-\infty,\infty)$ would have both endpoints excluded and so could
+not be closed, yet the item lists it as closed. The item's list is coherent only
+under the convention the item states, and is correct under it. No false claim.
+
+Residual, and **not** repaired under R1: "both written endpoints" reads loosely
+where only one endpoint is written; "every written endpoint" would be exact. That
+is wording, not mathematics, it is inside the 30-second threshold, and A8 is
+fatal-only. Recorded for A10 as a step-6-class polish, not an edit. This matters
+more than usual because `def-interval` carries **25 of this wave's 29 cross-batch
+edges** and a repair here would have re-frozen a large cone for a comma.
+
+### FALSE POSITIVE — `cex-cauchy-rationals-no-rational-limit` (deepseek-v4-pro)
+
+**The identical allegation I refuted at round 2**, re-raised at a new context
+hash because my round-2 repair re-froze this page's contexts. DeepSeek again says
+`[L1]` cites `fs-rationals-complete` for the construction and bounds of $s_n$
+while "the supplied text of that item contains only the false claim and a remark,
+with no such construction or proof". I re-read `fs-rationals-complete` on disk;
+its step 1.1 reads verbatim:
+
+> "For each $n$ let $k_n$ be the largest natural with $k_n^2 \le 2 \cdot 10^{2n}$,
+> and set $s_n = k_n / 10^n$; then $s_n^2 \le 2 < (s_n + 10^{-n})^2$, and
+> $s_n \le 2$"
+
+which is the construction and both bounds, verbatim, plus a third bound `[L1]`
+does not even claim. Its step 2.1 proves $(s_n)$ Cauchy and its step 4.1 proves
+no rational limit. A refuted false statement still carries the full proof of its
+refutation, and that proof **is** the construction. Unchanged verdict.
+
+**Worth naming as a lane observation:** this is the same reader making the same
+error about the same item twice, in two independent sweeps. It is not random
+noise. `fs-` items present a false claim in the Statement and the truth in the
+proof, and this lane twice read the Statement as the item's whole content. If
+A10 wants one cheap judge-context line, it is that.
+
+### CONFIRMED NONFATAL — 2, both `deepseek-v4-pro`, both fact-fidelity
+
+1. **`cor-monotone-converges-iff-bounded`.** `[L5]` claims "$|t| \le M$ exactly
+   when $-M \le t \le M$" citing `lem-of-abs-value`, which states the **strict**
+   equivalence "for every $c > 0$, $|x| < c \iff -c < x < c$". DeepSeek is right
+   that the non-strict biconditional is not in the target. But the **direction
+   the proof uses is** one line from a clause `lem-of-abs-value` states verbatim:
+   step 1.2 needs only $|x_k| \le M \Rightarrow -M \le x_k \le M$, and
+   $-|x| \le x \le |x|$ is in that lemma's Statement. The unused converse is also
+   true and one line away. This is the wave's dominant class and the third
+   instance against this exact target; ruled nonfatal for consistency with the
+   ~30 I ruled at round 2.
+2. **`lem-geometric-sequence-null`.** DeepSeek is **half right**, and the half
+   matters. Step 3.5 multiplies $M/h' \le n$ by $h' > 0$ where $M$ is an
+   arbitrary real, so $M/h'$ may be negative and `[L9]`
+   (`prop-of-multiply-inequalities`: "$0 \le a \le b$ and $0 \le c \le d$ give
+   $ac \le bd$") genuinely does not cover it; the licensing fact is
+   order-compatibility of multiplication by a positive, an ordered-field axiom,
+   and `def-ordered-field` is already in `deps` and already cited at `[L10]`.
+   Step 3.6 is **not** defective: there $1/N > 0$ and $\varepsilon h > 0$, and the
+   conclusion is non-strict, so `[L9]` applies exactly as stated with
+   $a = 1/N$, $b = \varepsilon h$, $c = d = 1/h$. The same over-broad use of
+   `[L9]` recurs at 3.3, 4.2 and 5.1. All of it is inside the 30-second
+   threshold.
+
+## The twice-touched question the dispatch asked, answered
+
+**`cor-monotone-converges-iff-bounded` is converging, not thrashing, and its
+fact list does not need rewriting as a unit.**
+
+Measured from disk rather than inferred. The round-2 fatal was a false claim in
+the final Remark bullet, and my repair changed **only** that bullet. `[L5]`,
+which DeepSeek now objects to, is **pre-existing text I never touched** — so this
+is not a second defect introduced by the repair, and it is not a second defect in
+the same text. It is a first look at a different part of the item, made possible
+only because the repair re-froze the page context and bought DeepSeek a fresh
+read. The two findings are disjoint in location, disjoint in cause, and only one
+is fatal.
+
+`[L5]` is the one over-broad restatement in a fact list of five; the other four
+(`[L1]`–`[L4]`) were each confirmed an exact restatement by the round-2
+certifier, which opened all six declared dependencies. A unit rewrite would
+change more text, for nothing fatal, and would re-freeze 31 contexts a second
+time.
+
+**The stopping condition I will hold myself to, since the dispatch asked for
+one:** a *third distinct fatal* on this item stops the repairs and reopens the
+Statement. A third distinct **nonfatal** does not — nonfatals do not license
+edits at all under R1, which is exactly the loop the rule was written to prevent.
+
+`touchlog` again reports "54 item(s) now repaired more than once" at the
+`pre-a8-round3` snap. That is the snapshot-window artifact for the third time:
+the ledger carries nine per-item Beta snapshots recorded as a process deviation
+at A6, and a 24-snapshot ledger counts one frontmatter retag seen from two stage
+angles as two touches. `cex-unbounded-with-convergent-subsequence` is
+byte-identical across every snapshot from `baseline` to `post-A4` and changes
+exactly once, at the A4 real-analysis retag, which is a provenance retag and not
+a repair. **The real multiple-repair count for wave 5 remains one**,
+`def-regular-and-t3-spaces`, from round 1.
+
+## Gate state
+
+| gate | result |
+|---|---|
+| `step8-guard` (baseline `pre-a8-round3`) | **OK — 1 changed, 1/1 licensed by a confirmed fatal adjudication** |
+| `gates --audit --step A6` | **STEP A6 CLEAR, 14/14** |
+| `impact-audit` (from `pre-a8-round3`) | 0 changed public interfaces, 0 affected items |
+| `precheck` (repaired item) | 1 checked, 0 failing |
+| `depcheck` | exit 0, `published-unaudited` empty |
+| `citecheck` `fwdcheck` `extcheck` `rendercheck` `prosecheck` `depsource` | all exit 0 |
+| `proof-contract --strict` | 0 errors, 0 warnings, 155/155 |
+| `level-coverage --audit --audit-receipt` | **3 errors, none of them receipt-class** (see below) |
+
+The two persisting warnings are unchanged and are not gate failures:
+`content-policy` `generated-kind` on `rem-function-space-conventions`, `genrisk`
+`verified-generated-seed` on `rem-counting-conventions-and-scope`.
+
+## The coverage receipt — attested
+
+`research/audit/wave5-coverage.json` now carries a reviewer, a concrete
+attestation, and a concrete drift reason for each of the three
+`plan_reconciliation` entries. Written by
+`research/audit/wave5-write-coverage-attestation.mjs`, kept so the attestation is
+reproducible rather than hand-edited. **All three
+`audit-receipt-*` error classes are gone**; `level-coverage --audit` now reports
+exactly three errors, and neither remaining class is the receipt:
+
+1. `spine-receipt-missing` — the orchestrator's, unchanged since round 1.
+2. `judge-verdict-confirmed-fatal` ×2 on `cex-unbounded-with-convergent-
+   subsequence` — the fatal I confirmed and repaired this round, clearing when
+   the targeted rejudge below records a current verdict.
+
+**The three drift reasons, from the ledgers.**
+`cor-components-of-open-subsets-of-rn-are-polygonally-connected` gained
+`thm-path-connected-implies-connected` from A3 finding N2, where `[L1]` asserted
+"path-connected, hence connected" with no cited item stating that implication and
+step 1.1 leaned on it; I approved that repair at A3 over the Beta's
+recommendation to leave it. `lem-radial-normalisation-is-continuous` gained
+`def-subspace-topology-top` from the A8 round-1 both-lane fatal on `[L2]`'s
+misattributed subspace criterion. `thm-radial-straight-line-map-on-punctured-rn`
+gained `lem-continuity-is-local-and-pastes` because my **first** repair of its
+`[L4]` domain-widening fatal was itself wrong and `fwdcheck` caught it — the
+obvious replacement lives forward of the page, and the correct route goes through
+backward material. Each is certified; the receipt records the certifier lane.
+
+**What the attestation deliberately says against interest**, because a coverage
+claim that overstates is worse than one that records a limit: the Sonnet lane
+refused 207 calls at concurrency 16 and its verdicts exist only because of the
+concurrency-4 replay; coverage is current for **178 items, not 209**, until the
+rejudge below lands; Sonnet is not a cross-family screen; and the fact-fidelity
+policy question is unanswered on its fifth wave and accounts for roughly 75 of
+the 91 nonfatals.
+
+## The exact rejudge list — computed, not estimated
+
+I recomputed `tools/judge.mts --context-hash` over **all 209 scoped items** and
+diffed against the ledger, as at round 2. Exactly **31** items are stale: the
+whole `library/real-analysis/monotone-sequences-and-cauchy-completeness` A/B
+pair, and nothing outside it. It is the same 31 as round 2, for the same
+structural reason, and it **subsumes the 4 DeepSeek nulls**.
+
+```
+JUDGE_LINEUP=deepseek+sonnet node tools/judge-sweep.mjs \
+  --ledger research/audit/wave5-judge.jsonl \
+  --cost research/audit/wave5-judge-cost.jsonl \
+  --items cex-cauchy-rationals-no-rational-limit,cex-nested-open-intervals-empty,cex-nested-unbounded-closed-empty,cex-sqrt-k-differences-null-not-cauchy,cex-strictly-decreasing-gaps-no-limit,cex-unbounded-with-convergent-subsequence,cor-monotone-converges-iff-bounded,def-contractive-sequence,def-interval,def-monotone-sequence,def-subsequential-limit,ex-babylonian-sqrt-two,ex-contractive-sequence-fixed-point,ex-nested-intervals-single-point,ex-recursive-sqrt-two-plus-x,ex-two-subsequential-limits,fs-consecutive-differences-null-implies-cauchy,fs-convergent-subsequence-implies-bounded,fs-nested-open-intervals-nonempty,lem-alternating-sequence,lem-cauchy-sequence-bounded,lem-cauchy-with-convergent-subsequence,lem-geometric-sequence-null,lem-monotone-unbounded-diverges,lem-peak-monotone-subsequence,rem-completeness-routes,thm-bolzano-weierstrass,thm-cauchy-criterion-via-lub,thm-contractive-implies-cauchy,thm-monotone-convergence,thm-nested-interval-property
+```
+
+**62 verdicts expected.** Keep the Sonnet lane at the reduced concurrency;
+at 16 it returned 69 nulls at round 1, and DeepSeek returned 4 more at the
+round-2 replay.
+
+**A10 should record that this happened twice.** Two consecutive rounds, two
+Remark-only repairs on the same page, each changing zero public interfaces by
+`impact-audit`'s own measurement, each invalidating the same 31 frozen contexts
+and costing 62 judge calls — 60 of them on items I never opened. Page-granular
+judge context against item-granular repair is now measured, not theorised, and
+it is the single largest avoidable cost in the audit loop.
+
+## Handed back to the orchestrator
+
+1. **The 31-item targeted rejudge above.** Alpha cannot launch judge children
+   (the wave-1b `EPERM` finding stands).
+2. **`research/audit/wave5-spine-audit.json` still does not exist**, so
+   `level-coverage --verify-current-context` still cannot run. Third round
+   running; waves 2 and 4 produced one.
+3. **`research/audit/RESUME.md` is still headed WAVE 4.** Third round running.
+   Wave 5 has now completed A0 through A8 round 3 without that file being
+   updated once.
+
+**Exact next action:** orchestrator runs the 31-item rejudge, then A9 and A10.
+No A8 adjudication is outstanding: 108 rows, one per current rejection, none
+unadjudicated, none unhashed.

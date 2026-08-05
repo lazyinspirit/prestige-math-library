@@ -17,11 +17,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: claude-sonnet-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -97,8 +98,11 @@ adds the computation of its subsequential limit set.
   subsequences between them exhaust the sequence.
 
 - **Compare the bounded case.** With the unbounded branch replaced by a second
-  constant, the same interleaving gives a bounded divergent sequence with two
-  subsequential limits ([[ex-two-subsequential-limits]]). Bolzano-Weierstrass
-  applies there and produces one of the two; here it does not apply at all, and
-  the conclusion nevertheless happens to hold, which is exactly why the converse
-  is not a theorem.
+  constant $c \ne 1$, the same interleaving is bounded and divergent, its two
+  subsequential limits being $1$ and $c$. Bolzano-Weierstrass applies there and
+  produces one of the two; here it does not apply at all, and the conclusion
+  nevertheless happens to hold, which is exactly why the converse is not a
+  theorem. A different bounded sequence with two subsequential limits is worked
+  out in full at [[ex-two-subsequential-limits]], which reaches its two limits by
+  an alternating sign carrying a null perturbation rather than by interleaving
+  constants, so that neither limit is a value of the sequence.

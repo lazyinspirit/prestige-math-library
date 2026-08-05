@@ -1,0 +1,36 @@
+# audit-alpha/a8-round3 2026-08-05T16:08:52.797Z
+
+## stdout
+A8 round 3 is complete. Both jobs done.
+
+## 1. Five items, six rows adjudicated — 108 total, none outstanding
+
+| item | lane(s) | outcome |
+|---|---|---|
+| `cex-unbounded-with-convergent-subsequence` | **both** | **confirmed_fatal** (`dependency_citation`) |
+| `def-interval` | deepseek | false_positive |
+| `cex-cauchy-rationals-no-rational-limit` | deepseek | false_positive |
+| `cor-monotone-converges-iff-bounded` | deepseek | confirmed_nonfatal |
+| `lem-geometric-sequence-null` | deepseek | confirmed_nonfatal |
+
+**I touched exactly one item: `cex-unbounded-with-convergent-subsequence`.** Its Remark claimed that replacing the unbounded branch with a second constant "gives" `ex-two-subsequential-limits`. It does not — that item is $(-1)^k(1+1/k)$, and *its own Remark* says replacing the perturbation by a constant collapses it to the plain alternating sequence. The math asserted was true; the identification was false. Remark-only repair, `impact-audit` 0 interfaces / 0 items, certified independently (Sonnet, CERTIFY, 0 fatal 0 nonfatal), `verification.verified` written, `step8-guard` 1/1 licensed.
+
+**`def-interval` is not self-contradictory.** The item's next paragraph states that $\pm\infty$ are notation marking the absence of an endpoint condition. What settles it is the form DeepSeek didn't look at: $(-\infty,\infty)$ is listed as *both* open and closed, which is correct ($\mathbb{R}$ is clopen) and is only coherent under the item's own convention — under DeepSeek's reading it could not be closed at all. No repair, so its 25-edge cone is untouched.
+
+**`cor-monotone-converges-iff-bounded` is converging, not thrashing.** `[L5]` is pre-existing text my round-2 repair never touched; the two findings are disjoint in location and cause, and only one is fatal. Its fact list does not need a unit rewrite — the other four facts were each verified exact by the round-2 certifier. Stopping condition on record: a third distinct **fatal** reopens the Statement; a third nonfatal does not, since nonfatals license no edit at all.
+
+On `lem-geometric-sequence-null` DeepSeek is half right — step 3.5 genuinely escapes `[L9]` (M may be negative), step 3.6 does not. Both nonfatal.
+
+## 2. Coverage receipt attested
+
+Reviewer, attestation, and all three drift reasons written (via a kept script, so it's reproducible). **All three `audit-receipt-*` error classes are gone**; `level-coverage --audit` now reports 3 errors, none receipt-class: the missing spine receipt (yours) and the two confirmed-fatal rows that clear on rejudge.
+
+The attestation records against interest, as asked: the Sonnet lane refused 207 calls at concurrency 16 and its verdicts exist only via the concurrency-4 replay; coverage is current for **178 items, not 209**; Sonnet is not a cross-family screen; and paired coverage before this round was 205/209, with 4 DeepSeek nulls — all four on the same page my repair re-froze, so one rejudge closes both.
+
+**Rejudge list: the same 31 items** (whole `monotone-sequences-and-cauchy-completeness` A/B pair), recomputed over all 209 contexts, 62 verdicts — command in `wave5-alpha.md` § "The exact rejudge list". Second consecutive round where a Remark-only edit changing zero public interfaces invalidated 31 frozen contexts; that's now measured twice and belongs in A10.
+
+Still yours: the rejudge, `wave5-spine-audit.json`, and `RESUME.md` still headed WAVE 4.
+
+
+## stderr
+
