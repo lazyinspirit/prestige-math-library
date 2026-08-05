@@ -167,7 +167,29 @@ const MODEL_CONCURRENCY = Object.freeze({
   [OPUS]: 16,
   [SONNET]: 16,
 });
-const MAX_CONCURRENT_CALLS = supportedModels.reduce((sum, model) => sum + MODEL_CONCURRENCY[model], 0);
+
+// MEASURED, wave 5 A7 (2026-08-05): at cap 16 the Sonnet lane returned **207
+// capacity refusals against 140 responses** — `claude_exit`, status 1, 66 bytes,
+// ~3.5s, i.e. refused fast rather than reasoning and failing. 69 of 209 items
+// ended with only DeepSeek's verdict, so the wave's paired coverage was really
+// 140/209. The trend is the alarming part: wave 4 refused 61 of 213 (29%) at the
+// same cap, wave 5 refused 60%. DeepSeek, on the same sweep, returned 209/209.
+//
+// This is the exact failure that retired the Opus lane (303 refusals of 382 on
+// wave 0), and the standing rule is that a capacity refusal is a NULL, never a
+// verdict. So the cap needs to be tunable without editing an owner-set constant:
+// the default stays 16 as the owner set it, and a targeted replay can lower just
+// the refusing lane. Raising it above the owner's value is deliberately not
+// possible here — this exists to back off, not to push harder.
+const concurrencyOverride = (model) => {
+  const raw = process.env[`JUDGE_CONCURRENCY_${model.replace(/[^A-Za-z0-9]/g, "_").toUpperCase()}`];
+  if (raw === undefined) return null;
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < 1) throw new Error(`JUDGE_CONCURRENCY_* must be a positive integer; got ${raw}`);
+  return Math.min(n, MODEL_CONCURRENCY[model] ?? n);
+};
+const capFor = (model) => concurrencyOverride(model) ?? MODEL_CONCURRENCY[model];
+const MAX_CONCURRENT_CALLS = supportedModels.reduce((sum, model) => sum + capFor(model), 0);
 const RETRY_EXIT = 4;
 const LENGTH_RETRY_EXIT = 5;
 // These semaphores are shared across *all* sweep invocations. An in-process
@@ -218,7 +240,7 @@ const reapStaleSlots = (model) => {
 };
 const acquireModelSlot = async (model) => {
   const dir = slotDirFor(model);
-  const cap = MODEL_CONCURRENCY[model];
+  const cap = capFor(model);
   if (!cap) throw new Error(`no concurrency cap configured for ${model}`);
   mkdirSync(dir, { recursive: true });
   while (true) {
@@ -253,7 +275,7 @@ const pendingFor = (model) => ids
   })
   .slice(0, limit);
 const pending = Object.fromEntries(models.map((model) => [model, pendingFor(model)]));
-console.log(`[judge-sweep] lineup ${lineupName}: ${models.map((model) => `${model} pending ${pending[model]?.length ?? 0}/${ids.length} (cap ${MODEL_CONCURRENCY[model]})`).join("; ")} — at most ${MAX_CONCURRENT_CALLS} calls combined.`);
+console.log(`[judge-sweep] lineup ${lineupName}: ${models.map((model) => `${model} pending ${pending[model]?.length ?? 0}/${ids.length} (cap ${capFor(model)})`).join("; ")} — at most ${MAX_CONCURRENT_CALLS} calls combined.`);
 
 const runAttempt = async (task) => {
   const { id, model } = task;
@@ -374,7 +396,7 @@ const worker = async () => {
   }
 };
 const totalPending = models.reduce((sum, model) => sum + pending[model].length, 0);
-const workerLimit = models.reduce((sum, model) => sum + MODEL_CONCURRENCY[model], 0);
+const workerLimit = models.reduce((sum, model) => sum + capFor(model), 0);
 await Promise.all(Array.from(
   { length: Math.min(workerLimit, totalPending) },
   () => worker(),
