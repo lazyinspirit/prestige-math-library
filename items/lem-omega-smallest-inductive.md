@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-inductive-set]
+deps: [def-inductive-set, def-axiom-of-infinity, def-axiom-schema-of-separation,
+       def-axiom-of-extensionality]
 aliases: []
 landmark: false
 short: "$\\omega=\\bigcap$ inductive"
@@ -37,7 +38,7 @@ There is a set $\omega$ that is inductive ([[def-inductive-set]]) and is a subse
 
 ## Facts & Assumptions
 
-**Given:** ZFC; in particular the Axiom of Infinity: there exists an inductive set. Write $x^{+} := x \cup \{x\}$. Recall that $I$ inductive means $\varnothing \in I$ and ($x \in I \Rightarrow x^{+} \in I$).
+**Given:** ZFC; in particular the Axiom of Infinity ([[def-axiom-of-infinity]]): there exists an inductive set; the Axiom Schema of Separation ([[def-axiom-schema-of-separation]]); and Extensionality ([[def-axiom-of-extensionality]]). Write $x^{+} := x \cup \{x\}$. Recall that $I$ inductive means $\varnothing \in I$ and ($x \in I \Rightarrow x^{+} \in I$).
 
 ## Proof
 

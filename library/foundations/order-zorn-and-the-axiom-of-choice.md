@@ -2,8 +2,8 @@
 page: order-zorn-and-the-axiom-of-choice
 title: "Order, Zorn's Lemma, and the Axiom of Choice"
 status: published
-items: [def-partial-order, def-chain, def-upper-bound, def-maximal-element,
-        def-chain-complete-poset, def-choice-function, def-axiom-of-choice,
+items: [def-chain, def-upper-bound, def-maximal-element,
+        def-chain-complete-poset,
         lem-finite-choice, def-admissible-set, lem-admissible-set-exists,
         def-bw-extremal, lem-extremal-cut-closed-under-f,
         lem-extremal-cut-closed-under-sups, lem-extremal-comparability,
@@ -22,8 +22,9 @@ provable in ZF; it is cited as an external result rather than used in the proofs
 of the order-theoretic equivalences. These ingredients fix the logical scope of
 the development.
 
-The development introduces partial orders, chains, upper bounds, maximal
-elements, chain-complete posets, choice functions, and the Axiom of Choice. For
+The development introduces chains, upper bounds, maximal elements and
+chain-complete posets over the partial orders it requires, and applies the
+Axiom of Choice. For
 a progressive self-map, the least admissible set is closed under the map and
 chain suprema; its extremal elements are comparable, and minimality makes the
 set a chain. Its supremum is fixed, yielding Bourbaki-Witt without monotonicity

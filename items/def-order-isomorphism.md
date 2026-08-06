@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-partial-order, def-well-order]
+deps: [def-partial-order, def-well-order, def-injection-surjection-bijection,
+       def-ordered-pair]
 justified_by: []
 aliases: [def-order-embedding, def-order-isomorphic]
 landmark: false
@@ -84,6 +85,8 @@ $P \cong Q$, when an order isomorphism $P \to Q$ exists.
   surjectivity gives it the other, since $z <_Q f(x)$ has the form $z = f(y)$
   with $y <_P x$. Consequently the restriction of $f$ to that set is again an
   order isomorphism.
-- Functions, bijections, ordered pairs and Cartesian products are ambient ZFC
-  vocabulary in this library, exactly as "subset" and "union" are. This item
-  fixes only the order-theoretic terminology built on top of them.
+- Functions, bijections, ordered pairs and Cartesian products are built in this
+  library, at [[def-function]], [[def-injection-surjection-bijection]],
+  [[def-ordered-pair]] and [[def-cartesian-product]]; "subset" and "union" are
+  built alongside them. This item fixes only the order-theoretic terminology on
+  top of that vocabulary.

@@ -7,9 +7,11 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: []
+deps: [def-function, def-indexed-union-and-intersection, def-power-set,
+       def-set-difference-and-symmetric-difference]
 justified_by: []
-forward_refs: [ex-canonical-choice-on-naturals, ex-russells-socks]
+forward_refs: [ex-canonical-choice-on-naturals, ex-russells-socks,
+               lem-finite-choice]
 aliases: []
 landmark: false
 short: "choice function"
@@ -36,11 +38,12 @@ pipeline_run: null
 ## Definition
 
 Let $\mathcal{F}$ be a family of sets, every member of which is nonempty. A
-**choice function** for $\mathcal{F}$ is a function
+**choice function** for $\mathcal{F}$ is a function ([[def-function]])
 $$g : \mathcal{F} \to \bigcup \mathcal{F} \qquad \text{such that} \qquad g(S) \in S \ \text{ for every } S \in \mathcal{F}.$$
 
 Given a set $X$, a **choice function on $X$** means a choice function for the
-family $\mathcal{P}(X) \setminus \{\emptyset\}$ of nonempty subsets of $X$.
+family $\mathcal{P}(X) \setminus \{\emptyset\}$ ([[def-power-set]],
+[[def-set-difference-and-symmetric-difference]]) of nonempty subsets of $X$.
 
 ## Remarks
 

@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-inductive-set, lem-omega-smallest-inductive, def-peano-system]
+deps: [def-inductive-set, lem-omega-smallest-inductive, def-peano-system,
+       def-axiom-of-infinity, def-axiom-schema-of-separation]
 aliases: [def-omega, natural-numbers]
 landmark: true
 short: "$\\mathbb{N}=\\omega$, smallest inductive set"
@@ -36,8 +37,9 @@ The set of **natural numbers** is the **smallest inductive set**
 $$\mathbb{N} = \omega := \bigcap\,\{\, I : I \text{ is inductive} \,\},$$
 
 which exists and is itself inductive by [[lem-omega-smallest-inductive]] (the
-Axiom of Infinity supplies one inductive set to intersect within, and Separation
-makes the intersection a set). On $\mathbb{N}$ we take
+Axiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to
+intersect within, and Separation, [[def-axiom-schema-of-separation]], makes the
+intersection a set). On $\mathbb{N}$ we take
 
 $$0 := \varnothing, \qquad \sigma(n) := n \cup \{n\},$$
 

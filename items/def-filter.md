@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: []
+deps: [def-power-set, def-subset-and-proper-subset,
+       def-intersection-of-a-set-and-binary-intersection]
 justified_by: []
 aliases: [def-proper-filter]
 landmark: false
@@ -41,12 +42,14 @@ pipeline_run: null
 ## Definition
 
 Let $X$ be a set. A family $\mathcal{F} \subseteq \mathcal{P}(X)$ of subsets of
-$X$ is a **filter on $X$** when it satisfies:
+$X$ ([[def-power-set]], [[def-subset-and-proper-subset]]) is a **filter on $X$**
+when it satisfies:
 
 - **(F1)** *nontriviality*: $X \in \mathcal{F}$;
 - **(F2)** *properness*: $\emptyset \notin \mathcal{F}$;
-- **(F3)** *closure under pairwise intersection*: if $A, B \in \mathcal{F}$ then
-  $A \cap B \in \mathcal{F}$;
+- **(F3)** *closure under pairwise intersection*
+  ([[def-intersection-of-a-set-and-binary-intersection]]): if
+  $A, B \in \mathcal{F}$ then $A \cap B \in \mathcal{F}$;
 - **(F4)** *upward closure in $X$*: if $A \in \mathcal{F}$ and
   $A \subseteq B \subseteq X$ then $B \in \mathcal{F}$.
 

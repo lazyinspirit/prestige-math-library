@@ -7,7 +7,9 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-equivalence-relation]
+deps: [def-equivalence-relation, def-union-of-a-set-and-binary-union,
+       def-intersection-of-a-set-and-binary-intersection, def-power-set,
+       def-subset-and-proper-subset, thm-the-empty-set-exists-and-is-unique]
 justified_by: []
 aliases: [lem-partition-theorem]
 landmark: false

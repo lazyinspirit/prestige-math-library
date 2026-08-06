@@ -300,6 +300,10 @@ ceiling, not a target or permission to prune), `redundant-prereq` (a declared pr
 stand in the spec as of 2026-07-27 and are kept deliberately where the direct
 edge is mathematically real). 19 codes total.
 
+**`--rehomed FILE` — the owner-approved re-home receipt (owner, 2026-08-06).**
+See §3.11a. `dup-id` is the check it relaxes, and only for the exact
+id/from-page/to-page triples the receipt names.
+
 ### 3.9 `depsource.mjs` — where each dep actually lives
 Per dep: `published` / `planned-earlier` / `draft-page` / `homeless` /
 `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is
@@ -357,6 +361,50 @@ historical three-pair manifests. The gate does not decide whether a literature
 source is semantically correct; it makes that exact check an explicit Alpha
 obligation, especially when an AI-adapted target's exact claim or conventions
 are in doubt.
+
+### 3.11a The re-home receipt — `--rehomed FILE`
+
+**What it is for.** An item's home page is what fixes its position in the reading
+order, and an item may only cite pages *below* it. So when a new page is built
+underneath existing ones — a foundational page is the whole reason this happens —
+a statement the library already owns may need to move down to be citable there.
+Minting a second id for it is forbidden (`SCHEMA.md` §2: ids are immutable and a
+statement gets one id), and citing it upward would be a load-bearing forward
+reference, which `fwdcheck` forbids on the spine. **Moving it is the only legal
+option, and nothing could express that.**
+
+Two hard gates read a planned id that already exists as an illegal mint:
+`validate-plan`'s `dup-id` and `content-policy --manifest-only`'s
+`batch-item-already-exists` / `batch-plan-id-collision`. They are right to, by
+default — that is how an agent claiming someone else's id gets caught. A re-home
+is the one intentional case, and because it changes published **reading order**
+it is owner-only (`AUDIT-WORKFLOW.md`). The receipt is that approval in
+machine-readable form:
+
+```json
+{ "version": 1, "run": "<run>", "approved_by": "owner", "approved_on": "<date>",
+  "reason": "<why the move is necessary>",
+  "items": [{ "id": "<id>", "from_page": "<page>", "to_page": "<page>",
+              "reason": "<why this item>" }] }
+```
+
+**It stays fully armed.** A receipt licenses only the exact id/destination pairs
+it names; every other clash still fails. `approved_by` must be `owner` or both
+tools exit 2. `from_page` is verified against the item's actual disk home rather
+than trusted — a receipt naming the wrong origin raises `dup-id` with that
+mismatch spelled out, because a stale receipt is precisely how this would quietly
+stop protecting anything. `content-policy` additionally raises
+`batch-rehome-missing-item` for a declared re-home with no item file to move.
+`validate-plan` prints a `[rehome]` line per exercised entry: a waiver nobody can
+see is a waiver nobody re-reads, and this one moves published pages.
+
+**It does not do the move.** Re-homing means removing the id from its old page's
+`items:` list and adding it to the new page's. On a published page that is a live
+reader-facing change, so it belongs in the commit that publishes the new page,
+never before — and until it lands, `depcheck` reports the item `multi-home`,
+which is the truth. Nor does the receipt touch the item text: a moved item's
+own wikilinks may now point *forward*, and its prose may make positional claims
+the move falsifies. Both are ordinary content repairs the audit has to make.
 
 `tools/impact-audit.mjs` turns a repair's blast radius into a hard receipt. Each
 `touchlog` snapshot now records both the full mathematical-content hash and a

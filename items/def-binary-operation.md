@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: []
+deps: [def-function, def-cartesian-product]
 justified_by: []
 aliases: [def-closed-under-operation]
 landmark: false
@@ -31,9 +31,10 @@ pipeline_run: null
 
 ## Definition
 
-A **binary operation** on a set $S$ is a function
+A **binary operation** on a set $S$ is a function ([[def-function]]) whose domain
+is the Cartesian product $S \times S$ ([[def-cartesian-product]]),
 
-$$* \;:\; S \times S \longrightarrow S,$$
+$* \;:\; S \times S \longrightarrow S,$
 
 written in infix form $x * y := *(x,y)$. That the value always lies in $S$ is part
 of the definition, and is referred to as $S$ being **closed** under $*$. The pair

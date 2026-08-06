@@ -62,7 +62,22 @@ function level(id) {
   const p = byId.get(id);
   lvl.set(id, 0);                                   // cycle guard; validate-plan reports real cycles
   const reqs = (p.requires ?? []).filter((r) => byId.has(r));
-  const v = p.kind === 'P' ? 0 : (reqs.length ? Math.max(...reqs.map(level)) + 1 : 1);
+  // A `kind: P` page used to be pinned to level 0 unconditionally. That is a
+  // BUILD-PLANNING statement — "already published, schedules nothing" — and it
+  // was silently doing duty as a DEPENDENCY-DEPTH statement, which is a
+  // different claim and, for the legacy stubs, a false one.
+  //
+  // Measured 2026-08-06 on run `zfc`: `construction-of-the-natural-numbers` is a
+  // P stub, so it sat at level 0 — BELOW the ZFC axioms its own items depend on,
+  // and below the `not-proved-here` catalogue. Every page requiring it inherited
+  // that, which is why `order-zorn-and-the-axiom-of-choice` reported level 2,
+  // tied with the axioms page rather than above it. The level number therefore
+  // contradicted the reading order it exists to explain.
+  //
+  // Levelling every page from its own `requires` fixes it. P pages are still
+  // excluded from the ROUNDS below, because they really do schedule no work —
+  // that exclusion is the build-planning rule, and it is kept where it belongs.
+  const v = reqs.length ? Math.max(...reqs.map(level)) + 1 : (p.kind === 'P' ? 0 : 1);
   lvl.set(id, v);
   return v;
 }

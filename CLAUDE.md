@@ -491,11 +491,18 @@ banner; the public sees only `published`.
   one, degenerate, endpoint, nonempty-choice, and both iff-direction cases.
   The orchestrator merges the batch files before the whole-level gate with
   `tools/merge-proof-contracts.mjs`, then runs `proof-contract.mjs --strict`,
-  `finite-smoke.mjs`, and `risk-report.mjs --require-reviewed` after Step 5 and
+  `finite-smoke.mjs`, and `risk-report.mjs` after Step 5 and
   again after Step-6 repairs, before freezing Step-7 context. Finite smoke tests
   are bounded countermodel searches, never general proofs. A high/critical risk
   result routes the item to an additional Alpha proof-refuter and requires an
-  Alpha `risk_review` record. `QUALITY-CONTROLS.md` is the complete contract.
+  Alpha `risk_review` record. **`--require-reviewed` belongs to the Step-6 run,
+  not the Step-5 one** (owner rule unchanged; corrected 2026-08-06 against the
+  code): a `risk_review` is a disposition only Alpha may write, and Alpha writes
+  it at Step 6, so demanding one at Step 5 asks the authoring Betas to produce
+  another role's record and can never pass on a fresh level. Step 5 computes the
+  risk tiers; Step 6 requires their dispositions. This is the same correction the
+  audit already carries at A4 versus A6. `QUALITY-CONTROLS.md` is the complete
+  contract.
 - **Scope and blast-radius closure (owner, 2026-08-01).** Every future level
   also runs `content-policy.mjs` on the batch manifests, generates the complete
   `audit-manifest.mjs` relationship checklist, and records the Alpha audit

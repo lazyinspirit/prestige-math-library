@@ -2,7 +2,7 @@
 page: countability-and-uncountability
 title: "Countability and Uncountability"
 status: published
-items: [def-injection-surjection-bijection, def-equinumerous,
+items: [def-equinumerous,
         lem-nat-order-is-membership, lem-pigeonhole, def-countable,
         thm-schroder-bernstein, lem-subset-of-countable,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,

@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-well-order, def-natural-numbers, lem-nat-transitive-irreflexive]
+deps: [def-well-order, def-natural-numbers, lem-nat-transitive-irreflexive,
+       def-axiom-of-foundation]
 justified_by: []
 aliases: [def-ordinal-number, def-von-neumann-ordinal]
 landmark: true
@@ -87,11 +88,13 @@ $\alpha$.
   $\mathbb{N} = \omega$ itself ([[def-natural-numbers]]) satisfy both clauses.
   Both facts are proved in [[lem-omega-least-limit-ordinal]], where they are
   needed; they are recorded here because they are the intended picture.
-- **The Axiom of Foundation is not used.** Some treatments define an ordinal as a
-  transitive set *linearly* ordered by $\in$, which is equivalent to the
-  definition above only in the presence of Foundation, since Foundation is what
-  supplies the least element. This library does not assume Foundation anywhere,
-  so the least element property is written into the definition instead.
+- **The Axiom of Foundation is not used here.** Some treatments define an ordinal
+  as a transitive set *linearly* ordered by $\in$, which is equivalent to the
+  definition above only in the presence of Foundation
+  ([[def-axiom-of-foundation]]), since Foundation is what supplies the least
+  element. The least element property is written into the definition instead, so
+  nothing on this page depends on Foundation even though the library does state
+  it as an axiom of ZFC.
 - The definition is absolute in a strong sense: whether a set is an ordinal
   depends only on its members and the membership relation among them, with no
   reference to any ambient construction. That is why ordinals can be used to

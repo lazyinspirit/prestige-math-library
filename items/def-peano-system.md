@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: []
+deps: [def-function, def-subset-and-proper-subset]
 aliases: [peano-axioms, def-peano-axioms]
 landmark: true
 short: "$(N,0,\\sigma)$"
@@ -30,12 +30,13 @@ pipeline_run: null
 
 A **Peano system** is a triple $(N, 0, \sigma)$ consisting of a set $N$, a
 distinguished element $0 \in N$, and a **successor function**
-$\sigma : N \to N$, satisfying the three **Peano axioms**:
+$\sigma : N \to N$ ([[def-function]]), satisfying the three **Peano axioms**:
 
 - **(P1) Zero is not a successor.** For every $n \in N$, $\sigma(n) \neq 0$.
 - **(P2) Successor is injective.** For all $m, n \in N$, if $\sigma(m) = \sigma(n)$
   then $m = n$.
-- **(P3) Induction.** For every subset $S \subseteq N$, if $0 \in S$ and
+- **(P3) Induction.** For every subset $S \subseteq N$
+  ([[def-subset-and-proper-subset]]), if $0 \in S$ and
   $\sigma(n) \in S$ whenever $n \in S$, then $S = N$.
 
 The elements of $N$ are the **natural numbers** of the system. We abbreviate

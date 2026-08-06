@@ -2,8 +2,7 @@
 page: monoids-groups-and-subgroups
 title: "Binary Operations, Monoids, Groups and Subgroups"
 status: published
-items: [def-equivalence-relation, lem-equivalence-classes-partition,
-        def-binary-operation, def-identity-element, lem-identity-unique,
+items: [def-binary-operation, def-identity-element, lem-identity-unique,
         def-semigroup-and-monoid, def-invertible-element, lem-inverse-unique,
         def-group, lem-group-inverse-laws, lem-group-cancellation,
         lem-monoid-units-form-a-group, def-symmetric-group,
@@ -29,16 +28,6 @@ and $\mathbb{Z}$: as exponents, as counts, and in the division algorithm that
 the order of an element turns out to need, which is proved here for want of an
 earlier home. The number systems reappear as *examples of groups* only on the
 companion page linked under Prerequisites above.
-
-**Equivalence relations, minted here.** The library has used specific equivalence
-relations from its first pages, in the construction of $\mathbb{Z}$ and of
-$\mathbb{Q}$, but it has never defined the general notion, so
-[[def-equivalence-relation]] does that and
-[[lem-equivalence-classes-partition]] proves the partition theorem: the classes
-are nonempty, they cover the set, any two are equal or disjoint, and conversely
-every partition arises from exactly one equivalence relation. Cosets, quotient
-groups, congruence classes and quotient rings on later pages are all instances,
-and each would otherwise re-prove the same three lines.
 
 **One operation, and the two uniqueness results that license the notation.**
 [[def-binary-operation]] fixes what an operation is and what it means for a

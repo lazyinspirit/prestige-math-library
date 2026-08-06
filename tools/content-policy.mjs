@@ -50,9 +50,31 @@ const ledgerPaths = [];
 for (let index = 0; index < argv.length; index += 1) {
   if (argv[index] === '--ledger' && argv[index + 1]) ledgerPaths.push(argv[index + 1]);
 }
+// --rehomed (owner, 2026-08-06): the owner-approved re-home receipt. See the
+// note at the batch-item-already-exists / batch-plan-id-collision site below.
+// Absent, both checks behave exactly as they did before it existed.
+const rehomed = new Map();   // id -> {from_page, to_page}
+{
+  const index = argv.indexOf('--rehomed');
+  if (index >= 0 && argv[index + 1]) {
+    const receipt = JSON.parse(readFileSync(join(REPO, argv[index + 1]), 'utf8'));
+    if (receipt.approved_by !== 'owner') {
+      console.error(`content-policy: ${argv[index + 1]}: a re-home receipt must record approved_by: "owner"`);
+      process.exit(2);
+    }
+    for (const entry of receipt.items ?? []) {
+      if (!entry?.id || !entry.from_page || !entry.to_page || !entry.reason) {
+        console.error(`content-policy: ${argv[index + 1]}: every re-home entry needs id, from_page, to_page and reason`);
+        process.exit(2);
+      }
+      rehomed.set(entry.id, entry);
+    }
+  }
+}
 const files = argv.filter((arg, index) =>
   arg !== '--json' && arg !== '--manifest-only' && arg !== '--audit' &&
-  arg !== '--ledger' && argv[index - 1] !== '--ledger');
+  arg !== '--ledger' && argv[index - 1] !== '--ledger' &&
+  arg !== '--rehomed' && argv[index - 1] !== '--rehomed');
 // The evidence ledger is required by the audit's POST-tagging mode, which reads
 // each item's on-disk provenance. Manifest-only never opens an item file, so it
 // has nothing to reconcile a ledger against and must not demand one.
@@ -229,10 +251,20 @@ for (const file of files) {
       }
       seen.add(id);
       if (manifestOnly) {
+        // A RE-HOME is not a mint (owner, 2026-08-06). Both checks below exist to
+        // stop a batch claiming an id that is already someone else's; neither can
+        // tell that apart from moving an existing item to an earlier page, which
+        // is the only way to give a published statement a home a new foundational
+        // page can cite. `--rehomed FILE` is the owner's approval in
+        // machine-readable form, and it licenses ONLY the exact id/destination
+        // pairs it names — anything else still fails.
+        const move = rehomed.get(id);
+        const licensed = move && move.to_page === page?.id;
         // Audit scope is published content: every id has a file, by definition.
-        if (!auditMode && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
+        if (!auditMode && !licensed && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
+        if (licensed && !items.has(id)) error('batch-rehome-missing-item', `${id} is declared a re-home but has no item file to move`, id);
         const priorHome = planHomes.get(id);
-        if (priorHome && priorHome !== page?.id) {
+        if (priorHome && priorHome !== page?.id && !licensed) {
           error('batch-plan-id-collision', `${id} is already planned on ${priorHome}, not ${page?.id ?? '?'}`, id);
         }
         plannedItems.set(id, {

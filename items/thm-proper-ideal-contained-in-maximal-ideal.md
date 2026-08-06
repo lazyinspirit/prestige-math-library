@@ -7,14 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-prime-and-maximal-ideals, def-left-right-and-two-sided-ideal, lem-ideal-criterion-and-intersections, thm-zorn, def-chain, def-maximal-element, def-ring]
+deps: [def-prime-and-maximal-ideals, def-left-right-and-two-sided-ideal, lem-ideal-criterion-and-intersections, thm-zorn, def-axiom-of-choice, def-chain, def-maximal-element, def-ring]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-02
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-06
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +29,8 @@ pipeline_run: null
 ---
 
 ## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
 
 In a nonzero commutative ring, every proper ideal is contained in a maximal ideal.
 
@@ -37,7 +44,7 @@ In a nonzero commutative ring, every proper ideal is contained in a maximal idea
 
 [L3] An ideal criterion and intersection closure are available ([[lem-ideal-criterion-and-intersections]]).
 
-[L4] Zorn's lemma gives a maximal element when every chain has an upper bound ([[thm-zorn]]).
+[L4] Assuming the Axiom of Choice, a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
 [L5] A chain is a subset linearly ordered by the ambient order ([[def-chain]]).
 
@@ -49,8 +56,14 @@ In a nonzero commutative ring, every proper ideal is contained in a maximal idea
 
 **Proof technique:** direct.
 
-1.1 Let $\mathcal P$ be the nonempty poset of proper ideals containing $I$, ordered by inclusion. [L1, L2, L3, L4, L5, L6, L7, given, construct]
+1.1 Let $\mathcal P$ be the poset of proper ideals of $R$ containing $I$, ordered by inclusion. [L1, L2, given, construct]
 
-2.1 For a chain $\mathcal C\subseteq\mathcal P$, its union is an ideal; if it contained $1$, one member of the chain would contain $1$ and would equal $R$, contradicting properness. [step 1.1, L1, L2, L3, L4, L5, L6, L7, given, algebra]
+1.2 $\mathcal P$ is nonempty, because $I$ is a proper ideal containing $I$. [given, L2]
 
-3.1 Zorn gives a maximal member of $\mathcal P$, which is a maximal ideal containing $I$. [step 2.1] ∎
+2.1 The empty chain of $\mathcal P$ has an upper bound in $\mathcal P$: every member of $\mathcal P$ is vacuously above all of its members, and $\mathcal P$ is nonempty, so $I$ is such an upper bound. [step 1.1, step 1.2, L5]
+
+2.2 A nonempty chain $\mathcal C\subseteq\mathcal P$ has an upper bound in $\mathcal P$: $\bigcup\mathcal C$ is an ideal containing $I$, and it is proper, since $1\in\bigcup\mathcal C$ would place $1$ in some member of $\mathcal C$, forcing that member to equal $R$ and contradicting its properness. [step 1.1, L2, L3, L5, L7, algebra]
+
+3.1 Every chain of $\mathcal P$ has an upper bound in $\mathcal P$, and $\mathcal P$ is a nonempty poset, so Zorn's lemma yields a maximal element $M$ of $\mathcal P$. [step 1.2, step 2.1, step 2.2, L4]
+
+4.1 $M$ is a proper ideal containing $I$ that is maximal among proper ideals of $R$, so $M$ is a maximal ideal containing $I$. [step 3.1, L1, L6] ∎

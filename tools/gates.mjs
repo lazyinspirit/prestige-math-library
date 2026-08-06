@@ -83,6 +83,12 @@ const COVERAGE_RECEIPT = isAudit ? '{dir}/{run}-coverage.json' : '{dir}/{run}-au
 // what exists rather than what was written down; the shared path stays last so a
 // run that adopts the documented layout still works.
 const SPINE_RECEIPT = '{spine}';
+// The owner-approved re-home receipt (ARCHITECTURE.md §3.11a), if this run has
+// one. It expands to `--rehomed <path>` when the file exists and to NOTHING when
+// it does not, so a run that re-homes nothing passes exactly the command line it
+// always passed. It is deliberately not in `needs`: a missing receipt means "no
+// re-home on this run", not "a required receipt is absent".
+const REHOMED = '{rehomed}';
 
 // The base gates, run wherever content exists on disk. LEVELS.md §"The base
 // gates and future-scope closures" is the source; citecheck is advisory because
@@ -124,28 +130,39 @@ const COVERAGE = () => g('level-coverage.mjs', [
 
 const STEPS = {
   0: [
-    g('validate-plan.mjs', ['research/plan-spec.json'], { why: 'the spec is sane before batching' }),
-    g('content-policy.mjs', [MANIFESTS, '--manifest-only'], { needs: [MANIFESTS], why: 'the two-A-page batch cap' }),
+    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'the spec is sane before batching' }),
+    g('content-policy.mjs', [MANIFESTS, '--manifest-only', REHOMED], { needs: [MANIFESTS], why: 'the two-A-page batch cap' }),
   ],
   1: [],   // Betas are scaffolding; nothing of theirs is on disk to gate yet.
   2: [
-    g('validate-plan.mjs', ['research/plan-spec.json'], { why: 'scaffold structure and ordering' }),
+    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'scaffold structure and ordering' }),
     g('depsource.mjs', ['research/plan-spec.json'], { why: 'every dep resolves somewhere' }),
   ],
   3: [],   // Orchestrator adjudication of Beta recommendations. Judgment, not a gate.
   4: [
-    g('validate-plan.mjs', ['research/plan-spec.json'], { why: 'the spliced spec still validates' }),
-    g('content-policy.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'future-scope containment' }),
+    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'the spliced spec still validates' }),
+    // Step 4 is the SPLICE. Authoring is step 5, so no item file exists yet and
+    // the post-authoring mode can only report `scope-item-missing` for every
+    // item in the batch. What is checkable here is the manifest, which the
+    // splice just changed.
+    g('content-policy.mjs', [MANIFESTS, '--manifest-only', REHOMED], { needs: [MANIFESTS], why: 'future-scope containment of the spliced manifest' }),
   ],
   5: [
     ...BASE(),
-    ...CONTRACT_TRIO(),
-    g('content-policy.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'provenance and generated-claim containment' }),
+    // `reviewed: false` for the same reason A4 uses it, and it is the same bug:
+    // step 5 is the BETAS authoring, and a `risk_review` is a record only ALPHA
+    // may write, at step 6. Requiring one here asks the authors to produce
+    // someone else's disposition, and the step can never pass on a fresh level —
+    // measured on run `zfc`, which halted here on six critical items whose
+    // reviews were not yet due. Step 5 computes the tiers; step 6 requires the
+    // dispositions.
+    ...CONTRACT_TRIO({ reviewed: false }),
+    g('content-policy.mjs', [MANIFESTS, REHOMED], { needs: [MANIFESTS], why: 'provenance and generated-claim containment' }),
   ],
   6: [
     ...BASE(),
     ...CONTRACT_TRIO(),
-    g('content-policy.mjs', [MANIFESTS], { needs: [MANIFESTS] }),
+    g('content-policy.mjs', [MANIFESTS, REHOMED], { needs: [MANIFESTS] }),
     g('audit-manifest.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'the full relationship checklist' }),
     g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'after-authoring'], { needs: [TOUCHES], why: 'downstream consumers of a changed interface' }),
   ],
@@ -153,7 +170,20 @@ const STEPS = {
   // judge-sweep.mjs as an action; this gate only checks what it produced.
   7: [COVERAGE()],
   8: [
-    g('step8-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-step8', '--adjudications', ADJUDICATIONS],
+    // `--against` CLOSES THE STEP-8 WINDOW, and without it this gate is
+    // unre-runnable. `LEVELS.md` promises the guard "is scoped to that explicit
+    // baseline window, so a later legitimate stage — a step-9 scope-denial
+    // repair, an owner-directed change — is never mistaken for a nonfatal
+    // polish". But `step8-guard` defaults its upper bound to the LIVE WORKING
+    // TREE, so once step 9 legitimately edits anything, every re-run of step 8
+    // reports that edit as `nonfatal-edit`. Measured on run `zfc`: a step-9
+    // count repair to `def-language-of-set-theory` — an item neither judge ever
+    // rejected, so no honest `confirmed_fatal` could ever license it — blocked
+    // the step-8 gate permanently. Pass `--against <snapshot label>` to gate the
+    // window that step 8 actually owns; omit it while step 8 is still running.
+    g('step8-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-step8',
+      ...(option('--against') ? ['--against', option('--against')] : []),
+      '--adjudications', ADJUDICATIONS],
       { needs: [TOUCHES, ADJUDICATIONS], why: 'R1 — step 8 is fatal-only' }),
     g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-step8'], { needs: [TOUCHES] }),
     COVERAGE(),
@@ -323,10 +353,17 @@ const spineReceipt = () => {
   return candidates.find((path) => existsSync(join(REPO, path))) ?? candidates[0];
 };
 
+/** `--rehomed <file>`, or nothing at all when this run re-homes nothing. */
+const rehomedArgs = () => {
+  const path = `${DIR}/${run}-rehomed.json`;
+  return existsSync(join(REPO, path)) ? ['--rehomed', path] : [];
+};
+
 const expand = (value) => {
   if (value === MANIFESTS) return manifests();
   if (value === LEDGERS) return ledgerArgs();
   if (value === SPINE_RECEIPT) return [spineReceipt()];
+  if (value === REHOMED) return rehomedArgs();
   return [value.replaceAll('{run}', run).replaceAll('{dir}', DIR)];
 };
 const expandAll = (values) => values.flatMap(expand);
@@ -359,7 +396,26 @@ for (const gate of gates) {
   const ms = Date.now() - started;
 
   const output = ((child.stdout ?? '') + (child.stderr ?? '')).trim();
-  const tail = output.split('\n').slice(-6).join('\n');
+  const lines = output.split('\n');
+  // NEVER LET THE TAIL UNDERSTATE THE BLOCKER (measured five times on run `zfc`).
+  // `slice(-6)` shows the last six lines, and a caller who reads that as the
+  // whole failure undercounts the work: step 5's risk-report printed 6 of 60
+  // missing risk reviews, the step-6 coverage receipt printed 1 of 43
+  // unreconciled plan entries, and level-coverage printed 1 of 10 warnings. Each
+  // time a human or an agent briefed off the summary and planned against the
+  // wrong number. So the tail stays short, but it is now always accompanied by
+  // the true counts, taken from the FULL output.
+  const countOf = (re) => lines.filter((line) => re.test(line)).length;
+  const errorLines = countOf(/^\s*ERROR\b/);
+  const warnLines = countOf(/^\s*WARN\b/);
+  const hidden = Math.max(0, lines.length - 6);
+  const census = [
+    errorLines ? `${errorLines} ERROR line(s)` : '',
+    warnLines ? `${warnLines} WARN line(s)` : '',
+    hidden ? `${hidden} earlier line(s) not shown` : '',
+  ].filter(Boolean).join(', ');
+  const tail = [lines.slice(-6).join('\n'), census ? `[full output: ${census} — re-run the tool directly]` : '']
+    .filter(Boolean).join('\n');
   if (child.error) {
     results.push({ tool: gate.tool, required: gate.required, status: gate.required ? 'fail' : 'warn', code: 'spawn-error', detail: child.error.message, ms });
   } else if (child.status === 0) {

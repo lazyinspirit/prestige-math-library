@@ -1,0 +1,176 @@
+{
+  "reader": "claude-opus-5",
+  "range": "0-33",
+  "attestations": [
+    {
+      "id": "lem-omega-smallest-inductive",
+      "status": "clean",
+      "notes": "Read Statement, Given, steps 1.1-3.1, and def-inductive-set on disk. Separation instance in 1.2 quantifies over all inductive J, which is a legitimate ZFC Separation formula; 2.1 verifies both inductive clauses for omega (empty set in every inductive J and in I0; x-plus in every J and in I0 because omega is a subset of I0 and I0 is inductive); 2.2 gives minimality; 3.1 gets uniqueness by mutual inclusion plus Extensionality. def-inductive-set's actual text ('empty set in I, and x in I implies x-plus in I') is exactly what the proof checks. No boundary case is left open."
+    },
+    {
+      "id": "thm-induction-principle",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-5.1. [L1] reproduces lem-omega-smallest-inductive faithfully ('omega is contained in every inductive set') and that is exactly its Statement. 2.1 correctly recognizes an S containing 0 = empty set and closed under x -> x union {x} as inductive per def-inductive-set; 3.1-4.1 close by double inclusion. 5.1's property form is the set form applied to S = {n in N : P(n)}, a Separation instance, and the converse direction is given. Nothing stronger than minimality is claimed."
+    },
+    {
+      "id": "lem-nat-transitive-irreflexive",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-3.1. Base 1.1 handles the empty set (vacuous transitivity, empty set not a member of itself). 2.1 splits x in sigma(n) into x in n and x = n and closes both. 2.2 is correct in both branches: sigma(n) = n forces n in n via n in {n} contained in sigma(n) = n; sigma(n) in n gives sigma(n) subset of n by IH transitivity, then n in sigma(n) subset of n. [L1] quotes the induction principle exactly as thm-induction-principle states it (property form)."
+    },
+    {
+      "id": "thm-recursion",
+      "status": "nonfatal",
+      "notes": "Read Statement, Given (definition of 'closed'), [L1]-[L2], steps 1.1-6.1, plus def-peano-system on disk. The proof is correct: 1.1 forms g as the intersection of the nonempty family of closed subsets of N x A and verifies closure; 2.1 gets totality by P3 induction on D; 2.2 uses P1 so that removing (0,b) preserves closure, contradicting minimality; 4.1 uses P2 injectivity plus uniqueness at n so that removing (sigma(n),c) preserves closure; 5.1 assembles the function; 6.1 gets uniqueness by induction on the agreement set. Every use of minimality is legitimate (g is contained in every closed subset of N x A). NONFATAL, cosmetic citation quirk: [L1] asserts induction for an ARBITRARY Peano system N and attributes it to 'axiom P3, thm-induction-principle'. thm-induction-principle is a theorem about N = omega only; the actual licence for arbitrary N is P3 of def-peano-system, which is cited first and whose text ('For every subset S of N, if 0 in S and sigma(n) in S whenever n in S, then S = N') matches the fact verbatim. No inference is unlicensed."
+    },
+    {
+      "id": "thm-omega-is-peano-system",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-2.1, and def-peano-system's P1/P2/P3 on disk. P1 (1.2) is correct: sigma(n) contains n so it is nonempty, hence not the empty set. P2 (1.3) is correct and uses exactly what [L2] supplies: m in n gives m subset of n by transitivity, then n in m subset of n gives n in n, contradicting irreflexivity. P3 (1.1) is thm-induction-principle's Statement verbatim in the P3 subset form. The structural preconditions of a Peano system (0 = empty set in omega, sigma maps omega into omega) are not re-verified in the Proof but are supplied by the Given via def-natural-numbers/lem-omega-smallest-inductive, where omega is established inductive."
+    },
+    {
+      "id": "cor-nat-addition-well-defined",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1. [L1] reproduces thm-recursion's Statement faithfully; [L2] reproduces thm-omega-is-peano-system's. The recursion instance (A = N, a = m, f = sigma) is legal because sigma : N -> N and m in N; 2.1 turns the family of unique s_m into a binary operation, and 3.1 reads off m + 0 = m and m + sigma(n) = sigma(m + n) exactly. Assembling + as a set from the uniquely determined family is a routine Separation over N x N x N."
+    },
+    {
+      "id": "lem-nat-add-identity",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-3.1, and def-nat-addition. Base 0 + 0 = 0 is the clause m + 0 = m at m = 0; step 0 + sigma(n) = sigma(0 + n) = sigma(n) uses the recursion clause at m = 0 then the IH. The Statement's added remark that n + 0 = n is definitional is accurate against def-nat-addition."
+    },
+    {
+      "id": "lem-nat-add-successor-left",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-3.1. Base: sigma(m) + 0 = sigma(m) = sigma(m + 0). Step: sigma(m) + sigma(n) = sigma(sigma(m) + n) = sigma(sigma(m + n)) = sigma(m + sigma(n)), each equality an instance of the def-nat-addition recursion or the IH. Induction is on n with m arbitrary, and 3.1 discharges the m quantifier correctly."
+    },
+    {
+      "id": "lem-nat-add-commutative",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L3], steps 1.1-3.1. [L1] and [L2] restate lem-nat-add-identity and lem-nat-add-successor-left exactly. Base uses 0 + m = m; step chains m + sigma(n) = sigma(m + n) = sigma(n + m) = sigma(n) + m, the last equality being the left successor law read backwards. Base and step hold for arbitrary m, so the induction on n is sound."
+    },
+    {
+      "id": "lem-nat-add-associative",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-3.1. Base c = 0 uses x + 0 = x on both sides; step (a+b)+sigma(c) = sigma((a+b)+c) = sigma(a+(b+c)) = a + sigma(b+c) = a + (b + sigma(c)) uses the addition recursion twice and the IH once. Induction on c with a, b arbitrary."
+    },
+    {
+      "id": "lem-nat-add-cancellative",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1. [L1] cites P2 injectivity of sigma from thm-omega-is-peano-system, which that theorem's Statement does assert. Base: m + 0 = n + 0 gives m = n. Step: m + sigma(k) = n + sigma(k) gives sigma(m+k) = sigma(n+k), then m + k = n + k by injectivity, then m = n by the IH. The IH is correctly universally quantified over m, n."
+    },
+    {
+      "id": "lem-nat-nonzero-is-successor",
+      "status": "clean",
+      "notes": "Read Statement, [L1], steps 1.1-3.1. S is a legal Separation subset of N; 0 in S trivially; sigma(n) in S for any n whatsoever (witness m = n), so the IH is not even needed and the step is valid. 3.1 converts S = N into the stated 'nonzero implies successor' form correctly."
+    },
+    {
+      "id": "lem-nat-trichotomy",
+      "status": "nonfatal",
+      "notes": "Read Statement, [L1]-[L7], steps 1.1-3.1, and def-nat-order on disk. The mathematics is correct. Exclusivity: 1.1 handles the equality clashes; 1.2 derives j + i = 0 from m + (j+i) = m + 0 by commutativity [L7] and cancellation [L6], then contradicts it with j = sigma(a), sigma(a) + i = sigma(a+i) != 0 [L2],[L5]. Comparability: base 1.4 (m = 0 or 0 + m = m with m nonzero) and step 2.1 cover m < n, m = n and m > n, the last splitting on a = 0 / a != 0 after m = n + sigma(a) = sigma(n) + a; all three subcases land in the required disjunction. NONFATAL gap, twice: steps 1.3 and 2.1 assert the STRICT relation from 'x + k = y with k nonzero' without invoking the 'x != y' half. That half is one line from facts already on the page (x + k = x = x + 0, commute [L7], cancel [L6], k = 0), and neither [L6] nor [L7] appears in those two steps' citation tags. Step 1.3 (n < sigma(n)) is moreover never cited by any later step, so the gap is inert; in step 2.1 the conclusion actually needed is only the disjunction 'm < sigma(n) or m = sigma(n)', which follows from m <= sigma(n) alone."
+    },
+    {
+      "id": "thm-nat-linear-order",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L6], steps 1.1-3.1, and def-nat-order. Reflexivity from m + 0 = m; transitivity by associativity; 1.3 proves 'k + j = 0 implies k = j = 0' honestly (j nonzero gives j = sigma(i) and k + sigma(i) = sigma(k+i) != 0, so j = 0, then k + 0 = k = 0); antisymmetry 2.1 uses commutativity plus cancellation then 1.3; totality from [L4] trichotomy, whose restatement matches lem-nat-trichotomy's Statement exactly. All four linear-order properties named in the Statement are established."
+    },
+    {
+      "id": "lem-nat-order-add-compatible",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-2.1. Forward: (m+k)+j = (m+j)+k = n+k by [L1]. Backward: (m+k)+j = n+k regroups to (m+j)+k = n+k and cancellation [L2] gives m + j = n. Strict form 2.1 is correct in both directions because m + k = n + k iff m = n (forward by congruence, backward by [L2]). Both directions of the stated iff are proved."
+    },
+    {
+      "id": "cor-nat-multiplication-well-defined",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L3], steps 1.1-3.1. add_m : x -> x + m is a function N -> N because + is total (def-nat-addition / cor-nat-addition-well-defined), so the recursion instance (A = N, a = 0, f = add_m) is legal; 2.1 reads off p_m(0) = 0 and p_m(sigma(n)) = p_m(n) + m, which is exactly def-nat-multiplication's pair of clauses. Note the recursion supplies p_m(sigma n) = p_m(n) + m (m added on the RIGHT), matching the definition, not the reverse."
+    },
+    {
+      "id": "lem-nat-discrete",
+      "status": "nonfatal",
+      "notes": "Read Statement, [L1]-[L5], steps 1.1-2.1, and def-nat-order. Both directions of the iff are fully proved. Forward: m < n gives m + j = n with j nonzero, j = sigma(i) [L1], n = m + sigma(i) = sigma(m+i) = sigma(m) + i [L2], so sigma(m) <= n. Backward: sigma(m) + i = n gives n = sigma(m+i) = m + sigma(i) so m <= n, and m != n because m = n would force sigma(i) = 0 via [L5] commutativity and [L3] cancellation, contradicting [L4]. NONFATAL: the corollary in step 2.1 ('no k with n < k < sigma(n)') tacitly uses ANTISYMMETRY of <= to turn 'sigma(n) <= k and k < sigma(n)' into a contradiction. Antisymmetry (thm-nat-linear-order) is not among this item's facts or deps. It is closable in well under 30 seconds from the facts on the page (sigma(n) + a = k and k + b = sigma(n) give a + b = 0 by [L5],[L3], then b = 0 by [L1],[L4], so k = sigma(n)), and there is no circularity risk since thm-nat-linear-order does not depend on lem-nat-discrete."
+    },
+    {
+      "id": "lem-nat-mult-identity",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1, and def-nat-multiplication. n*1 = n*sigma(0) = n*0 + n = 0 + n = n uses the multiplication recursion then [L1]; 0*sigma(n) = 0*n + 0 = 0; 1*sigma(n) = 1*n + 1 = n + 1 = sigma(n) with n + 1 = n + sigma(0) = sigma(n + 0) = sigma(n) spelled out. The two simultaneous inductions share base 1.2 and step 2.1 correctly, and the Statement's remark that n*0 = 0 is definitional is accurate."
+    },
+    {
+      "id": "lem-nat-mult-distributive",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1. Checked the full chain in 1.3 term by term: sigma(a)*sigma(n) = sigma(a)*n + sigma(a) = (a*n + n) + sigma(a) = a*n + (n + sigma(a)) = a*n + sigma(n+a) = a*n + sigma(a+n) = a*n + (a + sigma(n)) = (a*n + a) + sigma(n) = a*sigma(n) + sigma(n); every equality is an instance of the multiplication recursion, the addition recursion, associativity or commutativity, all in [L1]/Given. 2.1's distributivity chain is likewise exact. Note the inner induction (successor-left law) does not use the outer IH, so the nesting is sound."
+    },
+    {
+      "id": "lem-nat-mult-commutative",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L3], steps 1.1-3.1. [L2] quotes lem-nat-mult-distributive's successor-left clause exactly (sigma(a)*n = a*n + n). Base uses 0*k = 0 from [L1] (lem-nat-mult-identity) together with the definitional m*0 = 0; step is m*sigma(n) = m*n + m = n*m + m = sigma(n)*m. Base and step hold for arbitrary m."
+    },
+    {
+      "id": "lem-nat-mult-associative",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1. Base c = 0: both sides are 0 using m*0 = 0 twice. Step: (a*b)*sigma(c) = (a*b)*c + a*b = a*(b*c) + a*b = a*(b*c + b) = a*(b*sigma(c)), where the third equality is left distributivity [L1] read backwards, which lem-nat-mult-distributive does state in that direction (a*(b+c) = a*b + a*c)."
+    },
+    {
+      "id": "lem-nat-no-zero-divisors",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-4.1. The contrapositive reduction is stated and discharged. m = sigma(a), n = sigma(b) by [L1]; m*n = m*sigma(b) = m*b + m = m*b + sigma(a) = sigma(m*b + a) by the addition recursion; nonzero by P1 [L2]. Both facts restate lem-nat-nonzero-is-successor and thm-omega-is-peano-system's P1 exactly."
+    },
+    {
+      "id": "lem-nat-order-mult-compatible",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L4], steps 1.1-2.1. [L1]'s right distributivity is honestly derived in the fact text from left distributivity plus multiplicative commutativity, both cited. 1.1: m + d = n gives n*k = m*k + d*k so m*k <= n*k. 2.1: m < n forces d nonzero, then k nonzero gives d*k nonzero by [L2], and m*k = n*k would give d*k = 0 by [L4] commutativity and [L3] cancellation. The k = 0 boundary is correctly excluded from the strict claim only, and the non-strict claim correctly holds for k = 0."
+    },
+    {
+      "id": "lem-int-add-well-defined",
+      "status": "clean",
+      "notes": "Read Statement, Given, [A1], steps 1.1-4.1, and def-integers ((a,b) ~ (c,d) iff a + d = b + c) and def-int-operations on disk. 2.2 is exactly the relation (b,a) ~ (b',a'); 3.1 regroups (a+b')+(c+d') = (a+c)+(b'+d') and (b+a')+(d+c') = (b+d)+(a'+c'), which is exactly (a+c, b+d) ~ (a'+c', b'+d'). Both operations of the Statement are covered and nothing beyond commutativity/associativity of natural addition is used."
+    },
+    {
+      "id": "lem-int-mul-well-defined",
+      "status": "clean",
+      "notes": "Read Statement, Given, [A1]-[A3], steps 1.1-5.1. Expanded 1.2 and 1.3 independently: (ac+bd)+(a'd+b'c) = c(a+b') + d(b+a') and (ad+bc)+(a'c+b'd) = d(a+b') + c(b+a') both hold. With s = a + b' = b + a' both right sides equal cs + ds, giving (ac+bd)+(a'd+b'c) = (ad+bc)+(a'c+b'd), which is precisely (ac+bd, ad+bc) ~ (a'c+b'd, a'd+b'c) under def-integers. 4.1's symmetry observation is true of the product formula, and 5.1's two-stage substitution is the right way to reach both-representative independence."
+    },
+    {
+      "id": "thm-int-comm-ring",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L3], steps 1.1-2.1, and def-int-operations (0 = [(0,0)], 1 = [(1,0)]). Independently expanded 1.8 and 1.9: both bracketings of the triple product give (ace+adf+bcf+bde, acf+ade+bce+bdf), and both sides of distributivity give (ac+ae+bd+bf, ad+af+bc+be). 1.5's additive inverse check is the correct equivalence ((a+b)+0 = (b+a)+0), 1.7 uses 1 = [(1,0)] correctly. [L1]-[L3] restate the cited natural-number lemmas and the two well-definedness lemmas without inflation, and 1.1's reduction to representatives is licensed by [L3]."
+    },
+    {
+      "id": "thm-int-ordered-ring",
+      "status": "nonfatal",
+      "notes": "Read Statement, [L1]-[L6], steps 1.1-5.1, and def-int-order (x <= y iff a + d <= b + c; 0 < [(a,b)] iff b < a). Verified every algebraic identity: 2.2's chain (b+c)+(a'+d') = (b+a')+(c+d') = (a+b')+(d+c') = (a+d)+(b'+c'); 3.2's expansion ac + bd = (ad + bc) + km from a = b + k, c = d + m; 1.5's transitivity regrouping (a+d)+(c+f) = (a+f)+(c+d); 1.6's (a+e)+(d+f) = (a+d)+(e+f). Antisymmetry 1.4 correctly identifies a + d = b + c with equality of classes, and totality 1.3 also yields reflexivity at y = x. [L2]-[L5] restate thm-nat-linear-order, lem-nat-order-add-compatible, def-nat-order and lem-nat-order-mult-compatible faithfully (in particular [L5]'s 'multiplication by a nonzero natural preserves strict order' is exactly that lemma's second clause). NONFATAL, cosmetic citation quirk: step 4.1 passes from 0 < km to ad + bc < ac + bd, which is the strict half of translation invariance [L3], but tags only [step 2.3, step 3.2, L2, L4, L5]. [L3] is on the page and licenses it directly."
+    },
+    {
+      "id": "lem-nat-successor-neq-self",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1. Base is P1 (sigma(0) != 0); step contraposes P2 injectivity against the IH. [L1] quotes both P1 and P2 from thm-omega-is-peano-system, which that theorem's Statement does assert."
+    },
+    {
+      "id": "lem-int-cancellation",
+      "status": "nonfatal",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1, and thm-int-ordered-ring / thm-int-comm-ring on disk. The case split is exhaustive for nonzero x, y, each case closes, and 3.1's cancellation from (x-y)z = xz - yz = 0 with z nonzero is valid. NONFATAL: [L2] attributes '(-u)v = -(uv), -(-u) = u, and distributivity' to thm-int-comm-ring, whose Statement asserts only the commutative-ring axioms with identity and additive inverses; the two sign identities are standard one-line consequences (uv + (-u)v = (u + (-u))v = 0*v = 0) but are not literally in the cited Statement. Likewise 1.3 uses the STRICT form of order-translation (y < 0 gives 0 < -y; 0 < -(xy) gives xy < 0) while thm-int-ordered-ring states compatibility non-strictly; the strict form is one line away by adding the inverse and noting equality would force y = 0. Both are well inside the 30-second threshold and neither affects the conclusion."
+    },
+    {
+      "id": "lem-rat-ops-well-defined",
+      "status": "clean",
+      "notes": "Read Statement, Given, [L1], steps 1.1-3.1, and def-rationals ((a,b) ~ (c,d) iff ad = cb, b nonzero) and def-rat-operations. Verified each identity: (ac)(b'd') = (ab')(cd') = (a'b)(c'd) = (a'c')(bd); (ad+cb)(b'd') = (ab')(dd') + (cd')(bb') = (a'b)(dd') + (c'd)(bb') = (a'd'+c'b')(bd); (-a)b' = (-a')b. Each conclusion is exactly the def-rationals relation for the corresponding output pair, and all three operations named in the Statement are covered. Legality of the output denominators (bd nonzero) is carried by def-rat-operations' own no-zero-divisor remark, not claimed here."
+    },
+    {
+      "id": "thm-rat-field",
+      "status": "nonfatal",
+      "notes": "Read Statement, [L1]-[L3], steps 1.1-2.1, and def-field and def-rat-operations on disk. Independently expanded 1.2 (both bracketings give (adf + cbf + ebd, bdf)) and 1.8 (the two sides are (acf+aed, bdf) and b times that pair, hence equivalent outright). 1.4-1.7 and 1.9 check the identities, inverses and 1 != 0 against def-rat-operations' 0 = [(0,1)], 1 = [(1,1)], inverse [(b,a)]; the a != 0 side condition on the inverse is respected. NONFATAL: (i) [L2] says 'Z is a commutative ring in which 1 != 0 (thm-int-comm-ring; 1 != 0 because 1 != 0 in N)'. thm-int-comm-ring's Statement does not assert 1 != 0; the inline reason is correct ([(1,0)] = [(0,0)] iff 1 = 0 in N, excluded by P1) but rests on thm-omega-is-peano-system, which is not cited. (ii) def-field's (M) requires (F minus {0}, *) to be a group, so closure of the nonzero rationals under multiplication is needed; it follows from [L3] (no zero divisors in Z) but gets no explicit step."
+    },
+    {
+      "id": "thm-rat-ordered-field",
+      "status": "clean",
+      "notes": "Read Statement, Given, [L1], steps 1.1-4.1, and def-rat-order (representatives with positive denominators; [(a,b)] <= [(c,d)] iff ad <= cb) and def-rationals. The Given's 'b, d, f > 0' is licensed by def-rat-order, which records that every rational has a positive-denominator representative (lem-rat-positive-denominator). Verified 2.2's chain (ad)(b'd') = (ab')(dd') = (a'b)(dd') = (a'd')(bd) and (cb)(b'd') = (cd')(bb') = (c'd)(bb') = (c'b')(bd); 2.3's transitivity chain (ad)f <= (cb)f = (cf)b <= (ed)b then cancel d > 0; 2.4's expansion (af+eb)(df) = (ad)f^2 + (eb)(df) against (cf+ed)(bf) = (cb)f^2 + (ed)(bf) with equal second terms. 1.1's order-scaling lemma is proved in both directions and only uses what [L1] supplies. Well-definedness in 3.1 is stated for arbitrary equivalent representatives, so the converse direction is the same argument with the roles exchanged."
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-4.1, and def-field on disk. [L1] uses distributivity in the right-hand form (y+z)*x = y*x + z*x; def-field states (D) in the left form but asserts multiplicative commutativity on ALL of F, including 0, and its own Remark records that this is exactly what converts (D) to the right form for this lemma. That amendment also closes the F_2 countermodel the definition's Remark describes, so the proof is sound for the element 0 itself. Cancellation in [L2] follows from (A)'s additive inverses."
+    },
+    {
+      "id": "lem-of-add-order",
+      "status": "clean",
+      "notes": "Read Statement, [L1]-[L2], steps 1.1-3.1, and def-ordered-field on disk. [L1] quotes the order definition exactly (a < b iff b - a in P) and [L2] quotes the additive half of (O2) without overclaiming the multiplicative half it does not need. The two field identities (b+c)-(a+c) = b-a and (b+d)-(a+c) = (b-a)+(d-c) are correct in any abelian group, and both claims of the Statement are separately discharged at 2.1 and 3.1."
+    }
+  ]
+}

@@ -12,7 +12,9 @@
 //   5. intra-order   within a page, an item's same-page deps precede it in the list
 //   6. b-leaf        no item depends on an item that lives on a B (examples) page
 //   7. orphan        every dep target has a home page (page-level prereqs need one)
-//   8. dup-id        no id declared twice, and no clash with an existing item id
+//   8. dup-id        no id declared twice, and no clash with an existing item id,
+//                    unless `--rehomed FILE` names an owner-approved re-home of
+//                    that exact id from that exact page to this one
 //   9. prefix        item id prefix matches its declared kind (SCHEMA.md §2)
 //  10. size          WARN when an A page exceeds --max-items (default 100;
 //                    review ceiling, not a target or a reason to drop results)
@@ -48,7 +50,25 @@ const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
 const repo = argVal('--repo') ?? REPO;
 const maxItems = Number(argVal('--max-items') ?? 100);
-if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N]');
+if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE]');
+
+// --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
+// Absent, nothing changes: every clash between a planned id and an already
+// composed item stays a hard error, which is the behaviour every run before
+// 2026-08-06 had.
+const rehomed = new Map();   // id -> {from_page, to_page}
+{
+  const path = argVal('--rehomed');
+  if (path) {
+    const receipt = JSON.parse(readFileSync(path, 'utf8'));
+    if (receipt.approved_by !== 'owner') die(`${path}: a re-home receipt must record approved_by: "owner"`);
+    for (const entry of receipt.items ?? []) {
+      if (!entry?.id || !entry.from_page || !entry.to_page || !entry.reason)
+        die(`${path}: every re-home entry needs id, from_page, to_page and reason`);
+      rehomed.set(entry.id, entry);
+    }
+  }
+}
 
 function argVal(flag) {
   const i = args.indexOf(flag);
@@ -81,6 +101,7 @@ try {
 
 const errors = [];
 const warns = [];
+const rehomeNote = [];   // owner-approved re-homes actually exercised this run
 const forward = [];   // whitelisted B-page forward citations, reported not hidden
 const existingClash = [];   // [plannedId, pageId] — adjudicated once page homes are known
 let authored = 0;     // planned items already written to items/
@@ -208,11 +229,33 @@ for (const p of pages)
 // An id planned here that already exists in items/ is a genuine immutability
 // violation only when it is homed on a DIFFERENT page that is already composed.
 // Otherwise it is simply an item of this plan that has been authored already.
+// A RE-HOME is the one licensed way this can be intentional (owner, 2026-08-06).
+// Moving a published item to a different page changes no id and no dep — only
+// which page composes it — and it is the only way to give an existing statement
+// a home earlier in the reading order, which is what a new foundational page
+// needs. It is a reading-order change, so it is OWNER-ONLY (AUDIT-WORKFLOW.md),
+// and the receipt passed by `--rehomed` is that approval in machine-readable
+// form. The gate stays fully armed for everything else: an id not named in the
+// receipt, or named with a different destination, still fails.
+//
+// The receipt is checked against the page the item is planned on, not merely
+// listed, so a receipt cannot silently license a clash somewhere else. `from_page`
+// is verified against the disk home rather than trusted, because a stale receipt
+// naming the wrong origin is exactly how this would quietly stop protecting
+// anything.
 for (const [id, pid] of existingClash) {
   const home = homePageOf.get(id);                 // the page in library/ that actually lists it
-  if (home && home !== pid)
-    err('dup-id', `${id} on ${pid} clashes with an item already composed onto ${home} (ids are IMMUTABLE)`);
-  else authored++;
+  if (home && home !== pid) {
+    const move = rehomed.get(id);
+    if (move && move.to_page === pid && move.from_page === home) {
+      rehomeNote.push(`${id}: ${home} -> ${pid} (owner-approved re-home)`);
+      authored++;
+    } else if (move && move.to_page === pid) {
+      err('dup-id', `${id} on ${pid} is licensed by a re-home receipt claiming it comes from ${move.from_page}, but it is composed onto ${home}`);
+    } else {
+      err('dup-id', `${id} on ${pid} clashes with an item already composed onto ${home} (ids are IMMUTABLE)`);
+    }
+  } else authored++;
 }
 
 // ---------------------------------------------------------------- check 2: item cycles (Tarjan)
@@ -322,6 +365,9 @@ console.log(`plan: ${pages.length} pages (${nOf('A')} A + ${nOf('B')} B + ${nOf(
 const planned = pages.filter((p) => p.kind !== 'P');
 console.log(`item lists written for ${withItems}/${planned.length} planned pages — the rest are validated at PAGE level only`);
 if (authored) console.log(`${authored}/${totalItems} planned items already authored into items/`);
+// Print what the receipt actually licensed. A waiver nobody can see is a waiver
+// nobody re-reads, and this one moves published pages.
+for (const note of rehomeNote) console.log(`  [rehome] ${note}`);
 
 // declared reading order. `*` marks a page whose item list is not written yet, so
 // its item-level dependencies have not been checked (nothing to check).

@@ -163,7 +163,7 @@ judge context. First merge the current namespaced batch contracts:
 node tools/merge-proof-contracts.mjs --level frontier-<n> research/level<n>-proof-contracts.json research/level<n>-batch-*.proof-contracts.json
 node tools/proof-contract.mjs research/level<n>-proof-contracts.json --strict
 node tools/finite-smoke.mjs research/level<n>-proof-contracts.json
-node tools/risk-report.mjs research/level<n>-proof-contracts.json --require-reviewed
+node tools/risk-report.mjs research/level<n>-proof-contracts.json   # add --require-reviewed at STEP 6 only
 node tools/content-policy.mjs research/level<n>-batch-*.pages.json
 node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json > research/level<n>-audit-manifest.json
 node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --template research/level<n>-impact-audit.json

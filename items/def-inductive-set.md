@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: []
+deps: [def-axiom-of-pairing, def-axiom-of-union, def-unordered-pair-and-singleton]
 aliases: []
 landmark: false
 short: "$\\varnothing \\in I$, closed under $x \\mapsto x \\cup \\{x\\}$"
@@ -29,7 +29,8 @@ pipeline_run: null
 ## Definition
 
 Working in ZFC, for a set $x$ write $x^{+} := x \cup \{x\}$ for its **successor**
-(a set, by the axioms of Pairing and Union). A set $I$ is **inductive** when
+(a set, by the axioms of Pairing and Union, [[def-axiom-of-pairing]] and
+[[def-axiom-of-union]]). A set $I$ is **inductive** when
 
 $$\varnothing \in I \quad\text{and}\quad \bigl(x \in I \implies x^{+} \in I\bigr)\ \text{for every } x.$$
 
@@ -37,8 +38,8 @@ That is, $I$ contains the empty set and is closed under the successor operation.
 
 ## Remarks
 
-The **Axiom of Infinity** is precisely the assertion that an inductive set
-exists. Inductive sets can be large and are far from unique (if $I$ is inductive
+The **Axiom of Infinity** ([[def-axiom-of-infinity]]) is precisely the assertion
+that an inductive set exists. Inductive sets can be large and are far from unique (if $I$ is inductive
 so is $I \cup \{\text{anything}\}$ once closed off), so an inductive set is not
 yet a good definition of $\mathbb{N}$. The natural numbers are carved out as the
 **smallest** inductive set, the intersection of all of them

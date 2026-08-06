@@ -681,7 +681,18 @@ node tools/touchlog.mjs snap research/level<n>-touches.json "pre-step8"
 # ... Alpha adjudicates and applies only confirmed-fatal repairs ...
 node tools/step8-guard.mjs --touches research/level<n>-touches.json \
   --baseline "pre-step8" --adjudications research/level<n>-judge-adjudications.jsonl
+# then CLOSE the window, so step 9 can edit without breaking this gate:
+node tools/touchlog.mjs snap research/level<n>-touches.json "after-step8-alpha"
+node tools/gates.mjs --step 8 --run <name> --against after-step8-alpha
 ```
+
+**Close the window, or the gate becomes unre-runnable.** `step8-guard` defaults
+its upper bound to the **live working tree**, so once step 9 legitimately edits
+anything, every later re-run of step 8 reports that edit as `nonfatal-edit` —
+and a step-9 repair to an item no judge ever rejected can never be licensed by a
+`confirmed_fatal`, so the gate stays red forever. Measured on run `zfc`. Snapshot
+a closing label when Alpha finishes and pass it as `--against`; omit it only
+while step 8 is still in progress.
 
 `nonfatal-edit` names any item changed without a licensing confirmed-fatal row;
 `judge-adjudication-unhashed` names a row that cannot license anything because
@@ -829,14 +840,14 @@ items). **Do not trim landmarks.**
 | `extcheck.mjs` | `unproved-kind`, `unproved-has-proof`, `unproved-judged`, `unproved-precheck`, `unproved-on-published`, `unproved-uncited`, `external-dangling`, `external-in-deps`, `external-not-unproved`, `external-unused` |
 | `citecheck.mjs` | mis-attribution heuristic — the largest historical defect class (14 of 50) |
 | `rendercheck.mjs` | `wikilink-in-math`, `nested-dollar-in-display`, `dollar-in-tag`, `multiline-display`, `unclosed-display`, `unbalanced-inline-dollar`, `blank-line-in-inline-math`, `katex-parse-error` (**real KaTeX**), `frontmatter-unparsable` / `frontmatter-duplicate-key` (**the renderer's own `yaml`** — a file whose frontmatter throws is silently dropped from the corpus, and every published page listing it then 404s), `unreadable` |
-| `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>100 A-page items; review only, never a pruning target), `redundant-prereq` (19 total) |
+| `validate-plan.mjs` | scaffold, **takes the spec path as an argument** (`node tools/validate-plan.mjs research/plan-spec.json`; bare = usage error, not a failure). Errors `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`, `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`, `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on a B page), `b-requires-a`, `dup-id`, `prefix`, `kind`, `companion`; warnings `orphan`, `size` (>100 A-page items; review only, never a pruning target), `redundant-prereq` (19 total). `--rehomed FILE` relaxes `dup-id` for the exact owner-approved re-homes it names (`ARCHITECTURE.md` §3.11a) |
 | `depsource.mjs` | per dep: `published` / `planned-earlier` / `draft-page` / `homeless` / `planned-later` / `unresolved`. **Only `unresolved` fails.** `planned-later` is the forward-reference report — but it reads `deps` only and is **blind to `forward_refs`** |
 | `prosecheck.mjs` | **the prose defect class**, which is where 100% of this library's found defects live. ERROR `position-contradiction` (a "later/earlier page" claim contradicting `plan-spec` order — decidable, no judgement). WARNINGS `count-in-prose`, `count-of-this-page`, `library-scope-denial`. `--warnings` lists them, `--strict` fails on them |
 
 | `proof-contract.mjs` | strict, versioned proof-obligation / citation / boundary worksheet. Each direct fact citation gets a declared source and exact source clause; each numbered step gets exactly one stated-input entry; every standard boundary case is checked or specifically not applicable. Checks accountable links, not mathematical truth |
 | `finite-smoke.mjs` | selected bounded countermodel searches for finite/combinatorial claims. A failure supplies a concrete model or convention discrepancy; a pass is **not** a general proof |
-| `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect |
-| `content-policy.mjs` | future-batch component provenance, AI-generated-statement dependency prohibition, generated-claim containment, and structured external fallback |
+| `risk-report.mjs` | transparent high-risk routing (fan-in, proof length, iff, existence/well-definedness, boundary language, induction, quotients, limits). `--require-reviewed` requires an Alpha `risk_review` for high/critical items; it does not declare a defect. **It belongs to step 6, not step 5**: only Alpha writes a `risk_review`, and it does so at step 6, so step 5 computes tiers and step 6 requires dispositions (the same split the audit uses at A4 versus A6) |
+| `content-policy.mjs` | future-batch component provenance, AI-generated-statement dependency prohibition, generated-claim containment, and structured external fallback. `--rehomed FILE` distinguishes an owner-approved re-home from an illegal id mint, and adds `batch-rehome-missing-item` (`ARCHITECTURE.md` §3.11a) |
 | `impact-audit.mjs` | required Alpha disposition of every computed downstream consumer of a changed public interface |
 | `step8-guard.mjs` | R1, step 8 is fatal-only: `nonfatal-edit` (an item changed since the `pre-step8` baseline with no `confirmed_fatal` adjudication against that text state), `judge-adjudication-unhashed` (a row with no `item_sha256`, which can license nothing). Warns on `step8-creation`/`step8-deletion`, which are step-6 powers. Fatal repairs are uncapped |
 | `level-coverage.mjs` | batch/relationship/contract scope, plan-dependency reconciliation, current paired-judge coverage, Alpha receipt, and spine receipt |
@@ -849,6 +860,15 @@ I touched), `gen-spec.mjs` (regenerate the spec).
 `tools/run-level.mjs` drives steps 0–10 and halts at the step-10 owner pause,
 with `tools/run-control.mjs` to steer it and `ops/run-level@.service` to survive
 logout. It changes no rule in this file — it sequences them.
+
+**Read a gate's counts off the tool, never off this summary.** `gates.mjs` prints
+only the last six lines of a failing tool, and five times on run `zfc` that
+understated the blocker: step 5's `risk-report` showed 6 of 60 missing risk
+reviews, the step-6 coverage receipt showed 1 of 43 unreconciled plan entries,
+`level-coverage` showed 1 of 10 warnings. Each time an agent briefed off the
+summary planned against the wrong number. The tail now always carries a census
+line (`[full output: N ERROR line(s), M WARN line(s), K earlier line(s) not
+shown]`), but the census is a warning to re-run the tool, not a substitute for it.
 
 **The gates for a step are a table, not a recollection:** `node tools/gates.mjs
 --step <0..10> --run <name>` runs exactly the gates of record for that step
