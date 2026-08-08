@@ -4,6 +4,9 @@ kind: theorem
 title: "For $n\\ge1$, radial normalisation is a deformation retraction of $\\mathbb{R}^n\\setminus\\{0\\}$ onto $S^{n-1}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-retraction-and-deformation-retract, thm-radial-straight-line-map-on-punctured-rn, lem-radial-normalisation-is-continuous, def-euclidean-spheres-and-closed-balls]
 aliases: []
 landmark: true
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "MAT 530 Topology lecture notes (Stony Brook University)"
+      url: "https://www.math.stonybrook.edu/~cschnell/pdf/notes/mat530.pdf"
 pipeline_run: null
 ---
 

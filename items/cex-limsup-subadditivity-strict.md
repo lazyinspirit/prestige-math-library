@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x_k = (-1)^k$, $y_k = (-1)^{k+1}$ give $\\limsup(x_k + y_k) = 0 < 2 = \\limsup x_k + \\limsup y_k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-limsup-additive, thm-limsup-subadditive, def-limsup-liminf, lem-alternating-sequence, def-extended-reals, def-sequence, cor-of-one-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_superior_and_limit_inferior"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

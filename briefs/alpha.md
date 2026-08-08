@@ -104,7 +104,7 @@ For every `literature-derived` or `ai-altered` item, verify from disk that
 provenance label.
 
 Delete a `verification.judge` block after a material rewrite. Do not judge; the
-paired DeepSeek V4 Pro / Claude Sonnet 5 judge is step 7.
+paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 
 ## Your read-only proof-refuter subagents (owner, 2026-07-31)
 
@@ -115,7 +115,7 @@ restrictions, grant no write capability; otherwise explicitly forbid all file
 writes, `apply_patch`, and fixes. They report evidence only.
 
 Their review standard is the same skeptical, adversarial standard used by
-DeepSeek V4 Pro and Claude Sonnet 5 at step 7. Instruct each reader to trace every proof
+DeepSeek V4 Pro and GPT 5.6 Terra at step 7. Instruct each reader to trace every proof
 step against the exact cited facts and dependency statements; read the cited
 item before saying a fact is too weak; seek concrete false claims, invalid
 inferences, missing hypotheses, scope/quantifier errors, or inaccurate

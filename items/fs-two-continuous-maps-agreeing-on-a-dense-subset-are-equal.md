@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: two continuous maps that agree on a dense subset of their common domain are equal, with no hypothesis on the codomain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal,
        def-standard-topologies, def-dense-top, lem-rat-embeds-dense,
        cor-irrationals-uncountable, def-countable, def-metrizable-space,
@@ -35,6 +38,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Trivial_topology"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
+    - title: "General Topology Notes (UC Riverside)"
+      url: "https://math.ucr.edu/~res/math205A-2014/gentop-notes.pdf"
+    - title: "Cocountable topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cocountable_topology"
 pipeline_run: null
 ---
 

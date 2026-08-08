@@ -4,6 +4,11 @@ kind: example
 title: "The four standard limits $n^{1/n} \\to 1$, $a^{1/n} \\to 1$, $n^{\\alpha}/(1+p)^n \\to 0$ and $x^k/k! \\to 0$, computed"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [lem-nth-root-of-n-tends-to-one, lem-nth-root-of-constant-tends-to-one, lem-power-over-geometric-null, lem-factorial-beats-geometric, thm-algebra-of-limits, def-real-limit, def-sequence, def-rational-power, def-integer-power, thm-nth-roots-exist, def-finite-sum, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

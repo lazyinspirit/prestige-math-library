@@ -4,6 +4,9 @@ kind: lemma
 title: "A compact subset of $\\mathbb{R}$ is closed and bounded"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-open-cover-r, def-open-and-closed-in-r, def-bounded-set, def-neighbourhood-r, def-interval, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-abs-value, lem-of-triangle-inequality, lem-finite-set-has-max, def-max-min, lem-of-naturals-positive, lem-of-inverse-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 forward_refs: [cex-unbounded-closed-set-not-compact]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.4"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

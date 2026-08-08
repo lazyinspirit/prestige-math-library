@@ -4,18 +4,27 @@ kind: lemma
 title: "For continuous maps into a convex subset of $\\mathbb{R}^n$, the straight-line formula defines a continuous homotopy"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-product-universal-property, thm-componentwise-limits-and-continuity, def-subspace-topology-top, thm-continuity-characterisations-top, lem-product-topology-on-rn]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
   audited: 2026-07-31
 sources:
   scraped: []
   references:
-    - title: "MIT 18.901, Introduction to Topology lecture notes"
-      url: "https://math.mit.edu/~pieloch/teaching/18.901-spring-2025/18.901-spring-2025-Lecture-Notes.pdf"
+    - title: "Algebraic Topology lecture notes (UC Riverside)"
+      url: "https://math.ucr.edu/~jbergner/SPWM09.pdf"
 pipeline_run: null
 ---
 

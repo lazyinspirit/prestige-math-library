@@ -44,27 +44,12 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
 
 const DEEPSEEK = "deepseek-v4-pro";
 const TERRA = "gpt-5.6-terra";
-const OPUS = "claude-opus-5";
-// Owner, 2026-08-02: the audit lane moves Opus 5 -> Sonnet 5 after the headless
-// Opus process exited status 1 on 303/382 wave-0 attempts under 16-way lane
-// concurrency (a capacity refusal, not a verdict; 101 null verdicts).
-const SONNET = "claude-sonnet-5";
-// JUDGE_LINEUP mirrors tools/judge.mts. Both the per-level build and the
-// published-page audit (AUDIT-WORKFLOW.md) run deepseek+sonnet — owner
-// instruction 2026-08-04, moving the second lane Terra -> Sonnet 5. The lane
-// has gone Opus -> Sonnet -> Terra -> Sonnet; every earlier ledger row is
-// append-only historical evidence, not current coverage, INCLUDING the older
-// Sonnet rows (a lineup returning to a model does not inherit its own retired
-// verdicts — the frozen context they were cast against is gone). The other
-// lineups stay selectable for a deliberate experiment only. The child judge
-// inherits the same env var, so the sweep and its judges can never disagree
-// about the active lineup.
+// JUDGE_LINEUP mirrors tools/judge.mts. Historical rows are append-only evidence
+// only; the child judge inherits the same env var as the sweep.
 const LINEUPS = Object.freeze({
   "deepseek+terra": [DEEPSEEK, TERRA],
-  "deepseek+opus": [DEEPSEEK, OPUS],
-  "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const supportedModels = LINEUPS[lineupName];
 if (!supportedModels) {
   throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
@@ -148,34 +133,31 @@ const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
 // Owner policy, 2026-08-01: cap each judge lane independently — 16 per lane,
 // so at most 32 calls combined under a two-model lineup.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
-// Every lane has its own model-named slot directory, so the Opus lane's pool
-// is disjoint from Terra's and a lineup switch cannot double-book a cap.
+// Every lane has its own model-named slot directory, so independent pools cannot
+// double-book a cap.
 const MODEL_CONCURRENCY = Object.freeze({
   // DeepSeek gates every sweep: at the end of wave 1b's A7, Terra had
   // finished all 174 while DeepSeek still had 36 pending with all of its
   // slots held. Its per-call latency, not its throughput, sets wall clock.
   // That is why it was raised 16 -> 24 (owner, 2026-08-03), and it is BACK to
   // 16 (owner, 2026-08-05) for a reason latency does not see: MEMORY. Every
-  // lane call is its own node+tsx process, and under the deepseek+sonnet
-  // lineup the other lane's 16 calls are 16 full `claude -p` processes. Wave 4
-  // measured the sweep at 3.9 GB with a 4.6 GB peak on a 7.8 GB host, past the
+  // lane call is its own node+tsx process. Wave 4 measured the sweep at 3.9 GB
+  // with a 4.6 GB peak on a 7.8 GB host, past the
   // unit's MemoryHigh=4G and closing on MemoryMax=5G. A lane killed by the
   // kernel returns a capacity refusal, and a capacity refusal is not a verdict
-  // — the exact failure that retired the Opus lane with 101 nulls on wave 0.
+  // — a capacity refusal is always a null verdict.
   [DEEPSEEK]: 16,
   [TERRA]: 16,
-  [OPUS]: 16,
-  [SONNET]: 16,
 });
 
-// MEASURED, wave 5 A7 (2026-08-05): at cap 16 the Sonnet lane returned **207
+// MEASURED, wave 5 A7 (2026-08-05): at cap 16 the retired second lane returned **207
 // capacity refusals against 140 responses** — `claude_exit`, status 1, 66 bytes,
 // ~3.5s, i.e. refused fast rather than reasoning and failing. 69 of 209 items
 // ended with only DeepSeek's verdict, so the wave's paired coverage was really
 // 140/209. The trend is the alarming part: wave 4 refused 61 of 213 (29%) at the
 // same cap, wave 5 refused 60%. DeepSeek, on the same sweep, returned 209/209.
 //
-// This is the exact failure that retired the Opus lane (303 refusals of 382 on
+// This is the exact failure that retired an earlier lane (303 refusals of 382 on
 // wave 0), and the standing rule is that a capacity refusal is a NULL, never a
 // verdict. So the cap needs to be tunable without editing an owner-set constant:
 // the default stays 16 as the owner set it, and a targeted replay can lower just

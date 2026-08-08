@@ -33,7 +33,7 @@ That is the design claim, and it is measured, not assumed.
 The asymmetry worth internalising: **mechanical gates prove absence of a defect
 class; reading tiers find defects; the judge is a cheap screen and finds almost
 nothing.** Historical judge measurements on this corpus were **21–24%**
-precision and **0/3** on real historical defects. The current DeepSeek/Sonnet
+precision and **0/3** on real historical defects. The current DeepSeek/Terra
 pair receives no inherited quality claim: its effectiveness is reported only
 from owner-adjudicated per-level findings. Never model it as the thing that
 finds problems.
@@ -433,7 +433,9 @@ impact queue.
 `tools/level-coverage.mjs` is the whole-level closure gate. It derives item and
 relationship scope from actual batch manifests, demands a contract for every
 proof-bearing item, verifies an Alpha receipt against a current manifest hash,
-and requires both judge models to have a usable verdict for every item. A
+and requires both judge models to have a usable verdict for every item in a
+build. In published-audit mode, `--judge-targets` keeps those non-judge checks
+whole-wave while requiring judge pairs only for the exact repair receipt. A
 current `keep: false` verdict is never silently cleared: the gate requires an
 exact `{id, model, context_sha256}` Alpha adjudication from
 `--judge-adjudications`; `confirmed_fatal` and a missing adjudication fail,
@@ -586,8 +588,8 @@ impact closure and records a hash-attested targeted rejudge receipt, not a new
 whole-wave coverage run or sweep.
 
 **`JUDGE_LINEUP`** (env, read identically by `judge.mts`, `judge-sweep.mjs`,
-and `level-coverage.mjs`): `deepseek+sonnet` for both the build and all future
-audit sweeps. Historical Sonnet/Opus records remain readable evidence only.
+and `level-coverage.mjs`): `deepseek+terra` for both the build and all future
+audit sweeps. Historical retired-lane records remain readable evidence only.
 See §5.
 
 **`judge-sweep.mjs --manifests`** (2026-08-02): audit sweeps supply the batch
@@ -685,9 +687,10 @@ shared path the docs name), because practice and documentation diverged there.
 
 **`tools/dispatch.mjs`** runs one briefed role, so a build no longer depends on
 the subagent mechanism of whatever session started it. It has three runners:
-`codex` (every build role, GPT 5.6 Sol), `claude` (the audit's `claude-opus-5`
-Beta and Alpha, the `claude-sonnet-5` certifier, the orchestrator), and
-`deepseek` (audit proof-refuters — an HTTP call, not a process).
+`codex` (all build and audit roles: GPT 5.6 Sol for Beta/Alpha/orchestration,
+GPT 5.6 Terra for certification), and `deepseek` (audit proof-refuters — an
+HTTP call, not a process). Every Codex role receives `xhigh` reasoning and an
+explicit 1,000,000-token context window.
 
 Read-only is a property of the ROLE, not of the prompt, and **each runner
 enforces it differently because their guarantees differ in strength**:
@@ -696,13 +699,9 @@ enforces it differently because their guarantees differ in strength**:
 |---|---|---|
 | `codex` | `--sandbox read-only` | process-level |
 | `deepseek` | tool-less transport: no disk, no web, ever | absolute, and blind |
-| `claude` | `--allowed-tools Read Glob Grep WebSearch WebFetch` (default-deny), plus a redundant deny of `Bash Write Edit NotebookEdit Task Agent Workflow` | tool-level |
 
-**The claude row is written from a measured escape, not from first principles.**
-Probed 2026-08-05, a read-only lane carrying only the deny list `Bash Write Edit
-NotebookEdit` **created the file it was asked to create**: it delegated to a
-subagent, whose tool set does not inherit the parent's deny list, and said so —
-"a second agent apparently ran independently". A deny list cannot cover a tool
+The retired Claude-runner observation remains in the historical record but is
+not part of the active audit path. A deny list cannot cover a tool
 that mints a fresh tool set, so the guarantee is now the ALLOW list, which
 restricts what loads at all; re-probed, the same request reported no write tool
 "loaded or discoverable" while `WebSearch` still retrieved and cited a live URL.
@@ -825,46 +824,41 @@ null so its distinct failure mode remains measurable.
 
 ## 5. The judge
 
-**Current routing (owner, 2026-07-31; second lane changed 2026-08-04): session-item
-judging runs DeepSeek V4 Pro directly at maximum reasoning and freshly spawned
-Claude Sonnet 5 through the local `claude` CLI at `high` effort, in parallel.**
+**Current routing (owner, 2026-08-08): session-item judging runs DeepSeek V4
+Pro directly at maximum reasoning and a fresh GPT 5.6 Terra Codex process at
+`xhigh` with a 1,000,000-token context window, in parallel.**
 
-**Lineup parameter (owner, 2026-08-02; lane changed 2026-08-04).** The build and
-all future audit work use `deepseek+sonnet`; every earlier lineup's rows — Opus,
-the retired Sonnet run, and Terra — are retained only as evidence, because
-coverage is per frozen context and never per model name. The Claude lane is
-`runFreshClaude` in `judge.mts`: a fresh headless Claude Code process —
-`claude -p --model claude-sonnet-5 --effort high --no-session-persistence`, an
-empty temporary working directory (which also keeps the repo's project
-settings and hooks out of scope), every core tool `--disallowed-tools` — the
-`runFreshTerra` isolation pattern with the Codex binary swapped for the local
-`claude` CLI, plus a transport-level `--append-system-prompt` JSON constraint —
-the exact analogue of the DeepSeek lane's `response_format: json_object`, added
-because Sonnet was measured detecting an injected false step precisely and then
-answering in prose, scoring UNPARSEABLE. `--bare` is deliberately absent: it was measured (2026-08-02)
-to skip OAuth credential loading and the lane reports "Not logged in". The frozen prompt, hash
+**Lineup parameter (owner, 2026-08-08).** The build and all future audit work
+use `deepseek+terra`; earlier rows remain evidence only because coverage is per
+frozen context and never per model name. The Terra lane is `runFreshTerra` in
+`judge.mts`: a fresh Codex process in an empty temporary working directory,
+with process-level read-only sandboxing, `xhigh` reasoning and an explicit
+one-million-token context window. The frozen prompt, hash
 attestation, verdict contract, attempt telemetry, and retry semantics are
-identical across lineups. `judge-sweep.mjs` gives DeepSeek and Sonnet their own
+identical across lineups. `judge-sweep.mjs` gives DeepSeek and Terra their own
 16-slot cross-process pools. The corpus was authored largely by Claude/GPT
-sessions, so DeepSeek remains the ONLY cross-family screen; Sonnet 5 is an
-independent second lane, cross-family relative to the Sol author but same-family
-as the audit Alpha adjudicating its rejections. Both receive the exact same
-hash-attested frozen item, A/B-pair, dependency, and conventions prompt; Sonnet
-runs read-only from an empty temporary work directory. Every
+sessions, so DeepSeek remains the ONLY cross-family screen; Terra is an
+independent second process in the GPT family and shares that family with the Sol
+author and audit Alpha. Both receive the exact same hash-attested frozen item,
+A/B-pair, dependency, and conventions prompt; Terra runs read-only from an empty
+temporary working directory. Every
 GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-token
-context window. DeepSeek is the cross-family screen from the Sol author; Sonnet
+context window. DeepSeek is the cross-family screen from the Sol author; Terra
 is an independent same-context comparison lane, not a claim of cross-family
 separation — and it shares a family with the Alpha that adjudicates it, which
-DeepSeek does not. After the all-Claude audit reroute (2026-08-05) that point
-sharpens: in an audit wave, Sonnet's judge lane now also shares a family with
+DeepSeek does not. Under the current GPT audit routing that point sharpens: in
+an audit wave, Terra's judge lane also shares a family with
 the Audit-Beta that authored the text it reads, so DeepSeek is the sole
 cross-family reader in BOTH the judge lane and the refuter lane. `tools/judge.mts --parallel` supports a one-item paired call and
 retains the historical GLM/DeepSeek injection-test record. The normal sweep
 uses independent model lanes so a slow judge never blocks the other's next item.
 
 **When it runs:** once, after the step-6 independent-reader/Alpha audit, on final
-text, with **both judges covering every item in the completed level** regardless
-of whether Alpha changed it. The old
+text, with **both judges covering every item in a newly built completed level**
+regardless of whether Alpha changed it. Published-page audit A7 is deliberately
+different (owner clarification 2026-08-08): its whole wave has already received
+Beta/Alpha/refuter coverage, so the paired lanes rejudge only ids in the
+machine-readable repair-target receipt. The old
 reason still applies: judging before audit bought verdicts that later rewrites
 invalidated. Measured on `frontier-1`, 292 calls for 212 items produced 80 repeat
 calls and 30 destroyed passes. Judging after audit preserves coverage and makes
@@ -905,9 +899,9 @@ fatal logic or dependency-citation defects; rejection volume alone is never
 treated as effectiveness. It resolves the pair from `JUDGE_LINEUP` exactly as
 `judge.mts`, `judge-sweep.mjs` and `level-coverage.mjs` do, and emits the
 `lineup` it compared so a saved report names its own two models. **It was pinned
-to the retired `deepseek+terra` lane until wave 5 (2026-08-06)**, so a wave
-judged by `deepseek+sonnet` reported one absent model and silently dropped every
-Sonnet verdict; the agreement keys are `primary_only_reject` and
+to a retired lineup until wave 5 (2026-08-06)**, so a wave judged by a newer
+lineup reported one absent model and silently dropped second-lane verdicts; the
+agreement keys are `primary_only_reject` and
 `second_only_reject` rather than model names for that reason.
 The ordinary sweep selects both judges; a targeted `--models` recovery selects
 only the named model's missing current-context verdicts and never re-spends a
@@ -996,7 +990,7 @@ Half the workflow. These are templates; substitute `<n>` and `<i>`.
 | `beta-step8-audit.md` | independent Step-6 reader, **step 6a batch auditor** (historical filename retained) | exhaustive audit of a batch the reader did not author; fixes; added/deleted in-flight results |
 | `authoring.md` | the same GPT 5.6 Sol Beta-n-i that scaffolded the batch, step 5 | precheck traps, shipped-defect checklist, fixed A/B page-summary contract, no-judge rule |
 | `alpha.md` | Alpha-n, steps 4, 6, and 8 | dispatches read-only skeptical proof-refuters; adjudicates their and judges' findings; propagates, audits independent-reader fixes, and audits cross-batch and cross-level references |
-| `codex-judge.md` | DeepSeek V4 Pro + Claude Sonnet 5 judges, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
+| `codex-judge.md` | DeepSeek V4 Pro + GPT 5.6 Terra judges, step 7 (historical filename) | human-readable role and JSON-verdict contract; runtime prompt lives in `judge.mts` |
 | `judge-conventions.txt` | the judge | canonical triage/library block loaded by `judge.mts` into both frozen prompts |
 | `audit-beta.md` | Audit-Beta, audit steps A1/A2/A4 (`AUDIT-WORKFLOW.md`) | provenance determination table, evidence ledger row contract, citation-precision duties, full proof-contract capture (D1), repair classes and A3 approval boundary |
 | `audit-alpha.md` | audit Alpha, audit steps A6/A8 | sole-adjudicator role, D2 concurrences, refuter dispatch, cross-edge audit, genrisk dispositions, exact-hash judge adjudication, the item-granular rejudge set |

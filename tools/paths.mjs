@@ -21,8 +21,8 @@
 // nothing resolves at import time: a tool that never needs tsx must not fail to
 // load because tsx is absent.
 
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, realpathSync } from 'node:fs';
+import { delimiter, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -55,9 +55,39 @@ const need = (what, path, install) => {
   return path;
 };
 
-/** The tsx ESM loader, for `node --import <loader> tools/<x>.mts`. */
-export const tsxLoader = () =>
-  need('tsx loader', join(WORKER_DIR ?? '', 'node_modules/tsx/dist/loader.mjs'), WORKER_DIR);
+const localTypeScriptRegister = join(REPO, 'tools/typescript-register.mjs');
+
+const globalTypeScriptRuntime = () => {
+  if (process.env.PRESTIGE_TYPESCRIPT_PATH && existsSync(process.env.PRESTIGE_TYPESCRIPT_PATH)) {
+    return process.env.PRESTIGE_TYPESCRIPT_PATH;
+  }
+  for (const dir of (process.env.PATH ?? '').split(delimiter).filter(Boolean)) {
+    const command = join(dir, process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
+    if (!existsSync(command)) continue;
+    try {
+      const root = dirname(dirname(realpathSync(command)));
+      const runtime = join(root, 'lib/typescript.js');
+      if (existsSync(runtime)) return runtime;
+    } catch { /* an unreadable PATH entry is not a usable compiler */ }
+  }
+  return null;
+};
+
+/** A TypeScript ESM loader, for `node --import <loader> tools/<x>.mts`.
+ * Prefer the app's tsx package. If that checkout has no installed dependencies,
+ * use this repo's register hook with an already-installed global TypeScript
+ * runtime; this executes the same source files and makes no external checkout
+ * writable. */
+export const tsxLoader = () => {
+  const appLoader = join(WORKER_DIR ?? '', 'node_modules/tsx/dist/loader.mjs');
+  if (WORKER_DIR && existsSync(appLoader)) return appLoader;
+  const typescript = globalTypeScriptRuntime();
+  if (typescript && existsSync(localTypeScriptRegister)) {
+    process.env.PRESTIGE_TYPESCRIPT_PATH = typescript;
+    return localTypeScriptRegister;
+  }
+  return need('tsx loader', appLoader, WORKER_DIR);
+};
 
 /** The normative precheck implementation. Never substitute a test fixture. */
 export const precheckSource = () =>

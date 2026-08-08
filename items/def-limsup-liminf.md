@@ -4,6 +4,9 @@ kind: definition
 title: "Limit superior and limit inferior of a real sequence as $\\inf_n \\sup_{k \\ge n} x_k$ and $\\sup_n \\inf_{k \\ge n} x_k$ in $\\overline{\\mathbb{R}}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-extended-reals, def-sequence, def-complete-ordered-field, thm-infimum-property, def-bounded-set, def-infimum, lem-extended-reals-complete]
 justified_by: []
 aliases: [def-limsup, def-liminf]

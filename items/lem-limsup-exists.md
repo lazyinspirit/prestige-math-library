@@ -4,6 +4,9 @@ kind: lemma
 title: "The tail suprema of any real sequence are nonincreasing in $\\overline{\\mathbb{R}}$, so the limit superior exists for every sequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, def-extended-reals, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-sequence, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §2.3"
       url: "https://www.jirka.org/ra/"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

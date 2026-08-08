@@ -4,6 +4,9 @@ kind: lemma
 title: "The graph of a continuous map into a Hausdorff space is closed in the product"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed,
        def-the-diagonal-of-a-space, def-product-topology, thm-product-universal-property,
        lem-continuity-is-local-and-pastes, def-hausdorff-space, def-continuous-map-top]
@@ -31,8 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "Closed graph theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Closed_graph_theorem"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Topology, Lemma 5.3 (Tag 08ZD)"
+      url: "https://stacks.math.columbia.edu/tag/08ZD"
 pipeline_run: null
 ---
 

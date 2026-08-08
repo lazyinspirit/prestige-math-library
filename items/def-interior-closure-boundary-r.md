@@ -4,6 +4,9 @@ kind: definition
 title: "Interior, closure, boundary and exterior of a subset of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, thm-open-set-algebra-r]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Boundary_(topology)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

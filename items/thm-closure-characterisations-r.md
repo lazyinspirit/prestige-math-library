@@ -4,6 +4,9 @@ kind: theorem
 title: "The closure equals the set together with its limit points, equals the set of points every neighbourhood of which meets it, and is the smallest closed superset; a set is closed iff it contains its limit points"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-interior-closure-boundary-r, def-limit-point-r, def-open-and-closed-in-r, thm-open-set-algebra-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

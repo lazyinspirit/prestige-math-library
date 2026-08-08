@@ -4,6 +4,9 @@ kind: lemma
 title: "For finite $L$: $L = \\limsup x_k$ iff for every $\\varepsilon > 0$ one has $x_k < L + \\varepsilon$ eventually and $x_k > L - \\varepsilon$ frequently"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, lem-limsup-reflection, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\mathbb{R}((t^{-1}))$ is non-Archimedean, and the monomials $t^{-k}$ are cofinal below its positive elements"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-formal-laurent-series, lem-laurent-valuation, thm-laurent-ordered-field, def-archimedean-field, def-ordered-field, def-abs-value, thm-int-ordered-ring, lem-nat-embeds-int, def-int-order]
 aliases: []
 landmark: true
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
     - title: "Ordered field (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_field"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 

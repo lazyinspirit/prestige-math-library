@@ -155,6 +155,14 @@ test('the injection-test gate keys on the judge prompt fingerprint', () => {
   assert.match(source, /injection-test-required/);
 });
 
+test('published-audit A7 spends only on the machine-recorded repair targets', () => {
+  const driver = readFileSync(join(REPO, 'tools/run-wave.mjs'), 'utf8');
+  const gates = readFileSync(join(REPO, 'tools/gates.mjs'), 'utf8');
+  assert.match(driver, /rejudge-targets\.json/);
+  assert.match(driver, /'--items', targets\.join\(','\)/);
+  assert.match(gates, /'--judge-targets', REJUDGE_TARGETS/);
+});
+
 test('gates.mjs exposes an audit table with no A5', () => {
   const r = spawnSync(process.execPath, ['tools/gates.mjs', '--audit', '--list'], { cwd: REPO, encoding: 'utf8' });
   assert.equal(r.status, 0);

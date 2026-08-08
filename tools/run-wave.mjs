@@ -60,6 +60,7 @@ const run = `wave${wave ?? option('--run', '')}`;
 const DIR = 'research/audit';
 const statePath = join(REPO, DIR, `${run}-run-state.json`);
 const controlPath = join(REPO, DIR, `${run}-run-control.json`);
+const rejudgeTargetsPath = join(REPO, DIR, `${run}-rejudge-targets.json`);
 
 // ---- state ------------------------------------------------------------------
 
@@ -227,6 +228,47 @@ const manifests = () => {
 };
 /** Batch labels are the category slugs: wave4-topology.pages.json -> topology. */
 const batchLabels = () => manifests().map((n) => n.replace(/\.pages\.json$/, '').replace(`${run}-`, ''));
+
+// Published-page A7 is a REJUDGE, not a second whole-wave reading pass. The
+// whole wave already received Beta, Alpha and independent-refuter coverage at
+// A2/A6. Owner clarification 2026-08-08: only exact repairs recorded by A6 (and
+// later exact A8 repairs) receive new paired judge calls. Keep that spend scope
+// in a machine-readable receipt rather than inferring it from a dirty worktree,
+// where provenance retags and unrelated owner edits are indistinguishable.
+const rejudgeTargets = () => {
+  if (simulation) return ['simulated-repair'];
+  if (!existsSync(rejudgeTargetsPath)) {
+    halt('rejudge-targets-missing',
+      `A7 requires ${DIR}/${run}-rejudge-targets.json; it must name only the items actually repaired in this wave.`,
+      resumeCmd('A7'));
+  }
+  let receipt;
+  try { receipt = JSON.parse(readFileSync(rejudgeTargetsPath, 'utf8')); }
+  catch (cause) {
+    halt('rejudge-targets-invalid', `${DIR}/${run}-rejudge-targets.json: ${cause.message}`, resumeCmd('A7'));
+  }
+  if (receipt?.version !== 1 || receipt?.mode !== 'published-audit-repair-targets' || !Array.isArray(receipt.targets)) {
+    halt('rejudge-targets-invalid',
+      `${DIR}/${run}-rejudge-targets.json must be {version:1, mode:"published-audit-repair-targets", targets:[...]}.`,
+      resumeCmd('A7'));
+  }
+  const ids = receipt.targets.map((target) => typeof target === 'string' ? target : target?.id);
+  if (!ids.length || ids.some((id) => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+    halt('rejudge-targets-invalid',
+      `${DIR}/${run}-rejudge-targets.json must name at least one unique repair id.`,
+      resumeCmd('A7'));
+  }
+  const manifestIds = new Set(manifests().flatMap((name) =>
+    JSON.parse(readFileSync(join(REPO, DIR, name), 'utf8'))
+      .flatMap((page) => (page.items ?? []).map((item) => typeof item === 'string' ? item : item?.id))));
+  const outside = ids.filter((id) => !manifestIds.has(id));
+  if (outside.length) {
+    halt('rejudge-targets-invalid',
+      `${DIR}/${run}-rejudge-targets.json names item(s) outside the wave: ${outside.join(', ')}`,
+      resumeCmd('A7'));
+  }
+  return ids;
+};
 
 // ---- the injection-test gate -------------------------------------------------
 //
@@ -505,13 +547,19 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       resumeCmd('A0'));
   }
 
-  // The A6 precompute: the pure/material split and the impact template. Both
-  // deterministic, both driver-side, neither Alpha's to redo. NOT the URL
-  // liveness sweep — this comment claimed it for three waves and no code here
-  // ever did it (wave 4). AUDIT-WORKFLOW.md §7 leaves that sweep with the
-  // orchestrator, and A3's note now says so instead of promising a table that
-  // does not exist.
+  // The A6 precompute: URL liveness, the pure/material split, and the impact
+  // template. All are driver-side inputs, never Alpha busywork. The driver
+  // previously acknowledged that the URL table was missing but still launched
+  // Alpha without it, contradicting the A6 efficiency protocol and forcing the
+  // sole adjudicator to stop mid-audit for an orchestrator prerequisite.
   if (plan.precompute) {
+    const urlTable = node(['tools/url-sweep.mjs',
+      '--manifests', manifests().map((n) => `${DIR}/${n}`).join(','),
+      '--ledgers', batchLabels().map((label) => `${DIR}/${run}-${label}.provenance.jsonl`).join(','),
+      '--out', `${DIR}/${run}-url-liveness.json`]);
+    if (urlTable.code !== 0) halt('action-failed', `url-sweep failed: ${String(urlTable.out).slice(-400)}`, resumeCmd(step));
+    journal('precompute', { detail: 'URL liveness table written' });
+
     const split = node(['tools/audit-split.mjs', '--scope', manifests().map((n) => `${DIR}/${n}`).join(','), '--json']);
     if (split.code !== 0) halt('action-failed', `audit-split failed: ${String(split.out).slice(-400)}`, resumeCmd(step));
     if (!dryRun && !simulation) writeFileSync(join(REPO, DIR, `${run}-split.json`), split.out + '\n');
@@ -585,16 +633,17 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
     if (spent >= budget) halt('budget-exhausted', `judge budget of ${budget} call(s) is spent`,
       `raise it: node tools/run-wave.mjs --wave ${state.wave} --from-step A7 --judge-budget <N>`);
 
+    const targets = rejudgeTargets();
     const sweep = execute('judge-sweep', process.execPath, [
       'tools/judge-sweep.mjs',
       '--ledger', `${DIR}/${run}-judge.jsonl`,
       '--cost', `${DIR}/${run}-judge-cost.jsonl`,
-      '--manifests', manifests().map((n) => `${DIR}/${n}`).join(','),
+      '--items', targets.join(','),
       // The lineup is the owner's to set and the sweep's child judges inherit
       // whatever lands here, so an explicit env wins and the default follows
       // tools/judge.mts rather than pinning a lineup the tools have moved off.
-    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+sonnet' } });
-    journal('spend', { detail: `judge sweep exit ${sweep.code}` });
+    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+terra' } });
+    journal('spend', { detail: `targeted judge sweep (${targets.length} repaired item(s)) exit ${sweep.code}` });
     if (sweep.code !== 0) halt('sweep-failed', `the judge sweep failed: ${String(sweep.out).slice(-500)}`, resumeCmd(step));
   }
 

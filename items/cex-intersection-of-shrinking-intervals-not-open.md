@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\bigcap_k (-1/k, 1/k) = \\{0\\}$ is not open"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-arbitrary-intersection-of-open-is-open, def-open-and-closed-in-r, cor-archimedean-reciprocal, thm-of-archimedean, def-interval, def-neighbourhood-r, lem-of-abs-value, lem-of-naturals-positive, lem-of-inverse-positive, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Thm 2.24 and the remark following it)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

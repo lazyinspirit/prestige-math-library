@@ -25,7 +25,7 @@ starting or resuming a level.
 **Published-page audit, step A0 to A10: `AUDIT-WORKFLOW.md`** — the canonical
 retro-audit of already-published pages (provenance retro-tagging, citation-
 precision audit, generated-statement blast radius, the wave/batch model, the
-`deepseek+sonnet` judge lineup). Read it before starting or resuming an audit
+`deepseek+terra` judge lineup). Read it before starting or resuming an audit
 wave.
 
 **Unattended runs, and supervising one: `UNATTENDED.md`** — the driver
@@ -65,23 +65,20 @@ run a page from prompt to publish; the normative docs above win where they diffe
    agents use **GPT 5.6 Sol via the
    Codex subscription plan**; the paired judges use **DeepSeek V4 Pro directly
    through the DeepSeek API at `xhigh` thinking (official API value: `max`)** and
-   a freshly spawned **Claude Sonnet 5** (`JUDGE_LINEUP=deepseek+sonnet`).
+   a freshly spawned **GPT 5.6 Terra** (`JUDGE_LINEUP=deepseek+terra`).
    GPT 5.6 Sol authoring/audit agents run at `xhigh`
-   reasoning with a **1,000,000-token context window**; Sonnet runs as a fresh
-   headless `claude -p` judge process at `high` effort, with session persistence
-   off, every core tool denied, and an empty temporary working directory, so the
-   frozen prompt is its only context. `tools/judge.mts --parallel` runs both
+   reasoning with a **1,000,000-token context window**; Terra runs as a fresh
+   read-only Codex judge process at `xhigh` with the same one-million-token
+   context window and an empty temporary working directory, so the frozen prompt
+   is its only context. `tools/judge.mts --parallel` runs both
    judges concurrently and preserves the injection-test record.
    **The judge's context unit is the A/B PAIR:** it receives the item's own page
    and `-examples` companion in full, plus exactly the pages the item's own page
    both declares in `requires` and actually cites. Both models receive the
    identical context and read proofs and dependency citations skeptically.
-   DeepSeek supplies the cross-family screen; Sonnet 5 is an independent
-   subscription-backed comparison lane, not a claim of cross-family separation —
-   and since 2026-08-04 it is the SAME family as the audit Alpha (`claude-opus-5`)
-   that adjudicates its rejections, and as much of the legacy corpus it judges.
-   DeepSeek is therefore the only cross-family reader in the loop; weight a
-   Sonnet-only agreement with an existing Claude-authored proof accordingly.
+   DeepSeek supplies the cross-family screen. Terra is an independent
+   subscription-backed comparison lane but shares the GPT family with audit
+   Alpha; weight same-family agreement accordingly.
    Record a paired pass in `verification.judge` only when both models actually
    pass the text; commit their full verdict ledger at
    `research/level<n>-judge.jsonl`. Compare the models' findings at step 10. A
@@ -183,27 +180,20 @@ banner; the public sees only `published`.
 
 - **Paired skeptical judges (owner, 2026-07-31; second lane changed
   2026-08-04).** At step 7, run
-  `deepseek-v4-pro` directly with `claude-sonnet-5` through `tools/judge.mts`,
-  selected by `JUDGE_LINEUP=deepseek+sonnet` (now the default in `judge.mts`,
+  `deepseek-v4-pro` directly with `gpt-5.6-terra` through `tools/judge.mts`,
+  selected by `JUDGE_LINEUP=deepseek+terra` (now the default in `judge.mts`,
   `judge-sweep.mjs`, `level-coverage.mjs` and the audit driver).
   DeepSeek reads `DEEPSEEK_API_KEY` directly from the configured environment or
-  the app repo's `.env`, located by `tools/paths.mjs`; Sonnet is a fresh headless
-  `claude -p` process in an empty temporary work directory, with
-  `--no-session-persistence`, every core tool denied, and a transport-level
-  `--append-system-prompt` JSON constraint that is the exact analogue of the
-  DeepSeek lane's `response_format: json_object`. The frozen judge prompt stays
-  byte-identical across lanes: that constraint is lane configuration and says
-  nothing about the mathematics. They receive the
+  the app repo's `.env`, located by `tools/paths.mjs`; Terra is a fresh ephemeral
+  Codex process in an empty temporary working directory, with process-level
+  read-only sandboxing, `xhigh` reasoning, and an explicit 1,000,000-token
+  context window. The frozen judge prompt stays byte-identical across lanes.
+  They receive the
   same hash-attested frozen prompt and must read proofs and dependencies as
   adversarial refuters.
-  **The measured record this switch overrides** (frontiers 6–9, waves 0–1,
-  computed from the adjudication ledgers): Terra 94.4% precision over 1,036
-  adjudicated rejections, DeepSeek 91.1% over 618, retired Sonnet 5 60.0% over
-  35 — with Sonnet's dominant failure being `reject` recorded while its own
-  reason text concluded *keep*, i.e. verdict extraction rather than reasoning,
-  which the JSON constraint above was built to fix and which postdates most of
-  that sample. Re-measure Sonnet's precision at the next step-10/A10 comparison
-  before treating the lane as settled.
+  Historical rows from retired second lanes remain append-only evidence; they
+  never satisfy current Terra coverage merely because the context is otherwise
+  familiar. Compare current DeepSeek and Terra findings at step 10/A10.
   `tools/judge-sweep.mjs` keeps their calls independent in file-backed,
   cross-process model pools: each lane has a cap of 16 concurrent calls
   (owner, 2026-08-05, lowering DeepSeek from 24). Each model moves to its next item when one of
@@ -211,10 +201,9 @@ banner; the public sees only `published`.
   combined). DeepSeek's cap was raised from 16 to 24 (owner, 2026-08-03) because
   its latency, not the second lane's, gates every sweep, and **lowered back to 16
   (owner, 2026-08-05)** for a reason latency does not see: every lane call is its
-  own node+tsx process, and under `deepseek+sonnet` the other lane's 16 calls are
-  16 full `claude -p` processes. Wave 4 measured the sweep at 3.9 GB with a 4.6 GB
+  own node+tsx process. Wave 4 measured the sweep at 3.9 GB with a 4.6 GB
   peak on a 7.8 GB host — past the unit's `MemoryHigh=4G`, closing on
-  `MemoryMax=5G`. Keep the Claude lane at 16 too: the retired Opus lane refused
+  `MemoryMax=5G`. Keep the Terra lane at 16 too: a retired second lane refused
   303 of 382 wave-0 calls at that same concurrency, and a capacity refusal —
   whether from a subscription or from the kernel — is a null verdict, not a
   verdict.
@@ -287,7 +276,7 @@ banner; the public sees only `published`.
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every future
   Alpha-n audit, Alpha dispatches read-only proof-refuter subagents. They use
-  the same skeptical standard as the DeepSeek V4 Pro/Claude Sonnet 5 judges: read each
+  the same skeptical standard as the DeepSeek V4 Pro/GPT 5.6 Terra judges: read each
   proof step and cited dependency as an adversarial refuter, report only a
   concrete false claim, unlicensed inference, missing hypothesis, or inaccurate
   citation, and inspect the supplied dependency before alleging it is too weak.
@@ -314,32 +303,30 @@ banner; the public sees only `published`.
   failed to surface; a recoverable restatement of established mathematics is
   `ai-altered`, and an undecidable case escalates to Alpha), uncertainty never
   falls toward a sourced label, and the sole URL waiver is the Alpha-concurred
-  `established-knowledge` evidence class; (2) **the audit lineup is all-Claude
-  plus DeepSeek as of 2026-08-05 (owner); GPT 5.6 Sol is no longer used
-  anywhere in the audit.** Audit-Beta is **`claude-opus-5` at `xhigh`**, audit
-  Alpha is **`claude-opus-5`** (owner, 2026-08-03), the certifier/independent
-  reader is **`claude-sonnet-5` at `xhigh`, read-only**, and proof-refuters are
-  **DeepSeek V4 Pro at `max`, read-only**. The refuter's routing to DeepSeek
-  rather than Sonnet is load-bearing: with Beta, Alpha and the certifier all
-  Claude, it is the only cross-family reader left on the audit side, and the
-  no-self-certification rule depends on it. The certifier stays agentic because
+  `established-knowledge` evidence class; (2) **the audit lineup is GPT plus
+  DeepSeek as of 2026-08-08 (owner).** Audit-Beta and Alpha are **GPT 5.6 Sol
+  at `xhigh` with a 1,000,000-token context window**; the certifier/independent
+  reader is **GPT 5.6 Terra at `xhigh` with a 1,000,000-token context window,
+  read-only**; and proof-refuters are **DeepSeek V4 Pro at `max`, read-only**.
+  The refuter's routing to DeepSeek is load-bearing: it is the only cross-family
+  reader on the audit side. The certifier stays agentic because
   it must fetch the source backing a repair; the DeepSeek lane is tool-less, so
   Alpha assembles a refuter's context into its `--task` file and `dispatch.mjs`
   refuses a refuter dispatched without one. Read-only is enforced per runner —
-  `--sandbox read-only` on codex, a default-deny `--allowed-tools` allowlist on
-  claude, and tool-lessness on deepseek — after a 2026-08-05 probe showed a
-  deny-list-only claude lane escaping to a subagent and writing the file it was
-  asked to write. This changes the AUDIT only; the build workflow of
-  `LEVELS.md` stays GPT 5.6 Sol under the dispatch default above until the
-  owner says otherwise. No injection test is required, because that bar
+  `--sandbox read-only` on Codex and tool-lessness on DeepSeek. No injection
+  test is required, because that bar
   governs judge lanes rather than adjudicators.
   Alpha must first recover the durable prior-session audit record; paired
-  judges are DeepSeek V4 Pro plus fresh Claude Sonnet 5 selected by env
-  `JUDGE_LINEUP=deepseek+sonnet` (owner, 2026-08-04), with the build's same independent 16+16
-  concurrent pools; (3) the published-item repair delegation extends to
+  judges are DeepSeek V4 Pro plus GPT 5.6 Terra selected by env
+  `JUDGE_LINEUP=deepseek+terra` (owner, 2026-08-08), with the build's same independent 16+16
+  concurrent pools. **Published-audit A7 is an exception to the build's initial
+  whole-level Step-7 sweep** (owner clarification 2026-08-08): A2/A6 already
+  read the entire audit wave, so A7 rejudges only the exact A4/A6 repair ids in
+  `wave<k>-rejudge-targets.json`; provenance-only retags are not judge targets.
+  The same targeted rule applies to new A8 repairs. (3) the published-item repair delegation extends to
   citation-precision repairs, provenance retags, and debatable restatements
   with Alpha as final adjudicator — deletions, id changes, and reading-order
-  changes remain owner-only. At audit A8, exactly as at build Step 8, Alpha
+  changes remain owner-only. At audit A7/A8, exactly as at build Step 8, Alpha
   adjudicates the rejection from disk, deletes a stale pass after a material
   rewrite, and re-runs both judges **only on what changed**. A
   public-interface repair also repeats impact closure and refreshes a
@@ -384,7 +371,7 @@ banner; the public sees only `published`.
 - Generation for this library NEVER goes through the public billed pipelines.
   Current session route: GPT 5.6 Sol authoring, Beta, and Alpha audit through
   the Codex subscription plan, all at `xhigh` with a 1,000,000-token context
-  window; direct DeepSeek judging plus fresh Claude Sonnet 5 judges through the
+  window; direct DeepSeek judging plus fresh GPT 5.6 Terra judges through the
   Codex subscription. Do not wire a subscription account into the worker service.
 - Mathematical content requires the step-6 Alpha/Beta audit before publish, even
   when judged.
@@ -511,7 +498,7 @@ banner; the public sees only `published`.
   requires an Alpha disposition before the item can continue. After Step 7,
   `level-coverage.mjs --verify-current-context` is the hard receipt gate: every
   scoped item needs provenance, every proof-bearing item needs a merged contract,
-  and both DeepSeek/Sonnet lanes need current verdicts — cast either against the
+  and both DeepSeek/Terra lanes need current verdicts — cast either against the
   current frozen pair context, or against byte-identical text of that item
   (owner, 2026-08-06). Repairing one item moves the whole A/B pair's context
   hash, so the strict reading forced a rejudge of every untouched sibling: wave 5

@@ -4,6 +4,9 @@ kind: example
 title: "Two continuous maps $\\mathbb{R} \\to \\mathbb{R}$ agreeing at every rational are equal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal,
        lem-rat-embeds-dense, def-dense-top, def-hausdorff-space,
        lem-real-line-is-a-metric-space, def-metrizable-space, def-continuity-real,
@@ -32,8 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dense_set"
     - title: "Continuous function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuous_function"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "General Topology Notes (UC Riverside)"
+      url: "https://math.ucr.edu/~res/math205A-2014/gentop-notes.pdf"
 pipeline_run: null
 ---
 

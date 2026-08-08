@@ -4,6 +4,9 @@ kind: lemma
 title: "In a locally compact Hausdorff space every open set containing a point contains an open set containing it whose closure is compact and still inside; such a space is regular"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-locally-compact-space, def-compact-space,
        thm-closed-subspace-of-a-compact-space-is-compact,
        thm-compact-subset-of-a-hausdorff-space-is-closed,
@@ -36,8 +39,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Locally_compact_space"
     - title: "Regular space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Regular_space"
-    - title: "J. Munkres, Topology, 2nd ed., §29"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "B. McKay, Topology Lecture Notes"
+      url: "https://ben-mckay.github.io/benmckay.github.io/files/topology-lecture-notes.pdf"
 pipeline_run: null
 ---
 

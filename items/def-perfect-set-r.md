@@ -4,6 +4,9 @@ kind: definition
 title: "Perfect subset of $\\mathbb{R}$: closed with no isolated points"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-limit-point-r, def-open-and-closed-in-r, thm-closure-characterisations-r]
 justified_by: []
 forward_refs: [cex-closed-set-with-an-isolated-point-is-not-perfect, ex-closed-interval-is-perfect]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "Isolated point (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Isolated_point"
+    - title: "A. Erdman, Companion to Real Analysis"
+      url: "https://web.pdx.edu/~erdman/CRA/COMPANION_ANALYSIS_pdf.pdf"
 pipeline_run: null
 ---
 

@@ -4,18 +4,22 @@ kind: corollary
 title: "$\\mathbb{R}((t^{-1}))$ has the nested interval property for lengths tending to $0$"
 status: published
 origin: session
-deps: [def-sequences-in-an-ordered-field, thm-laurent-cauchy-complete, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-formal-laurent-series, def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-add-order, thm-induction-principle, def-nat-order, def-natural-numbers]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-sequences-in-an-ordered-field, thm-laurent-cauchy-complete, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-formal-laurent-series, def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-add-order, thm-induction-principle, def-nat-order, thm-nat-linear-order, def-natural-numbers]
 aliases: []
 landmark: true
 short: "shrinking nested intervals in $K$"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Nested_intervals"
     - title: "Cauchy sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
+    - title: "Cantor theorem (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Cantor_theorem"
+    - title: "Cauchy sequences in ordered fields (University of Tennessee notes)"
+      url: "https://web.math.utk.edu/~freire/teaching/m300f12/m300s12handout7.pdf"
 pipeline_run: null
 ---
 
@@ -55,7 +63,7 @@ without the hypothesis.
 
 [L4] $|z| \ge 0$, $|z| = 0$ only for $z = 0$, and $|z|$ equals $z$ or $-z$; so $|z| = z$ when $z \ge 0$ ([[lem-of-abs-value]], [[def-abs-value]]).
 
-[L5] The order on $\mathbb{N}$ is total and induction is available ([[def-nat-order]], [[def-natural-numbers]], [[thm-induction-principle]]).
+[L5] The order on $\mathbb{N}$ is total ([[thm-nat-linear-order]], [[def-nat-order]]) and induction is available ([[thm-induction-principle]], [[def-natural-numbers]]).
 
 ## Proof
 
@@ -79,25 +87,8 @@ without the hypothesis.
 
 ## Remarks
 
-- **This is the shrinking form, and the restriction is real.** The unrestricted
-  nested interval property — every nested sequence of nonempty closed intervals
-  meets — is **false** in $K$, and
-  [[cex-laurent-nested-intervals-empty]] exhibits a nested sequence with empty
-  intersection. So the hypothesis here is not a convenience of the proof, and no
-  item on this page may be cited for the unrestricted form.
+- **This is the shrinking form, and the restriction is real.** The unrestricted nested interval property — every nested sequence of nonempty closed intervals meets — is **false** in $K$, and [[cex-laurent-nested-intervals-empty]] exhibits a nested sequence with empty intersection. So the hypothesis here is not a convenience of the proof, and no item on this page may be cited for the unrestricted form.
 
-- **A trap in the hypothesis: "lengths $2/n$" does not mean shrinking.** The
-  condition is that the lengths tend to $0$ *in the order of $K$*, tested
-  against every positive $\varepsilon \in K$, not merely against positive real
-  constants. A nested sequence whose $n$-th length is the constant series
-  $\iota(2/(n+1))$ does **not** satisfy it: since $\iota(c)$ takes the nonzero
-  value $c$ at index $0$, clause 4 of [[lem-laurent-non-archimedean]] forbids
-  $|\iota(c)| < t^{-1}$, so no such length ever gets below $\varepsilon =
-  t^{-1}$. Real-indexed shrinking is strictly weaker than shrinking in $K$, and
-  a proof that assumed the former would be proving a different theorem.
+- **A trap in the hypothesis: "lengths $2/n$" does not mean shrinking.** The condition is that the lengths tend to $0$ *in the order of $K$*, tested against every positive $\varepsilon \in K$, not merely against positive real constants. A nested sequence whose $n$-th length is the constant series $\iota(2/(n+1))$ does **not** satisfy it: since $\iota(c)$ takes the nonzero value $c$ at index $0$, clause 4 of [[lem-laurent-non-archimedean]] forbids $|\iota(c)| < t^{-1}$, so no such length ever gets below $\varepsilon = t^{-1}$. Real-indexed shrinking is strictly weaker than shrinking in $K$, and a proof that assumed the former would be proving a different theorem.
 
-- **Where completeness enters.** Exactly once, at [step 4.1]. Everything before
-  it is monotonicity bookkeeping valid in any ordered field, and everything
-  after it uses only the order and the absolute value. That is why the corollary
-  is a corollary of [[thm-laurent-cauchy-complete]] and not an independent
-  argument about series.
+- **Where completeness enters.** Exactly once, at [step 4.1]. Everything before it is monotonicity bookkeeping valid in any ordered field, and everything after it uses only the order and the absolute value. That is why the corollary is a corollary of [[thm-laurent-cauchy-complete]] and not an independent argument about series.

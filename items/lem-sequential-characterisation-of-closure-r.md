@@ -4,6 +4,9 @@ kind: lemma
 title: "A point lies in the closure of $A \\subseteq \\mathbb{R}$ iff some sequence in $A$ converges to it, so a subset of $\\mathbb{R}$ is closed iff it is sequentially closed"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-closure-characterisations-r, def-limit-point-r, def-real-limit, def-sequence, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, def-countable-choice, def-neighbourhood-r, def-interior-closure-boundary-r, def-open-and-closed-in-r]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

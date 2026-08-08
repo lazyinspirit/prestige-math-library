@@ -4,6 +4,9 @@ kind: theorem
 title: "A space is Hausdorff if and only if its diagonal is closed in the square carrying the product topology"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-the-diagonal-of-a-space, def-hausdorff-space, def-product-topology,
        def-topology-basis-subbasis, thm-closure-characterisation-top,
        def-interior-closure-boundary-top, def-topological-space]
@@ -31,8 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "Product topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Product_topology"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Topology, Lemma 5.3 (Tag 08ZD)"
+      url: "https://stacks.math.columbia.edu/tag/08ZD"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Sequences, convergence, Cauchyness, monotonicity, boundedness and closed intervals in an arbitrary ordered field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-natural-numbers, def-nat-order, def-sequence, def-real-limit, def-monotone-sequence, def-interval, def-subsequential-limit]
 aliases: []
 landmark: false
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Cauchy sequences in ordered fields (University of Tennessee notes)"
+      url: "https://web.math.utk.edu/~freire/teaching/m300f12/m300s12handout7.pdf"
 pipeline_run: null
 ---
 

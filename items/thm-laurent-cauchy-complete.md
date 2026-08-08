@@ -4,18 +4,22 @@ kind: theorem
 title: "Every Cauchy sequence in $\\mathbb{R}((t^{-1}))$ converges: $K$ is sequentially Cauchy complete"
 status: published
 origin: session
-deps: [def-formal-laurent-series, lem-laurent-series-ring, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-sequences-in-an-ordered-field, def-ordered-field, def-abs-value, thm-well-ordering-principle, thm-induction-principle, def-natural-numbers, def-nat-order, lem-nat-embeds-int]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-formal-laurent-series, lem-laurent-series-ring, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-sequences-in-an-ordered-field, def-ordered-field, def-abs-value, thm-well-ordering-principle, thm-induction-principle, def-natural-numbers, def-nat-order, thm-nat-linear-order, lem-nat-embeds-int]
 aliases: []
 landmark: true
 short: "$K$ is Cauchy complete"
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,6 +29,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
     - title: "Complete field (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Complete_field"
+    - title: "B. Sambale, An invitation to formal power series"
+      url: "https://link.springer.com/article/10.1365/s13291-022-00256-6"
+    - title: "Laurent series (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Laurent_series"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 
@@ -79,7 +89,7 @@ threshold $k = 0$, which already pins down every negative index at once.
 
 [L5] Every nonempty subset of $\mathbb{N}$ has a least element ([[thm-well-ordering-principle]]).
 
-[L6] The order on $\mathbb{N}$ is total, induction is available, and every integer $\ge 0$ is the image of a unique natural number, so a natural number may be used as an index in $\mathbb{Z}$ ([[def-nat-order]], [[def-natural-numbers]], [[thm-induction-principle]], [[lem-nat-embeds-int]]).
+[L6] The order on $\mathbb{N}$ is total ([[thm-nat-linear-order]], [[def-nat-order]]), induction is available ([[thm-induction-principle]], [[def-natural-numbers]]), and every integer $\ge 0$ is the image of a unique natural number, so a natural number may be used as an index in $\mathbb{Z}$ ([[lem-nat-embeds-int]]).
 
 ## Proof
 
@@ -105,34 +115,10 @@ threshold $k = 0$, which already pins down every negative index at once.
 
 ## Remarks
 
-- **What makes the argument work, in one sentence.** The value group of $K$ is
-  $\mathbb{Z}$, whose cofinality is countable, so the continuum of thresholds
-  $\varepsilon > 0$ in the Cauchy condition collapses to the countable family
-  $t^{-k}$, $k \in \mathbb{N}$ ([[lem-laurent-non-archimedean]], clause 3), and a
-  sequence indexed by $\mathbb{N}$ can meet all of them. A proof that skipped
-  this step would be proving nothing: it is exactly the point at which the
-  countability of the index set $\mathbb{N}$ is matched to the structure of the
-  field.
+- **What makes the argument work, in one sentence.** The value group of $K$ is $\mathbb{Z}$, whose cofinality is countable, so the continuum of thresholds $\varepsilon > 0$ in the Cauchy condition collapses to the countable family $t^{-k}$, $k \in \mathbb{N}$ ([[lem-laurent-non-archimedean]], clause 3), and a sequence indexed by $\mathbb{N}$ can meet all of them. A proof that skipped this step would be proving nothing: it is exactly the point at which the countability of the index set $\mathbb{N}$ is matched to the structure of the field.
 
-- **Support-boundedness of the limit is a separate obligation, and it is
-  discharged from a single threshold.** Knowing that each coefficient
-  $f^{(n)}(j)$ is eventually constant gives a function $\mathbb{Z} \to
-  \mathbb{R}$ and nothing more; there is no reason *a priori* why its support
-  should be bounded below. What supplies that is [step 3.2]: the threshold
-  $k = 0$ freezes *all* indices $j \le 0$ simultaneously from the single stage
-  $N_0$ onward, so $L$ agrees with the one series $f^{(N_0)}$ on the whole
-  negative half-line and inherits its lower bound.
+- **Support-boundedness of the limit is a separate obligation, and it is discharged from a single threshold.** Knowing that each coefficient $f^{(n)}(j)$ is eventually constant gives a function $\mathbb{Z} \to \mathbb{R}$ and nothing more; there is no reason *a priori* why its support should be bounded below. What supplies that is [step 3.2]: the threshold $k = 0$ freezes *all* indices $j \le 0$ simultaneously from the single stage $N_0$ onward, so $L$ agrees with the one series $f^{(N_0)}$ on the whole negative half-line and inherits its lower bound.
 
-- **No choice is used.** The stage $N_k$ is not chosen: it is defined as the
-  least element of $M_k$, which exists by the well-ordering principle
-  ([[thm-well-ordering-principle]]). This matters because the construction makes
-  countably many selections, and a version of it that said "pick some $N_k$"
-  would be an appeal to countable choice for no reason.
+- **No choice is used.** The stage $N_k$ is not chosen: it is defined as the least element of $M_k$, which exists by the well-ordering principle ([[thm-well-ordering-principle]]). This matters because the construction makes countably many selections, and a version of it that said "pick some $N_k$" would be an appeal to countable choice for no reason.
 
-- **This is Cauchy completeness and nothing more.** $K$ is sequentially Cauchy
-  complete and at the same time lacks the least-upper-bound property
-  ([[cor-laurent-not-lub-complete]]); the two are not the same condition, and in
-  a non-Archimedean field they come apart. Nor does this theorem give the
-  unrestricted nested interval property: see [[cor-laurent-nested-intervals]]
-  for what it does give, and [[cex-laurent-nested-intervals-empty]] for what it
-  does not.
+- **This is Cauchy completeness and nothing more.** $K$ is sequentially Cauchy complete and at the same time lacks the least-upper-bound property ([[cor-laurent-not-lub-complete]]); the two are not the same condition, and in a non-Archimedean field they come apart. Nor does this theorem give the unrestricted nested interval property: see [[cor-laurent-nested-intervals]] for what it does give, and [[cex-laurent-nested-intervals-empty]] for what it does not.

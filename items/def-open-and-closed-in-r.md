@@ -4,6 +4,9 @@ kind: definition
 title: "Open subset of $\\mathbb{R}$ (every point has a neighbourhood inside it), closed subset (complement open), and clopen"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-neighbourhood-r, def-interval, def-complete-ordered-field, def-ordered-field, def-real-order, lem-finite-set-has-max, def-max-min]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

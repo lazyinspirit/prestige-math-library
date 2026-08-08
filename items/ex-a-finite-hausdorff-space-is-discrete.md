@@ -4,6 +4,9 @@ kind: example
 title: "A finite Hausdorff space is discrete, and its diagonal is closed for the trivial reason that every subset of the square is"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-hausdorff-space, thm-t1-iff-singletons-are-closed, def-t0-and-t1-spaces,
        lem-urysohn-sits-between-hausdorff-and-regular-plus-t1, def-standard-topologies,
@@ -33,8 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Discrete_space"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "J. Munkres, Topology, 2nd ed., §17"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Topological Spaces lecture notes (University of Cambridge)"
+      url: "https://www.dpmms.cam.ac.uk/~or257/teaching/notes/TopSp.pdf"
 pipeline_run: null
 ---
 

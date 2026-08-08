@@ -4,6 +4,9 @@ kind: definition
 title: "Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-neighbourhood-r, def-open-and-closed-in-r, def-interior-closure-boundary-r]
 justified_by: []
 aliases: [def-accumulation-point-r, def-derived-set-r, def-dense-in-r]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dense_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Def. 2.18)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

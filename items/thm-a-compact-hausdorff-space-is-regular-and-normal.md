@@ -4,6 +4,9 @@ kind: theorem
 title: "A compact Hausdorff space is regular and normal, hence $T_3$ and $T_4$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-compact-subset-of-a-hausdorff-space-is-closed, def-compact-space,
        thm-closed-subspace-of-a-compact-space-is-compact, def-regular-and-t3-spaces,
        def-normal-and-t4-spaces, def-t0-and-t1-spaces, def-hausdorff-space,
@@ -34,8 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Compact_space"
     - title: "Separation axiom (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Separation_axiom"
-    - title: "J. Munkres, Topology, 2nd ed., §32"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "A. Hatcher, Topology Notes"
+      url: "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf"
 pipeline_run: null
 ---
 

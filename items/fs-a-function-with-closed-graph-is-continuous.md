@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every function between topological spaces whose graph is closed in the product is continuous"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain,
        def-product-topology, def-topology-basis-subbasis, def-metrizable-space,
        lem-real-line-is-a-metric-space, def-continuity-real,
@@ -34,8 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_graph_theorem"
     - title: "Compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Compact_space"
-    - title: "L. Steen and J. Seebach, Counterexamples in Topology"
-      url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "Analysis 3103, Handout 7 (UCL)"
+      url: "https://www.homepages.ucl.ac.uk/~ucahad0/2010/3103_handout_7.pdf"
 pipeline_run: null
 ---
 

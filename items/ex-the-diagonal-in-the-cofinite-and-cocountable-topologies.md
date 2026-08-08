@@ -4,6 +4,9 @@ kind: example
 title: "The cofinite topology on an infinite set, and the cocountable topology on $\\mathbb{R}$, are $T_1$ with a diagonal whose closure is the whole square; on a countably infinite set the cocountable topology is discrete instead"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-standard-topologies, def-t0-and-t1-spaces, thm-t1-iff-singletons-are-closed,
        def-product-topology, def-topology-basis-subbasis, def-hausdorff-space,
@@ -35,8 +38,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cocountable_topology"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "L. Steen and J. Seebach, Counterexamples in Topology"
-      url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "Topology review notes (University of Toronto)"
+      url: "https://www.math.toronto.edu/~alfonso/MC/topologyMC14_V2.pdf"
+    - title: "Topological Spaces lecture notes (University of Cambridge)"
+      url: "https://www.dpmms.cam.ac.uk/~or257/teaching/notes/TopSp.pdf"
 pipeline_run: null
 ---
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-// tsx-run.mjs — run one of this repo's .mts tools with the app repo's tsx loader.
+// tsx-run.mjs — run one of this repo's .mts tools with an available TS loader.
 //
 //   node tools/tsx-run.mjs tools/precheck.mts [item.md ...]
 //   node tools/tsx-run.mjs tools/judge.mts items/<id>.md --parallel
 //
 // This replaces the hardcoded `node --import /root/Projects/prestige-intelligence/
 // worker/node_modules/tsx/dist/loader.mjs <tool>` form that every doc and brief
-// used to carry. The loader path is resolved at run time (tools/paths.mjs), so a
-// checkout under a different home works without editing anything, and a missing
-// loader reports the remedy instead of a module-not-found stack.
+// used to carry. The loader path is resolved at run time (tools/paths.mjs): use
+// the app checkout's tsx when installed, otherwise use the repository's minimal
+// hook with an installed global TypeScript runtime.
 
 import { spawnSync } from 'node:child_process';
 import { tsxLoader } from './paths.mjs';

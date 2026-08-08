@@ -4,6 +4,9 @@ kind: theorem
 title: "If each $y_j$ is a subsequential limit of $(x_k)$ and $y_j \\to y \\in \\mathbb{R}$, then $y$ is a subsequential limit of $(x_k)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-subsequential-limit, def-real-limit, def-sequence, thm-recursion, thm-well-ordering-principle, lem-index-map-grows, lem-of-triangle-inequality, lem-of-abs-value, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "D. Auroux, Math 112 notes, 5 March 2019"
+      url: "https://people.math.harvard.edu/~auroux/112s19/Notes_Math_112_march5.pdf"
 pipeline_run: null
 ---
 

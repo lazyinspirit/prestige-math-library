@@ -4,6 +4,9 @@ kind: lemma
 title: "For every $p > 0$ and every positive rational $\\alpha$, $n^{\\alpha}/(1+p)^n \\to 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-integer-power, lem-power-laws, lem-power-monotone, lem-bernoulli-inequality, thm-nth-roots-exist, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-sign-rules, lem-of-add-order, lem-of-abs-value, prop-of-multiply-inequalities, def-real-limit, def-sequence, def-nat-order, thm-nat-linear-order, def-ordered-field]
 justified_by: []
 forward_refs: [ex-standard-limits-worked]

@@ -1,0 +1,2471 @@
+{
+  "version": 1,
+  "level": "audit-wave6-real-analysis-laurent",
+  "scope": [
+    "lem-laurent-series-ring",
+    "lem-laurent-valuation",
+    "thm-laurent-series-field",
+    "thm-laurent-ordered-field",
+    "lem-laurent-non-archimedean",
+    "cor-laurent-not-lub-complete",
+    "thm-laurent-cauchy-complete",
+    "cor-laurent-nested-intervals",
+    "cex-laurent-nested-intervals-empty"
+  ],
+  "contracts": {
+    "lem-laurent-series-ring": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.3",
+            "3.5",
+            "3.6",
+            "3.7",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-int-order",
+          "source_section": "Definition",
+          "quote": "For integers $x = [(a,b)]$ and $y = [(c,d)]$ ([[def-integers]]) define\n\n$$x \\le y \\iff a + d \\le b + c \\quad \\text{in } \\mathbb{N}.$$\n\nWrite $x < y$ when $x \\le y$ and $x \\ne y$. An integer $x$ is **positive**\nwhen $0 < x$; on representatives, $0 < [(a,b)]$ exactly when $b < a$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-int-operations",
+          "source_section": "Definition",
+          "quote": "On $\\mathbb{Z}$ ([[def-integers]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(a+c,\\; b+d)],$$\n$$[(a,b)] \\cdot [(c,d)] := [(ac+bd,\\; ad+bc)],$$\n$$-[(a,b)] := [(b,a)], \\qquad 0 := [(0,0)], \\qquad 1 := [(1,0)].$$\n\nThese do not depend on the chosen representatives\n([[lem-int-add-well-defined]], [[lem-int-mul-well-defined]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.7",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.7",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Let $S \\subseteq \\mathbb{Z}$ be nonempty with $s \\ge b$ for all $s \\in S$. Every element of $T := \\{\\, s - b : s \\in S \\,\\}$ is a nonnegative integer, so by [L4] $T = \\{\\, \\varepsilon(a) : a \\in A \\,\\}$ for a nonempty $A \\subseteq \\mathbb{N}$; by [L3] $A$ has a least element $a_0$, and since $\\varepsilon$ preserves order and $x \\mapsto x + b$ preserves order, $\\varepsilon(a_0) + b$ is an element of $S$ that is $\\le$ every element of $S$.",
+          "step": "1.1",
+          "inputs": [
+            "L4",
+            "L3",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Fix $k \\in \\mathbb{Z}$ and let $(i,j) \\in S_k$. Then $f(i) \\ne 0$ and $g(j) \\ne 0$, so $i \\ge m$ and $j \\ge n$; from $i + j = k$ and $j \\ge n$ we get $i = k - j \\le k - n$. Hence $m \\le i \\le k - n$, and $j = k - i$ is determined by $i$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The integers $i$ with $m \\le i \\le k - n$ are in order-preserving bijection with the naturals $a$ satisfying $\\varepsilon(a) \\le k - n - m$ by [L4], and there are finitely many of these, none at all when $k - n - m < 0$; so $S_k$ is a finite set by [step 1.2], it is empty whenever $k < m + n$, and therefore $(fg)(k)$ is a finite sum of reals which is $0$ whenever $k < m + n$.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L2",
+            "L5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "$(f+g)(k) = f(k) + g(k) = 0$ for every $k < \\min(m,n)$ and $(-f)(k) = -f(k) = 0$ for every $k < m$, so $f + g$ and $-f$ have support bounded below; and $(fg)(k) = 0$ for every $k < m+n$ by [step 2.1], so $fg$ does too. All three therefore lie in $K$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "$(fg)(k) = \\sum_{i+j=k} f(i)g(j) = \\sum_{j+i=k} g(j)f(i) = (gf)(k)$, since the two sums have the same finite index set and their terms agree by commutativity of multiplication in $\\mathbb{R}$; so multiplication on $K$ is commutative.",
+          "step": "3.2",
+          "inputs": [
+            "L5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.3",
+          "claim": "For $f, g, h \\in K$ and $k \\in \\mathbb{Z}$, expanding both $((fg)h)(k)$ and $(f(gh))(k)$ by [L1] and [L5] gives the sum of $f(i)g(j)h(l)$ over the triples $(i,j,l)$ with $i + j + l = k$ and $f(i)g(j)h(l) \\ne 0$; that set is finite because the argument of [step 1.2] bounds $i$, $j$ and $l$ from below and hence, as in [step 2.1], from above as well. So multiplication on $K$ is associative.",
+          "step": "3.3",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.4",
+          "claim": "$(f(g+h))(k) = \\sum_{i+j=k} f(i)\\bigl(g(j) + h(j)\\bigr) = \\sum_{i+j=k} f(i)g(j) + \\sum_{i+j=k} f(i)h(j) = (fg)(k) + (fh)(k)$, all three sums being finite; so multiplication distributes over addition.",
+          "step": "3.4",
+          "inputs": [
+            "L5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.5",
+          "claim": "For $h \\in K$, $(t^{-a}h)(k) = \\sum_{i+j=k} t^{-a}(i)h(j)$ has at most one nonzero term, the one with $i = a$ and $j = k - a$, so $(t^{-a}h)(k) = h(k-a)$; taking $h = t^{-b}$ gives $(t^{-a}t^{-b})(k) = t^{-b}(k-a)$, which is $1$ when $k = a+b$ and $0$ otherwise, that is, $t^{-a}t^{-b} = t^{-(a+b)}$.",
+          "step": "3.5",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.6",
+          "claim": "$(\\iota(c)f)(k) = \\sum_{i+j=k} \\iota(c)(i) f(j)$ has at most one nonzero term, the one with $i = 0$ and $j = k$, so $(\\iota(c)f)(k) = c\\,f(k)$.",
+          "step": "3.6",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.7",
+          "claim": "$(f \\cdot 1_K)(k) = \\sum_{i+j=k} f(i) 1_K(j)$ has at most one nonzero term, the one with $j = 0$ and $i = k$, so $(f \\cdot 1_K)(k) = f(k)$ and $f \\cdot 1_K = f$; moreover $1_K(0) = 1 \\ne 0 = 0_K(0)$, so $1_K \\ne 0_K$.",
+          "step": "3.7",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Addition on $K$ is defined index by index, and $K$ is closed under it and under negation by [step 3.1]; so associativity, commutativity, the law $f + 0_K = f$ and the law $f + (-f) = 0_K$ each hold at every index by the corresponding law in $\\mathbb{R}$, and $(K, +, 0_K)$ is an abelian group.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "By [step 4.1] addition makes $K$ an abelian group, by [step 3.2], [step 3.3] and [step 3.7] multiplication is commutative and associative with identity $1_K \\ne 0_K$, and by [step 3.4] it distributes over addition; hence $K$ is a commutative ring with identity.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 3.2",
+            "step 3.3",
+            "step 3.7",
+            "step 3.4"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "Clause 1 is [step 2.1], clause 2 is [step 3.1] with [step 2.1], clause 3 is [step 5.1], clause 4 is [step 3.5] and [step 3.6], and clause 5 is [step 1.1] applied to $S = \\operatorname{supp} f$, which is nonempty when $f \\ne 0_K$ and bounded below because $f \\in K$.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 5.1",
+            "step 3.5",
+            "step 3.6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty convolution index set is handled explicitly at step 2.1, where it gives coefficient 0 below the product support bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero series is covered at steps 3.1, 3.7, and 4.1; closure, the identity distinction, and additive inverses are all checked coefficientwise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The singleton convolution case is the monomial calculation at step 3.5 and the identity calculation at step 3.7."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If either factor is zero, step 2.1 gives an empty nonzero-term set at every coefficient and step 3.1 retains the zero product in K."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower support endpoints m+n and min(m,n) are included correctly at steps 2.1 and 3.1; only indices strictly below them are forced to vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only nonempty selection is the least element at step 1.1, supplied by well-ordering after an explicit translation to N."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (13), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: The target handles all relevant boundary cases: empty convolution set gives coefficient 0 (step 2.1); zero series is covered by steps 3.1, 3.7, 4.1; identity and monomials are checked in steps 3.5, 3.7; the lower support endpoints m+n and min(m,n) are treated with strict inequality, so k = m+n is allowed to be nonzero; the least‑element proof uses only well… Checked surface: The title, the public statement (clauses 1‑5), every numbered proof step (1.1‑6.1), and the absence of Remarks were read. No remarks are present. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-lem-laurent-series-ring.result.json."
+      }
+    },
+    "lem-laurent-valuation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-laurent-series-ring",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be as in [[def-formal-laurent-series]], and let\n$f, g \\in K$, with $m, n \\in \\mathbb{Z}$ chosen so that $f(i) = 0$ for all\n$i < m$ and $g(j) = 0$ for all $j < n$. Then:\n\n1. **(Finiteness.)** For every $k \\in \\mathbb{Z}$ the set\n   $S_k := \\{\\, (i,j) \\in \\mathbb{Z} \\times \\mathbb{Z} : i + j = k,\\; f(i)g(j) \\ne 0 \\,\\}$\n   is finite, so $(fg)(k) = \\sum_{i+j=k} f(i)g(j)$ is a finite sum of reals; and\n   $S_k = \\varnothing$ whenever $k < m + n$.\n2. **(Closure.)** $f + g$, $-f$ and $fg$ lie in $K$, with $(f+g)(k) = 0$ for\n   $k < \\min(m,n)$ and $(fg)(k) = 0$ for $k < m + n$.\n3. **(Ring.)** $(K, +, \\cdot\\,, 0_K, 1_K)$ is a commutative ring with identity,\n   and $1_K \\ne 0_K$.\n4. **(Monomials and constants.)** $(t^{-a}h)(k) = h(k-a)$ for every $h \\in K$\n   and all $a, k \\in \\mathbb{Z}$; consequently $t^{-a} \\, t^{-b} = t^{-(a+b)}$\n   for all $a, b \\in \\mathbb{Z}$. Moreover $(\\iota(c)f)(k) = c\\, f(k)$ for all\n   $c \\in \\mathbb{R}$ and $k \\in \\mathbb{Z}$.\n5. **(Least element.)** Every nonempty $S \\subseteq \\mathbb{Z}$ that is bounded\n   below has a least element. In particular $\\operatorname{supp} f$ has a least\n   element whenever $f \\ne 0_K$, so the valuation $v(f)$ and the leading\n   coefficient $\\operatorname{lc}(f)$ of [[def-formal-laurent-series]] are\n   defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-int-order",
+          "source_section": "Definition",
+          "quote": "For integers $x = [(a,b)]$ and $y = [(c,d)]$ ([[def-integers]]) define\n\n$$x \\le y \\iff a + d \\le b + c \\quad \\text{in } \\mathbb{N}.$$\n\nWrite $x < y$ when $x \\le y$ and $x \\ne y$. An integer $x$ is **positive**\nwhen $0 < x$; on representatives, $0 < [(a,b)]$ exactly when $b < a$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.6"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [L1] $f$ vanishes at every index below $p$ and $g$ at every index below $q$, so by [L2] $(fg)(k) = 0$ for every $k < p + q$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "If $(i,j)$ satisfies $i + j = p+q$ and $f(i)g(j) \\ne 0$ then $i \\ge p$ and $j \\ge q$ by [L1], and $i + j = p + q$ then forces $i = p$ and $j = q$; hence $(fg)(p+q) = f(p)g(q) = \\operatorname{lc}(f)\\operatorname{lc}(g)$, which is nonzero by [L3].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "$(-f)(k) = -f(k)$ for every $k$, so $-f$ vanishes exactly where $f$ does; by [L1] and [L3] this gives $-f \\ne 0_K$, $v(-f) = p$ and $\\operatorname{lc}(-f) = -\\operatorname{lc}(f) \\ne 0$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L3",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1.4",
+          "claim": "Suppose $p < q$. For $k < p$ both $f(k) = 0$ and $g(k) = 0$, so $(f+g)(k) = 0$; and $g(p) = 0$ because $p < q$, so $(f+g)(p) = \\operatorname{lc}(f) \\ne 0$. By [L1], $f + g \\ne 0_K$ with $v(f+g) = p$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.",
+          "step": "1.4",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1.5",
+          "claim": "Suppose $p = q$ and $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$. For $k < p$ both terms vanish, so $(f+g)(k) = 0$; and $(f+g)(p) = \\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$. By [L1], $f+g \\ne 0_K$, $v(f+g) = p$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.",
+          "step": "1.5",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1.6",
+          "claim": "For $k < \\min\\{p,q\\}$ one has $f(k) = g(k) = 0$, hence $(f+g)(k) = 0$; so if $f + g \\ne 0_K$ then its valuation, being the least index at which it is nonzero, satisfies $v(f+g) \\ge \\min\\{p,q\\}$.",
+          "step": "1.6",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [step 1.1] $fg$ vanishes at every index below $p+q$ and by [step 1.2] it is nonzero at $p+q$; so by [L1] $fg \\ne 0_K$, $v(fg) = p + q$ and $\\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g)$. Since $f$ and $g$ were arbitrary nonzero elements, no product of nonzero elements of $K$ is zero.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Clause 1 is [step 2.1], clause 2 is [step 1.3], clause 3 is [step 1.4], clause 4 is [step 1.5] and clause 5 is [step 1.6].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "step 1.6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The valuation and leading-coefficient clauses assume both input series are nonzero, so their supports are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero is excluded where v is used, while possible cancellation f+g=0 is isolated explicitly in the hypothesis of clause 5 and at step 1.6."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the single leading index p+q, step 1.2 proves that exactly the pair (p,q) contributes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Complete leading-term cancellation at equal valuation is excluded in step 1.5 and handled by the general lower bound at step 1.6 when the sum remains nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 distinguish strict indices below p+q from the endpoint p+q itself."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is chosen; all leading indices are already supplied by the nonzero hypotheses and the definition of valuation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (9), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: The valuation is defined only for nonzero series; zero is excluded from every clause that mentions v or lc. The product's leading index p+q is exactly the sum of the valuations, and the only contributing term is (p,q) because any other pair would involve an index below the support lower bound. The sum cases are partitioned into v(f)<v(g) (the lower valuatio… Checked surface: The title, the public claim (Statement clauses 1–5), every numbered proof step (1.1–3.1), and the absence of Remarks were read and verified. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-lem-laurent-valuation.result.json."
+      }
+    },
+    "thm-laurent-series-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-laurent-series-ring",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be as in [[def-formal-laurent-series]], and let\n$f, g \\in K$, with $m, n \\in \\mathbb{Z}$ chosen so that $f(i) = 0$ for all\n$i < m$ and $g(j) = 0$ for all $j < n$. Then:\n\n1. **(Finiteness.)** For every $k \\in \\mathbb{Z}$ the set\n   $S_k := \\{\\, (i,j) \\in \\mathbb{Z} \\times \\mathbb{Z} : i + j = k,\\; f(i)g(j) \\ne 0 \\,\\}$\n   is finite, so $(fg)(k) = \\sum_{i+j=k} f(i)g(j)$ is a finite sum of reals; and\n   $S_k = \\varnothing$ whenever $k < m + n$.\n2. **(Closure.)** $f + g$, $-f$ and $fg$ lie in $K$, with $(f+g)(k) = 0$ for\n   $k < \\min(m,n)$ and $(fg)(k) = 0$ for $k < m + n$.\n3. **(Ring.)** $(K, +, \\cdot\\,, 0_K, 1_K)$ is a commutative ring with identity,\n   and $1_K \\ne 0_K$.\n4. **(Monomials and constants.)** $(t^{-a}h)(k) = h(k-a)$ for every $h \\in K$\n   and all $a, k \\in \\mathbb{Z}$; consequently $t^{-a} \\, t^{-b} = t^{-(a+b)}$\n   for all $a, b \\in \\mathbb{Z}$. Moreover $(\\iota(c)f)(k) = c\\, f(k)$ for all\n   $c \\in \\mathbb{R}$ and $k \\in \\mathbb{Z}$.\n5. **(Least element.)** Every nonempty $S \\subseteq \\mathbb{Z}$ that is bounded\n   below has a least element. In particular $\\operatorname{supp} f$ has a least\n   element whenever $f \\ne 0_K$, so the valuation $v(f)$ and the leading\n   coefficient $\\operatorname{lc}(f)$ of [[def-formal-laurent-series]] are\n   defined.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "6.1",
+            "7.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ with its valuation $v$ and leading coefficient\n$\\operatorname{lc}$ ([[def-formal-laurent-series]]), and let $f, g \\in K$ with\n$f \\ne 0_K$ and $g \\ne 0_K$. Then:\n\n1. **(Products.)** $fg \\ne 0_K$, and\n   $$v(fg) = v(f) + v(g), \\qquad \\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g).$$\n   In particular $K$ has no zero divisors.\n2. **(Negatives.)** $-f \\ne 0_K$, $v(-f) = v(f)$ and\n   $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$.\n3. **(Unequal valuations.)** If $v(f) < v(g)$ then $f + g \\ne 0_K$,\n   $v(f+g) = v(f)$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.\n4. **(Equal valuations, no cancellation.)** If $v(f) = v(g) = q$ and\n   $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$, then $f + g \\ne 0_K$,\n   $v(f+g) = q$ and\n   $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.\n5. **(Sums in general.)** If $f + g \\ne 0_K$ then\n   $v(f+g) \\ge \\min\\{v(f), v(g)\\}$.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "9.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Define $u : \\mathbb{Z} \\to \\mathbb{R}$ by $u(j) := -c^{-1} f(p + j)$ for $j \\ge 1$ and $u(j) := 0$ for $j \\le 0$. Then $u$ vanishes at every index $< 1$, so its support is bounded below and $u \\in K$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "By [L5] with $A = K$, $a = 1_K$ and $F(h) = hu$ there is a family $(u^{n})_{n \\in \\mathbb{N}}$ in $K$ with $u^{0} = 1_K$ and $u^{\\sigma(n)} = u^{n} u$.",
+          "step": "1.2",
+          "inputs": [
+            "L5",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every $k \\in \\mathbb{Z}$, $\\bigl(\\iota(c)\\,t^{-p}\\,(1_K - u)\\bigr)(k) = c\\,(1_K - u)(k - p)$ by [L2]; this is $0$ when $k < p$ because $1_K - u$ vanishes at every negative index, it is $c$ when $k = p$, and it is $c \\cdot \\bigl(-u(k-p)\\bigr) = c c^{-1} f(k) = f(k)$ when $k > p$. Comparing with $f(k) = 0$ for $k < p$ and $f(p) = c$, we get $f = \\iota(c)\\, t^{-p}\\,(1_K - u)$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "L4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "For every $n \\in \\mathbb{N}$, $u^{n}$ vanishes at every index $< n$: at $n = 0$ this says $1_K$ vanishes at every negative index, which holds by [L1]; and if $u^{n}$ vanishes at every index $< n$ then, since $u$ vanishes at every index $< 1$ by [step 1.1], the product $u^{\\sigma(n)} = u^{n}u$ vanishes at every index $< n + 1$ by [L2].",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Define $g : \\mathbb{Z} \\to \\mathbb{R}$ by $g(k) := \\sum_{n=0}^{k} (u^{n})(k)$ for $k \\ge 0$ and $g(k) := 0$ for $k < 0$; each value is a finite sum of reals, and $g$ vanishes at every index $< 0$, so $g \\in K$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Fix $k \\ge 1$. In $(ug)(k) = \\sum_{i+j=k} u(i)g(j)$ a term can be nonzero only when $i \\ge 1$ and $j \\ge 0$, hence only for $1 \\le i \\le k$ and $j = k - i$; so $(ug)(k) = \\sum_{i=1}^{k} u(i)\\, g(k-i) = \\sum_{i=1}^{k} u(i) \\sum_{n=0}^{k-i} (u^{n})(k-i)$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "For $k \\le 0$ one has $(ug)(k) = 0$, since $u$ vanishes at every index $< 1$ and $g$ at every index $< 0$, so every pair $(i,j)$ with $i + j = k$ has $u(i)g(j) = 0$.",
+          "step": "4.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "In the inner sum of [step 4.1] the terms with $k - i < n \\le k-1$ vanish by [step 2.2], so the inner sum may be extended to $n = 0, \\dots, k-1$ without changing its value; interchanging the two finite sums gives $(ug)(k) = \\sum_{n=0}^{k-1} \\sum_{i=1}^{k} u(i)\\,(u^{n})(k-i)$.",
+          "step": "5.1",
+          "inputs": [
+            "L4",
+            "step 4.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "For each $n$, $\\sum_{i=1}^{k} u(i)(u^{n})(k-i) = \\sum_{i+j=k} u(i)(u^{n})(j) = (u\\,u^{n})(k) = (u^{\\sigma(n)})(k)$, because a term of the full convolution can be nonzero only for $i \\ge 1$ and $j \\ge 0$; hence $(ug)(k) = \\sum_{n=0}^{k-1} (u^{\\sigma(n)})(k) = \\sum_{n=1}^{k} (u^{n})(k)$ for every $k \\ge 1$.",
+          "step": "6.1",
+          "inputs": [
+            "L2",
+            "step 1.2",
+            "step 2.2",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7.1",
+          "claim": "For $k \\ge 1$, $\\bigl((1_K - u)g\\bigr)(k) = g(k) - (ug)(k) = \\sum_{n=0}^{k}(u^{n})(k) - \\sum_{n=1}^{k}(u^{n})(k) = (u^{0})(k) = 1_K(k)$; for $k = 0$, $g(0) = (u^{0})(0) = 1$ and $(ug)(0) = 0$, so the value is $1 = 1_K(0)$; and for $k < 0$ both $g(k)$ and $(ug)(k)$ are $0$, as is $1_K(k)$. Hence $(1_K - u)g = 1_K$.",
+          "step": "7.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 3.1",
+            "step 4.2",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "step-8.1",
+          "claim": "Using [step 2.1], [L2] and $cc^{-1} = 1$, one computes $f \\cdot \\bigl(\\iota(c^{-1})\\,t^{p}\\,g\\bigr) = \\iota(c)\\iota(c^{-1})\\, t^{-p}t^{-(-p)}\\,(1_K - u)g = 1_K \\cdot 1_K \\cdot 1_K = 1_K$, so $\\iota(c^{-1}) t^{p} g \\in K$ is a multiplicative inverse of $f$.",
+          "step": "8.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "step 2.1",
+            "step 7.1"
+          ]
+        },
+        {
+          "id": "step-9.1",
+          "claim": "$K$ is a commutative ring with $1_K \\ne 0_K$ by [L2], its nonzero elements are closed under multiplication by [L3], and by [step 8.1] every nonzero element has an inverse; so $K$ satisfies the field axioms of [L7] and the construction is complete.",
+          "step": "9.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L7",
+            "step 8.1",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inverse construction is only for nonzero f, so its support and leading index are nonempty by the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero coefficient boundary for u and g is treated at steps 1.1, 3.1, 4.2, and 7.1; the theorem correctly does not invert 0_K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For f=1_K, the construction gives p=0, c=1, u=0 and g=1_K; steps 2.1 through 8.1 reduce to the identity calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate tail u=0 is admitted: step 2.2 makes all positive powers vanish and step 7.1 gives (1_K-u)g=1_K."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The split at k<0, k=0, and k>=1 is exhaustive and checked separately at steps 3.1, 4.1, 4.2, and 7.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The powers u^n are supplied uniquely by recursion at step 1.2, and all coefficient sums used to define g are explicit finite sums at step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (13), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: All required boundary cases are correctly treated. The zero element is not inverted, and the construction for nonzero f handles the degenerate case u=0 (where g=1_K) and the identity case f=1_K. The index splits at k<0, k=0, k≥1 are exhaustive and each branch is verified. The powers uⁿ are supplied uniquely by recursion, and every coefficient sum is an expl… Checked surface: The title, the public statement, every numbered proof step (1.1 through 9.1), the Scratch, and both Remarks were read and verified. No mathematical defect, over-assertion, or invalid inference was found. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-thm-laurent-series-field.result.json."
+      }
+    },
+    "thm-laurent-ordered-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-laurent-series-ring",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be as in [[def-formal-laurent-series]], and let\n$f, g \\in K$, with $m, n \\in \\mathbb{Z}$ chosen so that $f(i) = 0$ for all\n$i < m$ and $g(j) = 0$ for all $j < n$. Then:\n\n1. **(Finiteness.)** For every $k \\in \\mathbb{Z}$ the set\n   $S_k := \\{\\, (i,j) \\in \\mathbb{Z} \\times \\mathbb{Z} : i + j = k,\\; f(i)g(j) \\ne 0 \\,\\}$\n   is finite, so $(fg)(k) = \\sum_{i+j=k} f(i)g(j)$ is a finite sum of reals; and\n   $S_k = \\varnothing$ whenever $k < m + n$.\n2. **(Closure.)** $f + g$, $-f$ and $fg$ lie in $K$, with $(f+g)(k) = 0$ for\n   $k < \\min(m,n)$ and $(fg)(k) = 0$ for $k < m + n$.\n3. **(Ring.)** $(K, +, \\cdot\\,, 0_K, 1_K)$ is a commutative ring with identity,\n   and $1_K \\ne 0_K$.\n4. **(Monomials and constants.)** $(t^{-a}h)(k) = h(k-a)$ for every $h \\in K$\n   and all $a, k \\in \\mathbb{Z}$; consequently $t^{-a} \\, t^{-b} = t^{-(a+b)}$\n   for all $a, b \\in \\mathbb{Z}$. Moreover $(\\iota(c)f)(k) = c\\, f(k)$ for all\n   $c \\in \\mathbb{R}$ and $k \\in \\mathbb{Z}$.\n5. **(Least element.)** Every nonempty $S \\subseteq \\mathbb{Z}$ that is bounded\n   below has a least element. In particular $\\operatorname{supp} f$ has a least\n   element whenever $f \\ne 0_K$, so the valuation $v(f)$ and the leading\n   coefficient $\\operatorname{lc}(f)$ of [[def-formal-laurent-series]] are\n   defined.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ with its valuation $v$ and leading coefficient\n$\\operatorname{lc}$ ([[def-formal-laurent-series]]), and let $f, g \\in K$ with\n$f \\ne 0_K$ and $g \\ne 0_K$. Then:\n\n1. **(Products.)** $fg \\ne 0_K$, and\n   $$v(fg) = v(f) + v(g), \\qquad \\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g).$$\n   In particular $K$ has no zero divisors.\n2. **(Negatives.)** $-f \\ne 0_K$, $v(-f) = v(f)$ and\n   $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$.\n3. **(Unequal valuations.)** If $v(f) < v(g)$ then $f + g \\ne 0_K$,\n   $v(f+g) = v(f)$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.\n4. **(Equal valuations, no cancellation.)** If $v(f) = v(g) = q$ and\n   $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$, then $f + g \\ne 0_K$,\n   $v(f+g) = q$ and\n   $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.\n5. **(Sums in general.)** If $f + g \\ne 0_K$ then\n   $v(f+g) \\ge \\min\\{v(f), v(g)\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-laurent-series-field",
+          "source_section": "Statement",
+          "quote": "$K = \\mathbb{R}((t^{-1}))$ ([[def-formal-laurent-series]]) is a field\n([[def-field]]): it is a commutative ring with $1_K \\ne 0_K$, and every\n$f \\in K$ with $f \\ne 0_K$ has a multiplicative inverse in $K$.\n\nExplicitly, if $p = v(f)$ and $c = \\operatorname{lc}(f)$, then\n$f = \\iota(c)\\, t^{-p}\\,(1_K - u)$ for the element $u \\in K$ given by\n$u(j) = -c^{-1}f(p+j)$ for $j \\ge 1$ and $u(j) = 0$ for $j \\le 0$, and\n$f^{-1} = \\iota(c^{-1})\\, t^{p}\\, g$, where\n$g \\in K$ vanishes at every index $< 0$ and is given at $k \\ge 0$ by\n$g(k) = \\sum_{n=0}^{k} (u^{n})(k)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-archimedean-field",
+          "source_section": "Definition",
+          "quote": "For a natural number\n$n \\ge 1$, write $n \\cdot 1_F := \\underbrace{1_F + \\cdots + 1_F}_{n}$ for the\n$n$-fold sum of the multiplicative identity, and $0 \\cdot 1_F := 0$. These are\nthe **canonical natural numbers** of $F$.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Let $f \\in K$. If $f = 0_K$ then neither $f$ nor $-f = 0_K$ lies in $P$, since membership in $P$ requires being nonzero. If $f \\ne 0_K$ then $-f \\ne 0_K$ and $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$ by [L3], and by trichotomy in $\\mathbb{R}$ ([L6]) exactly one of $\\operatorname{lc}(f) > 0$ and $-\\operatorname{lc}(f) > 0$ holds. So for every $f$ exactly one of $f \\in P$, $f = 0_K$, $-f \\in P$ holds, which is (O1).",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L6",
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $f, g \\in P$. By [L3] $fg \\ne 0_K$ and $\\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g)$, a product of two positive reals, hence positive by [L6]; so $fg \\in P$.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "$\\iota(c) + \\iota(d) = \\iota(c+d)$ because addition is computed index by index, and $\\iota(c)\\iota(d) = \\iota(cd)$ because $(\\iota(c)\\iota(d))(k) = c\\,\\iota(d)(k)$ by [L2], which is $cd$ at $k = 0$ and $0$ elsewhere; also $\\iota(1) = 1_K$, and $\\iota$ is injective since $\\iota(c)(0) = c$.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Let $f, g \\in P$ and compare $v(f)$ with $v(g)$, which by [L9] are related in exactly one of three ways. If $v(f) < v(g)$ then by [L3] $f + g \\ne 0_K$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) > 0$; if $v(g) < v(f)$ the same argument with the roles exchanged applies; and if $v(f) = v(g)$ then $\\operatorname{lc}(f) + \\operatorname{lc}(g) > 0$ by [L6], in particular nonzero, so by [L3] $f+g \\ne 0_K$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g) > 0$. In every case $f + g \\in P$, which with [step 1.2] is (O2).",
+          "step": "2.1",
+          "inputs": [
+            "L9",
+            "L3",
+            "L6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "For $c \\ne 0$ the series $\\iota(c)$ is nonzero with $v(\\iota(c)) = 0$ and $\\operatorname{lc}(\\iota(c)) = c$, so $\\iota(c) \\in P$ exactly when $c > 0$; and $\\iota(0) = 0_K \\notin P$. With [step 1.3] this makes $\\iota$ an injective ring homomorphism carrying the positive reals onto the positive constants.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "For every natural $n$, $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$: at $n = 0$ both sides are $0_K$ by [L5] and [L1], and if the identity holds at $n$ then $(n+1)\\cdot 1_K = n \\cdot 1_K + 1_K = \\iota(n \\cdot 1_{\\mathbb{R}}) + \\iota(1) = \\iota(n \\cdot 1_{\\mathbb{R}} + 1) = \\iota((n+1)\\cdot 1_{\\mathbb{R}})$ by [step 1.3].",
+          "step": "2.3",
+          "inputs": [
+            "L5",
+            "L1",
+            "L8",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "By [step 1.1] and [step 2.1] the set $P$ satisfies (O1) and (O2), and $K$ is a field by [L4]; hence $(K,P)$ is an ordered field, in which $f < g$ means $g - f \\in P$, that is, $g - f \\ne 0_K$ and $\\operatorname{lc}(g-f) > 0$.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Let $f \\ne 0_K$. If $f \\in P$ then $f > 0_K$ by [step 3.1], so $|f| = f$ by [L7], and $\\operatorname{lc}(|f|) = \\operatorname{lc}(f) = \\lvert \\operatorname{lc}(f)\\rvert$ since $\\operatorname{lc}(f) > 0$. Otherwise $-f \\in P$ by [step 1.1], so $f < 0_K$ and $|f| = -f$, whence $|f| \\ne 0_K$, $v(|f|) = v(f)$ and $\\operatorname{lc}(|f|) = -\\operatorname{lc}(f) = \\lvert\\operatorname{lc}(f)\\rvert$, again positive. In both cases $v(|f|) = v(f)$ and $\\operatorname{lc}(|f|) = \\lvert\\operatorname{lc}(f)\\rvert > 0$.",
+          "step": "4.1",
+          "inputs": [
+            "L7",
+            "L3",
+            "step 3.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Clause 1 is [step 3.1], clause 2 is [step 4.1], and clause 3 is [step 2.2] with [step 2.3].",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The positive cone is a defined subset of the nonempty field K; the theorem is not an assertion about an empty carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats f=0_K separately and proves that neither sign lies in P; step 2.3 also checks the canonical natural n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 proves iota(1)=1_K and step 2.3 starts the canonical-natural induction at n=0 before passing to n+1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-valuation addition case, including possible cancellation, is separated at step 2.1; positivity prevents cancellation there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The sign boundary lc(f)=0 cannot occur for a nonzero f by the definition, and step 1.1 handles f=0_K independently."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary witness is chosen; trichotomy and the three exhaustive valuation cases drive steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (15), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: Zero element is explicitly separated in step 1.1 and the base case of step 2.3. The one/identity element is verified in steps 1.3 and 2.3. Degenerate equal‑valuation addition that would cancel cannot occur because $f,g\\in P$ forces $\\operatorname{lc}(f)+\\operatorname{lc}(g)>0$, so clause 4 of L3 applies and the sum remains in $P$. The empty carrier is not a… Checked surface: The title, the public statement (clauses 1‑3), every numbered proof step 1.1‑5.1, and the Remarks section were read and found mathematically accurate and logically consistent. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-thm-laurent-ordered-field.result.json."
+      }
+    },
+    "lem-laurent-non-archimedean": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ with its valuation $v$ and leading coefficient\n$\\operatorname{lc}$ ([[def-formal-laurent-series]]), and let $f, g \\in K$ with\n$f \\ne 0_K$ and $g \\ne 0_K$. Then:\n\n1. **(Products.)** $fg \\ne 0_K$, and\n   $$v(fg) = v(f) + v(g), \\qquad \\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g).$$\n   In particular $K$ has no zero divisors.\n2. **(Negatives.)** $-f \\ne 0_K$, $v(-f) = v(f)$ and\n   $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$.\n3. **(Unequal valuations.)** If $v(f) < v(g)$ then $f + g \\ne 0_K$,\n   $v(f+g) = v(f)$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.\n4. **(Equal valuations, no cancellation.)** If $v(f) = v(g) = q$ and\n   $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$, then $f + g \\ne 0_K$,\n   $v(f+g) = q$ and\n   $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.\n5. **(Sums in general.)** If $f + g \\ne 0_K$ then\n   $v(f+g) \\ge \\min\\{v(f), v(g)\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-archimedean-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). For a natural number\n$n \\ge 1$, write $n \\cdot 1_F := \\underbrace{1_F + \\cdots + 1_F}_{n}$ for the\n$n$-fold sum of the multiplicative identity, and $0 \\cdot 1_F := 0$. These are\nthe **canonical natural numbers** of $F$.\n\n$F$ is **Archimedean** if for every $x \\in F$ there is a natural number $n$ with\n\n$$x < n \\cdot 1_F.$$\n\nEquivalently, the canonical naturals $(n \\cdot 1_F)_{n \\ge 1}$ are **cofinal**:\nno single element of $F$ is an upper bound for all of them.",
+          "uses": [
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-int-order",
+          "source_section": "Definition",
+          "quote": "For integers $x = [(a,b)]$ and $y = [(c,d)]$ ([[def-integers]]) define\n\n$$x \\le y \\iff a + d \\le b + c \\quad \\text{in } \\mathbb{N}.$$\n\nWrite $x < y$ when $x \\le y$ and $x \\ne y$. An integer $x$ is **positive**\nwhen $0 < x$; on representatives, $0 < [(a,b)]$ exactly when $b < a$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For every $k \\in \\mathbb{Z}$ the monomial $t^{-k}$ is nonzero with $\\operatorname{lc}(t^{-k}) = 1 > 0$, so $t^{-k} > 0_K$ by [L2]; and since $v(t^{-k}) = k < k+1 = v(-t^{-(k+1)})$ by [L1] and [L3], the difference $t^{-k} - t^{-(k+1)}$ is nonzero with leading coefficient $\\operatorname{lc}(t^{-k}) = 1 > 0$, so $t^{-(k+1)} < t^{-k}$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $n \\in \\mathbb{N}$. If $n = 0$ then $t - n \\cdot 1_K = t$, which is nonzero with $\\operatorname{lc}(t) = 1 > 0$. If $n \\ge 1$ then $n \\cdot 1_K$ is nonzero with $v(n \\cdot 1_K) = 0$, so $-(n\\cdot 1_K)$ is nonzero with valuation $0$ by [L3], while $v(t) = -1 < 0$; hence $t - n\\cdot 1_K$ is nonzero with leading coefficient $\\operatorname{lc}(t) = 1 > 0$ by [L3]. In both cases $n \\cdot 1_K < t$ by [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Conversely, let $h \\in K$ and $k \\in \\mathbb{Z}$ with $|h| < t^{-k}$, and suppose $h \\ne 0_K$ with $v(h) < k$. Then $v(|h|) = v(h) < k = v(t^{-k})$ and $\\operatorname{lc}(|h|) > 0$ by [L2], so $|h| - t^{-k}$ is nonzero with leading coefficient $\\operatorname{lc}(|h|) > 0$ by [L3], giving $t^{-k} < |h|$ and contradicting $|h| < t^{-k}$ by the trichotomy of [L4]. Hence $h = 0_K$ or $v(h) \\ge k$, and in either case $h(j) = 0$ for every $j < k$ by [L1].",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Let $h \\in K$ and $k \\in \\mathbb{Z}$ with $h(j) = 0$ for every $j \\le k$. If $h = 0_K$ then $|h| = 0_K < t^{-k}$ by [step 1.1]. Otherwise $h \\ne 0_K$ with $v(h) > k$, so $|h| \\ne 0_K$ with $v(|h|) = v(h) > k = v(t^{-k})$ by [L1] and [L2]; then $t^{-k} - |h|$ is nonzero with leading coefficient $\\operatorname{lc}(t^{-k}) = 1 > 0$ by [L3], so $|h| < t^{-k}$ by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Let $\\varepsilon \\in K$ with $\\varepsilon > 0_K$, so $\\varepsilon \\ne 0_K$ and $\\operatorname{lc}(\\varepsilon) > 0$ by [L2]; put $m := v(\\varepsilon)$ and use [L5] to fix a natural $k$ with $k > m$. Then $v(\\varepsilon) = m < k = v(t^{-k}) = v(-t^{-k})$ by [L1] and [L3], so $\\varepsilon - t^{-k}$ is nonzero with leading coefficient $\\operatorname{lc}(\\varepsilon) > 0$, that is $t^{-k} < \\varepsilon$; and $t^{-k} > 0_K$ by [step 1.1]. The same computation applies to every integer $k > m$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L5",
+            "L1",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "By [step 1.2], $n \\cdot 1_K < t$ for every natural $n$; by the trichotomy of [L4] no natural $n$ can then satisfy $t < n \\cdot 1_K$, so the defining condition of [L4] fails at $x = t$ and $K$ is not Archimedean.",
+          "step": "2.3",
+          "inputs": [
+            "L4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Clause 1 is [step 1.2] with [step 2.3], clause 2 is [step 1.1], clause 3 is [step 2.2], and clause 4 is [step 2.1] together with [step 1.3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.3",
+            "step 1.1",
+            "step 2.2",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All quantified carriers K, Z, and N are fixed nonempty structures, and valuation is only applied after nonzeroness is established."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case h=0_K is handled explicitly at step 2.1, and n=0 is handled explicitly at step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first positive monomial and canonical natural are admitted without a special exception at steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If h vanishes through k, step 2.1 covers both h=0_K and the nonzero valuation-above-k case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Clause 4 intentionally differs at the endpoint: step 2.1 assumes vanishing for j<=k, while step 1.3 concludes only vanishing for j<k."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 obtains k from the explicit cofinality consequence in L5; the remaining construction is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (10), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: - n = 0 handled explicitly in step 1.2; h = 0 handled in step 2.1 and step 1.3 by case split. - k may be any integer (including negative) in clauses 2,4. The proofs use L1/L3 which apply for all integer indices; t^{-k}>0 for all k∈Z (step 1.1). - Clause 4 forward assumes vanishing for j≤k; proof step 2.1 correctly infers v(h)>k (or h=0) and then |h|<t^{-k}.… Checked surface: The title, the full public statement (clauses 1–4), every numbered proof step (1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 3.1), and the Remarks section were all read and verified against the supplied sources and the proof logic. No… Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-lem-laurent-non-archimedean.result.json."
+      }
+    },
+    "cor-laurent-not-lub-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-laurent-non-archimedean",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be the ordered field of\n[[thm-laurent-ordered-field]], and identify a natural number with its image in\n$\\mathbb{Z}$ when it is used as an index. Then:\n\n1. $n \\cdot 1_K < t$ for every $n \\in \\mathbb{N}$; consequently $K$ is **not**\n   Archimedean ([[def-archimedean-field]]).\n2. $0_K < t^{-(k+1)} < t^{-k}$ for every $k \\in \\mathbb{Z}$.\n3. **(Countable cofinality.)** For every $\\varepsilon \\in K$ with\n   $\\varepsilon > 0_K$ there is $k \\in \\mathbb{N}$ with\n   $0_K < t^{-k} < \\varepsilon$; indeed every integer $k > v(\\varepsilon)$\n   works.\n4. **(The monomials measure the valuation.)** For $h \\in K$ and $k \\in\n   \\mathbb{Z}$: if $h(j) = 0$ for every $j \\le k$ then $|h| < t^{-k}$; and\n   conversely, if $|h| < t^{-k}$ then $h(j) = 0$ for every $j < k$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-archimedean-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). For a natural number\n$n \\ge 1$, write $n \\cdot 1_F := \\underbrace{1_F + \\cdots + 1_F}_{n}$ for the\n$n$-fold sum of the multiplicative identity, and $0 \\cdot 1_F := 0$. These are\nthe **canonical natural numbers** of $F$.\n\n$F$ is **Archimedean** if for every $x \\in F$ there is a natural number $n$ with\n\n$$x < n \\cdot 1_F.$$\n\nEquivalently, the canonical naturals $(n \\cdot 1_F)_{n \\ge 1}$ are **cofinal**:\nno single element of $F$ is an upper bound for all of them.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ with its valuation $v$ and leading coefficient\n$\\operatorname{lc}$ ([[def-formal-laurent-series]]), and let $f, g \\in K$ with\n$f \\ne 0_K$ and $g \\ne 0_K$. Then:\n\n1. **(Products.)** $fg \\ne 0_K$, and\n   $$v(fg) = v(f) + v(g), \\qquad \\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g).$$\n   In particular $K$ has no zero divisors.\n2. **(Negatives.)** $-f \\ne 0_K$, $v(-f) = v(f)$ and\n   $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$.\n3. **(Unequal valuations.)** If $v(f) < v(g)$ then $f + g \\ne 0_K$,\n   $v(f+g) = v(f)$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.\n4. **(Equal valuations, no cancellation.)** If $v(f) = v(g) = q$ and\n   $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$, then $f + g \\ne 0_K$,\n   $v(f+g) = q$ and\n   $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.\n5. **(Sums in general.)** If $f + g \\ne 0_K$ then\n   $v(f+g) \\ge \\min\\{v(f), v(g)\\}$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "$K$ is an ordered field that is not Archimedean, while by [L3] every complete ordered field is Archimedean; so $K$ is not a complete ordered field, that is, $K$ does not have the least-upper-bound property of [L4].",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "$A$ is nonempty, since $0 \\cdot 1_K = 0_K$ and $1 \\cdot 1_K = 1_K$ lie in it, and it is bounded above by $t$, since $n \\cdot 1_K < t$ for every natural $n$ by [L2].",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Let $s \\in K$ be any upper bound of $A$. Since $1_K \\in A$ we have $1_K \\le s$, and $1_K > 0_K$ because $\\operatorname{lc}(1_K) = 1 > 0$; so $s > 0_K$, hence $s \\ne 0_K$ and $\\operatorname{lc}(s) > 0$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "$v(s) < 0$. Indeed, if $v(s) > 0$ then $v(1_K) = 0 < v(s) = v(-s)$ by [L6], so $1_K - s$ is nonzero with leading coefficient $\\operatorname{lc}(1_K) = 1 > 0$, giving $s < 1_K$ and contradicting $1_K \\le s$ by [L8]. And if $v(s) = 0$, write $c := \\operatorname{lc}(s) > 0$ and use [L7] to fix a natural $n$ with $c < n \\cdot 1_{\\mathbb{R}}$; then $\\iota(n \\cdot 1_{\\mathbb{R}}) - s$ has both valuations equal to $0$ and leading coefficients summing to $n \\cdot 1_{\\mathbb{R}} - c \\ne 0$, so by [L6] it is nonzero with leading coefficient $n \\cdot 1_{\\mathbb{R}} - c > 0$, giving $n \\cdot 1_K > s$ and contradicting that $s$ is an upper bound of $A$.",
+          "step": "2.1",
+          "inputs": [
+            "L6",
+            "L8",
+            "L7",
+            "L1",
+            "L4",
+            "L5",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Put $r := v(s) < 0$ and $c := \\operatorname{lc}(s) > 0$, and set $s' := \\iota(c/2)\\, t^{-r} \\in K$. By [L1], [L5] and [L6], $s'$ is nonzero with $v(s') = 0 + r = r$ and $\\operatorname{lc}(s') = (c/2)\\cdot 1 = c/2 > 0$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "L6",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "$s'$ is an upper bound of $A$: it satisfies $s' > 0_K$ by [L1], which settles $n = 0$; and for $n \\ge 1$ the element $n \\cdot 1_K$ is nonzero with valuation $0$ by [L1], so $v(s') = r < 0 = v(-(n \\cdot 1_K))$ and [L6] makes $s' - n\\cdot 1_K$ nonzero with leading coefficient $c/2 > 0$, that is $n \\cdot 1_K < s'$.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L6",
+            "L5",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "$s' < s$: both $s$ and $-s'$ are nonzero of valuation $r$, and their leading coefficients sum to $c - c/2 = c/2 \\ne 0$, so by [L6] the difference $s - s'$ is nonzero with leading coefficient $c/2 > 0$.",
+          "step": "4.2",
+          "inputs": [
+            "L6",
+            "L1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Steps 4.1 and 4.2 show that every upper bound $s$ of $A$ admits an upper bound $s'$ with $s' < s$, so no upper bound of $A$ is least and $A$ has no least upper bound in $K$; with [step 1.2] this exhibits a nonempty subset of $K$ that is bounded above and has no supremum, which is the concrete form of the failure already established in [step 1.1].",
+          "step": "5.1",
+          "inputs": [
+            "L4",
+            "step 1.2",
+            "step 1.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 proves A is nonempty by displaying 0_K and 1_K."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes 0_K in A and step 4.1 treats n=0 separately when proving the smaller element is still an upper bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the explicit member 1_K to force every upper bound s to be positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The possible valuation cases v(s)>0 and v(s)=0 are both refuted at step 2.1, leaving exactly v(s)<0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.2 uses strict coefficient halving c/2<c, so the constructed upper bound cannot coincide with s."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the Archimedean witness n only after c>0 is established; step 3.1 then defines s prime explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (10), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: Checked nonemptiness (0_K, 1_K), n=0 case (s'>0_K), n=1 case (1_K forces s>0), degenerate/zero cases (valuation v(s)>0, v(s)=0, v(s)<0 exhaust possibilities; v(s)>0 and v(s)=0 refuted, leaving exactly v(s)<0). The halving construction (any λ∈(0,1) works) guarantees strict inequality (c – λc > 0) and positivity of the smaller upper bound. No hidden choice pr… Checked surface: The title, the public claim, every numbered proof step (1.1 – 5.1), and the Remarks were read and verified. The reasoning is logically valid and mathematically sound. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-cor-laurent-not-lub-complete.result.json."
+      }
+    },
+    "thm-laurent-cauchy-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-laurent-series-ring",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be as in [[def-formal-laurent-series]], and let\n$f, g \\in K$, with $m, n \\in \\mathbb{Z}$ chosen so that $f(i) = 0$ for all\n$i < m$ and $g(j) = 0$ for all $j < n$. Then:\n\n1. **(Finiteness.)** For every $k \\in \\mathbb{Z}$ the set\n   $S_k := \\{\\, (i,j) \\in \\mathbb{Z} \\times \\mathbb{Z} : i + j = k,\\; f(i)g(j) \\ne 0 \\,\\}$\n   is finite, so $(fg)(k) = \\sum_{i+j=k} f(i)g(j)$ is a finite sum of reals; and\n   $S_k = \\varnothing$ whenever $k < m + n$.\n2. **(Closure.)** $f + g$, $-f$ and $fg$ lie in $K$, with $(f+g)(k) = 0$ for\n   $k < \\min(m,n)$ and $(fg)(k) = 0$ for $k < m + n$.\n3. **(Ring.)** $(K, +, \\cdot\\,, 0_K, 1_K)$ is a commutative ring with identity,\n   and $1_K \\ne 0_K$.\n4. **(Monomials and constants.)** $(t^{-a}h)(k) = h(k-a)$ for every $h \\in K$\n   and all $a, k \\in \\mathbb{Z}$; consequently $t^{-a} \\, t^{-b} = t^{-(a+b)}$\n   for all $a, b \\in \\mathbb{Z}$. Moreover $(\\iota(c)f)(k) = c\\, f(k)$ for all\n   $c \\in \\mathbb{R}$ and $k \\in \\mathbb{Z}$.\n5. **(Least element.)** Every nonempty $S \\subseteq \\mathbb{Z}$ that is bounded\n   below has a least element. In particular $\\operatorname{supp} f$ has a least\n   element whenever $f \\ne 0_K$, so the valuation $v(f)$ and the leading\n   coefficient $\\operatorname{lc}(f)$ of [[def-formal-laurent-series]] are\n   defined.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-non-archimedean",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be the ordered field of\n[[thm-laurent-ordered-field]], and identify a natural number with its image in\n$\\mathbb{Z}$ when it is used as an index. Then:\n\n1. $n \\cdot 1_K < t$ for every $n \\in \\mathbb{N}$; consequently $K$ is **not**\n   Archimedean ([[def-archimedean-field]]).\n2. $0_K < t^{-(k+1)} < t^{-k}$ for every $k \\in \\mathbb{Z}$.\n3. **(Countable cofinality.)** For every $\\varepsilon \\in K$ with\n   $\\varepsilon > 0_K$ there is $k \\in \\mathbb{N}$ with\n   $0_K < t^{-k} < \\varepsilon$; indeed every integer $k > v(\\varepsilon)$\n   works.\n4. **(The monomials measure the valuation.)** For $h \\in K$ and $k \\in\n   \\mathbb{Z}$: if $h(j) = 0$ for every $j \\le k$ then $|h| < t^{-k}$; and\n   conversely, if $|h| < t^{-k}$ then $h(j) = 0$ for every $j < k$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-sequences-in-an-ordered-field",
+          "source_section": "Definition",
+          "quote": "Throughout, $F$ is an ordered field ([[def-ordered-field]]) with its order and\nits absolute value $|\\cdot|$ ([[def-abs-value]]), and $\\mathbb{N}$ is the set of\nnatural numbers with its order ([[def-natural-numbers]], [[def-nat-order]]).\n\nA **sequence in $F$** is a function $x : \\mathbb{N} \\to F$. We write $x_k$ for\n$x(k)$ and $(x_k)$, or $(x_k)_{k \\in \\mathbb{N}}$, for the function itself.\n\nLet $(x_k)$ be a sequence in $F$.\n\n- $(x_k)$ is **bounded** when there is $M \\in F$ with $|x_k| \\le M$ for every\n  $k \\in \\mathbb{N}$.\n- $(x_k)$ **converges to** $L \\in F$ when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - L| < \\varepsilon \\text{ for all } k \\ge N.$$\n\n  We then write $x_k \\to L$ *in $F$*. The sequence is **convergent in $F$** when\n  it converges to some $L \\in F$, and **divergent in $F$** otherwise.\n- $(x_k)$ is **Cauchy in $F$** when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - x_l| < \\varepsilon \\text{ for all } k, l \\ge N.$$\n\n- $(x_k)$ is **nondecreasing** when $x_j \\le x_k$ for all $j \\le k$,\n  **increasing** when $x_j < x_k$ for all $j < k$, **nonincreasing** when\n  $x_j \\ge x_k$ for all $j \\le k$, **decreasing** when $x_j > x_k$ for all\n  $j < k$, and **monotone** when it is nondecreasing or nonincreasing.\n- For a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$, the **subsequence**\n  of $(x_k)$ along $n$ is the composite $(x_{n_j})_{j \\in \\mathbb{N}}$. An\n  element $L \\in F$ is a **subsequential limit** of $(x_k)$ when some\n  subsequence of $(x_k)$ converges to $L$ in $F$.\n\n**Closed intervals and nesting.** For $a, b \\in F$ with $a \\le b$, the **closed\ninterval** with endpoints $a$ and $b$ is\n\n$$[a,b]_F \\;:=\\; \\{\\, x \\in F : a \\le x \\le b \\,\\},$$\n\nand its **length** is $b - a \\ge 0$. A sequence $(I_k)_{k \\in \\mathbb{N}}$ of\nclosed intervals $I_k = [a_k, b_k]_F$ is **nested** when $I_{k+1} \\subseteq I_k$\nfor every $k$. Its **lengths tend to $0$ in $F$** when the sequence\n$(b_k - a_k)_{k \\in \\mathbb{N}}$ converges to $0$ in the sense above, that is,\nwhen for every $\\varepsilon > 0$ in $F$ there is $N \\in \\mathbb{N}$ with\n$b_k - a_k < \\varepsilon$ for all $k \\ge N$ (the absolute value may be dropped\nbecause each length is $\\ge 0$).",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $k \\in \\mathbb{N}$ put $M_k := \\{\\, N \\in \\mathbb{N} : |f^{(n)} - f^{(m)}| < t^{-(k+1)} \\text{ for all } n, m \\ge N \\,\\}$. Since $t^{-(k+1)} > 0_K$ by [L3] and the sequence is Cauchy, $M_k \\ne \\varnothing$ by [L4]; let $N_k := \\min M_k$, which exists by [L5].",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every $k \\in \\mathbb{N}$, all $n, m \\ge N_k$ and every $j \\le k$ one has $f^{(n)}(j) = f^{(m)}(j)$: by [step 1.1] $|f^{(n)} - f^{(m)}| < t^{-(k+1)}$, so [L3] gives $(f^{(n)} - f^{(m)})(j) = 0$ for every $j < k+1$, that is for every $j \\le k$, and $(f^{(n)} - f^{(m)})(j) = f^{(n)}(j) - f^{(m)}(j)$ by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "L6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "$N_a \\le N_b$ whenever $a \\le b$ in $\\mathbb{N}$: for consecutive indices, $t^{-(k+2)} < t^{-(k+1)}$ by [L3], so any $N$ witnessing membership in $M_{k+1}$ also witnesses membership in $M_k$ by transitivity of the order [L2]; hence $M_{k+1} \\subseteq M_k$ and $N_k = \\min M_k \\le \\min M_{k+1} = N_{k+1}$. The general case follows by induction on $b$ [L6].",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "L2",
+            "L6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "Define $\\kappa : \\mathbb{Z} \\to \\mathbb{N}$ by $\\kappa(j) := j$ for $j \\ge 0$ and $\\kappa(j) := 0$ for $j < 0$, so that $j \\le \\kappa(j)$ for every $j \\in \\mathbb{Z}$; then define $L : \\mathbb{Z} \\to \\mathbb{R}$ by $L(j) := f^{(N_{\\kappa(j)})}(j)$.",
+          "step": "2.3",
+          "inputs": [
+            "L6",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For every $j \\in \\mathbb{Z}$ and every $n \\ge N_{\\kappa(j)}$ one has $f^{(n)}(j) = L(j)$: apply [step 2.1] with $k = \\kappa(j)$, which is legitimate since $j \\le \\kappa(j)$, to the two indices $n$ and $N_{\\kappa(j)}$, both of which are $\\ge N_{\\kappa(j)}$.",
+          "step": "3.1",
+          "inputs": [
+            "L6",
+            "step 2.1",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "$L \\in K$. The series $f^{(N_0)}$ lies in $K$, so by [L1] there is $m_0 \\in \\mathbb{Z}$ with $f^{(N_0)}(j) = 0$ for every $j < m_0$. If $j < m_0$ and $j < 0$ then $\\kappa(j) = 0$, so $L(j) = f^{(N_0)}(j) = 0$; hence $L(j) = 0$ for every $j$ below both $m_0$ and $0$, the support of $L$ is bounded below, and $L \\in K$.",
+          "step": "3.2",
+          "inputs": [
+            "L1",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "For every $k \\in \\mathbb{N}$, every $n \\ge N_k$ and every $j \\le k$ one has $f^{(n)}(j) = L(j)$: if $j \\ge 0$ then $\\kappa(j) = j \\le k$, and if $j < 0$ then $\\kappa(j) = 0 \\le k$, so in both cases $N_{\\kappa(j)} \\le N_k \\le n$ by [step 2.2] and [step 3.1] applies.",
+          "step": "4.1",
+          "inputs": [
+            "L6",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "$(f^{(n)})$ converges to $L$ in $K$. Let $\\varepsilon > 0$ in $K$. By [L3] — this is the countable-cofinality step, and it is the only place where anything special about $K$ is used — there is $k \\in \\mathbb{N}$ with $t^{-k} < \\varepsilon$. Put $N := N_k$. For every $n \\ge N$, [step 4.1] and [L2] give $(f^{(n)} - L)(j) = f^{(n)}(j) - L(j) = 0$ for every $j \\le k$, so $|f^{(n)} - L| < t^{-k}$ by [L3] and therefore $|f^{(n)} - L| < \\varepsilon$ by transitivity [L2]. As $\\varepsilon$ was arbitrary, this is convergence in the sense of [L4].",
+          "step": "5.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "L4",
+            "step 4.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "The sequence $(f^{(n)})$ was an arbitrary Cauchy sequence in $K$, and [step 3.2] and [step 5.1] produce an element $L \\in K$ to which it converges; so every Cauchy sequence in $K$ converges in $K$.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.2",
+            "step 5.1",
+            "discharge-construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A sequence is a total function on N, so it has at least its index-0 term; every threshold set M_k is proved nonempty at step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The threshold k=0 is included and is used at step 3.2 to obtain one uniform lower support bound for the limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A constant sequence is covered: step 2.1 makes every coefficient stable and step 5.1 gives convergence to that constant series."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all terms are 0_K, the constructed L is 0_K at step 2.3 and its support-boundedness and convergence follow at steps 3.2 and 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shift from the strict conclusion j<k+1 to j<=k is made explicitly at step 2.1, and step 5.1 uses vanishing through k to get the strict bound t^-k."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every M_k is nonempty by Cauchyness and N_k is defined as its least element at step 1.1, so no countable choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (12), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: All boundary cases cited in the proof contract were verified and hold: the sequence is total on ℕ so no emptiness issue; the threshold k=0 is correctly used for support boundedness; a constant sequence (including the zero sequence) trivially converges; the step from strict j<k+1 to j≤k is explicit; and no choice is used because each N_k is the least element… Checked surface: The title, the public Statement, the Scratch outline, all numbered proof steps (1.1–6.1), and the Remarks were read and audited. No mathematical error, missing hypothesis, or invalid inference was found; the limit const… Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-thm-laurent-cauchy-complete.result.json."
+      }
+    },
+    "cor-laurent-nested-intervals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sequences-in-an-ordered-field",
+          "source_section": "Definition",
+          "quote": "Throughout, $F$ is an ordered field ([[def-ordered-field]]) with its order and\nits absolute value $|\\cdot|$ ([[def-abs-value]]), and $\\mathbb{N}$ is the set of\nnatural numbers with its order ([[def-natural-numbers]], [[def-nat-order]]).\n\nA **sequence in $F$** is a function $x : \\mathbb{N} \\to F$. We write $x_k$ for\n$x(k)$ and $(x_k)$, or $(x_k)_{k \\in \\mathbb{N}}$, for the function itself.\n\nLet $(x_k)$ be a sequence in $F$.\n\n- $(x_k)$ is **bounded** when there is $M \\in F$ with $|x_k| \\le M$ for every\n  $k \\in \\mathbb{N}$.\n- $(x_k)$ **converges to** $L \\in F$ when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - L| < \\varepsilon \\text{ for all } k \\ge N.$$\n\n  We then write $x_k \\to L$ *in $F$*. The sequence is **convergent in $F$** when\n  it converges to some $L \\in F$, and **divergent in $F$** otherwise.\n- $(x_k)$ is **Cauchy in $F$** when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - x_l| < \\varepsilon \\text{ for all } k, l \\ge N.$$\n\n- $(x_k)$ is **nondecreasing** when $x_j \\le x_k$ for all $j \\le k$,\n  **increasing** when $x_j < x_k$ for all $j < k$, **nonincreasing** when\n  $x_j \\ge x_k$ for all $j \\le k$, **decreasing** when $x_j > x_k$ for all\n  $j < k$, and **monotone** when it is nondecreasing or nonincreasing.\n- For a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$, the **subsequence**\n  of $(x_k)$ along $n$ is the composite $(x_{n_j})_{j \\in \\mathbb{N}}$. An\n  element $L \\in F$ is a **subsequential limit** of $(x_k)$ when some\n  subsequence of $(x_k)$ converges to $L$ in $F$.\n\n**Closed intervals and nesting.** For $a, b \\in F$ with $a \\le b$, the **closed\ninterval** with endpoints $a$ and $b$ is\n\n$$[a,b]_F \\;:=\\; \\{\\, x \\in F : a \\le x \\le b \\,\\},$$\n\nand its **length** is $b - a \\ge 0$. A sequence $(I_k)_{k \\in \\mathbb{N}}$ of\nclosed intervals $I_k = [a_k, b_k]_F$ is **nested** when $I_{k+1} \\subseteq I_k$\nfor every $k$. Its **lengths tend to $0$ in $F$** when the sequence\n$(b_k - a_k)_{k \\in \\mathbb{N}}$ converges to $0$ in the sense above, that is,\nwhen for every $\\varepsilon > 0$ in $F$ there is $N \\in \\mathbb{N}$ with\n$b_k - a_k < \\varepsilon$ for all $k \\ge N$ (the absolute value may be dropped\nbecause each length is $\\ge 0$).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-laurent-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every sequence $(f^{(n)})_{n \\in \\mathbb{N}}$ in $K = \\mathbb{R}((t^{-1}))$ that\nis Cauchy in $K$ ([[def-sequences-in-an-ordered-field]]) converges in $K$. That\nis, the ordered field $K$ of [[thm-laurent-ordered-field]] is **sequentially\nCauchy complete**.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-of-add-order",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c, d \\in F$.\n\n1. **Translation invariance.** If $a < b$ then $a + c < b + c$.\n2. **Adding inequalities.** If $a < b$ and $c < d$ then $a + c < b + d$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For each $n$, the endpoints $a_{n+1}$ and $b_{n+1}$ belong to $I_{n+1}$ because $a_{n+1} \\le b_{n+1}$, and $I_{n+1} \\subseteq I_n$, so both belong to $I_n$; by [L1] this says $a_n \\le a_{n+1}$ and $b_{n+1} \\le b_n$. Hence $a_n \\le a_{n+1} \\le b_{n+1} \\le b_n$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The intersection contains at most one element. Suppose $x, y \\in \\bigcap_n I_n$ with $x \\ne y$, so $|x - y| > 0$ by [L4]. For each $n$ both $x$ and $y$ lie in $[a_n,b_n]_K$, so $x - y \\le b_n - a_n$ and $y - x \\le b_n - a_n$ by [L1] and [L3], and since $|x-y|$ is one of $x-y$, $y-x$ by [L4] we get $|x - y| \\le b_n - a_n$ for every $n$. Applying the shrinking hypothesis with $\\varepsilon := |x-y|$ produces some $n$ with $b_n - a_n < |x-y|$, a contradiction.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Whenever $n \\le m$ one has $a_n \\le a_m \\le b_m \\le b_n$: this is [step 1.1] for $m = n+1$, it is trivial for $m = n$, and the general case follows by induction on $m$ using transitivity of the order.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "$(a_n)_{n \\in \\mathbb{N}}$ is Cauchy in $K$. Let $\\varepsilon > 0$ in $K$ and take $N$ with $b_n - a_n < \\varepsilon$ for all $n \\ge N$. Let $n, m \\ge N$; by [L5] we may assume $n \\le m$, the other case being the same with the roles exchanged. By [step 2.1], $a_n \\le a_m \\le b_m \\le b_n$, so $0 \\le a_m - a_n \\le b_n - a_n < \\varepsilon$, and $|a_m - a_n| = a_m - a_n < \\varepsilon$ by [L4].",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "L4",
+            "L1",
+            "L3",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "By [L2] there is $L \\in K$ with $a_n \\to L$ in $K$.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "$a_n \\le L$ for every $n$. Otherwise $L < a_n$ for some $n$; put $\\varepsilon := a_n - L > 0$ and use [step 4.1] to fix $N$ with $|a_m - L| < \\varepsilon$ for all $m \\ge N$. Pick $m$ with $m \\ge N$ and $m \\ge n$ ([L5]). By [step 2.1], $a_n \\le a_m$, so $a_m - L \\ge a_n - L = \\varepsilon > 0$ and hence $|a_m - L| = a_m - L \\ge \\varepsilon$ by [L4], contradicting $|a_m - L| < \\varepsilon$.",
+          "step": "5.1",
+          "inputs": [
+            "L5",
+            "L4",
+            "L1",
+            "L3",
+            "step 4.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-5.2",
+          "claim": "$L \\le b_n$ for every $n$. Otherwise $b_n < L$ for some $n$; put $\\varepsilon := L - b_n > 0$ and fix $N$ with $|a_m - L| < \\varepsilon$ for all $m \\ge N$. Pick $m$ with $m \\ge N$ and $m \\ge n$. By [step 2.1], $a_m \\le b_m \\le b_n$, so $L - a_m \\ge L - b_n = \\varepsilon > 0$ and hence $|a_m - L| = L - a_m \\ge \\varepsilon$ by [L4], again a contradiction.",
+          "step": "5.2",
+          "inputs": [
+            "L4",
+            "L1",
+            "L3",
+            "L5",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "By [step 5.1] and [step 5.2], $a_n \\le L \\le b_n$ for every $n$, so $L \\in \\bigcap_n I_n$ by [L1] and the intersection is nonempty; by [step 1.2] it has no second element. Hence $\\bigcap_n I_n = \\{L\\}$.",
+          "step": "6.1",
+          "inputs": [
+            "L1",
+            "step 5.1",
+            "step 5.2",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Each interval is nonempty because a_n<=b_n, used at step 1.1, and step 6.1 explicitly constructs a point in the full intersection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial interval I_0 and threshold indices equal to 0 are included in the monotonicity and Cauchy arguments at steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A constant singleton interval sequence has zero lengths; steps 3.1 through 6.1 return its unique endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Intervals with a_n=b_n are admitted; step 1.2 proves uniqueness and step 6.1 proves existence without requiring positive length."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed endpoints are retained by the nonstrict inequalities proved at steps 5.1 and 5.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the existential limit supplied by Cauchy completeness; all later arguments apply to that fixed witness and no repeated choices occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (12), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: The proof correctly handles the empty, zero, one, degenerate, and closed‑endpoint cases; a sequence of constant singleton intervals yields exactly one element; the Cauchy argument includes the index `0`; no choice principle is required. The corollary is not a biconditional, so forward/reverse implication boundaries do not apply. The counterexample reference… Checked surface: The title, the public claim, every numbered proof step (1.1 through 6.1), and the three remarks were read and verified for logical soundness and mathematical accuracy. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-cor-laurent-nested-intervals.result.json."
+      }
+    },
+    "cex-laurent-nested-intervals-empty": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the field of real numbers with its order\n([[def-real-numbers]], [[thm-reals-ordered-field]]) and $\\mathbb{Z}$ is the\ntotally ordered commutative ring of integers ([[def-integers]],\n[[def-int-operations]], [[def-int-order]], [[thm-int-ordered-ring]]).\n\nFor a function $f : \\mathbb{Z} \\to \\mathbb{R}$ write\n\n$$\\operatorname{supp} f \\;:=\\; \\{\\, k \\in \\mathbb{Z} : f(k) \\ne 0 \\,\\},$$\n\nand say that $\\operatorname{supp} f$ is **bounded below** when there is\n$m \\in \\mathbb{Z}$ with $f(k) = 0$ for every $k < m$. The set of **formal Laurent\nseries in $t^{-1}$ over $\\mathbb{R}$** is\n\n$$K \\;=\\; \\mathbb{R}((t^{-1})) \\;:=\\; \\{\\, f : \\mathbb{Z} \\to \\mathbb{R} \\;\\mid\\; \\operatorname{supp} f \\text{ is bounded below} \\,\\},$$\n\nequipped with\n\n$$(f + g)(k) := f(k) + g(k), \\qquad (fg)(k) := \\sum_{i + j = k} f(i)\\,g(j),$$\n\nwhere the product sum ranges over the pairs $(i,j) \\in \\mathbb{Z} \\times\n\\mathbb{Z}$ with $i + j = k$ and $f(i)g(j) \\ne 0$. That set of pairs is finite\nfor every $k$, and $f + g$ and $fg$ again lie in $K$: this is\n[[lem-laurent-series-ring]], which also proves that $K$ with these operations is\na commutative ring whose zero $0_K$ is the constant function $0$ and whose\nidentity $1_K$ is the function taking the value $1$ at $0$ and $0$ elsewhere.\n\n**Distinguished elements.** For $n \\in \\mathbb{Z}$ let $t^{-n} \\in K$ be the\nfunction taking the value $1$ at $n$ and $0$ at every other index; so\n$t^{0} = 1_K$, and $t := t^{-(-1)}$ is the function taking the value $1$ at $-1$.\nFor $c \\in \\mathbb{R}$ let $\\iota(c) \\in K$ be the function taking the value $c$\nat $0$ and $0$ elsewhere. The notation $t^{-n}$ is *defined* here as a name;\nthat it is consistent with the ring multiplication, $t^{-m} \\, t^{-n} =\nt^{-(m+n)}$, is proved in [[lem-laurent-series-ring]].\n\n**Series notation.** Because $\\operatorname{supp} f$ is bounded below, say by\n$m$, one writes\n\n$$f \\;=\\; \\sum_{k \\ge m} f(k)\\, t^{-k},$$\n\na purely notational device: the object is the function $f$, and no convergence\nof any kind is asserted or used.\n\n**Valuation and leading coefficient.** Let $f \\in K$ with $f \\ne 0_K$. Then\n$\\operatorname{supp} f$ is nonempty and bounded below, so it has a least element\n([[lem-laurent-series-ring]]). Define\n\n$$v(f) \\;:=\\; \\min \\operatorname{supp} f \\in \\mathbb{Z}, \\qquad \\operatorname{lc}(f) \\;:=\\; f(v(f)) \\in \\mathbb{R} \\setminus \\{0\\}.$$\n\n$v(f)$ is the **valuation** and $\\operatorname{lc}(f)$ the **leading\ncoefficient** of $f$. Neither is defined at $f = 0_K$, whose support is empty;\nevery statement about $v$ or $\\operatorname{lc}$ in this library carries the\nhypothesis $f \\ne 0_K$ explicitly.\n\n**Order.** The **positive cone** of $K$ is\n\n$$P \\;:=\\; \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\},$$\n\nthat is, a nonzero series is positive exactly when its lowest-index nonzero\ncoefficient is a positive real. That $(K, P)$ is an ordered field\n([[def-ordered-field]], [[def-field]]) is [[thm-laurent-ordered-field]], and\nthat every nonzero element of $K$ is invertible is\n[[thm-laurent-series-field]]. As in any ordered field, $f < g$ means\n$g - f \\in P$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-laurent-ordered-field",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ and let\n$P = \\{\\, f \\in K : f \\ne 0_K \\text{ and } \\operatorname{lc}(f) > 0 \\,\\}$\n([[def-formal-laurent-series]]). Then:\n\n1. $P$ is a positive cone on $K$, so $(K, P)$ is an ordered field\n   ([[def-ordered-field]]), and $f < g$ holds exactly when $g - f \\ne 0_K$ and\n   $\\operatorname{lc}(g - f) > 0$.\n2. For $f \\ne 0_K$ the absolute value ([[def-abs-value]]) satisfies\n   $|f| \\ne 0_K$, $v(|f|) = v(f)$ and\n   $\\operatorname{lc}(|f|) = \\lvert \\operatorname{lc}(f) \\rvert > 0$.\n3. The map $\\iota : \\mathbb{R} \\to K$ sending $c$ to the series with value $c$\n   at index $0$ is an injective ring homomorphism with $\\iota(c) \\in P$ exactly\n   when $c > 0$; and the canonical naturals of $K$ are\n   $n \\cdot 1_K = \\iota(n \\cdot 1_{\\mathbb{R}})$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ with its valuation $v$ and leading coefficient\n$\\operatorname{lc}$ ([[def-formal-laurent-series]]), and let $f, g \\in K$ with\n$f \\ne 0_K$ and $g \\ne 0_K$. Then:\n\n1. **(Products.)** $fg \\ne 0_K$, and\n   $$v(fg) = v(f) + v(g), \\qquad \\operatorname{lc}(fg) = \\operatorname{lc}(f)\\operatorname{lc}(g).$$\n   In particular $K$ has no zero divisors.\n2. **(Negatives.)** $-f \\ne 0_K$, $v(-f) = v(f)$ and\n   $\\operatorname{lc}(-f) = -\\operatorname{lc}(f)$.\n3. **(Unequal valuations.)** If $v(f) < v(g)$ then $f + g \\ne 0_K$,\n   $v(f+g) = v(f)$ and $\\operatorname{lc}(f+g) = \\operatorname{lc}(f)$.\n4. **(Equal valuations, no cancellation.)** If $v(f) = v(g) = q$ and\n   $\\operatorname{lc}(f) + \\operatorname{lc}(g) \\ne 0$, then $f + g \\ne 0_K$,\n   $v(f+g) = q$ and\n   $\\operatorname{lc}(f+g) = \\operatorname{lc}(f) + \\operatorname{lc}(g)$.\n5. **(Sums in general.)** If $f + g \\ne 0_K$ then\n   $v(f+g) \\ge \\min\\{v(f), v(g)\\}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-series-ring",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be as in [[def-formal-laurent-series]], and let\n$f, g \\in K$, with $m, n \\in \\mathbb{Z}$ chosen so that $f(i) = 0$ for all\n$i < m$ and $g(j) = 0$ for all $j < n$. Then:\n\n1. **(Finiteness.)** For every $k \\in \\mathbb{Z}$ the set\n   $S_k := \\{\\, (i,j) \\in \\mathbb{Z} \\times \\mathbb{Z} : i + j = k,\\; f(i)g(j) \\ne 0 \\,\\}$\n   is finite, so $(fg)(k) = \\sum_{i+j=k} f(i)g(j)$ is a finite sum of reals; and\n   $S_k = \\varnothing$ whenever $k < m + n$.\n2. **(Closure.)** $f + g$, $-f$ and $fg$ lie in $K$, with $(f+g)(k) = 0$ for\n   $k < \\min(m,n)$ and $(fg)(k) = 0$ for $k < m + n$.\n3. **(Ring.)** $(K, +, \\cdot\\,, 0_K, 1_K)$ is a commutative ring with identity,\n   and $1_K \\ne 0_K$.\n4. **(Monomials and constants.)** $(t^{-a}h)(k) = h(k-a)$ for every $h \\in K$\n   and all $a, k \\in \\mathbb{Z}$; consequently $t^{-a} \\, t^{-b} = t^{-(a+b)}$\n   for all $a, b \\in \\mathbb{Z}$. Moreover $(\\iota(c)f)(k) = c\\, f(k)$ for all\n   $c \\in \\mathbb{R}$ and $k \\in \\mathbb{Z}$.\n5. **(Least element.)** Every nonempty $S \\subseteq \\mathbb{Z}$ that is bounded\n   below has a least element. In particular $\\operatorname{supp} f$ has a least\n   element whenever $f \\ne 0_K$, so the valuation $v(f)$ and the leading\n   coefficient $\\operatorname{lc}(f)$ of [[def-formal-laurent-series]] are\n   defined.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-laurent-non-archimedean",
+          "source_section": "Statement",
+          "quote": "Let $K = \\mathbb{R}((t^{-1}))$ be the ordered field of\n[[thm-laurent-ordered-field]], and identify a natural number with its image in\n$\\mathbb{Z}$ when it is used as an index. Then:\n\n1. $n \\cdot 1_K < t$ for every $n \\in \\mathbb{N}$; consequently $K$ is **not**\n   Archimedean ([[def-archimedean-field]]).\n2. $0_K < t^{-(k+1)} < t^{-k}$ for every $k \\in \\mathbb{Z}$.\n3. **(Countable cofinality.)** For every $\\varepsilon \\in K$ with\n   $\\varepsilon > 0_K$ there is $k \\in \\mathbb{N}$ with\n   $0_K < t^{-k} < \\varepsilon$; indeed every integer $k > v(\\varepsilon)$\n   works.\n4. **(The monomials measure the valuation.)** For $h \\in K$ and $k \\in\n   \\mathbb{Z}$: if $h(j) = 0$ for every $j \\le k$ then $|h| < t^{-k}$; and\n   conversely, if $|h| < t^{-k}$ then $h(j) = 0$ for every $j < k$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-sequences-in-an-ordered-field",
+          "source_section": "Definition",
+          "quote": "Throughout, $F$ is an ordered field ([[def-ordered-field]]) with its order and\nits absolute value $|\\cdot|$ ([[def-abs-value]]), and $\\mathbb{N}$ is the set of\nnatural numbers with its order ([[def-natural-numbers]], [[def-nat-order]]).\n\nA **sequence in $F$** is a function $x : \\mathbb{N} \\to F$. We write $x_k$ for\n$x(k)$ and $(x_k)$, or $(x_k)_{k \\in \\mathbb{N}}$, for the function itself.\n\nLet $(x_k)$ be a sequence in $F$.\n\n- $(x_k)$ is **bounded** when there is $M \\in F$ with $|x_k| \\le M$ for every\n  $k \\in \\mathbb{N}$.\n- $(x_k)$ **converges to** $L \\in F$ when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - L| < \\varepsilon \\text{ for all } k \\ge N.$$\n\n  We then write $x_k \\to L$ *in $F$*. The sequence is **convergent in $F$** when\n  it converges to some $L \\in F$, and **divergent in $F$** otherwise.\n- $(x_k)$ is **Cauchy in $F$** when\n\n  $$\\text{for every } \\varepsilon \\in F \\text{ with } \\varepsilon > 0 \\text{ there is } N \\in \\mathbb{N} \\text{ such that } |x_k - x_l| < \\varepsilon \\text{ for all } k, l \\ge N.$$\n\n- $(x_k)$ is **nondecreasing** when $x_j \\le x_k$ for all $j \\le k$,\n  **increasing** when $x_j < x_k$ for all $j < k$, **nonincreasing** when\n  $x_j \\ge x_k$ for all $j \\le k$, **decreasing** when $x_j > x_k$ for all\n  $j < k$, and **monotone** when it is nondecreasing or nonincreasing.\n- For a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$, the **subsequence**\n  of $(x_k)$ along $n$ is the composite $(x_{n_j})_{j \\in \\mathbb{N}}$. An\n  element $L \\in F$ is a **subsequential limit** of $(x_k)$ when some\n  subsequence of $(x_k)$ converges to $L$ in $F$.\n\n**Closed intervals and nesting.** For $a, b \\in F$ with $a \\le b$, the **closed\ninterval** with endpoints $a$ and $b$ is\n\n$$[a,b]_F \\;:=\\; \\{\\, x \\in F : a \\le x \\le b \\,\\},$$\n\nand its **length** is $b - a \\ge 0$. A sequence $(I_k)_{k \\in \\mathbb{N}}$ of\nclosed intervals $I_k = [a_k, b_k]_F$ is **nested** when $I_{k+1} \\subseteq I_k$\nfor every $k$. Its **lengths tend to $0$ in $F$** when the sequence\n$(b_k - a_k)_{k \\in \\mathbb{N}}$ converges to $0$ in the sense above, that is,\nwhen for every $\\varepsilon > 0$ in $F$ there is $N \\in \\mathbb{N}$ with\n$b_k - a_k < \\varepsilon$ for all $k \\ge N$ (the absolute value may be dropped\nbecause each length is $\\ge 0$).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $n \\ge 1$ the element $a_n = \\iota(n)t^{-1}$ is nonzero with $v(a_n) = 0 + 1 = 1$ and $\\operatorname{lc}(a_n) = n \\cdot 1 = n > 0$, while $a_0 = \\iota(0)t^{-1} = 0_K$; and for every $n$ the element $b_n = \\iota(1/(n+1))$ is nonzero with $v(b_n) = 0$ and $\\operatorname{lc}(b_n) = 1/(n+1) > 0$. Also $a_1 = \\iota(1)t^{-1} = t^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "$a_n \\le b_n$ for every $n$: for $n = 0$ this is $0_K < \\iota(1) = 1_K$, which holds since $\\operatorname{lc}(1_K) = 1 > 0$; and for $n \\ge 1$ we have $v(b_n) = 0 < 1 = v(-a_n)$ by [step 1.1] and [L3], so $b_n - a_n$ is nonzero with leading coefficient $1/(n+1) > 0$, that is $a_n < b_n$. So each $[a_n,b_n]_K$ is a closed interval.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L1",
+            "L2",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "The sequence is nested: $a_{n+1} - a_n = \\bigl(\\iota(n+1) - \\iota(n)\\bigr)t^{-1} = \\iota(1)t^{-1} = t^{-1} > 0_K$ by [L2] and [L4], so $a_n < a_{n+1}$; and $b_n - b_{n+1} = \\iota\\bigl(\\tfrac{1}{n+1} - \\tfrac{1}{n+2}\\bigr) = \\iota\\bigl(\\tfrac{1}{(n+1)(n+2)}\\bigr)$, which is nonzero with positive leading coefficient, so $b_{n+1} < b_n$. Hence $a_n \\le a_{n+1}$ and $b_{n+1} \\le b_n$, and every $x$ with $a_{n+1} \\le x \\le b_{n+1}$ satisfies $a_n \\le x \\le b_n$, that is $I_{n+1} \\subseteq I_n$.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L4",
+            "L1",
+            "L3",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Suppose $x \\in \\bigcap_{n} I_n$. Then $a_1 \\le x$, and $a_1 = t^{-1} > 0_K$ by [step 1.1] and [L4], so $x > 0_K$; hence $x \\ne 0_K$ and $\\operatorname{lc}(x) > 0$ by [L2]. Write $q := v(x)$ and $c := \\operatorname{lc}(x) > 0$.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "L2",
+            "L1",
+            "L5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "$q \\ge 1$. If $q < 0$ then $v(x) < 0 = v(-b_0)$ by [step 1.1] and [L3], so $x - b_0$ is nonzero with leading coefficient $c > 0$ and $x > b_0$, contradicting $x \\le b_0$. If $q = 0$, use [L6] to fix a natural $n \\ge 1$ with $1/n < c$ and set $n' := n - 1$, so that $1/(n'+1) < c$; then $x$ and $-b_{n'}$ both have valuation $0$ with leading coefficients summing to $c - 1/(n'+1) \\ne 0$, so by [L3] $x - b_{n'}$ is nonzero with leading coefficient $c - 1/(n'+1) > 0$, giving $x > b_{n'}$ and contradicting $x \\le b_{n'}$. By trichotomy on $\\mathbb{Z}$ the remaining case is $q \\ge 1$.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "L6",
+            "L1",
+            "L2",
+            "L5",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "$q < 1$. If $q > 1$ then $v(-a_1) = 1 < q$ by [step 1.1] and [L3], so $x - a_1$ is nonzero with leading coefficient $\\operatorname{lc}(-a_1) = -1 < 0$, giving $x < a_1$ and contradicting $a_1 \\le x$. If $q = 1$, use [L6] to fix a natural $n$ with $c < n \\cdot 1_{\\mathbb{R}}$, so $n \\ge 1$; then $x$ and $-a_n$ both have valuation $1$ with leading coefficients summing to $c - n \\ne 0$, so by [L3] $x - a_n$ is nonzero with leading coefficient $c - n < 0$, giving $x < a_n$ and contradicting $a_n \\le x$. Hence $q \\ne 1$ and $q \\not> 1$.",
+          "step": "4.2",
+          "inputs": [
+            "L3",
+            "L6",
+            "L1",
+            "L2",
+            "L5",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "Steps 4.1 and 4.2 are incompatible, so no $x$ lies in every $I_n$: the nested sequence $(I_n)$ of [step 2.1] and [step 2.2] has $\\bigcap_n I_n = \\varnothing$, which refutes the unrestricted nested interval property for $K$.",
+          "step": "5.1",
+          "inputs": [
+            "L5",
+            "step 2.1",
+            "step 2.2",
+            "step 4.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "Consistency with [[cor-laurent-nested-intervals]]: the lengths here do not tend to $0$ in $K$. Indeed $(b_n - a_n)(0) = 1/(n+1) \\ne 0$ by [step 1.1], so by [L4] the inequality $|b_n - a_n| < t^{-1}$ fails for every $n$; taking $\\varepsilon = t^{-1}$ shows the shrinking hypothesis of [L5] is not satisfied.",
+          "step": "6.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The conclusion is precisely that the full intersection is empty, proved by the incompatible valuation bounds at step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The endpoint a_0=0_K is handled separately at steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint a_1=t^-1 is identified at step 1.1 and supplies positivity of a hypothetical common point at step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Every interval is proved genuinely nonempty at step 2.1, while their common intersection is proved empty at step 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All interval inequalities are nonstrict, and equality at an endpoint is included in the contradictions at steps 4.1 and 4.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two Archimedean witnesses used at steps 4.1 and 4.2 are licensed by L6 after their positive real inputs are established."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no forward implication boundary to audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so there is no reverse implication boundary to audit."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Audit-Alpha wave 6 (owner-delegated); DeepSeek V4 Pro audit-refuter",
+        "notes": "critical risk (10), routed by risk-report.mjs. The read-only cross-family refuter inspected the complete target, supplied dependency texts, citation direction and boundary cases and returned CLEAN. Boundary evidence: The empty-intersection conclusion is reached by deriving incompatible valuation bounds (step 5.1). All edge cases are handled: the zero endpoint a_0=0 is treated separately (step 1.1, 2.1); positivity of a_1=t^{-1} is established (step 3.1); each interval is nonempty but their full intersection is empty; the contradictions at steps 4.1 and 4.2 cover equalit… Checked surface: The title, the public claim (statement refuted), every numbered proof step (1.1, 2.1, 2.2, 3.1, 4.1, 4.2, 5.1, 6.1), and the three Remarks were read and verified. Audit-Alpha adjudicated the return from disk and found no fatal defect. Evidence: research/audit/wave6-dispatch/audit-refuter-cex-laurent-nested-intervals-empty.result.json."
+      }
+    }
+  }
+}

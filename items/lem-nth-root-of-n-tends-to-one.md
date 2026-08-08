@@ -4,6 +4,9 @@ kind: lemma
 title: "$n^{1/n} \\to 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-nth-roots-exist, thm-am-gm, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-squeeze, thm-of-archimedean, lem-of-inverse-positive, lem-of-sign-rules, lem-of-naturals-positive, lem-power-monotone, def-integer-power, def-real-limit, def-sequence, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, lem-of-add-order, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: []

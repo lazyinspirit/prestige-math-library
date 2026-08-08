@@ -4,6 +4,9 @@ kind: remark
 title: "Which results on this page use the order of $\\mathbb{R}$ and therefore have no general-topological analogue"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-metric-space, def-metric-topology, def-metric-ball, lem-real-line-is-a-metric-space,
        def-metric-interior-closure-boundary, thm-metric-closure-characterisation,
        thm-metric-sequential-closure, def-metric-bounded-diameter,

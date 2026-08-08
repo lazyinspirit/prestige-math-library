@@ -4,6 +4,9 @@ kind: corollary
 title: "For continuous $f, g : Z \\to Y$ with $Y$ Hausdorff the agreement set $\\{ z \\in Z : f(z) = g(z) \\}$ is closed in $Z$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, lem-the-diagonal-map-is-an-embedding,
        def-the-diagonal-of-a-space, def-hausdorff-space, def-continuous-map-top,
        thm-continuity-characterisations-top, def-standard-topologies]
@@ -31,8 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "Continuous function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuous_function"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "General Topology Notes (UC Riverside)"
+      url: "https://math.ucr.edu/~res/math205A-2014/gentop-notes.pdf"
 pipeline_run: null
 ---
 

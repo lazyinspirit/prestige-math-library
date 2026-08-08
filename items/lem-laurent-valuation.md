@@ -4,6 +4,9 @@ kind: lemma
 title: "Valuation and leading coefficient in $\\mathbb{R}((t^{-1}))$: $v(fg) = v(f) + v(g)$, and the behaviour of $v$ under sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-formal-laurent-series, lem-laurent-series-ring, def-field, thm-reals-ordered-field, thm-int-ordered-ring, def-int-order]
 aliases: []
 landmark: false
@@ -23,6 +26,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Valuation_(algebra)"
     - title: "Hahn series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn_series"
+    - title: "B. Sambale, An invitation to formal power series"
+      url: "https://link.springer.com/article/10.1365/s13291-022-00256-6"
+    - title: "Laurent series (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Laurent_series"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 

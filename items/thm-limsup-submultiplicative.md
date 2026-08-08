@@ -4,6 +4,9 @@ kind: theorem
 title: "For bounded nonnegative sequences, $\\limsup(x_k y_k) \\le (\\limsup x_k)(\\limsup y_k)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, lem-limsup-epsilon-characterisation, lem-extended-reals-complete, prop-of-multiply-inequalities, lem-of-sign-rules, def-bounded-set, def-sequence, def-extended-reals, def-upper-bound, def-partial-order, lem-of-abs-value, lem-of-add-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, def-nat-order, thm-nat-linear-order]
 justified_by: []
 forward_refs: [cex-limsup-product-strict, cex-zero-times-infinity-indeterminate]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §2.3"
       url: "https://www.jirka.org/ra/"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

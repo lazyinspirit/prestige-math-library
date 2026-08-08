@@ -4,6 +4,9 @@ kind: example
 title: "The graph of a continuous $f : \\mathbb{R} \\to \\mathbb{R}$ is closed in $\\mathbb{R}^2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed,
        def-continuity-real, lem-real-and-metric-notions-agree, def-continuous-map-top,
        def-product-topology, lem-product-topology-on-rn, def-hausdorff-space,
@@ -32,8 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_graph_theorem"
     - title: "Continuous function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuous_function"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Topology, Lemma 5.3 (Tag 08ZD)"
+      url: "https://stacks.math.columbia.edu/tag/08ZD"
 pipeline_run: null
 ---
 

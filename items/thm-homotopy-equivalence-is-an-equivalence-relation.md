@@ -4,6 +4,9 @@ kind: theorem
 title: "Having the same homotopy type is an equivalence relation on topological spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-homotopy-equivalence, thm-composition-respects-homotopy, cor-homotopy-relative-and-path-homotopy-are-equivalence-relations, def-equivalence-relation]
 aliases: []
 landmark: true

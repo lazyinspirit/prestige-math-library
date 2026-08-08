@@ -4,6 +4,9 @@ kind: definition
 title: "Nullhomotopic maps and contractible spaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-homotopy-relative-and-path-homotopy, def-continuous-map-top]
 aliases: []
 landmark: true

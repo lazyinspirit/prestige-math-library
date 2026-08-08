@@ -4,6 +4,9 @@ kind: remark
 title: "Why the criterion is about the product topology, and the choice cost of the compact separation lemmas"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-product-topology, thm-product-universal-property,
        thm-compact-subset-of-a-hausdorff-space-is-closed, lem-finite-choice,
@@ -34,8 +37,6 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "J. Munkres, Topology, 2nd ed., §19, §31 and §32"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
 pipeline_run: null
 ---
 

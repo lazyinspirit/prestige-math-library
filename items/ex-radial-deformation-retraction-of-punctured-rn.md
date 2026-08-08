@@ -4,6 +4,9 @@ kind: example
 title: "The radial homotopy is checked explicitly on punctured Euclidean space and on the unit sphere"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-punctured-rn-deformation-retracts-onto-the-sphere, thm-radial-straight-line-map-on-punctured-rn]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "MAT 530 Topology lecture notes (Stony Brook University)"
+      url: "https://www.math.stonybrook.edu/~cschnell/pdf/notes/mat530.pdf"
 pipeline_run: null
 ---
 

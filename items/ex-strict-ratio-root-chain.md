@@ -4,6 +4,9 @@ kind: example
 title: "A positive sequence making all three inequalities of the ratio-to-root chain strict"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-ratio-root-inequality, def-limsup-liminf, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, lem-geometric-sequence-null, def-integer-power, lem-power-laws, def-rational-power, lem-rational-power-laws, thm-nth-roots-exist, def-extended-reals, def-divergence-to-infinity, def-upper-bound, def-partial-order, def-sequence, def-real-limit, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, def-nat-order, thm-nat-linear-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ratio_test"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3 (3.37)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

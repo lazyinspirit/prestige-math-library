@@ -324,7 +324,7 @@ A published page listing a draft item is a hard error, so keep `items:` and
 Your final message is a report to the orchestrator, not to a human reader:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
-   judge verdict; the paired DeepSeek V4 Pro / Claude Sonnet 5 judge is step 7.
+   judge verdict; the paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
 2. **Ledger** — every item whose title, statement or dependency list you changed
    from the scaffold, with one line on what changed and why; for every
    mathematical-content item, include both component-provenance values and the

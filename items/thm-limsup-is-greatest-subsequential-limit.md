@@ -4,6 +4,9 @@ kind: theorem
 title: "The limit superior is itself a subsequential limit in $\\overline{\\mathbb{R}}$ and is the greatest one"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-limsup-liminf, def-subsequential-limit, def-extended-limits, lem-limsup-epsilon-characterisation, lem-limsup-exists, lem-extended-reals-complete, lem-liminf-le-limsup, thm-convergence-iff-limsup-equals-liminf, thm-recursion, thm-well-ordering-principle, lem-index-map-grows, def-extended-reals, def-divergence-to-infinity, def-real-limit, lem-limit-preserves-order, def-sequence, def-upper-bound, def-partial-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, lem-of-abs-value, def-nat-order, thm-nat-linear-order]
 justified_by: []
 forward_refs: [cex-limsup-infinite-not-attained-in-r]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

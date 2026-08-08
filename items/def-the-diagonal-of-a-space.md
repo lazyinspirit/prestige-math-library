@@ -4,6 +4,9 @@ kind: definition
 title: "The diagonal $\\Delta_X \\subseteq X \\times X$, the diagonal map $\\delta_X$, and the pairing $\\langle f, g \\rangle$ of two maps"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-space, def-product-topology, thm-product-universal-property,
        def-continuous-map-top, def-subspace-topology-top, def-homeomorphism-and-open-maps]
 justified_by: []
@@ -29,8 +32,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Product_topology"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "J. Munkres, Topology, 2nd ed., §19 and §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Diagonal embedding (PlanetMath)"
+      url: "https://planetmath.org/diagonalembedding"
+    - title: "Stacks Project, Topology, Lemma 5.3 (Tag 08ZD)"
+      url: "https://stacks.math.columbia.edu/tag/08ZD"
 pipeline_run: null
 ---
 

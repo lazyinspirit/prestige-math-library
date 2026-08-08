@@ -4,6 +4,9 @@ kind: definition
 title: "Homotopy equivalences, homotopy inverses and spaces of the same homotopy type"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-homotopy-relative-and-path-homotopy, def-continuous-map-top]
 aliases: []
 landmark: true

@@ -4,6 +4,11 @@ kind: counterexample
 title: "Null times divergent has no rule: $x_k = 1/k$ with $y_k = ck$ gives product limit $c$, and with $y_k = k^2$ gives divergence"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-extended-reals, def-divergence-to-infinity, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-limit-unique, lem-convergent-implies-bounded, def-real-limit, def-sequence, def-integer-power, lem-of-sign-rules, lem-of-add-order, cor-of-one-positive, def-nat-order, thm-nat-linear-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -11,11 +16,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -72,25 +78,14 @@ this reason.
 
 2.2 The product with $(z_k)$ is $x_k z_k = \big(1/\iota(k+1)\big)\iota(k+1)\iota(k+1) = \iota(k+1)$, which diverges to $+\infty$ by the argument of step 1.3 with the single factor, and therefore converges to no real number. [step 1.1, step 1.3, L1, L2, L3, L4, L5]
 
-3.1 Now take the three pairs $(x, y^{(1)})$, $(x, y^{(2)})$ and $(x, z)$. In each, the first sequence is null and the second diverges to $+\infty$, so each pair satisfies the hypotheses of the refuted claim; but the three products converge to $1$, converge to $2$, and converge to nothing at all. Since $1 \ne 2$ and limits are unique, no single $v \in \overline{\mathbb{R}}$ describes all three, and the claim is false. [step 2.1, step 2.2, L4, L5, L6] ∎
+3.1 Now take the three pairs $(x, y^{(1)})$, $(x, y^{(2)})$ and $(x, z)$. In each, the first sequence is null and the second diverges to $+\infty$, so each pair satisfies the hypotheses of the refuted claim; but the three products converge to $1$, converge to $2$, and converge to $+\infty$ in the extended sense. Since $1 \ne 2$ and limits are unique, no single $v \in \overline{\mathbb{R}}$ describes all three, and the claim is false. [step 2.1, step 2.2, L4, L5, L6] ∎
 
 ## Remarks
 
-- **This is why the entry is blank in the table.** [[def-extended-reals]] leaves
-  $0 \cdot (\pm\infty)$ undefined not out of caution but because any value
-  assigned to it would make some instance of a product rule false, and the three
-  pairs above already realise three different behaviours.
+- **This is why the entry is blank in the table.** [[def-extended-reals]] leaves $0 \cdot (\pm\infty)$ undefined not out of caution but because any value assigned to it would make some instance of a product rule false, and the three pairs above already realise three different behaviours.
 
-- **The same phenomenon rules out $(+\infty) + (-\infty)$.** Taking
-  $a_k = \iota(k)$ and $b_k = -\iota(k)$ gives a sum that is constantly $0$, while
-  $a_k = \iota(k)$ and $b_k = -\iota(k) - \iota(k)$ gives a sum diverging to
-  $-\infty$; both pairs have $a_k \to +\infty$ and $b_k \to -\infty$.
+- **The same phenomenon rules out $(+\infty) + (-\infty)$.** Taking $a_k = \iota(k)$ and $b_k = -\iota(k)$ gives a sum that is constantly $0$, while $a_k = \iota(k)$ and $b_k = -\iota(k) - \iota(k)$ gives a sum diverging to $-\infty$; both pairs have $a_k \to +\infty$ and $b_k \to -\infty$.
 
-- **Measure theory's convention is not a counterexample to this.** Texts that set
-  $0 \cdot \infty := 0$ are fixing the value of a *formula* in a context where the
-  factor $0$ is the measure of a null set, not asserting a limit rule; the
-  distinction is spelled out in [[rem-extended-real-conventions]].
+- **Measure theory's convention is not a counterexample to this.** Texts that set $0 \cdot \infty := 0$ are fixing the value of a *formula* in a context where the factor $0$ is the measure of a null set, not asserting a limit rule; the distinction is spelled out in [[rem-extended-real-conventions]].
 
-- **Index range.** The classical statement writes $x_k = 1/k$ and $y_k = ck$,
-  which requires $k \ge 1$. Written on $\mathbb{N}$, which contains $0$
-  ([[def-sequence]]), the same sequences are $1/(k+1)$ and $c(k+1)$, as above.
+- **Index range.** The classical statement writes $x_k = 1/k$ and $y_k = ck$, which requires $k \ge 1$. Written on $\mathbb{N}$, which contains $0$ ([[def-sequence]]), the same sequences are $1/(k+1)$ and $c(k+1)$, as above.

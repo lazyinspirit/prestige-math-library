@@ -4,6 +4,9 @@ kind: definition
 title: "Homotopies of continuous maps, homotopies relative to a subspace, and path homotopies relative to the endpoints"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-continuous-map-top, def-product-topology, def-subspace-topology-top, def-interval, def-path-connected]
 aliases: []
 landmark: true

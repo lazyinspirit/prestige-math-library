@@ -4,18 +4,27 @@ kind: corollary
 title: "Every nonempty convex subset of $\\mathbb{R}^n$ is contractible"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-two-maps-into-a-convex-set-are-homotopic, cor-contractible-iff-identity-nullhomotopic]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
   audited: 2026-07-31
 sources:
   scraped: []
   references:
-    - title: "MIT 18.901, Introduction to Topology lecture notes"
-      url: "https://math.mit.edu/~pieloch/teaching/18.901-spring-2025/18.901-spring-2025-Lecture-Notes.pdf"
+    - title: "Algebraic Topology lecture notes (UC Riverside)"
+      url: "https://math.ucr.edu/~jbergner/SPWM09.pdf"
 pipeline_run: null
 ---
 

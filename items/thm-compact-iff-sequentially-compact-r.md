@@ -4,6 +4,9 @@ kind: theorem
 title: "A subset of $\\mathbb{R}$ is compact iff it is sequentially compact"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-heine-borel-characterisation-r, thm-bolzano-weierstrass, def-open-cover-r, lem-sequential-characterisation-of-closure-r, def-subsequential-limit, def-bounded-set, def-countable-choice, def-open-and-closed-in-r, def-interior-closure-boundary-r, def-sequence, def-real-limit, lem-convergent-implies-bounded, lem-subsequence-inherits-limit, lem-limit-unique, lem-index-map-grows, thm-of-archimedean, lem-of-naturals-positive, lem-of-abs-value, lem-finite-set-has-max, def-max-min]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.4"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

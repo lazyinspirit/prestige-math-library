@@ -22,8 +22,8 @@
 // Model routing. BUILD roles follow the standing owner rule: GPT 5.6 Sol through
 // the Codex subscription at xhigh with a 1,000,000-token context window, passed
 // explicitly because the temporary CODEX_HOME deliberately does not inherit the
-// user's config.toml. AUDIT roles are all Claude as of 2026-08-05 (owner) — see
-// the audit block of the role table for what that costs.
+// user's config.toml. The audit uses the same Codex subscription route: Sol for
+// writing/adjudication roles and Terra for independent certification.
 //
 // READ-ONLY IS ENFORCED PER RUNNER, AND THE TWO RUNNERS DO IT DIFFERENTLY.
 // Codex has `--sandbox read-only`, a kernel-level guarantee. The `claude` CLI
@@ -44,8 +44,7 @@ import { REPO, deepseekEnvFile } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
-const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5';
-const SONNET_MODEL = process.env.SONNET_MODEL ?? 'claude-sonnet-5';
+const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
@@ -84,58 +83,15 @@ const ROLES = Object.freeze({
   reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, why: 'independent step-6 audit of a foreign batch' },
   alpha:        { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
-  orchestrator: { runner: 'claude', model: null,      sandbox: null,              cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
+  orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
 
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
-  // ALL-CLAUDE AUDIT LINEUP (owner, 2026-08-05). Beta moved Sol -> claude-opus-5,
-  // certifier and audit-refuter moved Sol -> claude-sonnet-5; Alpha was already
-  // claude-opus-5 (owner, 2026-08-03). Effort is xhigh on all three rerouted
-  // lanes, matching the Sol lanes they replace rather than silently dropping to
-  // the claude runner's default.
-  //
-  // WHAT THIS COSTS, recorded because the previous arrangement existed to buy it.
-  // Until now Alpha was deliberately a different family from the Sol Betas whose
-  // repairs it certifies and the Sol readers who certify Alpha's own. That
-  // separation is gone: Beta is now the SAME MODEL as the Alpha adjudicating its
-  // findings at A6, and certifier/refuter are the same family as both. No
-  // audit-side reader is cross-family with any other. DeepSeek in the judge lane
-  // (§8) is the only non-Claude reader left anywhere in the audit, so a
-  // Sonnet-refuter agreement with an Opus-authored repair is weak evidence and a
-  // DeepSeek rejection is the strong signal. Weight the A10 comparison that way.
-  //
-  // MEMORY. These are `claude` processes now, not `codex` ones, and wave 4
-  // measured 16 concurrent claude judge processes at 3.9 GB with a 4.6 GB peak on
-  // a 7.8 GB host (MemoryHigh=4G, MemoryMax=5G). A6 can hold certifier (6) plus
-  // audit-refuter (8) at once — comparable load, on the same host, and now on the
-  // same runner. If a lane starts returning capacity refusals, lower these caps
-  // rather than reading the refusal as a verdict.
-  'audit-beta':    { runner: 'claude', model: OPUS_MODEL,   sandbox: 'workspace-write', effort: 'xhigh', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
-  'audit-alpha':   { runner: 'claude', model: OPUS_MODEL,   sandbox: 'workspace-write', cap: 1, dir: 'research/audit', why: 'SINGLE adjudicator at A6 and A8; owner rule makes it claude-opus-5' },
-  // Read-only MECHANICALLY, not by request. The owner rule says a refuter never
-  // edits and a certifier never certifies its own work; a prompt that merely asks
-  // for that is not a guarantee, and these two roles are the ones whose findings
-  // would be worthless if they could quietly fix what they found. On the claude
-  // runner the guarantee is the CLAUDE_WRITE_TOOLS deny list above.
-  //
-  // THE SPLIT BETWEEN THESE TWO IS CAPABILITY, NOT PREFERENCE (owner, 2026-08-05
-  // permitted DeepSeek "as a substitute for sonnet 5 certifier or refuter").
-  // A CERTIFIER must check a repair against a reputable source, which needs web
-  // access; it stays on Sonnet 5, measured 2026-08-05 retrieving and citing a
-  // live URL under the read-only tool set below. DeepSeek through the API has no
-  // tools at all — no disk, no web — so a DeepSeek certifier would be reduced to
-  // asserting from memory exactly where wave 2 showed that fails (eight
-  // `established-knowledge` waivers, seven of which dissolved once a reader
-  // could actually fetch).
-  // A REFUTER reads a proof adversarially and returns evidence, which is what
-  // the DeepSeek judge lane already does on assembled context. Routing it to
-  // DeepSeek restores the cross-family separation this all-Claude lineup
-  // otherwise loses: it is the one audit-side reader that is not the same family
-  // as the Opus Beta that wrote the repair or the Opus Alpha that adjudicates it.
-  // The price is that Alpha must ASSEMBLE the context — a DeepSeek lane cannot
-  // open a file, so a refuter dispatched without --task is blind, and dispatch
-  // refuses that below rather than letting it return a confident empty reading.
-  certifier:       { runner: 'claude',   model: SONNET_MODEL, sandbox: 'read-only', effort: 'xhigh', cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author; needs web to check sources' },
-  'audit-refuter': { runner: 'deepseek', model: DEEPSEEK_MODEL, sandbox: 'read-only', cap: 8, dir: 'research/audit', requiresTask: true, why: 'adversarial proof reading on assembled context; the only cross-family audit reader' },
+  // Every Codex audit lane receives the explicit xhigh/1M configuration below;
+  // the tool-less DeepSeek refuter maps xhigh to its API's `max` value.
+  'audit-beta':    { runner: 'codex', model: SOL_MODEL,   sandbox: 'workspace-write', effort: 'xhigh', cap: 5, dir: 'research/audit', web: true, why: 'one per category batch: A1/A2 determination, A4 application' },
+  'audit-alpha':   { runner: 'codex', model: SOL_MODEL,   sandbox: 'workspace-write', effort: 'xhigh', cap: 1, dir: 'research/audit', web: true, why: 'single adjudicator at A6 and A8' },
+  certifier:       { runner: 'codex', model: TERRA_MODEL, sandbox: 'read-only',       effort: 'xhigh', cap: 6, dir: 'research/audit', web: true, why: 'independent current reading of a repair it did not author; needs web to check sources' },
+  'audit-refuter': { runner: 'deepseek', model: DEEPSEEK_MODEL, sandbox: 'read-only', effort: 'xhigh', cap: 8, dir: 'research/audit', requiresTask: true, why: 'adversarial proof reading on assembled context; tool-less by transport' },
 });
 
 const argv = process.argv.slice(2);

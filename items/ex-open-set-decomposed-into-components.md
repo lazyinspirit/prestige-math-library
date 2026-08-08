@@ -4,6 +4,11 @@ kind: example
 title: "An explicit open subset of $\\mathbb{R}$ written as the disjoint union of its component intervals"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-open-subsets-of-r-structure, def-interval, def-open-and-closed-in-r, thm-open-set-algebra-r]
 justified_by: []
 aliases: []

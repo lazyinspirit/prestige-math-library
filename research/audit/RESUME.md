@@ -1,8 +1,47 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVE 6 — A9 COMPLETE, A10 NEXT (2026-08-08)
+
+**This section supersedes the Wave 5 pointer below.** The owner cleared Wave 5's
+A10 pause by instructing the orchestrator to start Wave 6. Wave 5 was already
+committed and pushed; `main` matched `origin/main` at launch.
+
+A0 through A9 are complete: 126 items / 106 proof-bearing / 9 pages / 3 Beta
+batches after the declared real-analysis split; 34 tagged appearances excluded.
+The final manifest records 1,393 relationships. A6 read all 126 items, returned
+126/126 clean DeepSeek refutations, completed 93 high/critical reviews, and
+certified five mathematical repairs plus eight source corrections.
+
+Per the owner's correction, A7 was a **targeted rejudge of repaired items only**:
+13 exact targets, 13/13 DeepSeek + GPT 5.6 Terra pairs, and no sibling or
+whole-wave rejudge. The obsolete partial full-wave rows created before the
+correction remain in the append-only ledger but are explicitly ignored by the
+target-scoped coverage receipt. A8 adjudicated four Terra rejections as
+confirmed nonfatal, made zero edits, and independently read all 59 spine items.
+A9 personally re-read all 13 repaired items and their six home pages; it found
+no scope-denial defect or published-claim decay and passed both gates. Receipts:
+`research/audit/wave6-alpha.md`, `research/audit/wave6-A9.md`.
+
+**Exact next action: A10 final gates and rundown, then the sole owner pause.**
+Resume the driver with `node tools/run-wave.mjs --wave 6 --from-step A10`.
+Driver state: `research/audit/wave6-run-state.json`.
+
+Working baseline is HEAD `84c52d1` plus the owner-directed Sol/Terra mechanism
+change and Wave 6 artifacts. `.git` is read-only in this session, so those
+changes cannot be staged or committed here. Failed sandboxed attempts remain in
+the append-only ledgers as failed attempts; no failed row is counted as audit
+coverage.
+
 ## WAVE 5 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-06)
 
 **This section supersedes every section below it.**
+
+**Configuration amendment (2026-08-08).** The next audit work uses GPT 5.6 Sol
+for Audit-Beta and Alpha and GPT 5.6 Terra for certifiers and the second judge,
+all Codex lanes at `xhigh` with an explicit 1,000,000-token context window.
+The judge selector is now `JUDGE_LINEUP=deepseek+terra`; DeepSeek remains the
+tool-less cross-family refuter/judge lane at API `max`. This is a workflow
+configuration change only; it does not alter any completed wave ledger.
 
 **Full rundown: `research/audit/wave5-A10.md`.** Read that first; this is the
 pointer, not the record.

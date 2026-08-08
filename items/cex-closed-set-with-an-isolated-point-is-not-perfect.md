@@ -4,6 +4,11 @@ kind: counterexample
 title: "$\\{0\\} \\cup [1,2]$ is closed, has an isolated point, and is not perfect"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-perfect-set-r, def-limit-point-r, def-open-and-closed-in-r, def-interval, def-neighbourhood-r, thm-open-set-algebra-r, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []

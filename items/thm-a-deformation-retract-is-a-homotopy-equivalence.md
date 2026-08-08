@@ -4,6 +4,9 @@ kind: theorem
 title: "The inclusion of a deformation retract is a homotopy equivalence with the retraction as homotopy inverse"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-retraction-and-deformation-retract, def-homotopy-equivalence]
 aliases: []
 landmark: true

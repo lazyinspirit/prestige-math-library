@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every retract is a deformation retract"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-retraction-and-deformation-retract, def-standard-topologies, cor-contractible-iff-identity-nullhomotopic, cor-contractible-spaces-are-path-connected, def-path-connected, thm-path-connected-implies-connected, def-connected-space]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: definition
 title: "The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-numbers, def-real-order, def-complete-ordered-field, def-divergence-to-infinity, def-partial-order, lem-of-add-order]
 justified_by: []
 forward_refs: [cex-zero-times-infinity-indeterminate]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.2 (the extended real number system)"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "J. K. Hunter, Measure Theory notes"
+      url: "https://www.math.ucdavis.edu/~hunter/m206/ch0_measure.pdf"
 pipeline_run: null
 ---
 

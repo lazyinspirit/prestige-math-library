@@ -204,8 +204,7 @@ own, exactly as they would on disk.
 
 **The judge lanes.** Both pages name them **DeepSeek V4 Pro** and **GPT 5.6
 Terra** (owner instruction, 2026-08-05). Note that this is `JUDGE_LINEUP=`
-`deepseek+terra`, one of the three lineups `tools/judge.mts` and
-`tools/judge-sweep.mjs` support, but *not* their current default, which is
-`deepseek+sonnet`. If the default moves, the lanes are named in one place each:
+`deepseek+terra`, the production lineup used by `tools/judge.mts` and
+`tools/judge-sweep.mjs`. If the default moves, the lanes are named in one place each:
 `M.laneA` / `M.laneB` plus the step-7 narration in `build-workflow.html`, and
 `actorSlot()` plus `finding()` in `authoring-and-repair.html`.

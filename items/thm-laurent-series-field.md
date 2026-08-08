@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\mathbb{R}((t^{-1}))$ is a field: every nonzero formal Laurent series is invertible"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation, def-field, thm-reals-ordered-field, thm-recursion, thm-induction-principle, def-natural-numbers]
 aliases: []
 landmark: true
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Formal_power_series"
     - title: "Hahn series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn_series"
+    - title: "B. Sambale, An invitation to formal power series"
+      url: "https://link.springer.com/article/10.1365/s13291-022-00256-6"
+    - title: "Laurent series (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Laurent_series"
 pipeline_run: null
 ---
 

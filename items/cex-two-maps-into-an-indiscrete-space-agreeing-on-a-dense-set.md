@@ -4,6 +4,11 @@ kind: counterexample
 title: "Refuted: the agreement set of two continuous maps is closed, with no hypothesis on the codomain. Two continuous maps $\\mathbb{R} \\to \\{a,b\\}$ into the indiscrete two-point space have agreement set $\\mathbb{Q}$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-two-continuous-maps-agreeing-on-a-dense-subset-are-equal,
        cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed,
        cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal,

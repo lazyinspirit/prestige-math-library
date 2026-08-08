@@ -4,6 +4,9 @@ kind: lemma
 title: "For every $a > 0$, $a^{1/n} \\to 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-nth-roots-exist, lem-bernoulli-inequality, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-squeeze, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-sign-rules, lem-of-add-order, def-real-limit, def-sequence, def-integer-power, def-ordered-field, def-complete-ordered-field, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -28,6 +31,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.5"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "MIT 18.100B, Fall 2011, Problem Set 1 solutions"
+      url: "https://math.mit.edu/classes/18.100B/fall_2011/sol1.pdf"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

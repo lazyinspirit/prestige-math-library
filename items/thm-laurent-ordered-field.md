@@ -4,18 +4,22 @@ kind: theorem
 title: "$\\mathbb{R}((t^{-1}))$ is an ordered field, ordered by the sign of the leading coefficient"
 status: published
 origin: session
-deps: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation, thm-laurent-series-field, def-ordered-field, def-field, def-abs-value, thm-reals-ordered-field, thm-induction-principle, def-natural-numbers, thm-int-ordered-ring]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation, thm-laurent-series-field, def-ordered-field, def-archimedean-field, def-field, def-abs-value, thm-reals-ordered-field, thm-induction-principle, def-natural-numbers, thm-int-ordered-ring]
 aliases: []
 landmark: true
 short: "$K$ is an ordered field"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordered_field"
     - title: "Hahn series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn_series"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 
@@ -55,7 +61,7 @@ $P = \{\, f \in K : f \ne 0_K \text{ and } \operatorname{lc}(f) > 0 \,\}$
 
 [L4] $K$ is a field ([[thm-laurent-series-field]], [[def-field]]).
 
-[L5] An ordered field is a field with a subset $P$ satisfying (O1) trichotomy, for each $x$ exactly one of $x \in P$, $x = 0$, $-x \in P$, and (O2) closure of $P$ under addition and multiplication; the order is then $a < b :\iff b - a \in P$, and $n \cdot 1_F$ denotes the $n$-fold sum of $1_F$, with $0 \cdot 1_F = 0$ ([[def-ordered-field]]).
+[L5] An ordered field is a field with a subset $P$ satisfying (O1) trichotomy, for each $x$ exactly one of $x \in P$, $x = 0$, $-x \in P$, and (O2) closure of $P$ under addition and multiplication; the order is then $a < b :\iff b - a \in P$ ([[def-ordered-field]]). For $n \ge 1$, $n \cdot 1_F$ is the $n$-fold sum of $1_F$, and $0 \cdot 1_F = 0$ ([[def-archimedean-field]]).
 
 [L6] $\mathbb{R}$ is an ordered field: exactly one of $x > 0$, $x = 0$, $x < 0$ holds for each real $x$, and sums and products of positive reals are positive ([[thm-reals-ordered-field]], [[def-ordered-field]]).
 
@@ -89,19 +95,6 @@ $P = \{\, f \in K : f \ne 0_K \text{ and } \operatorname{lc}(f) > 0 \,\}$
 
 ## Remarks
 
-- **The order compares lowest terms, and only those.** By clause 1, deciding
-  $f < g$ means finding the least index at which $f$ and $g$ differ and
-  comparing the two coefficients there. Every later coefficient is irrelevant,
-  which is why $\iota(c) > t^{-1}$ for every positive real $c$, however small,
-  and why the order is not the coefficientwise one.
+- **The order compares lowest terms, and only those.** By clause 1, deciding $f < g$ means finding the least index at which $f$ and $g$ differ and comparing the two coefficients there. Every later coefficient is irrelevant, which is why $\iota(c) > t^{-1}$ for every positive real $c$, however small, and why the order is not the coefficientwise one.
 
-- **$\mathbb{R}$ sits inside $K$ as an ordered subfield, and that is all clause
-  3 says.** It does not say that $\mathbb{R}$ is cofinal in $K$, and indeed it
-  is not: the computation used for the canonical naturals in
-  [[lem-laurent-non-archimedean]] applies verbatim to every constant, since
-  $v(t) = -1 < 0 = v(\iota(c))$ for every $c \ne 0$, so $\iota(c) < t$ for every
-  real $c$. The identification
-  $n \cdot 1_K = \iota(n \cdot 1_{\mathbb{R}})$ is recorded because the
-  Archimedean property is a statement about the canonical naturals
-  ([[def-archimedean-field]]), and it is the bridge between those and the
-  constant series.
+- **$\mathbb{R}$ sits inside $K$ as an ordered subfield, and that is all clause 3 says.** It does not say that $\mathbb{R}$ is cofinal in $K$, and indeed it is not: the computation used for the canonical naturals in [[lem-laurent-non-archimedean]] applies verbatim to every constant, since $v(t) = -1 < 0 = v(\iota(c))$ for every $c \ne 0$, so $\iota(c) < t$ for every real $c$. The identification $n \cdot 1_K = \iota(n \cdot 1_{\mathbb{R}})$ is recorded because the Archimedean property is a statement about the canonical naturals ([[def-archimedean-field]]), and it is the bridge between those and the constant series.

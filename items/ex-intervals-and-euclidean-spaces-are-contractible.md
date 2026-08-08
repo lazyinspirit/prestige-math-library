@@ -4,18 +4,27 @@ kind: example
 title: "Every nonempty interval and every $\\mathbb{R}^n$ with $n\\ge1$ contracts to any chosen point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-convex-subsets-of-rn-are-contractible, def-interval]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
   audited: 2026-07-31
 sources:
   scraped: []
   references:
-    - title: "MIT 18.901, Introduction to Topology lecture notes"
-      url: "https://math.mit.edu/~pieloch/teaching/18.901-spring-2025/18.901-spring-2025-Lecture-Notes.pdf"
+    - title: "Algebraic Topology lecture notes (UC Riverside)"
+      url: "https://math.ucr.edu/~jbergner/SPWM09.pdf"
 pipeline_run: null
 ---
 

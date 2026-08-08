@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: homotopy-equivalent spaces must be homeomorphic"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-homotopy-equivalence, cor-convex-subsets-of-rn-are-contractible, cor-contractible-iff-identity-nullhomotopic, thm-r-uncountable, def-homeomorphism-and-open-maps]
 aliases: []
 landmark: false

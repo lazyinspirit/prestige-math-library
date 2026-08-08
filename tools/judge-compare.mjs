@@ -15,17 +15,12 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 }
 
 // JUDGE_LINEUP mirrors tools/judge.mts, judge-sweep.mjs and level-coverage.mjs.
-// This tool was pinned to deepseek+terra long after the owner retired that lane
-// (2026-08-04), so a wave judged by deepseek+sonnet reported one absent model
-// and silently dropped every Sonnet verdict from the step-10/A10 comparison.
-// The lane is resolved, never assumed; `lineup` is emitted so a saved report
+// The lineup is resolved, never assumed; `lineup` is emitted so a saved report
 // says which two models it actually compared.
 const JUDGE_LINEUPS = Object.freeze({
   "deepseek+terra": ["deepseek-v4-pro", "gpt-5.6-terra"],
-  "deepseek+opus": ["deepseek-v4-pro", "claude-opus-5"],
-  "deepseek+sonnet": ["deepseek-v4-pro", "claude-sonnet-5"],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const models = JUDGE_LINEUPS[lineupName];
 if (!models) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);

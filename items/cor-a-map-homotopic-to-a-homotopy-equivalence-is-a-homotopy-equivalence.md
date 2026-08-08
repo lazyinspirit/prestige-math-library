@@ -4,6 +4,9 @@ kind: corollary
 title: "A continuous map homotopic to a homotopy equivalence is itself a homotopy equivalence"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-homotopy-equivalence, thm-composition-respects-homotopy, cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]
 aliases: []
 landmark: false

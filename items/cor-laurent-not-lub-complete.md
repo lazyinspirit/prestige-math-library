@@ -4,6 +4,9 @@ kind: corollary
 title: "$\\mathbb{R}((t^{-1}))$ does not have the least-upper-bound property; its canonical naturals have no supremum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-formal-laurent-series, lem-laurent-valuation, thm-laurent-ordered-field, lem-laurent-non-archimedean, thm-of-archimedean, def-complete-ordered-field, def-archimedean-field, def-ordered-field, thm-reals-ordered-field, cor-cauchy-reals-lub-complete]
 aliases: []
 landmark: true
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ordered_field"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
+    - title: "Complete ordered fields are Archimedean (Rutgers Math 311 notes)"
+      url: "https://sites.math.rutgers.edu/~sussmann/slides-math-311-2020-September-21.pdf"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 

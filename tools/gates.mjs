@@ -76,6 +76,7 @@ const CONTRACTS = '{dir}/{run}-proof-contracts.json';
 const TOUCHES = '{dir}/{run}-touches.json';
 const JUDGE_LEDGER = '{dir}/{run}-judge.jsonl';
 const ADJUDICATIONS = '{dir}/{run}-judge-adjudications.jsonl';
+const REJUDGE_TARGETS = '{dir}/{run}-rejudge-targets.json';
 const COVERAGE_RECEIPT = isAudit ? '{dir}/{run}-coverage.json' : '{dir}/{run}-audit-coverage.json';
 // The docs all name one shared `research/dependency-spine-audit.json`, but on
 // disk every receipt has been run-scoped, under two different spellings
@@ -215,10 +216,11 @@ const AUDIT_COVERAGE = () => g('level-coverage.mjs', [
   '--contracts', CONTRACTS,
   '--judge-ledger', JUDGE_LEDGER,
   '--judge-adjudications', ADJUDICATIONS,
+  '--judge-targets', REJUDGE_TARGETS,
   '--spine-receipt', SPINE_RECEIPT,
   '--audit-receipt', COVERAGE_RECEIPT,
   '--verify-current-context', MANIFESTS,
-], { needs: [CONTRACTS, JUDGE_LEDGER, ADJUDICATIONS, SPINE_RECEIPT], why: 'the hard receipt gate — runs AFTER A8, not between A7 and A8' });
+], { needs: [CONTRACTS, JUDGE_LEDGER, ADJUDICATIONS, REJUDGE_TARGETS, SPINE_RECEIPT], why: 'whole-wave audit receipt plus targeted paired coverage for repaired items — runs AFTER A8' });
 
 const AUDIT_STEPS = {
   // Scope generation and the pre-audit baseline. Recording a green suite here is

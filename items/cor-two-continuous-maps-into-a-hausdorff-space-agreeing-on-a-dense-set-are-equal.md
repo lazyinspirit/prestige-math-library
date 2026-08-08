@@ -4,6 +4,9 @@ kind: corollary
 title: "Two continuous maps into a Hausdorff space that agree on a dense subset are equal"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed,
        def-dense-top, thm-closure-characterisation-top, def-hausdorff-space,
        def-continuous-map-top, def-interior-closure-boundary-top]
@@ -31,8 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dense_set"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "General Topology Notes (UC Riverside)"
+      url: "https://math.ucr.edu/~res/math205A-2014/gentop-notes.pdf"
 pipeline_run: null
 ---
 

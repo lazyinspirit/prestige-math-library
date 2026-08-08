@@ -4,6 +4,9 @@ kind: example
 title: "Every nondegenerate closed interval is perfect, giving a second proof that it is uncountable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-perfect-set-r, thm-perfect-set-uncountable-r, cor-interval-uncountable, def-interval, def-limit-point-r, def-neighbourhood-r, def-open-and-closed-in-r, lem-finite-set-has-max, def-max-min, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
 aliases: []

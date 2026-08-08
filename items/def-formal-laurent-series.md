@@ -4,6 +4,9 @@ kind: definition
 title: "The formal Laurent series $\\mathbb{R}((t^{-1}))$: support bounded below, valuation, leading coefficient"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-numbers, thm-reals-ordered-field, def-integers, def-int-order, def-int-operations, thm-int-ordered-ring, def-field, def-ordered-field]
 justified_by: [lem-laurent-series-ring, thm-laurent-series-field, thm-laurent-ordered-field]
 aliases: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hahn_series"
     - title: "Ordered field (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_field"
+    - title: "B. Sambale, An invitation to formal power series"
+      url: "https://link.springer.com/article/10.1365/s13291-022-00256-6"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 

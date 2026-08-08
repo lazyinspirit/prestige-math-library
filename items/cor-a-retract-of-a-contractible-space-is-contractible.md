@@ -4,6 +4,9 @@ kind: corollary
 title: "Every nonempty retract of a contractible space is contractible"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-retraction-and-deformation-retract, def-nullhomotopic-map-and-contractible-space, thm-composition-respects-homotopy, cor-contractible-iff-identity-nullhomotopic]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\mathbb{R}((t^{-1}))$ is a commutative ring: the product is a finite sum and both operations preserve support bounded below"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-formal-laurent-series, thm-int-ordered-ring, def-int-order, def-int-operations, thm-well-ordering-principle, lem-nat-embeds-int, def-field, thm-reals-ordered-field]
 aliases: []
 landmark: false
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Formal_power_series"
     - title: "Hahn series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hahn_series"
+    - title: "B. Sambale, An invitation to formal power series"
+      url: "https://link.springer.com/article/10.1365/s13291-022-00256-6"
+    - title: "H. G. Dales, Norming infinitesimals of large fields"
+      url: "https://eprints.lancs.ac.uk/id/eprint/78955/1/Norminginfinitesimalsfinal.pdf"
 pipeline_run: null
 ---
 

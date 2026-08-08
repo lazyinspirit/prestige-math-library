@@ -4,6 +4,9 @@ kind: theorem
 title: "Arbitrary unions and finite intersections of open subsets of $\\mathbb{R}$ are open, and dually for closed sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-interval, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 forward_refs: [cex-intersection-of-shrinking-intervals-not-open]
@@ -29,6 +32,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

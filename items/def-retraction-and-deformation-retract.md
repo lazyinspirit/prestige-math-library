@@ -4,6 +4,9 @@ kind: definition
 title: "Retractions and deformation retracts, with a deformation retraction required to fix the retract pointwise"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-homotopy-relative-and-path-homotopy, def-continuous-map-top, def-subspace-topology-top]
 aliases: []
 landmark: true

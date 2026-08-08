@@ -4,6 +4,9 @@ kind: example
 title: "The diagonal of $\\mathbb{R}$ is closed in $\\mathbb{R}^2$, computed from the product basis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-hausdorff-iff-the-diagonal-is-closed, def-the-diagonal-of-a-space,
        def-product-topology, lem-product-topology-on-rn, lem-real-line-is-a-metric-space,
        def-metrizable-space, def-hausdorff-space, def-interval,
@@ -33,8 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "Product topology (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Product_topology"
-    - title: "J. Munkres, Topology, 2nd ed., §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Stacks Project, Topology, Lemma 5.3 (Tag 08ZD)"
+      url: "https://stacks.math.columbia.edu/tag/08ZD"
 pipeline_run: null
 ---
 

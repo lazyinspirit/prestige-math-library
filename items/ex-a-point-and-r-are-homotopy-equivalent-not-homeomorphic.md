@@ -4,6 +4,9 @@ kind: example
 title: "A one-point space and $\\mathbb{R}$ are homotopy equivalent but not homeomorphic"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-homotopy-equivalent-spaces-are-homeomorphic, ex-intervals-and-euclidean-spaces-are-contractible, thm-r-uncountable, def-homotopy-equivalence, def-homeomorphism-and-open-maps]
 aliases: []
 landmark: false

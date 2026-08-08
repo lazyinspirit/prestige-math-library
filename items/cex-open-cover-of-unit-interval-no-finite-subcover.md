@@ -4,6 +4,9 @@ kind: counterexample
 title: "The cover $\\{(1/k, 1)\\}$ of $(0,1)$ has no finite subcover, so $(0,1)$ is not compact"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-open-cover-r, thm-heine-borel-characterisation-r, cor-archimedean-reciprocal, thm-of-archimedean, def-interval, def-open-and-closed-in-r, def-neighbourhood-r, lem-of-naturals-positive, lem-of-inverse-positive, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Example 2.21(h))"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "University of Colorado, Analysis I midterm solutions"
+      url: "https://math.colorado.edu/~stade/AnalysisI/TH_Midterm_3001_sol.pdf"
 pipeline_run: null
 ---
 

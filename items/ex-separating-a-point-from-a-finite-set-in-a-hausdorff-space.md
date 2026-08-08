@@ -4,6 +4,9 @@ kind: example
 title: "A finite subset of any space is compact, so the compact separation clauses specialise to separating a point from a finite set in a Hausdorff space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-compact-subset-of-a-hausdorff-space-is-closed, def-compact-space,
        def-subspace-topology-top, def-hausdorff-space, def-countable,
        lem-finite-choice, def-choice-function, def-topological-space]
@@ -31,8 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Compact_space"
     - title: "Hausdorff space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
-    - title: "J. Munkres, Topology, 2nd ed., §26"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "A. Hatcher, Topology Notes"
+      url: "https://pi.math.cornell.edu/~hatcher/Top/TopNotes.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "$\\limsup(x_k + y_k) \\le \\limsup x_k + \\limsup y_k$ whenever the right-hand side is defined in $\\overline{\\mathbb{R}}$, and dually for $\\liminf$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, lem-limsup-epsilon-characterisation, lem-limsup-reflection, lem-liminf-le-limsup, thm-convergence-iff-limsup-equals-liminf, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-divergence-to-infinity, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-add-order, def-nat-order, thm-nat-linear-order]
 justified_by: []
 forward_refs: [cex-limsup-subadditivity-strict]

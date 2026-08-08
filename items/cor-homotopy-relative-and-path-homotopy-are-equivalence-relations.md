@@ -4,6 +4,9 @@ kind: corollary
 title: "Homotopy relative to a fixed subspace, and path homotopy relative to endpoints, are equivalence relations"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-homotopy-relative-and-path-homotopy, lem-homotopy-reflexive-and-symmetric, lem-homotopy-transitivity-by-reparametrisation, def-equivalence-relation]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Homotopy lecture notes (University of Padua)"
+      url: "https://www.math.unipd.it/~maraston/Topologia2/Topo2_1011_homotopy.pdf"
 pipeline_run: null
 ---
 

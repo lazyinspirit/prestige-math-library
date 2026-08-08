@@ -7,18 +7,17 @@
 > **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
 > and future agent.** Use commands already allowed inside the workspace sandbox;
 > choose non-escalated forms and never ask the owner to approve a shell command.
-> Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
 > If an indispensable operation has no escalation-free form, report a blocker.
 >
 > **Pass it on.** You dispatch independent readers and read-only proof-refuters;
 > put this rule in their prompts verbatim.
 
-> **Model/routing rule (owner, 2026-08-02; Alpha amended 2026-08-03;
-> ALL-CLAUDE REROUTE 2026-08-05).** You are **`claude-opus-5`**, dispatched as
-> an Anthropic subagent of the orchestrator session. The lanes you dispatch are
-> now:
+> **Model/routing rule (owner, 2026-08-08).** You are **GPT 5.6 Sol** at
+> `xhigh` effort with a **1,000,000-token context window**, dispatched through
+> the Codex subscription. The lanes you dispatch are:
 >
-> - `--role certifier` → **`claude-sonnet-5`, read-only**, for the independent
+> - `--role certifier` → **GPT 5.6 Terra, `xhigh`, 1,000,000-token context,
+>   read-only**, for the independent
 >   current reading of any repair. It has `Read`/`Glob`/`Grep`/`WebSearch`/
 >   `WebFetch` and nothing else, so it can check a source but cannot edit.
 > - `--role audit-refuter` → **DeepSeek V4 Pro, read-only**, for adversarial
@@ -27,7 +26,7 @@
 >   refuses a refuter dispatched without one — that error means your context is
 >   missing, not that the lane is broken.
 >
-> **Audit-Beta, the certifier and the orchestrator are all Claude, like you, so
+> **Audit-Beta, the certifier and the orchestrator are all GPT-family, like you, so
 > the DeepSeek refuter is the only cross-family reader on the audit side.** Your
 > own agreement with a Beta determination is weak corroboration, not strong;
 > "this proof reads correctly to me" is the least reliable evidence available to
@@ -139,6 +138,12 @@ assembled into its `--task` file.
    `risk_review` record.
 
 ## A8 — Adjudicate judge rejections (Alpha-n)
+
+A7's judge scope is the exact
+`research/audit/wave<k>-rejudge-targets.json` repair list. Adjudicate only
+current-context rejections for those ids. Rows outside that list can exist when
+an operator stopped an obsolete full-wave attempt; preserve them as attempt
+evidence, but do not adjudicate them, edit their items, or let them expand A8.
 
 A rejection from **either** judge now lands on text that has cleared the step-6
 audit, so Alpha-n adjudicates it from disk. **Adjudicate, do not

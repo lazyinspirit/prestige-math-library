@@ -4,6 +4,9 @@ kind: remark
 title: "Which extended-real operations this library leaves undefined, and where each $\\limsup$ statement needs the hypothesis"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-extended-reals, def-limsup-liminf, thm-limsup-subadditive, thm-limsup-submultiplicative, rem-sup-conventions, lem-extended-reals-complete]
 justified_by: []
 forward_refs: [cex-zero-times-infinity-indeterminate]

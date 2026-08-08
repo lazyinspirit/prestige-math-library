@@ -4,6 +4,9 @@ kind: definition
 title: "Convergence in $\\overline{\\mathbb{R}}$ and the extended subsequential limit set: $L \\in \\overline{\\mathbb{R}}$ is an extended subsequential limit when some subsequence converges to $L$, or diverges to $L = \\pm\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-extended-reals, def-sequence, def-real-limit, def-divergence-to-infinity, def-subsequential-limit, lem-limit-unique]
 justified_by: []
 forward_refs: [cex-limsup-infinite-not-attained-in-r]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §6.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
 pipeline_run: null
 ---
 

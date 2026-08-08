@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\liminf x_k \\le \\limsup x_k$ for every real sequence"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-nat-order, thm-nat-linear-order]
 justified_by: []
 forward_refs: [ex-limsup-of-alternating-sequence]

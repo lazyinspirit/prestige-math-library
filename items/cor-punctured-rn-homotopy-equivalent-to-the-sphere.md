@@ -4,6 +4,9 @@ kind: corollary
 title: "For $n\\ge1$, the punctured Euclidean space $\\mathbb{R}^n\\setminus\\{0\\}$ is homotopy equivalent to $S^{n-1}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-punctured-rn-deformation-retracts-onto-the-sphere, thm-a-deformation-retract-is-a-homotopy-equivalence]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "MAT 530 Topology lecture notes (Stony Brook University)"
+      url: "https://www.math.stonybrook.edu/~cschnell/pdf/notes/mat530.pdf"
 pipeline_run: null
 ---
 

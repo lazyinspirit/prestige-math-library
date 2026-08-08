@@ -4,6 +4,9 @@ kind: example
 title: "For every space $X$, the cylinder $X\\times[0,1]$ deformation retracts onto $X\\times\\{0\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-retraction-and-deformation-retract, thm-product-universal-property, def-product-topology, lem-straight-line-homotopies-are-continuous, thm-continuity-characterisations-top]
 aliases: []
 landmark: false

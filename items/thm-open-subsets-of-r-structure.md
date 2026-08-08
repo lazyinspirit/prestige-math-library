@@ -4,6 +4,9 @@ kind: theorem
 title: "Every open subset of $\\mathbb{R}$ is a countable disjoint union of open intervals, namely its order components"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-open-and-closed-in-r, def-neighbourhood-r, def-interval, def-complete-ordered-field, lem-sup-epsilon, lem-inf-epsilon, thm-infimum-property, def-infimum, lem-sup-unique, def-bounded-set, lem-rat-embeds-dense, thm-rationals-countable, lem-subset-of-countable, def-countable, def-injection-surjection-bijection, def-equinumerous, thm-well-ordering-principle, def-ordered-field]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

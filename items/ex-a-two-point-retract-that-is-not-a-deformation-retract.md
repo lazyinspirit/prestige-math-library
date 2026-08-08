@@ -4,6 +4,9 @@ kind: example
 title: "A singleton is a retract but not a deformation retract of the two-point discrete space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-a-retract-must-be-a-deformation-retract, def-standard-topologies, def-path-connected, def-retraction-and-deformation-retract]
 aliases: []
 landmark: false

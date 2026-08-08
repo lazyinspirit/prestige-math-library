@@ -4,6 +4,9 @@ kind: theorem
 title: "Heine-Borel by bisection: every closed bounded interval $[a,b]$ is compact"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-open-cover-r, def-interval, thm-nested-interval-property, def-complete-ordered-field, thm-recursion, cor-archimedean-reciprocal, thm-of-archimedean, def-neighbourhood-r, def-open-and-closed-in-r, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -28,6 +31,8 @@ sources:
       url: "https://www.jirka.org/ra/"
     - title: "Nested intervals (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nested_intervals"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\limsup(-x_k) = -\\liminf(x_k)$, with the reflection of $\\overline{\\mathbb{R}}$ exchanging $\\pm\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, def-extended-reals, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-sequence]
 justified_by: []
 aliases: []
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infimum_and_supremum"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "M. Boyle, Liminf and limsup notes"
+      url: "https://www.math.umd.edu/~mboyle/courses/410f12/liminf.pdf"
+    - title: "Extended real number line (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Extended_real_number_line"
 pipeline_run: null
 ---
 

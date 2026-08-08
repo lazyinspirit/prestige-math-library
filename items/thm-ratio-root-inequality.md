@@ -4,6 +4,9 @@ kind: theorem
 title: "For $a_k > 0$: $\\liminf a_{k+1}/a_k \\le \\liminf a_k^{1/k} \\le \\limsup a_k^{1/k} \\le \\limsup a_{k+1}/a_k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-limsup-liminf, lem-limsup-epsilon-characterisation, lem-liminf-le-limsup, lem-limsup-monotone-comparison, lem-limsup-exists, lem-extended-reals-complete, thm-convergence-iff-limsup-equals-liminf, def-extended-reals, def-divergence-to-infinity, thm-nth-roots-exist, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, lem-nth-root-of-constant-tends-to-one, lem-power-monotone, def-integer-power, lem-power-laws, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-inverse-positive, thm-algebra-of-limits, thm-induction-principle, lem-rat-embeds-dense, lem-of-add-order, lem-of-sign-rules, prop-of-multiply-inequalities, def-sequence, def-real-limit, def-upper-bound, def-partial-order, def-nat-order, thm-nat-linear-order]
 justified_by: []
 forward_refs: [ex-ratio-fails-root-succeeds, ex-strict-ratio-root-chain]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ratio_test"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3 (3.37)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "University of Maryland Math 410, Notes on the Real Numbers"
+      url: "https://math.umd.edu/~lvrmr/2010-2011-F/Classes/MATH410/NOTES/Reals.pdf"
 pipeline_run: null
 ---
 

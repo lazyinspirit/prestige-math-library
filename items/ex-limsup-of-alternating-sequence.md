@@ -4,6 +4,9 @@ kind: example
 title: "$(-1)^k$ has $\\liminf = -1$ and $\\limsup = 1$, so it does not converge"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, thm-convergence-iff-limsup-equals-liminf, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_superior_and_limit_inferior"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

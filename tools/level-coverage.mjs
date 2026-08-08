@@ -27,12 +27,13 @@ const verifyCurrent = argv.includes('--verify-current-context');
 const contractsPath = option('--contracts');
 const judgePath = option('--judge-ledger');
 const judgeAdjudicationsPath = option('--judge-adjudications');
+const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
 const templatePath = option('--template');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--audit-receipt', '--spine-receipt', '--template'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template'].includes(argv[index - 1]);
 });
 if (!batchFiles.length || (!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
 
@@ -41,19 +42,13 @@ const warnings = [];
 const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 // JUDGE_LINEUP mirrors tools/judge.mts and tools/judge-sweep.mjs: the build
-// default is deepseek+sonnet, and the published-page audit (AUDIT-WORKFLOW.md)
-// verifies the same deepseek+sonnet pairs on the current frozen context. The
-// lane went Opus -> Sonnet -> Terra -> Sonnet (owner, 2026-08-04); every older
-// row is historical evidence and does not constitute coverage, the retired
-// Sonnet rows included — coverage is per frozen context, not per model name.
+// default is deepseek+terra, and the published-page audit (AUDIT-WORKFLOW.md)
+// verifies the same pairs on the current frozen context. Historical rows remain
+// evidence only: coverage is per frozen context, not per model name.
 const JUDGE_LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
-  // Owner, 2026-08-02: audit second lane moved Opus 5 -> Sonnet 5 (headless
-  // Opus refused ~80% of calls under 16-way lane concurrency).
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+sonnet';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
 const JUDGES = JUDGE_LINEUPS[lineupName];
 if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(', ')}`); process.exit(2); }
 // --audit: published-page audit scope (AUDIT-WORKFLOW.md). A legacy published
@@ -63,6 +58,10 @@ if (!JUDGES) { console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LI
 // blocking every wave on history or inviting dishonest retagging. Everything
 // else (provenance coverage, contracts, receipts, judge pairs) stays hard.
 const auditMode = argv.includes('--audit');
+if (judgeTargetsPath && !auditMode) {
+  console.error('--judge-targets is reserved for the published-page audit');
+  process.exit(2);
+}
 
 function split(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -147,6 +146,28 @@ for (const file of batchFiles) {
   }
 }
 scope.sort();
+let judgeScope = scope;
+if (judgeTargetsPath) {
+  const targetReceipt = loadJson(judgeTargetsPath, 'judge-targets-read');
+  if (targetReceipt) {
+    if (targetReceipt.version !== 1 || targetReceipt.mode !== 'published-audit-repair-targets' || !Array.isArray(targetReceipt.targets)) {
+      error('judge-targets-shape', `${judgeTargetsPath}: expected {version:1, mode:"published-audit-repair-targets", targets:[...]}`);
+      judgeScope = [];
+    } else {
+      const ids = targetReceipt.targets.map((target) => typeof target === 'string' ? target : target?.id);
+      if (!ids.length || ids.some((id) => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+        error('judge-targets-shape', `${judgeTargetsPath}: targets must name at least one unique item id`);
+        judgeScope = [];
+      } else {
+        const outside = ids.filter((id) => !scope.includes(id));
+        if (outside.length) error('judge-targets-outside-scope', `${judgeTargetsPath}: ${outside.join(', ')} are outside the supplied audit manifests`);
+        judgeScope = ids.filter((id) => scope.includes(id)).sort();
+      }
+    }
+  } else {
+    judgeScope = [];
+  }
+}
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
@@ -272,7 +293,7 @@ if (judgePath && existsSync(resolvePath(judgePath))) {
     if (!line.trim()) continue;
     let record;
     try { record = JSON.parse(line); } catch { continue; }
-    if (!scope.includes(record?.id) || !JUDGES.includes(record?.model) || typeof record?.context_sha256 !== 'string') continue;
+    if (!judgeScope.includes(record?.id) || !JUDGES.includes(record?.model) || typeof record?.context_sha256 !== 'string') continue;
     if (record.keep !== true && record.keep !== false) continue;
     if (!verdicts.has(record.id)) verdicts.set(record.id, new Map());
     const byContext = verdicts.get(record.id);
@@ -376,11 +397,12 @@ function currentContextHash(id) {
 // edit cannot stale it". The field simply was never written to the ledger, so
 // this gate had nothing to honour the rule with. judge.mts now records it.
 //
-// A REPAIRED item is never covered by (b): its own hash changed, so it must be
-// rejudged. That is the guarantee this gate exists to enforce, and it is intact.
+// In published-audit mode with --judge-targets, this loop is deliberately the
+// exact repair set rather than the whole manifest. A2/A6 provide whole-wave
+// reading coverage; A7 supplies paired REJUDGE evidence only for actual repairs.
 // Legacy rows predating item_sha256 fall back to (a) alone, which is strict.
 const judgeCoverage = [];
-for (const id of judgePath ? scope : []) {
+for (const id of judgePath ? judgeScope : []) {
   const contexts = verdicts.get(id) ?? new Map();
   const now = verifyCurrent ? currentContextHash(id) : null;
   const current = now?.context ?? null;
@@ -425,18 +447,18 @@ for (const id of judgePath ? scope : []) {
   judgeCoverage.push({ id, context_sha256: hash, models });
 }
 
-const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_pairs: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
+const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_pairs: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
 const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
 if (asJson) console.log(JSON.stringify(result, null, 2));
 else {
   if (templatePath) console.log(`level-coverage: wrote audit receipt template ${templatePath}`);
-  console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs} complete judge pair(s)`);
+  console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs}/${summary.judge_scope} required judge pair(s)`);
   for (const entry of warnings) console.warn(`WARN ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
   for (const entry of errors) console.error(`ERROR ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
 }
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
   process.exit(2);
 }

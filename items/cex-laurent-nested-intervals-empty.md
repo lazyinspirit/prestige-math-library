@@ -4,6 +4,9 @@ kind: counterexample
 title: "The unrestricted nested interval property fails in $\\mathbb{R}((t^{-1}))$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [def-formal-laurent-series, lem-laurent-series-ring, lem-laurent-valuation, thm-laurent-ordered-field, lem-laurent-non-archimedean, def-sequences-in-an-ordered-field, cor-laurent-nested-intervals, def-ordered-field, thm-reals-ordered-field, cor-cauchy-reals-lub-complete, thm-of-archimedean, cor-archimedean-reciprocal]
 aliases: []
 landmark: false

@@ -4,6 +4,9 @@ kind: corollary
 title: "A homotopy equivalence induces a bijection between path components"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-homotopy-equivalence, def-path-connected, thm-composition-respects-homotopy, thm-product-universal-property, thm-continuity-characterisations-top]
 aliases: []
 landmark: true

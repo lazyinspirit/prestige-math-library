@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Q}$ has closure $\\mathbb{R}$, empty interior, and boundary $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-interior-closure-boundary-r, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-neighbourhood-r, def-interval, lem-rat-embeds-dense, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Boundary_(topology)"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

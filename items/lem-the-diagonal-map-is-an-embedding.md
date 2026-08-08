@@ -4,6 +4,9 @@ kind: lemma
 title: "$\\delta_X$ is a topological embedding of $X$ onto $\\Delta_X$, and $\\langle f, g \\rangle$ is continuous whenever $f$ and $g$ are"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-diagonal-of-a-space, def-product-topology, thm-product-universal-property,
        def-homeomorphism-and-open-maps, def-subspace-topology-top, def-continuous-map-top]
 justified_by: []
@@ -30,8 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Product_topology"
     - title: "Embedding (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Embedding"
-    - title: "J. Munkres, Topology, 2nd ed., §19"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Diagonal embedding (PlanetMath)"
+      url: "https://planetmath.org/diagonalembedding"
 pipeline_run: null
 ---
 

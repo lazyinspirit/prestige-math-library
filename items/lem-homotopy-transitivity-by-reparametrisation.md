@@ -4,6 +4,9 @@ kind: lemma
 title: "Two homotopies relative to the same subspace concatenate after piecewise-linear reparametrisation"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-homotopy-relative-and-path-homotopy, thm-continuity-characterisations-top, def-subspace-topology-top, thm-product-universal-property, def-topological-space, lem-real-line-is-a-metric-space]
 aliases: []
 landmark: true
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Homotopy lecture notes (University of Padua)"
+      url: "https://www.math.unipd.it/~maraston/Topologia2/Topo2_1011_homotopy.pdf"
 pipeline_run: null
 ---
 

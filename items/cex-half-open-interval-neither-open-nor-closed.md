@@ -4,6 +4,9 @@ kind: counterexample
 title: "$[0,1)$ is neither open nor closed in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-every-set-is-open-or-closed, def-interval, def-open-and-closed-in-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_set"
     - title: "Interval (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Interval_(mathematics)"
+    - title: "MIT 18.100, Test 1 solutions"
+      url: "https://math.mit.edu/classes/18.100/Test1_sol.pdf"
 pipeline_run: null
 ---
 

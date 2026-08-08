@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\limsup(x_k + y_k) = \\limsup x_k + \\limsup y_k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-limsup-subadditive, def-limsup-liminf, def-extended-reals, lem-alternating-sequence, lem-index-map-grows, lem-limsup-exists, lem-extended-reals-complete, def-upper-bound, def-partial-order, def-sequence, lem-of-abs-value, def-abs-value, cor-of-one-positive, lem-of-add-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 forward_refs: [cex-limsup-subadditivity-strict]

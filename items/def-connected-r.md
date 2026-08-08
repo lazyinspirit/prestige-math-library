@@ -4,6 +4,9 @@ kind: definition
 title: "Separated sets, disconnection, and connected subset of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-interval, def-neighbourhood-r]
 justified_by: []
 forward_refs: [cex-rationals-in-an-interval-are-disconnected]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §7.5"
       url: "https://www.jirka.org/ra/"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

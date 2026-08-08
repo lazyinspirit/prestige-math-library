@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every subset of $\\mathbb{R}$ is either open or closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-open-and-closed-in-r, def-interval, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [cex-half-open-interval-neither-open-nor-closed]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Remark 2.28)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.100, Test 1 solutions"
+      url: "https://math.mit.edu/classes/18.100/Test1_sol.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "$\\{1/k : k \\ge 1\\} \\cup \\{0\\}$ is compact while $\\{1/k : k \\ge 1\\}$ is not closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-heine-borel-characterisation-r, def-limit-point-r, thm-closure-characterisations-r, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, lem-of-abs-value, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_point"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Example 2.21(e))"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

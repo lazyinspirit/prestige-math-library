@@ -89,30 +89,22 @@ attempt('yaml', true, () => {
 
 // ---- model lanes ------------------------------------------------------------
 
-// WHICH CLI IS REQUIRED IS COMPUTED, NOT ASSUMED (owner 2026-08-05 reroute).
+// WHICH CLI IS REQUIRED IS COMPUTED, NOT ASSUMED.
 // Two independent consumers decide it, and getting either wrong lets a run start
 // that cannot finish:
 //
 //   AGENTS  — a BUILD dispatches Sol through Codex (authoring, Beta, reader,
-//             Alpha). An AUDIT dispatches claude-opus-5 Betas and Alpha and a
-//             claude-sonnet-5 certifier, and touches Codex nowhere.
-//   JUDGES  — both workflows judge with the SAME configured lineup, and the
-//             default `deepseek+sonnet` spawns a fresh `claude -p` per call.
+//             Alpha). An AUDIT uses Codex for Sol Beta/Alpha and Terra readers.
+//   JUDGES  — both workflows judge with the configured `deepseek+terra` lineup.
 //
-// So the Claude CLI is required for a build too, whenever the lineup has a
-// claude lane: a build preflight that called it optional would pass on a machine
-// with no `claude`, and then fail every Sonnet call at step 7 — after the whole
-// authoring pass had already been spent. Symmetrically, Codex stays required for
-// a build's agents and for the retired Terra lane, and nothing else.
+// Codex is required for all GPT roles and the Terra judge lane.
 const lineupModels = {
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
-  'deepseek+opus': ['deepseek-v4-pro', 'claude-opus-5'],
-  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
-}[process.env.JUDGE_LINEUP ?? 'deepseek+sonnet'] ?? [];
+}[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
 const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
 const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
 const needCodex = !isAudit || judgeNeedsCodex;
-const needClaude = isAudit || judgeNeedsClaude;
+const needClaude = judgeNeedsClaude;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
@@ -123,7 +115,7 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
 
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
   needClaude
-    ? `REQUIRED here: ${[isAudit && 'audit agents are Claude CLI processes', judgeNeedsClaude && `the ${process.env.JUDGE_LINEUP ?? 'deepseek+sonnet'} judge lane spawns claude -p`].filter(Boolean).join('; ')}`
+    ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
     : 'not needed by this workflow or judge lineup');
 
 // The key itself is never printed, logged, or placed in any output.

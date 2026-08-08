@@ -4,6 +4,9 @@ kind: corollary
 title: "Every nonempty contractible space is path-connected"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-nullhomotopic-map-and-contractible-space, cor-contractible-iff-identity-nullhomotopic, def-path-connected, thm-product-universal-property, thm-continuity-characterisations-top]
 aliases: []
 landmark: false
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Homotopy lecture notes (University of Padua)"
+      url: "https://www.math.unipd.it/~maraston/Topologia2/Topo2_1011_homotopy.pdf"
 pipeline_run: null
 ---
 

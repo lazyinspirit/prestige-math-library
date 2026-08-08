@@ -4,6 +4,9 @@ kind: theorem
 title: "A subset of $\\mathbb{R}$ is connected if and only if it is order-convex, that is, an interval"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-connected-r, def-interval, def-complete-ordered-field, lem-sup-epsilon, lem-sup-unique, def-open-and-closed-in-r, def-bounded-set, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-ordered-field, lem-of-add-order, cor-of-one-positive, lem-of-sign-rules]
 justified_by: []
 forward_refs: [cex-rationals-in-an-interval-are-disconnected]
@@ -29,6 +32,8 @@ sources:
       url: "https://www.jirka.org/ra/"
     - title: "Interval (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Interval_(mathematics)"
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

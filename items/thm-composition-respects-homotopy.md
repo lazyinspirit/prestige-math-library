@@ -4,6 +4,9 @@ kind: theorem
 title: "Precomposition and postcomposition by continuous maps preserve homotopies, including their relative form"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-homotopy-relative-and-path-homotopy, thm-product-universal-property, thm-continuity-characterisations-top]
 aliases: []
 landmark: true
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "A. Hatcher, Algebraic Topology, Section 0"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Algebraic Topology lecture notes (UC Riverside)"
+      url: "https://math.ucr.edu/~jbergner/SPWM09.pdf"
 pipeline_run: null
 ---
 

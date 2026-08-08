@@ -4,6 +4,9 @@ kind: lemma
 title: "If $x_k \\le y_k$ eventually then $\\limsup x_k \\le \\limsup y_k$ and $\\liminf x_k \\le \\liminf y_k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, def-upper-bound, def-partial-order, def-sequence, def-nat-order, thm-nat-linear-order]
 justified_by: []
 aliases: []

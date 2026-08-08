@@ -4,6 +4,9 @@ kind: theorem
 title: "A map into a compact space whose graph is closed is continuous; so for a compact Hausdorff codomain, continuity and closedness of the graph are equivalent"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed,
        def-compact-space, thm-closed-subspace-of-a-compact-space-is-compact,
        def-product-topology, def-topology-basis-subbasis, def-subspace-topology-top,
@@ -33,8 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_graph_theorem"
     - title: "Compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Compact_space"
-    - title: "J. Munkres, Topology, 2nd ed., §26 and §31"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Introduction to Functional Analysis (MIT 18.102)"
+      url: "https://math.mit.edu/~kehle/files/Introduction_to_functional_analysis_18_102.pdf"
 pipeline_run: null
 ---
 

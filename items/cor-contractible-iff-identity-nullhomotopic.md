@@ -4,6 +4,9 @@ kind: corollary
 title: "A nonempty space is contractible if and only if its identity map is nullhomotopic"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-nullhomotopic-map-and-contractible-space, thm-composition-respects-homotopy]
 aliases: []
 landmark: true

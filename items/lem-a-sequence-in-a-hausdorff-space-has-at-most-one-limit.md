@@ -4,6 +4,9 @@ kind: lemma
 title: "In a Hausdorff space a sequence converges to at most one point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-hausdorff-space, def-sequence-convergence-top, def-neighbourhood-top,
        fs-unique-sequential-limits-imply-hausdorff, lem-nat-trichotomy]
 justified_by: []
@@ -30,8 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Hausdorff_space"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
-    - title: "J. Munkres, Topology, 2nd ed., §17"
-      url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Topological Spaces lecture notes (University of Cambridge)"
+      url: "https://www.dpmms.cam.ac.uk/~or257/teaching/notes/TopSp.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Refuted: a function into a Hausdorff space whose graph is closed is continuous. The function equal to $1/x$ off $0$ and to $0$ at $0$ has a closed graph, is discontinuous at $0$ alone, and has a Hausdorff codomain"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-a-function-with-closed-graph-is-continuous,
        thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain,
        def-continuity-real, thm-algebra-of-continuous-functions,
@@ -35,8 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Closed_graph_theorem"
     - title: "Compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Compact_space"
-    - title: "L. Steen and J. Seebach, Counterexamples in Topology"
-      url: "https://en.wikipedia.org/wiki/Counterexamples_in_Topology"
+    - title: "Analysis 3103, Handout 7 (UCL)"
+      url: "https://www.homepages.ucl.ac.uk/~ucahad0/2010/3103_handout_7.pdf"
 pipeline_run: null
 ---
 

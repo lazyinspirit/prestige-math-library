@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: in every ordered field a closed bounded set is compact, so Heine-Borel needs no completeness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-heine-borel-characterisation-r, def-open-cover-r, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, def-rationals, thm-rat-ordered-field, thm-rat-field, fs-sqrt2-rational, def-ordered-field, def-abs-value, lem-of-abs-value, lem-of-square-monotone, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, lem-of-inverse-positive]
 justified_by: []
 forward_refs: [cex-closed-bounded-in-q-not-compact]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Square_root_of_2"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (Example 2.21(g) and Thm 2.41)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.100, Test 1 solutions"
+      url: "https://math.mit.edu/classes/18.100/Test1_sol.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\{q \\in \\mathbb{Q} : q \\ge 0,\\ q^2 < 2\\}$ is closed and bounded in $\\mathbb{Q}$ and is not compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-closed-bounded-compact-without-completeness, def-rationals, fs-sqrt2-rational, thm-of-square-roots, def-open-cover-r, def-ordered-field, thm-rat-ordered-field, lem-of-square-monotone, def-abs-value, lem-of-abs-value]
 justified_by: []
 aliases: []

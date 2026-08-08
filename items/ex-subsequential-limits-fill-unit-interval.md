@@ -4,6 +4,9 @@ kind: example
 title: "The block sequence $1/1;\\ 1/2, 2/2;\\ 1/3, 2/3, 3/3;\\ \\dots$ has subsequential limit set exactly $[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-subsequential-limit, def-interval, def-limsup-liminf, thm-limsup-is-greatest-subsequential-limit, cor-liminf-is-least-subsequential-limit, def-extended-limits, def-extended-reals, lem-limsup-exists, lem-extended-reals-complete, thm-recursion, thm-well-ordering-principle, thm-induction-principle, lem-index-map-grows, lem-limit-preserves-order, lem-convergent-implies-bounded, def-divergence-to-infinity, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-sign-rules, lem-of-add-order, prop-of-multiply-inequalities, lem-of-abs-value, def-abs-value, def-sequence, def-real-limit, def-natural-numbers, def-nat-order, thm-nat-linear-order, lem-nat-discrete, def-upper-bound, def-partial-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
