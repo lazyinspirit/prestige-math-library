@@ -5,7 +5,7 @@ title: "A space is Hausdorff if and only if its diagonal is closed in the square
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-the-diagonal-of-a-space, def-hausdorff-space, def-product-topology,
        def-topology-basis-subbasis, thm-closure-characterisation-top,
@@ -17,16 +17,19 @@ short: "Hausdorff iff the diagonal is closed"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-29
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: f3876974083ab67ee5e2a3d59ce666fac6e41d9afde90f7fe2f94e367b2e3707
+    item_sha256: 6162d44db30366451fb730da86003ed6cdb198a682e1e357de71619848ba4a6c
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -50,8 +53,9 @@ $$X \text{ Hausdorff} \iff \Delta_X = \overline{\Delta_X} \text{ in } X \times X
 
 The condition on the right is a single closedness statement about one subset of
 one space, with no quantifier over pairs of points visible in it; that is what
-makes the criterion useful, and every consequence on this page is obtained by
-pulling $\Delta_X$ back along a continuous map.
+makes the criterion useful. In particular, the closed agreement-set result below
+is obtained by pulling $\Delta_X$ back along a continuous pairing, and the graph
+result is a specialization of that argument.
 
 ## Facts & Assumptions
 

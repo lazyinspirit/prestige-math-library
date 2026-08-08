@@ -24,6 +24,44 @@ hash. Only after that check did Audit-Alpha write `verification.verified` with
 No A4 repair changed an id, reading order, or published Statement. All five
 also received a current DeepSeek V4 Pro `VERDICT: CLEAN` proof-refuter reading.
 
+## A4 topology source corrections
+
+The topology Beta found 19 legacy references whose titles named Munkres or
+Steen–Seebach while their URLs opened only an author biography or an article
+about the book. A3 approved replacing or removing those entries with the direct
+mathematical sources documented in `wave6-topology.provenance.jsonl`. These are
+source corrections, not pure provenance retags, and therefore belong in the A7
+repair target even though `audit-split.mjs` correctly classifies their bodies
+and public mathematical interfaces as byte-identical.
+
+The 19 corrected ids are:
+
+- `def-the-diagonal-of-a-space`
+- `lem-the-diagonal-map-is-an-embedding`
+- `thm-hausdorff-iff-the-diagonal-is-closed`
+- `cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed`
+- `cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal`
+- `lem-a-sequence-in-a-hausdorff-space-has-at-most-one-limit`
+- `thm-a-compact-hausdorff-space-is-regular-and-normal`
+- `lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed`
+- `thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain`
+- `lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`
+- `rem-what-the-diagonal-criterion-gives-and-what-it-costs`
+- `ex-the-diagonal-of-the-real-line-is-closed`
+- `ex-the-graph-of-a-continuous-real-function-is-closed`
+- `ex-two-continuous-real-functions-agreeing-on-the-rationals-are-equal`
+- `ex-a-finite-hausdorff-space-is-discrete`
+- `ex-separating-a-point-from-a-finite-set-in-a-hausdorff-space`
+- `fs-a-function-with-closed-graph-is-continuous`
+- `ex-the-diagonal-in-the-cofinite-and-cocountable-topologies`
+- `cex-a-closed-graph-without-continuity`
+
+The last two closed-graph items were subsequently corrected again at A6 to use
+the live official UCL host, and their final-text certification is recorded
+below. The other 17 retain exactly the A4 mathematical text read CLEAN by the
+Wave 6 DeepSeek refuter pass. The A7 paired rejudge supplies the second current-
+text lane for all 19.
+
 ## A6 URL dispositions and source-only corrections
 
 The orchestrator's `wave6-url-liveness.json` checked 92 scoped URLs: 89 were
@@ -77,4 +115,27 @@ taking a forbidden extra snapshot.
   dispositions in `genrisk.json`; the receipt passes with only the expected
   warnings for generated seeds intentionally retained and flagged.
 - No Alpha mathematical repair, deletion, id change, or reading-order change
-  was made. A8 is not active and its exact edited-item/rejudge list is empty.
+  was made during A6. At that stage the A8 edited-item/rejudge list was empty;
+  the later fatal-only A8 repairs are recorded separately below.
+
+## A8 fatal-only repairs
+
+The expanded 30-item repair target exposed six judge rejections. Audit-Alpha
+adjudicated two as `confirmed_fatal`, two as `confirmed_nonfatal`, and two as
+`false_positive`. In accordance with the owner-confirmed fatal-only A8 rule,
+only the two fatal items changed:
+
+| item | fatal defect and narrow repair | provenance | pre-edit hash | final normalized hash | independent final-text certification |
+|---|---|---|---|---|---|
+| `thm-hausdorff-iff-the-diagonal-is-closed` | The Statement falsely said every consequence on the page came from pulling back the diagonal. It now names only the agreement-set consequence and its graph specialization. | Statement `literature-derived` -> `ai-altered`; evidence `exact-source` -> `semantic-source` because the core theorem remains source-backed while the page-scope prose is a material local restatement. | `8fea93f9d9d8f98b84203acb65796250a536a6c6908d2766f215d79fe0b87a86` | `ebdfe109ea93a3b59f670a1a1e202453f2199f608e0c0ad76d19829fc5866d6f` | GPT 5.6 Terra, `a8cert-thm-diagonal-scope`, CERTIFIED |
+| `ex-the-graph-of-a-continuous-real-function-is-closed` | A Remark said compactness alone restored the closed-graph equivalence. The missing Hausdorff hypothesis was inserted. | No class change; this is a one-phrase correction to the existing generated Remark. | `4fe01c8d4499bdbf3f77f1967fceab9b39cda58c39106e9502d8443d6e544269` | `d7655d541fd84197d94962fba76edce543943c2b00cb6d560a79b44332cf9288` | GPT 5.6 Terra, `a8cert-ex-closed-graph-hypothesis`, CERTIFIED |
+
+Both certifiers ran read-only at `xhigh`, read the complete final items and the
+relevant dependencies, matched the exact hashes above, and returned no finding.
+The four nonfatal/false-positive adjudications licensed no mutation. The only
+A8 paired rejudge targets were the two repaired ids in this table. Both exact
+final contexts then passed DeepSeek V4 Pro and GPT 5.6 Terra, and
+`wave6-targeted-judge-receipt.json` licensed fresh judge stamps on exactly
+those two items. The post-A8 impact audit found 25 required consumers of the
+theorem and none for the example; all 25 remain licensed because the theorem's
+mathematical biconditional is unchanged.

@@ -7,11 +7,11 @@ invoke either judge lane.
 
 ## Scope
 
-The exact surface was the 13 ids in
-`research/audit/wave6-rejudge-targets.json`: five mathematical repairs from A4
-and eight source corrections from A6. Every item was read in full, not sampled.
-Their six published home pages were also read in full so an item correction
-could not leave contradictory page prose behind:
+The exact surface was all 30 unique ids in
+`research/audit/wave6-rejudge-targets.json`: five mathematical A4 repairs, 19
+A4 topology source corrections, and eight A6 source corrections, with two
+items common to the source-correction sets. Every item was read in full, not
+sampled. Their six published home pages were also read in full:
 
 - `real-analysis/formal-laurent-series-field`
 - `real-analysis/limsup-and-subsequential-limits-examples`
@@ -22,64 +22,72 @@ could not leave contradictory page prose behind:
 
 ## Re-grep dispositions
 
-The scope-denial grep found candidate prose in seven repaired items and two home
-pages. All candidates were checked against the current corpus:
+The earlier 13-item pass remained sound. In particular, the Laurent-field
+denials still distinguish Cauchy completeness from least-upper-bound
+completeness and the unrestricted nested-interval property; the extended-real
+example's “does not determine” is the claim its three incompatible products
+prove; and the two closed-graph counterexample items state their missing
+hypotheses accurately.
 
-- `thm-laurent-ordered-field`: “neither” is part of ordered-field trichotomy;
-  the Remark correctly denies that the constant copy of `R` is cofinal in the
-  Laurent field and supplies `t` as the counterexample.
-- `thm-laurent-cauchy-complete`: the proof correctly says bounded-below support
-  does not follow merely from pointwise eventual values, then proves it from the
-  `k = 0` threshold. The final Remark correctly denies least-upper-bound
-  completeness and the unrestricted nested-interval property, with direct
-  links to the established counterresults.
-- `cor-laurent-nested-intervals`: the denial is exact. The corollary proves only
-  the shrinking form, while `cex-laurent-nested-intervals-empty` on the same
-  page refutes the unrestricted form. Its warning that real-constant lengths
-  `2/(n+1)` do not shrink in the order of the Laurent field follows from the
-  cited infinitesimal comparison.
-- `cex-zero-times-infinity-indeterminate`: “does not determine” is the false
-  claim being refuted; the displayed witnesses still give distinct products.
-- `fs-a-function-with-closed-graph-is-continuous`: “neither hypothesis” is
-  accurate for the false unrestricted implication. The witness already has a
-  Hausdorff codomain, so the missing hypothesis in the closed-graph-to-
-  continuity direction is compactness.
-- `cex-a-closed-graph-without-continuity`: the denial of relevance to the
-  functional-analytic closed graph theorem is accurate: no item on that page
-  supplies linearity or the Banach-space hypotheses.
-- `library/real-analysis/formal-laurent-series-field.md`: each negative claim
-  remains current. The earlier rational-function example establishes only
-  non-Archimedeanness; later completeness-equivalence pages reuse the Laurent
-  witness and do not retroactively provide an earlier one.
-- `library/topology/hausdorff-via-the-diagonal.md`: “neither direction selects
-  anything” describes the displayed diagonal proof and is not a library-scope
-  claim.
+The 17 topology source-repair items omitted from the first target receipt were
+then read in full. Their mathematical bodies are internally consistent and no
+new denial was introduced by the source corrections. The A8 adjudications have
+the following durable dispositions:
 
-The remaining repaired items and home pages contained no scope-denial
-candidate. The two examples pages are frontmatter-only item lists and therefore
-have no summary prose capable of decaying.
+- `def-the-diagonal-of-a-space`: the common domain's topology is implicit in
+  the cited product-universal-property continuity clause; confirmed nonfatal,
+  no edit.
+- `thm-hausdorff-iff-the-diagonal-is-closed`: its false universal page-scope
+  claim was fatal and was repaired at A8, independently certified, and passed
+  both rejudge lanes.
+- `rem-what-the-diagonal-criterion-gives-and-what-it-costs`: replacing an
+  ambient open cover by its traces in the compact subspace is immediate from
+  the cited subspace definition; confirmed nonfatal, no edit.
+- `ex-the-graph-of-a-continuous-real-function-is-closed`: its missing
+  Hausdorff hypothesis was fatal and was repaired at A8, independently
+  certified, and passed both rejudge lanes.
+- `ex-a-finite-hausdorff-space-is-discrete`: the alleged missing complement
+  rule is explicitly supplied by `def-topological-space`; false positive.
+- `lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`:
+  the cited subspace-topology definition explicitly states transitivity;
+  false positive.
+
+The repaired theorem exposed one stale sentence on
+`library/topology/hausdorff-via-the-diagonal.md`: “Everything else here is
+obtained by pulling that one closed set back” contradicted the page's
+sequential and compactness sections. A9 narrowed that page prose to the exact
+agreement-set and graph pullbacks, the dense-uniqueness consequence, and the
+separate separation arguments used later. No item text, contract, impact
+receipt, or judge target changed at A9.
 
 ## Required personal audits
 
-The combined judge/touch history escalated four items. I re-read each item and
-the cited hinge rather than accepting the A8 disposition by report:
+The combined judge/touch history escalated ten items. The orchestrator re-read
+each complete item and the cited hinge rather than accepting the A8 disposition
+by report:
 
 | item | personal disposition |
 |---|---|
-| `thm-laurent-cauchy-complete` | **sound; no edit.** The consecutive-index inequality extends to `a <= b` by induction on the additive gap supplied by `def-nat-order`; no predecessor lemma is required. Terra identified a compressed step, not an invalid inference. |
-| `cex-zero-times-infinity-indeterminate` | **sound; no edit.** Step 2.2 proves the eventual-threshold definition of divergence to `+infinity`. Calling this extended convergence is an immediate definitional bridge; moreover the constant product limits `1` and `2` already refute determinacy, so the phrase is not load-bearing. |
-| `cor-convex-subsets-of-rn-are-contractible` | **sound; no edit.** The Statement begins with `n >= 1`, so that standing hypothesis governs the Facts block and the application of the straight-line theorem. The local fact's shortened wording does not strengthen the corollary. |
-| `lem-straight-line-homotopies-are-continuous` | **sound; no edit.** The Statement proves the only non-algebraic obligation, continuity into `C`; substituting `t = 0,1` gives the endpoints in one line. The title's use of “homotopy” is accurate and downstream items state those endpoint equalities explicitly. |
+| `thm-laurent-cauchy-complete` | **Sound; no edit.** Induction on the additive natural-number gap extends the consecutive-index inequality; no predecessor lemma is needed. |
+| `cex-zero-times-infinity-indeterminate` | **Sound; no edit.** The eventual-threshold definition gives divergence to `+infinity`, and the two constant product limits already prove indeterminacy. |
+| `cor-convex-subsets-of-rn-are-contractible` | **Sound; no edit.** The Statement's standing `n >= 1` hypothesis governs the shortened local Fact. |
+| `lem-straight-line-homotopies-are-continuous` | **Sound; no edit.** Direct substitution gives the endpoints; the item proves the only non-algebraic obligation. |
+| `def-the-diagonal-of-a-space` | **Sound; no edit.** The cited product theorem supplies the topological-space reading of the common domain in its continuity clause. |
+| `thm-hausdorff-iff-the-diagonal-is-closed` | **Fatal scope prose repaired.** The biconditional itself is unchanged; the narrow final text is certified and passed both judges. |
+| `rem-what-the-diagonal-criterion-gives-and-what-it-costs` | **Sound; no edit.** Taking ambient-open traces yields the intrinsic compact-subspace cover immediately. |
+| `ex-the-graph-of-a-continuous-real-function-is-closed` | **Fatal hypothesis omission repaired.** “Compact Hausdorff” now matches the cited equivalence; the final text is certified and passed both judges. |
+| `ex-a-finite-hausdorff-space-is-discrete` | **Sound; no edit.** Closed-complement duality is directly cited. |
+| `lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure` | **Sound; no edit.** Subspace-topology transitivity is directly cited. |
 
-Dropping any of these four would remove a load-bearing completeness result, the
-standard indeterminate-product counterexample, or the straight-line homotopy
-spine. Because no fatal defect was found, no deletion, repair, recertification,
-or second rejudge is licensed.
+Dropping any of the eight sound items would remove a load-bearing theorem,
+counterexample, or topology spine node without a mathematical basis. The two
+fatal findings were repaired rather than dropped, and their 25 computed
+consumers remain licensed.
 
 ## Outcome
 
-- Published-claim decay: **none found**.
-- Scope-denial defects: **none found**.
-- A9 edits to `items/` or `library/`: **none**.
+- Published-claim decay: **one stale page-scope sentence repaired**.
+- Scope-denial defects: **none remaining**.
+- A9 edits: **one page-prose correction; zero item edits**.
 - Rejudge calls at A9: **zero**.
 - Decision: **A9 complete; advance to A10**.

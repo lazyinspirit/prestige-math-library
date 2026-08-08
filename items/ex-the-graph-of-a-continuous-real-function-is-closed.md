@@ -18,16 +18,19 @@ short: "a continuous real function has closed graph"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-29
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: 02e525d38b9ee579680c19ea4f99fff73e7dc39cd685b1169addf313cdf14019
+    item_sha256: d2da91a29b180c7020a661782298f3de0bbb5c31a4730b7221363e02c1545796
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-08
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -83,6 +86,6 @@ differentiable.
 
 - **What the $\varepsilon$-$\delta$ hypothesis becomes.** The dictionary of [[lem-real-and-metric-notions-agree]] and [[def-metrizable-space]] is what lets a hypothesis stated with $\varepsilon$ and $\delta$ be fed to a theorem stated about topological spaces; there is one notion of continuity for a real function here, not two, and step 1.2 is where that is used.
 
-- **The converse fails.** A discontinuous $\mathbb{R} \to \mathbb{R}$ may still have closed graph — the function equal to $1/x$ off $0$ does ([[fs-a-function-with-closed-graph-is-continuous]]) — so "closed graph" is strictly weaker than "continuous" for real functions. What restores the equivalence is a compact codomain ([[thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain]]).
+- **The converse fails.** A discontinuous $\mathbb{R} \to \mathbb{R}$ may still have closed graph — the function equal to $1/x$ off $0$ does ([[fs-a-function-with-closed-graph-is-continuous]]) — so "closed graph" is strictly weaker than "continuous" for real functions. What restores the equivalence is a compact Hausdorff codomain ([[thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain]]).
 
 - **Nothing about $\mathbb{R}$ as a domain is used.** The domain enters the argument only as an arbitrary topological space; the same proof gives a closed graph for a continuous map from any space into $\mathbb{R}$.

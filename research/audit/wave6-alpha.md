@@ -169,3 +169,206 @@ Measured from the touch and judge ledgers, these four items now each have a prio
 - **Current A8 text and hashes reverified:** the four rejected items and the cited definitions/theorems implicated by their rejections were read from current disk. The four verification-stripped hashes remain `thm-laurent-cauchy-complete` `cc1b09d79aa5ca608eb9ca2a715999b9b4e104e152abd9fcda66a1d06dca64d0`, `cex-zero-times-infinity-indeterminate` `c8540f4b61482b0e72b08333b770ac6f4f747c66680519ecc5f909e1b3c40d36`, `cor-convex-subsets-of-rn-are-contractible` `bb1cce791779ab85da116f724147aed63a1b269df655dfd034a4fbe41580cf38`, and `lem-straight-line-homotopies-are-continuous` `4421293444a41a1cc2c640107442e57e67780346c1f2c43db34dfb0274765967`; each matches its adjudication row. All 13 targets match both current judge-normalized hashes, and the current sorted 126-item normalized aggregate remains `0fa5bacf59275c6be3367144677c105b4ea25377b7c44a64fb827064b279c8f7`.
 - **Inherited Alpha action:** no A6 or A8 mathematical action remains. The four current Terra rejections are correctly `confirmed_nonfatal` under the binding thirty-second rule, so R1 licenses no mutation. The two recorded `pre-a8` snapshots contain identical 2,859-item hash and surface maps. The separate escalation list remains visible to the orchestrator, whose state machine has already recorded the authoritative A8 gate as exit zero.
 - **Exact next action:** re-run the permitted direct A8 fatal-only, pre-A8 impact, proof/risk, generated-risk, and current-context coverage checks without taking a new snapshot. If they remain green, report an empty A8 edited-item/rejudge set and return control at A9; do not perform the orchestrator's A9 judgment from the Alpha role.
+
+## Resumed Alpha verification completion (2026-08-08T11:00:52Z)
+
+- Direct `step8-guard.mjs` passes at **0 changed / 0 created / 0 deleted; 0/0 licensed changes** from the later `pre-a8` baseline. Direct `impact-audit.mjs --from pre-a8` likewise passes at **0 changed public interfaces / 0 affected items**.
+- The strict merged proof contract passes at **106/106**; required risk review, generated-risk, spine, full pre-A4 impact, content-policy audit, and finite-smoke checks all exit zero. Content policy emits only its four recorded legacy warnings (one missing generated counterexample role and three generated remarks routed through truth-risk handling).
+- `level-coverage.mjs --verify-current-context` cannot reproduce its aggregate exit in this sandbox because its internal Node `spawnSync` is denied with `EPERM`; the gate presently treats the resulting empty stdout as “not JSON.” This is an execution boundary, not a context mismatch. Direct `judge.mts --context-hash` calls succeed for all 13 targets, and an exhaustive comparison finds **26/26 exact current ledger rows**: one DeepSeek V4 Pro row and one GPT 5.6 Terra row for every current context and judge-normalized item hash. The run state's subprocess-capable authoritative A8 coverage gate remains exit zero.
+- **A8 item edits in this resumed verification:** none. **Exact rejudge set:** empty. The four nonfatal adjudications and the four-item personal-audit escalation list are unchanged. Control returns at the orchestrator-owned A9 halt; Alpha does not perform A9 judgment.
+
+## Recovery receipt — expanded-target A8 continuation (2026-08-08)
+
+- **Baseline and workspace verified:** `HEAD` is `b7b542a0bec53bfb5937da181407ef34ee0eaa57` on `main`; `origin/main` remains `84c52d136b16758747e7283118420cf88009148d`. I inspected `git status` and am preserving the inherited dirty Wave 6 artifacts. The top summary in `RESUME.md` and the completed-step map in `wave6-run-state.json` predate the newest journal entries: after the recorded A10 commit/owner pause, the driver re-entered A7, expanded the exact repair target from 13 to 30 items, completed the additional paired sweep at `2026-08-08T11:04:10Z`, took a third stage-level `pre-a8` snapshot, and journalled a new A8 step begin. The latest journal and current artifacts, not the stale summary fields, define this continuation.
+- **Normative and durable record recovered in full:** `CLAUDE.md`, `AUDIT-WORKFLOW.md`, `SCHEMA.md`, `README.md`, `QUALITY-CONTROLS.md`, `briefs/audit-alpha.md`, `research/audit/RESUME.md`, this complete report, `wave6-A0.md`, `wave6-A3-alpha-concurrence-task.md`, `wave6-A3.md`, `wave6-A9.md`, all three findings files, all three provenance JSONL ledgers, `wave6-judge-adjudications.jsonl`, `wave6-published-repairs.md`, `wave6-rejudge-targets.json`, and `wave6-run-state.json` were read before taking a new adjudication action.
+- **Receipts and mechanical evidence reverified:** all three page manifests; all three namespaced contracts and their exact 106-contract merged union; the 1,393-row audit manifest; `wave6-split.json`; `wave6-batch-split.json`; all three impact files; the complete eleven-snapshot touch ledger; the 92-row URL-liveness table; all 80 generated-risk rows; all 59 spine attestations; `wave6-coverage.json`; and all 127 judge, attempt, and cost rows were read or exhaustively parsed. Strict proof-contract validation remains 106/106, required risk review and generated-risk receipt validation remain green, the contracts merge exactly, and the 126-interface/912-consumer impact receipt is complete. The latest three `pre-a8` snapshots have identical 2,859-item hash and public-surface maps.
+- **Current judge scope and hashes bound to disk:** the current repair receipt names 30 items. The additional A7 calls added 34 rows for 17 newly included items; all transports completed. Six exact-current rejections in that newly swept surface have no owner decision yet: `def-the-diagonal-of-a-space` (`3e4f7f8b63ab058d268723fe7271a80825de167a3e64a47db6999b8e41f0aad7`), `thm-hausdorff-iff-the-diagonal-is-closed` (`8fea93f9d9d8f98b84203acb65796250a536a6c6908d2766f215d79fe0b87a86`), `rem-what-the-diagonal-criterion-gives-and-what-it-costs` (`bfebc1a4aacd425eabdcf839d4928ec7829bcc4751fbd42a39dace093cb32384`), `ex-the-graph-of-a-continuous-real-function-is-closed` (`4fe01c8d4499bdbf3f77f1967fceab9b39cda58c39106e9502d8443d6e544269`), `ex-a-finite-hausdorff-space-is-discrete` (`e38f4906c8772f1d5b3b2785e2ad8d2a91bb127977c73f611391282936eb72d5`), and `lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure` (`d28d42e619a13f35391c8190033ee0456eaa4295d231f95321394f60dd6c5616`). These are full verification-stripped SHA-256 values from `tools/item-hash.mjs`; their current judge contexts and judge-normalized item hashes exactly match the six rejection rows.
+- **Current reading completed for the live decisions:** I read all six rejected item texts in full, including every Remark, and opened the cited definitions and theorems implicated by the objections. The four earlier target-scope rejections remain covered by their exact-context decisions and will not be re-adjudicated. Rows outside the current 30-item repair receipt remain attempt evidence only and do not expand A8.
+- **Inherited open action:** adjudicate only the six exact-current, previously undecided rejections under the fatal-only R1 rule and the binding thirty-second threshold; append one hash-bound per-model decision for each. Only a `confirmed_fatal` decision may license a text edit. Any fatal repair will be completed once per item, independently read on final text, reported by exact id, and rejudged only for that edited id in both lanes.
+- **Exact next action:** verify the six objections against the verbatim cited passages, record the six owner decisions, then apply only the confirmed-fatal repairs and run the stage guard and affected gates from the latest `pre-a8` baseline.
+
+## Expanded-target A8 adjudication and repair handoff (2026-08-08T11:23:48Z)
+
+### Owner decisions on the six exact-current rejections
+
+Each decision is recorded per model and frozen context in
+`wave6-judge-adjudications.jsonl`, using the full verification-stripped item
+hash that stood when the rejection was adjudicated.
+
+1. **`def-the-diagonal-of-a-space` — `confirmed_nonfatal`.** The continuity
+   sentence compresses the hypothesis that the common domain is a topological
+   space. The cited product universal property says verbatim, “For every space
+   $Z$”; restoring that local hypothesis takes seconds, while the preceding
+   pairing definition remains valid for a bare set. R1 licenses no edit.
+2. **`thm-hausdorff-iff-the-diagonal-is-closed` — `confirmed_fatal`.** The
+   Statement claimed verbatim that “every consequence on this page is obtained
+   by pulling $\Delta_X$ back along a continuous map.” This is false: the
+   sequence-uniqueness, compact-Hausdorff regularity/normality, and locally-
+   compact-Hausdorff results use independent separation and compactness
+   arguments. The false public scope claim was replaced by the exact
+   agreement-set and graph consequences.
+3. **`rem-what-the-diagonal-criterion-gives-and-what-it-costs` —
+   `confirmed_nonfatal`.** The proof passes from an ambient open cover to
+   compactness of the subspace without spelling out traces. The cited compact-
+   space definition flags this distinction, and replacing each $V$ by
+   $V\cap K$, then retaining the corresponding originals, closes the gap well
+   inside thirty seconds. R1 licenses no edit.
+4. **`ex-the-graph-of-a-continuous-real-function-is-closed` —
+   `confirmed_fatal`.** Its Remark claimed that a compact codomain restores the
+   closed-graph equivalence, but the cited theorem requires compact **and
+   Hausdorff**. The missing hypothesis made the public prose false; “Hausdorff”
+   was inserted.
+5. **`ex-a-finite-hausdorff-space-is-discrete` — `false_positive`.** The
+   objection overlooks A2's citation to `def-topological-space`, which defines
+   closed precisely by having open complement. Step 3.1 is explicitly
+   licensed.
+6. **`lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`
+   — `false_positive`.** The cited `def-subspace-topology-top` states verbatim
+   the transitivity of subspace topologies for $S\subseteq T\subseteq X$.
+   L1 faithfully repeats that exact clause.
+
+### Fatal-only edits, provenance, and guard
+
+Exactly two item texts changed:
+
+- `thm-hausdorff-iff-the-diagonal-is-closed`: pre-edit normalized hash
+  `8fea93f9d9d8f98b84203acb65796250a536a6c6908d2766f215d79fe0b87a86`;
+  final normalized hash
+  `ebdfe109ea93a3b59f670a1a1e202453f2199f608e0c0ad76d19829fc5866d6f`.
+  Its Statement provenance and topology ledger row now read `ai-altered` with
+  `semantic-source` evidence because the source establishes the governing
+  biconditional while the repaired library-local scope prose is a material
+  restatement.
+- `ex-the-graph-of-a-continuous-real-function-is-closed`: pre-edit normalized
+  hash `4fe01c8d4499bdbf3f77f1967fceab9b39cda58c39106e9502d8443d6e544269`;
+  final normalized hash
+  `d7655d541fd84197d94962fba76edce543943c2b00cb6d560a79b44332cf9288`.
+
+Both stale `verification.verified` and `verification.judge` blocks were deleted
+when the text changed. Direct `step8-guard.mjs` passes from the latest handed
+`pre-a8` baseline at **2 changed / 0 created / 0 deleted; 2/2 licensed by
+`confirmed_fatal`**. Strict proof contracts remain 106/106; precheck,
+dependency/forward/external/render/prose checks, finite smoke, required risk
+reviews, content policy, and the generated-risk receipt pass directly. The
+inherited trailing whitespace reported by `git diff --check` is confined to
+the pre-existing dispatcher log and is not an item edit.
+
+### Independent final-text reading blocker
+
+Alpha assembled separate final-hash tasks and dispatched both through the
+prescribed `tools/dispatch.mjs --role certifier` route to GPT 5.6 Terra at
+`xhigh`, read-only, with the binding no-shell-permission and triage rules. Both
+calls failed **before inference** after their built-in WebSocket and HTTPS
+retries were denied with `Operation not permitted`. They produced no verdict,
+so neither item is independently certified and neither receives a delegated
+`verification.verified` stamp. Durable attempt evidence is preserved at:
+
+- `research/audit/wave6-dispatch/certifier-a8cert-thm-diagonal-scope.log`
+- `research/audit/wave6-dispatch/certifier-a8cert-thm-diagonal-scope.prompt.md`
+- `research/audit/wave6-dispatch/certifier-a8cert-thm-diagonal-scope.result.json`
+- `research/audit/wave6-dispatch/certifier-a8cert-ex-closed-graph-hypothesis.log`
+- `research/audit/wave6-dispatch/certifier-a8cert-ex-closed-graph-hypothesis.prompt.md`
+- `research/audit/wave6-dispatch/certifier-a8cert-ex-closed-graph-hypothesis.result.json`
+
+The no-escalation rule forbids asking for a different shell permission, and a
+same-family self-reading cannot substitute for the required independent Terra
+lane. This is therefore the current publication blocker.
+
+### Public-interface impact disposition
+
+The Hausdorff theorem's governing biconditional is unchanged; the repair only
+narrows a false, non-load-bearing sentence about which results on the page use
+the criterion. A read-only reconstruction of the impact graph finds the
+following 25 required consumers, all `still-licensed` by the unchanged theorem:
+
+- `cex-a-closed-graph-without-continuity`
+- `cex-two-maps-into-an-indiscrete-space-agreeing-on-a-dense-set`
+- `cor-samuel-compactification-agrees-with-completion-for-totally-bounded-spaces`
+- `cor-samuel-compactification-is-unique`
+- `cor-stone-cech-compactification-is-unique-over-x`
+- `cor-stone-cech-compactification-maps-onto-samuel-compactification`
+- `cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed`
+- `cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal`
+- `ex-a-finite-hausdorff-space-is-discrete`
+- `ex-samuel-compactification-of-a-compact-hausdorff-space`
+- `ex-samuel-compactification-of-discrete-naturals-is-beta-n`
+- `ex-samuel-compactification-of-the-open-unit-interval`
+- `ex-the-diagonal-in-the-cofinite-and-cocountable-topologies`
+- `ex-the-diagonal-of-the-real-line-is-closed`
+- `ex-the-graph-of-a-continuous-real-function-is-closed`
+- `ex-two-continuous-real-functions-agreeing-on-the-rationals-are-equal`
+- `fs-a-function-with-closed-graph-is-continuous`
+- `fs-two-continuous-maps-agreeing-on-a-dense-subset-are-equal`
+- `lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed`
+- `lem-unit-interval-functions-extend-over-evaluation-closure`
+- `rem-what-the-diagonal-criterion-gives-and-what-it-costs`
+- `thm-samuel-compactification-universal-property`
+- `thm-stone-cech-evaluation-closure-universal-property`
+- `thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain`
+- `thm-uniform-completion-universal-property-and-uniqueness`
+
+The repaired graph example has no consumers. Alpha took no stage snapshot, as
+required. Because `impact-audit.mjs --from pre-a8` resolves its comparison
+endpoint from the latest stage snapshot, the formal receipt must wait for the
+orchestrator's post-A8 snapshot; it should contain these 25 `still-licensed`
+dispositions and zero consumers for the example.
+
+### Exact edited-item/rejudge and escalation lists
+
+The exact edited-item list, and therefore the only targeted paired-rejudge set,
+is:
+
+- `thm-hausdorff-iff-the-diagonal-is-closed`
+- `ex-the-graph-of-a-continuous-real-function-is-closed`
+
+The current-target items with both a prior repair and a judge rejection, for
+the orchestrator's separate personal audit, are:
+
+- `thm-laurent-cauchy-complete`
+- `cex-zero-times-infinity-indeterminate`
+- `cor-convex-subsets-of-rn-are-contractible`
+- `lem-straight-line-homotopies-are-continuous`
+- `def-the-diagonal-of-a-space`
+- `thm-hausdorff-iff-the-diagonal-is-closed`
+- `rem-what-the-diagonal-criterion-gives-and-what-it-costs`
+- `ex-the-graph-of-a-continuous-real-function-is-closed`
+- `ex-a-finite-hausdorff-space-is-discrete`
+- `lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure`
+
+Rows from obsolete stopped full-wave attempts remain preserved as evidence and
+do not expand this target-scoped list.
+
+### Exact next action
+
+The orchestrator must run the two existing final-text certifier tasks through
+the prescribed outbound-capable GPT 5.6 Terra read-only route. Only after both
+return `CERTIFIED` against the final hashes may it write owner-delegated
+`verification.verified` records. It then takes the post-A8 stage snapshot,
+regenerates the impact receipt with the 25 `still-licensed` dispositions,
+rejudges **only the two ids above** through both DeepSeek V4 Pro and GPT 5.6
+Terra, rebuilds the targeted receipt/stamps against those current hashes, and
+runs the current-context coverage and fatal-only guards. Until that sequence
+succeeds, A8 is not publication-complete.
+
+## Expanded-target A8 completion (2026-08-08)
+
+The preceding blocker is resolved. The orchestrator ran the two existing
+final-hash tasks through the prescribed outbound-capable, read-only GPT 5.6
+Terra route at `xhigh`; both returned `CERTIFIED` against the exact hashes in
+the handoff. Owner-delegated `verification.verified` records were then written
+for exactly the two repaired items.
+
+The orchestrator took the `post-a8` snapshot and completed
+`wave6-A8-impact-audit.json`: two changed public interfaces, 25 required
+consumers, all 25 `still-licensed`, and no error or warning. It rejudged only
+`thm-hausdorff-iff-the-diagonal-is-closed` and
+`ex-the-graph-of-a-continuous-real-function-is-closed`; both final contexts
+passed DeepSeek V4 Pro and GPT 5.6 Terra. The targeted receipt licensed fresh
+judge stamps on exactly those two items.
+
+The authoritative A8 wrapper now passes all three gates: `step8-guard` reports
+2/2 changes licensed by confirmed-fatal rows, `impact-audit` validates the
+25-consumer disposition, and `level-coverage` validates 30/30 repair targets.
+The eight remaining latest-context rejections are the six confirmed-nonfatal
+and two false-positive decisions already recorded; none licensed an edit.
+A8 is publication-complete under the owner-confirmed fatal-only rule.

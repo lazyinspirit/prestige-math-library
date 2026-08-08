@@ -20,8 +20,10 @@ examples: [fs-a-function-with-closed-graph-is-continuous,
 quantifier over pairs of distinct points and pairs of open sets, and in that form
 it has to be re-verified by hand at every use. This page replaces it by a single
 closedness statement about one subset of one space: a space is Hausdorff exactly
-when its diagonal is closed in its square. Everything else here is obtained by
-pulling that one closed set back along a continuous map.
+when its diagonal is closed in its square. The agreement-set and graph
+consequences below are obtained by pulling that closed set back along continuous
+maps, and dense uniqueness follows from the closed agreement set. The later
+sequential and compactness results use separate separation arguments.
 
 **The objects, and why the product has to be named carefully.**
 [[def-the-diagonal-of-a-space]] fixes the diagonal

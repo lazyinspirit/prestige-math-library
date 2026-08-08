@@ -1,35 +1,37 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 6 — A9 COMPLETE, A10 NEXT (2026-08-08)
+## WAVE 6 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-08)
 
 **This section supersedes the Wave 5 pointer below.** The owner cleared Wave 5's
 A10 pause by instructing the orchestrator to start Wave 6. Wave 5 was already
 committed and pushed; `main` matched `origin/main` at launch.
 
-A0 through A9 are complete: 126 items / 106 proof-bearing / 9 pages / 3 Beta
+A0 through A10 are complete: 126 items / 106 proof-bearing / 9 pages / 3 Beta
 batches after the declared real-analysis split; 34 tagged appearances excluded.
-The final manifest records 1,393 relationships. A6 read all 126 items, returned
-126/126 clean DeepSeek refutations, completed 93 high/critical reviews, and
-certified five mathematical repairs plus eight source corrections.
+All A8, A9, and nine A10 gates are green. The final manifest records 1,393
+relationships. A6 read all 126 items, returned 126/126 clean DeepSeek
+refutations, completed 93 high/critical reviews, and certified five
+mathematical repairs plus the final source corrections.
 
 Per the owner's correction, A7 was a **targeted rejudge of repaired items only**:
-13 exact targets, 13/13 DeepSeek + GPT 5.6 Terra pairs, and no sibling or
-whole-wave rejudge. The obsolete partial full-wave rows created before the
-correction remain in the append-only ledger but are explicitly ignored by the
-target-scoped coverage receipt. A8 adjudicated four Terra rejections as
-confirmed nonfatal, made zero edits, and independently read all 59 spine items.
-A9 personally re-read all 13 repaired items and their six home pages; it found
-no scope-denial defect or published-claim decay and passed both gates. Receipts:
-`research/audit/wave6-alpha.md`, `research/audit/wave6-A9.md`.
+30 exact unique targets, 30/30 DeepSeek + GPT 5.6 Terra pairs, and no sibling or
+whole-wave rejudge. A later two-item rejudge covered only the two fatal A8
+repairs. The obsolete partial full-wave rows remain append-only attempt evidence
+and are ignored by target-scoped coverage. Ten target rejections were
+adjudicated: six confirmed nonfatal, two false positives, and two confirmed
+fatal. Under the owner-confirmed fatal-only rule, A8 repaired only those two
+fatal items; both final texts were independently certified and passed both
+judges. A9 re-read all 30 repaired items and six home pages and narrowed one
+stale page-scope sentence without changing any item or invoking a judge.
 
-**Exact next action: A10 final gates and rundown, then the sole owner pause.**
-Resume the driver with `node tools/run-wave.mjs --wave 6 --from-step A10`.
-Driver state: `research/audit/wave6-run-state.json`.
+**Full rundown: `research/audit/wave6-A10.md`. Read that first.** The run is
+stopped at the sole A10 owner pause. Nothing is running, and nothing may publish
+or compute Wave 7 until the owner clears this pause.
 
-Working baseline is HEAD `84c52d1` plus the owner-directed Sol/Terra mechanism
-change and Wave 6 artifacts. `.git` is read-only in this session, so those
-changes cannot be staged or committed here. Failed sandboxed attempts remain in
-the append-only ledgers as failed attempts; no failed row is counted as audit
+Commit `b7b542a` is the unpushed intermediate Wave 6 checkpoint created before
+the repair target was corrected from 13 to 30. The corrective A8/A9/A10 state is
+committed separately on `main`; `origin/main` remains `84c52d1`. Failed or
+stopped attempts remain append-only evidence and are never counted as target
 coverage.
 
 ## WAVE 5 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-06)
