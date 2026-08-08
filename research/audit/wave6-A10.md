@@ -1,8 +1,9 @@
 # Wave 6 — A10 rundown and owner pause
 
 Published-page retro-audit of dependency level 6. **A0 through A10 are
-complete and every gate is green.** This is the sole owner pause. Nothing in
-this workflow changed a publication status, renamed an id, removed an item, or
+complete and every gate is green.** The owner cleared the sole A10 pause on
+2026-08-08 by instructing the orchestrator to conclude Wave 6. Nothing in this
+workflow changed a publication status, renamed an id, removed an item, or
 changed reading order.
 
 **126 items, 106 proof-bearing, 1,393 relationships, 3 batches, 9 pages.**

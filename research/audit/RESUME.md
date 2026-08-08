@@ -1,6 +1,6 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 6 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-08)
+## WAVE 6 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-08)
 
 **This section supersedes the Wave 5 pointer below.** The owner cleared Wave 5's
 A10 pause by instructing the orchestrator to start Wave 6. Wave 5 was already
@@ -24,15 +24,16 @@ fatal items; both final texts were independently certified and passed both
 judges. A9 re-read all 30 repaired items and six home pages and narrowed one
 stale page-scope sentence without changing any item or invoking a judge.
 
-**Full rundown: `research/audit/wave6-A10.md`. Read that first.** The run is
-stopped at the sole A10 owner pause. Nothing is running, and nothing may publish
-or compute Wave 7 until the owner clears this pause.
+**Full rundown: `research/audit/wave6-A10.md`. Read that first.** The owner
+cleared the sole A10 pause by instructing the orchestrator to conclude Wave 6.
+The run state is `complete`; nothing is running. No publication status changed.
+The next authorized audit action is to compute the Wave 7 auditable pages.
 
-Commit `b7b542a` is the unpushed intermediate Wave 6 checkpoint created before
+Commit `b7b542a` is the intermediate Wave 6 checkpoint created before
 the repair target was corrected from 13 to 30. The corrective A8/A9/A10 state is
-committed separately on `main`; `origin/main` remains `84c52d1`. Failed or
-stopped attempts remain append-only evidence and are never counted as target
-coverage.
+committed separately on `main`. All Wave 6 audit commits are pushed to
+`origin/main`. Failed or stopped attempts remain append-only evidence and are
+never counted as target coverage.
 
 ## WAVE 5 — A0 THROUGH A10 COMPLETE, AT THE OWNER PAUSE (2026-08-06)
 
