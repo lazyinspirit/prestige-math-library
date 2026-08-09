@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the Cantor set is countable because only countably many intervals were removed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-set-properties, thm-cantor-set-ternary-description, def-cantor-set, def-countable, thm-cantor-powerset, lem-countable-iff-surjection-from-n, def-injection-surjection-bijection, def-equinumerous]
 justified_by: []
 forward_refs: [cex-cantor-point-that-is-not-an-endpoint]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_set"
     - title: "Cantor's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor%27s_theorem"
+    - title: "University of Chicago MATH 395 notes"
+      url: "https://math.uchicago.edu/~alephnil/notes/MATH-395-notes.pdf"
 pipeline_run: null
 ---
 

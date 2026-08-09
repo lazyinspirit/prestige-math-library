@@ -4,6 +4,9 @@ kind: example
 title: "An explicit greedy rearrangement of the alternating harmonic series with sum $0$, and the same recipe for any prescribed real"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-riemann-series-theorem, ex-alternating-harmonic-series, lem-positive-and-negative-parts, def-rearrangement-and-unconditional-convergence, def-absolute-and-conditional-convergence, thm-well-ordering-principle, thm-recursion, def-series]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,10 @@ kind: definition
 title: "Discontinuity of $f$ at a point of its domain, and its classification: removable discontinuity, jump discontinuity and essential discontinuity, equivalently Rudin's discontinuities of the first and of the second kind"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
 deps: [def-continuity-real, def-one-sided-limits, def-function-limit, def-limit-point-r, def-interval, thm-two-sided-limit-iff-both-one-sided]
 justified_by: []
 aliases: [def-discontinuity, def-jump-discontinuity, def-removable-discontinuity, def-essential-discontinuity]

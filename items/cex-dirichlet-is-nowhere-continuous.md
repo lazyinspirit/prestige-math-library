@@ -4,6 +4,9 @@ kind: counterexample
 title: "The indicator of $\\mathbb{Q}$ is continuous at no point of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-continuity-real, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-limit-point-r, def-interior-closure-boundary-r, def-neighbourhood-r, def-open-and-closed-in-r, lem-rat-embeds-dense, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [cex-dirichlet-function]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Continuous_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "E. Zakon, Mathematical Analysis, §4.1: Basic Definitions"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/04%3A_Function_Limits_and_Continuity/4.01%3A_Basic_Definitions"
 pipeline_run: null
 ---
 

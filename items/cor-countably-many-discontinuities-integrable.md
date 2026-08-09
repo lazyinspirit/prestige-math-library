@@ -4,6 +4,9 @@ kind: corollary
 title: "A bounded function on $[a,b]$ whose set of discontinuities is at most countable is Riemann integrable"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-lebesgue-criterion, lem-countable-sets-are-null, def-countable, def-measure-zero-and-content-zero, def-bounded-set, def-continuity-real, def-classification-of-discontinuities, def-darboux-integral, def-interval]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

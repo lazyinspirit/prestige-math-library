@@ -4,6 +4,9 @@ kind: theorem
 title: "Grouping: if $\\sum a_k$ converges and $(n_j)$ is strictly increasing with $n_0 = 0$, the series of blocks $\\sum_{k=n_j}^{n_{j+1}-1} a_k$ converges to the same sum"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-series, def-finite-sum, lem-finite-sum-laws, lem-subsequence-inherits-limit, def-monotone-sequence, thm-induction-principle, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
     - title: "T. Tao, Analysis I, 3rd ed., §7.4"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "W. Fisher, Introduction to Analysis"
+      url: "https://math.berkeley.edu/~willfisher/teaching/104sm24/main.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "Every paracompact Hausdorff space is regular"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-paracompact-space, def-cover-refinement-and-local-finiteness, lem-locally-finite-unions-and-closures, def-hausdorff-space, def-regular-and-t3-spaces]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Dartmouth Point-Set Topology, Lecture 25"
       url: "https://math.dartmouth.edu/~rmaguire/teaching/dartmouth_math_054_2022_summer/lectures/2022_summer_point_set_topology_lecture_25.pdf"
+    - title: "Topology 262 notes (California State University, Northridge)"
+      url: "https://www.csun.edu/~ac53971/research/topology_262.pdf"
 pipeline_run: null
 ---
 

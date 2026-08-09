@@ -4,6 +4,9 @@ kind: lemma
 title: "Under choice, Ornstein's second construction turns a point-finite metric open cover into a locally finite open refinement"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-metric-open-covers-have-point-finite-refinements, def-cover-refinement-and-local-finiteness, def-metric-topology, def-axiom-of-choice, thm-well-ordering-theorem]
 justified_by: []
 aliases: []
@@ -20,7 +23,7 @@ sources:
   scraped: []
   references:
     - title: "D. Ornstein, A New Proof of the Paracompactness of Metric Spaces, Proc. Amer. Math. Soc. 21 (1969), 341–342"
-      url: "https://www.ams.org/proc/1969-021-02/S0002-9939-1969-0242120-3/S0002-9939-1969-0242120-3.pdf"
+      url: "https://www.ams.org/proc/1969-021-02/"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a bounded function on $[a,b]$ is Riemann integrable exactly when its set of discontinuities is nowhere dense"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-fat-cantor-set, thm-fat-cantor-set-has-positive-measure, def-nowhere-dense-meager, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-neighbourhood-r, def-measure-zero-and-content-zero, def-continuity-real, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "MAT425 Lecture Notes (Princeton University)"
+      url: "https://web.math.princeton.edu/~js129/PDFs/teaching/MAT425_spring_2025/MAT425_Lecture_Notes.pdf"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "$x \\cdot 1_{\\mathbb{Q}}(x)$ is continuous at $0$ and at no other point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cex-dirichlet-is-nowhere-continuous, def-continuity-real, cor-of-reverse-triangle, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-neighbourhood-r, def-max-min, lem-finite-set-has-max, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Continuous_function"
     - title: "J. Lebl, Basic Analysis I, §3.2"
       url: "https://www.jirka.org/ra/"
+    - title: "E. Boman and R. Rogers, An Analytic Definition of Continuity"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_%28Boman_and_Rogers%29/06%3A_Continuity_-_What_It_Isnt_and_What_It_Is/6.01%3A_An_Analytic_De%EF%AC%81nition_of_Continuity"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: whenever both iterated sums of a double array exist, they are equal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-double-series-fubini, def-absolute-and-conditional-convergence, def-finite-sum, lem-finite-sum-laws, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fubini%27s_theorem"
     - title: "Series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
+    - title: "R. C. Gunning, Analytic Functions of Several Complex Variables"
+      url: "https://web.math.princeton.edu/~gunning/bk.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

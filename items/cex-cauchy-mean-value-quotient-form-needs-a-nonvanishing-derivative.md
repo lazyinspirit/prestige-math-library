@@ -4,6 +4,9 @@ kind: counterexample
 title: "With $f(x) = x^{3}$ and $g(x) = x^{2}$ on $[-1,1]$ the quotient form $\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}$ is meaningless because $g(b) = g(a)$, while the product form of Cauchy's theorem still holds"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cauchy-mean-value, thm-rolle, def-derivative, lem-derivative-of-a-power, lem-power-monotone, def-integer-power, def-interval, thm-algebra-of-continuous-functions, def-continuity-real, lem-of-sign-rules, def-canonical-natural, lem-of-naturals-positive, def-field, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "Rolle's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rolle%27s_theorem"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

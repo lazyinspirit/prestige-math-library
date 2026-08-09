@@ -4,6 +4,9 @@ kind: lemma
 title: "A locally finite family of continuous nonnegative functions has a continuous pointwise sum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-partition-of-unity-subordinate-to-a-cover, lem-algebra-of-continuous-real-maps-on-a-space]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "S. Semmes, Topology notes, Sections 5.13–5.14 (Rice University)"
+      url: "https://math.rice.edu/~semmes/math443b.pdf"
 pipeline_run: null
 ---
 

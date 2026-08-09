@@ -4,6 +4,10 @@ kind: example
 title: "The $n$-th root as a continuous inverse: for a natural $n \\ge 1$ the map $x \\mapsto x^{n}$ is continuous and strictly increasing on $[0,\\infty)$ with image $[0,\\infty)$, so its inverse $x \\mapsto x^{1/n}$ is continuous and strictly increasing"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [thm-continuous-inverse, thm-continuous-injection-on-an-interval-is-strictly-monotone, def-monotone-function, thm-nth-roots-exist, lem-power-monotone, def-integer-power, def-rational-power, thm-algebra-of-continuous-functions, def-interval, def-continuity-real, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -22,6 +26,10 @@ sources:
   references:
     - title: "Nth root (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nth_root"
+    - title: "MATH 320 Lecture Notes, October 21 (Stony Brook University)"
+      url: "https://www.math.stonybrook.edu/~bishop/classes/math320.F21/lecOct21.pdf"
+    - title: "Real Analysis Notes 10 (California State University, Dominguez Hills)"
+      url: "https://math.csudh.edu/~pong/a3/Notes_10.html"
 pipeline_run: null
 ---
 

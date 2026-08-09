@@ -4,6 +4,10 @@ kind: corollary
 title: "The Cantor function is continuous on $[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+  evidence: exact-source
 deps: [def-cantor-function, thm-cantor-function-properties, lem-monotone-with-interval-image-is-continuous, def-monotone-function, def-continuity-real, def-interval, def-cantor-set]
 justified_by: []
 aliases: []

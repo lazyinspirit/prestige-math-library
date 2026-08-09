@@ -4,6 +4,10 @@ kind: theorem
 title: "Continuous inverse theorem: a continuous injective $f$ on an interval $I$ is a bijection onto the order-convex set $f[I]$, and the inverse $g : f[I] \\to I$ is continuous and strictly monotone in the same sense as $f$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [thm-continuous-injection-on-an-interval-is-strictly-monotone, def-monotone-function, cor-continuous-image-of-an-interval-is-an-interval, lem-monotone-with-interval-image-is-continuous, def-continuity-real, def-interval, def-injection-surjection-bijection, thm-algebra-of-continuous-functions, thm-composition-of-continuous-functions]
 justified_by: []
 aliases: [thm-inverse-function-continuity]
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inverse_function_theorem"
     - title: "Monotonic function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
+    - title: "Real Analysis Notes 10 (California State University, Dominguez Hills)"
+      url: "https://math.csudh.edu/~pong/a3/Notes_10.html"
 pipeline_run: null
 ---
 

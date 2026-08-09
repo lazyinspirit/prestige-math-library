@@ -4,6 +4,9 @@ kind: definition
 title: "The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\\sup_P L(f,P)$ and $\\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\\int_a^b f$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-darboux-sums, lem-refinement-inequalities, def-partition-and-refinement, def-bounded-set, def-complete-ordered-field, def-ordered-field, def-infimum, thm-infimum-property, lem-sup-unique, def-interval]
 justified_by: []
 aliases: [def-riemann-integrable, def-lower-and-upper-integral]
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, The Riemann Integral"
+      url: "https://www.jirka.org/ra/html/sec_rint.html"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

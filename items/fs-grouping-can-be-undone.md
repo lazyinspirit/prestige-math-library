@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if some grouping of a series converges then the series itself converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-grouping-of-series, lem-alternating-sequence, lem-nth-term-test, def-finite-sum, lem-finite-sum-laws, def-monotone-sequence, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Grandi%27s_series"
     - title: "Series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
+    - title: "W. Fisher, Introduction to Analysis"
+      url: "https://math.berkeley.edu/~willfisher/teaching/104sm24/main.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

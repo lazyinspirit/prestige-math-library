@@ -4,6 +4,10 @@ kind: example
 title: "A bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $\\mathbb{Q}$, obtained from the prescribed-jump construction applied to one fixed enumeration of the rationals"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [thm-monotone-with-prescribed-discontinuity-set, def-monotone-function, def-classification-of-discontinuities, thm-froda, thm-rationals-countable, lem-rat-embeds-dense, def-countable, def-series, thm-geometric-series, def-equinumerous, lem-countable-iff-surjection-from-n]
 justified_by: []
 aliases: []
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
     - title: "Froda's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Froda%27s_theorem"
+    - title: "Math 402/502 Real Analysis Homework (University of New Mexico)"
+      url: "https://math.unm.edu/~crisp/courses/math402/spring19/hwk.html"
+    - title: "Discontinuities of monotone functions (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
 pipeline_run: null
 ---
 

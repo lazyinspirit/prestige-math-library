@@ -4,6 +4,9 @@ kind: definition
 title: "The Cantor middle-thirds set as the intersection of the sets $C_n$ obtained by removing open middle thirds"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-interval, thm-recursion, thm-induction-principle, def-integer-power, lem-power-laws, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: [def-cantor-middle-thirds-set]
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 (§2.44)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "University of Chicago MATH 395 notes"
+      url: "https://math.uchicago.edu/~alephnil/notes/MATH-395-notes.pdf"
 pipeline_run: null
 ---
 

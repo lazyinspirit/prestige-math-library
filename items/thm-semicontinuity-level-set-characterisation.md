@@ -4,6 +4,10 @@ kind: theorem
 title: "$f$ is upper semicontinuous on $A$ if and only if $\\{x \\in A : f(x) < \\alpha\\}$ is relatively open in $A$ for every real $\\alpha$, lower semicontinuous if and only if $\\{x \\in A : f(x) > \\alpha\\}$ is, and continuous if and only if it is both"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
 deps: [def-semicontinuity, def-continuity-real, def-open-and-closed-in-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Semi-continuity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Semi-continuity"
+    - title: "Characterization of Lower Semicontinuity (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Characterization_of_Lower_Semicontinuity"
 pipeline_run: null
 ---
 

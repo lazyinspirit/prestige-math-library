@@ -4,6 +4,9 @@ kind: example
 title: "Taking two positive terms for each negative one rearranges the alternating harmonic series to $3/2$ times its sum, by the identity $T_{3n} = S_{4n} + \\tfrac12 S_{2n}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [ex-alternating-harmonic-series, def-rearrangement-and-unconditional-convergence, thm-alternating-series-test, lem-alternating-sequence, lem-subsequence-inherits-limit, thm-algebra-of-limits, thm-recursion, thm-well-ordering-principle, thm-induction-principle, def-injection-surjection-bijection, def-monotone-sequence, def-finite-sum, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, cor-archimedean-reciprocal, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "N. Donaldson, Math 140A: Series"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/3series.html"
 pipeline_run: null
 ---
 

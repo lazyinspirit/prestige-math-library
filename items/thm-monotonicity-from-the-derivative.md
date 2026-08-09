@@ -4,6 +4,9 @@ kind: theorem
 title: "On an interval $I$, for $f$ continuous on $I$ and differentiable at every interior point: $f' \\ge 0$ throughout gives $f$ nondecreasing, $f' > 0$ gives $f$ increasing, $f' \\le 0$ and $f' < 0$ give the two decreasing forms; conversely a nondecreasing $f$ has $f' \\ge 0$ and a nonincreasing $f$ has $f' \\le 0$ wherever it is differentiable, and no strict converse is claimed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-mean-value-theorem, def-derivative, def-monotone-function, def-interval, def-continuity-real, lem-function-limit-preserves-order, def-function-limit, def-interior-closure-boundary-r, lem-of-sign-rules, lem-of-inverse-positive, def-ordered-field, def-neighbourhood-r, def-limit-point-r]
 justified_by: []
 aliases: [thm-derivative-sign-and-monotonicity]
@@ -11,12 +14,13 @@ landmark: true
 short: "sign of $f'$ and monotonicity"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 5 (Thm 5.11)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -73,7 +81,7 @@ only that the difference quotients have a constant sign.
 
 [L2] Order-convexity ([[def-interval]]): $u, v \in I$ with $u \le v$ gives $[u,v] \subseteq I$; and for $u < v$ in $I$ every $x \in (u,v)$ is interior to $I$, since $N_{\varepsilon}(x) \subseteq (u,v) \subseteq I$ for $\varepsilon := \min\{x-u,\ v-x\} > 0$ ([[def-neighbourhood-r]], [[def-interior-closure-boundary-r]]).
 
-[L3] Restriction of the domain ([[def-derivative]]): if $B \subseteq A$, if $p \in B$ is a limit point of $B$ and if $h : A \to \mathbb{R}$ is differentiable at $p$, then $h|_B$ is differentiable at $p$ with the same derivative; and every point of an order-convex set with at least two elements is a limit point of it ([[def-limit-point-r]]).
+[L3] Difference quotient and restriction of the domain ([[def-derivative]]): differentiability of $h$ at $p$ means that $q(x) := (h(x)-h(p))/(x-p)$ on $A \setminus \{p\}$ has limit $h'(p)$; if $B \subseteq A$, if $p \in B$ is a limit point of $B$ and if $h : A \to \mathbb{R}$ is differentiable at $p$, then $h|_B$ is differentiable at $p$ with the same derivative; and every point of an order-convex set with at least two elements is a limit point of it ([[def-limit-point-r]]).
 
 [L4] Continuity passes to a subset of the domain ([[def-continuity-real]]).
 

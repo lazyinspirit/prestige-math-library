@@ -4,6 +4,9 @@ kind: theorem
 title: "The image of a compact subset of $\\mathbb{R}$ under a continuous real function is compact"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-continuity-real, def-open-cover-r, def-open-and-closed-in-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ short: "continuous image of a compact set"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "W. Trench, Introduction to Real Analysis, Ch. 8: Metric Spaces"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Introduction_to_Real_Analysis_%28Trench%29/08%3A_Metric_Spaces/8.00%3A_Introduction_to_Metric_Spaces"
+    - title: "MIT 18.100B lecture notes"
+      url: "https://math.mit.edu/classes/18.100/100B.S1-Lects.html"
 pipeline_run: null
 ---
 
@@ -63,21 +71,23 @@ from a *finite* list, which needs no axiom.
 
 [L2] Open sets: $V \subseteq \mathbb{R}$ is open when every point of $V$ has a neighbourhood inside $V$, and every neighbourhood $N_{\delta}(x)$ is itself an open set containing $x$ ([[def-open-and-closed-in-r]], [[def-neighbourhood-r]]).
 
-[L3] Compactness of $K$: for every family $\mathcal{W}$ of open subsets of $\mathbb{R}$ with $K \subseteq \bigcup \mathcal{W}$ there are $n \in \mathbb{N}$ and $W_0, \dots, W_n \in \mathcal{W}$ with $K \subseteq W_0 \cup \dots \cup W_n$; and $\varnothing$ is compact ([[def-open-cover-r]]).
+[L3] Compactness of $K$: for every family $\mathcal{W}$ of open subsets of $\mathbb{R}$ with $K \subseteq \bigcup \mathcal{W}$, either $K = \varnothing$ and the empty subfamily covers it, or there are $n \in \mathbb{N}$ and $W_0, \dots, W_n \in \mathcal{W}$ with $K \subseteq W_0 \cup \dots \cup W_n$ ([[def-open-cover-r]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $\mathcal{V}$ be a family of open subsets of $\mathbb{R}$ with $f[K] \subseteq \bigcup \mathcal{V}$. Define $$\mathcal{W} \;:=\; \bigl\{\, N_{\delta}(x) \ : \ x \in K,\ \delta \in \mathbb{R},\ \delta > 0,\ \text{and } f\bigl(K \cap N_{\delta}(x)\bigr) \subseteq V \text{ for some } V \in \mathcal{V} \,\bigr\}.$$ This family is cut out by a property of the pair $(x,\delta)$, so it is a set and nothing is selected in forming it; every member is an open subset of $\mathbb{R}$ by [L2]. [L2]
+1.1 If $K = \varnothing$, then $f[K] = \varnothing$, which is compact by [L3]. Hence suppose $K \ne \varnothing$ for the rest of the proof. [L3, cases]
 
-2.1 **$\mathcal{W}$ covers $K$.** Let $x \in K$. Then $x \in A$ and $f(x) \in f[K] \subseteq \bigcup \mathcal{V}$, so $f(x) \in V$ for some $V \in \mathcal{V}$. As $V$ is open, [L2] gives a real $\varepsilon > 0$ with $N_{\varepsilon}(f(x)) \subseteq V$, and [L1] gives a real $\delta > 0$ with $f\bigl(A \cap N_{\delta}(x)\bigr) \subseteq N_{\varepsilon}(f(x)) \subseteq V$. Since $K \subseteq A$ we get $f\bigl(K \cap N_{\delta}(x)\bigr) \subseteq V$, so $N_{\delta}(x) \in \mathcal{W}$, and $x \in N_{\delta}(x)$ by [L2]. Hence $K \subseteq \bigcup \mathcal{W}$. [step 1.1, L1, L2]
+1.2 Let $\mathcal{V}$ be a family of open subsets of $\mathbb{R}$ with $f[K] \subseteq \bigcup \mathcal{V}$. Define $$\mathcal{W} \;:=\; \bigl\{\, N_{\delta}(x) \ : \ x \in K,\ \delta \in \mathbb{R},\ \delta > 0,\ \text{and } f\bigl(K \cap N_{\delta}(x)\bigr) \subseteq V \text{ for some } V \in \mathcal{V} \,\bigr\}.$$ This family is cut out by a property of the pair $(x,\delta)$, so it is a set and nothing is selected in forming it; every member is an open subset of $\mathbb{R}$ by [L2]. [L2]
 
-3.1 By [L3] there are $n \in \mathbb{N}$ and members $W_0, \dots, W_n$ of $\mathcal{W}$ with $K \subseteq W_0 \cup \dots \cup W_n$. For each $i \le n$ the membership $W_i \in \mathcal{W}$ asserts the existence of some $V \in \mathcal{V}$ with $f(K \cap W_i) \subseteq V$; naming one such $V_i$ for each of the finitely many indices $i \le n$ requires no choice principle. [step 1.1, step 2.1, L3, choose]
+2.1 **$\mathcal{W}$ covers $K$.** Let $x \in K$. Then $x \in A$ and $f(x) \in f[K] \subseteq \bigcup \mathcal{V}$, so $f(x) \in V$ for some $V \in \mathcal{V}$. As $V$ is open, [L2] gives a real $\varepsilon > 0$ with $N_{\varepsilon}(f(x)) \subseteq V$, and [L1] gives a real $\delta > 0$ with $f\bigl(A \cap N_{\delta}(x)\bigr) \subseteq N_{\varepsilon}(f(x)) \subseteq V$. Since $K \subseteq A$ we get $f\bigl(K \cap N_{\delta}(x)\bigr) \subseteq V$, so $N_{\delta}(x) \in \mathcal{W}$, and $x \in N_{\delta}(x)$ by [L2]. Hence $K \subseteq \bigcup \mathcal{W}$. [step 1.2, L1, L2]
+
+3.1 By [L3] there are $n \in \mathbb{N}$ and members $W_0, \dots, W_n$ of $\mathcal{W}$ with $K \subseteq W_0 \cup \dots \cup W_n$. For each $i \le n$ the membership $W_i \in \mathcal{W}$ asserts the existence of some $V \in \mathcal{V}$ with $f(K \cap W_i) \subseteq V$; naming one such $V_i$ for each of the finitely many indices $i \le n$ requires no choice principle. [step 1.1, step 1.2, step 2.1, L3, choose]
 
 4.1 **The finite subfamily works.** Let $z \in f[K]$, say $z = f(x)$ with $x \in K$. By step 3.1 there is $i \le n$ with $x \in W_i$, hence $x \in K \cap W_i$ and $z = f(x) \in V_i$. Therefore $f[K] \subseteq V_0 \cup \dots \cup V_n$, a union of finitely many members of $\mathcal{V}$. [step 3.1]
 
-5.1 Every family of open subsets of $\mathbb{R}$ covering $f[K]$ thus has a finite subfamily covering $f[K]$, so $f[K]$ is compact. [step 1.1, step 4.1, L3] ∎
+5.1 Every family of open subsets of $\mathbb{R}$ covering $f[K]$ thus has a finite subfamily covering $f[K]$, so $f[K]$ is compact. [step 1.1, step 1.2, step 4.1, L3] ∎
 
 ## Remarks
 

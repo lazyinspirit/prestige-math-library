@@ -4,6 +4,9 @@ kind: example
 title: "$\\sum_{j \\ge 0} (-1)^{j}\\,(j+3)/(j+1)^{2}$ converges, by Abel's test with the monotone bounded factor $(j+3)/(j+1)$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-abel-test, ex-alternating-harmonic-series, thm-alternating-series-test, def-monotone-sequence, cor-monotone-converges-iff-bounded, lem-alternating-sequence, lem-of-inverse-positive, lem-of-naturals-positive, def-integer-power, lem-power-laws, def-bounded-set, def-series, def-real-limit]
 justified_by: []
 aliases: []

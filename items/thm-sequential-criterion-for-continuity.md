@@ -4,6 +4,9 @@ kind: theorem
 title: "$f$ is continuous at $c \\in A$ if and only if $f(x_k) \\to f(c)$ for every sequence in $A$ converging to $c$, the converse direction costing countable choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-continuity-real, thm-sequential-criterion-for-function-limits, rem-heine-criterion-choice-cost, def-countable-choice, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-sequence, def-real-limit, lem-rat-embeds-dense, lem-of-abs-value]
 justified_by: []
 aliases: [thm-heine-criterion-for-continuity]
@@ -13,11 +16,12 @@ short: "sequential criterion for continuity"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -71,7 +75,7 @@ Heine-Cantor, and each of those two items says which direction it uses.
 
 [L3] At a limit point $c$ of $A$, $f$ is continuous at $c$ if and only if the limit of $f$ at $c$ exists and equals $f(c)$; at an isolated point of $A$ every function is continuous ([[def-continuity-real]], [[def-function-limit]]).
 
-[L4] Heine criterion for limits: at a limit point $c$ of $A$, $\lim_{x \to c} f(x) = L$ holds if and only if $f(x_k) \to L$ for every sequence $(x_k)$ with $x_k \in A$, $x_k \ne c$ for every $k$, and $x_k \to c$. The direction from the limit to sequences is a theorem of ZF; the converse uses the axiom of countable choice exactly once ([[thm-sequential-criterion-for-function-limits]], [[def-countable-choice]], [[rem-heine-criterion-choice-cost]]).
+[L4] Heine criterion for limits: at a limit point $c$ of $A$, $\lim_{x \to c} f(x) = L$ holds if and only if $f(x_k) \to L$ for every sequence $(x_k)$ with $x_k \in A$, $x_k \ne c$ for every $k$, and $x_k \to c$. The direction from the limit to sequences is a theorem of ZF; the converse uses the axiom of countable choice exactly once ([[thm-sequential-criterion-for-function-limits]], [[def-countable-choice]]).
 
 [L5] Convergence of a real sequence: $x_k \to x$ when for every rational $\varepsilon > 0$ there is $K$ with $|x_k - x| < \varepsilon$ for all $k \ge K$; below every positive real lies a positive rational, so the test may equally be run at every real $\varepsilon > 0$ ([[def-real-limit]], [[def-sequence]], [[lem-rat-embeds-dense]]).
 

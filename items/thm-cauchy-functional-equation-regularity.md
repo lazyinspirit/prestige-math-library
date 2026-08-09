@@ -4,6 +4,10 @@ kind: theorem
 title: "Six regularity conditions each force an additive $f : \\mathbb{R} \\to \\mathbb{R}$ to be $x \\mapsto f(1)x$: continuity at a single point, monotonicity on a nondegenerate interval, boundedness above on one, boundedness below on one, constancy of sign on one, and a graph that is not dense in $\\mathbb{R}^{2}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
 deps: [def-additive-function, lem-additive-is-q-linear, lem-additive-bounded-above-on-an-interval-is-linear, def-monotone-function, def-continuity-real, def-interval, def-bounded-set, lem-metrics-on-rn, def-metric-space, def-metric-ball, def-metric-interior-closure-boundary, thm-metric-closure-characterisation, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-of-abs-value, def-complete-ordered-field, def-neighbourhood-r]
 justified_by: []
 aliases: [thm-cauchy-equation-regularity]
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
     - title: "Hamel basis (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+    - title: "Additive operators approximately preserving Birkhoff-James orthogonality (Aequationes mathematicae)"
+      url: "https://link.springer.com/article/10.1007/s00010-025-01210-4"
 pipeline_run: null
 ---
 

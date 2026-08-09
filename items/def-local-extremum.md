@@ -4,6 +4,9 @@ kind: definition
 title: "Local (relative) maximum and minimum of $f : A \\to \\mathbb{R}$ at a point, the strict forms, and what it means for the point to be interior to $A$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-neighbourhood-r, def-max-min, def-interior-closure-boundary-r, def-complete-ordered-field, def-interval, def-limit-point-r]
 justified_by: []
 aliases: [def-local-maximum, def-local-minimum, def-relative-extremum]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §4.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
 pipeline_run: null
 ---
 

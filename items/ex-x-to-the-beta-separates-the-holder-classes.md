@@ -4,6 +4,9 @@ kind: example
 title: "On $[0,1]$ the function $x^{\\beta}$ is $\\beta$-Hölder and is $\\alpha$-Hölder for no rational $\\alpha > \\beta$, so the Hölder classes are strictly nested"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lipschitz-holder-contraction, lem-real-and-metric-notions-agree, thm-metric-regularity-hierarchy, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-integer-power, def-uniform-continuity-real, def-continuity-real, def-interval, def-rat-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
     - title: "Uniform continuity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Uniform_continuity"
+    - title: "University of Zaragoza thesis on Hölder continuity"
+      url: "https://zaguan.unizar.es/record/125531/files/TAZ-TFG-2022-2652.pdf"
+    - title: "University of Wisconsin Math 521 exercises"
+      url: "https://people.math.wisc.edu/~angenent/521.2016s/index.html"
 pipeline_run: null
 ---
 

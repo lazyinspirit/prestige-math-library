@@ -4,6 +4,11 @@ kind: example
 title: "A worked fixed point on $[1,2]$ for the map $x \\mapsto (x + 2/x)/2$, from the one-dimensional fixed point theorem"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-one-dimensional-fixed-point, thm-intermediate-value, thm-algebra-of-continuous-functions, thm-nth-roots-exist, def-continuity-real, def-interval, def-integer-power, lem-power-monotone, lem-of-inverse-positive, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

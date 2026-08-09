@@ -4,6 +4,9 @@ kind: lemma
 title: "A function on an interval satisfying $f(x) \\le f(y)$ whenever $x \\le y$, whose image is order-convex, is continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-continuity-real, def-interval, thm-connected-subsets-of-r-are-intervals, def-connected-r, def-neighbourhood-r, def-max-min, lem-finite-set-has-max, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [lem-monotone-darboux-implies-continuous]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "E. Zakon, Mathematical Analysis, §4.9: The Intermediate Value Property"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/04%3A_Function_Limits_and_Continuity/4.09%3A_The_Intermediate_Value_Property"
 pipeline_run: null
 ---
 

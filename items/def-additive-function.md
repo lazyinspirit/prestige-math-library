@@ -4,6 +4,10 @@ kind: definition
 title: "Cauchy's functional equation $f(x+y) = f(x) + f(y)$, and the additive functions $\\mathbb{R} \\to \\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+  evidence: exact-source
 deps: [def-complete-ordered-field, def-ordered-field, def-field]
 justified_by: []
 aliases: [def-cauchy-functional-equation]

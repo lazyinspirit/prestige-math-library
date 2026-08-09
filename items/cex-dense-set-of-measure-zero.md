@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{Q}$ is dense in $\\mathbb{R}$ and has measure zero"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-measure-zero-implies-nowhere-dense, lem-countable-sets-are-null, lem-q-and-irrationals-dense-r, def-measure-zero-and-content-zero, def-nowhere-dense-meager, thm-rationals-countable, lem-rat-embeds-dense, def-countable, def-interior-closure-boundary-r, def-open-and-closed-in-r]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Null_set"
     - title: "Dense set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dense_set"
+    - title: "E. Zakon, Mathematical Analysis, §6.8: Baire Categories"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
 pipeline_run: null
 ---
 
@@ -64,16 +72,8 @@ explicit cover.
 
 ## Remarks
 
-- **The cover is explicit and startling.** For every $\varepsilon > 0$ the
-  rationals are covered by open intervals of total length exactly $\varepsilon$
-  ([[ex-q-covered-by-intervals-of-small-total-length]]), even though every one of
-  those intervals meets every other and the union is dense.
+- **The cover is explicit and startling.** For every $\varepsilon > 0$ the rationals are covered by open intervals of total length exactly $\varepsilon$ ([[ex-q-covered-by-intervals-of-small-total-length]]), although their union is dense because it contains $\mathbb{Q}_{\mathbb{R}}$.
 
-- **$\mathbb{Q}$ is small in the other sense too, one level up.** It is meager,
-  being a countable union of singletons
-  ([[cor-q-is-meager-and-not-g-delta]]); what fails is only nowhere density
-  itself. So the counterexample separates "nowhere dense" from "meager", not
-  category from measure.
+- **$\mathbb{Q}$ is small in the other sense too, one level up.** It is meager, being a countable union of singletons ([[cor-q-is-meager-and-not-g-delta]]); what fails is only nowhere density itself. So the counterexample separates "nowhere dense" from "meager", not category from measure.
 
-- **The complementary witness** is the Smith-Volterra-Cantor set, nowhere dense
-  and not null ([[cex-nowhere-dense-with-positive-measure]]).
+- **The complementary witness** is the Smith-Volterra-Cantor set, nowhere dense and not null ([[cex-nowhere-dense-with-positive-measure]]).

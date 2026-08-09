@@ -4,6 +4,10 @@ kind: theorem
 title: "Every $G_\\delta$ subset of $\\mathbb{R}$ is the set of continuity points of some $f : \\mathbb{R} \\to \\mathbb{R}$, so the $G_\\delta$ sets are exactly the continuity sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [def-f-sigma-g-delta, thm-discontinuity-set-is-f-sigma, def-open-and-closed-in-r, thm-open-set-algebra-r, thm-well-ordering-principle, lem-q-and-irrationals-dense-r, cor-archimedean-reciprocal, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, def-neighbourhood-r, lem-rat-embeds-dense, thm-closure-characterisations-r]
 justified_by: []
 aliases: []
@@ -11,12 +15,13 @@ landmark: true
 short: "the continuity sets are exactly the $G_\\delta$ sets"
 proof_strategy: constructive
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -86,26 +91,8 @@ $0$, and the values cannot come close.
 
 ## Remarks
 
-- **Why the $V_n$ are replaced by the decreasing $W_n$.** The index $n(x)$ is
-  useful only because $y \in W_m$ implies $y \in W_j$ for all $j \le m$, which is
-  what makes $n(y) > m$ in step 4.1. For an arbitrary sequence $(V_n)$ that
-  implication fails, and $n(x)$ would carry no information about how deep $x$
-  sits in the intersection. Passing to the finite intersections costs nothing,
-  since they are still open and still intersect to $G$.
+- **Why the $V_n$ are replaced by the decreasing $W_n$.** The index $n(x)$ is useful only because $y \in W_m$ implies $y \in W_j$ for all $j \le m$, which is what makes $n(y) > m$ in step 4.1. For an arbitrary sequence $(V_n)$ that implication fails, and $n(x)$ would carry no information about how deep $x$ sits in the intersection. Passing to the finite intersections costs nothing, since they are still open and still intersect to $G$.
 
-- **Two extreme cases.** For $G = \mathbb{R}$ the construction gives $f = 0$,
-  continuous everywhere. For $G = \varnothing$, obtained as the intersection of
-  the sequence constantly $\varnothing$, every $x$ lies outside $W_0 = \varnothing$, so
-  $n(x) = 0$ and $f$ takes the value $1$ at every rational and $-1$ at every
-  irrational; it is nowhere continuous, as the Dirichlet function is
-  ([[thm-dirichlet-and-thomae-continuity-sets]]).
+- **Two extreme cases.** For $G = \mathbb{R}$ the construction gives $f = 0$, continuous everywhere. For $G = \varnothing$, obtained as the intersection of the sequence constantly $\varnothing$, every $x$ lies outside $W_0 = \varnothing$, so $n(x) = 0$ and $f$ takes the value $1$ at every rational and $-1$ at every irrational; it is nowhere continuous, as the Dirichlet function is ([[thm-dirichlet-and-thomae-continuity-sets]]).
 
-- **The theorem does not produce a monotone or a bounded example, and does not
-  claim to.** The function built above takes values in $[-1,1]$, so it happens to
-  be bounded; nothing here says anything about its behaviour beyond its
-  continuity set. Whether a **monotone** function with a given continuity set
-  exists is a different question, answered by [[thm-froda]] and
-  [[thm-monotone-with-prescribed-discontinuity-set]] together: a monotone
-  function has continuity set $G$ exactly when $\mathbb{R} \setminus G$ is at most
-  countable. So $G = \mathbb{R} \setminus \mathbb{Q}$ does admit a monotone
-  example, while a $G_\delta$ set with uncountable complement does not.
+- **The construction does not guarantee monotonicity, and the theorem does not claim it.** The function built above always takes values in $[-1,1]$, so it is bounded; no further behaviour beyond its continuity set is asserted.

@@ -1,5 +1,57 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVES 8, 9, AND 10 — A0 THROUGH A10 COMPLETE; THREE OWNER PAUSES OPEN (2026-08-09)
+
+The owner explicitly directed these three waves to run in parallel. Their
+shared clean baseline is pushed commit
+`6fb3b6c9d08752db2239a2e0794752f0f69107fc`. All three final A10 suites pass
+9/9. Nothing from Waves 8--10 is committed or pushed, and no owner pause has
+been cleared.
+
+### Wave 8 — A0 through A10 complete; owner pause open
+
+Scope is eight pages / four pairs / 139 items / 116 proof-bearing / 1,603
+relationships. A7 judged exactly the 17 repaired ids. Its eight Terra
+rejections were adjudicated as one confirmed fatal, six confirmed nonfatal and
+one false positive. Under the owner's fatal-only A8 rule, only
+`cor-q-is-meager-and-not-g-delta` changed and only that item was rejudged; both
+final judges passed and all ten consumers remain licensed. A9 reread all 17
+repaired items and all eight pages without another edit or judge call. Exact
+coverage is 139/139 items, 116/116 proofs, 1,603/1,603 relationships and 17/17
+repair pairs. A10 is green 9/9. Full rundown:
+`research/audit/wave8-A10.md`.
+
+### Wave 9 — A0 through A10 complete; owner pause open
+
+Scope is two pages / one pair / 43 items / 34 proof-bearing / 485
+relationships. Alpha reconciled the complete manifest, including all 65
+Wave9-to-Wave8 dependency edges. A7 judged exactly the five repaired ids. Its
+three Terra rejections were adjudicated as one confirmed fatal and two
+confirmed nonfatal. A8 changed and rejudged only
+`thm-semicontinuous-evt`; both final judges passed and its one consumer remains
+licensed. A9 reread all five repaired items and both pages without another edit
+or judge call. Exact coverage is 43/43 items, 34/34 proofs, 485/485
+relationships and 5/5 repair pairs. A10 is green 9/9. Full rundown:
+`research/audit/wave9-A10.md`.
+
+### Wave 10 — A0 through A10 complete; owner pause open
+
+Scope is four pages / two pairs / 57 items / 49 proof-bearing / 888
+relationships. Alpha reconciled all 888 edges, including 86 Wave10-to-Wave8
+and 29 Wave10-to-Wave9 edges. A7 judged exactly four repaired ids: the three
+material A4 repairs plus the A6 source repair
+`cex-differentiable-with-unbounded-derivative-is-not-lipschitz`. Terra rejected
+three. A8 adjudicated zero confirmed fatal, one confirmed nonfatal and two
+false positives, so it edited and rejudged nothing. A9 reread all four repaired
+items and all four page files without an edit or judge call. Exact coverage is
+57/57 items, 49/49 proofs, 888/888 relationships and 4/4 repair pairs. The
+combined concurrent impact receipt covers 239 changed interfaces and 729
+consumer dispositions. A10 is green 9/9. Full rundown:
+`research/audit/wave10-A10.md`.
+
+Exact next action: the owner decides whether to clear each wave's sole A10
+shipment/conclusion pause. Do not commit or push before that direction.
+
 ## WAVE 7 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-09)
 
 **This section supersedes the Wave 6 pointer below. Full rundown:

@@ -4,6 +4,9 @@ kind: theorem
 title: "Intermediate value theorem, by bisection with a canonical left-half rule: a continuous function on $[a,b]$ takes every value between $f(a)$ and $f(b)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-continuity-real, thm-algebra-of-continuous-functions, thm-sequential-criterion-for-continuity, thm-nested-interval-property, def-interval, def-complete-ordered-field, thm-recursion, lem-geometric-sequence-null, thm-algebra-of-limits, lem-limit-preserves-order, def-real-limit, def-sequence, def-integer-power, lem-power-laws, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [thm-ivt]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "E. Zakon, Mathematical Analysis, §4.9: The Intermediate Value Property"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/04%3A_Function_Limits_and_Continuity/4.09%3A_The_Intermediate_Value_Property"
 pipeline_run: null
 ---
 

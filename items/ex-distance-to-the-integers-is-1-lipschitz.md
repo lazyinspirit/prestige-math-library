@@ -4,6 +4,9 @@ kind: example
 title: "The distance $\\psi(x) = d(x, \\mathbb{Z})$ from a real number to the integers is $1$-Lipschitz, hence uniformly continuous, takes values in $[0,1/2]$, and vanishes exactly on $\\mathbb{Z}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-metric-bounded-diameter, lem-distance-to-set-is-lipschitz, lem-real-line-is-a-metric-space, lem-real-and-metric-notions-agree, thm-metric-regularity-hierarchy, def-lipschitz-holder-contraction, def-uniform-continuity-real, def-continuity-real, lem-integer-part, def-integers, lem-nat-embeds-int, lem-int-embeds-rat, lem-rat-embeds-dense, def-metric-space, def-infimum, def-max-min, lem-finite-set-has-max, def-interval, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [ex-psi-is-1-lipschitz]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Floor_and_ceiling_functions"
     - title: "Triangle wave (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Triangle_wave"
+    - title: "J. Heinonen, Lectures on Lipschitz Analysis"
+      url: "https://www.math.uchicago.edu/~shmuel/QuantCourse%20/Metric%20Space/Heinonen%2C%20Lecs%20on%20Lip%20Analysis.pdf"
 pipeline_run: null
 ---
 

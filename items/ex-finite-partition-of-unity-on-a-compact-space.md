@@ -4,6 +4,9 @@ kind: example
 title: "Under choice and dependent choice, a finite subordinate partition of unity for a two-set cover of a compact interval"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-supplied
 deps: [cor-compact-hausdorff-partitions-of-unity, def-partition-of-unity-subordinate-to-a-cover, lem-algebra-of-continuous-real-maps-on-a-space]
 justified_by: []
 aliases: []

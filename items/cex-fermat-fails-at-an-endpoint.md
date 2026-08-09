@@ -4,6 +4,9 @@ kind: counterexample
 title: "The identity on $[0,1]$ attains its maximum at $1$ and its minimum at $0$ with derivative $1$ at both, so Fermat's theorem genuinely needs the extremum to be at an interior point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-fermat-interior-extremum, def-local-extremum, def-derivative, def-interior-closure-boundary-r, def-max-min, def-interval, def-neighbourhood-r, def-function-limit, cor-of-one-positive, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fermat%27s_theorem_(stationary_points)"
     - title: "Maximum and minimum (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Maximum_and_minimum"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: differentiability at every point of $(a,b)$ alone yields a $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-mean-value-theorem, thm-rolle, def-derivative, def-continuity-real, def-interval, def-function-limit, def-limit-point-r, lem-of-abs-value, cor-of-one-positive]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "Rolle's theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Rolle%27s_theorem"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
 pipeline_run: null
 ---
 

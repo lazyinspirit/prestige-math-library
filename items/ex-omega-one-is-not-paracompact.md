@@ -4,6 +4,9 @@ kind: example
 title: 'Assuming choice, $\omega_1$ is countably compact, noncompact, and not paracompact'
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [lem-countably-compact-paracompact-hausdorff-is-compact, thm-ordinal-spaces-and-compactness, lem-ordinal-order-topology-is-t3, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "First uncountable ordinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
+    - title: "G. Gruenhage, General Topology Course Notes"
+      url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The Cantor set contains no interval of positive length yet has no isolated point, so every connected subset of it is a single point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-set-properties, def-perfect-set-r, def-cantor-set, def-connected-r, thm-connected-subsets-of-r-are-intervals, def-interval, def-limit-point-r, thm-cantor-set-ternary-description, def-open-and-closed-in-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Perfect_set"
     - title: "Totally disconnected space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Totally_disconnected_space"
+    - title: "University of Chicago MATH 395 notes"
+      url: "https://math.uchicago.edu/~alephnil/notes/MATH-395-notes.pdf"
 pipeline_run: null
 ---
 

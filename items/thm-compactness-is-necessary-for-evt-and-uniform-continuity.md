@@ -4,6 +4,9 @@ kind: theorem
 title: "Rudin 4.20, the sharp converse: on a noncompact $E \\subseteq \\mathbb{R}$ there is an unbounded continuous function and a bounded continuous function with no greatest value, and if $E$ is bounded there is a continuous function on $E$ that is not uniformly continuous"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-heine-borel-characterisation-r, def-open-cover-r, thm-extreme-value-r, thm-heine-cantor-r, cor-boundedness-theorem-r, cor-continuous-extension-from-a-dense-subset-r, thm-algebra-of-continuous-functions, def-continuity-real, def-uniform-continuity-real, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-interval, def-neighbourhood-r, def-integer-power, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-power-monotone, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [thm-rudin-4-20]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Extreme_value_theorem"
     - title: "Uniform continuity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Uniform_continuity"
+    - title: "W. Rudin, Principles of Mathematical Analysis"
+      url: "https://www.lehman.edu/faculty/rbettiol/lehman_teaching/2020mat320/baby_Rudin.pdf"
 pipeline_run: null
 ---
 

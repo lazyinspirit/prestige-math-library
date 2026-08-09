@@ -4,6 +4,9 @@ kind: example
 title: "The indicator of the Cantor set is discontinuous exactly on the Cantor set, which is null, so it is Riemann integrable with integral $0$ even though it is discontinuous at uncountably many points"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-lebesgue-criterion, def-cantor-set, thm-cantor-set-properties, def-measure-zero-and-content-zero, def-nowhere-dense-meager, def-interior-closure-boundary-r, def-continuity-real, def-classification-of-discontinuities, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-countable, def-interval, def-open-and-closed-in-r, def-neighbourhood-r, def-bounded-set, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_set"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "MAT425 Lecture Notes (Princeton University)"
+      url: "https://web.math.princeton.edu/~js129/PDFs/teaching/MAT425_spring_2025/MAT425_Lecture_Notes.pdf"
 pipeline_run: null
 ---
 

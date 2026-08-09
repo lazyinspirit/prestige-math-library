@@ -4,6 +4,9 @@ kind: counterexample
 title: 'Assuming choice, paracompactness is not open-hereditary: $\omega_1$ inside $\omega_1+1$'
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-omega-one-is-not-paracompact, prop-compact-spaces-are-paracompact, thm-ordinal-spaces-and-compactness, lem-ordinal-order-topology-is-t3]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "First uncountable ordinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
+    - title: "G. Gruenhage, General Topology Course Notes"
+      url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "M. Aitken, Compactness notes (California State University San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/Essays/Topology/compactness.pdf"
 pipeline_run: null
 ---
 

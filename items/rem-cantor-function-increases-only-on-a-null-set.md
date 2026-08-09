@@ -4,6 +4,10 @@ kind: remark
 title: "The Cantor function is continuous and nondecreasing, climbs from $0$ to $1$, and is constant on every interval removed in the construction of the Cantor set, so all of its increase happens on a set of measure zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
 deps: [cor-cantor-function-is-continuous, thm-cantor-function-properties, thm-cantor-set-properties, def-cantor-set, def-cantor-function, def-measure-zero-and-content-zero, def-monotone-function, def-interval]
 justified_by: []
 aliases: []

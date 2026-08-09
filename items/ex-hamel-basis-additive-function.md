@@ -4,6 +4,10 @@ kind: example
 title: "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ that is not $x \\mapsto cx$: the coefficient of one fixed Hamel basis vector. It is unbounded above and below on every nondegenerate interval, its graph is dense in $\\mathbb{R}^{2}$, and every nonempty level set is dense in $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [lem-hamel-basis-exists, fs-additive-implies-linear, def-additive-function, lem-additive-is-q-linear, thm-cauchy-functional-equation-regularity, def-vector-space, lem-restriction-of-scalars, def-linear-combination-and-span, def-linear-subspace, lem-metrics-on-rn, def-metric-interior-closure-boundary, thm-metric-closure-characterisation, def-metric-ball, def-axiom-of-choice, thm-zorn, def-bounded-set, def-interval, lem-rat-embeds-dense, lem-q-and-irrationals-dense-r, def-complete-ordered-field, def-continuity-real, def-monotone-function]
 justified_by: []
 aliases: []
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
     - title: "Hamel basis, in Basis (linear algebra) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+    - title: "On Functions Whose Graph Is a Hamel Basis"
+      url: "https://www.scranton.edu/faculty/plotka/pdfs/5.pdf"
 pipeline_run: null
 ---
 

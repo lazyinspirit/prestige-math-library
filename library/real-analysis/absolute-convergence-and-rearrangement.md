@@ -45,7 +45,11 @@ the alternating harmonic series as the witness.
 [[lem-positive-and-negative-parts]] is the technical form of the distinction: for
 an absolutely convergent series both part series $\sum a_k^{+}$ and
 $\sum a_k^{-}$ converge, and for a conditionally convergent one both diverge to
-$+\infty$. Every theorem below is a consequence of that dichotomy.
+$+\infty$. The rearrangement and unconditional-convergence results, together
+with the Cauchy-product and double-series results, are organised by that
+dichotomy. The three convergence tests that come first instead arise from
+summation by parts, while the grouping, infinite-product, and decimal results
+have their own hypotheses.
 
 **Two convergence tests that need no sign pattern.**
 [[lem-abel-summation-by-parts]] is the discrete integration by parts,
@@ -114,7 +118,7 @@ $\sum |p_k|$ for signed terms.
 [[fs-infinite-product-converges-iff-terms-tend-to-one]] records that factors
 tending to $1$ decide nothing. **No logarithm is used anywhere on this page**;
 every one of those inequalities is an induction on finite products, and the
-refinement of the criterion that genuinely needs the logarithm is deferred, as
+refinement usually proved with logarithms is deferred, as
 [[rem-sums-proved-to-exist-but-not-evaluated]] records.
 
 **Decimal expansions.** [[thm-decimal-expansions]] is the payoff of the geometric

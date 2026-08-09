@@ -4,6 +4,9 @@ kind: theorem
 title: "If $|f(x) - f(y)| \\le C|x-y|^{\\alpha}$ on an interval for some rational $\\alpha > 1$ then $f$ is constant"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-continuity-real, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-integer-power, def-interval, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-abs-value, def-rat-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: [thm-holder-above-one-constant]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "Cornell numerical methods notes: Calculus"
+      url: "https://www.cs.cornell.edu/~bindel/nmds/00-Background/04-Calculus.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming choice, refuted: paracompactness is productive"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-lower-limit-line-is-regular-and-lindelof, lem-regular-lindelof-spaces-are-paracompact, thm-paracompact-hausdorff-implies-normal, thm-normality-is-not-productive, lem-products-preserve-t0-t1-and-hausdorff, def-lower-limit-topology, def-hausdorff-space, def-axiom-of-choice, def-countable-choice]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Sorgenfrey plane and Jones's lemma"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
 pipeline_run: null
 ---
 

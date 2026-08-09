@@ -4,6 +4,9 @@ kind: theorem
 title: "A monotone function on $[a,b]$ is Riemann integrable: for the uniform partition into $N$ parts the upper minus lower sum telescopes to $|f(b) - f(a)|\\,(b-a)/\\iota(N)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-riemann-criterion, def-monotone-function, def-partition-and-refinement, def-darboux-sums, def-darboux-integral, lem-finite-sum-laws, def-finite-sum, def-bounded-set, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-interval, def-max-min, def-infimum, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, The Riemann Integral"
+      url: "https://www.jirka.org/ra/html/sec_rint.html"
+    - title: "J. Hunter, MAT 125B Lecture Notes"
+      url: "https://www.math.ucdavis.edu/~hunter/m125b/125bLectureNotes_5-26-11.pdf"
 pipeline_run: null
 ---
 

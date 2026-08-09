@@ -4,6 +4,9 @@ kind: counterexample
 title: "$(1-1) + (1-1) + \\dots$ converges to $0$ while $\\sum_{k} (-1)^{k}$ diverges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-grouping-can-be-undone, thm-grouping-of-series, lem-alternating-sequence, lem-nth-term-test, def-monotone-sequence, def-finite-sum, lem-finite-sum-laws, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Grandi%27s_series"
     - title: "Series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
+    - title: "W. Fisher, Introduction to Analysis"
+      url: "https://math.berkeley.edu/~willfisher/teaching/104sm24/main.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

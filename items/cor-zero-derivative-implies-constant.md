@@ -4,6 +4,9 @@ kind: corollary
 title: "A function continuous on an interval $I$ whose derivative vanishes at every interior point of $I$ is constant on $I$; consequently two such functions with the same derivative differ by a constant"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cor-mean-value-theorem, def-derivative, def-continuity-real, def-interval, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, def-interior-closure-boundary-r, def-neighbourhood-r, def-limit-point-r]
 justified_by: []
 aliases: [cor-antiderivatives-differ-by-a-constant]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §4.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
 pipeline_run: null
 ---
 

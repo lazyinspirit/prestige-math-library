@@ -4,6 +4,10 @@ kind: theorem
 title: "Semicontinuous extreme value theorem: an upper semicontinuous function on a nonempty compact $K \\subseteq \\mathbb{R}$ is bounded above and attains a maximum, and a lower semicontinuous one is bounded below and attains a minimum"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-semicontinuity, thm-semicontinuity-level-set-characterisation, def-open-cover-r, def-max-min, def-bounded-set, lem-sup-epsilon, def-complete-ordered-field, cor-archimedean-reciprocal, def-open-and-closed-in-r, lem-finite-set-has-max, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: [thm-usc-attains-maximum]
@@ -11,12 +15,20 @@ landmark: true
 short: "semicontinuous extreme value theorem"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-08-09
+    scope: published-audit-targeted
+    context_sha256: a0e60fb506eedee299cb38a7440e1f216e2f5ee101dd84ab6fd3aca6dd048e40
+    item_sha256: 2906e58bb366c631f921b470cf5ae8567eb6a875d5b28f15fc3aa63b58def863
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +36,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Semi-continuity"
     - title: "Extreme value theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Extreme_value_theorem"
+    - title: "Upper Semicontinuous Function on Compact Space Attains Maximum (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Real-Valued_Upper_Semicontinuous_Function_on_Compact_Space_attains_Maximum_with_Compact_Set_of_Maximizers"
 pipeline_run: null
 ---
 
@@ -39,8 +53,8 @@ Let $K \subseteq \mathbb{R}$ be nonempty and compact ([[def-open-cover-r]]).
    bounded below and $f$ attains a minimum.
 
 **The theorem is genuinely one-sided.** An upper semicontinuous function on a
-compact set need be neither bounded below nor a function attaining its infimum;
-the companion page gives such a function on $[0,1]$. Only the maximum is
+compact set need not attain its infimum; the companion page gives such a
+function on $[0,1]$. Only the maximum is
 asserted in claim 1, and only the minimum in claim 2.
 
 Taking $f$ continuous, which is upper and lower semicontinuous at once
@@ -63,6 +77,8 @@ compact subset of $\mathbb{R}$.
 
 [L6] A nonempty finite set of reals has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).
 
+[L7] For any $h : K \to \mathbb{R}$, $h$ is upper semicontinuous if and only if $-h$ is lower semicontinuous; hence a lower semicontinuous $f$ makes $-f$ upper semicontinuous ([[def-semicontinuity]], section “Negation exchanges the two”).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -83,7 +99,7 @@ compact subset of $\mathbb{R}$.
 
 8.1 So $f$ is bounded above on $K$ and attains the value $M = \sup f[K]$ at $x_{0} \in K$, which is a maximum of $f[K]$: this is claim 1. [step 3.1, step 4.1, step 7.1, L5]
 
-9.1 Claim 2 follows by applying claim 1 to $-f$, which is upper semicontinuous on $K$ when $f$ is lower semicontinuous; then $-f$ is bounded above and attains a maximum at some $x_{1} \in K$, so $f$ is bounded below and $f(x_{1}) \le f(x)$ for every $x \in K$, a minimum. [step 8.1, L1] ∎
+9.1 Claim 2 follows by applying claim 1 to $-f$, which is upper semicontinuous on $K$ when $f$ is lower semicontinuous; then $-f$ is bounded above and attains a maximum at some $x_{1} \in K$, so $f$ is bounded below and $f(x_{1}) \le f(x)$ for every $x \in K$, a minimum. [step 8.1, L7] ∎
 
 ## Remarks
 

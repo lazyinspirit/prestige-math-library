@@ -4,6 +4,9 @@ kind: counterexample
 title: "The identity is uniformly continuous on $\\mathbb{R}$ and its square is not, so uniform continuity is not preserved by products"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cex-x-squared-is-not-uniformly-continuous-on-r, def-uniform-continuity-real, def-continuity-real, thm-algebra-of-continuous-functions, def-integer-power, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ short: "products do not preserve uniform continuity"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Uniform_continuity"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "Rutgers Mathematics 300, Fall 2017 examination solutions"
+      url: "https://sites.math.rutgers.edu/~sussmann/exam-311-April-30-2018-answers.pdf"
 pipeline_run: null
 ---
 

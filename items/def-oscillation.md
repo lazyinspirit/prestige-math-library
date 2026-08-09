@@ -4,18 +4,23 @@ kind: definition
 title: "The oscillation $\\omega_f(S) = \\sup\\{\\,|f(x) - f(y)| : x, y \\in S\\,\\}$ of $f$ on a set and the oscillation $\\omega_f(c) = \\inf_{\\delta > 0} \\omega_f(A \\cap N_\\delta(c))$ at a point, both taken in the extended reals"
 status: published
 origin: session
-deps: [def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, def-bounded-set, def-infimum, lem-of-abs-value, def-complete-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
+deps: [def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, def-bounded-set, def-infimum, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field]
 justified_by: []
 aliases: [def-oscillation-at-a-point]
 landmark: true
 short: "oscillation $\\omega_f$"
 verification:
-  audited: 2026-07-28
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -48,7 +53,7 @@ The two uses of the symbol $\omega_f$ are distinguished by their argument: a
 subset of $A$ in the first, a point of $A$ in the second. Where confusion is
 possible the first is written $\omega_f(S)$ with $S$ named as a set.
 
-### Both values are well posed, and both are $\ge 0$
+### Both values are well posed; point oscillation and nonempty-set oscillation are nonnegative
 
 **The set in the first display is nonempty whenever $S$ is**, since $x = y \in S$
 gives the value $|f(x) - f(x)| = 0$; so $\omega_f(S) \ge 0$ for nonempty $S$,
@@ -77,18 +82,21 @@ the set. Consequently $\delta \mapsto \omega_f(A \cap N_\delta(c))$ is
 nondecreasing in $\delta$, since $\delta \le \delta'$ gives
 $N_\delta(c) \subseteq N_{\delta'}(c)$ ([[def-neighbourhood-r]]).
 
-**When $f$ is bounded the values are real.** Suppose there is a real $M$ with
-$|f(x)| \le M$ for every $x \in A$ ([[def-bounded-set]]). Then for $x, y \in A$,
+**When $f$ is bounded, nonempty-set and point oscillations are real.** Suppose
+there is a real $M$ with $|f(x)| \le M$ for every $x \in A$
+([[def-bounded-set]]). Then for $x, y \in A$,
 
 $$|f(x) - f(y)| \;\le\; |f(x)| + |f(y)| \;\le\; 2M$$
 
-([[lem-of-abs-value]]), so $\omega_f(S) \le 2M$ for every $S \subseteq A$ and
-every value above is a real number lying in $[0, 2M]$: the supremum of a
-nonempty subset of $\mathbb{R}$ that is bounded above in $\mathbb{R}$ is the
-real supremum ([[lem-extended-reals-complete]], [[def-complete-ordered-field]],
-[[def-infimum]]). Extended values occur only for unbounded $f$, and the
-definition is stated in $\overline{\mathbb{R}}$ precisely so that no case has to
-be excluded.
+([[lem-of-triangle-inequality]], [[lem-of-abs-value]]), so $\omega_f(S) \le 2M$
+for every $S \subseteq A$. If
+$S$ is nonempty, $\omega_f(S)$ is a real number in $[0,2M]$, and every point
+oscillation is also a real number in $[0,2M]$: the supremum of a nonempty
+subset of $\mathbb{R}$ that is bounded above in $\mathbb{R}$ is the real
+supremum ([[lem-extended-reals-complete]], [[def-complete-ordered-field]],
+[[def-infimum]]). The convention $\omega_f(\varnothing)=-\infty$ remains the
+single empty-set exception. Apart from that exception, an infinite extended
+value can occur only when $f$ is unbounded.
 
 **The notation.** The letter is $\omega$ throughout this library, never
 "$\operatorname{osc}$", and the function is always in the subscript.

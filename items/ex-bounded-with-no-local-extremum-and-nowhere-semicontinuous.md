@@ -4,6 +4,10 @@ kind: example
 title: "A bounded function on $\\mathbb{R}$ with no local maximum and no local minimum at any point, upper semicontinuous at no point and lower semicontinuous at no point: compose the Hamel coefficient with a strictly increasing injection of $\\mathbb{R}$ into $(0,1)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [ex-hamel-basis-additive-function, lem-hamel-basis-exists, def-additive-function, lem-additive-is-q-linear, def-semicontinuity, thm-semicontinuity-level-set-characterisation, def-max-min, lem-rat-embeds-dense, def-bounded-set, def-interval, lem-q-and-irrationals-dense-r, def-continuity-real, def-complete-ordered-field, def-neighbourhood-r, lem-of-abs-value, def-axiom-of-choice, thm-zorn]
 justified_by: []
 aliases: []

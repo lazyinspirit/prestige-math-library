@@ -4,6 +4,9 @@ kind: theorem
 title: "For a Hausdorff space, paracompactness is equivalent, under choice and dependent choice, to the existence of a locally finite subordinate partition of unity for every open cover"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-subordinate-partitions-of-unity-exist, def-partition-of-unity-subordinate-to-a-cover, def-zero-sets-and-cozero-sets, def-paracompact-space]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto x^2$ is continuous on $\\mathbb{R}$ and not uniformly continuous, the pairs $k+1$ and $k+1+1/(k+1)$ defeating every $\\delta$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-continuity-implies-uniform-continuity, cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval, def-uniform-continuity-real, def-continuity-real, thm-algebra-of-continuous-functions, thm-heine-cantor-r, def-open-cover-r, thm-heine-borel-characterisation-r, def-integer-power, def-sequence, def-bounded-set, def-open-and-closed-in-r, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: counterexample
 title: "Thomae's function is nonnegative, Riemann integrable on $[0,1]$ with integral $0$, and nonzero at every rational, so a vanishing integral does not force a nonnegative integrand to vanish"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-nonnegative-integrable-with-zero-integral-vanishes, ex-thomae-is-riemann-integrable-with-integral-zero, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, def-darboux-integral, def-canonical-natural, lem-of-naturals-positive, lem-q-and-irrationals-dense-r, def-interval, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Thomae%27s_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "MAT 125B Discussion 3 (UC Davis)"
+      url: "https://www.math.ucdavis.edu/~gravner/MAT125B/materials/disc3.pdf"
 pipeline_run: null
 ---
 

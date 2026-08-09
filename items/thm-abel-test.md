@@ -4,6 +4,9 @@ kind: theorem
 title: "Abel's test: if $\\sum a_k$ converges and $(b_k)$ is monotone and bounded then $\\sum a_k b_k$ converges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-dirichlet-test, def-monotone-sequence, cor-monotone-converges-iff-bounded, lem-convergent-implies-bounded, lem-series-linearity, thm-algebra-of-limits, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Abel%27s_test"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
 pipeline_run: null
 ---
 

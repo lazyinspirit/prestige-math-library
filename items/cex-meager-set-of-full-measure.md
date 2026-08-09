@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{R}$ is the union of a meager set and a set of measure zero, so smallness of category and smallness of measure are independent notions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-baire-category-r, def-nowhere-dense-meager, def-f-sigma-g-delta, def-measure-zero-and-content-zero, lem-countable-sets-are-null, thm-rationals-countable, lem-countable-iff-surjection-from-n, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, thm-geometric-series, def-series, def-open-and-closed-in-r, thm-open-set-algebra-r, def-interval, def-countable, def-equinumerous, def-integer-power, lem-power-laws, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-neighbourhood-r, def-limit-point-r, lem-geometric-sequence-null, def-real-limit, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Null_set"
     - title: "J. C. Oxtoby, Measure and Category, 2nd ed., Ch. 1-2 (John C. Oxtoby)"
       url: "https://en.wikipedia.org/wiki/John_C._Oxtoby"
+    - title: "Meager set (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Meager_set"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Every continuous map of a closed bounded interval into itself has a fixed point"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-intermediate-value, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: [thm-fixed-point-interval]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "K. Conrad, The Contraction Mapping Theorem"
+      url: "https://kconrad.math.uconn.edu/blurbs/analysis/contraction.pdf"
 pipeline_run: null
 ---
 

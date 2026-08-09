@@ -4,6 +4,9 @@ kind: example
 title: "The array with $a_{ii} = 1$, $a_{i+1,i} = -1$ and every other entry $0$ has iterated sums $1$ and $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [fs-iterated-double-sums-always-agree, thm-double-series-fubini, def-absolute-and-conditional-convergence, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fubini%27s_theorem"
     - title: "Series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
+    - title: "R. C. Gunning, Analytic Functions of Several Complex Variables"
+      url: "https://web.math.princeton.edu/~gunning/bk.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

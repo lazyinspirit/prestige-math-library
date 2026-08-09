@@ -4,18 +4,21 @@ kind: counterexample
 title: "The Cauchy product of $\\sum_{k \\ge 0} (-1)^{k}/\\sqrt{k+1}$ with itself has $|c_n| \\ge 1$ for every $n$, so it diverges"
 status: published
 origin: session
-deps: [fs-cauchy-product-of-convergent-series-converges, def-cauchy-product, thm-mertens, thm-alternating-series-test, thm-of-square-roots, thm-am-gm, lem-nth-term-test, lem-alternating-sequence, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, def-monotone-sequence, def-series, def-real-limit]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [fs-cauchy-product-of-convergent-series-converges, def-cauchy-product, thm-mertens, thm-alternating-series-test, thm-of-square-roots, thm-am-gm, lem-nth-term-test, lem-alternating-sequence, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, def-monotone-sequence, def-series, def-real-limit]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_product"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Colorado State University, MATH 171 Homework 4 Solutions"
+      url: "https://www.math.colostate.edu/~adams/teaching/math171spr2010/Hw4Sol.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 
@@ -58,13 +65,9 @@ marginal as the bound makes it.
 
 [L1] The series $\sum a_k$ converges, $|c_n| = \sum_{k=0}^{n}\beta_k\beta_{n-k}$, and $|c_n| \ge 2\iota(n+1)/\iota(n+2) \ge 1$ for every $n$; hence $\sum c_n$ diverges ([[fs-cauchy-product-of-convergent-series-converges]], [[thm-alternating-series-test]], [[def-monotone-sequence]], [[lem-nth-term-test]], [[def-cauchy-product]], [[def-series]]).
 
-[L2] Square roots and AM-GM for two nonnegative reals, in the form used there: $uv \le ((u+v)/2)^{2}$, and $\sqrt{\ }$ is strictly increasing on the nonnegative reals ([[thm-of-square-roots]], [[thm-am-gm]]).
-
 [L3] The canonical naturals are positive for $n \ge 1$ and strictly increasing, with $\iota(m+n) = \iota(m)+\iota(n)$; reciprocation reverses the order on the positives ([[lem-of-naturals-positive]], [[lem-of-inverse-positive]]).
 
 [L4] Finite sums are monotone in their terms, and the sum of $n+1$ copies of a constant $\lambda$ is $\iota(n+1)\lambda$ ([[lem-finite-sum-laws]]).
-
-[L5] Absolute value: $|xy| = |x|\,|y|$ and $|x| \ge 0$ ([[lem-of-abs-value]]).
 
 [L6] Mertens' theorem, whose hypothesis is that one factor converge absolutely ([[thm-mertens]]).
 
@@ -86,7 +89,7 @@ marginal as the bound makes it.
 
 ## Remarks
 
-- **Why the product cannot cancel.** By [[lem-alternating-sequence]] the sign of $a_k b_{n-k}$ is $\varepsilon_k\varepsilon_{n-k} = \varepsilon_n$, the same for every $k \le n$: the antidiagonal of the product array is sign-constant. So all $n+1$ terms of $c_n$ add, and the AM-GM bound of [L2] shows each is at least $2/\iota(n+2)$.
+- **Why the product cannot cancel.** By [[lem-alternating-sequence]] the sign of $a_k b_{n-k}$ is $\varepsilon_k\varepsilon_{n-k} = \varepsilon_n$, the same for every $k \le n$: the antidiagonal of the product array is sign-constant. So all $n+1$ terms of $c_n$ add, and the AM-GM bound ([[thm-am-gm]], with square roots as in [[thm-of-square-roots]]) shows each is at least $2/\iota(n+2)$.
 
 - **Compare the geometric case.** In [[ex-cauchy-product-of-geometric-series]] the antidiagonal also has $n+1$ equal terms, but they are $r^{n}$ with $|r| < 1$, so the count $n+1$ is beaten by the decay. Here the terms of the antidiagonal are at least $2/\iota(n+2)$ each, and there are $n+1$ of them, so the count wins.
 

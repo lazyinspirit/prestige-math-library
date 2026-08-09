@@ -4,6 +4,9 @@ kind: definition
 title: "The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-function-limit, lem-function-limit-unique, def-limit-point-r, def-interval, def-neighbourhood-r, def-complete-ordered-field, def-continuity-real, lem-limit-is-local]
 justified_by: []
 forward_refs: [cex-absolute-value-is-not-differentiable-at-zero]
@@ -28,6 +31,10 @@ sources:
       url: "https://www.jirka.org/ra/"
     - title: "T. Tao, Analysis I, 3rd ed., §10.1"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
+    - title: "J. Lebl, Basic Analysis I, The Derivative"
+      url: "https://www.jirka.org/ra/html/der_chapter.html"
 pipeline_run: null
 ---
 

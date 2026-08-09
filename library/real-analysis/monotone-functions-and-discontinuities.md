@@ -41,9 +41,10 @@ nondecreasing, increasing, nonincreasing, decreasing, monotone, strictly
 monotone — in the same convention [[def-monotone-sequence]] uses for sequences,
 and records the dictionary between the two. The first theorem,
 [[thm-monotone-one-sided-limits-exist]], is the one everything else on this half
-of the page rests on: a monotone function on an interval has **every** one-sided
-limit that is well posed, with no hypothesis of any kind, the left limit being a
-supremum and the right limit an infimum. [[def-classification-of-discontinuities]]
+of the page rests on: a monotone function on an interval has every well-posed
+one-sided limit. For a nondecreasing function the left limit is a supremum and
+the right limit an infimum; for a nonincreasing function the roles reverse.
+[[def-classification-of-discontinuities]]
 then sorts discontinuities into removable, jump and essential, equivalently
 Rudin's first and second kind, and
 [[thm-monotone-discontinuities-are-jumps]] shows that a monotone function has

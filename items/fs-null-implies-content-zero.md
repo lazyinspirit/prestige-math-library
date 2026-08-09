@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every set of measure zero has content zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-content-zero-implies-null, thm-compact-null-is-content-zero, lem-finite-interval-cover-total-length, def-measure-zero-and-content-zero, thm-rationals-countable, lem-countable-sets-are-null, lem-subset-of-countable, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, thm-open-set-algebra-r, def-open-and-closed-in-r, thm-closure-characterisations-r, def-interval, def-countable, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [cex-null-set-not-of-content-zero]
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Jordan_measure"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
+    - title: "UAF Math 641, Measure Theory notes"
+      url: "https://www.cs.uaf.edu/~maxwell/AY2007/math641/Measure.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,10 @@ kind: definition
 title: "The Dirichlet function $1_{\\mathbb{Q}}$, and Thomae's function $t$ with $t(x) = 1/q$ at a rational $x = p/q$ in lowest terms with $q \\ge 1$ and $t(x) = 0$ at every irrational $x$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+  evidence: exact-source
 deps: [lem-coprime-divides-product, lem-rat-embeds-dense, lem-int-embeds-rat, lem-nat-embeds-int, def-coprime, cor-gcd-quotients-coprime, lem-gcd-basic-values, def-common-divisor-and-gcd, thm-well-ordering-principle, def-complete-ordered-field, def-canonical-natural, lem-of-naturals-positive, lem-q-and-irrationals-dense-r]
 justified_by: []
 aliases: [def-thomae-function, def-dirichlet-function, def-popcorn-function]

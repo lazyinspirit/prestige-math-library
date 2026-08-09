@@ -4,6 +4,9 @@ kind: corollary
 title: "A continuous real function on a compact subset of $\\mathbb{R}$ is bounded"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-continuous-image-of-a-compact-set-r, thm-heine-borel-characterisation-r, def-open-cover-r, def-bounded-set, def-continuity-real, def-max-min, lem-finite-set-has-max, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [cor-continuous-on-compact-is-bounded]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "Compact space (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Compact_space"
 pipeline_run: null
 ---
 

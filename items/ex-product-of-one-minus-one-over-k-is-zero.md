@@ -4,6 +4,9 @@ kind: example
 title: "$\\prod_{j \\ge 0} \\bigl(1 - 1/(j+2)\\bigr)$ has partial products $1/(n+1)$, which tend to $0$, so the product does not converge in the sense used here"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-infinite-product, thm-infinite-product-criterion, thm-p-series-rational, lem-series-tail-invariance, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, cor-archimedean-reciprocal, def-rational-power, thm-nth-roots-exist, def-integer-power, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infinite_product"
     - title: "Telescoping series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Telescoping_series"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
 pipeline_run: null
 ---
 

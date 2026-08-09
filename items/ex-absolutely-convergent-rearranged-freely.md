@@ -4,6 +4,9 @@ kind: example
 title: "Every rearrangement of $\\sum_{k \\ge 0} (-1/2)^{k}$ converges to $2/3$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-dirichlet-rearrangement, def-rearrangement-and-unconditional-convergence, def-absolute-and-conditional-convergence, thm-geometric-series, def-integer-power, lem-power-laws, lem-of-abs-value, thm-induction-principle, def-series]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Geometric_series"
     - title: "Absolute convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Absolute_convergence"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "N. Donaldson, Math 140A: Series"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/3series.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,10 @@ kind: lemma
 title: "If an additive $f : \\mathbb{R} \\to \\mathbb{R}$ is bounded above on some nondegenerate interval, then $f(x) = f(1)\\,x$ for every real $x$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-additive-function, lem-additive-is-q-linear, def-interval, def-bounded-set, lem-rat-embeds-dense, cor-archimedean-reciprocal, thm-of-archimedean, def-complete-ordered-field, lem-of-abs-value, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Cauchy's functional equation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+    - title: "Additive operators approximately preserving Birkhoff-James orthogonality (Aequationes mathematicae)"
+      url: "https://link.springer.com/article/10.1007/s00010-025-01210-4"
 pipeline_run: null
 ---
 

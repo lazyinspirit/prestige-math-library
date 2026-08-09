@@ -4,6 +4,9 @@ kind: lemma
 title: "Under countable choice, every regular Lindelöf space is paracompact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-paracompact-space, def-compactness-variants, lem-regularity-via-closed-neighbourhoods, def-countable-choice]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "Dartmouth Point-Set Topology, Lecture 25"
       url: "https://math.dartmouth.edu/~rmaguire/teaching/dartmouth_math_054_2022_summer/lectures/2022_summer_point_set_topology_lecture_25.pdf"
+    - title: "Topology 262 notes (California State University, Northridge)"
+      url: "https://www.csun.edu/~ac53971/research/topology_262.pdf"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
 pipeline_run: null
 ---
 

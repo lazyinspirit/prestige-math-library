@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: the image of a closed subset of $\\mathbb{R}$ under a continuous real function is closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-continuity-real, thm-continuity-preimage-characterisation, thm-continuous-image-of-a-compact-set-r, thm-heine-borel-characterisation-r, def-open-cover-r, thm-algebra-of-continuous-functions, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-limit-point-r, def-neighbourhood-r, def-interval, def-integer-power, thm-nth-roots-exist, lem-power-monotone, lem-of-inverse-positive, lem-of-abs-value, def-max-min, lem-finite-set-has-max, def-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Continuous_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.100B lecture notes"
+      url: "https://math.mit.edu/classes/18.100/100B.S1-Lects.html"
 pipeline_run: null
 ---
 

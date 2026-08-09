@@ -4,6 +4,10 @@ kind: theorem
 title: "One-sided limits of a monotone function always exist: for $f$ nondecreasing on an interval $I$ and $c \\in I$, $\\lim_{x \\to c^{-}} f(x) = \\sup\\{f(x) : x \\in I,\\ x < c\\}$ whenever $I$ has points below $c$, $\\lim_{x \\to c^{+}} f(x) = \\inf\\{f(x) : x \\in I,\\ x > c\\}$ whenever it has points above $c$, and these satisfy $\\lim_{x \\to c^{-}} f(x) \\le f(c) \\le \\lim_{x \\to c^{+}} f(x)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
 deps: [def-monotone-function, def-one-sided-limits, def-function-limit, lem-function-limit-unique, def-limit-point-r, def-interval, lem-sup-epsilon, lem-inf-epsilon, def-bounded-set, def-infimum, thm-infimum-property, def-complete-ordered-field, def-neighbourhood-r]
 justified_by: []
 aliases: [thm-monotone-one-sided-limits]
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Monotone Functions (Analysis WebNotes)"
+      url: "https://mathcs.org/analysis/reals/cont/defs/monofun.html"
+    - title: "Discontinuities of monotone functions (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
 pipeline_run: null
 ---
 

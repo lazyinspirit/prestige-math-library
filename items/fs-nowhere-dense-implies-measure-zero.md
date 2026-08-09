@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every nowhere dense subset of $\\mathbb{R}$ has measure zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-fat-cantor-set-has-positive-measure, def-fat-cantor-set, def-nowhere-dense-meager, def-measure-zero-and-content-zero]
 justified_by: []
 forward_refs: [cex-nowhere-dense-with-positive-measure]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "A. Jin, Cantor sets in topology, analysis, and financial markets"
+      url: "https://math.uchicago.edu/~may/REU2021/REUPapers/Jin%2CAlexa.pdf"
 pipeline_run: null
 ---
 

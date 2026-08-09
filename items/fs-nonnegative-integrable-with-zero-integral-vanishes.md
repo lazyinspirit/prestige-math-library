@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a nonnegative Riemann integrable function on $[a,b]$ with $\\int_a^b f = 0$ is identically zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-darboux-integral, def-darboux-sums, def-partition-and-refinement, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, cor-countably-many-discontinuities-integrable, thm-rationals-countable, lem-subset-of-countable, def-countable, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, def-continuity-real, lem-finite-sum-laws, def-finite-sum, def-interval, def-bounded-set, def-infimum, def-max-min, def-canonical-natural, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Thomae%27s_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "MAT 125B Discussion 3 (UC Davis)"
+      url: "https://www.math.ucdavis.edu/~gravner/MAT125B/materials/disc3.pdf"
 pipeline_run: null
 ---
 

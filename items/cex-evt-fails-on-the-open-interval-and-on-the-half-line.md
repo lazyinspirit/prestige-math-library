@@ -4,6 +4,9 @@ kind: counterexample
 title: "The identity on $(0,1)$ is bounded with no greatest value, and on $[0,\\infty)$ it is continuous and unbounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-evt-holds-on-every-bounded-domain, thm-extreme-value-r, thm-compactness-is-necessary-for-evt-and-uniform-continuity, thm-heine-borel-characterisation-r, def-open-cover-r, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-open-and-closed-in-r, thm-of-archimedean, def-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "University of Edinburgh, The Extreme Value Theorem"
+      url: "https://uoe-school-of-mathematics.github.io/MATH08081_IMA/Ch4.S9.html"
 pipeline_run: null
 ---
 

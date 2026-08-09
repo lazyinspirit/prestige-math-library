@@ -4,6 +4,9 @@ kind: example
 title: "$0.999\\dots = 1$ and $0.4999\\dots = 0.5$: the second expansion of a number is exactly an eventually-all-$(b-1)$ digit sequence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-decimal-expansions, thm-geometric-series, lem-series-tail-invariance, lem-series-linearity, def-interval, def-canonical-natural, lem-of-naturals-positive, def-integer-power, lem-power-laws, def-finite-sum, lem-finite-sum-laws, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/0.999..."
     - title: "Decimal representation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Decimal_representation"
+    - title: "M365C Real Analysis"
+      url: "https://web.ma.utexas.edu/ibl1/courses/resources/m365.pdf"
 pipeline_run: null
 ---
 

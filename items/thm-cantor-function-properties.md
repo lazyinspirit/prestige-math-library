@@ -4,6 +4,9 @@ kind: theorem
 title: "The Cantor function is well defined, satisfies $c(x) \\le c(y)$ whenever $x \\le y$, is surjective onto $[0,1]$, and is constant on every interval removed from the Cantor set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cantor-function, thm-cantor-set-ternary-description, thm-cantor-set-properties, def-cantor-set, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, lem-series-linearity, def-interval, def-bounded-set, lem-sup-unique, lem-sup-epsilon, def-infimum, lem-inf-epsilon, thm-infimum-property, def-integer-power, lem-power-laws, thm-recursion, thm-induction-principle, thm-well-ordering-principle, lem-geometric-sequence-null, def-real-limit, lem-limit-unique, def-sequence, def-open-and-closed-in-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-injection-surjection-bijection, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [ex-cantor-function-values]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_function"
     - title: "Cantor set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor_set"
+    - title: "Stanford Math 205A, Homework 1"
+      url: "https://math.stanford.edu/~ryzhik/STANFORD/STANF205-11/hw205-11-1.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "A set of content zero has measure zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-measure-zero-and-content-zero, def-finite-sum, lem-finite-sum-laws, def-series, def-interval, def-complete-ordered-field, def-ordered-field, lem-of-add-order]
 justified_by: []
 forward_refs: [cex-null-set-not-of-content-zero]
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Jordan_measure"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
 pipeline_run: null
 ---
 

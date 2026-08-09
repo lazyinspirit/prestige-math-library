@@ -4,6 +4,10 @@ kind: example
 title: "The Cantor set has measure zero, yet the Cantor function maps it onto all of $[0,1]$: a null set can have image an interval of length $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [def-cantor-function, thm-cantor-function-properties, thm-cantor-set-properties, cor-cantor-function-is-continuous, def-measure-zero-and-content-zero, lem-nondegenerate-interval-is-not-null, def-cantor-set, def-interval, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_function"
     - title: "Cantor set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor_set"
+    - title: "The Cantor Function and the Cantor Set (University of Melbourne)"
+      url: "https://researchers.ms.unimelb.edu.au/~xgge%40unimelb/Files/Teaching/Advanced%20Probability%20%28Semester%201%202020%29/The%20Cantor%20Function%20and%20the%20Cantor%20Set.pdf"
 pipeline_run: null
 ---
 

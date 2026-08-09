@@ -4,6 +4,11 @@ kind: counterexample
 title: "$1/4$ lies in the Cantor set and is the endpoint of no removed interval, so the endpoints do not exhaust it"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-cantor-set-countable, ex-cantor-set-in-ternary, thm-cantor-set-ternary-description, def-cantor-set, def-integer-power, lem-power-laws, def-series, thm-geometric-series, lem-series-linearity, thm-nonnegative-series-bounded-partial-sums, lem-geometric-sequence-null, def-real-limit, def-interval, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []

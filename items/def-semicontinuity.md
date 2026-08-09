@@ -4,6 +4,10 @@ kind: definition
 title: "Upper and lower semicontinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
 deps: [def-continuity-real, def-neighbourhood-r, def-complete-ordered-field, lem-of-abs-value]
 justified_by: []
 aliases: [def-upper-semicontinuous, def-lower-semicontinuous]

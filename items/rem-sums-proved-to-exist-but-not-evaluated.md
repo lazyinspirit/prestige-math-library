@@ -1,20 +1,23 @@
 ---
 id: rem-sums-proved-to-exist-but-not-evaluated
 kind: remark
-title: "Which sums and products on this page are proved to exist without being evaluated, and what the evaluation waits for"
+title: "Selected sums and products on this page that are proved to exist without being evaluated, and what their evaluation waits for"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-alternating-series-test, thm-infinite-product-criterion, thm-decimal-expansions, thm-riemann-series-theorem, rem-rearrangement-in-higher-dimensions, def-absolute-and-conditional-convergence]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,14 +25,19 @@ sources:
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
     - title: "Infinite product (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Infinite_product"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
+    - title: "D. Dikranjan, Analysis 478, Chapter 6"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch6.pdf"
 pipeline_run: null
 ---
 
 ## Remark
 
 A convergence test proves that a limit exists; it does not produce the limit. On
-this page that gap is systematic, and this remark says exactly where it falls and
-what would close it. **Every scope statement below is relative to the reading
+this page that gap is systematic, and this remark records the principal places
+where a familiar value or formula is deferred and what would close it. **Every
+scope statement below is relative to the reading
 order**: the material named is developed elsewhere in this library, later than
 this page, and nothing here says it is absent from the library.
 
@@ -54,9 +62,9 @@ settles $\prod(1+p_k)$ completely for $p_k \ge 0$, settles $\prod(1-p_k)$ for
 $0 \le p_k < 1$, and proves that $\sum |p_k|$ convergent forces $\prod(1+p_k)$
 convergent. It does **not** settle the remaining case: a signed sequence $(p_k)$
 with $\sum p_k$ convergent but $\sum |p_k|$ divergent. The classical criterion
-there is that $\prod(1+p_k)$ converges exactly when $\sum p_k^{2}$ converges, and
-every known proof of it expands $\log(1+x)$; that expansion belongs with the
-logarithm, later in the reading order. The gap is not hypothetical: the companion
+there is that $\prod(1+p_k)$ converges exactly when $\sum p_k^{2}$ converges.
+A standard proof expands $\log(1+x)$; that route belongs with the logarithm,
+later in the reading order. The gap is not hypothetical: the companion
 examples page exhibits a signed
 sequence with $\sum p_k$ convergent whose partial products tend to $0$.
 
@@ -77,13 +85,12 @@ cases the construction is fully determined by the data, with no choice made
 anywhere, which is a stronger statement than mere existence and a weaker one than
 a formula.
 
-**What is not on this list.** Every other convergence claim on this page either
-identifies its sum outright (on the companion examples page, the geometric
-rearrangement of $\sum(-1/2)^k$, the Cauchy product of $\sum r^k$ with itself,
-and the telescoping product of $\prod(1 - 1/(j+2))$), or is a statement of the form
-"this converges to the same value as that", where both sides are named by the same
-unevaluated limit. [[thm-dirichlet-rearrangement]], [[thm-mertens]],
+**What this list does not claim.** It is not a census of every convergence result
+on the page. In particular, the Dirichlet, alternating-series, and Abel tests and
+their worked applications establish additional convergence without evaluating a
+numerical sum; their purpose here is to supply convergence criteria, not to flag
+a familiar value whose evaluation waits for a later object. Among the structural
+comparison theorems, [[thm-dirichlet-rearrangement]], [[thm-mertens]],
 [[cor-cauchy-product-absolute]], [[thm-grouping-of-series]] and
-[[thm-double-series-fubini]] are all of the second kind: they identify sums with
-one another and evaluate nothing, which is exactly what makes them usable wherever
-the sums themselves are unknown.
+[[thm-double-series-fubini]] identify sums with one another and evaluate nothing,
+which is exactly what makes them usable wherever the sums themselves are unknown.

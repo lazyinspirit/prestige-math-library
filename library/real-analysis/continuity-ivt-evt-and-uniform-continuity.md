@@ -26,8 +26,10 @@ the four theorems that continuity exists for: the image of a compact set is
 compact, the extreme value theorem, the intermediate value theorem, and
 Heine-Cantor. Along the way it states the dictionary that
 reconciles the vocabulary of this page with the metric-space vocabulary of the
-earlier topology track, and it closes with the sharp converse: compactness is
-exactly the hypothesis those results need.
+earlier topology track, and it closes with counterexamples showing that
+compactness is needed for the extreme-value and uniform-continuity conclusions;
+the intermediate value theorem instead rests on the interval/connectedness
+hypothesis.
 
 **The definition, and the clause that is easy to get wrong.**
 [[def-continuity-real]] says that $f : A \to \mathbb{R}$ is continuous at

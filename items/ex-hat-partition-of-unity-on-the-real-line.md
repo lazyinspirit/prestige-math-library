@@ -4,6 +4,9 @@ kind: example
 title: 'A locally finite hat-function partition of unity on $\mathbb{R}$ subordinate to overlapping intervals'
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-supplied
 deps: [def-partition-of-unity-subordinate-to-a-cover, lem-algebra-of-continuous-real-maps-on-a-space, def-interval]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "K. Datchev, Iterated interpolation and a partition of unity (Purdue University)"
+      url: "https://www.math.purdue.edu/~kdatchev/442/itint.pdf"
 pipeline_run: null
 ---
 

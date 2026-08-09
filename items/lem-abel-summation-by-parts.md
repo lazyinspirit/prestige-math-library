@@ -4,6 +4,9 @@ kind: lemma
 title: "Abel summation by parts: with $A_n = \\sum_{k<n} a_k$ one has $\\sum_{k<n} a_k b_k = A_n b_{n-1} - \\sum_{k < n-1} A_{k+1}\\,(b_{k+1} - b_k)$ for every $n \\ge 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-finite-sum, lem-finite-sum-laws, def-series, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Summation_by_parts"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
 pipeline_run: null
 ---
 

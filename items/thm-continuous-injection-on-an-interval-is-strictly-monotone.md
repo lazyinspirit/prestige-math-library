@@ -4,6 +4,10 @@ kind: theorem
 title: "A continuous injective function on an interval is strictly monotone"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-continuity-real, def-monotone-function, thm-intermediate-value, def-interval, def-injection-surjection-bijection, lem-rat-embeds-dense]
 justified_by: []
 aliases: []
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
     - title: "Intermediate value theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
+    - title: "Continuous Injection of Interval is Strictly Monotone (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Continuous_Injection_of_Interval_is_Strictly_Monotone"
 pipeline_run: null
 ---
 

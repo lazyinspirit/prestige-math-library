@@ -4,6 +4,9 @@ kind: definition
 title: "Tagged partitions of $[a,b]$, with a tag $\\xi_i$ in each subinterval, and the Riemann sum $S(f,P,\\xi) = \\sum_i f(\\xi_i)\\,\\Delta_i$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-partition-and-refinement, def-finite-sum, lem-finite-sum-laws, def-interval, def-complete-ordered-field, def-ordered-field, def-sequence, def-darboux-sums, def-bounded-set]
 justified_by: []
 aliases: [def-riemann-sum]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_sum"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: corollary
 title: "Under choice and dependent choice, every open cover of a compact Hausdorff space admits a finite subordinate partition of unity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [prop-compact-spaces-are-paracompact, thm-subordinate-partitions-of-unity-exist, lem-locally-finite-sums-are-continuous, lem-locally-finite-unions-and-closures, def-compact-space, def-hausdorff-space]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "Topology 262 notes (California State University, Northridge)"
+      url: "https://www.csun.edu/~ac53971/research/topology_262.pdf"
+    - title: "General Topology notes (University of Göttingen)"
+      url: "https://www.uni-math.gwdg.de/tammo/GT01.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Infinite products: partial products, and convergence to a nonzero limit after finitely many vanishing factors"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-sum, lem-finite-sum-laws, lem-of-no-zero-divisors, def-series, thm-algebra-of-limits, lem-limit-unique, def-real-limit]
 justified_by: []
 aliases: []
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infinite_product"
     - title: "W. Rudin, Real and Complex Analysis, 3rd ed., Ch. 15"
       url: "https://en.wikipedia.org/wiki/Walter_Rudin"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
 pipeline_run: null
 ---
 

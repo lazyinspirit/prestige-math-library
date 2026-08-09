@@ -4,18 +4,22 @@ kind: example
 title: "Which points of $[0,1]$ lie in the Cantor set, read off their ternary expansions, with $1/4$ worked out"
 status: published
 origin: session
-deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-geometric-series, def-series, def-integer-power, lem-power-laws, lem-series-linearity, def-interval, thm-nonnegative-series-bounded-partial-sums, def-sequence, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-geometric-series, def-series, def-integer-power, lem-power-laws, lem-series-linearity, thm-nonnegative-series-bounded-partial-sums, def-sequence, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_set"
     - title: "Ternary numeral system (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ternary_numeral_system"
+    - title: "Stanford Math 205A, Homework 1"
+      url: "https://math.stanford.edu/~ryzhik/STANFORD/STANF205-11/hw205-11-1.pdf"
 pipeline_run: null
 ---
 
@@ -57,8 +63,6 @@ construction ([[cex-cantor-point-that-is-not-an-endpoint]]).
 [L1] $\Phi$ is a bijection from $D$ onto $C$ with $\Phi(a) = \sum_{k \ge 0} a_k 3^{-k-1}$, and the series converges for every $a \in D$ ([[thm-cantor-set-ternary-description]], [[def-series]], [[def-sequence]]).
 
 [L2] $\sum_{k=0}^{\infty} r^{k} = 1/(1-r)$ for $|r| < 1$; in particular $\sum_{k \ge 0} 3^{-k} = 3 \cdot 2^{-1}$ and hence $\sum_{k \ge m} 2 \cdot 3^{-k-1} = 3^{-m}$; convergent series add and scale termwise, and the tail of a convergent series is again convergent with $\sum_{k \ge 0} t_k = t_0 + \sum_{k \ge 1} t_k$ ([[thm-geometric-series]], [[lem-series-linearity]], [[def-series]], [[thm-nonnegative-series-bounded-partial-sums]], [[def-integer-power]], [[lem-power-laws]]).
-
-[L3] Intervals and the sets $C_n$: $C_1 = [0,\tfrac13] \cup [\tfrac23,1]$ and $C \subseteq C_1$ ([[def-cantor-set]], [[def-interval]]).
 
 [L4] Ordered-field arithmetic: $0 < 1$, so $3 > 0$, $3^{-1} > 0$, $8 > 0$; adding a constant and multiplying by a positive preserve an inequality; the order is total and transitive ([[cor-of-one-positive]], [[lem-of-add-order]], [[lem-of-sign-rules]], [[def-ordered-field]], [[def-complete-ordered-field]]). These order-arithmetic facts are stated by their sources for the strict order only; the nonstrict forms used below follow by adjoining the equality case, in which the two sides coincide.
 

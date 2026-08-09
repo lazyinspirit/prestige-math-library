@@ -4,6 +4,9 @@ kind: definition
 title: "Nowhere dense, meager (first category), residual, and second category subsets of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-limit-point-r, def-countable, def-neighbourhood-r, thm-n-cross-n-countable, def-countable-choice]
 justified_by: []
 forward_refs: [cex-meager-set-of-full-measure]
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Meagre_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 and Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "E. Zakon, Mathematical Analysis, §6.8: Baire Categories"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps"
+    - title: "Meager set (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Meager_set"
 pipeline_run: null
 ---
 

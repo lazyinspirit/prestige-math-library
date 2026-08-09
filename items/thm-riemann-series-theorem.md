@@ -4,6 +4,9 @@ kind: theorem
 title: "The Riemann series theorem: a conditionally convergent real series has, for every $c \\in \\mathbb{R}$, a rearrangement with sum $c$, and rearrangements diverging to $+\\infty$, to $-\\infty$, and oscillating with any prescribed $\\liminf \\le \\limsup$ in $\\overline{\\mathbb{R}}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-positive-and-negative-parts, def-rearrangement-and-unconditional-convergence, def-absolute-and-conditional-convergence, lem-nth-term-test, thm-recursion, thm-well-ordering-principle, def-injection-surjection-bijection, def-divergence-to-infinity, def-limsup-liminf, def-extended-reals, def-extended-limits, thm-convergence-iff-limsup-equals-liminf, thm-nonnegative-series-bounded-partial-sums, def-series, def-finite-sum, lem-finite-sum-laws, lem-limit-preserves-order, thm-induction-principle, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
+    - title: "W. Fisher, Introduction to Analysis"
+      url: "https://math.berkeley.edu/~willfisher/teaching/104sm24/main.pdf"
 pipeline_run: null
 ---
 

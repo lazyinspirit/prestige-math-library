@@ -4,6 +4,9 @@ kind: theorem
 title: "Cauchy's mean value theorem: for $f, g$ continuous on $[a,b]$ with $a<b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $\\bigl(f(b)-f(a)\\bigr)g'(c) = \\bigl(g(b)-g(a)\\bigr)f'(c)$; no hypothesis on $g'$ is needed in this product form"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-rolle, thm-algebra-of-derivatives, def-derivative, thm-algebra-of-continuous-functions, def-continuity-real, def-interval]
 justified_by: []
 forward_refs: [cex-cauchy-mean-value-quotient-form-needs-a-nonvanishing-derivative]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §4.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

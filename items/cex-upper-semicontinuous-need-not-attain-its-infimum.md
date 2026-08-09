@@ -4,6 +4,10 @@ kind: counterexample
 title: "An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [def-semicontinuity, thm-semicontinuous-evt, thm-semicontinuity-level-set-characterisation, def-max-min, def-infimum, thm-infimum-property, def-bounded-set, def-interval, def-continuity-real, cor-archimedean-reciprocal, def-neighbourhood-r, thm-algebra-of-continuous-functions]
 justified_by: []
 aliases: []

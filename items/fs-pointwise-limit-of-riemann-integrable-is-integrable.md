@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a pointwise limit of a sequence of Riemann integrable functions on $[a,b]$ is Riemann integrable"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-finitely-many-discontinuities-integrable, fs-bounded-implies-riemann-integrable, def-dirichlet-and-thomae-functions, thm-rationals-countable, lem-subset-of-countable, lem-countable-iff-surjection-from-n, def-countable, def-real-limit, def-sequence, def-continuity-real, def-darboux-integral, def-bounded-set, lem-finite-set-has-max, def-max-min, def-neighbourhood-r, def-interval, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "Dirichlet function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dirichlet_function"
+    - title: "E. Schechter, Gauge Integral"
+      url: "https://math.vanderbilt.edu/schectex/ccc/gauge/"
 pipeline_run: null
 ---
 

@@ -4,6 +4,10 @@ kind: theorem
 title: "Froda's theorem: the set of discontinuities of a monotone function on an interval is at most countable, the injection into $\\mathbb{N}$ being built from one fixed enumeration of the rationals by least index, so no choice principle is used"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-monotone-function, thm-monotone-discontinuities-are-jumps, thm-monotone-one-sided-limits-exist, def-classification-of-discontinuities, def-countable, thm-rationals-countable, lem-rat-embeds-dense, lem-subset-of-countable, thm-well-ordering-principle, def-interval, def-injection-surjection-bijection, def-equinumerous, def-continuity-real]
 justified_by: []
 aliases: [thm-froda-countable-discontinuities]
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Froda%27s_theorem"
     - title: "Classification of discontinuities (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+    - title: "Discontinuities of monotone functions (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
 pipeline_run: null
 ---
 

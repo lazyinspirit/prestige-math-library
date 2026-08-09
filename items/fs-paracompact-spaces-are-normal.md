@@ -4,6 +4,9 @@ kind: false-statement
 title: "Refuted: every paracompact space is normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [prop-compact-spaces-are-paracompact, def-normal-and-t4-spaces, def-topological-space]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "Paracompact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Paracompact_space"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
 pipeline_run: null
 ---
 

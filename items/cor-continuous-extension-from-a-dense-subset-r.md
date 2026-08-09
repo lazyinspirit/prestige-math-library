@@ -4,6 +4,9 @@ kind: corollary
 title: "A uniformly continuous real function on a subset $D \\subseteq \\mathbb{R}$ extends uniquely to a uniformly continuous function on the closure of $D$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-real-and-metric-notions-agree, thm-uniformly-continuous-extension-from-dense, thm-euclidean-space-complete, def-complete-metric-space, def-uniform-continuity-real, def-continuity-real, def-metric-interior-closure-boundary, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space, def-metric-ball, def-neighbourhood-r, def-metric-space, def-metric-uniform-continuity, def-metric-continuity]
 justified_by: []
 aliases: [cor-dense-extension-r]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "MIT 18.100, Practice Final 3"
+      url: "https://math.mit.edu/classes/18.100/Practice-Final-3.18.100.pdf"
 pipeline_run: null
 ---
 

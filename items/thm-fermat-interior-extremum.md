@@ -4,6 +4,9 @@ kind: theorem
 title: "Fermat's interior extremum theorem: if $f$ has a local extremum at a point $c$ interior to its domain and is differentiable at $c$, then $f'(c) = 0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-derivative, def-local-extremum, lem-sign-preservation-near-a-limit, def-function-limit, def-neighbourhood-r, def-interior-closure-boundary-r, def-limit-point-r, lem-of-sign-rules, def-ordered-field]
 justified_by: []
 forward_refs: [cex-fermat-fails-at-an-endpoint]
@@ -27,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §4.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Lebl, Basic Analysis I, Mean Value Theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

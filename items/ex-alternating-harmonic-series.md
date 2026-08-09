@@ -4,6 +4,9 @@ kind: example
 title: "$\\sum_{j \\ge 0} (-1)^{j}/(j+1)$ converges conditionally, with sum strictly between $1/2$ and $1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-alternating-series-test, def-absolute-and-conditional-convergence, thm-p-series-rational, lem-alternating-sequence, def-monotone-sequence, def-series, def-finite-sum, lem-finite-sum-laws, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, cor-archimedean-reciprocal, def-rational-power, thm-nth-roots-exist, def-integer-power, lem-limit-preserves-order, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
     - title: "Alternating series test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Alternating_series_test"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "N. Donaldson, Math 140A: Series"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/3series.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,10 @@ kind: theorem
 title: "$f : A \\to \\mathbb{R}$ is continuous at $c \\in A$ if and only if $\\omega_f(c) = 0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-oscillation, def-continuity-real, def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Oscillation (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Oscillation_(mathematics)"
+    - title: "Real Function is Continuous at Point iff Oscillation is Zero (ProofWiki)"
+      url: "https://proofwiki.org/wiki/Real_Function_is_Continuous_at_Point_iff_Oscillation_is_Zero"
 pipeline_run: null
 ---
 

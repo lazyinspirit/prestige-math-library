@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every convergent series converges absolutely"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-absolute-and-conditional-convergence, lem-absolute-convergence-implies-convergence, thm-alternating-series-test, thm-p-series-rational, lem-alternating-sequence, def-monotone-sequence, def-series, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, cor-archimedean-reciprocal, def-rational-power, thm-nth-roots-exist, def-integer-power, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Conditional_convergence"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "N. Donaldson, Math 140A: Series"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/3series.html"
 pipeline_run: null
 ---
 

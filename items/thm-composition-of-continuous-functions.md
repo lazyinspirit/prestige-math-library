@@ -4,7 +4,10 @@ kind: theorem
 title: "A composite of continuous functions is continuous, with no side hypothesis of the kind the composition of limits needs"
 status: published
 origin: session
-deps: [def-continuity-real, thm-composition-of-function-limits, fs-naive-composition-of-limits, def-function-limit, def-limit-point-r, def-neighbourhood-r]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-continuity-real, thm-composition-of-function-limits, fs-naive-composition-of-limits, def-function-limit, def-neighbourhood-r]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,11 +15,12 @@ short: "composition of continuous functions"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.2"
       url: "https://www.jirka.org/ra/"
+    - title: "MIT 18.100B lecture notes"
+      url: "https://math.mit.edu/classes/18.100/100B.S1-Lects.html"
 pipeline_run: null
 ---
 
@@ -60,8 +66,6 @@ is precisely the one the continuity hypothesis does control.
 [L2] Continuity of $f$ at $b$: for every real $\varepsilon > 0$ there is a real $\rho > 0$ such that every $y \in B$ with $|y - b| < \rho$ satisfies $|f(y) - f(b)| < \varepsilon$ ([[def-continuity-real]]).
 
 [L3] Neighbourhoods and the unpunctured quantifier: the condition in [L2] is imposed at every $y \in B$ with $|y - b| < \rho$, the value $y = b$ included ([[def-neighbourhood-r]], [[def-continuity-real]]).
-
-[L4] For limits the corresponding statement needs an extra hypothesis, one of "$L \in B$ and $f(L) = M$" or "$g$ avoids $L$ near $c$", and is false without both ([[thm-composition-of-function-limits]], [[fs-naive-composition-of-limits]], [[def-function-limit]], [[def-limit-point-r]]).
 
 ## Proof
 

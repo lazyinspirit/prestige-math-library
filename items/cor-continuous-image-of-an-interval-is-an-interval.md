@@ -4,6 +4,9 @@ kind: corollary
 title: "The image of an interval under a continuous real function is order-convex, hence an interval, and the image of a closed bounded interval is a closed bounded interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-intermediate-value, thm-extreme-value-r, thm-heine-borel-characterisation-r, def-open-cover-r, def-interval, def-connected-r, thm-connected-subsets-of-r-are-intervals, def-continuity-real, def-bounded-set, def-max-min, def-open-and-closed-in-r]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "E. Zakon, Mathematical Analysis, §4.9: The Intermediate Value Property"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/04%3A_Function_Limits_and_Continuity/4.09%3A_The_Intermediate_Value_Property"
 pipeline_run: null
 ---
 

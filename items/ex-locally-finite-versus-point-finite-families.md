@@ -4,6 +4,9 @@ kind: example
 title: "Point-finite need not mean locally finite: intervals accumulating at the origin"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-supplied
 deps: [def-cover-refinement-and-local-finiteness, def-interval]
 justified_by: []
 aliases: []

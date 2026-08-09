@@ -4,6 +4,9 @@ kind: lemma
 title: "Assuming countable choice, every countably compact paracompact Hausdorff space is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-locally-finite-unions-and-closures, def-compactness-variants, def-paracompact-space, def-hausdorff-space, def-countable-choice, def-countable, thm-countable-union-of-countable, lem-finite-choice]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Dartmouth Point-Set Topology, Lecture 25"
       url: "https://math.dartmouth.edu/~rmaguire/teaching/dartmouth_math_054_2022_summer/lectures/2022_summer_point_set_topology_lecture_25.pdf"
+    - title: "P. Bacon, Pacific Journal of Mathematics 32 (1970), countably compact paracompact spaces"
+      url: "https://msp.org/pjm/1970/32-3/pjm-v32-n3-p03-p.pdf"
 pipeline_run: null
 ---
 

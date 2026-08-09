@@ -4,6 +4,9 @@ kind: lemma
 title: "A sequence of intervals covering $[a,b]$ has total length at least $b - a$, so no interval of positive length has measure zero"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-finite-interval-cover-total-length, def-measure-zero-and-content-zero, def-interval, thm-heine-borel-characterisation-r, def-open-cover-r, def-open-and-closed-in-r, def-bounded-set, thm-geometric-series, def-series, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-integer-power, thm-induction-principle, lem-nat-trichotomy, def-nat-order, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [cex-null-set-not-of-content-zero]
@@ -13,11 +16,12 @@ short: "countable cover of $[a,b]$ has total length $\\ge b-a$"
 proof_strategy: contradiction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "UAF Math 641, Measure Theory notes"
+      url: "https://www.cs.uaf.edu/~maxwell/AY2007/math641/Measure.pdf"
 pipeline_run: null
 ---
 
@@ -64,7 +70,7 @@ finite cover, where the finite lemma applies.
 
 [L3] Every open interval $(c,d)$ is an open set and every interval $[c,d]$ is a closed set ([[def-open-and-closed-in-r]], [[def-interval]]).
 
-[L4] A subset of $\mathbb{R}$ is compact exactly when it is closed and bounded ([[thm-heine-borel-characterisation-r]]); compact means that from every family of open sets whose union contains the set one can extract $m \in \mathbb{N}$ and members $U_0, \dots, U_m$ of the family whose union already contains it ([[def-open-cover-r]]).
+[L4] A subset of $\mathbb{R}$ is compact exactly when it is closed and bounded ([[thm-heine-borel-characterisation-r]]); from every family of open sets whose union contains a compact set, either the set is empty and the empty subfamily covers it, or one can extract $m \in \mathbb{N}$ and members $U_0, \dots, U_m$ of the family whose union already contains it ([[def-open-cover-r]]).
 
 [L5] If $[a,b] \subseteq \bigcup_{j \le n}[c_j,d_j]$ with $c_j \le d_j$ and $a \le b$, then $\sum_{j \le n}(d_j - c_j) \ge b - a$; the same holds for covering intervals of any bounded form with those endpoints ([[lem-finite-interval-cover-total-length]]).
 
@@ -92,23 +98,8 @@ finite cover, where the finite lemma applies.
 
 ## Remarks
 
-- **What the hypothesis $\sum_{k<n}(b_k - a_k) \le M$ says.** It is the working
-  form of "the total length is at most $M$" recorded in
-  [[def-measure-zero-and-content-zero]]: for nonnegative terms, having all
-  partial sums below $M$ is the same as convergence with sum below $M$. Stating
-  the lemma with partial sums avoids assuming convergence, and the conclusion is
-  therefore also the statement that a cover of $[a,b]$ whose total length
-  diverges is no counterexample.
+- **What the hypothesis $\sum_{k<n}(b_k - a_k) \le M$ says.** It is the working form of "the total length is at most $M$" recorded in [[def-measure-zero-and-content-zero]]: for nonnegative terms, having all partial sums below $M$ is the same as convergence with sum below $M$. Stating the lemma with partial sums avoids assuming convergence, and the conclusion is therefore also the statement that a cover of $[a,b]$ whose total length diverges is no counterexample.
 
-- **The $\varepsilon$ is spent on making the cover open, not on the estimate.**
-  Enlarging $[a_k,b_k]$ to $(a_k - \delta_k, b_k + \delta_k)$ adds $2\delta_k$ to
-  the $k$-th length, and the geometric choice $\delta_k = \varepsilon \theta^k/4$
-  makes the whole added amount at most $\varepsilon$, however many intervals are
-  used. This is the standard device and it recurs in
-  [[thm-compact-null-is-content-zero]].
+- **The $\varepsilon$ is spent on making the cover open, not on the estimate.** Enlarging $[a_k,b_k]$ to $(a_k - \delta_k, b_k + \delta_k)$ adds $2\delta_k$ to the $k$-th length, and the geometric choice $\delta_k = \varepsilon \theta^k/4$ makes the whole added amount at most $\varepsilon$, however many intervals are used. This is the standard device and it recurs in [[thm-compact-null-is-content-zero]].
 
-- **Compactness is not optional here.** Without it the finite lemma cannot be
-  reached, and the countable statement is genuinely stronger than the finite one:
-  $\mathbb{Q} \cap [0,1]$ is covered by countably many intervals of total length
-  below any $\varepsilon$, and by no finite family of total length below $1$
-  ([[cex-null-set-not-of-content-zero]]).
+- **Compactness is not optional here.** Without it the finite lemma cannot be reached, and the countable statement is genuinely stronger than the finite one: $\mathbb{Q} \cap [0,1]$ is covered by countably many intervals of total length below any $\varepsilon$, and by no finite family of total length below $1$ ([[cex-null-set-not-of-content-zero]]).

@@ -4,6 +4,9 @@ kind: lemma
 title: "If finitely many intervals cover a closed bounded interval $[a,b]$, the sum of their lengths is at least $b - a$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-interval, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Null_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "UAF Math 641, Measure Theory notes"
+      url: "https://www.cs.uaf.edu/~maxwell/AY2007/math641/Measure.pdf"
 pipeline_run: null
 ---
 

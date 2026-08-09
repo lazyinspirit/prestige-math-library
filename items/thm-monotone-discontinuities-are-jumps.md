@@ -4,6 +4,10 @@ kind: theorem
 title: "A monotone function on an interval has no discontinuity of the second kind: at every point both relevant one-sided limits exist, and an interior point $c$ is a discontinuity exactly when $\\lim_{x \\to c^{-}} f(x) < \\lim_{x \\to c^{+}} f(x)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
 deps: [def-monotone-function, thm-monotone-one-sided-limits-exist, def-classification-of-discontinuities, thm-two-sided-limit-iff-both-one-sided, def-continuity-real, def-one-sided-limits, def-interval, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Classification of discontinuities (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+    - title: "Discontinuities of monotone functions (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
 pipeline_run: null
 ---
 

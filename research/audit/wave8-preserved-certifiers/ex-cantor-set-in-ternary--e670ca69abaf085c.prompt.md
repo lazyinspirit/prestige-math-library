@@ -1,0 +1,343 @@
+# Independent repair certifier brief — Wave 8, step A6
+
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> If an indispensable operation has no escalation-free form, report a blocker.
+
+You are **GPT 5.6 Terra** at `xhigh` effort with a 1,000,000-token context
+window. You are an independent, read-only certifier of one Audit-Beta repair.
+You did not author it. Your Codex lane has a mechanically read-only shell: use
+non-mutating commands such as `rg`, `sed`, and `git diff` to read the current
+workspace and use web access where a source check is material. Do not edit,
+delegate, escalate, or ask for a shell permission. Shell reads already allowed
+inside the read-only sandbox require no owner approval.
+
+## Triage — the standing rule (verbatim, binding on you)
+
+- **Non-negotiable:** mathematical accuracy, logical validity, correct
+  citation.
+- **Explicitly acceptable, spend no effort:** minor citational quirks; logical
+  gaps a competent reader closes **within 30 seconds**; other non-fatal quirks;
+  imperfection at the level of the letter.
+
+Read the assigned item's **current final text from disk**, not merely its task
+summary. Read each dependency relevant to the repaired inference. Check the
+title and public statement, every numbered step, Facts & Assumptions, Remarks,
+dependency lists, provenance tags, and verification block. Where an exact
+external source is material, use web access to check that source. Confirm that
+stale pre-repair `verification.judge`/`verification.audited` evidence is absent
+and that the stated repair fixes its named defect without introducing a new
+one. A passing mechanical gate is supporting evidence, not a mathematical
+substitute.
+
+For a repaired page, read its complete current text and the current items it
+summarizes, then check the repaired mathematical assertion and page/item
+consistency. Pages do not carry item verification blocks.
+
+Return exactly:
+
+```text
+ITEM: <id-or-page-path>
+VERDICT: CERTIFIED | REFUSED | BLOCKED
+CURRENT-TEXT: READ
+MATHEMATICS: [concise evidence]
+CITATIONS: [concise evidence]
+METADATA: [provenance/dependencies/stale-verdict disposition, or n/a for a page]
+FINDINGS: NONE | [fatal defect or concrete blocker]
+```
+
+Do not suggest optional polishing and do not write a verification stamp. Audit-
+Alpha decides whether the independent reading licenses one.
+
+
+---
+
+# This dispatch
+
+## Assigned repair — `ex-cantor-set-in-ternary`
+
+Item path: `items/ex-cantor-set-in-ternary.md`
+
+Normalized final-text SHA-256 at dispatch: `e0942bd0775ebeaf72b965f6888b0c305b8aee56876872079bedf7df3aff68fb`
+
+Split reasons: ["body text","deps"]
+
+Provenance ledger: `wave8-real-analysis-cantor-continuity.provenance.jsonl`
+
+The three Wave 8 findings ledgers and wave8-A3.md record the original defect and approved repair. Locate this id there before certifying.
+
+Read the current target from disk and every dependency needed to check the repair. The generated manifest rows are supplied only as a completeness checklist:
+
+```json
+[
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "thm-cantor-set-ternary-description",
+    "declared_target": "thm-cantor-set-ternary-description",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "cantor-set-baire-and-measure-zero",
+    "targetBatch": "wave8-real-analysis-cantor-continuity",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-cantor-set",
+    "declared_target": "def-cantor-set",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "cantor-set-baire-and-measure-zero",
+    "targetBatch": "wave8-real-analysis-cantor-continuity",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "thm-geometric-series",
+    "declared_target": "thm-geometric-series",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "series-and-nonnegative-tests",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-series",
+    "declared_target": "def-series",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "series-and-nonnegative-tests",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-integer-power",
+    "declared_target": "def-integer-power",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "lem-power-laws",
+    "declared_target": "lem-power-laws",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "lem-series-linearity",
+    "declared_target": "lem-series-linearity",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "series-and-nonnegative-tests",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "thm-nonnegative-series-bounded-partial-sums",
+    "declared_target": "thm-nonnegative-series-bounded-partial-sums",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "series-and-nonnegative-tests",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-sequence",
+    "declared_target": "def-sequence",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "sequences-and-limits",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-complete-ordered-field",
+    "declared_target": "def-complete-ordered-field",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "def-ordered-field",
+    "declared_target": "def-ordered-field",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "cor-of-one-positive",
+    "declared_target": "cor-of-one-positive",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "lem-of-add-order",
+    "declared_target": "lem-of-add-order",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "ex-cantor-set-in-ternary",
+    "sourcePage": "cantor-set-baire-and-measure-zero-examples",
+    "batch": "wave8-real-analysis-cantor-continuity",
+    "target": "lem-of-sign-rules",
+    "declared_target": "lem-of-sign-rules",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  }
+]
+```
+
+For a byte-exact cross-check, the current item at dispatch was:
+
+````markdown
+---
+id: ex-cantor-set-in-ternary
+kind: example
+title: "Which points of $[0,1]$ lie in the Cantor set, read off their ternary expansions, with $1/4$ worked out"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-cantor-set-ternary-description, def-cantor-set, thm-geometric-series, def-series, def-integer-power, lem-power-laws, lem-series-linearity, thm-nonnegative-series-bounded-partial-sums, def-sequence, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Cantor set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Cantor_set"
+    - title: "Ternary numeral system (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ternary_numeral_system"
+    - title: "Stanford Math 205A, Homework 1"
+      url: "https://math.stanford.edu/~ryzhik/STANFORD/STANF205-11/hw205-11-1.pdf"
+pipeline_run: null
+---
+
+## Example
+
+By [[thm-cantor-set-ternary-description]] a real $x$ lies in the Cantor set $C$
+exactly when
+
+$$x \;=\; \Phi(a) \;=\; \sum_{k=0}^{\infty} a_k 3^{-k-1} \qquad \text{for some sequence } a \text{ with every } a_k \in \{0,2\},$$
+
+and that sequence is then unique. The membership test is therefore: *$x$ has a
+ternary expansion using only the digits $0$ and $2$.* Six points are worked out
+here.
+
+| $x$ | digit sequence $\Phi^{-1}(x)$ |
+|---|---|
+| $0$ | $0,0,0,0,\dots$ |
+| $1$ | $2,2,2,2,\dots$ |
+| $1/3$ | $0,2,2,2,\dots$ |
+| $2/3$ | $2,0,0,0,\dots$ |
+| $1/9$ | $0,0,2,2,2,\dots$ |
+| $1/4$ | $0,2,0,2,0,2,\dots$ |
+
+The last line is the interesting one: the digits of $1/4$ alternate for ever, so
+$1/4$ lies in $C$ without being an endpoint of any interval removed in the
+construction ([[cex-cantor-point-that-is-not-an-endpoint]]).
+
+## Facts & Assumptions
+
+**Given:** The Cantor set $C$, the set $D$ of $\{0,2\}$-valued sequences and the bijection $\Phi : D \to C$ of [[thm-cantor-set-ternary-description]]. Write $\sigma a$ for the shifted sequence $(\sigma a)_k = a_{k+1}$.
+
+[L1] $\Phi$ is a bijection from $D$ onto $C$ with $\Phi(a) = \sum_{k \ge 0} a_k 3^{-k-1}$, and the series converges for every $a \in D$ ([[thm-cantor-set-ternary-description]], [[def-series]], [[def-sequence]]).
+
+[L2] $\sum_{k=0}^{\infty} r^{k} = 1/(1-r)$ for $|r| < 1$; in particular $\sum_{k \ge 0} 3^{-k} = 3 \cdot 2^{-1}$ and hence $\sum_{k \ge m} 2 \cdot 3^{-k-1} = 3^{-m}$; convergent series add and scale termwise, and the tail of a convergent series is again convergent with $\sum_{k \ge 0} t_k = t_0 + \sum_{k \ge 1} t_k$ ([[thm-geometric-series]], [[lem-series-linearity]], [[def-series]], [[thm-nonnegative-series-bounded-partial-sums]], [[def-integer-power]], [[lem-power-laws]]).
+
+[L4] Ordered-field arithmetic: $0 < 1$, so $3 > 0$, $3^{-1} > 0$, $8 > 0$; adding a constant and multiplying by a positive preserve an inequality; the order is total and transitive ([[cor-of-one-positive]], [[lem-of-add-order]], [[lem-of-sign-rules]], [[def-ordered-field]], [[def-complete-ordered-field]]). These order-arithmetic facts are stated by their sources for the strict order only; the nonstrict forms used below follow by adjoining the equality case, in which the two sides coincide.
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 **The shift identity.** For $a \in D$, $\Phi(a) = a_0 \cdot 3^{-1} + 3^{-1}\Phi(\sigma a)$: by [L2] the series splits as $\Phi(a) = a_0 3^{-1} + \sum_{k \ge 1} a_k 3^{-k-1}$, and $\sum_{k \ge 1}a_k 3^{-k-1} = \sum_{j \ge 0} a_{j+1} 3^{-j-2} = 3^{-1}\sum_{j \ge 0}a_{j+1}3^{-j-1} = 3^{-1}\Phi(\sigma a)$ by [L2] and [L4]. [given, L1, L2, L4]
+
+1.2 **The constant and eventually constant sequences.** By [L2], $\Phi(0,0,0,\dots) = 0$ and $\Phi(2,2,2,\dots) = \sum_{k \ge 0}2 \cdot 3^{-k-1} = 3^{0} = 1$. Likewise $\Phi(0,2,2,2,\dots) = 0 + \sum_{k \ge 1}2\cdot3^{-k-1} = 3^{-1} = 1/3$, $\Phi(2,0,0,\dots) = 2 \cdot 3^{-1} = 2/3$, and $\Phi(0,0,2,2,2,\dots) = \sum_{k \ge 2}2 \cdot 3^{-k-1} = 3^{-2} = 1/9$. [L1, L2]
+
+2.1 **The alternating sequence gives $1/4$.** Let $a$ be the sequence with $a_k = 0$ for even $k$ and $a_k = 2$ for odd $k$, so $a \in D$ and $\sigma(\sigma a) = a$. Applying step 1.1 twice, $\Phi(a) = 0 \cdot 3^{-1} + 3^{-1}\Phi(\sigma a)$ and $\Phi(\sigma a) = 2 \cdot 3^{-1} + 3^{-1}\Phi(a)$, so $\Phi(a) = 3^{-1}\big(2 \cdot 3^{-1} + 3^{-1}\Phi(a)\big) = 2 \cdot 9^{-1} + 9^{-1}\Phi(a)$; hence $(1 - 9^{-1})\Phi(a) = 2 \cdot 9^{-1}$, that is $8 \cdot 9^{-1}\Phi(a) = 2 \cdot 9^{-1}$ and $\Phi(a) = 2 \cdot 8^{-1} = 1/4$, by [L4]. [step 1.1, L4]
+
+3.1 So all six points of the table lie in $C$ by [L1], with the digit sequences shown, and the sequences are the only ones representing them because $\Phi$ is injective by [L1]. The point $1/4$ has a digit sequence that is not eventually constant, since it takes both values $0$ and $2$ at arbitrarily large indices. [step 1.2, step 2.1, L1] ∎
+
+## Remarks
+
+- **The digit $1$ is what the test forbids.** $1/3$ has the ternary expansion $0.1000\dots$ as well as $0.0222\dots$, and it is the second that witnesses $1/3 \in C$; the test asks for the *existence* of an expansion with digits in $\{0,2\}$, not for every expansion to have that form. By contrast $1/2$ is not in $C$ at all, since $C \subseteq C_1 = [0,\tfrac13] \cup [\tfrac23,1]$ ([[def-cantor-set]]) while $\tfrac13 < \tfrac12 < \tfrac23$.
+
+- **The construction and the digits match stage by stage.** $C_1$ keeps the points whose first digit can be taken $0$ or $2$, $C_2$ those whose first two digits can be, and so on; that correspondence is the content of [[thm-cantor-set-ternary-description]] and is what makes the table computable without ever drawing the intervals.
+
+- **$1/4$ is not special.** Every point of $C$ whose digit sequence is not eventually constant fails to be an endpoint, and those points are the vast majority: the eventually constant sequences are at most countable while $C$ is not ([[thm-cantor-set-properties]]).
+````

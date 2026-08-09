@@ -4,7 +4,10 @@ kind: counterexample
 title: "The irrationals form a residual $G_\\delta$ set that is not $F_\\sigma$"
 status: published
 origin: session
-deps: [fs-q-is-g-delta, cor-q-is-meager-and-not-g-delta, def-f-sigma-g-delta, def-nowhere-dense-meager, thm-baire-category-r, lem-rat-embeds-dense, def-open-and-closed-in-r]
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [fs-q-is-g-delta, cor-q-is-meager-and-not-g-delta, def-f-sigma-g-delta, thm-baire-category-r, lem-rat-embeds-dense, def-open-and-closed-in-r]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,12 @@ proof_strategy: direct
 cx_machine_verified: false
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/G-delta_set"
     - title: "Fσ set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/F-sigma_set"
+    - title: "E. Zakon, Problems on Baire Categories and Linear Maps"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps/6.8.E%3A_Problems_on_Baire_Categories_and_Linear_Maps"
 pipeline_run: null
 ---
 
@@ -52,8 +58,6 @@ properties that make it the right one.
 
 [L2] $A$ is $F_\sigma$ if and only if $\mathbb{R} \setminus A$ is $G_\delta$ ([[def-f-sigma-g-delta]], [[def-open-and-closed-in-r]]).
 
-[L3] Residual means the complement is meager; $\mathbb{R}$ is not meager ([[def-nowhere-dense-meager]], [[thm-baire-category-r]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -66,24 +70,8 @@ properties that make it the right one.
 
 ## Remarks
 
-- **The asymmetry is real and is not a defect of the definitions.** The two
-  classes $F_\sigma$ and $G_\delta$ are exchanged by complementation, but a
-  *particular* set need not lie in both: $\mathbb{Q}_{\mathbb{R}}$ is $F_\sigma$
-  and not $G_\delta$, and $X$ is $G_\delta$ and not $F_\sigma$. A set lying in
-  both classes is a genuinely stronger condition, satisfied for instance by every
-  open set and every closed set.
+- **The asymmetry is real and is not a defect of the definitions.** The two classes $F_\sigma$ and $G_\delta$ are exchanged by complementation, but a *particular* set need not lie in both: $\mathbb{Q}_{\mathbb{R}}$ is $F_\sigma$ and not $G_\delta$, and $X$ is $G_\delta$ and not $F_\sigma$. A set lying in both classes is a genuinely stronger condition, satisfied for instance by every open set and every closed set.
 
-- **What forces it is the Baire category theorem**, through the fact that
-  $\mathbb{R}$ is not meager ([L3]) while $\mathbb{Q}_{\mathbb{R}}$ is. Both
-  $\mathbb{Q}_{\mathbb{R}}$ and $X$ are dense, both are uncountable or countable
-  respectively, and no cardinality or density argument distinguishes them in the
-  required way; the distinction is one of category.
+- **What forces it is the Baire category theorem**, through the fact that $\mathbb{R}$ is not meager ([[thm-baire-category-r]]) while $\mathbb{Q}_{\mathbb{R}}$ is. Both are dense; the rationals are countable and the irrationals are uncountable. No cardinality or density argument distinguishes them in the required way; the distinction is one of category.
 
-- **$X$ is large in both senses.** It is residual, so it is large in category;
-  and it is not null. For if it were, then, $\mathbb{Q}_{\mathbb{R}}$ being null
-  ([[lem-countable-sets-are-null]]), one could interleave a cover of each with
-  slack $\varepsilon \cdot 2^{-1}$ and obtain a cover of
-  $\mathbb{Q}_{\mathbb{R}} \cup X = \mathbb{R}$ of total length at most
-  $\varepsilon$, which [[lem-nondegenerate-interval-is-not-null]] forbids already
-  for $[0,1]$. Interleaving two covers needs no choice principle, unlike the
-  countably infinite case ([[thm-countable-union-of-null-is-null]]).
+- **$X$ is large in both senses.** It is residual, so it is large in category; and it is not null. For if it were, then, $\mathbb{Q}_{\mathbb{R}}$ being null ([[lem-countable-sets-are-null]]), one could interleave a cover of each with slack $\varepsilon \cdot 2^{-1}$ and obtain a cover of $\mathbb{Q}_{\mathbb{R}} \cup X = \mathbb{R}$ of total length at most $\varepsilon$, which [[lem-nondegenerate-interval-is-not-null]] forbids already for $[0,1]$. Interleaving two covers needs no choice principle, unlike the countably infinite case ([[thm-countable-union-of-null-is-null]]).

@@ -4,6 +4,9 @@ kind: counterexample
 title: "The Smith-Volterra-Cantor set is nowhere dense and does not have measure zero"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-nowhere-dense-implies-measure-zero, thm-fat-cantor-set-has-positive-measure, def-fat-cantor-set, def-nowhere-dense-meager, def-measure-zero-and-content-zero]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "A. Jin, Cantor sets in topology, analysis, and financial markets"
+      url: "https://math.uchicago.edu/~may/REU2021/REUPapers/Jin%2CAlexa.pdf"
 pipeline_run: null
 ---
 

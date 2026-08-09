@@ -4,6 +4,9 @@ kind: counterexample
 title: "Without local finiteness, a pointwise finite sum of continuous functions can be discontinuous"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [lem-locally-finite-sums-are-continuous, lem-algebra-of-continuous-real-maps-on-a-space]
 justified_by: []
 aliases: []

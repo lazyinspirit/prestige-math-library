@@ -4,6 +4,10 @@ kind: definition
 title: "The intermediate value property (Darboux property) of a function on an interval: the image of every subinterval is order-convex"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
 deps: [lem-monotone-with-interval-image-is-continuous, def-interval, def-complete-ordered-field, thm-connected-subsets-of-r-are-intervals, cor-continuous-image-of-an-interval-is-an-interval, def-continuity-real]
 justified_by: []
 aliases: [def-darboux-property]
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Darboux%27s_theorem_(analysis)"
     - title: "Intermediate value theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
+    - title: "Darboux property (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Darboux_property"
 pipeline_run: null
 ---
 

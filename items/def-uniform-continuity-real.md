@@ -4,6 +4,9 @@ kind: definition
 title: "Uniform continuity of $f : A \\to \\mathbb{R}$: one $\\delta$ serving every pair of points of $A$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-continuity-real, def-interval, def-neighbourhood-r, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Lebl, Basic Analysis I, §3.3: Uniform continuity"
+      url: "https://www.jirka.org/ra/html/sec_unifcont.html"
 pipeline_run: null
 ---
 

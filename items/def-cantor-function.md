@@ -4,6 +4,9 @@ kind: definition
 title: "The Cantor function on $[0,1]$, defined on the Cantor set through ternary digits and extended constantly across each removed interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-cantor-set-ternary-description, def-cantor-set, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, def-complete-ordered-field, def-bounded-set, lem-sup-unique, def-interval, def-injection-surjection-bijection, def-integer-power, lem-power-laws, def-sequence, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: [thm-cantor-function-properties]
 aliases: [def-devils-staircase]
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cantor_function"
     - title: "Cantor set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor_set"
+    - title: "Stanford Math 205A, Homework 1"
+      url: "https://math.stanford.edu/~ryzhik/STANFORD/STANF205-11/hw205-11-1.pdf"
 pipeline_run: null
 ---
 

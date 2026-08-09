@@ -4,6 +4,9 @@ kind: example
 title: "Baire category gives a third proof that $\\mathbb{R}$ is uncountable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-baire-category-r, def-nowhere-dense-meager, thm-r-uncountable, def-countable, lem-countable-iff-surjection-from-n, def-interval, def-neighbourhood-r, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-injection-surjection-bijection, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Baire_category_theorem"
     - title: "Cantor's first set theory article (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cantor%27s_first_set_theory_article"
+    - title: "Baire theorem (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Baire_theorem"
+    - title: "E. Zakon, Mathematical Analysis, §6.8: Baire Categories"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps"
 pipeline_run: null
 ---
 

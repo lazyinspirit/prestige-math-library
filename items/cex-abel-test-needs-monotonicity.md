@@ -4,6 +4,9 @@ kind: counterexample
 title: "With $a_j = (-1)^{j}/\\sqrt{j+1}$ convergent and $b_j = (-1)^{j}$ bounded but not monotone, $\\sum a_j b_j = \\sum 1/\\sqrt{j+1}$ diverges"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-abel-test, thm-alternating-series-test, thm-p-series-rational, thm-of-square-roots, thm-nth-roots-exist, def-rational-power, lem-alternating-sequence, def-monotone-sequence, def-bounded-set, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, cor-archimedean-reciprocal, def-series, def-real-limit]
 justified_by: []
 aliases: []

@@ -4,19 +4,24 @@ kind: theorem
 title: "Baire's theorem: a Baire class one function on a closed bounded interval $[a,b]$ is continuous at the points of a dense subset of $[a,b]$ that is the trace of a $G_\\delta$ set, so its set of discontinuities is meager"
 status: published
 origin: session
-deps: [def-baire-class-one, def-oscillation, thm-continuity-iff-oscillation-zero, lem-oscillation-superlevel-sets-are-closed, thm-discontinuity-set-is-f-sigma, lem-baire-category-in-a-closed-interval, def-nowhere-dense-meager, def-f-sigma-g-delta, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-continuity-preimage-characterisation, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, cor-archimedean-reciprocal, def-real-limit, def-sequence, lem-of-abs-value, def-max-min, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
+deps: [def-baire-class-one, def-oscillation, lem-oscillation-superlevel-sets-are-closed, thm-discontinuity-set-is-f-sigma, lem-baire-category-in-a-closed-interval, def-nowhere-dense-meager, def-f-sigma-g-delta, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-continuity-preimage-characterisation, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, cor-archimedean-reciprocal, def-real-limit, def-sequence, lem-of-abs-value, def-max-min, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r]
 justified_by: []
 aliases: [thm-baire-one-dense-continuity]
 landmark: true
 short: "Baire class one: continuity on a dense $G_\\delta$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -62,8 +67,6 @@ since $C \subseteq [a,b]$.
 [L1] $f$ of Baire class one on $[a,b]$ means: there are continuous $f_k : [a,b] \to \mathbb{R}$ with $f_k(x) \to f(x)$ for every $x \in [a,b]$ ([[def-baire-class-one]], [[def-continuity-real]], [[def-real-limit]], [[def-sequence]]).
 
 [L2] $\omega_f(S) = \sup\{|f(x)-f(y)| : x,y \in S\}$; $\omega_f(x) = \inf\{\omega_f([a,b] \cap N_\delta(x)) : \delta > 0\}$; $\omega_f$ is monotone under inclusion and $\omega_f(x) \ge 0$ ([[def-oscillation]]).
-
-[L3] $f$ is continuous at $x \in [a,b]$ if and only if $\omega_f(x) = 0$ ([[thm-continuity-iff-oscillation-zero]]).
 
 [L4] For every real $\varepsilon > 0$ there is a closed $G \subseteq \mathbb{R}$ with $\{x \in [a,b] : \omega_f(x) \ge \varepsilon\} = [a,b] \cap G$ ([[lem-oscillation-superlevel-sets-are-closed]]).
 
@@ -121,7 +124,7 @@ since $C \subseteq [a,b]$.
 
 ## Remarks
 
-- **Where the hypothesis of Baire class one is used.** Only in steps 1.3 and 2.2, and only through the Cauchy-style estimate: pointwise convergence makes the sets $E_{N}$ exhaust $[c,d]$, and category then produces an interval on which one single continuous $f_{N}$ approximates $f$ uniformly to within $\varepsilon/4$. Everything after step 4.1 is about oscillation and category and would apply to any function satisfying the refinement claim.
+- **Where the hypothesis of Baire class one is used.** The hypothesis enters through the approximating sequence fixed in step 1.1. Pointwise convergence is used in steps 2.2 and 4.1, and continuity of the approximants is used in steps 2.1 and 4.2. These facts establish the refinement claim in step 6.1. From step 7.1 onward the proof uses only that claim, oscillation, and category.
 
 - **The conclusion is sharp in the sense that "meager" cannot be improved to "at most countable".** The theorem constrains the discontinuity set by category, not by cardinality. Nothing above bounds the size of $D$; a meager set can be uncountable, the Cantor set being one ([[thm-cantor-set-properties]]), so the theorem leaves open how large a discontinuity set a Baire class one function may have. What it does exclude outright is a Baire class one function on $[0,1]$ that is nowhere continuous, and the companion page spends exactly that on the Dirichlet function.
 

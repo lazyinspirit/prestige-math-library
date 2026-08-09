@@ -4,6 +4,10 @@ kind: false-statement
 title: "FALSE: every additive $f : \\mathbb{R} \\to \\mathbb{R}$ is of the form $x \\mapsto cx$ for a single real $c$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-additive-function, lem-additive-is-q-linear, lem-hamel-basis-exists, thm-cauchy-functional-equation-regularity, def-vector-space, def-linear-combination-and-span, lem-restriction-of-scalars, def-axiom-of-choice, thm-zorn, def-complete-ordered-field, lem-rat-embeds-dense, lem-q-and-irrationals-dense-r]
 justified_by: []
 aliases: []
@@ -11,12 +15,13 @@ landmark: true
 short: "additive does not imply linear"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
     - title: "Axiom of choice (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
+    - title: "Hamel Basis (MathWorld)"
+      url: "https://mathworld.wolfram.com/HamelBasis.html"
 pipeline_run: null
 ---
 
@@ -60,8 +67,6 @@ counterexample exists without choice, and nothing here bears on that question.
 
 [L4] $\mathbb{R}$ is a field, so a nonzero real is invertible ([[def-complete-ordered-field]]).
 
-[L5] Each of six regularity conditions forces an additive $f$ to be $x \mapsto f(1)x$; in particular an additive $f$ that is not of that form is bounded neither above nor below on any nondegenerate interval, is monotone on none, is continuous at no point, and has dense graph in $\mathbb{R}^{2}$ ([[thm-cauchy-functional-equation-regularity]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -80,25 +85,8 @@ counterexample exists without choice, and nothing here bears on that question.
 
 ## Remarks
 
-- **What the witness looks like, by the regularity theorem.** Since $f$ is
-  additive and not of the form $x \mapsto cx$, the contrapositive of each clause
-  of [[thm-cauchy-functional-equation-regularity]] applies: $f$ is continuous at
-  no point of $\mathbb{R}$, is bounded neither above nor below on any
-  nondegenerate interval, is monotone on no nondegenerate interval, is of
-  constant sign on none, and its graph is dense in $\mathbb{R}^{2}$. The
-  companion page states and uses exactly this
-  in full.
+- **What the witness looks like, by the regularity theorem.** Since $f$ is additive and not of the form $x \mapsto cx$, the contrapositive of each clause of [[thm-cauchy-functional-equation-regularity]] applies: $f$ is continuous at no point of $\mathbb{R}$, is bounded neither above nor below on any nondegenerate interval, is monotone on no nondegenerate interval, is of constant sign on none, and its graph is dense in $\mathbb{R}^{2}$. The companion page states and uses exactly this in full.
 
-- **The cost is the Axiom of Choice, and only that.** The construction uses no
-  other principle, and AC is an axiom this library has adopted, so nothing here
-  is conditional in the sense of resting on unproved material. It is worth being
-  precise about what is *not* claimed: it is not claimed that no explicit
-  non-linear additive function can be written down, only that this one is
-  produced by a proof that exhibits nothing.
+- **The cost is the Axiom of Choice, and only that.** The construction uses no other principle, and AC is an axiom this library has adopted, so nothing here is conditional in the sense of resting on unproved material. It is worth being precise about what is *not* claimed: it is not claimed that no explicit non-linear additive function can be written down, only that this one is produced by a proof that exhibits nothing.
 
-- **Every hypothesis that would rescue the claim is already recorded.** Adding
-  any single one of the six conditions of
-  [[thm-cauchy-functional-equation-regularity]] turns the false statement into a
-  theorem. That is the reason the false statement is worth stating: the failure
-  is not marginal, and yet it is repaired by an extremely weak hypothesis, as
-  little as continuity at one single point.
+- **Every hypothesis that would rescue the claim is already recorded.** Adding any single one of the six conditions of [[thm-cauchy-functional-equation-regularity]] turns the false statement into a theorem. That is the reason the false statement is worth stating: the failure is not marginal, and yet it is repaired by an extremely weak hypothesis, as little as continuity at one single point.

@@ -4,6 +4,9 @@ kind: example
 title: "The intervals removed from the Smith-Volterra-Cantor set have total length $1/2$, so the set cannot be covered by intervals of total length less than $1/2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-fat-cantor-set-has-positive-measure, def-fat-cantor-set, lem-finite-interval-cover-total-length, lem-nondegenerate-interval-is-not-null, def-measure-zero-and-content-zero, thm-geometric-series, def-series, def-interval, def-integer-power, lem-power-laws, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "A. Jin, Cantor sets in topology, analysis, and financial markets"
+      url: "https://math.uchicago.edu/~may/REU2021/REUPapers/Jin%2CAlexa.pdf"
 pipeline_run: null
 ---
 

@@ -4,7 +4,10 @@ kind: false-statement
 title: "FALSE: a continuous real function on a bounded domain attains a greatest value"
 status: published
 origin: session
-deps: [thm-extreme-value-r, thm-compactness-is-necessary-for-evt-and-uniform-continuity, thm-heine-borel-characterisation-r, def-open-cover-r, def-continuity-real, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-interval, thm-algebra-of-continuous-functions, def-open-and-closed-in-r, def-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-extreme-value-r, thm-compactness-is-necessary-for-evt-and-uniform-continuity, thm-heine-borel-characterisation-r, def-continuity-real, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-interval, thm-algebra-of-continuous-functions, def-ordered-field]
 justified_by: []
 aliases: []
 forward_refs: [cex-evt-fails-on-the-open-interval-and-on-the-half-line]
@@ -13,11 +16,12 @@ short: "FALSE: EVT on every bounded domain"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "University of Edinburgh, The Extreme Value Theorem"
+      url: "https://uoe-school-of-mathematics.github.io/MATH08081_IMA/Ch4.S9.html"
 pipeline_run: null
 ---
 
@@ -65,8 +71,6 @@ below is that theorem's simplest instance.
 
 [L5] Suprema: a nonempty set bounded above has a least upper bound, and for $u = \sup S$ every real $\varepsilon > 0$ admits $s \in S$ with $u - \varepsilon < s$ ([[def-complete-ordered-field]], [[lem-sup-epsilon]]).
 
-[L6] $E = (0,1)$ is not closed, since $1$ is not in it while every neighbourhood of $1$ meets it; so $E$ is not compact ([[def-open-and-closed-in-r]], [[thm-heine-borel-characterisation-r]], [[def-open-cover-r]]).
-
 ## Refutation
 
 **Proof technique:** direct.
@@ -79,7 +83,7 @@ below is that theorem's simplest instance.
 
 ## Remarks
 
-- **The domain is bounded and not closed, and that is exactly the gap.** By [L6] the set $(0,1)$ is not compact, so [[thm-extreme-value-r]] does not apply. Adding the two endpoints repairs everything: on $[0,1]$ the same $f$ attains the value $1$ at the point $1$.
+- **The domain is bounded and not closed, and that is exactly the gap.** The set $(0,1)$ is not closed and hence is not compact by [[thm-heine-borel-characterisation-r]], so [[thm-extreme-value-r]] does not apply. Adding the two endpoints repairs everything: on $[0,1]$ the same $f$ attains the value $1$ at the point $1$.
 
 - **Boundedness of the function is not the issue either.** The witness above is bounded, so the failure is not a blow-up; it is the loss of the point at which the supremum would be attained. A function on the same domain that is unbounded, such as $x \mapsto 1/x$, fails the conclusion for the cruder reason that no upper bound exists at all, and both failures are catalogued together in [[cex-evt-fails-on-the-open-interval-and-on-the-half-line]] on the companion page.
 

@@ -4,6 +4,10 @@ kind: definition
 title: "Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\\mathbb{R}$, with the dictionary to monotone sequences"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+  evidence: semantic-source
 deps: [def-complete-ordered-field, def-real-order, def-interval, def-monotone-sequence, def-sequence, def-ordered-field, def-injection-surjection-bijection]
 justified_by: []
 aliases: [def-monotone-real-function, def-strictly-monotone]
@@ -21,6 +25,8 @@ sources:
   references:
     - title: "Monotonic function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
+    - title: "Monotone Functions (Analysis WebNotes)"
+      url: "https://mathcs.org/analysis/reals/cont/defs/monofun.html"
 pipeline_run: null
 ---
 

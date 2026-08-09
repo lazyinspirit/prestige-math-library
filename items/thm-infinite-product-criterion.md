@@ -4,18 +4,21 @@ kind: theorem
 title: "For $p_k \\ge 0$ the product $\\prod (1 + p_k)$ converges iff $\\sum p_k$ converges, with $1 + \\sum_{k<n} p_k \\le \\prod_{k<n}(1+p_k) \\le 1/\\bigl(1 - \\sum_{k<n} p_k\\bigr)$ when $\\sum_{k<n} p_k < 1$; for $0 \\le p_k < 1$ the product $\\prod (1 - p_k)$ converges iff $\\sum p_k$ converges and its partial products tend to $0$ otherwise; and $\\sum |p_k|$ convergent implies $\\prod (1+p_k)$ convergent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-infinite-product, def-series, lem-series-tail-invariance, thm-nonnegative-series-bounded-partial-sums, thm-monotone-convergence, cor-monotone-converges-iff-bounded, def-monotone-sequence, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, lem-of-inverse-positive, lem-of-abs-value, thm-algebra-of-limits, lem-limit-preserves-order, thm-squeeze, thm-reals-cauchy-complete, def-divergence-to-infinity, def-real-limit]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infinite_product"
     - title: "Weierstrass product inequality (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Weierstrass_product_inequality"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
+    - title: "D. Dikranjan, Analysis 478, Chapter 6"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch6.pdf"
 pipeline_run: null
 ---
 
@@ -117,7 +124,7 @@ convergence of $\sum p_k^2$, does need the logarithm and is not stated here; see
 
 - **Why the two bounds of claim 1 are the right pair.** The lower bound $1 + S_n \le \Pi_n$ is the Weierstrass product inequality and forces divergence of the product when $\sum p_k$ diverges; the upper bound $\Pi_n \le 1/(1-S_n)$, available once the partial sums are below $1$, forces convergence when $\sum p_k$ converges. Between them they prove claim 2 with no further input, and they are exactly what a logarithm would otherwise supply.
 
-- **The hypothesis $p_k < 1$ in claim 3 is not cosmetic.** A single factor $1 - p_k = 0$ would make every later partial product $0$; the definition of convergence then fails at every tail containing that index, though a tail starting after it may still converge. Requiring $p_k < 1$ throughout keeps every factor nonzero and makes the statement an honest equivalence.
+- **The strict inequality $p_k<1$ keeps this proof uniform, but the tail-based definition allows a slightly stronger statement.** Claim 3 remains true for $0\le p_k\le1$. If only finitely many $p_k$ equal $1$, start the product after the last zero factor; if infinitely many do, then $\sum p_k$ diverges and no tail has all factors nonzero. The stated strict form avoids this finite/infinite split.
 
 - **Claim 4 does not identify the value, and the converse fails.** Absolute convergence of $\sum p_k$ gives convergence of $\prod(1+p_k)$, but convergence of $\sum p_k$ alone does not: the companion examples page exhibits $\sum_{j\ge0}(-1)^j/\sqrt{j+2}$ convergent while the corresponding partial products tend to $0$. What separates the two cases is the convergence of $\sum p_k^2$, a criterion that needs the logarithm and is deferred.
 

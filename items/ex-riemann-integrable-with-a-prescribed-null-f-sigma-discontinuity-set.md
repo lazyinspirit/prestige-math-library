@@ -4,6 +4,9 @@ kind: example
 title: "For every $F_\\sigma$ subset $E$ of $[0,1]$ of measure zero there is a bounded Riemann integrable function on $[0,1]$ whose set of discontinuities is exactly $E$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-lebesgue-criterion, def-f-sigma-g-delta, def-measure-zero-and-content-zero, lem-nondegenerate-interval-is-not-null, def-continuity-real, def-classification-of-discontinuities, def-open-and-closed-in-r, def-neighbourhood-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-integer-power, lem-power-monotone, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, def-sequence, def-bounded-set, def-darboux-integral, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "Fsigma set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/F%CF%83_set"
+    - title: "M. Wodzicki, The Riemann Integral"
+      url: "https://math.berkeley.edu/~wodzicki/H104.F10/Integral.pdf"
+    - title: "Sets of discontinuity (University of Richmond MATH 320)"
+      url: "https://blog.richmond.edu/math320/2016/10/20/sets-of-discontinuity/"
 pipeline_run: null
 ---
 

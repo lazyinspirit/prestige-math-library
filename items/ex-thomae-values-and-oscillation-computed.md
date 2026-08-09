@@ -4,6 +4,10 @@ kind: example
 title: "Thomae's function computed: $t(1/2) = 1/2$, $t(2/3) = 1/3$, $t(m) = 1$ at every integer $m$, $t(x) = 0$ at every irrational, and $\\omega_t(c) = t(c)$ at every real $c$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+  evidence: semantic-source
 deps: [def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, def-oscillation, thm-continuity-iff-oscillation-zero, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, lem-integer-part, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Thomae's function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Thomae%27s_function"
+    - title: "Dirichlet Function (MathWorld)"
+      url: "https://mathworld.wolfram.com/DirichletFunction.html"
 pipeline_run: null
 ---
 

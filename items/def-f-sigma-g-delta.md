@@ -4,6 +4,9 @@ kind: definition
 title: "$F_\\sigma$ and $G_\\delta$ subsets of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-open-and-closed-in-r, def-countable, thm-open-set-algebra-r]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/G-delta_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 2 and Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Borel set (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Borel_set"
 pipeline_run: null
 ---
 

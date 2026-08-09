@@ -4,6 +4,9 @@ kind: lemma
 title: "Sums, products, absolute values, finite maxima and minima, and quotients of continuous real-valued maps on a topological space are continuous where defined"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-continuous-map-top, def-product-topology, def-subspace-topology-top, thm-product-universal-property, thm-continuity-characterisations-top, lem-real-line-is-a-metric-space, def-zero-sets-and-cozero-sets]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "S. Semmes, Topology notes, Sections 5.13–5.14 (Rice University)"
+      url: "https://math.rice.edu/~semmes/math443b.pdf"
+    - title: "Continuity notes (University of California, Berkeley)"
+      url: "https://math.berkeley.edu/~giventh/10415.html"
 pipeline_run: null
 ---
 

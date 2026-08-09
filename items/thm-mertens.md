@@ -4,6 +4,9 @@ kind: theorem
 title: "Mertens' theorem: if $\\sum a_k$ converges absolutely to $A$ and $\\sum b_k$ converges to $B$, their Cauchy product converges to $AB$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-cauchy-product, def-absolute-and-conditional-convergence, lem-absolute-convergence-implies-convergence, def-series, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, lem-of-abs-value, thm-nonnegative-series-bounded-partial-sums, lem-convergent-implies-bounded, thm-algebra-of-limits, thm-induction-principle, def-real-limit]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_product"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "R. Gardner, Operations Involving Series, Theorem 7-17"
+      url: "https://faculty.etsu.edu/gardnerr/4217/notes/7-2.pdf"
 pipeline_run: null
 ---
 

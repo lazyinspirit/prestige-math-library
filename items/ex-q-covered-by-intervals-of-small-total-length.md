@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Q}$ is covered by open intervals of total length $\\varepsilon$, for every $\\varepsilon > 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-countable-sets-are-null, def-measure-zero-and-content-zero, thm-rationals-countable, lem-countable-iff-surjection-from-n, thm-geometric-series, def-series, def-interval, def-integer-power, lem-power-laws, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-open-and-closed-in-r, lem-rat-embeds-dense, def-countable, def-equinumerous, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Null_set"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
 pipeline_run: null
 ---
 

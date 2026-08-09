@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every subset of $\\mathbb{R}$ of measure zero is nowhere dense"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-countable-sets-are-null, def-nowhere-dense-meager, def-measure-zero-and-content-zero, thm-rationals-countable, lem-q-and-irrationals-dense-r, def-interior-closure-boundary-r, def-countable, def-open-and-closed-in-r, lem-rat-embeds-dense, def-limit-point-r]
 justified_by: []
 forward_refs: [cex-dense-set-of-measure-zero]
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Null_set"
     - title: "Nowhere dense set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nowhere_dense_set"
+    - title: "E. Zakon, Mathematical Analysis, §6.8: Baire Categories"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "A countable union of measure-zero sets has measure zero, by countable choice"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-measure-zero-and-content-zero, def-countable, def-countable-choice, thm-n-cross-n-countable, thm-geometric-series, def-series, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-integer-power, def-injection-surjection-bijection, thm-induction-principle, lem-nat-trichotomy, def-nat-order, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [cex-null-set-not-of-content-zero, cex-meager-set-of-full-measure]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "One refinement worked out for $f(x) = x^{2}$ on $[0,1]$: adding the point $1/2$ to the trivial partition raises the lower sum from $0$ to $1/8$ and lowers the upper sum from $1$ to $5/8$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-refinement-inequalities, def-darboux-sums, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-integer-power, lem-power-monotone, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
   references:
     - title: "Darboux integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Darboux_integral"
+    - title: "J. Lebl, Basic Analysis I, The Riemann Integral"
+      url: "https://www.jirka.org/ra/html/sec_rint.html"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

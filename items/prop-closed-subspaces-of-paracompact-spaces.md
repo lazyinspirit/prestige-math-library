@@ -4,6 +4,9 @@ kind: proposition
 title: "Every closed subspace of a paracompact space is paracompact"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-paracompact-space, def-subspace-topology-top]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
 pipeline_run: null
 ---
 

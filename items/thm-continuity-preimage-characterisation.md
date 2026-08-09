@@ -4,6 +4,9 @@ kind: theorem
 title: "$f : A \\to \\mathbb{R}$ is continuous on $A$ if and only if the preimage of every open subset of $\\mathbb{R}$ is the intersection with $A$ of an open subset of $\\mathbb{R}$, and dually for closed sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-continuity-real, def-open-and-closed-in-r, def-neighbourhood-r, thm-open-set-algebra-r]
 justified_by: []
 aliases: [thm-continuity-open-preimage-r]
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.2"
       url: "https://www.jirka.org/ra/"
+    - title: "D. Ernst, Continuous Real Functions"
+      url: "https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/An_Introduction_to_Proof_via_Inquiry-Based_Learning_%28Ernst%29/08%3A_New_Page/8.5%3A_Continuous_Real_Functions"
+    - title: "MIT 18.100B lecture notes"
+      url: "https://math.mit.edu/classes/18.100/100B.S1-Lects.html"
 pipeline_run: null
 ---
 

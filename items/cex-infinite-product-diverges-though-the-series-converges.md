@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\prod_{j \\ge 0} \\bigl(1 + (-1)^{j}/\\sqrt{j+2}\\bigr)$ has partial products tending to $0$ although $\\sum_{j \\ge 0} (-1)^{j}/\\sqrt{j+2}$ converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-infinite-product, thm-infinite-product-criterion, thm-alternating-series-test, thm-p-series-rational, thm-of-square-roots, thm-am-gm, thm-direct-comparison-test, lem-series-linearity, lem-alternating-sequence, thm-induction-principle, thm-squeeze, def-monotone-sequence, def-finite-sum, lem-finite-sum-laws, lem-of-inverse-positive, lem-of-naturals-positive, cor-archimedean-reciprocal, def-rational-power, thm-nth-roots-exist, def-integer-power, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infinite_product"
     - title: "Alternating series test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Alternating_series_test"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
+    - title: "D. Dikranjan, Analysis 478, Chapter 6"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch6.pdf"
 pipeline_run: null
 ---
 

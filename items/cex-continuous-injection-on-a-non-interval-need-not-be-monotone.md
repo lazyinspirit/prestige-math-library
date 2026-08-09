@@ -4,6 +4,10 @@ kind: counterexample
 title: "A continuous injection on $[0,1] \\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [thm-continuous-injection-on-an-interval-is-strictly-monotone, thm-continuous-inverse, def-monotone-function, def-continuity-real, thm-algebra-of-continuous-functions, def-interval, def-injection-surjection-bijection, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Monotonic function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
+    - title: "Chapter 4: Continuous Functions (Trinity College Dublin)"
+      url: "https://www.maths.tcd.ie/~richardt/121/121-ch4.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The Darboux and Riemann definitions agree: a bounded $f$ on $[a,b]$ is Darboux integrable with integral $I$ if and only if for every real $\\varepsilon > 0$ there is a real $\\delta > 0$ such that $|S(f,P,\\xi) - I| < \\varepsilon$ for every tagged partition of mesh below $\\delta$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-partition-and-refinement, def-darboux-sums, def-darboux-integral, def-tagged-partition-and-riemann-sum, thm-riemann-criterion, lem-refinement-inequalities, lem-sup-epsilon, lem-inf-epsilon, lem-finite-sum-laws, def-finite-sum, def-bounded-set, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, lem-finite-choice, def-choice-function, lem-of-abs-value, def-interval, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive]
 justified_by: []
 aliases: [thm-riemann-and-darboux-integrals-agree]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

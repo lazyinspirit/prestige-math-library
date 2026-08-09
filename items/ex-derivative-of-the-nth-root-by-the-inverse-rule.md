@@ -4,6 +4,9 @@ kind: example
 title: "For a natural $n \\ge 1$, the derivative of $x \\mapsto x^{1/n}$ on $(0,\\infty)$ is $\\frac{1}{\\iota(n)}x^{1/n - 1}$, obtained from the inverse rule applied to $x \\mapsto x^{n}$; in particular $(\\sqrt{x})' = 1/(\\iota(2)\\sqrt{x})$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-derivative-of-an-inverse, lem-derivative-of-a-power, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, def-integer-power, def-derivative, thm-continuous-inverse, def-interval, def-canonical-natural, lem-of-naturals-positive, lem-power-monotone, thm-algebra-of-continuous-functions, def-continuity-real, def-injection-surjection-bijection, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Inverse_function_rule"
     - title: "Power rule (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Power_rule"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis I, The Derivative"
+      url: "https://www.jirka.org/ra/html/der_chapter.html"
 pipeline_run: null
 ---
 

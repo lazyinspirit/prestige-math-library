@@ -4,6 +4,9 @@ kind: corollary
 title: "If $\\sum a_k$ and $\\sum b_k$ both converge absolutely then their Cauchy product converges absolutely, with sum $AB$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-mertens, def-cauchy-product, def-absolute-and-conditional-convergence, lem-absolute-convergence-implies-convergence, thm-nonnegative-series-bounded-partial-sums, thm-direct-comparison-test, lem-triangle-inequality-finite, lem-of-abs-value, lem-finite-sum-laws, def-finite-sum, def-series]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_product"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

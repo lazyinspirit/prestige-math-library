@@ -4,7 +4,10 @@ kind: corollary
 title: "$\\mathbb{Q}$ is $F_\\sigma$, meager and not $G_\\delta$, while the irrationals are $G_\\delta$, residual and not $F_\\sigma$"
 status: published
 origin: session
-deps: [thm-baire-category-r, def-f-sigma-g-delta, def-nowhere-dense-meager, thm-rationals-countable, lem-q-and-irrationals-dense-r, def-countable, def-equinumerous, def-injection-surjection-bijection, def-open-and-closed-in-r, def-neighbourhood-r, thm-open-set-algebra-r, thm-n-cross-n-countable, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-limit-point-r, lem-rat-embeds-dense]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-baire-category-r, def-f-sigma-g-delta, def-nowhere-dense-meager, thm-rationals-countable, lem-q-and-irrationals-dense-r, def-equinumerous, def-injection-surjection-bijection, def-open-and-closed-in-r, def-neighbourhood-r, thm-n-cross-n-countable, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-limit-point-r, lem-rat-embeds-dense]
 justified_by: []
 forward_refs: [cex-irrationals-are-not-f-sigma, cex-meager-set-of-full-measure]
 aliases: []
@@ -14,10 +17,18 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-09
+    scope: published-audit-targeted
+    context_sha256: d66495c3278fff64c9ad999f462ae04a1e1646c19b701056c29ab6099277b243
+    item_sha256: f278811ea8f0cad9b18ca8692c27b9f5982048429cb35d3f357ada4c5e527cd3
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,6 +38,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Baire_category_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3 (Exercise 22)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "E. Zakon, Problems on Baire Categories and Linear Maps"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps/6.8.E%3A_Problems_on_Baire_Categories_and_Linear_Maps"
+    - title: "E. Zakon, Mathematical Analysis, §6.8: Baire Categories"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps"
 pipeline_run: null
 ---
 
@@ -53,7 +68,7 @@ argument would prove the same thing about both sets and about neither.
 
 **Given:** The complete ordered field $\mathbb{R}$, the set $\mathbb{Q}_{\mathbb{R}} \subseteq \mathbb{R}$ of rationals and its complement $X = \mathbb{R} \setminus \mathbb{Q}_{\mathbb{R}}$.
 
-[L1] $\mathbb{Q} \approx \mathbb{N}$ ([[thm-rationals-countable]], [[def-equinumerous]]), $q \mapsto \hat q$ is injective with image $\mathbb{Q}_{\mathbb{R}}$ ([[lem-rat-embeds-dense]]), and a composition of bijections is a bijection ([[def-injection-surjection-bijection]]); an at most countable family may be presented as a sequence indexed by $\mathbb{N}$ ([[def-countable]]).
+[L1] $\mathbb{Q} \approx \mathbb{N}$ ([[thm-rationals-countable]], [[def-equinumerous]]), $q \mapsto \hat q$ is injective with image $\mathbb{Q}_{\mathbb{R}}$ ([[lem-rat-embeds-dense]]), and a composition of bijections is a bijection ([[def-injection-surjection-bijection]]).
 
 [L2] $\mathbb{Q}_{\mathbb{R}}$ is dense in $\mathbb{R}$ ([[lem-q-and-irrationals-dense-r]]); a set is dense when its closure is $\mathbb{R}$, equivalently when every $N_\varepsilon(x)$ meets it ([[def-limit-point-r]], [[thm-closure-characterisations-r]], [[def-neighbourhood-r]]); the closure operator is monotone, so a superset of a dense set is dense ([[def-interior-closure-boundary-r]]).
 
@@ -66,8 +81,6 @@ argument would prove the same thing about both sets and about neither.
 [L6] A countable intersection of dense open subsets of $\mathbb{R}$ is dense ([[thm-baire-category-r]]).
 
 [L7] There is a bijection $J : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ ([[thm-n-cross-n-countable]]).
-
-[L8] An intersection of two open sets is open, and finite unions of closed sets are closed ([[thm-open-set-algebra-r]]).
 
 ## Proof
 
@@ -89,27 +102,10 @@ argument would prove the same thing about both sets and about neither.
 
 ## Remarks
 
-- **Where the two halves of the argument part company.** Claim 1 is a listing
-  argument and would work equally in $\mathbb{Q}$ or in any countable space;
-  claim 3 uses the completeness of $\mathbb{R}$ through
-  [[thm-nested-interval-property]], inside [[thm-baire-category-r]]. Indeed
-  $\mathbb{Q}$ is a $G_\delta$ subset of itself, being the whole space, so no
-  argument that ignores the ambient completeness can possibly give claim 3.
+- **Where the two halves of the argument part company.** Claim 1 is a listing argument: step 1.2 lists $\mathbb{Q}_{\mathbb{R}}$, and step 1.1 shows that each real singleton is nowhere dense; claim 3 uses the completeness of $\mathbb{R}$ through [[thm-nested-interval-property]], inside [[thm-baire-category-r]]. Indeed $\mathbb{Q}$ is a $G_\delta$ subset of itself, being the whole space, so no argument that ignores the ambient completeness can possibly give claim 3.
 
-- **The irrationals are also uncountable** ([[cor-irrationals-uncountable]]),
-  by a different and much cheaper argument that needs only the countability of
-  $\mathbb{Q}$ and the uncountability of $\mathbb{R}$. Uncountability and being
-  residual are independent properties: $\mathbb{Q}$ is meager and countable, the
-  Cantor set is meager and uncountable ([[thm-cantor-set-properties]]), and $X$
-  is residual and uncountable.
+- **The irrationals are also uncountable** ([[cor-irrationals-uncountable]]), by a different and much cheaper argument that needs only the countability of $\mathbb{Q}$ and the uncountability of $\mathbb{R}$. Uncountability and being residual are independent properties: $\mathbb{Q}$ is meager and countable, the Cantor set is meager and uncountable ([[thm-cantor-set-properties]]), and $X$ is residual and uncountable.
 
-- **The named witness for claim 3** is
-  [[cex-irrationals-are-not-f-sigma]], and the false statement it refutes is
-  [[fs-q-is-g-delta]]; the refutation is carried out here.
+- **The named witness for claim 3** is [[cex-irrationals-are-not-f-sigma]], and the false statement it refutes is [[fs-q-is-g-delta]]; the refutation is carried out here.
 
-- **Meagre and measure zero are not the same smallness.**
-  $\mathbb{Q}_{\mathbb{R}}$ is both, but the two notions diverge as soon as one
-  leaves the countable case: [[cex-meager-set-of-full-measure]] writes
-  $\mathbb{R}$ as a meager set together with a set of measure zero, and the set
-  of measure zero there is residual. So being residual, which is what claim 2
-  gives for $X$, carries no information at all about size in measure.
+- **Meagre and measure zero are not the same smallness.** $\mathbb{Q}_{\mathbb{R}}$ is both, but the two notions diverge as soon as one leaves the countable case: [[cex-meager-set-of-full-measure]] writes $\mathbb{R}$ as a meager set together with a set of measure zero, and the set of measure zero there is residual. So being residual, which is what claim 2 gives for $X$, carries no information at all about size in measure.

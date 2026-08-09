@@ -4,6 +4,9 @@ kind: example
 title: "$\\int_0^3 \\lfloor x \\rfloor = 3$: the floor function is nondecreasing, hence integrable, and the integral is computed from the uniform partitions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-monotone-implies-integrable, lem-integer-part, def-monotone-function, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-classification-of-discontinuities, def-continuity-real, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: true
 short: "$\\int_0^3 \\lfloor x\\rfloor = 3$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Floor_and_ceiling_functions"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "MTH 421 Homework 1 (Michigan State University)"
+      url: "https://users.math.msu.edu/users/seal/teaching/sp14/hw1.pdf"
 pipeline_run: null
 ---
 
@@ -74,7 +80,7 @@ $3 + 3/M$. So the lower sums do not merely approach the integral, they attain it
 
 1.1 $g$ is nondecreasing by [L2], and $0 < 3$, so $g$ is Riemann integrable on $[0,3]$ by [L3]; write $J := \int_0^3 g$. [given, L2, L3]
 
-1.2 By [L5] and [L7], for $i < N = 3M$ the lower value is $m_i = g(t_i) = \lfloor \iota(i)/\iota(M)\rfloor$, which is $0$ for $i < M$, $1$ for $M \le i < 2M$ and $2$ for $2M \le i < 3M$; and the upper value is $M_i = g(t_{i+1}) = \lfloor \iota(i+1)/\iota(M)\rfloor$, which is $0$ for $i+1 < M$, $1$ for $M \le i+1 < 2M$, $2$ for $2M \le i+1 < 3M$ and $3$ for $i+1 = 3M$. [given, L4, L5, L7]
+1.2 By [L5] and [L7], for $i < N = 3M$ the lower value is $m_i = g(t_i) = \lfloor \iota(i)/\iota(M)\rfloor$, which is $0$ for $i < M$, $1$ for $M \le i < 2M$ and $2$ for $2M \le i < 3M$; and the upper value is $M_i = g(t_{i+1}) = \lfloor \iota(i+1)/\iota(M)\rfloor$, which is $0$ for $i+1 < M$, $1$ for $M \le i+1 < 2M$, $2$ for $2M \le i+1 < 3M$ and $3$ for $i+1 = 3M$. [given, L1, L4, L5, L7]
 
 2.1 By [L6] and step 1.2, $L(g,U_N) = \frac{1}{\iota(M)}\Bigl(\sum_{i<M}0 + \sum_{M \le i < 2M}1 + \sum_{2M \le i < 3M}2\Bigr) = \frac{1}{\iota(M)}\bigl(0 + \iota(M) + 2\iota(M)\bigr) = 3$. [step 1.2, L4, L5, L6, L9]
 

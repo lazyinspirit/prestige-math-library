@@ -18,9 +18,9 @@ examples: [fs-mean-value-theorem-needs-no-continuity-at-the-endpoints,
 ---
 
 **Objective.** This page defines the derivative of a real function at a point,
-proves the rules that make it computable, and then proves the four theorems that
-the derivative exists for: Fermat's interior extremum theorem, Rolle's theorem,
-Cauchy's mean value theorem and the mean value theorem itself. It closes with
+proves the rules that make it computable, and then proves four central theorems
+whose hypotheses use differentiability: Fermat's interior extremum theorem,
+Rolle's theorem, Cauchy's mean value theorem, and the mean value theorem itself. It closes with
 what the mean value theorem is actually spent on downstream: a vanishing
 derivative forces a constant, the sign of the derivative controls monotonicity,
 and a bound on the derivative gives a Lipschitz bound on the function.

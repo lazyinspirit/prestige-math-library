@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\mathbb{Q} \\cap [0,1]$ has measure zero and not content zero, although it is bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-null-implies-content-zero, lem-finite-interval-cover-total-length, lem-countable-sets-are-null, def-measure-zero-and-content-zero, thm-rationals-countable, lem-subset-of-countable, lem-q-and-irrationals-dense-r, lem-rat-embeds-dense, thm-open-set-algebra-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-interval, def-countable, thm-compact-null-is-content-zero]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Jordan_measure"
     - title: "Null set (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Null_set"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
+    - title: "UAF Math 641, Measure Theory notes"
+      url: "https://www.cs.uaf.edu/~maxwell/AY2007/math641/Measure.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The period-three pattern $1, 1, -2$ has partial sums in $\\{0,1,2\\}$, so $\\sum a_k/(k+1)$ converges by Dirichlet's test although the alternating series test does not apply"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-dirichlet-test, thm-alternating-series-test, lem-alternating-sequence, thm-recursion, thm-induction-principle, def-absolute-and-conditional-convergence, thm-p-series-rational, thm-direct-comparison-test, def-monotone-sequence, def-bounded-set, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-rational-power, thm-nth-roots-exist, def-integer-power, def-finite-sum, lem-finite-sum-laws, def-series, def-real-limit]
 justified_by: []
 aliases: []

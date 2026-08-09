@@ -4,6 +4,9 @@ kind: theorem
 title: "Heine-Cantor in $\\mathbb{R}$: a continuous real function on a compact subset of $\\mathbb{R}$ is uniformly continuous, proved $\\mathbb{R}$-natively from sequential compactness"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-uniform-continuity-real, def-continuity-real, lem-real-and-metric-notions-agree, thm-sequential-criterion-for-continuity, thm-compact-iff-sequentially-compact-r, def-open-cover-r, def-real-limit, def-sequence, lem-index-map-grows, def-countable-choice, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-triangle-inequality, lem-of-abs-value, lem-rat-embeds-dense, def-ordered-field]
 justified_by: []
 aliases: [thm-uniform-continuity-on-compact-r]
@@ -27,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "W. Trench, Introduction to Real Analysis, Ch. 8: Metric Spaces"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Introduction_to_Real_Analysis_%28Trench%29/08%3A_Metric_Spaces/8.00%3A_Introduction_to_Metric_Spaces"
+    - title: "J. Lebl, Basic Analysis I, §3.3: Uniform continuity"
+      url: "https://www.jirka.org/ra/html/sec_unifcont.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Extreme value theorem: a continuous real function on a nonempty compact subset of $\\mathbb{R}$ attains a greatest and a least value"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-continuous-image-of-a-compact-set-r, cor-boundedness-theorem-r, thm-heine-borel-characterisation-r, def-open-cover-r, def-continuity-real, def-bounded-set, def-infimum, thm-infimum-property, lem-sup-epsilon, lem-inf-epsilon, def-max-min, def-complete-ordered-field, thm-closure-characterisations-r, def-open-and-closed-in-r, def-neighbourhood-r]
 justified_by: []
 aliases: [thm-evt-r]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
+    - title: "Compact space (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Compact_space"
 pipeline_run: null
 ---
 

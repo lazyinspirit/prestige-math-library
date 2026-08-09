@@ -4,6 +4,9 @@ kind: example
 title: "$x \\mapsto x^{3}$ is increasing on $\\mathbb{R}$ although its derivative vanishes at $0$, which is the witness for the false statement that a vanishing derivative forbids strict increase, and which makes its inverse non-differentiable at $0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-vanishing-derivative-forbids-strict-increase, def-derivative, lem-derivative-of-a-power, def-monotone-function, thm-monotonicity-from-the-derivative, def-integer-power, thm-derivative-of-an-inverse, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-canonical-natural, lem-of-naturals-positive, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
     - title: "Inverse function rule (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Inverse_function_rule"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

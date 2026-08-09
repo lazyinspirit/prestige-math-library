@@ -4,6 +4,10 @@ kind: definition
 title: "Pointwise convergence of a sequence of real functions, and the Baire class one functions as the pointwise limits of sequences of continuous functions"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+  evidence: exact-source
 deps: [def-continuity-real, def-sequence, def-real-limit, lem-limit-unique, def-interval]
 justified_by: []
 aliases: [def-pointwise-convergence, def-baire-one]
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Baire_function"
     - title: "Pointwise convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Pointwise_convergence"
+    - title: "Baire classes (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Baire_classes"
 pipeline_run: null
 ---
 

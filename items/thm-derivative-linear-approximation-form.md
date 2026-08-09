@@ -4,6 +4,9 @@ kind: theorem
 title: "The linear-approximation form of the derivative: $f$ is differentiable at $c$ with $f'(c) = L$ if and only if the remainder $r(x) = f(x) - f(c) - L(x-c)$ satisfies $\\lim_{x \\to c} r(x)/(x-c) = 0$; at most one $L$ does so, so $x \\mapsto f(c) + L(x-c)$ is the unique affine map approximating $f$ to first order at $c$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-derivative, def-function-limit, lem-function-limit-unique, def-limit-point-r, lem-of-abs-value]
 justified_by: []
 aliases: [thm-frechet-form-of-the-derivative]
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Linear_approximation"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 5"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
 pipeline_run: null
 ---
 

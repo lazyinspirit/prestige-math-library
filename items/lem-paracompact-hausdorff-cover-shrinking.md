@@ -4,23 +4,31 @@ kind: lemma
 title: 'Under choice, every open cover of a paracompact Hausdorff space has locally finite open refinements $\{V_s\}$ and $\{W_s\}$ with $\overline{V_s}\subseteq W_s\subseteq\overline{W_s}\subseteq U_s$'
 status: published
 origin: session
-deps: [lem-paracompact-hausdorff-is-regular, lem-locally-finite-unions-and-closures, def-paracompact-space, def-axiom-of-choice]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-paracompact-hausdorff-is-regular, lem-regularity-via-closed-neighbourhoods, lem-locally-finite-unions-and-closures, def-paracompact-space, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "Dartmouth Point-Set Topology, Lecture 25"
       url: "https://math.dartmouth.edu/~rmaguire/teaching/dartmouth_math_054_2022_summer/lectures/2022_summer_point_set_topology_lecture_25.pdf"
+    - title: "Topology 262 notes (California State University, Northridge)"
+      url: "https://www.csun.edu/~ac53971/research/topology_262.pdf"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
 pipeline_run: null
 ---
 
@@ -38,7 +46,9 @@ $$\overline{V_s}\subseteq W_s\subseteq\overline{W_s}\subseteq U_s\quad(s\in S).$
 
 [A1] Every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
-[L1] The space is regular, and $x\in O$ open gives open $R$ with $x\in R\subseteq\overline R\subseteq O$ ([[lem-paracompact-hausdorff-is-regular]]).
+[L1] The space is regular ([[lem-paracompact-hausdorff-is-regular]]).
+
+[L3] In a regular space, $x\in O$ open gives an open $R$ with $x\in R\subseteq\overline R\subseteq O$ ([[lem-regularity-via-closed-neighbourhoods]], implication (a)$\Rightarrow$(b)).
 
 [F1] Every open cover has a locally finite open refinement ([[def-paracompact-space]]).
 
@@ -48,7 +58,7 @@ $$\overline{V_s}\subseteq W_s\subseteq\overline{W_s}\subseteq U_s\quad(s\in S).$
 
 **Proof technique:** constructive.
 
-1.1 We first prove a one-shrink construction for any open cover $\mathcal C$. Let $\mathcal R$ be the family of all open $R$ for which $\overline R\subseteq C$ for some $C\in\mathcal C$. By [L1], $\mathcal R$ covers $X$. Take a locally finite open refining cover $\mathcal A$ of $\mathcal R$ by [F1], discard its empty members, and use [A1] to assign to each $A\in\mathcal A$ sets $R(A)\in\mathcal R$ and $C(A)\in\mathcal C$ with $$A\subseteq R(A)\subseteq\overline{R(A)}\subseteq C(A).$$ Then $\overline A\subseteq\overline{R(A)}\subseteq C(A)$. [A1, L1, F1, construct]
+1.1 We first prove a one-shrink construction for any open cover $\mathcal C$. Let $\mathcal R$ be the family of all open $R$ for which $\overline R\subseteq C$ for some $C\in\mathcal C$. By [L1] and [L3], $\mathcal R$ covers $X$. Take a locally finite open refining cover $\mathcal A$ of $\mathcal R$ by [F1], discard its empty members, and use [A1] to assign to each $A\in\mathcal A$ sets $R(A)\in\mathcal R$ and $C(A)\in\mathcal C$ with $$A\subseteq R(A)\subseteq\overline{R(A)}\subseteq C(A).$$ Then $\overline A\subseteq\overline{R(A)}\subseteq C(A)$. [A1, L1, L3, F1, construct]
 
 2.1 Apply step 1.1 to $\mathcal U$. This gives a locally finite open cover $\{W_s\}_{s\in S}$ and assigned $U_s\in\mathcal U$ such that $\overline{W_s}\subseteq U_s$. [step 1.1]
 

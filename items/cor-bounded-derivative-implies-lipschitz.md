@@ -4,6 +4,9 @@ kind: corollary
 title: "If $f$ is continuous on an interval $I$ and $|f'| \\le M$ at every interior point, then $|f(x) - f(y)| \\le M|x-y|$ for all $x,y \\in I$, so $f$ is Lipschitz with constant $M$ and uniformly continuous on $I$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [cor-mean-value-theorem, def-derivative, def-interval, def-continuity-real, def-uniform-continuity-real, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, lem-of-abs-value, def-interior-closure-boundary-r, def-neighbourhood-r, prop-of-multiply-inequalities, def-limit-point-r]
 justified_by: []
 forward_refs: [cex-differentiable-with-unbounded-derivative-is-not-lipschitz]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "J. Lebl, Basic Analysis I, §4.2"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

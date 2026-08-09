@@ -4,6 +4,9 @@ kind: example
 title: "$\\int_0^1 x^{2} = 1/3$, computed from the Darboux definition with uniform partitions and the closed form $\\sum_{k<n} k^{2} = n(n-1)(2n-1)/6$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-integer-power, lem-power-monotone, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "Square pyramidal number (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Square_pyramidal_number"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

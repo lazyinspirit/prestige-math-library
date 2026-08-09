@@ -4,6 +4,10 @@ kind: example
 title: "The Dirichlet function is the pointwise limit of a sequence of Baire class one functions and is itself not Baire class one, so the Baire hierarchy on $[0,1]$ is already strict at the first level"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-dirichlet-and-thomae-functions, def-baire-class-one, thm-baire-one-continuity-points, thm-dirichlet-and-thomae-continuity-sets, thm-rationals-countable, lem-q-and-irrationals-dense-r, def-continuity-real, thm-algebra-of-continuous-functions, def-real-limit, def-sequence, def-countable, def-interval, def-max-min, lem-finite-set-has-max, lem-countable-iff-surjection-from-n, lem-rat-embeds-dense, cor-archimedean-reciprocal, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, lem-of-abs-value, def-neighbourhood-r, thm-closure-characterisations-r]
 justified_by: []
 aliases: []

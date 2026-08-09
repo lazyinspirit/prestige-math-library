@@ -4,6 +4,10 @@ kind: false-statement
 title: "FALSE: a function with the intermediate value property on an interval is continuous"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+  evidence: exact-source
 deps: [def-intermediate-value-property, def-continuity-real, thm-intermediate-value, cor-continuous-image-of-an-interval-is-an-interval, def-interval, lem-integer-part, def-max-min, lem-finite-set-has-max, thm-algebra-of-continuous-functions, thm-composition-of-continuous-functions, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-abs-value, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -22,6 +26,8 @@ sources:
   references:
     - title: "Darboux's theorem (analysis) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Darboux%27s_theorem_(analysis)"
+    - title: "Darboux property (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Darboux_property"
 pipeline_run: null
 ---
 

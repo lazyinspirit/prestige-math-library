@@ -4,6 +4,10 @@ kind: lemma
 title: "For every real $\\varepsilon > 0$ the set $\\{\\,x \\in A : \\omega_f(x) \\ge \\varepsilon\\,\\}$ is the intersection with $A$ of a closed subset of $\\mathbb{R}$; in particular it is closed in $\\mathbb{R}$ when $A = \\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [def-oscillation, def-open-and-closed-in-r, def-neighbourhood-r, def-extended-reals, lem-extended-reals-complete]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: theorem
 title: "Carathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-derivative, def-continuity-real, def-function-limit, lem-function-limit-unique, def-limit-point-r, lem-limit-is-local]
 justified_by: []
 aliases: [thm-caratheodory-derivative]
@@ -28,6 +31,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Constantin_Carath%C3%A9odory"
     - title: "J. Lebl, Basic Analysis I, §4.1"
       url: "https://www.jirka.org/ra/"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
 pipeline_run: null
 ---
 

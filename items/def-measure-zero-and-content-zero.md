@@ -4,6 +4,9 @@ kind: definition
 title: "Measure zero (a countable cover by intervals of total length below every $\\varepsilon$) and content zero (a finite such cover)"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-interval, def-series, def-countable, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-complete-ordered-field]
 justified_by: []
 forward_refs: [cex-null-set-not-of-content-zero]
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Jordan_measure"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 11"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.125, Homework 2: Measure-zero sets"
+      url: "https://math.mit.edu/classes/18.125/HW2.pdf"
+    - title: "UAF Math 641, Measure Theory notes"
+      url: "https://www.cs.uaf.edu/~maxwell/AY2007/math641/Measure.pdf"
 pipeline_run: null
 ---
 

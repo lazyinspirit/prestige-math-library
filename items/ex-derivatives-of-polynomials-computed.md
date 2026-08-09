@@ -4,6 +4,9 @@ kind: example
 title: "Worked derivatives from the algebra of derivatives and the power rule: $(3x^{4} - 5x + 2)' = 12x^{3} - 5$, and the quotient rule applied to $(x^{2}+1)/(x-1)$ on $\\mathbb{R} \\setminus \\{1\\}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-derivative, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-integer-power, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Power_rule"
     - title: "Quotient rule (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Quotient_rule"
+    - title: "J. Lebl, Basic Analysis I, The Derivative"
+      url: "https://www.jirka.org/ra/html/der_chapter.html"
 pipeline_run: null
 ---
 

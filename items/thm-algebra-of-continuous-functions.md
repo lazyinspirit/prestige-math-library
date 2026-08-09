@@ -4,6 +4,9 @@ kind: theorem
 title: "Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-continuity-real, thm-algebra-of-function-limits, lem-sign-preservation-near-a-limit, def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, cor-of-reverse-triangle, def-max-min, lem-finite-set-has-max, def-integer-power, def-ordered-field, def-field]
 justified_by: []
 aliases: [thm-continuity-algebra]
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.2"
       url: "https://www.jirka.org/ra/"
+    - title: "MIT 18.100B lecture notes"
+      url: "https://math.mit.edu/classes/18.100/100B.S1-Lects.html"
 pipeline_run: null
 ---
 

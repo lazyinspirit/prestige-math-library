@@ -4,6 +4,9 @@ kind: theorem
 title: "Stone's theorem, under choice: every metric space is paracompact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-metric-open-covers-have-point-finite-refinements, lem-metric-point-finite-refinements-can-be-made-locally-finite, def-paracompact-space, def-metric-space, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -20,9 +23,11 @@ sources:
   scraped: []
   references:
     - title: "D. Ornstein, A New Proof of the Paracompactness of Metric Spaces, Proc. Amer. Math. Soc. 21 (1969), 341–342"
-      url: "https://www.ams.org/proc/1969-021-02/S0002-9939-1969-0242120-3/S0002-9939-1969-0242120-3.pdf"
+      url: "https://www.ams.org/proc/1969-021-02/"
     - title: "C. Good, I. J. Tree and W. S. Watson, On Stone's theorem and the axiom of choice"
       url: "https://doi.org/10.1090/S0002-9939-98-04163-X"
+    - title: "Topology 262 notes (California State University, Northridge)"
+      url: "https://www.csun.edu/~ac53971/research/topology_262.pdf"
 pipeline_run: null
 ---
 

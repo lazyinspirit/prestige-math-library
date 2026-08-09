@@ -4,6 +4,11 @@ kind: example
 title: "The Cantor function takes the value $1/2$ on all of $[1/3, 2/3]$, and its values at $1/9$, $1/4$ and $7/9$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-cantor-function-properties, def-cantor-function, ex-cantor-set-in-ternary, thm-cantor-set-ternary-description, def-cantor-set, thm-geometric-series, def-series, lem-series-linearity, thm-nonnegative-series-bounded-partial-sums, def-interval, def-integer-power, lem-power-laws, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []

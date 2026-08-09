@@ -4,6 +4,9 @@ kind: remark
 title: "The same question in $\\mathbb{R}^d$: what the set of rearrangement sums looks like, and why that answer is not reachable at this point in the reading order"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-riemann-series-theorem, thm-dirichlet-rearrangement, cor-unconditional-iff-absolute-in-r, def-rearrangement-and-unconditional-convergence]
 justified_by: []
 forward_refs: [thm-steinitz-polygonal-confinement, thm-rearrangement-sums-lie-in-an-affine-subspace]
@@ -20,9 +23,9 @@ sources:
   scraped: []
   references:
     - title: "P. Lévy, Sur les séries semi-convergentes, Nouv. Ann. Math. (4) 5 (1905), 506-511"
-      url: "https://en.wikipedia.org/wiki/Paul_L%C3%A9vy_(mathematician)"
+      url: "https://www.numdam.org/item/NAM_1905_4_5__506_1/"
     - title: "E. Steinitz, Bedingt konvergente Reihen und konvexe Systeme, J. reine angew. Math. 143 (1913), 128-176"
-      url: "https://en.wikipedia.org/wiki/Ernst_Steinitz"
+      url: "https://www.degruyterbrill.com/document/doi/10.1515/crll.1913.143.128/html"
     - title: "Lévy–Steinitz theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
 pipeline_run: null

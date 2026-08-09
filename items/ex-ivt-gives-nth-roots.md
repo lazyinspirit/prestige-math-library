@@ -4,6 +4,9 @@ kind: example
 title: "The intermediate value theorem gives a second proof that every nonnegative real has an $n$-th root, applied to $x^n$ on a closed bounded interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-intermediate-value, cor-continuous-image-of-an-interval-is-an-interval, thm-nth-roots-exist, thm-algebra-of-continuous-functions, def-continuity-real, def-integer-power, lem-power-monotone, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Nth_root"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 and Ch. 4"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "E. Zakon, Mathematical Analysis, §4.9: The Intermediate Value Property"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/04%3A_Function_Limits_and_Continuity/4.09%3A_The_Intermediate_Value_Property"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "The Dirichlet function on $[0,1]$ has lower Darboux integral $0$ and upper Darboux integral $1$, so it is bounded and not Riemann integrable"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [fs-bounded-implies-riemann-integrable, def-dirichlet-and-thomae-functions, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, lem-q-and-irrationals-dense-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval, def-infimum, def-max-min, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dirichlet_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
+    - title: "MIT 18.013A, Nonintegrable Functions"
+      url: "https://ocw.mit.edu/ans7870/18/18.013a/textbook/HTML/chapter20/section04.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: remark
 title: "Why the nested-interval proof of Baire category in $\\mathbb{R}$ needs no choice, while the general complete-metric statement does"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-baire-category-r, rem-baire-category-choice-strength, def-countable-choice, def-dependent-choice, thm-nested-interval-property, thm-rationals-countable, lem-rat-embeds-dense, thm-well-ordering-principle, thm-recursion]
 justified_by: []
 aliases: []

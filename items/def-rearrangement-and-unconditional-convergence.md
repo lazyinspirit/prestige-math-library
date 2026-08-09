@@ -4,6 +4,9 @@ kind: definition
 title: "Rearrangement of a series along a bijection of $\\mathbb{N}$, and unconditional convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-series, def-sequence, def-injection-surjection-bijection, def-absolute-and-conditional-convergence]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "Unconditional convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Unconditional_convergence"
+    - title: "N. Donaldson, Math 140A: Real Analysis notes"
+      url: "https://www.math.uci.edu/~ndonalds/math140a/notes.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

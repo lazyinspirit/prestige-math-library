@@ -4,6 +4,9 @@ kind: remark
 title: "What this page costs in choice: Riemann's criterion, the Darboux-Riemann equivalence and integrability of a monotone function are theorems of ZF; integrability of a continuous function inherits the single use of countable choice inside Heine-Cantor; and only the forward half of the Lebesgue criterion spends countable choice, once, at the countable union of null sets"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-lebesgue-criterion, thm-countable-union-of-null-is-null, def-countable-choice, thm-riemann-criterion, thm-darboux-equals-riemann, thm-continuous-implies-integrable, thm-monotone-implies-integrable, thm-finitely-many-discontinuities-integrable, cor-countably-many-discontinuities-integrable, thm-heine-cantor-r, rem-heine-criterion-choice-cost, thm-compact-iff-sequentially-compact-r, lem-finite-choice, lem-countable-sets-are-null, thm-compact-null-is-content-zero, lem-content-zero-implies-null, thm-heine-borel-characterisation-r, lem-oscillation-superlevel-sets-are-closed, def-tagged-partition-and-riemann-sum]
 justified_by: []
 aliases: []

@@ -4,6 +4,10 @@ kind: corollary
 title: "No function $\\mathbb{R} \\to \\mathbb{R}$ is continuous at every rational and discontinuous at every irrational, because $\\mathbb{Q}$ is not $G_\\delta$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+  evidence: semantic-source
 deps: [thm-discontinuity-set-is-f-sigma, def-f-sigma-g-delta, cor-q-is-meager-and-not-g-delta, def-continuity-real, lem-rat-embeds-dense]
 justified_by: []
 aliases: []

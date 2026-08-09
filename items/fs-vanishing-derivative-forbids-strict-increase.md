@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if $f'(c) = 0$ then $f$ is not increasing on any interval containing $c$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-derivative, def-monotone-function, lem-derivative-of-a-power, thm-monotonicity-from-the-derivative, def-integer-power, lem-power-monotone, def-interval, lem-of-sign-rules, thm-algebra-of-continuous-functions, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, def-neighbourhood-r, def-interior-closure-boundary-r, def-ordered-field, def-limit-point-r]
 justified_by: []
 forward_refs: [ex-x-cubed-is-strictly-increasing-with-a-vanishing-derivative]
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Monotonic_function"
     - title: "Stationary point (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Stationary_point"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto |x|$ is continuous everywhere and not differentiable at $0$: the difference quotient equals $1$ on the right and $-1$ on the left, so the two one-sided limits differ"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-derivative, cor-differentiable-implies-continuous, def-one-sided-limits, thm-two-sided-limit-iff-both-one-sided, lem-of-abs-value, thm-algebra-of-continuous-functions, def-continuity-real, def-function-limit, def-limit-point-r, def-interval, lem-function-limit-unique, cor-of-one-positive, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -26,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Differentiable_function"
     - title: "J. Lebl, Basic Analysis I, §4.1"
       url: "https://www.jirka.org/ra/"
+    - title: "T. Gantumur, Differentiation"
+      url: "https://www.math.mcgill.ca/gantumur/math248f19/differentiation.pdf"
 pipeline_run: null
 ---
 

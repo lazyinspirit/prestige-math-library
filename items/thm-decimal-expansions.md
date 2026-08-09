@@ -4,6 +4,9 @@ kind: theorem
 title: "Base-$b$ expansions: for an integer $b \\ge 2$ every $x \\in [0,1)$ is the sum of $\\sum_{j \\ge 0} d_j / b^{\\,j+1}$ for digits $d_j < b$, and the digit sequence is unique among those that are not eventually constantly $b-1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-series, thm-geometric-series, lem-nth-term-test, lem-series-linearity, thm-recursion, thm-well-ordering-principle, thm-induction-principle, def-interval, def-integer-power, lem-power-laws, thm-nonnegative-series-bounded-partial-sums, lem-series-tail-invariance, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, lem-finite-sum-laws, thm-squeeze, thm-algebra-of-limits, lem-limit-preserves-order, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Decimal_representation"
     - title: "Positional notation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Positional_notation"
+    - title: "M365C Real Analysis"
+      url: "https://web.ma.utexas.edu/ibl1/courses/resources/m365.pdf"
 pipeline_run: null
 ---
 

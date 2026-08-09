@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every continuous real function is uniformly continuous on its domain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-continuity-real, def-uniform-continuity-real, thm-heine-cantor-r, thm-algebra-of-continuous-functions, def-interval, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-abs-value, def-ordered-field, def-integer-power]
 justified_by: []
 aliases: []
@@ -27,6 +30,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.4"
       url: "https://www.jirka.org/ra/"
+    - title: "J. Lebl, Basic Analysis I, §3.3: Uniform continuity"
+      url: "https://www.jirka.org/ra/html/sec_unifcont.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "For $|r| < 1$ the Cauchy product of $\\sum r^{k}$ with itself is $\\sum (k+1) r^{k}$, with sum $1/(1-r)^{2}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-cauchy-product-absolute, thm-mertens, def-cauchy-product, thm-geometric-series, def-absolute-and-conditional-convergence, def-integer-power, lem-power-laws, lem-of-abs-value, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, lem-of-naturals-positive, def-series]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_product"
     - title: "Geometric series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Geometric_series"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 

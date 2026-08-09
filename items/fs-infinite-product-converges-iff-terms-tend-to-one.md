@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\prod (1 + p_k)$ converges whenever $p_k \\to 0$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-infinite-product, thm-infinite-product-criterion, thm-p-series-rational, thm-nonnegative-series-bounded-partial-sums, lem-finite-sum-laws, lem-of-inverse-positive, lem-of-naturals-positive, cor-archimedean-reciprocal, def-rational-power, thm-nth-roots-exist, def-integer-power, def-divergence-to-infinity, def-series, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Infinite_product"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://ejwingler.people.ysu.edu/TBB-Real.pdf"
 pipeline_run: null
 ---
 

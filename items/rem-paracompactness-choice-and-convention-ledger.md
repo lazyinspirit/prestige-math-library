@@ -4,6 +4,9 @@ kind: remark
 title: "Choice and convention ledger for paracompactness, Stone's theorem, and partitions of unity"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-paracompact-space, thm-paracompact-hausdorff-implies-normal, thm-subordinate-partitions-of-unity-exist, lem-metric-open-covers-have-point-finite-refinements, lem-metric-point-finite-refinements-can-be-made-locally-finite, thm-stone-metric-spaces-are-paracompact]
 justified_by: []
 aliases: []
@@ -19,7 +22,7 @@ sources:
   scraped: []
   references:
     - title: "D. Ornstein, A New Proof of the Paracompactness of Metric Spaces, Proc. Amer. Math. Soc. 21 (1969), 341–342"
-      url: "https://www.ams.org/proc/1969-021-02/S0002-9939-1969-0242120-3/S0002-9939-1969-0242120-3.pdf"
+      url: "https://www.ams.org/proc/1969-021-02/"
     - title: "C. Good, I. J. Tree and W. S. Watson, On Stone's theorem and the axiom of choice"
       url: "https://doi.org/10.1090/S0002-9939-98-04163-X"
 pipeline_run: null

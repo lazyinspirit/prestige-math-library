@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\mathbb{Q}$ is a $G_\\delta$ subset of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-q-is-meager-and-not-g-delta, def-f-sigma-g-delta, thm-baire-category-r, lem-rat-embeds-dense, def-open-and-closed-in-r]
 justified_by: []
 forward_refs: [cex-irrationals-are-not-f-sigma]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/G-delta_set"
     - title: "Baire category theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Baire_category_theorem"
+    - title: "E. Zakon, Problems on Baire Categories and Linear Maps"
+      url: "https://math.libretexts.org/Bookshelves/Analysis/Mathematical_Analysis_%28Zakon%29/06%3A_Differentiation_on_E_and_Other_Normed_Linear_Spaces/6.08%3A_Baire_Categories._More_on_Linear_Maps/6.8.E%3A_Problems_on_Baire_Categories_and_Linear_Maps"
 pipeline_run: null
 ---
 

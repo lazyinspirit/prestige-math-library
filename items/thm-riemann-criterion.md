@@ -4,6 +4,9 @@ kind: theorem
 title: "Riemann's criterion: a bounded $f$ on $[a,b]$ is Darboux integrable if and only if for every real $\\varepsilon > 0$ there is a partition $P$ with $U(f,P) - L(f,P) < \\varepsilon$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-darboux-sums, def-darboux-integral, lem-refinement-inequalities, lem-sup-epsilon, lem-inf-epsilon, def-partition-and-refinement, def-bounded-set, def-infimum, def-complete-ordered-field, def-ordered-field, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 aliases: [thm-cauchy-criterion-for-integrability]
@@ -26,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Darboux_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, The Riemann Integral"
+      url: "https://www.jirka.org/ra/html/sec_rint.html"
+    - title: "J. Hunter, Chapter 11: The Riemann Integral"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch11.pdf"
 pipeline_run: null
 ---
 

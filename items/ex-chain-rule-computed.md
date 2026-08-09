@@ -4,6 +4,9 @@ kind: example
 title: "The chain rule applied to $x \\mapsto (x^{2}+1)^{5}$ and to $x \\mapsto ((3x-1)^{2}+2)^{3}$, with the Carathéodory factor written out in closed form in the first case"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-chain-rule, thm-caratheodory-characterisation, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-derivative, def-integer-power, lem-power-difference-factorisation, lem-power-laws, def-finite-sum, lem-finite-sum-laws, thm-algebra-of-continuous-functions, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r, def-continuity-real, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Chain_rule"
     - title: "Power rule (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Power_rule"
+    - title: "J. Lebl, Basic Analysis I, The Derivative"
+      url: "https://www.jirka.org/ra/html/der_chapter.html"
 pipeline_run: null
 ---
 

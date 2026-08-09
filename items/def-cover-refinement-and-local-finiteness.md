@@ -4,6 +4,9 @@ kind: definition
 title: "Refinements, locally finite families, point-finite families, and star refinements"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-compact-space, def-neighbourhood-top, def-topological-space]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
     - title: "Dartmouth Point-Set Topology, Lecture 25"
       url: "https://math.dartmouth.edu/~rmaguire/teaching/dartmouth_math_054_2022_summer/lectures/2022_summer_point_set_topology_lecture_25.pdf"
+    - title: "R. Gardner, Notes on Munkres Section 41: Paracompactness (East Tennessee State University)"
+      url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-41.pdf"
+    - title: "Paracompact space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Paracompact_space"
 pipeline_run: null
 ---
 

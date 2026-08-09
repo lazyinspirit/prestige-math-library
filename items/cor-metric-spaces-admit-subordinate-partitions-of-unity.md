@@ -4,6 +4,9 @@ kind: corollary
 title: "Under choice and dependent choice, metric open covers admit locally finite subordinate partitions of unity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-stone-metric-spaces-are-paracompact, thm-subordinate-partitions-of-unity-exist, def-metric-space, def-hausdorff-space]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "J. Robbin, Partitions of Unity"
       url: "https://people.math.wisc.edu/~jwrobbin/partitions_of_unity.pdf"
+    - title: "D. Ornstein, A New Proof of the Paracompactness of Metric Spaces, Proc. Amer. Math. Soc. 21 (1969), 341–342"
+      url: "https://www.ams.org/proc/1969-021-02/"
 pipeline_run: null
 ---
 

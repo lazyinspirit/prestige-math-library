@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming choice, refuted: paracompactness is hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [prop-compact-spaces-are-paracompact, lem-countably-compact-paracompact-hausdorff-is-compact, thm-ordinal-spaces-and-compactness, lem-ordinal-order-topology-is-t3, def-order-topology-on-an-ordinal, def-hereditary-property, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "First uncountable ordinal (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/First_uncountable_ordinal"
+    - title: "G. Gruenhage, General Topology Course Notes"
+      url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "M. Aitken, Compactness notes (California State University San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/Essays/Topology/compactness.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "$x \\mapsto \\sqrt{x}$ on $(0,1]$ is differentiable with unbounded derivative and is not Lipschitz there, so the boundedness hypothesis in the Lipschitz corollary cannot be dropped"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-bounded-derivative-implies-lipschitz, ex-derivative-of-the-nth-root-by-the-inverse-rule, def-derivative, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-bounded-set, def-interval, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-sign-rules, prop-of-multiply-inequalities, lem-power-monotone, def-integer-power, cor-differentiable-implies-continuous, def-interior-closure-boundary-r, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, lem-of-abs-value, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: true
 short: "unbounded derivative, not Lipschitz"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,6 +30,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Square_root"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
+    - title: "J. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "MIT 18.785 Number Theory I, Lecture 19"
+      url: "https://math.mit.edu/classes/18.785/2021fa/LectureNotes19.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The Cauchy product of two series: $c_n = \\sum_{k=0}^{n} a_k b_{n-k}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-series, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -22,6 +25,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_product"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "John K. Hunter, An Introduction to Real Analysis, Chapter 4"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch4.pdf"
 pipeline_run: null
 ---
 
