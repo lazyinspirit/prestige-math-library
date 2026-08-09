@@ -4,6 +4,9 @@ kind: lemma
 title: "Regularity is hereditary, without a hidden $T_1$ hypothesis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-regularity-via-closed-neighbourhoods, thm-subspace-closure-and-interior, def-hereditary-property]
 aliases: []
 landmark: true

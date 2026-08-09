@@ -4,6 +4,9 @@ kind: definition
 title: "The five completeness properties of an ordered field: least upper bound, monotone convergence, nested intervals, Bolzano-Weierstrass, and Cauchy completeness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-sequences-in-an-ordered-field, def-ordered-field, def-archimedean-field, def-complete-ordered-field, def-upper-bound]
 justified_by: []
 aliases: []
@@ -11,13 +14,23 @@ landmark: true
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: c27ae27c26e8b980ad39cec98563eb16af8b25b71020ba698d505d7eddc35a1f
+    item_sha256: e0a7b26c3c42cd591172c05ab90a852a5c4ef4e217db4cab18998696cdd078a0
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Completeness of the real numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Completeness_of_the_real_numbers"
     - title: "Least-upper-bound property (Wikipedia)"
@@ -73,19 +86,14 @@ with $x < n \cdot 1_F$.
 
 ## Remarks
 
-- **(NIP) is stated in the shrinking form, and that is a decision forced by a
-  proved fact, not a convenience.** The unrestricted nested interval property,
-  which drops the hypothesis that the lengths tend to $0$, is **false** in the
-  formal Laurent series field $\mathbb{R}((t^{-1}))$: the nested intervals
-  exhibited in [[cex-laurent-nested-intervals-empty]] have empty intersection
-  there. That field is also the only witness this library has for a Cauchy
-  complete ordered field without least upper bounds
-  ([[thm-laurent-cauchy-complete]], [[cor-laurent-not-lub-complete]]), and it
-  does satisfy the shrinking form ([[cor-laurent-nested-intervals]]). So under
-  the unrestricted reading the assertion that (NIP) alone implies (LUB) would
-  have no witness at all in this library, while under the reading above it has
-  one. The shrinking form is also the only form the bisection argument of
-  [[lem-nested-intervals-and-archimedean-imply-bw]] ever produces.
+- **(NIP) is stated in the shrinking form because that is the form both
+  satisfied by the formal Laurent series field and used by the bisection
+  theorem.** The field $\mathbb{R}((t^{-1}))$ is Cauchy complete without having
+  least upper bounds ([[thm-laurent-cauchy-complete]],
+  [[cor-laurent-not-lub-complete]]), and it satisfies shrinking (NIP)
+  ([[cor-laurent-nested-intervals]]). The same shrinking condition is exactly
+  what the bisection argument of
+  [[lem-nested-intervals-and-archimedean-imply-bw]] produces.
 
 - **"Lengths tend to $0$" is read in $F$.** For a non-Archimedean $F$ this is
   strictly stronger than the same words read in $\mathbb{R}$ through some
@@ -113,4 +121,4 @@ with $x < n \cdot 1_F$.
   while without it two of them are strictly weaker
   ([[fs-nested-intervals-implies-lub]], [[fs-cauchy-complete-implies-lub]]).
 
-- **(CC) is this library's third rendering of "Cauchy complete", and for $\mathbb{R}$ all three agree.** [[def-cauchy-in-metric]] and [[def-complete-metric-space]] read Cauchyness and completeness in a metric space, and the case $n = 1$ of [[thm-euclidean-space-complete]] proves $(\mathbb{R}, |x-y|)$ complete; [[def-real-limit]] reads both notions for real sequences, with $\varepsilon$ ranging over the positive rationals; the present definition reads them in an ordered field $F$. For $F = \mathbb{R}$ under the metric $d(x,y) = |x-y|$ of [[lem-real-line-is-a-metric-space]] the three unfold to the same quantified statement: below every positive real lies a positive rational ([[lem-rat-embeds-dense]]), so the two ranges of $\varepsilon$ pick out the same Cauchy sequences and the same convergent ones. So "$\mathbb{R}$ satisfies (CC)" is a statement this library has already proved twice, as [[thm-cauchy-criterion-via-lub]] and as the case $n = 1$ of [[thm-euclidean-space-complete]]. The parallel stops at $\mathbb{R}$. The absolute value of an ordered field takes its values in $F$, while a metric is required to take its values in $\mathbb{R}$ ([[def-metric-space]]), so for a non-Archimedean $F$ the map $(x,y) \mapsto |x-y|$ is not a metric in this library's sense and the metric development says nothing about it. That is why [[lem-of-sequence-basics]] had to be proved from the order axioms alone, although its Cauchy clauses reappear for metric spaces as [[lem-metric-convergent-implies-cauchy]], [[lem-metric-cauchy-bounded]] and [[lem-metric-cauchy-with-convergent-subsequence]]. Neither development generalises the other; they meet exactly at $\mathbb{R}$.
+- **(CC) is this library's third rendering of "Cauchy complete", and for $\mathbb{R}$ all three agree.** [[def-cauchy-in-metric]] and [[def-complete-metric-space]] read Cauchyness and completeness in a metric space, and the case $n = 1$ of [[thm-euclidean-space-complete]] proves $(\mathbb{R}, |x-y|)$ complete; [[def-real-limit]] reads both notions for real sequences, with $\varepsilon$ ranging over the positive rationals; the present definition reads them in an ordered field $F$. For $F = \mathbb{R}$ under the metric $d(x,y) = |x-y|$ of [[lem-real-line-is-a-metric-space]] the three unfold to the same quantified statement: below every positive real lies a positive rational ([[lem-rat-embeds-dense]]), so the two ranges of $\varepsilon$ pick out the same Cauchy sequences and the same convergent ones. So "$\mathbb{R}$ satisfies (CC)" is a statement this library has already proved twice, as [[thm-cauchy-criterion-via-lub]] and as the case $n = 1$ of [[thm-euclidean-space-complete]]. The parallel stops at $\mathbb{R}$. The absolute value of an ordered field takes its values in $F$, while a metric is required to take its values in $\mathbb{R}$ ([[def-metric-space]]), so for a non-Archimedean $F$ the map $(x,y) \mapsto |x-y|$ is not a metric in this library's sense and the metric development says nothing about it. That is why [[lem-of-sequence-basics]] had to be proved from the order axioms alone, although its Cauchy clauses reappear for metric spaces as [[lem-metric-convergent-implies-cauchy]], [[lem-metric-cauchy-bounded]] and [[lem-metric-cauchy-with-convergent-subsequence]]. Neither development generalises the other; the comparison above identifies their agreement at $\mathbb{R}$ without claiming that $\mathbb{R}$ is their only overlap.

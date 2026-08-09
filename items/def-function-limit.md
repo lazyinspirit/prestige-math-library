@@ -4,6 +4,9 @@ kind: definition
 title: "The $\\varepsilon$-$\\delta$ limit $\\lim_{x \\to c} f(x) = L$ of $f : A \\to \\mathbb{R}$ at a limit point $c$ of $A$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-limit-point-r, def-neighbourhood-r, def-interval, def-real-order, def-complete-ordered-field, lem-of-abs-value, lem-rat-embeds-dense]
 justified_by: [lem-function-limit-unique]
 aliases: [def-epsilon-delta-limit, def-limit-of-a-function]
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4 (Def. 4.1)"

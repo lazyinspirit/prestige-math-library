@@ -4,6 +4,9 @@ kind: lemma
 title: "If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-function-limit, def-neighbourhood-r, def-limit-point-r, cor-of-reverse-triangle, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: [lem-sign-preservation-for-function-limits]
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"

@@ -4,21 +4,27 @@ kind: false-statement
 title: "FALSE: the nested interval property alone implies the least-upper-bound property"
 status: published
 origin: session
-deps: [cex-laurent-nested-intervals-empty, thm-completeness-equivalences, def-completeness-properties, def-archimedean-field, def-sequences-in-an-ordered-field, def-complete-ordered-field, cor-laurent-nested-intervals, cor-laurent-not-lub-complete, lem-laurent-non-archimedean, thm-laurent-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-completeness-equivalences, def-completeness-properties, def-archimedean-field, def-sequences-in-an-ordered-field, def-complete-ordered-field, cor-laurent-nested-intervals, cor-laurent-not-lub-complete, lem-laurent-non-archimedean, thm-laurent-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Nested intervals (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nested_intervals"
     - title: "Archimedean property (Wikipedia)"
@@ -39,9 +45,7 @@ is the formal Laurent series field $K = \mathbb{R}((t^{-1}))$, which satisfies
 (NIP) and has no least upper bound for the set of its own canonical naturals.
 
 Note that the false claim is being refuted in the *shrinking* form of (NIP),
-which is the weaker hypothesis and therefore the harder claim to refute; the
-unrestricted form fails in $K$ outright ([[cex-laurent-nested-intervals-empty]]),
-so a refutation stated against it would prove much less.
+which is the weaker hypothesis and therefore makes the implication stronger.
 
 ## Facts & Assumptions
 
@@ -73,20 +77,8 @@ so a refutation stated against it would prove much less.
 
 ## Remarks
 
-- **The failure is not an accident of one field.** By
-  [[lem-lub-implies-nested-intervals]] every field with (LUB) is Archimedean, so
-  any witness at all must be non-Archimedean; and in a non-Archimedean field the
-  shrinking hypothesis in (NIP) is a severe restriction, because a length that
-  tends to $0$ in the order of the field must get below every infinitesimal.
-  That is why $K$ satisfies the shrinking form while failing the unrestricted
-  one, and it is why $K$ can satisfy (NIP) while failing (LUB) at all.
+- **The failure is not an accident of one field.** By [[lem-lub-implies-nested-intervals]] every field with (LUB) is Archimedean, so any witness at all must be non-Archimedean; and in a non-Archimedean field the shrinking hypothesis in (NIP) is a severe restriction, because a length that tends to $0$ in the order of the field must get below every infinitesimal. That is why checking shrinking (NIP) in $K$ is substantive, and why $K$ can satisfy (NIP) while failing (LUB) at all.
 
-- **$\mathbb{R}(t)$ will not do as a witness**, although it is the library's
-  other non-Archimedean ordered field ([[cex-ordered-field-not-archimedean]]).
-  Nothing in this library establishes any nested interval property for it, and
-  the page that built $K$ says why a new field was constructed rather than
-  reusing that one.
+- **$\mathbb{R}(t)$ will not do as a witness**, although it is the library's other non-Archimedean ordered field ([[cex-ordered-field-not-archimedean]]). Nothing in this library establishes any nested interval property for it, and the page that built $K$ says why a new field was constructed rather than reusing that one.
 
-- **The companion failure** is [[fs-cauchy-complete-implies-lub]], refuted by the
-  same field. Together they are the exact content of the Archimedean hypotheses
-  in clauses 2 and 4 of [[thm-completeness-equivalences]].
+- **The companion failure** is [[fs-cauchy-complete-implies-lub]], refuted by the same field. Together they are the exact content of the Archimedean hypotheses in clauses 2 and 4 of [[thm-completeness-equivalences]].

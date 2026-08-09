@@ -4,6 +4,9 @@ kind: lemma
 title: "The monotone convergence property plus the Archimedean property imply the least-upper-bound property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, def-complete-ordered-field, def-upper-bound, thm-recursion, thm-induction-principle, thm-nat-linear-order, def-integer-power, lem-bernoulli-inequality, lem-of-inverse-positive, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, lem-of-abs-value, lem-of-triangle-inequality, lem-of-sequence-basics, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Least-upper-bound property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Least-upper-bound_property"
     - title: "Monotone convergence theorem (Wikipedia)"

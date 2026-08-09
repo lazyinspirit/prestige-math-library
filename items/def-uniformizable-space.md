@@ -4,6 +4,9 @@ kind: definition
 title: "Uniformizable and separated-uniformizable topological spaces"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [thm-uniformity-induces-a-topology, def-separated-uniform-space, def-topological-space]
 aliases: []
 landmark: true
@@ -16,7 +19,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 

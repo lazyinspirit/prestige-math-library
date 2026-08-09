@@ -4,6 +4,9 @@ kind: counterexample
 title: "$a_k = 2^{-k+(-1)^k}$ has ratio limsup $2$ and liminf $1/8$, so the ratio test fails, while the root test gives convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-ratio-test, thm-root-test, cor-root-test-dominates-ratio-test, def-limsup-liminf, lem-limsup-exists, def-integer-power, lem-alternating-sequence, fs-ratio-and-root-limits-always-agree, def-series, def-rational-power, lem-power-monotone, lem-power-laws, lem-of-abs-value, lem-series-tail-invariance]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Root_test"
     - title: "Ratio test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ratio_test"
+    - title: "CSUDH notes on the ratio and root tests"
+      url: "https://math.csudh.edu/~pong/a3/Notes_01.html"
 pipeline_run: null
 ---
 

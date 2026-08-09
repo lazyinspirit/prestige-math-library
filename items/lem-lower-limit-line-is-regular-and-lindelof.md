@@ -4,6 +4,9 @@ kind: lemma
 title: "The lower-limit line has a clopen basis, is regular, and is Lindelöf under countable choice"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lower-limit-topology, lem-regularity-via-closed-neighbourhoods, def-compactness-variants, thm-rationals-countable, lem-rat-embeds-dense, def-countable-choice]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, Sorgenfrey line"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
 pipeline_run: null
 ---
 

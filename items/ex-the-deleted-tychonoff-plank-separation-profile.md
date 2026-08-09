@@ -4,6 +4,9 @@ kind: example
 title: "Assuming countable choice, the deleted Tychonoff plank worked as $T_3$ but not normal inside its compact Hausdorff normal parent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [lem-deleted-tychonoff-plank-is-regular-and-nonnormal]
 aliases: []
 landmark: false
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, deleted Tychonoff plank"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Tychonoff plank (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_plank"
 pipeline_run: null
 ---
 

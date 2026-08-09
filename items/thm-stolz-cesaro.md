@@ -4,6 +4,9 @@ kind: theorem
 title: "Stolz-Cesaro, $\\infty/\\infty$ form: if $b_k$ is strictly increasing and unbounded and $(a_{k+1}-a_k)/(b_{k+1}-b_k) \\to L$ then $a_k/b_k \\to L$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence, def-monotone-sequence, def-bounded-set, def-divergence-to-infinity, lem-monotone-unbounded-diverges, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, lem-of-triangle-inequality, def-real-limit, lem-rat-embeds-dense, lem-of-inverse-positive, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value, thm-algebra-of-limits, lem-reciprocal-of-null-diverges, lem-limit-of-tail, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 forward_refs: [cex-stolz-cesaro-converse-fails]
 justified_by: []

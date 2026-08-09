@@ -7,8 +7,8 @@
 // same item. At most 32 calls run combined under a two-model lineup.
 // Retry backoffs return work to this scheduler, releasing that model's slot so
 // unrelated calls in the same lane can continue. No result influences the other.
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
-import { spawn, spawnSync } from "node:child_process";
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
+import { spawn } from "node:child_process";
 import { tsxLoader } from "./paths.mjs";
 
 const argv = process.argv.slice(2);
@@ -112,15 +112,42 @@ if (existsSync(ledger)) {
 let loader;
 try { loader = tsxLoader(); }
 catch (cause) { console.error(`[judge-sweep] ${cause.message}`); process.exit(2); }
-const currentContextHash = (id) => {
-  const result = spawnSync(process.execPath, ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], {
-    encoding: "utf8",
-    env: process.env,
-  });
-  if (result.status !== 0) {
+let childCaptureSerial = 0;
+const captureChild = (args, env) => new Promise((resolve, reject) => {
+  const prefix = `/tmp/prestige-math-library-judge-capture-${process.pid}-${childCaptureSerial += 1}`;
+  const stdoutPath = `${prefix}.stdout`;
+  const stderrPath = `${prefix}.stderr`;
+  const stdoutFd = openSync(stdoutPath, "w");
+  const stderrFd = openSync(stderrPath, "w");
+  let settled = false;
+  const finish = (callback) => {
+    if (settled) return;
+    settled = true;
+    closeSync(stdoutFd);
+    closeSync(stderrFd);
+    const stdout = readFileSync(stdoutPath, "utf8");
+    const stderr = readFileSync(stderrPath, "utf8");
+    rmSync(stdoutPath, { force: true });
+    rmSync(stderrPath, { force: true });
+    callback(stdout, stderr);
+  };
+  const child = spawn(process.execPath, args, { stdio: ["ignore", stdoutFd, stderrFd], env });
+  child.on("error", (cause) => finish(() => reject(cause)));
+  child.on("close", (code) => finish((stdout, stderr) => resolve({ code: code ?? 2, stdout, stderr })));
+});
+const currentContextHash = async (id) => {
+  let result;
+  try {
+    result = await captureChild(["--import", loader, "tools/judge.mts", `items/${id}.md`, "--context-hash"], process.env);
+  } catch (cause) {
+    throw new Error(`${id}: could not start current judge context build — ${cause.message}`);
+  }
+  if (result.code !== 0) {
     throw new Error(`${id}: could not build current judge context — ${result.stderr.trim()}`);
   }
-  const row = JSON.parse(result.stdout);
+  let row;
+  try { row = JSON.parse(result.stdout); }
+  catch (cause) { throw new Error(`${id}: malformed current context hash output — ${cause.message}`); }
   if (row.id !== id || typeof row.context_sha256 !== "string") {
     throw new Error(`${id}: malformed current context hash`);
   }
@@ -129,7 +156,8 @@ const currentContextHash = (id) => {
 // Both model queues attest against the identical current prompt. Build its hash
 // once per item rather than parsing the same A/B-pair context twice before any
 // API call can start.
-const currentHashes = new Map(ids.map((id) => [id, currentContextHash(id)]));
+const currentHashes = new Map();
+for (const id of ids) currentHashes.set(id, await currentContextHash(id));
 // Owner policy, 2026-08-01: cap each judge lane independently — 16 per lane,
 // so at most 32 calls combined under a two-model lineup.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
@@ -265,20 +293,11 @@ const runAttempt = async (task) => {
   const releaseSlot = await acquireModelSlot(model);
   heldSlotReleases.add(releaseSlot);
   try {
-    return await new Promise((resolve) => {
-      let stdout = "";
-      let stderr = "";
-      let settled = false;
-      const finish = (result) => {
-        if (settled) return;
-        settled = true;
-        if (stdout) process.stdout.write(stdout);
-        if (stderr) process.stderr.write(stderr);
-        resolve(result);
-      };
-      const child = spawn(process.execPath, ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--model", model], {
-        stdio: ["ignore", "pipe", "pipe"],
-        env: {
+    let captured;
+    try {
+      captured = await captureChild(
+        ["--import", loader, "tools/judge.mts", `items/${id}.md`, "--model", model],
+        {
           ...process.env,
           JUDGE_VERDICTLOG: ledger,
           JUDGE_COSTLOG: cost,
@@ -288,30 +307,27 @@ const runAttempt = async (task) => {
           JUDGE_RETRY_ALLOWED: task.attempt < 2 ? "1" : "0",
           JUDGE_DEEPSEEK_LENGTH_FALLBACK: task.lengthFallback ? "1" : "0",
         },
-      });
-      child.stdout.on("data", (chunk) => { stdout += chunk; });
-      child.stderr.on("data", (chunk) => { stderr += chunk; });
-      child.on("error", (error) => {
-        console.error(`[judge-sweep] ${id}: could not start judge — ${String(error)}`);
-        finish({ code: 2, retry_after_ms: null });
-      });
-      child.on("close", (exitCode) => {
-        const code = exitCode ?? 2;
-        let retry_after_ms = null;
-        if (code === RETRY_EXIT || code === LENGTH_RETRY_EXIT) {
-          for (const line of stdout.trim().split("\n").reverse()) {
-            try {
-              const control = JSON.parse(line);
-              if (control.retry) {
-                retry_after_ms = Number.isFinite(control.retry_after_ms) ? control.retry_after_ms : null;
-                break;
-              }
-            } catch { /* another diagnostic line, not the retry control record */ }
+      );
+    } catch (error) {
+      console.error(`[judge-sweep] ${id}: could not start judge — ${String(error)}`);
+      return { code: 2, retry_after_ms: null };
+    }
+    const { code, stdout, stderr } = captured;
+    if (stdout) process.stdout.write(stdout);
+    if (stderr) process.stderr.write(stderr);
+    let retry_after_ms = null;
+    if (code === RETRY_EXIT || code === LENGTH_RETRY_EXIT) {
+      for (const line of stdout.trim().split("\n").reverse()) {
+        try {
+          const control = JSON.parse(line);
+          if (control.retry) {
+            retry_after_ms = Number.isFinite(control.retry_after_ms) ? control.retry_after_ms : null;
+            break;
           }
-        }
-        finish({ code, retry_after_ms });
-      });
-    });
+        } catch { /* another diagnostic line, not the retry control record */ }
+      }
+    }
+    return { code, retry_after_ms };
   } finally {
     heldSlotReleases.delete(releaseSlot);
     releaseSlot();

@@ -4,6 +4,9 @@ kind: corollary
 title: "Stolz-Cesaro, $0/0$ form: if $b_k$ is strictly decreasing to $0$, $a_k \\to 0$, and the difference quotient converges, then $a_k/b_k$ converges to the same value"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-sequence, def-monotone-sequence, def-real-limit, lem-rat-embeds-dense, thm-algebra-of-limits, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, lem-limit-preserves-order, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, lem-of-abs-value, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

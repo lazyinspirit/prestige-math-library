@@ -4,6 +4,9 @@ kind: definition
 title: "The dyadic rationals of $[0,1]$, their finite levels $D_n$, and their density in $[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-interval, def-integer-power, def-canonical-natural, def-nat-power,
        cor-archimedean-reciprocal, def-ordered-field, def-natural-numbers,
        def-nat-order, thm-induction-principle, thm-well-ordering-principle,

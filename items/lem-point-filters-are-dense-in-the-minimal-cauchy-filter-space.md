@@ -4,26 +4,30 @@ kind: lemma
 title: "The minimal Cauchy filters associated to points define a uniformly continuous dense canonical map"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-minimal-cauchy-filter-associated-to-a-cauchy-filter, lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity, def-uniformly-continuous-map, thm-uniformity-induces-a-topology, def-interior-closure-boundary-top, lem-symmetric-entourages-form-a-base]
 aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "J. H. V. Hunt, Boletín de la Sociedad Matemática Mexicana 34 (1989), 11–21", url: "https://www.boletin.math.org.mx/pdf/2/34/BSMM%282%29.34.11-21.pdf"}]
 pipeline_run: null
 ---
 
 ## Statement
 
-The map $\eta:X\to\widehat X$ sending $x$ to the minimal Cauchy filter associated to its principal filter is uniformly continuous and has dense image.
+The map $\eta:X\to\widehat X$ sending $x$ to the minimal Cauchy filter associated to its principal filter is uniformly continuous and has dense image. For every $x\in X$, every member of $\eta(x)$ contains $x$.
 
 ## Facts & Assumptions
 
@@ -41,7 +45,7 @@ The map $\eta:X\to\widehat X$ sending $x$ to the minimal Cauchy filter associate
 
 **Proof technique:** constructive.
 
-1.1 Define $\eta(x)$ to be the minimal filter associated to the principal filter at $x$. [L1, construct]
+1.1 Define $\eta(x)$ to be the minimal filter associated to the principal filter $\mathcal P_x$ at $x$. Since $\eta(x)=m(\mathcal P_x)\subseteq\mathcal P_x$, every member of $\eta(x)$ contains $x$. [L1, construct]
 
 1.2 Let $\widehat E[\mathcal F]$ be a basic neighbourhood. Choose a symmetric $D$ with $D^{\circ2}\subseteq E$, a $D$-small $A\in\mathcal F$, and $a\in A$. The point filter $\eta(a)$ contains $D[a]$, and $D[a]\times A\subseteq D^{\circ2}\subseteq E$, so $\eta(a)\in\widehat E[\mathcal F]$. Thus every basic neighbourhood meets $\eta[X]$. [L1, L2, L3, L4, choose]
 

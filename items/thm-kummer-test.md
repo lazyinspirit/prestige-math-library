@@ -4,6 +4,9 @@ kind: theorem
 title: "Kummer: for positive terms $a_k$ and weights $\\zeta_k > 0$, $\\liminf(\\zeta_k a_k/a_{k+1} - \\zeta_{k+1}) > 0$ gives convergence, and if $\\sum 1/\\zeta_k$ diverges while that expression is eventually $\\le 0$ the series diverges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-series, thm-direct-comparison-test, def-limsup-liminf, lem-limsup-exists, lem-telescoping-series, def-monotone-sequence, thm-monotone-convergence, def-extended-reals, lem-extended-reals-complete, lem-series-tail-invariance, lem-series-linearity, thm-induction-principle, lem-of-inverse-positive, def-bounded-set, thm-geometric-series, lem-power-laws, def-integer-power, lem-nth-term-test]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Convergence_tests"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+    - title: "Binghamton University notes on Kummer, Raabe, and Gauss tests"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch5.pdf"
 pipeline_run: null
 ---
 

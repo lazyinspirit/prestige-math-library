@@ -4,6 +4,11 @@ kind: counterexample
 title: "$a_k = (-1)^k$, $b_k = k$ have $a_k/b_k \\to 0$ while the difference quotient oscillates, so Stolz-Cesaro has no converse"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-stolz-cesaro, lem-alternating-sequence, fs-bounded-implies-convergent, thm-algebra-of-limits, cor-archimedean-reciprocal, thm-of-archimedean, def-monotone-sequence, def-bounded-set, def-real-limit, def-sequence, lem-limit-of-tail, lem-limit-unique, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

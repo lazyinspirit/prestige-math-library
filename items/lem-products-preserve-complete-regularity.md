@@ -4,6 +4,9 @@ kind: lemma
 title: "Arbitrary products of completely regular spaces are completely regular"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-product-topology, thm-product-universal-property, def-completely-regular-and-tychonoff-spaces, lem-finite-minima-of-continuous-unit-interval-maps, lem-finite-choice]
 aliases: []
 landmark: true

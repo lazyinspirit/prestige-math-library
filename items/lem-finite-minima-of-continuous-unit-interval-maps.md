@@ -4,22 +4,31 @@ kind: lemma
 title: "Finite pointwise minima of continuous maps to $[0,1]$ are continuous"
 status: published
 origin: session
-deps: [def-continuous-map-top, def-product-topology, thm-product-universal-property, thm-continuity-characterisations-top, def-interval]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-continuous-map-top, def-product-topology, thm-product-universal-property,
+       thm-continuity-characterisations-top, def-interval,
+       lem-real-line-is-a-metric-space, def-topology-basis-subbasis,
+       def-subspace-topology-top]
 aliases: []
 landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "J. R. Munkres, Topology, 2nd ed., §18"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Boundedness Properties in Functionlattices (Canadian Journal of Mathematics)"
+      url: "https://www.cambridge.org/core/journals/canadian-journal-of-mathematics/article/boundedness-properties-in-functionlattices/E0BB364483D015D69B96D40631B4F805"
 pipeline_run: null
 ---
 
@@ -33,7 +42,7 @@ If $f_0,\ldots,f_{n-1}:X\to[0,1]$ are continuous, then $x\mapsto\min_{i<n}f_i(x)
 
 [F1] The product of two continuous maps is continuous into the product, and a map is continuous exactly when inverse images of open sets are open ([[thm-product-universal-property]], [[thm-continuity-characterisations-top]]).
 
-[F2] The open intervals form the usual open-set basis of $[0,1]$ as a subspace of $\mathbb R$ ([[def-interval]], [[def-continuous-map-top]]).
+[F2] In the usual topology of $\mathbb R$, a set is open exactly when each of its points lies in a bounded open interval contained in it; bases trace to subspaces, so the sets $(a,b)\cap[0,1]$ form a basis for $[0,1]$ ([[lem-real-line-is-a-metric-space]], clause 3; [[def-topology-basis-subbasis]]; [[def-subspace-topology-top]]).
 
 ## Proof
 

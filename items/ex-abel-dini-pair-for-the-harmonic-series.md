@@ -4,6 +4,9 @@ kind: example
 title: "Abel-Dini applied to $\\sum 1/k$: $\\sum 1/(k s_k)$ still diverges while $\\sum 1/(k s_k^2)$ converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-abel-dini, ex-harmonic-series-diverges, def-series, def-finite-sum, lem-of-naturals-positive, def-integer-power, lem-of-inverse-positive]
 justified_by: []
 aliases: []
@@ -12,10 +15,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: 3c9528ae54651082cbfbea6c824f87b31a909cdd650b74491a3d33ca6f18289c
+    item_sha256: 121eeb740e76f3ee820cad08053c898d3b349449bcddbe0c8bf3dbea050cfeaf
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +34,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "Abel-Dini-Pringsheim theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Abel%E2%80%93Dini%E2%80%93Pringsheim_theorem"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -42,11 +57,13 @@ $$\sum_{n} \frac{a_n}{S_n} \;=\; \sum_{n} \frac{1}{(n+1)\,H_{n+1}} \quad \text{d
 Classically these are written $\sum_{k \ge 1} 1/(k H_k)$ and
 $\sum_{k \ge 1} 1/(k H_k^{2})$, with $H_k = 1 + 1/2 + \dots + 1/k$.
 
-**What the pair shows.** The harmonic series already diverges as slowly as any
-explicit series on this page, and dividing its terms by the running total
+**What the pair shows.** The harmonic series is a familiar slowly divergent
+explicit series, and dividing its terms by the running total
 produces something that diverges more slowly still. Dividing by the square of the
-running total overshoots into convergence. So the two exponents $1$ and $2$
-straddle the boundary, and there is no last divergent series in the family.
+running total overshoots into convergence. So exponent $1$ gives a divergent
+member and exponent $2$ a convergent one. The absence of a slowest divergent
+positive series comes from applying Abel-Dini again to the newly produced
+divergent series, not from a last-exponent claim about this fixed pair.
 
 ## Facts & Assumptions
 

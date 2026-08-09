@@ -4,6 +4,9 @@ kind: theorem
 title: "Sums, scalar multiples, products and quotients of function limits, the quotient under the hypothesis that the denominator limit is nonzero"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-function-limit, lem-function-limit-unique, def-limit-point-r, def-neighbourhood-r, lem-limit-is-local, lem-limit-implies-local-boundedness, lem-sign-preservation-near-a-limit, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive, def-ordered-field, def-field]
 justified_by: []
 aliases: [thm-limit-laws-for-functions]
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4 (Thm 4.4)"

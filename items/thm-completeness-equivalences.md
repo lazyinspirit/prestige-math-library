@@ -1,9 +1,12 @@
 ---
 id: thm-completeness-equivalences
 kind: theorem
-title: "For an ordered field the five completeness properties are equivalent, provided the Archimedean property is assumed alongside monotone convergence, nested intervals and Cauchy completeness"
+title: "For an ordered field the five completeness properties are equivalent, provided the Archimedean property is assumed alongside nested intervals and Cauchy completeness"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-archimedean-field, lem-lub-implies-nested-intervals, lem-nested-intervals-and-archimedean-imply-bw, lem-bw-implies-archimedean, lem-bw-implies-cauchy-complete, lem-cauchy-complete-and-archimedean-imply-mct, lem-mct-implies-archimedean, lem-mct-implies-lub]
 justified_by: []
 aliases: []
@@ -11,14 +14,17 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Completeness of the real numbers (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Completeness_of_the_real_numbers"
     - title: "Least-upper-bound property (Wikipedia)"
@@ -98,27 +104,8 @@ arrow being one lemma of this page.
 
 ## Remarks
 
-- **What the cycle costs.** Seven lemmas suffice for the whole equivalence,
-  because a single cycle through all five statements yields every implication
-  between them, and the arrangement is chosen so that no lemma has to carry an
-  Archimedean hypothesis it cannot discharge. Statement 3 is deliberately the
-  hinge: (BW) is the one property that both implies (ARCH) and is implied by a
-  nested interval argument, so the cycle can enter and leave it without an extra
-  hypothesis.
+- **What the cycle costs.** Seven lemmas suffice for the whole equivalence, because a single cycle through all five statements yields every implication between them, and the arrangement is chosen so that no lemma has to carry an Archimedean hypothesis it cannot discharge. Statement 3 is deliberately the hinge: (BW) is the one property that both implies (ARCH) and is implied by a nested interval argument, so the cycle can enter and leave it without an extra hypothesis.
 
-- **Read as a statement about $\mathbb{R}$**, the theorem says that the five
-  familiar theorems of a first analysis course are not five theorems but one,
-  and that the least-upper-bound axiom could have been replaced by any of the
-  other four (with (ARCH) alongside, where required). This library takes (LUB)
-  as the axiom ([[def-complete-ordered-field]]) and proves the others from it on
-  earlier pages; nothing here re-proves them for $\mathbb{R}$, and nothing here
-  may be cited as a proof about $\mathbb{R}$ that is not already there.
+- **Read as a statement about $\mathbb{R}$**, the theorem says that the five familiar theorems of a first analysis course are not five theorems but one, and that the least-upper-bound axiom could have been replaced by any of the other four (with (ARCH) alongside, where required). This library takes (LUB) as the axiom ([[def-complete-ordered-field]]) and proves the others from it on earlier pages; nothing here re-proves them for $\mathbb{R}$, and nothing here may be cited as a proof about $\mathbb{R}$ that is not already there.
 
-- **The two failures are genuinely different from the three successes.** (NIP)
-  and (CC) are both statements about sequences whose data are already close
-  together, and neither of them ever produces a new element far away; that is
-  why an infinitesimal layer can be added to a field without disturbing them,
-  and why the naturals can stay bounded. (LUB), (BW) and (MCT) each quantify
-  over an object that is only assumed *bounded*, so each of them can be tested
-  against the canonical naturals themselves, and each fails at once when those
-  are bounded. [[rem-where-the-archimedean-hypothesis-is-needed]] develops this.
+- **The two failures are genuinely different from the three successes.** (NIP) and (CC) are both statements about sequences whose data are already close together, and neither of them ever produces a new element far away; that is why an infinitesimal layer can be added to a field without disturbing them, and why the naturals can stay bounded. (LUB), (BW) and (MCT) each quantify over an object that is only assumed *bounded*, so each of them can be tested against the canonical naturals themselves, and each fails at once when those are bounded. [[rem-where-the-archimedean-hypothesis-is-needed]] develops this.

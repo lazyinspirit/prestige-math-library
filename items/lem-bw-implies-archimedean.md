@@ -4,6 +4,9 @@ kind: lemma
 title: "Bolzano-Weierstrass alone forces the Archimedean property, so it needs no separate Archimedean hypothesis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, def-ordered-field, lem-of-add-order, lem-of-abs-value, lem-of-naturals-positive, lem-of-sequence-basics, cor-of-one-positive, lem-nat-discrete]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
     - title: "Bolzano-Weierstrass theorem (Wikipedia)"

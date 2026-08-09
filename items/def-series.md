@@ -4,6 +4,9 @@ kind: definition
 title: "Series, partial sums, convergence and the sum, divergence, and the tail series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-finite-sum, def-sequence, def-real-limit, def-real-numbers, lem-limit-unique]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §7.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

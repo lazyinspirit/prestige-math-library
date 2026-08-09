@@ -4,6 +4,9 @@ kind: lemma
 title: "Assuming dependent choice, every uniformizable space is completely regular"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-uniformizable-space, lem-normal-sequences-of-entourages, lem-pseudometric-from-a-normal-entourage-sequence, def-completely-regular-and-tychonoff-spaces, def-dependent-choice, thm-uniformity-induces-a-topology, thm-uniformly-continuous-maps-are-continuous, lem-metric-uniformity-dictionary]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}, {title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
 pipeline_run: null
 ---
 

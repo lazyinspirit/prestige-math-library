@@ -4,6 +4,9 @@ kind: lemma
 title: "$T_0$, $T_1$, and Hausdorffness are hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-t0-and-t1-spaces, def-hausdorff-space, def-subspace-topology-top, def-hereditary-property]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §§5–6"
       url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

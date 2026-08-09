@@ -4,6 +4,11 @@ kind: counterexample
 title: "In the $K$-topology on $\\mathbb{R}$ the closed set $K \\cup \\{0\\}$ carries a continuous two-valued function with no continuous extension"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-tietze-extension-theorem, lem-the-k-topology-is-hausdorff-and-not-regular,
        def-normal-and-t4-spaces, def-regular-and-t3-spaces, def-t0-and-t1-spaces,
        thm-t4-implies-t3, def-subspace-topology-top, def-continuous-map-top,

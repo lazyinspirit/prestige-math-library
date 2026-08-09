@@ -4,6 +4,9 @@ kind: example
 title: "$\\sum_{k \\ge 1} 1/(k(k+1)) = 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-telescoping-series, def-series, cor-archimedean-reciprocal, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, def-finite-sum, ex-harmonic-series-diverges]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Telescoping series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Telescoping_series"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

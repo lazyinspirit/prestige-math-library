@@ -4,6 +4,9 @@ kind: lemma
 title: "Integer part: for every real $x$ there is exactly one integer $m$ with $m \\le x < m + 1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-integers, def-natural-numbers, lem-nat-embeds-int, lem-int-embeds-rat, lem-rat-embeds-dense, lem-nat-discrete, thm-int-ordered-ring, thm-int-comm-ring, thm-of-archimedean, thm-well-ordering-principle, thm-induction-principle, lem-of-naturals-positive, lem-of-add-order, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: [lem-floor-function, lem-floor-exists]

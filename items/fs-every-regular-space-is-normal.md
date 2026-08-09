@@ -4,6 +4,9 @@ kind: false-statement
 title: "Assuming countable choice, refuted: every regular space is normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-deleted-tychonoff-plank-is-regular-and-nonnormal, def-regular-and-t3-spaces, def-normal-and-t4-spaces]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, deleted Tychonoff plank"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Tychonoff plank (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_plank"
+    - title: "Sierpinski space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sierpi%C5%84ski_space"
 pipeline_run: null
 ---
 

@@ -4,6 +4,11 @@ kind: example
 title: "The sets $U_0, U_1, U_{1/2}, U_{1/4}, U_{3/4}$ of the Urysohn construction computed for two disjoint closed subsets of $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-urysohn-lemma, def-the-dyadic-rationals-of-the-unit-interval,
        lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
        lem-normality-via-shrinking, def-normal-and-t4-spaces,

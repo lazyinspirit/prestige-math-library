@@ -1,33 +1,37 @@
 ---
 id: thm-three-definitions-of-uniform-space-are-equivalent
 kind: theorem
-title: "Entourages and uniform covers give equivalent definitions of a uniform space in ZF, and under dependent choice they are also equivalent to gauges of pseudometrics"
+title: "On a nonempty set, entourages and uniform covers give equivalent definitions of a uniform space in ZF, and under dependent choice they are also equivalent to gauges of pseudometrics"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-entourage-and-uniform-cover-dictionary, thm-entourage-uniformities-are-generated-by-gauges, def-gauge-of-pseudometrics, def-dependent-choice]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 
 ## Statement
 
-In ZF, the entourage and uniform-cover formulations determine each other. Assuming dependent choice, they are also equivalent to the formulation by gauges of pseudometrics.
+In ZF, on a nonempty set, the entourage and uniform-cover formulations determine each other. Assuming dependent choice, they are also equivalent to the formulation by gauges of pseudometrics.
 
 ## Facts & Assumptions
 
-**Given:** A uniform structure on a set $X$ in any one of the named formulations.
+**Given:** A uniform structure on a nonempty set $X$ in any one of the named formulations.
 
 [L1] Entourage uniformities and uniform-cover structures determine each other in ZF ([[lem-entourage-and-uniform-cover-dictionary]]).
 

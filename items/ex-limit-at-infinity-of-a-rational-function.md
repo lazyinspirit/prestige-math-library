@@ -4,6 +4,11 @@ kind: example
 title: "$(3x^2 - 1)/(x^2 + x) \\to 3$ as $x \\to +\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [def-limits-at-infinity, def-bounded-set, def-interval, def-integer-power, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-sign-rules, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, def-field, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

@@ -4,20 +4,24 @@ kind: example
 title: "The map $x\\mapsto x/(1+|x|)$ is a uniformly continuous homeomorphism from $\\mathbb{R}$ to $(-1,1)$ whose inverse is not uniformly continuous"
 status: published
 origin: session
-deps: [lem-metric-uniformity-dictionary, def-uniform-embedding-and-uniform-isomorphism, def-homeomorphism-and-open-maps, lem-of-abs-value, cor-archimedean-reciprocal]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [lem-metric-uniformity-dictionary, def-uniform-embedding-and-uniform-isomorphism, def-homeomorphism-and-open-maps, lem-of-abs-value, cor-archimedean-reciprocal, lem-of-triangle-inequality]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: []
 pipeline_run: null
 ---
 
@@ -31,7 +35,7 @@ The function $h(x)=x/(1+|x|)$ maps $\mathbb R$ onto $(-1,1)$ with inverse $h^{-1
 
 [L1] The metric dictionary translates metric uniform continuity into uniform continuity ([[lem-metric-uniformity-dictionary]]).
 
-[L2] Absolute value is nonnegative and satisfies the triangle inequality consequences used in the estimates ([[lem-of-abs-value]]).
+[L2] Absolute value is nonnegative ([[lem-of-abs-value]]) and satisfies the triangle inequality ([[lem-of-triangle-inequality]]).
 
 [L3] The reciprocal form of the Archimedean property says that $1/n\to0$ ([[cor-archimedean-reciprocal]]).
 

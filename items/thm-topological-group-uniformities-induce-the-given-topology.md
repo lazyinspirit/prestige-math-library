@@ -4,6 +4,9 @@ kind: theorem
 title: "The left and right uniformities of a topological group induce its topology, and inversion interchanges them"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-left-and-right-uniformities-of-a-topological-group, lem-topological-group-translations-and-inversion, thm-uniformity-induces-a-topology]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
 pipeline_run: null
 ---
 

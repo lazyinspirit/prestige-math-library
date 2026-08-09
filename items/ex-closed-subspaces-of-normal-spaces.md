@@ -4,6 +4,9 @@ kind: example
 title: "Closed subspaces inherit normality: compact intervals, ordinal endpoints, and finite closed pieces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [lem-normality-is-closed-hereditary, thm-a-compact-hausdorff-space-is-regular-and-normal]
 aliases: []
 landmark: false
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "J. R. Munkres, Topology, 2nd ed., §31"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
+    - title: "Tychonoff plank (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_plank"
 pipeline_run: null
 ---
 

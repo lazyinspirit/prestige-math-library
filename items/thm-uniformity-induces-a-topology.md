@@ -4,6 +4,9 @@ kind: theorem
 title: "The sets containing an entourage ball about each of their points form a topology"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-uniform-space-by-entourages, lem-symmetric-entourages-form-a-base, def-topological-space, def-neighbourhood-top]
 aliases: []
 landmark: true

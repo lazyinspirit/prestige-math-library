@@ -4,6 +4,9 @@ kind: definition
 title: "Uniform embedding and uniform isomorphism"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-uniformly-continuous-map, def-injection-surjection-bijection]
 aliases: []
 landmark: true
@@ -16,7 +19,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
 pipeline_run: null
 ---
 

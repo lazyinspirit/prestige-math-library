@@ -4,6 +4,11 @@ kind: example
 title: "A Urysohn function for $(-\\infty, 0]$ and $[1, \\infty)$ in $\\mathbb{R}$, written down and checked against the definition"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-urysohn-lemma, def-normal-and-t4-spaces, thm-metric-spaces-are-completely-normal,
        def-continuity-real, thm-algebra-of-continuous-functions, def-interval,
        def-continuous-map-top]
@@ -15,15 +20,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-09
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -64,6 +65,10 @@ continuous, with $A \subseteq g^{-1}(\{0\})$ and $B \subseteq g^{-1}(\{1\})$.
 
 ## Remarks
 
-- **For $0<x<1$**, neither clamp is active and $g(x)=x$, so $g$ interpolates linearly across the gap between $A$ and $B$; nothing in [[thm-urysohn-lemma]] requires linearity, and a Urysohn function is never unique.
+- **For $0<x<1$**, neither clamp is active and $g(x)=x$, so $g$
+  interpolates linearly across the gap between $A$ and $B$. Nothing in
+  [[thm-urysohn-lemma]] requires linearity: replacing $x$ by $x^2$ on
+  $[0,1]$ while keeping the same constant values outside that interval gives
+  a different Urysohn function for this pair.
 
 - **No dyadic recursion is visible here.** This $g$ is written down directly, not produced by the construction of [[thm-urysohn-lemma]]; the companion example works through several levels of that construction by hand for the same pair $A,B$.

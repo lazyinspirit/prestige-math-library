@@ -4,6 +4,9 @@ kind: counterexample
 title: "In $\\mathbb{R}(t)$ the rationals are not dense: no rational lies strictly between $0$ and $1/t$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cex-ordered-field-not-archimedean, ex-rational-function-field-order, lem-of-q-dense, lem-of-q-embeds, def-archimedean-field, lem-of-inverse-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Ordered field (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ordered_field"
     - title: "Dense order (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Dense_order"
     - title: "Archimedean property (Wikipedia)"

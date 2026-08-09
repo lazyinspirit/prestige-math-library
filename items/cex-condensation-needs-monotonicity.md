@@ -4,6 +4,9 @@ kind: counterexample
 title: "A nonnegative non-monotone sequence for which $\\sum a_k$ and $\\sum 2^k a_{2^k}$ behave differently"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cauchy-condensation, def-monotone-sequence, def-series, lem-nth-term-test, def-integer-power, lem-power-monotone, thm-induction-principle, lem-nat-discrete, def-finite-sum, lem-finite-sum-laws, def-real-limit, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Cauchy condensation test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy_condensation_test"
+    - title: "Stephen Semmes, Elements of Analysis"
+      url: "https://math.rice.edu/~semmes/math331.pdf"
 pipeline_run: null
 ---
 

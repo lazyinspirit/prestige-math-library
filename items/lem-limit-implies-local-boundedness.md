@@ -4,7 +4,10 @@ kind: lemma
 title: "If $f$ has a finite limit at $c$ then $f$ is bounded on some punctured neighbourhood of $c$"
 status: published
 origin: session
-deps: [def-function-limit, def-bounded-set, def-neighbourhood-r, def-limit-point-r, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, cor-of-one-positive]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-function-limit, def-bounded-set, def-neighbourhood-r, def-limit-point-r, lem-of-triangle-inequality, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,14 +15,17 @@ short: "local boundedness"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"

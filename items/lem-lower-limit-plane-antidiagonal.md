@@ -4,6 +4,9 @@ kind: lemma
 title: "The lower-limit plane has a countable dense set and a closed discrete antidiagonal of size $|\\mathbb{R}|$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-lower-limit-topology, def-product-topology, def-dense-top, def-subspace-topology-top, thm-rationals-countable, lem-rat-embeds-dense, thm-product-of-countable, thm-r-uncountable]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Sorgenfrey plane"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
 pipeline_run: null
 ---
 

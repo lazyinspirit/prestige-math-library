@@ -1,0 +1,579 @@
+# Audit proof-refuter brief — Wave 7, step A6
+
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
+> and future agent.** Use commands already allowed inside the workspace sandbox;
+> choose non-escalated forms and never ask the owner to approve a shell command.
+> If an indispensable operation has no escalation-free form, report a blocker.
+
+You are **DeepSeek V4 Pro** at the API's maximum reasoning setting, serving as a
+read-only adversarial proof-refuter for the published-page audit. You are
+tool-less: you cannot open a file, run a command, browse, edit, or delegate.
+Everything you may rely on is reproduced in the `This dispatch` section. Return
+evidence only; Audit-Alpha alone adjudicates and edits.
+
+## Triage — the standing rule (verbatim, binding on you)
+
+- **Non-negotiable:** mathematical accuracy, logical validity, correct
+  citation.
+- **Explicitly acceptable, spend no effort:** minor citational quirks; logical
+  gaps a competent reader closes **within 30 seconds**; other non-fatal quirks;
+  imperfection at the level of the letter.
+
+## Adversarial standard
+
+Read the target's title, Statement/Definition/Example/Statement refuted, Facts &
+Assumptions, every numbered proof/refutation/verification step, and Remarks.
+Try to falsify the public claim and every load-bearing inference.
+
+1. Compare every cited fact with the supplied source text before alleging that
+   it is weak. Check domain, quantifiers, hypotheses, direction, conclusion,
+   and whether the source licenses the exact use.
+2. Check that the title and public statement assert no more than the proof
+   establishes, and that every proof step uses only available premises.
+3. Check both directions of biconditionals, uniqueness/existence claims,
+   induction and limiting arguments, empty/zero/endpoint/degenerate cases,
+   extended-real conventions, index shifts, and hidden division or choice.
+4. Re-read Remarks as skeptically as a numbered step. A false mathematical
+   remark is a defect even when the proof is sound.
+5. When the target is marked `ai-generated`, actively search for a
+   counterexample to its claim, witness, or refutation rather than merely
+   checking prose consistency.
+6. Treat a false public claim, logically invalid proof, missing necessary
+   hypothesis, circularity, or materially inaccurate load-bearing citation as
+   fatal. Do not inflate an expository omission or a gap closable within thirty
+   seconds into a defect.
+
+## Output format
+
+Reply with exactly this structure and no preamble:
+
+```text
+VERDICT: CLEAN | DEFECTS
+```
+
+If `DEFECTS`, give one block per finding:
+
+```text
+FINDING 1
+  location: [exact title, section, fact label, or numbered step]
+  severity: fatal | nonfatal
+  claim:    [the exact mathematical assertion]
+  evidence: [counterexample, missing hypothesis, invalid inference, or exact source mismatch]
+```
+
+Then always end with:
+
+```text
+BOUNDARY: [specific boundary/counterexample checks and their disposition]
+SOURCES:  [confirm every supplied cited item used by the target was inspected]
+CHECKED:  [confirm the title, public claim, every numbered step, and Remarks were read]
+```
+
+
+---
+
+# This dispatch
+
+## Selection reasons
+
+- high risk (5): 4 declared dependencies; 3 cited facts; boundary-sensitive language
+
+## Target item — `thm-three-definitions-of-uniform-space-are-equivalent`
+
+Normalized current SHA-256: `9123ebdf2b12179eff9446a1fe3fa6d1d2f7c8215b65c61c1303bdd55e98f537`
+
+The complete current item follows, including frontmatter:
+
+````markdown
+---
+id: thm-three-definitions-of-uniform-space-are-equivalent
+kind: theorem
+title: "On a nonempty set, entourages and uniform covers give equivalent definitions of a uniform space in ZF, and under dependent choice they are also equivalent to gauges of pseudometrics"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [lem-entourage-and-uniform-cover-dictionary, thm-entourage-uniformities-are-generated-by-gauges, def-gauge-of-pseudometrics, def-dependent-choice]
+aliases: []
+landmark: true
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
+pipeline_run: null
+---
+
+## Statement
+
+In ZF, on a nonempty set, the entourage and uniform-cover formulations determine each other. Assuming dependent choice, they are also equivalent to the formulation by gauges of pseudometrics.
+
+## Facts & Assumptions
+
+**Given:** A uniform structure on a nonempty set $X$ in any one of the named formulations.
+
+[L1] Entourage uniformities and uniform-cover structures determine each other in ZF ([[lem-entourage-and-uniform-cover-dictionary]]).
+
+[L2] Under dependent choice every entourage uniformity is generated by a gauge of uniformly continuous pseudometrics ([[thm-entourage-uniformities-are-generated-by-gauges]]).
+
+[L3] A gauge itself generates an entourage uniformity ([[def-gauge-of-pseudometrics]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The equivalence between entourages and covers is exactly [L1] and uses no choice principle. [L1]
+
+1.2 Assuming dependent choice, [L2] sends an entourage uniformity to a gauge and [L3] sends every gauge back to an entourage uniformity. [L2, L3]
+
+2.1 Thus the first two formulations are equivalent in ZF and all three are equivalent under the displayed assumption. [step 1.1, step 1.2] ∎
+````
+
+## Wave 7 provenance row for the target
+
+```json
+{
+  "id": "thm-three-definitions-of-uniform-space-are-equivalent",
+  "statement": "ai-altered",
+  "proof": "ai-generated",
+  "evidence": "established-knowledge",
+  "urls": [
+    "https://encyclopediaofmath.org/wiki/Uniform_space",
+    "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf",
+    "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"
+  ],
+  "rationale": "ESCALATED TO ALPHA. Literature gives the entourage-cover equivalence and pseudometric generation, but not this exact compound ZF/DC calibration. This is a standard synthesis, not an invented theorem; the proof composes the preceding results. ALPHA CONCURRENCE: Entourage, uniform-cover, and gauge formulations are the standard equivalent presentations of uniform spaces. The nonempty-carrier repair and split ZF/DC bookkeeping adapt the classical package to this library's proper-filter convention without creating new mathematics.",
+  "alpha_concurred": true,
+  "at": "2026-08-08",
+  "ledger": "wave7-topology-uniform.provenance.jsonl"
+}
+```
+
+## Proof contract for the target
+
+```json
+{
+  "citations": [
+    {
+      "fact": "L1",
+      "source": "lem-entourage-and-uniform-cover-dictionary",
+      "source_section": "Statement",
+      "quote": "In ZF, on a nonempty set $X$, an entourage uniformity determines a uniform-cover structure by the covers $\\{E[x]:x\\in X\\}$, and a uniform-cover structure determines an entourage uniformity by the sets $\\bigcup_{V\\in\\mathcal V}V\\times V$. These constructions recover the same uniform structure.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "L2",
+      "source": "thm-entourage-uniformities-are-generated-by-gauges",
+      "source_section": "Statement",
+      "quote": "Assuming dependent choice, every entourage uniformity is generated by a gauge of uniformly continuous pseudometrics.",
+      "uses": [
+        "1.2"
+      ]
+    },
+    {
+      "fact": "L3",
+      "source": "def-gauge-of-pseudometrics",
+      "source_section": "Definition",
+      "quote": "A **gauge of pseudometrics** on $X$ is a family $\\mathcal P$ of pseudometrics ([[def-metric-space]]). For finite $F\\subseteq\\mathcal P$ and $\\varepsilon>0$, put $E(F,\\varepsilon)=\\{(x,y):p(x,y)<\\varepsilon\\text{ for every }p\\in F\\}$. If $X\\ne\\varnothing$, these sets form a filter base and generate a uniformity ([[def-filter-base]], [[lem-filter-base-generates]]), called the uniformity **generated by $\\mathcal P$**.",
+      "uses": [
+        "1.2"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1.1",
+      "claim": "The equivalence between entourages and covers is exactly [L1] and uses no choice principle. [L1]",
+      "step": "1.1",
+      "inputs": [
+        "L1"
+      ]
+    },
+    {
+      "id": "step-1.2",
+      "claim": "Assuming dependent choice, [L2] sends an entourage uniformity to a gauge and [L3] sends every gauge back to an entourage uniformity. [L2, L3]",
+      "step": "1.2",
+      "inputs": [
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "id": "step-2.1",
+      "claim": "Thus the first two formulations are equivalent in ZF and all three are equivalent under the displayed assumption. [step 1.1, step 1.2] ∎",
+      "step": "2.1",
+      "inputs": [
+        "1.1",
+        "1.2"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "checked",
+      "evidence": "statement: the repaired equivalence is stated only on a nonempty carrier, so the empty case is excluded"
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "statement and step 1.1: zero distance, zero index, or the base-value case was inspected under the displayed inequalities and definitions"
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "statement and step 1.1: the singleton, identity, finite-one, or unit-scale case was inspected"
+    },
+    {
+      "case": "degenerate",
+      "status": "not_applicable",
+      "reason": "The statement has no separate coincident-point, constant-map, or collapsed-parameter branch."
+    },
+    {
+      "case": "endpoints",
+      "status": "not_applicable",
+      "reason": "No interval endpoint, one-sided limit, or strict-versus-weak boundary enters the claim."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "statement and step 1.1: every selection was checked for a stated nonempty source, a canonical definition, or the expressly assumed choice principle"
+    },
+    {
+      "case": "iff-forward",
+      "status": "checked",
+      "evidence": "statement and step 1.1: the forward implication was traced through its cited inputs"
+    },
+    {
+      "case": "iff-reverse",
+      "status": "checked",
+      "evidence": "statement and step 2.1: the reverse implication was traced separately through its cited inputs"
+    }
+  ],
+  "finite_smoke": []
+}
+```
+
+## Generated audit-manifest relationships for the target
+
+```json
+[
+  {
+    "source": "thm-three-definitions-of-uniform-space-are-equivalent",
+    "sourcePage": "uniform-spaces",
+    "batch": "wave7-topology-uniform",
+    "target": "lem-entourage-and-uniform-cover-dictionary",
+    "declared_target": "lem-entourage-and-uniform-cover-dictionary",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "uniform-spaces",
+    "targetBatch": "wave7-topology-uniform",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-three-definitions-of-uniform-space-are-equivalent",
+    "sourcePage": "uniform-spaces",
+    "batch": "wave7-topology-uniform",
+    "target": "thm-entourage-uniformities-are-generated-by-gauges",
+    "declared_target": "thm-entourage-uniformities-are-generated-by-gauges",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "uniform-spaces",
+    "targetBatch": "wave7-topology-uniform",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-three-definitions-of-uniform-space-are-equivalent",
+    "sourcePage": "uniform-spaces",
+    "batch": "wave7-topology-uniform",
+    "target": "def-gauge-of-pseudometrics",
+    "declared_target": "def-gauge-of-pseudometrics",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "uniform-spaces",
+    "targetBatch": "wave7-topology-uniform",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-three-definitions-of-uniform-space-are-equivalent",
+    "sourcePage": "uniform-spaces",
+    "batch": "wave7-topology-uniform",
+    "target": "def-dependent-choice",
+    "declared_target": "def-dependent-choice",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "compactness-in-metric-spaces",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  }
+]
+```
+
+## Relevant pending generated-risk rows
+
+```json
+[]
+```
+
+## Full text of every cited or declared item (4)
+
+### `def-dependent-choice`
+
+````markdown
+---
+id: def-dependent-choice
+kind: definition
+title: "The axiom of dependent choice: a relation in which every element is related to something admits an $\\mathbb{N}$-indexed chain"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-choice-function, def-axiom-of-choice, def-countable-choice, def-sequence, def-natural-numbers]
+justified_by: []
+aliases: [def-dc]
+landmark: true
+short: "dependent choice (DC)"
+verification:
+  precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-27
+  audited: 2026-07-27
+sources:
+  scraped: []
+  references:
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
+    - title: "Axiom of countable choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
+    - title: "H. Herrlich, Axiom of Choice, Lecture Notes in Mathematics 1876, Springer 2006"
+      url: "https://link.springer.com/book/10.1007/11601562"
+pipeline_run: null
+---
+
+## Definition
+
+Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$.
+Call $R$ **entire on $X$** when
+
+$$\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$$
+
+The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following
+statement.
+
+> For every nonempty set $X$, every relation $R$ entire on $X$, and every
+> $a \in X$, there is a sequence $x : \mathbb{N} \to X$ ([[def-sequence]],
+> [[def-natural-numbers]]) with
+> $$x_0 = a \qquad \text{and} \qquad x_n \mathbin{R} x_{n+1} \ \text{ for every } n \in \mathbb{N}.$$
+
+As everywhere in this library $\mathbb{N}$ contains $0$, and the sequence is
+indexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every
+later term is related to its predecessor.
+
+**What DC adds to what came before.** [[def-choice-function]] and
+[[def-axiom-of-choice]] select one element from each member of a family that is
+fixed in advance, and [[def-countable-choice]] does the same for a family indexed
+by $\mathbb{N}$. In both, the family is given before any selection is made. DC is
+the principle needed when the $n$-th set to select from is not known until the
+first $n$ selections have been made: here the admissible values of $x_{n+1}$ are
+exactly the $R$-successors of $x_n$, so the family being chosen from is built
+along the choosing. That is precisely the situation $\mathrm{AC}_\omega$ does not
+cover, and it is why a construction "pick $x_{n+1}$ depending on $x_n$, for every
+$n$ at once" is not licensed by countable choice.
+
+**The starting point may be dropped.** The formally weaker statement obtained by
+deleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there
+is a sequence with $x_n \mathbin{R} x_{n+1}$ for all $n$ — is an immediate
+consequence of the form above, since $X$ is nonempty and any of its elements may
+be taken as $a$. The reverse derivation is standard and is not needed anywhere in
+this library, so it is not carried out; every use below prescribes $x_0$.
+
+**$R$ need not be an order and the terms need not be distinct.** What DC delivers
+is a sequence, that is a function $\mathbb{N} \to X$, not a chain in the
+order-theoretic sense ([[def-chain]]). The relation may be symmetric, and the
+sequence may repeat a value or be constant; all that is asserted is
+$x_n \mathbin{R} x_{n+1}$ at every index.
+
+## Remarks
+
+**Where DC sits among the choice principles.** It is a standard fact, proved in
+the references and **not** in this library, that
+
+$$\mathrm{AC} \;\Longrightarrow\; \mathrm{DC} \;\Longrightarrow\; \mathrm{AC}_\omega ,$$
+
+and that neither implication reverses. The non-reversals are relative-consistency
+results: what they establish is that ZF, if consistent, does not prove the
+missing implications, never that those implications are false. This library
+contains neither forcing nor permutation models and proves no independence
+result, so all of that is quoted from the references and used nowhere.
+
+**Nothing in this library proves DC, and nothing assumes it silently.** Like
+[[def-axiom-of-choice]] and [[def-countable-choice]], DC is a statement that may
+be assumed or not. Every theorem whose proof uses it says so in its own
+statement, and the accounting for the compactness page is collected in
+[[rem-compactness-choice-ledger-metric]].
+
+**An upper bound, never a lower one.** When a later item records that its proof
+uses DC, the claim made is that the argument given here is carried out in
+$\mathrm{ZF} + \mathrm{DC}$. No item claims that DC is *necessary* for the
+statement proved, because establishing necessity means separating the statement
+from ZF, and that is an independence result of exactly the kind this library does
+not prove.
+````
+
+### `def-gauge-of-pseudometrics`
+
+````markdown
+---
+id: def-gauge-of-pseudometrics
+kind: definition
+title: "A gauge of pseudometrics and, on a nonempty set, the uniformity it generates"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-metric-space, def-uniform-space-by-entourages, def-filter-base, lem-filter-base-generates]
+aliases: []
+landmark: true
+verification:
+  precheck: n/a
+sources:
+  scraped: []
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}, {title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
+pipeline_run: null
+---
+
+## Definition
+
+A **gauge of pseudometrics** on $X$ is a family $\mathcal P$ of pseudometrics ([[def-metric-space]]). For finite $F\subseteq\mathcal P$ and $\varepsilon>0$, put $E(F,\varepsilon)=\{(x,y):p(x,y)<\varepsilon\text{ for every }p\in F\}$. If $X\ne\varnothing$, these sets form a filter base and generate a uniformity ([[def-filter-base]], [[lem-filter-base-generates]]), called the uniformity **generated by $\mathcal P$**.
+
+For an already given uniformity $\mathcal U$ on $X$, a pseudometric $p$ is
+**uniformly continuous for $\mathcal U$** when
+$$
+\{(x,y):p(x,y)<\varepsilon\}\in\mathcal U
+$$
+for every $\varepsilon>0$. With this terminology, each member of a gauge is
+uniformly continuous for the uniformity generated by that gauge.
+````
+
+### `lem-entourage-and-uniform-cover-dictionary`
+
+````markdown
+---
+id: lem-entourage-and-uniform-cover-dictionary
+kind: lemma
+title: "On a nonempty set, entourage uniformities and uniform-cover structures determine one another"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-uniform-space-by-entourages, def-uniform-cover-space, lem-symmetric-entourages-form-a-base]
+aliases: []
+landmark: true
+proof_strategy: constructive
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
+pipeline_run: null
+---
+
+## Statement
+
+In ZF, on a nonempty set $X$, an entourage uniformity determines a uniform-cover structure by the covers $\{E[x]:x\in X\}$, and a uniform-cover structure determines an entourage uniformity by the sets $\bigcup_{V\in\mathcal V}V\times V$. These constructions recover the same uniform structure.
+
+## Facts & Assumptions
+
+**Given:** A nonempty set $X$ carrying either an entourage uniformity or a uniform-cover structure.
+
+[L1] Symmetric entourages form a base and have symmetric square roots ([[lem-symmetric-entourages-form-a-base]], [[def-uniform-space-by-entourages]]).
+
+[L2] Uniform covers are upward closed under coarsening, have common refinements, and have star-refinements ([[def-uniform-cover-space]]).
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 From an entourage $E$, form $\mathcal C_E=\{E[x]:x\in X\}$. Choose a symmetric entourage $D$ with $D^{\circ3}\subseteq E$. If $D[y]\cap D[x]\ne\varnothing$ and $z\in D[y]$, symmetry and a point in the intersection give $(x,z)\in D^{\circ3}\subseteq E$. Hence the star of $D[x]$ in $\mathcal C_D$ lies in $E[x]$, so $\mathcal C_D$ star-refines $\mathcal C_E$. [L1, construct]
+
+1.2 From a uniform cover $\mathcal V$, form $E_{\mathcal V}=\bigcup_{V\in\mathcal V}V\times V$. It contains the nonempty diagonal, so it is nonempty. A star-refinement $\mathcal W$ has $E_{\mathcal W}\circ E_{\mathcal W}\subseteq E_{\mathcal V}$, while common refinements and coarsenings give the remaining filter axioms. [L2, construct]
+
+2.1 Declare a cover uniform when it is coarser than some $\mathcal C_E$. Intersections of entourages give common refinements, enlargement of an entourage gives coarsening, and step 1.1 gives star-refinements. Hence these covers satisfy the uniform-cover axioms. [step 1.1, L1, L2]
+
+2.2 Start with an entourage uniformity. For symmetric $D$, $$ D\subseteq E_{\mathcal C_D}\subseteq D^{-1}\circ D=D^{\circ2}. $$ The first inclusion uses the diagonal, and the second follows because two points in one $D$-ball are $D^{-1}\circ D$-related. Taking a symmetric square root inside any prescribed entourage shows that the recovered entourage filter is exactly the original one. [L1, step 1.1, step 1.2]
+
+2.3 Start instead with a uniform-cover structure. The $E_{\mathcal V}$-ball at $x$ is $$ E_{\mathcal V}[x]=\operatorname{St}(x,\mathcal V), $$ the union of the members of $\mathcal V$ containing $x$. Thus $\mathcal V$ refines $\mathcal C_{E_{\mathcal V}}$, so the latter is uniform by coarsening. Conversely, if $\mathcal W$ star-refines $\mathcal V$, then for any $x$ and any $W_0\in\mathcal W$ containing $x$, $\operatorname{St}(x,\mathcal W)\subseteq\operatorname{St}(W_0,\mathcal W)$, which lies in some member of $\mathcal V$. Therefore $\mathcal C_{E_{\mathcal W}}$ refines $\mathcal V$. The recovered cover structure is exactly the original one. [L2, step 1.2]
+
+3.1 Steps 2.2 and 2.3 prove that the two constructions are mutually inverse at the level of generated structures. [step 2.2, step 2.3, discharge-construct] ∎
+````
+
+### `thm-entourage-uniformities-are-generated-by-gauges`
+
+````markdown
+---
+id: thm-entourage-uniformities-are-generated-by-gauges
+kind: theorem
+title: "Assuming dependent choice, every entourage uniformity is generated by a gauge of uniformly continuous pseudometrics"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-gauge-of-pseudometrics, lem-normal-sequences-of-entourages, lem-pseudometric-from-a-normal-entourage-sequence, def-dependent-choice]
+aliases: []
+landmark: true
+proof_strategy: constructive
+verification:
+  precheck: pass
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-31
+  audited: 2026-07-31
+sources:
+  scraped: []
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
+pipeline_run: null
+---
+
+## Statement
+
+Assuming dependent choice, every entourage uniformity is generated by a gauge of uniformly continuous pseudometrics.
+
+## Facts & Assumptions
+
+**Given:** An entourage uniformity $\mathcal U$ and dependent choice.
+
+[L1] For every entourage, dependent choice supplies a normal sequence whose first nontrivial member is contained in that entourage ([[lem-normal-sequences-of-entourages]]).
+
+[L2] Such a sequence yields a uniformly continuous pseudometric whose dyadic balls lie between consecutive entourages ([[lem-pseudometric-from-a-normal-entourage-sequence]]).
+
+[L3] A gauge generates the filter based on finite simultaneous pseudometric balls ([[def-gauge-of-pseudometrics]]).
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 Let $\mathcal P$ be the set of all pseudometrics obtained by applying [L2] to normal sequences of [L1] subordinate to some entourage. This definition makes no simultaneous choice. Every $p\in\mathcal P$ is uniformly continuous for $\mathcal U$, and for each entourage $E$, [L1] and [L2] ensure that at least one $p\in\mathcal P$ has a positive-radius $p$-ball contained in $E$. [L1, L2, construct]
+
+2.1 For each $p\in\mathcal P$ and each positive radius, its ball is an original entourage by step 1.1. Hence every finite intersection defining a basic entourage of the gauge belongs to $\mathcal U$. [step 1.1, L3]
+
+2.2 Conversely every original entourage $E$ contains a positive-radius ball for at least one $p\in\mathcal P$ by step 1.1, so it belongs to the gauge uniformity. [step 1.1, L3]
+
+3.1 The two uniformities contain one another and are equal. [step 2.1, step 2.2, discharge-construct] ∎
+````
+

@@ -4,6 +4,9 @@ kind: definition
 title: "Limits at $+\\infty$ and $-\\infty$, and infinite limits at a point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-function-limit, def-limit-point-r, def-divergence-to-infinity, def-interval, def-bounded-set, def-complete-ordered-field, lem-of-abs-value, lem-of-triangle-inequality, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, cor-of-one-positive]
 justified_by: []
 aliases: [def-limit-at-infinity, def-infinite-limit-at-a-point]

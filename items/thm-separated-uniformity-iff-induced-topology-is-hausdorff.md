@@ -4,6 +4,9 @@ kind: theorem
 title: "A uniformity is separated if and only if its induced topology is Hausdorff"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-separated-uniform-space, thm-uniformity-induces-a-topology, def-hausdorff-space, lem-symmetric-entourages-form-a-base]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
 pipeline_run: null
 ---
 

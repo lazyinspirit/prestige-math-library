@@ -44,12 +44,10 @@ rest on it, and it deliberately contains no arithmetic of limits, since no such
 result is available for a general ordered field anywhere in this library.
 
 **The nested interval property is stated in its shrinking form**, with the
-lengths required to tend to $0$ in the order of $F$. That is forced rather than
-chosen: [[cex-laurent-nested-intervals-empty]], on the prerequisite page,
-exhibits nested intervals with empty intersection in
-$\mathbb{R}((t^{-1}))$, so under the unrestricted reading the one witness this
-library has would be lost and [[fs-nested-intervals-implies-lub]] would have
-nothing to refute the claim with.
+lengths required to tend to $0$ in the order of $F$. This is the form satisfied
+by $\mathbb{R}((t^{-1}))$ ([[cor-laurent-nested-intervals]]) and the form used
+by the bisection argument
+([[lem-nested-intervals-and-archimedean-imply-bw]]).
 
 **The equivalence, and its cycle.** [[thm-completeness-equivalences]] proves
 that for an ordered field $F$ the following are equivalent: (LUB); (ARCH) with

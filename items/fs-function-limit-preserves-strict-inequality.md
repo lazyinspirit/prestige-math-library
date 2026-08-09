@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $f < g$ near $c$ implies $\\lim f < \\lim g$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-function-limit-preserves-order, def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"

@@ -4,6 +4,9 @@ kind: theorem
 title: "If $f \\le g \\le h$ near $c$ and $f$ and $h$ have the same limit at $c$, then so does $g$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, lem-of-add-order, def-ordered-field]
 justified_by: []
 aliases: [thm-sandwich-theorem-for-functions]
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Squeeze theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Squeeze_theorem"
     - title: "J. Lebl, Basic Analysis I, §3.1"

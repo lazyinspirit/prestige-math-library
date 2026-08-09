@@ -4,6 +4,9 @@ kind: counterexample
 title: "With $a_k/b_k \\to 0$, convergence of $\\sum a_k$ does not give convergence of $\\sum b_k$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-limit-comparison-test, thm-p-series-rational, ex-harmonic-series-diverges, def-series, cor-archimedean-reciprocal, def-integer-power, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, def-rational-power]
 justified_by: []
 aliases: []
@@ -21,6 +24,10 @@ sources:
   references:
     - title: "Limit comparison test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_comparison_test"
+    - title: "APEX Calculus, Section 9.4: Comparison Tests"
+      url: "https://sites.und.edu/timothy.prescott/apex/web/apex.Ch9.S4.html"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

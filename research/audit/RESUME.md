@@ -1,5 +1,44 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVE 7 — A0 THROUGH A10 COMPLETE, AT OWNER PAUSE (2026-08-09)
+
+**This section supersedes the Wave 6 pointer below. Full rundown:
+`research/audit/wave7-A10.md`.** Nothing is running. No publication status,
+item id, or reading-order position changed.
+
+Scope: **214 unique items / 179 proof-bearing / 1,827 relationships / 12 pages /
+6 A/B pairs / 4 Beta batches**. All 214 items went from untagged to fully
+tagged. A4 closed 13/13 gates; A6 closed 14/14; A8 closed the fatal-only guard,
+31-consumer impact audit and targeted current-context coverage; A9 closed both
+prose gates; A10 is green 9/9.
+
+The exact A7 spend scope was **48 repaired items only**: 46 material A4 items
+plus two additional Alpha repairs from the pure class. No page sibling or
+unchanged consumer was rejudged. Alpha adjudicated all 40 A7 rejection rows:
+four confirmed fatal, 29 confirmed nonfatal and seven false positive. A8
+changed only the four fatal ids — `def-completeness-properties`,
+`ex-abel-dini-pair-for-the-harmonic-series`,
+`ex-harmonic-series-diverges`, and
+`thm-hausdorff-completion-of-a-uniform-space`. All four final texts were
+independently certified, impact-audited and passed both judges.
+
+A9 reread all 48 repaired items and 11 containing pages. It narrowed one stale
+uniform-spaces page phrase and one stale oscillator reading-order claim. Only
+the changed oscillator item was rejudged; after the counterexample convention
+was made explicit, its final DeepSeek/Terra pair passed and its final-current
+Terra certifier returned `CERTIFIED`. The A9 impact receipt covers its two
+direct citation consumers as `still-licensed`.
+
+Alpha's whole-wave record is complete: 214/214 items, 1,827/1,827 edges,
+179/179 strict contracts, 154/154 high/critical risk reviews, 160/160 routed
+DeepSeek readers, 59/59 spine attestations, 110/110 live URLs, and the A4/A6
+812-consumer impact surface. The final coverage receipt is 48/48 exact repair
+pairs with no unadjudicated current fatal rejection.
+
+The driver will create the single Wave 7 A0-A10 checkpoint commit and stop at
+the sole owner pause. It must not push. Clearing this pause licenses computing
+the next auditable wave; it does not publish anything.
+
 ## WAVE 6 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-08)
 
 **This section supersedes the Wave 5 pointer below.** The owner cleared Wave 5's

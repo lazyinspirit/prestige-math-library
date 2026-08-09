@@ -4,6 +4,9 @@ kind: theorem
 title: "Heine criterion: $\\lim_{x \\to c} f(x) = L$ iff $f(x_k) \\to L$ for every sequence in $A \\setminus \\{c\\}$ converging to $c$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-function-limit, def-sequence, def-natural-numbers, def-real-limit, def-limit-point-r, def-neighbourhood-r, def-countable-choice, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-rat-embeds-dense, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [thm-heine-criterion-for-function-limits]
@@ -12,14 +15,17 @@ short: "Heine (sequential) criterion"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4 (Thm 4.2)"
@@ -80,7 +86,7 @@ direction.
 
 **Proof technique:** direct.
 
-1.1 Assume condition 1, let $(x_k)$ be a sequence with $x_k \in A$ and $x_k \ne c$ for every $k$ and $x_k \to c$, and let $\varepsilon > 0$ be an arbitrary real. [assume-hyp, L1, L2]
+1.1 Assume condition 1, let $(x_k)$ be a sequence with $x_k \in A$ and $x_k \ne c$ for every $k$ and $x_k \to c$, and let $\varepsilon > 0$ be an arbitrary real. [assume-hyp, L1, L2, L3]
 
 1.2 Assume condition 1 FAILS. Negating the quantifiers of [L1], there is a real $\varepsilon_0 > 0$ such that for every real $\delta > 0$ some $x \in A$ has $0 < |x - c| < \delta$ and $|f(x) - L| \ge \varepsilon_0$. [assume-hyp, L1, L6]
 

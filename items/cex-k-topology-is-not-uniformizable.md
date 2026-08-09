@@ -4,6 +4,9 @@ kind: counterexample
 title: "The $K$-topology on $\\mathbb{R}$ is not uniformizable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-uniformizable-spaces-are-regular, lem-the-k-topology-is-hausdorff-and-not-regular]
 aliases: []
 landmark: false
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "R. Gardner, Introduction to Topology, notes on Munkres Section 31: The Separation Axioms (East Tennessee State University)", url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-31.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 

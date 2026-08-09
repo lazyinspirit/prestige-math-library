@@ -4,6 +4,9 @@ kind: corollary
 title: "Under dependent choice a compact Hausdorff space is Tychonoff, and its disjoint closed sets are separated by continuous functions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-a-compact-hausdorff-space-is-regular-and-normal, thm-urysohn-lemma,
        cor-urysohns-lemma-closes-the-separation-chain, def-compact-space,
        def-completely-regular-and-tychonoff-spaces, def-hausdorff-space,
@@ -32,6 +35,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Tychonoff_space"
     - title: "Compact space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Compact_space"
+    - title: "Urysohn's lemma (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Urysohn%27s_lemma"
 pipeline_run: null
 ---
 

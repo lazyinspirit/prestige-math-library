@@ -4,6 +4,9 @@ kind: theorem
 title: "$T_0$, $T_1$, $T_2$, regularity, $T_3$, complete regularity, and Tychonoffness are hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-t0-t1-and-hausdorff-are-hereditary, lem-regularity-is-hereditary, lem-complete-regularity-is-hereditary, def-regular-and-t3-spaces, def-completely-regular-and-tychonoff-spaces]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §6"
       url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

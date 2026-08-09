@@ -4,6 +4,9 @@ kind: lemma
 title: "Bolzano-Weierstrass implies Cauchy completeness in any ordered field"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, lem-of-sequence-basics]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Cauchy sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy_sequence"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"

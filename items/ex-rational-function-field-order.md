@@ -4,6 +4,9 @@ kind: example
 title: "The rational function field $\\mathbb{R}(t)$ ordered by the eventual sign is an ordered field, worked out"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [cex-ordered-field-not-archimedean, def-ordered-field, def-field, def-archimedean-field, lem-of-square-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, thm-reals-ordered-field]
 justified_by: []
 aliases: []
@@ -11,14 +14,17 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "D. J. Eck, Axioms for the Real Numbers"
+      url: "https://math.hws.edu/eck/math331/guide2020/04-axioms-for-R.html"
     - title: "Ordered field (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ordered_field"
     - title: "Field of fractions (Wikipedia)"
@@ -86,25 +92,8 @@ in usable form. Three things are established below:
 
 ## Remarks
 
-- **Why the eventual sign, and not the sign at a point.** Evaluating at a fixed
-  real $x_0$ is not even a function on $\mathbb{R}(t)$, since a rational
-  function may have a pole at $x_0$; and the sign at a point would not give a
-  positive cone, because $t$ and $t - 1$ would then be incomparable in the wrong
-  way. The behaviour at $+\infty$ is the unique choice that is representative
-  independent and multiplicative, and step 1.1 is exactly that statement.
+- **Why the eventual sign, and not the sign at a point.** Evaluating at a fixed real $x_0$ is not even a function on all of $\mathbb{R}(t)$, since a rational function may have a pole at $x_0$; and even where evaluation is defined, its sign cannot give a positive cone on the field, because the nonzero rational function $t-x_0$ evaluates to $0$, so trichotomy fails. The behaviour at $+\infty$ is one representative-independent, multiplicative choice, and step 1.1 is exactly that statement.
 
-- **What this field is and is not good for.** It is the library's cheapest
-  witness that an ordered field need not be Archimedean, and
-  [[cex-q-not-dense-in-an-ordered-field]] uses the infinitesimal $1/t$ found
-  above to show $\mathbb{Q}$ need not be dense. It is **not** a witness for the
-  completeness failures of [[fs-nested-intervals-implies-lub]] or
-  [[fs-cauchy-complete-implies-lub]]: nothing in this library proves that
-  $\mathbb{R}(t)$ is Cauchy complete or that it has any nested interval
-  property, and in fact it is neither. Those two need the larger field
-  $\mathbb{R}((t^{-1}))$, which is why that field was built
-  ([[ex-cauchy-complete-not-complete-field]]).
+- **What this field is and is not good for.** It is the library's cheapest witness that an ordered field need not be Archimedean, and [[cex-q-not-dense-in-an-ordered-field]] uses the infinitesimal $1/t$ found above to show $\mathbb{Q}$ need not be dense. It is **not** a witness for the completeness failures of [[fs-nested-intervals-implies-lub]] or [[fs-cauchy-complete-implies-lub]]: nothing in this library proves that $\mathbb{R}(t)$ is Cauchy complete or that it has any nested interval property, and in fact it is neither. Those two need the larger field $\mathbb{R}((t^{-1}))$, which is why that field was built ([[ex-cauchy-complete-not-complete-field]]).
 
-- **The order is the one induced from $\mathbb{R}((t^{-1}))$ in spirit but not
-  by any embedding proved here.** Both fields order an element by its behaviour
-  at infinity, and in both the comparison looks at a single coefficient. This
-  library constructs no embedding of one into the other and never uses one.
+- **The order is the one induced from $\mathbb{R}((t^{-1}))$ in spirit but not by any embedding proved here.** Both fields order an element by its behaviour at infinity, and in both the comparison looks at a single coefficient. This library constructs no embedding of one into the other and never uses one.

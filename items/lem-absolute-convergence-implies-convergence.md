@@ -4,6 +4,9 @@ kind: lemma
 title: "If $\\sum |a_k|$ converges then $\\sum a_k$ converges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-series, thm-series-cauchy-criterion, lem-triangle-inequality-finite, lem-finite-sum-laws, def-finite-sum, lem-of-abs-value, def-real-limit]
 justified_by: []
 aliases: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "T. Tao, Analysis I, 3rd ed., §7.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Stephen Semmes, Elements of Analysis"
+      url: "https://math.rice.edu/~semmes/math331.pdf"
 pipeline_run: null
 ---
 

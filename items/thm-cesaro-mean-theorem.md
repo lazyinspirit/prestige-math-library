@@ -4,6 +4,9 @@ kind: theorem
 title: "If $x_k \\to L$ then $\\sigma_n \\to L$: convergence implies $(C,1)$-summability to the same value"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-cesaro-mean, def-sequence, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, def-real-limit, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-add-order, lem-of-sign-rules, lem-of-abs-value, lem-of-naturals-positive, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Summation methods (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Summation_methods"
     - title: "Cesàro summation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ces%C3%A0ro_summation"
     - title: "Silverman-Toeplitz theorem (Wikipedia)"

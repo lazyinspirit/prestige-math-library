@@ -4,6 +4,9 @@ kind: example
 title: "A worked preservation table for subspaces and products of the standard, cofinite, and ordinal topologies"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [thm-positive-heredity-of-separation-axioms, thm-positive-productivity-of-separation-axioms, def-standard-topologies, def-order-topology-on-an-ordinal]
 aliases: []
 landmark: false
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §6"
       url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

@@ -4,6 +4,11 @@ kind: counterexample
 title: "The reciprocal on $(0,1]$ is continuous and extends to no continuous function on $\\mathbb{R}$, so closedness of the subspace is not decoration in the $\\mathbb{R}$-valued Tietze extension"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends,
        thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps, def-continuity-real, thm-algebra-of-continuous-functions,
        cor-boundedness-theorem-r, cor-archimedean-reciprocal, def-interval,

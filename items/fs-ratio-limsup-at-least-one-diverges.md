@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\limsup |a_{k+1}/a_k| \\ge 1$ implies the series diverges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ratio-test, def-limsup-liminf, lem-limsup-exists, def-series, lem-alternating-sequence, lem-index-map-grows, def-extended-reals, lem-extended-reals-complete, thm-geometric-series, thm-direct-comparison-test, lem-series-linearity, def-integer-power, lem-power-laws, lem-power-monotone, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ratio_test"
     - title: "Convergence tests (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Convergence_tests"
+    - title: "CSUDH notes on the ratio and root tests"
+      url: "https://math.csudh.edu/~pong/a3/Notes_01.html"
 pipeline_run: null
 ---
 

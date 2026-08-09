@@ -4,6 +4,9 @@ kind: lemma
 title: "Convergent series add and scale termwise"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-series, thm-algebra-of-limits, lem-finite-sum-laws, def-finite-sum]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Series_(mathematics)"
     - title: "T. Tao, Analysis I, 3rd ed., §7.2"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

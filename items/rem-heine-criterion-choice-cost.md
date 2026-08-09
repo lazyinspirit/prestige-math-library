@@ -4,6 +4,9 @@ kind: remark
 title: "The sequence-to-$\\varepsilon$ direction of the Heine criterion uses countable choice for $\\mathbb{R}$, and where this library records that cost"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-sequential-criterion-for-function-limits, def-countable-choice, def-function-limit, lem-sequential-characterisation-of-closure-r]
 justified_by: []
 aliases: []

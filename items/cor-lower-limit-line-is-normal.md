@@ -4,6 +4,9 @@ kind: corollary
 title: "Assuming countable choice, the lower-limit line is normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-lower-limit-line-is-regular-and-lindelof, lem-regular-lindelof-spaces-are-normal]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, Sorgenfrey line"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: remark
 title: "Which results on this page spend dependent choice, which spend countable choice, and which are theorems of ZF"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-urysohn-lemma, thm-tietze-extension-theorem,
        thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set,
        lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function, def-dependent-choice,
@@ -19,15 +22,11 @@ short: "choice-cost ledger for this page"
 verification:
   precheck: n/a
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-09
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -88,11 +87,10 @@ genuine — unlike the corresponding step of
 below, the relation driving the recursion cannot be replaced by one that
 ignores its first argument.
 
-Every other theorem and corollary on this page that assumes dependent choice
-does so purely by inheritance, through a citation of one of the two results
-above, and spends no further choice principle of its own:
+The following results on this page assume dependent choice purely by
+inheritance, through a citation of one of the two results above, and spend no
+further choice principle of their own:
 [[cor-urysohns-lemma-closes-the-separation-chain]],
-[[thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set]],
 [[cor-tietze-for-unbounded-and-open-interval-valued-maps]],
 [[thm-a-locally-compact-hausdorff-space-is-completely-regular]], and
 [[cor-a-compact-hausdorff-space-is-tychonoff]].

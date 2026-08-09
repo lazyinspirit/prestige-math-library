@@ -4,6 +4,9 @@ kind: theorem
 title: "Composition of limits holds under either hypothesis: $f$ is defined at $L$ with value $M$, or $g$ avoids $L$ on a punctured neighbourhood of $c$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [thm-limit-of-a-composition]
@@ -12,14 +15,17 @@ short: "composition of limits"
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"
@@ -49,7 +55,7 @@ Then the limit of $f \circ g$ at $c$ **exists**, and
 
 $$\lim_{x \to c} f\bigl(g(x)\bigr) \;=\; \lim_{y \to L} f(y) \;=\; M .$$
 
-**Neither extra hypothesis may be dropped.** With both omitted the statement is
+**At least one extra hypothesis is necessary.** With both omitted the statement is
 false, and [[fs-naive-composition-of-limits]] refutes it with a two-line witness
 in which (i) fails because $f(L) \ne M$ and (ii) fails because $g$ is constantly
 equal to $L$.

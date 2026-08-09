@@ -4,6 +4,9 @@ kind: theorem
 title: "Under dependent choice a locally compact Hausdorff space is completely regular, hence Tychonoff"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-urysohn-lemma, def-one-point-compactification, thm-one-point-compactification-properties,
        thm-a-compact-hausdorff-space-is-regular-and-normal, def-locally-compact-space,
        def-completely-regular-and-tychonoff-spaces,
@@ -35,6 +38,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Alexandroff_extension"
     - title: "J. Munkres, Topology, 2nd ed., §33, 38"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Tychonoff space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_space"
 pipeline_run: null
 ---
 

@@ -4,17 +4,21 @@ kind: lemma
 title: "Every convergent filter on a uniform space is Cauchy"
 status: published
 origin: session
-deps: [def-uniform-space-by-entourages, def-cauchy-filter-in-a-uniform-space, def-filter-convergence-and-cluster-point, thm-uniformity-induces-a-topology]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-uniform-space-by-entourages, def-cauchy-filter-in-a-uniform-space, def-filter-convergence-and-cluster-point, thm-uniformity-induces-a-topology, lem-symmetric-entourages-form-a-base]
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
@@ -31,7 +35,7 @@ Every filter converging in the induced topology of a uniform space is Cauchy.
 
 [L1] Filter convergence means that every neighbourhood of the limit belongs to the filter ([[def-filter-convergence-and-cluster-point]]).
 
-[L2] Entourage balls form neighbourhood bases and every entourage has a square root ([[thm-uniformity-induces-a-topology]], [[def-uniform-space-by-entourages]]).
+[L2] Entourage balls form neighbourhood bases, and every entourage has a symmetric square root ([[thm-uniformity-induces-a-topology]], [[def-uniform-space-by-entourages]], [[lem-symmetric-entourages-form-a-base]]).
 
 [L3] A Cauchy filter has an $E$-small member for every entourage $E$ ([[def-cauchy-filter-in-a-uniform-space]]).
 

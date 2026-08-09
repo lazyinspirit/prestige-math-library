@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if $a_k \\to 0$ then $\\sum a_k$ converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-nth-term-test, thm-p-series-rational, def-series, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive, def-rational-power, thm-nth-roots-exist, def-integer-power, def-real-limit]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Term_test"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -73,4 +79,7 @@ series of this sequence is exactly $\sum_{k \ge 1} 1/k$.
 
 - **The failure is not marginal.** The harmonic series has terms tending to $0$ and partial sums diverging to $+\infty$, so no weakening of the false claim to "the partial sums are bounded" would rescue it either. The rate at which the terms tend to $0$ is what decides convergence, and the term test reads no rate at all.
 
-- **This is why every test on this page is a rate test.** Comparison, condensation, the root and ratio tests, Kummer, Raabe and Gauss all measure how fast the terms shrink, and each of them separates $1/k$ from $1/k^{2}$, which the term test cannot.
+- **The other tests use rate information that the term test ignores.** The
+  $p$-series theorem distinguishes $1/k$ from $1/k^2$. The basic root and
+  ratio tests do not: for both sequences their relevant limit is the boundary
+  value $1$, so those two tests are inconclusive.

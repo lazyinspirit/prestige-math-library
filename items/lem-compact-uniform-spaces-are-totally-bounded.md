@@ -4,6 +4,9 @@ kind: lemma
 title: "Every compact uniform space is totally bounded"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-totally-bounded-uniform-space, def-compact-space, lem-symmetric-entourages-form-a-base, thm-uniformity-induces-a-topology]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
 pipeline_run: null
 ---
 

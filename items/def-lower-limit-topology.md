@@ -4,6 +4,9 @@ kind: definition
 title: "The lower-limit topology on $\\mathbb{R}$, with the half-open intervals $[a,b)$ as a basis"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-interval, thm-basis-criterion, def-topology-basis-subbasis]
 aliases: [def-sorgenfrey-line]
 landmark: true
@@ -19,6 +22,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, Sorgenfrey line"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Lower limit topology (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Lower_limit_topology"
 pipeline_run: null
 ---
 

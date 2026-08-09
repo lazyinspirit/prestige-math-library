@@ -4,6 +4,9 @@ kind: corollary
 title: "Under dependent choice, a continuous real-valued map on a closed subspace of a normal space extends to the whole space, and a map into an open interval extends into that same open interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-tietze-extension-theorem, thm-urysohn-lemma, def-normal-and-t4-spaces,
        def-subspace-topology-top, def-continuous-map-top, thm-algebra-of-continuous-functions,
        def-continuity-real, lem-real-and-metric-notions-agree, def-interval,

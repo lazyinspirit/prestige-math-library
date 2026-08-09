@@ -4,6 +4,9 @@ kind: corollary
 title: "Kummer with $\\zeta_k = 1$ recovers the ratio test"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-kummer-test, thm-ratio-test, def-series, def-limsup-liminf, lem-limsup-exists, lem-extended-reals-complete, def-extended-reals, lem-nth-term-test, lem-of-inverse-positive, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Ratio_test"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+    - title: "Binghamton University notes on Kummer, Raabe, and Gauss tests"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch5.pdf"
 pipeline_run: null
 ---
 

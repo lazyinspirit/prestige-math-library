@@ -4,6 +4,9 @@ kind: lemma
 title: "If for every $\\varepsilon > 0$ some continuous $g : X \\to \\mathbb{R}$ satisfies $\\lvert f(x) - g(x)\\rvert < \\varepsilon$ for all $x$, then $f$ is continuous; in particular a uniformly convergent series of continuous real functions has a continuous sum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-topological-space, def-continuous-map-top, thm-continuity-characterisations-top,
        def-topology-basis-subbasis, lem-real-line-is-a-metric-space, def-metrizable-space,
        def-metric-topology, def-series, thm-direct-comparison-test,

@@ -4,6 +4,9 @@ kind: lemma
 title: "If $(U_r)_{r \\in D}$ are open with $\\overline{U_r} \\subseteq U_s$ whenever $r < s$ and $U_1 = X$, then $x \\mapsto \\inf\\{ r \\in D : x \\in U_r \\}$ is a continuous map $X \\to [0,1]$, and no choice principle is used"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-the-dyadic-rationals-of-the-unit-interval, def-topological-space,
        def-continuous-map-top, thm-continuity-characterisations-top,
        def-topology-basis-subbasis, thm-basis-criterion, def-subspace-topology-top,
@@ -34,6 +37,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Urysohn%27s_lemma"
     - title: "J. Munkres, Topology, 2nd ed., §33"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "Bernard Badzioch, MTH 427 Topology I, Notes 10"
+      url: "https://www.math.buffalo.edu/~badzioch/MTH427/_static/mth427_notes_10.pdf"
 pipeline_run: null
 ---
 

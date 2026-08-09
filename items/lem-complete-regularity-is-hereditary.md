@@ -4,6 +4,9 @@ kind: lemma
 title: "Complete regularity is hereditary, without a hidden $T_1$ hypothesis"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-completely-regular-and-tychonoff-spaces, def-subspace-topology-top, thm-continuity-characterisations-top, def-hereditary-property]
 aliases: []
 landmark: true

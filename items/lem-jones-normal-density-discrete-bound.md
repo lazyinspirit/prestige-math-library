@@ -4,6 +4,9 @@ kind: lemma
 title: "Jones's bound: under choice, a closed discrete subspace of a normal space cannot have more subsets than a dense set has subsets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-normal-and-t4-spaces, def-dense-top, def-subspace-topology-top, def-axiom-of-choice, def-cardinal-arithmetic, thm-cardinal-power-set-and-cantor]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Jones's lemma"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "Samuel Gomes da Silva, Closed discrete subsets of separable spaces and relative versions of normality, countable paracompactness and property (a)"
+      url: "https://dml.cz/bitstream/handle/10338.dmlcz/141614/CommentatMathUnivCarolRetro_52-2011-3_10.pdf"
 pipeline_run: null
 ---
 

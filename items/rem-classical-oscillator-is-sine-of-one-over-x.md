@@ -4,7 +4,10 @@ kind: remark
 title: "The classical form of the oscillator above is $\\sin(1/x)$, which this library can only construct much later"
 status: published
 origin: session
-deps: [cex-psi-of-one-over-x-has-no-limit-at-zero, ex-distance-to-the-integers, ex-x-times-psi-tends-to-zero, lem-integer-part]
+provenance:
+  statement: ai-generated
+  proof: not-applicable
+deps: [ex-distance-to-the-integers, lem-integer-part]
 justified_by: []
 aliases: []
 forward_refs: [cex-sine-of-one-over-x-has-no-limit-at-zero, ex-x-sine-of-one-over-x-tends-to-zero]
@@ -12,7 +15,19 @@ landmark: false
 short: "why $\\psi$ and not $\\sin$"
 verification:
   precheck: n/a
-  audited: 2026-08-02
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-09
+    scope: published-audit-targeted
+    context_sha256: f0707ce5c98f9e644bde170c8c4de79e97375f25b69e5f328bf584a0fac83bc8
+    item_sha256: 4cab2002bfbd3f50491110f464573837f47cfc48e98ed60098ad5724b0b0fe05
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -43,11 +58,13 @@ page uses or proves anything about $\sin$.
 
 This library now constructs sine and cosine from their power series, proves
 their differential and addition laws, and defines pi from the first positive
-zero of cosine. The promised classical examples are
-[[cex-sine-of-one-over-x-has-no-limit-at-zero]] and
-[[ex-x-sine-of-one-over-x-tends-to-zero]]. They occur later in the reading
-order, so both links are orientation-only forward references declared in this
-item's `forward_refs`; no proof on this earlier page depends on them.
+zero of cosine. Under this library's counterexample convention,
+[[cex-sine-of-one-over-x-has-no-limit-at-zero]] displays the false proposition
+that the sine limit exists under `Statement refuted`, then proves it false;
+[[ex-x-sine-of-one-over-x-tends-to-zero]] proves the squeezed limit for the
+product. Both occur later in the reading order, so the links are orientation-only
+forward references declared in this item's `forward_refs`; no proof on this
+earlier page depends on them.
 
 ## What $\psi$ supplies instead
 
@@ -80,6 +97,5 @@ What is lost is a connection to a different subject. The classical pair
 $\sin(1/x)$, $x\sin(1/x)$ also carries information about smoothness, about power
 series and about the topologist's sine curve, none of which $\psi$ can carry,
 since $\psi$ is assembled from the order, the absolute value and the integer part
-alone and none of those notions is defined in this library yet. Those phenomena
-are not in scope on this earlier page; the forward-linked analytic examples
-state them with $\sin$ on the later page that defines it.
+alone. Those notions occur only later in the reading order and are unavailable
+on this earlier page.

@@ -4,6 +4,9 @@ kind: corollary
 title: "Raabe is Kummer with $\\zeta_k = k+1$: for positive terms, $\\liminf\\, (k+1)(a_k/a_{k+1} - 1) > 1$ gives convergence and $\\limsup < 1$ gives divergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-kummer-test, thm-p-series-rational, def-limsup-liminf, lem-limsup-exists, def-series, def-extended-reals, lem-extended-reals-complete, lem-of-naturals-positive, def-rational-power, thm-nth-roots-exist, def-integer-power]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Raabe%27s_test"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+    - title: "Binghamton University notes on Kummer, Raabe, and Gauss tests"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch5.pdf"
 pipeline_run: null
 ---
 

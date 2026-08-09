@@ -4,6 +4,9 @@ kind: example
 title: "Geometric sums computed: $\\sum_{k \\ge 1} 2^{-k} = 1$ and $\\sum_{k \\ge 0} (-1/3)^k = 3/4$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-geometric-series, def-integer-power, lem-series-tail-invariance, def-series, lem-of-abs-value, def-finite-sum, lem-power-laws]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Geometric series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Geometric_series"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,13 +4,17 @@ kind: theorem
 title: "Tietze's extension theorem, under dependent choice: a continuous map from a closed subspace of a normal space into $[a,b]$ extends continuously to the whole space, and this property characterises normality"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-urysohn-lemma, lem-a-uniformly-approximable-real-valued-map-is-continuous,
        def-normal-and-t4-spaces, def-dependent-choice, def-subspace-topology-top,
        def-continuous-map-top, thm-continuity-characterisations-top, def-interval,
        def-series, thm-geometric-series,
        def-interior-closure-boundary-top, def-ordered-field, lem-of-abs-value,
        lem-of-sequence-basics, lem-continuity-is-local-and-pastes,
-       def-topological-space, lem-geometric-sequence-null]
+       def-topological-space, lem-geometric-sequence-null,
+       lem-real-line-is-a-metric-space]
 justified_by: []
 aliases: [thm-tietze]
 landmark: true
@@ -19,15 +23,11 @@ proof_strategy: constructive
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-09
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -35,6 +35,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Tietze_extension_theorem"
     - title: "J. Munkres, Topology, 2nd ed., §35"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §6"
+      url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
 pipeline_run: null
 ---
 
@@ -72,7 +76,7 @@ $(X, \mathcal{T})$ be a topological space.
 
 [L6] Finite triangle inequality $|\sum_k u_k| \le \sum_k |u_k|$ ([[lem-of-abs-value]]); a real sequence has at most one limit, and limits preserve non-strict order ([[lem-of-sequence-basics]]).
 
-[L7] $[0,\tfrac12)$ and $(\tfrac12,1]$ are open in the subspace topology of $[0,1]$, disjoint, with $0 \in [0,\tfrac12)$ and $1 \in (\tfrac12,1]$ ([[def-subspace-topology-top]], [[def-interval]]).
+[L7] The order rays $(-\infty,\tfrac12)$ and $(\tfrac12,\infty)$ are open in the usual topology of $\mathbb R$ ([[lem-real-line-is-a-metric-space]], clause 3), so their traces $[0,\tfrac12)$ and $(\tfrac12,1]$ are open in the subspace topology of $[0,1]$ ([[def-subspace-topology-top]], [[def-interval]]). They are disjoint and contain $0$ and $1$, respectively.
 
 [L8] $A$ and $B$ open in a subspace $S$, with $A \cup B = S$ and $A \cap B = \varnothing$: a function on $S$ constant on $A$ and constant on $B$ is continuous ([[lem-continuity-is-local-and-pastes]], clause 2).
 

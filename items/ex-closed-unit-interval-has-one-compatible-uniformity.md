@@ -4,6 +4,9 @@ kind: example
 title: "The closed unit interval has exactly one compatible uniformity, namely its usual metric uniformity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-compact-hausdorff-space-has-a-unique-compatible-uniformity, lem-metric-uniformity-dictionary, thm-heine-borel-characterisation-r, lem-real-line-is-a-metric-space]
 aliases: []
 landmark: false
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The usual metric entourages on $\\mathbb{R}$ induce its usual topology and usual uniform continuity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-metric-uniformity-dictionary, lem-real-line-is-a-metric-space, def-metric-uniform-continuity]
 aliases: []
 landmark: false
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
 pipeline_run: null
 ---
 

@@ -4,12 +4,15 @@ kind: theorem
 title: "Urysohn's lemma, under the axiom of dependent choice: in a normal space two disjoint closed sets are separated by a continuous function into $[0,1]$, and conversely such a space is normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function,
        def-the-dyadic-rationals-of-the-unit-interval, def-normal-and-t4-spaces,
        lem-normality-via-shrinking, def-dependent-choice, lem-finite-choice,
        def-choice-function, def-continuous-map-top, thm-continuity-characterisations-top,
        def-interior-closure-boundary-top, def-interval, def-topological-space,
-       def-subspace-topology-top]
+       def-subspace-topology-top, lem-real-line-is-a-metric-space]
 justified_by: []
 external_refs: [rem-urysohn-lemma-not-a-zf-theorem]
 aliases: [thm-urysohn]
@@ -19,15 +22,11 @@ proof_strategy: constructive
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-09
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
@@ -37,6 +36,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/James_Munkres"
     - title: "S. Willard, General Topology, §15"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §6"
+      url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
 pipeline_run: null
 ---
 
@@ -82,7 +85,7 @@ is carried out in $\mathrm{ZF} + \mathrm{DC}$.
 
 [L5] The generic construction: if $(U_r)_{r \in D}$ is a family of open subsets of $X$ with $\overline{U_r} \subseteq U_s$ whenever $r<s$ in $D$ and $U_1 = X$, then $g(x) := \inf(\{r \in D : x \in U_r\} \cup \{1\})$ is a continuous map $X \to [0,1]$ ([[lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function]]).
 
-[L6] $[0,\tfrac12) := (-\infty,\tfrac12) \cap [0,1]$ and $(\tfrac12,1] := (\tfrac12,\infty) \cap [0,1]$ are open in the subspace topology of $[0,1]$ ([[def-subspace-topology-top]], [[def-interval]]), disjoint, with $0 \in [0,\tfrac12)$ and $1 \in (\tfrac12,1]$.
+[L6] The order rays $(-\infty,\tfrac12)$ and $(\tfrac12,\infty)$ are open in the usual topology of $\mathbb R$ ([[lem-real-line-is-a-metric-space]], clause 3), so their traces $[0,\tfrac12)$ and $(\tfrac12,1]$ are open in the subspace topology of $[0,1]$ ([[def-subspace-topology-top]], [[def-interval]]). They are disjoint and contain $0$ and $1$, respectively.
 
 [L7] Preimages of open sets under a continuous map are open ([[thm-continuity-characterisations-top]], clause (b), [[def-continuous-map-top]]).
 

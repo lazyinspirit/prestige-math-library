@@ -4,6 +4,9 @@ kind: definition
 title: "A summability (Toeplitz) matrix, the transformed sequence $y_n = \\sum_k c_{n,k} x_k$, and regularity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-sequence, def-real-limit, def-finite-sum, lem-finite-sum-laws, lem-limit-unique, thm-nat-linear-order, def-complete-ordered-field]
 forward_refs: [cex-irregular-summability-matrix, ex-cesaro-means-of-alternating]
 justified_by: []
@@ -19,6 +22,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Toeplitz matrix (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Toeplitz_matrix"
+    - title: "Summation methods (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Summation_methods"
     - title: "Silverman-Toeplitz theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Silverman%E2%80%93Toeplitz_theorem"
     - title: "Divergent series (Wikipedia)"

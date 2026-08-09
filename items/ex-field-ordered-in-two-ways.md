@@ -4,6 +4,9 @@ kind: example
 title: "$\\mathbb{Q}(\\sqrt{2})$ carries exactly two distinct field orders, exchanged by the conjugation $\\sqrt{2} \\mapsto -\\sqrt{2}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-ordered-field, def-field, def-rationals, thm-of-square-roots, fs-sqrt2-rational, lem-of-square-positive, cor-of-one-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-add-order, lem-of-naturals-positive, lem-of-q-embeds, def-complete-ordered-field, thm-reals-ordered-field]
 justified_by: []
 aliases: []

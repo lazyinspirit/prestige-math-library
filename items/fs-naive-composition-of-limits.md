@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: $\\lim_{x \\to c} f(g(x)) = M$ whenever $\\lim_{x \\to c} g = L$ and $\\lim_{y \\to L} f = M$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-composition-of-function-limits, def-function-limit, def-limit-point-r, def-neighbourhood-r, fs-limit-equals-value, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"

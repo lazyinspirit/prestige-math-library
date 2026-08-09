@@ -4,6 +4,9 @@ kind: counterexample
 title: "Assuming choice, normality is not even finitely productive: two copies of the lower-limit line"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-normality-is-not-productive]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Sorgenfrey plane"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 

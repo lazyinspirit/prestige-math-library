@@ -4,18 +4,24 @@ kind: example
 title: "$\\mathbb{R}((t^{-1}))$, the formal Laurent series field, is Cauchy complete, non-Archimedean, and lacks the least-upper-bound property"
 status: published
 origin: session
-deps: [cex-laurent-nested-intervals-empty, fs-cauchy-complete-implies-lub, def-sequences-in-an-ordered-field, def-completeness-properties, def-archimedean-field, def-formal-laurent-series, lem-laurent-series-ring, thm-laurent-ordered-field, thm-laurent-cauchy-complete, lem-laurent-non-archimedean, cor-laurent-not-lub-complete, cor-laurent-nested-intervals, lem-bw-implies-archimedean, lem-mct-implies-archimedean, thm-completeness-equivalences]
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+deps: [fs-cauchy-complete-implies-lub, def-sequences-in-an-ordered-field, def-completeness-properties, def-archimedean-field, def-formal-laurent-series, lem-laurent-series-ring, thm-laurent-ordered-field, thm-laurent-cauchy-complete, lem-laurent-non-archimedean, cor-laurent-not-lub-complete, cor-laurent-nested-intervals, lem-bw-implies-archimedean, lem-mct-implies-archimedean, thm-completeness-equivalences]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,7 +48,6 @@ assembles, in one place and against the five properties of
 | Archimedean | **no** | [[lem-laurent-non-archimedean]] |
 | (CC) Cauchy completeness | yes | [[thm-laurent-cauchy-complete]] |
 | (NIP) nested intervals, shrinking | yes | [[cor-laurent-nested-intervals]] |
-| nested intervals, unrestricted | **no** | [[cex-laurent-nested-intervals-empty]] |
 | (LUB) least upper bound | **no** | [[cor-laurent-not-lub-complete]] |
 | (BW) Bolzano-Weierstrass | **no** | below |
 | (MCT) monotone convergence | **no** | below |
@@ -63,7 +68,7 @@ be. A concrete convergent Cauchy sequence is exhibited at the end.
 
 [L4] The set $A = \{\, n \cdot 1_K : n \in \mathbb{N}\,\}$ is nonempty, bounded above by $t$, and has no least upper bound in $K$, so (LUB) fails ([[cor-laurent-not-lub-complete]]).
 
-[L5] Every nested sequence of closed intervals of $K$ whose lengths tend to $0$ in $K$ has exactly one common point, so (NIP) holds; the unrestricted form fails ([[cor-laurent-nested-intervals]], [[cex-laurent-nested-intervals-empty]]).
+[L5] Every nested sequence of closed intervals of $K$ whose lengths tend to $0$ in $K$ has exactly one common point, so (NIP) holds ([[cor-laurent-nested-intervals]]).
 
 [L6] (BW) implies the Archimedean property ([[lem-bw-implies-archimedean]]) and so does (MCT) ([[lem-mct-implies-archimedean]]); and the five properties are equivalent once the Archimedean property is supplied where needed ([[thm-completeness-equivalences]]).
 
@@ -79,7 +84,7 @@ be. A concrete convergent Cauchy sequence is exhibited at the end.
 
 1.4 $K$ does not have (LUB): the canonical naturals are nonempty and bounded above and have no supremum in $K$. [L4]
 
-1.5 $K$ has (NIP) in the shrinking form of [[def-completeness-properties]], and fails the unrestricted nested interval property. [L5]
+1.5 $K$ has (NIP) in the shrinking form of [[def-completeness-properties]]. [L5]
 
 2.1 So $K$ is a Cauchy complete, non-Archimedean ordered field without the least-upper-bound property, which is what this example asserts, and it is the witness used in [[fs-cauchy-complete-implies-lub]] and in [[fs-nested-intervals-implies-lub]]. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5]
 
@@ -91,25 +96,10 @@ be. A concrete convergent Cauchy sequence is exhibited at the end.
 
 ## Remarks
 
-- **The one-line reason.** Comparison in $K$ looks only at the first coefficient
-  at which two elements differ, so $t$ is bigger than every real constant and
-  $t^{-1}$ is smaller than every positive real constant. The naturals are
-  therefore bounded, which kills (LUB), (BW) and (MCT) at a stroke. Meanwhile a
-  Cauchy sequence in $K$ must have each of its coefficients eventually constant,
-  and reading off those eventual values builds the limit; nothing about the
-  naturals being cofinal is needed for that.
+- **The one-line reason.** Comparison in $K$ looks only at the first coefficient at which two elements differ, so $t$ is bigger than every real constant and $t^{-1}$ is smaller than every positive real constant. The naturals are therefore bounded, which kills (LUB), (BW) and (MCT) at a stroke. Meanwhile a Cauchy sequence in $K$ must have each of its coefficients eventually constant, and reading off those eventual values builds the limit; nothing about the naturals being cofinal is needed for that.
 
-- **Why the limit above is not a sum.** The notation $\sum_{k \ge 0} t^{-k}$ for
-  $L$ is a name for a function, not an infinite sum
-  ([[def-formal-laurent-series]]). What step 2.3 proves is a genuine limit in
-  the order of $K$, and it happens to agree with that notation; no notion of
-  convergence is presupposed by the notation itself.
+- **Why the limit above is not a sum.** The notation $\sum_{k \ge 0} t^{-k}$ for $L$ is a name for a function, not an infinite sum ([[def-formal-laurent-series]]). What step 2.3 proves is a genuine limit in the order of $K$, and it happens to agree with that notation; no notion of convergence is presupposed by the notation itself.
 
-- **What this example does not give.** It says nothing about
-  $\mathbb{R}(t)$, the other non-Archimedean field in this library
-  ([[ex-rational-function-field-order]]), which is neither Cauchy complete nor
-  nested-interval complete and cannot replace $K$ in any of these roles.
+- **What this example does not give.** It says nothing about $\mathbb{R}(t)$, the other non-Archimedean field in this library ([[ex-rational-function-field-order]]), which is neither Cauchy complete nor nested-interval complete and cannot replace $K$ in any of these roles.
 
-- **Uniqueness of the complete ordered field is untouched.** $K$ is not a
-  complete ordered field, so it is no counterexample to that uniqueness; it is a
-  counterexample only to the habit of calling (CC) completeness.
+- **Uniqueness of the complete ordered field is untouched.** $K$ is not a complete ordered field, so it is no counterexample to that uniqueness; it is a counterexample only to the habit of calling (CC) completeness.

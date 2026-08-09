@@ -4,6 +4,9 @@ kind: theorem
 title: "Every uniformly continuous map into a complete Hausdorff uniform space extends uniquely across the Hausdorff completion; consequently completions are unique up to a unique uniform isomorphism"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-hausdorff-completion-of-a-uniform-space, def-uniformly-continuous-map, def-uniform-embedding-and-uniform-isomorphism, def-complete-uniform-space, def-separated-uniform-space, def-completion-of-a-uniform-space, lem-minimal-cauchy-filter-associated-to-a-cauchy-filter, lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity, lem-symmetric-entourages-form-a-base, thm-uniformly-continuous-maps-are-continuous, cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "I. James, Completeness and Completion", url: "https://www.cambridge.org/core/books/abs/introduction-to-uniform-spaces/completeness-and-completion/8978C977C907740F625119680B7DC42E"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
 pipeline_run: null
 ---
 

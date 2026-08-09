@@ -4,6 +4,9 @@ kind: lemma
 title: "Every open cover of a compact Hausdorff space has a finite open star-refinement"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-a-compact-hausdorff-space-is-regular-and-normal, def-compact-space, def-hausdorff-space, def-finite-cardinality, lem-finite-choice, def-interior-closure-boundary-top]
 aliases: []
 landmark: false
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 

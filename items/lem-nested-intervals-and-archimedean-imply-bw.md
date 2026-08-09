@@ -4,6 +4,9 @@ kind: lemma
 title: "Nested intervals plus the Archimedean property imply Bolzano-Weierstrass, by repeated bisection"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-recursion, thm-well-ordering-principle, lem-index-map-grows, def-integer-power, lem-bernoulli-inequality, lem-of-inverse-positive, lem-of-naturals-positive, cor-of-one-positive, lem-of-add-order, lem-of-abs-value, thm-induction-principle, thm-nat-linear-order, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Bolzano-Weierstrass theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Bolzano%E2%80%93Weierstrass_theorem"
     - title: "Nested intervals (Wikipedia)"

@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: there is a divergent series of positive terms that diverges more slowly than every other, hence a universal comparison test"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-abel-dini, def-series, thm-nonnegative-series-bounded-partial-sums, lem-monotone-unbounded-diverges, def-divergence-to-infinity, def-monotone-sequence, lem-of-inverse-positive, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Divergent_series"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "Abel-Dini-Pringsheim theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Abel%E2%80%93Dini%E2%80%93Pringsheim_theorem"
 pipeline_run: null
 ---
 

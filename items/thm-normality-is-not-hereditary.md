@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming countable choice, normality is not hereditary, even to open regular subspaces"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-deleted-tychonoff-plank-is-regular-and-nonnormal, def-hereditary-property]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, deleted Tychonoff plank"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Tychonoff plank (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_plank"
 pipeline_run: null
 ---
 

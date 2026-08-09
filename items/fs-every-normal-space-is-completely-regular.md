@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: Every normal space is completely regular"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-urysohns-lemma-closes-the-separation-chain,
        def-normal-and-t4-spaces, def-completely-regular-and-tychonoff-spaces,
        thm-completely-regular-implies-regular, def-regular-and-t3-spaces,

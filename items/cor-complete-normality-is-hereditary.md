@@ -4,6 +4,11 @@ kind: corollary
 title: "Complete normality, and hence $T_5$, is hereditary"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: direct-corollary
 deps: [thm-completely-normal-iff-hereditarily-normal, lem-t0-t1-and-hausdorff-are-hereditary, def-completely-normal-and-perfectly-normal-spaces]
 aliases: []
 landmark: true

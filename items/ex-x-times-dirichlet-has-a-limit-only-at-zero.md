@@ -4,6 +4,9 @@ kind: example
 title: "$x \\cdot 1_{\\mathbb{Q}}(x)$ has a limit at $0$ and at no other point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cex-dirichlet-has-no-limit-anywhere, thm-squeeze-for-function-limits, cor-sequential-criterion-for-nonexistence, lem-q-and-irrationals-dense-r, lem-sequential-characterisation-of-closure-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-sequence, def-real-limit, lem-rat-embeds-dense, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []

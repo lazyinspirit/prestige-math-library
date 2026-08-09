@@ -4,6 +4,9 @@ kind: example
 title: "Condensation reduces $\\sum 1/k^p$ to a geometric series with ratio $2^{1-p}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-cauchy-condensation, thm-p-series-rational, thm-geometric-series, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, def-series, def-integer-power, thm-nth-roots-exist, lem-of-naturals-positive, lem-of-inverse-positive, def-monotone-sequence]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_condensation_test"
     - title: "Geometric series (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Geometric_series"
+    - title: "Stephen Semmes, Elements of Analysis"
+      url: "https://math.rice.edu/~semmes/math331.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

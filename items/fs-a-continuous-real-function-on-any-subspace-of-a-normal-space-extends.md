@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: Every continuous real-valued function on a subspace of a normal space extends continuously to the whole space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
        def-subspace-topology-top, def-continuity-real, thm-algebra-of-continuous-functions,
        cor-boundedness-theorem-r, def-continuous-map-top, def-interval,

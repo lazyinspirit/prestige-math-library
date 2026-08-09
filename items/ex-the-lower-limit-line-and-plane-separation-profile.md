@@ -4,6 +4,9 @@ kind: example
 title: "Assuming choice, the lower-limit line is normal while its square is regular and nonnormal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-supplied
 deps: [cor-lower-limit-line-is-normal, lem-products-preserve-regularity, lem-lower-limit-plane-antidiagonal, thm-normality-is-not-productive]
 aliases: []
 landmark: false
@@ -19,6 +22,10 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Sorgenfrey plane"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 

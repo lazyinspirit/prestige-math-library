@@ -4,6 +4,9 @@ kind: corollary
 title: "Whenever the ratio test decides, the root test decides the same way, and the converse fails"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-ratio-root-inequality, thm-root-test, thm-ratio-test, def-limsup-liminf, def-extended-reals, lem-liminf-le-limsup, lem-of-abs-value, lem-series-tail-invariance, def-series, fs-ratio-and-root-limits-always-agree, lem-alternating-sequence, def-integer-power, lem-power-monotone]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Root_test"
     - title: "Ratio test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ratio_test"
+    - title: "CSUDH notes on the ratio and root tests"
+      url: "https://math.csudh.edu/~pong/a3/Notes_01.html"
 pipeline_run: null
 ---
 

@@ -1,9 +1,12 @@
 ---
 id: thm-hausdorff-completion-of-a-uniform-space
 kind: theorem
-title: "Every uniform space has a complete Hausdorff reflection with dense canonical image, and the canonical map is a uniform embedding exactly when the original uniformity is separated"
+title: "Every uniform space has a Hausdorff completion with dense canonical image, and the canonical map is a uniform embedding exactly when the original uniformity is separated"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-completion-of-a-uniform-space, lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity, lem-minimal-cauchy-filter-space-is-complete, lem-point-filters-are-dense-in-the-minimal-cauchy-filter-space, def-uniform-embedding-and-uniform-isomorphism, thm-separated-uniformity-iff-induced-topology-is-hausdorff, lem-symmetric-entourages-form-a-base]
 aliases: []
 landmark: true
@@ -11,13 +14,21 @@ proof_strategy: constructive
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: 3d7e2fe1b03bd5c26d2ae9cd13532f1a6c1397ace43b6019a7fea1d7b4fbed68
+    item_sha256: bfa21d0fbfb40458b4ea9592f3b1bf2e75114f5cc2cb479a688b7ae264a61672
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "I. James, Completeness and Completion", url: "https://www.cambridge.org/core/books/abs/introduction-to-uniform-spaces/completeness-and-completion/8978C977C907740F625119680B7DC42E"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}, {title: "Encyclopedia of Mathematics, Complete uniform space", url: "https://encyclopediaofmath.org/wiki/Complete_uniform_space"}]
 pipeline_run: null
 ---
 
@@ -31,7 +42,7 @@ Every uniform space $X$ has a Hausdorff completion $\eta:X\to\widehat X$. The ma
 
 [L1] Minimal Cauchy filters carry a separated uniformity ([[lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity]]) and form a complete space ([[lem-minimal-cauchy-filter-space-is-complete]]).
 
-[L2] Point filters define a uniformly continuous dense map $\eta:X\to\widehat X$ ([[lem-point-filters-are-dense-in-the-minimal-cauchy-filter-space]]).
+[L2] Point filters define a uniformly continuous dense map $\eta:X\to\widehat X$, and every member of $\eta(x)$ contains $x$ ([[lem-point-filters-are-dense-in-the-minimal-cauchy-filter-space]]).
 
 [L3] A Hausdorff completion and a uniform embedding have the stated definitions ([[def-completion-of-a-uniform-space]], [[def-uniform-embedding-and-uniform-isomorphism]]).
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "Arbitrary products of regular spaces are regular"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-product-topology, lem-regularity-via-closed-neighbourhoods, lem-finite-choice]
 aliases: []
 landmark: true

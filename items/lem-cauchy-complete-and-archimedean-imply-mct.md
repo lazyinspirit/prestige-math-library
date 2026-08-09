@@ -4,6 +4,9 @@ kind: lemma
 title: "Cauchy completeness plus the Archimedean property imply the monotone convergence property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-recursion, thm-well-ordering-principle, thm-induction-principle, thm-nat-linear-order, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, lem-of-inverse-positive, lem-of-naturals-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Monotone convergence theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Monotone_convergence_theorem"
     - title: "Cauchy sequence (Wikipedia)"

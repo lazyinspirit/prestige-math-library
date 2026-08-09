@@ -4,6 +4,9 @@ kind: definition
 title: "The Cesaro means $\\sigma_n = (x_0 + \\dots + x_n)/(n+1)$ and $(C,1)$-summability"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-sequence, def-finite-sum, def-real-limit, lem-of-naturals-positive, lem-limit-unique, def-complete-ordered-field]
 forward_refs: [ex-cesaro-means-of-alternating]
 justified_by: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Summation methods (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Summation_methods"
     - title: "Cesàro summation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ces%C3%A0ro_summation"
     - title: "Divergent series (Wikipedia)"

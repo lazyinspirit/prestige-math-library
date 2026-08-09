@@ -4,6 +4,9 @@ kind: theorem
 title: "For a nonincreasing nonnegative sequence, $\\sum a_k$ converges iff $\\sum 2^k a_{2^k}$ converges"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-nonnegative-series-bounded-partial-sums, def-monotone-sequence, def-integer-power, lem-power-monotone, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-series, def-bounded-set]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Cauchy_condensation_test"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3 (3.27)"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Stephen Semmes, Elements of Analysis"
+      url: "https://math.rice.edu/~semmes/math331.pdf"
 pipeline_run: null
 ---
 

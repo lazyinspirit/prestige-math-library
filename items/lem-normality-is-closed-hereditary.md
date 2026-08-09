@@ -4,6 +4,9 @@ kind: lemma
 title: "Every closed subspace of a normal space is normal"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-normal-and-t4-spaces, def-subspace-topology-top, def-hereditary-property]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "J. P. May, An Outline Summary of Basic Point Set Topology, §6"
       url: "https://math.uchicago.edu/~may/FINITE/REUNotes2010/Topology10.pdf"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
 pipeline_run: null
 ---
 

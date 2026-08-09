@@ -1,39 +1,43 @@
 ---
 id: thm-compact-hausdorff-space-has-a-unique-compatible-uniformity
 kind: theorem
-title: "A compact Hausdorff space carries exactly one compatible uniformity"
+title: "A nonempty compact Hausdorff space carries exactly one compatible uniformity"
 status: published
 origin: session
-deps: [thm-compact-hausdorff-open-cover-uniformity, lem-entourage-and-uniform-cover-dictionary, def-uniform-space-by-entourages, lem-finite-star-refinement-for-compact-hausdorff-spaces, lem-symmetric-entourages-form-a-base, thm-uniformity-induces-a-topology, def-compact-space]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-compact-hausdorff-open-cover-uniformity, lem-entourage-and-uniform-cover-dictionary, def-uniform-space-by-entourages, lem-finite-star-refinement-for-compact-hausdorff-spaces, lem-symmetric-entourages-form-a-base, thm-uniformity-induces-a-topology, def-compact-space, def-uniformizable-space]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 
 ## Statement
 
-A compact Hausdorff topology carries exactly one compatible uniformity.
+A nonempty compact Hausdorff topology carries exactly one compatible uniformity.
 
 ## Facts & Assumptions
 
-**Given:** A compact Hausdorff topology on $X$.
+**Given:** A nonempty compact Hausdorff topology on $X$.
 
 [L1] Its open covers form a compatible uniform-cover structure ([[thm-compact-hausdorff-open-cover-uniformity]]).
 
 [L2] Uniform-cover and entourage structures determine each other ([[lem-entourage-and-uniform-cover-dictionary]]).
 
-[L3] A compatible uniformity has the given topology as its induced topology ([[def-uniform-space-by-entourages]]).
+[L3] A compatible uniformity is one whose induced topology is the given topology ([[def-uniformizable-space]]).
 
 [L4] Entourage balls form neighbourhood bases, symmetric entourages have square roots, and compactness supplies finite subcovers ([[thm-uniformity-induces-a-topology]], [[lem-symmetric-entourages-form-a-base]], [[def-compact-space]]).
 

@@ -4,6 +4,9 @@ kind: definition
 title: "The left and right uniformities of a topological group"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-topological-group, def-uniform-space-by-entourages, def-neighbourhood-top]
 aliases: []
 landmark: true
@@ -16,7 +19,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
 pipeline_run: null
 ---
 

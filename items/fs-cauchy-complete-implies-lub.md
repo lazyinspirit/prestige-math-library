@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: an ordered field in which every Cauchy sequence converges has the least-upper-bound property"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-completeness-equivalences, def-completeness-properties, def-archimedean-field, def-sequences-in-an-ordered-field, def-complete-ordered-field, thm-laurent-cauchy-complete, cor-laurent-not-lub-complete, lem-laurent-non-archimedean, thm-laurent-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Complete metric space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Complete_metric_space"
     - title: "Completeness of the real numbers (Wikipedia)"

@@ -4,18 +4,22 @@ kind: theorem
 title: "For $a_k, b_k > 0$ with $a_k/b_k \\to L$: if $L \\in (0,\\infty)$ the two series share their behaviour, while $L = 0$ and $L = \\infty$ give one implication each"
 status: published
 origin: session
-deps: [thm-direct-comparison-test, def-real-limit, def-series, def-divergence-to-infinity, lem-series-linearity, cor-archimedean-reciprocal, def-sequence, lem-limit-unique]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-direct-comparison-test, def-real-limit, def-series, def-divergence-to-infinity, lem-series-linearity, cor-archimedean-reciprocal, def-sequence, lem-limit-unique, def-field, lem-of-sign-rules]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Limit_comparison_test"
     - title: "T. Tao, Analysis I, 3rd ed., §7.3"
       url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "APEX Calculus, Section 9.4: Comparison Tests"
+      url: "https://sites.und.edu/timothy.prescott/apex/web/apex.Ch9.S4.html"
+    - title: "MIT 18.100B Real Analysis lecture notes"
+      url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
 pipeline_run: null
 ---
 
@@ -70,7 +78,7 @@ no limit in $\mathbb{R}$, and this library does not write $\lim q_k = +\infty$.
 
 [L4] For $c \ne 0$: $\sum c\,x_k$ converges if and only if $\sum x_k$ converges ([[lem-series-linearity]]).
 
-[L5] Since $b_k > 0$, the identity $a_k = q_k b_k$ holds for every $k$, and multiplying an inequality between reals by $b_k > 0$ preserves it ([[def-series]]).
+[L5] Since $q_k=a_k/b_k$ and $b_k>0$, the field laws give $a_k=q_kb_k$. Multiplication by a positive scalar preserves strict inequalities; the non-strict form follows by adjoining the equality case ([[def-field]], [[lem-of-sign-rules]]).
 
 ## Proof
 

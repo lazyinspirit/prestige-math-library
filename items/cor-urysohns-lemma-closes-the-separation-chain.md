@@ -4,6 +4,9 @@ kind: corollary
 title: "Under dependent choice a normal $T_1$ space is completely regular, so $T_4 \\Rightarrow T_{3\\frac{1}{2}}$, and together with the implications already proved this is the whole classical chain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-urysohn-lemma, def-normal-and-t4-spaces, def-t0-and-t1-spaces,
        thm-t1-iff-singletons-are-closed, def-completely-regular-and-tychonoff-spaces,
        thm-the-separation-implication-chain, def-dependent-choice, def-countable-choice]

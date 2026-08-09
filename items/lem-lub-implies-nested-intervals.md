@@ -4,6 +4,9 @@ kind: lemma
 title: "An ordered field with the least-upper-bound property has the nested interval property and is Archimedean"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-completeness-properties, def-sequences-in-an-ordered-field, def-archimedean-field, thm-of-archimedean, def-complete-ordered-field, def-upper-bound, def-ordered-field, thm-induction-principle, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. F. Hall, Completeness of Ordered Fields"
+      url: "https://arxiv.org/abs/1101.5652"
     - title: "Nested intervals (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Nested_intervals"
     - title: "Archimedean property (Wikipedia)"

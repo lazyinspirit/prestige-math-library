@@ -4,6 +4,9 @@ kind: counterexample
 title: "The function equal to $0$ off the origin and to $1$ at the origin has limit $0 \\ne 1$ there"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-limit-equals-value, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-one-sided-limits, def-interval, lem-limit-is-local, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Classification of discontinuities (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
     - title: "Limit of a function (Wikipedia)"

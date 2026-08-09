@@ -4,6 +4,9 @@ kind: theorem
 title: "If $c$ is a limit point of the domain from both sides, the limit exists iff both one-sided limits exist and agree"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-one-sided-limits, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-interval, lem-limit-is-local, lem-function-limit-unique, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "One-sided limit (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/One-sided_limit"
     - title: "J. Lebl, Basic Analysis I, §3.1"

@@ -4,6 +4,11 @@ kind: example
 title: "A continuous function on $[0,1] \\subseteq \\mathbb{R}$ extended to all of $\\mathbb{R}$, both by Tietze and by hand"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-tietze-extension-theorem, cor-tietze-for-unbounded-and-open-interval-valued-maps,
        thm-metric-spaces-are-completely-normal, def-normal-and-t4-spaces,
        def-continuity-real, lem-continuity-is-local-and-pastes, def-interval,

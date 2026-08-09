@@ -4,6 +4,9 @@ kind: counterexample
 title: "Regular and normal do not imply $T_1$ under the library's conventions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-standard-topologies, def-regular-and-t3-spaces, def-normal-and-t4-spaces, def-t0-and-t1-spaces]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "S. Willard, General Topology, separation axioms"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "Sierpinski space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sierpi%C5%84ski_space"
+    - title: "Separation axiom (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separation_axiom"
 pipeline_run: null
 ---
 

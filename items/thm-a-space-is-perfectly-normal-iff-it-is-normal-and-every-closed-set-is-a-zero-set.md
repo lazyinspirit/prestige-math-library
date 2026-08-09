@@ -4,6 +4,9 @@ kind: theorem
 title: "Under dependent choice a space is perfectly normal if and only if it is normal and every closed set is a zero set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-urysohn-lemma, lem-a-uniformly-approximable-real-valued-map-is-continuous,
        def-completely-normal-and-perfectly-normal-spaces, def-zero-sets-and-cozero-sets,
        def-g-delta-and-f-sigma-in-a-topological-space, def-normal-and-t4-spaces,

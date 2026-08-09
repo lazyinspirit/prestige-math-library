@@ -4,6 +4,9 @@ kind: counterexample
 title: "$\\sum k^{-1/2}$ diverges and $\\sum k^{-2}$ converges, and both have root limit exactly $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-root-test, thm-p-series-rational, lem-nth-root-of-n-tends-to-one, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, thm-squeeze, thm-algebra-of-limits, thm-convergence-iff-limsup-equals-liminf, def-limsup-liminf, def-series, lem-of-naturals-positive, def-real-limit, lem-of-inverse-positive, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Root_test"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "Convergence tests (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Convergence_tests"
 pipeline_run: null
 ---
 

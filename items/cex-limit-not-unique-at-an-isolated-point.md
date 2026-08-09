@@ -4,6 +4,11 @@ kind: counterexample
 title: "On the domain $\\{0\\} \\cup [1,2]$ every real is vacuously a limit at $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [fs-limit-unique-at-every-point-of-the-domain, def-limit-point-r, def-function-limit, lem-function-limit-unique, def-neighbourhood-r, def-interval, lem-of-abs-value, lem-of-add-order, lem-of-sign-rules, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -12,11 +17,12 @@ short: "no uniqueness at an isolated point"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -86,6 +92,6 @@ The same $A$, the same $f$, and opposite behaviour at two of its points.
 
 - **Nothing about $f$ is used at $0$.** Step 2.1 never evaluates the function: the implication has no instances. Any $f$ whatever on this $A$ would give the same conclusion, which is precisely why the formula carries no information there.
 
-- **The dichotomy is complete.** For $c \in A$, being isolated in $A$ and being a limit point of $A$ are exact opposites ([[def-limit-point-r]]), so a point of the domain either admits a unique limit ([[lem-function-limit-unique]]) or admits every real as a solution of the formula, with no third possibility.
+- **The alternatives are exact.** At a limit point of the domain the formula has at most one solution ([[lem-function-limit-unique]]), while at an isolated point every real solves it ([[def-limit-point-r]]).
 
 - **Some texts declare the limit at an isolated point to be $f(c)$.** That convention is consistent — it selects one of the many solutions — but it is a stipulation, not a theorem, and [[fs-limit-unique-at-every-point-of-the-domain]] records why this library declines it.

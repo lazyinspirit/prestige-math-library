@@ -4,6 +4,9 @@ kind: theorem
 title: "Every uniformly continuous map is continuous for the induced topologies"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-uniformly-continuous-map, thm-uniformity-induces-a-topology, def-continuous-map-top]
 aliases: []
 landmark: false

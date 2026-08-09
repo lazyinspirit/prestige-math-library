@@ -4,6 +4,9 @@ kind: counterexample
 title: "Two series with $a_k \\le b_k$ for all $k$, $\\sum b_k$ convergent and $\\sum a_k$ divergent, when the terms may be negative"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-direct-comparison-test, thm-nonnegative-series-bounded-partial-sums, ex-harmonic-series-diverges, def-series, lem-series-linearity, def-finite-sum, lem-finite-sum-laws, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit]
 justified_by: []
 aliases: []
@@ -21,6 +24,8 @@ sources:
   references:
     - title: "Direct comparison test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Direct_comparison_test"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

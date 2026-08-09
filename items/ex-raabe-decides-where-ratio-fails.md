@@ -4,6 +4,9 @@ kind: example
 title: "A series with ratio limit exactly $1$ that Raabe decides"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-raabe-test, thm-ratio-test, def-series, def-limsup-liminf, lem-limsup-exists, def-integer-power, thm-p-series-rational, thm-algebra-of-limits, cor-archimedean-reciprocal, lem-extended-reals-complete, def-extended-reals, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit, lem-power-monotone]
 justified_by: []
 aliases: []
@@ -23,6 +26,12 @@ sources:
       url: "https://en.wikipedia.org/wiki/Raabe%27s_test"
     - title: "Ratio test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ratio_test"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+    - title: "Binghamton University notes on Kummer, Raabe, and Gauss tests"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch5.pdf"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

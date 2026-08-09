@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: every uniformizable topology has a unique compatible uniformity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [ex-r-and-open-interval-homeomorphic-not-uniformly-isomorphic, def-uniformizable-space, def-uniform-embedding-and-uniform-isomorphism]
 aliases: []
 landmark: false

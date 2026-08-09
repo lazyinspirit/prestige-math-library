@@ -4,10 +4,14 @@ kind: example
 title: "In a metric space the function $d(x,A)/(d(x,A) + d(x,B))$ separates two disjoint closed sets outright, so the metric case spends no choice principle"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-urysohn-lemma, thm-metric-spaces-are-completely-normal,
        thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-metric-space,
        def-metric-topology, def-dependent-choice, def-continuous-map-top,
-       def-interval, def-metrizable-space, lem-distance-to-set-is-lipschitz]
+       def-interval, def-metrizable-space, lem-distance-to-set-is-lipschitz,
+       def-metric-bounded-diameter, thm-metric-closure-characterisation]
 justified_by: []
 aliases: []
 landmark: false
@@ -16,20 +20,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-07-29
-    scope: page
+    date: 2026-08-09
+    scope: published-audit
     delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-29
 sources:
   scraped: []
   references:
     - title: "Urysohn's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Urysohn%27s_lemma"
+    - title: "Gabriel Nagy, Real Analysis, Lecture 6: Metric spaces"
+      url: "https://www.math.ksu.edu/~nagy/real-an/1-06-top-metric.pdf"
 pipeline_run: null
 ---
 
@@ -51,7 +53,7 @@ construction inside that theorem.
 
 **Given:** A metric space $(X,d)$ and disjoint, nonempty, closed $A, B \subseteq X$.
 
-[L1] For nonempty $S \subseteq X$: $d(\cdot,S)$ is $1$-Lipschitz, hence continuous ([[lem-distance-to-set-is-lipschitz]]); $d(x,S) \ge 0$; and $d(x,S)=0$ exactly when $x \in \overline{S} = S$, $S$ being closed ([[thm-metric-spaces-are-completely-normal]]'s own Facts, [[def-metric-space]]).
+[L1] For nonempty $S \subseteq X$, $d(\cdot,S)$ is $1$-Lipschitz, hence continuous; $d(x,S)\ge 0$; and $\overline S=\{x:d(x,S)=0\}$ ([[lem-distance-to-set-is-lipschitz]]; [[def-metric-bounded-diameter]]; [[thm-metric-closure-characterisation]], claim 1). In particular, when $S$ is closed, $d(x,S)=0$ exactly when $x\in S$.
 
 ## Verification
 

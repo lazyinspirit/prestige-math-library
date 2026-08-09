@@ -4,6 +4,9 @@ kind: counterexample
 title: "With $g \\equiv 0$ and $f$ equal to $0$ off the origin and $1$ at it, $\\lim g = 0$ and $\\lim_{y \\to 0} f = 0$ while $f \\circ g \\equiv 1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-naive-composition-of-limits, thm-composition-of-function-limits, cex-limit-differs-from-the-value, def-function-limit, def-limit-point-r, def-neighbourhood-r, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []
@@ -12,14 +15,17 @@ short: "composition fails"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "J. Lebl, Basic Analysis I, §3.1"
@@ -86,7 +92,7 @@ the inner function takes the critical value.
 
 4.2 Both extra hypotheses of [[thm-composition-of-function-limits]] fail for the pair $(f, g)$: hypothesis (i) fails because $L = 0$ lies in $B = \mathbb{R}$ while $f(L) = f(0) = 1 \ne 0 = M$, and hypothesis (ii) fails because $g(x) = 0 = L$ for every $x$, so no punctured neighbourhood of $0$ avoids the value $L$. For the pair $(f, \iota)$, hypothesis (ii) does hold with $\eta := 1$, since $\iota(x) = x \ne 0$ whenever $0 < |x - 0| < 1$; and step 3.2 confirms the conclusion of the theorem there. [step 1.1, step 3.1, step 3.2, L6]
 
-5.1 So the extra hypotheses of the true theorem are not removable, and the obstruction is located exactly at the values of the inner function that equal $L$. [step 4.1, step 4.2] ∎
+5.1 So the two safeguards in the true theorem cannot both be omitted, and the obstruction is located exactly at the values of the inner function that equal $L$. [step 4.1, step 4.2] ∎
 
 ## Remarks
 

@@ -4,6 +4,9 @@ kind: example
 title: "$\\sum 1/k^2$ converges with sum at most $2$, by comparison with the telescoping $\\sum 1/(k(k-1))$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-direct-comparison-test, lem-telescoping-series, thm-p-series-rational, def-series, def-integer-power, lem-series-tail-invariance, thm-nonnegative-series-bounded-partial-sums, lem-of-inverse-positive, lem-of-naturals-positive, def-finite-sum, lem-finite-sum-laws, cor-archimedean-reciprocal, def-real-limit, def-rational-power, def-bounded-set]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Telescoping_series"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 

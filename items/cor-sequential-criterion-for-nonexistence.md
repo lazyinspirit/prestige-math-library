@@ -4,6 +4,9 @@ kind: corollary
 title: "A function has no limit at $c$ as soon as two sequences in $A \\setminus \\{c\\}$ tending to $c$ give different limits of the values"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-sequential-criterion-for-function-limits, def-function-limit, def-limit-point-r, def-sequence, def-real-limit, lem-limit-unique]
 justified_by: []
 aliases: [cor-divergence-test-for-function-limits]
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4 (Cor. to Thm 4.2)"

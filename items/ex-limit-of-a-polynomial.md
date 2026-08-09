@@ -4,6 +4,9 @@ kind: example
 title: "Every polynomial has $\\lim_{x \\to c} p(x) = p(c)$, and rational functions do so away from the zeros of the denominator"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-algebra-of-function-limits, lem-sign-preservation-near-a-limit, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-finite-sum, def-integer-power, thm-induction-principle, lem-of-abs-value, def-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Polynomial (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Polynomial"
     - title: "Limit of a function (Wikipedia)"

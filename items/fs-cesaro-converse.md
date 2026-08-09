@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if the Cesaro means of a sequence converge then the sequence converges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cesaro-mean-theorem, def-cesaro-mean, lem-alternating-sequence, fs-bounded-implies-convergent, cor-archimedean-reciprocal, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, def-real-limit, def-sequence, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 forward_refs: [ex-cesaro-means-of-alternating]
 justified_by: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Grandi's series (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Grandi%27s_series"
     - title: "Cesàro summation (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ces%C3%A0ro_summation"
     - title: "Divergent series (Wikipedia)"

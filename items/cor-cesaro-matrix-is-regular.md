@@ -4,6 +4,9 @@ kind: corollary
 title: "The Cesaro matrix satisfies the Silverman-Toeplitz conditions, giving a second proof of the Cesaro mean theorem"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-silverman-toeplitz, def-summability-matrix, def-cesaro-mean, def-sequence, def-finite-sum, lem-finite-sum-laws, def-real-limit, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-abs-value, def-complete-ordered-field, def-ordered-field]
 forward_refs: [cex-irregular-summability-matrix]
 justified_by: []
@@ -20,6 +23,10 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "Toeplitz matrix (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Toeplitz_matrix"
+    - title: "Summation methods (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Summation_methods"
     - title: "Silverman-Toeplitz theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Silverman%E2%80%93Toeplitz_theorem"
     - title: "Cesàro summation (Wikipedia)"

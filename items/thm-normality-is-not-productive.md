@@ -4,6 +4,9 @@ kind: theorem
 title: "Assuming choice, normality is not productive: the normal lower-limit line has a nonnormal square"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-axiom-of-choice, def-countable-choice, cor-lower-limit-line-is-normal, lem-jones-normal-density-discrete-bound, lem-lower-limit-plane-antidiagonal, thm-cardinal-power-set-and-cantor, thm-schroder-bernstein, thm-cantor-set-ternary-description, thm-rationals-countable, lem-of-q-dense]
 aliases: []
 landmark: true
@@ -20,6 +23,10 @@ sources:
   references:
     - title: "G. Gruenhage, General Topology Course Notes, Sorgenfrey plane and Jones's lemma"
       url: "https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf"
+    - title: "Sorgenfrey topology (Encyclopedia of Mathematics)"
+      url: "https://encyclopediaofmath.org/wiki/Sorgenfrey_topology"
+    - title: "Sorgenfrey plane (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Sorgenfrey_plane"
 pipeline_run: null
 ---
 

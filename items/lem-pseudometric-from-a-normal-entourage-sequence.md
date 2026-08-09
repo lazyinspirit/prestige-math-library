@@ -4,6 +4,9 @@ kind: lemma
 title: "A normal sequence of entourages yields a uniformly continuous pseudometric with controlled dyadic balls"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-metric-space, def-rational-power, def-integer-power, def-infimum, def-finite-sum, def-gauge-of-pseudometrics, lem-geometric-sequence-null, thm-infimum-property, lem-inf-epsilon, lem-finite-sum-laws, lem-rational-power-laws, lem-rational-power-monotone, def-uniform-space-by-entourages, def-filter, thm-strong-induction]
 aliases: []
 landmark: true
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}]
 pipeline_run: null
 ---
 

@@ -4,6 +4,11 @@ kind: example
 title: "Every closed subset of $\\mathbb{R}$ is a zero set and a $G_\\delta$, as the perfect-normality criterion predicts"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
 deps: [thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set,
        thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-zero-sets-and-cozero-sets,
        def-g-delta-and-f-sigma-in-a-topological-space,

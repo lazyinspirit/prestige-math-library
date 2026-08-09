@@ -4,6 +4,9 @@ kind: example
 title: "The sign function has both one-sided limits at $0$ and no two-sided limit"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-one-sided-limits, thm-two-sided-limit-iff-both-one-sided, def-function-limit, lem-function-limit-unique, def-limit-point-r, def-neighbourhood-r, def-interval, lem-of-abs-value, lem-of-add-order, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []

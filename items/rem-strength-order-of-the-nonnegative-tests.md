@@ -4,17 +4,21 @@ kind: remark
 title: "How the nonnegative tests are ordered by strength, and which of them this page cannot state without the logarithm"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [thm-root-test, thm-ratio-test, cor-root-test-dominates-ratio-test, cor-ratio-test-is-kummer-with-constant-weights, cor-raabe-test, thm-gauss-test, thm-kummer-test, thm-abel-dini, fs-universal-comparison-series, thm-direct-comparison-test, thm-geometric-series, thm-cauchy-condensation, thm-p-series-rational, lem-absolute-convergence-implies-convergence, thm-series-cauchy-criterion, def-rational-power, def-limsup-liminf]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,6 +26,14 @@ sources:
       url: "https://en.wikipedia.org/wiki/Convergence_tests"
     - title: "K. Knopp, Theory and Application of Infinite Series, Ch. IX"
       url: "https://en.wikipedia.org/wiki/Konrad_Knopp"
+    - title: "CSUDH notes on the ratio and root tests"
+      url: "https://math.csudh.edu/~pong/a3/Notes_01.html"
+    - title: "Thomson, Bruckner, and Bruckner, Elementary Real Analysis"
+      url: "https://people.math.sc.edu/girardi/m5545/TBB-AllChapters-Landscape.pdf"
+    - title: "Binghamton University notes on Kummer, Raabe, and Gauss tests"
+      url: "https://people.math.binghamton.edu/dikran/478/Ch5.pdf"
+    - title: "Abel-Dini-Pringsheim theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Abel%E2%80%93Dini%E2%80%93Pringsheim_theorem"
 pipeline_run: null
 ---
 
@@ -94,12 +106,13 @@ not an approach to a best test.
 - *The integral test.* It compares $\sum f(k)$ with $\int f$, and the Riemann
   integral is developed much later in this library. Condensation is the substitute
   used on this page, and for the $p$-series it does the same work.
-- *The general form of Gauss's test.* The classical statement allows an error
-  $r_k$ of order $1/(k \log k)$, or more generally any error making
-  $\sum |r_k|$ convergent with the relevant products controlled; the version
-  proved here assumes $|r_k| \le C k^{-1-\varepsilon}$ with $\varepsilon$ a
-  positive rational, which is a $p$-series bound and therefore expressible. The
-  restriction costs generality, not correctness.
+- *The general form of Gauss's test.* The classical statement assumes
+  $r_k=O(k^{-\beta})$ for some real $\beta>1$. The version proved here writes
+  $\beta=1+\varepsilon$ with $\varepsilon$ a positive rational. This loses no
+  case covered by the classical hypothesis: given $\beta>1$, choose a rational
+  $0<\varepsilon<\beta-1$ and weaken the eventual bound. An error of order
+  $1/(k\log k)$ is not a Gauss remainder at $h=1$; it is the next Bertrand
+  borderline.
 
 **A limitation that has been removed, and one that has not.** The comparison
 with a geometric series inside [[thm-root-test]] and [[thm-ratio-test]] delivers

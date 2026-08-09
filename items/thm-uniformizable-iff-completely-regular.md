@@ -1,33 +1,37 @@
 ---
 id: thm-uniformizable-iff-completely-regular
 kind: theorem
-title: "Assuming dependent choice, a topological space is uniformizable if and only if it is completely regular"
+title: "Assuming dependent choice, a nonempty topological space is uniformizable if and only if it is completely regular"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-uniformizable-spaces-are-completely-regular, lem-completely-regular-topologies-come-from-continuous-pseudometrics, def-uniformizable-space, def-dependent-choice]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "M. Kunzinger, General Topology", url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"}, {title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}]
 pipeline_run: null
 ---
 
 ## Statement
 
-**Assuming dependent choice,** a topological space is uniformizable if and only if it is completely regular.
+**Assuming dependent choice,** a nonempty topological space is uniformizable if and only if it is completely regular.
 
 ## Facts & Assumptions
 
-**Given:** A topological space and dependent choice.
+**Given:** A nonempty topological space and dependent choice.
 
 [L1] Under dependent choice, uniformizable spaces are completely regular ([[lem-uniformizable-spaces-are-completely-regular]]).
 

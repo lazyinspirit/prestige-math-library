@@ -4,6 +4,9 @@ kind: theorem
 title: "A space is completely normal if and only if every subspace is normal"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-completely-normal-and-perfectly-normal-spaces, def-separated-sets, def-normal-and-t4-spaces, def-subspace-topology-top, def-hereditary-property]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "S. Willard, General Topology, §15"
       url: "https://en.wikipedia.org/wiki/General_topology"
+    - title: "Normal space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Normal_space"
 pipeline_run: null
 ---
 

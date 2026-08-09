@@ -4,6 +4,11 @@ kind: counterexample
 title: "Over $\\mathbb{Q}$ there is a nonconstant differentiable function with identically zero derivative, so Rolle and the mean value theorem both fail"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [cex-evt-and-ivt-fail-over-a-non-complete-field, def-sequences-in-an-ordered-field, def-completeness-properties, def-rationals, thm-rat-ordered-field, thm-of-square-roots, fs-sqrt2-rational, def-integer-power, lem-power-monotone, lem-of-abs-value, lem-of-inverse-positive, lem-of-sign-rules, lem-of-add-order, lem-of-naturals-positive, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

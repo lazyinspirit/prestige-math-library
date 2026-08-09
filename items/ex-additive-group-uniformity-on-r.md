@@ -4,6 +4,9 @@ kind: example
 title: "The left, right, upper and Roelcke uniformities of the additive topological group $\\mathbb{R}$ all equal its metric uniformity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-left-and-right-uniformities-of-a-topological-group, def-upper-and-roelcke-uniformities-of-a-topological-group, lem-metric-uniformity-dictionary, def-topological-group, def-group]
 aliases: []
 landmark: false
@@ -17,7 +20,7 @@ verification:
   audited: 2026-07-31
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "M. Megrelishvili, Lecture Notes in Topological Groups", url: "https://u.math.biu.ac.il/~megereli/TGrNotes070217.pdf"}, {title: "C. Rosendal, Coarse Geometry of Topological Groups", url: "https://homepages.math.uic.edu/~rosendal/PapersWebsite/Coarse-Geometry-Book23.pdf"}]
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: remark
 title: "Preservation ledger for the separation axioms, with $T_1$ conventions kept explicit"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-positive-heredity-of-separation-axioms, thm-positive-productivity-of-separation-axioms, lem-normality-is-closed-hereditary, thm-completely-normal-iff-hereditarily-normal, thm-normality-is-not-hereditary, thm-normality-is-not-productive]
 aliases: []
 landmark: true

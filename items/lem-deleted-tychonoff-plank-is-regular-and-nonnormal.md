@@ -4,6 +4,9 @@ kind: lemma
 title: "Assuming countable choice, the deleted Tychonoff plank is a regular nonnormal open subspace of a compact Hausdorff normal space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-order-topology-on-an-ordinal, lem-ordinal-order-topology-is-t3, thm-positive-heredity-of-separation-axioms, thm-positive-productivity-of-separation-axioms, thm-finite-products-of-compact-spaces, thm-a-compact-hausdorff-space-is-regular-and-normal, thm-countable-subsets-of-omega-one-are-bounded, thm-ordinal-spaces-and-compactness, def-ordinal-addition, def-normal-and-t4-spaces, def-countable-choice]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "L. A. Steen and J. A. Seebach, Counterexamples in Topology, deleted Tychonoff plank"
       url: "https://web.math.ucsb.edu/~bigelow/books/counterexamples.pdf"
+    - title: "Tychonoff plank (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Tychonoff_plank"
 pipeline_run: null
 ---
 

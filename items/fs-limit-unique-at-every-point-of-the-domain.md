@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a function has at most one limit at every point of its domain, isolated points included"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-function-limit-unique, def-limit-point-r, def-function-limit, def-neighbourhood-r, def-interval, lem-of-abs-value, cor-of-one-positive, def-ordered-field]
 justified_by: []
 aliases: []

@@ -4,20 +4,24 @@ kind: theorem
 title: "Assuming the ultrafilter lemma, every complete and totally bounded uniform space is compact"
 status: published
 origin: session
-deps: [lem-ultrafilters-on-totally-bounded-uniform-spaces-are-cauchy, def-complete-uniform-space, thm-compactness-via-nets-filters-and-ultrafilters, thm-ultrafilter-lemma]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [lem-ultrafilters-on-totally-bounded-uniform-spaces-are-cauchy, def-complete-uniform-space, thm-compactness-via-nets-filters-and-ultrafilters]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
-  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}]
+  references: [{title: "J. Wodzicki, Uniform Structure", url: "https://math.berkeley.edu/~wodzicki/H104.F13/UniformStructure-alt.pdf"}, {title: "Encyclopedia of Mathematics, Uniform space", url: "https://encyclopediaofmath.org/wiki/Uniform_space"}]
 pipeline_run: null
 ---
 
@@ -33,7 +37,7 @@ pipeline_run: null
 
 [L2] Completeness makes every Cauchy filter converge ([[def-complete-uniform-space]]).
 
-[L3] Assuming the ultrafilter lemma, a topological space is compact if and only if every ultrafilter converges ([[thm-compactness-via-nets-filters-and-ultrafilters]], [[thm-ultrafilter-lemma]]).
+[L3] Assuming the ultrafilter lemma, a topological space is compact if and only if every ultrafilter converges ([[thm-compactness-via-nets-filters-and-ultrafilters]]).
 
 ## Proof
 

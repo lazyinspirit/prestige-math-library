@@ -4,7 +4,10 @@ kind: example
 title: "The harmonic series $\\sum 1/k$ diverges, by condensation and by Oresme block grouping"
 status: published
 origin: session
-deps: [thm-cauchy-condensation, thm-p-series-rational, def-series, lem-nth-term-test, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-integer-power, lem-power-monotone, lem-of-inverse-positive, lem-of-naturals-positive, thm-of-archimedean, def-monotone-sequence, def-rational-power, def-bounded-set]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-cauchy-condensation, def-series, lem-nth-term-test, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, thm-nonnegative-series-bounded-partial-sums, def-integer-power, lem-power-monotone, lem-of-inverse-positive, lem-of-naturals-positive, thm-of-archimedean, def-monotone-sequence, def-bounded-set]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,10 +15,18 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-08-08
+    scope: published-audit-targeted
+    context_sha256: 0f48f4943f1dee4dd479b389de4cd9886d3a090954f07664cb04c0c931391a42
+    item_sha256: 387373f9a635ee8bebf4142a6f5c6dae2b7067de5e375e20e0c21e37e0ac4402
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-09
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +34,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
     - title: "Cauchy condensation test (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Cauchy_condensation_test"
+    - title: "John K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
 pipeline_run: null
 ---
 
@@ -43,8 +56,8 @@ bound
 $$\sum_{k=1}^{2^{n}} \frac{1}{k} \;\ge\; 1 + \frac{n}{2} \qquad (n \in \mathbb{N}) .$$
 
 That bound is worth having on its own: it says the harmonic partial sums grow at
-least like a constant multiple of $n$ along the powers of $2$, which is the
-slowest divergence any explicit series on this page exhibits.
+least like a constant multiple of $n$ along the powers of $2$, giving a concrete
+quantitative witness to their slow divergence.
 
 ## Facts & Assumptions
 
@@ -63,8 +76,6 @@ slowest divergence any explicit series on this page exhibits.
 [L6] The principle of induction ([[thm-induction-principle]]); and for every real $x$ there is a natural $n$ with $\iota(n) > x$ ([[thm-of-archimedean]]).
 
 [L7] For a series of nonnegative terms: it converges if and only if the range of its partial sums is bounded above ([[thm-nonnegative-series-bounded-partial-sums]], [[def-bounded-set]]).
-
-[L8] The rational power at exponent $1$ is the element itself, so $k^{1} = \iota(k)$ and the family here is the case $p = 1$ of the $p$-series ([[def-rational-power]], [[thm-p-series-rational]]).
 
 ## Verification
 

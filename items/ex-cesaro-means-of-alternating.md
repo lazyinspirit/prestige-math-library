@@ -4,6 +4,9 @@ kind: example
 title: "The Cesaro means of $(-1)^k$ converge to $0$ although the sequence diverges"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-cesaro-mean, fs-cesaro-converse, fs-bounded-implies-convergent, lem-alternating-sequence, cor-archimedean-reciprocal, def-finite-sum, def-real-limit, def-sequence, lem-of-abs-value, lem-of-inverse-positive, lem-of-naturals-positive, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []

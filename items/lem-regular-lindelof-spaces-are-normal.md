@@ -4,6 +4,9 @@ kind: lemma
 title: "Every regular Lindelöf space is normal"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-regularity-via-closed-neighbourhoods, def-compactness-variants, def-normal-and-t4-spaces]
 aliases: []
 landmark: true
@@ -20,6 +23,8 @@ sources:
   references:
     - title: "J. R. Munkres, Topology, 2nd ed., §31"
       url: "https://en.wikipedia.org/wiki/James_Munkres"
+    - title: "MSSC topology text, §16"
+      url: "https://www.mssc.mu.edu/~paul/Paper/112042text.pdf"
 pipeline_run: null
 ---
 

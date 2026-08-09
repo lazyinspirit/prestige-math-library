@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: a function with a limit at $c$ is bounded on its whole domain"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-limit-implies-local-boundedness, def-function-limit, def-limit-point-r, def-neighbourhood-r, def-bounded-set, def-interval, thm-of-archimedean, lem-of-inverse-positive, lem-of-sign-rules, lem-of-abs-value, lem-of-add-order, lem-of-naturals-positive, cor-of-one-positive, def-field, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -20,6 +23,8 @@ verification:
 sources:
   scraped: []
   references:
+    - title: "J. Lebl, Basic Analysis I, §3.1: Limits of functions"
+      url: "https://www.jirka.org/ra/html/sec_limoffunc.html"
     - title: "Limit of a function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_function"
     - title: "Archimedean property (Wikipedia)"
