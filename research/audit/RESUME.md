@@ -1,14 +1,15 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVES 8, 9, AND 10 — A0 THROUGH A10 COMPLETE; THREE OWNER PAUSES OPEN (2026-08-09)
+## WAVES 8, 9, AND 10 — CONCLUDED; OWNER PAUSES CLEARED (2026-08-09)
 
-The owner explicitly directed these three waves to run in parallel. Their
-shared clean baseline is pushed commit
-`6fb3b6c9d08752db2239a2e0794752f0f69107fc`. All three final A10 suites pass
-9/9. Nothing from Waves 8--10 is committed or pushed, and no owner pause has
-been cleared.
+The owner explicitly directed these three waves to run in parallel and then
+cleared all three sole A10 pauses by instructing the orchestrator to conclude
+Waves 8, 9, and 10. Their shared baseline was
+`6fb3b6c9d08752db2239a2e0794752f0f69107fc`; checkpoint `60be95d` records the
+complete audit. All three final A10 suites pass 9/9. The checkpoint and closure
+commit are pushed together. Nothing is running, and nothing was published.
 
-### Wave 8 — A0 through A10 complete; owner pause open
+### Wave 8 — concluded; owner pause cleared
 
 Scope is eight pages / four pairs / 139 items / 116 proof-bearing / 1,603
 relationships. A7 judged exactly the 17 repaired ids. Its eight Terra
@@ -21,7 +22,7 @@ coverage is 139/139 items, 116/116 proofs, 1,603/1,603 relationships and 17/17
 repair pairs. A10 is green 9/9. Full rundown:
 `research/audit/wave8-A10.md`.
 
-### Wave 9 — A0 through A10 complete; owner pause open
+### Wave 9 — concluded; owner pause cleared
 
 Scope is two pages / one pair / 43 items / 34 proof-bearing / 485
 relationships. Alpha reconciled the complete manifest, including all 65
@@ -34,7 +35,7 @@ or judge call. Exact coverage is 43/43 items, 34/34 proofs, 485/485
 relationships and 5/5 repair pairs. A10 is green 9/9. Full rundown:
 `research/audit/wave9-A10.md`.
 
-### Wave 10 — A0 through A10 complete; owner pause open
+### Wave 10 — concluded; owner pause cleared
 
 Scope is four pages / two pairs / 57 items / 49 proof-bearing / 888
 relationships. Alpha reconciled all 888 edges, including 86 Wave10-to-Wave8
@@ -49,8 +50,8 @@ combined concurrent impact receipt covers 239 changed interfaces and 729
 consumer dispositions. A10 is green 9/9. Full rundown:
 `research/audit/wave10-A10.md`.
 
-Exact next action: the owner decides whether to clear each wave's sole A10
-shipment/conclusion pause. Do not commit or push before that direction.
+The next authorized audit action is Wave 11, beginning from a freshly verified
+auditable-page scope. No publication status changed in this conclusion.
 
 ## WAVE 7 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-09)
 

@@ -1,8 +1,9 @@
-# Wave 8 — A10 rundown
+# Wave 8 — A10 rundown; owner pause cleared
 
 Published-page retro-audit of dependency level 8. The Wave 8 mathematical text
-is frozen after A9. A0 through A10 are complete and the sole owner pause is
-open. The formerly concurrent Wave 9/10 repairs now carry their final
+is frozen after A9. A0 through A10 are complete. The owner cleared the sole A10
+pause on 2026-08-09 by instructing the orchestrator to conclude Waves 8, 9,
+and 10. The formerly concurrent Wave 9/10 repairs now carry their final
 independent stamps, so the shared repository gates are clean.
 
 Baseline: `6fb3b6c9d08752db2239a2e0794752f0f69107fc`.
@@ -172,6 +173,8 @@ not a structural owner request. All delegated mathematical and citation
 restatements are inspectable in A3, the Alpha report, the eight-row A8
 adjudication ledger, the personal audit, and A9.
 
-The Wave 8 A10 gate has been rerun 9/9 after final Wave 9/10 certification. The
-sole owner pause is open. Nothing is committed or pushed until the owner clears
-shipment.
+The Wave 8 A10 gate was rerun 9/9 after final Wave 9/10 certification. The
+owner cleared the sole pause by instructing the orchestrator to conclude Waves
+8, 9, and 10. Checkpoint `60be95d` records the complete A0--A10 audit; the
+closure commit and checkpoint are pushed together as the Wave 8--10 shipment.
+Nothing was published by this action.

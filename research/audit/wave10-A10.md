@@ -1,8 +1,9 @@
-# Wave 10 — A10 rundown
+# Wave 10 — A10 rundown; owner pause cleared
 
 Published-page retro-audit of dependency level 10. Wave 10 mathematical text
-is frozen after A9. A0 through A9 are complete; this is the sole owner-pause
-rundown. No Wave 8–10 audit change has been committed or pushed.
+is frozen after A9. A0 through A10 are complete. The owner cleared the sole A10
+pause on 2026-08-09 by instructing the orchestrator to conclude Waves 8, 9,
+and 10.
 
 Baseline: `6fb3b6c9d08752db2239a2e0794752f0f69107fc`.
 
@@ -154,5 +155,7 @@ transport caveat are nonfatal debt, not structural owner requests. Every
 delegated restatement is inspectable in A3, the Alpha report, the append-only
 A8 adjudications, the personal audit, and A9.
 
-The sole owner pause is therefore a shipment decision for the completed Wave
-8–10 audit changes. Nothing is committed or pushed until the owner clears it.
+The owner cleared the sole pause by instructing the orchestrator to conclude
+Waves 8, 9, and 10. Checkpoint `60be95d` records the complete A0--A10 audit;
+the closure commit and checkpoint are pushed together as the Wave 8--10
+shipment. Nothing was published by this action.

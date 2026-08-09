@@ -1,9 +1,10 @@
-# Wave 9 — A10 rundown
+# Wave 9 — A10 rundown; owner pause cleared
 
 Published-page retro-audit of dependency level 9. Wave 9 mathematical text is
-frozen after A9. A0 through A10 are complete and the sole owner pause is open.
-Wave 10's final independent certification removed the only former shared-gate
-pending state.
+frozen after A9. A0 through A10 are complete. The owner cleared the sole A10
+pause on 2026-08-09 by instructing the orchestrator to conclude Waves 8, 9,
+and 10. Wave 10's final independent certification removed the only former
+shared-gate pending state.
 
 Baseline: `6fb3b6c9d08752db2239a2e0794752f0f69107fc`.
 
@@ -152,6 +153,8 @@ nonfatal prose/citation debt, not structural owner requests. Every delegated
 restatement is inspectable in A3, the Alpha report, the append-only A8
 adjudications, the personal audit, and A9.
 
-The Wave 9 A10 gate has been rerun 9/9 after final Wave 10 certification. The
-sole owner pause is open. Nothing is committed or pushed until the owner clears
-shipment.
+The Wave 9 A10 gate was rerun 9/9 after final Wave 10 certification. The owner
+cleared the sole pause by instructing the orchestrator to conclude Waves 8, 9,
+and 10. Checkpoint `60be95d` records the complete A0--A10 audit; the closure
+commit and checkpoint are pushed together as the Wave 8--10 shipment. Nothing
+was published by this action.
