@@ -1,10 +1,11 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVE 7 — A0 THROUGH A10 COMPLETE, AT OWNER PAUSE (2026-08-09)
+## WAVE 7 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-09)
 
 **This section supersedes the Wave 6 pointer below. Full rundown:
-`research/audit/wave7-A10.md`.** Nothing is running. No publication status,
-item id, or reading-order position changed.
+`research/audit/wave7-A10.md`.** The owner cleared the sole A10 pause by
+instructing the orchestrator to conclude Wave 7. Nothing is running. No
+publication status, item id, or reading-order position changed.
 
 Scope: **214 unique items / 179 proof-bearing / 1,827 relationships / 12 pages /
 6 A/B pairs / 4 Beta batches**. All 214 items went from untagged to fully
@@ -35,9 +36,11 @@ DeepSeek readers, 59/59 spine attestations, 110/110 live URLs, and the A4/A6
 812-consumer impact surface. The final coverage receipt is 48/48 exact repair
 pairs with no unadjudicated current fatal rejection.
 
-The driver will create the single Wave 7 A0-A10 checkpoint commit and stop at
-the sole owner pause. It must not push. Clearing this pause licenses computing
-the next auditable wave; it does not publish anything.
+The driver created checkpoint `8e8194d` and stopped at the sole owner pause.
+The owner has now accepted the audit record; the run state is `complete` after
+the closure commit. Both commits are pushed as the Wave 7 audit shipment.
+Nothing was published by this action. The next authorized audit action is to
+compute the next auditable wave.
 
 ## WAVE 6 — CONCLUDED; OWNER PAUSE CLEARED (2026-08-08)
 

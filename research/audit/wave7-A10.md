@@ -1,8 +1,10 @@
-# Wave 7 — A10 rundown and owner pause
+# Wave 7 — A10 rundown; owner pause cleared
 
 Published-page retro-audit of dependency level 7. **A0 through A10 are
-complete and every required gate is green.** Nothing changed publication
-status, removed or renamed an id, or changed reading order.
+complete and every required gate is green.** The owner cleared the sole A10
+pause on 2026-08-09 by instructing the orchestrator to conclude Wave 7.
+Nothing changed publication status, removed or renamed an id, or changed
+reading order.
 
 **214 items, 179 proof-bearing, 1,827 relationships, 4 batches, 12 pages and
 6 A/B pairs.** Baseline: `d38db82b23d6096da654a0d62836918ceb6e08fb`.
@@ -232,10 +234,11 @@ Optional policy choices remain:
 3. Retain or resolve prior-wave owner queues where still applicable, including
    the standing Fact-fidelity convention and older id/title questions.
 
-## 10. What clearing this pause does
+## 10. Owner clearance
 
-Nothing publishes: every page was already published and no status was flipped.
-Clearing the pause accepts the Wave 7 provenance determinations, 48 exact
-A4/A6 repair targets, four fatal-only A8 repairs, two A9 stale-scope
-corrections, and their final evidence. It then licenses computing the next
-auditable wave.
+The owner cleared the pause by instructing the orchestrator to conclude Wave 7.
+This accepts the Wave 7 provenance determinations, 48 exact A4/A6 repair
+targets, four fatal-only A8 repairs, two A9 stale-scope corrections, and their
+final evidence. Nothing publishes: every page was already published and no
+status was flipped. The next authorized action is to compute the next auditable
+wave.
