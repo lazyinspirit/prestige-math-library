@@ -42,4 +42,6 @@ If $R$ is an integral domain, then $R[x_1,\ldots,x_n]$ is an integral domain for
 
 1.1 The ring $P_0=R$ is a domain, giving the zero-indeterminate case. [base, given, L1]
 
-2.1 If $P_n$ is a domain, then [L1] and [L2] make $P_{n+1}=P_n[x_{n+1}]$ a domain; [L3] therefore proves the claim for every $n$. [step 1.1, ih, L1, L2, L3, discharge-induction] ∎
+1.2 Fix $n\in\mathbb N$ and assume that $P_n$ is a domain. [ih, given]
+
+2.1 Under that hypothesis, [L1] and [L2] make $P_{n+1}=P_n[x_{n+1}]$ a domain; together with the base case, [L3] proves the claim for every $n$. [step 1.1, step 1.2, L1, L2, L3, discharge-induction] ∎

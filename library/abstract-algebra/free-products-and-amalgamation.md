@@ -1,0 +1,11 @@
+---
+page: free-products-and-amalgamation
+title: "Free Products and Amalgamation"
+status: draft
+items: [def-free-product-of-a-family-of-groups, def-reduced-syllable-word-in-a-family-of-groups, lem-factor-elements-act-on-reduced-syllable-words, thm-reduced-syllable-words-form-the-free-product, thm-normal-form-for-free-products, cor-torsion-in-a-free-product-is-conjugate-into-a-factor, cor-center-of-a-free-product-is-trivial, cor-free-product-factor-maps-are-injective, cor-free-products-are-unique-up-to-unique-isomorphism, cor-each-factor-is-a-retract-of-a-free-product, thm-presentation-of-a-free-product, thm-free-product-of-free-groups-on-disjoint-bases, cor-free-product-of-infinite-cyclic-groups-is-free, cor-z-free-product-z-is-free-group-of-rank-two, def-pushout-of-group-homomorphisms, thm-group-pushout-as-an-amalgamated-quotient, def-free-product-with-amalgamation, thm-presentation-of-a-free-product-with-amalgamation, def-normal-form-data-for-amalgamated-free-products, lem-factor-elements-act-on-amalgamated-normal-words, thm-normal-form-for-free-products-with-amalgamation, cor-factors-embed-in-a-free-product-with-amalgamation, cor-factor-images-intersect-in-the-amalgamated-subgroup, cor-trivial-amalgamation-is-the-free-product, prop-kernels-of-amalgamating-maps-collapse-in-the-pushout, cor-amalgamation-along-an-isomorphism-recovers-the-other-factor, rem-free-product-and-amalgamation-conventions]
+examples: []
+---
+
+The declared prerequisites provide free groups, group presentations, von Dyck's theorem, normal closures, cyclic groups, and external direct products. Their universal properties and quotient constructions make it possible to combine groups without imposing unintended relations, while reduced words retain enough information to distinguish the resulting elements.
+
+Free products are defined by their coproduct property and constructed from reduced syllable words, giving normal form, factor embeddings, presentations, retractions, torsion conjugacy, and the centre theorem. General group pushouts arise as quotients by amalgamating relations. Under injective edge maps, transversal normal forms prove that both factors embed and meet exactly in the amalgamated subgroup, while kernel collapse explains the failure of injectivity for arbitrary pushouts.

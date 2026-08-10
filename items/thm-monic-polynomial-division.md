@@ -11,7 +11,7 @@ deps: [prop-polynomial-degree-laws-over-a-commutative-ring, def-polynomial-degre
 justified_by: []
 aliases: []
 landmark: true
-proof_strategy: direct
+proof_strategy: induction
 verification:
   precheck: pass
 sources:
@@ -42,10 +42,14 @@ This includes the zero dividend and a constant monic divisor.
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** induction.
 
-1.1 If $f=0$ or $f\ne0$ with $\deg f<d$, take $q=0$ and $r=f$; if $d=0$, monicity gives $g=1$, so take $q=f$ and $r=0$. [given, L1, L2, construct]
+1.1 If $d=0$, monicity gives $g=1$, so $q=f,r=0$ works for every $f$. Hence suppose $d>0$; for the zero dividend, $q=r=0$ works. [base, given, L2, construct]
 
-2.1 Otherwise write $n=\deg f\ge d$ and $a=\operatorname{lc}(f)$; the polynomial $f_1=f-a x^{n-d}g$ has its degree-$n$ coefficient cancelled and is zero or has degree below $n$, so strong induction using [L3] gives $f_1=q_1g+r$ with $r=0$ or $\deg r<d$, whence $f=(q_1+a x^{n-d})g+r$; together with step 1.1 this proves existence. [step 1.1, L1, L2, L3, construct]
+1.2 Let $f\ne0$ have degree $n$ and assume, as the strong induction hypothesis, that division exists for every zero polynomial or nonzero polynomial of degree below $n$. If $n<d$, take $q=0,r=f$. [ih, given, L1, L2, construct]
 
-3.1 If $f=qg+r=q'g+r'$ are two such expressions, then $(q-q')g=r'-r$; if $q-q'\ne0$, the leading coefficient of $(q-q')g$ equals the nonzero leading coefficient of $q-q'$ because $g$ is monic, so [L1] gives degree at least $d$, whereas $r'-r$ is zero or has degree below $d$, a contradiction. Thus $q=q'$ and then $r=r'$, proving uniqueness. [step 2.1, L1, L2, algebra] ∎
+2.1 If instead $n\ge d$, put $a=\operatorname{lc}(f)$; the polynomial $f_1=f-a x^{n-d}g$ has its degree-$n$ coefficient cancelled and is zero or has degree below $n$. The induction hypothesis gives $f_1=q_1g+r$ with $r=0$ or $\deg r<d$, whence $f=(q_1+a x^{n-d})g+r$. [step 1.2, L1, L2, construct]
+
+3.1 Steps 1.1–2.1 and strong induction [L3] prove existence for every dividend. [step 1.1, step 1.2, step 2.1, L3]
+
+4.1 If $f=qg+r=q'g+r'$ are two such expressions, then $(q-q')g=r'-r$; if $q-q'\ne0$, the leading coefficient of $(q-q')g$ equals the nonzero leading coefficient of $q-q'$ because $g$ is monic, so [L1] gives degree at least $d$, whereas $r'-r$ is zero or has degree below $d$, a contradiction. Thus $q=q'$ and then $r=r'$, proving uniqueness and completing the induction proof. [step 3.1, L1, L2, algebra, discharge-induction] ∎

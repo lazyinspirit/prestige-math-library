@@ -117,7 +117,7 @@ Codes [C], [E], [T], [N], [J], and [H] are the exact URLs and locators above. A 
 | `ex-complements-of-a-maximal-cyclic-subgroup-need-not-be-unique` | literature-derived | ai-generated | [C] | source-named result, standard source definition, or explicit source example |
 | `ex-unit-group-modulo-one-hundred-decomposition` | literature-derived | ai-generated | [C] | source-named result, standard source definition, or explicit source example |
 | `cex-additive-rationals-show-finiteness-is-essential` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
-| `fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
+| `fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups` | ai-altered | ai-generated | [C], [E] | source-backed deliberate overgeneralisation of the finite-abelian classification, refuted by an explicit finite nonabelian group |
 | `def-free-product-of-a-family-of-groups` | literature-derived | not-applicable | [T] | source-named result, standard source definition, or explicit source example |
 | `def-reduced-syllable-word-in-a-family-of-groups` | literature-derived | not-applicable | [T] | source-named result, standard source definition, or explicit source example |
 | `lem-factor-elements-act-on-reduced-syllable-words` | literature-derived | ai-generated | [T] | source-named result, standard source definition, or explicit source example |
@@ -148,10 +148,10 @@ Codes [C], [E], [T], [N], [J], and [H] are the exact URLs and locators above. A 
 | `ex-two-involutions-generate-the-infinite-dihedral-group` | ai-altered | ai-generated | [T] | source-backed specialization or recombination for the dispatched vocabulary |
 | `ex-c-two-free-product-c-three-is-infinite` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
 | `ex-canonical-map-from-free-product-to-direct-product` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
-| `fs-free-product-of-abelian-groups-is-abelian` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
+| `fs-free-product-of-abelian-groups-is-abelian` | ai-altered | ai-generated | [T] | source-backed deliberate strengthening of the factor hypotheses, refuted by two distinct reduced normal forms |
 | `ex-cyclic-amalgamation-with-relation-xm-equals-yn` | literature-derived | ai-generated | [T] | source-named result, standard source definition, or explicit source example |
 | `ex-amalgamating-c-two-inside-c-four-and-c-six` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
-| `fs-canonical-factor-maps-into-every-group-pushout-are-injective` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
+| `fs-canonical-factor-maps-into-every-group-pushout-are-injective` | ai-altered | ai-generated | [T] | source-backed deliberate extension of the monomorphism-only embedding theorem to arbitrary pushouts, refuted by kernel collapse |
 | `ex-amalgamation-along-a-whole-factor` | ai-generated | ai-generated | — (generated leaf; no source claim) | directly checkable leaf; see truth-risk obligation |
 
 ### Generated-Statement truth-risk obligations
@@ -288,3 +288,106 @@ prerequisite, coverage still maps all 84 harvested headings, and proof-contract
 scope still matches all 56 proof-bearing items. The remaining handoff action is
 for the orchestrator to re-splice these four page objects into `plan-spec.json`;
 the exact required gates are the final verification commands for this dispatch.
+
+## 13. Step-5 authoring record
+
+All 70 settled ids were authored without a drop, merge, rename, or new item.
+The four page files reproduce the authoritative reading order. Each A summary
+has exactly two prose paragraphs below 150 words; both B files have no body.
+The canonical harvest therefore remains unchanged: all 64 `included` rows name
+files now present on disk, all 15 `inline` rows remain absorbed as recorded,
+both `already-published` rows still resolve, and the three specific boundary
+declines remain the only declined headings.
+
+The component-provenance table in section 5 is the final per-item rationale.
+Three provisional truth-risk labels were corrected during authoring without
+changing the settled mathematics. The three `fs-` claims are deliberate false
+overgeneralisations of source-backed statements, while future-scope policy
+forbids an `ai-generated` false-statement kind. They are therefore `ai-altered`
+at statement level and retain `ai-generated` local refutations. The Conrad and
+Elman references support the finite-abelian source claim; Torres supports the
+free-product and pushout source claims. No other component label changed.
+
+Every permitted AI-generated construction received the planned dependency-leaf
+truth check. The additive rationals were checked directly to be torsion-free;
+the pushout along an isomorphism was checked by its universal property; the
+words $(st)^n$ were separated by reduced length including $n=0$; the map to a
+direct product was checked for surjectivity and a nontrivial commutator kernel;
+the $C_4*_{C_2}C_6$ edge maps and presentation were checked explicitly; the
+noninjective pushout was computed as the trivial group; and the whole-factor
+cyclic example was checked through the unique mediator. No counterexample to
+any retained construction was found. None is a dependency target.
+
+Three authored dependencies differ from the scaffold. The proof of
+`thm-cauchy-for-finite-abelian-groups` uses cyclic-group classification when a
+chosen nonidentity element generates the whole group, so
+`thm-classification-of-cyclic-groups` was added. Closure of the primary
+component explicitly uses the commutative power law, so `lem-group-power-laws`
+was added to `thm-p-primary-component-of-a-finite-abelian-group`. Finally, the
+splitting proof uses the finite-order characterisation both to identify the
+unique order-$p$ subgroup of its cyclic factor and to compare quotient and lift
+orders, so `lem-order-characterisation` was added there. All three are cited in
+the corresponding Facts blocks. Omitting any of these edges would leave a
+displayed deduction unlicensed. No dependency was added merely to satisfy a
+checker, and no published dependency was edited.
+
+The proof-contract file was rebuilt from the final 56 proof-bearing bodies. It
+maps each direct Fact wikilink to an exact source-section excerpt and every use,
+maps every numbered step exactly once, and anchors or specifically disposes all
+eight standard boundary cases. There is no external fallback, forward
+reference, published-item repair, or A-page size blocker.
+
+During the final proof read, the Facts extractor was found to stop at the first
+source line when a dependency statement spanned multiple lines. The authored
+files and contracts were regenerated with each complete cited Definition,
+Statement, Example, or Remark section. This repaired the evidence ledger, not
+the item set. The amalgamated normal-form proof was also made explicit that its
+inverse-normalisation is an involution and cannot delete a nontrivial
+transversal syllable; its statement now says directly that the represented
+group and conclusions are independent of the chosen transversals. The settled
+title, kind, purpose, and result did not change.
+
+## 14. Step-5 verification and boundary ledger
+
+Batch-local verification is complete. Reflow left all 70 files unchanged, and
+the scoped precheck passed all 56 proof-bearing items; the 13 definitions and
+one remark are correctly not applicable to precheck. Scoped rendercheck passed
+all 70 items plus four page files with zero errors. Scoped prosecheck also
+passed those 74 files with zero errors and five `count-in-prose` heuristic
+warnings caused by dependency excerpts containing the ordinary phrase “two
+definitions.” The two A summaries contain exactly two nonempty prose paragraphs:
+53 and 60 words for the finite-abelian page, and 46 and 66 words for the
+free-product page. Both B-page bodies are empty. A direct notation scan found
+no applied `\iota`, and page-list, status, origin, and two-component provenance
+integrity checks passed for all 70 items.
+
+The strict proof-contract gate passed all 56 contracts. Its eight-case worksheet
+records the following concrete dispositions: empty internal products and empty
+factor families; trivial primary groups and amalgams; zero exponents, zero-part
+partitions, and length-zero words; the one-factor and order-one cases; first and
+last syllable seams; nonempty choices of maximal-order elements, order-$p$
+subgroups, factors, and transversals (with the stated choice assumption);
+degenerate cyclic, trivial-edge, whole-factor, and noninjective-pushout cases;
+and both directions of every recognition or classification iff. Cases without
+such a parameter are specifically marked `not_applicable`, not silently omitted.
+
+The three batch-scoped dispatch gates are green: content policy checked 70 items
+with zero errors or warnings; coverage checked 84 harvested headings with zero
+errors or warnings; and strict proof contracts checked 56 of 56 with zero errors
+or warnings. Coverage yield is 64 `included`, 15 `inline`, two
+`already-published`, two `out-of-scope`, and one `deferred`. The two excluded
+headings are the nonabelian $p$-group remark and torus-knot classification; the
+deferred heading is the infinite bounded-exponent abelian-group theorem.
+
+The first exact repository-wide finish pass at 2026-08-11 06:23 +1000 could not
+be left wholly green because concurrently authored files outside this batch
+were incomplete. Global precheck reported nine failures: six untagged-step
+items and three auto-repair-only items, all in the Riemann--Stieltjes batch.
+Global depcheck reported 28 errors confined to Riemann--Stieltjes and
+change-of-variables files (invalid YAML/provenance values and unresolved
+determinant prerequisites). Global rendercheck reported nine errors in the same
+two external areas. Global prosecheck passed all 3334 files with zero errors.
+No failing diagnostic names a batch-2 item. Those files are outside this
+dispatch's writable artifacts, so they were not edited and no permission was
+requested. A final repository-wide rerun remains necessary after their owners
+finish.

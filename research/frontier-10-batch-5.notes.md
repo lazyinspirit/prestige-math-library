@@ -1,18 +1,18 @@
-# frontier-10 batch 5 — Beta scaffold notes
+# frontier-10 batch 5 — Step-5 authoring notes
 
 **Owner:** Beta-frontier-10-5  
-**Step:** 4 B-leaf dependency repair complete in the batch-5 artifacts; no batch-5 repair blocker remains
-**Writable scope observed:** only the four `research/frontier-10-batch-5.*` artifacts
+**Step:** 5 authoring complete for the settled 25-item A page and 13-item B page; final validation is recorded below
+**Writable scope observed:** only the batch-5 item ids, the two batch-5 page files, and the three writable batch-5 authoring ledgers
 
-## Inventory and proposed page summaries
+## Inventory and authored page summaries
 
 - `fubini-and-change-of-variables` (A, order 237): **25 items** — 3 definitions, 7 lemmas, 6 theorems, and 9 corollaries.
 - `fubini-and-change-of-variables-examples` (B, order 238): **13 items** — 9 examples and 4 counterexamples.
 - Total: **38 items**. The A page is below the owner's hard 60-item split threshold, so **no split is proposed**.
 
-Proposed A-page summary, paragraph 1: This page proves the bounded Riemann version of Fubini's theorem without pretending that every section of an integrable function is integrable. It first compares product-grid Darboux sums with lower and upper section integrals, then obtains rectangular Fubini, repeated integration, Jordan-set Fubini, Cavalieri's principle, and integration over a planar region between continuous graphs.
+Authored A-page summary, paragraph 1 (51 words): Multidimensional Darboux integration and Jordan content provide rectangles, grids, null boundaries, and integration over Jordan sets. Euclidean differentiation supplies $C^1$ maps, Jacobian matrices, inverse functions, and derivative estimates; row reduction and determinants supply the algebraic volume factor. Together these declared prerequisites support finite section arguments and local linearization without measure theory.
 
-Proposed A-page summary, paragraph 2: The second half builds the Riemann/Jordan change-of-variables machinery from the determinant upward: linear content scaling, local cube distortion, preservation of compact Jordan sets, and the change-of-variables theorem for compact Jordan sets, compactly supported integrands, and bounded open Jordan sets. It ends by reconciling the absolute-Jacobian formula with the library's oriented one-dimensional substitution theorem. No measure-theoretic theorem or catalogue page is used.
+Authored A-page summary, paragraph 2 (65 words): Lower and upper section integrals lead to rectangular and Jordan-set Fubini theorems, repeated integration, Cavalieri's principle, and graph-bounded regions. Determinants then control linear images and parallelepipeds. Near-identity cube estimates yield local volume distortion and preservation of compact Jordan sets, culminating in change of variables for compact Jordan sets, compactly supported functions, and bounded open Jordan sets, with the one-dimensional absolute-derivative formula reconciled with oriented substitution.
 
 The B page has no proposed summary body. Its examples and counterexamples remain
 machine-composed from the manifest, as required by `SCHEMA.md`.
@@ -334,6 +334,36 @@ interfaces named above. All are `status: published`. The replacement and page-
 requirement interfaces use the existing `source-checked` route recorded in the
 published-dependency audit; the removed examples were inspected only to verify
 that their facts were either replaced exactly or already proved locally.
+
+## Step-5 authored-state reconciliation
+
+All 38 manifest ids were authored without a drop, rename, merge, or split. The A page contains exactly 25 items and remains below the 60-item ceiling; the B page contains exactly 13 examples/counterexamples and has no authored summary body. Every item is `status: draft`, `origin: session`, and carries both statement and proof provenance. No applied natural-number inclusion notation occurs.
+
+The on-disk provenance values supersede the provisional provenance columns in the earlier table. `def-sections-and-iterated-riemann-integrals` is `ai-altered`/`not-applicable`. The seven directly harvested Fubini items from `lem-product-grid-bounds-for-section-integrals` through `cor-cavalieri-principle-for-jordan-content` are `literature-derived` for both components. The four counterexamples `cex-one-existing-iterated-integral-does-not-give-riemann-integrability`, `cex-polar-coordinates-are-not-globally-injective`, `cex-omitting-the-absolute-jacobian-reverses-sign`, and `cex-noninjective-change-of-variables-double-counts` are `ai-generated` for both components and carry `generation.role: counterexample`; their witnesses were recomputed directly. Every remaining item is `ai-altered` for both components because its source material was paraphrased, repaired, decomposed, or adapted to the library's exact conventions. The item-by-item rationales in the table above remain the rationale for these final classifications.
+
+Authoring made four dependency additions beyond the settled baseline, all to discharge facts actually used in the written proof. `cor-repeated-riemann-integrals-on-rectangles` adds `thm-heine-cantor-metric` so that successive section integrals are proved continuous by uniform continuity. The polar and cylindrical examples add `thm-sine-cosine-signs-monotonicity-and-ranges` to recover the angle on their seam-free boxes. The spherical and hyperspherical examples add the same monotonicity interface and `thm-sine-cosine-zero-sets-and-fundamental-period` to justify angle recovery and nonvanishing sine factors away from the poles. These additions do not change any coverage disposition.
+
+Two proof routes were corrected during authoring. In `ex-riemann-integrable-function-with-dense-nonintegrable-sections`, the rational exceptional heights are dense and therefore cannot be called content zero. The valid proof computes the lower and upper section envelopes as $0$ and Thomae's function, both with integral zero. In `thm-injective-c-one-images-of-compact-jordan-sets-are-jordan`, local Lipschitz control is converted to the published global null-preservation interface by composing each local restriction with coordinatewise clamping onto its closed cube.
+
+The scalar Jacobian determinant is written as $\det Dg$, never by overloading the library's Jacobian-matrix notation. The ring/field split is also preserved: determinant algebra is cited at the commutative-ring level, while singularity is connected to determinant zero only through `thm-real-square-matrix-invertible-iff-determinant-nonzero`; the ring-level corollary says an invertible matrix has unit determinant.
+
+### Boundary-case worksheet
+
+- **Empty:** rectangular Fubini uses nondegenerate factor rectangles; empty Jordan sections contribute zero by definition; the compact-support definition explicitly gives the empty-support function integral zero.
+- **Zero:** the zero function and zero section integrals are retained throughout; the near-identity lemma permits error constant zero but requires positive cube radius; singular linear maps have determinant and image content zero.
+- **One:** the repeated-integral proof includes the one-coordinate base case, linear scaling and change of variables include dimension one, and hyperspherical coordinates start at dimension two with polar coordinates as the base.
+- **Degenerate:** coincident graph boundaries give zero-length sections; singular matrices use the thin-slab branch; local and global diffeomorphism results explicitly require invertible derivatives; coordinate examples use positive radii and pole-free/seam-free boxes.
+- **Endpoints:** graph regions include their continuous boundary values, every main compact theorem uses closed Jordan sets, and all coordinate examples verify the closed angular endpoints chosen inside one injective branch.
+- **Nonempty choice:** Banach's theorem is applied to a nonempty closed cube, while every other selection is an explicit grid or a finite subcover supplied by compactness; no arbitrary choice from a varying family is used.
+- **Equivalence, forward and reverse:** the compact-Jordan theorem proves transformed integrability rather than assuming it, then applies the same local estimate to the $C^1$ inverse and uses the chain rule plus determinant multiplicativity to obtain both implications.
+
+### Harvest result
+
+The authored result preserves the coverage receipt exactly: 46 harvested headings, with 30 `included`, 15 `inline`, one `out-of-scope`, and none deferred. The sole decline remains Lebl Exercise 10.2.6 because it concerns unequal improper integrals at a singularity rather than bounded Riemann/Jordan integration. Every `included` disposition names an item now present on one of the two authored pages.
+
+### Cross-batch determinant checkpoint
+
+At the first Step-5 authoring checkpoint, batch 9's seven required determinant item files were not yet on disk, although their exact ids were present in the adjudicated manifests. The batch-5 prose was therefore written only against the agreed interfaces and was not treated as finally source-checked until those files could be opened. The final validation record below supersedes this checkpoint.
 
 ### Current repair gate record
 

@@ -1,8 +1,8 @@
-# frontier-10 batch 3 — Beta scaffold notes
+# frontier-10 batch 3 — Beta authoring notes
 
 **Owner:** Beta-frontier-10-3  
-**Step:** 3 Alpha breadth-and-depth repair complete  
-**Writable scope observed:** only the four `research/frontier-10-batch-3.*` artifacts
+**Step:** 5 authoring complete  
+**Writable scope observed:** the 58 manifest-owned item files, the two manifest-owned page files, and the batch-3 notes, coverage, and proof-contract artifacts
 
 ## Step-3 repair — Alpha findings B4 and F1
 
@@ -27,7 +27,7 @@ since approved re-homing both unchanged ids to
 citations are legal backward edges. They remain unchanged; no duplicate finite-
 sum interface is minted.
 
-## Inventory and proposed page summaries
+## Inventory and authored page summary
 
 - `polynomial-rings-and-roots` (A, order 52): **44 items** — 8 definitions, 5 lemmas, 17 theorems, 3 propositions, 10 corollaries, and 1 remark.
 - `polynomial-rings-and-roots-examples` (B, order 53): **14 items** — 8 examples and 6 counterexamples.
@@ -35,13 +35,9 @@ sum interface is minted.
 
 The manifest is the count authority; the prose category breakdown above is descriptive and must be re-counted mechanically if the list changes.
 
-Proposed A-page summary, paragraph 1: This page constructs the formal polynomial ring over a commutative ring from finitely supported coefficient sequences and convolution, proves the ring and degree laws, records the equivalent trimmed-list presentation, and establishes evaluation through the universal property. It then treats finite multivariate polynomial rings by iteration, proves monic division over a commutative ring and the full division algorithm over a field, and derives the factor theorem and the root bound over an integral domain.
+The A page carries exactly two nonempty prose paragraphs, each below 150 words. Its first paragraph names the used Euclidean/PID/UFD, finite-abelian-group, commutative-ring, quotient-ring, ideal, and finite-sum prerequisites. Its second paragraph summarizes the page's progression from coefficient sequences and convolution through division, gcds, factorisation, roots, derivatives, separability, content, Gauss, reduction, and Eisenstein.
 
-Proposed A-page summary, paragraph 2: The second half connects the construction to the preceding Euclidean-domain and finite-abelian-group material: `F[x]` is Euclidean, hence a PID, and a direct local argument proves that it is a UFD without assuming an unpublished general PID-to-UFD theorem. The root bound and invariant-factor exponent formula show that finite subgroups of a domain's unit group are cyclic. Polynomial gcds, Bézout, irreducible quotients, formal derivatives, separability, Gauss's lemma, rational roots, reduction modulo a prime, and Eisenstein's criterion complete the development.
-
-Proposed B-page summary, paragraph 1: The companion page computes convolution, long division, a polynomial gcd and Bézout coefficients, then tests the domain and division hypotheses with nonconstant units over `Z/4`, failed division in `Z[x]`, and quadratics with four roots over `Z/6` and `Z/8`. It also distinguishes a formal polynomial from its induced function using `x^p-x` over `F_p`.
-
-Proposed B-page summary, paragraph 2: The remaining examples compare irreducibility tests: roots for degrees two and three, rational roots, reduction modulo two, Eisenstein directly and after translation, and a reducible quartic without roots. A characteristic-two repeated-root calculation exercises the derivative criterion, and the ideal `(x,y)` shows that the multivariate ring need not remain principal.
+The B page intentionally has frontmatter only and no authored summary body.
 
 ## Split adjudication
 
@@ -163,7 +159,7 @@ The long-proof decomposition pass was performed separately for this pair.
 
 The corollary pass added the domain and polynomial-unit results, multivariate domain inheritance, (F[x]) Euclidean and PID, finite subgroups of domain units being cyclic, infinite-domain determination by values, the irreducible separability criterion, and the (x^n-p) family. The finite-subgroup result is Donaldson's Corollary 23.15 and now uses batch 2's earlier invariant-factor machinery. The value-determination corollary is the one permitted generated statement: it is a direct leaf consequence of the root bound and is not a dependency of any other planned item. All other added corollaries are explicitly represented in the harvested sources.
 
-Boundary obligations for Step 5:
+Boundary dispositions completed in Step 5:
 
 - zero polynomial has no degree; every degree assertion must split off zero;
 - monic division covers zero dividend, constant monic divisor and remainder zero;
@@ -231,7 +227,7 @@ Expected Step-5 provenance is below. “Adapted” means the source claim is kep
 | `rem-polynomials-are-not-polynomial-functions` | literature-derived | not-applicable | Donaldson's golden rule and finite-ring examples. |
 | `ex-polynomial-arithmetic-by-convolution` | literature-derived | ai-altered | Judson 17.1 / Donaldson §22 calculation, with a fresh finite check. |
 | `ex-polynomial-long-division-and-gcd` | literature-derived | ai-altered | Judson 17.7 and Donaldson long-division examples, extended through Bézout. |
-| `cex-nonconstant-units-and-degree-drop-with-zero-divisors` | ai-altered | ai-generated | Checkable ((1+2x)^2=1) witness adapted from the sources' zero-divisor examples. |
+| `cex-nonconstant-units-and-degree-drop-with-zero-divisors` | ai-generated | ai-generated | Checkable ((1+2x)^2=1) witness adapted from the sources' zero-divisor examples; the exact witness construction is generated. |
 | `cex-polynomial-division-fails-for-a-nonunit-leading-coefficient` | literature-derived | literature-derived | Donaldson's example after 23.14. |
 | `cex-quadratics-can-have-four-roots-over-composite-residue-rings` | ai-altered | ai-altered | Donaldson's `Z/6` witness plus the dispatched `Z/8` witness. |
 | `cex-distinct-polynomials-can-induce-the-same-finite-field-function` | literature-derived | ai-altered | Dispatched canonical example, checked by published Fermat. |
@@ -241,10 +237,18 @@ Expected Step-5 provenance is below. “Adapted” means the source claim is kep
 | `ex-eisenstein-proves-a-family-irreducible` | literature-derived | literature-derived | Keith Conrad 1.6 / Donaldson example. |
 | `ex-translation-makes-x-four-plus-one-eisenstein` | literature-derived | ai-altered | Donaldson's translated Eisenstein example with automorphism justified. |
 | `cex-no-roots-does-not-imply-irreducible-in-degree-four` | literature-derived | literature-derived | Donaldson example after 23.8. |
-| `ex-formal-derivative-detects-a-repeated-root-in-characteristic-two` | ai-altered | ai-generated | Direct finite-field witness exercising the source-backed derivative theorem. |
+| `ex-formal-derivative-detects-a-repeated-root-in-characteristic-two` | ai-generated | ai-generated | Direct generated finite-field witness exercising the source-backed derivative theorem. |
 | `cex-the-ideal-x-y-in-a-bivariate-polynomial-ring-is-not-principal` | literature-derived | literature-derived | Judson 17.21. |
 
-Items with AI-generated proof components are checkable witnesses or a direct leaf corollary. Step 5 must recompute each residue-ring product/root set and re-derive the infinite-domain corollary; none may become a dependency target. The checkable witnesses remain leaves. The value-determination corollary is also a leaf after the manifest change recorded here.
+Items with AI-generated statement/construction or proof components are checkable witnesses or a direct leaf corollary. Step 5 recomputed $(1+2x)^2=1$ in `Z/4`, the four displayed roots in each of `Z/6` and `Z/8`, and $(x+1)^2=x^2+1$ with zero derivative in characteristic two. It also re-derived the infinite-domain value-determination corollary by contradiction from the domain root bound. The counterexample search confirmed that this corollary fails over finite domains and that the root-bound mechanism fails over rings with zero divisors, so both hypotheses were retained. All generated statements/constructions remain leaves and no authored item depends on them.
+
+## Step-5 authoring outcome
+
+- All 58 manifest ids were authored: 44 A-page items and 14 B-page examples/counterexamples. Their kinds, titles, reading order, dependency arrays, `draft` status, `session` origin, and component-provenance fields match the authoritative manifest and the provenance rationale table above.
+- No item was dropped, renamed, merged, or added. The coverage dispositions therefore remain unchanged and true of the authored corpus.
+- The A page remains below the split threshold at 44 items. Its final summary has exactly two nonempty prose paragraphs below 150 words each. The B page has no summary body.
+- The proof-contract receipt was rebuilt from the authored Facts & Assumptions and numbered proof steps. It contains exactly the 49 proof-bearing items, with source quotations, fact uses, derivations, and all eight required boundary dispositions for each item.
+- No applied canonical inclusion notation was authored. Natural numbers are written directly; the only inclusion-map notation is bare notation where a universal property requires it.
 
 ## Published dependency audit
 
@@ -314,15 +318,9 @@ These are recommendations only. Beta did not edit any prose scaffold or `researc
 - **External fallbacks:** none.
 - **Published falsehoods found:** none.
 - **Split blocker:** none.
-- **Gate-scope caveat:** Alpha B4 requires three not-yet-authored batch-2 item
-  dependencies. Consequently the dispatch's isolated batch-3
-  `content-policy --manifest-only` invocation cannot resolve them: that tool
-  resolves scaffold-only ids from the manifests supplied on its command line,
-  not from `requires` or an unspliced `plan-spec.json`. The dependency-closed
-  batch-2-plus-batch-3 invocation and the full run-wide invocation are both
-  green. Omitting the three ids to make the isolated form green would hide the
-  required logical edge, while copying batch 2's rows into this manifest would
-  violate batch ownership.
+- **Authoring blockers:** none. The three required batch-2 item dependencies are
+  now present on disk, so the dispatch's literal batch-3 content-policy command
+  resolves the Alpha-required cross-batch edge without any ownership workaround.
 
 ## Gate report
 
