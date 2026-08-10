@@ -70,6 +70,56 @@ pages' `items:`/`examples:` lists in
 page edits and the status flips land together in the single publishing commit
 after the owner's step-10 audit.
 
+**D6 — the free group is CONSTRUCTED as `W(X)/~`, and its universal property is
+PROVED (owner, 2026-08-10, mid-run).** The owner's words:
+
+> I want to use the {words}/~ definition for free groups, and then prove they
+> possess the universal property of free groups.
+
+The published `def-free-group` characterises a free group *abstractly*, by the
+universal property; that stays, because it is what licenses "**the** free group"
+and the published uniqueness-up-to-unique-isomorphism theorem. What this run adds
+is the **concrete construction** and the **theorem** that it satisfies that
+characterisation — so the universal property is earned here, never assumed.
+
+The published `def-alphabet-words-and-reduction` already supplies both halves of
+the raw material: words on `X ⊔ X^{-1}`, and the relation "**freely
+equivalent**" — one word carried to another by finitely many elementary
+cancellations and their reverse insertions. That relation *is* `~`. **Reuse it;
+do not mint a second name for it.**
+
+The development to scaffold, each step a separate item where it carries real
+proof weight:
+
+1. Free equivalence is an equivalence relation, and concatenation descends to it:
+   if `w ~ w'` and `v ~ v'` then `wv ~ w'v'`.
+2. `F(X) := W(X)/~` with `[w][v] := [wv]` is a group — well-defined by (1),
+   associative because concatenation is, identity `[ε]`, and
+   `[x_1...x_n]^{-1} = [x_n^{-1}...x_1^{-1}]`. Associativity is *free* on this
+   model, which is the whole reason to prefer it.
+3. **Normal form:** every `~`-class contains exactly one reduced word. Existence
+   by induction on length; uniqueness by the van der Waerden permutation
+   argument — one permutation of the set of reduced words per letter, with
+   `σ_{a^{-1}} ∘ σ_a = id`, inducing a map constant on `~`-classes, evaluated at
+   the empty word. `def-symmetric-group` is published at order 44, below this
+   page, so `Sym(-)` is legitimately citable.
+4. **The universal property, proved:** for every group `G` and every `f: X → G`
+   there is a unique homomorphism `φ: F(X) → G` with `φ ∘ ι = f`. Well-defined
+   because an elementary move changes the product by `f(x)f(x)^{-1} = e`; unique
+   because `ι(X)` generates. Conclude that `(F(X), ι)` **is** a free group in the
+   sense of published `def-free-group`.
+5. Corollaries: `ι` is injective (immediate from the normal form), and this model
+   is uniquely isomorphic to the published reduced-word model by
+   `thm-free-groups-unique-up-to-unique-isomorphism`.
+
+**Overlap check is mandatory before minting.** `thm-reduced-words-form-the-free-group`
+is published and builds the *reduced-word* model (concatenate, then freely
+reduce), and `def-alphabet-words-and-reduction` says the reduction and uniqueness
+facts "are proved in" it. Read that theorem in full from disk and determine
+exactly which of steps 1 to 5 it already establishes. Reuse what exists; mint
+only what is genuinely new; and where the two models coexist, relate them by the
+published uniqueness theorem rather than restating either.
+
 **D5 — reuse before minting.** `def-free-group` is already stated *by the
 universal property*, `thm-reduced-words-form-the-free-group` already supplies
 existence plus that universal property, and

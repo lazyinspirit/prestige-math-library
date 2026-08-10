@@ -99,6 +99,45 @@ valuable result merely to stay small. Anything you cannot prove in scope is
 dropped with a licensing note — never asserted, never propped up by an overstated
 dependency.
 
+**(f) THE SPINE OF THIS RUN — construct `W(X)/~` and PROVE its universal
+property (owner, 2026-08-10, mid-run; decision D6 in the RESUME, read it in
+full).** The owner's words:
+
+> I want to use the {words}/~ definition for free groups, and then prove they
+> possess the universal property of free groups.
+
+This is the backbone of the A page and takes priority over everything in §3.
+Published `def-free-group` characterises a free group *abstractly* by the
+universal property; that stays, because it licenses "the" free group and the
+published uniqueness theorem. Your job is the **concrete construction** plus the
+**theorem** that it satisfies that characterisation, so the universal property is
+earned rather than assumed.
+
+Published `def-alphabet-words-and-reduction` already gives you words on
+`X ⊔ X^{-1}` **and** the relation "freely equivalent" — finitely many elementary
+cancellations and their reverse insertions. That relation **is** `~`. Reuse it;
+do not mint a second name for it.
+
+Scaffold, splitting wherever a step carries real proof weight: (1) free
+equivalence is an equivalence relation and concatenation descends to it;
+(2) `F(X) := W(X)/~` under `[w][v] := [wv]` is a group — note associativity is
+*free* on this model, which is precisely why the owner wants it; (3) the normal
+form theorem, every `~`-class contains exactly one reduced word, uniqueness by
+the van der Waerden permutation argument (`def-symmetric-group` is published at
+order 44, below this page, so `Sym(-)` is citable); (4) the universal property,
+proved, concluding that `(F(X), ι)` **is** a free group in the sense of
+`def-free-group`; (5) corollaries — `ι` injective, and unique isomorphism with
+the published reduced-word model.
+
+**Mandatory overlap check before you mint anything here.**
+`thm-reduced-words-form-the-free-group` is published, builds the *reduced-word*
+model, and `def-alphabet-words-and-reduction` says the reduction and uniqueness
+facts "are proved in" it. **Read it in full from disk** and determine exactly
+which of (1) to (5) it already establishes. Reuse what exists, mint only what is
+genuinely new, and relate the two models by
+`thm-free-groups-unique-up-to-unique-isomorphism` rather than restating either.
+Report precisely what you found it to prove — I need that at step 3.
+
 ## 3. Gaps I have already identified — a floor, not a ceiling
 
 I read the pair from disk. These are real gaps and I expect them scaffolded
