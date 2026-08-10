@@ -25,9 +25,12 @@ pipeline_run: null
 ## Example
 
 For a topological space $X$, paths modulo endpoint-preserving homotopy form a
-groupoid $\Pi_1(X)$. With this library's traversal-order multiplication on
-fundamental groups, $\operatorname{Aut}_{\Pi_1(X)}(x)$ is the opposite group of
-$\pi_1(X,x)$ and is canonically isomorphic to $\pi_1(X,x)$ by path reversal.
+groupoid $\Pi_1(X)$ with
+$[\beta]\circ[\alpha]=[\alpha*\beta]$ and
+$[\alpha]^{-1}=[\bar\alpha]$. With this library's traversal-order
+multiplication on fundamental groups,
+$\operatorname{Aut}_{\Pi_1(X)}(x)$ is the opposite group of $\pi_1(X,x)$ and is
+canonically isomorphic to $\pi_1(X,x)$ by path reversal.
 
 ## Facts & Assumptions
 
@@ -35,9 +38,11 @@ $\pi_1(X,x)$ and is canonically isomorphic to $\pi_1(X,x)$ by path reversal.
 
 [L1] Endpoint-preserving path homotopy is defined in [[def-homotopy-relative-and-path-homotopy]] and is an equivalence relation for each fixed pair of endpoints ([[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]]).
 
-[L2] Paths and their elementary concatenation and reversal constructions are given in [[def-path-connected]], while continuous maps compose and maps continuous on a finite closed cover paste continuously ([[lem-continuity-is-local-and-pastes]]); the resulting loop classes and their group laws are those of [[def-based-loops-and-fundamental-group]] and [[thm-fundamental-group-laws]].
+[L2] Paths and their elementary concatenation and reversal constructions are given in [[def-path-connected]], while continuous maps compose and maps continuous on a finite closed cover paste continuously ([[lem-continuity-is-local-and-pastes]]).
 
-[L3] Categories and groupoids have identity, associative composition, and invertible arrows ([[def-category]], [[def-isomorphism-groupoid-and-connected-category]]).
+[L3] Categories and groupoids have identity, associative composition, and invertible arrows ([[def-category]], [[def-isomorphism-groupoid-and-connected-category]]). For an object $x$, multiplication in its automorphism group is categorical composition: $vu:=v\circ u$.
+
+[L4] The traversal-order fundamental-group product is $[\alpha][\beta]=[\alpha*\beta]$, with inversion induced by path reversal ([[def-based-loops-and-fundamental-group]], [[thm-fundamental-group-laws]]).
 
 ## Verification
 
@@ -51,4 +56,4 @@ $\pi_1(X,x)$ and is canonically isomorphic to $\pi_1(X,x)$ by path reversal.
 
 3.1 For three composable paths, let $\delta:[0,3]\to X$ traverse them successively. The two bracketings are $\delta\circ p$ and $\delta\circ q$, where $p(s)=4s$ for $s\le1/2$ and $p(s)=2s+1$ for $s\ge1/2$, while $q(s)=2s$ for $s\le1/2$ and $q(s)=4s-1$ for $s\ge1/2$. The formula $\delta((1-t)p(s)+tq(s))$ is an endpoint-preserving homotopy, so composition is associative on classes. [step 1.1, step 2.1, L1, L2, algebra]
 
-4.1 Steps 2.1, 3.1, and 2.2 make $\Pi_1(X)$ a groupoid. Its automorphisms at $x$ are the based-loop classes, but $[\beta]\circ[\alpha]=[\alpha*\beta]=[\alpha][\beta]$ in the traversal-order product of [L2]. Thus the identity on loop classes identifies $\operatorname{Aut}_{\Pi_1(X)}(x)$ with $\pi_1(X,x)^{\mathrm{op}}$. The inversion map $[\alpha]\mapsto[\bar\alpha]$ is therefore a canonical group isomorphism $\operatorname{Aut}_{\Pi_1(X)}(x)\cong\pi_1(X,x)$. [step 2.1, step 3.1, step 2.2, L2, L3, algebra] ∎
+4.1 Steps 2.1, 3.1, and 2.2 make $\Pi_1(X)$ a groupoid. Its automorphisms at $x$ are the based-loop classes, but $[\beta]\circ[\alpha]=[\alpha*\beta]=[\alpha][\beta]$ in the traversal-order product of [L4]. Thus the identity on loop classes identifies $\operatorname{Aut}_{\Pi_1(X)}(x)$ with $\pi_1(X,x)^{\mathrm{op}}$. The inversion map $[\alpha]\mapsto[\bar\alpha]$ is therefore a canonical group isomorphism $\operatorname{Aut}_{\Pi_1(X)}(x)\cong\pi_1(X,x)$. [step 2.1, step 3.1, step 2.2, L3, L4, algebra] ∎

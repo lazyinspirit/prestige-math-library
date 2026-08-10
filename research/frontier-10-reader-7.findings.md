@@ -91,7 +91,9 @@ well-definedness by pasting endpoint-preserving homotopies; supplied explicit
 piecewise-linear reparameterizations for associativity and identities; and
 supplied explicit contractions for a path followed by its reversal and for the
 reverse order. The loop theorem is now used only in the exact comparison of
-each automorphism group with `pi_1(X,x)` and its opposite.
+each automorphism group with `pi_1(X,x)` and its opposite. The repaired Example
+also states composition and inversion explicitly so its downstream use by the
+change-of-basepoint item is licensed by the cited section itself.
 
 ### F7-05 — `ex-change-of-basepoint-isomorphism-for-fundamental-groups` — fatal, repaired
 

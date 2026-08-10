@@ -586,3 +586,15 @@ Exact continuation point: regenerate the changed proof-contract rows using
 resulting diffs, and write the per-item report to
 `research/frontier-10-reader-7.findings.md`. No permission prompt or
 escalation was attempted, and no blocker was present at this checkpoint.
+
+## Independent step-6 reader completion
+
+Reader `frontier-10`, batch 7, completed all 85 item reads and wrote
+`research/frontier-10-reader-7.findings.md`. The pre-repair ledger records 7
+fatal and 20 nonfatal concrete findings; every repair is on disk and remains
+provisional pending Alpha. The repaired scope passes direct precheck on all 18
+changed proof files, strict proof-contract 60/60, dependency resolution,
+rendercheck/prosecheck/citecheck on all 25 changed items, content policy 85/85,
+coverage 156/156, and `git diff --check`. Repository-wide dependency warnings
+are legacy rows outside batch 7. No permission prompt or escalation was
+attempted, and no batch-7 reader blocker remains.

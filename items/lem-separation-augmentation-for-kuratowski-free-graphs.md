@@ -30,7 +30,7 @@ Let $G$ be edge-maximal among graphs containing no subdivision of $K_5$ or $K_{3
 
 **Given:** Such $G$ and a minimum proper separation $(V_1,V_2)$ with separator $S=V_1\cap V_2$.
 
-[L1] A graph has a $K_5$ or $K_{3,3}$ minor exactly when it contains a subdivision of one of them ([[lem-kuratowski-minors-are-topological-minors]]).
+[L1] A graph has a $K_5$ or $K_{3,3}$ minor exactly when it contains a subdivision of $K_5$ or $K_{3,3}$ ([[lem-kuratowski-minors-are-topological-minors]]).
 
 
 
