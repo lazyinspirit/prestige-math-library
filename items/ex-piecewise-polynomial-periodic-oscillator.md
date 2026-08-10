@@ -4,6 +4,9 @@ kind: example
 title: "A bounded $C^1$ periodic oscillator made from a quartic Hermite spline"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [lem-integer-part, def-higher-derivatives-and-smoothness, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-integer-power]
 justified_by: []
 aliases: []

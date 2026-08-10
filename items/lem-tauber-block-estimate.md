@@ -4,6 +4,9 @@ kind: lemma
 title: "If $\\iota(n+1)a_n\\to0$, short multiplicative blocks of the coefficients have uniformly small sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-limit, lem-rat-embeds-dense, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, lem-of-abs-value, thm-geometric-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Tauberian theorem, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Tauberian_theorem"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Tauberian theorem, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Tauberian_theorem"
+    - title: "Tauberian theorems, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Tauberian_theorems"
 pipeline_run: null
 ---
 

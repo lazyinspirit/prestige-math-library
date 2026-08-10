@@ -4,6 +4,9 @@ kind: definition
 title: "Grid partitions of a rectangle in $\\mathbb{R}^m$, their cells, refinements and mesh"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-rectangle-and-volume, def-partition-and-refinement, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-finite-set-has-max, def-max-min]
 justified_by: []
 aliases: []

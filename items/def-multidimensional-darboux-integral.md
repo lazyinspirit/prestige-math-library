@@ -4,6 +4,9 @@ kind: definition
 title: "The lower and upper Darboux integrals over a nondegenerate rectangle in $\\mathbb{R}^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-darboux-sums, lem-multidimensional-refinement-inequalities, def-multidimensional-grid-partition, def-complete-ordered-field, def-infimum, thm-infimum-property, lem-sup-unique, def-bounded-set]
 justified_by: []
 aliases: []

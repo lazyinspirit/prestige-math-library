@@ -4,6 +4,9 @@ kind: counterexample
 title: "$1-2+3-4+\\cdots$ is Abel summable to $1/4$ but is not Cesaro summable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-abel-and-cesaro-summability-of-a-series, thm-termwise-differentiation-of-a-real-power-series, thm-geometric-series, def-cesaro-mean]
 justified_by: []
 aliases: []
@@ -12,7 +15,17 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel summability, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"}, {title: "Cesàro summation, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel summability, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"
+    - title: "Cesàro summation, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"
+    - title: "Cesàro summation methods, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Ces%C3%A0ro_summation_methods"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

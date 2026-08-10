@@ -4,6 +4,9 @@ kind: example
 title: "The right triangle $\\{(x,y)\\in[0,1]^2:x+y\\leq1\\}$ has Jordan content $1/2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-jordan-inner-and-outer-content, thm-jordan-content-and-indicator-integrability, thm-jordan-boundary-criterion, thm-graphs-of-continuous-functions-have-content-zero, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-finite-sum, lem-finite-sum-laws, def-canonical-natural, lem-of-naturals-positive, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "A. Cañez, multivariable calculus notes"
+      url: "https://www.math.cmu.edu/~gautam/sj/teaching/2017-18/268-multid-calc/pdfs/canez-calculus.pdf"
 pipeline_run: null
 ---
 

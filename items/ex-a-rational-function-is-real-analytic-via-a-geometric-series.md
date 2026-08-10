@@ -4,6 +4,9 @@ kind: example
 title: "A rational function with nonvanishing denominator is locally represented by geometric-series expansions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-local-reciprocal-of-a-real-power-series, thm-real-analytic-functions-closed-under-algebra-quotients-and-composition, thm-geometric-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

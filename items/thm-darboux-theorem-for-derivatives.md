@@ -4,6 +4,9 @@ kind: theorem
 title: "Darboux's theorem: every derivative has the intermediate-value property"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-derivative, cor-differentiable-implies-continuous, thm-heine-borel-r, thm-extreme-value-r, thm-fermat-interior-extremum, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-interval, def-intermediate-value-property]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "J. Lebl, Basic Analysis I, Mean value theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
+    - title: "Colgate University MATH 323, Chapter 5 notes"
+      url: "https://math.colgate.edu/math323/dlantz/extras/notesC5.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "Higher derivatives and the classes $C^k$ and $C^\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-derivative, def-continuity-real, def-one-sided-limits, def-natural-numbers]
 justified_by: []
 aliases: []

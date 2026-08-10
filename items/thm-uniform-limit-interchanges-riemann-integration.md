@@ -4,19 +4,29 @@ kind: theorem
 title: "A uniform limit of Riemann-integrable functions is Riemann integrable, and its integral is the limit of their integrals"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, thm-riemann-criterion, lem-uniform-integral-error-bound, def-darboux-integral, def-darboux-sums, lem-finite-sum-laws]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "MIT OpenCourseWare 18.100B, Real Analysis, Lectures 20–21"
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

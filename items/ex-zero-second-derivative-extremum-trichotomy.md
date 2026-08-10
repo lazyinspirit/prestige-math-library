@@ -4,6 +4,9 @@ kind: example
 title: "The functions $x^4$, $-x^4$, and $x^3$ show that $f''(0)=0$ is inconclusive"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [fs-zero-second-derivative-decides-extremum, thm-first-nonzero-derivative-test, lem-derivative-of-a-power, lem-power-monotone, def-integer-power]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "J. Lebl, Basic Analysis I, Taylor's theorem and related calculus"
+      url: "https://www.jirka.org/ra/html/sec_taylor.html"
+    - title: "University of Minnesota MATH 5615, higher derivative test"
+      url: "https://www-users.cse.umn.edu/~voronov/5615-20/pdfs/12-2-1.pdf"
 pipeline_run: null
 ---
 

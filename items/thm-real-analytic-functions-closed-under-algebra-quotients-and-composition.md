@@ -4,6 +4,9 @@ kind: theorem
 title: "Real-analytic functions are closed under sums, products and compositions, and under quotients where the denominator is nonzero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-analytic-function, lem-cauchy-product-of-real-power-series, lem-local-composition-of-real-power-series, lem-local-reciprocal-of-a-real-power-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,17 @@ proof_strategy: cases
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

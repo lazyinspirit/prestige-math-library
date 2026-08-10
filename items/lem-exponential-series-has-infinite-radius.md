@@ -4,14 +4,22 @@ kind: lemma
 title: "The exponential series converges absolutely for every real argument"
 status: published
 origin: session
-deps: [def-real-exponential-function-and-e, thm-direct-comparison-test, thm-geometric-series, lem-absolute-convergence-implies-convergence, thm-of-archimedean, def-factorial-and-falling-factorial, def-canonical-natural]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-real-exponential-function-and-e, thm-direct-comparison-test, thm-geometric-series, lem-absolute-convergence-implies-convergence, thm-of-archimedean, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,7 +42,7 @@ For every real $x$, the series $\sum_{n\ge0}x^n/\iota(n!)$ converges absolutely.
 
 [L2] A tail bounded termwise by a convergent geometric series converges ([[thm-direct-comparison-test]], [[thm-geometric-series]]), and absolute convergence implies convergence ([[lem-absolute-convergence-implies-convergence]]).
 
-[L3] $(n+1)!=n!(n+1)$, with nonzero embedded factorials ([[def-factorial-and-falling-factorial]], [[def-canonical-natural]]).
+[L3] Factorials satisfy $(n+1)!=n!(n+1)$ and are nonzero naturals; every positive natural has a positive, hence nonzero, canonical real image ([[def-factorial-and-falling-factorial]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 ## Proof
 

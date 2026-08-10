@@ -4,6 +4,9 @@ kind: corollary
 title: "At $m=1$, cube-nullity and cube-content-zero are exactly the published interval-cover notions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-null-and-content-zero-in-rn, def-measure-zero-and-content-zero, def-multidimensional-rectangle-and-volume, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
+      url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
 pipeline_run: null
 ---
 

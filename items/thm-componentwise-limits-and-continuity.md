@@ -4,6 +4,9 @@ kind: theorem
 title: "A vector-valued function has a limit, or is continuous, if and only if each of its components does; with the algebra of continuous vector-valued functions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-convergence-and-completeness, def-euclidean-inner-product, thm-cauchy-schwarz-and-the-euclidean-norm, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, def-metric-continuity, def-function-limit, def-limit-point-r, lem-finite-sum-laws, def-finite-sum, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, lem-finite-set-has-max, def-max-min, lem-finite-choice, lem-of-abs-value, def-metric-space, lem-real-line-is-a-metric-space, lem-standard-basis-of-f-n]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Vector-valued_function"
     - title: "Continuous function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuous_function"
+    - title: "MAT237 Multivariable Calculus, Section 1.2: Limits and continuity"
+      url: "https://www.math.toronto.edu/courses/mat237y1/20189/notes/Chapter1/S1.2.html"
+    - title: "APEX Calculus, Section 12.2: Calculus and Vector-Valued Functions"
+      url: "https://opentext.uleth.ca/apex-standard/sec_vvf_calc.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: lemma
 title: "An injective Darboux function on an interval is strictly monotone"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-interval, def-intermediate-value-property, def-monotone-function]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "Peer-reviewed article on injective Darboux functions (DOI Serbia)"
+      url: "https://doiserbia.nb.rs/Article.aspx?id=1452-86302100024M"
 pipeline_run: null
 ---
 

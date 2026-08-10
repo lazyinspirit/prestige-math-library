@@ -4,19 +4,29 @@ kind: theorem
 title: "$C(K,\\mathbb{R})$ is complete in the supremum metric for every nonempty compact metric space $K$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-continuous-real-functions-on-a-compact-metric-space, lem-sup-metric-is-a-metric, thm-extreme-value-metric, thm-uniform-cauchy-criterion-real-functions, thm-uniform-limit-continuous-real-functions, def-complete-metric-space, def-metric-convergence, def-cauchy-in-metric]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "MIT OpenCourseWare 18.100B, Real Analysis, Lectures 20–21"
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

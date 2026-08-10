@@ -4,6 +4,9 @@ kind: example
 title: "The parabola segment $\\{(x,x^2):0\\leq x\\leq1\\}$ has content zero in $\\mathbb{R}^2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-graphs-of-continuous-functions-have-content-zero, thm-algebra-of-continuous-functions, def-integer-power, def-canonical-natural, lem-of-naturals-positive, def-null-and-content-zero-in-rn]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "A. Cañez, multivariable calculus notes"
+      url: "https://www.math.cmu.edu/~gautam/sj/teaching/2017-18/268-multid-calc/pdfs/canez-calculus.pdf"
 pipeline_run: null
 ---
 

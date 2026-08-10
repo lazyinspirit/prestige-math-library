@@ -4,6 +4,9 @@ kind: example
 title: "A convergent series in $\\mathbb{R}^{2}$ with $\\Gamma$ a line and $\\Gamma^{\\perp}$ a line, computed from the definition"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-the-space-of-summing-directions, def-series-of-vectors-and-rearrangement, thm-rearrangement-sums-lie-in-an-affine-subspace, thm-componentwise-convergence-and-completeness, thm-alternating-series-test, thm-p-series-rational, thm-riemann-series-theorem, lem-series-linearity, lem-alternating-sequence, def-monotone-sequence, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, def-series, def-absolute-and-conditional-convergence, def-linear-subspace, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, cor-archimedean-reciprocal, def-integer-power, def-real-limit, lem-of-abs-value, lem-standard-basis-of-f-n, def-injection-surjection-bijection, thm-of-square-roots, def-rational-power]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "Levy-Steinitz theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
+    - title: "T. Banakh, A Simple Inductive Proof of the Levy-Steinitz Theorem"
+      url: "https://arxiv.org/abs/1711.04136"
 pipeline_run: null
 ---
 

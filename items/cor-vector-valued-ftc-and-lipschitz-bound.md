@@ -4,6 +4,9 @@ kind: corollary
 title: "If $f : [a,b] \\to \\mathbb{R}^m$ is differentiable with integrable $f'$ then $\\int_a^b f' = f(b)-f(a)$; and a bounded derivative makes $f$ Lipschitz"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-mean-value-inequality, thm-norm-inequality-for-the-vector-valued-integral, thm-componentwise-limits-and-continuity, thm-ftc-second-part, cor-primitives-of-a-continuous-function, def-lipschitz-holder-contraction, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-p-norms-on-rn, def-norm-and-normed-space, def-oriented-integral, thm-additivity-over-subintervals, def-derivative, cor-bounded-derivative-implies-lipschitz, def-interval, lem-real-line-is-a-metric-space, def-function-limit, lem-of-abs-value, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
     - title: "Lipschitz continuity (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
+    - title: "J. Lebl, Basic Analysis I, Section 8.4"
+      url: "https://www.jirka.org/ra/html/sec_svthedercont.html"
 pipeline_run: null
 ---
 
@@ -60,8 +66,6 @@ Let $m \in \mathbb{N}$ with $m \ge 1$ and let $a, b \in \mathbb{R}$ with $a < b$
 [L5] Norms and the induced metric: $\lVert w\rVert_2 \ge 0$, $\lVert -w\rVert_2 = \lVert w\rVert_2$, and $d_2(u,w) = \lVert u-w\rVert_2$ ([[def-norm-and-normed-space]], [[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]]); $d_{\mathbb{R}}(s,t) = |s-t|$ and $|t-s| = |s-t|$ ([[lem-real-line-is-a-metric-space]], [[lem-of-abs-value]]).
 
 [L6] Lipschitz maps: $f$ is Lipschitz with constant $L \ge 0$ when $d_Y(f(x),f(x')) \le L\,d_X(x,x')$ for all $x,x'$ ([[def-lipschitz-holder-contraction]]).
-
-[L7] Additivity of the integral over subintervals and the orientation convention ([[thm-additivity-over-subintervals]], [[def-oriented-integral]]).
 
 ## Proof
 

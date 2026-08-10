@@ -4,6 +4,9 @@ kind: counterexample
 title: "The Smith–Volterra–Cantor slab $S\\times[0,1]$ is compact and not Jordan measurable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-fat-cantor-set, thm-fat-cantor-set-has-positive-measure, lem-product-lower-bound-for-jordan-content, thm-jordan-boundary-criterion, thm-heine-borel-rn, def-metric-interior-closure-boundary, def-jordan-inner-and-outer-content]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "Whitman College real analysis notes"
+      url: "https://www.whitman.edu/Documents/Academics/Mathematics/Hardman.pdf"
 pipeline_run: null
 ---
 

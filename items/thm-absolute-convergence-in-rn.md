@@ -4,6 +4,9 @@ kind: theorem
 title: "An absolutely convergent series in $\\mathbb{R}^n$ converges, and every rearrangement converges to the same sum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-series-of-vectors-and-rearrangement, thm-componentwise-convergence-and-completeness, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, thm-direct-comparison-test, thm-dirichlet-rearrangement, lem-absolute-convergence-implies-convergence, def-absolute-and-conditional-convergence, def-series, def-cauchy-in-metric, def-complete-metric-space, lem-metric-convergent-implies-cauchy, lem-real-line-is-a-metric-space, lem-metrics-on-rn, lem-finite-sum-laws, def-finite-sum, lem-standard-basis-of-f-n, def-injection-surjection-bijection, def-metric-convergence, def-real-limit]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Absolute_convergence"
     - title: "Riemann series theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
+    - title: "T. Banakh, A Simple Inductive Proof of the Levy-Steinitz Theorem"
+      url: "https://arxiv.org/abs/1711.04136"
 pipeline_run: null
 ---
 

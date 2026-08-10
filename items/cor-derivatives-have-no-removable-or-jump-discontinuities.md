@@ -4,6 +4,9 @@ kind: corollary
 title: "A derivative has neither a removable discontinuity nor a jump discontinuity"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-darboux-theorem-for-derivatives, def-classification-of-discontinuities, def-one-sided-limits]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "Colgate University MATH 323, Chapter 5 notes"
+      url: "https://math.colgate.edu/math323/dlantz/extras/notesC5.pdf"
+    - title: "University of Pennsylvania, derivatives and discontinuities"
+      url: "https://www2.math.upenn.edu/~ancoop/3600/section-25.html"
 pipeline_run: null
 ---
 

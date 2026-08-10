@@ -4,6 +4,9 @@ kind: theorem
 title: "Steinitz's polygonal confinement theorem: finitely many vectors of norm at most $1$ summing to $0$ can be ordered so that every partial sum has norm at most $n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-series-of-vectors-and-rearrangement, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-cauchy-schwarz-and-the-euclidean-norm, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-norm-and-normed-space, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-linear-independence, def-dimension, lem-standard-basis-of-f-n, def-linear-combination-and-span, thm-well-ordering-principle, lem-finite-set-has-max, def-max-min, lem-finite-sum-laws, def-finite-sum, lem-finite-subsets-listable, def-countable, lem-pigeonhole, def-injection-surjection-bijection, def-canonical-natural, lem-of-naturals-positive, def-function-space, def-vector-space, thm-induction-principle, lem-of-inverse-positive, def-equinumerous, lem-vector-space-elementary-consequences]
 justified_by: []
 aliases: []
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
     - title: "Ernst Steinitz (Wikipedia), for the 1913 paper in which the rearrangement lemma appears"
       url: "https://en.wikipedia.org/wiki/Ernst_Steinitz"
+    - title: "T. Oertel, J. Paat and R. Weismantel, A Colorful Steinitz Lemma with Applications to Block Integer Programs"
+      url: "https://arxiv.org/abs/2201.05874"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "Abel's limit theorem: if a real series converges to $s$, then its power series tends to $s$ as $x\\uparrow1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-abel-and-cesaro-summability-of-a-series, lem-abel-summation-by-parts, thm-geometric-series, lem-convergent-implies-bounded, thm-direct-comparison-test]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel theorem, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_theorem"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel theorem, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_theorem"
+    - title: "MIT 18.100C, Lecture 11: Power Series"
+      url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

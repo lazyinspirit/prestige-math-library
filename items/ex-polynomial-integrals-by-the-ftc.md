@@ -4,6 +4,9 @@ kind: example
 title: "$\\int_0^1 x^{m} = 1/\\iota(m+1)$, computed by the fundamental theorem and checked against the definition"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-monotonicity-of-the-integral, lem-derivative-of-a-power, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-continuous-implies-integrable, lem-integral-elementary-bounds, def-integer-power, lem-power-monotone, def-canonical-natural, lem-of-naturals-positive, def-darboux-integral, def-oriented-integral, def-derivative, def-continuity-real, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "UC Berkeley Math 128A, Integration notes"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma128a_Spr02/LectureNotes/Integration.html"
 pipeline_run: null
 ---
 

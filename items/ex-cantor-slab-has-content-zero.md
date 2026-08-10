@@ -4,6 +4,9 @@ kind: example
 title: "The Cantor slab $C\\times[0,1]$ has content zero in $\\mathbb{R}^2$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cantor-set-properties, def-measure-zero-and-content-zero, def-jordan-inner-and-outer-content, def-multidimensional-rectangle-and-volume, lem-integer-part, def-canonical-natural, cex-compact-set-without-jordan-content]
 justified_by: []
 aliases: []

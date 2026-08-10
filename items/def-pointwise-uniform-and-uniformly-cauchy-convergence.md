@@ -4,18 +4,28 @@ kind: definition
 title: "Pointwise convergence, uniform convergence, and the uniformly Cauchy condition for sequences of real-valued functions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-function-space, def-real-limit, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
 landmark: true
 verification:
-  audited: 2026-07-31
   precheck: n/a
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "J. Lebl, Basic Analysis I, §6.1"
       url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

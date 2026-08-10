@@ -1,0 +1,237 @@
+## Assigned exact-final target — `thm-normalized-exponential-functional-equation`
+
+Item path: `items/thm-normalized-exponential-functional-equation.md`
+
+Normalized final-text SHA-256 at dispatch: `320bdc45524a752781b0a431bb19cefa0fc4a42d7c864bec24a6399cfdcab031`
+
+Target type(s): `A4-material`
+
+- A4 added the exponential definition and derivative theorem needed for the existence half of the two uniqueness arguments
+
+Read these exact-current cited/dependency ids from disk (11): `cor-exponential-reciprocal-and-positivity`, `def-continuity-real`, `def-derivative`, `def-rational-power`, `def-real-exponential-function-and-e`, `lem-rat-embeds-dense`, `thm-derivative-of-exponential`, `thm-exponential-addition-formula`, `thm-exponential-is-strictly-increasing`, `thm-exponential-ivp-uniqueness`, `thm-nth-roots-exist`.
+
+For source work, open every retained provenance URL and compare its mathematical claim with the current item and rationale. The two removed shell-blocked routes were independently confirmed browser-accessible but redundant; no retained evidence may be weakened by their removal.
+
+Current generated-manifest rows:
+
+```json
+[
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "thm-exponential-ivp-uniqueness",
+    "declared_target": "thm-exponential-ivp-uniqueness",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "thm-exponential-addition-formula",
+    "declared_target": "thm-exponential-addition-formula",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "thm-exponential-is-strictly-increasing",
+    "declared_target": "thm-exponential-is-strictly-increasing",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "cor-exponential-reciprocal-and-positivity",
+    "declared_target": "cor-exponential-reciprocal-and-positivity",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "def-real-exponential-function-and-e",
+    "declared_target": "def-real-exponential-function-and-e",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "thm-derivative-of-exponential",
+    "declared_target": "thm-derivative-of-exponential",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "the-exponential-function",
+    "targetBatch": "wave14-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "def-derivative",
+    "declared_target": "def-derivative",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "the-derivative-and-mean-value-theorems",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "def-rational-power",
+    "declared_target": "def-rational-power",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "thm-nth-roots-exist",
+    "declared_target": "thm-nth-roots-exist",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "lem-rat-embeds-dense",
+    "declared_target": "lem-rat-embeds-dense",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "construction-of-r-via-cauchy-sequences",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "thm-normalized-exponential-functional-equation",
+    "sourcePage": "the-exponential-function",
+    "batch": "wave14-real-analysis",
+    "target": "def-continuity-real",
+    "declared_target": "def-continuity-real",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "continuity-ivt-evt-and-uniform-continuity",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  }
+]
+```
+
+Current provenance row:
+
+```json
+{
+  "id": "thm-normalized-exponential-functional-equation",
+  "statement": "ai-altered",
+  "proof": "ai-altered",
+  "evidence": "semantic-source",
+  "urls": [
+    "https://people.tamu.edu/~yvorobets/MATH409-2013C/Lect2-07web.pdf",
+    "https://math.mit.edu/~stevenj/exponential.pdf"
+  ],
+  "rationale": "The Texas A&M notes give uniqueness of the continuous positive multiplicative function normalized at 1, and Johnson derives exponential form from continuity of a nonzero multiplicative solution. The item combines that standard characterization with the differentiability-at-zero normalization F(0)=F'(0)=1, so no one located source has its exact two-part packaging.",
+  "alpha_concurred": false,
+  "at": "2026-08-09"
+}
+```
+
+Exact current item at dispatch:
+
+````markdown
+---
+id: thm-normalized-exponential-functional-equation
+kind: theorem
+title: "Regular normalized multiplicative Cauchy equations characterize the exponential"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-exponential-ivp-uniqueness, thm-exponential-addition-formula, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, def-real-exponential-function-and-e, thm-derivative-of-exponential, def-derivative, def-rational-power, thm-nth-roots-exist, lem-rat-embeds-dense, def-continuity-real]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: cases
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 full lecture notes"
+      url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "J. Lebl, Basic Analysis, Analytic Functions"
+      url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "Y. Vorobets, Texas A&M MATH 409 Lecture 2-07"
+      url: "https://people.tamu.edu/~yvorobets/MATH409-2013C/Lect2-07web.pdf"
+    - title: "S. G. Johnson, Exponential Functions"
+      url: "https://math.mit.edu/~stevenj/exponential.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+The exponential function is the unique continuous $F:\mathbb R\to(0,\infty)$ satisfying $F(x+y)=F(x)F(y)$ and $F(1)=e$. It is also the unique function differentiable at $0$ satisfying the functional equation, $F(0)=1$, and $F'(0)=1$.
+
+## Facts & Assumptions
+
+**Given:** A function $F$ satisfying one of the two normalizations.
+
+[L1] The exponential satisfies $\exp(x+y)=\exp(x)\exp(y)$, is continuous and positive, obeys $\exp(0)=1$, $\exp(1)=e$, and $\exp'=\exp$, and is the unique normalized solution of $y'=y$ ([[thm-exponential-addition-formula]], [[thm-exponential-is-strictly-increasing]], [[cor-exponential-reciprocal-and-positivity]], [[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-exponential-ivp-uniqueness]]).
+
+[L2] Positive $n$-th roots exist uniquely ([[thm-nth-roots-exist]]), rational powers are [[def-rational-power]], and rationals are dense ([[lem-rat-embeds-dense]]).
+
+## Proof
+
+**Proof technique:** cases.
+
+1.1 Under continuity and $F(1)=e$, the equation gives $F(n)=e^n$, $F(-n)=e^{-n}$, and uniqueness of positive roots gives $F(m/n)=e^{m/n}$ for rationals $m/n$. Density and continuity then give $F(x)=\exp(x)$ for every real $x$.   [assume-case continuous, L1, L2, given]
+
+1.2 Under differentiability at $0$, $\frac{F(x+h)-F(x)}h=F(x)\frac{F(h)-1}h$, so $F'(x)=F(x)F'(0)=F(x)$. With $F(0)=1$, [L1] gives $F=\exp$.   [assume-case differentiable, given, L1, algebra]
+
+2.1 The exponential itself satisfies both normalizations, so both uniqueness assertions follow.  [step 1.1, step 1.2, L1, cases-exhaustive] ∎
+````

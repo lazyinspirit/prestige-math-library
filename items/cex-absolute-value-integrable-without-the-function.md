@@ -4,19 +4,23 @@ kind: counterexample
 title: "A function that is not Riemann integrable although $\\lvert f\\rvert$ is"
 status: published
 origin: session
-deps: [cor-integrability-of-absolute-values-products-and-lattice-operations, def-darboux-integral, def-darboux-sums, def-partition-and-refinement, lem-q-and-irrationals-dense-r, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, thm-lebesgue-criterion, lem-nondegenerate-interval-is-not-null, def-measure-zero-and-content-zero, lem-integral-elementary-bounds, def-finite-sum, lem-finite-sum-laws, def-infimum, def-max-min, def-abs-value, def-interval, def-bounded-set, def-continuity-real, def-complete-ordered-field, def-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [cor-integrability-of-absolute-values-products-and-lattice-operations, def-darboux-integral, def-darboux-sums, def-partition-and-refinement, lem-q-and-irrationals-dense-r, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, thm-lebesgue-criterion, lem-nondegenerate-interval-is-not-null, lem-integral-elementary-bounds, def-finite-sum, lem-finite-sum-laws, def-infimum, def-max-min, def-abs-value, def-interval, def-bounded-set, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 short: "$|f|$ integrable, $f$ not"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -63,8 +67,6 @@ are $-1$ and $1$.
 [L7] $\int_p^q c = c(q-p)$ for a constant $c$ ([[lem-integral-elementary-bounds]]).
 
 [L8] Absolute value and ordered-field arithmetic: $|1| = |-1| = 1$, and the order is total ([[def-abs-value]], [[def-ordered-field]], [[def-complete-ordered-field]]).
-
-[L9] Lebesgue's criterion, and the fact that a nondegenerate interval is not null ([[thm-lebesgue-criterion]], [[lem-nondegenerate-interval-is-not-null]], [[def-measure-zero-and-content-zero]], [[thm-dirichlet-and-thomae-continuity-sets]], [[def-continuity-real]]).
 
 ## Counterexample
 

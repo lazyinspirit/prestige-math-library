@@ -4,7 +4,10 @@ kind: corollary
 title: "For $n \\ge 1$ every bounded sequence in $\\mathbb{R}^n$ has a convergent subsequence"
 status: published
 origin: session
-deps: [thm-componentwise-convergence-and-completeness, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, thm-heine-borel-rn, thm-compact-implies-the-other-compactness-forms, thm-metric-compactness-equivalences, def-metric-compactness, def-metric-compactness-variants, def-metric-bounded-diameter, def-metric-ball, thm-bolzano-weierstrass, def-dependent-choice, lem-metrics-on-rn, def-metric-convergence, def-sequence, lem-subsequence-inherits-limit, lem-index-map-grows, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-isometry-and-metric-embedding, thm-of-square-roots, lem-of-abs-value]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, thm-heine-borel-rn, thm-compact-implies-the-other-compactness-forms, thm-metric-compactness-equivalences, def-metric-compactness, def-metric-compactness-variants, def-metric-bounded-diameter, def-metric-ball, thm-bolzano-weierstrass, def-dependent-choice, lem-metrics-on-rn, def-metric-convergence, def-sequence, lem-subsequence-inherits-limit, lem-index-map-grows, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-isometry-and-metric-embedding, thm-of-square-roots, lem-of-abs-value]
 justified_by: []
 aliases: []
 landmark: true
@@ -12,9 +15,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   verified:
-    model: gpt-5.6-sol-codex-subscription
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-08-04
+    date: 2026-08-10
     scope: published-audit
     delegated_by: owner
 sources:
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Bolzano%E2%80%93Weierstrass_theorem"
     - title: "Heine-Borel theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 
@@ -73,10 +80,6 @@ would overcharge this corollary; the arrow-by-arrow account is
 
 [L6] Convergence in a metric space, and inheritance of limits by subsequences ([[def-metric-convergence]], [[lem-subsequence-inherits-limit]], [[lem-index-map-grows]]).
 
-[L7] Componentwise convergence in $\mathbb{R}^{n}$ for $n \ge 1$ ([[thm-componentwise-convergence-and-completeness]] clause 1).
-
-[L8] Square roots and absolute values: $\sqrt{t^{2}} = |t|$ for every real $t$ ([[thm-of-square-roots]], [[lem-of-abs-value]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -99,8 +102,8 @@ would overcharge this corollary; the arrow-by-arrow account is
 
 ## Remarks
 
-- **The case $n = 1$ and the published one-dimensional theorem.** $\mathbb{R}^{1}$ is the set of functions $1 \to \mathbb{R}$ and is therefore **not literally** $\mathbb{R}$. The map $\theta : \mathbb{R} \to \mathbb{R}^{1}$ sending $t$ to the function with value $t$ at $0$ is a bijection, and $d_2(\theta(s),\theta(t)) = \sqrt{(s-t)^{2}} = |s-t|$ by [L8], so $\theta$ is an isometric bijection onto $\mathbb{R}^{1}$ ([[def-isometry-and-metric-embedding]]). Under that identification this corollary at $n = 1$ and the published [[thm-bolzano-weierstrass]] are the same statement, and neither is used to prove the other: the published theorem is proved on the real line, and the corollary above is proved from Heine-Borel in $\mathbb{R}^{n}$.
+- **The case $n = 1$ and the published one-dimensional theorem.** $\mathbb{R}^{1}$ is the set of functions $1 \to \mathbb{R}$ and is therefore **not literally** $\mathbb{R}$. The map $\theta : \mathbb{R} \to \mathbb{R}^{1}$ sending $t$ to the function with value $t$ at $0$ is a bijection, and $d_2(\theta(s),\theta(t)) = \sqrt{(s-t)^{2}} = |s-t|$ ([[thm-of-square-roots]], [[lem-of-abs-value]]), so $\theta$ is an isometric bijection onto $\mathbb{R}^{1}$ ([[def-isometry-and-metric-embedding]]). Under that identification this corollary at $n = 1$ and the published [[thm-bolzano-weierstrass]] are the same statement, and neither is used to prove the other: the published theorem is proved on the real line, and the corollary above is proved from Heine-Borel in $\mathbb{R}^{n}$.
 
-- **Boundedness of the sequence is boundedness of its range**, a set, and not a condition on each coordinate separately. The two do agree here, by step 3.1 in one direction and by [[thm-componentwise-convergence-and-completeness]] in the other; what does **not** follow from bounded coordinates is convergence, and the companion page carries that false statement.
+- **Boundedness of the sequence is boundedness of its range**, a set, and not a condition on each coordinate separately. The two do agree here: step 3.1 gives one direction, while the reverse follows from $\lVert y\rVert_2\le\iota(n)\lVert y\rVert_\infty$ in [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] clause 3 after taking the maximum of the finitely many coordinate bounds. What does **not** follow from bounded coordinates is convergence, and the companion page carries that false statement.
 
 - **What sequential compactness gives and what it does not.** It produces a convergent subsequence and says nothing about the original sequence. A bounded sequence need not converge, and a sequence with a convergent subsequence need not be bounded; both remarks are already recorded for the real line in [[thm-bolzano-weierstrass]].

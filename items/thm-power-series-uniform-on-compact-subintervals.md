@@ -4,6 +4,9 @@ kind: theorem
 title: "A power series converges absolutely and uniformly on every closed interval strictly inside its interval of convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-power-series-convergence-dichotomy, thm-weierstrass-m-test-for-function-series, def-series-of-real-functions, def-interval]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT 18.100C, Lecture 11: Power Series"
       url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
 pipeline_run: null
 ---
 

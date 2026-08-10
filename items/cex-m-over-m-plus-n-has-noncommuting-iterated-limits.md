@@ -4,19 +4,27 @@ kind: counterexample
 title: "The double sequence $(m+1)/(m+n+2)$ has unequal iterated limits"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-limit, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "W. F. Trench, Introduction to Real Analysis, §4.4"
-      url: "https://open.umn.edu/opentextbooks/textbooks/174"
+    - title: "Stephen Abbott, Understanding Analysis, 2nd ed., Exercise 2.3.13"
+      url: "https://link.springer.com/chapter/10.1007/978-1-4939-2712-8_2"
 pipeline_run: null
 ---
 

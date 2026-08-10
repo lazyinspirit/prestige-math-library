@@ -4,6 +4,9 @@ kind: definition
 title: "Tagged grid partitions and Riemann sums in $\\mathbb{R}^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-grid-partition, def-multidimensional-darboux-sums, def-multidimensional-rectangle-and-volume, lem-finite-choice, def-choice-function, def-bounded-set]
 justified_by: []
 aliases: []

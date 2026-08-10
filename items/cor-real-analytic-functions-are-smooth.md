@@ -4,6 +4,9 @@ kind: corollary
 title: "Every real-analytic function is infinitely differentiable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-analytic-function, cor-power-series-sums-are-smooth-with-coefficient-formula]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "The rational points of $[0,1]^2$ form a bounded null set that is not Jordan measurable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-jordan-boundary-criterion, def-null-and-content-zero-in-rn, lem-null-sets-in-rn-closed-under-subsets-and-countable-unions, thm-rationals-countable, thm-n-cross-n-countable, def-countable, lem-q-and-irrationals-dense-r, def-metric-interior-closure-boundary, lem-compact-null-iff-content-zero-in-rn, thm-jordan-content-and-indicator-integrability, ex-unit-box-volume-and-integral]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "A. Treibergs, MATH 3225 final solutions"
+      url: "https://www.math.utah.edu/~treiberg/M3225_Final_Solutions.pdf"
 pipeline_run: null
 ---
 

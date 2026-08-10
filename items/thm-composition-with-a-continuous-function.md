@@ -4,6 +4,9 @@ kind: theorem
 title: "If $f$ is integrable on $[a,b]$ with values in $[m,M]$ and $\\varphi$ is continuous on $[m,M]$, then $\\varphi \\circ f$ is integrable"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-riemann-criterion, def-darboux-sums, def-darboux-integral, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, cor-boundedness-theorem-r, def-uniform-continuity-real, thm-heine-borel-r, def-open-cover-r, lem-finite-sum-laws, def-finite-sum, def-oscillation, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field, lem-of-abs-value, thm-of-archimedean, cor-archimedean-reciprocal]
 forward_refs: [cex-a-composition-of-integrable-functions-that-is-not-integrable]
 justified_by: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Springer article on compositions of Riemann-integrable functions"
+      url: "https://link.springer.com/article/10.1007/s00591-022-00318-x"
 pipeline_run: null
 ---
 

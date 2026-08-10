@@ -4,6 +4,9 @@ kind: theorem
 title: "Two real-analytic functions on an open interval that agree on a set with an accumulation point in that interval agree throughout the interval"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-zero-of-a-real-analytic-function-is-isolated-or-locally-identical, def-real-analytic-function, thm-connected-subsets-of-r-are-intervals, def-connected-r, cor-power-series-sums-are-continuous]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

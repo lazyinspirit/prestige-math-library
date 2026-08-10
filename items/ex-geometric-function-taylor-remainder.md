@@ -4,6 +4,9 @@ kind: example
 title: "The Taylor polynomial of $(1-x)^{-1}$ at $0$ has the exact geometric remainder $x^{n+1}/(1-x)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-taylor-polynomial-and-remainder, cor-taylor-remainder-bound, lem-finite-sum-laws, thm-algebra-of-derivatives, thm-chain-rule, lem-derivative-of-a-power, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "J. Lebl, Basic Analysis I, Taylor's theorem and related calculus"
+      url: "https://www.jirka.org/ra/html/sec_taylor.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The first fundamental theorem: if $f$ is integrable on $[a,b]$ and continuous at $c$, then $F'(c) = f(c)$; in particular a continuous $f$ has $F$ as a primitive"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-the-integral-function, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, cor-integrability-of-absolute-values-products-and-lattice-operations, lem-integral-elementary-bounds, lem-integrability-on-a-subinterval, thm-additivity-over-subintervals, def-oriented-integral, def-derivative, def-function-limit, def-continuity-real, def-interval, def-darboux-integral, lem-of-abs-value, def-abs-value, def-ordered-field, def-complete-ordered-field, thm-of-archimedean, cor-archimedean-reciprocal]
 forward_refs: [cex-an-integrable-function-with-no-primitive, fs-the-integral-function-is-always-a-primitive]
 justified_by: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 

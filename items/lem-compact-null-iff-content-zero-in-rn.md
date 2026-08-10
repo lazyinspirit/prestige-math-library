@@ -4,6 +4,9 @@ kind: lemma
 title: "For compact subsets of $\\mathbb{R}^m$, measure zero and content zero coincide"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-null-and-content-zero-in-rn, thm-heine-borel-rn, def-metric-compactness, lem-compactness-is-intrinsic, def-metric-topology, def-multidimensional-rectangle-and-volume, thm-geometric-series, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
+      url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
 pipeline_run: null
 ---
 

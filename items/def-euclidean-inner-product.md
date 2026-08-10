@@ -4,6 +4,9 @@ kind: definition
 title: "The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-norm-and-normed-space, def-function-space, def-vector-space, lem-standard-basis-of-f-n, def-finite-sum, lem-finite-sum-laws, lem-metrics-on-rn, lem-of-square-positive, thm-of-square-roots, def-natural-numbers, lem-nat-order-is-membership, def-integer-power, lem-power-laws]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Dot_product"
     - title: "Euclidean space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Euclidean_space"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 

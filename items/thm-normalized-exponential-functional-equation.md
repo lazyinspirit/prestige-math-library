@@ -4,14 +4,22 @@ kind: theorem
 title: "Regular normalized multiplicative Cauchy equations characterize the exponential"
 status: published
 origin: session
-deps: [thm-exponential-ivp-uniqueness, thm-exponential-addition-formula, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, def-derivative, def-rational-power, thm-nth-roots-exist, lem-rat-embeds-dense, def-continuity-real]
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [thm-exponential-ivp-uniqueness, thm-exponential-addition-formula, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, def-real-exponential-function-and-e, thm-derivative-of-exponential, def-derivative, def-rational-power, thm-nth-roots-exist, lem-rat-embeds-dense, def-continuity-real]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -19,6 +27,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "Y. Vorobets, Texas A&M MATH 409 Lecture 2-07"
+      url: "https://people.tamu.edu/~yvorobets/MATH409-2013C/Lect2-07web.pdf"
+    - title: "S. G. Johnson, Exponential Functions"
+      url: "https://math.mit.edu/~stevenj/exponential.pdf"
 pipeline_run: null
 ---
 
@@ -30,7 +42,7 @@ The exponential function is the unique continuous $F:\mathbb R\to(0,\infty)$ sat
 
 **Given:** A function $F$ satisfying one of the two normalizations.
 
-[L1] The exponential satisfies the functional equation, is continuous, and satisfies the initial-value characterization ([[thm-exponential-addition-formula]], [[thm-exponential-is-strictly-increasing]], [[thm-exponential-ivp-uniqueness]]).
+[L1] The exponential satisfies $\exp(x+y)=\exp(x)\exp(y)$, is continuous and positive, obeys $\exp(0)=1$, $\exp(1)=e$, and $\exp'=\exp$, and is the unique normalized solution of $y'=y$ ([[thm-exponential-addition-formula]], [[thm-exponential-is-strictly-increasing]], [[cor-exponential-reciprocal-and-positivity]], [[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-exponential-ivp-uniqueness]]).
 
 [L2] Positive $n$-th roots exist uniquely ([[thm-nth-roots-exist]]), rational powers are [[def-rational-power]], and rationals are dense ([[lem-rat-embeds-dense]]).
 

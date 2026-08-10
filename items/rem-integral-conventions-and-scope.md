@@ -4,6 +4,9 @@ kind: remark
 title: "Conventions of this page, and which sharpenings of the integral are taken up later in the reading order"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-oriented-integral, def-darboux-integral, thm-darboux-equals-riemann, thm-ftc-first-part, thm-ftc-second-part, thm-substitution, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-integral-test-for-series, thm-second-mean-value-theorem-for-integrals, def-the-integral-function, thm-additivity-over-subintervals]
 external_refs: [rem-ftc-absolutely-continuous, rem-dominated-convergence-theorem]
 forward_refs: [cex-spikes-with-integral-one-converging-pointwise-to-zero, cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable]
@@ -12,12 +15,20 @@ aliases: []
 landmark: false
 short: "conventions and scope of this page"
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: n/a
-  audited: 2026-07-29
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-09
+    scope: published-audit-targeted
+    context_sha256: bae50918b2cd1f67bb94ad0168c7c29f51bcae3af7e6f7473d78b016f34050f9
+    item_sha256: e9d21277062eff21152f0b567aed7ab9d15c13298b8ef70a1c6be4debc48b2f8
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -31,7 +42,8 @@ pipeline_run: null
 This item is the ledger of the page: what "integrable" means here, what the
 orientation convention costs, what the page spends in choice, and which
 sharpenings of the integral belong to later pages rather than to this one. It
-establishes nothing and is cited by nothing.
+establishes no theorem and serves only as a conventions and reading-order
+ledger.
 
 ## 1. One integral, under two names
 
@@ -40,7 +52,8 @@ establishes nothing and is cited by nothing.
 upper Darboux integrals. By [[thm-darboux-equals-riemann]] that is the same class
 of functions with the same value as Riemann's own definition by tagged partitions
 of small mesh, so the two words are used interchangeably, as they are in the
-literature. No other integral appears anywhere on this page or its companion.
+literature. No other integral is defined or used by a proof on this page or its
+companion.
 
 ## 2. The orientation convention, and the statements whose form depends on it
 
@@ -107,13 +120,12 @@ Stated as reading order, and as no claim at all about what this library
 currently proves.
 
 - **Higher derivatives, and Taylor's theorem with the integral remainder.** The
-  integral remainder is an application of [[thm-integration-by-parts]], but it
-  needs derivatives of order $n$, which are introduced on the page of the
-  analysis track devoted to Darboux's theorem, l'Hopital's rule and Taylor
-  expansion. The scaffold for this build records that it belongs there, next to
-  the Lagrange and Cauchy forms, and it is deliberately absent here; that is a
-  statement about where the plan puts it, not about anything the library has
-  proved.
+  integral remainder is an application of [[thm-integration-by-parts]] and needs
+  derivatives of order $n$. The later Darboux/L'Hopital/Taylor page proves the
+  Peano, Lagrange, Cauchy and Schlomilch-Roche forms but explicitly excludes the
+  integral remainder. It is therefore absent from the current library, with no
+  later published page assigned to it; this is a statement about the present
+  reading order, not a theorem about Taylor remainders.
 - **Bounded variation and the Riemann-Stieltjes integral.** The integrator
   $\mathrm{d}\alpha$ generalises everything on this page, and the sharpened
   second mean value theorem belongs with it. That is a later page of the same
@@ -136,9 +148,10 @@ Both are recorded elsewhere as results the library does **not** establish, and
 they are mentioned here for orientation only; nothing on this page or its
 companion rests on either.
 
-- [[rem-ftc-absolutely-continuous]] — the sharp form of the fundamental theorem,
-  in which the class of functions $G$ with $\int_a^b G' = G(b)-G(a)$ is
-  identified exactly. The two counterexamples on the companion page,
+- [[rem-ftc-absolutely-continuous]] — the sharp form of the fundamental theorem:
+  the absolutely continuous functions are exactly those for which $G'$ exists
+  almost everywhere, $G'\in L^1$, and
+  $G(x)=G(a)+\int_a^x G'$ for every $x\in[a,b]$. The two counterexamples on the companion page,
   [[cex-an-integrable-function-with-no-primitive]] and
   [[cex-a-function-with-a-primitive-that-is-not-integrable]], are precisely the
   two ways the naive form fails, and that sharp form is the answer.

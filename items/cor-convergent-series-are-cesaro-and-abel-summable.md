@@ -4,6 +4,9 @@ kind: corollary
 title: "Every convergent real series is Cesaro summable and Abel summable to its ordinary sum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-cesaro-mean-theorem, thm-abel-limit-theorem, def-abel-and-cesaro-summability-of-a-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,19 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel summability, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"}, {title: "Cesàro summation, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel summability, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"
+    - title: "Cesàro summation, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"
+    - title: "Cesàro summation methods, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Ces%C3%A0ro_summation_methods"
+    - title: "MIT 18.100C, Lecture 11: Power Series"
+      url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

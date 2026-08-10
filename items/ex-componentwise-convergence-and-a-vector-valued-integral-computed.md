@@ -4,6 +4,9 @@ kind: example
 title: "A convergent sequence in $\\mathbb{R}^{3}$ and the integral $\\int_0^1 (1, t, t^{2})$, computed componentwise"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-convergence-and-completeness, thm-componentwise-limits-and-continuity, thm-norm-inequality-for-the-vector-valued-integral, cor-primitives-of-a-continuous-function, thm-continuous-implies-integrable, thm-monotonicity-of-the-integral, thm-linearity-of-the-integral, lem-derivative-of-a-power, thm-algebra-of-continuous-functions, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, def-oriented-integral, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, thm-of-square-roots, lem-of-square-monotone, def-integer-power, def-metric-convergence, def-sequence, lem-standard-basis-of-f-n, def-interval, lem-finite-sum-laws, def-finite-sum]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,13 +27,17 @@ sources:
       url: "https://en.wikipedia.org/wiki/Vector-valued_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "J. Lebl, Basic Analysis I, Section 7.3"
+      url: "https://www.jirka.org/ra/html/sec_metseqs.html"
+    - title: "APEX Calculus, Section 12.2"
+      url: "https://opentext.uleth.ca/apex-standard/sec_vvf_calc.html"
 pipeline_run: null
 ---
 
 ## Example
 
-Both halves of [[def-vector-valued-derivative-and-integral]] are exercised here,
-in $\mathbb{R}^{3}$.
+Two parts of the vector-valued toolkit are exercised here, in $\mathbb{R}^{3}$:
+componentwise sequence convergence and componentwise integration.
 
 **A convergent sequence.** For $k \in \mathbb{N}$ put
 
@@ -77,7 +85,7 @@ sides of [[thm-norm-inequality-for-the-vector-valued-integral]].
 
 **Proof technique:** direct.
 
-1.1 The three coordinate sequences of $\bigl(x^{(k)}\bigr)$ are $k \mapsto 1/\iota(k+1)$, $k \mapsto 1 - 1/\iota(k+1)$ and the constant $2$. Given a rational $\varepsilon>0$, take $K$ with $1/\iota(K+1)<\varepsilon$; then for $k \ge K$ one has $0 < 1/\iota(k+1) \le 1/\iota(K+1) < \varepsilon$, so the first converges to $0$, the second to $1$ and the third to $2$. [L2]
+1.1 The three coordinate sequences of $\bigl(x^{(k)}\bigr)$ are $k \mapsto 1/\iota(k+1)$, $k \mapsto 1 - 1/\iota(k+1)$ and the constant $2$. Given a real $\varepsilon>0$, take $K$ with $1/\iota(K+1)<\varepsilon$; then for $k \ge K$ one has $0 < 1/\iota(k+1) \le 1/\iota(K+1) < \varepsilon$, so the first converges to $0$, the second to $1$ and the third to $2$. [L2]
 
 1.2 Each component of $f$ is a polynomial function, hence continuous on $[0,1]$ and integrable there; so $f$ is integrable, and $f$ is continuous. [L3, L4, L9]
 
@@ -105,4 +113,4 @@ sides of [[thm-norm-inequality-for-the-vector-valued-integral]].
 
 - **The lower bound is deliberately crude.** The inequality $\sqrt{1+u} \ge 1 + u/\iota(3)$ used in step 1.4 holds for $0 \le u \le \iota(3)$ and is far from sharp; it is chosen because it is polynomial, so that step 2.3 is an application of [[cor-primitives-of-a-continuous-function]] and nothing more. The exact value of $\int_0^1\sqrt{1+t^{2}+t^{4}}\,dt$ is not a value this page can name.
 
-- **The sequence and the integral are independent computations**, put in one item because they exercise the two halves of [[def-vector-valued-derivative-and-integral]] on the same space. Neither uses the other.
+- **The sequence and the integral are independent computations**, put in one item because they exercise componentwise arguments on the same space. Neither uses the other.

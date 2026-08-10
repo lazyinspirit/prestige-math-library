@@ -4,6 +4,9 @@ kind: lemma
 title: "Changing an integrable function at finitely many points changes neither its integrability nor its integral"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-linearity-of-the-integral, thm-riemann-criterion, lem-integral-elementary-bounds, def-darboux-sums, def-partition-and-refinement, def-darboux-integral, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-countable, def-equinumerous, thm-of-archimedean, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field]
 forward_refs: [fs-the-integral-function-is-always-a-primitive]
 justified_by: []
@@ -25,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, Properties of the Riemann integral"
+      url: "https://www.jirka.org/ra/html/sec_rintprop.html"
 pipeline_run: null
 ---
 

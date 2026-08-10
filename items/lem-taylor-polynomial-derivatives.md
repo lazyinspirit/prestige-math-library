@@ -4,6 +4,9 @@ kind: lemma
 title: "Taylor polynomials match the prescribed derivatives at the centre"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-taylor-polynomial-and-remainder, lem-derivative-of-a-power, thm-chain-rule, thm-algebra-of-derivatives, def-factorial-and-falling-factorial, lem-finite-sum-laws, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "J. Lebl, Basic Analysis I, Taylor's theorem and related calculus"
+      url: "https://www.jirka.org/ra/html/sec_taylor.html"
 pipeline_run: null
 ---
 

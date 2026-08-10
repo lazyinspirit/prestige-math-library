@@ -4,6 +4,9 @@ kind: definition
 title: "The integral with oriented limits: $\\int_a^a f := 0$ and $\\int_b^a f := -\\int_a^b f$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [def-darboux-integral, def-partition-and-refinement, def-darboux-sums, def-bounded-set, def-interval]
 justified_by: []
 aliases: [def-oriented-limits-of-integration]
@@ -23,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
 pipeline_run: null
 ---
 

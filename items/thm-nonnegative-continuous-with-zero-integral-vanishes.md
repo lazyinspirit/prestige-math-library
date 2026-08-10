@@ -4,6 +4,9 @@ kind: theorem
 title: "A continuous $f \\ge 0$ on $[a,b]$ with $\\int_a^b f = 0$ is identically $0$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-additivity-over-subintervals, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, thm-continuous-implies-integrable, lem-integrability-on-a-subinterval, def-continuity-real, def-darboux-integral, def-oriented-integral, def-max-min, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "MIT 18.100, problem-set solutions on the Riemann integral"
+      url: "https://math.mit.edu/~rbm/18.100-F02.HMW/HMW7s.pdf"
+    - title: "J. Lebl, Basic Analysis I, Properties of the Riemann integral"
+      url: "https://www.jirka.org/ra/html/sec_rintprop.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The unit box in $\\mathbb{R}^m$ has volume $1$, and the integral of a constant $c$ over it is $c$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-multidimensional-rectangle-and-volume, def-multidimensional-grid-partition, def-multidimensional-darboux-sums, def-multidimensional-darboux-integral, lem-finite-sum-laws, def-finite-sum]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "J. Lebl, Basic Analysis, Riemann Integral in Several Variables"
+      url: "https://www.jirka.org/ra/html/sec_rirect.html"
 pipeline_run: null
 ---
 

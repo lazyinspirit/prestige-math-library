@@ -4,6 +4,9 @@ kind: example
 title: "L'Hôpital evaluates $\\lim_{x\\to1}(x^3-x)/(x^2-1)$ as $1$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-lhopital-zero-over-zero, thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-algebra-of-function-limits]
 justified_by: []
 aliases: []

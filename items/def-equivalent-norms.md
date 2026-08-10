@@ -4,6 +4,9 @@ kind: definition
 title: "Equivalent norms, and the dictionary with equivalent metrics"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-norm-and-normed-space, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-equivalent-metrics, thm-metric-equivalence-hierarchy, def-metric-topology, def-metric-convergence, def-cauchy-in-metric, def-metric-uniform-continuity, lem-bounded-remetrisation, def-vector-space, lem-of-inverse-positive]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
     - title: "Equivalence of metrics (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Equivalence_of_metrics"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 

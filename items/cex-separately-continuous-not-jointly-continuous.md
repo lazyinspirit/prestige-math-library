@@ -4,6 +4,9 @@ kind: counterexample
 title: "$g(x,y) = xy/(x^{2}+y^{2})$, extended by $g(0,0)=0$, is continuous in each variable separately and not continuous at the origin"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-metric-continuity, thm-metric-continuity-characterisations, thm-algebra-of-continuous-functions, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-p-norms-on-rn, def-norm-and-normed-space, def-metric-convergence, def-sequence, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-euclidean-inner-product, thm-componentwise-convergence-and-completeness, lem-standard-basis-of-f-n, def-continuity-real, lem-real-and-metric-notions-agree, thm-of-square-roots, def-integer-power, lem-of-inverse-positive, def-metric-space, lem-real-line-is-a-metric-space]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Continuous_function"
     - title: "Multivariable calculus (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Multivariable_calculus"
+    - title: "Harvard Math 21a, separately continuous but not jointly continuous example"
+      url: "https://legacy-www.math.harvard.edu/archive/21a_fall_09/exhibits/bitch/index.html"
 pipeline_run: null
 ---
 

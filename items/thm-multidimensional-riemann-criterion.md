@@ -4,6 +4,9 @@ kind: theorem
 title: "Riemann's criterion on a nondegenerate rectangle in $\\mathbb{R}^m$: integrability is equivalent to arbitrarily small Darboux gaps"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-multidimensional-darboux-integral, def-multidimensional-darboux-sums, lem-multidimensional-refinement-inequalities, def-multidimensional-grid-partition, lem-sup-epsilon, lem-inf-epsilon]
 justified_by: []
 aliases: []

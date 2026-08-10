@@ -4,6 +4,9 @@ kind: definition
 title: "Taylor polynomials and their remainders"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-higher-derivatives-and-smoothness, def-factorial-and-falling-factorial, def-finite-sum, lem-finite-sum-laws, def-integer-power, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "J. Lebl, Basic Analysis I, Taylor's theorem and related calculus"
+      url: "https://www.jirka.org/ra/html/sec_taylor.html"
 pipeline_run: null
 ---
 

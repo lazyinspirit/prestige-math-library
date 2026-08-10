@@ -4,7 +4,10 @@ kind: theorem
 title: "The second fundamental theorem: if $G$ is differentiable on $[a,b]$ with $G' = f$ and $f$ is integrable, then $\\int_a^b f = G(b)-G(a)$"
 status: published
 origin: session
-deps: [def-darboux-integral, def-partition-and-refinement, def-darboux-sums, cor-mean-value-theorem, def-derivative, cor-differentiable-implies-continuous, lem-finite-sum-laws, def-finite-sum, def-oriented-integral, def-interval, def-continuity-real, def-bounded-set, def-ordered-field, def-complete-ordered-field]
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [def-darboux-integral, def-partition-and-refinement, def-darboux-sums, cor-mean-value-theorem, def-derivative, cor-differentiable-implies-continuous, lem-finite-sum-laws, def-finite-sum, def-interval, def-continuity-real, def-bounded-set, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-a-function-with-a-primitive-that-is-not-integrable, cex-an-integrable-function-with-no-primitive]
 justified_by: []
 aliases: [thm-fundamental-theorem-of-calculus-second-part, thm-newton-leibniz]
@@ -12,12 +15,13 @@ landmark: true
 short: "second fundamental theorem"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 
@@ -65,8 +73,6 @@ continuous integrands.
 [L6] Finite sums: telescoping $\sum_{i<n}(c_{i+1}-c_i) = c_n - c_0$, and monotonicity in the terms ([[def-finite-sum]], [[lem-finite-sum-laws]], clauses 4 and 5).
 
 [L7] Ordered-field arithmetic: multiplying an inequality by a positive real preserves it, the order is total and transitive, and a number that is an upper bound of a set and also a lower bound of another set lies between their supremum and infimum ([[def-ordered-field]], [[def-complete-ordered-field]]).
-
-[L8] Oriented limits are not needed here, $a<b$ throughout ([[def-oriented-integral]]).
 
 ## Proof
 

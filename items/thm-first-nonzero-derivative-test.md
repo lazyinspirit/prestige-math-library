@@ -4,6 +4,9 @@ kind: theorem
 title: "The first nonzero higher derivative classifies a stationary point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-taylor-peano-remainder, def-taylor-polynomial-and-remainder, def-neighbourhood-r, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive, lem-power-monotone, lem-sign-preservation-near-a-limit, def-integer-power]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "University of Minnesota MATH 5615, higher derivative test"
+      url: "https://www-users.cse.umn.edu/~voronov/5615-20/pdfs/12-2-1.pdf"
 pipeline_run: null
 ---
 

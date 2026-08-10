@@ -4,6 +4,9 @@ kind: definition
 title: "A real-analytic function on an open subset of $\\mathbb{R}$ is locally represented by a convergent real power series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-power-series-and-radius-of-convergence, def-open-and-closed-in-r, def-neighbourhood-r]
 justified_by: []
 aliases: []
@@ -11,7 +14,13 @@ landmark: true
 verification:
   precheck: n/a
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
 pipeline_run: null
 ---
 

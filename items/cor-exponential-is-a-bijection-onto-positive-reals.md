@@ -4,6 +4,9 @@ kind: corollary
 title: "The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-exponential-is-strictly-increasing, thm-exponential-limits-and-range, thm-intermediate-value, cor-power-series-sums-are-continuous]
 justified_by: []
 aliases: []
@@ -11,7 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:

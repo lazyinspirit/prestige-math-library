@@ -4,6 +4,9 @@ kind: counterexample
 title: "Grandi's series is Abel summable to $1/2$ but its partial sums do not converge"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [fs-abel-summability-implies-ordinary-convergence, thm-geometric-series, def-abel-and-cesaro-summability-of-a-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel summability, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel summability, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

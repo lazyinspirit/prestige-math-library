@@ -4,6 +4,9 @@ kind: lemma
 title: "Inside the common radius the product of two power-series sums is represented by the Cauchy product of their coefficients"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-power-series-convergence-dichotomy, def-cauchy-product, cor-cauchy-product-absolute]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
 pipeline_run: null
 ---
 

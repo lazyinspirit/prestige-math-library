@@ -4,6 +4,9 @@ kind: theorem
 title: "Peano's form: the normalized Taylor remainder tends to zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-taylor-polynomial-and-remainder, lem-taylor-polynomial-derivatives, lem-cauchy-mean-value-quotient-form, lem-derivative-of-a-power, thm-chain-rule, cor-differentiable-implies-continuous, def-derivative, def-function-limit, def-continuity-real, def-neighbourhood-r, thm-algebra-of-function-limits, thm-induction-principle, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -11,12 +14,19 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "Taylor's theorem (Wikipedia): statement and Peano remainder"
+      url: "https://en.wikipedia.org/wiki/Taylor%27s_theorem"
 pipeline_run: null
 ---
 

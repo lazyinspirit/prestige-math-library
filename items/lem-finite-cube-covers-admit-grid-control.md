@@ -4,6 +4,9 @@ kind: lemma
 title: "A finite rectangle cover admits grid control with arbitrarily small volume excess"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-null-and-content-zero-in-rn, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-finite-sum, lem-finite-sum-laws, def-integer-power, thm-algebra-of-continuous-functions, def-continuity-real, lem-finite-set-has-max, def-max-min, thm-induction-principle, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
+      url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
 pipeline_run: null
 ---
 

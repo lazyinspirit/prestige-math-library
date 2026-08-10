@@ -4,6 +4,9 @@ kind: definition
 title: "Abel summability by $\\lim_{x\\uparrow1}\\sum a_nx^n$ and Cesaro summability by the Cesaro means of the partial sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-series, def-cesaro-mean, def-function-limit, def-real-power-series-and-radius-of-convergence]
 justified_by: []
 aliases: []
@@ -11,7 +14,17 @@ landmark: true
 verification:
   precheck: n/a
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel summability, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"}, {title: "Cesàro summation, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel summability, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"
+    - title: "Cesàro summation, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"
+    - title: "Cesàro summation methods, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Ces%C3%A0ro_summation_methods"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

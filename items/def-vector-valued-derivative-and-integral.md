@@ -1,9 +1,12 @@
 ---
 id: def-vector-valued-derivative-and-integral
 kind: definition
-title: "The derivative and the Riemann integral of a function $[a,b] \\to \\mathbb{R}^m$, defined componentwise and characterised intrinsically"
+title: "The derivative and the Riemann integral of a vector-valued function: an intrinsic derivative and a componentwise integral"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, def-derivative, def-darboux-integral, def-oriented-integral, thm-linearity-of-the-integral, thm-algebra-of-derivatives, lem-metric-limits-unique, def-function-limit, lem-function-limit-unique, def-function-space, lem-standard-basis-of-f-n, def-interval, lem-integrability-on-a-subinterval, thm-additivity-over-subintervals, def-limit-point-r, def-p-norms-on-rn, def-euclidean-inner-product, def-bounded-set]
 justified_by: []
 aliases: []
@@ -11,10 +14,18 @@ landmark: false
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-08-10
+    scope: published-audit-targeted
+    context_sha256: 35705ebde58b692bd9dfb2b8aefed941fa99539391a7ec70d35fcf9a1b3886bf
+    item_sha256: bd05849bc1a0279deadbdea41244985d8794c0ae0aa644fa3becc1d79fe66dae
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,6 +33,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Vector-valued_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "J. Lebl, Basic Analysis I, Section 8.4"
+      url: "https://www.jirka.org/ra/html/sec_svthedercont.html"
 pipeline_run: null
 ---
 
@@ -108,7 +121,8 @@ $\lambda\int_a^b f_i + \mu\int_a^b g_i$ respectively, and those agree by
 [[thm-linearity-of-the-integral]].
 
 **Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is
-integrable on every closed subinterval, and for $a<c<b$,
+integrable on every nondegenerate closed subinterval $[c,d]$ with
+$a\le c<d\le b$, and for $a<c<b$,
 $\int_a^b f = \int_a^c f + \int_c^b f$; both are the componentwise readings of
 [[lem-integrability-on-a-subinterval]] and
 [[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled

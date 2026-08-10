@@ -4,6 +4,9 @@ kind: theorem
 title: "The sum of a real power series is real analytic throughout the open interval determined by its radius"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-analytic-function, thm-power-series-reexpansion-at-an-interior-point]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
 pipeline_run: null
 ---
 

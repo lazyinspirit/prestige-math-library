@@ -1,0 +1,181 @@
+# Independent repair certifier brief — Wave 12, A6
+
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30).** Use only non-mutating
+> reads already available in the read-only sandbox. Do not edit, delegate,
+> escalate, or ask for shell or edit permission.
+
+You are **GPT 5.6 Terra** at `xhigh` effort with a 1,000,000-token context
+window. You are an independent, read-only certifier of a repair or source
+disposition you did not author.
+
+## Binding triage
+
+- **Non-negotiable:** mathematical accuracy, logical validity, correct citation.
+- **Explicitly acceptable, spend no effort:** minor citational quirks; logical
+  gaps a competent reader closes within 30 seconds; other non-fatal quirks;
+  imperfection at the level of the letter.
+
+Read the assigned target's exact current final text from disk and compare its
+hash with the dispatch task. For an item, read every dependency needed for the
+repaired inference, the title/public statement, every numbered step, Facts &
+Assumptions, Remarks, dependency list, provenance tags, sources, and
+verification block. Check the named baseline defect is fixed without a new one
+and that stale pre-repair judge/audited evidence is absent. Use web access when
+an external source is material. For a source-correction task, open the retained
+live source(s), compare the cited claim against them, and state whether the
+final attribution and provenance class remain exact after the dead redundant
+endpoint was removed.
+
+Return exactly:
+
+```text
+ITEM: <id>
+VERDICT: CERTIFIED | REFUSED | BLOCKED
+CURRENT-TEXT: READ
+MATHEMATICS: [concise evidence]
+CITATIONS: [concise evidence]
+METADATA: [provenance/dependencies/stale-verdict disposition]
+FINDINGS: NONE | [fatal defect or concrete blocker]
+```
+
+Do not suggest optional polishing and do not write a verification stamp.
+
+
+---
+
+# This dispatch
+
+## Assigned exact-final target — `lem-uniform-limits-linear-combinations`
+
+Item path: `items/lem-uniform-limits-linear-combinations.md`
+
+Normalized final-text SHA-256 at dispatch: `5de0cb26a95e498393f22e3f304afa88cf9d7e25170c80f835166bec167405af`
+
+Target type(s): `A6-source-correction`
+
+- A6 removed the failed redundant Lebl draft endpoint; a live semantic source remains
+
+Read the complete current item and every dependency needed for the changed inference or source attribution. For source work, open the retained exact-final URL(s) and compare the public claim with the current provenance rationale.
+
+Current generated-manifest rows:
+
+```json
+[
+  {
+    "source": "lem-uniform-limits-linear-combinations",
+    "sourcePage": "uniform-convergence-of-functions",
+    "batch": "wave12-real-analysis",
+    "target": "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+    "declared_target": "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "uniform-convergence-of-functions",
+    "targetBatch": "wave12-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "lem-uniform-limits-linear-combinations",
+    "sourcePage": "uniform-convergence-of-functions",
+    "batch": "wave12-real-analysis",
+    "target": "lem-of-abs-value",
+    "declared_target": "lem-of-abs-value",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "lem-uniform-limits-linear-combinations",
+    "sourcePage": "uniform-convergence-of-functions",
+    "batch": "wave12-real-analysis",
+    "target": "lem-of-triangle-inequality",
+    "declared_target": "lem-of-triangle-inequality",
+    "target_statement_provenance": "literature-derived",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  }
+]
+```
+
+Current provenance row:
+
+```json
+{
+  "id": "lem-uniform-limits-linear-combinations",
+  "statement": "ai-altered",
+  "proof": "ai-generated",
+  "evidence": "semantic-source",
+  "urls": [
+    "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
+  ],
+  "rationale": "Uniform limits respect sums and scalar multiples: The open textbooks give the corresponding uniform-convergence definition, permanence/interchange theorem, completeness result, or standard counterexample; the item reindexes sequences at zero and spells out the library’s metric, Riemann-integral, endpoint, and dependency conventions. The supplied numbered argument was audited as a local proof rather than a transcription or identifiable adaptation of a source proof.",
+  "alpha_concurred": false,
+  "at": "2026-08-09"
+}
+```
+
+Exact current item at dispatch:
+
+````markdown
+---
+id: lem-uniform-limits-linear-combinations
+kind: lemma
+title: "Uniform limits respect sums and scalar multiples"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, lem-of-abs-value, lem-of-triangle-inequality]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "J. Lebl, Basic Analysis I, §6.1"
+      url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Let $X$ be a set. Suppose $f_k\to f$ and $g_k\to g$ uniformly on $X$, where
+all functions are real valued. Then, for all $\alpha,\beta\in\mathbb{R}$,
+
+$$\alpha f_k+\beta g_k\longrightarrow \alpha f+\beta g$$
+
+uniformly on $X$. In particular, uniform convergence is preserved by sums,
+differences, and scalar multiples.
+
+## Facts & Assumptions
+
+**Given:** A set $X$, uniformly convergent sequences $f_k\to f$ and $g_k\to g$, and reals $\alpha,\beta$.
+
+[A1] Uniform convergence gives, for every real $\eta>0$, one index after which $|f_k(x)-f(x)|<\eta$ at every $x$, and likewise for $g_k\to g$ ([[def-pointwise-uniform-and-uniformly-cauchy-convergence]]).
+
+[L1] For reals $u,v$, $|u+v|\le |u|+|v|$, while $|cu|=|c||u|$ and absolute values are nonnegative ([[lem-of-triangle-inequality]], [[lem-of-abs-value]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Let $\varepsilon>0$ be real and put $\eta:=\varepsilon/\bigl(2(|\alpha|+|\beta|+1)\bigr)>0$. [construct, L1]
+
+1.2 By uniform convergence choose $N_f,N_g$ such that $|f_k(x)-f(x)|<\eta$ for $k\ge N_f$ and all $x$, and $|g_k(x)-g(x)|<\eta$ for $k\ge N_g$ and all $x$. [A1, choose]
+
+2.1 Choose an index $N$ at least as large as $N_f$ and $N_g$. For every $k\ge N$ and $x\in X$, one has $|\alpha(f_k(x)-f(x))+\beta(g_k(x)-g(x))|\le |\alpha|\eta+|\beta|\eta<\varepsilon$. [step 1.1, step 1.2, L1, choose, algebra]
+
+3.1 The expression in step 2.1 is $|(\alpha f_k+\beta g_k)(x)-(\alpha f+\beta g)(x)|$, and the index $N$ serves every $x$, so the asserted convergence is uniform. [step 2.1, A1] ∎
+````

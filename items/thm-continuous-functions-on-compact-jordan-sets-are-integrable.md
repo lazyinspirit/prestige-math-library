@@ -4,6 +4,9 @@ kind: theorem
 title: "A continuous real function on a compact Jordan measurable set is Riemann integrable over that set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-riemann-integral-over-a-jordan-set, lem-jordan-set-integral-well-defined, thm-jordan-boundary-criterion, thm-lebesgue-criterion-in-rn, def-metric-continuity, def-metric-interior-closure-boundary, def-metric-compactness, thm-extreme-value-metric, def-bounded-set]
 justified_by: []
 aliases: []

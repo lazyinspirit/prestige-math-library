@@ -4,6 +4,9 @@ kind: theorem
 title: "The integral function of a bounded integrable $f$ is Lipschitz, hence uniformly continuous"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-the-integral-function, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-monotonicity-of-the-integral, lem-integral-elementary-bounds, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, lem-real-line-is-a-metric-space, lem-real-and-metric-notions-agree, def-continuity-real, def-uniform-continuity-real, def-bounded-set, def-oriented-integral, def-darboux-integral, lem-of-abs-value, def-abs-value, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lipschitz_continuity"
     - title: "Fundamental theorem of calculus (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 

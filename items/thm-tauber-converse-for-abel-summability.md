@@ -4,6 +4,9 @@ kind: theorem
 title: "Tauber's theorem: an Abel-summable series with $\\iota(n+1)a_n\\to0$ converges ordinarily to its Abel sum"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-abel-and-cesaro-summability-of-a-series, lem-tauber-block-estimate, cor-archimedean-reciprocal, lem-of-naturals-positive, lem-of-inverse-positive, def-real-limit]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Tauberian theorem, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Tauberian_theorem"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Tauberian theorem, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Tauberian_theorem"
+    - title: "Tauberian theorems, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Tauberian_theorems"
 pipeline_run: null
 ---
 

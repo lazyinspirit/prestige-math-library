@@ -4,6 +4,9 @@ kind: example
 title: "The comparison constants between $\\lVert\\cdot\\rVert_1$, $\\lVert\\cdot\\rVert_2$ and $\\lVert\\cdot\\rVert_\\infty$ on $\\mathbb{R}^{2}$, and vectors attaining each"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, def-norm-and-normed-space, thm-cauchy-schwarz-finite, thm-of-square-roots, lem-of-square-monotone, lem-standard-basis-of-f-n, def-canonical-natural, lem-of-naturals-positive, def-metric-ball, lem-finite-sum-laws, def-finite-sum, lem-finite-set-has-max, def-max-min, def-abs-value, lem-of-abs-value]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lp_space"
     - title: "Norm (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 

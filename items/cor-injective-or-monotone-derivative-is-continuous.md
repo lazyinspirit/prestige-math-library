@@ -4,6 +4,9 @@ kind: corollary
 title: "An injective or monotone derivative on an interval is continuous"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-darboux-theorem-for-derivatives, lem-injective-darboux-function-is-strictly-monotone, lem-monotone-with-interval-image-is-continuous, def-monotone-function]
 justified_by: []
 aliases: []
@@ -19,6 +22,12 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "Peer-reviewed article on injective Darboux functions (DOI Serbia)"
+      url: "https://doiserbia.nb.rs/Article.aspx?id=1452-86302100024M"
+    - title: "J. Lebl, Basic Analysis I, Mean value theorem"
+      url: "https://www.jirka.org/ra/html/sec_mvt.html"
+    - title: "J. Lebl, Basic Analysis I, Monotone functions"
+      url: "https://www.jirka.org/ra/html/sec_monotonefunc.html"
 pipeline_run: null
 ---
 

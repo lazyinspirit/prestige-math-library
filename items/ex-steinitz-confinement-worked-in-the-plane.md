@@ -4,6 +4,9 @@ kind: example
 title: "Steinitz's confinement bound realised on an explicit list of six unit vectors in $\\mathbb{R}^{2}$ summing to zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-steinitz-polygonal-confinement, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-standard-basis-of-f-n, thm-of-square-roots, lem-of-square-monotone, def-canonical-natural, lem-of-naturals-positive, lem-finite-sum-laws, def-finite-sum, def-linear-combination-and-span, def-injection-surjection-bijection, lem-of-inverse-positive, def-integer-power]
 justified_by: []
 aliases: []
@@ -23,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
     - title: "Ernst Steinitz (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Ernst_Steinitz"
+    - title: "T. Oertel, J. Paat and R. Weismantel, A Colorful Steinitz Lemma with Applications to Block Integer Programs"
+      url: "https://arxiv.org/abs/2201.05874"
+    - title: "T. Banakh, A Simple Inductive Proof of the Levy-Steinitz Theorem"
+      url: "https://arxiv.org/abs/1711.04136"
 pipeline_run: null
 ---
 

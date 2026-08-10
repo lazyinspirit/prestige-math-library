@@ -4,6 +4,9 @@ kind: theorem
 title: "Substitution: if $\\varphi$ is differentiable on $[c,d]$ with $\\varphi'$ integrable and $f$ is continuous on an interval containing $\\varphi([c,d])$, then $\\int_{\\varphi(c)}^{\\varphi(d)} f = \\int_c^d (f\\circ\\varphi)\\,\\varphi'$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-chain-rule, thm-composition-with-a-continuous-function, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-continuous-implies-integrable, cor-continuous-image-of-an-interval-is-an-interval, def-oriented-integral, def-derivative, def-continuity-real, cor-differentiable-implies-continuous, def-interval, def-limit-point-r, def-darboux-integral, def-max-min]
 forward_refs: [fs-substitution-holds-for-every-integrable-integrand]
 justified_by: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integration_by_substitution"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 

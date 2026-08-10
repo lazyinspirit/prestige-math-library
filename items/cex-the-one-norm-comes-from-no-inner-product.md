@@ -4,7 +4,10 @@ kind: counterexample
 title: "$\\lVert\\cdot\\rVert_1$ on $\\mathbb{R}^{2}$ violates the parallelogram law, so no symmetric bilinear form induces it"
 status: published
 origin: session
-deps: [thm-cauchy-schwarz-and-the-euclidean-norm, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, thm-all-norms-on-rn-are-equivalent, def-equivalent-norms, lem-standard-basis-of-f-n, def-integer-power, def-canonical-natural, lem-of-naturals-positive, thm-of-square-roots, def-abs-value, lem-of-abs-value]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-cauchy-schwarz-and-the-euclidean-norm, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-norm-and-normed-space, thm-all-norms-on-rn-are-equivalent, lem-standard-basis-of-f-n, def-integer-power, def-canonical-natural, lem-of-naturals-positive, thm-of-square-roots, def-abs-value, lem-of-abs-value]
 justified_by: []
 aliases: []
 landmark: false
@@ -12,11 +15,12 @@ cx_machine_verified: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Parallelogram_law"
     - title: "Lp space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Lp_space"
+    - title: "Princeton MAT520 Functional Analysis Lecture Notes"
+      url: "https://web.math.princeton.edu/~js129/PDFs/teaching/MAT520_fall_2024/MAT520_Lecture_Notes.pdf"
 pipeline_run: null
 ---
 
@@ -56,7 +62,7 @@ built ([[rem-rn-conventions-and-scope]]).
 
 [A1] The refuted claim at $N = \lVert\cdot\rVert_1$: there is a symmetric $B : \mathbb{R}^{2}\times\mathbb{R}^{2}\to\mathbb{R}$, additive and homogeneous in each argument, with $\lVert x\rVert_1 = \sqrt{B(x,x)}$ for every $x \in \mathbb{R}^{2}$.
 
-[L1] $\lVert\cdot\rVert_1$ is a norm on $\mathbb{R}^{2}$, and $\lVert x\rVert_1 = |x_0|+|x_1|$ ([[def-p-norms-on-rn]], [[def-norm-and-normed-space]]).
+[L1] $\lVert\cdot\rVert_1$ is a norm on $\mathbb{R}^{2}$, and $\lVert x\rVert_1 = |x_0|+|x_1|$ ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]], [[def-norm-and-normed-space]]).
 
 [L2] Absolute values: $|1| = |-1| = 1$ and $|0| = 0$ ([[def-abs-value]], [[lem-of-abs-value]]).
 
@@ -65,8 +71,6 @@ built ([[rem-rn-conventions-and-scope]]).
 [L4] Canonical naturals are strictly increasing and positive and carry sums to sums and products to products, so $\iota(2)^{2} = \iota(4)$, $\iota(4)+\iota(4) = \iota(8)$, $2\cdot 1 + 2\cdot 1 = \iota(4)$ and $\iota(8) \ne \iota(4)$ ([[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 [L5] The Euclidean inner product is bilinear and symmetric and satisfies the parallelogram law for $\lVert\cdot\rVert_2$ ([[def-euclidean-inner-product]], [[thm-cauchy-schwarz-and-the-euclidean-norm]] clause 3).
-
-[L6] All norms on $\mathbb{R}^{2}$ are equivalent ([[thm-all-norms-on-rn-are-equivalent]], [[def-equivalent-norms]]).
 
 ## Counterexample
 

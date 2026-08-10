@@ -4,6 +4,9 @@ kind: counterexample
 title: "The exponential is not uniformly continuous on $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-derivative-of-exponential, thm-exponential-is-strictly-increasing, cor-mean-value-theorem, thm-exponential-beats-every-polynomial, cor-archimedean-reciprocal, def-uniform-continuity-real, thm-heine-cantor-r]
 justified_by: []
 aliases: []
@@ -11,7 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -19,6 +27,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "UTSA Mathematics Research Wiki, Uniform Continuity"
+      url: "https://mathresearch.utsa.edu/wiki/index.php?title=Uniform_Continuity"
 pipeline_run: null
 ---
 

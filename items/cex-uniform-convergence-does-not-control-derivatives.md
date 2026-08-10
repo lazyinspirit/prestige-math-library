@@ -4,19 +4,29 @@ kind: counterexample
 title: "$x/(1+(k+1)^2x^2)$ converges uniformly to zero on $\\mathbb{R}$ while every derivative at zero equals one"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, def-derivative, def-canonical-natural, cor-archimedean-reciprocal, lem-of-square-positive, lem-of-abs-value, def-integer-power, lem-derivative-of-a-power, thm-algebra-of-derivatives]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "MIT OpenCourseWare 18.100B, Real Analysis, Lectures 20–21"
-      url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "Trinity College Dublin MA2223, Homework 3 Solutions"
+      url: "https://www.maths.tcd.ie/~pete/ma2223/2015sol.pdf"
+    - title: "King Saud University, Final Exam Model Solution"
+      url: "https://faculty.ksu.edu.sa/sites/default/files/Model%20solution_0.pdf"
 pipeline_run: null
 ---
 

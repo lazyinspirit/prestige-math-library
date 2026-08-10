@@ -4,6 +4,9 @@ kind: corollary
 title: "Every continuous function on an interval has a primitive; two primitives differ by a constant; and $\\int_a^b f = G(b)-G(a)$ for any primitive $G$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ftc-first-part, thm-ftc-second-part, def-the-integral-function, cor-zero-derivative-implies-constant, thm-continuous-implies-integrable, thm-additivity-over-subintervals, cor-differentiable-implies-continuous, def-oriented-integral, def-derivative, def-function-limit, def-continuity-real, def-interval, def-max-min, def-darboux-integral, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-an-integrable-function-with-no-primitive, cex-a-function-with-a-primitive-that-is-not-integrable]
 justified_by: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Antiderivative"
     - title: "Fundamental theorem of calculus (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 

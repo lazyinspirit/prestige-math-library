@@ -4,6 +4,9 @@ kind: theorem
 title: "A power-series sum may be re-expanded about every interior point, with coefficients given by its derivatives there"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-power-series-reexpansion-double-series, cor-power-series-sums-are-smooth-with-coefficient-formula, thm-binomial-closed-formula]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "MIT 18.100C, Lecture 11: Power Series", url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"}]}
+sources:
+  scraped: []
+  references:
+    - title: "MIT 18.100C, Lecture 11: Power Series"
+      url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

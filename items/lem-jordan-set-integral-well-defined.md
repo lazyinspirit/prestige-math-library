@@ -4,6 +4,9 @@ kind: lemma
 title: "The Riemann integral over a Jordan set is independent of the bounding rectangle"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-riemann-integral-over-a-jordan-set, thm-multidimensional-integral-properties, thm-lebesgue-criterion-in-rn, thm-jordan-content-and-indicator-integrability, def-null-and-content-zero-in-rn, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []

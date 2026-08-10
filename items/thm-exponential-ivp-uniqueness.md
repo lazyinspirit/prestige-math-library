@@ -4,6 +4,9 @@ kind: theorem
 title: "The exponential is the unique solution of $y'=y$ with $y(0)=1$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [def-real-exponential-function-and-e, thm-derivative-of-exponential, cor-exponential-reciprocal-and-positivity, thm-algebra-of-derivatives, thm-chain-rule, cor-differentiable-implies-continuous, cor-zero-derivative-implies-constant]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
       url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Chapter 10"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch10.pdf"
+    - title: "University of Pennsylvania MATH 3600, Section 34"
+      url: "https://www2.math.upenn.edu/~ancoop/3600/section-34.html"
 pipeline_run: null
 ---
 

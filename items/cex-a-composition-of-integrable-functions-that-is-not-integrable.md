@@ -4,6 +4,9 @@ kind: counterexample
 title: "Integrable $\\varphi$ and integrable $f$ with $\\varphi\\circ f$ not integrable: the order of the hypotheses in the composition theorem cannot be reversed"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-composition-with-a-continuous-function, def-dirichlet-and-thomae-functions, thm-dirichlet-and-thomae-continuity-sets, thm-lebesgue-criterion, cor-countably-many-discontinuities-integrable, thm-monotone-implies-integrable, def-monotone-function, def-measure-zero-and-content-zero, lem-nondegenerate-interval-is-not-null, lem-countable-sets-are-null, lem-subset-of-countable, def-countable, thm-rationals-countable, def-darboux-integral, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Thomae%27s_function"
     - title: "Riemann integral (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
+    - title: "Springer article on compositions of Riemann-integrable functions"
+      url: "https://link.springer.com/article/10.1007/s00591-022-00318-x"
 pipeline_run: null
 ---
 

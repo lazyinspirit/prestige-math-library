@@ -4,6 +4,9 @@ kind: theorem
 title: "Frobenius' theorem: Cesaro summability of a real series implies Abel summability to the same value"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-abel-transform-of-cesaro-means, def-abel-and-cesaro-summability-of-a-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Cesàro summation, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Cesàro summation, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"
+    - title: "Cesàro summation methods, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Ces%C3%A0ro_summation_methods"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

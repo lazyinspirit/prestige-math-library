@@ -107,8 +107,9 @@ this point in the reading order — and both its sum and its integral begin at $
 since $\mathbb{N}$ contains $0$.
 
 **What is deliberately absent.** Taylor's integral remainder needs higher
-derivatives and is deliberately developed with Darboux's theorem, l'Hopital's
-rule, and Taylor expansion rather than on this page. Bounded variation with
+derivatives and is not developed on this page. The current
+Darboux/L'Hopital/Taylor page also explicitly excludes the integral remainder.
+Bounded variation with
 the Riemann-Stieltjes integral, and improper integrals, are each a later page of
 this track; the sharp form of the fundamental theorem is not a planned page at
 all but a recorded-not-proved result, [[rem-ftc-absolutely-continuous]]. Arzelà's bounded

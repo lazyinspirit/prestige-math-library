@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: convergence of a power series at one point other than its centre forces convergence at every real point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-geometric-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,11 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
 pipeline_run: null
 ---
 

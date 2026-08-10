@@ -4,6 +4,9 @@ kind: theorem
 title: "The integral test: for $f \\ge 0$ nonincreasing on $[0,\\infty)$, $\\sum_k f(k)$ converges if and only if the sequence $\\bigl(\\int_0^N f\\bigr)_N$ is bounded, with $\\int_0^N f \\le \\sum_{k<N} f(k) \\le f(0) + \\int_0^N f$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-monotonicity-of-the-integral, thm-additivity-over-subintervals, lem-integral-elementary-bounds, thm-monotone-implies-integrable, lem-integrability-on-a-subinterval, def-monotone-function, def-series, thm-nonnegative-series-bounded-partial-sums, lem-finite-sum-laws, def-finite-sum, def-sequence, def-canonical-natural, lem-of-naturals-positive, def-oriented-integral, def-bounded-set, def-interval, def-darboux-integral, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: [thm-cauchy-integral-test]
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integral_test_for_convergence"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 3"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, Improper Riemann integrals"
+      url: "https://www.jirka.org/ra/html/sec_impropriemann.html"
 pipeline_run: null
 ---
 

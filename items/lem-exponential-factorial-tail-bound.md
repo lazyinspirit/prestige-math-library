@@ -4,6 +4,9 @@ kind: lemma
 title: "A geometric bound for tails of the exponential series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-exponential-function-and-e, thm-geometric-series, def-factorial-and-falling-factorial, def-finite-sum, lem-finite-sum-laws, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "MIT Proofs in Analysis and Probability, Lecture 2 notes"
+      url: "https://math.mit.edu/classes/proofsiap/notes/Lecture2.pdf"
+    - title: "LSU MATH 7230, Homework 1"
+      url: "https://www.math.lsu.edu/~mahlburg/teaching/handouts/2018-7230/HW1.pdf"
 pipeline_run: null
 ---
 

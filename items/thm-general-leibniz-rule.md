@@ -4,6 +4,9 @@ kind: theorem
 title: "The general Leibniz rule for the $n$-th derivative of a product"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-higher-derivatives-and-smoothness, thm-algebra-of-derivatives, def-binomial-coefficient, thm-pascals-rule, def-factorial-and-falling-factorial, def-finite-sum, lem-finite-sum-laws, def-canonical-natural, lem-of-naturals-positive, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "UTSA Mathematics, Differentiation rules"
+      url: "https://mathresearch.utsa.edu/wiki/index.php?title=Differentiation_Rule"
+    - title: "University of Chicago MATH 395 notes"
+      url: "https://math.uchicago.edu/~alephnil/notes/MATH-395-notes.pdf"
 pipeline_run: null
 ---
 

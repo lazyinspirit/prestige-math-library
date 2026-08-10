@@ -4,19 +4,29 @@ kind: counterexample
 title: "$f_k(x)=x^{k+1}$ converges pointwise but not uniformly on $[0,1]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, def-integer-power, lem-geometric-sequence-null, lem-bernoulli-inequality, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "J. Lebl, Basic Analysis I, §6.1"
       url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

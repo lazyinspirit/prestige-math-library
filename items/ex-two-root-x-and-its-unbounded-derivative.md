@@ -4,6 +4,9 @@ kind: example
 title: "$H(x) = 2\\sqrt{x}$ on $[0,1]$: $H$ is continuous, $H'$ is unbounded on $(0,1]$, and $H'$ is therefore not Riemann integrable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ftc-second-part, def-darboux-sums, def-darboux-integral, def-bounded-set, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, thm-continuous-inverse, thm-derivative-of-an-inverse, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-continuous-implies-integrable, lem-derivative-of-a-power, lem-power-monotone, def-injection-surjection-bijection, def-monotone-function, def-derivative, def-function-limit, def-continuity-real, def-oriented-integral, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, cor-archimedean-reciprocal, def-integer-power, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: true
 short: "$2\\sqrt{x}$ and its unbounded derivative"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Square_root"
     - title: "Fundamental theorem of calculus (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
+    - title: "CLP-1 Differential Calculus, Definition of the Derivative"
+      url: "https://clp.math.uky.edu/clp1/sec_def_deriv.html"
+    - title: "Active Calculus, Improper integrals"
+      url: "https://faculty.gvsu.edu/boelkinm/Home/ACS/sec-6-5-improper.html"
 pipeline_run: null
 ---
 

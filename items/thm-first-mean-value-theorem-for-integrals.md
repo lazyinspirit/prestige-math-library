@@ -4,7 +4,10 @@ kind: theorem
 title: "If $f$ is continuous on $[a,b]$ and $g$ is integrable with $g \\ge 0$, there is $\\xi \\in [a,b]$ with $\\int_a^b fg = f(\\xi)\\int_a^b g$"
 status: published
 origin: session
-deps: [thm-monotonicity-of-the-integral, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, thm-extreme-value-r, cor-continuous-image-of-an-interval-is-an-interval, thm-heine-borel-r, def-open-cover-r, thm-continuous-implies-integrable, def-continuity-real, def-max-min, lem-integral-elementary-bounds, def-darboux-integral, def-oriented-integral, def-interval, def-ordered-field, def-complete-ordered-field]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [thm-monotonicity-of-the-integral, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, thm-extreme-value-r, cor-continuous-image-of-an-interval-is-an-interval, thm-heine-borel-r, def-open-cover-r, thm-continuous-implies-integrable, def-continuity-real, def-max-min, lem-integral-elementary-bounds, def-darboux-integral, def-interval, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-the-first-mean-value-theorem-needs-a-one-signed-weight]
 justified_by: []
 aliases: [thm-mean-value-theorem-for-integrals]
@@ -12,12 +15,13 @@ landmark: true
 short: "first mean value theorem for integrals"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,6 +29,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
 pipeline_run: null
 ---
 
@@ -67,8 +73,6 @@ page.
 [L6] Scalar multiples: $\int_a^b \lambda u = \lambda\int_a^b u$ ([[thm-linearity-of-the-integral]]), and $\int_a^b 1 = b-a$ ([[lem-integral-elementary-bounds]]).
 
 [L7] Ordered-field arithmetic: multiplying an inequality by a nonnegative quantity preserves it, a positive real has a positive inverse, and the order is total and transitive ([[def-ordered-field]], [[def-complete-ordered-field]]).
-
-[L8] Oriented limits are not needed here, $a < b$ throughout; $\int_a^a u = 0$ ([[def-oriented-integral]]).
 
 ## Proof
 

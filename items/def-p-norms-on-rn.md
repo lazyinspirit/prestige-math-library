@@ -4,6 +4,9 @@ kind: definition
 title: "The $p$-norms $\\lVert x\\rVert_p$ for rational $p \\ge 1$, and $\\lVert x\\rVert_\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-norm-and-normed-space, def-euclidean-inner-product, def-rational-power, lem-rational-power-well-defined, lem-rational-power-laws, lem-rational-power-monotone, rem-real-exponents-deferred, thm-minkowski-finite, def-finite-sum, lem-finite-sum-laws, lem-finite-set-has-max, def-max-min, lem-metrics-on-rn, def-abs-value, lem-of-abs-value, thm-of-square-roots]
 justified_by: []
 aliases: []
@@ -22,6 +25,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Lp_space"
     - title: "Norm (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 

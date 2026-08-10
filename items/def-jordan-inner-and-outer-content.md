@@ -4,6 +4,9 @@ kind: definition
 title: "Jordan inner and outer content and Jordan measurable bounded sets in $\\mathbb{R}^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-rectangle-and-volume, def-multidimensional-grid-partition, def-finite-sum, lem-finite-sum-laws, def-metric-bounded-diameter, def-metric-ball, lem-metrics-on-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-complete-ordered-field, def-infimum, thm-infimum-property, lem-sup-unique]
 justified_by: []
 aliases: []
@@ -18,6 +21,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Jordan Measurable Sets"
+      url: "https://www.jirka.org/ra/html/sec_jordansets.html"
 pipeline_run: null
 ---
 

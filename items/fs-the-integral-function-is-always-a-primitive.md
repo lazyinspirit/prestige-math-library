@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: for every integrable $f$ on $[a,b]$, the integral function $F(x)=\\int_a^x f$ satisfies $F' = f$ on $[a,b]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ftc-first-part, def-the-integral-function, cex-an-integrable-function-with-no-primitive, lem-changing-a-function-at-finitely-many-points, lem-integral-elementary-bounds, thm-additivity-over-subintervals, thm-finitely-many-discontinuities-integrable, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-function-limit, def-derivative, def-continuity-real, def-classification-of-discontinuities, def-oriented-integral, def-darboux-integral, def-abs-value, lem-of-abs-value, def-interval, def-bounded-set, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus"
     - title: "Sign function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Sign_function"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 

@@ -4,7 +4,10 @@ kind: theorem
 title: "If $u,v$ are differentiable on $[a,b]$ with $u',v'$ integrable, then $\\int_a^b u v' = u(b)v(b)-u(a)v(a) - \\int_a^b u'v$"
 status: published
 origin: session
-deps: [thm-ftc-second-part, thm-algebra-of-derivatives, cor-differentiable-implies-continuous, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, def-derivative, def-continuity-real, def-oriented-integral, def-darboux-integral, def-interval, def-limit-point-r]
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [thm-ftc-second-part, thm-algebra-of-derivatives, cor-differentiable-implies-continuous, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral, def-derivative, def-continuity-real, def-darboux-integral, def-interval, def-limit-point-r]
 forward_refs: [fs-integration-by-parts-needs-no-integrability-hypothesis]
 justified_by: []
 aliases: []
@@ -12,12 +15,13 @@ landmark: true
 short: "integration by parts"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -25,6 +29,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integration_by_parts"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
 pipeline_run: null
 ---
 
@@ -60,8 +68,6 @@ differentiable, since a continuous function on $[a,b]$ is integrable
 [L5] Sums of integrable functions are integrable, and $\int_a^b(w_1+w_2) = \int_a^b w_1 + \int_a^b w_2$ ([[thm-linearity-of-the-integral]]).
 
 [L6] If $H$ is differentiable at every point of $[a,b]$ with $H'$ integrable there, then $\int_a^b H' = H(b)-H(a)$ ([[thm-ftc-second-part]]).
-
-[L7] Oriented limits are not needed here, $a<b$ throughout ([[def-oriented-integral]]).
 
 ## Proof
 

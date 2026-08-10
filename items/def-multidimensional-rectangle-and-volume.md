@@ -4,6 +4,9 @@ kind: definition
 title: "Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [lem-metrics-on-rn, def-p-norms-on-rn, def-finite-sum, lem-finite-sum-laws, def-interval, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []

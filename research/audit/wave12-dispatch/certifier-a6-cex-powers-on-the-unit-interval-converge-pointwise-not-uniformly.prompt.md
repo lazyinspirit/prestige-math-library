@@ -1,0 +1,244 @@
+# Independent repair certifier brief — Wave 12, A6
+
+> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30).** Use only non-mutating
+> reads already available in the read-only sandbox. Do not edit, delegate,
+> escalate, or ask for shell or edit permission.
+
+You are **GPT 5.6 Terra** at `xhigh` effort with a 1,000,000-token context
+window. You are an independent, read-only certifier of a repair or source
+disposition you did not author.
+
+## Binding triage
+
+- **Non-negotiable:** mathematical accuracy, logical validity, correct citation.
+- **Explicitly acceptable, spend no effort:** minor citational quirks; logical
+  gaps a competent reader closes within 30 seconds; other non-fatal quirks;
+  imperfection at the level of the letter.
+
+Read the assigned target's exact current final text from disk and compare its
+hash with the dispatch task. For an item, read every dependency needed for the
+repaired inference, the title/public statement, every numbered step, Facts &
+Assumptions, Remarks, dependency list, provenance tags, sources, and
+verification block. Check the named baseline defect is fixed without a new one
+and that stale pre-repair judge/audited evidence is absent. Use web access when
+an external source is material. For a source-correction task, open the retained
+live source(s), compare the cited claim against them, and state whether the
+final attribution and provenance class remain exact after the dead redundant
+endpoint was removed.
+
+Return exactly:
+
+```text
+ITEM: <id>
+VERDICT: CERTIFIED | REFUSED | BLOCKED
+CURRENT-TEXT: READ
+MATHEMATICS: [concise evidence]
+CITATIONS: [concise evidence]
+METADATA: [provenance/dependencies/stale-verdict disposition]
+FINDINGS: NONE | [fatal defect or concrete blocker]
+```
+
+Do not suggest optional polishing and do not write a verification stamp.
+
+
+---
+
+# This dispatch
+
+## Assigned exact-final target — `cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly`
+
+Item path: `items/cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly.md`
+
+Normalized final-text SHA-256 at dispatch: `cdd1997c729016f54a6c63f842f2f94647f6596df509a8a7ac45c72a5726a7eb`
+
+Target type(s): `A6-source-correction`
+
+- A6 removed the failed redundant Lebl draft endpoint; a live semantic source remains
+
+Read the complete current item and every dependency needed for the changed inference or source attribution. For source work, open the retained exact-final URL(s) and compare the public claim with the current provenance rationale.
+
+Current generated-manifest rows:
+
+```json
+[
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+    "declared_target": "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "uniform-convergence-of-functions",
+    "targetBatch": "wave12-real-analysis",
+    "edge_type": "dependency",
+    "kind": "same-batch",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "def-integer-power",
+    "declared_target": "def-integer-power",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "lem-geometric-sequence-null",
+    "declared_target": "lem-geometric-sequence-null",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "monotone-sequences-and-cauchy-completeness",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "lem-bernoulli-inequality",
+    "declared_target": "lem-bernoulli-inequality",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "roots-and-rational-powers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "def-canonical-natural",
+    "declared_target": "def-canonical-natural",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "lem-of-naturals-positive",
+    "declared_target": "lem-of-naturals-positive",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  },
+  {
+    "source": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+    "sourcePage": "uniform-convergence-of-functions-examples",
+    "batch": "wave12-real-analysis",
+    "target": "lem-of-inverse-positive",
+    "declared_target": "lem-of-inverse-positive",
+    "target_statement_provenance": "ai-altered",
+    "targetPage": "foundations-of-the-real-numbers",
+    "targetBatch": null,
+    "edge_type": "dependency",
+    "kind": "published-backward",
+    "requires_semantic_audit": true
+  }
+]
+```
+
+Current provenance row:
+
+```json
+{
+  "id": "cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly",
+  "statement": "ai-altered",
+  "proof": "ai-generated",
+  "evidence": "semantic-source",
+  "urls": [
+    "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
+  ],
+  "rationale": "$f_k(x)=x^{k+1}$ converges pointwise but not uniformly on $[0,1]$: The open textbooks give the corresponding uniform-convergence definition, permanence/interchange theorem, completeness result, or standard counterexample; the item reindexes sequences at zero and spells out the library’s metric, Riemann-integral, endpoint, and dependency conventions. The supplied numbered argument was audited as a local proof rather than a transcription or identifiable adaptation of a source proof.",
+  "alpha_concurred": false,
+  "at": "2026-08-09"
+}
+```
+
+Exact current item at dispatch:
+
+````markdown
+---
+id: cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly
+kind: counterexample
+title: "$f_k(x)=x^{k+1}$ converges pointwise but not uniformly on $[0,1]$"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, def-integer-power, lem-geometric-sequence-null, lem-bernoulli-inequality, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "J. Lebl, Basic Analysis I, §6.1"
+      url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
+pipeline_run: null
+---
+
+## Statement refuted
+
+**Refuted claim:** pointwise convergence of real-valued functions on a closed
+bounded interval implies uniform convergence.
+
+For $k\in\mathbb{N}$ define $f_k:[0,1]\to\mathbb{R}$ by
+
+$$f_k(x):=x^{k+1}.$$
+
+Then $(f_k)$ converges pointwise to the endpoint indicator
+
+$$\chi(x):=\begin{cases}0,&0\le x<1,\\1,&x=1,\end{cases}$$
+
+but the convergence is not uniform.
+
+## Facts & Assumptions
+
+**Given:** The functions $f_k(x)=x^{k+1}$ and the endpoint indicator $\chi$ on $[0,1]$.
+
+[L1] If $|r|<1$, then $r^k\to0$ ([[lem-geometric-sequence-null]], [[def-integer-power]]).
+
+[L2] Bernoulli's inequality says $(1+t)^n\ge1+\iota(n)t$ for $t\ge-1$ and $n\in\mathbb{N}$ ([[lem-bernoulli-inequality]], [[def-canonical-natural]]).
+
+[L3] The canonical naturals satisfy $\iota(k+1)>0$, and positive reciprocals reverse nonstrict inequalities ([[lem-of-naturals-positive]], [[lem-of-inverse-positive]]).
+
+[L4] Uniform convergence requires one index after which the error is below every prescribed positive real at every point of the domain ([[def-pointwise-uniform-and-uniformly-cauchy-convergence]]).
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 If $0\le x<1$, then $|x|<1$, so [L1] gives $x^{k+1}\to0=\chi(x)$; at $x=1$, one has $f_k(1)=1=\chi(1)$ for every $k$. Thus $f_k\to\chi$ pointwise. [L1]
+
+1.2 For each $k$, put $a_k:=\iota(k+1)>0$ and $y_k:=1-1/(2a_k)$. Then $0\le y_k<1$, so $\chi(y_k)=0$. [L3, algebra]
+
+2.1 Apply [L2] with $n=k+1$ and $t=-1/(2a_k)$: $f_k(y_k)=\left(1-1/(2a_k)\right)^{k+1}\ge1-a_k/(2a_k)=1/2$. [step 1.2, L2, L3, algebra]
+
+3.1 Hence $|f_k(y_k)-\chi(y_k)|\ge1/2$ for every $k$, so no index makes the error smaller than $1/2$ at every point; the convergence is not uniform. [step 1.2, step 2.1, L4]
+
+4.1 The functions therefore satisfy the refuted claim's hypothesis and violate its conclusion. [step 1.1, step 3.1] ∎
+````

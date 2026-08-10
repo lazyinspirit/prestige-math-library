@@ -4,6 +4,9 @@ kind: counterexample
 title: "The series $\\sum_{n\\ge0}\\iota(n!)x^n$ converges only at $x=0$ and has radius zero"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-cauchy-hadamard-for-real-power-series, lem-factorial-beats-geometric, def-factorial-and-falling-factorial, def-canonical-natural]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Cauchy-Hadamard theorem, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cauchy-Hadamard_theorem"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Cauchy-Hadamard theorem, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cauchy-Hadamard_theorem"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
 pipeline_run: null
 ---
 

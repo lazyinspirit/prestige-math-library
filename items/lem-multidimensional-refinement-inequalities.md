@@ -4,6 +4,9 @@ kind: lemma
 title: "Refinement raises multidimensional lower sums and lowers upper sums, with a quantitative boundary-slab estimate"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-multidimensional-darboux-sums, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-finite-sum, lem-finite-sum-laws, thm-induction-principle, def-canonical-natural]
 justified_by: []
 aliases: []

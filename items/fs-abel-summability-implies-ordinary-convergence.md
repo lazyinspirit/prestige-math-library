@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: Abel summability alone implies ordinary convergence of a series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-abel-and-cesaro-summability-of-a-series, thm-geometric-series, def-series]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Abel summability, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Abel summability, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Abel_summability_method"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
+    - title: "Tauberian theorems, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Tauberian_theorems"
 pipeline_run: null
 ---
 

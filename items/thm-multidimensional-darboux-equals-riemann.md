@@ -4,6 +4,9 @@ kind: theorem
 title: "The multidimensional Darboux and tagged-mesh definitions of the Riemann integral agree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-multidimensional-tagged-partition-and-riemann-sum, def-multidimensional-darboux-integral, thm-multidimensional-riemann-criterion, lem-multidimensional-refinement-inequalities, def-multidimensional-darboux-sums, def-multidimensional-grid-partition, cor-archimedean-reciprocal, lem-sup-epsilon, lem-inf-epsilon, lem-finite-choice]
 justified_by: []
 aliases: []

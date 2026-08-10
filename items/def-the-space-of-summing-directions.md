@@ -4,17 +4,21 @@ kind: definition
 title: "The subspace $\\Gamma$ of directions along which a series converges absolutely, and its orthogonal complement $\\Gamma^{\\perp}$"
 status: published
 origin: session
-deps: [def-series-of-vectors-and-rearrangement, def-euclidean-inner-product, thm-cauchy-schwarz-and-the-euclidean-norm, thm-absolute-convergence-in-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, def-linear-subspace, lem-linear-subspace-criterion, lem-intersection-of-linear-subspaces, def-vector-space, def-series, lem-series-linearity, thm-direct-comparison-test, lem-standard-basis-of-f-n, def-absolute-and-conditional-convergence, lem-of-abs-value, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-norm-and-normed-space]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-series-of-vectors-and-rearrangement, def-euclidean-inner-product, thm-cauchy-schwarz-and-the-euclidean-norm, thm-absolute-convergence-in-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-p-norms-on-rn, def-linear-map, def-linear-subspace, lem-linear-subspace-criterion, lem-intersection-of-linear-subspaces, def-vector-space, def-series, lem-series-linearity, thm-direct-comparison-test, lem-standard-basis-of-f-n, def-absolute-and-conditional-convergence, lem-of-abs-value, lem-finite-sum-laws, def-finite-sum, thm-induction-principle, def-norm-and-normed-space]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,6 +26,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
     - title: "Linear subspace (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Linear_subspace"
+    - title: "T. Banakh, A Simple Inductive Proof of the Levy-Steinitz Theorem"
+      url: "https://arxiv.org/abs/1711.04136"
 pipeline_run: null
 ---
 
@@ -40,13 +46,12 @@ $\langle a, x_k\rangle$ converges absolutely
 $(x_k)$; when several are in play the notation is $\Gamma(x)$ and
 $\Gamma(x)^{\perp}$.
 
-**Phrased with the inner product, deliberately.** The classical statement uses
-linear functionals and the dual space. This library has no definition of a linear
-map at this point in the reading order — the page that introduces linear maps,
-rank-nullity and quotient spaces comes **earlier in the plan order** and is not
-yet built — so writing $\Gamma$ with functionals would mint that page's canonical
-object here. The two descriptions agree on $\mathbb{R}^{n}$, and nothing on this
-page depends on their agreement.
+**Phrased with the inner product, deliberately.** Abstract linear maps are
+already defined in [[def-linear-map]], so a linear functional can be read as a
+linear map into $\mathbb{R}$. This library does not yet define the dual space or
+prove that every such functional on $\mathbb{R}^{n}$ is represented by an inner
+product with a vector. Writing $\Gamma$ with Euclidean directions avoids
+presupposing that agreement, and nothing on this page depends on it.
 
 ### Both are linear subspaces
 

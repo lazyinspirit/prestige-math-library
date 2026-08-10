@@ -4,17 +4,28 @@ kind: remark
 title: "Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order"
 status: published
 origin: session
-deps: [def-norm-and-normed-space, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-cauchy-schwarz-and-the-euclidean-norm, def-equivalent-norms, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-all-norms-on-rn-are-equivalent, thm-componentwise-convergence-and-completeness, cor-bolzano-weierstrass-in-rn, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-vector-valued-derivative-and-integral, thm-norm-inequality-for-the-vector-valued-integral, thm-mean-value-inequality, cor-vector-valued-ftc-and-lipschitz-bound, def-series-of-vectors-and-rearrangement, thm-absolute-convergence-in-rn, def-the-space-of-summing-directions, thm-steinitz-polygonal-confinement, thm-rearrangement-sums-lie-in-an-affine-subspace, lem-metrics-on-rn, rem-real-exponents-deferred, def-function-space, def-rational-power, lem-standard-basis-of-f-n, thm-euclidean-space-complete, thm-heine-borel-rn, thm-minkowski-finite]
+provenance:
+  statement: ai-generated
+  proof: not-applicable
+deps: [def-norm-and-normed-space, def-linear-map, def-euclidean-inner-product, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-cauchy-schwarz-and-the-euclidean-norm, def-equivalent-norms, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, thm-all-norms-on-rn-are-equivalent, thm-componentwise-convergence-and-completeness, cor-bolzano-weierstrass-in-rn, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-vector-valued-derivative-and-integral, thm-norm-inequality-for-the-vector-valued-integral, thm-mean-value-inequality, cor-vector-valued-ftc-and-lipschitz-bound, def-series-of-vectors-and-rearrangement, thm-absolute-convergence-in-rn, def-the-space-of-summing-directions, thm-steinitz-polygonal-confinement, thm-rearrangement-sums-lie-in-an-affine-subspace, lem-metrics-on-rn, rem-real-exponents-deferred, def-function-space, def-rational-power, lem-standard-basis-of-f-n, thm-euclidean-space-complete, thm-heine-borel-rn, thm-minkowski-finite]
 justified_by: []
 aliases: []
 landmark: false
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-08-10
+    scope: published-audit-targeted
+    context_sha256: 67135d00762e11f79bd1855a2f1545ff2a1a054c86b09cd5ca17c79d2649dfb3
+    item_sha256: 65dbd0009d77d917801aff19b4781271c8ac4eacc9c568db99f6ebc812902963
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -78,8 +89,9 @@ $\mathbb{R}^{0}$.
 
 ## 2. The exponent of a $p$-norm is rational
 
-[[def-rational-power]] supplies $a^{r}$ for a nonnegative base and a **rational**
-exponent, and real exponents do not exist at this point in the reading order;
+[[def-rational-power]] supplies $a^{r}$ for a positive base and any **rational**
+exponent, together with $0^{r}$ for rational $r>0$; real exponents do not exist
+at this point in the reading order;
 [[rem-real-exponents-deferred]] records why. Consequently
 [[def-p-norms-on-rn]] defines $\lVert\cdot\rVert_p$ for rational $p \ge 1$ only,
 and the published Minkowski inequality it rests on is itself stated for rational
@@ -108,13 +120,13 @@ reading order**, and none of them is a claim about mathematics that this library
 denies.
 
 - **Linear maps, the operator norm, and "a linear map between finite-dimensional
-  normed spaces is Lipschitz".** There is no definition of a linear map anywhere
-  in this library at this point: the page introducing linear maps, rank-nullity
-  and quotient spaces comes **earlier in the plan order** than this one and is not
-  yet built. Minting a linear map here would create a second, competing canonical
-  definition of that page's central object. The operator norm and the Lipschitz
-  statement are short additions to this page once that page exists, and they are
-  also what the later page on the total derivative will want.
+  normed spaces is Lipschitz".** Abstract linear maps are defined on the earlier
+  linear-algebra page in [[def-linear-map]]. This page neither defines an
+  operator norm nor proves that every linear map between finite-dimensional
+  normed spaces is Lipschitz. The later total-derivative treatment uses a
+  concrete Euclidean formulation; identifying that formulation with the
+  abstract definition requires an explicit agreement argument rather than a
+  second silent meaning of "linear map".
 - **Inner product spaces and orthogonality.** [[def-euclidean-inner-product]]
   defines the concrete Euclidean form on $\mathbb{R}^{n}$ and claims nothing
   about abstract inner product spaces: orthonormal bases, Gram-Schmidt,
@@ -132,7 +144,8 @@ denies.
   uses the polynomial curve $t \mapsto (t^{2},t^{3})$ on $[0,1]$ instead. The
   substitution is recorded in the companion item that carries the witness, not
   here, so that a reader meeting the polynomial curve is told at once why the
-  classical one is absent; the theorem whose equality form it refutes is
+  classical one is absent. The witness refutes the vector-valued equality
+  generalisation of [[cor-mean-value-theorem]]; the inequality that survives is
   [[thm-mean-value-inequality]].
 
 ## 5. The open half of the rearrangement question

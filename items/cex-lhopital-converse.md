@@ -4,6 +4,9 @@ kind: counterexample
 title: "L'Hôpital's conclusion does not imply convergence of the derivative quotient"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [ex-piecewise-polynomial-periodic-oscillator, thm-lhopital-zero-over-zero, thm-chain-rule, thm-algebra-of-derivatives, lem-derivative-of-a-power]
 justified_by: []
 aliases: []

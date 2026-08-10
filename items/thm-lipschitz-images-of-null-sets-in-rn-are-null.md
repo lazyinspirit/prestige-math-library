@@ -4,6 +4,9 @@ kind: theorem
 title: "A Lipschitz map $\\mathbb{R}^m\\to\\mathbb{R}^m$ sends null sets to null sets"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-null-and-content-zero-in-rn, def-lipschitz-holder-contraction, def-p-norms-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, def-multidimensional-rectangle-and-volume, def-integer-power, def-canonical-natural, lem-finite-sum-laws]
 justified_by: []
 aliases: []

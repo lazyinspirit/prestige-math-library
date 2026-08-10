@@ -4,18 +4,28 @@ kind: definition
 title: "The space $C(K,\\mathbb{R})$ of continuous real-valued functions on a nonempty compact metric space"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-function-space, def-metric-continuity, def-metric-compactness, lem-real-line-is-a-metric-space]
 justified_by: []
 aliases: []
 landmark: true
 verification:
-  audited: 2026-07-31
   precheck: n/a
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "MIT OpenCourseWare 18.100B, Real Analysis, Lectures 20–21"
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

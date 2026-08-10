@@ -4,6 +4,9 @@ kind: counterexample
 title: "The sign function is Riemann integrable on $[-1,1]$ and has no primitive there"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-ftc-first-part, thm-finitely-many-discontinuities-integrable, thm-additivity-over-subintervals, lem-changing-a-function-at-finitely-many-points, lem-integral-elementary-bounds, cor-zero-derivative-implies-constant, cor-differentiable-implies-continuous, thm-two-sided-limit-iff-both-one-sided, def-one-sided-limits, def-derivative, def-function-limit, def-the-integral-function, def-continuity-real, def-classification-of-discontinuities, def-oriented-integral, def-darboux-integral, def-abs-value, lem-of-abs-value, def-interval, def-bounded-set, def-limit-point-r, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Sign_function"
     - title: "Antiderivative (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Antiderivative"
+    - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"
+      url: "https://www.jirka.org/ra/html/sec_ftc.html"
+    - title: "Colgate University MATH 323, Chapter 5 notes"
+      url: "https://math.colgate.edu/math323/dlantz/extras/notesC5.pdf"
 pipeline_run: null
 ---
 

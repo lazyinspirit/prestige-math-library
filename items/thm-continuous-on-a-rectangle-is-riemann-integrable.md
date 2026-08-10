@@ -4,6 +4,9 @@ kind: theorem
 title: "Every continuous function on a closed nondegenerate rectangle in $\\mathbb{R}^m$ is Riemann integrable"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-multidimensional-riemann-criterion, def-multidimensional-darboux-sums, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, thm-heine-borel-rn, thm-heine-cantor-metric, def-metric-continuity, def-metric-compactness, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-p-norms-are-norms-and-induce-the-published-metrics, thm-continuous-image-of-a-compact-space-is-compact, thm-extreme-value-metric, def-bounded-set]
 justified_by: []
 aliases: []

@@ -102,7 +102,7 @@ orientation convention of [[def-oriented-integral]].
 
 **Three theorems about vector-valued calculus.**
 [[thm-norm-inequality-for-the-vector-valued-integral]] proves that
-$\lVert f\rVert_2$ is integrable and that
+$\lVert f\rVert_2$ is integrable when $a<b$ and that
 $\lVert\int_a^b f\rVert_2 \le \int_a^b \lVert f\rVert_2$ for $a \le b$, by the
 inner-product argument, with the case $\int_a^b f = 0$ treated separately because
 the usual division is illegitimate there.

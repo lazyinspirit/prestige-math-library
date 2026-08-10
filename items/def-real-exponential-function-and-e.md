@@ -4,6 +4,9 @@ kind: definition
 title: "The real exponential function and the number $e$ by a power series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-real-power-series-and-radius-of-convergence, def-factorial-and-falling-factorial, def-integer-power, def-canonical-natural, lem-of-naturals-positive, def-series]
 justified_by: [lem-exponential-series-has-infinite-radius]
 aliases: []

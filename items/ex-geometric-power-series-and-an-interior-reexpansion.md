@@ -4,6 +4,9 @@ kind: example
 title: "The geometric series represents $1/(1-x)$ for $|x|<1$ and re-expands explicitly about every $c$ with $|c|<1$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-geometric-series, thm-power-series-reexpansion-at-an-interior-point, lem-local-reciprocal-of-a-real-power-series]
 justified_by: []
 aliases: []
@@ -11,8 +14,19 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 
@@ -40,4 +54,4 @@ $$\frac1{1-x}=\sum_{n=0}^{\infty}\frac{(x-c)^n}{(1-c)^{n+1}}\qquad(|x-c|<1-c).$$
 
 1.1 Apply [L1] with $t=x$ to get the first formula. [L1]
 
-2.1 Since $1-x=(1-c)(1-(x-c)/(1-c))$ and $1-c>0$, apply [L1] with $t=(x-c)/(1-c)$. This gives the second formula precisely when $|x-c|<1-c$. [given, L1, algebra] ∎
+2.1 The general results in [L2] show qualitatively that the sum re-expands about $c$ and that the nonzero denominator there has a local reciprocal series. To identify that series and its full convergence interval directly, use $1-x=(1-c)(1-(x-c)/(1-c))$ and $1-c>0$, and apply [L1] with $t=(x-c)/(1-c)$. This gives the second formula precisely when $|x-c|<1-c$. [given, L1, L2, algebra] ∎

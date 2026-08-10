@@ -4,6 +4,9 @@ kind: theorem
 title: "Uniform Abel test: a uniformly convergent function series times a uniformly bounded pointwise monotone family gives a uniformly convergent product series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-uniform-cauchy-criterion-function-series, lem-abel-summation-by-parts, def-finite-sum, lem-finite-sum-laws, lem-of-abs-value, lem-of-triangle-inequality]
 justified_by: []
 aliases: []

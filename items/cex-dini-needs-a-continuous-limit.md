@@ -4,6 +4,9 @@ kind: counterexample
 title: "Dini's theorem fails for a discontinuous limit: powers on $[0,1]$ decrease pointwise to a discontinuous endpoint indicator but not uniformly"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-dini-on-a-closed-interval, cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly, def-continuity-real, thm-algebra-of-continuous-functions, def-integer-power]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "J. Lebl, Basic Analysis I, §6.1"
       url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "Dini's theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dini%27s_theorem"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

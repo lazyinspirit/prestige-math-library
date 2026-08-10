@@ -4,6 +4,9 @@ kind: theorem
 title: "If $f \\le g$ on $[a,b]$ and both are integrable then $\\int_a^b f \\le \\int_a^b g$; and $m(b-a) \\le \\int_a^b f \\le M(b-a)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [thm-linearity-of-the-integral, def-darboux-integral, def-darboux-sums, lem-integral-elementary-bounds, lem-finite-sum-laws, def-finite-sum, def-oriented-integral, def-infimum, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: [thm-integral-is-monotone]
@@ -11,12 +14,13 @@ landmark: true
 short: "monotonicity of the integral"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
 pipeline_run: null
 ---
 
@@ -69,8 +77,6 @@ $u \ge v$, since both sides change sign together.
 [L3] Sums and scalar multiples of integrable functions are integrable, and $\int_a^b(\lambda h + \nu k) = \lambda\int_a^b h + \nu\int_a^b k$ ([[thm-linearity-of-the-integral]]).
 
 [L4] Ordered-field arithmetic: adding a constant to both sides of an inequality preserves it, and the order is total and transitive ([[def-ordered-field]], [[def-complete-ordered-field]]). The nonstrict forms follow from the strict ones by adjoining the case of equality.
-
-[L5] With oriented limits, $\int_v^u h = -\int_u^v h$ ([[def-oriented-integral]]).
 
 ## Proof
 

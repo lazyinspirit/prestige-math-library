@@ -4,6 +4,9 @@ kind: corollary
 title: "At $m=1$, nondegenerate multidimensional rectangles, grid sums and the integral are exactly the published one-dimensional notions"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-multidimensional-darboux-equals-riemann, def-multidimensional-rectangle-and-volume, def-multidimensional-grid-partition, def-multidimensional-darboux-sums, def-multidimensional-darboux-integral, def-multidimensional-tagged-partition-and-riemann-sum, def-darboux-integral, def-tagged-partition-and-riemann-sum, thm-darboux-equals-riemann, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics]
 justified_by: []
 aliases: []

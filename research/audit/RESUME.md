@@ -1,5 +1,45 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
+## WAVES 11–14 — A10 COMPLETE; FINAL GATES GREEN (2026-08-10)
+
+The owner directed the orchestrator to audit every remaining untagged page in
+parallel and to continue autonomously from A0 through A10. Routine shell and
+edit actions must never become permission prompts for the orchestrator or any
+agent; an operation with no already-authorized form becomes a recorded blocker.
+The shared baseline is clean `442f831c94882899c1dc5559b36599b0f78a99c8`,
+which equals `origin/main`. Nothing has been published, committed, or pushed by
+this run.
+
+A0 was recomputed from current published pages, not from the prior list. The
+closed scope is **14 pages / 7 A/B pairs / 223 unique formerly untagged items /
+188 proof-bearing items**: Wave 11 = 61/55, Wave 12 = 61/48, Wave 13 = 76/62,
+Wave 14 = 25/23. All 223 items now have component provenance, zero remain
+untagged, and zero retain legacy `authorship`.
+
+Every stage A0 through A10 is complete for all four waves. The four GPT 5.6 Sol
+`xhigh`/1M Beta/Alpha lanes, independent proof readers, DeepSeek V4 Pro and GPT
+5.6 Terra judge lanes, fatal-only A8 repairs, repaired-items-only targeted
+rejudges, exact consumer reviews, source sweeps, generated-risk dispositions,
+proof contracts, and final coverage receipts are durable under
+`research/audit/wave11-*` through `wave14-*`. Final strict contracts pass
+55/55, 48/48, 62/62, and 23/23. Final relationship censuses are exact and
+unresolved-free: Wave 11 = 785, Wave 12 = 890, Wave 13 = 488, Wave 14 = 178.
+
+All concurrency barriers are closed against frozen earlier-wave text:
+W12→W11 29/29; W13→W11 1/1 and W13→W12 23/23; W14→W11 4/4, W14→W12 3/3,
+and W14→W13 9/9. The common high-blast-radius proof spine is current at 59/59
+with unchanged proof hashes; only final dependency-cone counts moved. The final
+Wave 14 display-format repair was independently Terra-certified and rejudged
+only on that repaired item, DeepSeek/Terra keep+keep. No unchanged sibling was
+rejudged.
+
+Authoritative final A10 suites pass **9/9 for Wave 11, 9/9 for Wave 12, 9/9
+for Wave 13, and 9/9 for Wave 14**. The narrowed structural owner queues are
+empty. Full rundowns: `research/audit/wave11-A10.md`, `wave12-A10.md`,
+`wave13-A10.md`, and `wave14-A10.md`. Nothing from this run has been committed
+or pushed. Exact next action is owner-directed commit/push if desired; no audit
+work remains in flight.
+
 ## WAVES 8, 9, AND 10 — CONCLUDED; OWNER PAUSES CLEARED (2026-08-09)
 
 The owner explicitly directed these three waves to run in parallel and then

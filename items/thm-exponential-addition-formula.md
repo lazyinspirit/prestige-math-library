@@ -4,6 +4,9 @@ kind: theorem
 title: "The exponential addition formula $\\exp(x+y)=\\exp(x)\\exp(y)$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: literature-derived
 deps: [lem-exponential-series-has-infinite-radius, lem-cauchy-product-of-real-power-series, thm-binomial-theorem, thm-binomial-closed-formula, def-binomial-coefficient, def-factorial-and-falling-factorial, def-canonical-natural, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
       url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Chapter 10"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch10.pdf"
 pipeline_run: null
 ---
 

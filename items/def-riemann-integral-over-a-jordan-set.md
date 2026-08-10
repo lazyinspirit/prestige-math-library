@@ -4,6 +4,9 @@ kind: definition
 title: "The Riemann integral of a bounded function over a bounded Jordan measurable set"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-jordan-inner-and-outer-content, thm-jordan-content-and-indicator-integrability, def-multidimensional-darboux-integral, def-multidimensional-rectangle-and-volume, def-metric-bounded-diameter, def-bounded-set]
 justified_by: [lem-jordan-set-integral-well-defined]
 aliases: []

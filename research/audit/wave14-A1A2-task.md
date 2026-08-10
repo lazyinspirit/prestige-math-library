@@ -1,0 +1,3 @@
+# Wave 14 Audit-Beta task — A1/A2 only
+
+Audit the exact scope in `research/audit/wave14-real-analysis.pages.json` under the complete `briefs/audit-beta.md` contract. Perform A1 provenance determination and A2 full citation/accuracy audit now. Write only the three Wave 14 real-analysis namespaced artifacts; do not edit any item or page before A3 approval. Read every scoped item and every dependency it cites, capture all 23 proof contracts, and record exact coverage. Wave 14 reaches Waves 11–13; record those edges for later exact-final reconciliation rather than assuming concurrent text is final. Never ask for shell-command or edit permission; use already-authorized workspace operations, or record a blocker.

@@ -4,6 +4,9 @@ kind: definition
 title: "Measure zero and content zero in $\\mathbb{R}^m$ by countable and finite cube covers"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-rectangle-and-volume, def-series, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-countable, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -18,6 +21,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
+      url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
 pipeline_run: null
 ---
 

@@ -4,17 +4,21 @@ kind: definition
 title: "A norm on a real vector space, the induced metric, and the dictionary with the metric axioms"
 status: published
 origin: session
-deps: [def-vector-space, def-function-space, def-metric-space, lem-metric-nonnegativity, def-metric-topology, lem-bounded-remetrisation, rem-metric-axiom-conventions, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field, lem-vector-space-elementary-consequences]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-vector-space, def-function-space, def-linear-map, def-metric-space, lem-metric-nonnegativity, def-metric-topology, lem-bounded-remetrisation, rem-metric-axiom-conventions, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, def-complete-ordered-field, lem-vector-space-elementary-consequences]
 justified_by: []
 aliases: []
 landmark: true
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -22,6 +26,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
     - title: "Normed vector space (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Normed_vector_space"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 
@@ -125,8 +133,8 @@ strictly weaker than the corresponding statement about a norm.
   although the metrics of the published metric theory on $\mathbb{R}^n$ are
   defined only for $n \ge 1$.
 
-- **What is not defined here.** Nothing in this item mentions linear maps,
-  operator norms, dual spaces or inner product spaces. Those belong to pages of
-  this library that come earlier in the plan order and are not yet built;
-  [[rem-rn-conventions-and-scope]] records the full list and what each would
-  license.
+- **What is not defined here.** This item does not define linear maps; their
+  published definition is [[def-linear-map]]. It also does not define operator
+  norms, dual spaces, or abstract inner product spaces.
+  [[rem-rn-conventions-and-scope]] records the remaining scope boundaries and
+  what each later development would license.

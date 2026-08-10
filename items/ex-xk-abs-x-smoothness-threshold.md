@@ -4,6 +4,9 @@ kind: example
 title: "For every $k\\ge0$, $x^k|x|$ is $C^k$ but not $C^{k+1}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-higher-derivatives-and-smoothness, lem-derivative-of-a-power, def-abs-value, def-integer-power, def-canonical-natural]
 justified_by: []
 aliases: []

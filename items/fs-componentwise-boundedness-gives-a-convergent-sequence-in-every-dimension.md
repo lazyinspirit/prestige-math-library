@@ -4,18 +4,22 @@ kind: false-statement
 title: "FALSE: a sequence in $\\mathbb{R}^{n}$ whose coordinate sequences are each bounded converges"
 status: published
 origin: session
-deps: [cor-bolzano-weierstrass-in-rn, thm-componentwise-convergence-and-completeness, lem-limit-unique, lem-subsequence-inherits-limit, thm-convergence-iff-limsup-equals-liminf, lem-alternating-sequence, def-metric-convergence, def-sequence, def-real-limit, lem-metrics-on-rn, def-p-norms-on-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-p-norms-are-norms-and-induce-the-published-metrics, def-integer-power, lem-convergent-implies-bounded, lem-standard-basis-of-f-n, def-isometry-and-metric-embedding, def-metric-bounded-diameter, lem-of-naturals-positive, def-canonical-natural, lem-index-map-grows, lem-of-abs-value]
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+deps: [cor-bolzano-weierstrass-in-rn, thm-componentwise-convergence-and-completeness, lem-limit-unique, lem-subsequence-inherits-limit, thm-convergence-iff-limsup-equals-liminf, lem-alternating-sequence, def-metric-convergence, def-sequence, def-real-limit, lem-metrics-on-rn, def-p-norms-on-rn, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-convergent-implies-bounded, lem-standard-basis-of-f-n, def-isometry-and-metric-embedding, def-metric-bounded-diameter, lem-of-naturals-positive, def-canonical-natural, lem-index-map-grows, lem-of-abs-value]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Bolzano%E2%80%93Weierstrass_theorem"
     - title: "Limit of a sequence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Limit_of_a_sequence"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 
@@ -64,8 +72,6 @@ $\varepsilon_k$ at $0$, where $(\varepsilon_k)$ is the alternating sequence
 [L5] $1 \ne -1$, since $1-(-1) = \iota(2) > 0$ ([[lem-of-naturals-positive]], [[def-canonical-natural]]).
 
 [L6] A bounded sequence in $\mathbb{R}^{n}$ has a convergent subsequence ([[cor-bolzano-weierstrass-in-rn]], [[def-metric-bounded-diameter]], [[def-isometry-and-metric-embedding]]); and a convergent real sequence is bounded ([[lem-convergent-implies-bounded]]).
-
-[L7] A real sequence converges to $L$ exactly when its limit inferior and limit superior are both $L$ ([[thm-convergence-iff-limsup-equals-liminf]], [[def-integer-power]]).
 
 ## Refutation
 

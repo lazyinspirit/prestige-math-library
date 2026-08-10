@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if a convergent series in $\\mathbb{R}^{n}$ does not converge absolutely, then every point of $\\mathbb{R}^{n}$ is the sum of some rearrangement of it"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-rearrangement-sums-lie-in-an-affine-subspace, ex-gamma-and-its-complement-computed-for-a-plane-series, def-the-space-of-summing-directions, def-series-of-vectors-and-rearrangement, thm-componentwise-convergence-and-completeness, thm-riemann-series-theorem, thm-absolute-convergence-in-rn, def-absolute-and-conditional-convergence, thm-p-series-rational, def-euclidean-inner-product, def-p-norms-on-rn, def-norm-and-normed-space, def-linear-subspace, def-injection-surjection-bijection, lem-standard-basis-of-f-n, def-series, lem-metric-limits-unique, def-metric-convergence, lem-finite-sum-laws, def-finite-sum, def-canonical-natural]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_series_theorem"
     - title: "Levy-Steinitz theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/L%C3%A9vy%E2%80%93Steinitz_theorem"
+    - title: "T. Banakh, A Simple Inductive Proof of the Levy-Steinitz Theorem"
+      url: "https://arxiv.org/abs/1711.04136"
 pipeline_run: null
 ---
 
@@ -59,8 +65,6 @@ horizontal axis. In particular $(0,1)$ is not a rearrangement sum.
 [L3] Convergence in $\mathbb{R}^{2}$ is componentwise, partial sums are computed coordinatewise, and a limit in a metric space is unique ([[thm-componentwise-convergence-and-completeness]] clause 1, [[lem-standard-basis-of-f-n]] clause 1, [[lem-metric-limits-unique]], [[def-metric-convergence]], [[lem-finite-sum-laws]], [[def-finite-sum]]).
 
 [L4] The containment theorem: $\mathcal{S}(x) \subseteq s + \Gamma^{\perp}$, and for this series $\Gamma^{\perp}$ is the set of multiples of $e_0$ ([[thm-rearrangement-sums-lie-in-an-affine-subspace]], [[def-the-space-of-summing-directions]], [[ex-gamma-and-its-complement-computed-for-a-plane-series]] clause 3, [[def-linear-subspace]], [[def-euclidean-inner-product]], [[def-p-norms-on-rn]], [[def-norm-and-normed-space]]).
-
-[L5] An absolutely convergent series in $\mathbb{R}^{n}$ has exactly one rearrangement sum ([[thm-absolute-convergence-in-rn]]).
 
 ## Refutation
 

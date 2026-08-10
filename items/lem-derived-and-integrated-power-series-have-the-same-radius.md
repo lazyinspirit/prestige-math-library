@@ -4,6 +4,9 @@ kind: lemma
 title: "A power series, its formal derivative, and its zero-constant-term formal antiderivative have the same radius of convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-power-series-and-radius-of-convergence, thm-geometric-series, lem-power-monotone, lem-of-abs-value, cor-cauchy-product-absolute, thm-direct-comparison-test, lem-nth-term-test, lem-convergent-implies-bounded, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "Power series, Encyclopedia of Mathematics"
       url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
 pipeline_run: null
 ---
 

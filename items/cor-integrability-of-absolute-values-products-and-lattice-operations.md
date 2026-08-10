@@ -4,6 +4,9 @@ kind: corollary
 title: "If $f,g$ are integrable on $[a,b]$ then so are $\\lvert f\\rvert$, $f^{2}$, $fg$, $\\max(f,g)$ and $\\min(f,g)$, and $\\bigl\\lvert\\int_a^b f\\bigr\\rvert \\le \\int_a^b\\lvert f\\rvert$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-composition-with-a-continuous-function, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, def-oriented-integral, thm-algebra-of-continuous-functions, def-continuity-real, def-abs-value, lem-of-abs-value, def-darboux-integral, def-darboux-sums, def-max-min, def-integer-power, def-bounded-set, def-interval, def-ordered-field, def-complete-ordered-field]
 forward_refs: [cex-absolute-value-integrable-without-the-function]
 justified_by: []
@@ -25,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
 pipeline_run: null
 ---
 

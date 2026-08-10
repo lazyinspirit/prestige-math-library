@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: in every normed space a closed bounded set is compact"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-heine-borel-rn, def-norm-and-normed-space, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, fs-all-norms-on-any-real-vector-space-are-equivalent, fs-closed-and-bounded-implies-compact-in-every-metric-space, def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-metric-space, def-metric-topology, def-metric-ball, def-metric-bounded-diameter, def-metric-compactness, def-metric-compactness-variants, thm-compact-implies-the-other-compactness-forms, thm-metric-compactness-equivalences, thm-compact-implies-complete-and-totally-bounded, def-totally-bounded, def-cauchy-in-metric, def-metric-convergence, lem-metric-convergent-implies-cauchy, lem-standard-basis-of-f-n, lem-finite-set-has-max, def-max-min, lem-pigeonhole, def-countable, lem-of-abs-value, def-abs-value, lem-index-map-grows, def-sequence, def-injection-surjection-bijection, def-isometry-and-metric-embedding]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Borel_theorem"
     - title: "Riesz's lemma (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Riesz%27s_lemma"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 
@@ -94,7 +102,7 @@ vectors $e_k$ all lie in it and satisfy $N_\infty(e_j - e_k) = 1$ for $j \ne k$.
 
 ## Remarks
 
-- **What is refuted and what is not.** The claim refuted is the transfer of [[thm-heine-borel-rn]] to arbitrary normed spaces. Nothing here is asserted about normed spaces in general, a theory this library has not built; in particular the classical converse, that a normed space whose closed unit ball is compact must be finite-dimensional, is **not** proved anywhere here.
+- **What is refuted and what is not.** The claim refuted is the transfer of [[thm-heine-borel-rn]] to arbitrary normed spaces. No general classification of normed spaces is asserted here; in particular the classical converse, that a normed space whose closed unit ball is compact must be finite-dimensional, is **not** proved anywhere here.
 
 - **Why the linear structure does not help.** The bisection proof of [[thm-heine-borel-rn]] halves one coordinate at a time and terminates because there are finitely many coordinates. On $V$ there are infinitely many, and the standard unit vectors stay a fixed distance apart no matter how far out one looks; that is exactly the failure of total boundedness in step 5.1.
 

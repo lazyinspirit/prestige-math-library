@@ -4,6 +4,9 @@ kind: theorem
 title: "For every real $x$, $(1+x/n)^n\\to\\exp x$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-scaled-binomial-coefficients-converge, thm-binomial-theorem, lem-exponential-series-has-infinite-radius, def-real-exponential-function-and-e, def-real-limit, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -11,7 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -19,6 +27,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
+      url: "https://www.jirka.org/ra/html/sec_logandexp.html"
 pipeline_run: null
 ---
 

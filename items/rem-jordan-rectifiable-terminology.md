@@ -4,6 +4,9 @@ kind: remark
 title: "The term “rectifiable” for Jordan measurable sets is unrelated to rectifiable curves"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
 deps: [thm-jordan-boundary-criterion, def-jordan-inner-and-outer-content]
 justified_by: []
 aliases: []

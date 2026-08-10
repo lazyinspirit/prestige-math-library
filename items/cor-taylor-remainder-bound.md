@@ -4,6 +4,9 @@ kind: corollary
 title: "A uniform derivative bound gives a uniform Taylor remainder bound"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [cor-taylor-lagrange-and-cauchy-remainders, lem-of-abs-value, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -11,12 +14,19 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-01
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "Taylor's theorem (Wikipedia): Lagrange remainder and error estimate"
+      url: "https://en.wikipedia.org/wiki/Taylor%27s_theorem"
 pipeline_run: null
 ---
 

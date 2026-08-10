@@ -4,6 +4,9 @@ kind: corollary
 title: "The elementary numerical bound $2<e<3$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [lem-exponential-factorial-tail-bound, def-real-exponential-function-and-e, def-finite-sum, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "LSU MATH 7230, Homework 1"
+      url: "https://www.math.lsu.edu/~mahlburg/teaching/handouts/2018-7230/HW1.pdf"
+    - title: "University of Michigan MATH 295 notes"
+      url: "https://sites.lsa.umich.edu/idolga/wp-content/uploads/sites/1334/2024/08/295notes.pdf"
 pipeline_run: null
 ---
 

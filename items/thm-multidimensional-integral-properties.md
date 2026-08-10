@@ -4,6 +4,9 @@ kind: theorem
 title: "Linearity, monotonicity, the absolute-value estimate and coordinate-slice additivity for the Riemann integral in $\\mathbb{R}^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-multidimensional-darboux-integral, thm-multidimensional-riemann-criterion, thm-multidimensional-darboux-equals-riemann, lem-multidimensional-refinement-inequalities, def-multidimensional-darboux-sums, def-multidimensional-grid-partition, lem-finite-sum-laws, def-abs-value, lem-of-abs-value, cor-of-reverse-triangle]
 justified_by: []
 aliases: []

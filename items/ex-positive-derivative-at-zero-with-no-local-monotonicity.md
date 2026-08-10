@@ -4,6 +4,9 @@ kind: example
 title: "A function with positive derivative at $0$ that is monotone on no neighbourhood of $0$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [ex-piecewise-polynomial-periodic-oscillator, thm-algebra-of-derivatives, thm-chain-rule, def-derivative, def-monotone-function]
 justified_by: []
 aliases: []

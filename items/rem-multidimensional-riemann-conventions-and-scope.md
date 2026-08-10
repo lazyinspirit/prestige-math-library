@@ -4,6 +4,9 @@ kind: remark
 title: "Conventions and proved scope for the Riemann integral in $\\mathbb{R}^m$ and Jordan content"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [def-null-and-content-zero-in-rn, def-jordan-inner-and-outer-content, cor-one-dimensional-and-multidimensional-riemann-agree, cor-one-dimensional-null-and-content-zero-agree, thm-lebesgue-criterion-in-rn, thm-jordan-boundary-criterion, def-riemann-integral-over-a-jordan-set, thm-lipschitz-images-of-null-sets-in-rn-are-null, thm-graphs-of-continuous-functions-have-content-zero]
 justified_by: []
 aliases: []

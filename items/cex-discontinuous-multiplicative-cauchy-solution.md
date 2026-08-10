@@ -4,6 +4,9 @@ kind: counterexample
 title: "A discontinuous positive solution of $F(x+y)=F(x)F(y)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-every-independent-set-extends-to-a-basis, def-vector-space, def-additive-function, cor-irrationals-uncountable, thm-normalized-exponential-functional-equation, thm-exponential-addition-formula, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, def-axiom-of-choice]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "S. G. Johnson, Exponential Functions"
+      url: "https://math.mit.edu/~stevenj/exponential.pdf"
+    - title: "E. Gselmann, habilitation thesis on functional equations"
+      url: "https://math.unideb.hu/sites/default/files/upload_documents/habilitacios_ertekezes_gselmann.pdf"
 pipeline_run: null
 ---
 

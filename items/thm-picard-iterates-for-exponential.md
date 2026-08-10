@@ -4,6 +4,9 @@ kind: theorem
 title: "Picard iteration from $1$ produces the exponential partial sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-oriented-integral, thm-linearity-of-the-integral, thm-ftc-first-part, thm-ftc-second-part, lem-derivative-of-a-power, thm-uniform-limit-interchanges-riemann-integration, thm-uniform-limit-continuous-real-functions, thm-continuous-implies-integrable, thm-algebra-of-continuous-functions, thm-power-series-uniform-on-compact-subintervals, lem-exponential-series-has-infinite-radius, def-real-exponential-function-and-e, def-factorial-and-falling-factorial, def-finite-sum, lem-finite-sum-laws, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "J. Lebl, Basic Analysis, Picard's Theorem"
+      url: "https://www.jirka.org/ra/html/sec_picard.html"
+    - title: "University of Pennsylvania MATH 3600, Section 34"
+      url: "https://www2.math.upenn.edu/~ancoop/3600/section-34.html"
 pipeline_run: null
 ---
 

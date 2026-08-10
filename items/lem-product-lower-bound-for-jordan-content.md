@@ -4,6 +4,9 @@ kind: lemma
 title: "If every finite interval cover of $A\\subseteq\\mathbb{R}$ has total length at least $c$, then every rectangle cover of $A\\times[0,d]$ has total area at least $cd$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-jordan-inner-and-outer-content, def-multidimensional-rectangle-and-volume, def-multidimensional-grid-partition, def-finite-sum, lem-finite-sum-laws, def-interval]
 justified_by: []
 aliases: []

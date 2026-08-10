@@ -4,6 +4,9 @@ kind: theorem
 title: "Integrable functions on $[a,b]$ form a set closed under sums and scalar multiples, and $\\int_a^b(\\lambda f+\\mu g) = \\lambda\\int_a^b f + \\mu\\int_a^b g$"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-darboux-integral, def-darboux-sums, thm-riemann-criterion, lem-refinement-inequalities, def-partition-and-refinement, lem-integral-elementary-bounds, def-oriented-integral, lem-reflection, def-infimum, lem-sup-unique, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-complete-ordered-field, def-ordered-field]
 justified_by: []
 aliases: [thm-integral-is-linear]
@@ -11,12 +14,13 @@ landmark: true
 short: "linearity of the integral"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "Carnegie Mellon 21-269, Riemann integration notes"
+      url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
+    - title: "Encyclopedia of Mathematics, Integral calculus"
+      url: "https://encyclopediaofmath.org/wiki/Integral_calculus"
 pipeline_run: null
 ---
 
@@ -106,7 +114,7 @@ $\lambda < 0$.
 
 4.1 Both $\int_a^b(f+g)$ and $\int_a^b f + \int_a^b g$ lie in the interval from $L(f,P)+L(g,P)$ to $U(f,P)+U(g,P)$: the first by [L2] and step 2.2, the second by [L2] applied to $f$ and to $g$ separately. [step 2.1, step 2.2, step 3.1, L2]
 
-4.2 **Claim 2 for $\lambda < 0$.** Then $-\lambda > 0$ and $\lambda f = (-\lambda)(-f)$, so steps 2.3 to 6.3 give integrability and $\int_a^b \lambda f = (-\lambda)\int_a^b(-f) = (-\lambda)\bigl(-\int_a^b f\bigr) = \lambda\int_a^b f$. [step 2.3, step 3.2, step 2.4, L9]
+4.2 **Claim 2 for $\lambda < 0$.** Then $-\lambda > 0$ and $\lambda f = (-\lambda)(-f)$, so steps 2.3, 2.4 and 3.2 give integrability and the required identities and $\int_a^b \lambda f = (-\lambda)\int_a^b(-f) = (-\lambda)\bigl(-\int_a^b f\bigr) = \lambda\int_a^b f$. [step 2.3, step 3.2, step 2.4, L9]
 
 5.1 That interval has length less than $\varepsilon$ by step 2.1, so $\bigl|\int_a^b(f+g) - \int_a^b f - \int_a^b g\bigr| < \varepsilon$; as $\varepsilon > 0$ was arbitrary the difference is $0$, which is claim 1. [step 2.1, step 4.1, L9]
 

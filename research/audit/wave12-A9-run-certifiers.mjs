@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { basename, join } from "node:path";
+import { spawn } from "node:child_process";
+
+const root = new URL("../../", import.meta.url).pathname;
+const taskDir = join(root, "research/audit/wave12-A9-certifier-tasks");
+const dispatchDir = join(root, "research/audit/wave12-A9-dispatch");
+const brief = "research/audit/wave12-A9-certifier-brief.md";
+const run = "wave12-A9";
+const concurrency = 6;
+const tasks = readdirSync(taskDir).filter((name) => name.endsWith(".md")).sort()
+  .map((name) => ({ label: basename(name, ".md"), path: join(taskDir, name) }));
+
+const passed = ({ label }) => {
+  const path = join(dispatchDir, `certifier-${label}.result.json`);
+  if (!existsSync(path)) return false;
+  try {
+    const row = JSON.parse(readFileSync(path, "utf8"));
+    return row.ok === true && row.model === "gpt-5.6-terra" && /VERDICT:\s*CERTIFIED/.test(row.tail ?? "");
+  } catch { return false; }
+};
+
+const pending = tasks.filter((task) => !passed(task));
+console.log(`wave12 A9 certifiers: ${tasks.length} prepared; ${tasks.length - pending.length} certified; ${pending.length} pending; concurrency ${concurrency}`);
+let cursor = 0;
+const failures = [];
+const runOne = (task) => new Promise((resolve) => {
+  const started = Date.now();
+  const child = spawn(process.execPath, [
+    "tools/dispatch.mjs", "--role", "certifier", "--brief", brief,
+    "--label", task.label, "--run", run, "--task", task.path,
+    "--timeout", "7200", "--json",
+  ], { cwd: root, stdio: ["ignore", "pipe", "pipe"] });
+  let stdout = "", stderr = "";
+  child.stdout.on("data", (chunk) => { stdout += chunk; });
+  child.stderr.on("data", (chunk) => { stderr += chunk; });
+  child.on("error", (error) => {
+    failures.push({ label: task.label, error: error.message });
+    console.log(`FAIL ${task.label} — ${error.message}`);
+    resolve();
+  });
+  child.on("close", (code) => {
+    const seconds = ((Date.now() - started) / 1000).toFixed(1);
+    if (code === 0 && passed(task)) console.log(`PASS ${task.label} (${seconds}s)`);
+    else {
+      const detail = (stderr || stdout || `exit ${code}`).trim().split("\n").slice(-4).join(" | ");
+      failures.push({ label: task.label, error: detail });
+      console.log(`FAIL ${task.label} (${seconds}s) — ${detail}`);
+    }
+    resolve();
+  });
+});
+const worker = async () => {
+  while (cursor < pending.length) await runOne(pending[cursor++]);
+};
+await Promise.all(Array.from({ length: Math.min(concurrency, pending.length || 1) }, worker));
+console.log(`wave12 A9 certifiers: ${tasks.length - failures.length}/${tasks.length} certified; ${failures.length} failed`);
+for (const failure of failures) console.log(`FAILED ${failure.label}: ${failure.error}`);
+process.exit(failures.length ? 1 : 0);

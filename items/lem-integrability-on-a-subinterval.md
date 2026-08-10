@@ -4,6 +4,9 @@ kind: lemma
 title: "A function integrable on $[a,b]$ is integrable on every closed subinterval"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-oriented-integral, def-darboux-integral, thm-riemann-criterion, lem-refinement-inequalities, def-darboux-sums, def-partition-and-refinement, lem-finite-sum-laws, def-finite-sum, def-bounded-set, def-interval]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Darboux_integral"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
       url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "J. Lebl, Basic Analysis I, Properties of the Riemann integral"
+      url: "https://www.jirka.org/ra/html/sec_rintprop.html"
 pipeline_run: null
 ---
 

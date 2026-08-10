@@ -4,6 +4,9 @@ kind: lemma
 title: "For $0<x<1$, the Abel transform of a series is $(1-x)^2\\sum_{n\\ge0}(n+1)\\sigma_nx^n$, where $\\sigma_n$ are the Cesaro means of its partial sums"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-abel-and-cesaro-summability-of-a-series, def-finite-sum, thm-geometric-series, lem-power-monotone, lem-of-abs-value, def-cauchy-product, cor-cauchy-product-absolute, thm-direct-comparison-test, lem-series-linearity, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Cesàro summation, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Cesàro summation, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Cesaro_summation_method"
+    - title: "Cesàro summation methods, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Ces%C3%A0ro_summation_methods"
+    - title: "S. Semmes, Rice Math 322 notes"
+      url: "https://math.rice.edu/~semmes/math322.pdf"
 pipeline_run: null
 ---
 

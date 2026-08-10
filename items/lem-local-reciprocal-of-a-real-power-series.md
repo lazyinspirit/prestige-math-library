@@ -4,6 +4,9 @@ kind: lemma
 title: "A convergent real power series with nonzero constant term has a convergent reciprocal power series on a smaller neighbourhood"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-cauchy-product-of-real-power-series, thm-geometric-series, cor-power-series-sums-are-continuous, cor-power-series-convergence-dichotomy, thm-double-series-fubini]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: constructive
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

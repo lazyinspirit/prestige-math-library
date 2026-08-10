@@ -4,6 +4,9 @@ kind: corollary
 title: "Jordan content is finitely additive when the overlap has content zero"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [thm-jordan-content-and-indicator-integrability, thm-multidimensional-integral-properties, def-jordan-inner-and-outer-content, def-null-and-content-zero-in-rn, lem-finite-sum-laws]
 justified_by: []
 aliases: []

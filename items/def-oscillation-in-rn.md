@@ -4,6 +4,9 @@ kind: definition
 title: "Oscillation of a real function on subsets of $\\mathbb{R}^m$ and at a point"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-oscillation, def-extended-reals, lem-extended-reals-complete, def-metric-ball, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-bounded-set, def-infimum, lem-of-abs-value]
 justified_by: []
 aliases: []

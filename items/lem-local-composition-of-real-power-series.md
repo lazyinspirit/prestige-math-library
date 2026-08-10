@@ -4,6 +4,9 @@ kind: lemma
 title: "A composition of convergent real power series has a convergent power-series expansion wherever the inner series maps a neighbourhood into the outer disk of convergence"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [cor-cauchy-product-absolute, thm-double-series-fubini, cor-power-series-convergence-dichotomy]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: constructive
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "E. Randles, Supplementary Notes for Real Analysis"
+      url: "https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf"
 pipeline_run: null
 ---
 

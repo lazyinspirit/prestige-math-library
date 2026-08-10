@@ -4,6 +4,9 @@ kind: lemma
 title: "A function on a subset of $\\mathbb{R}^m$ is continuous at $x$ iff its oscillation there is $0$, and every oscillation superlevel set is closed"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-oscillation-in-rn, def-metric-continuity, def-metric-ball, def-metric-topology, lem-p-norms-are-norms-and-induce-the-published-metrics, def-bounded-set]
 justified_by: []
 aliases: []

@@ -4,6 +4,9 @@ kind: corollary
 title: "The Lagrange and Cauchy forms of Taylor's remainder"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-taylor-schlomilch-roche-remainder, def-factorial-and-falling-factorial, def-integer-power, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "MathWorld, Schlömilch's remainder"
+      url: "https://mathworld.wolfram.com/SchloemilchRemainder.html"
+    - title: "J. Lebl, Basic Analysis I, Taylor's theorem and related calculus"
+      url: "https://www.jirka.org/ra/html/sec_taylor.html"
 pipeline_run: null
 ---
 

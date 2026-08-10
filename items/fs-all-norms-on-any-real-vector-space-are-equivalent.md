@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: all norms on a real vector space are equivalent"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-all-norms-on-rn-are-equivalent, def-norm-and-normed-space, def-equivalent-norms, def-function-space, def-vector-space, def-linear-subspace, lem-linear-subspace-criterion, def-linear-independence, def-linear-basis, def-dimension, cor-independent-set-is-no-larger-than-a-finite-spanning-set, lem-standard-basis-of-f-n, def-linear-combination-and-span, def-finite-sum, lem-finite-sum-laws, lem-finite-set-has-max, def-max-min, thm-of-archimedean, def-canonical-natural, lem-of-naturals-positive, def-countable, def-equinumerous, lem-pigeonhole, lem-of-abs-value, def-abs-value, lem-of-triangle-inequality, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Norm_(mathematics)"
     - title: "Archimedean property (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Archimedean_property"
+    - title: "J. Demmel, MA221 Lecture 3: Vector Norms"
+      url: "https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_03.html"
+    - title: "G. Zitelli, Math 641 Functional Analysis, Part I"
+      url: "https://www.math.uci.edu/~gzitelli/pdf/641/641part1.pdf"
 pipeline_run: null
 ---
 
@@ -98,7 +106,7 @@ $N_1 \le C\,N_\infty$ on $V$**.
 
 ## Remarks
 
-- **Nothing is claimed here about general infinite-dimensional normed spaces.** This library has not built that theory. What is exhibited is one real vector space carrying two inequivalent norms, which is all that is needed to refute the claim.
+- **No classification of infinite-dimensional normed spaces is claimed here.** What is exhibited is one real vector space carrying two inequivalent norms, which is all that is needed to refute the claim.
 
 - **Where the proof of [[thm-all-norms-on-rn-are-equivalent]] breaks on $V$.** That proof takes the unit sphere of $\lVert\cdot\rVert_2$, which is closed and bounded, and concludes compactness from [[thm-heine-borel-rn]] — a theorem about $\mathbb{R}^{n}$ for a natural $n$, proved by bisecting finitely many coordinates. On $V$ there is no such theorem, and indeed [[fs-heine-borel-holds-in-every-normed-space]] refutes the corresponding claim on the same space.
 

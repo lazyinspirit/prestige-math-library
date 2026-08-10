@@ -4,6 +4,9 @@ kind: definition
 title: "Lower and upper Darboux sums over a grid partition in $\\mathbb{R}^m$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, def-bounded-set, def-complete-ordered-field, def-infimum, thm-infimum-property, lem-sup-unique, lem-finite-sum-laws]
 justified_by: []
 aliases: []

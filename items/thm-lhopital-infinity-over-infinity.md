@@ -4,6 +4,9 @@ kind: theorem
 title: "L'Hôpital's rule for the $\\infty/\\infty$ form at finite or infinite, one-sided endpoints"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [lem-cauchy-mean-value-quotient-form, cor-differentiable-implies-continuous, def-one-sided-limits, def-limits-at-infinity, def-extended-reals, thm-algebra-of-function-limits, def-function-limit]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "UC Davis, L'Hopital's rule"
+      url: "https://www.math.ucdavis.edu/~kouba/CalcOneDIRECTORY/lhopitaldirectory/LHopital.html"
+    - title: "Colgate University MATH 323, Chapter 5 notes"
+      url: "https://math.colgate.edu/math323/dlantz/extras/notesC5.pdf"
 pipeline_run: null
 ---
 

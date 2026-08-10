@@ -4,6 +4,9 @@ kind: false-statement
 title: "FALSE: if $u$ and $v$ are differentiable on $[a,b]$ then $\\int_a^b uv' = u(b)v(b)-u(a)v(a)-\\int_a^b u'v$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [thm-integration-by-parts, cex-a-function-with-a-primitive-that-is-not-integrable, thm-continuous-implies-integrable, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-derivative, def-darboux-sums, def-darboux-integral, def-bounded-set, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, def-integer-power, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []

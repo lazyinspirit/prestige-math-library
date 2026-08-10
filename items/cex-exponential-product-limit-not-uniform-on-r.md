@@ -4,6 +4,11 @@ kind: counterexample
 title: "The convergence $(1+x/n)^n\\to\\exp x$ is not uniform on $\\mathbb{R}$"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
 deps: [thm-exponential-product-limit, thm-exponential-addition-formula, cor-two-less-than-e-less-than-three, def-pointwise-uniform-and-uniformly-cauchy-convergence, def-integer-power]
 justified_by: []
 aliases: []

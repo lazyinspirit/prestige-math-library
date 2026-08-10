@@ -4,6 +4,9 @@ kind: theorem
 title: "Taylor's Schlömilch–Roche remainder formula"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-taylor-polynomial-and-remainder, lem-taylor-polynomial-derivatives, def-factorial-and-falling-factorial, def-integer-power, def-canonical-natural, lem-of-naturals-positive, lem-cauchy-mean-value-quotient-form, thm-algebra-of-derivatives, lem-derivative-of-a-power, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "MathWorld, Schlömilch's remainder"
+      url: "https://mathworld.wolfram.com/SchloemilchRemainder.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: counterexample
 title: "A curve for which the mean value inequality is an equality, showing the constant cannot be improved"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-mean-value-inequality, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-p-norms-on-rn, def-euclidean-inner-product, def-norm-and-normed-space, lem-derivative-of-a-power, def-derivative, cex-mean-value-equality-fails-for-a-vector-valued-function, thm-of-square-roots, thm-algebra-of-continuous-functions, cor-differentiable-implies-continuous, def-canonical-natural, lem-of-naturals-positive, def-integer-power, def-interval]
 justified_by: []
 aliases: []
@@ -12,11 +15,12 @@ cx_machine_verified: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "Vector-valued function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Vector-valued_function"
+    - title: "J. Lebl, Basic Analysis I, Section 8.4"
+      url: "https://www.jirka.org/ra/html/sec_svthedercont.html"
 pipeline_run: null
 ---
 

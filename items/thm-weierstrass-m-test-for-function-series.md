@@ -4,6 +4,9 @@ kind: theorem
 title: "The Weierstrass M-test gives absolute pointwise convergence and uniform convergence of a function series"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [cor-uniform-cauchy-criterion-function-series, thm-series-cauchy-criterion, thm-direct-comparison-test, def-series-of-real-functions, def-finite-sum, lem-finite-sum-laws, lem-of-abs-value, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
@@ -17,6 +20,8 @@ sources:
   references:
     - title: "MIT OpenCourseWare 18.100B, Real Analysis, Lectures 20–21"
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+    - title: "University of Alberta Math 317, Infinite Series of Functions"
+      url: "https://www.math.ualberta.ca/~xinweiyu/317.Q1.14w/LecNote317-02%20Infinite%20Series%20of%20Functions.pdf"
 pipeline_run: null
 ---
 

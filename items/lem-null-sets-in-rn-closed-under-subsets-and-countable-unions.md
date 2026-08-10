@@ -4,6 +4,9 @@ kind: lemma
 title: "Subsets and countable unions of null subsets of $\\mathbb{R}^m$ are null"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-null-and-content-zero-in-rn, def-countable-choice, thm-n-cross-n-countable, thm-geometric-series, def-series, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-integer-power]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
     - title: "J. Lebl, Basic Analysis, The Riemann-Lebesgue Criterion"
       url: "https://www.jirka.org/ra/html/sec_riemannlebesgue.html"
+    - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
+      url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The radius-one series with coefficients $1/(n+1)^2$, $1/(n+1)$ and $1$ realise absolute, conditional and divergent endpoint behaviour"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-cauchy-hadamard-for-real-power-series, thm-p-series-rational, thm-alternating-series-test, def-canonical-natural, lem-nth-root-of-n-tends-to-one, thm-algebra-of-limits]
 justified_by: []
 aliases: []
@@ -12,7 +15,13 @@ proof_strategy: cases
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Power series, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Power_series"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "MIT 18.100C, Lecture 11: Power Series"
+      url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
 pipeline_run: null
 ---
 

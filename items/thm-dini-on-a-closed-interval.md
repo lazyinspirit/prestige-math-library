@@ -4,6 +4,9 @@ kind: theorem
 title: "Dini's theorem on a closed interval: monotone pointwise convergence of continuous functions to a continuous limit is uniform"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-pointwise-uniform-and-uniformly-cauchy-convergence, def-continuity-real, thm-algebra-of-continuous-functions, thm-continuity-preimage-characterisation, thm-heine-borel-r, lem-finite-set-has-max, lem-finite-choice, def-canonical-natural, lem-of-naturals-positive, thm-nat-linear-order]
 justified_by: []
 aliases: []
@@ -17,6 +20,10 @@ sources:
   references:
     - title: "J. Lebl, Basic Analysis I, §6.1"
       url: "https://www.jirka.org/ra/html/sec_puconv.html"
+    - title: "Dini's theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dini%27s_theorem"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

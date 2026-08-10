@@ -4,6 +4,9 @@ kind: example
 title: "The integral test applied to $\\sum 1/\\iota(k+1)^{p}$ for rational $p>0$, cross-checked against the published $p$-series theorem"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-integral-test-for-series, thm-algebra-of-continuous-functions, thm-cauchy-condensation, rem-real-exponents-deferred, thm-p-series-rational, cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-chain-rule, lem-derivative-of-a-power, thm-algebra-of-derivatives, thm-continuous-implies-integrable, def-rational-power, lem-rational-power-laws, lem-rational-power-monotone, thm-nth-roots-exist, def-series, def-canonical-natural, lem-of-naturals-positive, def-monotone-function, def-integer-power, def-bounded-set, def-derivative, def-continuity-real, def-oriented-integral, def-interval, def-rat-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -11,12 +14,13 @@ landmark: true
 short: "integral test on the $p$-series"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
   precheck: pass
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -24,6 +28,10 @@ sources:
       url: "https://en.wikipedia.org/wiki/Integral_test_for_convergence"
     - title: "Harmonic series (mathematics) (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)"
+    - title: "J. Lebl, Basic Analysis I, Series"
+      url: "https://www.jirka.org/ra/html/sec_series.html"
+    - title: "J. Lebl, Basic Analysis I, Improper Riemann integrals"
+      url: "https://www.jirka.org/ra/html/sec_impropriemann.html"
 pipeline_run: null
 ---
 
@@ -53,9 +61,9 @@ $$\int_0^N (t+1)^{-2}\,\mathrm{d}t \;=\; 1 - \frac{1}{\iota(N+1)} \;<\; 1 ,$$
 
 so the sequence is bounded by $1$, in agreement with the verdict above at
 $p = 2 > 1$. At $p = 1$ the verdict is that $\bigl(\int_0^N (t+1)^{-1}\bigr)_N$ is
-**unbounded**, since the harmonic series diverges; no primitive is exhibited
-there, and none can be, because the primitive is the logarithm and this library
-has not built it.
+**unbounded**, since the harmonic series diverges. No named logarithmic primitive
+is available from the current dependency vocabulary, and none is needed for this
+conclusion.
 
 **The exponent must be rational.** Real exponents do not exist in this library at
 this point in the reading order ([[rem-real-exponents-deferred]]), so "for

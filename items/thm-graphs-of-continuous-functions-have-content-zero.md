@@ -4,6 +4,9 @@ kind: theorem
 title: "The graph of a continuous function on a closed nondegenerate rectangle in $\\mathbb{R}^m$ has content zero in $\\mathbb{R}^{m+1}$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-null-and-content-zero-in-rn, def-multidimensional-grid-partition, def-multidimensional-rectangle-and-volume, thm-heine-borel-rn, thm-heine-cantor-metric, def-metric-continuity, lem-p-norms-are-norms-and-induce-the-published-metrics, lem-integer-part, def-canonical-natural, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_jordansets.html"
     - title: "J. Lebl, Basic Analysis, Outer Measure and Null Sets"
       url: "https://www.jirka.org/ra/html/sec_outermeasure.html"
+    - title: "A. Cañez, multivariable calculus notes"
+      url: "https://www.math.cmu.edu/~gautam/sj/teaching/2017-18/268-multid-calc/pdfs/canez-calculus.pdf"
 pipeline_run: null
 ---
 

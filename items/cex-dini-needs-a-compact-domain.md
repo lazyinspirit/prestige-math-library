@@ -4,19 +4,29 @@ kind: counterexample
 title: "Dini's theorem fails on $[0,\\infty)$: $x/(\\iota(k+1)+x)$ decreases pointwise to zero but not uniformly"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-dini-on-a-closed-interval, def-continuity-real, thm-algebra-of-continuous-functions, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-inverse-positive, thm-heine-borel-characterisation-r, def-bounded-set]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "KTH Real Analysis Lecture Notes, §6.3"
-      url: "https://people.kth.se/~dogge/files/analysis.pdf"
+    - title: "Dini's theorem (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Dini%27s_theorem"
+    - title: "W. Trench, Introduction to Real Analysis"
+      url: "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: example
 title: "The one-sided flat function is $C^\\infty$ with identically zero Taylor series"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-exponential-beats-every-polynomial, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives, cor-power-series-sums-are-smooth-with-coefficient-formula, cor-exponential-reciprocal-and-positivity, def-factorial-and-falling-factorial]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "MIT 18.102, Chapter 4 notes"
+      url: "https://math.mit.edu/~rbm/18-102-Sp16/Chapter4.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: definition
 title: "A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
 deps: [def-series, def-absolute-and-conditional-convergence, def-integer-power, def-extended-reals, lem-extended-reals-complete, def-interval]
 justified_by: []
 aliases: []
@@ -16,6 +19,8 @@ sources:
   references:
     - title: "MIT 18.100C, Lecture 11: Power Series"
       url: "https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
 pipeline_run: null
 ---
 

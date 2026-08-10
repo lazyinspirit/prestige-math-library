@@ -4,6 +4,9 @@ kind: example
 title: "A differentiable function whose derivative is discontinuous"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: ai-generated
 deps: [ex-piecewise-polynomial-periodic-oscillator, thm-algebra-of-derivatives, thm-chain-rule, lem-derivative-of-a-power, thm-darboux-theorem-for-derivatives, def-derivative]
 justified_by: []
 aliases: []

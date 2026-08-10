@@ -4,6 +4,9 @@ kind: theorem
 title: "The exponential dominates every fixed nonnegative integer power at $+\\infty$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-exponential-function-and-e, cor-exponential-reciprocal-and-positivity, def-limits-at-infinity, def-factorial-and-falling-factorial, def-canonical-natural, lem-finite-sum-laws]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
       url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "MIT 18.102, Chapter 4 notes"
+      url: "https://math.mit.edu/~rbm/18-102-Sp16/Chapter4.pdf"
 pipeline_run: null
 ---
 

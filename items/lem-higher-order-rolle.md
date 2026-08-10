@@ -4,6 +4,9 @@ kind: lemma
 title: "Higher-order Rolle theorem"
 status: published
 origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
 deps: [def-higher-derivatives-and-smoothness, thm-rolle, cor-differentiable-implies-continuous, thm-induction-principle]
 justified_by: []
 aliases: []
@@ -19,6 +22,8 @@ sources:
       url: "https://www.jirka.org/ra/html/sec_taylor.html"
     - title: "MIT OpenCourseWare 18.100B Real Analysis, Spring 2025 lecture notes"
       url: "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/resources/lecture-notes/"
+    - title: "University of Florida note, Generalized Rolle's theorem"
+      url: "https://people.clas.ufl.edu/bruceedwards/files/GeneralRolle.pdf"
 pipeline_run: null
 ---
 

@@ -4,6 +4,9 @@ kind: theorem
 title: "The exponential function is smooth and $(\\exp)'=\\exp$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [lem-exponential-series-has-infinite-radius, thm-termwise-differentiation-of-a-real-power-series, cor-power-series-sums-are-smooth-with-coefficient-formula, def-factorial-and-falling-factorial, def-canonical-natural, lem-of-naturals-positive]
 justified_by: []
 aliases: []
@@ -19,6 +22,10 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
       url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Chapter 10"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch10.pdf"
+    - title: "J. Lebl, Basic Analysis, Analytic Functions"
+      url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
 pipeline_run: null
 ---
 

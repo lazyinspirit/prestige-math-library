@@ -4,6 +4,9 @@ kind: remark
 title: "The exponential roadmap and its circularity hazards"
 status: published
 origin: session
+provenance:
+  statement: ai-generated
+  proof: not-applicable
 deps: [thm-exponential-definition-equivalence, cor-exponential-is-a-bijection-onto-positive-reals, thm-exponential-beats-every-polynomial, thm-e-is-irrational]
 justified_by: []
 aliases: []

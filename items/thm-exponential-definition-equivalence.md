@@ -4,6 +4,9 @@ kind: theorem
 title: "The power-series, product-limit, IVP, functional-equation, and Picard definitions agree"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-real-exponential-function-and-e, thm-derivative-of-exponential, thm-exponential-product-limit, thm-exponential-ivp-uniqueness, thm-normalized-exponential-functional-equation, thm-picard-iterates-for-exponential]
 justified_by: []
 aliases: []
@@ -19,6 +22,12 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "University of Pennsylvania MATH 3600, Section 34"
+      url: "https://www2.math.upenn.edu/~ancoop/3600/section-34.html"
+    - title: "J. Lebl, Basic Analysis, Picard's Theorem"
+      url: "https://www.jirka.org/ra/html/sec_picard.html"
+    - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
+      url: "https://www.jirka.org/ra/html/sec_logandexp.html"
 pipeline_run: null
 ---
 

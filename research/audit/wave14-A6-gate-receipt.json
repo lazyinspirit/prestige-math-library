@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "scope": "wave14-a6-gates",
+  "reviewer": "Audit-Alpha (GPT 5.6 Sol xhigh/1M, owner-delegated), Wave 14 A6",
+  "authoritative_command": "node tools/gates.mjs --audit --step A6 --run wave14 --json",
+  "authoritative_execution": "host rerun after the sandbox wrapper returned spawnSync /usr/bin/node EPERM for child processes",
+  "authoritative_summary": {
+    "gates": 14,
+    "passed": 13,
+    "failed": 1,
+    "wave14_local_failures": 0,
+    "cross_wave_failures": 1
+  },
+  "passed": [
+    "precheck.mts",
+    "depcheck.mjs",
+    "fwdcheck.mjs",
+    "extcheck.mjs",
+    "rendercheck.mjs",
+    "prosecheck.mjs",
+    "citecheck.mjs (advisory)",
+    "depsource.mjs",
+    "proof-contract.mjs (23/23, zero errors/warnings)",
+    "finite-smoke.mjs",
+    "risk-report.mjs (23/23 reviewed)",
+    "content-policy.mjs",
+    "genrisk.mjs (125 seeds; all three Wave14 zero-cone seeds positively closed)"
+  ],
+  "additional_isolated_passes": [
+    "impact-audit.mjs on research/audit/wave14-impact-touches-isolated.json: 25 interfaces, 77 consumers, zero errors/warnings",
+    "spine-audit.mjs: 59 proof-bearing top-100 items, zero errors/warnings, scope SHA-256 c495826392ddb2bad8874d27b4407be2cf28dacfe1c6cc66dbc1d7c9b3034f5d",
+    "audit-manifest.mjs: 171 relationships (108 published-backward, 63 same-batch)",
+    "final URL receipt: 16/16 retained URLs host-live; two redundant 403 URLs removed with disposition",
+    "DeepSeek V4 Pro max: 22/22 exact-final CLEAN; 22 initial transport-null attempts preserved",
+    "GPT 5.6 Terra xhigh/1M: 10/10 exact-final CERTIFIED/FINDINGS NONE; 10 initial transport-null attempts preserved",
+    "git diff --check"
+  ],
+  "cross_wave_blockers": [
+    {
+      "gate": "impact-audit.mjs --touches research/audit/wave14-touches.json --from pre-A4 --receipt research/audit/wave14-impact-audit.json",
+      "cause": "The byte-honest full-corpus post-A6 snapshot includes 198 public-interface changes made concurrently by Waves 11–13 after Wave14's pre-A4 baseline. Alpha did not claim foreign-wave consumer dispositions. The separate Wave14-isolated projection preserves the raw snapshot and passes for the exact 25 Wave14 interfaces and all 77 consumers read by Alpha.",
+      "raw_changed_interfaces": 223,
+      "raw_required_review": 458,
+      "foreign_changed_interfaces": 198,
+      "isolated_changed_interfaces": 25,
+      "isolated_required_review": 77,
+      "evidence": "research/audit/wave14-impact-isolation.json"
+    }
+  ],
+  "adjudication": "Wave14's mathematical, source, contract, provenance, frozen-barrier edge, spine, isolated-impact, URL, certification, refuter, and generated-risk gates are closed. The authoritative shared-worktree gate is 13/14 solely because concurrent prior-wave finalization changed foreign public surfaces after Wave14's pre-A4 baseline; Alpha preserved the raw touch snapshot and did not write prior-wave content or foreign impact dispositions."
+}

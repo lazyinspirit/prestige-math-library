@@ -4,6 +4,9 @@ kind: lemma
 title: "For fixed $k$, $\\binom{n}{k}/n^k$ tends to $1/k!$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-binomial-closed-formula, def-binomial-coefficient, def-factorial-and-falling-factorial, def-finite-sum, lem-finite-sum-laws, thm-algebra-of-limits, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, lem-of-sign-rules, def-ordered-field]
 justified_by: []
 aliases: []
@@ -19,6 +22,12 @@ sources:
       url: "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
     - title: "J. Lebl, Basic Analysis, Analytic Functions"
       url: "https://www.jirka.org/ra/html/sec_analfuncs.html"
+    - title: "J. Lebl, Basic Analysis, Logarithm and Exponential"
+      url: "https://www.jirka.org/ra/html/sec_logandexp.html"
+    - title: "J. K. Hunter, An Introduction to Real Analysis, Chapter 10"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/ch10.pdf"
+    - title: "R. Sedgewick and P. Flajolet, Analytic Combinatorics, Asymptotic Approximations"
+      url: "https://aofa.cs.princeton.edu/40asymptotic/"
 pipeline_run: null
 ---
 

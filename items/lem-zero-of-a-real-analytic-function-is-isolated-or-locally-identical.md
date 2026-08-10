@@ -4,6 +4,9 @@ kind: lemma
 title: "At a zero of a real-analytic function, either some first nonzero coefficient makes the zero isolated or every local coefficient vanishes"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-real-analytic-function, cor-power-series-convergence-dichotomy, cor-power-series-sums-are-smooth-with-coefficient-formula, cor-power-series-sums-are-continuous, lem-sign-preservation-near-a-limit, thm-well-ordering-principle]
 justified_by: []
 aliases: []
@@ -12,7 +15,15 @@ proof_strategy: cases
 verification:
   precheck: pass
   audited: 2026-07-31
-sources: {scraped: [], references: [{title: "Analytic function, Encyclopedia of Mathematics", url: "https://encyclopediaofmath.org/wiki/Analytic_function"}]}
+sources:
+  scraped: []
+  references:
+    - title: "Analytic function, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Analytic_function"
+    - title: "Power series, Encyclopedia of Mathematics"
+      url: "https://encyclopediaofmath.org/wiki/Power_series"
+    - title: "Northwestern Math 320-2 lecture notes"
+      url: "https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-2.pdf"
 pipeline_run: null
 ---
 

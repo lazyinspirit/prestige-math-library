@@ -4,6 +4,9 @@ kind: counterexample
 title: "Continuous $f_n \\to 0$ pointwise on $[0,1]$ with $\\int_0^1 f_n = 1$ for every $n$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [thm-continuous-implies-integrable, thm-additivity-over-subintervals, cor-primitives-of-a-continuous-function, thm-ftc-second-part, thm-linearity-of-the-integral, thm-algebra-of-continuous-functions, lem-derivative-of-a-power, thm-algebra-of-derivatives, lem-integral-elementary-bounds, def-continuity-real, def-sequence, def-real-limit, thm-of-archimedean, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-integer-power, def-oriented-integral, def-darboux-integral, def-derivative, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: []
@@ -24,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Riemann_integral"
     - title: "Uniform convergence (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Uniform_convergence"
+    - title: "UC Davis MATH 125B, Chapter 1 notes"
+      url: "https://www.math.ucdavis.edu/~hunter/m125b/ch1.pdf"
 pipeline_run: null
 ---
 

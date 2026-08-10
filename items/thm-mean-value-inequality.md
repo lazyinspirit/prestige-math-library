@@ -4,6 +4,9 @@ kind: theorem
 title: "The mean value inequality: if $f : [a,b] \\to \\mathbb{R}^m$ is continuous and differentiable on $(a,b)$ with $\\lVert f'\\rVert_2 \\le M$, then $\\lVert f(b)-f(a)\\rVert_2 \\le M(b-a)$"
 status: published
 origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-generated
 deps: [def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-euclidean-inner-product, thm-cauchy-schwarz-and-the-euclidean-norm, def-p-norms-on-rn, def-norm-and-normed-space, cor-mean-value-theorem, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, lem-real-and-metric-notions-agree, def-derivative, cor-differentiable-implies-continuous, def-continuity-real, lem-finite-sum-laws, def-finite-sum, def-interval, thm-induction-principle, lem-of-inverse-positive, lem-of-abs-value, def-limit-point-r]
 justified_by: []
 aliases: []
@@ -11,11 +14,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: gpt-5.6-terra-codex-subscription
+    verdict: certify
+    date: 2026-08-10
+    scope: published-audit
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -23,6 +27,8 @@ sources:
       url: "https://en.wikipedia.org/wiki/Mean_value_theorem"
     - title: "Vector-valued function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Vector-valued_function"
+    - title: "J. Lebl, Basic Analysis I, Section 8.4"
+      url: "https://www.jirka.org/ra/html/sec_svthedercont.html"
 pipeline_run: null
 ---
 
