@@ -44,6 +44,6 @@ whenever either improper integral converges, and convergence occurs exactly when
 
 **Proof technique:** computation.
 
-1.1 The map $\phi$ is decreasing, so [L3] uses $|\phi'|=t^{-2}$. By [L1] and [L2], the transformed integrand is $t^{p-2}$, proving the identity.
+1.1 The map $\phi$ is decreasing, so [L3] uses $|\phi'|=t^{-2}$. By [L1] and [L2], the transformed integrand is $t^{p-2}$, proving the identity. [L3, L1, L2]
 
-2.1 Write $t^{p-2}=t^{-(2-p)}$. The finite-endpoint $p$-test says this converges exactly when $2-p<1$, namely $p>1$, which is also precisely the infinite-endpoint threshold for the original integral. ∎
+2.1 Write $t^{p-2}=t^{-(2-p)}$. The finite-endpoint $p$-test says this converges exactly when $2-p<1$, namely $p>1$, which is also precisely the infinite-endpoint threshold for the original integral. [given] ∎

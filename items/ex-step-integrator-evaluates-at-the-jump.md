@@ -43,4 +43,4 @@ $$\int_a^b f\,dH_c=f(c).$$
 
 1.1 In every tagged partition, all increments of $H_c$ vanish except the one on the interval across its jump; that increment is one. Its tag $\xi$ satisfies $|\xi-c|\le\lVert P\rVert$, so the complete Stieltjes sum is $f(\xi)$ and tends to $f(c)$ by [L2]. [L1, L2]
 
-2.1 The same computation counts a jump at $b$. A jump at $a$ is represented by $H(a)=0$ and $H(x)=1$ for $x>a$ and likewise contributes $f(a)$. By contrast, merely assigning a constant endpoint value on the whole interval creates no increment and hence has integral zero. ∎
+2.1 The same computation counts a jump at $b$. A jump at $a$ is represented by $H(a)=0$ and $H(x)=1$ for $x>a$ and likewise contributes $f(a)$. By contrast, merely assigning a constant endpoint value on the whole interval creates no increment and hence has integral zero. [given] ∎

@@ -47,6 +47,6 @@ converges. Then $\int_a^\infty u(x)v(x)\,dx$ diverges.
 
 **Proof technique:** contradiction.
 
-1.1 Suppose $\int_a^\infty uv$ converges. Then its truncation primitive is bounded by [L3], and $uv$ is continuous. Put $g=1/v$. Positivity and $v\to\infty$ give $g\to0$, while [L1] and the hypothesis give absolute convergence of $\int g'$.
+1.1 Suppose $\int_a^\infty uv$ converges. Then its truncation primitive is bounded by [L3], and $uv$ is continuous. Put $g=1/v$. Positivity and $v\to\infty$ give $g\to0$, while [L1] and the hypothesis give absolute convergence of $\int g'$. [L3, L1]
 
-2.1 Apply [L2] with the continuous function $uv$ and multiplier $g$. It yields convergence of $\int(uv)g=\int u$, contradicting the hypothesis. Hence $\int uv$ diverges. ∎
+2.1 Apply [L2] with the continuous function $uv$ and multiplier $g$. It yields convergence of $\int(uv)g=\int u$, contradicting the hypothesis. Hence $\int uv$ diverges. [L2] ∎

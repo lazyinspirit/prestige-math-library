@@ -54,8 +54,8 @@ Flat subintervals of $\phi$ are allowed.
 
 **Proof technique:** direct.
 
-1.1 Assume first that $\phi$ is nondecreasing. Transport a partition of $[c,d]$ through $\phi$ and delete repeated image points coming from flat subintervals. On each nonflat interval, [L1] turns the image length into $\phi'(\eta_i)\Delta t_i$; on a flat interval both the image length and $\phi'$ vanish.
+1.1 Assume first that $\phi$ is nondecreasing. Transport a partition of $[c,d]$ through $\phi$ and delete repeated image points coming from flat subintervals. On each nonflat interval, [L1] turns the image length into $\phi'(\eta_i)\Delta t_i$; on a flat interval both the image length and $\phi'$ vanish. [L1]
 
 1.2 Refine simultaneously by a partition making the Darboux oscillation sum of $f$ small on $[a,b]$ and one making that of the integrable $\phi'$ small on $[c,d]$. Boundedness of $f$, step 1.1, and finite-sum estimates show that the difference between corresponding upper and lower sums is bounded by the sum of those two arbitrarily small oscillation errors. This proves both directions of the integrability equivalence; the same estimate for tagged sums shows that their limits agree. [step 1.1, L2, L3, L4]
 
-2.1 If $\phi$ is nonincreasing, reverse the source orientation and apply steps 1.1–1.2 to the resulting nondecreasing map. The sign reversal is exactly removed by $|\phi'|$ and the oriented-integral convention. ∎
+2.1 If $\phi$ is nonincreasing, reverse the source orientation and apply steps 1.1–1.2 to the resulting nondecreasing map. The sign reversal is exactly removed by $|\phi'|$ and the oriented-integral convention. [given] ∎

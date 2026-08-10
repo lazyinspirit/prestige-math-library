@@ -49,7 +49,7 @@ $$\int_a^b f\,dg+\int_a^b g\,df=f(b)g(b)-f(a)g(a).$$
 
 **Proof technique:** direct.
 
-1.1 The dyadic left-endpoint sums for $\int f\,dg$ are Cauchy by the summable estimate in [L1], so they converge by [L2]. Insert the points of any sufficiently fine partition into a sufficiently fine dyadic partition. The general insertion estimate in [L1] shows that the two left-endpoint sums differ by a quantity tending to zero with their meshes.
+1.1 The dyadic left-endpoint sums for $\int f\,dg$ are Cauchy by the summable estimate in [L1], so they converge by [L2]. Insert the points of any sufficiently fine partition into a sufficiently fine dyadic partition. The general insertion estimate in [L1] shows that the two left-endpoint sums differ by a quantity tending to zero with their meshes. [L1, L2]
 
 1.2 Replacing a left endpoint $t_i$ by an arbitrary tag $\xi_i$ changes the $i$th term by at most $K_fK_g|t_{i+1}-t_i|^{p+q}$. Since the sum of these powers is at most $(b-a)\lVert P\rVert^{p+q-1}$, every fine tagged sum has the dyadic limit. Thus [L3] gives $\int f\,dg$; interchanging $f$ and $g$ gives $\int g\,df$. [step 1.1, L1, L2, L3, L4]
 

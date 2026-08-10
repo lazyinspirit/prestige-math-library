@@ -46,7 +46,7 @@ $$\int_a^b f\,d\alpha=\int_c^d(f\circ\phi)\,d(\alpha\circ\phi).$$
 
 **Proof technique:** direct.
 
-1.1 If $Q=(s_j)$ is a partition of $[c,d]$ with tags $\eta_j$, then $P=(\phi(s_j))$ is a partition of $[a,b]$ with tags $\phi(\eta_j)$. Direct substitution gives
+1.1 If $Q=(s_j)$ is a partition of $[c,d]$ with tags $\eta_j$, then $P=(\phi(s_j))$ is a partition of $[a,b]$ with tags $\phi(\eta_j)$. Direct substitution gives [given]
 $$S_{\alpha\circ\phi}(f\circ\phi;Q,\eta)=S_\alpha(f;P,\phi\circ\eta).$$
 
 1.2 By uniform continuity of $\phi$ in [L2], arbitrarily fine $Q$ give arbitrarily fine image partitions $P$. Thus existence of the left-hand integral in the displayed formula forces the right-hand sums to converge to the same value. Applying the identical argument to $\phi^{-1}$, using [L1] and [L2], proves the converse. Uniqueness [L4] identifies the two limits. [step 1.1, L1, L2, L3, L4] ∎

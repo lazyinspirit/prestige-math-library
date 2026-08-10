@@ -41,9 +41,9 @@ $$\int_0^1x\,d(x^2)=\frac23.$$
 
 **Proof technique:** computation.
 
-1.1 Directly from the difference quotient,
+1.1 Directly from the difference quotient, [given]
 $$\frac{(x+h)^2-x^2}{h}=2x+h\longrightarrow2x,$$
 so $\alpha'(x)=2x$. Likewise, $(2x^3/3)'=2x^2$ by expanding the difference quotient.
 
-2.1 Therefore [L1] and [L2] give
+2.1 Therefore [L1] and [L2] give [L1, L2]
 $$\int_0^1x\,d(x^2)=\int_0^1 2x^2\,dx=\left[\frac{2x^3}{3}\right]_0^1=\frac23.$$ ∎

@@ -48,7 +48,7 @@ Let $f,\alpha:[a,b]\to\mathbb R$ have bounded variation. If no point is a discon
 
 **Proof technique:** direct.
 
-1.1 By the no-common-discontinuity hypothesis, $f$ is continuous at every point of $D_\alpha$. For each $n\ge1$, [L1] and [L2] provide a finite step function $s_n$ with $\lVert f-s_n\rVert_\infty<1/n$ and all interior breakpoints outside $D_\alpha$.
+1.1 By the no-common-discontinuity hypothesis, $f$ is continuous at every point of $D_\alpha$. For each $n\ge1$, [L1] and [L2] provide a finite step function $s_n$ with $\lVert f-s_n\rVert_\infty<1/n$ and all interior breakpoints outside $D_\alpha$. [L1, L2]
 
 1.2 Each $s_n$ is integrable with respect to $\alpha$. Indeed, after a partition contains its breakpoints, $s_n$ is constant on every remaining open subinterval; the only tag-dependent terms are adjacent to a breakpoint, and continuity of $\alpha$ there makes their total contribution tend to zero as the mesh tends to zero. [step 1.1]
 

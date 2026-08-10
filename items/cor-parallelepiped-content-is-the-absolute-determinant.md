@@ -5,8 +5,8 @@ title: "The Jordan content of the parallelepiped spanned by the columns of a squ
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-linear-images-scale-jordan-content-by-absolute-determinant, def-multidimensional-rectangle-and-volume, lem-euclidean-linear-maps-have-matrices-and-are-bounded]
 justified_by: []
 aliases: []

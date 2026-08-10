@@ -46,10 +46,10 @@ for every $j$. Then $\int_a^\infty|f(x)g(x)|\,dx$ diverges, so $\int_a^\infty fg
 
 **Proof technique:** direct.
 
-1.1 Suppose first that $g$ is nonincreasing. On the $j$th block, $g(x)\ge g(x_{j+1})$, hence
+1.1 Suppose first that $g$ is nonincreasing. On the $j$th block, $g(x)\ge g(x_{j+1})$, hence [given]
 $$\int_{x_j}^{x_{j+1}}|f|g\ge\delta g(x_{j+1}).$$
 Also $\int_{x_j}^{x_{j+1}}g\le M g(x_j)$. Since $\int g$ diverges, additivity and [L2] force $\sum_jg(x_j)$, and hence its shifted tail, to diverge. Thus the block lower bounds for $\int|f|g$ have unbounded partial sums. [L1, L2, L3]
 
-1.2 If $g$ is nondecreasing, divergence of its integral implies it is positive at some point; thereafter $g(x_j)$ is bounded below by a positive constant. Now $\int_{x_j}^{x_{j+1}}|f|g\ge\delta g(x_j)$, whose partial sums diverge.
+1.2 If $g$ is nondecreasing, divergence of its integral implies it is positive at some point; thereafter $g(x_j)$ is bounded below by a positive constant. Now $\int_{x_j}^{x_{j+1}}|f|g\ge\delta g(x_j)$, whose partial sums diverge. [given]
 
-2.1 In either monotonicity case the nonnegative truncations of $|fg|$ are unbounded, so [L2] proves divergence and the definition rules out absolute convergence. ∎
+2.1 In either monotonicity case the nonnegative truncations of $|fg|$ are unbounded, so [L2] proves divergence and the definition rules out absolute convergence. [L2] ∎

@@ -49,7 +49,7 @@ $$\int_a^b f\,d\alpha=\int_a^b f(x)\alpha'(x)\,dx.$$
 
 **Proof technique:** direct.
 
-1.1 A Riemann-integrable function is bounded; choose $M$ with $|f|\le M$. For each partition interval, [L1] gives $\eta_i\in(t_i,t_{i+1})$ such that $\Delta_i\alpha=\alpha'(\eta_i)\Delta_i t$. Hence
+1.1 A Riemann-integrable function is bounded; choose $M$ with $|f|\le M$. For each partition interval, [L1] gives $\eta_i\in(t_i,t_{i+1})$ such that $\Delta_i\alpha=\alpha'(\eta_i)\Delta_i t$. Hence [L1]
 $$S_\alpha(f;P,\xi)-\sum_i f(\xi_i)\alpha'(\xi_i)\Delta_i t
 =\sum_i f(\xi_i)(\alpha'(\eta_i)-\alpha'(\xi_i))\Delta_i t.$$
 

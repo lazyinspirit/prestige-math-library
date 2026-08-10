@@ -44,7 +44,7 @@ $$\int_0^1x\,dx=\int_0^1t^2\,d(t^2)=\frac12.$$
 
 **Proof technique:** computation.
 
-1.1 The map $\phi(t)=t^2$ is a strictly increasing continuous bijection of $[0,1]$ onto itself. Applying [L1] gives $\int_0^1x\,dx=\int_0^1t^2\,d(t^2)$.
+1.1 The map $\phi(t)=t^2$ is a strictly increasing continuous bijection of $[0,1]$ onto itself. Applying [L1] gives $\int_0^1x\,dx=\int_0^1t^2\,d(t^2)$. [L1]
 
-1.2 Direct difference quotients give $(t^2)'=2t$ and $(t^4/2)'=2t^3$. Hence [L2], [L3], and the FTC give
+1.2 Direct difference quotients give $(t^2)'=2t$ and $(t^4/2)'=2t^3$. Hence [L2], [L3], and the FTC give [L2, L3]
 $$\int_0^1x\,dx=\frac12,qquad \int_0^1t^2\,d(t^2)=\int_0^1 2t^3\,dt=\frac12.$$ ∎

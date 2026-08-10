@@ -5,8 +5,8 @@ title: 'A linear endomorphism of $\mathbb R^n$ sends bounded Jordan sets to boun
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-determinant-of-a-square-matrix, thm-real-square-matrix-invertible-iff-determinant-nonzero, thm-determinant-under-elementary-row-operations, thm-invertible-matrices-factor-into-elementary-matrices, lem-euclidean-linear-maps-have-matrices-and-are-bounded, def-jordan-inner-and-outer-content, thm-jordan-boundary-criterion, cor-cavalieri-principle-for-jordan-content, lem-finite-jordan-cover-sum-bounds]
 justified_by: []
 aliases: []

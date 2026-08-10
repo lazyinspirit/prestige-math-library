@@ -41,6 +41,6 @@ $$\int_0^1 f\,d\alpha=2.$$
 
 **Proof technique:** direct.
 
-1.1 For each positive integer $n$, $f(1/n)=n$, so the range of $f$ is not bounded above.
+1.1 For each positive integer $n$, $f(1/n)=n$, so the range of $f$ is not bounded above. [given]
 
 1.2 Every Stieltjes sum equals $f(\xi)$ for a tag $\xi$ in the interval across $1/2$; as the mesh tends to zero, $\xi\to1/2$. By [L2], these sums tend to $f(1/2)=2$. The unbounded behavior near zero is multiplied only by zero increments of $\alpha$. [L1, L2] ∎

@@ -5,8 +5,8 @@ title: 'Spherical coordinates have absolute Jacobian determinant $r^2\sin\phi$ a
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-change-of-variables-for-compact-jordan-sets, def-jacobian-determinant-of-a-c-one-map, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-cosine-zero-sets-and-fundamental-period]
 justified_by: []
 aliases: []

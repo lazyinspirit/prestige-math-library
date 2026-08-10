@@ -5,8 +5,8 @@ title: "An integrable function on the unit square with one Dirichlet section and
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-riemann-fubini-on-product-rectangles, def-dirichlet-and-thomae-functions, fs-bounded-implies-riemann-integrable, thm-multidimensional-riemann-criterion]
 justified_by: []
 aliases: []
@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "J. Lebl, Basic Analysis II, Example 10.5.4"
+    - title: "J. Lebl, Basic Analysis II, Example 10.2.1"
       url: "https://www.jirka.org/ra/realanal2.pdf"
 pipeline_run: null
 ---

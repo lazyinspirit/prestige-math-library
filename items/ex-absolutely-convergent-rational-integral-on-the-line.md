@@ -48,6 +48,6 @@ converges absolutely. No evaluation of its value is needed.
 
 **Proof technique:** direct.
 
-1.1 By [L1], the integral over $[-1,1]$ is proper. On $[1,\infty)$, [L2] and [L3] prove convergence. Substitution $t=-x$ gives the identical conclusion on $(-\infty,-1]$.
+1.1 By [L1], the integral over $[-1,1]$ is proper. On $[1,\infty)$, [L2] and [L3] prove convergence. Substitution $t=-x$ gives the identical conclusion on $(-\infty,-1]$. [L1, L2, L3]
 
-2.1 Since $f\ge0$, $|f|=f$. Both tails converge separately and the middle piece is proper, so the mixed integral is absolutely convergent by definition. ∎
+2.1 Since $f\ge0$, $|f|=f$. Both tails converge separately and the middle piece is proper, so the mixed integral is absolutely convergent by definition. [given] ∎

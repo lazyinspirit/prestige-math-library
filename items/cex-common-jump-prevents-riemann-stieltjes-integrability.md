@@ -40,6 +40,6 @@ Let $a<c<b$ and put $f=\alpha=H_c$, the unit step that is zero left of $c$ and o
 
 **Proof technique:** counterexample.
 
-1.1 By [L2], both $f$ and $\alpha$ have total variation one. For every $h>0$ small enough, choose a partition containing $c-h$ and $c$. The only nonzero integrator increment occurs on $[c-h,c]$.
+1.1 By [L2], both $f$ and $\alpha$ have total variation one. For every $h>0$ small enough, choose a partition containing $c-h$ and $c$. The only nonzero integrator increment occurs on $[c-h,c]$. [L2]
 
-1.2 Tag that interval first at $c-h$ and then at $c$. The corresponding sums are respectively $f(c-h)=0$ and $f(c)=1$, although both partitions have mesh tending to zero after the other intervals are refined. Thus no common mesh limit exists, contradicting the necessary condition [L1]. ∎
+1.2 Tag that interval first at $c-h$ and then at $c$. The corresponding sums are respectively $f(c-h)=0$ and $f(c)=1$, although both partitions have mesh tending to zero after the other intervals are refined. Thus no common mesh limit exists, contradicting the necessary condition [L1]. [L1] ∎

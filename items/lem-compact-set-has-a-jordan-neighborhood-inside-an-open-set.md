@@ -5,7 +5,7 @@ title: "A compact subset of an open Euclidean set has a compact Jordan neighborh
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [def-metric-compactness, lem-compactness-is-intrinsic, def-metric-topology, def-multidimensional-grid-partition, cor-jordan-content-finite-additivity, thm-heine-borel-rn, thm-graphs-of-continuous-functions-have-content-zero, thm-jordan-boundary-criterion]
 justified_by: []
@@ -47,4 +47,3 @@ The set $K$ can be chosen as a finite union of closed grid rectangles.
 2.1 The finite union $K$ is closed and bounded, hence compact by [L2]. Its boundary is contained in the union of the boundaries of the $R_i$. Each rectangular face is a continuous coordinate graph over a bounded rectangle and is null by [L3]; a finite union remains null. [L2, L3, step 1.1]
 
 3.1 The boundary criterion in [L3] now makes $K$ Jordan measurable. Subdividing the finitely many rectangles by their common coordinate endpoints expresses the same set as a finite union of closed cells from one grid. [L3, step 2.1] ∎
-

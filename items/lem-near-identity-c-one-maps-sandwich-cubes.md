@@ -5,7 +5,7 @@ title: "A $C^1$ map uniformly close to the identity derivative sandwiches a cube
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [def-c-one-map-and-local-inverse, thm-mean-value-inequality-for-total-derivatives, thm-banach-fixed-point, thm-euclidean-space-complete, thm-complete-subspace-iff-closed, def-metric-ball, lem-p-norms-are-norms-and-induce-the-published-metrics]
 justified_by: []

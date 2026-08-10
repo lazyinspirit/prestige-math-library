@@ -46,10 +46,10 @@ There is a $3/4$-Hölder function $f:[0,1]\to\mathbb R$ of unbounded variation f
 
 **Proof technique:** construction.
 
-1.1 By [L1], $0<S<\infty$ and $\sum_nw_n=1$, so the intervals tile $(0,1]$. On one tent, the linear slope estimate and [L2] give $|f(x)-f(y)|\le2|x-y|^{3/4}$. If $x,y$ lie in different tents, insert a zero-valued endpoint $z$ between them and apply the same bound on both sides; the rational-power laws give $|f(x)-f(y)|\le C|x-y|^{3/4}$ for an absolute $C$. The same estimate at zero proves continuity there. Thus $f$ is $3/4$-Hölder.
+1.1 By [L1], $0<S<\infty$ and $\sum_nw_n=1$, so the intervals tile $(0,1]$. On one tent, the linear slope estimate and [L2] give $|f(x)-f(y)|\le2|x-y|^{3/4}$. If $x,y$ lie in different tents, insert a zero-valued endpoint $z$ between them and apply the same bound on both sides; the rational-power laws give $|f(x)-f(y)|\le C|x-y|^{3/4}$ for an absolute $C$. The same estimate at zero proves continuity there. Thus $f$ is $3/4$-Hölder. [L1, L2]
 
-1.2 A partition through the endpoints and peaks of the first $N$ tents has variation at least
+1.2 A partition through the endpoints and peaks of the first $N$ tents has variation at least [given]
 $$2\sum_{n=1}^N w_n^{3/4}=2S^{-3/4}\sum_{n=1}^N\frac1n.$$
 This is unbounded by [L1], so $f$ is not BV.
 
-2.1 Since $3/4+3/4>1$, [L3] nonetheless gives existence of $\int_0^1 f\,df$. This is genuinely outside the BV existence theorem. ∎
+2.1 Since $3/4+3/4>1$, [L3] nonetheless gives existence of $\int_0^1 f\,df$. This is genuinely outside the BV existence theorem. [L3] ∎

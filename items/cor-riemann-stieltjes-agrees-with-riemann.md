@@ -48,6 +48,6 @@ The equality also holds for $a=b$ and for reversed endpoints under the oriented 
 
 **Proof technique:** direct.
 
-1.1 When $a<b$ and $\alpha=\operatorname{id}$, every increment $\alpha(t_{i+1})-\alpha(t_i)$ equals $t_{i+1}-t_i$. Thus [L1] and [L2] are termwise identical for every tagged partition.
+1.1 When $a<b$ and $\alpha=\operatorname{id}$, every increment $\alpha(t_{i+1})-\alpha(t_i)$ equals $t_{i+1}-t_i$. Thus [L1] and [L2] are termwise identical for every tagged partition. [L1, L2]
 
 2.1 Consequently the two mesh limits exist simultaneously and have the same value; [L3] identifies that tagged limit with the Darboux integral. For $a=b$ both conventions give zero, and [L4] handles $a>b$. [step 1.1, L3, L4] ∎

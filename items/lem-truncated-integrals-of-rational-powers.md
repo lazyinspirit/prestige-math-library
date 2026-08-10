@@ -50,4 +50,4 @@ $$\int_1^{2^N}\frac{dx}{x}\ge\frac N2,qquad
 
 1.1 Write $p=m/q$ with positive integers $m,q$. Substituting $x=t^q$ on the positive interval and using [L1]–[L3] reduces the integrand to $q,t^{q-m-1}$. The integer-power rule gives primitive $q,t^{q-m}/(q-m)$ when $m\ne q$. Substituting $t=x^{1/q}$ back gives $x^{1-p}/(1-p)$. The FTC proves the displayed formula. [L1, L2, L3]
 
-2.1 On $[2^k,2^{k+1}]$, $1/x\ge2^{-(k+1)}$, so its integral is at least $1/2$. Adding the first $N$ dyadic blocks proves the first lower bound. The intervals $[2^{-(k+1)},2^{-k}]$ give the second in the same way. ∎
+2.1 On $[2^k,2^{k+1}]$, $1/x\ge2^{-(k+1)}$, so its integral is at least $1/2$. Adding the first $N$ dyadic blocks proves the first lower bound. The intervals $[2^{-(k+1)},2^{-k}]$ give the second in the same way. [given] ∎

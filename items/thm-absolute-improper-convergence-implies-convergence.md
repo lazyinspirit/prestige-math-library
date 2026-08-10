@@ -46,8 +46,8 @@ For a mixed interval the same conclusion applies separately to each singular-end
 
 **Proof technique:** direct.
 
-1.1 By the Cauchy criterion [L2], remote tail integrals of $|f|$ are arbitrarily small. The proper inequality [L1] makes the corresponding tail integrals of $f$ no larger in absolute value. A second application of [L2] proves convergence of $\int f$.
+1.1 By the Cauchy criterion [L2], remote tail integrals of $|f|$ are arbitrarily small. The proper inequality [L1] makes the corresponding tail integrals of $f$ no larger in absolute value. A second application of [L2] proves convergence of $\int f$. [L2, L1]
 
-1.2 Apply [L1] on compact truncations and pass to their finite limits using [L3] to obtain the displayed inequality.
+1.2 Apply [L1] on compact truncations and pass to their finite limits using [L3] to obtain the displayed inequality. [L1, L3]
 
-2.1 For a mixed integral, absolute convergence is required on every piece. Steps 1.1–1.2 apply piecewise, and finite addition completes the claim. ∎
+2.1 For a mixed integral, absolute convergence is required on every piece. Steps 1.1–1.2 apply piecewise, and finite addition completes the claim. [given] ∎

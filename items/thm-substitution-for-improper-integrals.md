@@ -49,10 +49,10 @@ converge simultaneously and, when convergent, are equal. At several singular end
 
 **Proof technique:** direct.
 
-1.1 On each compact source truncation $[u,v]\subset I$, [L1] gives
+1.1 On each compact source truncation $[u,v]\subset I$, [L1] gives [L1]
 $$\int_{\phi([u,v])}f=\int_u^v(f\circ\phi)|\phi'|,$$
 with the endpoint order adjusted when $\phi$ decreases.
 
 1.2 By [L2], the two sides form the same net of values as the corresponding truncation approaches a singular end. Thus one has a finite limit exactly when the other does, and the limits are equal. [step 1.1, L2, L3]
 
-2.1 For multiple ends, apply step 1.2 separately at each matched end and add only after all pieces converge, as [L4] requires. The oriented convention supplies the sign for a decreasing parametrization. ∎
+2.1 For multiple ends, apply step 1.2 separately at each matched end and add only after all pieces converge, as [L4] requires. The oriented convention supplies the sign for a decreasing parametrization. [L4, step 1.2] ∎

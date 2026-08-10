@@ -5,8 +5,8 @@ title: "A coordinate shear preserves Jordan content by translating every section
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [cor-cavalieri-principle-for-jordan-content, thm-linear-images-scale-jordan-content-by-absolute-determinant]
 justified_by: []
 aliases: []
@@ -45,4 +45,3 @@ preserves the Jordan content of every bounded Jordan set.
 2.1 Integrating these equal sectional contents with [L1] gives $\operatorname{cont}(S(E))=\operatorname{cont}(E)$. [L1, step 1.1]
 
 3.1 The shear matrix is the identity with one off-diagonal entry $c$ and has determinant $1$. Thus [L2] independently gives the same factor $|1|=1$. [L2, step 2.1] ∎
-

@@ -47,8 +47,8 @@ At a finite right singular endpoint $b$, replace the condition by $b-\delta<u<v<
 
 **Proof technique:** direct.
 
-1.1 Put $F(R)=\int_a^R f$. If $F(R)$ has a finite limit as $R\to\infty$, then $|F(v)-F(u)|<\varepsilon$ for all sufficiently large $u,v$. By [L1], this difference is $\int_u^v f$, proving necessity.
+1.1 Put $F(R)=\int_a^R f$. If $F(R)$ has a finite limit as $R\to\infty$, then $|F(v)-F(u)|<\varepsilon$ for all sufficiently large $u,v$. By [L1], this difference is $\int_u^v f$, proving necessity. [L1]
 
 1.2 Conversely, the tail condition and [L3] make the sequence $F(n)$ Cauchy, hence convergent to some $L$ by [L2]. Given $\varepsilon>0$, choose a large integer $n$ for which $|F(n)-L|<\varepsilon/2$ and the tail condition is below $\varepsilon/2$. For every real $R\ge n$, [L1] gives $F(R)-L=(F(R)-F(n))+(F(n)-L)$, so $F(R)\to L$. [L1, L2, L3]
 
-2.1 For a finite endpoint use the reciprocal sequence $a+1/n$ or $b-1/n$ furnished by [L3]; the identical Cauchy argument applies. Reversing the real line gives the $-\infty$ form. ∎
+2.1 For a finite endpoint use the reciprocal sequence $a+1/n$ or $b-1/n$ furnished by [L3]; the identical Cauchy argument applies. Reversing the real line gives the $-\infty$ form. [L3] ∎

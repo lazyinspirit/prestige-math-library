@@ -48,6 +48,6 @@ The same assertions hold separately at $+\infty$, at $-\infty$, and at either fi
 
 **Proof technique:** direct.
 
-1.1 Discard the finite portion before the eventual inequality using [L4]. On every remaining compact truncation, [L1] gives $0\le\int f\le\int g$. Convergence of $\int g$ bounds the latter truncations, so [L2] gives convergence of $\int f$.
+1.1 Discard the finite portion before the eventual inequality using [L4]. On every remaining compact truncation, [L1] gives $0\le\int f\le\int g$. Convergence of $\int g$ bounds the latter truncations, so [L2] gives convergence of $\int f$. [L4, L1, L2]
 
-2.1 If $|f|\le g$, step 1.1 applied to $|f|$ proves absolute convergence; [L3] then proves convergence of $f$. The argument depends only on the direction of truncation and therefore proves every endpoint form. ∎
+2.1 If $|f|\le g$, step 1.1 applied to $|f|$ proves absolute convergence; [L3] then proves convergence of $f$. The argument depends only on the direction of truncation and therefore proves every endpoint form. [L3, step 1.1] ∎

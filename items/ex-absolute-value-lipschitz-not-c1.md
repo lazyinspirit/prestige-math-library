@@ -41,6 +41,6 @@ The absolute-value function separates two implications in the hierarchy: it is L
 
 **Proof technique:** direct.
 
-1.1 By [L1], $f$ is $1$-Lipschitz, and [L2] makes it absolutely continuous.
+1.1 By [L1], $f$ is $1$-Lipschitz, and [L2] makes it absolutely continuous. [L1, L2]
 
 2.1 At zero, $(|h|-|0|)/h$ equals $1$ for $h>0$ and $-1$ for $h<0$. The two one-sided limits differ, so [L3] shows that $f'(0)$ does not exist. Therefore $f$ is not $C^1$ on $[-1,1]$. [L3] ∎

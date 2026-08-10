@@ -47,10 +47,10 @@ Then $f$ is continuous on $[0,1]$ but has unbounded variation.
 
 **Proof technique:** construction.
 
-1.1 By [L1] and the algebra of limits, $f$ is continuous for $x>0$. By [L2], $|f(x)|\le x/2$, so $f(x)\to0=f(0)$ as $x\downarrow0$. Hence $f$ is continuous on $[0,1]$.
+1.1 By [L1] and the algebra of limits, $f$ is continuous for $x>0$. By [L2], $|f(x)|\le x/2$, so $f(x)\to0=f(0)$ as $x\downarrow0$. Hence $f$ is continuous on $[0,1]$. [L1, L2]
 
-1.2 For every integer $n\ge1$, $f(1/n)=0$, while
+1.2 For every integer $n\ge1$, $f(1/n)=0$, while [given]
 $$f\left(\frac1{n+1/2}\right)=\frac1{2n+1}.$$
 The ordered partition containing these alternating zeros and peaks for $1\le n\le N$ therefore has variation sum at least $2\sum_{n=1}^N(2n+1)^{-1}$, apart from at most one endpoint term. [L2]
 
-2.1 Since $(2n+1)^{-1}\ge(3n)^{-1}$ and the harmonic partial sums are unbounded by [L3], the variation sums in step 1.2 are unbounded. Thus the continuous function $f$ is not BV. ∎
+2.1 Since $(2n+1)^{-1}\ge(3n)^{-1}$ and the harmonic partial sums are unbounded by [L3], the variation sums in step 1.2 are unbounded. Thus the continuous function $f$ is not BV. [L3, step 1.2] ∎

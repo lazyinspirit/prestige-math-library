@@ -42,8 +42,8 @@ $$\int_0^1\frac{dx}{\sqrt{x}}=2.$$
 
 **Proof technique:** computation.
 
-1.1 Since $1/2<1$, convergence follows from [L1]. For $0<c<1$, [L2] gives
+1.1 Since $1/2<1$, convergence follows from [L1]. For $0<c<1$, [L2] gives [L1, L2]
 $$\int_c^1x^{-1/2}dx=2(1-\sqrt c).$$
 As $c\downarrow0$, $\sqrt c\to0$, so the limit is two.
 
-2.1 This is not a proper Riemann integral on $[0,1]$: the displayed integrand is unbounded at zero, whereas every properly Riemann-integrable function is bounded. ∎
+2.1 This is not a proper Riemann integral on $[0,1]$: the displayed integrand is unbounded at zero, whereas every properly Riemann-integrable function is bounded. [given] ∎

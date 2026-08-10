@@ -5,7 +5,7 @@ title: "Change of variables on bounded open Jordan sets when both integrands are
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [lem-bounded-open-jordan-sets-have-compact-grid-exhaustions, thm-change-of-variables-for-compact-jordan-sets, thm-multidimensional-integral-properties]
 justified_by: []

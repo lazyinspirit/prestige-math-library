@@ -5,7 +5,7 @@ title: "An injective $C^1$ map with invertible derivative sends compact Jordan s
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [def-c-one-map-and-local-inverse, def-invertible-euclidean-linear-map, thm-euclidean-inverse-function-theorem, thm-continuous-image-of-a-compact-space-is-compact, thm-mean-value-inequality-for-total-derivatives, thm-lipschitz-images-of-null-sets-in-rn-are-null, thm-jordan-boundary-criterion]
 justified_by: []

@@ -45,7 +45,7 @@ More precisely, if $E\subseteq[a,b]$ is at most countable and $f$ is continuous 
 
 **Proof technique:** direct.
 
-1.1 By [L1], each $x\in(a,b)$ has a left neighborhood and a right neighborhood on each of which the values of $f$ differ by less than $\varepsilon$; use the corresponding one-sided neighborhood at an endpoint. Shrinking them if necessary gives an open cover of $[a,b]$. A finite subcover exists by [L2].
+1.1 By [L1], each $x\in(a,b)$ has a left neighborhood and a right neighborhood on each of which the values of $f$ differ by less than $\varepsilon$; use the corresponding one-sided neighborhood at an endpoint. Shrinking them if necessary gives an open cover of $[a,b]$. A finite subcover exists by [L2]. [L1, L2]
 
 1.2 Order all endpoints of the finitely many chosen neighborhoods and refine them to a partition $P$. On each open component between consecutive partition points, one of the chosen one-sided neighborhoods contains the component, so the oscillation of $f$ there is less than $2\varepsilon$. Sampling $f$ on every component and assigning the actual endpoint values gives a step function within $2\varepsilon$ uniformly. Starting with $\varepsilon/2$ proves the first assertion. [step 1.1]
 

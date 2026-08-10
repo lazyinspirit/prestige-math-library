@@ -5,7 +5,7 @@ title: "The hyperspherical-coordinate Jacobian is the standard product of a radi
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [def-jacobian-determinant-of-a-c-one-map, thm-determinant-multiplicative, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-induction-principle, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-cosine-zero-sets-and-fundamental-period]
 justified_by: []

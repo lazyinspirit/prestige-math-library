@@ -5,8 +5,8 @@ title: "Finite Jordan covers bound upper integrals, while interior-disjoint Jord
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-riemann-integral-over-a-jordan-set, thm-multidimensional-integral-properties, cor-jordan-content-finite-additivity]
 justified_by: []
 aliases: []

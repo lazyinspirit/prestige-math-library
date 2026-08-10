@@ -43,6 +43,6 @@ Equivalently, for every $\varepsilon>0$ all sufficiently remote proper tails $\i
 
 **Proof technique:** direct.
 
-1.1 Write $I=\int_a^\infty f$. By [L1], $\int_R^\infty f=I-\int_a^R f$, which tends to zero by the definition of $I$.
+1.1 Write $I=\int_a^\infty f$. By [L1], $\int_R^\infty f=I-\int_a^R f$, which tends to zero by the definition of $I$. [L1]
 
-2.1 The epsilon formulation is exactly [L2]. Reversing orientation or replacing infinite truncations by one-sided finite truncations proves all other stated forms. ∎
+2.1 The epsilon formulation is exactly [L2]. Reversing orientation or replacing infinite truncations by one-sided finite truncations proves all other stated forms. [L2] ∎

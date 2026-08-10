@@ -5,7 +5,7 @@ title: "A compactly supported Riemann integrand admits the global change-of-vari
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [thm-change-of-variables-for-compact-jordan-sets, thm-injective-c-one-images-of-compact-jordan-sets-are-jordan, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-support-and-compactly-supported-riemann-integral-in-rn, lem-compactly-supported-riemann-integral-is-well-defined]
 justified_by: []

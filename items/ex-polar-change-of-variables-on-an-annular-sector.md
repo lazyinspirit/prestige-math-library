@@ -5,8 +5,8 @@ title: "Polar change of variables on a compact annular sector gives the Jacobian
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-change-of-variables-for-compact-jordan-sets, def-jacobian-determinant-of-a-c-one-map, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-ftc-second-part, lem-derivative-of-a-power, thm-sine-cosine-signs-monotonicity-and-ranges]
 justified_by: []
 aliases: []

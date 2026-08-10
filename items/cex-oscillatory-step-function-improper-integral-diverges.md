@@ -43,8 +43,8 @@ Define $f(x)=(-1)^k$ on $[k,k+1)$ for every nonnegative integer $k$. Its truncat
 
 **Proof technique:** counterexample.
 
-1.1 For a positive integer $N$, additivity gives
+1.1 For a positive integer $N$, additivity gives [given]
 $$\int_0^Nf=\sum_{k=0}^{N-1}(-1)^k,$$
 which equals one for odd $N$ and zero for even $N$. Thus the integer truncations are bounded but have no limit.
 
-2.1 An improper limit would restrict to the same limit along all integer truncations, contradicting step 1.1. The example changes sign, so it does not satisfy the nonnegativity hypothesis in [L3] and shows that hypothesis cannot be deleted. ∎
+2.1 An improper limit would restrict to the same limit along all integer truncations, contradicting step 1.1. The example changes sign, so it does not satisfy the nonnegativity hypothesis in [L3] and shows that hypothesis cannot be deleted. [L3, step 1.1] ∎

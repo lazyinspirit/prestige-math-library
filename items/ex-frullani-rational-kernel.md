@@ -44,8 +44,8 @@ $$\int_0^\infty
 
 **Proof technique:** computation.
 
-1.1 Here $f$ is continuous, $f(0)=1$, and $f(t)\to0$. Thus [L1] gives exactly the displayed identity.
+1.1 Here $f$ is continuous, $f(0)=1$, and $f(t)\to0$. Thus [L1] gives exactly the displayed identity. [L1]
 
-1.2 For $x>0$, the integrand simplifies to
+1.2 For $x>0$, the integrand simplifies to [given]
 $$\frac{b-a}{(1+ax)(1+bx)}.$$
 It has finite limit $b-a$ at zero and is bounded in absolute value by a constant multiple of $x^{-2}$ for $x\ge1$. This independently confirms local convergence at zero and tail convergence by [L2], without replacing the proper factor by a logarithm. ∎

@@ -49,7 +49,7 @@ Moreover, inserting or deleting finitely many partition points whose surrounding
 
 **Proof technique:** direct.
 
-1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is
+1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is [given]
 $(f(v)-f(u))(g(w)-g(v))$ up to sign. Its absolute value is at most $K_fK_g(v-u)^p(w-v)^q$, hence at most $K_fK_g(w-u)^{p+q}$ by [L1].
 
 1.2 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing the estimate of step 1.1 gives the first displayed bound. Since $2^{-(p+q-1)}\in(0,1)$, [L2] makes the successive-refinement errors summable. [step 1.1, L1, L2, L3]

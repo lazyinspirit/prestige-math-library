@@ -5,8 +5,8 @@ title: "On a small cube, a $C^1$ diffeomorphism distorts Jordan content by facto
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [def-jacobian-determinant-of-a-c-one-map, thm-linear-images-scale-jordan-content-by-absolute-determinant, lem-near-identity-c-one-maps-sandwich-cubes, def-jordan-inner-and-outer-content]
 justified_by: []
 aliases: []

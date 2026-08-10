@@ -5,8 +5,8 @@ title: "The content of a compact Jordan image is the integral of the absolute Ja
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-change-of-variables-for-compact-jordan-sets, thm-jordan-content-and-indicator-integrability]
 justified_by: []
 aliases: []

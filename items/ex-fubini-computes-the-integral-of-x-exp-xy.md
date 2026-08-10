@@ -5,8 +5,8 @@ title: 'Fubini computes $\int_0^1\int_{-1}^1 x\exp(xy)\,dx\,dy$ by reversing the
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [cor-repeated-riemann-integrals-on-rectangles, thm-derivative-of-exponential, thm-ftc-second-part, cor-exponential-reciprocal-and-positivity]
 justified_by: []
 aliases: []
@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "J. Lebl, Basic Analysis II, Exercise 10.5.1"
+    - title: "J. Lebl, Basic Analysis II, Exercise 10.2.1"
       url: "https://www.jirka.org/ra/realanal2.pdf"
 pipeline_run: null
 ---

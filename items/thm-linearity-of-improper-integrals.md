@@ -44,6 +44,6 @@ The same formula holds for mixed improper integrals when every singular-end piec
 
 **Proof technique:** direct.
 
-1.1 On every compact truncation, [L1] gives $\int(rf+sg)=r\int f+s\int g$. Taking the appropriate one-sided or infinite limit and applying [L2] proves the formula on a one-ended interval.
+1.1 On every compact truncation, [L1] gives $\int(rf+sg)=r\int f+s\int g$. Taking the appropriate one-sided or infinite limit and applying [L2] proves the formula on a one-ended interval. [L1, L2]
 
-2.1 For a mixed integral, apply step 1.1 to every separately convergent piece and then add the finitely many resulting identities as required by [L3]. No assertion is made when either side would contain an indeterminate difference of divergent quantities. ∎
+2.1 For a mixed integral, apply step 1.1 to every separately convergent piece and then add the finitely many resulting identities as required by [L3]. No assertion is made when either side would contain an indeterminate difference of divergent quantities. [L3, step 1.1] ∎

@@ -5,8 +5,8 @@ title: "A Riemann-integrable Thomae-type function whose $x$-sections are noninte
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
-  proof: ai-altered
+  statement: literature-derived
+  proof: literature-derived
 deps: [thm-riemann-fubini-on-product-rectangles, def-dirichlet-and-thomae-functions, thm-multidimensional-riemann-criterion]
 justified_by: []
 aliases: []
@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "J. Lebl, Basic Analysis II, Exercise 10.5.2"
+    - title: "J. Lebl, Basic Analysis II, Exercise 10.2.9"
       url: "https://www.jirka.org/ra/realanal2.pdf"
 pipeline_run: null
 ---
@@ -47,4 +47,3 @@ Then $f$ is Riemann integrable with integral $0$, although its $x$-section is no
 2.1 At rational height $y$, $t(y)>0$ and the $x$-section is a nonzero multiple of the Dirichlet function, hence nonintegrable; at irrational height it is zero. Thus the lower and upper section integrals are $0$ and $t(y)$, whose outer integrals both vanish by [L1] and [L3]. [L1, L3, step 1.1]
 
 3.1 In the other direction, a rational $x$ gives the section $t$ and an irrational $x$ gives zero; every such section is integrable with value $0$. Hence that ordinary iterated integral is $0$, whereas the $x$-first ordinary iteration is undefined at a dense set of heights. [L1, step 2.1] ∎
-

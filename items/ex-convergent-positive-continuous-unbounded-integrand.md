@@ -46,8 +46,8 @@ $$f(x)=\frac1{(1+x)^2}+\sum_{k=1}^\infty s_k(x).$$
 
 **Proof technique:** construction.
 
-1.1 Local finiteness and matching zero endpoint values make the spike sum continuous; adding the positive continuous baseline preserves positivity and continuity. Direct differentiation gives primitive $1-1/(1+x)$ for the baseline, whose improper integral is one.
+1.1 Local finiteness and matching zero endpoint values make the spike sum continuous; adding the positive continuous baseline preserves positivity and continuity. Direct differentiation gives primitive $1-1/(1+x)$ for the baseline, whose improper integral is one. [given]
 
-1.2 By [L2], additivity, and [L3], the total integral of all spikes is $\sum_{k=1}^\infty2^{-k-2}<\infty$. Therefore the Cauchy criterion gives convergence of $\int_0^\infty f$.
+1.2 By [L2], additivity, and [L3], the total integral of all spikes is $\sum_{k=1}^\infty2^{-k-2}<\infty$. Therefore the Cauchy criterion gives convergence of $\int_0^\infty f$. [L2, L3]
 
-2.1 At every positive integer $k$, $f(k)\ge s_k(k)=k$. Integers occur arbitrarily far out, so $f$ is unbounded on every tail. ∎
+2.1 At every positive integer $k$, $f(k)\ge s_k(k)=k$. Integers occur arbitrarily far out, so $f$ is unbounded on every tail. [given] ∎

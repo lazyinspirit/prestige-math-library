@@ -6,7 +6,7 @@ status: draft
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-altered
+  proof: not-applicable
 deps: [def-c-one-map-and-local-inverse, def-jacobian-matrix-and-gradient, thm-total-derivative-computes-directional-and-partial-derivatives, def-determinant-of-a-square-matrix]
 justified_by: []
 aliases: []

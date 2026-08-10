@@ -5,7 +5,7 @@ title: "In one dimension the compact-Jordan formula is substitution over the uno
 status: draft
 origin: session
 provenance:
-  statement: ai-altered
+  statement: literature-derived
   proof: ai-altered
 deps: [thm-change-of-variables-for-compact-jordan-sets, thm-substitution, thm-continuous-injection-on-an-interval-is-strictly-monotone]
 justified_by: []

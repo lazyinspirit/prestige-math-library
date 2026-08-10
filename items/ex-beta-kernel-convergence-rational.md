@@ -47,8 +47,8 @@ $$p<1\quad\text{and}\quad p+q>1.$$
 
 **Proof technique:** cases.
 
-1.1 Near zero, divide the kernel by $x^{-p}$. The quotient $(1+x)^{-q}$ tends to one, so [L2] and [L3] give convergence at zero exactly when $p<1$.
+1.1 Near zero, divide the kernel by $x^{-p}$. The quotient $(1+x)^{-q}$ tends to one, so [L2] and [L3] give convergence at zero exactly when $p<1$. [L2, L3]
 
-1.2 At infinity, divide by $x^{-(p+q)}$. By [L1], the quotient is $(x/(1+x))^q$, which tends to one. Thus [L2] and [L3] give convergence at infinity exactly when $p+q>1$.
+1.2 At infinity, divide by $x^{-(p+q)}$. By [L1], the quotient is $(x/(1+x))^q$, which tends to one. Thus [L2] and [L3] give convergence at infinity exactly when $p+q>1$. [L1, L2, L3]
 
-2.1 The mixed definition requires both ends separately, so the full integral converges exactly under the two simultaneous inequalities. Positive bases ensure every rational power used above is defined, regardless of the signs of $p$ and $q$. ∎
+2.1 The mixed definition requires both ends separately, so the full integral converges exactly under the two simultaneous inequalities. Positive bases ensure every rational power used above is defined, regardless of the signs of $p$ and $q$. [given] ∎

@@ -44,6 +44,6 @@ $$\int_a^b f\,d\alpha=\sum_{j=1}^m w_jf(c_j).$$
 
 **Proof technique:** computation.
 
-1.1 The constant term has every increment equal to zero. By [L1], each $H_{c_j}$ contributes $f(c_j)$, and finite linearity [L2] gives the displayed sum.
+1.1 The constant term has every increment equal to zero. By [L1], each $H_{c_j}$ contributes $f(c_j)$, and finite linearity [L2] gives the displayed sum. [L1, L2]
 
-2.1 Ordering the distinct jump points prevents double counting. A jump at an endpoint is included exactly when it is encoded by the one-sided convention in [L1]; a constant endpoint assignment has increment zero. ∎
+2.1 Ordering the distinct jump points prevents double counting. A jump at an endpoint is included exactly when it is encoded by the one-sided convention in [L1]; a constant endpoint assignment has increment zero. [L1] ∎

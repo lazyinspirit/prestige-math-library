@@ -5,10 +5,8 @@ title: "One existing iterated integral does not imply multiple Riemann integrabi
 status: draft
 origin: session
 provenance:
-  statement: ai-generated
-  proof: ai-generated
-generation:
-  role: counterexample
+  statement: literature-derived
+  proof: ai-altered
 deps: [thm-riemann-fubini-on-product-rectangles, def-dirichlet-and-thomae-functions]
 justified_by: []
 aliases: []
@@ -18,7 +16,9 @@ verification:
   precheck: pass
 sources:
   scraped: []
-  references: []
+  references:
+    - title: "J. Lebl, Basic Analysis II, Exercise 10.2.8"
+      url: "https://www.jirka.org/ra/realanal2.pdf"
 pipeline_run: null
 ---
 
