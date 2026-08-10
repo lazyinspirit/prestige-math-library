@@ -367,6 +367,30 @@ const started = new Date();
 const release = await pool.acquire(role);
 
 let temporaryHome = null;
+let codexAuthPaths = null;
+
+// Copy a rotated auth record back to the canonical CODEX_HOME before the
+// temporary home is destroyed. Only writes when the bytes actually changed, so
+// an unrotated run leaves the canonical file untouched.
+//
+// Concurrency caveat, stated rather than hidden: a single-use refresh token and
+// N parallel agents are fundamentally in tension — if two agents rotate, the
+// later writer wins and the earlier agent's rotated token is retired. That is
+// still strictly better than the previous behaviour, where EVERY rotation was
+// discarded and the canonical file was guaranteed to go stale. Betas run at
+// cap 5, so if this proves lossy the fix is to refresh once before fan-out
+// rather than to drop the copy-back.
+const persistRotatedCodexAuth = () => {
+  if (!codexAuthPaths) return;
+  const { source, temporary } = codexAuthPaths;
+  try {
+    if (!existsSync(temporary)) return;
+    const after = readFileSync(temporary);
+    if (existsSync(source) && readFileSync(source).equals(after)) return;
+    writeFileSync(source, after);
+    chmodSync(source, 0o600);
+  } catch { /* best-effort: never fail a completed run over bookkeeping */ }
+};
 const result = spec.runner === 'deepseek'
   ? await (async () => {
     const outcome = await runDeepSeek(prompt, timeoutSec * 1000);
@@ -379,8 +403,22 @@ const result = spec.runner === 'deepseek'
     // Give each agent a 0700 temporary home containing only its auth record, so
     // parallel agents cannot race on Codex's own state and a killed one leaves
     // nothing behind. The token never enters a prompt, log, or argument.
+    //
+    // THE ROTATION MUST BE PERSISTED BACK (2026-08-10, learned the hard way).
+    // ChatGPT-subscription auth is OAuth with a SINGLE-USE refresh token: when
+    // Codex refreshes, the old refresh token is consumed and a new one is
+    // written to auth.json in its CODEX_HOME. That home is this temporary
+    // directory, which is deleted at the end of the run — so the rotated token
+    // was destroyed while the canonical copy kept a refresh token the server had
+    // already retired. The next dispatch then failed with
+    // `refresh_token_reused`, 401, and so did every subsequent codex call
+    // including plain `codex exec`: one long run silently bricked the whole
+    // lane. `codex login status` does NOT catch this — it reads the file
+    // without validating it, and keeps reporting "Logged in using ChatGPT".
+    // Copying the record back on exit keeps the canonical file in step.
     temporaryHome = mkdtempSync(`/tmp/prestige-dispatch-${role}-`);
     const sourceAuth = join(codexHome, 'auth.json');
+    codexAuthPaths = { source: sourceAuth, temporary: join(temporaryHome, 'auth.json') };
     if (existsSync(sourceAuth)) {
       copyFileSync(sourceAuth, join(temporaryHome, 'auth.json'));
       chmodSync(join(temporaryHome, 'auth.json'), 0o600);
@@ -418,6 +456,7 @@ const result = spec.runner === 'deepseek'
 });
 
 release();
+persistRotatedCodexAuth();
 if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true }); } catch { /* best-effort */ } }
 
 const ended = new Date();

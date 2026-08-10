@@ -109,9 +109,21 @@ const needClaude = judgeNeedsClaude;
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
   'install the Codex CLI — build authoring/Beta/Alpha and the Terra judge lane spawn it');
+// PRESENCE IS NOT VALIDITY (2026-08-10, learned the hard way). This checks that
+// an auth record exists; it cannot tell a live token from a retired one, and
+// neither can `codex login status`, which reads the file and keeps reporting
+// "Logged in using ChatGPT" against a refresh token the server has already
+// retired. That false green cost a build: a long Beta rotated the single-use
+// refresh token inside its throwaway CODEX_HOME, the rotation was discarded
+// with the temp directory, and every later codex call died on
+// `refresh_token_reused`. `dispatch.mjs` now persists the rotation back; the
+// label here is downgraded so nobody reads this line as proof the lane works.
+// `--judges` spends one minimal real call and IS proof.
 record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass' : 'fail',
-  existsSync(join(codexHome, 'auth.json')) ? `${join(codexHome, 'auth.json')}` : `no auth.json under ${codexHome}`,
-  'run the Codex login flow; an expired token takes out every Sol lane at once');
+  existsSync(join(codexHome, 'auth.json'))
+    ? `${join(codexHome, 'auth.json')} present (NOT validated — pass --judges to spend a real call)`
+    : `no auth.json under ${codexHome}`,
+  'run the Codex login flow; an expired or already-rotated token takes out every Sol lane at once');
 
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
   needClaude
