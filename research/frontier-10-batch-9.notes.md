@@ -611,7 +611,7 @@ match, which is the expected no-collision result. A separate structural check
 found 67 unique ids, no duplicate, no missing dependency and no same-page
 forward dependency.
 
-Direct gates:
+Original Step-2 direct gates:
 
 - node tools/validate-plan.mjs research/plan-spec.json — PASS;
 - node tools/depsource.mjs research/plan-spec.json — PASS, 16,688 published
@@ -629,3 +629,42 @@ wrapper has no in-process execution mode. Under the owner's no-permission-prompt
 rule I did not request escalation or edit the gate. This is an environmental
 wrapper blocker, not a gate finding, but it is still an unmet requested command
 and must be reported plainly.
+
+## 11. Step-3 batch-5 determinant-interface repair closeout
+
+The two requested ids have no occurrence in `items/` or `plan-spec.json`. The
+only manifest occurrences are their batch-9 definitions and batch-5 consumer
+edges, so ownership is unambiguous and no duplicate id was minted.
+
+The updated proof-contract file has exactly the 54 proof-bearing manifest ids,
+54 contract objects, no missing or extra scope entry and no duplicate. Each new
+contract maps every direct dependency and carries all eight required boundary
+dispositions. The determinant A page is now 24 items and the whole batch is 67;
+no split is proposed.
+
+Final repair gate record:
+
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed
+  research/frontier-10-rehomed.json`: **PASS** — declared order acyclic and no
+  item-level cycle, forward reference, B-page dependency or unresolved id in
+  the currently spliced lists.
+- `node tools/coverage-checklist.mjs
+  research/frontier-10-batch-9.coverage.json`: **PASS** — 2 pages, 126
+  harvested headings, 0 errors and 0 warnings.
+- The exact isolated command `node tools/content-policy.mjs
+  research/frontier-10-batch-9.pages.json --manifest-only --rehomed
+  research/frontier-10-rehomed.json`: **EXPECTED CROSS-BATCH BLOCKER** — 26
+  `batch-dependency-missing` errors and 0 warnings. Twenty-four are the existing
+  batch-1 sign/matrix interfaces that an isolated batch-9 manifest cannot see;
+  the other two are the new, intentional batch-3 polynomial definition and
+  evaluation interfaces. None concerns either new batch-5 consumer edge.
+- Whole-run cross-batch diagnostic `node tools/content-policy.mjs
+  research/frontier-10-batch-*.pages.json --manifest-only --rehomed
+  research/frontier-10-rehomed.json`: **PASS** — 579 scoped items, 0 errors and
+  0 warnings. This is the check that sees both provider and consumer manifests,
+  and it confirms that the two batch-5 dangling edges are closed.
+
+No wrapper gate was run in this repair round, as directed. The isolated
+content-policy command cannot be green until Step 4 authors or splices its
+other-batch dependencies; deleting those valid dependencies merely to silence
+the isolated invocation would break the scaffold's logical closure.

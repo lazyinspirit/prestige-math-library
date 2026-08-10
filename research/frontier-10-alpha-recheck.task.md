@@ -23,7 +23,14 @@ is a fine outcome; record it as such.
 
 **2. Review batch 9 for breadth and depth**, which you have not seen. Same six
 questions as before. `gaussian-elimination-and-row-reduction` (A 29, B 8) and
-`determinants-of-matrices-over-a-commutative-ring` (A 20, B 6). It was spliced in
+`determinants-of-matrices-over-a-commutative-ring` (A 24, B 6). Batch 9 was
+repaired once already: batch 5 needed
+`thm-real-square-matrix-invertible-iff-determinant-nonzero` and
+`cor-determinant-is-a-polynomial-in-the-matrix-entries`, which batch 9 had
+declined `out-of-scope`; both are now built and the dispositions flipped. Check
+the ring-versus-field boundary it chose for the invertibility statement — over a
+general commutative ring the correct form is invertible iff the determinant is a
+UNIT, and the real case batch 5 needs is the specialisation. It was spliced in
 at step 3 because Beta-5 correctly refused to scaffold change-of-variables
 against a library with no determinant —
 `research/frontier-10-step3-decisions.md` §D1. Note that determinants here are
