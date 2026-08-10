@@ -111,54 +111,59 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — step 3, second repair round
+## State — STEP 5 AUTHORING
 
-- **Steps 0, 1, 2 CLEAR.** Step 0 passes over all 9 batches: **579 scoped items,
-  0 errors**.
-- **Run is 14 A/B pairs** (12 original + batch 9's 2, spliced at step 3 per D1).
-  579 newly minted ids; 586 items in the spec after splice, the extra 7 being the
-  published items the group-actions enrichment appends to.
-- **Alpha Stage-0 review + re-check both done**, in
-  `research/frontier-10-alpha-step3-scaffold-review.md` (59 KB). First pass:
-  5 sufficient / 7 insufficient. Re-check: **7 resolved**, 3 sent back
-  (batch 8 R2; batch 9 R3, R4), 1 routed to the orchestrator (R1).
-- **F1 closed and independently verified.** Zero forward references to the
-  re-homed items anywhere in the run — checked across every batch manifest, not
-  just the ones Alpha named. Alpha additionally verified from disk that the moved
-  items have no forward wikilinks, no falsified positional prose, that the source
-  page's summary survives the move, and that no published consumer loses closure.
-- **R1 (orchestrator, done).** The re-home puts two items on
-  `rings-subrings-and-integral-domains` (46) whose own dependencies live on
-  `finite-counting-and-binomial-coefficients` (20), which that page does not
-  require — `undeclared-prereq` once applied. No batch owns the edge; it is a
-  consequence of the move. Taught to `research/frontier-10-splice.mjs`.
-- **Step 4 is scripted and dry-run clean**: `research/frontier-10-splice.mjs`,
-  `--apply` to write, backup taken automatically. Two bugs it caught before they
-  shipped: replacing rather than appending would have **deleted the 6 published
-  items** from the group-actions page, and `EXTRA_REQUIRES` silently dropped any
-  edge on a page no batch manifest contains (exactly R1's case).
-- **RUNNING**: batch 8 repair 2 (R2), batch 9 repair 2 (R3, R4).
+- **Steps 0–4 CLEAR.** Step 4 gate green: 583 scoped items, 0 errors.
+- **Step 5 running**: 9 authoring Betas, lane cap 5. Baseline draft count in
+  `items/` was **51** (pre-existing `rem-*` deferred-catalogue items) — subtract
+  it when reading the monitor's `drafts:` field.
+- 14 A/B pairs, **583 items** to author, 877 harvested source headings.
+
+### What step 4 caught that nothing earlier could
+
+Only visible once every item list existed in one graph:
+
+1. **10 `b-leaf` violations** — batches 2, 5, 8 cited *published examples* as
+   dependencies. B pages are leaves. Alpha's pass reported "0 unresolved, 0
+   forward references", both true; b-leaf is a third rule it was not checking.
+   All repaired.
+2. **A rule collision on the re-home.** §3.11a defers page edits to the
+   publishing commit, but that assumes an UNPUBLISHED destination. With both
+   endpoints published, deferring is what breaks the gate: `validate-plan`
+   resolves homes from `library/` on disk, so a staged move left 4 pages flagged
+   `undeclared-prereq`. Applied at step 4 instead; all 11 published consumers
+   verified independently (orders 203 and 213, both above 46). §3.11a now records
+   the distinction, **and that both halves must move together** — `library/`
+   page items AND `plan-spec.json` page items. Moving only the files raised 2
+   `dup-id`, which is how that was found.
+3. **Two bugs in `research/frontier-10-splice.mjs`.** Replacing rather than
+   appending would have deleted the 6 published items from the group-actions
+   page. Then appending only *unseen* ids meant a re-run carried pre-repair
+   `deps` forward — the Betas' b-leaf fixes never reached the spec and
+   `validate-plan` kept reporting edges that no longer existed. The manifest is
+   now authoritative for every id it declares, undeclared page items preserved
+   first. **Sequencing rule: splice AFTER scaffold repairs, never before.**
+
+### Alpha Stage 0 outcome
+
+First pass 5 sufficient / 7 insufficient; after two repair rounds **all 14 pairs
+`resolved` or `sufficient`**. F1 (7 forward references) closed and verified
+run-wide at zero. Two ledger corrections ride to step 6: L1 (batch 4's MIT
+syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
+`cosets-and-lagranges-theorem`).
 
 ## Exact next action
 
-Await batch 8 and batch 9 repair round 2, then **Alpha re-checks those three
-pairs only**. When all read `resolved`:
+Await the 9 authoring Betas, then `node tools/gates.mjs --step 5 --run frontier-10`
+(needs merged proof contracts first:
+`node tools/merge-proof-contracts.mjs --level frontier-10 research/frontier-10-proof-contracts.json research/frontier-10-batch-*.proof-contracts.json`).
+Then step 6: independent readers on foreign batches + Alpha Stage 2, including
+its §6b.0 harvest-faithfulness check and L1/L2.
 
-```
-node research/frontier-10-splice.mjs --apply
-node tools/gates.mjs --step 4 --run frontier-10
-```
-
-Then step 5: dispatch 9 authoring Betas on
-`research/frontier-10-brief-authoring.md`, one per batch, `--var i=<batch>`.
-
-The re-home's page-list edits — removing the two ids from
-`incidence-algebras-and-mobius-inversion`, adding them to
-`rings-subrings-and-integral-domains`, **plus R1's `requires` edge** — stay
-staged for the publishing commit per ARCHITECTURE §3.11a.
-`research/frontier-10-published-amendments.md` still does not exist and must be
-written before publish; it carries both the re-home edits and batch 8's
-enrichment additions.
+**Still owed before publish:** `research/frontier-10-published-amendments.md`
+does not exist. It must carry batch 8's enrichment additions to the two
+published group-actions pages. The re-home no longer belongs in it — that was
+applied at step 4.
 
 ## Open risks
 
