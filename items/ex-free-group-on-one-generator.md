@@ -25,8 +25,8 @@ pipeline_run: null
 
 ## Example
 
-Let $X=\{x\}$ be a one-element set. Every free group $(F,\iota)$ on $X$ is
-isomorphic to $(\mathbb Z,+)$, by the isomorphism carrying $\iota(x)$ to $1$.
+Let $X=\{x\}$ be a one-element set. Every free group $(F,i)$ on $X$ is
+isomorphic to $(\mathbb Z,+)$, by the isomorphism carrying $i(x)$ to $1$.
 
 ## Facts & Assumptions
 
@@ -36,7 +36,7 @@ isomorphic to $(\mathbb Z,+)$, by the isomorphism carrying $\iota(x)$ to $1$.
 
 [L2] If $g$ has infinite order, then for $j,k\in\mathbb Z$, $g^j=g^k$ implies $j=k$ ([[lem-order-characterisation]]).
 
-[L3] If $(F,\iota)$ and $(F',\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ with $\phi\circ\iota=\iota'$ ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
+[L3] If $(F,i)$ and $(F',i')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ with $\phi\circ i=i'$ ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
 [L4] The word-quotient group $W(X)/{\sim}$, with $x\mapsto[x]$, is a free group on $X$ ([[thm-word-quotient-model-is-free]]).
 
@@ -54,4 +54,4 @@ isomorphic to $(\mathbb Z,+)$, by the isomorphism carrying $\iota(x)$ to $1$.
 
 3.1 Since $[x]$ generates by step 2.1, [L5] makes every element of $F_{\mathrm{word}}(\{x\})$ equal to $[x]^k$ for some $k\in\mathbb Z$, and [L2] applied to the infinite-order element $[x]$ makes that exponent unique; so $\theta([x]^k):=k$ is a well-defined injection, it is surjective because $k=\theta([x]^k)$, and [L6] makes it a homomorphism. Construct $\theta:F_{\mathrm{word}}(\{x\})\to(\mathbb Z,+)$ as this isomorphism, which carries $[x]$ to $1$. [L2, L5, L6, step 2.1, construct]
 
-4.1 By [L4] the word-quotient model is a free group on $X$, so for any free group $(F,\iota)$ on $X$ the isomorphism $\phi:F\to F_{\mathrm{word}}(\{x\})$ of [L3] satisfies $\phi(\iota(x))=[x]$; then $\theta\circ\phi$ is an isomorphism $F\to(\mathbb Z,+)$ carrying $\iota(x)$ to $1$. [L3, L4, step 3.1, discharge-construct] ∎
+4.1 By [L4] the word-quotient model is a free group on $X$, so for any free group $(F,i)$ on $X$ the isomorphism $\phi:F\to F_{\mathrm{word}}(\{x\})$ of [L3] satisfies $\phi(i(x))=[x]$; then $\theta\circ\phi$ is an isomorphism $F\to(\mathbb Z,+)$ carrying $i(x)$ to $1$. [L3, L4, step 3.1, discharge-construct] ∎

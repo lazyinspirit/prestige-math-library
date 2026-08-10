@@ -26,8 +26,8 @@ pipeline_run: null
 
 ## Definition
 
-Let $F$ be a group and let $B\subseteq F$. Write $\iota:B\hookrightarrow F$
-for the inclusion. The subset $B$ is a **free basis** of $F$ if $(F,\iota)$ is
+Let $F$ be a group and let $B\subseteq F$. Write $i:B\hookrightarrow F$
+for the inclusion. The subset $B$ is a **free basis** of $F$ if $(F,i)$ is
 a free group on the set $B$ in the sense of [[def-free-group]]. Equivalently,
 for every group $G$ and every function $u:B\to G$, there is a unique group
 homomorphism $\widehat u:F\to G$ whose restriction to $B$ is $u$.

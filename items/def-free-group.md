@@ -25,11 +25,11 @@ pipeline_run: null
 ## Definition
 
 A **free group on a set $X$** is a group $F(X)$ together with a map
-$\iota:X\to F(X)$ such that, for every group $G$ and every function $u:X\to G$,
+$i:X\to F(X)$ such that, for every group $G$ and every function $u:X\to G$,
 there is a unique group homomorphism $\widehat u:F(X)\to G$ satisfying
 
-$$\widehat u\circ\iota=u.$$
+$$\widehat u\circ i=u.$$
 
 The reduced-word construction supplies such a group; the construction and its
 universal property are established in [[thm-reduced-words-form-the-free-group]].
-When no ambiguity arises, $x\in X$ is identified with its image $\iota(x)$.
+When no ambiguity arises, $x\in X$ is identified with its image $i(x)$.

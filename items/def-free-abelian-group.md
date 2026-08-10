@@ -25,9 +25,9 @@ pipeline_run: null
 ## Definition
 
 A **free abelian group on a set $X$** is an abelian group $A(X)$ together with
-a map $\iota:X\to A(X)$ such that, for every abelian group $B$ and every
+a map $i:X\to A(X)$ such that, for every abelian group $B$ and every
 function $u:X\to B$, there is a unique group homomorphism
 $\widehat u:A(X)\to B$ satisfying
 
-$$\widehat u\circ\iota=u.$$
+$$\widehat u\circ i=u.$$
 

@@ -39,7 +39,7 @@ definitions.
 
 **Given:** A set $X$, the word-quotient free group, and the reduced-word free group on $X$.
 
-[L1] If $(F,\iota)$ and $(F',\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ compatible with the two generator maps ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
+[L1] If $(F,i)$ and $(F',i')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ compatible with the two generator maps ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
 [L2] Reduced words form a group whose product is concatenation followed by free reduction, and the map sending $x\in X$ to the one-letter word $x$ has the universal property of the free group on $X$ ([[thm-reduced-words-form-the-free-group]]).
 

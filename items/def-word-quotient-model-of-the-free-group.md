@@ -43,7 +43,7 @@ The class of a word $w$ is denoted $[w]$. Define
 
 $$[w][v]:=[wv],\qquad 1:=[\varepsilon],$$
 
-and define the generator map $\iota_{\mathrm{word}}:X\to
-F_{\mathrm{word}}(X)$ by $\iota_{\mathrm{word}}(x)=[x]$. The congruence
+and define the generator map $i_{\mathrm{word}}:X\to
+F_{\mathrm{word}}(X)$ by $i_{\mathrm{word}}(x)=[x]$. The congruence
 property makes the displayed product independent of the representatives.
 

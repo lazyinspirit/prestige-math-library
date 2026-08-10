@@ -33,7 +33,7 @@ Every free group on the empty set is trivial: it has exactly one element.
 
 [L1] Every class in $W(X)/{\sim}$ contains exactly one reduced word ([[thm-normal-form-for-the-word-quotient-model]]).
 
-[L2] If $(F,\iota)$ and $(F',\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ with $\phi\circ\iota=\iota'$ ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
+[L2] If $(F,i)$ and $(F',i')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ with $\phi\circ i=i'$ ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
 [L3] The word-quotient group $W(X)/{\sim}$, with $x\mapsto[x]$, is a free group on $X$ ([[thm-word-quotient-model-is-free]]).
 

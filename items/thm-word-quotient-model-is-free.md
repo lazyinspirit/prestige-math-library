@@ -28,7 +28,7 @@ pipeline_run: null
 ## Statement
 
 For every set $X$, the group $F_{\mathrm{word}}(X)=W(X)/{\sim}$ together with
-$\iota_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
+$i_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
 [[def-free-group]].
 
 ## Facts & Assumptions
@@ -57,4 +57,4 @@ $\iota_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
 
 5.1 If $h:F_{\mathrm{word}}(X)\to G$ is any homomorphism with $h([x])=u(x)$, then [F1] gives $h([x^{-1}])=h([x]^{-1})=u(x)^{-1}$. For $w=a_1\cdots a_n$, the class $[w]$ is the ordered product of its one-letter classes, so [F1] forces $h([w])=\widetilde u(a_1)\cdots\widetilde u(a_n)=\widehat u([w])$; hence $h=\widehat u$. [L1, F1, step 4.1]
 
-6.1 The homomorphism of step 4.1 exists for every $G$ and $u$, and step 5.1 makes it unique; by [F3], $(F_{\mathrm{word}}(X),\iota_{\mathrm{word}})$ is a free group on $X$, including when $X$ is empty. [F3, step 4.1, step 5.1, discharge-construct] ∎
+6.1 The homomorphism of step 4.1 exists for every $G$ and $u$, and step 5.1 makes it unique; by [F3], $(F_{\mathrm{word}}(X),i_{\mathrm{word}})$ is a free group on $X$, including when $X$ is empty. [F3, step 4.1, step 5.1, discharge-construct] ∎

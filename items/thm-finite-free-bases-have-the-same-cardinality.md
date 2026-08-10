@@ -36,7 +36,7 @@ $|B|=|C|$.
 
 [L1] If $A$ and $B$ are finite, then $A^B$ is finite and $|A^B|=|A|^{|B|}$ ([[thm-cardinality-of-a-set-of-functions]]).
 
-[L2] For the canonical embedding $\iota:\mathbb N\to\mathbb R$, one has $\iota(m^n)=\iota(m)^n$ for $m,n\in\mathbb N$ ([[def-nat-power]]).
+[L2] For $m,n\in\mathbb N$, the natural number $m^n$ and the real number $m^n$ agree under the canonical inclusion $\mathbb N\subseteq\mathbb R$ ([[def-nat-power]]).
 
 [L3] If $a>1$, then $a^m<a^n$ whenever $m<n$ in $\mathbb N$ ([[lem-power-monotone]]).
 
@@ -56,6 +56,6 @@ $|B|=|C|$.
 
 3.1 Applying the same restriction-extension bijection to $C$ gives $|\operatorname{Hom}(F,C_2)|=2^{|C|}$, and therefore $2^{|B|}=2^{|C|}$ as natural numbers. [step 2.1, given]
 
-4.1 If $|B|<|C|$, then [L2] and [L3], applied to the real number $\iota(2)>1$, give $\iota(2^{|B|})<\iota(2^{|C|})$, contradicting step 3.1; the case $|C|<|B|$ is symmetric, so trichotomy [L4] forces $|B|=|C|$. [L2, L3, L4, step 3.1, algebra]
+4.1 If $|B|<|C|$, then [L2] lets the equality of step 3.1 be read in $\mathbb R$, and [L3] applied to the base $2>1$ gives $2^{|B|}<2^{|C|}$, contradicting step 3.1; the case $|C|<|B|$ is symmetric, so trichotomy [L4] forces $|B|=|C|$. [L2, L3, L4, step 3.1, algebra]
 
 5.1 Thus any two finite free bases of $F$, including empty bases, have the same cardinality. [step 4.1] ∎

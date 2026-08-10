@@ -26,9 +26,9 @@ pipeline_run: null
 ## Statement
 
 The generator map
-$\iota_{\mathrm{word}}:X\to F_{\mathrm{word}}(X)$ of
+$i_{\mathrm{word}}:X\to F_{\mathrm{word}}(X)$ of
 [[thm-word-quotient-model-is-free]], given by
-$\iota_{\mathrm{word}}(x)=[x]$, is injective.
+$i_{\mathrm{word}}(x)=[x]$, is injective.
 
 ## Facts & Assumptions
 
@@ -42,5 +42,5 @@ $\iota_{\mathrm{word}}(x)=[x]$, is injective.
 
 1.1 The one-letter words $x$ and $y$ are reduced and lie in the same class, so uniqueness in [L1] gives $x=y$. [L1, given]
 
-2.1 Thus $\iota_{\mathrm{word}}(x)=\iota_{\mathrm{word}}(y)$ implies $x=y$, which is injectivity; when $X$ is empty the assertion is vacuous. [step 1.1] ∎
+2.1 Thus $i_{\mathrm{word}}(x)=i_{\mathrm{word}}(y)$ implies $x=y$, which is injectivity; when $X$ is empty the assertion is vacuous. [step 1.1] ∎
 
