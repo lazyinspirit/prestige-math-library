@@ -746,3 +746,36 @@ verdict is claimed at step 5; those remain step-6 work.
 There is no mathematical, size, source, dependency, or artifact blocker. The
 individual prescribed gate receipts are recorded in §14 after the final run;
 the aggregate `tools/gates.mjs` wrapper was deliberately not invoked.
+
+## 14. Final step-5 gate receipts
+
+All seven prescribed escalation-free commands exit zero on the final disk
+state:
+
+- `node tools/tsx-run.mjs tools/precheck.mts`: 2,675 checked, 0 failing.
+- `node tools/depcheck.mjs`: no cycles, all references resolve, and no draft
+  item is listed on a published page. Its existing corpus-wide advisory output
+  does not name a batch-8 defect.
+- `node tools/rendercheck.mjs`: 3,689 files clean under the renderer's YAML,
+  KaTeX, delimiter and wikilink checks.
+- `node tools/prosecheck.mjs`: 3,689 files, 0 errors; 583 corpus-wide heuristic
+  warnings remain advisory.
+- `node tools/content-policy.mjs research/frontier-10-batch-8.pages.json`: 47
+  scoped items, 0 errors, 0 warnings.
+- `node tools/coverage-checklist.mjs
+  research/frontier-10-batch-8.coverage.json`: 1 page, 66 harvested results, 0
+  errors, 0 warnings.
+- `node tools/proof-contract.mjs
+  research/frontier-10-batch-8.proof-contracts.json --strict`: 40/40 items, 0
+  errors, 0 warnings.
+
+The 47 item frontmatters also parse individually under the renderer's YAML
+parser; their IDs, kinds and titles exactly match `pages.json`. The staged A
+summary has exactly two nonempty paragraphs of 63 and 78 words, and the staged
+B page has no authored summary. A scoped search finds no applied canonical-
+embedding notation, no trailing whitespace, and no change to either published
+group-actions page.
+`git diff --check` is clean for the tracked batch-8 artifacts.
+
+Per the dispatch, `node tools/gates.mjs --step 5 --run frontier-10` was not run.
+There is no blocker to hand off.

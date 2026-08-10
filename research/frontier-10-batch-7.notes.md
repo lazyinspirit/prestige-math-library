@@ -460,8 +460,8 @@ delimiters in place of the manifest's source-only `\(...\)` spelling; this is a
 delimiter normalization only, with every title's words and mathematics
 unchanged.
 
-Seven authored dependency additions were necessary to make the actual proofs
-self-contained; no manifest dependency was removed:
+Eight dependency edges across seven authored items were necessary to make the
+actual proofs self-contained; no manifest dependency was removed:
 
 1. `thm-every-equivalence-can-be-made-an-adjoint-equivalence` adds the split
    equivalence criterion and reflection of isomorphisms, which are used to
@@ -538,3 +538,34 @@ repair, and no blocker internal to batch 7.
 
 Per the repair brief, `tools/gates.mjs` was not run.  No permission prompt or
 escalation was attempted.
+
+## Step-5 final gate record
+
+The earlier single-manifest integration limitation is closed: batches 1 and 9
+have now authored the matrix and determinant interfaces, so batch 7's literal
+content-policy command resolves all of its dependencies.  The required final
+commands were run exactly as dispatched on 2026-08-11:
+
+- `node tools/tsx-run.mjs tools/precheck.mts` — exit 0; 2,675 proof-bearing
+  items checked repository-wide, 0 failing.
+- `node tools/depcheck.mjs` — exit 0; no cycles, unresolved references, or draft
+  items on published pages.  Its repository legacy warnings do not name a
+  batch-7 item.
+- `node tools/rendercheck.mjs` — exit 0; 3,689 files, with frontmatter, math,
+  display layout, and wikilink rendering clean.
+- `node tools/prosecheck.mjs` — exit 0; no positional errors.  Batch 7's scoped
+  rerun also had 0 warnings across its 87 item/page files.
+- `node tools/content-policy.mjs research/frontier-10-batch-7.pages.json` —
+  exit 0; 85 items, 0 errors, 0 warnings.
+- `node tools/coverage-checklist.mjs
+  research/frontier-10-batch-7.coverage.json` — exit 0; 156 harvested rows,
+  0 errors, 0 warnings.
+- `node tools/proof-contract.mjs
+  research/frontier-10-batch-7.proof-contracts.json --strict` — exit 0;
+  60/60 contracts checked, 0 errors, 0 warnings.
+
+Supplementary checks were also green: scoped `rendercheck` on all 87 owned
+item/page files, scoped `citecheck` on all 85 items, repository-wide
+`fwdcheck`, repository-wide `extcheck`, and `git diff --check`.  As required,
+`tools/gates.mjs` was not run.  No permission prompt or escalation was
+attempted.  There is no batch-7 blocker.

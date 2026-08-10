@@ -282,7 +282,7 @@ There are 78 unique published dependency targets: 21 carry a current published-a
 6. **Exponent scope.** Trench/Hunter often state real-$p$ examples. The library presently has rational powers, so the page proves exact rational thresholds and does not smuggle in logarithms or general real powers.
 7. **Young scope.** The cited paper uses real Hölder exponents. The library states the rational-exponent specialization and proves the partition estimate needed for it.
 8. **Frullani.** The convergence identity with a proper-integral factor is proved now; identifying the factor with $log(b/a)$ waits for the canonical logarithm page.
-9. **Notation.** Natural numbers are written directly. No new artifact applies the canonical embedding symbol to a natural number.
+9. **Notation.** Natural numbers are written directly throughout the batch-authored mathematical prose. Exact proof-contract quotations can preserve applied canonical-embedding notation from cited legacy items; those quotations are source evidence, not a new use by this batch.
 
 ## 8. Step-5 authoring reconciliation
 
@@ -317,7 +317,7 @@ The per-item contract is the exhaustive worksheet. The cross-page cases most lik
 | Substitution and Frullani | Monotone substitution permits flat pieces and handles decreasing orientation; improper substitution moves singular ends explicitly; Frullani treats $a=b$ and $a>b$ by zero and orientation. |
 | Examples | The spike construction is positive, continuous, integrable, and unbounded on every tail; the alternating-step examples check arbitrary real truncations rather than only integer subsequences; rational kernels check each singular endpoint separately. |
 
-No authored artifact applies `\iota` to a natural number.
+No batch-owned item or page applies `\iota` to a natural number. Exact proof-contract quotations preserve the wording of cited legacy items where necessary.
 
 ## 10. Historical Step-2 gate record and sandbox blocker
 
