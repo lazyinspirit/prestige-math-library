@@ -336,7 +336,7 @@ No `verification.audited` or judge block was added.  No judge was run.
   changed definition has no phase proof body).
 - Scoped `rendercheck.mjs`: all 9 changed item files plus this report, 0
   errors.
-- Scoped `prosecheck.mjs --warnings`: 0 errors.  Its 5 heuristic warnings are
+- Scoped `prosecheck.mjs --warnings`: 0 errors.  Its 4 heuristic warnings are
   count phrases required by this audit report; none names an item file.
 - Batch content policy: 69 scoped items, 0 errors, 0 warnings.
 - Coverage checklist: 2 A-page checklists, 128 harvested results, 0 errors, 0
