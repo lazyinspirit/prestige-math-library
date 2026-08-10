@@ -1,7 +1,7 @@
 # frontier-10 batch 5 — Beta scaffold notes
 
 **Owner:** Beta-frontier-10-5  
-**Step:** 2 scaffold complete, subject to the determinant prerequisite blocker below  
+**Step:** 3 B5 repair complete in the batch-5 artifacts; two upstream interface requests are staged below for batch 9
 **Writable scope observed:** only the four `research/frontier-10-batch-5.*` artifacts
 
 ## Inventory and proposed page summaries
@@ -14,9 +14,8 @@ Proposed A-page summary, paragraph 1: This page proves the bounded Riemann versi
 
 Proposed A-page summary, paragraph 2: The second half builds the Riemann/Jordan change-of-variables machinery from the determinant upward: linear content scaling, local cube distortion, preservation of compact Jordan sets, and the change-of-variables theorem for compact Jordan sets, compactly supported integrands, and bounded open Jordan sets. It ends by reconciling the absolute-Jacobian formula with the library's oriented one-dimensional substitution theorem. No measure-theoretic theorem or catalogue page is used.
 
-Proposed B-page summary, paragraph 1: The companion page tests exactly where Riemann Fubini is subtle: an integrable function can have a nonintegrable section, one existing iterated integral need not imply multiple integrability, and nonintegrable sections can occur for a dense content-zero set of parameters. A worked exponential integral and a shear example show the positive computational uses.
-
-Proposed B-page summary, paragraph 2: Coordinate examples compute the Jacobians for parallelepipeds, polar, cylindrical, spherical, and hyperspherical coordinates on honest injectivity domains. Three counterexamples isolate the hypotheses of change of variables: the polar seam, the sign error caused by omitting the absolute value, and double-counting by a noninjective map.
+The B page has no proposed summary body. Its examples and counterexamples remain
+machine-composed from the manifest, as required by `SCHEMA.md`.
 
 ## Canonical-coverage harvest
 
@@ -26,6 +25,14 @@ The only decline is Jiří Lebl, Exercise 10.2.6, the singular integrand
 `(x^2-y^2)/(x^2+y^2)^2` with unequal iterated improper integrals. It is out of scope because its claimed iterated values are improper integrals at a planar singularity, whereas this page works only with bounded Riemann integrands on rectangles and Jordan sets. The result belongs to the already published `improper-integrals` topic; it is not declined for lack of a local lemma. This is the decline most likely to be challenged, and the distinction between improper and bounded Riemann integration is the defense.
 
 No heading is marked `deferred`. In particular, the determinant and compact-neighborhood prerequisites are built or made explicit rather than used as reasons to drop change of variables.
+
+The B5 repair adds no batch-5 item and removes none, so the harvest still has
+46 headings, 30 `included`, 15 `inline`, and one `out-of-scope`. The two
+upstream determinant interfaces requested below are batch-9 items rather than
+batch-5 harvest dispositions. The batch-5 results they license are already
+anchored in the receipt at Lebl Proposition 10.7.1 and Theorem 10.7.2 and at
+Leibman Theorem 5.5.2 and Theorem 5.5.7. Thus no source heading is invented or
+duplicated merely to record a cross-batch dependency repair.
 
 ## Source ledger and licensing
 
@@ -58,23 +65,86 @@ No encyclopedia entry is used as primary backing. No external fallback is planne
 7. Lebl's current §10.2 HTML corrects the old Exercise 10.2.9 order typo recorded in the errata. The scaffold follows the corrected order.
 8. Lebl's current proof of Theorem 10.7.2 contains the inverse-norm/minimum-Jacobian/Darboux-refinement corrections listed in the errata; the proof contract follows the corrected route.
 
-## Structural blocker: determinant machinery is not yet authored
+## Step-3 B5 repair: determinant interfaces
 
-The assigned `requires` list names only `the-riemann-integral-in-rn-and-jordan-content` and `inverse-and-implicit-function-theorems`. That cannot license the canonical change-of-variables theorem: there is no determinant definition or determinant theorem among those pages, and no determinant item is published on disk. The algebra prose explicitly says that “the change of variables factor is a determinant,” but the present `plan-spec.json` leaves the relevant pages empty.
+The original four-interface blocker has been resolved on disk. I opened
+`research/frontier-10-batch-9.pages.json` and verified these exact planned-earlier
+interfaces, titles, kinds, and homes:
 
-Step 3/4 must adjudicate and splice these two additional A-page prerequisites, both earlier than order 237:
+- `def-determinant-of-a-square-matrix` — **definition**, “For $n\ge1$, the
+  determinant over a commutative ring by the Leibniz formula, and $|\det A|$
+  for a real matrix,” on `determinants-of-matrices-over-a-commutative-ring`.
+- `thm-determinant-under-elementary-row-operations` — **theorem**, “For every
+  square matrix, including singular ones, a row swap negates the determinant,
+  scaling a row by any scalar scales it, and row addition leaves it unchanged,”
+  on the determinant page.
+- `thm-determinant-multiplicative` — **theorem**, “For same-sized finite square
+  matrices over a commutative ring, $\det(AB)=\det(A)\det(B)$,” on the
+  determinant page.
+- `thm-invertible-matrices-factor-into-elementary-matrices` — **theorem**,
+  “Every invertible finite square real matrix is a finite product of elementary
+  matrices,” on `gaussian-elimination-and-row-reduction`.
 
-- `gaussian-elimination-and-row-reduction` (order 80)
-- `determinants-of-matrices-over-a-commutative-ring` (order 82)
+Alpha's B5 finding correctly identifies two further load-bearing clauses. They
+belong to batch 9; batch 5 does not mint them. This note is the requested
+cross-batch handoff, with collision checks returning no occurrence of either id
+in `items/`, `research/plan-spec.json`, or any current frontier-10 batch
+manifest:
 
-They must expose, with these ids or with a recorded id substitution applied consistently to this batch, the following exact interfaces before step 5 authors this page:
+1. `thm-real-square-matrix-invertible-iff-determinant-nonzero` — **theorem**,
+   title: “A finite square real matrix is invertible if and only if its
+   determinant is nonzero.” It belongs on
+   `determinants-of-matrices-over-a-commutative-ring`. The proof route is row
+   reduction: an invertible matrix reduces to the identity; a noninvertible one
+   reduces to a matrix with a zero row; the already scaffolded row-operation and
+   triangular-determinant laws preserve whether the determinant is zero. The
+   result is stated over $\mathbb R$, not over an arbitrary commutative ring,
+   where “nonzero” must be replaced by “a unit.”
+2. `cor-determinant-is-a-polynomial-in-the-matrix-entries` — **corollary**,
+   title: “For every fixed finite size at least one, the determinant of a real
+   square matrix is a polynomial in its matrix entries.” It also belongs on the
+   determinant page and follows directly from the finite Leibniz formula.
 
-- `def-determinant-of-a-square-matrix`: defines the determinant of a square matrix over a commutative ring and its absolute real value when specialized to real matrices.
-- `thm-determinant-under-elementary-row-operations`: row swap changes sign, nonzero row scaling scales the determinant by that scalar, and row addition leaves it unchanged; it must cover singular matrices.
-- `thm-determinant-multiplicative`: for square matrices of the same finite size, `det(AB)=det(A)det(B)`.
-- `thm-invertible-matrices-factor-into-elementary-matrices`: every invertible finite square real matrix is a finite product of elementary matrices.
+The second interface is deliberately algebraic. A theorem on the determinant
+page cannot cite the library's metric-continuity definition or the
+componentwise algebra of continuous maps, because `metric-spaces` and
+`rn-as-a-normed-space` follow the determinant page in the current plan. They do,
+however, precede `fubini-and-change-of-variables`. Batch 5 therefore derives
+the analytic clause exactly where it is legal: `def-c-one-map-and-local-inverse`
+makes every Jacobian-matrix entry continuous,
+`cor-determinant-is-a-polynomial-in-the-matrix-entries` supplies the finite
+polynomial expression, `thm-componentwise-limits-and-continuity` gives closure
+under finite sums, products, and absolute value, and
+`thm-continuous-functions-on-compact-jordan-sets-are-integrable` makes the
+absolute Jacobian determinant Riemann integrable on the compact Jordan set.
+This is an order-correct implementation of Alpha's “polynomial, hence
+continuous” requirement, not a disagreement with the mathematical finding.
 
-The first three belong on the determinant page; the factorization belongs on Gaussian elimination. This is not a request to defer or drop the linear and nonlinear change-of-variables results. It is the machinery the owner instructed us to build. Until those upstream items are in the spliced plan, the batch has unresolved planned dependencies and cannot honestly proceed to step 5. No existing published item was found unambiguously false.
+The sources are explicit. Margalit--Rabinoff, *Interactive Linear Algebra*,
+§4.1.2, “Invertibility Property,” states the real invertibility criterion and
+proves it by row reduction:
+<https://textbooks.math.gatech.edu/ila/1553/determinants-definitions-properties.html>.
+Massot's untagged polynomial-evaluation observation immediately after
+Definition 6.4.1 records the polynomial nature of the Leibniz expression:
+<https://www.imo.universite-paris-saclay.fr/~patrick.massot/enseignement/poly_alg/cha-algebres.html>.
+Lebl's proof of Theorem 10.7.2 explicitly uses continuity of
+$x\mapsto|\det g'(x)|$ on compact rectangles:
+<https://www.jirka.org/ra/html/sec_mvchangeofvars.html>. Batch 9 already
+harvested the first two determinant sources but currently marks the
+invertibility criterion `deferred` and the polynomial observation
+`out-of-scope`. Those dispositions must change when batch 9 adds the two
+interfaces: both results are now required by B5, and each proof closes with
+machinery already in batch 9.
+
+The batch-5 manifest now cites the real invertibility criterion from
+`thm-linear-images-scale-jordan-content-by-absolute-determinant`, and cites the
+polynomial corollary plus the two published continuity/integrability interfaces
+from `thm-change-of-variables-for-compact-jordan-sets`. The proof contracts give
+each citation an exact use. No linear or nonlinear change-of-variables result is
+dropped, no external fallback is used, and the A page remains below the
+60-item ceiling. The only remaining coordination condition is that batch 9 add
+and harvest these two requested ids before Step 4 splices the level. No existing
+published item was found unambiguously false.
 
 ## Proof and authoring obligations
 
@@ -83,11 +153,22 @@ The first three belong on the determinant page; the factorization belongs on Gau
 - Jordan Fubini must prove independence of both bounding rectangles and make empty sections contribute zero.
 - The continuous-graphs theorem must use a continuous extension to the closure, not mere continuity on an open region.
 - The determinant definition must restrict to finite `n>=1`; no canonical embedding may be written applied to a natural number. Bare basis-inclusion notation is irrelevant here.
-- The linear scaling proof must handle singular matrices separately. Factorization into elementary matrices applies only after invertibility is established.
+- The linear scaling proof must handle singular matrices separately. It must cite
+  `thm-real-square-matrix-invertible-iff-determinant-nonzero` for the equality
+  $\det A=0$ in that branch; row reduction and the thin-slab cover establish
+  zero image content. Factorization into elementary matrices applies only after
+  invertibility is established and is separately cited.
 - The near-identity cube lemma must explicitly prove the cube is a nonempty complete metric space using `thm-euclidean-space-complete` plus `thm-complete-subspace-iff-closed`; it must isolate zero radius and use a strict contraction constant below one.
 - Image Jordan measurability needs compactness, local bi-Lipschitz control, the boundary inclusion `boundary(g(K)) subset g(boundary K)`, and null preservation. Neither openness nor global Lipschitz behavior may be assumed without proof.
 - `lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set` is the reusable discharge of Lebl Exercise 10.5.6. It cites `lem-compactness-is-intrinsic` to convert the ambient open cover to the library's intrinsic compactness convention before taking a finite subcover.
-- The compact-Jordan change-of-variables theorem must prove transformed integrability, not assume it; apply the one-sided estimate to the inverse, use chain rule plus determinant multiplicativity, and treat signed functions through positive/negative parts.
+- The compact-Jordan change-of-variables theorem must first establish that
+  $x\mapsto|\det J_g(x)|$ is continuous and Riemann integrable, using the
+  polynomial determinant interface, the $C^1$ entrywise-continuity definition,
+  componentwise continuity algebra, and compact-Jordan integrability of
+  continuous functions. It must then prove transformed integrability rather
+  than assume it; apply the one-sided estimate to the inverse, use chain rule
+  plus determinant multiplicativity, and treat signed functions through
+  positive/negative parts.
 - `def-support-and-compactly-supported-riemann-integral-in-rn` defines the global notation using a nondegenerate rectangle containing the compact support, and `lem-compactly-supported-riemann-integral-is-well-defined` proves independence by passage to a common bounding rectangle. The compact-support corollary must cite both and must not silently read the global integral as an improper integral.
 - The bounded-open corollary must state hypotheses strong enough to control the exhaustion remainders (bounded integrands and the relevant integrability/derivative control). Bounded source and image alone are not a substitute for those hypotheses.
 - Coordinate formulas must restrict to seam-free compact boxes, positive radii, and (for spherical coordinates) angles away from the poles whenever the main injective theorem is invoked.
@@ -145,13 +226,25 @@ Every id below was opened from `items/<id>.md`, read on disk, and confirmed `sta
 
 ### Source-checked
 
-`cex-dirichlet-is-not-riemann-integrable`, `cor-exponential-reciprocal-and-positivity`, `cor-jordan-content-finite-additivity`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-c-one-map-and-local-inverse`, `def-dirichlet-and-thomae-functions`, `def-invertible-euclidean-linear-map`, `def-jacobian-matrix-and-gradient`, `def-jordan-inner-and-outer-content`, `def-multidimensional-darboux-integral`, `def-multidimensional-darboux-sums`, `def-multidimensional-grid-partition`, `def-multidimensional-rectangle-and-volume`, `def-null-and-content-zero-in-rn`, `def-riemann-integral-over-a-jordan-set`, `ex-thomae-is-riemann-integrable-with-integral-zero`, `lem-derivative-of-a-power`, `lem-euclidean-linear-maps-have-matrices-and-are-bounded`, `lem-finite-cube-covers-admit-grid-control`, `lem-jordan-set-integral-well-defined`, `lem-p-norms-are-norms-and-induce-the-published-metrics`, `thm-banach-fixed-point`, `thm-chain-rule-for-total-derivatives`, `thm-complete-subspace-iff-closed`, `thm-continuous-functions-on-compact-jordan-sets-are-integrable`, `thm-continuous-injection-on-an-interval-is-strictly-monotone`, `thm-continuous-on-a-rectangle-is-riemann-integrable`, `thm-derivative-of-exponential`, `thm-euclidean-inverse-function-theorem`, `thm-ftc-second-part`, `thm-graphs-of-continuous-functions-have-content-zero`, `thm-heine-borel-rn`, `thm-jordan-boundary-criterion`, `thm-jordan-content-and-indicator-integrability`, `thm-lipschitz-images-of-null-sets-in-rn-are-null`, `thm-mean-value-inequality-for-total-derivatives`, `thm-multidimensional-integral-properties`, `thm-multidimensional-riemann-criterion`, `thm-sine-and-cosine-derivatives`, `thm-sine-cosine-signs-monotonicity-and-ranges`, `thm-sine-cosine-zero-sets-and-fundamental-period`, `thm-substitution`, `thm-total-derivative-computes-directional-and-partial-derivatives`.
+`cex-dirichlet-is-not-riemann-integrable`, `cor-exponential-reciprocal-and-positivity`, `cor-jordan-content-finite-additivity`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-c-one-map-and-local-inverse`, `def-dirichlet-and-thomae-functions`, `def-invertible-euclidean-linear-map`, `def-jacobian-matrix-and-gradient`, `def-jordan-inner-and-outer-content`, `def-multidimensional-darboux-integral`, `def-multidimensional-darboux-sums`, `def-multidimensional-grid-partition`, `def-multidimensional-rectangle-and-volume`, `def-null-and-content-zero-in-rn`, `def-riemann-integral-over-a-jordan-set`, `ex-thomae-is-riemann-integrable-with-integral-zero`, `lem-derivative-of-a-power`, `lem-euclidean-linear-maps-have-matrices-and-are-bounded`, `lem-finite-cube-covers-admit-grid-control`, `lem-jordan-set-integral-well-defined`, `lem-p-norms-are-norms-and-induce-the-published-metrics`, `thm-banach-fixed-point`, `thm-chain-rule-for-total-derivatives`, `thm-complete-subspace-iff-closed`, `thm-componentwise-limits-and-continuity`, `thm-continuous-functions-on-compact-jordan-sets-are-integrable`, `thm-continuous-injection-on-an-interval-is-strictly-monotone`, `thm-continuous-on-a-rectangle-is-riemann-integrable`, `thm-derivative-of-exponential`, `thm-euclidean-inverse-function-theorem`, `thm-ftc-second-part`, `thm-graphs-of-continuous-functions-have-content-zero`, `thm-heine-borel-rn`, `thm-jordan-boundary-criterion`, `thm-jordan-content-and-indicator-integrability`, `thm-lipschitz-images-of-null-sets-in-rn-are-null`, `thm-mean-value-inequality-for-total-derivatives`, `thm-multidimensional-integral-properties`, `thm-multidimensional-riemann-criterion`, `thm-sine-and-cosine-derivatives`, `thm-sine-cosine-signs-monotonicity-and-ranges`, `thm-sine-cosine-zero-sets-and-fundamental-period`, `thm-substitution`, `thm-total-derivative-computes-directional-and-partial-derivatives`.
+
+For the newly direct `thm-componentwise-limits-and-continuity` edge, I opened
+its full Statement and checked clauses 1 and 3 against Leibman's independent
+continuity algebra and multivariable-polynomial discussion in §1.4 of
+<https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf>. Its
+`provenance.statement` is `ai-altered`, but the exact clause needed here is
+source-checked and eligible.
 
 ### Established-from-knowledge after exact on-disk interface check
 
 `def-metric-ball`, `def-metric-compactness`, `def-metric-continuity`, `def-metric-interior-closure-boundary`, `def-metric-topology`, `lem-compactness-is-intrinsic`, `lem-finite-sum-laws`, `thm-continuous-image-of-a-compact-space-is-compact`, `thm-euclidean-space-complete`, `thm-induction-principle`.
 
-The four determinant ids listed in the blocker are **not** in this published audit: all four are absent from `items/` and are proposed planned-earlier dependencies. No published dependency is treated as trusted merely because the old prose scaffold described it.
+None of the six determinant interfaces in the Step-3 handoff is in this
+published audit. The original four are absent from `items/` but present in
+batch 9's planned-earlier manifest; the two Alpha additions are absent from
+`items/`, `plan-spec.json`, and all current batch manifests and are requested
+from batch 9 above. No planned dependency is treated as trusted merely because
+the old prose scaffold described it.
 
 ## Applyable prose-scaffold amendments
 
@@ -163,7 +256,7 @@ These are proposals only; Beta did not edit either prose file.
 
    with:
 
-   > Downstream, the planned analysis pages that most need linear algebra had none beneath them: `rn-as-a-normed-space`, `the-total-derivative`, `inverse-and-implicit-function-theorems` and `fubini-and-change-of-variables`. The total derivative *is* a linear map and the change-of-variables factor *is* a determinant. Consequently the Fubini/change-of-variables page must require both Gaussian elimination and the determinant page, and those pages must expose elementary-matrix factorisation, determinant behavior under elementary row operations, and determinant multiplicativity before the analytic page is authored.
+   > Downstream, the planned analysis pages that most need linear algebra had none beneath them: `rn-as-a-normed-space`, `the-total-derivative`, `inverse-and-implicit-function-theorems` and `fubini-and-change-of-variables`. The total derivative *is* a linear map and the change-of-variables factor *is* a determinant. Consequently the Fubini/change-of-variables page must require both Gaussian elimination and the determinant page. Before the analytic page is authored, those pages must expose elementary-matrix factorisation, determinant behavior under elementary row operations, determinant multiplicativity, the real criterion $A$ invertible if and only if $\det A\ne0$, and the finite Leibniz expression as a polynomial in the matrix entries.
 
 2. In `research/plan-complex-analysis-track.md`, immediately after the prerequisite-table row whose left cell is `175 / 177`, insert:
 
@@ -173,12 +266,23 @@ These are proposals only; Beta did not edit either prose file.
 
 The complex-analysis prose names this page as support for iterated polydisc integrals and the several-complex-variables componentwise theory. The rectangular Riemann-Fubini item is therefore the intended stable downstream interface; downstream pages should not cite proof-decomposition lemmas.
 
-**Blocker:** the determinant definition and three determinant/elementary-matrix theorems are not on disk and not currently declared by the assigned page. They require step-3 owner/orchestrator adjudication and step-4 plan splicing. Apart from that structural prerequisite and the gate-wrapper sandbox failure recorded below, no source, licensing, or other mathematical blocker was found. The requested split was evaluated and is unnecessary.
+The original four determinant interfaces are now present in batch 9 and are
+declared by this batch. The remaining cross-batch condition is the two-item
+handoff in the Step-3 repair section: batch 9 must add them before Step 4, then
+the orchestrator must splice the already declared determinant/Gaussian page
+requirements. This is not a request to drop or delay any batch-5 theorem. Apart
+from that in-flight handoff, no source, licensing, mathematical, or split
+blocker was found.
 
-## Step-2 gate record
+## Step-3 repair gate record
 
-- `node tools/validate-plan.mjs research/plan-spec.json`: **PASS** — declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids in the currently spliced item lists.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: **PASS** — 176 pages; the plan order is acyclic and has no item-level cycle, forward reference, B-page dependency, or unresolved id in the currently spliced lists.
 - `node tools/coverage-checklist.mjs research/frontier-10-batch-5.coverage.json`: **PASS** — 1 page, 46 harvested headings, 0 errors, 0 warnings.
-- Direct `node tools/depsource.mjs research/plan-spec.json`: **PASS** — 0 unresolved dependencies in the currently spliced plan.
-- `node tools/gates.mjs --step 2 --run frontier-10`: **ENVIRONMENTAL BLOCKER** — the wrapper attempted three nested `spawnSync /usr/bin/node` calls and each returned `EPERM` in the workspace sandbox. The underlying three commands were run directly without escalation; each passed. A non-escalated PTY retry was rejected before launch because the runtime could not spawn `codex-linux-sandbox`. No permission prompt was issued. This wrapper result cannot be made green from the allowed sandbox without changing a normative tool or requesting escalation, neither of which is authorized.
-- Additional manifest-only diagnostic: the batch shape is valid, and the only seven reported dependency occurrences are references to the four deliberately proposed determinant interfaces. This is the structural blocker above, to be resolved by the step-3/4 splice.
+- The required isolated command `node tools/content-policy.mjs research/frontier-10-batch-5.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: **EXPECTED CROSS-BATCH BLOCKER** — 9 `batch-dependency-missing` occurrences and no other error or warning. Seven occurrences are the four original interfaces that now exist in batch 9 but are not visible when only batch 5's manifest is supplied. The other two are the new determinant-criterion and polynomial interfaces requested from batch 9 in this repair.
+- Whole-run diagnostic `node tools/content-policy.mjs research/frontier-10-batch-*.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: **EXPECTED TWO-ITEM HANDOFF BLOCKER** — 577 scoped items, exactly 2 errors, 0 warnings. The errors are solely the two requested batch-9 ids: `thm-real-square-matrix-invertible-iff-determinant-nonzero` and `cor-determinant-is-a-polynomial-in-the-matrix-entries`.
+
+The isolated content-policy command cannot become green in this round: making
+the original four interfaces visible requires the orchestrator's Step-4 splice,
+and making the final two visible requires batch 9 to accept this handoff. Both
+actions are explicitly outside batch 5's writable scope. No wrapper gate was
+run, as directed.

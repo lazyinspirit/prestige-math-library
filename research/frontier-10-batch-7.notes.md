@@ -85,7 +85,7 @@ The declines most likely to be challenged are these:
    block.  These are whole-subject deferrals, not missing local lemmas.
 2. **Initial/terminal uniqueness.**  It is elementary and could be proved here,
    but the normative CT-2 prose assigns the theorem to
-   `universal-properties-representables-and-yoneda`, where it is the template
+   `universal-properties-and-the-yoneda-lemma`, where it is the template
    for uniqueness of universal objects.  The definitions needed there are built
    here.
 3. **Representables, the hom bifunctor, presheaves and Yoneda.**  All are
@@ -462,20 +462,37 @@ and `plan-spec.json` splicing, all reserved for later workflow steps.
 4. **D2:** no A item was added.  The A page remains exactly 60 items and no split
    fires, exactly as Alpha directed.
 
-## Gate record and environment blocker
+## Step-3 repair gate record and one integration limitation
 
-- `node tools/validate-plan.mjs research/plan-spec.json` — exit 0; plan order is
-  acyclic and the item-listed pages have no cycle, forward reference, B-page
-  dependency, or unresolved id.
-- `node tools/coverage-checklist.mjs research/frontier-10-batch-7.coverage.json`
-  — exit 0; 1 page, 154 harvested headings, 0 errors, 0 warnings.
-- The step-2 wrapper `node tools/gates.mjs --step 2 --run frontier-10` was run
-  exactly as requested, but this managed workspace forbids Node's nested
-  `spawnSync('/usr/bin/node', ...)`: all three wrapper children reported `EPERM`,
-  so the wrapper exited 1.  No permission prompt or escalation was attempted.
-  To separate infrastructure from content, its third child was also run
-  directly: `node tools/depsource.mjs research/plan-spec.json` exited 0 with
-  0 unresolved dependencies.  Therefore all three underlying step-2 gates pass
-  individually; only the mandated subprocess wrapper remains blocked by the
-  runtime sandbox.  This is the sole blocker and could not be cleared within the
-  no-escalation rule.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed
+  research/frontier-10-rehomed.json` — exit 0; declared order is acyclic and
+  consistent, with no item-level cycle, forward reference, B-page dependency,
+  or unresolved id among pages currently carrying item lists.
+- `node tools/coverage-checklist.mjs
+  research/frontier-10-batch-7.coverage.json` — exit 0; 1 page, 156 harvested
+  headings, 0 errors, 0 warnings.
+- The dependency-closed manifest-policy invocation
+  `node tools/content-policy.mjs research/frontier-10-batch-1.pages.json
+  research/frontier-10-batch-9.pages.json
+  research/frontier-10-batch-7.pages.json --manifest-only --rehomed
+  research/frontier-10-rehomed.json` — exit 0; 209 scoped items, 0 errors,
+  0 warnings.
+- The repair brief's literal single-manifest invocation of `content-policy`
+  exits 1 with 13 `batch-dependency-missing` rows: six matrix interfaces from
+  batch 1 and seven determinant interfaces from batch 9.  This mode loads only
+  supplied manifests plus authored `items/`, while neither earlier batch has
+  been authored at step 3.  Supplying the two owning manifests makes the same
+  policy gate green, as above.  Removing those exact dependencies or copying
+  their owned items into batch 7 would make the scaffold mathematically false
+  or violate batch ownership, so I did neither.  This under-scoped literal
+  command is the sole remaining integration limitation; it clears when the
+  orchestrator runs the all-batch gate (already green) or after the earlier
+  interfaces are authored.
+- All three JSON artifacts parse; the A/B counts are 60/25; proof-contract
+  scope and rows are exactly 60/60; both added contracts cite every declared
+  dependency; ID collision checks are empty; `prosecheck` has 0 errors (its
+  count-in-notes warnings are expected ledger prose); and `git diff --check`
+  is clean.
+
+Per the repair brief, `tools/gates.mjs` was not run.  No permission prompt or
+escalation was attempted.

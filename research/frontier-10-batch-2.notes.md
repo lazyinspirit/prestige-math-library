@@ -263,9 +263,8 @@ Environment preflight completed every repository and application check available
 
 ## 10. Gate ledger
 
-- `node tools/validate-plan.mjs research/plan-spec.json`: passed.
-- `node tools/depsource.mjs`: passed with zero unresolved dependencies.
-- `node tools/coverage-checklist.mjs research/frontier-10-batch-2.coverage.json`: passed with 78 harvested headings, zero errors, and zero warnings.
-- Extra manifest check, `node tools/content-policy.mjs research/frontier-10-batch-2.pages.json --manifest-only`: passed with 67 scoped items, zero errors, and zero warnings.
-- Extra prose check over all four artifacts: zero errors; four heuristic count warnings, two of which are source heading numerals in the harvest and the others are required batch-accounting prose.
-- The exact aggregate command `node tools/gates.mjs --step 2 --run frontier-10` could not become green in this managed runtime. The wrapper attempts three nested `spawnSync /usr/bin/node` calls, and the sandbox rejects all three with `EPERM`. Running the same three constituent commands directly produces passing results. No escalation was requested, in accordance with the owner's instruction.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: passed after the step-3 repair.
+- `node tools/coverage-checklist.mjs research/frontier-10-batch-2.coverage.json`: passed with 84 harvested headings, zero errors, and zero warnings.
+- `node tools/content-policy.mjs research/frontier-10-batch-2.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: passed with 70 scoped items, zero errors, and zero warnings.
+- The earlier step-2 direct dependency-source check passed with zero unresolved dependencies. The three new scaffolds use only opened, published dependencies, and the proof-contract scope was rechecked against all 56 proof-bearing items.
+- Per the dispatch, `tools/gates.mjs` was not run. No escalation was requested.
