@@ -5,7 +5,7 @@ title: "Cyclically reduced words"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-alphabet-words-and-reduction]
 justified_by: []

@@ -5,9 +5,9 @@ title: "Tietze transformations: dictionary generators, redundant relators, renam
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-group-presentation, prop-normal-closure-is-products-of-conjugates, def-free-group]
+deps: [def-group-presentation, def-normal-closure]
 justified_by: []
 aliases: []
 landmark: true
@@ -33,7 +33,8 @@ moves.
    $y$ and the relator $y^{-1}w$ only when $w$ contains no $y$ and $y$ occurs
    in no other remaining relator.
 2. A **redundant-relator move** chooses
-   $r\in\langle\!\langle R\rangle\!\rangle_{F(X)}$ and replaces $R$ by
+   $r\in\langle\!\langle R\rangle\!\rangle_{F(X)}$
+   ([[def-normal-closure]]) and replaces $R$ by
    $R\cup\{r\}$. Its inverse may delete a relator $r$ only when
    $r\in\langle\!\langle R\setminus\{r\}\rangle\!\rangle_{F(X)}$, so it is
    already a consequence of the relators that remain.
@@ -44,12 +45,19 @@ moves.
 For finite presentations this package has exactly the same reachability as the
 classical four moves: add or delete a generator with a dictionary relation,
 and add or delete a consequence relator. The first two types and their stated
-inverses are those four moves. Conversely, a renaming can be simulated by
-classical moves. Add fresh names with dictionary relations, add the finitely
-many renamed relators as consequences, and delete the old relators after they
-have become consequences of the renamed ones and the dictionaries. For each
-old generator $x$ with new name $y$, replace the remaining relator $y^{-1}x$
-by its inverse $x^{-1}y$ using one legal relator addition and deletion; then $x$
-occurs only in that dictionary relation and may be deleted. All deletions
-satisfy the legality conditions above. Thus including renaming as a single move
-changes the packaging, but not finite-presentation reachability.
+inverses are those four moves. Conversely, consider first a renaming bijection
+$\alpha:X\to Y$ with $X\cap Y=\varnothing$. For each $x\in X$, put
+$y=\alpha(x)$ and add the fresh generator $y$ with dictionary relator
+$y^{-1}x$. These dictionaries make $r$ and its renamed word $\alpha(r)$ equal
+in the presented group for every $r\in R$. Hence each $\alpha(r)$ may be added
+as a consequence relator; once every renamed relator has been added, each old
+relator $r$ is a consequence of the renamed relators and the dictionaries and
+may be deleted. Finally, for each pair $(x,y)$, add $x^{-1}y$, delete its inverse
+$y^{-1}x$, and then delete $x$ using the dictionary $x^{-1}y$. At that point
+$x$ occurs in no other relator, so every inverse move is legal. The result is
+$\langle Y\mid\alpha(R)\rangle$.
+
+For a general bijection, choose a finite set $Z$ disjoint from $X\cup Y$ and
+factor the renaming as $X\to Z\to Y$. The preceding construction simulates
+both factors. Thus including renaming as a single move changes the packaging,
+but not finite-presentation reachability.

@@ -40,7 +40,7 @@ definitions.
 
 [L1] If $(F,\iota)$ and $(F',\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ compatible with the two generator maps ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
-[L2] The map sending $x\in X$ to the one-letter word $x$ has the universal property of the free group on $X$ ([[thm-reduced-words-form-the-free-group]]).
+[L2] Reduced words form a group whose product is concatenation followed by free reduction, and the map sending $x\in X$ to the one-letter word $x$ has the universal property of the free group on $X$ ([[thm-reduced-words-form-the-free-group]]).
 
 [L3] Every class in $W(X)/{\sim}$ contains exactly one reduced word ([[thm-normal-form-for-the-word-quotient-model]]).
 
@@ -52,4 +52,4 @@ definitions.
 
 1.1 By [L4] and [L2], both displayed models are free groups on the same set $X$, so [L1] gives a unique compatible isomorphism $\Phi:F_{\mathrm{word}}(X)\to F_{\mathrm{red}}(X)$. [L1, L2, L4]
 
-2.1 Compatibility gives $\Phi([x])=x$; since $\Phi$ is a homomorphism, it sends $[a_1\cdots a_n]$ to the reduced product of the one-letter words $a_1,\ldots,a_n$, which is the unique reduced representative of that class by [L3], including the empty class. [step 1.1, L2, L3] ∎
+2.1 Compatibility gives $\Phi([x])=x$, and preservation of inverses gives $\Phi([x^{-1}])=x^{-1}$. Thus $\Phi([a_1\cdots a_n])$ is the reduced product of the one-letter words $a_1,\ldots,a_n$. It is freely equivalent to $a_1\cdots a_n$ and hence is the unique reduced representative of that class by [L3], including the empty class. [step 1.1, L2, L3] ∎

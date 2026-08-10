@@ -40,13 +40,15 @@ relators and their inverses.
 
 [F1] $\langle X\mid R\rangle=F(X)/\langle\!\langle R\rangle\!\rangle_{F(X)}$ ([[def-group-presentation]]).
 
+[F2] If $N\mathrel{\trianglelefteq}G$, then the elements of $G/N$ are the left cosets $gN$ ([[def-quotient-group]]).
+
 [L1] For a subgroup $H$ of a group, $aH=bH$ if and only if $a^{-1}b\in H$ ([[lem-coset-membership-and-equality]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Set $N=\langle\!\langle R\rangle\!\rangle_{F(X)}$; by [F1], the elements represented by $u$ and $v$ are the quotient cosets $uN$ and $vN$. [F1, given]
+1.1 Set $N=\langle\!\langle R\rangle\!\rangle_{F(X)}$; by [F1] and [F2], the elements represented by $u$ and $v$ are the quotient cosets $uN$ and $vN$. [F1, F2, given]
 
 2.1 By [L1], $uN=vN$ if and only if $u^{-1}v\in N$. [L1, step 1.1]
 

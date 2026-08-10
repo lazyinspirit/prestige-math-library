@@ -36,11 +36,15 @@ $$G\cong\left\langle x_g\ (g\in G)\ \middle|\ x_gx_hx_{gh}^{-1}\ (g,h\in G)\righ
 
 [L2] If $A$ and $B$ are finite, then $A\times B$ is finite ([[thm-product-rule]]).
 
+[F1] A presentation $\langle X\mid R\rangle$ is finite when both $X$ and $R$ are finite ([[def-relators-relations-and-finite-presentations]]).
+
+[F2] A set is finite when it is in bijection with a natural number ([[def-finite-cardinality]]).
+
 ## Proof
 
 **Proof technique:** constructive.
 
-1.1 Let $X=\{x_g:g\in G\}$ and $R=\{x_gx_hx_{gh}^{-1}:(g,h)\in G\times G\}$; the indexing bijections make $X$ finite, and [L2] makes $R$ finite. [L2, given, construct]
+1.1 Let $X=\{x_g:g\in G\}$ and $R=\{x_gx_hx_{gh}^{-1}:(g,h)\in G\times G\}$. The map $g\mapsto x_g$ is a bijection, so [F2] makes $X$ finite. By [L2], $G\times G$ is finite, and $R$ is the image of this finite set under $(g,h)\mapsto x_gx_hx_{gh}^{-1}$, so $R$ is finite. [F2, L2, given, construct]
 
 2.1 The assignment $x_g\mapsto g$ sends each relator $x_gx_hx_{gh}^{-1}$ to $gh(gh)^{-1}=e_G$, so [L1] gives a homomorphism $\pi:P:=\langle X\mid R\rangle\to G$. [L1, step 1.1, construct]
 
@@ -48,5 +52,4 @@ $$G\cong\left\langle x_g\ (g\in G)\ \middle|\ x_gx_hx_{gh}^{-1}\ (g,h\in G)\righ
 
 3.1 The composite $\pi\circ\sigma$ fixes every $g\in G$; the composite $\sigma\circ\pi$ fixes every generator class $[x_g]$, and uniqueness in [L1] makes it the identity on $P$. Thus $\pi$ and $\sigma$ are inverse isomorphisms. [L1, step 2.1, step 2.2]
 
-4.1 Both $X$ and $R$ are finite and $P\cong G$, so $G$ has the displayed finite presentation, including when $G$ is the one-element group. [step 1.1, step 3.1, discharge-construct] ∎
-
+4.1 Both $X$ and $R$ are finite and $P\cong G$, so [F1] shows that $G$ has the displayed finite presentation, including when $G$ is the one-element group. [F1, step 1.1, step 3.1, discharge-construct] ∎

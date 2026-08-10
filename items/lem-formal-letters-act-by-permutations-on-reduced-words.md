@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-alphabet-words-and-reduction, def-symmetric-group, lem-symmetric-group-is-a-group, thm-induction-principle]
+deps: [def-alphabet-words-and-reduction, def-symmetric-group, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: true
@@ -51,10 +51,10 @@ words.
 
 1.1 For $r\in\mathcal R(X)$, define $\lambda_a(r)$ by deleting the first letter when $r$ begins with $a^{-1}$, and by prepending $a$ otherwise; in the second case the only new seam is not an inverse pair, so the output is reduced, while deletion from a reduced word also leaves a reduced word. [F1, given, construct]
 
-2.1 If $r$ begins with $a^{-1}$, then $\lambda_a(r)$ is its remaining suffix and $\lambda_{a^{-1}}$ restores the deleted $a^{-1}$; if $r$ does not begin with $a^{-1}$, then $\lambda_a(r)=ar$ begins with $a$ and $\lambda_{a^{-1}}$ deletes that $a$. Thus $\lambda_{a^{-1}}\lambda_a=\operatorname{id}$, and replacing $a$ by $a^{-1}$ gives $\lambda_a\lambda_{a^{-1}}=\operatorname{id}$. [step 1.1]
+2.1 If $r=a^{-1}s$ is reduced, then $s$ does not begin with $a$, so $\lambda_a(r)=s$ and $\lambda_{a^{-1}}(s)=a^{-1}s=r$. If $r$ does not begin with $a^{-1}$, then $\lambda_a(r)=ar$ begins with $a$, so $\lambda_{a^{-1}}(ar)=r$. Thus $\lambda_{a^{-1}}\circ\lambda_a=\operatorname{id}$, and replacing $a$ by $a^{-1}$ gives $\lambda_a\circ\lambda_{a^{-1}}=\operatorname{id}$. [F1, step 1.1]
 
 3.1 Hence each $\lambda_a$ is a bijection of $\mathcal R(X)$, so it is a permutation by [F2], and $\lambda_{a^{-1}}=\lambda_a^{-1}$. [F2, step 2.1]
 
-4.1 For a word $w=a_1\cdots a_n$, construct $\Lambda_w=\lambda_{a_1}\circ\cdots\circ\lambda_{a_n}$, with the empty composite equal to the identity; induction from the right end using [L1] shows that if $r$ is reduced then $\Lambda_r(\varepsilon)=r$, including $r=\varepsilon$. [L1, step 3.1, construct]
+4.1 For a word $w=a_1\cdots a_n$, construct $\Lambda_w=\lambda_{a_1}\circ\cdots\circ\lambda_{a_n}$, with the empty composite equal to the identity. Composition acts from right to left. If the suffix $a_{k+1}\cdots a_n$ of a reduced word has already been obtained from $\varepsilon$, then it does not begin with $a_k^{-1}$, so $\lambda_{a_k}$ prepends $a_k$. Induction on the suffix length using [L1] therefore gives $\Lambda_r(\varepsilon)=r$ for every reduced $r$, including $r=\varepsilon$. [F1, L1, step 1.1, step 3.1, construct]
 
 5.1 Inserting or deleting an adjacent pair $aa^{-1}$ inserts or deletes the adjacent composite $\lambda_a\circ\lambda_{a^{-1}}=\operatorname{id}$ inside $\Lambda_w$; therefore one elementary move leaves $\Lambda_w$ unchanged, and so does any finite sequence of such moves. [step 3.1, step 4.1, discharge-construct] ∎

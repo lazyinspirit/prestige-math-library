@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-cyclic-reduction-normal-form, thm-reduced-words-form-the-free-group, thm-free-groups-unique-up-to-unique-isomorphism, def-cyclically-reduced-word, def-group-power, def-order-in-a-group, thm-induction-principle]
+deps: [lem-cyclic-reduction-normal-form, thm-reduced-words-form-the-free-group, thm-free-groups-unique-up-to-unique-isomorphism, def-cyclically-reduced-word, def-group-power, def-order-in-a-group]
 justified_by: []
 aliases: []
 landmark: true
@@ -39,16 +39,18 @@ nonidentity element has infinite order in the sense of
 
 [L3] Free groups on the same set are uniquely isomorphic compatibly with their generators ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
+[F1] A reduced word is cyclically reduced when it is empty or its first letter is not the formal inverse of its last letter ([[def-cyclically-reduced-word]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 First work in the reduced-word model and let $w$ be a nonidentity element. Then $w$ is itself a nonempty reduced word, and [L1] gives a literal reduced factorisation $w=tct^{-1}$ with $c$ nonempty and cyclically reduced. [L1, L2, given]
 
-1.2 For every $n\geq1$, the literal concatenation $c^n$ is reduced and nonempty: each copy is reduced, and the seam between consecutive copies does not cancel because the last letter of $c$ is not the inverse of its first. [given]
+2.1 For every $n\geq1$, the literal concatenation $c^n$ is reduced and nonempty: each copy is reduced, and the seam between consecutive copies does not cancel because the last letter of $c$ is not the inverse of its first. [F1, step 1.1]
 
-2.1 In the product $w^n$, the adjacent factors $t^{-1}t$ cancel between copies, leaving $tc^nt^{-1}$; its two outer seams are the same seams as in the reduced word $tct^{-1}$, so it is reduced and nonempty by step 1.2, and [L2] therefore shows that $w^n$ is not the identity. [L2, step 1.1, step 1.2]
+3.1 In the product $w^n$, the adjacent factors $t^{-1}t$ cancel between copies, leaving $tc^nt^{-1}$; its two outer seams are the same seams as in the reduced word $tct^{-1}$, so it is reduced and nonempty by step 2.1, and [L2] therefore shows that $w^n$ is not the identity. [L2, step 1.1, step 2.1]
 
-3.1 For an arbitrary free group on $X$, use [L3] to transport $g$ to the reduced-word model; an isomorphism preserves the identity and natural powers, so step 2.1 gives $g^n\neq e$. [L3, step 2.1]
+4.1 For an arbitrary free group on $X$, use [L3] to transport $g$ to the reduced-word model; an isomorphism preserves the identity and natural powers, so step 3.1 gives $g^n\neq e$. [L3, step 3.1]
 
-4.1 Thus no nonidentity element has a positive power equal to the identity, so every nonidentity element has infinite order and every free group, including the trivial free group on the empty set, is torsion-free. [step 3.1] ∎
+5.1 Thus no nonidentity element has a positive power equal to the identity, so every nonidentity element has infinite order and every free group, including the trivial free group on the empty set, is torsion-free. [step 4.1] ∎

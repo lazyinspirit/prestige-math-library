@@ -33,7 +33,9 @@ not abelian.
 
 [L1] Every class in $W(X)/{\sim}$ contains exactly one reduced word ([[thm-normal-form-for-the-word-quotient-model]]).
 
-[L2] Free groups on the same set are uniquely isomorphic compatibly with their generators ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
+[L2] The word-quotient group $W(X)/{\sim}$, with $x\mapsto[x]$, is a free group on $X$ ([[thm-word-quotient-model-is-free]]).
+
+[L3] Free groups on the same set are uniquely isomorphic compatibly with their generators ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
 ## Verification
 
@@ -43,5 +45,4 @@ not abelian.
 
 2.1 Uniqueness in [L1] makes their word classes different, so $[x][y]\neq[y][x]$ in the word-quotient free group. [L1, step 1.1]
 
-3.1 By [L2], every free group on $X$ is isomorphic to that model by an isomorphism fixing the generators, so the two chosen basis elements do not commute and the group is not abelian. [L2, step 2.1] ∎
-
+3.1 By [L2] and [L3], every free group on $X$ is isomorphic to that model by an isomorphism fixing the generators, so the two chosen basis elements do not commute and the group is not abelian. [L2, L3, step 2.1] ∎

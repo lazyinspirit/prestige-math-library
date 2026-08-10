@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-normal-form-for-the-word-quotient-model, thm-word-quotient-model-is-free, thm-classification-of-cyclic-groups, def-group-power, thm-induction-principle]
+deps: [thm-normal-form-for-the-word-quotient-model, thm-word-quotient-model-is-free, thm-classification-of-cyclic-groups, def-group-power]
 justified_by: []
 aliases: []
 landmark: false

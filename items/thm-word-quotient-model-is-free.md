@@ -36,7 +36,7 @@ $\iota_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
 
 [L1] $F_{\mathrm{word}}(X)$ is a group under $[w][v]=[wv]$ ([[thm-word-quotient-model-is-a-group]]).
 
-[F1] A group homomorphism $f:G\to H$ satisfies $f(xy)=f(x)f(y)$ for all $x,y\in G$ ([[def-group-homomorphism]]).
+[F1] A group homomorphism $f:G\to H$ satisfies $f(xy)=f(x)f(y)$ for all $x,y\in G$, and consequently preserves the identity and inverses ([[def-group-homomorphism]]).
 
 [F2] In a group, for every $x$ there is $y$ with $yx=e=xy$ ([[def-group]]).
 
@@ -54,6 +54,6 @@ $\iota_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
 
 4.1 For words $w,v$, one has $E(wv)=E(w)E(v)$, so [L1] and [F1] show that $\widehat u$ is a homomorphism; moreover $\widehat u([x])=u(x)$, so it extends $u$. [L1, F1, step 3.1]
 
-5.1 If $h:F_{\mathrm{word}}(X)\to G$ is any homomorphism with $h([x])=u(x)$, then for $w=a_1\cdots a_n$ the class $[w]$ is the ordered product of the one-letter classes, and [F1] forces $h([w])=\widetilde u(a_1)\cdots\widetilde u(a_n)=\widehat u([w])$; hence $h=\widehat u$. [L1, F1, step 4.1]
+5.1 If $h:F_{\mathrm{word}}(X)\to G$ is any homomorphism with $h([x])=u(x)$, then [F1] gives $h([x^{-1}])=h([x]^{-1})=u(x)^{-1}$. For $w=a_1\cdots a_n$, the class $[w]$ is the ordered product of its one-letter classes, so [F1] forces $h([w])=\widetilde u(a_1)\cdots\widetilde u(a_n)=\widehat u([w])$; hence $h=\widehat u$. [L1, F1, step 4.1]
 
 6.1 The homomorphism of step 4.1 exists for every $G$ and $u$, and step 5.1 makes it unique; by [F3], $(F_{\mathrm{word}}(X),\iota_{\mathrm{word}})$ is a free group on $X$, including when $X$ is empty. [F3, step 4.1, step 5.1, discharge-construct] ∎
