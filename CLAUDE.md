@@ -249,6 +249,23 @@ banner; the public sees only `published`.
   step 10. The two model pools are independently capped — 16 each, 32 maximum
   combined; neither model's throughput is throttled by the other.
 
+- **Alpha reviews scaffold breadth and depth at step 3 (owner, 2026-08-11,
+  standing for this and every future session).** Alpha is spawned at **step 3**,
+  not step 4. After the orchestrator settles the Beta recommendations, Alpha
+  reads every pair's `.pages.json`, `.notes.md` and `.coverage.json` together and
+  returns a `sufficient` / `insufficient` verdict per pair in
+  `research/<run>-alpha-step3-scaffold-review.md`, naming for each
+  `insufficient` the exact results to add and the source that carries them. It
+  checks that the standard development of the subject is present, that the
+  harvest is faithful to the sources at their stated locators, that each decline
+  is real now that a missing prerequisite must be built rather than declined,
+  that the B page is a real examples development, that the proof decomposition
+  is honest, and whether the pair needs splitting at 60 items. Alpha authors
+  nothing at this stage and edits no batch file; the orchestrator routes findings
+  to the owning Beta and Alpha re-checks before step 4 splices. Step 3 is the
+  last point where fixing thinness costs a scaffold edit rather than a rewrite.
+  `LEVELS.md` §"Step 3", `briefs/alpha.md` §"Stage 0".
+
 - **Alpha adjudicates judges (owner, 2026-07-31).** For this and every future
   session, Alpha is the sole adjudicator of a paired-judge rejection. Alpha
   reads the frozen verdict and current disk text, confirms a fatal defect,

@@ -134,6 +134,56 @@ You are the **sole Alpha adjudicator**. Verify every reader report from disk and
 either confirm it, refute it with the relevant text or mathematics, or apply the
 warranted in-flight fix yourself. Reader conclusions never directly edit content.
 
+## Stage 0 — step 3: review every scaffold for BREADTH and DEPTH
+
+**Owner, 2026-08-11, standing for this and every future session.** You are
+spawned at step 3 now, not step 4, and this is your first job: read every Beta's
+scaffold, before a single item is authored, and decide whether it covers the
+subject with sufficient **breadth and depth**.
+
+This exists because two pairs shipped thin and nothing caught it until a reader
+did. `group-actions-and-cayleys-theorem` published with orbits, stabilisers and
+the orbit partition but **no orbit–stabiliser theorem**, no class equation, no
+Cauchy's theorem, and an empty B page. `free-groups-and-presentations` published
+at 6 + 1 items and was rewritten wholesale. The run that produced them averaged
+about four items per page. Step 3 is the last moment where fixing that costs a
+scaffold edit instead of a rewrite.
+
+For every A/B pair in the run, read `research/<run>-batch-<i>.pages.json`,
+`.notes.md` and `.coverage.json` together, and answer:
+
+1. **Is the standard development present?** Name, from your own knowledge of the
+   subject, the results a competent textbook chapter on this topic proves. Every
+   one of them must appear in the scaffold or in the coverage checklist with a
+   disposition. A result in neither is the defect this stage exists to catch.
+2. **Is the harvest faithful?** Open the sources at the stated `locator`. Does
+   `contents` reflect what that range actually contains, or a thin selection?
+   `coverage-checklist.mjs` proves the file is structurally complete; only you
+   can tell whether it is honest.
+3. **Are the declines real?** A `deferred`/`out-of-scope` reason is a claim, and
+   it is checkable. "Requires machinery we do not have" — does it? Since
+   2026-08-11 a missing prerequisite is a thing to **build**, not a licence to
+   decline; that disposition is now valid only for material belonging to another
+   page's topic or resting on a whole subject area the library has not reached.
+4. **Is the B page real?** An examples page with a token two entries, or none, is
+   a failure. Counterexamples that mark the boundary of each theorem are the
+   point of the B page.
+5. **Is the proof decomposition honest?** A single monolithic theorem where the
+   source proves four lemmas is depth loss even when nothing is missing.
+6. **Does the pair need splitting?** Over 60 items is a hard `validate-plan.mjs`
+   error. If a Beta proposed a split, adjudicate it now, with the exact cut and
+   the new page ids; if a Beta should have proposed one and did not, say so.
+
+**Your output** is `research/<run>-alpha-step3-scaffold-review.md`: per pair, a
+verdict of `sufficient` or `insufficient`, and for every `insufficient` the exact
+results to add, with the source that carries them. You may not author content
+here and you may not edit another agent's batch files — you return the findings,
+the orchestrator routes them back to the owning Beta, and you re-check before
+step 4 splices anything.
+
+Be specific. "Could be deeper" is not a finding; "the orbit–stabiliser theorem is
+absent and Brosnan §0035, already in the ledger, proves it" is.
+
 ## Stage 1 — step 4: propagate approved changes
 
 Apply approved `.notes.md` amendments from every `research/level<n>-batch-<i>.notes.md`

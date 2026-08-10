@@ -23,7 +23,7 @@ Everything below is verified against the code as of 2026-07-31.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, ledgers, and reporting |
-| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 4**, resumed at **steps 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
+| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
 | **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned Claude Sonnet 5 (`high` effort)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Sonnet 5 is the second comparison lane, same family as the audit Alpha that adjudicates its rejections. |
@@ -324,14 +324,35 @@ ask an agent for clarification before deciding, but routine scaffold
 adjudication does not pause for owner approval. Every decision and its rationale
 are logged.
 
+**Then Alpha-n reviews every scaffold for breadth and depth (owner,
+2026-08-11).** Alpha is spawned here, not at step 4, and this runs *after* the
+orchestrator has settled the recommendations. For every pair it reads the
+`.pages.json`, `.notes.md` and `.coverage.json` together and asks whether the
+standard development of the subject is actually present: are the results a
+competent textbook chapter proves either scaffolded or disposed; is the harvest
+faithful to the sources at their stated locators; are the declines real now that
+a missing prerequisite must be **built** rather than declined; is the B page a
+real examples development; is the proof decomposition honest; does the pair need
+splitting at 60 items. Output is
+`research/<run>-alpha-step3-scaffold-review.md`, a `sufficient` /
+`insufficient` verdict per pair with the exact results to add and the source
+that carries them. Alpha authors nothing here and edits no batch file: the
+orchestrator routes findings to the owning Beta, and Alpha re-checks before step
+4 splices. This is the last point where fixing thinness costs a scaffold edit
+rather than a rewrite — it exists because `group-actions-and-cayleys-theorem`
+published without the orbit–stabiliser theorem and nothing caught it until a
+reader did. `briefs/alpha.md` §"Stage 0".
+
 ## Step 4 — Apply and propagate (orchestrator + Alpha-n)
 
 Splice the Beta outputs into `plan-spec.json`. The splice keeps `plan-spec`'s
 page metadata but takes the **union of `requires`** (Beta computes the closure
 `validate-plan` demands), logs every disagreement, and hard-fails on an id clash.
-**Alpha-n is spawned here**, not at step 6, and applies the `.notes.md`
-amendments into higher-level prose scaffolds — one writer, so no silent
-overwrite.
+**Alpha-n was spawned at step 3** (owner, 2026-08-11; it used to be spawned
+here) and resumes now to apply the `.notes.md` amendments into higher-level
+prose scaffolds — one writer, so no silent overwrite. Do not splice a pair Alpha
+marked `insufficient` at step 3 until its findings are resolved and it has
+re-checked.
 
 ## Step 5 — Author (the scaffold Betas, by batch)
 

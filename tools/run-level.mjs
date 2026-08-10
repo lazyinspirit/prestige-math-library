@@ -249,10 +249,15 @@ const STEP_PLAN = {
        note: 'compute the frontier FROM DISK (not from rounds.mjs, which ignores publication state), divide A-pages into batches of at most 2, report the cross-batch seam count' },
   1: { name: 'Scaffold', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: l, vars: { n: state.level, i: i + 1 } })) },
   2: { name: 'Resolve dependencies', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: `${l}-deps`, vars: { n: state.level, i: i + 1 } })) },
-  3: { name: 'Adjudicate recommendations', judgment: true,
-       note: 'verify each Beta recommendation from disk, then approve or decline. Priority: mathematical accuracy > minimize forward references > preserve richness' },
+  // Judgment FIRST (the orchestrator adjudicates), then the agent: the executor
+  // runs `judgment` before `agents`, so Alpha reviews scaffolds that have already
+  // had their recommendations settled. Owner, 2026-08-11 — Alpha now first
+  // appears at step 3, not step 4, and its job here is breadth and depth.
+  3: { name: 'Adjudicate recommendations, then Alpha reviews scaffold breadth', judgment: true, requiresBatches: true,
+       note: 'verify each Beta recommendation from disk, then approve or decline. Priority: mathematical accuracy > minimize forward references > preserve richness',
+       agents: () => [{ role: 'alpha', brief: 'briefs/alpha.md', label: 'step3-scaffold-review', vars: { n: state.level } }] },
   4: { name: 'Apply and propagate', judgment: true,
-       note: 'splice Beta outputs into plan-spec.json taking the UNION of requires, hard-fail on id clash, then spawn Alpha to propagate notes into the prose scaffolds' },
+       note: 'splice Beta outputs into plan-spec.json taking the UNION of requires, hard-fail on id clash, then Alpha (already spawned at step 3) propagates notes into the prose scaffolds' },
   5: { name: 'Author', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/authoring.md', label: `${l}-author`, vars: { n: state.level, i: i + 1 } })) },
   6: { name: 'Audit', requiresBatches: true, agents: () => [
          ...batchLabels().map((l, i) => ({ role: 'reader', brief: 'briefs/beta-step8-audit.md', label: `${l}-reader`, vars: { n: state.level, i: i + 1 } })),
