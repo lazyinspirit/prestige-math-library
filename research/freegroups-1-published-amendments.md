@@ -23,11 +23,12 @@ the served pages stay untouched.
 
 ## What the owner applies at publish
 
-Three things, together, in one commit:
+Four things, together, in one commit:
 
 1. Replace the two frontmatter lists below.
-2. Flip all 37 new items from `status: draft` to `status: published`.
-3. Set `verification.audited` on the 37, per the owner audit.
+2. Replace the A-page summary body with the one staged below.
+3. Flip all 37 new items from `status: draft` to `status: published`.
+4. Set `verification.audited` on the 37, per the owner audit.
 
 Existing published items are **not reordered or renumbered** — every one keeps
 its current relative position, and the new material is interleaved after it in
@@ -92,6 +93,50 @@ examples: [ex-reducing-a-word-with-formal-inverses,
 ```
 
 12 ids: 1 already published (unmoved), 11 new.
+
+## The staged A-page summary
+
+**Why this is here (Alpha, step 6).** The staged lists above are not the whole
+amendment. The page-summary contract (owner, 2026-07-30) requires paragraph 1 to
+name the definitions and results from declared dependencies that the development
+actually uses, and paragraph 2 to name the main definitions and theorems
+developed on the page and explain their logical progression. The A page's
+current summary was written for the six items it now carries: it names the
+reduced-word construction and nothing else. The moment the lists above are
+applied, that summary stops satisfying the contract, because the entire
+`W(X)/~` spine, rank, the presentation machinery, Tietze transformations and
+cyclic reduction are developed on the page and go unmentioned. Applying the
+lists without this replacement publishes a page that fails its own contract.
+
+The B page has **no** authored summary body and must keep none.
+
+Replacement body for `library/abstract-algebra/free-groups-and-presentations.md`,
+everything after the closing `---` of the frontmatter. Two paragraphs, 96 and
+119 words, no counts and no reading-position claims, per SCHEMA §6:
+
+```markdown
+Groups, homomorphisms, kernels, quotient groups, and isomorphisms supply the
+algebraic framework for the constructions here. The development draws on the
+quotient group and its canonical projection, the universal property of a
+quotient by a normal subgroup, the normal closure of a subset, the commutator
+subgroup, generated subgroups, and symmetric groups. Cyclic groups, direct
+products, and the residue classes modulo a positive integer with their standard
+representatives supply the targets of the worked presentations, while the
+induction principle for the natural numbers and elementary counting of finite
+sets support the arguments about finite bases and finite presentations.
+
+Words in an alphabet with formal inverses and their free equivalence open the
+page. Free equivalence is an equivalence relation compatible with
+concatenation, so the words modulo free equivalence form a group. Formal
+letters act on reduced words by mutually inverse permutations, and evaluating
+the induced action at the empty word shows that each class holds exactly one
+reduced word. That normal form earns the universal property, so this quotient
+is a free group, its generator map is injective, and it is uniquely isomorphic
+to the reduced-word model. Free bases, rank for a finite basis, relators and
+presentations, von Dyck's theorem, abelianisation, Tietze transformations, and
+cyclic reduction follow, closing with torsion-freeness and a conjugacy
+criterion for cyclically reduced words.
+```
 
 ## What breaks if this is never applied
 

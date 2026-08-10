@@ -385,10 +385,10 @@ witness, not a failure to find literature.
 | `def-abelianisation-of-a-group` | `literature-derived` | `not-applicable` | Elman/MIT and standard commutator quotient |
 | `def-free-abelian-group` | `literature-derived` | `not-applicable` | Elman exercise and MIT Lemma 12.5 universal property |
 | `thm-abelianisation-of-a-free-group-is-free-abelian` | `literature-derived` | `ai-altered` | Elman Proposition 18.4 proof route and MIT Lemma 12.5 |
-| `def-tietze-transformations` | `literature-derived` | `not-applicable` | Touikan's three reversible move types |
+| `def-tietze-transformations` | `ai-altered` | `not-applicable` | Touikan's three reversible move types, adapted to an arbitrary generator-set bijection with an explicit classical-move simulation |
 | `prop-tietze-transformations-preserve-presented-groups` | `literature-derived` | `ai-generated` | source states the result as an exercise; mutual maps are supplied locally |
 | `thm-tietze-transformations-connect-finite-presentations` | `literature-derived` | `ai-altered` | Touikan Theorem 1.6.2 and its common-intermediate hint |
-| `def-cyclically-reduced-word` | `literature-derived` | `not-applicable` | Magnus–Karrass–Solitar convention |
+| `def-cyclically-reduced-word` | `ai-altered` | `not-applicable` | standard Magnus–Karrass–Solitar/Myasnikov–Shpilrain convention, with the empty-word boundary made explicit |
 | `lem-cyclic-reduction-normal-form` | `ai-altered` | `ai-altered` | standard cyclic peeling lemma, specialized to published word notation |
 | `thm-free-groups-are-torsion-free` | `literature-derived` | `ai-altered` | standard theorem with cyclic-core proof |
 | `thm-conjugacy-of-cyclically-reduced-words` | `literature-derived` | `ai-altered` | standard cyclic-permutation conjugacy theorem with seam analysis and induction on an arbitrary reduced conjugator |
@@ -772,3 +772,64 @@ No mathematical claim remains knowingly unclosed, and no authoring decision
 needs further adjudication.  The finite-presentation Tietze theorem remains the
 adjudicated high-risk item for the dedicated step-6 refuter and Alpha risk
 review; that is a required review lane, not an unresolved authoring blocker.
+
+## Step 6 independent-reader checkpoint — reader 1
+
+Substage: source comparison and first-pass proof refutation are complete for
+all 18 assigned items; targeted repairs and proof-contract synchronization are
+next.  The reader's write boundary is the assigned draft item files, their
+entries in `research/freegroups-1-batch-1.pages.json`, this batch note, and
+`research/freegroups-1-batch-1.proof-contracts.json`.
+
+Completed checks: every assigned Statement, proof step, declared dependency,
+component-provenance tag, source reference, and applicable proof contract was
+read.  The van der Waerden maps are well-defined inverse permutations; the
+word action uses standard right-to-left composition, and normal-form uniqueness
+is obtained by evaluating at the empty word rather than assuming normal form.
+No assigned result relies on computability, and no fatal mathematical defect
+has been found.
+
+Open constraints: make the inverse-map and action-orientation details explicit;
+remove two unused dependencies; repair nonfatal Fact/citation licensing in the
+normal-closure, presentation-equality, Von Dyck, and finite-presentation proofs;
+correct the finite-relator-set wording; then update exact contract claims and
+run reflow, precheck, strict contract, dependency, citation, finite-smoke, and
+prose gates.  Exact next action: patch the assigned item files and manifest.
+
+## Step 6 independent-reader disposition — reader 1
+
+The van der Waerden chain is correct.  I expanded the two inverse branches in
+`lem-formal-letters-act-by-permutations-on-reduced-words` and made the standard
+right-to-left action convention explicit.  In particular, the proof now shows
+why a reduced suffix accepts the next letter, and
+`thm-normal-form-for-the-word-quotient-model` obtains equality of reduced words
+by applying equal permutations to the empty word.  No normal-form conclusion is
+assumed in constructing or comparing the permutations.  I also made inverse
+letters explicit in the universal-property uniqueness proof and in the
+comparison with the reduced-word model.
+
+I repaired nonfatal citation and local-closure defects in
+`prop-normal-closure-is-products-of-conjugates`,
+`prop-equality-of-words-in-a-presentation`, `thm-von-dyck`, and
+`cor-every-finite-group-is-finitely-presented`.  The repairs add the exact
+subgroup, normality, quotient-coset, normal-closure, generated-subgroup,
+kernel/image, homomorphism, presentation, and finiteness facts used by the
+numbered steps.  The normality proof now derives the reverse conjugation
+inclusion, Von Dyck's image calculation uses a subgroup preimage, and the finite
+multiplication-table proof treats the relator set as a finite image rather than
+calling its indexing map a bijection.
+
+The unused dependency `lem-symmetric-group-is-a-group` was removed from the
+formal-letter action lemma, and the unused dependency
+`thm-induction-principle` was removed from the one-generator example.  The batch
+manifest and the affected exact-source proof contracts were synchronized.
+Existing component-provenance labels remain accurate after these repairs, and
+no judge block was present to remove.  I added or deleted no mathematical
+result and found no publish-blocking mathematical error in the assigned scope.
+
+The published A-page still has exactly two short prose summary paragraphs, and
+the B-page has no authored summary body.  The required staged page-amendment
+artifact named in decision D4, `research/freegroups-1-published-amendments.md`,
+is absent.  Creating it or changing the published page files is outside this
+reader's write boundary and is left to Alpha or the orchestrator before the
+publishing commit.
