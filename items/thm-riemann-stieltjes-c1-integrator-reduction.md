@@ -11,6 +11,7 @@ deps: [def-riemann-stieltjes-sum-and-integral,
        cor-riemann-stieltjes-agrees-with-riemann, cor-mean-value-theorem,
        def-derivative, def-continuity-real, thm-heine-cantor-r,
        def-darboux-integral, def-darboux-sums,
+       thm-continuous-implies-integrable,
        cor-integrability-of-absolute-values-products-and-lattice-operations,
        thm-darboux-equals-riemann]
 justified_by: []
@@ -41,7 +42,7 @@ $$\int_a^b f\,d\alpha=\int_a^b f(x)\alpha'(x)\,dx.$$
 
 [L2] The continuous function $\alpha'$ is uniformly continuous ([[thm-heine-cantor-r]]).
 
-[L3] The product $f\alpha'$ is Riemann integrable ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
+[L3] The continuous function $\alpha'$ is Riemann integrable, so the product $f\alpha'$ is Riemann integrable ([[thm-continuous-implies-integrable]], [[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
 
 [L4] Riemann tagged sums converge to the Darboux integral ([[thm-darboux-equals-riemann]]).
 

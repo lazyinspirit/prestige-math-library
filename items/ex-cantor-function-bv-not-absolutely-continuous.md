@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-cantor-function-properties,
+deps: [thm-cantor-function-properties, cor-cantor-function-is-continuous,
        def-bounded-variation-and-total-variation,
        def-absolutely-continuous-function, lem-geometric-sequence-null,
        lem-finite-sum-laws]
@@ -33,7 +33,7 @@ The Cantor function $c:[0,1]\to[0,1]$ is continuous and nondecreasing, so it has
 
 **Given:** The Cantor function and its standard stage construction.
 
-[L1] The Cantor function is continuous, nondecreasing, with $c(0)=0$ and $c(1)=1$ ([[thm-cantor-function-properties]]).
+[L1] The Cantor function is continuous and nondecreasing, with $c(0)=0$ and $c(1)=1$ ([[cor-cantor-function-is-continuous]], [[thm-cantor-function-properties]]).
 
 [L2] At stage $n$, the $2^n$ surviving closed intervals have total length $(2/3)^n$, and $c$ increases by $2^{-n}$ across each.
 

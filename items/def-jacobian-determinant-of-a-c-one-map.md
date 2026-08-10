@@ -16,14 +16,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Definition
 
-Let $U\subseteq\mathbb R^n$ be open and let $g=(g_1,\ldots,g_n):U\to\mathbb R^n$ be $C^1$. Its **Jacobian matrix** at $x\in U$ is
+Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open, and let $g=(g_1,\ldots,g_n):U\to\mathbb R^n$ be $C^1$. Its **Jacobian matrix** at $x\in U$ is
 $$Dg(x)=\left(\frac{\partial g_i}{\partial x_j}(x)\right)_{1\le i,j\le n},$$
 the matrix of the total derivative in the standard bases. Its **Jacobian determinant** is
 $$\det Dg(x).$$

@@ -11,7 +11,7 @@ deps: [thm-monotone-change-of-variable-for-riemann-integrals,
        def-improper-integral-at-infinity,
        def-improper-integral-at-a-finite-endpoint, def-mixed-improper-integral,
        def-monotone-function, def-derivative,
-       thm-algebra-of-function-limits, def-oriented-integral]
+       def-oriented-integral]
 justified_by: []
 aliases: []
 landmark: false
@@ -40,7 +40,7 @@ converge simultaneously and, when convergent, are equal. At several singular end
 
 [L2] Monotonicity and surjectivity send truncations tending to an endpoint of $I$ to truncations tending to the corresponding endpoint of $J$.
 
-[L3] Limits are preserved under equality and under finite sums ([[thm-algebra-of-function-limits]]).
+[L3] Improper convergence at one end is the existence of a finite limit of the corresponding compact-truncation values ([[def-improper-integral-at-infinity]], [[def-improper-integral-at-a-finite-endpoint]]).
 
 [L4] Mixed improper integrals require separate convergence at every singular end ([[def-mixed-improper-integral]]).
 
@@ -52,6 +52,6 @@ converge simultaneously and, when convergent, are equal. At several singular end
 $$\int_{\phi([u,v])}f=\int_u^v(f\circ\phi)|\phi'|,$$
 with the endpoint order adjusted when $\phi$ decreases.
 
-2.1 By [L2], the two sides form the same net of values as the corresponding truncation approaches a singular end. Thus one has a finite limit exactly when the other does, and the limits are equal. [step 1.1, L2, L3]
+2.1 By [L2], the two sides form the same family of values as the corresponding truncation approaches a singular end. Since they are equal term by term by step 1.1, the epsilon condition in [L3] holds for one family exactly when it holds for the other, with the same limit. [step 1.1, L2, L3]
 
 3.1 For multiple ends, apply step 2.1 separately at each matched end and add only after all pieces converge, as [L4] requires. The oriented convention supplies the sign for a decreasing parametrization. [L4, step 2.1] ∎

@@ -9,7 +9,8 @@ provenance:
   proof: ai-generated
 deps: [def-riemann-stieltjes-sum-and-integral,
        def-partition-and-refinement, def-finite-sum, lem-finite-sum-laws,
-       def-complete-ordered-field, def-bounded-set,
+       def-complete-ordered-field, def-infimum, thm-infimum-property,
+       def-bounded-set,
        cor-archimedean-reciprocal, def-continuity-real,
        thm-monotone-discontinuities-are-jumps]
 justified_by: []
@@ -58,7 +59,7 @@ alone is equivalent to mesh Riemann-Stieltjes integrability.
 
 [L3] Finite sums split, telescope, and preserve inequalities termwise ([[def-finite-sum]], [[lem-finite-sum-laws]]).
 
-[L4] Every nonempty bounded set of reals has a supremum and infimum ([[def-complete-ordered-field]], [[def-bounded-set]]).
+[L4] Every nonempty set of reals bounded above has a supremum, and every nonempty set bounded below has an infimum ([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[def-bounded-set]]).
 
 [L5] Arbitrarily small positive reciprocal naturals exist ([[cor-archimedean-reciprocal]]).
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-jordan-fubini-by-sections, thm-graphs-of-continuous-functions-have-content-zero, thm-jordan-boundary-criterion, thm-continuous-functions-on-compact-jordan-sets-are-integrable]
+deps: [thm-jordan-fubini-by-sections, thm-graphs-of-continuous-functions-have-content-zero, thm-jordan-boundary-criterion, thm-continuous-functions-on-compact-jordan-sets-are-integrable, thm-heine-borel-rn]
 justified_by: []
 aliases: []
 landmark: false
@@ -44,11 +44,13 @@ The formula includes coincident graphs and uses the continuous extension on the 
 
 [L4] A continuous real function on a compact Jordan set is Riemann integrable there ([[thm-continuous-functions-on-compact-jordan-sets-are-integrable]]).
 
+[L5] A closed bounded subset of $\mathbb R^2$ is compact ([[thm-heine-borel-rn]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The boundary of $K$ is contained in the graphs of $\alpha$ and $\beta$ together with the two vertical endpoint segments. Each is a continuous graph, after exchanging coordinates for the vertical segments, and hence has content zero by [L3]. The set $K$ is closed and bounded, thus compact, and [L2] makes it Jordan measurable. [L2, L3, given]
+1.1 The boundary of $K$ is contained in the graphs of $\alpha$ and $\beta$ together with the two vertical endpoint segments. Each is a continuous graph, after exchanging coordinates for the vertical segments, and hence has content zero by [L3]. The set $K$ is closed and bounded, hence compact by [L5], and [L2] makes it Jordan measurable. [L2, L3, L5, given]
 
 2.1 The continuous $H$ is integrable on the compact Jordan set by [L4]. Every vertical section is the closed interval $[\alpha(x),\beta(x)]$, and its restriction is continuous, so [L1] gives the displayed formula. [L1, L4, step 1.1]
 

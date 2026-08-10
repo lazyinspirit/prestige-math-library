@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-elementary-divisor-data-for-a-finite-abelian-group, def-invariant-factor-data-for-a-finite-abelian-group, thm-chinese-remainder-theorem, thm-order-of-element-in-direct-product, thm-classification-of-cyclic-groups]
+deps: [def-elementary-divisor-data-for-a-finite-abelian-group, def-invariant-factor-data-for-a-finite-abelian-group, thm-chinese-remainder-theorem, thm-order-of-element-in-direct-product, thm-classification-of-cyclic-groups, thm-canonical-prime-factorisation]
 justified_by: []
 aliases: []
 landmark: false
@@ -41,6 +41,8 @@ Every multiset of prime-power elementary divisors regroups in exactly one way in
 
 [L5] If $G=\langle g\rangle$ is cyclic, then exactly one of the following applies: - if $g$ has infinite order, $G\cong(\mathbb Z,+)$; - if $g$ has finite order $n$, necessarily $n\ge1$, then $G\cong(\mathbb Z/n,+)$. ([[thm-classification-of-cyclic-groups]]).
 
+[L6] Powers are the natural powers of def-group-power and finite products those of def-monoid-finite-product, both taken in the commutative monoid $(\mathbb{Z},\cdot,1)$ of lem-units-of-z. Call $p : r \to \mathbb{Z}$ an **injective list of primes** when every $p_i$ is prime (def-prime) and $p_i = p_j$ forces $i = j$ (def-injection-surjection-bijection). Let $n \in \mathbb{Z}$ with $n \ge 1$ and let $p : r \to \mathbb{Z}$ be an injective list of primes such that every prime divisor of $n$ equals $p_i$ for some $i < r$. Then, with $v_q$ as in def-p-adic-valuation: 1. $\displaystyle n \;=\; \prod_{i<r} p_i^{\,v_{p_i}(n)}$; 2. $v_q(n) = 0$ for every prime $q$ that is not among $p_0,\dots,p_{r-1}$; 3. the exponents are determined by $n$: if $e : r \to \mathbb{N}$ and $n = \prod_{i<r} p_i^{\,e_i}$, then $e_j = v_{p_j}(n)$ for every $j < r$. Clause 3 needs only injectivity of the list, not the covering hypothesis. ([[thm-canonical-prime-factorisation]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -49,6 +51,6 @@ Every multiset of prime-power elementary divisors regroups in exactly one way in
 
 2.1 The aligned exponents are nondecreasing, so $n_1\mid\cdots\mid n_r$. The Chinese remainder theorem identifies each column product of coprime cyclic groups with $C_{n_i}$. [step 1.1]
 
-3.1 Conversely, prime factorisation of each $n_i$ recovers every padded exponent column and hence the original elementary divisors. [step 2.1]
+3.1 Conversely, canonical prime factorisation of each $n_i$ recovers every padded exponent column and hence the original elementary divisors. [step 2.1, L6]
 
 4.1 The empty multiset gives the empty list, so uniqueness includes the trivial group. [step 3.1] ∎

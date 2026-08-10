@@ -8,7 +8,8 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-bounded-variation-and-total-variation, def-partition-and-refinement,
-       def-finite-sum, lem-finite-sum-laws, lem-sup-unique, def-interval]
+       def-finite-sum, lem-finite-sum-laws, def-complete-ordered-field,
+       lem-sup-unique, def-interval]
 justified_by: []
 aliases: []
 landmark: true
@@ -40,11 +41,11 @@ Consequently restriction to any subinterval cannot increase total variation.
 
 [L1] Total variation is the supremum of finite variation sums, and singleton variation is $0$ ([[def-bounded-variation-and-total-variation]]).
 
-[L2] Partitions may be spliced at a shared endpoint, and inserting $c$ produces a refinement ([[def-partition-and-refinement]]).
+[L2] A partition is a finite strictly increasing endpoint list, and a refinement contains every point of the original partition ([[def-partition-and-refinement]]).
 
 [L3] Finite sums telescope and split at an index ([[def-finite-sum]], [[lem-finite-sum-laws]]).
 
-[L4] Suprema are unique and preserve upper-bound comparisons ([[lem-sup-unique]]).
+[L4] A supremum is the least upper bound of a nonempty set bounded above, and is unique ([[def-complete-ordered-field]], [[lem-sup-unique]]).
 
 [L5] Closed subintervals are the sets $[u,v]=\{x:u\le x\le v\}$ ([[def-interval]]).
 

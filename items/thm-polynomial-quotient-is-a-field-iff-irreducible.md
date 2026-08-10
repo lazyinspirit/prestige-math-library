@@ -36,7 +36,7 @@ Let $F$ be a field and let $p\in F[x]$ be nonconstant. The following are equival
 
 [L1] The monic gcd of two polynomials is a polynomial linear combination of them ([[thm-bezout-identity-for-polynomials]]).
 
-[L2] The principal ideal $(p)$ consists of the multiples of $p$ ([[def-generated-and-principal-ideals]]).
+[L2] The principal ideal $(p)$ is the smallest ideal containing $p$ ([[def-generated-and-principal-ideals]]).
 
 [L3] A maximal ideal is a proper ideal with no proper ideal strictly between it and the whole ring ([[def-prime-and-maximal-ideals]]).
 
@@ -50,8 +50,8 @@ Let $F$ be a field and let $p\in F[x]$ be nonconstant. The following are equival
 
 **Proof technique:** direct.
 
-1.1 Suppose $p$ is irreducible and $f+(p)$ is a nonzero residue class; then $p\nmid f$, so every common divisor of $p,f$ is a unit and [L1] gives $A p+B f=1$, whence [L4] gives $(B+(p))(f+(p))=1+(p)$; every nonzero class is invertible, so the quotient is a field. [given, L1, L2, L4, L6]
+1.1 In a commutative ring the multiples of $p$ form an ideal containing $p$ and lie in every ideal containing $p$, so [L2] identifies $(p)$ with the set of multiples of $p$. Suppose $p$ is irreducible and $f+(p)$ is a nonzero residue class; then $p\nmid f$. If a common divisor $d$ of $p,f$ were a nonunit, a factorization $p=de$ and [L6] would make $e$ a unit, so $d$ would be associate to $p$ and $d\mid f$ would imply $p\mid f$, a contradiction. Thus every common divisor is a unit, and [L1] gives $A p+B f=1$, whence [L4] gives $(B+(p))(f+(p))=1+(p)$; every nonzero class is invertible, so the quotient is a field. [given, L1, L2, L4, L6, algebra]
 
-1.2 Conversely, suppose the quotient is a field and $p=ab$. By [L4], the two residue classes have product zero, so one is zero; say $a\in(p)$, and write $a=pc$. Then $p=ab=pcb$. A direct leading-coefficient argument shows that $F[x]$ has no zero divisors, because $F$ is a field, so cancellation of the nonzero polynomial $p$ gives $cb=1$ and makes $b$ a unit. The other case similarly makes $a$ a unit, and [L6] makes $p$ irreducible. [given, L2, L4, L6, algebra]
+2.1 Conversely, suppose the quotient is a field and $p=ab$. By [L4], the two residue classes have product zero, so one is zero; say $a\in(p)$. The characterization established in step 1.1 gives $a=pc$, and hence $p=ab=pcb$. A direct leading-coefficient argument shows that $F[x]$ has no zero divisors, because $F$ is a field, so cancellation of the nonzero polynomial $p$ gives $cb=1$ and makes $b$ a unit. The other case similarly makes $a$ a unit, and [L6] makes $p$ irreducible. [step 1.1, given, L2, L4, L6, algebra]
 
-2.1 Steps 1.1 and 1.2 prove that irreducibility is equivalent to quotient fieldness, and [L5] identifies quotient fieldness with maximality of $(p)$ in the sense of [L3]. [step 1.1, step 1.2, L3, L5] ∎
+3.1 Steps 1.1 and 2.1 prove that irreducibility is equivalent to quotient fieldness, and [L5] identifies quotient fieldness with maximality of $(p)$ in the sense of [L3]. [step 1.1, step 2.1, L3, L5] ∎

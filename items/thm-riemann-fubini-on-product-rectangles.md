@@ -41,6 +41,10 @@ The same assertion holds with the coordinate blocks exchanged. In particular, wh
 
 [L2] A bounded $f:Q\to\mathbb R$ on a nondegenerate rectangle is Riemann integrable if and only if, for every $\varepsilon>0$, some grid $P$ satisfies $U(f,P)-L(f,P)<\varepsilon$ ([[thm-multidimensional-riemann-criterion]]).
 
+[L3] A content-zero set has finite cube covers of arbitrarily small total volume ([[def-null-and-content-zero-in-rn]]).
+
+[L4] The multidimensional Riemann integral is linear on integrable functions ([[thm-multidimensional-integral-properties]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -49,4 +53,4 @@ The same assertion holds with the coordinate blocks exchanged. In particular, wh
 
 2.1 By [L2], both $\ell_B$ and $u_B$ are integrable. The inequalities in [L1], applied to grids with gaps tending to zero, give $\int_A\ell_B\ge\int_{A\times B}f$ and $\int_Au_B\le\int_{A\times B}f$; since $\ell_B\le u_B$, all three values are equal. The same argument after exchanging $A$ and $B$ gives the other two equalities. [L2, step 1.1, algebra]
 
-3.1 Suppose $h=\int_Bf_x$ outside a content-zero $N$. There $h=\ell_B=u_B$. If $M$ bounds $|h|,|\ell_B|,|u_B|$, a finite cube cover of $N$ with arbitrarily small total volume, refined into an outer grid, bounds the upper integral of $|h-\ell_B|$ by $2M$ times that volume. Thus $h-\ell_B$ is integrable with integral $0$, so $\int_Ah=\int_A\ell_B=\int_{A\times B}f$. The exchanged assertion is identical. [step 2.1, algebra] ∎
+3.1 Suppose $h=\int_Bf_x$ outside a content-zero $N$. There $h=\ell_B=u_B$. If $M$ bounds $|h|,|\ell_B|,|u_B|$, a finite cube cover of $N$ with arbitrarily small total volume, refined into an outer grid, bounds the upper integral of $|h-\ell_B|$ by $2M$ times that volume. The criterion [L2] therefore makes $h-\ell_B$ integrable with integral $0$, and linearity gives $\int_Ah=\int_A\ell_B=\int_{A\times B}f$. The exchanged assertion is identical. [L2, L3, L4, step 2.1, algebra] ∎

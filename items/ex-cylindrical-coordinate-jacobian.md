@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---

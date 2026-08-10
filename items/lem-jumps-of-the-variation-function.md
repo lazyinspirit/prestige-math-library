@@ -13,7 +13,7 @@ deps: [lem-variation-additive-on-subintervals,
        def-one-sided-limits, thm-algebra-of-function-limits,
        def-continuity-real, def-series,
        cor-monotone-converges-iff-bounded, lem-series-tail-invariance,
-       lem-geometric-sequence-null]
+       lem-convergent-implies-cauchy, lem-geometric-sequence-null]
 justified_by: []
 aliases: []
 landmark: false
@@ -51,7 +51,7 @@ $V_f$ is continuous at every point where $f$ is continuous.
 
 [L5] Continuity is equality of the relevant limit with the function value ([[def-continuity-real]]).
 
-[L6] A bounded nondecreasing sequence converges, and the tails of its associated nonnegative series tend to zero ([[cor-monotone-converges-iff-bounded]], [[def-series]], [[lem-series-tail-invariance]]).
+[L6] A bounded nondecreasing sequence converges; its partial sums are therefore Cauchy, so the sums over all sufficiently remote finite tails are uniformly small ([[cor-monotone-converges-iff-bounded]], [[def-series]], [[lem-series-tail-invariance]], [[lem-convergent-implies-cauchy]]).
 
 [L7] Geometric sequences with ratio in $(0,1)$ tend to zero ([[lem-geometric-sequence-null]]).
 

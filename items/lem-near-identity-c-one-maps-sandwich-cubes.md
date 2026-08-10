@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, Lemma 6.1.3"
+    - title: "A. Leibman, Multidimensional Real Analysis, Lemma 5.5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $C(a,r)=\{x:\|x-a\|_\infty\le r\}$ with $r>0$, let $W\subseteq\mathbb R^n$ be convex and open with $C(a,r)\subseteq W$, and let $F:W\to\mathbb R^n$ be $C^1$. Assume $F(a)=a$ and, for some $0\le q<1$,
+Let $n\ge1$, let $C(a,r)=\{x:\|x-a\|_\infty\le r\}$ with $r>0$, let $W\subseteq\mathbb R^n$ be convex and open with $C(a,r)\subseteq W$, and let $F:W\to\mathbb R^n$ be $C^1$. Assume $F(a)=a$ and, for some $0\le q<1$,
 $$\|(DF(z)-I)v\|_2\le \frac q{\sqrt n}\|v\|_2$$
 for every $z\in W$ and $v\in\mathbb R^n$. Then
 $$C(a,(1-q)r)\subseteq F(C(a,r))\subseteq C(a,(1+q)r).$$

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-polynomial-evaluation-and-root, def-coprime, lem-coprime-divides-product, def-polynomial-degree-leading-coefficient-and-monic, thm-rat-field, thm-induction-principle]
+deps: [def-polynomial-evaluation-and-root, def-coprime, lem-coprime-divides-product, def-polynomial-degree-leading-coefficient-and-monic, thm-rat-field, lem-int-embeds-rat, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: true
@@ -44,14 +44,16 @@ $$ r\mid a_0\qquad\text{and}\qquad s\mid a_n. $$
 
 [L5] The rational numbers form a field, so multiplication by the nonzero denominator power preserves the root equation ([[thm-rat-field]]).
 
-[L6] The induction principle permits iteration of a divisibility implication through a positive power ([[thm-induction-principle]]).
+[L6] The integers embed in the rationals preserving addition and multiplication ([[lem-int-embeds-rat]]).
+
+[L7] The induction principle permits iteration of a divisibility implication through a positive power ([[thm-induction-principle]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1] and [L5], multiplying $f(r/s)=0$ by $s^n$ gives $a_nr^n+a_{n-1}r^{n-1}s+\cdots+a_1rs^{n-1}+a_0s^n=0$. [given, L1, L4, L5, algebra]
+1.1 By [L1], [L5], and the coefficient embedding [L6], multiplying $f(r/s)=0$ by $s^n$ gives $a_nr^n+a_{n-1}r^{n-1}s+\cdots+a_1rs^{n-1}+a_0s^n=0$. [given, L1, L4, L5, L6, algebra]
 
-2.1 The equation shows $r\mid a_0s^n$; [L2], [L3], and [L6] remove the coprime factor $s$ one power at a time and give $r\mid a_0$, including $r=0$, when the root equation itself gives $a_0=0$. [step 1.1, L2, L3, L6]
+2.1 The equation shows $r\mid a_0s^n$; [L2], [L3], and [L7] remove the coprime factor $s$ one power at a time and give $r\mid a_0$, including $r=0$, when the root equation itself gives $a_0=0$. [step 1.1, L2, L3, L7]
 
-3.1 The same equation shows $s\mid a_nr^n$; [L2], [L3], and [L6] remove the coprime factor $r$ one power at a time and give $s\mid a_n$, proving both conclusions. [step 1.1, L2, L3, L4, L6] ∎
+3.1 The same equation shows $s\mid a_nr^n$; [L2], [L3], and [L7] remove the coprime factor $r$ one power at a time and give $s\mid a_n$, proving both conclusions. [step 1.1, L2, L3, L4, L7] ∎

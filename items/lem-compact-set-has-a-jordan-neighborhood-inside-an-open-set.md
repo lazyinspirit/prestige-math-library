@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-If $C\subseteq U\subseteq\mathbb R^n$, where $C$ is compact and $U$ is open, then there is a compact Jordan set $K$ such that
+Let $n\ge1$. If $C\subseteq U\subseteq\mathbb R^n$, where $C$ is compact and $U$ is open, then there is a compact Jordan set $K$ such that
 $$C\subseteq\operatorname{int}K\subseteq K\subseteq U.$$
 The set $K$ can be chosen as a finite union of closed grid rectangles.
 

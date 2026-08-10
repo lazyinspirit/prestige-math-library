@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-improper-integral-at-infinity, thm-integral-test-for-series,
+deps: [def-improper-integral-at-infinity, thm-monotonicity-of-the-integral,
+       thm-additivity-over-subintervals,
        cor-monotone-converges-iff-bounded,
        lem-improper-integral-splitting-and-tail-invariance,
        thm-of-archimedean, def-canonical-natural, def-series,
@@ -37,7 +38,7 @@ Changing finitely many initial terms or moving the finite lower integration endp
 
 **Given:** A nonnegative nonincreasing locally integrable $f$.
 
-[L1] The proper integral test bounds the integral at integer truncations between neighboring partial sums ([[thm-integral-test-for-series]]).
+[L1] Proper integration preserves order, evaluates the integral of a constant, and is additive over adjacent intervals ([[thm-monotonicity-of-the-integral]], [[thm-additivity-over-subintervals]]).
 
 [L2] Nonnegative partial sums and integer truncation integrals are nondecreasing, hence converge exactly when bounded ([[cor-monotone-converges-iff-bounded]]).
 
@@ -47,6 +48,10 @@ Changing finitely many initial terms or moving the finite lower integration endp
 
 **Proof technique:** direct.
 
-1.1 By [L1], the series partial sums are bounded exactly when the values $\int_1^Nf$ at positive integer $N$ are bounded. By [L2], this is exactly convergence of the corresponding two monotone sequences. [L1, L2]
+1.1 For every integer $k\ge1$, monotonicity of $f$ and [L1, L2] give
+$$f(k+1)\le\int_k^{k+1}f(x)\,dx\le f(k).$$
+Adding these inequalities and using interval additivity yields
+$$\sum_{k=2}^{N+1}f(k)\le\int_1^{N+1}f(x)\,dx\le\sum_{k=1}^{N}f(k).$$
+Thus the series partial sums are bounded exactly when the integer truncation integrals are bounded. By [L2], this is exactly convergence of the corresponding two monotone sequences. [L1, L2]
 
 2.1 Suppose the integer truncations converge to $I$. Given a sufficiently large integer $N$ and any real $R\ge N$, [L3] supplies an integer $M>R$. Nonnegativity gives $\int_1^Nf\le\int_1^Rf\le\int_1^Mf$, and both integer bounds tend to $I$; hence the full real-parameter limit is $I$. The reverse implication is immediate by restriction to integer truncations. Tail invariance handles finite changes. [L3] ∎

@@ -38,6 +38,6 @@ Let $F$ be a field. Every irreducible polynomial $p\in F[x]$ is prime: if $p$ di
 
 **Proof technique:** direct.
 
-1.1 If $p\mid f$ there is nothing to prove; otherwise any common divisor of $p$ and $f$ divides the irreducible $p$, so it is a unit, and [L1] gives $A,B\in F[x]$ with $Ap+Bf=1$. [given, L1, L2, choose]
+1.1 If $p\mid f$ there is nothing to prove. Otherwise, if a common divisor $d$ of $p$ and $f$ were a nonunit, a factorization $p=de$ and irreducibility would make $e$ a unit, so $d$ would be associate to $p$ and $d\mid f$ would imply $p\mid f$, a contradiction. Thus every common divisor is a unit, and [L1] gives $A,B\in F[x]$ with $Ap+Bf=1$. [given, L1, L2, choose, algebra]
 
 2.1 Multiplying the identity by $g$ gives $Apg+Bfg=g$; both terms on the left are divisible by $p$, the second because $p\mid fg$, so $p\mid g$. Thus $p$ satisfies the prime condition in [L2]. [step 1.1, L2, algebra] ∎

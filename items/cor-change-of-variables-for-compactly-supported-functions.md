@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-change-of-variables-for-compact-jordan-sets, thm-injective-c-one-images-of-compact-jordan-sets-are-jordan, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-support-and-compactly-supported-riemann-integral-in-rn, lem-compactly-supported-riemann-integral-is-well-defined]
+deps: [thm-change-of-variables-for-compact-jordan-sets, thm-injective-c-one-images-of-compact-jordan-sets-are-jordan, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-support-and-compactly-supported-riemann-integral-in-rn, lem-compactly-supported-riemann-integral-is-well-defined, thm-euclidean-inverse-function-theorem]
 justified_by: []
 aliases: []
 landmark: false
@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, Theorem 6.1.4"
+    - title: "A. Leibman, Multidimensional Real Analysis, Theorem 5.5.7"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $U\subseteq\mathbb R^n$ be open and let $g:U\to\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\mathbb R^n\to\mathbb R$ be compactly supported Riemann integrable and suppose $\operatorname{supp}f\subseteq g(U)$. Define
+Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open, and let $g:U\to\mathbb R^n$ be injective and $C^1$, with $Dg(x)$ invertible on $U$. Let $f:\mathbb R^n\to\mathbb R$ be compactly supported Riemann integrable and suppose $\operatorname{supp}f\subseteq g(U)$. Define
 $$h(x)=\begin{cases}f(g(x))|\det Dg(x)|,&x\in U,\\0,&x\notin U.\end{cases}$$
 Then $h$ is compactly supported Riemann integrable and
 $$\int_{\mathbb R^n}f(y)\,dy=\int_{\mathbb R^n}h(x)\,dx.$$
@@ -39,11 +39,13 @@ $$\int_{\mathbb R^n}f(y)\,dy=\int_{\mathbb R^n}h(x)\,dx.$$
 
 [L3] Compactly supported integrals are independent of their bounding rectangles ([[lem-compactly-supported-riemann-integral-is-well-defined]]).
 
+[L4] The inverse function theorem gives a local $C^1$ inverse wherever the derivative is invertible ([[thm-euclidean-inverse-function-theorem]]).
+
 ## Proof
 
 **Proof technique:** reduction.
 
-1.1 The inverse on $g(U)$ is continuous, so $C=g^{-1}(\operatorname{supp}f)$ is compact and lies in $U$. By [L1], choose compact Jordan $K$ with $C\subseteq\operatorname{int}K\subseteq K\subseteq U$. [L1, given]
+1.1 By [L4] and global injectivity, the local inverses patch to a continuous inverse on $g(U)$. Thus $C=g^{-1}(\operatorname{supp}f)$ is compact and lies in $U$. By [L1], choose compact Jordan $K$ with $C\subseteq\operatorname{int}K\subseteq K\subseteq U$. [L1, L4, given]
 
 2.1 The function $f$ vanishes outside $g(K)$, while $h$ vanishes outside $K$. Apply [L2] to $f|_{g(K)}$; its transformed integrand is $h|_K$, giving the following identity. [L2, step 1.1]
 $$\int_{g(K)}f=\int_Kh.$$

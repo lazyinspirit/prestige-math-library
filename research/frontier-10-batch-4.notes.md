@@ -344,3 +344,7 @@ The final required individual checks are green:
 - `node tools/proof-contract.mjs research/frontier-10-batch-4.proof-contracts.json --strict` — **OK**, 70/70 proof-bearing items, 0 errors, and 0 warnings.
 
 The aggregate `tools/gates.mjs` wrapper was not run, exactly as the Step-5 dispatch requires. There is no batch-local content, dependency, rendering, coverage, proof-contract, or sandbox blocker.
+
+## 12. Independent step-6 reader checkpoint (batch 4)
+
+The independent reader completed a first pass over all 81 dispatched items, the four page files, and the actual Statements of every external dependency cited by the batch. Boundary and counterexample checks are complete. The repair pass is focused on concrete licensing defects: sequence completeness was cited for nets or families of tagged sums; finite-point limit algebra was cited at improper endpoints; Cantor-function continuity was attributed to a theorem whose Statement expressly makes no continuity claim; and several variation or integrability properties were attributed to weaker definitions or corollaries. No dispatched Statement has yet been found false. The reader findings file remains the normative step-6 record; Alpha must adjudicate every reported repair from disk.

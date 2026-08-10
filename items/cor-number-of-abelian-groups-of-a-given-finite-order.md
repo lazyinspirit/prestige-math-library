@@ -25,7 +25,7 @@ pipeline_run: null
 ---
 ## Statement
 
-If $n=\prod_p p^{a_p}$, then the number of isomorphism classes of abelian groups of order $n$ is $$\prod_p P(a_p),$$ where $P(a)$ is the number of partitions of $a$. For $n=1$ the empty product is $1$.
+Let $n\ge1$, and write its canonical prime factorisation as $n=\prod_{i<r}p_i^{a_i}$, with the $p_i$ distinct and $a_i>0$. Then the number of isomorphism classes of abelian groups of order $n$ is $$\prod_{i<r}P(a_i),$$ where $P(a)$ is the number of partitions of $a$. For $n=1$ one has $r=0$, so the empty product is $1$.
 
 ## Facts & Assumptions
 
@@ -43,6 +43,6 @@ If $n=\prod_p p^{a_p}$, then the number of isomorphism classes of abelian groups
 
 **Proof technique:** direct.
 
-1.1 Primary decomposition makes an abelian group of order $n$ the product of one abelian $p$-group of order $p^{a_p}$ for each prime divisor $p$. [given, L1, L2, L3, L4]
+1.1 Primary decomposition makes an abelian group of order $n$ the product of one abelian $p_i$-group of order $p_i^{a_i}$ for each $i<r$. [given, L1, L2, L3, L4]
 
-2.1 The choices for distinct primes are independent and the preceding corollary counts them by $P(a_p)$, so the product rule gives the formula. The empty prime factorisation of $1$ gives one choice. [step 1.1] ∎
+2.1 The choices for distinct primes are independent and the preceding corollary counts the $i$th choice by $P(a_i)$, so the product rule gives the formula. The empty prime factorisation of $1$ gives one choice. [step 1.1] ∎

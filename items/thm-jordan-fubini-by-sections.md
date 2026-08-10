@@ -38,6 +38,8 @@ The symmetric assertion holds for the other coordinate block.
 
 [L2] An empty Jordan section has integral zero, and section integrals are taken after zero extension to a bounding rectangle ([[def-sections-and-iterated-riemann-integrals]]).
 
+[L3] The Jordan-set integral is independent of the chosen bounding rectangle ([[lem-jordan-set-integral-well-defined]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -46,4 +48,4 @@ The symmetric assertion holds for the other coordinate block.
 
 2.1 The zero extension is integrable by the definition of the Jordan-set integral. Apply [L1]; outside $N$ its ordinary section integral is exactly $h(x)$, so the exceptional-section clause gives $\int_Eg=\int_Ah$. [L1, step 1.1]
 
-3.1 Enlarging $A$ or $B$ only adds zero to the zero extension. Independence of the Jordan integral from a bounding rectangle and the content-zero invariance in [L1] therefore prove independence of both factor rectangles and of the assigned values on $N$. [L2, step 2.1, algebra] ∎
+3.1 Enlarging $A$ or $B$ only adds zero to the zero extension. Independence of the Jordan integral from a bounding rectangle [L3] and the content-zero invariance in [L1] therefore prove independence of both factor rectangles and of the assigned values on $N$. [L1, L2, L3, step 2.1, algebra] ∎

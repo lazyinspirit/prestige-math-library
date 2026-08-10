@@ -41,14 +41,18 @@ each cycle. The identity permutation has the empty disjoint-cycle decomposition.
 
 [L2] For a left action, the distinct orbits partition the acted-on set ([[thm-orbits-partition-the-set]]).
 
+[L3] The cyclic subgroup $\langle\sigma\rangle$ is exactly the set of integer powers $\{\sigma^r:r\in\mathbb Z\}$ ([[lem-cyclic-subgroup-is-the-set-of-powers]]).
+
+[L4] Cycles with disjoint supports commute ([[lem-disjoint-cycles-commute]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The evaluation rule is an action, and its orbit at $x$ is $\{\sigma^r(x):r\in\mathbb Z\}$; by [L2] these orbits partition $X$. [given, L1, L2]
+1.1 The evaluation rule is an action by the Given, and [L3] identifies its orbit at $x$ as $\{\sigma^r(x):r\in\mathbb Z\}$; by [L2] these orbits partition $X$. [given, L2, L3]
 
 2.1 Fix an orbit $O$. Since $O$ is finite, the sequence $x,\sigma(x),\sigma^2(x),\ldots$ first repeats; bijectivity of $\sigma$ makes the first repeated value $x$. If the least positive return time is $d$, then $O=\{x,\sigma(x),\ldots,\sigma^{d-1}(x)\}$ and $\sigma$ restricts to the cycle $(x\,\sigma(x)\,\ldots\,\sigma^{d-1}(x))$; when $d=1$, $x$ is fixed. [step 1.1, L1]
 
 3.1 The cycles obtained from the non-singleton orbits have pairwise disjoint supports, and their product agrees with $\sigma$ on each orbit and fixes every singleton orbit. Their product is therefore $\sigma$; if every orbit is a singleton, this is the empty product. [step 2.1, L1, L2]
 
-4.1 In any disjoint-cycle decomposition of $\sigma$, successive powers of $\sigma$ move a point exactly around the unique factor whose support contains it, so that support is the point's intrinsic $\langle\sigma\rangle$-orbit. Hence the factor supports are forced, and the cycle on each support is forced up to its starting point, which is cyclic rotation; only the order of the disjoint factors remains free. [step 3.1, L1, L2] ∎
+4.1 In any disjoint-cycle decomposition of $\sigma$, [L4] allows powers to be taken factor by factor, while every factor except the unique one supporting a given point fixes that point. Thus successive powers of $\sigma$ move the point exactly around that factor's support, so the support is the point's intrinsic $\langle\sigma\rangle$-orbit. Hence the factor supports are forced, and the cycle on each support is forced up to its starting point, which is cyclic rotation; only the order of the disjoint factors remains free. [step 3.1, L1, L2, L3, L4] ∎

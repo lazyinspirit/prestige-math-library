@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-reduction-mod-prime-irreducibility-test, thm-quadratic-and-cubic-irreducibility-test, prop-integers-modulo-n-as-a-quotient-ring, def-prime, lem-divisor-bound, def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, lem-nat-embeds-int, lem-nat-discrete]
+deps: [thm-reduction-mod-prime-irreducibility-test, thm-quadratic-and-cubic-irreducibility-test, prop-integers-modulo-n-as-a-quotient-ring, thm-z-mod-p-is-a-field, def-prime, lem-divisor-bound, def-int-abs, lem-int-abs-properties, thm-int-ordered-ring, lem-nat-embeds-int, lem-nat-discrete]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +36,7 @@ The polynomial $f=x^3+17x+391$ is irreducible in $\mathbb Q[x]$.
 
 [L3] The ring $\mathbb Z/2$ is the quotient $\mathbb Z/2\mathbb Z$ ([[prop-integers-modulo-n-as-a-quotient-ring]]).
 
-[L4] The integer $2$ is prime ([[def-prime]]).
+[L4] An integer is prime when it exceeds $1$ and has no positive divisors other than $1$ and itself ([[def-prime]]).
 
 [L5] Integer divisors of a nonzero integer are bounded in absolute value ([[lem-divisor-bound]]).
 
@@ -50,10 +50,12 @@ The polynomial $f=x^3+17x+391$ is irreducible in $\mathbb Q[x]$.
 
 [L10] The natural order is discrete ([[lem-nat-discrete]]).
 
+[L11] For prime $p$, the ring $\mathbb Z/p$ is a field ([[thm-z-mod-p-is-a-field]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Using [L3], reduction modulo the prime $2$ of [L4] gives $\bar f=x^3+x+1$; its values at the only residues $0$ and $1$ are both $1$, so [L2] makes $\bar f$ irreducible. [given, L2, L3, L4, L5, L6, L7, L8, L9, L10, algebra]
+1.1 Facts [L4] through [L10] show that $2$ is prime, so [L11] makes $\mathbb Z/2$ a field. Using [L3], reduction gives $\bar f=x^3+x+1$; its values at the only residues $0$ and $1$ are both $1$, so [L2] makes $\bar f$ irreducible. [given, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, algebra]
 
 2.1 The leading coefficient survives modulo $2$, and $f$ is primitive because it is monic, so [L1] proves that $f$ is irreducible over $\mathbb Q$. [step 1.1, L1] ∎

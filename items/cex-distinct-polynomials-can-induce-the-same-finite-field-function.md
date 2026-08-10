@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-polynomial-evaluation-and-root, thm-fermats-little-theorem, prop-integers-modulo-n-as-a-quotient-ring]
+deps: [def-polynomial-evaluation-and-root, thm-fermats-little-theorem, prop-integers-modulo-n-as-a-quotient-ring, def-prime, thm-z-mod-p-is-a-field]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,10 +36,14 @@ Two formal polynomials over a field are equal whenever they induce the same func
 
 [L3] The ring $\mathbb Z/p$ is the quotient $\mathbb Z/p\mathbb Z$ ([[prop-integers-modulo-n-as-a-quotient-ring]]).
 
+[L4] A prime integer is greater than $1$ ([[def-prime]]).
+
+[L5] For prime $p$, the quotient ring $\mathbb Z/p$ is a field ([[thm-z-mod-p-is-a-field]]).
+
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 For every $a\in\mathbb F_p$, choose an integer representative; [L2] and [L3] give $f(a)=a^p-a=0$, so $f$ and the zero polynomial induce the same function. [given, L1, L2, L3]
+1.1 Fact [L5] licenses the field $\mathbb F_p=\mathbb Z/p$. For every $a\in\mathbb F_p$, choose an integer representative; [L2] and [L3] give $f(a)=a^p-a=0$, so $f$ and the zero polynomial induce the same function. [given, L1, L2, L3, L5]
 
-2.1 Because a prime satisfies $p\ge2$, the degrees $p$ and $1$ are distinct; as a coefficient sequence, $f$ has coefficient $1$ in degree $p$ and is therefore nonzero. Hence [L1] distinguishes $f$ from the zero formal polynomial and refutes the statement. [given, L1, L3] ∎
+2.1 Because [L4] gives $p>1$, the degrees $p$ and $1$ are distinct; as a coefficient sequence, $f$ has coefficient $1$ in degree $p$ and is therefore nonzero. Hence [L1] distinguishes $f$ from the zero formal polynomial and refutes the statement. [given, L1, L3, L4] ∎

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, def-subgroup, def-generated-subgroup, def-finite-cardinality, def-exponent-of-a-finite-group, cor-order-and-exponent-from-invariant-factors, cor-finite-abelian-group-cyclic-iff-one-invariant-factor, def-polynomial-degree-leading-coefficient-and-monic, def-polynomial-evaluation-and-root, thm-root-bound-for-polynomials-over-a-domain]
+deps: [def-zero-divisor-and-integral-domain, lem-ring-units-form-a-group, def-subgroup, def-generated-subgroup, def-finite-cardinality, def-exponent-of-a-finite-group, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form, cor-order-and-exponent-from-invariant-factors, cor-finite-abelian-group-cyclic-iff-one-invariant-factor, def-polynomial-degree-leading-coefficient-and-monic, def-polynomial-evaluation-and-root, thm-root-bound-for-polynomials-over-a-domain]
 justified_by: []
 aliases: []
 landmark: true
@@ -52,6 +52,8 @@ Let $D$ be an integral domain. Every finite subgroup $G\le D^\times$ of the unit
 
 [L11] A nonzero polynomial of degree $n$ over an integral domain has at most $n$ distinct roots ([[thm-root-bound-for-polynomials-over-a-domain]]).
 
+[L12] Every finite abelian group has a unique invariant-factor list $1<n_1\mid\cdots\mid n_r$, with the trivial group corresponding to the empty list ([[thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -62,4 +64,4 @@ Let $D$ be an integral domain. Every finite subgroup $G\le D^\times$ of the unit
 
 2.1 Every $g\in G$ satisfies $g^e=1$, so all $|G|$ distinct elements of $G$ are roots, in the sense of [L10], of the nonzero monic polynomial $T^e-1$, whose degree is $e$ by [L9]; [L11] gives $|G|\le e$. [step 1.2, L5, L6, L9, L10, L11]
 
-3.1 Write the invariant-factor list of $G$ as $1<n_1\mid\cdots\mid n_r$. By [L7], $|G|=n_1\cdots n_r$ and $e=n_r$, so $e\le |G|$; step 2.1 gives equality. Hence $n_1\cdots n_r=n_r$, and because every $n_i>1$, this forces $r=1$. Fact [L8] makes $G$ cyclic, while step 1.1 covers the trivial case. [step 1.1, step 2.1, L7, L8] ∎
+3.1 By [L12], write the invariant-factor list of $G$ as $1<n_1\mid\cdots\mid n_r$. By [L7], $|G|=n_1\cdots n_r$ and $e=n_r$, so $e\le |G|$; step 2.1 gives equality. Hence $n_1\cdots n_r=n_r$, and because every $n_i>1$, this forces $r=1$. Fact [L8] makes $G$ cyclic, while step 1.1 covers the trivial case. [step 1.1, step 2.1, L7, L8, L12] ∎

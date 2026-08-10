@@ -35,12 +35,16 @@ $r=0$, the order is $1$.
 
 [L1] Every finite permutation has a disjoint-cycle decomposition, unique up to reordering and cyclic rotation ([[thm-disjoint-cycle-decomposition]]).
 
+[L2] Cycles with disjoint supports commute ([[lem-disjoint-cycles-commute]]).
+
+[L3] The order of an element is the least positive natural exponent giving the identity ([[def-order-in-a-group]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Write $\sigma=\gamma_1\cdots\gamma_r$ as in [L1]. Since the factors commute, $\sigma^k=\gamma_1^k\cdots\gamma_r^k$ for every natural $k$. [given, L1]
+1.1 Write $\sigma=\gamma_1\cdots\gamma_r$ as in [L1]. Since the factors commute by [L2], $\sigma^k=\gamma_1^k\cdots\gamma_r^k$ for every natural $k$. [given, L1, L2]
 
-2.1 A cycle of length $d_i$ has $k$-th power equal to the identity exactly when $d_i$ divides $k$; because the supports are disjoint, $\sigma^k$ is the identity exactly when every $\gamma_i^k$ is the identity. [step 1.1, L1]
+2.1 The $k$-th power of a $d_i$-cycle shifts its displayed entries by $k$ positions, so it is the identity exactly when $k\equiv0\pmod{d_i}$, equivalently when $d_i$ divides $k$. Because the supports are disjoint, $\sigma^k$ is the identity exactly when every $\gamma_i^k$ is the identity. [step 1.1, L1, L2]
 
-3.1 Thus the positive exponents giving the identity are precisely the positive common multiples of $d_1,\ldots,d_r$, so their least element is the order of $\sigma$. If $r=0$, then $\sigma$ is the identity and its order is $1$. [step 2.1, L1] ∎
+3.1 Thus the positive exponents giving the identity are precisely the positive common multiples of $d_1,\ldots,d_r$, so their least element is the order of $\sigma$ by [L3]. If $r=0$, then $\sigma$ is the identity and its order is $1$. [step 2.1, L1, L3] ∎

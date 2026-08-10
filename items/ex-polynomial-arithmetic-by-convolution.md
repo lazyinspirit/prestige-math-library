@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-polynomial-ring-over-a-commutative-ring]
+deps: [def-polynomial-ring-over-a-commutative-ring, thm-int-comm-ring]
 justified_by: []
 aliases: []
 landmark: false
@@ -34,10 +34,12 @@ $$ f+g=3+x+3x^2,\qquad fg=2+3x+4x^2-3x^3. $$
 
 [L1] Polynomial addition is coefficientwise, and the coefficient of $x^n$ in a product is the finite convolution sum $\sum_{i+j=n}a_i b_j$ ([[def-polynomial-ring-over-a-commutative-ring]]).
 
+[L2] The integers form a commutative ring ([[thm-int-comm-ring]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Coefficientwise addition gives the coefficients $(1+2,2-1,3+0)=(3,1,3)$. [given, L1, algebra]
+1.1 Coefficientwise addition over the commutative ring [L2] gives the coefficients $(1+2,2-1,3+0)=(3,1,3)$. [given, L1, L2, algebra]
 
-2.1 Convolution gives coefficients $2$, $-1+4=3$, $-2+6=4$, and $-3$ in degrees $0,1,2,3$, respectively, proving the displayed product. [given, L1, algebra] ∎
+2.1 Convolution gives coefficients $2$, $-1+4=3$, $-2+6=4$, and $-3$ in degrees $0,1,2,3$, respectively, proving the displayed product. [given, L1, L2, algebra] ∎

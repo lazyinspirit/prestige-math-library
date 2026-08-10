@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $f:\mathbb R^n\to\mathbb R$ have compact support. If $f$ is Riemann integrable on one closed rectangle whose interior contains its support, then it is integrable on every such rectangle, and all the resulting integrals are equal. This includes the empty-support case.
+Let $n\ge1$ and let $f:\mathbb R^n\to\mathbb R$ have compact support. If $f$ is Riemann integrable on one closed rectangle whose interior contains its support, then it is integrable on every such rectangle, and all the resulting integrals are equal. This includes the empty-support case.
 
 ## Facts & Assumptions
 
@@ -43,4 +43,3 @@ Let $f:\mathbb R^n\to\mathbb R$ have compact support. If $f$ is Riemann integrab
 2.1 If $f|_{Q_1}$ is integrable, [L1] makes its zero extension integrable on $Q$ with the same integral. Restricting this function to $Q_2$ by the coordinate cuts in [L2] gives integrability there, again with zero contribution off the support. [L1, L2, step 1.1]
 
 3.1 Applying [L1] to $Q_1$ and $Q_2$ inside the common rectangle yields $\int_{Q_1}f=\int_Qf=\int_{Q_2}f$. If the support is empty, all three functions are identically zero, so the same argument gives value $0$. [L1, step 2.1] ∎
-

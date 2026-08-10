@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, Theorem 6.1.4"
+    - title: "A. Leibman, Multidimensional Real Analysis, Theorem 5.5.7"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $U\subseteq\mathbb R^n$ be open, let $g:U\to\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\in U$. If $K\subseteq U$ is compact and Jordan measurable, then $g(K)$ is compact and Jordan measurable.
+Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open, let $g:U\to\mathbb R^n$ be injective and $C^1$, and suppose $Dg(x)$ is invertible for every $x\in U$. If $K\subseteq U$ is compact and Jordan measurable, then $g(K)$ is compact and Jordan measurable.
 
 ## Facts & Assumptions
 

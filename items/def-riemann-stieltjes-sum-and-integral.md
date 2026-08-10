@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-partition-and-refinement, def-tagged-partition-and-riemann-sum,
        def-finite-sum, lem-finite-sum-laws, def-bounded-set,
+       def-complete-ordered-field, def-infimum, thm-infimum-property,
        def-monotone-function, def-interval, def-oriented-integral]
 justified_by: []
 aliases: [def-riemann-stieltjes-integral]

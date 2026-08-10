@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-cantor-function-properties,
+deps: [thm-cantor-function-properties, cor-cantor-function-is-continuous,
        thm-riemann-stieltjes-existence-continuous-bv,
        def-riemann-stieltjes-sum-and-integral, lem-finite-sum-laws]
 justified_by: []
@@ -33,7 +33,7 @@ $$\int_0^1 1\,dc=1.$$
 
 **Given:** The Cantor function $c$ on $[0,1]$.
 
-[L1] The function $c$ is continuous and nondecreasing, with $c(0)=0$ and $c(1)=1$ ([[thm-cantor-function-properties]]).
+[L1] The function $c$ is continuous and nondecreasing, with $c(0)=0$ and $c(1)=1$ ([[cor-cantor-function-is-continuous]], [[thm-cantor-function-properties]]).
 
 [L2] A continuous integrand is integrable against a BV integrator ([[thm-riemann-stieltjes-existence-continuous-bv]]).
 

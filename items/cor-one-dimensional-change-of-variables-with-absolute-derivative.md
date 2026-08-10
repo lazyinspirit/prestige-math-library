@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "J. Lebl, Basic Analysis II, Theorem 10.6.6 and one-variable substitution"
+    - title: "J. Lebl, Basic Analysis II, Theorem 10.7.2 and one-variable substitution"
       url: "https://www.jirka.org/ra/realanal2.pdf"
 pipeline_run: null
 ---
@@ -42,9 +42,9 @@ Thus the absolute derivative is the correct factor for the unoriented image inte
 
 **Proof technique:** cases.
 
-1.1 Assume first that $\varphi$ is increasing. Its nonvanishing continuous derivative cannot be negative at any point, so it is positive throughout; [L2] is exactly the displayed formula. [L1, L2, assume-case increasing]
+1.1 Assume first that $\varphi$ is increasing. Every difference quotient using two points of $[a,b]$ is nonnegative, so an inward sequence at either endpoint and a two-sided sequence in the interior show that the derivative is nonnegative; nonvanishing makes it positive throughout. Thus [L2] is exactly the displayed formula. [L1, L2, given, assume-case increasing]
 
-1.2 Assume instead that $\varphi$ is decreasing. Then $\varphi'<0$ throughout, reversing both the oriented endpoints and the derivative sign in [L2], and consequently giving the following formula. [L1, L2, assume-case decreasing]
+1.2 Assume instead that $\varphi$ is decreasing. The same inward difference-quotient argument makes $\varphi'\le0$ on $[a,b]$, so nonvanishing makes $\varphi'<0$ throughout. This reverses both the oriented endpoints and the derivative sign in [L2], and consequently gives the following formula. [L1, L2, given, assume-case decreasing]
 $$\int_{\varphi(b)}^{\varphi(a)}f=\int_a^b(f\circ\varphi)|\varphi'|.$$
 
 2.1 The alternatives are exhaustive by [L1], and [L3] identifies $|\varphi'|$ with the one-dimensional absolute Jacobian factor. [L1, L3, cases-exhaustive: increasing or decreasing] ∎

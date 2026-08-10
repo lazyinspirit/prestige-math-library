@@ -45,6 +45,6 @@ The group $A_4$ has no subgroup of order $6$.
 
 2.1 The complement of $H$ in $A_4$ has six elements, so it cannot contain all eight three-cycles from [L1]; hence $H$ contains a three-cycle $g$. [step 1.1, L1]
 
-3.1 Normality puts every $A_4$-conjugate of $g$ in $H$, and subgroup closure puts $g^{-1}$ in $H$ and then all its conjugates there. Direct conjugation of the cycles in [L1] gives four three-cycles from $g$ and the other four from $g^{-1}$, so all eight three-cycles lie in $H$. [step 2.1, L1]
+3.1 Write $g=(a\,b\,c)$ and let $d$ be the fourth symbol. The three-cycle $u=(a\,b\,d)$ belongs to $A_4$ by [L1], so normality and direct evaluation give $ugu^{-1}=(b\,d\,c)=:h\in H$. Likewise $h\in A_4$ and $hgh^{-1}=(a\,d\,b)=:k\in H$. Subgroup closure also puts $g^{-1},h^{-1},k^{-1}$ in $H$. [step 2.1, L1]
 
-4.1 The identity and those eight distinct three-cycles give at least nine elements of $H$, contradicting $|H|=6$. Therefore no subgroup of order $6$ exists. [step 3.1, L1, discharge-contradiction] ∎
+4.1 The seven elements $e,g,g^{-1},h,h^{-1},k,k^{-1}$ are distinct: their displayed supports or orientations differ. This contradicts $|H|=6$, so no subgroup of order $6$ exists. [step 3.1, L1, discharge-contradiction] ∎

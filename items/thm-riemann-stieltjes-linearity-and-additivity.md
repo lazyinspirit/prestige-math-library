@@ -60,7 +60,7 @@ $$\int_a^b f\,d\alpha=\int_a^c f\,d\alpha+\int_c^b f\,d\alpha.$$
 
 [L7] The sum of the absolute integrator increments over any partition is at most $\operatorname{Var}_{[a,b]}(\alpha)$ ([[def-bounded-variation-and-total-variation]]).
 
-[L8] A Cauchy family of real sums has a finite real limit ([[thm-cauchy-criterion-via-lub]]).
+[L8] Every Cauchy sequence of real sums has a finite real limit ([[thm-cauchy-criterion-via-lub]]).
 
 ## Proof
 
@@ -70,4 +70,4 @@ $$\int_a^b f\,d\alpha=\int_a^c f\,d\alpha+\int_c^b f\,d\alpha.$$
 
 1.2 For a partition containing $c$, its Stieltjes sum splits exactly into the sums on the two subintervals. Inserting $c$ into a fine partition changes only the interval containing $c$. Direct subtraction bounds the difference, for any choices of the old and new tags, by the oscillation of $f$ near $c$ times the sum of the relevant absolute increments of $\alpha$, hence by that oscillation times $\operatorname{Var}_{[a,b]}(\alpha)$. Continuity of $f$ at $c$ makes this error tend to zero with the mesh. [L1, L3, L4, L5, L7]
 
-2.1 If the whole-interval integral exists, take any two sufficiently fine sums on $[a,c]$ and splice each with the same sufficiently fine sum on $[c,b]$. The two whole-interval sums are close, so their common right part cancels and the left sums are Cauchy; [L8] gives the left integral, and the symmetric argument gives the right one. Conversely, if both restricted integrals exist, splice their fine sums and use step 1.2 to compare with arbitrary whole-interval sums. The exact split gives the displayed value by [L2]. Endpoint cuts and reversed limits follow from [L6]. [step 1.2, L1, L2, L3, L6, L8] ∎
+2.1 If the whole-interval integral exists, take any two sufficiently fine sums on $[a,c]$ and splice each with the same sufficiently fine sum on $[c,b]$. The two whole-interval sums are close, so their common right part cancels and the left sums are Cauchy. Choose uniform left-hand sums with mesh tending to zero; they form a Cauchy sequence and have a limit by [L8]. Every arbitrary sufficiently fine left-hand sum is close to a sufficiently late uniform one, so the entire left-hand mesh family has that limit. The symmetric argument gives the right integral. Conversely, if both restricted integrals exist, splice their fine sums and use step 1.2 to compare with arbitrary whole-interval sums. The exact split gives the displayed value by [L2]. Endpoint cuts and reversed limits follow from [L6]. [step 1.2, L1, L2, L3, L6, L8] ∎

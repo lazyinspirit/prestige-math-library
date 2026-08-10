@@ -32,7 +32,7 @@ Then $f$ is Riemann integrable with integral $0$, although its $x$-section is no
 
 **Given:** The Thomae function $t$ and the displayed product on the unit square.
 
-[L1] Thomae's function is positive at a rational in inverse proportion to its least denominator and is zero at every irrational ([[def-dirichlet-and-thomae-functions]]).
+[L1] The rationals and irrationals are dense; Thomae's function is positive at a rational in inverse proportion to its least denominator and is zero at every irrational ([[def-dirichlet-and-thomae-functions]]).
 
 [L2] Product-grid Darboux gaps characterize multidimensional Riemann integrability ([[thm-multidimensional-riemann-criterion]]).
 
@@ -44,6 +44,6 @@ Then $f$ is Riemann integrable with integral $0$, although its $x$-section is no
 
 1.1 Given $\varepsilon>0$, only finitely many reduced rationals have Thomae height at least $\varepsilon/2$. Isolating those points in intervals of total length below $\varepsilon/2$ proves directly that $t$ is Riemann integrable with integral $0$; using the same intervals as horizontal strips gives a product-grid Darboux gap below $\varepsilon$ for $f$. Hence [L2] makes $f$ integrable with integral $0$. [L1, L2]
 
-2.1 At rational height $y$, $t(y)>0$ and the $x$-section is a nonzero multiple of the Dirichlet function, hence nonintegrable; at irrational height it is zero. Thus the lower and upper section integrals are $0$ and $t(y)$, whose outer integrals both vanish by [L1] and [L3]. [L1, L3, step 1.1]
+2.1 At rational height $y$, $t(y)>0$ and the $x$-section is a nonzero multiple of the Dirichlet function, hence nonintegrable; at irrational height it is zero. The exceptional rational heights are dense and not content zero: any finite union of closed intervals covering them also covers their closure $[0,1]$ and has total length at least $1$. The lower and upper section integrals are $0$ and $t(y)$, whose outer integrals both vanish by [L1] and [L3]. [L1, L3, step 1.1, algebra]
 
 3.1 In the other direction, a rational $x$ gives the section $t$ and an irrational $x$ gives zero; step 1.1 makes every such section integrable with value $0$. Hence that ordinary iterated integral is $0$, whereas the $x$-first ordinary iteration is undefined at a dense set of heights. [L1, step 1.1, step 2.1] ∎

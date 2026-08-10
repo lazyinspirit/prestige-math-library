@@ -32,7 +32,7 @@ For every positive natural number $n$, the polynomial $x^n-2$ is irreducible in 
 
 [L1] For every prime $p$ and positive $n$, the polynomial $x^n-p$ is irreducible over $\mathbb Q$ ([[cor-xn-minus-p-is-irreducible-over-q]]).
 
-[L2] The integer $2$ is prime because its only positive divisors are $1$ and $2$ ([[def-prime]]).
+[L2] An integer is prime when it exceeds $1$ and has no positive divisors other than $1$ and itself ([[def-prime]]).
 
 [L3] A divisor of a nonzero integer is bounded in absolute value ([[lem-divisor-bound]]).
 

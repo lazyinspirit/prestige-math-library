@@ -11,6 +11,7 @@ deps: [def-absolute-and-conditional-improper-convergence,
        thm-cauchy-criterion-for-improper-integrals,
        cor-integrability-of-absolute-values-products-and-lattice-operations,
        lem-limit-preserves-order,
+       def-sequence, thm-of-archimedean, cor-archimedean-reciprocal,
        lem-improper-integral-splitting-and-tail-invariance]
 justified_by: []
 aliases: []
@@ -40,7 +41,7 @@ For a mixed interval the same conclusion applies separately to each singular-end
 
 [L2] The improper Cauchy criterion characterizes convergence ([[thm-cauchy-criterion-for-improper-integrals]]).
 
-[L3] Inequalities persist under finite limits ([[lem-limit-preserves-order]]).
+[L3] Inequalities persist under limits of real sequences; integer and reciprocal truncation sequences approach the infinite and finite singular ends ([[lem-limit-preserves-order]], [[def-sequence]], [[thm-of-archimedean]], [[cor-archimedean-reciprocal]]).
 
 ## Proof
 
@@ -48,6 +49,6 @@ For a mixed interval the same conclusion applies separately to each singular-end
 
 1.1 By the Cauchy criterion [L2], remote tail integrals of $|f|$ are arbitrarily small. The proper inequality [L1] makes the corresponding tail integrals of $f$ no larger in absolute value. A second application of [L2] proves convergence of $\int f$. [L2, L1]
 
-1.2 Apply [L1] on compact truncations and pass to their finite limits using [L3] to obtain the displayed inequality. [L1, L3]
+1.2 Apply [L1] on compact truncations. Along integer truncations at infinity, or reciprocal truncations at a finite endpoint, both sides converge to the corresponding improper values; [L3] passes the inequality to those sequence limits and gives the displayed bound. [L1, L3]
 
 2.1 For a mixed integral, absolute convergence is required on every piece. Steps 1.1–1.2 apply piecewise, and finite addition completes the claim. [given] ∎

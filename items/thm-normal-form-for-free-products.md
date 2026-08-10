@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-reduced-syllable-words-form-the-free-product, def-reduced-syllable-word-in-a-family-of-groups]
+deps: [thm-reduced-syllable-words-form-the-free-product, def-reduced-syllable-word-in-a-family-of-groups, def-free-product-of-a-family-of-groups]
 justified_by: []
 aliases: []
 landmark: true
@@ -35,11 +35,13 @@ Every element of $\ast_{i\in I}G_i$ has a unique reduced syllable expression. Th
 
 [L2] For groups as in def-group, a **syllable** is a tagged pair $(i,g)$ with $i\in I$ and $g\in G_i\setminus\{e_i\}$. A **reduced syllable word** is a finite list of syllables, indexed by a natural length as in def-natural-numbers, in which adjacent tags differ. The empty list is allowed. At a concatenation seam, adjacent syllables from the same factor are multiplied and an identity result is deleted; this elementary reduction is repeated until the seam is reduced. ([[def-reduced-syllable-word-in-a-family-of-groups]]).
 
+[L3] For a family $(G_i)_{i\in I}$, a **free product** is a group $F$ with homomorphisms $\iota_i:G_i\to F$ in the sense of def-group-homomorphism, such that for every group $H$ and every family of homomorphisms $f_i:G_i\to H$, there is a unique homomorphism $f:F\to H$ satisfying $f\circ\iota_i=f_i$ for all $i$. It is denoted $\ast_{i\in I}G_i$. Injectivity of the maps $\iota_i$ is not part of this definition. ([[def-free-product-of-a-family-of-groups]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The reduced-word construction is a free product, and free products are identified by their universal property with that model. [given, L1, L2]
+1.1 Let $F$ be any free product and $W$ the reduced-word model. Their universal properties give factor-compatible homomorphisms $F\to W$ and $W\to F$. Each composite agrees with the identity on every factor, so uniqueness in the universal property makes the maps inverse isomorphisms. [given, L1, L2, L3]
 
 2.1 In the model every element is literally one reduced word. Distinct reduced words act differently on the empty word, so they are distinct elements. [step 1.1]
 

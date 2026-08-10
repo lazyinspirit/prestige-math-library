@@ -16,14 +16,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Definition
 
-For $f:\mathbb R^n\to\mathbb R$, its **support** is
+Let $n\ge1$. For $f:\mathbb R^n\to\mathbb R$, its **support** is
 $$\operatorname{supp}f:=\overline{\{x\in\mathbb R^n:f(x)\ne0\}}.$$
 The function is **compactly supported** if $\operatorname{supp}f$ is compact.
 

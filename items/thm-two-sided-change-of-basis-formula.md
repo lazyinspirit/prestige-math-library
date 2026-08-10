@@ -47,6 +47,6 @@ $$[T]_{\mathcal B'}^{\mathcal C'}=P_{\mathcal C'\leftarrow\mathcal C}[T]_{\mathc
 
 1.1 Regard $T$ from $\mathcal B'$ to $\mathcal C'$ as the composite of the identity on $V$ from $\mathcal B'$ to $\mathcal B$, then $T$ from $\mathcal B$ to $\mathcal C$, then the identity on $W$ from $\mathcal C$ to $\mathcal C'$. [given, L1]
 
-2.1 Applying [L2] twice identifies the three matrices as $P_{\mathcal B\leftarrow\mathcal B'}$, $[T]_{\mathcal B}^{\mathcal C}$, and $P_{\mathcal C'\leftarrow\mathcal C}$, in that multiplication order. [step 1.1, L1, L2]
+2.1 Applying [L2] twice, with the matrix of the last-applied map on the left, gives $$[T]_{\mathcal B'}^{\mathcal C'}=P_{\mathcal C'\leftarrow\mathcal C}[T]_{\mathcal B}^{\mathcal C}P_{\mathcal B\leftarrow\mathcal B'}.$$ [step 1.1, L1, L2]
 
 3.1 The right factor is square of size $\dim V$, the middle factor has shape $(\dim W)\times(\dim V)$, and the left factor is square of size $\dim W$, so the product is defined and has the asserted shape, proving the formula. [step 2.1, L1, L2] ∎

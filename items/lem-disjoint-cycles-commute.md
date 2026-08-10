@@ -24,14 +24,14 @@ pipeline_run: null
 
 ## Statement
 
-Cycles with disjoint supports commute. More precisely, if $\alpha$ and $\beta$
-are cycles in $\operatorname{Sym}(X)$ and
+Cycles with disjoint supports commute. More precisely, if $X$ is finite and
+$\alpha$ and $\beta$ are cycles in $\operatorname{Sym}(X)$ and
 $\operatorname{supp}(\alpha)\cap\operatorname{supp}(\beta)=\varnothing$, then
 $\alpha\beta=\beta\alpha$.
 
 ## Facts & Assumptions
 
-**Given:** A set $X$ and two cycles $\alpha,\beta\in\operatorname{Sym}(X)$ with disjoint supports.
+**Given:** A finite set $X$ and two cycles $\alpha,\beta\in\operatorname{Sym}(X)$ with disjoint supports.
 
 [L1] A cycle fixes every point outside its support, and two cycles are disjoint exactly when their supports are disjoint ([[def-permutation-support-disjoint-cycles-and-cycle-type]]).
 

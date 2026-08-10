@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, Lemma 5.5.4"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-For column vectors $v_1,\ldots,v_n\in\mathbb R^n$, let $A=[v_1\ \cdots\ v_n]$ and
+Let $n\ge1$. For column vectors $v_1,\ldots,v_n\in\mathbb R^n$, let $A=[v_1\ \cdots\ v_n]$ and
 $$P(v_1,\ldots,v_n):=\left\{\sum_{j=1}^n t_jv_j:0\le t_j\le1\right\}.$$
 Then $P(v_1,\ldots,v_n)$ is Jordan measurable and
 $$\operatorname{cont}(P(v_1,\ldots,v_n))=|\det A|.$$

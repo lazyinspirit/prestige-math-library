@@ -9,7 +9,9 @@ provenance:
   proof: ai-altered
 deps: [def-invertible-matrix-and-general-linear-group,
        def-linear-isomorphism-and-invertible-linear-map,
-       thm-coordinate-action-of-a-linear-map, thm-matrix-of-a-composite-is-the-product]
+       thm-coordinate-action-of-a-linear-map, thm-matrix-of-a-composite-is-the-product,
+       thm-matrix-multiplication-laws,
+       thm-matrix-representation-is-a-vector-space-isomorphism, def-dimension]
 justified_by: []
 aliases: []
 landmark: true
@@ -46,12 +48,18 @@ $$[T^{-1}]_{\mathcal C}^{\mathcal B}=([T]_{\mathcal B}^{\mathcal C})^{-1}.$$
 
 [L2] Matrix representation sends a composite of linear maps to the product of their matrices ([[thm-matrix-of-a-composite-is-the-product]]).
 
+[L3] Matrix multiplication distributes over addition and is compatible with scalar multiplication ([[thm-matrix-multiplication-laws]]).
+
+[L4] Every linear map between finite-dimensional coordinate spaces has a matrix in chosen ordered bases ([[thm-matrix-representation-is-a-vector-space-isomorphism]]).
+
+[L5] The dimension of a finite-dimensional vector space is the common size of its finite bases ([[def-dimension]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $AB=BA=I_n$, then $L_AL_B=L_{AB}=\operatorname{id}$ and $L_BL_A=L_{BA}=\operatorname{id}$, so $L_A$ is a linear isomorphism with inverse $L_B$. [given, L1]
+1.1 By [L3], $L_A$ and $L_B$ are linear. If $AB=BA=I_n$, then $L_AL_B=L_{AB}=\operatorname{id}$ and $L_BL_A=L_{BA}=\operatorname{id}$, so $L_A$ is a linear isomorphism with inverse $L_B$. This includes $n=0$, where the unique empty matrix and the unique zero-space map are their own inverses. [given, L1, L3]
 
-2.1 Conversely, if $L_A$ has a linear inverse $S$, represent $S$ by a matrix $B$ in the standard coordinate basis. The two identity composites and [L2] give $AB=I_n=BA$, so $A$ is invertible. [step 1.1, L1, L2]
+2.1 Conversely, if $L_A$ has a linear inverse $S$, [L4] represents $S$ by a matrix $B$ in the standard coordinate basis. The two identity composites and [L2] give $AB=I_n=BA$, so $A$ is invertible. [step 1.1, L1, L2, L4]
 
-3.1 For a general linear isomorphism $T$, represent $T^{-1}\circ T$ and $T\circ T^{-1}$ in the chosen bases. By [L2], the two identity composites give both inverse equations for $[T]_{\mathcal B}^{\mathcal C}$ and $[T^{-1}]_{\mathcal C}^{\mathcal B}$; conversely, an inverse matrix gives an inverse multiplication map by step 1.1. [step 2.1, L1, L2] ∎
+3.1 For a general linear isomorphism $T$, the list $T(\mathcal B)$ is an ordered basis of $W$: $T^{-1}$ transfers both linear independence and spanning back to $\mathcal B$. Hence [L5] shows that $\mathcal B$ and $\mathcal C$ have the same length, so the two displayed representation matrices are square. Representing $T^{-1}\circ T$ and $T\circ T^{-1}$ in the chosen bases, [L2] gives both inverse equations for $[T]_{\mathcal B}^{\mathcal C}$ and $[T^{-1}]_{\mathcal C}^{\mathcal B}$. [step 2.1, L1, L2, L5] ∎

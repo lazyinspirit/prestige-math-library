@@ -9,7 +9,8 @@ provenance:
   proof: ai-generated
 deps: [def-improper-integral-at-infinity,
        def-improper-integral-at-a-finite-endpoint, def-mixed-improper-integral,
-       thm-linearity-of-the-integral, thm-algebra-of-function-limits]
+       thm-linearity-of-the-integral, def-limits-at-infinity,
+       def-one-sided-limits, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +37,7 @@ The same formula holds for mixed improper integrals when every singular-end piec
 
 [L1] Proper Riemann integration is linear ([[thm-linearity-of-the-integral]]).
 
-[L2] Finite linear combinations pass through finite real limits ([[thm-algebra-of-function-limits]]).
+[L2] Infinite and one-sided endpoint limits use the usual epsilon definitions ([[def-limits-at-infinity]], [[def-one-sided-limits]]).
 
 [L3] Mixed convergence is defined separately on every singular piece ([[def-mixed-improper-integral]]).
 
@@ -44,6 +45,6 @@ The same formula holds for mixed improper integrals when every singular-end piec
 
 **Proof technique:** direct.
 
-1.1 On every compact truncation, [L1] gives $\int(rf+sg)=r\int f+s\int g$. Taking the appropriate one-sided or infinite limit and applying [L2] proves the formula on a one-ended interval. [L1, L2]
+1.1 On every compact truncation, [L1] gives $\int(rf+sg)=r\int f+s\int g$. Let the two truncation integrals tend to $A$ and $B$. Given $\varepsilon>0$, [L2] makes their respective errors smaller than $\varepsilon/(2(1+|r|))$ and $\varepsilon/(2(1+|s|))$ sufficiently near the end. The triangle inequality then makes the error of the linear combination from $rA+sB$ smaller than $\varepsilon$. This proves the formula on every one-ended interval, including $r=0$ or $s=0$. [L1, L2]
 
 2.1 For a mixed integral, apply step 1.1 to every separately convergent piece and then add the finitely many resulting identities as required by [L3]. No assertion is made when either side would contain an indeterminate difference of divergent quantities. [L3, step 1.1] ∎

@@ -9,7 +9,8 @@ provenance:
   proof: ai-generated
 deps: [def-similar-matrices, thm-two-sided-change-of-basis-formula,
        thm-invertible-matrices-correspond-to-linear-isomorphisms,
-       def-equivalence-relation, def-matrix-units]
+       def-equivalence-relation, def-matrix-units, thm-matrix-multiplication-laws,
+       def-linear-basis]
 justified_by: []
 aliases: []
 landmark: true
@@ -46,14 +47,18 @@ $B=[T]_{\mathcal C}^{\mathcal C}$.
 
 [L3] The matrices $E_{i0}$ are the standard coordinate columns in $M_{n\times1}(F)$ ([[def-matrix-units]]).
 
+[L4] Matrix multiplication is associative, unital, distributive, and compatible with scalar multiplication ([[thm-matrix-multiplication-laws]]).
+
+[L5] A finite ordered list is an ordered basis exactly when it is linearly independent and spans the space ([[def-linear-basis]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Taking $P=I_n$ proves reflexivity. If $B=P^{-1}AP$, then $A=(P^{-1})^{-1}BP^{-1}$, proving symmetry. If also $C=Q^{-1}BQ$, then $C=(PQ)^{-1}A(PQ)$, proving transitivity. Thus similarity is an equivalence relation. [given, L1]
+1.1 Taking $P=I_n$ proves reflexivity. If $B=P^{-1}AP$, then $A=(P^{-1})^{-1}BP^{-1}$, proving symmetry. If also $C=Q^{-1}BQ$, then associativity in [L4] gives $C=(PQ)^{-1}A(PQ)$, proving transitivity. Thus similarity is an equivalence relation. [given, L1, L4]
 
 2.1 If $A$ and $B$ represent the same endomorphism in bases $\mathcal B$ and $\mathcal C$, [L2] gives $B=P^{-1}AP$ with $P=P_{\mathcal B\leftarrow\mathcal C}$, so they are similar. [step 1.1, L1, L2]
 
-3.1 Conversely, suppose $B=P^{-1}AP$. On $V=M_{n\times1}(F)$ let $T=L_A$ and let $\mathcal E$ be the standard ordered basis of matrix units $E_{i0}$ from [L3]. The columns of invertible $P$ form an ordered basis $\mathcal C$: independence follows by multiplying $Px=0$ by $P^{-1}$, and every column $y$ equals $P(P^{-1}y)$. The change matrix $P_{\mathcal E\leftarrow\mathcal C}$ is $P$, so [L2] gives $[T]_{\mathcal C}^{\mathcal C}=P^{-1}AP=B$. [step 2.1, L1, L2, L3]
+3.1 Conversely, suppose $B=P^{-1}AP$. On $V=M_{n\times1}(F)$ let $T=L_A$, which is linear by [L4], and let $\mathcal E=(E_{i0})_{i<n}$. By [L3], every column $y$ has the unique expansion $y=\sum_{i<n}y_iE_{i0}$, so [L5] makes $\mathcal E$ the standard ordered basis. The columns of invertible $P$ form an ordered basis $\mathcal C$: independence follows by multiplying $Px=0$ by $P^{-1}$, and every column vector $y$ equals $P(P^{-1}y)$, so [L5] applies. Moreover, $[T]_{\mathcal E}^{\mathcal E}=A$ because $T(E_{j0})$ is the $j$-th column of $A$. The change matrix $P_{\mathcal E\leftarrow\mathcal C}$ is $P$, so [L2] gives $[T]_{\mathcal C}^{\mathcal C}=P^{-1}AP=B$. [step 2.1, L1, L2, L3, L4, L5]
 
-4.1 Steps 2.1 and 3.1 prove both directions of the characterisation, including $n=0$, where the unique empty matrix represents the unique endomorphism of the zero space. [step 2.1, step 3.1, L1, L2, L3] ∎
+4.1 Steps 2.1 and 3.1 prove both directions of the characterisation, including $n=0$, where the unique empty matrix represents the unique endomorphism of the zero space. [step 2.1, step 3.1, L1, L2, L3, L4, L5] ∎

@@ -8,7 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [cor-bv-discontinuities-are-countable-and-of-first-kind,
-       def-one-sided-limits, def-continuity-real, thm-heine-borel-r,
+       def-one-sided-limits, def-continuity-real, def-complete-ordered-field,
        def-partition-and-refinement, def-bounded-variation-and-total-variation,
        cor-interval-uncountable]
 justified_by: []
@@ -37,7 +37,7 @@ More precisely, if $E\subseteq[a,b]$ is at most countable and $f$ is continuous 
 
 [L1] A BV function has finite one-sided limits at every point ([[cor-bv-discontinuities-are-countable-and-of-first-kind]], [[def-one-sided-limits]]).
 
-[L2] Every open cover of $[a,b]$ has a finite subcover ([[thm-heine-borel-r]]).
+[L2] Every nonempty subset of the reals that is bounded above has a supremum ([[def-complete-ordered-field]]).
 
 [L3] Every nonempty open interval is uncountable ([[cor-interval-uncountable]]).
 
@@ -45,8 +45,10 @@ More precisely, if $E\subseteq[a,b]$ is at most countable and $f$ is continuous 
 
 **Proof technique:** direct.
 
-1.1 By [L1], each $x\in(a,b)$ has a left neighborhood and a right neighborhood on each of which the values of $f$ differ by less than $\varepsilon$; use the corresponding one-sided neighborhood at an endpoint. Shrinking them if necessary gives an open cover of $[a,b]$. A finite subcover exists by [L2]. [L1, L2]
+1.1 Fix $\eta>0$. Let $A$ be the set of $x\in[a,b]$ for which there is a finite chain $a=x_0<\cdots<x_m=x$ such that the oscillation of $f$ on every open interval $(x_{j-1},x_j)$ is below $\eta$. The set contains $a$ and is bounded above by $b$, so $c:=\sup A$ exists by [L2]. [L2, construct]
 
-2.1 Order all endpoints of the finitely many chosen neighborhoods and refine them to a partition $P$. On each open component between consecutive partition points, one of the chosen one-sided neighborhoods contains the component, so the oscillation of $f$ there is less than $2\varepsilon$. Sampling $f$ on every component and assigning the actual endpoint values gives a step function within $2\varepsilon$ uniformly. Starting with $\varepsilon/2$ proves the first assertion. [step 1.1]
+2.1 Suppose $c<b$. The left limit at $c$ and the right limit at $c$ supplied by [L1] give one-sided intervals on which the oscillation is below $\eta$. Choose $x\in A$ in the left interval (use $x=a$ if $c=a$), append $c$ to its chain if necessary, and then append a point $y>c$ in the right interval. This puts $y$ in $A$, contradicting that $c$ is an upper bound. Hence $c=b$. The left limit at $b$ now lets a chain ending sufficiently near $b$ be extended to $b$. Thus there is a finite partition of $[a,b]$ on each of whose open components the oscillation of $f$ is below $\eta$. The singleton case is immediate. [step 1.1, L1, L2]
 
-3.1 For the strengthened assertion, continuity at each point of $E$ permits every covering neighborhood centered there to work on both sides. Every proposed interior endpoint can then be moved slightly while retaining the finite-cover containment relations. By [L3], each available open interval contains a point outside the countable set $E$; choosing such points makes every interior breakpoint avoid $E$. The construction of step 2.1 is unchanged. [step 1.1, step 2.1, L3] ∎
+3.1 On each open component choose one value of $f$, and at every partition point assign the actual value of $f$. The resulting finite step function differs from $f$ by less than $\eta$ everywhere. Taking $\eta=\varepsilon/4$ leaves room for the strengthened construction. [step 2.1, choose]
+
+4.1 Only finitely many interior breakpoints lie in $E$. Around each such breakpoint $c$, continuity of $f$ gives a small two-sided interval, disjoint from the corresponding intervals for the other breakpoints, on which the oscillation is below $\varepsilon/2$. By [L3] choose a replacement point outside $E$ in that interval and between the neighboring breakpoints. Moving the breakpoint adds only a subinterval from this continuity neighborhood to either adjacent component; the original component oscillation is below $\varepsilon/4$, so the new component oscillation is below $\varepsilon$. Sampling again and retaining the actual values at all breakpoints and endpoints gives the required approximation with every interior breakpoint outside $E$. [step 3.1, L3] ∎

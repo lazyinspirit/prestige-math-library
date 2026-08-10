@@ -17,14 +17,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "A. Leibman, Multidimensional Real Analysis, §6.1"
+    - title: "A. Leibman, Multidimensional Real Analysis, §5.5"
       url: "https://people.math.osu.edu/leibman.1/analysis2/m-analysis.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $V\subseteq\mathbb R^n$ be bounded, open, and Jordan measurable. There are compact Jordan sets
+Let $n\ge1$ and let $V\subseteq\mathbb R^n$ be bounded, open, and Jordan measurable. There are compact Jordan sets
 $$K_1\subseteq K_2\subseteq\cdots\subseteq V,$$
 each a finite union of closed grid rectangles, such that every compact $C\subseteq V$ lies in some $K_j$ and
 $$\operatorname{cont}(V\setminus K_j)\longrightarrow0.$$

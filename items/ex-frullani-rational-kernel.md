@@ -9,7 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-frullani-integral-proper-factor,
        thm-comparison-test-for-improper-integrals,
-       thm-improper-p-test-rational, thm-algebra-of-function-limits,
+       thm-improper-p-test-rational,
        def-oriented-integral]
 justified_by: []
 aliases: []
@@ -42,7 +42,7 @@ $$\int_0^\infty\frac{(1+ax)^{-1}-(1+bx)^{-1}}x\,dx=\int_a^b\frac{dt}{t}.$$
 
 **Proof technique:** computation.
 
-1.1 Here $f$ is continuous, $f(0)=1$, and $f(t)\to0$. Thus [L1] gives exactly the displayed identity. [L1]
+1.1 Here $f$ is continuous and $f(0)=1$. Also $0<f(t)=1/(1+t)<\varepsilon$ whenever $t>1/\varepsilon$, so $f(t)\to0$ directly from the definition of the limit at infinity. Thus [L1] gives exactly the displayed identity. [L1]
 
 1.2 For $x>0$, the integrand simplifies to [L2]
 $$\frac{b-a}{(1+ax)(1+bx)}.$$

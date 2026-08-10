@@ -8,10 +8,10 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-mixed-improper-integral,
-       cor-limit-comparison-test-for-improper-integrals,
+       thm-comparison-test-for-improper-integrals,
+       thm-linearity-of-improper-integrals,
        thm-improper-p-test-rational, def-rational-power,
-       lem-rational-power-laws, lem-rational-power-monotone,
-       thm-algebra-of-function-limits]
+       lem-rational-power-laws, lem-rational-power-monotone]
 justified_by: []
 aliases: []
 landmark: false
@@ -37,9 +37,9 @@ $$p<1\quad\text{and}\quad p+q>1.$$
 
 **Given:** Rational exponents $p,q$ and the positive-domain kernel.
 
-[L1] Positive rational powers obey the quotient and limit laws ([[def-rational-power]], [[lem-rational-power-laws]], [[thm-algebra-of-function-limits]]).
+[L1] Positive rational powers obey the product, quotient, and monotonicity laws ([[def-rational-power]], [[lem-rational-power-laws]], [[lem-rational-power-monotone]]).
 
-[L2] Positive functions with a finite positive quotient limit have equivalent improper convergence ([[cor-limit-comparison-test-for-improper-integrals]]).
+[L2] Two-sided eventual comparison by positive constant multiples gives equivalent improper convergence, using comparison in each direction and linearity for the constant multiples ([[thm-comparison-test-for-improper-integrals]], [[thm-linearity-of-improper-integrals]]).
 
 [L3] The rational $p$-test gives the exact thresholds at zero and infinity ([[thm-improper-p-test-rational]]).
 
@@ -47,8 +47,8 @@ $$p<1\quad\text{and}\quad p+q>1.$$
 
 **Proof technique:** direct.
 
-1.1 Near zero, divide the kernel by $x^{-p}$. The quotient $(1+x)^{-q}$ tends to one, so [L2] and [L3] give convergence at zero exactly when $p<1$. [L2, L3]
+1.1 For $0<x\le1$, one has $1\le1+x\le2$. If $q\ge0$, [L1] gives $2^{-q}\le(1+x)^{-q}\le1$; if $q<0$, it gives $1\le(1+x)^{-q}\le2^{-q}$. Thus the kernel is bounded above and below by positive constant multiples of $x^{-p}$, so [L2] and [L3] give convergence at zero exactly when $p<1$. [L1, L2, L3]
 
-1.2 At infinity, divide by $x^{-(p+q)}$. By [L1], the quotient is $(x/(1+x))^q$, which tends to one. Thus [L2] and [L3] give convergence at infinity exactly when $p+q>1$. [L1, L2, L3]
+1.2 For $x\ge1$, $1/2\le x/(1+x)<1$. By [L1], the quotient of the kernel by $x^{-(p+q)}$ is $(x/(1+x))^q$ and lies between $2^{-q}$ and $1$ when $q\ge0$, and between $1$ and $2^{-q}$ when $q<0$. Hence [L2] and [L3] give convergence at infinity exactly when $p+q>1$. [L1, L2, L3]
 
 2.1 The mixed definition requires both ends separately, so the full integral converges exactly under the two simultaneous inequalities. Positive bases ensure every rational power used above is defined, regardless of the signs of $p$ and $q$. [given] ∎

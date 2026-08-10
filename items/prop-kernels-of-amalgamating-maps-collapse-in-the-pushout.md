@@ -45,4 +45,4 @@ For a pushout of $f:K\to G$ and $h:K\to H$, $$i_H(h(\ker f))=\{e\},\qquad i_G(f(
 
 2.1 Interchanging $f$ and $h$ gives $i_G(f(\ker h))=\{e\}$. [step 1.1]
 
-3.1 Therefore a nontrivial image of one kernel is killed by the opposite canonical map, proving the stated containments and the possible failure of injectivity. [step 2.1] ∎
+3.1 Therefore a nontrivial image of one kernel is killed by the opposite canonical map. This occurs, for example, for any nontrivial group $K$ with $G=1$, $H=K$, $f$ trivial, and $h=\mathrm{id}_K$: then $h(\ker f)=K$, so $i_H$ is not injective. This proves both the containments and the asserted possible failure. [step 2.1] ∎

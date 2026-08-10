@@ -8,7 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [thm-comparison-test-for-improper-integrals, def-limits-at-infinity,
-       def-one-sided-limits, lem-sign-preservation-near-a-limit,
+       def-one-sided-limits, thm-linearity-of-improper-integrals,
        lem-of-inverse-positive]
 justified_by: []
 aliases: []
@@ -36,9 +36,9 @@ If $L=0$, convergence of $\int g$ still implies convergence of $\int f$; if the 
 
 **Given:** Eventually positive functions with the stated quotient limit.
 
-[L1] A function with positive limit is eventually trapped between positive bounds around that limit ([[lem-sign-preservation-near-a-limit]]).
+[L1] The definitions of a limit at infinity and of a finite one-sided limit give the same eventual epsilon bound at their respective singular ends ([[def-limits-at-infinity]], [[def-one-sided-limits]]).
 
-[L2] Eventual pointwise comparison transfers convergence ([[thm-comparison-test-for-improper-integrals]]).
+[L2] Eventual pointwise comparison transfers convergence, and finite positive scalar multiples preserve it ([[thm-comparison-test-for-improper-integrals]], [[thm-linearity-of-improper-integrals]]).
 
 ## Proof
 
