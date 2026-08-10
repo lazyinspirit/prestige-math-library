@@ -111,14 +111,30 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State
+## State — step 3 in flight
 
-- **Step 1 RUNNING** — 8 Betas dispatched 2026-08-11 01:52, lane cap 5 so three
-  queued. Batch 7 has checkpointed: all eight prerequisites opened on disk, the
-  harvest running against Riehl *Category Theory in Context* ch. 1 §§1.1–1.5,
-  1.7 and Awodey–Bauer ch. 1 §§1.1–1.4.3, heading-by-heading dispositions in
-  progress, 60-item ceiling checked and no split indicated yet.
-- **Step 0 CLEAR.** `node tools/gates.mjs --step 0 --run frontier-10` passes
+- **Steps 0, 1, 2 CLEAR.** All 8 Betas exited 0 (36–84 min each). Step-2 gate:
+  `validate-plan`, `depsource`, `coverage-checklist` all green.
+- **Scaffold totals: 12 A pages, 508 items to author, 39 sources, 720 harvested
+  headings, every one disposed** — 508 `included`, 115 `inline`, 26
+  `already-published`, 40 `deferred`, 31 `out-of-scope`. The coverage gate's
+  first real outing found 0 errors. frontier-9, for comparison, shipped 83 items
+  across 20 pages.
+- No A page exceeds 60. `categories-functors` is at exactly 60 (see D2).
+- **Step 3 half one done** — `research/frontier-10-step3-decisions.md`, D1–D4.
+- **Step 3 half two RUNNING** — Alpha dispatched for the breadth/depth review of
+  batches 1–8, and **batch 9 Beta dispatched** (see D1).
+- **The run is now 14 pair-units, not 12.** D1 spliced
+  `gaussian-elimination-and-row-reduction` (80) and
+  `determinants-of-matrices-over-a-commutative-ring` (82) as batch 9: Beta-5
+  correctly refused to scaffold change-of-variables against a library with no
+  determinant, and the owner's build-the-machinery rule says build it.
+  **Batch 5 cannot author until batch 9's interfaces exist.**
+- Supervision: a 15-minute health monitor is armed (owner request). Its first
+  version had a broken staleness detector and gave one false STALE; replaced.
+- Permissions: `.claude/settings.local.json` now allows Bash/Edit/Write
+  unconditionally with `defaultMode: acceptEdits` (owner, no prompts). Gitignored,
+  backup in the session scratchpad. `node tools/gates.mjs --step 0 --run frontier-10` passes
   `validate-plan.mjs` and `content-policy.mjs --manifest-only`.
 - 8 manifests at `research/frontier-10-batch-{1..8}.pages.json`.
 - Item lists are empty by construction (these pages are unscaffolded in the
@@ -129,7 +145,7 @@ the first step-0 failure of this run.
 
 ## Exact next action
 
-Wait for the 8 Betas, then `node tools/gates.mjs --step 2 --run frontier-10`.
+Await Alpha's step-3 review and batch 9. Resolve every `insufficient` pair with its owning Beta, have Alpha re-check, then step 4: splice all 9 batches into plan-spec.json (adding the two determinant pages to fubini-and-change-of-variables `requires`), then step 5 authoring.
 Every Beta must have produced `research/frontier-10-batch-<i>.coverage.json`
 alongside its `.pages.json` and `.notes.md`, or step 2 fails `missing-receipt`.
 Then step 3: orchestrator adjudicates recommendations, **then dispatch Alpha for
