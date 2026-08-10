@@ -1,0 +1,120 @@
+# `freegroups-1` — run record
+
+Enrichment of the **published** A/B pair `free-groups-and-presentations`
+(order 60) and `free-groups-and-presentations-examples` (order 61), category
+`abstract-algebra`, run under `LEVELS.md` steps 0 to 10.
+
+Started 2026-08-10. Working-tree baseline: `f9a00d89`.
+
+## The owner's request
+
+> Examine `https://getcurious.cc/articles/math-free-groups-word-problem` and
+> enrich the A/B pair for "free groups and presentations" by adding definitions,
+> theorems, and examples that are missing. I want every item to be authored,
+> judged, audited, and stamped like the rest of the repo via the build workflow
+> from step 1 to step 10.
+
+Amended mid-run by the owner:
+
+> Define and prove as much as possible within this A-B pair.
+
+## Orchestrator decisions
+
+**D1 — the article is a scope pointer, not a citable source.** `getcurious.cc`
+is not a reputable mathematical source under the step-1 source-grounded rule. It
+may be used to identify *what* is missing. Every statement it suggests must be
+re-sourced against reputable literature (peer-reviewed or open textbooks,
+university-hosted notes, Encyclopedia of Mathematics) before it is scaffolded,
+and the article is never recorded in `sources.references`.
+
+**D2 — the decidability material is OUT of scope.** The article's centrepiece is
+the word problem: Dehn's three decision problems, Novikov–Boone, "residually
+finite + finitely presented implies solvable word problem", Knuth–Bendix,
+Todd–Coxeter. This library has built **no computability machinery at all** —
+grep confirms no Turing machine, no decidability, no recursive function, nothing
+about algorithms as objects. Under the self-contained-scope hard rule an item
+may not rest on unbuilt machinery, and none of these can be honestly proved in
+scope. They are **dropped, not deleted**: the batch notes must record each one
+with what would license it (a computability level that does not exist yet).
+
+**D2a — but the rewriting failures stay, as pure algebra.** The article's three
+"naive algorithm fails" witnesses are *not* decidability claims. Each says: in a
+named finitely presented group, a named explicit word is trivial (or not) while
+a named syntactic procedure reports otherwise. That is checkable group theory
+requiring no notion of *decidable*. All three verified by hand at scaffold time:
+
+- `⟨a,b | ab⟩`: `ab = 1` so `b = a^{-1}` and the group is infinite cyclic; the
+  word `ba` equals `1` yet contains no occurrence of the relator `ab`.
+- `⟨a,b | aba^{-1}b^{-1}⟩ ≅ Z^2`: `w = a^2b^2a^{-2}b^{-2}` is trivial, is freely
+  reduced, and contains no occurrence of the relator or its inverse — the word
+  must be *lengthened* before it can be shortened.
+- `⟨a,b | ab, aba⟩`: is the trivial group, since `aba = (ab)a = a` forces `a = 1`
+  and then `b = 1`; on `w = aba`, deleting `ab` first strands `a`, while deleting
+  `aba` empties the word — so the outcome depends on deletion order.
+
+State these as counterexamples/false statements about a *specific rewriting
+procedure*, never as claims about decidability in general.
+
+**D3 — maximal scope (owner amendment).** Define and prove as much as the pair
+can honestly hold. The A-page 100-item ceiling is a review ceiling, not a target;
+the pair currently holds 6 + 1. Do not pad, and do not drop a valuable result
+merely to stay small. Anything that cannot be proved in scope is dropped with a
+licensing note rather than asserted.
+
+**D4 — new items are drafts; page amendments are STAGED.** Both pages are
+`status: published`, and `depcheck` raises `draft-on-published-page` when a
+published page lists a non-published item. Follow the `frontier-1` precedent:
+author every new item as `status: draft`, and stage the additions to the two
+pages' `items:`/`examples:` lists in
+`research/freegroups-1-published-amendments.md` **without applying them**. The
+page edits and the status flips land together in the single publishing commit
+after the owner's step-10 audit.
+
+**D5 — reuse before minting.** `def-free-group` is already stated *by the
+universal property*, `thm-reduced-words-form-the-free-group` already supplies
+existence plus that universal property, and
+`thm-free-groups-unique-up-to-unique-isomorphism` supplies uniqueness.
+`def-normal-closure` and `def-commutator-and-commutator-subgroup` are published.
+Do not restate any of these. Ids are immutable; grep `items/` and
+`plan-spec.json` before minting.
+
+## What the pair currently holds
+
+A page, order 60 — `def-alphabet-words-and-reduction`, `def-free-group`,
+`thm-reduced-words-form-the-free-group`, `def-group-presentation`,
+`thm-free-groups-unique-up-to-unique-isomorphism`,
+`thm-every-group-has-a-presentation`.
+
+B page, order 61 — `ex-reducing-a-word-with-formal-inverses`.
+
+## Dependency base available (order < 60)
+
+`monoids-groups-and-subgroups` (24), `cosets-and-lagranges-theorem` (32),
+`normal-subgroups-and-quotient-groups` (34),
+`group-homomorphisms-and-the-isomorphism-theorems` (36),
+`cyclic-groups-and-direct-products` (38),
+`the-structure-of-finite-abelian-groups` (40),
+`group-actions-and-cayleys-theorem` (42),
+`symmetric-groups-and-the-sign-homomorphism` (44), and the ring/module pages
+(46+). Symmetric and cyclic groups being available is what makes concrete
+presentations provable here.
+
+## State
+
+| step | state |
+|---|---|
+| 0 batch | complete — one batch, one A/B pair |
+| 1 scaffold | dispatched |
+| 2 resolve deps | — |
+| 3 adjudicate | — |
+| 4 apply | — |
+| 5 author | — |
+| 6 audit | — |
+| 7 judge | — |
+| 8 adjudicate rejections | — |
+| 9 scope sweep | — |
+| 10 rundown | — (sole owner pause) |
+
+## Next action
+
+Dispatch Beta-freegroups-1-1 on `research/freegroups-1-brief-beta-1.md`.
