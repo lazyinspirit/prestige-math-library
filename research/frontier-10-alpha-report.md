@@ -562,6 +562,81 @@ caught** — five in wave 1's first six clusters, two from `kuratowski`, plus th
 nine are **false titles**, the class the step-7 judges structurally cannot see,
 which is now the single most common fatal class in this run.
 
+### Consolidated fatal-error ledger for step 10
+
+Grouped by defect type, then location. Mechanical and 30-second-gap edits are
+excluded per the owner rule. "R" = found by an independent step-6 reader,
+"F" = found by a read-only refuter, "A" = found by Alpha.
+
+**False title or Statement asserting more than the proof gives — 8 items.**
+This is the run's most common fatal class and the step-7 judges cannot see a
+title at all.
+
+| id | location | found | disposition |
+|---|---|---|---|
+| `thm-r-three-three-equals-six` | title | R | restated: dropped "the first exact Ramsey number" |
+| `ex-amalgamation-along-a-whole-factor` | title | F | restated: it is a pushout along an isomorphism, not an amalgamation |
+| `lem-separation-augmentation-for-kuratowski-free-graphs` | title | F | restated: minimum proper separation of order ≤ 2, not "each" |
+| `cor-orbit-stabilizer-cardinality` | title | F | restated: finiteness qualifier restored |
+| `thm-conjugacy-class-cardinality` | title | F | restated: finiteness qualifier restored |
+| `cor-solution-count-trichotomy-over-an-infinite-field` | Statement | F | hypothesis added: consistency, with the witness recorded |
+| `thm-improper-convergence-implies-principal-value` | Statement | F | proof supplied: both converses now refuted inline |
+| `lem-finite-jordan-cover-sum-bounds` | Statement | R | restated: every $M_i\ge0$; the original was false |
+
+**Invalid inference or unlicensed case reduction — 6 items.**
+
+| id | location | found | disposition |
+|---|---|---|---|
+| `thm-linear-images-scale-jordan-content-by-absolute-determinant` | proof | R+F | proof replaced twice: circular Cavalieri, then its unmet sectional hypothesis |
+| `prop-face-boundaries-in-three-connected-plane-graphs` | proof | R+F | proof replaced twice: false path claim, then the shared-attachment case |
+| `lem-kuratowski-minors-are-topological-minors` | proof | R | proof replaced: false attachment-leaf reduction |
+| `lem-edge-maximal-kuratowski-free-is-three-connected` | proof | R | proof replaced: unsupported obstruction analysis |
+| `lem-bv-functions-are-regulated` | proof | R | proof replaced: one-sided neighbourhoods are not an open cover at a jump |
+| `prop-maximal-plane-triangulation-characterisation` | Statement | F | hypothesis added: two-connectivity, so facial boundaries are cycles |
+
+**Missing hypothesis, ill-typed Statement, or domain error — 7 items.**
+
+| id | location | found | disposition |
+|---|---|---|---|
+| `def-category` (+ `prop-sets-and-functions-form-category-set`) | Definition | F | convention added: morphisms carry domain and codomain; `cod` was undefined |
+| `def-functor-category`, `def-natural-isomorphism` | Definition | R+F | restricted to a small source; natural isomorphism made intrinsic |
+| `def-comma-slice-and-coslice-categories` | Definition | R | restated through the terminal category and selector functor |
+| `thm-riemann-stieltjes-darboux-criterion` | Statement | F | hypothesis added: $a<b$; the iff failed on a singleton |
+| `cor-riemann-stieltjes-agrees-with-riemann` | Statement | F | typed on the sorted interval; the reversed clause was empty |
+| `thm-riemann-stieltjes-change-of-variable` | Statement | F | hypotheses added: $c<d$, $a<b$ |
+| `thm-plane-dual-exists-and-double-dual-recovers-primal` | Statement | F | hypothesis added: $G^*$ simple, else the double dual is not formed |
+| 14 items on `fubini-and-change-of-variables` | Statement | R | hypothesis added: $n\ge1$ |
+
+**Incorrect or inflated dependency citation — 5 items.**
+
+| id | location | found | disposition |
+|---|---|---|---|
+| `thm-riemann-stieltjes-existence-bv-no-common-discontinuities` | Facts + proof | R | three failures: a bound on the wrong object, a Cauchy **net** treated as a sequence, and uncontrolled step approximants |
+| `thm-riemann-stieltjes-continuous-composition` | `[L1]` | F | Fact restated: it had dropped the criterion's continuity clause |
+| `thm-row-rank-equals-column-rank` | `[L2]` | F | Fact restated: it had dropped the RREF hypothesis |
+| `ex-conditionally-convergent-step-function-integral` | `[L3]` | F | Fact restated + subinterval additivity added |
+| `ex-fundamental-groupoid`, `ex-change-of-basepoint-isomorphism-for-fundamental-groups` | Facts + deps | R+F | loop-only results applied to arbitrary endpoint paths; then a **b-leaf** dependency introduced by the repair itself |
+
+**Unbuilt machinery asserted — 2 items.**
+
+| id | location | found | disposition |
+|---|---|---|---|
+| `ex-free-group-and-free-module-functors` | proof | F | lemma supplied: $R^{(X)}$ constructed inline and the infinite index set corrected |
+| `lem-separation-augmentation-for-kuratowski-free-graphs` | Statement | R | definitions supplied: proper separation, separator, order; inflated Menger citation removed |
+
+**Coverage omission — 1 item added.**
+
+| id | found | disposition |
+|---|---|---|
+| `thm-riemann-stieltjes-countable-step-integrator` | A (§6b.0) | **new result added and proved by Alpha**: Rudin 6.16 had been declined on process grounds and was buildable |
+
+**Two items were twice-touched and require the orchestrator's personal audit**
+per WORKFLOW.md: `thm-linear-images-scale-jordan-content-by-absolute-determinant`
+and `prop-face-boundaries-in-three-connected-plane-graphs`. Both had a reader
+repair that was itself defective and a second Alpha repair on top. The touchlog
+reports 36 items repaired more than once overall; these two are the ones where
+both touches were *fatal* repairs to the same argument.
+
 ### Still open
 
 `risk_review` dispositions for the 316 high/critical items (they are due at step 6,
