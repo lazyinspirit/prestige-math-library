@@ -38,7 +38,7 @@ $X$.
 
 **Given:** Cyclically reduced words $u$ and $v$ on $X\sqcup X^{-1}$.
 
-[L1] The reduced words on $X\sqcup X^{-1}$ form a group under concatenation followed by free reduction ([[thm-reduced-words-form-the-free-group]]).
+[L1] The reduced words on $X\sqcup X^{-1}$ form a group under concatenation followed by free reduction, and the map sending $x\in X$ to the one-letter word $x$ has the universal property of the free group on $X$ ([[thm-reduced-words-form-the-free-group]]).
 
 [F1] A reduced word is cyclically reduced when it is empty or its first letter is not the formal inverse of its last letter ([[def-cyclically-reduced-word]]).
 

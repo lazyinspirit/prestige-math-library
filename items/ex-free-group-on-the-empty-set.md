@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-normal-form-for-the-word-quotient-model, thm-word-quotient-model-is-free]
+deps: [thm-normal-form-for-the-word-quotient-model, thm-word-quotient-model-is-free, thm-free-groups-unique-up-to-unique-isomorphism]
 justified_by: []
 aliases: []
 landmark: false
@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Example
 
-The free group on the empty set is the trivial group.
+Every free group on the empty set is trivial: it has exactly one element.
 
 ## Facts & Assumptions
 
@@ -32,11 +32,17 @@ The free group on the empty set is the trivial group.
 
 [L1] Every class in $W(X)/{\sim}$ contains exactly one reduced word ([[thm-normal-form-for-the-word-quotient-model]]).
 
+[L2] If $(F,\iota)$ and $(F',\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\phi:F\to F'$ with $\phi\circ\iota=\iota'$ ([[thm-free-groups-unique-up-to-unique-isomorphism]]).
+
+[L3] The word-quotient group $W(X)/{\sim}$, with $x\mapsto[x]$, is a free group on $X$ ([[thm-word-quotient-model-is-free]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 On the empty alphabet, the empty word is the only finite word and hence the only reduced word; by [L1], $F_{\mathrm{word}}(\varnothing)$ has the single class $[\varepsilon]$. [L1, given]
 
-2.1 That class is the identity, so the free group on $\varnothing$ has one element and is the trivial group. [step 1.1, given] ∎
+2.1 That class is the identity, so $F_{\mathrm{word}}(\varnothing)$ has exactly one element. [step 1.1, given]
+
+3.1 By [L3] this model is a free group on $\varnothing$, so [L2] makes every free group on $\varnothing$ isomorphic to it; an isomorphism is a bijection, so every free group on $\varnothing$ has exactly one element and is trivial. [L2, L3, step 2.1] ∎
 

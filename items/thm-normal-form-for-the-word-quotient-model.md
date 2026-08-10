@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-word-quotient-model-of-the-free-group, def-alphabet-words-and-reduction, lem-formal-letters-act-by-permutations-on-reduced-words, thm-induction-principle]
+deps: [def-word-quotient-model-of-the-free-group, def-alphabet-words-and-reduction, prop-free-equivalence-is-an-equivalence-and-a-congruence, lem-formal-letters-act-by-permutations-on-reduced-words, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: true
@@ -32,11 +32,13 @@ Every class in $W(X)/{\sim}$ contains exactly one reduced word.
 
 **Given:** A set $X$, a word $w$ on $X\sqcup X^{-1}$, and its class $[w]\in W(X)/{\sim}$.
 
-[F1] An **elementary cancellation** deletes two adjacent letters $xx^{-1}$ or $x^{-1}x$ ([[def-alphabet-words-and-reduction]]).
+[F1] An **elementary cancellation** deletes two adjacent letters $xx^{-1}$ or $x^{-1}x$; a word is **reduced** if no elementary cancellation applies; and words are **freely equivalent** if one can be transformed into the other by finitely many elementary cancellations and their reverse insertions ([[def-alphabet-words-and-reduction]]).
 
 [L1] For every reduced word $r$, one has $\Lambda_r(\varepsilon)=r$, and freely equivalent words induce the same permutation of the set of reduced words ([[lem-formal-letters-act-by-permutations-on-reduced-words]]).
 
 [L2] If a property $P$ satisfies $P(0)$ and $P(n)\Rightarrow P(n+1)$ for every natural number $n$, then $P(n)$ holds for every $n\in\mathbb N$ ([[thm-induction-principle]]).
+
+[L3] Free equivalence is an equivalence relation, and if $w\sim w'$ and $v\sim v'$ then $wv\sim w'v'$ ([[prop-free-equivalence-is-an-equivalence-and-a-congruence]]).
 
 ## Proof
 
@@ -44,7 +46,7 @@ Every class in $W(X)/{\sim}$ contains exactly one reduced word.
 
 1.1 The empty word is reduced and freely equivalent to itself, establishing the existence claim for words of length zero. [base, F1]
 
-1.2 Assume every word of length $n$ is freely equivalent to a reduced word, and write a word of length $n+1$ as $ua$ with $|u|=n$; by the induction hypothesis, $u\sim r$ for some reduced $r$, so compatibility of elementary moves with a fixed suffix gives $ua\sim ra$. [ih, F1]
+1.2 Assume every word of length $n$ is freely equivalent to a reduced word, and write a word of length $n+1$ as $ua$ with $|u|=n$; by the induction hypothesis, $u\sim r$ for some reduced $r$, so the congruence property of [L3], applied with the one-letter word $a$ on the right, gives $ua\sim ra$. [ih, L3]
 
 1.3 If reduced words $r$ and $s$ lie in the same class, then $r\sim s$, so [L1] gives $\Lambda_r=\Lambda_s$. [L1, given]
 

@@ -8,7 +8,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-group, def-group-homomorphism]
-justified_by: []
+justified_by: [thm-abelianisation-of-a-free-group-is-free-abelian]
 aliases: []
 landmark: true
 verification:

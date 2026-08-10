@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-cyclically-reduced-word, def-alphabet-words-and-reduction, thm-induction-principle]
+deps: [def-cyclically-reduced-word, def-alphabet-words-and-reduction, thm-reduced-words-form-the-free-group, thm-induction-principle]
 justified_by: []
 aliases: []
 landmark: true
@@ -42,6 +42,8 @@ is conjugate to $c$ in the reduced-word free group.
 
 [L1] If a property $P$ satisfies $P(0)$ and $P(n)\Rightarrow P(n+1)$ for every natural number $n$, then $P(n)$ holds for every $n\in\mathbb N$ ([[thm-induction-principle]]).
 
+[L2] The reduced words on $X\sqcup X^{-1}$ form a group when the product of reduced words is their concatenation followed by free reduction, and the map sending $x\in X$ to the one-letter word $x$ has the universal property of the free group on $X$ ([[thm-reduced-words-form-the-free-group]]).
+
 ## Proof
 
 **Proof technique:** induction.
@@ -54,4 +56,6 @@ is conjugate to $c$ in the reduced-word free group.
 
 2.1 Apply [L1] to the property that the assertion holds at every length at most $n$. The induction hypothesis then applies to the shorter word $u$, so write $u=t'c(t')^{-1}$ with $c$ nonempty and cyclically reduced; then $w=(at')c(at')^{-1}$ literally. [step 1.2, step 1.3, L1]
 
-3.1 The alternatives in steps 1.2 and 2.1 cover every nonempty reduced word and give the required factorisation, including the one-letter boundary. [step 1.1, step 1.2, step 2.1, discharge-induction] ∎
+3.1 The alternatives in steps 1.2 and 2.1 cover every nonempty reduced word and give the required factorisation, including the one-letter boundary. [step 1.1, step 1.2, step 2.1]
+
+4.1 In the group of [L2] the product of reduced words is their concatenation followed by free reduction. The concatenation $t\,c\,t^{-1}$ is the reduced word $w$ of step 3.1, so no reduction occurs there and that product is $w$; the concatenation $t\,t^{-1}$ reduces to the empty word, which is the identity because concatenating it with any reduced word changes nothing, so $t^{-1}$ is the inverse of $t$. Hence $w=tct^{-1}$ exhibits $w$ as a conjugate of $c$ in that group. [L2, step 3.1, algebra, discharge-induction] ∎

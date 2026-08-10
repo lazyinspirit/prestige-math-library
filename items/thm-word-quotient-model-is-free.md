@@ -34,7 +34,7 @@ $\iota_{\mathrm{word}}(x)=[x]$ is a free group on $X$ in the sense of
 
 **Given:** A set $X$, a group $G$, and a function $u:X\to G$.
 
-[L1] $F_{\mathrm{word}}(X)$ is a group under $[w][v]=[wv]$ ([[thm-word-quotient-model-is-a-group]]).
+[L1] $F_{\mathrm{word}}(X)$ is a group under $[w][v]=[wv]$, with identity the empty-word class $[\varepsilon]$ and $[a_1\cdots a_n]^{-1}=[a_n^{-1}\cdots a_1^{-1}]$ ([[thm-word-quotient-model-is-a-group]]).
 
 [F1] A group homomorphism $f:G\to H$ satisfies $f(xy)=f(x)f(y)$ for all $x,y\in G$, and consequently preserves the identity and inverses ([[def-group-homomorphism]]).
 

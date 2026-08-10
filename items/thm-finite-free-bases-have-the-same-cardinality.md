@@ -43,13 +43,15 @@ $|B|=|C|$.
 
 [L5] $(\operatorname{Sym}(X),\circ,\operatorname{id}_X)$ is a group for every set $X$ ([[lem-symmetric-group-is-a-group]]).
 
+[F1] If $A$ is finite and $f:A\to B$ is a bijection, then $B$ is finite and $|B|=|A|$ ([[def-finite-cardinality]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Every permutation of $\{0,1\}$ is determined by the image of $0$: it is either the identity or the transposition $(0\,1)$, and these two maps are distinct; hence $C_2$ is a group with exactly two elements. [L5, algebra]
 
-2.1 Restriction to $B$ maps $\operatorname{Hom}(F,C_2)$ to the function set $C_2^B$, and the free-basis property gives a unique homomorphic extension of every function $B\to C_2$; restriction and extension are inverse maps, so [L1] gives $|\operatorname{Hom}(F,C_2)|=2^{|B|}$, including $B=\varnothing$. [L1, step 1.1, given]
+2.1 Restriction to $B$ maps $\operatorname{Hom}(F,C_2)$ to the function set $C_2^B$, and the free-basis property gives a unique homomorphic extension of every function $B\to C_2$; restriction and extension are inverse maps, so restriction is a bijection $\operatorname{Hom}(F,C_2)\to C_2^B$; [L1] counts $|C_2^B|=2^{|B|}$ and [F1] transports that count along the bijection, giving $|\operatorname{Hom}(F,C_2)|=2^{|B|}$, including $B=\varnothing$. [F1, L1, step 1.1, given]
 
 3.1 Applying the same restriction-extension bijection to $C$ gives $|\operatorname{Hom}(F,C_2)|=2^{|C|}$, and therefore $2^{|B|}=2^{|C|}$ as natural numbers. [step 2.1, given]
 

@@ -338,3 +338,268 @@ listed. None required dropping or deferring a result, and no result was removed.
 Step 7. Both judge lanes rejudge; supply the 13 ids in §3. Judging needs no page
 amendment applied — `tools/judge-overlay.mjs` supplies pair context from the
 staged lists while the served pages stay untouched.
+
+---
+
+# Step 8 — adjudication of the paired-judge rejections
+
+Alpha: **Claude Opus 5 at `xhigh`**, outside both judge families. Baseline touch
+snapshot `pre-step8` (taken by the orchestrator); my post-stage snapshot is
+`post-step8-alpha`.
+
+Sweep result adjudicated: 74 verdicts, zero nulls, **13 rejection rows over 11
+distinct items** — DeepSeek V4 Pro 4, GPT 5.6 Terra 9, two items rejected by
+both lanes. Ledger `research/freegroups-1-judge-adjudications.jsonl`, one row per
+rejection, each carrying `item_sha256` = the full sha256 of the normalized item
+text (verification block excluded) **at adjudication time, before any edit**.
+
+## 12. The rule I applied
+
+R1 makes step 8 fatal-only, and `LEVELS.md` §"Step 6" states both a fatal list
+that includes "a step not licensed by its cited facts" and a carve-out making "an
+omitted bridge a competent human reader closes in 30 seconds" nonfatal. Those
+overlap, so I used the discriminator the two texts actually support:
+
+- **An omitted bridge is nonfatal.** The step's cited material is described
+  accurately; what is missing is an inference or a definitional unfolding the
+  reader supplies at once. The 30-second rule governs and, at step 8, the polish
+  it used to permit is withdrawn.
+- **A misattribution is fatal.** The step asserts that a cited fact yields
+  something it does not yield, or a title/Statement promises more than any cited
+  fact gives. That is not an omission the reader can close — the reader who
+  checks the citation finds it does not say what the item claims.
+
+By that test **2 of 13 rows are fatal**, on 2 distinct items. Both are repaired.
+The other 11 rows closed on their exact-hash ledger row with no content, page,
+frontmatter, contract, impact or judge mutation.
+
+## 13. The two fatal defects, repaired
+
+### `ex-free-group-on-one-generator` — `confirmed_fatal`, `dependency_citation` (gpt-5.6-terra)
+
+The Example asserts an isomorphism to `$(\mathbb Z,+)$` **carrying `$\iota(x)$` to
+`$1$`**, and step 3.1 attributed that generator-compatible isomorphism to `[L2]`,
+`thm-classification-of-cyclic-groups`. That theorem's Statement gives only
+"if `$g$` has infinite order, `$G\cong(\mathbb Z,+)$`" — an unspecified
+isomorphism. The generator-compatible form appears only inside that theorem's
+*proof*, which a Fact may not cite. So the Example's Statement asserted more than
+any cited fact gave. Terra is right, and my step-6 §2b classification of this item
+as nonfatal was about a different clause and did not close this gap.
+
+*Repair.* Step 3.1 now constructs `$\theta$` outright: step 2.1 gives that
+`$[x]$` generates and has infinite order; `[L5]`
+(`lem-cyclic-subgroup-is-the-set-of-powers`) makes every element `$[x]^k$`;
+`[L2]`, retargeted to `lem-order-characterisation`'s infinite-order clause,
+makes the exponent unique, so `$\theta([x]^k):=k$` is well defined and injective;
+surjectivity is `$k=\theta([x]^k)$`; and `[L6]` (`lem-group-power-laws`, claim 1)
+makes it a homomorphism. `thm-classification-of-cyclic-groups` is dropped from
+`deps`: after the repair no step uses it, and a decorative Fact is exactly what
+the citation-fidelity rule forbids. Step 4.1 is untouched and now composes with a
+`$\theta$` that genuinely carries `$[x]$` to `$1$`.
+
+### `lem-cyclic-reduction-normal-form` — `confirmed_fatal`, `logic` (gpt-5.6-terra)
+
+The Statement ends "In particular, `$w$` is conjugate to `$c$` in the reduced-word
+free group." **No proof step addressed that clause and no declared dependency
+supported it**: `deps` were `def-cyclically-reduced-word`,
+`def-alphabet-words-and-reduction`, `thm-induction-principle`, none of which
+carries a group structure. The proof established only the literal factorisation.
+This is a Statement asserting more than the proof gives, with no 30-second
+carve-out available, because there is no bridge between steps to close — the
+claim is simply unproved.
+
+*Repair.* `thm-reduced-words-form-the-free-group` added to `deps` as `[L2]`,
+quoted faithfully. New step 4.1 proves the clause: the product in that group is
+concatenation followed by free reduction; `$t\,c\,t^{-1}$` is the reduced word
+`$w$` itself, so no reduction occurs and the product is `$w$`; `$t\,t^{-1}$`
+reduces to the empty word, which is the identity; hence `$t^{-1}$` is the inverse
+of `$t$` and `$w=tct^{-1}$` is a conjugacy. `discharge-induction` moved to the new
+final step, which the mechanical checker requires (`strategy-missing
+(discharge-induction-final)`); step 3.1 is otherwise unchanged.
+
+## 14. The eleven rejections closed without an edit
+
+| id | model | outcome | why |
+|---|---|---|---|
+| `ex-free-group-on-one-generator` | deepseek | `confirmed_nonfatal` / other | Real: step 1.1 classifies reduced words on one letter while `[L1]` gives only normal-form uniqueness, and "reduced" is undeclared. But the step **writes out its own argument** ("a change from one letter to the other creates an adjacent inverse pair"); only the definitional citation is absent. Omission, not misattribution. Left untouched even though the item was open under Terra's fatal licence. |
+| `ex-free-group-on-two-generators-is-not-abelian` | terra + deepseek | `confirmed_nonfatal` / other | The run's strongest cross-family signal, and I still make it nonfatal. Both lanes are right that `$[u][v]=[uv]$` is used and never declared, and that `def-word-quotient-model-of-the-free-group` is absent from `deps`. But that identity is the **definition** of the operation, stated on this pair's own A page, and the Statement is not overstated: the mathematics is correct and nothing is misdescribed. Adding the Fact is precisely the citation-hygiene polish R1 withdraws at step 8. |
+| `thm-finite-free-bases-have-the-same-cardinality` | deepseek | `false_positive` | Step 1.1 is tagged `[L5, algebra]` and **performs the enumeration in the step**: a permutation of `$\{0,1\}$` is determined by the image of `$0$`, giving the identity and the transposition, and they are distinct. `algebra` is the licence for exactly that elementary derivation. `thm-number-of-bijections-of-a-finite-set` is not needed for a two-case check. |
+| `prop-equality-of-words-in-a-presentation` | deepseek | `false_positive` | The Statement's second sentence is not an unproved assertion: it reads "By `prop-normal-closure-is-products-of-conjugates`, …", that proposition is in `deps`, and its Statement is the set **equality** `$\langle\!\langle R\rangle\!\rangle_G=\{$finite products of conjugates$\}$`. Membership in a set equal to that set is the same condition. The attribution is exact and the main iff is fully proved. |
+| `prop-tietze-transformations-preserve-presented-groups` | terra | `confirmed_nonfatal` / other | Real: the composite fixes `$y$` only because the dictionary relator `$y^{-1}w$` is trivial in the enlarged presentation. But `def-group-presentation` says verbatim "In this quotient, every relation in `$R$` becomes the identity", and `def-tietze-transformations`, which is in `deps`, displays that relator. Definitional unfolding; no cited fact is misdescribed. |
+| `thm-conjugacy-of-cyclically-reduced-words` | terra | `confirmed_nonfatal` / other | Real: step 3.1 asserts the shifted word is cyclically reduced without proof. **I verified it independently.** With the right seam cancelling, `$u=u'a^{-1}$`; `$u$` cyclically reduced means its first letter is not `$a$`, and `$u$` reduced means `$u'$` does not end in `$a$`; so `$a^{-1}u'$` is reduced and its first letter is not the inverse of its last. One sentence, and true. I also checked that at most one seam can cancel when `$u$` is cyclically reduced, which the proof needs and does not say. |
+| `ex-presentation-of-z-squared` | terra | `confirmed_nonfatal` / other | Real: `thm-external-direct-product-is-a-group` is declared in `deps` but never stated as a Fact, so step 1.1 leans on `[L2]`, a ring statement. Declared dependency, instant closure. See §15 for a second, unraised tag slip in this item. |
+| `ex-presentation-of-the-klein-four-group` | terra | `confirmed_nonfatal` / other | Same class: `def-group-presentation` is in `deps`, absent from the Facts block; step 1.2's relator-triviality and generation are definitional. |
+| `ex-presentation-of-a-finite-cyclic-group` | terra | `confirmed_nonfatal` / other | Same class: `thm-integers-modulo-n-basic-algebra` is in `deps`, absent from the Facts block. |
+| `ex-presentation-of-a-dihedral-group` | terra | `confirmed_nonfatal` / other | Real and my own step-6 rewrite caused it: making `$D_n$` stipulative rewrote the Given and dropped the `$P=\langle r,s\mid\ldots\rangle$` declaration the three sibling examples still carry, so `$P$` is first used in step 1.2 and only bound in step 2.2 as "the displayed presentation `$P$`". A notation slip, not a mathematical one — and see §16. |
+
+**Answer to the orchestrator's question — Terra's nine are not nine defects.**
+Seven of them are one systematic authoring pattern: *a fact the proof genuinely
+uses is declared in `deps` but never restated in the Facts block, so the step tag
+points at facts that do not carry it.* Terra applied a uniformly strict "every
+step must be licensed by a displayed `[F#]`/`[L#]`" reading; DeepSeek did not.
+That is a lane-calibration difference, not nine independent errors, and it is a
+**step-6 fix in a future run**, not a step-8 one. The two genuine outliers are the
+dihedral notation slip and the two fatal items above.
+
+## 15. Defects I found that no judge raised, and did NOT repair
+
+R1 licenses an edit only from a `confirmed_fatal` adjudication **of a rejection**.
+I will not manufacture a fatal finding to justify an edit, so these are reported,
+not fixed:
+
+- `ex-presentation-of-z-squared`, step 2.1 tags `[L2]` for "the map `$\pi$` sends
+  `$a^mb^n$` to `$(m,n)$`". `[L2]` is "`$(\mathbb Z,+,\cdot,0,1)$` is a
+  commutative ring"; the computation actually uses `$\pi$` being a homomorphism
+  (step 1.1) plus the power laws `[L3]`. The right facts are already declared in
+  the item, so this is a tag slip, nonfatal — but it is a **misattribution**, and
+  had a judge rejected on it I would have called it fatal. Fix at a future step 6.
+- `ex-free-group-on-one-generator`, step 2.1 says "no positive power `$[x]^n$` is
+  the identity because its reduced representative `$x^n$` is nonempty", which
+  silently uses `$[x]^n=[x^n]$` — the same undeclared product rule both lanes
+  flagged one step later. I did not touch it: I classified that class nonfatal, and
+  editing it anyway would contradict my own ledger row.
+
+## 16. Twice-touched escalation — advisory, and it moved
+
+`tools/touchlog.mjs report --min 2` on the run ledger:
+
+| id | repairs | note |
+|---|---|---|
+| `ex-free-group-on-one-generator` | **2** in this ledger, **3** across the run | step 6a reader (commit `8b6bce1e`, before the `pre-step6-alpha` snapshot), step 6b me, step 8 me. **Escalates.** |
+| `ex-presentation-of-a-dihedral-group` | 2 | **Unchanged at step 8** — its rejection is nonfatal, so there is no third touch and no new escalation. |
+
+The item the dispatch flagged as at-risk did not move; the item that escalated is
+the one-generator example. Its three touches are not a proof thrashing: step 6a
+was a wording fix, step 6b quantified the Statement over every free group, and
+step 8 replaced a misattributed citation with an explicit construction. Each made
+the item strictly stronger and the last one closed a real defect the first two
+missed. Flagged for the orchestrator's personal audit as the rule requires.
+
+## 17. Gates re-run after the repairs
+
+| gate | result |
+|---|---|
+| `precheck.mts` (whole corpus) | **2201 checked, 0 failing** |
+| `depcheck.mjs` | **exit 0** — no cycles, all references resolve, no draft on a published page; neither repaired item appears in any warning |
+| `citecheck.mjs` | **exit 0**; neither repaired item appears in any warning |
+| `proof-contract.mjs --strict` | **0 errors**, 29/29 items — contracts updated for both repairs (new `[L2]`/`[L5]`/`[L6]` citation contracts with quotes verified against source Statements, `step-3-1` inputs corrected, `step-4-1` added) |
+| `finite-smoke.mjs` | 0 errors |
+| `risk-report.mjs --require-reviewed` | **0 errors**, 29 routed, 23 `risk_review` records; both repaired items' records extended with the step-8 disposition |
+| `impact-audit.mjs --from pre-step8` | 2 changed interfaces, 1 affected item; receipt `research/freegroups-1-impact-step8.json` validates |
+| `step8-guard.mjs --baseline pre-step8` | **2 changed, 2/2 licensed by a confirmed_fatal adjudication — OK** |
+
+`research/freegroups-1-impact.json` (the step-6 receipt) is **not** overwritten;
+the step-8 receipt is a separate file so both remain evidence.
+
+## 18. Rejudge set and next action
+
+Exactly **two** ids, both materially rewritten, both needing current verdicts
+from both lanes on the new pair context:
+
+```
+ex-free-group-on-one-generator
+lem-cyclic-reduction-normal-form
+```
+
+Neither carried a `verification.judge` block, so there was no stale stamp to
+delete. Under the owner's 2026-08-06 amendment their unedited page-mates are
+spared: a repaired item always rejudges because its own `item_sha256` changed,
+but the sibling context-hash move alone does not stale them.
+
+I flipped no `status`, wrote no `verification.audited`, changed no id or reading
+order, and edited neither page file.
+
+## 19. Step 8b — the targeted rejudge, and the one new rejection
+
+Both repairs were rejudged by both lanes on matching pair context
+(`context_sha256: 0ae38f5c…`, `item_sha256: 2c4511de…` for the one-generator
+example under the judge lanes' judge-block-only normalization).
+
+- `lem-cyclic-reduction-normal-form` — **both lanes keep.** Closed, no further
+  action.
+- `ex-free-group-on-one-generator` — DeepSeek keeps ("Every step is licensed by
+  its cited facts"). Terra rejects on a **new** point.
+
+### Terra's new point, and my ruling: `confirmed_nonfatal` / `other`
+
+> Step 2.1 concludes that `[x]` has infinite order solely from the absence of
+> positive powers equal to the identity, but it cites no definition or result
+> equating that condition with infinite order. This unsupported conclusion is
+> required for applying L2 in step 3.1.
+
+**Ruling from the published text, not from lane agreement.** The question the
+dispatch put is the right one and it has a clean answer:
+*"no positive power equals the identity" is not a condition that requires
+equating with infinite order — it **is** the library's definiens.*
+
+`def-order-in-a-group` (published, landmark) fixes, for any group `$G$` and
+`$g\in G$`:
+
+```
+S_g := { k ∈ ℕ : k ≥ 1 and g^k = e }
+```
+
+and then, verbatim: *"If `$S_g=\varnothing$` we say `$g$` has **infinite order**
+and write `$\operatorname{ord}(g)=\infty$`."* The definition's own **title**
+states the same equivalence in words — "…with `$\operatorname{ord}(g)=\infty$`
+when no positive power of `$g$` is the identity". Step 2.1 establishes exactly
+`$S_{[x]}=\varnothing$` and concludes exactly `$\operatorname{ord}([x])=\infty$`.
+That is definitional unfolding, one substitution wide, not an inference needing a
+warrant.
+
+Two further checks make it airtight rather than merely plausible:
+
+1. **The consuming dependency restates the same hypothesis.** `[L2]` is
+   `lem-order-characterisation`, whose own **Given:** line reproduces
+   `$S_g=\{k\in\mathbb N: k\ge1,\ g^k=e\}$` with
+   "`$\operatorname{ord}(g)=\infty$` otherwise", and whose infinite-order proof
+   (its step 1.3) opens "Assume `$S_g=\varnothing$`". So what step 2.1 delivers
+   and what step 3.1's `[L2]` consumes are *the same sentence*. There is no seam
+   between them for a gap to sit in.
+2. **No competing convention exists in the library.** There is no second
+   definition of infinite order (e.g. via `$|\langle g\rangle|$` being infinite)
+   that step 2.1 could be silently switching to. `def-order-in-a-group` is the
+   sole definition, and `lem-order-characterisation`'s claim 3
+   (`$|\langle g\rangle|=\operatorname{ord}(g)$`) is a *theorem* relating the two,
+   proved from that definition — not an alternative definiens.
+
+**Why nonfatal and not a false positive.** Terra's *observation* is factually
+correct and I record it as a real defect: step 2.1's tag is `[L1, step 1.1]`,
+neither of which states the definition, and `def-order-in-a-group` appears in
+neither the Facts block nor `deps`. What is wrong is the *severity*: Terra calls
+the conclusion "unsupported", and it is not — it is supported by the definition of
+the term it uses, which any competent reader closes far inside the 30-second
+threshold. So the defect is citation hygiene, which is precisely what R1 withdraws
+at step 8.
+
+This is also **the same systematic pattern as the seven rejections in §14**: a
+fact the proof genuinely uses is definitional or declared, but is not restated as
+a displayed `[F#]`/`[L#]`. Terra applies a uniformly strict "every step must cite
+a displayed fact" reading; DeepSeek does not. Ruling it fatal here would
+contradict the seven identical rulings I already made and would reopen an item at
+its fourth touch to add one Fact line. **No edit; no mutation of content, page,
+frontmatter, contract, impact or judge state.** Verified: the item's
+`item_sha256` is `f2dcf793…` both before and after this adjudication.
+
+### Ledger and rejudge
+
+Row appended to `research/freegroups-1-judge-adjudications.jsonl`:
+
+```json
+{"id":"ex-free-group-on-one-generator","model":"gpt-5.6-terra","context_sha256":"0ae38f5c1c94dc2b116a6d2f72eadcc41657103c57e95ad95cb061d334b17a1d","item_sha256":"f2dcf79300979ad53484d54930a02bc953f45df1902b9f122716135d2d9cbb81","outcome":"confirmed_nonfatal","defect_type":"other"}
+```
+
+**No rejudge is needed.** Nothing changed, so both lanes' current verdicts stand
+against unchanged text, and the Terra rejection is closed on its exact-hash row.
+Step 8 is complete.
+
+### Carried to step 10 as a step-6 backlog item for a future run
+
+`ex-free-group-on-one-generator` now carries **two** recorded citation-hygiene
+omissions in the same step 2.1 — the undeclared `$[x]^n=[x^n]$` product rule
+(§15) and the undeclared `def-order-in-a-group` unfolding (here). Both are
+nonfatal individually and neither is repairable at step 8. Both should be fixed
+together at step 6 of the next run that touches this pair, by adding
+`def-word-quotient-model-of-the-free-group` and `def-order-in-a-group` to `deps`
+and displaying them as Facts. Logged so the omission is not rediscovered a fourth
+time.

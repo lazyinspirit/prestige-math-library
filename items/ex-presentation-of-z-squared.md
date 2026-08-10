@@ -26,7 +26,8 @@ pipeline_run: null
 
 ## Example
 
-The free abelian group on two generators has the presentation
+Adjoining a single commutator relator to the free group on two generators
+presents the direct product of two copies of the additive integers:
 
 $$\langle a,b\mid aba^{-1}b^{-1}\rangle\cong(\mathbb Z,+)\times(\mathbb Z,+),$$
 

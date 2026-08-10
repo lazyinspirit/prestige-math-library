@@ -29,6 +29,11 @@ empty word $\varepsilon$, and let $\sim$ be free equivalence as in
 [[prop-free-equivalence-is-an-equivalence-and-a-congruence]], this is an
 equivalence relation and concatenation respects it.
 
+Throughout, $a^{-1}$ denotes the partner of a formal letter
+$a\in X\sqcup X^{-1}$ under the pairing that matches each $x\in X$ with
+$x^{-1}\in X^{-1}$, so $(x^{-1})^{-1}=x$ and an elementary cancellation deletes
+an adjacent pair $aa^{-1}$ for any formal letter $a$.
+
 The **word-quotient model** on $X$ is the quotient set
 
 $$F_{\mathrm{word}}(X):=W(X)/{\sim}.$$
