@@ -172,6 +172,62 @@ everything the Leibniz route needs, cited at the exact items that consume it.
 Authored nothing. Edited no batch file, item, page or `plan-spec.json`. No
 permission prompt raised; R1 recorded as a blocker instead.
 
+## Stage 0, third pass — final re-check of the three repaired pairs — **COMPLETE**
+
+Output: `## Final re-check` in
+`research/frontier-10-alpha-step3-scaffold-review.md`.
+Scope: batch 8 (R2) and batch 9's two pairs (R3, R4) only; the other eleven were
+settled in the second pass and I reopened nothing.
+
+**All three read `resolved`. Stage 0 is complete and step 4 may splice.**
+
+| pair | verdict |
+|---|---|
+| `group-actions-and-cayleys-theorem` (R2) | resolved — non-blocking ledger correction L2 |
+| `gaussian-elimination-and-row-reduction` (R3) | resolved |
+| `determinants-of-matrices-over-a-commutative-ring` (R4) | resolved |
+
+- **R2.** `thm-jordans-derangement-theorem` (A 31, after Cauchy–Frobenius) and
+  `thm-conjugates-of-proper-subgroup-do-not-cover-finite-group` (A 18, after the
+  normalizer count) are built at the positions I named, with Conrad §6 harvest
+  rows naming the exact ids, `literature-derived`/`ai-altered` provenance, and
+  proof contracts on the routes I gave — including the one-conjugate and
+  trivial-subgroup boundaries. A page 29 → 31, 37 with the published items. All
+  nine §6 headings now disposed.
+- **R3.** `cex-solution-count-trichotomy-fails-over-a-finite-field` (B 8 → 9)
+  marks the one explicitly hypothesised theorem on the page; both required
+  `canonical` rows for LU and the rank normal form exist, in the `canonical`
+  list rather than inflating a source's `contents`.
+- **R4.** `fs-determinant-is-additive-on-matrices` (B 6 → 7) is the page's first
+  `false-statement` and marks the one false inference multilinearity invites;
+  `invertibility-and-adjugate` has 0 occurrences on disk and the decline now
+  names `the-determinant-of-a-linear-operator` (84).
+
+**L2, non-blocking, same class as L1.** Batch 8's Theorem 6.9 decline is now
+checkable — and checking it, the named home `monoids-groups-and-subgroups` (24)
+carries no index material; `def-index`, `thm-lagrange` and `cor-index-tower-finite`
+live on `cosets-and-lagranges-theorem` (32). The substance of the reason is
+correct and only the page id is wrong. It changes no item; I verify it at step 6
+with the rest of the harvest-faithfulness check.
+
+**R1 is closed as a step-4 blocker**, verified from disk rather than taken from
+the dispatch: `research/frontier-10-splice.mjs` carries the
+`rings-subrings-and-integral-domains` → `finite-counting-and-binomial-coefficients`
+entry in `EXTRA_REQUIRES` and hard-errors if that page is absent from the spec,
+which is the case that matters since no batch manifest contains it.
+
+Verification this pass: full dependency resolution over 583 in-run items against
+2,895 published items with the re-home applied — **0 unresolved, 0 forward
+references**; `coverage-checklist.mjs` 14 pages / 877 results / 0 errors;
+`gates.mjs --step 0` **CLEAR**; every decline reason in all nine ledgers
+re-scanned for page-id claims, with no nonexistent home remaining; all four new
+items read in full.
+
+### Boundaries respected
+
+Authored nothing. Edited no batch file, item, page or `plan-spec.json` — only
+this report and my own scaffold review. No permission prompt raised.
+
 ## Stage 1 — step 4, propagation — not started
 
 ## Stage 2 — step 6, whole-level audit — not started

@@ -1038,3 +1038,177 @@ batch 9 for R3 and R4 (two B items, three ledger rows). R1 goes to the
 orchestrator. **Step 4 splices nothing until those three pairs come back clean;**
 the other seven are `resolved` and need no further scaffold work from me. I
 re-check the three, then move to Stage 1.
+
+---
+
+# Final re-check
+
+Alpha-frontier-10, Stage 0 third pass. Scope is the three pairs the dispatch
+names. The other eleven are settled and I reopened nothing on them.
+
+**I authored nothing and edited no batch file, item, page or `plan-spec.json` in
+this pass either.**
+
+## Verdicts
+
+| # | pair | verdict |
+|---:|---|---|
+| 12 | `group-actions-and-cayleys-theorem` (batch 8, R2) | **resolved** — one non-blocking ledger correction, L2 |
+| 13 | `gaussian-elimination-and-row-reduction` (batch 9, R3) | **resolved** |
+| 14 | `determinants-of-matrices-over-a-commutative-ring` (batch 9, R4) | **resolved** |
+
+**All three read `resolved`, and step 4 may splice.**
+
+---
+
+### 12. `group-actions-and-cayleys-theorem` — **resolved**
+
+Both declines that named a nonexistent home are built, and at the two positions
+I named rather than appended:
+
+- `thm-conjugates-of-proper-subgroup-do-not-cover-finite-group` is A item 18,
+  directly after `thm-conjugate-subgroups-are-counted-by-the-normalizer` (item
+  17), the theorem that supplies its count.
+- `thm-jordans-derangement-theorem` is A item 31, directly after
+  `thm-cauchy-frobenius-orbit-counting` (item 30).
+
+A page 29 → 31, so 37 with the six published items and 53 across the pair. Far
+below 60; no split.
+
+**Both carry real harvest rows against the source, not invented ones.** Conrad's
+locator now reads "§6, pp. 23–25, Theorem 6.2 through Theorem 6.10", and 6.6 →
+Jordan and 6.10 → the covering theorem are both `included` naming the exact item
+ids. All nine §6 headings, 6.2 through 6.10, now carry a disposition; nothing is
+left off the end of a locator, which was the original defect. Provenance is
+`literature-derived` statement with `ai-altered` proof for both — correct, since
+Conrad states both and both proofs are rewritten onto this page's machinery.
+
+I read the proof contracts, not just the presence of the items.
+
+- Jordan's specialises the integral Cauchy–Frobenius identity: transitivity makes
+  $X/G$ a singleton, so $\sum_{g}|X^g|=|G|$; the identity contributes $|X|\ge2$;
+  if each of the remaining $|G|-1$ elements fixed a point the sum would be at
+  least $|G|+1$. Rewriting it without division was the right call — no averaging
+  step then needs licensing. The `one` boundary discharges $|X|>1$ explicitly,
+  and the transitivity clause is cited from the published `def-group-action`,
+  which is where the library defines it.
+- The covering theorem's is the route I named: $m=[G:N_G(H)]$ conjugates, each of
+  cardinality $|H|$ and each containing $e$, so the union has at most
+  $1+m(|H|-1)$ elements; $H\le N_G(H)$ with Lagrange gives $m\le n=[G:H]$, and
+  $n\ge2$ gives $1+n(|H|-1)=|G|-n+1<|G|$. The one-conjugate (normal $H$) and
+  trivial-subgroup boundaries are both dispositioned — that is where this
+  argument is usually left open.
+
+**L2 — ledger correction, non-blocking, the same class as L1.** Theorem 6.9's
+reason was rewritten and is now checkable, which is exactly what I required and
+all I required. Checking it: the named home `monoids-groups-and-subgroups` is a
+real page, but at order 24 it carries `lem-intersection-of-subgroups` and no
+index material whatever — `def-index` and `thm-lagrange` live on
+`cosets-and-lagranges-theorem`, order 32, titled *Cosets, Index and Lagrange's
+Theorem*, which already carries `cor-index-tower-finite`, the index
+multiplicativity that 6.9 generalises. The substance of the reason is right —
+$[G:H\cap K]\le[G:H][G:K]$ and its coset-pair proof are index calculus, not
+action theory — and only the page id is wrong. Both candidate homes are
+published and earlier than 42, so the disposition routes 6.9 to a future
+enrichment of that page rather than to a later build; batch 8 *is* such an
+enrichment and batch 7 defers to earlier published pages the same way, so this
+is a real routing and not a disguised drop. Correct the id before the step-6
+harvest-faithfulness check. It changes no item, which is why it does not block.
+
+### 13. `gaussian-elimination-and-row-reduction` — **resolved**
+
+`cex-solution-count-trichotomy-fails-over-a-finite-field` is B item 9 (8 → 9)
+and is the item I named. Over $\mathbb F_2$, $x+y=0$ has exactly $(0,0)$ and
+$(1,1)$, so a two-element solution set is neither a singleton nor infinite and
+`cor-solution-count-trichotomy-over-an-infinite-field` loses its conclusion the
+moment the field is finite. It cites the corollary it bounds and
+`thm-z-mod-p-is-a-field`, and its contract exhausts $\mathbb F_2^2$ explicitly
+rather than asserting the count. **It marks a hypothesis rather than restating
+the A page:** the A page never touches a finite scalar field, and this is the
+page's one explicitly hypothesised theorem.
+
+Both required `canonical` rows exist and are in the `canonical` list, so no
+source's `contents` was inflated with a heading it does not have. LU
+factorisation is `out-of-scope` on triangular factorisation with pivot and
+leading-minor hypotheses; the rank normal form is `out-of-scope` because it
+classifies under two-sided equivalence and needs column operations this page
+does not develop. Both are result-specific and both match what I said when I
+declined to require the items themselves. Neither result is now invisible, which
+was the whole point.
+
+### 14. `determinants-of-matrices-over-a-commutative-ring` — **resolved**
+
+`fs-determinant-is-additive-on-matrices` is B item 7 (6 → 7) and is the item I
+named, as a `false-statement` — the tier this B page previously lacked entirely.
+$A=B=I_2$ over $\mathbb R$ gives $\det(A+B)=\det(2I_2)=4\neq2$. **It marks the
+boundary of items 11 and 15 rather than restating them:** multilinearity is
+linearity in one row or column with all others held fixed, and the item states
+that restriction as the reason the false inference fails, instead of repeating
+the theorem. Its statement is `literature-derived` — a source states the false
+claim exactly — with an `ai-altered` proof.
+
+The third ledger row is corrected. `invertibility-and-adjugate` has **0
+occurrences** anywhere on disk; the decline for real linear dependence forcing a
+zero determinant now names `the-determinant-of-a-linear-operator`, order 84 —
+real, one order after this page, and titled *The Determinant of a Linear
+Operator, Cofactors and Cramer's Rule*, which is the declared home of the
+adjugate material this criterion needs.
+
+### One observation across both batch-9 additions — recorded, not required
+
+Each new item took over a harvest row that previously pointed at the positive
+A-page result: Hefferon's solution-size paragraph moved from
+`cor-solution-count-trichotomy-over-an-infinite-field` to the counterexample, and
+Margalit–Rabinoff's Multilinearity Property moved from
+`thm-leibniz-determinant-is-alternating-multilinear-and-normalized` to the false
+statement. Beta-9 recorded the choice and its reason, and kept independent
+backing for both A items — Margalit–Rabinoff §1.3.2 for the corollary, New's
+notes and the existence theorem for the alternating-multilinear theorem — so
+nothing is orphaned and no heading is undisposed. I would have put the positive
+heading on the positive item and carried each boundary item on a `canonical`
+row, which is how batches 6 and 8 handled the same situation. It changes no
+item; noting it so the reading is on the record at step 6.
+
+## What I checked, and how
+
+Everything below was run or read from disk in this pass.
+
+- **Full dependency resolution and reading-order comparison, all nine batches**,
+  with the re-home applied: **583 in-run items against 2,895 published items
+  mapped, 0 unresolved and 0 forward references.** The four new items add no
+  edge that points forward or sideways: batch 8's two resolve within their own
+  page and to orders 20 and 32, batch 9's two to their own A pages and to
+  published field/ring items.
+- **`coverage-checklist.mjs` over all nine ledgers**: 14 pages, **877** harvested
+  results, 0 errors, 0 warnings (was 875 before the four additions).
+- **`node tools/gates.mjs --step 0 --run frontier-10`: STEP 0 CLEAR**, 583 scoped
+  items, 0 errors, 0 warnings.
+- **Every decline reason in all nine ledgers re-scanned for page-id claims.** All
+  three nonexistent homes I found last pass are gone; no new one appeared. The
+  surviving page targets all resolve in `plan-spec.json`, and I checked each
+  one's order against its citing page.
+- **All four new items read in full** — deps, contract derivations, step input
+  maps, boundary dispositions, provenance rows and harvest rows — plus the
+  on-page theorems each was required to consume.
+- `research/frontier-10-splice.mjs` re-read: R1 is taught, including the branch
+  for an `EXTRA_REQUIRES` page that no batch manifest contains, which is exactly
+  what the re-home destination is.
+
+## Blockers
+
+1. **R1 is closed as a step-4 blocker.** `EXTRA_REQUIRES` in
+   `research/frontier-10-splice.mjs` adds `finite-counting-and-binomial-coefficients`
+   to `rings-subrings-and-integral-domains`, and the script errors rather than
+   silently skipping if that page is absent. Verified from disk, not taken from
+   the dispatch.
+2. `research/frontier-10-published-amendments.md` still does not exist. Batch 8's
+   notes stage it at the publishing commit, so this remains not a step-3 defect —
+   repeated once more so it is not lost.
+
+## Next
+
+Stage 0 is complete. All fourteen pairs are `resolved` or `sufficient`, and
+**step 4 may splice.** Two ledger corrections ride along and block nothing: L1
+(batch 4's MIT syllabus row → Rudin Ch. 6 directly) and L2 (batch 8's Theorem 6.9
+home → `cosets-and-lagranges-theorem`). I verify both at step 6 with the rest of
+the harvest-faithfulness check. I move to Stage 1.
