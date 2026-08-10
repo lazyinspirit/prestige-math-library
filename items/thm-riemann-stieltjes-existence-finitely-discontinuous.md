@@ -39,7 +39,7 @@ Let $f:[a,b]\to\mathbb R$ be bounded and have only finitely many discontinuities
 
 [L2] The canonical monotone summands of a continuous BV function are continuous ([[lem-jumps-of-the-variation-function]]).
 
-[L3] For a nondecreasing integrator, the weighted oscillation criterion characterizes Stieltjes integrability ([[thm-riemann-stieltjes-darboux-criterion]]).
+[L3] For $a<b$, a bounded integrand and a nondecreasing integrator, mesh integrability is equivalent to continuity of the integrand at every discontinuity of the integrator together with the weighted oscillation criterion ([[thm-riemann-stieltjes-darboux-criterion]]).
 
 [L4] Continuous functions on compact intervals are uniformly continuous ([[thm-heine-cantor-r]]).
 
@@ -51,8 +51,10 @@ Let $f:[a,b]\to\mathbb R$ be bounded and have only finitely many discontinuities
 
 **Proof technique:** direct.
 
-1.1 First suppose that $\alpha$ is continuous and nondecreasing. Write $|f|\le M$. Given $\varepsilon>0$, [L6] and finiteness of $D$ allow pairwise disjoint closed intervals $I_x$ about the points $x\in D$ whose total $\alpha$-increment is less than $\varepsilon/(4M+1)$. [L6]
+1.1 If $a=b$ the integral is $0$ by the definition of the Riemann-Stieltjes integral on a singleton interval and there is nothing to prove, so assume $a<b$, which is the standing hypothesis of [L3]. [given, L3]
 
-2.1 On the compact complement of the interiors of the $I_x$, the function $f$ is continuous and hence uniformly continuous by [L4]. Choose a partition containing all endpoints of the $I_x$ and fine enough that every remaining partition interval has oscillation below $\varepsilon/(1+\alpha(b)-\alpha(a))$. The intervals meeting $D$ contribute at most $2M$ times their total $\alpha$-increment, and all other intervals contribute less than $\varepsilon$. After rescaling the two preliminary bounds, the weighted oscillation sum is arbitrarily small, so [L3] gives $f\in R(\alpha)$. [step 1.1, L3, L4]
+1.2 First suppose that $\alpha$ is continuous and nondecreasing. Write $|f|\le M$. Given $\varepsilon>0$, [L6] and finiteness of $D$ allow pairwise disjoint closed intervals $I_x$ about the points $x\in D$ whose total $\alpha$-increment is less than $\varepsilon/(4M+1)$. [L6]
+
+2.1 On the compact complement of the interiors of the $I_x$, the function $f$ is continuous and hence uniformly continuous by [L4]. Choose a partition containing all endpoints of the $I_x$ and fine enough that every remaining partition interval has oscillation below $\varepsilon/(1+\alpha(b)-\alpha(a))$. The intervals meeting $D$ contribute at most $2M$ times their total $\alpha$-increment, and all other intervals contribute less than $\varepsilon$. After rescaling the two preliminary bounds, the weighted oscillation sum is arbitrarily small, so [L3] gives $f\in R(\alpha)$. [step 1.2, L3, L4]
 
 3.1 For a general continuous BV $\alpha$, [L1] writes $\alpha=\alpha(a)+P_\alpha-N_\alpha$. Both $P_\alpha$ and $N_\alpha$ are continuous by [L2]. Step 2.1 gives integrability against each, and linearity in the integrator [L5] gives integrability against $\alpha$. [step 2.1, L1, L2, L5] ∎

@@ -37,7 +37,7 @@ Every finite abelian group is isomorphic to a finite direct product of cyclic gr
 
 [L3] An **elementary-divisor decomposition** of a finite abelian group $G$ is an isomorphism $$G\cong C_{q_0}\times\cdots\times C_{q_{r-1}},$$ where every $q_i>1$ is a prime power. The unordered multiset of the $q_i$, counted with multiplicity, is the **elementary-divisor data**. The cyclic factors and product use thm-classification-of-cyclic-groups and def-external-direct-product-of-groups. The data records factor isomorphism types, not distinguished internal subgroups; the trivial group has empty data. ([[def-elementary-divisor-data-for-a-finite-abelian-group]]).
 
-[L4] Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic. ([[lem-successive-p-multiple-quotients-recover-elementary-divisors]]).
+[L4] Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently, for every $k\ge1$, the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic. ([[lem-successive-p-multiple-quotients-recover-elementary-divisors]]).
 
 [L5] If $G=\langle g\rangle$ is cyclic, then exactly one of the following applies: - if $g$ has infinite order, $G\cong(\mathbb Z,+)$; - if $g$ has finite order $n$, necessarily $n\ge1$, then $G\cong(\mathbb Z/n,+)$. ([[thm-classification-of-cyclic-groups]]).
 

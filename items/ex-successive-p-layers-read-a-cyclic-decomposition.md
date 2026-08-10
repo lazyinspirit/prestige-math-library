@@ -31,7 +31,7 @@ For $$G=C_p^2\times C_{p^3}\times C_{p^4}^2,$$ the dimensions $d_i$ defined by $
 
 **Given:** The objects and hypotheses in the example.
 
-[L1] Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic. ([[lem-successive-p-multiple-quotients-recover-elementary-divisors]]).
+[L1] Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently, for every $k\ge1$, the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic. ([[lem-successive-p-multiple-quotients-recover-elementary-divisors]]).
 
 [L2] If $G$ and $H$ are finite groups, then their external direct product is finite and has order $|G\times H|=|G|\,|H|$. ([[prop-order-of-finite-direct-product]]).
 
