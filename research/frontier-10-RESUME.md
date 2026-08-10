@@ -111,25 +111,82 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — STEP 6 AUDIT (steps 0–5 all CLEAR)
+## State — STEP 6 COMPLETE, gate CLEAR (steps 0–6 all clear)
 
-- **Steps 0–4 CLEAR.** Step 4 gate green: 583 scoped items, 0 errors.
-- **Step 5 CLEAR.** All 583 items authored; 474/474 proof contracts check;
-  content-policy 583 items 0 errors (complete provenance, no applied iota).
-  Its one failure was an orchestrator sequencing error: batch 5 depends on batch
-  9's determinant interfaces but both were dispatched in parallel, so batch 5
-  quoted the scaffold while batch 9 was still authoring — 11
-  `citation-quote-mismatch`. Repaired against the authored text, and Beta-5
-  confirmed in writing that no proof step was unlicensed by the ring-versus-field
-  split. **Dispatch a dependent batch AFTER the batch it depends on.**
-- **Step 6 running**: 9 independent readers (fresh processes, cap 5), then Alpha
-  Stage 2. Baseline snapshot `after-authoring` taken (3479 items).
-- Batch 8 enrichment protocol verified: published pages untouched, all 47 items
-  `status: draft`, `research/frontier-10-published-amendments.md` written (5.9 KB),
-  depcheck clean.
-  `items/` was **51** (pre-existing `rem-*` deferred-catalogue items) — subtract
-  it when reading the monitor's `drafts:` field.
-- 14 A/B pairs, **583 items** to author, 877 harvested source headings.
+- **Steps 0–5 CLEAR** (unchanged; see below for what step 4 caught).
+- **Step 6 CLEAR.** `node tools/gates.mjs --step 6 --run frontier-10` → 15/15
+  gates pass. 584 items (583 authored + 1 authored by Alpha at step 6),
+  475 proof contracts, 887 harvested headings, 2,559 declared relationships.
+
+### Step 6 — what the audit actually cost
+
+Nine independent readers reported **19 fatal families**, not the 15 the Alpha
+dispatch listed: batch 6's findings file carries six (F1, F2, F8, F10, F11, F12),
+not two. Alpha adjudicated all 19 from disk.
+
+Alpha then dispatched **16 read-only refuters** in two waves of eight (the lane
+cap): six proof clusters built around the repaired fatal proofs, a whole-run
+title sweep, and eight wave-2 clusters covering the remaining 220 high/critical
+items. **They found eleven further fatal defects that neither the readers nor
+Alpha had caught**, all repaired:
+
+1. `thm-linear-images-scale-jordan-content-by-absolute-determinant` — the reader
+   fixed Cavalieri's *ordering* circularity; its *sectional* hypothesis was still
+   unmet, with a verified counterexample showing an arbitrary Jordan set need not
+   have Jordan sections outside a content-zero parameter set.
+2. `def-category` + `prop-sets-and-functions-form-category-set` — morphisms had
+   no well-defined codomain, because `def-function` makes the empty function a
+   function into *every* set. Fixed at the root with the disjoint-union tagging
+   convention, which repairs all fifteen concrete categories at once.
+3. `ex-change-of-basepoint-isomorphism-for-fundamental-groups` — the reader's own
+   repair introduced a **b-leaf violation**, and `validate-plan` was green only
+   because `plan-spec.json` was stale and did not carry the edge.
+4. `thm-riemann-stieltjes-darboux-criterion` — the iff fails at $a=b$.
+5. `thm-riemann-stieltjes-continuous-composition` — its `[L1]` dropped the
+   criterion's continuity clause, with a counterexample proving it essential.
+6. `prop-face-boundaries-in-three-connected-plane-graphs` — **wrong twice**: the
+   reader's replacement inferred arc-containment from the absence of alternating
+   attachments, which fails when two components share three attachments.
+7–11. **Five false titles**: `thm-r-three-three-equals-six` (found by its
+   reader), `ex-amalgamation-along-a-whole-factor`,
+   `lem-separation-augmentation-for-kuratowski-free-graphs`,
+   `cor-orbit-stabilizer-cardinality`, `thm-conjugacy-class-cardinality`.
+
+**False titles are now the single most common fatal class in this run**, and they
+are structurally invisible to the step-7 judges, which never receive a title.
+Anyone reading this later should keep the dedicated title sweep.
+
+### §6b.0 harvest faithfulness — the new gate works
+
+All 81 declines read against the narrowed rule. 78 properly grounded. Three
+batch-4 rows declined on *process* grounds; the real reason in all three is that
+the page defines the RS integral as a **mesh** limit while Rudin uses the
+**refinement** integral, so Rudin 6.12(c) is *false* here rather than unbuilt and
+6.17's obstruction is definitional. Rudin 6.16 was genuinely buildable, and Alpha
+authored and proved `thm-riemann-stieltjes-countable-step-integrator` to close it.
+
+**The gate's target case is confirmed fixed.** Brosnan §3.14 is now enumerated
+heading by heading and Theorem 3.107 (Orbit–Stabiliser) is `included` naming
+`thm-orbit-stabilizer` — the exact result frontier-9 lost while citing that same
+note.
+
+### Receipts
+
+- `research/frontier-10-spine-audit.json` — 60 items; 59 carried forward from
+  freegroups-1 at **identical `content_sha256`** (the receipt is hash-bound and
+  lapses only on content change), 1 newly scoped and read by Alpha.
+- `research/frontier-10-audit-coverage.json` — 584 items, 475 proof-bearing,
+  2,559 relationships, all 70 planned-vs-authored dependency differences
+  reasoned. Judge coverage deliberately empty; that is step 7.
+- `risk-report --require-reviewed` passes: all **317** high/critical items carry
+  a complete `risk_review`.
+
+### Verified run-wide
+
+0 dependencies on an `ai-generated` Statement (2,540 edges); 0 forward edges;
+all 60 cross-batch edges read individually; all 14 A-page summaries exactly two
+paragraphs under 150 words; all 14 B pages with no authored summary body; the
+re-home at order 46 clean with every dependency at order ≤ 24.
 
 ### What step 4 caught that nothing earlier could
 
@@ -166,14 +223,15 @@ syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
 
 ## Exact next action
 
-Await the 9 readers, then Alpha Stage 2 (step 6): adjudicate reader findings from
-disk, dispatch read-only refuters, run §6b.0 harvest faithfulness against the
-sources, reconcile contracts and risk tiers, apply L1/L2, audit cross-batch and
-cross-level citations. Then:
+**Step 7 — the paired judge sweep.** Step 6 is complete and its gate is clear.
 
 ```
-node tools/gates.mjs --step 6 --run frontier-10
+JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --pages <every A page in the run>
 ```
+
+Supply **every A page**, not only the repaired ones: the initial Step-7 sweep is
+whole-level by owner rule, and `--items` is reserved for a later Alpha-selected
+rejudge. 14 A pages; the sweep includes each B companion automatically.
 
 Step 7 is the paired judge sweep (DeepSeek + Terra, `JUDGE_LINEUP=deepseek+terra`),
 which SPENDS — supply every A page in the run. Then step 8 fatal-only
