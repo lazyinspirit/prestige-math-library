@@ -145,12 +145,11 @@ the first step-0 failure of this run.
 
 ## Exact next action
 
-Await Alpha's step-3 review and batch 9. Resolve every `insufficient` pair with its owning Beta, have Alpha re-check, then step 4: splice all 9 batches into plan-spec.json (adding the two determinant pages to fubini-and-change-of-variables `requires`), then step 5 authoring.
-Every Beta must have produced `research/frontier-10-batch-<i>.coverage.json`
-alongside its `.pages.json` and `.notes.md`, or step 2 fails `missing-receipt`.
-Then step 3: orchestrator adjudicates recommendations, **then dispatch Alpha for
-the breadth/depth review** — that half of step 3 is new as of this run and is
-mandatory before any step-4 splice.
+Await Alpha's step-3 review and batch 9. Resolve every `insufficient` pair with
+its owning Beta, have Alpha re-check, then **step 4**: splice all 9 batches into
+`plan-spec.json`, adding the two determinant pages to
+`fubini-and-change-of-variables`' `requires`. Then **step 5** authoring, with
+batch 5 gated behind batch 9's determinant interfaces.
 
 ## Open risks
 
