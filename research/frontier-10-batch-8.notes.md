@@ -1,6 +1,6 @@
 # frontier-10 batch 8 — Beta scaffold notes
 
-Run role: `Beta-frontier-10-8`, step-3 repair. Date: 2026-08-11.
+Run role: `Beta-frontier-10-8`, step-3 R2 repair. Date: 2026-08-11.
 
 This is an enrichment of two published pages. The batch manifest contains only
 newly minted IDs. Every new item is to be authored with `status: draft`; the
@@ -9,21 +9,22 @@ scope.
 
 ## 1. Result and size decision
 
-The repaired scaffold adds 29 A-page items and 16 B-page items. After the publishing
+The repaired scaffold adds 31 A-page items and 16 B-page items. After the publishing
 amendment, the pair will contain:
 
 | page | published context | new items | enriched total |
 |---|---:|---:|---:|
-| `group-actions-and-cayleys-theorem` | 6 | 29 | 35 |
+| `group-actions-and-cayleys-theorem` | 6 | 31 | 37 |
 | `group-actions-and-cayleys-theorem-examples` | 1 | 16 | 17 |
 
-No split is proposed. The enriched A page has 35 items, well below the hard
-limit of 60. The 29 new A items are machinery rather than padding: equivariant
+No split is proposed. The enriched A page has 37 items, well below the hard
+limit of 60. The 31 new A items are machinery rather than padding: equivariant
 maps and free actions; orbit–stabiliser and its cardinal form; coset actions,
 cores, the finite-index core bound and the transitive-action classification;
-conjugation, centralisers,
-normalisers and the class equation; finite \(p\)-group fixed-point machinery,
-index-\(p\) normality, Cauchy's theorem; and Cauchy–Frobenius orbit counting.
+conjugation, centralisers, normalisers, non-covering by conjugates and the class
+equation; finite \(p\)-group fixed-point machinery, index-\(p\) normality,
+Cauchy's theorem; Cauchy–Frobenius orbit counting; and Jordan's derangement
+theorem.
 
 The dispatch says that the B page is empty. Disk is authoritative and disagrees:
 `library/abstract-algebra/group-actions-and-cayleys-theorem-examples.md` has
@@ -61,6 +62,7 @@ exact manifest order:
   - lem-centralizers-and-normalizers-are-subgroups
   - thm-conjugacy-class-cardinality
   - thm-conjugate-subgroups-are-counted-by-the-normalizer
+  - thm-conjugates-of-proper-subgroup-do-not-cover-finite-group
   - thm-class-equation
   - def-finite-p-group
   - lem-subgroups-of-finite-p-groups-are-p-groups
@@ -73,6 +75,7 @@ exact manifest order:
   - thm-normal-subgroups-of-finite-p-groups-meet-the-center
   - thm-cauchys-theorem-for-finite-groups
   - thm-cauchy-frobenius-orbit-counting
+  - thm-jordans-derangement-theorem
 ```
 
 Replace the present two summary paragraphs with these two paragraphs:
@@ -85,13 +88,14 @@ Replace the present two summary paragraphs with these two paragraphs:
 > actions make that identification structural rather than merely numerical.
 > Cayley's theorem is the regular-action case.
 >
-> Conjugation then turns orbit–stabiliser into the conjugacy-class formula and
-> the class equation. Applied to finite \(p\)-groups, the same orbit
+> Conjugation then turns orbit–stabiliser into the conjugacy-class formula, the
+> non-covering theorem for conjugates of a proper subgroup, and the class
+> equation. Applied to finite \(p\)-groups, the same orbit
 > decomposition yields the fixed-point congruence, normality at index \(p\),
 > nontrivial centres, the order-\(p^2\) theorem and Cauchy's theorem. Finally,
-> double-counting fixed
-> pairs gives Cauchy–Frobenius orbit counting, the bridge from abstract actions
-> to concrete enumeration up to symmetry.
+> double-counting fixed pairs gives Cauchy–Frobenius orbit counting and Jordan's
+> derangement theorem, linking abstract actions to both enumeration up to
+> symmetry and the existence of fixed-point-free elements.
 
 ### B-page example list
 
@@ -144,11 +148,11 @@ headings:
 
 | disposition | count |
 |---|---:|
-| `included` | 39 |
+| `included` | 41 |
 | `inline` | 8 |
 | `already-published` | 4 |
 | `deferred` | 5 |
-| `out-of-scope` | 10 |
+| `out-of-scope` | 8 |
 
 The four source treatments (three independent authors, with Conrad's second
 note used only for the exact \(A_4\) witness) are:
@@ -170,14 +174,15 @@ note used only for the exact \(A_4\) witness) are:
    Theorem 6.2–Theorem 6.10.
    This independently supplies orbit counting, the fixed-point congruence,
    \(p\)-group centre results, the normal-subgroup intersection theorem and
-   Cauchy's theorem, together with index-\(p\) normality and the finite-index
-   core theorem.
+   Cauchy's theorem, together with Jordan's derangement theorem, index-\(p\)
+   normality, the finite-index core theorem and non-covering by conjugates of a
+   proper subgroup.
 4. Keith Conrad, [*No Subgroup of A4 Has Index 2*](https://kconrad.math.uconn.edu/blurbs/grouptheory/A4noindex2.pdf),
    opening discussion and Theorem 1. This exact-result note supplies the
    \(A_4\) boundary witness that a divisor of a group order need not occur as a
    subgroup order.
 
-The fifteen declines most likely to be challenged by Alpha are all result-specific:
+The thirteen remaining declines are all result-specific:
 
 - Judson's isolated two-orbit permutation table is declined because the B page
   already has two more diagnostic multi-orbit constructions.
@@ -208,18 +213,14 @@ The fifteen declines most likely to be challenged by Alpha are all result-specif
 - Conrad Corollary 6.5 is deferred to that same page because the successive
   index-\(p\) subgroup chain is an application of normalizer growth and part of
   the Sylow/nilpotent subgroup structure developed there.
-- Conrad Theorem 6.6 is out of scope because Jordan's derangement theorem is a
-  structural theorem about finite permutation groups, not an input to this
-  page's coset-action, class-equation or orbit-counting spine.
 - Conrad Remark 6.7 is out of scope because the cited prime-power-order
   strengthening uses the classification of finite simple groups, an entire
   subject area not reached by the library at this order.
-- Conrad Theorem 6.9 is out of scope because finite-index intersection
-  calculus serves residual-finiteness and profinite arguments and is not
-  consumed anywhere in this pair.
-- Conrad Theorem 6.10 is out of scope because the non-covering-by-conjugates
-  result belongs to subgroup-covering theory and is not used by any retained
-  action or finite-\(p\)-group result.
+- Conrad Theorem 6.9 is out of scope because it is a general closure theorem
+  for finite-index subgroups whose natural home is the real
+  `monoids-groups-and-subgroups` page beside subgroup intersections and index
+  calculus; neither its statement nor its coset-pair proof is specific to the
+  action structure developed here.
 
 No required result was declined for lack of a local lemma. In particular, the
 scaffold builds the core, the core-kernel theorem, the subgroup-order lemma for
@@ -261,6 +262,7 @@ statement opened on disk).
 | `lem-centralizers-and-normalizers-are-subgroups` | literature-derived | ai-altered | standard subgroup facts needed before their indices are used |
 | `thm-conjugacy-class-cardinality` | literature-derived | ai-altered | B Corollary 3.109, obtained from P conjugation and orbit–stabiliser |
 | `thm-conjugate-subgroups-are-counted-by-the-normalizer` | literature-derived | ai-altered | B Corollary 3.110 |
+| `thm-conjugates-of-proper-subgroup-do-not-cover-finite-group` | literature-derived | ai-altered | C Theorem 6.10; the first proof is repaired at the one-conjugate boundary by the uniform bound \(1+[G:N_G(H)](|H|-1)<|G|\) |
 | `thm-class-equation` | literature-derived | ai-altered | J §14.2 opening result |
 | `def-finite-p-group` | literature-derived | not-applicable | C §§4–5; includes the trivial group by allowing exponent zero |
 | `lem-subgroups-of-finite-p-groups-are-p-groups` | ai-altered | ai-generated | proof-decomposition lemma from P Lagrange and unique prime factorisation |
@@ -273,6 +275,7 @@ statement opened on disk).
 | `thm-normal-subgroups-of-finite-p-groups-meet-the-center` | literature-derived | ai-altered | C Theorem 5.3 |
 | `thm-cauchys-theorem-for-finite-groups` | literature-derived | ai-altered | C Theorem 5.4; uses the cyclic-shift proof required by the track plan |
 | `thm-cauchy-frobenius-orbit-counting` | literature-derived | ai-altered | J Theorem 14.19 and C Theorem 3.29; stated in integral double-counting form |
+| `thm-jordans-derangement-theorem` | literature-derived | ai-altered | C Theorem 6.6; proof rewritten without division from the integral Cauchy–Frobenius identity |
 | `ex-left-regular-action-is-free-and-transitive` | literature-derived | ai-altered | J Example 14.1.3 |
 | `cex-faithful-transitive-action-need-not-be-free` | ai-altered | ai-generated | B's natural symmetric-group action sharpened into the exact implication counterexample |
 | `cex-free-action-need-not-be-transitive` | ai-generated | ai-generated | checkable disjoint-union construction; it is a leaf and no item depends on it |
@@ -360,7 +363,7 @@ planned statement, proof outline or note; those legacy files remain untouched.
 ## 6. Proof design and authoring obligations
 
 `research/frontier-10-batch-8.proof-contracts.json` has version-1 contracts for
-all 38 proof-bearing items. Each contract contains the direct planned
+all 40 proof-bearing items. Each contract contains the direct planned
 dependency clauses, a numbered proof map, all eight boundary dispositions and
 an empty finite-smoke list (none of the currently implemented smoke-test kinds
 matches these action claims). Clauses whose source is another new item are
@@ -380,6 +383,11 @@ The high-risk proofs have these non-negotiable shapes:
   coset-action homomorphism, embeds its image in a symmetric group of order
   \(n!\), and proves finiteness of overgroups by injecting them into the finite
   power set of \(G/\operatorname{Core}_G(H)\).
+- The conjugates of a proper subgroup are counted by
+  \([G:N_G(H)]\). Since all contain the identity, their union has size at most
+  \(1+[G:N_G(H)](|H|-1)\); the inclusions \(H\le N_G(H)\le G\) and
+  \([G:H]\ge2\) make this strictly less than \(|G|\). This uniform bound handles
+  the normal-subgroup case, where there is only one distinct conjugate.
 - Index-\(p\) normality is proved from the core factorial bound, not from the
   deferred normalizer-growth theorem: the core index is a power of \(p\), is
   divisible by \(p\), and divides \(p!\), so it is exactly \(p\).
@@ -399,6 +407,10 @@ The high-risk proofs have these non-negotiable shapes:
   needed. Its only sum dependency is the order-20 natural-valued
   `def-sum-over-a-finite-index-set`; the two former order-203 citations have
   been removed from both the manifest and contract.
+- Jordan's derangement theorem specializes that integral identity to a
+  transitive action. The identity contributes \(|X|\ge2\); if every
+  nonidentity element fixed a point, the remaining \(|G|-1\) summands would
+  each be at least one, contradicting that the whole sum equals \(|G|\).
 - The four Alpha-requested B witnesses calculate, rather than merely assert,
   the failed boundary: \(Z(S_3)=\{e\}\), the natural \(S_3\)-action has
   \(|X|=3\) and no global fixed point, the square-symmetry group is nonabelian
@@ -408,10 +420,12 @@ The high-risk proofs have these non-negotiable shapes:
   \(24=4\cdot6\).
 
 Boundary emphasis: empty \(X\) is allowed in the fixed-point congruence and
-orbit-counting theorem; the trivial group is allowed as a finite \(p\)-group
-with exponent zero; nontrivial-centre results explicitly assume a nontrivial
-group; the smallest prime case is \(p=2\); and the core-free corollary proves
-both directions of its equivalence.
+orbit-counting theorem but excluded by \(|X|>1\) in Jordan's theorem; the
+trivial group is allowed as a finite \(p\)-group with exponent zero;
+nontrivial-centre results explicitly assume a nontrivial group; the subgroup-
+covering theorem handles both a normal proper subgroup (one conjugate) and the
+trivial subgroup; the smallest prime case is \(p=2\); and the core-free
+corollary proves both directions of its equivalence.
 
 ## 7. Convention disagreements
 

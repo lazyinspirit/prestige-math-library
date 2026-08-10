@@ -111,48 +111,54 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — step 3, repair round in flight
+## State — step 3, second repair round
 
-- **Steps 0, 1, 2 CLEAR.** Step 0 re-run clean with all **9 batches**: 563 scoped
-  items, 0 errors.
-- **Alpha's step-3 breadth review is DONE** —
-  `research/frontier-10-alpha-step3-scaffold-review.md`, 30 KB. Verdict: **5
-  sufficient, 7 insufficient**, no finding requiring a split. Alpha's own summary:
-  the harvests it checked against the actual sources "were faithful, not
-  decorative".
-- **F1, Alpha's largest finding, is resolved.** Seven load-bearing forward
-  references to two order-203 items, cited from orders 42, 52 and 78 — invisible
-  to every gate. The owner chose relocation; the re-home receipt is
-  `research/frontier-10-rehomed.json`, moving both items to
-  `rings-subrings-and-integral-domains` (46). Verified before writing: the def's
-  six dependencies all sit at 5.3–24, and the lemma's only late dependency is the
-  def, which moves with it. **Batch 8 is NOT fixed by this** — group-actions is
-  order 42, still below 46 — so it redirects to the order-20
-  `def-sum-over-a-finite-index-set` instead.
-- **A gate bug was found and fixed** (`2764386`): `content-policy`'s
-  `batch-b-leaf-target` lacked the same-page exemption `depcheck` and
-  ARCHITECTURE §8 both document, and blocked six legitimate B-page scaffolds. New
-  error `batch-b-leaf-forward` covers the same-page-wrong-direction case that the
-  cross-page check structurally cannot see.
-- **Batch 9 delivered its interfaces**: all four ids batch 5 named exist exactly
-  as named — no substitution to reconcile. 63 items over 4 pages. Still writing
-  notes/contracts.
-- **RUNNING**: batch 9, and step-3 repair Betas for batches 2, 3, 6, 7, 8.
-- **PENDING**: batch 5's repair, which needs batch 9's scaffold on disk.
+- **Steps 0, 1, 2 CLEAR.** Step 0 passes over all 9 batches: **579 scoped items,
+  0 errors**.
+- **Run is 14 A/B pairs** (12 original + batch 9's 2, spliced at step 3 per D1).
+  579 newly minted ids; 586 items in the spec after splice, the extra 7 being the
+  published items the group-actions enrichment appends to.
+- **Alpha Stage-0 review + re-check both done**, in
+  `research/frontier-10-alpha-step3-scaffold-review.md` (59 KB). First pass:
+  5 sufficient / 7 insufficient. Re-check: **7 resolved**, 3 sent back
+  (batch 8 R2; batch 9 R3, R4), 1 routed to the orchestrator (R1).
+- **F1 closed and independently verified.** Zero forward references to the
+  re-homed items anywhere in the run — checked across every batch manifest, not
+  just the ones Alpha named. Alpha additionally verified from disk that the moved
+  items have no forward wikilinks, no falsified positional prose, that the source
+  page's summary survives the move, and that no published consumer loses closure.
+- **R1 (orchestrator, done).** The re-home puts two items on
+  `rings-subrings-and-integral-domains` (46) whose own dependencies live on
+  `finite-counting-and-binomial-coefficients` (20), which that page does not
+  require — `undeclared-prereq` once applied. No batch owns the edge; it is a
+  consequence of the move. Taught to `research/frontier-10-splice.mjs`.
+- **Step 4 is scripted and dry-run clean**: `research/frontier-10-splice.mjs`,
+  `--apply` to write, backup taken automatically. Two bugs it caught before they
+  shipped: replacing rather than appending would have **deleted the 6 published
+  items** from the group-actions page, and `EXTRA_REQUIRES` silently dropped any
+  edge on a page no batch manifest contains (exactly R1's case).
+- **RUNNING**: batch 8 repair 2 (R2), batch 9 repair 2 (R3, R4).
 
 ## Exact next action
 
-Await the five repair Betas and batch 9. Then dispatch batch 5's repair (it needs
-batch 9 on disk), have **Alpha re-check every repaired pair plus batch 9**, and
-only then **step 4**: splice all 9 batches into `plan-spec.json` with
-`--rehomed research/frontier-10-rehomed.json`, adding the two determinant pages
-to `fubini-and-change-of-variables`' `requires`. Then step 5 authoring.
+Await batch 8 and batch 9 repair round 2, then **Alpha re-checks those three
+pairs only**. When all read `resolved`:
 
-The re-home's page-list edits (removing the two ids from
+```
+node research/frontier-10-splice.mjs --apply
+node tools/gates.mjs --step 4 --run frontier-10
+```
+
+Then step 5: dispatch 9 authoring Betas on
+`research/frontier-10-brief-authoring.md`, one per batch, `--var i=<batch>`.
+
+The re-home's page-list edits — removing the two ids from
 `incidence-algebras-and-mobius-inversion`, adding them to
-`rings-subrings-and-integral-domains`) are **staged for the publishing commit**,
-per ARCHITECTURE §3.11a — never before. Until then `depcheck` may report them
-`multi-home`, which is the truth.
+`rings-subrings-and-integral-domains`, **plus R1's `requires` edge** — stay
+staged for the publishing commit per ARCHITECTURE §3.11a.
+`research/frontier-10-published-amendments.md` still does not exist and must be
+written before publish; it carries both the re-home edits and batch 8's
+enrichment additions.
 
 ## Open risks
 

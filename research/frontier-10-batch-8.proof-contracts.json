@@ -13,6 +13,7 @@
     "lem-centralizers-and-normalizers-are-subgroups",
     "thm-conjugacy-class-cardinality",
     "thm-conjugate-subgroups-are-counted-by-the-normalizer",
+    "thm-conjugates-of-proper-subgroup-do-not-cover-finite-group",
     "thm-class-equation",
     "lem-subgroups-of-finite-p-groups-are-p-groups",
     "cor-index-p-subgroups-of-finite-p-groups-are-normal",
@@ -24,6 +25,7 @@
     "thm-normal-subgroups-of-finite-p-groups-meet-the-center",
     "thm-cauchys-theorem-for-finite-groups",
     "thm-cauchy-frobenius-orbit-counting",
+    "thm-jordans-derangement-theorem",
     "ex-left-regular-action-is-free-and-transitive",
     "cex-faithful-transitive-action-need-not-be-free",
     "cex-free-action-need-not-be-transitive",
@@ -1230,6 +1232,177 @@
           "case": "nonempty-choice",
           "status": "checked",
           "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conjugates-of-proper-subgroup-do-not-cover-finite-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-subgroups-are-counted-by-the-normalizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The conjugates of $H$ are in bijection with $G/N_G(H)$ and, for finite $G$, number $[G:N_G(H)]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-normalizer-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The normalizer $N_G(H)=\\{g\\in G:gHg^{-1}=H\\}$ of a subgroup",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-centralizers-and-normalizers-are-subgroups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$C_G(x)$ and $N_G(H)$ are subgroups of $G$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-conjugation-is-an-automorphism",
+          "source_section": "Statement",
+          "quote": "For each $g\\in G$, the map $c_g:G\\to G$, $c_g(x)=gxg^{-1}$, is an\nautomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "If $I$ is a finite set and $(A_i)_{i \\in I}$ is a\n   family of finite sets that are pairwise disjoint, then $\\bigcup_{i \\in I} A_i$\n   is finite and\n   $\\big\\lvert\\bigcup_{i \\in I} A_i\\big\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}),",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let the distinct conjugates of H be indexed by a finite set of size m=[G:N_G(H)]; every conjugate has cardinality |H| and contains the identity, and H is contained in N_G(H).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Remove the common identity, disjointify the remaining finite family, and use the finite sum rule to bound the union by 1+m(|H|-1).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L6",
+            "L7",
+            "L8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put n=[G:H]. Properness gives n at least 2, while H is contained in N_G(H), Lagrange and finite-cardinality monotonicity give m at most n, and |G|=n|H|.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L5",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combine the bounds to get a union of cardinality at most 1+n(|H|-1), which is strictly below n|H|=|G| because n is at least 2.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Every subgroup and every conjugate contains the identity, so neither the subgroup nor the family of conjugates is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A finite group and its subgroup have positive cardinality; step 1.1 isolates their common identity before subtracting one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If |H|=1 or there is only one distinct conjugate, the bound in steps 2.1–4.1 still gives a proper union; the trivial group has no proper subgroup."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The normal-subgroup case has one conjugate and the trivial-subgroup case has singleton conjugates; both are covered by the common bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this finite-group statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite family of conjugates is supplied by L1; any enumeration used for disjointification exists by finite cardinality and no simultaneous arbitrary choice is made."
         },
         {
           "case": "iff-forward",
@@ -2635,6 +2808,150 @@
           "case": "nonempty-choice",
           "status": "checked",
           "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-jordans-derangement-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-fixed-point-sets-of-a-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The fixed-point sets $X^g$ and $X^G$ of a group action",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Cauchy-Frobenius orbit counting: $|G|\\,|X/G|=\\sum_{g\\in G}|X^g|$ for a finite group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "In particular $\\sum_{i \\in S \\cup T} a_i = \\sum_{i \\in S} a_i + \\sum_{i \\in T} a_i$\n   for disjoint finite $S$ and $T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}),",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Transitivity makes X/G a singleton, so Cauchy-Frobenius gives the integral identity sum over g of |X^g| equal to |G|.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The identity fixes every point, so its summand is |X|; split it from the sum over the nonidentity elements.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Assume every nonidentity element fixes a point. Then each remaining summand is at least 1, so the sum is at least |X|+|G|-1>|G| because |X|>1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L4",
+            "L5",
+            "assume-contra",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The contradiction with step 1.1 gives an element g with X^g empty; the identity cannot be that element, so g is a nonidentity derangement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L2",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis |X|>1 excludes the empty acted-on set before orbit counting is specialized."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-cardinality case is excluded by |X|>1; a finite group itself is nonempty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-point action is exactly the necessary excluded boundary; the strict inequality in step 3.1 would fail there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Faithfulness is not assumed, and the trivial group cannot act transitively on a set with more than one element."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this finite-action statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof negates the universal fixed-point assumption to obtain one derangement; it does not choose fixed points simultaneously."
         },
         {
           "case": "iff-forward",

@@ -33,6 +33,7 @@
     "ex-parameter-dependent-rank-drop",
     "ex-elementary-factorisation-of-an-invertible-matrix",
     "cex-row-equivalent-matrices-can-have-different-column-spaces",
+    "cex-solution-count-trichotomy-fails-over-a-finite-field",
     "thm-ring-matrix-arithmetic-laws",
     "prop-field-and-ring-matrix-interfaces-agree",
     "lem-alternating-multilinear-implies-antisymmetric",
@@ -55,7 +56,8 @@
     "ex-integer-determinant-two-is-invertible-over-q-not-z",
     "cex-antisymmetric-need-not-be-alternating-in-characteristic-two",
     "cex-naive-quaternion-determinant-is-not-row-alternating",
-    "ex-row-operations-on-a-singular-matrix-over-z-mod-six"
+    "ex-row-operations-on-a-singular-matrix-over-z-mod-six",
+    "fs-determinant-is-additive-on-matrices"
   ],
   "contracts": {
     "lem-elementary-row-operations-are-reversible": {
@@ -3257,6 +3259,115 @@
       ],
       "finite_smoke": []
     },
+    "cex-solution-count-trichotomy-fails-over-a-finite-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-solution-count-trichotomy-over-an-infinite-field",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Over an infinite field, a finite linear system has no solution, exactly one solution, or infinitely many solutions according to its pivots",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-matrix-equation-augmented-matrix-and-linear-system",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Matrix equation $Ax=b$, its solution set, consistency, homogeneous systems and the augmented matrix $[A\\mid b]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Published Statement/Definition (synchronize exact clause at Step 5)",
+          "quote": "For every prime $p$, the ring $\\mathbb Z/p$ is a field",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Published Statement/Definition (synchronize exact clause at Step 5)",
+          "quote": "Addition and multiplication on $\\mathbb Z/n$ are induced by integer addition and multiplication modulo $n$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerate the four pairs in $\\mathbb F_2^2$ and verify that precisely $(0,0)$ and $(1,1)$ solve $x+y=0$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "given",
+            "definitions",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The solution set has exactly two elements, so it is neither a singleton nor infinite and the infinite-field hypothesis cannot be removed.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "definitions"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is a displayed one-equation system in two variables over a nonempty field."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both pairs containing zero and verifies that $(0,0)$ is a solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both pairs containing one and verifies that $(1,1)$ is the second solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The homogeneous underdetermined system is exactly the finite-field boundary that defeats the claimed trichotomy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or varying finite-size endpoint occurs in this fixed $\\mathbb F_2$ computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All four possible ordered pairs are explicitly enumerated; the proof makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample verifies one fixed solution set and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample verifies one fixed solution set and asserts no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
     "thm-ring-matrix-arithmetic-laws": {
       "citations": [
         {
@@ -5850,6 +5961,115 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The top-level statement is not a biconditional and no converse is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-determinant-is-additive-on-matrices": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Entrywise ring-matrix operations, rectangular matrix products, identity matrices and transpose",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Leibniz determinant is column-multilinear, alternating and normalized over every commutative ring",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "ex-two-by-two-determinant-formula",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Leibniz formula gives $\\det\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}=ad-bc$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-reals-field",
+          "source_section": "Published Statement/Definition (synchronize exact clause at Step 5)",
+          "quote": "The real numbers form a field",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $A=B=I_2$ over $\\mathbb R$ and compute $\\det(A+B)=\\det(2I_2)=4$ while $\\det(A)+\\det(B)=2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "given",
+            "definitions",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conclude that determinant is not additive as a function of the whole matrix; multilinearity permits addition in one row or column only while all others are fixed.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "definitions"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses two explicitly displayed nonempty $2\\times2$ matrices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes all zero off-diagonal entries and the zero-free determinant values directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The authoring proof must note that the determinant is additive in size one; size two is the first failing case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both witness matrices are invertible, so the failure is not caused by singular or zero matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or varying-index endpoint remains outside the displayed size-two calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrices and every arithmetic value are displayed explicitly; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false universal equality is refuted by one witness and is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false universal equality is refuted by one witness and asserts no converse."
         }
       ],
       "finite_smoke": []
