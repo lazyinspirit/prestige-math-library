@@ -1,7 +1,7 @@
 ---
 id: thm-conjugacy-class-cardinality
 kind: theorem
-title: '$G/C_G(x)\to\operatorname{Cl}_G(x)$ is a bijection, so $|\operatorname{Cl}_G(x)|=[G:C_G(x)]$'
+title: '$G/C_G(x)\to\operatorname{Cl}_G(x)$ is a bijection, so $|\operatorname{Cl}_G(x)|=[G:C_G(x)]$ whenever these cardinalities are finite'
 status: draft
 origin: session
 provenance:
