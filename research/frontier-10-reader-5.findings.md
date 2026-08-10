@@ -149,6 +149,11 @@ Jordan content was added.
     was rebuilt from the current Facts and numbered proof steps, including all
     changed source quotations and uses; the strict contract now checks all
     35 proof-bearing items with no error or warning.
+13. Reflow exposed thirteen proof items whose evidence tag preceded a displayed
+    formula instead of ending the numbered step, so the line-based proof-format
+    checker read them as untagged. The tags were moved, without mathematical
+    change, to the ends of the same steps and the contract derivations were
+    synchronized again.
 
 These are nonfatal under the 30-second rule individually, except where they
 form part of the fatal proof repairs above.
@@ -340,7 +345,33 @@ found after the repairs.
 - Nothing in the assigned batch or its dependency closure was unavailable for
   inspection. No factual check was left incomplete.
 
+## High-risk routing for Alpha
+
+`risk-report.mjs` routed 35/35 proof-bearing items and produced no gate error.
+All except the following four were rated high or critical by the mechanical
+signals: `cor-parallelepiped-content-is-the-absolute-determinant`,
+`ex-cavalieri-shear-preserves-jordan-content`,
+`ex-parallelepiped-content-from-a-matrix`, and
+`cex-polar-coordinates-are-not-globally-injective`. Alpha's required proof-
+refuter readings therefore apply to the other 31 items. The repaired F1--F3
+items and `thm-change-of-variables-for-compact-jordan-sets` warrant particular
+attention. No `finite_smoke` check was selected in the batch contract.
+
 ## Validation record
 
-To be filled from the final post-repair gate run. Alpha must independently
-adjudicate the mathematics even if every mechanical gate is green.
+- `reflow.mts` followed by `precheck.mts`: 35 proof-bearing items checked,
+  35 pass.
+- `proof-contract.mjs --strict`: 35/35 items checked, 0 errors, 0 warnings.
+- `coverage-checklist.mjs`: 1 A page and 46 harvested results, 0 errors,
+  0 warnings.
+- Whole-run `content-policy.mjs`: 583 scoped items, 0 errors, 0 warnings.
+- `rendercheck.mjs`: all 38 items and both page files, 0 errors.
+- `prosecheck.mjs --warnings`: all 38 items and both page files, 0 errors,
+  0 warnings.
+- Repo-wide `depcheck.mjs`: no hard error; all references resolve and no cycle
+  or draft-on-published-page defect was reported. Its visible warnings are
+  existing repository-wide legacy/multi-home diagnostics, not batch-5 errors.
+- `git diff --check`: clean.
+
+Alpha must independently adjudicate the mathematics even though these
+mechanical checks are green.
