@@ -61,9 +61,10 @@ run a page from prompt to publish; the normative docs above win where they diffe
    final text, for EVERY item in the completed level**; authors do not judge.
    Step-7 coverage is not limited to items Alpha or an independent reader changed:
    both judges read every item in every completed A/B pair. Current session workflow (owner,
-   2026-07-31, second lane amended 2026-08-04): authoring, Beta, and Alpha
+   2026-07-31, second lane amended 2026-08-04): authoring and Beta
    agents use **GPT 5.6 Sol via the
-   Codex subscription plan**; the paired judges use **DeepSeek V4 Pro directly
+   Codex subscription plan**, and **build Alpha uses Claude Opus 5 at `xhigh`**
+   (owner, 2026-08-10); the paired judges use **DeepSeek V4 Pro directly
    through the DeepSeek API at `xhigh` thinking (official API value: `max`)** and
    a freshly spawned **GPT 5.6 Terra** (`JUDGE_LINEUP=deepseek+terra`).
    GPT 5.6 Sol authoring/audit agents run at `xhigh`
@@ -136,12 +137,25 @@ banner; the public sees only `published`.
   replay.
 
 - **GPT 5.6 Sol dispatch default (owner, 2026-07-31).** Every authoring, Beta,
-  Alpha, or other GPT 5.6 Sol subagent is dispatched as **GPT 5.6 Sol** at
+  or other GPT 5.6 Sol subagent is dispatched as **GPT 5.6 Sol** at
   `xhigh` reasoning with a **1,000,000-token context window**. This is the
   binding default for this and all future sessions. Where the active launcher
   exposes a context-window field, set it explicitly to `1000000`; otherwise do
   not silently substitute another model or a smaller requested window. The
   authoring role uses Sol, not Terra.
+
+- **Build Alpha runs Claude Opus 5 (owner, 2026-08-10).** The build `alpha` role
+  is the one exception to the rule above: it is dispatched as **Claude Opus 5 on
+  the `claude` runner at `xhigh`**, not GPT 5.6 Sol. `effort: 'xhigh'` is set
+  explicitly in the `dispatch.mjs` role table because `buildClaude` defaults the
+  claude runner to `high`, so omitting it would silently downgrade the sole
+  adjudicator. Alpha keeps `workspace-write` and its lane cap of 1 — it remains
+  the single writer of the prose scaffolds. The change also buys cross-family
+  independence: Alpha adjudicates the DeepSeek and GPT 5.6 Terra judges, and a
+  Sol Alpha shared the GPT family with the Terra lane it was weighing. **Scope:
+  the BUILD `alpha` role only.** Alpha's read-only proof-refuter subagents
+  (`refuter`), the independent Step-6 `reader`, and the published-audit
+  `audit-alpha` adjudicator are NOT covered and stay on Sol.
 
 - **Future Step-5/6 ownership (owner, 2026-07-31).** In every future session,
   the Beta agents that scaffolded the batches personally author all Step-5
@@ -369,10 +383,12 @@ banner; the public sees only `published`.
   dropped. This is forward-looking; published items are not retrofitted. Full
   rule in `WORKFLOW.md` §"Self-contained scope".
 - Generation for this library NEVER goes through the public billed pipelines.
-  Current session route: GPT 5.6 Sol authoring, Beta, and Alpha audit through
-  the Codex subscription plan, all at `xhigh` with a 1,000,000-token context
-  window; direct DeepSeek judging plus fresh GPT 5.6 Terra judges through the
-  Codex subscription. Do not wire a subscription account into the worker service.
+  Current session route: GPT 5.6 Sol authoring and Beta through the Codex
+  subscription plan at `xhigh` with a 1,000,000-token context window; **build
+  Alpha as Claude Opus 5 at `xhigh` on the `claude` runner** (owner,
+  2026-08-10); audit Alpha still Sol through Codex; direct DeepSeek judging plus
+  fresh GPT 5.6 Terra judges through the Codex subscription. Do not wire a
+  subscription account into the worker service.
 - Mathematical content requires the step-6 Alpha/Beta audit before publish, even
   when judged.
 - **Scaffold richness (owner, 2026-07-30).** For every A/B pair, Beta decomposes

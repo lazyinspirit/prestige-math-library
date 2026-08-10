@@ -25,6 +25,12 @@
 // user's config.toml. The audit uses the same Codex subscription route: Sol for
 // writing/adjudication roles and Terra for independent certification.
 //
+// ONE EXCEPTION, owner 2026-08-10: the BUILD `alpha` role runs Claude Opus 5 on
+// the `claude` runner at xhigh. This is a deliberate cross-family split — Alpha
+// adjudicates the DeepSeek and Terra judges, and a Sol Alpha shared the GPT
+// family with the Terra lane it was weighing. The published-audit `audit-alpha`
+// role is NOT covered by this change and stays on Sol.
+//
 // READ-ONLY IS ENFORCED PER RUNNER, AND THE TWO RUNNERS DO IT DIFFERENTLY.
 // Codex has `--sandbox read-only`, a kernel-level guarantee. The `claude` CLI
 // has no sandbox flag, so its analogue is `--disallowed-tools` naming every tool
@@ -46,6 +52,7 @@ import { createSlotPool } from './slots.mjs';
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
 const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
+const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5';
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
 //
@@ -81,7 +88,10 @@ const REQUIRED_CLAUDE_DENIES = Object.freeze(['Bash', 'Write', 'Edit', 'Notebook
 const ROLES = Object.freeze({
   beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, why: 'one per batch, scaffolds and authors' },
   reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, why: 'independent step-6 audit of a foreign batch' },
-  alpha:        { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
+  // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh.
+  // `effort` must be explicit: buildClaude defaults the claude runner to 'high',
+  // so omitting it here would silently downgrade the adjudicator.
+  alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
 

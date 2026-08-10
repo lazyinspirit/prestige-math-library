@@ -687,10 +687,19 @@ shared path the docs name), because practice and documentation diverged there.
 
 **`tools/dispatch.mjs`** runs one briefed role, so a build no longer depends on
 the subagent mechanism of whatever session started it. It has three runners:
-`codex` (all build and audit roles: GPT 5.6 Sol for Beta/Alpha/orchestration,
-GPT 5.6 Terra for certification), and `deepseek` (audit proof-refuters — an
-HTTP call, not a process). Every Codex role receives `xhigh` reasoning and an
-explicit 1,000,000-token context window.
+`codex` (most build and audit roles: GPT 5.6 Sol for Beta/reader/refuter/
+orchestration and the audit's Beta/Alpha, GPT 5.6 Terra for certification),
+`claude` (the BUILD `alpha` role, Claude Opus 5 at `xhigh` — owner, 2026-08-10),
+and `deepseek` (audit proof-refuters — an HTTP call, not a process). Every Codex
+role receives `xhigh` reasoning and an explicit 1,000,000-token context window.
+
+Alpha's move to Opus 5 is a deliberate cross-family split: Alpha is the sole
+adjudicator of the DeepSeek and GPT 5.6 Terra judges, and a Sol Alpha shared the
+GPT family with the Terra lane it was weighing. `effort: 'xhigh'` is explicit in
+the role table because `buildClaude` defaults the claude runner to `high`, so
+omitting it would silently downgrade the adjudicator. The role keeps
+`workspace-write` and its lane cap of 1. The published-audit `audit-alpha` role
+is unchanged and stays on Sol.
 
 Read-only is a property of the ROLE, not of the prompt, and **each runner
 enforces it differently because their guarantees differ in strength**:
@@ -856,11 +865,15 @@ independent second process in the GPT family and shares that family with the Sol
 author and audit Alpha. Both receive the exact same hash-attested frozen item,
 A/B-pair, dependency, and conventions prompt; Terra runs read-only from an empty
 temporary working directory. Every
-GPT 5.6 Sol author, Beta, and Alpha uses `xhigh` reasoning with a 1,000,000-token
-context window. DeepSeek is the cross-family screen from the Sol author; Terra
+GPT 5.6 Sol author and Beta uses `xhigh` reasoning with a 1,000,000-token
+context window; the build Alpha is Claude Opus 5 at `xhigh` (owner, 2026-08-10).
+DeepSeek is the cross-family screen from the Sol author; Terra
 is an independent same-context comparison lane, not a claim of cross-family
-separation — and it shares a family with the Alpha that adjudicates it, which
-DeepSeek does not. Under the current GPT audit routing that point sharpens: in
+separation. Terra shared a family with the Alpha that adjudicated it, which
+DeepSeek did not — **on the build side that is no longer so**, since an Opus 5
+Alpha is outside both judges' families and weighs the two lanes symmetrically.
+It still holds on the audit side, where `audit-alpha` remains Sol: weight
+Terra's agreement with an audit Alpha accordingly. Under the current GPT audit routing that point sharpens: in
 an audit wave, Terra's judge lane also shares a family with
 the Audit-Beta that authored the text it reads, so DeepSeek is the sole
 cross-family reader in BOTH the judge lane and the refuter lane. `tools/judge.mts --parallel` supports a one-item paired call and

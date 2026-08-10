@@ -416,7 +416,7 @@ and the runtime it ran on.
 | Orchestrator | current coding session | subscription/tooling of the active orchestrator |
 | Beta-n-i scaffold and Step-5 author | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox; does not audit its own authored content |
 | Independent Step-6 reader | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; audits a batch it did not scaffold or author |
-| Alpha-n lead adjudicator, propagation, and cross-level audit | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
+| Alpha-n lead adjudicator, propagation, and cross-level audit | Claude Opus 5 (`xhigh`) | `claude` runner (owner, 2026-08-10; was GPT 5.6 Sol via Codex) |
 | Alpha proof-refuter subagents | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; read-only access; never ofox |
 | Step-5 author | the same Beta-n-i, GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
 | Paired judges | DeepSeek V4 Pro (`max`) + Claude Sonnet 5 (`high`) | direct DeepSeek API + fresh headless `claude -p` process; identical frozen context, concurrent calls |
@@ -462,7 +462,7 @@ says whose verdict survives a disagreement.
 | Generator | GPT 5.6 Sol author via Codex | one A/B pair | draft content | every tier below |
 | **Independent Step-6 reader** | GPT 5.6 Sol via Codex | a batch it did not scaffold or author, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
 | **Alpha proof-refuter reader** | GPT 5.6 Sol via Codex | read-only level and published dependencies | skeptically reports concrete proof/citation defects only | Alpha, owner |
-| **Alpha lead adjudicator** | GPT 5.6 Sol via Codex | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content, plus only the documented obvious published-dependency repair | owner |
+| **Alpha lead adjudicator** | Claude Opus 5 (`xhigh`) | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content, plus only the documented obvious published-dependency repair | owner |
 | **Paired judges** | DeepSeek V4 Pro direct + fresh Claude Sonnet 5 | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | orchestrator, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
@@ -531,8 +531,9 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Current session cost rule: GPT 5.6 Sol authoring, Beta, Alpha, and Claude Sonnet 5
-judging run through the Codex subscription plan; DeepSeek V4 Pro judging is
+Current session cost rule: GPT 5.6 Sol authoring, Beta, and Claude Sonnet 5
+judging run through the Codex subscription plan; build Alpha runs as Claude
+Opus 5 on the `claude` runner (owner, 2026-08-10); DeepSeek V4 Pro judging is
 direct DeepSeek API spend. GPT-family work must not be routed through ofox.
 
 Two hard rules govern the models:
@@ -1041,8 +1042,10 @@ directory directly.
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
    apify (step-0 scraping, zero when nothing was scraped) plus direct DeepSeek
-   judge spend. GPT 5.6 Sol authoring, Beta, Alpha, and Sonnet judge work run on
-   the Codex subscription plan and are not counted as direct-API spend.
+   judge spend. GPT 5.6 Sol authoring, Beta, and Sonnet judge work run on
+   the Codex subscription plan and are not counted as direct-API spend; build
+   Alpha runs as Claude Opus 5 on the `claude` runner and is likewise not
+   direct-API spend.
 
 ---
 
