@@ -162,8 +162,8 @@ presentations provable here.
 | 6 audit | complete — 2 readers + Alpha + 6 refuters; 5 fatal repaired; `16d74c93` |
 | 7 judge | complete — 74 verdicts, 0 nulls; coverage gate EXIT 0 with spine 59/59 and the Alpha receipt |
 | 8 adjudicate rejections | complete — 2 fatal, 9 nonfatal, 2 false positive; step8-guard clean |
-| 9 scope sweep | in progress |
-| 10 rundown | — (sole owner pause) |
+| 9 scope sweep | complete — freegroups-1-step9-scope-denial.md |
+| 10 rundown | COMPLETE — freegroups-1-step10-rundown.md; AWAITING OWNER AUDIT |
 
 ## BLOCKED at step 5 — Codex auth must be renewed by the owner
 
