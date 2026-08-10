@@ -1,7 +1,7 @@
 ---
 id: ex-absolutely-convergent-rational-integral-on-the-line
 kind: example
-title: "$\int_{-\infty}^{\infty}(1+x^2)^{-1}\,dx$ converges absolutely"
+title: '$\int_{-\infty}^{\infty}(1+x^2)^{-1}\,dx$ converges absolutely'
 status: draft
 origin: session
 provenance:

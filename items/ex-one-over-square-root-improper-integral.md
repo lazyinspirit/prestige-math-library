@@ -1,7 +1,7 @@
 ---
 id: ex-one-over-square-root-improper-integral
 kind: example
-title: "$\int_0^1 x^{-1/2}\,dx=2$"
+title: '$\int_0^1 x^{-1/2}\,dx=2$'
 status: draft
 origin: session
 provenance:

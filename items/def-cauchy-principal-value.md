@@ -6,7 +6,7 @@ status: draft
 origin: session
 provenance:
   statement: literature-derived
-  proof: n/a
+  proof: not-applicable
 deps: [def-improper-integral-at-infinity,
        def-improper-integral-at-a-finite-endpoint, def-one-sided-limits,
        def-limits-at-infinity, def-oriented-integral, def-darboux-integral]

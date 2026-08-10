@@ -1,7 +1,7 @@
 ---
 id: ex-beta-kernel-convergence-rational
 kind: example
-title: "Convergence range of $x^{-p}(1+x)^{-q}$ on $(0,\infty)$ for rational exponents"
+title: 'Convergence range of $x^{-p}(1+x)^{-q}$ on $(0,\infty)$ for rational exponents'
 status: draft
 origin: session
 provenance:

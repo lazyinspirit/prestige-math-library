@@ -1,7 +1,7 @@
 ---
 id: ex-square-root-ac-not-lipschitz
 kind: example
-title: "$\sqrt{x}$ is absolutely continuous but not Lipschitz on $[0,1]$"
+title: '$\sqrt{x}$ is absolutely continuous but not Lipschitz on $[0,1]$'
 status: draft
 origin: session
 provenance:

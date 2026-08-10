@@ -18,7 +18,7 @@ deps: [def-absolutely-continuous-function, def-derivative,
 justified_by: []
 aliases: []
 landmark: true
-short: "$C^1\subseteq\mathrm{Lip}\subseteq AC\subseteq C\cap BV$"
+short: '$C^1\subseteq\mathrm{Lip}\subseteq AC\subseteq C\cap BV$'
 proof_strategy: direct
 verification:
   precheck: pass

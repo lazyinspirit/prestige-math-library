@@ -16,7 +16,7 @@ deps: [lem-riemann-stieltjes-refinement-estimate,
 justified_by: []
 aliases: []
 landmark: true
-short: "$f\in C,\ \alpha\in BV\Rightarrow\int f\,d\alpha$"
+short: '$f\in C,\ \alpha\in BV\Rightarrow\int f\,d\alpha$'
 proof_strategy: direct
 verification:
   precheck: pass
@@ -61,4 +61,3 @@ $\int_a^b f\,d\alpha$ exists.
 2.1 Choose one tagged uniform partition with mesh tending to $0$ for each natural index and call its sum $s_n$. Step 1.1 makes $(s_n)$ Cauchy, so [L5] gives a real limit $I$. [step 1.1, L5, L6, choose]
 
 3.1 Given $\varepsilon>0$, choose the threshold in step 1.1 for error $\varepsilon/2$ and then a uniform sum $s_n$ beyond that threshold with $|s_n-I|<\varepsilon/2$. Every arbitrary tagged sum with sufficiently small mesh differs from $s_n$ by less than $\varepsilon/2$, hence is within $\varepsilon$ of $I$. This is the mesh-limit definition, and [L2] identifies the unique value. [step 1.1, step 2.1, L1, L2, L5, L6] ∎
-

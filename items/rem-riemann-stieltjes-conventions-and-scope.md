@@ -6,7 +6,7 @@ status: draft
 origin: session
 provenance:
   statement: literature-derived
-  proof: n/a
+  proof: not-applicable
 deps: [def-bounded-variation-and-total-variation,
        def-absolutely-continuous-function,
        def-riemann-stieltjes-sum-and-integral,

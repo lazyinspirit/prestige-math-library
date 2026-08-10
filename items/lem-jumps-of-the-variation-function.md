@@ -11,7 +11,9 @@ deps: [lem-variation-additive-on-subintervals,
        lem-basic-properties-of-total-variation,
        cor-bv-discontinuities-are-countable-and-of-first-kind,
        def-one-sided-limits, thm-algebra-of-function-limits,
-       def-continuity-real]
+       def-continuity-real, def-series,
+       cor-monotone-converges-iff-bounded, lem-series-tail-invariance,
+       lem-geometric-sequence-null]
 justified_by: []
 aliases: []
 landmark: false
@@ -49,12 +51,20 @@ $V_f$ is continuous at every point where $f$ is continuous.
 
 [L5] Continuity is equality of the relevant limit with the function value ([[def-continuity-real]]).
 
+[L6] A bounded nondecreasing sequence converges, and the tails of its associated nonnegative series tend to zero ([[cor-monotone-converges-iff-bounded]], [[def-series]], [[lem-series-tail-invariance]]).
+
+[L7] Geometric sequences with ratio in $(0,1)$ tend to zero ([[lem-geometric-sequence-null]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Since $V_f$ is nondecreasing and bounded above by $V_f(b)$, its one-sided limits exist. By [L1] and [L2], $V_f(x)-V_f(c)\ge|f(x)-f(c)|$ for $x>c$; passage to the right limit gives $V_f(c+)-V_f(c)\ge|f(c+)-f(c)|$. [L1, L2, L3, L4]
 
-1.2 For the reverse inequality, fix $x_0>c$. Additivity gives $\operatorname{Var}_{[c,x_0]}(f)=\operatorname{Var}_{[c,x]}(f)+\operatorname{Var}_{[x,x_0]}(f)$ for $c<x<x_0$. The increasing quantity $\operatorname{Var}_{[x,x_0]}(f)$ has supremum at most $\operatorname{Var}_{[c,x_0]}(f)$. If $\operatorname{Var}_{[c,x]}(f)$ did not tend to $|f(c+)-f(c)|$, partitions witnessing a fixed positive excess on a nested sequence of intervals shrinking to $c$ could be spliced on disjoint successive annuli; the resulting finite variation sums would exceed $\operatorname{Var}_{[c,x_0]}(f)$. Therefore $\lim_{x\downarrow c}\operatorname{Var}_{[c,x]}(f)=|f(c+)-f(c)|$. [L1, L2, L3]
+1.2 For the reverse inequality, fix $x_0>c$ and put $x_n=c+(x_0-c)2^{-n}$. Let $a_n=\operatorname{Var}_{[x_{n+1},x_n]}(f)$. By repeated additivity, every partial sum of the nonnegative series $\sum_na_n$ is $\operatorname{Var}_{[x_N,x_0]}(f)$ for a suitable $N$, hence is bounded by $\operatorname{Var}_{[c,x_0]}(f)$. Its tails therefore tend to zero by [L6], while $x_n\downarrow c$ by [L7]. [L1, L6, L7]
 
-2.1 Combining step 1.2 with [L1] proves the right-hand formula. Applying the same argument to the reversed interval proves the left-hand formula. If $f$ is continuous at $c$, both absolute jumps vanish by [L5], so both one-sided limits of $V_f$ equal $V_f(c)$ and $V_f$ is continuous there. Endpoint cases use only the available side. [step 1.1, step 1.2, L1, L3, L5] ∎
+2.1 Given $\varepsilon>0$, take $N$ so large that the series tail from $N$ is below $\varepsilon$ and $|f(y)-f(c+)|<\varepsilon$ whenever $c<y\le x_N$. For any partition $c=t_0<t_1<\cdots<t_k=x_N$, choose $m\ge N$ with $x_{m+1}<t_1\le x_m$. The part after its first increment is at most [step 1.2, L1, L2, L3, L6]
+$$\operatorname{Var}_{[t_1,x_N]}(f)\le\operatorname{Var}_{[x_{m+1},x_N]}(f)=\sum_{n=N}^{m}a_n<\varepsilon,$$
+while $|f(t_1)-f(c)|\le|f(c+)-f(c)|+\varepsilon$. Taking the supremum over partitions gives $\operatorname{Var}_{[c,x_N]}(f)\le|f(c+)-f(c)|+2\varepsilon$. Restriction gives the same bound for $c<x\le x_N$, and [L2] gives the reverse bound in the limit.
+
+3.1 Thus $\lim_{x\downarrow c}\operatorname{Var}_{[c,x]}(f)=|f(c+)-f(c)|$, and [L1] proves the right-hand formula. Applying steps 1.2–2.1 to the reversed interval proves the left-hand formula. If $f$ is continuous at $c$, both absolute jumps vanish by [L5], so $V_f$ is continuous there. Endpoint cases use only the available side. [step 1.1, step 2.1, L1, L3, L5] ∎

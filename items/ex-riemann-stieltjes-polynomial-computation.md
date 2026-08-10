@@ -1,7 +1,7 @@
 ---
 id: ex-riemann-stieltjes-polynomial-computation
 kind: example
-title: "$\int_0^1 x\,d(x^2)=2/3$"
+title: '$\int_0^1 x\,d(x^2)=2/3$'
 status: draft
 origin: session
 provenance:

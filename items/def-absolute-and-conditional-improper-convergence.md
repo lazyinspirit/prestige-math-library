@@ -6,7 +6,7 @@ status: draft
 origin: session
 provenance:
   statement: literature-derived
-  proof: n/a
+  proof: not-applicable
 deps: [def-improper-integral-at-infinity,
        def-improper-integral-at-a-finite-endpoint, def-mixed-improper-integral,
        cor-integrability-of-absolute-values-products-and-lattice-operations,

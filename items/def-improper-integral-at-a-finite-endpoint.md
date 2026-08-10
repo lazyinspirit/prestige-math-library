@@ -6,7 +6,7 @@ status: draft
 origin: session
 provenance:
   statement: literature-derived
-  proof: n/a
+  proof: not-applicable
 deps: [def-one-sided-limits, def-oriented-integral,
        def-darboux-integral, def-interval]
 justified_by: []

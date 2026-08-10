@@ -1,7 +1,7 @@
 ---
 id: ex-cantor-function-as-riemann-stieltjes-integrator
 kind: example
-title: "The Cantor function defines a nonclassical Stieltjes integrator and $\int_0^1 1\,dc=1$"
+title: 'The Cantor function defines a nonclassical Stieltjes integrator and $\int_0^1 1\,dc=1$'
 status: draft
 origin: session
 provenance:
