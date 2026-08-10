@@ -273,9 +273,18 @@ No item was added, dropped, or retitled, so the 84-row canonical harvest and its
 
 ## 11. Gate ledger
 
-- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: exits 1 with 22 errors because `plan-spec.json` still contains the pre-repair Step-4 copy. Five name this batch: the three removed B-leaf edges and the two now-added `cyclic-groups-and-direct-products` requirements. Editing or re-splicing the plan is outside this Beta's scope.
-- An in-memory replacement of exactly this batch's four page objects in the plan reduces the gate to 16 errors, all belonging to other batches or the already-approved rehoming operation. None names `the-structure-of-finite-abelian-groups`, `free-products-and-amalgamation`, either companion, or any batch-2 item.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: exits 1 with 18 errors because `plan-spec.json` still contains the pre-repair Step-4 copy. Six name this batch: the three removed B-leaf edges, the consequential undeclared examples-page prerequisite caused by the finite-group edge, and the two now-added `cyclic-groups-and-direct-products` requirements. Editing or re-splicing the plan is outside this Beta's scope.
+- An in-memory replacement of exactly this batch's four page objects in the plan reduces the gate to 12 errors, all belonging to other batches. None names `the-structure-of-finite-abelian-groups`, `free-products-and-amalgamation`, either companion, or any batch-2 item.
 - `node tools/coverage-checklist.mjs research/frontier-10-batch-2.coverage.json`: passed with 84 harvested headings, zero errors, and zero warnings.
 - `node tools/content-policy.mjs research/frontier-10-batch-2.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: passed with 70 scoped items, zero errors, and zero warnings.
 - The direct dependency-source check has zero unresolved dependencies. The repaired scaffolds use only opened, published A-page dependencies, and the proof-contract scope remains exact at all 56 proof-bearing items.
 - Per the dispatch, `tools/gates.mjs` was not run. No escalation was requested.
+
+## 12. Continuity checkpoint
+
+The B-leaf repair is complete in all four batch artifacts: the three forbidden
+example dependencies are gone, both free-product pages declare the cyclic-groups
+prerequisite, coverage still maps all 84 harvested headings, and proof-contract
+scope still matches all 56 proof-bearing items. The remaining handoff action is
+for the orchestrator to re-splice these four page objects into `plan-spec.json`;
+the exact required gates are the final verification commands for this dispatch.

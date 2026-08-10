@@ -61,15 +61,24 @@ for (const f of manifests) {
     // For an ENRICHMENT of a published pair the batch manifest deliberately holds
     // only the newly minted ids, so replacing would DELETE the published items
     // from the spec. Append instead, published first, preserving reading order.
+    // The manifest is AUTHORITATIVE for every id it declares — including the
+    // deps of an item already spliced once, which a later scaffold repair may
+    // have changed. Appending only unseen ids (the first version of this) leaves
+    // a re-run carrying the pre-repair dep lists forward, so the repairs never
+    // reach plan-spec and validate-plan keeps reporting edges the Betas fixed.
+    //
+    // Anything on the page that the manifest does NOT declare is a published
+    // item on an enrichment pair; it is preserved, and kept first so reading
+    // order is unchanged. This makes the splice idempotent: re-running after a
+    // repair round is the intended way to use it.
+    const idOf = (i) => (typeof i === 'string' ? i : i.id);
     const existing = target.items ?? [];
     const fresh = page.items ?? [];
-    if (existing.length && fresh.length) {
-      const existingIds = new Set(existing.map((i) => (typeof i === 'string' ? i : i.id)));
-      const additions = fresh.filter((i) => !existingIds.has(typeof i === 'string' ? i : i.id));
-      target.items = [...existing, ...additions];
-      log.push(`${page.id}: ENRICHMENT — ${existing.length} published + ${additions.length} new = ${target.items.length}`);
-    } else {
-      target.items = fresh;
+    const declared = new Set(fresh.map(idOf));
+    const preserved = existing.filter((i) => !declared.has(idOf(i)));
+    target.items = [...preserved, ...fresh];
+    if (preserved.length) {
+      log.push(`${page.id}: ENRICHMENT — ${preserved.length} published + ${fresh.length} new = ${target.items.length}`);
     }
     itemTotal += target.items.length;
 
