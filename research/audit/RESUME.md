@@ -1,14 +1,13 @@
 # Published-page audit — orchestrator RESUME checkpoint
 
-## WAVES 11–14 — A10 COMPLETE; FINAL GATES GREEN (2026-08-10)
+## WAVES 11–14 — CONCLUDED; OWNER PAUSES CLEARED (2026-08-10)
 
 The owner directed the orchestrator to audit every remaining untagged page in
-parallel and to continue autonomously from A0 through A10. Routine shell and
-edit actions must never become permission prompts for the orchestrator or any
-agent; an operation with no already-authorized form becomes a recorded blocker.
-The shared baseline is clean `442f831c94882899c1dc5559b36599b0f78a99c8`,
-which equals `origin/main`. Nothing has been published, committed, or pushed by
-this run.
+parallel and to continue autonomously from A0 through A10, then explicitly
+cleared all four sole A10 pauses by instructing the orchestrator to conclude
+Waves 11–14. Audit checkpoint `370dc17` records the complete run from baseline
+`442f831c94882899c1dc5559b36599b0f78a99c8`. The checkpoint and closure commit
+are pushed together. Nothing is running, and nothing was published.
 
 A0 was recomputed from current published pages, not from the prior list. The
 closed scope is **14 pages / 7 A/B pairs / 223 unique formerly untagged items /
@@ -36,9 +35,8 @@ rejudged.
 Authoritative final A10 suites pass **9/9 for Wave 11, 9/9 for Wave 12, 9/9
 for Wave 13, and 9/9 for Wave 14**. The narrowed structural owner queues are
 empty. Full rundowns: `research/audit/wave11-A10.md`, `wave12-A10.md`,
-`wave13-A10.md`, and `wave14-A10.md`. Nothing from this run has been committed
-or pushed. Exact next action is owner-directed commit/push if desired; no audit
-work remains in flight.
+`wave13-A10.md`, and `wave14-A10.md`. The owner pauses are cleared, the audit
+checkpoint is shipped, and no audit work remains in flight.
 
 ## WAVES 8, 9, AND 10 — CONCLUDED; OWNER PAUSES CLEARED (2026-08-09)
 
