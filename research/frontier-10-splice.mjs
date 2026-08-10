@@ -18,6 +18,14 @@ const EXTRA_REQUIRES = {
     'determinants-of-matrices-over-a-commutative-ring',
     'gaussian-elimination-and-row-reduction',
   ],
+  // Alpha's re-check finding R1. The re-home moves two items onto
+  // rings-subrings-and-integral-domains (46) whose own dependencies —
+  // def-finite-cardinality, def-sum-over-a-finite-index-set, thm-product-rule,
+  // thm-sum-rule — are homed on finite-counting-and-binomial-coefficients (20).
+  // That page currently requires only divisibility-gcd-and-bezout, so once the
+  // re-home is applied validate-plan raises undeclared-prereq. Nothing else owns
+  // this edge: it is a consequence of the move, not of any batch's scaffold.
+  'rings-subrings-and-integral-domains': ['finite-counting-and-binomial-coefficients'],
 };
 
 const manifests = readdirSync('research')
@@ -74,6 +82,24 @@ for (const f of manifests) {
     if (added.length) log.push(`${page.id}: requires += ${added.join(', ')}`);
     if (dropped.length) log.push(`${page.id}: WARNING requires would drop ${dropped.join(', ')} — kept`);
     target.requires = [...union];
+  }
+}
+
+// An EXTRA_REQUIRES entry for a page NO batch manifest contains — R1's
+// rings-subrings edge is exactly that: a consequence of the re-home, not of any
+// batch's scaffold. The per-page loop above never reaches such a page, so apply
+// the remainder here or the edge is silently dropped.
+const touched = new Set(manifests.flatMap((f) =>
+  JSON.parse(readFileSync(`research/${f}`, 'utf8')).map((p) => p.id)));
+for (const [pageId, extra] of Object.entries(EXTRA_REQUIRES)) {
+  if (touched.has(pageId)) continue;
+  const target = byId.get(pageId);
+  if (!target) { console.error(`EXTRA_REQUIRES names unknown page ${pageId}`); process.exit(1); }
+  const before = new Set(target.requires ?? []);
+  const added = extra.filter((r) => !before.has(r));
+  if (added.length) {
+    target.requires = [...before, ...added];
+    log.push(`${pageId}: requires += ${added.join(', ')}  (off-manifest, R1)`);
   }
 }
 
