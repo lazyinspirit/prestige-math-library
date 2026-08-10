@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-cauchy-principal-value, def-mixed-improper-integral,
+deps: [thm-improper-p-test-rational, def-cauchy-principal-value, def-mixed-improper-integral,
        lem-improper-integral-splitting-and-tail-invariance,
        thm-linearity-of-improper-integrals]
 justified_by: []
@@ -40,6 +40,8 @@ The converses need not hold.
 
 [L3] Principal values use coupled symmetric truncations ([[def-cauchy-principal-value]]).
 
+[L4] For every rational $p$, $\int_0^1x^{-p}\,dx$ converges exactly when $p<1$, and $\int_1^\infty x^{-p}\,dx$ converges exactly when $p>1$ ([[thm-improper-p-test-rational]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -48,4 +50,4 @@ The converses need not hold.
 
 1.2 On the real line, split at zero. As $R\to\infty$, $\int_{-R}^0f$ and $\int_0^Rf$ tend separately to their two tail values. The same $\varepsilon/2$ estimate shows that their sum tends to the mixed value. Split-point invariance [L2] removes any dependence on zero. [L2]
 
-2.1 These arguments prove only that independent limits imply the coupled limit; the coupled limit can exist by cancellation even when neither independent limit is finite. [given] ∎
+2.1 The converses fail, and a witness is available on this page rather than assumed. Take $f(x)=1/x$ on $[-1,1]$ with the interior singularity at $0$. For every $\delta\in(0,1)$ the substitution $x\mapsto-x$ gives $\int_{-1}^{-\delta}x^{-1}\,dx=-\int_{\delta}^{1}x^{-1}\,dx$, so the symmetric truncations cancel exactly and the principal value exists and is $0$. But $\int_0^1x^{-p}\,dx$ converges exactly when $p<1$ by [L4], so at $p=1$ the right-hand one-sided integral diverges, and by the same reflection so does the left-hand one. Hence the principal value can exist while neither one-sided improper integral converges, and the converse of the first claim fails; applying the same witness on $[-R,R]$ and letting $R\to\infty$ refutes the whole-line converse. [L4, given] ∎

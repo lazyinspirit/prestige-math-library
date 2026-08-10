@@ -43,7 +43,7 @@ Then $\int_0^\infty f$ converges conditionally, and its value is the sum of the 
 
 [L2] The harmonic series diverges ([[thm-p-series-rational]]).
 
-[L3] A finite collection of jumps does not obstruct Riemann integrability on a compact interval ([[lem-changing-a-function-at-finitely-many-points]]).
+[L3] If $f$ is Riemann integrable on a compact interval and $g$ agrees with $f$ outside a finite set, then $g$ is Riemann integrable there with the same integral ([[lem-changing-a-function-at-finitely-many-points]]); a constant function is Riemann integrable, and the integral is additive over adjacent subintervals ([[thm-additivity-over-subintervals]]).
 
 ## Verification
 

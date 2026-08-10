@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $F$ be an infinite field. A finite system over $F$ has no solutions when its augmented column contains a pivot, exactly one solution when every variable column contains a pivot, and infinitely many solutions when it is consistent and has a nonpivot variable.
+Let $F$ be an infinite field. A finite system over $F$ has no solutions when its augmented column contains a pivot, exactly one solution when it is consistent and every variable column contains a pivot, and infinitely many solutions when it is consistent and has a nonpivot variable. Consistency is not implied by the pivot condition on the variable columns: over any field the system with matrix $\begin{pmatrix}1\\0\end{pmatrix}$ and right-hand side $\begin{pmatrix}0\\1\end{pmatrix}$ has a pivot in its single variable column and also a pivot in its augmented column, and has no solution.
 
 ## Facts & Assumptions
 

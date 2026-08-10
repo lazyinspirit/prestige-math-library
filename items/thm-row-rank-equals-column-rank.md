@@ -36,7 +36,7 @@ Both dimensions equal the number of pivots in any echelon form of $A$.
 
 [L1] The nonzero rows of $R$ form a basis of the row space of $A$ ([[lem-nonzero-echelon-rows-form-a-basis-of-the-row-space]]).
 
-[L2] The original columns indexed by pivot columns form a basis of the column space ([[thm-pivot-columns-form-a-basis-of-the-column-space]]).
+[L2] Let $Q$ be the **reduced** row echelon form of $A$. The columns of $A$ whose indices are pivot columns of $Q$ form a basis of the column space of $A$ ([[thm-pivot-columns-form-a-basis-of-the-column-space]]).
 
 [L3] Row rank and column rank are the respective dimensions ([[def-row-space-column-space-nullspace-and-matrix-ranks]]).
 
