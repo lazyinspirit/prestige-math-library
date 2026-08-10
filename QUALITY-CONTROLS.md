@@ -154,6 +154,24 @@ current receipt, so a new level cannot silently rely on an unaudited high-fan-ou
 proof. This is a focused dependency-proof audit, not a replacement for normal
 per-item citation checking.
 
+## Canonical-coverage harvest (owner, 2026-08-11)
+
+The proof contract answers "is every step licensed?". It cannot answer "should
+this page have had another theorem on it?" — and two published pairs came out
+thin for exactly that reason. Each Beta additionally maintains
+`research/<run>-batch-<i>.coverage.json`: per A page, at least two independent
+treatments (at least one textbook/monograph/full note set), each with the exact
+range read and an enumeration of **that source's own** section and named-result
+headings, each heading disposed as `included` / `inline` / `already-published` /
+`deferred` / `out-of-scope`, the last two with a written per-result reason.
+
+```sh
+node tools/coverage-checklist.mjs research/<run>-batch-*.coverage.json
+```
+
+Required at **step 2** and **step 6**; a missing checklist is a missing receipt.
+Full mechanism and error codes: `ARCHITECTURE.md` §3.11b.
+
 ## Gates
 
 Run after Step 5 and again after all Step-6 repairs, before the frozen Step-7
@@ -164,6 +182,7 @@ node tools/merge-proof-contracts.mjs --level frontier-<n> research/level<n>-proo
 node tools/proof-contract.mjs research/level<n>-proof-contracts.json --strict
 node tools/finite-smoke.mjs research/level<n>-proof-contracts.json
 node tools/risk-report.mjs research/level<n>-proof-contracts.json   # add --require-reviewed at STEP 6 only
+node tools/coverage-checklist.mjs research/level<n>-batch-*.coverage.json
 node tools/content-policy.mjs research/level<n>-batch-*.pages.json
 node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json > research/level<n>-audit-manifest.json
 node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --template research/level<n>-impact-audit.json

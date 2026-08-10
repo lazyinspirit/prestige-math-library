@@ -54,6 +54,14 @@ For your A page and your B page:
   exactly matches final prose: every direct fact citation has its exact source
   excerpt and all uses; every numbered step has exactly one input-map entry; and
   every standard boundary case is checked or specifically not applicable.
+- keep your own `research/<run>-batch-<i>.coverage.json` **true of what you
+  actually authored** (owner, 2026-08-11). Authoring legitimately drops, renames
+  or merges a planned item; when it does, that heading's disposition changes with
+  it — an `included` row naming an item you did not write is a step-6 gate
+  failure. A result you drop while authoring becomes `deferred` or
+  `out-of-scope` **with a reason**, exactly as at scaffold time. Re-run
+  `node tools/coverage-checklist.mjs research/<run>-batch-<i>.coverage.json`
+  before reporting done.
 
 Everything is authored `status: draft` and `origin: session`. Every
 mathematical-content item, including definitions, propositions, theorems,

@@ -191,6 +191,24 @@ planned material it supports, and record convention disagreements rather than
 silently choosing one. Web research informs the scaffold; it does not turn
 session-authored material into fabricated scraped provenance.
 
+**Canonical-coverage harvest (owner, 2026-08-11).** Finding a source is not
+reading it. Each pair needs **at least two independent treatments**, at least
+one a textbook, monograph, or full lecture-note set; an encyclopedia entry is a
+convention tiebreaker and never a pair's primary backing. For each source, Beta
+records the exact chapter/section range read and enumerates **that source's own
+section and named-result headings** across it, then gives every heading a
+disposition: `included` with the scaffolded item id, `inline` with the item
+absorbing it, `already-published` with the published id, or `deferred` /
+`out-of-scope` with a written reason about that specific result. The output is
+`research/<run>-batch-<i>.coverage.json`, and `coverage-checklist.mjs` is a
+required gate at **step 2 and step 6** — a missing checklist is a missing
+receipt, not a skip. This is the only gate in the system that can see a result
+that was never written; every other one reads what is there and asks whether it
+is true. It exists because `group-actions-and-cayleys-theorem` published without
+the orbit–stabiliser theorem while citing a source titled "Orbits and
+stabilizers". Alpha checks faithfulness to the sources at step 6; the gate checks
+structure only.
+
 **Component-provenance and truth-risk pass (owner, 2026-08-02).** For every planned
 mathematical-content item, including definitions, propositions, theorems,
 lemmas, corollaries, examples, counterexamples, false statements, and
@@ -274,7 +292,11 @@ mention; it cannot conceal a logical dependency. The fuchsia ‡ marker is the
 external-dependency tag. Foundational axioms already adopted (AC, countable
 choice, dependent choice) and the independence facts about them remain
 separately permitted. **A dropped item is deferred, not deleted — the note is
-what makes it recoverable.**
+what makes it recoverable.** Since 2026-08-11 that note has a machine-checked
+home: a dropped result is a `deferred` or `out-of-scope` row in the batch's
+`coverage.json`, with a reason naming that specific result.
+`coverage-checklist.mjs` runs here as a required gate, and it is what stops a
+drop from being silent rather than recorded.
 
 **Reuse discipline.** Ids are IMMUTABLE on `main`. Grep `items/` and
 `plan-spec.json` before minting; reuse or alias an existing id for an existing

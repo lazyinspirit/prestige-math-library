@@ -507,6 +507,68 @@ entire `verification:` block, so the two hashes differ for every stamped item.
 Quoting a judge-ledger item hash into an adjudication would write a value the
 guard can never match; adjudication rows take theirs from `item-hash.mjs`.
 
+### 3.11b The omission gate — `coverage-checklist.mjs` (owner, 2026-08-11)
+
+**Which failure it prevents.** Every other gate in this file reads what was
+written and asks whether it is true. None can see what was never written. That
+blind spot is not hypothetical: `group-actions-and-cayleys-theorem` was
+published with orbits, stabilisers and the orbit partition, but **without the
+orbit–stabiliser theorem**, the class equation, or Cauchy's theorem, and with
+`examples: []`. `free-groups-and-presentations` was published at 6 + 1 items and
+had to be rewritten wholesale in run `freegroups-1`. Every gate passed both
+times, correctly — nothing false was written.
+
+**Why the obvious fix is the wrong one.** The tempting diagnosis is bad sources.
+It is measurably not what happened: frontier-9's batch notes cite Sharifi
+(UCLA), Brosnan (UMD), Judson, Axler and Diestel. The real defect is that a Beta
+could *cite* a source without *harvesting* it. Brosnan's note is titled "Orbits
+and stabilizers"; the ledger recorded it as covering "orbit structure"; the
+orbit–stabiliser theorem was never scaffolded. Nothing asked what else was on
+the page.
+
+**The mechanism.** `research/<run>-batch-<i>.coverage.json` holds, per A page, a
+list of sources — each with `url`, `kind`, `title`, `locator` (the exact range
+read) and `contents`, the source's **own** section and named-result headings over
+that range. Every heading carries a `disposition`:
+
+| disposition | means | also requires |
+|---|---|---|
+| `included` | scaffolded in this batch | `item`, cross-checked against the batch manifest |
+| `inline` | absorbed into another item's proof | `item` naming that item |
+| `already-published` | the library already has it | `item`, verified `status: published` on disk |
+| `deferred` | not built now, recoverable later | `reason` ≥ 40 chars about *this* result |
+| `out-of-scope` | not this pair's material | `reason` ≥ 40 chars about *this* result |
+
+At least two sources per pair, at least one of `textbook`/`monograph`/
+`lecture-notes`/`course-notes`/`survey`. An `encyclopedia`/`wiki` source cannot
+be a pair's only backing.
+
+**Why source-anchored and not a minimum count.** A required *number* of results
+would collide head-on with the scaffold-richness rule's "never pad". A required
+*disposition for every heading the source itself contains* cannot be satisfied by
+inventing anything — the bar is set by the source, so meeting it honestly is the
+only way to meet it.
+
+**Error codes.** `coverage-missing-page`, `coverage-missing-file`,
+`coverage-unparseable`, `coverage-thin-sources`, `coverage-no-primary-source`,
+`coverage-unknown-kind`, `coverage-source-url`, `coverage-source-locator`,
+`coverage-empty-harvest`, `coverage-unnamed-result`, `coverage-undisposed`,
+`coverage-included-no-item`, `coverage-inline-no-item`,
+`coverage-published-no-item`, `coverage-not-published`, `coverage-unknown-item`,
+`coverage-thin-reason`, `coverage-boilerplate-reason`. Warnings:
+`coverage-no-manifest`, `coverage-low-yield` (fewer than 40% of ≥8 harvested
+results scaffolded — a judgment call routed to Alpha, never a script's).
+
+**Where it runs.** Required at **step 2**, where a gap still costs a scaffold
+entry rather than a rewrite, and again at **step 6**, where it checks the
+checklist is still true of what was actually authored. A missing checklist is a
+`missing-receipt` failure, not a skip.
+
+**What it does not do.** It cannot fetch a source and confirm the harvest is
+honest — a Beta that under-enumerates a chapter passes. That reading is Alpha's
+at step 6, and the checklist's real value there is that it gives Alpha something
+specific and falsifiable to check rather than an open-ended "is this page thin?".
+
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
 `AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.
@@ -1199,6 +1261,13 @@ State this honestly rather than implying coverage.
   declared dependencies, second for the main definitions/results and their
   logical progression; B pages carry no authored summary body. This remains a
   reading rule, not a mechanical gate.
+- **Omission is now partly covered, and only partly.** Until 2026-08-11 no gate
+  could see a result that was never written; `coverage-checklist.mjs` (§3.11b)
+  now forces every heading a cited source contains to be scaffolded or declined
+  in writing. It closes the *silent* drop. It cannot close the *unread* source: a
+  Beta that enumerates six of a chapter's twenty theorems passes the gate, and
+  only Alpha's step-6 read catches that. Nor does it apply to legacy pages, which
+  are not retro-harvested.
 - **`depsource` cannot see `forward_refs`** (§3.8).
 - **Authored B-leaf edges are now covered.** `depcheck` reads actual page homes
   and rejects any `deps` edge to an item that lives only on B/examples pages,

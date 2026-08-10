@@ -90,6 +90,10 @@ const SPINE_RECEIPT = '{spine}';
 // always passed. It is deliberately not in `needs`: a missing receipt means "no
 // re-home on this run", not "a required receipt is absent".
 const REHOMED = '{rehomed}';
+// The per-batch canonical-coverage checklists (owner, 2026-08-11). A missing one
+// is a MISSING RECEIPT, not a skip: the whole point of the omission gate is that
+// silence about what a source contains is the defect it catches.
+const CHECKLISTS = '{checklists}';
 
 // The base gates, run wherever content exists on disk. LEVELS.md §"The base
 // gates and future-scope closures" is the source; citecheck is advisory because
@@ -138,6 +142,10 @@ const STEPS = {
   2: [
     g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'scaffold structure and ordering' }),
     g('depsource.mjs', ['research/plan-spec.json'], { why: 'every dep resolves somewhere' }),
+    // The omission gate, at the only step where acting on it is still cheap: the
+    // item list is not yet authored, so adding a harvested result costs a
+    // scaffold entry rather than a rewrite.
+    g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'every result the sources contain is scaffolded or declined in writing' }),
   ],
   3: [],   // Orchestrator adjudication of Beta recommendations. Judgment, not a gate.
   4: [
@@ -166,6 +174,11 @@ const STEPS = {
     g('content-policy.mjs', [MANIFESTS, REHOMED], { needs: [MANIFESTS] }),
     g('audit-manifest.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'the full relationship checklist' }),
     g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'after-authoring'], { needs: [TOUCHES], why: 'downstream consumers of a changed interface' }),
+    // Re-run after authoring: step 5 may legitimately drop or rename a planned
+    // item, and a checklist that still claims it as `included` has stopped being
+    // a record of what was built. Alpha's step-6 read is what checks the harvest
+    // is FAITHFUL to the sources; this only checks it is still TRUE of disk.
+    g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'the checklist still matches what was authored' }),
   ],
   // Step 7 is the judge sweep itself, which SPENDS. The driver runs
   // judge-sweep.mjs as an action; this gate only checks what it produced.
@@ -339,6 +352,11 @@ const discover = (suffixPattern) => {
 
 const manifests = () => discover('\\.pages\\.json');
 
+/** Per-batch coverage checklists. The literal dot before `coverage` is what
+ *  keeps this from also matching the audit's `{run}-audit-coverage.json`
+ *  receipt, which is a different artifact with a hyphen in that position. */
+const checklists = () => discover('\\.coverage\\.json');
+
 /** Per-batch provenance ledgers, interleaved as `--ledger <file>` pairs, which
  *  is the shape content-policy.mjs --audit expects. Discovered from disk: a
  *  batch that produced no ledger must show up as a missing row, not as a
@@ -366,6 +384,7 @@ const expand = (value) => {
   if (value === LEDGERS) return ledgerArgs();
   if (value === SPINE_RECEIPT) return [spineReceipt()];
   if (value === REHOMED) return rehomedArgs();
+  if (value === CHECKLISTS) return checklists();
   return [value.replaceAll('{run}', run).replaceAll('{dir}', DIR)];
 };
 const expandAll = (values) => values.flatMap(expand);
@@ -381,6 +400,7 @@ for (const gate of gates) {
   const missing = needs.filter((path) => !existsSync(join(REPO, path)));
   // A manifest glob that matched nothing is itself a missing receipt.
   if (gate.needs.includes(MANIFESTS) && !manifests().length) missing.push('research/{run}-*.pages.json (no match)');
+  if (gate.needs.includes(CHECKLISTS) && !checklists().length) missing.push(`${DIR}/${run}-batch-*.coverage.json (no match)`);
 
   if (missing.length) {
     results.push({

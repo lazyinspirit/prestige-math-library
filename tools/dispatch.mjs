@@ -86,8 +86,16 @@ const REQUIRED_CLAUDE_DENIES = Object.freeze(['Bash', 'Write', 'Edit', 'Notebook
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
-  beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, why: 'one per batch, scaffolds and authors' },
-  reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, why: 'independent step-6 audit of a foreign batch' },
+  // `web: true` on the two source-reading build lanes (owner, 2026-08-11). Every
+  // audit role already had it; the build roles that LEVELS.md §Step 1 orders to
+  // "search reputable mathematical sources on the web" did not. A probe on
+  // 2026-08-11 confirmed this account exposes a `web.run` tool even under the
+  // isolated CODEX_HOME, so this was never a total blackout — but the native
+  // search tool was off for exactly the lanes whose brief is half source
+  // research, and the comment below already records what an unsearching lane
+  // does instead: it asserts from memory.
+  beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'one per batch, scaffolds and authors' },
+  reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'independent step-6 audit of a foreign batch' },
   // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh.
   // `effort` must be explicit: buildClaude defaults the claude runner to 'high',
   // so omitting it here would silently downgrade the adjudicator.

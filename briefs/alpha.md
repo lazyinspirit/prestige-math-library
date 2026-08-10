@@ -161,6 +161,34 @@ logical progression second. Every B page must have no authored summary body.
 Confirm, refute, amend, revert, or extend fixes as the evidence warrants. If
 you add a result, personally author its proof.
 
+### 6b.0 Audit the coverage harvest for FAITHFULNESS (owner, 2026-08-11)
+
+`coverage-checklist.mjs` proves each batch's `coverage.json` is structurally
+complete — every heading disposed, every `included` id real. It cannot prove the
+harvest is honest, and a Beta that enumerates six of a chapter's twenty theorems
+passes it cleanly. **That check is yours, and it is the reason this artifact
+exists.** The failure it targets is `group-actions-and-cayleys-theorem`, which
+published without the orbit–stabiliser theorem while citing a source titled
+*Orbits and stabilizers*.
+
+For every A/B pair, open the actual sources named in `coverage.json` at the
+stated `locator` and ask:
+
+1. Does `contents` reflect what that range **actually contains**, or a thin
+   selection from it? A missing standard result is the defect; name it.
+2. Is each `deferred`/`out-of-scope` reason true, or a plausible-sounding
+   dismissal of something that is in scope and cheap? "Requires machinery we do
+   not have" is checkable — check it.
+3. Is the pair's **primary** backing genuinely a textbook, monograph or full
+   note set? Two encyclopedia entries dressed as `lecture-notes` fails.
+4. Does anything standard in the pair's development appear in **no** source's
+   `contents` at all? That is the signal that the sources themselves were too
+   thin, and it is a scaffold defect even though every listed row is disposed.
+
+A faithfulness failure is a **step-6 repair**, not a step-8 one: add the missing
+results now, while the text is unfrozen and no verdict exists to void. Record
+what you added and why in your Alpha report.
+
 ### 6b.1 Reconcile proof contracts and high-risk routing
 
 Require each independent reader to update its own batch proof-contract whenever

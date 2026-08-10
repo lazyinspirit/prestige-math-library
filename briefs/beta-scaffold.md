@@ -58,6 +58,59 @@ source supports and flag every convention disagreement you found. Do not copy
 source prose, fabricate a source, or describe session-authored content as
 scraped.
 
+### The canonical-coverage harvest — REQUIRED, and gated
+
+**Owner instruction, 2026-08-11.** Finding a source is not reading it. Two pages
+shipped thin because a Beta cited a source without harvesting it: a note titled
+*Orbits and stabilizers* was logged as covering "orbit structure", and the
+orbit–stabiliser theorem never reached the scaffold. The whole page is now being
+rebuilt. Do not repeat that.
+
+For **each A/B pair** you own, write
+`research/<run>-batch-<i>.coverage.json`:
+
+```json
+{ "pages": [ { "page": "<A page id>",
+  "sources": [ { "url": "https://…", "kind": "textbook",
+                 "title": "Author, Title", "locator": "ch. 4.3–4.7",
+                 "contents": [
+                   { "name": "orbit–stabiliser theorem",
+                     "disposition": "included", "item": "thm-orbit-stabilizer" },
+                   { "name": "Sylow's theorems", "disposition": "deferred",
+                     "reason": "…why THIS result is not built here…" } ] } ] } ] }
+```
+
+Rules the gate enforces, so read them before you write the file:
+
+- **At least two independent treatments per pair**, at least one of `kind`
+  `textbook`, `monograph`, `lecture-notes`, `course-notes` or `survey`.
+  `encyclopedia`/`wiki` is a **convention tiebreaker only** and can never be a
+  pair's primary backing. Wikipedia alone fails this gate.
+- `locator` names the **exact chapter/section range you actually read**.
+- `contents` is **that source's own** section and named-result headings across
+  that range — what the source contains, not what you thought of. This is the
+  part that is not optional and not summarisable.
+- Every heading needs a `disposition`: `included` (+ `item` id you scaffold),
+  `inline` (+ `item` whose proof absorbs it), `already-published` (+ published
+  `item` id), `deferred` or `out-of-scope` (+ a `reason` of at least 40
+  characters about **that specific result** — one reason pasted across three
+  declines is rejected).
+
+There is deliberately **no minimum number of results**: padding is forbidden by
+the scaffold-richness rule and a count would invite it. The bar is set by the
+source, not by a target. If a chapter proves twenty things and you build six,
+that can be entirely correct — but you must say, result by result, why.
+
+Run it yourself before you report done:
+
+```
+node tools/coverage-checklist.mjs research/<run>-batch-<i>.coverage.json
+```
+
+Alpha checks at Step 6 that your harvest is **faithful** to the sources. The gate
+only checks that it is structurally complete. Under-enumerating a chapter passes
+the script and fails the audit.
+
 For every planned mathematical-content item, record expected
 `provenance.statement` and `provenance.proof` values with a reason for each.
 Statement means the claim/witness/construction; proof means only its local

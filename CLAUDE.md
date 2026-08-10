@@ -396,6 +396,37 @@ banner; the public sees only `published`.
   for useful, cheaply proved corollaries. The A-page size-warning ceiling is 100
   total items, raised from 60. It is a review ceiling, not a target: never pad,
   and never drop valuable results merely for ergonomics or to stay below it.
+- **Source depth and the canonical-coverage harvest (owner, 2026-08-11).** Two
+  published pairs came out thin: `group-actions-and-cayleys-theorem` shipped
+  without the orbit–stabiliser theorem, the class equation or Cauchy's theorem
+  and with an empty B page, and `free-groups-and-presentations` needed a
+  wholesale rewrite. The measured cause was **not** source quality — frontier-9's
+  ledgers cite Sharifi, Brosnan, Judson, Axler and Diestel, all real notes and
+  textbooks. It was that nothing obliged a Beta to *harvest* a source it had
+  already found: Brosnan's note titled "Orbits and stabilizers" was recorded as
+  covering "orbit structure", and orbit–stabiliser was still never scaffolded.
+  So, forward-looking, in every future scaffold:
+  (a) each A/B pair is backed by **at least two independent treatments**, at
+  least one of which is a textbook, monograph, or full lecture-note/course-note
+  set with a harvestable table of contents. Wikipedia and encyclopedia entries
+  are **convention tiebreakers only** and can never be a pair's primary backing.
+  (b) For every source, Beta records the exact chapter/section range it read and
+  enumerates **that source's own section and named-result headings** over that
+  range. (c) Every harvested heading then receives an explicit disposition —
+  `included` (naming the scaffolded item id), `inline` (naming the item whose
+  proof absorbs it), `already-published` (naming the published item),
+  `deferred`, or `out-of-scope` — and the last two need a written reason about
+  **that specific result**. The harvest is deliberately source-anchored rather
+  than a minimum result count, because a required count would invite exactly the
+  padding the scaffold-richness rule forbids, while a disposition for every
+  heading the source itself contains cannot be satisfied by inventing anything.
+  The artifact is `research/<run>-batch-<i>.coverage.json`, gated mechanically by
+  `tools/coverage-checklist.mjs` at **step 2** (where acting on a gap still costs
+  a scaffold entry, not a rewrite) and again at **step 6**. Alpha checks at step 6
+  that the harvest is *faithful* to the sources; the gate only checks it is
+  structurally complete and still true of disk. Error codes are listed in
+  `ARCHITECTURE.md` §3.11b. Legacy pages are not retro-harvested.
+
 - **Generated-claim minimization (owner, 2026-08-01).** Source-backed
   statements are the default. Beta must not invent a new theorem, proposition,
   definition, false statement, or mathematical remark merely to enrich a page
