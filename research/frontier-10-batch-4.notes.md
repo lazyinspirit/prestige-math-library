@@ -8,10 +8,10 @@ This is the durable reasoning record for orders 163–166. The only repo outputs
 |---:|---|---|---:|
 | 163 | `bounded-variation-and-riemann-stieltjes` | A | 32 |
 | 164 | `bounded-variation-and-riemann-stieltjes-examples` | B | 12 |
-| 165 | `improper-integrals` | A | 24 |
+| 165 | `improper-integrals` | A | 25 |
 | 166 | `improper-integrals-examples` | B | 12 |
 
-The batch has 80 items. Both A pages are below the hard 60-item limit, so **no split is proposed**. The precise cut remains the dispatched cut: bounded variation/Riemann–Stieltjes through Young integration at 163–164, then improper endpoint and infinite-interval integrals at 165–166. Bounded variation supplies the intended earlier-page machinery for `arc-length-and-rectifiable-curves` and for the later sharp fundamental-theorem page.
+The batch has 81 items. Both A pages are below the hard 60-item limit, so **no split is proposed**. The precise cut remains the dispatched cut: bounded variation/Riemann–Stieltjes through Young integration at 163–164, then improper endpoint and infinite-interval integrals at 165–166. Bounded variation supplies the intended earlier-page machinery for `arc-length-and-rectifiable-curves` and for the later sharp fundamental-theorem page.
 
 All same-page A edges point backward. A B item depends only on its A page, an earlier page, or an earlier item on the same B page. There are no cross-batch edges and no forward load-bearing references.
 
@@ -57,7 +57,7 @@ with these exact two A-page summary paragraphs (each is under 150 words):
 
 > Improper integrals are defined at finite singular endpoints, at infinity, and across mixed or interior singularities, with every component required to converge separately. The page proves splitting and tail invariance, linearity, the Cauchy criterion, the bounded-primitive criterion for nonnegative integrands, and that absolute convergence implies convergence. Comparison, limit comparison, the proper-integral form of the integral test, truncated rational-power formulas, and the rational $p$-test provide the main convergence toolkit.
 >
-> Cauchy principal value is kept distinct from ordinary improper convergence, and ordinary convergence is shown to imply the corresponding principal value. Dirichlet and Abel tests are accompanied by divergence-transfer and uniform-tail-mass divergence criteria, so oscillation is handled in both directions. An improper substitution theorem and the source-backed Frullani identity with a proper integral factor complete the theory. The companion supplies conditional, principal-value, unbounded-spike, rational-power, interior-singularity, substitution, and comparison examples without using logarithmic, trigonometric, or exponential functions before their pages.
+> Cauchy principal value is kept distinct from ordinary improper convergence, and ordinary convergence is shown to imply the corresponding principal value. Dirichlet and Abel tests are accompanied by divergence-transfer and uniform-tail-mass divergence criteria, so oscillation is handled in both directions. A proper monotone change-of-variable theorem, its improper counterpart, and the source-backed Frullani identity complete the theory. The companion supplies conditional, principal-value, unbounded-spike, rational-power, interior-singularity, substitution, and comparison examples without using logarithmic, trigonometric, or exponential functions before their pages.
 
 The B pages remain bodyless, as required by `SCHEMA.md`.
 
@@ -76,8 +76,8 @@ No mathematical dependency changes: these are stale pre-renumber annotations. In
 The machine harvest enumerates 90 source/canonical headings. Its dispositions are:
 
 - BV/RS: 34 included, 2 inline, 2 already published, 2 out of scope.
-- Improper integrals: 34 included, 2 inline, 12 deferred, 2 out of scope.
-- Combined yield: **72 incorporated** (68 included + 4 inline), **2 already published**, and **16 declined**.
+- Improper integrals: 35 included, 2 inline, 12 deferred, 2 out of scope.
+- Combined yield: **73 incorporated** (69 included + 4 inline), **2 already published**, and **16 declined**.
 
 The initial Trench dispositions for the finite-step integrator and an unbounded Stieltjes-integrable function were not defensible as declines. They are now explicit B items, `ex-finite-step-integrator-weighted-jump-sum` and `ex-unbounded-integrand-stieltjes-integrable`.
 
@@ -106,7 +106,7 @@ The declines most likely to be challenged are the full real-exponent $p$-test an
 
 ## 4. Source ledger, locators, and licences
 
-- **[T] William F. Trench, _Introduction to Real Analysis_.** <https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf>. Read Chapter 3, Definition 3.1.5 and Exercises 3.1.13–17 (pp. 125–128), Exercises 3.2.7–10 (pp. 135–136), and §3.4 Definitions/Theorems 3.4.1–3.4.13 with Examples 3.4.1–17. This is the textbook backing for both pairs. The official USF record is <https://digitalcommons.usf.edu/oa_textbooks/6/> and identifies the open textbook licence as CC BY-NC-SA; Step 5 will still paraphrase rather than copy source prose.
+- **[T] William F. Trench, _Introduction to Real Analysis_.** <https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf>. Read Chapter 3, Definition 3.1.5 and Exercises 3.1.13–17 (pp. 125–128), Exercises 3.2.7–10 (pp. 135–136), the proper monotone substitution theorem 3.3.18 (pp. 148–150), and §3.4 Definitions/Theorems 3.4.1–3.4.13 with Examples 3.4.1–17. This is the textbook backing for both pairs. The official USF record is <https://digitalcommons.usf.edu/oa_textbooks/6/> and identifies the open textbook licence as CC BY-NC-SA; Step 5 will still paraphrase rather than copy source prose.
 - **[M] MIT 18.100B Spring 2004 lecture outline (Rudin treatment).** <https://math.mit.edu/~rbm/18.100-S04/node2.html>. Read Lectures 16–19, explicitly keyed to Rudin pp. 120–136. It independently backs the Stieltjes definition, criterion, existence ladder, properties, integration by parts, and the already-published FTC statements. No reuse licence was relied on; paraphrase only.
 - **[H] Christopher Heil, “Absolute Continuity and the Banach–Zaretsky Theorem.”** <https://heil.math.gatech.edu/papers/abscont_typosmarked.pdf>. Read §§2.1 and 3.2, pp. 30–31 and 39–41: Definition 2 (BV), Theorem 3 (Jordan decomposition), Definition 13 (AC), and Lemma 14. This independently backs the BV/AC spine. The author-hosted paper is used as a mathematical source only; paraphrase only.
 - **[Y] Nourdin, Nualart, and Peccati, “The Breuer–Major theorem in total variation: improved rates under minimal regularity.”** <https://alea.math.cnrs.fr/articles/v16/16-23.pdf>. Read §2.2, “The Young integral,” p. 636, including the $alpha+eta>1$ condition and integration-by-parts equation. The library narrows exponents to available rational Hölder parameters. Use as a mathematical source; paraphrase only.
@@ -163,16 +163,16 @@ Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below ar
 | `cex-common-jump-prevents-riemann-stieltjes-integrability` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `ex-riemann-stieltjes-polynomial-computation` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
 | `ex-riemann-stieltjes-substitution` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `ex-young-integral-beyond-bounded-variation` | ai-altered | ai-generated | [Y] | source-backed theorem narrowed or recombined to match rational/elementary scope |
+| `ex-young-integral-beyond-bounded-variation` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit Hölder tent construction; must remain a dependency leaf |
 | `def-improper-integral-at-infinity` | literature-derived | not-applicable | [T], [D] | standard source definition |
 | `def-improper-integral-at-a-finite-endpoint` | literature-derived | not-applicable | [T], [D] | standard source definition |
 | `def-mixed-improper-integral` | ai-altered | not-applicable | [T], [D] | source-backed convention restricted to the available library vocabulary |
 | `lem-improper-integral-splitting-and-tail-invariance` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-linearity-of-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-cauchy-criterion-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `def-absolute-and-conditional-improper-convergence` | literature-derived | not-applicable | [H], [T] | standard source definition |
+| `def-absolute-and-conditional-improper-convergence` | literature-derived | not-applicable | [T], [D] | standard source definition |
 | `thm-nonnegative-improper-integral-bounded-primitive-criterion` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-absolute-improper-convergence-implies-convergence` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-absolute-improper-convergence-implies-convergence` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-improper-integral-tails-tend-to-zero` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-comparison-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-limit-comparison-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
@@ -184,7 +184,8 @@ Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below ar
 | `thm-dirichlet-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-abel-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-dirichlet-divergence-transfer` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-absolute-divergence-from-uniform-tail-mass` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-absolute-divergence-from-uniform-tail-mass` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-monotone-change-of-variable-for-riemann-integrals` | literature-derived | ai-generated | [T] | Trench Theorem 3.3.18; local machinery required by the full improper theorem |
 | `thm-substitution-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-frullani-integral-proper-factor` | ai-altered | ai-generated | [T], [D] | source-backed theorem narrowed or recombined to match rational/elementary scope |
 | `rem-improper-integral-conventions-and-scope` | ai-altered | not-applicable | [T], [D] | scope/convention synthesis; no proof |
@@ -201,7 +202,7 @@ Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below ar
 | `cex-principal-value-one-over-x-squared-diverges` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `ex-beta-kernel-convergence-rational` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
 
-Truth-risk checks for the generated witnesses are concrete: unequal one-sided quotients for $|x|$; an initial-segment/away-from-zero proof for $sqrt{x}$; explicit distance-to-$mathbb Z$ zeros and peaks for unbounded variation; partition sums for the Cantor, polynomial, and substitution examples; alternating-harmonic truncations; explicitly rational locally finite spikes with geometric areas; rational comparisons; and endpoint exponent checks. None of these ids appears in another item's `deps`.
+Truth-risk checks for the generated witnesses are concrete: unequal one-sided quotients for $|x|$; an initial-segment/away-from-zero proof for $\sqrt{x}$; explicit distance-to-$\mathbb Z$ zeros and peaks for unbounded variation; a normalized Hölder tent construction whose variation is a harmonic sum; partition sums for the Cantor, polynomial, and substitution examples; alternating-harmonic truncations; explicitly rational locally finite spikes with geometric areas; rational comparisons; and endpoint exponent checks. None of these ids appears in another item's `deps`.
 
 ## 6. Published prerequisite and direct-dependency audit
 
@@ -268,17 +269,20 @@ Every direct external dependency below was opened on disk at its actual Definiti
 | `lem-sup-unique` | published | literature-derived / literature-derived | published-audit certification (claude-opus-5, 2026-07-26); exact section re-opened |
 | `thm-additivity-over-subintervals` | published | ai-altered / ai-generated | published-audit certification (gpt-5.6-terra-codex-subscription, 2026-08-10); exact section re-opened |
 | `thm-algebra-of-derivatives` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
+| `thm-algebra-of-continuous-functions` | published | ai-altered / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-algebra-of-function-limits` | published | literature-derived / ai-generated | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-alternating-series-test` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-cantor-function-properties` | published | ai-altered / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-cauchy-criterion-via-lub` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-26; exact section re-opened |
 | `thm-continuous-inverse` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
+| `thm-continuous-implies-integrable` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
 | `thm-darboux-equals-riemann` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
 | `thm-ftc-second-part` | published | literature-derived / ai-generated | published-audit certification (gpt-5.6-terra-codex-subscription, 2026-08-10); exact section re-opened |
 | `thm-geometric-series` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-heine-borel-r` | published | literature-derived / ai-generated | published judge pass (z-ai/glm-5.2) plus audit 2026-07-26; exact section re-opened |
 | `thm-heine-cantor-r` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-27; exact section re-opened |
 | `thm-integral-test-for-series` | published | ai-altered / ai-generated | published judge pass (z-ai/glm-5.2) plus audit 2026-07-29; exact section re-opened |
+| `thm-integration-by-parts` | published | literature-derived / ai-generated | published-audit certification (gpt-5.6-terra-codex-subscription, 2026-08-10); exact section re-opened |
 | `thm-linearity-of-the-integral` | published | literature-derived / ai-generated | published-audit certification (gpt-5.6-terra-codex-subscription, 2026-08-10); exact section re-opened |
 | `thm-monotone-discontinuities-are-jumps` | published | ai-altered / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
 | `thm-monotone-implies-integrable` | published | literature-derived / ai-altered | published judge pass (z-ai/glm-5.2) plus audit 2026-07-28; exact section re-opened |
@@ -289,7 +293,7 @@ Every direct external dependency below was opened on disk at its actual Definiti
 | `thm-second-mean-value-theorem-for-integrals` | published | ai-altered / ai-generated | published judge pass (z-ai/glm-5.2) plus audit 2026-07-29; exact section re-opened |
 | `thm-substitution` | published | ai-altered / ai-generated | published judge pass (z-ai/glm-5.2) plus audit 2026-07-29; exact section re-opened |
 
-There are 75 unique published dependency targets. All mapped targets lie on strictly earlier pages; the few pre-plan foundations are published and earlier in the canonical foundation sequence. No dependency was found unambiguously false, so no published repair is proposed.
+There are 78 unique published dependency targets: 21 carry a current published-audit certification and 57 carry a published judge-pass/audit route; none relies on precheck alone. All mapped targets lie on strictly earlier pages; the few pre-plan foundations are published and earlier in the canonical foundation sequence. No dependency was found unambiguously false, so no published repair is proposed.
 
 ## 7. Convention decisions and disagreements
 
@@ -305,7 +309,7 @@ There are 75 unique published dependency targets. All mapped targets lie on stri
 
 ## 8. Proof-obligation checkpoint for Step 5
 
-The proof-contract file covers all **69 proof-bearing items**, with 442 direct dependency clauses, 186 planned derivation blocks, all eight boundary dispositions per item, and no inapplicable finite-model smoke test forced onto analytic claims. Quotes from the 75 published dependency targets are exact excerpts from their current Definition/Statement/Example sections. Quotes for planned same-batch dependencies are explicitly labelled `Planned Statement`; Step 5 must replace them with exact authored clauses and refine the conservative all-step `uses` maps as item proofs acquire final numbering.
+The proof-contract file covers all **70 proof-bearing items**, with 472 direct dependency clauses, 195 planned derivation blocks, all eight boundary dispositions per item, and no inapplicable finite-model smoke test forced onto analytic claims. Quotes from the 78 published dependency targets are exact excerpts from their current Definition/Statement/Example sections. Quotes for planned same-batch dependencies are explicitly labelled `Planned Statement`; Step 5 must replace them with exact authored clauses and refine the conservative all-step `uses` maps as item proofs acquire final numbering.
 
 The proof-sensitive routes to preserve are:
 
@@ -315,9 +319,10 @@ The proof-sensitive routes to preserve are:
 - prove the finite-discontinuity and no-common-discontinuity Stieltjes theorems with explicit small-variation neighbourhoods and regulated step approximations;
 - keep both directions of the Darboux criterion and every endpoint/jump convention;
 - prove Young's rational estimate at partition level before taking limits;
+- construct the Hölder tent witness with normalized $n^{-4/3}$ widths and prove both the cross-tent Hölder estimate and harmonic lower bound for variation;
 - define mixed improper convergence componentwise, prove Cauchy criteria with two independently moving truncations, and keep principal value logically separate;
 - obtain Dirichlet/Abel from the published second mean-value theorem with boundary terms controlled explicitly;
-- state improper substitution with the exact monotonicity/orientation/end-limit hypotheses used by truncation; and
+- prove the proper monotone change-of-variable equivalence from Darboux sums before using it on improper truncations, with flat pieces and decreasing orientation explicit; and
 - prove the Frullani proper-factor identity without naming an unavailable logarithm.
 
 No planned external fallback or mathematical blocker remains at scaffold time.
@@ -327,7 +332,7 @@ No planned external fallback or mathematical blocker remains at scaffold time.
 The two directly requested constituent checks and the dependency-source constituent are green:
 
 - `node tools/validate-plan.mjs research/plan-spec.json` — **OK**: the declared order is acyclic and consistent, with no unresolved ids, item cycles, forward references, or B-page dependency errors among pages whose item lists are present;
-- `node tools/coverage-checklist.mjs research/frontier-10-batch-4.coverage.json` — **OK**: 2 pages, 90 harvested results, 0 errors, 0 warnings; and
+- `node tools/coverage-checklist.mjs research/frontier-10-batch-4.coverage.json` — **OK**: 2 pages, 91 harvested results, 0 errors, 0 warnings; and
 - `node tools/depsource.mjs research/plan-spec.json` — **OK**: 16,688 external dependencies, all published, with 0 homeless, planned-later, or unresolved targets.
 
 Because the four dispatched page slots are intentionally still empty in `plan-spec.json` at Step 2, I also streamed an in-memory copy of the spec with only this batch's four item arrays inserted into `validate-plan.mjs`. That stronger local check is **OK** across 180 pages with item lists: no item cycles, forward references, B-page dependency violations, unresolved ids, size errors, or undeclared prerequisite edges. The streamed check did not write `plan-spec.json` or any temporary repo artifact.

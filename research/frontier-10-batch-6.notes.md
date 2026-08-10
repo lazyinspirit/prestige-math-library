@@ -4,9 +4,9 @@ These notes are the durable step-2 reasoning record for the two batch-6 page pai
 
 ## Continuity checkpoint — 2026-08-11, step 2
 
-Disk state verified at this checkpoint: the machine scaffold contains 21 + 6 Ramsey items and 38 + 7 plane-graph items; both A pages are below the 60-item split threshold. The coverage harvest contains two independent Ramsey treatments and four plane-graph treatments, including textbooks on both A pages, and `coverage-checklist.mjs` reports no errors or warnings. The newly exposed contractible-edge prerequisite is now a numbered lemma before the three-connected Kuratowski reduction. The page definition also fixes facial boundary-walk length explicitly, counting a bridge twice.
+Disk state verified at this checkpoint: the machine scaffold then contained 21 + 6 Ramsey items and 38 + 7 plane-graph items; both A pages were below the 60-item split threshold. The final hidden-lemma pass subsequently added the graph-theoretic bridge definition and bridge–cycle equivalence, so the final plane A count is 40. The coverage harvest contains two independent Ramsey treatments and four plane-graph treatments, including textbooks on both A pages, and `coverage-checklist.mjs` reports no errors or warnings. The contractible-edge prerequisite is a numbered lemma before the three-connected Kuratowski reduction. The page definition also fixes facial boundary-walk length explicitly, counting a bridge twice.
 
-The remaining work after this checkpoint is mechanical and audit-facing: read every final published dependency on disk, finish the exact-schema proof-contract ledger for every proof-bearing item, splice-check the proposed pages against the live plan, run all three required gates, and record their output below. Do not revisit the source harvest unless a gate or dependency statement exposes a genuine mismatch.
+The audit-facing work after that checkpoint is now complete: every final published dependency was read on disk, the exact-schema proof-contract ledger covers every proof-bearing item, and the proposed pages pass an in-memory splice validation against the live plan. The sole execution blocker is recorded in the gate section below: this sandbox denies the aggregate gate wrapper permission to spawn its child Node processes, although the same three child gates pass when invoked directly.
 
 ## 1. Page shape, reading order, and split decision
 
@@ -14,10 +14,10 @@ The remaining work after this checkpoint is mechanical and audit-facing: read ev
 |---:|---|:---:|---:|---|
 | 217 | `ramsey-theory` | A | 21 | no split |
 | 218 | `ramsey-theory-examples` | B | 6 | companion |
-| 357 | `plane-graphs-euler-and-the-five-colour-theorem` | A | 38 | no split |
+| 357 | `plane-graphs-euler-and-the-five-colour-theorem` | A | 40 | no split |
 | 358 | `plane-graphs-euler-and-the-five-colour-theorem-examples` | B | 7 | companion |
 
-Neither A page approaches 60 items, so no split is proposed. The exact cut question is therefore inapplicable. If later adjudication adds at least 23 Ramsey items or 23 plane-graph items, the page must be split before authoring rather than shortened; nothing harvested here should be dropped merely to stay under the cap.
+Neither A page approaches 60 items, so no split is proposed. The exact cut question is therefore inapplicable. If later adjudication adds at least 40 Ramsey items or 21 plane-graph items, the page must be split before authoring rather than shortened; nothing harvested here should be dropped merely to stay under the cap.
 
 The Ramsey spine is: notation and the two-colour recursion; explicit finite bounds and `R(3,3)`; uniform finite Ramsey; a choice-free ordered-tree König lemma; infinite Ramsey on `N` and its exact Dedekind-infinite corollary; the compactness proof of the finite theorem; canonical pairs; van der Waerden; and Schur. The B page supplies exact small values, two infinite-sequence applications, and sharp failures of the tempting infinite-progression and unrestricted-branching claims.
 
@@ -41,11 +41,103 @@ The page then proves the finite Kuratowski–Wagner characterisation with its th
 
 These are proposals for step-3 adjudication; this Beta did not edit the normative prose.
 
-1. In CB-11 `requires`, append `sequences-and-limits`. The B-page monotone and convex/concave subsequence applications cite the published sequence definition; the existing three requirements are otherwise retained exactly.
-2. Replace the CB-11 claim that infinite Ramsey “costs DC” with: “Infinite Ramsey is proved on `N` in ZF by choosing least colours and least witnesses; the transfer corollary is stated only for a set equipped with an injection from `N`.” This avoids the false ZF assertion that every infinite set contains a countably infinite subset.
-3. Replace the claim that the König compactness derivation costs DC with: “For trees of finite sequences whose finite successor sets carry their natural order, choose the least successor with arbitrarily high descendants; the compactness proof is in ZF.”
-4. Replace the modular-Fermat corollary instruction with an explicit deferral to the future finite-fields material. The standard route needs cyclicity of `F_p^×` and polynomial root bounds, not a local Ramsey lemma.
-5. In GT-8, keep the general Jordan curve theorem outside the proof graph, retain Kuratowski–Wagner, and state the four colour theorem only through the existing not-proved-here catalogue. Add the contractible-edge lemma to the advertised Kuratowski machinery.
+1. CB-11 `requires` block.
+
+   Exact old text:
+
+   ```text
+   `requires`: `graph-colouring` (197),
+   `inclusion-exclusion-and-the-pigeonhole-principle` (22),
+   `countability-and-uncountability` (18)
+   ```
+
+   Exact new text:
+
+   ```text
+   `requires`: `graph-colouring` (197),
+   `inclusion-exclusion-and-the-pigeonhole-principle` (22),
+   `countability-and-uncountability` (18), `sequences-and-limits` (112)
+   ```
+
+   The B-page monotone and convex/concave subsequence applications cite the published sequence definition; the existing three requirements remain.
+
+2. CB-11 infinite theorem sentence.
+
+   Exact old text:
+
+   ```text
+   **the infinite Ramsey theorem**
+   (landmark), with **DC named in the Statement** (§7) and a choice-ledger remark;
+   ```
+
+   Exact new text:
+
+   ```text
+   **the infinite Ramsey theorem on $\mathbb N$** (landmark), proved in ZF by
+   choosing least colours and least natural witnesses; the transfer corollary is
+   stated only for a set equipped with an injection from $\mathbb N$;
+   ```
+
+   This avoids the false ZF assertion that every infinite set contains a countably infinite subset.
+
+3. CB-11 compactness sentence.
+
+   Exact old text:
+
+   ```text
+   **the finite theorem derived from the infinite one by compactness** (König's
+   lemma, DC), as a *second* proof with an agreement remark — the first proof is
+   choice-free and that contrast is the item's whole point;
+   ```
+
+   Exact new text:
+
+   ```text
+   **the finite theorem derived from the infinite one by compactness** (König's
+   lemma for ordered trees of finite sequences, in ZF), as a *second* proof with
+   an agreement remark — both proofs are choice-free, and the compactness proof
+   chooses the least successor with arbitrarily high descendants;
+   ```
+
+4. CB-11 Schur/Fermat sentence.
+
+   Exact old text:
+
+   ```text
+   **Schur's theorem** and the corollary
+   that $x^n + y^n \equiv z^n \pmod p$ has a nontrivial solution for large $p$
+   (cites the number theory pages at 26–30);
+   ```
+
+   Exact new text:
+
+   ```text
+   **Schur's theorem**; its modular Fermat corollary is deferred to the finite-
+   fields material, because the standard proof also needs cyclicity of
+   $\mathbb F_p^\times$ and a polynomial root bound, neither of which is available
+   from the number-theory pages at 26–30;
+   ```
+
+5. GT-8 Kuratowski sentence.
+
+   Exact old text:
+
+   ```text
+   **Kuratowski's theorem** (landmark: planar iff no subdivision of $K_5$ or
+   $K_{3,3}$), via 3-connectivity, citing GT-4's Menger/Whitney form and building
+   the drawing by induction on edge contraction;
+   ```
+
+   Exact new text:
+
+   ```text
+   **Kuratowski–Wagner's theorem** (landmark: planar iff no subdivision of
+   $K_5$ or $K_{3,3}$, equivalently neither minor), via separately numbered
+   contractible-edge, three-connected drawing, separation-augmentation, and
+   edge-maximal three-connectivity lemmas, citing GT-4's Menger/Whitney form;
+   ```
+
+   The existing general-Jordan and four-colour trap text remains: the former is not a dependency and the latter is true, unproved here, and never cited.
 
 ## 4. Canonical source harvest and licensing ledger
 
@@ -69,7 +161,7 @@ No source prose or diagram is copied. All references will be cited at the theore
 
 ## 5. Coverage dispositions likely to be challenged
 
-The harvest records 87 source/result-heading dispositions. Five are declines: one `deferred` Ramsey result and four plane-graph decline records, of which two independently record the same four-colour boundary.
+The harvest records 88 source/result-heading dispositions: 67 `included`, 15 `inline`, one `already-published`, two `deferred`, and three `out-of-scope`. Thus 82 harvested headings feed the scaffold, one is discharged by a published item, and five are declines. The five decline records comprise one Ramsey result and four plane-graph records, of which two independently record the same four-colour boundary.
 
 | result | disposition | defence |
 |---|---|---|
@@ -146,6 +238,8 @@ Abbreviations: D9 = Diestel Ch. 9 §9.1; L1 = Leader §§1.1–1.2; F2 = Fox et 
 | `def-plane-graph-face-and-boundary` | D4 §4.2 and ECM §3.3, with facial boundary walks made explicit |
 | `lem-plane-graph-faces-are-finite-with-one-unbounded-face` | D4 §4.2 opening facts, proved from the numbered polygonal lemmas |
 | `lem-face-containment-under-plane-subgraphs` | D4 Lemma 4.2.1 |
+| `def-bridge-in-a-graph` | standard graph definition used explicitly by D4 §4.2 edge incidence |
+| `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle` | direct graph-theoretic equivalence required before D4 Lemma 4.2.2 |
 | `lem-plane-edge-face-incidence` | D4 Propositions/Lemmas 4.2.2–4.2.3 |
 | `prop-plane-forest-has-one-face` | D4 Proposition 4.2.4 |
 | `lem-equal-plane-face-boundaries-force-a-cycle` | D4 Lemma 4.2.5 |
@@ -196,7 +290,7 @@ Abbreviations: D9 = Diestel Ch. 9 §9.1; L1 = Leader §§1.1–1.2; F2 = Fox et 
 - The canonical pair theorem must define the four behaviours precisely, especially “left-dependent” and “right-dependent,” and prove mutual coverage after thinning.
 - The van der Waerden focussing lemma is the engine, not a slogan. The author must record the induction parameters and the colour-vector pigeonhole bound used at each extension.
 - Polygonal Jordan must number general position, parity invariance, existence of both parities, connectedness of each parity class, and frontier equality. No arbitrary-Jordan theorem may enter a citation.
-- Euler must treat forest/bridge and cycle-edge cases explicitly and must state what happens to the number of faces on edge deletion. The disconnected formula includes the null graph.
+- Before geometric edge incidence, prove from paths that an edge is a bridge exactly when it lies on no cycle. Euler must then treat bridge and cycle-edge cases explicitly and state what happens to the number of faces on edge deletion. The disconnected formula includes the null graph.
 - The Kuratowski chain must prove the contractible-edge lemma, the three-connected induction, the separation augmentation, and the edge-maximal three-connectivity reduction as separate arguments. A citation to the final theorem cannot substitute for these proofs.
 - Dual construction must explain loop/parallel-edge cases and why reciprocal crossing arcs can be chosen polygonally without unintended intersections.
 - Five-colour must extract the cyclic neighbour order from the plane embedding, prove the two alternating Kempe connections cannot coexist by polygonal separation, and verify that the colour swap frees a colour at the deleted vertex.
@@ -205,7 +299,7 @@ The proof-contract JSON is the step-5 checklist. Its cited clauses are obligatio
 
 ## 9. Boundary pass
 
-- Ramsey indices: `s,t,k,c,r` positivity is explicit; recursion assumes `s,t>=2`; `R(3,3)` checks both bounds; `W(k,c)` requires a positive difference; Schur permits `x=y` unless the source theorem states otherwise.
+- Ramsey indices: `s,t,k,c,r` positivity is explicit; recursion assumes `s,t>=2`; `R(3,3)` checks both bounds; `W(k,c)` requires a positive difference; Schur uses the positive interval `{1,...,N}`, excludes the trivial zero solution, and permits `x=y` unless the source theorem states otherwise.
 - Infinite results: only finite colour sets; `k=1` is a real base case; the homogeneous set is infinite in the sense of an injection/enumeration, not merely not-finite; no arbitrary-set choice is hidden.
 - Trees: root and empty sequence included; every level is nonempty; finite branching includes zero successors; an infinite branch has a node at every level.
 - Plane graphs: null graph and disconnected graphs handled in the extended Euler formula; loops are excluded in the primal simple graph but allowed in its dual; bridges count twice in facial length.
@@ -215,8 +309,84 @@ The proof-contract JSON is the step-5 checklist. Its cited clauses are obligatio
 
 ## 10. Published dependency audit
 
-The final dependency list and confidence route are filled after the disk-reading pass. The required route is: open the item file in full, match the exact Statement/Definition clause used, confirm its page is earlier in the transitive plan order, and reject any generated load-bearing claim. Page-level titles or the prose scaffold are not treated as evidence.
+All 60 candidate external dependency files were opened in full from `items/`, not inferred from a page summary. The clause audit rejected two direct dependencies, leaving 58: `def-bipartite-graph` and `thm-bipartite-iff-no-odd-cycle` cannot support the triangle-free edge bound because triangle-free does not imply bipartite. They remain in the table as opened-and-rejected evidence and are not present in the final manifest. For every row the route was: confirm `status: published`; read and match the exact Statement/Definition clause used; confirm the owning page is earlier than order 217 or 357 through the live plan/library frontmatter; inspect `provenance.statement`; then run the spliced validator and manifest content policy. “LD” means `literature-derived` statement provenance and “AA” means `ai-altered`. No dependency has `provenance.statement: ai-generated`; generated legacy proofs are not being treated as statement evidence.
+
+| published dependency opened | owning published page | route |
+|---|---|---|
+| `cor-complete-graph-edge-count` | `graphs-walks-and-connectivity` (207) | AA; exact edge-count Statement matched |
+| `cor-components-of-open-subsets-of-rn-are-polygonally-connected` | `the-topology-of-euclidean-space` (257) | AA; exact component Statement matched |
+| `cor-connected-components-partition-the-vertex-set` | `graphs-walks-and-connectivity` (207) | AA; exact partition/maximality Statement matched |
+| `cor-whitney-k-connected-path-characterisation` | `matchings-covers-menger-and-network-flows` (213) | LD; both directions and size hypothesis matched |
+| `def-binomial-coefficient` | `finite-counting-and-binomial-coefficients` (20) | LD; definition and boundary clauses matched |
+| `def-bipartite-graph` | `graphs-walks-and-connectivity` (207) | AA; opened, then rejected as non-load-bearing for triangle-free graphs |
+| `def-bounded-set` | `suprema-and-infima` (14) | LD; boundedness Definition matched |
+| `def-connected-component-and-quasicomponent` | `connectedness` (253) | AA; largest-connected-subset clause matched |
+| `def-connected-graph-and-connected-component` | `graphs-walks-and-connectivity` (207) | AA; path-connected graph/component Definition matched |
+| `def-countable` | `countability-and-uncountability` (18) | AA; finite/countably-infinite convention matched |
+| `def-equinumerous` | `countability-and-uncountability` (18) | AA; bijection and domination clauses matched |
+| `def-finite-cardinality` | `finite-counting-and-binomial-coefficients` (20) | AA; uniqueness/transport/cardinality clauses matched |
+| `def-finite-simple-graph` | `graphs-walks-and-connectivity` (207) | AA; finite simple graph convention matched |
+| `def-graph-adjacency-incidence-neighbourhood-and-degree` | `graphs-walks-and-connectivity` (207) | AA; adjacency/degree clauses matched |
+| `def-graph-deletion-contraction-minor-and-subdivision` | `graphs-walks-and-connectivity` (207) | AA; simple contraction, minor, subdivision clauses matched |
+| `def-graph-distance-and-girth` | `graphs-walks-and-connectivity` (207) | AA; girth and acyclic convention matched |
+| `def-graph-isomorphism-and-complement` | `graphs-walks-and-connectivity` (207) | AA; isomorphism/complement Definition matched |
+| `def-graph-walk-trail-path-and-cycle` | `graphs-walks-and-connectivity` (207) | AA; walk/path/cycle clauses matched |
+| `def-injection-surjection-bijection` | `relations-functions-and-quotients` (5.3) | AA; injective/bijective clauses matched |
+| `def-interior-closure-boundary-top` | `topological-spaces-and-continuity` (249) | AA; closure/frontier Definition matched |
+| `def-multigraph-loop-and-digraph` | `graphs-walks-and-connectivity` (207) | AA; loop/parallel-edge clauses matched |
+| `def-nat-order` | `construction-of-the-natural-numbers` (6) | LD; additive order Definition matched |
+| `def-nat-power` | `finite-counting-and-binomial-coefficients` (20) | AA; natural exponentiation recursion matched |
+| `def-natural-numbers` | `construction-of-the-natural-numbers` (6) | LD; von Neumann natural convention matched |
+| `def-ordered-field` | `foundations-of-the-real-numbers` (9) | AA; positive-cone order Definition matched |
+| `def-path-connected` | `connectedness` (253) | AA; path and path-connectedness clauses matched |
+| `def-petersen-graph` | `graphs-walks-and-connectivity` (207) | AA; disjoint-two-subset Definition matched |
+| `def-polygonal-path-and-polygonal-connectedness` | `the-topology-of-euclidean-space` (257) | AA; finite polygonal path Definition matched |
+| `def-proper-vertex-colouring-and-chromatic-number` | `graph-colouring` (215) | LD; proper-colouring/chromatic-number clauses matched |
+| `def-rational-power` | `roots-and-rational-powers` (16) | AA; positive-base rational power Definition matched |
+| `def-real-order` | `construction-of-r-via-cauchy-sequences` (7) | AA; real-order Definition matched |
+| `def-sequence` | `sequences-and-limits` (112) | AA; real sequence/subsequence clauses matched |
+| `def-standard-complete-bipartite-path-and-cycle-graphs` | `graphs-walks-and-connectivity` (207) | AA; complete/bipartite/cycle conventions matched |
+| `def-subgraph-induced-subgraph-and-spanning-subgraph` | `graphs-walks-and-connectivity` (207) | AA; subgraph/induced/spanning clauses matched |
+| `def-subspace-topology-top` | `topological-spaces-and-continuity` (249) | AA; trace and subspace clauses matched |
+| `def-sum-over-a-finite-index-set` | `finite-counting-and-binomial-coefficients` (20) | AA; finite reindexing and constant-sum clauses matched |
+| `def-tree-forest-and-leaf` | `trees-forests-and-spanning-trees` (209) | LD; forest/tree/leaf conventions matched |
+| `def-vertex-and-edge-connectivity` | `graphs-walks-and-connectivity` (207) | AA; cut/connectivity and small-graph conventions matched |
+| `lem-alternating-sequence` | `monotone-sequences-and-cauchy-completeness` (114) | AA; recursive parity partition Statement matched |
+| `lem-edge-deletion-in-a-tree` | `trees-forests-and-spanning-trees` (209) | AA; exact two-component Statement matched |
+| `lem-metrics-on-rn` | `metric-spaces` (116) | AA; `R^2` function-coordinate model and metric clauses matched |
+| `lem-nonempty-forest-has-low-degree-vertex` | `trees-forests-and-spanning-trees` (209) | AA; degree-at-most-one Statement matched |
+| `lem-of-q-dense` | `foundations-of-the-real-numbers` (9) | LD; Archimedean density Statement matched |
+| `lem-rational-power-monotone` | `roots-and-rational-powers` (16) | AA; monotonicity in base/exponent clauses matched |
+| `thm-binomial-closed-formula` | `finite-counting-and-binomial-coefficients` (20) | AA; natural identity and symmetry clauses matched |
+| `thm-binomial-theorem` | `finite-counting-and-binomial-coefficients` (20) | AA; real binomial identity matched |
+| `thm-bipartite-iff-no-odd-cycle` | `graphs-walks-and-connectivity` (207) | LD; opened, then rejected because “no triangle” is weaker than “no odd cycle” |
+| `thm-cardinality-of-a-set-of-functions` | `finite-counting-and-binomial-coefficients` (20) | LD; function-set count including empty cases matched |
+| `thm-connected-iff-has-spanning-tree` | `trees-forests-and-spanning-trees` (209) | AA; both directions matched |
+| `thm-double-counting` | `inclusion-exclusion-and-the-pigeonhole-principle` (22) | AA; row/column fibre identity matched |
+| `thm-forest-edge-component-count` | `trees-forests-and-spanning-trees` (209) | AA; null-inclusive edge/component identity matched |
+| `thm-handshake-lemma-for-finite-simple-graphs` | `graphs-walks-and-connectivity` (207) | LD; null-inclusive handshake identity matched |
+| `thm-induction-principle` | `construction-of-the-natural-numbers` (6) | LD; set and property forms matched |
+| `thm-menger-finite-directed-and-undirected-path-forms` | `matchings-covers-menger-and-network-flows` (213) | LD; finite undirected vertex form and nonadjacency hypothesis matched |
+| `thm-pascals-rule` | `finite-counting-and-binomial-coefficients` (20) | AA; unrestricted Pascal identity matched |
+| `thm-product-rule` | `finite-counting-and-binomial-coefficients` (20) | AA; two-factor and finite-family forms matched |
+| `thm-recursion` | `construction-of-the-natural-numbers` (6) | LD; existence-and-uniqueness recursion Statement matched |
+| `thm-sum-rule` | `finite-counting-and-binomial-coefficients` (20) | AA; disjoint finite union/partition forms matched |
+| `thm-the-strong-pigeonhole-principle` | `inclusion-exclusion-and-the-pigeonhole-principle` (22) | AA; counting and ceiling forms matched |
+| `thm-well-ordering-principle` | `construction-of-the-natural-numbers` (6) | LD; least-element Statement matched |
+
+The spliced `validate-plan.mjs` run reports no unresolved ids, item-level forward references, B-page dependencies, or cycles. `content-policy.mjs ... --manifest-only` reports 74 scoped items with zero errors and zero warnings. The validator's redundant-prerequisite notices for the plane page concern the four direct requirements supplied by the dispatch; they are not removed here.
 
 ## 11. Gate record and blockers
 
-Pending the final gate pass. No source-access, licensing, page-size, or mathematical blocker is currently known. The only proposed plan amendment is the direct `sequences-and-limits` requirement and the prose correction to the choice ledger; this Beta did not edit the plan.
+The direct gate receipts are green:
+
+- `node tools/validate-plan.mjs research/plan-spec.json`: exit 0; the live plan is acyclic and has no item-level cycles, forward references, B-page dependencies, or unresolved ids among its 176 pages with item lists.
+- Final-manifest in-memory splice through `validate-plan.mjs`: exit 0; the plan with these four pages substituted is acyclic and has no item-level cycles, forward references, B-page dependencies, or unresolved ids among 180 pages with item lists.
+- `node tools/depsource.mjs research/plan-spec.json`: exit 0; 16,688 dependencies resolve to published pages and zero are unresolved. Because the orchestrator has not yet performed the step-4 splice, the batch-specific supplement is the 60-file clause audit in section 10: 58 final external dependencies resolve to published earlier pages and two opened candidates were rejected.
+- `node tools/coverage-checklist.mjs research/frontier-10-batch-6.coverage.json`: exit 0; two A pages, 88 harvested headings, zero errors, zero warnings.
+- `node tools/content-policy.mjs research/frontier-10-batch-6.pages.json --manifest-only`: exit 0; 74 scoped items, zero errors, zero warnings.
+- Structural proof-contract check: 61 proof-bearing ids, 61 scope ids, and 61 contracts; no missing or extra ids, and every contract has citations, derivations, routine steps, all eight boundary cases, and a finite-smoke array. Strict item-file checking belongs to step 5, after those files exist.
+
+The required aggregate command `node tools/gates.mjs --step 2 --run frontier-10` exits 1 in this execution environment: each of its three internal `spawnSync /usr/bin/node` calls is denied with `EPERM`. The wrapper therefore prints `STEP 2 BLOCKED` even though `validate-plan.mjs`, `depsource.mjs`, and `coverage-checklist.mjs` each exit 0 when invoked directly above. The owner prohibited permission prompts, so none was made and no normative tool was edited to evade the sandbox. This wrapper-level runtime restriction is the sole blocker; there is no source-access, licensing, page-size, dependency, or mathematical blocker.
+
+The only proposed plan amendment is the direct `sequences-and-limits` requirement and the prose correction to the choice ledger; this Beta did not edit the plan.

@@ -1,0 +1,74 @@
+# Step-5 authoring brief for run `frontier-10`
+
+> **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
+> — binding on you.** The owner's words: *"Do not ask and do not let any agents
+> ask for shell command permissions, edit permissions, git permissions, or any
+> permissions whatsoever."* Use already-allowed workspace commands and
+> non-escalated forms; pass `dangerouslyDisableSandbox: true` on every Bash call
+> where your runtime exposes it. If an indispensable operation has no
+> escalation-free form, **record a blocker in your notes** — never raise a prompt.
+
+You are the **Beta who scaffolded this batch, returning as its step-5 author**
+(owner, 2026-07-31: the scaffolding Beta personally authors its own batch).
+`briefs/authoring.md` is your **base contract in full**; this file pins the run.
+
+## Run identity
+
+Everywhere the base contract says `research/level<n>-…`, read
+`research/frontier-10-…`. Your batch number is in the dispatch section below.
+Gates run as `node tools/gates.mjs --step 5 --run frontier-10`.
+
+Your writable artifacts, and nothing else:
+
+- `items/<id>.md` — the items your own manifest declares, and only those
+- `library/<category>/<page-id>.md` — your own pages (**batch 8: see below**)
+- `research/frontier-10-batch-<i>.notes.md`
+- `research/frontier-10-batch-<i>.coverage.json`
+- `research/frontier-10-batch-<i>.proof-contracts.json`
+
+## Author exactly what step 3 and 4 settled
+
+`research/frontier-10-batch-<i>.pages.json` is authoritative for ids, kinds,
+titles, reading order and the baseline dependency list — it has been spliced into
+`research/plan-spec.json` and adjudicated. Alpha's
+`research/frontier-10-alpha-step3-scaffold-review.md` may have added required
+results to your pair; **those are not optional**, and Alpha re-checks them at
+step 6.
+
+## The four rules that will fail your batch if you ignore them
+
+1. **Keep `coverage.json` true of what you actually wrote.** Authoring
+   legitimately drops, renames or merges an item; when it does, that heading's
+   disposition changes with it. An `included` row naming an item you did not
+   write is a step-6 gate failure. Re-run
+   `node tools/coverage-checklist.mjs research/frontier-10-batch-<i>.coverage.json`.
+2. **Build the machinery, do not drop.** A missing prerequisite is a thing to
+   write. If that pushes the A page over **60 items**, you may not prune — stop
+   and report, because a split at this stage is an orchestrator decision.
+3. **No applied `\iota(n)`.** Write the natural number.
+   `content-policy.mjs` fails the batch with `notation-iota-applied`. Bare
+   `\iota` for a universal-property inclusion is unaffected; legacy items you
+   cite still use the old form and are not your scope.
+4. **Page summaries.** Every A summary is exactly two nonempty prose paragraphs
+   under 150 words each: background and used declared dependencies first; the
+   page's own definitions, theorems and their logical progression second. B pages
+   carry no authored summary body.
+
+Everything is `status: draft`, `origin: session`, with both `provenance.statement`
+and `provenance.proof` on every mathematical-content item and a rationale for each
+in your notes.
+
+## Batch 8 only — enriching a published pair
+
+`group-actions-and-cayleys-theorem` and its companion are **published**. Do
+**not** edit those two page files. Author every new item as `status: draft` and
+stage the additions to their `items:`/`examples:` lists in
+`research/frontier-10-published-amendments.md`. The orchestrator applies them in
+the single publishing commit, after the owner audit. `depcheck` raises
+`draft-on-published-page` if you list a draft item on a published page.
+
+## Finish
+
+Leave `node tools/gates.mjs --step 5 --run frontier-10` green, then report:
+items authored, harvest yield against your checklist, every boundary case
+disposed, and any blocker stated plainly.

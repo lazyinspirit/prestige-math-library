@@ -29,6 +29,7 @@
     "lem-polygonal-arc-does-not-separate-the-plane",
     "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
     "lem-face-containment-under-plane-subgraphs",
+    "lem-edge-is-a-bridge-iff-it-lies-on-no-cycle",
     "lem-plane-edge-face-incidence",
     "prop-plane-forest-has-one-face",
     "lem-equal-plane-face-boundaries-force-a-cycle",
@@ -349,7 +350,7 @@
       ],
       "routine_steps": [],
       "boundaries": [
-        {"case":"empty","status":"not_applicable","reason":"A positive finite colour count and a nonempty initial interval are used."},
+        {"case":"empty","status":"not_applicable","reason":"A positive finite colour count and the positive initial interval $\\{1,\\ldots,N\\}$ are used."},
         {"case":"zero","status":"checked","evidence":"Step 2.1 uses strict vertex inequalities, so $x,y,z$ are positive and zero never appears."},
         {"case":"one","status":"checked","evidence":"The one-colour case is included by step 1.1."},
         {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits $x=y$; distinctness of the summands is not claimed."},
@@ -403,7 +404,7 @@
       "citations": [{"fact":"L1","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["1.1"]},{"fact":"F1","source":"def-sequence","source_section":"Definition","quote":"A **sequence of reals** is a function $x : \\mathbb{N} \\to \\mathbb{R}$.","uses":["1.1","2.1"]}],
       "derivations": [
         {"id":"pair-colouring","claim":"Colour $i<j$ according as $x_i\\le x_j$ or $x_i>x_j$ and apply L1 to obtain an infinite homogeneous index set.","step":"1.1","inputs":["L1","F1","given","definitions"]},
-        {"id":"subsequence","claim":"Enumerate that subset increasingly and translate its constant pair colour into a nondecreasing or strictly decreasing subsequence.","step":"2.1","inputs":["F1","step 1.1"]}
+        {"id":"subsequence","claim":"Enumerate that subset increasingly and translate its constant pair colour into a nondecreasing or strictly decreasing, hence nonincreasing, subsequence.","step":"2.1","inputs":["F1","step 1.1"]}
       ],
       "routine_steps": [],
       "boundaries": [
@@ -473,6 +474,799 @@
         {"case":"nonempty-choice","status":"not_applicable","reason":"The tree is explicit and the nonexistence proof makes no sequence of choices."},
         {"case":"iff-forward","status":"not_applicable","reason":"The counterexample sharpens one hypothesis rather than proving an iff."},
         {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-polygonal-ray-general-position": {
+      "citations": [{"fact":"L1","source":"lem-of-q-dense","source_section":"Statement","quote":"for any $x < y$ in $F$ there is a rational $q$","uses":["1.1"]},{"fact":"F1","source":"def-polygonal-path-and-polygonal-connectedness","source_section":"Definition","quote":"a finite list of vertices $v_0,\\ldots,v_m\\in A$","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"finite-bad-directions","claim":"For a point off a polygon, list the finitely many ray directions hitting a vertex, overlapping an edge line, or causing a nontransverse contact.","step":"1.1","inputs":["L1","F1","given","definitions"]},
+        {"id":"choose-good-ray","claim":"Choose a direction outside the finite bad set and verify that its intersections are finite, nonvertex, and transverse.","step":"2.1","inputs":["F1","step 1.1","construct"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A polygon has a nonempty finite edge set by definition."},
+        {"case":"zero","status":"not_applicable","reason":"The ambient space is $\\mathbb R^2$ and the point lies off the polygon."},
+        {"case":"one","status":"not_applicable","reason":"A polygon has at least three distinct vertices."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 excludes collinear overlap, vertex hits, and tangent contacts separately."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 verifies that no polygon vertex is an intersection point."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 chooses one direction from the explicitly nonempty complement of a finite set."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an existence statement."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse characterisation of good rays is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-polygonal-crossing-parity-is-locally-constant": {
+      "citations": [{"fact":"L1","source":"lem-polygonal-ray-general-position","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every point off a polygon admits a ray meeting it transversely in finitely many nonvertex points.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"stable-neighbourhood","claim":"Around a point and one general-position ray, choose positive separation from every vertex and nonincident edge and preserve each transverse intersection under a small displacement.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"parity-invariance","claim":"Pair any intersections created or destroyed away from the stable transverse crossings and conclude the crossing count changes by an even number.","step":"2.1","inputs":["L1","step 1.1","cases"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The polygon and its finite edge set are nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 includes a point whose chosen ray has zero crossings."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 handles a ray with one transverse crossing."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 excludes vertices and tangencies before the local comparison."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 keeps all intersection points away from polygon endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Only one general-position ray and one sufficiently small explicit neighbourhood are selected."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is a local constancy assertion."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-polygonal-jordan-curve": {
+      "citations": [{"fact":"L1","source":"lem-polygonal-crossing-parity-is-locally-constant","source_section":"Planned Statement (synchronize at Step 5)","quote":"The parity of transverse ray crossings with a polygon is locally constant on its complement.","uses":["1.1","2.1"]},{"fact":"L2","source":"cor-components-of-open-subsets-of-rn-are-polygonally-connected","source_section":"Statement","quote":"Every connected component of an open subset $U\\subseteq\\mathbb{R}^n$ is open in $\\mathbb{R}^n$ and polygonally connected.","uses":["3.1"]}],
+      "derivations": [
+        {"id":"parity-classes","claim":"Define even and odd crossing classes on the complement and use L1 to prove each is open and constant on connected components.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"two-nonempty","claim":"Show points sufficiently close on opposite sides of an edge have opposite parity, while all sufficiently distant points have even parity.","step":"2.1","inputs":["L1","step 1.1","local-geometry"]},
+        {"id":"connected-classes","claim":"Use polygonal paths and L2 to reduce any two points of equal parity to one another without crossing the polygon, proving there are exactly two regions.","step":"3.1","inputs":["L2","step 1.1","step 2.1"]},
+        {"id":"frontier","claim":"Prove every polygon point is approached from both parity regions and no off-polygon point is on either frontier.","step":"4.1","inputs":["step 1.1","step 2.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A polygon is a nonempty simple closed polygonal curve."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 uses the zero-crossing unbounded region."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 constructs a local one-crossing point on the opposite side of an edge."},
+        {"case":"degenerate","status":"checked","evidence":"The planned definition excludes self-intersections, repeated nonterminal vertices, and zero-length edges before step 1.1."},
+        {"case":"endpoints","status":"checked","evidence":"Step 4.1 handles polygon vertices as well as relative interiors of edges."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All paths and local points are selected from one finite polygonal configuration."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is a separation and frontier assertion, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No characterisation of polygons by two complementary regions is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-polygonal-arc-does-not-separate-the-plane": {
+      "citations": [{"fact":"F1","source":"def-polygonal-path-and-polygonal-connectedness","source_section":"Definition","quote":"A **polygonal path in $A$** from $x$ to $y$ is a path $\\gamma:[0,1]\\to A$","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"general-position-path","claim":"Join two off-arc points by a polygonal path in general position with finitely many transverse crossings and no arc-vertex hits.","step":"1.1","inputs":["F1","given","definitions"]},
+        {"id":"detours","claim":"Replace each crossing by a sufficiently small polygonal detour around the finite arc endpoint side, choosing disjoint detour neighbourhoods.","step":"2.1","inputs":["F1","step 1.1","construct"]},
+        {"id":"connect","claim":"Concatenate the altered segments to obtain a polygonal path in the arc complement.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A polygonal arc has at least two distinct endpoints."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 allows the original joining path to have zero crossings, in which case no detour is needed."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 works for a single crossing and a single detour."},
+        {"case":"degenerate","status":"checked","evidence":"The arc definition excludes self-intersection and step 1.1 excludes tangencies and vertex hits."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 treats crossings near either endpoint without closing the arc into a separator."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Only finitely many disjoint local detours are chosen."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma asserts connectedness of one complement."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse characterisation of arcs is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-plane-graph-faces-are-finite-with-one-unbounded-face": {
+      "citations": [{"fact":"L1","source":"thm-polygonal-jordan-curve","source_section":"Planned Statement (synchronize at Step 5)","quote":"The complement of a polygon has exactly two regions, each with frontier the polygon.","uses":["2.1"]},{"fact":"L2","source":"def-bounded-set","source_section":"Definition","quote":"$S$ is **bounded** if it is both bounded above and bounded below","uses":["1.1","3.1"]}],
+      "derivations": [
+        {"id":"bounded-drawing","claim":"Enclose the finite polygonal drawing in one large rectangle or disk and identify its connected exterior as a single candidate unbounded face.","step":"1.1","inputs":["L2","given","definitions"]},
+        {"id":"edge-induction","claim":"Add edges one at a time: a bridge-like polygonal arc does not split a face, while an arc closing a polygon splits exactly one face by L1.","step":"2.1","inputs":["L1","step 1.1","induction"]},
+        {"id":"finite-unique","claim":"Conclude finiteness of faces and prove every unbounded complementary point lies in the one exterior component.","step":"3.1","inputs":["L2","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 treats the null plane graph, whose complement is its sole unbounded face."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 begins with zero edges."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 handles a single vertex or single edge, neither of which creates a bounded face."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 separates face-preserving bridge insertion from cycle-closing insertion."},
+        {"case":"endpoints","status":"checked","evidence":"The plane-graph convention and step 2.1 require an inserted edge to meet the existing drawing only at endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The edge induction is over one fixed finite edge set."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is not biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse face criterion is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-face-containment-under-plane-subgraphs": {
+      "citations": [{"fact":"L1","source":"def-connected-component-and-quasicomponent","source_section":"Definition","quote":"$C(x)$ is *the largest connected subset of $X$ containing $x$*","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"complement-inclusion","claim":"A plane subgraph has a larger complement; any original face is a connected subset of that larger complement.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"component-maximality","claim":"If a subgraph face meets an original face, use L1 in the subgraph complement to contain the entire original face.","step":"2.1","inputs":["L1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 applies when the subgraph is empty and its unique face is the plane."},
+        {"case":"zero","status":"checked","evidence":"The zero-edge subgraph case is included in step 1.1."},
+        {"case":"one","status":"checked","evidence":"A one-face original graph is included without a separate assumption."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 requires actual intersection; disjoint faces impose no containment claim."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The argument fixes a given meeting point and uses component maximality."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only the containment implication is asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Containment does not imply meeting in a unique way and no converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-edge-is-a-bridge-iff-it-lies-on-no-cycle": {
+      "citations": [{"fact":"F1","source":"def-bridge-in-a-graph","source_section":"Planned Statement (synchronize at Step 5)","quote":"A bridge is an edge whose deletion increases the number of connected components.","uses":["1.1","2.1"]},{"fact":"F2","source":"def-graph-walk-trail-path-and-cycle","source_section":"Definition","quote":"A **cycle** is a closed walk","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"cycle-not-bridge","claim":"If an edge lies on a cycle, the rest of that cycle supplies a path between its endpoints after deletion, so every old path using the edge can be rerouted and the component count does not increase.","step":"1.1","inputs":["F1","F2","given","definitions"]},
+        {"id":"not-bridge-gives-cycle","claim":"If deletion does not increase the component count, its endpoints remain joined by a path avoiding the edge; adjoining the edge gives a cycle containing it.","step":"2.1","inputs":["F1","F2","step 1.1"]},
+        {"id":"iff","claim":"Take contrapositives where needed and combine the two implications for every edge, including edges in disconnected graphs componentwise.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement fixes an edge, so the graph has a nonempty edge set."},
+        {"case":"zero","status":"not_applicable","reason":"An edgeless graph supplies no edge to test."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 covers a one-edge component: deletion separates its endpoints and no cycle exists."},
+        {"case":"degenerate","status":"checked","evidence":"Step 3.1 applies componentwise when the ambient graph is disconnected."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1–2.1 track both endpoints of the deleted edge explicitly."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 chooses one path from a fixed finite connected component after deletion."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves a cycle edge is not a bridge, equivalently a bridge lies on no cycle."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.1 proves a nonbridge lies on a cycle, equivalently an edge on no cycle is a bridge."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-plane-edge-face-incidence": {
+      "citations": [{"fact":"L1","source":"thm-polygonal-jordan-curve","source_section":"Planned Statement (synchronize at Step 5)","quote":"The complement of a polygon has exactly two regions, each with frontier the polygon.","uses":["1.1","2.1"]},{"fact":"L2","source":"lem-edge-is-a-bridge-iff-it-lies-on-no-cycle","source_section":"Planned Statement (synchronize at Step 5)","quote":"An edge is a bridge if and only if it lies on no cycle.","uses":["3.1"]}],
+      "derivations": [
+        {"id":"whole-edge-frontier","claim":"Use a small rectangle about the relative interior of an edge to show its two local sides lie in faces and that frontier membership propagates along the entire open edge.","step":"1.1","inputs":["L1","given","local-geometry"]},
+        {"id":"cycle-two-sides","claim":"If the edge lies on a cycle, apply L1 to the polygonal cycle and prove its two local sides belong to distinct faces.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"bridge-one-face","claim":"If the edge lies on no cycle, use the bridge/path criterion represented by L2 and an arc detour to join its two local sides in one face.","step":"3.1","inputs":["L2","step 1.1","cases"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement fixes an edge, so the graph is nonempty."},
+        {"case":"zero","status":"not_applicable","reason":"A zero-edge graph supplies no edge to test."},
+        {"case":"one","status":"checked","evidence":"Step 3.1 covers the one-edge graph, where the edge borders the sole face on both sides."},
+        {"case":"degenerate","status":"checked","evidence":"Steps 2.1 and 3.1 are the exhaustive cycle-edge versus bridge cases."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 proves propagation from the edge interior and then adds both endpoints to the frontier statement."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The local side points and finite cycle are selected within one fixed embedding."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 2.1 proves that lying on a cycle gives two incident faces."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 3.1 proves that an edge on no cycle has only one incident face, yielding the converse."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-plane-forest-has-one-face": {
+      "citations": [{"fact":"L1","source":"thm-forest-edge-component-count","source_section":"Statement","quote":"$|V(F)|=|E(F)|+c(F)$","uses":["1.1"]},{"fact":"L2","source":"lem-plane-edge-face-incidence","source_section":"Planned Statement (synchronize at Step 5)","quote":"A bridge borders one face, counted on both local sides.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"low-degree","claim":"Use the forest count or leaf lemma to choose an isolated vertex or leaf and delete it.","step":"1.1","inputs":["L1","given","induction"]},
+        {"id":"face-preservation","claim":"Show deletion or insertion of an isolated point or pendant edge does not change the unique complementary region, using L2 for the pendant edge.","step":"2.1","inputs":["L2","step 1.1"]},
+        {"id":"induction","claim":"Induct from the null forest to conclude every plane forest has one face.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 3.1 starts with the null forest and its one complementary face."},
+        {"case":"zero","status":"checked","evidence":"Step 3.1 includes every edgeless forest."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 handles a single isolated vertex and a single pendant edge."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 separates isolated and degree-one vertices."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 treats both endpoints of the inserted pendant polygonal edge."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The induction chooses one vertex from a fixed finite nonnull forest."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The proposition is not biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Graphs with one face need not be forests under broader drawing conventions; no converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-equal-plane-face-boundaries-force-a-cycle": {
+      "citations": [{"fact":"L1","source":"lem-plane-edge-face-incidence","source_section":"Planned Statement (synchronize at Step 5)","quote":"A cycle edge borders two faces and a bridge borders one face.","uses":["1.1"]},{"fact":"L2","source":"thm-polygonal-jordan-curve","source_section":"Planned Statement (synchronize at Step 5)","quote":"The complement of a polygon has exactly two regions, each with frontier the polygon.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"all-boundary-edges-cyclic","claim":"A common boundary of two distinct faces contains no bridge by L1, so every boundary edge lies on a cycle.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"exclude-branches-chords","claim":"Choose a boundary cycle and use L2 to show any extra edge, chord, or attached component would create a different face boundary.","step":"2.1","inputs":["L2","step 1.1"]},
+        {"id":"conclude-cycle","claim":"Connectedness and step 2.1 force the entire graph to be that cycle.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Two distinct faces with a common boundary require a nonempty connected graph."},
+        {"case":"zero","status":"not_applicable","reason":"An edgeless connected graph has only one face."},
+        {"case":"one","status":"not_applicable","reason":"A one-vertex graph has only one face."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 excludes chords, repeated boundary vertices, and attached branches."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 includes vertices of the chosen boundary cycle."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 chooses one cycle from a fixed finite nonempty boundary subgraph."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only the implication from equal boundaries is asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Although a cycle has two faces with the same boundary, that converse is not needed in the planned statement."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-face-boundaries-in-two-connected-plane-graphs": {
+      "citations": [{"fact":"L1","source":"cor-whitney-k-connected-path-characterisation","source_section":"Statement","quote":"every two distinct vertices of $G$ are joined by at least $k$ internally vertex-disjoint paths","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"boundary-walk","claim":"Take the closed facial boundary walk supplied by edge incidence and suppose it repeats a vertex.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"cut-vertex","claim":"Use the cyclic portions of the repeated walk and planar separation to show the repeated vertex separates two graph portions, contradicting two-connectivity via L1.","step":"2.1","inputs":["L1","step 1.1","separation"]},
+        {"id":"cycle","claim":"Conclude that the facial boundary walk is a simple cycle.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A two-connected graph has at least three vertices under the library convention."},
+        {"case":"zero","status":"not_applicable","reason":"A two-connected graph is not edgeless."},
+        {"case":"one","status":"not_applicable","reason":"The connectivity hypothesis excludes one-vertex graphs."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 rules out repeated boundary vertices and bridge repetitions."},
+        {"case":"endpoints","status":"not_applicable","reason":"A facial boundary walk is closed and has no interval endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof fixes one face and a repeated boundary vertex under contradiction."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The proposition is a one-way consequence of two-connectivity."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Cycle facial boundaries do not by themselves characterise two-connectivity in the claimed form."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-face-boundaries-in-three-connected-plane-graphs": {
+      "citations": [{"fact":"L1","source":"prop-face-boundaries-in-two-connected-plane-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every face of a two-connected plane graph is bounded by a cycle.","uses":["1.1"]},{"fact":"L2","source":"cor-whitney-k-connected-path-characterisation","source_section":"Statement","quote":"every two distinct vertices of $G$ are joined by at least $k$ internally vertex-disjoint paths","uses":["2.1","3.1"]}],
+      "derivations": [
+        {"id":"facial-properties","claim":"Use L1 and three-connectivity to prove every facial cycle is induced and deletion of its vertices leaves the remaining graph connected when nonempty.","step":"1.1","inputs":["L1","L2","given","definitions"]},
+        {"id":"nonfacial-separates","claim":"For an induced cycle that is not facial, find graph material on both polygonal sides and use L2 to show deletion of the cycle disconnects it.","step":"2.1","inputs":["L2","step 1.1","separation"]},
+        {"id":"equivalence","claim":"Combine the two directions, with the spanning-cycle boundary case stated explicitly, to characterise face boundaries.","step":"3.1","inputs":["L2","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Three-connected graphs have at least four vertices."},
+        {"case":"zero","status":"not_applicable","reason":"No zero-order graph satisfies the hypothesis."},
+        {"case":"one","status":"not_applicable","reason":"No one-vertex graph satisfies the hypothesis."},
+        {"case":"degenerate","status":"checked","evidence":"Step 3.1 states how a spanning cycle's empty deletion is read under the connectedness convention."},
+        {"case":"endpoints","status":"not_applicable","reason":"Cycles have no endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof fixes one finite cycle and components determined by it."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves every facial boundary has the two graph-theoretic properties."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 2.1–3.1 prove every induced nonseparating cycle is facial."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-maximal-plane-triangulation-characterisation": {
+      "citations": [{"fact":"L1","source":"thm-polygonal-jordan-curve","source_section":"Planned Statement (synchronize at Step 5)","quote":"The complement of a polygon has exactly two regions, each with frontier the polygon.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"nontriangle-add-edge","claim":"If a facial boundary has at least four distinct boundary vertices or a repeated portion, draw a new polygonal chord inside the region, contradicting maximality.","step":"1.1","inputs":["L1","given","definitions","construct"]},
+        {"id":"triangle-blocks-edge","claim":"If every face has triangular boundary, show any new edge between nonadjacent vertices would have to lie in one face and then its endpoints would already be adjacent.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"iff","claim":"Handle the order-three and disconnected exclusions and combine both implications.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The proposition assumes graph order at least three."},
+        {"case":"zero","status":"not_applicable","reason":"The order hypothesis excludes zero vertices."},
+        {"case":"one","status":"not_applicable","reason":"The order hypothesis excludes one vertex."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 treats repeated facial walks and step 3.1 discharges disconnected embeddings."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 chooses chord endpoints among distinct boundary vertices and keeps the chord interior inside the face."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 selects two nonadjacent vertices from one fixed finite facial boundary."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves maximal implies triangular faces."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.1 proves triangular faces imply maximality."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-euler-formula-for-connected-plane-graphs": {
+      "citations": [{"fact":"L1","source":"thm-connected-iff-has-spanning-tree","source_section":"Statement","quote":"A finite graph $G$ is connected if and only if it has a spanning tree.","uses":["1.1"]},{"fact":"L2","source":"lem-plane-edge-face-incidence","source_section":"Planned Statement (synchronize at Step 5)","quote":"A cycle edge borders two faces and a bridge borders one face.","uses":["2.1","3.1"]}],
+      "derivations": [
+        {"id":"tree-base","claim":"Choose a spanning tree using L1 and use the one-face forest proposition to verify $|V|-|E|+|F|=2$ for it.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"add-cycle-edges","claim":"Add each remaining edge in its fixed embedding; L2 and polygonal separation show the edge count and face count each increase by one.","step":"2.1","inputs":["L2","step 1.1","induction"]},
+        {"id":"alternative-deletion","claim":"Record equivalently that deleting a cycle edge decreases edges and faces by one while deleting a bridge changes components and is outside the connected induction step.","step":"3.1","inputs":["L2","step 2.1"]},
+        {"id":"conclude-euler","claim":"The invariant remains two through every edge addition, proving Euler's formula for the original connected plane graph.","step":"4.1","inputs":["step 1.1","step 2.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The library's connected graph convention excludes the null graph."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 covers a one-vertex connected graph with zero edges and one face."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 verifies the one-vertex tree exactly."},
+        {"case":"degenerate","status":"checked","evidence":"Steps 2.1–3.1 distinguish cycle edges from bridges and do not assume every edge splits a face."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint is involved beyond polygonal edge endpoints already built into the plane-graph definition."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 chooses one spanning tree from a nonempty finite family; no varying infinite choice is used."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Euler's formula is an equality, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Satisfying the numerical equality does not characterise connected plane graphs and no converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-euler-formula-for-disconnected-plane-graphs": {
+      "citations": [{"fact":"L1","source":"thm-euler-formula-for-connected-plane-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"For every connected plane graph, $|V|-|E|+|F|=2$.","uses":["1.1"]},{"fact":"L2","source":"cor-connected-components-partition-the-vertex-set","source_section":"Statement","quote":"The vertex sets $C_G(v)$ of the connected components of a graph $G$ are nonempty, cover $V(G)$, and any two are equal or disjoint.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"component-addition","claim":"Order the components from L2 and add them one at a time; L1 contributes two for each component while the common unbounded face is counted once globally.","step":"1.1","inputs":["L1","L2","given","induction"]},
+        {"id":"formula","claim":"Sum vertices and edges componentwise and track the face count to derive $|V|-|E|+|F|=1+c$.","step":"2.1","inputs":["L2","step 1.1","algebra"]},
+        {"id":"null","claim":"Check the null plane graph separately: zero vertices, zero edges, one face, and zero components.","step":"3.1","inputs":["step 2.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 3.1 verifies the null graph explicitly."},
+        {"case":"zero","status":"checked","evidence":"Step 3.1 handles zero components, vertices, and edges."},
+        {"case":"one","status":"checked","evidence":"At $c=1$, step 2.1 reduces exactly to L1."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 accounts for the single shared unbounded face rather than summing it repeatedly."},
+        {"case":"endpoints","status":"not_applicable","reason":"No ordered interval endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The finite component family may be enumerated without any infinite choice principle."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is a numerical equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-plane-face-handshake-by-girth": {
+      "citations": [{"fact":"L1","source":"thm-double-counting","source_section":"Statement","quote":"$\\sum_{x \\in X}\\lvert R_x\\rvert \\;=\\; \\lvert R\\rvert \\;=\\; \\sum_{y \\in Y}\\lvert R^{y}\\rvert$","uses":["1.1"]},{"fact":"L2","source":"lem-plane-edge-face-incidence","source_section":"Planned Statement (synchronize at Step 5)","quote":"Each edge contributes two local face sides; a bridge contributes twice to its single facial boundary walk.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"face-handshake","claim":"Double-count edge sides incident with faces using L1 and L2 to prove that the sum of facial boundary-walk lengths is $2|E|$.","step":"1.1","inputs":["L1","L2","given","definitions"]},
+        {"id":"lower-each-face","claim":"Use the hypothesis that every facial boundary walk has length at least $g$ and sum the inequalities to get $g|F|\\le2|E|$.","step":"2.1","inputs":["L2","step 1.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The stated lower face-length hypothesis is used on a connected nonnull plane graph."},
+        {"case":"zero","status":"checked","evidence":"The planned statement notes separately when $g=0$ makes the inequality tautological."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 covers a one-face graph and counts every bridge twice."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 is formulated for boundary walks, so bridges and repeated vertices are included."},
+        {"case":"endpoints","status":"not_applicable","reason":"Facial boundary walks are closed."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof double-counts one fixed finite incidence relation."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only the inequality implication is asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The numerical inequality does not force each facial length bound and no converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-planar-simple-graph-edge-bound": {
+      "citations": [{"fact":"L1","source":"thm-euler-formula-for-connected-plane-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"For every connected plane graph, $|V|-|E|+|F|=2$.","uses":["1.1"]},{"fact":"L2","source":"lem-plane-face-handshake-by-girth","source_section":"Planned Statement (synchronize at Step 5)","quote":"If every facial boundary walk has length at least $g$, then $g|F|\\le2|E|$.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"connected-bound","claim":"For a connected simple planar graph of order at least three, show facial boundary length is at least three, combine L1 and L2, and solve for $|E|$.","step":"1.1","inputs":["L1","L2","given","algebra"]},
+        {"id":"disconnected-bound","claim":"Add noncrossing edges between components or sum the component bounds to extend the inequality to disconnected graphs without changing $n$.","step":"2.1","inputs":["step 1.1","construct"]},
+        {"id":"equality","claim":"Use the face-handshake equality case and Euler to prove equality occurs precisely for a triangulation in the maximal-plane setting.","step":"3.1","inputs":["L1","L2","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The corollary explicitly assumes $n\\ge3$."},
+        {"case":"zero","status":"not_applicable","reason":"Zero vertices are outside the stated range."},
+        {"case":"one","status":"not_applicable","reason":"One vertex is outside the stated range."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 handles disconnected graphs and forests without pretending every face has a cycle boundary."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 verifies the smallest permitted order $n=3$."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Only a finite connecting-edge construction is used."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 3.1 proves triangulation gives equality."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 3.1 proves equality forces every facial boundary length to be three in the applicable maximal embedding."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-triangle-free-planar-edge-bound": {
+      "citations": [{"fact":"L1","source":"thm-euler-formula-for-connected-plane-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"For every connected plane graph, $|V|-|E|+|F|=2$.","uses":["1.1"]},{"fact":"L2","source":"lem-plane-face-handshake-by-girth","source_section":"Planned Statement (synchronize at Step 5)","quote":"If every facial boundary walk has length at least $g$, then $g|F|\\le2|E|$.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"girth-four","claim":"After separating forest and bridge blocks, prove every cyclic facial boundary in a triangle-free simple plane graph has length at least four.","step":"1.1","inputs":["L1","L2","given","definitions"]},
+        {"id":"solve","claim":"Combine Euler with $4|F|\\le2|E|$ and solve for $|E|\\le2n-4$.","step":"2.1","inputs":["L1","L2","step 1.1","algebra"]},
+        {"id":"disconnected","claim":"Extend the result over components and check forests separately, retaining the stated $n\\ge3$ range.","step":"3.1","inputs":["step 2.1","cases"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The result assumes $n\\ge3$."},
+        {"case":"zero","status":"not_applicable","reason":"Zero vertices lie outside the stated range."},
+        {"case":"one","status":"not_applicable","reason":"One vertex lies outside the stated range."},
+        {"case":"degenerate","status":"checked","evidence":"Steps 1.1 and 3.1 treat forests, bridges, and disconnected graphs separately."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 checks $n=3$ explicitly."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The argument is finite and componentwise."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only a necessary edge bound is asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The inequality is not sufficient for planarity or triangle-freeness."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-planar-graph-has-low-degree-vertex": {
+      "citations": [{"fact":"L1","source":"cor-planar-simple-graph-edge-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges.","uses":["1.1"]},{"fact":"L2","source":"thm-handshake-lemma-for-finite-simple-graphs","source_section":"Statement","quote":"$\\sum_{v\\in V}\\deg_G(v)=2|E|$","uses":["1.1"]}],
+      "derivations": [
+        {"id":"small-orders","claim":"Check nonnull planar graphs of order one and two directly.","step":"1.1","inputs":["L1","L2","given","definitions"]},
+        {"id":"average-degree","claim":"For $n\\ge3$, assume every degree is at least six, apply L2 and contradict L1.","step":"2.1","inputs":["L1","L2","step 1.1","contradiction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The corollary assumes a nonnull graph so a vertex can be concluded."},
+        {"case":"zero","status":"not_applicable","reason":"The zero-vertex graph is explicitly excluded."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 gives degree zero in the one-vertex graph."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 includes edgeless and disconnected nonnull graphs."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 bridges the small orders before L1's $n\\ge3$ hypothesis."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Contradiction proves existence in one finite vertex set."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is not biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"A low-degree vertex does not imply planarity."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-k-five-and-k-three-three-are-nonplanar": {
+      "citations": [{"fact":"L1","source":"cor-complete-graph-edge-count","source_section":"Statement","quote":"the complete graph $K_V$ has exactly $\\binom n2$ edges","uses":["1.1"]},{"fact":"L2","source":"cor-planar-simple-graph-edge-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges.","uses":["1.1"]},{"fact":"L3","source":"cor-triangle-free-planar-edge-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every triangle-free simple planar graph with $n\\ge3$ vertices has at most $2n-4$ edges.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"k5","claim":"Compute $|E(K_5)|=10$ using L1 and contradict L2's maximum of nine under a hypothetical plane embedding.","step":"1.1","inputs":["L1","L2","given","arithmetic"]},
+        {"id":"k33","claim":"Compute $|E(K_{3,3})|=9$, note bipartiteness and hence triangle-freeness, and contradict L3's maximum of eight.","step":"2.1","inputs":["L3","step 1.1","definitions","arithmetic"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Both fixed graphs are nonempty."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"Neither graph has order one."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 uses the triangle-free bound rather than the insufficient general bound for $K_{3,3}$."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Both graphs and all counts are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary proves two fixed nonplanarity claims."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No obstruction characterisation is claimed yet."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-planar-graphs-have-no-kuratowski-subdivision": {
+      "citations": [{"fact":"L1","source":"cor-k-five-and-k-three-three-are-nonplanar","source_section":"Planned Statement (synchronize at Step 5)","quote":"$K_5$ and $K_{3,3}$ are nonplanar.","uses":["2.1"]},{"fact":"F1","source":"def-graph-deletion-contraction-minor-and-subdivision","source_section":"Definition","quote":"A **subdivision** repeats this operation zero or more times.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"subdivision-invariance","claim":"Suppress degree-two subdivision vertices in a hypothetical plane drawing to show that planarity of a subdivision implies planarity of the original graph.","step":"1.1","inputs":["F1","given","construct"]},
+        {"id":"contradiction","claim":"A planar subgraph is planar, so a planar graph containing either subdivision would contradict L1 after step 1.1.","step":"2.1","inputs":["L1","F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The two obstruction graphs and all their subdivisions are nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 includes zero subdivisions, recovering the original obstruction itself."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 explicitly suppresses one inserted degree-two vertex before iterating."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 preserves the simple polygonal drawing when suppressing a degree-two vertex."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 joins the two incident polygonal arcs at the suppressed vertex without altering their original endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Only finitely many subdivision vertices are suppressed."},
+        {"case":"iff-forward","status":"not_applicable","reason":"This corollary proves only the easy obstruction direction."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The hard converse is scaffolded later as Kuratowski–Wagner."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-maximally-planar-edge-characterisation": {
+      "citations": [{"fact":"L1","source":"cor-planar-simple-graph-edge-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges, with equality for a triangulation.","uses":["1.1","2.1"]},{"fact":"L2","source":"prop-maximal-plane-triangulation-characterisation","source_section":"Planned Statement (synchronize at Step 5)","quote":"A plane graph of order at least three is maximal exactly when every face is triangular.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"maximal-equality","claim":"Choose a maximal plane embedding, apply L2, and combine Euler/face handshake to obtain exactly $3n-6$ edges.","step":"1.1","inputs":["L1","L2","given","definitions"]},
+        {"id":"equality-maximal","claim":"If a planar graph has $3n-6$ edges, any added planar edge would violate L1, so it is maximally planar.","step":"2.1","inputs":["L1","step 1.1","contradiction"]},
+        {"id":"iff","claim":"Check order at least three and combine both directions for the abstract planar graph.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The proposition assumes graph order at least three."},
+        {"case":"zero","status":"not_applicable","reason":"Zero vertices are outside the stated range."},
+        {"case":"one","status":"not_applicable","reason":"One vertex is outside the stated range."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 works with an arbitrary maximal plane embedding and step 3.1 records the simple-graph convention."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 includes the smallest permitted order $n=3$."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 extends one finite planar graph to an edge-maximal member of a finite family."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves maximal planarity implies the edge count."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.1 proves the edge count implies maximal planarity."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-kuratowski-minors-are-topological-minors": {
+      "citations": [{"fact":"F1","source":"def-graph-deletion-contraction-minor-and-subdivision","source_section":"Definition","quote":"A graph $H$ is a **minor** of $G$ when it can be obtained by vertex deletions, edge deletions and edge contractions.","uses":["1.1","2.1","3.1"]},{"fact":"L1","source":"thm-menger-finite-directed-and-undirected-path-forms","source_section":"Statement","quote":"the maximum number of internally vertex-disjoint $s$-$t$ paths equals the minimum size of a vertex separator","uses":["2.1"]}],
+      "derivations": [
+        {"id":"minimal-model","claim":"Choose a minor model of $K_5$ or $K_{3,3}$ with minimal branch sets and replace every branch set by a tree spanning its attachment vertices.","step":"1.1","inputs":["F1","given","definitions","minimality"]},
+        {"id":"reduce-branch-trees","claim":"Use the terminal degrees and L1 to suppress unnecessary branch-tree structure; show a $K_{3,3}$ model yields a subdivision and a $K_5$ model yields either a $K_5$ subdivision or the alternate $K_{3,3}$ subdivision.","step":"2.1","inputs":["L1","step 1.1","cases"]},
+        {"id":"converse","claim":"Contract every subdivided path to show any topological $K_5$ or $K_{3,3}$ is a corresponding minor.","step":"3.1","inputs":["F1","step 2.1"]},
+        {"id":"equivalence","claim":"Combine the obstruction-specific forward reduction and the contraction converse.","step":"4.1","inputs":["step 2.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A graph containing either fixed obstruction minor is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 3.1 includes zero subdivisions and zero contractions as the identity case."},
+        {"case":"one","status":"checked","evidence":"Step 3.1 contracts a single subdivided path correctly."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 treats the exceptional $K_5$ minor model that produces a $K_{3,3}$ subdivision."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1–3.1 keep branch vertices distinct and paths internally disjoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 chooses a minimal member of one nonempty finite family of minor models."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–2.1 prove minor implies one of the two subdivisions."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 3.1 proves subdivision implies minor."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-three-connected-graph-has-a-contractible-edge": {
+      "citations": [{"fact":"L1","source":"cor-whitney-k-connected-path-characterisation","source_section":"Statement","quote":"$G$ is $k$-connected ... if and only if every two distinct vertices of $G$ are joined by at least $k$ internally vertex-disjoint paths.","uses":["1.1","3.1"]},{"fact":"F1","source":"def-graph-deletion-contraction-minor-and-subdivision","source_section":"Definition","quote":"The condition $|q[f]|=2$ deletes loops, while writing the edge family as a set merges parallel edges.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"assume-none","claim":"Assume every edge contraction destroys three-connectivity; for each edge select a size-at-most-two separator in its simple contraction and lift it to a constrained separation of the original graph.","step":"1.1","inputs":["L1","F1","given","contradiction"]},
+        {"id":"minimal-fragment","claim":"Choose an edge and lifted separation with a smallest nontrivial side, then analyse neighbours of the contracted endpoints using three-connectivity.","step":"2.1","inputs":["F1","step 1.1","minimality"]},
+        {"id":"smaller-fragment","claim":"Apply L1 to paths across that separation and construct another noncontractible-edge separation with a strictly smaller side unless the graph is $K_4$.","step":"3.1","inputs":["L1","step 2.1","cases"]},
+        {"id":"contradiction","claim":"The order-greater-than-four hypothesis excludes the $K_4$ terminal case, contradicting minimality and yielding a contractible edge.","step":"4.1","inputs":["step 2.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A three-connected graph with more than four vertices is nonempty."},
+        {"case":"zero","status":"not_applicable","reason":"Zero vertices and zero edges cannot satisfy the hypothesis."},
+        {"case":"one","status":"not_applicable","reason":"A one-vertex graph is excluded by order and connectivity."},
+        {"case":"degenerate","status":"checked","evidence":"Step 4.1 isolates $K_4$ as the exact exceptional graph and step 1.1 uses simple contraction."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1–3.1 track both endpoints of each contracted edge in the lifted separation."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Steps 1.1–2.1 select minima from finite nonempty collections of edges and separators."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an existence implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Having a contractible edge does not characterise three-connectivity."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-three-connected-kuratowski-free-is-planar": {
+      "citations": [{"fact":"L1","source":"lem-three-connected-graph-has-a-contractible-edge","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every three-connected simple graph with more than four vertices has an edge whose simple contraction remains three-connected.","uses":["2.1"]},{"fact":"L2","source":"lem-kuratowski-minors-are-topological-minors","source_section":"Planned Statement (synchronize at Step 5)","quote":"A graph has a $K_5$ or $K_{3,3}$ minor exactly when it contains a subdivision of one of them.","uses":["1.1","3.1"]}],
+      "derivations": [
+        {"id":"base","claim":"Handle three-connected graphs of order at most four directly and formulate induction on the number of vertices while preserving exclusion of the two minors by L2.","step":"1.1","inputs":["L2","given","definitions"]},
+        {"id":"contract","claim":"For larger graphs choose the edge from L1; its simple contraction is three-connected and remains obstruction-free, hence planar by induction.","step":"2.1","inputs":["L1","step 1.1","induction"]},
+        {"id":"split-vertex","claim":"In the plane embedding of the contraction, analyse the cyclic order of neighbours of the contracted vertex; if the two endpoint neighbour sets cannot be separated into intervals, construct a forbidden subdivision using L2 and Menger paths.","step":"3.1","inputs":["L2","step 2.1","separation"]},
+        {"id":"recover-drawing","claim":"Split the contracted vertex inside a small disk according to the separated neighbour intervals and draw the contracted edge to recover a plane embedding of the original graph.","step":"4.1","inputs":["step 3.1","construct"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Three-connectivity excludes the null graph."},
+        {"case":"zero","status":"not_applicable","reason":"Zero vertices are excluded."},
+        {"case":"one","status":"not_applicable","reason":"One vertex is excluded."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 includes $K_4$, and step 3.1 treats coincident neighbours created by simple contraction."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 3.1–4.1 separate the two original endpoints and their common neighbours explicitly."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 chooses one edge supplied by L1 in a finite graph."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only obstruction-free implies planar is proved here."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The easy planar-implies-obstruction-free direction was proved earlier."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-separation-augmentation-for-kuratowski-free-graphs": {
+      "citations": [{"fact":"L1","source":"thm-menger-finite-directed-and-undirected-path-forms","source_section":"Statement","quote":"the maximum number of internally vertex-disjoint $s$-$t$ paths equals the minimum size of a vertex separator","uses":["2.1"]},{"fact":"L2","source":"lem-kuratowski-minors-are-topological-minors","source_section":"Planned Statement (synchronize at Step 5)","quote":"A graph has a $K_5$ or $K_{3,3}$ minor exactly when it contains a subdivision of one of them.","uses":["1.1","3.1"]}],
+      "derivations": [
+        {"id":"separation-cases","claim":"Let an edge-maximal obstruction-free graph have a proper separation of order at most two and define the completion of each separator side by the missing separator edge when needed.","step":"1.1","inputs":["L2","given","definitions"]},
+        {"id":"paths-through-other-side","claim":"Use connectedness/Menger in L1 to replace any added separator edge appearing in a topological obstruction by a path through the opposite side.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"preserve-exclusion","claim":"The replacement would give the same forbidden subdivision in the original graph, contradicting L2; hence both augmented sides remain obstruction-free.","step":"3.1","inputs":["L2","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A proper separation has graph material on both sides."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 treats a separation of order zero componentwise."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 treats a one-vertex separator without adding a loop."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 treats order two with the separator vertices already adjacent or nonadjacent."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 preserves the two separator endpoints while replacing an augmented edge by a path."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 chooses one path in a fixed finite connected side."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is a preservation implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse from augmented sides to edge maximality is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-edge-maximal-kuratowski-free-is-three-connected": {
+      "citations": [{"fact":"L1","source":"lem-separation-augmentation-for-kuratowski-free-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"Each proper separation of order at most two can be augmented on its sides without creating a $K_5$ or $K_{3,3}$ subdivision.","uses":["2.1"]},{"fact":"L2","source":"cor-whitney-k-connected-path-characterisation","source_section":"Statement","quote":"$G$ is $k$-connected ... if and only if every two distinct vertices of $G$ are joined by at least $k$ internally vertex-disjoint paths.","uses":["1.1","3.1"]}],
+      "derivations": [
+        {"id":"assume-small-separator","claim":"Assume the edge-maximal obstruction-free graph of order at least four is not three-connected and take a proper separation of minimum order at most two using L2.","step":"1.1","inputs":["L2","given","contradiction"]},
+        {"id":"augment","claim":"Apply L1 to complete the separator in each side while preserving obstruction exclusion, then use edge maximality to force every possible separator edge already present.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"cross-edge","claim":"Choose vertices on opposite proper sides; their absent cross edge can be added without creating an obstruction by the completed-side decomposition, contradicting edge maximality.","step":"3.1","inputs":["L2","step 2.1","construct"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The graph has order at least four."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 includes a disconnected separation of order zero."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 includes a cut-vertex separation."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 handles whether the two separator vertices are already adjacent."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 chooses cross-edge endpoints outside the separator on both proper sides."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Steps 1.1 and 3.1 choose elements from fixed finite nonempty sides."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma proves edge maximality plus exclusion implies three-connectivity."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Three-connectivity alone does not imply edge maximality."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-kuratowski-wagner-planarity-characterisation": {
+      "citations": [{"fact":"L1","source":"cor-planar-graphs-have-no-kuratowski-subdivision","source_section":"Planned Statement (synchronize at Step 5)","quote":"A planar graph contains no subdivision of $K_5$ or $K_{3,3}$.","uses":["1.1"]},{"fact":"L2","source":"lem-edge-maximal-kuratowski-free-is-three-connected","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every edge-maximal graph of order at least four with no subdivision of $K_5$ or $K_{3,3}$ is three-connected.","uses":["2.1"]},{"fact":"L3","source":"lem-three-connected-kuratowski-free-is-planar","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every three-connected graph with no $K_5$ or $K_{3,3}$ minor is planar.","uses":["3.1"]},{"fact":"L4","source":"lem-kuratowski-minors-are-topological-minors","source_section":"Planned Statement (synchronize at Step 5)","quote":"A graph has a $K_5$ or $K_{3,3}$ minor exactly when it contains a subdivision of one of them.","uses":["4.1"]}],
+      "derivations": [
+        {"id":"easy-direction","claim":"Use L1 and minor/subdivision preservation under subgraphs to prove every planar graph excludes both topological obstructions.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"maximal-extension","claim":"Extend an obstruction-free finite graph on its fixed vertex set to an edge-maximal obstruction-free supergraph and use L2, separating orders below four.","step":"2.1","inputs":["L2","step 1.1","finite-maximality"]},
+        {"id":"planar-supergraph","claim":"Apply L3 to the maximal supergraph and inherit a plane drawing for the original subgraph.","step":"3.1","inputs":["L3","step 2.1"]},
+        {"id":"minor-equivalence","claim":"Use L4 to identify exclusion of the two subdivisions with exclusion of the two minors and combine both directions.","step":"4.1","inputs":["L4","step 1.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 2.1 treats graphs of order below four, including the null graph, as planar."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 includes zero vertices and zero edges."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 includes one-vertex graphs."},
+        {"case":"degenerate","status":"checked","evidence":"Steps 2.1–3.1 handle disconnected input by passing to a maximal supergraph before invoking three-connectivity."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 takes a maximal member of a finite nonempty set of supergraphs."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves planar implies exclusion."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 2.1–4.1 prove exclusion implies planar in both subdivision and minor forms."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-plane-dual-exists-and-double-dual-recovers-primal": {
+      "citations": [{"fact":"F1","source":"def-multigraph-loop-and-digraph","source_section":"Definition","quote":"An edge assigned $\\{v\\}$ is a **loop** at $v$. Distinct members of $M$ assigned the same endpoint set are **parallel edges**.","uses":["1.1","2.1"]},{"fact":"L1","source":"lem-plane-edge-face-incidence","source_section":"Planned Statement (synchronize at Step 5)","quote":"Each primal edge has two local face sides, possibly belonging to the same face when it is a bridge.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"place-dual","claim":"Choose one point in each face and, for every primal edge, draw a polygonal crossing arc joining the two incident face points through a disjoint small neighbourhood of that edge.","step":"1.1","inputs":["F1","L1","given","construct"]},
+        {"id":"loops-parallels","claim":"Verify that a bridge produces a dual loop, repeated face pairs produce parallel dual edges, and no unintended crossings occur.","step":"2.1","inputs":["F1","L1","step 1.1"]},
+        {"id":"reciprocal","claim":"Identify each primal vertex with the face of the constructed dual surrounding it and each primal edge with the corresponding reciprocal dual edge.","step":"3.1","inputs":["step 1.1","step 2.1","local-geometry"]},
+        {"id":"isomorphism","claim":"Prove the vertex/edge identifications preserve incidence and give an isomorphism from the fixed primal plane graph to its double dual.","step":"4.1","inputs":["step 3.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem assumes a connected plane graph, which is nonnull under the library convention."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 covers the one-vertex graph with zero edges and one dual vertex."},
+        {"case":"one","status":"checked","evidence":"Steps 1.1–3.1 include a single bridge and its dual loop."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 explicitly handles loops and parallel edges in the dual multigraph."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 crosses each primal edge once away from its endpoints."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 makes finitely many choices of face points and crossing arcs in a fixed embedding."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is an existence and recovery assertion."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse characterisation of dual pairs is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-six-colour-theorem-for-planar-graphs": {
+      "citations": [{"fact":"L1","source":"cor-planar-graph-has-low-degree-vertex","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every nonnull simple planar graph has a vertex of degree at most five.","uses":["1.1"]},{"fact":"F1","source":"def-proper-vertex-colouring-and-chromatic-number","source_section":"Definition","quote":"A **proper $k$-vertex-colouring** is a function $c:V\\longrightarrow k$ such that $c(u)\\ne c(v)$ whenever $\\{u,v\\}\\in E$.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"delete-colour","claim":"Induct on graph order: use L1 to delete a vertex of degree at most five and six-colour the remaining planar graph.","step":"1.1","inputs":["L1","F1","given","induction"]},
+        {"id":"extend","claim":"At most five colours appear on the deleted vertex's neighbours, so assign one of six unused colours and verify properness.","step":"2.1","inputs":["F1","step 1.1","finite-pigeonhole"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 starts the induction with the null graph and its empty colouring."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 covers zero vertices and step 2.1 covers degree zero."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 colours a one-vertex graph."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 includes repeated neighbour colours and disconnected graphs."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 selects the least unused colour from a fixed six-element palette."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is an upper bound."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Six-colourability does not imply planarity."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-kempe-component-colour-swap": {
+      "citations": [{"fact":"F1","source":"def-proper-vertex-colouring-and-chromatic-number","source_section":"Definition","quote":"$c(u)\\ne c(v)$ whenever $\\{u,v\\}\\in E$","uses":["1.1","2.1"]},{"fact":"F2","source":"def-connected-graph-and-connected-component","source_section":"Definition","quote":"its **connected component** is the induced subgraph on","uses":["1.1"]}],
+      "derivations": [
+        {"id":"define-swap","claim":"On one connected component of the subgraph induced by two colour classes, interchange those two labels and leave all other vertices fixed.","step":"1.1","inputs":["F1","F2","given","definitions"]},
+        {"id":"edge-cases","claim":"Check edges with zero, one, or two endpoints in the component; an edge leaving the component cannot join to the other swapped colour without merging components.","step":"2.1","inputs":["F1","step 1.1","cases"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The selected Kempe component contains at least one vertex."},
+        {"case":"zero","status":"not_applicable","reason":"Two distinct colour labels are fixed."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 includes a singleton Kempe component."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 exhausts edges inside, outside, and crossing the selected component."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The component is supplied as part of the statement."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma asserts preservation of properness."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-alternating-kempe-paths-cannot-both-occur": {
+      "citations": [{"fact":"L1","source":"thm-polygonal-jordan-curve","source_section":"Planned Statement (synchronize at Step 5)","quote":"The complement of a polygon has exactly two regions, each with frontier the polygon.","uses":["2.1"]},{"fact":"F1","source":"def-graph-walk-trail-path-and-cycle","source_section":"Definition","quote":"A **path** is a walk in which the vertices are distinct.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"minimal-path","claim":"Assume both alternating Kempe connections exist, choose a simple path for the first pair, and join it through the centre vertex to form a polygonal cycle.","step":"1.1","inputs":["F1","given","definitions"]},
+        {"id":"separate-second-pair","claim":"Use the cyclic order of the five neighbours and L1 to place the second pair on opposite sides of that polygonal cycle, so their purported Kempe path must cross it.","step":"2.1","inputs":["L1","F1","step 1.1","separation"]},
+        {"id":"colour-disjointness","claim":"A crossing vertex or edge would belong simultaneously to disjoint pairs of colour classes, contradicting the proper colouring; hence both connections cannot exist.","step":"3.1","inputs":["step 2.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement fixes a plane vertex with five neighbours and two alleged paths."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"Five cyclically ordered neighbours are required."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 chooses a simple path and the proper-colouring hypothesis keeps the four endpoint colours distinct as required."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 uses the exact alternating cyclic order of the four path endpoints around the centre."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 chooses one path from a finite graph under the contradiction hypothesis."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an incompatibility implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Failure of one path does not imply existence of the other."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-five-colour-theorem": {
+      "citations": [{"fact":"L1","source":"cor-planar-graph-has-low-degree-vertex","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every nonnull simple planar graph has a vertex of degree at most five.","uses":["1.1"]},{"fact":"L2","source":"lem-kempe-component-colour-swap","source_section":"Planned Statement (synchronize at Step 5)","quote":"Swapping the two colours on one Kempe component preserves a proper colouring.","uses":["3.1"]},{"fact":"L3","source":"lem-alternating-kempe-paths-cannot-both-occur","source_section":"Planned Statement (synchronize at Step 5)","quote":"Alternating Kempe paths between the first and third and between the second and fourth cyclic neighbours cannot both occur.","uses":["2.1","3.1"]}],
+      "derivations": [
+        {"id":"delete-low-degree","claim":"Induct on order, use L1 to delete a vertex of degree at most five, and five-colour the remaining plane graph.","step":"1.1","inputs":["L1","given","induction"]},
+        {"id":"degree-five-order","claim":"If all five colours occur on five distinct neighbours, record their cyclic order around the deleted vertex and invoke L3 on the two alternating colour pairs.","step":"2.1","inputs":["L3","step 1.1","plane-embedding"]},
+        {"id":"kempe-swap","claim":"Choose the absent alternating connection, apply L2 to swap its Kempe component, and free one colour among the five neighbours.","step":"3.1","inputs":["L2","L3","step 2.1"]},
+        {"id":"extend-colouring","claim":"Assign the freed colour to the deleted vertex; handle degree below five directly and conclude the induction for all planar graphs.","step":"4.1","inputs":["step 1.1","step 3.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 starts with the null graph and its empty colouring."},
+        {"case":"zero","status":"checked","evidence":"Step 4.1 handles a deleted vertex of degree zero."},
+        {"case":"one","status":"checked","evidence":"Step 4.1 handles the one-vertex graph."},
+        {"case":"degenerate","status":"checked","evidence":"Step 4.1 handles degree below five and repeated neighbour colours before the Kempe case."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 records the full cyclic order around the degree-five vertex; no linear endpoint order is substituted."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 3.1 selects the Kempe pair whose connection is absent, guaranteed by L3, from two explicit alternatives."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is a colouring upper bound."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Five-colourability does not imply planarity."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-euler-formula-on-a-tree-cycle-and-k-four": {
+      "citations": [{"fact":"L1","source":"thm-euler-formula-for-connected-plane-graphs","source_section":"Planned Statement (synchronize at Step 5)","quote":"For every connected plane graph, $|V|-|E|+|F|=2$.","uses":["1.1","2.1","3.1"]}],
+      "derivations": [
+        {"id":"tree","claim":"For a plane tree on $n$ vertices, use $n-1$ edges and one face to check L1.","step":"1.1","inputs":["L1","given","arithmetic"]},
+        {"id":"cycle","claim":"For a plane cycle on $n\\ge3$ vertices, count $n$ edges and two faces and check L1.","step":"2.1","inputs":["L1","arithmetic"]},
+        {"id":"k4","claim":"Give the tetrahedral plane embedding of $K_4$, enumerate its six edges and four triangular faces, and check L1.","step":"3.1","inputs":["L1","construct","arithmetic"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"All three worked connected examples are nonnull."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 includes the one-vertex tree with zero edges."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 checks $n=1$ under the library leaf convention."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 handles the tree's single face and step 3.1 counts the outer face of $K_4$."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 starts cycles at the permitted endpoint $n=3$."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The three embeddings and counts are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The examples verify an equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-k-four-is-planar-but-not-three-colourable": {
+      "citations": [{"fact":"F1","source":"def-proper-vertex-colouring-and-chromatic-number","source_section":"Definition","quote":"$c(u)\\ne c(v)$ whenever $\\{u,v\\}\\in E$","uses":["2.1"]},{"fact":"F2","source":"def-standard-complete-bipartite-path-and-cycle-graphs","source_section":"Definition","quote":"the **complete graph** $K_V$ has edge set $[V]^2$","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"plane-k4","claim":"Exhibit the standard triangular embedding of $K_4$ with one vertex inside the outer triangle and no crossings.","step":"1.1","inputs":["F2","given","construct"]},
+        {"id":"four-colours-needed","claim":"Because every pair of vertices of $K_4$ is adjacent, F1 makes their four colours pairwise distinct; give a four-colouring and conclude $\\chi(K_4)=4$.","step":"2.1","inputs":["F1","F2","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"$K_4$ has four vertices."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"The witness has order four."},
+        {"case":"degenerate","status":"not_applicable","reason":"$K_4$ is simple and all vertex pairs are distinct and adjacent."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The embedding and colouring are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The counterexample disproves a universal claim rather than an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is involved."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-petersen-graph-nonplanar-by-kuratowski": {
+      "citations": [{"fact":"L1","source":"thm-kuratowski-wagner-planarity-characterisation","source_section":"Planned Statement (synchronize at Step 5)","quote":"A finite graph is planar exactly when it has neither a $K_5$ nor a $K_{3,3}$ minor, equivalently neither subdivision.","uses":["2.1"]},{"fact":"F1","source":"def-petersen-graph","source_section":"Definition","quote":"two vertices are adjacent exactly when the corresponding two-element subsets are disjoint","uses":["1.1"]}],
+      "derivations": [
+        {"id":"label-subdivision","claim":"Label the Petersen graph in its outer-cycle/inner-star model, delete one named vertex, and list six branch vertices and the three internally disjoint subdivided edges forming $K_{3,3}$.","step":"1.1","inputs":["F1","given","construct"]},
+        {"id":"apply-kuratowski","claim":"Verify every listed branch-to-branch adjacency and internal disjointness, then apply L1 to conclude the Petersen graph is nonplanar.","step":"2.1","inputs":["L1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The Petersen graph and displayed subdivision are nonempty."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 deletes exactly one Petersen vertex as stated."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 checks that the six branch vertices are distinct and subdivided paths are internally disjoint."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 names both endpoints of each of the nine $K_{3,3}$ branch connections."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All vertices and paths are explicitly labelled."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 2.1 uses the obstruction-implies-nonplanar direction of L1."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The reverse direction is not needed for this witness."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-one-planar-graph-two-nonisomorphic-duals": {
+      "citations": [{"fact":"L1","source":"thm-plane-dual-exists-and-double-dual-recovers-primal","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every connected plane graph has a plane dual.","uses":["1.1","2.1"]},{"fact":"F1","source":"def-graph-isomorphism-and-complement","source_section":"Definition","quote":"A **graph isomorphism** is a bijection $\\varphi:V\\to W$","uses":["2.1"]}],
+      "derivations": [
+        {"id":"two-embeddings","claim":"Specify one connected planar graph and give two rotation/plane embeddings that place a separable block in different faces; construct both dual multigraphs using L1.","step":"1.1","inputs":["L1","given","construct"]},
+        {"id":"distinguish-duals","claim":"Compute an isomorphism invariant of the two duals, such as loop incidence or degree multiset, and use F1 to prove they are nonisomorphic.","step":"2.1","inputs":["L1","F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The witness graph is connected and nonnull."},
+        {"case":"zero","status":"not_applicable","reason":"The witness has edges and multiple faces."},
+        {"case":"one","status":"not_applicable","reason":"A one-vertex graph cannot furnish the required embedding dependence."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 compares dual multigraph invariants including any loops or parallel edges."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Both embeddings and dual constructions are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example disproves uniqueness and is not biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is involved."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-five-colouring-by-a-kempe-swap": {
+      "citations": [{"fact":"L1","source":"lem-kempe-component-colour-swap","source_section":"Planned Statement (synchronize at Step 5)","quote":"Swapping the two colours on one Kempe component preserves a proper colouring.","uses":["2.1"]},{"fact":"L2","source":"lem-alternating-kempe-paths-cannot-both-occur","source_section":"Planned Statement (synchronize at Step 5)","quote":"Alternating Kempe paths between the first and third and between the second and fourth cyclic neighbours cannot both occur.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"worked-configuration","claim":"Draw and label a degree-five insertion configuration whose five neighbours presently use all five colours, and identify an alternating Kempe connection absent by L2.","step":"1.1","inputs":["L2","given","construct"]},
+        {"id":"swap-and-extend","claim":"Use L1 to swap the explicit component, verify the freed neighbour colour, and assign it to the inserted vertex.","step":"2.1","inputs":["L1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The worked graph has a degree-five insertion vertex."},
+        {"case":"zero","status":"not_applicable","reason":"Five colours and five neighbours are explicit."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 performs exactly one Kempe-component swap."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 verifies all five colours occur before the nontrivial swap case is invoked."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 records the cyclic neighbour order used by L2."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The component and recolouring are explicitly specified."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example demonstrates one colouring construction."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-k-three-three-satisfies-the-planar-edge-bound": {
+      "citations": [{"fact":"L1","source":"cor-planar-simple-graph-edge-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges.","uses":["1.1"]},{"fact":"L2","source":"cor-k-five-and-k-three-three-are-nonplanar","source_section":"Planned Statement (synchronize at Step 5)","quote":"$K_5$ and $K_{3,3}$ are nonplanar.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"count","claim":"Compute $|V(K_{3,3})|=6$ and $|E(K_{3,3})|=9$, hence $9\\le3\\cdot6-6=12$.","step":"1.1","inputs":["L1","given","definitions","arithmetic"]},
+        {"id":"nonplanar","claim":"Invoke L2 to show this graph nevertheless is nonplanar, refuting sufficiency of L1's edge inequality.","step":"2.1","inputs":["L2","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"$K_{3,3}$ has six vertices."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"Neither bipartition has size one."},
+        {"case":"degenerate","status":"not_applicable","reason":"The fixed witness is a simple graph with two three-element parts."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The witness and counts are explicit."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 verifies the necessary inequality on the witness."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.1 refutes the attempted reverse implication."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-a-wild-arc-drawing-is-not-a-plane-graph": {
+      "citations": [{"fact":"F1","source":"def-path-connected","source_section":"Definition","quote":"A **path in $X$ from $x$ to $y$** is a continuous map $\\gamma : I \\to X$","uses":["1.1"]},{"fact":"L1","source":"def-plane-graph-face-and-boundary","source_section":"Planned Statement (synchronize at Step 5)","quote":"A plane graph is a finite simple graph embedded with polygonal edge arcs meeting only at common endpoints.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"nonpolygonal-arc","claim":"Give an explicit injective continuous arc with infinitely many bends or oscillations between two endpoints and verify injectivity and continuity from F1.","step":"1.1","inputs":["F1","given","construct"]},
+        {"id":"convention-boundary","claim":"Regard that arc as a drawing of the one-edge abstract graph and use L1 to prove the displayed drawing itself is not a plane graph because its edge is not polygonal; do not claim the abstract graph is nonplanar.","step":"2.1","inputs":["L1","step 1.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The witness is a one-edge drawing."},
+        {"case":"zero","status":"not_applicable","reason":"The witness arc has distinct endpoints and is not a constant path."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 uses exactly one abstract edge."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 verifies injectivity despite infinitely many bends, and step 2.1 distinguishes drawing from abstract graph."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 specifies both endpoint limits and continuity there."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The arc is given by one explicit formula or vertex sequence."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example marks a definition boundary, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No claim is made that every nonpolygonal drawing fails to represent a planar abstract graph."}
       ],
       "finite_smoke": []
     }

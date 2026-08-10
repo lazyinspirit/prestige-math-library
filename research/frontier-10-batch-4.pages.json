@@ -460,22 +460,22 @@
         "id": "thm-dirichlet-test-for-improper-integrals",
         "kind": "theorem",
         "title": "Dirichlet's test for improper integrals",
-        "strategy": "Let f have bounded primitives and let g be nonnegative, nonincreasing, and tend to zero. Apply the published second mean value theorem on each tail to bound integral_u^v fg by a constant times g(u), then invoke the improper Cauchy criterion. State the finite-endpoint analogue explicitly.",
-        "deps": ["thm-cauchy-criterion-for-improper-integrals", "thm-second-mean-value-theorem-for-integrals", "thm-additivity-over-subintervals", "def-monotone-function", "def-limits-at-infinity", "def-darboux-integral", "lem-of-triangle-inequality"]
+        "strategy": "Give two source-standard multiplier clauses. If f is locally integrable with bounded truncation primitives and g is nonnegative, nonincreasing, and tends to zero, apply the second mean value theorem on each tail and the improper Cauchy criterion. If f is continuous with bounded primitive, g is differentiable, g tends to zero, and g' is absolutely improperly integrable, apply proper integration by parts on truncations; the boundary term vanishes and the remaining integral converges absolutely by comparison. State both clauses at a finite singular endpoint as well.",
+        "deps": ["thm-cauchy-criterion-for-improper-integrals", "thm-second-mean-value-theorem-for-integrals", "thm-additivity-over-subintervals", "thm-integration-by-parts", "thm-comparison-test-for-improper-integrals", "thm-absolute-improper-convergence-implies-convergence", "def-absolute-and-conditional-improper-convergence", "def-monotone-function", "def-limits-at-infinity", "def-darboux-integral", "def-continuity-real", "lem-of-triangle-inequality"]
       },
       {
         "id": "cor-abel-test-for-improper-integrals",
         "kind": "corollary",
         "title": "Abel's test for improper integrals",
         "strategy": "If integral f converges and g is bounded and monotone, prove g has a finite endpoint limit L from completeness. Write g=L+h, orient h so it is nonnegative decreasing to zero, apply Dirichlet to fh, and use linearity for Lf.",
-        "deps": ["thm-dirichlet-test-for-improper-integrals", "thm-linearity-of-improper-integrals", "def-improper-integral-at-infinity", "def-monotone-function", "def-limits-at-infinity", "def-complete-ordered-field", "def-bounded-set"]
+        "deps": ["thm-dirichlet-test-for-improper-integrals", "thm-linearity-of-improper-integrals", "def-improper-integral-at-infinity", "def-monotone-function", "def-limits-at-infinity", "def-complete-ordered-field", "def-bounded-set", "cor-integrability-of-absolute-values-products-and-lattice-operations"]
       },
       {
         "id": "thm-dirichlet-divergence-transfer",
         "kind": "theorem",
         "title": "A Dirichlet-type transfer criterion for divergence",
-        "strategy": "Suppose integral u diverges, v>0 tends to infinity, and v'/v^2 is absolutely integrable. If integral uv converged, apply Dirichlet's test to f=uv and g=1/v: the primitive of f would be bounded, g tends to zero, and g' is absolutely integrable, forcing integral u to converge. This contradiction proves divergence.",
-        "deps": ["thm-dirichlet-test-for-improper-integrals", "def-improper-integral-at-infinity", "def-absolute-and-conditional-improper-convergence", "thm-algebra-of-derivatives", "def-limits-at-infinity"]
+        "strategy": "Suppose u is continuous with divergent improper integral, v>0 is differentiable and tends to infinity, and v'/v^2 is absolutely improperly integrable. If integral uv converged, its truncation primitive would be bounded. Apply the differentiable-multiplier clause of Dirichlet's test to f=uv and g=1/v; the reciprocal rule gives g'=-v'/v^2 and forces integral u to converge, a contradiction.",
+        "deps": ["thm-dirichlet-test-for-improper-integrals", "def-improper-integral-at-infinity", "def-absolute-and-conditional-improper-convergence", "thm-algebra-of-derivatives", "def-limits-at-infinity", "def-continuity-real", "cor-integrability-of-absolute-values-products-and-lattice-operations"]
       },
       {
         "id": "thm-absolute-divergence-from-uniform-tail-mass",
@@ -485,11 +485,18 @@
         "deps": ["thm-nonnegative-improper-integral-bounded-primitive-criterion", "def-absolute-and-conditional-improper-convergence", "thm-monotonicity-of-the-integral", "thm-additivity-over-subintervals", "def-monotone-function", "def-sequence", "def-series", "lem-series-tail-invariance"]
       },
       {
+        "id": "thm-monotone-change-of-variable-for-riemann-integrals",
+        "kind": "theorem",
+        "title": "Monotone change of variable for Riemann-integrable functions",
+        "strategy": "Let phi be monotone and differentiable on [c,d], with phi' Riemann integrable, and map [c,d] onto [a,b]. For bounded f on [a,b], prove that f is Riemann integrable iff (f composed with phi)|phi'| is Riemann integrable, and then the integrals agree. Treat the nondecreasing case by transporting partitions, applying the mean value theorem to each phi-increment, and comparing Darboux upper and lower sums; reduce the nonincreasing case by orientation. Include flat subintervals explicitly.",
+        "deps": ["def-darboux-integral", "def-darboux-sums", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "def-bounded-set", "def-monotone-function", "def-derivative", "cor-mean-value-theorem", "thm-darboux-equals-riemann", "cor-integrability-of-absolute-values-products-and-lattice-operations", "def-oriented-integral"]
+      },
+      {
         "id": "thm-substitution-for-improper-integrals",
         "kind": "theorem",
         "title": "Change of variable in an improper integral",
-        "strategy": "Let a monotone differentiable map phi carry one half-open or open interval onto another, with phi' locally integrable and f locally integrable. Apply the proper substitution theorem on truncations and transfer the endpoint limits through monotonicity and surjectivity. Include decreasing maps through |phi'| and oriented limits; convergence or divergence is preserved, and convergent values agree.",
-        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "thm-substitution", "def-monotone-function", "def-derivative", "thm-algebra-of-function-limits", "def-oriented-integral"]
+        "strategy": "Let a monotone differentiable map phi carry one half-open or open interval onto another, with phi' locally Riemann integrable and f locally Riemann integrable. Apply the preceding monotone proper change-of-variable theorem on corresponding compact truncations and transfer the endpoint limits through monotonicity and surjectivity. Include decreasing maps through |phi'| and oriented limits; convergence or divergence is preserved, and convergent values agree.",
+        "deps": ["thm-monotone-change-of-variable-for-riemann-integrals", "def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "def-monotone-function", "def-derivative", "thm-algebra-of-function-limits", "def-oriented-integral"]
       },
       {
         "id": "thm-frullani-integral-proper-factor",
@@ -526,7 +533,7 @@
         "id": "ex-conditionally-convergent-step-function-integral",
         "kind": "example",
         "title": "A step function whose improper integral is the alternating harmonic series",
-        "strategy": "On [k,k+1) give the function value epsilon_k/(k+1), where epsilon_k is the published alternating sign. Integer truncations are alternating-harmonic partial sums; the absolute integrals are harmonic partial sums. Check local Riemann integrability from finitely many jumps on each compact interval and write natural numbers directly.",
+        "strategy": "On [k,k+1) give the function value epsilon_k/(k+1), where epsilon_k is the published alternating sign. Integer truncations are alternating-harmonic partial sums; an arbitrary truncation differs from the preceding integer truncation by at most 1/(k+1), so the full real-parameter limit agrees. The absolute integrals are harmonic partial sums. Check local Riemann integrability from finitely many jumps on each compact interval and write natural numbers directly.",
         "deps": ["def-absolute-and-conditional-improper-convergence", "def-improper-integral-at-infinity", "lem-alternating-sequence", "thm-alternating-series-test", "thm-p-series-rational", "thm-additivity-over-subintervals", "lem-changing-a-function-at-finitely-many-points", "def-canonical-natural", "lem-of-naturals-positive"]
       },
       {
@@ -562,7 +569,7 @@
         "kind": "example",
         "title": "$\\int_{-\\infty}^{\\infty}(1+x^2)^{-1}\\,dx$ converges absolutely",
         "strategy": "On |x|>=1 compare the nonnegative integrand with x^{-2}; the middle interval is a proper integral. Treat the two tails separately and do not evaluate the integral as pi, since inverse trigonometric functions occur later.",
-        "deps": ["def-mixed-improper-integral", "def-absolute-and-conditional-improper-convergence", "thm-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "cor-integrability-of-absolute-values-products-and-lattice-operations", "def-darboux-integral"]
+        "deps": ["def-mixed-improper-integral", "def-absolute-and-conditional-improper-convergence", "thm-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "cor-integrability-of-absolute-values-products-and-lattice-operations", "thm-algebra-of-continuous-functions", "thm-continuous-implies-integrable", "def-darboux-integral"]
       },
       {
         "id": "ex-improper-substitution-reciprocal",
@@ -596,7 +603,7 @@
         "id": "ex-beta-kernel-convergence-rational",
         "kind": "example",
         "title": "Convergence range of $x^{-p}(1+x)^{-q}$ on $(0,\\infty)$ for rational exponents",
-        "strategy": "For rational p,q, compare the kernel with x^{-p} near zero and with x^{-(p+q)} at infinity using limit comparison and rational-power laws. Conclude separate convergence exactly when p<1 and p+q>1, under the positivity conditions needed to define all powers.",
+        "strategy": "For rational p,q on the positive domain, compare the kernel with x^{-p} near zero and with x^{-(p+q)} at infinity using limit comparison and rational-power laws. Conclude separate convergence exactly when p<1 and p+q>1; x>0 and 1+x>0 make every displayed rational power well-defined without an extra sign hypothesis on p or q.",
         "deps": ["def-mixed-improper-integral", "cor-limit-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "def-rational-power", "lem-rational-power-laws", "lem-rational-power-monotone", "thm-algebra-of-function-limits"]
       }
     ]
