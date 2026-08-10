@@ -82,6 +82,96 @@ Await the orchestrator's routing of findings to Beta-1, -2, -3, -5, -6, -7, -8
 determinant interfaces). **Re-check every `insufficient` pair before step 4
 splices**, and run Stage 0 on batch 9 when it lands.
 
+## Stage 0, second pass — re-check + batch 9 — **COMPLETE**
+
+Appended to `research/frontier-10-alpha-step3-scaffold-review.md` under
+`## Re-check (post-repair)`. The original verdicts were not rewritten.
+
+**7 of 8 repairs resolved; 3 pairs still short, each by a named amount.**
+
+| pair | verdict |
+|---|---|
+| `matrices-and-the-matrix-of-a-linear-map` | resolved |
+| `the-structure-of-finite-abelian-groups` | resolved |
+| `free-products-and-amalgamation` | resolved |
+| `polynomial-rings-and-roots` | resolved |
+| `fubini-and-change-of-variables` | resolved |
+| `ramsey-theory` | resolved |
+| `categories-functors-and-natural-transformations` | resolved |
+| `group-actions-and-cayleys-theorem` | **still insufficient** (R2) |
+| `gaussian-elimination-and-row-reduction` (new) | **insufficient** (R3) |
+| `determinants-of-matrices-over-a-commutative-ring` (new) | **insufficient** (R4) |
+
+Count correction to my own first-pass summary line: it said "five sufficient,
+seven insufficient"; the table said four and eight, and the table is right. The
+dispatch's "seven" is the number of pairs owing a *Beta repair* — pair 2 was
+`insufficient` for F1 alone, which the owner's re-home resolved without a Beta
+edit. Nothing was lost.
+
+### F1 fully closed, verified the way it was found
+
+Re-ran the dependency-resolution check that surfaced F1, with the re-home
+applied: 579 in-run items against 2,895 mapped published items,
+**0 unresolved dependencies and 0 forward references in every batch**.
+`coverage-checklist.mjs`: 14 pages, 875 harvested results, 0 errors, 0 warnings.
+
+### R1 — a step-4 blocker in the re-home that nobody owns
+
+The receipt checked the moved items' dependency **orders** (all 5.3–24 < 46).
+`validate-plan.mjs` also enforces `undeclared-prereq` against the **transitive
+closure of declared `requires`**, and `rings-subrings-and-integral-domains`
+declares only `divisibility-gcd-and-bezout`, whose 12-page closure omits
+`finite-counting-and-binomial-coefficients` (order 20) — home of
+`def-finite-cardinality`, `def-sum-over-a-finite-index-set`, `thm-product-rule`
+and `thm-sum-rule`. Four `undeclared-prereq` errors the moment the re-home
+lands. One-line remedy; `research/frontier-10-splice.mjs` unions `requires` for
+in-run pages only, so it will not do this by itself.
+
+The receipt's two open follow-ups both came back **clear**: no forward wikilinks
+in either moved item, and no positional prose claim falsified — including the
+source page's paragraph-1 summary sentence, which the move makes more apt rather
+than false.
+
+### R2, R3, R4 — what goes back
+
+- **R2, batch 8.** Two of fifteen Conrad §6 declines name a home that does not
+  exist ("the later permutation-group development", "the structural study of
+  subgroup coverings"), and both are 3–4 line corollaries of theorems on the
+  page: Theorem 6.6 from item 29 (Cauchy–Frobenius), Theorem 6.10 from item 17
+  (`thm-conjugate-subgroups-are-counted-by-the-normalizer`). Theorem 6.9's reason
+  ("not consumed by this pair") is not a permitted ground. Add 6.6 and 6.10
+  (29 → 31 A items, no split); include 6.9 or rewrite its reason.
+  Everything else on this pair landed, and **Beta-8's one disagreement is
+  upheld** — my suggested citation of `ex-a-four-has-no-subgroup-of-order-six`
+  would have been both a forward edge and a citation into a B-page leaf (order
+  45 from order 43). Its self-contained replacement is correct.
+- **R3, batch 9 / gaussian.** A page complete; B page has no witness for the
+  explicit "over an infinite field" hypothesis of
+  `cor-solution-count-trichotomy-over-an-infinite-field` ($x+y=0$ over
+  $\mathbb F_2$ has exactly two solutions). Plus `canonical` disposition rows for
+  LU factorisation and the rank normal form, which appear in no source's
+  `contents` at all — rows, not items.
+- **R4, batch 9 / determinants.** The cofactor/adjugate/Cramer deferral is
+  **licensed by the plan**, not invented: order 84 is titled "The Determinant of
+  a Linear Operator, Cofactors and Cramer's Rule". Ring-level source backing is
+  genuine (New's MATH 146 works over a commutative ring throughout). Two asks: a
+  witness that $\det$ is not additive, marking multilinearity's boundary; and the
+  decline naming the nonexistent page `invertibility-and-adjugate` corrected to
+  order 84.
+
+The ring-versus-field boundary the dispatch asked me to check is **right**:
+Beta-9 shipped `cor-invertible-matrix-has-unit-determinant` as the ring-level ⟹
+half and `thm-real-square-matrix-invertible-iff-determinant-nonzero` as the real
+specialisation, declining unprompted to state "nonzero" over a ring. The
+ring-level converse needs the adjugate, which lives at order 84, and no in-run
+consumer needs it. `symmetric-groups-and-the-sign-homomorphism` carries
+everything the Leibniz route needs, cited at the exact items that consume it.
+
+### Boundaries respected
+
+Authored nothing. Edited no batch file, item, page or `plan-spec.json`. No
+permission prompt raised; R1 recorded as a blocker instead.
+
 ## Stage 1 — step 4, propagation — not started
 
 ## Stage 2 — step 6, whole-level audit — not started

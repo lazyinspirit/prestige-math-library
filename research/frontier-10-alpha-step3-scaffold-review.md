@@ -521,3 +521,520 @@ Route findings to Beta-1, -2, -3, -5, -6, -7 and -8; batch 4 gets L1 as a
 non-blocking ledger correction; batch 9 gets the two additional determinant
 interfaces from B5. I re-check every `insufficient` pair before step 4 splices,
 and review batch 9 when it lands.
+
+---
+
+# Re-check (post-repair)
+
+Alpha-frontier-10, Stage 0 second pass, before step 4 splices. The verdicts above
+are the record of what was found and are not rewritten.
+
+**I authored nothing and edited no batch file, item, page or `plan-spec.json` in
+this pass either.**
+
+## Count correction to my own summary line
+
+The summary above reads "Five sufficient, seven insufficient". **The table says
+four and eight**, and the table is right: `sufficient` are pairs 1, 6, 7, 10;
+`insufficient` are pairs 2, 3, 4, 5, 8, 9, 11, 12. The dispatch's "seven" is the
+number of pairs needing a *Beta repair* — pair 2 was `insufficient` for F1 alone
+and F1 was resolved by the owner's re-home, so no Beta edit was owed on it.
+Eight pairs are re-checked below; nothing was lost, but the count should not be
+quoted as five/seven.
+
+## Verdicts
+
+| # | pair | verdict |
+|---:|---|---|
+| 2 | `matrices-and-the-matrix-of-a-linear-map` | **resolved** |
+| 3 | `the-structure-of-finite-abelian-groups` | **resolved** |
+| 4 | `free-products-and-amalgamation` | **resolved** |
+| 5 | `polynomial-rings-and-roots` | **resolved** |
+| 8 | `fubini-and-change-of-variables` | **resolved** |
+| 9 | `ramsey-theory` | **resolved** |
+| 11 | `categories-functors-and-natural-transformations` | **resolved** |
+| 12 | `group-actions-and-cayleys-theorem` | **still insufficient** — R2 |
+| 13 | `gaussian-elimination-and-row-reduction` (batch 9, new) | **insufficient** — R3 |
+| 14 | `determinants-of-matrices-over-a-commutative-ring` (batch 9, new) | **insufficient** — R4 |
+
+Seven of the eight repairs landed. Three pairs are short, each by a small,
+named amount. **R1 below is a separate defect in the re-home that belongs to the
+step-4 splice, not to any Beta.**
+
+---
+
+## F1 is fully closed, and I verified it the way it was found
+
+I re-ran the dependency-resolution check that surfaced F1: every `deps` entry of
+every item in all nine batches, resolved against the published `library/` page
+files and the in-run batch manifests, with the re-home applied from
+`research/frontier-10-rehomed.json`, then compared for reading order.
+
+**579 in-run items, 2,895 published items mapped: 0 unresolved dependencies and
+0 forward references, in every batch.** Batch 8's two edges now point at the
+order-20 `def-sum-over-a-finite-index-set` (with `thm-double-counting` supplying
+the exchange), and batches 1, 3, 7 and 9 cite the two re-homed items backward
+from orders 78, 52, 359 and 82 against their new home at 46.
+
+`coverage-checklist.mjs` over all nine ledgers: **14 pages, 875 harvested
+results, 0 errors, 0 warnings** (was 720 over 12).
+
+### R1 — the re-home breaks the DESTINATION page's `requires` closure
+
+**This is a step-4 blocker and nobody owns it yet.** The receipt verified that
+the two moved items' own dependencies all sit at orders 5.3–24, strictly below
+the destination's 46. That is the `prereq-order` check. It is not the check that
+fires.
+
+`validate-plan.mjs` also enforces `undeclared-prereq`: every item dependency must
+lie in the **transitive closure of the page's declared `requires`**.
+`rings-subrings-and-integral-domains` declares exactly one prerequisite,
+`divisibility-gcd-and-bezout`, whose closure is 12 pages and **does not contain
+`finite-counting-and-binomial-coefficients` (order 20)**. Four of the moved
+items' dependencies live there:
+
+| id | home | order |
+|---|---|---|
+| `def-finite-cardinality` | `finite-counting-and-binomial-coefficients` | 20 |
+| `def-sum-over-a-finite-index-set` | same | 20 |
+| `thm-product-rule` | same | 20 |
+| `thm-sum-rule` | same | 20 |
+
+So the moment the re-home is applied, `rings-subrings-and-integral-domains`
+raises `undeclared-prereq` four times.
+
+**Remedy, one line:** add `finite-counting-and-binomial-coefficients` to that
+page's `requires`. Order 20 < 46, so no `prereq-order` error; it is not currently
+reachable, so no `redundant-prereq` warning. `research/frontier-10-splice.mjs`
+unions `requires` for in-run batch pages only, and the destination is a published
+page in no batch manifest, so **the splice will not do this on its own** — it
+needs the entry in `EXTRA_REQUIRES` or an explicit case. Like the rest of the
+re-home's page-list edits, the change itself is staged for the publishing commit.
+
+### The two re-home follow-ups the receipt left open — both clear
+
+- **Forward wikilinks in the moved items: none.** Both files' body links are all
+  `deps` targets, and all of those resolve at orders 5.3–24, or (for the lemma)
+  to the definition that moves with it and lands earlier on the same page.
+- **Positional prose claims: none falsified.** The definition's Remarks call the
+  order-20 `def-sum-over-a-finite-index-set` "the published real- and
+  natural-valued definition", which is still earlier and still true, and say the
+  monoid form "is the form needed for sums in a commutative ring" — a sentence
+  the move makes *more* apt, since order 46 is the rings page.
+- **The source page's summary survives the move.** Paragraph 1 of
+  `incidence-algebras-and-mobius-inversion` says its ingredients "support finite
+  sums in arbitrary commutative monoids rather than only in $\mathbb R$ or
+  $\mathbb N$". Under the page-summary contract paragraph 1 is background drawn
+  from declared dependencies, and after the move that is exactly what this is;
+  paragraph 2, which names what the page develops, never mentions the sums.
+  No edit needed. Flagging for step 6 only so the reading is on the record.
+- **No published consumer loses its closure.** The two items are consumed off-page
+  only by `matchings-covers-menger-and-network-flows` (213), which reaches order
+  46 transitively through `incidence-algebras-and-mobius-inversion` (203). No
+  `requires` edit there, and adding one would raise `redundant-prereq`.
+
+---
+
+## Per-pair re-check
+
+### 2. `matrices-and-the-matrix-of-a-linear-map` — **resolved**
+
+`insufficient` for F1 only, and F1 was resolved by re-home rather than by a Beta
+edit. Confirmed from disk: the five items still cite
+`def-finite-sum-in-a-commutative-monoid` and `lem-finite-sum-reindexing-and-fubini`,
+which is correct — with the destination at order 46 those are now backward edges
+from 78. The page carries no forward reference of any kind. Nothing mathematical
+was owed and nothing was changed. Closed.
+
+### 3. `the-structure-of-finite-abelian-groups` — **resolved**
+
+`cor-converse-of-lagrange-for-finite-abelian-groups` is A item 16, between the
+invariant-factor theorem and the exponent definition — the right place. It
+carries a real disposition in **both** required artifacts: a source row against
+Judson Chapter 13's exercises ("if $n$ divides the order $m$ of a finite abelian
+group $G$, then $G$ has a subgroup of order $n$") and a `canonical` row, both
+`included` and both naming the item.
+
+The strategy is the honest proof and not a sketch: strong induction on $|G|$,
+$d=1$ trivial, a prime $p \mid d$, abelian Cauchy for a subgroup of order $p$,
+induction in $G/H$ on $d/p$, then the full preimage under the quotient map, with
+the trivial and $d=|G|$ boundaries named. Its nine `deps` all exist and all point
+backward.
+
+A page whose subject is the classification now proves its most-used consequence.
+
+### 4. `free-products-and-amalgamation` — **resolved**
+
+Both corollaries landed as A items 6 and 7, immediately after
+`thm-normal-form-for-free-products`, which is where they belong:
+
+- `cor-torsion-in-a-free-product-is-conjugate-into-a-factor`
+- `cor-center-of-a-free-product-is-trivial`
+
+Both carry a source row and a `canonical` row. The Beta harvested them from
+Hatcher, *Algebraic Topology*, Chapter 1 §1.2 Exercise 1 — which is genuinely
+where both clauses sit, and is a better citation than the three I offered — then
+recorded the adaptation from Hatcher's two factors to the page's existing
+arbitrary-family construction.
+
+I checked both proof strategies rather than only their presence. The torsion
+argument cyclically reduces and then reads infinite order off the normal form.
+The centre argument is correct including its edge cases: for $z=x_1\cdots x_n$
+central, a nonidentity $g$ from a factor other than $x_1$'s exists because at
+least two factors are nontrivial; $gz$ is reduced of length $n+1$; $zg$ either
+reduces to length $\le n$ or is reduced of length $n+1$ with a different first
+syllable; normal-form uniqueness closes it in both branches, and $n=1$ is covered.
+
+### 5. `polynomial-rings-and-roots` — **resolved**
+
+`cor-finite-subgroups-of-units-in-a-domain-are-cyclic` is A item 26, directly
+after `thm-root-bound-for-polynomials-over-a-domain` — the theorem it consumes.
+Both Donaldson rows flipped from `out-of-scope` to `included` naming it, so the
+invalidated decline is gone rather than merely contradicted.
+
+The page's `requires` now lists `the-structure-of-finite-abelian-groups`,
+creating the run's first cross-batch page edge, 52 → 40, backward and legal.
+
+The strategy is the two-line argument I named, with the boundary handled: $G$
+finite abelian, trivial case separate; $e=\exp(G)=n_r$; every $g\in G$ is a root
+of $T^e-1$; the root bound gives $|G|\le e$; and $e=n_r\le n_1\cdots n_r=|G|$
+forces $r=1$ because each $n_i>1$. It cites
+`cor-order-and-exponent-from-invariant-factors` and
+`cor-finite-abelian-group-cyclic-iff-one-invariant-factor` from batch 2, both of
+which exist as A items 18 and 19.
+
+One nit for step 6, not blocking: the item speaks of "its invariant factors" but
+does not cite `def-invariant-factor-data-for-a-finite-abelian-group` directly,
+resting instead on the two corollaries that mention them.
+
+F1's ledger defect is also fixed: the notes no longer claim "Forward references
+kept: none" and now record the original edges and the owner-approved re-home.
+
+### 8. `fubini-and-change-of-variables` — **resolved**
+
+Both missing interfaces are declared **and consumed by exactly the two items
+that needed them**, which is the part a presence check alone would miss:
+
+- `thm-linear-images-scale-jordan-content-by-absolute-determinant` now cites
+  `thm-real-square-matrix-invertible-iff-determinant-nonzero` — the singular
+  branch of its own stated strategy.
+- `thm-change-of-variables-for-compact-jordan-sets` now cites
+  `cor-determinant-is-a-polynomial-in-the-matrix-entries` — the integrability of
+  $x\mapsto|\det J_g(x)|$.
+
+`requires` lists both batch-9 pages, and all six determinant interfaces resolve
+against batch 9's manifest with the exact ids named. Beta-5 correctly declined to
+mint either item itself and handed both to batch 9, which built them.
+
+Beta-5 also recorded, unprompted, that over a general commutative ring
+invertibility corresponds to the determinant being a **unit** rather than
+nonzero, and that the criterion it needs is therefore the real specialisation.
+That is the right reading and it matches what batch 9 built.
+
+### 9. `ramsey-theory` — **resolved**
+
+Both B items landed, taking the B page from 6 to 8:
+
+- `cex-infinite-ramsey-fails-with-infinitely-many-colours` (the $\min$ colouring)
+- `ex-all-four-canonical-pair-colouring-types`
+
+Both carry Leader rows — Theorem 4 case (iii) and the remark after Theorem 4 —
+so they are harvested rather than invented.
+
+The two silent locator stops are now five explicit `deferred` rows: Leader §1.3
+as a section, the combinatorial-line definition, Theorem 9 itself, the remarks
+after it, and Rado's theorem. I accept all five. Both name a genuinely separate
+development — Hales–Jewett's word-cube machinery and Rado's partition-regular
+matrix theory — which is the permitted `deferred` ground, and neither is a
+prerequisite of anything the page proves; van der Waerden is proved locally by
+colour focussing rather than imported from Hales–Jewett.
+
+### 11. `categories-functors-and-natural-transformations` — **resolved**
+
+Both additions are B items, as I required, and the A page is **still exactly 60**:
+the D2 contingency split stays unarmed.
+
+- `ex-matrix-category-equivalent-to-finite-dimensional-vector-spaces` (Riehl
+  §1.5), citing the five batch-1 ids I named.
+- `ex-determinant-is-a-natural-transformation` (Mac Lane I.4), citing batch 9's
+  ring-level `def-matrices-over-a-commutative-ring`,
+  `def-invertible-matrix-and-similarity-over-a-commutative-ring`,
+  `def-determinant-of-a-square-matrix`, `thm-determinant-multiplicative` and
+  `cor-invertible-matrix-has-unit-determinant`.
+
+**My conditional on the second one is discharged.** I made it contingent on batch
+9 exposing $\mathrm{GL}_n$ and $\det$ over a commutative ring rather than over a
+field; batch 9 does, and the example needs only the ⟹ half
+(`cor-invertible-matrix-has-unit-determinant`) for $\det$ to land in $R^\times$,
+which is on the page. The $n\ge1$ restriction matches batch 9's determinant
+definition, which is also stated for $n\ge1$.
+
+Both ledger corrections landed. Riehl Definition 1.4.3 now has its row, and the
+nonexistent `universal-properties-representables-and-yoneda` is gone —
+**0 occurrences** on disk, against 10 for the real `universal-properties-and-the-yoneda-lemma`.
+`requires` gained `matrices-and-the-matrix-of-a-linear-map` and
+`determinants-of-matrices-over-a-commutative-ring`.
+
+### 12. `group-actions-and-cayleys-theorem` — **STILL INSUFFICIENT** (R2)
+
+Most of the repair is right, and I want that on the record before the finding.
+
+- **F1: fixed.** `thm-cauchy-frobenius-orbit-counting` now cites the order-20
+  `def-sum-over-a-finite-index-set` and `thm-double-counting`. Zero forward
+  references on the pair.
+- **Conrad 6.8 and 6.4: added**, as A items 10 and 21.
+  `thm-finite-index-core-bound-and-finite-overgroups` states all three clauses —
+  normality of the core, $[G:\operatorname{Core}_G(H)] \mid n!$, and finiteness
+  of the set of overgroups — and cites the right route for each, including
+  `cor-cardinality-of-the-power-set` and `thm-subset-of-a-finite-set` for the
+  third. `cor-index-p-subgroups-of-finite-p-groups-are-normal` is proved through
+  the factorial core bound rather than through the deferred Theorem 6.2, which is
+  the correct choice given that 6.2 is deferred.
+- **All four boundary witnesses: added**, taking the B page from 12 to 16 and
+  the counterexample count from 3 to 6, now spread across the class equation,
+  the fixed-point congruence, the order-$p^2$ theorem and Cauchy rather than
+  bunched on the free/faithful/transitive trio.
+- **Conrad §6 is now completely disposed**, 6.2 through 6.10.
+
+**Beta-8's one disagreement is upheld.** I asked it to cite batch 1's
+`ex-a-four-has-no-subgroup-of-order-six` rather than duplicate it. Beta-8
+declined with evidence: that item is on `symmetric-groups-and-the-sign-homomorphism-examples`
+at **order 45**, and the citing page is order **43**. I checked, and it is right
+twice over — the edge would be a forward reference *and* a citation into a B-page
+leaf. My original suggestion was wrong on the orders. Its replacement,
+`cex-cauchys-theorem-does-not-extend-to-composite-divisors`, is self-contained on
+$\langle(1\,2\,3),(1\,2)(3\,4)\rangle \le S_4$ with Conrad's own $A_4$ note as
+source, and its cited route (index two forces normality, then every 3-cycle
+$g=(g^2)^2$ lies in $H$, giving $|H|\ge9$) is valid. Step 6 should confirm the
+item actually establishes that the generated subgroup has order 12, since
+`def-alternating-group` is also at order 44 and unavailable to it.
+
+**R2 — two of the fifteen declines name a home that does not exist, and both are
+three-line corollaries of theorems on this page.**
+
+I applied one test to all fifteen: does the stated home name a real page in
+`plan-spec.json`, or a real subject area the library has not reached? Twelve
+pass cleanly — 6.2, 6.3 and 6.5 to `sylow-theorems-and-nilpotent-groups` (order
+70, a real page); 6.7 to the classification of finite simple groups, which is a
+model decline reason; Example 14.14 to `conjugacy-and-simplicity-in-the-symmetric-groups`
+(order 64); Example 4.3 to the representation track. Three fail:
+
+- **Theorem 6.6, Jordan's derangement theorem** — *every nontrivial transitive
+  action of a finite group has a fixed-point-free element*. Declined to "the
+  later permutation-group development". **There is no such page**; the nearest,
+  `conjugacy-and-simplicity-in-the-symmetric-groups` (64), is about $S_n$
+  specifically, and this is a statement about an abstract finite group acting
+  transitively. It is three lines from **item 29 on this very page**: transitivity
+  makes $\sum_{g\in G}|X^g| = |G|$, the identity alone contributes $|X|\ge2$, so
+  the $|G|-1$ non-identity elements contribute at most $|G|-2$ between them and
+  one of them contributes nothing. It is also squarely inside the owner's request
+  for the orbit–stabiliser theorem "and its consequences".
+- **Theorem 6.10** — *the conjugates of a proper subgroup do not cover a finite
+  group*. Declined to "the later structural study of subgroup coverings", which
+  is not a page and not a subject area. It is four lines from **item 17 on this
+  page**, `thm-conjugate-subgroups-are-counted-by-the-normalizer`, which supplies
+  exactly the count $[G:N_G(H)]$: with $n=[G:H]\ge2$, the union has at most
+  $[G:N_G(H)](|H|-1)+1 \le n|H|-n+1 = |G|-n+1 < |G|$ elements.
+- **Theorem 6.9** — *a finite intersection of finite-index subgroups has finite
+  index*. Its reason is "not consumed by ... this pair", which is not one of the
+  two permitted grounds; residual finiteness is where the result is *used*, not
+  where it belongs.
+
+**Required:** add 6.6 and 6.10 as A items (29 → 31, pair total 35 → 37, far
+below 60, no split), each citing the on-page theorem named above. For 6.9,
+either include it — $g(H\cap K) \mapsto (gH, gK)$ is injective, so
+$[G:H\cap K] \le [G:H][G:K]$, and it needs nothing from this page — or rewrite
+the reason to a true one. I do not require the item; I require the reason to be
+checkable.
+
+I am not reopening anything else on this pair.
+
+---
+
+## Batch 9 — Stage 0 review (new)
+
+Two pairs, 67 items. Reviewed against the same six questions. Batch 9's own
+repair round is verified as part of this.
+
+### The two interfaces batch 5 needed — built, and built correctly
+
+`thm-real-square-matrix-invertible-iff-determinant-nonzero` (A item 22) and
+`cor-determinant-is-a-polynomial-in-the-matrix-entries` (A item 10) exist under
+the exact ids batch 5 declared, and both dispositions flipped in `coverage.json`
+from `out-of-scope` to `included`.
+
+**The ring-versus-field boundary is right, and Beta-9 identified it unprompted.**
+It declined to state invertibility as "determinant nonzero" over a ring, because
+over a commutative ring the correct condition is that the determinant is a
+**unit**, and it split the statement accordingly:
+
+- `cor-invertible-matrix-has-unit-determinant` (item 21) — the ring-level ⟹
+  direction, from multiplicativity and `lem-ring-units-form-a-group`.
+- `thm-real-square-matrix-invertible-iff-determinant-nonzero` (item 22) — the
+  real specialisation batch 5 actually needs, with the ⟸ direction by row
+  reduction to a triangular RREF with a zero row, tracking the determinant
+  through reversible row operations.
+
+The ⟸ direction over a general ring needs the adjugate identity, and that is
+deferred (see below), so item 21 is the correct ring-level half to ship here.
+No in-run consumer needs the ring-level converse: batch 5 needs the real case,
+and batch 7's naturality example needs only $\det$ landing in $R^\times$.
+
+`cor-determinant-is-a-polynomial-in-the-matrix-entries` unfolds the finite
+Leibniz sum into `def-multivariate-polynomial-ring-by-iteration` from batch 3
+(order 52 < 82), which is the honest route.
+
+### `symmetric-groups-and-the-sign-homomorphism` carries what the Leibniz route needs
+
+`def-determinant-of-a-square-matrix` cites `def-inversions-inversion-number-and-sign`
+(batch 1 A item 6) for $\operatorname{sgn}$, and `thm-determinant-of-transpose`
+cites `thm-sign-is-a-homomorphism` (A item 9) for
+$\operatorname{sgn}(\sigma^{-1})=\operatorname{sgn}(\sigma)$ — the one fact I
+flagged in the first review as a 30-second consequence, now cited at exactly the
+place that consumes it. `thm-number-of-bijections-of-a-finite-set` supplies
+$|S_n|=n!$ for the finite sum. The order-44 page is below the order-82
+determinant page. **No gap.**
+
+### 13. `gaussian-elimination-and-row-reduction` (A 29, B 8) — **insufficient** (R3)
+
+The A page is a complete standard chapter and I have no addition to ask for.
+Elementary operations and their reversibility, elementary matrices and left
+multiplication, systems and augmented matrices, REF and RREF with existence for
+both, **uniqueness of the RREF** (often skipped, present here as item 12), the
+four subspaces and their ranks, row rank = column rank via two independent basis
+lemmas, matrix rank–nullity, affine solution sets, free-variable parametrisation,
+the rank consistency criterion, the invertible matrix theorem, factorisation into
+elementary matrices, and inversion by augmented row reduction. Two independent
+textbooks back it — Margalit–Rabinoff (44 rows) and Hefferon (26) — and the
+proof decomposition is honest: items 14, 15, 17 and 18 are four separate lemmas
+where a thinner page would have asserted rank equality once.
+
+**R3, B page.** Eight items for a 29-item A page, and two of them are real
+boundary markers — RREF unique but REF not (item 5), and row-equivalent matrices
+with different column spaces (item 8), which is the sharp one. But the page's
+single explicitly hypothesised theorem has no witness:
+
+- **`cor-solution-count-trichotomy-over-an-infinite-field` names "over an
+  infinite field" in its own title, and nothing marks that hypothesis.** Over
+  $\mathbb F_2$, $x+y=0$ has exactly two solutions, so "no solution, exactly one,
+  or infinitely many" fails outright. One counterexample item; the deps are all
+  already on the page.
+
+**Also, two silent absences.** Neither **LU factorisation** nor the **rank normal
+form** $PAQ=\begin{psmallmatrix}I_r&0\\0&0\end{psmallmatrix}$ appears in any
+source's `contents` or in any `canonical` row. I am **not** requiring either
+item: LU is a numerical topic outside both declared locators, and the rank normal
+form needs column operations this page does not develop. I am requiring a
+`canonical` disposition row for each, on the same principle that produced the
+Hales–Jewett and Rado rows — a result absent from both the scaffold and the
+ledger is invisible, and that invisibility is the exact mechanism that lost the
+orbit–stabiliser theorem.
+
+### 14. `determinants-of-matrices-over-a-commutative-ring` (A 24, B 6) — **insufficient** (R4)
+
+The A page is well built and its central deferral is legitimate, which I want to
+state plainly because my first instinct was the opposite.
+
+The development is the full ring-level construction: matrices over a commutative
+ring and the proof that the interface specialises to the published field one
+(item 5), multilinear/alternating/normalized/antisymmetric functions, alternating
+⟹ antisymmetric, the rigidity lemma $L(A)=L(I)\det(A)$, the Leibniz determinant,
+existence, **uniqueness**, vanishing on a repeated column, $\det(A^{\mathsf T})=\det(A)$,
+row operations, triangular matrices, multiplicativity, unit determinant, the real
+criterion, $\det(A^{-1})$, and similarity invariance.
+
+**The cofactor/adjugate/Cramer deferral is licensed by the plan, not invented.**
+Massot's Definition 6.4.1 (cofactor matrix) and Lemma 6.4.2 (the adjugate
+identity $M\operatorname{adj}(M)=\det(M)I$) are deferred to
+`the-determinant-of-a-linear-operator`, order 84 — whose title in
+`plan-spec.json` is literally *"The Determinant of a Linear Operator, Cofactors
+and Cramer's Rule"*. That is a real page, one order later, whose declared topic
+is exactly this material. Deferral to another page's topic is the permitted
+disposition, and nothing is dropped.
+
+**Source backing is genuine at the ring level**, which was my other worry.
+Stephen New's MATH 146 notes work over a commutative ring explicitly (Notation
+4.16 "matrices as tuples of columns over a commutative ring", Definition 4.21
+"determinant over a commutative ring") and supply 16 rows across the whole
+construction; Massot supplies a second ring-level treatment; Margalit–Rabinoff
+supplies the real-level invertibility criterion. Two independent treatments, one
+a textbook and one a full course-note set. Rule (a) is satisfied, and every one
+of the 24 items maps to a harvested row.
+
+**R4, two items, neither of them a split risk.**
+
+1. **The B page has six items for a 24-item A page and no witness for
+   multilinearity's boundary.** Four of the six are genuinely well-aimed —
+   antisymmetric ≠ alternating in characteristic two, the naive quaternion
+   $ad-bc$ failing alternation (marking commutativity), determinant $2$
+   invertible over $\mathbb Q$ but not $\mathbb Z$ (marking exactly the unit
+   condition), and row operations on a singular matrix over $\mathbb Z/6$. But
+   `cor-determinant-is-alternating-multilinear-in-the-rows` and
+   `thm-leibniz-determinant-is-alternating-multilinear-and-normalized` invite one
+   specific false inference — that $\det$ is additive in the matrix — and nothing
+   on the page marks it. $\det(I_2+I_2)=4\neq 2=\det I_2+\det I_2$. Add it; it is
+   the only kind of item this B page lacks, and it is the only B page in the run
+   with no `false-statement` entry.
+2. **Ledger correction.** The decline for "linearly dependent rows or columns
+   force zero determinant over the real field" reserves it for a page called
+   **`invertibility-and-adjugate`**, which does not exist anywhere in
+   `plan-spec.json` or `library/`. The material does belong at order 84; the
+   reason simply needs the real id. This is the same defect class as batch 7's
+   nonexistent Yoneda page, and a decline whose stated home does not exist cannot
+   be checked.
+
+I record but do not require one further decline: "a finite product of real square
+matrices is invertible exactly when every factor is invertible" is two lines from
+items 20 and 22. Its stated home (order 84, where the determinant homomorphism on
+$\mathrm{GL}_n$ is developed) is real, so the decline passes the test.
+
+**No split.** 29+8 and 24+6; both A pages are far below 60.
+
+---
+
+## What I checked, and how
+
+Everything below was run or read from disk in this pass, not carried from the
+first review.
+
+- **Full dependency resolution and reading-order comparison**, all 9 batches:
+  every `deps` entry of all 579 in-run items resolved against 2,895 published
+  items mapped to their page files, plus the in-run manifests, with the re-home
+  applied. 0 unresolved, 0 forward references, 0 same-page-later edges.
+- **`requires` closure of the re-home destination**, computed transitively the
+  way `validate-plan.mjs` computes it. This is what produced R1.
+- **`coverage-checklist.mjs`** over all nine ledgers: 14 pages, 875 results, 0
+  errors, 0 warnings.
+- **Every decline reason in all nine ledgers** matched against the page ids in
+  `plan-spec.json` and the in-run manifests. Three nonexistent homes found:
+  batch 8's "later permutation-group development" and "structural study of
+  subgroup coverings" (R2), batch 9's `invertibility-and-adjugate` (R4). Batch
+  7's previously-nonexistent Yoneda id is confirmed gone.
+- **Every added item's scaffold entry read in full** — strategy and deps, not
+  just presence — for all thirteen additions across batches 2, 6, 7, 8 and 9,
+  plus batch 5's two re-pointed dependency edges.
+- **Both re-homed item files read in full** for forward wikilinks and positional
+  prose, and every published consumer of them located and its page closure
+  checked.
+- `research/frontier-10-splice.mjs` read, to establish that it unions `requires`
+  for in-run pages only and therefore will not fix R1 by itself.
+
+## Blockers
+
+1. **R1 — the re-home needs one `requires` edit that nothing currently owns.**
+   Add `finite-counting-and-binomial-coefficients` to
+   `rings-subrings-and-integral-domains`, staged with the rest of the re-home's
+   page-list edits for the publishing commit, and taught to the step-4 splice so
+   `validate-plan.mjs` stays green once the re-home is applied. Recorded here
+   rather than prompted, and outside my Stage-0 write boundary in any case.
+2. `research/frontier-10-published-amendments.md` still does not exist. Batch 8's
+   notes correctly stage it at the publishing commit, so this remains not a
+   step-3 defect — repeated so it is not lost.
+
+## Next
+
+Three pairs go back: batch 8 for R2 (two A items, one reason rewrite), and
+batch 9 for R3 and R4 (two B items, three ledger rows). R1 goes to the
+orchestrator. **Step 4 splices nothing until those three pairs come back clean;**
+the other seven are `resolved` and need no further scaffold work from me. I
+re-check the three, then move to Stage 1.
