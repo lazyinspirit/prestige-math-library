@@ -69,6 +69,23 @@ the single publishing commit, after the owner audit. `depcheck` raises
 
 ## Finish
 
-Leave `node tools/gates.mjs --step 5 --run frontier-10` green, then report:
+Leave these green, then report:
+
+```
+node tools/tsx-run.mjs tools/precheck.mts
+node tools/depcheck.mjs
+node tools/rendercheck.mjs
+node tools/prosecheck.mjs
+node tools/content-policy.mjs research/frontier-10-batch-<i>.pages.json
+node tools/coverage-checklist.mjs research/frontier-10-batch-<i>.coverage.json
+node tools/proof-contract.mjs research/frontier-10-batch-<i>.proof-contracts.json --strict
+```
+
+**Do not run `tools/gates.mjs`.** Beta-4 and Beta-7 both found it fails `EPERM`
+inside this sandbox: the wrapper's `spawnSync` of `node` is refused before any
+child script runs. The individual scripts above are the same checks and they
+work. The orchestrator runs the aggregate wrapper and is the gate of record.
+
+Report:
 items authored, harvest yield against your checklist, every boundary case
 disposed, and any blocker stated plainly.

@@ -165,6 +165,26 @@ Stated plainly so nobody discovers these at 3am.
 * **Step 7 halts rather than spending.** `manual-step` is deliberate for the
   first builds: the sweep is the expensive irreversible action, and it should
   earn autonomy after a run or two of watching it.
+* **A dispatched agent cannot run `gates.mjs` itself** (measured, `frontier-10`
+  step 2, 2026-08-11). Inside the Codex `workspace-write` sandbox the wrapper's
+  `spawnSync` of `node` returns `EPERM` before any child script runs, so it
+  reports three wrapper failures while every one of those scripts runs fine from
+  the same shell. Brief agents to run the individual gate scripts; the
+  orchestrator runs the wrapper and remains the gate of record. Two Betas hit
+  this independently and both correctly recorded a blocker rather than requesting
+  escalation, which is the no-permission-prompt rule working as intended.
+* **A run whose name is not a numeric level cannot use the driver's briefs.** The
+  step table dispatches `briefs/beta-scaffold.md` / `authoring.md` / `alpha.md`
+  with `--var n=<level>`, producing `research/level<n>-batch-<i>.*` paths. A run
+  named `frontier-10` keeps its artifacts at `research/frontier-10-batch-<i>.*`,
+  which those briefs never name, so `frontier-10` was orchestrated by hand.
+  Wanted: run-scoped brief templating, or an `--artifact-prefix`.
+* **A run-specific brief may not contain a literal `<n>` or `<k>`**, even inside a
+  table documenting the base contract's own path pattern. `dispatch.mjs` refuses
+  it — correctly, since an agent that guesses its level audits the wrong one —
+  and the launch exits 2 having written nothing but a one-line `.out`. **The
+  proof a dispatch really started is its `<role>-<label>.prompt.md` file**, not
+  the process being alive a few seconds later; that only catches it mid-exit.
 * **`judge-sweep.mjs` keeps its own copy of the slot pool.** The swap to
   `slots.mjs` is small but wants a live sweep to validate it.
 * **`precheck.mts`'s dynamic import is unverified**, because tsx is not installed

@@ -110,8 +110,11 @@ is recorded in your notes at steps 1–2, never edited.
 ```
 node tools/validate-plan.mjs research/plan-spec.json
 node tools/coverage-checklist.mjs research/frontier-10-batch-<i>.coverage.json
-node tools/gates.mjs --step 2 --run frontier-10
 ```
+
+**Do not run `tools/gates.mjs`** — it fails `EPERM` in this sandbox (its
+`spawnSync` of `node` is refused before any child runs). The individual scripts
+are the same checks. The orchestrator runs the wrapper.
 
 ## 5. Report
 
