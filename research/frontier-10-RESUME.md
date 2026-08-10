@@ -111,10 +111,22 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — STEP 5 AUTHORING
+## State — STEP 6 AUDIT (steps 0–5 all CLEAR)
 
 - **Steps 0–4 CLEAR.** Step 4 gate green: 583 scoped items, 0 errors.
-- **Step 5 running**: 9 authoring Betas, lane cap 5. Baseline draft count in
+- **Step 5 CLEAR.** All 583 items authored; 474/474 proof contracts check;
+  content-policy 583 items 0 errors (complete provenance, no applied iota).
+  Its one failure was an orchestrator sequencing error: batch 5 depends on batch
+  9's determinant interfaces but both were dispatched in parallel, so batch 5
+  quoted the scaffold while batch 9 was still authoring — 11
+  `citation-quote-mismatch`. Repaired against the authored text, and Beta-5
+  confirmed in writing that no proof step was unlicensed by the ring-versus-field
+  split. **Dispatch a dependent batch AFTER the batch it depends on.**
+- **Step 6 running**: 9 independent readers (fresh processes, cap 5), then Alpha
+  Stage 2. Baseline snapshot `after-authoring` taken (3479 items).
+- Batch 8 enrichment protocol verified: published pages untouched, all 47 items
+  `status: draft`, `research/frontier-10-published-amendments.md` written (5.9 KB),
+  depcheck clean.
   `items/` was **51** (pre-existing `rem-*` deferred-catalogue items) — subtract
   it when reading the monitor's `drafts:` field.
 - 14 A/B pairs, **583 items** to author, 877 harvested source headings.
@@ -154,16 +166,18 @@ syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
 
 ## Exact next action
 
-Await the 9 authoring Betas, then `node tools/gates.mjs --step 5 --run frontier-10`
-(needs merged proof contracts first:
-`node tools/merge-proof-contracts.mjs --level frontier-10 research/frontier-10-proof-contracts.json research/frontier-10-batch-*.proof-contracts.json`).
-Then step 6: independent readers on foreign batches + Alpha Stage 2, including
-its §6b.0 harvest-faithfulness check and L1/L2.
+Await the 9 readers, then Alpha Stage 2 (step 6): adjudicate reader findings from
+disk, dispatch read-only refuters, run §6b.0 harvest faithfulness against the
+sources, reconcile contracts and risk tiers, apply L1/L2, audit cross-batch and
+cross-level citations. Then:
 
-**Still owed before publish:** `research/frontier-10-published-amendments.md`
-does not exist. It must carry batch 8's enrichment additions to the two
-published group-actions pages. The re-home no longer belongs in it — that was
-applied at step 4.
+```
+node tools/gates.mjs --step 6 --run frontier-10
+```
+
+Step 7 is the paired judge sweep (DeepSeek + Terra, `JUDGE_LINEUP=deepseek+terra`),
+which SPENDS — supply every A page in the run. Then step 8 fatal-only
+adjudication, step 9 scope-denial sweep, step 10 rundown and the owner pause.
 
 ## Open risks
 
