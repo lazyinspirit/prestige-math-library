@@ -40,9 +40,9 @@ pipeline_run: null
 
 **Proof technique:** direct.
 
-1.1 Define a one-object category $\mathcal O$ with object $*$ and $\operatorname{Hom}_{\mathcal O}(*,*)=\mathrm{Ord}$. Take $0$ as the identity and define $\beta\circ\alpha=\max\{\alpha,\beta\}$. [L2, L3]
+1.1 Define a one-object category $\mathcal O$ with object $*$ and $\operatorname{Hom}_{\mathcal O}(*,*)=\mathrm{Ord}$. Take $0$ as the identity and define $\beta\circ\alpha=\max\{\alpha,\beta\}$. [given, L2, L3]
 
-2.1 Maximum is associative, and $\max\{0,\alpha\}=\alpha=\max\{\alpha,0\}$ for every ordinal $\alpha$. Thus the data in step 1.1 satisfy the category axioms under the convention in [L3]. [step 1.1, L2, L3]
+2.1 Maximum is associative, and $\max\{0,\alpha\}=\alpha=\max\{\alpha,0\}$ for every ordinal $\alpha$. Thus the data in step 1.1 satisfy the category axioms under the given convention. [step 1.1, given, L2]
 
 2.2 Its sole hom-collection is $\mathrm{Ord}$, which is not a set by [L3]. Hence $\mathcal O$ is not locally small by [L1]. [step 1.1, L1, L3]
 

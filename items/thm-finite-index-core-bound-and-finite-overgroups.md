@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-left-coset-action-and-its-kernel, lem-core-is-largest-normal-subgroup-contained, thm-first-isomorphism-theorem-groups, def-symmetric-group, lem-symmetric-group-is-a-group, thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial, thm-lagrange, def-index, def-finite-cardinality, def-order-in-a-group, def-quotient-group, prop-canonical-quotient-map, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set]
+deps: [thm-left-coset-action-and-its-kernel, lem-core-is-largest-normal-subgroup-contained, thm-first-isomorphism-theorem-groups, def-symmetric-group, lem-symmetric-group-is-a-group, thm-number-of-bijections-of-a-finite-set, def-factorial-and-falling-factorial, thm-lagrange, def-index, def-finite-cardinality, def-quotient-group, prop-canonical-quotient-map, cor-cardinality-of-the-power-set, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
 landmark: true
@@ -59,8 +59,8 @@ $H\le K\le G$.
 
 1.1 By [L1] and [L2], the coset action has kernel $N\mathrel{\trianglelefteq}G$ with $N\le H$, and its image is a subgroup of $\operatorname{Sym}(G/H)$. [L1, L2, L4]
 
-1.2 Every subgroup $K$ containing $H$ also contains $N$ by [L2], and then $K=\pi^{-1}[\pi[K]]$ for the projection [L7]. Hence $K\mapsto\pi[K]$ injects the set of such overgroups into the power set of the finite set $G/N$, which is finite by [L8] and [L9]. [L2, L7, L8, L9]
-
 2.1 By [L3], $G/N\cong\operatorname{im}\rho$. The set $G/H$ has $n$ elements by [L10], so [L5] gives $|\operatorname{Sym}(G/H)|=n!$; [L6] therefore gives $|G/N|=|\operatorname{im}\rho|\mid n!$, that is, $[G:N]\mid n!$ by [L10]. [step 1.1, L3, L4, L5, L6, L10]
 
-3.1 Thus the core is normal and finite-index, its index divides $n!$, and the collection of subgroups containing $H$ is finite. [step 1.1, step 2.1, step 1.2] ∎
+3.1 Every subgroup $K$ containing $H$ also contains $N$ by [L2]. If $\pi(x)\in\pi[K]$, then $\pi(x)=\pi(k)$ for some $k\in K$, so $k^{-1}x\in N\le K$ and hence $x\in K$; thus $K=\pi^{-1}[\pi[K]]$. Therefore $K\mapsto\pi[K]$ injects the set of such overgroups into the power set of the now known finite set $G/N$, which is finite by [L8] and [L9]. [step 2.1, L2, L7, L8, L9]
+
+4.1 Thus the core is normal and finite-index, its index divides $n!$, and the collection of subgroups containing $H$ is finite. [step 1.1, step 2.1, step 3.1] ∎

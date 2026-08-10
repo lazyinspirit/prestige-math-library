@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-vertical-composition-of-natural-transformations-is-natural, lem-horizontal-composition-of-natural-transformations-is-natural]
+deps: [def-vertical-composition-of-natural-transformations, lem-vertical-composition-of-natural-transformations-is-natural, def-horizontal-composition-and-whiskering-of-natural-transformations, lem-horizontal-composition-of-natural-transformations-is-natural]
 justified_by: []
 aliases: []
 landmark: true
@@ -35,7 +35,7 @@ interchange law.
 
 **Given:** Natural transformations $\alpha:F\Rightarrow G$, $\alpha':G\Rightarrow K:\mathcal C\to\mathcal D$ and $\beta:H\Rightarrow L$, $\beta':L\Rightarrow M:\mathcal D\to\mathcal E$.
 
-[L1] Vertical composites are natural and componentwise ([[lem-vertical-composition-of-natural-transformations-is-natural]]), and horizontal composites are natural with the standard component formula ([[lem-horizontal-composition-of-natural-transformations-is-natural]]).
+[L1] Vertical composition is componentwise and its composites are natural ([[def-vertical-composition-of-natural-transformations]], [[lem-vertical-composition-of-natural-transformations-is-natural]]); horizontal composition has the standard component formula and its composites are natural ([[def-horizontal-composition-and-whiskering-of-natural-transformations]], [[lem-horizontal-composition-of-natural-transformations-is-natural]]).
 
 ## Proof
 

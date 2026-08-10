@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-center-of-a-group, lem-center-is-normal, def-quotient-group, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, lem-group-power-laws]
+deps: [def-center-of-a-group, lem-center-is-normal, def-quotient-group, def-generated-subgroup, lem-cyclic-subgroup-is-the-set-of-powers, lem-group-power-laws, lem-coset-membership-and-equality]
 justified_by: []
 aliases: []
 landmark: false
@@ -17,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "K. Conrad, Group Actions, Remark 5.5"
-      url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
+    - title: "T. W. Judson, Abstract Algebra: Theory and Applications, Corollary 14.16, proof"
+      url: "https://judsonbooks.org/aata-files/aata-html/actions-section-class-equation.html"
 pipeline_run: null
 ---
 
@@ -42,11 +42,13 @@ If the quotient group $G/Z(G)$ is cyclic, then $G$ is abelian.
 
 [L6] Powers of one group element commute with one another ([[lem-group-power-laws]]).
 
+[L7] Equality of left cosets $aH=bH$ is equivalent to $a^{-1}b\in H$ ([[lem-coset-membership-and-equality]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose $aZ(G)$ generating $G/Z(G)$. By [L3], [L4], and [L5], arbitrary $x,y\in G$ have forms $x=a^m z$ and $y=a^n w$ for some integers $m,n$ and central elements $z,w\in Z(G)$. [L1, L2, L3, L4, L5, choose]
+1.1 Choose $aZ(G)$ generating $G/Z(G)$. By [L3]--[L6], arbitrary $x,y\in G$ satisfy $xZ(G)=a^mZ(G)$ and $yZ(G)=a^nZ(G)$ for some integers $m,n$. By [L7], $a^{-m}x$ and $a^{-n}y$ lie in $Z(G)$; setting $z=a^{-m}x$ and $w=a^{-n}y$ gives $x=a^mz$ and $y=a^nw$. [L1, L2, L3, L4, L5, L6, L7, choose]
 
 1.2 The elements $z,w$ commute with every element by [L1], and $a^m$ commutes with $a^n$ by [L6]. [L1, L6]
 

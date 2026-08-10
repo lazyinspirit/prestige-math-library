@@ -569,3 +569,20 @@ item/page files, scoped `citecheck` on all 85 items, repository-wide
 `fwdcheck`, repository-wide `extcheck`, and `git diff --check`.  As required,
 `tools/gates.mjs` was not run.  No permission prompt or escalation was
 attempted.  There is no batch-7 blocker.
+
+## Independent step-6 reader continuity checkpoint
+
+Reader `frontier-10`, batch 7, completed the mathematical and citation read of
+all 85 assigned items before context compaction. The reader found and repaired
+the concrete defects in its write boundary; substantive repairs include the
+large-category class-function convention, seven local-smallness citations,
+typed slice/coslice notation, categorical-composition dependency links, the
+fundamental-groupoid endpoint-path proof, and the change-of-basepoint proof.
+Two nonfatal source/strict-equality issues were also repaired. All repairs
+remain provisional pending Alpha adjudication.
+
+Exact continuation point: regenerate the changed proof-contract rows using
+`/tmp/update-frontier10-b7-contract.mjs`, rerun the scoped gates, reread the
+resulting diffs, and write the per-item report to
+`research/frontier-10-reader-7.findings.md`. No permission prompt or
+escalation was attempted, and no blocker was present at this checkpoint.

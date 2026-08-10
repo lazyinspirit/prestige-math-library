@@ -1,7 +1,7 @@
 ---
 id: thm-r-three-three-equals-six
 kind: theorem
-title: "The first exact Ramsey number is $R(3,3)=6$"
+title: "The Ramsey number $R(3,3)=6$"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ The Ramsey number of [[def-off-diagonal-ramsey-number]] satisfies $R(3,3)=6$. Co
 
 **Given:** Red-blue colourings of the edges of $K_6$ and $K_5$.
 
-[L1] If $\lvert A\rvert > k\,\lvert B\rvert$ then there is $b \in B$ with $\lvert f^{-1}[\{b\}]\rvert > k$ ([[thm-the-strong-pigeonhole-principle]]).
+[L1] If $A,B$ are finite, $k\in\mathbb N$, and $f:A\to B$ satisfies $\lvert A\rvert > k\,\lvert B\rvert$, then there is $b \in B$ with $\lvert f^{-1}[\{b\}]\rvert > k$ ([[thm-the-strong-pigeonhole-principle]]).
 
 
 

@@ -30,7 +30,7 @@ In a two-connected plane graph ([[def-vertex-and-edge-connectivity]]), every fac
 
 **Given:** A two-connected plane graph $G$ and a face $f$ with its closed boundary walk.
 
-[L1] A finite graph is $k$-connected if and only if every two distinct vertices are joined by at least $k$ internally vertex-disjoint paths ([[cor-whitney-k-connected-path-characterisation]]).
+[L1] For $k\ge1$, a finite graph on at least $k+1$ vertices is $k$-connected if and only if every two distinct vertices are joined by at least $k$ internally vertex-disjoint paths ([[cor-whitney-k-connected-path-characterisation]]).
 
 ## Proof
 
@@ -41,4 +41,3 @@ In a two-connected plane graph ([[def-vertex-and-edge-connectivity]]), every fac
 2.1 Vertices or edges incident with those two portions lie in different components of $G-v$: a path between them avoiding $v$ would, together with boundary subpaths, cross the face boundary in the plane. Thus $v$ is a cut vertex. [step 1.1]
 
 3.1 By [L1], two-connectivity supplies two internally vertex-disjoint paths between vertices chosen on the two portions, so deletion of $v$ cannot separate them. This contradicts step 2.1. The boundary walk has no repeated vertex and is therefore a cycle. [step 2.1, L1, discharge-contradiction] ∎
-

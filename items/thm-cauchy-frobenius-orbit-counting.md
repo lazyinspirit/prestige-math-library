@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-fixed-point-sets-of-a-group-action, thm-orbits-partition-the-set, cor-orbit-stabilizer-cardinality, thm-double-counting, def-sum-over-a-finite-index-set]
+deps: [def-fixed-point-sets-of-a-group-action, thm-orbits-partition-the-set, cor-orbit-stabilizer-cardinality, thm-double-counting, def-sum-over-a-finite-index-set, thm-sum-rule]
 justified_by: []
 aliases: [thm-burnsides-orbit-counting-lemma]
 landmark: true
@@ -19,7 +19,7 @@ sources:
   references:
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.3, Burnside's Counting Theorem"
       url: "https://twjudson.github.io/aata-files/aata-html/actions-section-burnsides-counting-theorem.html"
-    - title: "K. Conrad, Group Actions, Theorem 4.1"
+    - title: "K. Conrad, Group Actions, Theorem 3.29"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
 pipeline_run: null
 ---
@@ -48,6 +48,8 @@ element of $G$.
 
 [L5] Finite sums over finite index sets are well-defined ([[def-sum-over-a-finite-index-set]]).
 
+[L6] A finite sum splits along a finite partition of its index set ([[thm-sum-rule]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -56,6 +58,6 @@ element of $G$.
 
 1.2 Counting the same relation over $x$ gives $|R|=\sum_{x\in X}|G_x|$. [L4, L5]
 
-2.1 Group the second sum by the orbit partition [L2]. On an orbit $O=G\cdot x$, [L3] gives $|G_y|=|G|/|O|$ for every $y\in O$, so that orbit contributes $|O|(|G|/|O|)=|G|$. [step 1.2, L2, L3, L5]
+2.1 Split the second sum along the orbit partition using [L2] and [L6]. On an orbit $O=G\cdot x$, [L3] gives $|G_y|=|G|/|O|$ for every $y\in O$, so that orbit contributes $|O|(|G|/|O|)=|G|$. [step 1.2, L2, L3, L5, L6]
 
 3.1 There is one contribution for each orbit in $X/G$, hence $|R|=|G|\,|X/G|$. Combining this with step 1.1 gives the stated identity. [step 1.1, step 2.1, L2, L5] ∎

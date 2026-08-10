@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-left-and-right-modules, def-module-homomorphism-kernel-image-and-cokernel, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-left-and-right-modules, def-module-homomorphism-kernel-image-and-cokernel, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ locally small category $R\text{-}\mathbf{Mod}$.
 
 [L1] Left modules satisfy the axioms in [[def-left-and-right-modules]], and module homomorphisms preserve addition and scalar multiplication ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L2] Functions between fixed sets form a set ([[def-function]]); the category and size notions are [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); the category and size notions are [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ locally small category $R\text{-}\mathbf{Mod}$.
 2.1 Thus left $R$-modules and their homomorphisms form a category whose hom-collections are sets. [step 1.1, L2]
 
 3.1 For every ordinal $\alpha$, the singleton $\{\alpha\}$ carries a transported zero $R$-module structure, producing a proper class of distinct objects by [L2]; hence $R\text{-}\mathbf{Mod}$ is large and locally small. [step 2.1, L1, L2] ∎
-

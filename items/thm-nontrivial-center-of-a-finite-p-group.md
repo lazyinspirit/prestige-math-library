@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "K. Conrad, Group Actions, Corollary 5.4"
+    - title: "K. Conrad, Group Actions, Theorem 5.1"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.2"
       url: "https://judsonbooks.org/aata-files/aata-html/actions-section-class-equation.html"

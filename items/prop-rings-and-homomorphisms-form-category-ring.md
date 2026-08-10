@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-ring, def-ring-homomorphism, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-ring, def-ring-homomorphism, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ category $\mathbf{Ring}$.
 
 [L1] A ring is an additive abelian group and multiplicative monoid with both distributive laws ([[def-ring]]); a ring homomorphism preserves addition, multiplication, zero, and one ([[def-ring-homomorphism]]).
 
-[L2] Functions between fixed sets form a set ([[def-function]]); the category and size conditions are [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); the category and size conditions are [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ category $\mathbf{Ring}$.
 2.1 These data form a category, and every hom-collection is a set because it is a subset of the functions between the two underlying sets. [step 1.1, L2]
 
 3.1 For each ordinal $\alpha$, the one-element set $\{\alpha\}$ carries the zero-ring structure with $0=1=\alpha$; these are distinct objects, so [L2] shows that $\mathbf{Ring}$ is large and locally small. [step 2.1, L1, L2] ∎
-

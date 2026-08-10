@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Proposition 3.105"
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Lemma 3.105 and Theorem 3.107"
       url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
 pipeline_run: null
 ---

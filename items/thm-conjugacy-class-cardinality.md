@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Example 3.110"
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Corollary 3.109"
       url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.2"
       url: "https://judsonbooks.org/aata-files/aata-html/actions-section-class-equation.html"

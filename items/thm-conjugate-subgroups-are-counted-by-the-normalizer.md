@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Example 3.111"
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Corollary 3.110"
       url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
 pipeline_run: null
 ---

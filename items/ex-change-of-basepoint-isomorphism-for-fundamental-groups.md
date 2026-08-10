@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-based-loops-and-fundamental-group, thm-fundamental-group-laws, def-path-connected, thm-composition-respects-homotopy, def-group-isomorphism-and-automorphism]
+deps: [def-based-loops-and-fundamental-group, thm-fundamental-group-laws, def-path-connected, ex-fundamental-groupoid, def-group-isomorphism-and-automorphism]
 justified_by: []
 aliases: []
 landmark: false
@@ -31,9 +31,9 @@ gives an isomorphism $\pi_1(X,x_0)\cong\pi_1(X,x_1)$.
 
 **Given:** A space $X$ and a path $\gamma:x_0\to x_1$.
 
-[L1] Loop classes multiply by concatenation in traversal order, reversed paths give inverses, and the group laws hold ([[def-based-loops-and-fundamental-group]], [[thm-fundamental-group-laws]], [[def-path-connected]]).
+[L1] Loop classes multiply by concatenation in traversal order and satisfy the group laws ([[def-based-loops-and-fundamental-group]], [[thm-fundamental-group-laws]]); paths are those of [[def-path-connected]].
 
-[L2] Concatenation respects endpoint-preserving path homotopy ([[thm-composition-respects-homotopy]]).
+[L2] In the fundamental groupoid, concatenation is well defined and associative on endpoint-preserving path-homotopy classes, and reversal gives the inverse of an arbitrary path class ([[ex-fundamental-groupoid]]).
 
 [L3] A bijective group homomorphism is a group isomorphism ([[def-group-isomorphism-and-automorphism]]).
 

@@ -30,5 +30,10 @@ $$N(A):=\{x\in F^n:Ax=0\}.$$
 
 The **row rank** and **column rank** are
 $$\operatorname{rrank}(A):=\dim_F\operatorname{Row}(A),\qquad \operatorname{crank}(A):=\dim_F\operatorname{Col}(A).$$
-These dimensions are defined: each space is spanned by a finite list. Induction on the length of such a list gives a finite basis, since a dependent last vector may be deleted without changing the span, while an independent list is already a basis of its span. The **rank** of $A$ is its row rank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column rank.
-
+These dimensions are defined because each space is spanned by a finite list.
+Starting with the empty list, inspect the spanning vectors in order and retain a
+vector exactly when it is not in the span of those already retained. Induction
+shows that the retained list is independent and has the same span as the
+original finite list, so it is a finite basis. The **rank** of $A$ is its row
+rank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column
+rank.

@@ -32,7 +32,7 @@ All differences are positive. The finite product and function-counting used to c
 
 **Given:** The parameters and the family of witnesses $V(m-1,q)$ in the Statement.
 
-[L1] Then $A^{B}$ is finite and $\lvert A^{B}\rvert = \lvert A\rvert^{\lvert B\rvert}$ ([[thm-cardinality-of-a-set-of-functions]]).
+[L1] If $A$ and $B$ are finite, then $A^{B}$ is finite and $\lvert A^{B}\rvert = \lvert A\rvert^{\lvert B\rvert}$ ([[thm-cardinality-of-a-set-of-functions]]).
 
 
 

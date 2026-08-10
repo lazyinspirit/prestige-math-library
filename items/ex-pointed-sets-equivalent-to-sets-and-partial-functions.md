@@ -49,6 +49,6 @@ categories exists.
 
 1.3 The empty set is the unique zero object of $\mathbf{Par}$: if $Z$ were terminal, the empty partial function and each everywhere-defined map $\{*\}\to Z$ would force $Z=\varnothing$. In $\mathbf{Set}_*$ every pointed singleton is a zero object, so the distinct objects $(\{0\},0)$ and $(\{1\},1)$ are both zero objects. [L3]
 
-2.1 Direct inspection of domains shows that both assignments preserve identities and partial composition. Moreover $RL=1_{\mathbf{Par}}$, while the pointed bijection $(X\setminus\{x_0\})\amalg\{*\}\to X$ that is inclusion on the first summand and sends $*$ to $x_0$ is natural. Hence $LR\cong1_{\mathbf{Set}_*}$. [step 1.1, step 1.2]
+2.1 Direct inspection of domains shows that both assignments preserve identities and partial composition. The canonical bijection $A\to RLA$ and the pointed bijection $(X\setminus\{x_0\})\amalg\{*\}\to X$ that is inclusion on the first summand and sends $*$ to $x_0$ are natural. Hence $RL\cong1_{\mathbf{Par}}$ and $LR\cong1_{\mathbf{Set}_*}$. [step 1.1, step 1.2]
 
 3.1 Step 2.1 supplies the equivalence in [L1]. An isomorphism as in [L2] would biject objects and, together with its inverse, preserve and reflect the zero-object property, contradicting step 1.3. Thus these categories are equivalent but not isomorphic. [step 2.1, step 1.3, L1, L2] ∎

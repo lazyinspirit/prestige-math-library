@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-polygonal-arc-and-polygon, def-plane-region-and-frontier, lem-of-q-dense, thm-sum-rule, def-polygonal-path-and-polygonal-connectedness]
+deps: [def-polygonal-arc-and-polygon, def-plane-region-and-frontier, lem-of-q-dense, thm-of-archimedean, thm-sum-rule, def-polygonal-path-and-polygonal-connectedness]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,9 @@ Let $P$ be a polygon ([[def-polygonal-arc-and-polygon]]) and $x\in\mathbb R^2\se
 
 **Given:** A polygon $P$ with its finite edge and vertex sets, and $x\notin P$.
 
-[L1] For any $x < y$ in $F$ there is a rational $q$ strictly between them ([[lem-of-q-dense]]).
+[L1] In an Archimedean ordered field $F$, for any $x<y$ there is a rational $q$ whose canonical image lies strictly between them ([[lem-of-q-dense]]).
+
+[L2] Every complete ordered field, in particular $\mathbb R$, is Archimedean ([[thm-of-archimedean]]).
 
 [F1] A polygonal path is specified by a finite list of vertices $v_0,\ldots,v_m\in A$ ([[def-polygonal-path-and-polygonal-connectedness]]).
 
@@ -38,7 +40,6 @@ Let $P$ be a polygon ([[def-polygonal-arc-and-polygon]]) and $x\in\mathbb R^2\se
 
 **Proof technique:** constructive.
 
-1.1 A ray direction is bad if its line through $x$ contains a polygon vertex or is parallel to an edge line. There are only finitely many such directions. A rational-slope direction in an open angular interval avoiding them exists by [L1]. [L1, F1, construct]
+1.1 A ray direction is bad if its line through $x$ contains a polygon vertex or is parallel to an edge line. There are only finitely many such directions. By [L2], [L1] applies in $\mathbb R$ and supplies a rational-slope direction in an open angular interval avoiding them. [L1, L2, F1, construct]
 
 2.1 In the chosen direction the ray misses every vertex and is not parallel to any edge. It therefore meets each closed edge segment in at most one point, and every such intersection is transverse. Since the polygon has finitely many edges, the total intersection set is finite and has the required properties. [step 1.1, F1, discharge-construct] ∎
-

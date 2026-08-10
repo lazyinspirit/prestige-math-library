@@ -31,7 +31,7 @@ Every three-connected simple graph $G$ with more than four vertices has an edge 
 
 **Given:** A three-connected simple graph $G\ne K_4$.
 
-[L1] A finite graph is three-connected exactly when every two distinct vertices are joined by at least three internally vertex-disjoint paths ([[cor-whitney-k-connected-path-characterisation]]).
+[L1] A finite graph on at least four vertices is three-connected exactly when every two distinct vertices are joined by at least three internally vertex-disjoint paths ([[cor-whitney-k-connected-path-characterisation]]).
 
 [F1] Simple contraction deletes resulting loops and merges parallel edges ([[def-graph-deletion-contraction-minor-and-subdivision]]).
 
@@ -46,4 +46,3 @@ Every three-connected simple graph $G$ with more than four vertices has an edge 
 3.1 Because $x$ and $y$ are adjacent, some component $D$ of $G-\{z,v,w\}$ avoids both $x$ and $y$. The separator-neighbour property puts a neighbour of $v$ in $D$; since $v\in C$ and $D$ avoids $x,y,z$, that neighbour and every vertex of $D$ reached without the new separator lie in $C$. Moreover $v\notin D$, so $D$ is a proper nonempty subset of $C$. The triple $\{z,v,w\}$ with component $D$ is therefore a smaller choice than $C$. [step 2.1, L1]
 
 4.1 Step 3.1 contradicts the minimality in step 2.1. Hence some edge has a simple contraction that remains three-connected. [step 2.1, step 3.1, discharge-contradiction] ∎
-

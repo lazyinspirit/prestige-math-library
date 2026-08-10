@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-finitely-branching-tree-on-finite-sequences, thm-well-ordering-principle, thm-induction-principle, def-countable]
+deps: [def-finitely-branching-tree-on-finite-sequences, thm-well-ordering-principle, thm-induction-principle, thm-recursion, def-countable]
 justified_by: []
 aliases: []
 landmark: true
@@ -25,13 +25,15 @@ pipeline_run: null
 
 ## Statement
 
-Let $T$ be an ordered finitely branching tree of finite sequences ([[def-finitely-branching-tree-on-finite-sequences]]). If every level $T_n$ is nonempty, then $T$ has an infinite branch. The branch is constructed in ZF by least successors; no choice principle is used. Its natural indexing agrees with the convention of [[def-countable]], and the elementary induction below uses [[thm-induction-principle]].
+Let $T$ be an ordered finitely branching tree of finite sequences ([[def-finitely-branching-tree-on-finite-sequences]]). If every level $T_n$ is nonempty, then $T$ has an infinite branch. The branch is constructed in ZF by least successors and natural recursion ([[thm-recursion]]); no choice principle is used. Its natural indexing agrees with the convention of [[def-countable]], and the elementary induction below uses [[thm-induction-principle]].
 
 ## Facts & Assumptions
 
 **Given:** An ordered finitely branching tree $T$ with a node at every level.
 
 [L1] Every nonempty subset $S \subseteq \mathbb{N}$ has a least element ([[thm-well-ordering-principle]]).
+
+[L2] Given a set $A$, an element $a\in A$, and a function $f:A\to A$, natural recursion supplies a unique sequence beginning at $a$ and iterating $f$ ([[thm-recursion]]).
 
 ## Proof
 
@@ -41,5 +43,4 @@ Let $T$ be an ordered finitely branching tree of finite sequences ([[def-finitel
 
 2.1 Every viable node has a viable immediate successor. Otherwise all its finitely many successors would have bounded descendant height, and the maximum of their bounds would contradict viability. The viable successor labels form a nonempty set of naturals, so [L1] gives a unique least one. [step 1.1, L1]
 
-3.1 Start at the root and recursively append the least viable successor from step 2.1. Every finite initial segment produced is a node of $T$, and at stage $n$ it has length $n$. Thus the recursive sequence is an infinite branch. [step 2.1, construct, discharge-construct] ∎
-
+3.1 On the set of viable nodes, send each node to its least viable successor from step 2.1. Apply [L2] from the root. Every finite initial segment produced is a node of $T$, and at stage $n$ it has length $n$. Thus the recursive sequence is an infinite branch. [step 2.1, L2, discharge-construct] ∎

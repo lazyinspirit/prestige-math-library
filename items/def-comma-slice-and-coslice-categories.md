@@ -35,8 +35,12 @@ Identities and composites are componentwise. Functoriality of $S,T$ shows that
 the displayed square remains commutative under composition, and the category
 axioms follow from [[def-category]].
 
-For an object $C\in\mathcal C$, the **slice category** $\mathcal C/C$ is
-$(1_{\mathcal C}\downarrow C)$, whose objects are arrows into $C$.
-The **coslice category** $C/\mathcal C$ is
-$(C\downarrow1_{\mathcal C})$, whose objects are arrows out of $C$.
-
+For an object $C\in\mathcal C$, let
+$\Delta_C:\mathbf 1\to\mathcal C$ be the functor from the one-object,
+identity-only category that selects $C$. The **slice category** is
+$\mathcal C/C=(1_{\mathcal C}\downarrow\Delta_C)$: its objects are arrows
+$f:A\to C$, and a morphism from $f:A\to C$ to $f':A'\to C$ is an arrow
+$a:A\to A'$ with $f'\circ a=f$. The **coslice category** is
+$C/\mathcal C=(\Delta_C\downarrow1_{\mathcal C})$: its objects are arrows
+$f:C\to A$, and a morphism from $f:C\to A$ to $f':C\to A'$ is an arrow
+$a:A\to A'$ with $a\circ f=f'$.

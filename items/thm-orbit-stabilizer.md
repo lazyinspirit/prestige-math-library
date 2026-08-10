@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Proposition 3.107"
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Theorem 3.107"
       url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.1"
       url: "https://twjudson.github.io/aata-files/aata-html/actions-section-groups-acting-on-sets.html"

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-topological-space, def-continuous-map-top, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-topological-space, def-continuous-map-top, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ $\mathbf{Top}$.
 
 [L1] A topology is the structure in [[def-topological-space]], and identity maps and composites of continuous maps are continuous by the inverse-image definition in [[def-continuous-map-top]].
 
-[L2] Functions between fixed sets form a set ([[def-function]]); category size is as in [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); category size is as in [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ $\mathbf{Top}$.
 2.1 Consequently spaces and continuous maps form a category, and each hom-collection is a set of functions between fixed underlying sets. [step 1.1, L2]
 
 3.1 Every singleton $\{\alpha\}$, for an ordinal $\alpha$, has its unique topology; these give distinct space objects, so [L2] makes $\mathbf{Top}$ large and locally small. [step 2.1, L1, L2] ∎
-

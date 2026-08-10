@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-euler-formula-for-connected-plane-graphs, lem-plane-graph-faces-are-finite-with-one-unbounded-face, cor-connected-components-partition-the-vertex-set, def-finite-cardinality]
+deps: [thm-euler-formula-for-connected-plane-graphs, lem-plane-graph-faces-are-finite-with-one-unbounded-face, cor-connected-components-partition-the-vertex-set, def-finite-cardinality, thm-connected-iff-has-spanning-tree, thm-forest-edge-component-count, prop-plane-forest-has-one-face, lem-plane-edge-face-incidence]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,11 +38,19 @@ This includes the null graph, for which $c=0$ and the complement is its single f
 
 [L2] The vertex sets of the connected components of a graph are nonempty, cover the vertex set, and any two are equal or disjoint ([[cor-connected-components-partition-the-vertex-set]]).
 
+[L3] A finite graph is connected if and only if it has a spanning tree ([[thm-connected-iff-has-spanning-tree]]).
+
+[L4] A tree on $n$ vertices has $n-1$ edges ([[thm-forest-edge-component-count]]).
+
+[L5] Every plane forest has exactly one face ([[prop-plane-forest-has-one-face]]).
+
+[L6] A cycle edge in a plane graph is incident with two distinct faces ([[lem-plane-edge-face-incidence]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Sum [L1] over the components. Vertices and edges add disjointly by [L2]. Each component has an unbounded face, but in the combined drawing these exterior regions merge into the single unbounded face of $G$; all bounded faces remain distinct. Hence $|F|=1+\sum_i(|F(G_i)|-1)$. [L1, L2]
+1.1 Insert the connected component drawings one at a time in their inherited positions. Before a component is inserted, its connected drawing lies in one face of the components already inserted. By [L3] choose a spanning tree; [L4] gives it $|V(G_i)|-1$ edges, and [L5] shows that inserting this tree does not split the containing face. Add the remaining edges in their inherited drawing order. Each joins vertices already connected by the tree, hence lies on a cycle, so [L6] shows that its insertion splits one face into two. There are $|E(G_i)|-|V(G_i)|+1=|F(G_i)|-1$ such edges, where the last equality is [L1]. Starting from the one face of the empty drawing therefore gives $|F|=1+\sum_i(|F(G_i)|-1)$. Vertices and edges add disjointly by [L2]. [L1, L2, L3, L4, L5, L6]
 
 2.1 Therefore $|V|-|E|+|F|=\sum_i(|V(G_i)|-|E(G_i)|+|F(G_i)|)-c+1=2c-c+1=1+c$. [step 1.1, algebra]
 

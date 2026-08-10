@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-nontrivial-center-of-a-finite-p-group, lem-cyclic-quotient-by-center-implies-abelian, cor-order-of-a-quotient-group, cor-prime-order-group-is-cyclic, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups]
+deps: [thm-nontrivial-center-of-a-finite-p-group, lem-cyclic-quotient-by-center-implies-abelian, cor-order-of-a-quotient-group, cor-prime-order-group-is-cyclic, def-finite-p-group, lem-subgroups-of-finite-p-groups-are-p-groups, lem-center-is-normal, thm-subset-of-a-finite-set]
 justified_by: []
 aliases: []
 landmark: true
@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "K. Conrad, Group Actions, Remark 5.5"
+    - title: "K. Conrad, Group Actions, Corollary 5.2"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
 pipeline_run: null
 ---
@@ -42,12 +42,16 @@ If $p$ is prime and $G$ is a group of order $p^2$, then $G$ is abelian.
 
 [L6] Every subgroup of a finite $p$-group has prime-power order ([[lem-subgroups-of-finite-p-groups-are-p-groups]]).
 
+[L7] The center $Z(G)$ is a normal subgroup, hence in particular a subgroup, of $G$ ([[lem-center-is-normal]]).
+
+[L8] A finite subset with the same cardinality as its ambient finite set is the whole set ([[thm-subset-of-a-finite-set]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L1], [L5], and [L6], the nontrivial subgroup $Z(G)$ has order $p$ or $p^2$. [L1, L5, L6]
+1.1 By [L1] and [L7], $Z(G)$ is a nontrivial subgroup of $G$; [L5] and [L6] therefore show that it has order $p$ or $p^2$. [L1, L5, L6, L7]
 
-2.1 If $|Z(G)|=p^2$, then $Z(G)=G$ and $G$ is abelian. If $|Z(G)|=p$, then [L3] gives $|G/Z(G)|=p$, so [L4] makes $G/Z(G)$ cyclic. [step 1.1, L3, L4]
+2.1 If $|Z(G)|=p^2=|G|$, then [L8] gives $Z(G)=G$, so $G$ is abelian. If $|Z(G)|=p$, then [L3] gives $|G/Z(G)|=p$, so [L4] makes $G/Z(G)$ cyclic. [step 1.1, L3, L4, L8]
 
 3.1 In the second case [L2] makes $G$ abelian, and the first case already did so. Hence every group of order $p^2$ is abelian. [step 2.1, L2] ∎

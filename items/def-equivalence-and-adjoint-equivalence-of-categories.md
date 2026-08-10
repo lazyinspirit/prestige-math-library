@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-natural-isomorphism, def-functor-and-contravariant-functor]
+deps: [def-natural-isomorphism, def-functor-and-contravariant-functor, def-horizontal-composition-and-whiskering-of-natural-transformations]
 justified_by: []
 aliases: []
 landmark: true
@@ -39,4 +39,7 @@ An **adjoint equivalence** is such data satisfying the triangle identities
 
 $$G\varepsilon\circ\eta G=1_G,\qquad \varepsilon F\circ F\eta=1_F.$$
 
+Here $G\varepsilon$, $\eta G$, $\varepsilon F$, and $F\eta$ are the
+whiskerings of
+[[def-horizontal-composition-and-whiskering-of-natural-transformations]].
 No triangle identity is required of a bare equivalence.

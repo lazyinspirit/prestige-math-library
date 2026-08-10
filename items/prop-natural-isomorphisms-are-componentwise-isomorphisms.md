@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-natural-isomorphism, def-functor-category]
+deps: [def-natural-isomorphism, def-vertical-composition-of-natural-transformations]
 justified_by: []
 aliases: []
 landmark: true
@@ -31,7 +31,7 @@ exactly when every component $\alpha_A$ is an isomorphism.
 
 **Given:** A natural transformation $\alpha:F\Rightarrow G$.
 
-[L1] A natural isomorphism is an invertible morphism in the functor category ([[def-natural-isomorphism]]), whose composition and identities are componentwise ([[def-functor-category]]).
+[L1] A natural isomorphism has a two-sided inverse natural transformation ([[def-natural-isomorphism]]), and vertical composition and identity transformations are componentwise ([[def-vertical-composition-of-natural-transformations]]).
 
 ## Proof
 
@@ -42,4 +42,3 @@ exactly when every component $\alpha_A$ is an isomorphism.
 2.1 Conversely, suppose every $\alpha_A$ is invertible and put $\beta_A=\alpha_A^{-1}$; from $Gf\alpha_A=\alpha_BFf$, composition with the two inverses gives $Ff\beta_A=\beta_BGf$, so $\beta:G\Rightarrow F$ is natural. [step 1.1, L1]
 
 3.1 Componentwise, $\beta\circ\alpha=1_F$ and $\alpha\circ\beta=1_G$, hence $\alpha$ is a natural isomorphism. [step 2.1, L1] ∎
-

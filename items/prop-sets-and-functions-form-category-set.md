@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-function, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -31,7 +31,7 @@ $\mathbf{Set}$.
 
 **Given:** Sets $A,B,C$ and functions $f:A\to B$, $g:B\to C$.
 
-[L1] A category has associative composition and an identity at every object ([[def-category]]), and a function has a set domain, a codomain, and a uniquely determined value at each point of its domain ([[def-function]]).
+[L1] A category has associative composition and an identity at every object ([[def-category]]); a function has a set domain, a codomain, and a uniquely determined value at each point of its domain ([[def-function]]); and the functions $A\to B$ form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]).
 
 [L2] Small, locally small, and large have the meanings in [[def-small-locally-small-and-large-category]], and the ordinals do not form a set ([[thm-burali-forti]]).
 
@@ -43,5 +43,4 @@ $\mathbf{Set}$.
 
 2.1 Hence sets and functions satisfy every axiom of a category. [step 1.1, L1]
 
-3.1 For fixed $A,B$, the functions $A\to B$ form a subset of the power set of $A\times B$, so the hom-collection is a set; the object class contains every ordinal and therefore is not a set, so $\mathbf{Set}$ is locally small and large. [step 2.1, L2] ∎
-
+3.1 For fixed $A,B$, the hom-collection is the set $B^A$ from [L1]; the object class contains every ordinal and therefore is not a set, so $\mathbf{Set}$ is locally small and large. [step 2.1, L1, L2] ∎

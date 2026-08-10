@@ -1399,7 +1399,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "There is one nonzero echelon row for each pivot, so [L1] and [L3] make the row rank equal to the pivot count.",
+          "claim": "There is one nonzero echelon row for each pivot, so [L1] and [L3] make the row rank equal to the pivot count of the arbitrary echelon form R. This applies to every echelon form of A.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -1408,7 +1408,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "There is one original pivot-indexed column for each pivot, so [L2] and [L3] make the column rank equal to the same count. This includes pivot count zero.",
+          "claim": "For the RREF Q of A, step 1.1 identifies its pivot count with row rank, while [L2] and [L3] identify that same count with column rank. Thus both ranks agree and both equal the pivot count of the originally chosen echelon form R, including pivot count zero.",
           "step": "2.1",
           "inputs": [
             "L2",
@@ -1493,9 +1493,18 @@
         },
         {
           "fact": "L4",
-          "source": "thm-coordinate-action-of-a-linear-map",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-matrix-multiplication-laws",
           "source_section": "Statement",
-          "quote": "Let $T:V\\to W$ be linear, let $\\mathcal B$ be an ordered basis of $V$, and let $\\mathcal C$ be an ordered basis of $W$. Then for every $v\\in V$,",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over entrywise addition on both sides, and is compatible with scalar multiplication.",
           "uses": [
             "1.1"
           ]
@@ -1504,10 +1513,11 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Every value $Ax$ is a linear combination of the columns of $A$, with coefficients $x_j$, and every such combination is $Ax$ for that coefficient column. Hence $\\operatorname{im}L_A=\\operatorname{Col}(A)$.",
+          "claim": "Fact [L5] makes $L_A(x)=Ax$ linear. By [L4], every value $Ax$ is a linear combination of the columns of $A$, with coefficients $x_j$, and every such combination is $Ax$ for that coefficient column. Hence $\\operatorname{im}L_A=\\operatorname{Col}(A)$.",
           "step": "1.1",
           "inputs": [
-            "L4"
+            "L4",
+            "L5"
           ]
         },
         {
@@ -1681,17 +1691,37 @@
           "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is $$N(A):=\\{x\\in F^n:Ax=0\\}.$$",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
           ]
         },
         {
           "fact": "L3",
-          "source": "def-affine-subspace-of-a-vector-space",
-          "source_section": "Definition",
-          "quote": "Let $V$ be a vector space over $F$, let $U\\subseteq V$ be a linear subspace, and let $x\\in V$. The translate $$x+U:=\\{x+u:u\\in U\\}$$ is an **affine subspace** of $V$. The same affine subspace can have different representatives: if $y\\in x+U$, then $y+U=x+U$. It is a linear subspace exactly when it contains $0$, equivalently when $x\\in U$.",
+          "source": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$, the matrix rank of $A$ equals the rank of the linear map $L_A:F^n\\to F^m$ defined by $L_A(x)=Ax$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are linear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-affine-subspace-of-a-vector-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over $F$, let $U\\subseteq V$ be a linear subspace, and let $x\\in V$. The translate $$x+U:=\\{x+u:u\\in U\\}$$ is an **affine subspace** of $V$.",
+          "uses": [
+            "3.1"
           ]
         }
       ],
@@ -1708,13 +1738,25 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Conversely, if $x\\in S(A,b)$, then $A(x-x_p)=Ax-Ax_p=b-b=0$, so $x-x_p\\in N(A)$ and $x=x_p+(x-x_p)\\in x_p+N(A)$.",
+          "claim": "Conversely, if $x\\in S(A,b)$, then $A(x-x_p)=Ax-Ax_p=b-b=0$, so $x-x_p\\in N(A)$ and $x=x_p+(x-x_p)\\in x_p+N(A)$. Thus $S(A,b)=x_p+N(A)$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
             "L2",
             "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $N(A)=\\ker L_A$, facts [L3] and [L4] make it a linear subspace. Its translate $x_p+N(A)$ is therefore an affine subspace by [L5].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L3",
+            "L4",
+            "L5"
           ]
         }
       ],
@@ -1728,7 +1770,7 @@
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "The argument through step 2.1 uses no cancellation by a matrix entry and therefore includes zero entries and the zero matrix when shape permits."
+          "evidence": "The argument through step 3.1 uses no cancellation by a matrix entry and therefore includes zero entries and the zero matrix when shape permits."
         },
         {
           "case": "one",
@@ -1738,12 +1780,12 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The argument through step 2.1 does not assume full rank unless the statement says so, and covers singular, dependent, or inconsistent inputs as applicable."
+          "evidence": "The argument through step 3.1 does not assume full rank unless the statement says so, and covers singular, dependent, or inconsistent inputs as applicable."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "The finite construction or expansion is initialized and terminated within steps 1.1–2.1; no terminal index is omitted."
+          "evidence": "The finite construction or expansion is initialized and terminated within steps 1.1–3.1; no terminal index is omitted."
         },
         {
           "case": "nonempty-choice",
@@ -2110,11 +2152,21 @@
           "source_section": "Statement",
           "quote": "For $A\\in M_{m\\times n}(F)$, the matrix rank of $A$ equals the rank of the linear map $L_A:F^n\\to F^m$ defined by $L_A(x)=Ax$.",
           "uses": [
-            "2.1"
+            "2.1",
+            "4.1"
           ]
         },
         {
           "fact": "L4",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field, $$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$ Both dimensions equal the number of pivots in any echelon form of $A$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
           "source": "def-invertible-matrix-and-general-linear-group",
           "source_section": "Definition",
           "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$ such that",
@@ -2123,42 +2175,55 @@
           ]
         },
         {
-          "fact": "L5",
+          "fact": "L6",
           "source": "thm-invertible-matrices-correspond-to-linear-isomorphisms",
           "source_section": "Statement",
           "quote": "For $A\\in M_n(F)$, let $L_A:M_{n\\times1}(F)\\to M_{n\\times1}(F)$ be $L_A(x)=Ax$. Then $A$ is invertible if and only if $L_A$ is a linear isomorphism.",
           "uses": [
-            "1.1"
+            "1.1",
+            "4.1"
           ]
         },
         {
-          "fact": "L6",
+          "fact": "L7",
           "source": "thm-linear-kernel-image-and-injectivity",
           "source_section": "Statement",
           "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are linear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
           "uses": [
             "1.1"
           ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-linear-isomorphism-and-invertible-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be linear. It is **invertible** when there is a linear map $S:W\\to V$ such that $$S\\circ T=\\operatorname{id}_V,\\qquad T\\circ S=\\operatorname{id}_W.$$ Such an $S$ is the **inverse linear map** of $T$, denoted $T^{-1}$. The two inverse equations make $T$ bijective and determine $T^{-1}$ uniquely. An invertible linear map is also called a **linear isomorphism**",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [L5], matrix invertibility is equivalent to the multiplication map being an isomorphism; an isomorphism is bijective, and [L6] identifies injectivity with $N(A)=\\{0\\}$.",
+          "claim": "By [L6], matrix invertibility is equivalent to the multiplication map being an isomorphism. An isomorphism has a two-sided inverse by [L8], hence is injective, and [L7] then gives $N(A)=\\{0\\}$.",
           "step": "1.1",
           "inputs": [
             "L5",
             "L6",
-            "L4"
+            "L7",
+            "L8"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "By [L2] and [L3], trivial nullspace is equivalent to rank $n$, which is equivalent to having $n$ pivots. A square matrix has $n$ pivots exactly when every row and column contains one.",
+          "claim": "By [L2], trivial nullspace is equivalent to rank $n$, and [L4] makes this equivalent to having $n$ pivots. A square matrix has $n$ pivots exactly when every row and column contains one.",
           "step": "2.1",
           "inputs": [
             "L2",
             "L3",
+            "L4",
             "step 1.1"
           ]
         },
@@ -2173,11 +2238,15 @@
         },
         {
           "id": "step-4-1",
-          "claim": "The implications in steps 1.1–3.1 are equivalences, so they run in both directions and prove all seven conditions equivalent. For $n=0$, the unique empty matrix is $I_0$, its map on the zero space is bijective, and every condition holds.",
+          "claim": "Under condition 7, define S(b) as the unique solution of Ax=b. Then L_A S and S L_A are identity maps. Linearity of L_A from [L3] and uniqueness prove S(lambda y+z)=lambda S(y)+S(z), so S is linear. Thus L_A is a linear isomorphism by [L8], and [L6] returns condition 1. Together with steps 1.1–3.1 this closes the implication cycle; the zero-dimensional case is included.",
           "step": "4.1",
           "inputs": [
             "step 1.1",
-            "step 3.1"
+            "step 2.1",
+            "step 3.1",
+            "L3",
+            "L6",
+            "L8"
           ]
         }
       ],
@@ -4343,9 +4412,9 @@
         },
         {
           "fact": "L3",
-          "source": "thm-ring-matrix-arithmetic-laws",
-          "source_section": "Statement",
-          "quote": "For matrices over a commutative ring, whenever the shapes are compatible, $$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$ $$A(B+C)=AB+AC,\\qquad (A+B)C=AC+BC,$$ and $$ (AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A.$$ The corresponding entrywise additive and scalar laws also hold, including all zero-sized shapes.",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Definition",
+          "quote": "The **transpose** $A^{\\mathsf T}\\in M_{n\\times m}(R)$ is defined by $(A^{\\mathsf T})_{ji}:=a_{ij}$.",
           "uses": [
             "1.1"
           ]

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-matrix-equation-augmented-matrix-and-linear-system, def-row-space-column-space-nullspace-and-matrix-ranks, def-affine-subspace-of-a-vector-space]
+deps: [def-matrix-equation-augmented-matrix-and-linear-system, def-row-space-column-space-nullspace-and-matrix-ranks, cor-matrix-rank-equals-the-rank-of-its-linear-map, thm-linear-kernel-image-and-injectivity, def-affine-subspace-of-a-vector-space]
 justified_by: []
 aliases: []
 landmark: true
@@ -36,7 +36,11 @@ Thus every nonempty solution set of a finite linear system is an affine subspace
 
 [L2] $N(A)=\{z:Az=0\}$ ([[def-row-space-column-space-nullspace-and-matrix-ranks]]).
 
-[L3] An affine subspace is a translate $x+U$ of a linear subspace ([[def-affine-subspace-of-a-vector-space]]).
+[L3] The multiplication map $L_A:x\mapsto Ax$ is linear ([[cor-matrix-rank-equals-the-rank-of-its-linear-map]]).
+
+[L4] The kernel of a linear map is a linear subspace ([[thm-linear-kernel-image-and-injectivity]]).
+
+[L5] An affine subspace is a translate $x+U$ of a linear subspace ([[def-affine-subspace-of-a-vector-space]]).
 
 ## Proof
 
@@ -44,5 +48,6 @@ Thus every nonempty solution set of a finite linear system is an affine subspace
 
 1.1 If $z\in N(A)$, then $A(x_p+z)=Ax_p+Az=b+0=b$, so $x_p+z\in S(A,b)$. [L1, L2, L3, algebra]
 
-2.1 Conversely, if $x\in S(A,b)$, then $A(x-x_p)=Ax-Ax_p=b-b=0$, so $x-x_p\in N(A)$ and $x=x_p+(x-x_p)\in x_p+N(A)$. [step 1.1, L1, L2, L3, algebra] ∎
+2.1 Conversely, if $x\in S(A,b)$, then $A(x-x_p)=Ax-Ax_p=b-b=0$, so $x-x_p\in N(A)$ and $x=x_p+(x-x_p)\in x_p+N(A)$. Thus $S(A,b)=x_p+N(A)$. [step 1.1, L1, L2, L3, algebra]
 
+3.1 Since $N(A)=\ker L_A$, facts [L3] and [L4] make it a linear subspace. Its translate $x_p+N(A)$ is therefore an affine subspace by [L5]. [step 2.1, L2, L3, L4, L5] ∎

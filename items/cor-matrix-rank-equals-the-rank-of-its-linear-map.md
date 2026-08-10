@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-row-space-column-space-nullspace-and-matrix-ranks, thm-row-rank-equals-column-rank, def-rank-and-nullity, thm-coordinate-action-of-a-linear-map]
+deps: [def-row-space-column-space-nullspace-and-matrix-ranks, thm-row-rank-equals-column-rank, def-rank-and-nullity, def-matrix-product-and-identity-matrix, thm-matrix-multiplication-laws]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,12 +36,14 @@ For $A\in M_{m\times n}(F)$, the matrix rank of $A$ equals the rank of the linea
 
 [L3] The rank of a linear map is the dimension of its image ([[def-rank-and-nullity]]).
 
-[L4] Matrix multiplication by a coordinate column gives the coordinate column of the corresponding linear-map value ([[thm-coordinate-action-of-a-linear-map]]).
+[L4] Matrix multiplication is given entrywise by $(Ax)_i=\sum_{j<n}a_{ij}x_j$ ([[def-matrix-product-and-identity-matrix]]).
+
+[L5] Matrix multiplication distributes over addition and is compatible with scalar multiplication ([[thm-matrix-multiplication-laws]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Every value $Ax$ is a linear combination of the columns of $A$, with coefficients $x_j$, and every such combination is $Ax$ for that coefficient column. Hence $\operatorname{im}L_A=\operatorname{Col}(A)$. [L4, algebra]
+1.1 Fact [L5] shows that $L_A(x)=Ax$ is linear. By [L4], every value $Ax$ is a linear combination of the columns of $A$, with coefficients $x_j$, and every such combination is $Ax$ for that coefficient column. Hence $\operatorname{im}L_A=\operatorname{Col}(A)$. [L4, L5, algebra]
 
 2.1 Taking dimensions and using [L1]–[L3] gives $\operatorname{rank}L_A=\dim\operatorname{Col}(A)=\operatorname{rank}A$. [step 1.1, L1, L2, L3] ∎

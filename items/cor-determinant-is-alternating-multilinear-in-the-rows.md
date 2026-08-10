@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-determinant-of-transpose, thm-leibniz-determinant-is-alternating-multilinear-and-normalized, thm-ring-matrix-arithmetic-laws]
+deps: [thm-determinant-of-transpose, thm-leibniz-determinant-is-alternating-multilinear-and-normalized, def-ring-matrix-product-identity-and-transpose]
 justified_by: []
 aliases: []
 landmark: false
@@ -34,7 +34,7 @@ For $n\ge1$, determinant on $M_n(R)$ over a commutative ring is multilinear and 
 
 [L2] Determinant is alternating and multilinear in columns ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
-[L3] Transpose interchanges rows and columns and reverses products ([[thm-ring-matrix-arithmetic-laws]]).
+[L3] Transpose is defined by $(A^{\mathsf T})_{ji}=a_{ij}$, so it interchanges rows and columns ([[def-ring-matrix-product-identity-and-transpose]]).
 
 ## Proof
 

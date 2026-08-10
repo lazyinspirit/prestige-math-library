@@ -5,8 +5,10 @@ title: 'Over $\mathbb Z/2$, an antisymmetric bilinear form need not be alternati
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-generated
   proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions, thm-z-mod-p-is-a-field, thm-integers-modulo-n-basic-algebra]
 justified_by: []
 aliases: []

@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "K. Conrad, Group Actions, Section 5"
+    - title: "K. Conrad, Group Actions, Theorem 4.1"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
 pipeline_run: null
 ---

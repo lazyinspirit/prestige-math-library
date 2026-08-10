@@ -44,7 +44,6 @@ Both dimensions equal the number of pivots in any echelon form of $A$.
 
 **Proof technique:** direct.
 
-1.1 There is one nonzero echelon row for each pivot, so [L1] and [L3] make the row rank equal to the pivot count. [L1, L3]
+1.1 There is one nonzero echelon row for each pivot, so [L1] and [L3] make the row rank equal to the pivot count of $R$. This applies to every echelon form of $A$. [L1, L3]
 
-2.1 There is one original pivot-indexed column for each pivot, so [L2] and [L3] make the column rank equal to the same count. This includes pivot count zero. [step 1.1, L2, L3] ∎
-
+2.1 Let $Q$ be the RREF of $A$. Step 1.1 makes the number of pivots of $Q$ equal to the row rank, while [L2] and [L3] make that same number equal to the column rank. Hence the two ranks are equal, and step 1.1 shows that both equal the pivot count of the originally chosen echelon form $R$. This includes pivot count zero. [step 1.1, L2, L3] ∎

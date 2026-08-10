@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-category]
+deps: [def-category, def-functor-and-contravariant-functor, def-product-category]
 justified_by: []
 aliases: []
 landmark: true
@@ -31,8 +31,9 @@ There are identity 1-morphisms and horizontal-composition functors
 
 $$\mathcal K(B,C)\times\mathcal K(A,B)\longrightarrow\mathcal K(A,C)$$
 
-that are associative and unital as literal equalities. Because horizontal
-composition is functorial, it satisfies the interchange law with the vertical
-composition inside each hom-category. The adjective strict refers to these
-equalities rather than coherent isomorphisms.
-
+where the product and functor notions are those of [[def-product-category]] and
+[[def-functor-and-contravariant-functor]]. They are associative and unital as
+literal equalities. Because horizontal composition is functorial, it satisfies
+the interchange law with the vertical composition inside each hom-category.
+The adjective strict refers to these equalities rather than coherent
+isomorphisms.

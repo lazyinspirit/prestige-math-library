@@ -17,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Saunders Mac Lane, Categories for the Working Mathematician, Chapter IV"
-      url: "https://link.springer.com/book/10.1007/978-1-4757-4721-8"
+    - title: "Emily Riehl, Category Theory in Context, Example 1.5.12"
+      url: "https://emilyriehl.github.io/files/context.pdf"
 pipeline_run: null
 ---
 

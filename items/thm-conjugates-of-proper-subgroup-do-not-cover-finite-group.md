@@ -36,7 +36,7 @@ Thus some element of $G$ lies in no conjugate of $H$.
 
 [L1] There are $m=[G:N_G(H)]$ distinct conjugates of $H$ ([[thm-conjugate-subgroups-are-counted-by-the-normalizer]]).
 
-[L2] The subgroup $H$ is contained in its normalizer $N_G(H)$ ([[def-normalizer-of-a-subgroup]]).
+[L2] The normalizer is $N_G(H)=\{g\in G:gHg^{-1}=H\}$ ([[def-normalizer-of-a-subgroup]]).
 
 [L3] The normalizer is a subgroup of $G$ ([[lem-centralizers-and-normalizers-are-subgroups]]).
 
@@ -44,7 +44,7 @@ Thus some element of $G$ lies in no conjugate of $H$.
 
 [L5] For a finite group and subgroup, $|G|=[G:H]|H|$ ([[thm-lagrange]], [[def-index]], [[def-finite-cardinality]]).
 
-[L6] A subset of a finite set is finite and has no larger cardinality ([[thm-subset-of-a-finite-set]]).
+[L6] A subset of a finite set is finite, has no larger cardinality, and has equal cardinality only when it is the whole set ([[thm-subset-of-a-finite-set]]).
 
 [L7] The cardinality of a finite disjoint union is the sum of the cardinalities of its parts ([[thm-sum-rule]]).
 
@@ -54,7 +54,7 @@ Thus some element of $G$ lies in no conjugate of $H$.
 
 **Proof technique:** direct.
 
-1.1 Let $K_1,\ldots,K_m$ be the distinct conjugates of $H$, where $m=[G:N_G(H)]$ by [L1]. Each $K_i$ has $|H|$ elements by [L4], every $K_i$ contains $e$, and [L2] gives $H\le N_G(H)$. [L1, L2, L3, L4]
+1.1 Let $K_1,\ldots,K_m$ be the distinct conjugates of $H$, where $m=[G:N_G(H)]$ by [L1]. Each $K_i$ has $|H|$ elements by [L4] and contains $e$. For $h\in H$, subgroup closure gives $hHh^{-1}=H$, so [L2] gives $H\le N_G(H)$. [L1, L2, L3, L4]
 
 2.1 Add the sets successively after removing elements already counted. The common identity contributes once and each $K_i\setminus\{e\}$ contributes at most $|H|-1$, so [L6], [L7], and [L8] give $|\bigcup_iK_i|\le 1+m(|H|-1)$. [step 1.1, L6, L7, L8]
 

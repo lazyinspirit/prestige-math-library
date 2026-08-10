@@ -19,8 +19,6 @@ sources:
   references:
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.2, The Class Equation"
       url: "https://judsonbooks.org/aata-files/aata-html/actions-section-class-equation.html"
-    - title: "K. Conrad, Group Actions, Theorem 5.1"
-      url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
 pipeline_run: null
 ---
 

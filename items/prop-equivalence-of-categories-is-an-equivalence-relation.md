@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-equivalence-and-adjoint-equivalence-of-categories, def-horizontal-composition-and-whiskering-of-natural-transformations, lem-horizontal-composition-of-natural-transformations-is-natural]
+deps: [def-equivalence-and-adjoint-equivalence-of-categories, def-vertical-composition-of-natural-transformations, def-horizontal-composition-and-whiskering-of-natural-transformations, lem-horizontal-composition-of-natural-transformations-is-natural]
 justified_by: []
 aliases: []
 landmark: false
@@ -34,7 +34,7 @@ Equivalence of categories is reflexive, symmetric, and transitive.
 
 [L1] An equivalence consists of quasi-inverse functors and natural isomorphisms in both composite directions ([[def-equivalence-and-adjoint-equivalence-of-categories]]).
 
-[L2] Whiskering and horizontal composition produce natural transformations between composite functors ([[def-horizontal-composition-and-whiskering-of-natural-transformations]]), and those composites are natural ([[lem-horizontal-composition-of-natural-transformations-is-natural]]).
+[L2] Vertical composition is componentwise ([[def-vertical-composition-of-natural-transformations]]); whiskering and horizontal composition produce natural transformations between composite functors ([[def-horizontal-composition-and-whiskering-of-natural-transformations]]), and those horizontal composites are natural ([[lem-horizontal-composition-of-natural-transformations-is-natural]]).
 
 ## Proof
 
@@ -45,4 +45,3 @@ Equivalence of categories is reflexive, symmetric, and transitive.
 2.1 If $(F,G,\eta,\varepsilon)$ gives $\mathcal C\simeq\mathcal D$, then $(G,F,\varepsilon^{-1},\eta^{-1})$ gives $\mathcal D\simeq\mathcal C$, proving symmetry. [step 1.1, L1]
 
 3.1 If $(F,G)$ gives $\mathcal C\simeq\mathcal D$ and $(H,K)$ gives $\mathcal D\simeq\mathcal E$, then $HF$ and $GK$ are quasi-inverses; whiskering and vertically composing the two units gives $1_{\mathcal C}\Rightarrow GKHF$, and doing the same with the counits gives $HFGK\Rightarrow1_{\mathcal E}$, so [L2] proves transitivity. [step 2.1, L1, L2] ∎
-

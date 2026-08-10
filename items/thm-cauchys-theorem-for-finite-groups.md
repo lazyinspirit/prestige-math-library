@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-p-group-fixed-point-congruence, def-finite-p-group, thm-integers-modulo-n-basic-algebra, def-integers-modulo-n, thm-standard-representatives-modulo-n, thm-cardinality-of-a-set-of-functions, def-nat-power, def-prime, def-divides-in-z, def-order-in-a-group, lem-order-characterisation]
+deps: [thm-p-group-fixed-point-congruence, def-finite-p-group, thm-integers-modulo-n-basic-algebra, def-integers-modulo-n, thm-standard-representatives-modulo-n, thm-cardinality-of-a-set-of-functions, def-nat-power, def-prime, def-congruence-modulo-an-integer, def-divides-in-z, def-order-in-a-group, lem-order-characterisation]
 justified_by: []
 aliases: []
 landmark: true
@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "K. Conrad, Group Actions, Theorem 5.7"
+    - title: "K. Conrad, Group Actions, Theorem 5.4"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"
     - title: "T. W. Judson, Abstract Algebra: Theory and Applications, 14.2"
       url: "https://judsonbooks.org/aata-files/aata-html/actions-section-class-equation.html"
@@ -41,7 +41,7 @@ contains an element of order $p$.
 
 [L4] A prime is greater than $1$ and has only $1$ and itself as positive divisors ([[def-prime]]).
 
-[L5] Divisibility means existence of an integer factor ([[def-divides-in-z]]).
+[L5] A congruence $a\equiv b\pmod p$ means that $p$ divides $a-b$, and divisibility means existence of an integer factor ([[def-congruence-modulo-an-integer]], [[def-divides-in-z]]).
 
 [L6] The order of an element is the least positive exponent giving the identity ([[def-order-in-a-group]], [[lem-order-characterisation]]).
 

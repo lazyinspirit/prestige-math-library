@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-plane-dual-multigraph, thm-plane-dual-exists-and-double-dual-recovers-primal, def-graph-isomorphism-and-complement, def-multigraph-loop-and-digraph, def-graph-adjacency-incidence-neighbourhood-and-degree]
+deps: [def-plane-dual-multigraph, thm-plane-dual-exists-and-double-dual-recovers-primal, def-multigraph-loop-and-digraph]
 justified_by: []
 aliases: []
 landmark: false
@@ -26,7 +26,7 @@ pipeline_run: null
 
 ## Example
 
-The abstract graph below has two plane embeddings whose dual multigraphs are distinguished by their degree multisets.
+The abstract graph below has two plane embeddings whose dual multigraphs are distinguished by their degree multisets. For a finite multigraph with the endpoint map of [[def-multigraph-loop-and-digraph]], count an ordinary incident edge once and a loop twice in the degree. An isomorphism of such endpoint-map structures is a pair of vertex and edge bijections preserving endpoints, and therefore preserves the degree multiset.
 
 ## Facts & Assumptions
 
@@ -34,7 +34,7 @@ The abstract graph below has two plane embeddings whose dual multigraphs are dis
 
 [L1] Every connected plane graph has a plane dual ([[thm-plane-dual-exists-and-double-dual-recovers-primal]]).
 
-[F1] A multigraph isomorphism is a vertex bijection preserving edge incidence, so it preserves vertex degrees, as defined in [[def-graph-adjacency-incidence-neighbourhood-and-degree]], with loops counted twice ([[def-graph-isomorphism-and-complement]], [[def-multigraph-loop-and-digraph]]).
+[F1] An endpoint-preserving multigraph isomorphism preserves the degree multiset because it bijects the incident edge-ends at every vertex, with a loop contributing two ends.
 
 ## Verification
 

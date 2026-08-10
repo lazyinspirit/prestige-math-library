@@ -5,7 +5,7 @@ title: "Row-equivalent matrices can have different column spaces even though the
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 deps: [lem-row-operations-preserve-column-relations, def-row-space-column-space-nullspace-and-matrix-ranks]
 justified_by: []
@@ -41,4 +41,3 @@ The false claim is: row-equivalent matrices have the same column space.
 1.1 Swapping the two rows of $A$ gives $B$, so the matrices are row equivalent. [L1, algebra]
 
 2.1 Yet $\operatorname{Col}(A)=\operatorname{span}\{(1,0)^{\mathsf T}\}$ and $\operatorname{Col}(B)=\operatorname{span}\{(0,1)^{\mathsf T}\}$, which are distinct one-dimensional subspaces. Their column ranks are both $1$, exactly as [L1] predicts. [step 1.1, L2, algebra] ∎
-

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-partial-order, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-partial-order, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ $\mathbf{Poset}$.
 
 [L1] Partial orders are reflexive, antisymmetric, and transitive ([[def-partial-order]]); a composite of monotone maps is monotone by transitivity of implication.
 
-[L2] Functions between fixed sets form a set ([[def-function]]); category size is as in [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); category size is as in [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ $\mathbf{Poset}$.
 2.1 Hence posets and monotone maps form a category whose hom-collections are sets of functions. [step 1.1, L2]
 
 3.1 Each singleton $\{\alpha\}$ has its equality order, and ordinals yield a proper class of distinct such posets by [L2]; therefore $\mathbf{Poset}$ is large and locally small. [step 2.1, L1, L2] ∎
-

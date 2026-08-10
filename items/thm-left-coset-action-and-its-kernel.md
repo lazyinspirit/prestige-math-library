@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Example 3.99"
+    - title: "P. Brosnan, Undergraduate Algebra Notes, 3.14: G-Sets, Proposition 3.102 and Corollary 3.104"
       url: "https://www.math.umd.edu/~pbrosnan/notes/ugalg/sect0035.html"
     - title: "K. Conrad, Group Actions, Theorem 6.8"
       url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/gpaction.pdf"

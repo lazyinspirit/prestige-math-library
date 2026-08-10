@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-isomorphism-groupoid-and-connected-category, def-homotopy-relative-and-path-homotopy, cor-homotopy-relative-and-path-homotopy-are-equivalence-relations, thm-composition-respects-homotopy, def-based-loops-and-fundamental-group, thm-fundamental-group-laws]
+deps: [def-category, def-isomorphism-groupoid-and-connected-category, def-path-connected, def-homotopy-relative-and-path-homotopy, cor-homotopy-relative-and-path-homotopy-are-equivalence-relations, lem-continuity-is-local-and-pastes, def-based-loops-and-fundamental-group, thm-fundamental-group-laws]
 justified_by: []
 aliases: []
 landmark: false
@@ -25,15 +25,17 @@ pipeline_run: null
 ## Example
 
 For a topological space $X$, paths modulo endpoint-preserving homotopy form a
-groupoid $\Pi_1(X)$ whose automorphism groups are the fundamental groups.
+groupoid $\Pi_1(X)$. With this library's traversal-order multiplication on
+fundamental groups, $\operatorname{Aut}_{\Pi_1(X)}(x)$ is the opposite group of
+$\pi_1(X,x)$ and is canonically isomorphic to $\pi_1(X,x)$ by path reversal.
 
 ## Facts & Assumptions
 
 **Given:** A topological space $X$.
 
-[L1] Path homotopy relative to endpoints is an equivalence relation, and path concatenation respects its classes ([[def-homotopy-relative-and-path-homotopy]], [[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]], [[thm-composition-respects-homotopy]]).
+[L1] Endpoint-preserving path homotopy is defined in [[def-homotopy-relative-and-path-homotopy]] and is an equivalence relation for each fixed pair of endpoints ([[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]]).
 
-[L2] Constant paths, concatenation, and reversal satisfy the fundamental-group laws on path-homotopy classes ([[def-based-loops-and-fundamental-group]], [[thm-fundamental-group-laws]]).
+[L2] Paths and their elementary concatenation and reversal constructions are given in [[def-path-connected]], while continuous maps compose and maps continuous on a finite closed cover paste continuously ([[lem-continuity-is-local-and-pastes]]); the resulting loop classes and their group laws are those of [[def-based-loops-and-fundamental-group]] and [[thm-fundamental-group-laws]].
 
 [L3] Categories and groupoids have identity, associative composition, and invertible arrows ([[def-category]], [[def-isomorphism-groupoid-and-connected-category]]).
 
@@ -41,10 +43,12 @@ groupoid $\Pi_1(X)$ whose automorphism groups are the fundamental groups.
 
 **Proof technique:** direct.
 
-1.1 Take the points of $X$ as objects and define $\operatorname{Hom}(x,y)$ to be the endpoint-preserving homotopy classes of paths from $x$ to $y$. Define composition by concatenation and the identity at $x$ by the constant path at $x$. [L1, L2]
+1.1 Take the points of $X$ as objects and define $\operatorname{Hom}(x,y)$ to be the endpoint-preserving homotopy classes of paths from $x$ to $y$. For $\alpha:x\to y$ and $\beta:y\to z$, put $[\beta]\circ[\alpha]=[\alpha*\beta]$, and take the constant path at $x$ as $1_x$. [L1, L2]
 
-2.1 The operations in step 1.1 are well defined on classes by [L1]. Reparametrization homotopies give associativity and the two identity laws, as in the fundamental-group laws of [L2]. Hence they define a category. [step 1.1, L1, L2, L3]
+2.1 If $H$ deforms $\alpha$ to $\alpha'$ and $K$ deforms $\beta$ to $\beta'$ rel endpoints, paste $H(2s,t)$ for $s\le1/2$ to $K(2s-1,t)$ for $s\ge1/2$. The endpoint conditions agree along the seam, so the finite closed-pasting argument in [L2] gives an endpoint-preserving homotopy $\alpha*\beta\simeq\alpha'*\beta'$. Thus composition is well defined on classes. [step 1.1, L1, L2]
 
-2.2 Reversing a path gives a two-sided inverse class because a path followed by its reverse contracts relative to its endpoints. Thus every arrow is invertible. [step 1.1, L1, L2]
+2.2 Composing a path $\alpha$ with the straight-line homotopies from $s$ to $\max(0,2s-1)$ and to $\min(2s,1)$ proves the left and right identity laws. If $r(s)=2s$ for $s\le1/2$ and $r(s)=2-2s$ for $s\ge1/2$, then $\alpha((1-t)r(s))$ contracts $\alpha*\bar\alpha$ rel endpoints; the analogous formula $\alpha(t+(1-t)(1-r(s)))$ contracts $\bar\alpha*\alpha$. Hence reversal supplies a two-sided inverse class. [step 1.1, L1, L2, algebra]
 
-3.1 Therefore $\Pi_1(X)$ is a groupoid. Its automorphisms at $x$ are exactly based loops at $x$ modulo based homotopy, with concatenation, so $\operatorname{Aut}_{\Pi_1(X)}(x)=\pi_1(X,x)$. [step 2.1, step 2.2, L2, L3] ∎
+3.1 For three composable paths, let $\delta:[0,3]\to X$ traverse them successively. The two bracketings are $\delta\circ p$ and $\delta\circ q$, where $p(s)=4s$ for $s\le1/2$ and $p(s)=2s+1$ for $s\ge1/2$, while $q(s)=2s$ for $s\le1/2$ and $q(s)=4s-1$ for $s\ge1/2$. The formula $\delta((1-t)p(s)+tq(s))$ is an endpoint-preserving homotopy, so composition is associative on classes. [step 1.1, step 2.1, L1, L2, algebra]
+
+4.1 Steps 2.1, 3.1, and 2.2 make $\Pi_1(X)$ a groupoid. Its automorphisms at $x$ are the based-loop classes, but $[\beta]\circ[\alpha]=[\alpha*\beta]=[\alpha][\beta]$ in the traversal-order product of [L2]. Thus the identity on loop classes identifies $\operatorname{Aut}_{\Pi_1(X)}(x)$ with $\pi_1(X,x)^{\mathrm{op}}$. The inversion map $[\alpha]\mapsto[\bar\alpha]$ is therefore a canonical group isomorphism $\operatorname{Aut}_{\Pi_1(X)}(x)\cong\pi_1(X,x)$. [step 2.1, step 3.1, step 2.2, L2, L3, algebra] ∎

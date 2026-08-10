@@ -5,9 +5,9 @@ title: "Category, object, morphism, domain, codomain, identity, composition, and
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: []
+deps: [rem-category-theory-class-and-size-conventions]
 justified_by: []
 aliases: []
 landmark: true
@@ -22,6 +22,12 @@ pipeline_run: null
 ---
 
 ## Definition
+
+Under the definable-class convention of
+[[rem-category-theory-class-and-size-conventions]], every class below is a
+formula and every function whose domain may be proper-class-sized is a
+definable class-function schema. When its domain is a set, it is an ordinary
+set-valued function.
 
 A **category** $\mathcal C$ consists of a class
 $\operatorname{Ob}(\mathcal C)$ of **objects**, a class

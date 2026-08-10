@@ -17,8 +17,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Saunders Mac Lane, Categories for the Working Mathematician, Chapter II"
-      url: "https://link.springer.com/book/10.1007/978-1-4757-4721-8"
+    - title: "Saunders Mac Lane, Categories for the Working Mathematician, Chapter I, section 4, p. 16"
+      url: "https://math.mit.edu/~hrm/palestine/maclane-categories.pdf"
 pipeline_run: null
 ---
 
@@ -36,7 +36,7 @@ determinant is natural between them.
 
 [L2] Units form a group and ring homomorphisms preserve the ring operations and units ([[lem-ring-homomorphism-basic-properties]], [[lem-ring-units-form-a-group]]).
 
-[L3] Matrices over a commutative ring have entrywise functorial scalar maps compatible with identity and multiplication ([[def-matrices-over-a-commutative-ring]], [[def-ring-matrix-product-identity-and-transpose]], [[thm-ring-matrix-arithmetic-laws]], [[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
+[L3] Matrices, their products and identities, their arithmetic laws, and invertibility over a commutative ring are given by [[def-matrices-over-a-commutative-ring]], [[def-ring-matrix-product-identity-and-transpose]], [[thm-ring-matrix-arithmetic-laws]], and [[def-invertible-matrix-and-similarity-over-a-commutative-ring]].
 
 [L4] Determinant is given by the Leibniz formula, is multiplicative, and sends invertible matrices to units ([[def-determinant-of-a-square-matrix]], [[thm-determinant-multiplicative]], [[cor-invertible-matrix-has-unit-determinant]]).
 
@@ -46,7 +46,7 @@ determinant is natural between them.
 
 1.1 For a commutative ring $R$, put $U(R)=R^\times$. For $\varphi:R\to S$, restrict $\varphi$ to units; it is a group homomorphism because ring homomorphisms preserve products, identities, and inverses. Identity and composition are inherited, so $U$ is a functor to $\mathbf{Grp}$. [L1, L2]
 
-1.2 Put $G_n(R)=\operatorname{GL}_n(R)$. Apply $\varphi$ entrywise to define $G_n(\varphi)$; it preserves matrix multiplication and carries an inverse matrix to an inverse matrix. Entrywise identity and composition make $G_n$ a functor to $\mathbf{Grp}$. [L1, L3]
+1.2 Put $G_n(R)=\operatorname{GL}_n(R)$ and apply $\varphi$ entrywise. From the product formula, $\varphi((AB)_{ik})=\sum_j\varphi(a_{ij})\varphi(b_{jk})$, so this assignment preserves matrix products and identities and carries an inverse matrix to an inverse matrix. Entrywise identity and composition make $G_n$ a functor to $\mathbf{Grp}$. [L1, L2, L3, algebra]
 
 2.1 Multiplicativity and the unit result in [L4] make $\det_R:G_n(R)\to U(R)$ a group homomorphism. [step 1.1, step 1.2, L4]
 

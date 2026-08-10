@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [def-countable, thm-the-strong-pigeonhole-principle, thm-sum-rule, def-finite-cardinality, def-natural-numbers]
+deps: [def-countable, lem-subset-of-countable, thm-the-strong-pigeonhole-principle, thm-sum-rule, def-finite-cardinality, def-natural-numbers]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,11 +32,12 @@ Every colouring of $\mathbb N$ ([[def-natural-numbers]]) by a nonempty finite se
 
 [L1] A finite disjoint union is finite with $\lvert A \cup B\rvert = \lvert A\rvert + \lvert B\rvert$ ([[thm-sum-rule]]).
 
+[L2] A subset of $\mathbb N$ is finite if it is bounded and countably infinite if it is unbounded ([[lem-subset-of-countable]]).
+
 ## Proof
 
 **Proof technique:** contradiction.
 
 1.1 Suppose every fibre $c^{-1}(\{i\})$, for $i\in C$, is finite. These fibres are pairwise disjoint and their union is $\mathbb N$. [assume-contra]
 
-2.1 Iterating [L1] over the finite set $C$ makes their union finite. This contradicts the infinitude of $\mathbb N$, so at least one fibre is infinite. [step 1.1, L1, discharge-contradiction] ∎
-
+2.1 Iterating [L1] over the finite set $C$ makes their union finite. This contradicts the infinitude of $\mathbb N$, so at least one fibre is not finite. That fibre is a subset of $\mathbb N$, and [L2] therefore makes it countably infinite. [step 1.1, L1, L2, discharge-contradiction] ∎

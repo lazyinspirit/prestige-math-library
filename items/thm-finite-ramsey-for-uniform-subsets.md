@@ -39,7 +39,7 @@ Equivalently, every $c$-colouring of $[N]^k$ has a monochromatic $r$-element set
 
 [L1] For all positive $s,t$, $\binom{s+t-2}{s-1}\to(s,t)^2$ ([[thm-finite-graph-ramsey-binomial-bound]]).
 
-[L2] Then $A^{B}$ is finite and $\lvert A\rvert^{\lvert B\rvert}=\lvert A^{B}\rvert$ ([[thm-cardinality-of-a-set-of-functions]]).
+[L2] If $A$ and $B$ are finite, then $A^{B}$ is finite and $\lvert A\rvert^{\lvert B\rvert}=\lvert A^{B}\rvert$ ([[thm-cardinality-of-a-set-of-functions]]).
 
 
 

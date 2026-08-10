@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-vector-space, def-linear-map, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-vector-space, def-linear-map, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ locally small category $\mathbf{Vect}_F$.
 
 [L1] The vector-space axioms are those of [[def-vector-space]], and a linear map preserves vector addition and scalar multiplication ([[def-linear-map]]).
 
-[L2] Functions between fixed sets form a set ([[def-function]]); category size is governed by [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); category size is governed by [[def-category]] and [[def-small-locally-small-and-large-category]], and the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ locally small category $\mathbf{Vect}_F$.
 2.1 Hence $F$-vector spaces and linear maps form a category, and every hom-collection is a set of functions. [step 1.1, L2]
 
 3.1 Each singleton $\{\alpha\}$, for an ordinal $\alpha$, carries a transported zero-dimensional $F$-vector-space structure; these distinct objects and [L2] show that $\mathbf{Vect}_F$ is large and locally small. [step 2.1, L1, L2] ∎
-

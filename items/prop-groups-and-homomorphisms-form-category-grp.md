@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-category, def-small-locally-small-and-large-category, def-group, def-group-homomorphism, def-function, thm-burali-forti]
+deps: [def-category, def-small-locally-small-and-large-category, def-group, def-group-homomorphism, def-the-set-of-functions-from-one-set-to-another, thm-burali-forti]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ $\mathbf{Grp}$.
 
 [L1] Groups are sets with the group operations ([[def-group]]), and identity maps and composites of group homomorphisms are group homomorphisms ([[def-group-homomorphism]]).
 
-[L2] Functions between fixed sets form a set ([[def-function]]); the category and size conditions are [[def-category]] and [[def-small-locally-small-and-large-category]], while the ordinals form a proper class ([[thm-burali-forti]]).
+[L2] The functions $A\to B$ between fixed sets form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]); the category and size conditions are [[def-category]] and [[def-small-locally-small-and-large-category]], while the ordinals form a proper class ([[thm-burali-forti]]).
 
 ## Proof
 
@@ -44,4 +44,3 @@ $\mathbf{Grp}$.
 2.1 Thus the group objects and homomorphisms satisfy the category axioms, and each hom-collection is a set of functions between two fixed underlying sets. [step 1.1, L2]
 
 3.1 For every ordinal $\alpha$, the singleton $\{\alpha\}$ carries a transported trivial group structure, and distinct ordinals give distinct group objects; [L2] therefore rules out a set of all group objects, so $\mathbf{Grp}$ is large and locally small. [step 2.1, L2] ∎
-

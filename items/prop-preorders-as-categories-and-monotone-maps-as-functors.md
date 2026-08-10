@@ -33,7 +33,7 @@ objects, and functors between such categories are exactly monotone maps.
 
 [L1] A preorder is reflexive and transitive, and a monotone map preserves its relation ([[def-preorder]]).
 
-[L2] Category identities, composition, and functors have the meanings of [[def-category]].
+[L2] Category identities and composition have the meanings of [[def-category]]. In this proposition, a functor is an assignment on objects and arrows that preserves identities and composition.
 
 ## Proof
 
@@ -44,4 +44,3 @@ objects, and functors between such categories are exactly monotone maps.
 2.1 A function $F:P\to Q$ extends to a functor exactly when $x\le_P y$ guarantees a target morphism $F(x)\to F(y)$, which is exactly $F(x)\le_Q F(y)$. [step 1.1, L1, L2]
 
 3.1 Thus the functors between the associated categories are precisely the monotone maps, with no extra arrow choices because every relevant hom-collection has at most one member. [step 2.1, L1] ∎
-
