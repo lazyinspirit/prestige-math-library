@@ -1,20 +1,43 @@
 # frontier-10 batch 3 — Beta scaffold notes
 
 **Owner:** Beta-frontier-10-3  
-**Step:** 2 scaffold complete  
+**Step:** 3 Alpha breadth-and-depth repair complete  
 **Writable scope observed:** only the four `research/frontier-10-batch-3.*` artifacts
+
+## Step-3 repair — Alpha findings B4 and F1
+
+For B4, the A-page scaffold now includes
+`cor-finite-subgroups-of-units-in-a-domain-are-cyclic` immediately after the
+domain root bound. Donaldson's Corollary 23.15 states the integral-domain
+version. Its proof is closed against the earlier batch-2 invariant-factor
+interfaces: `def-exponent-of-a-finite-group`,
+`cor-order-and-exponent-from-invariant-factors`, and
+`cor-finite-abelian-group-cyclic-iff-one-invariant-factor`. Thus the addition
+creates a legal backward page edge from order 52 to
+`the-structure-of-finite-abelian-groups` at order 40. Both Donaldson harvest
+rows formerly marked `out-of-scope` now map to this item as `included`.
+
+For F1, Alpha correctly found that the original notes' claim “Forward
+references kept: none” was false against the then-current disk: four items cite
+`def-finite-sum-in-a-commutative-monoid` or
+`lem-finite-sum-reindexing-and-fubini`, then homed at order 203. The owner has
+since approved re-homing both unchanged ids to
+`rings-subrings-and-integral-domains` at order 46, recorded in
+`research/frontier-10-rehomed.json`. Under that authoritative overlay the four
+citations are legal backward edges. They remain unchanged; no duplicate finite-
+sum interface is minted.
 
 ## Inventory and proposed page summaries
 
-- `polynomial-rings-and-roots` (A, order 52): **43 items** — 8 definitions, 5 lemmas, 17 theorems, 3 propositions, 9 corollaries, and 1 remark.
+- `polynomial-rings-and-roots` (A, order 52): **44 items** — 8 definitions, 5 lemmas, 17 theorems, 3 propositions, 10 corollaries, and 1 remark.
 - `polynomial-rings-and-roots-examples` (B, order 53): **14 items** — 8 examples and 6 counterexamples.
-- Total: **57 items**.
+- Total: **58 items**.
 
 The manifest is the count authority; the prose category breakdown above is descriptive and must be re-counted mechanically if the list changes.
 
 Proposed A-page summary, paragraph 1: This page constructs the formal polynomial ring over a commutative ring from finitely supported coefficient sequences and convolution, proves the ring and degree laws, records the equivalent trimmed-list presentation, and establishes evaluation through the universal property. It then treats finite multivariate polynomial rings by iteration, proves monic division over a commutative ring and the full division algorithm over a field, and derives the factor theorem and the root bound over an integral domain.
 
-Proposed A-page summary, paragraph 2: The second half connects the construction exactly to the preceding Euclidean-domain material: `F[x]` is Euclidean, hence a PID, and a direct local argument proves that it is a UFD without assuming an unpublished general PID-to-UFD theorem. Polynomial gcds, Bézout, irreducible quotients, formal derivatives, repeated roots and separability are built before Gauss's lemma, the rational-root theorem, reduction modulo a prime, and Eisenstein's criterion.
+Proposed A-page summary, paragraph 2: The second half connects the construction to the preceding Euclidean-domain and finite-abelian-group material: `F[x]` is Euclidean, hence a PID, and a direct local argument proves that it is a UFD without assuming an unpublished general PID-to-UFD theorem. The root bound and invariant-factor exponent formula show that finite subgroups of a domain's unit group are cyclic. Polynomial gcds, Bézout, irreducible quotients, formal derivatives, separability, Gauss's lemma, rational roots, reduction modulo a prime, and Eisenstein's criterion complete the development.
 
 Proposed B-page summary, paragraph 1: The companion page computes convolution, long division, a polynomial gcd and Bézout coefficients, then tests the domain and division hypotheses with nonconstant units over `Z/4`, failed division in `Z[x]`, and quadratics with four roots over `Z/6` and `Z/8`. It also distinguishes a formal polynomial from its induced function using `x^p-x` over `F_p`.
 
@@ -22,16 +45,16 @@ Proposed B-page summary, paragraph 2: The remaining examples compare irreducibil
 
 ## Split adjudication
 
-No split is proposed. The A page has 43 items, below the owner's hard 60-item threshold. The natural internal cut would be immediately before `def-formal-derivative-of-a-polynomial`, but making that cut now would separate the root theory from its repeated-root and separability completion without a size or dependency reason.
+No split is proposed. The A page has 44 items, below the owner's hard 60-item threshold. The natural internal cut would be immediately before `def-formal-derivative-of-a-polynomial`, but making that cut now would separate the root theory from its repeated-root and separability completion without a size or dependency reason.
 
 ## Canonical-coverage harvest
 
-The machine receipt is `research/frontier-10-batch-3.coverage.json`. It records **118 headings** from five independent treatments:
+The machine receipt is `research/frontier-10-batch-3.coverage.json`. It records **118 headings** from five independent treatments, including the page-level canonical rows:
 
-- 90 `included` headings, mapping to 46 distinct scaffolded items;
+- 92 `included` headings, mapping to 47 distinct scaffolded items;
 - 14 `inline` headings, mapping to 9 proof-bearing items;
 - 5 `already-published` headings, mapping to 3 published definitions/results;
-- 5 `deferred` and 4 `out-of-scope` headings.
+- 5 `deferred` and 2 `out-of-scope` headings.
 
 The other scaffolded items are proof-decomposition machinery, direct corollaries, convention dictionaries, or checkable hypothesis-testing examples rather than unharvested canonical claims.
 
@@ -42,9 +65,12 @@ The declines most likely to be challenged are:
 3. Donaldson's prime cyclotomic-polynomial example is deferred to `field-extensions-and-the-complex-numbers`, where roots of unity and cyclotomic extensions have their mathematical home; translation and Eisenstein are both built here.
 4. Donaldson's and Keith Conrad's examples of polynomials irreducible over `Q` but reducible modulo every prime are deferred because the sources themselves route the all-primes proof through Galois-theoretic machinery.
 5. Donaldson's rational-function field paragraph is out of scope because fraction-field/localisation construction is independent of the root and irreducibility spine and no planned item consumes it.
-6. Corollary 23.15 on finite subgroups of units is out of scope because its proof uses classification of finite abelian groups; the polynomial root bound it consumes is included.
-7. Judson's historical note is out of scope because it is narrative rather than a mathematical definition, result, proof or example.
-8. The source heading “Finite Subgroups of Units” and its numbered corollary are separately disposed because the checklist records both source headings; they are one mathematical decline, not two omitted results.
+6. Judson's historical note is out of scope because it is narrative rather than a mathematical definition, result, proof or example.
+
+Donaldson's heading “Finite Subgroups of Units” and Corollary 23.15 are no
+longer declines. Alpha B4 correctly observed that this run itself supplies the
+needed finite-abelian-group classification at order 40, so both harvest rows
+are included through `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`.
 
 No result is declined because a definition or elementary lemma is missing. The machinery needed for the assigned topic is scaffolded.
 
@@ -61,7 +87,7 @@ No result is declined because a definition or elementary lemma is missing. The m
 
 - URL: <https://www.math.uci.edu/~ndonalds/math120b/2poly.pdf>
 - Exact range: §§22–23 in full, pp. 1–16.
-- Role: independent full course-note treatment for formal polynomial objects, coefficient-ring caveats, domain inheritance, roots in extensions, field division, factorisation, UFD, irreducibility tests, general monic division and counterexamples.
+- Role: independent full course-note treatment for formal polynomial objects, coefficient-ring caveats, domain inheritance, roots in extensions, field division, factorisation, UFD, irreducibility tests, general monic division, counterexamples, and the finite-subgroup-of-units application of the domain root bound.
 - Licensing: no explicit reuse licence was found in the inspected PDF. Treat it as citation-only; paraphrase all statements and proofs.
 
 ### James McKernan, MIT 18.703, Lecture 21
@@ -135,7 +161,7 @@ The long-proof decomposition pass was performed separately for this pair.
 - The integer irreducibility chain is decomposed into content, Gauss content, Gauss's lemma, rational roots, reduction modulo a prime and Eisenstein.
 - Because the published integer gcd accepts a pair rather than a coefficient list, finite content is defined recursively and `lem-content-divisibility-characterisation` supplies the universal common-divisor property before Gauss's content lemma uses it.
 
-The corollary pass added the domain and units results, multivariate domain inheritance, (F[x]) Euclidean and PID, infinite-domain determination by values, the irreducible separability criterion, and the (x^n-p) family. The value-determination corollary is the one permitted generated statement: it is a direct leaf consequence of the root bound and is not a dependency of any other planned item. All other added corollaries are explicitly represented in the harvested sources.
+The corollary pass added the domain and polynomial-unit results, multivariate domain inheritance, (F[x]) Euclidean and PID, finite subgroups of domain units being cyclic, infinite-domain determination by values, the irreducible separability criterion, and the (x^n-p) family. The finite-subgroup result is Donaldson's Corollary 23.15 and now uses batch 2's earlier invariant-factor machinery. The value-determination corollary is the one permitted generated statement: it is a direct leaf consequence of the root bound and is not a dependency of any other planned item. All other added corollaries are explicitly represented in the harvested sources.
 
 Boundary obligations for Step 5:
 
@@ -144,6 +170,7 @@ Boundary obligations for Step 5:
 - field division covers every nonzero divisor, including constants;
 - polynomial gcd excludes `(0,0)` and normalizes every other gcd to monic;
 - root bound starts at degree zero and counts distinct roots only;
+- the finite-subgroup corollary treats the trivial group separately, uses a positive exponent, proves that (T^e-1) is nonzero of degree (e), and applies the one-invariant-factor criterion only in the nontrivial case;
 - multivariate induction includes zero indeterminates;
 - rational-root theorem treats zero constant coefficient and signs/positive denominator;
 - finite content uses the unique trimmed list, begins its recursive gcd at zero, and proves positivity only for nonzero polynomials;
@@ -183,6 +210,7 @@ Expected Step-5 provenance is below. “Adapted” means the source claim is kep
 | `thm-polynomial-ring-over-a-field-is-a-ufd` | literature-derived | literature-derived | Donaldson 23.11. |
 | `thm-polynomial-quotient-is-a-field-iff-irreducible` | literature-derived | ai-altered | Judson 17.22 plus the published field-quotient/maximal-ideal equivalence. |
 | `thm-root-bound-for-polynomials-over-a-domain` | literature-derived | ai-altered | Judson 17.9 / Donaldson 23.14, stated at domain generality. |
+| `cor-finite-subgroups-of-units-in-a-domain-are-cyclic` | literature-derived | ai-altered | Donaldson Corollary 23.15; proof adapted to batch 2's invariant-factor exponent and cyclicity interfaces, with the trivial group isolated. |
 | `cor-polynomials-over-an-infinite-domain-are-determined-by-values` | ai-generated | ai-generated | Direct leaf corollary of the root bound; may not become a dependency. |
 | `thm-quadratic-and-cubic-irreducibility-test` | literature-derived | literature-derived | Donaldson 23.8. |
 | `def-formal-derivative-of-a-polynomial` | literature-derived | not-applicable | Standard formal derivative used in Brian Conrad §1. |
@@ -224,11 +252,21 @@ Every dependency below was opened from `items/<id>.md`, confirmed `status: publi
 
 ### Source-checked against the harvested algebra treatments or the item's authoritative source route
 
-`def-commutative-ring`, `def-euclidean-domain`, `def-field`, `def-generated-and-principal-ideals`, `def-irreducible-and-prime-elements-in-a-domain`, `def-prime-and-maximal-ideals`, `def-principal-ideal-domain`, `def-quotient-ring`, `def-ring-homomorphism`, `def-subfield`, `def-unique-factorisation-domain`, `def-zero-divisor-and-integral-domain`, `prop-canonical-quotient-ring-map`, `prop-integers-modulo-n-as-a-quotient-ring`, `thm-euclidean-domain-is-a-pid`, `thm-quotient-is-field-iff-ideal-maximal`, `thm-rat-field`, `thm-rat-ordered-field`, `thm-reals-ordered-field`, `thm-z-mod-p-is-a-field`.
+`def-commutative-ring`, `def-euclidean-domain`, `def-field`, `def-generated-and-principal-ideals`, `def-irreducible-and-prime-elements-in-a-domain`, `def-prime-and-maximal-ideals`, `def-principal-ideal-domain`, `def-quotient-ring`, `def-ring-homomorphism`, `def-subfield`, `def-unique-factorisation-domain`, `def-zero-divisor-and-integral-domain`, `lem-ring-units-form-a-group`, `prop-canonical-quotient-ring-map`, `prop-integers-modulo-n-as-a-quotient-ring`, `thm-euclidean-domain-is-a-pid`, `thm-quotient-is-field-iff-ideal-maximal`, `thm-rat-field`, `thm-rat-ordered-field`, `thm-reals-ordered-field`, `thm-z-mod-p-is-a-field`.
 
 ### Established-from-knowledge after exact on-disk interface check
 
-`cor-common-divisor-divides-gcd`, `def-common-divisor-and-gcd`, `def-coprime`, `def-finite-sum-in-a-commutative-monoid`, `def-int-abs`, `def-prime`, `lem-coprime-divides-product`, `lem-divisor-bound`, `lem-finite-sum-reindexing-and-fubini`, `lem-int-abs-properties`, `lem-int-cancellation`, `lem-nat-discrete`, `lem-nat-embeds-int`, `lem-units-of-z`, `thm-fermats-little-theorem`, `thm-fundamental-theorem-of-arithmetic`, `thm-induction-principle`, `thm-int-comm-ring`, `thm-int-ordered-ring`, `thm-strong-induction`.
+`cor-common-divisor-divides-gcd`, `def-common-divisor-and-gcd`, `def-coprime`, `def-finite-cardinality`, `def-finite-sum-in-a-commutative-monoid`, `def-generated-subgroup`, `def-int-abs`, `def-prime`, `def-subgroup`, `lem-coprime-divides-product`, `lem-divisor-bound`, `lem-finite-sum-reindexing-and-fubini`, `lem-int-abs-properties`, `lem-int-cancellation`, `lem-nat-discrete`, `lem-nat-embeds-int`, `lem-units-of-z`, `thm-fermats-little-theorem`, `thm-fundamental-theorem-of-arithmetic`, `thm-induction-principle`, `thm-int-comm-ring`, `thm-int-ordered-ring`, `thm-strong-induction`.
+
+The new batch-2 dependencies are not published and therefore are not included
+in the published-dependency lists above. I opened their order-40 scaffold and
+proof contracts directly. `def-exponent-of-a-finite-group` fixes the trivial
+group's exponent as one;
+`cor-order-and-exponent-from-invariant-factors` gives
+`|G|=n_1\cdots n_r` and `exp(G)=n_r` for a nonempty invariant-factor list; and
+`cor-finite-abelian-group-cyclic-iff-one-invariant-factor` gives the exact
+nontrivial cyclicity criterion used by the new proof. Their source route is
+Elman's *Lectures on Abstract Algebra*, recorded in batch 2's own ledger.
 
 The exact-interface pass rejected one initially contemplated dependency: `lem-finite-sum-laws` is stated only for real sequences, so it cannot license polynomial convolution over an arbitrary commutative ring. The manifest instead uses the genuinely general `lem-finite-sum-reindexing-and-fubini` and proves the remaining ring algebra inline. The pass also replaced an invalid planned use of integer Euclid's lemma in the rational-root theorem: a reduced numerator need not be prime, so the correct dependency is `lem-coprime-divides-product`.
 
@@ -247,9 +285,9 @@ Their zero-degree convention agrees with this scaffold, but their formal object 
 
 ## New-id and overlap audit
 
-Before writing, I searched `items/`, `research/plan-spec.json`, and every current `research/frontier-10-batch-*.pages.json` for all proposed ids and for the mathematical phrases “polynomial ring”, “factor theorem”, “root bound”, “Gauss lemma”, “Eisenstein”, “formal derivative”, “repeated root” and “separable”. No proposed id already existed.
+Before writing, I searched `items/`, `research/plan-spec.json`, and every current `research/frontier-10-batch-*.pages.json` for all proposed ids and for the mathematical phrases “polynomial ring”, “factor theorem”, “root bound”, “finite subgroup”, “unit group”, “Gauss lemma”, “Eisenstein”, “formal derivative”, “repeated root” and “separable”. No proposed id already existed, including the B4 addition `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`.
 
-The search did find the four later real/complex specialisations listed above. They were treated as a convention seam, not reused as dependencies or silently duplicated. No item from another frontier-10 batch is consumed.
+The search did find the four later real/complex specialisations listed above. They were treated as a convention seam, not reused as dependencies or silently duplicated. The B4 addition consumes the three order-40 batch-2 interfaces named above; no other frontier-10 batch item is consumed.
 
 ## Applyable prose-scaffold recommendations
 
@@ -262,22 +300,39 @@ These are recommendations only. Beta did not edit any prose scaffold or `researc
 
 ## Forward references, cross-batch dependencies and blockers
 
-- **Forward references kept:** none.
-- **Cross-batch dependencies:** none.
+- **Forward references kept:** none under the owner-approved re-homing overlay.
+  Before that decision, the four finite-sum citations were forward references
+  to order 203; Alpha F1 correctly caught the former false claim in these
+  notes. `research/frontier-10-rehomed.json` moves both cited ids unchanged to
+  order 46, below this page at order 52.
+- **Cross-batch dependencies:** the A page now requires
+  `the-structure-of-finite-abelian-groups` (batch 2, order 40). The new
+  finite-subgroup corollary cites `def-exponent-of-a-finite-group`,
+  `cor-order-and-exponent-from-invariant-factors`, and
+  `cor-finite-abelian-group-cyclic-iff-one-invariant-factor`. This is a legal
+  backward edge and is the only cross-batch page edge introduced by B4.
 - **External fallbacks:** none.
 - **Published falsehoods found:** none.
 - **Split blocker:** none.
-- **Other blocker:** the aggregate `node tools/gates.mjs --step 2 --run frontier-10` wrapper is blocked by this managed sandbox: each of its three `spawnSync /usr/bin/node` calls returns `EPERM`. The same three child commands are runnable directly and are recorded separately in the gate report; no permission prompt or escalation was attempted.
+- **Gate-scope caveat:** Alpha B4 requires three not-yet-authored batch-2 item
+  dependencies. Consequently the dispatch's isolated batch-3
+  `content-policy --manifest-only` invocation cannot resolve them: that tool
+  resolves scaffold-only ids from the manifests supplied on its command line,
+  not from `requires` or an unspliced `plan-spec.json`. The dependency-closed
+  batch-2-plus-batch-3 invocation and the full run-wide invocation are both
+  green. Omitting the three ids to make the isolated form green would hide the
+  required logical edge, while copying batch 2's rows into this manifest would
+  violate batch ownership.
 
 ## Gate report
 
-- `node tools/validate-plan.mjs research/plan-spec.json`: exit 0. This checks the current unspliced spec; authoritative validation of this batch remains the orchestrator's step-4 splice duty.
-- `node tools/depsource.mjs research/plan-spec.json`: exit 0, with no unresolved dependencies in the current spec. A separate scaffold check resolved all 40 external dependencies in this batch to published on-disk items, checked every internal dependency topologically, and matched all 48 proof-bearing items to proof contracts.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: exit 0. This checks the current unspliced spec and the owner-approved F1 re-homing; authoritative validation of the 44-item repaired page remains the orchestrator's step-4 splice duty.
 - `node tools/coverage-checklist.mjs research/frontier-10-batch-3.coverage.json`: exit 0, with 118 harvested headings and no errors or warnings.
-- `node tools/content-policy.mjs research/frontier-10-batch-3.pages.json --manifest-only`: exit 0, with 57 scoped items and no errors or warnings.
-- `node tools/prosecheck.mjs research/frontier-10-batch-3.notes.md research/frontier-10-batch-3.pages.json --warnings`: exit 0 with no errors or positional contradictions. Its remaining warnings are the inventory and harvest counts this step-2 report is explicitly required to state.
-- `node tools/gates.mjs --step 2 --run frontier-10`: exit 1 solely because the wrapper receives `EPERM` from all three child-process launches; the directly invoked child gates above complete normally.
+- The literal isolated command `node tools/content-policy.mjs research/frontier-10-batch-3.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: exit 1, reporting exactly the three required scaffold-only batch-2 dependencies as `batch-dependency-missing`.
+- The dependency-closed command supplying batch 2 and batch 3 together: exit 0, with 128 scoped items and no errors or warnings. The run-wide command supplying all nine frontier-10 manifests is also green, with 571 scoped items and no errors or warnings.
+- JSON parsing and the proof-bearing scope check are green: 49 expected proof-bearing ids, 49 scope ids, 49 contracts, with no missing, extra or duplicate entry.
+- `node tools/prosecheck.mjs research/frontier-10-batch-3.notes.md research/frontier-10-batch-3.pages.json --warnings`: exit 0 with no errors or positional contradictions. Its count warnings are the inventory and harvest counts this report is required to state.
 
 ## Confidence and unverified matters
 
-Confidence is high in the item inventory, mathematical dependency closure and harvest fidelity for the named ranges. I checked all 118 coverage dispositions against the displayed source headings and re-opened all external dependency interfaces on disk. I did not verify licensing beyond what the inspected source pages/PDFs exposed, so four sources are deliberately marked citation-only. I did not prove the planned items in final house format at step 2; the proof-contract file is the durable obligation map for that step-5 work. I did not modify the later published real/complex polynomial items, the prose scaffolds, `plan-spec.json`, any library page, or any other batch's artifacts.
+Confidence is high in the item inventory, mathematical dependency closure and harvest fidelity for the named ranges. I checked all 118 coverage dispositions against the displayed source and canonical headings, re-opened all published dependency interfaces on disk, re-opened Donaldson's Corollary 23.15, and inspected the three consumed batch-2 interfaces and their proof contracts. I did not verify licensing beyond what the inspected source pages/PDFs exposed, so four sources are deliberately marked citation-only. I did not prove the planned items in final house format at step 3; the proof-contract file is the durable obligation map for that step-5 work. I did not modify the later published real/complex polynomial items, the prose scaffolds, `plan-spec.json`, any library page, or any other batch's artifacts.

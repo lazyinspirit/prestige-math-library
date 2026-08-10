@@ -23,6 +23,8 @@
     "ex-infinite-convex-or-concave-subsequence-by-ramsey",
     "fs-two-colouring-forces-an-infinite-monochromatic-progression",
     "cex-infinite-branching-is-not-enough-for-konig",
+    "cex-infinite-ramsey-fails-with-infinitely-many-colours",
+    "ex-all-four-canonical-pair-colouring-types",
     "lem-polygonal-ray-general-position",
     "lem-polygonal-crossing-parity-is-locally-constant",
     "thm-polygonal-jordan-curve",
@@ -474,6 +476,166 @@
         {"case":"nonempty-choice","status":"not_applicable","reason":"The tree is explicit and the nonexistence proof makes no sequence of choices."},
         {"case":"iff-forward","status":"not_applicable","reason":"The counterexample sharpens one hypothesis rather than proving an iff."},
         {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-infinite-ramsey-fails-with-infinitely-many-colours": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-infinite-ramsey-on-the-naturals",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "infinite-colour-witness",
+          "claim": "Define c({i,j})=min{i,j} and verify that every natural occurs as c({i,i+1}), so this genuinely uses infinitely many colours.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "no-infinite-homogeneous-set",
+          "claim": "For any a<b<c, compare c({a,b})=a with c({b,c})=b; hence no set of size at least three, and therefore no infinite set, is monochromatic.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "order"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The colouring is defined on all two-element subsets of the nonempty set of natural numbers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes c({0,1})=0 under the library's natural-number convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 leaves one- and two-element sets vacuously monochromatic but rules out every set of size at least three, which is enough for the infinite conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 assigns the colour using the unique smaller member of each two-element set, so repeated endpoints never arise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The natural numbers have no terminal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The countercolouring is explicit and the refutation makes no sequence of arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a weakened universal statement rather than proving a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-all-four-canonical-pair-colouring-types": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-canonical-ramsey-theorem-for-pairs",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "On an infinite subset a pair-colouring is constant, injective, left-dependent, or right-dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-and-injective-witnesses",
+          "claim": "Define a constant colouring and the identity colouring c({i,j})={i,j}, then verify respectively that all pairs have one colour and that distinct pairs have distinct colours.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "coordinate-dependent-witnesses",
+          "claim": "For i<j define c_left({i,j})=i and c_right({i,j})=j, and verify in both directions that equal colours are equivalent to equality of the corresponding left or right endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "order"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All four witnesses are colourings of the two-element subsets of the nonempty set of natural numbers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 include pairs containing 0 and assign them unambiguously."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no size parameter and its domain is the full infinite set of naturals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 orders each unordered pair uniquely as i<j before defining its left and right colours."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The natural numbers have no terminal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every witness is given by an explicit formula and requires no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 verify that equality of the relevant pair data forces equality of colours for all four witnesses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 verify that equal colours force equality of the whole pair or the selected endpoint in the injective and coordinate-dependent witnesses."
+        }
       ],
       "finite_smoke": []
     },

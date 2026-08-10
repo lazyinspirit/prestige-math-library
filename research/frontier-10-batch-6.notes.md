@@ -4,22 +4,22 @@ These notes are the durable step-2 reasoning record for the two batch-6 page pai
 
 ## Continuity checkpoint — 2026-08-11, step 2
 
-Disk state verified at this checkpoint: the machine scaffold then contained 21 + 6 Ramsey items and 38 + 7 plane-graph items; both A pages were below the 60-item split threshold. The final hidden-lemma pass subsequently added the graph-theoretic bridge definition and bridge–cycle equivalence, so the final plane A count is 40. The coverage harvest contains two independent Ramsey treatments and four plane-graph treatments, including textbooks on both A pages, and `coverage-checklist.mjs` reports no errors or warnings. The contractible-edge prerequisite is a numbered lemma before the three-connected Kuratowski reduction. The page definition also fixes facial boundary-walk length explicitly, counting a bridge twice.
+Disk state verified at the original step-2 checkpoint: the machine scaffold then contained 21 + 6 Ramsey items and 38 + 7 plane-graph items; both A pages were below the 60-item split threshold. The final hidden-lemma pass subsequently added the graph-theoretic bridge definition and bridge–cycle equivalence, so the final plane A count is 40. Alpha's step-3 repair now leaves the Ramsey A page unchanged at 21 items and enlarges only its B companion to 8 items. The coverage harvest still contains two independent Ramsey treatments and four plane-graph treatments, including textbooks on both A pages. The contractible-edge prerequisite is a numbered lemma before the three-connected Kuratowski reduction. The page definition also fixes facial boundary-walk length explicitly, counting a bridge twice.
 
-The audit-facing work after that checkpoint is now complete: every final published dependency was read on disk, the exact-schema proof-contract ledger covers every proof-bearing item, and the proposed pages pass an in-memory splice validation against the live plan. The sole execution blocker is recorded in the gate section below: this sandbox denies the aggregate gate wrapper permission to spawn its child Node processes, although the same three child gates pass when invoked directly.
+The audit-facing work after that checkpoint is now complete: every final published dependency was read on disk, the exact-schema proof-contract ledger covers every proof-bearing item, and the proposed pages pass an in-memory splice validation against the live plan. The original step-2 aggregate-wrapper restriction is retained as historical context in the gate section; the three individual gates required for this repair all pass, so it is not a current blocker.
 
 ## 1. Page shape, reading order, and split decision
 
 | order | page | kind | item count | decision |
 |---:|---|:---:|---:|---|
 | 217 | `ramsey-theory` | A | 21 | no split |
-| 218 | `ramsey-theory-examples` | B | 6 | companion |
+| 218 | `ramsey-theory-examples` | B | 8 | companion; two Alpha-required boundary witnesses added |
 | 357 | `plane-graphs-euler-and-the-five-colour-theorem` | A | 40 | no split |
 | 358 | `plane-graphs-euler-and-the-five-colour-theorem-examples` | B | 7 | companion |
 
 Neither A page approaches 60 items, so no split is proposed. The exact cut question is therefore inapplicable. If later adjudication adds at least 40 Ramsey items or 21 plane-graph items, the page must be split before authoring rather than shortened; nothing harvested here should be dropped merely to stay under the cap.
 
-The Ramsey spine is: notation and the two-colour recursion; explicit finite bounds and `R(3,3)`; uniform finite Ramsey; a choice-free ordered-tree König lemma; infinite Ramsey on `N` and its exact Dedekind-infinite corollary; the compactness proof of the finite theorem; canonical pairs; van der Waerden; and Schur. The B page supplies exact small values, two infinite-sequence applications, and sharp failures of the tempting infinite-progression and unrestricted-branching claims.
+The Ramsey spine is: notation and the two-colour recursion; explicit finite bounds and `R(3,3)`; uniform finite Ramsey; a choice-free ordered-tree König lemma; infinite Ramsey on `N` and its exact Dedekind-infinite corollary; the compactness proof of the finite theorem; canonical pairs; van der Waerden; and Schur. The B page supplies exact small values, two infinite-sequence applications, sharp failures of the tempting infinite-progression and unrestricted-branching claims, a countercolouring showing why infinite Ramsey requires finitely many colours, and explicit witnesses that all four canonical pair-colouring types occur.
 
 The plane-graph spine is: polygonal topology; faces and facial boundary walks; Euler and its extremal corollaries; Kuratowski–Wagner with the contractible-edge and separation machinery exposed; duality; and the six- then five-colour induction. The B page tests Euler, planarity, dual embedding dependence, Kempe swapping, insufficiency of the edge bound, and the polygonal convention.
 
@@ -147,6 +147,8 @@ The machine-readable heading-by-heading harvest is in `frontier-10-batch-6.cover
 |---|---|---|
 | Reinhard Diestel, *Graph Theory*, 6th ed. preview, Ch. 9 §9.1, <https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch9.pdf> | finite and infinite Ramsey, uniform form | official copyrighted preview; facts and result structure only |
 | I. B. Leader, *Ramsey Theory*, §§1.1–1.2, pp. 1–7, <https://www.dpmms.cam.ac.uk/~par31/notes/ramsey.pdf> | infinite and canonical Ramsey, van der Waerden, Schur, sequence applications | official lecture notes; no explicit reuse licence found, so reference only |
+| Leader, §1.3 from the combinatorial-line definition through the remarks after Theorem 9, pp. 7–8, same URL | explicit Hales–Jewett disposition and its relation to van der Waerden | same official lecture notes; reference only |
+| Leader, §2.1 displayed statement of Rado's theorem, p. 11, same URL | explicit Rado disposition after Schur | same official lecture notes; reference only |
 | Jacob Fox et al., *Graph Ramsey Theory*, §2.1, <https://math.mit.edu/~fox/paper-graphramsey.pdf> | recursion and binomial bound cross-check | author-hosted survey; reference only |
 | MIT OCW 18.310, Ch. 3, <https://ocw.mit.edu/courses/18-310-principles-of-discrete-applied-mathematics-fall-2013/resources/mit18_310f13_ch3/> | exact `W(3,2)=9` | CC BY-NC-SA course material; adapted mathematics, independently worded |
 | Douglas West / Whitman College combinatorial game-theory text, Ramsey example, <https://www.whitman.edu/mathematics/cgt_online/cgt.pdf> | explicit `R(3,3)` extremal colouring cross-check | reference only |
@@ -161,11 +163,13 @@ No source prose or diagram is copied. All references will be cited at the theore
 
 ## 5. Coverage dispositions likely to be challenged
 
-The harvest records 88 source/result-heading dispositions: 67 `included`, 15 `inline`, one `already-published`, two `deferred`, and three `out-of-scope`. Thus 82 harvested headings feed the scaffold, one is discharged by a published item, and five are declines. The five decline records comprise one Ramsey result and four plane-graph records, of which two independently record the same four-colour boundary.
+The repaired harvest records 95 source/result-heading dispositions: 69 `included`, 15 `inline`, one `already-published`, seven `deferred`, and three `out-of-scope`. Thus 84 harvested headings feed the scaffold, one is discharged by a published item, and ten are declines. The five new Ramsey declines are the section, definition, theorem, and immediate remarks needed to make the Hales–Jewett stop explicit, plus Rado's theorem. They are source-anchored in the two supplementary Leader slices above rather than hidden beyond a locator boundary.
 
 | result | disposition | defence |
 |---|---|---|
 | Schur's modular Fermat corollary | deferred | Its usual proof uses the cyclic multiplicative group of a finite field and a polynomial root bound. Those are an unbuilt algebraic subject, not a local lemma that can honestly be added here. Schur itself is included. |
+| Hales–Jewett section, combinatorial-line vocabulary, Theorem 9, and its immediate remarks | deferred | This is a separate high-dimensional word-cube Ramsey theory with its own colour-focussing induction. Van der Waerden is already proved directly and does not use it; every individual heading now has a result-specific reason in the harvest. |
+| Rado's theorem | deferred | The rational-matrix classification needs partition regularity, the columns property, and valuation/focussing machinery. Schur is proved here as a single equation without invoking that distinct arithmetic-Ramsey subject. |
 | General Jordan curve theorem | out of scope | The polygonal theorem required by finite plane graphs is built here. Arbitrary topological circles and Schoenflies theory belong to the later embedding/topology subject. |
 | Whitney uniqueness of embeddings | deferred | Euler already proves face-count invariance. Full embedding uniqueness requires a separate 3-connected topological-equivalence theory; it is not being invoked by duality or colouring. |
 | Four colour theorem (two source records) | out of scope | The dispatch explicitly requires the five-colour theorem and explicitly forbids silently omitting four-colour. The known proof's computer-verified reducible-configuration/discharging machinery is outside the auditable scope; the theorem is neither cited nor labelled false. |
@@ -224,6 +228,8 @@ Abbreviations: D9 = Diestel Ch. 9 §9.1; L1 = Leader §§1.1–1.2; F2 = Fox et 
 | `ex-infinite-convex-or-concave-subsequence-by-ramsey` | L1 example after Theorem 2 |
 | `fs-two-colouring-forces-an-infinite-monochromatic-progression` | L1 explicit warning; constructive dyadic-block colouring supplied in the proof |
 | `cex-infinite-branching-is-not-enough-for-konig` | standard decreasing-sequence tree, directly verified |
+| `cex-infinite-ramsey-fails-with-infinitely-many-colours` | expected statement `ai-altered` from Leader Theorem 4's left-dependent canonical form and Alpha's explicit minimum-colouring specialisation; expected proof `ai-generated` by the direct three-point check; Leader URL above will appear in `sources.references` |
+| `ex-all-four-canonical-pair-colouring-types` | expected statement `ai-altered` from Leader Theorem 4 and its following canonical-colourings remark; expected proof `ai-generated` by checking the four explicit formulas; Leader URL above will appear in `sources.references` |
 
 ### Plane-graph A
 
@@ -288,6 +294,7 @@ Abbreviations: D9 = Diestel Ch. 9 §9.1; L1 = Leader §§1.1–1.2; F2 = Fox et 
 - The counting lower bound must count bad colourings of each `K_k`, union-bound those finite sets without probability language, and prove the displayed inequality for every `k>=3`; small `k` cannot be waved away.
 - The uniform finite proof must show its induction parameter and explicit finite witness recurrence. The infinite proof must construct a sequence of vertices and nested infinite reservoirs by least choices on `N`, then invoke induction on subset size.
 - The canonical pair theorem must define the four behaviours precisely, especially “left-dependent” and “right-dependent,” and prove mutual coverage after thinning.
+- The canonical-type example must give four formulas on unordered pairs, order each pair as `i<j`, and verify both directions of the equality pattern for the injective, left-dependent, and right-dependent cases. The infinite-colour counterexample must separately show that its range is infinite and that any three increasing vertices already contain two differently coloured pairs.
 - The van der Waerden focussing lemma is the engine, not a slogan. The author must record the induction parameters and the colour-vector pigeonhole bound used at each extension.
 - Polygonal Jordan must number general position, parity invariance, existence of both parities, connectedness of each parity class, and frontier equality. No arbitrary-Jordan theorem may enter a citation.
 - Before geometric edge incidence, prove from paths that an edge is a bridge exactly when it lies on no cycle. Euler must then treat bridge and cycle-edge cases explicitly and state what happens to the number of faces on edge deletion. The disconnected formula includes the null graph.
@@ -300,7 +307,7 @@ The proof-contract JSON is the step-5 checklist. Its cited clauses are obligatio
 ## 9. Boundary pass
 
 - Ramsey indices: `s,t,k,c,r` positivity is explicit; recursion assumes `s,t>=2`; `R(3,3)` checks both bounds; `W(k,c)` requires a positive difference; Schur uses the positive interval `{1,...,N}`, excludes the trivial zero solution, and permits `x=y` unless the source theorem states otherwise.
-- Infinite results: only finite colour sets; `k=1` is a real base case; the homogeneous set is infinite in the sense of an injection/enumeration, not merely not-finite; no arbitrary-set choice is hidden.
+- Infinite results: only finite colour sets; `k=1` is a real base case; the homogeneous set is infinite in the sense of an injection/enumeration, not merely not-finite; no arbitrary-set choice is hidden. The B counterexample assigns colour `0` to `{0,1}`, permits one- and two-point homogeneous sets, and rules out every homogeneous set of size at least three.
 - Trees: root and empty sequence included; every level is nonempty; finite branching includes zero successors; an infinite branch has a node at every level.
 - Plane graphs: null graph and disconnected graphs handled in the extended Euler formula; loops are excluded in the primal simple graph but allowed in its dual; bridges count twice in facial length.
 - Edge bounds: `n>=3` is explicit; simple graphs only; triangle-free gives face length at least four after bridge/tree boundary cases are discharged rather than assumed.
@@ -378,15 +385,28 @@ The spliced `validate-plan.mjs` run reports no unresolved ids, item-level forwar
 
 ## 11. Gate record and blockers
 
-The direct gate receipts are green:
+The direct gate receipts are green. The first three rows below are the exact step-3 repair commands required by the dispatch:
+
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: exit 0; the rehomed plan is acyclic and has no item-level cycles, forward references, B-page dependencies, or unresolved ids among its 176 pages with item lists.
+- `node tools/coverage-checklist.mjs research/frontier-10-batch-6.coverage.json`: exit 0; two A pages, 95 harvested headings, zero errors, zero warnings.
+- `node tools/content-policy.mjs research/frontier-10-batch-6.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: exit 0; 76 scoped items, zero errors, zero warnings.
 
 - `node tools/validate-plan.mjs research/plan-spec.json`: exit 0; the live plan is acyclic and has no item-level cycles, forward references, B-page dependencies, or unresolved ids among its 176 pages with item lists.
 - Final-manifest in-memory splice through `validate-plan.mjs`: exit 0; the plan with these four pages substituted is acyclic and has no item-level cycles, forward references, B-page dependencies, or unresolved ids among 180 pages with item lists.
 - `node tools/depsource.mjs research/plan-spec.json`: exit 0; 16,688 dependencies resolve to published pages and zero are unresolved. Because the orchestrator has not yet performed the step-4 splice, the batch-specific supplement is the 60-file clause audit in section 10: 58 final external dependencies resolve to published earlier pages and two opened candidates were rejected.
-- `node tools/coverage-checklist.mjs research/frontier-10-batch-6.coverage.json`: exit 0; two A pages, 88 harvested headings, zero errors, zero warnings.
-- `node tools/content-policy.mjs research/frontier-10-batch-6.pages.json --manifest-only`: exit 0; 74 scoped items, zero errors, zero warnings.
-- Structural proof-contract check: 61 proof-bearing ids, 61 scope ids, and 61 contracts; no missing or extra ids, and every contract has citations, derivations, routine steps, all eight boundary cases, and a finite-smoke array. Strict item-file checking belongs to step 5, after those files exist.
+- Structural proof-contract check: 63 proof-bearing ids, 63 scope ids, and 63 contracts; no missing or extra ids, and every contract has citations, derivations, routine steps, all eight boundary cases, and a finite-smoke array. Strict item-file checking belongs to step 5, after those files exist.
+- Additional `prosecheck.mjs --warnings`: zero errors. Its twelve advisory `count-in-prose` rows are confined to this audit-facing notes ledger, which necessarily records page/item/gate counts; no A-page summary or B-page content row is implicated.
 
-The required aggregate command `node tools/gates.mjs --step 2 --run frontier-10` exits 1 in this execution environment: each of its three internal `spawnSync /usr/bin/node` calls is denied with `EPERM`. The wrapper therefore prints `STEP 2 BLOCKED` even though `validate-plan.mjs`, `depsource.mjs`, and `coverage-checklist.mjs` each exit 0 when invoked directly above. The owner prohibited permission prompts, so none was made and no normative tool was edited to evade the sandbox. This wrapper-level runtime restriction is the sole blocker; there is no source-access, licensing, page-size, dependency, or mathematical blocker.
+The historical step-2 aggregate command `node tools/gates.mjs --step 2 --run frontier-10` was blocked in the original sandbox because its internal child-process spawns received `EPERM`. The step-3 dispatch expressly forbids rerunning that wrapper, so it was not run in this repair. The required individual scripts all pass and there is no current source-access, licensing, page-size, dependency, or mathematical blocker.
 
 The only proposed plan amendment is the direct `sequences-and-limits` requirement and the prose correction to the choice ledger; this Beta did not edit the plan.
+
+## 12. Alpha step-3 Ramsey repair — 2026-08-11
+
+Alpha's §9 finding is accepted in full.
+
+1. The finite-colour hypothesis is now tested by `cex-infinite-ramsey-fails-with-infinitely-many-colours` on the B page. Its colouring is the left-dependent canonical colouring `c({i,j})=min{i,j}`; three increasing vertices force two different colours. The harvest records it under Leader's explicit Theorem 4 case (iii).
+2. `ex-all-four-canonical-pair-colouring-types` now gives constant, injective, left-dependent, and right-dependent witnesses. The harvest records it under Leader's named remark after Theorem 4.
+3. The previously silent Hales–Jewett stop now has four explicit `deferred` rows in a supplementary Leader §1.3 source slice, and Rado's theorem has its own `deferred` row in a supplementary Leader §2.1 slice. These are whole adjacent subjects, not results declined for want of a local prerequisite.
+
+The Ramsey A page remains at 21 items, so the 60-item split contingency does not fire. The B page is 8 items. Both new items are proof-bearing leaves, are present in the proof-contract scope, and cite only earlier A-page results. They introduce no external published dependency, no forward reference, and no cross-batch edge. The plane-graph pair was sufficient and was not changed in this repair.
