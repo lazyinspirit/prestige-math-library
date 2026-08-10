@@ -347,6 +347,15 @@ transversal syllable; its statement now says directly that the represented
 group and conclusions are independent of the chosen transversals. The settled
 title, kind, purpose, and result did not change.
 
+The final strategy audit also replaced six provisional `direct` labels with
+the strategies actually used. Cauchy's theorem, maximal-cyclic splitting,
+cyclic $p$-group decomposition, and decomposition into indecomposables now use
+`induction` with explicit base, induction-hypothesis, and discharge tags. The
+unique-order-$p$ lemma and the free-product centre corollary now use
+`contradiction` with explicit assumption and discharge tags. Scoped precheck
+passes each item under the corrected strategy; no proof was weakened to obtain
+that result.
+
 ## 14. Step-5 verification and boundary ledger
 
 Batch-local verification is complete. Reflow left all 70 files unchanged, and
@@ -391,3 +400,43 @@ No failing diagnostic names a batch-2 item. Those files are outside this
 dispatch's writable artifacts, so they were not edited and no permission was
 requested. A final repository-wide rerun remains necessary after their owners
 finish.
+
+## 15. Final exact-command snapshot
+
+The seven commands in the dispatch were run exactly again after the final
+batch-2 edits. The three scoped commands are green: content policy reports
+70 items, zero errors, zero warnings; coverage reports 84 headings, zero errors,
+zero warnings; and strict proof contracts report 56 of 56, zero errors, zero
+warnings. Global prosecheck also exits zero, checking 3416 files with zero
+errors and 580 heuristic warnings. A separate batch-2 invocation of precheck
+passes all 56 proof-bearing items; scoped rendercheck passes all 74 owned item
+and page files; scoped prosecheck has zero errors and the five harmless
+`count-in-prose` warnings recorded above. No batch-2 id occurs in a global
+depcheck diagnostic.
+
+The other three repository-wide commands remain blocked by in-flight work
+outside this dispatch. At the final snapshot, global precheck exits one with
+eight external failures: three bad/unfinished Riemann--Stieltjes or improper-
+integral phase tags and auto-repair findings in one improper-integral example
+and four Ramsey items. Global depcheck exits one with 56 external errors,
+principally unfinished provenance/YAML in the improper-integral batch and
+determinant/row-reduction dependencies whose authoritative items belong to
+batch 9 and are not yet on disk. Global rendercheck exits one with 19 external
+errors in the same unfinished analysis files. Editing any named file would
+cross the dispatch's ownership boundary, so none was edited and no permission
+was requested.
+
+While this authoring pass was still performing its proof-strategy audit, a
+concurrent orchestrator committed an intermediate batches-2--5 snapshot as
+`6090b68a7220d7e4da15615baa971b9f8db28c94`. The final post-snapshot refinements
+therefore remain visible as working-tree modifications in eight owned items
+(`thm-cauchy-for-finite-abelian-groups`,
+`lem-unique-subgroup-of-order-p-forces-cyclicity`,
+`thm-maximal-order-cyclic-subgroup-splits-in-a-finite-abelian-p-group`,
+`thm-cyclic-decomposition-of-finite-abelian-p-groups`,
+`thm-finite-abelian-groups-decompose-into-indecomposable-subgroups`,
+`cor-center-of-a-free-product-is-trivial`,
+`thm-normal-form-for-free-products-with-amalgamation`, and
+`ex-amalgamating-c-two-inside-c-four-and-c-six`), this notes file, and the proof
+contracts. They must be included in the orchestrator's next authorized commit;
+this Beta did not stage or commit them.

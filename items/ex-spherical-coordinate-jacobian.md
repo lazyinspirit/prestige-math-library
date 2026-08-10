@@ -27,7 +27,7 @@ pipeline_run: null
 For
 $$S(r,\phi,\theta)=(r\sin\phi\cos\theta,r\sin\phi\sin\theta,r\cos\phi),$$
 one has $|\det DS|=r^2\sin\phi$ on
-$$[1,2]\times[\pi/6,\pi/3]\times[0,\pi/2].$$
+$$[1,2]\times[\pi/6,\pi/3]\times[\pi/6,\pi/3].$$
 The map is injective there, away from both polar axes and the angular seam.
 
 ## Facts & Assumptions
@@ -46,6 +46,6 @@ The map is injective there, away from both polar axes and the angular seam.
 
 1.1 Differentiating the three coordinates and expanding by columns, then using [L1], gives $\det DS=r^2\sin\phi$. It is positive on the parameter box by [L2]. [L1, L2]
 
-2.1 The image norm recovers $r$; the quotient of the third coordinate by $r$ recovers $\phi$ through strict cosine monotonicity; the first two normalized coordinates then recover $\theta$ on $[0,\pi/2]$. Thus $S$ is injective. [L1, L2, step 1.1]
+2.1 The image norm recovers $r$; the quotient of the third coordinate by $r$ recovers $\phi$ through strict cosine monotonicity; the first two normalized coordinates then recover $\theta$. The same recovery works when both angles range in $(\pi/12,5\pi/12)$ and $r\in(1/2,5/2)$, so $S$ is injective with nonzero determinant on an open neighborhood of the compact box. [L1, L2, step 1.1]
 
 3.1 The positive determinant and step 2.1 verify every hypothesis of [L3], so spherical integration on this box carries the factor $r^2\sin\phi$. [L3, step 2.1] ∎

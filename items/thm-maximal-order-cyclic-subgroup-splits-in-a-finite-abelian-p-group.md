@@ -11,7 +11,7 @@ deps: [lem-unique-subgroup-of-order-p-forces-cyclicity, thm-cauchy-for-finite-ab
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: direct
+proof_strategy: induction
 verification:
   precheck: pass
 sources:
@@ -51,14 +51,16 @@ Let $G$ be a finite abelian $p$-group and let $a\in G$ have maximal element orde
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** induction.
 
-1.1 Use induction on $|G|$. The trivial and cyclic cases hold with the evident complement, so assume $G$ is noncyclic and put $A=\langle a\rangle$. [given, L1, L2, L3, L4, L5, L6, L7, L8, L9]
+1.1 For induction on $|G|$, the trivial and cyclic cases hold with the evident complement. [base, given, L1, L2, L3, L4, L5, L6, L7, L8, L9]
 
-2.1 Write $|A|=p^m$. If $a^r$ has order $p$, then $a^{pr}=e$, so the order characterisation gives $p^{m-1}\mid r$; hence $A$ has the unique order-$p$ subgroup $\langle a^{p^{m-1}}\rangle$. The preceding lemma and Cauchy's theorem therefore give an order-$p$ subgroup $B$ of $G$ different from it, and $A\cap B=\{0\}$. [step 1.1]
+2.1 Fix the induction hypothesis for smaller finite abelian $p$-groups, assume $G$ is noncyclic, and put $A=\langle a\rangle$. [ih, step 1.1]
 
-3.1 In $G/B$ the image of $a$ has the same order as $a$ because $A\cap B=\{0\}$. It is still of maximal order: if $y+B$ had order larger than $p^m$, then $(y+B)^{p^m}\ne B$, so $y^{p^m}\ne0$ and $y$ would have order larger than that of $a$. [step 2.1]
+3.1 Write $|A|=p^m$. If $a^r$ has order $p$, then $a^{pr}=e$, so the order characterisation gives $p^{m-1}\mid r$; hence $A$ has the unique order-$p$ subgroup $\langle a^{p^{m-1}}\rangle$. The preceding lemma and Cauchy's theorem therefore give an order-$p$ subgroup $B$ of $G$ different from it, and $A\cap B=\{0\}$. [step 2.1]
 
-4.1 Induction in $G/B$ gives $G/B=(A+B)/B\oplus H'/B$ for some subgroup $H'\ge B$. Pulling back yields $G=A+H'$, while $A\cap H'\subseteq A\cap B=\{0\}$. [step 3.1]
+4.1 In $G/B$ the image of $a$ has the same order as $a$ because $A\cap B=\{0\}$. It is still of maximal order: if $y+B$ had order larger than $p^m$, then $(y+B)^{p^m}\ne B$, so $y^{p^m}\ne0$ and $y$ would have order larger than that of $a$. [step 3.1]
 
-5.1 Thus $H=H'$ is the required complement. The order-$p$ and one-factor boundaries are included in the cyclic case. [step 4.1] ∎
+5.1 Induction in $G/B$ gives $G/B=(A+B)/B\oplus H'/B$ for some subgroup $H'\ge B$. Pulling back yields $G=A+H'$, while $A\cap H'\subseteq A\cap B=\{0\}$. [step 4.1]
+
+6.1 Thus $H=H'$ is the required complement. The order-$p$ and one-factor boundaries are included in the cyclic case, completing the induction. [step 5.1, discharge-induction] ∎

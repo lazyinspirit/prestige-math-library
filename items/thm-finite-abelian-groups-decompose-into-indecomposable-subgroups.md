@@ -11,7 +11,7 @@ deps: [def-indecomposable-finite-abelian-group, thm-strong-induction, thm-intern
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: direct
+proof_strategy: induction
 verification:
   precheck: pass
 sources:
@@ -41,10 +41,12 @@ Every nontrivial finite abelian group is an internal direct product of finitely 
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** induction.
 
-1.1 Use strong induction on $|G|$. If $G$ is indecomposable, the one-factor product is the required decomposition. [given, L1, L2, L3, L4]
+1.1 For strong induction on $|G|$, the order-one case is vacuous because the only group of that order is trivial. [base, given, L1, L2, L3, L4]
 
-2.1 If $G$ is decomposable, write $G=B\oplus C$ with $B$ and $C$ nontrivial. Lagrange gives $|B|,|C|<|G|$, so induction decomposes each into indecomposable factors. [step 1.1]
+2.1 Fix a nontrivial $G$ and assume the result for every nontrivial finite abelian group of smaller order. If $G$ is indecomposable, the one-factor product is the required decomposition. [ih, step 1.1]
 
-3.1 Unique factorisation in $B\oplus C$ and in the two inductive products combines to unique factorisation by all the smaller factors; internal-product recognition completes the induction. [step 2.1] ∎
+3.1 If $G$ is decomposable, write $G=B\oplus C$ with $B$ and $C$ nontrivial. Lagrange gives $|B|,|C|<|G|$, so the induction hypothesis decomposes each into indecomposable factors. [step 2.1]
+
+4.1 Unique factorisation in $B\oplus C$ and in the two inductive products combines to unique factorisation by all the smaller factors; internal-product recognition completes the induction. [step 3.1, discharge-induction] ∎

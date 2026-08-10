@@ -24,9 +24,9 @@ pipeline_run: null
 
 ## Example
 
-On $K=[1,2]\times[0,\pi/2]$, the polar map
+On $K=[1,2]\times[\pi/6,\pi/3]$, the polar map
 $$P(r,\theta)=(r\cos\theta,r\sin\theta)$$
-is injective with Jacobian factor $r$. Its annular-sector image has area $3\pi/4$.
+is injective with Jacobian factor $r$. Its annular-sector image has area $\pi/4$.
 
 ## Facts & Assumptions
 
@@ -45,7 +45,7 @@ is injective with Jacobian factor $r$. Its annular-sector image has area $3\pi/4
 1.1 Differentiation and [L1] give the derivative matrix and determinant below. [L1]
 $$DP=\begin{pmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{pmatrix},\qquad \det DP=r.$$
 
-2.1 Equality of two images first gives equality of radii by [L1], then equality of cosines; [L2] gives equality of angles. Thus $P$ is injective on $K$, and $\det DP$ never vanishes there. [L1, L2, step 1.1]
+2.1 Equality of two images first gives equality of radii by [L1], then equality of cosines; [L2] gives equality of angles. The same recovery works on the open neighborhood $(1/2,5/2)\times(\pi/12,5\pi/12)$, where $\det DP$ never vanishes. Thus the compact theorem's neighborhood hypotheses hold. [L1, L2, step 1.1]
 
 3.1 Applying [L3] to the constant-one function and integrating $r$ gives the claimed area. [L3, step 2.1]
-$$\operatorname{area}(P(K))=\int_0^{\pi/2}\int_1^2r\,dr\,d\theta=\frac32\cdot\frac\pi2=\frac{3\pi}{4}.$$ ∎
+$$\operatorname{area}(P(K))=\int_{\pi/6}^{\pi/3}\int_1^2r\,dr\,d\theta=\frac32\cdot\frac\pi6=\frac{\pi}{4}.$$ ∎

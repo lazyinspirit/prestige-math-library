@@ -45,6 +45,6 @@ Suppose $\alpha:[a,b]\to\mathbb R$ is nondecreasing, $f$ is bounded and Riemann�
 
 1.1 Choose $K$ with $|\phi|\le K$. Given $\varepsilon>0$, uniform continuity supplies $\eta>0$ such that $|u-v|<\eta$ implies $|\phi(u)-\phi(v)|<\varepsilon/(2(1+\alpha(b)-\alpha(a)))$. [L2]
 
-1.2 By [L1], choose a partition $P$ for which $\sum_I\operatorname{osc}_I(f)\,\Delta_I\alpha<\eta\varepsilon/(4K+1)$. Split its intervals into those with $\operatorname{osc}_I(f)<\eta$ and the rest. The first class contributes less than $\varepsilon/2$ to the weighted oscillation sum of $\phi\circ f$. In the second class, $\operatorname{osc}_I(\phi\circ f)\le2K$, while $\eta\sum\Delta_I\alpha\le\sumoperatorname{osc}_I(f)\Delta_I\alpha$; hence it too contributes less than $\varepsilon/2$. [step 1.1, L1, L2, L3]
+2.1 By [L1], choose a partition $P$ for which $\sum_I\operatorname{osc}_I(f)\,\Delta_I\alpha<\eta\varepsilon/(4K+1)$. Split its intervals into those with $\operatorname{osc}_I(f)<\eta$ and the rest. The first class contributes less than $\varepsilon/2$ to the weighted oscillation sum of $\phi\circ f$. In the second class, $\operatorname{osc}_I(\phi\circ f)\le2K$, while $\eta\sum\Delta_I\alpha\le\sumoperatorname{osc}_I(f)\Delta_I\alpha$; hence it too contributes less than $\varepsilon/2$. [step 1.1, L1, L2, L3]
 
-2.1 Thus the weighted oscillation criterion [L1] holds for $\phi\circ f$, proving $\phi\circ f\in R(\alpha)$. [step 1.2, L1] ∎
+3.1 Thus the weighted oscillation criterion [L1] holds for $\phi\circ f$, proving $\phi\circ f\in R(\alpha)$. [step 2.1, L1] ∎

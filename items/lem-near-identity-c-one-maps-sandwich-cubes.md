@@ -24,9 +24,9 @@ pipeline_run: null
 
 ## Statement
 
-Let $C(a,r)=\{x:\|x-a\|_\infty\le r\}$ with $r>0$, and suppose that $C(a,r)$ lies in a convex open set on which $F:\mathbb R^n\to\mathbb R^n$ is $C^1$. Assume $F(a)=a$ and, for some $0\le q<1$,
+Let $C(a,r)=\{x:\|x-a\|_\infty\le r\}$ with $r>0$, let $W\subseteq\mathbb R^n$ be convex and open with $C(a,r)\subseteq W$, and let $F:W\to\mathbb R^n$ be $C^1$. Assume $F(a)=a$ and, for some $0\le q<1$,
 $$\|(DF(z)-I)v\|_2\le \frac q{\sqrt n}\|v\|_2$$
-for every $z\in C(a,r)$ and $v\in\mathbb R^n$. Then
+for every $z\in W$ and $v\in\mathbb R^n$. Then
 $$C(a,(1-q)r)\subseteq F(C(a,r))\subseteq C(a,(1+q)r).$$
 Moreover, $F$ is injective on $C(a,r)$.
 
@@ -40,11 +40,13 @@ Moreover, $F$ is injective on $C(a,r)$.
 
 [L3] Euclidean space is complete and every closed subspace of a complete metric space is complete ([[thm-euclidean-space-complete]], [[thm-complete-subspace-iff-closed]]).
 
+[L4] The Euclidean and sup norms satisfy $\|w\|_\infty\le\|w\|_2\le\sqrt n\|w\|_\infty$ ([[lem-p-norms-are-norms-and-induce-the-published-metrics]]).
+
 ## Proof
 
 **Proof technique:** fixed-point.
 
-1.1 Put $R=F-I$ and use [L1] with the Euclidean--sup norm comparison to obtain the following contraction estimate. [L1, given]
+1.1 Put $R=F-I$ and use [L1] with the Euclidean--sup norm comparison [L4] to obtain the following contraction estimate. [L1, L4, given]
 $$\|R(x)-R(y)\|_\infty\le q\|x-y\|_\infty$$
 on the cube. In particular $\|R(x)\|_\infty\le qr$, so $F(x)=x+R(x)$ lies in $C(a,(1+q)r)$.
 

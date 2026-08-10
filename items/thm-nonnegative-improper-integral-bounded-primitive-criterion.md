@@ -48,6 +48,6 @@ is bounded above. In the convergent case its supremum is the value of the improp
 
 1.1 At $+\infty$, $F(R)=\int_a^R f$ is nondecreasing by [L1]. If $F(R)$ converges, its range is bounded. Conversely, if its range is bounded above, the integer sequence $F(n)$ is bounded and nondecreasing, so [L2] gives $F(n)\to S=\sup_nF(n)$. [L1, L2]
 
-1.2 For $n\le R\le n+1$, monotonicity gives $F(n)\le F(R)\le F(n+1)$. Hence $F(R)\to S$. Every real truncation lies below a later integer truncation, so $S$ is also the supremum of the full truncation range. [step 1.1, L1]
+2.1 For $n\le R\le n+1$, monotonicity gives $F(n)\le F(R)\le F(n+1)$. Hence $F(R)\to S$. Every real truncation lies below a later integer truncation, so $S$ is also the supremum of the full truncation range. [step 1.1, L1]
 
-2.1 Reciprocal truncations and the same squeeze prove the finite-endpoint forms; reversing orientation proves the $-\infty$ form. Moving the initial finite endpoint is harmless by [L3]. [L3] ∎
+3.1 Reciprocal truncations and the same squeeze prove the finite-endpoint forms; reversing orientation proves the $-\infty$ form. Moving the initial finite endpoint is harmless by [L3]. [L3] ∎

@@ -49,4 +49,4 @@ Changing finitely many initial terms or moving the finite lower integration endp
 
 1.1 By [L1], the series partial sums are bounded exactly when the values $\int_1^Nf$ at positive integer $N$ are bounded. By [L2], this is exactly convergence of the corresponding two monotone sequences. [L1, L2]
 
-1.2 If the integer truncations converge to $I$, [L3] gives $N\le R<N+1$ for arbitrarily large $N$, and nonnegativity gives $\int_1^Nf\le\int_1^Rf\le\int_1^{N+1}f$. Thus the full real-parameter limit is $I$. The reverse implication is immediate by restriction to integer truncations. Tail invariance handles finite changes. [L3] ∎
+2.1 If the integer truncations converge to $I$, [L3] gives $N\le R<N+1$ for arbitrarily large $N$, and nonnegativity gives $\int_1^Nf\le\int_1^Rf\le\int_1^{N+1}f$. Thus the full real-parameter limit is $I$. The reverse implication is immediate by restriction to integer truncations. Tail invariance handles finite changes. [L3] ∎

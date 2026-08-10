@@ -11,7 +11,7 @@ deps: [thm-strong-induction, thm-lagrange, cor-order-of-a-quotient-group, cor-qu
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: direct
+proof_strategy: induction
 verification:
   precheck: pass
 sources:
@@ -49,12 +49,14 @@ Let $G$ be a finite abelian group and let $p$ be a prime dividing $|G|$. Then $G
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** induction.
 
-1.1 Proceed by strong induction on $|G|$. The trivial group has no relevant prime divisor, and if $|G|=p$ then $G$ is cyclic of order $p$. [given, L1, L2, L3, L4, L5, L6, L7, L8]
+1.1 For strong induction on $|G|$, the trivial group has no relevant prime divisor, and if $|G|=p$ then $G$ is cyclic of order $p$. [base, given, L1, L2, L3, L4, L5, L6, L7, L8]
 
-2.1 Choose $x\ne e$. If $\langle x\rangle=G$, cyclic-group classification supplies $x^{|G|/p}$ of order $p$. Otherwise put $H=\langle x\rangle$, a nontrivial proper subgroup. [step 1.1]
+2.1 Fix the induction hypothesis for every finite abelian group of order smaller than $|G|$. Choose $x\ne e$. If $\langle x\rangle=G$, cyclic-group classification supplies $x^{|G|/p}$ of order $p$. Otherwise put $H=\langle x\rangle$, a nontrivial proper subgroup. [ih, step 1.1]
 
-3.1 If $p\mid |H|$, induction in $H$ gives an element of order $p$. If $p\nmid |H|$, then $p\mid |G/H|$ and induction in the finite abelian quotient gives a coset $yH$ of order $p$. [step 2.1]
+3.1 If $p\mid |H|$, the induction hypothesis in $H$ gives an element of order $p$. If $p\nmid |H|$, then $p\mid |G/H|$ and the induction hypothesis in the smaller finite abelian quotient gives a coset $yH$ of order $p$. [step 2.1]
 
-4.1 In the latter case $y^p\in H$. Let $q$ be the order of $y^p$; then $q\mid |H|$ and $p\nmid q$. Since the coset of $y$ has order $p$, the order of $y$ is $pq$, so $y^q$ has order $p$. This completes the induction. [step 3.1] ∎
+4.1 In the latter case $y^p\in H$. Let $q$ be the order of $y^p$; then $q\mid |H|$ and $p\nmid q$. Since the coset of $y$ has order $p$, the order of $y$ is $pq$, so $y^q$ has order $p$. [step 3.1]
+
+5.1 Every branch supplies an element of order $p$, completing the strong induction. [step 4.1, discharge-induction] ∎

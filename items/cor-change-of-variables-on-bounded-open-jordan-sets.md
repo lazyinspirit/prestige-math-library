@@ -38,7 +38,7 @@ No improper-integral convention is implicit in this statement.
 
 [L2] Compact-Jordan change of variables applies to every member of that exhaustion ([[thm-change-of-variables-for-compact-jordan-sets]]).
 
-[L3] The absolute value of an integral over a Jordan set is bounded by the supremum of the integrand times the set's content ([[thm-multidimensional-integral-properties]]).
+[L3] On a bounding rectangle, the absolute value of an integral is bounded by the integral of the absolute value ([[thm-multidimensional-integral-properties]]); zero extension gives the corresponding supremum-times-content bound on a Jordan subset.
 
 ## Proof
 

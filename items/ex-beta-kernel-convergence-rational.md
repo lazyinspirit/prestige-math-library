@@ -15,7 +15,7 @@ deps: [def-mixed-improper-integral,
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: cases
+proof_strategy: direct
 verification:
   precheck: pass
 sources:
@@ -45,7 +45,7 @@ $$p<1\quad\text{and}\quad p+q>1.$$
 
 ## Verification
 
-**Proof technique:** cases.
+**Proof technique:** direct.
 
 1.1 Near zero, divide the kernel by $x^{-p}$. The quotient $(1+x)^{-q}$ tends to one, so [L2] and [L3] give convergence at zero exactly when $p<1$. [L2, L3]
 

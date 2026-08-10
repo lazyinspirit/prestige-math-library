@@ -55,6 +55,6 @@ $$\int_\varepsilon^R\frac{f(ax)-f(bx)}x,dx
 =\int_a^b\frac{f(\varepsilon t)}t,dt-
 \int_a^b\frac{f(Rt)}t,dt.$$
 
-1.2 By [L2] and [L4], the first proper integral tends to $f(0)\int_a^b dt/t$ as $\varepsilon\downarrow0$. By [L3] and [L4], the second tends to $L\int_a^b dt/t$ as $R\to\infty$. The two limits exist independently, so the mixed improper integral converges and has the displayed value. [step 1.1, L2, L3, L4]
+2.1 By [L2] and [L4], the first proper integral tends to $f(0)\int_a^b dt/t$ as $\varepsilon\downarrow0$. By [L3] and [L4], the second tends to $L\int_a^b dt/t$ as $R\to\infty$. The two limits exist independently, so the mixed improper integral converges and has the displayed value. [step 1.1, L2, L3, L4]
 
-2.1 The case $a=b$ is zero on both sides. If $a>b$, interchange $a,b$ in step 1.2; both the numerator and the oriented proper factor change sign. [step 1.2] ∎
+3.1 The case $a=b$ is zero on both sides. If $a>b$, interchange $a,b$ in step 2.1; both the numerator and the oriented proper factor change sign. [step 2.1] ∎

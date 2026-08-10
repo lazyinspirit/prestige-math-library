@@ -11,7 +11,7 @@ deps: [def-center-of-a-group, def-reduced-syllable-word-in-a-family-of-groups, t
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: direct
+proof_strategy: contradiction
 verification:
   precheck: pass
 sources:
@@ -37,10 +37,10 @@ If at least two factors in a free product are nontrivial, then its center is the
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** contradiction.
 
-1.1 Suppose a nonidentity central element has reduced word $z=x_1\cdots x_n$. Choose a nonidentity syllable $g$ from a factor different from the factor of $x_1$. [given, L1, L2, L3]
+1.1 Assume for contradiction that a nonidentity central element has reduced word $z=x_1\cdots x_n$. Choose a nonidentity syllable $g$ from a factor different from the factor of $x_1$. [assume-contra, given, L1, L2, L3]
 
 2.1 Then $gz$ is reduced of length $n+1$. If the last syllable of $z$ lies in the factor of $g$, the word $zg$ reduces to length at most $n$; otherwise it is reduced of length $n+1$ but begins in a different factor from $gz$. [step 1.1]
 
-3.1 Normal-form uniqueness gives $gz\ne zg$ in either case, contradicting centrality. Hence only the identity is central. [step 2.1] ∎
+3.1 Normal-form uniqueness gives $gz\ne zg$ in either case, contradicting centrality. Hence only the identity is central. [step 2.1, discharge-contradiction] ∎

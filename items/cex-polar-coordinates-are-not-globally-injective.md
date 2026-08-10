@@ -32,7 +32,7 @@ pipeline_run: null
 
 [L1] Sine and cosine have common period $2\pi$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]).
 
-[L2] The polar Jacobian determinant is $r$, by direct differentiation and the Pythagorean identity ([[cor-trigonometric-parity-and-pythagorean-identity]]).
+[L2] Sine and cosine satisfy $\sin^2\theta+\cos^2\theta=1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
 
 ## Counterexample
 
@@ -42,4 +42,4 @@ pipeline_run: null
 
 2.1 At $r=0$, every angle maps to the origin, providing infinitely many preimages even away from comparing the seam endpoints. [given, step 1.1]
 
-3.1 By [L2], $\det DP(0,\theta)=0$, so the derivative is singular along that entire parameter edge. The map therefore violates both claimed hypotheses. [L2, step 2.1] ∎
+3.1 Direct differentiation and [L2] give $\det DP(r,\theta)=r$. Thus $\det DP(0,\theta)=0$, so the derivative is singular along the entire zero-radius edge and the map violates both claimed hypotheses. [L2, step 2.1] ∎

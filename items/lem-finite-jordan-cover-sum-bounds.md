@@ -38,9 +38,9 @@ $$\left|\int_Fh\right|\le \sup_F|h|\operatorname{cont}(F).$$
 
 **Given:** The Jordan sets and bounded integrable function in the statement.
 
-[L1] The Riemann integral over Jordan sets is linear, monotone, and bounded by the integral of the absolute value ([[thm-multidimensional-integral-properties]]).
+[L1] On a bounding rectangle, the Riemann integral is linear, monotone, and bounded by the integral of the absolute value ([[thm-multidimensional-integral-properties]]); zero extension transfers these properties to Jordan-set integrals.
 
-[L2] Jordan content and integration are finitely additive across Jordan pieces whose overlaps have content zero ([[cor-jordan-content-finite-additivity]]).
+[L2] Jordan content is finitely additive across Jordan pieces whose overlaps have content zero ([[cor-jordan-content-finite-additivity]]).
 
 ## Proof
 

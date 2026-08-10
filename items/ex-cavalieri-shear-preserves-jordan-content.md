@@ -40,7 +40,7 @@ preserves the Jordan content of every bounded Jordan set.
 
 **Proof technique:** direct.
 
-1.1 Hold all coordinates except $x_j$ fixed. The corresponding section of $S(E)$ is the section of $E$ translated by $cx_i$, so its one-dimensional content is unchanged. [given]
+1.1 By [L2], the linear image $S(E)$ is Jordan measurable. Hold all coordinates except $x_j$ fixed: the corresponding section of $S(E)$ is the section of $E$ translated by $cx_i$, so its one-dimensional content is unchanged. [L2, given]
 
 2.1 Integrating these equal sectional contents with [L1] gives $\operatorname{cont}(S(E))=\operatorname{cont}(E)$. [L1, step 1.1]
 

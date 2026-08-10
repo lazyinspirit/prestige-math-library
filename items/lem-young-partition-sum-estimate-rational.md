@@ -52,6 +52,6 @@ Moreover, inserting or deleting finitely many partition points whose surrounding
 1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is [given]
 $(f(v)-f(u))(g(w)-g(v))$ up to sign. Its absolute value is at most $K_fK_g(v-u)^p(w-v)^q$, hence at most $K_fK_g(w-u)^{p+q}$ by [L1].
 
-1.2 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing the estimate of step 1.1 gives the first displayed bound. Since $2^{-(p+q-1)}\in(0,1)$, [L2] makes the successive-refinement errors summable. [step 1.1, L1, L2, L3]
+2.1 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing the estimate of step 1.1 gives the first displayed bound. Since $2^{-(p+q-1)}\in(0,1)$, [L2] makes the successive-refinement errors summable. [step 1.1, L1, L2, L3]
 
-2.1 For a general insertion or deletion, charge its error to the union of its two adjacent intervals. Grouping disjoint charges in alternating classes prevents double counting; [L1] gives $\ell^{p+q}\le h^{p+q-1}\ell$, and the charged lengths sum to at most a fixed factor times $b-a$. This proves the second estimate. If $K_fK_g=0$ or $a=b$, all errors vanish. [step 1.1, L1, L3] ∎
+3.1 For a general insertion or deletion, charge its error to the union of its two adjacent intervals. Grouping disjoint charges in alternating classes prevents double counting; [L1] gives $\ell^{p+q}\le h^{p+q-1}\ell$, and the charged lengths sum to at most a fixed factor times $b-a$. This proves the second estimate. If $K_fK_g=0$ or $a=b$, all errors vanish. [step 1.1, L1, L3] ∎

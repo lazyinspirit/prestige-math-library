@@ -55,10 +55,10 @@ The reflected statements hold at $-\infty$ and at finite singular endpoints, wit
 
 **Proof technique:** cases.
 
-1.1 Choose $M$ with $|F|\le M$. In clause 1, apply [L1] on $[u,v]$. Every partial integral $\int_u^xf=F(x)-F(u)$ has absolute value at most $2M$, so [L1]
+1.1 Choose $M$ with $|F|\le M$. In clause 1, apply [L1] on $[u,v]$. Every partial integral $\int_u^xf=F(x)-F(u)$ has absolute value at most $2M$, so [L1, assume-case first]
 $$\left|\int_u^vfg\right|\le2M(g(u)+g(v))\le4Mg(u).$$
 This tends to zero as $u\to\infty$, and [L2] proves convergence.
 
-1.2 In clause 2, [L3] gives the integration-by-parts identity. The boundary term $F(R)g(R)$ tends to zero because $F$ is bounded and $g(R)\to0$. Also $|Fg'|\le M|g'|$, so [L4] makes $\int Fg'$ converge. Passing $R\to\infty$ proves convergence of $\int fg$. [L3, L4]
+1.2 In clause 2, [L3] gives the integration-by-parts identity. The boundary term $F(R)g(R)$ tends to zero because $F$ is bounded and $g(R)\to0$. Also $|Fg'|\le M|g'|$, so [L4] makes $\int Fg'$ converge. Passing $R\to\infty$ proves convergence of $\int fg$. [L3, L4, assume-case second]
 
-2.1 Reversing orientation proves the $-\infty$ case. At a finite endpoint, use a primitive based at a fixed nonsingular point and take the corresponding one-sided limits; the same estimates are unchanged. [given] ∎
+2.1 The two clauses are exhausted by steps 1.1–1.2. Reversing orientation proves the $-\infty$ case. At a finite endpoint, use a primitive based at a fixed nonsingular point and take the corresponding one-sided limits; the same estimates are unchanged. [step 1.1, step 1.2, cases-exhaustive] ∎

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [def-determinant-of-a-square-matrix, thm-real-square-matrix-invertible-iff-determinant-nonzero, thm-determinant-under-elementary-row-operations, thm-invertible-matrices-factor-into-elementary-matrices, lem-euclidean-linear-maps-have-matrices-and-are-bounded, def-jordan-inner-and-outer-content, thm-jordan-boundary-criterion, cor-cavalieri-principle-for-jordan-content, lem-finite-jordan-cover-sum-bounds]
+deps: [def-determinant-of-a-square-matrix, thm-real-square-matrix-invertible-iff-determinant-nonzero, thm-determinant-under-elementary-row-operations, thm-invertible-matrices-factor-into-elementary-matrices, thm-gaussian-elimination-produces-row-echelon-form, thm-invertible-matrix-theorem, cor-a-row-reduction-is-a-product-of-elementary-matrices, cor-elementary-matrices-are-invertible, lem-euclidean-linear-maps-have-matrices-and-are-bounded, def-jordan-inner-and-outer-content, thm-jordan-boundary-criterion, cor-cavalieri-principle-for-jordan-content, lem-finite-jordan-cover-sum-bounds]
 justified_by: []
 aliases: []
 landmark: false
@@ -40,12 +40,18 @@ In particular, a singular linear image has content zero.
 
 [L4] Jordan inner and outer content approximate a Jordan set by finite rectangular figures ([[def-jordan-inner-and-outer-content]]).
 
+[L5] Every Euclidean linear map is bounded and continuous ([[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).
+
+[L6] Gaussian elimination produces row-echelon form, and a square matrix is invertible exactly when that form has a pivot in every row ([[thm-gaussian-elimination-produces-row-echelon-form]], [[thm-invertible-matrix-theorem]]).
+
+[L7] A finite row reduction is left multiplication by a product of elementary matrices, each of which is invertible ([[cor-a-row-reduction-is-a-product-of-elementary-matrices]], [[cor-elementary-matrices-are-invertible]]).
+
 ## Proof
 
 **Proof technique:** constructive.
 
 1.1 Suppose first that $A$ is invertible. By [L1], construct it as a product of elementary matrices. A coordinate permutation merely permutes the edge lengths of a rectangle; a scaling of one coordinate by $c\ne0$ multiplies its content by $|c|$; and adding $c$ times one coordinate to another translates every section parallel to the changed coordinate, so [L3] shows that a shear preserves content. The factors are exactly the absolute determinant factors listed by [L2]. [L1, L2, L3, construct]
 
-2.1 These calculations apply first to rectangles and then to finite rectangular figures. Given inner and outer figures $P\subseteq E\subseteq Q$, injectivity gives $T(P)\subseteq T(E)\subseteq T(Q)$, and step 1.1 scales both bounding contents by $|\det A|$. Letting the gap $\operatorname{cont}(Q)-\operatorname{cont}(P)$ tend to zero by [L4] proves both Jordan measurability of $T(E)$ and the formula. Boundedness follows from boundedness of linear maps. [L4, step 1.1]
+2.1 These calculations apply first to rectangles and then to finite rectangular figures. Given inner and outer figures $P\subseteq E\subseteq Q$, injectivity gives $T(P)\subseteq T(E)\subseteq T(Q)$, and step 1.1 scales both bounding contents by $|\det A|$. Letting the gap $\operatorname{cont}(Q)-\operatorname{cont}(P)$ tend to zero by [L4] proves both Jordan measurability of $T(E)$ and the formula. Boundedness follows from [L5]. [L4, L5, step 1.1]
 
-3.1 If $A$ is singular, row reduction and [L1] place its range, after an invertible linear change of coordinates, in a coordinate hyperplane. A bounded part of that hyperplane fits in slabs of arbitrarily small thickness and hence has content zero. Applying the already proved invertible case to undo the coordinate change shows that $T(E)$ is null and Jordan; [L1] gives $\det A=0$, so the same formula holds. [L1, step 2.1, discharge-construct: invertible and singular constructions] ∎
+3.1 If $A$ is singular, [L6] reduces it to an echelon matrix with a zero row; [L7] realizes this as an invertible change of codomain coordinates. The transformed range lies in a coordinate hyperplane, whose bounded part fits in slabs of arbitrarily small thickness and has content zero. Applying the invertible case to undo the coordinate change shows that $T(E)$ is null and Jordan; [L1] gives $\det A=0$, so the same formula holds. [L1, L6, L7, step 2.1, discharge-construct: invertible and singular constructions] ∎

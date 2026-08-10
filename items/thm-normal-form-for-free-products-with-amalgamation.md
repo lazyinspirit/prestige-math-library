@@ -43,7 +43,7 @@ Every element of $G\ast_KH$ has a unique normal form $s_1\cdots s_nk$ relative t
 
 **Proof technique:** direct.
 
-1.1 The compatible factor permutations give, by the pushout presentation, an action of $G\ast_KH$ on the set of normal words. Applying a product of factor elements to the length-zero word rewrites it to a normal word, so every group element has such a form. [given, L1, L2, L3, L4]
+1.1 The compatible factor permutations give, by the pushout presentation, an action of $G\ast_KH$ on the set of normal words. For a factor product $w$, applying $P_w$ to the length-zero word performs the deterministic normal-form rewrite of $w^{-1}$; since inversion is a bijection of the group, every element has such a form. [given, L1, L2, L3, L4]
 
 2.1 The permutation attached to a normal word sends the length-zero word to the deterministic normal-form rewrite of its inverse. The resulting inversion-normalisation map is an involution: invert the represented factor product again and repeat the uniquely determined transversal rewrites. It preserves syllable length, since multiplying a nontrivial transversal representative by an element of $K$ cannot put it in $K$. Hence a positive-length normal word cannot represent the identity, and equality of two represented elements forces equality of their inverse normal forms and then of the original words. [step 1.1]
 

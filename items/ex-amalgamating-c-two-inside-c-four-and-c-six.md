@@ -41,7 +41,7 @@ Embed $C_2$ as the unique order-two subgroup of $C_4=\langle a\rangle$ and $C_6=
 
 **Proof technique:** direct.
 
-1.1 The maps send the nonidentity element of $C_2$ to $a^2$ and $b^3$, each of order $2$, so both maps are injective. [given, L1, L2, L3, L4]
+1.1 Enumerating the cyclic powers shows that $a^2$ is the unique element of order $2$ in $C_4$ and $b^3$ is the unique element of order $2$ in $C_6$. The edge maps send the nonidentity element of $C_2$ to these elements, so both maps are injective. [given, L1, L2, L3, L4]
 
 2.1 The amalgamated-presentation theorem gives the displayed presentation. [step 1.1]
 

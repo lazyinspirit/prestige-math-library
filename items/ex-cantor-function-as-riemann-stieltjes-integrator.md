@@ -43,4 +43,5 @@ $$\int_0^1 1\,dc=1.$$
 
 1.1 Monotonicity and [L1] make $c$ BV, so existence follows from [L2]. Every tagged sum for the constant integrand telescopes: [L1, L2]
 $$\sum_i1\,(c(t_{i+1})-c(t_i))=c(1)-c(0)=1.$$
-Thus its common limit is one. This computation invokes neither a derivative of $c$ nor measure theory. ∎
+
+2.1 Thus its common limit is one. This computation invokes neither a derivative of $c$ nor measure theory. [step 1.1] ∎

@@ -34,11 +34,13 @@ is finite, then $\int_{A\times B}f=0$. The analogous assertion holds with the co
 
 [L1] Riemann--Fubini permits a content-zero exceptional set of parameters and identifies the multiple integral with the resulting iterated integral ([[thm-riemann-fubini-on-product-rectangles]]).
 
+[L2] A set has content zero when it admits finite cube covers of arbitrarily small total volume ([[def-null-and-content-zero-in-rn]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 A finite subset of $\mathbb R^p$ has content zero: for a given $\varepsilon>0$, cover its finitely many points by cubes whose total volume is below $\varepsilon$. [given, algebra]
+1.1 A finite subset of $\mathbb R^p$ has content zero by [L2]: for a given $\varepsilon>0$, cover its finitely many points by cubes whose total volume is below $\varepsilon$. [L2, given]
 
 2.1 Outside $S$ every section is identically zero and has integral zero. Complete the section-integral function by the value $0$ on $S$ and apply [L1]; the resulting outer function is identically zero, so the multiple integral is zero. [L1, step 1.1]
 

@@ -24,11 +24,11 @@ pipeline_run: null
 
 ## Example
 
-For $n\ge2$, write hyperspherical coordinates as
-$$\begin{aligned}x_1&=r\cos\phi_1,\\x_2&=r\sin\phi_1\cos\phi_2,\\&\ \vdots\\x_{n-1}&=r\sin\phi_1\cdots\sin\phi_{n-2}\cos\theta,\\x_n&=r\sin\phi_1\cdots\sin\phi_{n-2}\sin\theta.\end{aligned}$$
+For $n=2$, use the polar coordinates $x_1=r\cos\theta$ and $x_2=r\sin\theta$. For $n\ge3$, write hyperspherical coordinates as
+$$\begin{aligned}x_1&=r\cos\phi_1,\\x_k&=r\left(\prod_{j=1}^{k-1}\sin\phi_j\right)\cos\phi_k\quad(2\le k\le n-2),\\x_{n-1}&=r\left(\prod_{j=1}^{n-2}\sin\phi_j\right)\cos\theta,\\x_n&=r\left(\prod_{j=1}^{n-2}\sin\phi_j\right)\sin\theta.\end{aligned}$$
 Its absolute Jacobian determinant is
 $$r^{n-1}\sin^{n-2}\phi_1\sin^{n-3}\phi_2\cdots\sin\phi_{n-2}.$$
-On compact boxes with $r>0$, every $\phi_j$ strictly between $0$ and $\pi$, and $\theta$ in a seam-free interval such as $[0,\pi/2]$, the factor is nonzero and the map is injective.
+On compact boxes with $r>0$, every $\phi_j$ strictly between $0$ and $\pi$, and $\theta$ in a seam-free interval such as $[\pi/6,\pi/3]$, the factor is nonzero and the map is injective.
 
 ## Facts & Assumptions
 

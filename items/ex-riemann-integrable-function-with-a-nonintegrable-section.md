@@ -32,18 +32,20 @@ Then $f$ is Riemann integrable with integral $0$. Every horizontal section is in
 
 **Given:** The displayed function on the unit square.
 
-[L1] The Dirichlet function is nonintegrable on every nondegenerate interval ([[def-dirichlet-and-thomae-functions]]); boundedness by itself does not imply Riemann integrability ([[fs-bounded-implies-riemann-integrable]]).
+[L1] The Dirichlet function is the indicator of the rationals, with values $1$ and $0$ on two dense sets ([[def-dirichlet-and-thomae-functions]]).
 
-[L2] A bounded function is Riemann integrable when grids make its upper-minus-lower sum arbitrarily small ([[thm-multidimensional-riemann-criterion]]).
+[L2] The published boundedness false statement computes the Dirichlet function's unequal lower and upper Darboux integrals, so boundedness alone does not give integrability ([[fs-bounded-implies-riemann-integrable]]).
 
-[L3] Riemann--Fubini distinguishes ordinary iterated integrals from lower/upper completion across exceptional sections ([[thm-riemann-fubini-on-product-rectangles]]).
+[L3] A bounded function is Riemann integrable when grids make its upper-minus-lower sum arbitrarily small ([[thm-multidimensional-riemann-criterion]]).
+
+[L4] Riemann--Fubini distinguishes ordinary iterated integrals from lower/upper completion across exceptional sections ([[thm-riemann-fubini-on-product-rectangles]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Every lower sum of $f$ is $0$. Put grid lines immediately to either side of $x=1/2$ with total intervening width below $\varepsilon$; only cells in that strip can have supremum $1$, so the upper sum is below $\varepsilon$. Thus [L2] gives integrability and integral $0$. [L2, given]
+1.1 Every lower sum of $f$ is $0$. Put grid lines immediately to either side of $x=1/2$ with total intervening width below $\varepsilon$; only cells in that strip can have supremum $1$, so the upper sum is below $\varepsilon$. Thus [L3] gives integrability and integral $0$. [L3, given]
 
 2.1 For fixed $y$, the $x$-section is either zero or the indicator of the singleton $\{1/2\}$, and in both cases its integral is $0$. The resulting outer function is zero, so that ordinary iteration exists and equals $0$. [step 1.1]
 
-3.1 For fixed $x\ne1/2$, the $y$-section is zero; at $x=1/2$ it is the Dirichlet function and is nonintegrable by [L1]. Therefore the reverse ordinary iteration is undefined, exactly as [L3] permits despite multiple integrability. [L1, L3, step 2.1] ∎
+3.1 For fixed $x\ne1/2$, the $y$-section is zero; at $x=1/2$ it is the Dirichlet function and is nonintegrable by [L2]. Therefore the reverse ordinary iteration is undefined, exactly as [L4] permits despite multiple integrability. [L1, L2, L4, step 2.1] ∎

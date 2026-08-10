@@ -46,4 +46,4 @@ where the integral is improper at the interior point $c$.
 
 1.1 On the left use $t=c-x$; on the right use $t=x-c$. The two one-sided integrals become respectively $\int_0^{c-a}t^{-1/2}dt$ and $\int_0^{b-c}t^{-1/2}dt$. [given]
 
-1.2 Both converge separately by [L2], as [L1] requires. Evaluating them with [L3] and adding gives the displayed value. [L2, L1, L3] ∎
+2.1 Both converge separately by [L2], as [L1] requires. Evaluating them with [L3] and adding gives the displayed value. [L2, L1, L3] ∎

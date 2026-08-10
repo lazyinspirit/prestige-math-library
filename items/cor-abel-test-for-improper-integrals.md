@@ -49,4 +49,4 @@ Suppose $\int_a^\infty f$ converges and $g:[a,\infty)\to\mathbb R$ is bounded, m
 
 1.1 By [L1], $g(x)\to L$ for some finite $L$. If $g$ is nonincreasing, put $h=g-L$; if it is nondecreasing, put $h=L-g$. In either case $h\ge0$, $h$ is nonincreasing toward the singular end, and $h\to0$. [L1]
 
-1.2 The primitive of $f$ is bounded by [L2], so [L3] makes $\int fh$ converge. Since $fg=Lf\pm fh$, linearity [L4] and convergence of $\int f$ prove convergence of $\int fg$. The oriented endpoint variants are identical. [L2, L3, L4] ∎
+2.1 The primitive of $f$ is bounded by [L2], so [L3] makes $\int fh$ converge. Since $fg=Lf\pm fh$, linearity [L4] and convergence of $\int f$ prove convergence of $\int fg$. The oriented endpoint variants are identical. [L2, L3, L4] ∎

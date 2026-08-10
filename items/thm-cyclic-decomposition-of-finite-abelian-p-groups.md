@@ -11,7 +11,7 @@ deps: [thm-maximal-order-cyclic-subgroup-splits-in-a-finite-abelian-p-group, thm
 justified_by: []
 aliases: []
 landmark: true
-proof_strategy: direct
+proof_strategy: induction
 verification:
   precheck: pass
 sources:
@@ -41,10 +41,12 @@ Every finite abelian $p$-group is isomorphic to a finite direct product of cycli
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** induction.
 
-1.1 Induct on $|G|$. The trivial group gives the empty product. Otherwise choose $a$ of maximal order and split $G=\langle a\rangle\oplus H$. [given, L1, L2, L3, L4]
+1.1 For induction on $|G|$, the trivial group gives the empty product. [base, given, L1, L2, L3, L4]
 
-2.1 The cyclic factor $\langle a\rangle$ has prime-power order. If $H$ is nontrivial then $|H|<|G|$, so induction decomposes $H$ into cyclic $p$-groups. [step 1.1]
+2.1 Fix the induction hypothesis for smaller finite abelian $p$-groups. If $G$ is nontrivial, choose $a$ of maximal order and split $G=\langle a\rangle\oplus H$. [ih, step 1.1]
 
-3.1 Concatenating that decomposition with $\langle a\rangle$ and applying internal-product recognition gives the asserted external direct product. [step 2.1] ∎
+3.1 The cyclic factor $\langle a\rangle$ has prime-power order. If $H$ is nontrivial then $|H|<|G|$, so the induction hypothesis decomposes $H$ into cyclic $p$-groups. [step 2.1]
+
+4.1 Concatenating that decomposition with $\langle a\rangle$ and applying internal-product recognition gives the asserted external direct product, completing the induction. [step 3.1, discharge-induction] ∎

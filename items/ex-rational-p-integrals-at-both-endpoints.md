@@ -13,7 +13,7 @@ deps: [thm-improper-p-test-rational,
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: cases
+proof_strategy: direct
 verification:
   precheck: pass
 sources:
@@ -41,8 +41,8 @@ $$\int_0^1x^{-1/2}dx=2,qquad \int_1^\infty x^{-1/2}dx\text{ diverges}.$$
 
 ## Verification
 
-**Proof technique:** cases.
+**Proof technique:** direct.
 
 1.1 Applying [L1] at $p=2$ proves convergence only at infinity, and [L2] gives the value $1/(2-1)=1$ there. [L1, L2]
 
-1.2 Applying [L1] at $p=1/2$ proves convergence only at zero, and [L2] gives $1/(1-1/2)=2$. These are precisely the four assertions displayed above. [L1, L2] ∎
+2.1 Applying [L1] at $p=1/2$ proves convergence only at zero, and [L2] gives $1/(1-1/2)=2$. These are precisely the four assertions displayed above. [L1, L2] ∎

@@ -36,12 +36,16 @@ In particular, if $f(x,y)=a(x)$ is independent of $y$, then $\int_{A\times B}f=\
 
 [L1] Riemann--Fubini identifies the integral over a product rectangle with either iterated integral ([[thm-riemann-fubini-on-product-rectangles]]).
 
+[L2] A continuous real function on a closed nondegenerate rectangle is Riemann integrable ([[thm-continuous-on-a-rectangle-is-riemann-integrable]]).
+
+[L3] The multidimensional Riemann integral is linear ([[thm-multidimensional-integral-properties]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The product $f$ is continuous and hence integrable. For fixed $x$, linearity gives $\int_Bf_x=a(x)\int_Bb$. [given, algebra]
+1.1 The product $f$ is continuous and hence integrable by [L2]. For fixed $x$, linearity [L3] gives $\int_Bf_x=a(x)\int_Bb$. [L2, L3, given]
 
-2.1 Apply [L1] and linearity once more: $\int_{A\times B}f=\int_A(a(x)\int_Bb)=(\int_Aa)(\int_Bb)$. [L1, step 1.1, algebra]
+2.1 Apply [L1] and [L3] once more: $\int_{A\times B}f=\int_A(a(x)\int_Bb)=(\int_Aa)(\int_Bb)$. [L1, L3, step 1.1]
 
 3.1 Taking $b$ constantly equal to $1$ gives $\int_Bb=\operatorname{vol}(B)$ and yields the coordinate-independent case, including the case $\int_Aa=0$. [step 2.1, algebra] ∎

@@ -49,8 +49,12 @@ When they converge, their values are respectively $1/(p-1)$ and $1/(1-p)$.
 
 **Proof technique:** cases.
 
-1.1 If $p>1$, then $R^{1-p}\to0$, so [L1] gives $\int_1^R x^{-p}dx\to1/(p-1)$. If $0<p<1$, the same formula grows without bound as $R\to\infty$. For $p=1$, the first dyadic bound in [L1] is unbounded. If $p\le0$, then $x^{-p}\ge1$ for $x\ge1$, so [L3] gives divergence. [L1, L3]
+1.1 If $p>1$, then $R^{1-p}\to0$, so [L1] gives $\int_1^R x^{-p}dx\to1/(p-1)$. [L1, L2, assume-case infinityhigh]
 
-1.2 At zero, if $0<p<1$, [L1] and $c^{1-p}\to0$ give value $1/(1-p)$. If $p>1$, the same truncations are unbounded; if $p=1$, use the second dyadic bound. If $p\le0$, then $0\le x^{-p}\le1$ on $(0,1]$, so comparison with the constant one gives convergence, and the formula from step 1.1's power computation gives $1/(1-p)$. [L1, L2, L3]
+1.2 If $p\le1$, the integral at infinity diverges: for $0<p<1$ the formula in [L1] is unbounded, for $p=1$ use the first dyadic bound, and for $p\le0$ compare $x^{-p}\ge1$ with the constant one. [L1, L3, assume-case infinitylow]
 
-2.1 These cases exhaust the rational exponents and establish both thresholds and values. [given] ∎
+1.3 If $p<1$, the integral at zero converges. For $0<p<1$, [L1] and $c^{1-p}\to0$ give value $1/(1-p)$; for $p\le0$, compare $0\le x^{-p}\le1$ with the constant one, and the same power formula gives that value. [L1, L2, L3, assume-case zerolow]
+
+1.4 If $p\ge1$, the zero-endpoint integral diverges: use the unbounded formula for $p>1$ and the second dyadic bound for $p=1$. [L1, assume-case zerohigh]
+
+2.1 The alternatives in steps 1.1–1.4 exhaust all rational exponents and establish both thresholds and values. [step 1.1, step 1.2, step 1.3, step 1.4, cases-exhaustive] ∎

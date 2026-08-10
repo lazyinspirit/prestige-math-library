@@ -11,7 +11,7 @@ deps: [thm-cauchy-for-finite-abelian-groups, def-quotient-group, cor-quotient-of
 justified_by: []
 aliases: []
 landmark: false
-proof_strategy: direct
+proof_strategy: contradiction
 verification:
   precheck: pass
 sources:
@@ -45,12 +45,12 @@ Let $G$ be a nontrivial finite abelian $p$-group. If $G$ has exactly one subgrou
 
 ## Proof
 
-**Proof technique:** direct.
+**Proof technique:** contradiction.
 
-1.1 Choose $a\in G$ of maximal order $p^m$, and put $A=\langle a\rangle$. If $A=G$ there is nothing to prove, so suppose $A$ is proper. [given, L1, L2, L3, L4, L5, L6]
+1.1 Assume for contradiction that $G$ is not cyclic. Choose $a\in G$ of maximal order $p^m$ and put $A=\langle a\rangle$, which is then proper. [assume-contra, given, L1, L2, L3, L4, L5, L6]
 
 2.1 Cauchy's theorem in $G/A$ gives $b+A$ of order $p$. Thus $pb=sa$ in additive notation for some integer $s$, while $b\notin A$. [step 1.1]
 
 3.1 Maximality gives $p^m b=0$, so $p^{m-1}sa=0$. Since $a$ has order $p^m$, the integer $s$ is divisible by $p$, say $s=pt$. [step 2.1]
 
-4.1 Then $c=b-ta$ is nonzero, lies outside $A$, and satisfies $pc=0$. Its order-$p$ subgroup differs from the unique order-$p$ subgroup inside $A$, a contradiction. Therefore $A=G$. [step 3.1] ∎
+4.1 Then $c=b-ta$ is nonzero, lies outside $A$, and satisfies $pc=0$. Its order-$p$ subgroup differs from the unique order-$p$ subgroup inside $A$, contradicting the hypothesis. Therefore $G$ is cyclic. [step 3.1, discharge-contradiction] ∎

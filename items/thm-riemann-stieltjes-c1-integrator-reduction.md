@@ -53,4 +53,4 @@ $$\int_a^b f\,d\alpha=\int_a^b f(x)\alpha'(x)\,dx.$$
 $$S_\alpha(f;P,\xi)-\sum_i f(\xi_i)\alpha'(\xi_i)\Delta_i t
 =\sum_i f(\xi_i)(\alpha'(\eta_i)-\alpha'(\xi_i))\Delta_i t.$$
 
-1.2 By [L2], the absolute value of the right side is at most $M(b-a)\omega_{\alpha'}(\lVert P\rVert)$, which tends to zero with the mesh. By [L3] and [L4], the second sum in step 1.1 tends to $\int_a^b f\alpha'$. Thus all Stieltjes sums have the same limit, proving both existence and the formula. [step 1.1, L2, L3, L4] ∎
+2.1 By [L2], the absolute value of the right side is at most $M(b-a)\omega_{\alpha'}(\lVert P\rVert)$, which tends to zero with the mesh. By [L3] and [L4], the second sum in step 1.1 tends to $\int_a^b f\alpha'$. Thus all Stieltjes sums have the same limit, proving both existence and the formula. [step 1.1, L2, L3, L4] ∎

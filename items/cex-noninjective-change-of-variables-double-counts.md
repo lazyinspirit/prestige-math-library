@@ -28,7 +28,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** The compact Jordan set $K=[-2,-1]\cup[1,2]$, the map $g(x)=x^2$, and $f=1$ on $g(K)=[1,4]$.
+**Given:** The open set $U=(-3,-1/2)\cup(1/2,3)$, the compact Jordan set $K=[-2,-1]\cup[1,2]\subset U$, the $C^1$ map $g:U\to\mathbb R$ given by $g(x)=x^2$, and $f=1$ on $g(K)=[1,4]$.
 
 [L1] Compact-Jordan change of variables assumes injectivity ([[thm-change-of-variables-for-compact-jordan-sets]]).
 
@@ -38,7 +38,7 @@ pipeline_run: null
 
 **Proof technique:** direct.
 
-1.1 The derivative $2x$ never vanishes on $K$, but $g(-x)=g(x)$, so every point of $(1,4)$ has one preimage in each component of $K$. [L2, given]
+1.1 The derivative $2x$ never vanishes anywhere on $U$, but $g(-x)=g(x)$, so every point of $(1,4)$ has one preimage in each component of $K$. [L2, given]
 
 2.1 The image integral is its length, $\int_{1}^{4}1\,dy=3$, while the proposed source integral is the doubled value below. [L2, step 1.1]
 $$\int_K|2x|\,dx=\int_{-2}^{-1}(-2x)\,dx+\int_1^2 2x\,dx=3+3=6.$$
