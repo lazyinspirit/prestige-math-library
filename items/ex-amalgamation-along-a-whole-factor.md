@@ -1,7 +1,7 @@
 ---
 id: ex-amalgamation-along-a-whole-factor
 kind: example
-title: "Amalgamating along a whole factor recovers the other group"
+title: "A pushout along an isomorphism recovers the other group"
 status: draft
 origin: session
 provenance:

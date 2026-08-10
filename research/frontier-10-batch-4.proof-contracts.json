@@ -26,6 +26,7 @@
     "thm-riemann-stieltjes-existence-bv-no-common-discontinuities",
     "cor-riemann-stieltjes-agrees-with-riemann",
     "thm-riemann-stieltjes-c1-integrator-reduction",
+    "thm-riemann-stieltjes-countable-step-integrator",
     "thm-riemann-stieltjes-change-of-variable",
     "lem-young-partition-sum-estimate-rational",
     "thm-young-riemann-stieltjes-existence-rational",
@@ -8490,6 +8491,312 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The Statement is not an equivalence, so it has no reverse implication to audit."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-riemann-stieltjes-countable-step-integrator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-monotone-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let\n$S = \\{x_k : k \\in \\mathbb{N}\\}$ be its range.\n\n1. If $(x_k)$ is nondecreasing ([[def-monotone-sequence]]) and $S$ is bounded\n   above ([[def-bounded-set]]), then $(x_k)$ converges ([[def-real-limit]]) and\n   $$\\lim_{k} x_k = \\sup S .$$\n2. If $(x_k)$ is nonincreasing and $S$ is bounded below, then $(x_k)$ converges\n   and $$\\lim_{k} x_k = \\inf S .$$\n\nBoth suprema and infima exist under the stated hypotheses: $S$ is nonempty, so\nthe le",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-series",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-real-numbers]]) and\na **sequence of reals** is a function $a : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), written $(a_k)$; recall that $\\mathbb{N}$ contains $0$.\n\n**Partial sums.** Let $(a_k)$ be a sequence of reals. Its **sequence of partial\nsums** is\n\n$$s_n \\;:=\\; \\sum_{k < n} a_k \\qquad (n \\in \\mathbb{N}),$$\n\nthe finite sum of [[def-finite-sum]]. In particular $s_0 = 0$, the empty sum, and\n$s_{n+1} = s_n + a_n$ for every $n$, t",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-decomposition-for-bv-functions",
+          "source_section": "Statement",
+          "quote": "A real function $f$ on $[a,b]$ has bounded variation if and only if it is a\ndifference of two nondecreasing functions. If $f(a)=0$, the canonical normalized\ndecomposition is $f=P_f-N_f$. More generally $f=f(a)+P_f-N_f$.\n\nIt is minimal: if $f=f(a)+g-h$ with nondecreasing $g,h$ and $g(a)=h(a)=0$, then\n$P_f(x)\\le g(x)$ and $N_f(x)\\le h(x)$ for every $x$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "Let $a\\le b$ and let $f:[a,b]\\to\\mathbb R$ ([[def-interval]]). If $a<b$ and\n$P=(n,t)$ is a partition of $[a,b]$ ([[def-partition-and-refinement]]), the\n**variation of $f$ over $P$** is\n\n$$V(f,P):=\\sum_{i<n}|f(t_{i+1})-f(t_i)|.$$\n\nThe sum is finite ([[def-finite-sum]], [[lem-finite-sum-laws]]) and nonnegative\n([[def-abs-value]]). The set of all such sums is nonempty, since $[a,b]$ has the\npartition with point set $\\{a,b\\}$. The function $f$ has **bounded variation**\non $[a,b]$ when this set of su",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-riemann-stieltjes-existence-continuous-bv",
+          "source_section": "Statement",
+          "quote": "If $f:[a,b]\\to\\mathbb R$ is continuous and\n$\\alpha:[a,b]\\to\\mathbb R$ has bounded variation, then\n$\\int_a^b f\\,d\\alpha$ exists.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-riemann-stieltjes-linearity-and-additivity",
+          "source_section": "Statement",
+          "quote": "Whenever the integrals on the right exist,\n\n$$\\int_a^b(uf+vg)\\,d\\alpha=u\\int_a^b f\\,d\\alpha+v\\int_a^b g\\,d\\alpha,$$\n$$\\int_a^b f\\,d(u\\alpha+v\\beta)=u\\int_a^b f\\,d\\alpha+v\\int_a^b f\\,d\\beta.$$\n\nLet $a\\le c\\le b$, suppose $\\alpha$ has bounded variation, and suppose $f$ is continuous at $c$. Then integrability on\n$[a,b]$ is equivalent to integrability on both $[a,c]$ and $[c,b]$, and\n\n$$\\int_a^b f\\,d\\alpha=\\int_a^c f\\,d\\alpha+\\int_c^b f\\,d\\alpha.$$",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-riemann-stieltjes-integral-bound",
+          "source_section": "Statement",
+          "quote": "Suppose $\\int_a^b f\\,d\\alpha$ exists, $\\alpha$ has bounded variation, and\n$|f(x)|\\le M$ on $[a,b]$. Then\n\n$$\\left|\\int_a^b f\\,d\\alpha\\right|\\le M\\operatorname{Var}_{[a,b]}(\\alpha).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-boundedness-theorem-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be compact\n([[def-open-cover-r]]). Then $f$ is **bounded on $K$**: there is a real\n$M \\ge 0$ with\n\n$$|f(x)| \\le M \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, $f[K]$ is a bounded subset of $\\mathbb{R}$\n([[def-bounded-set]]).\n\n**The hypothesis is compactness of $K$, not of $A$**, and it cannot be relaxed\nto boundedness of $K$ or to closedness of $K$ alone: the ide",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field with its order and\nabsolute value ([[def-complete-ordered-field]], [[lem-of-abs-value]]), and\nneighbourhoods are those of [[def-neighbourhood-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$\n\nwith $\\varepsilon$ and $\\de",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-riemann-stieltjes-sum-and-integral",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $f,\\alpha:[a,b]\\to\\mathbb R$, and let $P=(n,t)$ be a partition\n([[def-partition-and-refinement]]). A choice of tags\n$\\xi_i\\in[t_i,t_{i+1}]$ for $i<n$ makes $(P,\\xi)$ a tagged partition as in\n[[def-tagged-partition-and-riemann-sum]]. Its **Riemann-Stieltjes sum** is\n\n$$S(f,\\alpha;P,\\xi):=\\sum_{i<n}f(\\xi_i)\\bigl(\\alpha(t_{i+1})-\\alpha(t_i)\\bigr).$$\n\nThe function $f$ is **Riemann-Stieltjes integrable with respect to $\\alpha$** on\n$[a,b]$ if there is $I\\in\\mathbb R$ such that for ever",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-partition-and-refinement",
+          "source_section": "Definition",
+          "quote": "**Standing hypothesis for this page.** Throughout, $\\mathbb{R}$ is the complete\nordered field ([[def-complete-ordered-field]], [[def-ordered-field]]),\n$\\mathbb{N}$ is the set of natural numbers and **contains $0$**\n([[def-natural-numbers]], [[def-nat-order]]), $\\iota : \\mathbb{N} \\to \\mathbb{R}$\nis the canonical natural ([[def-canonical-natural]]), and $a, b$ are reals with\n\n$$a \\;<\\; b .$$\n\nIntervals and their lengths are those of [[def-interval]]; finite sums are those\nof [[def-finite-sum]], i",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-tagged-partition-and-riemann-sum",
+          "source_section": "Definition",
+          "quote": "Let $a < b$ be reals and let $P = (n,t)$ be a partition of $[a,b]$, with\nsubintervals $I_i = [t_i,t_{i+1}]$ and lengths $\\Delta_i = t_{i+1} - t_i$ for\n$i < n$ ([[def-partition-and-refinement]]).\n\nA **tagging** of $P$ is a sequence $\\xi : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]) with\n\n$$\\xi_i \\;\\in\\; I_i \\qquad \\text{for every } i < n, \\qquad \\xi_k := b \\ \\text{ for } k \\ge n ,$$\n\nthe second clause being the same bookkeeping tail convention that\n[[def-partition-and-refinement]] uses, so that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-direct-comparison-test",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ and $(b_k)$ be sequences of reals and suppose there is\n$K \\in \\mathbb{N}$ with\n\n$$0 \\;\\le\\; a_k \\;\\le\\; b_k \\qquad \\text{for all } k \\ge K .$$\n\nThen:\n\n1. if $\\sum b_k$ converges then $\\sum a_k$ converges ([[def-series]]);\n2. if $\\sum a_k$ diverges then $\\sum b_k$ diverges.\n\nThe same statement holds verbatim for series with a general starting index $m$,\napplied to the shifted sequences of [[def-series]].\n\nThe hypothesis is on the terms from some index on, not on all of them: finitely\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-absolute-convergence-implies-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals. If the series $\\sum |a_k|$ converges\n([[def-series]]) then the series $\\sum a_k$ converges.\n\nA series with the property that $\\sum |a_k|$ converges is called **absolutely\nconvergent**; the lemma says that absolute convergence implies convergence.\n\nThe same statement holds for a family from a general starting index $m$, being\nthis statement applied to the shifted sequence $j \\mapsto a_{j+m}$\n([[def-series]]).\n\n**The converse is false**, and the standard witness",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field with its order and\nabsolute value ([[def-complete-ordered-field]], [[lem-of-abs-value]]), and\nneighbourhoods are those of [[def-neighbourhood-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$\n\nwith $\\varepsilon$ and $\\de",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x_l| < \\hat\\varepsilon$ for all $k, l \\ge K$.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each term $c_nI(x-s_n)$ lies in $[0,c_n]$, so the partial sums are nondecreasing and bounded above by $\\sum_n c_n$; [L1] gives convergence and defines $\\alpha(x)$ with $0\\le\\alpha(x)\\le\\sum_n c_n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Monotonicity of $I$ gives $I(x-s_n)\\le I(y-s_n)$ for $x\\le y$; multiplying by $c_n\\ge0$ and passing to the limit by [L1] makes $\\alpha$ nondecreasing, and $\\alpha=\\alpha-0$ with [L2] gives bounded variation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[L6] supplies $M\\ge0$ with $|f|\\le M$ on the compact $[a,b]$; $0\\le|c_nf(s_n)|\\le Mc_n$ and [L8] give absolute convergence of $\\sum c_nf(s_n)$; step 2.1 and [L3] give existence of $\\int_a^b f\\,d\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "L3",
+            "L6",
+            "L8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a single interior jump $\\sigma=I(\\cdot-s)$, exactly one partition index has $t_i\\le s<t_{i+1}$ and increment $1$, so the Stieltjes sum of [L7] equals $f(\\xi_i)$ with $|\\xi_i-s|<\\delta$; continuity [L9] gives $\\int_a^b f\\,d\\sigma=f(s)$, and [L2] gives $\\sigma$ bounded variation.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2",
+            "L7",
+            "L9"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Finitely many applications of the integrator-linearity [L4], each summand evaluated by step 1.2, give $\\int_a^b f\\,d\\alpha_N=\\sum_{n<N}c_nf(s_n)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The tail $\\beta_N=\\alpha-\\alpha_N$ is nondecreasing with bounded variation by the argument of steps 1.1 and 2.1; $s_n\\in(a,b)$ gives $\\beta_N(a)=0$ and $\\beta_N(b)=\\sum_{n\\ge N}c_n$, and every partition sum of a nondecreasing function telescopes, so [L2] gives $\\operatorname{Var}_{[a,b]}(\\beta_N)=\\sum_{n\\ge N}c_n$.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[L3] makes both $\\int f\\,d\\alpha_N$ and $\\int f\\,d\\beta_N$ exist, [L4] splits $\\int f\\,d\\alpha$ along $\\alpha=\\alpha_N+\\beta_N$, and step 2.2 with [L5] bounds the difference by $M\\sum_{n\\ge N}c_n$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "step 3.2",
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Convergence of $\\sum c_n$ drives its tails to $0$, so the partial sums $\\sum_{n<N}c_nf(s_n)$ converge to $\\int_a^b f\\,d\\alpha$; step 3.1 gives absolute convergence and [L1], [L9] identify the sum.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "L1",
+            "L9"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 covers $N=0$: $\\alpha_0=0$ is the empty finite sum and $\\int_a^b f\\,d\\alpha_0=0$ is the empty weighted sum, so step 4.1 reads as the trivial identity $\\int f\\,d\\alpha=\\int f\\,d\\beta_0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Any $c_n=0$ is admitted explicitly by the Statement and contributes $0$ to every partial sum in steps 1.1 and 2.2; the bound in step 3.2 is unaffected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 is exactly the single-jump case $N=1$ with $c=1$, proved directly from the mesh definition rather than by citation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires $a<b$, excluding the singleton interval; repeated points $s_n$ are admitted explicitly and step 2.2 does not use distinctness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Remark disposes of both endpoints: $s=a$ would still satisfy the counting argument of step 1.2, which needs only $a\\le s<b$, while $s=b$ makes $I(\\cdot-b)$ identically $0$ on $[a,b]$ and breaks the identity, which is why the Statement confines $s_n$ to $(a,b)$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses the unique index $i$ with $t_i\\le s<t_{i+1}$; uniqueness and existence both follow from $a\\le s<b$ and the partition covering $[a,b)$ by the half-open cells $[t_i,t_{i+1})$."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an identity together with two convergence claims; it contains no biconditional, so there is no forward direction to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse direction to discharge."
         }
       ],
       "finite_smoke": []

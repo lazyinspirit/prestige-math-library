@@ -31,7 +31,7 @@ $\mathbf{Set}$.
 
 **Given:** Sets $A,B,C$ and functions $f:A\to B$, $g:B\to C$.
 
-[L1] A category has associative composition and an identity at every object ([[def-category]]); a function has a set domain, a codomain, and a uniquely determined value at each point of its domain ([[def-function]]); and the functions $A\to B$ form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]).
+[L1] A category has associative composition and an identity at every object, and when it is presented by its hom-collections a morphism is the triple $(A,B,f)$, so that $\operatorname{dom}$ and $\operatorname{cod}$ are the projections ([[def-category]]); a function is a set of ordered pairs with a set domain and a uniquely determined value at each point of it, and does not itself determine a codomain ([[def-function]]); the functions $A\to B$ form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]]).
 
 [L2] Small, locally small, and large have the meanings in [[def-small-locally-small-and-large-category]], and the ordinals do not form a set ([[thm-burali-forti]]).
 
@@ -43,4 +43,4 @@ $\mathbf{Set}$.
 
 2.1 Hence sets and functions satisfy every axiom of a category. [step 1.1, L1]
 
-3.1 For fixed $A,B$, the hom-collection is the set $B^A$ from [L1]; the object class contains every ordinal and therefore is not a set, so $\mathbf{Set}$ is locally small and large. [step 2.1, L1, L2] ∎
+3.1 For fixed $A,B$, the hom-collection is $\{(A,B,f):f\in B^A\}$, a set in bijection with the set $B^A$ from [L1]; the tagging is what gives each morphism a unique codomain, since the empty function alone would be a morphism into every set. The object class contains every ordinal and therefore is not a set, so $\mathbf{Set}$ is locally small and large. [step 2.1, L1, L2] ∎

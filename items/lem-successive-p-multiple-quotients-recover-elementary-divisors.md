@@ -25,7 +25,7 @@ pipeline_run: null
 ---
 ## Statement
 
-Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic.
+Suppose $G\cong\prod_{j<r}C_{p^{e_j}}$ with $e_j\ge1$, and in additive notation write $p^iG=\{p^ig:g\in G\}$. Define $d_i$ by $|p^iG/p^{i+1}G|=p^{d_i}$. Then $$d_i=|\{j:e_j\ge i+1\}|.$$ Consequently, for every $k\ge1$, the number of summands of order $p^k$ is $d_{k-1}-d_k$, so the elementary divisors are intrinsic. The restriction to $k\ge1$ is the whole content of the hypothesis $e_j\ge1$: no summand has order $p^0=1$, and $d_{-1}$ is not defined.
 
 ## Facts & Assumptions
 

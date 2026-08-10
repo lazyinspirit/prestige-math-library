@@ -44,6 +44,6 @@ More precisely, there is a unique $q\in R[x]$ such that $f=q(x-a)+f(a)$.
 
 **Proof technique:** direct.
 
-1.1 Apply [L1]; the remainder $r$ is zero or constant, and applying [L3] to $f=q(x-a)+r$ gives $f(a)=q(a)(a-a)+r=r$, so $f=q(x-a)+f(a)$. [given, L1, L2, L3]
+1.1 If $R$ is the zero ring then $R[x]$ has one element, $f=0=0\cdot(x-a)+f(a)$, and the conclusion holds with $q=0$; this case is separated because $x-a=0$ there, which has no leading coefficient and so is not monic, leaving [L1] inapplicable. Otherwise $1\ne0$, so $x-a$ is monic of degree one. Apply [L1]; the remainder $r$ is zero or constant, and applying [L3] to $f=q(x-a)+r$ gives $f(a)=q(a)(a-a)+r=r$, so $f=q(x-a)+f(a)$. [given, L1, L2, L3]
 
 2.1 If $f(a)=0$, step 1.1 gives $f=q(x-a)$; conversely, if $f=q(x-a)$, applying [L3] gives $f(a)=q(a)(a-a)=0$, proving the biconditional. [step 1.1, L3, algebra] ∎

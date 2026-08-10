@@ -5,7 +5,7 @@ title: "The fundamental groupoid of a topological space"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-category, def-isomorphism-groupoid-and-connected-category, def-path-connected, def-homotopy-relative-and-path-homotopy, cor-homotopy-relative-and-path-homotopy-are-equivalence-relations, lem-continuity-is-local-and-pastes, def-based-loops-and-fundamental-group, thm-fundamental-group-laws]
 justified_by: []

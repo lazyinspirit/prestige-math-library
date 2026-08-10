@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [rem-category-theory-class-and-size-conventions]
+deps: [def-function, rem-category-theory-class-and-size-conventions]
 justified_by: []
 aliases: []
 landmark: true
@@ -45,3 +45,19 @@ We write $\mathcal C(A,B)$, or $\operatorname{Hom}_{\mathcal C}(A,B)$, for the
 **hom-collection** of morphisms with domain $A$ and codomain $B$. The object
 class is allowed to be empty; then the morphism class is empty and all axioms
 are vacuous.
+
+**Morphisms carry their domain and codomain.** A category is often presented the
+other way round, by saying what the morphisms from $A$ to $B$ are for each pair
+of objects. When it is, $\operatorname{Mor}(\mathcal C)$ is the **disjoint
+union** of those hom-collections: a morphism is a triple $(A,B,f)$ with $f$ in
+the collection assigned to $(A,B)$, and $\operatorname{dom}$ and
+$\operatorname{cod}$ are the first two projections, which are then functions in
+the required sense. This is not a technicality that can be dropped. In this
+library a function is a set of ordered pairs and does not determine a codomain
+([[def-function]]), so the empty function is a function $\varnothing\to B$ for
+every $B$ at once; reading the morphisms of $\mathbf{Set}$ as bare functions
+would give that one set two different codomains and leave $\operatorname{cod}$
+undefined. Every concrete category below whose morphisms are described as
+structure-preserving maps is to be read with this tagging, and each hom-collection
+is then in canonical bijection with the corresponding collection of untagged
+maps, so no size or smallness claim is affected.

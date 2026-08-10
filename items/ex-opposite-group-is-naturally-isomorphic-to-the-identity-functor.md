@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-opposite-category, def-natural-isomorphism, prop-groups-and-homomorphisms-form-category-grp, def-group-isomorphism-and-automorphism]
+deps: [def-opposite-category, def-natural-isomorphism, prop-natural-isomorphisms-are-componentwise-isomorphisms, prop-groups-and-homomorphisms-form-category-grp, def-group-isomorphism-and-automorphism]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ a natural isomorphism from the identity functor to it.
 
 [L1] Groups and homomorphisms form $\mathbf{Grp}$, and group isomorphisms are bijective homomorphisms ([[prop-groups-and-homomorphisms-form-category-grp]], [[def-group-isomorphism-and-automorphism]]).
 
-[L2] Opposite composition reverses the order, and natural isomorphisms are componentwise isomorphisms satisfying naturality ([[def-opposite-category]], [[def-natural-isomorphism]]).
+[L2] Opposite composition reverses the order ([[def-opposite-category]]); a natural isomorphism is a natural transformation with a two-sided inverse natural transformation ([[def-natural-isomorphism]]), which holds exactly when every component is an isomorphism ([[prop-natural-isomorphisms-are-componentwise-isomorphisms]]).
 
 ## Verification
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-functor-and-contravariant-functor, def-natural-isomorphism, prop-topological-spaces-and-continuous-maps-form-category-top, prop-posets-and-monotone-maps-form-category-poset, def-topological-space, def-continuous-map-top, def-image-and-preimage-under-a-relation]
+deps: [def-functor-and-contravariant-functor, def-natural-isomorphism, prop-natural-isomorphisms-are-componentwise-isomorphisms, prop-topological-spaces-and-continuous-maps-form-category-top, prop-posets-and-monotone-maps-form-category-poset, def-topological-space, def-continuous-map-top, def-image-and-preimage-under-a-relation]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +36,7 @@ isomorphism between the resulting poset-valued functors.
 
 [L2] Topological spaces and posets form categories, and contravariant functors are functors on the opposite category ([[prop-topological-spaces-and-continuous-maps-form-category-top]], [[prop-posets-and-monotone-maps-form-category-poset]], [[def-functor-and-contravariant-functor]]).
 
-[L3] A natural isomorphism is a natural transformation whose components are isomorphisms ([[def-natural-isomorphism]]).
+[L3] A natural isomorphism is a natural transformation with a two-sided inverse natural transformation ([[def-natural-isomorphism]]), and this holds exactly when every component is an isomorphism ([[prop-natural-isomorphisms-are-componentwise-isomorphisms]]).
 
 ## Verification
 

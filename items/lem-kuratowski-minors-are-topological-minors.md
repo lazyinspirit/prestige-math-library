@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-graph-deletion-contraction-minor-and-subdivision, cor-whitney-k-connected-path-characterisation, thm-menger-finite-directed-and-undirected-path-forms, def-standard-complete-bipartite-path-and-cycle-graphs]
+deps: [def-graph-deletion-contraction-minor-and-subdivision, def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: []
 landmark: true
@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Statement
 
-A finite graph contains $K_5$ or $K_{3,3}$ as a minor if and only if it contains a subdivision of $K_5$ or $K_{3,3}$ as a subgraph. Minors and subdivisions are those of [[def-graph-deletion-contraction-minor-and-subdivision]], the two standard graphs are from [[def-standard-complete-bipartite-path-and-cycle-graphs]], and the disjoint-path interpretation used in reducing branch sets is consistent with [[cor-whitney-k-connected-path-characterisation]] and [[thm-menger-finite-directed-and-undirected-path-forms]].
+A finite graph contains $K_5$ or $K_{3,3}$ as a minor if and only if it contains a subdivision of $K_5$ or $K_{3,3}$ as a subgraph. Minors and subdivisions are those of [[def-graph-deletion-contraction-minor-and-subdivision]], and the two standard graphs are from [[def-standard-complete-bipartite-path-and-cycle-graphs]].
 
 ## Facts & Assumptions
 

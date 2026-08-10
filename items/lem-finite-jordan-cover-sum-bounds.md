@@ -28,10 +28,10 @@ Let $n\ge1$, let $E\subseteq\mathbb R^n$ be a bounded Jordan set, and let $h:E\t
 
 1. If Jordan sets $E_1,\ldots,E_N$ cover $E$, and each $M_i\ge0$ satisfies $M_i\ge\sup_{E\cap E_i}h$ whenever that intersection is nonempty, then
    $$\int_Eh\le\sum_{i=1}^N M_i\operatorname{cont}(E_i).$$
-2. If Jordan sets $F_1,\ldots,F_N$ lie in $E$ and have pairwise disjoint interiors, and $m_i\le\inf_{F_i}h$, then
+2. If Jordan sets $F_1,\ldots,F_N$ lie in $E$ and have pairwise disjoint interiors, and each real $m_i$ satisfies $m_i\le\inf_{F_i}h$ whenever $F_i$ is nonempty, then
    $$\sum_{i=1}^N m_i\operatorname{cont}(F_i)\le\int_Eh.$$
 
-For an arbitrary bounded integrable real $h$ and a Jordan set $F\subseteq E$,
+For an arbitrary bounded integrable real $h$ and a **nonempty** Jordan set $F\subseteq E$,
 $$\left|\int_Fh\right|\le \sup_F|h|\operatorname{cont}(F).$$
 
 ## Facts & Assumptions
@@ -50,4 +50,4 @@ $$\left|\int_Fh\right|\le \sup_F|h|\operatorname{cont}(F).$$
 
 1.2 The restriction of $h$ to each $F_i$ is integrable: away from grid cells meeting $\partial F_i$ its Darboux gap is inherited from $h$, while [L2] makes the total volume of boundary cells arbitrarily small. Hence $\int_{F_i}h\ge m_i\operatorname{cont}(F_i)$ by [L1]. Pairwise interior-disjoint Jordan sets intersect only on their content-zero boundaries, so the sum of their zero-extended restrictions equals the restriction to their union outside a content-zero set. The same boundary-cell argument and linearity [L1] therefore add these integrals without overcounting; their union lies in $E$, and $h\ge0$, giving the lower bound. [L1, L2]
 
-2.1 The boundary-cell argument in step 1.2 also makes the restriction of a signed integrable $h$ to $F$ integrable. On $F$, the inequalities $-|h|\le h\le|h|\le\sup_F|h|$ and [L1], together with the indicator identity in [L2], give the last estimate. [L1, L2, step 1.2] ∎
+2.1 The boundary-cell argument in step 1.2 also makes the restriction of a signed integrable $h$ to $F$ integrable. A nonempty $F$ makes $\sup_F|h|$ a real number, since $h$ is bounded. On $F$, the inequalities $-|h|\le h\le|h|\le\sup_F|h|$ and [L1], together with the indicator identity in [L2], give the last estimate. [L1, L2, step 1.2] ∎
