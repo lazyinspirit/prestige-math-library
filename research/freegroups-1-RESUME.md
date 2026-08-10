@@ -158,11 +158,11 @@ presentations provable here.
 | 2 resolve deps | complete |
 | 3 adjudicate | complete — freegroups-1-step3-decisions.md |
 | 4 apply | complete — manifest split mint-only, gate 0/0; Alpha deferred to step 6 per D7 |
-| 5 author | BLOCKED — Codex auth retired, owner must run `codex login` |
-| 6 audit | — |
-| 7 judge | — |
-| 8 adjudicate rejections | — |
-| 9 scope sweep | — |
+| 5 author | complete — 37 drafts, `696d3ffc` (after the Codex auth outage, fixed in `ee6c08fc`) |
+| 6 audit | complete — 2 readers + Alpha + 6 refuters; 5 fatal repaired; `16d74c93` |
+| 7 judge | complete — 74 verdicts, 0 nulls; coverage gate EXIT 0 with spine 59/59 and the Alpha receipt |
+| 8 adjudicate rejections | complete — 2 fatal, 9 nonfatal, 2 false positive; step8-guard clean |
+| 9 scope sweep | in progress |
 | 10 rundown | — (sole owner pause) |
 
 ## BLOCKED at step 5 — Codex auth must be renewed by the owner
