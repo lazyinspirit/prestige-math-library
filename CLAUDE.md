@@ -489,6 +489,20 @@ banner; the public sees only `published`.
   statement and its conventions. Record which route was used in the batch
   notes. If neither route establishes confidence, do not make it load-bearing:
   prove it locally, rescope, or use the narrow documented external fallback.
+- **No applied `\iota(n)` for natural numbers (owner, 2026-08-11, standing).**
+  Do not write the canonical embedding explicitly around a natural number —
+  `\iota(n)`, `\iota(0)`, `\iota(k!)`. Write the number. To a reader who has not
+  just read the embedding lemma it looks like an undefined function, which is
+  the confusion the rule exists to remove. **Bare `\iota` is untouched and still
+  correct** as the name of a basis inclusion in a universal property, as in a
+  free group `(F,\iota)` with `\phi\circ\iota=\iota'`. Only the *applied* form is
+  banned. Enforced batch-scoped by `content-policy.mjs` error
+  `notation-iota-applied`, so new content is gated and the legacy corpus is not
+  retro-flagged: **350 published items carry roughly 4,900 occurrences**, and
+  cleaning them is a separate owner decision, not a gate's. It is a real
+  mathematical edit per item, never a `sed` pass — dropping the embedding changes
+  what the symbol denotes and must be read in context.
+
 - **Natural mathematical voice and citation fidelity (owner, 2026-07-30).** Do
   not write AI-sounding labels or interpretive filler such as "Null definition:"
   or "the key bridge says". In every `[F#]`, `[A#]`, or `[L#]` dependency fact,

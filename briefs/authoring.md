@@ -63,6 +63,12 @@ For your A page and your B page:
   `node tools/coverage-checklist.mjs research/<run>-batch-<i>.coverage.json`
   before reporting done.
 
+**Notation (owner, 2026-08-11):** never write the canonical embedding applied to
+a natural number — no `\iota(n)`, `\iota(0)`, `\iota(k!)`. Write the number.
+`content-policy.mjs` fails your batch with `notation-iota-applied`. Bare `\iota`
+for a universal-property inclusion, as in a free group `(F,\iota)`, is fine and
+unaffected. Legacy items you cite still use the old form; leave them alone.
+
 Everything is authored `status: draft` and `origin: session`. Every
 mathematical-content item, including definitions, propositions, theorems,
 lemmas, corollaries, examples, counterexamples, false statements, and

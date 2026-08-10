@@ -313,6 +313,27 @@ if (!manifestOnly) for (const id of scope) {
     error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
     continue;
   }
+  // Reader-facing notation (owner, 2026-08-11). `\iota(n)` — the canonical
+  // embedding of a natural number into Z or R, written explicitly around its
+  // argument — is banned in new content: write the number. It reads as an
+  // undefined function to anyone who has not just read the embedding lemma, and
+  // 350 legacy items carry roughly 4,900 of them.
+  //
+  // Bare `\iota` is NOT matched and must not be: it is the standard name for the
+  // basis inclusion in a universal property, as in a free group `(F, \iota)`
+  // with `\phi \circ \iota = \iota'`. 35 items use it that way, correctly. Only
+  // the APPLIED form is the defect.
+  //
+  // Batch-scoped, like every other rule in this file, so the legacy corpus is
+  // not retro-flagged — that is an owner decision, not a gate's.
+  for (const match of item.body.matchAll(/\\iota\s*(?:_\{[^}]*\}|_[A-Za-z0-9])?\s*\(/g)) {
+    const at = item.body.slice(match.index, match.index + 24).replace(/\s+/g, ' ');
+    error('notation-iota-applied',
+      `${item.file}: applied \\iota notation ("${at}…") — write the natural number directly. Bare \\iota for a universal-property inclusion is still fine.`,
+      item.id);
+    break;   // one finding per item; the fix is a pass over the file, not per hit
+  }
+
   const statement = item.provenance.statement;
   const proof = item.provenance.proof;
   if (!statement) error('provenance-statement-missing', `${item.file}: every in-flight mathematical-content item needs provenance.statement`, item.id);
