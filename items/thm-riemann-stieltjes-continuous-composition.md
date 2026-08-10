@@ -33,7 +33,7 @@ Suppose $\alpha:[a,b]\to\mathbb R$ is nondecreasing, $f$ is bounded and Riemannâ
 
 **Given:** A nondecreasing $\alpha$, a bounded $f\in R(\alpha)$, and a continuous $\phi$ on a compact interval containing the range of $f$.
 
-[L1] Integrability with respect to a nondecreasing integrator is equivalent to arbitrarily small weighted oscillation sums ([[thm-riemann-stieltjes-darboux-criterion]]).
+[L1] For $a<b$, bounded $f$ and nondecreasing $\alpha$, integrability in the mesh sense is equivalent to the conjunction of two conditions: $f$ is continuous at every discontinuity of $\alpha$, and for every $\varepsilon>0$ some partition has $\sum_{i<n}\omega_i(f)\Delta_i\alpha<\varepsilon$ ([[thm-riemann-stieltjes-darboux-criterion]]).
 
 [L2] The function $\phi$ is bounded and uniformly continuous on its compact domain ([[cor-boundedness-theorem-r]], [[thm-heine-cantor-r]]).
 

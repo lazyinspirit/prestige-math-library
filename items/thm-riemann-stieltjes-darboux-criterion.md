@@ -32,8 +32,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $f:[a,b]\to\mathbb R$ be bounded and let $\alpha:[a,b]\to\mathbb R$ be
-nondecreasing. Then $f$ is Riemann-Stieltjes integrable in the mesh sense of
+Let $a<b$, let $f:[a,b]\to\mathbb R$ be bounded and let $\alpha:[a,b]\to\mathbb R$
+be nondecreasing. Then $f$ is Riemann-Stieltjes integrable in the mesh sense of
 [[def-riemann-stieltjes-sum-and-integral]] if and only if both of the following
 conditions hold:
 
@@ -45,6 +45,13 @@ $$U_\alpha(f,P)-L_\alpha(f,P)<\varepsilon.$$
 In condition 2, writing $\omega_i(f)$ for the oscillation of $f$ on
 $[t_i,t_{i+1}]$, the condition is
 $\sum_{i<n}\omega_i(f)\Delta_i\alpha<\varepsilon$.
+
+The hypothesis $a<b$ is required and not cosmetic. On $[a,a]$ the integral is
+$0$ by [[def-riemann-stieltjes-sum-and-integral]], so every bounded $f$ is
+integrable, while [[def-partition-and-refinement]] admits no partition of a
+singleton interval, so condition 2 asserts the existence of something that does
+not exist and fails. The equivalence therefore holds only on a nondegenerate
+interval; a consumer needing $a=b$ reads the value straight off the definition.
 
 In particular, when $\alpha$ is continuous, the weighted Darboux condition
 alone is equivalent to mesh Riemann-Stieltjes integrability.
