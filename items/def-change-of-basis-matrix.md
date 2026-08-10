@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., Definition 3.82'
+    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., §3D, result 3.82'
       url: 'https://linear.axler.net/LADR4e.pdf'
 pipeline_run: null
 ---

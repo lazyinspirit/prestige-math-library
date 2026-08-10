@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., Theorems 3.81 and 3.84'
+    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., §3D, results 3.81 and 3.84'
       url: 'https://linear.axler.net/LADR4e.pdf'
     - title: 'S. Schiavone, MIT 18.700 Day 9, change of basis'
       url: 'https://math.mit.edu/~sschiavo/18-700/Lectures/LessonPlan9.pdf'

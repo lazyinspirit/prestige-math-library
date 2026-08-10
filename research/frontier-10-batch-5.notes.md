@@ -189,15 +189,15 @@ published item was found unambiguously false.
 | `cor-cavalieri-principle-for-jordan-content` | literature-derived | literature-derived | Leibman Theorems 5.4.3–5.4.4. |
 | `thm-fubini-over-a-region-between-continuous-graphs` | ai-altered | ai-altered | Repairs Lebl Proposition 10.5.8 by requiring extension to the closure. |
 | `def-jacobian-determinant-of-a-c-one-map` | ai-altered | not-applicable | Dictionary between published Jacobian matrix and upstream determinant. |
-| `lem-finite-jordan-cover-sum-bounds` | literature-derived | literature-derived | Leibman Lemma 5.5.1. |
-| `thm-linear-images-scale-jordan-content-by-absolute-determinant` | literature-derived | literature-derived | Lebl Proposition 10.7.1 and Leibman Lemmas 5.5.2–5.5.4. |
+| `lem-finite-jordan-cover-sum-bounds` | ai-altered | ai-altered | Leibman Lemma 5.5.1 repaired to require nonnegative cover coefficients even when a cover member misses the source set. |
+| `thm-linear-images-scale-jordan-content-by-absolute-determinant` | literature-derived | ai-altered | Lebl Proposition 10.7.1 and Leibman Lemmas 5.5.2–5.5.4, with Jordan measurability established before Cavalieri is invoked. |
 | `cor-parallelepiped-content-is-the-absolute-determinant` | literature-derived | literature-derived | Leibman Lemma 5.5.4. |
 | `lem-near-identity-c-one-maps-sandwich-cubes` | literature-derived | ai-altered | Leibman Lemma 5.5.5, with completeness and fixed-point obligations made explicit. |
-| `lem-local-c-one-volume-distortion` | literature-derived | literature-derived | Leibman Lemma 5.5.6 and Lebl's corrected 10.7.2 proof. |
+| `lem-local-c-one-volume-distortion` | ai-altered | ai-altered | Leibman Lemma 5.5.6 and Lebl's corrected 10.7.2 proof, strengthened to every Jordan subset with the boundary-null and finite-additivity obligations made explicit. |
 | `thm-injective-c-one-images-of-compact-jordan-sets-are-jordan` | literature-derived | ai-altered | Lebl Proposition 10.5.9, decomposed through local bi-Lipschitz control. |
 | `lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set` | literature-derived | ai-altered | Lebl Exercise 10.5.6, stated as reusable machinery. |
 | `lem-bounded-open-jordan-sets-have-compact-grid-exhaustions` | ai-altered | ai-altered | Lebl Exercise 10.7.6 proof prerequisite isolated as a lemma. |
-| `thm-change-of-variables-for-compact-jordan-sets` | literature-derived | literature-derived | Lebl Theorem 10.7.2 and Leibman Theorem 5.5.7. |
+| `thm-change-of-variables-for-compact-jordan-sets` | ai-altered | literature-derived | Lebl Theorem 10.7.2 and Leibman Theorem 5.5.7; the library's bounded-integrand equivalence is an explicit adaptation of those formulations. |
 | `cor-jordan-content-under-a-c-one-diffeomorphism` | literature-derived | literature-derived | Constant-one case of both sources' change-of-variables theorem. |
 | `def-support-and-compactly-supported-riemann-integral-in-rn` | ai-altered | not-applicable | Makes Lebl Exercise 10.7.5's global notation explicit using bounded Riemann integrals only. |
 | `lem-compactly-supported-riemann-integral-is-well-defined` | ai-altered | ai-altered | Required definition-justification item; reduces two bounding rectangles to the published Jordan-integral independence lemma. |
@@ -403,3 +403,22 @@ The earlier cross-batch blocker is closed. I opened the finalized Definition or 
 The ring-versus-field split required an explicit licensing check. `cor-invertible-matrix-has-unit-determinant` says only that an invertible matrix over a commutative ring has unit determinant; it does not assert that noninvertibility is equivalent to determinant zero over an arbitrary ring. Batch 5 does not use that corollary. The singular branch of `thm-linear-images-scale-jordan-content-by-absolute-determinant` cites the finalized real specialization `thm-real-square-matrix-invertible-iff-determinant-nonzero`, whose two directions give exactly the needed real-matrix equivalence. The row-operation and multiplicativity results are stated over commutative rings and are used only after specialization to real matrices. Thus no proof step was unlicensed and no proof strategy or dependency edge needed repair.
 
 After synchronization, `node tools/proof-contract.mjs research/frontier-10-batch-5.proof-contracts.json --strict` reports 0 errors and 0 warnings for 35/35 proof-bearing items.
+
+## Independent Step-6 reader checkpoint — batch 5
+
+The independent reader opened all 38 batch items and every declared dependency,
+including all 15 dependency occurrences into batch 9. Four fatal findings were
+repaired subject to Alpha adjudication: a false signed-cover coefficient clause,
+a circular use of Cavalieri before image Jordan measurability, an unlicensed
+extension of cube distortion to arbitrary Jordan subsets, and a systematic
+missing `$n\ge1$` domain hypothesis across fourteen determinant/Euclidean
+interfaces. Nonfatal licensing and boundary repairs added the exact facts used
+by the Darboux, Fubini, graph, compact-support, bounded-open, one-dimensional,
+dense-section, and hyperspherical arguments.
+
+The source ledger was also corrected from Leibman's stale §6.1 numbering to the
+current §5.5 numbering in every affected batch item, and from Lebl 10.6.6 to
+10.7.2 in both affected items. The batch manifest now matches every on-disk
+dependency list, and the proof contract was regenerated from the current Facts
+and numbered steps. The detailed evidence and per-item dispositions are in
+`research/frontier-10-reader-5.findings.md`; Alpha alone adjudicates them.

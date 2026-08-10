@@ -136,7 +136,7 @@ Source codes refer to the exact URLs above. “AI-altered” means the source-ba
 | `ex-two-transposition-factorisations-have-the-same-parity` | ai-generated | ai-generated | Explicit cancelling-pair witness; no consumer. Add checkable-example `generation`. |
 | `ex-signs-of-five-and-six-cycles` | ai-generated | ai-generated | Direct numerical instance of the sourced cycle-sign corollary; no consumer. |
 | `ex-elements-of-the-alternating-group-a-four` | literature-derived | ai-altered | JUD Example 8. This item is source-backed because the next example depends on its enumeration. |
-| `ex-a-four-has-no-subgroup-of-order-six` | literature-derived | ai-altered | JUD Example 8; proof route uses index two, counting of 3-cycles, conjugation, and inverses, not unavailable Cauchy machinery. |
+| `ex-a-four-has-no-subgroup-of-order-six` | literature-derived | ai-altered | JUD Proposition 6.9 (Example 8 states the conclusion but does not prove it); proof route uses index two, counting of 3-cycles, conjugation, and inverses, not unavailable Cauchy machinery. |
 
 ### Matrix A page
 

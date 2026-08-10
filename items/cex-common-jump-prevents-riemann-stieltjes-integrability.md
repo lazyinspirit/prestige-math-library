@@ -9,7 +9,8 @@ provenance:
   proof: ai-generated
 deps: [def-riemann-stieltjes-sum-and-integral,
        def-bounded-variation-and-total-variation,
-       def-partition-and-refinement, lem-riemann-stieltjes-integral-unique]
+       def-partition-and-refinement, def-finite-sum, lem-finite-sum-laws,
+       lem-riemann-stieltjes-integral-unique]
 justified_by: []
 aliases: []
 landmark: false
@@ -34,7 +35,7 @@ Let $a<c<b$ and put $f=\alpha=H_c$, the unit step that is zero left of $c$ and o
 
 [L1] A Stieltjes integral must be the same limit for every sufficiently fine choice of partition and tags ([[def-riemann-stieltjes-sum-and-integral]], [[lem-riemann-stieltjes-integral-unique]]).
 
-[L2] A nondecreasing function has variation equal to its endpoint increment ([[def-bounded-variation-and-total-variation]]).
+[L2] For a nondecreasing function every partition increment is nonnegative, so the absolute values in the variation sum may be removed and the finite sum telescopes to the endpoint increment ([[def-bounded-variation-and-total-variation]], [[def-finite-sum]], [[lem-finite-sum-laws]]).
 
 ## Verification
 

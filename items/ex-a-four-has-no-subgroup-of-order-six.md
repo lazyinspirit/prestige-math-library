@@ -18,7 +18,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: 'T. W. Judson, Abstract Algebra: Theory and Applications, §5.1, Example 8'
+    - title: 'T. W. Judson, Abstract Algebra: Theory and Applications, §6.2, Proposition 6.9'
       url: 'https://judsonbooks.org/aata-files/aata-20140815.pdf'
 pipeline_run: null
 ---

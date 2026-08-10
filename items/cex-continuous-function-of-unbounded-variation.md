@@ -41,7 +41,7 @@ Then $f$ is continuous on $[0,1]$ but has unbounded variation.
 
 [L1] Distance to a nonempty set is $1$-Lipschitz ([[lem-distance-to-set-is-lipschitz]]).
 
-[L2] The integer-part property implies $0\le d(t,\mathbb Z)\le1/2$, with value zero at integers and $1/2$ at half-integers ([[lem-integer-part]], [[def-integers]]).
+[L2] The integer-part property gives an integer $n$ with $n\le t<n+1$; one of $t-n$ and $n+1-t$ is at most $1/2$, so $0\le d(t,\mathbb Z)\le1/2$. The definition gives value zero at integers, and the two nearest integers to $n+1/2$ are both at distance $1/2$ ([[lem-integer-part]], [[def-integers]]).
 
 [L3] The harmonic series diverges ([[thm-p-series-rational]] at exponent $1$).
 

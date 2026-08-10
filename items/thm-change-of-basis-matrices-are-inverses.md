@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., Definition 3.82'
+    - title: 'S. Axler, Linear Algebra Done Right, 4th ed., §3D, result 3.82'
       url: 'https://linear.axler.net/LADR4e.pdf'
     - title: 'S. Schiavone, MIT 18.700 Day 9, Corollary 36'
       url: 'https://math.mit.edu/~sschiavo/18-700/Lectures/LessonPlan9.pdf'

@@ -12,6 +12,7 @@ deps: [thm-dirichlet-test-for-improper-integrals,
        def-absolute-and-conditional-improper-convergence,
        thm-algebra-of-derivatives, def-limits-at-infinity,
        def-continuity-real,
+       thm-the-integral-function-is-lipschitz,
        cor-integrability-of-absolute-values-products-and-lattice-operations]
 justified_by: []
 aliases: []
@@ -41,12 +42,12 @@ converges. Then $\int_a^\infty u(x)v(x)\,dx$ diverges.
 
 [L2] The differentiable-multiplier clause of Dirichlet's test applies to a continuous function with bounded truncation primitive ([[thm-dirichlet-test-for-improper-integrals]]).
 
-[L3] Convergence of an improper integral makes its truncation primitive bounded.
+[L3] Convergence of an improper integral bounds its truncation primitive near infinity, while on the remaining compact interval the integral function is Lipschitz and hence bounded ([[def-improper-integral-at-infinity]], [[thm-the-integral-function-is-lipschitz]]).
 
 ## Proof
 
 **Proof technique:** contradiction.
 
-1.1 Suppose for contradiction that $\int_a^\infty uv$ converges. Then its truncation primitive is bounded by [L3], and $uv$ is continuous. Put $g=1/v$. Positivity and $v\to\infty$ give $g\to0$, while [L1] and the hypothesis give absolute convergence of $\int g'$. [L3, L1, assume-contra]
+1.1 Suppose for contradiction that $\int_a^\infty uv$ converges. Then its truncation primitive is bounded by [L3], and $uv$ is continuous. Put $g=1/v$. Positivity and $v\to\infty$ give $g\to0$: for $\varepsilon>0$, eventually $v>1/\varepsilon$, hence $0<g<\varepsilon$. Also [L1] and the hypothesis give absolute convergence of $\int g'$. [L3, L1, assume-contra]
 
 2.1 Apply [L2] with the continuous function $uv$ and multiplier $g$. It yields convergence of $\int(uv)g=\int u$, contradicting the hypothesis. Hence $\int uv$ diverges. [step 1.1, L2, discharge-contradiction] ∎

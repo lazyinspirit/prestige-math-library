@@ -12,6 +12,7 @@ deps: [thm-dirichlet-test-for-improper-integrals,
        def-improper-integral-at-infinity, def-monotone-function,
        def-limits-at-infinity, def-complete-ordered-field,
        def-bounded-set,
+       thm-the-integral-function-is-lipschitz,
        cor-integrability-of-absolute-values-products-and-lattice-operations]
 justified_by: []
 aliases: []
@@ -37,7 +38,7 @@ Suppose $\int_a^\infty f$ converges and $g:[a,\infty)\to\mathbb R$ is bounded, m
 
 [L1] A bounded monotone function has a finite limit at the relevant end ([[def-complete-ordered-field]], [[def-bounded-set]], [[def-monotone-function]]).
 
-[L2] Convergence of $\int f$ makes its truncation primitive bounded.
+[L2] Convergence of $\int f$ bounds its truncation primitive near the singular end, while on the remaining compact interval the integral function is Lipschitz and hence bounded ([[def-improper-integral-at-infinity]], [[thm-the-integral-function-is-lipschitz]]).
 
 [L3] Dirichlet's test applies to a nonnegative monotone multiplier tending to zero ([[thm-dirichlet-test-for-improper-integrals]]).
 

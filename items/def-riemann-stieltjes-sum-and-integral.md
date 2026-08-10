@@ -49,7 +49,10 @@ $$m_i:=\inf_{x\in[t_i,t_{i+1}]}f(x),\qquad M_i:=\sup_{x\in[t_i,t_{i+1}]}f(x),$$
 $$L_\alpha(f,P):=\sum_{i<n}m_i\Delta_i\alpha,\qquad U_\alpha(f,P):=\sum_{i<n}M_i\Delta_i\alpha,$$
 
 where $\Delta_i\alpha=\alpha(t_{i+1})-\alpha(t_i)\ge0$. These are the lower and
-upper Stieltjes sums. Finite sums use [[def-finite-sum]] and
+upper Stieltjes sums. Each subinterval is nonempty and its image under bounded
+$f$ is bounded above and below, so the suprema exist by
+[[def-complete-ordered-field]] and the infima by [[def-infimum]] and
+[[thm-infimum-property]]. Finite sums use [[def-finite-sum]] and
 [[lem-finite-sum-laws]]. On $[a,a]$ the integral is $0$; for $b<a$ set
 $\int_a^b f\,d\alpha=-\int_b^a f\,d\alpha$, matching
 [[def-oriented-integral]].
