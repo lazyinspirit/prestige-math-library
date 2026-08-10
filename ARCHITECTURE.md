@@ -710,6 +710,20 @@ cheap enough to belong in a preflight. `requiresTask` is enforced for the
 tool-less runner: a refuter dispatched without assembled context would read
 nothing, confidently.
 
+**Dispatch-log retention (2026-08-10).** `dispatch.mjs` writes
+`<role>-<label>.log` per run and **no tool ever reads one back** — they are
+write-only evidence, cited by path in Alpha reports and named by the
+`agent-failed` halt code. They reached 742 MB across 2115 files, growing 400 to
+700 files per wave, against 18 MB for `items/` — the library itself. They are
+therefore **gzipped on disk and untracked** (`.gitignore`), not deleted: every
+byte stays recoverable from git history at
+`git show <commit>:research/audit/wave<k>-dispatch/<role>-<label>.log`, and the
+working copy reads with `zcat`/`zless`/`zgrep`. Concluded waves' `*-touches.json`
+snapshots get the same treatment; a **halted** wave's snapshot stays tracked and
+plain, because `touchlog.mjs` must still read it on resume.
+`research/BUILD-AUDIT-INDEX.md` is the concise standing record of what each
+build and wave did and where its evidence lives.
+
 Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
 
 **The drivers dispatch a step's agents in PARALLEL** (owner, 2026-08-05, binding

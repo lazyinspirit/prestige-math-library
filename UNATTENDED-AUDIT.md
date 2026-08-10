@@ -114,7 +114,7 @@ intended route whenever the mathematics needs you.
 | `judgment-empty` | the autonomous A3/A9 lane exited 0 without writing `wave<k>-A<n>.md` | read the dispatch log: a refusal and a decision look identical without the receipt |
 | `gate-failed` | a gate of record failed; the failing tool is quoted | fix the content, resume at that step |
 | `action-failed` | a driver tool exited nonzero | read the quoted output |
-| `agent-failed` | a dispatched role exited nonzero | read `research/audit/wave<k>-dispatch/<role>-<label>.log` |
+| `agent-failed` | a dispatched role exited nonzero | read `research/audit/wave<k>-dispatch/<role>-<label>.log` — the current wave's is plain, concluded waves' are gzipped, so `zless`/`zgrep` reads either |
 | `no-batches` | a per-batch step found no manifest | produce them at A0 |
 | `snapshot-failed` | a `touchlog` baseline could not be taken | fix, resume; R1's guard needs `pre-a8` |
 | `injection-test-required` | the judge prompt context changed with no passing injection test | run it, record the pass, resume |

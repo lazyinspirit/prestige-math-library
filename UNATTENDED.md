@@ -105,7 +105,7 @@ command in `research/<run>-run-state.json`.
 |---|---|---|
 | `judgment-required` | a step needs an orchestrator decision (0, 3, 4, 9) | make it, resume at the next step |
 | `gate-failed` | a gate of record failed; the failing tool is quoted | fix the content, resume at that step |
-| `agent-failed` | a dispatched role exited nonzero | read `research/<run>-dispatch/<role>-<label>.log` |
+| `agent-failed` | a dispatched role exited nonzero | read `research/<run>-dispatch/<role>-<label>.log` — the current run's is plain, concluded runs' are gzipped, so `zless`/`zgrep` reads either |
 | `no-batches` | a per-batch step found no batch manifest | produce them at step 0 |
 | `snapshot-failed` | the `pre-step8` baseline could not be taken | fix, resume; R1's guard needs that baseline |
 | `manual-step` | step 7 spends | run the judge sweep yourself, then resume at 7 |
