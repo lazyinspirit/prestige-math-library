@@ -155,4 +155,17 @@ Every repaired proof-bearing item has a correspondingly updated exact-source pro
 
 ## Page files, checks, and limits of this report
 
-The two A-page summaries accurately describe the proved scope and contain no mathematical overclaim. The two B-page bodies are intentionally empty. I found no unchecked dependency, boundary case, or item in the dispatch. Mechanical check results after the reader repairs are recorded in the final check pass for this findings file; their success is evidence of structural consistency only, not reader certification of the mathematics.
+The two A-page summaries accurately describe the proved scope and contain no mathematical overclaim. The two B-page bodies are intentionally empty. I found no unchecked dependency, boundary case, or item in the dispatch.
+
+Final post-repair checks on the disk state read by this report:
+
+- global precheck: 2675 proof-bearing items checked, 0 failing; the batch-4 scope accounts for 70/70 of those proof-bearing items;
+- strict batch proof contract: 70/70 items checked, 0 errors, 0 warnings;
+- batch content policy: 81 scoped items, 0 errors, 0 warnings;
+- batch coverage checklist: 2 pages and 100 harvested results, 0 errors, 0 warnings;
+- dependency check: no cycles, every reference resolves, and no draft item occurs on a published page (legacy informational warnings remain outside the batch finding question);
+- render check: 3689 files checked, no structural or KaTeX error;
+- prose check: 3689 files checked, 0 errors; 583 corpus-wide heuristic warnings remain, and the checker reports no positional claim contradicting the spec;
+- `git diff --check`: clean.
+
+These successes establish mechanical consistency only. They do not certify the mathematics or these reader repairs; Alpha must adjudicate the findings against the current files.
