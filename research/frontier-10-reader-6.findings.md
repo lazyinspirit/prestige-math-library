@@ -217,7 +217,7 @@ Scoped validation after repair:
 - coverage checklist: 95 harvested headings, zero errors and zero warnings;
 - plan validation: acyclic and consistent, with no item-level cycle, forward reference, B-page dependency, or unresolved id;
 - renderer: all changed item files clean;
-- prose checker: zero errors; one advisory phrase in the separation lemma;
+- prose checker: zero errors and zero warnings;
 - precheck: all changed proof-bearing item files clean after adopting its canonical step ordering.
 
 I could not independently fetch the external source URLs, as stated above. Nothing else in the assigned batch was left unchecked.
