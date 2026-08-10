@@ -477,8 +477,24 @@ interface PageInfo {
   ids: string[];
 }
 
+// PAGE MEMBERSHIP MAY COME FROM AN OVERLAY (2026-08-10). The judge's context
+// unit is the A/B pair, and it discovers a pair by reading the page files'
+// `items:`/`examples:` lists. That breaks for an ENRICHMENT run, which adds new
+// draft items to an ALREADY PUBLISHED page: `depcheck`'s `draft-on-published-page`
+// forbids listing a draft there, and `library/` is bind-mounted by the live
+// site, so writing the new ids into the served page would publish a dangling
+// reference. The new items would then be judged with NO pair context at all —
+// silently, since an absent page reads as an empty one.
+//
+// `JUDGE_LIBRARY_DIR` points page DISCOVERY at a scratch overlay whose page
+// files carry the staged item lists. Item bodies are always read from `items/`,
+// so the overlay affects only which ids are considered to share a page — never
+// the mathematics judged. Leave it unset for an ordinary build, where the pages
+// being judged are themselves drafts and already list their items.
+const LIBRARY_DIR = process.env.JUDGE_LIBRARY_DIR ?? "library";
+
 function loadPages(): PageInfo[] {
-  if (!existsSync("library")) return [];
+  if (!existsSync(LIBRARY_DIR)) return [];
   const paths: string[] = [];
   const walk = (dir: string): void => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -487,7 +503,7 @@ function loadPages(): PageInfo[] {
       else if (e.name.endsWith(".md")) paths.push(p);
     }
   };
-  walk("library");
+  walk(LIBRARY_DIR);
 
   const listed = (fm: string, key: string): string[] => {
     const m = fm.match(new RegExp("^" + key + ":\\s*\\[([^\\]]*)\\]", "m"));
@@ -534,7 +550,7 @@ for (const slug of namedBatch) {
   // A named page that matches nothing is a silent no-op otherwise, and a
   // silently-empty context block reads as "the batch is clean". Say so.
   if (withContext && !allPages.some((p) => p.slug === slug)) {
-    console.error(`[judge] --batch: no page "${slug}" under library/ — that page contributes NO context`);
+    console.error(`[judge] --batch: no page "${slug}" under ${LIBRARY_DIR}/ — that page contributes NO context`);
   }
 }
 const batchPages = allPages.filter(

@@ -719,6 +719,26 @@ cheap enough to belong in a preflight. `requiresTask` is enforced for the
 tool-less runner: a refuter dispatched without assembled context would read
 nothing, confidently.
 
+**`tools/judge-overlay.mjs` — pair context for an ENRICHMENT run (2026-08-10).**
+`judge.mts` discovers an item's A/B pair by reading the page files'
+`items:`/`examples:` frontmatter, and the owner's rule makes that pair the
+judge's context unit. An **enrichment** run — new draft items added to an
+already published page — cannot list them there: `depcheck` raises
+`draft-on-published-page`, and `library/` is bind-mounted by the live site, so a
+served page naming an unpublished item publishes a dangling reference. Left
+alone the new items are judged with **no page and no pair context**, and the
+failure is silent, because a page listing nothing is indistinguishable from a
+page with nothing to say.
+
+`judge-overlay.mjs` copies `library/` to a scratch directory and splices the
+staged ids into the affected pages there; `JUDGE_LIBRARY_DIR` points **page
+discovery only** at that copy. Item bodies always come from `items/`, so the
+overlay changes which ids count as page-mates and nothing else, and `library/`
+is never written. Unset the variable for an ordinary build, whose pages are
+themselves drafts and already list their items. Verified on `freegroups-1`: the
+overlay resolves 32 A-page items and 12 B-page examples where the served pages
+carry 6 and 1.
+
 **Dispatch-log retention (2026-08-10).** `dispatch.mjs` writes
 `<role>-<label>.log` per run and **no tool ever reads one back** — they are
 write-only evidence, cited by path in Alpha reports and named by the
