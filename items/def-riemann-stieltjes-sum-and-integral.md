@@ -1,7 +1,7 @@
 ---
 id: def-riemann-stieltjes-sum-and-integral
 kind: definition
-title: "Riemann-Stieltjes sums, upper and lower sums, and the Riemann-Stieltjes integral"
+title: "Riemann–Stieltjes sums, upper and lower sums, and the Riemann–Stieltjes integral"
 status: draft
 origin: session
 provenance:
@@ -52,4 +52,3 @@ upper Stieltjes sums. Finite sums use [[def-finite-sum]] and
 [[lem-finite-sum-laws]]. On $[a,a]$ the integral is $0$; for $b<a$ set
 $\int_a^b f\,d\alpha=-\int_b^a f\,d\alpha$, matching
 [[def-oriented-integral]].
-

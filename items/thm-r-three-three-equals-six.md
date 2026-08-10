@@ -32,13 +32,14 @@ The Ramsey number of [[def-off-diagonal-ramsey-number]] satisfies $R(3,3)=6$. Co
 
 [L1] If $\lvert A\rvert > k\,\lvert B\rvert$ then there is $b \in B$ with $\lvert f^{-1}[\{b\}]\rvert > k$ ([[thm-the-strong-pigeonhole-principle]]).
 
+
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 At a fixed vertex $v$ of $K_6$, at least three of its five incident edges have one colour by [L1]. Call their other endpoints $a,b,c$ and suppose that colour is red. If one of $ab,bc,ca$ is red it closes a red triangle with $v$; if none is red, then $a,b,c$ form a blue triangle. The same argument with the colour names exchanged proves $6\to(3,3)^2$. [L1]
 
-2.1 On five cyclically ordered vertices, colour the five cycle edges red and the remaining five edges blue. The red graph is a $5$-cycle and has no triangle; the blue graph is also a $5$-cycle, in the order obtained by stepping two places at a time, and has no triangle. Thus $5\not\to(3,3)^2$. [construct]
+1.2 On five cyclically ordered vertices, colour the five cycle edges red and the remaining five edges blue. The red graph is a $5$-cycle and has no triangle; the blue graph is also a $5$-cycle, in the order obtained by stepping two places at a time, and has no triangle. Thus $5\not\to(3,3)^2$. [construct]
 
-3.1 Step 1.1 gives $R(3,3)\le6$ and step 2.1 gives $R(3,3)>5$. Since $R(3,3)$ is a natural number, it equals $6$. [step 1.1, step 2.1] ∎
-
+2.1 Step 1.1 gives $R(3,3)\le6$ and step 1.2 gives $R(3,3)>5$. Since $R(3,3)$ is a natural number, it equals $6$. [step 1.1, step 1.2] ∎

@@ -41,15 +41,16 @@ The arrow notation is [[def-ramsey-colouring-and-arrow-notation]], binomial coef
 
 [L2] Pascal's rule. $\displaystyle\binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1}$ ([[thm-pascals-rule]]).
 
+
+
 ## Proof
 
 **Proof technique:** induction.
 
 1.1 If $s=1$ or $t=1$, every nonempty vertex set contains the required one-vertex set in the corresponding colour convention, and the displayed binomial coefficient is $1$. [base]
 
-2.1 Assume $s,t\ge2$ and that the formula holds whenever the sum of the two positive parameters is smaller than $s+t$. Then $\binom{s+t-3}{s-2}\to(s-1,t)^2$ and $\binom{s+t-3}{s-1}\to(s,t-1)^2$ by the induction hypothesis. [ih]
+1.2 Assume $s,t\ge2$ and that the formula holds whenever the sum of the two positive parameters is smaller than $s+t$. Then $\binom{s+t-3}{s-2}\to(s-1,t)^2$ and $\binom{s+t-3}{s-1}\to(s,t-1)^2$ by the induction hypothesis. [ih]
 
-2.2 Apply [L1] to the two witnesses in step 2.1 and use [L2] to identify their sum as $\binom{s+t-2}{s-1}$. This gives the displayed arrow for $(s,t)$. [step 2.1, L1, L2]
+2.1 Apply [L1] to the two witnesses in step 1.2 and use [L2] to identify their sum as $\binom{s+t-2}{s-1}$. This gives the displayed arrow for $(s,t)$. [step 1.2, L1, L2]
 
-3.1 The base faces and the induction step cover all positive $s,t$, so the explicit binomial witness works universally. [step 1.1, step 2.2, discharge-induction] ∎
-
+3.1 The base faces and the induction step cover all positive $s,t$, so the explicit binomial witness works universally. [step 1.1, step 2.1, discharge-induction] ∎

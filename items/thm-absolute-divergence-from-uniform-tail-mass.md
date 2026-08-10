@@ -21,14 +21,14 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, exercises following Section 8.3"
+    - title: "William F. Trench, Introduction to Real Analysis, exercises following Section 3.4"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
 
 ## Statement
 
-Let $g\ge0$ be monotone on $[a,\infty)$ and suppose $\int_a^\infty g$ diverges. Let $x_j\uparrow\infty$ have $0<x_{j+1}-x_j\le M$ for some $M$, and suppose a locally integrable $f$ satisfies
+Let $g\ge0$ be monotone on $[a,\infty)$ and suppose $\int_a^\infty g$ diverges. Let $a\le x_0<x_1<\cdots$ tend to infinity and satisfy $x_{j+1}-x_j\le M$ for some $M>0$, and suppose a locally integrable $f$ satisfies
 $$\int_{x_j}^{x_{j+1}}|f(x)|\,dx\ge\delta>0$$
 for every $j$. Then $\int_a^\infty|f(x)g(x)|\,dx$ diverges, so $\int_a^\infty fg$ cannot converge absolutely.
 
@@ -46,7 +46,7 @@ for every $j$. Then $\int_a^\infty|f(x)g(x)|\,dx$ diverges, so $\int_a^\infty fg
 
 **Proof technique:** direct.
 
-1.1 Suppose first that $g$ is nonincreasing. On the $j$th block, $g(x)\ge g(x_{j+1})$, hence [given]
+1.1 Suppose first that $g$ is nonincreasing. On the $j$th block, $g(x)\ge g(x_{j+1})$, hence [L1, L2, L3]
 $$\int_{x_j}^{x_{j+1}}|f|g\ge\delta g(x_{j+1}).$$
 Also $\int_{x_j}^{x_{j+1}}g\le M g(x_j)$. Since $\int g$ diverges, additivity and [L2] force $\sum_jg(x_j)$, and hence its shifted tail, to diverge. Thus the block lower bounds for $\int|f|g$ have unbounded partial sums. [L1, L2, L3]
 

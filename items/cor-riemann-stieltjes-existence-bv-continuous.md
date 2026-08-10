@@ -1,7 +1,7 @@
 ---
 id: cor-riemann-stieltjes-existence-bv-continuous
 kind: corollary
-title: "A bounded-variation integrand is Riemann-Stieltjes integrable against every continuous integrator"
+title: "A bounded-variation integrand is Riemann–Stieltjes integrable against every continuous integrator"
 status: draft
 origin: session
 provenance:
@@ -48,4 +48,3 @@ $\alpha:[a,b]\to\mathbb R$ is continuous, then $\int_a^b f\,d\alpha$ exists.
 1.1 Since $\alpha$ is continuous and $f$ is BV, [L1] gives the integral $\int_a^b\alpha\,df$. [L1, L3]
 
 2.1 Integration by parts [L2] then gives existence of $\int_a^b f\,d\alpha$ and its value $f(b)\alpha(b)-f(a)\alpha(a)-\int_a^b\alpha\,df$. [step 1.1, L2] ∎
-

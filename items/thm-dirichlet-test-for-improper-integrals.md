@@ -25,7 +25,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Theorem 8.3.7"
+    - title: "William F. Trench, Introduction to Real Analysis, Theorem 3.4.10"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -55,7 +55,7 @@ The reflected statements hold at $-\infty$ and at finite singular endpoints, wit
 
 **Proof technique:** cases.
 
-1.1 Choose $M$ with $|F|\le M$. In clause 1, apply [L1] on $[u,v]$. Every partial integral $\int_u^xf=F(x)-F(u)$ has absolute value at most $2M$, so [L1, assume-case first]
+1.1 Choose $M$ with $|F|\le M$. In clause 1, apply [L1] on $[u,v]$. Every partial integral $\int_u^xf=F(x)-F(u)$ has absolute value at most $2M$, so [L1, L2, assume-case first]
 $$\left|\int_u^vfg\right|\le2M(g(u)+g(v))\le4Mg(u).$$
 This tends to zero as $u\to\infty$, and [L2] proves convergence.
 

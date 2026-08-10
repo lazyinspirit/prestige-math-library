@@ -1,7 +1,7 @@
 ---
 id: thm-riemann-stieltjes-existence-continuous-bv
 kind: theorem
-title: "A continuous integrand is Riemann-Stieltjes integrable against every bounded-variation integrator"
+title: "A continuous integrand is Riemann–Stieltjes integrable against every bounded-variation integrator"
 status: draft
 origin: session
 provenance:

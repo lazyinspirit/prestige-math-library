@@ -1,7 +1,7 @@
 ---
 id: thm-riemann-stieltjes-linearity-and-additivity
 kind: theorem
-title: "Linearity and interval additivity of the Riemann-Stieltjes integral"
+title: "Linearity and interval additivity of the Riemann–Stieltjes integral"
 status: draft
 origin: session
 provenance:

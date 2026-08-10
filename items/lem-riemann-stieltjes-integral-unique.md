@@ -1,7 +1,7 @@
 ---
 id: lem-riemann-stieltjes-integral-unique
 kind: lemma
-title: "The Riemann-Stieltjes integral is unique"
+title: "The Riemann–Stieltjes integral is unique"
 status: draft
 origin: session
 provenance:
@@ -48,4 +48,3 @@ mesh-limit condition defining $\int_a^b f\,d\alpha$.
 1.1 Given $\varepsilon>0$, choose positive thresholds $\delta_I,\delta_J$ for error $\varepsilon/2$ in the two mesh conditions. By [L3] choose a natural $N\ge1$ whose uniform partition has mesh smaller than both thresholds, and give it arbitrary tags. [L1, L2, L3, choose]
 
 2.1 For its sum $S$, $|I-J|\le|I-S|+|S-J|<\varepsilon$. Since this holds for every $\varepsilon>0$, $|I-J|=0$ and $I=J$. The singleton interval has only the prescribed value $0$. [step 1.1, L1, L4] ∎
-

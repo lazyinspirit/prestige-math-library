@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-improper-integral-at-infinity,
        thm-cauchy-criterion-for-improper-integrals,
        thm-additivity-over-subintervals, thm-linearity-of-the-integral,
@@ -46,7 +48,7 @@ $$f(x)=\frac1{(1+x)^2}+\sum_{k=1}^\infty s_k(x).$$
 
 **Proof technique:** construction.
 
-1.1 Local finiteness and matching zero endpoint values make the spike sum continuous; adding the positive continuous baseline preserves positivity and continuity. Direct differentiation gives primitive $1-1/(1+x)$ for the baseline, whose improper integral is one. [given]
+1.1 By [L1], local finiteness and matching zero endpoint values make the spike sum continuous; adding the positive continuous baseline preserves positivity and continuity. Direct differentiation gives primitive $1-1/(1+x)$ for the baseline, whose improper integral is one. [L1]
 
 1.2 By [L2], additivity, and [L3], the total integral of all spikes is $\sum_{k=1}^\infty2^{-k-2}<\infty$. Therefore the Cauchy criterion gives convergence of $\int_0^\infty f$. [L2, L3]
 

@@ -20,7 +20,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Example 8.3.1"
+    - title: "William F. Trench, Introduction to Real Analysis, Examples 3.4.1–3"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---

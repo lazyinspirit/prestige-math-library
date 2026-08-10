@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Section 8.4"
+    - title: "William F. Trench, Introduction to Real Analysis, Section 3.4"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -43,8 +43,6 @@ does not exist as a finite real number.
 **Proof technique:** computation.
 
 1.1 For $0<\varepsilon<1$, symmetry and [L2] give [L2]
-$$\int_{-1}^{-\varepsilon}\frac{dx}{x^2}+
-\int_\varepsilon^1\frac{dx}{x^2}
-=2\left(\frac1\varepsilon-1\right).$$
+$$\int_{-1}^{-\varepsilon}\frac{dx}{x^2}+\int_\varepsilon^1\frac{dx}{x^2}=2\left(\frac1\varepsilon-1\right).$$
 
 2.1 This tends to $+\infty$ as $\varepsilon\downarrow0$, not to a finite real. Therefore the principal value in [L1] diverges. [L1] ∎

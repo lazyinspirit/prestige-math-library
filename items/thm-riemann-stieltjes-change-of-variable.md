@@ -32,7 +32,7 @@ $$\int_a^b f\,d\alpha=\int_c^d(f\circ\phi)\,d(\alpha\circ\phi).$$
 
 ## Facts & Assumptions
 
-**Given:** A strictly increasing continuous bijection $\phi:[c,d]\to[a,b]$ and functions $f, \alpha$ on $[a,b]$.
+**Given:** A strictly increasing continuous bijection $\phi:[c,d]\to[a,b]$ and functions $f,\alpha$ on $[a,b]$.
 
 [L1] The inverse $\phi^{-1}$ is continuous ([[thm-continuous-inverse]]).
 

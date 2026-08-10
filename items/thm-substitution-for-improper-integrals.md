@@ -21,7 +21,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Theorem 8.3.9"
+    - title: "William F. Trench, Introduction to Real Analysis, Theorem 3.4.13"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -29,8 +29,7 @@ pipeline_run: null
 ## Statement
 
 Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\phi:I\to J$ be a monotone differentiable surjection. Assume $\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then
-$$\int_J f(x)\,dx\quad\text{and}\quad
-\int_I f(\phi(t))|\phi'(t)|\,dt$$
+$$\int_J f(x)\,dx\quad\text{and}\quad\int_I f(\phi(t))|\phi'(t)|\,dt$$
 converge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.
 
 ## Facts & Assumptions

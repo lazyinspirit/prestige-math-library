@@ -43,20 +43,9 @@ to this Beta's Step-5 return.
 
 ## Exact two-paragraph A-page summary
 
-Categories isolate the common algebra of identities and composition behind sets,
-groups, rings, vector spaces, modules, spaces, posets, monoids and preorders.  This
-page fixes class-size conventions, develops opposite categories, isomorphisms,
-monomorphisms, epimorphisms, zero morphisms and distinguished objects, and proves
-the basic cancellation and size results without forming an illicit category of
-all categories.
+Sets and functions, groups and homomorphisms, unital rings, vector spaces, modules, topological spaces, and posets provide the recurring examples. The development uses product topology and continuity, linear and module maps, group actions, the fundamental group, the Axiom of Choice, and Burali–Forti's size obstruction to keep large-category claims inside ZFC's definable-class convention.
 
-Functors and natural transformations then supply the maps and two-dimensional
-maps of the subject.  Vertical and horizontal composition satisfy interchange,
-small categories form a strict 2-category, and equivalence is separated carefully
-from isomorphism: the split-essential-surjectivity criterion is choice-free,
-whereas its ordinary small-target form and skeleton construction state their use
-of Choice.  The companion computes these ideas in the library's existing
-topological, algebraic and set-theoretic examples.
+A category packages identities and associative composition; opposite categories lead to duality, while isomorphisms, monomorphisms, epimorphisms, zero objects, and zero morphisms describe special arrows and objects. Functors preserve structure, natural transformations compose vertically and horizontally, and interchange organizes small categories into a strict 2-category. Natural isomorphisms then distinguish equivalence from strict isomorphism, with split essential surjectivity giving a choice-free criterion and Choice supplying skeletons and selected representatives.
 
 The B page has no body, per the page contract.
 
@@ -355,17 +344,16 @@ the cited URL(s) above in `sources.references` at Step 5.
 
 ## Generated-claim truth-risk obligations
 
-At Step 5 the four generated counterexamples must state their entire finite or
-elementary witness, enumerate all relevant hom-sets/functions, and verify the
-failed property directly.  In particular:
+The four generated counterexamples state their entire finite or elementary
+witness and verify the failed property directly.  In particular:
 
-- the non-mono-preserving functor must give finite source/target categories,
-  the complete arrow action, composition preservation, a monic source arrow,
-  and the explicit cancelling pair after applying the functor;
-- `\varnothing\to\{*\}` must be checked monic and shown to admit no retraction;
-- the discrete two-object target must make full faithfulness and failure of
+- the non-mono-preserving functor sends the walking arrow to the constant
+  function `\{0,1\}\to\{*\}` and exhibits the two distinct singleton-domain
+  maps that it fails to cancel;
+- `\varnothing\to\{*\}` is checked monic and shown to admit no retraction;
+- the discrete two-object target makes full faithfulness and failure of
   essential surjectivity visibly separate; and
-- the non-natural family must display the one naturality square that fails.
+- the non-natural family displays the one naturality square that fails.
 
 The ordinal/max one-object category used to refute local smallness, and the
 two-component witness used to refute component determination, receive the same
@@ -377,17 +365,15 @@ claiming an unavailable automated smoke check.
 ## Proof-contract handoff
 
 `frontier-10-batch-7.proof-contracts.json` has version 1, level `frontier-10`,
-and one entry for every one of the 60 proof-bearing items.  It records exact
-on-disk clauses for published dependencies, planned clauses for same-pair
-and earlier same-run dependencies, numbered-step obligations for every item,
-and all eight boundary dispositions.  The two repair contracts each use a
-five-step map: matrix-category construction through split essential
-surjectivity, and determinant functoriality through the Leibniz naturality
-square.  At Step 5 the author must synchronize every “Planned Statement”
-quote and `L#` fact with the authored source item, expand the generic three-step
-map wherever the final proof has more steps, and retain one-to-one step coverage.
-`risk_review` is intentionally absent: it belongs to independent Alpha review,
-not the author.
+and one entry for every one of the 60 proof-bearing items.  Every `L#` link is
+synchronized to an exact on-disk quotation from the cited Statement,
+Definition, Example, or Statement-refuted section.  Every authored numbered
+step has exactly one derivation row, and all eight standard boundary cases have
+a checked or reasoned-not-applicable disposition.  The matrix contract follows
+the coordinate functor through full faithfulness and supplied-basis split
+essential surjectivity; the determinant contract follows both group-valued
+functors through the Leibniz naturality square.  `risk_review` is intentionally
+absent: it belongs to independent Alpha review, not the author.
 
 ## Applyable prose-scaffold amendments
 
@@ -461,6 +447,62 @@ and `plan-spec.json` splicing, all reserved for later workflow steps.
    id `universal-properties-and-the-yoneda-lemma`.
 4. **D2:** no A item was added.  The A page remains exactly 60 items and no split
    fires, exactly as Alpha directed.
+
+## Step-5 authoring record
+
+All 85 manifest items were authored in manifest order: 60 on A and 25 on B.
+There was no drop, rename, merge, split, or added A item, so the coverage
+dispositions remain true and the A ceiling remains exact.  Every item is
+`status: draft`, `origin: session`, and carries both statement and proof
+provenance.  The rationale for every provenance group is the component ledger
+above.  Titles containing mathematics use the renderer's canonical `$...$`
+delimiters in place of the manifest's source-only `\(...\)` spelling; this is a
+delimiter normalization only, with every title's words and mathematics
+unchanged.
+
+Seven authored dependency additions were necessary to make the actual proofs
+self-contained; no manifest dependency was removed:
+
+1. `thm-every-equivalence-can-be-made-an-adjoint-equivalence` adds the split
+   equivalence criterion and reflection of isomorphisms, which are used to
+   construct and certify the adjusted unit.
+2. `ex-fundamental-groupoid` adds the published fundamental-group laws for
+   associativity, identities, and path reversal.
+3. `ex-pointed-sets-equivalent-to-sets-and-partial-functions` adds zero objects
+   for the strict-nonisomorphism witness: partial functions have exactly one
+   zero object, while pointed sets have distinct pointed singletons.
+4. `ex-set-arithmetic-isomorphisms-are-natural` adds natural numbers for the
+   literal disjoint-union tags `0` and `1`.
+5. `cex-functors-need-not-preserve-monomorphisms` and
+   `cex-a-family-of-components-need-not-be-natural` each add the category of
+   sets because their explicit finite functions are load-bearing witnesses.
+6. `fs-every-category-is-locally-small` adds the batch's definable-class size
+   convention for the one-object category with ordinal endomorphisms.
+
+The standard boundary worksheet is fully disposed in the 60 synchronized proof
+contracts.  The material cases include empty sets and the empty partial map,
+dimension zero in the matrix category, dimension one and the lower `n=1`
+determinant endpoint, the zero ring, singleton and one-object categories,
+identity-only and disconnected categories, nonempty selection under Choice,
+both directions of every top-level characterization, and endpoint-preserving
+path homotopies.  Items without a relevant numerical, endpoint, choice, or
+biconditional boundary record a specific not-applicable reason rather than a
+silent omission.
+
+The generated-claim search produced explicit minimal witnesses.  Besides the
+four generated counterexamples itemized above, the local-smallness refutation
+uses the proper class of all ordinals with associative `max` composition, and
+the one-component refutation uses two natural transformations on a discrete
+two-object source that agree at one object and differ at the other.  No finite
+smoke harness for finite categories is registered, so these witnesses are
+enumerated inside their proofs instead of claiming an unavailable automation.
+
+The final source-heading harvest remains 134 accepted dispositions versus 22
+declined dispositions out of 156 total rows.  Every `included` row names an
+authored item.  The deferrals and out-of-scope decisions remain exactly those
+listed in the canonical-coverage section; no boundary case was used to hide a
+missing prerequisite.  There is no external fallback, no published-falsehood
+repair, and no blocker internal to batch 7.
 
 ## Step-3 repair gate record and one integration limitation
 

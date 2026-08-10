@@ -41,17 +41,18 @@ Equivalently, every $c$-colouring of $[N]^k$ has a monochromatic $r$-element set
 
 [L2] Then $A^{B}$ is finite and $\lvert A\rvert^{\lvert B\rvert}=\lvert A^{B}\rvert$ ([[thm-cardinality-of-a-set-of-functions]]).
 
+
+
 ## Proof
 
 **Proof technique:** induction.
 
 1.1 If $r=1$ or $c=1$, any sufficiently large finite set works. For $k=1$, $N=c(r-1)+1$ works by finite pigeonhole. For $k=2$, repeatedly group one colour against all remaining colours and apply [L1]; induction on $c$ gives a finite multicolour graph witness for every target $r$. [base, L1]
 
-2.1 Assume $k\ge3$ and that the theorem is known for $(k-1)$-subsets with every finite colour and target parameter. Put $M=c(r-1)+1$. Choose finite reservoir sizes backwards by $q_M=1$ and, for $i<M$, let $q_i$ be one more than a $(k-1)$-uniform Ramsey witness for target $q_{i+1}$ and $c$ colours, which exists by the induction hypothesis. [ih]
+1.2 Assume $k\ge3$ and that the theorem is known for $(k-1)$-subsets with every finite colour and target parameter. Put $M=c(r-1)+1$. Choose finite reservoir sizes backwards by $q_M=1$ and, for $i<M$, let $q_i$ be one more than a $(k-1)$-uniform Ramsey witness for target $q_{i+1}$ and $c$ colours, which exists by the induction hypothesis. [ih]
 
-2.2 Starting with a $q_0$-element set, choose its least vertex $x_0$. Colour each $(k-1)$-subset $A$ of the remaining reservoir by the colour of $A\cup\{x_0\}$, and restrict to a homogeneous $q_1$-element reservoir. Repeat. After $M$ stages there are vertices $x_0,\ldots,x_{M-1}$ and colours $d_0,\ldots,d_{M-1}$ such that every $k$-set of chosen vertices whose least member is $x_i$ has colour $d_i$. [step 2.1, L2, construct]
+2.1 Starting with a $q_0$-element set, choose its least vertex $x_0$. Colour each $(k-1)$-subset $A$ of the remaining reservoir by the colour of $A\cup\{x_0\}$, and restrict to a homogeneous $q_1$-element reservoir. Repeat. After $M$ stages there are vertices $x_0,\ldots,x_{M-1}$ and colours $d_0,\ldots,d_{M-1}$ such that every $k$-set of chosen vertices whose least member is $x_i$ has colour $d_i$. [step 1.2, L2, construct]
 
-3.1 Finite pigeonhole gives indices $i_1<\cdots<i_r$ for which $d_{i_1}=\cdots=d_{i_r}$. Every $k$-subset of $\{x_{i_1},\ldots,x_{i_r}\}$ has least element $x_{i_j}$ for some $j$, hence has this common colour by step 2.2. This is a monochromatic $r$-set. [step 2.2]
+3.1 Finite pigeonhole gives indices $i_1<\cdots<i_r$ for which $d_{i_1}=\cdots=d_{i_r}$. Every $k$-subset of $\{x_{i_1},\ldots,x_{i_r}\}$ has least element $x_{i_j}$ for some $j$, hence has this common colour by step 2.1. This is a monochromatic $r$-set. [step 2.1]
 
 4.1 The bases and the step from $(k-1)$ to $k$ prove the assertion for every positive $k,c,r$. [step 1.1, step 3.1, discharge-induction] ∎
-

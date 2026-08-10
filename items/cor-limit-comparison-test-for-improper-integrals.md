@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Theorem 8.3.6"
+    - title: "William F. Trench, Introduction to Real Analysis, Theorem 3.4.7"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -44,6 +44,6 @@ If $L=0$, convergence of $\int g$ still implies convergence of $\int f$; if the 
 
 **Proof technique:** direct.
 
-1.1 With tolerance $L/2$, the limit gives $L/2<f/g<3L/2$ sufficiently near the singular end. Thus $(L/2)g\le f\le(3L/2)g$. Applying [L2] in both directions proves the equivalence. [L2]
+1.1 By [L1], tolerance $L/2$ gives $L/2<f/g<3L/2$ sufficiently near the singular end. Thus $(L/2)g\le f\le(3L/2)g$. Applying [L2] in both directions proves the equivalence. [L1, L2]
 
 2.1 If $L=0$, eventually $f/g\le1$, so $f\le g$. If $f/g\to+\infty$, eventually $g\le f$. The one-way conclusions again follow from [L2]. [L2] ∎

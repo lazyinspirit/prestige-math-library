@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Section 8.4"
+    - title: "William F. Trench, Introduction to Real Analysis, Section 3.4"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -42,7 +42,7 @@ but its two one-sided improper integrals do not converge.
 
 **Proof technique:** computation.
 
-1.1 Substitution $x=-t$ gives [given]
+1.1 Substitution $x=-t$ gives [L1]
 $$\int_{-1}^{-\varepsilon}\frac{dx}{x}=-\int_\varepsilon^1\frac{dt}{t}.$$
 Thus the symmetric sum is exactly zero for every $\varepsilon>0$, and [L1] gives principal value zero.
 

@@ -19,7 +19,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Example 8.3.1"
+    - title: "William F. Trench, Introduction to Real Analysis, Examples 3.4.1–3"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -27,9 +27,9 @@ pipeline_run: null
 ## Example
 
 The exponents $2$ and $1/2$ display the opposite convergence thresholds:
-$$\int_1^\infty x^{-2}dx=1,qquad \int_0^1x^{-2}dx\text{ diverges},$$
+$$\int_1^\infty x^{-2}dx=1,\qquad \int_0^1x^{-2}dx\text{ diverges},$$
 while
-$$\int_0^1x^{-1/2}dx=2,qquad \int_1^\infty x^{-1/2}dx\text{ diverges}.$$
+$$\int_0^1x^{-1/2}dx=2,\qquad \int_1^\infty x^{-1/2}dx\text{ diverges}.$$
 
 ## Facts & Assumptions
 

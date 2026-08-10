@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: example
 deps: [def-absolute-and-conditional-improper-convergence,
        def-improper-integral-at-infinity, lem-alternating-sequence,
        thm-alternating-series-test, thm-p-series-rational,
@@ -47,7 +49,7 @@ Then $\int_0^\infty f$ converges conditionally, and its value is the sum of the 
 
 **Proof technique:** computation.
 
-1.1 Every compact interval meets only finitely many jumps, so $f$ is properly integrable there. At a positive integer $N$, [given]
+1.1 Every compact interval meets only finitely many jumps, so [L3] makes $f$ properly integrable there. At a positive integer $N$, [L1, L3]
 $$\int_0^Nf=\sum_{k=0}^{N-1}\frac{(-1)^k}{k+1},$$
 which converges as $N\to\infty$ by [L1].
 

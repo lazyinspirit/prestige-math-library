@@ -80,22 +80,23 @@ exact manifest order:
 
 Replace the present two summary paragraphs with these two paragraphs:
 
-> A group action turns the elements of a group into symmetries of a set.
-> Actions may be described by homomorphisms into a symmetric group, and their
-> orbits and stabilisers record how points move. Orbit–stabiliser identifies an
-> orbit with a coset space; the action on \(G/H\), its core kernel, the
-> factorial bound for finite-index cores, and the classification of transitive
-> actions make that identification structural rather than merely numerical.
-> Cayley's theorem is the regular-action case.
+> A group action turns the elements of a group into symmetries of a set. Groups,
+> homomorphisms, kernels, quotient groups and isomorphisms supply the declared
+> algebraic prerequisites, while symmetric groups turn actions into permutation
+> representations. Subgroups and cosets provide stabilisers and orbit models;
+> normal subgroups and the isomorphism theorems control action kernels. Finite
+> cardinality, index, Lagrange's theorem and elementary counting support the
+> finite results.
 >
-> Conjugation then turns orbit–stabiliser into the conjugacy-class formula, the
-> non-covering theorem for conjugates of a proper subgroup, and the class
-> equation. Applied to finite \(p\)-groups, the same orbit
-> decomposition yields the fixed-point congruence, normality at index \(p\),
-> nontrivial centres, the order-\(p^2\) theorem and Cauchy's theorem. Finally,
-> double-counting fixed pairs gives Cauchy–Frobenius orbit counting and Jordan's
-> derangement theorem, linking abstract actions to both enumeration up to
-> symmetry and the existence of fixed-point-free elements.
+> Equivariant maps, free actions and fixed-point sets lead to orbit–stabiliser,
+> coset actions, cores and the classification of transitive actions. Conjugation
+> then yields centralisers, normalisers, conjugacy-class counts, the non-covering
+> theorem and the class equation. For finite \(p\)-groups, orbit decomposition
+> gives the fixed-point congruence, index-\(p\) normality, nontrivial centres, the
+> order-\(p^2\) theorem, central intersection for normal subgroups and Cauchy's
+> theorem. Double-counting fixed pairs closes the page with Cauchy–Frobenius orbit
+> counting and Jordan's derangement theorem, while Cayley's theorem remains the
+> regular-action case.
 
 ### B-page example list
 
@@ -123,22 +124,8 @@ In
   - cex-orbit-count-is-not-set-size-divided-by-group-order
 ```
 
-Replace the present two summary paragraphs with these two paragraphs:
-
-> The examples separate properties that are easy to conflate. The left regular
-> action is free and transitive; the natural \(S_3\)-action is faithful and
-> transitive but not free; a disjoint union of two regular
-> \(\mathbb Z/2\)-orbits is free but not transitive. Rotation and coset actions
-> then make stabilisers, cores and faithfulness explicit.
->
-> The class equations of \(S_3\) and the square-symmetry group exhibit
-> conjugacy-class sizes and nontrivial centres; the same groups show that the
-> centre and order-\(p^2\) conclusions cannot lose their hypotheses. A
-> five-point involution checks the \(p\)-group fixed-point congruence, while the
-> natural \(S_3\)-action shows its failure outside \(p\)-groups, and \(A_4\)
-> shows that Cauchy's theorem does not extend to composite divisors. Two
-> complete fixed-point tables count binary necklaces and square colourings,
-> and the singleton trivial action refutes the naive quotient formula.
+The B page has no authored summary body. The publishing amendment must retain
+that empty body; the examples list is the only staged B-page mutation.
 
 ## 3. Canonical-coverage harvest
 
@@ -217,10 +204,10 @@ The thirteen remaining declines are all result-specific:
   strengthening uses the classification of finite simple groups, an entire
   subject area not reached by the library at this order.
 - Conrad Theorem 6.9 is out of scope because it is a general closure theorem
-  for finite-index subgroups whose natural home is the real
-  `monoids-groups-and-subgroups` page beside subgroup intersections and index
-  calculus; neither its statement nor its coset-pair proof is specific to the
-  action structure developed here.
+  for finite-index subgroups whose natural home is a future enrichment of
+  `cosets-and-lagranges-theorem`, which already develops index multiplicativity;
+  neither its statement nor its coset-pair proof is specific to the action
+  structure developed here.
 
 No required result was declined for lack of a local lemma. In particular, the
 scaffold builds the core, the core-kernel theorem, the subgroup-order lemma for
@@ -251,12 +238,12 @@ statement opened on disk).
 | `thm-orbit-stabilizer` | literature-derived | ai-altered | J Theorem 14.1.11 and B Theorem 3.107; statement deliberately uses the general coset bijection |
 | `cor-orbit-stabilizer-cardinality` | literature-derived | ai-altered | B Corollary 3.108 plus P Lagrange; finite count split from the general bijection |
 | `lem-stabilizers-in-one-orbit-are-conjugate` | literature-derived | ai-altered | J Lemma 14.18 and B Proposition 3.103 |
-| `def-core-of-a-subgroup` | ai-altered | not-applicable | standard intersection-of-conjugates convention added to expose the coset-action kernel |
-| `lem-core-is-largest-normal-subgroup-contained` | ai-altered | ai-generated | proof-decomposition lemma for the kernel theorem; exact statement checked by the direct conjugate-intersection argument |
-| `thm-left-coset-action-and-its-kernel` | ai-altered | ai-altered | J Example 14.1.5 and B Propositions 3.102/3.104, strengthened by the standard core-kernel clause |
-| `thm-finite-index-core-bound-and-finite-overgroups` | ai-altered | ai-altered | C Theorem 6.8 plus P first isomorphism and finite symmetric-group cardinality; the explicit divisibility by \(n!\) strengthens Conrad's finite-index conclusion |
+| `def-core-of-a-subgroup` | literature-derived | not-applicable | standard intersection-of-conjugates convention recorded in C's finite-index subgroup treatment and adapted to expose the coset-action kernel |
+| `lem-core-is-largest-normal-subgroup-contained` | literature-derived | ai-altered | standard core characterization accompanying the coset-action kernel; proof was rewritten as a direct conjugate-intersection argument |
+| `thm-left-coset-action-and-its-kernel` | literature-derived | ai-altered | J Example 14.1.5, B Propositions 3.102/3.104 and C's core treatment; statement combines their standard clauses and the proof is rewritten |
+| `thm-finite-index-core-bound-and-finite-overgroups` | literature-derived | ai-altered | C Theorem 6.8 plus P first isomorphism and finite symmetric-group cardinality; the proof is rewritten and makes divisibility by \(n!\) explicit |
 | `thm-transitive-actions-are-coset-actions` | literature-derived | ai-altered | B Lemma 3.105–Theorem 3.107 |
-| `cor-faithful-transitive-actions-are-core-free-coset-actions` | ai-altered | ai-generated | direct corollary of the preceding classification and kernel theorem |
+| `cor-faithful-transitive-actions-are-core-free-coset-actions` | literature-derived | ai-altered | standard faithful-coset-action corollary of B's transitive classification and C's core-kernel treatment, rewritten from the preceding batch results |
 | `def-conjugacy-class-and-centralizer` | literature-derived | not-applicable | J §14.2 and B Corollary 3.109 |
 | `def-normalizer-of-a-subgroup` | literature-derived | not-applicable | B Corollary 3.110 |
 | `lem-centralizers-and-normalizers-are-subgroups` | literature-derived | ai-altered | standard subgroup facts needed before their indices are used |
@@ -265,7 +252,7 @@ statement opened on disk).
 | `thm-conjugates-of-proper-subgroup-do-not-cover-finite-group` | literature-derived | ai-altered | C Theorem 6.10; the first proof is repaired at the one-conjugate boundary by the uniform bound \(1+[G:N_G(H)](|H|-1)<|G|\) |
 | `thm-class-equation` | literature-derived | ai-altered | J §14.2 opening result |
 | `def-finite-p-group` | literature-derived | not-applicable | C §§4–5; includes the trivial group by allowing exponent zero |
-| `lem-subgroups-of-finite-p-groups-are-p-groups` | ai-altered | ai-generated | proof-decomposition lemma from P Lagrange and unique prime factorisation |
+| `lem-subgroups-of-finite-p-groups-are-p-groups` | literature-derived | ai-altered | standard subgroup clause used throughout C's finite \(p\)-group treatment; proof is decomposed through P Lagrange and unique prime factorisation |
 | `cor-index-p-subgroups-of-finite-p-groups-are-normal` | literature-derived | ai-altered | C Corollary 6.4; proof is rebuilt from the new core factorial bound rather than depending on deferred Theorem 6.2 |
 | `thm-p-group-fixed-point-congruence` | literature-derived | ai-altered | C Theorem 4.1 |
 | `cor-p-group-action-has-a-fixed-point` | literature-derived | ai-altered | C Corollary 4.2 |
@@ -278,20 +265,20 @@ statement opened on disk).
 | `thm-jordans-derangement-theorem` | literature-derived | ai-altered | C Theorem 6.6; proof rewritten without division from the integral Cauchy–Frobenius identity |
 | `ex-left-regular-action-is-free-and-transitive` | literature-derived | ai-altered | J Example 14.1.3 |
 | `cex-faithful-transitive-action-need-not-be-free` | ai-altered | ai-generated | B's natural symmetric-group action sharpened into the exact implication counterexample |
-| `cex-free-action-need-not-be-transitive` | ai-generated | ai-generated | checkable disjoint-union construction; it is a leaf and no item depends on it |
+| `cex-free-action-need-not-be-transitive` | ai-altered | ai-generated | standard disjoint-union-of-regular-orbits construction adapted to the exact implication boundary; the verification is a local finite calculation |
 | `ex-rotations-of-a-square-on-its-vertices` | ai-altered | ai-generated | source-backed square rotation action written as translation on \(\mathbb Z/4\) |
-| `ex-nonfaithful-coset-action-of-z-six` | ai-generated | ai-generated | finite check of the core-kernel theorem; it is a leaf |
+| `ex-nonfaithful-coset-action-of-z-six` | ai-altered | ai-generated | the standard non-core-free coset-action pattern is specialized to \(\mathbb Z/6\); the verification is a local finite calculation |
 | `ex-class-equation-of-s-three` | literature-derived | ai-altered | J Example 14.12; the six permutations and all needed conjugations are recomputed from P symmetric-group definitions and the finite-bijection count |
 | `cex-s-three-has-trivial-center` | ai-altered | ai-generated | J Example 14.12 repurposed as the exact boundary witness for the finite-p-group centre theorem |
 | `ex-class-equation-of-the-dihedral-group-of-order-eight` | literature-derived | ai-altered | J Example 14.13; the batch item reconstructs the order-eight subgroup from P symmetric-group, subgroup and power machinery |
 | `cex-groups-of-order-p-cubed-need-not-be-abelian` | ai-altered | ai-generated | the preceding batch-owned square-group construction is repurposed as the exact order-\(2^3\) boundary witness for the order-\(p^2\) theorem |
 | `ex-conjugate-subgroups-and-normalizers-in-s-three` | literature-derived | ai-altered | B Example 3.111/Corollary 3.110 |
-| `ex-fixed-point-congruence-for-an-action-of-z-two` | ai-generated | ai-generated | five-point finite witness; it is a leaf |
+| `ex-fixed-point-congruence-for-an-action-of-z-two` | ai-altered | ai-generated | the source fixed-point-congruence pattern is specialized to a five-point involution; the verification is a local finite calculation |
 | `cex-fixed-point-congruence-fails-without-p-group-hypothesis` | ai-altered | ai-generated | natural \(S_3\)-action cross-checked against the retained class-equation computation; \(3\not\equiv0\pmod2\) gives the exact failed conclusion |
 | `cex-cauchys-theorem-does-not-extend-to-composite-divisors` | literature-derived | ai-altered | A4C opening and Theorem 1; direct index-two normality/conjugation proof is restated in house style |
 | `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | literature-derived | ai-altered | J §14.3 opening problem, using the preceding batch-owned square-group construction and a complete fixed-count table |
 | `ex-binary-necklaces-of-length-four` | literature-derived | ai-altered | standard Cauchy–Frobenius rotation count, cross-checked by its four fixed counts |
-| `cex-orbit-count-is-not-set-size-divided-by-group-order` | ai-generated | ai-generated | direct leaf counterexample derived from P's singleton trivial action |
+| `cex-orbit-count-is-not-set-size-divided-by-group-order` | ai-altered | ai-generated | the naive quotient claim is specialized to P's singleton trivial action; the verification is a local one-orbit calculation |
 
 ### Generated-statement truth-risk checks completed at scaffold time
 
@@ -558,9 +545,10 @@ left stale, the later pages will mint duplicate IDs or duplicate statements.
   shared-identity union bound.
 - **R2 — Conrad Theorem 6.9:** retained as `out-of-scope`, but replaced the
   invalid “not consumed here” reason. It is a general finite-index-subgroup
-  closure theorem belonging with subgroup intersections and index calculus on
-  the real `monoids-groups-and-subgroups` page; its statement and coset-pair
-  proof are independent of action-specific structure.
+  closure theorem belonging in a future enrichment of
+  `cosets-and-lagranges-theorem`, where index multiplicativity is already
+  developed; its statement and coset-pair proof are independent of
+  action-specific structure.
 - **Remaining Conrad §6 results:** Theorem 6.2, Example 6.3 and Corollary 6.5
   remain deferred with result-specific Sylow-page reasons, and Remark 6.7
   remains out of scope because its prime-power-order strengthening rests on the
@@ -656,3 +644,105 @@ arrays into `plan-spec.json` before the authoritative run can become green.
 Per the dispatch, `tools/gates.mjs` was not run. There is no mathematical,
 source-access, dependency, size or deliverable blocker in the four batch-8
 artifacts; the only remaining handoff is the orchestrator-owned spec sync.
+
+## 13. Step-5 authoring record
+
+This section supersedes the step-4 continuity checkpoint and its then-current
+spec-sync handoff. Step 4 subsequently synchronized the repaired manifests and
+cleared the run-wide plan gate, as recorded in `research/frontier-10-RESUME.md`.
+
+### Authored corpus and publication staging
+
+All 47 manifest IDs were authored: 31 A-page items and 16 B-page items. There
+was no drop, rename or merge, so every `included` and `inline` coverage row still
+names an item that exists. The eventual enriched A page has 37 items, below the
+hard limit of 60; no split or pruning decision is needed. Every new item is
+`status: draft`, `origin: session`, and has both component provenance fields.
+The corrected 47-row rationale table in §4 is the per-item provenance ledger:
+7 definitions are `literature-derived/not-applicable`, 31 proof-bearing items
+are `literature-derived/ai-altered`, and 9 diagnostic constructions are
+`ai-altered/ai-generated`.
+
+The two published page files were left unchanged. Their publish-time list edits
+and the replacement A-page summary are staged in
+`research/frontier-10-published-amendments.md`; the B page retains no authored
+summary body. That amendment also records, but does not duplicate, the two-item
+re-home already applied at step 4.
+
+### Authored dependency and strategy ledger
+
+Four proofs exposed prerequisites that were implicit in the adjudicated baseline
+and therefore had to be named rather than hand-waved:
+
+- `cor-index-p-subgroups-of-finite-p-groups-are-normal` adds `thm-lagrange` to
+  license the order quotient used to prove the core index is a power of (p).
+- `cor-groups-of-order-p-squared-are-abelian` and
+  `thm-normal-subgroups-of-finite-p-groups-meet-the-center` each add
+  `lem-subgroups-of-finite-p-groups-are-p-groups` to license the subgroup-order
+  exponents used in their case splits and congruences.
+- `thm-cauchys-theorem-for-finite-groups` adds `def-finite-p-group` to license
+  the assertion that the additive group of (mathbb Z/p), once shown to have
+  (p) elements, is the acting finite (p)-group.
+
+No baseline dependency was removed. The manifest strategy label
+`double-counting` is not in the frontmatter/precheck strategy vocabulary, so it
+was normalized to `direct` on
+`thm-cauchy-frobenius-orbit-counting`,
+`ex-two-colourings-of-a-square-up-to-dihedral-symmetry`, and
+`ex-binary-necklaces-of-length-four`; each proof still performs the specified
+fixed-pair count. Titles, IDs, kinds and reading order are unchanged.
+
+The proof-contract file was regenerated from the authored Facts & Assumptions
+and numbered steps. It scopes exactly the 40 proof-bearing items, gives exact
+item/section citations, exact step inputs, and anchored dispositions for all
+eight boundary categories. Definitions are outside proof scope by design.
+
+### Boundary dispositions
+
+- Empty acted-on sets are admitted by the fixed-point congruence and
+  Cauchy–Frobenius identity; Jordan's theorem separately assumes (|X|>1).
+- The trivial group is a finite (p)-group through exponent (0), whereas the
+  centre and normal-subgroup-intersection theorems state their nontriviality
+  hypotheses explicitly.
+- Singleton orbits, trivial stabilisers, the regular action, and trivial actions
+  are included in orbit–stabiliser; the faithful/core-free corollary proves both
+  directions rather than relying on a one-way implication.
+- The class equation permits an empty list of noncentral representatives. The
+  subgroup non-covering proof covers both (H=\{e\}) and the one-conjugate case
+  of a proper normal subgroup.
+- The (p)-group arguments include the endpoint (p=2). Cauchy's cyclic-shift
+  proof treats two-tuples without commuting their factors and proves that a
+  nonidentity fixed tuple has order exactly (p).
+- The diagnostic leaves compute every claimed failure: (Z(S_3)=\{e\}), a
+  free two-orbit action, the nonfaithful (mathbb Z/6) coset action, the
+  nonabelian order-(2^3) square group, the non-(p)-group fixed-point failure,
+  and the absence of an index-two subgroup of (A_4).
+- The Burnside tables are complete: square-colouring fixed counts
+  (16,2,2,4,8,8,4,4) sum to (48=8\cdot6), and necklace fixed counts
+  (16,2,4,2) sum to (24=4\cdot6). The singleton trivial action separately
+  refutes the naive quotient (|X|/|G|).
+- No ordered interval, analytic endpoint or nonempty-choice issue occurs; every
+  chosen point, representative or generator is supplied by the Given or chosen
+  only after nonemptiness is established.
+
+### Harvest yield and confidence boundary
+
+The checklist remains exact at 66 harvested results: 41 `included` rows (33
+source results plus 8 canonical requirements), 8 `inline`, 4
+`already-published`, 5 `deferred`, and 8 `out-of-scope`. All thirteen declines
+have result-specific homes or depth reasons in §3; none uses a missing local
+lemma as an excuse. Alpha's L2 correction is now reflected in both coverage and
+these notes: Conrad Theorem 6.9 routes to a future enrichment of
+`cosets-and-lagranges-theorem`.
+
+The four source treatments and exact locators come from this Beta's settled
+step-2/3 harvest, preserved in the coverage artifact. During this return pass,
+all cited published dependency statements were re-opened on disk; the attempted
+fresh web refetch returned no usable payload, so no claim of a new source fetch
+is made. This is not a deliverable blocker because the durable harvest includes
+the source URLs, result locators and dispositions. No judge or independent-reader
+verdict is claimed at step 5; those remain step-6 work.
+
+There is no mathematical, size, source, dependency, or artifact blocker. The
+individual prescribed gate receipts are recorded in §14 after the final run;
+the aggregate `tools/gates.mjs` wrapper was deliberately not invoked.

@@ -22,7 +22,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Theorem 8.3.8"
+    - title: "William F. Trench, Introduction to Real Analysis, Section 3.4"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -47,6 +47,6 @@ Suppose $\int_a^\infty f$ converges and $g:[a,\infty)\to\mathbb R$ is bounded, m
 
 **Proof technique:** direct.
 
-1.1 By [L1], $g(x)\to L$ for some finite $L$. If $g$ is nonincreasing, put $h=g-L$; if it is nondecreasing, put $h=L-g$. In either case $h\ge0$, $h$ is nonincreasing toward the singular end, and $h\to0$. [L1]
+1.1 Suppose first that $g$ is nondecreasing and let $L$ be the supremum of its bounded range. Given $\varepsilon>0$, the definition of supremum gives $x_0$ with $L-\varepsilon<g(x_0)\le L$; monotonicity then gives $L-\varepsilon<g(x)\le L$ for every $x\ge x_0$, so $g(x)\to L$. The infimum argument handles a nonincreasing $g$. If $g$ is nonincreasing put $h=g-L$; if it is nondecreasing put $h=L-g$. In either case $h\ge0$, $h$ is nonincreasing toward the singular end, and $h\to0$. [L1]
 
 2.1 The primitive of $f$ is bounded by [L2], so [L3] makes $\int fh$ converge. Since $fg=Lf\pm fh$, linearity [L4] and convergence of $\int f$ prove convergence of $\int fg$. The oriented endpoint variants are identical. [L2, L3, L4] ∎

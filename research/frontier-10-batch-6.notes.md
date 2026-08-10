@@ -410,3 +410,151 @@ Alpha's §9 finding is accepted in full.
 3. The previously silent Hales–Jewett stop now has four explicit `deferred` rows in a supplementary Leader §1.3 source slice, and Rado's theorem has its own `deferred` row in a supplementary Leader §2.1 slice. These are whole adjacent subjects, not results declined for want of a local prerequisite.
 
 The Ramsey A page remains at 21 items, so the 60-item split contingency does not fire. The B page is 8 items. Both new items are proof-bearing leaves, are present in the proof-contract scope, and cite only earlier A-page results. They introduce no external published dependency, no forward reference, and no cross-batch edge. The plane-graph pair was sufficient and was not changed in this repair.
+
+## 13. Step-5 continuity checkpoint — 2026-08-11
+
+The step-5 authoring pass is in progress on the shared branch. The 21 Ramsey A items, all 8 Ramsey B items, and all 40 plane-graph A items declared by `research/frontier-10-batch-6.pages.json` are authored as draft/session files. No page file, coverage row, or proof contract has yet been certified by the step-5 checks, and unrelated batches' working-tree changes remain untouched.
+
+The remaining authored items are the seven plane-graph B examples and counterexamples. After those files are written, the exact next actions are to assemble the four owned page files, reconcile the proof-contract JSON with every final item proof, keep the coverage ledger literal, record component-level provenance rationales and dependency deviations here, and run the seven individual step-5 commands from the dispatch. The aggregate gates wrapper remains forbidden.
+
+Four dependency deviations already require final recording: the colour-focussing lemma omits the unused strong-pigeonhole dependency; the strengthened van der Waerden theorem keeps only the focussing lemma and induction as direct dependencies; the three-connected lifting lemma directly adds face containment and two-connected face boundaries; and the edge-maximal Kuratowski-free lemma directly adds planar-side embedding and obstruction-exclusion results. These changes follow the proofs actually written and must be mirrored in the strict contracts.
+
+## 14. Component provenance rationales
+
+Each row records separate statement and proof judgments. A definition's `not-applicable` proof label means that the item makes no proof claim.
+
+### Ramsey A
+
+| Item | Statement rationale | Proof rationale |
+|---|---|---|
+| `def-ramsey-colouring-and-arrow-notation` | `literature-derived`: standard finite-colouring and arrow notation follows Leader and Fox. | `not-applicable`: this is notation and terminology. |
+| `lem-two-colour-ramsey-arrow-recursion` | `literature-derived`: the two-parameter recursion is the standard Ramsey recursion. | `ai-altered`: the textbook vertex argument is recast in the library's arrow notation and finite-cardinality conventions. |
+| `thm-finite-graph-ramsey-binomial-bound` | `literature-derived`: the binomial Ramsey bound is stated in the cited sources. | `ai-altered`: the standard Pascal induction is expanded with positive-parameter base cases. |
+| `def-off-diagonal-ramsey-number` | `literature-derived`: the least-witness definition is standard. | `not-applicable`: this is a definition backed by prior existence. |
+| `cor-ramsey-recursion-and-diagonal-upper-bound` | `literature-derived`: both the Ramsey recursion and diagonal binomial bound are standard consequences. | `ai-altered`: the source deductions are joined and the power-of-two comparison is made explicit. |
+| `thm-r-three-three-equals-six` | `literature-derived`: the first exact Ramsey number is a standard cited result. | `ai-altered`: the upper pigeonhole proof and explicit five-cycle lower witness are presented together. |
+| `thm-diagonal-ramsey-counting-lower-bound` | `literature-derived`: the stated Erdős counting bound follows the cited standard argument. | `ai-altered`: the random-colouring proof is written as finite counting with every numerical inequality exposed. |
+| `thm-finite-ramsey-for-uniform-subsets` | `literature-derived`: finite Ramsey for uniform subsets is standard. | `ai-altered`: the induction is reconstructed using finite colour-pattern vectors and the authored pair theorem. |
+| `def-uniform-ramsey-number` | `literature-derived`: the least finite uniform witness is standard notation. | `not-applicable`: this is a definition backed by the preceding theorem. |
+| `def-finitely-branching-tree-on-finite-sequences` | `ai-altered`: standard tree language is specialized to ordered finite sequences for a choice-free proof. | `not-applicable`: this item only fixes conventions. |
+| `thm-konig-infinity-lemma-for-ordered-trees` | `literature-derived`: König's infinity lemma is the cited theorem. | `ai-altered`: the proof selects the least live successor to make the ZF construction explicit. |
+| `lem-infinite-pigeonhole-on-the-naturals` | `literature-derived`: the finite-colouring conclusion is the standard infinite pigeonhole principle. | `ai-generated`: the contradiction is rebuilt from finite union and boundedness facts in this library. |
+| `thm-infinite-ramsey-on-the-naturals` | `literature-derived`: the theorem and finite-colour scope follow Leader. | `ai-altered`: the inductive thinning proof uses canonical least choices to record the ZF boundary. |
+| `cor-infinite-ramsey-for-dedekind-infinite-sets` | `ai-generated`: this explicit injection-form transfer was derived from the authored natural-number theorem. | `ai-generated`: the proof pulls back the colouring and pushes forward the homogeneous set. |
+| `cor-finite-ramsey-by-konig-compactness` | `literature-derived`: the compactness deduction by a tree of bad colourings is standard. | `ai-altered`: nodes and compatibility are spelled out using the ordered-tree convention. |
+| `thm-canonical-ramsey-theorem-for-pairs` | `literature-derived`: the four canonical alternatives are Leader's theorem. | `ai-altered`: the source thinning argument is reorganized into labelled equality-pattern stages. |
+| `lem-colour-focussing-for-arithmetic-progressions` | `ai-altered`: Leader's focusing device is isolated and strengthened to the exact extension interface used here. | `ai-altered`: the block-vector proof is reconstructed with explicit finite Ramsey witnesses. |
+| `thm-van-der-waerden-with-monochromatic-difference` | `literature-derived`: Leader states the progression-plus-difference strengthening. | `ai-altered`: the nested induction is expanded around the preceding focusing lemma. |
+| `def-van-der-waerden-number` | `literature-derived`: the least forcing interval is standard terminology. | `not-applicable`: this is a definition backed by existence. |
+| `thm-schur-monochromatic-sum` | `literature-derived`: Schur's finite monochromatic-sum theorem is standard. | `ai-altered`: the familiar difference-colouring proof is expressed with the page's finite Ramsey witness. |
+| `def-schur-number` | `ai-altered`: the standard least-witness definition is normalized to positive initial intervals and this page's variables. | `not-applicable`: this is a definition backed by Schur's theorem. |
+
+### Ramsey B
+
+| Item | Statement rationale | Proof rationale |
+|---|---|---|
+| `ex-r-three-three-both-bounds` | `literature-derived`: the six-vertex upper proof and five-cycle witness are standard examples. | `ai-altered`: both directions are relabelled and checked directly. |
+| `ex-w-three-two-equals-nine` | `literature-derived`: the exact value $W(3,2)=9$ is the cited standard example. | `ai-altered`: the lower colouring and finite upper propagation are written out rather than quoted. |
+| `ex-infinite-monotone-subsequence-by-ramsey` | `literature-derived`: the Ramsey proof of monotone subsequences is classical. | `ai-altered`: the pair colouring is aligned with the library's sequence and order definitions. |
+| `ex-infinite-convex-or-concave-subsequence-by-ramsey` | `literature-derived`: the triple-colouring application is standard. | `ai-altered`: divided-difference signs and the telescoping conclusion are exposed. |
+| `fs-two-colouring-forces-an-infinite-monochromatic-progression` | `literature-derived`: the false strengthening and its standard alternating-block obstruction come from the cited discussion. | `ai-altered`: the counter-colouring is specified and checked against every infinite progression. |
+| `cex-infinite-branching-is-not-enough-for-konig` | `ai-generated`: the decreasing-sequence tree was chosen to isolate finite branching exactly. | `ai-generated`: the level and no-branch checks are direct constructions. |
+| `cex-infinite-ramsey-fails-with-infinitely-many-colours` | `ai-altered`: Leader's left-dependent canonical form is repurposed as the finite-colour boundary test. | `ai-generated`: the three-vertex colour clash is checked directly. |
+| `ex-all-four-canonical-pair-colouring-types` | `ai-altered`: Leader's four named alternatives are converted into an explicit witness request. | `ai-generated`: simple formulas are supplied and their equality patterns verified. |
+
+### Plane graphs A
+
+| Item | Statement rationale | Proof rationale |
+|---|---|---|
+| `def-polygonal-arc-and-polygon` | `ai-altered`: Diestel's polygonal conventions are normalized to the existing path definition. | `not-applicable`: this is a definition. |
+| `def-plane-region-and-frontier` | `literature-derived`: components of complements and their frontiers are standard plane-topology definitions. | `not-applicable`: this is a definition. |
+| `lem-polygonal-ray-general-position` | `ai-altered`: Diestel's ray setup is isolated as a finite avoidance lemma. | `ai-generated`: the forbidden-direction and perturbation argument is supplied explicitly. |
+| `lem-polygonal-crossing-parity-is-locally-constant` | `ai-altered`: the parity assertion is extracted from Diestel's Jordan proof. | `ai-altered`: the source crossing argument is decomposed into local moves and parity preservation. |
+| `thm-polygonal-jordan-curve` | `literature-derived`: this is Diestel's polygonal Jordan lemma. | `ai-altered`: the ray-parity proof is expanded to cover nonemptiness, connectedness, and frontier. |
+| `lem-polygonal-arc-does-not-separate-the-plane` | `literature-derived`: the polygonal-arc complement lemma is stated by Diestel. | `ai-altered`: a thin-neighbourhood polygonal completion reduces the claim to the authored Jordan theorem. |
+| `def-plane-graph-face-and-boundary` | `ai-altered`: standard plane-graph and face definitions are specialized to finite simple polygonal drawings. | `not-applicable`: this item fixes the page's embedding convention. |
+| `lem-plane-graph-faces-are-finite-with-one-unbounded-face` | `literature-derived`: finiteness and the unique unbounded face are standard plane-graph facts. | `ai-altered`: the proof is rebuilt by successive polygonal edge insertions. |
+| `lem-face-containment-under-plane-subgraphs` | `literature-derived`: face containment under deletion is a standard embedding fact. | `ai-altered`: component maximality is written as a direct containment proof. |
+| `def-bridge-in-a-graph` | `literature-derived`: the deletion/component definition is standard. | `not-applicable`: this is a definition. |
+| `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle` | `literature-derived`: the bridge-cycle equivalence is standard. | `ai-generated`: both directions are reconstructed from path and deletion definitions. |
+| `lem-plane-edge-face-incidence` | `literature-derived`: the two-side incidence and bridge criterion follow Diestel. | `ai-altered`: local Jordan separation and the bridge equivalence are combined explicitly. |
+| `prop-plane-forest-has-one-face` | `literature-derived`: a plane forest has one face in the standard theory. | `ai-altered`: forest counts and edge-side incidence are used to expose disconnected and null cases. |
+| `lem-equal-plane-face-boundaries-force-a-cycle` | `literature-derived`: the equal-boundary obstruction is standard face theory. | `ai-altered`: the minimal closed-walk reduction and Jordan separation are detailed. |
+| `prop-face-boundaries-in-two-connected-plane-graphs` | `literature-derived`: facial boundaries in two-connected plane graphs are cycles. | `ai-altered`: repeated-vertex boundary walks are ruled out by a cut-vertex argument. |
+| `prop-face-boundaries-in-three-connected-plane-graphs` | `literature-derived`: induced nonseparating facial cycles characterize the three-connected case used here. | `ai-altered`: chords and separating deletions are handled as separate labelled steps. |
+| `def-maximal-plane-and-maximally-planar-graph` | `literature-derived`: both maximality notions are standard. | `not-applicable`: this is a definition. |
+| `prop-maximal-plane-triangulation-characterisation` | `literature-derived`: maximal plane simple graphs are triangulations under the stated order boundary. | `ai-altered`: both implications and the small-order exclusions are made explicit. |
+| `thm-euler-formula-for-connected-plane-graphs` | `literature-derived`: Euler's plane-graph formula is standard. | `ai-altered`: induction on non-tree edges uses the authored face-incidence lemma. |
+| `cor-euler-formula-for-disconnected-plane-graphs` | `ai-altered`: the usual component correction is stated with null-graph and isolated-component conventions. | `ai-generated`: components are connected by added polygonal bridges and the counts are tracked. |
+| `lem-plane-face-handshake-by-girth` | `literature-derived`: face-length double counting and the girth bound are standard. | `ai-altered`: bridge multiplicity and forest exceptions are recorded directly. |
+| `cor-planar-simple-graph-edge-bound` | `literature-derived`: the $3n-6$ planar bound is standard. | `ai-altered`: maximal completion, face counting, and disconnected cases are separated. |
+| `cor-triangle-free-planar-edge-bound` | `literature-derived`: the $2n-4$ triangle-free bound is standard. | `ai-altered`: forest and component-joining cases are retained rather than suppressed. |
+| `cor-planar-graph-has-low-degree-vertex` | `literature-derived`: the degree-at-most-five consequence is standard. | `ai-altered`: handshake and edge bounds are combined with null and small-order boundaries. |
+| `cor-k-five-and-k-three-three-are-nonplanar` | `literature-derived`: both classical nonplanarity conclusions are cited. | `ai-altered`: the two distinct edge inequalities are calculated explicitly. |
+| `cor-planar-graphs-have-no-kuratowski-subdivision` | `literature-derived`: subdivisions of either obstruction remain nonplanar. | `ai-altered`: planarity inheritance and suppression are stated in the library's subdivision language. |
+| `prop-maximally-planar-edge-characterisation` | `literature-derived`: maximal planarity is characterized by the sharp Euler edge count. | `ai-altered`: maximal completion and equality are used for both directions. |
+| `lem-kuratowski-minors-are-topological-minors` | `literature-derived`: for $K_5$ and $K_{3,3}$ the minor and subdivision obstructions coincide. | `ai-altered`: minimal branch trees and degree constraints are expanded from Diestel's argument. |
+| `lem-three-connected-graph-has-a-contractible-edge` | `literature-derived`: the contractible-edge lemma is Diestel's standard reduction. | `ai-altered`: the maximal-fragment argument is aligned with the published Whitney-Menger form. |
+| `lem-three-connected-kuratowski-free-is-planar` | `literature-derived`: the three-connected lifting lemma follows Diestel's Kuratowski proof. | `ai-altered`: contraction, facial placement, and obstruction cases are exposed separately. |
+| `lem-separation-augmentation-for-kuratowski-free-graphs` | `literature-derived`: adding an edge across a small separation is Diestel's augmentation device. | `ai-altered`: both separation orders and obstruction preservation are written out. |
+| `lem-edge-maximal-kuratowski-free-is-three-connected` | `literature-derived`: edge-maximal obstruction-free graphs are the standard reduction target. | `ai-altered`: the augmentation induction and planar-side gluing are expanded with direct dependencies. |
+| `thm-kuratowski-wagner-planarity-characterisation` | `literature-derived`: the subdivision and minor formulations are the classical theorem. | `ai-altered`: easy direction, maximal supergraph reduction, and obstruction equivalence are composed explicitly. |
+| `def-plane-dual-multigraph` | `literature-derived`: face vertices and crossing edges are the standard plane dual definition. | `not-applicable`: this is a definition, including loop and parallel-edge conventions. |
+| `thm-plane-dual-exists-and-double-dual-recovers-primal` | `literature-derived`: reciprocal plane duality is stated by Diestel and Erickson. | `ai-altered`: polygonal corridors and the primal-to-double-dual incidence map are constructed explicitly. |
+| `thm-six-colour-theorem-for-planar-graphs` | `literature-derived`: the six-colour theorem is the standard low-degree induction. | `ai-altered`: disconnected, isolated, and extension cases are made explicit. |
+| `def-kempe-chain` | `literature-derived`: two-colour components and Kempe chains are standard. | `not-applicable`: this is a definition. |
+| `lem-kempe-component-colour-swap` | `literature-derived`: safe swapping on a Kempe component is standard. | `ai-altered`: every endpoint-colour case is checked directly. |
+| `lem-alternating-kempe-paths-cannot-both-occur` | `ai-altered`: the standard planar Kempe separation fact is isolated at the exact cyclic-neighbour interface. | `ai-altered`: the proof is rebuilt using the authored polygonal Jordan theorem. |
+| `thm-five-colour-theorem` | `literature-derived`: this is the classical five-colour theorem. | `ai-altered`: low-degree induction and the alternating Kempe case are integrated with explicit boundaries. |
+
+### Plane graphs B
+
+| Item | Statement rationale | Proof rationale |
+|---|---|---|
+| `ex-euler-formula-on-a-tree-cycle-and-k-four` | `literature-derived`: these are the standard first checks of Euler's formula. | `ai-altered`: all vertex, edge, and face counts are written out, including the one-vertex tree. |
+| `cex-k-four-is-planar-but-not-three-colourable` | `ai-altered`: the familiar $K_4$ observation is framed specifically as the three-colour boundary. | `ai-generated`: an explicit plane embedding and colouring lower bound are checked directly. |
+| `ex-petersen-graph-nonplanar-by-kuratowski` | `literature-derived`: Petersen nonplanarity via a Kuratowski obstruction is standard. | `ai-altered`: the subset-labelled deletion and all nine subdivided connections are listed explicitly. |
+| `ex-one-planar-graph-two-nonisomorphic-duals` | `literature-derived`: embedding-dependent nonisomorphic duals are standard examples in Bondy-Murty. | `ai-altered`: an asymmetric theta graph with a bridge is constructed and distinguished by dual degree multisets. |
+| `ex-five-colouring-by-a-kempe-swap` | `ai-altered`: the general five-colour step is converted into a minimal worked wheel configuration. | `ai-generated`: the singleton Kempe component, swap, and extension colour are computed explicitly. |
+| `cex-k-three-three-satisfies-the-planar-edge-bound` | `literature-derived`: $K_{3,3}$ is the standard witness that the Euler edge bound is not sufficient. | `ai-altered`: the inequality and nonplanarity are verified in separate steps. |
+| `cex-a-wild-arc-drawing-is-not-a-plane-graph` | `ai-generated`: the oscillating graph arc was selected to test the page's polygonal convention without denying abstract planarity. | `ai-generated`: continuity, injectivity, nonpolygonality, and the straight-edge alternative are all checked directly. |
+
+## 15. Step-5 reconciliation, yield, and boundaries
+
+All 76 manifest ids were authored with their settled kinds, titles, and reading order: Ramsey A has 21 items, Ramsey B has 8 examples, plane graphs A has 40 items, and plane graphs B has 7 examples. Both A pages remain below the 60-item stop boundary. No item was dropped, renamed, or merged during authoring, so every `included` coverage row remains literally true.
+
+The 95 harvested headings now have these dispositions: 69 `included`, 1 `already-published`, 15 `inline`, 7 `deferred`, and 3 `out-of-scope`. The direct included-heading yield is therefore 69 of 95, or 72.6 percent. The 76 authored items exceed the count of distinct source headings because the proof machinery includes normalized definitions, extracted lemmas, corollaries, and boundary examples; conversely, some harvested headings merge into one authored result.
+
+Ten items changed their baseline direct-dependency lists to match the proof actually written:
+
+| Item | Change | Rationale |
+|---|---|---|
+| `lem-colour-focussing-for-arithmetic-progressions` | Dropped `thm-the-strong-pigeonhole-principle`. | The block-vector proof uses a finite Ramsey witness on identical colour vectors, not pigeonhole directly. |
+| `thm-diagonal-ramsey-counting-lower-bound` | Added `lem-integer-part`. | The final strict inequality directly uses the defining floor inequality for $\lfloor2^{k/2}\rfloor$. |
+| `thm-van-der-waerden-with-monochromatic-difference` | Dropped `thm-the-strong-pigeonhole-principle`, `thm-product-rule`, and `def-nat-order`. | These are internal to the focusing lemma; the theorem itself directly uses that lemma and induction. |
+| `thm-infinite-ramsey-on-the-naturals` | Added `thm-well-ordering-principle`. | The ZF recursion canonically selects least extendable naturals and the least index of an infinite colour class. |
+| `lem-polygonal-arc-does-not-separate-the-plane` | Added `def-polygonal-path-and-polygonal-connectedness` and `thm-polygonal-jordan-curve`. | Its fact ledger directly cites polygonal paths, and its thin-neighbourhood completion directly invokes polygonal Jordan separation. |
+| `lem-three-connected-kuratowski-free-is-planar` | Added `lem-face-containment-under-plane-subgraphs` and `prop-face-boundaries-in-two-connected-plane-graphs`. | The contraction-lifting step directly places the split vertex using face containment and a facial boundary cycle. |
+| `lem-edge-maximal-kuratowski-free-is-three-connected` | Added `lem-three-connected-kuratowski-free-is-planar`, `cor-planar-graphs-have-no-kuratowski-subdivision`, and `lem-kuratowski-minors-are-topological-minors`. | The separation induction directly embeds both sides and excludes the two equivalent obstruction forms. |
+| `thm-plane-dual-exists-and-double-dual-recovers-primal` | Added `def-multigraph-loop-and-digraph`. | The construction directly invokes loop and parallel-edge incidence in the dual. |
+| `ex-one-planar-graph-two-nonisomorphic-duals` | Added `def-graph-adjacency-incidence-neighbourhood-and-degree`. | The nonisomorphism certificate directly compares dual degree multisets. |
+| `ex-euler-formula-on-a-tree-cycle-and-k-four` | Added `thm-forest-edge-component-count`. | The tree check directly uses the exact $n-1$ edge count before substituting in Euler's formula. |
+
+The strict proof-contract scope contains 63 proof-bearing items and 504 standard boundary dispositions. Every case is disposed: 224 are checked in a numbered step or the item statement and 280 are specifically not applicable.
+
+| Boundary | Checked | Not applicable |
+|---|---:|---:|
+| empty | 10 | 53 |
+| zero | 30 | 33 |
+| one | 39 | 24 |
+| degenerate | 59 | 4 |
+| endpoints | 40 | 23 |
+| nonempty-choice | 25 | 38 |
+| iff-forward | 11 | 52 |
+| iff-reverse | 10 | 53 |
+
+## 16. Step-5 validation receipts
+
+Batch-scoped validation is green: all 63 proof-bearing items pass precheck; all 80 owned item/page files pass renderer parsing and delimiter checks; scoped prose has zero errors; content policy checks 76 items with zero errors or warnings; the coverage checklist checks 95 headings with zero errors or warnings; and the strict proof contract checks 63 of 63 items with zero errors or warnings. Dependency-check output filtered against all 76 ids has no batch-6 finding.
+
+The final exact repository-wide receipts are also green. `precheck.mts` checks 2,675 proof-bearing files with zero failures. `depcheck.mjs` reports no cycles, all references resolved, and no draft items on published pages. `rendercheck.mjs` checks 3,689 files with no renderer error. `prosecheck.mjs` has zero errors; its 583 heuristic warnings are repository-wide advisories. The scoped content-policy, coverage, and strict-contract commands each report zero errors and zero warnings. The aggregate gates wrapper was not run, exactly as the dispatch requires. There is no blocker.

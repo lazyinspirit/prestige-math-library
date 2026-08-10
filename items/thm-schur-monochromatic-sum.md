@@ -33,13 +33,14 @@ For every positive number $c$ of colours there is a positive natural $N$ such th
 
 [L1] For all positive $s,t$, $\binom{s+t-2}{s-1}\to(s,t)^2$ ([[thm-finite-graph-ramsey-binomial-bound]]).
 
+
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Iterating [L1] gives a finite $M$ such that every $c$-colouring of the pairs of an $M$-element set has a monochromatic triangle: separate one colour from the remaining colours, use [L1] with target $3$ for the first colour and with a recursively chosen target for the others, and continue through the finite colour list. [L1]
 
-1.2 Colour the edge $\{i,j\}$ of the ordered vertex set $\{0,\ldots,M-1\}$, with $i<j$, by the given colour of the positive difference $j-i$. Step 1.1 gives a monochromatic triangle $i<j<k$. [step 1.1]
+2.1 Colour the edge $\{i,j\}$ of the ordered vertex set $\{0,\ldots,M-1\}$, with $i<j$, by the given colour of the positive difference $j-i$. Step 1.1 gives a monochromatic triangle $i<j<k$. [step 1.1]
 
-2.1 Put $x=j-i$, $y=k-j$ and $z=k-i$. These are positive, the edge colouring says they have one original colour, and arithmetic gives $x+y=z$. Taking $N=M-1$ contains all three differences. [step 1.2, algebra] ∎
-
+3.1 Put $x=j-i$, $y=k-j$ and $z=k-i$. These are positive, the edge colouring says they have one original colour, and arithmetic gives $x+y=z$. Taking $N=M-1$ contains all three differences. [step 2.1, algebra] ∎

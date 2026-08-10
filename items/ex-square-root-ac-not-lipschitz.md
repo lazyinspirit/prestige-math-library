@@ -42,7 +42,7 @@ The function $f(x)=\sqrt{x}$ is absolutely continuous on $[0,1]$, although its s
 
 **Proof technique:** direct.
 
-1.1 Let $[u_j,v_j]$ be pairwise nonoverlapping subintervals. Fix $r>0$. The intervals meeting $[0,r]$ contribute at most $\sqrt r$ in total, because $\sqrt{x}$ is increasing and their increments telescope after gaps are filled. On intervals with $u_j\ge r$, [given]
+1.1 Let $[u_j,v_j]$ be pairwise nonoverlapping subintervals. Fix $r>0$ and split at $r$ the one family interval, if any, that crosses $r$; monotonicity makes this split preserve its endpoint increment. The resulting pieces contained in $[0,r]$ contribute at most $\sqrt r$ in total, because their increments telescope after gaps are filled. On every remaining interval, whose left endpoint satisfies $u_j\ge r$, [given]
 $$\sqrt{v_j}-\sqrt{u_j}=\frac{v_j-u_j}{\sqrt{v_j}+\sqrt{u_j}}\le\frac{v_j-u_j}{2\sqrt r}.$$
 
 1.2 Given $\varepsilon>0$, choose $r>0$ with $\sqrt r<\varepsilon/2$, then require $\sum_j(v_j-u_j)<\varepsilon\sqrt r$. Steps 1.1 and 1.2 make the total endpoint increment less than $\varepsilon$, proving absolute continuity by [L2]. [L1, L2]

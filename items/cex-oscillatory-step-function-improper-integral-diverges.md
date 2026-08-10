@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-improper-integral-at-infinity,
        thm-nonnegative-improper-integral-bounded-primitive-criterion,
        thm-additivity-over-subintervals, lem-alternating-sequence,
@@ -20,7 +22,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Section 8.3"
+    - title: "William F. Trench, Introduction to Real Analysis, Section 3.4"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---
@@ -43,8 +45,9 @@ Define $f(x)=(-1)^k$ on $[k,k+1)$ for every nonnegative integer $k$. Its truncat
 
 **Proof technique:** counterexample.
 
-1.1 For a positive integer $N$, additivity gives [given]
+1.1 For a positive integer $N$, additivity gives the displayed sum, whose parity values follow from the alternating sequence. [L1, L2]
 $$\int_0^Nf=\sum_{k=0}^{N-1}(-1)^k,$$
-which equals one for odd $N$ and zero for even $N$. Thus the integer truncations are bounded but have no limit.
+which equals one for odd $N$ and zero for even $N$ by [L2]. Thus the integer truncations are bounded but have no limit. [L1, L2]
+If $N\le R<N+1$, the remaining integral has absolute value at most one, so the full truncation primitive is bounded as asserted.
 
 2.1 An improper limit would restrict to the same limit along all integer truncations, contradicting step 1.1. The example changes sign, so it does not satisfy the nonnegativity hypothesis in [L3] and shows that hypothesis cannot be deleted. [L3, step 1.1] ∎

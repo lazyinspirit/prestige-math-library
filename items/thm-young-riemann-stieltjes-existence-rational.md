@@ -22,7 +22,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "L. C. Young, An inequality of the Hölder type, connected with Stieltjes integration"
+    - title: "Nourdin, Nualart, and Peccati, The Breuer–Major theorem in total variation: improved rates under minimal regularity, Section 2.2"
       url: "https://alea.math.cnrs.fr/articles/v16/16-23.pdf"
 pipeline_run: null
 ---
@@ -49,8 +49,8 @@ $$\int_a^b f\,dg+\int_a^b g\,df=f(b)g(b)-f(a)g(a).$$
 
 **Proof technique:** direct.
 
-1.1 The dyadic left-endpoint sums for $\int f\,dg$ are Cauchy by the summable estimate in [L1], so they converge by [L2]. Insert the points of any sufficiently fine partition into a sufficiently fine dyadic partition. The general insertion estimate in [L1] shows that the two left-endpoint sums differ by a quantity tending to zero with their meshes. [L1, L2]
+1.1 Given two partitions $P,Q$, let $R$ be their common refinement. By [L1], the left sum over $R$ differs from those over $P$ and $Q$ by at most $C_rK_fK_g(b-a)(\lVert P\rVert^{r-1}+\lVert Q\rVert^{r-1})$. This tends to zero with the two meshes, so the left-endpoint sums form a Cauchy family and converge by [L2]. [L1, L2]
 
-2.1 Replacing a left endpoint $t_i$ by an arbitrary tag $\xi_i$ changes the $i$th term by at most $K_fK_g|t_{i+1}-t_i|^{p+q}$. Since the sum of these powers is at most $(b-a)\lVert P\rVert^{p+q-1}$, every fine tagged sum has the dyadic limit. Thus [L3] gives $\int f\,dg$; interchanging $f$ and $g$ gives $\int g\,df$. [step 1.1, L1, L2, L3, L4]
+2.1 Replacing a left endpoint $t_i$ by an arbitrary tag $\xi_i$ changes the $i$th term by at most $K_fK_g|t_{i+1}-t_i|^r$. Their sum is at most $K_fK_g(b-a)\lVert P\rVert^{r-1}$, so every fine tagged sum has the left-sum limit from step 1.1. Thus [L3] gives $\int f\,dg$; interchanging $f$ and $g$ gives $\int g\,df$. [step 1.1, L1, L2, L3, L4]
 
 3.1 On every partition, the right-endpoint sum for $f\,dg$ plus the left-endpoint sum for $g\,df$ telescopes exactly to $f(b)g(b)-f(a)g(a)$. Passing to the two limits established in step 2.1 proves the formula. [step 2.1, L3] ∎

@@ -21,7 +21,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "William F. Trench, Introduction to Real Analysis, Theorem 8.3.4"
+    - title: "William F. Trench, Introduction to Real Analysis, Theorem 3.4.9"
       url: "https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf"
 pipeline_run: null
 ---

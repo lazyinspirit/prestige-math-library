@@ -1,6 +1,6 @@
-# Beta-frontier-10-4 — scaffold notes (steps 1–2)
+# Beta-frontier-10-4 — scaffold and Step-5 authoring notes
 
-This is the durable reasoning record for orders 163–166. The only repo outputs in scope are the batch manifest, this note, the coverage harvest, and the proof-contract file. No published item, library page, normative document, or plan specification was edited.
+This is the durable reasoning record for orders 163–166. Step 5 authored the 81 manifest-declared item files and the four draft page files, then reconciled this note, the coverage harvest, and the proof-contract file. No published artifact, normative document, plan specification, or out-of-batch item was edited.
 
 ## 1. Result and reading order
 
@@ -15,7 +15,9 @@ The batch has 81 items. Both A pages are below the hard 60-item limit, so **no s
 
 All same-page A edges point backward. A B item depends only on its A page, an earlier page, or an earlier item on the same B page. There are no cross-batch edges and no forward load-bearing references.
 
-## 2. Exact prose-scaffold amendments
+## 2. Historical Step-2 prose-scaffold proposal
+
+This section preserves the Step-2 plan-file proposal. Step 5 refined the summaries into direct mathematical prose after the settled items were authored; the current A-page bodies are authoritative. Neither plan prose file was writable or edited at Step 5.
 
 ### 2.1 `research/plan-realanalysis-pages.md`
 
@@ -73,100 +75,75 @@ No mathematical dependency changes: these are stale pre-renumber annotations. In
 
 ## 3. Canonical-coverage harvest
 
-The machine harvest enumerates 90 source/canonical headings. Its dispositions are:
+The reconciled checklist enumerates **100** source/canonical headings. BV/Riemann–Stieltjes has 33 included, 6 inline, 5 already published, 3 deferred, and 2 out of scope. Improper integrals has 35 included, 2 inline, 12 deferred, and 2 out of scope. The combined authored yield is therefore **76 incorporated** (68 included + 8 inline), with **5 already published** and **19 declined** (15 deferred + 4 out of scope). Every `included` row names an item that exists in this batch.
 
-- BV/RS: 34 included, 2 inline, 2 already published, 2 out of scope.
-- Improper integrals: 35 included, 2 inline, 12 deferred, 2 out of scope.
-- Combined yield: **73 incorporated** (69 included + 4 inline), **2 already published**, and **16 declined**.
+The initial Trench dispositions for the finite-step integrator and an unbounded Stieltjes-integrable function were corrected to explicit authored B items, `ex-finite-step-integrator-weighted-jump-sum` and `ex-unbounded-integrand-stieltjes-integrable`. The Rudin harvest was also corrected from a secondary syllabus pointer to the primary Chapter 6 numbered treatment, 6.1–6.22. Three Rudin results are honestly deferred rather than overstated: unrestricted Darboux interval additivity in 6.12(c), the infinite pure-step series theorem in 6.16, and the full merely-Riemann-integrable derivative reduction in 6.17. The authored page proves, respectively, the BV/continuity-at-cut mesh theorem, the finite-step formula, and the continuously differentiable special case settled by the manifest.
 
-The initial Trench dispositions for the finite-step integrator and an unbounded Stieltjes-integrable function were not defensible as declines. They are now explicit B items, `ex-finite-step-integrator-weighted-jump-sum` and `ex-unbounded-integrand-stieltjes-integrable`.
-
-Every remaining decline rests on a later whole function theory or a whole later subject, not on a locally buildable missing lemma:
-
-| page | disposition | source heading | exact scope reason |
-|---|---|---|---|
-| bounded-variation-and-riemann-stieltjes | out-of-scope | Christopher Heil, Absolute Continuity and the Banach–Zaretsky Theorem: Lemma 14: an indefinite Lebesgue integral is absolutely continuous, differentiable a.e., and has integrable derivative | This named result is a Lebesgue-integration theorem using null sets and almost-everywhere differentiation, a whole subject not yet present in the declared prerequisite closure. |
-| bounded-variation-and-riemann-stieltjes | out-of-scope | canonical coverage pass: Lebesgue–Stieltjes measure correspondence and a.e. BV differentiation | Both conclusions require the measure, null-set, and almost-everywhere machinery of a later subject, not a missing elementary lemma that this page could locally build. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.4: a logarithmic endpoint kernel | Its statement and evaluation use the logarithm, whose canonical construction and integral identity occur on the later logarithm page rather than in this page's prerequisites. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.5: divergence of the cosine integral by oscillation | The example requires the trigonometric-function development scheduled after this page; the general nonconvergence mechanism is already represented by the step-function counterexample. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.6: improper integrability of log x at zero | The logarithm is not yet defined at order 165, so this exact example belongs on the later logarithm and exponential examples page. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.13: absolute convergence range for a trigonometric power kernel | The exact kernel uses sine and its periodic integral, material developed on the later trigonometric pages; the absolute-comparison mechanism itself is included here. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.14: conditional convergence of a trigonometric power kernel | The source's witness depends on sine, cosine, and their antiderivatives, all scheduled after this page; a checkable alternating-step witness supplies conditional convergence now. |
-| improper-integrals | deferred | William F. Trench, Introduction to Real Analysis: Example 3.4.15: divergence of x^q sin x | This exact oscillatory witness requires the later trigonometric function theory; its source-named abstract divergence transfer theorem is nevertheless built here. |
-| improper-integrals | deferred | John K. Hunter, The Riemann Integral: Example 1.76: Gaussian integral convergence and its double-integral evaluation | The Gaussian uses the later exponential page, while its exact evaluation uses double integration and polar coordinates, a multivariable subject not yet reached. |
-| improper-integrals | deferred | John K. Hunter, The Riemann Integral: Example 1.77: absolute convergence of sin x/(1+x^2) | The rational comparison is built here, but this exact numerator requires the sine function and its bound from the later trigonometric development. |
-| improper-integrals | deferred | John K. Hunter, The Riemann Integral: Example 1.78: conditional convergence of the sine integral | The exact witness and value require later trigonometric and complex-analytic machinery; conditional convergence is represented now by an alternating-step integral. |
-| improper-integrals | out-of-scope | John K. Hunter, The Riemann Integral: Example 1.79: Fresnel integral | Its exact value and standard proof use trigonometric oscillation plus complex analysis, an entire later subject beyond this elementary improper-integral page. |
-| improper-integrals | deferred | John K. Hunter, The Riemann Integral: Example 1.83: the exponential integral Ei as an improper/principal-value integral | The exponential and logarithm used to define and analyse Ei are both constructed on later pages, so the named special function cannot yet be stated faithfully. |
-| improper-integrals | out-of-scope | John K. Hunter, The Riemann Integral: Example 1.84: Hilbert transform as a principal-value integral | The Hilbert transform belongs to harmonic analysis and needs function-space and singular-integral machinery far beyond this page's prerequisite closure. |
-| improper-integrals | deferred | canonical coverage pass: Full real-exponent p-test | Real powers are canonically defined on the later exponential/logarithm pages; this page proves the complete theorem for the rational exponents presently available. |
-| improper-integrals | deferred | canonical coverage pass: Frullani's logarithmic value log(b/a) | The convergence theorem and proper factor are built now, while identifying that factor with log(b/a) belongs to the later logarithm construction. |
-
-The declines most likely to be challenged are the full real-exponent $p$-test and the logarithmic value in Frullani's formula. The page builds the complete rational-exponent theorem and the Frullani convergence/proper-factor identity now; it defers only the claims whose canonical statements require the later real-power/logarithm construction. The trigonometric examples are likewise represented by the abstract Dirichlet/divergence results and step-function witnesses now, while their exact named functions stay on the later trigonometric pages.
+The remaining declines are recorded row by row with exact reasons in `research/frontier-10-batch-4.coverage.json`. They require later logarithm/real-power, trigonometric, exponential, measure-theoretic, multivariable, complex, or harmonic-analysis machinery rather than a locally buildable prerequisite. The rational $p$-test and the Frullani proper-integral factor are built now; only the full real-exponent theorem and identification of the factor with $\log(b/a)$ wait for the logarithm page.
 
 ## 4. Source ledger, locators, and licences
 
-- **[T] William F. Trench, _Introduction to Real Analysis_.** <https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf>. Read Chapter 3, Definition 3.1.5 and Exercises 3.1.13–17 (pp. 125–128), Exercises 3.2.7–10 (pp. 135–136), the proper monotone substitution theorem 3.3.18 (pp. 148–150), and §3.4 Definitions/Theorems 3.4.1–3.4.13 with Examples 3.4.1–17. This is the textbook backing for both pairs. The official USF record is <https://digitalcommons.usf.edu/oa_textbooks/6/> and identifies the open textbook licence as CC BY-NC-SA; Step 5 will still paraphrase rather than copy source prose.
-- **[M] MIT 18.100B Spring 2004 lecture outline (Rudin treatment).** <https://math.mit.edu/~rbm/18.100-S04/node2.html>. Read Lectures 16–19, explicitly keyed to Rudin pp. 120–136. It independently backs the Stieltjes definition, criterion, existence ladder, properties, integration by parts, and the already-published FTC statements. No reuse licence was relied on; paraphrase only.
+- **[T] William F. Trench, _Introduction to Real Analysis_.** <https://people.math.sc.edu/girardi/m5545/TrenchBook/FreeHyperlinkedEdition2pt04.pdf>. Read Chapter 3, Definition 3.1.5 and Exercises 3.1.13–17 (pp. 125–128), Exercises 3.2.7–10 (pp. 135–136), the proper monotone substitution theorem 3.3.18 (pp. 148–150), and §3.4 Definitions/Theorems 3.4.1–3.4.13 with Examples 3.4.1–17. This is the textbook backing for both pairs. The official USF record is <https://digitalcommons.usf.edu/oa_textbooks/6/> and identifies the open textbook licence as CC BY-NC-SA; Step 5 paraphrased rather than copied source prose.
+- **[R] W. Rudin, _Principles of Mathematical Analysis_.** <https://archive.org/details/principlesofmath00rudi>. Read Chapter 6, numbered treatment 6.1–6.22, pp. 120–136. It independently backs the Stieltjes definition, criterion, existence ladder, properties, integration by parts, reduction, and change of variable. No reuse licence was relied on; paraphrase only.
 - **[H] Christopher Heil, “Absolute Continuity and the Banach–Zaretsky Theorem.”** <https://heil.math.gatech.edu/papers/abscont_typosmarked.pdf>. Read §§2.1 and 3.2, pp. 30–31 and 39–41: Definition 2 (BV), Theorem 3 (Jordan decomposition), Definition 13 (AC), and Lemma 14. This independently backs the BV/AC spine. The author-hosted paper is used as a mathematical source only; paraphrase only.
-- **[Y] Nourdin, Nualart, and Peccati, “The Breuer–Major theorem in total variation: improved rates under minimal regularity.”** <https://alea.math.cnrs.fr/articles/v16/16-23.pdf>. Read §2.2, “The Young integral,” p. 636, including the $alpha+eta>1$ condition and integration-by-parts equation. The library narrows exponents to available rational Hölder parameters. Use as a mathematical source; paraphrase only.
+- **[Y] Nourdin, Nualart, and Peccati, “The Breuer–Major theorem in total variation: improved rates under minimal regularity.”** <https://alea.math.cnrs.fr/articles/v16/16-23.pdf>. Read §2.2, “The Young integral,” p. 636, including the $\alpha+\beta>1$ condition and integration-by-parts equation. The authored theorem specializes the exponents to available rational Hölder parameters. Used as a mathematical source and paraphrased.
 - **[D] John K. Hunter, _The Riemann Integral_.** <https://www.math.ucdavis.edu/~hunter/m125b/ch1.pdf>. Read §§1.10.1–1.10.3, Definitions 1.67–1.81, Theorem 1.75, and Examples 1.68–1.84. This is the independent full-note treatment for improper integrals and principal values. No reuse licence was found in the read excerpt; paraphrase only.
 
 An encyclopedia was not used as either pair's primary backing. No external fallback or `proved_here: false` item is planned.
 
-## 5. Planned component provenance
+## 5. Authored component provenance and rationale
 
-Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below are allowed only for explicit checkable examples/counterexamples and are not dependency targets. All source-backed Step-5 items must carry the listed URL(s) in `sources.references`.
+Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below occur only on explicit checkable examples/counterexamples and are not dependency targets. Every row records the authored component provenance and the reason for that choice; source-backed items carry the corresponding URL in `sources.references`.
 
 | item | statement | proof/construction | source | rationale |
 |---|---|---|---|---|
 | `def-bounded-variation-and-total-variation` | literature-derived | not-applicable | [H], [T] | standard source definition |
-| `lem-basic-properties-of-total-variation` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-variation-additive-on-subintervals` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-basic-properties-of-total-variation` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-variation-additive-on-subintervals` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `def-variation-function-and-positive-negative-variation` | literature-derived | not-applicable | [H], [T] | standard source definition |
 | `lem-variation-function-and-jordan-identities` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-jordan-decomposition-for-bv-functions` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-bv-discontinuities-are-countable-and-of-first-kind` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `lem-jumps-of-the-variation-function` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-total-variation-seminorm-laws` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-bv-functions-form-an-algebra` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `cor-bv-functions-are-riemann-integrable` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-total-variation-seminorm-laws` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-bv-functions-form-an-algebra` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `cor-bv-functions-are-riemann-integrable` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `def-absolutely-continuous-function` | ai-altered | not-applicable | [H], [T] | source-backed convention restricted to the available library vocabulary |
 | `thm-c1-lipschitz-ac-bv-hierarchy` | ai-altered | ai-generated | [H], [T] | source-backed theorem narrowed or recombined to match rational/elementary scope |
-| `def-riemann-stieltjes-sum-and-integral` | ai-altered | not-applicable | [T], [M] | source-backed convention restricted to the available library vocabulary |
-| `thm-riemann-stieltjes-darboux-criterion` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-riemann-stieltjes-integral-unique` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-riemann-stieltjes-refinement-estimate` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-existence-continuous-bv` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `cor-riemann-stieltjes-integral-bound` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-linearity-and-additivity` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-integration-by-parts` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `cor-riemann-stieltjes-existence-bv-continuous` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-existence-finitely-discontinuous` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-continuous-composition` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-bv-functions-are-regulated` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-existence-bv-no-common-discontinuities` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `cor-riemann-stieltjes-agrees-with-riemann` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-c1-integrator-reduction` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-riemann-stieltjes-change-of-variable` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-young-partition-sum-estimate-rational` | ai-altered | ai-generated | [Y] | source-backed theorem narrowed or recombined to match rational/elementary scope |
-| `thm-young-riemann-stieltjes-existence-rational` | ai-altered | ai-generated | [Y] | source-backed theorem narrowed or recombined to match rational/elementary scope |
-| `rem-riemann-stieltjes-conventions-and-scope` | ai-altered | not-applicable | [T], [M] | scope/convention synthesis; no proof |
-| `ex-absolute-value-lipschitz-not-c1` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `ex-square-root-ac-not-lipschitz` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
+| `def-riemann-stieltjes-sum-and-integral` | ai-altered | not-applicable | [T], [R] | source-backed convention restricted to the available library vocabulary |
+| `thm-riemann-stieltjes-darboux-criterion` | ai-altered | ai-generated | [T], [R] | source-backed Darboux criterion reconciled with the stronger mesh-limit definition by the necessary jump-continuity condition; local proof |
+| `lem-riemann-stieltjes-integral-unique` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-riemann-stieltjes-refinement-estimate` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-existence-continuous-bv` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `cor-riemann-stieltjes-integral-bound` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-linearity-and-additivity` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-integration-by-parts` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `cor-riemann-stieltjes-existence-bv-continuous` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-existence-finitely-discontinuous` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-continuous-composition` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-bv-functions-are-regulated` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-existence-bv-no-common-discontinuities` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `cor-riemann-stieltjes-agrees-with-riemann` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-c1-integrator-reduction` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `thm-riemann-stieltjes-change-of-variable` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `lem-young-partition-sum-estimate-rational` | literature-derived | ai-generated | [Y] | source-backed rational specialization; local dependency-closed proof |
+| `thm-young-riemann-stieltjes-existence-rational` | literature-derived | ai-generated | [Y] | source-backed rational specialization; local dependency-closed proof |
+| `rem-riemann-stieltjes-conventions-and-scope` | ai-altered | not-applicable | [T], [R] | source-backed scope/convention synthesis reconciled with the mesh-limit convention; no proof |
+| `ex-absolute-value-lipschitz-not-c1` | literature-derived | ai-generated | [H] | source-backed strictness witness; local verification |
+| `ex-square-root-ac-not-lipschitz` | literature-derived | ai-generated | [H] | source-backed strictness witness; local verification |
 | `ex-cantor-function-bv-not-absolutely-continuous` | literature-derived | ai-generated | [H], [T] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cex-continuous-function-of-unbounded-variation` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `ex-step-integrator-evaluates-at-the-jump` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-finite-step-integrator-weighted-jump-sum` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-unbounded-integrand-stieltjes-integrable` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-cantor-function-as-riemann-stieltjes-integrator` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `cex-common-jump-prevents-riemann-stieltjes-integrability` | literature-derived | ai-generated | [T], [M] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-riemann-stieltjes-polynomial-computation` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `ex-riemann-stieltjes-substitution` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
+| `ex-step-integrator-evaluates-at-the-jump` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `ex-finite-step-integrator-weighted-jump-sum` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `ex-unbounded-integrand-stieltjes-integrable` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `ex-cantor-function-as-riemann-stieltjes-integrator` | literature-derived | ai-generated | [H] | source-backed Cantor-integrator example; local verification |
+| `cex-common-jump-prevents-riemann-stieltjes-integrability` | literature-derived | ai-generated | [T], [R] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `ex-riemann-stieltjes-polynomial-computation` | literature-derived | ai-generated | [R] | source-backed reduction example; local computation |
+| `ex-riemann-stieltjes-substitution` | literature-derived | ai-generated | [R] | source-backed substitution example; local computation |
 | `ex-young-integral-beyond-bounded-variation` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit Hölder tent construction; must remain a dependency leaf |
 | `def-improper-integral-at-infinity` | literature-derived | not-applicable | [T], [D] | standard source definition |
 | `def-improper-integral-at-a-finite-endpoint` | literature-derived | not-applicable | [T], [D] | standard source definition |
-| `def-mixed-improper-integral` | ai-altered | not-applicable | [T], [D] | source-backed convention restricted to the available library vocabulary |
+| `def-mixed-improper-integral` | literature-derived | not-applicable | [T], [D] | standard componentwise-convergence definition |
 | `lem-improper-integral-splitting-and-tail-invariance` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-linearity-of-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-cauchy-criterion-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
@@ -177,8 +154,8 @@ Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below ar
 | `thm-comparison-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-limit-comparison-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cor-improper-integral-test-for-series` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `lem-truncated-integrals-of-rational-powers` | ai-altered | ai-generated | [T], [D] | source-backed theorem narrowed or recombined to match rational/elementary scope |
-| `thm-improper-p-test-rational` | ai-altered | ai-generated | [T], [D] | source-backed theorem narrowed or recombined to match rational/elementary scope |
+| `lem-truncated-integrals-of-rational-powers` | literature-derived | ai-generated | [T], [D] | source-backed rational-power formula; local proof |
+| `thm-improper-p-test-rational` | literature-derived | ai-generated | [T], [D] | source-backed rational specialization; local proof |
 | `def-cauchy-principal-value` | literature-derived | not-applicable | [T], [D] | standard source definition |
 | `thm-improper-convergence-implies-principal-value` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-dirichlet-test-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
@@ -187,20 +164,20 @@ Codes [T]–[D] are the exact URLs above. “ai-generated” Statements below ar
 | `thm-absolute-divergence-from-uniform-tail-mass` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `thm-monotone-change-of-variable-for-riemann-integrals` | literature-derived | ai-generated | [T] | Trench Theorem 3.3.18; local machinery required by the full improper theorem |
 | `thm-substitution-for-improper-integrals` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `thm-frullani-integral-proper-factor` | ai-altered | ai-generated | [T], [D] | source-backed theorem narrowed or recombined to match rational/elementary scope |
-| `rem-improper-integral-conventions-and-scope` | ai-altered | not-applicable | [T], [D] | scope/convention synthesis; no proof |
+| `thm-frullani-integral-proper-factor` | literature-derived | ai-generated | [T], [D] | source-backed proper-factor form; local proof without logarithms |
+| `rem-improper-integral-conventions-and-scope` | literature-derived | not-applicable | [T], [D] | source-backed scope/convention synthesis; no proof |
 | `ex-principal-value-of-one-over-x` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `ex-conditionally-convergent-step-function-integral` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
 | `ex-convergent-positive-continuous-unbounded-integrand` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
 | `ex-one-over-square-root-improper-integral` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `ex-rational-p-integrals-at-both-endpoints` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `ex-frullani-rational-kernel` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-absolutely-convergent-rational-integral-on-the-line` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `ex-improper-substitution-reciprocal` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
-| `cex-oscillatory-step-function-improper-integral-diverges` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
+| `ex-absolutely-convergent-rational-integral-on-the-line` | literature-derived | ai-generated | [T] | source-backed comparison example; local verification |
+| `ex-improper-substitution-reciprocal` | literature-derived | ai-generated | [T] | source-backed substitution example; local verification |
+| `cex-oscillatory-step-function-improper-integral-diverges` | ai-generated | ai-generated | [T], [D] | explicit source-motivated step witness; local verification and dependency leaf |
 | `ex-interior-square-root-singularity` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
 | `cex-principal-value-one-over-x-squared-diverges` | literature-derived | ai-generated | [T], [D] | source-backed claim; Step 5 supplies a dependency-closed local proof |
-| `ex-beta-kernel-convergence-rational` | ai-generated | ai-generated | — (generated witness; no source claim) | explicit checkable witness; must remain a dependency leaf |
+| `ex-beta-kernel-convergence-rational` | literature-derived | ai-generated | [T] | source-backed comparison example; local verification |
 
 Truth-risk checks for the generated witnesses are concrete: unequal one-sided quotients for $|x|$; an initial-segment/away-from-zero proof for $\sqrt{x}$; explicit distance-to-$\mathbb Z$ zeros and peaks for unbounded variation; a normalized Hölder tent construction whose variation is a harmonic sum; partition sums for the Cantor, polynomial, and substitution examples; alternating-harmonic truncations; explicitly rational locally finite spikes with geometric areas; rational comparisons; and endpoint exponent checks. None of these ids appears in another item's `deps`.
 
@@ -307,27 +284,42 @@ There are 78 unique published dependency targets: 21 carry a current published-a
 8. **Frullani.** The convergence identity with a proper-integral factor is proved now; identifying the factor with $log(b/a)$ waits for the canonical logarithm page.
 9. **Notation.** Natural numbers are written directly. No new artifact applies the canonical embedding symbol to a natural number.
 
-## 8. Proof-obligation checkpoint for Step 5
+## 8. Step-5 authoring reconciliation
 
-The proof-contract file covers all **70 proof-bearing items**, with 472 direct dependency clauses, 195 planned derivation blocks, all eight boundary dispositions per item, and no inapplicable finite-model smoke test forced onto analytic claims. Quotes from the 78 published dependency targets are exact excerpts from their current Definition/Statement/Example sections. Quotes for planned same-batch dependencies are explicitly labelled `Planned Statement`; Step 5 must replace them with exact authored clauses and refine the conservative all-step `uses` maps as item proofs acquire final numbering.
+All **81** manifest rows were authored under their settled ids, kinds, titles, and reading order: 32 + 12 items for the BV/Riemann–Stieltjes pair and 25 + 12 for the improper-integral pair. Nothing was dropped, renamed, or merged. Both A pages remain below 60 items. Every item is `status: draft`, `origin: session`, and has both provenance components; generated Statements also declare `generation.role`. The two A bodies each contain exactly two nonempty prose paragraphs under 150 words, and both B bodies are empty.
 
-The proof-sensitive routes to preserve are:
+Six local prerequisite additions were necessary to make the authored proofs honest; there were no dependency removals:
 
-- prove variation additivity before Jordan decomposition, and prove the one-sided jump formula for the variation function rather than merely asserting continuity transfer;
-- in $ACRightarrow BV$, refine an arbitrary partition by finitely many short blocks before applying the disjoint-family definition;
-- derive continuous-integrand/BV-integrator existence through Jordan decomposition and track total-variation bounds;
-- prove the finite-discontinuity and no-common-discontinuity Stieltjes theorems with explicit small-variation neighbourhoods and regulated step approximations;
-- keep both directions of the Darboux criterion and every endpoint/jump convention;
-- prove Young's rational estimate at partition level before taking limits;
-- construct the Hölder tent witness with normalized $n^{-4/3}$ widths and prove both the cross-tent Hölder estimate and harmonic lower bound for variation;
-- define mixed improper convergence componentwise, prove Cauchy criteria with two independently moving truncations, and keep principal value logically separate;
-- obtain Dirichlet/Abel from the published second mean-value theorem with boundary terms controlled explicitly;
-- prove the proper monotone change-of-variable equivalence from Darboux sums before using it on improper truncations, with flat pieces and decreasing orientation explicit; and
-- prove the Frullani proper-factor identity without naming an unavailable logarithm.
+| item | added dependency | reason |
+|---|---|---|
+| `cor-bv-discontinuities-are-countable-and-of-first-kind` | `thm-froda` | The published monotone-discontinuity theorem establishes first-kind jumps but not countability; Froda supplies the missing countability result. |
+| `lem-jumps-of-the-variation-function` | `def-series`, `cor-monotone-converges-iff-bounded`, `lem-series-tail-invariance`, `lem-geometric-sequence-null` | A geometric-annulus variation series and its vanishing tails replace an unjustified shrinking-interval assertion. |
+| `thm-riemann-stieltjes-darboux-criterion` | `def-continuity-real`, `thm-monotone-discontinuities-are-jumps` | For the repository's all-fine-mesh definition, the Darboux gap must be paired with continuity of the integrand at integrator jumps; these dependencies prove that exact compatibility condition. |
+| `lem-bv-functions-are-regulated` | `cor-interval-uncountable` | Breakpoints must be chosen outside a prescribed countable discontinuity set. |
+| `thm-riemann-stieltjes-linearity-and-additivity` | `def-bounded-variation-and-total-variation`, `thm-cauchy-criterion-via-lub` | Mesh-limit interval additivity is proved with BV control and continuity of the integrand at the cut, using the Cauchy criterion for the two restricted sum families. |
+| `thm-monotone-change-of-variable-for-riemann-integrals` | `thm-ftc-second-part` | The signed-function reduction shifts by a constant and needs the exact identity $\int_c^d\phi'=\phi(d)-\phi(c)$. |
 
-No planned external fallback or mathematical blocker remains at scaffold time.
+The reconciled proof contract covers all **70 proof-bearing items** with 304 exact fact-to-source citations, 185 numbered derivations, 118 distinct cited item sources, and all eight standard boundary dispositions for every contract (274 checked and 286 specifically not applicable). No `Planned Statement` quotation or conservative placeholder remains. The strict checker reports 0 errors and 0 warnings.
 
-## 9. Step-2 gate record and sandbox blocker
+The proof-sensitive routes were implemented: variation additivity precedes Jordan decomposition; jump variation is controlled by summable annuli; $AC\Rightarrow BV$ uses finite disjoint short intervals; Stieltjes existence uses Jordan decomposition, regulated approximation, and explicit small-variation neighborhoods; integration by parts uses an exact refined local sum identity; Young's rational estimate is proved before existence; mixed improper convergence keeps each end separate; Dirichlet/Abel retain boundary control; monotone substitution treats flat and decreasing pieces; and Frullani remains in proper-integral-factor form without importing logarithms.
+
+## 9. Boundary-case disposition
+
+The per-item contract is the exhaustive worksheet. The cross-page cases most likely to be missed were disposed as follows:
+
+| family | authored disposition |
+|---|---|
+| Intervals and orientation | Total variation is zero on a singleton; reversed ordinary and Stieltjes integrals use the declared oriented convention; interval additivity names the BV and continuity-at-cut hypotheses needed by the mesh definition. |
+| Jumps | One-sided variation jumps equal absolute function jumps; finite-step formulas state endpoint conventions; the common-jump counterexample proves the no-common-discontinuity hypothesis is sharp. |
+| Regularity | Constant/zero-variation cases, endpoint one-sided limits, zero Hölder increments, strict $C^1$/Lipschitz/AC/BV separations, and a continuous unbounded-variation witness are explicit. |
+| Improper ends | Finite endpoints, $+\infty$, $-\infty$, whole-line, and interior singularities are defined componentwise; changing split points preserves values but cannot cancel divergent pieces. |
+| Thresholds and convergence modes | The rational $p$-test includes $p=1$ and the divergent side; absolute, conditional, ordinary improper, and principal-value convergence are kept distinct, with witnesses in both directions needed by the scaffold. |
+| Substitution and Frullani | Monotone substitution permits flat pieces and handles decreasing orientation; improper substitution moves singular ends explicitly; Frullani treats $a=b$ and $a>b$ by zero and orientation. |
+| Examples | The spike construction is positive, continuous, integrable, and unbounded on every tail; the alternating-step examples check arbitrary real truncations rather than only integer subsequences; rational kernels check each singular endpoint separately. |
+
+No authored artifact applies `\iota` to a natural number.
+
+## 10. Historical Step-2 gate record and sandbox blocker
 
 The two directly requested constituent checks and the dependency-source constituent are green:
 
@@ -337,4 +329,18 @@ The two directly requested constituent checks and the dependency-source constitu
 
 Because the four dispatched page slots are intentionally still empty in `plan-spec.json` at Step 2, I also streamed an in-memory copy of the spec with only this batch's four item arrays inserted into `validate-plan.mjs`. That stronger local check is **OK** across 180 pages with item lists: no item cycles, forward references, B-page dependency violations, unresolved ids, size errors, or undeclared prerequisite edges. The streamed check did not write `plan-spec.json` or any temporary repo artifact.
 
-The aggregate command `node tools/gates.mjs --step 2 --run frontier-10` could not itself turn green in this managed sandbox. Its wrapper attempted `spawnSync /usr/bin/node` for each of the same three scripts and received `EPERM`, reporting three wrapper failures before any child script ran. The individual scripts run successfully from the shell as recorded above. Per the owner's no-permission-prompt instruction, I did not request escalation or edit the gate tool. This environment-only wrapper failure is the sole remaining blocker.
+The aggregate command `node tools/gates.mjs --step 2 --run frontier-10` could not itself turn green in this managed sandbox. Its wrapper attempted `spawnSync /usr/bin/node` for each of the same three scripts and received `EPERM`, reporting three wrapper failures before any child script ran. The individual scripts run successfully from the shell as recorded above. Per the owner's no-permission-prompt instruction, I did not request escalation or edit the gate tool. This was the sole blocker to invoking the aggregate Step-2 wrapper; it is not a Step-5 content blocker.
+
+## 11. Step-5 check record
+
+The final required individual checks are green:
+
+- `node tools/tsx-run.mjs tools/precheck.mts` — **OK**, 2,675 proof-bearing items checked and 0 failing;
+- `node tools/depcheck.mjs` — **OK**, no cycles, all references resolve, and no draft item is listed on a published page;
+- `node tools/rendercheck.mjs` — **OK**, 3,689 files checked;
+- `node tools/prosecheck.mjs` — **OK**, 3,689 files checked, 0 errors, and 583 nonblocking heuristic warnings;
+- `node tools/content-policy.mjs research/frontier-10-batch-4.pages.json` — **OK**, 81 scoped items, 0 errors, and 0 warnings;
+- `node tools/coverage-checklist.mjs research/frontier-10-batch-4.coverage.json` — **OK**, 2 pages and 100 harvested results, 0 errors, and 0 warnings; and
+- `node tools/proof-contract.mjs research/frontier-10-batch-4.proof-contracts.json --strict` — **OK**, 70/70 proof-bearing items, 0 errors, and 0 warnings.
+
+The aggregate `tools/gates.mjs` wrapper was not run, exactly as the Step-5 dispatch requires. There is no batch-local content, dependency, rendering, coverage, proof-contract, or sandbox blocker.

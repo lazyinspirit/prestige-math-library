@@ -30,8 +30,7 @@ pipeline_run: null
 ## Statement
 
 Let $a,b>0$, and let $f:[0,\infty)\to\mathbb R$ be continuous with finite limit $L=\lim_{x\to\infty}f(x)$. Then the mixed improper integral converges and
-$$\int_0^\infty\frac{f(ax)-f(bx)}{x}\,dx
-=(f(0)-L)\int_a^b\frac{dt}{t},$$
+$$\int_0^\infty\frac{f(ax)-f(bx)}{x}\,dx=(f(0)-L)\int_a^b\frac{dt}{t},$$
 where the factor on the right is a proper oriented Riemann integral.
 
 ## Facts & Assumptions
@@ -50,10 +49,8 @@ where the factor on the right is a proper oriented Riemann integral.
 
 **Proof technique:** direct.
 
-1.1 Assume first $a<b$. Substitution on $[\varepsilon,R]$ and cancellation give [given]
-$$\int_\varepsilon^R\frac{f(ax)-f(bx)}x,dx
-=\int_a^b\frac{f(\varepsilon t)}t,dt-
-\int_a^b\frac{f(Rt)}t,dt.$$
+1.1 Assume first $a<b$. Substitution on $[\varepsilon,R]$ and cancellation give the identity below. [L1]
+$$\int_\varepsilon^R\frac{f(ax)-f(bx)}x\,dx=\int_a^b\frac{f(\varepsilon t)}t\,dt-\int_a^b\frac{f(Rt)}t\,dt.$$
 
 2.1 By [L2] and [L4], the first proper integral tends to $f(0)\int_a^b dt/t$ as $\varepsilon\downarrow0$. By [L3] and [L4], the second tends to $L\int_a^b dt/t$ as $R\to\infty$. The two limits exist independently, so the mixed improper integral converges and has the displayed value. [step 1.1, L2, L3, L4]
 

@@ -28,9 +28,7 @@ pipeline_run: null
 ## Example
 
 For $a,b>0$,
-$$\int_0^\infty
-\frac{(1+ax)^{-1}-(1+bx)^{-1}}x\,dx
-=\int_a^b\frac{dt}{t}.$$
+$$\int_0^\infty\frac{(1+ax)^{-1}-(1+bx)^{-1}}x\,dx=\int_a^b\frac{dt}{t}.$$
 
 ## Facts & Assumptions
 
@@ -46,6 +44,6 @@ $$\int_0^\infty
 
 1.1 Here $f$ is continuous, $f(0)=1$, and $f(t)\to0$. Thus [L1] gives exactly the displayed identity. [L1]
 
-1.2 For $x>0$, the integrand simplifies to [given]
+1.2 For $x>0$, the integrand simplifies to [L2]
 $$\frac{b-a}{(1+ax)(1+bx)}.$$
 It has finite limit $b-a$ at zero and is bounded in absolute value by a constant multiple of $x^{-2}$ for $x\ge1$. This independently confirms local convergence at zero and tail convergence by [L2], without replacing the proper factor by a logarithm. ∎

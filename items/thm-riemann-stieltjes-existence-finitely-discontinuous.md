@@ -45,11 +45,13 @@ Let $f:[a,b]\to\mathbb R$ be bounded and have only finitely many discontinuities
 
 [L5] Stieltjes integration is linear in the integrator ([[thm-riemann-stieltjes-linearity-and-additivity]]).
 
+[L6] Continuity makes the increment of $\alpha$ arbitrarily small on sufficiently short intervals around each point ([[def-continuity-real]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 First suppose that $\alpha$ is continuous and nondecreasing. Write $|f|\le M$. Given $\varepsilon>0$, continuity of $\alpha$ and finiteness of $D$ allow pairwise disjoint closed intervals $I_x$ about the points $x\in D$ whose total $\alpha$-increment is less than $\varepsilon/(4M+1)$. [L2]
+1.1 First suppose that $\alpha$ is continuous and nondecreasing. Write $|f|\le M$. Given $\varepsilon>0$, [L6] and finiteness of $D$ allow pairwise disjoint closed intervals $I_x$ about the points $x\in D$ whose total $\alpha$-increment is less than $\varepsilon/(4M+1)$. [L6]
 
 2.1 On the compact complement of the interiors of the $I_x$, the function $f$ is continuous and hence uniformly continuous by [L4]. Choose a partition containing all endpoints of the $I_x$ and fine enough that every remaining partition interval has oscillation below $\varepsilon/(1+\alpha(b)-\alpha(a))$. The intervals meeting $D$ contribute at most $2M$ times their total $\alpha$-increment, and all other intervals contribute less than $\varepsilon$. After rescaling the two preliminary bounds, the weighted oscillation sum is arbitrarily small, so [L3] gives $f\in R(\alpha)$. [step 1.1, L3, L4]
 

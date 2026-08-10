@@ -20,7 +20,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "L. C. Young, An inequality of the Hölder type, connected with Stieltjes integration"
+    - title: "Nourdin, Nualart, and Peccati, The Breuer–Major theorem in total variation: improved rates under minimal regularity, Section 2.2"
       url: "https://alea.math.cnrs.fr/articles/v16/16-23.pdf"
 pipeline_run: null
 ---
@@ -33,7 +33,10 @@ $|g(y)-g(x)|\le K_g|y-x|^q$ on $[a,b]$. If $D_m$ is the partition into $2^m$ equ
 
 $$|L_{m+1}-L_m|\le K_fK_g(b-a)^{p+q}2^{-m(p+q-1)}.$$
 
-Moreover, inserting or deleting finitely many partition points whose surrounding intervals have length at most $h$ changes the associated left-endpoint sum by at most $K_fK_g(b-a)h^{p+q-1}$, up to the harmless factor $2^{p+q}$ when both adjacent intervals are charged together.
+Put $r=p+q$ and
+$$C_r:=\frac{2^r}{1-2^{1-r}}.$$
+If $R$ refines an arbitrary partition $P$, then their left-endpoint sums satisfy
+$$|L(R)-L(P)|\le C_rK_fK_g(b-a)\lVert P\rVert^{r-1}.$$
 
 ## Facts & Assumptions
 
@@ -52,6 +55,6 @@ Moreover, inserting or deleting finitely many partition points whose surrounding
 1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is [given]
 $(f(v)-f(u))(g(w)-g(v))$ up to sign. Its absolute value is at most $K_fK_g(v-u)^p(w-v)^q$, hence at most $K_fK_g(w-u)^{p+q}$ by [L1].
 
-2.1 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing the estimate of step 1.1 gives the first displayed bound. Since $2^{-(p+q-1)}\in(0,1)$, [L2] makes the successive-refinement errors summable. [step 1.1, L1, L2, L3]
+2.1 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing step 1.1 gives the first displayed bound. More generally, if a partition of an interval $I$ has $k\ge2$ subintervals, some interior point has two adjacent lengths whose sum is at most $2|I|/(k-1)$: the sum of all such two-interval lengths is at most $2|I|$. Removing that point therefore changes the left sum by at most $K_fK_g(2|I|/(k-1))^r$. [step 1.1, L1, L3]
 
-3.1 For a general insertion or deletion, charge its error to the union of its two adjacent intervals. Grouping disjoint charges in alternating classes prevents double counting; [L1] gives $\ell^{p+q}\le h^{p+q-1}\ell$, and the charged lengths sum to at most a fixed factor times $b-a$. This proves the second estimate. If $K_fK_g=0$ or $a=b$, all errors vanish. [step 1.1, L1, L3] ∎
+3.1 Remove the extra points of $R$ inside a fixed interval $I$ of $P$, one at a time, always using step 2.1. The total error is at most $2^rK_fK_g|I|^r\sum_{j\ge1}j^{-r}$. Grouping the positive integers into $[2^m,2^{m+1})$ bounds this series by $\sum_{m\ge0}2^{-m(r-1)}=(1-2^{1-r})^{-1}$ via [L2]. Thus the error on $I$ is at most $C_rK_fK_g|I|^r$. Summing over $I\in P$ and using $|I|^r\le\lVert P\rVert^{r-1}|I|$ proves the refinement estimate. If $K_fK_g=0$ or $a=b$, every error is zero. [step 2.1, L1, L2, L3] ∎

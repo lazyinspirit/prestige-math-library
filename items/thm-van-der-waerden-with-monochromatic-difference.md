@@ -37,15 +37,16 @@ all have one colour. In particular, the first $m$ displayed terms form a monochr
 
 [L1] Under the length-$(m-1)$ induction hypothesis, finite colour focussing produces either a monochromatic $m$-term progression or focused $(m-1)$-term progressions of all available colours ([[lem-colour-focussing-for-arithmetic-progressions]]).
 
+
+
 ## Proof
 
 **Proof technique:** induction.
 
 1.1 Ordinary van der Waerden existence follows by induction on $m$. Length $1$ is immediate. Assuming finite witnesses for length $m-1$ for every number of colours, apply [L1] with $r=c$; if its first alternative occurs, it gives length $m$, while in the second alternative the focus has one of the $c$ colours and extends the focused progression of that colour to length $m$. [base, L1]
 
-2.1 We now prove the strengthened statement by induction on $c$. It is immediate for $c=1$. Assume it for $c-1$ colours and let $n$ be a finite witness for the same target length $m$ with $c-1$ colours. By step 1.1, choose an ordinary monochromatic progression $a,a+d,\ldots,a+n(m-1)d$ in a sufficiently long $c$-coloured interval. [ih, step 1.1]
+2.1 We now prove the strengthened statement. If $m=1$, take $a=d=1$, so assume $m\ge2$. Induct on $c$. The assertion is immediate for $c=1$. Assume it for $c-1$ colours and let $n$ be a finite witness for the same target length $m$ with $c-1$ colours. By step 1.1, choose an ordinary monochromatic progression $a,a+d,\ldots,a+n(m-1)d$ in a sufficiently long $c$-coloured interval. [ih, step 1.1]
 
-2.2 If one of $d,2d,\ldots,nd$ has the progression's colour, say $td$ does, then $a,a+td,\ldots,a+(m-1)td$ together with its difference $td$ has one colour. Otherwise the colouring $t\mapsto\operatorname{colour}(td)$ on $\{1,\ldots,n\}$ uses at most $c-1$ colours. The induction hypothesis gives $u,u+q,\ldots,u+(m-1)q,q$ of one colour there, and multiplication by $d$ gives the required progression and difference in the original colouring. [step 2.1, ih]
+3.1 If one of $d,2d,\ldots,nd$ has the progression's colour, say $td$ does, then $a,a+td,\ldots,a+(m-1)td$ together with its difference $td$ has one colour. Otherwise the colouring $t\mapsto\operatorname{colour}(td)$ on $\{1,\ldots,n\}$ uses at most $c-1$ colours. The induction hypothesis gives $u,u+q,\ldots,u+(m-1)q,q$ of one colour there, and multiplication by $d$ gives the required progression and difference in the original colouring. [step 2.1, ih]
 
-3.1 The colour induction proves the strengthened theorem for every finite $c$, while step 1.1 supplies the ordinary finite witnesses used in its construction. [step 2.2, discharge-induction] ∎
-
+4.1 The colour induction proves the strengthened theorem for every finite $c$, while step 1.1 supplies the ordinary finite witnesses used in its construction. [step 3.1, discharge-induction] ∎

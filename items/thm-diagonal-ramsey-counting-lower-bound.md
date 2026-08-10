@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-off-diagonal-ramsey-number, def-binomial-coefficient, thm-binomial-closed-formula, thm-cardinality-of-a-set-of-functions, thm-sum-rule, thm-product-rule, def-rational-power, lem-rational-power-monotone, def-nat-power]
+deps: [def-off-diagonal-ramsey-number, def-binomial-coefficient, thm-binomial-closed-formula, thm-cardinality-of-a-set-of-functions, thm-sum-rule, thm-product-rule, def-rational-power, lem-rational-power-monotone, def-nat-power, lem-integer-part]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,6 +38,8 @@ where $R$ is [[def-off-diagonal-ramsey-number]], real rational powers are those 
 
 [L2] $\binom{n}{k}\cdot k!\cdot (n-k)! = n!$ ([[thm-binomial-closed-formula]]).
 
+[L3] Every real $x$ has a unique integer $\lfloor x\rfloor$ with $\lfloor x\rfloor\le x<\lfloor x\rfloor+1$ ([[lem-integer-part]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -48,4 +50,4 @@ where $R$ is [[def-off-diagonal-ramsey-number]], real rational powers are those 
 
 3.1 From [L2], $\binom Nk\le N^k/k!$. Since $N\le2^{k/2}$, the left side in step 2.1 is at most $2^{1+k/2}/k!$. At $k=3$ this is $2^{5/2}/6<1$; thereafter the ratio of the bound for $k+1$ to that for $k$ is $\sqrt2/(k+1)<1$. Hence the strict inequality holds for every $k\ge3$. [step 2.1, L2, algebra]
 
-4.1 Step 2.1 supplies a colouring on $N$ vertices with no monochromatic $k$-set, so $R(k,k)>N$. As $R(k,k)$ is an integer and $N=\lfloor2^{k/2}\rfloor$, this implies $R(k,k)\ge N+1>2^{k/2}$. [step 3.1] ∎
+4.1 Step 2.1 supplies a colouring on $N$ vertices with no monochromatic $k$-set, so $R(k,k)>N$. As $R(k,k)$ is an integer and $N=\lfloor2^{k/2}\rfloor$, [L3] implies $R(k,k)\ge N+1>2^{k/2}$. [step 3.1, L3] ∎

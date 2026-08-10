@@ -7,6 +7,8 @@ origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
+generation:
+  role: counterexample
 deps: [def-metric-bounded-diameter, lem-distance-to-set-is-lipschitz,
        lem-real-line-is-a-metric-space, lem-real-and-metric-notions-agree,
        def-integers, lem-integer-part, thm-algebra-of-function-limits,
@@ -30,7 +32,7 @@ pipeline_run: null
 ## Example
 
 Let $d(t,\mathbb Z)=\inf_{k\in\mathbb Z}|t-k|$ and define
-$$f(0)=0,\qquad f(x)=x,d(1/x,\mathbb Z)\quad(0<x\le1).$$
+$$f(0)=0,\qquad f(x)=x\,d(1/x,\mathbb Z)\quad(0<x\le1).$$
 Then $f$ is continuous on $[0,1]$ but has unbounded variation.
 
 ## Facts & Assumptions

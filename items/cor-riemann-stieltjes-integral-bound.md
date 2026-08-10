@@ -1,7 +1,7 @@
 ---
 id: cor-riemann-stieltjes-integral-bound
 kind: corollary
-title: "The total-variation bound for a Riemann-Stieltjes integral"
+title: "The total-variation bound for a Riemann–Stieltjes integral"
 status: draft
 origin: session
 provenance:
@@ -52,4 +52,3 @@ $$\left|\int_a^b f\,d\alpha\right|\le M\operatorname{Var}_{[a,b]}(\alpha).$$
 1.1 Every tagged sum satisfies $|S(f,\alpha;P,\xi)|\le\sum_{i<n}|f(\xi_i)||\Delta_i\alpha|\le M\sum_{i<n}|\Delta_i\alpha|\le M\operatorname{Var}_{[a,b]}(\alpha)$. [L2, L3]
 
 2.1 Take a sequence of tagged partitions with mesh tending to $0$. Their sums converge to the integral by [L1], and [L4] passes the bound in step 1.1 to the limit. Orientation and the singleton case preserve the same absolute-value inequality. [step 1.1, L1, L4] ∎
-
