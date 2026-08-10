@@ -130,9 +130,9 @@ page. Free equivalence is an equivalence relation compatible with
 concatenation, so the words modulo free equivalence form a group. Formal
 letters act on reduced words by mutually inverse permutations, and evaluating
 the induced action at the empty word shows that each class holds exactly one
-reduced word. That normal form earns the universal property, so this quotient
-is a free group, its generator map is injective, and it is uniquely isomorphic
-to the reduced-word model. Free bases, rank for a finite basis, relators and
+reduced word. Evaluation of word classes in a target group proves the universal
+property, so this quotient is a free group; the normal form makes its generator
+map injective, and uniqueness identifies it with the reduced-word model. Free bases, rank for a finite basis, relators and
 presentations, von Dyck's theorem, abelianisation, Tietze transformations, and
 cyclic reduction follow, closing with torsion-freeness and a conjugacy
 criterion for cyclically reduced words.
